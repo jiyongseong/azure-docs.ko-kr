@@ -1,28 +1,24 @@
 ---
-title: "HDInsight에서 Hadoop 샘플 실행 - Azure | Microsoft Docs"
-description: "제공된 샘플을 사용하여 Azure HDInsight 서비스 사용을 시작합니다. 또한 데이터 클러스터에 대해 MapReduce 프로그램을 실행하는 PowerShell 스크립트를 사용합니다."
+title: HDInsight에서 Hadoop 샘플 실행 - Azure | Microsoft Docs
+description: 제공된 샘플을 사용하여 Azure HDInsight 서비스 사용을 시작합니다. 또한 데이터 클러스터에 대해 MapReduce 프로그램을 실행하는 PowerShell 스크립트를 사용합니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 tags: azure-portal
 author: mumian
 manager: jhubbard
 editor: cgronlun
 ms.assetid: bf76d452-abb4-4210-87bd-a2067778c6ed
 ms.service: hdinsight
-ms.workload: big-data
-ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 05/25/2017
 ms.author: jgao
 ROBOTS: NOINDEX
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 3bbc9e9a22d962a6ee20ead05f728a2b706aee19
-ms.openlocfilehash: c3e9ee66974f8b7077a0436b3686fb0515ea5e22
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/10/2017
-
-
+ms.openlocfilehash: 1262e0eda5cf490eb6c3ef81bc05de3954059f4c
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="run-hadoop-mapreduce-samples-in-windows-based-hdinsight"></a>Windows 기반 HDInsight에서 Hadoop MapReduce 샘플 실행
 [!INCLUDE [samples-selector](../../includes/hdinsight-run-samples-selector.md)]
@@ -39,18 +35,18 @@ Azure HDInsight를 사용하여 Hadoop 클러스터에서 MapReduce 작업을 �
 
 Hadoop 관련 기술(예: Java 기반 MapReduce 프로그래밍 및 스트리밍)에 대한 다양한 추가 설명서 및 Windows PowerShell 스크립팅에 사용되는 cmdlet에 대한 설명서를 웹에서 찾을 수 있습니다. 이러한 리소스에 대한 자세한 내용은 다음을 참조하세요.
 
-* [HDInsight의 Hadoop용 Java MapReduce 프로그램 개발](hdinsight-develop-deploy-java-mapreduce-linux.md)
-* [HDInsight에서 Hadoop 작업 제출](hdinsight-submit-hadoop-jobs-programmatically.md)
+* [HDInsight의 Hadoop용 Java MapReduce 프로그램 개발](hadoop/apache-hadoop-develop-deploy-java-mapreduce-linux.md)
+* [HDInsight에서 Hadoop 작업 제출](hadoop/submit-apache-hadoop-jobs-programmatically.md)
 * [Azure HDInsight 소개][hdinsight-introduction]
 
 오늘날에 많은 사람들이 MapReduce를 통한 Hive 및 Pig를 선택합니다.  자세한 내용은 다음을 참조하세요.
 
-* [HDInsight에서 Hive 사용](hdinsight-use-hive.md)
-* [HDInsight에서 Pig 사용](hdinsight-use-pig.md)
+* [HDInsight에서 Hive 사용](hadoop/hdinsight-use-hive.md)
+* [HDInsight에서 Pig 사용](hadoop/hdinsight-use-pig.md)
 
 **필수 조건**:
 
-* **Azure 구독**. [Azure 무료 평가판](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/)을 참조하세요.
+* **Azure 구독**. [Azure 평가판](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/)을 참조하세요.
 * **HDInsight 클러스터**. 이러한 클러스터를 만드는 여러 방법에 대한 자세한 내용은 [HDInsight에서 Hadoop 클러스터 만들기](hdinsight-hadoop-provision-linux-clusters.md)를 참조하세요.
 * **Azure PowerShell이 포함된 워크스테이션**.
 
@@ -60,11 +56,11 @@ Hadoop 관련 기술(예: Java 기반 MapReduce 프로그래밍 및 스트리밍
     > [Azure PowerShell 설치 및 구성](/powershell/azureps-cmdlets-docs) 단계를 수행하여 최신 버전의 Azure PowerShell을 설치합니다. Azure Resource Manager로 작동하는 새로운 cmdlet을 사용하도록 수정해야 하는 스크립트가 있는 경우 자세한 내용은 [HDInsight 클러스터에 대한 Azure Resource Manager 기반 개발 도구에 마이그레이션](hdinsight-hadoop-development-using-azure-resource-manager.md)을 참조하세요.
 
 ## <a name="hdinsight-sample-wordcount"></a>단어 개수 - Java
-MapReduce 프로젝트를 제출하려면 먼저 MapReduce 작업 정의를 만듭니다. 작업 정의에서 MapReduce 프로그램 jar 파일 및 jar 파일이 있는 위치(여기서 **wasbs:///example/jars/hadoop-mapreduce-examples.jar**), 클래스 이름 및 인수를 지정합니다.  단어 개수 MapReduce 프로그램은 두 인수로, 단어를 계산하는 데 사용할 소스 파일과 출력 위치를 사용합니다.
+MapReduce 프로젝트를 제출하려면 먼저 MapReduce 작업 정의를 만듭니다. 작업 정의에서 MapReduce 프로그램 jar 파일 및 jar 파일이 있는 위치(**wasb:///example/jars/hadoop-mapreduce-examples.jar**), 클래스 이름 및 인수를 지정합니다.  단어 개수 MapReduce 프로그램은 두 인수로, 단어를 계산하는 데 사용할 소스 파일과 출력 위치를 사용합니다.
 
 [부록 A](#apendix-a---the-word-count-MapReduce-program-in-java)에서 소스 코드를 찾을 수 있습니다.
 
-Java MapReduce 프로그램을 개발하는 절차는 [HDInsight의 Hadoop용 Java MapReduce 프로그램 개발](hdinsight-develop-deploy-java-mapreduce-linux.md)
+Java MapReduce 프로그램을 개발하는 절차는 [HDInsight의 Hadoop용 Java MapReduce 프로그램 개발](hadoop/apache-hadoop-develop-deploy-java-mapreduce-linux.md)
 
 **단어 개수 MapReduce 작업을 제출하려면**
 
@@ -80,9 +76,9 @@ Java MapReduce 프로그램을 개발하는 절차는 [HDInsight의 Hadoop용 Ja
 
     # Define the MapReduce job
     $mrJobDefinition = New-AzureRmHDInsightMapReduceJobDefinition `
-                                -JarFile "wasbs:///example/jars/hadoop-mapreduce-examples.jar" `
+                                -JarFile "wasb:///example/jars/hadoop-mapreduce-examples.jar" `
                                 -ClassName "wordcount" `
-                                -Arguments "wasbs:///example/data/gutenberg/davinci.txt", "wasbs:///example/data/WordCountOutput"
+                                -Arguments "wasb:///example/data/gutenberg/davinci.txt", "wasb:///example/data/WordCountOutput"
 
     # Submit the job and wait for job completion
     $cred = Get-Credential -Message "Enter the HDInsight cluster HTTP user credential:"
@@ -129,7 +125,7 @@ Java MapReduce 프로그램을 개발하는 절차는 [HDInsight의 Hadoop용 Ja
 Hadoop은 맵을 작성하고 Java가 아닌 다른 언어의 함수를 줄일 수 있는 스트리밍 API를 MapReduce에 제공합니다.
 
 > [!NOTE]
-> 이 자습서의 단계는 Windows 기반 HDInsight 클러스터에만 적용됩니다. Linux 기반 HDInsight 클러스터를 스트리밍하는 예제는 [HDInsight용 Python 스트리밍 프로그램 개발](hdinsight-hadoop-streaming-python.md)을 참조하세요.
+> 이 자습서의 단계는 Windows 기반 HDInsight 클러스터에만 적용됩니다. Linux 기반 HDInsight 클러스터를 스트리밍하는 예제는 [HDInsight용 Python 스트리밍 프로그램 개발](hadoop/apache-hadoop-streaming-python.md)을 참조하세요.
 
 예제에서 mapper 및 reducer는 [stdin][stdin-stdout-stderr]에서 입력을 줄 단위로 읽고 출력을 [stdout][stdin-stdout-stderr]로 내보내는 실행 파일입니다. 프로그램은 텍스트의 모든 단어 수를 계산합니다.
 
@@ -169,7 +165,7 @@ Pi 추정은 통계(준난수 몬테카를로) 방법을 사용하여 Pi 값을 
 
     ```powershell
     $mrJobJobDefinition = New-AzureRmHDInsightMapReduceJobDefinition `
-                                -JarFile "wasbs:///example/jars/hadoop-mapreduce-examples.jar" `
+                                -JarFile "wasb:///example/jars/hadoop-mapreduce-examples.jar" `
                                 -ClassName "pi" `
                                 -Arguments "16", "10000000"
     ```
@@ -220,7 +216,6 @@ Pi 추정은 통계(준난수 몬테카를로) 방법을 사용하여 Pi 값을 
 * [HDInsight에서 Hadoop과 Hive 사용][hdinsight-use-hive]
 * [HDInsight에서 Hadoop 작업 제출][hdinsight-submit-jobs]
 * [Azure HDInsight SDK 설명서][hdinsight-sdk-documentation]
-* [Hadoop in HDInsight 디버그: 오류 메시지][hdinsight-errors]
 
 ## <a name="appendix-a---the-word-count-source-code"></a>부록 A - 단어 개수 소스 코드
 
@@ -522,7 +517,7 @@ implements Mapper<LongWritable, LongWritable, BooleanWritable, LongWritable> {
 //Map method.
 //@param offset samples starting from the (offset+1)th sample.
 //@param size the number of samples for this map
-//@param out output {ture->numInside, false->numOutside}
+//@param out output {true->numInside, false->numOutside}
 //@param reporter
 public void map(LongWritable offset,
 LongWritable size,
@@ -987,16 +982,14 @@ public class TeraSort extends Configured implements Tool {
 }
 ```
 
-[hdinsight-errors]: hdinsight-debug-jobs.md
-
 [hdinsight-sdk-documentation]: https://msdn.microsoft.com/library/azure/dn479185.aspx
 
-[hdinsight-submit-jobs]: hdinsight-submit-hadoop-jobs-programmatically.md
-[hdinsight-introduction]: hdinsight-hadoop-introduction.md
+[hdinsight-submit-jobs]: hadoop/submit-apache-hadoop-jobs-programmatically.md
+[hdinsight-introduction]:hadoop/apache-hadoop-introduction.md
 
 [powershell-install-configure]: /powershell/azureps-cmdlets-docs
 
-[hdinsight-get-started]: hdinsight-hadoop-linux-tutorial-get-started.md
+[hdinsight-get-started]:hadoop/apache-hadoop-linux-tutorial-get-started.md
 
 [hdinsight-samples]: hdinsight-run-samples.md
 [hdinsight-sample-10gb-graysort]: #hdinsight-sample-10gb-graysort
@@ -1004,10 +997,9 @@ public class TeraSort extends Configured implements Tool {
 [hdinsight-sample-pi-estimator]: #hdinsight-sample-pi-estimator
 [hdinsight-sample-wordcount]: #hdinsight-sample-wordcount
 
-[hdinsight-use-hive]: hdinsight-use-hive.md
-[hdinsight-use-pig]: hdinsight-use-pig.md
+[hdinsight-use-hive]: hadoop/hdinsight-use-hive.md
+[hdinsight-use-pig]: hadoop/hdinsight-use-pig.md
 
 [streamreader]: http://msdn.microsoft.com/library/system.io.streamreader.aspx
 [console-writeline]: http://msdn.microsoft.com/library/system.console.writeline
 [stdin-stdout-stderr]: https://msdn.microsoft.com/library/3x292kth.aspx
-

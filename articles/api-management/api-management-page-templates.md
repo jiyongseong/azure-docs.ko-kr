@@ -3,7 +3,7 @@ title: "Azure API Management의 페이지 템플릿 | Microsoft Docs"
 description: "Azure API Management에서 템플릿 집합을 사용하여 개발자 포털 페이지의 콘텐츠를 사용자 지정하는 방법에 대해 알아봅니다."
 services: api-management
 documentationcenter: 
-author: miaojiang
+author: vladvino
 manager: erikre
 editor: 
 ms.assetid: e57df269-1019-4b74-b74d-53155b809d59
@@ -12,12 +12,13 @@ ms.workload: mobile
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 01/09/2017
+ms.date: 01/09/2018
 ms.author: apimpm
-translationtype: Human Translation
-ms.sourcegitcommit: 77fd7b5b339a8ede8a297bec96f91f0a243cc18d
-ms.openlocfilehash: d3c947ec67a6acba3058afcef36a18bf5debd55d
-
+ms.openlocfilehash: 882bb27c7692f4eaf628d26f6081b1e1015be81b
+ms.sourcegitcommit: 9292e15fc80cc9df3e62731bafdcb0bb98c256e1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/10/2018
 ---
 # <a name="page-templates-in-azure-api-management"></a>Azure API Management의 페이지 템플릿
 Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사용하여 개발자 포털 페이지의 콘텐츠를 사용자 지정하는 기능을 제공합니다. 이러한 템플릿에서 [DotLiquid](http://dotliquidmarkup.org/) 구문 및 [DotLiquid for Designers](https://github.com/dotliquid/dotliquid/wiki/DotLiquid-for-Designers) 및 제공된 지역화 [String 리소스](api-management-template-resources.md#strings), [Glyph 리소스](api-management-template-resources.md#glyphs) 및 [Page 컨트롤](api-management-page-controls.md)의 집합과 같은 선택한 편집기를 사용하여 필요에 따라 페이지 콘텐츠를 유연하게 구성할 수 있습니다.  
@@ -33,7 +34,7 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 > [!NOTE]
 >  다음 문서에는 샘플 기본 템플릿이 포함되어 있지만 지속적인 향상으로 인해 변경될 수 있습니다. 원하는 개별 템플릿으로 이동하여 개발자 포털에서 라이브 기본 템플릿을 볼 수 있습니다. 템플릿 작업에 대한 자세한 내용은 [템플릿을 사용하여 API Management 개발자 포털을 사용자 지정하는 방법](https://azure.microsoft.com/documentation/articles/api-management-developer-portal-templates/)을 참조하세요.  
   
-##  <a name="a-namesignina-sign-in"></a><a name="SignIn"></a> 로그인  
+##  <a name="SignIn"></a> 로그인  
  **로그인** 템플릿을 통해 개발자 포털에서 로그인 페이지를 사용자 지정할 수 있습니다.  
   
  ![로그인 페이지](./media/api-management-page-templates/APIM-Sign-In-Page-Developer-Portal-Templates.png "APIM 로그인 페이지 개발자 포털 템플릿")  
@@ -107,16 +108,16 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 ### <a name="sample-template-data"></a>샘플 템플릿 데이터  
   
 ```json  
-{  
-    "Email": null,  
-    "Password": null,  
-    "ReturnUrl": null,  
-    "RememberMe": false,  
-    "RegistrationEnabled": true,  
-    "DelegationEnabled": false,  
-    "DelegationUrl": null,  
-    "SsoSignUpUrl": null,  
-    "AuxServiceUrl": "https://manage.windowsazure.com/#Workspaces/ApiManagementExtension/service/contoso5/dashboard",  
+{
+    "Email": null,
+    "Password": null,
+    "ReturnUrl": null,
+    "RememberMe": false,
+    "RegistrationEnabled": true,
+    "DelegationEnabled": false,
+    "DelegationUrl": null,
+    "SsoSignUpUrl": null,
+    "AuxServiceUrl": "https://portal.azure.com/#resource/subscriptions/{subscription ID}/resourceGroups/Api-Default-West-US/providers/Microsoft.ApiManagement/service/contoso5",
     "Providers": [  
         {  
             "Properties": {  
@@ -126,13 +127,13 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
             "AuthenticationType": "Aad",  
             "Caption": "Azure Active Directory"  
         }  
-    ],  
-    "UserRegistrationTerms": null,  
-    "UserRegistrationTermsEnabled": false  
-}  
+        ],
+    "UserRegistrationTerms": null,
+    "UserRegistrationTermsEnabled": false
+}
 ```  
   
-##  <a name="a-namesignupa-sign-up"></a><a name="SignUp"></a> 등록  
+##  <a name="SignUp"></a> 등록  
  **로그인** 템플릿을 통해 개발자 포털에서 로그인 페이지를 사용자 지정할 수 있습니다.  
   
  ![등록 페이지](./media/api-management-page-templates/APIM-Sign-Up-Page-Developer-Portal-Templates.png "APIM 등록 페이지 개발자 포털 템플릿")  
@@ -180,7 +181,7 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 }  
 ```  
   
-##  <a name="a-namepagenotfounda-page-not-found"></a><a name="PageNotFound"></a> 페이지를 찾을 수 없음  
+##  <a name="PageNotFound"></a> 페이지를 찾을 수 없음  
  **페이지를 찾을 수 없음** 템플릿을 통해 개발자 포털에서 페이지를 찾을 수 없음 페이지를 사용자 지정할 수 있습니다.  
   
  ![페이지를 찾을 수 없음](./media/api-management-page-templates/APIM-Not-Found-Page-Developer-Portal-Templates.png "APIM 페이지를 찾을 수 없음 개발자 포털 템플릿")  
@@ -222,13 +223,13 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
   
 ### <a name="data-model"></a>데이터 모델  
   
-|속성|유형|설명|  
+|자산|type|설명|  
 |--------------|----------|-----------------|  
-|referenceCode|string|이 페이지가 내부 오류의 결과로 표시된 경우에 생성되는 코드입니다.|  
-|errorCode|string|이 페이지가 내부 오류의 결과로 표시된 경우에 생성되는 코드입니다.|  
-|emailBody|string|내부 오류로 인해이 페이지 표시 된 경우 생성 된 본문을 전자 메일로 보냅니다.|  
-|requestedUrl|string|페이지를 찾을 수 없는 경우 요청되는 URL입니다.|  
-|referrerUrl|string|요청된 URL의 참조 페이지 URL입니다.|  
+|referenceCode|문자열|이 페이지가 내부 오류의 결과로 표시된 경우에 생성되는 코드입니다.|  
+|errorCode|문자열|이 페이지가 내부 오류의 결과로 표시된 경우에 생성되는 코드입니다.|  
+|emailBody|문자열|내부 오류로 인해이 페이지 표시 된 경우 생성 된 본문을 전자 메일로 보냅니다.|  
+|requestedUrl|문자열|페이지를 찾을 수 없는 경우 요청되는 URL입니다.|  
+|referrerUrl|문자열|요청된 URL의 참조 페이지 URL입니다.|  
   
 ### <a name="sample-template-data"></a>샘플 템플릿 데이터  
   
@@ -244,8 +245,3 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 
 ## <a name="next-steps"></a>다음 단계
 템플릿 작업에 대한 자세한 내용은 [템플릿을 사용하여 API Management 개발자 포털을 사용자 지정하는 방법](api-management-developer-portal-templates.md)을 참조하세요.
-
-
-<!--HONumber=Jan17_HO2-->
-
-

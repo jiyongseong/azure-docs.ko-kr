@@ -14,12 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/30/2017
 ms.author: ganesr
-translationtype: Human Translation
-ms.sourcegitcommit: 24d86e17a063164c31c312685c0742ec4a5c2f1b
 ms.openlocfilehash: a65b1ba2998eae33b3e73bd2492fbbf025eb5946
-ms.lasthandoff: 03/11/2017
-
-
+ms.sourcegitcommit: b5c6197f997aa6858f420302d375896360dd7ceb
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/21/2017
 ---
 # <a name="getting-arp-tables-in-the-resource-manager-deployment-model"></a>Resource Manager 배포 모델에서 ARP 테이블 가져오기
 > [!div class="op_single_selector"]
@@ -60,7 +59,7 @@ ARP 테이블의 예:
 더 진행하기 전에 다음이 있는지 확인합니다.
 
 * 1개 이상 피어링으로 구성된 유효한 ExpressRoute 회로. 연결 공급자가 완벽히 구성한 회로여야 합니다. 사용자(또는 연결 공급자)는 이 회로에서 하나 이상의 피어링을 구성했어야 합니다(Azure 개인, Azure 공용 및 Microsoft).
-* 피어링(Azure 개인, Azure 공용 및 Microsoft) 구성에 사용한 IP 주소 범위. [Express 경로 라우팅 요구 사항 페이지](expressroute-routing.md) 에서 IP 주소 할당 예제를 검토하여 사용자 측과 Express 경로 측에서 인터페이스에 IP 주소를 매핑하는 방법을 파악합니다. [ExpressRoute 피어링 구성 페이지](expressroute-howto-routing-arm.md)를 검토하면 피어링 구성에 관한 정보를 얻을 수 있습니다.
+* 피어링(Azure 개인, Azure 공용 및 Microsoft) 구성에 사용한 IP 주소 범위. [ExpressRoute 라우팅 요구 사항 페이지](expressroute-routing.md) 에서 IP 주소 할당 예제를 검토하여 사용자 측과 ExpressRoute 측에서 인터페이스에 IP 주소를 매핑하는 방법을 파악합니다. [ExpressRoute 피어링 구성 페이지](expressroute-howto-routing-arm.md)를 검토하면 피어링 구성에 관한 정보를 얻을 수 있습니다.
 * 네트워킹 팀/연결 공급자가 제공한 해당 IP 주소에서 사용하는 인터페이스 MAC 주소 정보.
 * 최신 Azure용 PowerShell 모듈(1.50 버전 이상)이 있어야 합니다.
 
@@ -178,5 +177,4 @@ ARP 테이블의 예:
   * 라우트 테이블에서 ExpressRoute에 어떤 접두사가 보급되었는지 확인
 * 바이트 입출력으로 데이터 전송의 유효성 검사
 * 여전히 문제가 해결되지 않을 경우 [Microsoft 지원](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) 으로 지원 티켓을 엽니다.
-
 

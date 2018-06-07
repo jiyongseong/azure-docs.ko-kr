@@ -1,9 +1,9 @@
 ---
-title: "Azure Application Insights에서 Stream Analytics를 사용하여 내보내기 | Microsoft Docs"
-description: "Stream Analytics를 사용하면 Application Insights에서 내보내는 데이터를 지속적으로 변환, 필터링 및 라우팅할 수 있습니다."
+title: Azure Application Insights에서 Stream Analytics를 사용하여 내보내기 | Microsoft Docs
+description: Stream Analytics를 사용하면 Application Insights에서 내보내는 데이터를 지속적으로 변환, 필터링 및 라우팅할 수 있습니다.
 services: application-insights
-documentationcenter: 
-author: noamben
+documentationcenter: ''
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 31594221-17bd-4e5e-9534-950f3b022209
 ms.service: application-insights
@@ -11,15 +11,13 @@ ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
-ms.date: 10/18/2016
-ms.author: cfreeman
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 785d3a8920d48e11e80048665e9866f16c514cf7
-ms.openlocfilehash: c1a76f521cbee673eb473d40bb15badd40cead5f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/12/2017
-
-
+ms.date: 01/04/2018
+ms.author: mbullwin
+ms.openlocfilehash: c898e43cb1334bf7fb1836554fb92708033d3f7d
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
 # <a name="use-stream-analytics-to-process-exported-data-from-application-insights"></a>Stream Analytics를 사용하여 Application Insights에서 내보낸 데이터 처리
 [Azure Stream Analytics](https://azure.microsoft.com/services/stream-analytics/)는 [Application Insights에서 내보낸](app-insights-export-telemetry.md) 데이터를 처리하는 위한 이상적인 도구입니다. Stream Analytics는 다양한 원본의 데이터를 가져와서 변환하고 필터링한 다음 다양한 싱크로 라우팅할 수 있습니다.
@@ -34,11 +32,11 @@ ms.lasthandoff: 04/12/2017
 ![SA를 통해 PBI로 내보내기에 대한 블록 다이어그램](./media/app-insights-export-stream-analytics/020.png)
 
 ## <a name="create-storage-in-azure"></a>Azure에서 저장소 만들기
-연속 내보내기는 항상 Azure 저장소 계정에 데이터를 출력하므로 저장소를 먼저 만들어야 합니다.
+연속 내보내기는 항상 Azure Storage 계정에 데이터를 출력하므로 저장소를 먼저 만들어야 합니다.
 
 1. [Azure 포털](https://portal.azure.com)에서 구독에 "클래식" 저장소 계정을 만듭니다.
    
-   ![Azure 포털에서 새로 만들기, 데이터, 저장소 선택](./media/app-insights-export-stream-analytics/030.png)
+   ![Azure Portal에서 새로 만들기, 데이터, 저장소 선택](./media/app-insights-export-stream-analytics/030.png)
 2. 컨테이너 만들기
    
     ![새 저장소에서 컨테이너를 선택하고 컨테이너 타일, 추가를 차례로 클릭합니다.](./media/app-insights-export-stream-analytics/040.png)
@@ -75,34 +73,34 @@ ms.lasthandoff: 04/12/2017
    
     응용 프로그램 이름 및 계측 키에서 파생된 경로 이름의 공통 부분을 적어 둡니다. 
 
-이벤트는 JSON 형식으로 blob 파일에 기록됩니다. 각 파일에는 하나 이상의 이벤트가 있을 수 있습니다. 따라서 이벤트 데이터를 읽고 원하는 필드를 필터링하려고 합니다. 데이터로 온갖 종류의 작업을 수행할 수 있지만, 지금은 스트림 분석을 사용하여 데이터를 Power BI로 파이프하려고 합니다.
+이벤트는 JSON 형식으로 blob 파일에 기록됩니다. 각 파일에는 하나 이상의 이벤트가 있을 수 있습니다. 따라서 이벤트 데이터를 읽고 원하는 필드를 필터링하려고 합니다. 데이터로 온갖 종류의 작업을 수행할 수 있지만, 지금은 Stream Analytics를 사용하여 데이터를 Power BI로 파이프하려고 합니다.
 
-## <a name="create-an-azure-stream-analytics-instance"></a>Azure 스트림 분석 인스턴스 만들기
-[클래식 Azure 포털](https://manage.windowsazure.com/)에서 Azure 스트림 분석 서비스를 선택하고 새 스트림 분석 작업을 만듭니다.
+## <a name="create-an-azure-stream-analytics-instance"></a>Azure Stream Analytics 인스턴스 만들기
+[Azure Portal](https://portal.azure.com/)에서 Azure Stream Analytics 서비스를 선택하고 새 Stream Analytics 작업을 만듭니다.
 
-![](./media/app-insights-export-stream-analytics/090.png)
+![](./media/app-insights-export-stream-analytics/SA001.png)
 
-![](./media/app-insights-export-stream-analytics/100.png)
+![](./media/app-insights-export-stream-analytics/SA002.png)
 
-새 작업이 만들어지면 해당 세부 정보를 확장합니다.
+새 작업이 만들어질 때 **리소스로 이동**을 선택합니다.
 
-![](./media/app-insights-export-stream-analytics/110.png)
+![](./media/app-insights-export-stream-analytics/SA003.png)
 
-### <a name="set-blob-location"></a>Blob 위치 설정
+### <a name="add-a-new-input"></a>새 입력 추가
+
+![](./media/app-insights-export-stream-analytics/SA004.png)
+
 연속 내보내기 Blob에서 입력을 가져오도록 설정합니다.
 
-![](./media/app-insights-export-stream-analytics/120.png)
+![](./media/app-insights-export-stream-analytics/SA005.png)
 
-이제 앞에서 기록해 둔 저장소 계정의 기본 액세스 키가 필요합니다. 이 키를 저장소 계정 키로 설정합니다.
-
-![](./media/app-insights-export-stream-analytics/130.png)
+이제 앞에서 기록해 둔 Storage 계정의 기본 액세스 키가 필요합니다. 이 키를 Storage 계정 키로 설정합니다.
 
 ### <a name="set-path-prefix-pattern"></a>경로 접두사 패턴 설정
-![](./media/app-insights-export-stream-analytics/140.png)
 
 **날짜 형식을 YYYY-MM-DD(파선 포함)로 설정해야 합니다.**
 
-전위 패턴은 스트림 분석이 저장소에서 입력 파일을 찾는 위치를 지정합니다. 연속 내보내기에서 데이터를 저장하는 방법과 일치하도록 설정해야 합니다. 다음과 같이 설정합니다.
+전위 패턴은 Stream Analytics가 저장소에서 입력 파일을 찾는 위치를 지정합니다. 연속 내보내기에서 데이터를 저장하는 방법과 일치하도록 설정해야 합니다. 다음과 같이 설정합니다.
 
     webapplication27_12345678123412341234123456789abcdef0/PageViews/{date}/{time}
 
@@ -116,33 +114,19 @@ ms.lasthandoff: 04/12/2017
 > [!NOTE]
 > 저장소를 검사하여 올바른 경로를 가져오는지 확인합니다.
 > 
-> 
 
-### <a name="finish-initial-setup"></a>초기 설치 완료
-직렬화 형식을 확인합니다.
+## <a name="add-new-output"></a>새 출력 추가
+이제 작업 > **출력** > **추가**를 선택합니다.
 
-![마법사 확인 후 닫기](./media/app-insights-export-stream-analytics/150.png)
+![](./media/app-insights-export-stream-analytics/SA006.png)
 
-마법사를 닫고 설치가 완료될 때까지 기다립니다.
 
-> [!TIP]
-> 샘플 명령을 사용하여 일부 데이터를 다운로드합니다. 쿼리를 디버그할 테스트 샘플로 보관합니다.
-> 
-> 
+![새 채널을 선택하고, 출력, 추가, Power BI를 클릭합니다.](./media/app-insights-export-stream-analytics/SA010.png)
 
-## <a name="set-the-output"></a>출력 설정
-이제 사용자의 작업을 선택하고 출력을 설정합니다.
-
-![새 채널을 선택하고, 출력, 추가, Power BI를 클릭합니다.](./media/app-insights-export-stream-analytics/160.png)
-
-**회사 또는 학교 계정** 을 제공하여 스트림 분석에 Power BI 리소스에 대한 액세스 권한을 부여합니다. 그런 다음 출력 및 대상 Power BI 데이터 집합과 테이블의 이름을 지정합니다.
-
-![이름 3개를 생성합니다.](./media/app-insights-export-stream-analytics/170.png)
+**회사 또는 학교 계정** 을 제공하여 Stream Analytics에 Power BI 리소스에 대한 액세스 권한을 부여합니다. 그런 다음 출력 및 대상 Power BI 데이터 집합과 테이블의 이름을 지정합니다.
 
 ## <a name="set-the-query"></a>쿼리 설정
 쿼리는 입력에서 출력으로 번역을 제어합니다.
-
-![작업을 선택하고 쿼리를 클릭합니다. 아래 샘플을 붙여넣습니다.](./media/app-insights-export-stream-analytics/180.png)
 
 Test 함수를 사용하여 올바른 출력이 표시되는지 확인합니다. 입력 페이지에서 얻은 샘플 데이터를 제공합니다. 
 
@@ -208,7 +192,7 @@ Test 함수를 사용하여 올바른 출력이 표시되는지 확인합니다.
 ## <a name="run-the-job"></a>작업 실행
 작업을 시작할 과거의 날짜를 선택할 수 있습니다. 
 
-![작업을 선택하고 쿼리를 클릭합니다. 아래 샘플을 붙여넣습니다.](./media/app-insights-export-stream-analytics/190.png)
+![작업을 선택하고 쿼리를 클릭합니다. 아래 샘플을 붙여넣습니다.](./media/app-insights-export-stream-analytics/SA008.png)
 
 작업이 실행 중인 동안 기다립니다.
 
@@ -218,7 +202,7 @@ Test 함수를 사용하여 올바른 출력이 표시되는지 확인합니다.
 > 
 > 
 
-회사 또는 학교 계정을 사용하여 Power BI를 열고 스트림 분석 작업의 출력으로 정의된 데이터 집합 및 테이블을 선택합니다.
+회사 또는 학교 계정을 사용하여 Power BI를 열고 Stream Analytics 작업의 출력으로 정의된 데이터 집합 및 테이블을 선택합니다.
 
 ![Power BI에서 데이터 집합과 필드를 선택합니다.](./media/app-insights-export-stream-analytics/200.png)
 
@@ -240,5 +224,4 @@ Noam Ben Zeev에서는 Stream Analytics를 사용하여 내보낸 데이터를 �
 * [연속 내보내기](app-insights-export-telemetry.md)
 * [속성 형식 및 값에 대한 자세한 데이터 모델 참조입니다.](app-insights-export-data-model.md)
 * [Application Insights](app-insights-overview.md)
-
 

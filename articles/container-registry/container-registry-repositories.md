@@ -1,57 +1,57 @@
 ---
-title: "Azure 컨테이너 레지스트리 리포지토리 | Microsoft Docs"
-description: "Docker 이미지에 Azure 컨테이너 레지스트리 리포지토리를 사용하는 방법"
+title: Azure Portal의 Azure Container Registry 리포지토리
+description: Azure Portal에서 Azure Container Registry 리포지토리를 보는 방법
 services: container-registry
-documentationcenter: 
 author: cristy
-manager: balans
-editor: dlepow
+manager: jeconnoc
 ms.service: container-registry
-ms.devlang: na
-ms.topic: how-to-article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 03/24/2017
+ms.topic: article
+ms.date: 01/05/2018
 ms.author: cristyg
-translationtype: Human Translation
-ms.sourcegitcommit: 6e0ad6b5bec11c5197dd7bded64168a1b8cc2fdd
-ms.openlocfilehash: 06b809c31cecef1714f60d04657eb74c611be8cb
-ms.lasthandoff: 03/28/2017
-
-
+ms.openlocfilehash: 171593483fc94c1c67013ab520b0085ca98f3a82
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
-# <a name="azure-container-registry-repositories"></a>Azure 컨테이너 레지스트리 리포지토리
+# <a name="view-container-registry-repositories-in-the-azure-portal"></a>Azure Portal의 컨테이너 레지스트리 리포지토리 보기
 
-Azure 컨테이너 레지스트리를 통해 리포지토리에 컨테이너 이미지를 저장할 수 있습니다. 리포지토리에 이미지를 저장하면 격리된 환경에 이미지 그룹(또는 이미지 버전)을 포함할 수 있습니다. 이미지를 레지스트리에 푸시할 때 이러한 리포지토리를 지정할 수 있습니다.
-
+Azure Container Registry를 통해 리포지토리에 Docker 컨테이너 이미지를 저장할 수 있습니다. 리포지토리에 이미지를 저장하면 격리된 환경에 이미지 그룹(또는 이미지 버전)을 저장할 수 있습니다. 이미지를 레지스트리에 푸시할 때 이러한 리포지토리를 지정하고, Azure Portal에서 해당 콘텐츠를 볼 수 있습니다.
 
 ## <a name="prerequisites"></a>필수 조건
-* **Azure Container Registry** - Azure 구독 내에서 컨테이너 레지스트리를 만듭니다. 예를 들어 [Azure Portal](container-registry-get-started-portal.md) 또는 [Azure CLI 2.0](container-registry-get-started-azure-cli.md)을 사용합니다.
-* **Docker CLI** - 로컬 컴퓨터를 Docker 호스트로 설정하고 Docker CLI 명령에 액세스하려면 [Docker 엔진](https://docs.docker.com/engine/installation/)을 설치합니다.
-* **이미지 끌어오기** - 공개 Docker Hub 레지스트리에서 이미지를 끌어온 후 태그를 지정하고 레지스트리에 밀어넣습니다. 이미지를 밀어넣고 끌어오는 방법은 [Azure 개인 레지스트리에 Docker 이미지 밀어넣기](container-registry-get-started-docker-cli.md)를 참조하세요.
 
+* **컨테이너 레지스트리**: Azure 구독 내에서 컨테이너 레지스트리를 만듭니다. 예를 들어 [Azure Portal](container-registry-get-started-portal.md) 또는 [Azure CLI](container-registry-get-started-azure-cli.md)를 사용합니다.
+* **Docker CLI**: 로컬 컴퓨터에 Docker 명령줄 인터페이스를 제공하는 [Docker][docker-install]를 설치합니다.
+* **컨테이너 이미지**: 이미지를 컨테이너 레지스트리를 밀어 넣습니다. 이미지 밀어넣기 및 끌어오기 방법에 대한 지침은 [이미지 밀어넣기 및 끌어오기](container-registry-get-started-docker-cli.md)를 참조하세요.
 
-## <a name="viewing-repositories-in-the-portal"></a>포털에서 리포지토리 보기
+## <a name="view-repositories-in-azure-portal"></a>Azure Portal에서 리포지토리 보기
 
-이미지를 컨테이너 레지스트리에 밀어넣었으면 Azure Portal에서 이미지를 호스팅하는 리포지토리 목록을 볼 수 있습니다.
+Azure Portal에서 이미지 태그뿐만 아니라 이미지를 호스트하는 리포지토리 목록도 볼 수 있습니다.
 
-[Azure 개인 레지스트리에 Docker 이미지 밀어넣기](container-registry-get-started-docker-cli.md) 문서의 단계를 수행하면 컨테이너 레지스트리에 Nginx 이미지가 포함됩니다. 지침의 일부로 이미지에 대한 네임스페이스를 지정해야 합니다. 아래 예제의 명령은 NGinx 이미지를 "samples" 리포지토리에 밀어넣습니다.
+[이미지 밀어넣기 및 끌어오기](container-registry-get-started-docker-cli.md)의 단계를 따른 경우(나중에 이미지를 삭제하지 않음) 컨테이너 레지스트리에 Nginx 이미지가 있을 것입니다. 해당 문서의 지침에서는 `/samples/nginx`에서 네임스페이스 “samples”를 태그로 이미지에 지정하도록 지정했습니다. 해당 문서에 지정된 [docker push][docker-push] 명령이 아래에 다시 제공되니 참조하기 바랍니다.
 
-```
+```Bash
 docker push myregistry.azurecr.io/samples/nginx
 ```
- Azure Container Registry는 다단계 리포지토리 네임스페이스를 지원합니다. 이 기능을 통해 특정 앱과 관련된 이미지 컬렉션 또는 특정 배포 또는 작업 팀에 대한 앱 컬렉션을 그룹화할 수 있습니다. 컨테이너 레지스트리의 리포지토리에 대한 자세한 내용은 [Azure의 개인 Docker 컨테이너 레지스트리](container-registry-intro.md)를 참조하세요.
 
-Azure 컨테이너 레지스트리 리포지토리를 보려면
+ Azure Container Registry는 이러한 다단계 리포지토리 네임스페이스를 지원하므로 특정 앱 또는 앱 컬렉션과 관련된 이미지 모음을 다른 개발 또는 운영 팀으로 확장할 수 있습니다. 컨테이너 레지스트리의 리포지토리에 대한 자세한 내용은 [Azure의 개인 Docker 컨테이너 레지스트리](container-registry-intro.md)를 참조하세요.
 
-1. Azure 포털에 로그인
-2. **Azure 컨테이너 레지스트리** 블레이드에서 검사할 레지스트리를 선택합니다.
-3. 레지스트리 블레이드에서 **리포지토리**를 클릭하면 모든 리포지토리와 해당 이미지 목록이 표시됩니다.
-4. (선택 사항) 태그를 볼 특정 이미지 선택
+리포지토리를 보려면
+
+1. [Azure Portal][portal]에 로그인합니다.
+1. Nginx 이미지를 밀어 넣은 **Azure Container Registry**를 선택합니다.
+1. **리포지토리**를 선택하여 레지스트리의 이미지를 포함하는 리포지토리 목록을 확인합니다.
+1. 리포지토리를 선택하여 해당 리포지토리 내의 이미지 태그를 확인합니다.
+
+예를 들어, [이미지 밀어넣기 및 끌어오기](container-registry-get-started-docker-cli.md)에 지시된 대로 Nginx 이미지를 밀어 넣은 경우 다음과 유사한 결과가 표시됩니다.
 
 ![포털에서 리포지토리](./media/container-registry-repositories/container-registry-repositories.png)
 
-
 ## <a name="next-steps"></a>다음 단계
-이제 기본 사항을 배웠으니 레지스트리 사용을 시작할 준비가 되었습니다! 예를 들어, 컨테이너 이미지를 [Azure Container Service](https://azure.microsoft.com/documentation/services/container-service/) 클러스터에 배포하기 시작하세요.
 
+이제 포털에서 리포지토리를 보고 사용하는 기본 방법을 확인했으므로 [ACS(Azure Kubernetes Service)](../aks/tutorial-kubernetes-prepare-app.md) 클러스터에서 Azure Container Registry를 사용해보세요.
+
+<!-- LINKS - External -->
+[docker-install]: https://docs.docker.com/engine/installation/
+[docker-push]: https://docs.docker.com/engine/reference/commandline/push/
+[portal]: https://portal.azure.com

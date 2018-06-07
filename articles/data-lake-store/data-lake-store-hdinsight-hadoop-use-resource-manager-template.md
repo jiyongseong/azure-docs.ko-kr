@@ -1,26 +1,22 @@
 ---
-title: "Azure 템플릿을 사용하여 Azure HDInsight 및 Data Lake Store 만들기 | Microsoft Docs"
-description: "Azure Resource Manager 템플릿을 사용하여 Azure Data Lake Store로 HDInsight Hadoop 클러스터 만들기 및 사용"
+title: Azure 템플릿을 사용하여 Azure HDInsight 및 Data Lake Store 만들기 | Microsoft Docs
+description: Azure Resource Manager 템플릿을 사용하여 Azure Data Lake Store로 HDInsight Hadoop 클러스터 만들기 및 사용
 services: data-lake-store,hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: nitinme
 manager: jhubbard
 editor: cgronlun
 ms.assetid: 8ef8152f-2121-461e-956c-51c55144919d
 ms.service: data-lake-store
 ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 05/04/2017
+ms.topic: conceptual
+ms.date: 11/28/2017
 ms.author: nitinme
-ms.translationtype: Human Translation
-ms.sourcegitcommit: e22bd56e0d111add6ab4c08b6cc6e51c364c7f22
-ms.openlocfilehash: 6f43423096f0e74f41afea275e4ec9801dc2cea5
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/19/2017
-
-
+ms.openlocfilehash: 1a5651e9e1b8c46e8151e44308de44245aa2ac35
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="create-an-hdinsight-cluster-with-data-lake-store-using-azure-resource-manager-template"></a>Azure Resource Manager 템플릿을 사용하여 Data Lake Store로 HDInsight 클러스터 만들기
 > [!div class="op_single_selector"]
@@ -48,7 +44,7 @@ Data Lake Store에서 HDInsight를 사용하는 몇 가지 중요한 고려 사�
 ## <a name="prerequisites"></a>필수 조건
 이 자습서를 시작하기 전에 다음이 있어야 합니다.
 
-* **Azure 구독**. [Azure 무료 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
+* **Azure 구독**. [Azure 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
 * **Azure PowerShell 1.0 이상**. [Azure PowerShell 설치 및 구성 방법](/powershell/azure/overview)을 참조하세요.
 * **Azure Active Directory 서비스 사용자**. 이 자습서의 단계에서는 Azure AD에서 서비스 사용자를 만드는 방법에 대한 지침을 제공합니다. 그러나 서비스 사용자를 만들려면 Azure AD 관리자여야 합니다. Azure AD 관리자인 경우 이 필수 조건을 건너뛰고 자습서를 진행할 수 있습니다.
 
@@ -61,7 +57,7 @@ Resource Manager 템플릿 및 템플릿 사용을 위한 필수 조건은 GitHu
 
 ```
 # Log in to your Azure account
-Login-AzureRmAccount
+Connect-AzureRmAccount
 
 # List all the subscriptions associated to your account
 Get-AzureRmSubscription
@@ -82,7 +78,7 @@ HDInsight 클러스터에서 업로드한 샘플 데이터에 액세스할 수 �
 ## <a name="run-test-jobs-on-the-hdinsight-cluster-to-use-the-data-lake-store"></a>HDInsight 클러스터에서 테스트 작업을 실행하여 데이터 레이크 저장소 사용
 HDInsight 클러스터를 구성한 후에 클러스터에서 테스트 작업을 실행하여 HDInsight 클러스터가 데이터 레이크 저장소에 액세스할 수 있는지 테스트할 수 있습니다. 이렇게 하려면 데이터 레이크 저장소에 이전에 업로드한 샘플 데이터를 사용하여 테이블을 만드는 샘플 Hive 작업을 실행합니다.
 
-이 섹션에서는 HDInsight Linux 클러스터로 SSH하고 샘플 Hive 쿼리를 실행합니다. Windows 클라이언트를 사용 중인 경우 **PuTTY**를 사용하는 것이 좋습니다([http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)에서 다운로드할 수 있음).
+이 섹션에서는 HDInsight Linux 클러스터로 SSH하고 샘플 Hive 쿼리를 실행합니다. Windows 클라이언트를 사용하는 경우 [http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)에서 다운로드할 수 있는 **PuTTY**를 사용하는 것이 좋습니다.
 
 PuTTY 사용에 대한 자세한 내용은 [Windows에서 HDInsight의 Linux 기반 Hadoop과 SSH 사용 ](../hdinsight/hdinsight-hadoop-linux-use-ssh-windows.md)을 참조하세요.
 
@@ -118,7 +114,7 @@ PuTTY 사용에 대한 자세한 내용은 [Windows에서 HDInsight의 Linux 기
 ## <a name="access-data-lake-store-using-hdfs-commands"></a>HDFS 명령을 사용한 액세스 데이터 레이크 저장소
 데이터 레이크 저장소를 사용하도록 HDInsight 클러스터를 구성한 후 HDFS 셸 명령을 사용하여 저장소에 액세스할 수 있습니다.
 
-이 섹션에서는 HDInsight Linux 클러스터로 SSH하고 HDFS 명령을 실행합니다. Windows 클라이언트를 사용 중인 경우 **PuTTY**를 사용하는 것이 좋습니다([http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)에서 다운로드할 수 있음).
+이 섹션에서는 HDInsight Linux 클러스터로 SSH하고 HDFS 명령을 실행합니다. Windows 클라이언트를 사용하는 경우 [http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)에서 다운로드할 수 있는 **PuTTY**를 사용하는 것이 좋습니다.
 
 PuTTY 사용에 대한 자세한 내용은 [Windows에서 HDInsight의 Linux 기반 Hadoop과 SSH 사용 ](../hdinsight/hdinsight-hadoop-linux-use-ssh-windows.md)을 참조하세요.
 
@@ -140,5 +136,5 @@ Found 1 items
 
 
 ## <a name="next-steps"></a>다음 단계
-* [Azure Storage Blob에서 Data Lake Store로 데이터 복사](data-lake-store-copy-data-wasb-distcp.md)
-
+* [Azure Storage Blob에서 데이터 레이크 저장소로 데이터 복사](data-lake-store-copy-data-wasb-distcp.md)
+* [Azure HDInsight 클러스터에 Data Lake Store 사용](../hdinsight/hdinsight-hadoop-use-data-lake-store.md)

@@ -1,10 +1,10 @@
 ---
-title: "자습서: Bambu by Sprout Social과 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory와 Bambu by Sprout Social 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Bambu by Sprout Social과 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory와 Bambu by Sprout Social 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: d2b9ddbc-cab7-40d6-aca1-5b171cab4199
 ms.service: active-directory
 ms.workload: identity
@@ -13,12 +13,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/17/2017
 ms.author: jeedes
-translationtype: Human Translation
-ms.sourcegitcommit: db7cb109a0131beee9beae4958232e1ec5a1d730
-ms.openlocfilehash: 985966d26f6ed0dcd4db47589abf94260ce62bf0
-ms.lasthandoff: 04/18/2017
-
-
+ms.openlocfilehash: d6b94e1a2d002459089730fc5b47cca33ca55f20
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-bambu-by-sprout-social"></a>자습서: Bambu by Sprout Social과 Azure Active Directory 통합
 
@@ -30,15 +29,7 @@ Bambu by Sprout Social을 Azure AD와 통합하면 다음과 같은 이점이 �
 - 사용자가 해당 Azure AD 계정으로 Bambu by Sprout Social에 자동으로 로그온(Single Sign-On)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](active-directory-appssoaccess-whatis.md)을 참조하세요.
-
-<!--## Overview
-
-To enable single sign-on with Bambu by Sprout Social, it must be configured to use Azure Active Directory as an identity provider. This guide provides information and tips on how to perform this configuration in Bambu by Sprout Social.
-
->[!Note]: 
->This embedded guide is brand new in the new Azure portal, and we’d love to hear your thoughts. Use the Feedback ? button at the top of the portal to provide feedback. The older guide for using the [Azure classic portal](https://manage.windowsazure.com) to configure this application can be found [here](https://github.com/Azure/AzureAD-App-Docs/blob/master/articles/en-us/_/sso_configure.md).-->
-
+Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](manage-apps/what-is-single-sign-on.md)을 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -66,7 +57,7 @@ Bambu by Sprout Social의 Azure AD 통합을 구성하려면 갤러리의 Bambu 
 
 **갤러리에서 Bambu by Sprout Social을 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Active Directory][1]
 
@@ -95,11 +86,11 @@ Single Sign-On이 작동하려면 Azure AD에서 Azure AD 사용자에 해당하
 
 Bambu by Sprout Social에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구성 요소를 완료해야 합니다.
 
-1. **[Azure AD Single Sign-On 구성](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
-2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
+1. **[Configuring Azure AD Single Sign-On](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
+2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On 테스트하는 데 사용합니다.
 3. **[Bambu by Sprout Social 테스트 사용자 만들기](#creating-a-bambu-by-sprout-social-test-user)** - Britta Simon의 Azure AD 표현과 연결된 해당 사용자를 Bambu by Sprout Social에 만듭니다.
 4. **[Azure AD 테스트 사용자 할당](#assigning-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Testing Single Sign-On](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
+5. **[Single Sign-On 테스트](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
 
 ### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -109,27 +100,27 @@ Bambu by Sprout Social에서 Azure AD Single Sign-On을 구성하고 테스트�
 
 1. Azure Portal의 **Bambu by Sprout Social** 응용 프로그램 통합 페이지에서 **Single sign-on**을 클릭합니다.
 
-    ![Single Sign-On 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single sign on** 대화 상자에서 **모드**로 **SAML 기반 로그온**을 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-on 구성](./media/active-directory-saas-bambubysproutsocial-tutorial/tutorial_bambubysproutsocial_samlbase.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-bambubysproutsocial-tutorial/tutorial_bambubysproutsocial_samlbase.png)
 
 3. **Bambu by Sprout Social 도메인 및 URL** 섹션에서 앱이 Azure와 이미 사전 통합되었으므로 사용자는 아무 단계도 수행할 필요가 없습니다. 
 
-    ![Single Sign-on 구성](./media/active-directory-saas-bambubysproutsocial-tutorial/tutorial_bambubysproutsocial_url.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-bambubysproutsocial-tutorial/tutorial_bambubysproutsocial_url.png)
 
 4. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 XML 파일을 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-bambubysproutsocial-tutorial/tutorial_bambubysproutsocial_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-bambubysproutsocial-tutorial/tutorial_bambubysproutsocial_certificate.png) 
 
 5. **저장** 단추를 클릭합니다.
 
-    ![Single Sign-On 구성](./media/active-directory-saas-bambubysproutsocial-tutorial/tutorial_general_400.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-bambubysproutsocial-tutorial/tutorial_general_400.png)
     
 6. **Bambu by Sprout Social 구성** 섹션에서 **Bambu by Sprout Social 구성**을 클릭하여 **로그인 구성** 창을 엽니다. **빠른 참조 섹션**에서 **SAML Single Sign-On 서비스 URL**을 복사합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-bambubysproutsocial-tutorial/tutorial_bambubysproutsocial_configure.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-bambubysproutsocial-tutorial/tutorial_bambubysproutsocial_configure.png) 
 
 7. **Bambu by Sprout Social** 쪽에서 Single Sign-On을 구성하려면 다운로드한 **메타데이터 XML** 및 **SAML Single Sign-On 서비스 URL**을 [Bambu by Sprout Social 지원](mailto:support@getbambu.com)으로 보내야 합니다. 이렇게 설정하면 SAML SSO 연결이 양쪽에서 제대로 설정됩니다.
 
@@ -175,15 +166,15 @@ To ensure users can sign-in to Bambu by Sprout Social after it has been configur
 
     a. **이름** 텍스트 상자에 **Britta Simon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 Britta Simon의 **메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 Britta Simon의 **메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
 ### <a name="creating-a-bambu-by-sprout-social-test-user"></a>Bambu by Sprout Social 테스트 사용자 만들기
 
-응용 프로그램이 Just-In-Time 사용자 프로비전을 지원하며 인증 후에는 응용 프로그램에서 자동으로 사용자가 생성됩니다.
+응용 프로그램이 JIT(Just-in-time) 사용자 프로비저닝을 지원하며 인증 후에 응용 프로그램에서 사용자가 자동으로 만들어집니다.
 
 ### <a name="assigning-the-azure-ad-test-user"></a>Azure AD 테스트 사용자 할당
 
@@ -199,7 +190,7 @@ To ensure users can sign-in to Bambu by Sprout Social after it has been configur
 
 2. 응용 프로그램 목록에서 **Bambu by Sprout Social**을 선택합니다.
 
-    ![Single Sign-On 구성](./media/active-directory-saas-bambubysproutsocial-tutorial/tutorial_bambubysproutsocial_app.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-bambubysproutsocial-tutorial/tutorial_bambubysproutsocial_app.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -224,7 +215,7 @@ To ensure users can sign-in to Bambu by Sprout Social after it has been configur
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -241,5 +232,4 @@ To ensure users can sign-in to Bambu by Sprout Social after it has been configur
 [201]: ./media/active-directory-saas-bambubysproutsocial-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-bambubysproutsocial-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-bambubysproutsocial-tutorial/tutorial_general_203.png
-
 

@@ -1,30 +1,22 @@
 ---
-title: "Entity Framework와 함께 탄력적 데이터베이스 클라이언트 라이브러리 사용 | Microsoft Docs"
-description: "데이터베이스 코딩을 위해 탄력적 데이터베이스 클라이언트 라이브러리 및 Entity Framework 사용"
+title: Entity Framework와 함께 탄력적 데이터베이스 클라이언트 라이브러리 사용 | Microsoft Docs
+description: 데이터베이스 코딩을 위해 Elastic Database 클라이언트 라이브러리 및 Entity Framework 사용
 services: sql-database
-documentationcenter: 
-manager: jhubbard
-author: torsteng
-editor: 
-ms.assetid: b9c3065b-cb92-41be-aa7f-deba23e7e159
+manager: craigg
+author: stevestein
 ms.service: sql-database
 ms.custom: scale out apps
-ms.workload: sql-database
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 03/06/2017
-ms.author: torsteng
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 094729399070a64abc1aa05a9f585a0782142cbf
-ms.openlocfilehash: 2a7229c9658cbbab676801f5c532a50bc0adedce
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/07/2017
-
-
+ms.date: 04/01/2018
+ms.author: sstein
+ms.openlocfilehash: fba872b01d4ddf0bb4e6aa8d0217042617688b8a
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-# <a name="elastic-database-client-library-with-entity-framework"></a>엔터티 프레임 작업과 함께 탄력적 데이터베이스 클라이언트 라이브러리
-이 문서에서는 [탄력적 데이터베이스 도구](sql-database-elastic-scale-introduction.md)의 기능을 통합하는 데 필요한 Entity Framework 응용 프로그램의 변경 내용을 보여줍니다. 여기서는 Entity Framework **Code First** 접근 방식으로 [공유된 데이터베이스 맵 관리](sql-database-elastic-scale-shard-map-management.md) 및 [데이터 종속 라우팅](sql-database-elastic-scale-data-dependent-routing.md)을 작성하는 데 집중합니다. 이 문서 전체에서는 EF용 [Code First – New Database](http://msdn.microsoft.com/data/jj193542.aspx) 자습서를 실행 예제로 사용합니다. 이 문서와 함께 제공되는 샘플 코드는 Visual Studio 코드 샘플에 포함된 탄력적 데이터베이스 도구의 샘플 세트 일부입니다.
+# <a name="elastic-database-client-library-with-entity-framework"></a>엔터티 프레임 작업과 함께 Elastic Database 클라이언트 라이브러리
+이 문서에서는 [Elastic Database 도구](sql-database-elastic-scale-introduction.md)의 기능을 통합하는 데 필요한 Entity Framework 응용 프로그램의 변경 내용을 보여줍니다. 여기서는 Entity Framework **Code First** 접근 방식으로 [공유된 데이터베이스 맵 관리](sql-database-elastic-scale-shard-map-management.md) 및 [데이터 종속 라우팅](sql-database-elastic-scale-data-dependent-routing.md)을 작성하는 데 집중합니다. 이 문서 전체에서는 EF용 [Code First – New Database](http://msdn.microsoft.com/data/jj193542.aspx) 자습서를 실행 예제로 사용합니다. 이 문서와 함께 제공되는 샘플 코드는 Visual Studio 코드 샘플에 포함된 탄력적 데이터베이스 도구의 샘플 세트 일부입니다.
 
 ## <a name="downloading-and-running-the-sample-code"></a>샘플 코드 다운로드 및 실행
 이 기사의 코드를 다운로드하려면:
@@ -35,13 +27,13 @@ ms.lasthandoff: 03/07/2017
 * Visual Studio에서 [파일] -> [프로젝트/솔루션 열기]를 선택합니다. 
 * **프로젝트 열기** 대화 상자에서 다운로드한 샘플로 이동하고 **EntityFrameworkCodeFirst.sln**을 선택하여 샘플을 엽니다. 
 
-샘플을 실행하려면 Azure SQL 데이터베이스에서 3개의 빈 데이터베이스를 만들어야 합니다.
+샘플을 실행하려면 Azure SQL Database에서 3개의 빈 데이터베이스를 만들어야 합니다.
 
 * 분할된 데이터베이스 맵 관리자 데이터베이스
 * 분할 1 데이터베이스
 * 분할 2 데이터베이스
 
-이러한 데이터베이스를 만든 후 Azure SQL DB 서버 이름, 데이터베이스 이름 및 데이터베이스에 연결하는 자격 증명을 **Program.cs** 의 자리 표시자에 입력합니다. Visual Studio에서 솔루션을 빌드합니다. Visual Studio는 탄력적 데이터베이스 클라이언트 라이브러리, Entity Framework 및 일시적인 오류 처리를 위해 필요한 NuGet 패키지를 빌드 프로세스 중에 다운로드합니다. 사용 중인 솔루션에 대해 NuGet 패키지를 복원할 수 있는지 확인합니다. Visual Studio 솔루션 탐색기에서 솔루션 파일을 마우스 오른쪽 단추로 클릭하여 이 설정을 사용할 수 있습니다. 
+이러한 데이터베이스를 만든 후 Azure SQL DB 서버 이름, 데이터베이스 이름 및 데이터베이스에 연결하는 자격 증명을 **Program.cs**의 자리 표시자에 입력합니다. Visual Studio에서 솔루션을 빌드합니다. Visual Studio는 탄력적 데이터베이스 클라이언트 라이브러리, Entity Framework 및 일시적인 오류 처리를 위해 필요한 NuGet 패키지를 빌드 프로세스 중에 다운로드합니다. 사용 중인 솔루션에 대해 NuGet 패키지를 복원할 수 있는지 확인합니다. Visual Studio 솔루션 탐색기에서 솔루션 파일을 마우스 오른쪽 단추로 클릭하여 이 설정을 사용할 수 있습니다. 
 
 ## <a name="entity-framework-workflows"></a>Entity Framework 워크플로
 Entity Framework 개발자는 다음 4개의 워크플로 중 하나를 사용하여 응용 프로그램을 구축하고 응용 프로그램 개체의 지속성을 확인합니다. 
@@ -51,14 +43,14 @@ Entity Framework 개발자는 다음 4개의 워크플로 중 하나를 사용�
 * **Model First**: 개발자가 EF 디자이너에서 모델을 만들면 EF가 해당 모델에서 데이터베이스를 만듭니다.
 * **Database First**: 개발자가 EF 도구를 사용하여 기존 데이터베이스에서 모델을 유추합니다. 
 
-이러한 모든 접근 방법은 DbContext 클래스를 사용하여 응용 프로그램용 데이터베이스 연결 및 데이터베이스 스키마를 쉽게 이해할 수 있게 관리합니다. 이 문서의 뒷부분에서 더 자세히 다루겠지만 DbContext 기본 클래스의 여러 생성자는 연결 생성, 데이터베이스 부트스트래핑 및 스키마 생성에 대해 다양한 수준의 제어를 허용합니다. EF에서 제공하는 데이터베이스 연결 관리가 탄력적 데이터베이스 클라이언트 라이브러리에서 제공하는 데이터 종속 라우팅 인터페이스의 연결 관리 기능과 교차한다는 사실에서 주로 문제가 발생합니다. 
+이러한 모든 접근 방법은 DbContext 클래스를 사용하여 응용 프로그램용 데이터베이스 연결 및 데이터베이스 스키마를 쉽게 이해할 수 있게 관리합니다. DbContext 기본 클래스의 여러 생성자는 연결 생성, 데이터베이스 부트스트래핑 및 스키마 생성에 대해 다양한 수준의 제어를 허용합니다. EF에서 제공하는 데이터베이스 연결 관리가 탄력적 데이터베이스 클라이언트 라이브러리에서 제공하는 데이터 종속 라우팅 인터페이스의 연결 관리 기능과 교차한다는 사실에서 주로 문제가 발생합니다. 
 
 ## <a name="elastic-database-tools-assumptions"></a>탄력적 데이터베이스 도구 가정
-용어 정의는 [탄력적 데이터베이스 도구 용어집](sql-database-elastic-scale-glossary.md)을 참조하세요.
+용어 정의는 [Elastic Database 도구 용어집](sql-database-elastic-scale-glossary.md)을 참조하세요.
 
-탄력적 데이터베이스 클라이언트 라이브러리를 사용하여 shardlet이라고 하는 응용 프로그램 데이터의 파티션을 정의합니다. Shardlet은 분할 키로 식별되며 특정 데이터베이스에 매핑됩니다. 응용 프로그램은 필요한 만큼 많은 데이터베이스를 포함하고 shardlet을 배포하여 현재 비즈니스 요구 사항에 따른 용량이나 성능을 충분히 제공할 수 있습니다. 탄력적 데이터베이스 클라이언트 API에서 제공하는 분할된 데이터베이스 맵을 통해 데이터베이스에 대한 분할 키 값의 매핑이 저장됩니다. 이 기능을 **분할된 데이터베이스 맵 관리**또는 줄여서 SMM이라고 합니다. 분할된 데이터베이스 맵은 분할 키를 전송하는 요청에 대한 데이터베이스 연결의 브로커 역할도 합니다. 이 기능을 **데이터 종속 라우팅**이라고 합니다. 
+탄력적 데이터베이스 클라이언트 라이브러리를 사용하여 shardlet이라고 하는 응용 프로그램 데이터의 파티션을 정의합니다. Shardlet은 분할 키로 식별되며 특정 데이터베이스에 매핑됩니다. 응용 프로그램은 필요한 만큼 많은 데이터베이스를 포함하고 shardlet을 배포하여 현재 비즈니스 요구 사항에 따른 용량이나 성능을 충분히 제공할 수 있습니다. 탄력적 데이터베이스 클라이언트 API에서 제공하는 분할된 데이터베이스 맵을 통해 데이터베이스에 대한 분할 키 값의 매핑이 저장됩니다. 이 기능을 **분할된 데이터베이스 맵 관리**또는 줄여서 SMM이라고 합니다. 분할된 데이터베이스 맵은 분할 키를 전송하는 요청에 대한 데이터베이스 연결의 브로커 역할도 합니다. 이 기능은 **데이터 종속 라우팅**이라고 알려져 있습니다. 
 
-분할된 데이터베이스 맵 관리자는 동시 shardlet 관리 작업(예: 분할된 데이터베이스 간에 데이터 재배치)이 수행될 때 발생할 수 있는 shardlet 데이터에 대한 불일치한 뷰가 생성되지 않도록 합니다. 이를 위해, 분할된 데이터베이스 맵은 클라이언트 라이브러리에 의해 관리되고 기존 응용 프로그램용 데이터베이스 연결을 조정합니다. 따라서 분할된 데이터베이스 관리 작업에서 연결이 생성된 shardlet 영향을 줄 수 있는 경우 분할된 데이터베이스 맵 기능이 자동으로 데이터베이스 연결을 중지합니다. 이 접근 방식은 EF의 기능 중 일부(예: 기존 연결에서 새 연결을 생성하여 데이터베이스 존재 여부 확인)와 통합해야 합니다. 일반적으로 표준 DbContext 생성자는 EF 작업을 위해 안전하게 복제할 수 있는 닫힌 데이터베이스 연결에 대해서만 안정적으로 작동합니다. 탄력적 데이터베이스의 설계 원칙에서만 열린 연결을 조정합니다. 클라이언트 라이브러리를 통해 조정된 연결을 EF DbContext로 전달하기 전에 닫으면 이 문제를 해결할 수 있습니다. 그러나 연결을 닫고 EF를 사용하여 다시 열면 라이브러리를 통해 수행된 유효성 검사 및 일관성 검사가 사라집니다. 그러나 EF의 마이그레이션 기능은 이러한 연결을 사용하여 응용 프로그램 작동에 영향을 주지 않는 방식으로 기본 데이터베이스 스키마를 관리합니다. 동일한 응용 프로그램에서 탄력적 데이터베이스 클라이언트 라이브러리 및 EF의 이러한 기능을 모두 유지하고 결합하는 것이 좋습니다. 다음 섹션에서는 이러한 속성 및 요구 사항을 자세히 설명합니다. 
+분할된 데이터베이스 맵 관리자는 동시 shardlet 관리 작업(예: 분할된 데이터베이스 간에 데이터 재배치)이 수행될 때 발생할 수 있는 shardlet 데이터에 대한 불일치한 뷰가 생성되지 않도록 합니다. 이를 위해, 분할된 데이터베이스 맵은 클라이언트 라이브러리에 의해 관리되고 기존 응용 프로그램용 데이터베이스 연결을 조정합니다. 따라서 분할된 데이터베이스 관리 작업에서 연결이 생성된 shardlet 영향을 줄 수 있는 경우 분할된 데이터베이스 맵 기능이 자동으로 데이터베이스 연결을 중지합니다. 이 접근 방식은 EF의 기능 중 일부(예: 기존 연결에서 새 연결을 생성하여 데이터베이스 존재 여부 확인)와 통합해야 합니다. 일반적으로 표준 DbContext 생성자는 EF 작업을 위해 안전하게 복제할 수 있는 닫힌 데이터베이스 연결에 대해서만 안정적으로 작동합니다. 탄력적 데이터베이스의 설계 원칙에서만 열린 연결을 조정합니다. 클라이언트 라이브러리를 통해 조정된 연결을 EF DbContext로 전달하기 전에 닫으면 이 문제를 해결할 수 있습니다. 그러나 연결을 닫고 EF를 사용하여 다시 열면 라이브러리를 통해 수행된 유효성 검사 및 일관성 검사가 사라집니다. 그러나 EF의 마이그레이션 기능은 이러한 연결을 사용하여 응용 프로그램 작동에 영향을 주지 않는 방식으로 기본 데이터베이스 스키마를 관리합니다. 동일한 응용 프로그램에서 탄력적 데이터베이스 클라이언트 라이브러리 및 EF의 이러한 기능을 모두 유지하고 결합합니다. 다음 섹션에서는 이러한 속성 및 요구 사항을 자세히 설명합니다. 
 
 ## <a name="requirements"></a>요구 사항
 탄력적 데이터베이스 클라이언트 라이브러리와 엔터티 프레임 워크 API를 모두 사용할 때는 다음 속성을 유지해야 합니다. 
@@ -90,9 +82,9 @@ Entity Framework를 사용하는 데이터베이스 연결은 대개 **DbContext
     public DbSet<Blog> Blogs { get; set; }
     …
 
-        // C'tor for data dependent routing. This call will open a validated connection 
+        // C'tor for data-dependent routing. This call opens a validated connection 
         // routed to the proper shard by the shard map manager. 
-        // Note that the base class c'tor call will fail for an open connection
+        // Note that the base class c'tor call fails for an open connection
         // if migrations need to be done and SQL credentials are used. This is the reason for the 
         // separation of c'tors into the data-dependent routing case (this c'tor) and the internal c'tor for new shards.
         public ElasticScaleContext(ShardMap shardMap, T shardingKey, string connectionStr)
@@ -180,7 +172,7 @@ Microsoft Patterns & Practices 팀은 [일시적인 오류 처리 응용 프로�
 #### <a name="constructor-rewrites"></a>생성자 다시 작성
 위의 코드 예제는 응용 프로그램에서 Entity Framework와 함께 데이터 종속 라우팅을 사용하는 데 필요한 기본 생성자 다시 작성 방법을 보여 줍니다. 다음 표에서는 다른 생성자에 대한 이 접근 방식을 일반화합니다. 
 
-| 현재 생성자 | 데이터에 맞게 다시 작성된 생성자 | 기본 생성자 | 참고 |
+| 현재 생성자 | 데이터에 맞게 다시 작성된 생성자 | 기본 생성자 | 메모 |
 | --- | --- | --- | --- |
 | MyContext() |ElasticScaleContext(ShardMap, TKey) |DbContext(DbConnection, bool) |연결은 분할된 데이터베이스 맵 및 데이터 종속 라우팅 키의 한 기능이어야 합니다. EF를 통한 자동 연결 생성을 무시하고 분할된 데이터베이스 맵을 사용하여 연결을 조정해야 합니다. |
 | MyContext(string) |ElasticScaleContext(ShardMap, TKey) |DbContext(DbConnection, bool) |연결은 분할된 데이터베이스 맵 및 데이터 종속 라우팅 키의 한 기능입니다. 고정 데이터베이스 이름 또는 연결 문자열은 분할된 데이터베이스 맵에 의한 유효성 검사를 무시하므로 작동하지 않습니다. |
@@ -188,7 +180,7 @@ Microsoft Patterns & Practices 팀은 [일시적인 오류 처리 응용 프로�
 | MyContext(DbConnection, bool) |ElasticScaleContext(ShardMap, TKey, bool) |DbContext(DbConnection, bool) |연결은 분할된 데이터베이스 맵 및 키에서 유추해야 합니다. 연결은 입력으로 제공할 수 없습니다(해당 입력이 이미 분할된 데이터베이스 맵 및 키를 사용하고 있지 않다면). 부울이 전달됩니다. |
 | MyContext(string, DbCompiledModel) |ElasticScaleContext(ShardMap, TKey, DbCompiledModel) |DbContext(DbConnection, DbCompiledModel, bool) |연결은 분할된 데이터베이스 맵 및 키에서 유추해야 합니다. 연결은 입력으로 제공할 수 없습니다(해당 입력이 분할된 데이터베이스 맵 및 키를 사용하고 있지 않다면). 컴파일된 모델이 전달됩니다. |
 | MyContext(ObjectContext, bool) |ElasticScaleContext(ShardMap, TKey, ObjectContext, bool) |DbContext(ObjectContext, bool) |새로운 생성자가 입력으로 전달된 ObjectContext의 모든 연결이 탄력적인 확장을 통해 관리되는 연결로 다시 라우팅되는지 확인해야 합니다. 이 문서에서는 ObjectContexts에 대해 자세히 설명하지 않습니다. |
-| MyContext(DbConnection, DbCompiledModel,bool) |ElasticScaleContext(ShardMap, TKey, DbCompiledModel, bool) |DbContext(DbConnection, DbCompiledModel, bool); |연결은 분할된 데이터베이스 맵 및 키에서 유추해야 합니다. 연결은 입력으로 제공할 수 없습니다(해당 입력이 이미 분할된 데이터베이스 맵 및 키를 사용하고 있지 않다면). 모델 및 Boolean이 기본 클래스 생성자에 전달됩니다. |
+| MyContext(DbConnection, DbCompiledModel, bool) |ElasticScaleContext(ShardMap, TKey, DbCompiledModel, bool) |DbContext(DbConnection, DbCompiledModel, bool); |연결은 분할된 데이터베이스 맵 및 키에서 유추해야 합니다. 연결은 입력으로 제공할 수 없습니다(해당 입력이 이미 분할된 데이터베이스 맵 및 키를 사용하고 있지 않다면). 모델 및 Boolean이 기본 클래스 생성자에 전달됩니다. |
 
 ## <a name="shard-schema-deployment-through-ef-migrations"></a>EF 마이그레이션을 통해 분할된 데이터베이스 스키마 배포
 자동 스키마 관리는 Entity Framework에서 제공하는 편리한 기능입니다. 탄력적 데이터베이스 도구를 사용한 응용 프로그램의 컨텍스트에서, 데이터베이스가 분할된 응용 프로그램에 추가될 때 새로 생성된 분할된 데이터베이스에 스키마를 자동으로 프로 비전하는 이 기능을 유지하려고 합니다. 기본 사용 사례는 EF를 사용하여 분할된 응용 프로그램에 대한 데이터 계층의 용량을 늘리는 것입니다. 스키마 관리에 EF의 기능을 사용하면 EF를 기반으로 하는 분할된 응용 프로그램에 대한 데이터베이스 관리 작업이 줄어듭니다. 
@@ -201,7 +193,7 @@ EF 마이그레이션을 통한 스키마 배포는 **열려 있지 않은 연�
 * 데이터베이스가 비어 있습니다. 즉, 사용자 스키마와 사용자 데이터가 없습니다.
 * 데이터 종속 라우팅을 위한 탄력적 데이터베이스 클라이언트 API를 통해 데이터베이스에 아직 액세스할 수 없습니다. 
 
-이러한 필수 구성 요소가 충족되면 열려 있지 않은 일반 **SqlConnection** 을 만들어 스키마 배포에 대한 EF 마이그레이션을 시작할 수 있습니다. 다음 코드 샘플에서 이 접근 방법을 보여 줍니다. 
+이러한 필수 구성 요소가 충족되면 열려 있지 않은 일반 **SqlConnection**을 만들어 스키마 배포에 대한 EF 마이그레이션을 시작할 수 있습니다. 다음 코드 샘플에서 이 접근 방법을 보여 줍니다. 
 
         // Enter a new shard - i.e. an empty database - to the shard map, allocate a first tenant to it  
         // and kick off EF intialization of the database to deploy schema 
@@ -242,7 +234,7 @@ EF 마이그레이션을 통한 스키마 배포는 **열려 있지 않은 연�
         // Only static methods are allowed in calls into base class c'tors 
         private static string SetInitializerForConnection(string connnectionString) 
         { 
-            // We want existence checks so that the schema can get deployed 
+            // You want existence checks so that the schema can get deployed 
             Database.SetInitializer<ElasticScaleContext<T>>( 
         new CreateDatabaseIfNotExists<ElasticScaleContext<T>>()); 
 
@@ -265,4 +257,3 @@ EF 마이그레이션을 통한 스키마 배포는 **열려 있지 않은 연�
 
 <!--Image references-->
 [1]: ./media/sql-database-elastic-scale-use-entity-framework-applications-visual-studio/sample.png
-

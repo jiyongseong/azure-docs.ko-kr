@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 04/04/2017
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
 ms.openlocfilehash: e45b09a62f33fd9811714febd63a74149784980d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="safely-install-and-operate-your-storsimple-device"></a>StorSimple 장치의 안전한 설치 및 작동
 ![경고 아이콘](./media/storsimple-safety/IC740879.png)
@@ -153,5 +151,4 @@ ms.lasthandoff: 07/08/2017
 ## <a name="next-steps"></a>다음 단계
 * 8100 장치의 경우 [StorSimple 8100 장치 설치](storsimple-8100-hardware-installation.md)로 이동합니다.
 * 8600 장치의 경우 [StorSimple 8600 장치 설치](storsimple-8600-hardware-installation.md)로 이동합니다.
-
 

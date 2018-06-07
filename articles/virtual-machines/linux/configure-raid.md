@@ -1,10 +1,10 @@
 ---
-title: "Linux를 실행하는 가상 컴퓨터에 소프트웨어 RAID 구성 | Microsoft Docs"
-description: "mdadm을 사용하여 Azure에서 Linux에 대해 RAID를 구성하는 방법에 대해 알아봅니다."
+title: Linux를 실행하는 가상 머신에 소프트웨어 RAID 구성 | Microsoft Docs
+description: mdadm을 사용하여 Azure에서 Linux에 대해 RAID를 구성하는 방법에 대해 알아봅니다.
 services: virtual-machines-linux
 documentationcenter: na
 author: rickstercdn
-manager: timlt
+manager: jeconnoc
 editor: tysonn
 tag: azure-service-management,azure-resource-manager
 ms.assetid: f3cb2786-bda6-4d2c-9aaf-2db80f490feb
@@ -15,18 +15,17 @@ ms.devlang: na
 ms.topic: article
 ms.date: 02/02/2017
 ms.author: rclaus
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 12f540a700fbf85e579e8aadc9f6def039299ff7
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: d6e831692da37645e264c6674f1ba54bb16d25d4
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="configure-software-raid-on-linux"></a>Linux에서 소프트웨어 RAID 구성
-Azure에서 Linux 가상 컴퓨터의 소프트웨어 RAID를 사용하여 연결된 여러 데이터 디스크를 단일 RAID 장치로 나타내는 것이 일반적인 시나리오입니다. 일반적으로 이 시나리오는 단일 디스크만 사용하는 경우와 비교하여 성능을 개선하고 처리량을 향상하기 위해 사용할 수 있습니다.
+Azure에서 Linux 가상 머신의 소프트웨어 RAID를 사용하여 연결된 여러 데이터 디스크를 단일 RAID 장치로 나타내는 것이 일반적인 시나리오입니다. 일반적으로 이 시나리오는 단일 디스크만 사용하는 경우와 비교하여 성능을 개선하고 처리량을 향상하기 위해 사용할 수 있습니다.
 
 ## <a name="attaching-data-disks"></a>데이터 디스크 연결
-RAID 장치를 구성하는 데 두 개 이상의 빈 데이터 디스크가 필요합니다.  RAID 장치를 만드는 주된 이유는 디스크 IO의 성능을 개선하기 위한 것입니다.  IO 요구 사항에 따라 표준 저장소에 저장된 디스크(디스크당 최대 500IO/ps) 또는 프리미엄 저장소에 저장된 디스크(디스크당 최대 5000IO/ps)를 연결할 수 있습니다. Linux 가상 컴퓨터에 데이터 디스크를 프로비전 및 연결하는 방법은 이 문서에서 자세히 다루지 않습니다.  Azure에서 빈 데이터 디스크를 Linux 가상 컴퓨터에 연결하는 방법에 대한 자세한 내용은 Microsoft Azure 문서 [디스크 연결](add-disk.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)을 참조하세요.
+RAID 장치를 구성하는 데 두 개 이상의 빈 데이터 디스크가 필요합니다.  RAID 장치를 만드는 주된 이유는 디스크 IO의 성능을 개선하기 위한 것입니다.  IO 요구 사항에 따라 Standard Storage에 저장된 디스크(디스크당 최대 500IO/ps) 또는 Premium Storage에 저장된 디스크(디스크당 최대 5000IO/ps)를 연결할 수 있습니다. Linux 가상 머신에 데이터 디스크를 프로비전 및 연결하는 방법은 이 문서에서 자세히 다루지 않습니다.  Azure에서 빈 데이터 디스크를 Linux 가상 컴퓨터에 연결하는 방법에 대한 자세한 내용은 Microsoft Azure 문서 [디스크 연결](add-disk.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)을 참조하세요.
 
 ## <a name="install-the-mdadm-utility"></a>mdadm 유틸리티 설치
 * **Ubuntu**
@@ -127,13 +126,13 @@ zypper install mdadm
     sudo mkfs -t ext4 /dev/md127
     ```
    
-    b. **SLES 11**
+    나. **SLES 11**
 
     ```bash
     sudo mkfs -t ext3 /dev/md127
     ```
    
-    c. **SLES 11** - boot.md 사용 및 mdadm.conf 만들기
+    다. **SLES 11** - boot.md 사용 및 mdadm.conf 만들기
 
     ```bash
     sudo -i chkconfig --add boot.md
@@ -206,7 +205,7 @@ zypper install mdadm
 
     **Linux 부팅 매개 변수**
    
-    위의 매개 변수 외에, 커널 매개 변수 "`bootdegraded=true`"는 RAID가 손상 또는 저하된 것으로 인식되는 경우에도(예: 데이터 드라이브가 실수로 가상 컴퓨터에서 제거된 경우) 시스템이 부팅되도록 할 수 있습니다. 기본적으로 이 매개 변수는 시스템이 부팅할 수 없게 만들 수도 있습니다.
+    위의 매개 변수 외에, 커널 매개 변수 "`bootdegraded=true`"는 RAID가 손상 또는 저하된 것으로 인식되는 경우에도(예: 데이터 드라이브가 실수로 가상 머신에서 제거된 경우) 시스템이 부팅되도록 할 수 있습니다. 기본적으로 이 매개 변수는 시스템이 부팅할 수 없게 만들 수도 있습니다.
    
     커널 매개 변수를 올바르게 편집하는 방법에 대해서는 배포 설명서를 참조하십시오. 예를 들어 CentOS, Oracle Linux, SLES 11 등 많은 배포에서 이 매개 변수를 "`/boot/grub/menu.lst`" 파일에 수동으로 추가할 수 있습니다.  Ubuntu에서는 "/etc/default/grub"의 `GRUB_CMDLINE_LINUX_DEFAULT` 변수에 이 매개 변수를 추가할 수 있습니다.
 
@@ -239,4 +238,3 @@ Linux VM에서 TRIM 지원을 사용하는 두 가지 방법이 있습니다. �
     # sudo yum install util-linux
     # sudo fstrim /data
     ```
-

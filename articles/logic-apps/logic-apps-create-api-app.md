@@ -1,7 +1,7 @@
 ---
-title: "웹 API 및 REST API를 커넥터로 만들기 - Azure Logic Apps | Microsoft Docs"
-description: "Azure Logic Apps와 시스템을 통합하기 위해 워크플로에서 API, 서비스 또는 시스템을 호출하는 웹 API 및 REST API를 만듭니다."
-keywords: "웹 API, REST API, 커넥터, 워크플로, 시스템 통합"
+title: "Azure Logic Apps용 웹 API 및 REST API 만들기 | Microsoft Docs"
+description: "시스템 통합을 위해 논리 앱 워크플로에서 API, 서비스 또는 시스템을 호출하는 웹 API 및 REST API를 만듭니다."
+keywords: "웹 API, REST API, 워크플로, 시스템 통합"
 services: logic-apps
 author: jeffhollan
 manager: anneta
@@ -15,30 +15,54 @@ ms.devlang: na
 ms.topic: article
 ms.date: 5/26/2017
 ms.author: LADocs; jehollan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 9edcaee4d051c3dc05bfe23eecc9c22818cf967c
-ms.openlocfilehash: 4ae98804aced23c0261c1d58721cb18d8152c6f1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/08/2017
-
+ms.openlocfilehash: ec7fe2adfb89edd635adcf247eea0b98f7007b1b
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
+# <a name="create-custom-apis-that-you-can-call-from-logic-app-workflows"></a>논리 앱 워크플로에서 호출할 수 있는 사용자 지정 API 만들기
 
-# <a name="create-custom-apis-as-connectors-for-logic-apps"></a>사용자 지정 API를 논리 앱용 커넥터로 만들기
-
-Azure Logic Apps는 논리 앱 워크플로에서 사용할 수 있는[100개 이상의 기본 제공 커넥터](../connectors/apis-list.md)를 제공하지만, 커넥터로 사용할 수 없는 API, 시스템 및 서비스를 호출하는 것이 좋을 수도 있습니다. 논리 앱에서 사용할 동작과 트리거를 제공하는 사용자 지정 API는 직접 만들 수 있습니다. 논리 앱에서 커넥터로 사용할 API를 직접 만들려는 다른 이유는 다음가 같습니다.
+Azure Logic Apps는 논리 앱 워크플로에서 사용할 수 있는[100개 이상의 기본 제공 커넥터](../connectors/apis-list.md)를 제공하지만, 커넥터로 사용할 수 없는 API, 시스템 및 서비스를 호출하는 것이 좋을 수도 있습니다. 논리 앱에서 사용할 동작과 트리거를 제공하는 자체 API는 직접 만들 수 있습니다. 논리 앱 워크플로에서 호출할 수 있는 API를 직접 만들려는 다른 이유는 다음가 같습니다.
 
 * 현재의 시스템 통합 및 데이터 통합 워크플로를 확장합니다.
 * 고객이 서비스를 사용하여 전문적이거나 개인적인 작업을 관리할 수 있도록 지원합니다.
 * 서비스에 대한 범위, 검색 기능 및 사용을 확장합니다.
 
-기본적으로 커넥터는 플러그형 인터페이스에 대한 REST, 문서에 대한 [Swagger 메타데이터 형식](http://swagger.io/specification/) 및 JSON(데이터 교환 형식)을 사용하는 웹 API입니다. 커넥터는 HTTP 끝점을 통해 통신하는 REST API이므로 .NET, Java 또는 Node.js와 같은 언어를 사용하여 커넥터를 빌드할 수 있습니다. API 호스팅을 위한 가장 쉽고, 확장성 있는, 최상의 방법 중 하나를 제공하는 PaaS(Platform-as-a-Service) 제품인 [Azure App Service](../app-service/app-service-value-prop-what-is.md)에서 API를 호스팅할 수도 있습니다. 
+기본적으로 커넥터는 플러그형 인터페이스에 대한 REST, 문서에 대한 [Swagger 메타데이터 형식](http://swagger.io/specification/) 및 JSON(데이터 교환 형식)을 사용하는 웹 API입니다. 커넥터는 HTTP 끝점을 통해 통신하는 REST API이므로 .NET, Java 또는 Node.js와 같은 언어를 사용하여 커넥터를 빌드할 수 있습니다. API 호스팅을 위한 가장 쉽고, 확장성 있는, 최상의 방법 중 하나를 제공하는 PaaS(Platform-as-a-Service) 제품인 [Azure App Service](../app-service/app-service-web-overview.md)에서 API를 호스팅할 수도 있습니다. 
 
-사용자 지정 API가 논리 앱에서 작동하려면 API가 논리 앱 워크플로에서 특정 작업을 수행하는 [*동작*](./logic-apps-what-are-logic-apps.md#logic-app-concepts)을 제공할 수 있습니다. 또한 API는 [*트리거*](./logic-apps-what-are-logic-apps.md#logic-app-concepts)의 역할을 수행하여 새 데이터 또는 이벤트가 지정된 조건을 충족할 때 논리 앱 워크플로를 시작할 수도 있습니다. 이 항목에서는 API에서 제공할 동작에 따라 API에서 동작과 트리거를 빌드할 때 따라야 하는 일반적인 패턴에 대해 설명합니다.
+사용자 지정 API가 논리 앱에서 작동하려면 API가 논리 앱 워크플로에서 특정 작업을 수행하는 [*동작*](./logic-apps-overview.md#logic-app-concepts)을 제공할 수 있습니다. 또한 API는 [*트리거*](./logic-apps-overview.md#logic-app-concepts)의 역할을 수행하여 새 데이터 또는 이벤트가 지정된 조건을 충족할 때 논리 앱 워크플로를 시작할 수도 있습니다. 이 항목에서는 API에서 제공할 동작에 따라 API에서 동작과 트리거를 빌드할 때 따라야 하는 일반적인 패턴에 대해 설명합니다.
+
+확장성이 뛰어나고 쉬운 API 호스팅을 제공하는 PaaS(Platform-as-a-Service) 제품인 [Azure App Service](../app-service/app-service-web-overview.md)에서 API를 호스트할 수 있습니다.
 
 > [!TIP] 
-> API를 [웹앱](../app-service-web/app-service-web-overview.md)으로 배포할 수 있지만 [API 앱](../app-service-api/app-service-api-apps-why-best-platform.md)으로 배포하는 것이 좋습니다. 이렇게 하면 클라우드에서 API를 빌드, 호스팅 및 사용할 때 작업을 더 쉽게 수행할 수 있습니다. API에서 코드를 변경할 필요가 없이 API 앱에 코드를 배포하기만 하면 됩니다. [ASP.NET](../app-service-api/app-service-api-dotnet-get-started.md), [Java](../app-service-api/app-service-api-java-api-app.md) 또는 [Node.js](../app-service-api/app-service-api-nodejs-api-app.md)로 만든 API 앱을 빌드하는 방법에 대해 알아보세요. 
+> API를 웹앱으로 배포할 수 있지만 API 앱으로 배포하는 것이 좋습니다. 이렇게 하면 클라우드에서 API를 빌드, 호스트 및 사용할 때 작업을 더 쉽게 수행할 수 있습니다. API에서 코드를 변경할 필요가 없이 API 앱에 코드를 배포하기만 하면 됩니다. 예를 들어 다음 언어를 사용하여 만든 API 앱을 빌드하는 방법을 알아봅니다. 
+> 
+> * [ASP.NET](../app-service/app-service-web-get-started-dotnet.md). 
+> * [Java](../app-service/app-service-web-get-started-java.md)
+> * [Node.js](../app-service/app-service-web-get-started-nodejs.md)
+> * [PHP](../app-service/app-service-web-get-started-php.md)
+> * [Python](../app-service/app-service-web-get-started-python.md)
 >
 > 논리 앱용으로 빌드된 API 앱 샘플은 [Azure Logic Apps GitHub 리포지토리](http://github.com/logicappsio) 또는 [블로그](http://aka.ms/logicappsblog)를 방문하세요.
+
+## <a name="how-do-custom-apis-differ-from-custom-connectors"></a>사용자 지정 API는 사용자 지정 커넥터와 어떻게 다른가요?
+
+사용자 지정 API 및 [사용자 지정 커넥터](../logic-apps/custom-connector-overview.md)는 플러그형 인터페이스에 대한 REST, 문서에 대한 [Swagger 메타데이터 형식](http://swagger.io/specification/) 및 JSON(데이터 교환 형식)을 사용하는 웹 API입니다. 또한 이러한 API 및 커넥터는 HTTP 끝점을 통해 통신하는 REST API이므로 .NET, Java 또는 Node.js와 같은 언어를 사용하여 사용자 지정 API 및 커넥터를 빌드할 수 있습니다.
+
+사용자 지정 API는 커넥터가 아닌 API를 호출할 수 있도록 하고, HTTP + Swagger, Azure SAPI Management 또는 App Services를 사용하여 호출할 수 있는 끝점을 제공합니다. 사용자 지정 커넥터는 사용자 지정 API처럼 작동하지만 다음과 같은 특성도 있습니다.
+
+* Azure에서 Logic Apps 커넥터 리소스로 등록됩니다.
+* Logic Apps 디자이너에서 Microsoft 관리 커넥터와 함께 아이콘으로 표시됩니다.
+* 커넥터의 작성자와 논리 앱이 배포된 지역에서 동일한 Azure Active Directory 테넌트 및 Azure 구독을 가지는 논리 앱 사용자만 사용할 수 있습니다.
+
+Microsoft 인증에 대해 등록된 커넥터를 지정할 수도 있습니다. 이 프로세스는 등록된 커넥터가 공용 사용 조건을 충족하는지 확인하고 사용자가 Microsoft Flow 및 Microsoft PowerApps에서 해당 커넥터를 사용할 수 있도록 합니다.
+
+사용자 지정 커넥터에 대한 자세한 내용은 다음을 참조하세요. 
+
+* [사용자 지정 커넥터 개요](../logic-apps/custom-connector-overview.md)
+* [웹 API에서 사용자 지정 커넥터 만들기](../logic-apps/custom-connector-build-web-api-app-tutorial.md)
+* [Azure Logic Apps에서 사용자 지정 커넥터 등록](../logic-apps/logic-apps-custom-connector-register.md)
 
 ## <a name="helpful-tools"></a>유용한 도구
 
@@ -49,7 +73,7 @@ API 작업 및 매개 변수를 설명하는 [Swagger 문서](http://swagger.io/
 
 ## <a name="action-patterns"></a>동작 패턴
 
-논리 앱에서 작업을 수행하려면 사용자 지정 API에서 [*동작*](./logic-apps-what-are-logic-apps.md#logic-app-concepts)을 제공해야 합니다. API 작업 각각은 동작에 맵핑됩니다. 기본 동작은 HTTP 요청을 받아들이고 HTTP 응답을 반환하는 컨트롤러입니다. 예를 들어 논리 앱은 웹앱 또는 API 앱에 HTTP 요청을 보냅니다. 그런 다음 앱은 논리 앱에서 처리할 수 있는 내용과 함께 HTTP 응답을 반환합니다.
+논리 앱에서 작업을 수행하려면 사용자 지정 API에서 [*동작*](./logic-apps-overview.md#logic-app-concepts)을 제공해야 합니다. API 작업 각각은 동작에 맵핑됩니다. 기본 동작은 HTTP 요청을 받아들이고 HTTP 응답을 반환하는 컨트롤러입니다. 예를 들어 논리 앱은 웹앱 또는 API 앱에 HTTP 요청을 보냅니다. 그런 다음 앱은 논리 앱에서 처리할 수 있는 내용과 함께 HTTP 응답을 반환합니다.
 
 표준 동작의 경우 API에 HTTP 요청 메서드를 작성하고 해당 메서드를 Swagger 파일에 설명할 수 있습니다. 그런 다음 [HTTP 동작](../connectors/connectors-native-http.md) 또는 [HTTP + Swagger](../connectors/connectors-native-http-swagger.md) 동작을 사용하여 API를 직접 호출할 수 있습니다. 기본적으로 응답은 [요청 시간 제한](./logic-apps-limits-and-config.md) 내에 반환되어야 합니다. 
 
@@ -120,7 +144,7 @@ API가 이 패턴을 따르는 경우 작업 상태를 계속 확인하기 위�
 ![웹후크 동작 패턴](./media/logic-apps-create-api-app/custom-api-webhook-action-pattern.png)
 
 > [!NOTE]
-> 현재 Logic App Designer는 Swagger를 통한 웹후크 끝점 검색을 지원하지 않습니다. 따라서 이 패턴의 경우 [**웹후크** 동작](../connectors/connectors-native-webhook.md)을 추가하고 요청에 대한 URL, 헤더 및 본문을 지정해야 합니다. [워크플로 작업 및 트리거](logic-apps-workflow-actions-triggers.md#api-connection-webhook-action)도 참조하세요. 콜백 URL을 전달하려면 필요에 따라 이전 필드 중 하나에서 `@listCallbackUrl()` 워크플로 함수를 사용할 수 있습니다.
+> 현재 Logic App Designer는 Swagger를 통한 웹후크 끝점 검색을 지원하지 않습니다. 따라서 이 패턴의 경우 [**웹후크** 동작](../connectors/connectors-native-webhook.md)을 추가하고 요청에 대한 URL, 헤더 및 본문을 지정해야 합니다. [워크플로 작업 및 트리거](logic-apps-workflow-actions-triggers.md#apiconnection-webhook-action)도 참조하세요. 콜백 URL을 전달하려면 필요에 따라 이전 필드 중 하나에서 `@listCallbackUrl()` 워크플로 함수를 사용할 수 있습니다.
 
 > [!TIP]
 > 웹후크 패턴 예제는 [GitHub의 웹후크 트리거 샘플](https://github.com/logicappsio/LogicAppTriggersExample/blob/master/LogicAppTriggers/Controllers/WebhookTriggerController.cs)(영문)을 검토하세요.
@@ -129,7 +153,7 @@ API가 이 패턴을 따르는 경우 작업 상태를 계속 확인하기 위�
 
 ## <a name="trigger-patterns"></a>트리거 패턴
 
-사용자 지정 API는 [*트리거*](./logic-apps-what-are-logic-apps.md#logic-app-concepts)의 역할을 수행하여 새 데이터 또는 이벤트가 지정된 조건을 충족할 때 논리 앱을 시작할 수 있습니다. 이 트리거는 서비스 끝점에서 새 데이터 또는 이벤트를 정기적으로 확인하거나 대기 및 수신 대기할 수 있습니다. 새 데이터 또는 이벤트가 지정된 조건을 충족하면 트리거가 시작되고 해당 트리거를 수신하는 논리 앱이 시작됩니다. 이러한 방식으로 논리 앱을 시작하려면 API에서 [*폴링 트리거*](#polling-triggers) 또는 [*웹후크 트리거*](#webhook-triggers) 패턴을 따르면 됩니다. 이러한 패턴은 [폴링 동작](#async-pattern) 및 [웹후크 동작](#webhook-actions)의 해당 패턴과 비슷합니다. 또한 [트리거 사용량 측정](logic-apps-pricing.md)에 대해서도 자세히 알아보세요.
+사용자 지정 API는 [*트리거*](./logic-apps-overview.md#logic-app-concepts)의 역할을 수행하여 새 데이터 또는 이벤트가 지정된 조건을 충족할 때 논리 앱을 시작할 수 있습니다. 이 트리거는 서비스 끝점에서 새 데이터 또는 이벤트를 정기적으로 확인하거나 대기 및 수신 대기할 수 있습니다. 새 데이터 또는 이벤트가 지정된 조건을 충족하면 트리거가 시작되고 해당 트리거를 수신하는 논리 앱이 시작됩니다. 이러한 방식으로 논리 앱을 시작하려면 API에서 [*폴링 트리거*](#polling-triggers) 또는 [*웹후크 트리거*](#webhook-triggers) 패턴을 따르면 됩니다. 이러한 패턴은 [폴링 동작](#async-pattern) 및 [웹후크 동작](#webhook-actions)의 해당 패턴과 비슷합니다. 또한 [트리거 사용량 측정](logic-apps-pricing.md)에 대해서도 자세히 알아보세요.
 
 <a name="polling-triggers"></a>
 
@@ -146,21 +170,24 @@ API의 관점에서 설명하는 폴링 트리거의 구체적인 단계는 다�
 
 | 새 데이터 또는 이벤트가 있습니까?  | API 응답 | 
 | ------------------------- | ------------ |
-| 있음 | 응답 페이로드(다음 단계의 입력)와 함께 HTTP `200 OK` 상태를 반환합니다. <br/>이 응답은 논리 앱 인스턴스를 만들고 워크플로를 시작합니다. |
-| 찾을 수 없음 | `location` 헤더 및 `retry-after` 헤더와 함께 HTTP `202 ACCEPTED` 상태를 반환합니다. <br/>트리거의 경우 `location` 헤더에 `triggerState` 쿼리 매개 변수(일반적으로 "timestamp")도 있어야 합니다. API에서는 이 식별자를 사용하여 논리 앱이 트리거된 마지막 시간을 추적할 수 있습니다. |
+| 있음 | 응답 페이로드(다음 단계의 입력)와 함께 HTTP `200 OK` 상태를 반환합니다. <br/>이 응답은 논리 앱 인스턴스를 만들고 워크플로를 시작합니다. | 
+| 찾을 수 없음 | `location` 헤더 및 `retry-after` 헤더와 함께 HTTP `202 ACCEPTED` 상태를 반환합니다. <br/>트리거의 경우 `location` 헤더에 `triggerState` 쿼리 매개 변수(일반적으로 "timestamp")도 있어야 합니다. API에서는 이 식별자를 사용하여 논리 앱이 트리거된 마지막 시간을 추적할 수 있습니다. | 
+||| 
 
 예를 들어 새 파일에 대한 서비스를 정기적으로 확인하려면 다음과 같은 동작을 포함하는 폴링 트리거를 빌드할 수 있습니다.
 
-| 요청에 `triggerState`가 있습니까? | API 응답 |
-| -------------------------------- | -------------|
-| 아니요 | HTTP `202 ACCEPTED` 상태 및 현재 시간으로 설정된 `triggerState`와 15초로 설정된 `retry-after` 간격이 포함된 `location` 헤더를 반환합니다. |
-| 예 | `triggerState`에 대한 `DateTime` 이후에 추가된 파일에 대한 서비스를 확인합니다. |
+| 요청에 `triggerState`가 있습니까? | API 응답 | 
+| -------------------------------- | -------------| 
+| 아니요 | HTTP `202 ACCEPTED` 상태 및 현재 시간으로 설정된 `triggerState`와 15초로 설정된 `retry-after` 간격이 포함된 `location` 헤더를 반환합니다. | 
+| 예 | `triggerState`에 대한 `DateTime` 이후에 추가된 파일에 대한 서비스를 확인합니다. | 
+||| 
 
-| 검색된 파일의 수 | API 응답 |
-| --------------------- | -------------|
-| 단일 파일 | HTTP `200 OK` 상태와 콘텐츠 페이로드를 반환하고, `triggerState`를 반환된 파일에 대한 `DateTime`으로 업데이트하고, `retry-after` 간격을 15초로 설정합니다. |
-| 여러 파일 | 한 번에 파일 하나씩 및 HTTP `200 OK` 상태를 반환하고, `triggerState`를 업데이트하고, `retry-after` 간격을 0초로 설정합니다. </br>이러한 단계를 통해 더 많은 데이터를 사용할 수 있고 엔진이 `location` 헤더의 URL에서 데이터를 즉시 요청해야 한다고 엔진에 알립니다. |
-| 파일 없음 | HTTP `202 ACCEPTED` 상태를 반환하고, `triggerState`를 변경하지 않고, `retry-after` 간격을 15초로 설정합니다. |
+| 검색된 파일의 수 | API 응답 | 
+| --------------------- | -------------| 
+| 단일 파일 | HTTP `200 OK` 상태와 콘텐츠 페이로드를 반환하고, `triggerState`를 반환된 파일에 대한 `DateTime`으로 업데이트하고, `retry-after` 간격을 15초로 설정합니다. | 
+| 여러 파일 | 한 번에 파일 하나씩 및 HTTP `200 OK` 상태를 반환하고, `triggerState`를 업데이트하고, `retry-after` 간격을 0초로 설정합니다. </br>이러한 단계를 통해 더 많은 데이터를 사용할 수 있고 엔진이 `location` 헤더의 URL에서 데이터를 즉시 요청해야 한다고 엔진에 알립니다. | 
+| 파일 없음 | HTTP `202 ACCEPTED` 상태를 반환하고, `triggerState`를 변경하지 않고, `retry-after` 간격을 15초로 설정합니다. | 
+||| 
 
 > [!TIP]
 > 폴링 트리거 패턴 예제는 [GitHub의 폴 트리거 컨트롤러 샘플](https://github.com/logicappsio/LogicAppTriggersExample/blob/master/LogicAppTriggers/Controllers/PollTriggerController.cs)(영문)을 검토하세요.
@@ -186,26 +213,30 @@ API의 관점에서 설명하는 폴링 트리거의 구체적인 단계는 다�
 > [!TIP]
 > 웹후크 패턴 예제는 [GitHub의 웹후크 트리거 컨트롤러 샘플](https://github.com/logicappsio/LogicAppTriggersExample/blob/master/LogicAppTriggers/Controllers/WebhookTriggerController.cs)(영문)을 검토하세요.
 
-## <a name="deploy-call-and-secure-custom-apis"></a>사용자 지정 API 배포, 호출 및 보호
+## <a name="secure-calls-to-your-apis-from-logic-apps"></a>논리 앱에서의 API 호출에 대해 보안 유지
 
-사용자 지정 API를 만든 후 배포를 위한 API를 설정하여 안전하게 호출할 수 있도록 합니다. [논리 앱에 대한 사용자 지정 API를 배포, 호출 및 보안](./logic-apps-custom-hosted-api.md)하는 방법에 대해 알아보세요.
+사용자 지정 API를 만든 후 논리 앱에서 안전하게 호출할 수 있도록 API에 대한 인증을 설정합니다. [논리 앱에서의 사용자 지정 API 호출에 대해 보안을 유지하는 방법](../logic-apps/logic-apps-custom-api-authentication.md)을 알아봅니다.
+
+## <a name="deploy-and-call-your-apis"></a>API 배포 및 호출
+
+인증을 설정한 후에 API에 대한 배포를 설정합니다. [논리 앱에서 사용자 지정 API를 배포 및 호출하는 방법](../logic-apps/logic-apps-custom-api-host-deploy-call.md)을 알아봅니다.
 
 ## <a name="publish-custom-apis-to-azure"></a>Azure에 사용자 지정 API 게시
 
-사용자 지정 API를 Azure에서 공용으로 사용할 수 있게 하려면 [Microsoft Azure Certified 프로그램](https://azure.microsoft.com/marketplace/programs/certified/logic-apps/)에 추천을 제출해 주세요.
+사용자 지정 API를 Azure의 다른 Logic Apps 사용자가 사용할 수 있게 하려면 보안을 추가하고 Logic Apps 커넥터로 등록해야 합니다. 자세한 내용은 [사용자 지정 커넥터 개요](../logic-apps/custom-connector-overview.md)를 참조하세요. 
 
-## <a name="get-help"></a>도움말 보기
+사용자 지정 API를 Logic Apps, Microsoft Flow 및 Microsoft PowerApps의 모든 사용자가 사용할 수 있게 하려면 보안을 추가하고, API를 Logic Apps 커넥터로 등록하고, [Microsoft Azure 인증 프로그램](https://azure.microsoft.com/marketplace/programs/certified/logic-apps/)에 대한 커넥터로 지정해야 합니다. 
 
-사용자 지정 API에 대한 구체적인 지원은 [customapishelp@microsoft.com](mailto:customapishelp@microsoft.com)에 문의해 주세요.
+## <a name="get-support"></a>지원 받기
 
-질문하고, 질문에 답변하고, 다른 Azure Logic Apps 사용자가 어떤 일을 하는지 확인하려면 [Azure Logic Apps 포럼](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurelogicapps)을 방문하세요.
+* 사용자 지정 API에 대한 구체적인 지원은 [customapishelp@microsoft.com](mailto:customapishelp@microsoft.com)에 문의해 주세요.
 
-Logic Apps 및 커넥터 개선에 도움을 주려면 [Logic Apps 사용자 의견 사이트](http://aka.ms/logicapps-wish)에서 투표하고 아이디어를 제출하세요. 
+* 질문이 있는 경우 [Azure Logic Apps 포럼](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurelogicapps)을 방문해 보세요.
+
+* Logic Apps 개선에 도움을 주려면 [Logic Apps 사용자 의견 사이트](http://aka.ms/logicapps-wish)에서 투표하고 아이디어를 제출하세요. 
 
 ## <a name="next-steps"></a>다음 단계
 
-* [동작 및 트리거에 대한 사용량 측정](logic-apps-pricing.md)
-* [콘텐츠 형식 처리](./logic-apps-content-type.md)
-* [오류 및 예외 처리](./logic-apps-exception-handling.md)
-* [논리 앱에 대한 보안 액세스](./logic-apps-securing-a-logic-app.md)
-* [HTTP 끝점을 통해 논리 앱 호출, 트리거 또는 중첩](./logic-apps-http-endpoint.md)
+* [오류 및 예외 처리](../logic-apps/logic-apps-exception-handling.md)
+* [HTTP 끝점을 통해 논리 앱 호출, 트리거 또는 중첩](../logic-apps/logic-apps-http-endpoint.md)
+* [동작 및 트리거에 대한 사용량 측정](../logic-apps/logic-apps-pricing.md)

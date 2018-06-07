@@ -1,26 +1,25 @@
 ---
-title: "Virtual Network로 HDInsight 확장 - Azure | Microsoft Docs"
-description: "Azure 가상 네트워크를 사용하여 HDInsight 다른 클라우드 리소스 또는 데이터 센터에서 리소스에 연결하는 방법을 알아봅니다."
+title: Virtual Network로 HDInsight 확장 - Azure | Microsoft Docs
+description: Azure Virtual Network를 사용하여 HDInsight 다른 클라우드 리소스 또는 데이터 센터에서 리소스에 연결하는 방법을 알아봅니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: Blackmist
-manager: jhubbard
+manager: cgronlun
 editor: cgronlun
 ms.assetid: 37b9b600-d7f8-4cb1-a04a-0b3a827c6dcc
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: big-data
-ms.date: 07/11/2017
+ms.date: 02/21/2018
 ms.author: larryfr
+ms.openlocfilehash: 3df32c39152c8dda24fd5d0796f8074af8ce8a1a
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 7244103d952e32c330743ddc3dd68e417cb7fb9b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="extend-azure-hdinsight-using-an-azure-virtual-network"></a>Azure Virtual Network를 사용하여 Azure HDInsight 확장
 
@@ -34,6 +33,9 @@ ms.lasthandoff: 07/21/2017
 
 > [!WARNING]
 > 이 문서의 정보를 이해하려면 TCP/IP 네트워킹에 대한 사전 지식이 필요합니다. TCP/IP 네트워킹에 대해 잘 모르는 경우 이전에 프로덕션 네트워크를 수정한 사람과 협력하여 작업해야 합니다.
+
+> [!IMPORTANT]
+> Azure Virtual Network를 사용하여 HDInsight를 온-프레미스 네트워크에 연결하는 단계별 지침을 찾으려면 [온-프레미스 네트워크에 HDInsight 연결](connect-on-premises-network.md) 문서를 참조하세요.
 
 ## <a name="planning"></a>계획
 
@@ -53,11 +55,14 @@ ms.lasthandoff: 07/21/2017
 
 ## <a id="existingvnet"></a>기존 가상 네트워크에 HDInsight 추가
 
-이 섹션의 단계를 사용하여 HDInsight를 기존 Azure Virtual Network에 추가하는 방법을 알아봅니다.
+이 섹션의 단계를 사용하여 새 HDInsight를 기존 Azure Virtual Network에 추가하는 방법을 알아봅니다.
+
+> [!NOTE]
+> 기존 HDInsight 클러스터를 가상 네트워크에 추가할 수 없습니다.
 
 1. 가상 네트워크에 클래식 또는 리소스 관리자 배포 모델을 사용하나요?
 
-    HDInsight 3.4 이상에는 리소스 관리자 가상 네트워크가 필요합니다. 이전 버전의 HDInsight에는 클래식 가상 네트워크가 필요했지만 이러한 버전은 사용 중지되었거나 곧 사용 중지될 예정입니다.
+    HDInsight 3.4 이상에는 리소스 관리자 가상 네트워크가 필요합니다. 이전 버전의 HDInsightㅇ는 클래식 가상 네트워크가 필요했습니다.
 
     기존 네트워크가 클래식 가상 네트워크인 경우 리소스 관리자 가상 네트워크를 만든 후 둘을 연결해야 합니다. [새 VNet에 클래식 VNet 연결](../vpn-gateway/vpn-gateway-connect-different-deployment-models-portal.md).
 
@@ -88,7 +93,7 @@ ms.lasthandoff: 07/21/2017
         자세한 내용은 [네트워크 보안 그룹 문제 해결](../virtual-network/virtual-network-nsg-troubleshoot-portal.md) 문서를 참조하세요.
 
         > [!IMPORTANT]
-        > 네트워크 보안 그룹 규칙은 규칙 우선 순위에 따라 적용됩니다. 트래픽 패턴과 일치하는 첫 번째 규칙이 적용되고 해당 트래픽에 대해서는 다른 규칙이 적용되지 않습니다. 가장 허용적인 것부터 가장 허용적이지 않은 것 순서로 규칙을 정렬합니다. 자세한 내용은 [네트워크 보안 그룹을 사용하여 네트워크 트래픽 필터링](../virtual-network/virtual-networks-nsg.md) 문서를 참조하세요.
+        > 네트워크 보안 그룹 규칙은 규칙 우선 순위에 따라 적용됩니다. 트래픽 패턴과 일치하는 첫 번째 규칙이 적용되고 해당 트래픽에 대해서는 다른 규칙이 적용되지 않습니다. 가장 허용적인 것부터 가장 허용적이지 않은 것 순서로 규칙을 정렬합니다. 자세한 내용은 [네트워크 보안 그룹을 사용하여 네트워크 트래픽 필터링](../virtual-network/security-overview.md) 문서를 참조하세요.
 
     * 사용자 정의 경로
 
@@ -103,6 +108,16 @@ ms.lasthandoff: 07/21/2017
         ```
 
         자세한 내용은 [문제 해결 경로](../virtual-network/virtual-network-routes-troubleshoot-portal.md) 문서를 참조하세요.
+
+4. HDInsight 클러스터를 만들고 구성 중 Azure Virtual Network를 선택합니다. 클러스터 만들기 프로세스를 이해하려면 다음 문서의 단계를 사용하세요.
+
+    * [Azure Portal을 사용하여 HDInsight 만들기](hdinsight-hadoop-create-linux-clusters-portal.md)
+    * [Azure PowerShell을 사용하여 HDInsight 만들기](hdinsight-hadoop-create-linux-clusters-azure-powershell.md)
+    * [Azure CLI 1.0을 사용하여 HDInsight 만들기](hdinsight-hadoop-create-linux-clusters-azure-cli.md)
+    * [Azure Resource Manager 템플릿을 사용하여 HDInsight 만들기](hdinsight-hadoop-create-linux-clusters-arm-templates.md)
+
+  > [!IMPORTANT]
+  > 가상 네트워크에 HDInsight 추가하기는 선택적 구성 단계입니다. 클러스터를 구성할 때 가상 네트워크를 선택해야 합니다.
 
 ## <a id="multinet"></a>다중 네트워크 연결
 
@@ -158,11 +173,11 @@ Azure는 가상 네트워크에 설치된 Azure 서비스에 대한 이름 확�
 
     각 구성에 대한 예는 [예제: 사용자 지정 DNS](#example-dns) 섹션을 참조하세요.
 
-자세한 내용은 [VM 및 역할 인스턴스의 이름 확인](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md#name-resolution-using-your-own-dns-server) 문서를 참조하세요.
+자세한 내용은 [VM 및 역할 인스턴스의 이름 확인](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md) 문서를 참조하세요.
 
 ## <a name="directly-connect-to-hadoop-services"></a>Hadoop 서비스에 직접 연결
 
-HDInsight에 대한 대부분의 설명서는 인터넷을 통해 클러스터에 액세스할 수 있다고 가정합니다. 예를 들어 https://CLUSTERNAME.azurehdinsight.net에서 클러스터에 연결할 수 있습니다. 이 주소는 인터넷에서 액세스를 제한하는 데 NSG 또는 UDR을 사용한 경우에는 사용할 수 없는 공용 게이트웨이를 사용합니다.
+HDInsight에 대한 대부분의 설명서는 인터넷을 통해 클러스터에 액세스할 수 있다고 가정합니다. 예를 들어 https://CLUSTERNAME.azurehdinsight.net에 있는 클러스터에 연결할 수 있습니다. 이 주소는 인터넷에서 액세스를 제한하는 데 NSG 또는 UDR을 사용한 경우에는 사용할 수 없는 공용 게이트웨이를 사용합니다.
 
 가상 네트워크를 통해 Ambari 및 다른 웹 페이지에 연결하려면 다음 단계를 사용합니다.
 
@@ -199,9 +214,12 @@ HDInsight에 대한 대부분의 설명서는 인터넷을 통해 클러스터�
 
 Azure Virtual Networks의 네트워크 트래픽은 다음 방법을 사용하여 제어할 수 있습니다.
 
-* **NSG(네트워크 보안 그룹)**를 통해 네트워크로의 인바운드 및 아웃바운드 트래픽을 필터링할 수 있습니다. 자세한 내용은 [네트워크 보안 그룹을 사용하여 네트워크 트래픽 필터링](../virtual-network/virtual-networks-nsg.md) 문서를 참조하세요.
+* **NSG(네트워크 보안 그룹)** 를 통해 네트워크로의 인바운드 및 아웃바운드 트래픽을 필터링할 수 있습니다. 자세한 내용은 [네트워크 보안 그룹을 사용하여 네트워크 트래픽 필터링](../virtual-network/security-overview.md) 문서를 참조하세요.
 
-* **UDR(사용자 정의 경로)**은 네트워크에 있는 리소스 간에 트래픽이 흐르는 방식을 정의합니다. 자세한 내용은 [사용자 정의 경로 및 IP 전달](../virtual-network/virtual-networks-udr-overview.md) 문서를 참조하세요.
+    > [!WARNING]
+    > HDInsight는 아웃바운드 트래픽을 제한하도록 지원하지 않습니다.
+
+* **UDR(사용자 정의 경로)** 은 네트워크에 있는 리소스 간에 트래픽이 흐르는 방식을 정의합니다. 자세한 내용은 [사용자 정의 경로 및 IP 전달](../virtual-network/virtual-networks-udr-overview.md) 문서를 참조하세요.
 
 * **네트워크 가상 어플라이언스**는 방화벽 및 라우터와 같은 장치 기능을 복제합니다. 자세한 내용은 [네트워크 어플라이언스](https://azure.microsoft.com/solutions/network-appliances) 문서를 참조하세요.
 
@@ -215,7 +233,7 @@ HDInsight는 여러 포트에서 서비스를 공개합니다. 가상 어플라�
 
 1. HDInsight에 대해 사용할 Azure 지역을 식별합니다.
 
-2. HDInsight에 필요한 IP 주소를 식별합니다. 허용되어야 하는 IP 주소는 HDInsight 클러스터 및 Virtual Network가 상주하는 하위 지역으로 특정됩니다. 지역별 IP 주소 목록은 [HDInsight에 필요한 IP 주소](#hdinsight-ip) 섹션을 참조하세요.
+2. HDInsight에 필요한 IP 주소를 식별합니다. 자세한 내용은 [HDInsight에 필요한 IP 주소](#hdinsight-ip) 섹션을 참조하세요.
 
 3. HDInsight을 설치하려는 서브넷에 대한 사용자 정의 경로 또는 네트워크 보안 그룹을 만들거나 수정합니다.
 
@@ -224,7 +242,7 @@ HDInsight는 여러 포트에서 서비스를 공개합니다. 가상 어플라�
 
 네트워크 보안 그룹 또는 사용자 정의 경로에 대한 자세한 내용은 다음 설명서를 참조하세요.
 
-* [네트워크 보안 그룹](../virtual-network/virtual-networks-nsg.md)
+* [네트워크 보안 그룹](../virtual-network/security-overview.md)
 
 * [사용자 정의 경로](../virtual-network/virtual-networks-udr-overview.md)
 
@@ -234,47 +252,61 @@ HDInsight는 여러 포트에서 서비스를 공개합니다. 가상 어플라�
 
 ## <a id="hdinsight-ip"></a> 필수 IP 주소
 
-다음 목록에는 HDInsight 클러스터를 모니터링하는 Azure 상태 및 모니터링 서비스의 IP 주소가 포함되어 있습니다. 이 목록은 네트워크 보안 그룹 또는 사용자 정의 경로를 사용하는 경우에만 중요합니다. 자세한 내용은 [네트워크 트래픽 제어](#networktraffic) 섹션을 참조하세요.
-
-다음 표를 사용하여 사용하는 하위 지역에 대한 IP 주소를 확인하세요.
-
-| 국가 | 지역 | 허용된 IP 주소 | 허용되는 포트 | 방향 |
-| ---- | ---- | ---- | ---- | ----- |
-| 아시아 | 동아시아 | 23.102.235.122</br>52.175.38.134 | 443 | 인바운드 |
-| 오스트레일리아 | 오스트레일리아 동부 | 104.210.84.115</br>13.75.152.195 | 443 | 인바운드 |
-| 브라질 | 브라질 남부 | 191.235.84.104</br>191.235.87.113 | 443 | 인바운드 |
-| 캐나다 | 캐나다 동부 | 52.229.127.96</br>52.229.123.172 | 443 | 인바운드 |
-| &nbsp; | 캐나다 중부 | 52.228.37.66</br>52.228.45.222 | 443 | 인바운드 |
-| 중국 | 중국 북부 | 42.159.96.170</br>139.217.2.219 | 443 | 인바운드 |
-| &nbsp; | 중국 동부 | 42.159.198.178</br>42.159.234.157 | 443 | 인바운드 |
-| 유럽 | 북유럽 | 52.164.210.96</br>13.74.153.132 | 443 | 인바운드 |
-| 독일 | 독일 중부 | 51.4.146.68</br>51.4.146.80 | 443 | 인바운드 |
-| &nbsp; | 독일 북동부 | 51.5.150.132</br>51.5.144.101 | 443 | 인바운드 |
-| 인도 | 인도 중부 | 52.172.153.209</br>52.172.152.49 | 443 | 인바운드 |
-| 일본 | 일본 동부 | 13.78.125.90</br>13.78.89.60 | 443 | 인바운드 |
-| &nbsp; | 일본 서부 | 40.74.125.69</br>138.91.29.150 | 443 | 인바운드 |
-| 한국 | 한국 중부 | 52.231.39.142</br>52.231.36.209 | 433 | 인바운드 |
-| &nbsp; | 한국 남부 | 52.231.203.16</br>52.231.205.214 | 443 | 인바운드
-| 영국 | 영국 서부 | 51.141.13.110</br>51.141.7.20 | 443 | 인바운드 |
-| &nbsp; | 영국 남부 | 51.140.47.39</br>51.140.52.16 | 443 | 인바운드 |
-| 미국 | 미국 중부 | 13.67.223.215</br>40.86.83.253 | 443 | 인바운드 |
-| &nbsp; | 미국 중서부 | 52.161.23.15</br>52.161.10.167 | 443 | 인바운드 |
-| &nbsp; | 미국 서부 2 | 52.175.211.210</br>52.175.222.222 | 443 | 인바운드 |
-
-Azure Government에 사용할 IP 주소에 대한 자세한 내용은 [Azure Government 인텔리전스 + 분석](https://docs.microsoft.com/azure/azure-government/documentation-government-services-intelligenceandanalytics) 문서를 참조하세요.
-
-__거주하는 지역이 표에 없을 경우__ 다음 IP 주소에 대해 포트 __443__에 대한 트래픽을 허용하세요.
-
-* 168.61.49.99
-* 23.99.5.239
-* 168.61.48.131
-* 138.91.141.162
-
 > [!IMPORTANT]
-> HDInsight는 아웃바운드 트래픽 제한은 지원하지 않으며 인바운드 트래픽만 제한합니다.
+> Azure 상태 및 관리 서비스는 HDInsight와 통신할 수 있어야 합니다. 네트워크 보안 그룹 또는 사용자 정의 경로를 사용하는 경우 이러한 서비스의 IP 주소에서 HDInsight로 트래픽이 전송되도록 할 수 있습니다.
+>
+> 트래픽을 제어하는 네트워크 보안 그룹 또는 사용자 정의 경로를 사용하지 않는 경우 이 섹션을 무시할 수 있습니다.
 
-> [!NOTE]
-> 가상 네트워크에서 사용자 지정 DNS 서버를 사용하는 경우 __168.63.129.16__에서의 액세스도 허용해야 합니다. 이 주소는 Azure 재귀 확인자입니다. 자세한 내용은 [VM 및 역할 인스턴스의 이름 확인](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md) 문서를 참조하세요.
+네트워크 보안 그룹 또는 사용자 정의 경로를 사용하는 경우 Azure 상태 및 관리 서비스의 트래픽이 HDInsight에 도달하도록 해야 합니다. 다음 단계를 사용하여 다음을 허용해야 하는 IP 주소를 찾을 수 있습니다.
+
+1. 다음 IP 주소에서 트래픽을 항상 허용해야 합니다.
+
+    | IP 주소 | 허용되는 포트 | 방향 |
+    | ---- | ----- | ----- |
+    | 168.61.49.99 | 443 | 인바운드 |
+    | 23.99.5.239 | 443 | 인바운드 |
+    | 168.61.48.131 | 443 | 인바운드 |
+    | 138.91.141.162 | 443 | 인바운드 |
+
+2. HDInsight 클러스터가 다음 지역 중에 있으면 해당 지역에 대해 나열된 IP 주소에서 트래픽을 허용해야 합니다.
+
+    > [!IMPORTANT]
+    > 사용하는 Azure 지역이 나열되지 않으면 1단계의 4가지 IP 주소만 사용합니다.
+
+    | 국가 | 지역 | 허용된 IP 주소 | 허용되는 포트 | 방향 |
+    | ---- | ---- | ---- | ---- | ----- |
+    | 아시아 | 동아시아 | 23.102.235.122</br>52.175.38.134 | 443 | 인바운드 |
+    | &nbsp; | 동남아시아 | 13.76.245.160</br>13.76.136.249 | 443 | 인바운드 |
+    | 오스트레일리아 | 오스트레일리아 동부 | 104.210.84.115</br>13.75.152.195 | 443 | 인바운드 |
+    | &nbsp; | 오스트레일리아 남동부 | 13.77.2.56</br>13.77.2.94 | 443 | 인바운드 |
+    | 브라질 | 브라질 남부 | 191.235.84.104</br>191.235.87.113 | 443 | 인바운드 |
+    | 캐나다 | 캐나다 동부 | 52.229.127.96</br>52.229.123.172 | 443 | 인바운드 |
+    | &nbsp; | 캐나다 중부 | 52.228.37.66</br>52.228.45.222 | 443 | 인바운드 |
+    | 중국 | 중국 북부 | 42.159.96.170</br>139.217.2.219 | 443 | 인바운드 |
+    | &nbsp; | 중국 동부 | 42.159.198.178</br>42.159.234.157 | 443 | 인바운드 |
+    | 유럽 | 북유럽 | 52.164.210.96</br>13.74.153.132 | 443 | 인바운드 |
+    | &nbsp; | 서유럽| 52.166.243.90</br>52.174.36.244 | 443 | 인바운드 |
+    | 독일 | 독일 중부 | 51.4.146.68</br>51.4.146.80 | 443 | 인바운드 |
+    | &nbsp; | 독일 북동부 | 51.5.150.132</br>51.5.144.101 | 443 | 인바운드 |
+    | 인도 | 인도 중부 | 52.172.153.209</br>52.172.152.49 | 443 | 인바운드 |
+    | 일본 | 일본 동부 | 13.78.125.90</br>13.78.89.60 | 443 | 인바운드 |
+    | &nbsp; | 일본 서부 | 40.74.125.69</br>138.91.29.150 | 443 | 인바운드 |
+    | 한국 | 한국 중부 | 52.231.39.142</br>52.231.36.209 | 433 | 인바운드 |
+    | &nbsp; | 한국 남부 | 52.231.203.16</br>52.231.205.214 | 443 | 인바운드
+    | 영국 | 영국 서부 | 51.141.13.110</br>51.141.7.20 | 443 | 인바운드 |
+    | &nbsp; | 영국 남부 | 51.140.47.39</br>51.140.52.16 | 443 | 인바운드 |
+    | 미국 | 미국 중부 | 13.67.223.215</br>40.86.83.253 | 443 | 인바운드 |
+    | &nbsp; | 미국 동부 | 13.82.225.233</br>40.71.175.99 | 443 | 인바운드 |
+    | &nbsp; | 미국 중북부 | 157.56.8.38</br>157.55.213.99 | 443 | 인바운드 |
+    | &nbsp; | 미국 중서부 | 52.161.23.15</br>52.161.10.167 | 443 | 인바운드 |
+    | &nbsp; | 미국 서부 | 13.64.254.98</br>23.101.196.19 | 443 | 인바운드 |
+    | &nbsp; | 미국 서부 2 | 52.175.211.210</br>52.175.222.222 | 443 | 인바운드 |
+
+    Azure Government에 사용할 IP 주소에 대한 자세한 내용은 [Azure Government 인텔리전스 + 분석](https://docs.microsoft.com/azure/azure-government/documentation-government-services-intelligenceandanalytics) 문서를 참조하세요.
+
+3. 가상 네트워크에서 사용자 지정 DNS 서버를 사용하는 경우 __168.63.129.16__에서의 액세스도 허용해야 합니다. 이 주소는 Azure 재귀 확인자입니다. 자세한 내용은 [VM 및 역할 인스턴스의 이름 확인](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md) 문서를 참조하세요.
+
+자세한 내용은 [네트워크 트래픽 제어](#networktraffic) 섹션을 참조하세요.
 
 ## <a id="hdinsight-ports"></a> 필수 포트
 
@@ -305,7 +337,7 @@ __거주하는 지역이 표에 없을 경우__ 다음 IP 주소에 대해 포�
 
 ### <a name="azure-powershell"></a>Azure PowerShell
 
-다음 PowerShell 스크립트를 사용하여 인바운드 트래픽을 제한하지만 북유럽 지역에서 HDInsight에 필요한 IP 주소에서의 트래픽은 허용하는 가상 네트워크를 만듭니다.
+다음 PowerShell 스크립트를 사용하여 인바운드 트래픽을 제한하며 북유럽 지역의 IP 주소에서 전송되는 트래픽을 허용하는 가상 네트워크를 만듭니다.
 
 > [!IMPORTANT]
 > 이 예제에 사용된 IP 주소를 사용 중인 Azure 지역에 맞게 변경합니다. 이 정보는 [네트워크 보안 그룹 및 사용자 정의 경로가 있는 HDInsight](#hdinsight-ip) 섹션에서 확인할 수 있습니다.
@@ -351,16 +383,49 @@ $nsg = New-AzureRmNetworkSecurityGroup `
         -Priority 301 `
         -Direction Inbound `
     | Add-AzureRmNetworkSecurityRuleConfig `
-        -Name "blockeverything" `
-        -Description "Block everything else" `
+        -Name "hdirule3" `
+        -Description "HDI health and management 168.61.49.99" `
         -Protocol "*" `
         -SourcePortRange "*" `
-        -DestinationPortRange "*" `
-        -SourceAddressPrefix "Internet" `
+        -DestinationPortRange "443" `
+        -SourceAddressPrefix "168.61.49.99" `
         -DestinationAddressPrefix "VirtualNetwork" `
-        -Access Deny `
-        -Priority 500 `
-        -Direction Inbound
+        -Access Allow `
+        -Priority 302 `
+        -Direction Inbound `
+    | Add-AzureRmNetworkSecurityRuleConfig `
+        -Name "hdirule4" `
+        -Description "HDI health and management 23.99.5.239" `
+        -Protocol "*" `
+        -SourcePortRange "*" `
+        -DestinationPortRange "443" `
+        -SourceAddressPrefix "23.99.5.239" `
+        -DestinationAddressPrefix "VirtualNetwork" `
+        -Access Allow `
+        -Priority 303 `
+        -Direction Inbound `
+    | Add-AzureRmNetworkSecurityRuleConfig `
+        -Name "hdirule5" `
+        -Description "HDI health and management 168.61.48.131" `
+        -Protocol "*" `
+        -SourcePortRange "*" `
+        -DestinationPortRange "443" `
+        -SourceAddressPrefix "168.61.48.131" `
+        -DestinationAddressPrefix "VirtualNetwork" `
+        -Access Allow `
+        -Priority 304 `
+        -Direction Inbound `
+    | Add-AzureRmNetworkSecurityRuleConfig `
+        -Name "hdirule6" `
+        -Description "HDI health and management 138.91.141.162" `
+        -Protocol "*" `
+        -SourcePortRange "*" `
+        -DestinationPortRange "443" `
+        -SourceAddressPrefix "138.91.141.162" `
+        -DestinationAddressPrefix "VirtualNetwork" `
+        -Access Allow `
+        -Priority 305 `
+        -Direction Inbound `
 # Set the changes to the security group
 Set-AzureRmNetworkSecurityGroup -NetworkSecurityGroup $nsg
 # Apply the NSG to the subnet
@@ -369,6 +434,7 @@ Set-AzureRmVirtualNetworkSubnetConfig `
     -Name $subnetName `
     -AddressPrefix $subnet.AddressPrefix `
     -NetworkSecurityGroup $nsg
+$vnet | Set-AzureRmVirtualNetwork
 ```
 
 > [!IMPORTANT]
@@ -377,7 +443,7 @@ Set-AzureRmVirtualNetworkSubnetConfig `
 > 다음 예제는 인터넷에서 SSH 액세스를 사용 설정하는 방법을 보여 줍니다.
 >
 > ```powershell
-> Add-AzureRmNetworkSecurityRuleConfig -Name "SSH" -Description "SSH" -Protocol "*" -SourcePortRange "*" -DestinationPortRange "22" -SourceAddressPrefix "*" -DestinationAddressPrefix "VirtualNetwork" -Access Allow -Priority 304 -Direction Inbound
+> Add-AzureRmNetworkSecurityRuleConfig -Name "SSH" -Description "SSH" -Protocol "*" -SourcePortRange "*" -DestinationPortRange "22" -SourceAddressPrefix "*" -DestinationAddressPrefix "VirtualNetwork" -Access Allow -Priority 306 -Direction Inbound
 > ```
 
 ### <a name="azure-cli"></a>Azure CLI
@@ -392,7 +458,7 @@ Set-AzureRmVirtualNetworkSubnetConfig `
 
     그룹을 만들면 새 그룹에 대한 정보를 받습니다.
 
-2. 다음을 사용하여 Azure HDInsight 상태 및 관리 서비스에서 포트 443에 대한 인바운드 통신을 허용하는 새 네트워크 보안 그룹에 규칙을 추가합니다. **RESOURCEGROUPNAME** 을 Azure 가상 네트워크를 포함하는 리소스 그룹 이름으로 바꿉니다.
+2. 다음을 사용하여 Azure HDInsight 상태 및 관리 서비스에서 포트 443에 대한 인바운드 통신을 허용하는 새 네트워크 보안 그룹에 규칙을 추가합니다. **RESOURCEGROUPNAME** 을 Azure Virtual Network를 포함하는 리소스 그룹 이름으로 바꿉니다.
 
     > [!IMPORTANT]
     > 이 예제에 사용된 IP 주소를 사용 중인 Azure 지역에 맞게 변경합니다. 이 정보는 [네트워크 보안 그룹 및 사용자 정의 경로가 있는 HDInsight](#hdinsight-ip) 섹션에서 확인할 수 있습니다.
@@ -400,7 +466,10 @@ Set-AzureRmVirtualNetworkSubnetConfig `
     ```azurecli
     az network nsg rule create -g RESOURCEGROUPNAME --nsg-name hdisecure -n hdirule1 --protocol "*" --source-port-range "*" --destination-port-range "443" --source-address-prefix "52.164.210.96" --destination-address-prefix "VirtualNetwork" --access "Allow" --priority 300 --direction "Inbound"
     az network nsg rule create -g RESOURCEGROUPNAME --nsg-name hdisecure -n hdirule2 --protocol "*" --source-port-range "*" --destination-port-range "443" --source-address-prefix "13.74.153.132" --destination-address-prefix "VirtualNetwork" --access "Allow" --priority 301 --direction "Inbound"
-    az network nsg rule create -g RESOURCEGROUPNAME --nsg-name hdisecure -n block --protocol "*" --source-port-range "*" --destination-port-range "*" --source-address-prefix "Internet" --destination-address-prefix "VirtualNetwork" --access "Deny" --priority 500 --direction "Inbound"
+    az network nsg rule create -g RESOURCEGROUPNAME --nsg-name hdisecure -n hdirule2 --protocol "*" --source-port-range "*" --destination-port-range "443" --source-address-prefix "168.61.49.99" --destination-address-prefix "VirtualNetwork" --access "Allow" --priority 302 --direction "Inbound"
+    az network nsg rule create -g RESOURCEGROUPNAME --nsg-name hdisecure -n hdirule2 --protocol "*" --source-port-range "*" --destination-port-range "443" --source-address-prefix "23.99.5.239" --destination-address-prefix "VirtualNetwork" --access "Allow" --priority 303 --direction "Inbound"
+    az network nsg rule create -g RESOURCEGROUPNAME --nsg-name hdisecure -n hdirule2 --protocol "*" --source-port-range "*" --destination-port-range "443" --source-address-prefix "168.61.48.131" --destination-address-prefix "VirtualNetwork" --access "Allow" --priority 304 --direction "Inbound"
+    az network nsg rule create -g RESOURCEGROUPNAME --nsg-name hdisecure -n hdirule2 --protocol "*" --source-port-range "*" --destination-port-range "443" --source-address-prefix "138.91.141.162" --destination-address-prefix "VirtualNetwork" --access "Allow" --priority 305 --direction "Inbound"
     ```
 
 3. 이 네트워크 보안 그룹에 대한 고유 식별자를 검색하려면 다음 명령을 사용합니다.
@@ -429,7 +498,7 @@ Set-AzureRmVirtualNetworkSubnetConfig `
 > 다음 예제는 인터넷에서 SSH 액세스를 사용 설정하는 방법을 보여 줍니다.
 >
 > ```azurecli
-> az network nsg rule create -g RESOURCEGROUPNAME --nsg-name hdisecure -n hdirule5 --protocol "*" --source-port-range "*" --destination-port-range "22" --source-address-prefix "*" --destination-address-prefix "VirtualNetwork" --access "Allow" --priority 304 --direction "Inbound"
+> az network nsg rule create -g RESOURCEGROUPNAME --nsg-name hdisecure -n hdirule5 --protocol "*" --source-port-range "*" --destination-port-range "22" --source-address-prefix "*" --destination-address-prefix "VirtualNetwork" --access "Allow" --priority 306 --direction "Inbound"
 > ```
 
 ## <a id="example-dns"></a> 예제: DNS 구성
@@ -593,9 +662,10 @@ Set-AzureRmVirtualNetworkSubnetConfig `
 ## <a name="next-steps"></a>다음 단계
 
 * 온-프레미스 네트워크에 연결하기 위해 HDInsight를 구성하는 종단 간 예제는 [HDInsight를 온-프레미스 네트워크에 연결](./connect-on-premises-network.md)을 참조하세요.
-
+* Azure 가상 네트워크에서 Hbase 클러스터를 구성하려면 [Azure Virtual Network의 HDInsight에서 HBase 클러스터 만들기](hbase/apache-hbase-provision-vnet.md)를 참조하세요.
+* HBase 지리적 복제를 구성하려면 [Azure 가상 네트워크에서 HBase 클러스터 복제 설정](hbase/apache-hbase-replication.md)을 참조하세요.
 * Azure 가상 네트워크에 대한 자세한 내용은 [Azure Virtual Network 개요](../virtual-network/virtual-networks-overview.md)를 참조하세요.
 
-* 네트워크 보안 그룹에 대한 자세한 내용은 [네트워크 보안 그룹](../virtual-network/virtual-networks-nsg.md)을 참조하세요.
+* 네트워크 보안 그룹에 대한 자세한 내용은 [네트워크 보안 그룹](../virtual-network/security-overview.md)을 참조하세요.
 
 * 사용자 정의 경로에 대한 자세한 내용은 [사용자 정의 경로 및 IP 전달](../virtual-network/virtual-networks-udr-overview.md)을 참조하세요.

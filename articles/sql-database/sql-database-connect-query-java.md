@@ -1,26 +1,21 @@
 ---
-title: "Java를 사용하여 Azure SQL Database 쿼리 | Microsoft Docs"
-description: "이 항목에서는 Java를 사용하여 Azure SQL Database에 연결하고 Transact-SQL 문을 사용하여 쿼리하는 프로그램을 만드는 방법을 보여 줍니다."
+title: Java를 사용하여 Azure SQL Database 쿼리 | Microsoft Docs
+description: 이 항목에서는 Java를 사용하여 Azure SQL Database에 연결하고 Transact-SQL 문을 사용하여 쿼리하는 프로그램을 만드는 방법을 보여 줍니다.
 services: sql-database
-documentationcenter: 
 author: ajlam
-manager: jhubbard
-editor: 
-ms.assetid: 
+manager: craigg
 ms.service: sql-database
 ms.custom: mvc,develop apps
-ms.workload: drivers
-ms.tgt_pltfrm: na
 ms.devlang: java
-ms.topic: hero-article
-ms.date: 07/10/2017
+ms.topic: quickstart
+ms.date: 04/01/2018
 ms.author: andrela
+ms.openlocfilehash: e19006d177777b18e1665ec5039f9c28f7e54df5
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 264a9e8f109ff77d8fbd81f01ba40d21aebea538
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34363675"
 ---
 # <a name="use-java-to-query-an-azure-sql-database"></a>Java를 사용하여 Azure SQL Database 쿼리
 
@@ -28,15 +23,11 @@ ms.lasthandoff: 07/21/2017
 
 ## <a name="prerequisites"></a>필수 조건
 
-이 빠른 시작 자습서를 완료하려면 다음 필수 구성 요소가 있어야 합니다.
+이 빠른 시작을 완료하려면 다음 필수 구성 요소가 있어야 합니다.
 
-- Azure SQL 데이터베이스입니다. 이 빠른 시작에서는 다음과 같은 빠른 시작 중 하나에서 만든 리소스를 사용합니다. 
+[!INCLUDE [prerequisites-create-db](../../includes/sql-database-connect-query-prerequisites-create-db-includes.md)]
 
-   - [DB 만들기 - 포털](sql-database-get-started-portal.md)
-   - [DB 만들기 - CLI](sql-database-get-started-cli.md)
-   - [DB 만들기 - PowerShell](sql-database-get-started-powershell.md)
-
-- 이 빠른 시작 자습서에서 사용하는 컴퓨터의 공용 IP 주소에 대한 [서버 수준 방화벽 규칙](sql-database-get-started-portal.md#create-a-server-level-firewall-rule)
+- 이 빠른 시작에서 사용하는 컴퓨터의 공용 IP 주소에 대한 [서버 수준 방화벽 규칙](sql-database-get-started-portal.md#create-a-server-level-firewall-rule)
 
 - 운영 체제에 맞게 설치된 Java 및 관련 소프트웨어
 
@@ -46,15 +37,7 @@ ms.lasthandoff: 07/21/2017
 
 ## <a name="sql-server-connection-information"></a>SQL 서버 연결 정보
 
-Azure SQL Database에 연결하는 데 필요한 연결 정보를 가져옵니다. 다음 절차에는 정규화된 서버 이름, 데이터베이스 이름 및 로그인 정보가 필요합니다.
-
-1. [Azure Portal](https://portal.azure.com/)에 로그인합니다.
-2. 왼쪽 메뉴에서 **SQL Database**를 선택하고 **SQL Database** 페이지에서 데이터베이스를 클릭합니다. 
-3. 데이터베이스의 **개요** 페이지에서 다음 이미지와 같이 정규화된 서버 이름을 검토합니다. 해당 서버 이름을 마우스로 가리키면 **복사하려면 클릭** 옵션이 표시됩니다.  
-
-   ![서버 이름](./media/sql-database-connect-query-dotnet/server-name.png) 
-
-4. 서버 로그인 정보를 잊어버린 경우 SQL Database 서버 페이지로 이동하여 서버 관리자 로그인 이름을 확인합니다.  필요한 경우 암호를 다시 설정합니다.     
+[!INCLUDE [prerequisites-server-connection-info](../../includes/sql-database-connect-query-prerequisites-server-connection-info-includes.md)]
 
 ## <a name="create-maven-project-and-dependencies"></a>**Maven 프로젝트 및 종속성 만들기**
 1. 터미널에서 **sqltest**라는 새 Maven 프로젝트를 만듭니다. 
@@ -70,7 +53,7 @@ Azure SQL Database에 연결하는 데 필요한 연결 정보를 가져옵니�
    <dependency>
        <groupId>com.microsoft.sqlserver</groupId>
        <artifactId>mssql-jdbc</artifactId>
-       <version>6.2.1.jre8</version>
+       <version>6.4.0.jre8</version>
    </dependency>
    ```
 
@@ -135,7 +118,8 @@ Azure SQL Database에 연결하는 데 필요한 연결 정보를 가져옵니�
                                System.out.println(resultSet.getString(1) + " "
                                    + resultSet.getString(2));
                            }
-                   }
+                    connection.close();
+                   }                   
            }
            catch (Exception e) {
                    e.printStackTrace();
@@ -160,5 +144,4 @@ Azure SQL Database에 연결하는 데 필요한 연결 정보를 가져옵니�
 - [첫 번째 Azure SQL Database 디자인](sql-database-design-first-database.md)
 - [SQL Server용 Microsoft JDBC Driver](https://github.com/microsoft/mssql-jdbc)
 - [문제/질문 보고](https://github.com/microsoft/mssql-jdbc/issues)
-
 

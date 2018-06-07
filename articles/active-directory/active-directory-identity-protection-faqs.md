@@ -4,24 +4,25 @@ description: "Azure AD ID 보호에 대한 질문과 대답입니다."
 services: active-directory
 documentationcenter: 
 author: MarkusVi
-manager: femila
+manager: mtillman
 ms.assetid: 14f7fc83-f4bb-41bf-b6f1-a9bb97717c34
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/11/2017
+ms.date: 11/03/2017
 ms.author: markvi
 ms.reviewer: nigu
+ms.openlocfilehash: 102cf0108aeefa255d40bd932e41f1e7b5536205
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 781f868c87cea3cd790d89c61e26eecf352babea
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="azure-active-directory-identity-protection-faq"></a>Azure Active Directory ID 보호 FAQ
+
+이 문서에는 Azure AD(Azure Active Directory) Identity Protection에 대한 질문과 대답이 포함되어 있습니다. 자세한 내용은 [Azure Active Directory Identity Protection](active-directory-identityprotection.md)을 참조하세요. 
 
 
 ## <a name="why-do-some-risk-events-have-closed-system-status"></a>일부 위험 이벤트에 "닫힘(시스템)" 상태가 있는 이유는 무엇인가요?
@@ -31,18 +32,18 @@ ms.lasthandoff: 07/21/2017
 ---
 
 ## <a name="do-i-need-to-be-a-global-admin-to-use-identity-protection-in-the-azure-portal"></a>Azure Portal에서 ID 보호를 사용하려면 전역 관리자여야 하나요?
-**A:** **아니요**. 보안 읽기 권한자, 보안 관리자 또는 전역 관리자는 ID 보호를 사용할 수 있습니다.
+**A:** 아니요. 보안 읽기 권한자, 보안 관리자 또는 전역 관리자는 ID 보호를 사용할 수 있습니다.
 
 ---
 
 ## <a name="how-do-i-get-identity-protection"></a>ID 보호를 얻으려면 어떻게 해야 하나요?
+
 **A:** 이 질문에 대한 답변은 [Azure Active Directory Premium 시작하기](active-directory-get-started-premium.md)를 참조하세요.
 
 ---
 
-## <a name="what-happens-when-your-azure-active-directory-premium-2-trial-expires"></a>Azure Active Directory Premium 2 평가판이 만료되면 어떻게 되나요?
+## <a name="how-can-i-sort-users-in-users-flagged-for-risk"></a>'위험에 대한 플래그가 지정된 사용자'의 사용자를 어떻게 정렬할 수 있나요?
 
-**A:** Azure Active Directory Premium 2 평가 버전이 Azure Active Directory Free, Basic 또는 Premium 1 버전에서 만료되고 ID 보호 기능을 사용하도록 설정한 경우에는 라이선스를 준수하지 않아도 여전히 해당 버전에 액세스할 수 있습니다.
+**A:** **위험에 대한 플래그가 지정된 사용자** 페이지 위쪽에 있는 **다운로드**를 클릭하여 위험에 대한 플래그가 지정된 사용자 보고서를 다운로드합니다. 그런 다음 마지막 업데이트(UTC)를 포함하여 사용 가능한 필드를 기반으로 다운로드된 데이터를 정렬할 수 있습니다.
 
 ---
-

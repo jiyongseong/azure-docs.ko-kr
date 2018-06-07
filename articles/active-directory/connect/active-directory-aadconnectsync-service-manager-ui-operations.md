@@ -3,8 +3,8 @@ title: "Azure AD Connect Synchronization Service Manager 작업 | Microsoft Docs
 description: "Azure AD Connect의 Synchronization Service Manager에 있는 작업 탭을 이해합니다."
 services: active-directory
 documentationcenter: 
-author: andkjell
-manager: femila
+author: billmath
+manager: mtillman
 editor: 
 ms.assetid: 97a26565-618f-4313-8711-5925eeb47cdc
 ms.service: active-directory
@@ -15,12 +15,11 @@ ms.topic: article
 ms.date: 07/13/2017
 ms.author: billmath
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 72b2d9142479f9ba0380c5bd2dd82734e370dee7
-ms.openlocfilehash: 7f50ce0d4842bde809664c392ebee5425a70e6f0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/08/2017
-
+ms.openlocfilehash: 309a4ca2d5ef929bb50ed899f24709c062d7db29
+ms.sourcegitcommit: 9d317dabf4a5cca13308c50a10349af0e72e1b7e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/01/2018
 ---
 # <a name="using-the-sync-service-manager-operations-tab"></a>Sync Service Manager 작업 탭 사용
 
@@ -35,7 +34,7 @@ ms.lasthandoff: 03/08/2017
 
 | 상태 | 주석 |
 | --- | --- |
-| stopped-* |실행을 완료하지 못했습니다. 예를 들어 원격 시스템이 다운되어 연결할 수 없는 경우입니다. |
+| stopped-\* |실행을 완료하지 못했습니다. 예를 들어 원격 시스템이 다운되어 연결할 수 없는 경우입니다. |
 | stopped-error-limit |5000개보다 많은 오류가 있습니다. 많은 오류로 인해 실행이 자동으로 중지되었습니다. |
 | completed-\*-errors |실행이 완료되었지만 조사해야 할 오류가 있습니다(5,000개 미만). |
 | completed-\*-warnings |실행이 완료되었지만 일부 데이터가 예상된 상태가 아닙니다. 오류가 발생하는 경우 이 메시지는 일반적으로 증상일 뿐입니다. 오류를 해결할 때까지 경고를 조사하지 않습니다. |
@@ -49,4 +48,3 @@ ms.lasthandoff: 03/08/2017
 [Azure AD Connect 동기화](active-directory-aadconnectsync-whatis.md) 구성에 대해 자세히 알아봅니다.
 
 [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)에 대해 자세히 알아봅니다.
-

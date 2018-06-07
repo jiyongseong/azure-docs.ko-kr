@@ -15,13 +15,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/24/2017
 ms.author: cherylmc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ef74361c7a15b0eb7dad1f6ee03f8df707a7c05e
-ms.openlocfilehash: 4315e9168a1ad724a6c28bd9bab065d6ffdabb5d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/25/2017
-
-
+ms.openlocfilehash: 604af54d034b6b51a96ff098827e2352a163be18
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="reset-a-vpn-gateway"></a>VPN Gateway 다시 설정
 
@@ -37,7 +35,7 @@ VPN Gateway는 활성-대기 구성에서 실행 중인 두 VM 인스턴스로 �
 
 두 번의 재부팅 후 크로스-프레미스 연결 문제가 여전히 발생하는 경우 Azure Portal에서 지원 요청을 여세요.
 
-## <a name="before-you-begin"></a>시작하기 전에
+## <a name="before"></a>시작하기 전에
 
 게이트웨이를 재설정하기 전에 각 IPsec 사이트 간(S2S) VPN 터널에 대해 아래 나열된 키 항목을 확인합니다. 일치하지 않는 항목은 S2S VPN 터널에서 연결이 끊깁니다. 온-프레미스 및 Azure VPN Gateway에 대한 구성을 확인 및 수정하면 게이트웨이에서 작동 중인 기타 연결에 대해 불필요한 재부팅 및 중단을 피할 수 있습니다.
 
@@ -47,7 +45,7 @@ VPN Gateway는 활성-대기 구성에서 실행 중인 두 VM 인스턴스로 �
 * 미리 공유한 키가 Azure와 온-프레미스 VPN 게이트웨이에서 동일해야 합니다.
 * 암호화, 해시 알고리즘 및 전달 완전 보안(PFS)과 같은 특정 IPsec/IKE 구성을 적용하는 경우 Azure와 온-프레미스 VPN 게이트웨이에서 동일한 구성을 포함하는지 확인하세요.
 
-## <a name="azure-portal"></a>Azure 포털
+## <a name="portal"></a>Azure Portal
 
 Azure Portal을 사용하여 Resource Manager VPN Gateway를 다시 설정할 수 있습니다. 클래식 게이트웨이를 다시 설정하려는 경우 [PowerShell](#resetclassic) 단계를 참조하세요.
 
@@ -59,7 +57,7 @@ Azure Portal을 사용하여 Resource Manager VPN Gateway를 다시 설정할 �
   ![VPN Gateway 블레이드 다시 설정](./media/vpn-gateway-howto-reset-gateway/reset-vpn-gateway-portal.png)
 3. 다시 설정 블레이드에서 **다시 설정** 단추를 클릭합니다.
 
-## <a name="powershell"></a>PowerShell
+## <a name="ps"></a>PowerShell
 
 ### <a name="resource-manager-deployment-model"></a>리소스 관리자 배포 모델
 
@@ -93,9 +91,9 @@ RequestId      : 9ca273de2c4d01e986480ce1ffa4d6d9
 StatusCode     : OK
 ```
 
-## <a name="azure-cli"></a>Azure CLI
+## <a name="cli"></a>Azure CLI
 
-게이트웨이를 다시 설정하려면 [az network vnet-gateway reset](https://docs.microsoft.com/cli/azure/network/vnet-gateway#reset) 명령을 사용합니다. 다음 예제에서는 TestRG5 리소스 그룹에서 VNet5GW라는 가상 네트워크 게이트웨이를 다시 설정합니다.
+게이트웨이를 다시 설정하려면 [az network vnet-gateway reset](https://docs.microsoft.com/cli/azure/network/vnet-gateway#az_network_vnet_gateway_reset) 명령을 사용합니다. 다음 예제에서는 TestRG5 리소스 그룹에서 VNet5GW라는 가상 네트워크 게이트웨이를 다시 설정합니다.
 
 ```azurecli
 az network vnet-gateway reset -n VNet5GW -g TestRG5

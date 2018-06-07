@@ -1,5 +1,5 @@
 
-[az webapp create](/cli/azure/appservice/web#create) 명령을 사용하여 `myAppServicePlan` App Service 계획에 [API 앱](../articles/app-service-api/app-service-api-apps-why-best-platform.md)을 만듭니다. 
+[az webapp create](/cli/azure/webapp?view=azure-cli-latest#az_webapp_create) 명령을 사용하여 `myAppServicePlan` App Service 계획에 앱을 만듭니다. 
 
 웹앱은 API에 대한 호스팅 공간을 제공하고, 배포된 앱을 확인하도록 URL을 제공합니다.
 

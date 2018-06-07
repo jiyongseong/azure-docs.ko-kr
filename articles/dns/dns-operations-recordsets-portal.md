@@ -1,11 +1,11 @@
 ---
-title: "Azure DNS에서 DNS 레코드 집합 및 레코드 관리 | Microsoft Docs"
-description: "Azure DNS는 도메인을 호스트하는 경우 DNS 레코드 집합 및 레코드를 관리하는 기능을 제공합니다."
+title: Azure DNS에서 DNS 레코드 집합 및 레코드 관리 | Microsoft Docs
+description: Azure DNS는 도메인을 호스트하는 경우 DNS 레코드 집합 및 레코드를 관리하는 기능을 제공합니다.
 services: dns
 documentationcenter: na
-author: georgewallace
-manager: timlt
-editor: 
+author: KumudD
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
 ms.assetid: 18ed44a1-7bfe-454f-964e-922ad978264a
 ms.service: dns
@@ -14,19 +14,17 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 08/16/2016
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5edc47e03ca9319ba2e3285600703d759963e1f3
-ms.openlocfilehash: 001b80ccba43beab44f6a598f820df65a85a345f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/01/2017
-
+ms.author: kumud
+ms.openlocfilehash: da7d2118a0fb6bc5004856d994a01a932094ca45
+ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/03/2018
 ---
-
 # <a name="manage-dns-records-and-record-sets-by-using-the-azure-portal"></a>Azure 포털을 사용하여 DNS 레코드 및 레코드 집합 관리
 
 > [!div class="op_single_selector"]
-> * [Azure 포털](dns-operations-recordsets-portal.md)
+> * [Azure Portal](dns-operations-recordsets-portal.md)
 > * [Azure CLI 1.0](dns-operations-recordsets-cli-nodejs.md)
 > * [Azure CLI 2.0](dns-operations-recordsets-cli.md)
 > * [PowerShell](dns-operations-recordsets.md)
@@ -108,7 +106,7 @@ Azure 포털을 사용하여 레코드 집합에서 레코드를 제거할 수 �
 
 ### <a name="modify-soa-records"></a>SOA 레코드 수정
 
-영역 루트(이름 = "@")에 설정된 자동으로 생성된 SOA 레코드 집합에서 레코드를 추가 또는 제거할 수는 없습니다. 그러나 SOA 레코드 내의 매개 변수("Host" 제외) 및 레코드 집합 TTL을 수정할 수 있습니다.
+영역 루트(이름 = "\@\")에 설정된 자동으로 생성된 SOA 레코드 집합에서 레코드를 추가 또는 제거할 수는 없습니다. 그러나 SOA 레코드 내의 매개 변수("Host" 제외) 및 레코드 집합 TTL을 수정할 수 있습니다.
 
 ### <a name="modify-ns-records-at-the-zone-apex"></a>영역 루트의 NS 레코드 수정
 
@@ -120,11 +118,10 @@ Azure 포털을 사용하여 레코드 집합에서 레코드를 제거할 수 �
 
 ### <a name="delete-soa-or-ns-record-sets"></a>SOA 또는 NS 레코드 집합 삭제
 
-영역을 만들 때 자동으로 만들어진 영역 루트(이름 = "@")의 SOA 및 NS 레코드 집합은 삭제할 수 없습니다. 영역을 삭제하면 자동으로 삭제됩니다.
+영역을 만들 때 자동으로 만들어진 영역 루트(이름 = "\@\")의 SOA 및 NS 레코드 집합은 삭제할 수 없습니다. 영역을 삭제하면 자동으로 삭제됩니다.
 
 ## <a name="next-steps"></a>다음 단계
 
 * Azure DNS에 대한 자세한 내용은 [Azure DNS 개요](dns-overview.md)를 참조하세요.
 * DNS 자동화에 대한 자세한 내용은 [.NET SDK를 사용하여 DNS 영역 및 레코드 집합 만들기](dns-sdk.md)를 참조하세요.
 * 역방향 DNS 레코드에 대한 자세한 내용은 [Azure의 역방향 DNS 및 지원 개요](dns-reverse-dns-overview.md)를 참조하세요.
-

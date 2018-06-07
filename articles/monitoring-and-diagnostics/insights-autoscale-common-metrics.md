@@ -14,17 +14,16 @@ ms.devlang: na
 ms.topic: article
 ms.date: 12/6/2016
 ms.author: ancav
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 71fea4a41b2e3a60f2f610609a14372e678b7ec4
-ms.openlocfilehash: 7f9fb67a28560f8cc48ba8be8011bc1991d09024
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/10/2017
-
+ms.openlocfilehash: 240a230d09680672ccd5316470a87d047fab9fd1
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="azure-monitor-autoscaling-common-metrics"></a>Azure Monitor 자동 크기 조정 공용 메트릭
 Azure Monitor 자동 크기 조정을 사용하여 원격 분석 데이터(메트릭)에 따라 실행 중인 인스턴트 수를 늘리거나 줄일 수 있습니다. 이 문서에서는 사용하고자 하는 공용 메트릭에 대해 설명합니다. Cloud Services 및 서버 팜용 Azure Portal에서 크기를 조정할 리소스의 메트릭을 선택할 수 있습니다. 그러나 크기를 조정하기 위해 여러 리소스에서 임의 메트릭을 선택할 수도 있습니다.
 
-Azure Monitor 자동 크기 조정은 [가상 컴퓨터 크기 집합](https://azure.microsoft.com/services/virtual-machine-scale-sets/), [Cloud Services](https://azure.microsoft.com/services/cloud-services/) 및 [App Service - Web Apps](https://azure.microsoft.com/services/app-service/web/)에만 적용됩니다. 다른 Azure 서비스에는 다른 크기 조정 방법이 사용됩니다.
+Azure Monitor 자동 크기 조정은 [가상 컴퓨터 확장 집합](https://azure.microsoft.com/services/virtual-machine-scale-sets/), [Cloud Services](https://azure.microsoft.com/services/cloud-services/) 및 [App Service - Web Apps](https://azure.microsoft.com/services/app-service/web/)에만 적용됩니다. 다른 Azure 서비스에는 다른 크기 조정 방법이 사용됩니다.
 
 ## <a name="compute-metrics-for-resource-manager-based-vms"></a>Resource Manager 기반 VM용 메트릭 계산
 기본적으로 Resource Manager 기반 Virtual Machines 및 Virtual Machine Scale Sets는 기본(호스트 수준) 메트릭을 내보냅니다. 또한 Azure VM 및 VMSS용 진단 데이터 수집을 구성하면 Azure 진단 확장은 게스트 OS 성능 카운터(일반적으로 "게스트 OS 메트릭"이라고 함)도 내보냅니다.  자동 크기 조정 규칙에서 이러한 모든 메트릭을 사용합니다.
@@ -193,4 +192,3 @@ VM Scale Sets의 경우 *metricName*을 *ApproximateMessageCount*로 사용하�
 > 서비스 버스의 경우 리소스 그룹 개념이 없지만 Azure Resource Manager가 지역마다 기본 리소스 그룹을 만듭니다. 리소스 그룹은 일반적으로 'Default-ServiceBus-[region]' 형식입니다. 예를 들어 'Default-ServiceBus-EastUS', 'Default-ServiceBus-WestUS', 'Default-ServiceBus-AustraliaEast' 등입니다.
 >
 >
-

@@ -1,43 +1,40 @@
 ---
-title: Storage accounts in Azure Stack | Microsoft Docs
-description: Learn how to create an Azure Stack storage account.
+title: "저장소 계정에 Azure 스택 | Microsoft Docs"
+description: "Azure 스택 저장소 계정을 만드는 방법에 알아봅니다."
 services: azure-stack
 documentationcenter: 
-author: vhorne
-manager: byronr
-editor: 
+author: mattbriggs
+manager: femila
 ms.assetid: e1152110-b756-4c1a-9fa2-73fe3ab0ad8e
 ms.service: azure-stack
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: get-started-article
-ms.date: 3/1/2017
-ms.author: victorh
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 988e7fe2ae9f837b661b0c11cf30a90644085e16
-ms.openlocfilehash: 1a0e04d3a5d4c90484c9323097daf1a84c29d6ba
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/06/2017
-
+ms.date: 02/28/2018
+ms.author: mabrigg
+ms.openlocfilehash: a599d809ba3da8487a6c5d115bf04922a546e6ad
+ms.sourcegitcommit: 782d5955e1bec50a17d9366a8e2bf583559dca9e
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/02/2018
 ---
-# <a name="storage-accounts-in-azure-stack"></a>Storage accounts in Azure Stack
-Storage accounts include Blob and Table services, and the unique namespace for your storage data objects. By default, the data in your account is available only to you, the storage account owner.
+# <a name="storage-accounts-in-azure-stack"></a>Azure Stack의 Storage 계정
+Storage 계정에는 Blob 및 Table service, 그리고 저장소 데이터 개체에 대한 고유한 네임스페이스가 있습니다. 기본적으로 계정에 대한 데이터는 저장소 계정 소유자에만 사용할 수 있습니다.
 
-1. On the Azure Stack POC computer, log in to `https://adminportal.local.azurestack.external` as [an admin](azure-stack-connect-azure-stack.md), and then click **New** > **Data + Storage** > **Storage account**.
+1. Azure 스택 POC 컴퓨터에 로그인 하려면 `https://adminportal.local.azurestack.external` 으로 [관리자](azure-stack-connect-azure-stack.md), 클릭 하 고 **새로** > **데이터 + 저장소**  >  **저장소 계정**합니다.
 
    ![](media/azure-stack-provision-storage-account/image01.png)
-2. In the **Create storage account** blade, type a name for your storage account. Create a new **Resource Group**, or select an existing one, then click **Create** to create the storage account.
+2. 에 **저장소 계정 만들기** 블레이드에서 저장소 계정에 대 한 이름 입력 합니다. 새 **리소스 그룹**, 기존 템플릿을 선택 하거나 다음을 클릭 **만들기** 저장소 계정을 만들 수 있습니다.
 
    ![](media/azure-stack-provision-storage-account/image02.png)
-3. To see your new storage account, click **All resources**, then search for the storage account and click its name.
+3. 새 저장소 계정의 보려면 클릭 **모든 리소스**, 저장소 계정에 대 한 다음 검색 하 고 해당 이름을 클릭 합니다.
 
     ![](media/azure-stack-provision-storage-account/image03.png)
 
-### <a name="next-steps"></a>Next steps
-[Use Azure Resource Manager templates](azure-stack-arm-templates.md)
+### <a name="next-steps"></a>다음 단계
+[Azure 리소스 관리자 템플릿 사용](user/azure-stack-arm-templates.md)
 
-[Learn about Azure storage accounts](../storage/storage-create-storage-account.md)
+[Azure 저장소 계정에 대 한 자세한 내용은](../storage/common/storage-create-storage-account.md)
 
-[Download the Azure Stack Azure-consistent Storage Validation Guide](http://aka.ms/azurestacktp1doc)
-
+[Azure 스택 일관 된 Azure 저장소 유효성 검사 가이드 다운로드](http://aka.ms/azurestacktp1doc)

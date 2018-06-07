@@ -1,3 +1,20 @@
+---
+title: 포함 파일
+description: 포함 파일
+services: expressroute
+author: cherylmc
+ms.service: expressroute
+ms.topic: include
+ms.date: 03/22/2018
+ms.author: cherylmc
+ms.custom: include file
+ms.openlocfilehash: 064bda1b4201d30e32766b4d0e19e9950901152f
+ms.sourcegitcommit: 6116082991b98c8ee7a3ab0927cf588c3972eeaa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2018
+ms.locfileid: "30197485"
+---
 > [!IMPORTANT] 
 > 2017년 3월 1일부터 클래식 배포 모델에서 새 ExpressRoute 회로를 만들 수 없습니다.
 > 

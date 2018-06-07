@@ -16,14 +16,12 @@ ms.workload: infrastructure
 ms.date: 03/01/2017
 ms.author: nepeters
 ms.custom: mvc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: 8b4bbc01c76e84961b1ed7e26e29022eb8f2a980
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
+ms.openlocfilehash: 778a6d5cfc63f80aa66654d682fedb178cfd67a4
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="create-a-wordpress-vm-with-powershell"></a>PowerShell로 WordPress VM 만들기
 
 이 스크립트는 가상 컴퓨터를 만들고 Azure Virtual Machine 사용자 지정 스크립트 확장을 사용하여 WordPress를 설치합니다. 스크립트를 실행하면 `http://<public IP of VM>/wordpress`에서 WordPress 구성 사이트에 액세스할 수 있습니다. 
@@ -34,7 +32,7 @@ ms.lasthandoff: 04/27/2017
 
 ## <a name="sample-script"></a>샘플 스크립트
 
-[!code-powershell[main](../../../powershell_scripts/virtual-machine/create-wordpress-mysql/create-wordpress-mysql.ps1 "VM WordPress 만들기")]
+[!code-powershell[main](../../../powershell_scripts/virtual-machine/create-wordpress-mysql/create-wordpress-mysql.ps1 "Create VM WordPress")]
 
 ## <a name="clean-up-deployment"></a>배포 정리 
 
@@ -68,4 +66,3 @@ Remove-AzureRmResourceGroup -Name myResourceGroup
 Azure PowerShell 모듈에 대한 자세한 내용은 [Azure PowerShell 설명서](/powershell/azure/overview)를 참조하세요.
 
 추가 가상 컴퓨터 PowerShell 스크립트 샘플은 [Azure Linux VM 설명서](../linux/powershell-samples.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)에서 확인할 수 있습니다.
-

@@ -1,26 +1,21 @@
 ---
-title: "Azure Active Directory B2C: 사용자 지정 정책 문제 해결 | Microsoft Docs"
-description: "Azure Active Directory에서 사용자 지정 정책을 사용하는 경우 오류를 해결하는 방법을 알아봅니다."
+title: 'Azure Active Directory B2C: 사용자 지정 정책 문제 해결 | Microsoft Docs'
+description: Azure Active Directory에서 사용자 지정 정책을 사용하는 경우 오류를 해결하는 방법을 알아봅니다.
 services: active-directory-b2c
-documentationcenter: 
-author: rojasja
-manager: krassk
-editor: rojasja
-ms.assetid: 
+documentationcenter: ''
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 05/07/2017
-ms.author: joroja
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 857267f46f6a2d545fc402ebf3a12f21c62ecd21
-ms.openlocfilehash: 023390ba36a74217503ff8b3076ad17978fe3fb8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/28/2017
-
-
+ms.author: davidmu
+ms.openlocfilehash: e51990bd2e121b89e7260e0d745d08ecc82ff8a0
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="troubleshoot-azure-ad-b2c-custom-policies-and-identity-experience-framework"></a>Azure AD B2C 사용자 지정 정책 및 Identity Experience Framework 문제 해결
 
@@ -33,7 +28,7 @@ Azure AD B2C(Azure Active Directory B2C) 사용자 지정 정책을 사용하는
 
 사용자 지정 정책 설정에서 가장 일반적인 오류는 형식이 잘못 지정된 XML입니다. 좋은 XML 편집기가 거의 필수입니다. 좋은 XML 편집기는 XML을 기본적으로 표시하고, 콘텐츠를 색상으로 구분하며, 일반적인 용어를 미리 채우고, XML 요소를 인덱싱된 상태로 유지하며, 스키마로 유효성을 검사할 수 있습니다. 다음은 권장되는 두 XML 편집기입니다.
 
-* [Contact.java](https://code.visualstudio.com/)
+* [Visual Studio Code](https://code.visualstudio.com/)
 * [메모장++](https://notepad-plus-plus.org/)
 
 XML 파일을 업로드하기 전에 XML 스키마 유효성 검사가 오류를 식별합니다. 시작 팩의 루트 폴더에서 XML 스키마 정의 TrustFrameworkPolicy_0.3.0.0.xsd를 가져옵니다. 자세한 내용을 보려면 XML 편집기 문서에서 *XML 도구* 및 *XML 유효성 검사*를 찾습니다.
@@ -79,5 +74,4 @@ XML 규칙 검토가 도움이 될 수도 있습니다. Azure AD B2C는 검색�
 
 ## <a name="next-steps"></a>다음 단계
 
-* GitHub에서 [active-directory-b2c-custom-policy-starterpack](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack/archive/master.zip) .zip 파일을 다운로드합니다.
-
+* GitHub에서 [active-directory-b2c-custom-policy-starterpack](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack/archive/master.zip)) .zip 파일을 다운로드합니다.

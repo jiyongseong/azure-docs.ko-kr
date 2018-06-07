@@ -4,7 +4,7 @@ description: "하이브리드 ID 설계 고려 사항 가이드의 개요 및 �
 documentationcenter: 
 services: active-directory
 author: billmath
-manager: femila
+manager: mtillman
 editor: 
 ms.assetid: 100509c4-0b83-4207-90c8-549ba8372cf7
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 07/18/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: cfe4957191ad5716f1086a1a332faf6a52406770
-ms.openlocfilehash: b22e34f9ad0644def8a344b261077b44c34420cb
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/09/2017
-
+ms.openlocfilehash: 94e67c5ea0028419e9bf74420e2bb46709b3df01
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="azure-active-directory-hybrid-identity-design-considerations"></a>Azure Active Directory 하이브리드 ID 설계 고려 사항
 소비자 기반 장치가 기업 전반에 퍼지고 있기 때문에 클라우드 기반 소프트웨어 SaaS 응용 프로그램은 쉽게 채택할 수 있습니다. 결과적으로 내부 데이터 센터 및 클라우드 플랫폼에 걸쳐 사용자의 응용 프로그램 액세스를 제어하도록 유지하는 것은 어렵습니다.  
@@ -48,7 +47,7 @@ Microsoft의 ID 솔루션은 온-프레미스 및 클라우드 기반 기능을 
 
 이 가이드는 조직의 고유한 요구 사항을 만족하는 하이브리드 ID 솔루션을 설계하기 위해 수행할 수 있는 일련의 단계 및 작업을 제공합니다. 다음 단계 및 작업 전체에 걸쳐 가이드는 조직의 기능 및 서비스 품질 수준 요구 사항을 충족하기 위해 사용할 수 있는 관련 기술 및 기능 옵션을 표시합니다.
 
-**가정**: Windows Server, Active Directory 도메인 서비스 및 Azure Active Directory를 사용한 경험이 있습니다. 이 문서에서는 이러한 솔루션이 자체적으로 또는 통합된 솔루션에서 비즈니스 요구를 충족하는 방법을 찾는다고 가정합니다.
+**가정**: Windows Server, Active Directory Domain Services 및 Azure Active Directory를 사용한 경험이 있습니다. 이 문서에서는 이러한 솔루션이 자체적으로 또는 통합된 솔루션에서 비즈니스 요구를 충족하는 방법을 찾는다고 가정합니다.
 
 ## <a name="design-considerations-overview"></a>설계 고려 사항 개요
 이 문서는 요구 사항을 만족하는 하이브리드 ID 솔루션을 설계하기 위해 수행할 수 있는 일련의 단계 및 작업을 제공합니다. 단계는 정렬된 순서로 표시됩니다. 그러나 설계 선택에서 충돌로 인해 이후 단계에서 설명하는 설명 고려 사항은 이전 단계에서 결정한 사항을 변경할 수도 있습니다. 문서 전체에서 잠재적인 설계 충돌을 경고하기 위해 최선을 다합니다. 
@@ -63,5 +62,4 @@ Microsoft의 ID 솔루션은 온-프레미스 및 클라우드 기반 기능을 
 
 ## <a name="download-this-guide"></a>이 가이드 다운로드
 [Technet 갤러리](https://gallery.technet.microsoft.com/Azure-Hybrid-Identity-b06c8288)에서 하이브리드 ID 설계 고려 사항 가이드의 pdf 버전을 다운로드할 수 있습니다. 
-
 

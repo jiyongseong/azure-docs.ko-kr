@@ -12,10 +12,11 @@ ms.devlang: na
 ms.topic: landing-page
 ms.date: 01/23/2017
 ms.author: carolz
-translationtype: Human Translation
-ms.sourcegitcommit: ad88288056956ab29d446efbe105157f6b732d5f
 ms.openlocfilehash: 4883e5689a639259ec1c0bcd31e1016f85af5d66
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="scheduler-documentation"></a>Scheduler 설명서
 
@@ -107,11 +108,5 @@ ms.openlocfilehash: 4883e5689a639259ec1c0bcd31e1016f85af5d66
         </div>
     </li>
 </ul>
-
-
-
-
-
-<!--HONumber=Feb17_HO2-->
 
 

@@ -1,13 +1,12 @@
 ---
-title: "Azure PowerShell 스크립트 - cosmosdb에 대한 계정 키 가져오기 | Microsoft Docs"
-description: "Azure PowerShell 스크립트 샘플 - cosmosdb에 대한 계정 키 가져오기"
+title: Azure PowerShell 스크립트 - cosmosdb에 대한 계정 키 가져오기 | Microsoft Docs
+description: Azure PowerShell 스크립트 샘플 - cosmosdb에 대한 계정 키 가져오기
 services: cosmos-db
 documentationcenter: cosmosdb
-author: mimig1
-manager: jhubbard
-editor: 
+author: SnehaGunda
+manager: kfile
 tags: azure-service-management
-ms.assetid: 
+ms.assetid: ''
 ms.service: cosmos-db
 ms.custom: mvc
 ms.devlang: PowerShell
@@ -15,15 +14,13 @@ ms.topic: sample
 ms.tgt_pltfrm: cosmosdb
 ms.workload: database
 ms.date: 05/10/2017
-ms.author: mimig
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 71fea4a41b2e3a60f2f610609a14372e678b7ec4
-ms.openlocfilehash: 63e4719a448a289aaa74ad050b36412969c5452d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/10/2017
-
+ms.author: sngun
+ms.openlocfilehash: 38b0028a8c9363af54df37583f50aefc533bc78c
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-
 # <a name="get-account-keys-for-azure-cosmos-db-using-powershell"></a>PowerShell을 사용하여 Azure Cosmos DB의 계정 키 가져오기
 
 이 샘플은 모든 종류의 Azure Cosmos DB 계정의 계정 키를 가져옵니다.  
@@ -32,7 +29,7 @@ ms.lasthandoff: 05/10/2017
 
 ## <a name="sample-script"></a>샘플 스크립트
 
-[!code-powershell[기본](../../../powershell_scripts/cosmosdb/get-account-keys/get-account-keys.ps1?highlight=36-40 "Azure Cosmos DB 계정의 키 가져오기")]
+[!code-powershell[main](../../../powershell_scripts/cosmosdb/get-account-keys/get-account-keys.ps1?highlight=36-40 "Get the keys for an Azure Cosmos DB account")]
 
 ## <a name="clean-up-deployment"></a>배포 정리
 
@@ -46,7 +43,7 @@ Remove-AzureRmResourceGroup -ResourceGroupName "myResourceGroup"
 
 이 스크립트는 다음 명령을 사용합니다. 테이블에 있는 각 명령은 명령에 해당하는 문서에 연결됩니다.
 
-| 명령 | 참고 사항 |
+| 명령 | 메모 |
 |---|---|
 | [New-AzureRmResourceGroup](https://docs.microsoft.com/powershell/resourcemanager/azurerm.resources/v3.5.0/new-azurermresourcegroup) | 모든 리소스가 저장되는 리소스 그룹을 만듭니다. |
 | [New-AzureRmResource](https://docs.microsoft.com/powershell/module/azurerm.resources/new-azurermresource?view=azurermps-3.8.0) | 데이터베이스 또는 탄력적 풀을 호스트하는 논리 서버를 만듭니다. |

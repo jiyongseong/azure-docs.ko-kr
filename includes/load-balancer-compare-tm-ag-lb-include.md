@@ -8,7 +8,7 @@ Microsoft Azure를 사용하여 네트워크 트래픽을 분산하는 다양한
 
 다음 표에서는 각 서비스에서 제공하는 기능을 요약해서 보여 줍니다.
 
-| 부여 | Azure Load Balancer | 응용 프로그램 게이트웨이 | 트래픽 관리자 |
+| 부여 | Azure Load Balancer | Application Gateway | 트래픽 관리자 |
 | --- | --- | --- | --- |
 | 기술 |전송 수준(계층 4) |응용 프로그램 수준(계층 7) |DNS 수준 |
 | 지원되는 응용 프로그램 프로토콜 |모두 |HTTP, HTTPS 및 WebSockets |모두(HTTP 끝점은 끝점 모니터링에 필요함) |

@@ -1,12 +1,12 @@
 ---
-title: "Azure 서버를 사용하지 않음 개요 | Microsoft Docs"
-description: "인프라에 대한 염려 없이 클라우드에서 강력한 솔루션을 만듭니다."
-keywords: 
+title: Azure 서버를 사용하지 않음 개요 | Microsoft Docs
+description: 인프라에 대한 염려 없이 클라우드에서 강력한 솔루션을 만듭니다.
+keywords: ''
 services: logic-apps
 author: jeffhollan
 manager: anneta
-editor: 
-documentationcenter: 
+editor: ''
+documentationcenter: ''
 ms.assetid: d565873c-6b1b-4057-9250-cf81a96180ae
 ms.service: logic-apps
 ms.workload: integration
@@ -15,12 +15,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/30/2017
 ms.author: LADocs; jehollan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2db2ba16c06f49fd851581a1088df21f5a87a911
-ms.openlocfilehash: ae74dda6337c04eea0641930d1ec6ab7570c5486
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/09/2017
-
+ms.openlocfilehash: 30c7dd36efca5ffcae770fe310a43a107d9136af
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
 # <a name="overview-of-azure-serverless-with-functions-and-logic-apps"></a>함수 및 Logic Apps로 Azure 서버를 사용하지 않음 개요
 
@@ -42,11 +41,11 @@ Azure Functions를 바로 시작하려면 [첫 번째 Azure 함수 만들기](..
 
 Azure Logic Apps는 클라우드에서 확장 가능한 통합 및 워크플로를 단순화하고 구현하는 방법을 제공합니다. 모델에 비주얼 디자이너를 제공하고 프로세스를 워크플로라는 일련의 단계로 자동화합니다.  클라우스 및 온-프레미스 서비스에는 서버를 사용하지 않는 앱을 다른 API에 신속하게 연결하는 [많은 커넥터](../connectors/apis-list.md)가 있습니다.  논리 앱은 ('Dynamics CRM에 계정을 추가하는 경우'와 같이) 트리거로 시작하고 실행 후에 여러 조합 작업, 변환 및 조건 논리 실행을 시작할 수 있습니다.  Logic Apps는 프로세스에서 다른 Azure Functions를 오케스트레이션하는 경우(특히 프로세스가 외부 시스템 또는 API와 상호 작용해야 하는 경우) 탁월한 선택입니다.
 
-Logic Apps를 시작하려면 [첫 번째 논리 앱 만들기](logic-apps-create-a-logic-app.md)로 시작합니다.  Logic Apps에 대한 자세한 기술 정보는 [개발자 참조](logic-apps-workflow-actions-triggers.md)를 참조하세요.
+Logic Apps를 시작하려면 [첫 번째 논리 앱 만들기](quickstart-create-first-logic-app-workflow.md)로 시작합니다.  Logic Apps에 대한 자세한 기술 정보는 [개발자 참조](logic-apps-workflow-actions-triggers.md)를 참조하세요.
 
 ## <a name="how-can-i-build-and-deploy-serverless-applications-in-azure"></a>Azure에서 서버를 사용하지 않는 응용 프로그램을 빌드 및 배포하려면 어떻게 해야 합니까?
 
-Azure는 서버를 사용하지 않는 앱의 개발, 배포 및 관리에 대한 풍부한 도구 집합을 제공합니다.  앱은 Azure Portal에서 직접 빌드하거나 [Visual Studio의 도구](logic-apps-serverless-get-started-vs.md)를 사용하여 빌드할 수 있습니다.  응용 프로그램이 개발되면 [즉시 배포](logic-apps-create-deploy-template.md)될 수 있습니다.  Azure는 또한 서버를 사용하지 않는 앱에 대한 모니터링을 제공합니다.  이 모니터링은 API 또는 SDK를 통해 Azure Portal에서 액세스하거나 OMS 및 Application Insights에 대해 통합된 도구를 사용하여 액세스할 수 있습니다.
+Azure는 서버를 사용하지 않는 앱의 개발, 배포 및 관리에 대한 풍부한 도구 집합을 제공합니다.  앱은 Azure Portal에서 직접 빌드하거나 [Visual Studio의 도구](logic-apps-serverless-get-started-vs.md)를 사용하여 빌드할 수 있습니다.  응용 프로그램이 개발되면 [즉시 배포](logic-apps-create-deploy-template.md)될 수 있습니다.  Azure는 또한 서버를 사용하지 않는 앱에 대한 모니터링을 제공합니다.  이 모니터링은 API 또는 SDK를 통해 Azure Portal에서 액세스하거나 Log Analytics 및 Application Insights에 대해 통합된 도구를 사용하여 액세스할 수 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
 

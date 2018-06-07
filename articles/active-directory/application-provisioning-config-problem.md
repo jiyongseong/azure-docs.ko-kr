@@ -1,11 +1,11 @@
 ---
-title: "Azure AD 갤러리 응용 프로그램에 대해 사용자 프로비전 구성 문제 | Microsoft Docs"
-description: "Azure AD 응용 프로그램 갤러리에 이미 나열된 응용 프로그램에 대한 사용자 프로비전을 구성할 때 발생하는 일반적인 문제를 해결하는 방법"
+title: Azure AD 갤러리 응용 프로그램에 대해 사용자 프로비전 구성 문제 | Microsoft Docs
+description: Azure AD 응용 프로그램 갤러리에 이미 나열된 응용 프로그램에 대한 사용자 프로비전을 구성할 때 발생하는 일반적인 문제를 해결하는 방법
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: ajamess
-manager: femila
-ms.assetid: 
+manager: mtillman
+ms.assetid: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
@@ -13,14 +13,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0d6f6fb24f1f01d703104f925dcd03ee1ff46062
-ms.openlocfilehash: e15784a662b1691774eb3d9cc8b3fbe66ac67385
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/18/2017
-
+ms.openlocfilehash: 9fcfee9cbbeb01422e7d9e92d90b908e054f96da
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
-
 # <a name="problem-configuring-user-provisioning-to-an-azure-ad-gallery-application"></a>Azure AD 갤러리 응용 프로그램에 대해 사용자 프로비전 구성 문제
 
 앱에 대해 [자동 사용자 프로비전](https://docs.microsoft.com/azure/active-directory/active-directory-saas-app-provisioning)을 구성하려면(지원되는 경우) 자동 프로비전에 대해 응용 프로그램을 준비하는 특정 지침을 따라야 합니다. 그런 다음 Azure Portal에서 프로비전 서비스를 구성하여 사용자 계정을 응용 프로그램에 동기화할 수 있습니다.
@@ -60,14 +58,13 @@ Azure Portal의 **Azure Active Directory &gt; 엔터프라이즈 응용 프로�
 
 감사 로그에 사용자가 “생략”으로 표시되면 로그 메시지의 확장되는 세부 정보를 읽고 이유를 확인해야 합니다. 다음은 일반적인 원인과 해결 방법입니다.
 
--   **특성 값에 따라 사용자를 필터링하는** **범위 지정 필터가 구성되었습니다**. 범위 지정 필터에 대한 자세한 내용은 <https://docs.microsoft.com/azure/active-directory/active-directory-saas-scoping-filters>를 참조하세요.
+-   **특성 값에 따라 사용자를 필터링하는** **범위 지정 필터가 구성되었습니다**. 필터를 범위 지정하는 방법에 대한 자세한 내용은 <https://docs.microsoft.com/azure/active-directory/active-directory-saas-scoping-filters>를 참조하세요.
 
 -   **사용자가 “실질적으로 권한을 부여받지 않았습니다.”** 이 특정 오류 메시지가 표시되는 경우 Azure AD에 저장된 사용자 할당 레코드에 문제가 있기 때문입니다. 이 문제를 해결하려면 앱에서 사용자(또는 그룹)의 할당을 취소하고 다시 할당하세요. 할당에 대한 자세한 내용은 <https://docs.microsoft.com/azure/active-directory/active-directory-coreapps-assign-user-azure-portal>을 참조하세요.
 
--   **사용자에게 필요한 특성이 누락되었거나 입력되지 않았습니다.** 프로비전을 설정할 때 고려해야 할 중요한 사항은 Azure AD에서 응용 프로그램으로 이동하는 사용자(또는 그룹)를 정의하는 특성 매핑 및 워크플로를 검토하고 구성하는 것입니다. 여기에는 두 시스템 간 사용자/그룹을 고유하게 식별하고 일치하는 데 사용되는 “일치하는 속성” 설정이 포함됩니다. 이 중요한 프로세스에 대한 자세한 내용은 <https://docs.microsoft.com/azure/active-directory/active-directory-saas-customizing-attribute-mappings>를 참조하세요.
+-   **사용자에게 필요한 특성이 누락되었거나 입력되지 않았습니다.** 프로비전을 설정할 때 고려해야 할 중요한 사항은 Azure AD에서 응용 프로그램으로 이동하는 사용자(또는 그룹)를 정의하는 특성 매핑 및 워크플로를 검토하고 구성하는 것입니다. 여기에는 두 시스템 간 사용자/그룹을 고유하게 식별하고 일치하는 데 사용되는 “일치하는 속성” 설정이 포함됩니다. 이 중요한 프로세스에 대한 자세한 정보는 <https://docs.microsoft.com/azure/active-directory/active-directory-saas-customizing-attribute-mappings>을 참조하세요.
 
    * **그룹에 대한 특성 매핑:** 일부 응용 프로그램에 대해 지원되는 경우, 구성원 외에 그룹 이름 및 그룹 세부 정보 프로비전. **프로비전** 탭에 표시된 그룹 개체의 **매핑**을 사용하거나 사용하지 않도록 설정하여 이 기능을 사용하거나 사용하지 않을 수 있습니다. 그룹 프로비전을 사용하는 경우 특성 매핑을 검토하여 “일치하는 ID”에 적절한 필드를 사용하는지 확인하세요. 이는 표시 이름이나 메일 별칭일 수 있습니다. Azure AD에 일치하는 속성이 비어 있거나 그룹에 대해 입력되어 있지 않은 경우 그룹 및 구성원이 프로비전되지 않습니다.
 
-#<a name="next-steps"></a>다음 단계
+## <a name="next-steps"></a>다음 단계
 [Azure Active Directory를 사용하여 SaaS 응용 프로그램의 사용자를 자동으로 프로비저닝 및 프로비저닝 해제](active-directory-saas-app-provisioning.md)
-

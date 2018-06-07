@@ -1,0 +1,97 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Load Balancer
+metadata:
+  document_id: 
+  title: Load Balancer
+  meta.description: Learn how to use Azure Load Balancer. Quickstarts, tutorials, samples, and more, show you how to deploy a load balancer and load balance traffic to and from virtual machines and cloud resources, and in cross-premises virtual networks.
+  services: load-balancer
+  author: KumudD
+  manager: jeconnoc
+  ms.service: load-balancer
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 04/19/2018
+  ms.author: kumud
+  ms.openlocfilehash: 8ddf35502bb8fd7f6d4e2a83d1f6f37f30ab8857
+  ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 05/03/2018
+abstract:
+  description: Azure Load Balancer의 사용 방법에 대해 알아보세요. 빠른 시작, 자습서, 샘플 등은 부하 분산 장치를 배포하고, 가상 머신 및 클라우드 리소스 간 그리고 크로스-프레미스 가상 네트워크의 트래픽 부하를 분산하는 방법을 보여줍니다.
+sections:
+- title: 5분 빠른 시작
+  items:
+  - type: paragraph
+    text: 부하 분산 장치를 만들고, 백엔드 서버 역할을 하는 가상 머신을 만들고, 가상 머신에 사용자 지정 웹 응용 프로그램을 설치한 다음, 가상 머신 간에 웹앱의 부하를 분산하는 방법에 대해 알아보세요.
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: https://docs.microsoft.com/en-us/media/common/i_portal.svg
+      text: Azure portal
+      href: /azure/load-balancer/quickstart-create-basic-load-balancer-portal
+    - image:
+        src: https://docs.microsoft.com/en-us/media/logos/logo_powershell.svg
+      text: Azure PowerShell
+      href: /azure/load-balancer/quickstart-create-basic-load-balancer-powershell
+    - image:
+        src: https://docs.microsoft.com/en-us/media/common/cli.svg
+      text: Azure CLI
+      href: /azure/load-balancer/quickstart-create-basic-load-balancer-cli
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: 부하 분산 장치를 만들고 VM에 서비스 부하를 분산하는 방법에 대해 알아보세요.
+  - type: list
+    style: unordered
+    items:
+    - html: <a href="/azure/load-balancer/tutorial-load-balancer-basic-internal-portal">VM에 내부 트래픽 부하 분산</a>
+    - html: <a href="/azure/load-balancer/tutorial-load-balancer-standard-public-zone-redundant-portal">영역 중복 공용 표준 부하 분산 장치 만들기</a>
+    - html: <a href="/azure/load-balancer/tutorial-load-balancer-standard-public-zonal-portal">영역 내에 VM 부하 분산</a>
+- title: >
+    무료 Pluralsight 동영상 교육
+  items:
+  - type: list
+    style: cards
+    className: cardsFTitle
+    items:
+    - title: Microsoft Azure Networking 구현
+      href: https://app.pluralsight.com/library/courses/microsoft-azure-networking-implementing/table-of-contents
+      image:
+        src: https://docs.microsoft.com/media/logos/logo_pluralsight.svg
+        href: https://app.pluralsight.com/library/courses/microsoft-azure-networking-implementing/table-of-contents
+    - title: Microsoft Azure Networking Solutions 계획 및 설계
+      href: https://app.pluralsight.com/library/courses/planning-designing-microsoft-azure-network-solutions/table-of-contents
+      image:
+        src: https://docs.microsoft.com/media/logos/logo_pluralsight.svg
+        href: https://app.pluralsight.com/library/courses/planning-designing-microsoft-azure-network-solutions/table-of-contents
+    - title: AWS 관리자용 Microsoft Azure 관리
+      href: https://app.pluralsight.com/library/courses/azure-administration-aws-administrators/table-of-contents
+      image:
+        src: https://docs.microsoft.com/media/logos/logo_pluralsight.svg
+        href: https://app.pluralsight.com/library/courses/azure-administration-aws-administrators/table-of-contents
+- title: 샘플
+  items:
+  - type: paragraph
+    text: 일반 작업에 대한 스크립트 샘플입니다.
+  - type: list
+    style: unordered
+    className: spaced noBullet
+    items:
+    - html: <a href="/azure/load-balancer/cli-samples">Azure CLI</a>
+    - html: <a href="/azure/load-balancer/powershell-samples">PowerShell</a>
+- title: 참고 자료
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: 명령줄
+      html: <p><a href="/powershell/module/azurerm.network#networking">PowerShell</a></p><p><a href="/cli/azure/network">Azure CLI</a></p>
+    - title: 언어
+      html: <p><a href="/dotnet/api/overview/azure/network">.NET</a></p><p><a href="/java/api/com.microsoft.azure.management.network">Java</a></p><p><a href="http://azure.github.io/azure-sdk-for-node/azure-arm-network/latest/LoadBalancers.html">Node.js</a></p><p><a href="http://azure-sdk-for-python.readthedocs.io/en/latest/ref/azure.mgmt.network.operations.html#azure.mgmt.network.operations.LoadBalancersOperations#azure.mgmt.network.operations.LoadBalancersOperations">Python</a></p>
+    - title: REST (영문)
+      html: <p><a href="/rest/api/load-balancer/">REST API 참조</a></p>

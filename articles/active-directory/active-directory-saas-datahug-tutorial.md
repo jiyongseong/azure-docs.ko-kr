@@ -1,10 +1,10 @@
 ---
-title: "자습서: Datahug와 Azure Active Directory 통합 | Microsoft 문서"
-description: "Azure Active Directory 및 Datahug 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Datahug와 Azure Active Directory 통합 | Microsoft 문서'
+description: Azure Active Directory 및 Datahug 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: 5c0dc1ea-7ff4-4554-b60b-0f2fa9f5abaa
 ms.service: active-directory
 ms.workload: identity
@@ -13,12 +13,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/18/2017
 ms.author: jeedes
-translationtype: Human Translation
-ms.sourcegitcommit: e0bfa7620feeb1bad33dd2fe4b32cb237d3ce158
-ms.openlocfilehash: ec431dd5ccfa53e4b975e46da247704dd1e15c2c
-ms.lasthandoff: 04/21/2017
-
-
+ms.openlocfilehash: 929b63ea3d78aafe6b96af40b9dce4decbd295b1
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-datahug"></a>자습서: Datahug와 Azure Active Directory 통합
 
@@ -30,7 +29,7 @@ Datahug를 Azure AD와 통합하면 다음과 같은 이점이 제공됩니다.
 - 사용자가 해당 Azure AD 계정으로 Datahug에 자동으로 로그온(Single Sign-on)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -58,7 +57,7 @@ Datahug의 Azure AD 통합을 구성하려면 갤러리의 Datahug를 관리되�
 
 **갤러리에서 Datahug를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Active Directory][1]
 
@@ -87,11 +86,11 @@ Single Sign-On이 작동하려면 Azure AD에서 Azure AD 사용자에 해당하
 
 Datahug에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구성 요소를 완료해야 합니다.
 
-1. **[Azure AD Single Sign-On 구성](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
-2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
+1. **[Configuring Azure AD Single Sign-On](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
+2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On 테스트하는 데 사용합니다.
 3. **[Datahug 테스트 사용자 만들기](#creating-a-datahug-test-user)** - Britta Simon의 Azure AD 표현과 연결되는 대응 사용자를 Datahug에 만듭니다.
 4. **[Azure AD 테스트 사용자 할당](#assigning-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Testing Single Sign-On](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
+5. **[Single Sign-On 테스트](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
 
 ### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -101,23 +100,23 @@ Datahug에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 
 
 1. Azure Portal의 **Datahug** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single Sign-On** 대화 상자에서 **모드**를 **SAML 기반 로그온**으로 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-On 구성](./media/active-directory-saas-datahug-tutorial/tutorial_datahug_samlbase.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-datahug-tutorial/tutorial_datahug_samlbase.png)
 
 3. **Datahug 도메인 및 URL** 섹션에서 **IDP 시작 모드**로 응용 프로그램을 구성하려는 경우 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-datahug-tutorial/tutorial_datahug_ur1.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-datahug-tutorial/tutorial_datahug_ur1.png)
 
     a. **식별자** 텍스트 상자에서 `https://apps.datahug.com/identity/<uniqueID>` 패턴을 사용하여 URL을 입력합니다.
 
-    b. **회신 URL** 텍스트 상자에 다음 패턴으로 URL을 입력합니다.`https://apps.datahug.com/identity/<uniqueID>/acs`
+    나. **회신 URL** 텍스트 상자에 다음 패턴으로 URL을 입력합니다.`https://apps.datahug.com/identity/<uniqueID>/acs`
 
 4. **고급 URL 설정 표시**를 선택합니다. **SP** 시작 모드에서 응용 프로그램을 구성하려면:
 
-    ![Single Sign-on 구성](./media/active-directory-saas-datahug-tutorial/tutorial_datahug_url2.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-datahug-tutorial/tutorial_datahug_url2.png)
 
     **로그온 URL** 텍스트 상자에 URL을 입력합니다. `https://apps.datahug.com/`
      
@@ -126,23 +125,23 @@ Datahug에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 
 
 5. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 메타데이터 파일을 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-datahug-tutorial/tutorial_datahug_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-datahug-tutorial/tutorial_datahug_certificate.png) 
 
-6.  **“고급 인증서 서명 설정 표시”**를 선택하고 다음 단계를 수행합니다.
+6.  **“고급 인증서 서명 설정 표시”** 를 선택하고 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-datahug-tutorial/tutorial_datahug_cert.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-datahug-tutorial/tutorial_datahug_cert.png)
 
     a. **서명 옵션**에서 **SAML 어설션 서명**을 선택합니다.
     
-    b. **서명 알고리즘**에서 **SHA1**을 선택합니다.
+    나. **서명 알고리즘**에서 **SHA1**을 선택합니다.
  
 7. **저장** 단추를 클릭합니다.
 
-    ![Single Sign-On 구성](./media/active-directory-saas-datahug-tutorial/tutorial_general_400.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-datahug-tutorial/tutorial_general_400.png)
     
 8. **Datahug 구성** 섹션에서 **Datahug 구성**을 클릭하여 **로그온 구성** 창을 엽니다. **빠른 참조 섹션**에서 **SAML 엔터티 ID** 및 **SAML Single Sign-On 서비스 URL**을 복사합니다.
 
-    ![Single Sign-On 구성](./media/active-directory-saas-datahug-tutorial/tutorial_datahug_configure.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-datahug-tutorial/tutorial_datahug_configure.png) 
 
 9. **Datahug** 쪽에서 Single Sign-On을 구성하려면 다운로드한 **메타데이터 XML**, **SAML 엔터티 ID** 및 **SAML Single Sign-On 서비스 URL**을 [Datahug 지원](http://datahug.com/about/contact-us/)으로 보내야 합니다. 그러면 이 응용 프로그램에서 SAML SSO 연결이 양쪽에 제대로 설정되도록 설정합니다.
 
@@ -175,9 +174,9 @@ Datahug에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -203,7 +202,7 @@ Datahug의 경우 프로비전은 수동 작업입니다.
     ![직원 추가](./media/active-directory-saas-datahug-tutorial/3.png)
 
     > [!NOTE] 
-    > **환영 메일 보내기** 확인란을 선택하여 사용자에게 등록 메일을 보낼 수 있습니다.    
+    > **환영 메일 보내기** 확인란을 선택하여 사용자에게 등록 메일을 보낼 수 있습니다.  
     > Salesforce에 대한 계정을 만들 경우 환영 메일을 보내지 마세요.
 
 ### <a name="assigning-the-azure-ad-test-user"></a>Azure AD 테스트 사용자 할당
@@ -220,7 +219,7 @@ Datahug의 경우 프로비전은 수동 작업입니다.
 
 2. 응용 프로그램 목록에서 **Datahug**를 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-datahug-tutorial/tutorial_datahug_app.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-datahug-tutorial/tutorial_datahug_app.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -244,7 +243,7 @@ Datahug의 경우 프로비전은 수동 작업입니다.
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -261,5 +260,4 @@ Datahug의 경우 프로비전은 수동 작업입니다.
 [201]: ./media/active-directory-saas-datahug-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-datahug-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-datahug-tutorial/tutorial_general_203.png
-
 

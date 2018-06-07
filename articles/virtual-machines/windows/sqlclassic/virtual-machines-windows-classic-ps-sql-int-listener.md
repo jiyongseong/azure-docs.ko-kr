@@ -1,11 +1,11 @@
 ---
-title: "Azure에서 Always On 가용성 그룹에 대한 ILB 수신기 구성 | Microsoft Docs"
-description: "이 자습서에서는 클래식 배포 모델을 사용하여 만든 리소스를 사용하며, Azure에서 내부 부하 분산 장치를 사용하는 Always On 가용성 그룹 수신기를 만듭니다."
+title: Azure에서 Always On 가용성 그룹에 대한 ILB 수신기 구성 | Microsoft Docs
+description: 이 자습서에서는 클래식 배포 모델을 사용하여 만든 리소스를 사용하며, Azure에서 내부 부하 분산 장치를 사용하는 Always On 가용성 그룹 수신기를 만듭니다.
 services: virtual-machines-windows
 documentationcenter: na
 author: MikeRayMSFT
-manager: jhubbard
-editor: 
+manager: craigg
+editor: ''
 tags: azure-service-management
 ms.assetid: 291288a0-740b-4cfa-af62-053218beba77
 ms.service: virtual-machines-sql
@@ -15,13 +15,11 @@ ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 ms.date: 05/02/2017
 ms.author: mikeray
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 857267f46f6a2d545fc402ebf3a12f21c62ecd21
-ms.openlocfilehash: fea70b389b1f1d6af963e3f14fdc48e8d857dd53
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/28/2017
-
-
+ms.openlocfilehash: 0466265ad5a24e8ea6dc5079e2b4006d74e7dde0
+ms.sourcegitcommit: d74657d1926467210454f58970c45b2fd3ca088d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/28/2018
 ---
 # <a name="configure-an-ilb-listener-for-always-on-availability-groups-in-azure"></a>Azure에서 Always On 가용성 그룹에 대한 ILB 수신기 구성
 > [!div class="op_single_selector"]
@@ -135,7 +133,7 @@ Azure 복제본을 호스트하는 각 VM에 대해 부하가 분산된 끝점�
         # Define variables
         $ClusterNetworkName = "<MyClusterNetworkName>" # the cluster network name (Use Get-ClusterNetwork on Windows Server 2012 of higher to find the name)
         $IPResourceName = "<IPResourceName>" # the IP address resource name
-        $ILBIP = “<X.X.X.X>” # the IP address of the ILB
+        $ILBIP = "<X.X.X.X>" # the IP address of the ILB
 
         Import-Module FailoverClusters
 
@@ -146,7 +144,7 @@ Azure 복제본을 호스트하는 각 VM에 대해 부하가 분산된 끝점�
         # Define variables
         $ClusterNetworkName = "<MyClusterNetworkName>" # the cluster network name (Use Get-ClusterNetwork on Windows Server 2012 of higher to find the name)
         $IPResourceName = "<IPResourceName>" # the IP address resource name
-        $ILBIP = “<X.X.X.X>” # the IP address of the ILB
+        $ILBIP = "<X.X.X.X>" # the IP address of the ILB
 
         Import-Module FailoverClusters
 
@@ -168,4 +166,3 @@ Azure 복제본을 호스트하는 각 VM에 대해 부하가 분산된 끝점�
 
 ## <a name="next-steps"></a>다음 단계
 [!INCLUDE [Listener-Next-Steps](../../../../includes/virtual-machines-ag-listener-next-steps.md)]
-

@@ -1,10 +1,10 @@
 ---
-title: "인터넷 연결 부하 분산 장치 만들기 - Azure CLI 클래식 | Microsoft Docs"
-description: "Azure CLI를 사용하여 클래식 배포 모델에서 인터넷 연결 부하 분산 장치를 만드는 방법에 대해 알아봅니다."
+title: 인터넷 연결 부하 분산 장치 만들기 - Azure CLI 클래식 | Microsoft Docs
+description: Azure CLI를 사용하여 클래식 배포 모델에서 인터넷 연결 부하 분산 장치를 만드는 방법에 대해 알아봅니다.
 services: load-balancer
 documentationcenter: na
-author: kumudd
-manager: timlt
+author: genlin
+manager: cshepard
 tags: azure-service-management
 ms.assetid: e433a824-4a8a-44d2-8765-a74f52d4e584
 ms.service: load-balancer
@@ -13,21 +13,19 @@ ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/23/2017
-ms.author: kumud
-translationtype: Human Translation
-ms.sourcegitcommit: 0d8472cb3b0d891d2b184621d62830d1ccd5e2e7
-ms.openlocfilehash: da3a908f17ff5c6d3923549a884ecc0a13cb8e9e
-ms.lasthandoff: 03/21/2017
-
+ms.author: genli
+ms.openlocfilehash: bacf135da25a5315e61922179db9a29fa8a152f1
+ms.sourcegitcommit: c52123364e2ba086722bc860f2972642115316ef
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
 ---
-
 # <a name="get-started-creating-an-internet-facing-load-balancer-classic-in-the-azure-cli"></a>Azure CLI에서 인터넷 연결 부하 분산 장치(클래식) 만들기 시작
 
 > [!div class="op_single_selector"]
-> * [Azure 클래식 포털](../load-balancer/load-balancer-get-started-internet-classic-portal.md)
 > * [PowerShell](../load-balancer/load-balancer-get-started-internet-classic-ps.md)
 > * [Azure CLI](../load-balancer/load-balancer-get-started-internet-classic-cli.md)
-> * [Azure 클라우드 서비스](../load-balancer/load-balancer-get-started-internet-classic-cloud.md)
+> * [Azure Cloud Services](../load-balancer/load-balancer-get-started-internet-classic-cloud.md)
 
 [!INCLUDE [load-balancer-get-started-internet-intro-include.md](../../includes/load-balancer-get-started-internet-intro-include.md)]
 
@@ -36,11 +34,11 @@ ms.lasthandoff: 03/21/2017
 
 [!INCLUDE [load-balancer-get-started-internet-scenario-include.md](../../includes/load-balancer-get-started-internet-scenario-include.md)]
 
-## <a name="step-by-step-creating-an-internet-facing-load-balancer-using-cli"></a>CLI를 사용하여 인터넷 연결 부하 분산 장치 만들기 단계별 지침
+## <a name="create-an-internet-facing-load-balancer-using-cli"></a>CLI를 사용하여 인터넷 연결 부하 분산 장치 만들기
 
 이 가이드에서는 위의 시나리오에 따라 인터넷 부하 분산 장치를 만드는 방법을 보여줍니다.
 
-1. Azure CLI를 처음 사용하는 경우 [Azure CLI 설치 및 구성](../cli-install-nodejs.md) 을 참조하고 Azure 계정 및 구독을 선택하는 부분까지 관련 지침을 따릅니다.
+1. Azure CLI를 처음 사용하는 경우 [Azure CLI 설치 및 구성](../cli-install-nodejs.md)을 참조하고 Azure 계정 및 구독을 선택하는 부분까지 관련 지침을 따릅니다.
 2. 아래와 같이 **azure config mode** 명령을 실행하여 클래식 모드로 전환합니다.
 
     ```azurecli
@@ -53,26 +51,26 @@ ms.lasthandoff: 03/21/2017
 
 ## <a name="create-endpoint-and-load-balancer-set"></a>끝점과 부하 분산 장치 집합 만들기
 
-시나리오는 가상 컴퓨터 "web1" 및 "web2"가 만들어졌다고 가정합니다.
+시나리오는 가상 머신 "web1" 및 "web2"가 만들어졌다고 가정합니다.
 이 가이드를 통해 공용 포트로 포트 80과 로컬 포트로 포트 80을 사용하여 부하 분산 장치 집합을 만듭니다. 또한 프로브 포트가 포트 80에 구성되고 부하 분산 장치 집합을 "lbset"로 지명합니다.
 
 ### <a name="step-1"></a>1단계
 
-가상 컴퓨터 "web1"을 위해 `azure network vm endpoint create` 을 사용하여 첫 번째 끝점과 부하 분산 장치 집합을 만듭니다.
+가상 머신 "web1"을 위해 `azure network vm endpoint create` 을 사용하여 첫 번째 끝점과 부하 분산 장치 집합을 만듭니다.
 
 ```azurecli
 azure vm endpoint create web1 80 --local-port 80 --protocol tcp --probe-port 80 --load-balanced-set-name lbset
 ```
 
-## <a name="step-2"></a>2단계
+### <a name="step-2"></a>2단계
 
-두 번째 가상 컴퓨터 "web2"를 부하 분산 장치 집합에 추가합니다.
+두 번째 가상 머신 "web2"를 부하 분산 장치 집합에 추가합니다.
 
 ```azurecli
 azure vm endpoint create web2 80 --local-port 80 --protocol tcp --probe-port 80 --load-balanced-set-name lbset
 ```
 
-## <a name="step-3"></a>3단계
+### <a name="step-3"></a>3단계
 
 `azure vm show` 를 사용하여 부하 분산 장치 구성을 확인합니다.
 
@@ -124,19 +122,19 @@ azure vm show web1
     data:    Network Endpoints 2 port 58081
     info:    vm show command OK
 
-## <a name="create-a-remote-desktop-endpoint-for-a-virtual-machine"></a>가상 컴퓨터를 위한 원격 데스크톱 끝점 만들기
+## <a name="create-a-remote-desktop-endpoint-for-a-virtual-machine"></a>가상 머신을 위한 원격 데스크톱 끝점 만들기
 
-`azure vm endpoint create`을 사용하여 특정 가상 컴퓨터의 공용 포트에서 로컬 포트로 네트워크 트래픽을 전달하는 원격 데스크톱 끝점을 만들 수 있습니다.
+`azure vm endpoint create`을 사용하여 특정 가상 머신의 공용 포트에서 로컬 포트로 네트워크 트래픽을 전달하는 원격 데스크톱 끝점을 만들 수 있습니다.
 
 ```azurecli
 azure vm endpoint create web1 54580 -k 3389
 ```
 
-## <a name="remove-virtual-machine-from-load-balancer"></a>부하 분산 장치에서 가상 컴퓨터 제거
+## <a name="remove-virtual-machine-from-load-balancer"></a>부하 분산 장치에서 가상 머신 제거
 
-가상 컴퓨터에서 부하 분산 장치 집합에 연결된 끝점을 삭제해야 합니다. 끝점이 제거되면 가상 컴퓨터는 더 이상 부하 분산 장치 집합에 속하지 않습니다.
+가상 머신에서 부하 분산 장치 집합에 연결된 끝점을 삭제해야 합니다. 끝점이 제거되면 가상 컴퓨터는 더 이상 부하 분산 장치 집합에 속하지 않습니다.
 
-위의 예제를 통해 명령 `azure vm endpoint delete`를 사용하여 부하 분산 장치 "lbset"에서 가상 컴퓨터 "web1"을 위해 만들어진 끝점을 제거할 수 있습니다.
+위의 예제를 통해 명령 `azure vm endpoint delete`를 사용하여 부하 분산 장치 "lbset"에서 가상 머신 "web1"을 위해 만들어진 끝점을 제거할 수 있습니다.
 
 ```azurecli
 azure vm endpoint delete web1 tcp-80-80
@@ -152,4 +150,3 @@ azure vm endpoint delete web1 tcp-80-80
 [부하 분산 장치 배포 모드 구성](load-balancer-distribution-mode.md)
 
 [부하 분산 장치에 대한 유휴 TCP 시간 제한 설정 구성](load-balancer-tcp-idle-timeout.md)
-

@@ -1,133 +1,69 @@
 ---
-title: "Azure 구독과 Azure Active Directory의 연관 관계 | Microsoft Docs"
-description: "Microsoft Azure 로그인 및 Azure 구독과 Azure Active Directory 간의 관계와 같은 관련 문제입니다."
+title: Azure AD 디렉터리에 기존 Azure 구독을 추가하는 방법 | Microsoft Docs
+description: Azure AD 디렉터리에 기존 구독을 추가하는 방법
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: curtand
-manager: femila
-editor: 
-ms.assetid: bc4773c2-bc4a-4d21-9264-2267065f0aea
+manager: mtillman
+editor: ''
 ms.service: active-directory
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
+ms.component: users-groups-roles
 ms.topic: get-started-article
-ms.date: 07/24/2017
+ms.date: 12/12/2017
 ms.author: curtand
 ms.reviewer: jeffsta
 ms.custom: oldportal;it-pro;
+ms.openlocfilehash: 6664a2b9bb6375314090bf4dae9190c7d52565d2
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
 ms.translationtype: HT
-ms.sourcegitcommit: bfd49ea68c597b109a2c6823b7a8115608fa26c3
-ms.openlocfilehash: 7a82dcddcd051c88c2a6a515ed2353961307182a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
-# <a name="how-azure-subscriptions-are-associated-with-azure-active-directory"></a>Azure 구독과 Azure Active Directory의 연관 관계
-이 문서에서는 Microsoft Azure 로그인 및 Azure 구독과 Azure Active Directory(Azure AD) 간의 관계와 같은 관련 문제에 대한 정보를 제공합니다.
+# <a name="how-to-associate-or-add-an-azure-subscription-to-azure-active-directory"></a>Azure Active Directory에 Azure 구독을 연결하거나 추가하는 방법
 
-> [!IMPORTANT]
-> 이 문서에서 참조되는 Azure 클래식 포털을 사용하는 대신 Azure Portal에서 [Azure AD 관리 센터](https://aad.portal.azure.com)를 사용하여 Azure AD를 관리하는 것이 좋습니다.
+이 문서에서는 Azure 구독과 Azure Active Directory(Azure AD) 간의 관계와 같은 정보 및 Azure AD 디렉터리에 기존 구독을 추가하는 방법을 다룹니다. Azure 구독은 Azure AD와 트러스트 관계가 있습니다. 즉, 사용자, 서비스 및 장치를 인증하는 디렉터리를 신뢰합니다. 여러 구독에서 동일한 디렉터리를 신뢰할 수 있지만 각 구독은 하나의 디렉터리만 신뢰합니다. 
 
-## <a name="accounts-that-you-can-use-to-sign-in"></a>로그인에 사용할 수 있는 계정
-로그인에 사용할 수 있는 계정부터 살펴보겠습니다. 두 가지 유형의 계정, 즉 Microsoft 계정(이전의 Microsoft Live ID)과 Azure AD에 저장되는 회사 또는 학교 계정이 있습니다.
+구독이 디렉터리와 갖는 트러스트 관계는 구독이 Azure의 다른 리소스(웹 사이트, 데이터베이스 등)와 갖는 관계와 다릅니다. 구독이 만료되면 구독과 연결된 다른 리소스에 대한 액세스도 중지됩니다. 하지만 Azure AD 디렉터리는 Azure에 남아 있으며 해당 디렉터리와 다른 구독을 연결하고 새 구독을 사용하여 디렉터리를 관리할 수 있습니다.
 
-| Microsoft 계정 | Azure AD 계정 |
-| --- | --- |
-| Microsoft에서 제공하는 소비자 ID 시스템 |Microsoft에서 제공하는 기업 ID 시스템 |
-| Hotmail, MSN과 같은 소비자 지향적인 서비스에 대한 인증 |Office 365와 같은 비즈니스 지향적인 서비스에 대한 인증 |
-| 소비자가 자신의 Microsoft 계정을 생성(메일에 등록할 때 등) |회사와 조직이 자신의 회사 또는 학교 계정을 만들고 관리함 |
-| ID가 만들어지고 Microsoft 계정 시스템에 저장됨 |Azure 또는 Office 365와 같은 다른 서비스를 사용하여 ID가 만들어지고 이 ID는 조직에 할당된 Azure AD 인스턴스에 저장됨 |
+모든 사용자는 자신을 인증하는 단일 홈 디렉터리를 가지고 있지만 다른 디렉터리의 게스트가 될 수도 있습니다. Azure AD에서 사용자 계정이 멤버 또는 게스트인 디렉터리만 볼 수 있습니다.
 
-원래 Microsoft 계정 사용자만 Azure에 액세스할 수 있었으나 이제는 이 *두 가지* 시스템의 사용자도 액세스할 수 있습니다. 이렇게 하기 위해 모든 Azure 속성이 인증을 위해 Azure AD를 신뢰하도록 하고, Azure AD가 조직 사용자를 인증하도록 하며, 소비자 사용자를 인증하는 Microsoft 계정 소비자 ID 시스템을 Azure AD가 신뢰하는 위치에 페더레이션 관계를 만들었습니다. 그 결과, Azure AD가 "기본" Azure AD 계정 뿐만 아니라 "게스트" Microsoft 계정도 인증할 수 있습니다.
+## <a name="before-you-begin"></a>시작하기 전에
 
-예를 들어 Microsoft 계정을 가진 사용자가 Azure 클래식 포털에 로그인합니다.
+* 구독에 대해 RBAC 소유자 액세스 권한이 있는 계정으로 로그인해야 합니다.
+* 구독이 연결된 현재 디렉터리 및 추가하려는 디렉터리에 존재하는 계정으로 로그인해야 합니다. 다른 디렉터리에 대한 액세스 권한을 얻는 방법에 대해 알아보려면 [Azure Active Directory 관리자가 B2B 공동 작업 사용자를 추가하는 방법](active-directory-b2b-admin-add-users.md)을 참조하세요.
+* 이 기능은 CSP(MS-AZR-0145P, MS-AZR-0146P, MS-AZR-159P) 및 Microsoft Imagine(MS-AZR-0144P) 구독에 사용할 수 없습니다.
 
-> [!NOTE]
-> Azure 클래식 포털에 로그인하려면 msmith@hotmail.com에 Azure 구독이 있어야 합니다. 구독의 공동 관리자 또는 서비스 관리자 계정이어야 합니다.
->
->
+## <a name="to-associate-an-existing-subscription-to-your-azure-ad-directory"></a>Azure AD 디렉터리에 기존 구독을 연결하려면
 
-![][1]
+1. 로그인하고 [Azure Portal의 구독 페이지](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade)에 구독을 선택합니다.
+2. **디렉터리 변경**을 클릭합니다.
 
-이 Hotmail 주소는 소비자 계정이므로 Microsoft 계정 소비자 ID 시스템에서 로그인을 인증했습니다. Azure AD ID 시스템은 Microsoft 계정 시스템에서 수행한 인증을 신뢰하고 Azure 서비스에 액세스할 수 있는 토큰을 발급합니다.
+    ![디렉터리 변경 단추를 보여 주는 스크린샷](./media/active-directory-how-subscriptions-associated-directory/edit-directory-button.PNG)
+3. 경고를 검토합니다. 구독 디렉터리가 변경되면 액세스 권한이 할당된 모든 [RBAC(역할 기반 액세스 제어)](../role-based-access-control/role-assignments-portal.md) 사용자 및 모든 구독 관리자의 액세스 권한이 손실됩니다.
+4. 디렉터리를 선택합니다.
 
-## <a name="how-an-azure-subscription-is-related-to-azure-ad"></a>Azure 구독과 Azure AD의 연관 관계
-모든 Azure 구독은 Azure AD 인스턴스와 트러스트 관계가 있습니다. 이는 Azure 구독이 사용자, 서비스, 장치를 인증하는 해당 디렉터리를 신뢰함을 의미합니다. 여러 구독에서 동일한 디렉터리를 신뢰할 수 있지만 구독은 하나의 디렉터리만 신뢰합니다. 설정 탭에서 구독이 신뢰하는 디렉터리를 확인할 수 있습니다. 신뢰하는 디렉터리를 변경하도록 [구독 설정을 편집](active-directory-understanding-resource-access.md) 할 수 있습니다.
+    ![디렉터리 변경 UI를 보여 주는 스크린샷](./media/active-directory-how-subscriptions-associated-directory/edit-directory-ui.PNG)
+5. **변경**을 클릭합니다.
+6. 성공! 디렉터리 전환기를 사용하여 새 디렉터리로 이동합니다. 모든 항목이 제대로 표시되는 데 최대 10분이 걸릴 수 있습니다.
 
-구독이 디렉터리와 갖는 이 트러스트 관계는 구독이 Azure의 다른 모든 리소스(웹 사이트, 데이터베이스 등)와 갖는 관계와 다르며 구독의 하위 리소스와 더 유사합니다. 구독이 만료되면 구독과 연결된 다른 리소스에 대한 액세스도 중지됩니다. 하지만 디렉터리는 Azure에 남아 있으며 해당 디렉터리와 다른 구독을 연결하여 디렉터리 사용자를 계속 관리할 수 있습니다.
+    ![디렉터리 변경 성공 알림을 보여 주는 스크린샷](./media/active-directory-how-subscriptions-associated-directory/edit-directory-success.PNG)
 
-마찬가지로, 구독에 표시되는 Azure AD 확장은 Azure 클래식 포털의 다른 확장처럼 작동하지 않습니다. Azure 클래식 포털의 다른 확장은 Azure 구독으로 범위가 제한됩니다. Azure AD 확장에 표시되는 내용은 구독에 따라 달라지지 않고 로그인한 사용자에 따라 디렉터리만 표시됩니다.
+    ![전환기를 보여주는 스크린샷](./media/active-directory-how-subscriptions-associated-directory/directory-switcher.PNG)
 
-모든 사용자는 자신을 인증하는 단일 홈 디렉터리를 가지고 있지만 다른 디렉터리의 게스트가 될 수도 있습니다. Azure AD 확장에 사용자 계정이 구성원인 디렉터리가 모두 표시됩니다. 계정이 구성원이 아닌 디렉터리는 표시되지 않습니다. 디렉터리는 Azure AD의 회사 또는 학교 계정을 위한 토큰이나 Microsoft 계정 사용자(Azure AD가 Microsoft 계정 시스템과 페더레이션되므로)를 위한 토큰을 발급할 수 있습니다.
 
-이 다이어그램에서는 Michael Smith란 사람이 Contoso의 회사 계정을 사용하여 등록한 후의 구독을 보여 줍니다.
+갖고 있는 모든 Azure 키 자격 증명 모음도 구독 이동의 영향을 받으므로 작업을 다시 시작하기 전에 [키 자격 증명 모음 테넌트 ID를 변경](../key-vault/key-vault-subscription-move-fix.md)해야 합니다.
 
-![][2]
-
-## <a name="how-to-manage-a-subscription-and-a-directory"></a>구독 및 디렉터리를 관리하는 방법
-Azure 구독의 관리 역할은 Azure 구독에 연결된 리소스를 관리합니다. 이러한 역할 및 구독 관리 모범 사례는 [Azure Active Directory의 관리자 역할 할당](active-directory-assign-admin-roles.md)에서 다룹니다.
-
-등록할 때 기본적으로 서비스 관리자 역할이 할당됩니다. 다른 사용자가 동일한 구독을 사용하여 로그인하고 서비스에 액세스해야 하는 경우 공동 관리자로 추가할 수 있습니다. 서비스 관리자와 공동 관리자는 Azure 구독이 연결된 디렉터리의 Microsoft 계정이거나 회사 또는 학교 계정일 수 있습니다.
-
-Azure AD는 디렉터리 및 ID 관련 기능을 관리하는 다른 관리 역할 집합을 가지고 있습니다. 예를 들어 디렉터리의 전역 관리자는 디렉터리에 사용자 및 그룹을 추가하거나 사용자에 대해 다단계 인증을 요구할 수 있습니다. 디렉터리를 만든 사용자는 전역 관리자 역할에 할당되어 다른 사용자에게 관리자 역할을 할당할 수 있습니다.
-
-구독 관리자와 마찬가지로 Azure AD 관리 역할은 Microsoft 계정이거나 회사 또는 학교 계정일 수 있습니다. 또한 Azure AD 관리 역할은 Office 365 및 Microsoft Intune과 같은 다른 서비스에서도 사용됩니다. 자세한 내용은 [관리자 역할 할당](active-directory-assign-admin-roles.md)을 참조하세요.
-
-하지만 여기서 중요한 것은 Azure 구독 관리자와 Azure AD 디렉터리 관리자는 서로 다른 개념이라는 점입니다. Azure 구독 관리자는 Azure에서 리소스를 관리할 수 있으며 Azure 클래식 포털이 Azure 리소스이므로 Azure 클래식 포털에서 Active Directory 확장을 볼 수 있습니다. 디렉터리 관리자는 디렉터리에서 속성을 관리할 수 있습니다.
-
-역할을 모두 담당할 수 있지만 그럴 필요는 없습니다. 사용자는 디렉터리 전역 관리자 역할에 할당될 수 있지만 Azure 구독의 공동 관리자 또는 서비스 관리자로 할당될 수는 없습니다. 구독의 관리자가 아니어도 이 사용자는 Azure 클래식 포털에 로그인할 수 없습니다. 하지만 Azure AD PowerShell 또는 Office 365 관리 센터와 같은 다른 도구를 사용하여 디렉터리 관리 작업을 수행할 수 있습니다.
-
-## <a name="why-cant-i-manage-the-directory-with-my-current-user-account"></a>현재 사용자 계정으로 디렉터리를 관리할 수 없는 이유
-사용자가 Azure 구독에 등록하기 전에 회사 또는 학교 계정을 사용하여 Azure 클래식 포털에 로그인할 경우도 있습니다. 이 경우에 사용자는 해당 계정에 대한 구독이 없다는 메시지를 받게 됩니다. 메시지에는 무료 평가판 구독을 시작할 수 있는 링크가 포함됩니다.
-
-무료 평가판에 등록한 후 사용자는 Azure 클래식 포털에서 조직의 디렉터리를 볼 수 있지만 디렉터리 전역 관리자가 아니므로 디렉터리를 관리할 수는 없습니다. 즉, 사용자를 추가하거나 기존 사용자 속성을 편집할 수 없습니다. 구독을 통해 사용자는 Azure 클래식 포털을 사용하고 Azure Active Directory 확장을 볼 수 있지만 디렉터리를 관리하려면 전역 관리자 권한이 추가로 필요합니다.
-
-## <a name="using-your-work-or-school-account-to-manage-an-azure-subscription-that-was-created-by-using-a-microsoft-account"></a>Microsoft 계정을 사용하여 만든 Azure 구독을 회사 또는 학교 계정을 사용하여 관리
-[조직으로 Azure에 등록](sign-up-organization.md) 하고 회사 또는 학교 계정을 사용하여 Azure에서 리소스를 관리하는 것이 가장 좋습니다. 회사 또는 학교 계정은 발급한 조직이 중앙에서 관리하고, Microsoft 계정보다 많은 기능을 갖고 있으며, Azure AD에서 직접 인증하므로 선호됩니다. 동일한 계정은 기업 및 조직에 제공된 Office 365 또는 Microsoft Intune 등의 다른 Microsoft 온라인 서비스에 대한 액세스를 제공합니다. 이러한 다른 속성을 사용하는 계정이 이미 있는 경우 Azure로 동일한 계정을 사용하려는 경우가 많습니다. 또한 Azure 구독을 신뢰하는 해당 속성을 지원하는 Active Directory 인스턴스도 갖게 됩니다.
-
-회사 또는 학교 계정은 Microsoft 계정보다 많은 방법으로 관리할 수도 있습니다. 예를 들어 관리자는 회사 또는 학교 계정의 암호를 재설정하거나 계정에 대한 다단계 인증을 요구할 수 있습니다.
-
-경우에 따라 조직의 사용자가 소비자 Microsoft 계정의 Azure 구독에 연결된 리소스를 관리할 수도 있습니다. 다른 계정이 구독 또는 디렉터리를 관리하도록 전환하는 방법에 대한 자세한 내용은 [Azure에서 Office 365 구독의 디렉터리 관리](#manage-the-directory-for-your-office-365-subscription-in-azure)를 참조하세요.
-
-## <a name="signing-in-when-you-used-your-work-email-for-your-microsoft-account"></a>Microsoft 계정에 업무용 메일을 사용한 경우의 로그인
-지난 번에 업무용 메일을 사용자 ID로 사용하여 소비자 Microsoft 계정을 만들었으면 Microsoft Azure 계정 시스템 또는 Microsoft 계정 시스템에서 선택하라는 페이지가 표시될 수 있습니다.
-
-![][3]
-
-이름이 같은 사용자 계정이 있으며, 하나는 Azure AD에 있고 다른 하나는 소비자 Microsoft 계정 시스템에 있습니다. 사용하려는 Azure 구독과 연결된 계정을 선택해야 합니다. 이 사용자에 대한 구독이 없다는 오류가 발생하면 옵션을 잘못 선택한 것입니다. 로그아웃하고 다시 시도하세요. 로그인을 방해할 수 있는 오류에 대한 자세한 내용은 ["계정과 연결된 구독을 찾지 못했습니다" 오류 문제 해결](https://social.msdn.microsoft.com/Forums/en-US/f952f398-f700-41a1-8729-be49599dd7e2/troubleshooting-we-were-unable-to-find-any-subscriptions-associated-with-your-account-errors-in?forum=windowsazuremanagement)을 참조하세요.
-
-## <a name="manage-the-directory-for-your-office-365-subscription-in-azure"></a>Azure에서 Office 365 구독의 디렉터리 관리
-Azure에 등록하기 전에 Office 365에 등록했다고 가정해 보겠습니다. 이제 Azure 클래식 포털에서 Office 365 구독의 디렉터리를 관리하려고 합니다. 이 작업을 수행하는 방법에는 Azure 등록 여부에 따라 두 가지가 있습니다.
-
-### <a name="i-do-not-have-a-subscription-for-azure"></a>Azure에 대한 구독이 없는 경우
-이 경우 Office 365에 로그인하는 데 사용하는 것과 동일한 회사 또는 학교 계정을 사용하여 [Azure에 등록](sign-up-organization.md) 하기만 하면 됩니다. Office 365 계정의 관련 정보가 Azure 등록 양식에 미리 채워집니다. 계정이 구독의 서비스 관리자 역할에 할당됩니다.  
-
-### <a name="i-do-have-a-subscription-for-azure-using-my-microsoft-account"></a>Azure에 대해 Microsoft 계정을 사용하는 구독이 있는 경우
-회사 또는 학교 계정을 사용하여 Office 365에 등록한 다음 Microsoft 계정을 사용하여 Azure에 등록한 경우에는 두 개의 디렉터리가 있습니다. 하나는 회사 또는 학교용 디렉터리이고, 다른 하나는 Azure에 등록할 때 생성된 기본 디렉터리입니다.
-
-이 두 디렉터리를 모두 Azure 클래식 포털에서 관리하려면 다음 단계를 완료하세요.
-
-> [!NOTE]
-> 이 단계는 사용자가 Microsoft 계정으로 로그인한 경우에만 완료할 수 있습니다. 사용자가 회사 또는 학교 계정으로 로그인했으면 홈 디렉터리(즉, 회사 또는 학교 계정이 저장된 디렉터리 및 회사 또는 학교가 소유한 디렉터리)만 회사 또는 학교 계정을 인증할 수 있으므로 **기존 디렉터리 사용** 옵션을 사용할 수 없습니다.
->
->
-
-1. Microsoft 계정을 사용하여 Azure 클래식 포털에 로그인합니다.
-2. **새로 만들기** > **App services** > **Active Directory** > **디렉터리** > **사용자 지정 만들기**를 클릭합니다.
-3. **기존 디렉터리 사용**을 클릭하고 **지금 로그아웃할 준비가 되었습니다**를 선택하고 확인 표시를 클릭하여 작업을 완료합니다.
-4. 회사 또는 학교 디렉터리에 대한 전역 관리자 권한이 있는 계정을 사용하여 Azure 클래식 포털에 로그인합니다.
-5. **Azure로 Contoso 디렉터리를 사용할까요?**란 메시지가 나타나면 **계속**을 클릭합니다.
-6. **지금 로그아웃**을 클릭합니다.
-7. Microsoft 계정을 사용하여 Azure 클래식 포털에 다시 로그인합니다. Active Directory 확장에 두 디렉터리가 모두 표시됩니다.
+구독 디렉터리 변경은 서비스 수준 작업입니다. 구독 청구 소유권에는 영향을 미치지 않으며 계정 관리자는 [계정 센터](https://account.azure.com/subscriptions)를 사용하여 서비스 관리자를 계속 변경할 수 있습니다. 원래 디렉터리를 삭제하려면 구독 청구 소유권을 새 계정 관리자로 이전해야 합니다. 청구 소유권 이전에 대해 자세히 알아보려면 [Azure 구독의 소유권을 다른 계정으로 이전](../billing/billing-subscription-transfer.md)을 참조하세요. 
 
 ## <a name="next-steps"></a>다음 단계
-* Azure 구독에 대한 관리자를 변경하는 방법을 자세히 알아보려면 [Azure 관리자 역할을 추가 또는 변경하는 방법](../billing/billing-add-change-azure-subscription-administrator.md)
-* Microsoft Azure에서 리소스 액세스를 제어하는 방법을 자세히 알아보려면 [Azure에서 리소스 액세스 이해](active-directory-understanding-resource-access.md)
+
+* 새 Azure AD 디렉터리를 무료로 만드는 방법에 대해 자세히 알아보려면 [Azure Active Directory 테넌트를 얻는 방법](develop/active-directory-howto-tenant.md)을 참조하세요.
+* Azure 구독에 대한 청구 소유권 이전에 대해 자세히 알아보려면 [Azure 구독의 소유권을 다른 계정으로 이전](../billing/billing-subscription-transfer.md)을 참조하세요.
+* Microsoft Azure에서 리소스 액세스를 제어하는 방법을 자세히 알아보려면 [Azure에서 리소스 액세스 이해](../role-based-access-control/rbac-and-directory-admin-roles.md)
 * Azure AD에서 역할을 할당하는 방법에 대한 자세한 내용은 [Azure Active Directory에서 관리자 역할 할당](active-directory-assign-admin-roles-azure-portal.md)
 
 <!--Image references-->
 [1]: ./media/active-directory-how-subscriptions-associated-directory/WAAD_PassThruAuth.png
 [2]: ./media/active-directory-how-subscriptions-associated-directory/WAAD_OrgAccountSubscription.png
 [3]: ./media/active-directory-how-subscriptions-associated-directory/WAAD_SignInDisambiguation.PNG
-

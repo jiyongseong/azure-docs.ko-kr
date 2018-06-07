@@ -14,12 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 03/27/2017
 ms.author: alkohli
-ms.translationtype: HT
-ms.sourcegitcommit: 71fea4a41b2e3a60f2f610609a14372e678b7ec4
 ms.openlocfilehash: d987a4ae170f21532a886552cbe1eb5a0d25fc3f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/12/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-the-service-summary-blade-for-storsimple-8000-series-device"></a>StorSimple 8000 시리즈 장치에 대한 서비스 요약 블레이드 사용
 
@@ -88,5 +87,4 @@ StorSimple Device Manager 내에서 수행된 다양한 작업을 보려면 Stor
 ## <a name="next-steps"></a>다음 단계
 
 * [StorSimple 장치 관리자 서비스를 사용하여 StorSimple 장치를 관리](storsimple-8000-manager-service-administration.md)하는 방법을 자세히 알아봅니다.
-
 

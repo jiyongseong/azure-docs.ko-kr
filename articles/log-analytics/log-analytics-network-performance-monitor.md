@@ -1,319 +1,283 @@
 ---
-title: "Azure Log Analytics의 네트워크 성능 모니터 솔루션 | Microsoft Docs"
-description: "Azure Log Analytics의 네트워크 성능 모니터를 사용하면 네트워크 성능을 거의 실시간으로 모니터링하여 네트워크 성능 병목을 감지하고 찾을 수 있습니다."
+title: Azure의 네트워크 성능 모니터 | Microsoft Docs
+description: Azure의 네트워크 성능 모니터를 사용하면 네트워크 성능을 거의 실시간으로 모니터링하여 네트워크 성능 병목을 감지하고 위치를 찾을 수 있습니다.
 services: log-analytics
-documentationcenter: 
-author: bandersmsft
+documentationcenter: ''
+author: abshamsft
 manager: carmonm
-editor: 
+editor: ''
 ms.assetid: 5b9c9c83-3435-488c-b4f6-7653003ae18a
 ms.service: log-analytics
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 06/07/2017
-ms.author: banders
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 74f34bdbf5707510c682814716aa0b95c19a5503
-ms.openlocfilehash: 5c2cb05ced7841899c2bd19f627d13b86a4b05cc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/09/2017
-
-
+ms.date: 02/20/2018
+ms.author: abshamsft
+ms.openlocfilehash: a3c81d63593bb7bf268c1026064e34c3a363ef86
+ms.sourcegitcommit: 688a394c4901590bbcf5351f9afdf9e8f0c89505
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/18/2018
+ms.locfileid: "34304660"
 ---
-# <a name="network-performance-monitor-solution-in-log-analytics"></a>Log Analytics의 네트워크 성능 모니터 솔루션
+# <a name="network-performance-monitor-solution-in-azure"></a>Azure의 네트워크 성능 모니터 솔루션
 
 ![네트워크 성능 모니터 기호](./media/log-analytics-network-performance-monitor/npm-symbol.png)
 
-이 문서는 Log Analytics에서 네트워크 성능을 거의 실시간으로 모니터링하여 네트워크 성능 병목을 감지하고 찾을 수 있는 Log Analytics의 네트워크 성능 모니터 솔루션을 설정하고 사용하는 방법에 대해 설명합니다. 네트워크 성능 모니터 솔루션에서는 두 네트워크, 서브넷 또는 서버 간 손실과 대기 시간을 모니터링할 수 있습니다. 네트워크 성능 모니터는 트래픽 블랙홀, 라우팅 오류 등의 네트워크 문제와 기존 네트워크 모니터링 방법으로 감지할 수 없는 문제를 감지합니다. 네트워크 성능 모니터는 네트워크 링크의 임계값이 위반될 때 경고와 알림을 표시합니다. 이러한 임계값은 시스템에서 자동으로 학습할 수 있으며 사용자 지정 경고 규칙을 사용하도록 구성할 수도 있습니다. 네트워크 성능 모니터는 네트워크 성능 문제를 빠르게 감지하고 문제의 소스를 특정 네트워크 세그먼트 또는 장치로 지역화합니다.
 
-최근 네트워크 상태 이벤트, 비정상 네트워크 링크, 패킷 손실 및 대기 시간이 높아질 수 있는 서브네트워크 링크를 포함하여 네트워크에 대한 요약 정보를 표시하는 솔루션 대시보드로 네트워크 문제를 감지할 수 있습니다. 네트워크 링크를 드릴다운하여 서브네트워크 링크의 현재 상태와 노드 간 링크를 볼 수 있습니다. 또한 네트워크, 서브네트워크, 노드 간 수준에서 손실 및 대기 시간의 지난 추세를 볼 수 있습니다. 패킷 손실 및 대기 시간에 대한 기존 추세 차트를 확인해서 일시적인 네트워크 문제를 감지하고 토폴로지 맵에서 네트워크 병목을 확인할 수 있습니다. 인터랙티브 토폴로지 그래프에서는 홉-홉 네트워크 경로를 시각화하고 문제의 소스를 확인할 수 있습니다. 다른 솔루션과 달리, 다양한 분석 요구 사항에 Log Search를 사용하여 네트워크 성능 모니터에서 수집한 데이터를 기준으로 사용자 지정 보고서를 만들 수 있습니다.
+네트워크 성능 모니터는 네트워크 인프라의 다양한 지점 간 네트워크 성능을 모니터링하는 데 도움이 되는 클라우드 기반 하이브리드 네트워크 모니터링 솔루션입니다. 또한 서비스 및 응용 프로그램 엔드포인트에 대한 네트워크 연결을 모니터링하고 Azure ExpressRoute의 성능을 모니터링하는 데 도움이 됩니다. 
 
-이 솔루션은 가상 트랜잭션을 기본 메커니즘으로 사용하여 네트워크 장애를 감지합니다. 따라서 특정 네트워크 장치의 공급업체 또는 모델과 상관없이 사용할 수 있으며 온-프레미스, 클라우드(IaaS), 하이브리드 환경에서 작동합니다. 이 솔루션은 네트워크 토폴로지와 네트워크의 다양한 경로를 자동으로 검색합니다.
+네트워크 성능 모니터는 트래픽 블랙홀링, 라우팅 오류와 같은 네트워크 문제와 기존 네트워크 모니터링 방법으로 감지할 수 없는 문제를 감지합니다. 이 솔루션은 네트워크 링크에 임계값이 위반되면 경고를 생성하고 사용자에게 알립니다. 또한 네트워크 성능 문제를 적시에 감지하고 문제의 원인을 특정 네트워크 세그먼트 또는 장치로 국한시킵니다. 
 
-일반적인 네트워크 모니터링 제품은 주로 네트워크 장치(라우터, 스위치 등)의 상태를 모니터링하지만 네트워크 성능 모니터가 하는 기능인 두 지점 간 네트워크 연결의 실제 품질에 대한 정보 제공을 하지 않습니다.
+네트워크 성능 모니터는 세 가지 광범위한 기능을 제공합니다. 
 
-### <a name="using-the-solution-standalone"></a>솔루션을 독립 실행형으로 사용
-중요 워크로드, 네트워크, 데이터 센터 또는 지점 사이트 간 네트워크 연결 품질을 모니터링하려는 경우 네트워크 성능 모니터 솔루션만 사용하여 다음 간 연결 상태를 모니터링할 수 있습니다.
+* [성능 모니터](log-analytics-network-performance-monitor-performance-monitor.md): 클라우드 배포 및 온-프레미스 위치, 여러 데이터 센터, 지점, 업무에 중요한 다중 계층 응용 프로그램 또는 마이크로 서비스 간의 네트워크 연결을 모니터링할 수 있습니다. 성능 모니터를 사용하면 사용자가 불만을 제기하기 전에 네트워크 문제를 감지할 수 있습니다.
 
-* 공용 또는 사설 네트워크를 사용하여 연결된 여러 데이터 센터 또는 지점 사이트 사이
-* 기간 업무 애플리케이션을 실행하는 중요 워크로드 사이
-* IaaS(VM)를 사용할 수 있고 온-프레미스 네트워크와 클라우드 네트워크 간 통신이 가능하도록 게이트웨이를 구성한 경우 Microsoft Azure 또는 AWS(Amazon Web Services) 등의 공용 Cloud Services와 사내 네트워크 사이
-* Express Route를 사용하는 경우 Azure 및 온-프레미스 네트워크
+* [서비스 엔드포인트 모니터](log-analytics-network-performance-monitor-service-endpoint.md): 관심 있는 서비스에 대한 사용자의 연결을 모니터링하고 경로에 어떤 인프라가 있는지 판단하고 네트워크 병목 현상이 발생하는 위치를 식별할 수 있습니다. 사용자보다 먼저 중단에 대해 알 수 있고, 네트워크 경로에서 문제의 위치를 정확히 볼 수 있습니다. 
 
-### <a name="using-the-solution-with-other-networking-tools"></a>다른 네트워킹 도구와 함께 솔루션 사용
-기간 업무 애플리케이션을 모니터링하려는 경우 다른 네트워크 도구에 대한 도우미 솔루션으로 네트워크 성능 모니터 솔루션을 사용할 수 있습니다. 네트워크가 느릴 경우 애플리케이션이 느려질 수 있으며 네트워크 성능 모니터를 사용하면 기본 네트워킹 문제로 인해 발생한 애플리케이션 성능 문제를 조사할 수 있습니다. 이 솔루션은 네트워크 장치에 액세스할 필요가 없으므로 애플리케이션 관리자는 네트워크가 애플리케이션에 어떤 영향을 미치고 있는지에 대한 정보를 제공하기 위해 네트워킹 팀에 의존하지 않아도 됩니다.
+    이 기능을 사용하면 HTTP, HTTPS, TCP 및 ICMP를 기반으로 테스트를 수행하여 서비스의 가용성 및 응답 시간을 거의 실시간으로 또는 시간별로 모니터링할 수 있습니다. 또한 패킷 손실 및 대기 시간에 대한 네트워크의 영향도 모니터링할 수 있습니다. 네트워크 토폴로지 맵을 통해 네트워크 속도 저하를 격리시킬 수 있습니다. 각 홉의 대기 시간 데이터를 통해, 노드에서 서비스로 가는 네트워크 경로에서 발생하는 문제 지점을 식별할 수 있습니다. 기본 제공 테스트를 통해 사전 구성 없이 Office 365, Dynamics CRM에 대한 네트워크 연결을 모니터링할 수 있습니다. 이 기능을 사용하여 웹 사이트, SaaS 응용 프로그램, PaaS 응용 프로그램, SQL 데이터베이스 등과 같은 TCP 지원 엔드포인트에 대한 네트워크 연결을 모니터링할 수 있습니다.
 
-또한 대부분의 기존 네트워크 모니터링 솔루션은 손실, 대기 시간과 같은 종단 간 네트워크 성능에 대한 정보를 제공하지 않기 때문에 이미 다른 네트워크 모니터링 도구에 투자한 경우에는 기존 도구를 보완할 수 있습니다.  네트워크 성능 모니터 솔루션은 그 차이를 좁혀줍니다.
+* [ExpressRoute 모니터](log-analytics-network-performance-monitor-expressroute.md): Azure ExpressRoute를 통해 지사와 Azure 간의 종단 간 연결 및 성능을 모니터링합니다.  
 
-## <a name="installing-and-configuring-agents-for-the-solution"></a>솔루션의 에이전트 설치 및 구성
-[Log Analytics에 Windows 컴퓨터 연결](log-analytics-windows-agents.md) 및 [Log Analytics에 Operations Manager 연결](log-analytics-om-agents.md)에 나와 있는 기본 프로세스에 따라 에이전트를 설치합니다.
+[네트워크 성능 모니터](https://docs.microsoft.com/azure/networking/network-monitoring-overview)에서 지원하는 다양한 기능에 대한 자세한 내용은 온라인으로 제공됩니다.
+ 
+## <a name="supported-regions"></a>지원되는 지역
+NPM은 다음 지역 중 한 곳에서 호스트되는 작업 영역에서 전 세계에 모든 곳에 있는 네트워크와 응용 프로그램 간의 연결을 모니터링할 수 있습니다.
+* 서유럽
+* 미국 중서부
+* 미국 동부
+* 동남아시아
+* 오스트레일리아 동남부
+* 영국 남부
+* 미국 버지니아 주 정부
 
-> [!NOTE]
-> 네트워크 리소스를 검색 및 모니터링하는 데 충분한 데이터를 확보하려면 2개 이상의 에이전트를 설치해야 합니다. 그렇지 않을 경우 추가 에이전트를 설치 및 구성할 때까지 솔루션이 구성 중 상태로 유지됩니다.
->
->
-
-### <a name="where-to-install-the-agents"></a>에이전트 설치 위치
-에이전트를 설치하기 전에 네트워크 토폴로지 및 모니터링할 네트워크 부분을 고려하십시오. 모니터링하려는 각 서브넷에 대해 둘 이상의 에이전트를 설치하는 것이 좋습니다. 즉, 모니터링하려는 모든 서브넷에 대해 둘 이상의 서버 또는 VM을 선택하고 여기에 에이전트를 설치합니다.
-
-네트워크 토폴로지를 확실히 모를 경우 네트워크 성능을 모니터링하려는 중요 워크로드가 있는 서버에 에이전트를 설치합니다. 예를 들어 웹 서버와 SQL Server를 실행하는 서버 간 네트워크 연결을 추적하려는 경우가 있습니다. 이 예에서는 두 서버에 에이전트를 설치합니다.
-
-에이전트는 호스트 자체가 아닌 호스트 사이의 네트워크 연결(링크)을 모니터링합니다. 따라서 네트워크 링크를 모니터링하려면 해당 링크의 두 끝점에 에이전트를 설치해야 합니다.
-
-### <a name="configure-agents"></a>에이전트 구성
-
-가상 트랜잭션에 ICMP 프로토콜을 사용하려는 경우 ICMP를 안정적으로 활용하기 위해 다음 방화벽 규칙을 사용하도록 설정해야 합니다.
-
-```
-netsh advfirewall firewall add rule name="NPMDICMPV4Echo" protocol="icmpv4:8,any" dir=in action=allow
-netsh advfirewall firewall add rule name="NPMDICMPV6Echo" protocol="icmpv6:128,any" dir=in action=allow
-netsh advfirewall firewall add rule name="NPMDICMPV4DestinationUnreachable" protocol="icmpv4:3,any" dir=in action=allow
-netsh advfirewall firewall add rule name="NPMDICMPV6DestinationUnreachable" protocol="icmpv6:1,any" dir=in action=allow
-netsh advfirewall firewall add rule name="NPMDICMPV4TimeExceeded" protocol="icmpv4:11,any" dir=in action=allow
-netsh advfirewall firewall add rule name="NPMDICMPV6TimeExceeded" protocol="icmpv6:3,any" dir=in action=allow
-```
+ExpressRoute 모니터가 지원되는 지역 목록은 [설명서](https://docs.microsoft.com/azure/expressroute/how-to-npm?utm_swu=8117#regions)에 제공됩니다.
 
 
-TCP 프로토콜을 사용하려면 에이전트가 통신할 수 있도록 해당 컴퓨터의 방화벽 포트를 열어야 합니다. 관리자 권한으로 PowerShell 창에서 [EnableRules.ps1 PowerShell 스크립트](https://gallery.technet.microsoft.com/OMS-Network-Performance-04a66634)를 다운로드하고 매개 변수 없이 실행해야 합니다.
+## <a name="set-up-and-configure"></a>설정 및 구성
 
-이 스크립트는 네트워크 성능 모니터에 필요한 레지스트리 키를 만들며 에이전트가 상호 TCP 연결을 만들 수 있도록 하는 Windows 방화벽 규칙을 만듭니다. 또한 이 스크립트로 생성된 레지스트리 키는 디버그 로그와 로그 파일의 패스를 로깅해야 하는지 여부를 지정하며 통신에 사용되는 에이전트 TCP 포트도 정의합니다. 이러한 키 값은 스크립트에서 자동으로 설정하므로 해당 키를 수동으로 변경하지 않아야 합니다.
+### <a name="install-and-configure-agents"></a>에이전트 설치 및 구성 
 
-기본적으로 열리는 포트는 8084입니다. 스크립트에 매개 변수 `portNumber`를 지정하여 사용자 지정 포트를 사용할 수 있습니다. 하지만 스크립트가 실행되는 모든 컴퓨터에서 동일한 포트를 사용해야 합니다.
+[Azure Log Analytics에 Windows 컴퓨터 연결](log-analytics-windows-agents.md) 및 [Log Analytics에 Operations Manager 연결](log-analytics-om-agents.md)에 나와 있는 기본 프로세스에 따라 에이전트를 설치합니다.
 
-> [!NOTE]
-> EnableRules.ps1 스크립트는 스크립트가 실행되는 컴퓨터에서만 Windows 방화벽 규칙을 구성합니다. 네트워크 방화벽이 있는 경우 네트워크 성능 모니터에서 사용하는 TCP 포트로 트래픽이 전송될 수 있도록 해야 합니다.
->
->
+### <a name="where-to-install-the-agents"></a>에이전트 설치 위치 
 
-## <a name="configuring-the-solution"></a>솔루션 구성
-다음 정보를 사용하여 솔루션을 설치하고 구성합니다.
+* **성능 모니터:** 다른 서브네트워크에 대한 네트워크 연결을 모니터링하려는 각 서브네트워크에 연결된 하나 이상의 노드에 Operations Management Suite 에이전트를 설치합니다.
 
-1. 네트워크 성능 모니터 솔루션은 MMA(Microsoft Monitoring Agent)와 요구 사항이 동일한 Windows Server 2008 SP 1 및 이후 버전 또는 Windows 7 SP1 이후 버전을 실행하는 컴퓨터에서 데이터를 가져옵니다. NPM 에이전트 또한 Windows 데스크톱/클라이언트 운영 체제(Windows 10, Windows 8.1, Windows 8 및 Windows 7)에서 실행할 수 있습니다.
+    네트워크 링크를 모니터링하려면 해당 링크의 엔드포인트 양쪽 모두에 에이전트를 설치해야 합니다. 네트워크 토폴로지를 확실히 모를 경우 사이의 네트워크 성능을 모니터링하려는 중요 워크로드가 있는 서버에 에이전트를 설치합니다. 예를 들어, 웹 서버와 SQL을 실행하는 서버 간의 네트워크 연결을 모니터링하려는 경우 두 서버 모두에 에이전트를 설치합니다. 에이전트는 호스트 자체가 아닌 호스트 간의 네트워크 연결(링크)을 모니터링합니다. 
+
+* **서비스 엔드포인트 모니터:** 서비스 엔드포인트에 대한 네트워크 연결을 모니터링하려는 각 노드에 Operations Management Suite 에이전트를 설치합니다. 예를 들어 O1, O2 및 O3 레이블이 지정된 사무실 사이트에서 Office 365에 대한 네트워크 연결을 모니터링하려는 경우 O1, O2 및 O3 각각 하나 이상의 노드에 Operations Management Suite 에이전트를 설치합니다. 
+
+* **ExpressRoute 모니터**: Azure 가상 네트워크에 Operations Management Suite 에이전트를 하나 이상 설치합니다. 또한 ExpressRoute 개인 피어링을 통해 연결된 온-프레미스 서브네트워크에 에이전트를 하나 이상 설치합니다.  
+
+### <a name="configure-operations-management-suite-agents-for-monitoring"></a>모니터링을 위해 Operations Management Suite 에이전트 구성 
+
+네트워크 성능 모니터는 가상 트랜잭션을 사용하여 원본과 대상 에이전트 사이의 네트워크 성능을 모니터링합니다. 성능 모니터 및 서비스 엔드포인트 모니터 기능으로 모니터링하기 위해서 TCP와 ICMP 중 하나를 프로토콜로 선택할 수 있습니다. TCP는 ExpressRoute 모니터에 사용됩니다. 선택한 프로토콜로 모니터링하는 데 사용되는 Operations Management Suite 에이전트간에 통신을 방화벽에서 허용하는지 확인합니다. 
+
+* **TCP 프로토콜:** 모니터링을 위한 프로토콜로 TCP를 선택했으면 네트워크 성능 모니터 및 ExpressRoute 모니터에 사용되는 에이전트에서 방화벽 포트를 열어서 에이전트가 서로 연결할 수 있는지 확인합니다. 포트를 열려면 매개 변수 없이 PowerShell 창에서 관리자 권한으로 [EnableRules.ps1](https://aka.ms/npmpowershellscript) PowerShell 스크립트를 실행합니다.
+
+    스크립트를 통해 솔루션에 필요한 레지스트리 키가 만들어집니다. 또한 에이전트가 서로 TCP 연결을 만들 수 있도록 Windows 방화벽 규칙이 만들어집니다. 스크립트로 만들어진 레지스트리 키는 디버그 로그와 로그 파일의 경로를 기록할지 여부를 지정합니다. 스크립트는 통신에 사용되는 에이전트 TCP 포트도 정의합니다. 이러한 키 값은 스크립트에 의해 자동으로 설정됩니다. 이 키는 수동으로 변경하지 마십시오. 기본적으로 열리는 포트는 8084입니다. 스크립트에 매개 변수 portNumber를 지정하여 사용자 지정 포트를 사용할 수 있습니다. 스크립트가 실행되는 모든 컴퓨터에서 동일한 포트를 사용하십시오. 
+
     >[!NOTE]
-    >Windows Server 운영 체제용 에이전트는 가상 트랜잭션에 대한 프로토콜로써 TCP 및 ICMP를 모두 지원합니다. 그러나 Windows 클라이언트 운영 체제용 에이전트는 가상 트랜잭션에 대한 프로토콜로써 ICMP만을 지원합니다.
+    > 스크립트는 Windows 방화벽만 로컬로 구성합니다. 네트워크 방화벽이 있는 경우 네트워크 성능 모니터에서 사용하는 TCP 포트를 대상으로 하는 트래픽을 허용하는지 확인해야 합니다.
 
-2. [Azure Marketplace](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.NetworkMonitoringOMS?tab=Overview)에서 또는 [솔루션 갤러리에서 Log Analytics 솔루션 추가](log-analytics-add-solutions.md)에 설명된 절차에 따라 작업 영역에 네트워크 성능 모니터 솔루션을 추가합니다.  
-   ![네트워크 성능 모니터 기호](./media/log-analytics-network-performance-monitor/npm-symbol.png)
-3. OMS 포털에는 *Solution requires additional configuration*이라는 메시지가 포함된 **네트워크 성능 모니터** 타일이 새로 추가된 것을 확인할 수 있습니다. 에이전트에서 검색한 서브네트워크 및 노드를 기준으로 네트워크를 추가하기 위해 솔루션을 구성해야 합니다. 기본 네트워크 구성을 시작하려면 **네트워크 성능 모니터**를 클릭합니다.  
-   ![solution requires additional configuration](./media/log-analytics-network-performance-monitor/npm-config.png)
+    >[!NOTE]
+    > 서비스 엔드포인트 모니터에 대해 [EnableRules.ps1](https://aka.ms/npmpowershellscript ) PowerShell 스크립트를 실행할 필요가 없습니다.
 
-### <a name="configure-the-solution-with-a-default-network"></a>기본 네트워크로 솔루션 구성
-구성 페이지에 **Default**라는 단일 네트워크가 있습니다. 정의한 네트워크가 없는 경우 자동으로 검색된 모든 서브넷은 기본 네트워크로 지정됩니다.
+    
 
-네트워크를 만들면 사용자가 해당 네트워크에 서브넷을 추가하며 해당 서브넷은 기본 네트워크에서 제거됩니다. 네트워크를 삭제할 경우 모든 서브넷이 자동으로 기본 네트워크로 돌아갑니다.
+* **ICMP 프로토콜**: 모니터링을 위한 프로토콜로 ICMP를 선택한 경우 ICMP를 안정적으로 활용하기 위해 다음과 같은 방화벽 규칙을 사용하도록 설정합니다.
+    
+   ```
+   netsh advfirewall firewall add rule name="NPMDICMPV4Echo" protocol="icmpv4:8,any" dir=in action=allow 
+   netsh advfirewall firewall add rule name="NPMDICMPV6Echo" protocol="icmpv6:128,any" dir=in action=allow 
+   netsh advfirewall firewall add rule name="NPMDICMPV4DestinationUnreachable" protocol="icmpv4:3,any" dir=in action=allow 
+   netsh advfirewall firewall add rule name="NPMDICMPV6DestinationUnreachable" protocol="icmpv6:1,any" dir=in action=allow 
+   netsh advfirewall firewall add rule name="NPMDICMPV4TimeExceeded" protocol="icmpv4:11,any" dir=in action=allow 
+   netsh advfirewall firewall add rule name="NPMDICMPV6TimeExceeded" protocol="icmpv6:3,any" dir=in action=allow 
+   ```
+ 
 
-즉, 기본 네트워크는 사용자 정의 네트워크에 포함되지 않은 모든 서브넷의 컨테이너입니다. 기본 네트워크는 편집 또는 삭제할 수 없으며 언제나 시스템에 유지됩니다. 하지만 네트워크는 필요한 만큼 만들 수 있습니다.
+### <a name="configure-the-solution"></a>솔루션 구성 
 
-대부분의 경우 조직의 서브넷은 둘 이상의 네트워크에 배열되므로 서브넷을 논리적으로 그룹화할 수 있도록 둘 이상의 네트워크를 만들어야 합니다.
+1. [Azure 마켓플레이스](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.NetworkMonitoringOMS?tab=Overview)에서 작업 영역에 네트워크 성능 모니터 솔루션을 추가합니다. [솔루션 갤러리에서 Log Analytics 솔루션 추가](log-analytics-add-solutions.md)에서 설명한 프로세스를 사용할 수도 있습니다. 
+2. Log Analytics 작업 영역을 열고 **개요** 타일을 선택합니다. 
+3.  *솔루션에 추가 구성이 필요합니다.* 라는 메시지가 있는 **네트워크 성능 모니터** 타일을 선택합니다.
 
-### <a name="create-new-networks"></a>새 네트워크 만들기
-네트워크 성능 모니터의 네트워크는 서브넷의 컨테이너입니다. 원하는 이름으로 네트워크를 만든 다음 여기에 서브넷을 추가할 수 있습니다. 예를 들어 *Building1*이라는 네트워크를 만든 다음 서브넷을 추가하거나 *DMZ*라는 네트워크를 만든 다음 완충 영역에 속하는 모든 서브넷을 이 네트워크에 추가할 수 있습니다.
+   ![네트워크 성능 모니터 타일](media/log-analytics-network-performance-monitor/npm-config.png)
 
-#### <a name="to-create-a-new-network"></a>새 네트워크를 만들려면
-1. **Add network**를 클릭한 다음 네트워크 이름과 설명을 입력합니다.
-2. 하나 이상의 서브넷을 선택한 다음 **Add**를 클릭합니다.
-3. 구성을 저장하려면 **Save**를 클릭합니다.  
-   ![네트워크 추가](./media/log-analytics-network-performance-monitor/npm-add-network.png)
+4. **설정** 페이지에 Operations Management Suite 에이전트를 설치하고 **일반 설정** 보기에서 모니터링하기 위해 에이전트를 구성하는 옵션이 제공됩니다. 앞에서 설명했듯이 Operations Management Suite 에이전트를 설치하고 구성한 경우 **설정** 보기를 선택하여 사용하려는 기능을 구성합니다. 
 
-### <a name="wait-for-data-aggregation"></a>데이터 집계 대기
-처음으로 구성을 저장하면 솔루션이 에이전트가 설치된 노드 사이의 네트워크 패킷 손실과 대기 시간 정보를 수집하기 시작합니다. 이 프로세스는 많은 시간이 소요되며 30분 이상이 소요되는 경우도 있습니다. 이 상태에서 개요 페이지의 네트워크 성능 모니터 타일에 *Data aggregation in process*라는 메시지가 표시됩니다.
+   **성능 모니터**: **기본** 성능 모니터 규칙에서 가상 트랜잭션에 사용할 프로토콜을 선택하고 **저장하고 계속**을 클릭합니다. 이 프로토콜 선택은 시스템에서 생성된 기본 규칙에만 적용됩니다. 성능 모니터 규칙을 명시적으로 만들 때마다 프로토콜을 선택해야 합니다. 항상 **성능 모니터** 탭에서 **기본** 규칙 설정(당일 구성을 완료한 후 표시)으로 이동하고 나중에 프로토콜을 변경할 수 있습니다. 성능 모니터 기능이 필요하지 않은 경우 **성능 모니터** 탭의 **기본** 규칙 설정에서 기본 규칙을 사용하지 않도록 설정할 수 있습니다.
 
-![데이터 집계 진행 중](./media/log-analytics-network-performance-monitor/npm-aggregation.png)
+   ![성능 모니터 보기](media/log-analytics-network-performance-monitor/npm-synthetic-transactions.png)
+    
+   **서비스 엔드포인트 모니터**: 이 기능은 에이전트에서 Office 365 및 Dynamics 365로의 네트워크 연결을 모니터링하기 위한 기본 제공 사전 구성 테스트를 제공합니다. 옆에 있는 확인란을 선택하여 모니터링할 Office 365 및 Dynamics 365 서비스를 선택합니다. 모니터링할 에이전트를 선택하려면 **에이전트 추가**를 선택합니다. 이 기능을 사용하지 않거나 나중에 설정하려는 경우 아무것도 선택하지 않은 상태에서 **저장하고 계속**을 선택합니다.
 
-데이터가 업로드되면 네트워크 성능 모니터 타일에 데이터가 표시됩니다.
+   ![서비스 엔드포인트 모니터 보기](media/log-analytics-network-performance-monitor/npm-service-endpoint-monitor.png)
 
-![네트워크 성능 모니터 타일](./media/log-analytics-network-performance-monitor/npm-tile.png)
+   **ExpressRoute 모니터**: **지금 검색** 단추를 선택하여 이 Log Analytics 작업 영역에 연결된 Azure 구독의 가상 네트워크에 연결되어 있는 모든 ExpressRoute 개인 피어링을 검색합니다. 
 
-네트워크 성능 모니터 대시보드를 보려면 타일을 클릭합니다.
+   >[!NOTE] 
+   > 이 솔루션은 현재, ExpressRoute 개인 피어링만 검색합니다. 
 
-![네트워크 성능 모니터 대시보드](./media/log-analytics-network-performance-monitor/npm-dash01.png)
+   >[!NOTE] 
+   > 이 Log Analytics 작업 영역에 연결된 구독 관련 가상 네트워크에 연결되어 있는 개인 피어링만 검색됩니다. ExpressRoute가 이 작업 영역에 연결된 구독 외부의 가상 네트워크에 연결된 경우 해당 구독에 Log Analytics 작업 영역을 만듭니다. 네트워크 성능 모니터를 사용하여 해당 피어링을 모니터링합니다.
 
-### <a name="edit-monitoring-settings-for-subnets"></a>서브넷의 모니터링 설정 편집
-하나 이상의 에이전트가 설치된 모든 서브넷은 구성 페이지의 **Subnetworks** 탭에 나열됩니다.
+   ![ExpressRoute 모니터 보기](media/log-analytics-network-performance-monitor/npm-express-route.png)
 
-#### <a name="to-enable-or-disable-monitoring-for-particular-subnetworks"></a>특정 서브네트워크의 모니터링을 활성화 또는 비활성화하려면
-1. **subnetwork ID** 옆의 상자를 선택 또는 선택 취소한 다음 **Use for Monitoring**이 적절히 선택 또는 선택 취소되었는지 확인합니다. 여러 서브넷을 선택 또는 선택 취소할 수 있습니다. 이 설정을 사용하지 않도록 설정할 경우 에이전트가 업데이트되면서 다른 에이전트에 대한 ping을 중지하므로 서브네트워크가 모니터링되지 않습니다.
-2. 목록에서 서브네트워크를 선택하고 모니터링되지 않는 노드와 모니터링되는 노드가 포함된 목록 사이에서 필요한 노드를 이동하여 특정 서브네트워크에 대해 모니터링하려는 노드를 선택합니다.
-   원할 경우 서브네트워크에 사용자 지정 **설명**을 추가할 수 있습니다.
-3. 구성을 저장하려면 **Save**를 클릭합니다.  
-   ![서브넷 편집](./media/log-analytics-network-performance-monitor/npm-edit-subnet.png)
+   검색이 완료되면 검색된 개인 피어링이 표에 나열됩니다. 
 
-### <a name="choose-nodes-to-monitor"></a>모니터링할 노드 선택
-에이전트가 설치된 모든 노드는 **Nodes** 탭에 나열됩니다.
+   ![네트워크 성능 모니터 구성 페이지](media/log-analytics-network-performance-monitor/npm-private-peerings.png)
+    
+이러한 피어링에 대한 모니터링은 처음에는 사용할 수 없는 상태입니다. 모니터링하려는 각 피어링을 선택하고 오른쪽의 세부 정보 보기에서 모니터링을 구성합니다. 구성을 저장하려면 **저장**을 선택합니다. 자세히 알아보려면 ExpressRoute 모니터링 구성"을 참조하세요. 
 
-#### <a name="to-enable-or-disable-monitoring-for-nodes"></a>노드 모니터링을 사용 또는 사용하지 않도록 설정하려면
-1. 모니터링하거나 모니터링을 중지하려는 노드를 선택 또는 선택 취소합니다.
-2. **Use for Monitoring**을 적절히 클릭하거나 선택 취소합니다.
-3. **Save**를 클릭합니다.  
-   ![노드 모니터링 사용](./media/log-analytics-network-performance-monitor/npm-enable-node-monitor.png)
+설치가 완료된 후 데이터를 채우는 데 30분~1시간이 소요됩니다. 이 솔루션이 네트워크에서 데이터를 집계하는 동안 네트워크 성능 모니터 **개요** 타일에 *솔루션에 추가 구성이 필요합니다.* 라는 메시지가 표시됩니다. 데이터가 수집되고 인덱싱되면 **개요** 타일이 변경되고, 네트워크 상태를 요약으로 알려줍니다. 그런 후 Operations Management Suite 에이전트가 설치된 노드 및 사용자 환경에서 검색된 서브넷의 모니터링을 편집할 수 있습니다.
 
-### <a name="set-monitoring-rules"></a>모니터링 규칙 설정
-네트워크 성능 모니터는 임계값이 위반된 경우 두 개의 노드 또는 서브네트 또는 네트워크 링크 사이의 연결에 대한 상태 이벤트를 생성합니다. 이러한 임계값은 시스템에서 자동으로 학습할 수 있으며 사용자 지정 경고 규칙을 구성할 수도 있습니다.
+#### <a name="edit-monitoring-settings-for-subnets-and-nodes"></a>서브넷 및 노드에 대한 모니터링 설정 편집 
 
-*기본 규칙*은 시스템에서 생성하며 이 규칙에서는 두 네트워크 또는 서브네트워크 링크 간 손실 또는 대기 시간이 시스템에서 학습한 임계값을 위반할 때마다 상태 이벤트를 만듭니다. 기본 규칙을 사용하지 않도록 설정하고 사용자 지정 모니터링 규칙을 만들 수 있습니다.
-
-#### <a name="to-create-custom-monitoring-rules"></a>사용자 지정 모니터링 규칙을 만들려면
-1. **Monitor** 탭에서 **Add Rule**을 클릭하고 규칙 이름과 설명을 입력합니다.
-2. 목록에서 모니터링할 네트워크 또는 서브네트워크 링크 쌍을 선택합니다.
-3. 가장 먼저 네트워크 드롭다운에서 모니터링할 첫 번째 서브네트워크가 포함된 네트워크를 선택한 다음 해당 서브네트워크 드롭다운에서 서브네트워크를 선택합니다.
-   네트워크 링크의 모든 서브네트워크를 모니터링하려면 **All subnetworks**를 선택합니다. 마찬가지로 모니터링할 다른 서브네트워크를 선택합니다. 그런 다음 선택한 서브네트워크 중에서 특정 서브네트워크 링크에 대한 모니터링을 제외하려면 **Add Exception**을 클릭합니다.
-4. ICMP 및 TCP 프로토콜 중 가상 트랜잭션 실행에 사용할 프로토콜을 선택합니다.
-5. 선택한 항목에 대해 상태 이벤트를 만들지 않으려는 경우 **Enable health monitoring on the links covered by this rule**을 선택 취소합니다.
-6. 모니터링 조건을 선택합니다.
-   임계값을 입력하여 상태 이벤트 생성에 대한 사용자 지정 임계값을 설정할 수 있습니다. 조건 값이 선택한 네트워크/서브네트워크 쌍에 선택된 임계값을 초과할 경우 상태 이벤트가 생성됩니다.
-7. 구성을 저장하려면 **Save**를 클릭합니다.  
-   ![사용자 지정 모니터링 규칙 만들기](./media/log-analytics-network-performance-monitor/npm-monitor-rule.png)
-
-모니터링 규칙을 저장한 후에는 **경고 만들기**를 클릭하여 규칙을 경고 관리와 통합할 수 있습니다. 검색 쿼리로 경고 규칙이 자동으로 만들어지며 다른 필요한 매개 변수가 자동으로 채워집니다. 경고 규칙을 사용하면 NPM 내에 있는 기존 경고 외에도 전자 메일 기반 경고를 수신할 수 있습니다. 경고를 통해 Runbook으로 수정 작업을 트리거하거나 웹후크를 사용하여 기존 서비스 관리 솔루션과 통합할 수 있습니다. **경고 관리**를 클릭하여 경고 설정을 편집할 수 있습니다.
-
-### <a name="choose-the-right-protocol-icmp-or-tcp"></a>올바른 프로토콜 ICMP 또는 TCP 선택
-
-네트워크 성능 모니터(NPM)는 가상 트랜잭션을 사용하여 패킷 손실 및 연결 대기 시간과 같은 네트워크 성능 메트릭을 계산합니다. 이에 대한 이해를 돕기 위해 네트워크 링크의 한 쪽 끝에 연결된 NPM 에이전트를 살펴보겠습니다. NPM 에이전트는 네트워크의 다른 쪽 끝에 연결된 두 번째 NPM 에이전트에 프로브 패킷을 보냅니다. 두 번째 에이전트는 응답 패킷을 사용하여 회신합니다. 이 프로세스는 몇 번 반복됩니다. 첫 번째 NPM 에이전트는 응답 수 및 각 응답을 수신하는 데 소요된 시간을 측정하여 연결 대기 시간 및 패킷 삭제를 평가합니다.
-
-이러한 패킷의 형식, 크기 및 시퀀스는 모니터링 규칙을 만들 때 선택하는 프로토콜에 의해 결정됩니다. 패킷의 프로토콜을 기반으로 중간 네트워크 장치(라우터, 스위치 등)는 이러한 패킷을 다르게 처리할 수 있습니다. 따라서 프로토콜 선택은 결과의 정확성이 영향을 미칩니다. 또한 프로토콜 선택은 NPM 솔루션을 배포한 후 수동 단계를 수행해야 하는지 여부도 결정합니다.
-
-NPM에서는 ICMP 및 TCP 프로토콜 중 가상 트랜잭션 수행에 사용할 프로토콜을 선택할 수 있습니다.
-가상 트랜잭션 규칙을 만들 때 ICMP를 선택하면 NPM 에이전트는 ICMP 에코 메시지를 사용하여 네트워크 대기 시간 및 패킷 손실을 계산합니다. ICMP 에코는 기본 Ping 유틸리티에서 보낸 것과 같은 메시지를 사용합니다. TCP를 프로토콜로 사용하는 경우 NPM 에이전트는 네트워크를 통해 TCP SYN 패킷을 보냅니다. 이것은 TCP 핸드셰이크 완료 후에 RST 패킷을 사용한 연결 제거로 이어집니다.
-
-#### <a name="points-to-consider-before-choosing-the-protocol"></a>프로토콜을 선택하기 전에 고려할 사항
-사용할 프로토콜을 선택하기 전에 다음 정보를 고려하세요.
-
-##### <a name="discovering-multiple-network-routes"></a>여러 네트워크 경로 검색
-TCP는 여러 경로 검색 시 보다 정확하며 각 서브넷에 필요한 에이전트 수가 더 적습니다. 예를 들어 TCP를 사용하는 하나 또는 두 개의 에이전트는 서브넷 간의 모든 중복 경로를 검색할 수 있습니다. 하지만 ICMP를 사용하여 비슷한 결과를 달성하려면 에이전트가 여러 개 필요합니다. ICMP 사용 시 두 서브넷 간에 경로가 *N*개이면 원본 또는 대상 서브넷에 에이전트가 5*N*개 넘게 필요합니다.
-
-##### <a name="accuracy-of-results"></a>결과의 정확성
-라우터와 스위치는 ICMP 에코 패킷에 TCP 패킷보다 낮은 우선 순위를 할당하는 경향이 있습니다. 특정 상황에서 네트워크 장치에 부하가 심하면 TCP에서 가져온 데이터가 응용 프로그램에 발생하는 손실과 대기 시간을 보다 철저하게 반영합니다. 이것은 대부분의 응용 프로그램 트래픽이 TCP를 통해 흐르기 때문입니다. 이런 경우 ICMP는 TCP보다 덜 정확한 결과를 제공합니다.
-
-##### <a name="firewall-configuration"></a>방화벽 구성
-TCP 프로토콜에서는 TCP 패킷이 대상 포트에 전송되어야 합니다. NPM 에이전트에 사용되는 기본 포트는 8084이지만 에이전트를 구성할 때 이것을 변경할 수 있습니다. 따라서 네트워크 방화벽 또는 NSG 규칙(Azure의)이 포트에 트래픽을 허용하는지 확인해야 합니다. 에이전트가 설치된 컴퓨터의 로컬 방화벽이 이 포트에 트래픽을 허용하는지도 확인해야 합니다.
-
-PowerShell 스크립트를 사용하여 Windows를 실행하는 컴퓨터에서 방화벽 규칙을 구성할 수 있지만 네트워크 방화벽을 수동으로 구성해야 합니다.
-
-반면에 ICMP는 포트를 사용하여 운영되지 않습니다. 대부분의 엔터프라이즈 시나리오에서 ICMP 트래픽은 방화벽을 통해 Ping 유틸리티와 같은 네트워크 진단 도구를 사용할 수 있도록 허용됩니다. 따라서 한 컴퓨터에서 다른 컴퓨터에 Ping을 할 수 있으면 방화벽을 수동으로 구성하지 않고도 ICMP 프로토콜을 사용할 수 있습니다.
-
-> [!NOTE]
-> 어떤 프로토콜을 사용할지 잘 모를 경우에는 ICMP를 선택하여 시작하세요. 결과가 만족스럽지 않으면 나중에 TCP로 언제든 전환할 수 있습니다.
+하나 이상의 에이전트가 설치된 모든 서브넷은 구성 페이지의  **서브네트워크**  탭에 나열됩니다. 
 
 
-#### <a name="how-to-switch-the-protocol"></a>프로토콜 전환 방법
+특정 서브네트워크의 모니터링을 사용하거나 사용하지 않도록 설정하려면:
 
-배포하는 동안 ICMP를 사용하도록 선택한 경우에는 기본 모니터링 규칙을 편집하여 TCP로 언제든 전환할 수 있습니다.
+1.  **서브네트워크 ID** 옆에 있는 확인란을 선택하거나 선택 취소합니다. 그런 다음,  **모니터링에 사용** 이 적절하게 선택되거나 선택이 취소되었는지 확인합니다. 여러 서브넷을 선택 또는 선택 취소할 수 있습니다. 이 설정을 사용하지 않도록 설정할 경우 서브네트워크가 모니터링되지 않고 다른 에이전트에 대한 Ping을 중지하도록 에이전트가 업데이트됩니다. 
+2. 특정 서브네트워크에서 모니터링할 노드를 선택합니다. 목록에서 서브네트워크를 선택하고 모니터링되지 않는 노드와 모니터링되는 노드가 있는 목록 사이에서 필요한 노드를 이동합니다. 서브네트워크에 사용자 지정 설명을 추가할 수 있습니다.
+3. **저장**을 선택하여 구성을 저장합니다. 
 
-##### <a name="to-edit-the-default-monitoring-rule"></a>기본 모니터링 규칙을 편집하려면
-1.  **네트워크 성능** > **모니터** > **구성** > **모니터**로 이동한 다음 **기본 규칙**을 클릭합니다.
-2.  **프로토콜** 섹션으로 스크롤하여 사용할 프로토콜을 선택합니다.
-3.  **저장**을 클릭하여 설정을 적용합니다.
+#### <a name="choose-nodes-to-monitor"></a>모니터링할 노드 선택
 
-기본 규칙에서 특정 프로토콜을 사용하더라도 다른 프로토콜로 새 규칙을 만들 수 있습니다. 일부 규칙은 ICMP를 사용하고 다른 곳에서는 TCP를 사용하는 혼합 규칙을 만들 수도 있습니다.
+에이전트가 설치된 모든 노드는 **노드** 탭에 나열됩니다. 
+
+1. 모니터링하거나 모니터링을 중지하려는 노드를 선택 또는 선택 취소합니다. 
+2. 필요에 맞게 **모니터링에 사용**을 선택하거나 선택 취소합니다. 
+3. **저장**을 선택합니다. 
 
 
+원하는 기능 구성:
 
+- [성능 모니터](log-analytics-network-performance-monitor-performance-monitor.md#configuration)
+- [서비스 엔드포인트 모니터](log-analytics-network-performance-monitor-performance-monitor.md#configuration)
+- [ExpressRoute 모니터](log-analytics-network-performance-monitor-expressroute.md#configuration)
+
+ 
 
 ## <a name="data-collection-details"></a>데이터 수집 세부 정보
-네트워크 성능 모니터는 TCP를 선택한 경우 TCP SYN-SYNACK-ACK 핸드셰이크 패킷을 사용하고 ICMP를 선택한 경우 ICMP ECHO ICMP ECHO REPLY를 사용하여 손실 및 대기 시간 정보를 수집합니다. 토폴로지 정보를 가져오는 데도 경로 추적이 사용됩니다.
+손실 및 대기 시간 정보를 수집하기 위해 네트워크 성능 모니터는 TCP를 프로토콜로 선택하면 TCP SYN-SYNACK-ACK 핸드셰이크 패킷을 사용합니다. 네트워크 성능 모니터는 ICMP를 프로토콜로 선택하면 ICMP ECHO ICMP ECHO REPLY를 사용합니다. 토폴로지 정보를 가져오기 위해 경로 추적도 사용됩니다.
 
 다음 표에는 데이터 수집 방법 및 네트워크 성능 모니터에 대한 데이터가 수집되는 방식에 대한 기타 세부 정보가 나와 있습니다.
 
-| 플랫폼 | 직접 에이전트 | SCOM 에이전트 | Azure 저장소 | SCOM 필요? | 관리 그룹을 통해 전송되는 SCOM 에이전트 데이터 | 수집 빈도 |
+| 플랫폼 | 직접 에이전트 | System Center Operations Manager 에이전트 | Azure Storage | Operations Manager 필요 여부 | 관리 그룹을 통해 전송되는 Operations Manager 에이전트 데이터 | 수집 빈도 |
 | --- | --- | --- | --- | --- | --- | --- |
-| Windows |![예](./media/log-analytics-network-performance-monitor/oms-bullet-green.png) |![예](./media/log-analytics-network-performance-monitor/oms-bullet-green.png) |![아니요](./media/log-analytics-network-performance-monitor/oms-bullet-red.png) |![아니요](./media/log-analytics-network-performance-monitor/oms-bullet-red.png) |![아니요](./media/log-analytics-network-performance-monitor/oms-bullet-red.png) |TCP는 5초마다 핸드셰이크/ICMP ECHO 메시지를 전송하며 3분마다 데이터가 전송됩니다. |
+| Windows | &#8226; | &#8226; |  |  |  |TCP는 5초마다 핸드셰이크/ICMP ECHO 메시지를 전송하며 3분마다 데이터가 전송됩니다. |
+ 
 
-이 솔루션은 가상 트랜잭션을 사용하여 네트워크 상태를 평가합니다. 네트워크 교환 TCP 패킷 또는 ICMP Echo(모니터링을 위해 선택한 프로토콜에 따라 다름)의 다양한 지점에 설치된 OMS 에이전트는 다른 에이전트와 통신합니다. 이 과정에서 에이전트는 왕복 시간과 패킷 손실(있는 경우)을 확인합니다. 또한 각 에이전트는 다른 에이전트에 대해 정기적으로 추적 경로를 수행하여 네트워크에서 테스트가 필요한 다양한 경로를 모두 찾아냅니다. 에이전트는 이 데이터를 사용하여 네트워크 대기 시간 및 패킷 손실 수치를 추론할 수 있습니다. 테스트는 5초마다 반복되며 에이전트는 이 데이터를 3분 기간마다 집계하여 Log Analytics 서비스에 업로드합니다.
+ 
+이 솔루션은 가상 트랜잭션을 사용하여 네트워크 상태를 평가합니다. 네트워크의 다양한 지점에 설치된 Operations Management Suite 에이전트는 TCP 패킷 또는 ICMP Echo를 서로 교환합니다. 에이전트가 TCP 패킷을 사용할지 또는 ICMP Echo를 사용할지는 모니터링을 위해 선택한 프로토콜에 따라 달라집니다. 이 과정에서 에이전트는 왕복 시간과 패킷 손실(있는 경우)을 확인합니다. 또한 각 에이전트는 다른 에이전트에 대해 정기적으로 추적 경로를 수행하여 네트워크에서 테스트가 필요한 다양한 경로를 모두 찾아냅니다. 에이전트는 이 데이터를 사용하여 네트워크 대기 시간 및 패킷 손실 수치를 추론할 수 있습니다. 테스트는 5초마다 반복됩니다. 데이터가 Log Analytics 서비스에 업로드되기 전에 에이전트가 약 3분간 데이터를 집계합니다.
 
-> [!NOTE]
-> 에이전트가 서로 자주 통신하긴 하지만 테스트를 수행하는 동안 많은 네트워크 트래픽을 생성하지 않습니다. 에이전트는 TCP SYN-SYNACK-ACK 핸드셰이크에만 의존하여 손실과 대기 시간을 결정하며 데이터 패킷은 교환되지 않습니다. 이 프로세스에서 에이전트는 필요할 때에만 다른 에이전트와 통신하며 네트워크 트래픽을 줄이도록 에이전트 통신 토폴로지가 최적화됩니다.
->
->
 
-## <a name="using-the-solution"></a>솔루션 사용
-이 섹션에서는 모든 대시보드 기능과 사용 방법에 대해 설명합니다.
 
-### <a name="solution-overview-tile"></a>솔루션 개요 타일
-네트워크 성능 모니터 솔루션을 사용하도록 설정하면 OMS Overview 페이지의 솔루션 타일에 네트워크 상태에 대한 간략한 개요가 표시됩니다. 여기에는 정상 및 비정상 서브네트워크 링크 수를 보여주는 도넛형 차트가 표시됩니다. 타일을 클릭하면 솔루션 대시보드가 열립니다.
+>[!NOTE]
+> 에이전트는 서로 자주 통신하지만 테스트를 수행하는 동안 상당한 네트워크 트래픽을 생성하지는 않습니다. 에이전트는 TCP SYN-SYNACK-ACK 핸드셰이크 패킷에만 의존하여 손실 및 대기 시간을 결정합니다. 데이터 패킷은 교환되지 않습니다. 이 과정에서 에이전트는 필요할 때만 서로 통신합니다. 에이전트 통신 토폴로지는 네트워크 트래픽을 줄이도록 최적화됩니다.
 
-![네트워크 성능 모니터 타일](./media/log-analytics-network-performance-monitor/npm-tile.png)
+## <a name="use-the-solution"></a>솔루션 사용 
 
-### <a name="network-performance-monitor-solution-dashboard"></a>네트워크 성능 모니터 솔루션 대시보드
-**Network Summary** 블레이드에 네트워크에 대한 요약 정보와 상대적 크기가 표시됩니다. 그 다음 타일에는 시스템의 네트워크 링크, 서브넷 링크 및 패스의 총 수가 표시됩니다(패스는 에이전트가 설치된 두 호스트의 IP 주소와 그 사이의 모든 홉으로 구성됨).
+### <a name="network-performance-monitor-overview-tile"></a>네트워크 성능 모니터 개요 타일 
 
-**Top Network Health Events** 블레이드에는 시스템의 최근 상태 이벤트 및 경고의 목록과 이벤트가 활성화된 이후 경과된 시간이 표시됩니다. 상태 이벤트 또는 경고는 네트워크 또는 서브네트워크 링크의 패킷 손실 또는 대기 시간이 임계값을 초과할 때마다 생성됩니다.
+네트워크 성능 모니터 솔루션을 사용하도록 설정하면 **개요** 페이지의 솔루션 타일에 네트워크 상태에 대한 간략한 개요가 표시됩니다. 
 
-**Top Unhealthy Network Links** 블레이드에는 비정상 네트워크 링크 목록이 표시됩니다. 비정상 네트워크 링크는 부정적 상태 이벤트가 하나 이상 있는 네트워크 링크입니다.
+ ![네트워크 성능 모니터 개요 타일](media/log-analytics-network-performance-monitor/npm-overview-tile.png)
 
-**Top Subnetwork Links with Most Loss** 블레이드에는 패킷 손실이 가장 많은 서브네크워크 링크가 표시되며 **Subnetwork Links with Most Latency** 블레이드에는 대기 시간이 가장 긴 서브네트워크 링크가 표시됩니다. 특정 네트워크 링크는 대기 시간 또는 패킷 손실량이 높은 상태가 정상일 수 있습니다. 이러한 링크는 목록에 상위 10개 안에 포함되지만 비정상으로 표시되지 않습니다.
+### <a name="network-performance-monitor-dashboard"></a>네트워크 성능 모니터 대시보드 
 
-**Common Queries** 블레이드에는 원시 네트워크 모니터링 데이터를 직접 가져오는 검색 쿼리 집합이 포함되어 있습니다. 이러한 쿼리를 시작점으로 사용하여 사용자 지정 보고를 위한 쿼리를 만들 수 있습니다.
+* **상위 네트워크 상태 이벤트**: 이 페이지에는 시스템의 최근 상태 이벤트 및 경고의 목록과 이벤트가 활성화된 이후 경과된 시간이 표시됩니다. 모니터링 규칙에 대해 선택한 메트릭(손실, 대기 시간, 응답 시간 또는 대역폭 사용률) 값이 임계값을 초과할 때마다 상태 이벤트 또는 경고가 생성됩니다. 
 
-![네트워크 성능 모니터 대시보드](./media/log-analytics-network-performance-monitor/npm-dash01.png)
+* **ExpressRoute 모니터**: 이 페이지에는 솔루션이 모니터링하는 다양한 ExpressRoute 피어링 연결에 대한 상태 요약이 제공됩니다. **토폴로지** 타일에는 네트워크에서 모니터링되는 ExpressRoute 회로를 통과하는 네트워크 경로 수가 표시됩니다. **토폴로지** 보기로 이동하려면 이 타일을 선택합니다.
 
-### <a name="drill-down-for-depth"></a>상세하게 드릴다운
-솔루션 대시보드의 다양한 링크를 클릭하여 관심 부분을 상세하게 드릴다운할 수 있습니다. 예를 들어 대시보드에 경고 또는 비정상 네트워크 링크가 나타날 경우 해당 링크를 클릭하여 자세히 조사할 수 있습니다. 그러면 특정 네트워크 링크의 모든 서브네트워크 링크가 나열된 페이지로 이동합니다. 각 서브네트워크 링크의 손실, 대기 시간, 상태를 확인하고 문제의 원인이 된 서브네트워크 링크를 빠르게 찾을 수 있습니다. 그런 다음 **View node links**를 클릭하여 비정상 서브넷 링크의 모든 노드 링크를 볼 수 있습니다. 그런 다음 노드 간 개별 링크를 확인하고 비정상 노드 링크를 찾을 수 있습니다.
+* **서비스 엔드포인트 모니터**: 이 페이지에는 사용자가 만든 여러 테스트에 대한 상태 요약이 제공됩니다. **토폴로지** 타일에는 모니터링되는 엔드포인트 수가 표시됩니다. **토폴로지** 보기로 이동하려면 이 타일을 선택합니다.
 
-원본-대상 노드 간 경로에서 각 홉 사이의 토폴로지를 보려면 **View topology**를 클릭합니다. 비정상 경로 또는 홉은 빨간색으로 표시되므로 네트워크의 특정 부분에서 문제를 빠르게 식별할 수 있습니다.
+* **성능 모니터**: 이 페이지에는 솔루션이 모니터링하는 **네트워크** 링크 및 **서브네트워크** 링크에 대한 상태 요약이 제공됩니다. **토폴로지** 타일에는 네트워크에서 모니터링되는 네트워크 경로 수가 표시됩니다. **토폴로지** 보기로 이동하려면 이 타일을 선택합니다. 
 
-![드릴다운 데이터](./media/log-analytics-network-performance-monitor/npm-drill.png)
+* **일반 쿼리**: 이 페이지에는 원시 네트워크 모니터링 데이터를 직접 가져오는 검색 쿼리 집합이 포함되어 있습니다. 이러한 쿼리를 시작점으로 사용하여 사용자 지정 보고를 위한 자체 쿼리를 만들 수 있습니다. 
 
-### <a name="network-state-recorder"></a>네트워크 상태 레코더
+   ![네트워크 성능 모니터 대시보드](media/log-analytics-network-performance-monitor/npm-dashboard.png)
 
-각 보기에는 특정 시점에서 네트워크 상태에 대한 스냅숏이 표시됩니다. 기본적으로 가장 최근 상태가 표시됩니다. 페이지 맨 위에 있는 막대에 상태가 표시되는 시점이 표시됩니다. 시간을 뒤로 이동하도록 선택하거나 **작업**에서 막대를 클릭하여 네트워크 상태에 대한 스냅숏을 볼 수 있습니다. 또한 최신 상태를 보고 있는 동안 페이지 자동 새로 고침을 사용 또는 사용하지 않도록 설정할 수도 있습니다.
+ 
 
-![네트워크 상태](./media/log-analytics-network-performance-monitor/network-state.png)
+### <a name="drill-down-for-depth"></a>상세하게 드릴다운 
 
-#### <a name="trend-charts"></a>추세 차트
-드릴다운하는 각 수준에서 네트워크 링크의 손실 및 대기 시간 추세를 확인할 수 있습니다. 추세 차트는 서브네트워크 또는 노드 링크에도 사용할 수 있습니다. 차트 상단에 있는 시간 컨트롤을 사용하여 그리는 그래프의 시간 간격을 변경할 수 있습니다.
+솔루션 대시보드의 다양한 링크를 선택하여 관심 영역을 상세하게 드릴다운할 수 있습니다. 예를 들어 대시보드에 경고 또는 비정상 네트워크 링크가 나타날 경우 해당 링크를 선택하여 자세히 조사할 수 있습니다. 특정 네트워크 링크에 대한 모든 서브네트워크 링크가 페이지에 나열됩니다. 각 서브네트워크 링크의 손실, 대기 시간 및 상태를 볼 수 있습니다. 문제를 유발한 서브네트워크 링크를 빠르게 알아낼 수 있습니다. **노드 링크 보기** 를 선택하여 비정상 서브넷 링크에 대한 노드 링크를 모두 볼 수 있습니다. 그런 다음 노드 간 개별 링크를 확인하고 비정상 노드 링크를 찾을 수 있습니다. 
 
-추세 차트는 네트워크 링크 성능에 대한 기존 관점을 보여줍니다. 일부 네트워크 문제는 일시적인 것이며 현재 네트워크 상태를 보는 것만으로 확인하기 어려울 수 있습니다. 그 이유는 문제가 빠르게 나타났다 누군가 알기 전에 사라지고 나중에 다시 나타날 수 있기 때문입니다. 이와 같은 일시적 문제는 모든 애플리케이션 구성 요소가 원활하게 실행되는 것처럼 보일 경우에도 애플리케이션 응답 시간이 알 수 없는 이유로 증가하는 문제로 나타나는 경우가 많기 때문에 애플리케이션 관리자도 확인이 어려울 수 있습니다.
+원본-대상 노드 간 경로에서 각 홉 단위 토폴로지를 보려면  **토폴로지 보기** 를 선택합니다. 비정상 경로는 빨간색으로 표시됩니다. 각 홉의 영향을 받은 대기 시간을 확인할 수 있으므로 네트워크의 특정 부분에서 문제를 빠르게 식별할 수 있습니다.
 
-이러한 유형의 문제는 추세 차트에서 네트워크 대기 시간 또는 패킷 손실이 급증하는 부분을 찾아 쉽게 감지할 수 있습니다.
+ 
 
-![추세 차트](./media/log-analytics-network-performance-monitor/npm-trend.png)
+### <a name="network-state-recorder-control"></a>네트워크 상태 레코더 컨트롤
 
-#### <a name="hop-by-hop-topology-map"></a>홉 단위 토폴로지 맵
-네트워크 성능 모니터에는 인터랙티브 토폴로지 맵에서 두 노드 사이의 홉 단위 경로 토폴로지를 보여줍니다. 노드 링크를 선택한 다음 **View topology**를 클릭하여 토폴로지 맵을 볼 수 있습니다. 대시보드의 **Paths** 타일을 클릭해도 토폴로지 맵을 볼 수 있습니다. 대시보드에서 **Paths**를 클릭하면 왼쪽 패널에서 원본 및 대상 노드를 선택해야 합니다. 그런 다음 **Plot**을 클릭하여 두 노드 간 경로를 그릴 수 있습니다.
+각 보기에는 특정 시점에서 네트워크 상태에 대한 스냅숏이 표시됩니다. 기본적으로 가장 최근 상태가 표시됩니다. 페이지 맨 위에 있는 막대에 상태가 표시되는 시점이 표시됩니다. 과거 시간 네트워크 상태의 스냅숏을 보려면 **작업**을 선택합니다. 또한 최신 상태를 보는 동안 페이지 자동 새로 고침을 사용 또는 사용하지 않도록 설정할 수도 있습니다. 
 
-토폴로지 맵에는 두 노드 간 경로 수와 데이터 패킷이 사용하는 경로가 표시됩니다. 네트워크 성능 병목은 토폴로지 맵에서 빨간색으로 표시됩니다. 토폴로지 맵에서 빨간색으로 표시된 요소를 찾아 문제가 있는 네트워크 연결 또는 장애가 발생한 네트워크 장치를 찾을 수 있습니다.
+ ![네트워크 상태 레코더](media/log-analytics-network-performance-monitor/network-state-recorder.png)
 
-노드를 클릭하거나 토폴로지 맵에서 노드에 커서를 올려 놓으면 FQDN, IP 주소와 같은 노드 속성이 표시됩니다. 홉의 IP 주소를 보려면 해당 홉을 클릭합니다. 축소 가능한 작업 창에서 필터를 사용하여 특정 경로를 필터링하도록 선택할 수도 있습니다. 또한 작업 창에 있는 슬라이더를 사용하여 중간 홉을 숨기는 방법으로 네트워크 토폴로지를 간소화할 수도 있습니다. 마우스 휠을 사용하여 토폴로지 맵을 확대 또는 축소할 수 있습니다.
+ 
 
-맵에 표시된 토폴로지는 계층 3 토폴로지이며 계층 2 장치와 연결이 포함되어 있지 않습니다.
+### <a name="trend-charts"></a>추세 차트 
 
-![홉 단위 토폴로지 맵](./media/log-analytics-network-performance-monitor/npm-topology.png)
+드릴다운하는 각 수준에서 적용 가능한 메트릭의 추세를 확인할 수 있습니다. 손실, 대기 시간, 응답 시간 또는 대역폭 사용량을 확인할 수 있습니다. 추세의 시간 간격을 변경하려면 차트 상단에 있는 시간 컨트롤을 사용합니다. 
 
-#### <a name="fault-localization"></a>오류 있는 지역화
-네트워크 성능 모니터는 네트워크 장치에 연결하지 않고 네트워크 병목을 찾을 수 있습니다. 네트워크 성능 모니터는 네트워크에서 수집하는 데이터를 기준으로 네트워크 그래프에 고급 알고리즘을 적용하여 문제의 원일일 가능성이 가장 높은 네트워크 부분을 확률적으로 예측합니다.
+추세 차트는 성능 메트릭의 성능에 대한 기존 관점을 보여줍니다. 일부 네트워크 문제는 본질적으로 일시적이며 네트워크의 현재 상태만 보고 파악하기 어렵습니다. 문제를 알아차리기 전에 빠르게 나타나고 사라졌다가 나중에 다시 나타날 수 있습니다. 이렇게 일시적인 문제는 응용 프로그램 관리자에게도 어려울 수 있습니다. 이러한 문제로 인해 응용 프로그램 구성 요소가 모두 원활하게 실행되는 경우에도 응용 프로그램 응답 시간이 설명할 수 없게 증가되기도 합니다. 
 
-이 방식은 라우터나 스위처 같은 네트워크 장치에서 데이터를 수집하지 않아도 되므로 홉에 액세스할 수 없을 때 네트워크 병목을 확인하는 데 유용합니다. 이 방식은 또한 관리자가 두 노드 간 홉을 제어할 수 없는 경우에도 유용합니다. 예를 들어 홉이 ISP 라우터일 수 있습니다.
+추세 차트를 보면 이런 종류의 문제를 쉽게 파악할 수 있습니다. 이 문제는 네트워크 대기 시간이나 패킷 손실이 급증하는 것으로 나타납니다. 문제를 조사하려면 네트워크 상태 레코더 컨트롤을 사용하여 문제가 발생한 시점의 네트워크 스냅숏과 토폴로지를 확인합니다.
 
-### <a name="log-analytics-search"></a>Log Analytics 검색
-모든 데이터는 네트워크 성능 모니터 대시보드를 통해 그래픽으로 노출되며 Log Analytics 검색 시에도 드릴다운 페이지를 기본적으로 사용할 수 있습니다. 검색 쿼리 언어를 사용하여 데이터를 쿼리하고 데이터를 Excel 또는 PowerBI로 내보내 사용자 지정 보고서를 만들 수 있습니다. 대시보드의 **Common Queries** 블레이드에는 자신의 쿼리와 보고서를 만드는 데 사용할 수 있는 유용한 쿼리 몇 가지가 있습니다.
+ 
+![추세 차트](media/log-analytics-network-performance-monitor/trend-charts.png)
+ 
 
-![검색 쿼리](./media/log-analytics-network-performance-monitor/npm-queries.png)
+### <a name="topology-map"></a>토폴로지 맵 
 
-## <a name="investigate-the-root-cause-of-a-health-alert"></a>상태 경고의 근본 원인 조사
-지금까지 네트워크 성능 모니터에 대해 알아보았습니다. 이제 상태 정상 이벤트의 근본 원인을 간단히 조사하는 방법을 알아보겠습니다.
+네트워크 성능 모니터는 인터랙티브 토폴로지 맵에서 원본 및 대상 엔드포인트 사이의 홉 단위 경로 토폴로지를 보여줍니다. 토폴로지 맵을 보려면 솔루션 대시보드에서 **토폴로지**를 선택합니다. 드릴다운 페이지에서 **토폴로지 보기** 링크를 선택할 수도 있습니다. 
 
-1. Overview 페이지에서 **네트워크 성능 모니터** 타일을 보면 네트워크 상태를 간단히 확인할 수 있습니다. 모니터링하는 6개 서브네트워크 링크 중 2개가 비정상입니다. 이 경우 조사가 필요합니다. 솔루션 대시보드를 보려면 타일을 클릭합니다.  
-   ![네트워크 성능 모니터 타일](./media/log-analytics-network-performance-monitor/npm-investigation01.png)
-2. 아래 예제 이미지에서 1개의 정상 이벤트와 1개의 비정상 네트워크 링크가 있는 것을 확인할 수 있습니다. 사용자가 문제를 조사하기로 하고 문제의 근본 원인을 찾기 위해 **DMZ2-DMZ1** 네트워크 링크를 클릭합니다.  
-   ![비정상 네트워크 링크 예](./media/log-analytics-network-performance-monitor/npm-investigation02.png)
-3. 드릴다운 페이지에는 **DMZ2-DMZ1** 네트워크 링크의 모든 서브네트워크 링크가 표시되어 있습니다. 두 서브네트워크 링크에서 대기 시간이 임계값을 초과해 네트워크 링크가 비정상 상태가 되었습니다. 또한 두 서브네트워크 링크의 대기 시간 추세도 볼 수 있습니다. 그래프에서 시간 선택 컨트롤을 사용하여 필요한 시간 범위만 자세히 확인할 수 있습니다. 대기 시간이 최고점에 도달한 경우 시간대를 확인할 수 있습니다. 나중에 이 시간대의 로그를 검색하여 문제를 조사할 수 있습니다. **노드 링크 보기**를 클릭하여 자세히 드릴다운합니다.  
-   ![비정상 서브넷 링크 예](./media/log-analytics-network-performance-monitor/npm-investigation03.png)
-4. 이전 페이지와 마찬가지로, 특정 서브네트워크 링크의 드릴다운 페이지에는 해당 노드 링크가 나열됩니다. 여기에서도 이전 단계와 유사한 작업을 할 수 있습니다. 두 노드 간 토폴로지를 보려면 **View topology**를 클릭합니다.  
-   ![비정상 노드 링크 예](./media/log-analytics-network-performance-monitor/npm-investigation04.png)
-5. 선택된 두 노드 사이의 모든 패스가 토폴로지 맵에 그려져 있습니다. 토폴로지 맵에서 두 노드 간 경로의 홉 단위 토폴로지를 시각화할 수 있습니다. 이를 통해 두 노드 간 존재하는 경로 수와 데이터 패킷이 사용하는 패스를 분명히 확인할 수 있습니다. 네트워크 성능 병목은 빨간색으로 표시되어 있습니다. 토폴로지 맵에서 빨간색으로 표시된 요소를 찾아 문제가 있는 네트워크 연결 또는 장애가 발생한 네트워크 장치를 찾을 수 있습니다.  
-   ![비정상 토폴로지 보기 예](./media/log-analytics-network-performance-monitor/npm-investigation05.png)
-6. 각 패스의 손실, 대기 시간, 홉 수는 **작업** 창에서 검토할 수 있습니다. 비정상 패스의 세부 정보를 보려면 스크롤 막대를 사용합니다.  필터를 사용하여 비정상 홉이 있는 경로를 선택하고 선택한 경로에 대한 토폴로지만 그려지도록 합니다. 마우스 휠을 사용하여 토폴로지 맵을 확대 또는 축소할 수 있습니다.
+토폴로지 맵에는 원본 및 대상 간 경로 수와 데이터 패킷이 사용하는 경로가 표시됩니다. 각 네트워크 홉으로 인한 대기 시간도 표시됩니다. 전체 경로 대기 시간이 임계값(해당 모니터링 규칙에 설정)을 초과하는 모든 경로가 빨간색으로 표시됩니다. 
 
-   아래 이미지에서 빨간색으로 표시된 패스와 홉을 확인하여 문제 영역의 근본 원인이 네트워크의 특정 섹션에 있는 것을 확인할 수 있습니다. 토폴로지 맵에서 노드를 클릭하면 FQDN, IP 주소 등의 노드 속성이 표시됩니다. 홉을 클릭하면 홉의 IP 주소가 표시됩니다.  
-   ![비정상 토폴로지 - 패스 세부 정보 예](./media/log-analytics-network-performance-monitor/npm-investigation06.png)
+노드를 선택하거나 토폴로지 맵에서 노드 위로 마우스를 올리면 노드 속성(예: FQDN 및 IP 주소)이 표시됩니다. 홉의 IP 주소를 보려면 홉을 선택합니다. 문제가 있는 네트워크 홉은 해당 홉으로 인한 대기 시간을 통해 식별할 수 있습니다. 특정 경로를 필터링하려면 축소 가능한 작업 창에서 필터를 사용합니다. 네트워크 토폴로지를 간소화하려면 작업 창에 있는 슬라이더를 사용하여 중간 홉을 숨깁니다. 마우스 휠을 사용하여 토폴로지 맵을 확대하거나 축소할 수 있습니다. 
 
-## <a name="provide-feedback"></a>피드백 제공
+맵에 표시된 토폴로지는 계층 3 토폴로지이며 계층 2 장치와 연결은 포함되지 않습니다. 
 
-- **UserVoice** - 사용하려는 네트워크 성능 모니터 기능에 대한 아이디어를 게시할 수 있습니다. [UserVoice 페이지](https://feedback.azure.com/forums/267889-log-analytics/category/188146-network-monitoring)를 방문하세요.
-- **코호트 조인** - 코호트에 조인하는 새 고객을 항상 환영합니다. 그 일환으로 새로운 기능에 대한 초기 액세스 권한을 통해 네트워크 성능 모니터를 개선하는 데 참여하실 수 있습니다. 조인에 관심이 있을 경우 이 [빠른 설문 조사](https://aka.ms/npmcohort)에 참여하세요.
+ 
+![토폴로지 맵](media/log-analytics-network-performance-monitor/topology-map.png)
+ 
 
-## <a name="next-steps"></a>다음 단계
-* 자세한 네트워크 성능 데이터 레코드를 보려면 [로그 검색](log-analytics-log-searches.md)을 수행합니다.
+## <a name="log-analytics-search"></a>Log Analytics 검색 
 
+네트워크 성능 모니터 대시보드 및 드릴다운 페이지를 통해 그래픽으로 노출되는 모든 데이터는 [Log Analytics 검색](log-analytics-log-search-new.md)에서도 기본적으로 사용할 수 있습니다. 리포지토리의 데이터를 대화형으로 분석하고 여러 원본의 데이터를 상호 연결할 수 있습니다. 사용자 지정 경고 및 보기를 만들 수 있고 Excel, Power BI 또는 공유할 수 있는 링크로 데이터를 내보낼 수도 있습니다. 대시보드의  **일반 쿼리**  영역에는 자신의 쿼리와 보고서를 만드는 데 사용할 수 있는 유용한 쿼리가 몇 가지 있습니다. 
+
+## <a name="alerts"></a>Alerts
+
+네트워크 성능 모니터는 [Azure Monitor](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-unified-alerts)의 경고 기능을 사용합니다.
+
+즉, 모든 경고는 [작업 그룹](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-action-groups#overview)을 사용하여 관리됩니다.  
+
+OMS를 통해 경고를 만드는 NPM 사용자인 경우: 
+1. Azure Portal로 리디렉션하는 링크가 보입니다. 이 링크를 클릭하여 포털에 액세스합니다.
+2. 네트워크 성능 모니터 솔루션 타일을 클릭합니다. 
+3. [구성]으로 이동합니다.  
+4. 경고를 만들려는 테스트를 선택하고 아래에 설명된 단계를 따릅니다.
+
+Azure Portal을 통해 경고를 만드는 NPM 사용자인 경우:  
+1. 이메일을 직접 입력할 수도 있고 작업 그룹을 통해 경고를 만들 수도 있습니다.
+2. 이메일을 직접 입력하기로 선택하면 **NPM Email ActionGroup**이라는 이름의 작업 그룹이 만들어지고 이 작업 그룹에 이메일 id가 추가됩니다.
+3. 작업 그룹을 사용하기로 선택하면 이전에 만든 작업 그룹을 선택해야 합니다. 작업 그룹을 만드는 방법은 [여기](https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-action-groups#create-an-action-group-by-using-the-azure-portal)서 배울 수 있습니다. 
+4. 경고가 만들어지면 경고 관리를 사용하여 경고를 관리할 수 있습니다. 
+
+##<a name="pricing"></a>가격
+
+가격 책정에 대한 정보는 [온라인](log-analytics-network-performance-monitor-pricing-faq.md)으로 지원됩니다.
+
+## <a name="provide-feedback"></a>피드백 제공 
+
+* **UserVoice:** 개발되기를 바라는 네트워크 성능 모니터 기능에 대한 아이디어를 게시할 수 있습니다. [UserVoice 페이지](https://feedback.azure.com/forums/267889-log-analytics/category/188146-network-monitoring)를 방문하세요. 
+
+* **코호트 조인:** 코호트에 조인하는 새 고객을 항상 환영합니다. 그 일환으로 새로운 기능에 초기에 액세스할 수 있고 네트워크 성능 모니터를 개선하는 데 참여할 수 있는 기회가 제공됩니다. 조인하는 데 관심이 있으면  [빠른 설문 조사](https://aka.ms/npmcohort)에 참여하세요. 
+
+## <a name="next-steps"></a>다음 단계 
+[성능 모니터](log-analytics-network-performance-monitor-performance-monitor.md), [서비스 끝점 모니터](log-analytics-network-performance-monitor-performance-monitor.md) 및 [ExpressRoute 모니터](log-analytics-network-performance-monitor-expressroute.md)에 대해 알아봅니다. 

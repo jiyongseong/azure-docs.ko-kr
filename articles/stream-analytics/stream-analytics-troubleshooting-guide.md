@@ -1,29 +1,20 @@
 ---
-title: "Azure Stream Analytics 문제 해결 가이드 | Microsoft Docs"
-description: "Stream Analytics 작업 문제를 해결하는 방법"
-keywords: "문제 해결 가이드"
-documentationcenter: 
+title: Azure Stream Analytics 문제 해결 가이드
+description: 이 문서에서는 Azure Stream Analytics 작업, 연결, 입력, 출력, 쿼리 및 데이터 문제를 해결하는 기술에 대해 설명합니다.
 services: stream-analytics
-author: jeffstokes72
-manager: jhubbard
-editor: cgronlun
-ms.assetid: 
+author: jseb225
+ms.author: jeanb
+manager: kfile
+ms.reviewer: jasonh
 ms.service: stream-analytics
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: data-services
+ms.topic: conceptual
 ms.date: 04/20/2017
-ms.author: jeffstok
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: 25567d7aa586aaa1534c822fb635e4e62fb1b229
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
-
+ms.openlocfilehash: 44777946fdc829da222ffdd67dfecfa3bf240be7
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-
 # <a name="troubleshooting-guide-for-azure-stream-analytics"></a>Azure Stream Analytics 문제 해결 가이드
 
 Azure Stream Analytics 문제 해결은 언뜻 보기에 복잡한 노력이 필요한 것처럼 보일 수 있습니다. 여러 사용자가 작업을 한 후에 프로세스를 간소화하고 입력, 출력, 쿼리 및 함수에 대한 추측을 제거하는 데 도움이 되도록 이 가이드를 만들었습니다.
@@ -91,13 +82,12 @@ Stream Analytics 작업 문제 해결에서 최상의 결과를 얻으려면 다
 
 ## <a name="get-help"></a>도움말 보기
 
-추가 지원이 필요한 경우 [Azure Stream Analytics 포럼](https://social.msdn.microsoft.com/Forums/home?forum=AzureStreamAnalytics)을 참조하세요.
+추가 지원이 필요한 경우 [Azure Stream Analytics 포럼](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureStreamAnalytics)을 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
 
 * [Azure Stream Analytics 소개](stream-analytics-introduction.md)
 * [Azure Stream Analytics 사용 시작](stream-analytics-real-time-fraud-detection.md)
-* [Azure 스트림 분석 작업 규모 지정](stream-analytics-scale-jobs.md)
-* [Azure 스트림 분석 쿼리 언어 참조](https://msdn.microsoft.com/library/azure/dn834998.aspx)
+* [Azure  Stream Analytics 작업 규모 지정](stream-analytics-scale-jobs.md)
+* [Azure  Stream Analytics 쿼리 언어 참조](https://msdn.microsoft.com/library/azure/dn834998.aspx)
 * [Azure Stream Analytics 관리 REST API 참조](https://msdn.microsoft.com/library/azure/dn835031.aspx)
-

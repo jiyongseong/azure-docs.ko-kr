@@ -1,29 +1,27 @@
 ---
-title: "SQL Data Warehouse의 GROUP BY 옵션 | Microsoft Docs"
-description: "솔루션 개발을 위한 Azure SQL 데이터 웨어하우스의 GROUP BY 옵션 구현을 위한 팁."
+title: Azure SQL Data Warehouse의 GROUP BY 옵션 사용 | Microsoft Docs
+description: 솔루션 개발을 위한 Azure SQL Data Warehouse의 GROUP BY 옵션 구현을 위한 팁.
 services: sql-data-warehouse
-documentationcenter: NA
-author: jrowlandjones
-manager: jhubbard
-editor: 
-ms.assetid: f95a1e43-768f-4b7b-8a10-8a0509d0c871
+author: ronortloff
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: queries
-ms.date: 10/31/2016
-ms.author: jrj;barbkess
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: da71cb834c13da5d0f5690f471efc6c696163f30
-ms.lasthandoff: 04/03/2017
-
-
+ms.topic: conceptual
+ms.component: implement
+ms.date: 04/17/2018
+ms.author: rortloff
+ms.reviewer: igorstan
+ms.openlocfilehash: 0548983df23b158385783ac777b23268b5ac7d01
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
-# <a name="group-by-options-in-sql-data-warehouse"></a>SQL 데이터 웨어하우스의 GROUP BY 옵션
-[GROUP BY][GROUP BY] 절을 사용하여 데이터를 요약 행 집합으로 집계합니다. 또한 Azure SQL 데이터 웨어하우스에서 직접 지원하지 않기 때문에 해결해야 하는 기능을 확장하는 몇 가지 옵션이 있습니다.
+# <a name="group-by-options-in-sql-data-warehouse"></a>SQL Data Warehouse의 GROUP BY 옵션
+솔루션 개발을 위한 Azure SQL Data Warehouse의 GROUP BY 옵션 구현을 위한 팁.
+
+## <a name="what-does-group-by-do"></a>GROUP BY의 기능
+
+[GROUP BY](/sql/t-sql/queries/select-group-by-transact-sql) T-SQL 절을 사용하여 데이터를 요약 행 집합으로 집계합니다. GROUP BY에는 SQL Data Warehouse가 지원하지 않는 옵션이 몇 가지 있습니다. 이러한 옵션에는 해결 방법이 있습니다.
 
 이들 옵션은
 
@@ -32,10 +30,9 @@ ms.lasthandoff: 04/03/2017
 * GROUP BY with CUBE
 
 ## <a name="rollup-and-grouping-sets-options"></a>롤업 및 그룹화 집합 옵션
-여기서 가장 간단한 옵션은 명시적 구문에 의존하는 대신 `UNION ALL` 을 사용하여 롤업을 수행하는 것입니다. 결과는 완전히 동일합니다.
+여기서 가장 간단한 옵션은 명시적 구문에 의존하는 대신 UNION ALL을 사용하여 롤업을 수행하는 것입니다. 결과는 완전히 동일합니다.
 
-다음은 `ROLLUP` 옵션을 사용하는 GROUP BY 문의 예제입니다.
-
+다음은 ROLLUP 옵션과 함께GROUP BY 문을 사용하는 예제입니다.
 ```sql
 SELECT [SalesTerritoryCountry]
 ,      [SalesTerritoryRegion]
@@ -49,13 +46,13 @@ GROUP BY ROLLUP (
 ;
 ```
 
-ROLLUP을 사용하여 다음과 같은 집계를 요청했습니다.
+ROLLUP을 사용하여, 앞의 예제는 다음과 같은 집계를 요청합니다.
 
 * 국가 및 지역
 * 국가
 * 총합계
 
-이 요청을 바꾸려면 `UNION ALL`을 사용해야 하며, 동일한 결과가 반환되도록 필요한 집계를 명시적으로 지정합니다.
+ROLLUP을 대체하고 동일한 결과를 반환하려면 UNION ALL을 사용하고 필요한 집계를 명시적으로 지정합니다.
 
 ```sql
 SELECT [SalesTerritoryCountry]
@@ -82,10 +79,10 @@ FROM  dbo.factInternetSales s
 JOIN  dbo.DimSalesTerritory t     ON s.SalesTerritoryKey       = t.SalesTerritoryKey;
 ```
 
-GROUPING SETS의 경우 같은 원칙을 적용하되 보고자 하는 집계 수준에 맞는 UNION ALL 섹션만 만들면 됩니다.
+GROUPING SETS를 바꾸려면 샘플 원칙이 적용됩니다. 보려는 집계 수준에 대한 UNION ALL 섹션만 만들면 됩니다.
 
 ## <a name="cube-options"></a>큐브 옵션
-UNION ALL 접근방식을 사용하여 GROUP BY WITH CUBE를 만들 수 있습니다. 문제는 코드가 금세 번거롭고 다루기 힘들게 될 수 있다는 것입니다. 이 문제를 완화하기 위해 더 고급스러운 이 접근방식을 사용할 수 있습니다.
+UNION ALL 접근방식을 사용하여 GROUP BY WITH CUBE를 만들 수 있습니다. 문제는 코드가 금세 번거롭고 다루기 힘들게 될 수 있다는 것입니다. 이 문제를 완화하기 위해 보다 발전된 접근 방식을 사용할 수 있습니다.
 
 위의 예제를 사용해 보겠습니다.
 
@@ -120,9 +117,9 @@ SELECT Cols
 FROM GrpCube;
 ```
 
-CTAS의 결과는 아래와 같습니다.
+다음은 CTAS의 결과를 보여줍니다.
 
-![][1]
+![큐브별로 그룹화](media/sql-data-warehouse-develop-group-by-options/sql-data-warehouse-develop-group-by-cube.png)
 
 두 번째 단계는 중간 결과를 저장할 대상 테이블을 지정하는 것입니다.
 
@@ -183,17 +180,5 @@ ORDER BY 1,2,3
 코드를 섹션으로 분할하고 반복 구성을 생성하면 코드의 관리 및 유지 관리가 더 쉬워집니다.
 
 ## <a name="next-steps"></a>다음 단계
-더 많은 개발 팁은 [개발 개요][development overview]를 참조하세요.
-
-<!--Image references-->
-[1]: media/sql-data-warehouse-develop-group-by-options/sql-data-warehouse-develop-group-by-cube.png
-
-<!--Article references-->
-[development overview]: sql-data-warehouse-overview-develop.md
-
-<!--MSDN references-->
-[GROUP BY]: https://msdn.microsoft.com/library/ms177673.aspx
-
-
-<!--Other Web references-->
+더 많은 개발 팁은 [개발 개요](sql-data-warehouse-overview-develop.md)를 참조하세요.
 

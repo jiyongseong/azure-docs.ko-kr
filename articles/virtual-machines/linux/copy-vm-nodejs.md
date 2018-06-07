@@ -1,10 +1,10 @@
 ---
-title: "Azure CLI 1.0을 사용하여 Linux VM의 복사본 만들기 | Microsoft Docs"
-description: "Resource Manager 배포 모델에서 Azure CLI 1.0을 사용하여 Azure Linux 가상 컴퓨터의 복사본을 만드는 방법에 대해 알아보기"
+title: Azure CLI 1.0을 사용하여 Linux VM의 복사본 만들기 | Microsoft Docs
+description: Resource Manager 배포 모델에서 Azure CLI 1.0을 사용하여 Azure Linux 가상 머신의 복사본을 만드는 방법에 대해 알아보기
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
-manager: timlt
+manager: jeconnoc
 tags: azure-resource-manager
 ms.assetid: 770569d2-23c1-4a5b-801e-cddcd1375164
 ms.service: virtual-machines-linux
@@ -14,15 +14,14 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/22/2017
 ms.author: cynthn
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 62ae54f3596c9383cbf3b401fcfdb42ecfdee63c
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: bb350f8d14ad451ad3ff7cd617ca3f90967aaa4b
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-# <a name="create-a-copy-of-a-linux-virtual-machine-running-on-azure-with-the-azure-cli-10"></a>Azure CLI 1.0을 사용하여 Azure에서 실행되는 Linux 가상 컴퓨터의 복사본 만들기
-이 문서는 Resource Manager 배포 모델에서 Linux를 실행하는 Azure VM(가상 컴퓨터)의 복사본을 만드는 방법에 대해 설명합니다. 먼저 운영 체제와 데이터 디스크를 새 컨테이너로 복사한 다음 네트워크 리소스를 설정하고 새 가상 컴퓨터를 만듭니다.
+# <a name="create-a-copy-of-a-linux-virtual-machine-running-on-azure-with-the-azure-cli-10"></a>Azure CLI 1.0을 사용하여 Azure에서 실행되는 Linux 가상 머신의 복사본 만들기
+이 문서는 Resource Manager 배포 모델에서 Linux를 실행하는 Azure VM(가상 컴퓨터)의 복사본을 만드는 방법에 대해 설명합니다. 먼저 운영 체제와 데이터 디스크를 새 컨테이너로 복사한 다음 네트워크 리소스를 설정하고 새 가상 머신을 만듭니다.
 
 [사용자 지정 디스크 이미지에서 VM 업로드 및 만들](upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)수도 있습니다.
 
@@ -43,7 +42,7 @@ ms.lasthandoff: 04/03/2017
 | VM 이름 |`azure vm list` |
 | 리소스 그룹 이름 |`azure vm list` |
 | 위치 |`azure vm list` |
-| 저장소 계정 이름 |`azure storage account list -g <resourceGroup>` |
+| Storage 계정 이름 |`azure storage account list -g <resourceGroup>` |
 | 컨테이너 이름 |`azure storage container list -a <sourcestorageaccountname>` |
 | 소스 VM VHD 파일 이름 |`azure storage blob list --container <containerName>` |
 
@@ -112,6 +111,5 @@ azure vm create -n myVM -l myLocation -g myResourceGroup -f myNic \
 
 
 ## <a name="next-steps"></a>다음 단계
-Azure CLI를 사용하여 새 가상 컴퓨터를 관리하는 방법을 알아보려면 [Azure Resource Manager의 Azure CLI 명령](../azure-cli-arm-commands.md)을 참조하세요.
-
+Azure CLI를 사용하여 새 가상 머신을 관리하는 방법을 알아보려면 [Azure Resource Manager의 Azure CLI 명령](../azure-cli-arm-commands.md)을 참조하세요.
 

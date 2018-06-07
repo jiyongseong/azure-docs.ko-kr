@@ -1,9 +1,9 @@
 ---
-title: "Application Insights를 사용하여 웹앱의 실패 및 예외 진단 | Microsoft Docs"
-description: "요청 원격 분석과 함께 ASP.NET 앱에서 예외를 캡처합니다."
+title: Application Insights를 사용하여 웹앱의 실패 및 예외 진단 | Microsoft Docs
+description: 요청 원격 분석과 함께 ASP.NET 앱에서 예외를 캡처합니다.
 services: application-insights
 documentationcenter: .net
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: d1e98390-3ce4-4d04-9351-144314a42aa2
 ms.service: application-insights
@@ -11,15 +11,13 @@ ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
-ms.date: 03/14/2017
-ms.author: cfreeman
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 17c4dc6a72328b613f31407aff8b6c9eacd70d9a
-ms.openlocfilehash: ec8fadda778ac34d1a11006d4c6ab91e998f6d18
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/16/2017
-
-
+ms.date: 09/19/2017
+ms.author: mbullwin
+ms.openlocfilehash: ee04fc3338dec7893f9f33322bd6b9af932199e7
+ms.sourcegitcommit: 8aab1aab0135fad24987a311b42a1c25a839e9f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/16/2018
 ---
 # <a name="diagnose-exceptions-in-your-web-apps-with-application-insights"></a>Application Insights를 사용하여 웹앱에서 예외 진단
 라이브 웹앱의 예외는 [Application Insights](app-insights-overview.md)에서 보고됩니다. 클라이언트와 서버에서 실패한 요청을 예외 및 다른 이벤트와 상호 연결하여 원인을 신속하게 진단할 수 있습니다.
@@ -34,8 +32,8 @@ ms.lasthandoff: 05/16/2017
 * 일부 응용 프로그램 프레임워크 또는 일부 설정에서는 더 많은 예외를 catch하기 위해 몇 가지 추가 단계를 수행해야 합니다.
   * [웹 양식](#web-forms)
   * [MVC](#mvc)
-  * [Web API 1.*](#web-api-1)
-  * [Web API 2.*](#web-api-2)
+  * [Web API 1.*](#web-api-1x)
+  * [Web API 2.*](#web-api-2x)
   * [WCF](#wcf)
 
 ## <a name="diagnosing-exceptions-using-visual-studio"></a>Visual Studio를 사용하여 예외 진단
@@ -43,7 +41,7 @@ ms.lasthandoff: 05/16/2017
 
 F5 키를 사용하여 서버 또는 개발 컴퓨터에서 앱을 실행합니다.
 
-Visual Studio에서 Application Insights 검색 창을 열고 앱에서 이벤트를 표시하도록 설정합니다. 디버깅하는 동안 Application Insights 단추를 클릭하여 이를 수행할 수 있습니다.
+Visual Studio에서 Application Insights Search 창을 열고 앱에서 이벤트를 표시하도록 설정합니다. 디버깅하는 동안 Application Insights 단추를 클릭하여 이를 수행할 수 있습니다.
 
 ![프로젝트를 마우스 오른쪽 단추로 클릭하고 Application Insights 및 열기를 선택합니다.](./media/app-insights-asp-net-exceptions/34.png)
 
@@ -59,15 +57,19 @@ Visual Studio에서 Application Insights 검색 창을 열고 앱에서 이벤�
 ![CodeLens 예외 알림.](./media/app-insights-asp-net-exceptions/35.png)
 
 ## <a name="diagnosing-failures-using-the-azure-portal"></a>Azure 포털을 사용하여 오류 진단
-앱의 Application Insights 개요에서 실패 타일은 가장 많은 실패를 유발하는 요청 URL 목록과 함께 예외 및 실패한 HTTP 요청에 대한 차트를 보여 줍니다.
+Application Insights는 APM 환경과 함께 제공되어 모니터링된 응용 프로그램에서 실패를 진단하는 데 도움이 됩니다. 시작하려면 조사 섹션에 있는 Application Insights 리소스 메뉴에서 오류 옵션을 클릭합니다. 사용자의 요청, 실패하는 횟수 및 사용자가 영향을 받는 횟수에 대한 오류 속도 추세를 표시하는 전체 화면 보기에 표시됩니다. 상위 3개 응답 코드, 상위 3개 예외 형식 및 상위 3개 실패 종속성 형식을 비롯한 선택한 실패 작업에 관한 몇 가지 가장 유용한 분포가 오른쪽에 표시됩니다. 
 
-![설정 선택, 오류](./media/app-insights-asp-net-exceptions/012-start.png)
+![오류 심사 보기(작업 탭)](./media/app-insights-asp-net-exceptions/FailuresTriageView.png)
 
-목록에서 실패한 예외 형식 중 하나를 클릭하여 개별 예외 항목으로 이동합니다. 여기서 세부 정보 및 스택 추적을 볼 수 있습니다.
+한 번 클릭하면 작업의 이러한 각 하위 집합에 대한 대표 샘플을 검토할 수 있습니다. 특히, 예외를 진단하려면 다음과 같이 예외 세부 정보 블레이드에 표시되는 특정 예외 수를 클릭할 수 있습니다.
 
-![실패한 요청 인스턴트를 선택하고, 예외 세부 정보 아래에서 예외 인스턴스로 이동합니다.](./media/app-insights-asp-net-exceptions/030-req-drill.png)
+![예외 세부 정보 블레이드](./media/app-insights-asp-net-exceptions/ExceptionDetailsBlade.png)
 
-**또는** 요청 목록에서 시작하여 관련 예외를 찾을 수 있습니다.
+**또는** 특정 실패 작업의 예외를 살펴보는 대신 예외 탭으로 전환하여 전체적인 예외 보기로 시작할 수 있습니다.
+
+![오류 심사 보기(예외 탭)](./media/app-insights-asp-net-exceptions/FailuresTriageView_Exceptions.png)
+
+여기서 모니터링한 앱에 대해 수집된 모든 예외를 확인할 수 있습니다.
 
 *예외가 표시되지 않나요? [예외 캡처](#exceptions)를 참조하세요.*
 
@@ -111,8 +113,7 @@ Visual Studio에서 Application Insights 검색 창을 열고 앱에서 이벤�
 ## <a name="reporting-exceptions-explicitly"></a>예외를 명시적으로 보고
 가장 간단한 방법은 예외 처리기에 TrackException()에 대한 호출을 삽입하는 것입니다.
 
-JavaScript
-
+```javascript
     try
     { ...
     }
@@ -122,9 +123,9 @@ JavaScript
         {Game: currentGame.Name,
          State: currentGame.State.ToString()});
     }
+```
 
-C#
-
+```csharp
     var telemetry = new TelemetryClient();
     ...
     try
@@ -142,9 +143,9 @@ C#
        // Send the exception telemetry:
        telemetry.TrackException(ex, properties, measurements);
     }
+```
 
-VB
-
+```VB
     Dim telemetry = New TelemetryClient
     ...
     Try
@@ -160,6 +161,7 @@ VB
       ' Send the exception telemetry:
       telemetry.TrackException(ex, properties, measurements)
     End Try
+```
 
 속성 및 측정 매개 변수는 선택적이지만 추가 정보를 [필터링 및 추가](app-insights-diagnostic-search.md)하는 데 유용합니다. 예를 들어 여러 게임을 실행할 수 있는 앱이 있는 경우 특정 게임과 관련된 모든 예외 보고서를 찾을 수 있습니다. 각 사전에 원하는 만큼 항목을 추가할 수 있습니다.
 
@@ -173,8 +175,7 @@ VB
 
 하지만 활성 리디렉션이 있다면 Global.asax.cs의 Application_Error 함수에 다음 줄을 추가합니다 (아직 없는 경우 Global.asax 파일 추가).
 
-*C#*
-
+```csharp
     void Application_Error(object sender, EventArgs e)
     {
       if (HttpContext.Current.IsCustomErrorEnabled && Server.GetLastError  () != null)
@@ -184,11 +185,28 @@ VB
          ai.TrackException(Server.GetLastError());
       }
     }
-
+```
 
 ## <a name="mvc"></a>MVC
+Application Insights 웹 SDK 버전 2.6(beta3 및 이후 버전)부터 Application Insights는 MVC 5 + 컨트롤러 메서드에서 자동으로 throw된 처리되지 않은 예외를 수집합니다. (다음 예제에 설명된 대로) 이전에 사용자 지정 처리기를 추가하여 이러한 예외를 추적한 경우 예외의 이중 추적을 방지하기 위해 제거할 수 있습니다.
+
+예외 필터에서 처리할 수 없는 다양한 경우가 있습니다. 예: 
+
+* 컨트롤러 생성자에서 throw된 예외
+* 메시지 처리기에서 throw된 예외
+* 라우팅 중에 throw된 예외
+* 응답 콘텐츠를 직렬화하는 동안 throw된 예외
+* 응용 프로그램 시작 중에 throw된 예외
+* 배경 작업에서 throw된 예외
+
+응용 프로그램에 의해 *처리*된 모든 예외는 수동으로 추적되어야 합니다. 일반적으로 컨트롤러에서 발생한 처리되지 않은 예외로 인해 500 "내부 서버 오류" 응답이 발생합니다. 이러한 응답이 처리된 예외(또는 예외 없음)의 결과로 수동으로 생성된 경우 `ResultCode` 500을 사용하여 해당하는 요청 원격 분석에서 추적됩니다. 그러나 Application Insights SDK는 해당하는 예외를 추적할 수 없습니다.
+
+### <a name="prior-versions-support"></a>이전 버전 지원
+Application Insights 웹 SDK 2.5(및 이전 버전)의 MVC 4(및 이전 버전)를 사용하는 경우 예외를 추적하기 위해 다음 예제를 참조합니다.
+
 [CustomErrors](https://msdn.microsoft.com/library/h0hfz6fc.aspx)가 `Off`로 구성되어 있으면 [HTTP 모듈](https://msdn.microsoft.com/library/ms178468.aspx)에서 예외를 수집할 수 있습니다. 그러나 `RemoteOnly`(기본값) 또는 `On`으로 설정되어 있으면 예외가 지워지고 Application Insights에서 자동으로 수집할 수 없습니다. [System.Web.Mvc.HandleErrorAttribute 클래스](http://msdn.microsoft.com/library/system.web.mvc.handleerrorattribute.aspx)를 재정의하고, 재정의된 클래스를 아래와 같이 다른 MVC 버전에 적용하여 이 문제를 해결할 수 있습니다([github 자료](https://github.com/AppInsightsSamples/Mvc2UnhandledExceptions/blob/master/MVC2App/Controllers/AiHandleErrorAttribute.cs)).
 
+```csharp
     using System;
     using System.Web.Mvc;
     using Microsoft.ApplicationInsights;
@@ -213,22 +231,26 @@ VB
         }
       }
     }
+```
 
 #### <a name="mvc-2"></a>MVC 2
 HandleError 특성을 컨트롤러의 새 특성으로 바꿉니다.
 
+```csharp
     namespace MVC2App.Controllers
     {
        [AiHandleError]
        public class HomeController : Controller
        {
     ...
+```
 
 [샘플](https://github.com/AppInsightsSamples/Mvc2UnhandledExceptions)
 
 #### <a name="mvc-3"></a>MVC 3
 Global.asax.cs에서 `AiHandleErrorAttribute` 를 글로벌 필터로 등록합니다.
 
+```csharp
     public class MyMvcApplication : System.Web.HttpApplication
     {
       public static void RegisterGlobalFilters(GlobalFilterCollection filters)
@@ -236,12 +258,14 @@ Global.asax.cs에서 `AiHandleErrorAttribute` 를 글로벌 필터로 등록합�
          filters.Add(new AiHandleErrorAttribute());
       }
      ...
+```
 
 [샘플](https://github.com/AppInsightsSamples/Mvc3UnhandledExceptionTelemetry)
 
 #### <a name="mvc-4-mvc5"></a>MVC 4, MVC5
 FilterConfig.cs에서 AiHandleErrorAttribute를 글로벌 필터로 등록합니다.
 
+```csharp
     public class FilterConfig
     {
       public static void RegisterGlobalFilters(GlobalFilterCollection filters)
@@ -250,12 +274,31 @@ FilterConfig.cs에서 AiHandleErrorAttribute를 글로벌 필터로 등록합니
         filters.Add(new AiHandleErrorAttribute());
       }
     }
+```
 
 [샘플](https://github.com/AppInsightsSamples/Mvc5UnhandledExceptionTelemetry)
 
-## <a name="web-api-1x"></a>Web API 1.x
+## <a name="web-api"></a>Web API
+Application Insights 웹 SDK 버전 2.6(beta3 및 이후 버전)부터 Application Insights는 WebAPI 2+의 컨트롤러 메서드에서 자동으로 throw된 처리되지 않은 예외를 수집합니다. (다음 예제에 설명된 대로) 이전에 사용자 지정 처리기를 추가하여 이러한 예외를 추적한 경우 예외의 이중 추적을 방지하기 위해 제거할 수 있습니다.
+
+예외 필터에서 처리할 수 없는 다양한 경우가 있습니다. 예: 
+
+* 컨트롤러 생성자에서 throw된 예외
+* 메시지 처리기에서 throw된 예외
+* 라우팅 중에 throw된 예외
+* 응답 콘텐츠를 직렬화하는 동안 throw된 예외
+* 응용 프로그램 시작 중에 throw된 예외
+* 배경 작업에서 throw된 예외
+
+응용 프로그램에 의해 *처리*된 모든 예외는 수동으로 추적되어야 합니다. 일반적으로 컨트롤러에서 발생한 처리되지 않은 예외로 인해 500 "내부 서버 오류" 응답이 발생합니다. 이러한 응답이 처리된 예외(또는 예외 없음)의 결과로 수동으로 생성된 경우 `ResultCode` 500을 사용하여 해당하는 요청 원격 분석에서 추적됩니다. 그러나 Application Insights SDK는 해당하는 예외를 추적할 수 없습니다.
+
+### <a name="prior-versions-support"></a>이전 버전 지원
+Application Insights 웹 SDK 2.5(및 이전 버전)의 WebAPI 1(및 이전 버전)을 사용하는 경우 예외를 추적하기 위해 다음 예제를 참조합니다.
+
+#### <a name="web-api-1x"></a>Web API 1.x
 System.Web.Http.Filters.ExceptionFilterAttribute를 재정의합니다.
 
+```csharp
     using System.Web.Http.Filters;
     using Microsoft.ApplicationInsights;
 
@@ -274,9 +317,11 @@ System.Web.Http.Filters.ExceptionFilterAttribute를 재정의합니다.
         }
       }
     }
+```
 
 재정의된 특성을 특정 컨트롤러에 추가하거나 WebApiConfig 클래스에서 글로벌 필터 구성에 추가할 수 있습니다.
 
+```csharp
     using System.Web.Http;
     using WebApi1.x.App_Start;
 
@@ -296,19 +341,14 @@ System.Web.Http.Filters.ExceptionFilterAttribute를 재정의합니다.
         }
       }
     }
+```
 
 [샘플](https://github.com/AppInsightsSamples/WebApi_1.x_UnhandledExceptions)
 
-예외 필터에서 처리할 수 없는 다양한 경우가 있습니다. 예:
-
-* 컨트롤러 생성자에서 throw된 예외
-* 메시지 처리기에서 throw된 예외
-* 라우팅 중에 throw된 예외
-* 응답 콘텐츠를 직렬화하는 동안 throw된 예외
-
-## <a name="web-api-2x"></a>Web API 2.x
+#### <a name="web-api-2x"></a>Web API 2.x
 IExceptionLogger를 추가로 구현합니다.
 
+```csharp
     using System.Web.Http.ExceptionHandling;
     using Microsoft.ApplicationInsights;
 
@@ -327,9 +367,11 @@ IExceptionLogger를 추가로 구현합니다.
         }
       }
     }
+```
 
 WebApiConfig에서 서비스에 추가합니다.
 
+```csharp
     using System.Web.Http;
     using System.Web.Http.ExceptionHandling;
     using ProductsAppPureWebAPI.App_Start;
@@ -353,7 +395,8 @@ WebApiConfig에서 서비스에 추가합니다.
             config.Services.Add(typeof(IExceptionLogger), new AiExceptionLogger());
         }
       }
-  }
+     }
+```
 
 [샘플](https://github.com/AppInsightsSamples/WebApi_2.x_UnhandledExceptions)
 
@@ -365,6 +408,7 @@ WebApiConfig에서 서비스에 추가합니다.
 ## <a name="wcf"></a>WCF
 특성을 확장하고 IErrorHandler 및 IServiceBehavior를 구현하는 클래스를 추가합니다.
 
+```csharp
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -414,7 +458,7 @@ WebApiConfig에서 서비스에 추가합니다.
       }
     }
 
-서비스 구현에 특성을 추가합니다.
+Add the attribute to the service implementations:
 
     namespace WcfService4
     {
@@ -422,6 +466,7 @@ WebApiConfig에서 서비스에 추가합니다.
         public class Service1 : IService1
         {
          ...
+```
 
 [샘플](https://github.com/AppInsightsSamples/WCFUnhandledExceptions)
 
@@ -432,7 +477,7 @@ WebApiConfig에서 서비스에 추가합니다.
 
 .NET Framework는 간격의 예외 수를 계산하고 간격의 길이로 나누어 속도를 계산합니다.
 
-TrackException 보고서를 계산하여 Application Insights 포털에서 계산되는 '예외' 개수와는 다릅니다. 샘플링 간격이 다르며, SDK에서 처리된 예외 및 처리되지 않은 예외 둘 다에 대한 TrackException 보고서를 보내지 않습니다.
+TrackException 보고서를 계산하여 Application Insights 포털에서 계산되는 ‘예외’ 개수와는 다릅니다. 샘플링 간격이 다르며, SDK에서 처리된 예외 및 처리되지 않은 예외 둘 다에 대한 TrackException 보고서를 보내지 않습니다.
 
 ## <a name="video"></a>비디오
 
@@ -442,4 +487,3 @@ TrackException 보고서를 계산하여 Application Insights 포털에서 계�
 * [REST, SQL 및 기타 종속성 호출 모니터링](app-insights-asp-net-dependencies.md)
 * [페이지 로드 시간, 브라우저 예외 및 AJAX 호출 모니터링](app-insights-javascript.md)
 * [성능 카운터 모니터링](app-insights-performance-counters.md)
-

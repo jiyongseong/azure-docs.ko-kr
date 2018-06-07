@@ -1,12 +1,12 @@
 ---
-title: "Azure AD Connect 동기화: Azure AD Connect 동기화 서비스 계정 변경 | Microsoft Docs"
-description: "이 항목 문서는 암호화 키 및 암호가 변경된 후 암호화 키를 제거하는 방법을 설명합니다."
+title: 'Azure AD Connect 동기화: Azure AD Connect 동기화 서비스 계정 변경 | Microsoft Docs'
+description: 이 항목 문서는 암호화 키 및 암호가 변경된 후 암호화 키를 제거하는 방법을 설명합니다.
 services: active-directory
-keywords: "Azure AD 동기화 서비스 계정, 암호"
-documentationcenter: 
-author: cychua
-manager: femila
-editor: 
+keywords: Azure AD 동기화 서비스 계정, 암호
+documentationcenter: ''
+author: billmath
+manager: mtillman
+editor: ''
 ms.assetid: 76b19162-8b16-4960-9e22-bd64e6675ecc
 ms.service: active-directory
 ms.workload: identity
@@ -15,12 +15,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/12/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 4e9412caa9fed15f42a04260f12fa802caf7a2e2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/03/2017
-
+ms.openlocfilehash: faa6d667b514563516c23e0484437ac9572e52b7
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
 # <a name="changing-the-azure-ad-connect-sync-service-account-password"></a>Azure AD Connect 동기화 서비스 계정 암호 변경
 Azure AD Connect 동기화 서비스 계정 암호를 변경하면 암호화 키를 제거하고 Azure AD Connect 동기화 서비스 계정 암호를 다시 초기화할 때까지 동기화 서비스를 제대로 시작할 수 없습니다. 
@@ -31,7 +30,7 @@ Azure AD Connect는 동기화 서비스의 일환으로 암호화 키를 사용�
 
 서비스 계정 암호를 변경해야 하는 경우 [Azure AD Connect 동기화 암호화 키 제거](#abandoning-the-azure-ad-connect-sync-encryption-key)의 절차를 사용하여 작업을 수행할 수 있습니다.  이러한 절차는 어떤 이유로든 암호화 키를 제거해야 하는 경우에 사용되어야 합니다.
 
-##<a name="issues-that-arise-from-changing-the-password"></a>암호 변경으로 인해 발생하는 문제
+## <a name="issues-that-arise-from-changing-the-password"></a>암호 변경으로 인해 발생하는 문제
 서비스 계정 암호를 변경하는 경우 두 가지 작업을 수행해야 합니다.
 
 첫째, Windows 서비스 제어 관리자에서 암호를 변경해야 합니다.  이 문제가 해결될 때까지 다음 오류가 표시됩니다.
@@ -114,4 +113,3 @@ Azure AD 서비스 계정의 암호를 동기화 서비스에 직접 제공할 �
 * [Azure AD Connect 동기화: 동기화의 이해 및 사용자 지정](active-directory-aadconnectsync-whatis.md)
 
 * [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)
-

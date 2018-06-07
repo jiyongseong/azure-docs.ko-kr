@@ -1,25 +1,21 @@
 ---
-title: "Visual Studio에서 Azure Cloud Services의 역할 관리 | Microsoft Docs"
-description: "Visual Studio에서 Azure Cloud Services의 역할을 추가 및 제거하는 방법을 알아봅니다."
+title: Visual Studio에서 Azure Cloud Services의 역할 관리 | Microsoft Docs
+description: Visual Studio에서 Azure Cloud Services의 역할을 추가 및 제거하는 방법을 알아봅니다.
 services: visual-studio-online
-documentationcenter: na
-author: TomArcher
+author: ghogen
 manager: douge
-editor: 
-ms.assetid: 5ec9ae2e-8579-4e5d-999e-8ae05b629bd1
-ms.service: multiple
-ms.devlang: dotnet
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: multiple
+assetId: 5ec9ae2e-8579-4e5d-999e-8ae05b629bd1
+ms.prod: visual-studio-dev15
+ms.technology: vs-azure
+ms.workload: azure
+ms.topic: conceptual
 ms.date: 03/21/2017
-ms.author: tarcher
-translationtype: Human Translation
-ms.sourcegitcommit: 424d8654a047a28ef6e32b73952cf98d28547f4f
-ms.openlocfilehash: d46c2b846f5790db1e1b0e06a12184fe7bed7c34
-ms.lasthandoff: 03/22/2017
-
-
+ms.author: ghogen
+ms.openlocfilehash: d0a2148274cd41654eb789772b3ea46bc4ed01aa
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="managing-roles-in-azure-cloud-services-with-visual-studio"></a>Visual Studio에서 Azure Cloud Services의 역할 관리
 Azure 클라우드 서비스를 만든 후 새 역할을 추가하거나 기존 역할에서 제거할 수 있습니다. 또한 기존 프로젝트를 가져오고 역할로 변환할 수 있습니다. 예를 들어, ASP.NET 웹 응용 프로그램을 가져오고 웹 역할로 지정할 수 있습니다.
@@ -74,4 +70,3 @@ Azure 클라우드 서비스를 만든 후 새 역할을 추가하거나 기존 
 
 ## <a name="next-steps"></a>다음 단계
 - [Visual Studio에서 Azure 클라우드 서비스에 대한 역할 구성](vs-azure-tools-configure-roles-for-cloud-service.md)
-

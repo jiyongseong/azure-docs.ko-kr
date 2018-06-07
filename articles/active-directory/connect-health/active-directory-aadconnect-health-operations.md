@@ -1,10 +1,10 @@
 ---
-title: "Azure Active Directory Connect Health 작업"
-description: "이 문서에서는 Azure AD Connect Health를 배포한 후 수행할 수 있는 추가 작업에 대해 설명합니다."
+title: Azure Active Directory Connect Health 작업
+description: 이 문서에서는 Azure AD Connect Health를 배포한 후 수행할 수 있는 추가 작업에 대해 설명합니다.
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: karavar
-manager: femila
+manager: mtillman
 ms.assetid: 86cc3840-60fb-43f9-8b2a-8598a9df5c94
 ms.service: active-directory
 ms.workload: identity
@@ -13,12 +13,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/18/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: fa9983a3d53cf8d6278163a2b7d08c86ae2f0637
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
+ms.openlocfilehash: c9920857f7d1910921b4bb3771e770fb4c3a42c3
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="azure-active-directory-connect-health-operations"></a>Azure Active Directory Connect Health 작업
 이 항목에서는 Azure AD(Azure Active Directory) Connect Health를 사용하여 수행할 수 있는 다양한 작업에 대해 설명합니다.
@@ -43,6 +42,9 @@ ID 인프라가 정상 상태가 아님을 나타내는 경고가 표시되면 �
 
 ## <a name="delete-a-server-or-service-instance"></a>서버 또는 서비스 인스턴스 삭제
 
+>[!NOTE] 
+> 삭제 단계에는 Azure AD 프리미엄 라이선스가 필요합니다.
+
 서버를 모니터링 대상에서 제거하려는 경우도 있습니다. Azure AD Connect Health 서비스에서 서버를 제거하기 위해 알아야 할 사항은 다음과 같습니다.
 
 서버를 삭제하는 경우 다음 사항에 유의하세요.
@@ -52,7 +54,11 @@ ID 인프라가 정상 상태가 아님을 나타내는 경고가 표시되면 �
 * 이 작업을 수행해도 이 서버에서 이미 수집된 데이터는 삭제되지 않습니다. 해당 데이터는 Azure 데이터 보존 정책에 따라 삭제됩니다.
 * 이 작업을 수행한 후 동일한 서버를 다시 모니터링하려는 경우 이 서버에서 Health Agent를 제거한 후 다시 설치해야 합니다.
 
-### <a name="to-delete-a-server-from-the-azure-ad-connect-health-service"></a>Azure AD Connect Health 서비스에서 서버를 삭제하려면
+### <a name="delete-a-server-from-the-azure-ad-connect-health-service"></a>Azure AD Connect Health 서비스에서 서버 삭제
+
+>[!NOTE] 
+> 삭제 단계에는 Azure AD 프리미엄 라이선스가 필요합니다.
+
 AD FS(Active Directory Federation Services)용 Azure AD Connect Health 및 Azure AD Connect(동기화):
 
 1. **서버 목록** 블레이드에서 제거할 서버 이름을 선택하여 **서버** 블레이드를 엽니다.
@@ -85,9 +91,9 @@ Azure Active Directory Domain Services용 Azure AD Connect Health:
 4. **삭제**를 클릭합니다.
    <br><br>
 
-[//]: # (Start of RBAC section)
-## <a name="manage-access-with-role-based-access-control"></a>역할 기반 액세스 제어로 액세스 관리
-Azure AD Connect Health에 대한 [RBAC(역할 기반 액세스 제어)](../role-based-access-control-configure.md)는 전역 관리자 이외의 사용자 및 그룹에 액세스 권한을 부여합니다. RBAC는 의도한 사용자 및 그룹에 역할을 할당하고 디렉터리 내의 전역 관리자를 제한하는 메커니즘을 제공합니다.
+[//]: # (RBAC 섹션의 시작)
+## <a name="manage-access-with-role-based-access-control"></a>역할 기반 Access Control로 액세스 관리
+Azure AD Connect Health에 대한 [RBAC(역할 기반 Access Control)](../../role-based-access-control/role-assignments-portal.md)는 전역 관리자 이외의 사용자 및 그룹에 액세스 권한을 부여합니다. RBAC는 의도한 사용자 및 그룹에 역할을 할당하고 디렉터리 내의 전역 관리자를 제한하는 메커니즘을 제공합니다.
 
 ### <a name="roles"></a>역할
 Azure AD Connect Health는 다음과 같은 기본 제공 역할을 지원합니다.
@@ -95,7 +101,7 @@ Azure AD Connect Health는 다음과 같은 기본 제공 역할을 지원합니
 | 역할 | 권한 |
 | --- | --- |
 | 소유자 |소유자는 *액세스를 관리*(예: 사용자 또는 그룹에 역할 할당)하고, 포털에서 *모든 정보를 확인*(예: 경고 보기)하며, Azure AD Connect Health 내에서 *설정을 변경*(예: 메일 알림)할 수 있습니다. <br>기본적으로 Azure AD 전역 관리자에게 이 역할이 할당되며, 이 설정은 변경할 수 없습니다. |
-| 참여자 |참가자는 포털에서 *모든 정보를 확인*(예: 경고 보기)하고, Azure AD Connect Health 내에서 *설정을 변경*(예: 메일 알림)할 수 있습니다. |
+| 참가자 |참가자는 포털에서 *모든 정보를 확인*(예: 경고 보기)하고, Azure AD Connect Health 내에서 *설정을 변경*(예: 메일 알림)할 수 있습니다. |
 | 읽기 권한자 |구독자는 Azure AD Connect Health 내의 포털에서 *모든 정보를 확인*(예: 경고 보기)할 수 있습니다. |
 
 다른 모든 역할(예: 사용자 액세스 관리자 또는 DevTest 랩 사용자)은 포털 환경에서 사용할 수 있는 경우에도 Azure AD Connect Health 내의 액세스 권한에 영향을 주지 않습니다.
@@ -134,7 +140,7 @@ Azure AD Connect Health 내에서 *모든 서비스 인스턴스* 수준으로 �
 >
 
 #### <a name="step-3-share-the-blade-location-with-users-or-groups"></a>3단계: 사용자 또는 그룹을 사용하여 블레이드 위치 공유
-1. 사용 권한을 할당하면 사용자가 [여기](http://aka.ms/aadconnecthealth)로 이동하여 Azure AD Connect Health에 액세스할 수 있습니다.
+1. 사용 권한을 할당하면 사용자가 [여기](https://aka.ms/aadconnecthealth)로 이동하여 Azure AD Connect Health에 액세스할 수 있습니다.
 2. 블레이드에서 사용자는 블레이드 또는 블레이드의 서로 다른 부분을 대시보드에 고정할 수 있습니다. **대시보드에 고정** 아이콘을 클릭하면 됩니다.<br>
    ![고정 아이콘이 강조 표시된 Azure AD Connect Health RBAC 고정 블레이드 스크린샷](./media/active-directory-aadconnect-health/RBAC_pin_blade.png)
 
@@ -147,7 +153,7 @@ Azure AD Connect Health 내에서 *모든 서비스 인스턴스* 수준으로 �
 Azure AD Connect Health RBAC에 추가된 사용자 또는 그룹을 제거할 수 있습니다. 사용자 또는 그룹을 마우스 오른쪽 단추로 클릭하고 **제거**를 선택하면 됩니다.<br>
 ![제거가 강조 표시된 Azure AD Connect Health RBAC 사용자 창 스크린샷](./media/active-directory-aadconnect-health/RBAC_remove.png)
 
-[//]: # (End of RBAC section)
+[//]: # (RBAC 섹션의 끝)
 
 ## <a name="next-steps"></a>다음 단계
 * [Azure AD Connect Health](active-directory-aadconnect-health.md)
@@ -157,4 +163,3 @@ Azure AD Connect Health RBAC에 추가된 사용자 또는 그룹을 제거할 �
 * [AD DS와 함께 Azure AD Connect Health 사용](active-directory-aadconnect-health-adds.md)
 * [Azure AD Connect Health FAQ](active-directory-aadconnect-health-faq.md)
 * [Azure AD Connect Health 버전 내역](active-directory-aadconnect-health-version-history.md)
-

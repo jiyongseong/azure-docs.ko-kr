@@ -4,7 +4,7 @@ description: "Azure Active Directory 활동 콘텐츠 팩의 오류 메시지 �
 services: active-directory
 documentationcenter: 
 author: MarkusVi
-manager: femila
+manager: mtillman
 editor: 
 ms.assetid: ffce7eb1-99da-4ea7-9c4d-2322b755c8ce
 ms.service: active-directory
@@ -12,17 +12,15 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 07/15/2017
+ms.date: 01/15/2018
 ms.author: markvi
 ms.reviewer: dhanyahk
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ff2fb126905d2a68c5888514262212010e108a3d
-ms.openlocfilehash: a47810d89fb3db839d1d59942ee90610afaeb6a8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/17/2017
-
+ms.openlocfilehash: b22f387a0338246c7586f0f0735b4612a796691a
+ms.sourcegitcommit: 384d2ec82214e8af0fc4891f9f840fb7cf89ef59
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/16/2018
 ---
-
 # <a name="troubleshooting-azure-active-directory-activity-logs-content-pack-errors"></a>Azure Active Directory 활동 로그 콘텐츠 팩 오류 문제 해결 
 
 
@@ -68,6 +66,5 @@ Azure Active Directory 미리 보기용 Power BI 콘텐츠 팩에서 작업할 �
 ## <a name="next-steps"></a>다음 단계
 
 Azure Active Directory 미리 보기용 Power BI 콘텐츠 팩을 설치하려면 [여기](https://powerbi.microsoft.com/en-us/blog/azure-active-directory-meets-power-bi/)를 클릭합니다.
-
 
 

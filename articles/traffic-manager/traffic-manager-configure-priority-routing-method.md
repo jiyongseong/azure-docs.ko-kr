@@ -14,13 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/20/2017
 ms.author: kumud
-translationtype: Human Translation
-ms.sourcegitcommit: 1429bf0d06843da4743bd299e65ed2e818be199d
 ms.openlocfilehash: 0db83cde6facc89b8b8aa72e6419129ec868235c
-ms.lasthandoff: 03/22/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="configure-priority-traffic-routing-method-in-traffic-manager"></a>Traffic Manager에서 우선 순위 트래픽 라우팅 방법 구성
 
 웹 사이트 모드에 관계없이 Azure Websites는 데이터 센터(지역이라고도 함) 내의 웹 사이트에 대해 이미 장애 조치(Failover) 기능을 제공합니다. Traffic Manager는 다른 데이터 센터의 웹 사이트에 대해 장애 조치(Failover)를 제공합니다.
@@ -36,7 +35,7 @@ ms.lasthandoff: 03/22/2017
     1. **트래픽 라우팅 방법 설정**에서 트래픽 라우팅 방법이 **우선 순위**인지 확인합니다. 아닌 경우 드롭다운 목록에서 **우선 순위**를 클릭합니다.
     2. **끝점 모니터 설정**을 다음과 같이 이 프로필 내의 모든 끝점과 동일하게 설정합니다.
         1. 적절한 **프로토콜**을 선택하고 **포트** 번호를 지정합니다. 
-        2. **경로**에서 슬래시 */*를 입력합니다. 끝점을 모니터링하려면 경로와 파일 이름을 지정해야 합니다. 슬래시 "/"는 상대 경로에 유효한 입력이며 파일이 루트 디렉터리(기본값)에 있음을 나타냅니다.
+        2. **경로**에서 슬래시  */* 를 입력합니다. 끝점을 모니터링하려면 경로와 파일 이름을 지정해야 합니다. 슬래시 "/"는 상대 경로에 유효한 입력이며 파일이 루트 디렉터리(기본값)에 있음을 나타냅니다.
         3. 페이지 위쪽에서 **저장**을 클릭합니다.
 5. **설정** 섹션에서 **끝점**을 클릭합니다.
 6. **끝점** 블레이드에서 사용자의 끝점에 대한 우선 순위 순서를 검토합니다. **우선 순위** 트래픽 라우팅 방법을 선택하는 경우 선택한 끝점의 순서가 중요합니다. 끝점의 우선 순위 순서를 확인합니다.  기본 끝점이 맨 위에 있습니다. 표시되는 순서를 다시 확인합니다. 모든 요청이 첫 번째 끝점으로 라우팅되고, Traffic Manager에서 이를 비정상으로 감지하면 트래픽은 자동으로 다음 끝점으로 장애 조치됩니다. 
@@ -44,9 +43,9 @@ ms.lasthandoff: 03/22/2017
 8. **저장**을 클릭하여 끝점 설정의 변경 사항을 저장합니다.
 9. 구성 변경을 완료한 후 페이지 맨 아래에서 **저장**을 클릭합니다.
 10. 다음과 같이 사용자 구성의 변경 내용을 테스트합니다.
-    1.    포털의 검색 창에서 Traffic Manager 프로필 이름을 검색하고 표시되는 결과에서 Traffic Manager 프로필을 클릭합니다.
-    2.    **Traffic Manager** 프로필 블레이드에서 **개요**를 클릭합니다.
-    3.    **Traffic Manager 프로필** 블레이드에 사용자의 새로 만든 Traffic Manager 프로필의 DNS 이름이 표시됩니다. 이는 라우팅 형식에서 결정된 대로 올바른 끝점으로 라우팅되도록 모든 클라이언트가 사용할 수 있습니다(예를 들어 웹 브라우저를 사용하여 이동). 이 경우 모든 요청이 첫 번째 끝점으로 라우팅되고 Traffic Manager에서 이를 비정상으로 감지하면 트래픽은 자동으로 다음 끝점으로 장애 조치됩니다.
+    1.  포털의 검색 창에서 Traffic Manager 프로필 이름을 검색하고 표시되는 결과에서 Traffic Manager 프로필을 클릭합니다.
+    2.  **Traffic Manager** 프로필 블레이드에서 **개요**를 클릭합니다.
+    3.  **Traffic Manager 프로필** 블레이드에 사용자의 새로 만든 Traffic Manager 프로필의 DNS 이름이 표시됩니다. 이는 라우팅 형식에서 결정된 대로 올바른 끝점으로 라우팅되도록 모든 클라이언트가 사용할 수 있습니다(예를 들어 웹 브라우저를 사용하여 이동). 이 경우 모든 요청이 첫 번째 끝점으로 라우팅되고 Traffic Manager에서 이를 비정상으로 감지하면 트래픽은 자동으로 다음 끝점으로 장애 조치됩니다.
 11. Traffic Manager 프로필이 작동하면 회사 도메인 이름이 Traffic Manager 도메인 이름을 가리키도록 권한 있는 DNS 서버의 DNS 레코드를 편집합니다.
 
 ![Traffic Manager를 사용한 우선 순위 트래픽 라우팅 방법 구성][1]

@@ -1,0 +1,73 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: "Azure Backup 설명서"
+metadata:
+  title: "Azure Backup 설명서 - 자습서, API 참조 | Microsoft Docs"
+  description: "Azure Backup을 사용하면 온-프레미스 서버, 가상 머신, 가상화된 작업, SQL 서버, SharePoint 서버 등에 대한 데이터를 백업할 수 있습니다. 빠른 시작, 자습서 및 샘플을 사용하여 데이터를 백업하고 복원하는 방법을 알아봅니다."
+  services: backup
+  author: czeumault
+  manager: carolz
+  ms.service: backup
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 09/11/2017
+  ms.author: carolz
+  ms.openlocfilehash: f2654916ee61a548537c8887ff7d1923fb6f29ac
+  ms.sourcegitcommit: 48fce90a4ec357d2fb89183141610789003993d2
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 01/12/2018
+abstract:
+  description: "Azure Backup을 사용하면 온-프레미스 서버, 가상 머신, 가상화된 작업, SQL 서버, SharePoint 서버 등에 대한 데이터를 백업할 수 있습니다. 빠른 시작, 자습서 및 샘플을 사용하여 데이터를 백업하고 복원하는 방법을 알아봅니다."
+sections:
+- title: "5분 빠른 시작"
+  items:
+  - type: paragraph
+    text: "Azure에서 Azure 가상 머신을 백업하는 방법을 알아봅니다."
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: https://docs.microsoft.com/azure/sql-database/media/index/portal.svg
+      text: Azure Portal
+      href: quick-backup-vm-portal
+    - image:
+        src: https://docs.microsoft.com/azure/sql-database/media/index/logo_powershell.svg
+      text: Azure PowerShell
+      href: quick-backup-vm-powershell
+    - image:
+        src: https://docs.microsoft.com/media/common/cli.svg
+      text: Azure CLI
+      href: quick-backup-vm-cli
+- title: "단계별 자습서"
+  items:
+  - type: paragraph
+    text: "Azure 또는 Windows Server에서 가상 머신을 백업하고 복구하는 방법을 알아봅니다."
+  - type: list
+    style: ordered
+    items:
+    - html: "<a href=\"tutorial-backup-vm-at-scale\">여러 Azure VM 백업</a>"
+    - html: "<a href=\"tutorial-restore-disk\">디스크 복원 및 복구된 VM 만들기</a>"
+    - html: "\r\n            <a href=\"tutorial-restore-files\">Azure에서 Virtual Machine에 파일 복원</a>"
+    - html: "<a href=\"tutorial-backup-windows-server-to-azure\">Azure에 Windows Server 백업</a>"
+    - html: "<a href=\"tutorial-backup-restore-files-windows-server\">Azure에서 Windows Server로 파일 복구</a>"
+- title: "샘플"
+  items:
+  - type: paragraph
+    text: "다음 샘플을 사용하여 Azure에서 데이터를 보호합니다."
+  - type: list
+    style: unordered
+    className: spaced noBullet
+    items:
+    - html: <a href="/azure/backup/powershell-backup-samples">Azure PowerShell</a>
+- title: "참조"
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: "명령줄"
+      html: <p><a href="/powershell/resourcemanager/azurerm.backup/v2.3.0/azurerm.backup">Azure PowerShell</a></p>
+    - title: "언어"
+      html: <p><a href="/dotnet/api/microsoft.azure.management.backupservices">.NET</a></p>

@@ -1,33 +1,26 @@
 ---
-title: "Azure Portal: SQL Database 지역에서 복제 | Microsoft Docs"
-description: "Azure Portal에서 Azure SQL 데이터베이스에 대한 지역에서 복제 구성 및 장애 조치(Failover) 시작"
+title: 'Azure Portal: SQL Database 지역에서 복제 | Microsoft Docs'
+description: Azure Portal에서 Azure SQL Database에 대한 지역에서 복제 구성 및 장애 조치(Failover) 시작
 services: sql-database
-documentationcenter: 
 author: CarlRabeler
-manager: jhubbard
-editor: 
-ms.assetid: d0b29822-714f-4633-a5ab-fb1a09d43ced
+manager: craigg
 ms.service: sql-database
 ms.custom: business continuity
-ms.devlang: NA
 ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: NA
-ms.date: 03/06/2016
+ms.date: 04/01/2018
 ms.author: carlrab
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6adaf7026d455210db4d7ce6e7111d13c2b75374
-ms.openlocfilehash: db90fad2fe397f0c8466db6bdc1bd8c8d1cf8f15
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/22/2017
-
-
+ms.openlocfilehash: 89839d18e90a75f81e78edcb7f54e77a31ea4886
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32187194"
 ---
-# <a name="configure-active-geo-replication-for-azure-sql-database-in-the-azure-portal-and-initiate-failover"></a>Azure Portal에서 Azure SQL 데이터베이스에 대한 활성 지역 복제 구성 및 장애 조치(Failover) 시작
+# <a name="configure-active-geo-replication-for-azure-sql-database-in-the-azure-portal-and-initiate-failover"></a>Azure Portal에서 Azure SQL Database에 대한 활성 지역 복제 구성 및 장애 조치(Failover) 시작
 
 이 문서에서는 [Azure Portal](http://portal.azure.com)을 사용하여 SQL Database에 대한 활성 지역 복제를 구성하고 장애 조치(Failover)를 시작하는 방법을 보여 줍니다.
 
-Azure 포털에서 장애 조치를 시작하려면 [Azure SQL 데이터베이스에 대해 계획 또는 계획되지 않은 장애 조치(Failover) 시작](sql-database-geo-replication-portal.md)을 참조하세요.
+Azure Portal에서 장애 조치를 시작하려면 [Azure SQL Database에 대해 계획 또는 계획되지 않은 장애 조치(Failover) 시작](sql-database-geo-replication-portal.md)을 참조하세요.
 
 Azure Portal을 사용하여 활성 지역 복제를 구성하려면 다음 리소스가 필요합니다.
 
@@ -41,7 +34,7 @@ Azure Portal을 사용하여 활성 지역 복제를 구성하려면 다음 리�
 
 보조 데이터베이스를 추가하려면 구독 소유자 또는 공동 소유자여야 합니다.
 
-보조 데이터베이스는 주 데이터베이스와 동일한 이름을 포함하며 기본적으로 동일한 수준의 서비스입니다. 보조 데이터베이스는 단일 데이터베이스 또는 탄력적 풀에 있는 데이터베이스일 수 있습니다. 자세한 내용은 [서비스 계층](sql-database-service-tiers.md)을 참조하세요.
+보조 데이터베이스는 주 데이터베이스와 동일한 이름을 포함하며 기본적으로 동일한 수준의 서비스입니다. 보조 데이터베이스는 단일 데이터베이스 또는 탄력적 풀에 있는 데이터베이스일 수 있습니다. 자세한 내용은 [DTU 기반 구매 모델](sql-database-service-tiers-dtu.md) 및 [vCore 기반 구매 모델(미리 보기)](sql-database-service-tiers-vcore.md)을 참조하세요.
 보조가 만들어지고 시드된 후 데이터는 주 데이터베이스에서 새로운 보조 데이터베이스로 복제되기 시작합니다.
 
 > [!NOTE]
@@ -98,5 +91,4 @@ Azure Portal을 사용하여 활성 지역 복제를 구성하려면 다음 리�
 ## <a name="next-steps"></a>다음 단계
 * 활성 지역 복제에 대한 자세한 내용은 [활성 지역 복제](sql-database-geo-replication-overview.md)를 참조하세요.
 * 비즈니스 연속성의 개요 및 시나리오를 보려면 [비즈니스 연속성 개요](sql-database-business-continuity.md)를 참조하세요.
-
 

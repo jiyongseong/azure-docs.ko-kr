@@ -1,36 +1,28 @@
 ---
-title: "Azure SQL Database Azure 사례 연구 - Daxko/CSI | Microsoft Docs"
-description: "Daxko/CSI에서 SQL 데이터베이스를 사용하여 개발 주기를 가속화하고 고객 서비스 및 성능을 개선하는 방법을 알아봅니다."
+title: Azure SQL Database Azure 사례 연구 - Daxko/CSI | Microsoft Docs
+description: Daxko/CSI에서 SQL Database를 사용하여 개발 주기를 가속화하고 고객 서비스 및 성능을 개선하는 방법을 알아봅니다.
 services: sql-database
-documentationcenter: 
 author: CarlRabeler
-manager: jhubbard
-editor: 
-ms.assetid: 00c8a713-f20c-4d6b-b8b7-0c1b9ba5f05b
+manager: craigg
 ms.service: sql-database
 ms.custom: reference
-ms.devlang: NA
 ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: NA
-ms.date: 01/10/2017
+ms.date: 04/01/2018
 ms.author: carlrab
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 95b8c100246815f72570d898b4a5555e6196a1a0
-ms.openlocfilehash: 61d62cde5311c8e447acf8890e0a32339585bb42
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/18/2017
-
-
+ms.openlocfilehash: 3779b32aa1397b2ca0e05e2627241c0bfb7a8622
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="daxkocsi-used-azure-to-accelerate-its-development-cycle-and-to-enhance-its-customer-services-and-performance"></a>Daxko/CSI에서 Azure를 사용하여 개발 주기를 가속화하고 고객 서비스 및 성능 개선
 ![Daxko/CSI 로고](./media/sql-database-implementation-daxko/csidaxkologo25.png)
 
 Daxko/CSI Software는 한 가지 문제에 직면해 있습니다. 이 기업에서는 포괄적인 엔터프라이즈 소프트웨어 솔루션의 성공 덕분에 피트니스 및 레크리에이션 센터의 고객 기반이 빠르게 증가하고 있지만 증가하는 고객 기반의 IT 인프라 요구를 충족하기 위해 회사의 IT 직원을 테스트하고 있습니다. 이 회사는 특히 증가하는 데이터베이스 관리를 위한 운영 오버헤드 증가로 압박을 받고 있습니다. 더 나쁜 점은 운영 오버헤드 때문에 새 이니셔티브(예: 회사 소프트웨어에 대한 새로운 모바일 기능)를 위한 개발 리소스가 감소하고 있다는 것이었습니다.
 
-Daxko/CSI의 제품 개발 책임자인 David Molina에 따르면, Azure는 데이터베이스 관리를 간소화하고, 확장성을 높이고, ops 대신 소프트웨어에만 집중하도록 리소스를 확보하는 데 필요한 PaaS(platform-as-a-service) 모델로 CSI 소프트웨어를 제공했습니다. "Azure SQL 데이터베이스는 우리에게 아주 유용한 선택 옵션이었습니다. SQL Server, 장애 조치 클러스터 및 다른 모든 인프라를 유지 관리하는 문제를 걱정할 필요가 없다는 점은 매우 이상적인 것이었습니다."
+Daxko/CSI의 제품 개발 책임자인 David Molina에 따르면, Azure는 데이터베이스 관리를 간소화하고, 확장성을 높이고, ops 대신 소프트웨어에만 집중하도록 리소스를 확보하는 데 필요한 PaaS(platform-as-a-service) 모델로 CSI 소프트웨어를 제공했습니다. "Azure SQL Database는 우리에게 아주 유용한 선택 옵션이었습니다. SQL Server, 장애 조치 클러스터 및 다른 모든 인프라를 유지 관리하는 문제를 걱정할 필요가 없다는 점은 매우 이상적인 것이었습니다."
 
-Azure로 마이그레이션한 이후에 CSI Software는 600개가 넘는 고객 데이터베이스를 관리하기 위해 2명의 작업 담당자만 필요합니다. 이 회사는 Azure SQL 데이터베이스의 탄력적 풀을 사용하여 크기 및 필요에 따라 고객 데이터베이스를 이동합니다.
+Azure로 마이그레이션한 이후에 CSI Software는 600개가 넘는 고객 데이터베이스를 관리하기 위해 2명의 작업 담당자만 필요합니다. 이 회사는 Azure SQL Database의 탄력적 풀을 사용하여 크기 및 필요에 따라 고객 데이터베이스를 이동합니다.
 
 “우리 고객은 변화가 시급하다고 느겼습니다. 탄력적 풀 이전에는 버스트 기간 동안 제한 시간 및 기타 문제가 가끔씩 발생했습니다. Azure의 탄력적 풀을 사용하면서 필요에 따라 버스트되며, 문제 없이 소프트웨어를 사용할 수 있게 되었습니다."라고 Molina는 덧붙였습니다.
 
@@ -58,7 +50,7 @@ CSI Software는 환경을 구성 및 테스트한 후 고객 마이그레이션�
 새 고객을 위해 CSI Software의 IT 직원들은 다음 프로세스를 사용하여 Azure에 온보드합니다.
 
 1. Azure PowerShell 스크립트는 고객에 대한 새 데이터베이스를 스핀업하는 데 사용됩니다. 모든 고객은 전환을 위해 충분한 초기 처리량을 보장하도록 프리미엄 계층에서 시작합니다.
-2. 가능한 경우 CSI Software는 Azure SQL 마이그레이션 마법사를 사용하여 기존 데이터를 Azure SQL 데이터베이스 인스턴스로 이동합니다.
+2. 가능한 경우 CSI Software는 Azure SQL 마이그레이션 마법사를 사용하여 기존 데이터를 Azure SQL Database 인스턴스로 이동합니다.
 3. 마지막으로 데이터의 불일치를 조정하거나 필요에 따라 데이터 정리를 수행하기 위해 Microsoft SSIS(SQL Server Integration Services)가 사용됩니다.
 
 현재, CSI Software 고객의 약 99%가 4개의 지역 데이터 센터(중북부, 중남부, 동부, 서부)에 있는 Azure에 호스트되고 있습니다. 각 고객의 지리적 지역에 데이터 센터를 배치함으로써 대기 시간을 최소한으로 유지합니다.
@@ -78,23 +70,21 @@ SpectrumNG에서는 웹 역할을 사용합니다. 응용 프로그램이 다중
 
 ![Daxko/CSI 아키텍처](./media/sql-database-implementation-daxko/figure1.png)
 
-그림 1. 클라우드 서비스 작업자 역할은 Azure SQL 데이터베이스에서 구조화된 데이터를 가져오고, 테이블 저장소에서 반구조화된 데이터를 가져옵니다. SpectrumNG 사용자는 클라우드 데이터 서비스 웹 역할을 통해 해당 데이터와 상호 작용합니다.
+그림 1. 클라우드 서비스 작업자 역할은 Azure SQL Database에서 구조화된 데이터를 가져오고, 테이블 저장소에서 반구조화된 데이터를 가져옵니다. SpectrumNG 사용자는 클라우드 데이터 서비스 웹 역할을 통해 해당 데이터와 상호 작용합니다.
 
 ## <a name="using-web-apps-and-a-web-plan-tier-for-mobile-apps"></a>모바일 앱에 대해 웹앱 및 웹 계획 계층 사용
-Azure SQL 데이터베이스를 사용하면 리소스가 확보되므로 CSI Software에서 Azure 웹앱에 호스트되는 사용자 지정 API를 기반으로 하는 완벽한 모바일 플랫폼을 비롯한 새로운 이니셔티브를 구현할 수 있게 되었습니다. 이 플랫폼은 체육관 회원 및 직원들이 모바일 장치를 사용하여 일정을 확인하고, 수업을 예약하고, 메시지를 받도록 합니다.
+Azure SQL Database를 사용하면 리소스가 확보되므로 CSI Software에서 Azure 웹앱에 호스트되는 사용자 지정 API를 기반으로 하는 완벽한 모바일 플랫폼을 비롯한 새로운 이니셔티브를 구현할 수 있게 되었습니다. 이 플랫폼은 체육관 회원 및 직원들이 모바일 장치를 사용하여 일정을 확인하고, 수업을 예약하고, 메시지를 받도록 합니다.
 
 이 플랫폼은 모든 항목을 원래 웹 계획에 그대로 두면서, SOA(서비스 지향 아키텍처)를 사용하여 단일 구성 요소(예: POS(Point-of-Sale) 시스템 또는 판매 시스템)를 받아들이고, 즉석에서 다른 웹 계획으로 이동한 다음 서비스를 스핀업하여 해당 구성 요소를 지원합니다. 이 기능은 CSI Software에 놀라운 유연성을 제공하고, 비용 절감에도 도움을 줍니다.
 
 ## <a name="azure-lets-csi-software-developers-focus-on-apps-and-services"></a>Azure를 통해 CSI Software 개발자가 앱 및 서비스에 집중
-Azure SQL 데이터베이스는 빠르고 안정적인 서비스를 즐기는 SpectrumNG에게 유용한 기능일뿐 아니라 CSI Software의 IT 직원 및 개발자에게 큰 행운이기도 했습니다. CSI Software는 ops를 클라우드의 Azure에 오프로드하여, 리소스 및 인프라에 대한 오버헤드를 줄이고, 해당 개발 주기를 획기적으로 가속화하고, 테넌트에 맞게 성능을 최적화하기 위해 더 이상 데이터베이스를 세부적으로 관리할 필요가 없게 되었습니다.
+Azure SQL Database는 빠르고 안정적인 서비스를 즐기는 SpectrumNG에게 유용한 기능일뿐 아니라 CSI Software의 IT 직원 및 개발자에게 큰 행운이기도 했습니다. CSI Software는 ops를 클라우드의 Azure에 오프로드하여, 리소스 및 인프라에 대한 오버헤드를 줄이고, 해당 개발 주기를 획기적으로 가속화하고, 테넌트에 맞게 성능을 최적화하기 위해 더 이상 데이터베이스를 세부적으로 관리할 필요가 없게 되었습니다.
 
 ## <a name="more-information"></a>자세한 정보
 * Azure의 탄력적 풀에 대한 자세한 내용은 [탄력적 풀](sql-database-elastic-pool.md)을 참조하세요.
 * 데이터베이스 도구 및 탄력적 크기 조정에 대한 자세한 내용은 [탄력적 데이터베이스 도구 및 탄력적 크기 조정](sql-database-elastic-scale-get-started.md)을 참조하세요.
 * SQL Server 데이터베이스 마이그레이션에 대한 자세한 내용은 [Azure에 SQL Server 데이터베이스 마이그레이션](sql-database-cloud-migrate.md)을 참조하세요.
 * 활성 지역 복제에 대한 자세한 내용은 [활성 지역 복제](sql-database-geo-replication-overview.md)를 참조하세요.
-* 웹 역할 및 작업자 역할에 대한 자세한 내용은 [작업자 역할](../fundamentals-introduction-to-azure.md#compute)을 참조하세요.    
-* Azure 서비스 버스에 대한 자세한 내용은 [Azure 서비스 버스](https://azure.microsoft.com/services/service-bus/)를 참조하세요.
-* 자동 크기 조정에 대한 자세한 내용은 [클라우드 서비스 크기 조정](../cloud-services/cloud-services-how-to-scale.md)을 참조하세요.
-
+* Azure Service Bus에 대한 자세한 내용은 [Azure Service Bus](https://azure.microsoft.com/services/service-bus/)를 참조하세요.
+* 자동 크기 조정에 대한 자세한 내용은 [클라우드 서비스 크기 조정](../cloud-services/cloud-services-how-to-scale-portal.md)을 참조하세요.
 

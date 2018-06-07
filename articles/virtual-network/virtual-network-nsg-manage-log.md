@@ -15,12 +15,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/31/2017
 ms.author: jdial
+ms.openlocfilehash: 6beb9ae1b64e27df0a4eefefd592c7850efc7d2d
+ms.sourcegitcommit: d87b039e13a5f8df1ee9d82a727e6bc04715c341
 ms.translationtype: HT
-ms.sourcegitcommit: 1dbb1d5aae55a4c926b9d8632b416a740a375684
-ms.openlocfilehash: 552f37dd704de25159bc0f0ad34fdae9ed8b73f5
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/07/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/21/2018
 ---
 # <a name="log-analytics-for-network-security-groups-nsgs"></a>NSG(네트워크 보안 그룹)에 대한 로그 분석
 
@@ -45,9 +44,9 @@ NSG에 대한 다음 진단 로그 범주를 활성화할 수 있습니다.
 
 진단 로깅은 데이터를 수집하려는 *각* NSG에 대해 활성화되어야 합니다. [Azure 진단 로그 개요](../monitoring-and-diagnostics/monitoring-overview-of-diagnostic-logs.md) 문서는 진단 로그를 보낼 수 있는 위치를 설명합니다. 기존 NSG가 없는 경우 [네트워크 보안 그룹 만들기](virtual-networks-create-nsg-arm-pportal.md) 문서의 단계를 완료하여 NSG를 만듭니다. 다음 방법 중 하나를 사용하여 NSG 진단 로깅을 활성화할 수 있습니다.
 
-### <a name="azure-portal"></a>Azure 포털
+### <a name="azure-portal"></a>Azure portal
 
-로깅을 활성화하는 데 포털을 사용하려면 [포털](https://portal.azure.com)에 로그인합니다. **더 많은 서비스**를 클릭한 다음 *네트워크 보안 그룹*을 입력합니다. 로깅을 활성화하려는 NSG를 선택합니다. [포털에서 진단 로그 사용](../monitoring-and-diagnostics/monitoring-overview-of-diagnostic-logs.md#how-to-enable-collection-of-resource-diagnostic-logs) 문서의 비 계산 리소스에 대한 지침을 따릅니다. **NetworkSecurityGroupEvent**, **NetworkSecurityGroupRuleCounter** 또는 두 범주의 로그를 선택합니다.
+로깅을 활성화하는 데 포털을 사용하려면 [포털](https://portal.azure.com)에 로그인합니다. **모든 서비스**를 클릭한 다음, *네트워크 보안 그룹*을 입력합니다. 로깅을 활성화하려는 NSG를 선택합니다. [포털에서 진단 로그 사용](../monitoring-and-diagnostics/monitoring-overview-of-diagnostic-logs.md#how-to-enable-collection-of-resource-diagnostic-logs) 문서의 비 계산 리소스에 대한 지침을 따릅니다. **NetworkSecurityGroupEvent**, **NetworkSecurityGroupRuleCounter** 또는 두 범주의 로그를 선택합니다.
 
 ### <a name="powershell"></a>PowerShell
 
@@ -124,4 +123,3 @@ JSON 형식 데이터는 두 로그에 기록됩니다. 각 로그 형식에 대
 ## <a name="view-and-analyze-logs"></a>로그 보기 및 분석
 
 활동 로그 데이터를 보는 방법을 알아보려면 [Azure 활동 로그 개요](../monitoring-and-diagnostics/monitoring-overview-of-diagnostic-logs.md) 문서를 확인합니다. 진단 로그 데이터를 보는 방법을 알아보려면 [Azure 진단 로그 개요](../monitoring-and-diagnostics/monitoring-overview-of-diagnostic-logs.md) 문서를 확인합니다. Log Analytics에 진단 데이터를 보내는 경우 향상된 통찰력을 위해 [Azure 네트워크 보안 그룹 분석](../log-analytics/log-analytics-azure-networking-analytics.md)(미리 보기) 관리 솔루션을 사용할 수 있습니다. 
-

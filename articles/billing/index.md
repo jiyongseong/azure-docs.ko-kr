@@ -2,7 +2,7 @@
 title: "Azure Billing 설명서 - 자습서, API 참조 | Microsoft Docs"
 description: "Azure 결제를 이해할 뿐만 아니라 사용 및 비용을 관리하고 모니터링하는 방법에 대해 알아봅니다. 자습서, FAQ, API, 참조 및 기타 설명서입니다."
 services: billing
-author: carolz
+author: czeumault
 manager: carolz
 layout: LandingPage
 ms.assetid: 
@@ -12,12 +12,11 @@ ms.devlang: na
 ms.topic: landing-page
 ms.date: 01/23/2017
 ms.author: carolz
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 71fea4a41b2e3a60f2f610609a14372e678b7ec4
-ms.openlocfilehash: f9d8cecf45e40909e39f894c62bcc572b610b014
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/10/2017
-
+ms.openlocfilehash: 70aac3b0544e652ca92219fba9e6bfb405c2eadc
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="azure-billing-documentation"></a>Azure Billing 설명서
 
@@ -136,4 +135,3 @@ Azure 결제를 이해하고 사용 및 비용을 모니터링하는 방법에 �
         </div>
     </li>
 </ul>
-

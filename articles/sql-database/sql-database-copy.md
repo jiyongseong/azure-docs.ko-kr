@@ -1,27 +1,19 @@
 ---
-title: "Azure SQL Database 복사 | Microsoft Docs"
-description: "Azure SQL 데이터베이스 사본 만들기"
+title: Azure SQL Database 복사 | Microsoft Docs
+description: 같은 서버 또는 다른 서버에 기존 Azure SQL 데이터베이스의 트랜잭션 방식으로 일관된 사본을 만듭니다.
 services: sql-database
-documentationcenter: 
 author: CarlRabeler
-manager: jhubbard
-editor: 
-ms.assetid: 5aaf6bcd-3839-49b5-8c77-cbdf786e359b
+manager: craigg
 ms.service: sql-database
 ms.custom: load & move data
-ms.devlang: NA
-ms.date: 06/15/2017
+ms.date: 04/01/2018
 ms.author: carlrab
-ms.workload: data-management
 ms.topic: article
-ms.tgt_pltfrm: NA
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 7948c99b7b60d77a927743c7869d74147634ddbf
-ms.openlocfilehash: 67c42b8df2f1d12ceecd127ab24d359a6de8ef43
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
-
+ms.openlocfilehash: 6b594c81f86a87e3b50b487f523cf4699c97365a
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="copy-an-azure-sql-database"></a>Azure SQL 데이터베이스 복사
 
@@ -111,4 +103,3 @@ sys.databases 및 sys.dm_database_copies 뷰 쿼리를 통해 복사 프로세�
 
 * 로그인에 대한 자세한 내용은 [로그인 관리](sql-database-manage-logins.md) 및 [재해 복구 후에 Azure SQL Database 보안을 관리하는 방법](sql-database-geo-replication-security-config.md)을 참조하세요.
 * 데이터베이스를 내보내려면 [데이터베이스를 BACPAC로 내보내기](sql-database-export.md)를 참조하세요.
-

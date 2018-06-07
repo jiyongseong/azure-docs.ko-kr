@@ -1,27 +1,19 @@
 ---
-title: "SQL Database에 대한 XEvent 링 버퍼 코드 | Microsoft Docs"
-description: "Azure SQL Database에서 링 버퍼 대상을 사용하여 편리하고 빨라진 Transact-SQL 코드 샘플을 제공합니다."
+title: SQL Database에 대한 XEvent 링 버퍼 코드 | Microsoft Docs
+description: Azure SQL Database에서 링 버퍼 대상을 사용하여 편리하고 빨라진 Transact-SQL 코드 샘플을 제공합니다.
 services: sql-database
-documentationcenter: 
 author: MightyPen
-manager: jhubbard
-editor: 
-tags: 
-ms.assetid: 2510fb3f-c8f2-437a-8f49-9d5f6c96e75b
+manager: craigg
 ms.service: sql-database
 ms.custom: monitor & tune
-ms.workload: data-management
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 02/03/2017
+ms.date: 04/01/2018
 ms.author: genemi
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 857267f46f6a2d545fc402ebf3a12f21c62ecd21
-ms.openlocfilehash: a49be9d5037af120e429a9cc7ae77ceda5e03236
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/28/2017
-
+ms.openlocfilehash: ee6181baf7a16bc827d35aaf5d18b281bcf9c3f7
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="ring-buffer-target-code-for-extended-events-in-sql-database"></a>SQL Database의 확장 이벤트에 대한 링 버퍼 대상 코드
 
@@ -59,7 +51,7 @@ ms.lasthandoff: 06/28/2017
 
 ## <a name="code-sample"></a>코드 샘플
 
-다음 링 버퍼 코드 샘플은 약간만 수정하면 Azure SQL Database 또는 Microsoft SQL Server에서 실행할 수 있습니다. 5단계의 FROM 절에 사용되는 일부 DMV(동적 관리 뷰) 이름에 '_database' 노드가 있다는 점이 다릅니다. 예:
+다음 링 버퍼 코드 샘플은 약간만 수정하면 Azure SQL Database 또는 Microsoft SQL Server에서 실행할 수 있습니다. 5단계의 FROM 절에 사용되는 일부 DMV(동적 관리 뷰) 이름에 '_database' 노드가 있다는 점이 다릅니다. 예: 
 
 * sys.dm_xe**_database**_session_targets
 * sys.dm_xe_session_targets
@@ -360,4 +352,3 @@ Azure SQL Database의 확장 이벤트에 대한 기본 항목은 다음과 같�
 - Code sample for SQL Server: [Determine Which Queries Are Holding Locks](http://msdn.microsoft.com/library/bb677357.aspx)
 - Code sample for SQL Server: [Find the Objects That Have the Most Locks Taken on Them](http://msdn.microsoft.com/library/bb630355.aspx)
 -->
-

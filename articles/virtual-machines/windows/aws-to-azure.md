@@ -1,13 +1,13 @@
 ---
-title: "Windows AWS VM을 Azure로 이동 | Microsoft Docs"
-description: "Azure PowerShell을 사용하여 AWS(Amazon Web Services) EC2 Windows 인스턴스를 Azure Virtual Machines로 이동합니다."
+title: Windows AWS VM을 Azure로 이동 | Microsoft Docs
+description: Azure PowerShell을 사용하여 AWS(Amazon Web Services) EC2 Windows 인스턴스를 Azure Virtual Machines로 이동합니다.
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
@@ -15,20 +15,17 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/01/2017
 ms.author: cynthn
+ms.openlocfilehash: 4b7e794cb08647dde6fe59b6d4b06a9cbfab06e1
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
 ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
-ms.openlocfilehash: b382e545e47353a177b3b02b3931001ab22d53c8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-
-
 # <a name="move-a-windows-vm-from-amazon-web-services-aws-to-azure-using-powershell"></a>PowerShell을 사용하여 AWS(Amazon Web Services)에서 Azure로 Windows VM 이동
 
-워크로드를 호스팅하기 위해 Azure 가상 컴퓨터를 평가하는 경우 기존 AWS(Amazon Web Services) EC2 Windows VM 인스턴스를 내보낸 다음 VHD(가상 하드 디스크)를 Azure로 업로드할 수 있습니다. VHD를 업로드하면 VHD에서 Azure로 새 VM을 만들 수 있습니다. 
+워크로드를 호스팅하기 위해 Azure 가상 머신을 평가하는 경우 기존 AWS(Amazon Web Services) EC2 Windows VM 인스턴스를 내보낸 다음 VHD(가상 하드 디스크)를 Azure로 업로드할 수 있습니다. VHD를 업로드하면 VHD에서 Azure로 새 VM을 만들 수 있습니다. 
 
-이 항목에서는 단일 VM을 AWS에서 Azure로 이동하는 방법에 대해 설명합니다. VM을 AWS에서 Azure로 대규모로 이동하려면 [Azure Site Recovery를 사용하여 AWS(Amazon Web Services)의 가상 컴퓨터를 Azure로 마이그레이션](../../site-recovery/site-recovery-migrate-aws-to-azure.md)을 참조하세요.
+이 항목에서는 단일 VM을 AWS에서 Azure로 이동하는 방법에 대해 설명합니다. VM을 AWS에서 Azure로 대규모로 이동하려면 [Azure Site Recovery를 사용하여 AWS(Amazon Web Services)의 가상 머신을 Azure로 마이그레이션](../../site-recovery/site-recovery-migrate-aws-to-azure.md)을 참조하세요.
 
 ## <a name="prepare-the-vm"></a>VM 준비 
  
@@ -37,7 +34,7 @@ ms.lasthandoff: 07/26/2017
 - **일반화된 VHD** - 일반화된 VHD에는 Sysprep을 사용하여 제거된 모든 개인 계정 정보가 포함되어 있습니다. 새 VM을 만드는 이미지로 VHD를 사용하려는 경우 다음을 수행해야 합니다. 
  
     * [Windows VM을 준비합니다](prepare-for-upload-vhd-image.md).  
-    * Sysprep을 사용하여 가상 컴퓨터를 일반화합니다.  
+    * Sysprep을 사용하여 가상 머신을 일반화합니다.  
 
  
 - **특수한 VHD** - 특수한 VHD는 사용자 계정, 응용 프로그램 및 원본 VM의 다른 상태 데이터를 유지 관리합니다. 새 VM을 만드는데 VHD를 그대로 사용하려는 경우 다음 단계가 완료되었는지 확인합니다.  
@@ -48,7 +45,7 @@ ms.lasthandoff: 07/26/2017
 
 ## <a name="export-and-download-the-vhd"></a>VHD 내보내기 및 다운로드 
 
-EC2 인스턴스를 Amazon S3 버킷의 VHD로 내보냅니다. Amazon 설명서의 [VM 가져오기/내보내기를 사용하여 인스턴스를 VM으로 내보내기](http://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html)(영문) 항목에서 설명하는 단계를 수행하고, [create-instance-export-task](http://docs.aws.amazon.com/cli/latest/reference/ec2/create-instance-export-task.html) 명령을 실행하여 EC2 인스턴스를 VHD 파일로 내보냅니다. 
+EC2 인스턴스를 Amazon S3 버킷의 VHD로 내보냅니다. Amazon 설명서의 [VM Import/Export를 사용하여 인스턴스를 VM으로 내보내기](http://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html)(영문) 항목에서 설명하는 단계를 수행하고, [create-instance-export-task](http://docs.aws.amazon.com/cli/latest/reference/ec2/create-instance-export-task.html) 명령을 실행하여 EC2 인스턴스를 VHD 파일로 내보냅니다. 
 
 내보낸 VHD 파일은 지정한 Amazon S3 버킷에 저장됩니다. VHD를 내보내기 위한 기본 구문은 다음과 같으며, 여기서 <brackets>의 자리 표시자 텍스트를 사용자의 정보로 바꿉니다.
 
@@ -71,4 +68,3 @@ VHD를 내보냈으면 [S3 버킷에서 개체를 다운로드하려면 어떻�
 - 내보내기 전에 Sysprep을 실행하지 않은 경우 VHD는 **특수한 디스크**로 간주됩니다. [Azure에 특수한 VHD 업로드 및 새 VM 만들기](create-vm-specialized.md)를 참조하세요.
 
  
-

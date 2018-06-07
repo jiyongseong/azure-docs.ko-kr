@@ -3,7 +3,7 @@ title: "Azure Application Insights에서 경고 설정 | Microsoft Docs"
 description: "느린 응답 시간, 예외 및 웹앱의 기타 성능 또는 사용 변경에 대한 알림을 받습니다."
 services: application-insights
 documentationcenter: 
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: f8ebde72-f819-4ba5-afa2-31dbd49509a5
 ms.service: application-insights
@@ -12,14 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 03/14/2017
-ms.author: cfreeman
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0d8472cb3b0d891d2b184621d62830d1ccd5e2e7
-ms.openlocfilehash: 04965375fc94fc1aa8b1c48deb743bb1d0cf1c26
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/21/2017
-
-
+ms.author: mbullwin
+ms.openlocfilehash: b0e4828b2cb6bbcb4329381e77db3b187d659706
+ms.sourcegitcommit: e462e5cca2424ce36423f9eff3a0cf250ac146ad
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/01/2017
 ---
 # <a name="set-alerts-in-application-insights"></a>Application Insights에서 경고 설정
 [Azure Application Insights][start]는 웹앱의 성능 및 사용 메트릭이 변경되면 사용자에게 경고할 수 있습니다. 
@@ -42,9 +40,9 @@ Application Insights는 [다양한 플랫폼][platforms]에서 라이브 앱을 
 * 다른 속성에 앞서 리소스를 설정합니다. **"(구성 요소)" 리소스 선택** 성능 또는 사용 메트릭에 대한 경고를 설정하려는 경우.
 * 경고에 입력하는 이름은 리소스 그룹(응용 프로그램 아님) 내에서 고유한 이름이어야 합니다.
 * 임계값을 입력하라는 단위에 주의하세요.
-* "메일 소유자..." 확인란을 선택하면 이 리소스 그룹에 액세스하는 모든 사용자에게 메일을 통해 경고가 보내집니다. 사용자 집합을 확장하려면 [리소스 그룹 또는 구독](app-insights-resources-roles-access-control.md) (리소스 아님)에 추가합니다.
+* "메일 소유자..." 확인란을 선택하면 이 리소스 그룹에 액세스하는 모든 사용자에게 메일로 경고가 보내집니다. 사용자 집합을 확장하려면 [리소스 그룹 또는 구독](app-insights-resources-roles-access-control.md) (리소스 아님)에 추가합니다.
 * "추가 메일"을 지정하면 "메일 소유자..." 확인란의 선택 여부와 상관없이 이러한 개인 또는 그룹에게 경고가 보내집니다. 
-* 경고에 응답하는 웹앱을 설정한 경우 [웹후크 주소](../monitoring-and-diagnostics/insights-webhooks-alerts.md)를 설정합니다. 경고가 활성화(즉, 트리거)될 때 및 해결될 때 모두 호출됩니다. 그러나 현재 쿼리 매개 변수는 웹후크 속성으로 전달되지 않습니다.
+* 경고에 응답하는 웹앱을 설정한 경우 [웹후크 주소](../monitoring-and-diagnostics/insights-webhooks-alerts.md)를 설정합니다. 경고가 활성화될 때 및 해결될 때 모두 호출됩니다. 그러나 현재 쿼리 매개 변수는 웹후크 속성으로 전달되지 않습니다.
 * 블레이드 맨 위에 있는 단추를 참조하여 경고를 사용 또는 사용 안 함으로 설정할 수 있습니다.
 
 *경고 추가 단추가 보이지 않습니다.* 
@@ -52,7 +50,7 @@ Application Insights는 [다양한 플랫폼][platforms]에서 라이브 앱을 
 * 조직 계정을 사용 중이신가요? 이 응용 프로그램 리소스에 소유자 또는 참가자 액세스가 가능하면 경고를 설정할 수 있습니다. Access Control 블레이드를 살펴봅니다. [액세스 제어에 대해 자세히 알아보세요][roles].
 
 > [!NOTE]
-> 경고 블레이드에 [사전 진단](app-insights-proactive-failure-diagnostics.md) 경고 설정이 이미 있습니다. 이는 특정 메트릭, 요청 실패율을 모니터링하는 자동 경고입니다. 사전 경고를 사용하지 않으려는 경우가 아니면 요청 실패율에 대한 자체 경고를 설정할 필요가 없습니다. 
+> 경고 블레이드에 [사전 진단](app-insights-proactive-failure-diagnostics.md) 경고 설정이 이미 표시됩니다. 자동 경고는 특정 메트릭, 요청 실패율을 모니터링합니다. 사전 경고를 사용하지 않으려는 경우가 아니면 요청 실패율에 대한 자체 경고를 설정할 필요가 없습니다. 
 > 
 > 
 
@@ -86,13 +84,13 @@ Application Insights는 [다양한 플랫폼][platforms]에서 라이브 앱을 
 
 다음은 많은 사람들이 사용하는 경고입니다.
 
-* [브라우저 메트릭][client], 특히 브라우저 **페이지 로드 시간**은 웹 응용 프로그램에 매우 유용합니다. 페이지에 스크립트가 많으면 **브라우저 예외**를 살펴봐야 합니다. 이러한 메트릭 및 경고를 가져오려면 [웹 페이지 모니터링][client]을 설정해야 합니다.
-* 서버 쪽 웹 응용 프로그램에 대한 **서버 응답 시간**. 경고 설정 외에도 이 메트릭을 주시하여 메트릭이 불균형적으로 변하고 요청 속도가 빠른지 살펴보는 것이 좋습니다. 앱 리소스가 부족하다는 의미일 수 있습니다. 
+* [브라우저 메트릭][client], 특히 브라우저 **페이지 로드 시간**은 웹 응용 프로그램에 매우 유용합니다. 페이지에 스크립트가 많은 경우 **브라우저 예외**를 확인해야 합니다. 이러한 메트릭 및 경고를 가져오려면 [웹 페이지 모니터링][client]을 설정해야 합니다.
+* 서버 쪽 웹 응용 프로그램에 대한 **서버 응답 시간**. 경고 설정 외에도 이 메트릭을 주시하여 메트릭이 불균형적으로 변하고 요청 속도가 빠른지 살펴보는 것이 좋습니다. 변형은 앱에 리소스가 부족하다는 의미일 수 있습니다. 
 * **서버 예외** 를 보려면 일부 [추가 설치](app-insights-asp-net-exceptions.md)작업을 수행해야 합니다.
 
 [자동 관리 실패율 진단](app-insights-proactive-failure-diagnostics.md)은 앱이 오류 코드로 요청에 응답하는 속도를 자동으로 모니터링한다는 것을 잊지 마십시오. 
 
-## <a name="automation"></a>자동화
+## <a name="automation"></a>Automation
 * [PowerShell을 사용하여 경고 설정 자동화](app-insights-powershell-alerts.md)
 * [Webhook를 사용하여 경고에 대한 응답 자동화](../monitoring-and-diagnostics/insights-webhooks-alerts.md)
 
@@ -112,5 +110,4 @@ Application Insights는 [다양한 플랫폼][platforms]에서 라이브 앱을 
 [platforms]: app-insights-platforms.md
 [roles]: app-insights-resources-roles-access-control.md
 [start]: app-insights-overview.md
-
 

@@ -14,14 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 05/15/2017
 ms.author: markgal,masaran
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a1ba750d2be1969bfcd4085a24b0469f72a357ad
 ms.openlocfilehash: 30f70a702d7d9a3e1196c04096708c035e406607
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="back-up-system-state-and-restore-to-bare-metal-with-azure-backup-server"></a>Azure Backup Server로 시스템 상태 백업 및 완전 복구로 복원
 
 Azure Backup Server는 시스템 상태를 백업하고 BMR(완전 복구) 보호를 제공합니다.
@@ -227,5 +225,4 @@ Windows Server 백업을 실행합니다.
     버전 식별자를 사용하여 시스템 상태 복원을 시작합니다. 명령 프롬프트에 다음을 입력합니다. ```wbadmin start systemstaterecovery -version:<versionidentified> -backuptarget:<servername\sharename>```
 
     복구를 시작할지 확인합니다. 명령 프롬프트 창에서 프로세스를 확인할 수 있습니다. 복원 로그가 생성됩니다. 복원한 후 서버를 다시 시작합니다.
-
 

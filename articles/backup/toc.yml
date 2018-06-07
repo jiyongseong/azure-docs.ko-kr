@@ -1,0 +1,227 @@
+- name: Azure Backup 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: Azure Backup이란?
+      href: backup-introduction-to-azure-backup.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: VM 백업 - 포털
+      href: quick-backup-vm-portal.md
+    - name: VM 백업 - PowerShell
+      href: quick-backup-vm-powershell.md
+    - name: VM 백업 - CLI
+      href: quick-backup-vm-cli.md
+- name: 자습서
+  items:
+    - name: 대규모 Azure VM 백업
+      href: tutorial-backup-vm-at-scale.md
+    - name: 디스크 복원
+      href: tutorial-restore-disk.md
+    - name: 개별 파일 복원
+      href: tutorial-restore-files.md
+    - name: Windows Server 백업
+      href: tutorial-backup-windows-server-to-azure.md
+    - name: Windows Server로 파일 복원
+      href: tutorial-backup-restore-files-windows-server.md
+- name: 샘플
+  items:
+    - name: Azure PowerShell
+      href: powershell-backup-samples.md
+    - name: 리소스 관리자 템플릿
+      href: backup-rm-template-samples.md
+- name: 개념
+  items:
+    - name: FAQ
+      items:
+        - name: Recovery Services 자격 증명 모음에 대한 FAQ
+          href: backup-azure-backup-faq.md
+        - name: Azure VM 백업에 대한 FAQ
+          href: backup-azure-vm-backup-faq.md
+        - name: Azure Backup 에이전트를 사용하여 파일-폴더 백업에 대한 FAQ
+          href: backup-azure-file-folder-backup-faq.md
+        - name: 백업 자격 증명 모음의 자동 업그레이드에 대한 FAQ
+          href: backup-upgrade-backup-vault.md
+    - name: 역할 기반 Access Control
+      href: backup-rbac-rs-vault.md
+    - name: 하이브리드 백업 보안
+      href: backup-azure-security-feature.md
+    - name: 오프라인 백업 구성
+      href: backup-azure-backup-import-export.md
+    - name: DPM 및 Azure Backup Server를 위한 오프라인 백업
+      href: backup-azure-backup-server-import-export-.md
+    - name: 테이프 라이브러리 교체
+      href: backup-azure-backup-cloud-as-tape.md
+- name: 방법
+  items:
+    - name: Azure Backup 서버
+      items:
+        - name: Azure Backup Server 보호 매트릭스
+          href: backup-mabs-protection-matrix.md
+        - name: 설치 또는 업그레이드
+          items:
+            - name: Azure Portal에서 Azure Backup Server 작업 준비
+              href: backup-azure-microsoft-azure-backup.md
+            - name: Azure Backup Server에 저장소 추가
+              href: backup-mabs-add-storage.md
+            - name: Azure Backup Server를 v.2로 업그레이드
+              href: backup-mabs-upgrade-to-v2.md
+            - name: Azure Backup Server의 무인 설치
+              href: backup-mabs-unattended-install.md
+        - name: 워크로드 보호
+          items:
+            - name: VMware 서버
+              href: backup-azure-backup-server-vmware.md
+            - name: Exchange
+              href: backup-azure-exchange-mabs.md
+            - name: Sharepoint 팜
+              href: backup-azure-backup-sharepoint-mabs.md
+            - name: SQL Server
+              href: backup-azure-sql-mabs.md
+            - name: 시스템 상태 및 완전 복구 보호
+              href: backup-mabs-system-state-and-bmr.md
+            - name: Azure Stack의 파일 및 응용 프로그램
+              href: backup-mabs-files-applications-azure-stack.md
+        - name: Azure Backup Server에서 데이터 복구
+          href: backup-azure-alternate-dpm-server.md
+    - name: Azure 파일 공유
+      items:
+        - name: Azure 파일 공유 백업
+          href: backup-azure-files.md
+        - name: Azure 파일 공유 백업 FAQ
+          href: backup-azure-files-faq.md
+    - name: Azure VM
+      items:
+        - name: VM 준비
+          items:
+            - name: 리소스 관리자 배포 VM 준비
+              href: backup-azure-arm-vms-prepare.md
+            - name: Linux VM의 응용 프로그램 일치 백업
+              href: backup-azure-linux-app-consistent.md
+        - name: 환경 계획
+          items:
+            - name: VM 백업 인프라 계획
+              href: backup-azure-vms-introduction.md
+        - name: VM 백업
+          items:
+            - name: Recovery Services 자격 증명 모음에 Azure VM 백업
+              href: backup-azure-vms-first-look-arm.md
+            - name: 암호화된 VM 백업
+              href: backup-azure-vms-encryption.md
+            - name: VM을 만드는 동안 VM 백업 사용
+              href: backup-during-vm-creation.md
+            - name: VM 백업 스택 V2로 업그레이드
+              href: backup-upgrade-to-vm-backup-stack-v2.md
+        - name: VM 관리 및 모니터링
+          items:
+            - name: Azure Portal에서 Azure VM 백업 관리
+              href: backup-azure-manage-vms.md
+            - name: Azure VM 백업에 대한 경고 모니터링
+              href: backup-azure-monitor-vms.md
+        - name: VM에서 데이터 복원
+          items:
+            - name: Azure VM 백업에서 파일 복구
+              href: backup-azure-restore-files-from-vm.md
+            - name: Azure Portal에서 VM 복원
+              href: backup-azure-arm-restore-vms.md
+            - name: 암호화된 VM 복원
+              href: backup-azure-vms-encryption.md
+            - name: 암호화된 VM의 Key Vault 키 및 비밀 복원
+              href: backup-azure-restore-key-secret.md
+    - name: Azure Backup 보고서 구성
+      items:
+        - name: Azure Backup 보고서 구성
+          href: backup-azure-configure-reports.md
+        - name: Azure Backup 보고서용 데이터 모델
+          href: backup-azure-reports-data-model.md
+        - name: Azure Backup용 Log Analytics 데이터 모델
+          href: backup-azure-log-analytics-data-model.md
+    - name: Data Protection Manager
+      items:
+        - name: Azure Portal에서 DPM 작업 준비
+          href: backup-azure-dpm-introduction.md
+        - name: Exchange 서버를 백업하기 위해 DPM 사용
+          href: backup-azure-backup-exchange-server.md
+        - name: 다른 DPM 서버에 데이터 복구
+          href: backup-azure-alternate-dpm-server.md
+        - name: SQL Server 작업을 백업하기 위해 DPM 사용
+          href: backup-azure-backup-sql.md
+        - name: SharePoint 팜을 백업하기 위해 DPM 사용
+          href: backup-azure-backup-sharepoint.md
+    - name: Azure PowerShell 사용
+      items:
+        - name: Azure Portal의 Azure VM
+          href: backup-azure-vms-automation.md
+        - name: Azure Portal의 DPM
+          href: backup-dpm-automation.md
+        - name: Azure Portal의 Windows Server
+          href: backup-client-automation.md
+    - name: Azure SQL Database
+      items:
+        - name: SQL Database 백업 구성 및 복원 - SQL 저장소
+          href: ../sql-database/sql-database-long-term-backup-retention-configure.md?toc=%2fazure%2fbackup%2ftoc.json
+        - name: SQL Database 백업 구성 및 복원 - Recovery Services 자격 증명 모음
+          href: ../sql-database/sql-database-long-term-backup-retention-configure-vault.md?toc=%2fazure%2fbackup%2ftoc.json
+    - name: Windows Server
+      items:
+        - name: Windows Server 파일 및 폴더 백업
+          href: backup-configure-vault.md
+        - name: Windows Server 시스템 상태 백업
+          href: backup-azure-system-state.md
+        - name: Azure에서 Windows Server로 파일 복구
+          href: backup-azure-restore-windows-server.md
+        - name: Windows Server 시스템 상태 복원
+          href: backup-azure-restore-system-state.md
+        - name: Recovery Services 자격 증명 모음 모니터링 및 관리
+          href: backup-azure-manage-windows-server.md
+    - name: Recovery Services 자격 증명 모음
+      items:
+        - name: Recovery Services 자격 증명 모음 개요
+          href: backup-azure-recovery-services-vault-overview.md
+        - name: Recovery Services 자격 증명 모음으로 백업 자격 증명 모음 업그레이드
+          href: backup-azure-upgrade-backup-to-recovery-services.md
+        - name: Recovery Services 자격 증명 모음 삭제
+          href: backup-azure-delete-vault.md
+    - name: 문제 해결
+      items:
+        - name: Azure VM
+          href: backup-azure-vms-troubleshoot.md
+        - name: Azure Backup 에이전트 또는 VM 확장 시간 초과
+          href: backup-azure-troubleshoot-vm-backup-fails-snapshot-timeout.md
+        - name: 파일 및 폴더 백업이 느림
+          href: backup-azure-troubleshoot-slow-backup-performance-issue.md
+        - name: Azure Backup 서버
+          href: backup-azure-mabs-troubleshoot.md
+        - name: System Center DPM
+          href: backup-azure-scdpm-troubleshooting.md
+        - name: Azure Backup 에이전트
+          href: backup-azure-mars-troubleshoot.md
+        - name: Azure 파일 공유
+          href: troubleshoot-azure-files.md
+- name: 참고 자료
+  items:
+    - name: .NET
+      href: /dotnet/api/microsoft.azure.management.recoveryservices.backup
+    - name: Azure CLI 2.0
+      href: /cli/azure/backup?view=azure-cli-latest
+    - name: PowerShell
+      href: /powershell/module/azurerm.recoveryservices.backup
+    - name: REST - 백업
+      href: /rest/api/backup/
+    - name: REST - Recovery Services 자격 증명 모음
+      href: /rest/api/recoveryservices/
+- name: 리소스
+  items:
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: MSDN 포럼
+      href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=windowsazureonlinebackup'
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/backup/'
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'
+    - name: 서비스 업데이트
+      href: 'https://azure.microsoft.com/updates/?product=backup'
+    - name: 동영상
+      href: 'https://azure.microsoft.com/documentation/videos/index/?services=backup'

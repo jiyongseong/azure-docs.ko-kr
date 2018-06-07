@@ -1,26 +1,27 @@
 ---
-title: "Azure Active Directory 개발자 용어집 | Microsoft Docs"
-description: "일반적으로 사용되는 Azure Active Directory 개발자 개념 및 기능에 대한 용어 목록입니다."
+title: Azure Active Directory 개발자 용어집 | Microsoft Docs
+description: 일반적으로 사용되는 Azure Active Directory 개발자 개념 및 기능에 대한 용어 목록입니다.
 services: active-directory
-documentationcenter: 
-author: bryanla
-manager: mbaldwin
-editor: 
+documentationcenter: ''
+author: CelesteDG
+manager: mtillman
+editor: ''
 ms.assetid: 551512df-46fb-4219-a14b-9c9fc23998ba
 ms.service: active-directory
+ms.component: develop
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 07/19/2017
-ms.author: bryanla
+ms.date: 11/16/2017
+ms.author: celested
 ms.custom: aaddev
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 424d8654a047a28ef6e32b73952cf98d28547f4f
-ms.openlocfilehash: 1d65d5292d51c58b92f68dd469bf1eb0ccdc47ca
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/22/2017
-
+ms.openlocfilehash: 12c1a4b2b1f3e433721b9c8a335c6b55de746643
+ms.sourcegitcommit: e14229bb94d61172046335972cfb1a708c8a97a5
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/14/2018
+ms.locfileid: "34158152"
 ---
 # <a name="azure-active-directory-developer-glossary"></a>Azure Active Directory 개발자 용어집
 이 문서에는 Azure AD에 대한 응용 프로그램 개발에 관해 알아보고자 할 때 유용한 핵심 Azure Active Directory(AD) 개발자 개념 함 합니다.
@@ -34,6 +35,9 @@ ms.lasthandoff: 03/22/2017
 * ["클라이언트 자격 증명" 권한 부여](#authorization-grant) - 클라이언트에서 리소스 소유자의 인증/권한 부여 없이 작동하는 유일한 인증을 제공하므로 때로는 토큰을 “앱 전용” 토큰이라고도 할 수 있습니다.
 
 자세한 내용은 [Azure AD 토큰 참조][AAD-Tokens-Claims]를 참조하세요.
+
+## <a name="application-id-client-id"></a>응용 프로그램 ID(클라이언트 ID)
+Azure AD가 응용 프로그램 등록 시 부여하는 고유 식별자로, 해당 응용 프로그램과 그 구성을 식별하는 데 사용됩니다. 응용 프로그램 ID([클라이언트 ID](https://tools.ietf.org/html/rfc6749#page-15))는 인증 요청을 수행할 때 사용되며, 개발 시 인증 라이브러리에 제공됩니다. 응용 프로그램 ID(클라이언트 ID)는 비밀이 아닙니다. 
 
 ## <a name="application-manifest"></a>응용 프로그램 매니페스트
 [Azure Portal][AZURE-portal]이 제공하는 기능, 응용 프로그램 ID 구성의 JSON 표현을 생성하며 연결된 [응용 프로그램][AAD-Graph-App-Entity] 및 [ServicePrincipal][AAD-Graph-Sp-Entity] 엔터티를 업데이트하기 위한 메커니즘으로 사용됩니다. 자세한 내용은 [Azure Active Directory 응용 프로그램 매니페스트 이해][AAD-App-Manifest]를 참조하세요.
@@ -52,7 +56,7 @@ ms.lasthandoff: 03/22/2017
 
 자세한 내용은 [Azure Active Directory와 응용 프로그램 통합][AAD-Integrating-Apps]을 참조하세요.
 
-## <a name="authentication"></a>authentication
+## <a name="authentication"></a>인증
 ID 및 액세스 제어에 사용할 보안 주체를 만들기 위한 기반을 제공하도록 당사자에게 합법적인 자격 증명을 하게 챌린지하는 작업. 예를 들어 [OAuth2 권한 부여](#authorization-grant) 시 당사자 인증은 사용된 권한 부여에 따라 [리소스 소유자](#resource-owner) 또는 [클라이언트 응용 프로그램](#client-application)의 역할을 수행합니다.
 
 ## <a name="authorization"></a>권한 부여
@@ -83,7 +87,7 @@ Azure AD 응용 프로그램 통합의 경우 Azure AD는 예를 들어 [Microso
 자세한 내용은 [Azure AD 토큰 참조][AAD-Tokens-Claims]를 참조하세요.
 
 ## <a name="client-application"></a>클라이언트 응용 프로그램
-[OAuth2 권한 부여 프레임워크][OAuth2-Role-Def]에 정의된 대로, [리소스 소유자](#resource-owner) 대신 보호된 리소스 요청을 하는 응용 프로그램입니다. "클라이언트"라는 용어는 특정 하드웨어 구현 특성(예: 응용 프로그램이 서버, 데스크톱, 또는 다른 장치에서 실행할지 여부)을 의미하지 않습니다.  
+[OAuth2 권한 부여 프레임워크][OAuth2-Role-Def]에 정의된 대로, [리소스 소유자](#resource-owner) 대신 보호된 리소스 요청을 하는 응용 프로그램입니다. "클라이언트"라는 용어는 특정 하드웨어 구현 특성(예: 응용 프로그램이 서버, 데스크톱, 또는 다른 장치에서 실행할지 여부)을 의미하지 않습니다. 
 
 클라이언트 응용 프로그램은 [OAuth2 권한 부여](#authorization-grant) 흐름에 참여하기 위해 리소스 소유자에게 [권한 부여](#authorization)를 요청하고 리소스 소유자를 대신하여 API/데이터에 액세스할 수 있습니다. OAuth2 권한 부여 프레임워크는 해당 자격 증명의 기밀을 유지할 수 있는 클라이언트의 능력에 기반하여 "기밀"과 "공용"이란 [두 가지 유형의 클라이언트를 정의][OAuth2-Client-Types]합니다. 응용 프로그램은 웹 서버에서 실행되는 [웹 클라이언트(기밀)](#web-client), 장치에 설치된 [네이티브 클라이언트(공용)](#native-client) 또는 장치의 브라우저에서 실행되는 [사용자 에이전트 기반 클라이언트(공용)](#user-agent-based-client)를 구현할 수 있습니다.
 
@@ -119,7 +123,7 @@ Azure AD 응용 프로그램 통합의 경우 Azure AD는 예를 들어 [Microso
 ## <a name="resource-server"></a>리소스 서버
 [OAuth2 권한 부여 프레임워크][OAuth2-Role-Def]에 정의된 대로, [액세스 토큰](#access-token)에 있는 [클라이언트 응용 프로그램](#client-application)에 의한 보호된 리소스 요청을 수락하고 응답할 수 있는, 보호된 리소스를 호스트하는 서버입니다. 보호된 리소스 서버 또는 리소스 응용 프로그램이라고도 합니다.
 
-리소스 서버는 API를 공개하고 OAuth 2.0 권한 부여 프레임워크를 사용하여 [범위](#scopes) 및 [역할](#roles)을 통해 보호된 리소스에 대한 액세스를 수행합니다. Azure AD 테넌트 데이터에 대한 액세스를 제공하는 Azure AD Graph API 및 메일과 일정 등 데이터에 대한 액세스를 제공하는 Office 365 API를 예로 들 수 있습니다. 둘 다 [Microsoft Graph API][Microsoft-Graph]를 통해 액세스할 수 있습니다.  
+리소스 서버는 API를 공개하고 OAuth 2.0 권한 부여 프레임워크를 사용하여 [범위](#scopes) 및 [역할](#roles)을 통해 보호된 리소스에 대한 액세스를 수행합니다. Azure AD 테넌트 데이터에 대한 액세스를 제공하는 Azure AD Graph API 및 메일과 일정 등 데이터에 대한 액세스를 제공하는 Office 365 API를 예로 들 수 있습니다. 둘 다 [Microsoft Graph API][Microsoft-Graph]를 통해 액세스할 수 있습니다. 
 
 클라이언트 응용 프로그램과 마찬가지로 리소스 응용 프로그램 ID 구성은 Azure AD 테넌트에서 [등록](#application-registration) 을 통해 설정되며 응용 프로그램과 서비스 주체 개체를 모두 제공 합니다. Azure AD Graph API와 같은 일부 Microsoft 제공 API에는 프로비전 중에 모든 테넌트에서 사용할 수 있도록 설정된 사전 등록된 서비스 주체가 있습니다.
 
@@ -153,14 +157,14 @@ OAuth2 토큰 또는 SAML 2.0 어설션과 같은 클레임을 포함한 서명�
 ## <a name="sign-out"></a>로그 아웃
 [로그인](#sign-in) 시 [클라이언트 응용 프로그램](#client-application) 세션과 연결된 사용자 상태를 분리하여 최종 사용자의 인증을 무효화하는 프로세스
 
-## <a name="tenant"></a>테넌트
-Azure AD 디렉터리의 인스턴스는 Azure AD 테넌트라고 합니다. 다음을 비롯한 다양한 기능을 제공합니다.
+## <a name="tenant"></a>tenant
+Azure AD 디렉터리의 인스턴스는 Azure AD 테넌트라고 합니다. 다음과 같은 여러 기능을 제공합니다.
 
 * 통합 응용 프로그램에 대한 레지스트리 서비스
 * 사용자 계정 및 등록된 응용 프로그램의 인증
 * OAuth2 및 SAML을 포함한 다양한 프로토콜을 지원하는 데 필요한 REST 끝점([권한 부여 끝점](#authorization-endpoint), [토큰 끝점](#token-endpoint) 및 [다중 테넌트 응용 프로그램](#multi-tenant-application)에서 사용하는 "일반" 끝점 포함)
 
-테넌트는 구독을 프로비전하는 동안 Azure AD 또는 Office 365와 연결되어 구독에 대한 ID 및 액세스 관리 기능을 제공합니다. 테넌트에 대한 액세스 권한을 가질 수 있는 다양한 방법에 대한 자세한 내용은 [Azure Active Directory 테넌트를 얻는 방법][AAD-How-To-Tenant]을 참조하세요. 구독과 Azure AD 테넌트 간의 관계에 대한 자세한 내용은 [Azure Active Directory와 Azure 구독을 연결하는 방법][AAD-How-Subscriptions-Assoc]을 참조하세요.
+Azure AD 테넌트는 등록 시 Azure 및 Office 365 구독으로 생성/연결되어 구독에 대한 ID 및 액세스 관리 기능을 제공합니다. Azure 구독 관리자는 Azure Portal을 통해 Azure AD 테넌트를 추가로 만들 수도 있습니다. 테넌트에 대한 액세스 권한을 가질 수 있는 다양한 방법에 대한 자세한 내용은 [Azure Active Directory 테넌트를 얻는 방법][AAD-How-To-Tenant]을 참조하세요. 구독과 Azure AD 테넌트 간의 관계에 대한 자세한 내용은 [Azure Active Directory와 Azure 구독을 연결하는 방법][AAD-How-Subscriptions-Assoc]을 참조하세요.
 
 ## <a name="token-endpoint"></a>토큰 끝점
 OAuth2 [권한 부여](#authorization-grant)를 지원하기 위해 [권한 부여 서버](#authorization-server)에서 구현하는 끝점 중 하나. 권한 부여에 따라 [OpenID Connect][OpenIDConnect] 프로토콜과 함께 사용할 경우 [클라이언트](#client-application) 또는 [ID 토큰](#ID-token)에 대한 [액세스 토큰](#access-token)(및 관련된 "새로 고침" 토큰)을 얻기 위해 사용될 수 있습니다.
@@ -175,7 +179,7 @@ OAuth2 [권한 부여](#authorization-grant)를 지원하기 위해 [권한 부�
 웹 서버에 대한 모든 코드를 실행하고 서버에서 해당 자격 증명을 안전하게 저장하여 "기밀" 클라이언트로 작동하도록 하는 [클라이언트 응용 프로그램](#client-application) 유형입니다. 더 자세한 내용은 [OAuth2 클라이언트 형식 및 프로필][OAuth2-Client-Types]을 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
-[Azure AD 개발자 가이드][AAD-Dev-Guide]는 [응용 프로그램 통합][AAD-How-To-Integrate] 개요 및 [Azure AD 인증 및 지원되는 인증 시나리오][AAD-Auth-Scenarios]의 기본을 포함하는 Azure AD 개발 관련 모든 항목에 대해 사용하는 포털입니다.
+[Azure AD 개발자 가이드][AAD-Dev-Guide]는 [응용 프로그램 통합][AAD-How-To-Integrate] 개요 및 [Azure AD 인증 및 지원되는 인증 시나리오][AAD-Auth-Scenarios]의 기본 사항을 포함하는, Azure AD 개발 관련 모든 항목에 대해 사용되는 랜딩 페이지입니다. [Github](https://github.com/azure-samples?utf8=%E2%9C%93&q=active%20directory&type=&language=)에서도 코드 샘플과 빠른 시작 자습서를 확인할 수 있습니다.
 
 다음 설명 섹션을 사용하여 피드백을 제공하고 새 정의 및 기존 정의 업데이트 요청을 포함하여 콘텐츠를 구체화하고 형성하는 데 도움을 주시기 바랍니다.
 
@@ -201,7 +205,7 @@ OAuth2 [권한 부여](#authorization-grant)를 지원하기 위해 [권한 부�
 [Duyshant-Role-Blog]: http://www.dushyantgill.com/blog/2014/12/10/roles-based-access-control-in-cloud-applications-using-azure-ad/
 [JWT]: https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32
 [Microsoft-Graph]: https://graph.microsoft.io
-[O365-Perm-Ref]: https://msdn.microsoft.com/en-us/office/office365/howto/application-manifest
+[O365-Perm-Ref]: https://msdn.microsoft.com/office/office365/howto/application-manifest
 [OAuth2-Access-Token-Scopes]: https://tools.ietf.org/html/rfc6749#section-3.3
 [OAuth2-AuthZ-Endpoint]: https://tools.ietf.org/html/rfc6749#section-3.1
 [OAuth2-AuthZ-Grant-Types]: https://tools.ietf.org/html/rfc6749#section-1.3
@@ -210,4 +214,3 @@ OAuth2 [권한 부여](#authorization-grant)를 지원하기 위해 [권한 부�
 [OpenIDConnect]: http://openid.net/specs/openid-connect-core-1_0.html
 [OpenIDConnect-AuthZ-Endpoint]: http://openid.net/specs/openid-connect-core-1_0.html#AuthorizationEndpoint
 [OpenIDConnect-ID-Token]: http://openid.net/specs/openid-connect-core-1_0.html#IDToken
-

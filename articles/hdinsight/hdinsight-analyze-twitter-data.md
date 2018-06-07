@@ -1,28 +1,24 @@
 ---
-title: "HDInsight의 Hadoop을 사용하여 Twitter 데이터 분석 - Azure | Microsoft Docs"
-description: "Hive를 사용하여 HDInsight의 Hadoop에서 Twitter 데이터를 분석해 특정 단어의 사용 빈도를 확인하는 방법에 대해 알아봅니다."
+title: HDInsight의 Hadoop을 사용하여 Twitter 데이터 분석 - Azure | Microsoft Docs
+description: Hive를 사용하여 HDInsight의 Hadoop에서 Twitter 데이터를 분석해 특정 단어의 사용 빈도를 확인하는 방법에 대해 알아봅니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: mumian
 manager: jhubbard
 editor: cgronlun
 ms.assetid: 78e4ea33-9714-424d-ac07-3d60ecaebf2e
 ms.service: hdinsight
-ms.workload: big-data
-ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 05/25/2017
 ms.author: jgao
 ROBOTS: NOINDEX
+ms.openlocfilehash: d81f7889122bcf887676496a056df2148cdff6e9
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
 ms.translationtype: HT
-ms.sourcegitcommit: 54774252780bd4c7627681d805f498909f171857
-ms.openlocfilehash: 711d364c36c3aba699326f4a76d42891ba3219fb
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
-
 # <a name="analyze-twitter-data-using-hive-in-hdinsight"></a>HDInsight에서 Hive를 사용하여 Twitter 데이터 분석
 소셜 웹 사이트는 빅데이터 채택의 주요 추진력 중 하나입니다. Twitter와 같은 사이트에서 제공하는 공개 API는 대중적인 추세를 분석하고 이해하는 데 유용한 데이터 원본입니다.
 이 자습서에서는 Twitter 스트리밍 API를 사용해 트윗을 가져온 다음 Azure HDInsight의 Apache Hive를 사용하여 특정 단어가 포함된 트윗을 가장 많이 보낸 Twitter 사용자 목록을 가져옵니다.
@@ -40,7 +36,7 @@ ms.lasthandoff: 07/28/2017
     Windows PowerShell 스크립트를 실행하기 전에 다음과 같은 cmdlet을 사용하여 Azure 구독에 연결되어 있는지 확인합니다.
 
     ```powershell
-    Login-AzureRmAccount
+    Connect-AzureRmAccount
     ```
 
     여러 Azure 구독이 있는 경우 다음 cmdlet을 사용하여 현재 구독을 설정합니다.
@@ -79,13 +75,13 @@ OAuth를 사용하는 첫 단계는 Twitter 개발자 사이트에서 새 응용
 
 **Twitter 응용 프로그램을 만들려면**
 
-1. [https://apps.twitter.com/](https://apps.twitter.com/)(영문)에 로그인합니다. Twitter 계정이 없는 경우 **Sign up now** 링크를 클릭합니다.
+1. [https://apps.twitter.com/](https://apps.twitter.com/)에 로그인합니다. Twitter 계정이 없는 경우 **Sign up now** 링크를 클릭합니다.
 2. **Create New App**을 클릭합니다.
 3. **Name**, **Description**, **Website**를 입력합니다. **Website** 필드의 URL을 구성할 수 있습니다. 다음 표는 사용할 샘플 값을 보여 줍니다.
 
    | 필드 | 값 |
    | --- | --- |
-   |  이름 |MyHDInsightApp |
+   |  Name |MyHDInsightApp |
    |  설명 |MyHDInsightApp |
    |  Website |http://www.myhdinsightapp.com |
 4. **Yes, I agree**를 선택한 후 **Create your Twitter application**을 클릭합니다.
@@ -95,7 +91,7 @@ OAuth를 사용하는 첫 단계는 Twitter 개발자 사이트에서 새 응용
 8. 페이지의 오른쪽 위에서 **Test OAuth** 를 클릭합니다.
 9. **consumer key**, **Consumer secret**, **Access token** 및 **Access token secret**을 기록해 둡니다. 이 값은 자습서의 뒷부분에서 필요합니다.
 
-이 자습서에서는 Windows PowerShell을 사용하여 웹 서비스를 호출합니다. .NET C# 샘플의 경우 [HDInsight에서 HBase를 사용하여 Twitter 데이터 실시간 분석][hdinsight-hbase-twitter-sentiment]을 참조하세요. 웹 서비스 호출에 많이 사용되는 다른 도구는 [*Curl*][curl]입니다. Curl은 [여기][curl-download](영문)에서 다운로드할 수 있습니다.
+이 자습서에서는 Windows PowerShell을 사용하여 웹 서비스를 호출합니다. 웹 서비스 호출에 많이 사용되는 다른 도구는 [*Curl*][curl]입니다. Curl은 [여기][curl-download](영문)에서 다운로드할 수 있습니다.
 
 > [!NOTE]
 > Windows에서 curl 명령을 사용할 때는 옵션 값에 작은따옴표 대신 큰따옴표를 사용합니다.
@@ -124,7 +120,7 @@ OAuth를 사용하는 첫 단계는 Twitter 개발자 사이트에서 새 응용
 
     #region - Connect to Azure subscription
     Write-Host "`nConnecting to your Azure subscription ..." -ForegroundColor Green
-    Login-AzureRmAccount
+    Connect-AzureRmAccount
     #endregion
 
     #region - Create a block blob object for writing tweets into Blob storage
@@ -398,7 +394,7 @@ HiveQL 스크립트는 다음을 수행합니다.
         Get-AzureRmSubscription
     }
     Catch{
-        Login-AzureRmAccount
+        Connect-AzureRmAccount
     }
 
     Select-AzureRmSubscription -SubscriptionId $subscriptionID
@@ -545,7 +541,6 @@ Write-Host "==================================" -ForegroundColor Green
 이 자습서에서는 비구조적 JSON 데이터 집합을 구조적 Hive 테이블로 변환하여 Azure의 HDInsight를 통해 Twitter 데이터를 쿼리하고 탐색하고 분석하는 방법을 살펴보았습니다. 자세한 내용은 다음을 참조하세요.
 
 * [HDInsight 시작][hdinsight-get-started]
-* [HDInsight에서 HBase를 사용하여 Twitter 데이터 실시간 분석][hdinsight-hbase-twitter-sentiment]
 * [HDInsight를 사용하여 비행 지연 데이터 분석][hdinsight-analyze-flight-delay-data]
 * [파워 쿼리로 HDInsight에 Excel 연결][hdinsight-power-query]
 * [Microsoft Hive ODBC 드라이버로 HDInsight에 Excel 연결][hdinsight-hive-odbc]
@@ -564,12 +559,10 @@ Write-Host "==================================" -ForegroundColor Green
 [powershell-script]: http://technet.microsoft.com/library/ee176961.aspx
 
 [hdinsight-provision]: hdinsight-hadoop-provision-linux-clusters.md
-[hdinsight-get-started]: hdinsight-hadoop-linux-tutorial-get-started.md
+[hdinsight-get-started]:hadoop/apache-hadoop-linux-tutorial-get-started.md
 [hdinsight-storage-powershell]:hdinsight-hadoop-use-blob-storage.md#access-blobs-using-azure-powershell
 [hdinsight-analyze-flight-delay-data]: hdinsight-analyze-flight-delay-data.md
 [hdinsight-storage]: hdinsight-hadoop-use-blob-storage.md
-[hdinsight-use-sqoop]: hdinsight-use-sqoop.md
-[hdinsight-power-query]: hdinsight-connect-excel-power-query.md
-[hdinsight-hive-odbc]: hdinsight-connect-excel-hive-odbc-driver.md
-[hdinsight-hbase-twitter-sentiment]: hdinsight-hbase-analyze-twitter-sentiment.md
-
+[hdinsight-use-sqoop]:hadoop/hdinsight-use-sqoop.md
+[hdinsight-power-query]:hadoop/apache-hadoop-connect-excel-power-query.md
+[hdinsight-hive-odbc]:hadoop/apache-hadoop-connect-excel-hive-odbc-driver.md

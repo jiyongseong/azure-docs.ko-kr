@@ -1,30 +1,30 @@
 ---
-title: "Azure IoT Hub 장치 관리 | Microsoft Docs"
-description: "Azure IoT Hub의 장치 관리에 대한 개요: 엔터프라이즈 장치 수명 주기 및 재부팅, 공장 재설정, 펌웨어 업데이트, 구성, 장치 배, 쿼리, 작업과 같은 장치 관리 패턴."
+title: Azure IoT Hub 장치 관리 | Microsoft Docs
+description: 'Azure IoT Hub의 장치 관리에 대한 개요: 엔터프라이즈 장치 수명 주기 및 재부팅, 공장 재설정, 펌웨어 업데이트, 구성, 장치 배, 쿼리, 작업과 같은 장치 관리 패턴.'
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: bzurcher
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: a367e715-55f6-4593-bd68-7863cbf0eb81
 ms.service: iot-hub
 ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/09/2017
+ms.date: 08/24/2017
 ms.author: briz
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5edc47e03ca9319ba2e3285600703d759963e1f3
-ms.openlocfilehash: 7ae476dbaf51ae90cc3c5948b0ec8901d7a536da
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/01/2017
-
-
+ms.openlocfilehash: 4fe4328314e23bbd1ace13e935f82336e1e602a9
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="overview-of-device-management-with-iot-hub"></a>IoT Hub를 사용한 장치 관리 개요
-## <a name="introduction"></a>소개
+
 Azure IoT Hub는 장치 및 백 엔드 개발자가 강력한 장치 관리 솔루션을 빌드할 수 있도록 하는 기능 및 확장성 모델을 제공합니다. 장치의 범위는 제한된 센서 및 단일 목적 마이크로컨트롤러에서 다수의 장치에 대한 통신을 라우팅하는 강력한 게이트웨이까지를 포함합니다.  또한 IoT 운영자의 사용 사례 및 요구 사항은 여러 산업에 따라 크게 다릅니다.  이 변형에도 불구하고 IoT Hub 장치 관리는 기능, 패턴 및 코드 라이브러리를 다양한 장치 및 최종 사용자에게 제공합니다.
+
+[!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-partial.md)]
 
 성공적인 기업 IoT 솔루션을 만드는 데 있어 중요한 부분은 운영자가 다수의 장치를 지속적으로 관리하는 방법에 대한 전략을 제공하는 것입니다. IoT 운영자는 업무 중 보다 전략적인 측면에 중점을 둘 수 있는 간단하고 안정적인 도구와 응용 프로그램을 필요로 합니다. 이 문서는 다음을 제공합니다.
 
@@ -59,7 +59,7 @@ IoT는 특유의 장치 관리 과제를 수반하며 모든 기업 수준의 �
     *추가 정보*: [장치 쌍 시작][lnk-twins-getstarted], [장치 쌍 이해][lnk-twins-devguide], [장치 쌍 속성 사용 방법][lnk-twin-properties]
 * **프로비전**: 새 장치를 IoT Hub에 안전하게 프로비전하고 운영자가 장치의 기능을 즉시 검색할 수 있도록 합니다.  IoT Hub ID 레지스트리를 사용하여 유연한 장치 ID 및 자격 증명을 만들고 작업을 사용하여 대량으로 이 작업을 수행합니다. 장치 쌍에서 장치 속성을 통해 기능 및 조건을 보고하도록 장치를 빌드합니다.
   
-    *추가 정보*: [장치 ID 관리][lnk-identity-registry], [장치 ID 대량 관리][lnk-bulk-identity], [장치 쌍 속성 사용 방법][lnk-twin-properties]
+    *추가 정보*: [장치 ID 관리][lnk-identity-registry], [장치 ID 대량 관리][lnk-bulk-identity], [장치 쌍 속성 사용 방법][lnk-twin-properties], [Azure IoT Hub Device Provisioning 서비스][lnk-dps]
 * **구성**: 정상적인 상태와 보안을 유지하면서 장치에 대한 일괄 구성 변경 및 펌웨어 업데이트를 가능하게 합니다. 원하는 속성 또는 직접 메서드와 브로드캐스트 작업을 사용하여 대량으로 이러한 장치 관리 작업을 수행합니다.
   
     *추가 정보*:  [직접 메서드 사용][lnk-c2d-methods], [장치에서 직접 메서드 호출][lnk-methods-devguide], [장치 쌍 속성 사용 방법][lnk-twin-properties], [작업 예약 및 브로드캐스트][lnk-jobs], [여러 장치에서 작업 예약][lnk-jobs-devguide]
@@ -90,7 +90,7 @@ IoT Hub는 다음과 같은 장치 관리 패턴을 가능하게 합니다.  [�
     ![장치 관리 보고 진행률 및 상태 패턴 그래픽][img-report_progress_pattern]
 
 ## <a name="next-steps"></a>다음 단계
-IoT Hub에서 장치 관리를 위해 제공하는 기능, 패턴 및 코드 라이브러리를 사용하여 각 장치 수명 주기 단계에서 기업 IoT 운영자 요구 사항을 충족하는 IoT 응용 프로그램을 만들 수 있습니다.
+IoT Hub에서 장치 관리를 위해 제공하는 기능, 패턴 및 코드 라이브러리를 사용하면 각 장치 수명 주기 단계에서 기업 IoT 운영자 요구 사항을 충족하는 IoT 응용 프로그램을 만들 수 있습니다.
 
 IoT Hub 장치 관리 기능에 대해 계속 알아보려면 [장치 관리 시작][lnk-get-started] 자습서를 참조하세요.
 
@@ -115,4 +115,4 @@ IoT Hub 장치 관리 기능에 대해 계속 알아보려면 [장치 관리 시
 [lnk-methods-devguide]: iot-hub-devguide-direct-methods.md
 [lnk-jobs]: iot-hub-node-node-schedule-jobs.md
 [lnk-jobs-devguide]: iot-hub-devguide-jobs.md
-
+[lnk-dps]: https://azure.microsoft.com/documentation/services/iot-dps

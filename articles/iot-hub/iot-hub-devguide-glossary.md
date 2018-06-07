@@ -1,32 +1,36 @@
 ---
-title: "Azure IoT Hub 용어집 | Microsoft Docs"
-description: "개발자 가이드 - Azure IoT Hub와 관련된 일반적인 용어집"
+title: Azure IoT Hub 용어집 | Microsoft Docs
+description: 개발자 가이드 - Azure IoT Hub와 관련된 일반적인 용어집
 services: iot-hub
 documentationcenter: .net
 author: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 16ef29ea-a185-48c3-ba13-329325dc6716
 ms.service: iot-hub
 ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 05/02/2017
+ms.date: 01/29/2018
 ms.author: dobett
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5edc47e03ca9319ba2e3285600703d759963e1f3
-ms.openlocfilehash: c3646fef95bc06f8febe45718f4f9aeb9aefb42a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/01/2017
-
-
+ms.openlocfilehash: aae72618da42db53304075506b4969945ff0165f
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="glossary-of-iot-hub-terms"></a>IoT Hub 용어집
 이 문서에서는 IoT Hub 문서에 사용된 몇 가지 일반적인 용어를 나열합니다.
 
 ## <a name="advanced-message-queueing-protocol"></a>고급 메시지 큐 프로토콜
 [AMQP(고급 메시지 큐 프로토콜)](https://www.amqp.org/)는 [IoT Hub](#iot-hub)에서 장치와 통신을 위해 지원하는 메시징 프로토콜 중 하나입니다. IoT Hub에서 지원하는 메시징 프로토콜에 대한 자세한 내용은 [IoT Hub를 통해 메시지 보내고 받기](iot-hub-devguide-messaging.md)를 참조하세요.
+
+## <a name="automatic-device-management"></a>자동 장치 관리
+Azure IoT Hub에서 자동 장치 관리는 전체 수명 주기를 통해 대규모 장치를 관리하는 반복적이고 복잡한 작업을 자동화합니다. 자동 장치 관리를 사용하여 해당 속성을 기반으로 장치 집합을 대상으로 지정하고, 원하는 구성을 정의하고, 범위에 나올 때마다 IoT Hub에서 장치를 업데이트하도록 할 수 있습니다.  [자동 장치 구성](iot-hub-auto-device-config.md) 및 [IoT Edge 자동 배포](../iot-edge/how-to-deploy-monitor.md)로 구성됩니다.
+
+## <a name="automatic-device-configuration"></a>자동 장치 구성
+솔루션 백 엔드는 [자동 장치 구성](iot-hub-auto-device-config.md)을 사용하여 [장치 쌍](#device-twin)의 집합에 원하는 속성을 할당하고 시스템 메트릭 및 사용자 지정 메트릭을 사용하여 상태를 보고할 수 있습니다. 
 
 ## <a name="azure-cli"></a>Azure CLI
 [Azure CLI](../cli-install-nodejs.md)는 Microsoft Azure에서 리소스를 만들고 관리하기 위한 플랫폼 간 오픈 소스 셸 기반 명령 도구입니다. 이 버전의 CLI는 Node.js를 사용하여 구현됩니다.
@@ -38,14 +42,11 @@ ms.lasthandoff: 06/01/2017
 ## <a name="azure-iot-device-sdks"></a>Azure IoT 장치 SDK
 여러 언어로 된 _장치 SDK_가 제공되어 이를 통해 IoT Hub와 상호 작용하는 [장치 앱](#device-app)을 만들 수 있습니다. IoT Hub 자습서는 이러한 장치 SDK를 사용하는 방법을 보여 줍니다. 이 GitHub [리포지토리](https://github.com/Azure/azure-iot-sdks)에서 장치 SDK에 대한 소스 코드와 추가 정보를 확인할 수 있습니다.
 
-## <a name="azure-iot-edge"></a>Azure IoT Edge
-IoT Edge를 통해 게이트웨이 연결 장치가 [IoT Hub](#iot-hub)와 통신할 수 있도록 해주는 응용 프로그램을 작성할 수 있습니다. IoT Edge 자습서는 이 서비스를 사용하는 방법을 보여줍니다. 이 GitHub [리포지토리](https://github.com/Azure/iot-edge)에서 Azure IoT Edge에 대한 소스 코드와 추가 정보를 확인할 수 있습니다.
-
 ## <a name="azure-iot-service-sdks"></a>Azure IoT 서비스 SDK
 여러 언어로 된 _장치 SDK_가 제공되어 이를 통해 IoT Hub와 상호 작용하는 [백 엔드 앱](#back-end-app)을 만들 수 있습니다. IoT Hub 자습서는 이러한 서비스 SDK를 사용하는 방법을 보여 줍니다. 이 GitHub [리포지토리](https://github.com/Azure/azure-iot-sdks)에서 서비스 SDK에 대한 소스 코드와 추가 정보를 확인할 수 있습니다.
 
-## <a name="azure-portal"></a>Azure 포털
-[Microsoft Azure Portal](https://portal.azure.com)은 Azure 리소스를 프로비전 및 관리할 수 있는 중앙 위치입니다. _블레이드_를 사용하여 해당 콘텐츠를 구성합니다. 일부 IoT Hub 자습서에서는 [Azure 클래식 포털](https://manage.windowsazure.com)을 사용할지 묻는 메시지가 표시될 수 있습니다.
+## <a name="azure-portal"></a>Azure portal
+[Microsoft Azure Portal](https://portal.azure.com)은 Azure 리소스를 프로비전 및 관리할 수 있는 중앙 위치입니다. _블레이드_를 사용하여 해당 콘텐츠를 구성합니다.
 
 ## <a name="azure-powershell"></a>Azure PowerShell
 [Azure PowerShell](/powershell/azure/overview)은 Windows PowerShell로 Azure를 관리하는 데 사용할 수 있는 cmdlet 컬렉션입니다. cmdlet을 사용하여 Azure 플랫폼을 통해 제공되는 솔루션과 서비스를 만들고 테스트, 배포 및 관리할 수 있습니다.
@@ -53,11 +54,11 @@ IoT Edge를 통해 게이트웨이 연결 장치가 [IoT Hub](#iot-hub)와 통�
 ## <a name="azure-resource-manager"></a>Azure 리소스 관리자
 [Azure Resource Manager](../azure-resource-manager/resource-group-overview.md)를 사용하면 솔루션에서 리소스를 그룹으로 사용할 수 있습니다. 조정된 단일 작업에서 솔루션에 대한 리소스를 배포, 업데이트 또는 삭제할 수 있습니다.
 
-## <a name="azure-service-bus"></a>Azure 서비스 버스
+## <a name="azure-service-bus"></a>Azure Service Bus
 [Service Bus](../service-bus/index.md)에서는 온-프레미스 솔루션을 클라우드에 연결할 수 있는 릴레이된 통신과 엔터프라이즈 메시징을 사용하여 클라우드 사용 통신을 제공합니다. 일부 IoT Hub 자습서는 Service Bus [큐](../service-bus-messaging/service-bus-messaging-overview.md)를 활용합니다.
 
-## <a name="azure-storage"></a>Azure 저장소
-[Azure Storage](../storage/storage-introduction.md)는 클라우드 저장소 솔루션입니다. 여기에는 구조화되지 않은 개체 데이터를 저장하는 데 사용할 수 있는 Blob Storage 서비스가 포함됩니다. 일부 IoT Hub 자습서는 Blob Storage를 사용합니다.
+## <a name="azure-storage"></a>Azure Storage
+[Azure Storage](../storage/common/storage-introduction.md)는 클라우드 저장소 솔루션입니다. 여기에는 구조화되지 않은 개체 데이터를 저장하는 데 사용할 수 있는 Blob Storage 서비스가 포함됩니다. 일부 IoT Hub 자습서는 Blob Storage를 사용합니다.
 
 ## <a name="back-end-app"></a>백 엔드 앱
 [IoT Hub](#iot-hub)의 컨텍스트에서 백 엔드 앱은 IoT Hub에서 서비스 지향 끝점 중 하나에 연결되는 앱입니다. 예를 들어 백 엔드 앱은 [장치-클라우드](#device-to-cloud) 메시지를 검색하거나 [ID 레지스트리](#identity-registry)를 관리할 수 있습니다. 일반적으로 백 엔드 앱은 클라우드에서 실행되지만 대부분의 자습서에 나오는 백 엔드 앱은 로컬 개발 환경에서 실행 중인 콘솔 앱입니다.
@@ -70,6 +71,9 @@ IoT Edge를 통해 게이트웨이 연결 장치가 [IoT Hub](#iot-hub)와 통�
 
 ## <a name="cloud-to-device"></a>클라우드-장치
 IoT Hub에서 연결된 장치로 전송되는 메시지를 참조하세요. 대개 이러한 메시지는 장치에 작업을 수행하도록 하는 명령입니다. 자세한 내용은 [IoT Hub를 통해 메시지 보내고 받기](iot-hub-devguide-messaging.md)를 참조하세요.
+
+## <a name="configuration"></a>구성
+[자동 장치 구성](iot-hub-auto-device-config.md)의 컨텍스트에서 IoT Hub 내의 구성은 장치 쌍의 집합에 대해 원하는 구성을 정의하고 상태 및 진행률을 보고하도록 메트릭 집합을 제공합니다.
 
 ## <a name="connection-string"></a>연결 문자열
 앱 코드에서 연결 문자열을 사용하여 끝점에 연결하는 데 필요한 정보를 캡슐화할 수 있습니다. 일반적으로 연결 문자열에는 끝점의 주소와 보안 정보가 포함되지만 연결 문자열의 형식은 서비스 간에 다양합니다. IoT Hub 서비스와 연관된 연결 문자열에는 다음 두 종류가 있습니다.
@@ -107,13 +111,16 @@ IoT의 컨텍스트에서 일반적으로 장치는 데이터를 수집하거나
 장치 데이터는 IoT Hub [ID 레지스트리](#identity-registry)에 저장된 장치 단위 데이터를 나타냅니다. 이 데이터를 가져오고 내보낼 수 있습니다.
 
 ## <a name="device-explorer"></a>장치 탐색기
-[장치 탐색기](https://github.com/Azure/azure-iot-sdk-csharp/tree/master/tools/DeviceExplorer)는 Windows에서 실행되는 도구이며 이 도구를 통해 [ID 레지스트리](#identity-registry)에서 장치를 관리하고 메시지를 장치로 보내고 받을 수 있습니다.
+[장치 탐색기](https://github.com/Azure/azure-iot-sdk-csharp/tree/master/tools/DeviceExplorer)는 Windows에서 실행되는 도구이며 이 도구를 통해 [ID 레지스트리](#identity-registry)에서 장치를 관리할 수 있습니다. 또한 이 도구는 장치로 메시지를 보내고 받을 수 있습니다.
 
 ## <a name="device-identities-rest-api"></a>장치 ID REST API
 [장치 ID REST API](https://docs.microsoft.com/rest/api/iothub/iothubresource)를 통해 REST API를 사용하여 [ID 레지스트리](#identity-registry)에 등록된 장치를 관리할 수 있습니다. 일반적으로 IoT Hub 자습서에 나와 있는 것보다 상위 수준의 [서비스 SDK](#azure-iot-service-sdks)를 사용해야 합니다.
 
 ## <a name="device-identity"></a>장치 ID
 장치 ID는 [ID 레지스트리](#identity-registry)에 등록된 모든 장치에 할당된 고유한 식별자입니다.
+
+## <a name="module-identity"></a>모듈 ID
+모듈 ID는 장치에 속해 있는 모든 모듈에 할당된 고유 식별자입니다. 또한 모듈 ID는 [ID 레지스트리](#identity-registry)에도 등록됩니다.
 
 ## <a name="device-management"></a>장치 관리
 장치 관리에는 계획, 프로비전, 구성, 모니터링 및 사용 중지를 비롯하여 IoT 솔루션에서 장치 관리와 관련된 전체 수명 주기가 포함됩니다.
@@ -130,14 +137,17 @@ IoT의 컨텍스트에서 일반적으로 장치는 데이터를 수집하거나
 ## <a name="device-twin"></a>장치 쌍
 [장치 쌍](iot-hub-devguide-device-twins.md)은 장치의 상태 정보(메타데이터, 구성 및 조건)를 저장하는 JSON 문서입니다. [IoT Hub](#iot-hub)는 IoT Hub에 프로비전하는 각 장치에 대해 하나의 장치 쌍을 유지합니다. 장치 쌍을 통해 장치 및 솔루션 백 엔드 간의 [장치 조건](#device-condition) 및 구성을 동기화할 수 있습니다. 장치 쌍을 쿼리하여 특정 장치를 찾고 장기 실행 중인 작업의 상태를 쿼리할 수 있습니다.
 
-## <a name="device-twin-queries"></a>장치 쌍 쿼리
-[장치 쌍 쿼리](iot-hub-devguide-query-language.md)에서는 SQL과 유사한 IoT Hub 쿼리 언어를 사용하여 장치 쌍에서 정보를 검색합니다. 동일한 IoT Hub 쿼리 언어를 사용하여 IoT Hub에서 실행 중인 [작업](#job)에 대한 정보를 검색할 수 있습니다.
+## <a name="module-twin"></a>모듈 쌍
+장치 쌍과 유사하게 모듈 쌍은 모듈의 상태 정보(메타데이터, 구성 및 조건)를 저장하는 JSON 문서입니다. IoT Hub는 IoT 허브의 장치 ID에서 프로비전하는 각 모듈 ID에 대해 모듈 쌍을 유지합니다. 모듈 쌍을 통해 모듈 및 솔루션 백 엔드 간의 모듈 조건 및 구성을 동기화할 수 있습니다. 모듈 쌍을 쿼리하여 특정 모듈을 찾고 장기 실행 중인 작업의 상태를 쿼리할 수 있습니다.
+
+## <a name="twin-queries"></a>쌍 쿼리
+[장치 및 모듈 쌍 쿼리](iot-hub-devguide-query-language.md)에서는 SQL과 유사한 IoT Hub 쿼리 언어를 사용하여 장치 쌍 또는 모듈 쌍에서 정보를 검색합니다. 동일한 IoT Hub 쿼리 언어를 사용하여 IoT Hub에서 실행 중인 [작업](#job)에 대한 정보를 검색할 수 있습니다.
 
 ## <a name="device-twin-rest-api"></a>장치 쌍 REST API
 솔루션 백 엔드에서 [장치 쌍 REST API](https://docs.microsoft.com/rest/api/iothub/devicetwinapi)를 사용하여 장치 쌍을 관리할 수 있습니다. API를 사용하면 [장치 쌍](#device-twin) 속성을 검색 및 업데이트하고 [직접 메서드](#direct-method)를 호출할 수 있습니다. 일반적으로 IoT Hub 자습서에 나와 있는 것보다 상위 수준의 [서비스 SDK](#azure-iot-service-sdks)를 사용해야 합니다.
 
-## <a name="device-twin-synchronization"></a>장치 쌍 동기화
-장치 쌍 동기화는 장치 쌍에서 [desired 속성](#desired-properties)을 사용하여 장치를 구성하고 장치 쌍에 저장할 장치의 [reported 속성](#reported-properties)을 검색합니다.
+## <a name="twin-synchronization"></a>쌍 동기화
+쌍 동기화는 장치 쌍 또는 모듈 쌍에서 [원하는 속성](#desired-properties)을 사용하여 장치 또는 모듈을 구성하고 쌍에 저장할 장치 또는 모듈의 [보고된 속성](#reported-properties)을 검색합니다.
 
 ## <a name="direct-method"></a>직접 메서드
 [직접 메서드](iot-hub-devguide-direct-methods.md)는 IoT Hub에서 API를 호출하여 장치에서 실행할 메서드를 트리거하는 방법입니다.
@@ -166,7 +176,9 @@ IoT Hub에 전송된 [장치-클라우드](#device-to-cloud) 메시지를 읽으
 ## <a name="interactive-message"></a>대화형 메시지
 대화형 메시지는 솔루션 백 엔드에서 즉각적인 작업을 트리거하는 [클라우드-장치](#cloud-to-device) 메시지입니다. 예를 들어 장치는 CRM 시스템에 자동으로 로깅되는 실패에 대한 경보를 보낼 수 있습니다.
 
-## <a name="iot-hub"></a>IoT 허브
+[!INCLUDE [azure-iot-hub-edge-glossary-includes](../../includes/azure-iot-hub-edge-glossary-includes.md)]
+
+## <a name="iot-hub"></a>IoT Hub
 IoT Hub는 수백만의 장치와 솔루션 백 엔드 간에서 안정적이고 안전한 양방향 통신이 가능하도록 완전히 관리되는 Azure 서비스입니다. 자세한 내용은 [Azure IoT Hub란?](iot-hub-what-is-iot-hub.md)을 참조하세요. [Azure 구독](#subscription)을 사용하여 IoT 메시징 워크로드를 처리하는 IoT Hub를 만들 수 있습니다.
 
 ## <a name="iot-hub-metrics"></a>IoT Hub 메트릭
@@ -178,20 +190,17 @@ IoT Hub는 수백만의 장치와 솔루션 백 엔드 간에서 안정적이고
 ## <a name="iot-hub-resource-provider-rest-api"></a>IoT Hub 리소스 공급자 REST API
 [IoT Hub 리소스 공급자 REST API](https://docs.microsoft.com/rest/api/iothub/resourceprovider/iot-hub-resource-provider-rest)를 사용하여 허브 만들기, 업데이트 및 삭제와 같은 작업을 수행하는 [Azure 구독](#subscription)에서 IoT Hub를 관리할 수 있습니다.
 
-## <a name="iot-suite"></a>IoT Suite
-Azure IoT Suite는 Azure 서비스를 미리 구성된 솔루션과 함께 패키지합니다. 이렇게 미리 구성된 솔루션을 통해 일반적인 IoT 시나리오의 종단 간 구현을 빠르게 시작합니다. 자세한 내용은 [Azure IoT Suite란?](../iot-suite/iot-suite-overview.md)을 참조하세요.
+## <a name="iot-solution-accelerators"></a>IoT 솔루션 가속기
+Azure IoT 솔루션 가속기는 여러 Azure 서비스를 솔루션으로 함께 패키징합니다. 이러한 솔루션을 통해 일반적인 IoT 시나리오의 종단 간 구현을 빠르게 시작합니다. 자세한 내용은 [Azure IoT 솔루션 가속기란?](../iot-suite/iot-suite-overview.md)을 참조하세요.
 
-## <a name="iothub-explorer"></a>iothub-explorer
-[iothub-explorer](https://github.com/azure/iothub-explorer)는 플랫폼 간 명령줄 도구입니다. 이 도구를 통해 [ID 레지스트리](#identity-registry)에서 장치를 관리하고 장치에서 메시지 및 파일을 보내고 받으며 IoT Hub 작업을 모니터링할 수 있습니다.
+## <a name="the-iot-extension-for-azure-cli-20"></a>Azure CLI 2.0에 대한 IoT 확장
+[Azure CLI 2.0에 대한 IoT 확장](https://github.com/Azure/azure-iot-cli-extension)은 플랫폼 간 명령줄 도구입니다. 이 도구를 통해 [ID 레지스트리](#identity-registry)에서 장치를 관리하고 장치에서 메시지 및 파일을 보내고 받으며 IoT Hub 작업을 모니터링할 수 있습니다.
 
 ## <a name="job"></a>작업
 솔루션 백 엔드에서는 IoT Hub에 등록된 장치 집합에서의 활동을 예약 및 추적하는 [작업](iot-hub-devguide-jobs.md)을 사용할 수 있습니다. 활동에는 장치 쌍 [desired 속성](#desired-properties) 업데이트, 장치 쌍 [태그](#tags) 업데이트 및 [직접 메서드](#direct-method) 호출이 포함됩니다. [IoT Hub](#iot-hub)는 [ID 레지스트리](#identity-registry)에서 [가져오고 내보내는](iot-hub-devguide-identity-registry.md#import-and-export-device-identities) 작업도 사용합니다.
 
 ## <a name="jobs-rest-api"></a>작업 REST API
 [작업 REST API](https://docs.microsoft.com/rest/api/iothub/jobapi)는 IoT Hub에서 실행되는 [작업](#job)을 관리할 수 있게 해줍니다.
-
-## <a name="module"></a>모듈
-[Azure IoT Edge](iot-hub-linux-iot-edge-get-started.md)에서 [모듈](iot-hub-linux-iot-edge-get-started.md)은 특정 작업을 수행하는 구성 요소입니다. 작업에는 장치에서 메시지 수집, 메시지 변환 또는 IoT Hub로 메시지 보내기가 포함됩니다. broker는 모듈 간 메시지 전달을 담당합니다. Azure IoT Edge에는 일련의 샘플 모듈이 포함됩니다. 사용자 고유의 사용자 지정 모듈을 만들 수도 있습니다.
 
 ## <a name="mqtt"></a>MQTT
 [MQTT](http://mqtt.org/)는 [IoT Hub](#iot-hub)에서 장치와 통신을 위해 지원하는 메시징 프로토콜 중 하나입니다. IoT Hub에서 지원하는 메시징 프로토콜에 대한 자세한 내용은 [IoT Hub를 통해 메시지 보내고 받기](iot-hub-devguide-messaging.md)를 참조하세요.
@@ -258,4 +267,3 @@ Azure 구독에서는 청구가 이루어집니다. 생성한 각 Azure 서비�
 
 ## <a name="x509-client-certificate"></a>X.509 클라이언트 인증서
 장치는 X.509 인증서를 사용하여 [IoT Hub](#iot-hub)와 인증을 수행할 수 있습니다. [SAS 토큰](#shared-access-signature)을 사용하는 대신 X.509 인증서를 사용합니다.
-

@@ -1,29 +1,25 @@
 ---
-title: "사용자 역할을 추가하거나 제거하는 방법| Microsoft Azure"
-description: "Azure Active Directory Privileged Identity Management 응용 프로그램을 사용하여 권한 있는 ID에 역할을 추가하는 방법을 알아봅니다."
+title: 사용자 역할을 추가하거나 제거하는 방법| Microsoft Azure
+description: Azure Active Directory Privileged Identity Management 응용 프로그램을 사용하여 권한 있는 ID에 역할을 추가하는 방법을 알아봅니다.
 services: active-directory
-documentationcenter: 
-author: billmath
-manager: femila
-editor: 
-ms.assetid: 6a47ced8-cf34-4ce8-bea2-e4fc548cfe22
+documentationcenter: ''
+author: curtand
+manager: mtillman
+editor: ''
 ms.service: active-directory
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 06/06/2017
-ms.author: billmath
-ms.custom: pim;oldportal;it-pro;
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: 5dde6b98f72306d6fe78f3c12377d3ce2ec5ddea
-ms.contentlocale: ko-kr
-ms.lasthandoff: 12/29/2016
-
+ms.component: users-groups-roles
+ms.date: 01/03/2018
+ms.author: curtand
+ms.openlocfilehash: 6024016d7c59551e5678069cb6a6e1e7ab45ad6e
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="azure-ad-privileged-identity-management-how-to-add-or-remove-a-user-role"></a>Azure AD Privileged Identity Management: 사용자 역할을 추가 또는 제거하는 방법
-Azure AD(Active Directory)와 전역 관리자(또는 회사 관리자)는 사용자가 Azure AD에서 **영구적으로** 역할에 할당되도록 업데이트할 수 있습니다. 이 작업은 `Add-MsolRoleMember` 및 `Remove-MsolRoleMember` 등 PowerShell cmdlet을 사용하여 완료됩니다. 또는 [Azure Active Directory에서 관리자 역할 할당](active-directory-assign-admin-roles.md)에 설명된 대로 Azure 클래식 포털을 사용할 수 있습니다.
+Azure AD(Active Directory)와 전역 관리자(또는 회사 관리자)는 사용자가 Azure AD에서 **영구적으로** 역할에 할당되도록 업데이트할 수 있습니다. 이 작업은 `Add-MsolRoleMember` 및 `Remove-MsolRoleMember` 등 PowerShell cmdlet을 사용하여 완료됩니다. 또는 [Azure Active Directory에서 관리자 역할 할당](active-directory-assign-admin-roles.md)에 설명된 대로 Azure Portal을 사용할 수 있습니다.
 
 Azure AD Privileged Identity Management 응용 프로그램을 통해 권한 있는 역할 관리자가 영구 역할 할당을 수행할 수도 있습니다. 또한 권한이 있는 역할 관리자는 사용자의 관리자 역할을 **적격**으로 만들 수 있습니다. 적격인 관리자는 필요할 때 역할을 활성화할 수 있으며 작업을 완료하고 나면 권한이 만료됩니다.
 
@@ -48,7 +44,7 @@ Privileged Identity Management를 사용하여 역할에 사용자를 추가하�
 
 > [!NOTE]
 > 역할에 포함된 새 사용자는 기본적으로 그 역할에 대해서만 자격이 있습니다. 역할을 영구적으로 지정하려면 목록에서 사용자를 클릭합니다. 사용자의 정보가 새 블레이드에 표시됩니다. 사용자 정보 메뉴에서 **make perm** (영구 지정)을 선택합니다.  
-> 사용자가 Azure MFA(Multi-Factor Authentication)를 등록할 수 없거나 Microsoft 계정(일반적으로 @outlook.com),)을 사용하고 있는 경우 사용자 정보는 모든 역할에서 영구적으로 유지되도록 해야 합니다. 활성화 과정에서 적격 관리자에게 MFA를 등록하도록 요청하는 메시지가 표시됩니다.
+> 사용자가 Azure MFA(Multi-Factor Authentication)를 등록할 수 없거나 Microsoft 계정(일반적으로 @outlook.com)을 사용하고 있는 경우 사용자 정보는 모든 역할에서 영구적으로 유지되도록 해야 합니다. 활성화 과정에서 적격 관리자에게 MFA를 등록하도록 요청하는 메시지가 표시됩니다.
 
 사용자가 역할을 부여받을 자격이 있으므로 [역할을 활성화 또는 비활성화하는 방법](active-directory-privileged-identity-management-how-to-activate-role.md)의 지침에 따라 역할을 활성화할 수 있음을 알려 줍니다.
 
@@ -66,5 +62,4 @@ Privileged Identity Management를 사용하여 역할에 사용자를 추가하�
 
 ## <a name="next-steps"></a>다음 단계
 [!INCLUDE [active-directory-privileged-identity-management-toc](../../includes/active-directory-privileged-identity-management-toc.md)]
-
 

@@ -14,14 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/22/2017
 ms.author: kumud
+ms.openlocfilehash: 45fa209b4417ce8b65d1fa4f2f59ff6c2d50f3a4
+ms.sourcegitcommit: ded74961ef7d1df2ef8ffbcd13eeea0f4aaa3219
 ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
-ms.openlocfilehash: b273733f545d8d00d0ffaf4d783ba31ec91f1ec8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/29/2018
 ---
-
 # <a name="countryregion-hierarchy-used-by-azure-traffic-manager-for-geographic-traffic-routing-method"></a>지리적 트래픽 라우팅 메소드에 대해 Azure Traffic Manager에서 사용하는 국가/지역 계층 구조
 
 이 문서에서는 Azure Traffic Manager의 **지리적** 트래픽 라우팅 메서드에서 사용하는 국가 및 지역을 나열합니다. [Azure Traffic Manager REST API](https://docs.microsoft.com/rest/api/trafficmanager/)를 호출하여 이 정보를 프로그래밍 방식으로 가져올 수도 있습니다. 
@@ -67,14 +65,6 @@ ms.lasthandoff: 07/26/2017
         - FR(프랑스)
 
         - GB(영국)
-
-            - GB-ENG(잉글랜드)
-
-            - GB-NIR(북아일랜드)
-
-            - GB-SCT(스코틀랜드)
-
-            - GB-WLS(웨일즈)
 
         - GG(건지)
 
@@ -230,7 +220,7 @@ ms.lasthandoff: 07/26/2017
 
         - CU(쿠바)
 
-        - CW(CuraÃ§ao)
+        - CW(퀴라소)
 
         - DM(도미니카)
 
@@ -703,4 +693,3 @@ ms.lasthandoff: 07/26/2017
 ## <a name="next-steps"></a>다음 단계
 
 - [Azure Traffic Manager에서 지리적 트래픽 라우팅 메서드](traffic-manager-routing-methods.md#geographic)에 대해 자세히 알아봅니다.
-

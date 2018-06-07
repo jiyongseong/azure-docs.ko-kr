@@ -14,13 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/27/2017
 ms.author: LADocs; padmavc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a30a90682948b657fb31dd14101172282988cbf0
-ms.openlocfilehash: 18719a8f49c74973947517161f7306c233a9323f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.openlocfilehash: bc2e5c2b351fb87cb763459a9e24368a422ada1b
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="decode-x12-messages-for-azure-logic-apps-with-the-enterprise-integration-pack"></a>엔터프라이즈 통합 팩이 포함된 Azure Logic Apps에 대한 X12 메시지 디코딩
 
@@ -37,7 +35,7 @@ X12 메시지 디코드 커넥터를 사용하여 거래 업체 규약과 비교
 
 ## <a name="decode-x12-messages"></a>X12 디코딩 메시지
 
-1. [논리 앱 만들기](logic-apps-create-a-logic-app.md)
+1. [논리 앱 만들기](quickstart-create-first-logic-app-workflow.md)
 
 2. X12 메시지 디코딩 커넥터에는 트리거가 없으므로 요청 트리거와 마찬가지로 논리 앱을 시작하는 트리거를 추가해야 합니다. Logic App Designer에서 트리거를 추가하고 작업을 논리 앱에 추가합니다.
 
@@ -51,7 +49,7 @@ X12 메시지 디코드 커넥터를 사용하여 거래 업체 규약과 비교
 
     별표가 있는 속성은 필수 사항입니다.
 
-    | 속성 | 세부 정보 |
+    | 자산 | 세부 정보 |
     | --- | --- |
     | 연결 이름 * |연결의 이름을 입력합니다. |
     | 통합 계정 * |통합 계정의 이름을 입력합니다. 통합 계정 및 논리 앱이 동일한 Azure 위치에 있어야 합니다. |
@@ -64,9 +62,19 @@ X12 메시지 디코드 커넥터를 사용하여 거래 업체 규약과 비교
 
     ![통합 계정 연결 생성](media/logic-apps-enterprise-integration-x12-decode/x12decodeimage6.png) 
 
-    예:
+    예: 
 
     ![디코딩할 X12 플랫 파일 메시지를 선택합니다.](media/logic-apps-enterprise-integration-x12-decode/x12decodeimage7.png) 
+
+   > [!NOTE]
+   > 실제 메시지 콘텐츠 또는 메시지 배열에 대한 페이로드(올바른 경우 또는 잘못된 경우) base64로 인코딩됩니다. 따라서 이 콘텐츠를 처리하는 식을 지정해야 합니다.
+   > 콘텐츠를 코드 뷰에서 또는 디자이너의 식 작성기를 사용하여 입력할 수 있는 XML로 처리하는 예제는 다음과 같습니다.
+   > ``` json
+   > "content": "@xml(base64ToBinary(item()?['Payload']))"
+   > ```
+   > ![콘텐츠 예제](media/logic-apps-enterprise-integration-x12-decode/content-example.png)
+   >
+
 
 ## <a name="x12-decode-details"></a>X12 디코딩 세부 정보
 
@@ -101,5 +109,4 @@ X12 디코딩 커넥터는 다음과 같은 태스크를 수행합니다.
 
 ## <a name="next-steps"></a>다음 단계
 [엔터프라이즈 통합 팩에 대해 자세히 알아보기](../logic-apps/logic-apps-enterprise-integration-overview.md "엔터프라이즈 통합 팩에 대해 알아보기") 
-
 

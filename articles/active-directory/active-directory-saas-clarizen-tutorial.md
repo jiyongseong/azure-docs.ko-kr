@@ -1,10 +1,10 @@
 ---
-title: "자습서: Clarizen과 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory 및 Clarizen 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Clarizen과 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory 및 Clarizen 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: 28acce3e-22a0-4a37-8b66-6e518d777350
 ms.service: active-directory
 ms.workload: identity
@@ -13,12 +13,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 02/10/2017
 ms.author: jeedes
-translationtype: Human Translation
-ms.sourcegitcommit: 3908c354a8551d7b16c759a48ef3e5316bfa11fa
-ms.openlocfilehash: 574c6877bddac8be7d6d541bfabbdc10f6be3101
-ms.lasthandoff: 02/21/2017
-
-
+ms.openlocfilehash: 8af9e7023142077fdeed0262e5f39921b158a14f
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-clarizen"></a>자습서: Clarizen과 Azure Active Directory 통합
 
@@ -33,7 +32,7 @@ ms.lasthandoff: 02/21/2017
 1. 갤러리에서 Clarizen을 추가합니다.
 2. Azure AD Single Sign-On을 구성하고 테스트합니다.
 
-Azure AD와의 SaaS(Software as a Service) 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](active-directory-appssoaccess-whatis.md)을 참조하세요.
+Azure AD와의 SaaS(Software as a Service) 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](manage-apps/what-is-single-sign-on.md)을 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 Clarizen과 Azure AD 통합을 구성하려면 다음 항목이 필요합니다.
@@ -99,14 +98,14 @@ Azure Portal에서 Azure AD Single Sign-On을 사용하도록 설정하고 Clari
 
     a. **식별자** 상자에 해당 값으로 **Clarizen**을 입력합니다.
 
-    b. **회신 URL** 상자에 **https://<company name>.clarizen.com/Clarizen/Pages/Integrations/SAML/SamlResponse.aspx** 패턴을 사용하여 URL을 입력합니다.
+    나. **회신 URL** 상자에 **https://<company name>.clarizen.com/Clarizen/Pages/Integrations/SAML/SamlResponse.aspx** 패턴을 사용하여 URL을 입력합니다.
 
     > [!NOTE]
     > 이러한 값은 실제 값이 아닙니다. 실제 식별자 및 회신 URL을 사용해야 합니다. 식별자에는 고유한 문자열 값을 사용하는 것이 좋습니다. 실제 값을 확인하려면 [Clarizen 지원 팀](https://success.clarizen.com/hc/en-us/requests/new)에 문의하세요.
 
 4. **SAML 서명 인증서** 섹션에서 **새 인증서 만들기**를 클릭합니다.
 
-    !["새 인증서 만들기" 클릭](./media/active-directory-saas-clarizen-tutorial/tutorial_clarizen_03.png)     
+    !["새 인증서 만들기" 클릭](./media/active-directory-saas-clarizen-tutorial/tutorial_clarizen_03.png)  
 
 5. **새 인증서 만들기** 대화 상자에서 달력 아이콘을 클릭하고 만료 날짜를 선택합니다. 그런 다음 **Save**를 클릭합니다.
 
@@ -120,7 +119,7 @@ Azure Portal에서 Azure AD Single Sign-On을 사용하도록 설정하고 Clari
 
     !["확인"을 클릭하여 인증서를 활성화할지 확인](./media/active-directory-saas-clarizen-tutorial/tutorial_general_400.png)
 
-8. **SAML 서명 인증서** 섹션에서 **인증서(Base64)**를 클릭한 후 컴퓨터에 인증서 파일을 저장합니다.
+8. **SAML 서명 인증서** 섹션에서 **인증서(Base64)** 를 클릭한 후 컴퓨터에 인증서 파일을 저장합니다.
 
     !["인증서(Base64)"를 클릭하여 다운로드 시작](./media/active-directory-saas-clarizen-tutorial/tutorial_clarizen_05.png)
 
@@ -146,15 +145,15 @@ Azure Portal에서 Azure AD Single Sign-On을 사용하도록 설정하고 Clari
 
     a. **페더레이션 인증 사용**을 선택합니다.
 
-    b. 다운로드한 인증서를 업로드하려면 **업로드** 를 클릭합니다.
+    나. 다운로드한 인증서를 업로드하려면 **업로드** 를 클릭합니다.
 
-    c. **로그인 URL** 상자에 Azure AD 응용 프로그램 구성 창의 **SAML Single Sign-on 서비스 URL** 값을 입력합니다.
+    다. **로그인 URL** 상자에 Azure AD 응용 프로그램 구성 창의 **SAML Single Sign-on 서비스 URL** 값을 입력합니다.
 
     d. **로그아웃 URL** 상자에 Azure AD 응용 프로그램 구성 창의 **로그아웃 URL** 값을 입력합니다.
 
     e. **POST 사용**을 선택합니다.
 
-    f. **Save**를 클릭합니다.
+    f. **저장**을 클릭합니다.
 
 ### <a name="create-an-azure-ad-test-user"></a>Azure AD 테스트 사용자 만들기
 Azure Portal에서 Britta Simon이라는 테스트 사용자를 만듭니다.
@@ -179,9 +178,9 @@ Azure Portal에서 Britta Simon이라는 테스트 사용자를 만듭니다.
 
     a. **이름** 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 상자에 Britta Simon 계정의 전자 메일 주소를 입력합니다.
+    나. **사용자 이름** 상자에 Britta Simon 계정의 전자 메일 주소를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
 
@@ -204,7 +203,7 @@ Azure AD 사용자가 Clarizen에 로그인할 수 있도록 하려면 사용자
 
     a. **전자 메일** 상자에 Britta Simon 계정의 전자 메일 주소를 입력합니다.
 
-    b. **초대**를 클릭합니다.
+    나. **초대**를 클릭합니다.
 
     > [!NOTE]
     > Azure Active Directory 계정 보유자는 활성화되기 전에 전자 메일을 받고 링크를 따라 계정을 확인합니다.
@@ -244,7 +243,7 @@ Azure Single Sign-On을 사용할 수 있도록 Britta Simon에게 Clarizen에 �
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory를 사용하여 SaaS 앱을 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 <!--Image references-->
 
@@ -259,4 +258,3 @@ Azure Single Sign-On을 사용할 수 있도록 Britta Simon에게 Clarizen에 �
 [201]: ./media/active-directory-saas-clarizen-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-clarizen-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-clarizen-tutorial/tutorial_general_203.png
-

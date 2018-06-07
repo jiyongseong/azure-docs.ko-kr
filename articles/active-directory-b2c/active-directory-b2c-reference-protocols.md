@@ -1,35 +1,30 @@
 ---
-title: "Azure Active Directory B2C: 인증 프로토콜 | Microsoft Docs"
-description: "Azure Active Directory B2C에서 지원하는 프로토콜을 사용하여 앱을 직접 빌드하는 방법"
+title: 'Azure Active Directory B2C: 인증 프로토콜 | Microsoft Docs'
+description: Azure Active Directory B2C에서 지원하는 프로토콜을 사용하여 앱을 직접 빌드하는 방법
 services: active-directory-b2c
-documentationcenter: 
-author: dstrockis
-manager: mbaldwin
-editor: 
-ms.assetid: 5e407d0a-73a2-4d74-ac81-3aa6c31ddcee
+documentationcenter: ''
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 01/07/2017
-ms.author: dastrock
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 857267f46f6a2d545fc402ebf3a12f21c62ecd21
-ms.openlocfilehash: 8e7e7bc7633370057f8dc596ad04a3f1d796a7d2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/28/2017
-
-
+ms.author: davidmu
+ms.openlocfilehash: 9159a1ff55ada7f2c3bdcc60a15eae5ddc7e08b2
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
-# Azure AD B2C: 인증 프로토콜
+# <a name="azure-ad-b2c-authentication-protocols"></a>Azure AD B2C: 인증 프로토콜
 Azure AD B2C(Azure Active Directory B2C)는 두 개의 업계 표준 프로토콜인 OpenID Connect 및 OAuth 2.0을 지원하여 앱에 대한 Identity-as-a-Service를 제공합니다. 서비스는 표준을 준수하지만 이러한 프로토콜의 두 구현에는 약간의 차이가 있을 수 있습니다. 
 
 이 가이드의 정보는 오픈 소스 라이브러리를 사용하지 않고 HTTP 요청을 직접 전송하고 처리하여 코드를 작성하는 경우에 유용합니다. 각 특정 프로토콜의 세부 정보를 자세히 살펴보기 전에 이 페이지를 참조하는 것이 좋습니다. Azure AD B2C에 대해 이미 잘 알고 있는 경우 [프로토콜 참조 가이드](#protocols)로 바로 이동해도 됩니다.
 
 <!-- TODO: Need link to libraries above -->
 
-## 기본 사항
+## <a name="the-basics"></a>기본 사항
 Azure AD B2C를 사용하는 모든 앱은 [Azure 포털](https://portal.azure.com)의 B2C 디렉터리에 등록해야 합니다. 앱 등록 프로세스는 몇 개의 값을 수집하고 앱에 할당합니다.
 
 * 앱을 고유하게 식별하는 **응용 프로그램 ID**
@@ -55,14 +50,14 @@ https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
 
 * **리소스 서버** 는 리소스 또는 데이터가 있는 곳입니다. OAuth 클라이언트를 안전하게 인증하고 권한을 부여하는 권한 부여 서버를 신뢰합니다. 또한 전달자 액세스 토큰을 사용하여 리소스에 액세스 권한이 부여되어야 합니다.
 
-## 정책
+## <a name="policies"></a>정책
 Azure AD B2C 정책은 분명히 서비스의 가장 중요한 기능입니다. Azure AD B2C에서 정책이 도입되어 표준 OAuth 2.0 및 OpenID Connect 프로토콜이 확장됩니다. 이렇게 하면 Azure AD B2C에서 더 쉽게 인증 및 권한 부여를 수행할 수 있습니다. 
 
 정책은 등록, 로그인, 프로필 편집 등의 소비자 ID 경험을 완벽하게 설명합니다. 정책은 관리 UI에서 정의될 수 있습니다. HTTP 인증 요청에서 특별한 쿼리 매개 변수를 사용하여 실행될 수 있습니다. 
 
 정책은 OAuth 2.0 및 OpenID Connect의 표준 기능이 아니므로 이해하는 데 시간이 필요합니다. 자세한 내용은 [Azure AD B2C 정책 참조 가이드](active-directory-b2c-reference-policies.md)를 참조하세요.
 
-## 토큰
+## <a name="tokens"></a>토큰
 OAuth 2.0 및 OpenID Connect의 Azure AD B2C 구현은 JWT(JSON 웹 토큰)로 표현되는 전달자 토큰을 포함하여 전달자 토큰을 광범위하게 활용합니다. 전달자 토큰은 보호된 리소스에 대한 "전달자" 액세스 권한을 부여하는 간단한 보안 토큰입니다.
 
 전달자는 토큰을 제공할 수 있는 당사자입니다. Azure AD에서 전달자 토큰을 받으려면 먼저 당사자를 인증해야 합니다. 하지만 전송 및 저장에 토큰을 보호하는 데 필요한 단계를 수행하지 않으면 의도하지 않은 당사자가 가로채서 사용할 수 있습니다.
@@ -75,11 +70,10 @@ OAuth 2.0 및 OpenID Connect의 Azure AD B2C 구현은 JWT(JSON 웹 토큰)로 �
 
 Azure AD B2C에서 사용되는 다양한 토큰 형식에 대한 자세한 내용은 [Azure AD 토큰 참조](active-directory-b2c-reference-tokens.md)를 참조하세요.
 
-## 프로토콜
+## <a name="protocols"></a>프로토콜
 몇 가지 예제 요청을 검토할 준비가 되면 다음 자습서 중 하나를 시작할 수 있습니다. 각각 특정 인증 시나리오에 해당합니다. 사용자에게 맞는 흐름을 결정하는 데 도움이 필요하면 [Azure AD B2C를 사용하여 빌드할 수 있는 앱 형식](active-directory-b2c-apps.md)을 확인합니다.
 
 * [OAuth 2.0을 사용하여 모바일 및 네이티브 응용 프로그램 빌드](active-directory-b2c-reference-oauth-code.md)
 * [OpenID Connect를 사용하여 웹앱 빌드](active-directory-b2c-reference-oidc.md)
 * [OAuth 2.0 암시적 흐름을 사용하여 단일 페이지 앱 구축](active-directory-b2c-reference-spa.md)
-
 

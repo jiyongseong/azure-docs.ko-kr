@@ -1,28 +1,26 @@
 ---
-title: "Azure Active Directory를 사용하여 Azure Batch 서비스 솔루션 인증 | Microsoft Docs"
-description: "Batch는 Batch 서비스의 인증을 위해 Azure AD를 지원합니다."
+title: Azure Active Directory를 사용하여 Azure Batch 서비스 솔루션 인증 | Microsoft Docs
+description: Batch는 Batch 서비스의 인증을 위해 Azure AD를 지원합니다.
 services: batch
 documentationcenter: .net
-author: tamram
-manager: timlt
-editor: 
-tags: 
-ms.assetid: 
+author: dlepow
+manager: jeconnoc
+editor: ''
+tags: ''
+ms.assetid: ''
 ms.service: batch
 ms.devlang: multiple
 ms.topic: article
-ms.tgt_pltfrm: vm-windows
+ms.tgt_pltfrm: ''
 ms.workload: big-compute
-ms.date: 06/20/2017
-ms.author: tamram
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 4f68f90c3aea337d7b61b43e637bcfda3c98f3ea
-ms.openlocfilehash: 9c03bde919c46cd301229255c0b12ee69dda6f78
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
+ms.date: 04/18/2018
+ms.author: danlep
+ms.openlocfilehash: c28af5a9773cc362663831346b58f599aed6ea9a
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
-
 # <a name="authenticate-batch-service-solutions-with-active-directory"></a>Active Directory를 사용하여 Batch 서비스 솔루션 인증
 
 Azure Batch는 [Azure Active Directory][aad_about](Azure AD) 인증을 지원합니다. Azure AD는 Microsoft의 다중 테넌트 클라우드 기반 디렉터리 및 ID 관리 서비스입니다. Azure에서는 Azure AD를 자체적으로 사용하여 고객, 서비스 관리자 및 조직 사용자를 인증합니다.
@@ -33,13 +31,6 @@ Azure Batch와 함께 Azure AD 인증을 사용할 때 다음 두 가지 방법 
 - **서비스 주체**를 사용하여 무인으로 실행되는 응용 프로그램을 인증합니다. 서비스 주체는 런타임에 리소스에 액세스할 때 응용 프로그램을 나타내기 위해 응용 프로그램에 대한 정책과 권한을 정의합니다.
 
 Azure AD에 대한 자세한 내용은 [Azure Active Directory 설명서](https://docs.microsoft.com/azure/active-directory/)를 참조하세요.
-
-## <a name="authentication-and-pool-allocation-mode"></a>인증 및 풀 할당 모드
-
-배치 계정을 만들 때 해당 계정에 대해 생성된 풀을 할당해야 하는 위치를 지정할 수 있습니다. 기본 Batch 서비스 구독 또는 사용자 구독 중 하나에서 풀을 할당하도록 선택할 수 있습니다. 사용자의 선택은 해당 계정의 리소스에 대한 액세스를 인증하는 방법에 영향을 줍니다.
-
-- **Batch 서비스 구독** - 기본적으로 Batch 풀은 Batch 서비스 구독에 할당됩니다. 이 옵션을 선택하면 [공유 키](https://docs.microsoft.com/rest/api/batchservice/authenticate-requests-to-the-azure-batch-service) 또는 Azure AD로 해당 계정의 리소스에 대한 액세스를 인증할 수 있습니다.
-- **사용자 구독** - 지정한 사용자 구독에 Batch 풀을 할당하도록 선택할 수 있습니다. 이 옵션을 선택하는 경우 Azure AD로 인증해야 합니다.
 
 ## <a name="endpoints-for-authentication"></a>인증에 대한 끝점
 
@@ -74,7 +65,7 @@ Azure AD 끝점에 대한 자세한 내용은 [Azure AD의 인증 시나리오][
 
 Azure AD를 사용하여 인증하는 첫 번째 단계는 Azure AD 테넌트에 응용 프로그램을 등록하는 것입니다. 응용 프로그램을 등록하면 코드에서 Azure [Active Directory 인증 라이브러리][aad_adal](ADAL)를 호출할 수 있습니다. ADAL은 응용 프로그램에서 Azure AD로 인증하는 API를 제공합니다. 통합 인증 또는 서비스 주체를 사용하려면 응용 프로그램을 등록해야 합니다.
 
-응용 프로그램을 등록할 때 응용 프로그램에 대한 정보를 Azure AD에 제공합니다. 그런 다음 Azure AD는 런타임 시 응용 프로그램을 Azure AD와 연결하는 데 사용하는 응용 프로그램 ID를 제공합니다. 응용 프로그램 ID에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 및 서비스 주체 개체](../active-directory/develop/active-directory-application-objects.md)를 참조하세요.
+응용 프로그램을 등록할 때 응용 프로그램에 대한 정보를 Azure AD에 제공합니다. 그런 다음, Azure AD는 런타임 시 응용 프로그램을 Azure AD와 연결하는 데 사용하는 응용 프로그램 ID(*클라이언트 ID*라고도 함)를 제공합니다. 응용 프로그램 ID에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 및 서비스 주체 개체](../active-directory/develop/active-directory-application-objects.md)를 참조하세요.
 
 Batch 응용 프로그램을 등록하려면 [Azure Active Directory와 응용 프로그램 통합][aad_integrate]에서 [응용 프로그램 추가](../active-directory/develop/active-directory-integrating-applications.md#adding-an-application) 섹션의 단계를 따릅니다. 응용 프로그램을 네이티브 응용 프로그램으로 등록하는 경우 **리디렉션 URI**에 유효한 URI를 지정할 수 있습니다. 실제 끝점일 필요는 없습니다.
 
@@ -90,7 +81,7 @@ Azure AD에 응용 프로그램을 등록하는 방법에 대한 자세한 내�
 
 1. Azure Portal에서 Active Directory를 선택합니다.
 2. **속성**을 클릭합니다.
-3. 디렉터리 ID에 제공된 GUID 값을 복사합니다. 이 값은 테넌트 ID라고도 합니다.
+3. **디렉터리 ID**에 제공된 GUID 값을 복사합니다. 이 값은 테넌트 ID라고도 합니다.
 
 ![디렉터리 ID 복사](./media/batch-aad-auth/aad-directory-id.png)
 
@@ -101,22 +92,22 @@ Azure AD에 응용 프로그램을 등록하는 방법에 대한 자세한 내�
 
 [응용 프로그램을 등록](#register-your-application-with-an-azure-ad-tenant)했으면 Azure Portal에서 다음 단계에 따라 Batch 서비스에 대한 액세스 권한을 부여합니다.
 
-1. Azure Portal의 왼쪽 탐색 창에서 **추가 서비스**를 선택하고 **앱 등록**을 클릭합니다.
+1. Azure Portal의 왼쪽 탐색 창에서 **모든 서비스**를 선택합니다. **앱 등록**을 클릭합니다.
 2. 앱 등록의 목록에서 응용 프로그램의 이름을 검색합니다.
 
     ![응용 프로그램 이름 검색](./media/batch-aad-auth/search-app-registration.png)
 
-3. 응용 프로그램에 대한**설정** 블레이드를 엽니다. **API 액세스** 섹션에서 **필요한 사용 권한**을 선택합니다.
+3. 응용 프로그램을 클릭하고 **설정**을 클릭합니다. **API 액세스** 섹션에서 **필요한 사용 권한**을 선택합니다.
 4. **필요한 사용 권한** 블레이드에서 **추가** 단추를 클릭합니다.
-5. 1단계에서 Batch API를 검색합니다. API를 찾을 때까지 다음 문자열 각각을 검색합니다.
+5. **API 선택**에서 일괄 처리 API를 검색합니다. API를 찾을 때까지 다음 문자열 각각을 검색합니다.
     1. **MicrosoftAzureBatch**
     2. **Microsoft Azure Batch** - 최신 Azure AD 테넌트에서는 이 이름을 사용할 수도 있습니다.
     3. **ddbf3205-c6bd-46ae-8127-60eb93363864**는 Batch API에 대한 ID입니다. 
-6. Batch API를 찾으면 해당 API를 선택하고 **선택** 단추를 클릭합니다.
-6. 2단계에서 **Azure Batch 서비스에 액세스** 옆의 확인란을 선택하고 **선택** 단추를 클릭합니다.
-7. **완료** 단추를 클릭합니다.
+6. 일괄 처리 API를 찾으면 해당 API를 선택하고 **선택**을 클릭합니다.
+7. **권한 선택**에서 **Azure Batch 서비스에 액세스** 옆의 확인란을 선택하고 **선택**을 클릭합니다.
+8. **Done**을 클릭합니다.
 
-이제 **필요한 권한** 블레이드에서 Azure AD 응용 프로그램에 ADAL 및 Batch 서비스 API 모두에 대한 액세스 권한이 있음을 보여 줍니다. Azure AD에 앱을 처음 등록할 때 자동으로 ADAL에 권한이 부여됩니다.
+이제 **필요한 권한** 창이 Azure AD 응용 프로그램에 ADAL 및 Batch 서비스 API 모두에 대한 액세스 권한이 있음을 보여 줍니다. Azure AD에 앱을 처음 등록할 때 자동으로 ADAL에 권한이 부여됩니다.
 
 ![API 권한 부여](./media/batch-aad-auth/required-permissions-data-plane.png)
 
@@ -133,9 +124,9 @@ Azure AD에 응용 프로그램을 등록하는 방법에 대한 자세한 내�
 
 Azure Portal에서 다음 단계를 따릅니다.
 
-1. Azure Portal의 왼쪽 탐색 창에서 **추가 서비스**를 선택하고 **앱 등록**을 클릭합니다.
+1. Azure Portal의 왼쪽 탐색 창에서 **모든 서비스**를 선택합니다. **앱 등록**을 클릭합니다.
 2. 앱 등록 목록에서 응용 프로그램의 이름을 검색합니다.
-3. **설정** 블레이드를 표시합니다. **API 액세스** 섹션에서 **키**를 선택합니다.
+3. 응용 프로그램을 클릭하고 **설정**을 클릭합니다. **API 액세스** 섹션에서 **키**를 선택합니다.
 4. 키를 만들려면 키에 대한 설명을 입력합니다. 그런 다음 키의 기간으로 1년 또는 2년을 선택합니다. 
 5. **저장** 단추를 클릭하여 키를 만들고 표시합니다. 블레이드를 닫은 후에 다시 액세스할 수 없으므로 키 값을 안전한 곳에 복사해 둡니다. 
 
@@ -145,10 +136,10 @@ Azure Portal에서 다음 단계를 따릅니다.
 
 서비스 주체로 인증하려면 응용 프로그램에 RBAC 역할을 할당해야 합니다. 다음 단계를 수행하세요.
 
-1. Azure Portal에서 응용 프로그램에서 사용되는 배치 계정으로 이동합니다.
-2. 배치 계정의 **설정** 블레이드에서 **액세스 제어(IAM)**를 선택합니다.
+1. Azure Portal에서 응용 프로그램에서 사용되는 Batch 계정으로 이동합니다.
+2. Batch 계정의 **설정** 블레이드에서 **Access Control(IAM)** 을 선택합니다.
 3. **추가** 단추를 클릭합니다. 
-4. **역할** 드롭다운에서 응용 프로그램에 대한 _참가자_ 또는 _읽기 권한자_ 역할을 선택합니다. 이러한 역할에 대한 자세한 내용은 [Azure Portal에서 액세스 관리 시작](../active-directory/role-based-access-control-what-is.md)을 참조하세요.  
+4. **역할** 드롭다운에서 응용 프로그램에 대한 _참가자_ 또는 _읽기 권한자_ 역할을 선택합니다. 이러한 역할에 대한 자세한 내용은 [Azure Portal에서 역할 기반 Access Control 시작](../role-based-access-control/overview.md)을 참조하세요.  
 5. **선택** 필드에서 응용 프로그램의 이름을 입력합니다. 목록에서 응용 프로그램을 선택하고 **저장**을 클릭합니다.
 
 이제 액세스 제어 설정에서 RBAC 역할이 할당된 응용 프로그램이 표시됩니다. 
@@ -161,14 +152,14 @@ Azure Portal에서 다음 단계를 따릅니다.
 
 1. Azure Portal에서 Active Directory를 선택합니다.
 2. **속성**을 클릭합니다.
-3. 디렉터리 ID에 제공된 GUID 값을 복사합니다. 이 값은 테넌트 ID라고도 합니다.
+3. **디렉터리 ID**에 제공된 GUID 값을 복사합니다. 이 값은 테넌트 ID라고도 합니다.
 
 ![디렉터리 ID 복사](./media/batch-aad-auth/aad-directory-id.png)
 
 
 ## <a name="code-examples"></a>코드 예제
 
-이 섹션의 코드 예제에서는 Azure AD에서 통합 인증과 서비스 주체를 사용하여 인증하는 방법을 보여 줍니다. 이 코드 예제에서 .NET을 사용하지만, 개념은 다른 언어와 비슷합니다.
+이 섹션의 코드 예제에서는 Azure AD에서 통합 인증과 서비스 주체를 사용하여 인증하는 방법을 보여 줍니다. 이러한 코드 예제 대부분은 .NET을 사용하지만, 개념은 다른 언어와 비슷합니다.
 
 > [!NOTE]
 > Azure AD 인증 토큰은 1시간 후 만료됩니다. 수명이 긴 **BatchClient** 개체를 사용하는 경우 항상 유효한 토큰을 갖도록 모든 요청에 대해 ADAL에서 토큰을 검색하는 것이 좋습니다. 
@@ -202,7 +193,7 @@ Batch 서비스 리소스 끝점 참조:
 private const string BatchResourceUri = "https://batch.core.windows.net/";
 ```
 
-배치 계정 참조:
+Batch 계정 참조:
 
 ```csharp
 private const string BatchAccountUrl = "https://myaccount.mylocation.batch.azure.com";
@@ -214,7 +205,7 @@ private const string BatchAccountUrl = "https://myaccount.mylocation.batch.azure
 private const string ClientId = "<application-id>";
 ```
 
-또한 등록 프로세스 중 지정한 리디렉션 URI를 복사합니다. 코드에 지정된 리디렉션 URI는 응용 프로그램을 등록할 때 제공한 리디렉션 URI와 일치해야 합니다.
+또한 네이티브 응용 프로그램으로 응용 프로그램을 등록하는 경우 사용자가 지정한 리디렉션 URI를 복사합니다. 코드에 지정된 리디렉션 URI는 응용 프로그램을 등록할 때 제공한 리디렉션 URI와 일치해야 합니다.
 
 ```csharp
 private const string RedirectUri = "http://mybatchdatasample";
@@ -275,7 +266,7 @@ Batch 서비스 리소스 끝점 참조:
 private const string BatchResourceUri = "https://batch.core.windows.net/";
 ```
 
-배치 계정 참조:
+Batch 계정 참조:
 
 ```csharp
 private const string BatchAccountUrl = "https://myaccount.mylocation.batch.azure.com";
@@ -305,7 +296,7 @@ public static async Task<string> GetAuthenticationTokenAsync()
 }
 ```
 
-매개 변수로 대리자를 사용자는 **BatchTokenCredentials** 개체를 생성합니다. 이러한 자격 증명을 사용하여 **BatchClient** 개체를 엽니다. 그런 다음 Batch 서비스에 대한 후속 작업에 대해 해당 **BatchClient** 개체를 사용할 수 있습니다.
+매개 변수로 대리자를 사용자는 **BatchTokenCredentials** 개체를 생성합니다. 이러한 자격 증명을 사용하여 **BatchClient** 개체를 엽니다. 그런 다음, Batch 서비스에 대한 후속 작업에 해당 **BatchClient** 개체를 사용합니다.
 
 ```csharp
 public static async Task PerformBatchOperations()
@@ -318,18 +309,78 @@ public static async Task PerformBatchOperations()
     }
 }
 ```
+### <a name="code-example-using-an-azure-ad-service-principal-with-batch-python"></a>코드 예제: Batch Python에서 Azure AD 서비스 주체 사용
+
+Batch Python의 서비스 주체로 인증하려면 [azure-batch](https://pypi.org/project/azure-batch/) 및 [azure-common](https://pypi.org/project/azure-common/) 모듈을 설치 및 참조합니다.
+
+
+```python
+from azure.batch import BatchServiceClient
+from azure.common.credentials import ServicePrincipalCredentials
+```
+
+서비스 주체를 사용하는 경우 테넌트 ID를 제공해야 합니다. 테넌트 ID를 검색하려면 [Azure Active Directory에 대한 테넌트 ID 가져오기](#get-the-tenant-id-for-your-active-directory)에서 설명하는 단계를 따릅니다.
+
+```python
+TENANT_ID = "<tenant-id>";
+```
+
+Batch 서비스 리소스 끝점 참조:  
+
+```python
+RESOURCE = "https://batch.core.windows.net/";
+```
+
+Batch 계정 참조:
+
+```python
+BATCH_ACCOUNT_URL = "https://myaccount.mylocation.batch.azure.com";
+```
+
+응용 프로그램에 대한 응용 프로그램 ID(클라이언트 ID)를 지정합니다. 응용 프로그램 ID는 Azure Portal의 앱 등록에서 사용할 수 있습니다.
+
+```python
+CLIENT_ID = "<application-id>";
+```
+
+Azure Portal에서 복사한 비밀 키를 지정합니다.
+
+```python
+SECRET = "<secret-key>";
+```
+
+**ServicePrincipalCredentials** 개체를 만듭니다.
+
+```python
+credentials = ServicePrincipalCredentials(
+    client_id=CLIENT_ID,
+    secret=SECRET,
+    tenant=TENANT_ID,
+    resource=RESOURCE
+)
+```
+
+서비스 주체 자격 증명을 사용하여 **BatchServiceClient** 개체를 엽니다. 그런 다음, Batch 서비스에 대한 후속 작업에 해당 **BatchServiceClient** 개체를 사용합니다.
+
+```python
+    batch_client = BatchServiceClient(
+    credentials,
+    base_url=BATCH_ACCOUNT_URL
+)
+```
 
 ## <a name="next-steps"></a>다음 단계
 
-Azure AD에 대한 자세한 내용은 [Azure Active Directory 설명서](https://docs.microsoft.com/azure/active-directory/)를 참조하세요. ADAL을 사용하는 방법을 보여 주는 자세한 예제는 [Azure 코드 샘플](https://azure.microsoft.com/resources/samples/?service=active-directory) 라이브러리에서 사용할 수 있습니다.
+* Azure AD에 대한 자세한 내용은 [Azure Active Directory 설명서](https://docs.microsoft.com/azure/active-directory/)를 참조하세요. ADAL을 사용하는 방법을 보여 주는 자세한 예제는 [Azure 코드 샘플](https://azure.microsoft.com/resources/samples/?service=active-directory) 라이브러리에서 사용할 수 있습니다.
 
-서비스 주체에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 및 서비스 주체 개체](../active-directory/develop/active-directory-application-objects.md)를 참조하세요. Azure Portal을 사용하여 서비스 주체를 만들려면 [포털을 사용하여 리소스에 액세스할 수 있는 Active Directory 응용 프로그램 및 서비스 주체 만들기](../resource-group-create-service-principal-portal.md)를 참조하세요. 또한 PowerShell 또는 Azure CLI를 사용하여 서비스 주체를 만들 수도 있습니다. 
+* 서비스 주체에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 및 서비스 주체 개체](../active-directory/develop/active-directory-application-objects.md)를 참조하세요. Azure Portal을 사용하여 서비스 주체를 만들려면 [포털을 사용하여 리소스에 액세스할 수 있는 Active Directory 응용 프로그램 및 서비스 주체 만들기](../resource-group-create-service-principal-portal.md)를 참조하세요. 또한 PowerShell 또는 Azure CLI를 사용하여 서비스 주체를 만들 수도 있습니다.
 
-Azure AD를 사용하여 Batch Management 응용 프로그램을 인증하려면 [Active Directory를 사용하여 Batch Management 솔루션 인증](batch-aad-auth-management.md)을 참조하세요. 
+* Azure AD를 사용하여 Batch Management 응용 프로그램을 인증하려면 [Active Directory를 사용하여 Batch Management 솔루션 인증](batch-aad-auth-management.md)을 참조하세요.
+
+* Azure AD 토큰을 사용하여 인증된 Batch 클라이언트를 만드는 방법의 Python 예제의 경우 [Python 스크립트를 사용하여 Azure Batch 사용자 지정 이미지 배포](https://github.com/azurebigcompute/recipes/blob/master/Azure%20Batch/CustomImages/CustomImagePython.md) 샘플을 참조하세요.
 
 [aad_about]: ../active-directory/active-directory-whatis.md "Azure Active Directory란?"
 [aad_adal]: ../active-directory/active-directory-authentication-libraries.md
 [aad_auth_scenarios]: ../active-directory/active-directory-authentication-scenarios.md "Azure AD의 인증 시나리오"
 [aad_integrate]: ../active-directory/active-directory-integrating-applications.md "Azure Active Directory와 응용 프로그램 통합"
 [azure_portal]: http://portal.azure.com
-

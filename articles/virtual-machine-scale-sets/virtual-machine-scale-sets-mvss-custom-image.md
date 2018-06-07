@@ -1,10 +1,10 @@
 ---
-title: "Azure 크기 집합 템플릿에서 사용자 지정 이미지 참조 | Microsoft Docs"
+title: "Azure 확장 집합 템플릿에서 사용자 지정 이미지 참조 | Microsoft Docs"
 description: "기존 Azure Virtual Machine Scale Set 템플릿에 사용자 지정 이미지를 추가하는 방법 알아보기"
 services: virtual-machine-scale-sets
 documentationcenter: 
 author: gatneil
-manager: timlt
+manager: jeconnoc
 editor: 
 tags: azure-resource-manager
 ms.assetid: 76ac7fd7-2e05-4762-88ca-3b499e87906e
@@ -15,27 +15,25 @@ ms.devlang: na
 ms.topic: article
 ms.date: 5/10/2017
 ms.author: negat
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 97fa1d1d4dd81b055d5d3a10b6d812eaa9b86214
-ms.openlocfilehash: cf52fc9e95267c4bc5c0106aadf626685ddd5c24
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/11/2017
-
+ms.openlocfilehash: 28d2c080048a7f82e83ad9c1794c9757b330a8c7
+ms.sourcegitcommit: f46cbcff710f590aebe437c6dd459452ddf0af09
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/20/2017
 ---
-
-# <a name="add-a-custom-image-to-an-azure-scale-set-template"></a>Azure 크기 집합 템플릿에 사용자 지정 이미지 추가
+# <a name="add-a-custom-image-to-an-azure-scale-set-template"></a>Azure 확장 집합 템플릿에 사용자 지정 이미지 추가
 
 이 문서에서는 사용자 지정 이미지에서 배포할 [실행 가능한 최소 크기 집합 템플릿](./virtual-machine-scale-sets-mvss-start.md)을 수정하는 방법을 보여 줍니다.
 
 ## <a name="change-the-template-definition"></a>템플릿 정의 변경
 
-실행 가능한 최소 크기 집합 템플릿은 [여기](https://raw.githubusercontent.com/gatneil/mvss/minimum-viable-scale-set/azuredeploy.json)에 있으며, 사용자 지정 이미지에서 크기 집합을 배포하기 위한 템플릿은 [여기](https://raw.githubusercontent.com/gatneil/mvss/custom-image/azuredeploy.json)에 있습니다. 이 템플릿(`git diff minimum-viable-scale-set custom-image`)을 하나씩 만드는 데 사용되는 diff에 대해 살펴보겠습니다.
+실행 가능한 최소 확장 집합 템플릿은 [여기](https://raw.githubusercontent.com/gatneil/mvss/minimum-viable-scale-set/azuredeploy.json)에 있으며, 사용자 지정 이미지에서 확장 집합을 배포하기 위한 템플릿은 [여기](https://raw.githubusercontent.com/gatneil/mvss/custom-image/azuredeploy.json)에 있습니다. 이 템플릿(`git diff minimum-viable-scale-set custom-image`)을 하나씩 만드는 데 사용되는 diff에 대해 살펴보겠습니다.
 
 ### <a name="creating-a-managed-disk-image"></a>Managed Disk 이미지 만들기
 
 사용자 지정 Managed Disk 이미지가 이미 있는 경우(`Microsoft.Compute/images` 형식 리소스) 이 섹션을 건너뛰어도 됩니다.
 
-먼저 배포를 시작할 사용자 지정 이미지를 포함하는 Azure Storage의 일반화된 Blob에 대한 URI에 해당하는 `sourceImageVhdUri` 매개 변수를 추가합니다.
+먼저 배포를 시작할 사용자 지정 이미지를 포함하는 Azure Storage의 일반화된 Blob의 URI에 해당하는 `sourceImageVhdUri` 매개 변수를 추가합니다.
 
 
 ```diff
@@ -53,7 +51,7 @@ ms.lasthandoff: 05/11/2017
    "variables": {},
 ```
 
-다음으로 `sourceImageVhdUri` URI에 있는 일반화된 Blob를 기준으로 하는 Managed Disk 이미지에 해당하는 `Microsoft.Compute/images` 형식의 리소스를 추가합니다. 이 이미지는 사용되는 크기 집합과 동일한 하위 지역에 있어야 합니다. 이미지의 속성에서 OS 운영 체제, blob의 위치(`sourceImageVhdUri` 매개 변수) 및 저장소 계정 유형을 지정합니다.
+다음으로 `sourceImageVhdUri` URI에 있는 일반화된 Blob을 기준으로 하는 Managed Disk 이미지에 해당하는 `Microsoft.Compute/images` 형식의 리소스를 추가합니다. 이 이미지는 사용되는 확장 집합과 동일한 하위 지역에 있어야 합니다. 이미지의 속성에서 OS 운영 체제, blob의 위치(`sourceImageVhdUri` 매개 변수) 및 저장소 계정 유형을 지정합니다.
 
 ```diff
    "resources": [
@@ -80,7 +78,7 @@ ms.lasthandoff: 05/11/2017
 
 ```
 
-크기 집합 리소스에서 사용자 지정 이미지를 참조하는 추가 `dependsOn` 절을 추가하여 크기 집합이 해당 이미지에서의 배포를 시도하기 전에 이미지가 만들어지도록 합니다.
+확장 집합 리소스에서 사용자 지정 이미지를 참조하는 추가 `dependsOn` 절을 추가하여 확장 집합이 해당 이미지에서의 배포를 시도하기 전에 이미지가 만들어지도록 합니다.
 
 ```diff
        "location": "[resourceGroup().location]",
@@ -95,9 +93,9 @@ ms.lasthandoff: 05/11/2017
 
 ```
 
-### <a name="changing-scale-set-properties-to-use-the-managed-disk-image"></a>Managed Disk 이미지를 사용하도록 크기 집합 속성 설정
+### <a name="changing-scale-set-properties-to-use-the-managed-disk-image"></a>Managed Disk 이미지를 사용하도록 확장 집합 속성 설정
 
-크기 집합 `storageProfile`의 `imageReference`에서, 플랫폼 이미지의 게시자, 제품, SKU 및 버전을 지정하는 대신, `Microsoft.Compute/images` 리소스의 `id`를 지정합니다.
+확장 집합 `storageProfile`의 `imageReference`에서, 플랫폼 이미지의 게시자, 제품, SKU 및 버전을 지정하는 대신, `Microsoft.Compute/images` 리소스의 `id`를 지정합니다.
 
 ```diff
          "virtualMachineProfile": {
@@ -119,4 +117,3 @@ ms.lasthandoff: 05/11/2017
 ## <a name="next-steps"></a>다음 단계
 
 [!INCLUDE [mvss-next-steps-include](../../includes/mvss-next-steps.md)]
-

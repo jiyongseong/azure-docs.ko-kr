@@ -1,7 +1,7 @@
 ---
 title: "DevOps용 Azure Application Insights 개요 | Microsoft Docs"
 description: "DevOps 환경에서 Application Insights를 사용하는 방법을 알아봅니다."
-author: CFreemanwa
+author: mrbullwinkle
 services: application-insights
 documentationcenter: 
 manager: carmonm
@@ -10,15 +10,15 @@ ms.service: application-insights
 ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
-ms.topic: article
+ms.custom: mvc
+ms.topic: overview
 ms.date: 06/26/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 857267f46f6a2d545fc402ebf3a12f21c62ecd21
-ms.openlocfilehash: c6bfa094f5f06483a9c59a1e0167e5fa7f8f053e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/28/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: b83d08b9dac4fccc033ad4537afd343a6fbe02c2
+ms.sourcegitcommit: e462e5cca2424ce36423f9eff3a0cf250ac146ad
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/01/2017
 ---
 # <a name="overview-of-application-insights-for-devops"></a>DevOps용 Application Insights 개요
 
@@ -38,7 +38,7 @@ ms.lasthandoff: 06/28/2017
 
 팀에서는 Application Insights를 사용하여 라이브 웹 응용 프로그램을 자세히 모니터링합니다.
 
-* 성능. 팀에서는 요청 수에 따라 응답 시간이 어떻게 달라지는지, 얼마나 많은 CPU, 네트워크, 디스크 및 기타 리소스가 사용되고 있는지, 어디에 병목이 있는지를 파악하려고 합니다.
+* 성능. 팀에서는 요청 수에 따라 응답 시간이 어떻게 달라지는지, 얼마나 많은 CPU, 네트워크, 디스크 및 기타 리소스가 사용되고 있는지, 어떤 응용 프로그램 코드로 인해 성능이 저하되었는지, 그리고 어디에 병목이 있는지를 파악하려고 합니다.
 * 오류. 예외 또는 실패한 요청이 있거나 성능 카운터가 적절한 범위를 벗어나는 경우 팀에서는 조치를 취할 수 있도록 신속하게 파악해야 합니다.
 * 사용 현황. 새로운 기능이 릴리스될 때마다 팀에서는 해당 기능이 사용되는 범위와 사용자가 해당 기능에서 어려움을 겪고 있는지 여부를 파악하려고 합니다.
 
@@ -181,11 +181,14 @@ Marcela는 가만히 앉아서 경고를 기다리고 있지는 않습니다. �
 
 **원인이 무엇인가요?**  예를들어 고객이 계정서를 원할 때 특정 요청 유형의 성능에서 갑작스러운 하락이 있는 경우, 웹 응용 프로그램보다는 외부 하위 시스템일 가능성이 있습니다. 메트릭 탐색기에서 종속성 실패 비율 및 종속성 기간 비율을 선택하여 감지한 문제가 있는 과거 몇 시간 또는 몇 일에 대한 기록을 비교합니다. 연관된 변경 내용이 있는 경우 외부 하위 시스템 때문일 수 있습니다.  
 
+
 ![종속성 오류 및 종속성에 대한 호출 기간 차트](./media/app-insights-detect-triage-diagnose/11-dependencies.png)
 
 일부 느린 종속성 문제는 지리적 위치 문제입니다. Fabrikam 은행은 Azure 가상 컴퓨터를 사용하며, 의도치 않게 다른 국가에 웹 서버 및 계정 서버가 있음을 발견했습니다. 그 중 하나를 마이그레이션하여 극적인 개선이 이루어졌습니다.
 
-**무엇을 했나요?** 문제가 종속성에 있는 것으로 나타나지 않고 항상 있지 않는 경우, 최근 변경 내용으로 인한 것일 수 있습니다. 메트릭 및 이벤트 차트에서 제공하는 기록적 관점을 통해 갑작스러운 변경 내용과 배포를 쉽게 연관지을 수 있습니다. 이는 문제에 대한 검색 범위를 좁힙니다.
+**무엇을 했나요?** 문제가 종속성에 있는 것으로 나타나지 않고 항상 있지 않는 경우, 최근 변경 내용으로 인한 것일 수 있습니다. 메트릭 및 이벤트 차트에서 제공하는 기록적 관점을 통해 갑작스러운 변경 내용과 배포를 쉽게 연관지을 수 있습니다. 이는 문제에 대한 검색 범위를 좁힙니다. 응용 프로그램 코드에서 성능을 저하시킨 줄을 확인하려면 Application Insights Profiler를 사용하도록 설정합니다. [Application Insights를 사용하여 라이브 Azure Web Apps 프로파일링](./app-insights-profiler.md)을 참조하세요. Profiler를 사용하도록 설정하고 나면 다음과 같은 추적이 표시됩니다. 이 예제에서는 *GetStorageTableData* 메서드로 인해 문제가 발생했음을 쉽게 확인할 수 있습니다.  
+
+![App Insights Profiler 추적](./media/app-insights-detect-triage-diagnose/AppInsightsProfiler.png)
 
 **무엇이 일어나고 있나요?** 일부 문제가 드물게만 발생하고 오프라인 테스트를 통해서는 추적하기 어려울 수 있습니다. 최대한 할 수 있는 일은 실시간으로 발생할 때 버그를 확보하려고 노력하는 것입니다. 예외 보고서에서 스택 덤프를 점검할 수 있습니다. 또한 자주 사용하는 로깅 프레임워크 또는 TrackTrace()나 TrackEvent()를 사용하여 추적 호출을 작성할 수 있습니다.  
 
@@ -203,7 +206,7 @@ Fabrikam 은행 개발팀은 보다 구조화된 접근법으로 Application Ins
 ## <a name="monitor-user-activity"></a>사용자 활동 모니터링
 응답 시간이 일관적으로 양호하고 예외가 거의 없으면 개발 팀에서 유용성으로 넘어갈 수 있습니다. 사용자의 경험을 개선하는 방법과 더 많은 사용자가 원하는 목표를 달성하도록 유도하는 방법에 대해 고민할 수 있습니다.
 
-Application Insights는 사용자가 앱으로 수행할 작업에 대해 알아보는 데 사용할 수도 있습니다. 원활하게 실행되면 팀은 가장 인기 있는 기능, 사용자가 좋아하는 기능 또는 어려워하는 기능 및 다시 방문하는 빈도에 대해 알고자 합니다. 이는 예정된 작업의 우선 순위를 정하는 데 도움이 됩니다. 또한 개발 주기의 일환으로 각 기능의 성공을 측정할 계획을 세울 수 있습니다. 
+Application Insights는 사용자가 앱으로 수행할 작업에 대해 알아보는 데 사용할 수도 있습니다. 원활하게 실행되면 팀은 가장 인기 있는 기능, 사용자가 좋아하는 기능 또는 어려워하는 기능 및 다시 방문하는 빈도에 대해 알고자 합니다. 이는 예정된 작업의 우선 순위를 정하는 데 도움이 됩니다. 또한 개발 주기의 일환으로 각 기능의 성공을 측정할 계획을 세울 수 있습니다.
 
 예를 들어 웹 사이트를 통한 일반적인 사용자 여정에는 명확한 "깔때기"가 있습니다. 많은 고객들이 다양한 유형의 대출 금리를 살펴봅니다. 견적서를 작성하는 단계로 넘어가는 고객은 그보다 수가 적습니다. 견적서를 작성한 고객 중에서 일부만 다음 단계로 넘어가서 대출을 실행합니다.
 
@@ -233,4 +236,3 @@ Application Insights는 사용자가 앱으로 수행할 작업에 대해 알아
 * [IIS](app-insights-monitor-web-app-availability.md), [J2EE](app-insights-java-live.md) 또는 [Azure](app-insights-azure.md)에서 호스트되는 이미 배포된 앱
 * [웹 페이지](app-insights-javascript.md) - 단일 페이지 앱 또는 일반 웹 페이지 - 독립적으로 또는 다른 서버 옵션과 함께 사용
 * [가용성 테스트](app-insights-monitor-web-app-availability.md) - 공용 인터넷에서 앱 테스트
-

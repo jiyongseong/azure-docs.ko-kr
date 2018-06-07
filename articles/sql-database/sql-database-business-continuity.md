@@ -1,56 +1,51 @@
 ---
-title: "클라우드 무중단 업무 방식 - 데이터베이스 복구 - SQL Database | Microsoft Docs"
-description: "Azure SQL 데이터베이스에서 클라우드 무중단 업무 방식 및 데이터베이스 복구를 지원하고 중요 업무용 클라우드 응용 프로그램을 계속해서 실행할 수 있도록 하는 방법을 알아봅니다."
-keywords: "무중단 업무 방식, 클라우드 무중단 업무 방식, 데이터베이스 재해 복구, 데이터베이스 복구"
+title: 클라우드 무중단 업무 방식 - 데이터베이스 복구 - SQL Database | Microsoft Docs
+description: Azure SQL Database에서 클라우드 무중단 업무 방식 및 데이터베이스 복구를 지원하고 중요 업무용 클라우드 응용 프로그램을 계속해서 실행할 수 있도록 하는 방법을 알아봅니다.
+keywords: 무중단 업무 방식, 클라우드 무중단 업무 방식, 데이터베이스 재해 복구, 데이터베이스 복구
 services: sql-database
-documentationcenter: 
 author: anosov1960
-manager: jhubbard
-editor: 
-ms.assetid: 18e5d3f1-bfe5-4089-b6fd-76988ab29822
+manager: craigg
 ms.service: sql-database
 ms.custom: business continuity
-ms.devlang: NA
 ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: NA
-ms.date: 05/15/2017
+ms.workload: On Demand
+ms.date: 04/04/2018
 ms.author: sashan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 95b8c100246815f72570d898b4a5555e6196a1a0
-ms.openlocfilehash: 88ca437b84298d0c008076f78e0699d36c1a23c2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/18/2017
-
-
+ms.reviewer: carlrab
+ms.openlocfilehash: e5c64ed51fd7c36b1c2cb3b5d98df18b82e08cc3
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32192393"
 ---
-# <a name="overview-of-business-continuity-with-azure-sql-database"></a>Azure SQL 데이터베이스의 비즈니스 연속성 개요
+# <a name="overview-of-business-continuity-with-azure-sql-database"></a>Azure SQL Database의 비즈니스 연속성 개요
 
-이 개요에서는 Azure SQL 데이터베이스에서 비즈니스 연속성 및 재해 복구를 위해 제공하는 기능에 대해 설명합니다. 데이터 손실을 유발하거나 데이터베이스 및 응용 프로그램을 사용할 수 없게 만들 수 있는 중단 이벤트에서의 복구와 관련된 옵션, 권장 사항 및 자습서에 대해 알아봅니다. 사용자 또는 응용 프로그램 오류가 데이터 무결성에 영향을 주거나, Azure 지역에 가동 중단이 발생하거나, 응용 프로그램에 유지 관리가 필요할 때 수행할 작업을 알아봅니다.
+이 개요에서는 Azure SQL Database에서 비즈니스 연속성 및 재해 복구를 위해 제공하는 기능에 대해 설명합니다. 데이터 손실을 유발하거나 데이터베이스 및 응용 프로그램을 사용할 수 없게 만들 수 있는 중단 이벤트에서의 복구와 관련된 옵션, 권장 사항 및 자습서에 대해 알아봅니다. 사용자 또는 응용 프로그램 오류가 데이터 무결성에 영향을 주거나, Azure 지역에 가동 중단이 발생하거나, 응용 프로그램에 유지 관리가 필요할 때 수행할 작업을 알아봅니다.
 
-## <a name="sql-database-features-that-you-can-use-to-provide-business-continuity"></a>비즈니스 연속성을 제공하는 데 사용할 수 있는 SQL 데이터베이스 기능
+## <a name="sql-database-features-that-you-can-use-to-provide-business-continuity"></a>비즈니스 연속성을 제공하는 데 사용할 수 있는 SQL Database 기능
 
-SQL 데이터베이스는 자동화된 백업 및 선택적 데이터베이스 복제를 비롯한 여러 가지 비즈니스 연속성 기능을 제공합니다. 이러한 기능은 최근 트랜잭션에 대한 ERT(예상 복구 시간) 및 잠재적 데이터 손실에 대해 각기 다른 특성을 갖습니다. 이러한 옵션을 이해하면 적절한 옵션을 선택할 수 있습니다. 대부분의 시나리오에서 이러한 옵션을 함께 사용할 수 있습니다. 비즈니스 연속성 계획을 개발할 때는 중단 이벤트 후 응용 프로그램이 완벽하게 복구되기까지 허용되는 최대 시간(RTO(복구 시간 목표))을 이해해야 합니다. 중단 이벤트 후 복구될 때 응용 프로그램이 손실을 허용할 수 있는 최신 데이터 업데이트의 최대 크기(시간 간격)(RPO(복구 지점 목표))도 이해해야 합니다.
+SQL Database는 자동화된 백업 및 선택적 데이터베이스 복제를 비롯한 여러 가지 비즈니스 연속성 기능을 제공합니다. 이러한 기능은 최근 트랜잭션에 대한 ERT(예상 복구 시간) 및 잠재적 데이터 손실에 대해 각기 다른 특성을 갖습니다. 이러한 옵션을 이해하면 적절한 옵션을 선택할 수 있습니다. 대부분의 시나리오에서 이러한 옵션을 함께 사용할 수 있습니다. 비즈니스 연속성 계획을 개발할 때는 중단 이벤트 후 응용 프로그램이 완벽하게 복구되기까지 허용되는 최대 시간(RTO(복구 시간 목표))을 이해해야 합니다. 중단 이벤트 후 복구될 때 응용 프로그램이 손실을 허용할 수 있는 최신 데이터 업데이트의 최대 크기(시간 간격)(RPO(복구 지점 목표))도 이해해야 합니다.
 
-다음 테이블에서 세 가지 가장 일반적인 시나리오에 대한 ERT 및 RPO를 비교합니다.
+다음 테이블에서 세 가지 가장 일반적인 시나리오에 대한 각 서비스 계층의 ERT 및 RPO를 비교합니다.
 
-| 기능 | 기본 계층 | 표준 계층 | 프리미엄 계층 |
-| --- | --- | --- | --- |
-| 백업에서 특정 시점 복원 |7일 이내의 모든 복원 지점 |35일 이내의 모든 복원 지점 |35일 이내의 모든 복원 지점 |
-| 지리적으로 복제된 백업에서 지역 복원 |ERT < 12시간, RPO < 1시간 |ERT < 12시간, RPO < 1시간 |ERT < 12시간, RPO < 1시간 |
-| Azure 백업 자격 증명 모음에서 복원 |ERT < 12시간, RPO < 1주 |ERT < 12시간, RPO < 1주 |ERT < 12시간, RPO < 1주 |
-| 활성 지역 복제 |ERT < 30초, RPO < 5초 |ERT < 30초, RPO < 5초 |ERT < 30초, RPO < 5초 |
+| 기능 | Basic | Standard | Premium  | 범용 | 중요 비즈니스용
+| --- | --- | --- | --- |--- |--- |
+| 백업에서 특정 시점 복원 |7일 이내의 모든 복원 지점 |35일 이내의 모든 복원 지점 |35일 이내의 모든 복원 지점 |구성된 기간 이내의 모든 복원 지점(최대 35일)|구성된 기간 이내의 모든 복원 지점(최대 35일)|
+| 지리적으로 복제된 백업에서 지역 복원 |ERT < 12시간, RPO < 1시간 |ERT < 12시간, RPO < 1시간 |ERT < 12시간, RPO < 1시간 |ERT < 12시간, RPO < 1시간|ERT < 12시간, RPO < 1시간|
+| Azure Backup 자격 증명 모음에서 복원 |ERT < 12시간, RPO < 1주 |ERT < 12시간, RPO < 1주 |ERT < 12시간, RPO < 1주 |ERT < 12시간, RPO < 1주|ERT < 12시간, RPO < 1주|
+| 활성 지역 복제 |ERT < 30초, RPO < 5초 |ERT < 30초, RPO < 5초 |ERT < 30초, RPO < 5초 |ERT < 30초, RPO < 5초|ERT < 30초, RPO < 5초|
 
-### <a name="use-database-backups-to-recover-a-database"></a>데이터베이스 백업을 사용하여 데이터베이스 복구
+### <a name="use-point-in-time-restore-to-recover-a-database"></a>지정 시간 복원을 사용하여 데이터베이스 복구
 
-SQL Database는 데이터 손실로부터 비즈니스를 보호하기 위해 매주 전체 데이터베이스 백업과 매시간 차등 데이터베이스 백업, 그리고 5~10분 간격으로 트랜잭션 로그 백업을 모두 자동으로 수행합니다. 이러한 백업은 표준 및 프리미엄 서비스 계층의 데이터베이스에 대해서는 35일 동안, 기본 서비스 계층의 데이터베이스에 대해서는 7일 동안 지역 중복 저장소에 저장됩니다. 자세한 내용은 [서비스 계층](sql-database-service-tiers.md)을 참조하세요. 서비스 계층에 대한 보존 기간이 비즈니스 요구 사항에 맞지 않으면 [서비스 계층을 변경](sql-database-service-tiers.md)하여 보존 기간을 늘릴 수 있습니다. 데이터 센터 가동 중단으로부터 보호하기 위해 전체 및 차등 데이터베이스 백업도 [쌍을 이루는 데이터 센터](../best-practices-availability-paired-regions.md)로 복제됩니다. 자세한 내용은 [자동 데이터베이스 백업](sql-database-automated-backups.md)을 참조하세요.
+SQL Database는 데이터 손실로부터 비즈니스를 보호하기 위해 매주 전체 데이터베이스 백업과 매시간 차등 데이터베이스 백업, 그리고 5~10분 간격으로 트랜잭션 로그 백업을 모두 자동으로 수행합니다. [DTU 기반 구매 모델](sql-database-service-tiers-dtu.md)을 사용하는 경우 이러한 백업은 표준 및 프리미엄 서비스 계층의 데이터베이스에 대해서는 35일 동안, 기본 서비스 계층의 데이터베이스에 대해서는 7일 동안 RA-GRS 저장소에 저장됩니다. 서비스 계층에 대한 보존 기간이 비즈니스 요구 사항에 맞지 않으면 [서비스 계층을 변경](sql-database-service-tiers-dtu.md#choosing-a-service-tier-in-the-dtu-based-purchasing-model)하여 보존 기간을 늘릴 수 있습니다. [vCore 기반 구매 모델(미리 보기)](sql-database-service-tiers-vcore.md)을 사용하는 경우 범용 및 중요 비즈니스용 계층에서 백업 보존은 최대 35일로 구성할 수 있습니다. 데이터 센터 가동 중단으로부터 보호하기 위해 전체 및 차등 데이터베이스 백업도 [쌍을 이루는 데이터 센터](../best-practices-availability-paired-regions.md)로 복제됩니다. 자세한 내용은 [자동 데이터베이스 백업](sql-database-automated-backups.md)을 참조하세요.
 
-기본 보존 기간이 응용 프로그램에 대해 충분하지 않을 경우에 데이터베이스 장기 보존 정책을 구성하여 확장할 수 있습니다. 자세한 내용은 [장기 보존](sql-database-long-term-retention.md)을 참조하세요.
+지원되는 최대 PITR 보존 기간이 응용 프로그램에 대해 충분하지 않을 경우에 데이터베이스에 대한 LTR(장기 보존) 정책을 구성하여 확장할 수 있습니다. 자세한 내용은 [장기 보존](sql-database-long-term-retention.md)을 참조하세요.
 
 이러한 자동 데이터베이스 백업을 사용하여 다양한 중단 이벤트에서 데이터 센터 내로 및 다른 데이터 센터로 데이터베이스를 복구할 수 있습니다. 자동 데이터베이스 백업을 사용할 경우 예상 복구 시간은 동일한 지역에서 동시에 복구되는 총 데이터베이스 수, 데이터베이스 크기, 트랜잭션 로그 크기 및 네트워크 대역폭에 따라 좌우됩니다. 복구 시간은 일반적으로 12시간 미만입니다. 다른 데이터 영역을 복구할 때 잠재적인 데이터 손실은 시간별 차등 데이터베이스 백업의 지역 중복 저장소별로 1시간으로 제한됩니다.
 
 > [!IMPORTANT]
-> 자동화된 백업을 사용하여 복구하려면 SQL Server 참여자 역할의 구성원이거나 구독 소유자여야 합니다. [RBAC: 기본 제공 역할](../active-directory/role-based-access-built-in-roles.md)을 참조하세요. Azure 포털, PowerShell 또는 REST API를 사용하여 복구할 수 있습니다. Transact-SQL은 사용할 수 없습니다.
+> 자동화된 백업을 사용하여 복구하려면 SQL Server 참여자 역할의 구성원이거나 구독 소유자여야 합니다. [RBAC: 기본 제공 역할](../role-based-access-control/built-in-roles.md)을 참조하세요. Azure 포털, PowerShell 또는 REST API를 사용하여 복구할 수 있습니다. Transact-SQL은 사용할 수 없습니다.
 >
 
 다음 조건의 응용 프로그램의 경우, 자동화된 백업을 비즈니스 연속성 및 복구 메커니즘으로 사용합니다.
@@ -60,7 +55,7 @@ SQL Database는 데이터 손실로부터 비즈니스를 보호하기 위해 �
 * 데이터 변경(시간당 낮은 트랜잭션) 속도가 느리고, 최대 1시간의 데이터 변경 내용 손실은 비교적 허용 가능한 데이터 손실에 해당합니다.
 * 비용에 민감합니다.
 
-빠른 복구가 필요한 경우 [활성 지역 복제](sql-database-geo-replication-overview.md)(다음에 설명)를 사용합니다. 35일이 지난 기간에서 데이터를 복구해야 하는 경우 [장기 백업 보존](sql-database-long-term-retention.md)을 사용합니다. 
+빠른 복구가 필요한 경우 [활성 지역 복제](sql-database-geo-replication-overview.md)(다음에 설명)를 사용합니다. 35일이 지난 기간에서 데이터를 복구해야 하는 경우 [장기 보존](sql-database-long-term-retention.md)을 사용합니다. 
 
 ### <a name="use-active-geo-replication-and-auto-failover-groups-in-preview-to-reduce-recovery-time-and-limit-data-loss-associated-with-a-recovery"></a>활성 지역 복제 및 자동 장애 조치 그룹(미리 보기 상태)을 사용하여 복구 시간을 줄이고 복구와 연결된 데이터 손실을 제한합니다.
 
@@ -82,17 +77,17 @@ SQL Database는 데이터 손실로부터 비즈니스를 보호하기 위해 �
 * 데이터 변경 속도가 높고 1시간에 해당하는 데이터 손실은 허용할 수 없는 수준입니다.
 * 활성 지역 복제를 사용할 때 발생하는 추가적인 비용이 잠재적인 재무적 책임과 연계된 비즈니스 손실보다 낮습니다.
 
->
 > [!VIDEO https://channel9.msdn.com/Blogs/Azure/Azure-SQL-Database-protecting-important-DBs-from-regional-disasters-is-easy/player]
 >
 
 ## <a name="recover-a-database-after-a-user-or-application-error"></a>사용자 또는 응용 프로그램 오류 발생 이후 데이터베이스 복구
-*어느 누구도 완벽하지는 않습니다. 사용자가 실수로 데이터를 삭제할 수도 있고, 의도치 않게 중요한 테이블을 삭제할 수도 있고, 전체 데이터베이스를 삭제할 수도 있습니다. 또는 응용 프로그램에서 결함으로 인해 잘못된 데이터를 적절한 데이터에 덮어쓸 수도 있습니다.
+
+어느 누구도 완벽하지는 않습니다. 사용자가 실수로 데이터를 삭제할 수도 있고, 의도치 않게 중요한 테이블을 삭제할 수도 있고, 전체 데이터베이스를 삭제할 수도 있습니다. 또는 응용 프로그램에서 결함으로 인해 잘못된 데이터를 적절한 데이터에 덮어쓸 수도 있습니다.
 
 이러한 시나리오에서 복구 옵션은 다음과 같습니다.
 
 ### <a name="perform-a-point-in-time-restore"></a>지정 시간 복원 수행
-자동화된 백업을 사용하여 데이터베이스 복사본을 알려진 적절한 지정 시간(데이터베이스 보존 기간 내에 포함되는 시간)으로 복구할 수 있습니다. 데이터베이스가 복원된 후에 원본 데이터베이스를 복원된 데이터베이스로 바꾸거나 복원된 데이터에서 필요한 데이터를 원본 데이터베이스로 복사할 수 있습니다. 데이터베이스가 활성 지역 복제를 사용하는 경우 복원된 복사본에서 필수 데이터를 원본 데이터베이스로 복사하는 것이 좋습니다. 원본 데이터베이스를 복원된 데이터베이스로 바꾸는 경우 활성 지역 복제를 다시 구성하고 다시 동기화해야 합니다(데이터베이스 크기가 클 경우 시간이 오래 걸릴 수 있음).
+자동화된 백업을 사용하여 데이터베이스 복사본을 알려진 적절한 지정 시간(데이터베이스 보존 기간 내에 포함되는 시간)으로 복구할 수 있습니다. 데이터베이스가 복원된 후에 원본 데이터베이스를 복원된 데이터베이스로 바꾸거나 복원된 데이터에서 필요한 데이터를 원본 데이터베이스로 복사할 수 있습니다. 데이터베이스가 활성 지역 복제를 사용하는 경우 복원된 복사본에서 필수 데이터를 원본 데이터베이스로 복사하는 것이 좋습니다. 원본 데이터베이스를 복원된 데이터베이스로 바꾸는 경우 활성 지역 복제를 다시 구성하고 다시 동기화해야 합니다(데이터베이스 크기가 클 경우 시간이 오래 걸릴 수 있음). 이 경우 데이터베이스를 사용 가능한 마지막 시점으로 복원하지만 지역 보조 복제본에 대한 지정 시간 복원은 현재 지원되지 않습니다.
 
 Azure 포털 또는 PowerShell을 사용하여 데이터베이스를 지정 시간으로 복원하기 위한 자세한 단계 및 내용은 [지정 시간 복원](sql-database-recovery-using-backups.md#point-in-time-restore)을 참조하세요. Transact-SQL을 사용하여 복구할 수는 없습니다.
 
@@ -103,11 +98,11 @@ Azure 포털 또는 PowerShell을 사용하여 삭제된 데이터베이스를 �
 
 > [!IMPORTANT]
 > 논리 서버가 삭제되면 삭제된 데이터베이스를 복구할 수 없습니다.
->
->
 
-### <a name="restore-from-azure-backup-vault"></a>Azure 백업 자격 증명 모음에서 복원
-자동화된 백업에 대한 현재 보존 기간 외에 데이터 손실이 발생하고 장기 보존을 위해 데이터베이스를 구성하는 경우 Azure Backup Vault의 주간 백업에서 새 데이터베이스로 복원할 수 있습니다. 이 시점에서 원본 데이터베이스를 복원된 데이터베이스로 바꾸거나 복원된 데이터베이스에서 필요한 데이터를 원본 데이터베이스로 복사할 수 있습니다. 이전 버전의 주요 응용 프로그램 업그레이드하기 전에 데이터베이스를 검색해야 할 경우 감사자 또는 법적 순서의 요청을 충족한다면 Azure Backup Vault에 저장된 전체 백업을 사용하여 데이터베이스를 만들 수 있습니다.  자세한 내용은 [장기 보존](sql-database-long-term-retention.md)을 참조하세요.
+
+### <a name="restore-backups-from-long-term-retention"></a>장기 보존에서 백업 복원
+
+자동화된 백업에 대한 현재 보존 기간 외에 데이터 손실이 발생 하고 장기 보존에 대한 데이터베이스를 구성하는 경우 LTR 저장소의 전체 백업에서 새 데이터베이스로 복원할 수 있습니다. 이 시점에서 원본 데이터베이스를 복원된 데이터베이스로 바꾸거나 복원된 데이터베이스에서 필요한 데이터를 원본 데이터베이스로 복사할 수 있습니다. 이전 버전의 주요 응용 프로그램 업그레이드하기 전에 데이터베이스를 검색해야 할 경우 감사자 또는 법적 순서의 요청을 충족한다면 Azure Backup Vault에 저장된 전체 백업을 사용하여 데이터베이스를 만들 수 있습니다.  자세한 내용은 [장기 보존](sql-database-long-term-retention.md)을 참조하세요.
 
 ## <a name="recover-a-database-to-another-region-from-an-azure-regional-data-center-outage"></a>Azure 지역 데이터 센터 가동 중단 상태에서 다른 지역으로 데이터베이스 복구
 <!-- Explain this scenario -->
@@ -131,14 +126,14 @@ Azure 포털 또는 PowerShell을 사용하여 삭제된 데이터베이스를 �
 적절한 준비 없이 장애 조치나 데이터베이스 복구 이후에 응용 프로그램을 온라인 상태로 전환하면 추가 시간이 소요되고, 바쁜 업무 중 문제 해결이 필요할 수도 있어 비효율적입니다.
 
 ### <a name="fail-over-to-a-geo-replicated-secondary-database"></a>지역에서 복제된 보조 데이터베이스로 장애 조치
-활성 지역 복제 및 자동 장애 조치 그룹(미리 보기 상태)을 복구 메커니즘으로 사용할 경우 자동 장애 조치 정책을 구성하거나 [수동 장애 조치](sql-database-disaster-recovery.md#fail-over-to-geo-replicated-secondary-database)를 사용할 수 있습니다. 일단 장애 조치가 시작되면 보조 데이터베이스는 새로운 주 데이터베이스로 승격되며, 새 트랜잭션을 기록하고 쿼리에 응답할 준비를 갖춥니다. 이때 최소한의 데이터 손실이 있을 수 있으나 아직 복제되지 않습니다. 장애 조치(failover) 프로세스 디자인에 대한 자세한 내용은 [클라우드 재해 복구를 위해 응용 프로그램 디자인](sql-database-designing-cloud-solutions-for-disaster-recovery.md)을 참조하세요.
+활성 지역 복제 및 자동 장애 조치 그룹(미리 보기 상태)을 복구 메커니즘으로 사용할 경우 자동 장애 조치 정책을 구성하거나 [수동 장애 조치](sql-database-disaster-recovery.md#fail-over-to-geo-replicated-secondary-server-in-the-failover-group)를 사용할 수 있습니다. 일단 장애 조치가 시작되면 보조 데이터베이스는 새로운 주 데이터베이스로 승격되며, 새 트랜잭션을 기록하고 쿼리에 응답할 준비를 갖춥니다. 이때 최소한의 데이터 손실이 있을 수 있으나 아직 복제되지 않습니다. 장애 조치(failover) 프로세스 디자인에 대한 자세한 내용은 [클라우드 재해 복구를 위해 응용 프로그램 디자인](sql-database-designing-cloud-solutions-for-disaster-recovery.md)을 참조하세요.
 
 > [!NOTE]
 > 데이터 센터가 다시 온라인 상태가 되면 이전 주 데이터베이스는 새 주 데이터베이스에 자동으로 다시 연결되고 보조 데이터베이스가 됩니다. 주 데이터베이스를 다시 원래 지역으로 재배치해야 할 경우 계획된 장애 조치를 수동으로 시작할 수 있습니다(장애 복구). 
 > 
 
 ### <a name="perform-a-geo-restore"></a>지역 복원 수행
-복구 메커니즘으로 지역 중복 저장소 복제와 자동화된 백업을 함께 사용하는 경우 [지역 복원을 사용하여 데이터베이스 복구를 시작](sql-database-disaster-recovery.md#recover-using-geo-restore)합니다. 일반적으로 복구는 12시간 이내에 수행됩니다. 이때 마지막으로 수행된 매시간 차등 백업의 실행 및 복제를 기준으로 최대 1시간의 데이터 손실이 있을 수 있습니다. 복구가 완료될 때까지 데이터베이스는 어떤 트랜잭션도 기록할 수 없으며 쿼리에 응답할 수 없습니다.
+복구 메커니즘으로 지역 중복 저장소 복제와 자동화된 백업을 함께 사용하는 경우 [지역 복원을 사용하여 데이터베이스 복구를 시작](sql-database-disaster-recovery.md#recover-using-geo-restore)합니다. 일반적으로 복구는 12시간 이내에 수행됩니다. 이때 마지막으로 수행된 매시간 차등 백업의 실행 및 복제를 기준으로 최대 1시간의 데이터 손실이 있을 수 있습니다. 복구가 완료될 때까지 데이터베이스는 어떤 트랜잭션도 기록할 수 없으며 쿼리에 응답할 수 없습니다. 이 경우 데이터베이스를 사용 가능한 마지막 시점으로 복원하지만 지역 보조 복제본에 대한 지정 시간 복원은 현재 지원되지 않습니다.
 
 > [!NOTE]
 > 응용 프로그램이 복구된 데이터베이스로 전환하기 전에 데이터 센터가 다시 온라인 상태가 되면 복구를 취소할 수 있습니다.  
@@ -159,4 +154,3 @@ Azure 포털 또는 PowerShell을 사용하여 삭제된 데이터베이스를 �
 
 ## <a name="next-steps"></a>다음 단계
 독립 실행형 데이터베이스 및 탄력적 풀에 대한 응용 프로그램 디자인 고려 사항에 대한 자세한 내용은[ 클라우드 재해 복구를 위해 응용 프로그램 디자인](sql-database-designing-cloud-solutions-for-disaster-recovery.md) 및 [탄력적 풀 재해 복구 전략](sql-database-disaster-recovery-strategies-for-applications-with-elastic-pool.md)을 참조하세요.
-

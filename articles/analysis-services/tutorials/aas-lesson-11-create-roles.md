@@ -1,30 +1,20 @@
 ---
-title: "Azure Analysis Services 자습서 단원 11: 역할 만들기 | Microsoft Docs"
-description: "Azure Analysis Services 자습서 프로젝트에서 역할을 만드는 방법을 설명합니다."
-services: analysis-services
-documentationcenter: 
+title: 'Azure Analysis Services 자습서 단원 11: 역할 만들기 | Microsoft Docs'
+description: Azure Analysis Services 자습서 프로젝트에서 역할을 만드는 방법을 설명합니다.
 author: minewiskan
-manager: erikre
-editor: 
-tags: 
-ms.assetid: 
+manager: kfile
 ms.service: analysis-services
-ms.devlang: NA
-ms.topic: get-started-article
-ms.tgt_pltfrm: NA
-ms.workload: na
-ms.date: 05/26/2017
+ms.topic: conceptual
+ms.date: 04/12/2018
 ms.author: owend
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 43aab8d52e854636f7ea2ff3aae50d7827735cc7
-ms.openlocfilehash: 085a36edd2a0e80123ac8754b438bceadfa6c0e9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/03/2017
-
+ms.reviewer: minewiskan
+ms.openlocfilehash: 7a34884482a53a9b96dac87dc30803be08fdc806
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-# <a name="lesson-11-create-roles"></a>단원 11: 역할 만들기
-
-[!INCLUDE[analysis-services-appliesto-aas-sql2017-later](../../../includes/analysis-services-appliesto-aas-sql2017-later.md)]
+# <a name="create-roles"></a>역할 만들기
 
 이 단원에서는 역할을 만듭니다. 역할은 역할 멤버인 Sa 사용자로만 액세스를 제한하여 모델 데이터베이스 개체 및 데이터 보안을 제공합니다. 각 역할은 단일 사용 권한(없음, 읽기, 읽기 및 프로세스, 프로세스 또는 관리자)으로 정의됩니다. 역할 관리자를 사용하여 모델 작성 중에 역할을 정의할 수 있습니다. 모델을 배포한 후에는 SSMS(SQL Server Management Studio)를 사용하여 역할을 관리할 수 있습니다. 자세한 내용은 [역할](https://docs.microsoft.com/sql/analysis-services/tabular-models/roles-ssas-tabular)을 참조하세요.
   
@@ -97,4 +87,3 @@ ms.lasthandoff: 06/03/2017
 
   
   
-

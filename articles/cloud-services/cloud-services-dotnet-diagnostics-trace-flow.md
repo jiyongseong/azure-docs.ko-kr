@@ -1,10 +1,10 @@
 ---
-title: "Azure 진단으로 클라우드 서비스 응용 프로그램의 흐름 추적 | Microsoft Docs"
+title: "Azure 진단으로 Cloud Services 응용 프로그램의 흐름 추적 | Microsoft Docs"
 description: "Azure 응용 프로그램에 추적 메시지를 추가하여 디버깅, 성능 측정, 모니터링, 트래픽 분석 등을 할 수 있습니다."
 services: cloud-services
 documentationcenter: .net
-author: rboucher
-manager: jwhit
+author: thraka
+manager: timlt
 editor: 
 ms.assetid: 09934772-cc07-4fd2-ba88-b224ca192f8e
 ms.service: cloud-services
@@ -13,18 +13,18 @@ ms.tgt_pltfrm: na
 ms.devlang: dotnet
 ms.topic: article
 ms.date: 02/20/2016
-ms.author: robb
-translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: 35b4a4270846c54a1ca760e803ef7adba60cf03b
-
-
+ms.author: adegeo
+ms.openlocfilehash: 7551ae2e3a7c5f3ff6010bf34e7600da1028d67f
+ms.sourcegitcommit: d1f35f71e6b1cbeee79b06bfc3a7d0914ac57275
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/22/2018
 ---
-# <a name="trace-the-flow-of-a-cloud-services-application-with-azure-diagnostics"></a>Azure 진단으로 클라우드 서비스 응용 프로그램의 흐름 추적
+# <a name="trace-the-flow-of-a-cloud-services-application-with-azure-diagnostics"></a>Azure 진단으로 Cloud Services 응용 프로그램의 흐름 추적
 추적은 실행되는 동안 응용 프로그램의 실행을 모니터링하는 방법입니다. [System.Diagnostics.Trace](https://msdn.microsoft.com/library/system.diagnostics.trace.aspx), [System.Diagnostics.Debug](https://msdn.microsoft.com/library/system.diagnostics.debug.aspx) 및 [System.Diagnostics.TraceSource](https://msdn.microsoft.com/library/system.diagnostics.tracesource.aspx) 클래스를 사용하여 로그의 오류 및 응용 프로그램 실행, 텍스트 파일 또는 차후 분석을 위한 다른 장치에 대한 정보를 기록할 수 있습니다. 추적에 대한 자세한 내용은 [응용 프로그램을 추적 및 계측](https://msdn.microsoft.com/library/zs6s4h68.aspx)을 참조하세요.
 
 ## <a name="use-trace-statements-and-trace-switches"></a>추적 문 및 추적 스위치 사용
-[DiagnosticMonitorTraceListener](https://msdn.microsoft.com/library/azure/microsoft.windowsazure.diagnostics.diagnosticmonitortracelistener.aspx) 를 응용 프로그램 구성에 추가하고 응용 프로그램 코드에 System.Diagnostics.Trace 또는 System.Diagnostics.Debug에 대해 호출하여 클라우드 서비스 응용 프로그램에서 추적을 구현합니다. 작업자 역할에 대해 구성 파일 *app.config* 및 웹 역할에 대해 *web.config*를 사용합니다. Visual Studio 템플릿을 사용하여 새 호스티드 서비스를 만드는 경우 Azure 진단이 프로젝트에 자동으로 추가되고 DiagnosticMonitorTraceListener가 추가하는 역할에 대한 적절한 구성 파일에 추가됩니다.
+[DiagnosticMonitorTraceListener](https://msdn.microsoft.com/library/azure/microsoft.windowsazure.diagnostics.diagnosticmonitortracelistener.aspx) 를 응용 프로그램 구성에 추가하고 응용 프로그램 코드에 System.Diagnostics.Trace 또는 System.Diagnostics.Debug에 대해 호출하여 Cloud Services 응용 프로그램에서 추적을 구현합니다. 작업자 역할에 대해 구성 파일 *app.config* 및 웹 역할에 대해 *web.config*를 사용합니다. Visual Studio 템플릿을 사용하여 새 호스티드 서비스를 만드는 경우 Azure 진단이 프로젝트에 자동으로 추가되고 DiagnosticMonitorTraceListener가 추가하는 역할에 대한 적절한 구성 파일에 추가됩니다.
 
 추적 문 배치에 대한 정보는 [방법: 응용 프로그램 코드에 추적 문 추가](https://msdn.microsoft.com/library/zd83saa2.aspx)를 참조하세요.
 
@@ -75,10 +75,4 @@ Visual Studio에서 제공되는 서식 파일을 사용하는 경우 수신기�
     ```
 3. 응용 프로그램의 상태에 대한 정보를 캡처하려는 추적 문을 추가합니다. 다양한 메서드를 사용하여 추적 문의 출력을 포맷할 수 있습니다. 자세한 내용은 [방법: 응용 프로그램 코드에 추적 문 추가](https://msdn.microsoft.com/library/zd83saa2.aspx)를 참조하세요.
 4. 소스 파일을 저장합니다.
-
-
-
-
-<!--HONumber=Nov16_HO3-->
-
 

@@ -4,7 +4,7 @@ description: "이 문서에서는 Azure Active Directory에서 Single Sign-on �
 services: active-directory
 documentationcenter: .net
 author: priyamohanram
-manager: mbaldwin
+manager: mtillman
 editor: 
 ms.assetid: 88125cfc-45c1-448b-9903-a629d8f31b01
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/19/2017
 ms.author: priyamo
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f48df694e6ac20a11f92faebeeec273745fbfaed
-ms.openlocfilehash: 53e9fd58e72d83db32fa1fab937b4618cd4cd159
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/22/2017
-
+ms.openlocfilehash: 1fcc854362428d4ae32e815ccbf611f4562399ad
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="how-azure-active-directory-uses-the-saml-protocol"></a>Azure Active Directory에서 SAML 프로토콜을 사용하는 방법
 Azure AD(Azure Active Directory)는 SAML 2.0 프로토콜을 사용하여 응용 프로그램에서 사용자에게 Single Sign-On 환경을 제공할 수 있도록 합니다. Azure AD의 [Single Sign-On](active-directory-single-sign-on-protocol-reference.md) 및 [Single Sign-Out](active-directory-single-sign-out-protocol-reference.md) SAML 프로필은 ID 공급자 서비스에서 SAML 어설션, 프로토콜 및 바인딩이 어떻게 사용되는지를 설명합니다.
@@ -35,4 +34,3 @@ Azure Active Directory는 테넌트별 및 공통(테넌트 독립적) single si
 * 테넌트 독립적 끝점은 `https://login.microsoftonline.com/common/FederationMetadata/2007-06/FederationMetadata.xml`에 있습니다. 이 끝점 주소에는 테넌트 도메인 이름 또는 ID 대신 **common**이 나타납니다.
 
 Azure AD에서 게시하는 페더레이션 메타데이터 문서에 대한 자세한 정보는 [페더레이션 메타데이터](active-directory-federation-metadata.md)를 참조하세요.
-

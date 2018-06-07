@@ -1,22 +1,23 @@
 ---
-title: "Azure Analysis Services 설명서 - 자습서, API 참조 | Microsoft Docs"
-description: "클라우드에서 Analysis Services를 사용하여 데이터 모델링을 설정하는 방법에 대해 알아봅니다. 설명서에서는 표 형식 데이터를 사용하여 엔터프라이즈 BI 솔루션을 만드는 방법을 보여 줍니다."
+title: Azure Analysis Services 설명서 - 자습서, API 참조 | Microsoft Docs
+description: 클라우드에서 Analysis Services를 사용하여 데이터 모델링을 설정하는 방법에 대해 알아봅니다. 설명서에서는 표 형식 데이터를 사용하여 엔터프라이즈 BI 솔루션을 만드는 방법을 보여 줍니다.
 services: analysis-services
-author: carolz
+author: czeumault
 manager: carolz
 layout: LandingPage
-ms.assetid: 
-ms.service: analysis-services
+ms.assetid: ''
+ms.service: azure-analysis-services
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: landing-page
-ms.date: 01/23/2017
+ms.date: 02/14/2018
 ms.author: carolz
-translationtype: Human Translation
-ms.sourcegitcommit: b0c27ca561567ff002bbb864846b7a3ea95d7fa3
-ms.openlocfilehash: f5358e2395d5380841894e62a694a6d1253c9126
-ms.lasthandoff: 04/25/2017
-
+ms.openlocfilehash: 39b1870eebbaa1322e956576947bddb6b848c994
+ms.sourcegitcommit: 266fe4c2216c0420e415d733cd3abbf94994533d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/01/2018
+ms.locfileid: "34595695"
 ---
 # <a name="analysis-services-documentation"></a>Analysis Services 설명서
 
@@ -81,7 +82,7 @@ Analysis Services를 사용하여 데이터 모델링을 설정하고 관리하�
 
 ---
 
-<h2>참조</h2>
+<h2>참고 자료</h2>
 <ul class="panelContent cardsW">
     <li>
         <div class="cardSize">
@@ -121,6 +122,5 @@ Analysis Services를 사용하여 데이터 모델링을 설정하고 관리하�
         </div>
     </li>
 </ul>
-
 
 

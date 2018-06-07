@@ -1,10 +1,10 @@
 ---
-title: "Red Hat Enterprise Linux VHD 만들기 및 Azure에서 사용하도록 업로드 | Microsoft Docs"
-description: "RedHat Linux 운영 체제가 포함된 Azure VHD(가상 하드 디스크)를 만들고 업로드하는 방법에 대해 알아봅니다."
+title: Red Hat Enterprise Linux VHD 만들기 및 Azure에서 사용하도록 업로드 | Microsoft Docs
+description: RedHat Linux 운영 체제가 포함된 Azure VHD(가상 하드 디스크)를 만들고 업로드하는 방법에 대해 알아봅니다.
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: szarkos
-manager: timlt
+manager: jeconnoc
 editor: tysonn
 tags: azure-resource-manager,azure-service-management
 ms.assetid: 6c6b8f72-32d3-47fa-be94-6cb54537c69f
@@ -13,39 +13,38 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: na
 ms.topic: article
-ms.date: 04/28/2017
+ms.date: 05/04/2018
 ms.author: szark
+ms.openlocfilehash: 9893ab83584e2fc93ea9cf29c0b74b957080d5ad
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
 ms.translationtype: HT
-ms.sourcegitcommit: f9003c65d1818952c6a019f81080d595791f63bf
-ms.openlocfilehash: b753c76b8c3d789c681d7fbff6aa07590b860be5
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/09/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
-# <a name="prepare-a-red-hat-based-virtual-machine-for-azure"></a>Azure용 RedHat 기반 가상 컴퓨터 준비
-이 문서에서는 Azure용 RHEL(Red Hat Enterprise Linux) 가상 컴퓨터를 준비하는 방법을 알아봅니다. 이 문서에 설명되어 있는 RHEL의 버전은 6.7+ 및 7.1+입니다. 이 문서에서 다룰 준비에 대한 하이퍼바이저는 Hyper-V, KVM(커널 기반 가상 컴퓨터) 및 VMware입니다. Red Hat 클라우드 액세스 프로그램에 참여하기 위한 자격 요구 사항에 대한 자세한 내용은 [Red Hat 클라우드 액세스 웹 사이트](http://www.redhat.com/en/technologies/cloud-computing/cloud-access) 및 [Azure에서 실행 중인 RHEL](https://access.redhat.com/ecosystem/ccsp/microsoft-azure)을 참조하세요.
+# <a name="prepare-a-red-hat-based-virtual-machine-for-azure"></a>Azure용 RedHat 기반 가상 머신 준비
+이 문서에서는 Azure용 RHEL(Red Hat Enterprise Linux) 가상 머신을 준비하는 방법을 알아봅니다. 이 문서에 설명되어 있는 RHEL의 버전은 6.7+ 및 7.1+입니다. 이 문서에서 다룰 준비에 대한 하이퍼바이저는 Hyper-V, KVM(커널 기반 가상 머신) 및 VMware입니다. Red Hat 클라우드 액세스 프로그램에 참여하기 위한 자격 요구 사항에 대한 자세한 내용은 [Red Hat 클라우드 액세스 웹 사이트](http://www.redhat.com/en/technologies/cloud-computing/cloud-access) 및 [Azure에서 실행 중인 RHEL](https://access.redhat.com/ecosystem/ccsp/microsoft-azure)을 참조하세요.
 
-## <a name="prepare-a-red-hat-based-virtual-machine-from-hyper-v-manager"></a>Hyper-V 관리자에서 Red Hat 기반 가상 컴퓨터 준비
+## <a name="prepare-a-red-hat-based-virtual-machine-from-hyper-v-manager"></a>Hyper-V 관리자에서 Red Hat 기반 가상 머신 준비
 
 ### <a name="prerequisites"></a>필수 조건
-이 섹션은 RedHat 웹 사이트에서 ISO 파일을 확보했으며 VHD(가상 하드 디스크)에 RHEL 이미지를 이미 설치한 것으로 가정합니다. Hyper-V 관리자를 사용하여 운영 체제 이미지를 설치하는 방법에 대한 자세한 내용은 [Hyper-V 역할 설치 및 가상 컴퓨터 구성](http://technet.microsoft.com/library/hh846766.aspx)을 참조하세요.
+이 섹션은 RedHat 웹 사이트에서 ISO 파일을 확보했으며 VHD(가상 하드 디스크)에 RHEL 이미지를 이미 설치한 것으로 가정합니다. Hyper-V 관리자를 사용하여 운영 체제 이미지를 설치하는 방법에 대한 자세한 내용은 [Hyper-V 역할 설치 및 Virtual Machine 구성](http://technet.microsoft.com/library/hh846766.aspx)을 참조하세요.
 
 **RHEL 설치 참고 사항**
 
 * Azure는 VHDX 형식을 지원하지 않습니다. Azure는 고정 VHD만 지원합니다. Hyper-V 관리자를 사용하여 디스크를 VHD 형식으로 변환하거나, convert-vhd cmdlet을 사용할 수 있습니다. VirtualBox를 사용하는 경우 디스크를 만들 때 기본 동적 할다 옵션과 달리 **고정 크기**를 선택합니다.
-* Azure에서는 1세대 가상 컴퓨터만 지원합니다. VHDX에서 VHD 파일 형식으로, 동적 확장에서 고정된 크기의 디스크로 1세대 가상 컴퓨터를 변환할 수 있습니다. 가상 컴퓨터의 세대는 변경할 수 없습니다. 자세한 내용은 [Hyper-V에 1 또는 2세대 가상 컴퓨터를 만들어야 하나요?](https://technet.microsoft.com/windows-server-docs/compute/hyper-v/plan/should-i-create-a-generation-1-or-2-virtual-machine-in-hyper-v)를 참조하세요.
+* Azure에서는 1세대 가상 머신만 지원합니다. VHDX에서 VHD 파일 형식으로, 동적 확장에서 고정된 크기의 디스크로 1세대 가상 컴퓨터를 변환할 수 있습니다. 가상 머신의 세대는 변경할 수 없습니다. 자세한 내용은 [Hyper-V에 1 또는 2세대 가상 머신을 만들어야 하나요?](https://technet.microsoft.com/windows-server-docs/compute/hyper-v/plan/should-i-create-a-generation-1-or-2-virtual-machine-in-hyper-v)를 참조하세요.
 * VHD에 허용되는 최대 크기는 1,023GB입니다.
-* Linux 운영 체제를 설치하는 경우 설치 기본값인 경우가 많은 LVM(논리 볼륨 관리자)이 아닌 표준 파티션을 사용하는 것이 좋습니다. 이 방법은 특히 문제 해결을 위해 운영 체제 디스크를 다른 동일한 가상 컴퓨터에 연결해야 하는 경우, 복제된 가상 컴퓨터와 LVM 이름이 충돌하는 것을 방지합니다. 데이터 디스크에서 [LVM](configure-lvm.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) 또는 [RAID](configure-raid.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)를 사용할 수 있습니다.
-* UDF(범용 디스크 형식) 파일 시스템을 탑재하기 위한 커널 지원이 필요합니다. Azure에서 처음 부팅 시 게스트에 연결된 UDF 형식 미디어는 프로비저닝 구성을 Linux 가상 컴퓨터에 전달합니다. Azure Linux 에이전트는 해당 구성을 읽고 가상 컴퓨터를 프로비전하기 위해 UDF 파일 시스템을 탑재할 수 있어야 합니다.
-* 2.6.37 이전의 Linux 커널 버전은 가상 컴퓨터 크기가 더 큰 Hyper-V에서 NUMA(비균일 메모리 액세스)를 지원하지 않습니다. 이 문제는 주로 업스트림 Red Hat 2.6.32 커널을 사용하는 이전 배포에 영향을 주며 RHEL 6.6(kernel-2.6.32-504)에서는 해결되었습니다. 2.6.37보다 오래된 사용자 지정 커널 또는 2.6.32-504보다 오래된 RHEL 기반 커널을 실행하는 시스템의 경우 grub.conf의 커널 명령줄에 부트 매개 변수 `numa=off`를 설정해야 합니다. 자세한 내용은 Red Hat [KB 436883](https://access.redhat.com/solutions/436883)을 참조하세요.
+* Linux 운영 체제를 설치하는 경우 설치 기본값인 경우가 많은 LVM(논리 볼륨 관리자)이 아닌 표준 파티션을 사용하는 것이 좋습니다. 이 방법은 특히 문제 해결을 위해 운영 체제 디스크를 다른 동일한 가상 머신에 연결해야 하는 경우, 복제된 가상 머신과 LVM 이름이 충돌하는 것을 방지합니다. 데이터 디스크에서 [LVM](configure-lvm.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) 또는 [RAID](configure-raid.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)를 사용할 수 있습니다.
+* UDF(범용 디스크 형식) 파일 시스템을 탑재하기 위한 커널 지원이 필요합니다. Azure에서 처음 부팅 시 게스트에 연결된 UDF 형식 미디어는 프로비저닝 구성을 Linux 가상 머신에 전달합니다. Azure Linux 에이전트는 해당 구성을 읽고 가상 머신을 프로비전하기 위해 UDF 파일 시스템을 탑재할 수 있어야 합니다.
+* 2.6.37 이전의 Linux 커널 버전은 가상 머신 크기가 더 큰 Hyper-V에서 NUMA(비균일 메모리 액세스)를 지원하지 않습니다. 이 문제는 주로 업스트림 Red Hat 2.6.32 커널을 사용하는 이전 배포에 영향을 주며 RHEL 6.6(kernel-2.6.32-504)에서는 해결되었습니다. 2.6.37보다 오래된 사용자 지정 커널 또는 2.6.32-504보다 오래된 RHEL 기반 커널을 실행하는 시스템의 경우 grub.conf의 커널 명령줄에 부트 매개 변수 `numa=off`를 설정해야 합니다. 자세한 내용은 Red Hat [KB 436883](https://access.redhat.com/solutions/436883)을 참조하세요.
 * 운영 체제 디스크에서는 스왑 파티션을 구성하지 마세요. 임시 리소스 디스크에서 스왑 파일을 만들도록 Linux 에이전트를 구성할 수 있습니다.  여기에 대한 자세한 내용은 다음 단계에서 확인할 수 있습니다.
-* 모든 VHD 크기는 1MB의 배수여야 합니다.
+* Azure의 모든 VHD는 가상 크기가 1MB 단위로 조정되어야 합니다. 원시 디스크에서 VHD로 변환할 때 변환하기 전에 원시 디스크 크기가 1MB의 배수인지 확인해야 합니다. 자세한 내용은 아래 단계에서 찾을 수 있습니다. 자세한 내용은 [Linux 설치 참고 사항](create-upload-generic.md#general-linux-installation-notes)을 참조하세요.
 
-### <a name="prepare-a-rhel-6-virtual-machine-from-hyper-v-manager"></a>Hyper-V 관리자에서 RHEL 6 가상 컴퓨터 준비
+### <a name="prepare-a-rhel-6-virtual-machine-from-hyper-v-manager"></a>Hyper-V 관리자에서 RHEL 6 가상 머신 준비
 
-1. Hyper-V 관리자에서 가상 컴퓨터를 선택합니다.
+1. Hyper-V 관리자에서 가상 머신을 선택합니다.
 
-2. **연결** 을 클릭하여 가상 컴퓨터의 콘솔 창을 엽니다.
+2. **연결** 을 클릭하여 가상 머신의 콘솔 창을 엽니다.
 
 3. RHEL 6에서 NetworkManager는 Azure Linux 에이전트 작동을 방해할 수 있습니다. 다음 명령을 실행하여 이 패키지를 제거합니다.
    
@@ -66,7 +65,7 @@ ms.lasthandoff: 08/09/2017
         PEERDNS=yes
         IPV6INIT=no
 
-6. 이더넷 인터페이스에 대한 정적 규칙을 생성하지 않도록 방지하는 udev 규칙을 이동(또는 제거)합니다. 이러한 규칙은 Microsoft Azure 또는 Hyper-V에서 가상 컴퓨터를 복제하는 경우 문제를 발생시킵니다.
+6. 이더넷 인터페이스에 대한 정적 규칙을 생성하지 않도록 방지하는 udev 규칙을 이동(또는 제거)합니다. 이러한 규칙은 Microsoft Azure 또는 Hyper-V에서 가상 머신을 복제하는 경우 문제를 발생시킵니다.
 
         # sudo ln -s /dev/null /etc/udev/rules.d/75-persistent-net-generator.rules
         
@@ -113,7 +112,7 @@ ms.lasthandoff: 08/09/2017
 
 13. 운영 체제 디스크에 스왑 공간을 만들지 마세요.
 
-    Azure Linux 에이전트는 Azure에서 가상 컴퓨터를 프로비전한 후에 가상 컴퓨터에 연결된 로컬 리소스 디스크를 사용하여 자동으로 스왑 공간을 구성할 수 있습니다. 로컬 리소스 디스크는 임시 디스크이며 가상 컴퓨터의 프로비전을 해제할 때 비워질 수 있습니다. Azure Linux 에이전트를 설치한 후에(이전 단계 참조) /etc/waagent.conf에서 다음 매개 변수를 적절하게 수정합니다.
+    Azure Linux 에이전트는 Azure에서 가상 머신을 프로비전한 후에 가상 머신에 연결된 로컬 리소스 디스크를 사용하여 자동으로 스왑 공간을 구성할 수 있습니다. 로컬 리소스 디스크는 임시 디스크이며 가상 머신의 프로비전을 해제할 때 비워질 수 있습니다. Azure Linux 에이전트를 설치한 후에(이전 단계 참조) /etc/waagent.conf에서 다음 매개 변수를 적절하게 수정합니다.
 
         ResourceDisk.Format=y
         ResourceDisk.Filesystem=ext4
@@ -125,7 +124,7 @@ ms.lasthandoff: 08/09/2017
 
         # sudo subscription-manager unregister
 
-15. 다음 명령을 실행하여 가상 컴퓨터의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
+15. 다음 명령을 실행하여 가상 머신의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
 
         # sudo waagent -force -deprovision
 
@@ -136,11 +135,11 @@ ms.lasthandoff: 08/09/2017
 16. Hyper-V 관리자에서 **작업** > **종료**를 클릭합니다. 이제 Linux VHD를 Azure에 업로드할 수 있습니다.
 
 
-### <a name="prepare-a-rhel-7-virtual-machine-from-hyper-v-manager"></a>Hyper-V 관리자에서 RHEL 7 가상 컴퓨터 준비
+### <a name="prepare-a-rhel-7-virtual-machine-from-hyper-v-manager"></a>Hyper-V 관리자에서 RHEL 7 가상 머신 준비
 
-1. Hyper-V 관리자에서 가상 컴퓨터를 선택합니다.
+1. Hyper-V 관리자에서 가상 머신을 선택합니다.
 
-2. **연결** 을 클릭하여 가상 컴퓨터의 콘솔 창을 엽니다.
+2. **연결** 을 클릭하여 가상 머신의 콘솔 창을 엽니다.
 
 3. 파일 `/etc/sysconfig/network`를 만들거나 편집하고 다음 텍스트를 추가합니다.
    
@@ -160,13 +159,13 @@ ms.lasthandoff: 08/09/2017
 
 5. 다음 명령을 실행하여 부팅 시 네트워크 서비스가 시작되도록 합니다.
 
-        # sudo chkconfig network on
+        # sudo systemctl enable network
 
 6. RHEL 리포지토리에서 패키지 설치를 사용하도록 다음 명령을 실행하여 Red Hat 구독을 등록합니다.
 
         # sudo subscription-manager register --auto-attach --username=XXX --password=XXX
 
-7. Azure용 커널 매개 변수를 추가로 포함하려면 grub 구성에서 커널 부팅 줄을 수정합니다. 이렇게 수정하려면 텍스트 편집기에서 `/etc/default/grub`를 열고 `GRUB_CMDLINE_LINUX` 매개 변수를 편집합니다. 예:
+7. Azure용 커널 매개 변수를 추가로 포함하려면 grub 구성에서 커널 부팅 줄을 수정합니다. 이렇게 수정하려면 텍스트 편집기에서 `/etc/default/grub`를 열고 `GRUB_CMDLINE_LINUX` 매개 변수를 편집합니다. 예: 
    
         GRUB_CMDLINE_LINUX="rootdelay=300 console=ttyS0 earlyprintk=ttyS0 net.ifnames=0"
    
@@ -196,7 +195,7 @@ ms.lasthandoff: 08/09/2017
 
 12. 운영 체제 디스크에 스왑 공간을 만들지 마세요.
 
-    Azure Linux 에이전트는 Azure에서 가상 컴퓨터를 프로비전한 후에 가상 컴퓨터에 연결된 로컬 리소스 디스크를 사용하여 자동으로 스왑 공간을 구성할 수 있습니다. 로컬 리소스 디스크는 임시 디스크이며 가상 컴퓨터의 프로비전을 해제할 때 비워질 수 있습니다. Azure Linux 에이전트를 설치한 후에(이전 단계 참조) `/etc/waagent.conf`에서 다음 매개 변수를 적절하게 수정합니다.
+    Azure Linux 에이전트는 Azure에서 가상 컴퓨터를 프로비전한 후에 가상 컴퓨터에 연결된 로컬 리소스 디스크를 사용하여 자동으로 스왑 공간을 구성할 수 있습니다. 로컬 리소스 디스크는 임시 디스크이며 가상 머신의 프로비전을 해제할 때 비워질 수 있습니다. Azure Linux 에이전트를 설치한 후에(이전 단계 참조) `/etc/waagent.conf`에서 다음 매개 변수를 적절하게 수정합니다.
 
         ResourceDisk.Format=y
         ResourceDisk.Filesystem=ext4
@@ -208,7 +207,7 @@ ms.lasthandoff: 08/09/2017
 
         # sudo subscription-manager unregister
 
-14. 다음 명령을 실행하여 가상 컴퓨터의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
+14. 다음 명령을 실행하여 가상 머신의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
 
         # sudo waagent -force -deprovision
 
@@ -220,7 +219,7 @@ ms.lasthandoff: 08/09/2017
 
 
 ## <a name="prepare-a-red-hat-based-virtual-machine-from-kvm"></a>KVM에서 RedHat 기반 가상 컴퓨터 준비
-### <a name="prepare-a-rhel-6-virtual-machine-from-kvm"></a>KVM에서 RHEL 6 가상 컴퓨터 준비
+### <a name="prepare-a-rhel-6-virtual-machine-from-kvm"></a>KVM에서 RHEL 6 가상 머신 준비
 
 1. Red Hat 웹 사이트에서 RHEL 6의 KVM 이미지를 다운로드합니다.
 
@@ -241,7 +240,7 @@ ms.lasthandoff: 08/09/2017
 
    루트 사용자의 두 번째 필드를 “!!”에서 암호화된 암호로 변경합니다.
 
-3. qcow2 이미지에서 KVM에 가상 컴퓨터를 만듭니다. 디스크 형식을 **qcow2**로 설정하고 가상 네트워크 인터페이스 장치 모델을 **virtio**로 설정합니다. 그 후 가상 컴퓨터를 시작하고 루트로 로그인합니다.
+3. qcow2 이미지에서 KVM에 가상 머신을 만듭니다. 디스크 형식을 **qcow2**로 설정하고 가상 네트워크 인터페이스 장치 모델을 **virtio**로 설정합니다. 그 후 가상 머신을 시작하고 루트로 로그인합니다.
 
 4. 파일 `/etc/sysconfig/network`를 만들거나 편집하고 다음 텍스트를 추가합니다.
    
@@ -258,7 +257,7 @@ ms.lasthandoff: 08/09/2017
         PEERDNS=yes
         IPV6INIT=no
 
-6. 이더넷 인터페이스에 대한 정적 규칙을 생성하지 않도록 방지하는 udev 규칙을 이동(또는 제거)합니다. 이러한 규칙은 Azure 또는 Hyper-V에서 가상 컴퓨터를 복제하는 경우 문제를 발생시킵니다.
+6. 이더넷 인터페이스에 대한 정적 규칙을 생성하지 않도록 방지하는 udev 규칙을 이동(또는 제거)합니다. 이러한 규칙은 Azure 또는 Hyper-V에서 가상 머신을 복제하는 경우 문제를 발생시킵니다.
 
         # sudo ln -s /dev/null /etc/udev/rules.d/75-persistent-net-generator.rules
 
@@ -282,7 +281,7 @@ ms.lasthandoff: 08/09/2017
     
         rhgb quiet crashkernel=auto
     
-    모든 로그를 직렬 포트로 보내려는 클라우드 환경에서는 그래픽 및 자동 부팅 기능이 효율적이지 않습니다. 원할 경우 `crashkernel` 옵션은 구성된 상태로 둘 수 있습니다. 이 매개 변수는 가상 컴퓨터의 사용 가능한 메모리 양을 128MB 이상 줄입니다. 이 방식은 좀 더 작은 가상 컴퓨터 크기에서는 문제가 될 수도 있습니다.
+    모든 로그를 직렬 포트로 보내려는 클라우드 환경에서는 그래픽 및 자동 부팅 기능이 효율적이지 않습니다. 원할 경우 `crashkernel` 옵션은 구성된 상태로 둘 수 있습니다. 이 매개 변수는 가상 머신의 사용 가능한 메모리 양을 128MB 이상 줄입니다. 이 방식은 좀 더 작은 가상 머신 크기에서는 문제가 될 수도 있습니다.
 
     >[!Important]
     또한 RHEL 6.5 및 이전 버전에서는 커널 매개 변수 `numa=off`를 설정해야 합니다. Red Hat [KB 436883](https://access.redhat.com/solutions/436883)을 참조하세요.
@@ -320,7 +319,7 @@ ms.lasthandoff: 08/09/2017
 
         # chkconfig waagent on
 
-15. Azure Linux 에이전트는 Azure에서 가상 컴퓨터를 프로비전한 후에 가상 컴퓨터에 연결된 로컬 리소스 디스크를 사용하여 자동으로 스왑 공간을 구성할 수 있습니다. 로컬 리소스 디스크는 임시 디스크이며 가상 컴퓨터의 프로비전을 해제할 때 비워질 수 있습니다. Azure Linux 에이전트를 설치한 후에(이전 단계 참조) **/etc/waagent.conf**에서 다음 매개 변수를 적절하게 수정합니다.
+15. Azure Linux 에이전트는 Azure에서 가상 머신을 프로비전한 후에 가상 머신에 연결된 로컬 리소스 디스크를 사용하여 자동으로 스왑 공간을 구성할 수 있습니다. 로컬 리소스 디스크는 임시 디스크이며 가상 컴퓨터의 프로비전을 해제할 때 비워질 수 있습니다. Azure Linux 에이전트를 설치한 후에(이전 단계 참조) **/etc/waagent.conf**에서 다음 매개 변수를 적절하게 수정합니다.
 
         ResourceDisk.Format=y
         ResourceDisk.Filesystem=ext4
@@ -332,7 +331,7 @@ ms.lasthandoff: 08/09/2017
 
         # subscription-manager unregister
 
-17. 다음 명령을 실행하여 가상 컴퓨터의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
+17. 다음 명령을 실행하여 가상 머신의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
 
         # waagent -force -deprovision
 
@@ -340,29 +339,38 @@ ms.lasthandoff: 08/09/2017
 
         # logout
 
-18. KVM의 가상 컴퓨터를 종료합니다.
+18. KVM의 가상 머신을 종료합니다.
 
 19. qcow2 이미지를 VHD 형식으로 변환합니다.
 
-    우선 이미지를 원시 형식으로 변환합니다.
+> [!NOTE]
+> VHD 형식이 잘못 지정되는 qemu-img 버전 >=2.2.1에 알려진 버그가 있습니다. 이 문제는 QEMU 2.6에서 해결되었습니다. qemu-img 2.2.0 이하 버전을 사용하거나 2.6 이상으로 업데이트하는 것이 좋습니다. 참조: https://bugs.launchpad.net/qemu/+bug/1490611
+>
 
-        # qemu-img convert -f qcow2 -O raw rhel-6.8.qcow2 rhel-6.8.raw
 
-    원시 이미지의 크기가 1MB로 정렬되는지 확인합니다. 그렇지 않은 경우 1MB에 맞게 크기를 반올림합니다.
+    First convert the image to raw format:
+
+        # qemu-img convert -f qcow2 -O raw rhel-6.9.qcow2 rhel-6.9.raw
+
+    Make sure that the size of the raw image is aligned with 1 MB. Otherwise, round up the size to align with 1 MB:
 
         # MB=$((1024*1024))
-        # size=$(qemu-img info -f raw --output json "rhel-6.8.raw" | \
+        # size=$(qemu-img info -f raw --output json "rhel-6.9.raw" | \
           gawk 'match($0, /"virtual-size": ([0-9]+),/, val) {print val[1]}')
 
         # rounded_size=$((($size/$MB + 1)*$MB))
-        # qemu-img resize rhel-6.8.raw $rounded_size
+        # qemu-img resize rhel-6.9.raw $rounded_size
 
-    원시 디스크를 고정 크기 VHD로 변환합니다.
+    Convert the raw disk to a fixed-sized VHD:
 
-        # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-6.8.raw rhel-6.8.vhd
+        # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-6.9.raw rhel-6.9.vhd
 
+    Or, with qemu version **2.6+** include the `force_size` option:
 
-### <a name="prepare-a-rhel-7-virtual-machine-from-kvm"></a>KVM에서 RHEL 7 가상 컴퓨터 준비
+        # qemu-img convert -f raw -o subformat=fixed,force_size -O vpc rhel-6.9.raw rhel-6.9.vhd
+
+        
+### <a name="prepare-a-rhel-7-virtual-machine-from-kvm"></a>KVM에서 RHEL 7 가상 머신 준비
 
 1. Red Hat 웹 사이트에서 RHEL 7의 KVM 이미지를 다운로드합니다. 이 절차에서는 RHEL 7을 예제로 사용합니다.
 
@@ -383,7 +391,7 @@ ms.lasthandoff: 08/09/2017
 
    루트 사용자의 두 번째 필드를 “!!”에서 암호화된 암호로 변경합니다.
 
-3. qcow2 이미지에서 KVM에 가상 컴퓨터를 만듭니다. 디스크 형식을 **qcow2**로 설정하고 가상 네트워크 인터페이스 장치 모델을 **virtio**로 설정합니다. 그 후 가상 컴퓨터를 시작하고 루트로 로그인합니다.
+3. qcow2 이미지에서 KVM에 가상 머신을 만듭니다. 디스크 형식을 **qcow2**로 설정하고 가상 네트워크 인터페이스 장치 모델을 **virtio**로 설정합니다. 그 후 가상 머신을 시작하고 루트로 로그인합니다.
 
 4. 파일 `/etc/sysconfig/network`를 만들거나 편집하고 다음 텍스트를 추가합니다.
    
@@ -403,13 +411,13 @@ ms.lasthandoff: 08/09/2017
 
 6. 다음 명령을 실행하여 부팅 시 네트워크 서비스가 시작되도록 합니다.
 
-        # chkconfig network on
+        # sudo systemctl enable network
 
 7. RHEL 리포지토리에서 패키지 설치를 사용하도록 다음 명령을 실행하여 Red Hat 구독을 등록합니다.
 
         # subscription-manager register --auto-attach --username=XXX --password=XXX
 
-8. Azure용 커널 매개 변수를 추가로 포함하려면 grub 구성에서 커널 부팅 줄을 수정합니다. 이렇게 구성하려면 텍스트 편집기에서 `/etc/default/grub`를 열고 `GRUB_CMDLINE_LINUX` 매개 변수를 편집합니다. 예:
+8. Azure용 커널 매개 변수를 추가로 포함하려면 grub 구성에서 커널 부팅 줄을 수정합니다. 이렇게 구성하려면 텍스트 편집기에서 `/etc/default/grub`를 열고 `GRUB_CMDLINE_LINUX` 매개 변수를 편집합니다. 예: 
    
         GRUB_CMDLINE_LINUX="rootdelay=300 console=ttyS0 earlyprintk=ttyS0 net.ifnames=0"
    
@@ -460,7 +468,7 @@ ms.lasthandoff: 08/09/2017
 
 15. 운영 체제 디스크에 스왑 공간을 만들지 마세요.
 
-    Azure Linux 에이전트는 Azure에서 가상 컴퓨터를 프로비전한 후에 가상 컴퓨터에 연결된 로컬 리소스 디스크를 사용하여 자동으로 스왑 공간을 구성할 수 있습니다. 로컬 리소스 디스크는 임시 디스크이며 가상 컴퓨터의 프로비전을 해제할 때 비워질 수 있습니다. Azure Linux 에이전트를 설치한 후에(이전 단계 참조) `/etc/waagent.conf`에서 다음 매개 변수를 적절하게 수정합니다.
+    Azure Linux 에이전트는 Azure에서 가상 컴퓨터를 프로비전한 후에 가상 컴퓨터에 연결된 로컬 리소스 디스크를 사용하여 자동으로 스왑 공간을 구성할 수 있습니다. 로컬 리소스 디스크는 임시 디스크이며 가상 머신의 프로비전을 해제할 때 비워질 수 있습니다. Azure Linux 에이전트를 설치한 후에(이전 단계 참조) `/etc/waagent.conf`에서 다음 매개 변수를 적절하게 수정합니다.
 
         ResourceDisk.Format=y
         ResourceDisk.Filesystem=ext4
@@ -472,7 +480,7 @@ ms.lasthandoff: 08/09/2017
 
         # subscription-manager unregister
 
-17. 다음 명령을 실행하여 가상 컴퓨터의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
+17. 다음 명령을 실행하여 가상 머신의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
 
         # sudo waagent -force -deprovision
 
@@ -480,36 +488,46 @@ ms.lasthandoff: 08/09/2017
 
         # logout
 
-18. KVM의 가상 컴퓨터를 종료합니다.
+18. KVM의 가상 머신을 종료합니다.
 
 19. qcow2 이미지를 VHD 형식으로 변환합니다.
 
-    우선 이미지를 원시 형식으로 변환합니다.
+> [!NOTE]
+> VHD 형식이 잘못 지정되는 qemu-img 버전 >=2.2.1에 알려진 버그가 있습니다. 이 문제는 QEMU 2.6에서 해결되었습니다. qemu-img 2.2.0 이하 버전을 사용하거나 2.6 이상으로 업데이트하는 것이 좋습니다. 참조: https://bugs.launchpad.net/qemu/+bug/1490611
+>
 
-        # qemu-img convert -f qcow2 -O raw rhel-7.3.qcow2 rhel-7.3.raw
 
-    원시 이미지의 크기가 1MB로 정렬되는지 확인합니다. 그렇지 않은 경우 1MB에 맞게 크기를 반올림합니다.
+    First convert the image to raw format:
+
+        # qemu-img convert -f qcow2 -O raw rhel-7.4.qcow2 rhel-7.4.raw
+
+    Make sure that the size of the raw image is aligned with 1 MB. Otherwise, round up the size to align with 1 MB:
 
         # MB=$((1024*1024))
-        # size=$(qemu-img info -f raw --output json "rhel-6.8.raw" | \
+        # size=$(qemu-img info -f raw --output json "rhel-7.4.raw" | \
           gawk 'match($0, /"virtual-size": ([0-9]+),/, val) {print val[1]}')
 
         # rounded_size=$((($size/$MB + 1)*$MB))
-        # qemu-img resize rhel-6.8.raw $rounded_size
+        # qemu-img resize rhel-7.4.raw $rounded_size
 
-    원시 디스크를 고정 크기 VHD로 변환합니다.
+    Convert the raw disk to a fixed-sized VHD:
 
-        # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-7.3.raw rhel-7.3.vhd
+        # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-7.4.raw rhel-7.4.vhd
 
-## <a name="prepare-a-red-hat-based-virtual-machine-from-vmware"></a>VMware에서 RedHat 기반 가상 컴퓨터 준비
+    Or, with qemu version **2.6+** include the `force_size` option:
+
+        # qemu-img convert -f raw -o subformat=fixed,force_size -O vpc rhel-7.4.raw rhel-7.4.vhd
+
+
+## <a name="prepare-a-red-hat-based-virtual-machine-from-vmware"></a>VMware에서 RedHat 기반 가상 머신 준비
 ### <a name="prerequisites"></a>필수 조건
-이 섹션은 VMWare에 RHEL 가상 컴퓨터가 이미 설치되어 있다고 가정합니다. VMWare에서 운영 체제를 설치하는 자세한 방법은 [VMWare 게스트 운영 체제 설치 가이드](http://partnerweb.vmware.com/GOSIG/home.html)를 참조하세요.
+이 섹션은 VMWare에 RHEL 가상 머신이 이미 설치되어 있다고 가정합니다. VMWare에서 운영 체제를 설치하는 자세한 방법은 [VMWare 게스트 운영 체제 설치 가이드](http://partnerweb.vmware.com/GOSIG/home.html)를 참조하세요.
 
-* Linux 운영 체제를 설치하는 경우 LVM(설치 기본값인 경우가 많음)이 아닌 표준 파티션을 사용하는 것이 좋습니다. 이 방법은 특히 문제 해결을 위해 운영 체제 디스크를 다른 가상 컴퓨터에 연결해야 하는 경우, 복제된 가상 컴퓨터와 LVM 이름이 충돌하는 것을 방지합니다. 원하는 경우에는 데이터 디스크에서 LVM 또는 RAID를 사용할 수 있습니다.
+* Linux 운영 체제를 설치하는 경우 LVM(설치 기본값인 경우가 많음)이 아닌 표준 파티션을 사용하는 것이 좋습니다. 이 방법은 특히 문제 해결을 위해 운영 체제 디스크를 다른 가상 머신에 연결해야 하는 경우, 복제된 가상 머신과 LVM 이름이 충돌하는 것을 방지합니다. 원하는 경우에는 데이터 디스크에서 LVM 또는 RAID를 사용할 수 있습니다.
 * 운영 체제 디스크에서는 스왑 파티션을 구성하지 마세요. Linux 에이전트를 구성하여 임시 리소스 디스크에서 스왑 파일을 만들 수 있습니다. 여기에 대한 자세한 내용은 아래 단계에서 찾을 수 있습니다.
 * 가상 하드 디스크를 만들 때 **가상 디스크를 단일 파일로 저장**을 선택합니다.
 
-### <a name="prepare-a-rhel-6-virtual-machine-from-vmware"></a>VMWare에서 RHEL 6 가상 컴퓨터 준비
+### <a name="prepare-a-rhel-6-virtual-machine-from-vmware"></a>VMWare에서 RHEL 6 가상 머신 준비
 1. RHEL 6에서 NetworkManager는 Azure Linux 에이전트 작동을 방해할 수 있습니다. 다음 명령을 실행하여 이 패키지를 제거합니다.
    
         # sudo rpm -e --nodeps NetworkManager
@@ -529,7 +547,7 @@ ms.lasthandoff: 08/09/2017
         PEERDNS=yes
         IPV6INIT=no
 
-4. 이더넷 인터페이스에 대한 정적 규칙을 생성하지 않도록 방지하는 udev 규칙을 이동(또는 제거)합니다. 이러한 규칙은 Azure 또는 Hyper-V에서 가상 컴퓨터를 복제하는 경우 문제를 발생시킵니다.
+4. 이더넷 인터페이스에 대한 정적 규칙을 생성하지 않도록 방지하는 udev 규칙을 이동(또는 제거)합니다. 이러한 규칙은 Azure 또는 Hyper-V에서 가상 머신을 복제하는 경우 문제를 발생시킵니다.
 
         # sudo ln -s /dev/null /etc/udev/rules.d/75-persistent-net-generator.rules
 
@@ -547,7 +565,7 @@ ms.lasthandoff: 08/09/2017
 
         # subscription-manager repos --enable=rhel-6-server-extras-rpms
 
-8. Azure용 커널 매개 변수를 추가로 포함하려면 grub 구성에서 커널 부팅 줄을 수정합니다. 이렇게 하려면 텍스트 편집기에서 `/etc/default/grub`를 열고 `GRUB_CMDLINE_LINUX` 매개 변수를 편집합니다. 예:
+8. Azure용 커널 매개 변수를 추가로 포함하려면 grub 구성에서 커널 부팅 줄을 수정합니다. 이렇게 하려면 텍스트 편집기에서 `/etc/default/grub`를 열고 `GRUB_CMDLINE_LINUX` 매개 변수를 편집합니다. 예: 
    
         GRUB_CMDLINE_LINUX="rootdelay=300 console=ttyS0 earlyprintk=ttyS0"
    
@@ -555,7 +573,7 @@ ms.lasthandoff: 08/09/2017
    
         rhgb quiet crashkernel=auto
    
-    모든 로그를 직렬 포트로 보내려는 클라우드 환경에서는 그래픽 및 자동 부팅 기능이 효율적이지 않습니다. 원할 경우 `crashkernel` 옵션은 구성된 상태로 둘 수 있습니다. 이 매개 변수는 가상 컴퓨터의 사용 가능한 메모리 양을 128MB 이상 줄입니다. 이 방식은 좀 더 작은 가상 컴퓨터 크기에서는 문제가 될 수도 있습니다.
+    모든 로그를 직렬 포트로 보내려는 클라우드 환경에서는 그래픽 및 자동 부팅 기능이 효율적이지 않습니다. 원할 경우 `crashkernel` 옵션은 구성된 상태로 둘 수 있습니다. 이 매개 변수는 가상 머신의 사용 가능한 메모리 양을 128MB 이상 줄입니다. 이 방식은 좀 더 작은 가상 머신 크기에서는 문제가 될 수도 있습니다.
 
 9. Hyper-V 모듈을 initramfs에 추가합니다.
 
@@ -579,7 +597,7 @@ ms.lasthandoff: 08/09/2017
 
 12. 운영 체제 디스크에 스왑 공간을 만들지 마세요.
 
-    Azure Linux 에이전트는 Azure에서 가상 컴퓨터를 프로비전한 후에 가상 컴퓨터에 연결된 로컬 리소스 디스크를 사용하여 자동으로 스왑 공간을 구성할 수 있습니다. 로컬 리소스 디스크는 임시 디스크이며 가상 컴퓨터의 프로비전을 해제할 때 비워질 수 있습니다. Azure Linux 에이전트를 설치한 후에(이전 단계 참조) `/etc/waagent.conf`에서 다음 매개 변수를 적절하게 수정합니다.
+    Azure Linux 에이전트는 Azure에서 가상 컴퓨터를 프로비전한 후에 가상 컴퓨터에 연결된 로컬 리소스 디스크를 사용하여 자동으로 스왑 공간을 구성할 수 있습니다. 로컬 리소스 디스크는 임시 디스크이며 가상 머신의 프로비전을 해제할 때 비워질 수 있습니다. Azure Linux 에이전트를 설치한 후에(이전 단계 참조) `/etc/waagent.conf`에서 다음 매개 변수를 적절하게 수정합니다.
 
         ResourceDisk.Format=y
         ResourceDisk.Filesystem=ext4
@@ -591,7 +609,7 @@ ms.lasthandoff: 08/09/2017
 
         # sudo subscription-manager unregister
 
-14. 다음 명령을 실행하여 가상 컴퓨터의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
+14. 다음 명령을 실행하여 가상 머신의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
 
         # sudo waagent -force -deprovision
 
@@ -599,26 +617,36 @@ ms.lasthandoff: 08/09/2017
 
         # logout
 
-15. 가상 컴퓨터를 종료하고 VMDK 파일을 .vhd 파일로 변환합니다.
+15. 가상 머신을 종료하고 VMDK 파일을 .vhd 파일로 변환합니다.
 
-    우선 이미지를 원시 형식으로 변환합니다.
+> [!NOTE]
+> VHD 형식이 잘못 지정되는 qemu-img 버전 >=2.2.1에 알려진 버그가 있습니다. 이 문제는 QEMU 2.6에서 해결되었습니다. qemu-img 2.2.0 이하 버전을 사용하거나 2.6 이상으로 업데이트하는 것이 좋습니다. 참조: https://bugs.launchpad.net/qemu/+bug/1490611
+>
 
-        # qemu-img convert -f vmdk -O raw rhel-6.8.vmdk rhel-6.8.raw
 
-    원시 이미지의 크기가 1MB로 정렬되는지 확인합니다. 그렇지 않은 경우 1MB에 맞게 크기를 반올림합니다.
+    First convert the image to raw format:
+
+        # qemu-img convert -f vmdk -O raw rhel-6.9.vmdk rhel-6.9.raw
+
+    Make sure that the size of the raw image is aligned with 1 MB. Otherwise, round up the size to align with 1 MB:
 
         # MB=$((1024*1024))
-        # size=$(qemu-img info -f raw --output json "rhel-6.8.raw" | \
+        # size=$(qemu-img info -f raw --output json "rhel-6.9.raw" | \
           gawk 'match($0, /"virtual-size": ([0-9]+),/, val) {print val[1]}')
 
         # rounded_size=$((($size/$MB + 1)*$MB))
-        # qemu-img resize rhel-6.8.raw $rounded_size
+        # qemu-img resize rhel-6.9.raw $rounded_size
 
-    원시 디스크를 고정 크기 VHD로 변환합니다.
+    Convert the raw disk to a fixed-sized VHD:
 
-        # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-6.8.raw rhel-6.8.vhd
+        # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-6.9.raw rhel-6.9.vhd
 
-### <a name="prepare-a-rhel-7-virtual-machine-from-vmware"></a>VMWare에서 RHEL 7 가상 컴퓨터 준비
+    Or, with qemu version **2.6+** include the `force_size` option:
+
+        # qemu-img convert -f raw -o subformat=fixed,force_size -O vpc rhel-6.9.raw rhel-6.9.vhd
+
+
+### <a name="prepare-a-rhel-7-virtual-machine-from-vmware"></a>VMWare에서 RHEL 7 가상 머신 준비
 1. 파일 `/etc/sysconfig/network`를 만들거나 편집하고 다음 텍스트를 추가합니다.
    
         NETWORKING=yes
@@ -637,13 +665,13 @@ ms.lasthandoff: 08/09/2017
 
 3. 다음 명령을 실행하여 부팅 시 네트워크 서비스가 시작되도록 합니다.
 
-        # sudo chkconfig network on
+        # sudo systemctl enable network
 
 4. RHEL 리포지토리에서 패키지 설치를 사용하도록 다음 명령을 실행하여 Red Hat 구독을 등록합니다.
 
         # sudo subscription-manager register --auto-attach --username=XXX --password=XXX
 
-5. Azure용 커널 매개 변수를 추가로 포함하려면 grub 구성에서 커널 부팅 줄을 수정합니다. 이렇게 수정하려면 텍스트 편집기에서 `/etc/default/grub`를 열고 `GRUB_CMDLINE_LINUX` 매개 변수를 편집합니다. 예:
+5. Azure용 커널 매개 변수를 추가로 포함하려면 grub 구성에서 커널 부팅 줄을 수정합니다. 이렇게 수정하려면 텍스트 편집기에서 `/etc/default/grub`를 열고 `GRUB_CMDLINE_LINUX` 매개 변수를 편집합니다. 예: 
    
         GRUB_CMDLINE_LINUX="rootdelay=300 console=ttyS0 earlyprintk=ttyS0 net.ifnames=0"
    
@@ -683,7 +711,7 @@ ms.lasthandoff: 08/09/2017
 
 11. 운영 체제 디스크에 스왑 공간을 만들지 마세요.
 
-    Azure Linux 에이전트는 Azure에서 가상 컴퓨터를 프로비전한 후에 가상 컴퓨터에 연결된 로컬 리소스 디스크를 사용하여 자동으로 스왑 공간을 구성할 수 있습니다. 로컬 리소스 디스크는 임시 디스크이며 가상 컴퓨터의 프로비전을 해제할 때 비워질 수 있습니다. Azure Linux 에이전트를 설치한 후에(이전 단계 참조) `/etc/waagent.conf`에서 다음 매개 변수를 적절하게 수정합니다.
+    Azure Linux 에이전트는 Azure에서 가상 컴퓨터를 프로비전한 후에 가상 컴퓨터에 연결된 로컬 리소스 디스크를 사용하여 자동으로 스왑 공간을 구성할 수 있습니다. 로컬 리소스 디스크는 임시 디스크이며 가상 머신의 프로비전을 해제할 때 비워질 수 있습니다. Azure Linux 에이전트를 설치한 후에(이전 단계 참조) `/etc/waagent.conf`에서 다음 매개 변수를 적절하게 수정합니다.
 
         ResourceDisk.Format=y
         ResourceDisk.Filesystem=ext4
@@ -695,7 +723,7 @@ ms.lasthandoff: 08/09/2017
 
         # sudo subscription-manager unregister
 
-13. 다음 명령을 실행하여 가상 컴퓨터의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
+13. 다음 명령을 실행하여 가상 머신의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
 
         # sudo waagent -force -deprovision
 
@@ -703,27 +731,37 @@ ms.lasthandoff: 08/09/2017
 
         # logout
 
-14. 가상 컴퓨터를 종료하고 VMDK 파일을 VHD 형식으로 변환합니다.
+14. 가상 머신을 종료하고 VMDK 파일을 VHD 형식으로 변환합니다.
 
-    우선 이미지를 원시 형식으로 변환합니다.
+> [!NOTE]
+> VHD 형식이 잘못 지정되는 qemu-img 버전 >=2.2.1에 알려진 버그가 있습니다. 이 문제는 QEMU 2.6에서 해결되었습니다. qemu-img 2.2.0 이하 버전을 사용하거나 2.6 이상으로 업데이트하는 것이 좋습니다. 참조: https://bugs.launchpad.net/qemu/+bug/1490611
+>
 
-        # qemu-img convert -f vmdk -O raw rhel-7.3.vmdk rhel-7.3.raw
 
-    원시 이미지의 크기가 1MB로 정렬되는지 확인합니다. 그렇지 않은 경우 1MB에 맞게 크기를 반올림합니다.
+    First convert the image to raw format:
+
+        # qemu-img convert -f vmdk -O raw rhel-7.4.vmdk rhel-7.4.raw
+
+    Make sure that the size of the raw image is aligned with 1 MB. Otherwise, round up the size to align with 1 MB:
 
         # MB=$((1024*1024))
-        # size=$(qemu-img info -f raw --output json "rhel-6.8.raw" | \
+        # size=$(qemu-img info -f raw --output json "rhel-7.4.raw" | \
           gawk 'match($0, /"virtual-size": ([0-9]+),/, val) {print val[1]}')
 
         # rounded_size=$((($size/$MB + 1)*$MB))
-        # qemu-img resize rhel-6.8.raw $rounded_size
+        # qemu-img resize rhel-7.4.raw $rounded_size
 
-    원시 디스크를 고정 크기 VHD로 변환합니다.
+    Convert the raw disk to a fixed-sized VHD:
 
-        # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-7.3.raw rhel-7.3.vhd
+        # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-7.4.raw rhel-7.4.vhd
 
-## <a name="prepare-a-red-hat-based-virtual-machine-from-an-iso-by-using-a-kickstart-file-automatically"></a>자동으로 kickstart 파일을 사용하여 ISO에서 Red Hat 기반 가상 컴퓨터 준비
-### <a name="prepare-a-rhel-7-virtual-machine-from-a-kickstart-file"></a>kickstart 파일에서 RHEL 7 가상 컴퓨터 준비
+    Or, with qemu version **2.6+** include the `force_size` option:
+
+        # qemu-img convert -f raw -o subformat=fixed,force_size -O vpc rhel-7.4.raw rhel-7.4.vhd
+
+
+## <a name="prepare-a-red-hat-based-virtual-machine-from-an-iso-by-using-a-kickstart-file-automatically"></a>자동으로 kickstart 파일을 사용하여 ISO에서 Red Hat 기반 가상 머신 준비
+### <a name="prepare-a-rhel-7-virtual-machine-from-a-kickstart-file"></a>kickstart 파일에서 RHEL 7 가상 머신 준비
 
 1.  다음 콘텐츠를 포함하는 kickstart 파일을 만들고 저장합니다. Kickstart 설치에 대한 자세한 내용은 [Kickstart 설치 가이드](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/chap-kickstart-installations.html)를 참조하세요.
 
@@ -848,21 +886,21 @@ ms.lasthandoff: 08/09/2017
 
 2. 설치 시스템에서 액세스할 수 있는 위치에 kickstart 파일을 배치합니다.
 
-3. Hyper-V 관리자에서 새 가상 컴퓨터를 만듭니다. **가상 하드 디스크 연결** 페이지에서 **나중에 가상 하드 디스크 연결**을 선택하고 새 가상 컴퓨터 마법사를 완료합니다.
+3. Hyper-V 관리자에서 새 가상 머신을 만듭니다. **가상 하드 디스크 연결** 페이지에서 **나중에 가상 하드 디스크 연결**을 선택하고 새 Virtual Machine 마법사를 완료합니다.
 
-4. 가상 컴퓨터 설정을 엽니다.
+4. 가상 머신 설정을 엽니다.
 
-    a.  새 가상 하드 디스크를 가상 컴퓨터에 연결합니다. **VHD 형식** 및 **고정된 크기**를 선택하도록 합니다.
+    a.  새 가상 하드 디스크를 가상 머신에 연결합니다. **VHD 형식** 및 **고정된 크기**를 선택하도록 합니다.
 
-    b.  설치 ISO를 DVD 드라이브에 연결합니다.
+    나.  설치 ISO를 DVD 드라이브에 연결합니다.
 
-    c.  CD에서 부팅하도록 BIOS를 설정합니다.
+    다.  CD에서 부팅하도록 BIOS를 설정합니다.
 
-5. 가상 컴퓨터를 시작합니다. 설치 가이드가 나타나면 **Tab** 키를 눌러서 부팅 옵션을 구성합니다.
+5. 가상 머신을 시작합니다. 설치 가이드가 나타나면 **Tab** 키를 눌러서 부팅 옵션을 구성합니다.
 
 6. 부팅 옵션 마지막에 `inst.ks=<the location of the kickstart file>` 을 입력하고 **Enter**키를 누릅니다.
 
-7. 설치가 완료될 때까지 기다립니다. 완료되면 가상 컴퓨터가 자동으로 종료됩니다. 이제 Linux VHD를 Azure에 업로드할 수 있습니다.
+7. 설치가 완료될 때까지 기다립니다. 완료되면 가상 머신이 자동으로 종료됩니다. 이제 Linux VHD를 Azure에 업로드할 수 있습니다.
 
 ## <a name="known-issues"></a>알려진 문제
 ### <a name="the-hyper-v-driver-could-not-be-included-in-the-initial-ram-disk-when-using-a-non-hyper-v-hypervisor"></a>Hyper-V 드라이버가 Hyper-V 하이퍼바이저가 아닌 프로그램을 사용하는 경우 초기 RAM 디스크에 포함될 수 없습니다.
@@ -884,7 +922,6 @@ Initramfs를 다시 빌드합니다.
 자세한 정보는 [initramfs 다시 작성](https://access.redhat.com/solutions/1958)에 대한 내용을 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
-이제 Red Hat Enterprise Linux 가상 하드 디스크를 사용하여 Azure에 새 가상 컴퓨터를 만들 준비가 되었습니다. .vhd 파일을 Azure에 처음으로 업로드하는 경우 [Linux 운영 체제를 포함하는 가상 하드 디스크 만들기 및 업로드](classic/create-upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2fclassic%2ftoc.json)에서 2단계 및 3단계를 참조하세요.
+이제 Red Hat Enterprise Linux 가상 하드 디스크를 사용하여 Azure에 새 가상 머신을 만들 준비가 되었습니다. .vhd 파일을 Azure에 처음 업로드하는 경우 [사용자 지정 디스크에서 Linux VM 만들기](upload-vhd.md#option-1-upload-a-vhd)를 참조하세요.
 
 Red Hat Enterprise Linux를 실행하기 위해 인증된 하이퍼바이저에 대한 자세한 내용은 [Red Hat 웹 사이트](https://access.redhat.com/certified-hypervisors)를 참조하세요.
-

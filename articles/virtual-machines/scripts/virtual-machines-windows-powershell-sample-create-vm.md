@@ -1,13 +1,13 @@
 ---
-title: "Azure PowerShell 스크립트 샘플 - Windows VM 만들기 | Microsoft Docs"
-description: "Azure PowerShell 스크립트 샘플 - Windows VM 만들기"
+title: Azure PowerShell 스크립트 샘플 - Windows VM 만들기 | Microsoft Docs
+description: Azure PowerShell 스크립트 샘플 - Windows VM 만들기
 services: virtual-machines-windows
 documentationcenter: virtual-machines
 author: neilpeterson
 manager: timlt
 editor: tysonn
 tags: azure-service-management
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-windows
 ms.devlang: na
 ms.topic: sample
@@ -16,17 +16,15 @@ ms.workload: infrastructure
 ms.date: 03/02/2017
 ms.author: nepeters
 ms.custom: mvc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: bd1736fdc04498779c7b749bf9cb1c79de075c96
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
+ms.openlocfilehash: a9e46aded0cf3792558a7fba6f00e5662166cc0a
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
+# <a name="create-a-fully-configured-virtual-machine-with-powershell"></a>PowerShell로 완벽히 구성된 가상 머신 만들기
 
-# <a name="create-a-fully-configured-virtual-machine-with-powershell"></a>PowerShell로 완벽히 구성된 가상 컴퓨터 만들기
-
-이 스크립트는 Windows Server 2016을 실행하는 Azure Virtual Machine을 만듭니다. 스크립트를 실행하면 RDP를 통해 가상 컴퓨터에 액세스할 수 있습니다.
+이 스크립트는 Windows Server 2016을 실행하는 Azure Virtual Machine을 만듭니다. 스크립트를 실행하면 RDP를 통해 가상 머신에 액세스할 수 있습니다.
 
 [!INCLUDE [sample-powershell-install](../../../includes/sample-powershell-install-no-ssh.md)]
 
@@ -34,7 +32,7 @@ ms.lasthandoff: 04/27/2017
 
 ## <a name="sample-script"></a>샘플 스크립트
 
-[!code-powershell[main](../../../powershell_scripts/virtual-machine/create-vm-detailed/create-windows-vm-detailed.ps1 "VM 세부 사항 만들기")]
+[!code-powershell[main](../../../powershell_scripts/virtual-machine/create-vm-detailed/create-windows-vm-detailed.ps1 "Create VM detailed")]
 
 ## <a name="clean-up-deployment"></a>배포 정리 
 
@@ -48,7 +46,7 @@ Remove-AzureRmResourceGroup -Name myResourceGroup
 
 이 스크립트는 다음 명령을 사용하여 배포합니다. 테이블에 있는 각 항목은 명령에 해당하는 문서에 연결됩니다.
 
-| 명령 | 참고 사항 |
+| 명령 | 메모 |
 |---|---|
 | [New-AzureRmResourceGroup](/powershell/module/azurerm.resources/new-azurermresourcegroup) | 모든 리소스가 저장되는 리소스 그룹을 만듭니다. |
 | [New-AzureRmVirtualNetworkSubnetConfig](/powershell/module/azurerm.network/new-azurermvirtualnetworksubnetconfig) | 서브넷 구성을 만듭니다. 이 구성은 가상 네트워크 만들기 프로세스에서 사용됩니다. |
@@ -59,12 +57,11 @@ Remove-AzureRmResourceGroup -Name myResourceGroup
 | [Get-AzureRmVirtualNetworkSubnetConfig](/powershell/module/azurerm.network/get-azurermvirtualnetworksubnetconfig) | 서브넷 정보를 가져옵니다. 이 정보는 네트워크 인터페이스를 만들 때 사용됩니다. |
 | [새-AzureRmNetworkInterface](/powershell/module/azurerm.network/new-azurermnetworkinterface) | 네트워크 인터페이스를 만듭니다. |
 | [New-AzureRmVMConfig](/powershell/module/azurerm.compute/new-azurermvmconfig) | VM 구성을 만듭니다. 이 구성은 VM 이름, 운영 체제 및 관리자 자격 증명 등의 정보를 포함합니다. 이 구성은 VM을 만드는 중에 사용됩니다. |
-| [New-AzureRmVM](/powershell/module/azurerm.compute/new-azurermvm) | 가상 컴퓨터를 만듭니다. |
+| [New-AzureRmVM](/powershell/module/azurerm.compute/new-azurermvm) | 가상 머신을 만듭니다. |
 |[Remove-AzureRmResourceGroup](/powershell/module/azurerm.resources/remove-azurermresourcegroup) | 리소스 그룹 및 포함된 모든 리소스를 제거합니다. |
 
 ## <a name="next-steps"></a>다음 단계
 
 Azure PowerShell 모듈에 대한 자세한 내용은 [Azure PowerShell 설명서](/powershell/azure/overview)를 참조하세요.
 
-추가 가상 컴퓨터 PowerShell 스크립트 샘플은 [Azure Windows VM 설명서](../windows/powershell-samples.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)에서 확인할 수 있습니다.
-
+추가 가상 머신 PowerShell 스크립트 샘플은 [Azure Windows VM 설명서](../windows/powershell-samples.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)에서 확인할 수 있습니다.

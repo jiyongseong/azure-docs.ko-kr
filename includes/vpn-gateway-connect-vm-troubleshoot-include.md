@@ -1,4 +1,20 @@
-VPN 연결을 통해 가상 컴퓨터에 연결하는 데 문제가 있는 경우 다음 항목을 확인합니다.
+---
+title: 포함 파일
+description: 포함 파일
+services: vpn-gateway
+author: cherylmc
+ms.service: vpn-gateway
+ms.topic: include
+ms.date: 03/21/2018
+ms.author: cherylmc
+ms.custom: include file
+ms.openlocfilehash: a22cc1f1bffb0126c4fe23bd9f28b292bfdc48a8
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
+---
+VPN 연결을 통해 가상 머신에 연결하는 데 문제가 있는 경우 다음 항목을 확인합니다.
 
 - VPN 연결이 성공했는지 확인합니다.
 - VM의 개인 IP 주소에 연결하고 있는지 확인합니다.

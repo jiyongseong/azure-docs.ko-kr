@@ -1,28 +1,26 @@
 ---
-title: "Azure Compute 단위 개요 | Microsoft Docs"
-description: "Windows용 Azure Compute 단위의 개념 개요 ACU에서는 Azure SKU에서 CPU 성능을 비교하는 방법을 제공합니다."
+title: Azure Compute 단위 개요 | Microsoft Docs
+description: Windows용 Azure Compute 단위의 개념 개요 ACU에서는 Azure SKU에서 CPU 성능을 비교하는 방법을 제공합니다.
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: jonbeck7
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager,azure-service-management
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-windows
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 07/28/2017
+ms.date: 12/05/2017
 ms.author: jonbeck
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 197ebd6e37066cb4463d540284ec3f3b074d95e1
-ms.openlocfilehash: 8be8d538b192a55d5c1ecc8cb5839f9079317d50
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/31/2017
-
+ms.openlocfilehash: baf49856f8f7480ece10e065b3ac002297f06617
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/20/2018
 ---
-
 # <a name="azure-compute-unit-acu"></a>ACU(Azure Compute 단위)
 
 [!INCLUDE [virtual-machines-common-acu](../../../includes/virtual-machines-common-acu.md)]

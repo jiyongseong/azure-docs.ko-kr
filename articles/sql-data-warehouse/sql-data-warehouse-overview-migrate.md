@@ -1,27 +1,20 @@
 ---
-title: "SQL Data Warehouse에 솔루션 마이그레이션| Microsoft Docs"
-description: "Azure SQL 데이터 웨어하우스 플랫폼에 솔루션을 가져오기 위한 마이그레이션 지침"
+title: SQL Data Warehouse에 솔루션 마이그레이션| Microsoft Docs
+description: Azure SQL Data Warehouse 플랫폼에 솔루션을 가져오기 위한 마이그레이션 지침
 services: sql-data-warehouse
-documentationcenter: NA
-author: sqlmojo
-manager: jhubbard
-editor: 
-ms.assetid: 198365eb-7451-4222-b99c-d1d9ef687f1b
+author: jrowlandjones
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: migrate
-ms.date: 06/27/2017
-ms.author: joeyong;barbkess
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 1500c02fa1e6876b47e3896c40c7f3356f8f1eed
-ms.openlocfilehash: 771b9456e66b8a1e41f72340b695b19e2adaf793
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/30/2017
-
-
+ms.topic: conceptual
+ms.component: implement
+ms.date: 04/17/2018
+ms.author: jrj
+ms.reviewer: igorstan
+ms.openlocfilehash: 5a609fb2da1f9dba1247358f64b284fc3e3ef5bc
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
 # <a name="migrate-your-solution-to-azure-sql-data-warehouse"></a>Azure SQL Data Warehouse에 솔루션 마이그레이션
 Azure SQL Data Warehouse로 기존 데이터베이스 솔루션을 마이그레이션하는 데 관련된 정보를 참조하세요. 
@@ -79,4 +72,3 @@ CAT(고객 자문 팀)에서 블로그를 통해 게시하는 몇 가지 유용�
 
 <!--Other Web references-->
 [Migrating data to Azure SQL Data Warehouse in practice]: https://blogs.msdn.microsoft.com/sqlcat/2016/08/18/migrating-data-to-azure-sql-data-warehouse-in-practice/
-

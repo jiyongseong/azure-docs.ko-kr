@@ -1,33 +1,24 @@
 ---
-title: "동적 관리 뷰를 사용하여 Azure SQL Database 모니터링 | Microsoft Docs"
-description: "동적 관리 뷰를 사용하여 Microsoft Azure SQL 데이터베이스를 모니터링하여 일반적인 성능 문제를 감지 및 진단하는 방법에 대해 알아봅니다."
+title: 동적 관리 뷰를 사용하여 Azure SQL Database 모니터링 | Microsoft Docs
+description: 동적 관리 뷰를 사용하여 Microsoft Azure SQL Database를 모니터링하여 일반적인 성능 문제를 감지 및 진단하는 방법에 대해 알아봅니다.
 services: sql-database
-documentationcenter: 
 author: CarlRabeler
-manager: jhubbard
-editor: 
-tags: 
-ms.assetid: d08f505f-3c62-47d4-bab7-35c9a834b79b
+manager: craigg
 ms.service: sql-database
 ms.custom: monitor & tune
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: data-management
-ms.date: 01/10/2017
+ms.date: 04/01/2018
 ms.author: carlrab
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: ae0054ac9d87562f6babbfaeaf440d653d60963a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
-
+ms.openlocfilehash: 96255ed92e0dc05aa5a215a78a070f60f001e8bc
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-# <a name="monitoring-azure-sql-database-using-dynamic-management-views"></a>동적 관리 뷰를 사용하여 Azure SQL 데이터베이스 모니터링
-Microsoft Azure SQL 데이터베이스를 사용하여 차단되거나 오래 실행된 쿼리, 리소스 병목 현상, 잘못된 쿼리 계획 등에 의해 야기될 수 있는 동적 관리 뷰의 하위 집합에서 성능 문제를 진단할 수 있습니다. 이 항목에서는 동적 관리 뷰를 사용하여 일반적인 성능 문제를 감지하는 방법을 설명합니다.
+# <a name="monitoring-azure-sql-database-using-dynamic-management-views"></a>동적 관리 뷰를 사용하여 Azure SQL Database 모니터링
+Microsoft Azure SQL Database를 사용하여 차단되거나 오래 실행된 쿼리, 리소스 병목 현상, 잘못된 쿼리 계획 등에 의해 야기될 수 있는 동적 관리 뷰의 하위 집합에서 성능 문제를 진단할 수 있습니다. 이 항목에서는 동적 관리 뷰를 사용하여 일반적인 성능 문제를 감지하는 방법을 설명합니다.
 
-SQL 데이터베이스는 세 가지 범주의 동적 관리 뷰를 부분적으로 지원합니다.
+SQL Database는 세 가지 범주의 동적 관리 뷰를 부분적으로 지원합니다.
 
 * 데이터베이스 관련 동적 관리 뷰.
 * 실행 관련 동적 관리 뷰.
@@ -36,12 +27,12 @@ SQL 데이터베이스는 세 가지 범주의 동적 관리 뷰를 부분적으
 동적 관리 뷰에 대한 자세한 내용은 SQL Server 온라인 설명서의 [동적 관리 뷰 및 함수(Transact-SQL)](https://msdn.microsoft.com/library/ms188754.aspx) 를 참조하세요.
 
 ## <a name="permissions"></a>권한
-SQL 데이터베이스에서 동적 관리 뷰를 쿼리하려면 **VIEW DATABASE STATE** 권한이 있어야 합니다. **VIEW DATABASE STATE** 권한은 현재 데이터베이스 내의 모든 개체에 대한 정보를 반환합니다.
+SQL Database에서 동적 관리 뷰를 쿼리하려면 **VIEW DATABASE STATE** 권한이 있어야 합니다. **VIEW DATABASE STATE** 권한은 현재 데이터베이스 내의 모든 개체에 대한 정보를 반환합니다.
 특정 데이터베이스 사용자에게 **VIEW DATABASE STATE** 권한을 부여하려면 다음 쿼리를 실행합니다.
 
 ```GRANT VIEW DATABASE STATE TO database_user; ```
 
-온-프레미스 SQL 서버의 인스턴스에서 동적 관리 뷰는 서버 상태 정보를 반환합니다. SQL 데이터베이스에서는 현재의 논리 데이터베이스에 관한 정보만 반환합니다.
+온-프레미스 SQL 서버의 인스턴스에서 동적 관리 뷰는 서버 상태 정보를 반환합니다. SQL Database에서는 현재의 논리 데이터베이스에 관한 정보만 반환합니다.
 
 ## <a name="calculating-database-size"></a>데이터베이스 크기 계산
 다음 쿼리는 데이터베이스 크기(MB)를 반환합니다.
@@ -110,7 +101,7 @@ ORDER BY 2 DESC;
 ```
 
 ### <a name="monitoring-blocked-queries"></a>차단된 쿼리 모니터링
-느린 속도로 또는 장시간 실행하는 쿼리는 과도한 리소스 소비에 기여하고 차단된 쿼리에 따른 결과일 수 있습니다. 차단의 원인으로 부실한 응용 프로그램 디자인, 잘못된 쿼리 계획, 유용한 인덱스 부족 등이 있습니다. sys.dm_tran_locks 뷰를 사용하여 Azure SQL 데이터베이스의 현재 잠금 작업에 관한 정보를 가져올 수 있습니다. 예제 코드는 SQL Server 온라인 설명서의 [sys.dm_tran_locks (Transact-SQL)](https://msdn.microsoft.com/library/ms190345.aspx)를 참조하세요.
+느린 속도로 또는 장시간 실행하는 쿼리는 과도한 리소스 소비에 기여하고 차단된 쿼리에 따른 결과일 수 있습니다. 차단의 원인으로 부실한 응용 프로그램 디자인, 잘못된 쿼리 계획, 유용한 인덱스 부족 등이 있습니다. sys.dm_tran_locks 뷰를 사용하여 Azure SQL Database의 현재 잠금 작업에 관한 정보를 가져올 수 있습니다. 예제 코드는 SQL Server 온라인 설명서의 [sys.dm_tran_locks (Transact-SQL)](https://msdn.microsoft.com/library/ms190345.aspx)를 참조하세요.
 
 ### <a name="monitoring-query-plans"></a>쿼리 계획 모니터링
 또한 비효율적인 쿼리 계획 때문에 CPU 사용량이 증가할 수 있습니다. 다음 예제에서는 [sys.dm_exec_query_stats](https://msdn.microsoft.com/library/ms189741.aspx) 뷰를 사용하여 가장 많은 누적 CPU를 사용하는 쿼리를 확인합니다.
@@ -136,6 +127,5 @@ ORDER BY highest_cpu_queries.total_worker_time DESC;
 ```
 
 ## <a name="see-also"></a>참고 항목
-[SQL 데이터베이스 소개](sql-database-technical-overview.md)
-
+[SQL Database 소개](sql-database-technical-overview.md)
 

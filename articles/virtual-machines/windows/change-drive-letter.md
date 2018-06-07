@@ -4,7 +4,7 @@ description: "Windows VM의 D: 드라이브를 데이터 드라이브로 사용�
 services: virtual-machines-windows
 documentationcenter: 
 author: cynthn
-manager: timlt
+manager: jeconnoc
 editor: 
 tags: azure-resource-manager,azure-service-management
 ms.assetid: 0867a931-0055-4e31-8403-9b38a3eeb904
@@ -13,28 +13,26 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
 ms.devlang: na
 ms.topic: article
-ms.date: 05/31/2017
+ms.date: 01/02/2018
 ms.author: cynthn
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 07584294e4ae592a026c0d5890686eaf0b99431f
-ms.openlocfilehash: 7667175c01be2421bfc3badd83b1d8aaeb29bfde
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/02/2017
-
-
+ms.openlocfilehash: a4e29ce7ebb20753c3313e1148e1c91e853f49f5
+ms.sourcegitcommit: 2e540e6acb953b1294d364f70aee73deaf047441
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/03/2018
 ---
 # <a name="use-the-d-drive-as-a-data-drive-on-a-windows-vm"></a>D: 드라이브를 Windows VM의 데이터 드라이브로 사용
 응용 프로그램에서 D 드라이브를 사용하여 데이터를 저장해야 하는 경우 다음 지침에 따라 임시 디스크에 다른 드라이브 문자를 사용할 수 있습니다. 보관해야 하는 데이터를 저장하는 데 임시 디스크를 사용하지 마세요.
 
-가상 컴퓨터의 크기를 조정하거나 **중지(할당 취소)** 하는 경우 새 하이퍼바이저로 가상 컴퓨터의 배치를 트리거할 수 있습니다. 계획되거나 계획되지 않은 유지 관리 이벤트로 이 배치가 트리거될 수도 있습니다. 이 시나리오에서는 임시 디스크가 첫 번째 사용 가능한 드라이브 문자에 다시 할당됩니다. 특히 D: 드라이브가 필요한 응용 프로그램의 경우 이러한 단계를 사용하여 pagefile.sys를 일시적으로 이동하고, 새 데이터 디스크를 연결한 후 문자 D를 할당한 다음, pagefile.sys를 임시 드라이브로 다시 이동해야 합니다. 완료된 후 VM이 다른 하이퍼바이저로 이동되어도 Azure는 D:를 다시 취소하지 않습니다.
+가상 머신의 크기를 조정하거나 **중지(할당 취소)** 하는 경우 새 하이퍼바이저로 가상 머신의 배치를 트리거할 수 있습니다. 계획되거나 계획되지 않은 유지 관리 이벤트로 이 배치가 트리거될 수도 있습니다. 이 시나리오에서는 임시 디스크가 첫 번째 사용 가능한 드라이브 문자에 다시 할당됩니다. 특히 D: 드라이브가 필요한 응용 프로그램의 경우 이러한 단계를 사용하여 pagefile.sys를 일시적으로 이동하고, 새 데이터 디스크를 연결한 후 문자 D를 할당한 다음, pagefile.sys를 임시 드라이브로 다시 이동해야 합니다. 완료된 후 VM이 다른 하이퍼바이저로 이동되어도 Azure는 D:를 다시 취소하지 않습니다.
 
-Azure에서 임시 디스크를 사용하는 방법에 대한 자세한 내용은 [Microsoft Azure 가상 컴퓨터에서의 임시 드라이브 이해](https://blogs.msdn.microsoft.com/mast/2013/12/06/understanding-the-temporary-drive-on-windows-azure-virtual-machines/)
+Azure에서 임시 디스크를 사용하는 방법에 대한 자세한 내용은 [Microsoft Azure Virtual Machines에서의 임시 드라이브 이해](https://blogs.msdn.microsoft.com/mast/2013/12/06/understanding-the-temporary-drive-on-windows-azure-virtual-machines/)
 
 ## <a name="attach-the-data-disk"></a>데이터 디스크 연결
-우선 가상 컴퓨터에 데이터 디스크를 연결해야 합니다. 포털을 사용하여 이를 수행하려면 [Azure Portal에서 관리되는 데이터 디스크를 연결하는 방법](attach-managed-disk-portal.md)을 참조하세요.
+우선 가상 머신에 데이터 디스크를 연결해야 합니다. 포털을 사용하여 이를 수행하려면 [Azure Portal에서 관리되는 데이터 디스크를 연결하는 방법](attach-managed-disk-portal.md)을 참조하세요.
 
 ## <a name="temporarily-move-pagefilesys-to-c-drive"></a>pagefile.sys를 C 드라이브로 임시 이동
-1. 가상 컴퓨터에 연결합니다. 
+1. 가상 머신에 연결합니다. 
 2. **시작** 메뉴를 마우스 오른쪽 단추로 클릭하고 **시스템**을 선택합니다.
 3. 왼쪽 메뉴에서 **고급 시스템 설정**을 선택합니다.
 4. **성능** 섹션에서 **설정**을 선택합니다.
@@ -43,7 +41,7 @@ Azure에서 임시 디스크를 사용하는 방법에 대한 자세한 내용�
 7. **C** 드라이브를 선택한 후 **시스템이 관리하는 크기**를 클릭하고 **설정**을 클릭합니다.
 8. **D** 드라이브를 선택하고 **페이징 파일 없음**을 클릭하고 **설정**을 클릭합니다.
 9. 적용을 클릭합니다. 변경 내용을 적용하려면 컴퓨터를 다시 시작해야 한다는 경고가 표시됩니다.
-10. 가상 컴퓨터를 다시 시작합니다.
+10. 가상 머신을 다시 시작합니다.
 
 ## <a name="change-the-drive-letters"></a>드라이브 문자 변경
 1. VM이 다시 시작되면 VM에 다시 로그인합니다.
@@ -62,9 +60,8 @@ Azure에서 임시 디스크를 사용하는 방법에 대한 자세한 내용�
 6. OS 드라이브 **C**를 선택하고 **페이징 파일 없음**을 클릭하고 **설정**을 클릭합니다.
 7. 임시 저장소 드라이브 **T**를 선택한 후 **시스템이 관리하는 크기**를 클릭하고 **설정**을 클릭합니다.
 8. **Apply**를 클릭합니다. 변경 내용을 적용하려면 컴퓨터를 다시 시작해야 한다는 경고가 표시됩니다.
-9. 가상 컴퓨터를 다시 시작합니다.
+9. 가상 머신을 다시 시작합니다.
 
 ## <a name="next-steps"></a>다음 단계
-* [추가 데이터 디스크를 연결](attach-managed-disk-portal.md)하여 가상 컴퓨터에서 사용할 수 있는 저장소를 늘릴 수 있습니다.
-
+* [추가 데이터 디스크를 연결](attach-managed-disk-portal.md)하여 가상 머신에서 사용할 수 있는 저장소를 늘릴 수 있습니다.
 

@@ -1,11 +1,11 @@
 ---
-title: "비갤러리 응용 프로그램에 대해 페더레이션된 Single Sign-On을 구성하는 방법 | Microsoft Docs"
-description: "Azure AD와 통합할 사용자 지정 비갤러리 응용 프로그램에 대해 페더레이션된 Single Sign-On을 구성하는 방법"
+title: 비갤러리 응용 프로그램에 대해 페더레이션된 Single Sign-On을 구성하는 방법 | Microsoft Docs
+description: Azure AD와 통합할 사용자 지정 비갤러리 응용 프로그램에 대해 페더레이션된 Single Sign-On을 구성하는 방법
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: ajamess
-manager: femila
-ms.assetid: 
+manager: mtillman
+ms.assetid: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
@@ -13,20 +13,18 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a1ba750d2be1969bfcd4085a24b0469f72a357ad
-ms.openlocfilehash: 54e092e4bb8d83a59d05d8aca2760f9098ecd548
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
+ms.openlocfilehash: 65df07b6fca62476953ad98dc9e17d9a82c97a53
+ms.sourcegitcommit: c52123364e2ba086722bc860f2972642115316ef
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
 ---
-
 # <a name="how-to-configure-federated-single-sign-on-for-a-non-gallery-application"></a>비갤러리 응용 프로그램에 대해 페더레이션된 Single Sign-On을 구성하는 방법
 
-비갤러리 응용 프로그램을 구성하려면 Azure AD 프리미엄이 있어야 하며 응용 프로그램에서 SAML 2.0을 지원해야 합니다. Azure AD 버전에 대한 자세한 내용은 [Azure AD 가격 책정](https://azure.microsoft.com/pricing/details/active-directory/)에서 확인할 수 있습니다.
+비갤러리 응용 프로그램에 대해 *코드를 작성하지 않고* Single Sign-On을 구성하려면 Azure AD Premium 구독이 있어야 하며 응용 프로그램이 SAML 2.0을 지원해야 합니다. Azure AD 버전에 대한 자세한 내용은 [Azure AD 가격 책정](https://azure.microsoft.com/pricing/details/active-directory/)에서 확인할 수 있습니다.
 
 ## <a name="overview-of-steps-required"></a>필요한 단계 개요
-다음은 비갤러리(예: 사용자 지정) 응용 프로그램에 대해 페더레이션된 Single Sign-On을 구성하는 데 필요한 단계를 요약한 개요입니다.
+다음은 비갤러리(예: 사용자 지정) 응용 프로그램에 대해 SAML 2.0을 사용하여 페더레이션된 Single Sign-On을 구성하는 데 필요한 단계를 요약한 개요입니다.
 
 -   [Azure AD에서 응용 프로그램의 메타데이터 값 구성(로그온 URL, 식별자, 회신 URL)](#_Configuring_single_sign-on)
 
@@ -44,13 +42,13 @@ Azure AD 갤러리에 없는 응용 프로그램에 대해 Single Sign-On을 구
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 또는 **공동 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
 4.  Azure Active Directory 왼쪽 탐색 메뉴에서 **엔터프라이즈 응용 프로그램**을 클릭합니다.
 
-5.  **엔터프라이즈 응용 프로그램** 블레이드의 오른쪽 위 모서리에서 **추가** 단추를 클릭합니다.
+5.  **엔터프라이즈 응용 프로그램** 창의 오른쪽 위 모서리에서 **추가** 단추를 클릭합니다.
 
 6.  **고유한 응용 프로그램 추가** 섹션에서 **비갤러리 응용 프로그램**을 클릭합니다.
 
@@ -88,7 +86,7 @@ Azure AD 갤러리에 없는 응용 프로그램에 대해 Single Sign-On을 구
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 또는 **공동 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -122,7 +120,7 @@ Azure AD에서 응용 프로그램 메타데이터 또는 인증서를 다운로
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 또는 **공동 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -146,7 +144,7 @@ Azure AD에서는 메타데이터를 가져오는 URL을 제공하지 않습니�
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -160,9 +158,9 @@ Azure AD에서는 메타데이터를 가져오는 URL을 제공하지 않습니�
 
 7.  응용 프로그램이 로드되면 응용 프로그램의 왼쪽 탐색 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
-8.  **사용자 및 그룹** 목록의 맨 위에서 **추가** 단추를 클릭하여 **할당 추가** 블레이드를 엽니다.
+8.  **사용자 및 그룹** 목록의 맨 위에서 **추가** 단추를 클릭하여 **할당 추가** 창을 엽니다.
 
-9.  **할당 추가** 블레이드에서 **사용자 및 그룹** 선택기를 클릭합니다.
+9.  **할당 추가** 창에서 **사용자 및 그룹** 선택기를 클릭합니다.
 
 10. **이름 또는 전자 메일 주소로 검색** 검색 상자에 할당하려는 사용자의 **전체 이름** 또는 **전자 메일 주소**를 입력합니다.
 
@@ -172,7 +170,7 @@ Azure AD에서는 메타데이터를 가져오는 URL을 제공하지 않습니�
 
 13. 사용자 선택이 완료되면 **선택** 단추를 클릭하여 응용 프로그램에 할당되도록 사용자 및 그룹의 목록에 추가합니다.
 
-14. **선택 사항:** **할당 추가** 블레이드에서 **역할 선택** 선택기를 클릭하여 선택한 사용자에게 할당할 역할을 선택합니다.
+14. **선택 사항:** **할당 추가** 창에서 **역할 선택** 선택기를 클릭하여 선택한 사용자에게 할당할 역할을 선택합니다.
 
 15. **할당** 단추를 클릭하여 선택한 사용자에게 응용 프로그램을 할당합니다.
 
@@ -183,5 +181,4 @@ Azure AD에서는 메타데이터를 가져오는 URL을 제공하지 않습니�
 응용 프로그램에 전송된 SAML 특성 클레임을 사용자 지정하는 방법을 알아보려면 [Azure Active Directory의 클레임 매핑](https://docs.microsoft.com/azure/active-directory/active-directory-claims-mapping)을 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
-[응용 프로그램 프록시를 사용하여 앱에 Single Sign-On 제공](active-directory-application-proxy-sso-using-kcd.md)
-
+[응용 프로그램 프록시를 사용하여 앱에 Single Sign-On 제공](manage-apps/application-proxy-configure-single-sign-on-with-kcd.md)

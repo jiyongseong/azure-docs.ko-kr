@@ -1,6 +1,6 @@
 ---
 title: "VM 재시작 또는 크기 조정 문제 | Microsoft Docs"
-description: "Azure의 기존 Windows 가상 컴퓨터 재시작 또는 크기 조정 관련 클래식 배포 문제 해결"
+description: "Azure의 기존 Windows Virtual Machine 재시작 또는 크기 조정 관련 클래식 배포 문제 해결"
 services: virtual-machines-windows
 documentationcenter: 
 author: Deland-Han
@@ -9,28 +9,26 @@ editor:
 tags: top-support-issue
 ms.assetid: aa854fff-c057-4b8e-ad77-e4dbc39648cc
 ms.service: virtual-machines-windows
-ms.topic: support-article
+ms.topic: troubleshooting
 ms.tgt_pltfrm: vm-windows
 ms.workload: required
-ms.date: 06/13/2017
+ms.date: 11/03/2017
 ms.devlang: na
 ms.author: delhan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: fc27849f3309f8a780925e3ceec12f318971872c
-ms.openlocfilehash: 7fe0636366c60d4679cfc69bd96cd532695b080e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/14/2017
-
-
+ms.openlocfilehash: bed5da25042d29983bad9a80cd44bdd7df261c2e
+ms.sourcegitcommit: b5c6197f997aa6858f420302d375896360dd7ceb
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/21/2017
 ---
-# <a name="troubleshoot-classic-deployment-issues-with-restarting-or-resizing-an-existing-windows-virtual-machine-in-azure"></a>Azure의 기존 Windows 가상 컴퓨터 재시작 또는 크기 조정 관련 클래식 배포 문제 해결
+# <a name="troubleshoot-classic-deployment-issues-with-restarting-or-resizing-an-existing-windows-virtual-machine-in-azure"></a>Azure의 기존 Windows Virtual Machine 재시작 또는 크기 조정 관련 클래식 배포 문제 해결
 > [!div class="op_single_selector"]
 > * [클래식](virtual-machines-windows-classic-restart-resize-error-troubleshooting.md)
 > * [리소스 관리자](../restart-resize-error-troubleshooting.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
 > 
 > 
 
-중지된 Azure 가상 컴퓨터(VM)를 시작하거나, 기존 Azure AM의 크기를 조정하려다 접하는 일반적인 오류는 할당 오류입니다. 이런 오류는 클러스터나 지역에 사용할 수 있는 리소스가 없거나 요청한 VM 크기를 지원할 수 없을 때 발생합니다.
+중지된 Azure Virtual Machine(VM)을 시작하거나, 기존 Azure AM의 크기를 조정하려다 접하는 일반적인 오류는 할당 오류입니다. 이런 오류는 클러스터나 지역에 사용할 수 있는 리소스가 없거나 요청한 VM 크기를 지원할 수 없을 때 발생합니다.
 
 > [!IMPORTANT]
 > Azure에는 리소스를 만들고 작업하는 [Resource Manager와 클래식](../../../azure-resource-manager/resource-manager-deployment-model.md)이라는 두 가지 배포 모델이 있습니다.  이 문서에서는 클래식 배포 모델 사용에 대해 설명합니다. 새로운 배포는 대부분 리소스 관리자 모델을 사용하는 것이 좋습니다.
@@ -42,7 +40,7 @@ ms.lasthandoff: 06/14/2017
 ## <a name="collect-audit-logs"></a>감사 로그 수집
 문제 해결을 시작하려면 문제와 관련된 오류를 파악하기 위해 감사 로그를 수집합니다.
 
-Azure 포털에서 **찾아보기** > **가상 컴퓨터** > *Windows 가상 컴퓨터* > **설정** > **감사 로그**를 클릭합니다.
+Azure 포털에서 **찾아보기** > **가상 머신** > *Windows 가상 머신* > **설정** > **감사 로그**를 클릭합니다.
 
 ## <a name="issue-error-when-starting-a-stopped-vm"></a>문제: 중지된 VM 시작 시 오류
 중지된 VM을 시작하려는데 할당 오류가 발생했습니다.
@@ -72,7 +70,7 @@ VM 크기를 조정하기 위한 요청은 클라우드 서비스를 호스트�
 ### <a name="resolution"></a>해결 방법
 요청한 VM 크기를 줄이고 크기 조정 요청을 다시 시도합니다.
 
-* **모두 찾아보기** > **가상 컴퓨터(클래식)** > *사용자의 가상 컴퓨터* > **설정** > **크기**를 클릭합니다. 자세한 단계는 [가상 컴퓨터 크기 조정](https://msdn.microsoft.com/library/dn168976.aspx)을 참조하세요.
+* **모두 찾아보기** > **가상 머신(클래식)** > *사용자의 가상 머신* > **설정** > **크기**를 클릭합니다. 자세한 단계는 [가상 머신 크기 조정](https://msdn.microsoft.com/library/dn168976.aspx)을 참조하세요.
 
 VM 크기를 줄이는 것이 가능하지 않으면, 다음 단계를 수행합니다.
 
@@ -85,5 +83,4 @@ VM 크기를 줄이는 것이 가능하지 않으면, 다음 단계를 수행합
 
 ## <a name="next-steps"></a>다음 단계
 Azure에서 Windows VM을 만들 때 문제가 발생하면 [Azure에서 Windows 가상 컴퓨터 생성 관련 배포 문제 해결](../troubleshoot-deployment-new-vm.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)을 참조하세요.
-
 

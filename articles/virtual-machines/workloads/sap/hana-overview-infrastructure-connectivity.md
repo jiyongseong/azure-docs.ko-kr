@@ -1,33 +1,32 @@
 ---
-title: "Azure(큰 인스턴스)의 SAP HANA에 대한 인프라 및 연결 | Microsoft Docs"
-description: "Azure(큰 인스턴스)의 SAP HANA를 사용하도록 필수 연결 인프라를 구성합니다."
+title: Azure(큰 인스턴스)의 SAP HANA에 대한 인프라 및 연결 | Microsoft Docs
+description: Azure(큰 인스턴스)의 SAP HANA를 사용하도록 필수 연결 인프라를 구성합니다.
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: RicksterCDN
 manager: timlt
-editor: 
+editor: ''
 ms.service: virtual-machines-linux
 ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 12/01/2016
+ms.date: 10/31/2017
 ms.author: rclaus
 ms.custom: H1Hack27Feb2017
+ms.openlocfilehash: 51089ffa05168d2309bd2a96ec44b2ce0fed75f9
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: abc3f5ee70130b6be093e63afb495c86b921ba26
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
+ms.locfileid: "33778293"
 ---
-
 # <a name="sap-hana-large-instances-infrastructure-and-connectivity-on-azure"></a>Azure(큰 인스턴스)의 SAP HANA 인프라 및 연결 
 
 이 가이드를 읽기에 앞서 일부 사전 정의. [SAP HANA (큰 인스턴스) 개요 및 Azure 상의 아키텍처](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-architecture)에서 HANA 큰 인스턴스 단위의 두 다른 클래스를 도입했습니다.
 
 - SKU의 'Type I 클래스'인 S72, S72m, S144, S144m, S192 및 S192m.
-- SKU의 'Type II 클래스'인 S384, S384m, S384xm, S576, S768, 및 S960.
+- SKU의 'Type II 클래스'인 S384, S384m, S384xm, S576m, S768m 및 S960m.
 
 HANA 큰 인스턴스 설명서 전반에 걸쳐 HANA 큰 인스턴스 SKU를 기반으로 하여 궁극적으로 다양한 기능 및 요구를 참조하는 데 클래스 지정자가 사용될 것입니다.
 
@@ -42,8 +41,7 @@ HANA 큰 인스턴스 설명서 전반에 걸쳐 HANA 큰 인스턴스 SKU를 �
 - 비즈니스 연락처 정보(전자 메일 주소 및 전화 번호 포함)
 - 기술 담당자 정보(전자 메일 주소 및 전화 번호 포함)
 - 기술 네트워킹 담당자 정보(전자 메일 주소 및 전화 번호 포함)
-- Azure 배포 지역 (7월 현재 미국 서부, 미국 동부, 오스트레일리아 동부, 오스트레일리아 남동부, 유럽 서부 및 북유럽 
-- 2017)
+- Azure 배포 지역(2017년 7월 현재 미국 서부, 미국 동부, 오스트레일리아 동부, 오스트레일리아 남동부, 유럽 서부 및 북유럽)
 - Azure(큰 인스턴스) SKU(구성)에서 SAP HANA 확인
 - HANA 큰 인스턴스의 개요 및 아키텍처 문서에서 이미 자세히 설명했듯이 다음에 배포되는 모든 Azure 지역의 경우:
     - Azure VNet을 HANA 큰 인스턴스에 연결하는 ER-P2P 연결에 대한 /29 IP 주소 범위
@@ -52,9 +50,9 @@ HANA 큰 인스턴스 설명서 전반에 걸쳐 HANA 큰 인스턴스 SKU를 �
 - HANA 큰 인스턴스 시스템 각각에 대한 데이터:
   - 원하는 호스트 이름 - 정규화된 도메인 이름이 이상적.
   - 서버 IP 풀 주소 범위 밖의 HANA 큰 인스턴스 단위의 원하는 IP 주소 - 서버 IP 풀 주소 범위의 처음 30개 IP 주소는 HANA 큰 인스턴스 내에서 내부용으로 예약되어 있습니다.
-  - SAP HANA 인스턴스의 SAP HANA SID 이름(필요한 SAP HANA 관련 디스크 볼륨을 만드는 데 필수). HANA SID는 <sidadm>NFS 볼륨에서 허락을 생성하기 위해 필요하며, HANA 큰 인스턴스 단위에 연결됩니다. 또한 탑재된 디스크 볼륨의 이름 구성 요소 중 하나로 사용됩니다. 단위에 둘 이상의 HANA 인스턴스를 실행하려는 경우 여러 HANA SID를 나열해야 합니다. 각각에 별도의 볼륨 집합이 할당됩니다.
-  - hana-sidadm 사용자가 Linux OS에서 가지고 있는 groupid는 필요한 SAP HANA 관련 디스크 볼륨을 만드는 데 필요합니다. 일반적으로 SAP HANA 설치에서는 그룹 ID가 1001인 sapsys 그룹을 생성합니다. hana-sidadm 사용자가 그룹에 포함됩니다.
-  - hana-sidadm 사용자가 Linux OS에서 가지고 있는 userid는 필요한 SAP HANA 관련 디스크 볼륨을 만드는 데 필요합니다. 단위에서 여러 HANA 인스턴스를 실행하는 경우 모든 <sid>adm 사용자를 나열해야 합니다 
+  - SAP HANA 인스턴스의 SAP HANA SID 이름(필요한 SAP HANA 관련 디스크 볼륨을 만드는 데 필수). HANA SID는 NFS 볼륨에서 sidadm에 대한 허락을 생성하기 위해 필요하며, HANA 큰 인스턴스 단위에 연결됩니다. 또한 탑재된 디스크 볼륨의 이름 구성 요소 중 하나로 사용됩니다. 단위에 둘 이상의 HANA 인스턴스를 실행하려는 경우 여러 HANA SID를 나열해야 합니다. 각각에 별도의 볼륨 집합이 할당됩니다.
+  - sidadm 사용자가 Linux OS에서 가지고 있는 groupid는 필요한 SAP HANA 관련 디스크 볼륨을 만드는 데 필요합니다. 일반적으로 SAP HANA 설치에서는 그룹 ID가 1001인 sapsys 그룹을 생성합니다. sidadm 사용자가 그룹에 포함됩니다.
+  - sidadm 사용자가 Linux OS에서 가지고 있는 userid는 필요한 SAP HANA 관련 디스크 볼륨을 만드는 데 필요합니다. 단위에서 여러 HANA 인스턴스를 실행하는 경우 모든 <sid>adm 사용자를 나열해야 합니다 
 - Azure HANA 큰 인스턴스의 SAP HANA를 직접 연결하는 Azure 구독의 Azure 구독 ID. 이 구독 ID는 HANA 큰 인스턴스 단위로 청구될 Azure 구독을 참조합니다.
 
 정보를 제공한 후 Microsoft는 Azure(큰 인스턴스)에 SAP HANA를 프로비전하고 Azure VNet을 HANA 큰 인스턴스에 연결하고 HANA 큰 인스턴스 단위에 액세스하는 데 필요한 정보를 반환합니다.
@@ -78,7 +76,7 @@ Azure VNet 쪽을 자세히 살펴보면 다음에 대한 필요성을 인식하
 >[!Note]
 >이 HANA 큰 인스턴스에 대한 Azure VNet은 Azure Resource Manager 배포 모델을 사용하여 만들어야 합니다. 일반적으로 클래식 배포 모델로 알려진 이전 Azure 배포 모델은 HANA 큰 인스턴스 솔루션에 지원되지 않습니다.
 
-Azure Portal, PowerShell, Azure 템플릿 또는 Azure CLI를 사용하여 VNet을 만들 수 있습니다([Azure Portal을 사용하여 가상 네트워크 만들기](../../../virtual-network/virtual-networks-create-vnet-arm-pportal.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) 참조). 다음 예에서 Azure Portal을 통해 생성된 VNet에 대해 살펴봅니다.
+Azure Portal, PowerShell, Azure 템플릿 또는 Azure CLI를 사용하여 VNet을 만들 수 있습니다([Azure Portal을 사용하여 가상 네트워크 만들기](../../../virtual-network/manage-virtual-network.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#create-a-virtual-network) 참조). 다음 예에서 Azure Portal을 통해 생성된 VNet에 대해 살펴봅니다.
 
 Azure Portal을 통해 Azure VNet의 정의를 살펴보기 위해 몇 가지 정의와 그 정의가 다양한 IP 주소 범위에 나열된 것과 어떻게 관련되는지 살펴보겠습니다. **주소 공간**에 대해 이야기할 때 Azure VNet의 사용이 허용된 주소 공간을 의미합니다. 이 주소 공간은 VNet에서 BGP 경로 전파에 사용할 주소 범위이기도 합니다. 이 **주소 공간**은 여기에서 볼 수 있습니다.
 
@@ -112,7 +110,7 @@ HANA 큰 인스턴스에 연결되는 Azure VNet에 대한 중요한 사실 요�
 - **VNet 주소 공간**은 Azure VM 서브넷 IP 주소 범위 및 VNet 게이트웨이 서브넷 IP 주소 범위에 대한 범위를 다루는 더 큰 범위일 수 있습니다.
 - 또는 VM 서브넷 IP 주소 범위와 VNet 게이트웨이 서브넷 IP 주소 범위의 다양한 IP 주소 범위를 포함하는 여러 범위를 **VNet 주소 공간**으로 제출할 수도 있습니다.
 - 정의된 **VNet 주소 공간**은 BGP 라우팅 전파에 사용됩니다.
-- 게이트웨이 서브넷의 이름은 **"GatewaySubnet"**이어야 합니다.
+- 게이트웨이 서브넷의 이름은 **"GatewaySubnet"** 이어야 합니다.
 - **VNet 주소 공간**은 Azure에서 HANA 큰 인스턴스 단위로 트래픽을 허용 또는 차단하기 위해 HANA 큰 인스턴스 쪽의 필터로 사용됩니다. Azure VNet의 BGP 라우팅 정보와 HANA 큰 인스턴스 측에서 필터링을 위해 구성된 IP 주소 범위가 일치하지 않으면 연결 문제가 발생할 수 있습니다.
 - 게이트웨이 서브넷에 대한 자세한 내용은 'VNet을 HANA 큰 인스턴스 ExpressRoute에 연결' 섹션에서 자세히 설명합니다.
 
@@ -171,7 +169,7 @@ IP 주소 범위를 정의한 후에는 다음 작업이 수행되어야 합니�
      - ExpressRoute PeerID
 - ExpressRoute 회로 및 Azure VNet을 설정한 후 HANA 큰 인스턴스에 액세스하기 위한 데이터.
 
-[SAP HANA 큰 인스턴스에 대한 종단 간 설치](https://msdnshared.blob.core.windows.net/media/2017/06/End-to-End-Setup-of-SAP-HANA-Large-Instances.pdf) 문서에서 HANA 큰 인스턴스를 연결하는 순서를 확인할 수 있습니다. 대다수의 다음 단계는 해당 문서의 배포 예에 표시됩니다. 
+[SAP HANA 큰 인스턴스에 대한 종단 간 설치](https://azure.microsoft.com/resources/sap-hana-on-azure-large-instances-setup/) 문서에서 HANA 큰 인스턴스를 연결하는 순서를 확인할 수 있습니다. 대다수의 다음 단계는 해당 문서의 배포 예에 표시됩니다. 
 
 
 ## <a name="connecting-a-vnet-to-hana-large-instance-expressroute"></a>VNet을 HANA 큰 인스턴스 ExpressRoute에 연결
@@ -216,7 +214,7 @@ New-AzureRmVirtualNetworkGateway -Name $myGWName -ResourceGroupName $myGroupName
 이 예제에서는 HighPerformance 게이트웨이 SKU를 사용했습니다. 옵션은 Azure(큰 인스턴스)의 SAP HANA에 지원되는 유일한 게이트웨이 SKU인 HighPerformance 또는 UltraPerformance입니다.
 
 > [!IMPORTANT]
-> SKU 유형 S384, S384m, S384xm, S576, S768, 및 S960(Type II 클래스 SKU) HANA 큰 인스턴스의 경우 UltraPerformance 게이트웨이 SKU 사용은 필수입니다.
+> SKU 유형 S384, S384m, S384xm, S576m, S768m 및 S960m(Type II 클래스 SKU) HANA 큰 인스턴스의 경우 UltraPerformance 게이트웨이 SKU 사용은 필수입니다.
 
 ### <a name="linking-vnets"></a>VNet 연결
 
@@ -253,7 +251,7 @@ IP 주소 또는 서브넷을 추가하는 경우 Azure Portal, PowerShell 또�
 
 이 경우 새 집계 범위를 생성하는 대신 새 IP 주소 범위를 새 범위로 VNet 주소 공간에 추가하는 것이 좋습니다. 두 경우 모두 클라이언트의 HANA 큰 인스턴스 단위에 새 IP 주소 범위 밖의 연결을 허용하려면 이 변경 내용을 Microsoft에 제출해야 합니다. Azure 지원 요청을 열고 새 VNet 주소 공간이 추가되게 할 수 있습니다. 확인을 받은 후에 다음 단계를 수행합니다.
 
-Azure Portal에서 추가 서브넷을 만들려면 [Azure Portal을 사용하여 가상 네트워크 만들기](../../../virtual-network/virtual-networks-create-vnet-arm-pportal.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)를 참조하고 PowerShell에서 추가 서브넷을 만들려면 [PowerShell을 사용하여 가상 네트워크 만들기](../../../virtual-network/virtual-networks-create-vnet-arm-ps.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)를 참조하세요.
+Azure Portal에서 추가 서브넷을 만들려면 [Azure Portal을 사용하여 가상 네트워크 만들기](../../../virtual-network/manage-virtual-network.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#create-a-virtual-network)를 참조하고 PowerShell에서 추가 서브넷을 만들려면 [PowerShell을 사용하여 가상 네트워크 만들기](../../../virtual-network/manage-virtual-network.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#create-a-virtual-network)를 참조하세요.
 
 ## <a name="adding-vnets"></a>VNet 추가
 
@@ -280,15 +278,13 @@ Azure의 SAP HANA Service Management를 참조하여 추가 ExpressRoute 회로�
 
 VNet 서브넷을 제거하기 위해 Azure Portal, PowerShell 또는 CLI 중 하나를 사용할 수 있습니다. Azure VNet IP 주소 범위/Azure VNet 주소 공간이 집계 범위인 경우 Microsoft의 후속 조치가 없습니다. 단, 삭제된 서브넷을 포함하는 BGP 경로 주소 공간을 VNet이 여전히 전파하고 있습니다. Azure VNet IP 주소 범위/Azure VNet 주소 공간을 삭제된 서브넷에 할당된 여러 IP 주소 범위로 정의한 경우, VNet 주소 공간에서 해당 주소를 삭제하고 Azure의 SAP HANA Service Management에 알려서 Azure(큰 인스턴스)의 SAP HANA 통신 허용 범위에서 제거하도록 합니다.
 
-아직 서브넷을 제거하는 방법에 대한 특정 전용 Azure.com 지침은 없지만 서브넷을 제거하는 프로세스는 서브넷을 추가하는 프로세스와 반대입니다. 서브넷을 만드는 방법에 대한 자세한 내용은 [Azure Portal을 사용하여 가상 네트워크 만들기](../../../virtual-network/virtual-networks-create-vnet-arm-pportal.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) 문서를 참조하세요.
+서브넷을 삭제하려면 서브넷 삭제에 대한 자세한 내용을 제공하는 [서브넷 삭제](../../../virtual-network/virtual-network-manage-subnet.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#delete-a-subnet)를 참조하세요.
 
 ## <a name="deleting-a-vnet"></a>VNet 삭제
 
-VNet을 삭제하는 경우 Azure Portal, PowerShell 또는 CLI를 사용합니다. Azure의 SAP HANA Service Management는 Azure(큰 인스턴스)의 SAP HANA ExpressRoute 회로에 대한 기존 권한 부여를 제거하고 HANA 큰 인스턴스와의 통신에 대한 Azure VNet IP 주소 범위/Azure VNet 주소 공간을 제거합니다.
+가상 네트워크를 삭제하려면 [가상 네트워크 삭제](../../../virtual-network/manage-virtual-network.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#delete-a-virtual-network)를 참조하세요. Azure의 SAP HANA Service Management는 Azure(큰 인스턴스)의 SAP HANA ExpressRoute 회로에 대한 기존 권한 부여를 제거하고 HANA 큰 인스턴스와의 통신에 대한 Azure VNet IP 주소 범위/Azure VNet 주소 공간을 제거합니다.
 
 VNet을 제거하면 제거될 IP 주소 공간 범위를 제공하는 Azure 지원 요청이 열립니다.
-
-아직 VNet을 제거하는 방법에 대한 특정 전용 Azure.com 지침은 없지만 VNet을 제거하는 프로세스는 위에 설명된 VNet을 추가하는 프로세스와 반대입니다. VNet을 만드는 방법에 대한 자세한 내용은 [Azure Portal을 사용하여 가상 네트워크 만들기](../../../virtual-network/virtual-networks-create-vnet-arm-pportal.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) 및 [PowerShell을 사용하여 가상 네트워크 만들기](../../../virtual-network/virtual-networks-create-vnet-arm-ps.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) 문서를 참조하세요.
 
 모든 항목이 제거되었는지 확인하려면 다음 항목을 삭제합니다.
 
@@ -299,6 +295,5 @@ VNet을 제거하면 제거될 IP 주소 공간 범위를 제공하는 Azure 지
 추가 Azure(큰 인스턴스)의 SAP HANA ExpressRoute 회로를 제거하려면 Azure의 SAP HANA Service Management를 통해 Azure 지원 요청을 열고 회로를 삭제하도록 요청합니다. Azure 구독 내에서 필요에 따라 VNet을 삭제하거나 유지할 수 있습니다. 그러나 HANA 큰 인스턴스 ExpressRoute 회로와 연결된 VNet 게이트웨이 간에 연결을 삭제해야 합니다.
 
 VNet도 제거하려면 위의 섹션에서 VNet 삭제에 대한 지침을 따릅니다.
-
 
 

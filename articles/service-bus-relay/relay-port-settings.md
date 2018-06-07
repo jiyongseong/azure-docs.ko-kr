@@ -12,17 +12,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 07/03/2017
+ms.date: 01/23/2018
 ms.author: sethm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: b1d56fcfb472e5eae9d2f01a820f72f8eab9ef08
-ms.openlocfilehash: 5906495c565dad583e74a43b2e5eed57e0c68df1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.openlocfilehash: 055f04d496b56a5e8542911aa78292d7746ae80b
+ms.sourcegitcommit: 9890483687a2b28860ec179f5fd0a292cdf11d22
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/24/2018
 ---
-
 # <a name="azure-relay-port-settings"></a>Azure Relay 포트 설정
 
 다음 표에서는 Azure Relay의 포트 값에 필요한 구성을 설명합니다.
@@ -35,14 +32,14 @@ ms.lasthandoff: 07/06/2017
 |바인딩|전송 보안|포트|  
 |-------------|------------------------|----------|  
 |[BasicHttpRelayBinding 클래스](/dotnet/api/microsoft.servicebus.basichttprelaybinding)(클라이언트)|예|HTTPS| 
-| |" |아니요|HTTP|  
+| |" |아니오|HTTP|  
 |[BasicHttpRelayBinding 클래스](/dotnet/api/microsoft.servicebus.basichttprelaybinding)(서비스)|여기서는|9351/HTTP|  
 |[NetEventRelayBinding 클래스](/dotnet/api/microsoft.servicebus.neteventrelaybinding)(클라이언트)|예|9351/HTTPS|  
 ||" |아니요|9350/HTTP|  
 |[NetEventRelayBinding 클래스](/dotnet/api/microsoft.servicebus.neteventrelaybinding)(서비스)|여기서는|9351/HTTP|  
 |[NetTcpRelayBinding 클래스](/dotnet/api/microsoft.servicebus.nettcprelaybinding)(클라이언트/서비스)|여기서는|5671/9352/HTTP(하이브리드를 사용하는 경우 9352/9353)|  
 |[NetOnewayRelayBinding 클래스](/dotnet/api/microsoft.servicebus.netonewayrelaybinding)(클라이언트)|예|9351/HTTPS|  
-||" |아니요|9350/HTTP|  
+||" |아니오|9350/HTTP|  
 |[NetOnewayRelayBinding 클래스](/dotnet/api/microsoft.servicebus.netonewayrelaybinding)(서비스)|여기서는|9351/HTTP|  
 |[WebHttpRelayBinding 클래스](/dotnet/api/microsoft.servicebus.webhttprelaybinding)(클라이언트)|예|HTTPS|  
 ||" |아니요|HTTP|  

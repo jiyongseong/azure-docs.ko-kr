@@ -1,8 +1,8 @@
 ---
-title: "Azure Data Lake Store MapReduce 성능 조정 지침 | Microsoft Docs"
-description: "Azure Data Lake Store MapReduce 성능 조정 지침"
+title: Azure Data Lake Store MapReduce 성능 조정 지침 | Microsoft Docs
+description: Azure Data Lake Store MapReduce 성능 조정 지침
 services: data-lake-store
-documentationcenter: 
+documentationcenter: ''
 author: stewu
 manager: amitkul
 editor: stewu
@@ -10,28 +10,23 @@ ms.assetid: ebde7b9f-2e51-4d43-b7ab-566417221335
 ms.service: data-lake-store
 ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
 ms.date: 12/19/2016
 ms.author: stewu
-ms.translationtype: Human Translation
-ms.sourcegitcommit: b1d56fcfb472e5eae9d2f01a820f72f8eab9ef08
-ms.openlocfilehash: 9528148792f083cb0e48d356e61cf61762ee954f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.openlocfilehash: f5586e7706d4dad7e3c943b2a661fa296b4d30bf
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="performance-tuning-guidance-for-mapreduce-on-hdinsight-and-azure-data-lake-store"></a>HDInsight and Azure Data Lake Store에서 MapReduce에 대한 성능 조정 지침
 
-
 ## <a name="prerequisites"></a>필수 조건
 
-* **Azure 구독**. [Azure 무료 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
+* **Azure 구독**. [Azure 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
 * **Azure 데이터 레이크 저장소 계정**. 만드는 방법에 대한 지침은 [Azure 데이터 레이크 저장소 시작](data-lake-store-get-started-portal.md)
 * **Azure HDInsight 클러스터** 입니다. [Data Lake Store가 있는 HDInsight 클러스터 만들기](data-lake-store-hdinsight-hadoop-use-portal.md)를 참조하세요. 클러스터에 대한 원격 데스크톱을 사용하도록 설정해야 합니다.
-* **HDInsight에서 MapReduce 사용**.  자세한 내용은 [HDInsight에서 Hadoop과 MapReduce 사용](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-use-mapreduce)을 참조하세요.  
-* **ADLS에서 성능 조정 지침**.  일반적인 성능 개념은 [Data Lake Store 성능 조정 지침](https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-performance-tuning-guidance)을 참조하세요.  
+* **HDInsight에서 MapReduce 사용**.  자세한 내용은 [HDInsight에서 Hadoop과 MapReduce 사용](https://docs.microsoft.com/azure/hdinsight/hdinsight-use-mapreduce)을 참조하세요.
+* **ADLS에서 성능 조정 지침**.  일반적인 성능 개념은 [Data Lake Store 성능 조정 지침](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-performance-tuning-guidance)을 참조하세요.
 
 ## <a name="parameters"></a>매개 변수
 
@@ -119,4 +114,3 @@ Azure Data Lake Store에서 MapReduce가 실행되는 방식을 보여 주기 �
 **Teravalidate**
 
     yarn jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-mapreduce-examples.jar teravalidate -Dmapreduce.job.maps=512 -Dmapreduce.map.memory.mb=3072 adl://example/data/1TB-sort-output adl://example/data/1TB-sort-validate
-

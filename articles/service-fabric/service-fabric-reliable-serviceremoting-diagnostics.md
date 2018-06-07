@@ -1,6 +1,6 @@
 ---
-title: "Azure Service Fabric 진단 및 모니터링 | Microsoft Docs"
-description: "이 문서에서는 Service Fabric Reliable ServiceRemoting 런타임에서 내보낸 성능 카운터를 포함하여 성능 모니터링 기능을 설명합니다."
+title: Azure Service Fabric 진단 및 모니터링 | Microsoft Docs
+description: 이 문서에서는 Service Fabric Reliable ServiceRemoting 런타임에서 내보낸 성능 카운터를 포함하여 성능 모니터링 기능을 설명합니다.
 services: service-fabric
 documentationcenter: .net
 author: suchiagicha
@@ -9,17 +9,16 @@ editor: suchiagicha
 ms.assetid: 1c229923-670a-4634-ad59-468ff781ad18
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 06/29/2017
 ms.author: suchiagicha
+ms.openlocfilehash: d462ba0955a362c27b786ee6a5670eec20c52a22
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
 ms.translationtype: HT
-ms.sourcegitcommit: 7bf5d568e59ead343ff2c976b310de79a998673b
-ms.openlocfilehash: f54e157654fb15d2f7ff48ddc666c6c8803c75a2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/01/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="diagnostics-and-performance-monitoring-for-reliable-service-remoting"></a>Reliable Service Remoting에 대한 진단 및 성능 모니터링
 Reliable ServiceRemoting 런타임에서는 [성능 카운터](https://msdn.microsoft.com/library/system.diagnostics.performancecounter.aspx)를 내보냅니다. 이러한 정보는 ServiceRemoting이 어떻게 작동하고 있는지 파악하여 문제를 해결하고 성능을 모니터링하는 데 도움이 됩니다.
@@ -102,4 +101,3 @@ Reliable Service 런타임은 서비스 메서드의 실행과 관련하여 다�
 ## <a name="next-steps"></a>다음 단계
 * [샘플 코드](https://github.com/Azure/servicefabric-samples)
 * [PerfView의 EventSource 공급자](https://blogs.msdn.microsoft.com/vancem/2012/07/09/introduction-tutorial-logging-etw-events-in-c-system-diagnostics-tracing-eventsource/)
-

@@ -1,22 +1,20 @@
 ---
-title: "MySQL용 Azure 데이터베이스에서 덤프 및 복원을 사용하여 MySQL Database 마이그레이션 | Microsoft Docs"
-description: "이 문서에서는 mysqldump, MySQL Workbench 및 PHPMyAdmin과 같은 도구를 사용하여 MySQL용 Azure Database에서 데이터베이스를 백업 및 복원하는 2가지 일반적인 방법에 대해 설명합니다."
+title: Azure Database for MySQL에서 덤프 및 복원을 사용하여 MySQL 데이터베이스 마이그레이션
+description: 이 문서에서는 mysqldump, MySQL Workbench 및 PHPMyAdmin과 같은 도구를 사용하여 MySQL용 Azure Database에서 데이터베이스를 백업 및 복원하는 2가지 일반적인 방법에 대해 설명합니다.
 services: mysql
-author: v-chenyh
-ms.author: v-chenyh
-manager: jhubbard
+author: ajlam
+ms.author: andrela
+manager: kfile
 editor: jasonwhowell
 ms.service: mysql-database
 ms.topic: article
-ms.date: 06/13/2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ff2fb126905d2a68c5888514262212010e108a3d
-ms.openlocfilehash: 8606067a8e82c6314ab931eb4816d45755a8e04f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/17/2017
-
+ms.date: 03/20/2018
+ms.openlocfilehash: ef35ee881923c69d41b79fd6cb8464c695c614f9
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
-
 # <a name="migrate-your-mysql-database-to-azure-database-for-mysql-using-dump-and-restore"></a>덤프 및 복원을 사용하여 MySQL Database를 MySQL용 Azure 데이터베이스로 마이그레이션
 이 문서에서는 MySQL용 Azure Database에서 데이터베이스를 백업 및 복원하는 2가지 일반적인 방법에 대해 설명합니다.
 - 명령줄에서 덤프 및 복원(mysqldump 사용) 
@@ -46,8 +44,8 @@ MySQL Workbench, mysqldump, Toad 또는 Navicat과 같은 일반 유틸리티 �
 ## <a name="performance-considerations"></a>성능 고려 사항
 성능을 최적화하려면 큰 데이터베이스를 덤프할 때 이러한 고려 사항을 숙지합니다.
 -   데이터베이스를 덤프할 때 mysqldump에서 `exclude-triggers` 옵션을 사용합니다. 데이터 복원 중 발생하는 트리거 명령을 방지하기 위해 덤프 파일에서 트리거를 제외합니다. 
--   매우 큰 데이터베이스를 덤프할 때 mysqldump에서 `single-transaction` 옵션을 사용하지 마십시오. 단일 트랜잭션 내에서 여러 테이블을 덤프하면 복원 중 사용되도록 추가 저장소 및 메모리 리소스가 발생하고 성능 지연 또는 리소스 제약 조건이 발생할 수 있습니다.
--   데이터베이스를 덤프할 때 문 실행 오버헤드를 최소화하기 위해 SQL로 로드할 때 다중 값 삽입을 사용합니다. mysqldump 유틸리티에 의해 생성된 덤프 파일을 사용할 경우 다중 값 삽입은 기본적으로 활성화됩니다. 
+-   `single-transaction` 옵션을 사용하여 트랜잭션 격리 모드를 REPEATABLE READ로 설정하고 데이터를 덤프하기 전에 START TRANSACTION SQL 문을 서버로 보냅니다. 단일 트랜잭션 내에서 많은 테이블을 덤프하면 복원 중 저장소가 추가로 소비됩니다. LOCK TABLES는 보류 중인 트랜잭션을 암시적으로 커밋되도록 하기 때문에 `single-transaction` 옵션과 `lock-tables` 옵션은 상호 배타적입니다. 대형 테이블을 덤프하려면 `single-transaction` 옵션을 `quick` 옵션과 결합합니다. 
+-   여러 VALUE 목록을 포함하는 `extended-insert` 여러 행 구문을 사용합니다. 그러면 덤프 파일이 작아지고 파일을 다시 로드할 때 삽입 속도가 빨라집니다.
 -  데이터가 기본 키 순서로 스크립팅되도록 데이터베이스를 덤프할 때 mysqldump에서 `order-by-primary` 옵션을 사용합니다.
 -   로드 전에 외래 키 제약 조건을 비활성화하려면 데이터를 덤프할 때 mysqldump에서 `disable-keys` 옵션을 사용합니다. 외래 키 검사 비활성화는 성능 향상을 제공합니다. 제약 조건을 활성화하고 참조 무결성을 확인하도록 로드 후 데이터를 확인합니다.
 -   적절한 경우 분할된 테이블을 사용합니다.
@@ -55,7 +53,7 @@ MySQL Workbench, mysqldump, Toad 또는 Navicat과 같은 일반 유틸리티 �
 -   테이블 데이터가 로드된 후 인덱스 생성이 발생하도록 데이터베이스를 덤프할 때 mysqlpump에서 `defer-table-indexes` 옵션을 사용합니다.
 
 ## <a name="create-a-backup-file-from-the-command-line-using-mysqldump"></a>mysqldump를 사용하여 명령줄에서 백업 파일 만들기
-로컬 온-프레미스 서버 또는 가상 컴퓨터에 기존 MySQL 데이터베이스를 백업하려면 다음 명령을 실행합니다. 
+로컬 온-프레미스 서버 또는 가상 머신에 기존 MySQL 데이터베이스를 백업하려면 다음 명령을 실행합니다. 
 ```bash
 $ mysqldump --opt -u [uname] -p[pass] [dbname] > [backupfile.sql]
 ```
@@ -82,17 +80,19 @@ $ mysqldump -u root -p testdb table1 table2 > testdb_tables_backup.sql
 $ mysqldump -u root -p --databases testdb1 testdb3 testdb5 > testdb135_backup.sql 
 ```
 서버의 모든 데이터베이스를 한 번에 백업하려면 --all-databases 옵션을 사용해야 합니다.
-```
+```bash
 $ mysqldump -u root -p --all-databases > alldb_backup.sql 
 ```
 
 ## <a name="create-a-database-on-the-target-azure-database-for-mysql-server"></a>대상 Azure Database for MySQL 서버에서 데이터베이스 만들기
 데이터를 마이그레이션하려는 대상 Azure Database for MySQL 서버에서 빈 데이터베이스를 만듭니다. MySQL Workbench, Toad 또는 Navicat과 같은 도구를 사용하여 데이터베이스를 만듭니다. 이 데이터베이스는 덤프된 데이터를 포함하는 데이터베이스와 이름이 같을 수 있고 다른 이름의 데이터베이스를 만들 수도 있습니다.
 
-연결하려면 Azure Database for MySQL의 속성 페이지에서 연결 정보를 찾습니다.
-![Azure Portal에서 연결 정보 찾기](./media/concepts-migrate-dump-restore/1_server-properties-name-login.png)
+연결하려면 Azure Database for MySQL의 **개요**에서 연결 정보를 찾습니다.
+
+![Azure Portal에서 연결 정보 찾기](./media/concepts-migrate-dump-restore/1_server-overview-name-login.png)
 
 MySQL Workbench에 연결 정보를 추가합니다.
+
 ![MySQL Workbench 연결 문자열](./media/concepts-migrate-dump-restore/2_setup-new-connection.png)
 
 
@@ -103,7 +103,7 @@ mysql -h [hostname] -u [uname] -p[pass] [db_to_restore] < [backupfile.sql]
 ```
 이 예제에서는 대상 Azure Database for MySQL 서버의 새로 만든 데이터베이스로 데이터를 복원합니다.
 ```bash
-$ mysql -h myserver4demo.mysql.database.azure.com -u myadmin@myserver4demo -p testdb < testdb_backup.sql
+$ mysql -h mydemoserver.mysql.database.azure.com -u myadmin@mydemoserver -p testdb < testdb_backup.sql
 ```
 
 ## <a name="export-using-phpmyadmin"></a>PHPMyAdmin을 사용하여 내보내기
@@ -126,4 +126,3 @@ $ mysql -h myserver4demo.mysql.database.azure.com -u myadmin@myserver4demo -p te
 
 ## <a name="next-steps"></a>다음 단계
 [Azure Database for MySQL에 응용 프로그램 연결](./howto-connection-string.md)
-

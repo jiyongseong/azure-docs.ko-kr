@@ -1,32 +1,24 @@
 ---
-title: "분할된 맵 관리자에 대한 성능 카운터"
-description: "ShardMapManager 클래스 및 데이터 종속 라우팅 성능 카운터"
+title: 분할된 맵 관리자에 대한 성능 카운터
+description: ShardMapManager 클래스 및 데이터 종속 라우팅 성능 카운터
 services: sql-database
-documentationcenter: 
-manager: jhubbard
-author: ddove
-editor: 
-ms.assetid: b090aba0-2e30-454c-96b3-dffa281f539a
+manager: craigg
+author: stevestein
 ms.service: sql-database
 ms.custom: scale out apps
-ms.workload: sql-database
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 05/23/2016
-ms.author: ddove
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: 7e5d43ca318337626734f9460780764150314f9c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
-
+ms.date: 04/01/2018
+ms.author: sstein
+ms.openlocfilehash: 017b2bfdbcff7d0971dd0aaf00a66291d7bec987
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="performance-counters-for-shard-map-manager"></a>분할된 맵 관리자에 대한 성능 카운터
 [분할된 맵 관리자](sql-database-elastic-scale-shard-map-management.md)에 대한 성능은 특히, [데이터 종속 라우팅](sql-database-elastic-scale-data-dependent-routing.md)을 사용하는 경우에 캡처할 수 있습니다. 카운터는 Microsoft.Azure.SqlDatabase.ElasticScale.Client 클래스의 메서드를 사용하여 만들 수 있습니다.  
 
-카운터는 [데이터 종속 라우팅](sql-database-elastic-scale-data-dependent-routing.md) 작업의 성능을 추적하는 데 사용됩니다. 이러한 카운터는 “탄력적 데이터베이스: 분할된 관리" 범주 아래 성능 모니터에서 액세스할 수 있습니다.
+카운터는 [데이터 종속 라우팅](sql-database-elastic-scale-data-dependent-routing.md) 작업의 성능을 추적하는 데 사용됩니다. 이러한 카운터는 “Elastic Database: 분할된 관리" 범주 아래 성능 모니터에서 액세스할 수 있습니다.
 
 **최신 버전은**[Microsoft.Azure.SqlDatabase.ElasticScale.Client](https://www.nuget.org/packages/Microsoft.Azure.SqlDatabase.ElasticScale.Client/)로 이동합니다. 참고 항목: [최신 탄력적 데이터베이스 클라이언트 라이브러리를 사용하도록 앱 업그레이드](sql-database-elastic-scale-upgrade-client-library.md).
 
@@ -50,7 +42,7 @@ ms.lasthandoff: 11/17/2016
 
 성능 카운터는 프로세스마다 각각의 캐시된 분할 맵에 생성됩니다.  
 
-## <a name="notes"></a>참고 사항
+## <a name="notes"></a>메모
 다음 이벤트는 성능 카운터 생성을 트리거합니다.  
 
 * ShardMapManager에 분할된 맵이 포함된 경우, [즉시 로드](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.aspx)를 통한 [ShardMapManager](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanagerloadpolicy.aspx) 초기화. 여기에는 [GetSqlShardMapManager](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanagerfactory.getsqlshardmapmanager.aspx?f=255&MSPPError=-2147217396#M:Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardMapManagerFactory.GetSqlShardMapManager%28System.String,Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement.ShardMapManagerLoadPolicy%29) 및 [TryGetSqlShardMapManager](https://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanagerfactory.trygetsqlshardmapmanager.aspx) 메서드가 포함됩니다.
@@ -64,11 +56,10 @@ ms.lasthandoff: 11/17/2016
 * 성능 카운터 인스턴스는 프로세스 마다 생성됩니다. 응용 프로그램 작동이 중단되거나 분할된 맵이 캐시에서 제거되면 성능 카운터 인스턴스가 삭제됩니다.  
 
 ### <a name="see-also"></a>참고 항목: 
-[탄력적 데이터베이스 기능 개요](sql-database-elastic-scale-introduction.md)  
+[Elastic Database 기능 개요](sql-database-elastic-scale-introduction.md)  
 
 [!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 
 <!--Anchors-->
 <!--Image references-->
-
 

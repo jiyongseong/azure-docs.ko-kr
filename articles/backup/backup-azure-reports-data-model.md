@@ -15,13 +15,11 @@ ms.workload: storage-backup-recovery
 ms.date: 06/26/2017
 ms.author: pajosh
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: cb4d075d283059d613e3e9d8f0a6f9448310d96b
 ms.openlocfilehash: efecbc9f1c410744f49795889c4ec3cc618f07e0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/26/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="data-model-for-azure-backup-reports"></a>Azure Backup 보고서용 데이터 모델
 이 문서에서는 Azure Backup 보고서를 만드는 데 사용되는 Power BI 데이터 모델을 설명합니다. 이 데이터 모델을 사용하여 관련 필드를 기반으로 하는 기존 보고서를 필터링할 수 있으며 무엇보다도 모델의 테이블 및 필드를 사용하여 사용자 고유의 보고서를 만들 수 있습니다. 
@@ -199,4 +197,3 @@ Azure Backup 보고서를 만들기 위해 데이터 모델을 검토한 후 Pow
 
 * [Power BI에서 보고서 만들기](https://powerbi.microsoft.com/documentation/powerbi-service-create-a-new-report/)
 * [Power BI에서 보고서 필터링](https://powerbi.microsoft.com/documentation/powerbi-service-about-filters-and-highlighting-in-reports/)
-

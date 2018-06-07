@@ -1,11 +1,11 @@
 ---
-title: "Azure IoT Hub IP 연결 필터 | Microsoft Docs"
-description: "특정 IP 주소에서 Azure IoT hub로 연결을 차단하도록 IP 필터링을 사용하는 방법입니다. 개별 또는 IP 주소 범위에서 연결을 차단할 수 있습니다."
+title: Azure IoT Hub IP 연결 필터 | Microsoft Docs
+description: 특정 IP 주소에서 Azure IoT hub로 연결을 차단하도록 IP 필터링을 사용하는 방법입니다. 개별 또는 IP 주소 범위에서 연결을 차단할 수 있습니다.
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: BeatriceOltean
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: f833eac3-5b5f-46a7-a47b-f4f6fc927f3f
 ms.service: iot-hub
 ms.devlang: na
@@ -14,15 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 05/23/2017
 ms.author: boltean
-ms.translationtype: Human Translation
-ms.sourcegitcommit: d9ae8e8948d82b9695d7d144d458fe8180294084
-ms.openlocfilehash: 85f5f044faddd5180f0c19d3f2c235b20f6373d5
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/23/2017
-
-
+ms.openlocfilehash: 0229b8b16de1fa04d953c90895b29e4fbad60ec3
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-
 # <a name="use-ip-filters"></a>IP 필터 사용
 
 보안은 Azure IoT Hub를 기반으로 하는 모든 IoT 솔루션의 중요한 측면입니다. 경우에 따라 장치가 보안 구성의 일부로 연결할 수 있는 IP 주소를 명시적으로 지정해야 합니다. _IP 필터_ 기능을 사용하면 특정 IPv4 주소에서 들어오는 트래픽을 거부하거나 수락하는 규칙을 구성할 수 있습니다.
@@ -106,7 +103,7 @@ IoT Hub의 기능을 추가로 탐색하려면 다음을 참조하세요.
 <!-- Links -->
 
 [IoT Hub developer guide]: iot-hub-devguide.md
-[Azure ExpressRoute]:  https://azure.microsoft.com/en-us/documentation/articles/expressroute-faqs/#supported-services
+[Azure ExpressRoute]:  https://azure.microsoft.com/documentation/articles/expressroute-faqs/#supported-services
 
 [lnk-monitor]: iot-hub-operations-monitoring.md
 [lnk-metrics]: iot-hub-metrics.md

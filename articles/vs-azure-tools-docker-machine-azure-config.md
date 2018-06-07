@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: multiple
 ms.date: 06/08/2016
 ms.author: mlearned
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 80be19618bd02895d953f80e5236d1a69d0811af
 ms.openlocfilehash: 766d327a87ed13e04166d71c3d9ae0a1e7a66d19
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/07/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="create-docker-hosts-in-azure-with-docker-machine"></a>Docker Machine으로 Azure에서 Docker 호스트 만들기
 [Docker](https://www.docker.com/) 컨테이너를 실행하려면 호스트 VM이 docker 데몬을 실행해야 합니다.
@@ -122,5 +120,4 @@ docker-machine을 사용하면 개별 docker 호스트 유효성 검사를 위�
 컨테이너의 프로덕션 호스팅은 [Azure 컨테이너 서비스](http://aka.ms/AzureContainerService)
 
 Visual Studio를 사용한 .NET 핵심 응용 프로그램 개발은 [Visual Studio 용 Docker 도구](http://aka.ms/DockerToolsForVS)
-
 

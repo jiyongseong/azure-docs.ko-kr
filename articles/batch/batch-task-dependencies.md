@@ -1,27 +1,25 @@
 ---
-title: "작업 의존 관계를 사용하여 다른 작업의 완료에 따라 작업 실행 - Azure 배치 | Microsoft Docs"
-description: "Azure 배치에서 MapReduce 스타일과 비슷한 빅 데이터 워크로드를 처리하기 위해 다른 작업의 완료에 종속된 작업을 만듭니다."
+title: 작업 의존 관계를 사용하여 다른 작업의 완료에 따라 작업 실행 - Azure Batch | Microsoft Docs
+description: Azure Batch에서 MapReduce 스타일과 비슷한 빅 데이터 워크로드를 처리하기 위해 다른 작업의 완료에 종속된 작업을 만듭니다.
 services: batch
 documentationcenter: .net
-author: tamram
-manager: timlt
-editor: 
+author: dlepow
+manager: jeconnoc
+editor: ''
 ms.assetid: b8d12db5-ca30-4c7d-993a-a05af9257210
 ms.service: batch
 ms.devlang: multiple
 ms.topic: article
-ms.tgt_pltfrm: vm-windows
+ms.tgt_pltfrm: ''
 ms.workload: big-compute
 ms.date: 05/22/2017
-ms.author: tamram
+ms.author: danlep
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 67ee6932f417194d6d9ee1e18bb716f02cf7605d
-ms.openlocfilehash: 465306d2de8d1dbe6ba1f0cd74be720b78a50de3
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
-
+ms.openlocfilehash: ba85e075c39251b0b3d7c4b8bc3f8d53a1afadf7
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="create-task-dependencies-to-run-tasks-that-depend-on-other-tasks"></a>작업 의존 관계를 만들어 다른 작업에 종속된 작업 실행
 
@@ -38,8 +36,8 @@ Batch 태스크 종속성을 통해 하나 이상의 상위 태스크를 완료�
 
 일대일 또는 일대다 관계에서 다른 태스크에 따라 달라지는 태스크를 만들 수 있으며, 지정된 범위의 태스크 ID 내에서 태스크 그룹이 완료되는 데 따라 태스크가 달라지는 범위 종속성을 만들 수도 있습니다. 다대다 관계를 만들기 위해 다음 세 가지 기본 시나리오를 결합할 수 있습니다.
 
-## <a name="task-dependencies-with-batch-net"></a>배치 .NET을 사용한 태스크 종속성
-이 문서에서는 [배치 .NET][net_msdn] 라이브러리를 사용하여 태스크 종속성을 구성하는 방법을 설명합니다. 먼저는 작업에서 [태스크 종속성을 사용](#enable-task-dependencies)하는 방법을 보여 주고 [종속성을 사용하여 태스크를 구성](#create-dependent-tasks)하는 방법을 설명합니다. 또한 상위 태스크가 실패하는 경우 종속 태스크를 실행하는 종속성 작동을 지정하는 방법을 설명합니다. 마지막으로 배치에서 지원되는 [종속성 시나리오](#dependency-scenarios)를 설명합니다.
+## <a name="task-dependencies-with-batch-net"></a>Batch .NET을 사용한 태스크 종속성
+이 문서에서는 [Batch .NET][net_msdn] 라이브러리를 사용하여 태스크 종속성을 구성하는 방법을 설명합니다. 먼저는 작업에서 [태스크 종속성을 사용](#enable-task-dependencies)하는 방법을 보여 주고 [종속성을 사용하여 태스크를 구성](#create-dependent-tasks)하는 방법을 설명합니다. 또한 상위 태스크가 실패하는 경우 종속 태스크를 실행하는 종속성 작동을 지정하는 방법을 설명합니다. 마지막으로 Batch에서 지원되는 [종속성 시나리오](#dependency-scenarios)를 설명합니다.
 
 ## <a name="enable-task-dependencies"></a>태스크 종속성 사용
 Batch 응용 프로그램에서 태스크 종속성을 사용하려면 먼저 작업이 태스크 종속성을 사용하도록 구성해야 합니다. Batch .NET에서 해당 [UsesTaskDependencies][net_usestaskdependencies] 속성을 `true`으로 설정하여 [CloudJob][net_cloudjob]에서 이를 사용합니다.
@@ -74,7 +72,7 @@ new CloudTask("Flowers", "cmd.exe /c echo Flowers")
 > 
 
 ## <a name="dependency-scenarios"></a>종속성 시나리오
-Azure 배치에서 사용할 수 있는 세 가지 기본 태스크 종속성 시나리오는 일대일, 일대다 및 태스크 ID 범위 종속성입니다. 네 번째 시나리오인 다대다를 제공하도록 결합될 수 있습니다.
+Azure Batch에서 사용할 수 있는 세 가지 기본 태스크 종속성 시나리오는 일대일, 일대다 및 태스크 ID 범위 종속성입니다. 네 번째 시나리오인 다대다를 제공하도록 결합될 수 있습니다.
 
 | 시나리오&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | 예 |  |
 |:---:| --- | --- |
@@ -211,7 +209,7 @@ new CloudTask("B", "cmd.exe /c echo B")
 
 ## <a name="next-steps"></a>다음 단계
 ### <a name="application-deployment"></a>응용 프로그램 배포
-배치의 [응용 프로그램 패키지](batch-application-packages.md) 기능은 계산 노드에서 태스크를 실행하는 응용 프로그램을 배포하고 버전을 관리하는 쉬운 방법을 제공합니다.
+Batch의 [응용 프로그램 패키지](batch-application-packages.md) 기능은 계산 노드에서 태스크를 실행하는 응용 프로그램을 배포하고 버전을 관리하는 쉬운 방법을 제공합니다.
 
 ### <a name="installing-applications-and-staging-data"></a>응용 프로그램 설치 및 데이터 준비
 태스크를 실행하기 위해 노드를 준비하는 방법의 개요는 Azure 배치 포럼에서 [Batch 계산 노드에서 응용 프로그램 설치 및 데이터 스테이징][forum_post]을 참조하세요. Azure Batch 팀 구성원 중 한 사람이 작성한 이 게시물은 계산 노드에 응용 프로그램, 태스크 입력 데이터 및 다른 파일을 복사하는 다른 방법에 대한 좋은 기초입니다.
@@ -239,4 +237,3 @@ new CloudTask("B", "cmd.exe /c echo B")
 [1]: ./media/batch-task-dependency/01_one_to_one.png "다이어그램: 일대일 종속성"
 [2]: ./media/batch-task-dependency/02_one_to_many.png "다이어그램: 일대다 종속성"
 [3]: ./media/batch-task-dependency/03_task_id_range.png "다이어그램: 태스크 ID 범위 종속성"
-

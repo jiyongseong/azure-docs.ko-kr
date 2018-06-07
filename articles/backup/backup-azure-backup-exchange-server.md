@@ -11,14 +11,14 @@ ms.service: backup
 ms.workload: storage-backup-recovery
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 11/28/2016
+ms.topic: troubleshooting
+ms.date: 09/08/2017
 ms.author: masaran;jimpark;delhan;trinadhk;markgal
-translationtype: Human Translation
-ms.sourcegitcommit: 219dcbfdca145bedb570eb9ef747ee00cc0342eb
-ms.openlocfilehash: 2ee4bfa8c7dce45c6366ddc8aa6e723fe91431a7
-
-
+ms.openlocfilehash: 9dc0105034e0d354a6cbbd7ba70634bdff83c1bd
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="back-up-an-exchange-server-to-azure-backup-with-system-center-2012-r2-dpm"></a>System Center 2012 R2 DPM을 사용하여 Azure 백업에 Exchange 서버 백업
 이 문서에서는 System Center 2012 R2 Data Protection Manager(DPM) 서버를 구성하여 Azure 백업에 Microsoft Exchange server를 백업하는 방법을 설명합니다.  
@@ -66,7 +66,7 @@ Exchange 서버에서 DPM 보호 에이전트를 설치하려면 다음 이 단�
 
    * 디스크를 사용하여 단기 보호를 하려고 합니다.
    * 온라인 보호를 사용하려고 합니다.
-6. **Next**를 클릭합니다.
+6. **다음**을 누릅니다.
 7. Exchange Server 데이터베이스의 무결성을 확인하려는 경우 **Eseutil 실행하여 데이터 무결성 확인** 옵션을 선택합니다.
 
     이 옵션을 선택한 후에 Exchange 서버에서 **eseutil** 명령을 실행하여 생성되는 I/O 트래픽을 방지하기 위해 백업 일관성 확인 작업이 DPM 서버에서 실행됩니다.
@@ -76,7 +76,7 @@ Exchange 서버에서 DPM 보호 에이전트를 설치하려면 다음 이 단�
    > ![eseutil 오류](./media/backup-azure-backup-exchange-server/eseutil-error.png)
    >
    >
-8. **다음**을 클릭합니다.
+8. **다음**을 누릅니다.
 9. **복사 백업**에 대한 데이터베이스를 선택하고 **다음**을 클릭합니다.
 
    > [!NOTE]
@@ -125,9 +125,3 @@ Exchange 서버에서 DPM 보호 에이전트를 설치하려면 다음 이 단�
 
 ## <a name="next-steps"></a>다음 단계
 * [Azure 백업 - FAQ](backup-azure-backup-faq.md)
-
-
-
-<!--HONumber=Nov16_HO3-->
-
-

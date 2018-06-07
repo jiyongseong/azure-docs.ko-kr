@@ -1,26 +1,25 @@
 ---
-title: "iothub-explorer를 사용하여 Azure IoT 장치 관리 | Microsoft Docs"
-description: "Direct 메서드와 Twin의 desired 속성 관리 옵션을 제공하는 iothub-explorer CLI 도구를 사용하여 Azure IoT Hub 장치를 관리합니다."
+title: iothub-explorer를 사용하여 Azure IoT 장치 관리 | Microsoft Docs
+description: Direct 메서드와 Twin의 desired 속성 관리 옵션을 제공하는 iothub-explorer CLI 도구를 사용하여 Azure IoT Hub 장치를 관리합니다.
 services: iot-hub
-documentationcenter: 
-author: shizn
+documentationcenter: ''
+author: rangv
 manager: timlt
-tags: 
-keywords: "Azure IoT 장치 관리, Azure IoT Hub 장치 관리, 장치 관리 IoT, IoT Hub 장치 관리"
+tags: ''
+keywords: Azure IoT 장치 관리, Azure IoT Hub 장치 관리, 장치 관리 IoT, IoT Hub 장치 관리
 ms.assetid: b34f799a-fc14-41b9-bf45-54751163fffe
 ms.service: iot-hub
 ms.devlang: arduino
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 07/12/2017
-ms.author: xshi
+ms.date: 4/11/2018
+ms.author: rangv
+ms.openlocfilehash: 26e08c3d6b1c96e2d508c87f188118aec02bab6a
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 5b7a5057bdfb5920fbb5759bed1f5561cfa1d7e0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="use-iothub-explorer-for-azure-iot-hub-device-management"></a>iothub-explorer를 사용하여 Azure IoT Hub 장치 관리
 
@@ -30,8 +29,10 @@ ms.lasthandoff: 07/21/2017
 
 [iothub-explorer](https://github.com/azure/iothub-explorer)는 호스트 컴퓨터에서 실행하여 IoT Hub 레지스트리의 장치 ID를 관리하는 CLI 도구입니다. 다양한 작업을 수행하는 데 사용할 수 있는 관리 옵션이 제공됩니다.
 
-| 관리 옵션          | 작업                                                                                                                            |
-|----------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+[!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-whole.md)]
+
+| 관리 옵션          | Task                                                                                                                            |
+|----------------------------|------------------------------------------------------------------------------------------------------------------------------|
 | 직접 메서드             | 메시지 보내기 시작 또는 중지, 장치 다시 부팅 등의 장치 작업을 수행합니다.                                        |
 | Twin desired 속성    | 장치를 특정 상태(예: LED를 녹색으로 설정 또는 원격 분석 전송 간격을 30 분으로 설정)로 지정합니다.         |
 | Twin reported 속성   | 장치의 보고된 상태를 가져옵니다. 예를 들어 장치에서 지금 LED가 깜박이고 있다고 보고합니다.                                    |
@@ -41,8 +42,7 @@ ms.lasthandoff: 07/21/2017
 
 이러한 옵션을 사용하는 방법에 대한 차이점과 지침에 대한 자세한 내용은 [장치-클라우드 통신 지침](iot-hub-devguide-d2c-guidance.md) 및 [클라우드-장치 통신 지침](iot-hub-devguide-c2d-guidance.md)을 참조하세요.
 
-> [!NOTE]
-> 장치 쌍은 장치의 상태 정보(메타데이터, 상태 및 조건)를 저장하는 JSON 문서입니다. IoT Hub는 여기에 연결하는 각 장치에 대해 하나의 장치 쌍을 유지합니다. 장치 쌍에 대한 자세한 내용은 [장치 쌍 시작](iot-hub-node-node-twin-getstarted.md)을 참조하세요.
+장치 쌍은 장치의 상태 정보(메타데이터, 상태 및 조건)를 저장하는 JSON 문서입니다. IoT Hub는 여기에 연결하는 각 장치에 대해 하나의 장치 쌍을 유지합니다. 장치 쌍에 대한 자세한 내용은 [장치 쌍 시작](iot-hub-node-node-twin-getstarted.md)을 참조하세요.
 
 ## <a name="what-you-learn"></a>학습 내용
 
@@ -55,9 +55,9 @@ ms.lasthandoff: 07/21/2017
 ## <a name="what-you-need"></a>필요한 항목
 
 - 다음 요구 사항을 다루는 자습서 [장치 설정](iot-hub-raspberry-pi-kit-node-get-started.md) 완료:
-  - 활성 Azure 구독.
-  - 구독 중인 Azure IoT Hub
-  - 메시지를 Azure IoT Hub로 보내는 클라이언트 응용 프로그램
+- 활성 Azure 구독.
+- 구독 중인 Azure IoT Hub
+- 메시지를 Azure IoT Hub로 보내는 클라이언트 응용 프로그램
 - 이 자습서를 진행하는 동안 장치가 클라이언트 응용 프로그램을 사용해서 실행되고 있어야 합니다.
 - iothub-explorer, 개발 컴퓨터에 [iothub-explorer를 설치](https://github.com/azure/iothub-explorer)합니다.
 
@@ -115,7 +115,6 @@ iothub-explorer get-twin <your device id>
 
 ```bash
 iothub-explorer update-twin <your device id> "{\"tags\":{\"role\":\"temperature&humidity\"}}"
-
 ```
 
 ## <a name="use-iothub-explorer-with-cloud-to-device-messages"></a>클라우드-장치 메시지로 iothub-explorer 사용
@@ -147,4 +146,3 @@ iothub-explorer query-twin "SELECT * FROM devices WHERE tags.role != 'temperatur
 다양한 관리 옵션으로 iothub-explorer를 사용하는 방법을 알아보았습니다.
 
 [!INCLUDE [iot-hub-get-started-next-steps](../../includes/iot-hub-get-started-next-steps.md)]
-

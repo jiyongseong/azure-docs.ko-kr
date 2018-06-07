@@ -1,0 +1,21 @@
+- name: OpenShift 설명서
+  href: index.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: 'OpenShift: 커뮤니티 템플릿'
+      href: 'https://azure.microsoft.com/en-us/resources/templates/openshift-origin-rhel/'
+- name: 자습서
+  items:
+    - name: Azure VM으로 배포
+      href: /azure/virtual-machines/linux/openshift-get-started
+- name: 리소스
+  items:
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: OpenShift 컨테이너 템플릿
+      href: 'https://github.com/Microsoft/openshift-container-platform'
+    - name: OpenShift Origin
+      href: 'https://docs.openshift.org/latest/getting_started/index.html'
+    - name: OpenShift 사이트
+      href: 'https://docs.openshift.org/latest/welcome/index.html'

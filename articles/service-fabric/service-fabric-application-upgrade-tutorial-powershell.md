@@ -1,25 +1,25 @@
 ---
-title: "PowerShell을 사용하여 Service Fabric 앱 업그레이드 | Microsoft Docs"
-description: "이 문서는 PowerShell을 사용하여 서비스 패브릭 응용 프로그램의 배포, 코드 변경, 업그레이드 롤아웃 환경을 안내합니다."
+title: PowerShell을 사용하여 Service Fabric 앱 업그레이드 | Microsoft Docs
+description: 이 문서는 PowerShell을 사용하여 서비스 패브릭 응용 프로그램의 배포, 코드 변경, 업그레이드 롤아웃 환경을 안내합니다.
 services: service-fabric
 documentationcenter: .net
 author: mani-ramaswamy
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 9bc75748-96b0-49ca-8d8a-41fe08398f25
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 7/27/2017
+ms.date: 2/23/2018
 ms.author: subramar
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: c685deaa008cfdba5971cef4cfc7dfa41b1df64d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
+ms.openlocfilehash: 44f4dc3a9c876e383a6e4df8ef5f467f2b93eaa9
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
+ms.locfileid: "34205487"
 ---
 # <a name="service-fabric-application-upgrade-using-powershell"></a>PowerShell을 사용하여 서비스 패브릭 응용 프로그램 업그레이드
 > [!div class="op_single_selector"]
@@ -39,16 +39,16 @@ ms.lasthandoff: 04/27/2017
 </a></center>
 
 ## <a name="step-1-build-and-deploy-the-visual-objects-sample"></a>1단계: 시각적 개체 샘플 빌드 및 배포
-응용 프로그램 프로젝트 **VisualObjectsApplication,**을 마우스 오른쪽 단추로 클릭하고 **게시** 명령을 선택하여 응용 프로그램을 빌드 및 게시합니다.  자세한 내용은 [서비스 패브릭 응용 프로그램 업그레이드 자습서](service-fabric-application-upgrade-tutorial.md)를 참조하세요.  또는 PowerShell을 사용하여 응용 프로그램을 배포할 수 있습니다.
+응용 프로그램 프로젝트 **VisualObjectsApplication,** 을 마우스 오른쪽 단추로 클릭하고 **게시** 명령을 선택하여 응용 프로그램을 빌드 및 게시합니다.  자세한 내용은 [서비스 패브릭 응용 프로그램 업그레이드 자습서](service-fabric-application-upgrade-tutorial.md)를 참조하세요.  또는 PowerShell을 사용하여 응용 프로그램을 배포할 수 있습니다.
 
 > [!NOTE]
 > 어떤 서비스 패브릭 명령이 PowerShell에서 사용되기 전에 `Connect-ServiceFabricCluster` cmdlet을 사용하여 클러스터에 처음 연결해야 합니다. 마찬가지로, 클러스터는 로컬 컴퓨터에 이미 설치된 것으로 간주됩니다. [서비스 패브릭 개발 환경 설정](service-fabric-get-started.md)문서를 참조하십시오.
 > 
 > 
 
-Visual Studio에서 프로젝트를 빌드한 후, PowerShell 명령 [Copy-ServiceFabricApplicationPackage](/powershell/servicefabric/vlatest/copy-servicefabricapplicationpackage) 를 사용하여 응용 프로그램 패키지를 ImageStore에 복사합니다. 앱 패키지를 로컬로 확인하려는 경우 [Test-ServiceFabricApplicationPackage](/powershell/servicefabric/vlatest/test-servicefabricapplicationpackage) cmdlet을 사용합니다. 다음 단계는 [Register-ServiceFabricApplicationPackage](/powershell/servicefabric/vlatest/register-servicefabricapplicationtype) cmdlet을 사용하여 서비스 패브릭 런타임에 응용 프로그램을 등록하는 것입니다. 마지막 단계로, [New-ServiceFabricApplication](/powershell/module/servicefabric/new-servicefabricapplication?view=azureservicefabricps) cmdlet을 사용하여 응용 프로그램의 인스턴스를 시작합니다.  이 세 단계는 Visual Studio의 **배포** 메뉴를 사용하는 것과 유사합니다.
+Visual Studio에서 프로젝트를 빌드한 후, PowerShell 명령 [Copy-ServiceFabricApplicationPackage](/powershell/servicefabric/vlatest/copy-servicefabricapplicationpackage) 를 사용하여 응용 프로그램 패키지를 ImageStore에 복사합니다. 앱 패키지를 로컬로 확인하려는 경우 [Test-ServiceFabricApplicationPackage](/powershell/servicefabric/vlatest/test-servicefabricapplicationpackage) cmdlet을 사용합니다. 다음 단계는 [Register-ServiceFabricApplicationType](/powershell/servicefabric/vlatest/register-servicefabricapplicationtype) cmdlet을 사용하여 서비스 패브릭 런타임에 응용 프로그램을 등록하는 것입니다. 다음 단계로, [New-ServiceFabricApplication](/powershell/module/servicefabric/new-servicefabricapplication?view=azureservicefabricps) cmdlet을 사용하여 응용 프로그램의 인스턴스를 시작합니다.  이 세 단계는 Visual Studio의 **배포** 메뉴를 사용하는 것과 유사합니다.  프로비전이 완료되면 리소스 소비를 줄이기 위해 이미지 저장소에서 복사된 응용 프로그램 패키지를 정리해야 합니다.  같은 이유로, 응용 프로그램 형식이 더 이상 필요하지 않은 경우 등록 해제해야 합니다. 자세한 내용은 [PowerShell을 사용하여 응용 프로그램 배포 및 제거](service-fabric-application-upgrade-tutorial-powershell.md)를 참조하세요.
 
-이제 [클러스터 및 응용 프로그램을 보는 서비스 패브릭 탐색기](service-fabric-visualizing-your-cluster.md)를 사용할 수 있습니다. 응용 프로그램에는 웹 서비스가 있으며, Internet Explorer 주소 표시줄에 [http://localhost:8081/visualobjects](http://localhost:8081/visualobjects) 를 입력하여 웹 서비스로 이동할 수 있습니다.  화면에서 일부 부동 시각적 개체가 움직이는 것을 볼 수 있을 것입니다.  또한 [Get-ServiceFabricApplication](/powershell/module/servicefabric/get-servicefabricapplication?view=azureservicefabricps) 을 사용하여 응용 프로그램 상태를 확인할 수 있습니다.
+이제 [클러스터 및 응용 프로그램을 보는 서비스 패브릭 탐색기](service-fabric-visualizing-your-cluster.md)를 사용할 수 있습니다. 응용 프로그램에는 웹 서비스가 있으며, Internet Explorer 주소 표시줄에 [http://localhost:8081/visualobjects](http://localhost:8081/visualobjects)를 입력하여 웹 서비스로 이동할 수 있습니다.  화면에서 일부 부동 시각적 개체가 움직이는 것을 볼 수 있을 것입니다.  또한 [Get-ServiceFabricApplication](/powershell/module/servicefabric/get-servicefabricapplication?view=azureservicefabricps) 을 사용하여 응용 프로그램 상태를 확인할 수 있습니다.
 
 ## <a name="step-2-update-the-visual-objects-sample"></a>2단계: 시각적 개체 샘플 업데이트
 1단계에서에서 배포된 버전에서 알 수 있듯이 시각적 개체는 회전하지 않습니다. 이 응용 프로그램을 시각적 개체도 회전하도록 업그레이드하겠습니다.
@@ -73,7 +73,6 @@ VisualObjects 솔루션에서 VisualObjects.ActorService 프로젝트를 선택�
 
  <ServiceManifestRefServiceManifestName="VisualObjects.ActorService" ServiceManifestVersion="2.0" />
 ```
-
 
 이제 **ActorService** 프로젝트를 선택하고 마우스 오른쪽 단추를 클릭한 후 Visual Studio에서 **Build** 옵션을 선택하여 프로젝트를 빌드합니다. **모두 다시 빌드**를 선택한 경우 코드가 변경되었으므로 모든 프로젝트의 버전을 업데이트해야 합니다. 다음으로, ***VisualObjectsApplication***을 마우스 오른쪽 단추로 클릭하고 서비스 패브릭 메뉴를 선택한 후 **패키지**를 선택하여 업데이트된 응용 프로그램을 패키지해봅시다. 이 작업을 수행하면 배포 가능한 응용 프로그램 패키지가 만들어집니다.  업데이트된 응용 프로그램의 배포 준비가 되었습니다.
 
@@ -100,8 +99,7 @@ UpgradeTimeout = 3000
 이제 업데이트된 응용 프로그램 패키지를 서비스 패브릭 ImageStore(서비스 패브릭에 의해 응용 프로그램 패키지가 저장된 곳)에 복사합니다. 매개 변수 *ApplicationPackagePathInImageStore* 는 서비스 패브릭에 응용 프로그램 패키지를 찾을 수 있는 위치를 알립니다. 다음 명령으로 업데이트된 응용 프로그램을 "VisualObjects\_V2"에 저장하였습니다(경로를 다시 적절하게 수정해야 할 수 있습니다).
 
 ```powershell
-Copy-ServiceFabricApplicationPackage  -ApplicationPackagePath .\Samples\Services\Stateful\VisualObjects\VisualObjects\obj\x64\Debug\Package
--ImageStoreConnectionString fabric:ImageStore   -ApplicationPackagePathInImageStore "VisualObjects\_V2"
+Copy-ServiceFabricApplicationPackage -ApplicationPackagePath .\Samples\Services\Stateful\VisualObjects\VisualObjects\obj\x64\Debug\Package -ApplicationPackagePathInImageStore "VisualObjects\_V2"
 ```
 
 다음 단계에서는 Service Fabric으로 이 응용 프로그램을 등록하는 것이며, [Register-ServiceFabricApplicationType](/powershell/module/servicefabric/register-servicefabricapplicationtype?view=azureservicefabricps) 명령을 사용하여 수행할 수 있습니다.
@@ -111,6 +109,12 @@ Register-ServiceFabricApplicationType -ApplicationPathInImageStore "VisualObject
 ```
 
 위 명령이 실패하면 모든 서비스를 다시 빌드해야 할 가능성이 높습니다. 2단계에서 언급했듯이 WebService 버전도 업데이트해야 합니다.
+
+응용 프로그램이 성공적으로 등록된 후에는 응용 프로그램 패키지를 제거하는 것이 좋습니다.  이미지 저장소에서 응용 프로그램 패키지를 삭제하면 시스템 리소스가 해제됩니다.  사용되지 않는 응용 프로그램 패키지를 그대로 두면 디스크 저장소를 소비하고 응용 프로그램 성능 문제로 이어집니다.
+
+```powershell
+Remove-ServiceFabricApplicationPackage -ApplicationPackagePathInImageStore "VisualObjects\_V2" -ImageStoreConnectionString fabric:ImageStore
+```
 
 ## <a name="step-5-start-the-application-upgrade"></a>5단계: 응용 프로그램 업그레이드 시작
 이제 [Start-ServiceFabricApplicationUpgrade](/powershell/module/servicefabric/start-servicefabricapplicationupgrade?view=azureservicefabricps) 명령을 사용하여 응용 프로그램 업그레이드를 시작할 수 있습니다.
@@ -142,5 +146,4 @@ Get-ServiceFabricApplicationUpgrade fabric:/VisualObjects
 [고급 항목](service-fabric-application-upgrade-advanced.md)을 참조하여 응용 프로그램을 업그레이드하는 동안 고급 기능을 사용하는 방법에 대해 알아봅니다.
 
 [응용 프로그램 업그레이드 문제 해결](service-fabric-application-upgrade-troubleshooting.md)의 단계를 참조하여 응용 프로그램 업그레이드 중 발생하는 일반적인 문제를 해결합니다.
-
 

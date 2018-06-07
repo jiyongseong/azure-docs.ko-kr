@@ -3,7 +3,7 @@
 
 1. Mobile Engagement 포털로 이동합니다. 올바른 위치에 있는지 확인하고 맨 아래에서 **연결** 단추를 클릭합니다.
    
-    ![](./media/mobile-engagement-ios-send-push/engage-button.png)
+    ![](./media/mobile-engagement-create-app-in-portal-new/engage-button.png)
 2. Engagement 포털에서 **설정** 페이지를 클릭합니다. 여기에서 **네이티브 푸시** 섹션을 클릭하여 p12 인증서를 업로드합니다.
    
     ![](./media/mobile-engagement-ios-send-push/engagement-portal.png)

@@ -1,9 +1,9 @@
 ---
-title: "Azure Application Insights 원격 분석 데이터 모델 - 이벤트 원격 분석 | Microsoft 문서"
-description: "이벤트 원격 분석을 위한 Azure Application Insights 데이터 모델"
+title: Azure Application Insights 원격 분석 데이터 모델 - 이벤트 원격 분석 | Microsoft 문서
+description: 이벤트 원격 분석을 위한 Azure Application Insights 데이터 모델
 services: application-insights
 documentationcenter: .net
-author: SergeyKanzhelev
+author: mrbullwinkle
 manager: carmonm
 ms.service: application-insights
 ms.workload: TBD
@@ -11,13 +11,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: multiple
 ms.topic: article
 ms.date: 04/25/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: 1cad3594be32e59ea6bd3d3ba2289d391bd92c0b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
+ms.author: mbullwin; sergkanz
+ms.openlocfilehash: 4f6b5c35b65b4aff2dbe8dafbb2eb07d75c2382a
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
 # <a name="event-telemetry-application-insights-data-model"></a>이벤트 원격 분석: Application Insights 데이터 모델
 
@@ -25,7 +24,7 @@ ms.lasthandoff: 04/27/2017
 
 의미상 이벤트는 요청과 상호 관련되거나 그렇지 않을 수 있습니다. 하지만 제대로 사용될 경우 이벤트 원격 분석은 요청이나 추적보다 더 중요합니다. 이벤트는 비즈니스 원격 분석을 나타내며, 별도의 덜 공격적인 [샘플링](app-insights-api-filtering-sampling.md)의 대상이어야 합니다.
 
-## <a name="name"></a>이름
+## <a name="name"></a>Name
 
 이벤트 이름입니다. 적절한 그룹화 및 유용한 메트릭을 허용하려면 적은 수의 별도 이벤트 이름을 생성하도록 응용 프로그램을 제한합니다. 예를 들어 생성된 이벤트 인스턴스마다 별도의 이름을 사용하지 않습니다.
 
@@ -44,4 +43,3 @@ ms.lasthandoff: 04/27/2017
 - Application Insights 형식 및 데이터 모델에 대한 자세한 내용은 [데이터 모델](application-insights-data-model.md)을 참조하세요.
 - [사용자 지정 이벤트 원격 분석을 작성합니다](app-insights-api-custom-events-metrics.md#trackevent).
 - Application Insights에서 지원되는 [플랫폼](app-insights-platforms.md)을 확인합니다.
-

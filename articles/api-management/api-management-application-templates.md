@@ -3,7 +3,7 @@ title: "Azure API Management의 응용 프로그램 템플릿 | Microsoft Docs"
 description: "Azure API Management의 개발자 포털에서 응용 프로그램 페이지의 콘텐츠를 사용자 지정하는 방법을 알아봅니다."
 services: api-management
 documentationcenter: 
-author: miaojiang
+author: vladvino
 manager: erikre
 editor: 
 ms.assetid: f3122c4d-e10e-4cdf-977b-36e8f4133fc8
@@ -14,10 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/09/2017
 ms.author: apimpm
-translationtype: Human Translation
-ms.sourcegitcommit: 77fd7b5b339a8ede8a297bec96f91f0a243cc18d
-ms.openlocfilehash: df71d6d36949f457ad95576e37ae3da2fef7d4d7
-
+ms.openlocfilehash: 40a4d159afff4db78e27f89b448e21b1d94cd378
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="application-templates-in-azure-api-management"></a>Azure API Management의 응용 프로그램 템플릿
 Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사용하여 개발자 포털 페이지의 콘텐츠를 사용자 지정하는 기능을 제공합니다. 이러한 템플릿에서 [DotLiquid](http://dotliquidmarkup.org/) 구문 및 [DotLiquid for Designers](https://github.com/dotliquid/dotliquid/wiki/DotLiquid-for-Designers) 및 제공된 지역화 [String 리소스](api-management-template-resources.md#strings), [Glyph 리소스](api-management-template-resources.md#glyphs) 및 [Page 컨트롤](api-management-page-controls.md)의 집합과 같은 선택한 편집기를 사용하여 필요에 따라 페이지 콘텐츠를 유연하게 구성할 수 있습니다.  
@@ -31,7 +32,7 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 > [!NOTE]
 >  다음 문서에는 샘플 기본 템플릿이 포함되어 있지만 지속적인 향상으로 인해 변경될 수 있습니다. 원하는 개별 템플릿으로 이동하여 개발자 포털에서 라이브 기본 템플릿을 볼 수 있습니다. 템플릿 작업에 대한 자세한 내용은 [템플릿을 사용하여 API Management 개발자 포털을 사용자 지정하는 방법](https://azure.microsoft.com/documentation/articles/api-management-developer-portal-templates/)을 참조하세요.  
   
-##  <a name="a-nameproductlista-application-list"></a><a name="ProductList"></a> 응용 프로그램 목록  
+##  <a name="ProductList"></a> 응용 프로그램 목록  
  **응용 프로그램 목록** 템플릿을 사용하여 개발자 포털에서 응용 프로그램 목록 페이지의 본문을 사용자 지정할 수 있습니다.  
   
  ![응용 프로그램 목록 페이지 개발자 포털 템플릿](./media/api-management-application-templates/APIM-Application-List-Page-Developer-Portal-Templates.png "APIM 응용 프로그램 목록 페이지 개발자 포털 템플릿")  
@@ -71,11 +72,11 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 ### <a name="controls"></a>컨트롤  
  `Product list` 템플릿에서 다음 [페이지 컨트롤](api-management-page-controls.md)을 사용할 수 있습니다.  
   
--   [페이징 컨트롤](api-management-page-controls.md#paging-control)  
+-   [paging-control](api-management-page-controls.md#paging-control)  
   
 ### <a name="data-model"></a>데이터 모델  
   
-|속성|유형|설명|  
+|속성|형식|설명|  
 |--------------|----------|-----------------|  
 |페이징|[페이징](api-management-template-data-model-reference.md#Paging) 엔터티입니다.|응용 프로그램 컬렉션에 대한 페이징 정보입니다.|  
 |응용 프로그램|[응용 프로그램](api-management-template-data-model-reference.md#Application) 엔터티의 컬렉션입니다.|현재 사용자에게 표시되는 응용 프로그램입니다.|  
@@ -132,7 +133,7 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 }  
 ```  
   
-##  <a name="a-nameapplicationa-application"></a><a name="Application"></a> 응용 프로그램  
+##  <a name="Application"></a> 응용 프로그램  
  **응용 프로그램** 템플릿을 사용하여 개발자 포털에서 응용 프로그램 페이지의 본문을 사용자 지정할 수 있습니다.  
   
  ![응용 프로그램 페이지 개발자 포털 템플릿](./media/api-management-application-templates/APIM-Application-Page-Developer-Portal-Templates.png "APIM 응용 프로그램 페이지 개발자 포털 템플릿")  
@@ -220,8 +221,3 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 
 ## <a name="next-steps"></a>다음 단계
 템플릿 작업에 대한 자세한 내용은 [템플릿을 사용하여 API Management 개발자 포털을 사용자 지정하는 방법](api-management-developer-portal-templates.md)을 참조하세요.
-
-
-<!--HONumber=Jan17_HO2-->
-
-

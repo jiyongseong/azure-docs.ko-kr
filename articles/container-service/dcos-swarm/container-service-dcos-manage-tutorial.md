@@ -1,29 +1,20 @@
 ---
-title: "Azure Container Service 자습서 - DC/OS 관리 | Microsoft Docs"
-description: "Azure Container Service 자습서 - DC/OS 관리"
+title: Azure Container Service 자습서 - DC/OS 관리
+description: Azure Container Service 자습서 - DC/OS 관리
 services: container-service
-documentationcenter: 
 author: neilpeterson
-manager: timlt
-editor: 
-tags: acs, azure-container-service
-keywords: "Docker, 컨테이너, 마이크로 서비스, Kubernetes, DC/OS, Azure"
-ms.assetid: 
+manager: jeconnoc
 ms.service: container-service
-ms.devlang: azurecli
-ms.topic: sample
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 07/17/2017
+ms.topic: tutorial
+ms.date: 02/26/2018
 ms.author: nepeters
+ms.custom: mvc
+ms.openlocfilehash: 1c06605db3044234f6171d8b784bafb7e7ce759e
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: bfd49ea68c597b109a2c6823b7a8115608fa26c3
-ms.openlocfilehash: 2b4ebe3d026b38916dd127312ad684b7c973ac0d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-
 # <a name="azure-container-service-tutorial---manage-dcos"></a>Azure Container Service 자습서 - DC/OS 관리
 
 DC/OS는 컨테이너화된 최신 응용 프로그램 실행을 위한 분산 플랫폼을 제공합니다. Azure Container Service를 통해 프로덕션이 준비된 DC/OS 클러스터를 프로비전하는 작업은 간단하고 빠릅니다. 이 빠른 시작에서는 DC/OS 클러스터를 배포하고 기본 워크로드를 실행하는 데 필요한 기본 단계를 자세히 설명합니다.
@@ -42,15 +33,15 @@ DC/OS는 컨테이너화된 최신 응용 프로그램 실행을 위한 분산 �
 
 ## <a name="create-dcos-cluster"></a>DC/OS 클러스터 만들기
 
-먼저 [az group create](/cli/azure/group#create) 명령을 사용하여 리소스 그룹을 만듭니다. Azure 리소스 그룹은 Azure 리소스가 배포 및 관리되는 논리적 컨테이너입니다. 
+먼저 [az group create](/cli/azure/group#az_group_create) 명령을 사용하여 리소스 그룹을 만듭니다. Azure 리소스 그룹은 Azure 리소스가 배포 및 관리되는 논리적 컨테이너입니다. 
 
-다음 예제에서는 *eastus* 위치에 *myResourceGroup*이라는 리소스 그룹을 만듭니다.
+다음 예제에서는 *westeurope* 위치에 *myResourceGroup*이라는 리소스 그룹을 만듭니다.
 
 ```azurecli
-az group create --name myResourceGroup --location eastus
+az group create --name myResourceGroup --location westeurope
 ```
 
-다음으로 [az acs create](/cli/azure/acs#create) 명령을 사용하여 DC/OS 클러스터를 만듭니다.
+다음으로 [az acs create](/cli/azure/acs#az_acs_create) 명령을 사용하여 DC/OS 클러스터를 만듭니다.
 
 다음 예제에서는 *myDCOSCluster*라는 DC/OS 클러스터를 만들고 SSH 키가 없는 경우 이 키를 만듭니다. 특정 키 집합을 사용하려면 `--ssh-key-value` 옵션을 사용합니다.  
 
@@ -248,13 +239,13 @@ az network public-ip list --resource-group myResourceGroup --query "[?contains(n
 
 이전의 예에서 응용 프로그램은 여러 인스턴스로 확장되었습니다. 더 많거나 적은 계산 수용작업량을 제공하도록 DC/OS 인프라를 확장할 수도 있습니다. 그러려면 [az acs scale]() 명령을 사용합니다. 
 
-DC/OS 에이전트의 현재 수를 보려면 [az acs show](/cli/azure/acs#show) 명령을 사용합니다.
+DC/OS 에이전트의 현재 수를 보려면 [az acs show](/cli/azure/acs#az_acs_show) 명령을 사용합니다.
 
 ```azurecli
 az acs show --resource-group myResourceGroup --name myDCOSCluster --query "agentPoolProfiles[0].count"
 ```
 
-개수를 5로 늘리려면 [az acs scale](/cli/azure/acs#scale) 명령을 사용합니다. 
+개수를 5로 늘리려면 [az acs scale](/cli/azure/acs#az_acs_scale) 명령을 사용합니다. 
 
 ```azurecli
 az acs scale --resource-group myResourceGroup --name myDCOSCluster --new-agent-count 5
@@ -262,7 +253,7 @@ az acs scale --resource-group myResourceGroup --name myDCOSCluster --new-agent-c
 
 ## <a name="delete-dcos-cluster"></a>DC/OS 클러스터 삭제
 
-더 이상 필요하지 않은 경우 [az group delete](/cli/azure/group#delete) 명령을 사용하여 리소스 그룹, DC/OS 클러스터 및 모든 관련된 리소스를 제거할 수 있습니다.
+더 이상 필요하지 않은 경우 [az group delete](/cli/azure/group#az_group_delete) 명령을 사용하여 리소스 그룹, DC/OS 클러스터 및 모든 관련된 리소스를 제거할 수 있습니다.
 
 ```azurecli 
 az group delete --name myResourceGroup --no-wait

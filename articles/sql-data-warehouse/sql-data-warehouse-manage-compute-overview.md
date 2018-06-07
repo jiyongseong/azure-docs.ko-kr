@@ -1,49 +1,37 @@
 ---
-title: "Azure SQL Data Warehouse의 계산 능력 관리(개요) | Microsoft Docs"
-description: "Azure SQL 데이터 웨어하우스의 성능 확장 기능입니다. 또는 DWU를 조정하거나 계산 리소스를 일지 중지한 다음 다시 시작하여 비용을 절감합니다."
+title: Azure SQL Data Warehouse에서 계산 리소스 관리 | Microsoft Docs
+description: Azure SQL Data Warehouse의 성능 확장 기능을 알아봅니다. DWU를 조정하여 확장하거나 데이터 웨어하우스를 일시 중지하여 비용을 절약합니다.
 services: sql-data-warehouse
-documentationcenter: NA
-author: hirokib
-manager: johnmac
-editor: 
-ms.assetid: e13a82b0-abfe-429f-ac3c-f2b6789a70c6
+author: kevinvngo
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: manage
-ms.date: 03/22/2017
-ms.author: elbutter
-translationtype: Human Translation
-ms.sourcegitcommit: 785d3a8920d48e11e80048665e9866f16c514cf7
-ms.openlocfilehash: abe22f542a79714f6e894870872ee6b76ffe7633
-ms.lasthandoff: 04/12/2017
-
-
+ms.topic: conceptual
+ms.component: manage
+ms.date: 04/17/2018
+ms.author: kevin
+ms.reviewer: igorstan
+ms.openlocfilehash: ca6d34d3b670bfd05a9b65fe9e6b260120e3a5b8
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
-# <a name="manage-compute-power-in-azure-sql-data-warehouse-overview"></a>Azure SQL 데이터 웨어하우스의 계산 능력 관리(개요)
-> [!div class="op_single_selector"]
-> * [개요](sql-data-warehouse-manage-compute-overview.md)
-> * [포털](sql-data-warehouse-manage-compute-portal.md)
-> * [PowerShell](sql-data-warehouse-manage-compute-powershell.md)
-> * [REST (영문)](sql-data-warehouse-manage-compute-rest-api.md)
-> * [TSQL](sql-data-warehouse-manage-compute-tsql.md)
->
->
+# <a name="manage-compute-in-azure-sql-data-warehouse"></a>Azure SQL Data Warehouse의 계산 관리
+Azure SQL Data Warehouse에서 계산 리소스를 관리하는 방법에 대해 알아봅니다. 데이터 웨어하우스를 일시 중지하여 비용을 절약하거나 성능 요구 사항에 맞게 데이터 웨어하우스의 크기를 조정합니다. 
 
-SQL 데이터 웨어하우스는 저장소와 계산을 분리하여 각각의 성능을 독립적으로 조정할 수 있습니다. 따라서 데이터 양에 관계 없이 성능 요구 사항에 맞게 계산을 확장할 수 있습니다. 이 아키텍처의 자연스러운 결과는 계산 및 저장소에 대한 [청구][billed]가 분리되어 있다는 것입니다. 
+## <a name="what-is-compute-management"></a>계산 관리란?
+SQL Data Warehouse는 저장소와 계산을 분리하여 각각의 성능을 독립적으로 조정할 수 있습니다. 이에 따라 데이터 저장소와는 관계없이 성능 요구 사항에 맞게 계산의 크기를 조정할 수 있습니다. 또한 계산 리소스를 일시 중지했다가 다시 시작할 수도 있습니다. 이 아키텍처의 당연한 결과는 계산 및 저장소에 대한 [청구](https://azure.microsoft.com/pricing/details/sql-data-warehouse/)가 분리되어 있다는 것입니다. 한동안 데이터 웨어하우스를 사용할 필요가 없으면 계산을 일시 중지하여 계산 비용을 절약할 수 있습니다. 
 
-이 개요에서는 SQL Data Warehouse에서 규모 확장이 작동하는 방법과 SQL Data Warehouse의 일시 중지, 다시 시작 및 확장 기능을 활용하는 방법에 대해 설명합니다. DWU(데이터 웨어하우스 단위)와 성능 간의 관계에 대해 알아 보려면 [DWU][data warehouse units (DWUs)] 페이지를 참조하세요. 
+## <a name="scaling-compute"></a>계산 크기 조정
+데이터 웨어하우스에 대한 [데이터 웨어하우스 단위](what-is-a-data-warehouse-unit-dwu-cdwu.md) 설정을 조정하여 계산 크기를 확장 또는 축소할 수 있습니다. 데이터 웨어하우스 단위를 더 추가함에 따라 로드 및 쿼리 성능이 선형적으로 증가할 수 있습니다. 
 
-## <a name="how-compute-management-operations-work-in-sql-data-warehouse"></a>SQL Data Warehouse에서 계산 관리 작업이 작동하는 방법
-SQL Data Warehouse의 아키텍처는 제어 노드, 계산 노드 및 60개 배포판으로 분산된 저장소 계층으로 구성됩니다. 
+확장 단계는 [Azure Portal](quickstart-scale-compute-portal.md), [PowerShell](quickstart-scale-compute-powershell.md) 또는 [T-SQL](quickstart-scale-compute-tsql.md) 빠른 시작을 참조하세요. 또한 확장 작업은 [REST API](sql-data-warehouse-manage-compute-rest-api.md#scale-compute)를 통해 수행할 수도 있습니다.
 
-SQL Data Warehouse의 정상적인 활성 세션 동안 메타데이터를 관리하는 시스템의 헤드 노드에는 분산된 쿼리 최적화 프로그램이 있습니다. 이 헤드 노드 아래에는 계산 노드와 저장소 계층이 있습니다. 400DWU의 경우 시스템에는 하나의 헤드 노드, 네 개의 계산 노드 및 60개의 배포판으로 구성된 저장소 계층이 있습니다. 
+SQL Data Warehouse는 크기 조정 작업을 수행하기 위해 먼저 들어오는 모든 쿼리를 종료한 다음, 트랜잭션을 롤백하여 일관된 상태를 보장합니다. 크기 조정은 트랜잭션 롤백이 완료된 후에만 수행됩니다. 크기 조정 작업의 경우 시스템은 저장소 계층을 계산 노드에서 분리하고, 계산 노드를 추가한 다음, 저장소 계층을 계산 계층에 다시 연결합니다. 각 데이터 웨어하우스는 계산 노드에 고르게 배포되어 60개의 배포로 저장됩니다. 계산 노드를 더 추가할수록 계산 성능이 더 많이 추가됩니다. 계산 노드 수가 늘어나면 계산 노드당 배포 수가 줄어들어 쿼리에 대한 계산 능력이 더 많이 제공됩니다. 마찬가지로, 데이터 웨어하우스 단위를 줄이면 계산 노드 수가 줄어들어 쿼리에 대한 계산 리소스가 줄어듭니다.
 
-크기 조정 또는 일시 중지 작업을 수행하는 경우 시스템에서 먼저 들어오는 모든 쿼리를 종료한 다음 트랜잭션을 롤백하여 일관된 상태를 유지합니다. 크기 조정 작업의 경우 이 트랜잭션 롤백을 완료한 후에만 크기 조정이 수행됩니다. 강화 작업의 경우 시스템에서 추가로 원하는 계산 노드 수를 프로비전한 다음 계산 노드를 저장소 계층에 다시 연결합니다. 규모 축소 작업의 경우 불필요한 노드가 해제되고 나머지 계산 노드는 적절한 수의 배포판에 다시 연결됩니다. 일시 중지 작업의 경우 모든 계산 노드가 해제되고 시스템에서 다양한 메타데이터 작업을 수행하여 최종 시스템을 안정된 상태로 유지합니다.
+다음 표에서는 데이터 웨어하우스 단위를 변경할 때 계산 노드당 배포 수가 변경되는 방식을 보여 줍니다.  6,000DWU는 60개 계산 노드를 제공하며, 100DWU보다 훨씬 높은 쿼리 성능을 달성합니다. 
 
-| DWU  | 계산 노드 수 \# | 노드당 배포 수 \# |
+| DWU(데이터 웨어하우스 단위)  | \#(계산 노드 수) | 노드당 배포 수 \# |
 | ---- | ------------------ | ---------------------------- |
 | 100  | 1                  | 60                           |
 | 200  | 2                  | 30                           |
@@ -58,166 +46,72 @@ SQL Data Warehouse의 정상적인 활성 세션 동안 메타데이터를 관�
 | 3000 | 30                 | 2                            |
 | 6000 | 60                 | 1                            |
 
-계산 관리를 위한 세 가지 주요 기능은 다음과 같습니다.
 
-1. 일시 중지
-2. 다시 시작
-3. 확장
+## <a name="finding-the-right-size-of-data-warehouse-units"></a>올바른 데이터 웨어하우스 단위 크기 찾기
 
-이러한 작업을 각각 완료하는 데에는 몇 분이 걸릴 수 있습니다. 자동으로 크기 조정/일시 중지/다시 시작하는 경우 다른 작업을 진행하기 전에 특정 작업이 완료되었는지 확인하는 논리를 구현하는 것이 좋습니다. 
+확장, 특히 더 큰 데이터 웨어하우스 단위의 성능상 이점을 알아보기 위해 최소한 1TB의 데이터 집합을 사용하려고 합니다. 데이터 웨어하우스에 가장 적합한 수의 데이터 웨어하우스 단위를 찾으려면 크기를 늘리거나 줄여봅니다. 데이터를 로드한 후 서로 다른 데이터 웨어하우스 단위 수를 사용하여 몇 가지 쿼리를 실행합니다. 크기 조정이 빠르기 때문에 1시간 이내에 다양한 성능 수준을 시험해 볼 수 있습니다. 
 
-다양한 끝점을 통해 데이터베이스 상태를 확인하는 경우 이러한 작업의 자동화를 올바르게 구현할 수 있습니다. 포털에서는 작업 완료 시의 알림과 데이터베이스 현재 상태를 제공하지만 프로그래밍 방식으로 상태를 확인할 수는 없습니다. 
+최적의 데이터 웨어하우스 단위 수를 찾는 데 권장되는 사항은 다음과 같습니다.
 
->  [!NOTE]
->
->  모든 끝점에 대한 계산 관리 기능은 존재하지 않습니다.
->
->  
+- 개발 중인 데이터 웨어하우스의 경우 우선 더 적은 수의 데이터 웨어하우스 단위를 선택하여 시작합니다.  적합한 시작 지점은 DW400 또는 DW200입니다.
+- 응용 프로그램 성능을 모니터링하여 선택한 데이터 웨어하우스 단위 수와 관찰한 성능을 비교합니다.
+- 선형 크기 조정을 가정하고 데이터 웨어하우스 단위를 늘리거나 줄이는 데 필요한 크기를 결정합니다. 
+- 비즈니스 요구 사항에 맞는 최적 성능 수준에 도달할 때까지 계속 조정합니다.
 
-|              | 일시 중지/다시 시작 | 확장 | 데이터베이스 상태 확인 |
-| ------------ | ------------ | ----- | -------------------- |
-| Azure 포털 | 예          | 예   | **아니요**               |
-| PowerShell   | 예          | 예   | 예                  |
-| REST API     | 예          | 예   | 예                  |
-| T-SQL        | **아니요**       | 예   | 예                  |
+## <a name="when-to-scale-out"></a>확장하는 경우
+데이터 웨어하우스 단위를 확장하는 경우 성능 측면에 미치는 영향은 다음과 같습니다.
 
+- 검색, 집계 및 CTAS 문에 대한 시스템 성능을 선형적으로 향상시킵니다.
+- 데이터를 로드하기 위해 판독기 및 기록기의 수를 늘립니다.
+- 동시 쿼리 및 동시성 슬롯의 최대 수
 
+데이터 웨어하우스 단위를 확장하는 경우 권장 사항은 다음과 같습니다.
 
-<a name="scale-compute-bk"></a>
+- 대량의 데이터 로드 또는 변환 작업을 수행하기 전에 데이터를 더 빠르게 사용할 수 있도록 확장합니다.
+- 가장 바쁜 업무 시간에 많은 수의 동시 쿼리를 수용할 수 있도록 확장합니다. 
 
-## <a name="scale-compute"></a>계산 조정
+## <a name="what-if-scaling-out-does-not-improve-performance"></a>확장으로도 성능이 향상되지 않는 경우
 
-SQL Data Warehouse의 성능은 CPU, 메모리 및 I/O 대역폭과 같은 계산 리소스를 추상화한 측정값인 [DWU(데이터 웨어하우스 단위)][data warehouse units (DWUs)]로 측정됩니다. 시스템 성능을 조정하려는 사용자는 포털, T-SQL 및 REST API와 같은 다양한 방법을 통해 시스템 성능을 조정할 수 있습니다. 
+데이터 웨어하우스 단위를 추가하면 병렬 처리가 증가합니다. 작업이 계산 노드 간에 균등하게 분할되면 추가 병렬 처리로 인해 쿼리 성능이 향상됩니다. 확장을 통해 성능이 변경되지 않는 경우 이러한 상황이 발생할 수 있는 몇 가지 이유가 있습니다. 데이터가 배포를 통해 왜곡되거나 쿼리에서 대량의 데이터 이동이 발생할 수 있습니다. 쿼리 성능 문제를 조사하려면 [성능 문제 해결](sql-data-warehouse-troubleshoot.md#performance)을 참조하세요. 
 
-### <a name="how-do-i-scale-compute"></a>계산 크기는 어떻게 조정합니까?
-DWU 설정을 변경하여 SQL Data Warehouse에 대한 계산 성능을 관리합니다. 특정 작업에 대해 DWU를 더 많이 추가하면 성능이 [선형적으로][linearly] 향상됩니다.  시스템을 강화하거나 축소할 때 성능이 눈에 띄게 변경되는 DWU 제품을 제공합니다. 
+## <a name="pausing-and-resuming-compute"></a>컴퓨팅 일시 중지 및 다시 시작
+계산을 일시 중지하면 저장소 계층이 계산 노드에서 분리됩니다. 계산 리소스는 계정에서 해제됩니다. 계산이 일시 중지된 동안에는 계산 비용이 청구되지 않습니다. 계산을 다시 시작하면 저장소를 계산 노드에 다시 연결하여 계산 비용에 대한 청구를 다시 시작합니다. 데이터 웨어하우스를 일시 중지하는 경우 다음과 같이 진행됩니다.
 
-DWU를 조정할 경우 다음과 같은 개별 방법을 사용할 수 있습니다.
+* Compute 및 메모리 리소스가 데이터 센터에서 사용 가능한 리소스의 풀에 반환됩니다.
+* 일시 중지 기간 동안에는 데이터 웨어하우스 단위 비용이 0입니다.
+* 데이터 저장소에는 영향이 없으며 데이터는 그대로 유지됩니다. 
+* SQL Data Warehouse가 실행 중이거나 큐에 있는 모든 작업을 취소합니다.
 
-* [Azure Portal을 사용하여 계산 능력 조정][Scale compute power with Azure portal]
-* [PowerShell을 사용하여 계산 능력 조정][Scale compute power with PowerShell]
-* [REST API를 사용하여 계산 능력 조정][Scale compute power with REST APIs]
-* [TSQL을 사용하여 계산 능력 조정][Scale compute power with TSQL]
+데이터 웨어하우스를 다시 시작하는 경우 다음과 같이 진행됩니다.
 
-### <a name="how-many-dwus-should-i-use"></a>얼마나 많은 DWU를 사용해야 합니까?
+* SQL Data Warehouse는 데이터 웨어하우스 단위 설정에 대한 계산 및 메모리 리소스를 확보합니다.
+* 데이터 웨어하우스 단위에 대한 계산 비용 청구가 다시 시작됩니다.
+* 데이터를 사용할 수 있게 됩니다.
+* 데이터 웨어하우스가 온라인 상태가 되면 작업 쿼리를 다시 시작해야 합니다.
 
-사용자에게 이상적인 DWU가 무엇인지 파악하기 위해서는 규모를 키우거나 줄이고 데이터를 로드한 후에 몇 가지 쿼리를 실행해 봅니다. 크기 조정이 빠르기 때문에 1시간 이내에 다양한 성능 수준을 시험해 볼 수 있습니다. 
+데이터 웨어하우스에 항상 액세스할 수 있게 하려면 일시 중지하는 대신 가장 작은 크기로 축소하는 것이 좋습니다. 
 
-> [!Note] 
-> SQL Data Warehouse는 많은 양의 데이터를 처리하도록 설계되었습니다. 특히 대규모 DWU에서 크기 조정에 대한 실제 기능을 확인하려면 1TB에 가깝거나 초과하는 대용량 데이터 집합을 사용합니다.
+일시 중지 및 다시 시작 단계는 [Azure Portal](pause-and-resume-compute-portal.md) 또는 [PowerShell](pause-and-resume-compute-powershell.md) 빠른 시작을 참조하세요. 또한 [일시 중지 REST API](sql-data-warehouse-manage-compute-rest-api.md#pause-compute) 또는 [다시 시작 REST API](sql-data-warehouse-manage-compute-rest-api.md#resume-compute)를 사용할 수도 있습니다.
 
-워크로드에 가장 적합한 DWU를 찾는 방법에 대한 권장 사항:
+## <a name="drain-transactions-before-pausing-or-scaling"></a>일시 중지 또는 크기 조정 전 트랜잭션 비우기
+일시 중지 또는 크기 조정 작업을 시작하기 전에 기존 트랜잭션이 완료되도록 허용하는 것이 좋습니다.
 
-1. 개발 중인 데이터 웨어하우스의 경우 먼저 낮은 DWU 성능 수준을 선택합니다.  적합한 시작 지점은 DW400 또는 DW200입니다.
-2. 응용 프로그램 성능을 모니터링하여 선택한 DWU 수와 관찰한 성능을 비교합니다.
-3. 선형 크기 조정을 가정하여 요구 사항에 맞는 최적 성능 수준을 달성하기 위해 성능이 얼마나 더 빠르거나 느려야 하는지 확인합니다.
-4. 원하는 워크로드 성능에 비례하여 DWU 수를 늘리거나 줄입니다. 
-5. 비즈니스 요구 사항에 맞는 최적 성능 수준에 도달할 때까지 계속 조정합니다.
+SQL Data Warehouse를 일시 중지하거나 크기를 조정하는 경우 일시 중지 또는 크기 조정 요청을 시작하면 백그라운드에서 쿼리가 취소됩니다.  간단한 SELECT 쿼리를 취소하는 것은 빠른 작업이며 인스턴스를 일시 중지하거나 규모를 조정하는 데 소요되는 시간에 거의 영향을 주지 않습니다.  하지만 트랜잭션 쿼리는 데이터 또는 데이터 구조를 수정하므로 신속하게 중지되지 않을 수 있습니다.  **기본적으로 트랜잭션 쿼리는 전체를 완료하거나 변경 사항을 롤백해야 합니다.**  트랜잭션 쿼리로 완료된 작업을 롤백하는 데는 쿼리가 적용된 원래 변경 사항보다 시간이 훨씬 더 오래 걸릴 수 있습니다.  예를 들어 행을 삭제하고 1시간 동안 실행 중인 쿼리를 취소하는 경우 시스템에서 삭제된 행을 다시 삽입하는 데 1시간이 소요될 수 있습니다.  트랜잭션이 진행 중인 동안 일시 중지 또는 크기 조정을 실행할 경우 일시 중지 및 크기 조정 시 롤백이 완료될 때까지 기다린 후 진행할 수 있으므로 시간이 오래 소요되는 것처럼 보일 수 있습니다.
 
-> [!NOTE]
->
-> 계산 노드 간에 작업을 분할할 수 있는 경우 더 많은 병렬 처리를 통해 쿼리 성능만 증가합니다. 크기 조정으로 성능이 변경되지 않는다고 확인되면 성능 튜닝 관련 문서를 참조하여 데이터가 균일하게 분산되어 있지 않은지 또는 많은 양의 데이터 이동이 있는지 확인합니다. 
+[트랜잭션 이해](sql-data-warehouse-develop-transactions.md) 및 [트랜잭션 최적화](sql-data-warehouse-develop-best-practices-transactions.md)도 참조하세요.
 
-### <a name="when-should-i-scale-dwus"></a>언제 DWU를 조정해야 하나요?
-DWU 크기 조정은 다음과 같은 중요한 시나리오를 변경합니다.
+## <a name="automating-compute-management"></a>계산 관리 자동화
+계산 관리 작업을 자동화하려면 [Azure Functions를 사용하여 계산 관리](manage-compute-with-azure-functions.md)를 참조하세요.
 
-1. 검색, 집계 및 CTAS 문에 대한 시스템 성능의 선형적 변경
-2. PolyBase로 로드할 때 판독기 및 기록기 수 증가
-3. 동시 쿼리 및 동시성 슬롯의 최대 수
+각각의 확장, 일시 중지 및 다시 시작 작업을 완료하는 데 몇 분이 걸릴 수 있습니다. 자동으로 크기 조정, 일시 중지 또는 다시 시작하는 경우, 다른 작업을 진행하기 전에 특정 작업이 완료되었는지 확인하는 논리를 구현하는 것이 좋습니다. 다양한 엔드포인트를 통해 데이터 웨어하우스 상태를 확인하면 이러한 작업의 자동화를 올바르게 구현할 수 있습니다. 
 
-DWU 성능 조정 시기에 대한 권장 사항:
+데이터 웨어하우스 상태를 확인하려면 [PowerShell](quickstart-scale-compute-powershell.md#check-data-warehouse-state) 또는 [T-SQL](quickstart-scale-compute-tsql.md#check-data-warehouse-state) 빠른 시작을 참조하세요. 또한 [REST API](sql-data-warehouse-manage-compute-rest-api.md#check-database-state)를 사용하여 데이터 웨어하우스 상태를 확인할 수도 있습니다.
 
-1. 대량의 데이터 로딩 또는 변환 작업을 수행하기 전에 데이터를 더욱 빠르게 사용할 수 있도록 DWU를 확장합니다.
-2. 가장 바쁜 업무 시간에서 많은 수의 동시 쿼리를 수용할 수 있도록 확장합니다. 
-
-<a name="pause-compute-bk"></a>
-
-## <a name="pause-compute"></a>계산 일시 중지
-[!INCLUDE [SQL Data Warehouse pause description](../../includes/sql-data-warehouse-pause-description.md)]
-
-데이터베이스를 일시 중지하려면 다음과 같은 개별 방법을 사용합니다.
-
-* [Azure Portal을 사용하여 계산 일시 중지][Pause compute with Azure portal]
-* [PowerShell을 사용하여 계산 일시 중지][Pause compute with PowerShell]
-* [REST API를 사용하여 계산 일시 중지][Pause compute with REST APIs]
-
-<a name="resume-compute-bk"></a>
-
-## <a name="resume-compute"></a>계산 다시 시작
-[!INCLUDE [SQL Data Warehouse resume description](../../includes/sql-data-warehouse-resume-description.md)]
-
-데이터베이스를 다시 시작하려면 다음과 같은 개별 방법을 사용합니다.
-
-* [Azure Portal을 사용하여 계산 다시 시작][Resume compute with Azure portal]
-* [PowerShell을 사용하여 계산 다시 시작][Resume compute with PowerShell]
-* [REST API를 사용하여 계산 다시 시작][Resume compute with REST APIs]
-
-<a name="check-compute-bk"></a>
-
-## <a name="check-database-state"></a>데이터베이스 상태 확인 
-
-데이터베이스를 다시 시작하려면 다음과 같은 개별 방법을 사용합니다.
-
-- [T-SQL을 사용하여 데이터베이스 상태 확인][Check database state with T-SQL]
-- [PowerShell을 사용하여 데이터베이스 상태 확인][Check database state with PowerShell]
-- [REST API를 사용하여 데이터베이스 상태 확인][Check database state with REST APIs]
 
 ## <a name="permissions"></a>권한
 
-데이터베이스 크기를 조정하려면 [ALTER DATABASE][ALTER DATABASE]에서 설명하는 권한이 필요합니다.  일시 중지 및 다시 시작을 수행하려면 [SQL DB 참가자][SQL DB Contributor] 권한, 특히 Microsoft.Sql/servers/databases/action이 필요합니다.
+데이터 웨어하우스 크기를 조정하려면 [ALTER DATABASE](/sql/t-sql/statements/alter-database-azure-sql-data-warehouse)에서 설명하는 권한이 필요합니다.  일시 중지하고 다시 시작하려면 [SQL DB 참가자](../role-based-access-control/built-in-roles.md#sql-db-contributor) 권한, 특히 Microsoft.Sql/servers/databases/action이 필요합니다.
 
-<a name="next-steps-bk"></a>
 
 ## <a name="next-steps"></a>다음 단계
-일부 추가적인 주요 성능 개념을 이해하는 데 도움이 되는 다음 문서를 참조하세요.
-
-* [워크로드 및 동시성 관리][Workload and concurrency management]
-* [테이블 디자인 개요][Table design overview]
-* [테이블 배포][Table distribution]
-* [테이블 인덱싱][Table indexing]
-* [테이블 분할][Table partitioning]
-* [테이블 통계][Table statistics]
-* [모범 사례][Best practices]
-
-<!--Image reference-->
-
-<!--Article references-->
-[data warehouse units (DWUs)]: ./sql-data-warehouse-overview-what-is.md#predictable-and-scalable-performance-with-data-warehouse-units
-[billed]: https://azure.microsoft.com/en-us/pricing/details/sql-data-warehouse/
-[linearly]: ./sql-data-warehouse-overview-what-is.md#predictable-and-scalable-performance-with-data-warehouse-units
-[Scale compute power with Azure portal]: ./sql-data-warehouse-manage-compute-portal.md#scale-compute-power
-[Scale compute power with PowerShell]: ./sql-data-warehouse-manage-compute-powershell.md#scale-compute-bk
-[Scale compute power with REST APIs]: ./sql-data-warehouse-manage-compute-rest-api.md#scale-compute-bk
-[Scale compute power with TSQL]: ./sql-data-warehouse-manage-compute-tsql.md#scale-compute-bk
-
-[capacity limits]: ./sql-data-warehouse-service-capacity-limits.md
-
-[Pause compute with Azure portal]:  ./sql-data-warehouse-manage-compute-portal.md#pause-compute-bk
-[Pause compute with PowerShell]: ./sql-data-warehouse-manage-compute-powershell.md#pause-compute-bk
-[Pause compute with REST APIs]: ./sql-data-warehouse-manage-compute-rest-api.md#pause-compute-bk
-
-[Resume compute with Azure portal]:  ./sql-data-warehouse-manage-compute-portal.md#resume-compute-bk
-[Resume compute with PowerShell]: ./sql-data-warehouse-manage-compute-powershell.md#resume-compute-bk
-[Resume compute with REST APIs]: ./sql-data-warehouse-manage-compute-rest-api.md#resume-compute-bk
-
-[Check database state with T-SQL]: ./sql-data-warehouse-manage-compute-tsql.md#check-database-state-and-operation-progress
-[Check database state with PowerShell]: ./sql-data-warehouse-manage-compute-powershell.md#check-database-state
-[Check database state with REST APIs]: ./sql-data-warehouse-manage-compute-rest-api.md#check-database-state
-
-[Workload and concurrency management]: ./sql-data-warehouse-develop-concurrency.md
-[Table design overview]: ./sql-data-warehouse-tables-overview.md
-[Table distribution]: ./sql-data-warehouse-tables-distribute.md
-[Table indexing]: ./sql-data-warehouse-tables-index.md
-[Table partitioning]: ./sql-data-warehouse-tables-partition.md
-[Table statistics]: ./sql-data-warehouse-tables-statistics.md
-[Best practices]: ./sql-data-warehouse-best-practices.md
-[development overview]: ./sql-data-warehouse-overview-develop.md
-
-[SQL DB Contributor]: ../active-directory/role-based-access-built-in-roles.md#sql-db-contributor
-
-<!--MSDN references-->
-[ALTER DATABASE]: https://msdn.microsoft.com/library/mt204042.aspx
-
-<!--Other Web references-->
-[Azure portal]: http://portal.azure.com/
-
+계산 리소스를 관리하는 또 다른 측면은 개별 쿼리에 대해 서로 다른 계산 리소스를 할당하는 것입니다. 자세한 내용은 [워크로드 관리를 위한 리소스 클래스](resource-classes-for-workload-management.md)를 참조하세요.

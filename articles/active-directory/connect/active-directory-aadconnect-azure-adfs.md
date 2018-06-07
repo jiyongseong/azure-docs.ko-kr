@@ -1,12 +1,12 @@
 ---
-title: "Azure의 Active Directory Federation Services | Microsoft Docs"
-description: "이 문서에서는 고가용성을 위해 Azure에서 AD FS를 배포하는 방법을 알아봅니다."
-keywords: "Azure에 AD FS 배포, Azure ADFS 배포, Azure ADFS, Azure AD FS, ADFS 배포, AD FS 배포, Azure에서 ADFS, Azure에서 ADFS 배포, Azure에서 AD FS배포, ADFS Azure, AD FS 소개, Azure, Azure에서 AD FS, IaaS, ADFS, Azure에 ADFS 이동"
+title: Azure의 Active Directory Federation Services | Microsoft Docs
+description: 이 문서에서는 고가용성을 위해 Azure에서 AD FS를 배포하는 방법을 알아봅니다.
+keywords: Azure에 AD FS 배포, Azure ADFS 배포, Azure ADFS, Azure AD FS, ADFS 배포, AD FS 배포, Azure에서 ADFS, Azure에서 ADFS 배포, Azure에서 AD FS배포, ADFS Azure, AD FS 소개, Azure, Azure에서 AD FS, IaaS, ADFS, Azure에 ADFS 이동
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: anandyadavmsft
-manager: femila
-editor: 
+manager: mtillman
+editor: ''
 ms.assetid: 692a188c-badc-44aa-ba86-71c0e8074510
 ms.service: active-directory
 ms.workload: identity
@@ -16,12 +16,11 @@ ms.topic: get-started-article
 ms.date: 07/17/2017
 ms.author: anandy; billmath
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: 9119a4523c66415925223b5de10ca0fb4a7147b2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
+ms.openlocfilehash: 76ed05d55389e2c05b38fe1f2c239f544c6a5d38
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
 # <a name="deploying-active-directory-federation-services-in-azure"></a>Azure에서 Active Directory Federation Services 배포
 AD FS는 간편하고 안전한 ID 페더레이션 및 웹 Single Sign-on(SSO) 기능을 제공합니다. 사용자는 Azure AD 또는 O365와 함께 페더레이션을 통해 온-프레미스 자격 증명을 사용하여 인증하고 클라우드에서 모든 리소스에 액세스할 수 있습니다. 결과적으로 온-프레미스 및 클라우드에서 리소스에 대한 액세스를 보장하는 항상 사용 가능한 AD FS 인프라가 있는 것이 중요합니다. Azure에서 AD FS를 배포하면 필요한 최소한의 노력으로 고가용성을 실현할 수 있습니다.
@@ -41,8 +40,8 @@ Azure에서 AD FS를 배포하는 여러 가지 이점의 일부는 다음과 �
 * **WAP 서버** – 사용자가 회사 네트워크에 있지 않은 경우 AD FS에 연결할 수 있도록 웹 응용 프로그램 프록시 서버를 배포해야 합니다.
 * **DMZ**: 웹 응용 프로그램 프록시 서버는 DMZ에 배치되고 DMZ와 내부 서브넷 간에 TCP/443 액세스만이 허용됩니다.
 * **부하 분산 장치**: AD FS 및 웹 응용 프로그램 프록시 서버의 고가용성을 보장하려면 AD FS 서버용 내부 부하 분산 장치 및 웹 응용 프로그램 프록시 서버용 Azure Load Balancer를 사용하는 것이 좋습니다.
-* **가용성 집합**: AD FS 배포에 대한 중복성을 제공하려면 비슷한 워크로드에 대한 가용성 집합에 두 개 이상의 가상 컴퓨터를 그룹화하는 것이 좋습니다. 이 구성은 계획된 유지 관리 또는 계획되지 않은 유지 관리 이벤트 중에 적어도 하나의 가상 컴퓨터를 사용할 수 있습니다.
-* **Storage 계정**: 두 개의 저장소 계정을 사용하는 것이 좋습니다. 단일 저장소 계정을 만들면 단일 실패 지점이 생성될 수 있고 저장소 계정이 중단되는 가능성이 적은 시나리오에서 배포를 사용할 수 없게 될 수 있습니다. 두 개의 저장소 계정이 있으면 각 오류 줄에 하나의 저장소 계정을 연결할 수 있습니다.
+* **가용성 집합**: AD FS 배포에 대한 중복성을 제공하려면 비슷한 워크로드에 대한 가용성 집합에 두 개 이상의 가상 머신을 그룹화하는 것이 좋습니다. 이 구성은 계획된 유지 관리 또는 계획되지 않은 유지 관리 이벤트 중에 적어도 하나의 가상 머신을 사용할 수 있습니다.
+* **Storage 계정**: 두 개의 Storage 계정을 사용하는 것이 좋습니다. 단일 저장소 계정을 만들면 단일 실패 지점이 생성될 수 있고 저장소 계정이 중단되는 가능성이 적은 시나리오에서 배포를 사용할 수 없게 될 수 있습니다. 두 개의 저장소 계정이 있으면 각 오류 줄에 하나의 저장소 계정을 연결할 수 있습니다.
 * **네트워크 분리**: 웹 응용 프로그램 프록시 서버를 별도의 DMZ 네트워크에 배포해야 합니다. 하나의 가상 네트워크를 두 개의 서브넷으로 나누고 격리된 서브넷에는 웹 응용 프로그램 프록시 서버를 배포할 수 있습니다. 각 서브넷에 대한 네트워크 보안 그룹 설정을 구성하고 두 개의 서브넷 간에 필요한 통신만을 허용할 수 있습니다. 자세한 내용은 아래 배포 시나리오 별로 지정됩니다.
 
 ## <a name="steps-to-deploy-ad-fs-in-azure"></a>Azure에서 AD FS를 배포하는 단계
@@ -108,7 +107,7 @@ ExpressRoute를 사용하는 것이 좋지만 조직에 가장 적합한 연결 
 ### <a name="3-create-availability-sets"></a>3. 가용성 집합 만들기
 각 역할(DC/AD FS 및 WAP)에 최소한 2대의 컴퓨터를 포함하는 가용성 집합을 만듭니다. 각 역할이 높은 가용성을 달성하는 데 도움이 됩니다. 가용성 집합을 만드는 동안 필수적으로 다음을 결정해야 합니다.
 
-* **장애 도메인**: 동일한 장애 도메인에 있는 가상 컴퓨터는 동일한 전원 및 물리적 네트워크 스위치를 공유합니다. 최소 2개의 장애 도메인을 사용하는 것이 좋습니다. 기본값은 3개이며 배포하기 위해 그대로 둘 수 있습니다.
+* **장애 도메인**: 동일한 장애 도메인에 있는 가상 머신은 동일한 전원 및 물리적 네트워크 스위치를 공유합니다. 최소 2개의 장애 도메인을 사용하는 것이 좋습니다. 기본값은 3개이며 배포하기 위해 그대로 둘 수 있습니다.
 * **업데이트 도메인**: 업데이트하는 동안 동일한 업데이트 도메인에 속한 컴퓨터는 모두 다시 시작됩니다. 최소 2개의 업데이트 도메인이 있어야 합니다. 기본값은 5개이며 배포하기 위해 그대로 둘 수 있습니다.
 
 ![가용성 집합](./media/active-directory-aadconnect-azure-adfs/availabilityset1.png)
@@ -120,15 +119,15 @@ ExpressRoute를 사용하는 것이 좋지만 조직에 가장 적합한 연결 
 | contosodcset |DC/ADFS |3 |5 |
 | contosowapset |WAP |3 |5 |
 
-### <a name="4-deploy-virtual-machines"></a>4. 가상 컴퓨터 배포
-다음 단계는 인프라의 다양한 역할을 호스팅하는 가상 컴퓨터를 배포하는 것입니다. 각 가용성 집합에서 최소 두 대의 컴퓨터를 사용하는 것이 좋습니다. 기본 배포를 위해 4개의 가상 컴퓨터를 만듭니다.
+### <a name="4-deploy-virtual-machines"></a>4. 가상 머신 배포
+다음 단계는 인프라의 다양한 역할을 호스팅하는 가상 머신을 배포하는 것입니다. 각 가용성 집합에서 최소 두 대의 컴퓨터를 사용하는 것이 좋습니다. 기본 배포를 위해 4개의 가상 머신을 만듭니다.
 
 | 컴퓨터 | 역할 | 서브넷 | 가용성 집합 | Storage 계정 | IP 주소 |
 |:---:|:---:|:---:|:---:|:---:|:---:|
-| contosodc1 |DC/ADFS |INT |contosodcset |contososac1 |정적 |
-| contosodc2 |DC/ADFS |INT |contosodcset |contososac2 |정적 |
-| contosowap1 |WAP |DMZ |contosowapset |contososac1 |정적 |
-| contosowap2 |WAP |DMZ |contosowapset |contososac2 |정적 |
+| contosodc1 |DC/ADFS |INT |contosodcset |contososac1 |공용 |
+| contosodc2 |DC/ADFS |INT |contosodcset |contososac2 |공용 |
+| contosowap1 |WAP |DMZ |contosowapset |contososac1 |공용 |
+| contosowap2 |WAP |DMZ |contosowapset |contososac2 |공용 |
 
 보시는 것처럼 NSG가 지정되지 않았습니다. Azure가 서브넷 수준에서 NSG를 사용할 수 있도록 하기 때문입니다. 그러면 서브넷 또는 NIC 개체와 연결된 개별 NSG를 사용하여 컴퓨터 네트워크 트래픽을 제어할 수 있습니다. 자세한 내용은 [NSG(네트워크 보안 그룹)란](https://aka.ms/Azure/NSG)을 참고하세요.
 DNS를 관리하는 경우 고정 IP 주소를 사용하는 것이 좋습니다. 도메인에 대한 DNS 레코드 대신 Azure DNS를 사용할 수 있으며 해당 Azure FQDN에 의한 새 컴퓨터를 참조할 수 있습니다.
@@ -178,7 +177,7 @@ ILB를 배포하려면 Azure Portal에서 부하 분산 장치를 선택하고 �
 부하 분산 장치 패널에서 새로 만든 ILB를 선택합니다. 설정 패널이 열립니다. 
 
 1. 설정 패널에서 백 엔드 풀을 선택합니다.
-2. 백 엔드 풀 추가 패널에서 가상 컴퓨터 추가를 클릭합니다.
+2. 백 엔드 풀 추가 패널에서 가상 머신 추가를 클릭합니다.
 3. 가용성 집합을 선택할 수 있는 패널로 나타납니다.
 4. AD FS 가용성 집합을 선택합니다.
 
@@ -215,7 +214,7 @@ DNS 서버로 이동하고 ILB에 대한 CNAME을 만듭니다. CNAME은 ILB의 
 
 **7.2. 웹 응용 프로그램 프록시 역할 설치**
 
-웹 응용 프로그램 프록시 서버가 ILB 다음에 AD FS 서버에 연결할 수 있는지를 확인한 후에 웹 응용 프로그램 프록시 서버를 설치할 수 있습니다. 웹 응용 프로그램 프록시 서버는 도메인에 조인되지 않습니다. 원격 액세스 역할을 선택하여 두 개의 웹 응용 프로그램 프록시 서버에 웹 응용 프로그램 프록시 역할을 설치합니다. 서버 관리자에서는 WAP 설치를 완료하도록 안내합니다.
+웹 응용 프로그램 프록시 서버가 ILB 다음에 AD FS 서버에 연결할 수 있는지를 확인한 후에 웹 응용 프로그램 프록시 서버를 설치할 수 있습니다. 웹 응용 프로그램 프록시 서버는 도메인에 조인할 필요가 없습니다. 원격 액세스 역할을 선택하여 두 개의 웹 응용 프로그램 프록시 서버에 웹 응용 프로그램 프록시 역할을 설치합니다. 서버 관리자에서는 WAP 설치를 완료하도록 안내합니다.
 WAP를 배포하는 방법에 대한 자세한 내용은 [웹 응용 프로그램 프록시 서버 설치 및 구성](https://technet.microsoft.com/library/dn383662.aspx)을 참고합니다.
 
 ### <a name="8--deploying-the-internet-facing-public-load-balancer"></a>8.  인터넷 연결 (공용) 부하 분산 장치 배포
@@ -275,7 +274,10 @@ ILB와 같은 단계를 수행하여 TCP 443에 대한 부하 분산 규칙을 �
 
 ![INT 액세스 규칙(인바운드)](./media/active-directory-aadconnect-azure-adfs/nsg_int.png)
 
-[주석]: <> (![INT 액세스 규칙(인바운드)](./media/active-directory-aadconnect-azure-adfs/nsgintinbound.png)) [주석]: <> (![INT 액세스 규칙(아웃바운드)](./media/active-directory-aadconnect-azure-adfs/nsgintoutbound.png))
+<!--
+[comment]: <> (![INT access rules (inbound)](./media/active-directory-aadconnect-azure-adfs/nsgintinbound.png))
+[comment]: <> (![INT access rules (outbound)](./media/active-directory-aadconnect-azure-adfs/nsgintoutbound.png))
+-->
 
 **9.2. DMZ 서브넷 보안**
 
@@ -286,7 +288,10 @@ ILB와 같은 단계를 수행하여 TCP 443에 대한 부하 분산 규칙을 �
 
 ![EXT 액세스 규칙(인바운드)](./media/active-directory-aadconnect-azure-adfs/nsg_dmz.png)
 
-[주석]: <> (![EXT 액세스 규칙(인바운드)](./media/active-directory-aadconnect-azure-adfs/nsgdmzinbound.png)) [주석]: <> (![EXT 액세스 규칙(아웃바운드)](./media/active-directory-aadconnect-azure-adfs/nsgdmzoutbound.png))
+<!--
+[comment]: <> (![EXT access rules (inbound)](./media/active-directory-aadconnect-azure-adfs/nsgdmzinbound.png))
+[comment]: <> (![EXT access rules (outbound)](./media/active-directory-aadconnect-azure-adfs/nsgdmzoutbound.png))
+-->
 
 > [!NOTE]
 > 클라이언트 사용자 인증서 인증(X509 사용자 인증서를 사용하는 clientTLS 인증)이 필요한 경우 AD FS는 TCP 포트 49443를 인바운드 액세스에 사용하도록 설정해야 합니다.
@@ -298,7 +303,7 @@ ILB와 같은 단계를 수행하여 TCP 443에 대한 부하 분산 규칙을 �
 
 1. 아래 AD FS 서버의 cmdlet을 실행하고 PowerShell을 사용하여 사용하도록 설정합니다.
    Set-AdfsProperties -EnableIdPInitiatedSignonPage $true 
-2. 외부 컴퓨터에서 https://adfs.thecloudadvocate.com/adfs/ls/IdpInitiatedSignon.aspx에 액세스합니다.  
+2. 아무 외부 컴퓨터에서 https://adfs.thecloudadvocate.com/adfs/ls/IdpInitiatedSignon.aspx에 액세스  
 3. 아래와 같은 AD FS 페이지를 참조해야 합니다.
 
 ![테스트 로그인 페이지](./media/active-directory-aadconnect-azure-adfs/test1.png)
@@ -333,14 +338,14 @@ ILB와 같은 단계를 수행하여 TCP 443에 대한 부하 분산 규칙을 �
 | WAP01NICIPAddress |첫 번째 WAP 서버의 내부 IP 주소인 이 IP 주소는 WAP 서버에 정적으로 할당되고 DMZ 서브넷 내에서 유효한 IP 주소여야 합니다. |
 | WAP02NICIPAddress |두 번째 WAP 서버의 내부 IP 주소인 이 IP 주소는 WAP 서버에 정적으로 할당되고 DMZ 서브넷 내에서 유효한 IP 주소여야 합니다. |
 | ADFSLoadBalancerPrivateIPAddress |ADFS 부하 분산 장치의 내부 IP 주소인 이 IP 주소는 부하 분산 장치에 정적으로 할당되고 내부 서브넷 내에서 유효한 IP 주소여야 합니다. |
-| ADDCVMNamePrefix |도메인 컨트롤러의 가상 컴퓨터 이름 접두사입니다. |
-| ADFSVMNamePrefix |ADFS 서버의 가상 컴퓨터 이름 접두사입니다. |
-| WAPVMNamePrefix |WAP 서버의 가상 컴퓨터 이름 접두사입니다. |
+| ADDCVMNamePrefix |도메인 컨트롤러의 Virtual Machine 이름 접두사입니다. |
+| ADFSVMNamePrefix |ADFS 서버의 Virtual Machine 이름 접두사입니다. |
+| WAPVMNamePrefix |WAP 서버의 Virtual Machine 이름 접두사입니다. |
 | ADDCVMSize |도메인 컨트롤러의 VM 크기입니다. |
 | ADFSVMSize |ADFS 서버의 VM 크기입니다. |
 | WAPVMSize |WAP 서버의 VM 크기입니다. |
-| AdminUserName |가상 컴퓨터의 로컬 관리자의 이름입니다. |
-| AdminPassword |가상 컴퓨터의 로컬 관리자 계정의 암호입니다. |
+| AdminUserName |가상 머신의 로컬 관리자의 이름입니다. |
+| AdminPassword |가상 머신의 로컬 관리자 계정의 암호입니다. |
 
 ## <a name="additional-resources"></a>추가 리소스
 * [가용성 집합](https://aka.ms/Azure/Availability) 
@@ -348,12 +353,11 @@ ILB와 같은 단계를 수행하여 TCP 443에 대한 부하 분산 규칙을 �
 * [내부 부하 분산 장치](https://aka.ms/Azure/ILB/Internal)
 * [인터넷 연결 부하 분산 장치](https://aka.ms/Azure/ILB/Internet)
 * [Storage 계정](https://aka.ms/Azure/Storage)
-* [Azure Virtual Networks](https://aka.ms/Azure/VNet)
-* [AD FS 및 웹 응용 프로그램 프록시 링크](http://aka.ms/ADFSLinks) 
+* [Azure Virtual Network](https://aka.ms/Azure/VNet)
+* [AD FS 및 웹 응용 프로그램 프록시 링크](https://aka.ms/ADFSLinks) 
 
 ## <a name="next-steps"></a>다음 단계
 * [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)
 * [Azure AD Connect를 사용하여 AD FS 구성 및 관리](active-directory-aadconnectfed-whatis.md)
 * [Azure Traffic Manager를 사용하여 Azure에서 고가용성 교차 지리적 AD FS 배포](../active-directory-adfs-in-azure-with-azure-traffic-manager.md)
-
 

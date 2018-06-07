@@ -14,13 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 06/05/2017
 ms.author: v-sharos
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
 ms.openlocfilehash: f5e3186a4271e0be781f367fa75ada195c58c960
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-storsimple-snapshot-manager-to-connect-and-manage-storsimple-devices"></a>StorSimple 스냅숏 관리자를 사용하여 StorSimple 장치 연결 및 관리
 ## <a name="overview"></a>개요
@@ -212,5 +210,4 @@ StorSimple 장치에서 오류가 발생하여 대기(장애 조치(failover)) �
 ## <a name="next-steps"></a>다음 단계
 * [StorSimple 스냅숏 관리자를 사용하여 StorSimple 솔루션을 관리](storsimple-snapshot-manager-admin.md)하는 방법을 알아봅니다.
 * [StorSimple 스냅숏 관리자를 사용하여 볼륨을 보고 관리](storsimple-snapshot-manager-manage-volumes.md)하는 방법을 알아봅니다.
-
 

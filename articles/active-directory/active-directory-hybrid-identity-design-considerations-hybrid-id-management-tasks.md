@@ -1,10 +1,10 @@
 ---
-title: "Azure Active Directory 하이브리드 ID 디자인 고려 사항 - 하이브리드 ID 관리 작업 | Microsoft Docs"
+title: "Azure의 하이브리드 ID 디자인 - 관리 작업 | Microsoft Docs"
 description: "조건부 액세스 제어를 통해 Azure Active Directory는 사용자를 인증할 때 및 응용 프로그램에 대한 액세스를 허용하기 전에 선택한 특정 조건을 확인합니다. 이러한 조건이 충족되면 사용자가 인증되고 응용 프로그램에 대한 액세스가 허용됩니다."
 documentationcenter: 
 services: active-directory
 author: billmath
-manager: femila
+manager: mtillman
 editor: 
 ms.assetid: 65f80aea-0426-4072-83e1-faf5b76df034
 ms.service: active-directory
@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 07/18/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 69f7b49fd82e4d34b1d54718cfbd2f4dedd2ae47
-ms.openlocfilehash: 12e142b08774ac5e92fb14ad11554a8c250e65df
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/05/2017
-
+ms.custom: seohack1
+ms.openlocfilehash: ed683f1b96172b71cc3dfae2511607e50071739f
+ms.sourcegitcommit: f1c1789f2f2502d683afaf5a2f46cc548c0dea50
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/18/2018
 ---
 # <a name="plan-for-hybrid-identity-lifecycle"></a>하이브리드 ID 수명 주기에 대한 계획
 ID는 엔터프라이즈 이동성 및 응용 프로그램 액세스 전략의 토대 중 하나입니다. 모바일 장치 또는 SaaS 앱에 로그인하는지와 무관하게 ID는 모든 항목에 액세스를 얻는 키입니다. 가장 높은 수준에서 ID 관리 솔루션은 프로비전한 리소스의 프로세스를 자동화하고 중앙 집중화를 포함하는 ID 리포지토리 간의 통합 및 동기화를 포함합니다. ID 솔루션은 온-프레미스 및 클라우드 전반에서 중앙 집중화된 ID여야 하며 특정 형태의 ID 페더레이션을 사용하여 중앙 집중된 인증을 유지 관리하고 외부 사용자 및 비즈니스와 안전하게 공유하며 협력해야 합니다. 리소스의 범위는 운영 체제 및 응용 프로그램에서 사용자에 걸쳐 있거나 조직에 속해 있습니다. 조직 구조는 프로비전하는 정책 및 절차를 수용하기 위해 변경될 수 있습니다.
@@ -67,5 +67,4 @@ ID 관리자의 목표 중 하나는 모든 ID 공급자를 가져오고 동기�
 
 ## <a name="see-also"></a>참고 항목
 [설계 고려 사항 개요](active-directory-hybrid-identity-design-considerations-overview.md)
-
 

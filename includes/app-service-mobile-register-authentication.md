@@ -3,11 +3,11 @@
 
 1. 공급자 관련 지침에 따라 기본 설정된 ID 공급자를 구성합니다.
 
-   * [Azure Active Directory](../articles/app-service-mobile/app-service-mobile-how-to-configure-active-directory-authentication.md)
-   * [Facebook](../articles/app-service-mobile/app-service-mobile-how-to-configure-facebook-authentication.md)
-   * [Google](../articles/app-service-mobile/app-service-mobile-how-to-configure-google-authentication.md)
-   * [Microsoft](../articles/app-service-mobile/app-service-mobile-how-to-configure-microsoft-authentication.md)
-   * [Twitter](../articles/app-service-mobile/app-service-mobile-how-to-configure-twitter-authentication.md)
+   * [Azure Active Directory](../articles/app-service/app-service-mobile-how-to-configure-active-directory-authentication.md)
+   * [Facebook](../articles/app-service/app-service-mobile-how-to-configure-facebook-authentication.md)
+   * [Google](../articles/app-service/app-service-mobile-how-to-configure-google-authentication.md)
+   * [Microsoft](../articles/app-service/app-service-mobile-how-to-configure-microsoft-authentication.md)
+   * [Twitter](../articles/app-service/app-service-mobile-how-to-configure-twitter-authentication.md)
 2. 앱에서 지원하려는 각 공급자에 대해 이전 단계를 반복합니다.
 
 <!-- URLs. -->

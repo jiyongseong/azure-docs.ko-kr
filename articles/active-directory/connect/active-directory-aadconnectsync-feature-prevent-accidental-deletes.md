@@ -3,8 +3,8 @@ title: "Azure AD Connect 동기화: 실수로 인한 삭제 방지 | Microsoft D
 description: "이 항목에서는 Azure AD Connect의 실수로 인한 삭제 방지 기능을 설명합니다."
 services: active-directory
 documentationcenter: 
-author: AndKjell
-manager: femila
+author: billmath
+manager: mtillman
 editor: 
 ms.assetid: 6b852cb4-2850-40a1-8280-8724081601f7
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 07/12/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0bec803e4b49f3ae53f2cc3be6b9cb2d256fe5ea
-ms.openlocfilehash: 48531d69fcefed27785e0e1ae667274fa48ea1d2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/24/2017
-
+ms.openlocfilehash: 57ce7b2fcece751b1386ef1d57762ad8d1c27c62
+ms.sourcegitcommit: f1c1789f2f2502d683afaf5a2f46cc548c0dea50
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/18/2018
 ---
 # <a name="azure-ad-connect-sync-prevent-accidental-deletes"></a>Azure AD Connect 동기화: 실수로 인한 삭제 방지
 이 항목에서는 Azure AD Connect의 실수로 인한 삭제 방지 기능을 설명합니다.
@@ -33,7 +32,7 @@ Azure AD Connect를 설치하면 실수로 인한 삭제 방지가 기본적으�
 * OU의 모든 개체가 삭제됩니다.
 * OU 이름이 변경되면 OU의 모든 개체가 동기화 범위를 벗어난 것으로 간주됩니다.
 
-기본값인 500개 개체는 PowerShell에서 `Enable-ADSyncExportDeletionThreshold`를 사용하여 변경할 수 있습니다. 조직의 규모에 맞게 이 값을 구성해야 합니다. 동기화 스케줄러가 30분마다 실행되므로 이 값은 30분 내에 표시되는 삭제 수입니다.
+Azure Active Directory Connect와 함께 설치된 AD Sync 모듈의 일부인 `Enable-ADSyncExportDeletionThreshold`를 사용하는 PowerShell로 500개 개체의 기본값을 변경할 수 있습니다. 조직의 규모에 맞게 이 값을 구성해야 합니다. 동기화 스케줄러가 30분마다 실행되므로 이 값은 30분 내에 표시되는 삭제 수입니다.
 
 Azure AD로 내보내도록 스테이징된 삭제 수가 너무 많을 경우 내보내기가 중지되며 다음과 같은 메일을 받게 됩니다.
 
@@ -69,4 +68,3 @@ Azure AD로 내보내도록 스테이징된 삭제 수가 너무 많을 경우 �
 
 * [Azure AD Connect 동기화: 동기화의 이해 및 사용자 지정](active-directory-aadconnectsync-whatis.md)
 * [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)
-

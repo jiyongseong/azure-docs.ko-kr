@@ -16,14 +16,12 @@ ms.workload: infrastructure
 ms.date: 05/10/2017
 ms.author: ramankum
 ms.custom: mvc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: e7da3c6d4cfad588e8cc6850143112989ff3e481
-ms.openlocfilehash: 68820183e28cd27fb8493704f1de523747e9f7cc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/16/2017
-
+ms.openlocfilehash: ec532811e94647c8a04b9faf9474f6749969f83e
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="create-a-virtual-machine-using-an-existing-managed-os-disk-with-powershell"></a>PowerShell과 기존 관리 OS 디스크를 사용하여 가상 컴퓨터 만들기
 
 이 스크립트는 기존 관리 디스크를 OS 디스크로 연결하여 가상 컴퓨터를 만듭니다. 이전 시나리오에서는 이 스크립트를 사용합니다.
@@ -37,7 +35,7 @@ ms.lasthandoff: 05/16/2017
 
 ## <a name="sample-script"></a>샘플 스크립트
 
-[!code-powershell[기본](../../../powershell_scripts/virtual-machine/create-vm-from-snapshot/create-vm-from-snapshot.ps1 "스냅숏에서 VM 만들기")]
+[!code-powershell[main](../../../powershell_scripts/virtual-machine/create-vm-from-snapshot/create-vm-from-snapshot.ps1 "Create VM from snapshot")]
 
 ## <a name="clean-up-deployment"></a>배포 정리 
 

@@ -1,11 +1,11 @@
 ---
-title: "Azure AD Connect: 계정 및 사용 권한 | Microsoft Docs"
-description: "이 항목에서는 사용되고 만든 계정 및 필요한 권한을 설명합니다."
+title: 'Azure AD Connect: 계정 및 사용 권한 | Microsoft Docs'
+description: 이 항목에서는 사용되고 만든 계정 및 필요한 권한을 설명합니다.
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: billmath
-manager: femila
-editor: 
+manager: mtillman
+editor: ''
 ms.reviewer: cychua
 ms.assetid: b93e595b-354a-479d-85ec-a95553dd9cc2
 ms.service: active-directory
@@ -13,14 +13,14 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/27/2017
+ms.date: 03/27/2018
 ms.author: billmath
+ms.openlocfilehash: 5a0574af04c118d466544d533561eb01639edfc6
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: 54774252780bd4c7627681d805f498909f171857
-ms.openlocfilehash: fdd90721b6823c20c1ff27383769bfff24e80eae
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32158995"
 ---
 # <a name="azure-ad-connect-accounts-and-permissions"></a>Azure AD Connect: 계정 및 사용 권한
 Azure AD Connect 설치 마법사는 두 가지 다른 경로를 제공합니다.
@@ -59,7 +59,7 @@ AD DS에 대해 읽고 쓰도록 만들어진 [계정](#active-directory-account
 
 | 사용 권한 | 용도 |
 | --- | --- |
-| <li>디렉터리 변경 내용 복제</li><li>모든 디렉터리 변경 내용 복제 |암호 동기화 |
+| <li>디렉터리 변경 내용 복제</li><li>모든 디렉터리 변경 내용 복제 |암호 해시 동기화 |
 | 모든 속성 사용자 읽기/쓰기  |가져오기 및 Exchange 하이브리드 |
 | 모든 속성 iNetOrgPerson 읽기/쓰기  |가져오기 및 Exchange 하이브리드 |
 | 모든 속성 그룹 읽기/쓰기 |가져오기 및 Exchange 하이브리드 |
@@ -88,15 +88,19 @@ Azure AD Connect 버전 1.1.524.0 이상에는 Azure AD Connect 마법사가 Act
 | 기능 | 권한 |
 | --- | --- |
 | msDS-ConsistencyGuid 기능 |[디자인 개념 - msDS-ConsistencyGuid를 sourceAnchor로 사용](active-directory-aadconnect-design-concepts.md#using-msds-consistencyguid-as-sourceanchor)에서 설명하는 msDS-ConsistencyGuid 특성에 대한 쓰기 권한 | 
-| 암호 동기화 |<li>디렉터리 변경 내용 복제</li>  <li>모든 디렉터리 변경 내용 복제 |
+| 암호 해시 동기화 |<li>디렉터리 변경 내용 복제</li>  <li>모든 디렉터리 변경 내용 복제 |
 | Exchange 하이브리드 배포 |사용자, 그룹 및 연락처에 대한 [Exchange 하이브리드 쓰기 저장](active-directory-aadconnectsync-attributes-synchronized.md#exchange-hybrid-writeback)에 설명된 특성에 사용 권한을 작성합니다. |
 | Exchange 메일 공용 폴더 |공용 폴더의 [Exchange Mail 공용 폴더](active-directory-aadconnectsync-attributes-synchronized.md#exchange-mail-public-folder)에서 설명하는 특성에 대한 읽기 권한 | 
-| 비밀번호 쓰기 저장 |사용자에 대한 [암호 관리 시작](../active-directory-passwords-writeback.md)에 설명된 특성에 사용 권한을 작성합니다. |
+| 비밀번호 쓰기 저장 |사용자에 대한 [암호 관리 시작](../authentication/howto-sspr-writeback.md)에 설명된 특성에 사용 권한을 작성합니다. |
 | 장치 쓰기 저장 |[장치 쓰기 저장](active-directory-aadconnect-feature-device-writeback.md)에 설명한 대로 PowerShell 스크립트에 부여된 사용 권한입니다. |
 | 그룹 쓰기 저장 |동기화된 **Office 365 그룹**에 대해 그룹 개체를 읽기, 만들기, 업데이트 및 삭제합니다.  자세한 내용은 [그룹 쓰기 저장](active-directory-aadconnect-feature-preview.md#group-writeback)을 참조하세요.|
 
 ## <a name="upgrade"></a>업그레이드
 Azure AD Connect의 한 버전에서 새 릴리스로 업그레이드하는 경우 다음 권한이 필요합니다.
+
+>[!IMPORTANT]
+>Azure AD Connect에서는 빌드 1.1.484부터 SQL Database를 업그레이드하기 위해 sysadmin 권한이 필요한 회귀 버그를 도입했습니다.  이 버그는 1.1.647 빌드에서 수정되었습니다.  이 빌드로 업그레이드하는 경우 sysadmin 권한이 필요합니다.  Dbo 권한은 충분하지 않습니다.  sysadmin 권한 없이 Azure AD Connect를 업그레이드하려고 하면 업그레이드에 실패하고 이후로 Azure AD Connect가 더 이상 올바르게 작동하지 않습니다.  Microsoft는 이를 알고 해결하기 위해 노력하고 있습니다.
+
 
 | 주체 | 필요한 사용 권한 | 용도 |
 | --- | --- | --- |
@@ -106,7 +110,7 @@ Azure AD Connect의 한 버전에서 새 릴리스로 업그레이드하는 경�
 
 ## <a name="more-about-the-created-accounts"></a>만든 계정에 대한 자세한 내용
 ### <a name="active-directory-account"></a>Active Directory 계정
-Express 설정을 사용하는 경우 계정은 동기화에 사용되는 Active Directory에서 만들어집니다. 만든 계정은 사용자 컨테이너의 포리스트 루트 도메인에 위치하고 **MSOL_**를 접두사로 하는 이름을 갖습니다. 계정은 만료되지 않은 길고 복잡한 암호를 사용하여 만들어집니다. 사용자 도메인에 암호 정책이 있는 경우 길고 복잡한 암호가 이 계정에 대해 허용되는지 확인합니다.
+Express 설정을 사용하는 경우 계정은 동기화에 사용되는 Active Directory에서 만들어집니다. 만든 계정은 사용자 컨테이너의 포리스트 루트 도메인에 위치하고 **MSOL_** 를 접두사로 하는 이름을 갖습니다. 계정은 만료되지 않은 길고 복잡한 암호를 사용하여 만들어집니다. 사용자 도메인에 암호 정책이 있는 경우 길고 복잡한 암호가 이 계정에 대해 허용되는지 확인합니다.
 
 ![AD 계정](./media/active-directory-aadconnect-accounts-permissions/adsyncserviceaccount.png)
 
@@ -165,7 +169,7 @@ VSA는 동기화 엔진과 SQL이 동일한 서버에 있는 시나리오에서 
 이 기능을 사용하려면 Windows Server 2012 이상이 필요합니다. 이전 운영 체제를 사용해야 하고 원격 SQL을 사용하는 경우에는 [사용자 계정](#user-account)을 사용해야 합니다.
 
 #### <a name="user-account"></a>사용자 계정
-로컬 서비스 계정은 설치 마법사에서 만듭니다.(사용자 지정 설정에 사용할 계정을 지정하지 않으면) 계정은 **AAD_**를 접두사로 하며 실행할 실제 동기화 서비스에 사용됩니다. 도메인 컨트롤러에 Azure AD Connect를 설치하는 경우 계정은 도메인에 만들어집니다. 다음과 같은 경우 **AAD_** 서비스 계정이 도메인에 있어야 합니다.
+로컬 서비스 계정은 설치 마법사에서 만듭니다.(사용자 지정 설정에 사용할 계정을 지정하지 않으면) 계정은 **AAD_** 를 접두사로 하며 실행할 실제 동기화 서비스에 사용됩니다. 도메인 컨트롤러에 Azure AD Connect를 설치하는 경우 계정은 도메인에 만들어집니다. 다음과 같은 경우 **AAD_** 서비스 계정이 도메인에 있어야 합니다.
    - SQL Server를 실행하는 원격 서버를 사용합니다.
    - 인증이 필요한 프록시를 사용합니다.
 
@@ -194,4 +198,3 @@ Azure AD에서 동기화 서비스 계정은 20개로 제한됩니다. Azure AD�
 
 ## <a name="next-steps"></a>다음 단계
 [Azure Active Directory와 온-프레미스 ID 통합](../active-directory-aadconnect.md)에 대해 자세히 알아봅니다.
-

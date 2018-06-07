@@ -1,11 +1,11 @@
 ---
-title: "Windows VM에 대한 벤치마크 점수 계산 | Microsoft Docs"
-description: "Windows Server를 실행하는 Azure VM에 대한 SPECint 계산 벤치마크 점수를 비교합니다."
+title: Azure Windows VM에 대한 벤치마크 점수 계산 | Microsoft Docs
+description: Windows Server를 실행하는 Azure VM에 대한 SPECint 계산 벤치마크 점수를 비교합니다.
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager,azure-service-management
 ms.assetid: 69ae72ec-e8be-4e46-a8f0-e744aebb5cc2
 ms.service: virtual-machines-windows
@@ -13,18 +13,19 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 05/11/2017
-ms.author: cynthn
-ms.translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: a3e4ce890d02290ba954119de8443d28378c0f98
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/03/2017
-
-
+ms.date: 04/09/2018
+ms.author: cynthn;davberg
+ms.openlocfilehash: 2831f177bbcd02be02124812de144bd7a6867aa4
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="compute-benchmark-scores-for-windows-vms"></a>Windows VM에 대한 벤치마크 점수 계산
-다음 SPECInt 벤치마크 점수는 Windows Server를 실행하는 Azure의 고성능 VM 라인업에 대한 계산 성능을 보여 줍니다. [Linux VM](../linux/compute-benchmark-scores.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)에 대해 계산 벤치마크 점수를 사용할 수도 있습니다.
+다음 SPECInt 벤치마크 점수는 Windows Server를 실행하는 Azure의 고성능 VM 라인업에 대한 계산 성능을 보여 줍니다. [Linux VM](../linux/compute-benchmark-scores.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)에 대해 Compute 벤치마크 점수를 사용할 수도 있습니다. 
+
+> [!NOTE]
+> Linux 숫자는 최근에 업데이트되었으며 VM의 보다 포괄적인 집합을 포함합니다.
 
 ## <a name="a-series---compute-intensive"></a>A 시리즈-계산 집약적
 | 크기 | vCPU | NUMA 노드 | CPU | 실행 | Avg 기본 요율 | StdDev |
@@ -67,9 +68,8 @@ ms.lasthandoff: 04/03/2017
 | Standard_H16mr |16 |2 |Intel Xeon E5-2667 v3 @ 3.2 GHz |7 |569.6 |2.8 |
 
 ## <a name="about-specint"></a>SPECint 정보
-Windows 번호는 Windows Server에서 [SPECint 2006](https://www.spec.org/cpu2006/results/rint2006.html) 을 실행하여 계산합니다. SPECint는 코어당 하나의 복사본과 함께 기본 요율 옵션(SPECint_rate2006)을 사용하여 실행합니다. SPECint은 12번의 별도 테스트로 각기 세 번 실행되도록 구성되며, 각 테스트에서 중간값을 취해 가중치를 주어 종합 점수를 형성합니다. 그런 다음 여러 VM에서 실행하여 평균값을 구합니다.
+Windows 번호는 Windows Server에서 [SPECint 2006](https://www.spec.org/cpu2006/results/rint2006.html) 을 실행하여 계산합니다. SPECint는 vCPU당 하나의 복사본과 함께 기본 요율 옵션(SPECint_rate2006)을 사용하여 실행합니다. SPECint은 12번의 별도 테스트로 각기 세 번 실행되도록 구성되며, 각 테스트에서 중간값을 취해 가중치를 주어 종합 점수를 형성합니다. 그런 다음 여러 VM에서 실행하여 평균값을 구합니다.
 
 ## <a name="next-steps"></a>다음 단계
-* 저장 용량, 디스크 세부 정보 및 VM 크기 선택시 추가적인 고려 사항에 관한 자세한 내용은 [가상 컴퓨터의 크기](sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 참조하세요.
-
+* 저장 용량, 디스크 세부 정보 및 VM 크기 선택시 추가적인 고려 사항에 관한 자세한 내용은 [가상 머신의 크기](sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 참조하세요.
 

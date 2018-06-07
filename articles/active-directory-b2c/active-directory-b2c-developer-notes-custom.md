@@ -1,26 +1,21 @@
 ---
-title: "Azure Active Directory B2C: 사용자 지정 정책을 사용하는 개발자 정보 | Microsoft Docs"
-description: "사용자 지정 정책으로 Azure AD B2C를 구성 및 유지 관리하는 개발자를 위한 정보"
+title: 'Azure Active Directory B2C: 사용자 지정 정책을 사용하는 개발자 정보 | Microsoft Docs'
+description: 사용자 지정 정책으로 Azure AD B2C를 구성 및 유지 관리하는 개발자를 위한 정보
 services: active-directory-b2c
-documentationcenter: 
-author: rojasja
-manager: krassk
-editor: rojasja
-ms.assetid: 
+documentationcenter: ''
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: article
-ms.devlang: na
-ms.date: 05/05/2017
-ms.author: joroja
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5edc47e03ca9319ba2e3285600703d759963e1f3
-ms.openlocfilehash: a5f222e5b11e05286152a9f1cc55d2c3fc27a9dc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/01/2017
-
-
+ms.date: 10/13/2017
+ms.author: davidmu
+ms.openlocfilehash: cf76f158d7e87a2f2f902551fdc751b295b6915b
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="release-notes-for-azure-active-directory-b2c-custom-policy-public-preview"></a>Azure Active Directory B2C 사용자 지정 정책 공개 미리 보기에 대한 릴리스 정보
 사용자 지정 정책 기능 집합은 현재 모든 Azure Active Directory B2C(Azure AD B2C) 고객에 대해 공개 미리 보기에서 평가용으로 제공됩니다. 이 기능 집합은 가장 복잡한 ID 솔루션을 구축하는 고급 ID 개발자를 대상으로 합니다.  
@@ -50,19 +45,100 @@ ms.lasthandoff: 06/01/2017
 수동 정책 구성은 Azure AD B2C의 기본 플랫폼에 대해 낮은 수준의 액세스 권한을 부여하며 완전히 사용자 지정할 수 있는 보안 프레임워크를 생성합니다. 다각적인 사용자 지정 ID 공급자, 트러스트 관계, 외부 서비스와의 통합 및 단계별 워크플로 관계로 인해, 이를 사용하는 고급 개발자의 요구가 더욱 증가합니다.
 
 공개 미리 보기를 최대한 활용하기 위해 사용자 지정 정책 기능 집합을 사용하는 개발자는 다음 지침을 준수하는 것이 좋습니다.
-* ID 경험 엔진의 구성 언어 및 키/암호 관리에 익숙해집니다.
+* ID 경험 프레임워크의 구성 언어 및 키/암호 관리에 익숙해집니다.
 * 시나리오 및 사용자 지정 통합을 직접 소유합니다.
 * 체계적인 시나리오 테스트를 수행합니다.
 * 최소 1개의 개발/테스트 환경과 1개의 프로덕션 환경을 구축하여 소프트웨어 개발 및 스테이징 모범 사례를 준수합니다.
 * 사용자와 통합된 ID 공급자 및 서비스에 대한 새로운 개발 정보를 바로 입수합니다. 예를 들어 기밀 변경 내용과 예정되었거나 갑작스럽게 진행되는 서비스 변경 내용을 추적합니다.
 * 활성 모니터링을 설정하고 프로덕션 환경의 응답성을 모니터링합니다.
-* 연락처 전자 메일 주소를 최신 상태로 유지하고 Microsoft 라이브 사이트 팀 전자 메일에 즉시 응답합니다.
+* Azure 구독에서 연락처 전자 메일 주소를 최신 상태로 유지하고 Microsoft 라이브 사이트 팀 전자 메일에 즉시 응답합니다.
 * Microsoft 라이브 사이트 팀에서 권고할 때 시기 적절하게 조치를 취합니다. 
 
+## <a name="features-by-stage-and-known-issues"></a>단계 및 알려진 문제별 기능
+사용자 지정 정책/ID 경험 프레임워크 기능은 지속적으로 빠르게 개발되고 있습니다.  다음 표는 기능/구성 요소 가용성 색인입니다.
 
->[!NOTE]
->이러한 기능은 결국 Azure AD 기본 제공 정책에 포함되어 모든 개발자가 보다 쉽게 액세스할 수 있게 됩니다.
+[https://aka.ms/aadb2cso](https://aka.ms/aadb2cso)에서 Stack Overflow에 대한 질문을 게시하세요.
+
+
+### <a name="identity-providers-tokens-protocols"></a>ID 공급자, 토큰, 프로토콜
+외부 구성 요소 및 응용 프로그램 인터페이스
+
+| 기능 | 개발 | 미리 보기 | GA | 메모 |
+|---------------------------------------------|-------------|---------|----|-------|
+| IDP-OpenIDConnect |  | x |  | 예: Google+ |
+| IDP-OAUTH2 |  | x |  | 예: Facebook  |
+| IDP-OAUTH1 |  | x |  | 예: Twitter |
+| IDP-SAML |  | x |  | 예: Salesforce, ADFS |
+| IDP-WSFED | x |  |  |  |
+| 신뢰 당사자 OAUTH |  | x |  |  |
+| 신뢰 당사자 OIDC |  | x |  |  |
+| 신뢰 당사자 SAML | x |  |  |  |
+| 신뢰 당사자 WSFED | x |  |  |  |
+| 기본 및 인증서 인증을 사용하는 REST API |  | x |  | 예: Azure Functions |
+
+
+### <a name="component-support"></a>구성 요소 지원
+
+
+| 기능 | 개발 | 미리 보기 | GA | 메모 |
+|-------------------------------------------|-------------|---------|----|-------|
+| Azure Multi Factor Authentication |  | x |  |  |
+| 로컬 디렉터리로서의 Azure Active Directory |  | x |  |  |
+| 2FA을 위한 Azure 전자 메일 하위 시스템 |  | x |  |  |
+| 다중 언어 지원|  | x |  |  |
+| 암호 복잡성 | x |  |  |  |
+
+
+### <a name="content-definition"></a>콘텐츠 정의
+
+| 기능 | 개발 | 미리 보기 | GA | 메모 |
+|-----------------------------------------------------------------------------|-------------|---------|----|-------|
+|   오류 페이지, api.error |  | x |  |  |
+|   IDP 선택 페이지, api.idpselections |  | x |  |  |
+|   등록을 위한 IDP 선택, api.idpselections.signup |  | x |  |  |
+|   암호 찾기, api.localaccountpasswordreset |  | x |  |  |
+|   로컬 계정 로그인, api.localaccountsignin |  | x |  |  |
+|   로컬 계정 등록, api.localaccountsignup |  | x |  |  |
+|   MFA 페이지, api.phonefactor |  | x |  |  |
+|   자체 어설션(예: 소셜 계정 등록), api.selfasserted |  | x |  |  |
+|   자체 어설션 프로필 업데이트, api.selfasserted.profileupdate |  | x |  |  |
+|   통합 등록 또는 로그인 페이지, api.signuporsignin |  | x |  |  |
+
+
+### <a name="app-ief-integration"></a>App-IEF 통합
+| 기능 | 개발 | 미리 보기 | GA | 메모 |
+|--------------------------------------------------|-------------|---------|----|-------------------------------------------------|
+| 쿼리 문자열 매개 변수 id_token_hint | x |  |  |  |
+| 쿼리 문자열 매개 변수 domain_hint |  | x |  | 클레임으로 사용 가능, IDP로 전달될 수 있음 |
+| 쿼리 문자열 매개 변수 login_hint |  | x |  | 클레임으로 사용 가능, IDP로 전달될 수 있음 |
+| client_assertion을 통해 UserJourney에 JSON 삽입 | x |  |  | 지원 중단 예정 |
+| UserJourney에 Id_token_hint로 JSON 삽입 | x |  |  | JSON을 전달하는 진행 방법 |
+
+
+### <a name="session-management"></a>세션 관리
+
+| 기능 | 개발 | 미리 보기 | GA | 메모 |
+|---------------------------------|-------------|---------|----|-------|
+| SSO 세션 공급자 |  | x |  |  |
+| 외부 로그인 세션 공급자 |  | x |  |  |
+| SAML SSO 세션 공급자 |  | x |  |  |
+
+
+### <a name="security"></a>보안
+| 기능 | 개발 | 미리 보기 | GA | 메모 |
+|---------------------------------------------|-------------|---------|----|-------|
+| 정책 키 - 생성, 수동, 업로드 |  | x |  |  |
+| 정책 키 - RSA/Cert, 비밀 |  | x |  |  |
+
+
+### <a name="developer-interface"></a>개발자 인터페이스
+| 기능 | 개발 | 미리 보기 | GA | 메모 |
+|---------------------------------------------|-------------|---------|----|-------|
+| Azure Portal-IEF UX |  | x |  |  |
+| Application Insights UserJourney 로그  |  | x |  |  |
+| Application Insights 이벤트 로그 |x|  |  |  |
+
+
 
 ## <a name="next-steps"></a>다음 단계
 [사용자 지정 정책 시작](active-directory-b2c-get-started-custom.md)
-

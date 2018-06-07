@@ -11,17 +11,14 @@ ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 05/12/2017
+ms.date: 08/08/2017
 ms.author: dobett
-ms.translationtype: Human Translation
-ms.sourcegitcommit: e22bd56e0d111add6ab4c08b6cc6e51c364c7f22
-ms.openlocfilehash: f4690097da1b56a7688754294ab63ec88a457761
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/19/2017
-
-
+ms.openlocfilehash: 7e3837582e2020dc560a2b624352f7326ea87c3d
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="get-started-with-device-management-java"></a>장치 관리 시작(Java)
 
 [!INCLUDE [iot-hub-selector-dm-getstarted](../../includes/iot-hub-selector-dm-getstarted.md)]
@@ -48,7 +45,7 @@ ms.lasthandoff: 05/19/2017
 * 업데이트된 보고된 속성을 표시합니다.
 
 > [!NOTE]
-> [Azure IoT SDKs][lnk-hub-sdks] 문서는 장치와 솔루션 백 엔드에서 실행하기 위해 두 응용 프로그램을 빌드하는 데 사용할 수 있는 Azure IoT SDK에 관한 정보를 제공합니다.
+> 장치와 솔루션 백 엔드에서 실행하기 위해 응용 프로그램을 빌드하는 데 사용할 수 있는 SDK에 관한 정보는 [Azure IoT SDK][lnk-hub-sdks]를 참조하세요.
 
 이 자습서를 완료하려면 다음이 필요합니다.
 
@@ -62,11 +59,17 @@ ms.lasthandoff: 05/19/2017
 
 ## <a name="trigger-a-remote-reboot-on-the-device-using-a-direct-method"></a>직접 메서드를 사용하여 장치에서 원격 재부팅 트리거
 
-이 섹션에서는 시뮬레이트된 장치 앱에서 재부팅 직접 메서드를 호출하고 응답을 표시하는 Java 콘솔 앱을 만듭니다. 그러면 앱에서는 장치에서 보낸 보고된 속성을 폴링하여 재부팅이 완료되는 시간을 확인합니다. 이 콘솔 앱은 IoT Hub에 연결하여 직접 메서드를 호출하고 보고된 속성을 읽습니다.
+이 섹션에서는 다음을 수행하는 Java 콘솔 앱을 만듭니다.
+
+1. 시뮬레이트된 장치 앱에서 재부팅 직접 메서드를 호출합니다.
+1. 응답을 표시합니다.
+1. 장치에서 보낸 보고된 속성을 폴링하여 재부팅이 완료되는 시간을 확인합니다.
+
+이 콘솔 앱은 IoT Hub에 연결하여 직접 메서드를 호출하고 보고된 속성을 읽습니다.
 
 1. dm-get-started라는 빈 폴더를 만듭니다.
 
-1. 명령 프롬프트에서 다음 명령을 사용하여 dm-get-started folder 폴더에 **trigger-reboot**라는 Maven 프로젝트를 만듭니다. 긴 단일 명령입니다.
+1. 명령 프롬프트에서 다음 명령을 사용하여 dm-get-started folder 폴더에 **trigger-reboot**라는 Maven 프로젝트를 만듭니다. 다음은 긴 단일 명령입니다.
 
     `mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=trigger-reboot -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false`
 
@@ -78,7 +81,7 @@ ms.lasthandoff: 05/19/2017
     <dependency>
       <groupId>com.microsoft.azure.sdk.iot</groupId>
       <artifactId>iot-service-client</artifactId>
-      <version>1.5.22</version>
+      <version>1.7.23</version>
       <type>jar</type>
     </dependency>
     ```
@@ -123,7 +126,7 @@ ms.lasthandoff: 05/19/2017
     import java.util.concurrent.ExecutorService;
     ```
 
-1. 다음 클래스 수준 변수를 **App** 클래스에 추가합니다. **{youriothubconnectionstring}**을 *IoT Hub 만들기* 섹션에서 기록한 IoT Hub 연결 문자열로 바꿉니다.
+1. 다음 클래스 수준 변수를 **App** 클래스에 추가합니다. `{youriothubconnectionstring}`은 *IoT Hub 만들기* 섹션에서 기록한 IoT Hub 연결 문자열로 바꿉니다.
 
     ```java
     public static final String iotHubConnectionString = "{youriothubconnectionstring}";
@@ -153,6 +156,12 @@ ms.lasthandoff: 05/19/2017
         }
       }
     }
+    ```
+
+1. 다음 예외를 throw하도록 **main** 메서드의 서명을 수정합니다.
+
+    ```java
+    public static void main(String[] args) throws IOException
     ```
 
 1. 시뮬레이트된 장치에서 재부팅 직접 메서드를 호출하려면 **main** 메서드에 다음 코드를 추가합니다.
@@ -207,7 +216,7 @@ ms.lasthandoff: 05/19/2017
 
 이 섹션에서는 장치를 시뮬레이트하는 Java 콘솔 앱을 만듭니다. 이 앱은 IoT Hub의 재부팅 직접 메서드 호출을 수신하고 그 즉시 해당 호출에 응답합니다. 그런 다음 잠시 유휴 상태로 전환하여 재부팅 프로세스를 시뮬레이트한 후 보고된 속성을 사용하여 **trigger-reboot** 백 엔드 앱에 재부팅이 완료되었음을 알립니다.
 
-1. 명령 프롬프트에서 다음 명령을 사용하여 dm-get-started 폴더에 **simulated-device**라는 Maven 프로젝트를 만듭니다. 긴 단일 명령입니다.
+1. 명령 프롬프트에서 다음 명령을 사용하여 dm-get-started 폴더에 **simulated-device**라는 Maven 프로젝트를 만듭니다. 다음은 긴 단일 명령입니다.
 
     `mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=simulated-device -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false`
 
@@ -219,7 +228,7 @@ ms.lasthandoff: 05/19/2017
     <dependency>
       <groupId>com.microsoft.azure.sdk.iot</groupId>
       <artifactId>iot-device-client</artifactId>
-      <version>1.3.30</version>
+      <version>1.3.32</version>
     </dependency>
     ```
 
@@ -262,7 +271,7 @@ ms.lasthandoff: 05/19/2017
     import java.util.HashSet;
     ```
 
-1. 다음 클래스 수준 변수를 **App** 클래스에 추가합니다. **{yourdeviceconnectionstring}**을 *장치 ID 만들기* 섹션에서 기록해 둔 장치 연결 문자열로 바꿉니다.
+1. 다음 클래스 수준 변수를 **App** 클래스에 추가합니다. `{yourdeviceconnectionstring}`을 *장치 ID 만들기* 섹션에서 기록해 둔 장치 연결 문자열로 바꿉니다.
 
     ```java
     private static final int METHOD_SUCCESS = 200;
@@ -369,14 +378,14 @@ ms.lasthandoff: 05/19/2017
     public static void main(String[] args) throws IOException, URISyntaxException
     ```
 
-1. **DeviceClient**를 인스턴스화하도록 **main** 메서드에 다음 코드를 추가합니다.
+1. **DeviceClient**를 인스턴스화하려면 **main** 메서드에 다음 코드를 추가합니다.
 
     ```java
     System.out.println("Starting device client sample...");
     client = new DeviceClient(connString, protocol);
     ```
 
-1. 직접 메서드 호출 수신을 시작하도록 **main** 메서드에 다음 코드를 추가합니다.
+1. 직접 메서드 호출 수신을 시작하려면 **main** 메서드에 다음 코드를 추가합니다.
 
     ```java
     try
@@ -394,7 +403,7 @@ ms.lasthandoff: 05/19/2017
     }
     ```
 
-1. 장치 시뮬레이터를 종료하도록 **main** 메서드에 다음 코드를 추가합니다.
+1. 장치 시뮬레이터를 종료하려면 **main** 메서드에 다음 코드를 추가합니다.
 
     ```java
     System.out.println("Press any key to exit...");

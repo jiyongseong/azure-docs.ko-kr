@@ -14,13 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/05/2017
 ms.author: v-sharos
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: b2be03e12b2deaecb352f8703650cf23cdefdebd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
-
+ms.openlocfilehash: 48f439a566a8067e153aab4fb789937d2f91268d
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-the-mmc-menu-actions-in-storsimple-snapshot-manager"></a>StorSimple 스냅숏 관리자에서 MMC 메뉴 작업 사용
 
@@ -102,5 +100,4 @@ StorSimple 스냅숏 관리자에서 모든 작업 메뉴에 나열된 다음과
 ## <a name="next-steps"></a>다음 단계
 * [StorSimple 스냅숏 관리자 사용자 인터페이스](storsimple-use-snapshot-manager.md)에 대해 자세히 알아봅니다.
 * [StorSimple 스냅숏 관리자를 사용하여 StorSimple 솔루션을 관리](storsimple-snapshot-manager-admin.md)하는 방법을 자세히 알아봅니다.
-
 

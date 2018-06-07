@@ -1,6 +1,6 @@
 ---
-title: "PowerShell 및 템플릿으로 리소스 배포 | Microsoft Docs"
-description: "Azure Resource Manager와 Azure PowerShell을 사용하여 Azure에 리소스를 배포합니다. 리소스는 Resource Manager 템플릿에 정의됩니다."
+title: PowerShell 및 템플릿으로 리소스 배포 | Microsoft Docs
+description: Azure Resource Manager와 Azure PowerShell을 사용하여 Azure에 리소스를 배포합니다. 리소스는 Resource Manager 템플릿에 정의됩니다.
 services: azure-resource-manager
 documentationcenter: na
 author: tfitzmac
@@ -9,26 +9,24 @@ editor: tysonn
 ms.assetid: 55903f35-6c16-4c6d-bf52-dbf365605c3f
 ms.service: azure-resource-manager
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 05/15/2017
+ms.date: 12/06/2017
 ms.author: tomfitz
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 17c4dc6a72328b613f31407aff8b6c9eacd70d9a
-ms.openlocfilehash: 48e2f606ff676ca1c3217ac4fcca75db0d283616
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/16/2017
-
-
+ms.openlocfilehash: 3a5daea55f2303f695627f06569f04e1c18b5e09
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="deploy-resources-with-resource-manager-templates-and-azure-powershell"></a>리소스 관리자 템플릿과 Azure PowerShell로 리소스 배포
 
-이 항목은 리소스 관리자 템플릿으로 Azure PowerShell을 사용하여 Azure에 리소스를 배포하는 방법을 설명합니다. Azure 솔루션 배포 및 관리와 관련된 개념에 익숙하지 않은 경우 [Azure Resource Manager 개요](resource-group-overview.md)를 참조하세요.
+이 문서는 리소스 관리자 템플릿으로 Microsoft Azure PowerShell을 사용하여 Azure에 리소스를 배포하는 방법을 설명합니다. Azure 솔루션 배포 및 관리와 관련된 개념에 익숙하지 않은 경우 [Azure Resource Manager 개요](resource-group-overview.md)를 참조하세요.
 
 배포하는 Resource Manager 템플릿은 컴퓨터의 로컬 파일 또는 GitHub와 같은 저장소에 있는 외부 파일일 수도 있습니다. 이 문서에서 배포하는 템플릿은 [샘플 템플릿](#sample-template) 섹션 또는 [GitHub의 저장소 계정 템플릿](https://github.com/Azure/azure-quickstart-templates/blob/master/101-storage-account-create/azuredeploy.json)으로 사용할 수 있습니다.
 
-[!INCLUDE [sample-powershell-install](../../includes/sample-powershell-install.md)]
+필요한 경우 [Azure PowerShell 가이드](/powershell/azure/overview)에 있는 지침을 사용하여 Azure PowerShell 모듈을 설치한 다음, `Connect-AzureRmAccount`를 실행하여 Azure에 연결합니다.
 
 <a id="deploy-local-template" />
 
@@ -45,7 +43,9 @@ Azure에 리소스를 배포할 때 다음을 수행합니다.
 다음 예제에서는 리소스 그룹을 만들고 로컬 컴퓨터에서 템플릿을 배포합니다.
 
 ```powershell
-Login-AzureRmAccount
+Connect-AzureRmAccount
+
+Select-AzureRmSubscription -SubscriptionName <yourSubscriptionName>
  
 New-AzureRmResourceGroup -Name ExampleResourceGroup -Location "South Central US"
 New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName ExampleResourceGroup `
@@ -71,6 +71,23 @@ New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName Ex
 ```
 
 앞의 예제에서는 템플릿에 중요한 데이터가 포함되어 있지 않으므로 대부분의 시나리오에 적합한 이 템플릿에 대해 공개적으로 액세스할 수 있는 URI가 필요합니다. 중요한 데이터(예: 관리자 암호)를 지정해야 하는 경우 해당 값을 안전한 매개 변수로 전달합니다. 그러나 템플릿에 공개적으로 액세스할 수 있도록 하지 않으려면 개인 저장소 컨테이너에 저장하여 보호할 수 있습니다. SAS(공유 액세스 서명) 토큰이 필요한 템플릿을 배포하는 데 관한 내용은 [SAS 토큰으로 개인 템플릿 배포](resource-manager-powershell-sas-token.md)를 참조하세요.
+
+[!INCLUDE [resource-manager-cloud-shell-deploy.md](../../includes/resource-manager-cloud-shell-deploy.md)]
+
+Cloud Shell에서 다음 명령을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroup -Name ExampleResourceGroup -Location "South Central US"
+New-AzureRmResourceGroupDeployment -ResourceGroupName ExampleResourceGroup `
+  -TemplateUri <copied URL> `
+  -storageAccountType Standard_GRS
+```
+
+## <a name="deploy-to-more-than-one-resource-group-or-subscription"></a>둘 이상의 리소스 그룹 또는 구독에 배포
+
+일반적으로 단일 리소스 그룹에 템플릿의 모든 리소스를 배포합니다. 그러나 일단의 리소스를 함께 배포하고 다른 리소스 그룹 또는 구독에 배치하려는 시나리오가 있습니다. 단일 배포의 5개 리소스 그룹에만 배포할 수 있습니다. 자세한 내용은 [둘 이상의 구독 또는 리소스 그룹에 Azure 리소스 배포](resource-manager-cross-resource-group-deployment.md)를 참조하세요.
+
+<a id="parameter-file" />
 
 ## <a name="parameter-files"></a>매개 변수 파일
 
@@ -119,7 +136,7 @@ New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName Ex
 리소스를 실제로 배포하지 않고 템플릿과 매개 변수 값을 테스트하려면 [Test-AzureRmResourceGroupDeployment](/powershell/module/azurerm.resources/test-azurermresourcegroupdeployment)를 사용합니다. 
 
 ```powershell
-Test-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName ExampleResourceGroup `
+Test-AzureRmResourceGroupDeployment -ResourceGroupName ExampleResourceGroup `
   -TemplateFile c:\MyTemplates\storage.json -storageAccountType Standard_GRS
 ```
 
@@ -154,7 +171,7 @@ New-AzureRmResourceGroupDeployment -Mode Complete -Name ExampleDeployment `
 
 ## <a name="sample-template"></a>샘플 템플릿
 
-다음 템플릿은 이 항목의 예제에 사용됩니다. 복사한 후 storage.json이라는 파일로 저장합니다. 이 템플릿을 만드는 방법을 이해하려면 [첫 번째 Azure Resource Manager 템플릿 만들기](resource-manager-create-first-template.md)를 참조하세요.  
+다음 템플릿은 이 문서의 예제에 사용됩니다. 복사한 후 storage.json이라는 파일로 저장합니다. 이 템플릿을 만드는 방법을 이해하려면 [첫 번째 Azure Resource Manager 템플릿 만들기](resource-manager-create-first-template.md)를 참조하세요.  
 
 ```json
 {
@@ -208,5 +225,4 @@ New-AzureRmResourceGroupDeployment -Mode Complete -Name ExampleDeployment `
 * 일반적인 배포 오류를 해결하는 방법은 [Azure Resource Manager를 사용한 일반적인 Azure 배포 오류 해결](resource-manager-common-deployment-errors.md)을 참조하세요.
 * SAS 토큰이 필요한 템플릿을 배포하는 데 관한 내용은 [SAS 토큰으로 개인 템플릿 배포](resource-manager-powershell-sas-token.md)를 참조하세요.
 * 엔터프라이즈에서 리소스 관리자를 사용하여 구독을 효과적으로 관리할 수 있는 방법에 대한 지침은 [Azure 엔터프라이즈 스캐폴드 - 규범적 구독 거버넌스](resource-manager-subscription-governance.md)를 참조하세요.
-
 

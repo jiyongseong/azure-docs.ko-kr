@@ -1,58 +1,40 @@
 ---
-title: "Ruby를 사용하여 Azure SQL Database 쿼리 | Microsoft Docs"
-description: "이 항목에서는 Ruby를 사용하여 Azure SQL Database에 연결하고 Transact-SQL 문을 사용하여 쿼리하는 프로그램을 만드는 방법을 보여 줍니다."
+title: Ruby를 사용하여 Azure SQL Database 쿼리 | Microsoft Docs
+description: 이 항목에서는 Ruby를 사용하여 Azure SQL Database에 연결하고 Transact-SQL 문을 사용하여 쿼리하는 프로그램을 만드는 방법을 보여 줍니다.
 services: sql-database
-documentationcenter: 
 author: CarlRabeler
-manager: jhubbard
-editor: 
-ms.assetid: 94fec528-58ba-4352-ba0d-25ae4b273e90
+manager: craigg
 ms.service: sql-database
 ms.custom: mvc,develop apps
-ms.workload: drivers
-ms.tgt_pltfrm: na
 ms.devlang: ruby
-ms.topic: hero-article
-ms.date: 07/14/2017
+ms.topic: quickstart
+ms.date: 04/01/2018
 ms.author: carlrab
+ms.openlocfilehash: f86c53465636f82cf36d5099699fc9e6efeb55a5
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 25ff9a9cfaa5494dbb006c84e235099fe51e6545
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
-
 # <a name="use-ruby-to-query-an-azure-sql-database"></a>Ruby를 사용하여 Azure SQL Database 쿼리
 
-이 빠른 시작 자습서에서는 [Ruby](https://www.ruby-lang.org)를 통해 Azure SQL Database에 연결하고 Transact-SQL 문을 사용하여 데이터를 쿼리하는 프로그램을 만드는 방법을 보여 줍니다.
+이 빠른 시작에서는 [Ruby](https://www.ruby-lang.org)를 사용하여 Azure SQL Database에 연결하고, TRANSACT-SQL 문을 사용하여 데이터를 쿼리하는 프로그램을 만드는 방법을 보여 줍니다.
 
 ## <a name="prerequisites"></a>필수 조건
 
-이 빠른 시작 자습서를 완료하려면 다음 필수 구성 요소가 있어야 합니다.
+이 빠른 시작을 완료하려면 다음 필수 구성 요소가 있어야 합니다.
 
-- Azure SQL 데이터베이스입니다. 이 빠른 시작에서는 다음과 같은 빠른 시작 중 하나에서 만든 리소스를 사용합니다. 
+[!INCLUDE [prerequisites-create-db](../../includes/sql-database-connect-query-prerequisites-create-db-includes.md)]
 
-   - [DB 만들기 - 포털](sql-database-get-started-portal.md)
-   - [DB 만들기 - CLI](sql-database-get-started-cli.md)
-   - [DB 만들기 - PowerShell](sql-database-get-started-powershell.md)
+- 이 빠른 시작에서 사용하는 컴퓨터의 공용 IP 주소에 대한 [서버 수준 방화벽 규칙](sql-database-get-started-portal.md#create-a-server-level-firewall-rule)
 
-- 이 빠른 시작 자습서에서 사용하는 컴퓨터의 공용 IP 주소에 대한 [서버 수준 방화벽 규칙](sql-database-get-started-portal.md#create-a-server-level-firewall-rule)
 - 운영 체제에 맞게 설치된 Ruby 및 관련 소프트웨어
     - **MacOS**: Homebrew를 설치하고, rbenv와 ruby-build를 설치하고, Ruby를 설치한 다음, FreeTDS를 설치합니다. [1.2, 1.3, 1.4 및 1.5 단계](https://www.microsoft.com/sql-server/developer-get-started/ruby/mac/) 참조
     - **Ubuntu**: Ruby용 필수 구성 요소를 설치하고, rbenv와 ruby-build를 설치하고, Ruby를 설치한 다음, FreeTDS를 설치합니다. [1.2, 1.3, 1.4 및 1.5 단계](https://www.microsoft.com/sql-server/developer-get-started/ruby/ubuntu/) 참조
 
 ## <a name="sql-server-connection-information"></a>SQL 서버 연결 정보
 
-Azure SQL Database에 연결하는 데 필요한 연결 정보를 가져옵니다. 다음 절차에는 정규화된 서버 이름, 데이터베이스 이름 및 로그인 정보가 필요합니다.
-
-1. [Azure Portal](https://portal.azure.com/)에 로그인합니다.
-2. 왼쪽 메뉴에서 **SQL Database**를 선택하고 **SQL Database** 페이지에서 데이터베이스를 클릭합니다. 
-3. 데이터베이스의 **개요** 페이지에서 정규화된 서버 이름을 검토합니다. 해당 서버 이름을 마우스로 가리키면 다음 이미지와 같이 **복사하려면 클릭** 옵션이 표시됩니다.
-
-   ![서버 이름](./media/sql-database-connect-query-dotnet/server-name.png) 
-
-4. Azure SQL Database 서버의 로그인 정보를 잊어버린 경우 SQL Database 서버 페이지로 이동하여 서버 관리자 이름을 확인하고 필요한 경우 암호를 다시 설정합니다.
+[!INCLUDE [prerequisites-server-connection-info](../../includes/sql-database-connect-query-prerequisites-server-connection-info-includes.md)]
 
 > [!IMPORTANT]
 > 이 자습서를 수행하는 컴퓨터의 공용 IP 주소에 대한 방화벽 규칙이 있어야 합니다. 다른 컴퓨터에 있거나 다른 공용 IP 주소가 있으면 [Azure Portal을 사용하여 서버 수준 방화벽 규칙을 만듭니다](sql-database-get-started-portal.md#create-a-server-level-firewall-rule). 
@@ -99,4 +81,3 @@ end
 - [TinyTDS에 대한 GitHub 리포지토리](https://github.com/rails-sqlserver/tiny_tds)
 - [TinyTDS에 관한 문제 보고 또는 질문](https://github.com/rails-sqlserver/tiny_tds/issues)
 - [SQL Server용 Ruby 드라이버](https://docs.microsoft.com/sql/connect/ruby/ruby-driver-for-sql-server/)
-

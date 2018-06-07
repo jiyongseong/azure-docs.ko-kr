@@ -1,0 +1,223 @@
+- name: Azure API Management 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: API Management 정보
+      href: api-management-key-concepts.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: 인스턴스 만들기 - 포털
+      href: get-started-create-service-instance.md
+    - name: 인스턴스 만들기 - PowerShell
+      href: powershell-create-service-instance.md
+- name: 자습서
+  items:
+    - name: 1 - 첫 번째 API 가져오기
+      href: import-and-publish.md
+    - name: 2 - 제품 만들기 및 게시
+      href: api-management-howto-add-products.md
+    - name: 3 - 모의 API 응답
+      href: mock-api-responses.md
+    - name: 4 - API 보호
+      href: transform-api.md
+    - name: 5 - 게시된 API 모니터링
+      href: api-management-howto-use-azure-monitor.md
+    - name: 6 - API 디버그
+      href: api-management-howto-api-inspector.md
+    - name: 7 - 수정 버전 추가
+      href: api-management-get-started-revise-api.md
+    - name: 8 - 여러 버전 추가
+      href: api-management-get-started-publish-versions.md
+    - name: 9 - 개발자 포털 사용자 지정
+      href: api-management-customize-styles.md
+- name: 샘플
+  items:
+    - name: 정책
+      href: policy-samples.md
+    - name: Azure PowerShell
+      href: powershell-samples.md
+- name: 개념
+  items:
+    - name: 용어
+      href: api-management-terminology.md
+    - name: 정책
+      items:
+        - name: 개요
+          href: api-management-howto-policies.md
+        - name: 정책 참조 인덱스
+          href: api-management-policies.md
+    - name: 자동화를 사용하여 관리
+      href: automation-manage-api-management.md
+    - name: 오류 처리
+      href: api-management-error-handling-policies.md
+    - name: API 가져오기 제한
+      href: api-management-api-import-restrictions.md
+- name: 방법 가이드
+  items:
+    - name: 'API 정의 '
+      items:
+        - name: API를 수동으로 추가
+          href: add-api-manually.md
+        - name: OpenAPI 사양 가져오기
+          href: import-api-from-oas.md
+        - name: SOAP API 가져오기
+          href: import-soap-api.md
+        - name: SOAP API 가져오기 및 REST로 변환
+          href: restify-soap-api.md
+        - name: API 앱 가져오기
+          href: import-api-app-as-api.md
+        - name: 함수 앱 가져오기
+          href: import-function-app-as-api.md
+        - name: 논리 앱 가져오기
+          href: import-logic-app-as-api.md
+        - name: Service Fabric 앱 가져오기
+          href: ../service-fabric/service-fabric-tutorial-deploy-api-management.md
+        - name: API 편집
+          href: edit-api.md
+    - name: 프로비전 및 비율 크기 조정
+      items:
+        - name: 업그레이드 및 크기 조정
+          href: upgrade-and-scale.md
+        - name: 사용자 지정 도메인 구성
+          href: configure-custom-domain.md
+    - name: 캐시
+      items:
+        - name: 성능 개선을 위해 캐싱 추가
+          href: api-management-howto-cache.md
+    - name: 백 엔드 보호
+      items:
+        - name: Azure AD로 API 보호
+          href: api-management-howto-protect-backend-with-aad.md
+        - name: 가상 네트워크에 연결
+          href: api-management-using-with-vnet.md
+        - name: 내부 가상 네트워크에 연결
+          href: api-management-using-with-internal-vnet.md
+        - name: 내부 VNET에서 Application Gateway 통합
+          href: api-management-howto-integrate-internal-vnet-appgateway.md
+        - name: 상호 인증서 인증
+          href: api-management-howto-mutual-certificates.md
+    - name: 개발자 환경 사용자 지정
+      items:
+        - name: 페이지 콘텐츠 및 레이아웃 수정
+          href: api-management-modify-content-layout.md
+        - name: 템플릿을 사용하여 시스템 페이지 사용자 지정
+          href: api-management-developer-portal-templates.md
+        - name: Azure AD를 사용하는 인증
+          href: api-management-howto-aad.md
+        - name: Azure AD B2C를 사용하는 인증
+          href: api-management-howto-aad-b2c.md
+        - name: 위임된 인증
+          href: api-management-howto-setup-delegation.md
+        - name: 전자 메일 알림 및 템플릿
+          href: api-management-howto-configure-notifications.md
+        - name: 콘솔 OAuth 지원 사용
+          href: api-management-howto-oauth2.md
+    - name: 정책 정의
+      items:
+        - name: 정책 설정 또는 편집
+          href: set-edit-policies.md
+        - name: 정책 식
+          href: api-management-policy-expressions.md
+        - name: 사용자 지정 캐싱
+          href: api-management-sample-cache-by-key.md
+        - name: 고급 모니터링
+          href: api-management-log-to-eventhub-sample.md
+        - name: 고급 요청 제한
+          href: api-management-sample-flexible-throttling.md
+        - name: 외부 서비스 사용
+          href: api-management-sample-send-request.md
+        - name: 속성을 사용하여 기밀 관리
+          href: api-management-howto-properties.md
+        - name: 클라이언트 인증서 인증을 사용하여 API 보안
+          href: api-management-howto-mutual-certificates-for-clients.md
+        - name: 액세스 제한 정책
+          href: api-management-access-restriction-policies.md
+        - name: 고급 정책
+          href: api-management-advanced-policies.md
+        - name: 인증 정책
+          href: api-management-authentication-policies.md
+        - name: 캐싱 정책
+          href: api-management-caching-policies.md
+        - name: 도메인 간 정책
+          href: api-management-cross-domain-policies.md
+        - name: 변환 정책
+          href: api-management-transformation-policies.md
+    - name: 템플릿 참조
+      items:
+        - name: 템플릿
+          href: api-management-developer-portal-templates-reference.md
+        - name: API
+          href: api-management-api-templates.md
+        - name: 제품
+          href: api-management-product-templates.md
+        - name: 응용 프로그램
+          href: api-management-application-templates.md
+        - name: 문제
+          href: api-management-issue-templates.md
+        - name: 사용자 프로필
+          href: api-management-user-profile-templates.md
+        - name: 페이지
+          href: api-management-page-templates.md
+        - name: 템플릿 리소스
+          href: api-management-template-resources.md
+    - name: 데이터 모델 참조
+      href: api-management-template-data-model-reference.md
+    - name: 페이지 컨트롤
+      href: api-management-page-controls.md
+    - name: 프로덕션에서 관리
+      items:
+        - name: 그룹 관리
+          href: api-management-howto-create-groups.md
+        - name: 여러 Azure 지역에 배포
+          href: api-management-howto-deploy-multi-region.md
+        - name: Azure Event Hubs에 이벤트 기록
+          href: api-management-howto-log-event-hubs.md
+        - name: 백업/복원을 사용하여 DR 설정
+          href: api-management-howto-disaster-recovery-backup-restore.md
+        - name: 사용자 계정 관리
+          href: api-management-howto-create-or-invite-developers.md
+        - name: Git를 사용하여 구성
+          href: api-management-configuration-repository-git.md
+        - name: 역할 기반 액세스 제어 사용
+          href: api-management-role-based-access-control.md
+        - name: 관리되는 서비스 ID 사용
+          href: api-management-howto-use-managed-service-identity.md
+        - name: Service Fabric과 통합
+          items:
+            - name: 개요
+              href: ../service-fabric/service-fabric-api-management-overview.md
+            - name: 자습서
+              href: ../service-fabric/service-fabric-tutorial-deploy-api-management.md
+- name: 참고 자료
+  items:
+    - name: Azure PowerShell
+      href: /powershell/azure/overview
+    - name: REST (영문)
+      href: /rest/api/apimanagement/
+    - name: REST(원본)
+      href: /rest/api/apimanagement/ApiManagementREST/api-management-REST
+- name: 리소스
+  items:
+    - name: FAQ
+      href: api-management-faq.md
+    - name: 국가별 가용성
+      href: 'https://azure.microsoft.com/regions/services/'
+    - name: API 디자인 지침
+      href: 'https://docs.microsoft.com/azure/architecture/best-practices/api-design?toc=%2Fazure%2Fapi-management%2Ftoc.json'
+    - name: API 구현 지침
+      href: 'https://docs.microsoft.com/azure/architecture/best-practices/api-implementation?toc=%2Fazure%2Fapi-management%2Ftoc.json'
+    - name: MSDN 포럼
+      href: 'https://social.msdn.microsoft.com/Forums/azure/en-US/home?forum=azureapimgmt'
+    - name: 스택 오버플로
+      href: 'http://stackoverflow.com/questions/tagged/azure-api-management'
+    - name: 동영상
+      href: 'https://azure.microsoft.com/documentation/videos/index/?services=api-management'
+    - name: 로드맵
+      href: 'http://aka.ms/apimroadmap'
+    - name: API Management용 Power BI 솔루션 템플릿
+      href: 'http://aka.ms/apimpbi'
+    - name: 블로그
+      href: 'http://aka.ms/apimblog'
+    - name: 기능 요청
+      href: 'http://aka.ms/apimwish'

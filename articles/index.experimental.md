@@ -1,14 +1,14 @@
---- 
+---
 layout: HubPage
 hide_bc: true
-title: "Microsoft Azure 설명서"
-description: "Microsoft Azure 클라우드 서비스를 사용하여 강력한 응용 프로그램을 관리하는 방법을 알아봅니다. 설명서, 샘플 코드, 자습서 등을 가져옵니다."
+title: Microsoft Azure 설명서
+description: Microsoft Azure 클라우드 서비스를 사용하여 강력한 응용 프로그램을 관리하는 방법을 알아봅니다. 설명서, 샘플 코드, 자습서 등을 가져옵니다.
+ms.openlocfilehash: c7f46f9b22bd3696b7d281815687cca2b90b22b3
+ms.sourcegitcommit: c52123364e2ba086722bc860f2972642115316ef
 ms.translationtype: HT
-ms.sourcegitcommit: 22aa82e5cbce5b00f733f72209318c901079b665
-ms.openlocfilehash: 282e1da4a5ec8ccb3c6119c6de6fd37b83bbb71e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/24/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
+ms.locfileid: "34070064"
 ---
 <div id="main" class="v2">
     <div class="container">
@@ -81,7 +81,7 @@ ms.lasthandoff: 07/24/2017
                             <li>
                                 <div class="container intro">
                                     <h2 class="likeAnH1">Azure 시작</h2>
-                                    <p>빠른 시작, 샘플 및 자습서를 사용하여 가장 많이 사용되는 서비스를 살펴보세요.</p>
+                                    <p>Microsoft Azure의 가장 인기 있는 서비스를 빠른 시작, 샘플 및 자습서를 통해 만나보세요.</p>
                                 </div>
                             </li>
                             <li>
@@ -91,8 +91,8 @@ ms.lasthandoff: 07/24/2017
                                             <div class="cardText">
                                                 <h3>인프라 배포</h3>
                                                 <ul class="noBullet">
-                                                    <li><a class="barLink" href="/azure/virtual-machines/linux/">Linux 가상 컴퓨터</a></li>
-                                                    <li><a class="barLink" href="/azure/virtual-machines/windows/">Windows 가상 컴퓨터</a></li>
+                                                    <li><a class="barLink" href="/azure/virtual-machines/linux/">Linux 가상 머신</a></li>
+                                                    <li><a class="barLink" href="/azure/virtual-machines/windows/">Windows 가상 머신</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -135,11 +135,17 @@ ms.lasthandoff: 07/24/2017
                                                         <span>Python</span>
                                                     </a>
                                                 </div>
+                                                <div class="ico48Link">
+                                                    <a href="/go/azure/">
+                                                        <img src="https://docs.microsoft.com/en-us/media/logos/logo_Go-lightblue.svg" alt=""/>
+                                                        <span>Go</span>
+                                                    </a>
+                                                </div>
                                                 <div>
                                                     <h4>앱 모델</h4>
                                                     <ul class="noBullet">
                                                         <li><a class="barLink" href="/azure/app-service-web/">Web Apps</a></li>
-                                                        <li><a class="barLink" href="/azure/azure-functions/">서버를 사용하지 않는 함수</a></li>
+                                                        <li><a class="barLink" href="/azure/azure-functions/">서버리스 Functions</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -161,7 +167,7 @@ ms.lasthandoff: 07/24/2017
                                                 </ul>
                                                 <h4>NoSQL</h4>
                                                 <ul class="noBullet">
-                                                    <li><a class="barLink" href="/azure/cosmos-db/">Cosmos DB</a></li>
+                                                    <li><a class="barLink" href="/azure/cosmos-db/">Azure Cosmos DB</a></li>
                                                 </ul>
                                                 <h4>AI 및 Cognitive Services</h4>
                                                 <ul class="noBullet">
@@ -180,7 +186,7 @@ ms.lasthandoff: 07/24/2017
                                             <div class="cardText">
                                                 <h3>명령줄 도구</h3>
                                                 <div class="ico48Link">
-                                                    <a href="/cli/azure/overview">
+                                                    <a href="/cli/azure">
                                                         <img src="media/index/azure_dev-7.svg" alt="">
                                                         <span>Azure<br />CLI</span>
                                                     </a>
@@ -218,24 +224,24 @@ ms.lasthandoff: 07/24/2017
                         <ul id="all" class="directory">
                             <li>
                                 <div class="group">
-                                    <h3>Compute</h3>
+                                    <h3>컴퓨팅</h3>
                                     <ul>
                                         <li>
                                             <a href="/azure/virtual-machines/linux/">
                                                 <img src="media/index/VirtualMachine.svg" alt="" />
-                                                <p>Linux Virtual Machines</p>
+                                                <p>Linux 가상 머신</p>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="/azure/virtual-machines/windows/">
                                                 <img src="media/index/VirtualMachine.svg" alt="" />
-                                                <p>Windows Virtual Machines</p>
+                                                <p>Windows 가상 머신</p>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="/azure/virtual-machine-scale-sets/">
                                                 <img src="media/index/AvailabilitySetOld.svg" alt="" />
-                                                <p>가상 컴퓨터 크기 집합</p>
+                                                <p>Virtual Machine Scale Sets</p>
                                             </a>
                                         </li>
                                         <li>
@@ -253,26 +259,26 @@ ms.lasthandoff: 07/24/2017
                                         <li>
                                             <a href="/azure/azure-functions/">
                                                 <img src="media/index/AzureFunctions.svg" alt="" />
-                                                <p>함수</p>
+                                                <p>Functions</p>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="/azure/batch/">
                                                 <img src="media/index/Batch.svg" alt="" />
-                                                <p>배치</p>
+                                                <p>Batch</p>
                                             </a>
                                         </li>
                                         
                                         <li>
                                             <a href="/azure/service-fabric/">
                                                 <img src="media/index/Fabric.svg" alt="" />
-                                                <p>서비스 패브릭</p>
+                                                <p>Service Fabric</p>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="/azure/cloud-services/">
                                                 <img src="media/index/CloudService.svg" alt="" />
-                                                <p>클라우드 서비스</p>
+                                                <p>Cloud Services</p>
                                             </a>
                                         </li>
                                     </ul>
@@ -293,13 +299,13 @@ ms.lasthandoff: 07/24/2017
                                         <li>
                                             <a href="/azure/sql-server-stretch-database/">
                                                 <img src="media/index/SQLDatabase.svg" alt="" />
-                                                <p>SQL Server 스트레치 데이터베이스</p>
+                                                <p>SQL Server Stretch Database</p>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="/azure/cosmos-db/">
                                                 <img src="media/index/cosmosdb.svg" alt="" />
-                                                <p>Cosmos DB</p>
+                                                <p>Azure Cosmos DB</p>
                                             </a>
                                         </li>
                                         <li>
@@ -317,13 +323,13 @@ ms.lasthandoff: 07/24/2017
                                         <li>
                                             <a href="/azure/redis-cache/">
                                                 <img src="media/index/RedisCache.svg" alt="" />
-                                                <p>Redis 캐시</p>
+                                                <p>Redis Cache</p>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="/azure/data-factory/">
                                                 <img src="media/index/DataFactory.svg" alt="" />
-                                                <p>데이터 팩터리</p>
+                                                <p>Data Factory</p>
                                             </a>
                                         </li>
                                     </ul>
@@ -344,7 +350,7 @@ ms.lasthandoff: 07/24/2017
                                         <li>
                                             <a href="/azure/service-fabric/">
                                                 <img src="media/index/Fabric.svg" alt="" />
-                                                <p>서비스 패브릭</p>
+                                                <p>Service Fabric</p>
                                             </a>
                                         </li>
                                         <li>
@@ -356,7 +362,7 @@ ms.lasthandoff: 07/24/2017
                                         <li>
                                             <a href="/azure/batch/">
                                                 <img src="media/index/Batch.svg" alt="" />
-                                                <p>배치</p>
+                                                <p>Batch</p>
                                             </a>
                                         </li>
                                     </ul>
@@ -395,7 +401,7 @@ ms.lasthandoff: 07/24/2017
                                         <li>
                                             <a href="/azure/data-factory/">
                                                 <img src="media/index/DataFactory.svg" alt="" />
-                                                <p>데이터 팩터리</p>
+                                                <p>Data Factory</p>
                                             </a>
                                         </li>
                                         <li>
@@ -422,7 +428,7 @@ ms.lasthandoff: 07/24/2017
                                         <li>
                                             <a href="/azure/azure-stack/">
                                                 <img src="media/index/azure-stack.svg" alt="" />
-                                                <p>Azure 스택</p>
+                                                <p>Azure Stack</p>
                                             </a>
                                         </li>
                                     </ul>
@@ -439,13 +445,13 @@ ms.lasthandoff: 07/24/2017
                                         <li>
                                             <a href="/azure/virtual-network/">
                                                 <img src="media/index/VirtualNetwork.svg" alt="" />
-                                                <p>가상 네트워크</p>
+                                                <p>Virtual Network</p>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="/azure/load-balancer/">
                                                 <img src="media/index/LoadBalancer.svg" alt="" />
-                                                <p>부하 분산 장치</p>
+                                                <p>Load Balancer</p>
                                             </a>
                                         </li>
                                         <li>
@@ -481,7 +487,7 @@ ms.lasthandoff: 07/24/2017
                                         <li>
                                             <a href="/azure/expressroute/">
                                                 <img src="media/index/ExpressRoute.svg" alt="" />
-                                                <p>Express 경로</p>
+                                                <p>ExpressRoute</p>
                                             </a>
                                         </li>
                                         <li>
@@ -586,13 +592,13 @@ ms.lasthandoff: 07/24/2017
                                         <li>
                                             <a href="/azure/cognitive-services/custom-speech-service/cognitive-services-custom-speech-home">
                                                 <img src="media/index/API_Spc_CustomSpeechService.svg" alt="" />
-                                                <p>사용자 지정 음성 서비스</p>
+                                                <p>Custom Speech Service</p>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="/azure/cognitive-services/Custom-Vision-Service/home">
                                                 <img src="media/index/cs-custom-vision.svg" alt="" />
-                                                <p>사용자 지정 시각 검색</p>
+                                                <p>사용자 지정 시각 서비스</p>
                                             </a>
                                         </li>
                                         <li>
@@ -672,7 +678,7 @@ ms.lasthandoff: 07/24/2017
                             </li>
                             <li>
                                 <div class="group">
-                                    <h3>저장소</h3>
+                                    <h3>Storage</h3>
                                     <ul>
                                         <li>
                                             <a href="/azure/storage/">
@@ -695,13 +701,13 @@ ms.lasthandoff: 07/24/2017
                                         <li>
                                             <a href="/azure/backup/">
                                                 <img src="media/index/Backup.svg" alt="" />
-                                                <p>백업</p>
+                                                <p>Backup</p>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="/azure/site-recovery/">
                                                 <img src="media/index/SiteRecovery.svg" alt="" />
-                                                <p>사이트 복구</p>
+                                                <p>Site Recovery</p>
                                             </a>
                                         </li>
                                     </ul>
@@ -722,13 +728,13 @@ ms.lasthandoff: 07/24/2017
                                         <li>
                                             <a href="/azure/stream-analytics/">
                                                 <img src="media/index/StreamAnalytics.svg" alt="" />
-                                                <p>스트림 분석</p>
+                                                <p>Stream Analytics</p>
                                             </a>
                                         </li>
                                         <li>
                                             <a href="/azure/data-catalog/">
                                                 <img src="media/index/data-catalog.svg" alt="" />
-                                                <p>데이터 카탈로그</p>
+                                                <p>Data Catalog</p>
                                             </a>
                                         </li>
                                         <li>
@@ -746,7 +752,7 @@ ms.lasthandoff: 07/24/2017
                                         <li>
                                             <a href="/azure/data-factory/">
                                                 <img src="media/index/DataFactory.svg" alt="" />
-                                                <p>데이터 팩터리</p>
+                                                <p>Data Factory</p>
                                             </a>
                                         </li>
                                         <li>
@@ -842,7 +848,7 @@ ms.lasthandoff: 07/24/2017
                                         <li>
                                             <a href="/azure/machine-learning/">
                                                 <img src="media/index/MachineLearning.svg" alt="" />
-                                                <p>기계 학습</p>
+                                                <p>Machine Learning</p>
                                             </a>
                                         </li>
                                         <li>
@@ -895,7 +901,7 @@ ms.lasthandoff: 07/24/2017
                                         <li>
                                             <a href="/azure/search/">
                                                 <img src="media/index/Search.svg" alt="" />
-                                                <p>Search</p>
+                                                <p>검색</p>
                                             </a>
                                         </li>
                                         <li>
@@ -907,7 +913,7 @@ ms.lasthandoff: 07/24/2017
                                         <li>
                                             <a href="/azure/notification-hubs/">
                                                 <img src="media/index/NotificationHubs.svg" alt="" />
-                                                <p>알림 허브</p>
+                                                <p>Notification Hubs</p>
                                             </a>
                                         </li>
                                     </ul>
@@ -1030,7 +1036,7 @@ ms.lasthandoff: 07/24/2017
                         </ul>
                     </li>
                     <li>
-                        <a data-default="true" href="#Compute">계산</a>
+                        <a data-default="true" href="#Compute">컴퓨팅</a>
                         <ul id="Compute" class="cardsA">
                             <li>
                                 <a href="/azure/virtual-machines/linux/">
@@ -1043,8 +1049,8 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>Linux Virtual Machines</h3>
-                                                    <p>Ubuntu, Red Hat 및 기타 운영 체제의 가상 컴퓨터 프로비전</p>
+                                                    <h3>Linux 가상 머신</h3>
+                                                    <p>Ubuntu, Red Hat 및 기타 운영 체제의 가상 머신 프로비전</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1062,8 +1068,8 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>Windows Virtual Machines</h3>
-                                                    <p>SQL Server, SharePoint 등을 위한 가상 컴퓨터 프로비전</p>
+                                                    <h3>Windows 가상 머신</h3>
+                                                    <p>SQL Server, SharePoint 등을 위한 가상 머신 프로비전</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1081,8 +1087,8 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>가상 컴퓨터 크기 집합</h3>
-                                                    <p>수십 개에서 수천 개에 이르는 Linux 및 Windows 가상 컴퓨터 관리 및 규모 조정</p>
+                                                    <h3>Virtual Machine Scale Sets</h3>
+                                                    <p>수십 개에서 수천 개에 이르는 Linux 및 Windows 가상 머신 관리 및 규모 조정</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1138,7 +1144,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>함수</h3>
+                                                    <h3>Functions</h3>
                                                     <p>서버가 없는 코드로 이벤트 처리</p>
                                                 </div>
                                             </div>
@@ -1157,7 +1163,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>배치</h3>
+                                                    <h3>Batch</h3>
                                                     <p>컨테이너를 사용하여 계산 작업 실행</p>
                                                 </div>
                                             </div>
@@ -1176,8 +1182,8 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>서비스 패브릭</h3>
-                                                    <p>Windows 또는 Linux에서 마이크로 서비스 및 오케스트레이션 컨테이너 개발</p>
+                                                    <h3>Service Fabric</h3>
+                                                    <p>Windows 또는 Linux에서 마이크로 서비스를 개발하고 컨테이너를 오케스트레이션</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1195,7 +1201,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>클라우드 서비스</h3>
+                                                    <h3>Cloud Services</h3>
                                                     <p>가용성과 확장성이 뛰어난 클라우드 응용 프로그램 및 API 만들기</p>
                                                 </div>
                                             </div>
@@ -1237,7 +1243,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>가상 네트워크</h3>
+                                                    <h3>Virtual Network</h3>
                                                     <p>사설 네트워크 프로비전, 온-프레미스 데이터 센터에 선택적으로 연결</p>
                                                 </div>
                                             </div>
@@ -1256,7 +1262,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>부하 분산 장치</h3>
+                                                    <h3>Load Balancer</h3>
                                                     <p>응용 프로그램에 고가용성 및 네트워크 성능 제공</p>
                                                 </div>
                                             </div>
@@ -1276,7 +1282,7 @@ ms.lasthandoff: 07/24/2017
                                                 </div>
                                                 <div class="cardText">
                                                     <h3>Application Gateway</h3>
-                                                    <p>기본 제공 HTTP 부하 분산 및 배달 제어를 사용하는 계층 7 부하 분산 장치</p>
+                                                    <p>기본 제공 HTTP 부하 분산 및 배달 제어를 사용하는 Layer 7 Load Balancer</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1351,7 +1357,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>트래픽 관리자</h3>
+                                                    <h3>Traffic Manager</h3>
                                                     <p>고성능 및 고가용성을 위해 들어오는 트래픽 라우팅</p>
                                                 </div>
                                             </div>
@@ -1400,7 +1406,7 @@ ms.lasthandoff: 07/24/2017
                         </ul>
                     </li>
                     <li>
-                        <a href="#storage">저장소</a>
+                        <a href="#storage">Storage</a>
                         <ul id="storage" class="cardsA">
                             <li>
                                 <a href="/azure/storage/">
@@ -1413,7 +1419,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>저장소</h3>
+                                                    <h3>Storage</h3>
                                                     <p>내구성과 가용성이 높고 대량으로 확장 가능한 클라우드 저장소</p>
                                                 </div>
                                             </div>
@@ -1489,7 +1495,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>사이트 복구</h3>
+                                                    <h3>Site Recovery</h3>
                                                     <p>사설 클라우드의 보호 및 복구 오케스트레이션</p>
                                                 </div>
                                             </div>
@@ -1627,7 +1633,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>Search</h3>
+                                                    <h3>검색</h3>
                                                     <p>완전히 관리되는 SaaS(Search-as-a-Service)</p>
                                                 </div>
                                             </div>
@@ -1727,8 +1733,8 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>서비스 패브릭</h3>
-                                                    <p>Windows 또는 Linux에서 마이크로 서비스 및 오케스트레이션 컨테이너 개발</p>
+                                                    <h3>Service Fabric</h3>
+                                                    <p>Windows 또는 Linux에서 마이크로 서비스를 개발하고 컨테이너를 오케스트레이션</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1765,7 +1771,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>배치</h3>
+                                                    <h3>Batch</h3>
                                                     <p>컨테이너를 사용하여 계산 작업 실행</p>
                                                 </div>
                                             </div>
@@ -1846,8 +1852,8 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>Cosmos DB</h3>
-                                                    <p>관리되는 NoSQL 문서 DaaS(Database-as-a-Service)</p>
+                                                    <h3>Azure Cosmos DB</h3>
+                                                    <p>모든 규모를 위한 전역 배포 다중 모델 데이터베이스</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -1903,7 +1909,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>Redis 캐시</h3>
+                                                    <h3>Redis Cache</h3>
                                                     <p>높은 처리량과 대기 시간이 짧은 데이터 액세스로 빠르고 확장 가능한 응용 프로그램 빌드</p>
                                                 </div>
                                             </div>
@@ -1922,7 +1928,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>데이터 팩터리</h3>
+                                                    <h3>Data Factory</h3>
                                                     <p>데이터 변환과 이동 오케스트레이션 및 관리</p>
                                                 </div>
                                             </div>
@@ -2003,7 +2009,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>사용자 지정 음성 서비스</h3>
+                                                    <h3>Custom Speech Service</h3>
                                                     <p>음성 인식 장벽 극복</p>
                                                 </div>
                                             </div>
@@ -2160,7 +2166,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>데이터 카탈로그</h3>
+                                                    <h3>Data Catalog</h3>
                                                     <p>기업 전체에서 셀프 서비스 데이터 원본 검색 사용</p>
                                                 </div>
                                             </div>
@@ -2217,7 +2223,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>데이터 팩터리</h3>
+                                                    <h3>Data Factory</h3>
                                                     <p>데이터 변환과 이동 오케스트레이션 및 관리</p>
                                                 </div>
                                             </div>
@@ -2550,7 +2556,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>데이터 팩터리</h3>
+                                                    <h3>Data Factory</h3>
                                                     <p>데이터 변환과 이동 오케스트레이션 및 관리</p>
                                                 </div>
                                             </div>
@@ -2594,7 +2600,7 @@ ms.lasthandoff: 07/24/2017
                                                 </div>
                                                 <div class="cardText">
                                                     <h3>Security Center</h3>
-                                                    <p>향상된 가시성을 통해 위협 예방, 감지 및 대응</p>
+                                                    <p>향상된 가시성을 통해 위협을 예방, 감지 및 대응</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -2670,7 +2676,7 @@ ms.lasthandoff: 07/24/2017
                                                 </div>
                                                 <div class="cardText">
                                                     <h3>Active Directory Domain Services</h3>
-                                                    <p>도메인 컨트롤러가 없는 도메인에 Azure 가상 컴퓨터 연결</p>
+                                                    <p>도메인 컨트롤러가 없는 도메인에 Azure 가상 머신 연결</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -2689,7 +2695,7 @@ ms.lasthandoff: 07/24/2017
                                                 </div>
                                                 <div class="cardText">
                                                     <h3>Multi-Factor Authentication</h3>
-                                                    <p>추가 인증 수준을 통해 데이터 및 앱에 대한 액세스 보호</p>
+                                                    <p>인증 수준을 높여 데이터 및 앱에 대한 액세스를 보호</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -2751,7 +2757,7 @@ ms.lasthandoff: 07/24/2017
                                                 </div>
                                                 <div class="cardText">
                                                     <h3>Azure DevTest Labs</h3>
-                                                    <p>재사용 가능 템플릿 및 아티팩트를 사용하는 환경 신속하게 만들기</p>
+                                                    <p>재사용 가능한 템플릿 및 아티팩트를 사용하여 환경을 신속하게 구축</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -2851,7 +2857,7 @@ ms.lasthandoff: 07/24/2017
                                                 </div>
                                                 <div class="cardText">
                                                     <h3>Log Analytics</h3>
-                                                    <p>컴퓨터 데이터를 운영 인텔리전스로 변환하는 방법 알아보기</p>
+                                                    <p>머신 데이터를 운영 인텔리전스로 변환하는 방법 알아보기</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -2907,7 +2913,7 @@ ms.lasthandoff: 07/24/2017
                                                     </div>
                                                 </div>
                                                 <div class="cardText">
-                                                    <h3>사이트 복구</h3>
+                                                    <h3>Site Recovery</h3>
                                                     <p>사설 클라우드의 보호 및 복구 오케스트레이션</p>
                                                 </div>
                                             </div>
@@ -3250,6 +3256,30 @@ ms.lasthandoff: 07/24/2017
                                         <div class="card">
                                             <div class="cardImageOuter">
                                                 <div class="cardImage">
+                                                    <img src="https://docs.microsoft.com/en-us/media/logos/logo_Go-lightblue.svg" alt="" />
+                                                </div>
+                                            </div>
+                                            <div class="cardText">
+                                                <h3>
+                                                    <a href="/go/azure/">Go SDK 가져오기</a>
+                                                </h3>
+                                                <p>
+                                                    <a href="/go/azure/azure-sdk-go-qs-vm">시작</a>
+                                                </p>
+                                                <p>
+                                                    <a href="https://godoc.org/github.com/Azure/azure-sdk-for-go">참조</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="cardSize">
+                                    <div class="cardPadding">
+                                        <div class="card">
+                                            <div class="cardImageOuter">
+                                                <div class="cardImage">
                                                     <img src="media/index/azure_dev-6.svg" alt="" />
                                                 </div>
                                             </div>
@@ -3285,7 +3315,7 @@ ms.lasthandoff: 07/24/2017
                                             <div class="cardText">
                                                 <h3>Azure CLI 2.0 </h3>
                                                 <p>
-                                                    <a href="/cli/azure/overview">시작</a>
+                                                    <a href="/cli/azure">시작</a>
                                                 </p>
                                                 <p>
                                                     <a href="/cli/azure/install-azure-cli">Azure CLI 2.0 다운로드</a>
@@ -3370,7 +3400,7 @@ ms.lasthandoff: 07/24/2017
                                             </div>
                                             <div class="cardText">
                                                 <h3>
-                                                    <a href="https://www.visualstudio.com/vs/azure-tools/">Azure용 Visual Studio 도구</a>
+                                                    <a href="https://www.visualstudio.com/vs/azure-tools/">Visual Studio Tools for Azure</a>
                                                 </h3>
                                                 <p>
                                                     <a href="https://www.microsoft.com/web/handlers/webpi.ashx/getinstaller/VWDOrVs2015AzurePack.appids">다운로드</a>
@@ -3397,13 +3427,13 @@ ms.lasthandoff: 07/24/2017
                                                     <a href="/dotnet/articles/core/docker/visual-studio-tools-for-docker">시작</a>
                                                 </p>
                                                 <p>
-                                                    <a href="https://go.microsoft.com/fwlink/?LinkId=780680">Visual Studio 다운로드</a>
+                                                    <a href="https://go.microsoft.com/fwlink/?LinkId=780680">Visual Studio용 다운로드 </a>
                                                 </p>
                                                 <p>
-                                                    <a href="https://go.microsoft.com/fwlink/?LinkId=780681">Visual Studio 코드 다운로드</a>
+                                                    <a href="https://go.microsoft.com/fwlink/?LinkId=780681">Visual Studio Code용 다운로드 </a>
                                                 </p>
                                                 <p>
-                                                    <a href="https://go.microsoft.com/fwlink/?LinkId=780682">팀 서비스 다운로드</a>
+                                                    <a href="https://go.microsoft.com/fwlink/?LinkId=780682">Team Services용 다운로드</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -3421,7 +3451,7 @@ ms.lasthandoff: 07/24/2017
                                             </div>
                                             <div class="cardText">
                                                 <h3>
-                                                    <a href="https://visualstudiogallery.msdn.microsoft.com/c9eb3ba8-0c59-4944-9a62-6eee37294597">Visual Studio용 PowerShell 도구</a>
+                                                    <a href="https://visualstudiogallery.msdn.microsoft.com/c9eb3ba8-0c59-4944-9a62-6eee37294597">PowerShell Tools for Visual Studio</a>
                                                 </h3>
                                                 <p>
                                                     <a href="https://visualstudiogallery.msdn.microsoft.com/c9eb3ba8-0c59-4944-9a62-6eee37294597">다운로드</a>
@@ -3472,7 +3502,7 @@ ms.lasthandoff: 07/24/2017
                                             </div>
                                             <div class="cardText">
                                                 <h3>
-                                                    <a href="https://www.visualstudio.com/vs/python">Python Tools</a>
+                                                    <a href="https://www.visualstudio.com/vs/python">Python 도구</a>
                                                 </h3>
                                                 <p>
                                                     <a href="https://github.com/Microsoft/PTVS/wiki/PTVS-Installation">Visual Studio 시작</a>
@@ -3603,4 +3633,3 @@ ms.lasthandoff: 07/24/2017
         </ul>
     </div>
 </div>
-

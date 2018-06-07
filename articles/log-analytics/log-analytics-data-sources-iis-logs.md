@@ -1,6 +1,6 @@
 ---
-title: "Log Analytics의 IIS 로그 | Microsoft Docs"
-description: "IIS(인터넷 정보 서비스)는 Log Analytics에서 수집할 수 있는 로그 파일에 사용자 활동을 저장합니다.  이 문서에서는 IIS 로그 수집을 구성하는 방법을 설명하고, OMS 리포지토리에 생성되는 레코드에 대한 자세한 정보를 제공합니다."
+title: "Azure Log Analytics의 IIS 로그 | Microsoft Docs"
+description: "IIS(인터넷 정보 서비스)는 Log Analytics에서 수집할 수 있는 로그 파일에 사용자 활동을 저장합니다.  이 문서에서는 IIS 로그 수집을 구성하는 방법을 설명하고, Log Analytics 작업 영역에 생성되는 레코드에 대한 자세한 정보를 제공합니다."
 services: log-analytics
 documentationcenter: 
 author: bwren
@@ -12,14 +12,13 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 07/12/2017
+ms.date: 01/07/2018
 ms.author: bwren
+ms.openlocfilehash: b8ce4e6fe6e12aa3edb81abad1589924e3e121e4
+ms.sourcegitcommit: 176c575aea7602682afd6214880aad0be6167c52
 ms.translationtype: HT
-ms.sourcegitcommit: 137671152878e6e1ee5ba398dd5267feefc435b7
-ms.openlocfilehash: 2114bdafb3b9fe2eb0632271840b8b70a76d10f1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/09/2018
 ---
 # <a name="iis-logs-in-log-analytics"></a>Log Analytics의 IIS 로그
 IIS(인터넷 정보 서비스)는 Log Analytics에서 수집할 수 있는 로그 파일에 사용자 활동을 저장합니다.  
@@ -42,9 +41,9 @@ Log Analytics는 연결된 각 원본에서 대략 15분마다 IIS 로그 항목
 ## <a name="iis-log-record-properties"></a>IIS 로그 레코드 속성
 IIS 로그 레코드는 **W3CIISLog** 형식이며, 다음 표의 속성이 있습니다.
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 |:--- |:--- |
-| 컴퓨터 |이벤트가 수집된 컴퓨터의 이름입니다. |
+| Computer |이벤트가 수집된 컴퓨터의 이름입니다. |
 | cIP |클라이언트의 IP 주소입니다. |
 | csMethod |GET 또는 POST와 같은 요청 메서드입니다. |
 | csReferer |사용자가 현재 사이트로 이동하는 데 사용된 링크가 있던 사이트입니다. |
@@ -71,17 +70,6 @@ IIS 로그 레코드는 **W3CIISLog** 형식이며, 다음 표의 속성이 있�
 
 | 쿼리 | 설명 |
 |:--- |:--- |
-| Type=W3CIISLog |모든 IIS 로그 레코드 |
-| Type=W3CIISLog scStatus=500 |반환 상태가 500인 모든 IIS 로그 레코드입니다. |
-| Type=W3CIISLog &#124; Measure count() by cIP |클라이언트 IP 주소별 IIS 로그 항목 수 |
-| Type=W3CIISLog csHost="www.contoso.com" &#124; Measure count() by csUriStem |호스트 www.contoso.com의 URL별 IIS 로그 항목 수 |
-| Type=W3CIISLog &#124; Measure Sum(csBytes) by Computer &#124; top 500000 |각 IIS 컴퓨터에서 받은 총 바이트 수 |
-
->[!NOTE]
-> 작업 영역을 [새 Log Analytics 쿼리 언어](log-analytics-log-search-upgrade.md)로 업그레이드한 경우에는 위의 쿼리가 다음과 같이 변경됩니다.
-
-> | 쿼리 | 설명 |
-|:--- |:--- |
 | W3CIISLog |모든 IIS 로그 레코드 |
 | W3CIISLog &#124; where scStatus==500 |반환 상태가 500인 모든 IIS 로그 레코드입니다. |
 | W3CIISLog &#124; summarize count() by cIP |클라이언트 IP 주소별 IIS 로그 항목 수 |
@@ -89,7 +77,6 @@ IIS 로그 레코드는 **W3CIISLog** 형식이며, 다음 표의 속성이 있�
 | W3CIISLog &#124; summarize sum(csBytes) by Computer &#124; take 500000 |각 IIS 컴퓨터에서 받은 총 바이트 수 |
 
 ## <a name="next-steps"></a>다음 단계
-* 분석을 위해 다른 [데이터 원본](log-analytics-data-sources.md)을 수집하도록 Log Analytics를 구성합니다.
+* 분석을 위해 다른 [데이터 원본](log-analytics-data-sources.md) 을 수집하도록 Log Analytics를 구성합니다.
 * 데이터 원본 및 솔루션에서 수집한 데이터를 분석하기 위해 [로그 검색](log-analytics-log-searches.md)에 대해 알아봅니다.
 * IIS 로그에서 발견된 중요한 조건을 사전에 알리도록 Log Analytics의 경고를 구성합니다.
-

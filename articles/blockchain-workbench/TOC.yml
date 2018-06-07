@@ -1,0 +1,50 @@
+- name: Azure Blockchain Workbench(공개 미리 보기)
+  href: index.yml
+- name: 개요
+  items:
+    - name: Azure Blockchain Workbench 정보
+      href: blockchain-workbench-overview.md
+- name: 개념
+  items:
+    - name: 아키텍처
+      href: blockchain-workbench-architecture.md
+    - name: 통합 패턴
+      href: blockchain-workbench-integration-patterns.md
+- name: 방법 가이드
+  items:
+    - name: Workbench 배포
+      href: blockchain-workbench-deploy.md
+    - name: 블록체인 응용 프로그램 만들기
+      href: blockchain-workbench-create-app.md
+    - name: Workbench 사용자 관리
+      href: blockchain-workbench-manage-users.md
+    - name: 블록체인 응용 프로그램 사용
+      href: blockchain-workbench-use.md
+    - name: Workbench API 사용
+      href: blockchain-workbench-use-API.md
+    - name: 응용 프로그램 문제 해결
+      href: blockchain-workbench-troubleshooting.md
+    - name: Workbench 데이터 사용
+      items:
+        - name: DB 방화벽 구성
+          href: blockchain-workbench-database-firewall.md
+        - name: DB 세부 정보 가져오기
+          href: blockchain-workbench-getdb-details.md
+        - name: Excel에서 데이터 사용
+          href: blockchain-workbench-data-excel.md
+        - name: Power BI에서 데이터 사용
+          href: blockchain-workbench-data-powerbi.md
+        - name: SQL Management Studio에서 데이터 사용
+          href: blockchain-workbench-data-sql-management-studio.md
+- name: 참고 자료
+  items:
+    - name: 코드 샘플
+      href: 'https://github.com/Azure-Samples/blockchain'
+    - name: 구성
+      href: blockchain-workbench-configuration-overview.md
+    - name: 데이터베이스 뷰
+      href: blockchain-workbench-database-views.md
+    - name: 메시징 API
+      href: blockchain-workbench-messages-overview.md
+    - name: REST API
+      href: 'https://docs.microsoft.com/rest/api/azure-blockchain-workbench'

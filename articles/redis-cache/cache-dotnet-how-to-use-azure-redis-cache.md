@@ -3,8 +3,8 @@ title: "Azure Redis Cache를 사용하는 방법 | Microsoft 문서"
 description: "Azure Redis Cache를 사용하여 Azure 응용 프로그램의 성능을 향상시키는 방법을 알아봅니다."
 services: redis-cache,app-service
 documentationcenter: 
-author: steved0x
-manager: douge
+author: wesmc7777
+manager: cfowler
 editor: 
 ms.assetid: c502f74c-44de-4087-8303-1b1f43da12d5
 ms.service: cache
@@ -13,13 +13,12 @@ ms.tgt_pltfrm: cache-redis
 ms.devlang: dotnet
 ms.topic: hero-article
 ms.date: 07/27/2017
-ms.author: sdanie
+ms.author: wesmc
+ms.openlocfilehash: a9276eaa4c7d8b11891d7dfade475316ffac5f71
+ms.sourcegitcommit: 2a70752d0987585d480f374c3e2dba0cd5097880
 ms.translationtype: HT
-ms.sourcegitcommit: 137671152878e6e1ee5ba398dd5267feefc435b7
-ms.openlocfilehash: 3dfc026490093523446650c510dbebdd660e8b6b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="how-to-use-azure-redis-cache"></a>Azure Redis Cache 사용 방법
 > [!div class="op_single_selector"]
@@ -308,6 +307,5 @@ Azure Redis Cache는 .NET 개체 및 기본 데이터 유형을 캐시할 수 �
 [a fifteen minute introduction to Redis data types]: http://redis.io/topics/data-types-intro
 
 [How Application Strings and Connection Strings Work]: http://azure.microsoft.com/blog/2013/07/17/windows-azure-web-sites-how-application-strings-and-connection-strings-work/
-
 
 

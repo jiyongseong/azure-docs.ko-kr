@@ -1,32 +1,32 @@
 ---
-title: "독립 실행형 Service Fabric 클러스터에 노드 추가 또는 제거 | Microsoft Docs"
-description: "Windows Server를 실행하는 실제 또는 가상 컴퓨터에서 Azure 서비스 패브릭 클러스터에 노드를 추가하거나 제거하는 방법(온-프레미스 또는 클라우드에 위치 가능)을 알아봅니다."
+title: 독립 실행형 Service Fabric 클러스터에 노드 추가 또는 제거 | Microsoft Docs
+description: Windows Server를 실행하는 실제 또는 가상 머신에서 Azure 서비스 패브릭 클러스터에 노드를 추가하거나 제거하는 방법(온-프레미스 또는 클라우드에 위치 가능)을 알아봅니다.
 services: service-fabric
 documentationcenter: .net
-author: rwike77
+author: dkkapur
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: bc6b8fc0-d2af-42f8-a164-58538be38d02
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 2/02/2017
-ms.author: chackdan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 09f24fa2b55d298cfbbf3de71334de579fbf2ecd
-ms.openlocfilehash: 42b7ea3ec1efa6eb7f3ac31ecefa615c29f7d495
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/08/2017
-
-
+ms.date: 11/02/2017
+ms.author: dekapur
+ms.openlocfilehash: b1ffe3510cf4f5e73b05572a482f49d529fca60d
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
+ms.locfileid: "34212547"
 ---
 # <a name="add-or-remove-nodes-to-a-standalone-service-fabric-cluster-running-on-windows-server"></a>Windows Server가 실행되는 독립 실행형 서비스 패브릭 클러스터에 노드 추가 또는 제거 | Microsoft Azure
-[Windows Server 컴퓨터에 독립 실행형 Service Fabric 클러스터를 만든](service-fabric-cluster-creation-for-windows-server.md)후 비즈니스 요구는 변경될 수 있으며 클러스터에 노드를 추가 또는 제거해야 할 수 있습니다. 이 문서에서는 이 목표를 달성하는 자세한 단계를 제공합니다. 노드 추가/제거 기능은 로컬 개발 클러스터에서 지원되지 않습니다.
+[Windows Server 컴퓨터에 독립 실행형 Service Fabric 클러스터를 만든](service-fabric-cluster-creation-for-windows-server.md) 후 비즈니스 요구는 변경될 수 있으며 클러스터에 노드를 추가 또는 제거해야 할 수 있습니다. 이 문서에서는 이 목표를 달성하는 자세한 단계를 제공합니다. 노드 추가/제거 기능은 로컬 개발 클러스터에서 지원되지 않습니다.
 
 ## <a name="add-nodes-to-your-cluster"></a>클러스터에 노드 추가
-1. [클러스터 배포를 위한 필수 조건을 충족하는 컴퓨터 준비](service-fabric-cluster-creation-for-windows-server.md) 섹션에 나와 있는 단계에 따라 클러스터에 추가할 VM/컴퓨터를 준비합니다.
+
+1. [Service Fabric 클러스터 배포 계획 및 준비](service-fabric-cluster-creation-for-windows-server.md)에 설명된 단계에 따라 클러스터에 추가하려는 VM/컴퓨터를 준비합니다.
 2. 이 VM/컴퓨터를 추가하려는 장애 도메인 및 업그레이드 도메인을 식별합니다.
 3. 클러스터에서 추가하려는 VM/컴퓨터로 RDP(원격 데스크톱)를 수행합니다.
 4. VM/컴퓨터에 [Windows Server용 Service Fabric에 대한 독립 실행형 패키지를 복사 또는 다운로드](http://go.microsoft.com/fwlink/?LinkId=730690)하고 패키지 압축을 풉니다.
@@ -58,7 +58,7 @@ ms.lasthandoff: 06/08/2017
     Service Fabric Explorer에서 업그레이드의 진행률을 모니터링할 수 있습니다. 또한 [Get-ServiceFabricClusterUpgrade](/powershell/module/servicefabric/get-servicefabricclusterupgrade?view=azureservicefabricps)를 실행할 수 있습니다.
 
 ### <a name="add-nodes-to-clusters-configured-with-windows-security-using-gmsa"></a>gMSA를 사용하여 Windows 보안으로 구성된 클러스터에 노드 추가
-gMSA(그룹 관리 서비스 계정)로 구성된 클러스터의 경우(https://technet.microsoft.com/library/hh831782.aspx) 구성 업그레이드를 사용하여 새 노드를 추가할 수 있습니다.
+gMSA(그룹 관리 서비스 계정)로 구성된 클러스터의 경우(https://technet.microsoft.com/library/hh831782.aspx)) 구성 업그레이드를 사용하여 새 노드를 추가할 수 있습니다.
 1. 기존 노드 중 하나에서 [Get-ServiceFabricClusterConfiguration](/powershell/module/servicefabric/get-servicefabricclusterconfiguration?view=azureservicefabricps)을 실행하여 최신 구성 파일을 가져오고 "노드" 섹션에 추가하려는 새 노드에 대한 세부 정보를 추가합니다. 새 노드가 동일한 그룹 관리 계정의 일부인지 확인합니다. 이 계정은 모든 컴퓨터에서 관리자여야 합니다.
 
     ```
@@ -132,5 +132,4 @@ gMSA(그룹 관리 서비스 계정)로 구성된 클러스터의 경우(https:/
 * [독립 실행형 Windows 클러스터에 대한 구성 설정](service-fabric-cluster-manifest.md)
 * [X509 인증서를 사용하여 Windows에서 독립 실행형 클러스터 보호](service-fabric-windows-cluster-x509-security.md)
 * [Windows를 실행하는 Azure VM에서 독립 실행형 서비스 패브릭 클러스터 만들기](service-fabric-cluster-creation-with-windows-azure-vms.md)
-
 

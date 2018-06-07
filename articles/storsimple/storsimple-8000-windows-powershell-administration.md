@@ -4,7 +4,7 @@ description: "StorSimple용 Windows PowerShell을 사용하여 StorSimple 장치
 services: storsimple
 documentationcenter: NA
 author: alkohli
-manager: timlt
+manager: jeconnoc
 editor: 
 ms.assetid: 
 ms.service: storsimple
@@ -12,15 +12,13 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: TBD
-ms.date: 04/03/2017
+ms.date: 01/09/2018
 ms.author: alkohli@microsoft.com
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 89e1054117f19e787da5330932021351fb016209
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 291de21d3d98bf9eb65adc7d506f3549171ee0a0
+ms.sourcegitcommit: 9292e15fc80cc9df3e62731bafdcb0bb98c256e1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/10/2018
 ---
 # <a name="use-windows-powershell-for-storsimple-to-administer-your-device"></a>StorSimple용 Windows PowerShell을 사용하여 장치 관리
 
@@ -128,8 +126,8 @@ Windows PowerShell 원격을 사용하여 StorSimple 장치에 연결할 수 있
 
 HTTP 또는 HTTPS를 사용하여 Windows PowerShell 원격을 통해 연결할 수 있습니다. 다음 자습서의 지침을 사용합니다.
 
-* [HTTP를 사용하여 원격으로 연결](storsimple-remote-connect.md#connect-through-http)
-* [HTTPS를 사용하여 원격으로 연결](storsimple-remote-connect.md#connect-through-https)
+* [HTTP를 사용하여 원격으로 연결](storsimple-8000-remote-connect.md#connect-through-http)
+* [HTTPS를 사용하여 원격으로 연결](storsimple-8000-remote-connect.md#connect-through-https)
 
 ## <a name="connection-security-considerations"></a>연결 보안 고려 사항
 
@@ -186,6 +184,5 @@ Windows PowerShell 인터페이스에서 도움말을 쉽게 업데이트할 수
 
 ## <a name="next-steps"></a>다음 단계
 
-위의 워크플로 중 하나를 수행할 때 StorSimple 장치에서 문제가 발생하는 경우 [StorSimple 배포 문제를 해결하는 도구](storsimple-troubleshoot-deployment.md#tools-for-troubleshooting-storsimple-deployments)를 참조하세요.
-
+위의 워크플로 중 하나를 수행할 때 StorSimple 장치에서 문제가 발생하는 경우 [StorSimple 배포 문제를 해결하는 도구](storsimple-8000-troubleshoot-deployment.md#tools-for-troubleshooting-storsimple-deployments)를 참조하세요.
 

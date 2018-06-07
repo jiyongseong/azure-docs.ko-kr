@@ -1,6 +1,6 @@
 ---
-title: "Azure 모바일 앱에 iOS SDK를 사용하는 방법"
-description: "Azure 모바일 앱에 iOS SDK를 사용하는 방법"
+title: "Azure Mobile Apps에 iOS SDK를 사용하는 방법"
+description: "Azure Mobile Apps에 iOS SDK를 사용하는 방법"
 services: app-service\mobile
 documentationcenter: ios
 author: ysxu
@@ -14,17 +14,16 @@ ms.devlang: objective-c
 ms.topic: article
 ms.date: 10/01/2016
 ms.author: yuaxu
+ms.openlocfilehash: 63dd283605553297a7dc8feab90c8bcbd716d5de
+ms.sourcegitcommit: aaba209b9cea87cb983e6f498e7a820616a77471
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 65817208e1b26fb5f9eb56d164f48b44d57dce56
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/12/2017
 ---
-# <a name="how-to-use-ios-client-library-for-azure-mobile-apps"></a>Azure 모바일 앱용 iOS 클라이언트 라이브러리를 사용하는 방법
+# <a name="how-to-use-ios-client-library-for-azure-mobile-apps"></a>Azure Mobile Apps용 iOS 클라이언트 라이브러리를 사용하는 방법
 [!INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
 
-이 가이드에서는 최신 [Azure Mobile Apps iOS SDK][1]를 사용하여 일반적인 시나리오를 수행하는 방법을 알려줍니다. Azure 모바일 앱을 처음 접하는 경우 먼저 [Azure 모바일 앱 빠른 시작] 을 완료하여 백 엔드를 만들고, 테이블을 만든 다음 미리 빌드된 iOS Xcode 프로젝트를 다운로드합니다. 이 가이드에서는 클라이언트 쪽 iOS SDK에 초점을 둡니다. 백 엔드의 서버 쪽 SDK에 대한 자세한 내용은 서버 SDK 사용 방법을 참조하세요.
+이 가이드에서는 최신 [Azure Mobile Apps iOS SDK][1]를 사용하여 일반적인 시나리오를 수행하는 방법을 알려줍니다. Azure Mobile Apps를 처음 접하는 경우 먼저 [Azure Mobile Apps 빠른 시작] 을 완료하여 백 엔드를 만들고, 테이블을 만든 다음 미리 빌드된 iOS Xcode 프로젝트를 다운로드합니다. 이 가이드에서는 클라이언트 쪽 iOS SDK에 초점을 둡니다. 백 엔드의 서버 쪽 SDK에 대한 자세한 내용은 서버 SDK 사용 방법을 참조하세요.
 
 ## <a name="reference-documentation"></a>참조 설명서
 iOS 클라이언트 SDK에 대한 참조 설명서는 [Azure Mobile Apps iOS 클라이언트 참조][2](영문)에 있습니다.
@@ -39,7 +38,7 @@ iOS SDK는 iOS 버전 8.0 이상을 위한 Objective-C 프로젝트, Swift 2.2 �
 이 가이드에서는 테이블과 함께 백 엔드를 만들었다고 가정합니다. 이 가이드에서는 해당 테이블에 이러한 자습서의 테이블과 동일한 스키마가 있다고 가정합니다. 또한 이 가이드에서는 코드에서 `MicrosoftAzureMobile.framework`를 참조하고 `MicrosoftAzureMobile/MicrosoftAzureMobile.h`를 가져온다고 가정합니다.
 
 ## <a name="create-client"></a>방법: 클라이언트 만들기
-프로젝트에서 Azure 모바일 앱 백 엔드에 액세스하려면 `MSClient`를 만듭니다. `AppUrl` 을 앱 URL로 대체합니다. `gatewayURLString` 및 `applicationKey`는 비워둘 수 있습니다. 인증에 대한 게이트웨이를 설정하는 경우 `gatewayURLString` 을 게이트웨이 URL로 채웁니다.
+프로젝트에서 Azure Mobile Apps 백 엔드에 액세스하려면 `MSClient`를 만듭니다. `AppUrl` 을 앱 URL로 대체합니다. `gatewayURLString` 및 `applicationKey`는 비워둘 수 있습니다. 인증에 대한 게이트웨이를 설정하는 경우 `gatewayURLString` 을 게이트웨이 URL로 채웁니다.
 
 **Objective-C**:
 
@@ -547,7 +546,7 @@ Azure Active Directory를 사용하여 응용 프로그램에 사용자가 로�
 3. 터미널을 사용하여 프로젝트를 포함하는 디렉터리에서 `pod install`을 실행한 다음 생성된 Xcode 작업 영역(프로젝트 아님)을 엽니다.
 4. 사용하는 언어에 따라 응용 프로그램에 다음 코드를 추가합니다. 각 코드에서 다음과 같이 값을 바꿉니다.
 
-   * **INSERT-AUTHORITY-HERE** 를 응용 프로그램이 프로비전된 테넌트의 이름으로 바꿉니다. 형식은 https://login.microsoftonline.com/contoso.onmicrosoft.com이어야 합니다. 이 값은 [Azure 클래식 포털]의 Azure Active Directory에 있는 도메인 탭에서 복사할 수 있습니다.
+   * **INSERT-AUTHORITY-HERE** 를 응용 프로그램이 프로비전된 테넌트의 이름으로 바꿉니다. 형식은 https://login.microsoftonline.com/contoso.onmicrosoft.com이어야 합니다. 이 값은 [Azure Portal]의 Azure Active Directory에 있는 [도메인] 탭에서 복사할 수 있습니다.
    * **INSERT-RESOURCE-ID-HERE** 를 모바일 앱 백 엔드에 대한 클라이언트 ID로 바꿉니다. 포털의 Azure **Active Directory 설정**에 있는 **고급** 탭에서 클라이언트 ID를 가져올 수 있습니다.
    * **INSERT-CLIENT-ID-HERE** 를 네이티브 클라이언트 응용 프로그램에서 복사한 클라이언트 ID로 바꿉니다.
    * HTTPS 체계를 사용하여 **INSERT-REDIRECT-URI-HERE** 를 사이트의 */.auth/login/done* 끝점으로 바꿉니다. 이 값은 *https://contoso.azurewebsites.net/.auth/login/done*과 유사합니다.
@@ -688,11 +687,11 @@ Facebook을 사용하여 응용 프로그램에 사용자를 로그인하도록 
 ## <a name="twitter-fabric"></a>방법: iOS용 Twitter Fabric을 사용하여 사용자 인증
 Twitter를 사용하여 응용 프로그램에 사용자를 로그인하도록 iOS용 Fabric을 사용할 수 있습니다. 클라이언트 흐름 인증은 UX 느낌을 그대로 제공하고 추가 사용자 지정을 허용하기에 `loginWithProvider:completion:` 메서드보다 선호도가 높습니다.
 
-1. 다음으로 [Twitter 로그인에 앱 서비스를 구성하는 방법](app-service-mobile-how-to-configure-twitter-authentication.md) 자습서를 수행하여 Twitter 로그인에 모바일 앱 백 엔드를 구성합니다.
+1. 다음으로 [Twitter 로그인에 App Service를 구성하는 방법](../app-service/app-service-mobile-how-to-configure-twitter-authentication.md) 자습서를 수행하여 Twitter 로그인에 모바일 앱 백 엔드를 구성합니다.
 2. [iOS용 Fabric - 시작] 설명서를 수행하고 TwitterKit를 설정하여 프로젝트에 Fabric을 추가합니다.
 
    > [!NOTE]
-   > 기본적으로 패브릭은 사용자를 위해 Twitter 응용 프로그램을 만듭니다. 다음 코드 조각을 사용하여 이전에 만든 소비자 키 및 소비자 암호를 등록하면 응용 프로그램을 만들지 않아도 됩니다.    또는 [패브릭 대시보드]에 표시되는 값으로 앱 서비스를 제공하는 소비자 키 및 소비자 암호 값을 바꿀 수 있습니다. 이 옵션을 선택하면 콜백 URL을 `https://<yoursitename>.azurewebsites.net/.auth/login/twitter/callback`와 같은 자리 표시자 값으로 설정해야 합니다.
+   > 기본적으로 패브릭은 사용자를 위해 Twitter 응용 프로그램을 만듭니다. 다음 코드 조각을 사용하여 이전에 만든 소비자 키 및 소비자 암호를 등록하면 응용 프로그램을 만들지 않아도 됩니다.    또는 [패브릭 대시보드]에 표시되는 값으로 App Service를 제공하는 소비자 키 및 소비자 암호 값을 바꿀 수 있습니다. 이 옵션을 선택하면 콜백 URL을 `https://<yoursitename>.azurewebsites.net/.auth/login/twitter/callback`와 같은 자리 표시자 값으로 설정해야 합니다.
    >
    >
 
@@ -762,7 +761,7 @@ Twitter를 사용하여 응용 프로그램에 사용자를 로그인하도록 i
 ## <a name="google-sdk"></a>방법: iOS용 Google 로그인 SDK를 사용하여 사용자 인증
 Google 로그인을 사용하여 응용 프로그램에 사용자를 로그인하도록 iOS용 Google 로그인 SDK를 사용할 수 있습니다.  최근에 Google에서 OAuth 보안 정책 변경 소식을 발표했습니다.  정책이 변경됨에 따라 향후에는 Google SDK를 사용해야 할 것입니다.
 
-1. 다음으로 [Google 로그인에 App Service를 구성하는 방법](app-service-mobile-how-to-configure-google-authentication.md) 자습서를 수행하여 Google 로그인에 모바일 앱 백 엔드를 구성합니다.
+1. 다음으로 [Google 로그인에 App Service를 구성하는 방법](../app-service/app-service-mobile-how-to-configure-google-authentication.md) 자습서를 수행하여 Google 로그인에 모바일 앱 백 엔드를 구성합니다.
 2. [iOS용 Google 로그인 - 통합 시작](https://developers.google.com/identity/sign-in/ios/start-integrating) 설명서에 따라 iOS용 Google SDK를 설치합니다. "백 엔드 서버를 사용하여 인증" 섹션은 건너뛰어도 됩니다.
 3. 사용하는 언어에 따라 대리자의 `signIn:didSignInForUser:withError:` 메서드에 다음을 추가합니다.
 
@@ -846,7 +845,7 @@ Google 로그인을 사용하여 응용 프로그램에 사용자를 로그인�
 <!-- Images. -->
 
 <!-- URLs. -->
-[Azure 모바일 앱 빠른 시작]: app-service-mobile-ios-get-started.md
+[Azure Mobile Apps 빠른 시작]: app-service-mobile-ios-get-started.md
 
 [Add Mobile Services to Existing App]: /develop/mobile/tutorials/get-started-data
 [Get started with Mobile Services]: /develop/mobile/tutorials/get-started-ios
@@ -854,7 +853,7 @@ Google 로그인을 사용하여 응용 프로그램에 사용자를 로그인�
 [Mobile Services SDK]: https://go.microsoft.com/fwLink/p/?LinkID=266533
 [Authentication]: /develop/mobile/tutorials/get-started-with-users-ios
 [iOS SDK]: https://developer.apple.com/xcode
-
+[Azure Portal]: https://portal.azure.com/
 [Handling Expired Tokens]: http://go.microsoft.com/fwlink/p/?LinkId=301955
 [Live Connect SDK]: http://go.microsoft.com/fwlink/p/?LinkId=301960
 [Permissions]: http://msdn.microsoft.com/library/windowsazure/jj193161.aspx
@@ -876,8 +875,7 @@ Google 로그인을 사용하여 응용 프로그램에 사용자를 로그인�
 [4]: app-service-mobile-dotnet-backend-how-to-use-server-sdk.md#tags
 [5]: http://azure.github.io/azure-mobile-services/iOS/v3/Classes/MSClient.html#//api/name/invokeAPI:data:HTTPMethod:parameters:headers:completion:
 [6]: https://github.com/Azure/azure-mobile-services/blob/master/sdk/iOS/src/MSError.h
-[7]: app-service-mobile-how-to-configure-active-directory-authentication.md
+[7]: ../app-service/app-service-mobile-how-to-configure-active-directory-authentication.md
 [8]: ../active-directory/active-directory-devquickstarts-ios.md
-[9]: app-service-mobile-how-to-configure-facebook-authentication.md
+[9]: ../app-service/app-service-mobile-how-to-configure-facebook-authentication.md
 [10]: https://developers.facebook.com/docs/ios/getting-started
-

@@ -3,8 +3,8 @@ title: "Azure Redis Cache를 Node.js와 함께 사용하는 방법 | Microsoft �
 description: "Node.js 및 node_redis를 사용하여 Azure Redis Cache를 시작합니다."
 services: redis-cache
 documentationcenter: 
-author: steved0x
-manager: douge
+author: wesmc7777
+manager: cfowler
 editor: v-lincan
 ms.assetid: 06fddc95-8029-4a8d-83f5-ebd5016891d9
 ms.service: cache
@@ -13,12 +13,12 @@ ms.topic: hero-article
 ms.tgt_pltfrm: cache-redis
 ms.workload: tbd
 ms.date: 02/10/2017
-ms.author: sdanie
-translationtype: Human Translation
-ms.sourcegitcommit: 5369dcd6ad1ec93c63eb442db9fc5ffdcca37375
-ms.openlocfilehash: 530191637b1aa91ee1d7fe5b5bb032c60983f7dc
-
-
+ms.author: wesmc
+ms.openlocfilehash: e8b4818ad2b876ce4d55cf8aa2aa0e0162dea963
+ms.sourcegitcommit: 2a70752d0987585d480f374c3e2dba0cd5097880
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="how-to-use-azure-redis-cache-with-nodejs"></a>Azure Redis Cache를 Node.js와 함께 사용하는 방법
 > [!div class="op_single_selector"]
@@ -32,7 +32,7 @@ ms.openlocfilehash: 530191637b1aa91ee1d7fe5b5bb032c60983f7dc
 
 Azure Redis Cache는 Microsoft에서 관리하는 안전한 전용 Redis Cache에 액세스할 수 있게 합니다. Microsoft Azure 내의 모든 응용 프로그램에서 캐시에 액세스할 수 있습니다.
 
-이 항목에서는 Node.js를 사용하여 Azure Redis Cache를 시작하는 방법을 설명합니다. Azure Redis Cache를 Node.js와 함께 사용하는 방법에 대한 다른 예는 [Azure 웹 사이트에서 Socket.IO를 사용하여 Node.js 채팅 응용 프로그램 빌드](../app-service-web/web-sites-nodejs-chat-app-socketio.md)를 참조하세요.
+이 항목에서는 Node.js를 사용하여 Azure Redis Cache를 시작하는 방법을 설명합니다. 
 
 ## <a name="prerequisites"></a>필수 조건
 [node_redis](https://github.com/mranney/node_redis) 설치:
@@ -76,7 +76,7 @@ Azure Redis Cache는 Microsoft에서 관리하는 안전한 전용 Redis Cache�
             console.log(reply);
         });
 
-출력:
+출력
 
     OK
     value
@@ -85,10 +85,4 @@ Azure Redis Cache는 Microsoft에서 관리하는 안전한 전용 Redis Cache�
 ## <a name="next-steps"></a>다음 단계
 * [캐시 진단을 사용](cache-how-to-monitor.md#enable-cache-diagnostics)하도록 설정하면 캐시의 상태를 [모니터링](cache-how-to-monitor.md)할 수 있습니다.
 * 공식 [Redis 설명서](http://redis.io/documentation)를 읽어보세요.
-
-
-
-
-<!--HONumber=Feb17_HO2-->
-
 

@@ -12,19 +12,17 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: dotnet
 ms.topic: article
-ms.date: 4/10/2017
+ms.date: 12/19/2017
 ms.author: sethm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 785d3a8920d48e11e80048665e9866f16c514cf7
-ms.openlocfilehash: a9023448c4ced1edf54c84bb103454cbd76fbfba
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/12/2017
-
+ms.openlocfilehash: 2ae2f8f2006507284338fb4fa62e4942476cf2bc
+ms.sourcegitcommit: f46cbcff710f590aebe437c6dd459452ddf0af09
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/20/2017
 ---
-
 # <a name="event-hubs-management-libraries"></a>Event Hubs 관리 라이브러리
 
-Event Hubs 관리 라이브러리는 Event Hubs 네임스페이스 및 엔터티를 동적으로 프로비전할 수 있습니다. 이를 통해 복잡한 배포 및 메시지 시나리오가 가능하며, 어떤 엔터티를 프로비전할 것인지 프로그래밍 방식으로 결정할 수 있습니다. 이러한 라이브러리는 현재 .NET에서 사용할 수 있습니다.
+Event Hubs 관리 라이브러리는 Event Hubs 네임스페이스 및 엔터티를 동적으로 프로비전할 수 있습니다. 이 동적 특성을 통해 복잡한 배포 및 메시지 시나리오가 가능하며, 어떤 엔터티를 프로비전할 것인지 프로그래밍 방식으로 결정할 수 있습니다. 이러한 라이브러리는 현재 .NET에서 사용할 수 있습니다.
 
 ## <a name="supported-functionality"></a>지원되는 기능
 
@@ -40,13 +38,13 @@ Event Hubs 관리 라이브러리 사용을 시작하려면 AAD(Azure Active Dir
 * [Azure PowerShell을 사용하여 리소스에 액세스하는 서비스 주체 만들기](../azure-resource-manager/resource-group-authenticate-service-principal.md)
 * [Azure CLI를 사용하여 리소스에 액세스하는 서비스 주체 만들기](../azure-resource-manager/resource-group-authenticate-service-principal-cli.md)
 
-이러한 자습서는 관리 라이브러리를 통해 인증에 사용되는 `AppId`(클라이언트 ID), `TenantId` 및 `ClientSecret`(인증 키)를 제공합니다. 실행하려는 리소스 그룹에 대한 '소유자' 권한이 있어야 합니다.
+이러한 자습서는 관리 라이브러리를 통해 인증에 사용되는 `AppId`(클라이언트 ID), `TenantId` 및 `ClientSecret`(인증 키)를 제공합니다. 실행하려는 리소스 그룹에 대한 **소유자** 권한이 있어야 합니다.
 
 ## <a name="programming-pattern"></a>프로그래밍 패턴
 
 Event Hubs 리소스를 조작하는 패턴은 일반 프로토콜을 따릅니다.
 
-1. `Microsoft.IdentityModel.Clients.ActiveDirectory` 라이브러리를 사용하여 Azure Active Directory에서 토큰을 얻습니다.
+1. `Microsoft.IdentityModel.Clients.ActiveDirectory` 라이브러리를 사용하여 AAD에서 토큰을 가져옵니다.
     ```csharp
     var context = new AuthenticationContext($"https://login.microsoftonline.com/{tenantId}");
 
@@ -81,4 +79,3 @@ Event Hubs 리소스를 조작하는 패턴은 일반 프로토콜을 따릅니�
 ## <a name="next-steps"></a>다음 단계
 * [.NET 관리 샘플](https://github.com/Azure-Samples/event-hubs-dotnet-management/)
 * [Microsoft.Azure.Management.EventHub 참조](/dotnet/api/Microsoft.Azure.Management.EventHub) 
-

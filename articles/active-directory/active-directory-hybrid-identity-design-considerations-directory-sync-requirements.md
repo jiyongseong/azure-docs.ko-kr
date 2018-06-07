@@ -1,10 +1,10 @@
 ---
-title: "Azure Active Directory 하이브리드 ID 디자인 고려 사항 - 디렉터리 동기화 요구 사항 확인 | Microsoft Docs"
+title: "Azure의 하이브리드 ID 디자인 - 디렉터리 동기화 요구 사항 | Microsoft Docs"
 description: "기업에 대한 온-프레미스와 클라우드 사이의 모든 사용자를 동기화하는 데 필요한 요구 사항을 식별합니다."
 documentationcenter: 
 services: active-directory
 author: billmath
-manager: femila
+manager: mtillman
 editor: 
 ms.assetid: 593eaa71-17eb-4c16-8c98-43cc62987e65
 ms.service: active-directory
@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 07/18/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 69f7b49fd82e4d34b1d54718cfbd2f4dedd2ae47
-ms.openlocfilehash: e50a308a897878d0985f2a8f1baa044e5c82335f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/05/2017
-
+ms.custom: seohack1
+ms.openlocfilehash: 475b35c767fcc9c42b828dd2219a14890e05f779
+ms.sourcegitcommit: f1c1789f2f2502d683afaf5a2f46cc548c0dea50
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/18/2018
 ---
 # <a name="determine-directory-synchronization-requirements"></a>디렉터리 동기화 요구 사항 결정
 동기화는 해당 온-프레미스 ID에 기반하여 클라우드에서 사용자에게 ID를 제공하는 모든 작업입니다. 인증에 대해 동기화된 계정 또는 페더레이션된 인증을 사용하는지와 무관하게 사용자는 클라우드에서 ID가 필요합니다.  이 ID는 정기적으로 유지 관리하고 업데이트해야 합니다.  업데이트는 제목 변경에서 암호 변경까지 다양한 형태일 수 있습니다.  
@@ -74,5 +74,4 @@ ms.lasthandoff: 05/05/2017
 
 ## <a name="see-also"></a>참고 항목
 [디자인 고려 사항 개요](active-directory-hybrid-identity-design-considerations-overview.md)
-
 

@@ -1,23 +1,20 @@
 ---
-title: "조건부 액세스 - Azure SQL Database 및 데이터 웨어하우스 | Microsoft Doc"
-description: "Azure SQL Database 및 데이터 웨어하우스에 대한 조건부 액세스를 구성하는 방법에 대해 알아봅니다."
+title: 조건부 액세스 - Azure SQL Database 및 데이터 웨어하우스 | Microsoft Doc
+description: Azure SQL Database 및 데이터 웨어하우스에 대한 조건부 액세스를 구성하는 방법에 대해 알아봅니다.
 services: sql-database
-author: BYHAM
-manager: jhubbard
+author: GithubMirek
+manager: johammer
 ms.custom: security
 ms.service: sql-database
 ms.topic: article
-ms.date: 06/07/2017
-ms.author: rickbyh
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 9edcaee4d051c3dc05bfe23eecc9c22818cf967c
-ms.openlocfilehash: 0dcec61c03a84197e2c351761c743683caa98a06
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/08/2017
-
+ms.date: 04/01/2018
+ms.author: mireks
+ms.openlocfilehash: f7f34bc7a28cdf3a23af54785002b12fba4baf1d
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-
-
 # <a name="conditional-access-mfa-with-azure-sql-database-and-data-warehouse"></a>Azure SQL Database 및 데이터 웨어하우스를 사용하여 조건부 액세스(MFA)  
 
 SQL Database와 SQL Data Warehouse는 Microsoft 조건부 액세스를 지원합니다. 다음 단계에서는 조건부 액세스 정책을 적용하기 위해 SQL Database를 구성하는 방법을 보여 줍니다.  
@@ -27,7 +24,7 @@ SQL Database와 SQL Data Warehouse는 Microsoft 조건부 액세스를 지원합
 - 다단계 인증을 사용하는 경우 최신 SSMS와 같은 지원되는 도구에 연결해야 합니다. 자세한 내용은 [SQL Server Management Studio에 대한 Azure SQL Database 다단계 인증 구성](sql-database-ssms-mfa-authentication-configure.md)을 참조하세요.  
 
 ## <a name="configure-ca-for-azure-sql-dbdw"></a>Azure SQL DB/DW에 대한 CA 구성  
-1.  포털에 로그인하고 **Azure Active Directory**를 선택한 다음 **조건부 액세스**를 선택합니다. 자세한 내용은 [Azure Active Directory 조건부 액세스 기술 참조](https://docs.microsoft.com/en-us/azure/active-directory/active-directory-conditional-access-technical-reference)를 참조하세요.  
+1.  포털에 로그인하고 **Azure Active Directory**를 선택한 다음 **조건부 액세스**를 선택합니다. 자세한 내용은 [Azure Active Directory 조건부 액세스 기술 참조](https://docs.microsoft.com/azure/active-directory/active-directory-conditional-access-technical-reference)를 참조하세요.  
   ![조건부 액세스 블레이드](./media/sql-database-conditional-access/conditional-access-blade.png) 
      
 2.  **조건부 액세스 정책** 블레이드에서 **새 정책**을 클릭하고 이름을 입력한 다음 **규칙 구성**을 클릭합니다.  
@@ -51,4 +48,3 @@ Azure AD Premium을 사용하여 Azure SQL DB/DW에 대한 연결을 허용하�
 ## <a name="next-steps"></a>다음 단계  
 
 자습서는 [Azure SQL Database 보안](sql-database-security-tutorial.md)을 참조하세요.
-

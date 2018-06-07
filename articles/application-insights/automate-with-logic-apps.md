@@ -3,7 +3,7 @@ title: "Logic Apps를 사용하여 Azure Application Insights 프로세스를 �
 description: "논리 앱에 Application Insights 커넥터를 추가하여 반복 가능한 프로세스를 신속하게 자동화하는 방법을 알아봅니다."
 services: application-insights
 documentationcenter: 
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.service: application-insights
 ms.workload: tbd
@@ -11,15 +11,13 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 06/29/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 06bfb75a07b7902fcf245271def5d40e9941a89e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: e17d8076a00cab2cf608fe1a690e4a780a69d56f
+ms.sourcegitcommit: d87b039e13a5f8df1ee9d82a727e6bc04715c341
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/21/2018
 ---
-
 # <a name="automate-application-insights-processes-by-using-logic-apps"></a>Logic Apps를 사용하여 Application Insights 프로세스 자동화
 
 서비스가 제대로 작동하는지 확인하기 위해 원격 분석 데이터에 대해 같은 쿼리를 반복적으로 실행하고 있나요? 추세와 비정상을 찾기 위해 이러한 쿼리를 자동화하고 여기에 관련된 고유한 워크플로를 빌드하기를 원하나요? Logic Apps용 Azure Application Insights 커넥터(미리 보기)가 이러한 용도에 적합한 도구입니다.
@@ -33,8 +31,8 @@ ms.lasthandoff: 07/08/2017
 이 자습서에서는 Analytics 자동 클러스터 알고리즘을 사용하여 웹 응용 프로그램에 대한 데이터에서 특성을 그룹화하는 논리 앱을 만드는 방법을 알아봅니다. 흐름은 자동으로 메일을 통해 결과를 보내며, 이는 Application Insights Analytics와 Logic Apps를 함께 사용하는 방법의 한 가지 예일 뿐입니다. 
 
 ### <a name="step-1-create-a-logic-app"></a>1단계: 논리 앱 만들기
-1. [Azure 포털](https://portal.azure.com)에 로그인합니다.
-2. **+새로 만들기** 창을 선택하고 **웹 + 모바일**을 선택한 다음 **논리 앱**을 선택합니다.
+1. [Azure Portal](https://portal.azure.com)에 로그인합니다.
+2. **리소스 만들기**를 클릭하고 **웹 + 모바일**을 선택한 다음, **논리 앱**을 선택합니다.
 
     ![새 논리 앱 창](./media/automate-with-logic-apps/logicapp1.png)
 
@@ -102,9 +100,9 @@ ms.lasthandoff: 07/08/2017
 
    a. 받는 사람의 이메일 주소를 입력합니다.
 
-   b. 이메일의 제목을 입력합니다.
+   나. 이메일의 제목을 입력합니다.
 
-   c. **본문** 상자의 임의의 위치를 클릭한 다음, 오른쪽에서 열리는 동적 콘텐츠 메뉴에서 **본문**을 선택합니다.
+   다. **본문** 상자의 임의의 위치를 클릭한 다음, 오른쪽에서 열리는 동적 콘텐츠 메뉴에서 **본문**을 선택합니다.
 
    d. **고급 옵션 표시**를 클릭합니다.
 
@@ -114,9 +112,9 @@ ms.lasthandoff: 07/08/2017
 
     a. **첨부 파일 이름**을 선택합니다.
 
-    b. **첨부 파일 콘텐츠**를 선택합니다.
+    나. **첨부 파일 콘텐츠**를 선택합니다.
     
-    c. **HTML임** 상자에서 **예**를 선택합니다.
+    다. **HTML임** 상자에서 **예**를 선택합니다.
 
       ![Office 365 메일 구성 화면](./media/automate-with-logic-apps/flow7.png)
 
@@ -139,7 +137,6 @@ ms.lasthandoff: 07/08/2017
 
 
 <!--Link references-->
-
 
 
 

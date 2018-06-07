@@ -1,97 +1,49 @@
 ---
-title: "처리량을 높이기 위한 Stream Analytics 작업 규모 지정 | Microsoft Docs"
-description: "입력 파티션을 구성하고, 쿼리 정의를 조정하고, 작업 스트리밍 단위를 설정하여 Stream Analytics 작업의 크기를 조정하는 방법을 알아봅니다."
-keywords: "데이터 스트리밍, 스트리밍 데이터 처리, 분석 조정"
+title: Azure Stream Analytics 작업에서 강화 및 확장
+description: 이 아티클에서는 입력 데이터를 분할하고, 쿼리를 조정하고, 작업 스트리밍 단위를 설정하여 Stream Analytics 작업의 크기를 조정하는 방법을 설명합니다.
 services: stream-analytics
-documentationcenter: 
-author: jeffstokes72
-manager: jhubbard
-editor: cgronlun
-ms.assetid: 7e857ddb-71dd-4537-b7ab-4524335d7b35
+author: JSeb225
+ms.author: jeanb
+manager: kfile
+ms.reviewer: jasonh
 ms.service: stream-analytics
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: data-services
+ms.topic: conceptual
 ms.date: 06/22/2017
-ms.author: jeffstok
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: 9a2b16fc6dff687e2a1fa03c9194d50711f53476
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
-
+ms.openlocfilehash: 2868ebd459f937f8621086b16c63f89842f376be
+ms.sourcegitcommit: c47ef7899572bf6441627f76eb4c4ac15e487aec
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/04/2018
 ---
-# <a name="scale-azure-stream-analytics-jobs-to-increase-stream-data-processing-throughput"></a>Azure Stream Analytics 작업 크기를 조정하여 스트림 데이터 처리량 증가
-이 문서에서는 Streaming Analytics 작업에 대한 처리량을 증가시키기 위해 Stream Analytics 쿼리를 조정하는 방법을 보여 줍니다. 입력 파티션을 구성하고, 분석 쿼리 정의를 조정하고, 작업 *SU(스트리밍 단위)*를 계산 및 설정하여 Stream Analytics 작업의 크기를 조정하는 방법을 알아봅니다. 
+# <a name="scale-an-azure-stream-analytics-job-to-increase-throughput"></a>처리량을 높이도록 Azure Stream Analytics 작업 크기 조정
+이 문서에서는 Streaming Analytics 작업에 대한 처리량을 증가시키기 위해 Stream Analytics 쿼리를 조정하는 방법을 보여 줍니다. 다음 가이드를 사용하여 더 높은 부하를 처리하고 더 많은 시스템 리소스(예: 추가 대역폭, 추가 CPU 리소스, 추가 메모리)를 활용하도록 작업 크기를 조정할 수 있습니다.
+전제 조건으로 다음 문서를 읽을 필요가 있습니다.
+-   [스트리밍 단위 이해 및 조정](stream-analytics-streaming-unit-consumption.md)
+-   [병렬 처리 가능한 작업 만들기](stream-analytics-parallelization.md)
 
-## <a name="what-are-the-parts-of-a-stream-analytics-job"></a>Stream Analytics 작업은 무엇으로 구성되나요?
-Stream Analytics 작업 정의에는 입력, 쿼리 및 출력이 포함됩니다. 입력은 작업이 데이터 스트림을 읽는 위치입니다. 쿼리는 데이터 입력 스트림을 변환하는 데 사용되며, 출력은 작업이 작업 결과를 전송하는 위치입니다.  
+## <a name="case-1--your-query-is-inherently-fully-parallelizable-across-input-partitions"></a>사례 1 - 쿼리가 기본적으로 여러 입력 파티션 간에 완전히 병렬 처리 가능한 경우
+쿼리가 기본적으로 여러 입력 파티션 간에 완전히 병렬 처리가 가능하면 다음 단계를 따를 수 있습니다.
+1.  **PARTITION BY** 키워드를 사용하여 쉬운 병렬 처리가 되도록 쿼리를 작성합니다. [이 페이지](stream-analytics-parallelization.md)의 쉬운 병렬 처리(Embarrassingly parallel) 작업 섹션에서 자세한 내용을 참조하세요.
+2.  쿼리에 사용되는 출력 형식에 따라, 일부 출력은 병렬 처리할 수 없거나, 쉬운 병렬 처리를 위해 추가 구성이 필요할 수 있습니다. 예를 들어 SQL, SQL DW 및 PowerBI 출력은 병렬 처리가 가능하지 않습니다. 출력은 출력 싱크로 전송되기 전에 항상 병합됩니다. Blob, Tables, ADLS, Service Bus 및 Azure Function은 자동으로 병렬 처리됩니다. CosmosDB 및 이벤트 허브에서는 PartitionKey 구성이 **PARTITION BY** 필드(일반적으로 PartitionId)와 일치하도록 설정되어야 합니다. 이벤트 허브의 경우 모든 입/출력의 파티션 수가 일치하도록 하여 파티션 간에 교차가 이루어지지 않도록 특히 주의해야 합니다. 
+3.  **6개 SU**(단일 컴퓨팅 노드의 전체 용량)로 쿼리를 실행하여 달성 가능한 최대 처리량을 측정하고, **GROUP BY**를 사용하는 경우 작업이 처리할 수 있는 그룹(카디널리티) 수를 측정합니다. 시스템 리소스 제한에 도달하는 작업의 일반적인 증상은 다음과 같습니다.
+    - SU % 사용률 메트릭이 80%를 초과합니다. 이것은 메모리 사용량이 높음을 나타냅니다. 이 메트릭의 증가에 영향을 주는 요인은 [여기](stream-analytics-streaming-unit-consumption.md)에 설명되어 있습니다. 
+    -   출력 타임스탬프가 벽 시계 시간보다 느립니다. 쿼리 논리에 따라 출력 타임스탬프와 벽 시계 시간 간에는 논리 오프셋이 있을 수 있습니다. 그러나 이들은 거의 같은 속도로 진행됩니다. 출력 타임스탬프가 점점 더 느려지면 시스템이 과부하되었다는 것을 의미합니다. 이것은 다운스트림 출력 싱크 제한이나 높은 CPU 사용률의 결과일 수 있습니다. 현재는 CPU 사용률 메트릭을 제공하지 않으므로 둘 간을 구분하는 것이 어려울 수 있습니다.
+        - 이 문제가 싱크 제한으로 발생한 경우 출력 파티션의 수를 늘리거나(또한 입력 파티션의 수를 늘려 작업을 완전히 병렬 처리가 가능하도록 유지) 싱크의 리소스 양(예: CosmosDB에 대한 요청 단위 수)을 늘려야 할 수 있습니다.
+    - 작업 다이어그램에는 각 입력에 대한 파티션 기준 백로그 이벤트 메트릭이 있습니다. 백로그 이벤트 메트릭이 계속 증가하는 경우에도 시스템 리소스가 제한되었다는 것을 의미할 수 있습니다(출력 싱크 제한 또는 높은 CPU 사용률이 원인).
+4.  6개 SU 작업이 도달할 수 있는 제한을 확인한 후에는, SU를 더 추가하면서 작업의 처리 용량을 선형으로 추론할 수 있습니다(특정 파티션의 "작업량을 높이는" 데이터 기울이기가 없다는 가정 하).
 
-작업에는 데이터 스트림에 대해 하나 이상의 입력 소스가 필요합니다. 데이터 스트림 입력 원본은 Azure 이벤트 허브 또는 Azure Blob Storage에 저장될 수 있습니다. 자세한 내용은 [Azure Stream Analytics 소개](stream-analytics-introduction.md) 및 [Azure Stream Analytics 사용 시작](stream-analytics-real-time-fraud-detection.md)을 참조하세요.
-
-## <a name="partitions-in-event-hubs-and-azure-storage"></a>이벤트 허브와 Azure Storage의 파티션
-Stream Analytics 작업 크기 조정은 입력 또는 출력에 있는 파티션을 활용합니다. 분할을 통해 데이터를 파티션 키에 따라 하위 집합으로 분할할 수 있습니다. 데이터를 사용하는 프로세스(예: Streaming Analytics 작업)는 서로 다른 파티션을 병렬로 사용 및 기록하여 처리량을 증가시킬 수 있습니다. Streaming Analytics로 작업할 때 이벤트 허브 및 Blob Storage에서 분할을 활용할 수 있습니다. 
-
-파티션에 대한 자세한 내용은 다음 문서를 참조하세요.
-
-* [Event Hubs 기능 개요](../event-hubs/event-hubs-features.md#partitions)
-* [데이터 분할](https://docs.microsoft.com/azure/architecture/best-practices/data-partitioning#partitioning-azure-blob-storage)
+> [!NOTE]
+> 적절한 스트리밍 단위 수를 선택합니다. Stream Analytics는 각 6개의 SU가 추가될 때마다 처리 노드를 만들기 때문에 노드 수를 입력 파티션 수의 제수로 사용하여 파티션을 노드 간에 균일하게 분산하는 것이 가장 좋습니다.
+> 예를 들어 6개 SU 작업이 4MB/s 처리 속도를 달성할 수 있다고 측정했고, 입력 파티션 수는 4개입니다. 약 8MB/s의 처리 속도를 얻기 위해서는 12개 SU, 16MB/s의 처리 속도를 얻기 위해서는 24개 SU의 작업을 선택하여 실행할 수 있습니다. 그런 후 입력 속도의 함수로서, 작업에 대한 SU 수를 특정 값으로 늘려야 하는 시기를 결정할 수 있습니다.
 
 
-## <a name="streaming-units-sus"></a>SU(스트리밍 단위)
-SU(스트리밍 단위)는 Azure Stream Analytics 작업을 실행하는 데 필요한 리소스 및 계산 능력을 나타냅니다. SU는 CPU, 메모리의 혼합된 측정치 및 읽기/쓰기 속도를 기반으로 상대적 이벤트 처리 용량을 설명하는 방법을 제공합니다. 각 SU는 대략 1MB/초의 처리량에 해당합니다. 
-
-특정 작업에 필요한 SU 수 선택은 입력에 대한 파티션 구성 및 작업에 정의된 쿼리에 따라 달라집니다. 작업에 대해 SU의 할당량까지 선택할 수 있습니다. 기본적으로 각 Azure 구독에는 특정 지역의 모든 분석 작업에 대해 최대 50개의 SU 할당량이 있습니다. 구독의 SU를 이 할당량을 초과하여 늘리려면 [Microsoft 지원](http://support.microsoft.com)에 문의하세요. 작업당 SU에 대한 유효한 값은 1, 3, 6이며 6 단위로 증가합니다.
-
-## <a name="embarrassingly-parallel-jobs"></a>병렬 처리가 적합한 작업
-*병렬 처리가 적합한* 작업은 Azure Stream Analytics에서 가장 확장성이 뛰어난 시나리오입니다. 하나의 쿼리 인스턴스에 대한 하나의 입력 파티션을 하나의 출력 파티션에 연결합니다. 이 병렬 처리에는 다음 요구 사항이 있습니다.
-
-1. 쿼리 논리가 동일한 쿼리 인스턴스에서 처리되는 동일한 키에 따라 다른 경우 이벤트가 동일한 입력 파티션으로 이동하는지 확인해야 합니다. 이벤트 허브의 경우 이것은 이벤트 데이터에 **PartitionKey** 값이 설정되어야 함을 의미합니다. 또는 분할된 보낸 사람을 사용할 수 있습니다. Blob Storage의 경우 이것은 이벤트가 같은 파티션 폴더에 전송된다는 것을 의미합니다. 쿼리 논리가 동일한 쿼리 인스턴스에서 동일한 키를 처리할 필요가 없는 경우 이 요구 사항을 무시할 수 있습니다. 이 논리에 대한 예로 간단한 선택/프로젝트/필터 쿼리를 참조하세요.  
-
-2. 데이터가 입력 측에 배치되면 쿼리가 분할되었는지 확인해야 합니다. 그러려면 모든 단계에서 **Partition By**를 사용해야 합니다. 여러 단계가 허용되지만 모두 동일한 키로 분할되어야 합니다. 현재는 작업을 완전히 병렬로 처리하기 위해 분할 키를 **PartitionId**로 설정해야 합니다.  
-
-3. 현재는 이벤트 허브 및 Blob Storage만 분할된 출력을 지원합니다. 이벤트 허브 출력에 대해 파티션 키를 **PartitionId**로 구성해야 합니다. Blob Storage 출력의 경우 필요한 작업이 없습니다.  
-
-4. 입력 파티션 수가 출력 파티션 수와 같아야 합니다. Blob Storage 출력은 현재 파티션을 지원하지 않습니다. 하지만 업스트림 쿼리의 분할 스키마를 상속하므로 문제되지 않습니다. 다음은 완전한 병렬 작업을 허용하는 파티션 값의 예입니다.  
-
-   * 8개의 이벤트 허브 입력 파티션 및 8개의 이벤트 허브 출력 파티션
-   * 8개의 이벤트 허브 입력 파티션 및 Blob Storage 출력  
-   * 8개의 Blob Storage 입력 파티션 및 Blob Storage 출력  
-   * 8개의 Blob Storage 입력 파티션 및 8개의 이벤트 허브 출력 파티션  
-
-다음 섹션에서는 병렬 처리가 적합한 작업의 몇 가지 예제 시나리오를 살펴봅니다.
-
-### <a name="simple-query"></a>단순 쿼리
-
-* 입력: 8개의 파티션이 있는 이벤트 허브
-* 출력: 8개의 파티션이 있는 이벤트 허브
-
-쿼리:
-
-    SELECT TollBoothId
-    FROM Input1 Partition By PartitionId
-    WHERE TollBoothId > 100
-
-이 쿼리는 간단한 필터입니다. 따라서 이벤트 허브로 전송되는 입력을 분할하는 것에 대해 걱정하지 않아도 됩니다. 쿼리가 **Partition By PartitionId**를 포함하므로 앞에서 언급된 요구 사항 2번을 충족합니다. 출력의 경우 파티션 키가 **PartitionId**로 설정되도록 작업에서 이벤트 허브 출력을 구성해야 합니다. 마지막 한 가지 검사는 입력 파티션 수가 출력 파티션 수와 같은지 확인하는 것입니다.
-
-### <a name="query-with-a-grouping-key"></a>그룹화 키가 있는 쿼리
-
-* 입력: 8개의 파티션이 있는 이벤트 허브
-* 출력: Blob Storage
-
-쿼리:
-
-    SELECT COUNT(*) AS Count, TollBoothId
-    FROM Input1 Partition By PartitionId
-    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-
-이 쿼리에 그룹화 키가 있습니다. 따라서 동일한 키는 동일한 쿼리 인스턴스에 의해 처리되어야 하며 이벤트를 분할된 방식으로 이벤트 허브로 보내야 함을 의미합니다. 하지만 어떤 키를 사용해야 하나요? **PartitionId**는 작업 논리 개념입니다. 실제로 고려할 키는 **TollBoothId**이므로 이벤트 데이터의 **PartitionKey** 값은 **TollBoothId**여야 합니다. **Partition By**를 **PartitionId**로 설정하여 쿼리에서 이 작업을 수행합니다. 출력이 Blob Storage이므로 요구 사항 4번에 따라 파티션 키 값 구성에 대해 걱정할 필요가 없습니다.
-
-### <a name="multi-step-query-with-a-grouping-key"></a>그룹화 키가 있는 다중 단계 쿼리
-* 입력: 8개의 파티션이 있는 이벤트 허브
-* 출력: 8개의 파티션이 있는 이벤트 허브 인스턴스
+## <a name="case-2---if-your-query-is-not-embarrassingly-parallel"></a>사례 2 - 쿼리가 병렬 처리하기 쉽지 않은 경우
+쿼리가 병렬 처리하기 쉽지 않은 경우, 다음 단계를 따릅니다.
+1.  먼저 **PARTITION BY** 없이 쿼리를 시작하여 분할에 따른 복잡성을 피하고, [사례 1](#case-1--your-query-is-inherently-fully-parallelizable-across-input-partitions)과 같이 최대 부하를 측정하기 위해 6개 SU로 쿼리를 실행합니다.
+2.  처리량 측면에서 예상되는 부하를 달성하는 경우 완료된 것입니다. 또는 3개 SU 및 1개 SU에서 실행되는 동일한 작업을 측정하도록 선택하여 시나리오에 적합한 최소 SU 수를 알아낼 수 있습니다.
+3.  원하는 처리량을 얻을 수 없고 쿼리가 아직 여러 단계로 구성되지 않은 경우 가능하면 쿼리를 여러 단계로 분리하고, 쿼리의 각 단계에 대해 최대 6개 SU를 할당합니다. 예를 들어 3개 단계가 있는 경우 "규모" 옵션에서 18개의 SU를 할당합니다.
+4.  이러한 작업을 실행하는 경우, Stream Analytics는 전용 6개 SU 리소가 있는 자체 노드에 각 단계를 배치합니다. 
+5.  부하 목표에 도달하지 못한 경우 입력에 가까운 단계부터 시작해서 **PARTITION BY**를 사용할 수 있습니다. 자연스럽게 분할 가능하지 않을 수 있는 **GROUP BY** 연산자의 경우, 로컬/전역 집계 패턴을 사용하여 분할된 **GROUP BY**를 수행한 후 분할되지 않은 **GROUP BY**를 수행할 수 있습니다. 예를 들어 3분 간격으로 각 요금 창구를 통과하는 차량 수를 계산하려고 하며 데이터 볼륨이 6개 SU에 의해 처리될 수 있는 수준을 초과한다고 가정합니다.
 
 쿼리:
 
@@ -100,176 +52,31 @@ SU(스트리밍 단위)는 Azure Stream Analytics 작업을 실행하는 데 필
     FROM Input1 Partition By PartitionId
     GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
     )
-
-    SELECT SUM(Count) AS Count, TollBoothId
-    FROM Step1 Partition By PartitionId
-    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-
-이 쿼리는 그룹화 키가 있으므로 동일한 키가 동일한 쿼리 인스턴스에서 처리되어야 합니다. 이전 예제와 동일한 전략을 사용할 수 있습니다. 이 경우 쿼리에는 여러 단계가 있습니다. 각 단계에 **Partition By PartitionId**가 있나요? 예, 따라서 쿼리는 요구 사항 3번을 충족합니다. 출력의 경우 이전에 설명한 것처럼 파티션 키를 **PartitionId**로 설정해야 합니다. 또한 입력으로 동일한 파티션 수를 포함하는 것을 확인할 수 있습니다.
-
-## <a name="example-scenarios-that-are-not-embarrassingly-parallel"></a>병렬 처리가 적합하지 *않은* 예제 시나리오
-
-이전 섹션에서는 병렬 처리가 적합한 시나리오를 살펴보았습니다. 이 섹션에서는 병렬 처리에 적합하기 위한 모든 요구 사항을 충족하지 않는 시나리오에 대해 설명합니다. 
-
-### <a name="mismatched-partition-count"></a>일치하지 않는 파티션 수
-* 입력: 8개의 파티션이 있는 이벤트 허브
-* 출력: 32개의 파티션이 있는 이벤트 허브
-
-이 경우 쿼리 내용은 중요하지 않습니다. 입력 파티션 수가 출력 파티션 수와 일치하지 않는 토폴로지는 병렬 처리가 적합하지 않습니다.
-
-### <a name="not-using-event-hubs-or-blob-storage-as-output"></a>이벤트 허브 또는 Blob Storage를 출력으로 사용하지 않음
-* 입력: 8개의 파티션이 있는 이벤트 허브
-* 출력: PowerBI
-
-PowerBI 출력은 현재 분할을 지원하지 않습니다. 따라서 이 시나리오는 병렬 처리가 적합하지 않습니다.
-
-### <a name="multi-step-query-with-different-partition-by-values"></a>서로 다른 Partition By 값이 있는 다중 단계 쿼리
-* 입력: 8개의 파티션이 있는 이벤트 허브
-* 출력: 8개의 파티션이 있는 이벤트 허브
-
-쿼리:
-
-    WITH Step1 AS (
-    SELECT COUNT(*) AS Count, TollBoothId, PartitionId
-    FROM Input1 Partition By PartitionId
-    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-    )
-
-    SELECT SUM(Count) AS Count, TollBoothId
-    FROM Step1 Partition By TollBoothId
-    GROUP BY TumblingWindow(minute, 3), TollBoothId
-
-보이는 것처럼 두 번째 단계에서는 **TollBoothId** 를 분할 키로 사용합니다. 이 단계는 첫 번째 단계와 동일하지 않으므로 순서를 섞어야 합니다. 
-
-앞의 예제에서는 병렬 처리가 적합한 토폴로지를 준수(또는 준수하지 않는) 일부 Stream Analytics 작업을 보여 줍니다. 준수하는 경우 최대 규모의 가능성을 포함합니다. 이러한 프로필 중 하나에 적합하지 않는 작업의 경우 향후 업데이트에서 크기 조정 지침이 제공될 예정입니다. 현재는 다음 섹션에 있는 일반적인 지침을 사용하세요.
-
-## <a name="calculate-the-maximum-streaming-units-of-a-job"></a>작업의 최대 스트리밍 단위 계산
-Stream Analytics 작업에 사용될 수 있는 스트리밍 단위의 총 수는 작업에 대해 정의된 쿼리의 단계 수와 각 단계에 대한 파티션 수에 따라 결정됩니다.
-
-### <a name="steps-in-a-query"></a>쿼리의 단계
-하나의 쿼리에는 하나 이상의 단계가 있을 수 있습니다. 각 단계는 **WITH** 키워드를 사용하여 정의된 하위 쿼리입니다. **WITH** 키워드(한 개 쿼리만) 밖에 있는 쿼리도 한 단계로 계산됩니다. 예를 들어 다음 쿼리에서 **SELECT** 문입니다.
-
-    WITH Step1 AS (
-        SELECT COUNT(*) AS Count, TollBoothId
-        FROM Input1 Partition By PartitionId
-        GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-    )
-
-    SELECT SUM(Count) AS Count, TollBoothId
-    FROM Step1
-    GROUP BY TumblingWindow(minute,3), TollBoothId
-
-이 쿼리에는 2개의 단계가 있습니다.
-
-> [!NOTE]
-> 이 쿼리는 문서 뒷부분에서 좀 더 자세히 설명합니다.
->  
-
-### <a name="partition-a-step"></a>단계 분할
-단계를 분할하려면 다음 조건이 필요합니다.
-
-* 입력 소스는 분할해야 합니다. 
-* 쿼리의 **SELECT** 문은 분할된 입력 원본에서 읽어와야 합니다.
-* 단계 내의 쿼리에는 **Partition By** 키워드가 있어야 합니다.
-
-쿼리가 분할되면 입력 이벤트가 처리되고 별도의 파티션 그룹에 집계되며 각 그룹에 대해 출력 이벤트가 생성됩니다. 결합된 집계를 원하는 경우 집계할 또 다른 분할되지 않은 단계를 만들어야 합니다.
-
-### <a name="calculate-the-max-streaming-units-for-a-job"></a>작업의 최대 스트리밍 단위 계산
-하나의 Stream Analytics 작업에 대해 분할되지 않은 모든 단계를 최대 6개의 SU(스트리밍 단위)로 확장할 수 있습니다. SU를 추가하려면 단계를 분할해야 합니다. 각 파티션에는 6개의 SU가 있을 수 있습니다.
-
-<table border="1">
-<tr><th>쿼리</th><th>작업에 대한 최대 SU</th></td>
-
-<tr><td>
-<ul>
-<li>쿼리는 한 단계를 포함합니다.</li>
-<li>이 단계는 분할되지 않습니다.</li>
-</ul>
-</td>
-<td>6</td></tr>
-
-<tr><td>
-<ul>
-<li>입력 데이터 스트림은 3으로 분할됩니다.</li>
-<li>쿼리는 한 단계를 포함합니다.</li>
-<li>이 단계는 분할됩니다.</li>
-</ul>
-</td>
-<td>18</td></tr>
-
-<tr><td>
-<ul>
-<li>쿼리는 두 단계를 포함합니다.</li>
-<li>두 단계모두 분할되지 않습니다.</li>
-</ul>
-</td>
-<td>6</td></tr>
-
-<tr><td>
-<ul>
-<li>입력 데이터 스트림은 3으로 분할됩니다.</li>
-<li>쿼리는 두 단계를 포함합니다. 입력 단계는 분할되며 두 번째 단계는 분할되지 않습니다.</li>
-<li><strong>SELECT</strong> 문은 분할된 입력에서 읽어옵니다.</li>
-</ul>
-</td>
-<td>24(분할된 단계에 대한 18+분할되지 않은 단계에 대한 6)</td></tr>
-</table>
-
-### <a name="examples-of-scaling"></a>크기 조정 예제
-
-다음 쿼리는 3분의 기간 내에 세 곳의 요금 징수소가 있는 요금 스테이션을 통과하는 자동차 수를 계산합니다. 이 쿼리는 6개 SU까지 확장될 수 있습니다.
-
-    SELECT COUNT(*) AS Count, TollBoothId
-    FROM Input1
-    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-
-쿼리에 더 많은 SU를 사용하려면 입력 데이터 스트림 및 쿼리를 모두 분할해야 합니다. 데이터 스트림 파티션이 3으로 설정되므로 다음의 수정된 쿼리를 최대 18개 SU로 확장할 수 있습니다.
-
-    SELECT COUNT(*) AS Count, TollBoothId
-    FROM Input1 Partition By PartitionId
-    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-
-쿼리가 분할되면 입력 이벤트가 처리되고 별도의 파티션 그룹에 집계되며 각 그룹에 대해 출력 이벤트가 생성됩니다. 출력 이벤트도 각 그룹에 대해 생성됩니다. **GROUP BY** 필드가 입력 데이터 스트림의 파티션 키가 아닌 상태에서 분할을 수행하면 예기치 않은 결과가 발생할 수 있습니다. 예를 들어 이전 쿼리의 **TollBoothId** 필드는 **Input1**의 파티션 키가 아닙니다. 따라서 TollBooth #1의 데이터는 여러 파티션으로 분산될 수 있습니다.
-
-각각의 **Input1** 파티션은 Stream Analytics에 의해 별도로 처리됩니다. 결과적으로, 동일한 연속 창에 동일한 요금 징수소에 대한 자동차 수 레코드가 여러 개 생성됩니다. 입력 파티션 키를 변경할 수 없는 경우 다음 예제처럼 비분할 단계를 추가하여 이 문제를 해결할 수 있습니다.
-
-    WITH Step1 AS (
-        SELECT COUNT(*) AS Count, TollBoothId
-        FROM Input1 Partition By PartitionId
-        GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-    )
-
     SELECT SUM(Count) AS Count, TollBoothId
     FROM Step1
     GROUP BY TumblingWindow(minute, 3), TollBoothId
 
-이 쿼리는 24개 SU까지 확장될 수 있습니다.
+위의 쿼리에서는 파티션당 요금 창구별 차량 수를 계산한 다음, 모든 파티션의 차량 수를 합합니다.
 
-> [!NOTE]
-> 두 스트림을 조인하는 경우 스트림이 조인을 생성하는 데 사용하는 열의 파티션 키별로 분할되는지 확인합니다. 또한 두 스트림에서 파티션 수가 동일한지도 확인합니다.
-> 
-> 
+일단 분할되면, 단계의 각 파티션에 대해 최대 6개의 SU를 할당합니다. 그러면 6개의 SU를 갖는 각 파티션이 최대값이 되므로 각 파티션은 자체 처리 노드에 배치될 수 있습니다.
 
-## <a name="configure-stream-analytics-streaming-units"></a>Stream Analytics 스트리밍 단위 구성
+> [!Note]
+> 쿼리를 분할할 수 없는 경우 다단계 쿼리에 SU를 더 추가한다고 해서 항상 처리량이 개선될 수 있는 것은 아닙니다. 성능을 높이는 한 가지 방법은 위의 5단계에서 설명한 것과 같이 로컬/전역 집계 패턴을 사용하여 초기 단계에서 볼륨을 줄이는 것입니다.
 
-1. [Azure 포털](https://portal.azure.com)에 로그인합니다.
-2. 리소스 목록에서 확장할 Stream Analytics 작업을 찾은 후 엽니다.
-3. 작업 블레이드의 **구성** 아래에서 **크기 조정**을 클릭합니다.
+## <a name="case-3---you-are-running-lots-of-independent-queries-in-a-job"></a>사례 3 - 한 작업에서 많은 양의 독립 쿼리를 실행하는 경우
+한 작업에서 여러 테넌트의 데이터를 처리하는 것이 더 비용 효율적인 특정 ISV 사용 사례의 경우, 각 테넌트에 대해 별도의 입/출력을 사용하면 다수의(예: 20개) 독립 쿼리가 한 작업에서 수행될 수 있습니다. 여기서는 이러한 각 하위 쿼리 부하가 비교적 작다고 가정합니다. 이 경우 다음 단계를 수행할 수 있습니다.
+1.  여기서는 쿼리에서 **PARTITION BY**를 사용하지 않도록 합니다.
+2.  이벤트 허브를 사용하는 경우 입력 파티션 수를 가능한 가장 낮은 값인 2로 줄입니다.
+3.  6개의 SU를 사용하여 쿼리를 실행합니다. 각 하위 쿼리에 예상된 부하가 있으면, 작업이 시스템 리소스 제한에 도달할 때까지 이러한 하위 쿼리를 최대한 많이 추가합니다. 이 경우의 증상에 대해서는 [사례 1](#case-1--your-query-is-inherently-fully-parallelizable-across-input-partitions)을 참조하세요.
+4.  위에서 측정한 하위 쿼리 제한에 도달하면 하위 쿼리를 새 작업에 추가하기 시작합니다. 독립적인 쿼리 수에 대한 함수로서, 실행할 작업의 수는 비교적 선형이며 부하 기울이기가 없다고 가정합니다. 그런 후 제공하려는 테넌트 수에 대한 함수로서, 실행해야 하는 6개 SU 작업의 수를 예측할 수 있습니다.
+5.  이러한 쿼리와 함께 참조 데이터 조인을 사용할 경우 동일한 참조 데이터와 조인하기 전에 입력을 함께 통합하고 필요한 경우 이벤트를 분할해야 합니다. 그렇지 않은 경우, 각 참조 데이터 조인은 참조 데이터의 복사본을 메모리에 유지하여 메모리 사용량이 불필요하게 증가할 수 있습니다.
 
-    ![Azure Portal Stream Analytics 작업 구성][img.stream.analytics.preview.portal.settings.scale]
-
-4. 슬라이더를 사용하여 작업에 대한 SU를 설정합니다. 특정 SU 설정으로 제한되는 것을 확인합니다.
-
-
-## <a name="monitor-job-performance"></a>작업 성능 모니터링
-Azure Portal을 사용하여 작업 처리량을 추적할 수 있습니다.
-
-![Azure Stream Analytics 모니터링 작업][img.stream.analytics.monitor.job]
-
-워크로드의 예상 처리량을 계산합니다. 처리량이 예상보다 더 작은 경우 입력 파티션을 조정하고, 쿼리를 조정하고, 작업에 SU를 추가합니다.
+> [!Note] 
+> 각 작업에 몇 개의 테넌트를 배치해야 할까요?
+> 이 쿼리 패턴에는 종종 많은 수의 하위 쿼리가 있으며 매우 크고 복잡한 토폴로지가 생성됩니다. 작업의 컨트롤러는 이러한 대량의 토폴로지를 처리하지 못할 수 있습니다. 원칙적으로, 1개 SU 작업의 경우 40개의 테넌트, 3개 SU 및 6개 SU 작업의 경우 60개의 테넌트 미만으로 유지하는 것이 좋습니다. 컨트롤러의 용량을 초과하는 경우 작업이 제대로 시작되지 않습니다.
 
 
-## <a name="visualize-stream-analytics-throughput-at-scale-the-raspberry-pi-scenario"></a>규모별 Stream Analytics 처리량 시각화: Raspberry Pi 시나리오
+## <a name="an-example-of-stream-analytics-throughput-at-scale"></a>대규모 Stream Analytics 처리량 예제
 Stream Analytics 작업의 크기를 조정하는 방법을 이해하기 위해 Raspberry Pi 장치의 입력을 기반으로 실험을 수행했습니다. 이 실험을 통해 여러 스트리밍 단위 및 파티션의 처리량에 미치는 영향을 볼 수 있습니다.
 
 이 시나리오에서는 장치가 이벤트 허브로 센서 데이터(클라이언트)를 보냅니다. Streaming Analytics에서 데이터를 처리하고 경고 또는 통계를 다른 이벤트 허브에 대한 출력으로 보냅니다. 
@@ -280,16 +87,14 @@ Stream Analytics 작업의 크기를 조정하는 방법을 이해하기 위해 
 
 다음 쿼리는 광원 스위치가 꺼진 경우 경고를 보내는 데 사용됩니다.
 
-    SELECT AVG(lght),
-     "LightOff" as AlertText
-    FROM input TIMESTAMP
-    BY devicetime
-     WHERE
-        lght< 0.05 GROUP BY TumblingWindow(second, 1)
+    SELECT AVG(lght), "LightOff" as AlertText
+    FROM input TIMESTAMP BY devicetime 
+    PARTITION BY PartitionID
+    WHERE lght< 0.05 GROUP BY TumblingWindow(second, 1)
 
 ### <a name="measure-throughput"></a>처리량 측정
 
-이 컨텍스트에서 처리량은 고정된 시간 동안 Stream Analytics이 처리한 입력 데이터의 양입니다. (10분 동안 측정했음) 입력 데이터에 대해 최상의 처리량을 달성하려면 데이터 스트림 입력 및 쿼리 모두 분할됩니다. 처리된 입력 이벤트 수를 측정하기 위해 **COUNT()**를 쿼리에 포함합니다. 작업이 발생할 입력 이벤트를 단순히 기다리고 있지 않도록 입력 이벤트 허브의 각 파티션이 입력 데이터(약 300MB)로 미리 로드되었습니다.
+이 컨텍스트에서 처리량은 고정된 시간 동안 Stream Analytics가 처리한 입력 데이터의 양입니다. (10분 동안 측정했음) 입력 데이터에 대해 최상의 처리량을 달성하려면 데이터 스트림 입력 및 쿼리 모두 분할됩니다. 처리된 입력 이벤트 수를 측정하기 위해 **COUNT()** 를 쿼리에 포함합니다. 작업이 발생할 입력 이벤트를 단순히 기다리고 있지 않도록 입력 이벤트 허브의 각 파티션이 입력 데이터(약 300MB)로 미리 로드되었습니다.
 
 다음 표에서 스트리밍 단위 수와 이벤트 허브에서 해당 파티션 수를 늘렸을 때 나타나는 결과를 보여 줍니다.  
 
@@ -306,31 +111,31 @@ Stream Analytics 작업의 크기를 조정하는 방법을 이해하기 위해 
 <tr><td>12</td>
 <td>12</td>
 <td>12</td>
-<td>8.06 MB/초</td>
+<td>8.06MB/s</td>
 </tr>
 
 <tr><td>48</td>
 <td>48</td>
 <td>48</td>
-<td>38.32 MB/초</td>
+<td>38.32MB/초</td>
 </tr>
 
 <tr><td>192</td>
 <td>192</td>
 <td>192</td>
-<td>172.67 MB/초</td>
+<td>172.67MB/초</td>
 </tr>
 
 <tr><td>480</td>
 <td>480</td>
 <td>480</td>
-<td>454.27 MB/초</td>
+<td>454.27MB/초</td>
 </tr>
 
 <tr><td>720</td>
 <td>720</td>
 <td>720</td>
-<td>609.69 MB/초</td>
+<td>609.69MB/초</td>
 </tr>
 </table>
 
@@ -339,7 +144,7 @@ Stream Analytics 작업의 크기를 조정하는 방법을 이해하기 위해 
 ![img.stream.analytics.perfgraph][img.stream.analytics.perfgraph]
 
 ## <a name="get-help"></a>도움말 보기
-추가 지원이 필요한 경우 [Azure Stream Analytics 포럼](https://social.msdn.microsoft.com/Forums/home?forum=AzureStreamAnalytics)을 참조하세요.
+추가 지원이 필요한 경우 [Azure Stream Analytics 포럼](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureStreamAnalytics)을 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
 * [Azure Stream Analytics 소개](stream-analytics-introduction.md)
@@ -358,12 +163,10 @@ Stream Analytics 작업의 크기를 조정하는 방법을 이해하기 위해 
 <!--Link references-->
 
 [microsoft.support]: http://support.microsoft.com
-[azure.management.portal]: http://manage.windowsazure.com
 [azure.event.hubs.developer.guide]: http://msdn.microsoft.com/library/azure/dn789972.aspx
 
 [stream.analytics.introduction]: stream-analytics-introduction.md
 [stream.analytics.get.started]: stream-analytics-real-time-fraud-detection.md
 [stream.analytics.query.language.reference]: http://go.microsoft.com/fwlink/?LinkID=513299
 [stream.analytics.rest.api.reference]: http://go.microsoft.com/fwlink/?LinkId=517301
-
 

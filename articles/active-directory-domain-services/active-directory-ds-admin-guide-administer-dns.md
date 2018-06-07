@@ -4,7 +4,7 @@ description: "Azure Active Directory Domain Services 관리되는 도메인에�
 services: active-directory-ds
 documentationcenter: 
 author: mahesh-unnikrishnan
-manager: stevenpo
+manager: mtillman
 editor: curtand
 ms.assetid: 938a5fbc-2dd1-4759-bcce-628a6e19ab9d
 ms.service: active-directory-ds
@@ -12,17 +12,16 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 03/06/2017
+ms.date: 09/23/2017
 ms.author: maheshu
-translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: 20cc8290663b4931ed3c7ef6769312da1b4b34e1
-ms.lasthandoff: 12/29/2016
-
-
+ms.openlocfilehash: 55b6368d55b5d0ad50d066a4963e74d8c44a2049
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="administer-dns-on-an-azure-ad-domain-services-managed-domain"></a>Azure AD 도메인 서비스 관리되는 도메인에서 DNS 관리
-Azure Active Directory 도메인 서비스는 관리되는 도메인에 대한 DNS 확인을 제공하는 DNS(도메인 이름 확인) 서버를 포함합니다. 경우에 따라 관리되는 도메인에서 DNS를 구성해야 할 수 있습니다. 도메인에 가입되지 않은 컴퓨터에 대한 DNS 레코드를 만들고 부하 분산 장치에 대한 가상 IP 주소를 구성하거나 외부 DNS 전달자를 설정해야 할 수 있습니다. 이러한 이유로 'AAD DC 관리자' 그룹에 속한 사용자에게 관리되는 도메인에 대한 DNS 관리 권한이 부여됩니다.
+Azure Active Directory Domain Services는 관리되는 도메인에 대한 DNS 확인을 제공하는 DNS(도메인 이름 확인) 서버를 포함합니다. 경우에 따라 관리되는 도메인에서 DNS를 구성해야 할 수 있습니다. 도메인에 가입되지 않은 컴퓨터에 대한 DNS 레코드를 만들고 부하 분산 장치에 대한 가상 IP 주소를 구성하거나 외부 DNS 전달자를 설정해야 할 수 있습니다. 이러한 이유로 'AAD DC 관리자' 그룹에 속한 사용자에게 관리되는 도메인에 대한 DNS 관리 권한이 부여됩니다.
 
 ## <a name="before-you-begin"></a>시작하기 전에
 이 문서에 나열된 작업을 수행하려면 다음이 필요합니다.
@@ -45,11 +44,12 @@ Windows Server 가상 컴퓨터를 프로비전하기 위한 첫 번째 작업�
 ## <a name="task-2---install-dns-server-tools-on-the-virtual-machine"></a>작업 2 - 가상 컴퓨터에 DNS 서버 도구 설치
 도메인에 가입된 가상 컴퓨터에 DNS 관리 도구를 설치하려면 다음 단계를 수행합니다. [원격 서버 관리 도구 설치 및 사용](https://technet.microsoft.com/library/hh831501.aspx)에 대한 자세한 내용은 TechNet을 참조하세요.
 
-1. Azure 클래식 포털에서 **가상 컴퓨터** 노드로 이동합니다. 작업 1에서 만든 가상 컴퓨터를 선택하고 창 아래쪽에 있는 명령 모음에서 **연결** 을 클릭합니다.
+1. Azure Portal로 이동합니다. 왼쪽 패널에서 **모든 리소스**를 클릭합니다. 작업 1에서 만든 가상 컴퓨터를 찾아 클릭합니다.
+2. 개요 탭에서 **연결** 단추를 클릭합니다. 원격 데스크톱 프로토콜(.rdp) 파일이 생성되고 다운로드됩니다.
 
     ![Windows 가상 컴퓨터에 연결](./media/active-directory-domain-services-admin-guide/connect-windows-vm.png)
-2. 클래식 포털에 가상 컴퓨터에 연결하는 데 사용되는 ‘.rdp’ 확장명을 가진 파일을 열거나 저장하라는 메시지가 표시됩니다. 다운로드가 완료되면 파일을 클릭합니다.
-3. 로그인 프롬프트에서 'AAD DC 관리자' 그룹에 속한 사용자의 자격 증명을 사용합니다. 예를 들어 여기서는 'bob@domainservicespreview.onmicrosoft.com'을 사용합니다.
+3. VM에 연결하려면 다운로드한 RDP 파일을 엽니다. 메시지가 표시되면 **연결**을 클릭합니다. 로그인 프롬프트에서 'AAD DC 관리자' 그룹에 속한 사용자의 자격 증명을 사용합니다. 예를 들어 여기서는 'bob@domainservicespreview.onmicrosoft.com'을 사용합니다. 로그인 프로세스 중에 인증서 경고가 나타날 수 있습니다. 예 또는 계속을 클릭하여 연결을 진행합니다.
+
 4. 시작 화면에서 **서버 관리자**를 엽니다. 서버 관리자 창의 가운데 창에서 **역할 및 기능 추가** 를 클릭합니다.
 
     ![가상 컴퓨터에서 서버 관리자 시작](./media/active-directory-domain-services-admin-guide/install-rsat-server-manager.png)
@@ -102,4 +102,3 @@ DNS 관리에 대한 자세한 내용은 [Technet의 DNS 도구 문서](https://
 * [Windows Server 가상 컴퓨터를 Azure AD 도메인 서비스 관리되는 도메인에 가입](active-directory-ds-admin-guide-join-windows-vm.md)
 * [Azure AD 도메인 서비스 관리되는 도메인 관리](active-directory-ds-admin-guide-administer-domain.md)
 * [DNS 관리 도구](https://technet.microsoft.com/library/cc753579.aspx)
-

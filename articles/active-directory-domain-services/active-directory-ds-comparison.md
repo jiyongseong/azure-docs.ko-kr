@@ -1,10 +1,10 @@
 ---
-title: "Azure AD Domain Services: DIY 도메인 컨트롤러와 Azure AD Domain Services 비교 | Microsoft Docs"
-description: "DIY 도메인 컨트롤러와 Azure Active Directory Domain Services 비교"
+title: 'Azure AD Domain Services: DIY 도메인 컨트롤러와 Azure AD Domain Services 비교 | Microsoft Docs'
+description: DIY 도메인 컨트롤러와 Azure Active Directory Domain Services 비교
 services: active-directory-ds
-documentationcenter: 
+documentationcenter: ''
 author: mahesh-unnikrishnan
-manager: stevenpo
+manager: mtillman
 editor: curtand
 ms.assetid: 165249d5-e0e7-4ed1-aa26-91a05a87bdc9
 ms.service: active-directory-ds
@@ -14,13 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/07/2017
 ms.author: maheshu
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 09a68c7f4e7169a6ca02e33e89e0f048155fa88c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: c384046d280e03de5a808d245dd273fdf7b44549
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="how-to-decide-if-azure-ad-domain-services-is-right-for-your-use-case"></a>Azure AD Domain Services가 사용 사례에 적합한지 결정하는 방법
 Azure AD Domain Services를 사용하면 Azure에서 ID 인프라 유지 관리에 대해 걱정할 필요없이 Azure 인프라 서비스에서 워크로드를 배포할 수 있습니다. 이 관리되는 서비스는 고유한 서비스에 배포하고 관리하는 일반적인 Windows Server Active Directory 배포와 다릅니다. 서비스는 쉽게 배포할 수 있으며 자동화된 상태 모니터링 및 업데이트 관리를 제공합니다. 서비스를 지속적으로 개발하여 일반적인 배포 시나리오에 대한 지원을 추가할 예정입니다.
@@ -66,10 +64,10 @@ Azure AD Domain Services 관리되는 도메인은 관리되는 DNS 서비스를
 AAD DS 관리되는 도메인에서는 이러한 상승된 권한이 제공되지 않습니다. 관리자 권한을 요구하는 응용 프로그램은 AAD DS 관리되는 도메인에 대해 배포할 수 없습니다. 관리 권한의 작은 하위 집합은 'AAD DC 관리자'라는 위임된 관리 그룹의 구성원에 제공됩니다. 이러한 권한에는 DNS를 구성하고 그룹 정책을 구성하며 도메인 가입 컴퓨터에서 관리자 권한을 얻을 수 있는 권한 등이 포함됩니다.
 
 #### <a name="domain-join"></a>도메인 가입
-AD 도메인에 컴퓨터를 가입하는 방법과 비슷하게 가상 컴퓨터를 관리되는 도메인에 가입시킬 수 있습니다.
+AD 도메인에 컴퓨터를 가입하는 방법과 비슷하게 가상 머신을 관리되는 도메인에 가입시킬 수 있습니다.
 
 #### <a name="domain-authentication-using-ntlm-and-kerberos"></a>NTLM 및 Kerberos를 사용하여 도메인 인증
-Azure AD Domain Services에서 회사 자격 증명을 사용하여 관리되는 도메인으로 인증할 수 있습니다. 자격 증명은 Azure AD 테넌트와 동기화된 상태로 유지됩니다. 동기화된 테넌트의 경우 Azure AD Connect를 통해 온-프레미스를 만든 자격 증명의 변경 내용을 Azure AD로 동기화하도록 합니다. DIY(Do-It-Yourself) 도메인 설치를 사용하여 사용자가 해당 회사 자격 증명으로 인증하도록 온-프레미스 AD와 AD 도메인 트러스트 관계를 설정해야 할 수 있습니다. 또는 AD 복제를 설정하여 Azure 도메인 컨트롤러 가상 컴퓨터에 사용자 암호를 동기화해야 합니다.
+Azure AD Domain Services에서 회사 자격 증명을 사용하여 관리되는 도메인으로 인증할 수 있습니다. 자격 증명은 Azure AD 테넌트와 동기화된 상태로 유지됩니다. 동기화된 테넌트의 경우 Azure AD Connect를 통해 온-프레미스를 만든 자격 증명의 변경 내용을 Azure AD로 동기화하도록 합니다. DIY(Do-It-Yourself) 도메인 설치를 사용하여 사용자가 해당 회사 자격 증명으로 인증하도록 온-프레미스 AD와 AD 도메인 트러스트 관계를 설정해야 할 수 있습니다. 또는 AD 복제를 설정하여 Azure 도메인 컨트롤러 가상 머신에 사용자 암호를 동기화해야 합니다.
 
 #### <a name="kerberos-constrained-delegation"></a>Kerberos 제한 위임
 Active Directory Domain Services 관리되는 도메인에서 '도메인 관리자' 권한이 없습니다. 따라서 계정 기반(기존의) Kerberos 제한 위임을 구성할 수 없습니다. 하지만 보다 안전한 리소스 기반 제한 위임은 구성할 수 있습니다.
@@ -106,8 +104,8 @@ Azure AD Domain Services 관리되는 도메인은 Azure의 단일 가상 네트
 ## <a name="do-it-yourself-diy-ad-deployment-options"></a>DIY('직접') AD 배포 옵션
 Windows Server AD 설치에서 제공되는 기능 중 일부가 필요한 배포 사용 사례가 있을 수 있습니다. 이러한 경우에는 다음 DIY(직접) 옵션 중 하나를 고려해 보세요.
 
-* **독립 실행형 클라우드 도메인:** 도메인 컨트롤러로 구성된 Azure 가상 컴퓨터를 사용하여 독립 실행형 '클라우드 도메인'을 설정할 수 있습니다. 이 인프라는 온-프레미스 AD 환경과 통합되지 않습니다. 이 옵션에서는 다른 '클라우드 자격 증명' 집합이 로그인하거나 클라우드에서 VM을 관리해야 합니다.
-* **리소스 포리스트 배포:** 도메인 컨트롤러로 구성된 Azure 가상 컴퓨터를 사용하여 리소스 포리스트 토폴로지에서 도메인을 설정할 수 있습니다. 다음으로 온-프레미스 AD 환경으로 AD 트러스트 관계를 구성할 수 있습니다. 클라우드에서 이 리소스 포리스트에 컴퓨터(Azure VM)를 도메인 가입시킬 수 있습니다. 사용자 인증은 온-프레미스 디렉터리에 대한 VPN/ExpressRoute 연결 중 하나를 통해 발생합니다.
+* **독립 실행형 클라우드 도메인:** 도메인 컨트롤러로 구성된 Azure 가상 머신을 사용하여 독립 실행형 '클라우드 도메인'을 설정할 수 있습니다. 이 인프라는 온-프레미스 AD 환경과 통합되지 않습니다. 이 옵션에서는 다른 '클라우드 자격 증명' 집합이 로그인하거나 클라우드에서 VM을 관리해야 합니다.
+* **리소스 포리스트 배포:** 도메인 컨트롤러로 구성된 Azure 가상 머신을 사용하여 리소스 포리스트 토폴로지에서 도메인을 설정할 수 있습니다. 다음으로 온-프레미스 AD 환경으로 AD 트러스트 관계를 구성할 수 있습니다. 클라우드에서 이 리소스 포리스트에 컴퓨터(Azure VM)를 도메인 가입시킬 수 있습니다. 사용자 인증은 온-프레미스 디렉터리에 대한 VPN/ExpressRoute 연결 중 하나를 통해 발생합니다.
 * **온-프레미스 도메인을 Azure로 확장:** VPN/ExpressRoute 연결을 사용하여 온-프레미스 네트워크에 Azure Virtual Network를 연결할 수 있습니다. 이렇게 설정하면 Azure VM이 온-프레미스 AD에 가입할 수 있습니다. 또 다른 방법은 Azure에서 온-프레미스 도메인의 복제 도메인 컨트롤러를 VM으로 승격하는 것입니다. 온-프레미스 디렉터리에 대한 VPN/ExpressRoute 연결을 통해 복제되도록 설정할 수 있습니다. 이 배포 모드는 Azure에 온-프레미스 도메인을 효과적으로 확장합니다.
 
 > [!NOTE]
@@ -115,10 +113,9 @@ Windows Server AD 설치에서 제공되는 기능 중 일부가 필요한 배�
 >
 >
 
-[Azure Virtual Machines에 Windows Server Active Directory를 배포하기 위한 지침](https://msdn.microsoft.com/library/azure/jj156090.aspx) 을 게시하여 DIY 설치를 보다 쉽게 만들 수 있습니다.
+[Azure Virtual Machines에 Windows Server Active Directory를 배포하기 위한 지침](https://msdn.microsoft.com/library/azure/jj156090.aspx)을 게시하여 DIY 설치를 보다 쉽게 만들 수 있습니다.
 
 ## <a name="related-content"></a>관련 콘텐츠
 * [기능 - Azure AD Domain Services](active-directory-ds-features.md)
 * [배포 시나리오 - Azure AD Domain Services](active-directory-ds-scenarios.md)
-* [Azure 가상 컴퓨터에 Windows Server Active Directory를 배포하기 위한 지침](https://msdn.microsoft.com/library/azure/jj156090.aspx)
-
+* [Azure Virtual Machines에 Windows Server Active Directory를 배포하기 위한 지침](https://msdn.microsoft.com/library/azure/jj156090.aspx)

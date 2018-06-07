@@ -1,9 +1,9 @@
 ---
-title: "웹 사이트의 가용성 및 응답성 모니터링 | Microsoft Docs"
-description: "Application Insights에서 웹 테스트를 설정합니다. 웹 사이트가 사용할 수 없게 되거나 느리게 응답하는 경우 알림이 제공됩니다."
+title: 웹 사이트의 가용성 및 응답성 모니터링 | Microsoft Docs
+description: Application Insights에서 웹 테스트를 설정합니다. 웹 사이트가 사용할 수 없게 되거나 느리게 응답하는 경우 알림이 제공됩니다.
 services: application-insights
-documentationcenter: 
-author: SoubhagyaDash
+documentationcenter: ''
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 46dc13b4-eb2e-4142-a21c-94a156f760ee
 ms.service: application-insights
@@ -11,14 +11,13 @@ ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: get-started-article
-ms.date: 05/25/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c785ad8dbfa427d69501f5f142ef40a2d3530f9e
-ms.openlocfilehash: 74cd4dbf74afbf5e7e0e7d0b7aca49b5aa214b83
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
+ms.date: 02/09/2018
+ms.author: sdash ; mbullwin
+ms.openlocfilehash: c97b45616a58035dd5a1d7e832212fb90694ccce
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
 # <a name="monitor-availability-and-responsiveness-of-any-web-site"></a>웹 사이트의 가용성 및 응답성 모니터링
 웹앱 또는 웹 사이트를 서버에 배포한 후에 가용성 및 응답성을 모니터링하도록 테스트를 설정할 수 있습니다. [Azure Application Insights](app-insights-overview.md)는 전세계 지점에서 정기적인 간격으로 응용 프로그램에 웹 요청을 보냅니다. 응용 프로그램이 응답하지 않거나 느리게 응답하는 경우 사용자에게 경고할 수 있습니다.
@@ -30,19 +29,25 @@ ms.lasthandoff: 05/26/2017
 * [URL ping 테스트](#create): Azure 포털에서 만들 수 있는 간단한 테스트입니다.
 * [다단계 웹 테스트](#multi-step-web-tests): Visual Studio Enterprise에서 만들고 포털에 업로드합니다.
 
-응용 프로그램 리소스당 최대 25개의 가용성 테스트를 만들 수 있습니다.
+응용 프로그램 리소스당 최대 100개의 가용성 테스트를 만들 수 있습니다.
 
-## <a name="create"></a>1. 가용성 테스트 보고서에 대한 리소스 열기
+
+> [!NOTE] 
+> * 가용성 테스트 위치는 최근에 Azure 데이터 센터로 이동했습니다. 이 이동을 통해 Azure 데이터 센터의 증가하는 네트워크와 함께 위치를 추가할 수 있습니다.  
+> * 테스트를 업데이트할 필요가 없습니다. 모든 테스트가 마이그레이션되고 새 위치에서 실행됩니다. 
+>* 자세한 내용은 [서비스 업데이트](https://blogs.msdn.microsoft.com/applicationinsights-status/2018/01/24/application-insights-availability-monitoring-test-locations-updated/)를 참조하세요.
+
+## <a name="create"></a>가용성 테스트 보고서에 대한 리소스 열기
 
 웹앱에 **Application Insights를 이미 구성한 경우** [Azure Portal](https://portal.azure.com)에서 Application Insights 리소스를 엽니다.
 
-**또는, 새로운 리소스에서 보고서를 확인하려는 경우** [Microsoft Azure](http://azure.com)에 등록하고 [Azure Portal](https://portal.azure.com)로 이동한 후 Application Insights 리소스를 만듭니다.
+**또는 새 리소스에서 보고서를 확인하려는 경우** [Azure Portal](https://portal.azure.com)로 이동한 후 Application Insights 리소스를 만듭니다.
 
 ![새로 만들기 > Application Insights](./media/app-insights-monitor-web-app-availability/11-new-app.png)
 
 **모든 리소스** 를 클릭하여 새 리소스에 대한 개요 블레이드를 엽니다.
 
-## <a name="setup"></a>2. URL ping 테스트 만들기
+## <a name="setup"></a>URL ping 테스트 만들기
 가용성 블레이드를 열고 테스트를 추가합니다.
 
 ![웹 사이트의 최소 URL 채우기](./media/app-insights-monitor-web-app-availability/13-availability.png)
@@ -51,9 +56,13 @@ ms.lasthandoff: 05/26/2017
 * **종속 요청 구문 분석**: 이 옵션을 선택하는 경우 테스트에서 테스트 대상 웹 페이지의 일부인 이미지, 스크립트, 스타일 파일 및 기타 파일을 요청합니다. 기록된 응답 시간에는 이러한 파일을 가져오는 데 걸리는 시간이 포함됩니다. 전체 테스트의 시간 제한 내에서 이러한 모든 리소스를 성공적으로 다운로드할 수 없는 경우 테스트에 실패합니다. 
 
     옵션을 선택하지 않으면 테스트는 지정한 URL에서만 파일을 요청합니다.
+
 * **다시 시도 사용**: 이 옵션을 선택한 경우 테스트에 실패하면 잠시 후에 다시 시도합니다. 연속 된 세 번의 시도가 실패하는 경우에 실패가 보고됩니다. 후속 테스트는 일반적인 테스트 빈도로 수행됩니다. 다음 성공까지 다시 시도는 일시적으로 중단됩니다. 이 규칙은 각 테스트 위치에서 독립적으로 적용됩니다. 이 옵션을 권장합니다. 평균 실패의 약 80%는 다시 시도에서 사라집니다.
-* **테스트 빈도**: 각 테스트 위치에서 테스트를 실행하는 빈도를 설정합니다. 5분에 5번의 테스트를 하는 빈도로 사이트를 평균 1분마다 테스트합니다.
+
+* **테스트 빈도**: 각 테스트 위치에서 테스트를 실행하는 빈도를 설정합니다. 5분에 5번의 테스트를 하는 기본 빈도로 사이트를 평균 1분마다 테스트합니다.
+
 * **테스트 위치** 는 서버가 URL로 웹 요청을 보내는 곳입니다. 웹 사이트의 문제와 네트워크 문제를 구분할 수 있도록 한 가지 이상을 선택합니다. 최대 16 개의 위치를 선택할 수 있습니다.
+
 * **성공 조건**:
 
     **테스트 시간 제한**: 느린 응답에 대한 알림을 받으려면 이 값을 감소시킵니다. 해당 기간 내에 사이트에서 응답을 받지 못한 경우 테스트는 실패로 계산됩니다. **종속 요청 구문 분석**을 선택한 경우 모든 이미지, 스타일 파일, 스크립트 및 다른 종속된 리소스도 해당 기간 내에 받아야 합니다.
@@ -69,7 +78,7 @@ ms.lasthandoff: 05/26/2017
 테스트를 더 추가 합니다. 예를 들어 홈 페이지를 테스트할 수 있을 뿐 아니라 검색을 위한 URL을 테스트하여 데이터베이스가 실행되고 있는지 확인할 수 있습니다.
 
 
-## <a name="monitor"></a>3. 가용성 테스트 결과 참조
+## <a name="monitor"></a>가용성 테스트 결과 참조
 
 5분 후에 **새로 고침**을 클릭하여 테스트 결과를 볼 수 있습니다. 
 
@@ -103,14 +112,16 @@ ms.lasthandoff: 05/26/2017
 가용성 테스트 결과에서 다음을 수행할 수 있습니다.
 
 * 서버로부터 수신한 응답을 검사합니다.
-* 실패한 요청 인스턴스를 처리하는 동안 서버 앱에서 보낸 원격 분석을 엽니다.
+* 실패한 요청 인스턴스를 처리하는 동안 수집된 서버 쪽 원격 분석 데이터로 실패를 진단합니다.
 * Git 또는 VSTS에 문제 또는 작업 항목을 기록하고 문제를 추적합니다. 버그에는 이 이벤트에 대한 링크가 포함됩니다.
 * 웹 테스트 결과를 Visual Studio에서 엽니다.
 
+*정상으로 보이지만 실패로 보고되었습니까?* 노이즈를 줄이는 방법은 [FAQ](#qna)를 참조하세요.
 
-*정상으로 보이지만 실패로 보고되었습니까?* 모든 이미지, 스크립트, 스타일 시트 및 페이지에 의해 로드된 다른 파일을 확인합니다. 그 중 하나라도 실패하면, 기본 html 페이지가 확인을 로드하는 경우에도 테스트는 실패로 보고됩니다.
 
-*관련 항목이 없나요?* 서버 쪽 응용 프로그램에 대해 Application Insights를 설정한 경우, [샘플링](app-insights-sampling.md)이 작동 중이기 때문일 수 있습니다. 
+> [!TIP]
+> 신뢰할 수 있는 모니터링의 경우 2개 이상의 위치에서 테스트하는 것이 좋습니다.
+>
 
 ## <a name="multi-step-web-tests"></a>다중 단계 웹 테스트
 URL 시퀀스를 포함하는 시나리오를 모니터링할 수 있습니다. 예를 들어 판매 웹 사이트를 모니터링하는 경우 장바구니에 항목을 제대로 추가할 수 있는지 테스트할 수 있습니다.
@@ -122,7 +133,8 @@ URL 시퀀스를 포함하는 시나리오를 모니터링할 수 있습니다. 
 다단계 테스트를 만들려면 Visual Studio Enterprise를 사용하여 시나리오를 기록한 다음 Application Insights에 기록을 업로드합니다. Application Insights는 지정된 간격에 따라 시나리오를 재생하고 응답을 확인합니다.
 
 > [!NOTE]
-> 테스트에서 코딩된 함수 또는 루프를 사용할 수 없습니다. 테스트는 .webtest 스크립트에 완전히 포함되어야 합니다. 그러나 표준 플러그 인을 사용할 수 있습니다.
+> * 테스트에서 코딩된 함수 또는 루프를 사용할 수 없습니다. 테스트는 .webtest 스크립트에 완전히 포함되어야 합니다. 그러나 표준 플러그 인을 사용할 수 있습니다.
+> * 영어 문자만 다단계 웹 테스트에서 지원됩니다. 다른 언어로 Visual Studio를 사용하는 경우 웹 테스트 정의 파일을 영어가 아닌 문자를 번역/제외하도록 업데이트하세요.
 >
 
 #### <a name="1-record-a-scenario"></a>1. 시나리오 기록
@@ -252,14 +264,28 @@ Visual Studio Enterprise를 사용하여 웹 세션을 기록합니다.
 > 성능 테스트 결과를 살펴 보려면 [라이브 스트림](app-insights-live-stream.md) 및 [프로필](app-insights-profiler.md)을 사용합니다.
 >
 
-## <a name="automation"></a>자동화
+## <a name="automation"></a>Automation
 * [PowerShell 스크립트를 사용하여 가용성 테스트를 자동으로 설정](app-insights-powershell.md#add-an-availability-test)합니다.
 * 경고가 발생하면 호출되는 [웹후크](../monitoring-and-diagnostics/insights-webhooks-alerts.md)를 설정합니다.
 
 ## <a name="qna"></a>질문이 있습니까? 문제가 있습니까?
+* *프로토콜 위반 오류로 인한 일시적 테스트 오류인가요?*
+
+    이 오류("프로토콜 위반, CR 뒤에 LF가 와야 함")는 서버(또는 종속성)와 관련된 문제를 나타내며 잘못된 헤더가 응답에 설정된 경우에 발생합니다. 부하 분산 장치 또는 CDN으로 인해 발생할 수 있습니다. 특히 일부 헤더는 줄 끝을 표시하는 데 CRLF를 사용하지 않았을 수 있으며 이는 HTTP 사양을 위반하기 때문에 .NET WebRequest 수준에서 유효성 검사가 실패합니다. 위반한 헤더를 찾기 위해 응답을 검사합니다.
+    
+    참고: HTTP 헤더의 유효성 검사가 완화된 브라우저에서는 URL이 실패하지 않을 수 있습니다. 이 문제에 대한 자세한 설명은 http://mehdi.me/a-tale-of-debugging-the-linkedin-api-net-and-http-protocol-violations/ 블로그 게시물을 참조하세요.  
+* *사이트는 괜찮아 보이지만 테스트 실패가 표시됩니다.*
+
+    * 모든 이미지, 스크립트, 스타일 시트 및 페이지에 의해 로드된 다른 파일을 확인합니다. 그 중 하나라도 실패하면, 기본 html 페이지가 확인을 로드하는 경우에도 테스트는 실패로 보고됩니다. 테스트가 이러한 리소스 오류에 둔감해지도록 하려면 테스트 구성에서 "종속 요청 구문 분석"을 선택 취소합니다. 
+
+    * 일시적인 네트워크 문제 등으로 인해 노이즈가 발생할 가능성을 줄이려면 "Enable retries for test failures"(테스트 실패 시 다시 시도 사용) 구성을 선택해야 합니다. 또한 더 많은 위치에서 테스트하고 그에 따라 경고 규칙 임계값을 관리하여 과도한 경고를 유발하는 특정 위치의 문제를 방지할 수 있습니다.
+    
+* *테스트 실패를 진단할만한 관련 서버 쪽 원격 분석 데이터가 표시되지 않습니다.*
+    
+    서버 쪽 응용 프로그램에 대해 Application Insights를 설정한 경우, [샘플링](app-insights-sampling.md)이 작동 중이기 때문일 수 있습니다.
 * *웹 테스트에서 코드를 호출할 수 있나요?*
 
-    안 됩니다. 테스트 단계는 .webtest 파일에 포함되어야 합니다. 또한 다른 웹 테스트를 호출하거나 루프를 사용할 수 없습니다. 그러나 몇 가지 유용한 플러그 인이 있습니다.
+    번호 테스트 단계는 .webtest 파일에 포함되어야 합니다. 또한 다른 웹 테스트를 호출하거나 루프를 사용할 수 없습니다. 그러나 몇 가지 유용한 플러그 인이 있습니다.
 * *HTTPS가 지원됩니까?*
 
     TLS 1.1 및 TLS 1.2를 지원합니다.

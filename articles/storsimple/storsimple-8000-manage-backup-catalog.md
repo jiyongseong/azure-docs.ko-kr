@@ -14,13 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/29/2017
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
 ms.openlocfilehash: ac2577c6cd350d6d437d55e61ec73d954cb24893
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-the-storsimple-device-manager-service-to-manage-your-backup-catalog"></a>StorSimple 장치 관리자 서비스를 사용하여 백업 카탈로그 관리
 ## <a name="overview"></a>개요
@@ -113,5 +111,4 @@ StorSimple 장치 관리자 서비스 **백업 카탈로그** 블레이드는 �
 ## <a name="next-steps"></a>다음 단계
 * 백업 카탈로그를 사용하여 [백업 세트에서 장치를 복원](storsimple-8000-restore-from-backup-set-u2.md)하는 방법을 알아봅니다.
 * [StorSimple 장치 관리자 서비스를 사용하여 StorSimple 장치를 관리](storsimple-8000-manager-service-administration.md)하는 방법에 대해 자세히 알아보기
-
 

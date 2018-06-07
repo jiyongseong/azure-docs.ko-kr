@@ -1,29 +1,21 @@
 ---
-title: "Azure SQL Database Azure 사례 연구 - Snelstart | Microsoft Docs"
-description: "어떻게 SnelStart가 Azure를 사용하여 매월 1,000개의 새 Azure SQL 데이터베이스 규모로 비즈니스 서비스를 빠르게 확장했는지 알아봅니다."
+title: Azure SQL Database Azure 사례 연구 - Snelstart | Microsoft Docs
+description: 어떻게 SnelStart가 Azure를 사용하여 매월 1,000개의 새 Azure SQL Database 규모로 비즈니스 서비스를 빠르게 확장했는지 알아봅니다.
 services: sql-database
-documentationcenter: 
 author: CarlRabeler
-manager: jhubbard
-editor: 
-ms.assetid: fab506b2-439d-4f1a-bdc5-d1d25c80d267
+manager: craigg
 ms.service: sql-database
 ms.custom: reference
-ms.devlang: NA
 ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: NA
-ms.date: 01/10/2017
+ms.date: 04/01/2018
 ms.author: carlrab
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 187954f3ddafdbc17e341ce41f5b109cb95f8a24
-ms.openlocfilehash: 0c37a035cfc782e05dd72da7323fe244eadc4ce9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/12/2017
-
-
+ms.openlocfilehash: 55734dc0889ae6d1b03fab073586fa2fab32ec3c
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-# <a name="with-azure-snelstart-has-rapidly-expanded-its-business-services-at-a-rate-of-1000-new-azure-sql-databases-per-month"></a>Azure를 사용하여 SnelStart는 매월 1,000개의 새 Azure SQL 데이터베이스 규모로 비즈니스 서비스를 빠르게 확장했습니다.
+# <a name="with-azure-snelstart-has-rapidly-expanded-its-business-services-at-a-rate-of-1000-new-azure-sql-databases-per-month"></a>Azure를 사용하여 SnelStart는 매월 1,000개의 새 Azure SQL Database 규모로 비즈니스 서비스를 빠르게 확장했습니다.
 ![SnelStart 로고](./media/sql-database-implementation-snelstart/snelstartlogo.png)
 
 SnelStart는 네덜란드에서 인기리에 사용되는 SMB(중소기업)을 위한 재무 및 비즈니스 관리 소프트웨어를 제작합니다. 이 회사의 55,000여 고객은 IT 직원 35명을 포함하여 110명의 직원에게 서비스를 받습니다. SnelStart는 데스크톱 소프트웨어에서 Azure에서 구축되는 SaaS(software-as-a-service) 제품으로 전환하면서, 기본 제공 서비스를 활용하고, C#의 친숙한 환경을 사용하여 관리를 자동화하고, 탄력적 풀을 통해 비즈니스의 과도한 프로비전 또는 부족한 프로비전 없이 성능 및 확장성을 최적화했습니다. SnelStart는 Azure를 사용하여 온-프레미스와 클라우드 간에 고객을 유연하게 이동할 수 있습니다.
@@ -45,7 +37,7 @@ SnelStart는 전통적인 개발 모델인 코드, 패키지, 배송 및 반복�
 
 "우리는 가속화된 속도로 업데이트를 프로그래밍하고 릴리스하는 방법을 원했습니다. 따라서 더 빠르게 혁신하고 고객을 위한 새 서비스를 만들 수 있었습니다. 또한 우리는 고객의 비즈니스 관리 요구를 단순화하기 위해 더 많은 프로세스를 자동화하는 방법도 원했습니다."라고 Been은 덧붙였습니다.
 
-SnelStart의 경우 이러한 솔루션은 클라우드 기반 SaaS 공급자가 되어서 해당 서비스를 확장하는 것이었습니다. Azure SQL 데이터베이스 플랫폼은 IaaS(infrastructure-as-a-service) 솔루션에 필요할 수 있는 주요 IT 오버헤드를 발생하지 않도록 도와주었습니다.
+SnelStart의 경우 이러한 솔루션은 클라우드 기반 SaaS 공급자가 되어서 해당 서비스를 확장하는 것이었습니다. Azure SQL Database 플랫폼은 IaaS(infrastructure-as-a-service) 솔루션에 필요할 수 있는 주요 IT 오버헤드를 발생하지 않도록 도와주었습니다.
 
 또한 클라우드 모델에서는 SnelStart가 버그를 수정하고 새 기능을 빠르게 제공할 수 있으므로 고객이 소프트웨어를 다운로드하거나 업그레이드할 필요가 없습니다. Been에 따르면 “Azure 클라우드 서비스를 사용하면 타사의 변화하는 요구에 빠르게 대응할 수 있습니다. 새 버전을 수천 명의 고객에게 제공하지 않고, 데스크톱 응용 프로그램에서 전송된 정보를 타사가 요구하는 새로운 형식으로 조정할 수 있습니다."
 
@@ -59,15 +51,15 @@ SnelStart는 1964에서 다소 초라하게 시작한 기민한 현대식 하이
 ## <a name="optimizing-performance-and-cost-with-elastic-pools"></a>탄력적 풀을 통해 성능 및 비용 최적화
 SnelStart는 탄력적 풀을 대규모로 일찌감치 활용했습니다. 탄력적 풀은 이 회사에서 비용을 제한하고 성능 요구를 보다 효율적으로 관리하도록 지원합니다. Been에 따르면 "탄력적 풀을 사용하여 과도 프로비전 없이, 고객의 요구에 따라 성능을 최적화할 수 있습니다. 최대 부하를 토대로 프로비전해야 한다면 훨씬 비용이 많이 들 것입니다. 대신, 사용률이 낮은 여러 데이터베이스 간에 리소스를 공유할 수 있는 옵션을 통해 성능이 뛰어나고 비용 효과적인 솔루션을 작성할 수 있게 되었습니다."
 
-## <a name="azure-sql-databases-help-containerize-data-for-isolation-and-security"></a>Azure SQL 데이터베이스는 격리 및 보안을 위해 데이터를 컨테이너에 보관하도록 지원합니다.
-Azure SQL 데이터베이스를 사용하여 SnelStart는 고객의 온-프레미스 비즈니스 관리 데이터를 Azure에 쉽고 투명하게 이동할 수 있습니다. Azure SQL 데이터베이스는 인증, 권한 부여, 손쉬운 백업 및 복원 기능을 위해 격리, 경계를 제공하는 편리한 컨테이너입니다. 데이터베이스는 비즈니스 관리에 적합한 개념적 모델을 제공합니다. IT 설계자인 Carlo Kuip에 따르면, "이 컨테이너 경계 내의 항목에는 비즈니스에 중요한 데이터가 포함되어 있으며 이러한 항목을 격리된 데이터베이스에 저장하면 적절히 보호할 수 있습니다. 우리는 데이터베이스 수준에서 권한 부여를 관리할 수 있으며, DBA(데이터베이스 관리자) 없이도 관리를 자동화하고 데이터베이스를 확장할 수 있습니다.”
+## <a name="azure-sql-databases-help-containerize-data-for-isolation-and-security"></a>Azure SQL Database는 격리 및 보안을 위해 데이터를 컨테이너에 보관하도록 지원합니다.
+Azure SQL Database를 사용하여 SnelStart는 고객의 온-프레미스 비즈니스 관리 데이터를 Azure에 쉽고 투명하게 이동할 수 있습니다. Azure SQL Database는 인증, 권한 부여, 손쉬운 백업 및 복원 기능을 위해 격리, 경계를 제공하는 편리한 컨테이너입니다. 데이터베이스는 비즈니스 관리에 적합한 개념적 모델을 제공합니다. IT 설계자인 Carlo Kuip에 따르면, "이 컨테이너 경계 내의 항목에는 비즈니스에 중요한 데이터가 포함되어 있으며 이러한 항목을 격리된 데이터베이스에 저장하면 적절히 보호할 수 있습니다. 우리는 데이터베이스 수준에서 권한 부여를 관리할 수 있으며, DBA(데이터베이스 관리자) 없이도 관리를 자동화하고 데이터베이스를 확장할 수 있습니다.”
 
-또한 Azure SQL 데이터 웨어하우스는 기업에서 침입 감지, 사용자 작업 로깅 및 연결 등의 원격 분석 데이터를 수집할 수 있도록 지원하여 SnelStart 보안 및 관리 영역에서 중요한 역할을 합니다.
+또한 Azure SQL Data Warehouse는 기업에서 침입 감지, 사용자 작업 로깅 및 연결 등의 원격 분석 데이터를 수집할 수 있도록 지원하여 SnelStart 보안 및 관리 영역에서 중요한 역할을 합니다.
 
 ## <a name="azure-removes-overhead-so-that-developers-can-spend-more-time-delivering-value"></a>Azure는 오버헤드를 제거하여 개발자가 가치를 전달하는 데 더 많은 시간을 투입할 수 있게 합니다.
 Azure 플랫폼 모델은 인프라 오버헤드를 제거하며, SnelStart가 C# 관리 라이브러리를 사용하여 배포를 자동화할 수 있도록 했습니다. "우리는 고객을 위해 확장성, 속도 및 재해 복구 옵션을 높이면서 동시에 소수의 직원으로 현재 업무를 성장시킬 수 있었습니다. 서비스 개발로 전환하면서, 새로운 규정 또는 세금 코드에 맞게 기존 코드를 단순히 업데이트하지 않고 새로운 서비스 및 기능에 집중할 수 있게 리소스를 확보했습니다."라고 Kuip은 언급했습니다. "관리를 자동화하고 SaaS 제품을 사용하여 운영 직원에 큰 비용을 투자할 필요 없이 고객에게 더 나은 가치를 제공할 수 있습니다.”라고 덧붙였습니다. 예를 들어 Azure 및 탄력적 풀을 사용하여 SnelStart는 은행, 새로운 청구 서비스, 중소기업 신원 조사 및 전자 메일 서비스와의 보다 강력한 고객 데이터 통합을 포함하여 다양한 새 기능을 추가할 수 있게 되었습니다.
 
-> "2016년이 되고 처음 몇 달 만에, Azure SQL 데이터베이스 배포를 약 5,500건에서 12,000건 이상으로 확장했으며, 현재 매월 약 1,000개의 데이터베이스를 추가하고 있습니다."
+> "2016년이 되고 처음 몇 달 만에, Azure SQL Database 배포를 약 5,500건에서 12,000건 이상으로 확장했으며, 현재 매월 약 1,000개의 데이터베이스를 추가하고 있습니다."
 > 
 > - 소프트웨어 설계자 Henry Been
 > 
@@ -86,7 +78,7 @@ SnelStart는 Azure를 사용하여 좀 더 원활하게 고객 및 해당 회계
 > 
 > 
 
-또한 SnelStart 웹 서비스는 고객 및 회계사가 Azure SQL 데이터베이스의 탄력적 풀에 있는 데이터에 쉽게 액세스할 수 있도록 합니다. 데이터베이스 탄력성 및 Azure 리소스 관리자와 결합된 이 SaaS 모델은 모든 Azure 배포를 보완하는 확장성 기능을 SnelStart에 제공합니다. 구현은 C# 관리 라이브러리를 사용하여 완전하게 자동화되었습니다.
+또한 SnelStart 웹 서비스는 고객 및 회계사가 Azure SQL Database의 탄력적 풀에 있는 데이터에 쉽게 액세스할 수 있도록 합니다. 데이터베이스 탄력성 및 Azure 리소스 관리자와 결합된 이 SaaS 모델은 모든 Azure 배포를 보완하는 확장성 기능을 SnelStart에 제공합니다. 구현은 C# 관리 라이브러리를 사용하여 완전하게 자동화되었습니다.
 
 ![SnelStart 아키텍처](./media/sql-database-implementation-snelstart/figure1.png)
 
@@ -106,8 +98,6 @@ SnelStart의 즉각적인 목표는 만족을 주는 고객 기반을 지속적�
 
 ## <a name="more-information"></a>자세한 정보
 * Azure의 탄력적 풀에 대한 자세한 내용은 [탄력적 풀](sql-database-elastic-pool.md)을 참조하세요.
-* 웹 역할 및 작업자 역할에 대한 자세한 내용은 [작업자 역할](../fundamentals-introduction-to-azure.md#compute)을 참조하세요.    
-* Azure SQL 데이터 웨어하우스에 대한 자세한 내용은 [SQL 데이터 웨어하우스](https://azure.microsoft.com/documentation/services/sql-data-warehouse/)
+* Azure SQL Data Warehouse에 대한 자세한 내용은 [SQL Data Warehouse](https://azure.microsoft.com/documentation/services/sql-data-warehouse/)
 * SnelStart에 대해 자세히 알아보려면 [SnelStart](http://www.snelstart.nl)를 참조하세요.
-
 

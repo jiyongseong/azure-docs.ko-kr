@@ -1,10 +1,10 @@
 ---
-title: "U-SQL UDO(사용자 정의 연산자) 개발 | Microsoft Docs"
-description: "Data Lake Analytics 작업에 사용 및 재사용되는 사용자 정의 연산자를 개발하는 방법에 대해 알아봅니다. "
+title: U-SQL UDO(사용자 정의 연산자) 개발 | Microsoft Docs
+description: 'Data Lake Analytics 작업에 사용 및 재사용되는 사용자 정의 연산자를 개발하는 방법에 대해 알아봅니다. '
 services: data-lake-analytics
-documentationcenter: 
-author: edmacauley
-manager: jhubbard
+documentationcenter: ''
+author: saveenr
+manager: kfile
 editor: cgronlun
 ms.assetid: e5189e4e-9438-46d1-8686-ed4836bf3356
 ms.service: data-lake-analytics
@@ -13,14 +13,12 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: big-data
 ms.date: 12/05/2016
-ms.author: edmaca
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a1ba750d2be1969bfcd4085a24b0469f72a357ad
-ms.openlocfilehash: fdee02fb60b633c26704fc1774dfc3a7825b5e0d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
-
+ms.author: saveenr
+ms.openlocfilehash: c0164d9f1e40778d3ce0dc7e947f6d2807234468
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="develop-u-sql-user-defined-operators-udos"></a>U-SQL UDO(사용자 정의 연산자) 개발
 U-SQL 작업에서 데이터를 처리하기 위한 사용자 정의 연산자를 개발하는 방법에 대해 알아봅니다.
@@ -123,16 +121,14 @@ U-SQL에 대한 일반적인 용도의 어셈블리 개발에 대한 지침은 [
 8. **솔루션 탐색기**에서 **Script.usql**을 마우스 오른쪽 클릭하고 **빌드 스크립트**를 클릭합니다.
 9. **솔루션 탐색기**에서 **Script.usql**을 마우스 오른쪽 클릭하고 **스크립트 제출**을 클릭합니다.
 10. Azure 구독에 연결하지 않았다면 Azure 계정 자격 증명을 입력하라는 메시지가 표시됩니다.
-11. **Submit**를 클릭합니다. 제출이 완료되면 결과 창에서 제출 결과 및 작업 링크를 사용할 수 있습니다.
+11. **제출**을 클릭합니다. 제출이 완료되면 결과 창에서 제출 결과 및 작업 링크를 사용할 수 있습니다.
 12. 최근 작업 상태를 보고 화면을 새로 고치려면 **새로 고침** 단추를 클릭하세요.
 
 **출력을 보려면**
 
-1. **서버 탐색기**, **Azure** 확장, **데이터 레이크 분석** 확장, 사용자 데이터 레이크 분석 계정 확장, **저장소 계정** 확장에서 기본 저장소를 오른 클릭하고 **탐색기**를 클릭합니다.
+1. **서버 탐색기**, **Azure** 확장, **데이터 레이크 분석** 확장, 사용자 데이터 레이크 분석 계정 확장, **Storage 계정** 확장에서 기본 저장소를 오른 클릭하고 **탐색기**를 클릭합니다.
 2. 샘플 및 출력을 확장하고 **Drivers.csv**를 두 번 클릭합니다.
 
 ## <a name="see-also"></a>참고 항목
-* [PowerShell을 사용하여 데이터 레이크 분석 시작하기](data-lake-analytics-get-started-powershell.md)
-* [Azure 포털을 사용하여 데이터 레이크 분석 시작하기](data-lake-analytics-get-started-portal.md)
+* [사용자 코드를 사용하여 U-SQL 식 확장](https://msdn.microsoft.com/library/azure/mt621316.aspx)
 * [U-SQL 응용 프로그램 개발에 Visual Studio용 데이터 레이크 도구 사용하기](data-lake-analytics-data-lake-tools-get-started.md)
-

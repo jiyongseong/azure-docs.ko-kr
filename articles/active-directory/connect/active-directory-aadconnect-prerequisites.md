@@ -1,25 +1,24 @@
 ---
-title: "Azure AD Connect: 필수 조건 및 하드웨어 | Microsoft Docs"
-description: "이 항목에서는 Azure AD Connect에 대한 필수 조건 및 하드웨어 요구 사항에 대해 설명합니다."
+title: 'Azure AD Connect: 필수 조건 및 하드웨어 | Microsoft Docs'
+description: 이 항목에서는 Azure AD Connect에 대한 필수 조건 및 하드웨어 요구 사항에 대해 설명합니다.
 services: active-directory
-documentationcenter: 
-author: andkjell
-manager: femila
-editor: 
+documentationcenter: ''
+author: billmath
+manager: mtillman
+editor: ''
 ms.assetid: 91b88fda-bca6-49a8-898f-8d906a661f07
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/12/2017
+ms.date: 03/09/2018
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a643f139be40b9b11f865d528622bafbe7dec939
-ms.openlocfilehash: eb9697edc5a6085417ec1339c334db6451ebbf12
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/31/2017
-
+ms.openlocfilehash: d6d6eadf0ae8996b019a0564715f843913101944
+ms.sourcegitcommit: a0be2dc237d30b7f79914e8adfb85299571374ec
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/12/2018
 ---
 # <a name="prerequisites-for-azure-ad-connect"></a>Azure AD Connect에 대한 필수 조건
 이 항목에서는 Azure AD Connect에 대한 필수 조건 및 하드웨어 요구 사항을 설명합니다.
@@ -32,6 +31,7 @@ Azure AD Connect를 설치하기 전에 필요한 몇 가지 사항이 있습니
   * [Azure Portal](https://portal.azure.com)을 사용할 수도 있습니다. 이 포털에는 Azure AD 라이선스가 필요하지 않습니다.
 * [도메인을 추가하고 확인합니다](../active-directory-domains-add-azure-portal.md) . 예를 들어, 사용자가 contoso.com을 사용하려는 경우 해당 도메인을 확인하고 contoso.onmicrosoft.com 기본 도메인을 사용하지 않도록 합니다.
 * Azure AD 테넌트는 기본적으로 5만 개의 개체를 허용합니다. 도메인을 확인하는 경우, 제한은 30만 개의 개체로 늘어납니다. Azure AD에서 더 많은 개체가 필요한 경우 제한을 더 증가시키려면 지원 사례를 열어야 합니다. 개체가 50만 개 이상 필요한 경우 Office 365, Azure AD Basic, Azure AD Premium 또는 Enterprise Mobility 및 Security와 같은 라이선스가 필요합니다.
+* ADSyncPrep은 Azure AD Connect에 대한 Active Directory 환경을 준비하는 데 사용되는 기능을 제공하는 PowerShell 스크립트 모듈입니다.  ADSyncPrep에는 [Azure AD Microsoft Online v1.1 PowerShell 모듈](https://docs.microsoft.com/powershell/azure/active-directory/install-msonlinev1?view=azureadps-1.0)이 필요합니다.  버전 2는 작동하지 않습니다.  `Install-Module` cmdlet을 사용하여 모듈을 설치할 수 있습니다.  자세한 내용은 제공된 링크를 참조하세요.
 
 ### <a name="prepare-your-on-premises-data"></a>온-프레미스 데이터 준비
 * Azure AD 및 Office 365로 동기화하기 전에 [IdFix](https://support.office.com/article/Install-and-run-the-Office-365-IdFix-tool-f4bd2439-3e41-4169-99f6-3fabdfa326ac)를 사용하여 디렉터리의 중복 및 서식 문제 등의 오류가 있는지 식별합니다.
@@ -62,7 +62,7 @@ Azure AD Connect를 설치하기 전에 필요한 몇 가지 사항이 있습니
 ### <a name="sql-server-used-by-azure-ad-connect"></a>Azure AD Connect에서 사용하는 SQL Server
 * Azure AD Connect는 ID 데이터를 저장하기 위한 SQL Server 데이터베이스가 필요합니다. 기본적으로 SQL Server 2012 Express LocalDB(SQL Server Express의 라이트 버전)가 설치됩니다. SQL Server Express는 약 100,000개의 개체를 관리할 수 있는 10GB의 용량을 제공합니다. 더 큰 볼륨의 디렉터리 개체 관리가 필요한 경우 설치 마법사가 SQL Server의 다른 설치를 가리키도록 해야 합니다.
 * 별도의 SQL Server를 사용하는 경우 다음 요구 사항이 적용됩니다.
-  * Azure AD Connect는 SQL Server 2008(최신 서비스 팩)에서 SQL Server 2016 SP1까지 Microsoft SQL Server의 모든 버전을 지원합니다. Microsoft Azure SQL 데이터베이스는 데이터베이스로 **지원되지 않습니다** .
+  * Azure AD Connect는 SQL Server 2008(최신 서비스 팩)에서 SQL Server 2016 SP1까지 Microsoft SQL Server의 모든 버전을 지원합니다. Microsoft Azure SQL Database는 데이터베이스로 **지원되지 않습니다** .
   * 대/소문자를 구분하지 않는 SQL 데이터 정렬을 사용해야 합니다. 이러한 데이터 정렬은 이름에 \_CI_를 사용하여 식별됩니다. 이름에 \_CS_를 사용하여 식별되는 대/소문자 구분 데이터 정렬을 사용하는 것은 **지원되지 않습니다**.
   * SQL 인스턴스당 동기화 엔진을 한 개만 사용할 수 있습니다. SQL 인스턴스를 FIM/MIM 동기화, DirSync 또는 Azure AD Sync와 공유하는 것은 **지원되지 않습니다**.
 
@@ -75,8 +75,9 @@ Azure AD Connect를 설치하기 전에 필요한 몇 가지 사항이 있습니
 * Azure AD Connect 서버는 인트라넷 및 인터넷에 대해 DNS 확인을 해야 합니다. DNS 서버는 온-프레미스 Active Directory와 Azure AD 끝점 모두에 대해 이름을 확인할 수 있어야 합니다.
 * 인트라넷에 방화벽이 있고 Azure AD Connect 서버와 도메인 컨트롤러 사이에서 포트를 열어야 하는 경우 자세한 내용은 [Azure AD Connect 포트](active-directory-aadconnect-ports.md) 를 참조하세요.
 * 프록시 또는 방화벽에 액세스할 수 있는 URL을 제한하는 경우 [Office 365 URL 및 IP 주소 범위 ](https://support.office.com/article/Office-365-URLs-and-IP-address-ranges-8548a211-3fe7-47cb-abb1-355ea5aa88a2) 에서 설명한 URL이 열려야 합니다.
-  * 독일의 Microsoft 클라우드 또는 Microsoft Azure Government 클라우드를 사용하는 경우 URL은 [Azure AD Connect 동기화 서비스 인스턴스가 고려 사항](active-directory-aadconnect-instances.md) 을 참조하세요.
-* Azure AD Connect는 기본적으로 TLS 1.0을 사용하여 Azure AD와 통신합니다. [Azure AD Connect에 TLS 1.2 사용](#enable-tls-12-for-azure-ad-connect)의 단계에 따라 TLS 1.2로 변경할 수 있습니다.
+  * 독일의 Microsoft Cloud 또는 Microsoft Azure Government 클라우드를 사용하는 경우 URL은 [Azure AD Connect 동기화 서비스 인스턴스가 고려 사항](active-directory-aadconnect-instances.md) 을 참조하세요.
+* Azure AD Connect(1.1.614.0 버전 이상)는 기본적으로 TLS 1.2를 사용하여 동기화 엔진과 Azure AD 간의 통신을 암호화합니다. 기본 운영 체제에서 TLS 1.2를 사용할 수 없는 경우 Azure AD Connect에 이전 프로토콜(TLS 1.1 및 TLS 1.0)이 점차적으로 다시 적용됩니다. 예를 들어 Windows Server 2008에서 TLS 1.1 또는 TLS 1.2를 지원하지 않기 때문에 Windows Server 2008에서 실행되는 Azure AD Connect는 TLS 1.0을 사용합니다.
+* 1.1.614.0 버전 이전의 Azure AD Connect는 기본적으로 TLS 1.0을 사용하여 동기화 엔진과 Azure AD 간의 통신을 암호화합니다. TLS 1.2로 변경하려면 [Azure AD Connect에 TLS 1.2 사용](#enable-tls-12-for-azure-ad-connect)의 단계를 수행합니다.
 * 인터넷에 연결하는 데 아웃바운드 프록시를 사용하는 경우 설치 마법사 및 Azure AD Connect 동기화에서 인터넷 및 Azure AD에 연결하려면 **C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config\machine.config** 파일에 다음 설정을 추가해야 합니다. 이 텍스트는 파일의 맨 아래에 입력해야 합니다. 이 코드에서 &lt;PROXYADRESS&gt;는 실제 프록시 IP 주소 또는 호스트 이름을 나타냅니다.
 
 ```
@@ -128,7 +129,7 @@ Azure AD Connect는 Microsoft PowerShell 및 .NET Framework 4.5.1에 따라 다�
   * .NET Framework 4.5.1과 이후 릴리스는 [Microsoft 다운로드 센터](http://www.microsoft.com/downloads)에서 찾을 수 있습니다.
 
 ### <a name="enable-tls-12-for-azure-ad-connect"></a>Azure AD Connect에 TLS 1.2 사용
-Azure AD Connect는 동기화 엔진 서버와 Azure AD 간의 통신을 암호화하기 위해 기본적으로 TLS 1.0을 사용합니다. 서버에서 기본적으로 TLS 1.2를 사용하도록 .Net 응용 프로그램을 구성하여 이를 변경할 수 있습니다. TLS 1.2에 대한 자세한 내용은 [Microsoft 보안 권고 2960358](https://technet.microsoft.com/security/advisory/2960358)에서 찾을 수 있습니다.
+1.1.614.0 버전 이전의 Azure AD Connect는 기본적으로 TLS 1.0을 사용하여 동기화 엔진 서버와 Azure AD 간의 통신을 암호화합니다. 서버에서 기본적으로 TLS 1.2를 사용하도록 .Net 응용 프로그램을 구성하여 이를 변경할 수 있습니다. TLS 1.2에 대한 자세한 내용은 [Microsoft 보안 권고 2960358](https://technet.microsoft.com/security/advisory/2960358)에서 찾을 수 있습니다.
 
 1. Windows Server 2008에서는 TLS 1.2를 사용할 수 없습니다. Windows Server 2008R2 이상이 필요합니다. 운영 체제에 대해 .Net 4.5.1 핫픽스를 설치했는지 확인하고 [Microsoft 보안 권고 2960358](https://technet.microsoft.com/security/advisory/2960358)을 참조하세요. 이 핫픽스 또는 이후 릴리스를 서버에 이미 설치했을 수 있습니다.
 2. Windows Server 2008R2를 사용하는 경우 TLS 1.2가 사용되도록 설정되어 있는지 확인합니다. Windows Server 2012 서버 및 이후 버전에서는 TLS 1.2가 이미 사용되도록 설정되어 있습니다.
@@ -154,8 +155,8 @@ Azure AD Connect를 사용하여 웹 응용 프로그램 프록시 또는 Active
   * 대상 컴퓨터(WAP 컴퓨터):
     * Winrm(Windows Remote Management / WS-Management) 서비스가 서비스 스냅인을 통해 실행되는지 확인합니다.
     * 관리자 권한 PSH 명령 창에서 `Enable-PSRemoting –force`
-      * 마법사를 실행 중인 컴퓨터(대상 컴퓨터가 도메인에 가입되지 않거나 신뢰할 수 없는 도메인인 경우):
-      * 관리자 권한 PSH 명령 창에서 `Set-Item WSMan:\localhost\Client\TrustedHosts –Value <DMZServerFQDN> -Force –Concatenate`
+  * 마법사를 실행 중인 컴퓨터(대상 컴퓨터가 도메인에 가입되지 않거나 신뢰할 수 없는 도메인인 경우):
+    * 관리자 권한 PSH 명령 창에서 `Set-Item WSMan:\localhost\Client\TrustedHosts –Value <DMZServerFQDN> -Force –Concatenate`
     * 서버 관리자:
       * DMZ WAP 호스트를 컴퓨터 풀에 추가(서버 관리자 -> 관리 -> 서버 추가...DNS 탭 사용)
       * 서버 관리자 모든 서버 탭: WAP 서버를 마우스 오른쪽 단추로 클릭하고 다음으로 관리...를 선택하고, WAP 컴퓨터에 대한 로컬(도메인이 아닌) 자격 증명을 입력합니다.
@@ -209,4 +210,3 @@ AD FS 또는 웹 응용 프로그램 서버를 실행하는 컴퓨터에 대한 
 
 ## <a name="next-steps"></a>다음 단계
 [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)에 대해 자세히 알아봅니다.
-

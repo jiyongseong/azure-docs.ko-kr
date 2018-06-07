@@ -14,12 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 04/06/2017
 ms.author: charwen
-translationtype: Human Translation
-ms.sourcegitcommit: 0b53a5ab59779dc16825887b3c970927f1f30821
 ms.openlocfilehash: c3a85b9445d69330c3f6c7d298169efddb6ecca0
-ms.lasthandoff: 04/07/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="optimize-expressroute-routing"></a>Express 경로 라우팅 최적화
 여러 개의 Express 경로 회로가 있는 경우 Microsoft에 연결되는 하나 이상의 경로가 있습니다. 결과적으로 최적이 아닌 라우팅이 발생할 수 있습니다. 즉, 트래픽이 Microsoft에, Microsoft에서 다시 네트워크로 도달하는 경로가 더 길어질 수 있습니다. 네트워크 경로가 길어질수록 대기 시간도 늘어납니다. 대기 시간은 응용 프로그램 성능 및 사용자 환경에 직접적인 영향을 줍니다. 이 문서에서는 이 문제를 보여 주고 표준 라우팅 기술을 사용하여 라우팅을 최적화하는 방법을 설명합니다.
@@ -75,4 +74,3 @@ ExpressRoute의 경우 ExpressRoute 회로에 연결하여 Virtual Network("VNet
 > 또한 여러 ExpressRoute 회로 설정한 경우 위의 두 번째 시나리오에서 설명한 기술인 AS PATH 접두사를 적용하는 대신 연결의 가중치를 구성하여 VNet에서 온-프레미스 네트워크로의 라우팅에 영향을 줄 수 있습니다. 각 접두사의 경우 트래픽을 전송하는 방법을 결정할 때 AS Path 길이 앞에 있는 연결 가중치를 항상 살펴봅니다.
 >
 >
-

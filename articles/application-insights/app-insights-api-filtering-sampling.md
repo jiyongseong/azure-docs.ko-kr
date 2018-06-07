@@ -1,9 +1,9 @@
 ---
-title: "Azure Application Insights SDK에서 필터링 및 전처리 | Microsoft Docs"
-description: "SDK용 원격 분석 프로세서 및 원격 분석 이니셜라이저를 작성하여 원격 분석이 Application Insights 포털에 전송되기 전에 데이터에 대한 속성을 필터링하거나 추가합니다."
+title: Azure Application Insights SDK에서 필터링 및 전처리 | Microsoft Docs
+description: SDK용 원격 분석 프로세서 및 원격 분석 이니셜라이저를 작성하여 원격 분석이 Application Insights 포털에 전송되기 전에 데이터에 대한 속성을 필터링하거나 추가합니다.
 services: application-insights
-documentationcenter: 
-author: beckylino
+documentationcenter: ''
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 38a9e454-43d5-4dba-a0f0-bd7cd75fb97b
 ms.service: application-insights
@@ -12,13 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: multiple
 ms.topic: article
 ms.date: 11/23/2016
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 785d3a8920d48e11e80048665e9866f16c514cf7
-ms.openlocfilehash: f961cde4aa8de5bdd0f8f220d355f2c93af580a4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/12/2017
-
+ms.author: mbullwin; borooji
+ms.openlocfilehash: 987ae184a0812f24df99a0b6e6543c8be55a9e79
+ms.sourcegitcommit: 909469bf17211be40ea24a981c3e0331ea182996
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
 # <a name="filtering-and-preprocessing-telemetry-in-the-application-insights-sdk"></a>Application Insights SDK에서 원격 분석 필터링 및 전처리
 
@@ -123,7 +122,7 @@ Application Insights SDK에 대한 플러그인을 작성하고 구성하여 원
 
 **또는** 코드에서 필터를 초기화할 수 있습니다. Global.asax.cs의 AppStart과 같은 적합한 초기화 클래스의 과정에서 프로세서를 삽입합니다.
 
-```C#
+```csharp
 
     var builder = TelemetryConfiguration.Active.TelemetryProcessorChainBuilder;
     builder.Use((next) => new SuccessfulDependencyFilter(next));
@@ -156,7 +155,7 @@ Application Insights SDK에 대한 플러그인을 작성하고 구성하여 원
 #### <a name="failed-authentication"></a>실패한 인증
 "401" 응답을 사용하여 요청을 필터링합니다.
 
-```C#
+```csharp
 
 public void Process(ITelemetry item)
 {
@@ -208,13 +207,13 @@ public void Process(ITelemetry item)
 
 예를 들어, 웹 패키지에 대한 Application Insights는 HTTP 요청에 대한 원격 분석을 수집합니다. 기본적으로, 모든 요청을 응답 코드 > = 400으로 실패한 것으로 플래그합니다. 하지만 400를 성공으로 처리하려는 경우 성공 속성을 설정하는 원격 분석 이니셜라이저를 제공할 수 있습니다.
 
-원격 분석 이니셜라이저를 제공하는 경우 Track*() 메소드가 호출될 때마다 호출됩니다. 표준 원격 분석 모듈에 의해 호출되는 메서드가 포함됩니다. 규칙에 따라 이러한 모듈은 이니셜라이저에서 이미 설정된 모든 속성을 설정하지 않습니다.
+원격 분석 이니셜라이저를 제공하는 경우 Track*() 메서드가 호출될 때마다 호출됩니다. 표준 원격 분석 모듈에 의해 호출되는 메서드가 포함됩니다. 규칙에 따라 이러한 모듈은 이니셜라이저에서 이미 설정된 모든 속성을 설정하지 않습니다.
 
 **이니셜라이저 정의**
 
 *C#*
 
-```C#
+```csharp
 
     using System;
     using Microsoft.ApplicationInsights.Channel;
@@ -265,7 +264,7 @@ ApplicationInsights.config에서:
 
 *또는* , 코드에서 이니셜라이저를 인스턴스화할 수 있습니다(예: Global.aspx.cs).
 
-```C#
+```csharp
     protected void Application_Start()
     {
         // ...
@@ -336,18 +335,20 @@ TelemetryItem에서 사용할 수 있는 사용자 지정이 아닌 속성의 �
 * TelemetryProcessors를 사용하면 원격 분석 항목을 완전히 대체하거나 삭제할 수 있습니다.
 * TelemetryProcessors는 성능 카운터 원격 분석을 처리하지 않습니다.
 
+## <a name="troubleshooting-applicationinsightsconfig"></a>ApplicationInsights.config 문제 해결
+* 정규화된 형식 이름 및 어셈블리 이름이 올바른지 확인합니다.
+* applicationinsights.config 파일이 출력 디렉터리에 있고 최근 변경 내용을 포함하는지 확인합니다.
 
 ## <a name="reference-docs"></a>참조 문서
 * [API 개요](app-insights-api-custom-events-metrics.md)
 * [ASP.NET 참조](https://msdn.microsoft.com/library/dn817570.aspx)
 
 ## <a name="sdk-code"></a>SDK 코드
-* [ASP.NET 핵심 SDK](https://github.com/Microsoft/ApplicationInsights-dotnet)
-* [ASP.NET 5](https://github.com/Microsoft/ApplicationInsights-aspnet5)
+* [ASP.NET 핵심 SDK](https://github.com/Microsoft/ApplicationInsights-aspnetcore)
+* [ASP.NET SDK](https://github.com/Microsoft/ApplicationInsights-dotnet)
 * [JavaScript SDK](https://github.com/Microsoft/ApplicationInsights-JS)
 
 ## <a name="next"></a>다음 단계
 * [검색 이벤트 및 로그](app-insights-diagnostic-search.md)
 * [샘플링](app-insights-sampling.md)
 * [문제 해결](app-insights-troubleshoot-faq.md)
-

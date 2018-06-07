@@ -1,0 +1,61 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Azure Lab Services(이전의 DevTest Labs) 미리 보기 설명서
+metadata:
+  title: Azure Lab Services 설명서 - 자습서, API 참조 | Microsoft Docs
+  description: Azure Lab Services를 사용하여 클라우드에 팀 또는 학생들을 위한 개발, 테스트, 해커톤(hackathon) 또는 클래스룸 랩을 빠르게 설정하는 방법을 알아봅니다. Azure 자습서, 샘플 등에서는 랩을 만들고, 관리하고, 보호하는 방법을 보여 줍니다.
+  services: lab-services
+  author: spelluru
+  manager: 
+  ms.service: lab-services
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 04/06/2018
+  ms.author: spelluru
+  ms.openlocfilehash: f06102399cac6ef1b6b31155dff32999a923e173
+  ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 05/07/2018
+abstract:
+  description: Azure Lab Services를 사용하여 클라우드에 팀 또는 학생들을 위한 개발, 테스트, 해커톤(hackathon) 또는 클래스룸 랩을 빠르게 설정하는 방법을 알아봅니다. Azure 자습서, 샘플 등에서는 랩을 만들고, 관리하고, 보호하는 방법을 보여 줍니다.
+sections:
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: Azure Lab Services를 사용하여 <b>클래스룸 랩</b>을 만들고 사용하는 방법을 알아봅니다.
+  - type: list
+    style: ordered
+    items:
+    - html: <a href="/azure/lab-services/tutorial-setup-lab-account">랩 계정 설정</a>
+    - html: <a href="/azure/lab-services/tutorial-setup-classroom-lab">클래스룸 랩 설정</a>
+    - html: <a href="/azure/lab-services/tutorial-connect-virtual-machine-classroom-lab">클래스룸 랩 액세스</a>
+  - type: paragraph
+    text: Azure Lab Services를 사용하여 <b>사용자 지정 랩</b>을 만들고 사용하는 방법을 알아봅니다.
+  - type: list
+    style: ordered
+    items:
+    - html: <a href="/azure/lab-services/tutorial-create-custom-lab">사용자 지정 랩 설정</a>
+    - html: <a href="/azure/lab-services/tutorial-use-custom-lab">사용자 지정 랩 액세스</a>
+- title: 샘플
+  items:
+  - type: paragraph
+    text: 다음 샘플을 사용하여 Lab Services 작업을 수행합니다.
+  - type: list
+    style: unordered
+    className: spaced noBullet
+    items:
+    - html: <a href="https://github.com/Azure/azure-devtestlab/tree/master/Samples">Resource Manager 템플릿</a>
+    - html: <a href="/azure/lab-services/samples-cli">Azure CLI</a>
+    - html: <a href="/azure/lab-services/samples-powershell">Azure PowerShell</a>
+- title: 참고 자료
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: 명령줄
+      html: <p><a href="/cli/azure/lab">Azure CLI</a></p><p><a href="/powershell/module/azurerm.devtestlabs/#devtest_labs">Azure PowerShell</a></p>
+    - title: REST (영문)
+      html: <p><a href="/rest/api/dtl">REST API</a></p>

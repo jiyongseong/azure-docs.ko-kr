@@ -1,10 +1,10 @@
 ---
-title: "Azure AD Connect 동기화: 스케줄러 | Microsoft Docs"
+title: "Azure AD Connect 동기화: Scheduler | Microsoft Docs"
 description: "이 항목에서는 Azure AD Connect 동기화의 기본 제공 스케줄러 기능을 설명합니다."
 services: active-directory
 documentationcenter: 
-author: AndKjell
-manager: femila
+author: billmath
+manager: mtillman
 editor: 
 ms.assetid: 6b1a598f-89c0-4244-9b20-f4aaad5233cf
 ms.service: active-directory
@@ -14,14 +14,13 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 07/12/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 17c4dc6a72328b613f31407aff8b6c9eacd70d9a
-ms.openlocfilehash: fe7f508ed1c4eb57663f7e252d286719af03dbb1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/16/2017
-
+ms.openlocfilehash: df7b16157ccb47a5463570c3ed58b9c44f0b67d0
+ms.sourcegitcommit: f1c1789f2f2502d683afaf5a2f46cc548c0dea50
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/18/2018
 ---
-# <a name="azure-ad-connect-sync-scheduler"></a>Azure AD Connect 동기화: 스케줄러
+# <a name="azure-ad-connect-sync-scheduler"></a>Azure AD Connect 동기화: Scheduler
 이 토픽은 Azure AD Connect 동기화(동기화 엔진이라고도 함)의 기본 제공 스케줄러를 설명합니다.
 
 이 기능은 빌드 1.1.105.0(2016년 2월에 발표됨)에서 도입되었습니다.
@@ -38,7 +37,7 @@ Azure AD Connect 동기화는 스케줄러를 사용하여 온-프레미스 디�
 
 스케줄러 자체가 항상 실행되지만 이러한 작업 중 하나만 실행되도록 구성하거나 하나도 실행되지 않도록 구성할 수 있습니다. 예를 들어 고유한 동기화 주기 프로세스가 필요한 경우 스케줄러에서 이 작업을 사용하지 않도록 설정할 수 있지만 유지 관리 작업은 여전히 실행됩니다.
 
-## <a name="scheduler-configuration"></a>스케줄러 구성
+## <a name="scheduler-configuration"></a>Scheduler 구성
 현재 구성 설정을 보려면 PowerShell로 이동하고 `Get-ADSyncScheduler`를 실행합니다. 아래 그림과 같이 표시됩니다.
 
 ![GetSyncScheduler](./media/active-directory-aadconnectsync-feature-scheduler/getsynccyclesettings2016.png)
@@ -166,11 +165,10 @@ Get-ADSyncConnectorRunStatus
 ![커넥터 실행 상태](./media/active-directory-aadconnectsync-feature-scheduler/getconnectorrunstatus.png)  
 위의 그림에서 첫 번째 줄은 동기화 엔진이 유휴 상태인 경우이고, 두 번째 줄은 Azure AD 커넥터가 실행 중인 경우입니다.
 
-## <a name="scheduler-and-installation-wizard"></a>스케줄러 및 설치 마법사
+## <a name="scheduler-and-installation-wizard"></a>Scheduler 및 설치 마법사
 설치 마법사를 시작하면 스케줄러가 일시 중단됩니다. 이는 구성을 변경했다고 가정하기 때문이며 동기화 엔진이 실행 중인 경우에는 적용되지 않습니다. 이러한 이유로 동기화 엔진이 동기화 작업을 수행하지 못하므로 설치 마법사를 연 상태로 두지 마세요.
 
 ## <a name="next-steps"></a>다음 단계
 [Azure AD Connect 동기화](active-directory-aadconnectsync-whatis.md) 구성에 대해 자세히 알아봅니다.
 
 [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)에 대해 자세히 알아봅니다.
-

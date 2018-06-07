@@ -1,25 +1,25 @@
 ---
-title: "Service Fabric 앱 업그레이드 자습서 | Microsoft Docs"
-description: "이 문서는 Visual Studio를 사용하여 서비스 패브릭 응용 프로그램의 배포, 코드 변경, 업그레이드 롤아웃 환경을 안내합니다."
+title: Service Fabric 앱 업그레이드 자습서 | Microsoft Docs
+description: 이 문서는 Visual Studio를 사용하여 서비스 패브릭 응용 프로그램의 배포, 코드 변경, 업그레이드 롤아웃 환경을 안내합니다.
 services: service-fabric
 documentationcenter: .net
 author: mani-ramaswamy
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: a3181a7a-9ab1-4216-b07a-05b79bd826a4
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 7/27/2017
+ms.date: 2/23/2018
 ms.author: subramar
-ms.translationtype: Human Translation
-ms.sourcegitcommit: b0c27ca561567ff002bbb864846b7a3ea95d7fa3
-ms.openlocfilehash: 2b1b12666b71bf173342d5864772a94b9625d38b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/25/2017
-
+ms.openlocfilehash: 0a94dc91308f21d9e2b440f9638829ee03a8b903
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
+ms.locfileid: "34205198"
 ---
 # <a name="service-fabric-application-upgrade-tutorial-using-visual-studio"></a>Visual Studio를 사용하여 서비스 패브릭 응용 프로그램 업그레이드 자습서
 > [!div class="op_single_selector"]
@@ -43,7 +43,7 @@ Azure 서비스 패브릭을 사용하면 변경된 서비스만 업그레이드
 
 이제 대화 상자에서 **게시** 를 클릭할 수 있습니다. [클러스터 및 응용 프로그램을 보는 서비스 패브릭 탐색기](service-fabric-visualizing-your-cluster.md)를 사용할 수 있습니다. Visual Objects 응용 프로그램에는 브라우저의 주소 표시줄에 [http://localhost:8081/visualobjects/](http://localhost:8081/visualobjects/)를 입력해서 이동할 수 있는 웹 서비스가 있습니다.  화면에서 10개의 부동 시각적 개체가 움직이는 것을 볼 수 있을 것입니다.
 
-**참고:** `Cloud.xml` 프로필(Azure 서비스 패브릭)에 배포하는 경우 **http://{ServiceFabricName}.{Region}.cloudapp.azure.com:8081/visualobjects/**에서 응용 프로그램을 사용할 수 있어야 합니다. 부하 분산 장치에 `8081/TCP`가 구성되었는지 확인합니다(Serivce Fabric 인스턴스와 동일한 리소스 그룹에 부하 분산 장치 찾기).
+**참고:** `Cloud.xml` 프로필(Azure 서비스 패브릭)에 배포하는 경우 **http://{ServiceFabricName}.{Region}.cloudapp.azure.com:8081/visualobjects/** 에서 응용 프로그램을 사용할 수 있어야 합니다. 부하 분산 장치에 `8081/TCP`가 구성되었는지 확인합니다(Serivce Fabric 인스턴스와 동일한 리소스 그룹에 부하 분산 장치 찾기).
 
 ## <a name="step-2-update-the-visual-objects-sample"></a>2단계: 시각적 개체 샘플 업데이트
 1단계에서 배포된 버전에서 알 수 있듯이 시각적 개체는 회전하지 않습니다. 이 응용 프로그램을 시각적 개체도 회전하도록 업그레이드하겠습니다.
@@ -88,4 +88,3 @@ VisualObjects 솔루션에서 VisualObjects.ActorService 프로젝트를 선택�
 [image2]: media/service-fabric-application-upgrade-tutorial/upgrade1.png
 [image3]: media/service-fabric-application-upgrade-tutorial/upgrade5.png
 [image4]: media/service-fabric-application-upgrade-tutorial/upgrade6.png
-

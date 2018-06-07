@@ -1,0 +1,117 @@
+- name: Traffic Manager 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: Traffic Manager란?
+      href: traffic-manager-overview.md
+- name: 빠른 시작
+  items:
+    - name: Traffic Manager 프로필 만들기
+      href: traffic-manager-create-profile.md
+- name: 자습서
+  items:
+    - name: 엔드포인트의 지리적 위치에 따라 트래픽 라우팅
+      href: traffic-manager-configure-geographic-routing-method.md
+    - name: 짧은 대기 시간을 위해 트래픽 라우팅
+      href: traffic-manager-configure-performance-routing-method.md
+    - name: 엔드포인트 집합으로 트래픽 분산
+      href: traffic-manager-configure-weighted-routing-method.md
+    - name: 우선순위 엔드포인트로 트래픽 라우팅
+      href: traffic-manager-configure-priority-routing-method.md
+- name: 샘플
+  items:
+    - name: Azure CLI
+      href: cli-samples.md
+    - name: Azure PowerShell
+      href: powershell-samples.md
+- name: 개념
+  items:
+    - name: 라우팅 방법
+      href: traffic-manager-routing-methods.md
+      items:
+        - name: Traffic Manager에서 사용하는 국가/지역 계층 구조
+          href: traffic-manager-geographic-regions.md
+    - name: 중첩 Traffic Manager 프로필
+      href: traffic-manager-nested-profiles.md
+    - name: 엔드포인트 유형
+      href: traffic-manager-endpoint-types.md
+    - name: 엔드포인트 모니터링
+      href: traffic-manager-monitoring.md
+    - name: 실제 사용자 측정
+      href: traffic-manager-rum-overview.md
+    - name: 트래픽 보기
+      href: traffic-manager-traffic-view-overview.md
+    - name: FAQ
+      href: traffic-manager-FAQs.md
+- name: 방법
+  items:
+    - name: Traffic Manager로 실제 사용자 측정 보내기
+      items:
+        - name: Visual Studio SDK 사용
+          href: traffic-manager-create-rum-visual-studio.md
+        - name: 웹 페이지 사용
+          href: traffic-manager-create-rum-web-pages.md
+    - name: 끝점 관리
+      href: traffic-manager-manage-endpoints.md
+    - name: 프로필 관리
+      href: traffic-manager-manage-profiles.md
+    - name: Traffic Manager 설정 확인
+      href: traffic-manager-testing-settings.md
+    - name: 부하 분산 서비스 조합
+      href: traffic-manager-load-balancing-azure.md
+    - name: Traffic Manager 성능 측정
+      href: traffic-manager-performance-considerations.md
+    - name: Azure PowerShell을 사용하여 Traffic Manager 관리
+      href: traffic-manager-powershell-arm.md
+    - name: 인터넷 도메인이 Traffic Manager를 가리키도록 설정
+      href: traffic-manager-point-internet-domain.md
+    - name: 문제 해결
+      items:
+        - name: Azure Traffic Manager의 성능 저하된 상태 문제 해결
+          href: traffic-manager-troubleshooting-degraded.md
+- name: 참고 자료
+  items:
+    - name: 코드 샘플
+      href: 'https://azure.microsoft.com/resources/samples/?service=traffic-manager'
+    - name: Azure PowerShell
+      href: /powershell/module/azurerm.trafficmanager
+    - name: Azure CLI
+      href: /cli/azure/network/traffic-manager
+    - name: 자바
+      href: /java/api/com.microsoft.azure.management.trafficmanager
+    - name: Node.js
+      href: 'http://azure.github.io/azure-sdk-for-node/azure-arm-trafficmanager/latest/'
+    - name: Ruby
+      href: 'http://www.rubydoc.info/gems/azure_mgmt_traffic_manager'
+    - name: 파이썬
+      href: 'http://azure-sdk-for-python.readthedocs.io/en/latest/sample_azure-mgmt-trafficmanager.html'
+    - name: REST (영문)
+      href: 'https://msdn.microsoft.com/library/mt163667.aspx'
+- name: 관련 항목
+  items:
+    - name: Application Gateway
+      href: /azure/application-gateway/
+    - name: Load Balancer
+      href: /azure/load-balancer/
+    - name: Azure DNS
+      href: /azure/dns/
+- name: 리소스
+  items:
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: 블로그
+      href: 'https://azure.microsoft.com/blog/topics/networking/'
+    - name: MSDN 포럼
+      href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=WAVirtualMachinesVirtualNetwork'
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/traffic-manager/'
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'
+    - name: 서비스 제한
+      href: '../azure-subscription-service-limits.md#traffic-manager-limits'
+    - name: 서비스 업데이트
+      href: 'https://azure.microsoft.com/updates/?product=traffic-manager'
+    - name: SLA
+      href: 'https://azure.microsoft.com/support/legal/sla/traffic-manager/'
+    - name: 동영상
+      href: 'https://azure.microsoft.com/resources/videos/index/?services=traffic-manager'

@@ -1,48 +1,46 @@
 ---
-title: "Azure 배치에서 사용자 계정으로 태스크 실행 | Microsoft Docs"
-description: "Azure 배치에서 태스크를 실행하기 위해 사용자 계정 구성"
+title: Azure Batch에서 사용자 계정으로 태스크 실행 | Microsoft Docs
+description: Azure Batch에서 태스크를 실행하기 위해 사용자 계정 구성
 services: batch
-author: tamram
-manager: timlt
-editor: 
-tags: 
-ms.assetid: 
+author: dlepow
+manager: jeconnoc
+editor: ''
+tags: ''
+ms.assetid: ''
 ms.service: batch
 ms.devlang: multiple
 ms.topic: article
-ms.tgt_pltfrm: vm-windows
+ms.tgt_pltfrm: ''
 ms.workload: big-compute
 ms.date: 05/22/2017
-ms.author: tamram
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 67ee6932f417194d6d9ee1e18bb716f02cf7605d
-ms.openlocfilehash: d408c0565c0ed81fc97cc2b3976a4fc233e31302
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
+ms.author: danlep
+ms.openlocfilehash: 1b9c0514e93fa89f8776d830ef242fc4963a6f7b
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
+# <a name="run-tasks-under-user-accounts-in-batch"></a>Batch에서 사용자 계정으로 태스크 실행
 
-# <a name="run-tasks-under-user-accounts-in-batch"></a>배치에서 사용자 계정으로 태스크 실행
-
-Azure 배치의 태스크는 항상 사용자 계정으로 실행됩니다. 기본적으로 태스크는 관리자 권한 없이 표준 사용자 계정으로 실행됩니다. 일반적으로는 이러한 기본 사용자 계정 설정만으로 충분합니다. 그러나 특정 시나리오에서는 태스크를 실행하려는 사용자 계정을 구성하는 것이 유용할 수 있습니다. 이 문서에서는 사용자 계정의 유형 및 시나리오에 맞게 구성하는 방법을 설명합니다.
+Azure Batch의 태스크는 항상 사용자 계정으로 실행됩니다. 기본적으로 태스크는 관리자 권한 없이 표준 사용자 계정으로 실행됩니다. 일반적으로는 이러한 기본 사용자 계정 설정만으로 충분합니다. 그러나 특정 시나리오에서는 태스크를 실행하려는 사용자 계정을 구성하는 것이 유용할 수 있습니다. 이 문서에서는 사용자 계정의 유형 및 시나리오에 맞게 구성하는 방법을 설명합니다.
 
 ## <a name="types-of-user-accounts"></a>사용자 계정의 유형
 
-Azure 배치에서는 태스크 실행을 위해 다음과 같은 두 가지 유형의 사용자 계정을 제공합니다.
+Azure Batch에서는 태스크 실행을 위해 다음과 같은 두 가지 유형의 사용자 계정을 제공합니다.
 
-- **자동 사용자 계정.** 자동 사용자 계정은 배치 서비스에 의해 자동으로 생성되는 기본 제공 사용자 계정입니다. 기본적으로 태스크는 자동 사용자 계정에서 실행됩니다. 태스크가 실행될 자동 사용자 계정을 나타내도록 태스크에 대한 자동 사용자 지정을 구성할 수 있습니다. 자동 사용자 지정을 사용하면 태스크를 실행할 자동 사용자 계정의 권한 상승 수준 및 범위를 지정할 수 있습니다. 
+- **자동 사용자 계정.** 자동 사용자 계정은 Batch 서비스에 의해 자동으로 생성되는 기본 제공 사용자 계정입니다. 기본적으로 태스크는 자동 사용자 계정에서 실행됩니다. 태스크가 실행될 자동 사용자 계정을 나타내도록 태스크에 대한 자동 사용자 지정을 구성할 수 있습니다. 자동 사용자 지정을 사용하면 태스크를 실행할 자동 사용자 계정의 권한 상승 수준 및 범위를 지정할 수 있습니다. 
 
 - **명명된 사용자 계정.** 풀을 만들 때 풀에 대해 하나 이상의 명명된 사용자 계정을 지정할 수 있습니다. 각 사용자 계정은 풀의 각 노드에서 생성됩니다. 계정 이름 외에도 계정 암호, 권한 상승 수준을 지정할 수 있으며, Linux 풀의 경우에는 SSH 개인 키도 지정할 수 있습니다. 태스크를 추가할 때 해당 태스크를 실행할 명명된 사용자 계정을 지정할 수 있습니다.
 
 > [!IMPORTANT] 
-> 배치 서비스 버전 2017-01-01.4.0에서는 해당 버전을 호출하기 위해 코드를 업데이트해야 하는 주요 변경 내용이 추가되었습니다. 이전 버전의 배치에서 코드를 마이그레이션하는 경우 REST API 또는 배치 클라이언트 라이브러리에서 **runElevated** 속성이 더 이상 지원되지 않습니다. 태스크의 새로운 **userIdentity** 속성을 사용하여 권한 상승 수준을 지정합니다. 클라이언트 라이브러리 중 하나를 사용하는 경우 배치 코드를 업데이트하기 위한 빠른 지침을 보려면 [최신 배치 클라이언트 라이브러리로 코드 업데이트](#update-your-code-to-the-latest-batch-client-library) 섹션을 참조하세요.
+> Batch 서비스 버전 2017-01-01.4.0에서는 해당 버전을 호출하기 위해 코드를 업데이트해야 하는 주요 변경 내용이 추가되었습니다. 이전 버전의 Batch에서 코드를 마이그레이션하는 경우 REST API 또는 Batch 클라이언트 라이브러리에서 **runElevated** 속성이 더 이상 지원되지 않습니다. 태스크의 새로운 **userIdentity** 속성을 사용하여 권한 상승 수준을 지정합니다. 클라이언트 라이브러리 중 하나를 사용하는 경우 Batch 코드를 업데이트하기 위한 빠른 지침을 보려면 [최신 Batch 클라이언트 라이브러리로 코드 업데이트](#update-your-code-to-the-latest-batch-client-library) 섹션을 참조하세요.
 >
 >
 
 > [!NOTE] 
 > 이 문서에서 설명하는 사용자 계정은 보안상의 이유로 RDP(원격 데스크톱 프로토콜) 또는 SSH(보안 셸)을 지원하지 않습니다. 
 >
-> SSH를 통해 Linux 가상 컴퓨터 구성을 실행하는 노드에 연결하려면 [Azure에서 Linux VM에 대해 원격 데스크톱 사용](../virtual-machines/virtual-machines-linux-use-remote-desktop.md)을 참조하세요. RDP를 통해 Windows를 실행하는 노드에 연결하려면 [Windows Server VM에 연결](../virtual-machines/windows/connect-logon.md)을 참조하세요.<br /><br />
+> SSH를 통해 Linux 가상 머신 구성을 실행하는 노드에 연결하려면 [Azure에서 Linux VM에 대해 원격 데스크톱 사용](../virtual-machines/virtual-machines-linux-use-remote-desktop.md)을 참조하세요. RDP를 통해 Windows를 실행하는 노드에 연결하려면 [Windows Server VM에 연결](../virtual-machines/windows/connect-logon.md)을 참조하세요.<br /><br />
 > RDP를 통해 클라우드 서비스 구성을 실행하는 노드에 연결하려면 [Azure Cloud Services의 역할에 대해 원격 데스크톱 연결 사용](../cloud-services/cloud-services-role-enable-remote-desktop-new-portal.md)을 참조하세요.
 >
 >
@@ -53,18 +51,18 @@ Azure 배치에서는 태스크 실행을 위해 다음과 같은 두 가지 유
 
 태스크가 시작 태스크를 실행하는 데 사용된 것과 동일한 계정에서 실행되는 경우 태스크에는 시작 태스크 디렉터리에 대한 읽기/쓰기 액세스 권한이 있습니다. 마찬가지로 태스크가 작업 준비 태스크를 실행하는 데 사용된 것과 동일한 계정에서 실행되는 경우 태스크에는 작업 준비 태스크 디렉터리에 대한 읽기/쓰기 액세스 권한이 있습니다. 태스크가 시작 태스크 또는 작업 준비 태스크와는 다른 계정에서 실행될 경우 태스크는 해당 디렉터리에 대해 읽기 액세스 권한만 있습니다.
 
-태스크에서 파일 및 디렉터리 액세스에 대한 자세한 내용은 [배치를 사용하여 대규모 병렬 계산 솔루션 개발](batch-api-basics.md#files-and-directories)을 참조하세요.
+태스크에서 파일 및 디렉터리 액세스에 대한 자세한 내용은 [Batch를 사용하여 대규모 병렬 계산 솔루션 개발](batch-api-basics.md#files-and-directories)을 참조하세요.
 
 ## <a name="elevated-access-for-tasks"></a>태스크에 대한 관리자 권한 액세스 
 
 사용자 계정의 권한 상승 수준은 태스크가 관리자 액세스 권한으로 실행되는지 여부를 나타냅니다. 자동 사용자 계정 및 명명된 사용자 계정 모두 관리자 권한 액세스로 실행될 수 있습니다. 권한 상승 수준의 두 가지 옵션은 다음과 같습니다.
 
-- **NonAdmin:** 태스크가 관리자 액세스 권한이 없는 표준 사용자로 실행됩니다. 배치 사용자 계정에 대한 기본 권한 상승 수준은 항상 **NonAdmin**입니다.
+- **NonAdmin:** 태스크가 관리자 액세스 권한이 없는 표준 사용자로 실행됩니다. Batch 사용자 계정에 대한 기본 권한 상승 수준은 항상 **NonAdmin**입니다.
 - **Admin:** 태스크가 관리자 액세스 권한이 있는 사용자로 실행되고 모든 관리자 권한으로 작동됩니다. 
 
 ## <a name="auto-user-accounts"></a>자동 사용자 계정
 
-기본적으로 태스크는 자동 사용자 계정에서 배치로, 관리자 액세스 권한이 없는 표준 사용자로, 태스크 범위를 사용해서 실행됩니다. 태스크 범위에 대해 자동 사용자 지정이 구성되면 배치 서비스는 해당 태스크에 대해서만 자동 사용자 계정을 만듭니다.
+기본적으로 태스크는 자동 사용자 계정에서 Batch로, 관리자 액세스 권한이 없는 표준 사용자로, 태스크 범위를 사용해서 실행됩니다. 태스크 범위에 대해 자동 사용자 지정이 구성되면 Batch 서비스는 해당 태스크에 대해서만 자동 사용자 계정을 만듭니다.
 
 태스크 범위 대신 풀 범위를 지정할 수 있습니다. 태스크에 대한 자동 사용자 지정이 풀 범위에 대해 구성되면 태스크는 풀의 모든 태스크에서 사용할 수 있는 자동 사용자 계정으로 실행됩니다. 풀 범위에 대한 자세한 내용은 [풀 범위를 갖는 자동 사용자로 태스크 실행](#run-a-task-as-the-autouser-with-pool-scope) 섹션을 참조하세요.   
 
@@ -81,7 +79,7 @@ Azure 배치에서는 태스크 실행을 위해 다음과 같은 두 가지 유
 - 풀 범위를 사용하는 관리자 액세스
 
 > [!IMPORTANT] 
-> 태스크 범위 내에서 실행되는 태스크는 실제로 노드의 다른 태스트에 대해 액세스 권한이 없습니다. 그러나 계정에 액세스할 수 있는 악의적인 사용자는 관리자 권한으로 실행되고 다른 태스크 디렉터리에 액세스하는 태스크를 제출하여 이러한 제한을 해결할 수 있습니다. 또한 악의적인 사용자는 RDP 또는 SSH를 사용하여 노드에 연결할 수도 있습니다. 이러한 시나리오를 방지하기 위해서는 배치 계정 키에 대한 액세스를 보호하는 것이 중요합니다. 계정이 노출이 의심되는 경우에 키를 다시 생성해야 합니다.
+> 태스크 범위 내에서 실행되는 태스크는 실제로 노드의 다른 태스트에 대해 액세스 권한이 없습니다. 그러나 계정에 액세스할 수 있는 악의적인 사용자는 관리자 권한으로 실행되고 다른 태스크 디렉터리에 액세스하는 태스크를 제출하여 이러한 제한을 해결할 수 있습니다. 또한 악의적인 사용자는 RDP 또는 SSH를 사용하여 노드에 연결할 수도 있습니다. 이러한 시나리오를 방지하기 위해서는 Batch 계정 키에 대한 액세스를 보호하는 것이 중요합니다. 계정이 노출이 의심되는 경우에 키를 다시 생성해야 합니다.
 >
 >
 
@@ -163,7 +161,7 @@ task.UserIdentity = new UserIdentity(new AutoUserSpecification(scope: AutoUserSc
 
 ### <a name="create-named-user-accounts"></a>명명된 사용자 계정 만들기
 
-배치에서 명명된 사용자 계정을 만들려면 풀에 사용자 계정의 컬렉션을 추가합니다. 다음 코드 조각에서는 .NET, Java 및 Python에서 명명된 사용자 계정을 만드는 방법을 보여 줍니다. 이러한 코드 조각에서는 풀에 관리자 및 비관리자 명명된 계정을 만드는 방법을 보여 줍니다. 예제에서는 클라우드 서비스 구성을 사용하여 풀을 만들지만 가상 컴퓨터 구성을 사용하여 Windows 또는 Linux 풀을 만들 때도 같은 방법을 사용합니다.
+Batch에서 명명된 사용자 계정을 만들려면 풀에 사용자 계정의 컬렉션을 추가합니다. 다음 코드 조각에서는 .NET, Java 및 Python에서 명명된 사용자 계정을 만드는 방법을 보여 줍니다. 이러한 코드 조각에서는 풀에 관리자 및 비관리자 명명된 계정을 만드는 방법을 보여 줍니다. 예제에서는 클라우드 서비스 구성을 사용하여 풀을 만들지만 가상 머신 구성을 사용하여 Windows 또는 Linux 풀을 만들 때도 같은 방법을 사용합니다.
 
 #### <a name="batch-net-example-windows"></a>Batch .NET 예제(Windows)
 
@@ -304,9 +302,9 @@ CloudTask task = new CloudTask("1", "cmd.exe /c echo 1");
 task.UserIdentity = new UserIdentity(AdminUserAccountName);
 ```
 
-## <a name="update-your-code-to-the-latest-batch-client-library"></a>최신 배치 클라이언트 라이브러리로 코드 업데이트
+## <a name="update-your-code-to-the-latest-batch-client-library"></a>최신 Batch 클라이언트 라이브러리로 코드 업데이트
 
-2017-01-01.4.0의 배치 서비스 버전에는 중요한 변경 내용이 추가되었으며 이전 버전에서 사용할 수 있던 **runElevated** 속성이 **userIdentity** 속성으로 바뀌었습니다. 다음 표에서는 이전 버전의 클라이언트 라이브러리에서 코드를 업데이트하는 데 사용할 수 있는 간단한 매핑을 제공합니다.
+2017-01-01.4.0의 Batch 서비스 버전에는 중요한 변경 내용이 추가되었으며 이전 버전에서 사용할 수 있던 **runElevated** 속성이 **userIdentity** 속성으로 바뀌었습니다. 다음 표에서는 이전 버전의 클라이언트 라이브러리에서 코드를 업데이트하는 데 사용할 수 있는 간단한 매핑을 제공합니다.
 
 ### <a name="batch-net"></a>Batch .NET
 
@@ -335,6 +333,6 @@ task.UserIdentity = new UserIdentity(AdminUserAccountName);
 
 ## <a name="next-steps"></a>다음 단계
 
-### <a name="batch-forum"></a>배치 포럼
+### <a name="batch-forum"></a>Batch 포럼
 
-MSDN의 [Azure 배치 포럼](https://social.msdn.microsoft.com/forums/azure/home?forum=azurebatch)은 배치를 설명하고 서비스에 대한 질문을 하는 데 많은 도움이 됩니다. 유용한 고정 게시물을 참조하고 배치 솔루션을 빌드하는 동안 질문이 생기면 즉시 게시합니다.
+MSDN의 [Azure Batch 포럼](https://social.msdn.microsoft.com/forums/azure/home?forum=azurebatch)은 Batch를 설명하고 서비스에 대한 질문을 하는 데 많은 도움이 됩니다. 유용한 고정 게시물을 참조하고 Batch 솔루션을 빌드하는 동안 질문이 생기면 즉시 게시합니다.

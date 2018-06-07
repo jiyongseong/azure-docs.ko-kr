@@ -1,28 +1,27 @@
 ---
-title: "응용 프로그램 시나리오 및 설계 | Microsoft Docs"
-description: "서비스 패브릭의 클라우드 응용 프로그램 범주 개요 상태 저장 및 상태 비저장 서비스를 사용하는 응용 프로그램 설계에 대해 논의합니다."
+title: 응용 프로그램 시나리오 및 설계 | Microsoft Docs
+description: 서비스 패브릭의 클라우드 응용 프로그램 범주 개요 상태 저장 및 상태 비저장 서비스를 사용하는 응용 프로그램 설계에 대해 논의합니다.
 services: service-fabric
 documentationcenter: .net
 author: msfussell
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 3a8ca6ea-b8e9-4bc3-9e20-262437d2528e
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 7/02/2017
 ms.author: mfussell
+ms.openlocfilehash: c0a9b24704a91d6a6893937b4ee03765fb05f092
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 471ec6f45f4152fbac56242ef3ce906f8af00b54
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="service-fabric-application-scenarios"></a>서비스 패브릭 응용 프로그램 시나리오
-Azure 서비스 패브릭은 다양한 유형의 비즈니스 응용 프로그램 및 서비스를 쓰고 실행할 수 있도록 하는 안정적이고 유연한 플랫폼을 제공합니다. 이러한 응용 프로그램 및 마이크로 서비스는 상태를 저장하지 않을 수도 있고 상태를 저장할 수도 있으며, 가상 컴퓨터 간에 리소스를 분산하여 효율성을 극대화합니다. 서비스 패브릭의 고유한 아키텍처는 응용 프로그램에서 거의 실시간으로 데이터 분석, 메모리 내 계산, 병렬 트랜잭션 및 이벤트 처리가 가능합니다. 리소스 요구 사항의 변화에 따라 응용 프로그램을 간단하게 확장 또는 축소(실제 내부 또는 외부)할 수 있습니다.
+Azure 서비스 패브릭은 다양한 유형의 비즈니스 응용 프로그램 및 서비스를 쓰고 실행할 수 있도록 하는 안정적이고 유연한 플랫폼을 제공합니다. 이러한 응용 프로그램 및 마이크로 서비스는 상태를 저장하지 않을 수도 있고 상태를 저장할 수도 있으며, 가상 머신 간에 리소스를 분산하여 효율성을 극대화합니다. 서비스 패브릭의 고유한 아키텍처는 응용 프로그램에서 거의 실시간으로 데이터 분석, 메모리 내 계산, 병렬 트랜잭션 및 이벤트 처리가 가능합니다. 리소스 요구 사항의 변화에 따라 응용 프로그램을 간단하게 확장 또는 축소(실제 내부 또는 외부)할 수 있습니다.
 
 Azure의 서비스 패브릭 플랫폼은 다음과 같은 응용 프로그램 범주에 이상적입니다.
 
@@ -68,4 +67,3 @@ Azure Cloud Service 작업자 역할이 있는 응용 프로그램을 구축하�
 
 [Image1]: media/service-fabric-application-scenarios/AppwithStatelessServices.jpg
 [Image2]: media/service-fabric-application-scenarios/AppwithStatefulServices.jpg
-

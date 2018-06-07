@@ -15,11 +15,11 @@ ms.workload: NA
 ms.date: 03/15/2017
 ms.author: alkohli
 ms.custom: H1Hack27Feb2017
-translationtype: Human Translation
-ms.sourcegitcommit: fd35f1774ffda3d3751a6fa4b6e17f2132274916
 ms.openlocfilehash: bad431c8958f7d381bb9c0410caa3a57c6e75c19
-ms.lasthandoff: 03/16/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="deploy-storsimple-virtual-array---provision-in-hyper-v"></a>StorSimple 가상 배열 배포 - Hyper-V에서 프로비전
 ![](./media/storsimple-virtual-array-deploy2-provision-hyperv/hyperv4.png)
@@ -93,7 +93,7 @@ ms.lasthandoff: 03/16/2017
 
    ![](./media/storsimple-virtual-array-deploy2-provision-hyperv/image2.png)
 4. 새 가상 컴퓨터 마법사의 **시작하기 전에** 페이지에서 **다음**을 클릭합니다.
-5. **이름 및 위치 지정** 페이지에서 가상 배열의 **이름**을 입력합니다. **다음**을 클릭합니다.
+5. **이름 및 위치 지정** 페이지에서 가상 배열의 **이름**을 입력합니다. **다음**을 누릅니다.
 
    ![](./media/storsimple-virtual-array-deploy2-provision-hyperv/image4.png)
 6. **세대 지정** 페이지에서 장치 이미지 유형을 선택하고 **다음**을 클릭합니다. Windows Server 2008 R2를 사용하는 경우에는 이 페이지가 표시되지 않습니다.
@@ -130,16 +130,16 @@ ms.lasthandoff: 03/16/2017
 
     ![](./media/storsimple-virtual-array-deploy2-provision-hyperv/image13.png)
 15. 새 가상 하드 디스크 마법사의 **시작하기 전에** 페이지에서 **다음**을 클릭합니다.
-16. **디스크 형식 선택** 페이지에서 **VHDX** 형식의 기본 옵션을 적용합니다. **다음**을 클릭합니다. Windows Server 2008 R2를 실행하는 경우에는 이 화면이 표시되지 않습니다.
+16. **디스크 형식 선택** 페이지에서 **VHDX** 형식의 기본 옵션을 적용합니다. **다음**을 누릅니다. Windows Server 2008 R2를 실행하는 경우에는 이 화면이 표시되지 않습니다.
 
     ![](./media/storsimple-virtual-array-deploy2-provision-hyperv/image15.png)
-17. **디스크 유형 선택** 페이지에서 가상 하드 디스크 유형을 **동적 확장**(권장)으로 설정합니다. **고정 크기** 디스크는 작동은 되지만 오래 기다려야 할 수 있습니다. **차이점 보관용** 옵션은 사용하지 않는 것이 좋습니다. **Next**를 클릭합니다. Windows Server 2012 R2 및 Windows Server 2012에서는 **동적 확장**이 기본 옵션이지만 Windows Server 2008 R2에서는 **고정 크기**가 기본값입니다.
+17. **디스크 유형 선택** 페이지에서 가상 하드 디스크 유형을 **동적 확장**(권장)으로 설정합니다. **고정 크기** 디스크는 작동은 되지만 오래 기다려야 할 수 있습니다. **차이점 보관용** 옵션은 사용하지 않는 것이 좋습니다. **다음**을 누릅니다. Windows Server 2012 R2 및 Windows Server 2012에서는 **동적 확장**이 기본 옵션이지만 Windows Server 2008 R2에서는 **고정 크기**가 기본값입니다.
 
     ![](./media/storsimple-virtual-array-deploy2-provision-hyperv/image16.png)
-18. **이름 및 위치 지정** 페이지에서 데이터 디스크의 **이름** 및 **위치**(해당 위치로 이동 가능)를 입력합니다. **Next**를 클릭합니다.
+18. **이름 및 위치 지정** 페이지에서 데이터 디스크의 **이름** 및 **위치**(해당 위치로 이동 가능)를 입력합니다. **다음**을 누릅니다.
 
     ![](./media/storsimple-virtual-array-deploy2-provision-hyperv/image17.png)
-19. **디스크 구성** 페이지에서 **비어 있는 새 가상 하드 디스크 만들기** 옵션을 선택하고 크기를 **500GB**(또는 그 이상)로 지정합니다. 500GB가 최소 요구 사항이지만 언제나 더 큰 디스크를 프로비전할 수 있습니다. 프로비전된 후에는 디스크를 확장하거나 축소할 수 없습니다. 프로비전할 디스크의 크기에 대한 자세한 정보는 [모범 사례 문서](storsimple-ova-best-practices.md)의 크기 조정 섹션을 검토하세요. **다음**을 클릭합니다.
+19. **디스크 구성** 페이지에서 **비어 있는 새 가상 하드 디스크 만들기** 옵션을 선택하고 크기를 **500GB**(또는 그 이상)로 지정합니다. 500GB가 최소 요구 사항이지만 언제나 더 큰 디스크를 프로비전할 수 있습니다. 프로비전된 후에는 디스크를 확장하거나 축소할 수 없습니다. 프로비전할 디스크의 크기에 대한 자세한 정보는 [모범 사례 문서](storsimple-ova-best-practices.md)의 크기 조정 섹션을 검토하세요. **다음**을 누릅니다.
 
     ![](./media/storsimple-virtual-array-deploy2-provision-hyperv/image18.png)
 20. **요약** 페이지에서 가상 데이터 디스크의 세부 정보를 검토한 후 만족스러우면 **마침**을 클릭하여 디스크를 만듭니다. 마법사가 닫히고 가상 하드 디스크가 컴퓨터에 추가됩니다.
@@ -216,4 +216,3 @@ ms.lasthandoff: 03/16/2017
 ## <a name="next-steps"></a>다음 단계
 * [StorSimple 가상 배열을 파일 서버로 설정](storsimple-virtual-array-deploy3-fs-setup.md)
 * [StorSimple 가상 배열을 iSCSI 서버로 설정](storsimple-virtual-array-deploy3-iscsi-setup.md)
-

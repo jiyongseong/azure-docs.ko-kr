@@ -1,31 +1,27 @@
 ---
-title: "Azure Search에서 동의어 미리 보기 자습서 | Microsoft Docs"
-description: "Azure Search의 인덱스에 동의어 미리 보기 기능을 추가합니다."
-services: search
-manager: jhubbard
-documentationcenter: 
+title: Azure Search에서 동의어 자습서 | Microsoft Docs
+description: Azure Search의 인덱스에 동의어 기능을 추가합니다.
+manager: cgronlun
 author: HeidiSteen
+services: search
 ms.service: search
-ms.devlang: NA
-ms.workload: search
-ms.topic: get-started-article
-ms.tgt_pltfrm: na
-ms.date: 03/31/2017
+ms.topic: tutorial
+ms.date: 04/20/2018
 ms.author: heidist
-translationtype: Human Translation
-ms.sourcegitcommit: 0d6f6fb24f1f01d703104f925dcd03ee1ff46062
-ms.openlocfilehash: 014959ed471f796d2184f0f8ff10d15cdc8a2ec6
-ms.lasthandoff: 04/18/2017
-
+ms.openlocfilehash: 5482185a4a4cc8b76c1094ce12a7ac52985ec57c
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-# <a name="synonym-preview-c-tutorial-for-azure-search"></a>Azure Search에 대한 동의어(미리 보기) C# 자습서
+# <a name="synonym-c-tutorial-for-azure-search"></a>Azure Search에 대한 동의어 C# 자습서
 
 동의어는 입력 용어와 의미상 동일하다고 간주되는 용어를 비교하여 쿼리를 확장합니다. 예를 들어 "car"를 "automobile" 또는 "vehicle"이라는 용어를 포함하는 문서와 비교합니다.
 
 Azure Search에서 동의어는 동등한 용어를 연결하는 *매핑 규칙*을 통해 *동의어 맵*에 정의됩니다. 여러 동의어 맵을 만들고 모든 인덱스에 사용할 수 있는 서비스 전반 리소스로 게시한 다음 필드 수준에서 사용할 용어를 참조합니다. Azure Search에서는 쿼리 시 인덱스를 검색하는 것 외에도 용어가 쿼리에서 사용되는 필드에 지정된 경우 동의어 맵에서 조회를 수행합니다.
 
 > [!NOTE]
-> 동의어 기능은 현재 미리 보기 상태이며 최신 미리 보기 API 및 SDK 버전(api-version=2016-09-01-Preview, SDK version 4.x-preview)에서만 지원됩니다. 지금은 Azure Portal에서 지원되지 않습니다. 미리 보기 API는 SLA가 적용되지 않으며 미리 보기 기능이 변경될 수 있으므로 프로덕션 응용 프로그램에서 사용하지 않는 것이 좋습니다.
+> 동의어 기능은 최신 API 및 SDK 버전에서 지원됩니다(api-버전=2017-11-11, SDK 버전 5.0.0). 지금은 Azure Portal 지원이 없습니다. 동의어에 대한 Azure Portal 지원이 사용자에게 유용한 경우 [UserVoice](https://feedback.azure.com/forums/263029-azure-search)에서 피드백을 제공해 주세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -33,7 +29,7 @@ Azure Search에서 동의어는 동등한 용어를 연결하는 *매핑 규칙*
 
 * [Visual Studio](https://www.visualstudio.com/downloads/)
 * [Azure Search 서비스](search-create-service-portal.md)
-* [Microsoft.Azure.Search .NET 라이브러리의 미리 보기 버전](https://aka.ms/search-sdk-preview)
+* [Microsoft.Azure.Search .NET library](https://aka.ms/search-sdk)
 * [.NET 응용 프로그램에서 Azure Search를 사용하는 방법](https://docs.microsoft.com/azure/search/search-howto-dotnet-sdk)
 
 ## <a name="overview"></a>개요
@@ -167,4 +163,3 @@ Name: Roach Motel       Category: Budget        Tags: [motel, budget]
 * [Azure Search에서 동의어를 사용하는 방법](search-synonyms.md) 검토
 * [동의어 REST API 설명서](https://aka.ms/rgm6rq) 검토
 * [.NET SDK](https://docs.microsoft.com/dotnet/api/microsoft.azure.search) 및 [REST API](https://docs.microsoft.com/rest/api/searchservice/)에 대한 참고 자료를 찾아봅니다.
-

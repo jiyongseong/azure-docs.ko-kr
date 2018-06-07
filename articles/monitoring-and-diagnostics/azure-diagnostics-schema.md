@@ -1,12 +1,12 @@
 ---
-title: "Azure 진단 확장 구성 스키마 버전 및 기록 | Microsoft Docs"
-description: "Azure Virtual Machines, VM Scale Sets, Service Fabric 및 Cloud Services에서 성능 카운터 수집과 관련됩니다."
+title: Azure 진단 확장 구성 스키마 버전 및 기록 | Microsoft Docs
+description: Azure Virtual Machines, VM Scale Sets, Service Fabric 및 Cloud Services에서 성능 카운터 수집과 관련됩니다.
 services: monitoring-and-diagnostics
 documentationcenter: .net
 author: rboucher
 manager: carmonm
-editor: 
-ms.assetid: 
+editor: ''
+ms.assetid: ''
 ms.service: monitoring-and-diagnostics
 ms.workload: na
 ms.tgt_pltfrm: na
@@ -14,23 +14,21 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 05/16/2017
 ms.author: robb
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 8f987d079b8658d591994ce678f4a09239270181
-ms.openlocfilehash: 119e8a237f24cdc80a1ab8e376f2b308c9eada05
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/18/2017
-
-
+ms.openlocfilehash: 45a092452bc702a6a593cd6c21a8d2eaf4ff44bd
+ms.sourcegitcommit: 168426c3545eae6287febecc8804b1035171c048
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/08/2018
 ---
-# <a name="azure-diagnostics-extention-configuration-schema-versions-and-history"></a>Azure 진단 확장 구성 스키마 버전 및 기록
+# <a name="azure-diagnostics-extension-configuration-schema-versions-and-history"></a>Azure 진단 확장 구성 스키마 버전 및 기록
 이 페이지는 Microsoft Azure SDK의 일부로 제공되는 Azure 진단 확장 스키마 버전을 인덱스합니다.  
 
 > [!NOTE]
 > Azure 진단 확장은 성능 카운터 및 기타 통계를 수집하는 데 사용하는 구성 요소입니다.
-> - Azure 가상 컴퓨터 
-> - 가상 컴퓨터 크기 집합
-> - 서비스 패브릭 
-> - 클라우드 서비스 
+> - Azure Virtual Machines 
+> - Virtual Machine Scale Sets
+> - Service Fabric 
+> - Cloud Services 
 > - 네트워크 보안 그룹
 > 
 > 이 페이지는 이러한 서비스 중 하나를 사용하는 경우에만 해당됩니다.
@@ -137,18 +135,18 @@ EventHub로 라우팅하는 기능이 추가되었습니다.
 ### <a name="azure-sdk-26-and-diagnostics-extension-13"></a>Azure SDK 2.6 및 진단 확장 1.3 
 Visual Studio에서 클라우드 서비스 프로젝트의 경우 다음 사항이 변경되었습니다. (이러한 변경 사항은 이후 버전의 Azure SDK에도 적용됩니다.)
 
-* 이제 로컬 에뮬레이터에서 진단을 지원합니다. 따라서 Visual Studio에서 개발 및 테스트하는 동안 진단 데이터를 수집하고 응용 프로그램에서 올바른 추적을 생성하고 있는지 확인할 수 있습니다. 연결 문자열 `UseDevelopmentStorage=true` 는 Azure 저장소 에뮬레이터를 사용하여 Visual Studio에서 클라우드 서비스 프로젝트를 실행하는 동안 진단 데이터 수집을 사용하도록 설정합니다. 모든 진단 데이터는 (개발 저장소) 저장소 계정에 수집됩니다.
+* 이제 로컬 에뮬레이터에서 진단을 지원합니다. 따라서 Visual Studio에서 개발 및 테스트하는 동안 진단 데이터를 수집하고 응용 프로그램에서 올바른 추적을 생성하고 있는지 확인할 수 있습니다. 연결 문자열 `UseDevelopmentStorage=true` 는 Azure 저장소 에뮬레이터를 사용하여 Visual Studio에서 클라우드 서비스 프로젝트를 실행하는 동안 진단 데이터 수집을 사용하도록 설정합니다. 모든 진단 데이터는 (개발 저장소) Storage 계정에 수집됩니다.
 * 진단 저장소 계정 연결 문자열(Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString)은 서비스 구성(.cscfg) 파일에 다시 저장됩니다. Azure SDK 2.5에서는 진단 저장소 계정이 diagnostics.wadcfgx 파일에 지정되었습니다.
 
 Azure SDK 2.4 이하와 Azure SDK 2.6 이상 버전에서 연결 문자열이 작동하는 방식 간에 몇 가지 주목할 만한 차이점이 있습니다.
 
 * Azure SDK 2.4 이하 버전에서는 진단 로그를 전송하기 위한 저장소 계정 정보를 가져오기 위해 진단 플러그인에 의해 런타임으로 연결 문자열이 사용되었습니다.
-* Azure SDK 2.6 이상 버전에서는 게시하는 동안 적절한 저장소 계정 정보로 진단 확장을 구성하기 위해 Visual Studio에 의해 연결 문자열이 사용됩니다. 연결 문자열을 통해 사용자는 Visual Studio에서 게시하는 동안 사용할 다양한 서비스 구성에 대해 서로 다른 저장소 계정을 정의할 수 있습니다. 그러나 진단 플러그인을 더 이상 사용할 수 없으므로(Azure SDK 2.5 이후) .cscfg 파일 자체만으로 진단 확장을 활성화할 수 없습니다. Visual Studio 또는 PowerShell과 같은 도구를 통해 별도로 확장을 사용하도록 설정해야 합니다.
+* Azure SDK 2.6 이상 버전에서 Visual Studio는 게시하는 동안 진단 연결 문자열을 사용하여 적절한 저장소 계정 정보로 진단 확장을 구성합니다. 연결 문자열을 통해 사용자는 Visual Studio에서 게시하는 동안 사용할 다양한 서비스 구성에 대해 서로 다른 저장소 계정을 정의할 수 있습니다. 그러나 진단 플러그인을 더 이상 사용할 수 없으므로(Azure SDK 2.5 이후) .cscfg 파일 자체만으로 진단 확장을 활성화할 수 없습니다. Visual Studio 또는 PowerShell과 같은 도구를 통해 별도로 확장을 사용하도록 설정해야 합니다.
 * PowerShell을 사용한 진단 확장 구성 프로세스를 단순화하기 위해 Visual Studio의 패키지 출력에도 각 역할에 대한 진단 확장의 공용 구성 XML이 포함됩니다. Visual Studio에서는 진단 연결 문자열을 사용하여 공용 구성에 있는 저장소 계정 정보를 채웁니다. 공용 config 파일이 Extensions 폴더에서 생성되고 PaaSDiagnostics<RoleName>.PubConfig.xml 패턴을 따릅니다. 모든 PowerShell 기반 배포에서 이 패턴을 사용하여 각 구성을 역할에 매핑합니다.
 * .cscfg 파일의 연결 문자열은 Azure 포털에서 진단 데이터에 액세스하는 데도 사용되므로 **모니터링** 탭에 나타날 수 있습니다. 이 연결 문자열은 포털에서 자세한 모니터링 데이터를 표시하도록 서비스를 구성하는 데 필요 합니다.
 
 #### <a name="migrating-projects-to-azure-sdk-26-and-later"></a>Azure SDK 2.6 이상으로 프로젝트 마이그레이션
-Azure SDK 2.5에서 Azure SDK 2.6 이상으로 마이그레이션하는 경우 .wadcfgx 파일에 진단 저장소 계정이 지정된 경우 값이 계속 유지됩니다. 서로 다른 저장소 구성에 대해 서로 다른 저장소 계정을 유연성 있게 사용하려면 프로젝트에 연결 문자열을 수동으로 추가해야 합니다. Azure SDK 2.4 또는 이전 버전에서 Azure SDK 2.6으로 프로젝트를 마이그레이션하는 경우 진단 연결 문자열이 유지됩니다. 그러나 이전 섹션에서 지정된 것처럼 Azure SDK 2.6에서 연결 문자열을 처리하는 방식이 변경되었음을 유의하세요.
+Azure SDK 2.5에서 Azure SDK 2.6 이상으로 마이그레이션하는 경우 .wadcfgx 파일에 진단 저장소 계정이 지정된 경우 값이 계속 유지됩니다. 서로 다른 저장소 구성에 대해 서로 다른 저장소 계정을 유연성 있게 사용하려면 프로젝트에 연결 문자열을 수동으로 추가해야 합니다. Azure SDK 2.4 또는 이전 버전에서 Azure SDK 2.6으로 프로젝트를 마이그레이션하는 경우 진단 연결 문자열이 유지됩니다. 그러나 이전 섹션에서 지정된 것처럼 Azure SDK 2.6에서 연결 문자열을 처리하는 방식이 변경되었음에 유의하세요.
 
 #### <a name="how-visual-studio-determines-the-diagnostics-storage-account"></a>Visual Studio에서 진단 저장소 계정을 결정하는 방법
 * 진단 연결 문자열이.cscfg 파일에 지정된 경우 Visual Studio에서는 게시할 때와 패키징 중 공용 구성 xml 파일을 생성할 때 이 문자열을 사용하여 진단 확장을 구성합니다.
@@ -167,5 +165,4 @@ Azure SDK 2.4에서 Azure SDK 2.5 이상으로 업그레이드하는 경우 다�
 * **클라우드 서비스 응용 프로그램에 대한 진단은 인스턴스 수준이 아닌 역할 수준에서만 구성할 수 있습니다.**
 * **앱을 배포할 때마다 진단 구성이 업데이트됨** – 이로 인해 서버 탐색기에서 진단 구성을 변경한 후 앱을 다시 배포하는 경우 패리티 문제가 발생할 수 있습니다.
 * **Azure SDK 2.5 이상에서 코드가 아닌 진단 구성 파일에 크래시 덤프가 구성됨** – 코드에 크래시 덤프가 구성된 경우, Azure SDK 2.6으로 마이그레이션하는 동안 크래시 덤프가 전송되지 않으므로 해당 구성을 코드에서 구성 파일로 수동으로 전송해야 합니다.
-
 

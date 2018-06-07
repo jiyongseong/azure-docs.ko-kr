@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/02/2017
 ms.author: ganesr
-ms.translationtype: Human Translation
-ms.sourcegitcommit: be3ac7755934bca00190db6e21b6527c91a77ec2
 ms.openlocfilehash: 7f8386b518ada850fc03e23c5cae3b159b3b213e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/03/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="moving-expressroute-circuits-from-the-classic-to-the-resource-manager-deployment-model"></a>클래식에서 리소스 관리자 배포 모델로 Express 경로 회로 이동
 이 문서에서는 Azure Express 경로 회로를 클래식에서 Azure Resource Manager 배포 모델로 이동하는 것에 대해 간략히 설명합니다.
@@ -106,5 +104,4 @@ Express 경로 회로는 클래식 및 리소스 관리자 배포 모델 간의 
   * [Express 경로 회로 만들기](expressroute-howto-circuit-arm.md)
   * [라우팅 구성](expressroute-howto-routing-arm.md)
   * [가상 네트워크를 Express 경로 회로에 연결합니다.](expressroute-howto-linkvnet-arm.md)
-
 

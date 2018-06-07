@@ -1,11 +1,11 @@
 ---
-title: "SQL Server VM의 자동화된 패치(클래식) | Microsoft Docs"
-description: "클래식 배포 모드를 사용하여 Azure에서 실행 중인 SQL Server 가상 컴퓨터에 대한 자동화된 패치 기능에 대해 설명합니다."
+title: SQL Server VM의 자동화된 패치(클래식) | Microsoft Docs
+description: 클래식 배포 모드를 사용하여 Azure에서 실행 중인 SQL Server Virtual Machines에 대한 자동화된 패치 기능에 대해 설명합니다.
 services: virtual-machines-windows
 documentationcenter: na
 author: rothja
-manager: jhubbard
-editor: 
+manager: craigg
+editor: ''
 tags: azure-service-management
 ms.assetid: 737b2f65-08b9-4f54-b867-e987730265a8
 ms.service: virtual-machines-sql
@@ -13,27 +13,30 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
-ms.date: 07/05/2017
+ms.date: 03/07/2018
 ms.author: jroth
-ms.translationtype: Human Translation
-ms.sourcegitcommit: b1d56fcfb472e5eae9d2f01a820f72f8eab9ef08
-ms.openlocfilehash: 66ab12f2590196ff14ee96a9b88c3d87e376230b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.openlocfilehash: 1da89bbf88e9f1f2105e7afab5c3fdabcecdbc64
+ms.sourcegitcommit: 8c3267c34fc46c681ea476fee87f5fb0bf858f9e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/09/2018
 ---
-# <a name="automated-patching-for-sql-server-in-azure-virtual-machines-classic"></a>Azure 가상 컴퓨터에서 SQL Server의 자동화된 패치(클래식)
+# <a name="automated-patching-for-sql-server-in-azure-virtual-machines-classic"></a>Azure Virtual Machines에서 SQL Server의 자동화된 패치(클래식)
 > [!div class="op_single_selector"]
 > * [리소스 관리자](../sql/virtual-machines-windows-sql-automated-patching.md)
 > * [클래식](../classic/sql-automated-patching.md)
 > 
 > 
 
-자동화된 패치는 SQL Server를 실행하는 Azure 가상 컴퓨터에 대한 유지 관리 기간을 설정합니다. 이 유지 관리 기간 동안만 자동화된 업데이트를 설치할 수 있습니다. SQL Server의 경우 이를 통해 시스템 업데이트 및 관련 재시작 작업이 데이터베이스에 대해 가장 적절한 시간에 수행되도록 할 수 있습니다. 자동화된 패치는 [SQL Server IaaS 에이전트 확장](../classic/sql-server-agent-extension.md)에 따라 다릅니다.
+자동화된 패치는 SQL Server를 실행하는 Azure Virtual Machine에 대한 유지 관리 기간을 설정합니다. 이 유지 관리 기간 동안만 자동화된 업데이트를 설치할 수 있습니다. SQL Server의 경우 이를 통해 시스템 업데이트 및 관련 재시작 작업이 데이터베이스에 대해 가장 적절한 시간에 수행되도록 할 수 있습니다. 
+
+> [!IMPORTANT]
+> **중요**로 표시된 Windows 업데이트만 설치됩니다. 누적 업데이트 등의 다른 SQL Server 업데이트는 수동으로 설치해야 합니다. 
+
+자동화된 패치는 [SQL Server IaaS 에이전트 확장](../classic/sql-server-agent-extension.md)에 따라 다릅니다.
 
 > [!IMPORTANT] 
-> Azure에는 리소스를 만들고 작업하기 위한 [리소스 관리자 및 클래식](../../../azure-resource-manager/resource-manager-deployment-model.md)라는 두 가지 배포 모델이 있습니다. 이 문서에서는 클래식 배포 모델 사용에 대해 설명합니다. 새로운 배포는 대부분 리소스 관리자 모델을 사용하는 것이 좋습니다. 이 문서의 Resource Manager 버전을 보려면 [Azure 가상 컴퓨터 Resource Manager에서 SQL Server의 자동화된 패치](../sql/virtual-machines-windows-sql-automated-patching.md)를 참조하세요.
+> Azure에는 리소스를 만들고 작업하기 위한 [리소스 관리자 및 클래식](../../../azure-resource-manager/resource-manager-deployment-model.md)이라는 두 가지 배포 모델이 있습니다. 이 문서에서는 클래식 배포 모델 사용에 대해 설명합니다. 새로운 배포는 대부분 리소스 관리자 모델을 사용하는 것이 좋습니다. 이 문서의 Resource Manager 버전을 보려면 [Azure Virtual Machines Resource Manager에서 SQL Server의 자동화된 패치](../sql/virtual-machines-windows-sql-automated-patching.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 자동화된 패치를 사용하려면 다음 필수 조건을 고려하세요.
@@ -63,9 +66,9 @@ ms.lasthandoff: 07/06/2017
 
 | 설정 | 가능한 값 | 설명 |
 | --- | --- | --- |
-| **자동화된 패치** |사용/사용 안 함(사용 안 함) |Azure 가상 컴퓨터에 대한 자동화된 패치를 사용 또는 사용 안 함으로 설정합니다. |
-| **유지 관리 일정** |매일, 월요일, 화요일, 수요일, 목요일, 금요일, 토요일, 일요일 |가상 컴퓨터에 대한 Windows, SQL Server 및 Microsoft 업데이트 다운로드 및 설치에 대한 일정입니다. |
-| **유지 관리 시작 시간** |0-24 |가상 컴퓨터를 업데이트할 로컬 시작 시간입니다. |
+| **자동화된 패치** |사용/사용 안 함(사용 안 함) |Azure 가상 머신에 대한 자동화된 패치를 사용 또는 사용 안 함으로 설정합니다. |
+| **유지 관리 일정** |매일, 월요일, 화요일, 수요일, 목요일, 금요일, 토요일, 일요일 |가상 머신에 대한 Windows, SQL Server 및 Microsoft 업데이트 다운로드 및 설치에 대한 일정입니다. |
+| **유지 관리 시작 시간** |0-24 |가상 머신을 업데이트할 로컬 시작 시간입니다. |
 | **유지 관리 기간** |30-180 |업데이트 다운로드 및 설치를 완료하는데 허용된 시간(분)입니다. |
 | **패치 범주** |중요 |다운로드 및 설치할 업데이트의 범주입니다. |
 
@@ -92,6 +95,5 @@ SQL Server IaaS 에이전트를 설치하고 구성하는 데는 몇 분 정도 
 ## <a name="next-steps"></a>다음 단계
 사용 가능한 다른 자동화 작업에 대한 내용은 [SQL Server IaaS 에이전트 확장](../classic/sql-server-agent-extension.md)을 참조하세요.
 
-Azure VM의 SQL Server 실행에 대한 자세한 내용은 [Azure 가상 컴퓨터의 SQL Server 개요](../sql/virtual-machines-windows-sql-server-iaas-overview.md)를 참조하세요.
-
+Azure VM의 SQL Server 실행에 대한 자세한 내용은 [Azure Virtual Machines의 SQL Server 개요](../sql/virtual-machines-windows-sql-server-iaas-overview.md)를 참조하세요.
 

@@ -1,0 +1,1 @@
+2017년 11월 15일부터 Virtual Machines는 [Azure Portal](https://portal.azure.com)에서만 사용할 수 있습니다. 

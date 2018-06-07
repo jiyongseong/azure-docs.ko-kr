@@ -1,8 +1,8 @@
 ---
-title: "Azure Resource Manager 템플릿 내보내기 | Microsoft Docs"
-description: "Azure Resource Manager를 사용하여 기존 리소스 그룹에서 템플릿을 내보냅니다."
+title: Azure Resource Manager 템플릿 내보내기 | Microsoft Docs
+description: Azure Resource Manager를 사용하여 기존 리소스 그룹에서 템플릿을 내보냅니다.
 services: azure-resource-manager
-documentationcenter: 
+documentationcenter: ''
 author: tfitzmac
 manager: timlt
 editor: tysonn
@@ -11,16 +11,14 @@ ms.service: azure-resource-manager
 ms.workload: multiple
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: get-started-article
-ms.date: 07/06/2017
+ms.topic: conceptual
+ms.date: 02/23/2018
 ms.author: tomfitz
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 1801ef47e5b182e0bcd5b23970a2999633b4a852
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 14aa54277cac3369df739a1d84580624f2d3b401
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="export-an-azure-resource-manager-template-from-existing-resources"></a>기존 리소스에서 Azure Resource Manager 템플릿 내보내기
 이 문서에서는 구독에서 기존 리소스의 Resource Manager 템플릿을 내보내는 방법을 알아봅니다. 생성된 해당 템플릿을 사용하여 템플릿 구문을 깊이 이해할 수 있습니다.
@@ -28,14 +26,14 @@ ms.lasthandoff: 07/08/2017
 두 가지 방법으로 템플릿을 내보낼 수 있습니다.
 
 * **배포에 사용된 실제 템플릿**을 내보낼 수 있습니다. 내보낸 템플릿은 원본 템플릿에 나타난 대로 모든 매개 변수 및 변수를 포함합니다. 이 방법은 포털을 통해 리소스를 배포하고 해당 리소스를 만드는 템플릿을 확인하려는 경우에 유용합니다. 이 템플릿은 곧 사용할 수 있습니다. 
-* **리소스 그룹의 현재 상태를 나타내는 생성된 템플릿을 내보낼** 수 있습니다. 내보낸 템플릿은 배포에 사용된 템플릿에 기초하지 않습니다. 대신 리소스 그룹의 스냅숏인 템플릿을 만듭니다. 내보낸 템플릿에는 하드 코드된 값이 많으며 일반적으로 정의된 경우와 같이 매개 변수가 많이 포함되지 않습니다. 이 방법은 배포 후에 리소스 그룹을 수정한 경우에 유용합니다. 일반적으로 이 템플릿을 사용하기 전에 수정해야 합니다.
+* **리소스 그룹의 현재 상태를 나타내는 생성된 템플릿을 내보낼** 수 있습니다. 내보낸 템플릿은 배포에 사용된 템플릿에 기초하지 않습니다. 대신 리소스 그룹의 “스냅숏” 또는 “백업”인 템플릿을 만듭니다. 내보낸 템플릿에는 하드 코드된 값이 많으며 일반적으로 정의된 경우와 같이 매개 변수가 많이 포함되지 않습니다. 동일한 리소스 그룹에 리소스를 다시 배포하려면 이 옵션을 사용합니다. 다른 리소스 그룹에 이 템플릿을 사용하려면 크게 수정해야 할 수 있습니다.
 
-이 항목에서는 포털을 통한 방법을 모두 보여줍니다.
+이 문서에서는 포털을 통해 두 가지 방법을 모두 보여 줍니다.
 
 ## <a name="deploy-resources"></a>리소스 배포
-템플릿으로 내보내는 데 사용할 수 있는 리소스를 Azure에 배포하기 시작하겠습니다. 템플릿을 내보내려는 구독에 리소스 그룹이 이미 있는 경우 이 섹션을 건너뛸 수 있습니다. 이 문서의 나머지 부분에서는 이 섹션에 표시된 웹앱 및 SQL Database 솔루션을 배포했다고 가정합니다. 다른 솔루션을 사용하는 경우 환경은 약간 다를 수 있지만 템플릿을 내보내는 단계는 동일합니다. 
+템플릿으로 내보내는 데 사용할 수 있는 리소스를 Azure에 배포하기 시작하겠습니다. 템플릿을 내보내려는 구독에 리소스 그룹이 이미 있는 경우 이 섹션을 건너뛸 수 있습니다. 이 문서의 나머지 부분에서는 이 섹션에 나온 웹앱 및 SQL Database 솔루션을 배포했다고 가정합니다. 다른 솔루션을 사용하는 경우 환경은 약간 다를 수 있지만 템플릿을 내보내는 단계는 동일합니다. 
 
-1. [Azure Portal](https://portal.azure.com)에서 **새로 만들기**를 선택합니다.
+1. [Azure Portal](https://portal.azure.com)에서 **리소스 만들기**를 선택합니다.
    
       ![새로 만들기 선택](./media/resource-manager-export-template/new.png)
 2. **웹앱 + SQL**을 검색하고 사용 가능한 옵션 중에서 선택합니다.
@@ -53,13 +51,13 @@ ms.lasthandoff: 07/08/2017
 배포는 몇 분 정도가 걸릴 수 있습니다. 배포가 완료되면 구독에는 솔루션이 포함됩니다.
 
 ## <a name="view-template-from-deployment-history"></a>배포 기록의 템플릿 보기
-1. 새 리소스 그룹의 리소스 그룹 블레이드로 이동합니다. 블레이드가 최종 배포 결과를 보여 줍니다. 이 링크를 선택합니다.
+1. 새 리소스 그룹의 리소스 그룹으로 이동합니다. 포털에 최종 배포 결과가 표시됩니다. 이 링크를 선택합니다.
    
-      ![리소스 그룹 블레이드](./media/resource-manager-export-template/select-deployment.png)
-2. 그룹의 배포 기록을 볼 수 있습니다. 사용자의 경우에 블레이드에 하나의 배포만 나열되어 있을 것입니다. 이 배포를 선택합니다.
+      ![리소스 그룹](./media/resource-manager-export-template/select-deployment.png)
+2. 그룹의 배포 기록을 볼 수 있습니다. 사용자의 경우 포털에 하나의 배포만 나열되어 있을 것입니다. 이 배포를 선택합니다.
    
      ![마지막 배포](./media/resource-manager-export-template/select-history.png)
-3. 블레이드에 배포 요약이 표시됩니다. 요약에는 배포 상태와 해당 작업, 매개 변수에 입력한 값이 포함됩니다. 배포에 사용된 템플릿을 보려면 **템플릿 보기**를 선택합니다.
+3. 포털에 배포 요약이 표시됩니다. 요약에는 배포 상태와 해당 작업, 매개 변수에 입력한 값이 포함됩니다. 배포에 사용된 템플릿을 보려면 **템플릿 보기**를 선택합니다.
    
      ![배포 요약 보기](./media/resource-manager-export-template/view-template.png)
 4. Resource Manager는 다음 7개의 파일을 검색합니다.
@@ -72,21 +70,21 @@ ms.lasthandoff: 07/08/2017
    5. **.NET** - 템플릿 배포에 사용할 수 있는 .NET 클래스.
    6. **Ruby** - 템플릿 배포에 사용할 수 있는 Ruby 클래스.
       
-      이러한 파일은 전체 블레이드에서 링크를 통해 사용할 수 있습니다. 기본적으로 블레이드가 템플릿을 표시합니다.
+      기본적으로 포털에 템플릿이 표시됩니다.
       
        ![템플릿 보기](./media/resource-manager-export-template/see-template.png)
       
 이 템플릿은 웹앱 및 SQL Database를 만드는 데 사용되는 실제 템플릿입니다. 배포 중에 다른 값을 제공할 수 있는 매개 변수를 포함합니다. 템플릿 구조에 대해 자세히 알아보려면 [Azure Resource Manager 템플릿 작성하기](resource-group-authoring-templates.md)를 참조하세요.
 
 ## <a name="export-the-template-from-resource-group"></a>리소스 그룹에서 템플릿 내보내기
-수동으로 리소스를 변경했거나 여러 배포에서 리소스를 추가한 경우 배포 기록에서 템플릿을 검색하면 리소스 그룹의 현재 상태를 반영하지 않습니다. 이 섹션에서는 리소스 그룹의 현재 상태를 반영하는 템플릿을 내보내는 방법을 보여줍니다. 
+수동으로 리소스를 변경했거나 여러 배포에서 리소스를 추가한 경우 배포 기록에서 템플릿을 검색하면 리소스 그룹의 현재 상태를 반영하지 않습니다. 이 섹션에서는 리소스 그룹의 현재 상태를 반영하는 템플릿을 내보내는 방법을 보여줍니다. 동일한 리소스 그룹에 다시 배포하는 데 사용할 수 있는 리소스 그룹의 스냅숏으로 사용됩니다. 다른 솔루션에 내보낸 템플릿을 사용하려면 대폭 수정해야 합니다.
 
 > [!NOTE]
 > 200개 이상의 리소스가 있는 리소스 그룹에 대한 템플릿을 내보낼 수 없습니다.
 > 
 > 
 
-1. 리소스 그룹에 대한 템플릿을 보려면 **자동화 스크립트**를 선택합니다.
+1. 리소스 그룹에 대한 템플릿을 보려면 **Automation 스크립트**를 선택합니다.
    
       ![리소스 그룹 내보내기](./media/resource-manager-export-template/select-automation.png)
    
@@ -99,7 +97,7 @@ ms.lasthandoff: 07/08/2017
    
       ![템플릿 다운로드](./media/resource-manager-export-template/download-template.png)
    
-     JSON 편집기를 설정하지 않은 경우 포털을 통해 템플릿을 편집하는 것을 선호할 수 있습니다. 이 항목의 나머지 부분에서는 템플릿을 포털의 라이브러리에 저장했다고 가정합니다. 그러나 JSON 편집기로 로컬에서 작업하든지 포털을 통해 작업하든지 템플릿에 동일한 구문 변경 내용을 만듭니다. 포털을 통해 작업하려면 **라이브러리에 추가**를 선택합니다.
+     JSON 편집기를 설정하지 않은 경우 포털을 통해 템플릿을 편집하는 것을 선호할 수 있습니다. 이 문서의 나머지 부분에서는 템플릿을 포털의 라이브러리에 저장했다고 가정합니다. 그러나 JSON 편집기로 로컬에서 작업하든지 포털을 통해 작업하든지 템플릿에 동일한 구문 변경 내용을 만듭니다. 포털을 통해 작업하려면 **라이브러리에 추가**를 선택합니다.
    
       ![라이브러리에 추가](./media/resource-manager-export-template/add-to-library.png)
    
@@ -172,10 +170,8 @@ ms.lasthandoff: 07/08/2017
 > 
 
 ## <a name="next-steps"></a>다음 단계
-포털에서 만든 리소스에서 템플릿을 내보내는 방법을 배웠습니다.
 
 * [PowerShell](resource-group-template-deploy.md), [Azure CLI](resource-group-template-deploy-cli.md) 또는 [REST API](resource-group-template-deploy-rest.md)를 통해 템플릿을 배포할 수 있습니다.
-* PowerShell을 통해 템플릿을 내보내는 방법을 알아보려면 [Azure Resource Manager에서 Azure PowerShell 사용](powershell-azure-resource-manager.md)을 참조하세요.
-* Azure CLI를 통해 템플릿을 내보내는 방법은 [Azure Resource Manager에서 Mac, Linux 및 Windows용 Azure CLI 사용](xplat-cli-azure-resource-manager.md)을 참조하세요.
-
+* PowerShell을 통해 템플릿을 내보내는 방법을 알아보려면 [PowerShell을 사용하여 Azure Resource Manager 템플릿 내보내기](resource-manager-export-template-powershell.md)를 참조하세요.
+* Azure CLI을 통해 템플릿을 내보내는 방법을 알아보려면 [Azure CLI를 사용하여 Azure Resource Manager 템플릿 내보내기](resource-manager-export-template-cli.md)를 참조하세요.
 

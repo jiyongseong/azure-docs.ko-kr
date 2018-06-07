@@ -1,5 +1,5 @@
 ---
-title: "Azure Linux 가상 컴퓨터에 Oracle ASM 설정 | Microsoft Docs"
+title: "Azure Linux 가상 머신에 Oracle ASM 설정 | Microsoft Docs"
 description: "Azure 환경에서 Oracle ASM을 빠르게 준비하여 실행합니다."
 services: virtual-machines-linux
 documentationcenter: virtual-machines
@@ -15,17 +15,15 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 07/19/2017
 ms.author: rclaus
+ms.openlocfilehash: 0e34a188271a5ac2fb6cb34a088ec3f650be6cab
+ms.sourcegitcommit: 059dae3d8a0e716adc95ad2296843a45745a415d
 ms.translationtype: HT
-ms.sourcegitcommit: 6e76ac40e9da2754de1d1aa50af3cd4e04c067fe
-ms.openlocfilehash: 117212a2e7e3da7c3e249798eec804a652e0ef58
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/31/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/09/2018
 ---
-
 # <a name="set-up-oracle-asm-on-an-azure-linux-virtual-machine"></a>Azure Linux 가상 컴퓨터에 Oracle ASM 설정  
 
-Azure 가상 컴퓨터는 완전히 구성 가능하고 유연한 컴퓨팅 환경을 제공합니다. 이 자습서에서는 Oracle ASM(Automated Storage Management) 설치 및 구성과 결합된 기본 Azure 가상 컴퓨터 배포에 대해 설명합니다.  다음 방법에 대해 알아봅니다.
+Azure Virtual Machines는 완전히 구성 가능하고 유연한 컴퓨팅 환경을 제공합니다. 이 자습서에서는 Oracle ASM(Automated Storage Management) 설치 및 구성과 결합된 기본 Azure 가상 머신 배포에 대해 설명합니다.  다음 방법에 대해 알아봅니다.
 
 > [!div class="checklist"]
 > * Oracle 데이터베이스 VM 만들기 및 연결
@@ -43,7 +41,7 @@ CLI를 로컬로 설치하여 사용하도록 선택한 경우 이 자습서에�
 
 ### <a name="create-a-resource-group"></a>리소스 그룹 만들기
 
-리소스 그룹을 만들려면 [az group create](/cli/azure/group#create) 명령을 사용합니다. Azure 리소스 그룹은 Azure 리소스가 배포 및 관리되는 논리적 컨테이너입니다. 이 예제에서는 *eastus* 지역에 *myResourceGroup*이라는 리소스 그룹을 만듭니다.
+리소스 그룹을 만들려면 [az group create](/cli/azure/group#az_group_create) 명령을 사용합니다. Azure 리소스 그룹은 Azure 리소스가 배포 및 관리되는 논리적 컨테이너입니다. 이 예제에서는 *eastus* 지역에 *myResourceGroup*이라는 리소스 그룹을 만듭니다.
 
 ```azurecli-interactive
 az group create --name myResourceGroup --location eastus
@@ -51,7 +49,7 @@ az group create --name myResourceGroup --location eastus
 
 ### <a name="create-a-vm"></a>VM 만들기
 
-Oracle Database 이미지에 따라 가상 컴퓨터를 만들고 Oracle ASM을 사용하도록 구성하려면 [az vm create](/cli/azure/vm#create) 명령을 사용합니다. 
+Oracle Database 이미지에 따라 가상 머신을 만들고 Oracle ASM을 사용하도록 구성하려면 [az vm create](/cli/azure/vm#az_vm_create) 명령을 사용합니다. 
 
 다음 예에서는 각 50GB인 네 개의 연결된 데이터 디스크를 포함한 Standard_DS2_v2 크기의 myVM이라는 VM을 만듭니다. 또한 기본 키 위치에 SSH 키가 없는 경우 이 키를 만듭니다.  특정 키 집합을 사용하려면 `--ssh-key-value` 옵션을 사용합니다.  
 
@@ -589,4 +587,3 @@ az group delete --name myResourceGroup
 [자습서: Oracle GoldenGate 구성](Configure-oracle-golden-gate.md)
 
 [Oracle DB 설계](oracle-design.md) 검토
-

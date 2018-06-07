@@ -1,10 +1,10 @@
 ---
-title: "Azure Active Directory 하이브리드 ID 설계 고려 사항 - 액세스 제어 요구 사항 확인 | Microsoft Docs"
+title: "Azure의 하이브리드 ID 디자인 액세스 제어 요구 사항 | Microsoft Docs"
 description: "하이브리드 환경에서 ID의 기본 요소 및 사용자의 리소스에 대한 액세스 요구 사항 식별에 대해 설명합니다."
 documentationcenter: 
 services: active-directory
 author: billmath
-manager: femila
+manager: mtillman
 editor: 
 ms.assetid: e3b3b984-0d15-4654-93be-a396324b9f5e
 ms.service: active-directory
@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 07/18/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0af5a4e2139a202c7f62f48c7a7e8552457ae76d
-ms.openlocfilehash: 032467e0885d574a7b0f4a1c043e1800e5cc4071
-ms.contentlocale: ko-kr
-ms.lasthandoff: 12/29/2016
-
+ms.custom: seohack1
+ms.openlocfilehash: 161820e69b0c9d0dc376a62cecceb9cc5e83c8ce
+ms.sourcegitcommit: f1c1789f2f2502d683afaf5a2f46cc548c0dea50
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/18/2018
 ---
 # <a name="determine-access-control-requirements-for-your-hybrid-identity-solution"></a>하이브리드 ID 솔루션에 대한 액세스 제어 요구 사항 확인
 또한 조직이 해당 하이브리드 ID 솔루션을 설계하는 경우 사용자는 이 기회를 사용하여 사용자가 사용할 수 있게 하려는 리소스에 대한 액세스 요구 사항을 검토할 수 있습니다. ID의 네 가지 기본 요소에 대한 데이터 액세스는 다음과 같습니다.
@@ -57,7 +57,7 @@ ms.lasthandoff: 12/29/2016
 * 조직은 온-프레미스 나 클라우드에 위치한 앱에 Single Sign-On을 사용합니까?
   * 사용한다면 하이브리드 ID 모델의 도입은 이 프로세스에 영향을 줍니까?
 
-## <a name="access-control"></a>액세스 제어
+## <a name="access-control"></a>Access Control
 인증 및 권한 부여는 사용자의 유효성 검사를 통해 회사 데이터에 액세스할 수 있도록 하는 핵심 요소이며 또한 관리 중인 리소스를 통해 이러한 사용자가 가질 액세스 수준 및 관리자가 가질 액세스 수준을 제어하는 것이 중요합니다. 하이브리드 ID 솔루션은 리소스, 위임 및 역할 기반 액세스 제어에 대한 세부적인 액세스를 제공할 수 있어야 합니다. 액세스 제어에 관하여 다음과 같은 질문에 응답해야 합니다.
 
 * 회사에는 상승된 권한이 있는 둘 이상의 사용자가 있어서 ID 시스템을 관리합니까?
@@ -80,5 +80,4 @@ ms.lasthandoff: 12/29/2016
 
 ## <a name="see-also"></a>참고 항목
 [설계 고려 사항 개요](active-directory-hybrid-identity-design-considerations-overview.md)
-
 

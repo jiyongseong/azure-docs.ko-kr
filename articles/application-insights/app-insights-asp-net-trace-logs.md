@@ -1,9 +1,9 @@
 ---
-title: "Application Insights에서 .NET 추적 로그 탐색"
-description: "추적, NLog 또는 Log4Net을 사용하여 생성된 로그를 검색합니다."
+title: Application Insights에서 .NET 추적 로그 탐색
+description: 추적, NLog 또는 Log4Net을 사용하여 생성된 로그를 검색합니다.
 services: application-insights
 documentationcenter: .net
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 0c2a084f-6e71-467b-a6aa-4ab222f17153
 ms.service: application-insights
@@ -11,15 +11,13 @@ ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
-ms.date: 05/3/2017
-ms.author: cfreeman
-ms.translationtype: Human Translation
-ms.sourcegitcommit: e22bd56e0d111add6ab4c08b6cc6e51c364c7f22
-ms.openlocfilehash: e562e6a1a6c2b8203f3d5a9a2ee5680372499693
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/19/2017
-
-
+ms.date: 05/03/2017
+ms.author: mbullwin
+ms.openlocfilehash: 574b11f9ba38bda775610f2f9e90fbb2d2b05868
+ms.sourcegitcommit: 34e0b4a7427f9d2a74164a18c3063c8be967b194
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="explore-net-trace-logs-in-application-insights"></a>Application Insights에서 .NET 추적 로그 탐색
 ASP.NET 응용 프로그램에서 진단 추적에 NLog, log4Net 또는 System.Diagnostics.Trace를 사용하는 경우 [Azure Application Insights][start]로 로그를 보내서 탐색 및 검색할 수 있습니다. 서비스를 제공하는 각 사용자 요청과 연결된 추적을 식별하고 다른 이벤트 및 예외 보고서와 상호 연결할 수 있도록 로그가 응용 프로그램에서 들어오는 다른 원격 분석과 병합됩니다.
@@ -101,7 +99,7 @@ Application Insights에 추적으로 보낼 [System.Diagnostics.Tracing.EventSou
 Application Insights에 추적으로 보낼 [System.Diagnostics.DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) 이벤트를 구성할 수 있습니다. 먼저 [`Microsoft.ApplicationInsights.DiagnosticSourceListener`](https://www.nuget.org/packages/Microsoft.ApplicationInsights.DiagnosticSourceListener) NuGet 패키지를 설치합니다. 그런 다음 [ApplicationInsights.config](app-insights-configuration-with-applicationinsights-config.md) 파일의 `TelemetryModules` 섹션을 편집합니다.
 
 ```xml
-    <Add Type="Microsoft.ApplicationInsights.DiagnsoticSourceListener.DiagnosticSourceTelemetryModule, Microsoft.ApplicationInsights.DiagnosticSourceListener">
+    <Add Type="Microsoft.ApplicationInsights.DiagnosticSourceListener.DiagnosticSourceTelemetryModule, Microsoft.ApplicationInsights.DiagnosticSourceListener">
       <Sources>
         <Add Name="MyDiagnosticSourceName" />
       </Sources>
@@ -133,21 +131,21 @@ Application Insights에 추적으로 보낼 [System.Diagnostics.DiagnosticSource
 ## <a name="using-the-trace-api-directly"></a>직접 추적 API 사용
 Application Insights 추적 API를 직접 호출할 수 있습니다. 로깅 어댑터는 이 API를 사용합니다.
 
-예:
+예: 
 
     var telemetry = new Microsoft.ApplicationInsights.TelemetryClient();
     telemetry.TrackTrace("Slow response - database01");
 
 TrackTrace의 장점은 메시지에 상대적으로 긴 데이터를 넣을 수 있습니다. 예를 들어, POST 데이터를 인코딩할 수 있습니다.
 
-또한 메시지에 심각도 수준을 추가할 수 있습니다. 또 다른 원격 분석처럼, 다른 추적 집합에 대한 필터링 또는 검색하는 데 사용할 수 있는 속성 값을 추가할 수 있습니다. 예:
+또한 메시지에 심각도 수준을 추가할 수 있습니다. 또 다른 원격 분석처럼, 다른 추적 집합에 대한 필터링 또는 검색하는 데 사용할 수 있는 속성 값을 추가할 수 있습니다. 예: 
 
     var telemetry = new Microsoft.ApplicationInsights.TelemetryClient();
     telemetry.TrackTrace("Slow database response",
                    SeverityLevel.Warning,
                    new Dictionary<string,string> { {"database", db.ID} });
 
-이를 통해 [검색][diagnostic]에서 특정 데이터베이스와 관련된 특정 심각도 수준의 모든 메시지를 쉽게 필터링할 수 있습니다.
+이를 통해 [Search][diagnostic]에서 특정 데이터베이스와 관련된 특정 심각도 수준의 모든 메시지를 쉽게 필터링할 수 있습니다.
 
 ## <a name="explore-your-logs"></a>로그 탐색
 디버그 모드에서 앱을 실행하거나 실시간으로 배포합니다.
@@ -197,7 +195,7 @@ Application Insights를 설치하지 않고 로깅 어댑터 Nuget 패키지를 
 모든 이벤트와 요청이 파이프라인을 통과할 때까지 다소 시간이 걸릴 수 있습니다.
 
 ### <a name="limits"></a>얼마나 많은 데이터가 보존되나요?
-각 응용 프로그램에서 초당 최대 500개의 이벤트가 보존됩니다. 이벤트는 7일 동안 보존됩니다.
+여러 가지 요인이 보관되는 데이터의 양에 영향을 줍니다. 자세한 내용은 고객 이벤트 메트릭 페이지의 [제한](app-insights-api-custom-events-metrics.md#limits) 섹션을 참조하세요. 
 
 ### <a name="im-not-seeing-some-of-the-log-entries-that-i-expect"></a>예상되는 로그 항목의 일부가 표시되지 않습니다.
 응용 프로그램이 대량의 데이터를 전송하고 ASP.NET 버전 2.0.0-beta3 또는 그 이상에서의 Application Insights SDK를 사용하는 경우 적응 샘플링 기능이 작동하고 원격 분석의 백분율만 보낼 수 있습니다. [샘플링에 대해 자세히 알아봅니다.](app-insights-sampling.md)
@@ -214,4 +212,3 @@ Application Insights를 설치하지 않고 로깅 어댑터 Nuget 패키지를 
 [portal]: https://portal.azure.com/
 [qna]: app-insights-troubleshoot-faq.md
 [start]: app-insights-overview.md
-

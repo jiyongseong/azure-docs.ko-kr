@@ -1,28 +1,24 @@
 ---
-title: "Azure 클라우드 서비스에 대한 일정한 가상 IP 주소를 유지하는 방법 | Microsoft Docs"
-description: "Azure 클라우드 서비스의 가상 IP 주소(VIP)가 변경되지 않도록 하는 방법에 대해 알아봅니다."
+title: Azure 클라우드 서비스에 대한 일정한 가상 IP 주소를 유지하는 방법 | Microsoft Docs
+description: Azure 클라우드 서비스의 가상 IP 주소(VIP)가 변경되지 않도록 하는 방법에 대해 알아봅니다.
 services: visual-studio-online
-documentationcenter: na
-author: TomArcher
+author: ghogen
 manager: douge
-editor: 
-ms.assetid: 4a58e2c6-7a79-4051-8a2c-99182ff8b881
-ms.service: multiple
-ms.devlang: dotnet
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: multiple
+assetId: 4a58e2c6-7a79-4051-8a2c-99182ff8b881
+ms.prod: visual-studio-dev15
+ms.technology: vs-azure
+ms.workload: azure
+ms.topic: conceptual
 ms.date: 03/21/2017
-ms.author: tarcher
-translationtype: Human Translation
-ms.sourcegitcommit: 303cb9950f46916fbdd58762acd1608c925c1328
-ms.openlocfilehash: c54c4c044bb4a6afd880fe101d7bb0cffdacb579
-ms.lasthandoff: 04/04/2017
-
-
+ms.author: ghogen
+ms.openlocfilehash: c02e80a97fe5943019f446299e370bf029a01ff4
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="retain-a-constant-virtual-ip-address-for-an-azure-cloud-service"></a>Azure 클라우드 서비스의 가상 IP 주소를 일정하게 유지
-Azure에서 호스팅되는 클라우드 서비스를 업데이트하는 경우 서비스의 가상 IP 주소(VIP)가 변경되지 않는지 확인해야 할 수 있습니다. 많은 도메인 관리 서비스에서 도메인 이름을 등록하는 데 도메인 이름 시스템(DNS)을 사용합니다. DNS는 VIP가 동일하게 유지되는 경우에만 작동합니다. Azure 도구에서 **게시 마법사** 를 사용하여 클라우드 서비스를 업데이트할 때 VIP가 변경되지 않는지 확인할 수 있습니다. 클라우드 서비스에 대한 DNS 도메인 관리를 사용하는 방법에 대한 자세한 내용은 [Azure 클라우드 서비스에 대한 사용자 지정 도메인 이름 구성](cloud-services/cloud-services-custom-domain-name.md)을 참조하세요.
+Azure에서 호스팅되는 클라우드 서비스를 업데이트하는 경우 서비스의 가상 IP 주소(VIP)가 변경되지 않는지 확인해야 할 수 있습니다. 많은 도메인 관리 서비스에서 도메인 이름을 등록하는 데 도메인 이름 시스템(DNS)을 사용합니다. DNS는 VIP가 동일하게 유지되는 경우에만 작동합니다. Azure 도구에서 **게시 마법사** 를 사용하여 클라우드 서비스를 업데이트할 때 VIP가 변경되지 않는지 확인할 수 있습니다. 클라우드 서비스에 대한 DNS 도메인 관리를 사용하는 방법에 대한 자세한 내용은 [Azure 클라우드 서비스에 대한 사용자 지정 도메인 이름 구성](cloud-services/cloud-services-custom-domain-name-portal.md)을 참조하세요.
 
 ## <a name="publish-a-cloud-service-without-changing-its-vip"></a>VIP를 변경하지 않고 클라우드 서비스 게시
 클라우드 서비스의 VIP는 프로덕션 환경과 같은 특정 환경에서 Azure에 처음 배포할 때 할당됩니다. VIP는 배포를 명시적으로 삭제하거나 배포 업데이트 프로세스에 의해 암시적으로 삭제된 경우에만 변경됩니다. VIP를 유지하려면 배포를 삭제해서는 안되며 Visual Studio에서 배포를 자동으로 삭제하지 않는지 확인해야 합니다. 
@@ -44,7 +40,7 @@ Azure에서 호스팅되는 클라우드 서비스를 업데이트하는 경우 
 
     ![Azure 응용 프로그램 게시 일반 설정 탭](./media/vs-azure-tools-cloud-service-retain-a-constant-virtual-ip-address/azure-publish-common-settings.png)
 
-5. **고급 설정** 탭에서 **배포 레이블** 및 **저장소 계정**이 올바른지 확인합니다. **실패 시 배포 삭제** 확인란의 선택을 취소했는지 확인하고, **배포 업데이트** 확인란을 선택했는지 확인합니다. **실패 시 배포 삭제** 확인란을 선택 취소하면 배포 중에 오류가 발생할 경우 VIP가 손실되지 않았는지 확인할 수 있습니다. **배포 업데이트** 확인란을 선택하면 응용 프로그램을 다시 게시할 때 배포가 삭제되지 않고 VIP가 손실되지 않았는지 확인할 수 있습니다. 
+5. **고급 설정** 탭에서 **배포 레이블** 및 **Storage 계정**이 올바른지 확인합니다. **실패 시 배포 삭제** 확인란의 선택을 취소했는지 확인하고, **배포 업데이트** 확인란을 선택했는지 확인합니다. **실패 시 배포 삭제** 확인란을 선택 취소하면 배포 중에 오류가 발생할 경우 VIP가 손실되지 않았는지 확인할 수 있습니다. **배포 업데이트** 확인란을 선택하면 응용 프로그램을 다시 게시할 때 배포가 삭제되지 않고 VIP가 손실되지 않았는지 확인할 수 있습니다. 
 
     ![Azure 응용 프로그램 게시 고급 설정 탭](./media/vs-azure-tools-cloud-service-retain-a-constant-virtual-ip-address/azure-publish-advanced-settings.png)
 
@@ -58,5 +54,4 @@ Azure에서 호스팅되는 클라우드 서비스를 업데이트하는 경우 
 
 ## <a name="next-steps"></a>다음 단계
 - [Visual Studio Azure 응용 프로그램 게시 마법사 사용](vs-azure-tools-publish-azure-application-wizard.md)
-
 

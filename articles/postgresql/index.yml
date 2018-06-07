@@ -1,60 +1,67 @@
 ### YamlMime:YamlDocument
 documentType: LandingData
-title: PostgreSQL용 Azure 데이터베이스 설명서
+title: "PostgreSQL용 Azure 데이터베이스 설명서"
 metadata:
   document_id: c0fe8cd3-35da-e3e5-718e-8f3cf2f87f34
-  title: 'Azure PostgreSQL 설명서 - 자습서, API 참조'
-  description: PostgreSQL용 Azure 데이터베이스는 오픈 소스 PostgreSQL 데이터베이스 엔진을 기반으로 개발자용으로 빌드된 Microsoft 클라우드의 관계형 데이터베이스 서비스입니다.
-  services: app-service
-  author: jasonwhowell
-  manager: jhubbard
+  title: "Azure PostgreSQL 설명서 - 자습서, API 참조"
+  description: "PostgreSQL용 Azure 데이터베이스는 오픈 소스 PostgreSQL 데이터베이스 엔진을 기반으로 개발자용으로 빌드된 Microsoft 클라우드의 관계형 데이터베이스 서비스입니다."
+  services: postgresql
+  author: czeumault
+  manager: carolz
   ms.service: postgresql
   ms.tgt_pltfrm: na
   ms.devlang: na
   ms.topic: landing-page
   ms.date: 01/23/2017
-  ms.author: jasonh
+  ms.author: carolz
+  ms.openlocfilehash: ef78955bf3b7453702725d0899f3f6813fa29ef2
+  ms.sourcegitcommit: 48fce90a4ec357d2fb89183141610789003993d2
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 01/12/2018
 abstract:
-  description: 'PostgreSQL용 Azure 데이터베이스는 오픈 소스 Postgres 데이터베이스 엔진을 기반으로 한 관계형 데이터베이스 서비스입니다.  예측 가능한 성능, 보안, 고가용성 및 동적인 확장성으로 중요 업무용 워크로드를 처리할 수 있는 완전 관리형 Database as a Service 제품입니다.  사용자가 선택한 오픈 소스 도구 및 플랫폼을 활용한 PostgreSQL용 Azure 데이터베이스로 응용 프로그램을 개발합니다.  빠른 시작, 자습서 및 샘플을 통해 PostgreSQL용 Azure 데이터베이스를 사용하는 방법을 알아보세요.'
+  description: "PostgreSQL용 Azure 데이터베이스는 오픈 소스 Postgres 데이터베이스 엔진을 기반으로 한 관계형 데이터베이스 서비스입니다.  예측 가능한 성능, 보안, 고가용성 및 동적인 확장성으로 중요 업무용 워크로드를 처리할 수 있는 완전 관리형 Database as a Service 제품입니다.  사용자가 선택한 오픈 소스 도구 및 플랫폼을 활용한 PostgreSQL용 Azure 데이터베이스로 응용 프로그램을 개발합니다.  빠른 시작, 자습서 및 샘플을 통해 PostgreSQL용 Azure 데이터베이스를 사용하는 방법을 알아보세요."
 sections:
-- title: 5분 빠른 시작
+- title: "5분 빠른 시작"
   items:
   - type: paragraph
-    text: 다음을 통해 PostgreSQL 데이터베이스를 만드는 방법을 알아봅니다.
+    text: "다음을 통해 PostgreSQL 데이터베이스를 만드는 방법을 알아봅니다."
   - type: list
     style: icon48
-    items: 
-    - image: 
-        src: https://docs.microsoft.com/en-us/azure/sql-database/media/index/portal.svg
-      text: Azure 포털
+    items:
+    - image:
+        src: https://docs.microsoft.com/azure/sql-database/media/index/portal.svg
+      text: Azure Portal
       href: /azure/postgresql/quickstart-create-server-database-portal
-    - image: 
-        src: https://docs.microsoft.com/en-us/azure/sql-database/media/index/cli.svg
+    - image:
+        src: https://docs.microsoft.com/azure/sql-database/media/index/cli.svg
       text: Azure CLI
       href: /azure/postgresql/quickstart-create-server-database-azure-cli
-- title: 단계별 자습서
+- title: "단계별 자습서"
   items:
   - type: paragraph
-    text: '방법 배우기:'
+    text: "방법 배우기:"
   - type: list
     style: ordered
     items:
-    - html: '데이터베이스 설계&#58; <a href="/azure/postgresql/tutorial-design-database-using-azure-portal">Azure Portal</a> | <a href="/azure/postgresql/tutorial-design-database-using-azure-cli">Azure CLI</a>'
-    - html: <a href="/azure/app-service-web/app-service-web-tutorial-docker-python-postgresql-app?toc=%2fazure%2fpostgresql%2ftoc.json">Python 및 CLI를 사용하여 웹앱 만들기</a>
-- title: 샘플
+    - html: "데이터베이스 설계&#58; <a href=\"/azure/postgresql/tutorial-design-database-using-azure-portal\">Azure Portal</a> | <a href=\"/azure/postgresql/tutorial-design-database-using-azure-cli\">Azure CLI</a>"
+    - html: "<a href=\"/azure/app-service-web/app-service-web-tutorial-docker-python-postgresql-app?toc=%2fazure%2fpostgresql%2ftoc.json\">Python 및 CLI를 사용하여 웹앱 만들기</a>"
+- title: "샘플"
   items:
   - type: paragraph
-    text: 일반적인 작업을 관리하는 스크립트를 찾습니다.
+    text: "일반적인 작업을 관리하기 위한 스크립트를 찾습니다.\r\n"
   - type: list
     style: unordered
     className: spaced noBullet
     items:
     - html: <a href="/azure/postgresql/sample-scripts-azure-cli">Azure CLI</a>
-- title: 참조
+- title: "참조"
   items:
   - type: list
     style: cards
     className: cardsD
     items:
-    - title: 명령줄
+    - title: "명령줄"
       html: <p><a href="/cli/azure">Azure CLI</a></p>
+    - title: "REST (영문)"
+      html: <p><a href="/rest/api/postgresql">REST API</a></p>

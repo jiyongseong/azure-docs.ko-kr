@@ -1,5 +1,4 @@
-## Azure Portal 사용
-<a id="use-the-azure-portal" class="xliff"></a>
+## <a name="use-the-azure-portal"></a>Azure Portal 사용
 1. 다시 배포하려는 VM을 선택하고 *설정* 블레이드에서 *다시 배포* 단추를 선택합니다. 다음 예제와 같이 '다시 배포' 단추가 포함된 **지원 및 문제 해결** 섹션을 보기 위해 아래로 스크롤해야 할 수 있습니다.
    
     ![Azure VM 블레이드](./media/virtual-machines-common-redeploy-to-new-node/vmoverview.png)

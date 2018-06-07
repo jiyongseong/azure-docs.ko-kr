@@ -15,13 +15,11 @@ ms.tgt_pltfrm:
 ms.workload: infrastructure
 ms.date: 05/24/2017
 ms.author: georgewallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 67ee6932f417194d6d9ee1e18bb716f02cf7605d
 ms.openlocfilehash: 0bca4fb6874bd265f0ae9faeb4219abeb4ffb6d4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="azure-powershell-samples-for-networking"></a>네트워킹에 대한 Azure PowerShell 샘플
 
@@ -39,4 +37,3 @@ ms.lasthandoff: 05/26/2017
 | [VM에서 여러 웹 사이트에 부하 분산](./scripts/load-balancer-windows-powershell-load-balance-multiple-websites-vm.md?toc=%2fazure%2fnetworking%2ftoc.json) | Azure 가용성 집합에 연결되고 Azure 부하 분산 장치를 통해 액세스할 수 있는 2개의 VM을 여러 IP 구성을 사용해서 만듭니다. |
 | [높은 응용 프로그램 가용성을 위해 여러 지역 간에 트래픽 전송](./scripts/traffic-manager-powershell-websites-high-availability.md?toc=%2fazure%2fnetworking%2ftoc.json) |  두 개의 App Service 계획, 두 개의 웹앱, Traffic Manager 프로필 및 두 개의 Traffic Manager 끝점을 만듭니다. |
 | | |
-

@@ -1,3 +1,5 @@
+# [BizTalk Services 설명서](index.md)
+
 # 개요
 ## [버전](biztalk-editions-feature-chart.md)
 
@@ -26,6 +28,7 @@
 ## [Azure 로드맵](https://azure.microsoft.com/roadmap/)
 ## [MSDN 포럼](https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurebiztalksvcs)
 ## [가격 책정](https://azure.microsoft.com/pricing/details/biztalk-services/)
+## [요금 계산기](https://azure.microsoft.com/pricing/calculator/)
 ## [릴리스 정보](biztalk-release-notes.md)
 ## [서비스 업데이트](https://azure.microsoft.com/updates/?product=biztalk-services)
 ## [스택 오버플로](http://stackoverflow.com/questions/tagged/biztalk-services)

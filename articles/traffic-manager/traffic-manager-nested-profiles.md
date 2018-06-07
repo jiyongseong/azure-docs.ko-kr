@@ -14,14 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/22/2017
 ms.author: kumud
-ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
 ms.openlocfilehash: 1ac4ec2775ca9f690f5adf4f939908f8cee3f715
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="nested-traffic-manager-profiles"></a>중첩 트래픽 관리자 프로필
 
 Traffic Manager에는 Traffic Manager가 각 최종 사용자의 트래픽을 수신할 끝점을 선택하는 방법을 제어할 수 있는 다양한 트래픽 라우팅 방법이 포함되어 있습니다. 자세한 내용은 [트래픽 관리자 트래픽 라우팅 방법](traffic-manager-routing-methods.md)을 참조하세요.
@@ -116,4 +114,3 @@ Traffic Manager 프로필에서 모니터링 설정은 단일 프로필 내의 �
 [8]: ./media/traffic-manager-nested-profiles/figure-8.png
 [9]: ./media/traffic-manager-nested-profiles/figure-9.png
 [10]: ./media/traffic-manager-nested-profiles/figure-10.png
-

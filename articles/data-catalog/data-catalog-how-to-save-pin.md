@@ -13,15 +13,13 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: data-catalog
-ms.date: 05/15/2017
+ms.date: 01/18/2018
 ms.author: maroche
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 532ff423ff53567b6ce40c0ea7ec09a689cee1e7
-ms.openlocfilehash: 23f38693939ef0dc893ef77267811b176d3083d1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/06/2017
-
-
+ms.openlocfilehash: cced7b8253a45d990371d8f95fe36b580c2debbf
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="save-searches-and-pin-data-assets-in-azure-data-catalog"></a>Azure Data Catalog에서 검색 저장 및 데이터 자산 고정
 ## <a name="introduction"></a>소개
@@ -86,4 +84,3 @@ Azure Data Catalog는 데이터 원본 검색에 대한 기능을 제공합니�
 
 ## <a name="summary"></a>요약
 Azure Data Catalog는 사용자가 필요한 데이터 원본을 쉽게 검색할 수 있는 기능을 제공하므로 사용자와 다른 조직 멤버가 데이터를 찾는 시간이 줄고 작업하는 시간은 늘어나게 됩니다. 저장된 검색 및 고정된 데이터 자산은 이러한 핵심 기능을 작성하므로 사용자가 반복해서 작업하는 데이터 원본을 쉽게 식별할 수 있습니다.
-

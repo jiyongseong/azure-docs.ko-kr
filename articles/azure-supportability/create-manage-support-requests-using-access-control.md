@@ -1,33 +1,32 @@
 ---
-title: "Azure 역할 기반 액세스 제어(RBAC)로 지원 요청을 만들고 관리하기 위한 액세스 권한 제어 | Microsoft Docs"
-description: "Azure 역할 기반 액세스 제어(RBAC)로 지원 요청을 만들고 관리하기 위한 액세스 권한 제어"
+title: Azure 역할 기반 Access Control(RBAC)로 지원 요청을 만들고 관리하기 위한 액세스 권한 제어 | Microsoft Docs
+description: Azure 역할 기반 Access Control(RBAC)로 지원 요청을 만들고 관리하기 위한 액세스 권한 제어
 author: ganganarayanan
 ms.author: gangan
 ms.date: 1/31/2017
 ms.topic: article
 ms.service: microsoft-docs
 ms.assetid: 58a0ca9d-86d2-469a-9714-3b8320c33cf5
-translationtype: Human Translation
-ms.sourcegitcommit: d408dbd55fa667e150bb42ff0d1e4b3236c438e9
-ms.openlocfilehash: 20ebd324cbf379980b43d255d468673de2b6d950
-
-
+ms.openlocfilehash: c3557d54b9fb3fd0173eec1e327050ac7cc80fc2
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
+# <a name="azure-role-based-access-control-rbac-to-control-access-rights-to-create-and-manage-support-requests"></a>Azure 역할 기반 Access Control(RBAC)로 지원 요청을 만들고 관리하기 위한 액세스 권한 제어
 
-# <a name="azure-role-based-access-control-rbac-to-control-access-rights-to-create-and-manage-support-requests"></a>Azure 역할 기반 액세스 제어(RBAC)로 지원 요청을 만들고 관리하기 위한 액세스 권한 제어
-
-[RBAC(역할 기반 액세스 제어)](https://docs.microsoft.com/azure/active-directory/role-based-access-control-what-is)를 통해 Azure에 대한 세밀한 액세스 관리가 가능합니다.
+[RBAC(역할 기반 Access Control)](https://docs.microsoft.com/azure/role-based-access-control/overview)를 통해 Azure에 대한 세밀한 액세스 관리가 가능합니다.
 Azure Portal([portal.azure.com](https://portal.azure.com))에서 지원 요청 생성은 Azure의 RBAC 모델을 사용하여 지원 요청을 만들고 관리할 수 잇는 사용자를 정의합니다.
 특정 범위(구독, 리소스 그룹 또는 리소스일 수 있음)에서 사용자, 그룹 및 응용 프로그램에 적절한 RBAC 역할을 할당하여 액세스 권한을 부여합니다.
 
-예를 들어 보겠습니다. 구독 범위에서 읽기 권한이 있는 리소스 그룹 소유자는 해당 리소스 그룹의 모든 리소스(예: 웹 사이트, 가상 컴퓨터 및 서브넷)를 관리할 수 있습니다.
-하지만 가상 컴퓨터 리소스에 대해 지원 요청을 생성하려고 하는 경우 다음 오류가 발생합니다.
+예를 들어 보겠습니다. 구독 범위에서 읽기 권한이 있는 리소스 그룹 소유자는 해당 리소스 그룹의 모든 리소스(예: 웹 사이트, 가상 머신 및 서브넷)를 관리할 수 있습니다.
+하지만 가상 머신 리소스에 대해 지원 요청을 생성하려고 하는 경우 다음 오류가 발생합니다.
 
 ![구독 오류](./media/create-manage-support-requests-using-access-control/subscription-error.png)
 
 지원 요청 관리에서는 구독 범위에서 지원 요청을 만들고 관리할 수 있도록 지원 작업 Microsoft.Support/*를 포함하는 역할 또는 쓰기 권한이 필요합니다.
 
-다음 문서에서는 Azure의 RBAC(역할 기반 액세스 제어)를 사용하여 Azure Portal에서 지원 요청을 만들고 관리하는 방법을 설명합니다.
+다음 문서에서는 Azure의 RBAC(역할 기반 Access Control)를 사용하여 Azure Portal에서 지원 요청을 만들고 관리하는 방법을 설명합니다.
 
 ## <a name="getting-started"></a>시작하기
 
@@ -91,7 +90,7 @@ Joe는 이 구독에서 일부 리소스 그룹에 대한 리소스 소유자인
 
     ![새 지원 요청](./media/create-manage-support-requests-using-access-control/new-support-request.png)
 
-8. Joe가 "모든 지원 요청"을 클릭하면 이 구독에 대해 생성된 모든 지원 요청을 확인할 수 있습니다.  ![사례 정보 보기](./media/create-manage-support-requests-using-access-control/case-details-view.png)
+8. Joe가 "모든 지원 요청"을 클릭하면 이 구독에 대해 생성된 모든 지원 요청을 확인할 수 있습니다. ![사례 정보 보기](./media/create-manage-support-requests-using-access-control/case-details-view.png)
 
 ## <a name="remove-support-request-access-in-the-azure-portal"></a>Azure Portal에서 지원 요청 액세스 제거
 
@@ -108,9 +107,3 @@ Joe가 포털에 로그인하고 지원 요청을 만들려고 하면 다음 오
 Joe가 "모든 지원 요청"을 클릭할 때 지원 요청을 볼 수 없습니다.
 
 ![사례 정보 보기-2](./media/create-manage-support-requests-using-access-control/case-details-view-2.png)
-
-
-
-<!--HONumber=Feb17_HO1-->
-
-

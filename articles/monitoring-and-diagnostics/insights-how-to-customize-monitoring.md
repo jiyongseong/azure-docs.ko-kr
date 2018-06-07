@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/06/2017
 ms.author: robb
-ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
 ms.openlocfilehash: 3f9ebb0f5737714dd685f0dcc1ff4b1c0c89528f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="overview-of-metrics-in-microsoft-azure"></a>Microsoft Azure의 메트릭 개요
 모든 Azure 서비스는 서비스의 상태, 성능, 가용성 및 사용량을 모니터링할 수 있게 해주는 주요 메트릭을 추적합니다. Azure 포털에서 이러한 메트릭을 볼 수 있으며, [REST API](https://msdn.microsoft.com/library/azure/dn931930.aspx) 또는 [.NET SDK](http://www.nuget.org/packages/Microsoft.Azure.Management.Monitor)를 사용하여 프로그래밍 방식으로 전체 메트릭 집합에 액세스할 수도 있습니다.
@@ -68,5 +67,4 @@ ms.lasthandoff: 07/21/2017
 * [응용 프로그램 성능을 모니터링](../application-insights/app-insights-azure-web-apps.md) 합니다.
 * [JavaScript 앱 및 웹 페이지용 Application Insights](../application-insights/app-insights-web-track-usage.md) 를 사용하여 웹 페이지를 방문하는 브라우저에 대한 클라이언트 분석을 가져옵니다.
 * [웹 페이지의 가용성 및 응답성을 모니터링](../application-insights/app-insights-monitor-web-app-availability.md) 합니다.
-
 

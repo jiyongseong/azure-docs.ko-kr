@@ -1,41 +1,42 @@
 ---
-title: "Azure AD의 OAuth 2.0 인증 코드 흐름 이해 | Microsoft Docs"
-description: "이 문서에서는 Azure Active Directory 및 OAuth 2.0을 사용하여 테넌트에서 웹 응용 프로그램 및 Web API에 대한 액세스 권한을 부여하기 위해 HTTP 메시지를 사용하는 방법을 설명합니다."
+title: Azure AD의 OAuth 2.0 인증 코드 흐름 이해
+description: 이 문서에서는 Azure Active Directory 및 OAuth 2.0을 사용하여 테넌트에서 웹 응용 프로그램 및 Web API에 대한 액세스 권한을 부여하기 위해 HTTP 메시지를 사용하는 방법을 설명합니다.
 services: active-directory
 documentationcenter: .net
-author: dstrockis
-manager: mbaldwin
-editor: 
-ms.assetid: de3412cb-5fde-4eca-903a-4e9c74db68f2
+author: CelesteDG
+manager: mtillman
+editor: ''
 ms.service: active-directory
+ms.component: develop
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 02/08/2017
-ms.author: dastrock
+ms.date: 04/17/2018
+ms.author: celested
+ms.reviewer: hirsin
 ms.custom: aaddev
+ms.openlocfilehash: 93de62a21ca1d3b8c88715fc9207a583920ac33e
+ms.sourcegitcommit: e14229bb94d61172046335972cfb1a708c8a97a5
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: c6670b97ebc0545dbcb01d2b0cb1e260f99cfed9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/14/2018
+ms.locfileid: "34158407"
 ---
-# OAuth 2.0 및 Azure Active Directory를 사용하여 웹 응용 프로그램에 대한 액세스 권한 부여
-Azure AD(Azure Active Directory)는 OAuth 2.0을 사용하여 사용자는 Azure AD 테넌트에서 웹 응용 프로그램 및 웹 API에 대한 액세스 권한을 부여할 수 있습니다. 이 가이드는 언어 독립적이며 공개 소스 라이브러리를 사용하지 않고 HTTP 메시지를 수신하는 방법을 설명합니다.
+# <a name="authorize-access-to-azure-active-directory-web-applications-using-the-oauth-20-code-grant-flow"></a>OAuth 2.0 코드 권한 부여 흐름을 사용하여 Azure Active Directory 웹 응용 프로그램에 대한 액세스 권한 부여
+Azure AD(Azure Active Directory)는 OAuth 2.0을 사용하여 사용자는 Azure AD 테넌트에서 웹 응용 프로그램 및 웹 API에 대한 액세스 권한을 부여할 수 있습니다. 이 가이드는 언어 독립적이며 [오픈 소스 라이브러리](active-directory-authentication-libraries.md)를 사용하지 않고 HTTP 메시지를 보내고 받는 방법을 설명합니다.
 
 OAuth 2.0 인증 코드 흐름은 [OAuth 2.0 사양의 섹션 4.1](https://tools.ietf.org/html/rfc6749#section-4.1)에서 설명합니다. 웹앱 및 기본적으로 설치된 앱을 포함하여 대부분의 응용 프로그램 형식에서 인증 및 권한 부여를 수행하는 데 사용됩니다.
 
 [!INCLUDE [active-directory-protocols-getting-started](../../../includes/active-directory-protocols-getting-started.md)]
 
-## OAuth 2.0 권한 부여 흐름
+## <a name="oauth-20-authorization-flow"></a>OAuth 2.0 권한 부여 흐름
 높은 수준에서 응용 프로그램에 대한 전체 권한 부여 흐름은 다음과 같습니다.
 
 ![OAuth 인증 코드 흐름](media/active-directory-protocols-oauth-code/active-directory-oauth-code-flow-native-app.png)
 
-## 인증 코드 요청
-인증 코드 흐름은 클라이언트가 사용자를 `/authorize` 끝점으로 보내는 것으로 시작됩니다. 이 요청에서 클라이언트는 사용자로부터 얻어야 하는 사용 권한을 나타냅니다. Azure 클래식 포털의 응용 프로그램 페이지에서 아래쪽 서랍의 **끝점 보기** 단추로 OAuth 2.0 끝점을 가져올 수 있습니다.
+## <a name="request-an-authorization-code"></a>인증 코드 요청
+인증 코드 흐름은 클라이언트가 사용자를 `/authorize` 끝점으로 보내는 것으로 시작됩니다. 이 요청에서 클라이언트는 사용자로부터 얻어야 하는 사용 권한을 나타냅니다. Azure Portal에서 **앱 등록 > 엔드포인트**를 차례로 선택하여 테넌트에 대한 OAuth 2.0 권한 부여 엔드포인트를 가져올 수 있습니다.
 
 ```
 // Line breaks for legibility only
@@ -43,7 +44,7 @@ OAuth 2.0 인증 코드 흐름은 [OAuth 2.0 사양의 섹션 4.1](https://tools
 https://login.microsoftonline.com/{tenant}/oauth2/authorize?
 client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 &response_type=code
-&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
+&redirect_uri=http%3A%2F%2Flocalhost%3A%12345
 &response_mode=query
 &resource=https%3A%2F%2Fservice.contoso.com%2F
 &state=12345
@@ -51,30 +52,33 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 
 | 매개 변수 |  | 설명 |
 | --- | --- | --- |
-| tenant |필수 |요청의 경로에 있는 `{tenant}` 값을 사용하여 응용 프로그램에 로그인할 수 있는 사용자를 제어할 수 있습니다.  허용되는 값은 테넌트 독립 토큰에 대한 테넌트 식별자(예: `8eaef023-2b34-4da1-9baa-8bc8c9d6a490`, `contoso.onmicrosoft.com`, `common`)입니다. |
-| client_id |필수 |Azure AD에 등록할 때 앱에 할당된 응용 프로그램 ID입니다. Azure Portal에서 이러한 값을 확인할 수 있습니다. **Active Directory**를 클릭하고 해당 디렉터리를 클릭하고 응용 프로그램을 선택한 후 **구성**을 클릭합니다. |
+| tenant |필수 |요청의 경로에 있는 `{tenant}` 값을 사용하여 응용 프로그램에 로그인할 수 있는 사용자를 제어할 수 있습니다. 허용되는 값은 테넌트 독립 토큰에 대한 테넌트 식별자(예: `8eaef023-2b34-4da1-9baa-8bc8c9d6a490`, `contoso.onmicrosoft.com`, `common`)입니다. |
+| client_id |필수 |Azure AD에 등록할 때 앱에 할당된 응용 프로그램 ID입니다. Azure Portal에서 이러한 값을 확인할 수 있습니다. 서비스 세로 막대에서 **Azure Active Directory**를 클릭하고, **앱 등록**을 클릭하고, 응용 프로그램을 선택합니다. |
 | response_type |필수 |인증 코드 흐름에 대한 `code`를 포함해야 합니다. |
-| redirect_uri |권장 |앱이 인증 응답을 보내고 받을 수 있는 앱의 redirect_uri입니다.  URL로 인코드되어야 한다는 점을 제외하고 포털에서 등록한 redirect_uri 중 하나와 정확히 일치해야 합니다.  네이티브 및 모바일 앱의 경우 `urn:ietf:wg:oauth:2.0:oob`의 기본값을 사용해야 합니다. |
-| response_mode |권장 |결과 토큰을 앱에 다시 보내는 데 사용해야 하는 방법을 지정합니다.  `query` 또는 `form_post`일 수 있습니다. |
-| state |권장 |토큰 응답에도 반환되는 요청에 포함된 값입니다. 일반적으로 [교차 사이트 요청 위조 공격을 방지](http://tools.ietf.org/html/rfc6749#section-10.12)하기 위해 임의로 생성된 고유 값이 사용됩니다.  상태는 인증 요청이 발생하기 전 앱의 사용자 상태에 대한 정보(예: 사용한 페이지 또는 보기)를 인코드하는 데에도 사용됩니다. |
-| resource |선택 사항 |웹 API (보안 리소스)의 앱 ID URI. Azure Portal에서 Web API의 앱 ID URI을 찾으려면, **Active Directory**을 클릭하고, 디렉터리를 클릭하고, 응용 프로그램을 클릭한 후 **구성**을 클릭합니다. |
+| redirect_uri |권장 |앱이 인증 응답을 보내고 받을 수 있는 앱의 redirect_uri입니다. URL로 인코드되어야 한다는 점을 제외하고 포털에서 등록한 redirect_uri 중 하나와 정확히 일치해야 합니다. 네이티브 및 모바일 앱의 경우 `urn:ietf:wg:oauth:2.0:oob`의 기본값을 사용해야 합니다. |
+| response_mode |권장 |결과 토큰을 앱에 다시 보내는 데 사용해야 하는 방법을 지정합니다. `query` 또는 `form_post`일 수 있습니다. `query`는 리디렉션 URI의 쿼리 문자열 매개 변수로 코드를 제공하지만, `form_post`는 코드가 포함된 POST를 리디렉션 URI에 실행합니다. |
+| state |권장 |토큰 응답에도 반환되는 요청에 포함된 값입니다. 일반적으로 [교차 사이트 요청 위조 공격을 방지](http://tools.ietf.org/html/rfc6749#section-10.12)하기 위해 임의로 생성된 고유 값이 사용됩니다. 상태는 인증 요청이 발생하기 전 앱의 사용자 상태에 대한 정보(예: 사용한 페이지 또는 보기)를 인코드하는 데에도 사용됩니다. |
+| resource | 권장 |대상 웹 API의 앱 ID URI(보안 리소스)입니다. 앱 ID URI을 찾으려면 Azure Portal에서 **Azure Active Directory**, **응용 프로그램 등록**을 차례로 클릭하고, 서비스 응용 프로그램의 **설정** 페이지를 연 다음, **속성**을 클릭합니다. `https://graph.microsoft.com`과 같은 외부 리소스일 수도 있습니다. 이는 권한 부여 또는 토큰 요청 중 하나에서 필요합니다. 인증 프롬프트의 수를 줄이기 위해 사용자의 동의를 받을 수 있도록 하는 권한 부여 요청에 배치합니다. |
+| scope | **무시됨** | v1 Azure AD 응앱의 경우 Azure Portal의 응용 프로그램 **설정**, **필수 권한** 아래에서 범위를 정적으로 구성해야 합니다. |
 | prompt |선택 사항 |필요한 사용자 상호 작용 유형을 나타냅니다.<p> 유효한 값은 다음과 같습니다. <p> *로그인*: 사용자에게 재인증할지 묻는 메시지가 표시되어야 합니다. <p> *동의*: 사용자 동의가 허용되었지만 업데이트해야 합니다. 사용자에게 동의하는지 묻는 메시지가 표시되어야 합니다. <p> *admin_consent*: 관리자에게 조직의 사용자를 대신하여 동의하는지 묻는 메시지가 표시되어야 합니다. |
-| login_hint |선택 사항 |사용자 이름을 미리 알고 있는 경우 사용자를 위해 로그인 페이지의 사용자 이름/이메일 주소 필드를 미리 채우는 데 사용될 수 있습니다.  `preferred_username` 클레임을 사용하여 이전 로그인 작업에서 사용자 이름이 이미 추출된 경우 앱이 재인증 과정에서 이 매개 변수를 종종 사용합니다. |
+| login_hint |선택 사항 |사용자 이름을 미리 알고 있는 경우 사용자를 위해 로그인 페이지의 사용자 이름/이메일 주소 필드를 미리 채우는 데 사용될 수 있습니다. `preferred_username` 클레임을 사용하여 이전 로그인 작업에서 사용자 이름이 이미 추출된 경우 앱이 재인증 과정에서 이 매개 변수를 종종 사용합니다. |
 | domain_hint |선택 사항 |사용자가 로그인하는 데 사용해야 하는 테넌트 또는 도메인에 대한 힌트를 제공합니다. domain_hint의 값은 테넌트에 대해 등록된 도메인입니다. 테넌트가 온-프레미스 디렉터리로 페더레이션된 경우, AAD는 지정된 테넌트 페더레이션 서버로 리디렉션됩니다. |
+| code_challenge_method | 선택 사항    | `code_challenge` 매개 변수에 대한 `code_verifier`를 인코딩하는 데 사용되는 메서드입니다. `plain` 또는 `S256` 중 하나일 수 있습니다. 제외할 경우 `code_challenge`가 포함되면 `code_challenge`가 일반 텍스트로 간주됩니다. Azure AAD v1.0은 `plain` 및 `S256`을 모두 지원합니다. 자세한 내용은 [PKCE RFC](https://tools.ietf.org/html/rfc7636)를 참조하세요. |
+| code_challenge        | 선택 사항    | 네이티브 또는 공용 클라이언트에서 PKCE(Proof Key for Code Exchange)를 통해 권한 부여 코드를 보호하는 데 사용됩니다. `code_challenge_method`가 포함되면 필수입니다. 자세한 내용은 [PKCE RFC](https://tools.ietf.org/html/rfc7636)를 참조하세요. |
 
 > [!NOTE]
 > 사용자가 조직에 소속된 경우 조직 관리자는 사용자 대신 동의 또는 거부하거나 사용자가 동의하도록 허용할 수 있습니다. 사용자에게는 관리자가 허용하는 경우에만 동의하는 옵션이 제공됩니다.
 >
 >
 
-이때 사용자에게 자격 증명을 입력하고 `scope` 쿼리 매개 변수에 표시된 사용 권한에 동의하는지 묻는 메시지가 표시됩니다. 사용자가 인증하고 동의하면 Azure AD는 요청의 `redirect_uri` 주소에서 사용자의 앱에 응답을 보냅니다.
+이 시점에서 사용자는 자신의 자격 증명을 입력하고 Azure Portal에서 앱이 요청한 권한에 동의하도록 요청받습니다. 사용자가 동의를 인증하고 승인하면 Azure AD에서 코드와 함께 요청한 `redirect_uri` 주소로 앱에 응답을 보냅니다.
 
-### 성공적인 응답
+### <a name="successful-response"></a>성공적인 응답
 성공적인 응답은 다음과 같습니다.
 
 ```
 GET  HTTP/1.1 302 Found
-Location: http://localhost/myapp/?code= AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrqqf_ZT_p5uEAEJJ_nZ3UmphWygRNy2C3jJ239gV_DBnZ2syeg95Ki-374WHUP-i3yIhv5i-7KU2CEoPXwURQp6IVYMw-DjAOzn7C3JCu5wpngXmbZKtJdWmiBzHpcO2aICJPu1KvJrDLDP20chJBXzVYJtkfjviLNNW7l7Y3ydcHDsBRKZc3GuMQanmcghXPyoDg41g8XbwPudVh7uCmUponBQpIhbuffFP_tbV8SNzsPoFz9CLpBCZagJVXeqWoYMPe2dSsPiLO9Alf_YIe5zpi-zY4C3aLw5g9at35eZTfNd0gBRpR5ojkMIcZZ6IgAA&session_state=7B29111D-C220-4263-99AB-6F6E135D75EF&state=D79E5777-702E-4260-9A62-37F75FF22CCE
+Location: http://localhost:12345/?code= AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrqqf_ZT_p5uEAEJJ_nZ3UmphWygRNy2C3jJ239gV_DBnZ2syeg95Ki-374WHUP-i3yIhv5i-7KU2CEoPXwURQp6IVYMw-DjAOzn7C3JCu5wpngXmbZKtJdWmiBzHpcO2aICJPu1KvJrDLDP20chJBXzVYJtkfjviLNNW7l7Y3ydcHDsBRKZc3GuMQanmcghXPyoDg41g8XbwPudVh7uCmUponBQpIhbuffFP_tbV8SNzsPoFz9CLpBCZagJVXeqWoYMPe2dSsPiLO9Alf_YIe5zpi-zY4C3aLw5g9at35eZTfNd0gBRpR5ojkMIcZZ6IgAA&session_state=7B29111D-C220-4263-99AB-6F6E135D75EF&state=D79E5777-702E-4260-9A62-37F75FF22CCE
 ```
 
 | 매개 변수 | 설명 |
@@ -84,7 +88,7 @@ Location: http://localhost/myapp/?code= AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLE
 | session_state |현재 사용자 세션을 식별하는 고유 값입니다. 이 값은 GUID이지만 검사 없이 전달되는 불투명 값으로 처리되어야 합니다. |
 | state |요청에 state 매개 변수가 포함되어 있으면 동일한 값이 응답에도 나타나야 합니다. 응답을 사용하기 전에 응용 프로그램에서 요청 및 응답의 상태 값이 동일한지 확인하는 것이 좋습니다. 이 값은 클라이언트에 대한 [교차 사이트 요청 위조(CSRF) 공격](https://tools.ietf.org/html/rfc6749#section-10.12) 을 감지하는 데 도움이 됩니다. |
 
-### 오류 응답
+### <a name="error-response"></a>오류 응답
 응용 프로그램이 적절하게 처리할 수 있도록 `redirect_uri` 에 오류 응답을 보낼 수도 있습니다.
 
 ```
@@ -99,7 +103,7 @@ error=access_denied
 | error_description |오류에 대한 자세한 설명입니다. 이 메시지는 최종 사용자에게 친숙한 내용이 아닙니다. |
 | state |상태 값은 교차 사이트 요청 위조(CSRF) 공격을 방지하기 위해 요청에서 전송하고 응답에서 반환하는 무작위로 생성되고 다시 사용되지 않는 값입니다. |
 
-#### 권한 부여 끝점 오류에 대한 오류 코드
+#### <a name="error-codes-for-authorization-endpoint-errors"></a>권한 부여 끝점 오류에 대한 오류 코드
 다음 테이블은 오류 응답의 `error` 매개 변수에 반환될 수 있는 여러 오류 코드를 설명합니다.
 
 | 오류 코드 | 설명 | 클라이언트 작업 |
@@ -112,7 +116,7 @@ error=access_denied
 | temporarily_unavailable |서버가 일시적으로 사용량이 많아 요청을 처리할 수 없습니다. |요청을 다시 시도하십시오. 클라이언트 응용 프로그램이 일시적 상태 때문에 응답이 지연되었음을 사용자에게 설명할 수 있습니다. |
 | invalid_resource |대상 리소스가 존재하지 않거나 Azure AD에서 해당 리소스를 찾을 수 없거나 올바르게 구성되지 않았기 때문에 잘못되었습니다. |리소스가 존재하는 경우 테넌트에 구성되지 않았음을 나타냅니다. 응용 프로그램이 사용자에게 응용 프로그램을 설치하고 Azure AD에 추가하기 위한 지침이 포함된 메시지를 표시할 수 있습니다. |
 
-## 인증 코드를 사용하여 액세스 토큰 요청
+## <a name="use-the-authorization-code-to-request-an-access-token"></a>인증 코드를 사용하여 액세스 토큰 요청
 인증 코드를 획득하고 사용자가 사용 권한을 부여했으므로 이제 POST 요청을 `/token` 끝점으로 보내 액세스 토큰에 대한 코드를 원하는 리소스에 대한 코드로 교환할 수 있습니다.
 
 ```
@@ -124,7 +128,7 @@ Content-Type: application/x-www-form-urlencoded
 grant_type=authorization_code
 &client_id=2d4d11a2-f814-46a7-890a-274a72a7309e
 &code=AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrqqf_ZT_p5uEAEJJ_nZ3UmphWygRNy2C3jJ239gV_DBnZ2syeg95Ki-374WHUP-i3yIhv5i-7KU2CEoPXwURQp6IVYMw-DjAOzn7C3JCu5wpngXmbZKtJdWmiBzHpcO2aICJPu1KvJrDLDP20chJBXzVYJtkfjviLNNW7l7Y3ydcHDsBRKZc3GuMQanmcghXPyoDg41g8XbwPudVh7uCmUponBQpIhbuffFP_tbV8SNzsPoFz9CLpBCZagJVXeqWoYMPe2dSsPiLO9Alf_YIe5zpi-zY4C3aLw5g9at35eZTfNd0gBRpR5ojkMIcZZ6IgAA
-&redirect_uri=https%3A%2F%2Flocalhost%2Fmyapp%2F
+&redirect_uri=https%3A%2F%2Flocalhost%3A12345
 &resource=https%3A%2F%2Fservice.contoso.com%2F
 &client_secret=p@ssw0rd
 
@@ -133,17 +137,18 @@ grant_type=authorization_code
 
 | 매개 변수 |  | 설명 |
 | --- | --- | --- |
-| tenant |필수 |요청의 경로에 있는 `{tenant}` 값을 사용하여 응용 프로그램에 로그인할 수 있는 사용자를 제어할 수 있습니다.  허용되는 값은 테넌트 독립 토큰에 대한 테넌트 식별자(예: `8eaef023-2b34-4da1-9baa-8bc8c9d6a490`, `contoso.onmicrosoft.com`, `common`)입니다. |
-| client_id |필수 |Azure AD에 등록할 때 앱에 할당된 응용 프로그램 ID입니다. Azure 클래식 포털에서 이를 확인할 수 있습니다. **Active Directory**를 클릭하고 해당 디렉터리를 클릭하고 응용 프로그램을 선택한 후 **구성**을 클릭합니다. |
+| tenant |필수 |요청의 경로에 있는 `{tenant}` 값을 사용하여 응용 프로그램에 로그인할 수 있는 사용자를 제어할 수 있습니다. 허용되는 값은 테넌트 독립 토큰에 대한 테넌트 식별자(예: `8eaef023-2b34-4da1-9baa-8bc8c9d6a490`, `contoso.onmicrosoft.com`, `common`)입니다. |
+| client_id |필수 |Azure AD에 등록할 때 앱에 할당된 응용 프로그램 ID입니다. Azure Portal에서 이러한 값을 확인할 수 있습니다. 응용 프로그램 ID가 앱 등록의 설정에 표시됩니다. |
 | grant_type |필수 |인증 코드 흐름에 대한 `authorization_code` 여야 합니다. |
 | 코드 |필수 |이전 섹션에서 획득한 `authorization_code` 입니다. |
 | redirect_uri |필수 |`authorization_code`를 획득하는 데 사용된 동일한 `redirect_uri` 값입니다. |
-| client_secret |웹앱에 필요 |앱에 대한 앱 등록 포털에서 만든 응용 프로그램 암호입니다.  장치에 client_secret을 안정적으로 저장할 수 없으므로 네이티브 앱에서는 사용하면 안 됩니다.  서버 쪽에서 `client_secret` 을 안전하게 저장할 수 있는 웹앱과 Web API에 필요합니다. |
-| resource |그렇지 않으면 선택적 인증 코드 요청에 지정 된 경우 필수 |웹 API (보안 리소스)의 앱 ID URI. |
+| client_secret |웹앱에 필요하지만 공용 클라이언트에 허용되지 않습니다. |**키** 아래에 있는 앱에 대해 Azure Portal에서 만든 응용 프로그램 비밀입니다. 장치에 client_secret을 안정적으로 저장할 수 없으므로 네이티브 앱(공용 클라이언트)에서는 사용할 수 없습니다. 서버 쪽에서 `client_secret`을 안전하게 저장할 수 있는 웹앱 및 Web API(모두 기밀 클라이언트)에 필요합니다. |
+| resource | 권장 |대상 웹 API의 앱 ID URI(보안 리소스)입니다. 앱 ID URI을 찾으려면 Azure Portal에서 **Azure Active Directory**, **응용 프로그램 등록**을 차례로 클릭하고, 서비스 응용 프로그램의 **설정** 페이지를 연 다음, **속성**을 클릭합니다. `https://graph.microsoft.com`과 같은 외부 리소스일 수도 있습니다. 이는 권한 부여 또는 토큰 요청 중 하나에서 필요합니다. 인증 프롬프트의 수를 줄이기 위해 사용자의 동의를 받을 수 있도록 하는 권한 부여 요청에 배치합니다. 권한 부여 요청과 토큰 요청 모두에서 리소스의 매개 변수가 일치해야 합니다. | 
+| code_verifier | 선택 사항 | authorization_code를 얻는 데 사용된 동일한 code_verifier입니다. 인증 코드 부여 요청에 PKCE가 사용된 경우에는 필수입니다. 자세한 내용은 [PKCE RFC](https://tools.ietf.org/html/rfc7636)를 참조하세요.   |
 
-Azure 관리 포털에서 앱 ID URI을 찾으려면, **Active Directory**을 클릭하고, 디렉터리를 클릭하고, 응용 프로그램을 클릭한 후 **구성**을 클릭합니다.
+앱 ID URI을 찾으려면 Azure Portal에서 **Azure Active Directory**, **응용 프로그램 등록**을 차례로 클릭하고, 서비스 응용 프로그램의 **설정** 페이지를 연 다음, **속성**을 클릭합니다.
 
-### 성공적인 응답
+### <a name="successful-response"></a>성공적인 응답
 Azure AD는 성공적인 응답에 액세스 토큰을 반환합니다. 클라이언트 응용 프로그램에서의 네트워크 호출 및 그와 연결된 대기 시간을 최소화하려면 클라이언트 응용 프로그램이 OAuth 2.0 응답에 지정된 토큰 수명에 대한 액세스 토큰을 캐시해야 합니다. 토큰 수명을 결정하려면 `expires_in` 또는 `expires_on` 매개 변수 값을 사용합니다.
 
 웹 API 리소스가 `invalid_token` 오류 코드를 반환하는 경우, 이는 리소스가 토큰이 만료되었다고 결정했음을 나타낼 수 있습니다. 클라이언트 및 리소스 시계 시간이 서로 다른 경우("시간차"라 함) 리소스는 토큰을 클라이언트 캐시에서 지우기 전에 토큰이 만료된 것으로 인식할 수 있습니다. 이 문제가 발생하면 계산된 토큰 수명이 아직 남아 있더라도 토큰을 캐시에서 지웁니다.
@@ -152,7 +157,7 @@ Azure AD는 성공적인 응답에 액세스 토큰을 반환합니다. 클라�
 
 ```
 {
-  "access_token": " eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1THdqcHdBSk9NOW4tQSJ9.eyJhdWQiOiJodHRwczovL3NlcnZpY2UuY29udG9zby5jb20vIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvN2ZlODE0NDctZGE1Ny00Mzg1LWJlY2ItNmRlNTdmMjE0NzdlLyIsImlhdCI6MTM4ODQ0MDg2MywibmJmIjoxMzg4NDQwODYzLCJleHAiOjEzODg0NDQ3NjMsInZlciI6IjEuMCIsInRpZCI6IjdmZTgxNDQ3LWRhNTctNDM4NS1iZWNiLTZkZTU3ZjIxNDc3ZSIsIm9pZCI6IjY4Mzg5YWUyLTYyZmEtNGIxOC05MWZlLTUzZGQxMDlkNzRmNSIsInVwbiI6ImZyYW5rbUBjb250b3NvLmNvbSIsInVuaXF1ZV9uYW1lIjoiZnJhbmttQGNvbnRvc28uY29tIiwic3ViIjoiZGVOcUlqOUlPRTlQV0pXYkhzZnRYdDJFYWJQVmwwQ2o4UUFtZWZSTFY5OCIsImZhbWlseV9uYW1lIjoiTWlsbGVyIiwiZ2l2ZW5fbmFtZSI6IkZyYW5rIiwiYXBwaWQiOiIyZDRkMTFhMi1mODE0LTQ2YTctODkwYS0yNzRhNzJhNzMwOWUiLCJhcHBpZGFjciI6IjAiLCJzY3AiOiJ1c2VyX2ltcGVyc29uYXRpb24iLCJhY3IiOiIxIn0.JZw8jC0gptZxVC-7l5sFkdnJgP3_tRjeQEPgUn28XctVe3QqmheLZw7QVZDPCyGycDWBaqy7FLpSekET_BftDkewRhyHk9FW_KeEz0ch2c3i08NGNDbr6XYGVayNuSesYk5Aw_p3ICRlUV1bqEwk-Jkzs9EEkQg4hbefqJS6yS1HoV_2EsEhpd_wCQpxK89WPs3hLYZETRJtG5kvCCEOvSHXmDE6eTHGTnEgsIk--UlPe275Dvou4gEAwLofhLDQbMSjnlV5VLsjimNBVcSRFShoxmQwBJR_b2011Y5IuD6St5zPnzruBbZYkGNurQK63TJPWmRd3mbJsGM0mf3CUQ",
+  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1THdqcHdBSk9NOW4tQSJ9.eyJhdWQiOiJodHRwczovL3NlcnZpY2UuY29udG9zby5jb20vIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvN2ZlODE0NDctZGE1Ny00Mzg1LWJlY2ItNmRlNTdmMjE0NzdlLyIsImlhdCI6MTM4ODQ0MDg2MywibmJmIjoxMzg4NDQwODYzLCJleHAiOjEzODg0NDQ3NjMsInZlciI6IjEuMCIsInRpZCI6IjdmZTgxNDQ3LWRhNTctNDM4NS1iZWNiLTZkZTU3ZjIxNDc3ZSIsIm9pZCI6IjY4Mzg5YWUyLTYyZmEtNGIxOC05MWZlLTUzZGQxMDlkNzRmNSIsInVwbiI6ImZyYW5rbUBjb250b3NvLmNvbSIsInVuaXF1ZV9uYW1lIjoiZnJhbmttQGNvbnRvc28uY29tIiwic3ViIjoiZGVOcUlqOUlPRTlQV0pXYkhzZnRYdDJFYWJQVmwwQ2o4UUFtZWZSTFY5OCIsImZhbWlseV9uYW1lIjoiTWlsbGVyIiwiZ2l2ZW5fbmFtZSI6IkZyYW5rIiwiYXBwaWQiOiIyZDRkMTFhMi1mODE0LTQ2YTctODkwYS0yNzRhNzJhNzMwOWUiLCJhcHBpZGFjciI6IjAiLCJzY3AiOiJ1c2VyX2ltcGVyc29uYXRpb24iLCJhY3IiOiIxIn0.JZw8jC0gptZxVC-7l5sFkdnJgP3_tRjeQEPgUn28XctVe3QqmheLZw7QVZDPCyGycDWBaqy7FLpSekET_BftDkewRhyHk9FW_KeEz0ch2c3i08NGNDbr6XYGVayNuSesYk5Aw_p3ICRlUV1bqEwk-Jkzs9EEkQg4hbefqJS6yS1HoV_2EsEhpd_wCQpxK89WPs3hLYZETRJtG5kvCCEOvSHXmDE6eTHGTnEgsIk--UlPe275Dvou4gEAwLofhLDQbMSjnlV5VLsjimNBVcSRFShoxmQwBJR_b2011Y5IuD6St5zPnzruBbZYkGNurQK63TJPWmRd3mbJsGM0mf3CUQ",
   "token_type": "Bearer",
   "expires_in": "3600",
   "expires_on": "1388444763",
@@ -166,16 +171,16 @@ Azure AD는 성공적인 응답에 액세스 토큰을 반환합니다. 클라�
 
 | 매개 변수 | 설명 |
 | --- | --- |
-| access_token |요청된 액세스 토큰입니다. 앱은 이 토큰을 사용하여 Web API와 같은 보안 리소스에 인증할 수 있습니다. |
+| access_token |서명된 JWT(JSON 웹 토큰)로 나타낸 요청된 액세스 토큰입니다. 앱은 이 토큰을 사용하여 Web API와 같은 보안 리소스에 인증할 수 있습니다. |
 | token_type |토큰 유형 값을 나타냅니다. Azure AD는 전달자 유형만 지원합니다. 전달자 토큰에 대한 자세한 내용은 [OAuth 2.0 권한 부여 프레임워크: 전달자 토큰 사용(RFC 6750)](http://www.rfc-editor.org/rfc/rfc6750.txt) |
 | expires_in |액세스 토큰이 유효한 기간(초)입니다. |
 | expires_on |액세스 토큰이 만료되는 시간입니다. 날짜는 1970-01-01T0:0:0Z UTC부터 만료 시간까지 기간(초)으로 표시됩니다. 이 값은 캐시된 토큰의 수명을 결정하는 데 사용됩니다. |
 | resource |웹 API (보안 리소스)의 앱 ID URI. |
 | scope |클라이언트 응용 프로그램에 부여된 권한을 가장합니다. 기본 권한은 `user_impersonation`입니다. 보안 리소스의 소유자는 Azure AD에서 추가 값을 등록할 수 있습니다. |
-| refresh_token |OAuth 2.0 새로 고침 토큰입니다. 앱은 현재 액세스 토큰이 만료된 후 이 토큰을 사용하여 추가 액세스 토큰을 획득할 수 있습니다.  새로 고침 토큰은 수명이 길며, 오랜 시간 동안 리소스에 대한 액세스를 유지하는 데 사용할 수 있습니다. |
+| refresh_token |OAuth 2.0 새로 고침 토큰입니다. 앱은 현재 액세스 토큰이 만료된 후 이 토큰을 사용하여 추가 액세스 토큰을 획득할 수 있습니다. 새로 고침 토큰은 수명이 길며, 오랜 시간 동안 리소스에 대한 액세스를 유지하는 데 사용할 수 있습니다. |
 | id_token |서명되지 않은 JWT(JSON 웹 토큰)입니다. 앱은 이 토큰의 세그먼트를 base64Url로 디코드하여 로그인한 사용자에 대한 정보를 요청할 수 있습니다. 앱은 값을 캐시하고 표시할 수 있지만 권한 부여 또는 보안 경계에 대해 의존해서는 안 됩니다. |
 
-### JWT 토큰 클레임
+### <a name="jwt-token-claims"></a>JWT 토큰 클레임
 `id_token` 매개 변수 값의 JWT 토큰은 다음 클레임으로 디코딩될 수 있습니다.
 
 ```
@@ -207,7 +212,7 @@ JSON 웹 토큰에 대한 자세한 내용은 [JWT IETF 초안 사양](http://go
 | 클레임 유형 | 설명 |
 | --- | --- |
 | aud |토큰의 대상입니다. 토큰이 클라이언트 응용 프로그램에 발급된 경우 대상 그룹은 클라이언트의 `client_id` 입니다. |
-| exp |만료 시간입니다. 토큰이 만료되는 시간입니다. 토큰이 유효하려면 현재 날짜/시간이 `exp` 값보다 작거나 같아야 합니다. 시간은 1970년 1월 1일(1970-01-01T0:0:0Z) UTC부터 토큰이 발급된 시간까지 기간(초)으로 표시됩니다. |
+| exp |만료 시간입니다. 토큰이 만료되는 시간입니다. 토큰이 유효하려면 현재 날짜/시간이 `exp` 값보다 작거나 같아야 합니다. 시간은 1970년 1월 1일(1970-01-01T0:0:0Z) UTC부터 토큰의 유효 기간이 만료될 때까지의 시간(초)으로 표시됩니다.|
 | family_name |사용자의 성입니다. 응용 프로그램이 이 값을 표시할 수 있습니다. |
 | given_name |사용자의 이름입니다. 응용 프로그램이 이 값을 표시할 수 있습니다. |
 | iat |발급 시간입니다. JWT가 발급된 시간입니다. 시간은 1970년 1월 1일(1970-01-01T0:0:0Z) UTC부터 토큰이 발급된 시간까지 기간(초)으로 표시됩니다. |
@@ -220,7 +225,7 @@ JSON 웹 토큰에 대한 자세한 내용은 [JWT IETF 초안 사양](http://go
 | upn |사용자의 사용자 계정 이름입니다. |
 | ver |버전. JWT 토큰의 버전으로 일반적으로 1.0입니다. |
 
-### 오류 응답
+### <a name="error-response"></a>오류 응답
 토큰 발급 끝점 오류는 클라이언트가 토큰 발급 끝점을 직접 호출하기 때문에 발생한 HTTP 오류 코드입니다. Azure AD 발급 끝점은 HTTP 상태 코드 외에 오류를 설명하는 개체가 포함된 JSON 문서도 반환합니다.
 
 샘플 오류 응답은 다음과 같습니다.
@@ -247,7 +252,7 @@ JSON 웹 토큰에 대한 자세한 내용은 [JWT IETF 초안 사양](http://go
 | trace_id |진단에 도움이 될 수 있는 요청에 대한 고유 식별자입니다. |
 | correlation_id |여러 구성 요소에서 진단에 도움이 될 수 있는 요청에 대한 고유 식별자입니다. |
 
-#### HTTP 상태 코드
+#### <a name="http-status-codes"></a>HTTP 상태 코드
 다음 테이블은 토큰 발급 끝점이 반환하는 HTTP 상태 코드를 나열합니다. 오류 코드가 응답을 설명하기에 충분한 경우도 있지만 오류의 경우 함께 제공되는 JSON 문서를 구문 분석하여 오류 코드를 검사해야 합니다.
 
 | HTTP 코드 | 설명 |
@@ -257,7 +262,7 @@ JSON 웹 토큰에 대한 자세한 내용은 [JWT IETF 초안 사양](http://go
 | 403 |권한 부여에 실패했습니다. 예를 들어 사용자가 리소스에 액세스할 수 있는 사용 권한이 없습니다. |
 | 500 |서비스에서 내부 오류가 발생했습니다. 요청을 다시 시도하십시오. |
 
-#### 토큰 끝점 오류에 대한 오류 코드
+#### <a name="error-codes-for-token-endpoint-errors"></a>토큰 끝점 오류에 대한 오류 코드
 | 오류 코드 | 설명 | 클라이언트 작업 |
 | --- | --- | --- |
 | invalid_request |프로토콜 오류(예: 필수 매개 변수 누락). |요청을 수정하여 다시 제출 |
@@ -266,20 +271,20 @@ JSON 웹 토큰에 대한 자세한 내용은 [JWT IETF 초안 사양](http://go
 | invalid_client |클라이언트 인증에 실패했습니다. |클라이언트 자격 증명이 잘못되었습니다. 해결하려면 응용 프로그램 관리자가 자격 증명을 업데이트합니다. |
 | unsupported_grant_type |권한 부여 서버가 해당 권한 부여 유형을 지원하지 않습니다. |요청에서 권한 부여 유형을 변경하십시오. 이 유형의 오류는 개발 중에만 발생하며 초기 테스트 중에 검색됩니다. |
 | invalid_resource |대상 리소스가 존재하지 않거나 Azure AD에서 해당 리소스를 찾을 수 없거나 올바르게 구성되지 않았기 때문에 잘못되었습니다. |리소스가 존재하는 경우 테넌트에 구성되지 않았음을 나타냅니다. 응용 프로그램이 사용자에게 응용 프로그램을 설치하고 Azure AD에 추가하기 위한 지침이 포함된 메시지를 표시할 수 있습니다. |
-| interaction_required |요청을 위해 사용자 상호 작용이 필요합니다. 예를 들어 추가 인증 단계가 필요합니다. |동일한 리소스를 사용하여 요청을 다시 시도하십시오. |
+| interaction_required |요청을 위해 사용자 상호 작용이 필요합니다. 예를 들어 추가 인증 단계가 필요합니다. | 동일한 리소스에 대해 비대화형 요청 대신, 대화형 권한 부여 요청을 다시 시도해 보세요. |
 | temporarily_unavailable |서버가 일시적으로 사용량이 많아 요청을 처리할 수 없습니다. |요청을 다시 시도하십시오. 클라이언트 응용 프로그램이 일시적 상태 때문에 응답이 지연되었음을 사용자에게 설명할 수 있습니다. |
 
-## 리소스에 액세스하는 데 액세스 토큰 사용
+## <a name="use-the-access-token-to-access-the-resource"></a>리소스에 액세스하는 데 액세스 토큰 사용
 `access_token`을(를) 성공적으로 획득했으므로 이제 `Authorization` 헤더에 포함하여 Web API에 대한 요청에 토큰을 사용할 수 있습니다. [RFC 6750](http://www.rfc-editor.org/rfc/rfc6750.txt) 사양에서는 HTTP 요청에 전달자 토큰을 사용하여 보호된 리소스에 액세스하는 방법을 설명합니다.
 
-### 샘플 요청
+### <a name="sample-request"></a>샘플 요청
 ```
 GET /data HTTP/1.1
 Host: service.contoso.com
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1THdqcHdBSk9NOW4tQSJ9.eyJhdWQiOiJodHRwczovL3NlcnZpY2UuY29udG9zby5jb20vIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvN2ZlODE0NDctZGE1Ny00Mzg1LWJlY2ItNmRlNTdmMjE0NzdlLyIsImlhdCI6MTM4ODQ0MDg2MywibmJmIjoxMzg4NDQwODYzLCJleHAiOjEzODg0NDQ3NjMsInZlciI6IjEuMCIsInRpZCI6IjdmZTgxNDQ3LWRhNTctNDM4NS1iZWNiLTZkZTU3ZjIxNDc3ZSIsIm9pZCI6IjY4Mzg5YWUyLTYyZmEtNGIxOC05MWZlLTUzZGQxMDlkNzRmNSIsInVwbiI6ImZyYW5rbUBjb250b3NvLmNvbSIsInVuaXF1ZV9uYW1lIjoiZnJhbmttQGNvbnRvc28uY29tIiwic3ViIjoiZGVOcUlqOUlPRTlQV0pXYkhzZnRYdDJFYWJQVmwwQ2o4UUFtZWZSTFY5OCIsImZhbWlseV9uYW1lIjoiTWlsbGVyIiwiZ2l2ZW5fbmFtZSI6IkZyYW5rIiwiYXBwaWQiOiIyZDRkMTFhMi1mODE0LTQ2YTctODkwYS0yNzRhNzJhNzMwOWUiLCJhcHBpZGFjciI6IjAiLCJzY3AiOiJ1c2VyX2ltcGVyc29uYXRpb24iLCJhY3IiOiIxIn0.JZw8jC0gptZxVC-7l5sFkdnJgP3_tRjeQEPgUn28XctVe3QqmheLZw7QVZDPCyGycDWBaqy7FLpSekET_BftDkewRhyHk9FW_KeEz0ch2c3i08NGNDbr6XYGVayNuSesYk5Aw_p3ICRlUV1bqEwk-Jkzs9EEkQg4hbefqJS6yS1HoV_2EsEhpd_wCQpxK89WPs3hLYZETRJtG5kvCCEOvSHXmDE6eTHGTnEgsIk--UlPe275Dvou4gEAwLofhLDQbMSjnlV5VLsjimNBVcSRFShoxmQwBJR_b2011Y5IuD6St5zPnzruBbZYkGNurQK63TJPWmRd3mbJsGM0mf3CUQ
 ```
 
-### 오류 응답
+### <a name="error-response"></a>오류 응답
 RFC 6750 문제 HTTP 상태 코드를 구현하는 보안된 리소스입니다. 요청이 인증 자격 증명을 포함하지 않거나 토큰이 누락된 경우 응답에 `WWW-Authenticate` 헤더가 포함됩니다. 요청이 실패한 경우 리소스 서버가 HTTP 상태 코드 및 오류 코드로 응답합니다.
 
 다음은 클라이언트 요청에 전달자 토큰이 포함되지 않은 경우 성공하지 못한 응답의 예입니다.
@@ -289,15 +294,15 @@ HTTP/1.1 401 Unauthorized
 WWW-Authenticate: Bearer authorization_uri="https://login.microsoftonline.com/contoso.com/oauth2/authorize",  error="invalid_token",  error_description="The access token is missing.",
 ```
 
-#### 오류 매개 변수
+#### <a name="error-parameters"></a>오류 매개 변수
 | 매개 변수 | 설명 |
 | --- | --- |
 | authorization_uri |권한 부여 서버의 URI(실제 끝점)입니다. 이 값은 검색 끝점에서 서버에 관한 자세한 정보를 가져오기 위한 조회 키로도 사용됩니다. <p><p> 클라이언트는 권한 부여 서버가 신뢰할 수 있는지 확인해야 합니다. 리소스가 Azure AD에 의해 보호되는 경우 이 값은 URL이 https://login.microsoftonline.com 또는 Azure AD가 지원하는 다른 호스트 이름으로 시작하는지 확인하기에 충분합니다. 테넌트별 리소스는 언제나 테넌트별 권한 부여 URI를 반환해야 합니다. |
 | error |[OAuth 2.0 권한 부여 프레임워크](http://tools.ietf.org/html/rfc6749)의 섹션 5.2에 정의된 오류 코드 값입니다. |
 | error_description |오류에 대한 자세한 설명입니다. 이 메시지는 최종 사용자에게 친숙한 내용이 아닙니다. |
-| resource_id |리소스의 고유 ID를 반환합니다. 클라이언트 응용 프로그램은 리소스에 대한 토큰을 요청할 때 이 ID를 `resource` 매개 변수의 값으로 사용할 수 있습니다. <p><p> 클라이언트 응용 프로그램이 이 값을 확인하는 것이 중요합니다. 그렇지 않으면 악성 서비스가 **권한 상승** 공격을 유도할 수 있습니다. <p><p> 공격을 방지하기 위해 권장되는 전략은 `resource_id`이(가) 액세스 중인 웹 API URL의 기본과 일치하는지 확인하는 것입니다. 예를 들어 https://service.contoso.com/data에 액세스하는 경우 `resource_id`은(는) htttps://service.contoso.com/이 될 수 있습니다. 클라이언트 응용 프로그램은 ID를 확인하는 신뢰할 수 있는 대체 방법이 있지 않은 한 기본 URL로 시작하지 않는 `resource_id` 를 거부해야 합니다. |
+| resource_id |리소스의 고유 ID를 반환합니다. 클라이언트 응용 프로그램은 리소스에 대한 토큰을 요청할 때 이 ID를 `resource` 매개 변수의 값으로 사용할 수 있습니다. <p><p> 클라이언트 응용 프로그램이 이 값을 확인하는 것이 중요합니다. 그렇지 않으면 악성 서비스가 **권한 상승** 공격을 유도할 수 있습니다. <p><p> 공격을 방지하기 위해 권장되는 전략은 `resource_id`이(가) 액세스 중인 웹 API URL의 기본과 일치하는지 확인하는 것입니다. 예를 들어 https://service.contoso.com/data에 액세스하는 경우 `resource_id`는 htttps://service.contoso.com/일 수 있습니다. 클라이언트 응용 프로그램은 ID를 확인하는 신뢰할 수 있는 대체 방법이 있지 않은 한 기본 URL로 시작하지 않는 `resource_id` 를 거부해야 합니다. |
 
-#### 전달자 체계 오류 코드
+#### <a name="bearer-scheme-error-codes"></a>전달자 체계 오류 코드
 RFC 6750 사양은 응답에 WWW-authenticate 헤더와 전달자 체계를 사용하는 리소스에 대한 다음과 같은 오류를 정의합니다.
 
 | HTTP 상태 코드 | 오류 코드 | 설명 | 클라이언트 작업 |
@@ -307,7 +312,7 @@ RFC 6750 사양은 응답에 WWW-authenticate 헤더와 전달자 체계를 사�
 | 403 |insufficient_scope |액세스 토큰에 리소스에 액세스하는 데 필요한 가장 권한이 포함되어 있지 않습니다. |권한 부여 끝점에 새 권한 부여 요청을 보냅니다. 응답에 범위 매개 변수가 포함된 경우 리소스 요청에 해당 범위 값을 사용합니다. |
 | 403 |insufficient_access |토큰의 제목에 리소스에 액세스하는 데 필요한 사용 권한이 업습니다. |사용자에게 다른 계정을 사용하거나 지정된 리소스에 대한 사용 권한을 요청하라는 메시지를 표시합니다. |
 
-## 액세스 토큰 새로 고침
+## <a name="refreshing-the-access-tokens"></a>액세스 토큰 새로 고침
 액세스 토큰은 수명이 짧으며, 만료되면 새로 고쳐야 리소스에 계속 액세스할 수 있습니다. 다른 `POST` 요청을 `/token` 끝점에 제출하여 `access_token`을(를) 새로 고칠 수 있지만 이번에는 `code` 대신 `refresh_token`을(를) 제공해야 합니다.
 
 새로 고침 토큰에는 지정된 수명이 없습니다. 일반적으로 새로 고침 토큰의 수명은 비교적 깁니다. 그러나 새로 고침 토큰이 만료되거나 해지되거나 원하는 작업을 위한 충분한 권한이 없는 경우가 있습니다. 응용 프로그램은 토큰 발급 끝점에서 반환하는 오류를 예상하고 정확히 처리해야 합니다.
@@ -329,17 +334,8 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 &resource=https%3A%2F%2Fservice.contoso.com%2F
 &client_secret=JqQX2PNo9bpM0uEihUPzyrh    // NOTE: Only required for web apps
 ```
-| 매개 변수 | 설명 |
-| --- | --- |
-| access_token |요청된 새 액세스 토큰입니다. |
-| expires_in |토큰의 남은 수명(초)입니다. 일반적인 값은 3600(한 시간)입니다. |
-| expires_on |토큰이 만료되는 날짜 및 시간입니다. 날짜는 1970-01-01T0:0:0Z UTC부터 만료 시간까지 기간(초)으로 표시됩니다. |
-| refresh_token |이 응답에 있는 토큰이 만료될 때 새 액세스 토큰을 요청하는 데 사용할 수 있는 새 OAuth 2.0 refresh_token입니다. |
-| resource |액세스하는 데 액세스 토큰을 사용할 수 있는 보안 리소스를 식별합니다. |
-| scope |네이티브 클라이언트 응용 프로그램에 부여된 권한을 가장합니다. 기본 권한은 **user_impersonation**입니다. 대상 리소스의 소유자는 Azure AD에서 대체 값을 등록할 수 있습니다. |
-| token_type |토큰 형식입니다. 현재 지원되는 유일한 값은 **bearer**입니다. |
 
-### 성공적인 응답
+### <a name="successful-response"></a>성공적인 응답
 성공적인 토큰 응답은 다음과 같습니다.
 
 ```
@@ -352,14 +348,23 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
   "refresh_token": "AwABAAAAv YNqmf9SoAylD1PycGCB90xzZeEDg6oBzOIPfYsbDWNf621pKo2Q3GGTHYlmNfwoc-OlrxK69hkha2CF12azM_NYhgO668yfcUl4VBbiSHZyd1NVZG5QTIOcbObu3qnLutbpadZGAxqjIbMkQ2bQS09fTrjMBtDE3D6kSMIodpCecoANon9b0LATkpitimVCrl PM1KaPlrEqdFSBzjqfTGAMxZGUTdM0t4B4rTfgV29ghDOHRc2B-C_hHeJaJICqjZ3mY2b_YNqmf9SoAylD1PycGCB90xzZeEDg6oBzOIPfYsbDWNf621pKo2Q3GGTHYlmNfwoc-OlrxK69hkha2CF12azM_NYhgO668yfmVCrl-NyfN3oyG4ZCWu18M9-vEou4Sq-1oMDzExgAf61noxzkNiaTecM-Ve5cq6wHqYQjfV9DOz4lbceuYCAA"
 }
 ```
+| 매개 변수 | 설명 |
+| --- | --- |
+| token_type |토큰 형식입니다. 현재 지원되는 유일한 값은 **bearer**입니다. |
+| expires_in |토큰의 남은 수명(초)입니다. 일반적인 값은 3600(한 시간)입니다. |
+| expires_on |토큰이 만료되는 날짜 및 시간입니다. 날짜는 1970-01-01T0:0:0Z UTC부터 만료 시간까지 기간(초)으로 표시됩니다. |
+| resource |액세스하는 데 액세스 토큰을 사용할 수 있는 보안 리소스를 식별합니다. |
+| scope |네이티브 클라이언트 응용 프로그램에 부여된 권한을 가장합니다. 기본 권한은 **user_impersonation**입니다. 대상 리소스의 소유자는 Azure AD에서 대체 값을 등록할 수 있습니다. |
+| access_token |요청된 새 액세스 토큰입니다. |
+| refresh_token |이 응답에 있는 토큰이 만료될 때 새 액세스 토큰을 요청하는 데 사용할 수 있는 새 OAuth 2.0 refresh_token입니다. |
 
-### 오류 응답
+### <a name="error-response"></a>오류 응답
 샘플 오류 응답은 다음과 같습니다.
 
 ```
 {
   "error": "invalid_resource",
-  "error_description": "AADSTS50001: The application named https://foo.microsoft.com/mail.read was not found in the tenant named 295e01fc-0c56-4ac3-ac57-5d0ed568f872.  This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant.  You might have sent your authentication request to the wrong tenant.\r\nTrace ID: ef1f89f6-a14f-49de-9868-61bd4072f0a9\r\nCorrelation ID: b6908274-2c58-4e91-aea9-1f6b9c99347c\r\nTimestamp: 2016-04-11 18:59:01Z",
+  "error_description": "AADSTS50001: The application named https://foo.microsoft.com/mail.read was not found in the tenant named 295e01fc-0c56-4ac3-ac57-5d0ed568f872. This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You might have sent your authentication request to the wrong tenant.\r\nTrace ID: ef1f89f6-a14f-49de-9868-61bd4072f0a9\r\nCorrelation ID: b6908274-2c58-4e91-aea9-1f6b9c99347c\r\nTimestamp: 2016-04-11 18:59:01Z",
   "error_codes": [
     50001
   ],
@@ -379,4 +384,3 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 | correlation_id |여러 구성 요소에서 진단에 도움이 될 수 있는 요청에 대한 고유 식별자입니다. |
 
 오류 코드 및 권장되는 클라이언트 작업에 대한 설명은 [토큰 끝점 오류에 대한 오류 코드](#error-codes-for-token-endpoint-errors)를 참조하세요.
-

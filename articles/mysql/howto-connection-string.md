@@ -1,38 +1,36 @@
 ---
-title: "MySQL용 Azure Database에 응용 프로그램 연결 | Microsoft Docs"
+title: "Azure Database for MySQL에 응용 프로그램 연결"
 description: "이 문서에는 MySQL용 Azure Database와 연결하는 응용 프로그램에 대한 현재 지원되는 연결 문자열이 나열되어 있습니다(ADO.NET (C#), JDBC, Node.js, ODBC, PHP, Python 및 Ruby)."
 services: mysql
 author: mswutao
 ms.author: wuta
 editor: jasonwhowell
-manager: jhubbard
+manager: kfile
 ms.service: mysql-database
 ms.topic: article
-ms.date: 06/12/2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 3716c7699732ad31970778fdfa116f8aee3da70b
-ms.openlocfilehash: 2f40da41bcfda7e35f6fc63ead5d055246ab390c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/30/2017
-
+ms.date: 02/28/2018
+ms.openlocfilehash: e7b200fd1de79f0bca680bdedc34fa376cf07d68
+ms.sourcegitcommit: c765cbd9c379ed00f1e2394374efa8e1915321b9
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/28/2018
 ---
-
 # <a name="how-to-connect-applications-to-azure-database-for-mysql"></a>MySQL용 Azure Database에 응용 프로그램을 연결하는 방법
-이 문서에는 템플릿 및 예제와 함께 MySQL용 Azure Database에서 지원되는 연결 문자열 형식이 나열되어 있습니다. 연결 문자열에 다른 매개 변수 및 다른 설정을 할 수도 있습니다.
+이 항목에는 템플릿 및 예제와 함께 MySQL용 Azure Database에서 지원되는 연결 문자열 형식이 나열되어 있습니다. 연결 문자열에 다른 매개 변수 및 설정을 사용할 수도 있습니다.
 
 - 인증서를 가져오려면 [SSL 구성 방법](./howto-configure-ssl.md)을 참조하세요.
 - {your_host} = <servername>.mysql.database.azure.com
-- {your_user}@{servername} = 올바른 인증을 위한 사용자 ID 형식입니다.  사용자 ID를 사용하면 인증에 실패하게 됩니다.
+- {your_user}@{servername} = 올바른 인증을 위한 사용자 ID 형식입니다.  사용자 ID만 사용하는 경우 인증이 실패합니다.
 
 ## <a name="adonet"></a>ADO.NET
 ```ado.net
 Server={your_host};Port={your_port};Database={your_database};Uid={username@servername};Pwd={your_password};[SslMode=Required;]
 ```
 
-이 예제에서 서버 이름은 `myserver4demo`, 데이터베이스 이름은 `wpdb`, 사용자 이름은 `WPAdmin`, 암호는 `mypassword!2`입니다. 그러면 연결 문자열은 다음과 같아야 합니다.
+이 예제에서 서버 이름은 `mydemoserver`이고, 데이터베이스 이름은 `wpdb`이고, 사용자 이름은 `WPAdmin`이고, 암호는 `mypassword!2`입니다. 결과적으로 연결 문자열은 다음과 같습니다.
 
 ```ado.net
-Server= "myserver4demo.mysql.database.azure.com"; Port=3306; Database= "wpdb"; Uid= "WPAdmin@myserver4demo"; Pwd="mypassword!2"; SslMode=Required;
+Server= "mydemoserver.mysql.database.azure.com"; Port=3306; Database= "wpdb"; Uid= "WPAdmin@mydemoserver"; Pwd="mypassword!2"; SslMode=Required;
 ```
 
 ## <a name="jdbc"></a>JDBC
@@ -55,7 +53,7 @@ DRIVER={MySQL ODBC 5.3 UNICODE Driver};Server={your_host};Port={your_port};Datab
 $con=mysqli_init(); [mysqli_ssl_set($con, NULL, NULL, {ca-cert filename}, NULL, NULL);] mysqli_real_connect($con, {your_host}, {username@servername}, {your_password}, {your_database}, {your_port});
 ```
 
-## <a name="python"></a>Python
+## <a name="python"></a>파이썬
 ```python
 cnx = mysql.connector.connect(user={username@servername}, password={your_password}, host={your_host}, port={your_port}, database={your_database}[, ssl_ca={ca-cert filename}, ssl_verify_cert=true])
 ```
@@ -72,4 +70,3 @@ client = Mysql2::Client.new(username: {username@servername}, password: {your_pas
 
 ## <a name="next-steps"></a>다음 단계
 - 연결 라이브러리에 대한 자세한 내용은 [개념 - 연결 라이브러리](./concepts-connection-libraries.md)를 참조하세요.
-

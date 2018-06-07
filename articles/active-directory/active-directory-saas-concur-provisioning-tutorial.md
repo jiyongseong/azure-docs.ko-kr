@@ -1,27 +1,25 @@
 ---
-title: "자습서: Concur와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory와 Concur 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Azure Active Directory로 자동 사용자 프로비전을 위한 Concur 구성 | Microsoft Docs'
+description: Azure Active Directory와 Concur 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: df47f55f-a894-4e01-a82e-0dbf55fc8af1
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 06/16/2017
+ms.date: 01/26/2018
 ms.author: jeedes
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: cd35b6e2dc3171e9cffdb820bbc5b0d45ff58e07
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
-
+ms.openlocfilehash: c439e6ca784bf031cd4102a6cb15b5e210130810
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
-# <a name="tutorial-configuring-concur-for-user-provisioning"></a>자습서: 사용자 프로비전에 대한 Concur 구성
+# <a name="tutorial-configure-concur-for-automatic-user-provisioning"></a>자습서: 자동 사용자 프로비전을 위한 Concur 구성
 
 이 자습서의 목적은 사용자 계정을 Azure AD에서 Concur로 자동으로 프로비전 및 프로비전 해제하도록 Concur 및 Azure AD에서 수행해야 하는 단계를 설명하는 것입니다.
 
@@ -106,7 +104,7 @@ Concur 컨설턴트 또는 클라이언트 관리자는 고유한 웹 서비스 
 
 11. Azure Portal에서 **연결 테스트**를 클릭하여 Azure AD가 Concur 앱에 연결되었는지 확인합니다. 연결에 실패하면 Concur 계정에 팀 관리자 권한이 있는지 확인합니다.
 
-12. 프로비전 오류 알림을 받을 개인 또는 그룹의 메일 주소를 **알림 메일** 필드에 입력하고 확인란을 선택합니다.
+12. 프로비전 오류 알림을 받을 개인 또는 그룹의 이메일 주소를 **알림 메일** 필드에 입력하고 확인란을 선택합니다.
 
 13. **저장**을 클릭합니다.
 
@@ -123,7 +121,6 @@ Concur 컨설턴트 또는 클라이언트 관리자는 고유한 웹 서비스 
 ## <a name="additional-resources"></a>추가 리소스
 
 * [엔터프라이즈 앱에 대한 사용자 계정 프로비전 관리](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 * [Single Sign-On 구성](active-directory-saas-concur-tutorial.md)
-
 

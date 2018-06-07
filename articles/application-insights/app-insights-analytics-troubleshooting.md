@@ -3,7 +3,7 @@ title: "Azure Application Insights 내 Analytics 문제 해결 | Microsoft Docs"
 description: "Application Insights Analytics에 문제가 있습니까? 여기에서 시작합니다. "
 services: application-insights
 documentationcenter: 
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 9bbd5859-3584-4d80-9b6d-d5910fa48baa
 ms.service: application-insights
@@ -12,20 +12,19 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2016
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 785d3a8920d48e11e80048665e9866f16c514cf7
-ms.openlocfilehash: 82a1888cca687ce60f811c2c3cec6b971d4a0461
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/12/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: 3ef9150cad62e9f9fc43f7afcbbbc01d89884a12
+ms.sourcegitcommit: e462e5cca2424ce36423f9eff3a0cf250ac146ad
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/01/2017
 ---
 # <a name="troubleshoot-analytics-in-application-insights"></a>Application Insights의 Analytics 문제 해결
 [Application Insights Analytics](app-insights-analytics.md)에 문제가 있습니까? 여기에서 시작합니다. Analytics는 Azure Application Insights의 강력한 검색 도구입니다.
 
 ## <a name="limits"></a>제한
 * 현재, 쿼리 결과는 지난 주의 데이터로 제한됩니다.
-* 테스트 브라우저: Chrome, Edge 및 Internet Explorer 최신 버전.
+* 테스트 브라우저: Chrome, Microsoft Edge 및 Internet Explorer 최신 버전.
 
 ## <a name="known-incompatible-browser-extensions"></a>알려진 호환되지 않는 브라우저 확장
 * Ghostery
@@ -63,7 +62,7 @@ ms.lasthandoff: 04/12/2017
      
      ![인터넷 옵션 대화 상자에서 신뢰할 수 있는 사이트에 사이트를 추가합니다.](./media/app-insights-analytics-troubleshooting/033.png)
      
-     웹 사이트 목록에 다음 URL이 포함되어 있다면 다른 URL도 포함하세요.
+     Websites 목록에 다음 URL이 포함되어 있다면 다른 URL도 포함하세요.
      
      https://analytics.applicationinsights.io<br/>
      https://login.microsoftonline.com<br/>
@@ -109,5 +108,4 @@ URL이 올바르지 않습니다.
 
 
 [!INCLUDE [app-insights-analytics-footer](../../includes/app-insights-analytics-footer.md)]
-
 

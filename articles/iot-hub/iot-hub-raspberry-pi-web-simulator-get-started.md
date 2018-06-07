@@ -1,27 +1,25 @@
 ---
-title: "시뮬레이션된 Raspberry Pi-클라우드(Node.js) - Azure IoT Hub에 Raspberry Pi 웹 시뮬레이터 연결 | Microsoft Docs"
-description: "Raspberry Pi가 Azure 클라우드에 데이터를 보내도록 Raspberry Pi 웹 시뮬레이터를 Azure IoT Hub에 연결합니다."
+title: 시뮬레이션된 Raspberry Pi-클라우드(Node.js) - Azure IoT Hub에 Raspberry Pi 웹 시뮬레이터 연결 | Microsoft Docs
+description: Raspberry Pi가 Azure 클라우드에 데이터를 보내도록 Raspberry Pi 웹 시뮬레이터를 Azure IoT Hub에 연결합니다.
 services: iot-hub
-documentationcenter: 
-author: shizn
+documentationcenter: ''
+author: rangv
 manager: timtl
-tags: 
-keywords: "raspberry pi 시뮬레이터, azure iot raspberry pi, raspberry pi iot hub, raspberry pi에서 클라우드로 데이터 전송, raspberry pi-클라우드"
+tags: ''
+keywords: raspberry pi 시뮬레이터, azure iot raspberry pi, raspberry pi iot hub, raspberry pi에서 클라우드로 데이터 전송, raspberry pi-클라우드
 ms.service: iot-hub
 ms.devlang: node
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 7/28/2017
-ms.author: xshi
+ms.date: 4/11/2018
+ms.author: rangv
+ms.openlocfilehash: fe953b56e0a4dbbf7aaaa81d5b8ac6e31bb6bc4d
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
 ms.translationtype: HT
-ms.sourcegitcommit: 6e76ac40e9da2754de1d1aa50af3cd4e04c067fe
-ms.openlocfilehash: 3b80bf35d6af91d5bdb196d97668dc0f837b92cc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/31/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-
 # <a name="connect-raspberry-pi-online-simulator-to-azure-iot-hub-nodejs"></a>Azure IoT Hub에 Raspberry Pi 온라인 시뮬레이터 연결(Node.js)
 
 [!INCLUDE [iot-hub-get-started-device-selector](../../includes/iot-hub-get-started-device-selector.md)]
@@ -54,7 +52,7 @@ ms.lasthandoff: 07/31/2017
 
 * Azure IoT Hub를 만들고 새 장치 연결 문자열을 가져오는 방법 Azure 계정이 없는 경우 몇 분 만에 [Azure 평가판 계정](https://azure.microsoft.com/free/)을 만들 수 있습니다.
 * Raspberry Pi 온라인 시뮬레이터를 사용하는 방법
-* IoT Hub로 센서 데이터를 보내는 방법
+* IoT Hub로 센서 데이터를 보내는 방법.
 
 ## <a name="overview-of-raspberry-pi-web-simulator"></a>Raspberry Pi 웹 시뮬레이터 개요
 
@@ -95,4 +93,3 @@ IoT Hub로 전송되는 센서 데이터와 메시지를 보여 주는 다음 �
 샘플 응용 프로그램을 실행하여 센서 데이터를 수집하고 IoT Hub로 전송했습니다.
 
 [!INCLUDE [iot-hub-get-started-next-steps](../../includes/iot-hub-get-started-next-steps.md)]
-

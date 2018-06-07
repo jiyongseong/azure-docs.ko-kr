@@ -1,39 +1,38 @@
 ---
-title: "Visual Studio WebApi 프로젝트에서 Azure AD 시작 | Microsoft Docs"
-description: "Visual Studio 연결 서비스를 사용하여 Azure AD를 만들거나 연결한 후에 WebApi 프로젝트에 Azure Active Directory를 사용하여 시작하는 방법입니다."
+title: Visual Studio WebApi 프로젝트에서 Azure AD 시작
+description: Visual Studio 연결 서비스를 사용하여 Azure AD를 만들거나 연결한 후에 WebApi 프로젝트에 Azure Active Directory를 사용하여 시작하는 방법입니다.
 services: active-directory
-documentationcenter: 
-author: TomArcher
+author: ghogen
 manager: douge
-editor: 
 ms.assetid: bf1eb32d-25cd-4abf-8679-2ead299fedaa
-ms.service: active-directory
-ms.workload: web
-ms.tgt_pltfrm: vs-getting-started
-ms.devlang: na
-ms.topic: article
-ms.date: 03/19/2017
-ms.author: tarcher
+ms.prod: visual-studio-dev15
+ms.technology: vs-azure
+ms.workload: azure
+ms.topic: conceptual
+ms.date: 03/12/2018
+ms.author: ghogen
 ms.custom: aaddev
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0d8472cb3b0d891d2b184621d62830d1ccd5e2e7
-ms.openlocfilehash: 333db54fe01aad42cfcd050995b64f3725b31ae9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/21/2017
-
-
+ms.openlocfilehash: 109de9fb78ae3abfc09a37c6b8cb38c554f7613c
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
-# <a name="get-started-with-azure-active-directory-and-visual-studio-connected-services-webapi-projects"></a>Azure Active Directory 및 Visual Studio 연결 서비스 시작(WebApi 프로젝트)
+# <a name="get-started-with-azure-active-directory-webapi-projects"></a>Azure Active Directory 시작(WebApi 프로젝트)
+
 > [!div class="op_single_selector"]
-> * [시작](vs-active-directory-webapi-getting-started.md)
-> * [변경된 내용](vs-active-directory-webapi-what-happened.md)
-> 
-> 
+> - [시작](vs-active-directory-webapi-getting-started.md)
+> - [변경된 내용](vs-active-directory-webapi-what-happened.md)
+
+이 아티클에서는 Visual Studio의 **프로젝트 > 연결된 서비스** 명령을 통해 ASP.NET WebAPI 프로젝트에 Active Directory를 추가한 후의 추가 지침을 제공합니다. 프로젝트에 서비스를 아직 추가하지 않은 경우 언제든지 추가할 수 있습니다.
+
+연결된 서비스를 추가할 때 프로젝트에서 변경되는 내용은 [내 WebAPI 프로젝트가 어떻게 되었습니까?](vs-active-directory-webapi-what-happened.md)를 참조하세요.
 
 ## <a name="requiring-authentication-to-access-controllers"></a>컨트롤러에 액세스하려면 인증 필요
-프로젝트의 모든 컨트롤러는 **Authorize** 특성으로 표시되었습니다. 이 특성으로 인해 사용자가 인증해야만 이러한 컨트롤러에서 정의한 API에 액세스할 수 있습니다. 컨트롤러에 익명으로 액세스할 수 있도록 하려면 컨트롤러에서 이 특성을 제거하세요. 더 세부적인 수준에서 권한을 설정하려면 특성을 컨트롤러 클래스에 적용하는 대신 인증이 필요한 각 메서드에 적용하세요.
+
+프로젝트의 모든 컨트롤러는 `[Authorize]` 특성으로 표시되었습니다. 이 특성으로 인해 사용자가 인증해야만 이러한 컨트롤러에서 정의한 API에 액세스할 수 있습니다. 컨트롤러에 익명으로 액세스할 수 있도록 하려면 컨트롤러에서 이 특성을 제거하세요. 더 세부적인 수준에서 권한을 설정하려면 특성을 컨트롤러 클래스에 적용하는 대신 인증이 필요한 각 메서드에 적용하세요.
 
 ## <a name="next-steps"></a>다음 단계
-[Azure Active Directory에 대한 자세한 정보](https://azure.microsoft.com/services/active-directory/)
 
-
+- [Azure Active Directory 인증 시나리오](active-directory-authentication-scenarios.md)
+- [ASP.NET 웹앱에 Microsoft에 로그인 추가](guidedsetups/active-directory-aspnetwebapp-v1.md)

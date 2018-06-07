@@ -1,0 +1,287 @@
+- name: Azure Log Analytics 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: Log Analytics란?
+      href: log-analytics-overview.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: 수집 - Azure VM
+      href: log-analytics-quick-collect-azurevm.md
+    - name: 수집 - Linux 컴퓨터
+      href: log-analytics-quick-collect-linux-computer.md
+    - name: 수집 - Windows 컴퓨터
+      href: log-analytics-quick-collect-windows-computer.md
+- name: 자습서
+  items:
+    - name: 1 - 데이터 분석
+      href: log-analytics-tutorial-viewdata.md
+    - name: 2 - 데이터 가상화
+      href: log-analytics-tutorial-dashboards.md
+    - name: 3 - 데이터에 대한 경고
+      href: log-analytics-tutorial-response.md
+- name: 샘플
+  items:
+    - name: Azure PowerShell
+      href: powershell-samples.md
+- name: 개념
+  items:
+    - name: 작업 영역 업그레이드
+      items:
+        - name: 업그레이드 개요
+          href: log-analytics-log-search-upgrade.md
+        - name: 변경 내용 요약
+          href: log-analytics-log-search-upgrade-changes.md
+        - name: 업그레이드 FAQ
+          href: log-analytics-log-search-faq.md
+    - name: Log Analytics FAQ
+      href: log-analytics-faq.md
+    - name: 데이터 보안
+      href: log-analytics-data-security.md
+    - name: 액세스 관리
+      href: log-analytics-manage-access.md
+    - name: 하이브리드 환경 모니터링
+      href: log-analytics-concept-hybrid.md
+    - name: 서비스 공급자의 기능
+      href: log-analytics-service-providers.md
+    - name: 로그 검색
+      items:
+        - name: 로그 검색 개요
+          href: log-analytics-log-search.md
+        - name: 로그 검색 포털
+          href: log-analytics-log-search-portals.md
+- name: 방법 가이드
+  items:
+    - name: Log Analytics 작업 영역 만들기
+      href: log-analytics-quick-create-workspace.md
+    - name: 데이터 수집
+      items:
+        - name: 연결된 소스
+          items:
+            - name: Windows 에이전트
+              href: log-analytics-agent-windows.md
+            - name: Windows용 VM 확장
+              href: ../virtual-machines/windows/extensions-oms.md
+            - name: Linux용 VM 확장
+              href: ../virtual-machines/linux/extensions-oms.md
+            - name: Azure 리소스
+              href: log-analytics-azure-storage.md
+            - name: Azure PaaS 리소스
+              href: log-analytics-collect-azurepass-posh.md
+            - name: Azure Storage에서 진단 또는 로그 데이터
+              href: log-analytics-azure-storage-iis-table.md
+            - name: Operations Manager
+              href: log-analytics-om-agents.md
+            - name: 구성 관리자
+              href: log-analytics-sccm.md
+            - name: OMS 게이트웨이
+              href: log-analytics-oms-gateway.md
+        - name: 데이터 원본
+          items:
+            - name: 데이터 원본 개요
+              href: log-analytics-data-sources.md
+            - name: Windows 이벤트
+              href: log-analytics-data-sources-windows-events.md
+            - name: 사용자 지정 JSON 데이터
+              href: log-analytics-data-sources-json.md
+            - name: 수집된 성능 데이터
+              href: log-analytics-data-sources-collectd.md
+            - name: Nagios 및 Zabbix 경고
+              href: log-analytics-data-sources-alerts-nagios-zabbix.md
+            - name: syslog
+              href: log-analytics-data-sources-syslog.md
+            - name: 성능 카운터
+              href: log-analytics-data-sources-performance-counters.md
+            - name: Linux 응용 프로그램 성능
+              href: log-analytics-data-sources-linux-applications.md
+            - name: IIS 로그
+              href: log-analytics-data-sources-iis-logs.md
+            - name: 사용자 지정 로그
+              href: log-analytics-data-sources-custom-logs.md
+            - name: 사용자 지정 필드
+              href: log-analytics-custom-fields.md
+            - name: 데이터 수집기 API
+              href: log-analytics-data-collector-api.md
+    - name: 쿼리 데이터
+      items:
+        - name: 언어 설명서
+          href: 'https://docs.loganalytics.io'
+        - name: 레거시 언어에서 전환
+          href: log-analytics-log-search-transition.md
+        - name: 교차 리소스 검색
+          href: log-analytics-cross-workspace-search.md
+        - name: 검색 결과에서 작업 수행
+          href: log-analytics-log-search-takeaction.md
+        - name: 컴퓨터 그룹 사용
+          href: log-analytics-computer-groups.md
+        - name: 흐름 커넥터
+          href: log-analytics-flow-tutorial.md
+        - name: 로그 검색 API
+          href: 'https://dev.loganalytics.io/'
+    - name: 데이터 분석
+      items:
+        - name: 대시보드
+          href: log-analytics-dashboards.md
+        - name: 뷰 디자이너
+          items:
+            - name: 개요
+              href: log-analytics-view-designer.md
+            - name: 타일 참조
+              href: log-analytics-view-designer-tiles.md
+            - name: 시각화 요소 참조
+              href: log-analytics-view-designer-parts.md
+            - name: 필터
+              href: log-analytics-view-designer-filters.md
+        - name: Power BI
+          href: log-analytics-powerbi.md
+    - name: 경고 만들기
+      items:
+        - name: 로그 경고 이해
+          href: ../monitoring-and-diagnostics/monitoring-overview-unified-alerts.md
+        - name: 로그 경고 만들기
+          href: ../monitoring-and-diagnostics/monitor-alerts-unified-usage.md
+        - name: 로그 경고에 대한 웹후크 작업
+          href: ../monitoring-and-diagnostics/monitor-alerts-unified-log-webhook.md
+        - name: Resource Manager 템플릿을 사용하여 로그 경고 만들기
+          href: ../monitoring-and-diagnostics/monitor-alerts-unified-log-template.md
+        - name: Log Analytics에서 Azure Alerts로 경고 복사
+          href: ../monitoring-and-diagnostics/monitoring-alerts-extend-tool.md
+    - name: 관리
+      items:
+        - name: 개인 데이터 처리
+          href: log-analytics-personal-data-mgmt.md
+        - name: 에이전트 관리
+          href: log-analytics-agent-manage.md
+        - name: 작업 영역 비용 관리
+          items:
+            - name: 데이터 볼륨 및 보존
+              href: log-analytics-manage-cost-storage.md
+            - name: 사용량 모니터링
+              href: log-analytics-usage.md
+        - name: 작업 영역 삭제
+          href: log-analytics-manage-del-workspace.md
+    - name: 문제 해결
+      items:
+        - name: VM 확장 문제 해결
+          href: log-analytics-azure-vmext-troubleshoot.md
+        - name: Linux 에이전트 문제 해결
+          href: log-analytics-agent-linux-support.md
+    - name: 솔루션 사용
+      items:
+        - name: 솔루션 개요
+          href: log-analytics-add-solutions.md
+        - name: 대상 솔루션
+          href: ../monitoring/monitoring-solution-targeting.md?toc=%2fazure%2flog-analytics%2ftoc.json
+        - name: Azure 활동 로그
+          items:
+            - name: 분석
+              href: log-analytics-activity.md
+            - name: 구독 간 수집
+              href: log-analytics-activity-logs-subscriptions.md
+        - name: AD 평가
+          href: log-analytics-ad-assessment.md
+        - name: AD 복제 상태
+          href: log-analytics-ad-replication-status.md
+        - name: 에이전트 상태
+          href: ../operations-management-suite/oms-solution-agenthealth.md?toc=%2fazure%2flog-analytics%2ftoc.json
+        - name: 경고 관리
+          href: log-analytics-solution-alert-management.md
+        - name: Application Insights 커넥터
+          href: log-analytics-app-insights-connector.md
+        - name: Azure SQL Analytics
+          href: log-analytics-azure-sql.md
+        - name: Azure Web Apps 분석
+          href: log-analytics-azure-web-apps-analytics.md
+        - name: 용량 및 성능
+          href: log-analytics-capacity.md
+        - name: 변경 내용 추적
+          href: log-analytics-change-tracking.md
+        - name: 컨테이너
+          href: log-analytics-containers.md
+        - name: DNS 분석
+          href: log-analytics-dns.md
+        - name: IT Service Management Connector
+          href: log-analytics-itsmc-overview.md
+          items:
+            - name: IT Service Management 연결
+              href: log-analytics-itsmc-connections.md
+        - name: Key Vault
+          href: log-analytics-azure-key-vault.md
+        - name: Logic Apps B2B 메시지
+          items:
+            - name: Logic Apps B2B 메시지 솔루션
+              href: ../logic-apps/logic-apps-track-b2b-messages-omsportal.md?toc=%2fazure%2flog-analytics%2ftoc.json
+            - name: Logic Apps B2B 사용자 지정 추적 스키마
+              href: ../logic-apps/logic-apps-track-integration-account-custom-tracking-schema.md?toc=%2fazure%2flog-analytics%2ftoc.json
+        - name: 네트워킹 분석
+          href: log-analytics-azure-networking-analytics.md
+        - name: 네트워크 성능 모니터
+          items:
+            - name: 솔루션 개요
+              href: log-analytics-network-performance-monitor.md
+            - name: 성능 모니터링
+              href: log-analytics-network-performance-monitor-performance-monitor.md
+            - name: 서비스 끝점
+              href: log-analytics-network-performance-monitor-service-endpoint.md
+            - name: ExpressRoute
+              href: log-analytics-network-performance-monitor-expressroute.md
+            - name: 가격
+              href: log-analytics-network-performance-monitor-pricing-faq.md
+        - name: Office 365
+          href: ../operations-management-suite/oms-solution-office-365.md?toc=%2fazure%2flog-analytics%2ftoc.json
+        - name: SCOM 상태 검사
+          href: log-analytics-scom-assessment.md
+        - name: 보안 감사
+          href: ../security-center/security-center-intro.md
+        - name: Azure PowerShell을 사용한 Service Fabric
+          href: log-analytics-service-fabric.md
+          items:
+            - name: Azure Resource Manager를 사용한 Service Fabric
+              href: log-analytics-service-fabric-azure-resource-manager.md
+        - name: 서비스 맵
+          href: ../monitoring/monitoring-service-map.md?toc=%2fazure%2flog-analytics%2ftoc.json
+        - name: SQL 상태 검사
+          href: log-analytics-sql-assessment.md
+        - name: Surface Hub
+          href: log-analytics-surface-hubs.md
+        - name: 업데이트 관리
+          href: ../operations-management-suite/oms-solution-update-management.md?toc=%2fazure%2flog-analytics%2ftoc.json
+        - name: VMware
+          href: log-analytics-vmware.md
+        - name: Windows 분석
+          items:
+            - name: 업데이트 준수
+              href: 'https://technet.microsoft.com/itpro/windows/manage/update-compliance-get-started'
+            - name: 업그레이드 준비
+              href: 'https://technet.microsoft.com/itpro/windows/deploy/upgrade-readiness-get-started'
+        - name: 실시간 데이터
+          href: log-analytics-wire-data.md
+    - name: 개발
+      items:
+        - name: PowerShell cmdlet
+          href: log-analytics-powershell-workspace-configuration.md
+        - name: 리소스 관리자 템플릿
+          href: log-analytics-template-workspace-configuration.md
+        - name: 알림 API
+          href: log-analytics-api-alerts.md
+- name: 참고 자료
+  items:
+    - name: 언어 참조
+      href: 'https://docs.loganalytics.io/docs/Language-Reference'
+    - name: Azure PowerShell
+      href: /powershell/module/azurerm.operationalinsights
+    - name: REST (영문)
+      href: /rest/api/loganalytics
+- name: 리소스
+  items:
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/log-analytics/'
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'
+    - name: 서비스 업데이트
+      href: 'https://azure.microsoft.com/updates/?product=log-analytics'
+    - name: Windows 분석
+      href: 'https://www.microsoft.com/en-us/WindowsForBusiness/windows-analytics'

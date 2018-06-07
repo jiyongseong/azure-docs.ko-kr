@@ -1,11 +1,11 @@
 ---
-title: "Azure Network Watcher를 사용하여 Virtual Network 게이트웨이 및 연결 문제 해결 - REST | Microsoft Docs"
-description: "REST를 사용하여 Azure Network Watcher에서 Virtual Network 게이트웨이 및 연결 문제를 해결하는 방법을 설명합니다."
+title: Azure Network Watcher를 사용하여 Virtual Network 게이트웨이 및 연결 문제 해결 - REST | Microsoft Docs
+description: REST를 사용하여 Azure Network Watcher에서 Virtual Network 게이트웨이 및 연결 문제를 해결하는 방법을 설명합니다.
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: e4d5f195-b839-4394-94ef-a04192766e55
 ms.service: network-watcher
 ms.devlang: na
@@ -13,20 +13,17 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 06/19/2017
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a1ba750d2be1969bfcd4085a24b0469f72a357ad
-ms.openlocfilehash: 33ae214a0cb606393c449920b78bde3230ff30c3
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
-
+ms.author: jdial
+ms.openlocfilehash: 35762d5781d5437a25eaf9942e50f60846ae1ae2
+ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/03/2018
 ---
-
 # <a name="troubleshoot-virtual-network-gateway-and-connections-using-azure-network-watcher"></a>Azure Network Watcher를 사용하여 Virtual Network 게이트웨이 및 연결 문제 해결
 
 > [!div class="op_single_selector"]
-> - [포털](network-watcher-troubleshoot-manage-portal.md)
+> - [포털](diagnose-communication-problem-between-networks.md)
 > - [PowerShell](network-watcher-troubleshoot-manage-powershell.md)
 > - [CLI 1.0](network-watcher-troubleshoot-manage-cli-nodejs.md)
 > - [CLI 2.0](network-watcher-troubleshoot-manage-cli.md)
@@ -83,8 +80,8 @@ $requestBody = @"
 }
 "@
 
-}
-armclient post "https://management.azure.com/subscriptions/${subscriptionId}/ResourceGroups/${NWresourceGroupName}/providers/Microsoft.Network/networkWatchers/${networkWatcherName}/troubleshoot?api-version=2016-03-30 "
+
+armclient post "https://management.azure.com/subscriptions/${subscriptionId}/ResourceGroups/${NWresourceGroupName}/providers/Microsoft.Network/networkWatchers/${networkWatcherName}/troubleshoot?api-version=2016-03-30" -verbose
 ```
 
 이 작업은 장시간 실행되므로 작업 쿼리를 위한 URI와 결과에 대한 URI가 다음 응답에 표시된 것처럼 응답 헤더에 반환됩니다.
@@ -117,7 +114,7 @@ null
 다음 예제에서 볼 수 있듯이 작업 URI를 사용하여 작업 진행 상태를 쿼리합니다.
 
 ```powershell
-armclient get "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westcentralus/operations/8a1167b7-6768-4ac1-85dc-703c9c9b9247?api-version=2016-03-30"
+armclient get "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westcentralus/operations/8a1167b7-6768-4ac1-85dc-703c9c9b9247?api-version=2016-03-30" -verbose
 ```
 
 작업이 진행 중인 동안에는 다음 예제에서 볼 수 있듯이 응답에 **진행 중**이 표시됩니다.
@@ -141,7 +138,7 @@ armclient get "https://management.azure.com/subscriptions/00000000-0000-0000-000
 반환된 상태가 **성공**이면 operationResult URI에서 GET 메서드를 호출하여 결과를 검색합니다.
 
 ```powershell
-armclient get "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westcentralus/operationResults/8a1167b7-6768-4ac1-85dc-703c9c9b9247?api-version=2016-03-30"
+armclient get "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westcentralus/operationResults/8a1167b7-6768-4ac1-85dc-703c9c9b9247?api-version=2016-03-30" -verbose
 ```
 
 다음 응답은 게이트웨이 문제 해결 결과를 쿼리할 때 반환된 일반적인 성능 저하 응답의 예입니다. 응답에서 속성이 의미하는 바를 확실히 알려면 [결과 이해](#understanding-the-results)를 참조하세요.
@@ -159,7 +156,7 @@ armclient get "https://management.azure.com/subscriptions/00000000-0000-0000-000
       "recommendedActions": [
         {
           "actionText": "If the condition persists, please try resetting your Azure VPN gateway",
-          "actionUri": "https://azure.microsoft.com/en-us/documentation/articles/vpn-gateway-resetgw-classic/",
+          "actionUri": "https://azure.microsoft.com/documentation/articles/vpn-gateway-resetgw-classic/",
           "actionUriText": "resetting the VPN Gateway"
         },
         {
@@ -176,7 +173,7 @@ armclient get "https://management.azure.com/subscriptions/00000000-0000-0000-000
       "recommendedActions": [
         {
           "actionText": "If you are still experience problems with the VPN gateway, please try resetting the VPN gateway.",
-          "actionUri": "https://azure.microsoft.com/en-us/documentation/articles/vpn-gateway-resetgw-classic/",
+          "actionUri": "https://azure.microsoft.com/documentation/articles/vpn-gateway-resetgw-classic/",
           "actionUriText": "resetting VPN gateway"
         },
         {
@@ -293,7 +290,7 @@ is a transient state while the Azure platform is being updated.",
       "recommendedActions": [
         {
           "actionText": "If the condition persists, please try resetting your Azure VPN gateway",
-          "actionUri": "https://azure.microsoft.com/en-us/documentation/articles/vpn-gateway-resetgw-classic/",
+          "actionUri": "https://azure.microsoft.com/documentation/articles/vpn-gateway-resetgw-classic/",
           "actionUriText": "resetting the VPN gateway"
         },
         {
@@ -310,7 +307,7 @@ is a transient state while the Azure platform is being updated.",
       "recommendedActions": [
         {
           "actionText": "If you are still experience problems with the VPN gateway, please try resetting the VPN gateway.",
-          "actionUri": "https://azure.microsoft.com/en-us/documentation/articles/vpn-gateway-resetgw-classic/",
+          "actionUri": "https://azure.microsoft.com/documentation/articles/vpn-gateway-resetgw-classic/",
           "actionUriText": "resetting VPN gateway"
         },
         {
@@ -328,9 +325,8 @@ is a transient state while the Azure platform is being updated.",
 
 작업 텍스트에서는 문제를 해결하는 방법에 대한 일반적인 지침을 제공합니다. 문제에 대한 조치를 취할 수 있는 경우 링크는 추가 설명서와 함께 제공됩니다. 추가 지침이 없는 경우에 응답은 지원 사례를 열 URL을 제공합니다.  응답의 속성 및 포함된 항목에 대한 자세한 내용은 [Network Watcher 문제 해결 개요](network-watcher-troubleshoot-overview.md)를 방문하세요.
 
-Azure Storage 계정에서 파일을 다운로드하는 방법에 대한 지침은 [.NET을 사용하여 Azure Blob Storage 시작](../storage/storage-dotnet-how-to-use-blobs.md)을 참조하세요. 사용할 수 있는 다른 도구는 저장소 탐색기입니다. 저장소 탐색기에 대한 자세한 내용은 여기에 있는 [저장소 탐색기](http://storageexplorer.com/) 링크에서 찾을 수 있습니다.
+Azure Storage 계정에서 파일을 다운로드하는 방법에 대한 지침은 [.NET을 사용하여 Azure Blob Storage 시작](../storage/blobs/storage-dotnet-how-to-use-blobs.md)을 참조하세요. 사용할 수 있는 다른 도구는 저장소 탐색기입니다. 저장소 탐색기에 대한 자세한 내용은 여기에 있는 [저장소 탐색기](http://storageexplorer.com/) 링크에서 찾을 수 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
 
-VPN 연결을 중지하도록 설정이 변경된 경우 [네트워크 보안 그룹 관리](../virtual-network/virtual-network-manage-nsg-arm-portal.md)를 참조하여 문제가 될 수 있는 네트워크 보안 그룹 및 보안 규칙을 추적합니다.
-
+VPN 연결을 중지하도록 설정이 변경된 경우 [네트워크 보안 그룹 관리](../virtual-network/manage-network-security-group.md)를 참조하여 문제가 될 수 있는 네트워크 보안 그룹 및 보안 규칙을 추적합니다.

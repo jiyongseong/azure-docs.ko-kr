@@ -3,7 +3,7 @@ title: "Microsoft Flow를 사용하여 Azure Application Insights 프로세스 �
 description: "Microsoft Flow를 통해 Application Insights 커넥터를 사용하여 반복 가능한 프로세스를 신속하게 자동화하는 방법을 알아봅니다."
 services: application-insights
 documentationcenter: 
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.service: application-insights
 ms.workload: tbd
@@ -11,15 +11,13 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 06/25/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: d0cd0cc97fa61d3401f6101292b82132622c9e81
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: a1d2787626ed8fa71e3e4e9921ffb8a4680014cb
+ms.sourcegitcommit: e462e5cca2424ce36423f9eff3a0cf250ac146ad
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/01/2017
 ---
-
 # <a name="automate-azure-application-insights-processes-with-the-connector-for-microsoft-flow"></a>Microsoft Flow용 커넥터를 사용하여 Azure Application Insights 프로세스 자동화
 
 서비스가 제대로 작동하는지 확인하기 위해 원격 분석 데이터에 대해 같은 쿼리를 반복적으로 실행하고 있나요? 추세와 비정상을 찾기 위해 이러한 쿼리를 자동화하고 여기에 관련된 고유한 워크플로를 빌드하기를 원하나요? Microsoft Flow용 Azure Application Insights 커넥터(미리 보기)가 이러한 용도에 적합한 도구입니다.
@@ -92,9 +90,9 @@ ms.lasthandoff: 07/08/2017
 
 4. **메일 보내기** 창에서 다음을 수행합니다.
 
-   a. 받는 사람의 메일 주소를 입력합니다.
+   a. 받는 사람의 이메일 주소를 입력합니다.
 
-   b. 메일의 제목을 입력합니다.
+   b. 이메일의 제목을 입력합니다.
 
    c. **본문** 상자의 임의의 위치를 클릭한 다음, 오른쪽에서 열리는 동적 콘텐츠 메뉴에서 **본문**을 선택합니다.
 
@@ -132,7 +130,6 @@ ms.lasthandoff: 07/08/2017
 
 
 <!--Link references-->
-
 
 
 

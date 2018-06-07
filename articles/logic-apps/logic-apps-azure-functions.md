@@ -15,14 +15,12 @@ ms.workload: integration
 ms.custom: H1Hack27Feb2017
 ms.date: 10/18/2016
 ms.author: LADocs; jehollan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 8a531f70f0d9e173d6ea9fb72b9c997f73c23244
-ms.openlocfilehash: 7d21ab1180fcd6df39a5dcc5c095c9521c00f6fd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/10/2017
-
+ms.openlocfilehash: 18442c87b049200fac5ed41cc7034ba7a848b8d3
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="add-and-run-custom-code-for-logic-apps-through-azure-functions"></a>Azure Functions를 통해 Logic Apps에 대한 사용자 지정 코드 추가 및 실행
 
 Logic Apps에서 C# 또는 node.js의 사용자 지정 코드 조각을 실행하려면 Azure Functions를 통해 사용자 지정 함수를 만들 수 있습니다. 
@@ -78,4 +76,3 @@ function start(req, res){
 <!--Image references-->
 [1]: ./media/logic-apps-azure-functions/callfunction.png
 [2]: ./media/logic-apps-azure-functions/createfunction.png
-

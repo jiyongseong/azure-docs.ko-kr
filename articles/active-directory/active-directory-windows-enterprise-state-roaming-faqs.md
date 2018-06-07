@@ -1,11 +1,11 @@
 ---
-title: "설정 및 데이터 로밍 FAQ | Microsoft Docs"
-description: "설정 및 앱 데이터 동기화에 대한 IT 관리자의 질문에 답변합니다."
+title: 설정 및 데이터 로밍 FAQ | Microsoft Docs
+description: 설정 및 앱 데이터 동기화에 대한 IT 관리자의 질문에 답변합니다.
 services: active-directory
-keywords: "엔터프라이즈 상태 로밍 설정, windows 클라우드, 엔터프라이즈 상태 로밍에 대한 질문과 대답"
-documentationcenter: 
+keywords: 엔터프라이즈 상태 로밍 설정, windows 클라우드, 엔터프라이즈 상태 로밍에 대한 질문과 대답
+documentationcenter: ''
 author: tanning
-manager: swadhwa
+manager: mtillman
 editor: curtand
 ms.assetid: c0824f5c-129b-4240-969f-921f6a64eae7
 ms.service: active-directory
@@ -13,17 +13,17 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 03/08/2017
+ms.date: 05/14/2018
 ms.author: markvi
-translationtype: Human Translation
-ms.sourcegitcommit: 7d472733e80ae03294ba1ac9e97d1afd3aa0fa91
-ms.openlocfilehash: c7d8eefe560a361690cc4daf6550b2a8c894f318
-ms.lasthandoff: 01/05/2017
-
-
+ms.openlocfilehash: f33376d5f68d64495a7a90e62870f3ec14f73246
+ms.sourcegitcommit: 96089449d17548263691d40e4f1e8f9557561197
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/17/2018
+ms.locfileid: "34258717"
 ---
 # <a name="settings-and-data-roaming-faq"></a>설정 및 데이터 로밍 FAQ
-이 토픽에서는 설정 및 앱 데이터 동기화에 대한 IT 관리자의 질문에 답변합니다.
+이 문서에서는 설정 및 앱 데이터 동기화에 대한 IT 관리자의 질문에 답변합니다.
 
 ## <a name="what-data-roams"></a>어떤 데이터가 로밍됩니까?
 **Windows 설정**: Windows 운영 체제에 내장된 PC 설정. 일반적으로 PC를 개인 설정하는 설정이며, 다음과 같은 광범위한 범주를 포함합니다.
@@ -71,17 +71,17 @@ Microsoft 계정이 연결된 Windows 8 또는 Windows 8.1을 실행하는 Activ
 Windows 10의 2015년 11월 이후 릴리스에서 엔터프라이즈 상태 로밍은 한 번에 한 계정에만 지원됩니다. 회사 및 학교 Azure AD 계정을 사용하여 Windows에 로그인하면 모든 데이터가 Azure AD를 통해 동기화됩니다. 개인용 Microsoft 계정을 사용하여 Windows에 로그인하면 모든 데이터가 Microsoft 계정을 통해 동기화됩니다. 앱 라이선스의 소유자가 기본 계정인 경우에만 유니버설 앱 데이터는 장치의 기본 로그인 계정을 사용하여 로밍됩니다. 소유자가 보조 계정인 앱에 대한 유니버설 앱 데이터는 동기화됩니다.
 
 ## <a name="do-settings-sync-for-azure-ad-accounts-from-multiple-tenants"></a>여러 테넌트의 Azure AD 계정에 대한 설정이 동기화됩니까?
-여러 Azure AD 테넌트의 여러 Azure 계정이 동일한 장치에 있는 경우 각 Azure AD 테넌트의 Azure RMS(Azure Rights Management)와 통신하도록 장치 레지스트리를 업데이트해야 합니다.  
+여러 Azure AD 테넌트의 여러 Azure 계정이 동일한 장치에 있는 경우 각 Azure AD 테넌트의 Azure Rights Management 서비스와 통신하도록 장치 레지스트리를 업데이트해야 합니다.  
 
-1. 각 Azure AD 테넌트에 대한 GUID를 확인합니다. Azure 클래식 포털을 열고 Azure AD 테넌트를 선택합니다. 테넌트에 대한 GUID는 브라우저 주소 표시줄의 URL에 있습니다. 예:  `https://manage.windowsazure.com/YourAccount.onmicrosoft.com#Workspaces/ActiveDirectoryExtension/Directory/Tenant GUID/directoryQuickStart`
-2. GUID를 확인한 후에는 레지스트리 키 **HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\SettingSync\WinMSIPC\<테넌트 ID GUID>**를 추가해야 합니다.
+1. 각 Azure AD 테넌트에 대한 GUID를 확인합니다. Azure Portal을 열고 Azure AD 테넌트를 선택합니다. 테넌트의 GUID는 선택한 테넌트, 레이블이 지정된 **Directory ID**에 대한 속성 페이지(https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Properties)에 있습니다. 
+2. GUID를 확인한 후에는 레지스트리 키 **HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\SettingSync\WinMSIPC\<테넌트 ID GUID>** 를 추가해야 합니다.
    **테넌트 ID GUID** 키에서 **AllowedRMSServerUrls**라는 새 다중 문자열 값(REG-MULTI-SZ)을 만듭니다. 해당 데이터에 대해 장치에서 액세스하는 다른 Azure 테넌트의 라이선스 배포 지점 URL을 지정합니다.
-3. **Get-AadrmConfiguration** cmdlet을 실행하여 라이선싱 배포 지점 URL을 찾을 수 있습니다. **LicensingIntranetDistributionPointUrl** 및 **LicensingExtranetDistributionPointUrl**의 값이 다르면 두 값을 모두 지정합니다. 값이 같으면 값을 한 번만 지정합니다.
+3. AADRM 모듈에서 **Get-AadrmConfiguration** cmdlet을 실행하여 라이선싱 배포 지점 URL을 찾을 수 있습니다. **LicensingIntranetDistributionPointUrl** 및 **LicensingExtranetDistributionPointUrl**의 값이 다르면 두 값을 모두 지정합니다. 값이 같으면 값을 한 번만 지정합니다.
 
 ## <a name="what-are-the-roaming-settings-options-for-existing-windows-desktop-applications"></a>기존 Windows 데스크톱 응용 프로그램의 로밍 설정 옵션은 무엇인가요?
 로밍은 유니버설 Windows 앱에서만 작동합니다. 기존 Windows 데스크톱 응용 프로그램에서 로밍을 활성화할 수 있는 두 가지 옵션이 있습니다.
 
-* [데스크톱 브리지](http://aka.ms/desktopbridge) 를 사용하면 유니버설 Windows 플랫폼에 기존 Windows 데스크톱 앱을 쉽게 가져올 수 있습니다. 이때 Azure AD 앱 데이터 로밍을 활용하려면 최소한의 코드 변경 작업이 필요합니다. 데스크톱 브리지는 앱 ID를 사용하여 앱을 제공하며 이는 기존 데스크톱 앱에 앱 데이터 로밍을 사용하는 데 필요합니다.
+* [데스크톱 브리지](https://aka.ms/desktopbridge) 를 사용하면 유니버설 Windows 플랫폼에 기존 Windows 데스크톱 앱을 쉽게 가져올 수 있습니다. 이때 Azure AD 앱 데이터 로밍을 활용하려면 최소한의 코드 변경 작업이 필요합니다. 데스크톱 브리지는 앱 ID를 사용하여 앱을 제공하며 이는 기존 데스크톱 앱에 앱 데이터 로밍을 사용하는 데 필요합니다.
 * [UE-V(사용자 경험 가상화)](https://technet.microsoft.com/library/dn458947.aspx) 를 사용하면 기존 Windows 데스크톱 앱에 대한 사용자 지정 설정 템플릿을 만들 수 있고 Win32 앱에 대해서만 로밍을 사용할 수 있습니다. 이 옵션은 앱의 코드를 변경하기 위해 앱 개발자가 필요하지 않습니다. UE-V는 Microsoft Desktop Optimization Pack을 구매한 고객에 대한 온-프레미스 Active Directory 로밍으로 제한됩니다.
 
 관리자는 [UE-V 그룹 정책](https://technet.microsoft.com/itpro/mdop/uev-v2/configuring-ue-v-2x-with-group-policy-objects-both-uevv2)을 통해 Windows OS 설정 및 유니버설 앱 데이터의 로밍을 변경하여 Windows 데스크톱 앱 데이터를 로밍하도록 UEV를 구성할 수 있습니다.
@@ -96,9 +96,9 @@ Windows 10의 2015년 11월 이후 릴리스에서 엔터프라이즈 상태 로
 엔터프라이즈 상태 로밍은 Azure 클라우드에 동기화된 모든 데이터를 저장합니다. UE-V는 온-프레미스 로밍 솔루션을 제공합니다.
 
 ## <a name="who-owns-the-data-thats-being-roamed"></a>로밍되는 데이터를 소유한 사람은 누구인가요?
-엔터프라이즈는 엔터프라이즈 상태 로밍을 통해 로밍되는 데이터를 소유합니다. 데이터는 Azure 데이터 센터에 저장됩니다. 모든 사용자 데이터는 Azure RMS를 사용하여 암호화된 상태로 전송되고 클라우드에 보관됩니다. 이는 사용자 자격 증명 같은 민감한 특정 데이터만 장치에서 내보내기 전에 암호화하는 Microsoft 계정 기반 설정 동기화에 비해 향상된 기능입니다.
+엔터프라이즈는 엔터프라이즈 상태 로밍을 통해 로밍되는 데이터를 소유합니다. 데이터는 Azure 데이터 센터에 저장됩니다. 모든 사용자 데이터는 Azure Information Protection의 Azure Rights Management 서비스를 사용하여 클라우드에서 전송 중 및 대기 중에 암호화됩니다. 이는 사용자 자격 증명 같은 민감한 특정 데이터만 장치에서 내보내기 전에 암호화하는 Microsoft 계정 기반 설정 동기화에 비해 향상된 기능입니다.
 
-Microsoft는 고객 데이터를 보호하기 위해 최선을 다하고 있습니다. 엔터프라이즈 사용자의 설정 데이터는 Windows 10 장치에서 나오기 전에 Azure RMS를 통해 암호화되므로 다른 사용자가 이 데이터를 읽을 수 없습니다. 조직에서 Azure RMS에 대한 유료 구독을 보유한 경우 문서 추적 및 해제, 민감한 정보가 포함된 전자 메일 자동 보호, 사용자 고유 키("BYOK(Bring Your Own Key"라고도 함) 관리 등 다른 Azure RMS 기능을 사용할 수 있습니다. 이러한 기능 및 Azure RMS의 작동 방식에 대한 자세한 내용은 [Azure Rights Management란](https://technet.microsoft.com/jj585026.aspx)을 참조하세요.
+Microsoft는 고객 데이터를 보호하기 위해 최선을 다하고 있습니다. 엔터프라이즈 사용자의 설정 데이터는 Windows 10 장치에서 나오기 전에 Azure Rights Management 서비스를 통해 자동으로 암호화되므로 다른 사용자가 이 데이터를 읽을 수 없습니다. 조직에서 Azure Rights Management 서비스에 대한 유료 구독을 보유한 경우 문서 추적 및 해제, 민감한 정보가 포함된 이메일 자동 보호, 사용자 고유 키(BYOK("Bring Your Own Key" 솔루션)라고도 함) 관리 등 다른 보호 기능을 사용할 수 있습니다. 이러한 기능 및 이 보호 서비스의 작동 방식에 대한 자세한 내용은 [Azure Rights Management란](https://docs.microsoft.com/azure/information-protection/understand-explore/what-is-information-protection)을 참조하세요.
 
 ## <a name="can-i-manage-sync-for-a-specific-app-or-setting"></a>특정 앱 또는 설정에 대한 동기화를 관리할 수 있나요?
 Windows 10에는 개별 응용 프로그램의 로밍을 비활성화하는 MDM 또는 그룹 정책 설정이 없습니다. 테넌트 관리자는 관리되는 장치의 모든 앱에 대해 앱 데이터 동기화를 비활성화할 수 있지만 앱당 또는 앱 내부 수준에서 더욱 정교하게 제어하는 방법은 없습니다.
@@ -115,10 +115,10 @@ Microsoft에서는 사용자 프로필 로밍, UE-V, 엔터프라이즈 상태 �
 * Windows 설정 및 최신 UWP 앱 데이터는 이미 엔터프라이즈 상태 로밍을 통해 다루었으므로 UE-V 그룹 정책을 사용하여 비활성화해야 합니다.
 
 ## <a name="how-does-enterprise-state-roaming-support-virtual-desktop-infrastructure-vdi"></a>엔터프라이즈 상태 로밍은 VDI(가상 데스크톱 인프라)를 어떻게 지원하나요?
-엔터프라이즈 상태 로밍은 서버 SKU가 아니라 Windows 10 클라이언트 SKU에서 지원됩니다. 클라이언트 VM이 하이퍼바이저 컴퓨터에서 호스트되는 경우 사용자가 가상 컴퓨터에 원격으로 로그인하면 사용자의 데이터가 로밍됩니다. 여러 사용자가 동일한 OS를 공유하고 전체 데스크톱 환경을 위해 서버에 원격으로 로그인하는 경우 로밍이 작동하지 않을 수 있습니다. 두 번째 세션 기반 시나리오는 공식적으로 지원되지 않습니다.
+엔터프라이즈 상태 로밍은 서버 SKU가 아니라 Windows 10 클라이언트 SKU에서 지원됩니다. 클라이언트 VM이 하이퍼바이저 컴퓨터에서 호스트되는 경우 사용자가 가상 머신에 원격으로 로그인하면 사용자의 데이터가 로밍됩니다. 여러 사용자가 동일한 OS를 공유하고 전체 데스크톱 환경을 위해 서버에 원격으로 로그인하는 경우 로밍이 작동하지 않을 수 있습니다. 두 번째 세션 기반 시나리오는 공식적으로 지원되지 않습니다.
 
-## <a name="what-happens-when-my-organization-purchases-azure-rms-after-using-roaming"></a>조직에서 로밍을 사용하다가 Azure RMS를 구입하면 어떻게 되나요?
-조직에서 Azure RMS 사용 제한된 무료 구독을 통해 Windows 10에서 이미 로밍을 사용 중인 경우에는 유료 Azure RMS 구독을 구입해도 로밍 기능에 영향을 주지 않으며 IT 관리자가 구성을 변경할 필요가 없습니다.
+## <a name="what-happens-when-my-organization-purchases-a-subscription-that-includes-azure-rights-management-after-using-roaming"></a>조직이 로밍 사용 후 Azure Rights Management를 포함하는 구독을 구매하는 경우 어떻게 되나요?
+조직에서 Azure Rights Management 사용 제한된 무료 구독을 통해 Windows 10에서 이미 로밍을 사용 중인 경우에는 Azure Rights Management 보호 서비스를 포함하는 [유료 구독](https://azure.microsoft.com/pricing/details/information-protection/)을 구입해도 로밍 기능에 영향을 주지 않으며, IT 관리자가 구성을 변경할 필요가 없습니다.
 
 ## <a name="known-issues"></a>알려진 문제
 알려진 문제 목록은 [문제 해결](active-directory-windows-enterprise-state-roaming-troubleshooting.md) 섹션의 문서를 참조하세요. 
@@ -129,4 +129,3 @@ Microsoft에서는 사용자 프로필 로밍, UE-V, 엔터프라이즈 상태 �
 * [설정 동기화에 대한 그룹 정책 및 MDM 설정](active-directory-windows-enterprise-state-roaming-group-policy-settings.md)
 * [Windows 10 로밍 설정 참조](active-directory-windows-enterprise-state-roaming-windows-settings-reference.md)
 * [문제 해결](active-directory-windows-enterprise-state-roaming-troubleshooting.md)
-

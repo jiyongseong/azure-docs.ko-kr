@@ -1,9 +1,9 @@
 ---
-title: "Azure Active Directory의 클레임 매핑(공개 미리 보기) | Microsoft Docs"
-description: "이 페이지에서는 Azure Active Directory 클레임 매핑을 설명합니다."
+title: Azure Active Directory의 클레임 매핑(공개 미리 보기) | Microsoft Docs
+description: 이 페이지에서는 Azure Active Directory 클레임 매핑을 설명합니다.
 services: active-directory
 author: billmath
-manager: femila
+manager: mtillman
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
@@ -11,14 +11,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/14/2017
 ms.author: billmath
+ms.openlocfilehash: e35a33cbe77d9d29b975ede8535abbded2cde4c3
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 78dbbe085fca26ad529c6262ba852f3c06ace404
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-
 # <a name="claims-mapping-in-azure-active-directory-public-preview"></a>Azure Active Directory의 클레임 매핑(공개 미리 보기)
 
 >[!NOTE]
@@ -32,7 +30,7 @@ ms.lasthandoff: 07/21/2017
 - 특정 클레임에 내보내지는 데이터 원본을 선택하거나 변경합니다.
 
 >[!NOTE]
->이 기능은 현재 공개 미리 보기로 제공되고 있습니다. 변경 내용을 되돌리거나 제거할 준비를 해야 합니다. 이 기능은 공개 미리 보기 동안 모든 Azure AD(Azure Active Directory) 구독에서 사용할 수 있습니다. 그러나 기능이 일반 공급되면 일부 기능에는 Azure Active Directory Premium 구독이 필요할 수도 있습니다.
+>이 기능은 현재 공개 미리 보기로 제공되고 있습니다. 변경 내용을 되돌리거나 제거할 준비를 해야 합니다. 이 기능은 공개 미리 보기 동안 모든 Azure AD(Azure Active Directory) 구독에서 사용할 수 있습니다. 그러나 기능이 일반 공급되면 일부 기능에는 Azure Active Directory Premium 구독이 필요할 수도 있습니다. 이 기능은 WS-Fed, SAML, OAuth 및 OpenID Connect 프로토콜에 대한 클레임 매핑 정책 구성을 지원합니다.
 
 ## <a name="claims-mapping-policy-type"></a>클레임 매핑 정책 유형
 Azure AD에서 **정책** 개체는 조직에 있는 개별 응용 프로그램 또는 모든 응용 프로그램에 적용되는 규칙 집합을 나타냅니다. 각 유형의 정책에는 할당된 개체에 적용되는 속성 집합이 포함된 고유한 구조가 있습니다.
@@ -142,7 +140,7 @@ Azure AD에서 **정책** 개체는 조직에 있는 개별 응용 프로그램 
 |onprem_sam_account_name|
 |onprem_sid|
 |openid2_id|
-|password|
+|암호|
 |platf|
 |polids|
 |pop_jwk|
@@ -177,7 +175,7 @@ Azure AD에서 **정책** 개체는 조직에 있는 개별 응용 프로그램 
 |unique_name|
 |upn|
 |user_setting_sync_url|
-|username|
+|사용자 이름|
 |uti|
 |ver|
 |verified_primary_email|
@@ -236,7 +234,7 @@ Azure AD에서 **정책** 개체는 조직에 있는 개별 응용 프로그램 
 |http://schemas.microsoft.com/identity/claims/scope|
 
 ## <a name="claims-mapping-policy-properties"></a>클레임 매핑 정책 속성
-클레임 매핑 정책의 속성을 사용하여 내보내지는 클레임과 데이터가 소싱되는 위치를 제어합니다. 정책을 설정하지 않으면 시스템은 핵심 클레임 집합, 기본 클레임 집합 및 응용 프로그램이 수신하도록 선택한 선택적 클레임이 포함된 토큰을 발급합니다.
+클레임 매핑 정책의 속성을 사용하여 내보내지는 클레임과 데이터가 소싱되는 위치를 제어합니다. 정책을 설정하지 않으면 시스템은 핵심 클레임 집합, 기본 클레임 집합 및 응용 프로그램이 수신하도록 선택한 [선택적 클레임](develop/active-directory-optional-claims.md)이 포함된 토큰을 발급합니다.
 
 ### <a name="include-basic-claim-set"></a>기본 클레임 집합 포함
 
@@ -492,7 +490,7 @@ Azure AD에서 특정 서비스 주체에 대해 토큰에 내보내지는 클�
     1. 정책을 만들려면 이 명령을 실행합니다. 
      
      ``` powershell
-    New-AzureADPolicy -Definition @('{"ClaimsMappingPolicy":{"Version":1,"IncludeBasicClaimSet":"true", "ClaimsSchema":[{"Source":"user","ID":"extensionattribute1"},{"Source":"transformation","ID":"DataJoin","TransformationId":"JoinTheData","JwtClaimType":"JoinedData"}],"ClaimsTransformation":[{"ID":"JoinTheData","TransformationMethod":"Join","InputClaims":[{"ClaimTypeReferenceId":"extensionattribute1","TransformationClaimType":"string1"}], "InputParameters": [{"Id":"string2","Value":"sandbox"},{"Id":"separator","Value":"."}],"OutputClaims":[{"ClaimTypeReferenceId":"DataJoin","TransformationClaimType":"outputClaim"}]}]}}') -DisplayName "TransformClaimsExample” -Type "ClaimsMappingPolicy"
+    New-AzureADPolicy -Definition @('{"ClaimsMappingPolicy":{"Version":1,"IncludeBasicClaimSet":"true", "ClaimsSchema":[{"Source":"user","ID":"extensionattribute1"},{"Source":"transformation","ID":"DataJoin","TransformationId":"JoinTheData","JwtClaimType":"JoinedData"}],"ClaimsTransformations":[{"ID":"JoinTheData","TransformationMethod":"Join","InputClaims":[{"ClaimTypeReferenceId":"extensionattribute1","TransformationClaimType":"string1"}], "InputParameters": [{"ID":"string2","Value":"sandbox"},{"ID":"separator","Value":"."}],"OutputClaims":[{"ClaimTypeReferenceId":"DataJoin","TransformationClaimType":"outputClaim"}]}]}}') -DisplayName "TransformClaimsExample" -Type "ClaimsMappingPolicy" 
     ```
     
     2. 새 정책을 보고 정책 ObjectId를 가져오려면 다음 명령을 실행합니다. 
@@ -507,4 +505,3 @@ Azure AD에서 특정 서비스 주체에 대해 토큰에 내보내지는 클�
      ``` powershell
     Add-AzureADServicePrincipalPolicy -Id <ObjectId of the ServicePrincipal> -RefObjectId <ObjectId of the Policy>
     ```
-

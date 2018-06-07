@@ -1,28 +1,27 @@
 ---
-title: "IPv6를 사용하여 인터넷 연결 부하 분산 장치 배포 - Azure 템플릿 | Microsoft Docs"
-description: "Azure Load Balancer 및 부하 분산된 VM에 대한 IPv6 지원을 배포하는 방법."
+title: IPv6를 사용하여 인터넷 연결 부하 분산 장치 배포 - Azure 템플릿 | Microsoft Docs
+description: Azure Load Balancer 및 부하 분산된 VM에 대한 IPv6 지원을 배포하는 방법.
 services: load-balancer
 documentationcenter: na
-author: kumudd
+author: KumudD
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
-keywords: "ipv6, Azure Load Balancer, 이중 스택, 공용 IP, 기본 ipv6, 모바일, iot"
+keywords: ipv6, Azure Load Balancer, 이중 스택, 공용 IP, 기본 ipv6, 모바일, iot
 ms.assetid: 2998e943-13fc-4ea9-a68c-875e53a08db3
 ms.service: load-balancer
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 01/23/2016
+ms.date: 09/25/2017
 ms.author: kumud
-translationtype: Human Translation
-ms.sourcegitcommit: a087df444c5c88ee1dbcf8eb18abf883549a9024
-ms.openlocfilehash: 95962833f853886476630d703c8959bad1852e50
-ms.lasthandoff: 03/15/2017
-
+ms.openlocfilehash: 431b43979ac364d943c58c40b4199b7f30f9acf6
+ms.sourcegitcommit: c3d53d8901622f93efcd13a31863161019325216
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/29/2018
 ---
-
 # <a name="deploy-an-internet-facing-load-balancer-solution-with-ipv6-using-a-template"></a>템플릿을 사용하여 IPv6로 인터넷 연결 부하 분산 장치 솔루션을 배포합니다.
 
 > [!div class="op_single_selector"]
@@ -30,7 +29,9 @@ ms.lasthandoff: 03/15/2017
 > * [Azure CLI](load-balancer-ipv6-internet-cli.md)
 > * [템플릿](load-balancer-ipv6-internet-template.md)
 
-Azure 부하 분산 장치는 계층 4(TCP, UDP) 부하 분산 장치입니다. 부하 분산 장치는 부하 분산 장치 집합에 있는 클라우드 서비스 또는 가상 컴퓨터의 정상 서비스 인스턴스 간에 들어오는 트래픽을 배포하여 고가용성을 제공합니다. Azure Load Balancer는 여러 포트, 여러 IP 주소 또는 둘 다에서 이러한 서비스를 제공할 수도 있습니다.
+
+
+Azure 부하 분산 장치는 계층 4(TCP, UDP) 부하 분산 장치입니다. 부하 분산 장치는 부하 분산 장치 집합에 있는 클라우드 서비스 또는 가상 머신의 정상 서비스 인스턴스 간에 들어오는 트래픽을 배포하여 고가용성을 제공합니다. Azure Load Balancer는 여러 포트, 여러 IP 주소 또는 둘 다에서 이러한 서비스를 제공할 수도 있습니다.
 
 ## <a name="example-deployment-scenario"></a>예제 배포 시나리오
 
@@ -44,7 +45,7 @@ Azure 부하 분산 장치는 계층 4(TCP, UDP) 부하 분산 장치입니다. 
 * IPv4 및 IPv6 공용 IP 주소를 가진 인터넷 연결 부하 분산 장치
 * 공용 VIP를 개인 끝점으로 매핑하기 위한 두 개의 부하 분산 규칙
 * 두 개의 VM이 들어 있는 가용성 집합
-* 2개의 가상 컴퓨터(VM)
+* 2개의 가상 머신(VM)
 
 ## <a name="deploying-the-template-using-the-azure-portal"></a>Azure Portal을 사용하여 템플릿 배포
 
@@ -109,10 +110,10 @@ Azure Resource Manager 템플릿은 요구에 맞게 사용자 지정할 수 있
 
 이 문서에서 사용된 예제 템플릿에는 다음 변수 및 매개 변수가 들어 있습니다.
 
-| 매개 변수 / 변수 | 참고 사항 |
+| 매개 변수 / 변수 | 메모 |
 | --- | --- |
-| adminUsername |가상 컴퓨터에 로그인하는 데 사용되는 관리자 계정의 이름을 지정합니다. |
-| adminPassword |가상 컴퓨터에 로그인하는 데 사용되는 관리자 계정의 비밀번호를 지정합니다. |
+| adminUsername |가상 머신에 로그인하는 데 사용되는 관리자 계정의 이름을 지정합니다. |
+| adminPassword |가상 머신에 로그인하는 데 사용되는 관리자 계정의 비밀번호를 지정합니다. |
 | dnsNameforIPv4LbIP |부하 분산 장치의 공개 이름으로 할당하려는 DNS 호스트 이름을 지정합니다. 이 이름은 부하 분산 장치의 공용 IPv4 주소로 바뀝니다. 이름은 소문자이어야 하며 다음 정규식과 일치해야 합니다.^[a-z][a-z0-9-]{1,61}[a-z0-9]$ |
 | dnsNameforIPv6LbIP |부하 분산 장치의 공개 이름으로 할당하려는 DNS 호스트 이름을 지정합니다. 이 이름은 부하 분산 장치의 공용 IPv6 주소로 바뀝니다. 이름은 소문자이어야 하며 다음 정규식과 일치해야 합니다.^[a-z][a-z0-9-]{1,61}[a-z0-9]$ 이 이름은 IPv4 주소와 같은 이름일 수 있습니다. 클라이언트가 이 이름에 대한 DNS 쿼리를 보낼 때 Azure는 이름이 공유된 경우 A 및 AAAA 기록 모두를 반환합니다. |
 | vmNamePrefix |VM 이름 접두사를 지정합니다. VM이 만들어질 때 템플릿은 이름에 번호(0, 1, 등)를 추가합니다. |
@@ -133,4 +134,3 @@ Azure Resource Manager 템플릿은 요구에 맞게 사용자 지정할 수 있
 | lbName |부하 분산 장치의 이름을 지정합니다. 이 이름은 포털에 표시되거나 CLI 또는 PowerShell 명령을 사용하여 참조할 때 사용됩니다. |
 
 템플릿의 나머지 변수는 Azure가 리소스를 만들 때 할당되는 파생 값을 포함합니다. 이러한 변수를 변경하지 마십시오.
-

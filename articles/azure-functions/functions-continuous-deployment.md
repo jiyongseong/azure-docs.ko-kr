@@ -4,7 +4,7 @@ description: "Azure 앱 서비스의 연속 배포 기능을 사용하여 Azure 
 services: functions
 documentationcenter: na
 author: ggailey777
-manager: erikre
+manager: cfowler
 editor: 
 tags: 
 ms.assetid: 361daf37-598c-4703-8d78-c77dbef91643
@@ -15,12 +15,11 @@ ms.tgt_pltfrm: multiple
 ms.workload: na
 ms.date: 09/25/2016
 ms.author: glenga
-translationtype: Human Translation
-ms.sourcegitcommit: b0c27ca561567ff002bbb864846b7a3ea95d7fa3
-ms.openlocfilehash: 3756f1a039730bfd99b0375ce9bfeaf27178f2e0
-ms.lasthandoff: 04/25/2017
-
-
+ms.openlocfilehash: 35a0b0faa61cf4b42ba1d8696c85f5724ff73f23
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="continuous-deployment-for-azure-functions"></a>Azure Functions에 대한 연속 배포
 Azure Functions를 사용하면 App Service 연속 통합을 사용하여 함수 앱을 쉽게 배포할 수 있습니다. Functions는 BitBucket, Dropbox, GitHub 및 VSTS(Visual Studio Team Services)와 통합됩니다. 따라서 Azure에사 이러한 통합된 서비스 트리거 배포 중 하나를 사용하여 함수 코드가 업데이트된 워크플로를 구현할 수 있습니다. Azure Functions를 처음 접하는 경우 [Azure 함수 개요](functions-overview.md)로 시작합니다.
@@ -30,7 +29,7 @@ Azure Functions를 사용하면 App Service 연속 통합을 사용하여 함수
 * [Bitbucket](https://bitbucket.org/)
 * [Dropbox](https://www.dropbox.com/)
 * 외부 리포지토리(Git 또는 Mercurial)
-* [Git 로컬 리포지토리](../app-service-web/app-service-deploy-local-git.md)
+* [Git 로컬 리포지토리](../app-service/app-service-deploy-local-git.md)
 * [GitHub](https://github.com)
 * [OneDrive](https://onedrive.live.com/)
 * [Visual Studio Team Services](https://www.visualstudio.com/team-services/)
@@ -149,3 +148,7 @@ FTP 또는 로컬 Git 리포지토리가 있는 함수 앱에서 파일을 다�
 
 [GitHub]: https://github.com/
 
+## <a name="next-steps"></a>다음 단계
+
+> [!div class="nextstepaction"]
+> [Azure Functions에 대한 모범 사례](functions-best-practices.md)

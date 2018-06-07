@@ -1,12 +1,11 @@
 ---
-title: "HL7 FHIR 리소스에 대한 변경 사항 피드 - Azure Cosmos DB | Microsoft Docs"
-description: "Azure Logic Apps, Azure Cosmos DB 및 Service Bus를 사용하여 HL7 FHIR 환자 의료 기록에 대한 변경 알림 설정 방법을 알아보세요."
+title: HL7 FHIR 리소스에 대한 변경 사항 피드 - Azure Cosmos DB | Microsoft Docs
+description: Azure Logic Apps, Azure Cosmos DB 및 Service Bus를 사용하여 HL7 FHIR 환자 의료 기록에 대한 변경 알림 설정 방법을 알아보세요.
 keywords: hl7 fhir
 services: cosmos-db
 author: hedidin
-manager: jhubbard
-editor: mimig
-documentationcenter: 
+manager: kfile
+documentationcenter: ''
 ms.assetid: 0d25c11f-9197-419a-aa19-4614c6ab2d06
 ms.service: cosmos-db
 ms.workload: data-services
@@ -14,16 +13,13 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 02/08/2017
-ms.author: b-hoedid
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 80be19618bd02895d953f80e5236d1a69d0811af
-ms.openlocfilehash: 6e6e12f3d6d95002b223ad0fcb11d72bd920cdaf
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/07/2017
-
-
+ms.author: sngun
+ms.openlocfilehash: d9894709cc10c55295e63f64a0db89137bf36826
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-
 # <a name="notifying-patients-of-hl7-fhir-health-care-record-changes-using-logic-apps-and-azure-cosmos-db"></a>Logic Apps 및 Azure Cosmos DB를 사용하여 환자에게 HL7 FHIR 의료 기록 변경 통지
 
 Azure MVP Howard Edidin은 최근에 환자 포털에 새 기능을 추가하길 원하는 한 의료 기관으로부터 문의를 받았습니다. 의료 기록이 업데이트되면 환자에게 알림을 보내고 환자가 이러한 업데이트를 구독할 수 있는 기능이 필요했습니다. 
@@ -57,7 +53,7 @@ Azure MVP Howard Edidin은 최근에 환자 포털에 새 기능을 추가하길
 
 ### <a name="azure-services-used-in-the-solution"></a>솔루션에 사용된 Azure 서비스
 
-#### <a name="azure-cosmos-db-documentdb-api"></a>Azure Cosmos DB DocumentDB API
+#### <a name="azure-cosmos-db-sql-api"></a>Azure Cosmos DB SQL API
 Azure Cosmos DB는 다음 그림과 같이 FHIR 리소스에 대한 리포지토리입니다.
 
 ![이 HL7 FHIR 의료 자습서에서 사용된 Azure Cosmos DB 계정](./media/change-feed-hl7-fhir-logic-apps/account.png)
@@ -79,7 +75,7 @@ Logic Apps는 워크플로 프로세스를 처리합니다. 다음 스크린샷�
 
     ![본문에 HL7 FHIR 리소스가 포함된 환자 전자 메일을 보내는 논리 앱](./media/change-feed-hl7-fhir-logic-apps/hl7-fhir-logic-apps-send-email.png)
 
-#### <a name="service-bus"></a>서비스 버스
+#### <a name="service-bus"></a>Service Bus
 다음 그림에서는 환자 큐를 보여 줍니다. 태그 속성 값은 전자 메일 제목에 사용됩니다.
 
 ![이 HL7 FHIR 자습서에서 사용한 Service Bus 큐](./media/change-feed-hl7-fhir-logic-apps/hl7-fhir-service-bus-queue.png)
@@ -89,7 +85,7 @@ Logic Apps는 워크플로 프로세스를 처리합니다. 다음 스크린샷�
 #### <a name="api-app"></a>API 앱
 API 앱은 Azure Cosmos DB에 연결해서 리소스 유형별로 새롭거나 수정된 FHIR 문서를 쿼리합니다. 이 앱에는 하나의 작업 **GetNewOrModifiedFhirDocuments**가 있는 하나의 컨트롤러 **FhirNotificationApi**가 있습니다. [API 앱의 소스](#api-app-source)를 참조하세요.
 
-Azure Cosmos DB DocumentDB .NET API에서 [`CreateDocumentChangeFeedQuery`](https://msdn.microsoft.com/library/azure/microsoft.azure.documents.client.documentclient.createdocumentchangefeedquery.aspx) 클래스를 사용하고 있습니다. 자세한 내용은 [변경 사항 피드 문서](change-feed.md)를 참조하세요. 
+Azure Cosmos DB SQL .NET API에서 [`CreateDocumentChangeFeedQuery`](https://msdn.microsoft.com/library/azure/microsoft.azure.documents.client.documentclient.createdocumentchangefeedquery.aspx) 클래스를 사용하고 있습니다. 자세한 내용은 [변경 사항 피드 문서](change-feed.md)를 참조하세요. 
 
 ##### <a name="getnewormodifiedfhirdocuments-operation"></a>GetNewOrModifiedFhirDocuments 작업
 
@@ -108,7 +104,7 @@ Azure Cosmos DB DocumentDB .NET API에서 [`CreateDocumentChangeFeedQuery`](http
 
 **API 앱에 대한 원본**
 
-```C#
+```csharp
 
     using System.Collections.Generic;
     using System.Linq;
@@ -233,6 +229,5 @@ Azure Cosmos DB DocumentDB .NET API에서 [`CreateDocumentChangeFeedQuery`](http
 
 ## <a name="next-steps"></a>다음 단계
 Azure Cosmos DB에 대한 자세한 내용은 [Azure Cosmos DB 홈페이지](https://azure.microsoft.com/services/cosmos-db/)를 참조하세요. Logic Apps에 대한 자세한 내용은 [Logic Apps](https://azure.microsoft.com/services/logic-apps/)를 참조하세요.
-
 
 

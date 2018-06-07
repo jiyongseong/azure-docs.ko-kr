@@ -1,11 +1,11 @@
 ---
-title: "Azure PowerShell을 사용하여 Azure Redis Cache 관리 | Microsoft Docs"
-description: "Azure PowerShell을 사용하여 Azure Redis Cache에 대한 관리 작업을 수행하는 방법을 알아봅니다."
+title: Azure PowerShell을 사용하여 Azure Redis Cache 관리 | Microsoft Docs
+description: Azure PowerShell을 사용하여 Azure Redis Cache에 대한 관리 작업을 수행하는 방법을 알아봅니다.
 services: redis-cache
-documentationcenter: 
-author: steved0x
-manager: douge
-editor: 
+documentationcenter: ''
+author: wesmc7777
+manager: cfowler
+editor: ''
 ms.assetid: 1136efe5-1e33-4d91-bb49-c8e2a6dca475
 ms.service: cache
 ms.workload: tbd
@@ -13,13 +13,12 @@ ms.tgt_pltfrm: cache-redis
 ms.devlang: na
 ms.topic: article
 ms.date: 07/13/2017
-ms.author: sdanie
+ms.author: wesmc
+ms.openlocfilehash: 38b2f57811b0e952d3020c06d39350918f2f0391
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
 ms.translationtype: HT
-ms.sourcegitcommit: 8021f8641ff3f009104082093143ec8eb087279e
-ms.openlocfilehash: 0a5c95eab3fd01f611fc049e80c5c506857e0b81
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="manage-azure-redis-cache-with-azure-powershell"></a>Azure PowerShell을 사용하여 Azure Redis Cache 관리
 > [!div class="op_single_selector"]
@@ -32,7 +31,7 @@ ms.lasthandoff: 07/21/2017
 
 [!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-rm-include.md)]
 
-두 배포 모델에 대한 자세한 내용은 [Azure Resource Manager 및 클래식 배포: 배포 모델 및 리소스 상태 이해](../azure-resource-manager/resource-manager-deployment-model.md#classic-deployment-characteristics)를 참조하세요.
+두 배포 모델에 대한 자세한 내용은 [Azure Resource Manager 및 클래식 배포: 배포 모델 및 리소스 상태 이해](../azure-resource-manager/resource-manager-deployment-model.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 Azure PowerShell을 이미 설치한 경우 Azure PowerShell 버전 1.0.0 이상이 있어야 합니다. Azure PowerShell 명령 프롬프트에서 다음 명령을 사용하여 설치한 Azure PowerShell의 버전을 확인할 수 있습니다.
@@ -42,7 +41,7 @@ Azure PowerShell을 이미 설치한 경우 Azure PowerShell 버전 1.0.0 이상
 
 먼저 다음 명령을 사용하여 Azure에 로그인해야 합니다.
 
-    Login-AzureRmAccount
+    Connect-AzureRmAccount
 
 Microsoft Azure 로그인 대화 상자에서 Azure 계정의 전자 메일 주소 및 해당 암호를 지정합니다.
 
@@ -67,18 +66,18 @@ Azure 리소스 관리자에서 Windows PowerShell을 사용하려면 다음이 
     Get-Help New-AzureRmRedisCache -Detailed
 
 ### <a name="how-to-connect-to-other-clouds"></a>다른 클라우드에 연결하는 방법
-기본적으로 Azure 환경은 글로벌 Azure 클라우드 인스턴스를 나타내는 `AzureCloud`입니다. 다른 인스턴스에 연결하려면 원하는 환경 또는 환경 이름을 사용하여 `-Environment` 또는 -`EnvironmentName` 명령줄 스위치와 함께 `Add-AzureRmAccount` 명령을 사용합니다.
+기본적으로 Azure 환경은 글로벌 Azure 클라우드 인스턴스를 나타내는 `AzureCloud`입니다. 다른 인스턴스에 연결하려면 원하는 환경 또는 환경 이름을 사용하여 `-Environment` 또는 -`EnvironmentName` 명령줄 스위치와 함께 `Connect-AzureRmAccount` 명령을 사용합니다.
 
 사용 가능한 환경 목록을 보려면 `Get-AzureRmEnvironment` cmdlet을 실행합니다.
 
 ### <a name="to-connect-to-the-azure-government-cloud"></a>Azure Government 클라우드를 연결하려면
 Azure Government 클라우드를 연결하려면 다음 명령 중 하나를 사용합니다.
 
-    Add-AzureRMAccount -EnvironmentName AzureUSGovernment
+    Connect-AzureRmAccount -EnvironmentName AzureUSGovernment
 
 또는
 
-    Add-AzureRmAccount -Environment (Get-AzureRmEnvironment -Name AzureUSGovernment)
+    Connect-AzureRmAccount -Environment (Get-AzureRmEnvironment -Name AzureUSGovernment)
 
 Azure Government 클라우드 내에 캐시를 만들려면 다음 위치 중 하나를 사용합니다.
 
@@ -90,11 +89,11 @@ Azure Government 클라우드에 대한 자세한 내용은 [Microsoft Azure Gov
 ### <a name="to-connect-to-the-azure-china-cloud"></a>Azure 중국 클라우드에 연결하려면
 Azure 중국 클라우드에 연결하려면 다음 명령 중 하나를 사용합니다.
 
-    Add-AzureRMAccount -EnvironmentName AzureChinaCloud
+    Connect-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 또는
 
-    Add-AzureRmAccount -Environment (Get-AzureRmEnvironment -Name AzureChinaCloud)
+    Connect-AzureRmAccount -Environment (Get-AzureRmEnvironment -Name AzureChinaCloud)
 
 Azure 중국 클라우드에서 캐시를 만들려면 다음 위치 중 하나를 사용합니다.
 
@@ -106,12 +105,12 @@ Azure 중국 클라우드에 대한 자세한 내용은 [중국 21Vianet에서 �
 ### <a name="to-connect-to-microsoft-azure-germany"></a>Microsoft Azure Germany에 연결하려면
 Microsoft Azure Germany에 연결하려면 다음 명령 중 하나를 사용합니다.
 
-    Add-AzureRMAccount -EnvironmentName AzureGermanCloud
+    Connect-AzureRmAccount -EnvironmentName AzureGermanCloud
 
 
 또는
 
-    Add-AzureRmAccount -Environment (Get-AzureRmEnvironment -Name AzureGermanCloud)
+    Connect-AzureRmAccount -Environment (Get-AzureRmEnvironment -Name AzureGermanCloud)
 
 Microsoft Azure Germany에서 캐시를 만들려면 다음 위치 중 하나를 사용합니다.
 
@@ -130,7 +129,7 @@ Microsoft Azure Germany에 대한 자세한 내용은 [Microsoft Azure Germany](
 | ResourceGroupName |캐시를 만들 리소스 그룹 이름 | |
 | 크기 |캐시의 크기. 유효한 값: P1, P2, P3, P4, C0, C1, C2, C3, C4, C5, C6, 250MB, 1GB, 2.5GB, 6GB, 13GB, 26GB, 53GB |1GB |
 | ShardCount |클러스터링을 사용하는 프리미엄 캐시를 만들 때 만들 분할된 데이터베이스 수. 유효한 값: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 | |
-| SKU |캐시의 SKU를 지정합니다. 유효한 값: 기본, 표준, 프리미엄 |표준 |
+| SKU |캐시의 SKU를 지정합니다. 유효한 값: 기본, 표준, 프리미엄 |Standard |
 | RedisConfiguration |Redis 구성 설정을 지정합니다. 각 설정에 대한 자세한 내용은 다음 [RedisConfiguration 속성](#redisconfiguration-properties) 테이블을 참조하세요. | |
 | EnableNonSslPort |비 SSL 포트를 사용하는지 여부를 나타냅니다. |False |
 | MaxMemoryPolicy |이 매개 변수는 더 이상 사용되지 않으며 대신 RedisConfiguration을 사용합니다. | |
@@ -140,7 +139,7 @@ Microsoft Azure Germany에 대한 자세한 내용은 [Microsoft Azure Germany](
 | KeyType |액세스 키를 갱신할 때 다시 생성할 액세스 키를 지정합니다. 유효한 값: 주, 보조 | |
 
 ### <a name="redisconfiguration-properties"></a>RedisConfiguration 속성
-| 속성 | 설명 | 가격 책정 계층 |
+| 자산 | 설명 | 가격 책정 계층 |
 | --- | --- | --- |
 | rdb-backup-enabled |[Redis 데이터 지속성](cache-how-to-premium-persistence.md) 사용 여부 |프리미엄 전용 |
 | rdb-storage-connection-string |[Redis 데이터 지속성](cache-how-to-premium-persistence.md) |프리미엄 전용 |
@@ -599,7 +598,7 @@ Redis Cache를 삭제하려면 [Remove-AzureRmRedisCache](https://msdn.microsoft
 `Import-AzureRmRedisCache` cmdlet을 사용하여 Azure Redis Cache 인스턴스에 데이터를 가져올 수 있습니다.
 
 > [!IMPORTANT]
-> 가져오기/내보내기는 [프리미엄 계층](cache-premium-tier-intro.md) 캐시에만 제공됩니다. 가져오기/내보내기에 대한 자세한 내용은 [Azure Redis Cache에서 데이터 가져오기 및 내보내기](cache-how-to-import-export-data.md)를 참조하세요.
+> Import/Export는 [프리미엄 계층](cache-premium-tier-intro.md) 캐시에만 제공됩니다. Import/Export에 대한 자세한 내용은 [Azure Redis Cache에서 데이터 가져오기 및 내보내기](cache-how-to-import-export-data.md)를 참조하세요.
 > 
 > 
 
@@ -659,7 +658,7 @@ Redis Cache를 삭제하려면 [Remove-AzureRmRedisCache](https://msdn.microsoft
 `Export-AzureRmRedisCache` cmdlet을 사용하여 Azure Redis Cache 인스턴스에서 데이터를 내보낼 수 있습니다.
 
 > [!IMPORTANT]
-> 가져오기/내보내기는 [프리미엄 계층](cache-premium-tier-intro.md) 캐시에만 제공됩니다. 가져오기/내보내기에 대한 자세한 내용은 [Azure Redis Cache에서 데이터 가져오기 및 내보내기](cache-how-to-import-export-data.md)를 참조하세요.
+> Import/Export는 [프리미엄 계층](cache-premium-tier-intro.md) 캐시에만 제공됩니다. Import/Export에 대한 자세한 내용은 [Azure Redis Cache에서 데이터 가져오기 및 내보내기](cache-how-to-import-export-data.md)를 참조하세요.
 > 
 > 
 
@@ -786,5 +785,4 @@ Azure에서 Windows PowerShell 사용에 대한 자세한 내용은 다음 리�
 * [Azure 블로그](http://blogs.msdn.com/windowsazure): Azure의 새로운 기능에 대해 알아봅니다.
 * [Windows PowerShell 블로그](http://blogs.msdn.com/powershell): Windows PowerShell의 새로운 기능에 대해 알아봅니다.
 * ["Hey, Scripting Guy!" 블로그](http://blogs.technet.com/b/heyscriptingguy/): Windows PowerShell 커뮤니티에서 실제 팁과 요령을 확인합니다.
-
 

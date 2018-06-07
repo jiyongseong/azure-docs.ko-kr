@@ -1,29 +1,29 @@
 ---
-title: "C용 Azure IoT 장치 SDK – IoTHubClient | Microsoft Docs"
-description: "C용 Azure IoT 장치 SDK에서 IoTHubClient 라이브러리를 사용하여 IoT Hub와 통신하는 장치 앱을 만드는 방법입니다."
+title: C용 Azure IoT 장치 SDK – IoTHubClient | Microsoft Docs
+description: C용 Azure IoT 장치 SDK에서 IoTHubClient 라이브러리를 사용하여 IoT Hub와 통신하는 장치 앱을 만드는 방법입니다.
 services: iot-hub
-documentationcenter: 
-author: olivierbloch
+documentationcenter: ''
+author: yzhong94
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 828cf2bf-999d-4b8a-8a28-c7c901629600
 ms.service: iot-hub
 ms.devlang: cpp
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 09/06/2016
-ms.author: obloch
-ms.translationtype: Human Translation
-ms.sourcegitcommit: e7da3c6d4cfad588e8cc6850143112989ff3e481
-ms.openlocfilehash: 2f1689a2f59b779c83b6be746edda915fd67a3db
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/16/2017
-
-
+ms.date: 08/29/2017
+ms.author: yizhon
+ms.openlocfilehash: 0fa07b2a785bd7d1a26924918e4428fd420e1547
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="azure-iot-device-sdk-for-c--more-about-iothubclient"></a>C용 Azure IoT 장치 SDK – IoTHubClient에 대한 자세한 정보
 이 시리즈의 [첫 번째 문서](iot-hub-device-sdk-c-intro.md)에서는 **C용 Azure IoT 장치 SDK**에 대해 소개했습니다. 첫 번째 문서에서 SDK에 두 아키텍처 계층이 있다는 것을 설명했습니다. 맨 하단은 IoT Hub와의 통신을 직접 관리하는 **IoTHubClient** 라이브러리입니다. 직렬화 서비스를 제공하기 위해 위쪽에 구축되는 **serializer** 라이브러리도 있습니다. 이 문서에서는 **IoTHubClient** 라이브러리에 대한 추가 세부 정보를 제공합니다.
+
+[!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-partial.md)]
 
 이전 문서에서는 **IoTHubClient** 라이브러리를 사용하여 이벤트를 IoT Hub로 전송하고 메시지를 수신하는 방법을 설명했습니다. 이 문서에서는 *하위 수준 API* 를 소개하여 데이터를 전송 및 수신하는 **시간**을 보다 정확하게 관리하는 방법에 대한 설명으로 논의를 확대합니다. 또한 **IoTHubClient** 라이브러리의 속성 처리 기능을 사용하여 이벤트에 속성을 첨부하고 메시지에서 검색하는 방법도 설명합니다. 마지막으로 IoT Hub에서 수신한 메시지를 처리하는 다양한 방법에 대한 추가 설명을 제공합니다.
 
@@ -261,10 +261,10 @@ IoTHubClient_LL_SetOption(iotHubClientHandle, "timeout", &timeout);
 
 일반적으로 사용되는 몇 가지 옵션이 있습니다.
 
-* **SetBatching**(bool) – **true**이면 IoT Hub로 전송된 데이터가 일괄 처리로 전송됩니다. **false**이면 메시지가 개별적으로 전송됩니다. 기본값은 **false**입니다. 참고로 **SetBatching** 옵션은 HTTP 프로토콜에만 적용되며 MQTT 또는 AMQP 프로토콜에는 적용되지 않습니다.
-* **Timeout** (unsigned int) – 이 값은 밀리초 단위로 표시됩니다. HTTP 요청을 전송하고 응답을 수신하는 경우 이 시간보다 오래 걸리면 연결이 시간 초과됩니다.
+* **SetBatching**(bool) – **true**이면 IoT Hub로 전송된 데이터가 일괄 처리로 전송됩니다. **false**이면 메시지가 개별적으로 전송됩니다. 기본값은 **false**입니다. 참고로 **SetBatching** 옵션은 HTTPS 프로토콜에만 적용되며 MQTT 또는 AMQP 프로토콜에는 적용되지 않습니다.
+* **Timeout** (unsigned int) – 이 값은 밀리초 단위로 표시됩니다. HTTPS 요청을 전송하고 응답을 수신하는 경우 이 시간보다 오래 걸리면 연결이 시간 초과됩니다.
 
-일괄 처리 옵션은 중요합니다. 기본적으로 라이브러리는 개별적으로 이벤트를 수신합니다(**IoTHubClient\_LL\_SendEventAsync**에 전달한 단일 이벤트). 일괄 처리 옵션이 **true**인 경우 라이브러리는 버퍼에서 가져올 수 있는 만큼 이벤트를 수집합니다(IoT Hub에서 수락하는 최대 메시지 크기까지).  이벤트 일괄 처리는 단일 HTTP 호출로 IoT Hub에 전송됩니다(개별 이벤트는 JSON 배열에 번들됨). 일괄 처리를 설정하면 네트워크 왕복이 감소되므로 성능상 이점이 상당합니다. 각 개별 이벤트에 대한 헤더 집합이 아닌, 이벤트 일괄 처리가 포함된 한 집합의 HTTP 헤더를 전송하므로 대역폭도 크게 감소합니다. 다른 이유가 없는 한, 일반적으로 일괄 처리를 사용하도록 설정하는 것이 좋습니다.
+일괄 처리 옵션은 중요합니다. 기본적으로 라이브러리는 개별적으로 이벤트를 수신합니다(**IoTHubClient\_LL\_SendEventAsync**에 전달한 단일 이벤트). 일괄 처리 옵션이 **true**인 경우 라이브러리는 버퍼에서 가져올 수 있는 만큼 이벤트를 수집합니다(IoT Hub에서 수락하는 최대 메시지 크기까지).  이벤트 일괄 처리는 단일 HTTPS 호출로 IoT Hub에 전송됩니다(개별 이벤트는 JSON 배열에 번들됨). 일괄 처리를 설정하면 네트워크 왕복이 감소되므로 성능상 이점이 상당합니다. 각 개별 이벤트에 대한 헤더 집합이 아닌, 이벤트 일괄 처리가 포함된 한 집합의 HTTPS 헤더를 전송하므로 대역폭도 크게 감소합니다. 다른 이유가 없는 한, 일반적으로 일괄 처리를 사용하도록 설정하는 것이 좋습니다.
 
 ## <a name="next-steps"></a>다음 단계
 이 문서에서는 **C용 Azure IoT 장치 SDK**에 있는 **IoTHubClient** 라이브러리의 동작에 대해 자세히 설명했습니다. 이 정보로 **IoTHubClient** 라이브러리의 기능에 대해 제대로 이해해야 합니다. [다음 문서](iot-hub-device-sdk-c-serializer.md) 에서는 **serializer** 라이브러리에 대한 유사한 세부 정보를 제공합니다.
@@ -273,9 +273,8 @@ IoT Hub를 개발하는 방법에 대한 자세한 내용은 [Azure IoT SDK][lnk
 
 IoT Hub의 기능을 추가로 탐색하려면 다음을 참조하세요.
 
-* [Azure IoT Edge에서 장치 시뮬레이션][lnk-iotedge]
+* [Azure IoT Edge를 사용하여 에지 장치에 AI 배포][lnk-iotedge]
 
 [lnk-sdks]: iot-hub-devguide-sdks.md
 
-[lnk-iotedge]: iot-hub-linux-iot-edge-simulated-device.md
-
+[lnk-iotedge]: ../iot-edge/tutorial-simulate-device-linux.md

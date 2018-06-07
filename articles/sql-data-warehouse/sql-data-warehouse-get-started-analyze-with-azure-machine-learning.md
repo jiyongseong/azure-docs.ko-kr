@@ -1,39 +1,32 @@
 ---
-title: "Azure Machine Learning을 사용한 데이터 분석 | Microsoft Docs"
-description: "Azure 기계 학습을 사용하여 Azure SQL 데이터 웨어하우스에 저장된 데이터를 기반으로 예측 기계 학습 모델을 구축합니다."
+title: Azure Machine Learning을 사용한 데이터 분석 | Microsoft Docs
+description: Azure Machine Learning을 사용하여 Azure SQL Data Warehouse에 저장된 데이터를 기반으로 예측 기계 학습 모델을 구축합니다.
 services: sql-data-warehouse
-documentationcenter: NA
-author: kevinvngo
-manager: jhubbard
-editor: 
-ms.assetid: 95635460-150f-4a50-be9c-5ddc5797f8a9
+author: kavithaj
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: get-started-article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: integrate
-ms.date: 03/02/2017
-ms.author: kevin;barbkess
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c1cd1450d5921cf51f720017b746ff9498e85537
-ms.openlocfilehash: a5befbf1dc1862b3b0803eb4940341d246ec036c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/14/2017
-
-
+ms.topic: conceptual
+ms.component: consume
+ms.date: 04/17/2018
+ms.author: kavithaj
+ms.reviewer: igorstan
+ms.openlocfilehash: 4a5137ef22455c304dc672520aabd16cac2570e1
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
-# <a name="analyze-data-with-azure-machine-learning"></a>Azure 기계 학습을 사용하여 데이터 분석
+# <a name="analyze-data-with-azure-machine-learning"></a>Azure Machine Learning을 사용하여 데이터 분석
 > [!div class="op_single_selector"]
 > * [Power BI](sql-data-warehouse-get-started-visualize-with-power-bi.md)
-> * [Azure 기계 학습](sql-data-warehouse-get-started-analyze-with-azure-machine-learning.md)
+> * [Azure Machine Learning](sql-data-warehouse-get-started-analyze-with-azure-machine-learning.md)
 > * [Visual Studio](sql-data-warehouse-query-visual-studio.md)
 > * [sqlcmd](sql-data-warehouse-get-started-connect-sqlcmd.md) 
 > * [SSMS](sql-data-warehouse-query-ssms.md)
 > 
 > 
 
-이 자습서는 Azure 기계 학습을 사용하여 Azure SQL 데이터 웨어하우스에 저장된 데이터를 기반으로 예측 기계 학습 모델을 구축합니다. 특히 고객이 자전거를 구매할 가능성 여부를 예측하여 자전거 매장인 Adventure Works에 대한 대상 마케팅 캠페인을 구축합니다.
+이 자습서는 Azure Machine Learning을 사용하여 Azure SQL Data Warehouse에 저장된 데이터를 기반으로 예측 기계 학습 모델을 구축합니다. 특히 고객이 자전거를 구매할 가능성 여부를 예측하여 자전거 매장인 Adventure Works에 대한 대상 마케팅 캠페인을 구축합니다.
 
 > [!VIDEO https://channel9.msdn.com/Blogs/Azure/Integrating-Azure-Machine-Learning-with-Azure-SQL-Data-Warehouse/player]
 > 
@@ -42,7 +35,7 @@ ms.lasthandoff: 03/14/2017
 ## <a name="prerequisites"></a>필수 조건
 이 자습서를 단계별로 실행하려면 다음을 수행해야 합니다.
 
-* AdventureWorksDW 샘플 데이터로 미리 로드된 SQL 데이터 웨어하우스. 프로비전하려면 [SQL Data Warehouse 만들기][Create a SQL Data Warehouse]를 참조하고 샘플 데이터 로드를 선택합니다. 데이터 웨어하우스는 있지만 샘플 데이터가 없는 경우 [샘플 데이터를 수동으로 로드][load sample data manually]할 수 있습니다.
+* AdventureWorksDW 샘플 데이터로 미리 로드된 SQL Data Warehouse. 프로비전하려면 [SQL Data Warehouse 만들기][Create a SQL Data Warehouse]를 참조하고 샘플 데이터 로드를 선택합니다. 데이터 웨어하우스는 있지만 샘플 데이터가 없는 경우 [샘플 데이터를 수동으로 로드][load sample data manually]할 수 있습니다.
 
 ## <a name="1-get-the-data"></a>1. 데이터 가져오기
 데이터는 AdventureWorksDW 데이터베이스의 dbo.vTargetMail 보기에 있습니다. 이 데이터를 읽으려면:
@@ -51,7 +44,7 @@ ms.lasthandoff: 03/14/2017
 2. **+새로 만들기**를 클릭하고 **빈 실험**을 선택합니다.
 3. 실험: 대상 마케팅에 대한 이름을 입력합니다.
 4. 모듈 창에서 **판독기** 모듈을 캔버스로 끌어서 놓습니다.
-5. 속성 창에서 SQL 데이터 웨어하우스 데이터베이스에 대한 세부 정보를 지정합니다.
+5. 속성 창에서 SQL Data Warehouse 데이터베이스에 대한 세부 정보를 지정합니다.
 6. 관련 데이터를 읽을 데이터베이스 **쿼리** 를 지정합니다.
 
 ```sql
@@ -124,7 +117,7 @@ FROM [dbo].[vTargetMail]
 * 점수가 매겨진 확률: 고객이 자전거 구매자일 가능성입니다.
 * 점수가 매겨진 레이블: 모델에 의해 분류가 실행되었습니다. – 자전거 구매자(1) 혹은 아님(0) 레이블 지정에 대한 확률 임계값은 50%로 설정되고 조정할 수 있습니다.
 
-점수가 매겨진 레이블(예측)로 열 BikeBuyer(실제) 비교를 통해 모델이 얼마나 잘 실행했는지 확인할 수 있습니다. 다음 단계로 이 모델을 사용하여 새 고객에 대한 예측을 수행하고 이 모델을 웹 서비스로 게시하거나 SQL 데이터 웨어하우스에 결과를 다시 작성할 수 있습니다.
+점수가 매겨진 레이블(예측)로 열 BikeBuyer(실제) 비교를 통해 모델이 얼마나 잘 실행했는지 확인할 수 있습니다. 다음 단계로 이 모델을 사용하여 새 고객에 대한 예측을 수행하고 이 모델을 웹 서비스로 게시하거나 SQL Data Warehouse에 결과를 다시 작성할 수 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
 예측 Machine Learning 모델을 구축하는 방법에 대한 자세한 내용은 [Azure의 Machine Learning 소개][Introduction to Machine Learning on Azure]를 참고하세요.
@@ -149,4 +142,3 @@ FROM [dbo].[vTargetMail]
 [Introduction to Machine Learning on Azure]:https://azure.microsoft.com/documentation/articles/machine-learning-what-is-machine-learning/
 [load sample data manually]: sql-data-warehouse-load-sample-databases.md
 [Create a SQL Data Warehouse]: sql-data-warehouse-get-started-provision.md
-

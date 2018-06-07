@@ -3,7 +3,7 @@ title: "독립 실행형 Azure Service Fabric 클러스터 설정 | Microsoft Do
 description: "동일한 컴퓨터에서 실행되는 3개의 노드가 있는 독립 실행형 개발 클러스터를 만듭니다. 이 설정을 마치면 다중 컴퓨터 클러스터를 만들 수 있습니다."
 services: service-fabric
 documentationcenter: .net
-author: rwike77
+author: dkkapur
 manager: timlt
 editor: 
 ms.assetid: 
@@ -12,17 +12,14 @@ ms.devlang: dotNet
 ms.topic: get-started-article
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 07/06/2017
-ms.author: ryanwi
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: a96150a6a7f83d1c220e0450f7704634a1f6ed1b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
-
+ms.date: 11/02/2017
+ms.author: dekapur
+ms.openlocfilehash: 5438d8d366ef989d5ae29581477513f8c884c4b3
+ms.sourcegitcommit: 295ec94e3332d3e0a8704c1b848913672f7467c8
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/06/2017
 ---
-
 # <a name="create-your-first-service-fabric-standalone-cluster"></a>첫 번째 Service Fabric 독립 실행형 클러스터 만들기
 온-프레미스 또는 클라우드에 Windows Server 2012 R2 또는 Windows Server 2016을 실행하는 컴퓨터나 가상 컴퓨터에 Service Fabric 독립 실행형 클러스터를 만들 수 있습니다. 이 빠른 시작을 통해 몇 분만에 독립 실행형 개발 클러스터를 만들 수 있습니다.  작업을 완료하면 앱을 배포할 수 있는 단일 컴퓨터에 3개 노드 클러스터가 실행 중입니다.
 
@@ -96,4 +93,3 @@ NodeDeactivationInfo NodeName IpAddressOrFQDN NodeType  CodeVersion  ConfigVersi
 * [PowerShell을 사용하여 앱 배포](service-fabric-deploy-remove-applications.md)
 
 [service-fabric-explorer]: ./media/service-fabric-get-started-standalone-cluster/sfx.png
-

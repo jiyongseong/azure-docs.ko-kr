@@ -1,25 +1,24 @@
 ---
-title: "연결 확인: Azure ExpressRoute 문제 해결 가이드 | Microsoft Docs"
-description: "ExpressRoute 회로에 대한 종단 간 연결의 유효성 검사 및 문제 해결에 대한 지침을 제공합니다."
+title: '연결 확인: Azure ExpressRoute 문제 해결 가이드 | Microsoft Docs'
+description: ExpressRoute 회로에 대한 종단 간 연결의 유효성 검사 및 문제 해결에 대한 지침을 제공합니다.
 documentationcenter: na
 services: expressroute
 author: rambk
 manager: tracsman
-editor: 
-ms.assetid: 
+editor: ''
+ms.assetid: ''
 ms.service: expressroute
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 08/01/2017
+ms.date: 09/26/2017
 ms.author: cherylmc
+ms.openlocfilehash: 5d01f2e402e4b793274761703ec3ca1ea3ff8164
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
 ms.translationtype: HT
-ms.sourcegitcommit: c30998a77071242d985737e55a7dc2c0bf70b947
-ms.openlocfilehash: 5a6360b56963d219ab576fb3e2636b6c51dd72ac
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/02/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="verifying-expressroute-connectivity"></a>ExpressRoute 연결 확인
 연결 공급자가 지원하는 개인 연결을 통해 온-프레미스 네트워크를 Microsoft 클라우드로 확장하는 ExpressRoute에는 다음 세 가지 고유 네트워크 영역이 필요합니다.
@@ -48,7 +47,7 @@ ExpressRoute 연결 모델(Cloud Exchange Co-location, 지점 간 이더넷 연�
 3.  PE(CE 연결): 고객 에지 라우터에 연결되는 공급자 에지 라우터/스위치입니다. 이 문서에서는 PE-CE라고 합니다.
 4.  PE(MSEE 연결): MSEE에 연결되는 공급자 에지 라우터/스위치입니다. 이 문서에서는 PE-MSEE라고 합니다.
 5.  MSEE: MSEE(Microsoft Enterprise Edge) ExpressRoute 라우터
-6.  VNet(가상 네트워크) 게이트웨이
+6.  VNet(Virtual Network) 게이트웨이
 7.  Azure VNet의 계산 장치
 
 연결 모델로 Cloud Exchange Co-location 또는 지점 간 이더넷 연결을 사용하는 경우 고객 에지 라우터(2)에서 MSEE(5)와의 BGP 피어링을 설정합니다. 네트워크 지점 3과 4는 여전히 존재하지만 계층 2 장치로 다소 투명하게 됩니다.
@@ -69,7 +68,7 @@ ExpressRoute 회로의 유효성을 검사하기 위해 다음 단계가 적용�
 
 나중에 더 많은 유효성 검사와 확인이 추가되며 매월 다시 확인해 주세요!
 
-##<a name="validate-circuit-provisioning-and-state"></a>회로 프로비전 및 상태 유효성 검사
+## <a name="validate-circuit-provisioning-and-state"></a>회로 프로비전 및 상태 유효성 검사
 연결 모델에 관계 없이 ExpressRoute 회로를 만들어야 하므로 회로 프로비전을 위해 생성된 서비스 키가 필요합니다. ExpressRoute 회로를 프로비전하면 PE-MSEE(4)와 MSEE(5) 간에 계층 2 중복 연결이 설정됩니다. ExpressRoute 회로 만들기, 수정, 프로비전 및 확인 방법에 대한 자세한 내용은 [ExpressRoute 회로 만들기 및 수정][CreateCircuit] 문서를 참조하세요.
 
 >[!TIP]
@@ -77,7 +76,7 @@ ExpressRoute 회로의 유효성을 검사하기 위해 다음 단계가 적용�
 >
 >
 
-###<a name="verification-via-the-azure-portal"></a>Azure Portal을 통한 확인
+### <a name="verification-via-the-azure-portal"></a>Azure Portal을 통한 확인
 Azure Portal에서 ExpressRoute 회로의 상태는 왼쪽 세로 막대 메뉴에서 ![2][2]를 선택한 다음 ExpressRoute 회로를 선택하여 확인할 수 있습니다. "모든 리소스" 아래에 나열된 ExpressRoute 회로를 선택하면 ExpressRoute 회로 블레이드가 열립니다. 블레이드의 ![3][3] 섹션에는 ExpressRoute Essentials가 다음 스크린샷과 같이 나열됩니다.
 
 ![4][4]    
@@ -91,13 +90,13 @@ ExpressRoute 회로가 작동하려면 *회로 상태*가 *사용*이고, *공�
 >
 >
 
-###<a name="verification-via-powershell"></a>PowerShell을 통한 확인
+### <a name="verification-via-powershell"></a>PowerShell을 통한 확인
 리소스 그룹의 모든 ExpressRoute 회로를 나열하려면 다음 명령을 사용합니다.
 
     Get-AzureRmExpressRouteCircuit -ResourceGroupName "Test-ER-RG"
 
 >[!TIP]
->Azure Portal을 통해 리소스 그룹 이름을 가져올 수 있습니다. 이 문서의 이전 하위 섹션을 참조하고, 리소스 그룹 이름은 예제 스크린샷에 나열되어 있습니다.
+>Azure를 통해 리소스 그룹 이름을 가져올 수 있습니다. 이 문서의 이전 하위 섹션을 참조하고, 리소스 그룹 이름은 예제 스크린샷에 나열되어 있습니다.
 >
 >
 
@@ -140,7 +139,7 @@ ExpressRoute 회로가 작동하는지 확인하려면 다음 필드에 특히 �
 >
 >
 
-###<a name="verification-via-powershell-classic"></a>PowerShell(클래식)을 통한 확인
+### <a name="verification-via-powershell-classic"></a>PowerShell(클래식)을 통한 확인
 구독 중인 모든 ExpressRoute 회로를 나열하려면 다음 명령을 사용합니다.
 
     Get-AzureDedicatedCircuit
@@ -168,18 +167,13 @@ ExpressRoute 회로가 작동하는지 확인하려면 ServiceProviderProvisioni
 >
 >
 
-##<a name="validate-peering-configuration"></a>피어링 구성 유효성 검사
+## <a name="validate-peering-configuration"></a>피어링 구성 유효성 검사
 서비스 공급자가 ExpressRoute 회로 프로비전을 완료하면 MSEE-PR(4)와 MSEE(5) 사이의 ExpressRoute 회로를 통해 라우팅 구성을 만들 수 있습니다. ExpressRoute 회로마다 하나, 둘 또는 셋의 라우팅 컨텍스트, 즉 Azure 개인 피어링(Azure에서 개인 가상 네트워크로의 트래픽), Azure 공용 피어링(Azure에서 공용 IP 주소로의 트래픽) 및 Microsoft 피어링(Office 365 및 Dynamics 365로의 트래픽)을 사용할 수 있습니다. 라우팅 구성을 만들고 수정하는 방법에 대한 자세한 내용은 [ExpressRoute 회로의 라우팅 만들기 및 수정][CreatePeering] 문서를 참조하세요.
 
-###<a name="verification-via-the-azure-portal"></a>Azure Portal을 통한 확인
->[!IMPORTANT]
->서비스 공급자가 ExpressRoute 피어링을 구성한 경우 해당 피어링이 Azure Portal에 포털에 *표시되지 않는* 알려진 버그가 있습니다. 포털 또는 PowerShell을 통해 ExpressRoute 피어링을 추가하면 *서비스 공급자 설정을 덮어씁니다*. 이 작업을 수행하면 ExpressRoute 회로의 라우팅이 중단되며, 설정을 복원하고 일반 라우팅을 다시 설정하려면 서비스 공급자의 지원이 필요합니다. 서비스 공급자가 계층 2 서비스만 제공하는 것이 확실한 경우에만 ExpressRoute 피어링을 수정하세요!
->
->
+### <a name="verification-via-the-azure-portal"></a>Azure Portal을 통한 확인
 
-<p/>
 >[!NOTE]
->서비스 공급자가 계층 3을 제공하고 포털에서 피어링이 비어 있는 경우 PowerShell을 사용하여 서비스 공급자가 구성한 설정을 확인할 수 있습니다.
+>레이어 3을 서비스 공급자가 제공하고 포털에서 피어링이 비어 있는 경우 포털의 새로 고침 단추를 사용하여 회로 구성을 새로 고칩니다. 이 작업은 회로에 올바른 라우팅 구성을 적용합니다. 
 >
 >
 
@@ -194,11 +188,11 @@ Azure Portal에서 ExpressRoute 회로의 상태는 왼쪽 세로 막대 메뉴�
 >
 >
 
-###<a name="verification-via-powershell"></a>PowerShell을 통한 확인
+### <a name="verification-via-powershell"></a>PowerShell을 통한 확인
 Azure 개인 피어링 구성 세부 정보를 가져오려면 다음 명령을 사용합니다.
 
     $ckt = Get-AzureRmExpressRouteCircuit -ResourceGroupName "Test-ER-RG" -Name "Test-ER-Ckt"
-    Get-AzureRmExpressRouteCircuitPeeringConfig -Name "AzurePrivatePeering" -Circuit $ckt
+    Get-AzureRmExpressRouteCircuitPeeringConfig -Name "AzurePrivatePeering" -ExpressRouteCircuit $ckt
 
 성공적으로 구성된 개인 피어링에 대한 샘플 응답은 다음과 같습니다.
 
@@ -222,12 +216,12 @@ Azure 개인 피어링 구성 세부 정보를 가져오려면 다음 명령을 
 Azure 공용 피어링 구성 세부 정보를 가져오려면 다음 명령을 사용합니다.
 
     $ckt = Get-AzureRmExpressRouteCircuit -ResourceGroupName "Test-ER-RG" -Name "Test-ER-Ckt"
-    Get-AzureRmExpressRouteCircuitPeeringConfig -Name "AzurePublicPeering" -Circuit $ckt
+    Get-AzureRmExpressRouteCircuitPeeringConfig -Name "AzurePublicPeering" -ExpressRouteCircuit $ckt
 
 Microsoft 피어링 구성 세부 정보를 가져오려면 다음 명령을 사용합니다.
 
     $ckt = Get-AzureRmExpressRouteCircuit -ResourceGroupName "Test-ER-RG" -Name "Test-ER-Ckt"
-    Get-AzureRmExpressRouteCircuitPeeringConfig -Name "MicrosoftPeering" -Circuit $ckt
+     Get-AzureRmExpressRouteCircuitPeeringConfig -Name "MicrosoftPeering" -ExpressRouteCircuit $ckt
 
 피어링이 구성되어 있지 않으면 오류 메시지가 표시됩니다. 명시된 피어링(이 예제에서는 Azure 공용 피어링)이 회로 내에 구성되지 않은 경우 샘플 응답은 다음과 같습니다.
 
@@ -287,7 +281,7 @@ Microsoft 피어링 구성 세부 정보를 가져오려면 다음 명령을 사
 >
 
 ## <a name="validate-arp-between-microsoft-and-the-service-provider"></a>Microsoft와 서비스 공급자 간의 ARP 유효성 검사
-이 섹션에서는 PowerShell(클래식) 명령을 사용합니다. PowerShell Azure Resource Manager 명령을 사용하고 있으면 [Azure 클래식 포털][OldPortal]을 통해 관리자/공동 관리자로서 구독에 액세스할 수 있는지 확인합니다. Azure Resource Manager 명령 사용과 관련된 문제를 해결하려면 [Resource Manager 배포 모델에서 ARP 테이블 가져오기][ARP] 문서를 참조하세요.
+이 섹션에서는 PowerShell(클래식) 명령을 사용합니다. PowerShell Azure Resource Manager 명령을 사용하고 있으면 관리자/공동 관리자로서 구독에 액세스할 수 있는지 확인합니다. Azure Resource Manager 명령 사용과 관련된 문제를 해결하려면 [Resource Manager 배포 모델에서 ARP 테이블 가져오기][ARP] 문서를 참조하세요.
 
 >[!NOTE]
 >ARP를 가져오려면 Azure Portal 및 Azure Resource Manager PowerShell 명령을 모두 사용할 수 있습니다. Azure Resource Manager PowerShell 명령에 오류가 발생하는 경우 클래식 PowerShell 명령은 Azure Resource Manager ExpressRoute 회로에서도 작동하므로 클래식 PowerShell 명령이 작동해야 합니다.
@@ -320,7 +314,7 @@ Microsoft 피어링 구성 세부 정보를 가져오려면 다음 명령을 사
 >
 
 ## <a name="validate-bgp-and-routes-on-the-msee"></a>MSEE에서 BGP 및 경로 유효성 검사
-이 섹션에서는 PowerShell(클래식) 명령을 사용합니다. PowerShell Azure Resource Manager 명령을 사용하고 있으면 [Azure 클래식 포털][OldPortal]을 통해 관리자/공동 관리자로서 구독에 액세스할 수 있는지 확인합니다.
+이 섹션에서는 PowerShell(클래식) 명령을 사용합니다. PowerShell Azure Resource Manager 명령을 사용하고 있으면 관리자/공동 관리자로서 구독에 액세스할 수 있는지 확인합니다.
 
 >[!NOTE]
 >BGP 정보를 가져오려면 Azure Portal 및 Azure Resource Manager PowerShell 명령을 모두 사용할 수 있습니다. Azure Resource Manager PowerShell 명령에 오류가 발생하는 경우 클래식 PowerShell 명령은 Azure Resource Manager ExpressRoute 회로에서도 작동하므로 클래식 PowerShell 명령이 작동해야 합니다.
@@ -370,7 +364,7 @@ Microsoft 피어링 구성 세부 정보를 가져오려면 다음 명령을 사
 
     Route Table Info:
 
-##<a name="check-the-traffic-statistics"></a>트래픽 통계 확인
+## <a name="check-the-traffic-statistics"></a>트래픽 통계 확인
 피어링 컨텍스트의 기본 및 보조 경로 트래픽 통계(송/수신 바이트 수)를 가져오려면 다음 명령을 사용합니다.
 
     Get-AzureDedicatedCircuitStats -ServiceKey 97f85950-01dd-4d30-a73c-bf683b3a6e5c -AccessType Private
@@ -408,9 +402,7 @@ Microsoft 피어링 구성 세부 정보를 가져오려면 다음 명령을 사
 [Support]: https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade
 [CreateCircuit]: https://docs.microsoft.com/azure/expressroute/expressroute-howto-circuit-portal-resource-manager 
 [CreatePeering]: https://docs.microsoft.com/azure/expressroute/expressroute-howto-routing-portal-resource-manager
-[OldPortal]: https://manage.windowsazure.com
-[ARP]: https://docs.microsoft.com/en-us/azure/expressroute/expressroute-troubleshooting-arp-resource-manager
-
+[ARP]: https://docs.microsoft.com/azure/expressroute/expressroute-troubleshooting-arp-resource-manager
 
 
 

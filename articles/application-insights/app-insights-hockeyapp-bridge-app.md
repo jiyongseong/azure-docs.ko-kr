@@ -1,9 +1,9 @@
 ---
-title: "Azure Application Insights에서 HockeyApp 데이터 탐색 | Microsoft Docs"
-description: "Application Insights를 사용하여 Azure 앱의 사용 현황 및 성능을 분석합니다."
+title: Azure Application Insights에서 HockeyApp 데이터 탐색 | Microsoft Docs
+description: Application Insights를 사용하여 Azure 앱의 사용 현황 및 성능을 분석합니다.
 services: application-insights
 documentationcenter: windows
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 97783cc6-67d6-465f-9926-cb9821f4176e
 ms.service: application-insights
@@ -12,16 +12,20 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 03/30/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 538f282b28e5f43f43bf6ef28af20a4d8daea369
-ms.openlocfilehash: 7ea28b4989ad889ff0427e221cc26ac5ebc41f93
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/07/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: cd185d799be5051340c2bfea44a1d1e69a1eb002
+ms.sourcegitcommit: 6e43006c88d5e1b9461e65a73b8888340077e8a2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/01/2018
+ms.locfileid: "32309847"
 ---
 # <a name="exploring-hockeyapp-data-in-application-insights"></a>Application Insights에서 HockeyApp 데이터 탐색
-[HockeyApp](https://azure.microsoft.com/services/hockeyapp/) 는 데스크톱 및 Mobile Apps를 실시간으로 모니터링하는 권장된 플랫폼입니다. HockeyApp에서 사용자 지정 및 추적 원격 분석을 전송하여(충돌 데이터를 가져오는 것 외에도) 사용량을 모니터링하고 진단에 도움을 줄 수 있습니다. 원격 분석의 이 스트림은 [Azure Application Insights](app-insights-analytics.md)의 강력한 [분석](app-insights-overview.md) 기능을 사용하여 쿼리될 수 있습니다. 또한 [사용자 지정 및 추적 원격 분석을 내보낼](app-insights-export-telemetry.md)수 있습니다. 이러한 기능을 활성화하기 위해 Application Insights에 HockeyApp 사용자 지정 데이터를 릴레이하는 브리지를 설정합니다.
+
+> [!NOTE]
+> HockeyApp을 더 이상 새 응용 프로그램에 사용할 수 없습니다. 기존 HockeyApp 배포는 계속 작동합니다. Visual Studio App Center는 이제 새로운 모바일 앱을 모니터링하기 위해 Microsoft에서 권장하는 서비스입니다. [App Center 및 Application Insights를 사용하여 앱을 설정하는 방법에 대해 알아보세요](app-insights-mobile-center-quickstart.md).
+
+[HockeyApp](https://azure.microsoft.com/services/hockeyapp/)은 데스크톱 및 Mobile Apps를 실시간으로 모니터링하는 서비스입니다. HockeyApp에서 사용자 지정 및 추적 원격 분석을 전송하여(충돌 데이터를 가져오는 것 외에도) 사용량을 모니터링하고 진단에 도움을 줄 수 있습니다. 원격 분석의 이 스트림은 [Azure Application Insights](app-insights-analytics.md)의 강력한 [분석](app-insights-overview.md) 기능을 사용하여 쿼리될 수 있습니다. 또한 [사용자 지정 및 추적 원격 분석을 내보낼](app-insights-export-telemetry.md)수 있습니다. 이러한 기능을 활성화하기 위해 Application Insights에 HockeyApp 사용자 지정 데이터를 릴레이하는 브리지를 설정합니다.
 
 ## <a name="the-hockeyapp-bridge-app"></a>HockeyApp 브리지 앱
 HockeyApp 브리지 앱은 분석 및 연속 내보내기 기능을 통해 Application Insights에서 HockeyApp 사용자 지정 및 추적 원격 분석에 액세스할 수 있는 핵심 기능입니다. HockeyApp 브리지 앱을 만든 후에 HockeyApp에서 수집한 사용자 지정 및 추적 이벤트를 이러한 기능에서 액세스할 수 있습니다. 이러한 브리지 앱 중 하나를 설정하는 방법을 살펴보겠습니다.
@@ -66,5 +70,4 @@ HockeyApp 브리지 필드가 나타납니다.
 
 ## <a name="next-steps"></a>다음 단계
 * [데이터에 분석 적용](app-insights-analytics-tour.md)
-
 

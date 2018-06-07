@@ -12,34 +12,21 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 06/28/2017
-ms.author: sethm; babanisa
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 857267f46f6a2d545fc402ebf3a12f21c62ecd21
-ms.openlocfilehash: 1a6bf0a0352e6d9e3a22586ac825558d12e1307a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/28/2017
-
-
+ms.date: 02/27/2018
+ms.author: sethm
+ms.openlocfilehash: 08b78f59dc758f12556f332546ccb6043bef2812
+ms.sourcegitcommit: c765cbd9c379ed00f1e2394374efa8e1915321b9
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/28/2018
 ---
-# Event Hubs란?
-<a id="what-is-event-hubs" class="xliff"></a>
+# <a name="what-is-event-hubs"></a>Event Hubs란?
 
-Azure Event Hubs는 초당 수백만 개의 이벤트를 수신하고 처리할 수 있는 확장성이 뛰어난 데이터 스트리밍 플랫폼 및 이벤트 수집 서비스입니다. Event Hubs는 분산된 소프트웨어와 장치에서 생성된 이벤트, 데이터 또는 원격 분석을 처리하고 저장할 수 있습니다. Event Hub로 전송된 데이터는 실시간 분석 공급자 또는 일괄 처리/저장소 어댑터를 사용하여 변환하고 저장할 수 있습니다. Event Hubs는 짧은 대기 시간과 엄청난 규모의 [게시-가입 기능](https://msdn.microsoft.com/library/aa560414.aspx)을 제공함으로써 빅 데이터를 위한 "램프" 역할을 수행합니다.
-
-## Event Hubs를 사용하는 이유
-<a id="why-use-event-hubs" class="xliff"></a>
-
-Event Hubs 이벤트 및 원격 분석 처리 기능은 다음과 같은 경우에 특히 유용합니다.
-
-* 응용 프로그램 계측
-* 사용자 환경 또는 워크플로 처리
-* IoT(사물 인터넷) 시나리오
+Azure Event Hubs는 초당 수백만 개의 이벤트를 수신하고 처리할 수 있는 확장성이 뛰어난 데이터 스트리밍 플랫폼 및 이벤트 수집 서비스입니다. Event Hubs는 분산된 소프트웨어와 장치에서 생성된 이벤트, 데이터 또는 원격 분석을 처리하고 저장할 수 있습니다. Event Hub로 전송된 데이터는 실시간 분석 공급자 또는 일괄 처리/저장소 어댑터를 사용하여 변환하고 저장할 수 있습니다. Event Hubs는 짧은 대기 시간과 엄청난 규모의 [게시-가입 기능](/biztalk/core/publish-and-subscribe-architecture)을 제공함으로써 빅 데이터를 위한 "램프" 역할을 수행합니다.
 
 예를 들어 Event Hubs를 사용하면 모바일 앱의 동작 추적, 웹 팜의 트래픽 정보, 콘솔 게임의 게임 내 이벤트 캡처 또는 산업용 컴퓨터, 연결된 차량 또는 다른 장치에서 수집한 원격 분석을 수행할 수 있습니다.
 
-## Azure Event Hubs 개요
-<a id="azure-event-hubs-overview" class="xliff"></a>
+## <a name="azure-event-hubs-overview"></a>Azure Event Hubs 개요
 
 Event Hubs가 솔루션 아키텍처에서 수행하는 일반적인 역할은 *이벤트 수집기*라고 하는 이벤트 파이프라인에 대한 "현관"으로서의 역할입니다. 이벤트 ingestor는 이러한 이벤트에서 이벤트 스트림의 프로덕션을 분리하는 이벤트 게시자와 이벤트 소비자 간에 작용하는 구성 요소 또는 서비스입니다. 다음 그림은 이 아키텍처를 보여 줍니다.
 
@@ -47,10 +34,9 @@ Event Hubs가 솔루션 아키텍처에서 수행하는 일반적인 역할은 *
 
 Event Hubs는 메시지 스트림 처리 기능을 제공하지만 기존 엔터프라이즈 메시지와 다른 특징을 가지고 있습니다. Event Hubs 기능은 높은 처리량 및 이벤트 처리 시나리오를 중심으로 구축됩니다. 따라서 Event Hubs는 [Azure Service Bus](https://azure.microsoft.com/services/service-bus/) 메시지와 다르며, 토픽과 같은 [Service Bus 메시지](/azure/service-bus-messaging/) 엔터티에 사용할 수 있는 기능 일부를 구현하지 않습니다.
 
-## Event Hubs 기능
-<a id="event-hubs-features" class="xliff"></a>
+## <a name="event-hubs-features"></a>Event Hubs 기능
 
-Event Hubs에는 다음과 같은 주요 요소가 포함되어 있습니다.
+Event Hubs는 다음과 같은 주요 요소를 제공합니다.
 
 - [**이벤트 생산자/게시자**](event-hubs-features.md#event-publishers): 이벤트 허브에 데이터를 보내는 엔터티입니다. 이벤트는 AMQP 1.0 또는 HTTPS를 통해 게시됩니다.
 - [**캡처**](event-hubs-features.md#capture): Event Hubs 스트리밍 데이터를 캡처하고 Azure Blob Storage 계정에 저장할 수 있습니다.
@@ -62,8 +48,7 @@ Event Hubs에는 다음과 같은 주요 요소가 포함되어 있습니다.
 
 이러한 요소와 다른 Event Hubs 기능에 대한 자세한 기술적 내용은 [Event Hubs 기능 개요](event-hubs-features.md)를 참조하세요. 
 
-## 다음 단계
-<a id="next-steps" class="xliff"></a>
+## <a name="next-steps"></a>다음 단계
 
 Event Hubs 가격에 대한 자세한 내용은 [Event Hubs 가격](https://azure.microsoft.com/pricing/details/event-hubs/)을 참조하세요.
 
@@ -74,5 +59,4 @@ Event Hubs에 대한 자세한 내용은 다음 링크를 방문하세요.
 * [Event Hubs를 사용하는 샘플 응용 프로그램](https://github.com/Azure/azure-event-hubs/tree/master/samples)
  
  
-
 

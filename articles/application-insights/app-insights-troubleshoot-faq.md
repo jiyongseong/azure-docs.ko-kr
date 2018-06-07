@@ -1,9 +1,9 @@
 ---
 title: Azure Application Insights FAQ | Microsoft Docs
-description: "Application Insights에 대한 질문과 대답입니다."
+description: Application Insights에 대한 질문과 대답입니다.
 services: application-insights
 documentationcenter: .net
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 0e3b103c-6e2a-4634-9e8c-8b85cf5e9c84
 ms.service: application-insights
@@ -12,13 +12,13 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 04/12/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c308183ffe6a01f4d4bf6f5817945629cbcedc92
-ms.openlocfilehash: 8a6a8027b93d0d5b353c41c103d2c9ad5faa70c1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/17/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: d7abfd1ac6f914c75297ff49462590e5b6169dbd
+ms.sourcegitcommit: 6e43006c88d5e1b9461e65a73b8888340077e8a2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/01/2018
+ms.locfileid: "32310017"
 ---
 # <a name="application-insights-frequently-asked-questions"></a>Application Insights: 질문과 대답
 
@@ -61,7 +61,7 @@ ms.lasthandoff: 05/17/2017
 
 ## <a name="how-much-is-it-costing"></a>비용은 어느 정도인가요?
 
-* Application Insights 리소스에서 **기능 + 가격 책정** 페이지를 엽니다. 최근 사용 현황에 대한 차트가 있습니다. 원하는 경우 데이터 볼륨 한도를 설정할 수 있습니다.
+* Application Insights 리소스에서 **사용량 및 예상 비용 페이지**를 엽니다. 최근 사용 현황에 대한 차트가 있습니다. 원하는 경우 데이터 볼륨 한도를 설정할 수 있습니다.
 * [Azure 청구 블레이드](https://portal.azure.com/#blade/Microsoft_Azure_Billing/BillingBlade/Overview)를 열어 모든 리소스에 대한 청구서를 확인합니다.
 
 ## <a name="q14"></a>Application Insights에서 내 프로젝트를 어떻게 수정하나요?
@@ -105,7 +105,7 @@ ms.lasthandoff: 05/17/2017
 * HTTP 요청
 * [종속성](app-insights-asp-net-dependencies.md). 호출: SQL Database, 외부 서비스(Azure Cosmos DB, 테이블, Blob Storage 및 큐)에 대한 HTTP 호출. 
 * [예외](app-insights-asp-net-exceptions.md) 및 스택 추적.
-* [성능 카운터](app-insights-performance-counters.md) - [상태 모니터](app-insights-monitor-performance-live-website-now.md)를 사용하는 경우 Azure 모니터링(app-insights-azure-web-apps.md) 또는 [Application Insights collectd 기록기](app-insights-java-collectd.md).
+* [성능 카운터](app-insights-performance-counters.md) - [상태 모니터](app-insights-monitor-performance-live-website-now.md)를 사용하는 경우 [Azure 모니터링](app-insights-azure-web-apps.md) 또는 [Application Insights collectd 기록기](app-insights-java-collectd.md).
 * 코딩하는 [사용자 지정 이벤트 및 메트릭](app-insights-api-custom-events-metrics.md).
 * 적절한 수집기를 구성한 경우 [추적 로그](app-insights-asp-net-trace-logs.md).
 
@@ -122,7 +122,7 @@ ms.lasthandoff: 05/17/2017
 * [Azure 진단](app-insights-azure-diagnostics.md)
 * [Docker 컨테이너](app-insights-docker.md)
 * [분석으로 테이블 가져오기](app-insights-analytics-import.md)
-* [OMS(Log Analytics)](https://azure.microsoft.com/blog/omssolutionforappinsightspublicpreview/)
+* [Log Analytics](https://azure.microsoft.com/blog/omssolutionforappinsightspublicpreview/)
 * [Logstash](app-insights-analytics-import.md)
 
 ## <a name="can-i-filter-out-or-modify-some-telemetry"></a>일부 원격 분석을 필터링하거나 수정할 수 있나요?
@@ -153,7 +153,7 @@ ms.lasthandoff: 05/17/2017
 
 코드에서 이러한 데이터를 전송하는 경우 가능합니다. 스택 추적의 변수에 PII가 포함된 경우에도 전송될 수 있습니다. 개발 팀은 PII가 제대로 처리되도록 위험 평가를 수행해야 합니다. [데이터 보존 및 개인 정보](app-insights-data-retention-privacy.md)에 대해 자세히 알아보세요.
 
-포털에서 수집된 후 클라이언트 웹 주소의 마지막 옥텟은 항상 0으로 설정됩니다.
+클라이언트 웹 주소의 **모든** 8진수는 지리적 위치 특성을 조회한 후에 항상 0으로 설정됩니다.
 
 ## <a name="my-ikey-is-visible-in-my-web-page-source"></a>내 iKey가 내 웹 페이지 원본에 표시됩니다. 
 
@@ -187,7 +187,7 @@ POST 데이터를 자동으로 기록 하지 않지만 TrackTrace 호출을 사�
 * JavaScript SDK는 웹 클라이언트에서 사용자 쿠키를 설정하여 다시 방문하는 사용자와 그룹 작업에 대한 세션 쿠키를 식별합니다.
 * 클라이언트 쪽 스크립트가 없으면 [서버에서 쿠키를 설정](http://apmtips.com/blog/2016/07/09/tracking-users-in-api-apps/)할 수 있습니다.
 * 한 명의 실제 사용자가 특정 사이트를 다른 브라우저에서 사용하거나, in-private/incognito 검색을 통해 사용하거나, 다른 컴퓨터에서 사용하는 경우 두 번 이상 계산됩니다.
-* 여러 컴퓨터 및 브라우저에서 로그인한 사용자를 식별하려면 [setAuthenticatedUserContect()](app-insights-api-custom-events-metrics.md#authenticated-users)에 대한 호출을 추가합니다.
+* 여러 컴퓨터 및 브라우저에서 로그인한 사용자를 식별하려면 [setAuthenticatedUserContext()](app-insights-api-custom-events-metrics.md#authenticated-users)에 대한 호출을 추가합니다.
 
 ## <a name="q17"></a> Application Insights의 모든 기능을 사용하도록 어떻게 설정하나요?
 | 표시 내용 | 시작 방법 | 원하는 이유 |
@@ -212,7 +212,7 @@ POST 데이터를 자동으로 기록 하지 않지만 TrackTrace 호출을 사�
 ```
 
 
-## <a name="automation"></a>자동화
+## <a name="automation"></a>Automation
 
 ### <a name="configuring-application-insights"></a>Application Insights 구성
 
@@ -243,7 +243,7 @@ Azure 경고는 메트릭에 대해서만 설정됩니다. 이벤트가 발생�
 
 ## <a name="can-i-send-telemetry-to-the-application-insights-portal"></a>Application Insights 포털에 원격 분석을 보낼 수 있나요?
 
-SDK를 사용하고 SDK API(app-insights-api-custom-events-metrics.md)를 사용하는 것이 좋습니다. 다양한 [플랫폼](app-insights-platforms.md)에 따라 여러 SDK 변형이 있습니다. 이러한 SDK는 버퍼링, 압축, 제한, 다시 시도 등을 처리합니다. 그러나 [수집 스키마](https://github.com/Microsoft/ApplicationInsights-dotnet/tree/develop/Schema/PublicSchema) 및 [끝점 프로토콜](https://github.com/Microsoft/ApplicationInsights-Home/blob/master/EndpointSpecs/ENDPOINT-PROTOCOL.md)은 공용입니다.
+저희가 제공하는 SDK 및 [SDK API](app-insights-api-custom-events-metrics.md)를 사용하는 것이 좋습니다. 다양한 [플랫폼](app-insights-platforms.md)에 따라 여러 SDK 변형이 있습니다. 이러한 SDK는 버퍼링, 압축, 제한, 다시 시도 등을 처리합니다. 그러나 [수집 스키마](https://github.com/Microsoft/ApplicationInsights-dotnet/tree/develop/Schema/PublicSchema) 및 [끝점 프로토콜](https://github.com/Microsoft/ApplicationInsights-Home/blob/master/EndpointSpecs/ENDPOINT-PROTOCOL.md)은 공용입니다.
 
 ## <a name="can-i-monitor-an-intranet-web-server"></a>인트라넷 웹 서버를 모니터링할 수 있나요?
 
@@ -251,19 +251,41 @@ SDK를 사용하고 SDK API(app-insights-api-custom-events-metrics.md)를 사용
 
 ### <a name="firewall-door"></a>방화벽 문
 
-원격 분석에서 끝점 https://dc.services.visualstudio.com:443 및 https://rt.services.visualstudio.com:443 으로 원격 분석으로 보내도록 허용합니다. 
+그러면 웹 서버가 https://dc.services.visualstudio.com:443 및 https://rt.services.visualstudio.com:443 끝점에 원격 분석을 전송할 수 있습니다. 
 
 ### <a name="proxy"></a>Proxy
 
-ApplicationInsights.config에서 다음과 같이 설정하여 서버에서 게이트웨이로 트래픽을 라우팅합니다.
+ApplicationInsights.config 예에서 이러한 설정을 덮어써서 서버에서 인트라넷의 게이트웨이로 트래픽을 라우팅합니다. config에 이러한 "엔드포인트" 속성이 없을 경우 이러한 클래스가 아래 예에 표시된 기본값을 사용합니다.
 
-```XML
-<TelemetryChannel>
-    <EndpointAddress>your gateway endpoint</EndpointAddress>
-</TelemetryChannel>
+#### <a name="example-applicationinsightsconfig"></a>ApplicationInsights.config 예:
+```xml
+<ApplicationInsights>
+    ...
+    <TelemetryChannel>
+         <EndpointAddress>https://dc.services.visualstudio.com/v2/track</EndpointAddress>
+    </TelemetryChannel>
+    ...
+    <ApplicationIdProvider Type="Microsoft.ApplicationInsights.Extensibility.Implementation.ApplicationId.ApplicationInsightsApplicationIdProvider, Microsoft.ApplicationInsights">
+        <ProfileQueryEndpoint>https://dc.services.visualstudio.com/api/profiles/{0}/appId</ProfileQueryEndpoint>
+    </ApplicationIdProvider>
+    ...
+</ApplicationInsights>
 ```
 
-게이트웨이는 트래픽을 https://dc.services.visualstudio.com:443/v2/track으로 라우팅해야 합니다.
+_ApplicationIdProvider는 v2.6.0부터 사용 가능합니다._
+
+게이트웨이는 트래픽을 https://dc.services.visualstudio.com:443으로 라우팅해야 합니다.
+
+위의 값을 `http://<your.gateway.address>/<relative path>`로 바꾸세요.
+ 
+예: 
+```
+http://<your.gateway.endpoint>/v2/track 
+http://<your.gateway.endpoint>/api/profiles/{0}/apiId
+```
+
+
+
 
 ## <a name="can-i-run-availability-web-tests-on-an-intranet-server"></a>인트라넷 서버에서 가용성 웹 테스트를 실행할 수 있나요?
 
@@ -281,4 +303,3 @@ ApplicationInsights.config에서 다음과 같이 설정하여 서버에서 게�
 [platforms]: app-insights-platforms.md
 [start]: app-insights-overview.md
 [windows]: app-insights-windows-get-started.md
-

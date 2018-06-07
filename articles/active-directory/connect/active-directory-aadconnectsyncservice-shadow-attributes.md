@@ -3,8 +3,8 @@ title: "Azure AD Connect 동기화 서비스 섀도 특성 | Microsoft Docs"
 description: "Azure AD Connect 동기화 서비스에서 섀도 특성이 작동하는 방식을 설명합니다."
 services: active-directory
 documentationcenter: 
-author: andkjell
-manager: femila
+author: billmath
+manager: mtillman
 editor: 
 ms.assetid: 
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/13/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: bb1ca3189e6c39b46eaa5151bf0c74dbf4a35228
-ms.openlocfilehash: 4963888748d7103e3b24ac9c8de3d10ef9554fd4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/18/2017
-
+ms.openlocfilehash: 19d5ae46955ecc094c340d141485d3eb54c8e9b2
+ms.sourcegitcommit: f1c1789f2f2502d683afaf5a2f46cc548c0dea50
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/18/2018
 ---
 # <a name="azure-ad-connect-sync-service-shadow-attributes"></a>Azure AD Connect 동기화 서비스 섀도 특성
 대부분의 특성은 온-프레미스 Active Directory에 있을 때와 동일한 방식으로 Azure AD에 표현됩니다. 하지만 일부 특성은 조작 방법이 특별하며 Azure AD의 특성 값이 Azure AD Connect가 동기화하는 값과 다를 수 있습니다.
@@ -75,4 +74,3 @@ ProxyCalc는 사용자에 대한 변경 내용을 처리하는 데 다소 시간
 ## <a name="see-also"></a>참고 항목
 * [Azure AD Connect 동기화](active-directory-aadconnectsync-whatis.md)
 * [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)
-

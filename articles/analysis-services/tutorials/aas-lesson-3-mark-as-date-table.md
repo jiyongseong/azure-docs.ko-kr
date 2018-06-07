@@ -1,30 +1,20 @@
 ---
-title: "Azure Analysis Services 자습서 단원 3: 날짜 테이블로 표시 | Microsoft Docs"
-description: "Azure Analysis Services 자습서 프로젝트에서 날짜 테이블로 표시하는 방법을 설명합니다."
-services: analysis-services
-documentationcenter: 
+title: 'Azure Analysis Services 자습서 단원 3: 날짜 테이블로 표시 | Microsoft Docs'
+description: Azure Analysis Services 자습서 프로젝트에서 날짜 테이블로 표시하는 방법을 설명합니다.
 author: minewiskan
-manager: erikre
-editor: 
-tags: 
-ms.assetid: 
+manager: kfile
 ms.service: analysis-services
-ms.devlang: NA
-ms.topic: get-started-article
-ms.tgt_pltfrm: NA
-ms.workload: na
-ms.date: 06/01/2017
+ms.topic: conceptual
+ms.date: 04/12/2018
 ms.author: owend
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 43aab8d52e854636f7ea2ff3aae50d7827735cc7
-ms.openlocfilehash: c62f2726fef5219155a08b70c61162c914600d1d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/03/2017
-
+ms.reviewer: minewiskan
+ms.openlocfilehash: 1b7f6252faef02676be6ccb22653f5d4805020df
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-# <a name="lesson-3-mark-as-date-table"></a>단원 3: 날짜 테이블로 표시
-
-[!INCLUDE[analysis-services-appliesto-aas-sql2017-later](../../../includes/analysis-services-appliesto-aas-sql2017-later.md)]
+# <a name="mark-as-date-table"></a>날짜 테이블로 표시
 
 2단원: 데이터 가져오기에서는 이름이 DimDate인 차원 테이블을 가져왔습니다. 모델에서 이 테이블의 이름은 DimDate이지만 날짜 및 시간 데이터가 포함되어 있으므로 *날짜 테이블*이라고도 합니다.  
   
@@ -60,4 +50,3 @@ DAX 시간 인텔리전스 함수를 사용할 때마다, 나중에 측정값을
 ## <a name="whats-next"></a>다음 작업
 [단원 4: 관계 만들기](../tutorials/aas-lesson-4-create-relationships.md)
   
-

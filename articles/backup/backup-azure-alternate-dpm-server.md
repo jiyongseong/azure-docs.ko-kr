@@ -1,6 +1,6 @@
 ---
 title: "Azure Backup Server에서 데이터 복구 | Microsoft Docs"
-description: "Azure Backup 저장소에 보호해 둔 데이터를 해당 저장소에 등록된 모든 Azure Backup Server에서 복구할 수 있습니다."
+description: "Recovery Services 자격 증명 모음에 보호해 둔 데이터를 해당 자격 증명 모음에 등록된 모든 Azure Backup Server에서 복구할 수 있습니다."
 services: backup
 documentationcenter: 
 author: nkolli1
@@ -12,28 +12,27 @@ ms.workload: storage-backup-recovery
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 11/28/2016
+ms.date: 08/18/2017
 ms.author: adigan;giridham;trinadhk;markgal
-translationtype: Human Translation
-ms.sourcegitcommit: 14cc190a7d1cde1181a6f26ef83095bc601f7fbb
-ms.openlocfilehash: 36c4e1865c99dd1c55be798e1d310a02f2af0864
-
-
+ms.openlocfilehash: 688d155b68bc2d76d53f78d251bc2f659582845f
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-# <a name="recovering-data-from-another-azure-backup-server-in-the-backup-vault"></a>백업 저장소의 다른 Azure Backup Server에서 데이터 복구
-이제 Azure 백업 저장소에 보호해 둔 데이터를 해당 저장소에 등록된 모든 Azure Backup Server에서 복구할 수 있습니다. 이를 위한 절차는 ABS 관리 콘솔에 완전히 통합되었으며 다른 복구 워크플로와 비슷합니다.
+# <a name="recover-data-from-azure-backup-server"></a>Azure Backup Server에서 데이터 복구
+Azure Backup Server를 사용하여 Recovery Services 자격 증명 모음으로 백업한 데이터를 복구할 수 있습니다. 이 과정이 Azure Backup Server 관리 콘솔에 통합되며 다른 Azure Backup 구성 요소의 복구 워크플로와 유사합니다.
 
 > [!NOTE]
-> 이 문서 및 다음 단계는 [최신 Azure 백업 에이전트](http://aka.ms/azurebackup_agent)가 있는 [System Center Data Protection Manager UR7](https://support.microsoft.com/en-us/kb/3065246)에도 적용됩니다.
+> 이 문서는 [최신 Azure Backup 에이전트](http://aka.ms/azurebackup_agent)와 결합된 [System Center Data Protection Manager 2012 R2 UR7 이상](https://support.microsoft.com/en-us/kb/3065246)에도 적용됩니다.
 >
 >
 
-## <a name="recover-data-from-another-azure-backup-server"></a>다른 Azure Backup Server에서 데이터 복구
-다른 Azure Backup Server에서 데이터를 복구하려면:
+Azure Backup Server에서 데이터를 복구하려면
 
-1. ABS 관리 콘솔의 **복구** 탭에서 화면 왼쪽 상단에 있는 **‘외부 DPM 추가’**를 클릭합니다.   
+1. Azure Backup Server 관리 콘솔의 **복구** 탭에서 화면 왼쪽 상단에 있는 **‘외부 DPM 추가’**(화면 왼쪽 맨 위에 있음)를 클릭합니다.   
     ![외부 DPM 추가](./media/backup-azure-alternate-dpm-server/add-external-dpm.png)
-2. 데이터를 복구할 **Azure Backup Server**와 연결된 자격 증명 모음에서 새 **보관 자격 증명**을 다운로드하고, 백업 자격 증명 모음에 등록된 Azure Backup Server 목록에서 Azure Backup Server를 선택하고, 데이터를 복구할 Azure Backup Server에 연결된 **암호화 암호**를 제공합니다.
+2. 데이터를 복구할 **Azure Backup Server**와 연결된 자격 증명 모음에서 새 **보관 자격 증명**을 다운로드하고, Recovery Services 자격 증명 모음에 등록된 Azure Backup Server 목록에서 Azure Backup Server를 선택하고, 데이터를 복구할 서버에 연결된 **암호화 암호**를 제공합니다.
 
     ![외부 DPM 자격 증명](./media/backup-azure-alternate-dpm-server/external-dpm-credentials.png)
 
@@ -62,13 +61,13 @@ ms.openlocfilehash: 36c4e1865c99dd1c55be798e1d310a02f2af0864
     ![외부 DPM 복구 대체 위치](./media/backup-azure-alternate-dpm-server/external-dpm-recovery-alternate-location.png)
 8. **복사본 만들기**, **건너뛰기** 또는 **덮어쓰기** 옵션 중에서 선택합니다.
 
-   * **복사본 만들기** 를 선택하면 이름이 충돌할 경우 파일의 복사본을 만듭니다.
-   * **건너뛰기** 를 선택하면 이름이 충돌할 경우 복구를 건너뜁니다.
-   * **덮어쓰기** 를 선택하면 이름이 충돌할 경우 지정된 위치의 기존 복사본을 덮어씁니다.
+   * **복사본 만들기** - 이름이 충돌할 경우 파일의 복사본을 만듭니다.
+   * **건너뛰기** - 이름이 충돌할 경우 원본 파일을 남기고 파일은 복구하지 않습니다.
+   * **덮어쓰기** - 이름이 충돌할 경우 기존 파일 복사본을 덮어씁니다.
 
      **복원 보안**에서 적절한 옵션을 선택합니다. 데이터를 복구할 대상 컴퓨터의 보안 설정을 적용하거나 복구 지점이 생성된 시기에 사용된 보안 설정을 적용할 수 있습니다.
 
-     복구가 성공적으로 완료되면 **알림** 을 전송할지 선택합니다.
+     복구가 성공적으로 완료되면 **알림**을 전송할지 여부를 식별합니다.
 
      ![외부 DPM 복구 알림](./media/backup-azure-alternate-dpm-server/external-dpm-recovery-notifications.png)
 9. **요약** 화면에 지금까지 선택한 옵션이 나열됩니다. **'복구'**를 클릭하면 데이터가 적절한 온-프레미스 위치에 복구됩니다.
@@ -88,26 +87,22 @@ ms.openlocfilehash: 36c4e1865c99dd1c55be798e1d310a02f2af0864
 ## <a name="troubleshooting-error-messages"></a>오류 메시지 문제 해결
 | 번호 | 오류 메시지 | 문제 해결 단계 |
 |:---:|:--- |:--- |
-| 1. |이 서버는 저장소 자격 증명을 통해 지정된 저장소에 등록되지 않았습니다. |**원인:** 이 오류는 선택한 저장소 자격 증명 파일이 복구를 시도하려는 Azure Backup Server와 연결된 백업 저장소에 속해 있지 않을 때 나타납니다. <br> **해결 방법:** Azure Backup Server가 등록된 백업 저장소에서 저장소 자격 증명 파일을 다운로드합니다. |
-| 2. |복구 가능한 데이터가 없거나 선택한 서버가 DPM 서버가 아닙니다. |**원인:** 백업 저장소에 다른 Azure Backup Server가 등록되지 않았거나, 서버에서 아직 메타데이터를 업로드하지 않았거나, 선택한 서버가 Azure Backup Server가 아닙니다(Windows Server 또는 Windows 클라이언트일 수 있음). <br> **해결 방법:** 백업 저장소에 다른 Azure Backup Server가 등록된 경우 최신 Azure Backup 에이전트가 설치되어 있는지 확인합니다. <br>다른 Azure Backup Server가 백업 저장소에 등록된 경우, 설치하고 하루 동안 기다린 다음 복구 프로세스를 시작하세요. 야간 작업을 통해 보호된 모든 백업에 대한 메타데이터가 클라우드로 업로드됩니다. 이제 데이터를 복구할 수 있습니다. |
-| 3. |이 저장소에 DPM 서버가 등록되어 있지 않습니다. |**원인:** 복구가 시도된 자격 증명 모음에 등록된 다른 Azure Backup Server가 없습니다.<br>**해결 방법:** 백업 저장소에 다른 Azure Backup Server가 등록된 경우 최신 Azure Backup 에이전트가 설치되어 있는지 확인합니다.<br>다른 Azure Backup Server가 백업 저장소에 등록된 경우, 설치하고 하루 동안 기다린 다음 복구 프로세스를 시작하세요. 야간 작업을 통해 보호된 모든 백업에 대한 메타데이터가 클라우드로 업로드됩니다. 이제 데이터를 복구할 수 있습니다. |
+| 1. |이 서버는 저장소 자격 증명을 통해 지정된 저장소에 등록되지 않았습니다. |**원인:** 이 오류는 선택한 보관 자격 증명 파일이 복구를 시도하려는 Azure Backup Server와 연결된 Recovery Services 자격 증명 모음에 속해 있지 않을 때 나타납니다. <br> **해결 방법:** Azure Backup Server가 등록된 Recovery Services 자격 증명 모음에서 보관 자격 증명 파일을 다운로드합니다. |
+| 2. |복구 가능한 데이터가 없거나 선택한 서버가 DPM 서버가 아닙니다. |**원인:** Recovery Services 자격 증명 모음에 다른 Azure Backup Server가 등록되지 않았거나, 서버에서 아직 메타데이터를 업로드하지 않았거나, 선택한 서버가 Azure Backup Server가 아닙니다(즉, Windows Server 또는 Windows 클라이언트). <br> **해결 방법:** Recovery Services 자격 증명 모음에 다른 Azure Backup Server가 등록된 경우 최신 Azure Backup 에이전트가 설치되어 있는지 확인합니다. <br>다른 Azure Backup Server가 Recovery Services 자격 증명 모음에 등록된 경우, 설치하고 하루 동안 기다린 다음 복구 프로세스를 시작하세요. 야간 작업을 통해 보호된 모든 백업에 대한 메타데이터가 클라우드로 업로드됩니다. 이제 데이터를 복구할 수 있습니다. |
+| 3. |이 저장소에 DPM 서버가 등록되어 있지 않습니다. |**원인:** 복구가 시도된 자격 증명 모음에 등록된 다른 Azure Backup Server가 없습니다.<br>**해결 방법:** Recovery Services 자격 증명 모음에 다른 Azure Backup Server가 등록된 경우 최신 Azure Backup 에이전트가 설치되어 있는지 확인합니다.<br>다른 Azure Backup Server가 Recovery Services 자격 증명 모음에 등록된 경우, 설치하고 하루 동안 기다린 다음 복구 프로세스를 시작하세요. 야간 작업을 통해 보호된 모든 백업에 대한 메타데이터가 클라우드로 업로드됩니다. 이제 데이터를 복구할 수 있습니다. |
 | 4. |암호화 암호가 다음 서버에 연결된 암호와 일치하지 않습니다. **<server name>** |**원인:** 데이터를 복구하려는 Azure Backup Server의 데이터를 암호화하는 데 사용된 암호화 암호가 입력한 암호화 암호와 일치하지 않습니다. 에이전트는 데이터의 암호를 해독할 수 없습니다. 따라서 복구가 실패합니다.<br>**해결 방법:** 데이터를 복구하려는 Azure Backup Server에 연결된 암호화 암호를 정확하게 입력하세요. |
 
-## <a name="frequently-asked-questions"></a>질문과 대답:
-1. **UR7과 최신 Azure 백업 에이전트를 설치한 후에 다른 DPM 서버에서 외부 DPM 서버를 추가할 수 없는 이유는 무엇입니까? (SC DPM 2012 R2를 사용하는 경우에 해당)**
+## <a name="frequently-asked-questions"></a>질문과 대답
 
-    대답) 데이터 원본이 클라우드에 보호되어 있는 기존 DPM 서버의 경우(업데이트 롤업 7 이전의 업데이트 롤업을 사용하여), UR7과 최신 Azure 백업 에이전트를 설치한 다음 하루 이상 기다린 후에 *외부 DPM 서버 추가*를 시작하세요. DPM 보호 그룹의 메타데이터가 Azure에 업로드되어야 합니다. 이 작업은 설치 후 첫 야간 작업을 통해 수행됩니다.
-2. **필요한 Azure 백업 에이전트의 최소 버전은 무엇입니까?**
+### <a name="why-cant-i-add-an-external-dpm-server-after-installing-ur7-and-latest-azure-backup-agent"></a>UR7과 최신 Azure Backup 에이전트를 설치한 후에 외부 DPM 서버를 추가할 수 없는 이유는 무엇인가요?
 
-    대답) 이 기능을 사용하기 위해 필요한 Azure 백업 에이전트의 최소 버전은 2.0.8719.0입니다.  제어판 **>** 모든 제어판 항목 **>** 프로그램 및 기능 **>** Microsoft Azure Recovery Services 에이전트로 이동하여 Azure 백업 에이전트 버전을 확인할 수 있습니다. 버전이 2.0.8719.0 보다 낮은 경우 [최신 Azure 백업 에이전트](https://go.microsoft.com/fwLink/?LinkID=288905) 를 다운로드하여 설치하세요.
+데이터 원본이 클라우드에 보호되어 있는 DPM 서버의 경우(업데이트 롤업 7 이전의 업데이트 롤업을 사용하여), UR7과 최신 Azure Backup 에이전트를 설치한 다음 하루 이상 기다린 후에 **외부 DPM 서버 추가**를 시작해야 합니다. DPM 보호 그룹의 메타데이터가 Azure에 업로드되는 데는 1일의 기간이 필요합니다. 보호 그룹 메타데이터는 야간 작업을 통해 처음으로 업로드됩니다.
 
-    ![외부 DPM 지우기](./media/backup-azure-alternate-dpm-server/external-dpm-azurebackupagentversion.png)
+### <a name="what-is-the-minimum-version-of-the-microsoft-azure-recovery-services-agent-needed"></a>필요한 Microsoft Azure Recovery Services 에이전트의 최소 버전은 무엇인가요?
+
+이 기능을 사용하도록 설정하는 데 필요한 Microsoft Azure Recovery Services 에이전트 또는 Azure Backup 에이전트의 최소 버전은 2.0.8719.0입니다.  에이전트 버전을 보려면 제어판 **>** 모든 제어판 항목 **>** 프로그램 및 기능 **>** Microsoft Azure Recovery Services 에이전트를 엽니다. 버전이 2.0.8719.0보다 낮은 경우 [최신 Azure Backup 에이전트](https://go.microsoft.com/fwLink/?LinkID=288905)를 다운로드하여 설치하세요.
+
+![외부 DPM 지우기](./media/backup-azure-alternate-dpm-server/external-dpm-azurebackupagentversion.png)
 
 ## <a name="next-steps"></a>다음 단계:
 •   [Azure Backup FAQ](backup-azure-backup-faq.md)
-
-
-
-<!--HONumber=Jan17_HO4-->
-
-

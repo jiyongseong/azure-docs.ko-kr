@@ -1,13 +1,13 @@
 ---
-title: "Azure에서 Team Services를 사용하여 CI/CD 파이프라인 만들기 | Microsoft Docs"
-description: "연속적인 통합 및 전달을 위해 Windows VM에서 웹앱을 IIS에 배포하는 Visual Studio Team Services 파이프라인을 만드는 방법에 대해 알아봅니다."
+title: 자습서 - Azure에서 Team Services를 사용하여 CI/CD 파이프라인 만들기 | Microsoft Docs
+description: 이 자습서에서는 지속적인 통합 및 전달을 위해 Azure의 Windows VM에서 웹앱을 IIS에 배포하는 Visual Studio Team Services 파이프라인을 만드는 방법에 대해 알아봅니다.
 services: virtual-machines-windows
 documentationcenter: virtual-machines
 author: iainfoulds
-manager: timlt
+manager: jeconnoc
 editor: tysonn
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-windows
 ms.devlang: na
 ms.topic: article
@@ -16,26 +16,25 @@ ms.workload: infrastructure
 ms.date: 05/12/2017
 ms.author: iainfou
 ms.custom: mvc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: afa23b1395b8275e72048bd47fffcf38f9dcd334
-ms.openlocfilehash: b4074c67c7a8214f8e103385d5aea75f019d2da6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/13/2017
-
+ms.openlocfilehash: d017f2453bbd757c16e2df034f5879f24ffe42f7
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32192223"
 ---
-
-# <a name="create-a-continuous-integration-pipeline-with-visual-studio-team-services-and-iis"></a>Visual Studio Team Services 및 IIS를 사용하여 연속 통합 파이프라인 만들기
-응용 프로그램 개발의 빌드, 테스트 및 배포 단계를 자동화하려면 CI/CD(연속 통합 및 배포) 파이프라인을 사용할 수 있습니다. 이 자습서에서는 Visual Studio Team Services 및 IIS를 실행하는 Azure의 Windows VM(가상 컴퓨터)를 사용하여 CI/CD 파이프라인을 만듭니다. 다음 방법에 대해 알아봅니다.
+# <a name="tutorial-create-a-continuous-integration-pipeline-with-visual-studio-team-services-and-iis"></a>자습서: Visual Studio Team Services 및 IIS를 사용하여 지속적인 통합 파이프라인 만들기
+응용 프로그램 개발의 빌드, 테스트 및 배포 단계를 자동화하려면 CI/CD(연속 통합 및 배포) 파이프라인을 사용할 수 있습니다. 이 자습서에서는 Visual Studio Team Services 및 IIS를 실행하는 Azure의 Windows VM(가상 머신)를 사용하여 CI/CD 파이프라인을 만듭니다. 다음 방법에 대해 알아봅니다.
 
 > [!div class="checklist"]
 > * Team Services 프로젝트에 ASP.NET 웹 응용 프로그램 게시
 > * 코드 커밋으로 트리거되는 빌드 정의 만들기
-> * Azure의 가상 컴퓨터에 IIS 설치 및 구성
+> * Azure의 가상 머신에 IIS 설치 및 구성
 > * Team Services의 배포 그룹에 IIS 인스턴스 추가
 > * 새 웹 배포 패키지를 IIS에 게시하기 위한 릴리스 정의 만들기
 > * CI/CD 파이프라인 테스트
 
-이 자습서에는 Azure PowerShell 모듈 버전 3.6 이상이 필요합니다. `Get-Module -ListAvailable AzureRM`을 실행하여 버전을 찾습니다. 업그레이드해야 하는 경우 [Azure PowerShell 모듈 설치](/powershell/azure/install-azurerm-ps)를 참조하세요.
+이 자습서에는 Azure PowerShell 모듈 버전 5.7.0 이상이 필요합니다. `Get-Module -ListAvailable AzureRM`을 실행하여 버전을 찾습니다. 업그레이드해야 하는 경우 [Azure PowerShell 모듈 설치](/powershell/azure/install-azurerm-ps)를 참조하세요.
 
 
 ## <a name="create-project-in-team-services"></a>Team Services에서 프로젝트 만들기
@@ -96,29 +95,30 @@ Team Services에서 빌드 정의를 사용하여 응용 프로그램을 빌드�
 ## <a name="create-virtual-machine"></a>가상 컴퓨터 만들기
 ASP.NET 웹앱을 실행할 플랫폼을 제공하려면 IIS를 실행하는 Windows 가상 컴퓨터가 필요합니다. 코드를 커밋하고 빌드가 트리거될 때 Team Services에서 에이전트를 사용하여 IIS 인스턴스와 상호 작용합니다.
 
-[이 스크립트 샘플](../scripts/virtual-machines-windows-powershell-sample-create-vm.md?toc=%2fpowershell%2fmodule%2ftoc.json)을 사용하여 Windows Server 2016 VM을 만듭니다. 스크립트가 실행되어 VM을 만드는 데 몇 분이 걸립니다. VM을 만들면 다음과 같이 [Add-AzureRmNetworkSecurityRuleConfig](/powershell/module/azurerm.resources/new-azurermresourcegroup)를 사용하여 웹 트래픽용 80 포트를 엽니다.
+[New-AzureRmVM](/powershell/module/azurerm.compute/new-azurermvm)으로 Windows Server 2016 VM을 만듭니다. 다음 예제에서는 *EastUS* 위치에 *myVM*이라는 VM을 만듭니다. 리소스 그룹 *myResourceGroupVSTS* 및 지원 네트워크 리소스도 만들어집니다. 웹 트래픽을 허용하기 위해 TCP 포트 *80*이 VM에 대해 열립니다. 메시지가 표시되면 VM에 대한 로그인 자격 증명으로 사용할 사용자 이름과 암호를 입력합니다.
 
 ```powershell
-Get-AzureRmNetworkSecurityGroup `
-  -ResourceGroupName $resourceGroup `
-  -Name "myNetworkSecurityGroup" | `
-Add-AzureRmNetworkSecurityRuleConfig `
-  -Name "myNetworkSecurityGroupRuleWeb" `
-  -Protocol "Tcp" `
-  -Direction "Inbound" `
-  -Priority "1001" `
-  -SourceAddressPrefix "*" `
-  -SourcePortRange "*" `
-  -DestinationAddressPrefix "*" `
-  -DestinationPortRange "80" `
-  -Access "Allow" | `
-Set-AzureRmNetworkSecurityGroup
+# Create user object
+$cred = Get-Credential -Message "Enter a username and password for the virtual machine."
+
+# Create a virtual machine
+New-AzureRmVM `
+  -ResourceGroupName "myResourceGroupVSTS" `
+  -Name "myVM" `
+  -Location "East US" `
+  -ImageName "Win2016Datacenter" `
+  -VirtualNetworkName "myVnet" `
+  -SubnetName "mySubnet" `
+  -SecurityGroupName "myNetworkSecurityGroup" `
+  -PublicIpAddressName "myPublicIp" `
+  -Credential $cred `
+  -OpenPorts 80
 ```
 
 VM에 연결하려면 다음과 같이 [Get-AzureRmPublicIpAddress](/powershell/module/azurerm.network/get-azurermpublicipaddress)를 사용하여 공용 IP 주소를 얻습니다.
 
 ```powershell
-Get-AzureRmPublicIpAddress -ResourceGroupName $resourceGroup | Select IpAddress
+Get-AzureRmPublicIpAddress -ResourceGroupName "myResourceGroup" | Select IpAddress
 ```
 
 VM에 대한 원격 데스크톱 세션을 만듭니다.
@@ -187,7 +187,7 @@ Install-WindowsFeature Web-Server,Web-Asp-Net45,NET-Framework-Features
 
 1. 릴리스 정의에서 **+ 릴리스**를 선택한 다음 **릴리스 만들기**를 선택합니다.
 2. 드롭다운 목록에서 **자동 배포: 릴리스를 만들 때**와 함께 최신 빌드가 선택되어 있는지 확인합니다. **만들기**를 선택합니다.
-3. 릴리스 정의의 위쪽에 *'Release-1' 릴리스를 만들었습니다.*와 같은 작은 배너가 나타납니다. 릴리스 링크를 선택합니다.
+3. 릴리스 정의의 위쪽에 *'Release-1' 릴리스를 만들었습니다.* 와 같은 작은 배너가 나타납니다. 릴리스 링크를 선택합니다.
 4. **로그** 탭을 열어 릴리스 진행 상황을 확인합니다.
     
     ![성공적인 Team Services 릴리스 및 웹 배포 패키지 푸시](media/tutorial-vsts-iis-cicd/successful_release.png)
@@ -227,12 +227,12 @@ Install-WindowsFeature Web-Server,Web-Asp-Net45,NET-Framework-Features
 > [!div class="checklist"]
 > * Team Services 프로젝트에 ASP.NET 웹 응용 프로그램 게시
 > * 코드 커밋으로 트리거되는 빌드 정의 만들기
-> * Azure의 가상 컴퓨터에 IIS 설치 및 구성
+> * Azure의 가상 머신에 IIS 설치 및 구성
 > * Team Services의 배포 그룹에 IIS 인스턴스 추가
 > * 새 웹 배포 패키지를 IIS에 게시하기 위한 릴리스 정의 만들기
 > * CI/CD 파이프라인 테스트
 
-미리 빌드된 가상 컴퓨터 스크립트 샘플을 보려면 이 링크를 따르세요.
+한 쌍의 Windows VM에 SQL&#92;IIS&#92;.NET 스택을 설치하는 방법을 알아보려면 다음 자습서로 이동하세요.
 
 > [!div class="nextstepaction"]
-> [Windows 가상 컴퓨터 스크립트 샘플 ](./powershell-samples.md)
+> [SQL&#92;IIS&#92;.NET 스택](tutorial-iis-sql.md)

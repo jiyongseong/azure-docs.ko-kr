@@ -14,13 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/31/2017
 ms.author: LADocs; padmavc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a30a90682948b657fb31dd14101172282988cbf0
-ms.openlocfilehash: 4a41d9eb8b28aed499bb20e17e3c979962c78bcd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.openlocfilehash: c644dd98d468a8c99625c45bad3f06031ff22b4e
+ms.sourcegitcommit: 088a8788d69a63a8e1333ad272d4a299cb19316e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/27/2018
 ---
 # <a name="exchange-x12-messages-for-enterprise-integration-with-logic-apps"></a>엔터프라이즈 통합용 X12 메시지를 논리 앱과 교환
 
@@ -33,45 +31,42 @@ Azure Logic Apps의 X12 메시지를 교환하기 전에 X12 규약을 만들고
 
 필요한 항목은 다음과 같습니다.
 
-* 이미 정의되고 Azure 구독과 연결된 [통합 계정](../logic-apps/logic-apps-enterprise-integration-accounts.md)
+* 이미 정의되고 Azure 구독과 연결된 [통합 계정](logic-apps-enterprise-integration-create-integration-account.md)
 * 통합 계정에 정의되고 **비즈니스 ID** 아래에서 X12 식별자를 사용하여 구성된 둘 이상의 [파트너](../logic-apps/logic-apps-enterprise-integration-partners.md)    
-* [통합 계정](../logic-apps/logic-apps-enterprise-integration-accounts.md)에 업로드하기 위한 필수 [스키마](../logic-apps/logic-apps-enterprise-integration-schemas.md)
+* 통합 계정에 업로드할 수 있는 필수 [스키마](../logic-apps/logic-apps-enterprise-integration-schemas.md)
 
-[통합 계정을 만들고](../logic-apps/logic-apps-enterprise-integration-accounts.md) [파트너를 추가하고](logic-apps-enterprise-integration-partners.md) 사용하려는 [스키마](../logic-apps/logic-apps-enterprise-integration-schemas.md)를 만든 후에 다음과 같은 단계에 따라 X12 규약을 만들 수 있습니다.
+[통합 계정을 만들고](../logic-apps/logic-apps-enterprise-integration-create-integration-account.md) [파트너를 추가하고](logic-apps-enterprise-integration-partners.md) 사용하려는 [스키마](../logic-apps/logic-apps-enterprise-integration-schemas.md)를 만든 후에 다음과 같은 단계에 따라 X12 규약을 만들 수 있습니다.
 
 ## <a name="create-an-x12-agreement"></a>X12 규약 만들기
 
-1.  [Azure Portal](http://portal.azure.com "Azure Portal")에 로그인합니다. 왼쪽 메뉴에서 **추가 서비스**를 클릭합니다. 
+1. [Azure Portal](http://portal.azure.com "Azure Portal")에 로그인합니다. 
 
-    > [!TIP]
-    > **추가 서비스**가 표시되지 않으면 먼저 메뉴를 확장해야 합니다. 축소된 메뉴의 맨 위에 있는 **메뉴 표시**를 선택합니다.
+2. Azure의 주 메뉴에서 **모든 서비스**를 선택합니다. 검색 상자에 "통합"을 입력한 다음, **통합 계정**을 선택합니다.  
 
-    ![왼쪽 메뉴에서 "추가 서비스"를 선택합니다.](./media/logic-apps-enterprise-integration-x12/account-1.png)
+   ![통합 계정 찾기](./media/logic-apps-enterprise-integration-x12/account-1.png)
 
-2.  검색 상자에서 필터에 "통합"을 입력합니다. 결과 목록에서 **통합 계정**을 선택합니다.  
+   > [!TIP]
+   > **모든 서비스**가 표시되지 않으면 먼저 메뉴를 확장해야 합니다. 축소된 메뉴의 맨 위에 있는 **메뉴 표시**를 선택합니다.
 
-    !["통합"에 대해 필터링하고 "통합 계정"을 선택합니다.](./media/logic-apps-enterprise-integration-x12/account-2.png)
+3. **통합 계정**에서 규약을 추가하려는 통합 계정을 선택합니다.
 
-3. 열린 **통합 계정** 블레이드에서 규약을 추가하려는 통합 계정을 선택합니다.
-통합 계정이 표시되지 않으면 [먼저 만듭니다](../logic-apps/logic-apps-enterprise-integration-accounts.md "통합 계정에 대한 모든 정보")를.
-
-    ![규약을 만들 통합 계정 선택](./media/logic-apps-enterprise-integration-x12/account-3.png)
+   ![규약을 만들 통합 계정 선택](./media/logic-apps-enterprise-integration-x12/account-3.png)
 
 4. **개요**를 선택한 다음 **규약** 타일을 선택합니다. 규약 타일이 없는 경우 먼저 타일을 추가합니다. 
 
-    !["규약" 타일 선택](./media/logic-apps-enterprise-integration-agreements/agreement-1.png)
+   !["규약" 타일 선택](./media/logic-apps-enterprise-integration-as2/agreement-1.png)
 
-5. 열린 [규약] 블레이드에서 **추가**를 선택합니다.
+5. **규약**에서 **추가**를 선택합니다.
 
-    !["추가" 선택](./media/logic-apps-enterprise-integration-agreements/agreement-2.png)     
+   !["추가" 선택](./media/logic-apps-enterprise-integration-as2/agreement-2.png)     
 
 6. **추가** 아래에서 규약의 **이름**을 입력합니다. 규약 유형에 **X12**를 선택합니다. 규약의 **호스트 파트너**, **호스트 ID**, **게스트 파트너** 및 **게스트 ID**를 선택합니다. 속성에 대한 자세한 내용은 이 단계에서 테이블을 참조하세요.
 
     ![규약 세부 정보 제공](./media/logic-apps-enterprise-integration-x12/x12-1.png)  
 
-    | 속성 | 설명 |
+    | 자산 | 설명 |
     | --- | --- |
-    | 이름 |규약 이름 |
+    | Name |규약 이름 |
     | 규약 유형 | X12여야 합니다. |
     | 호스트 파트너 |규약에는 호스트 및 게스트 파트너가 필요합니다. 호스트 파트너는 규약을 구성하는 조직을 나타냅니다. |
     | 호스트 ID |호스트 파트너의 식별자입니다. |
@@ -100,7 +95,7 @@ Azure Logic Apps의 X12 메시지를 교환하기 전에 X12 규약을 만들고
 
 ![식별자 속성 설정](./media/logic-apps-enterprise-integration-x12/x12-2.png)  
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | ISA1(인증 한정자) |드롭다운 목록에서 권한 부여 한정자 값을 선택합니다. |
 | ISA2 |선택 사항입니다. 권한 부여 정보 값을 입력합니다. ISA1에 대해 입력한 값이 00이 아니면 영숫자 문자를 1~10개 사이로 입력합니다. |
@@ -111,7 +106,7 @@ Azure Logic Apps의 X12 메시지를 교환하기 전에 X12 규약을 만들고
 
 ![승인 속성 설정](./media/logic-apps-enterprise-integration-x12/x12-3.png) 
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | TA1이 예상됨 |교환 보낸 사람에게 기술 승인을 반환합니다. |
 | FA가 예상됨 |교환 보낸 사람에게 기능 확인을 반환합니다. 그런 다음 스키마 버전에 따라 원하는 승인(997 또는 999)을 선택합니다. |
@@ -123,7 +118,7 @@ Azure Logic Apps의 X12 메시지를 교환하기 전에 X12 규약을 만들고
 
 ![스키마 선택](./media/logic-apps-enterprise-integration-x12/x12-33.png) 
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | 버전 |X12 버전 선택 |
 | 트랜잭션 유형(ST01) |트랜잭션 유형 선택 |
@@ -137,7 +132,7 @@ Azure Logic Apps의 X12 메시지를 교환하기 전에 X12 규약을 만들고
 
 ![트랜잭션 집합의 구분 기호를 지정합니다. 표준 식별자 또는 반복 구분 기호 선택](./media/logic-apps-enterprise-integration-x12/x12-34.png)
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | ISA11 사용 |트랜잭션 집합에서 사용할 구분 기호를 지정합니다. <p>EDI 수신 파이프라인에서 들어오는 문서의 소수 표기법 대신 **표준 식별자**를 선택하여 소수 표기법에 마침표(.)를 사용합니다. <p>단순 데이터 요소 또는 반복되는 데이터 구조의 반복 발생에 대한 구분 기호를 지정하려면 **반복 구분 기호**를 선택합니다. 예를 들어 일반적으로 캐럿(^)을 반복 구분 기호로 사용합니다. HIPAA 스키마의 경우 캐럿만 사용할 수 있습니다. |
 
@@ -145,7 +140,7 @@ Azure Logic Apps의 X12 메시지를 교환하기 전에 X12 규약을 만들고
 
 ![컨트롤 번호 중복을 처리하는 방법 선택](./media/logic-apps-enterprise-integration-x12/x12-35.png) 
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | 교환 컨트롤 번호 중복 허용 안 함 |중복 교환을 차단합니다. 받은 교환 컨트롤 번호의 교환 컨트롤 번호(ISA13)를 확인합니다. 일치하는 항목이 발견되면 수신 파이프라인은 교환을 처리하지 않습니다. *매일 중복 ISA13 확인*에 적절한 값을 지정하여 확인이 수행되는 일 수를 지정할 수 있습니다. |
 | 그룹 컨트롤 번호 중복 허용 안 함 |중복된 그룹 컨트롤 번호가 있는 교환을 차단합니다. |
@@ -157,7 +152,7 @@ Azure Logic Apps의 X12 메시지를 교환하기 전에 X12 규약을 만들고
 
 각 유효성 검사 행을 완료하면 다른 행이 자동으로 추가됩니다. 모든 규칙을 지정하지 않으면 유효성 검사에서는 "기본" 행을 사용합니다.
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | 메시지 유형 |EDI 메시지 유형을 선택합니다. |
 | EDI 유효성 검사 |스키마의 EDI 속성, 길이 제한, 빈 데이터 요소 및 후행 구분 기호로 정의되는 데이터 형식에 대해 EDI 유효성 검사를 수행합니다. |
@@ -170,7 +165,7 @@ Azure Logic Apps의 X12 메시지를 교환하기 전에 X12 규약을 만들고
 
 ![내부 설정 선택](./media/logic-apps-enterprise-integration-x12/x12-37.png) 
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | 10진수 형식 "Nn"을 밑수 10 숫자 값으로 변환 |"Nn" 형식으로 지정된 EDI 번호를 밑수가 10인 숫자 값으로 변환합니다. |
 | 후행 구분 기호가 허용되는 경우 빈 XML 태그 만들기 |교환 발신자가 후행 구분 기호에 대해 빈 XML 태그를 포함하도록 하려면 이 확인란을 선택합니다. |
@@ -196,7 +191,7 @@ Azure Logic Apps의 X12 메시지를 교환하기 전에 X12 규약을 만들고
 
 ![식별자 속성 설정](./media/logic-apps-enterprise-integration-x12/x12-4.png)  
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | 권한 부여 한정자(ISA1) |드롭다운 목록에서 권한 부여 한정자 값을 선택합니다. |
 | ISA2 |권한 부여 정보 값을 입력합니다. 이 값이 00이 아니면 영숫자 문자를 1~10개 사이로 입력합니다. |
@@ -207,7 +202,7 @@ Azure Logic Apps의 X12 메시지를 교환하기 전에 X12 규약을 만들고
 
 ![승인 속성 설정](./media/logic-apps-enterprise-integration-x12/x12-5.png)  
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | TA1이 예상됨 |교환 보낸 사람에게 기술 승인(TA1)을 반환합니다. 이 설정은 메시지를 보내는 호스트 파트너가 규약의 게스트 파트너로부터 승인을 요청하도록 지정합니다. 규약의 수신 설정에 따라 호스트 파트너는 이러한 승인을 확인해야 합니다. |
 | FA가 예상됨 |교환 보낸 사람에게 기능 승인(FA)을 반환합니다. 사용 중인 스키마 버전에 따라 원하는 승인의 종류(997 또는 999)를 선택합니다. 규약의 수신 설정에 따라 호스트 파트너는 이러한 승인을 확인해야 합니다. |
@@ -217,7 +212,7 @@ Azure Logic Apps의 X12 메시지를 교환하기 전에 X12 규약을 만들고
 
 ![사용할 스키마 선택](./media/logic-apps-enterprise-integration-x12/x12-5.png)  
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | 버전 |X12 버전 선택 |
 | 트랜잭션 유형(ST01) |트랜잭션 유형 선택 |
@@ -230,7 +225,7 @@ Azure Logic Apps의 X12 메시지를 교환하기 전에 X12 규약을 만들고
 
 ![트랜잭션 집합의 구분 기호를 지정합니다. 표준 식별자 또는 반복 구분 기호 선택](./media/logic-apps-enterprise-integration-x12/x12-6.png) 
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | ISA11 사용 |트랜잭션 집합에서 사용할 구분 기호를 지정합니다. <p>EDI 수신 파이프라인에서 들어오는 문서의 소수 표기법 대신 **표준 식별자**를 선택하여 소수 표기법에 마침표(.)를 사용합니다. <p>단순 데이터 요소 또는 반복되는 데이터 구조의 반복 발생에 대한 구분 기호를 지정하려면 **반복 구분 기호**를 선택합니다. 예를 들어 일반적으로 캐럿(^)을 반복 구분 기호로 사용합니다. HIPAA 스키마의 경우 캐럿만 사용할 수 있습니다. |
 
@@ -238,7 +233,7 @@ Azure Logic Apps의 X12 메시지를 교환하기 전에 X12 규약을 만들고
 
 ![컨트롤 번호 속성 지정](./media/logic-apps-enterprise-integration-x12/x12-8.png) 
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | 컨트롤 버전 번호(ISA12) |X12 표준 버전을 선택합니다. |
 | 사용 표시기(ISA15) |교환의 컨텍스트를 선택합니다.  값은 정보, 프로덕션 데이터 또는 테스트 데이터입니다. |
@@ -262,10 +257,10 @@ Azure Logic Apps의 X12 메시지를 교환하기 전에 X12 규약을 만들고
 
 ![메시지 유형의 구분 기호 지정](./media/logic-apps-enterprise-integration-x12/x12-9.png) 
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | 사용할 문자 집합 |속성의 유효성을 검사하려면 X12 문자 집합을 선택합니다. 옵션은 기본, 확장 및 UTF8입니다. |
-| 스키마 |드롭다운 목록에서 스키마를 선택합니다. 각 행을 완료한 후에 새 행이 자동으로 추가됩니다. 선택한 스키마의 경우 다음 구분 기호 설명에 따라 사용하려는 구분 기호 집합을 선택합니다. |
+| 스키마 |드롭다운 목록에서 스키마를 선택합니다. 각 행을 완료한 후에 새 행이 자동으로 추가됩니다. 선택한 스키마의 경우 아래의 구분 기호 설명에 따라 사용하려는 구분 기호 집합을 선택합니다. |
 | 입력 형식 |드롭다운 목록에서 입력 형식을 선택합니다. |
 | Component Separator |복합 데이터 요소를 분리하려면 단일 문자를 입력합니다. |
 | Data Element Separator |복합 데이터 요소 내에서 단순 데이터 요소를 분리하려면 단일 문자를 입력합니다. |
@@ -273,13 +268,16 @@ Azure Logic Apps의 X12 메시지를 교환하기 전에 X12 규약을 만들고
 | Segment Terminator |EDI 세그먼트의 끝을 나타내려면 단일 문자를 입력합니다. |
 | 접미사 |세그먼트 식별자와 함께 사용할 문자를 선택합니다. 접미사를 지정하면 세그먼트 마침 표시 데이터 요소를 비워 둘 수 있습니다. 세그먼트 마침 표시를 비워 두는 경우 접미사를 지정해야 합니다. |
 
+> [!TIP]
+> 특수 문자 값을 제공하려면 JSON으로 계약을 편집하고 특수 문자에 대한 ASCII 값을 제공합니다.
+
 ### <a name="validation"></a>유효성 검사
 
 ![보낸 메시지의 유효성 검사 속성 설정](./media/logic-apps-enterprise-integration-x12/x12-10.png) 
 
 각 유효성 검사 행을 완료하면 다른 행이 자동으로 추가됩니다. 모든 규칙을 지정하지 않으면 유효성 검사에서는 "기본" 행을 사용합니다.
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | 메시지 유형 |EDI 메시지 유형을 선택합니다. |
 | EDI 유효성 검사 |스키마의 EDI 속성, 길이 제한, 빈 데이터 요소 및 후행 구분 기호로 정의되는 데이터 형식에 대해 EDI 유효성 검사를 수행합니다. |
@@ -290,18 +288,17 @@ Azure Logic Apps의 X12 메시지를 교환하기 전에 X12 규약을 만들고
 
 ## <a name="find-your-created-agreement"></a>생성된 규약 찾기
 
-1.  모든 규약 속성 설정을 완료한 후에 **추가** 블레이드에서 **확인**을 선택하여 규약 만들기를 완료하고 사용자 통합 계정 블레이드로 돌아갑니다.
+1.  모든 규약 속성 설정을 완료한 후에 **추가** 페이지에서 **확인**을 선택하여 규약 만들기를 완료하고 사용자 통합 계정으로 돌아갑니다.
 
     이제 새로 추가된 규약이 **규약** 목록에 표시됩니다.
 
-2.  또한 통합 계정 개요에서 규약을 볼 수도 있습니다. 통합 사용자 계정 블레이드에서 **개요**를 선택한 다음 **규약** 타일을 선택합니다.
+2.  또한 통합 계정 개요에서 규약을 볼 수도 있습니다. 통합 계정 메뉴에서 **개요**를 선택한 다음, **규약** 타일을 선택합니다.
 
-    ![모든 규약을 보려면 "규약" 타일을 선택합니다](./media/logic-apps-enterprise-integration-x12/x12-1-5.png)   
+    !["규약" 타일 선택](./media/logic-apps-enterprise-integration-x12/x12-1-5.png)   
 
 ## <a name="view-the-swagger"></a>swagger 보기
 [swagger 정보](/connectors/x12/)를 참조하세요. 
 
 ## <a name="learn-more"></a>자세한 정보
 * [엔터프라이즈 통합 팩에 대해 자세히 알아보기](../logic-apps/logic-apps-enterprise-integration-overview.md "엔터프라이즈 통합 팩에 대해 알아보기")  
-
 

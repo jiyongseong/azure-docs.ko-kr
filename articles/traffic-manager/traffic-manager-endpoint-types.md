@@ -14,14 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/29/2017
 ms.author: kumud
-ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
 ms.openlocfilehash: 792712e3e529d77ff20a7603b5fbf028ca60f8c8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="traffic-manager-endpoints"></a>Traffic Manager 끝점
 Microsoft Azure Traffic Manager를 사용하면 다른 데이터 센터에서 실행 중인 응용 프로그램 배포에 네트워크 트래픽을 분산하는 방법을 제어할 수 있습니다. 각 응용 프로그램 배포를 Traffic Manager에서 '끝점'으로 구성합니다. Traffic Manager는 DNS 요청을 받으면 DNS 응답에서 반환할 사용 가능한 끝점을 선택합니다. Traffic Manager는 현재 끝점 상태와 트래픽 라우팅 메서드에 근거하여 선택합니다. 자세한 내용은 [Traffic Manager 작동 방식](traffic-manager-how-traffic-manager-works.md)을 참조하세요.
 
@@ -96,4 +94,3 @@ Traffic Manager에서 끝점 비활성화는 유지 관리 모드이거나 다�
 * [Traffic Manager 작동 방식](traffic-manager-how-traffic-manager-works.md)에 대해 알아봅니다.
 * Traffic Manager [끝점 모니터링 및 자동 장애 조치(failover)](traffic-manager-monitoring.md)에 대해 알아봅니다.
 * Traffic Manager [트래픽 라우팅 방법](traffic-manager-routing-methods.md)에 대해 알아봅니다.
-

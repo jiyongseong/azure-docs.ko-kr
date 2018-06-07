@@ -1,25 +1,24 @@
 ---
-title: "StorSimple 8000 시리즈 업데이트 4 릴리스 정보 | Microsoft Docs"
-description: "StorSimple 8000 시리즈 업데이트 4의 새로운 기능, 문제 및 해결 방법을 설명합니다."
+title: StorSimple 8000 시리즈 업데이트 4 릴리스 정보 | Microsoft Docs
+description: StorSimple 8000 시리즈 업데이트 4의 새로운 기능, 문제 및 해결 방법을 설명합니다.
 services: storsimple
 documentationcenter: NA
 author: alkohli
 manager: timlt
-editor: 
-ms.assetid: 
+editor: ''
+ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: TBD
-ms.date: 04/04/2017
+ms.date: 01/23/2018
 ms.author: alkohli
-translationtype: Human Translation
-ms.sourcegitcommit: 73ee330c276263a21931a7b9a16cc33f86c58a26
-ms.openlocfilehash: 23f1bbb066c5b6481988ee841ad8979d78abf084
-ms.lasthandoff: 04/05/2017
-
-
+ms.openlocfilehash: f4db5a49b71b0c384da7af2b90bd5426a4f35c72
+ms.sourcegitcommit: d28bba5fd49049ec7492e88f2519d7f42184e3a8
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
 ---
 # <a name="storsimple-8000-series-update-4-release-notes"></a>StorSimple 8000 시리즈 업데이트 4 릴리스 정보
 
@@ -57,7 +56,7 @@ StorSimple 솔루션에 업데이트를 배포하기 전에 릴리스 정보에 
 
 * **업데이트 변경 내용** - 이 릴리스에서는 업데이트 실패와 관련된 버그가 수정되었습니다.
 
-* **디스크 오류에 대한 경고** - 임박한 디스크 오류를 사용자에게 경고하는 새로운 경고가 이 릴리스에서 추가됩니다. 이 경고가 발생하는 경우 Microsoft 지원에 문의하여 대체 디스크를 보내주세요. 자세한 정보는 [StorSimple 장치에서 하드웨어 경고](storsimple-manage-alerts.md#hardware-alerts)를 참조하세요.
+* **디스크 오류에 대한 경고** - 임박한 디스크 오류를 사용자에게 경고하는 새로운 경고가 이 릴리스에서 추가됩니다. 이 경고가 발생하는 경우 Microsoft 지원에 문의하여 대체 디스크를 보내주세요. 자세한 정보는 [StorSimple 장치에서 하드웨어 경고](storsimple-8000-manage-alerts.md#hardware-alerts)를 참조하세요.
 
 * **컨트롤러 교체 변경 사항** - 사용자가 컨트롤러 교체 프로세스의 상태를 쿼리할 수 있도록 하는 cmdlet이 이 릴리스에서 추가됩니다. 자세한 내용은 [컨트롤러 교체 상태를 쿼리하는 cmdlet](https://technet.microsoft.com/library/dn688168.aspx)으로 이동합니다.
 
@@ -66,14 +65,14 @@ StorSimple 솔루션에 업데이트를 배포하기 전에 릴리스 정보에 
 
 다음 테이블에서 업데이트 4에서 해결된 문제를 간략하게 설명합니다.    
 
-| 아니요 | 기능 | 문제 | 실제 장치에 적용 | 가상 장치에 적용 |
+| 아니오 | 기능 | 문제 | 실제 장치에 적용 | 가상 장치에 적용 |
 | --- | --- | --- | --- | --- |
-| 1 |장애 조치(Failover) |이전 릴리스에서 장애 조치(failover) 후 고객 쪽에서 관찰된 정리와 관련된 문제가 있었습니다. 이 문제는 이 릴리스에서 해결되었습니다. |예 |예 |
-| 2 |로컬로 고정된 볼륨 |이전 릴리스에서 볼륨 만들기 실패를 초래할 수 있는 로컬로 고정된 볼륨에 대한 볼륨 만들기와 관련된 문제가 있었습니다. 이 문제는 근본 원인이 파악되었고 이 릴리스에서 수정되었습니다. |예 |아니요 |
+| 1 |장애 조치(failover) |이전 릴리스에서 장애 조치(failover) 후 고객 쪽에서 관찰된 정리와 관련된 문제가 있었습니다. 이 문제는 이 릴리스에서 해결되었습니다. |예 |예 |
+| 2 |로컬로 고정된 볼륨 |이전 릴리스에서 볼륨 만들기 실패를 초래할 수 있는 로컬로 고정된 볼륨에 대한 볼륨 만들기와 관련된 문제가 있었습니다. 이 문제는 근본 원인이 파악되었고 이 릴리스에서 수정되었습니다. |예 |아니오 |
 | 3 |지원 패키지 |이전 릴리스에서 System.OutOfMemory 예외를 초래할 수 있는 지원 패키지 또는 지원 패키지 만들기 실패를 가져오는 다른 오류와 관련된 문제가 있었습니다. 이러한 버그는 이 릴리스에서 해결되었습니다. |예 |예 |
 | 4 |모니터링 |이전 릴리스에서 EB에서 소비가 표시되었던 로컬로 고정된 볼륨에 대한 모니터링 차트와 관련된 문제가 있었습니다. 이 버그는 이 릴리스에서 해결되었습니다. |예 |예 |
 | 5 |마이그레이션 |이전 릴리스에서 5000-7000 시리즈에서 8000 시리즈 장치로 마이그레이션의 안정성과 관련된 몇 가지 문제가 있었습니다. 이러한 문제는 이 릴리스에서 해결되었습니다. |예 |예 |
-| 6 |업데이트 |이전 릴리스에서 업데이트 오류가 발생한 경우 컨트롤러가 복구 모드로 전환되므로 사용자는 업데이트를 계속할 수 없으며 Microsoft 지원에 문의해야 했습니다. <br> 이번 릴리스에서는 이 동작이 바뀌었습니다. 두 컨트롤러 모두 동일한 버전(업데이트 4)을 실행한 후에 업데이트가 실패하면 컨트롤러는 복구 모드로 전환되지 않습니다. 이 오류가 발생하는 경우 잠시 기다린 다음 업데이트를 다시 시도하는 것이 좋습니다. 다시 시도는 성공할 수 있습니다. 다시 시도가 실패하는 경우 Microsoft 지원에 문의해야 합니다. |예 |예 |
+| 6 |주 지역에서 |이전 릴리스에서 업데이트 오류가 발생한 경우 컨트롤러가 복구 모드로 전환되므로 사용자는 업데이트를 계속할 수 없으며 Microsoft 지원에 문의해야 했습니다. <br> 이번 릴리스에서는 이 동작이 바뀌었습니다. 두 컨트롤러 모두 동일한 버전(업데이트 4)을 실행한 후에 업데이트가 실패하면 컨트롤러는 복구 모드로 전환되지 않습니다. 이 오류가 발생하는 경우 잠시 기다린 다음 업데이트를 다시 시도하는 것이 좋습니다. 다시 시도는 성공할 수 있습니다. 다시 시도가 실패하는 경우 Microsoft 지원에 문의해야 합니다. |예 |예 |
 
 
 ## <a name="known-issues-in-update-4-from-previous-releases"></a>이전 릴리스에서 업데이트 4의 알려진 문제
@@ -91,5 +90,4 @@ StorSimple 솔루션에 업데이트를 배포하기 전에 릴리스 정보에 
 ## <a name="next-step"></a>다음 단계
 
 StorSimple 장치에 [업데이트 4를 설치](storsimple-install-update-4.md)하는 방법을 알아봅니다.
-
 

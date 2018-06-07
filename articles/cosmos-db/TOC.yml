@@ -1,328 +1,499 @@
-- name: Cosmos DB 설명서
-  href: index.yml
-- name: 개요
-  items:
-    - name: Azure Cosmos DB 정보
-      href: introduction.md
-    - name: DocumentDB 고객 시작
-      href: >-
-        https://azure.microsoft.com/blog/dear-documentdb-customers-welcome-to-azure-cosmos-db/
-- name: 빠른 시작
-  expanded: true
-  items:
-    - name: DocumentDB
-      items:
-        - name: .NET
-          href: create-documentdb-dotnet.md
-        - name: Java
-          href: create-documentdb-java.md
-        - name: Node.js
-          href: create-documentdb-nodejs.md
-        - name: Python
-          href: create-documentdb-python.md
-        - name: Xamarin
-          href: create-documentdb-xamarin-dotnet.md
-    - name: MongoDB
-      items:
-        - name: Node.js
-          href: create-mongodb-nodejs.md
-        - name: .NET
-          href: create-mongodb-dotnet.md
-        - name: 자바
-          href: create-mongodb-java.md
-        - name: Golang
-          href: create-mongodb-golang.md
-    - name: 그래프
-      items:
-        - name: .NET
-          href: create-graph-dotnet.md
-        - name: Gremlin 콘솔
-          href: create-graph-gremlin-console.md
-        - name: 자바
-          href: create-graph-java.md
-        - name: Node.js
-          href: create-graph-nodejs.md
-    - name: 테이블
-      items:
-        - name: .NET
-          href: create-table-dotnet.md
-- name: 자습서
-  items:
-    - name: 1 - 만들기
-      items:
-        - name: DocumentDB
-          href: tutorial-develop-documentdb-dotnet.md
-        - name: MongoDB
-          href: tutorial-develop-mongodb.md
-        - name: 테이블
-          href: tutorial-develop-table-dotnet.md
-        - name: 그래프
-          href: tutorial-develop-graph-dotnet.md
-    - name: 2 - 가져오기
-      items:
-        - name: DocumentDB
-          href: import-data.md
-        - name: MongoDB
-          href: mongodb-migrate.md
-    - name: 3 - 쿼리
-      items:
-        - name: DocumentDB
-          href: tutorial-query-documentdb.md
-        - name: MongoDB
-          href: tutorial-query-mongodb.md
-        - name: 테이블
-          href: tutorial-query-table.md
-        - name: 그래프
-          href: tutorial-query-graph.md
-    - name: 4 - 전역으로 분산
-      items:
-        - name: DocumentDB
-          href: tutorial-global-distribution-documentdb.md
-        - name: MongoDB
-          href: tutorial-global-distribution-mongodb.md
-        - name: 테이블
-          href: tutorial-global-distribution-table.md
-        - name: 그래프
-          href: tutorial-global-distribution-graph.md
-    - name: 5 - 로컬에서 개발
-      items:
-        - name: 에뮬레이터 사용
-          href: local-emulator.md
-        - name: 인증서 내보내기
-          href: local-emulator-export-ssl-certificates.md
-- name: 샘플
-  items:
-    - name: Azure CLI 2.0
-      href: cli-samples.md
-    - name: Azure PowerShell
-      href: powershell-samples.md
-- name: 개념
-  items:
-    - name: 글로벌 분포
-      href: distribute-data-globally.md
-    - name: 분할
-      href: partition-data.md
-    - name: 일관성
-      href: consistency-levels.md
-    - name: 처리량
-      href: request-units.md
-      items:
-        - name: 분당 요청 단위
-          href: request-units-per-minute.md
-    - name: 다중 모델 API
-      items:
-        - name: DocumentDB
-          href: documentdb-introduction.md
-        - name: MongoDB
-          href: mongodb-introduction.md
-        - name: 테이블
-          href: table-introduction.md
-        - name: 그래프
-          href: graph-introduction.md
-    - name: 보안
-      href: database-security.md
-    - name: TCO
-      href: 'https://aka.ms/documentdb-tco-paper'
-    - name: 사용 사례
-      href: use-cases.md
-      items:
-        - name: 소셜 미디어 앱
-          href: social-media-apps.md
-- name: 방법 가이드
-  items:
-    - name: 개발
-      items:
-        - name: DocumentDB API
-          items:
-            - name: 리소스
-              href: documentdb-resources.md
-            - name: SQL 쿼리
-              href: documentdb-sql-query.md
-            - name: SQL 실습
-              href: 'https://www.documentdb.com/sql/demo'
-            - name: 분할
-              href: documentdb-partition-data.md
-            - name: '저장 프로시저, 트리거 및 UDF'
-              href: programming.md
-            - name: 성능 테스트
-              href: performance-testing.md
-            - name: 성능 팁
-              href: performance-tips.md
-            - name: 다중 마스터 설치
-              href: multi-region-writers.md
-            - name: DateTimes
-              href: working-with-dates.md
-            - name: 문서 데이터 모델링
-              href: modeling-data.md
-            - name: 자습서
-              items:
-                - name: 첫 번째 앱 작성
-                  items:
-                    - name: .NET
-                      href: documentdb-get-started.md
-                    - name: .NET Core
-                      href: documentdb-dotnetcore-get-started.md
-                    - name: Java
-                      href: documentdb-java-get-started.md
-                    - name: Node.js
-                      href: documentdb-nodejs-get-started.md
-                    - name: C++
-                      href: documentdb-cpp-get-started.md
-                - name: 웹앱 만들기
-                  items:
-                    - name: .NET
-                      href: documentdb-dotnet-application.md
-                    - name: Xamarin
-                      href: mobile-apps-with-xamarin.md
-                    - name: Node.js
-                      href: documentdb-nodejs-application.md
-                    - name: 자바
-                      href: documentdb-java-application.md
-                    - name: Python Flask
-                      href: documentdb-python-application.md
-            - name: 샘플
-              items:
-                - name: .NET 샘플
-                  href: documentdb-dotnet-samples.md
-                - name: Node.js 샘플
-                  href: documentdb-nodejs-samples.md
-                - name: Python 샘플
-                  href: documentdb-python-samples.md
-            - name: 리소스
-              items:
-                - name: SQL 문법 치트 시트
-                  href: documentdb-sql-query-cheat-sheet.md
-                - name: 스택 오버플로
-                  href: 'http://stackoverflow.com/questions/tagged/azure-cosmosdb'
-                - name: 비디오
-                  href: >-
-                    https://azure.microsoft.com/documentation/videos/index/?services=cosmos-db
-                - name: 서비스 업데이트
-                  href: 'https://azure.microsoft.com/updates/?product=cosmos-db'
-                - name: 커뮤니티 포털
-                  href: community.md
-                - name: 스키마와 관계 없는 인덱싱 문서
-                  href: 'http://www.vldb.org/pvldb/vol8/p1668-shukla.pdf'
-                - name: 'S1, S2, S3 사용 중지'
-                  href: performance-levels.md
-        - name: MongoDB API
-          items:
-            - name: MongoDB 계정에 연결
-              href: connect-mongodb-account.md
-            - name: MongoChef 사용
-              href: mongodb-mongochef.md
-            - name: Robomongo 사용
-              href: mongodb-robomongo.md
-            - name: 자습서
-              items:
-                - name: Node.js 콘솔 앱
-                  href: mongodb-samples.md
-        - name: 그래프 API
-          items:
-            - name: Gremlin 지원
-              href: gremlin-support.md
-        - name: 테이블 API
-          items:
-            - name: 테이블 저장소
-              href: >-
-                https://docs.microsoft.com/rest/api/storageservices/fileservices/Table-Service-Concepts
-        - name: 변경 피드
-          href: change-feed.md
-        - name: 지리 공간적
-          href: geospatial.md
-        - name: 인덱싱
-          href: indexing-policies.md
-    - name: 관리
-      items:
-        - name: 비용 효율적인 읽기 및 쓰기
-          href: key-value-store-cost.md
-        - name: 자동으로 데이터 만료
-          href: time-to-live.md
-        - name: 백업 및 복원
-          href: online-backup-and-restore.md
-        - name: 지역별 장애 조치
-          href: regional-failover.md
-        - name: 처리량 설정
-          href: set-throughput.md
-        - name: 모니터 SLA
-          href: monitor-accounts.md
-        - name: 관리 키 및 일관성
-          href: manage-account.md
-        - name: 보안
-          items:
-            - name: 휴지 상태의 암호화
-              href: database-encryption-at-rest.md
-            - name: 방화벽 지원
-              href: firewall-support.md
-            - name: 데이터에 대한 액세스 보안
-              href: secure-access-to-data.md
-    - name: 통합
-      items:
-        - name: Spark에 연결
-          href: spark-connector.md
-        - name: Spark GraphX에 연결
-          href: spark-connector-graph.md
-        - name: Azure App Service로 웹 사이트 배포
-          href: create-website.md
-        - name: Logic Apps를 통한 응용 프로그램 로깅
-          href: ../logic-apps/logic-apps-scenario-error-and-exception-handling.md
-        - name: Azure Functions에 바인딩
-          href: ../azure-functions/functions-bindings-documentdb.md
-        - name: Hadoop으로 데이터 분석
-          href: run-hadoop-with-hdinsight.md
-        - name: Azure Search와의 통합
-          href: ../search/search-howto-index-documentdb.md
-        - name: Azure Data Factory를 사용하여 데이터 이동
-          href: ../data-factory/data-factory-azure-documentdb-connector.md
-        - name: Azure Stream Analytics로 실시간 데이터 분석
-          href: '../stream-analytics/stream-analytics-define-outputs.md#documentdb'
-        - name: Logic Apps를 사용하여 변경된 HL7 FHIR 레코드 가져오기
-          href: change-feed-hl7-fhir-logic-apps.md
-        - name: 실시간 프로세스 센서 데이터
-          href: ../hdinsight/hdinsight-storm-iot-eventhub-documentdb.md
-        - name: Power BI를 사용하여 데이터 시각화
-          href: powerbi-visualize.md
-        - name: 데이터 시각화에 ODBC 드라이버 활용
-          href: odbc-driver.md
-- name: 참조
-  items:
-    - name: DocumentDB API
-      items:
-        - name: 자바
-          href: documentdb-sdk-java.md
-        - name: .NET
-          href: documentdb-sdk-dotnet.md
-        - name: .NET 변경 피드
-          href: documentdb-sdk-dotnet-changefeed.md
-        - name: .NET Core
-          href: documentdb-sdk-dotnet-core.md
-        - name: Node.js
-          href: documentdb-sdk-node.md
-        - name: Python
-          href: documentdb-sdk-python.md
-        - name: REST (영문)
-          href: /rest/api/documentdb/
-        - name: REST 리소스 공급자
-          href: /rest/api/documentdbresourceprovider/
-        - name: SQL
-          href: documentdb-sql-query-reference.md
-    - name: 테이블 API
-      items:
-        - name: .NET
-          href: table-sdk-dotnet.md
-    - name: Graph API
-      items:
-        - name: .NET
-          href: graph-sdk-dotnet.md
-- name: 리소스
-  items:
-    - name: Azure 로드맵
-      href: 'https://azure.microsoft.com/roadmap/'
-    - name: 가격
-      href: 'https://azure.microsoft.com/pricing/details/cosmos-db/'
-    - name: FAQ
-      href: faq.md
-    - name: 스택 오버플로
-      href: 'http://stackoverflow.com/questions/tagged/azure-cosmosdb'
-    - name: 야구를 통해 설명하는 데이터 일관성
-      href: 'http://research.microsoft.com/apps/pubs/default.aspx?id=206913'
+items:
+  - name: Azure Cosmos DB 설명서
+    href: index.yml
+  - name: 개요
+    items:
+      - name: Azure Cosmos DB 정보
+        href: introduction.md
+  - name: 빠른 시작
+    expanded: true
+    items:
+      - name: SQL
+        items:
+          - name: .NET
+            href: create-sql-api-dotnet.md
+          - name: 자바
+            href: create-sql-api-java.md
+          - name: Node.js
+            href: create-sql-api-nodejs.md
+          - name: 파이썬
+            href: create-sql-api-python.md
+          - name: Xamarin
+            href: create-sql-api-xamarin-dotnet.md
+      - name: MongoDB
+        items:
+          - name: Node.js
+            href: create-mongodb-nodejs.md
+          - name: .NET
+            href: create-mongodb-dotnet.md
+          - name: 자바
+            href: create-mongodb-java.md
+          - name: Golang
+            href: create-mongodb-golang.md
+          - name: 파이썬
+            href: create-mongodb-flask.md
+      - name: 그래프
+        items:
+          - name: .NET
+            href: create-graph-dotnet.md
+          - name: Gremlin 콘솔
+            href: create-graph-gremlin-console.md
+          - name: 자바
+            href: create-graph-java.md
+          - name: Node.js
+            href: create-graph-nodejs.md
+          - name: 파이썬
+            href: create-graph-python.md
+          - name: PHP
+            href: create-graph-php.md
+      - name: 테이블
+        items:
+          - name: .NET
+            href: create-table-dotnet.md
+          - name: 자바
+            href: create-table-java.md
+          - name: Node.js
+            href: create-table-nodejs.md
+          - name: 파이썬
+            href: create-table-python.md
+      - name: Cassandra
+        items:
+          - name: Node.js
+            href: create-cassandra-nodejs.md
+          - name: 자바
+            href: create-cassandra-java.md
+          - name: .NET
+            href: create-cassandra-dotnet.md
+          - name: 파이썬
+            href: create-cassandra-python.md
+  - name: 개념
+    items:
+      - name: 글로벌 분포
+        href: distribute-data-globally.md
+      - name: 분할
+        href: partition-data.md
+      - name: 처리량
+        href: request-units.md
+      - name: 일관성
+        href: consistency-levels.md
+      - name: 고유 키
+        href: unique-keys.md
+      - name: 서버를 사용하지 않는 데이터베이스
+        href: serverless-computing-database.md
+      - name: 보안
+        href: database-security.md
+        items:
+          - name: 휴지 상태의 암호화
+            href: database-encryption-at-rest.md
+          - name: 데이터에 대한 액세스 보안
+            href: secure-access-to-data.md
+      - name: 사용 사례
+        href: use-cases.md
+        items:
+          - name: 소셜 미디어 앱
+            href: social-media-apps.md
+  - name: 다중 모델
+    expanded: true
+    items:
+      - name: SQL API 문서
+        items:
+          - name: 개요
+            items:
+              - name: SQL API 정보
+                href: sql-api-introduction.md
+          - name: 자습서
+            items:
+              - name: 1 - 만들기
+                items:
+                  - name: 첫 번째 앱 작성
+                    items:
+                      - name: .NET
+                        href: sql-api-get-started.md
+                      - name: .NET Core
+                        href: sql-api-dotnetcore-get-started.md
+                      - name: 자바
+                        href: sql-api-java-get-started.md
+                      - name: Node.js
+                        href: sql-api-nodejs-get-started.md
+                      - name: C++
+                        href: sql-api-cpp-get-started.md
+                  - name: 웹앱 만들기
+                    items:
+                      - name: .NET
+                        href: sql-api-dotnet-application.md
+                      - name: Xamarin
+                        href: mobile-apps-with-xamarin.md
+                      - name: Node.js
+                        href: sql-api-nodejs-application.md
+                      - name: 자바
+                        href: sql-api-java-application.md
+                      - name: Python Flask
+                        href: sql-api-python-application.md
+              - name: 2 - 가져오기
+                href: import-data.md
+              - name: 3 - 쿼리
+                href: tutorial-query-sql-api.md
+              - name: 4 - 전역으로 분산
+                href: tutorial-global-distribution-sql-api.md
+              - name: 5 - 로컬에서 개발
+                items:
+                  - name: 에뮬레이터 사용
+                    href: local-emulator.md
+                  - name: 인증서 내보내기
+                    href: local-emulator-export-ssl-certificates.md
+              - name: 6 - 함수와 통합
+                items:
+                  - name: HTTP 트리거
+                    href: tutorial-functions-http-trigger.md
+          - name: 샘플
+            items:
+              - name: Azure CLI
+                href: cli-samples.md
+              - name: PowerShell
+                href: powershell-samples.md
+              - name: .NET 샘플
+                href: sql-api-dotnet-samples.md
+              - name: Node.js 샘플
+                href: sql-api-nodejs-samples.md
+              - name: Python 샘플
+                href: sql-api-python-samples.md
+              - name: Java 샘플
+                href: sql-api-java-samples.md
+          - name: 개념
+            items:
+              - name: 리소스
+                href: sql-api-resources.md
+              - name: 모델 문서 데이터
+                href: modeling-data.md
+              - name: 다중 마스터 설치
+                href: multi-region-writers.md
+          - name: 방법 가이드
+            items:
+              - name: BulkExecutor - .NET
+                href: bulk-executor-dot-net.md
+              - name: BulkExecutor - Java
+                href: bulk-executor-java.md
+              - name: 저장소 탐색기를 사용하여 관리
+                href: storage-explorer.md
+              - name: 쿼리
+                items:
+                  - name: SQL 쿼리 수행
+                    href: sql-api-sql-query.md
+                  - name: 쿼리 성능 조정
+                    href: sql-api-sql-query-metrics.md
+              - name: 인덱스
+                href: indexing-policies.md
+              - name: SQL 데이터 분할
+                href: sql-api-partition-data.md
+              - name: '저장 프로시저, 트리거 및 UDF'
+                href: programming.md
+              - name: 변경 피드
+                href: change-feed.md
+              - name: 데이터 형식
+                items:
+                  - name: DateTimes
+                    href: working-with-dates.md
+                  - name: 지리 공간적
+                    href: geospatial.md
+              - name: 성능 조정
+                items:
+                  - name: 성능 테스트
+                    href: performance-testing.md
+                  - name: 비동기 Java용 성능 팁
+                    href: performance-tips-async-java.md
+                  - name: .NET용 성능 팁
+                    href: performance-tips.md
+                  - name: Java용 성능 팁
+                    href: performance-tips-java.md
+              - name: 다른 Azure 서비스와 통합
+                items:
+                  - name: HDInsight로 람다 아키텍처 구현
+                    href: lambda-architecture.md
+                  - name: Spark에 연결
+                    href: spark-connector.md
+                  - name: HDInsight에서 Kafka 및 Spark로 스트리밍
+                    href: 'https://docs.microsoft.com/azure/hdinsight/apache-kafka-spark-structured-streaming-cosmosdb?toc=/azure/cosmos-db/toc.json'
+                  - name: Azure App Service로 웹 사이트 배포
+                    href: create-website.md
+                  - name: Logic Apps를 통한 응용 프로그램 로깅
+                    href: 'https://docs.microsoft.com/azure/logic-apps/logic-apps-scenario-error-and-exception-handling?toc=/azure/cosmos-db/toc.json'
+                  - name: Azure Functions에 바인딩
+                    href: 'https://docs.microsoft.com/azure/azure-functions/functions-bindings-cosmosdb?toc=/azure/cosmos-db/toc.json'
+                  - name: Azure Search와의 통합
+                    href: 'https://docs.microsoft.com/azure/search/search-howto-index-cosmosdb?toc=/azure/cosmos-db/toc.json'
+                  - name: Azure Data Factory를 사용하여 데이터 이동
+                    href: 'https://docs.microsoft.com/azure/data-factory/connector-azure-cosmos-db?toc=/azure/cosmos-db/toc.json'
+                  - name: Azure Stream Analytics로 실시간 데이터 분석
+                    href: '../stream-analytics/stream-analytics-define-outputs.md#azure-cosmos-db'
+                  - name: Logic Apps를 사용하여 변경된 HL7 FHIR 레코드 가져오기
+                    href: change-feed-hl7-fhir-logic-apps.md
+                  - name: 실시간 프로세스 센서 데이터
+                    href: 'https://github.com/hdinsight/hdinsight-storm-examples/blob/master/IotExample/README.md'
+                  - name: Power BI를 사용하여 데이터 시각화
+                    href: powerbi-visualize.md
+                  - name: 데이터 시각화에 ODBC 드라이버 활용
+                    href: odbc-driver.md
+                  - name: SQL API에 Spring Boot Starter 사용
+                    href: 'https://docs.microsoft.com/java/azure/spring-framework/configure-spring-boot-starter-java-app-with-cosmos-db?toc=/azure/cosmos-db/toc.json'
+          - name: 참고 자료
+            items:
+              - name: 비동기 Java
+                href: sql-api-sdk-async-java.md
+              - name: 자바
+                href: sql-api-sdk-java.md
+              - name: .NET
+                href: sql-api-sdk-dotnet.md
+              - name: .NET 변경 피드
+                href: sql-api-sdk-dotnet-changefeed.md
+              - name: .NET Core
+                href: sql-api-sdk-dotnet-core.md
+              - name: Node.js
+                href: sql-api-sdk-node.md
+              - name: 파이썬
+                href: sql-api-sdk-python.md
+              - name: BulkExecutor - .NET
+                href: sql-api-sdk-bulk-executor-dot-net.md
+              - name: BulkExecutor - Java
+                href: sql-api-sdk-bulk-executor-java.md
+              - name: REST (영문)
+                href: /rest/api/cosmos-db/
+              - name: REST 리소스 공급자
+                href: /rest/api/cosmos-db-resource-provider/
+              - name: SQL
+                href: sql-api-sql-query-reference.md
+          - name: 리소스
+            items:
+              - name: 저장소 탐색기를 사용하여 관리
+                href: storage-explorer.md
+              - name: Visual Studio Code 확장
+                href: 'https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-cosmosdb'
+              - name: SQL 실습
+                href: 'https://aka.ms/cosmos-db-playground'
+      - name: MongoDB API 문서
+        items:
+          - name: 개요
+            items:
+              - name: MongoDB API 정보
+                href: mongodb-introduction.md
+              - name: MongoDB 지원
+                href: mongodb-feature-support.md
+          - name: 자습서
+            items:
+              - name: 1 - 만들기
+                items:
+                  - name: Node.js
+                    href: mongodb-samples.md
+                  - name: Node.js 및 Angular
+                    items:
+                      - name: 1부 - 소개
+                        href: tutorial-develop-mongodb-nodejs.md
+                      - name: 2부 - 노드 앱 만들기
+                        href: tutorial-develop-mongodb-nodejs-part2.md
+                      - name: 3부 - Angular UI 추가
+                        href: tutorial-develop-mongodb-nodejs-part3.md
+                      - name: 4부 - Cosmos DB 만들기
+                        href: tutorial-develop-mongodb-nodejs-part4.md
+                      - name: 5부 - Cosmos DB에 연결
+                        href: tutorial-develop-mongodb-nodejs-part5.md
+                      - name: 6부 - 앱에 쓰기
+                        href: tutorial-develop-mongodb-nodejs-part6.md
+                  - name: Node.js 및 대응
+                    href: tutorial-develop-mongodb-react.md
+              - name: 2 - 가져오기
+                href: mongodb-migrate.md
+              - name: 3 - 쿼리
+                href: tutorial-query-mongodb.md
+              - name: 4 - 전역으로 분산
+                href: tutorial-global-distribution-mongodb.md
+              - name: 5 - 로컬에서 개발
+                items:
+                  - name: 에뮬레이터 사용
+                    href: local-emulator.md
+                  - name: 인증서 내보내기
+                    href: local-emulator-export-ssl-certificates.md
+          - name: 방법 가이드
+            items:
+              - name: MongoDB 계정에 연결
+                href: connect-mongodb-account.md
+              - name: Studio 3T 사용
+                href: mongodb-mongochef.md
+              - name: Robomongo 사용
+                href: mongodb-robomongo.md
+              - name: Mongoose 사용
+                href: mongodb-mongoose.md
+              - name: 읽기 기본 설정 사용
+                href: mongodb-readpreference.md
+              - name: 인덱싱
+                href: mongodb-indexing.md
+              - name: Power BI를 사용하여 데이터 시각화
+                href: powerbi-visualize.md
+              - name: 저장소 탐색기를 사용하여 관리
+                href: storage-explorer.md
+          - name: 리소스
+            items:
+              - name: 저장소 탐색기를 사용하여 관리
+                href: storage-explorer.md
+              - name: Visual Studio Code 확장
+                href: 'https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-cosmosdb'
+      - name: Graph API 문서
+        items:
+          - name: 개요
+            items:
+              - name: Graph API 정보
+                href: graph-introduction.md
+              - name: Gremlin 지원
+                href: gremlin-support.md
+          - name: 자습서
+            items:
+              - name: 1 - 만들기
+                href: tutorial-develop-graph-dotnet.md
+              - name: 2 - 쿼리
+                href: tutorial-query-graph.md
+              - name: 3 - 전역으로 분산
+                href: tutorial-global-distribution-graph.md
+          - name: 방법 가이드
+            items:
+              - name: 그래프 분할
+                href: graph-partitioning.md
+              - name: 저장소 탐색기를 사용하여 관리
+                href: storage-explorer.md
+              - name: 통합
+                items:
+                  - name: Spark GraphX에 연결
+                    href: spark-connector-graph.md
+          - name: 참고 자료
+            items:
+              - name: .NET
+                href: graph-sdk-dotnet.md
+          - name: 리소스
+            items:
+              - name: 저장소 탐색기를 사용하여 관리
+                href: storage-explorer.md
+              - name: Visual Studio Code 확장
+                href: 'https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-cosmosdb'
+      - name: Table API 문서
+        items:
+          - name: 개요
+            items:
+              - name: Table API 정보
+                href: table-introduction.md
+              - name: 테이블 개발
+                href: table-support.md
+          - name: 자습서
+            items:
+              - name: 1 - 만들기
+                href: tutorial-develop-table-dotnet.md
+              - name: 2 - 가져오기
+                href: table-import.md
+              - name: 3 - 쿼리
+                href: tutorial-query-table.md
+              - name: 4 - 전역으로 분산
+                href: tutorial-global-distribution-table.md
+              - name: 5 - 서버를 사용하지 않는 앱 - Node.js
+                href: 'https://docs.microsoft.com/learn/build-serverless-app/index'
+          - name: 샘플
+            items:
+              - name: .NET
+                href: table-storage-how-to-use-dotnet.md
+              - name: 'F#'
+                href: 'https://docs.microsoft.com/dotnet/articles/fsharp/using-fsharp-on-azure/table-storage'
+              - name: Node.js
+                href: table-storage-cloud-service-nodejs.md
+              - name: 자바
+                href: table-storage-how-to-use-java.md
+              - name: Node.js
+                href: table-storage-how-to-use-nodejs.md
+              - name: C++
+                href: table-storage-how-to-use-c-plus.md
+              - name: PHP
+                href: table-storage-how-to-use-php.md
+              - name: 파이썬
+                href: table-storage-how-to-use-python.md
+              - name: Ruby
+                href: table-storage-how-to-use-ruby.md
+              - name: PowerShell
+                href: table-storage-how-to-use-powershell.md
+          - name: 참고 자료
+            items:
+              - name: .NET
+                href: table-sdk-dotnet.md
+              - name: 자바
+                href: table-sdk-java.md
+              - name: Node.js
+                href: table-sdk-nodejs.md
+              - name: 파이썬
+                href: table-sdk-python.md
+          - name: 리소스
+            items:
+              - name: 저장소 탐색기를 사용하여 관리
+                href: storage-explorer.md
+              - name: 테이블 저장소 개요
+                href: table-storage-overview.md
+              - name: 테이블 저장소 디자인 가이드
+                href: table-storage-design-guide.md
+              - name: 테이블 저장소 REST API
+                href: /rest/api/storageservices/Table-Service-Concepts
+      - name: Cassandra API 문서
+        items:
+          - name: 개요
+            items:
+              - name: Cassandra API 정보
+                href: cassandra-introduction.md
+          - name: 자습서
+            items:
+              - name: 1 - 만들기
+                href: tutorial-develop-cassandra-java.md
+              - name: 2 - 가져오기
+                href: cassandra-import-data.md
+  - name: 방법 가이드
+    items:
+      - name: 키 및 일관성
+        href: manage-account.md
+      - name: 처리량
+        href: set-throughput.md
+      - name: 방화벽 지원
+        href: firewall-support.md
+      - name: 가상 네트워크 서비스 엔드포인트 설정
+        href: vnet-service-endpoint.md
+      - name: 메트릭
+        href: use-metrics.md
+      - name: 모니터 SLA
+        href: monitor-accounts.md
+      - name: 백업 및 복원
+        href: online-backup-and-restore.md
+      - name: 지역별 장애 조치
+        href: regional-failover.md
+      - name: 진단 로깅
+        href: logging.md
+      - name: BulkExecutor 개요
+        href: bulk-executor-overview.md
+      - name: 비용 효율적인 읽기 및 쓰기
+        href: key-value-store-cost.md
+      - name: 자동으로 데이터 만료
+        href: time-to-live.md
+      - name: Powershell을 사용하여 관리
+        href: manage-account-with-powershell.md
+      - name: 저장소 탐색기를 사용하여 관리
+        href: storage-explorer.md
+  - name: 리소스
+    items:
+      - name: 저장소 탐색기를 사용하여 관리
+        href: storage-explorer.md
+      - name: 쿼리 참고 자료
+        href: query-cheat-sheet.md
+      - name: 20일 팁
+        href: 20-days-of-tips.md
+      - name: 동영상
+        href: 'https://azure.microsoft.com/resources/videos/index/?services=cosmos-db'
+      - name: Azure 로드맵
+        href: 'https://azure.microsoft.com/roadmap/'
+      - name: 무료로 Azure Cosmos DB 사용해 보기
+        href: 'https://azure.microsoft.com/try/cosmosdb/'
+      - name: 가격
+        href: 'https://azure.microsoft.com/pricing/details/cosmos-db/'
+      - name: FAQ
+        href: faq.md
+      - name: 야구를 통해 설명하는 데이터 일관성
+        href: 'http://research.microsoft.com/apps/pubs/default.aspx?id=206913'
+      - name: 백서
+        href: whitepapers.md

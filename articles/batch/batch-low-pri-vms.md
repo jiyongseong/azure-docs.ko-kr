@@ -1,40 +1,31 @@
 ---
-title: "비용 효율적이며 우선 순위가 낮은 VM에서 Azure Batch 워크로드 실행(미리 보기) | Microsoft Docs"
-description: "우선 순위가 낮은 VM을 프로비전하여 Azure Batch 워크로드의 비용을 줄이는 방법을 알아봅니다."
+title: 비용 효율적이며 우선 순위가 낮은 VM에서 Azure Batch 워크로드 실행 | Microsoft Docs
+description: 우선 순위가 낮은 VM을 프로비전하여 Azure Batch 워크로드의 비용을 줄이는 방법을 알아봅니다.
 services: batch
 author: mscurrell
-manager: timlt
+manager: jeconnoc
 ms.assetid: dc6ba151-1718-468a-b455-2da549225ab2
 ms.service: batch
 ms.devlang: multiple
 ms.topic: article
 ms.workload: na
-ms.date: 05/05/2017
+ms.date: 03/19/2018
 ms.author: markscu
+ms.openlocfilehash: a05c816bd876f7c66a1e62515dea44c6fd969c8c
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 0f839072d9603e83b0ca493c9a7bab0e71a682c5
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
+# <a name="use-low-priority-vms-with-batch"></a>Batch에서 낮은 우선 순위 VM 사용
 
-# <a name="use-low-priority-vms-with-batch-preview"></a>Batch(미리 보기)에서 낮은 우선 순위 VM 사용
-
-Azure 배치는 낮은 우선 순위 VM(가상 컴퓨터)을 사용하여 Batch 워크로드의 비용을 줄입니다. 우선 순위가 낮은 VM은 경제적 측면도 있는 대량의 Compute 성능을 제공하여 새로운 유형의 Batch 워크로드를 가능하게 합니다.
-
-우선 순위가 낮은 VM은 Azure에서 남는 용량을 활용합니다. 풀에서 우선 순위가 낮은 VM을 지정하면 Azure Batch는 가능한 경우 이러한 남는 용량을 자동으로 사용할 수 있습니다.
-
-우선 순위가 낮은 VM을 사용할 경우 Azure에서 사용할 수 있는 추가 용량이 없을 때 해당 VM이 선점될 수 있다는 장점이 있습니다. 이러한 이유로 우선 순위가 낮은 VM이 특정 유형의 워크로드에 가장 적절합니다. 작업 완료 시간이 유연하고 작업이 여러 VM 간에 분산되는 Batch 및 비동기 처리 워크로드에 우선 순위가 낮은 BM을 사용합니다.
-
-우선 순위가 낮은 VM은 전용 VM보다 훨씬 덜 비쌉니다. 가격 책정 세부 정보에 대해서는 [Batch 가격 책정](https://azure.microsoft.com/pricing/details/batch/)을 참조하세요.
-
-우선 순위가 낮은 VM에 대한 추가 토론 내용을 보려면 [보다 저렴한 가격으로 일괄 컴퓨팅 수행](https://azure.microsoft.com/blog/announcing-public-preview-of-azure-batch-low-priority-vms/)을 참조하세요.
-
-> [!IMPORTANT]
-> 우선 순위가 낮은 VM은 현재 미리 보기 상태이며 Batch에서 실행되는 워크로드에만 사용할 수 있습니다. 
->
->
+Azure Batch는 낮은 우선 순위 VM(가상 머신)을 사용하여 Batch 워크로드의 비용을 줄입니다. 우선 순위가 낮은 VM은 비용 절감을 위해 대량의 계산 성능을 사용할 수 있도록 하여 새로운 유형의 Batch 워크로드를 가능하게 합니다.
+ 
+우선 순위가 낮은 VM은 Azure에서 남는 용량을 활용합니다. 풀에서 우선 순위가 낮은 VM을 지정하면 Azure Batch는 가능한 경우 이러한 남는 용량을 사용할 수 있습니다.
+ 
+우선 순위가 낮은 VM은 할당이 가능하지 않거나, 사용 가능한 용량에 따라, 언제든지 선점될 수 있다는 단점이 있습니다. 이러한 이유로 우선 순위가 낮은 VM이 특정 유형의 워크로드에 가장 적절합니다. 작업 완료 시간이 유연하고 작업이 여러 VM 간에 분산되는 Batch 및 비동기 처리 워크로드에 우선 순위가 낮은 BM을 사용합니다.
+ 
+우선 순위가 낮은 VM은 전용 VM에 비해 상당히 저렴한 가격으로 제공됩니다. 가격 책정 세부 정보에 대해서는 [Batch 가격 책정](https://azure.microsoft.com/pricing/details/batch/)을 참조하세요.
 
 ## <a name="use-cases-for-low-priority-vms"></a>우선 순위가 낮은 VM에 대한 사용 사례
 
@@ -52,34 +43,33 @@ Batch 처리 사용 사례의 일부 예제에는 우선 순위가 낮은 VM을 
 
 -   **개발 및 테스트**: 특히 대규모 솔루션을 개발 중인 경우 상당한 비용 절감을 실현할 수 있습니다. 모든 유형의 테스트가 혜택을 볼 수 있지만 대규모 부하 테스트 및 회귀 테스트에 사용하면 아주 좋습니다.
 
--   **요청 시 용량 보완**: 우선 순위가 낮은 VM은 일반적인 전용 VM을 보완하는 데 사용될 수 있습니다. 사용 가능한 경우 작업을 확장하여 더 낮은 비용으로 더 빠르게 완료할 수 있고, 사용 가능하지 않은 경우 전용 VM 수준만 사용할 수 있습니다.
+-   **요청 시 용량 보완**: 우선 순위가 낮은 VM은 일반적인 전용 VM을 보완하는 데 사용될 수 있습니다. 사용 가능한 경우 작업을 확장하여 더 낮은 비용으로 더 빠르게 완료할 수 있고, 사용 가능하지 않은 경우 전용 VM 수준만 사용할 수 있게 유지됩니다.
 
 -   **유연한 작업 실행 시간**: 작업이 완료되어야 하는 시간이 유연한 경우 잠재적인 용량 감소가 허용될 수 있지만 우선 순위가 낮은 VM을 추가하면 작업이 더 낮은 비용으로 더 빠르게 실행됩니다.
 
 Batch 풀은 작업 실행 시간의 유연성에 따라 몇 가지 방법으로 우선 순위가 낮은 VM을 사용하도록 구성될 수 있습니다.
 
--   풀에서 우선 순위가 낮은 VM만 사용될 수 있고 Batch 기능은 사용 가능한 경우 선점된 용량을 복구합니다. 이것이 우선 순위가 낮은 VM만 사용될 때 작업을 실행하는 가장 경제적인 방법입니다.
+-   우선 순위가 낮은 VM은 풀에서만 사용할 수 있습니다. 이 경우 Batch는 사용 가능한 경우 선점된 용량을 모두 복구합니다. 이 구성은 우선 순위가 낮은 VM만 사용될 때 작업을 실행하는 가장 경제적인 방법입니다.
 
 -   우선 순위가 낮은 VM을 고정된 전용 VM과 함께 사용할 수 있습니다. 고정된 전용 VM의 수가 있으면 항상 일정한 용량을 작업 처리에 사용할 수 있도록 보장됩니다.
 
--   전용 VM과 우선 순위가 낮은 VM이 동적으로 혼합될 수 있으므로 사용 가능한 경우 좀 더 저렴한 우선 순위가 낮은 VM만 사용되고, 필요할 때는 높은 가격의 전용 VM을 확장하여 최소한의 용량으로 작업을 계속 진행할 수 있습니다.
+-   전용 VM과 우선 순위가 낮은 VM이 동적으로 혼합될 수 있으므로 사용 가능한 경우 좀 더 저렴한 우선 순위가 낮은 VM만 사용되고, 필요할 때는 높은 가격의 전용 VM이 확장됩니다. 이 구성은 최소한의 용량으로 작업을 계속 진행할 수 있도록 합니다.
 
 ## <a name="batch-support-for-low-priority-vms"></a>우선 순위가 낮은 VM에 대한 Batch 지원
 
 Azure Batch는 우선 순위가 낮은 VM을 쉽게 활용하고 혜택을 얻을 수 있도록 하는 몇 가지 기능을 제공합니다.
 
--   Batch 풀은 전용 VM 및 우선 순위가 낮은 VM을 모두 포함할 수 있습니다. 각 유형의 VM 수는 풀이 만들어질 때 지정될 수 있으며, 기준 풀에 대해서는 명시적 크기 조정 작업이나 자동 크기 조정 기능을 사용해서 언제든지 변경될 수 있습니다. 작업 및 태스크 전송은 변경되지 않은 상태로 유지되며 풀의 VM 유형과 관련된 필요가 없습니다. 작업을 가능한 한 경제적으로 실행할 수 있게 풀이 우선 순위가 낮은 VM을 완전히 사용하도록 할 수 있지만 용량이 최소 임계값 아래로 떨어질 경우 작업이 계속 실행되도록 하기 위해 전용 VM을 스핀업할 수 있습니다.
+-   Batch 풀은 전용 VM 및 우선 순위가 낮은 VM을 모두 포함할 수 있습니다. 각 유형의 VM 수는 풀이 만들어질 때 지정될 수 있으며, 기준 풀에 대해서는 명시적 크기 조정 작업이나 자동 크기 조정 기능을 사용해서 언제든지 변경될 수 있습니다. 작업 및 태스크 전송은 풀의 VM 유형과 관계없이 변경되지 않은 상태로 유지될 수 있습니다. 작업을 가능한 한 경제적으로 실행할 수 있게 우선 순위가 낮은 VM을 완전히 사용하도록 풀을 구성할 수도 있지만 용량이 최소 임계값 아래로 떨어질 경우 작업이 계속 실행되도록 하기 위해 전용 VM을 스핀업할 수 있습니다.
 
 -   Batch 풀은 목표 개수의 우선 순위가 낮은 VM을 자동으로 검색합니다. VM이 선점되면 Batch는 손실된 용량을 대체하고 목표 수준을 복구하려고 합니다.
 
--   태스크가 중단된 경우 Batch는 태스크를 검색하고 다시 실행되도록 자동으로 다시 대기합니다.
+-   작업이 중단되면 Batch는 작업을 검색하고 자동으로 다시 큐에 넣어 다시 실행합니다.
 
--   우선 순위가 낮은 VM의 코어 할당량은 전용 VM과는 다릅니다. 
+-   우선 순위가 낮은 VM은 전용 VM의 vCPU 할당량과는 다른 별도의 코어 할당량을 갖습니다. 
     우선 순위가 낮은 VM은 비용이 저렴하므로 할당량이 전용 VM보다 높습니다. 자세한 내용은 [Batch 서비스 할당량 및 제한](batch-quota-limit.md#resource-quotas)을 참조하세요.    
 
 > [!NOTE]
-> 우선 순위가 낮은 VM은 풀 할당 모드가 [사용자 구독](batch-account-create-portal.md#user-subscription-mode)으로 설정된 Batch 계정에서 지원되지 않습니다.
->
+> 우선 순위가 낮은 VM은 [사용자 구독 모드](batch-api-basics.md#account)에서 만든 배치 계정에서 지원되지 않습니다.
 >
 
 ## <a name="create-and-update-pools"></a>풀 만들기 및 업데이트
@@ -115,7 +105,7 @@ pool = batchClient.PoolOperations.CreatePool(
     poolId: "vmpool",
     targetDedicatedComputeNodes: 5,
     targetLowPriorityComputeNodes: 20,
-    virtualMachineSize: "Standard\_D2\_v2",
+    virtualMachineSize: "Standard_D2_v2",
     virtualMachineConfiguration: virtualMachineConfiguration);
 ```
 
@@ -132,7 +122,7 @@ int? numLowPri = pool1.CurrentLowPriorityComputeNodes;
 bool? isNodeDedicated = poolNode.IsDedicated;
 ```
 
-풀의 하나 이상의 노드가 선점될 경우 풀에 대한 노드 나열 작업은 해당 노드를 계속 반환하고, 우선 순위가 낮은 노드의 현재 수는 변경되지 않지만 해당 노드는 **선점** 상태로 설정됩니다. Batch는 대체 VM을 찾으려고 하고, 성공하면 노드는 새 노드처럼 **만드는 중**, **시작 중** 상태를 차례로 거쳐 태스크 실행에 사용할 수 있게 됩니다.
+풀에서 하나 이상의 노드가 선점되어도 풀의 목록 노드 작업은 여전히 해당 노드를 반환합니다. 우선 순위가 낮은 노드의 현재 수는 변경되지 않지만 해당 노드의 상태는 **선점됨** 상태로 설정됩니다. Batch는 대체 VM을 찾으려고 하고, 성공하면 노드는 새 노드처럼 **만드는 중**, **시작 중** 상태를 차례로 거쳐 태스크 실행에 사용할 수 있게 됩니다.
 
 ## <a name="scale-a-pool-containing-low-priority-vms"></a>우선 순위가 낮은 VM을 포함하는 풀 크기 조정
 
@@ -155,7 +145,7 @@ pool.Resize(targetDedicatedComputeNodes: 0, targetLowPriorityComputeNodes: 25);
 
 ## <a name="jobs-and-tasks"></a>작업 및 태스크
 
-작업 및 태스크는 우선 순위가 낮은 노드에 대한 지원을 거의 요구하지 않으며 다음만 지원됩니다.
+작업 및 태스크는 우선 순위가 낮은 노드에 대한 추가 지원을 거의 요구하지 않으며 다음만 지원됩니다.
 
 -   작업의 JobManagerTask 속성은 새 속성 **AllowLowPriorityNode**를 갖습니다. 
     이 속성이 true이면 작업 관리자 태스크는 전용 또는 우선 순위가 낮은 노드에서 예약될 수 있습니다. 이 속성이 false이면 작업 관리자 태스크는 전용 노드에서만 예약됩니다.
@@ -164,7 +154,7 @@ pool.Resize(targetDedicatedComputeNodes: 0, targetLowPriorityComputeNodes: 25);
 
 ## <a name="handling-preemption"></a>선점 처리
 
-VM은 경우에 따라 선점될 수 있습니다. 이 경우 Batch는 다음을 수행합니다.
+VM은 경우에 따라 선점될 수 있습니다. 선점될 경우 Batch는 다음을 수행합니다.
 
 -   선점된 VM의 상태는 **선점됨**으로 업데이트됩니다.
 -   작업이 선점된 노드 VM에서 실행되면 해당 작업이 요청되고 다시 실행됩니다.
@@ -172,8 +162,23 @@ VM은 경우에 따라 선점될 수 있습니다. 이 경우 Batch는 다음을
 -   풀은 계속해서 우선 순위가 낮은 노드의 목표 개수가 사용 가능해지도록 하려고 합니다. 대체 용량이 발견되면 노드는 해당 ID를 유지하지만 다시 초기화되며, 작업 예약에 사용되기 전에 먼저 **만드는 중** 및 **시작 중** 상태를 거치게 됩니다.
 -   선점 수는 Azure Portal에서 메트릭으로 사용할 수 있습니다.
 
+## <a name="metrics"></a>메트릭
+
+우선 순위가 낮은 노드의 경우 [Azure Portal](https://portal.azure.com)에서 새 메트릭을 사용할 수 있습니다. 이러한 메트릭은 다음과 같습니다.
+
+- 우선 순위가 낮은 노드 수
+- 우선 순위가 낮은 코어 수 
+- 선점된 노드 수
+
+Azure Portal에서 메트릭을 확인하려면 다음을 수행합니다.
+
+1. 포털에서 Batch 계정으로 이동하여 Batch 계정의 설정을 확인합니다.
+2. **모니터링** 섹션에서 **메트릭**을 선택합니다.
+3. **사용 가능한 메트릭** 목록에서 원하는 메트릭을 선택합니다.
+
+![우선 순위가 낮은 노드의 메트릭](media/batch-low-pri-vms/low-pri-metrics.png)
+
 ## <a name="next-steps"></a>다음 단계
 
-* 배치를 사용하려는 사용자를 위한 중요한 정보는 [개발자를 위한 배치 기능 개요](batch-api-basics.md)를 참고합니다. 문서에는 배치 응용 프로그램을 빌드하는 동안 사용할 수 있는 풀, 노드, 작업 및 태스크와 같은 배치 서비스 리소스 및 여러 API 기능에 대한 자세한 내용이 포함됩니다.
+* 배치를 사용하려는 사용자를 위한 중요한 정보는 [개발자를 Batch 기능 개요](batch-api-basics.md)를 참고합니다. 문서에는 Batch 응용 프로그램을 빌드하는 동안 사용할 수 있는 풀, 노드, 작업 및 태스크와 같은 Batch 서비스 리소스 및 여러 API 기능에 대한 자세한 내용이 포함됩니다.
 * Batch 솔루션을 빌드하는 데 사용할 수 있는 [Batch API 및 도구](batch-apis-tools.md)에 대해 알아봅니다.
-

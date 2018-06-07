@@ -1,36 +1,28 @@
 ---
-title: "CSV 파일에서 Azure SQL Database로 데이터 로드(bcp) | Microsoft Docs"
-description: "작은 데이터 크기의 경우 bcp를 사용하여 Azure SQL 데이터베이스로 데이터를 가져옵니다."
+title: CSV 파일에서 Azure SQL Database로 데이터 로드(bcp) | Microsoft Docs
+description: 작은 데이터 크기의 경우 bcp를 사용하여 Azure SQL Database로 데이터를 가져옵니다.
 services: sql-database
-documentationcenter: NA
 author: CarlRabeler
-manager: jhubbard
-editor: 
-ms.assetid: 875f9b8d-f1a1-4895-b717-f45570fb7f80
+manager: craigg
 ms.service: sql-database
 ms.custom: load & move data
-ms.devlang: NA
 ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.date: 01/10/2017
+ms.date: 04/01/2018
 ms.author: carlrab
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 9edcaee4d051c3dc05bfe23eecc9c22818cf967c
-ms.openlocfilehash: c017996235459766ca3c45ddac453fb11991b76e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/08/2017
-
-
+ms.openlocfilehash: 8ee8dcfddda01b16f18a14f445a2639cc56ee44d
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="load-data-from-csv-into-azure-sql-database-flat-files"></a>CSV에서 Azure SQL Database(플랫 파일)로 데이터 로드
-bcp 명령줄 유틸리티를 사용하여 CSV 파일에서 Azure SQL 데이터베이스로 데이터를 가져올 수 있습니다.
+bcp 명령줄 유틸리티를 사용하여 CSV 파일에서 Azure SQL Database로 데이터를 가져올 수 있습니다.
 
 ## <a name="before-you-begin"></a>시작하기 전에
 ### <a name="prerequisites"></a>필수 조건
 이 문서의 단계를 완료하려면 다음이 필요합니다.
 
-* Azure SQL 데이터베이스 논리 서버 및 데이터베이스
+* Azure SQL Database 논리 서버 및 데이터베이스
 * 설치된 bcp 명령줄 유틸리티
 * 설치된 sqlcmd 명령줄 유틸리티
 
@@ -120,4 +112,3 @@ SQL Server 데이터베이스를 마이그레이션하려면 [SQL Server 데이�
 
 <!--Other Web references-->
 [Microsoft Download Center]: https://www.microsoft.com/download/details.aspx?id=36433
-

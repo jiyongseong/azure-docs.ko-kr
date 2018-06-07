@@ -1,10 +1,10 @@
 ---
-title: "Azure AD Connect: 동기화 중의 오류 문제 해결 | Microsoft Docs"
-description: "Azure AD Connect와의 동기화 중에 발생하는 오류의 문제 해결 방법을 설명합니다."
+title: 'Azure AD Connect: 동기화 중의 오류 문제 해결 | Microsoft Docs'
+description: Azure AD Connect와의 동기화 중에 발생하는 오류의 문제 해결 방법을 설명합니다.
 services: active-directory
-documentationcenter: 
-author: karavar
-manager: samueld
+documentationcenter: ''
+author: billmath
+manager: mtillman
 editor: curtand
 ms.assetid: 2209d5ce-0a64-447b-be3a-6f06d47995f8
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/17/2017
 ms.author: billmath
+ms.openlocfilehash: aaa374d5a11ef5b5860f83a87386ff981319189f
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 5a319de69c4e142414ab8f2be980a6576acbf8bb
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
 # <a name="troubleshooting-errors-during-synchronization"></a>동기화 중 오류 문제 해결
 ID 데이터가 Windows Server Active Directory(AD DS)로부터 Azure AD(Azure Active Directory)로 동기화되는 중에 오류가 발생할 수 있습니다. 이 문서에서는 여러 동기화 오류 유형, 오류가 발생할 수 있는 몇 가지 상황, 오류를 해결할 수 있는 가능한 방법에 대한 개요를 제공합니다. 이 문서는 일반적인 오류 유형을 다루며 가능한 모든 오류를 포괄하지 못할 수 있습니다.
@@ -172,7 +171,7 @@ Azure Active Directory는 데이터를 디렉터리에 쓰도록 허용하기 �
 
 #### <a name="scenarios"></a>시나리오
 a. UserPrincipalName 특성 값에 잘못된/지원되지 않는 문자가 있습니다.
-b. UserPrincipalName 특성이 필요한 형식을 따르지 않습니다.
+나. UserPrincipalName 특성이 필요한 형식을 따르지 않습니다.
 
 #### <a name="how-to-fix-identitydatavalidationfailed-error"></a>IdentityDataValidationFailed 오류 해결 방법
 a. UserPrincipalName 특성이 지원되는 문자와 필요한 형식을 따르는지 확인합니다.
@@ -223,4 +222,3 @@ a. UserPrincipalName 특성이 지원되는 문자와 필요한 형식을 따르
 ## <a name="related-links"></a>관련 링크
 * [Active Directory 관리 센터에서 Active Directory 개체 찾기](https://technet.microsoft.com/library/dd560661.aspx)
 * [Azure Active Directory PowerShell을 사용하여 개체에 대해 Azure Active Directory를 쿼리하는 방법](https://msdn.microsoft.com/library/azure/jj151815.aspx)
-

@@ -1,27 +1,19 @@
 ---
-title: "Azure DC/OS 클러스터에 ACR 사용| Microsoft Docs"
+title: "Azure DC/OS 클러스터에 ACR 사용"
 description: "Azure Container Service에서 DC/OS 클러스터에 Azure Container Registry 사용"
 services: container-service
-documentationcenter: 
 author: julienstroheker
 manager: dcaro
-editor: 
-tags: acs, azure-container-service, acr, azure-container-registry
-keywords: "Docker, 컨테이너, 마이크로 서비스, Mesos, Azure, FileShare, cifs"
-ms.assetid: 
 ms.service: container-service
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
+ms.topic: tutorial
 ms.date: 03/23/2017
 ms.author: juliens
+ms.custom: mvc
+ms.openlocfilehash: 90d449de19022b3b427e3d89d5beb18bbd36c6b4
+ms.sourcegitcommit: 9d317dabf4a5cca13308c50a10349af0e72e1b7e
 ms.translationtype: HT
-ms.sourcegitcommit: bfd49ea68c597b109a2c6823b7a8115608fa26c3
-ms.openlocfilehash: fa07135d550bf9ea0f6d1e03089b988cf0d5dddc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/01/2018
 ---
 # <a name="use-acr-with-a-dcos-cluster-to-deploy-your-application"></a>DC/OS 클러스터에 ACR을 사용하여 응용 프로그램 배포
 
@@ -41,12 +33,12 @@ ms.lasthandoff: 07/25/2017
 
 ## <a name="deploy-azure-container-registry"></a>Azure Container Registry 배포
 
-필요한 경우 [az acr create](/cli/azure/acr#create) 명령으로 Azure Container Registry를 만듭니다. 
+필요한 경우 [az acr create](/cli/azure/acr#az_acr_create) 명령으로 Azure Container Registry를 만듭니다. 
 
 다음 예제에서는 임의로 생성된 이름으로 레지스트리를 만듭니다. 또한 레지스트리는 `--admin-enabled` 인수를 사용하여 관리자 계정으로 구성됩니다.
 
 ```azurecli-interactive
-az acr create --resource-group myResourceGroup --name myContainerRegistry$RANDOM --sku Basic --admin-enabled true
+az acr create --resource-group myResourceGroup --name myContainerRegistry$RANDOM --sku Basic
 ```
 
 레지스트리가 만들어지면 Azure CLI에서 다음과 유사한 데이터를 출력합니다. `name` 및 `loginServer`는 이후 단계에서 사용되므로 기록해 둡니다.
@@ -129,7 +121,7 @@ cp docker.tar.gz /mnt/share/dcosshare
 Ubuntu 이미지에서 컨테이너를 만듭니다.
 
 ```azurecli-interactive
-docker run ubunut --name base-image
+docker run ubuntu --name base-image
 ```
 
 이제 컨테이너를 새 이미지에 캡처합니다. 이미지 이름은 `loginServer/imageName` 형식으로 컨테이너 레지스트리의 `loginServer` 이름을 포함해야 합니다.
@@ -207,4 +199,3 @@ dcos marathon app add acrDemo.json
 > * DC/OS 클러스터에서 ACR 인증 구성
 > * Azure Container Registry에 이미지 업로드
 > * Azure Container Registry에서 컨테이너 이미지 실행
-

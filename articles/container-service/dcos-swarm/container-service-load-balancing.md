@@ -1,29 +1,22 @@
 ---
-title: "Azure DC/OS 클러스터의 컨테이너 부하 분산 | Microsoft Docs"
-description: "Azure Container Service DC/OS 클러스터에 있는 여러 컨테이너에 대해 부하를 분산합니다."
+title: Azure DC/OS 클러스터의 컨테이너 부하 분산
+description: Azure Container Service DC/OS 클러스터에 있는 여러 컨테이너에 대해 부하를 분산합니다.
 services: container-service
-documentationcenter: 
 author: rgardler
-manager: timlt
-editor: 
-tags: acs, azure-container-service
-keywords: "컨테이너, 마이크로 서비스, DC/OS, Azure"
-ms.assetid: f0ab5645-2636-42de-b23b-4c3a7e3aa8bb
+manager: jeconnoc
 ms.service: container-service
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
+ms.topic: tutorial
 ms.date: 06/02/2017
 ms.author: rogardle
+ms.custom: mvc
+ms.openlocfilehash: 62967636a4d80f72f731a666947d5d4d5e47f7e5
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: bfd49ea68c597b109a2c6823b7a8115608fa26c3
-ms.openlocfilehash: b0ab5a47e335998a7f1135b5715e9c50b89b6a68
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="load-balance-containers-in-an-azure-container-service-dcos-cluster"></a>Azure Container Service DC/OS 클러스터에서 컨테이너 부하 분산
+
 이 문서에서는 Marathon-LB를 사용하여 DC/OS로 관리되는 Azure Container Service에 내부 부하 분산 장치를 만드는 방법을 살펴봅니다. 이 구성은 응용 프로그램을 수평으로 확장할 수 있습니다. 또한 부하 분산 장치를 공용 클러스터에 배치하고 응용 프로그램 컨테이너를 개인 클러스터에 배치하여 공용 및 개인 에이전트 클러스터를 활용할 수 있습니다. 이 자습서에서는 다음을 수행했습니다.
 
 > [!div class="checklist"]
@@ -43,7 +36,7 @@ Azure Container Service DC/OS 클러스터에는 두 개의 부하 분산 계층
 
 **Azure Load Balancer**는 공용 진입점(최종 사용자가 액세스하는)을 제공합니다. Azure LB는 Azure Container Service에서 자동으로 제공하며 기본적으로 포트 80, 443 및 8080을 노출하도록 구성됩니다.
 
-**Marathon Load Balancer(marathon-lb)**는 요청을 서비스하는 컨테이너 인스턴스로 인바운드 요청을 라우팅합니다. 웹 서비스를 제공하는 컨테이너를 확장하면 marathon-lb는 동적으로 조정됩니다. 이 부하 분산 장치는 Container Service에 기본적으로 제공되지 않지만 쉽게 설치할 수 있습니다.
+**Marathon Load Balancer(marathon-lb)** 는 요청을 서비스하는 컨테이너 인스턴스로 인바운드 요청을 라우팅합니다. 웹 서비스를 제공하는 컨테이너를 확장하면 marathon-lb는 동적으로 조정됩니다. 이 부하 분산 장치는 Container Service에 기본적으로 제공되지 않지만 쉽게 설치할 수 있습니다.
 
 ## <a name="configure-marathon-load-balancer"></a>Marathon Load Balancer 구성
 

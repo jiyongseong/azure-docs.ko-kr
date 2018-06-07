@@ -1,8 +1,8 @@
 ---
-title: "PowerShell을 사용하여 Data Lake Store를 기본 저장소로 사용하여 HDInsight 클러스터 만들기 | Microsoft Docs"
-description: "Azure PowerShell을 사용하여 Azure Data Lake Store로 HDInsight Hadoop 클러스터 만들기 및 사용"
+title: PowerShell을 사용하여 Data Lake Store를 기본 저장소로 사용하여 HDInsight 클러스터 만들기 | Microsoft Docs
+description: Azure PowerShell을 사용하여 Azure Data Lake Store로 HDInsight Hadoop 클러스터 만들기 및 사용
 services: data-lake-store,hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: nitinme
 manager: jhubbard
 editor: cgronlun
@@ -10,19 +10,16 @@ ms.assetid: 8917af15-8e37-46cf-87ad-4e6d5d67ecdb
 ms.service: data-lake-store
 ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 05/08/2017
+ms.date: 11/28/2017
 ms.author: nitinme
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 245ce9261332a3d36a36968f7c9dbc4611a019b2
-ms.openlocfilehash: 77eb83b80312eca401e6f60d57ed6a5668ea442e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/09/2017
-
-
+ms.openlocfilehash: 2a9f2e9c2634173cf2feb9ded2e87e49f9c8d1e4
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="create-hdinsight-clusters-with-data-lake-store-as-default-storage-by-using-powershell"></a>PowerShell을 사용하여 Data Lake Store를 기본 저장소로 사용한 HDInsight 클러스터 만들기
+
 > [!div class="op_single_selector"]
 > * [Azure Portal 사용](data-lake-store-hdinsight-hadoop-use-portal.md)
 > * [PowerShell 사용(기본 저장소의 경우)](data-lake-store-hdinsight-hadoop-use-powershell-for-default-storage.md)
@@ -40,11 +37,12 @@ Data Lake Store에서 HDInsight를 사용하는 몇 가지 중요한 고려 사�
 PowerShell을 사용하여 Data Lake Store를 사용하도록 HDInsight를 구성하려면 다음 5개 섹션의 지침을 따릅니다.
 
 ## <a name="prerequisites"></a>필수 조건
+
 이 자습서를 시작하기 전에 다음 요구 사항을 충족하는지 확인합니다.
 
 * **Azure 구독**: [Azure 무료 평가판 받기](https://azure.microsoft.com/pricing/free-trial/)로 이동하세요.
 * **Azure PowerShell 1.0 이상**: [Azure PowerShell 설치 및 구성 방법](/powershell/azure/overview)을 참조하세요.
-* **Windows SDK(소프트웨어 개발 키트)**: Windows SDK를 설치하려면 [Windows 10용 도구 다운로드](https://dev.windows.com/en-us/downloads)로 이동합니다. 보안 인증서를 만드는 데 SDK가 사용됩니다.
+* **Windows SDK(소프트웨어 개발 키트)**: Windows SDK를 설치하려면 [Windows 10용 도구 다운로드](https://dev.windows.com/downloads)로 이동합니다. 보안 인증서를 만드는 데 SDK가 사용됩니다.
 * **Azure Active Directory 서비스 주체**: 이 자습서에서는 Azure AD(Azure Active Directory)에서 서비스 주체를 만드는 방법을 설명합니다. 그러나 서비스 주체를 만들려면 Azure AD 관리자여야 합니다. 관리자인 경우 이 필수 요소를 건너뛰고 자습서를 진행할 수 있습니다.
 
     >[!NOTE]
@@ -52,12 +50,13 @@ PowerShell을 사용하여 Data Lake Store를 사용하도록 HDInsight를 구�
     >
 
 ## <a name="create-a-data-lake-store-account"></a>Data Lake 저장소 계정 만들기
+
 Data Lake Store 계정을 만들려면 다음을 수행합니다.
 
 1. 바탕 화면에서 PowerShell 창을 열고 다음 코드 조각을 입력합니다. 로그인하라는 메시지가 표시되면 구독 관리자 또는 소유자 중 하나로 로그인합니다. 
 
         # Sign in to your Azure account
-        Login-AzureRmAccount
+        Connect-AzureRmAccount
 
         # List all the subscriptions associated to your account
         Get-AzureRmSubscription
@@ -131,7 +130,7 @@ Azure Data Lake에 대한 Active Directory 인증을 설정하려면 다음 두 
         makecert -sv mykey.pvk -n "cn=HDI-ADL-SP" CertFile.cer -r -len 2048
 
     개인 키 암호를 입력하라는 메시지가 표시됩니다. 명령을 성공적으로 실행한 후에 지정한 인증서 디렉터리에서 **CertFile.cer** 및 **mykey.pvk**를 확인해야 합니다.
-2. [Pvk2Pfx][pvk2pfx] 유틸리티를 사용하여 MakeCert가 생성한 .pvk 및 .cer 파일을 .pfx 파일로 변환합니다. 다음 명령을 실행합니다.
+2. [Pvk2Pfx][pvk2pfx] 유틸리티를 사용하여 MakeCert가 생성한 .pvk 및 .cer 파일을 .pfx 파일로 변환합니다. 다음 명령 실행:
 
         pvk2pfx -pvk mykey.pvk -spc CertFile.cer -pfx CertFile.pfx -po <password>
 
@@ -144,7 +143,7 @@ Azure Data Lake에 대한 Active Directory 인증을 설정하려면 다음 두 
 
         $certificateFilePath = "$certificateFileDir\CertFile.pfx"
 
-        $password = Read-Host –Prompt "Enter the password" # This is the password you specified for the .pfx file
+        $password = Read-Host -Prompt "Enter the password" # This is the password you specified for the .pfx file
 
         $certificatePFX = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2($certificateFilePath, $password)
 
@@ -252,8 +251,8 @@ Data Lake Store를 사용하도록 HDInsight 클러스터를 구성한 후에 HD
 `hdfs dfs -put` 명령을 사용하여 일부 파일을 Data Lake Store에 업로드한 다음 `hdfs dfs -ls`을(를) 사용하여 파일이 성공적으로 업로드되었는지 여부를 확인할 수도 있습니다.
 
 ## <a name="see-also"></a>참고 항목
+* [Azure HDInsight 클러스터에 Data Lake Store 사용](../hdinsight/hdinsight-hadoop-use-data-lake-store.md)
 * [Azure Portal: HDInsight 클러스터를 만들어 Data Lake Store 사용](data-lake-store-hdinsight-hadoop-use-portal.md)
 
 [makecert]: https://msdn.microsoft.com/library/windows/desktop/ff548309(v=vs.85).aspx
 [pvk2pfx]: https://msdn.microsoft.com/library/windows/desktop/ff550672(v=vs.85).aspx
-

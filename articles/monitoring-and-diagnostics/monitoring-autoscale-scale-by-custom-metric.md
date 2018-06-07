@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 05/07/2017
 ms.author: ancav
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5bbeb9d4516c2b1be4f5e076a7f63c35e4176b36
-ms.openlocfilehash: 428cfb29fe5d436073744a369da8ca1c2784044b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/13/2017
-
+ms.openlocfilehash: 72b6a68d0dbad4639f21aa701ec4865f36409f0a
+ms.sourcegitcommit: b07d06ea51a20e32fdc61980667e801cb5db7333
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="get-started-with-auto-scale-by-custom-metric-in-azure"></a>Azure에서 사용자 지정 메트릭을 기준으로 자동 크기 조정 시작
 이 문서에서는 Azure Portal에서 사용자 지정 메트릭을 기준으로 리소스 크기를 조정하는 방법에 대해 설명합니다.
@@ -50,11 +49,10 @@ Azure Monitor 자동 크기 조정은 VMSS(Virtual Machine Scale Sets), 클라�
 > 참고: VMSS 또는 클라우드 서비스 역할을 시작하는 데에도 동일한 단계를 적용할 수 있습니다.
 
 <!--Reference-->
-[1]: https://docs.microsoft.com/en-us/azure/application-insights/app-insights-asp-net
+[1]: https://docs.microsoft.com/azure/application-insights/app-insights-asp-net
 [2]: https://portal.azure.com
 [3]: ./media/monitoring-autoscale-scale-by-custom-metric/azure-monitor-launch.png
 [4]: ./media/monitoring-autoscale-scale-by-custom-metric/discover-autoscale-azure-monitor.png
 [5]: ./media/monitoring-autoscale-scale-by-custom-metric/scale-setting-new-web-app.png
 [6]: ./media/monitoring-autoscale-scale-by-custom-metric/scale-by-custom-metric.png
 [7]: ./media/monitoring-autoscale-scale-by-custom-metric/autoscale-setting-custom-metrics-ai.png
-

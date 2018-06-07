@@ -1,26 +1,24 @@
 ---
-title: "SAS 토큰 및 Azure CLI로 Azure 템플릿 배포 | Microsoft Docs"
-description: "Azure Resource Manager와 Azure CLI를 사용하여 SAS 토큰으로 보호되는 템플릿에서 Azure로 리소스를 배포합니다."
+title: SAS 토큰 및 Azure CLI로 Azure 템플릿 배포 | Microsoft Docs
+description: Azure Resource Manager와 Azure CLI를 사용하여 SAS 토큰으로 보호되는 템플릿에서 Azure로 리소스를 배포합니다.
 services: azure-resource-manager
 documentationcenter: na
 author: tfitzmac
 manager: timlt
 editor: tysonn
-ms.assetid: 
+ms.assetid: ''
 ms.service: azure-resource-manager
 ms.devlang: azurecli
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 05/31/2017
 ms.author: tomfitz
-ms.translationtype: Human Translation
-ms.sourcegitcommit: abdbb9a43f6f01303844677d900d11d984150df0
-ms.openlocfilehash: 2ab1cf399f47e2c19647b2a2a82de5c11f08e8c8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/21/2017
-
-
+ms.openlocfilehash: b97fdea36eab914926ff91e1f27bdab0fb8a3930
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="deploy-private-resource-manager-template-with-sas-token-and-azure-cli"></a>SAS 토큰과 Azure CLI를 사용하여 개인 Resource Manager 템플릿을 배포합니다.
 
@@ -91,4 +89,3 @@ az group deployment create --resource-group ExampleGroup --template-uri $url?$to
 * 템플릿을 배포하는 전체 샘플 스크립트는 [Resource Manager 템플릿 배포 스크립트](resource-manager-samples-cli-deploy.md)를 참조하세요.
 * 템플릿에서 매개 변수를 정의하려면 [템플릿 작성](resource-group-authoring-templates.md#parameters)을 참조하세요.
 * 엔터프라이즈에서 리소스 관리자를 사용하여 구독을 효과적으로 관리할 수 있는 방법에 대한 지침은 [Azure 엔터프라이즈 스캐폴드 - 규범적 구독 거버넌스](resource-manager-subscription-governance.md)를 참조하세요.
-

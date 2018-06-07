@@ -14,12 +14,11 @@ ms.devlang: python
 ms.topic: article
 ms.date: 02/19/2015
 ms.author: MicrosoftHelp@twilio.com
-translationtype: Human Translation
-ms.sourcegitcommit: 094729399070a64abc1aa05a9f585a0782142cbf
 ms.openlocfilehash: f4a02bb7a7c46e7a0e3c75b870c522eae8294339
-ms.lasthandoff: 03/07/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="how-to-use-twilio-for-voice-and-sms-capabilities-in-python"></a>Python에서 음성 및 SMS 기능을 위해 Twilio를 사용하는 방법
 이 가이드에서는 Azure에서 Twilio API 서비스로 일반 프로그래밍 작업을 수행하는 방법을 보여 줍니다. 이 문서의 시나리오에서는 전화 통화를 걸고 SMS(Short Message Service) 메시지를 보냅니다. 응용 프로그램에서 음성 및 SMS 사용 방법과 Twilio에 대한 자세한 내용은 [다음 단계](#NextSteps) 섹션을 참조하십시오.
@@ -32,7 +31,7 @@ Twilio는 개발자가 응용 프로그램에 음성, VoIP 및 메시징을 포�
 **Twilio 클라이언트** 를 통해서는 전화, 태블릿 또는 브라우저에서 VoIP 통화를 하고 WebRTC를 지원할 수 있습니다.
 
 ## <a id="Pricing"></a>Twilio 가격 책정 및 특별 제공
-Azure 고객은 Twilio 계정을 업그레이드할 때 [특별 제공][special_offer]&10;달러의 Twilio 크레딧을 받습니다. 이 Twilio 크레딧은 모든 Twilio 사용량에 적용될 수 있습니다. 10달러의 크레딧은 전화 번호 및 메시지 또는 통화 대상의 위치에 따라 SMS 메시지를 1,000개 보내거나 최대 1000분간 인바운드 음성을 받을 수 있는 금액입니다. 이 [Twilio 크레딧][special_offer]을 충전하고 시작하세요.
+Azure 고객은 Twilio 계정을 업그레이드할 때 [특별 제공][special_offer] 10달러의 Twilio 크레딧을 받습니다. 이 Twilio 크레딧은 모든 Twilio 사용량에 적용될 수 있습니다. 10달러의 크레딧은 전화 번호 및 메시지 또는 통화 대상의 위치에 따라 SMS 메시지를 1,000개 보내거나 최대 1000분간 인바운드 음성을 받을 수 있는 금액입니다. 이 [Twilio 크레딧][special_offer]을 충전하고 시작하세요.
 
 Twilio는 종량제 서비스입니다. 설정 수수료는 없으며 언제든 계정을 종료할 수 있습니다. [Twilio 가격 책정][twilio_pricing]에서 자세한 내용을 볼 수 있습니다.
 
@@ -256,4 +255,3 @@ Twilio 서비스의 기본 사항을 배웠으며 자세한 내용을 보려면 
 [twilio_on_github]: https://github.com/twilio
 [twilio_support]: http://www.twilio.com/help/contact
 [twilio_quickstarts]: http://www.twilio.com/docs/quickstart
-

@@ -1,30 +1,22 @@
 ---
-title: "확장하기 위해 기존 데이터베이스 마이그레이션 | Microsoft Docs"
-description: "분할된 데이터베이스 맵 관리자를 만들어 탄력적 데이터베이스 도구를 사용하기 위해 분할된 데이터베이스 변환"
+title: 확장하기 위해 기존 데이터베이스 마이그레이션 | Microsoft Docs
+description: 분할된 데이터베이스 맵 관리자를 만들어 탄력적 데이터베이스 도구를 사용하기 위해 분할된 데이터베이스 변환
 services: sql-database
-documentationcenter: 
-author: ddove
-manager: jhubbard
-editor: 
-ms.assetid: 8c851d8e-8fd5-4327-89c1-9178b20ddd69
+author: stevestein
+manager: craigg
 ms.service: sql-database
 ms.custom: scale out apps
-ms.devlang: NA
 ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-management
-ms.date: 10/24/2016
-ms.author: ddove
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 10b40214ad4c7d7bb7999a5abce1c22100b617d8
-ms.openlocfilehash: 6f51f0585dfc75d28da72d1056ef7173c06b24fd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/13/2017
-
-
+ms.date: 04/01/2018
+ms.author: sstein
+ms.openlocfilehash: 41652717417f47858698b80eac83a4022dcfe13b
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="migrate-existing-databases-to-scale-out"></a>확장하기 위해 기존 데이터베이스 마이그레이션
-Azure SQL 데이터베이스 데이터베이스 도구(예: [탄력적 데이터베이스 클라이언트 라이브러리](sql-database-elastic-database-client-library.md))를 사용하여 기존의 확장된 분할된 데이터베이스를 쉽게 관리합니다. 기존의 데이터베이스 집합을 먼저 변환하여 [분할된 데이터베이스 맵 관리자](sql-database-elastic-scale-shard-map-management.md)를 사용해야 합니다. 
+Azure SQL Database 데이터베이스 도구(예: [Elastic Database 클라이언트 라이브러리](sql-database-elastic-database-client-library.md))를 사용하여 기존의 확장된 분할된 데이터베이스를 쉽게 관리합니다. 기존의 데이터베이스 집합을 먼저 변환하여 [분할된 데이터베이스 맵 관리자](sql-database-elastic-scale-shard-map-management.md)를 사용합니다. 
 
 ## <a name="overview"></a>개요
 기존의 분할된 데이터베이스를 마이그레이션하려면: 
@@ -36,10 +28,10 @@ Azure SQL 데이터베이스 데이터베이스 도구(예: [탄력적 데이터
 
 이러한 기술은 [.NET Framework 클라이언트 라이브러리](http://www.nuget.org/packages/Microsoft.Azure.SqlDatabase.ElasticScale.Client/) 또는 [Azure SQL DB - Elastic Database 도구 스크립트](https://gallery.technet.microsoft.com/scriptcenter/Azure-SQL-DB-Elastic-731883db)에 있는 PowerShell 스크립트 중 하나를 사용하여 구현할 수 있습니다. 여기에 있는 예제에서는 PowerShell 스크립트를 사용합니다.
 
-ShardMapManager에 대한 자세한 내용은 [분할된 데이터베이스 맵 관리](sql-database-elastic-scale-shard-map-management.md)를 참조하세요. 탄력적 데이터베이스 도구에 대한 개요는 [탄력적 데이터베이스 기능 개요](sql-database-elastic-scale-introduction.md)를 참조하세요.
+ShardMapManager에 대한 자세한 내용은 [분할된 데이터베이스 맵 관리](sql-database-elastic-scale-shard-map-management.md)를 참조하세요. Elastic Database 도구에 대한 개요는 [Elastic Database 기능 개요](sql-database-elastic-scale-introduction.md)를 참조하세요.
 
 ## <a name="prepare-the-shard-map-manager-database"></a>분할된 데이터베이스 맵 관리자 데이터베이스를 준비합니다.
-분할된 데이터베이스 맵 관리자는 확장된 데이터베이스를 관리하는 데이터를 포함하는 특별한 데이터베이스입니다. 기존 데이터베이스를 사용하거나 새 데이터베이스를 만들 수 있습니다. 분할된 데이터베이스 맵 관리자의 역할을 하는 데이터베이스는 분할된 데이터베이스와 같은 데이터베이스가 아니어야 합니다. 또한 PowerShell 스크립트는 데이터베이스를 만들지 않습니다. 
+분할된 데이터베이스 맵 관리자는 확장된 데이터베이스를 관리하는 데이터를 포함하는 특별한 데이터베이스입니다. 기존 데이터베이스를 사용하거나 새 데이터베이스를 만들 수 있습니다. 분할된 데이터베이스 맵 관리자의 역할을 하는 데이터베이스는 분할된 데이터베이스와 같은 데이터베이스가 아니어야 합니다. PowerShell 스크립트는 데이터베이스를 만들지 않습니다. 
 
 ## <a name="step-1-create-a-shard-map-manager"></a>1단계: 분할된 데이터베이스 맵 관리자 만들기
     # Create a shard map manager. 
@@ -62,7 +54,7 @@ ShardMapManager에 대한 자세한 내용은 [분할된 데이터베이스 맵 
 
 
 ## <a name="step-2-create-the-shard-map"></a>2단계: 분할된 데이터베이스 맵 만들기
-만들 분할된 데이터베이스 맵의 종류를 선택해야 합니다. 데이터베이스 아키텍처에 따라 선택합니다. 
+만들 분할된 데이터베이스 맵의 종류를 선택합니다. 데이터베이스 아키텍처에 따라 선택합니다. 
 
 1. 데이터베이스당 단일 테넌트(용어는 [용어집](sql-database-elastic-scale-glossary.md)참조.) 
 2. 데이터베이스당 다중 테넌트(두 가지 형식):
@@ -93,7 +85,7 @@ ShardMapManager 개체를 사용하여 분할된 데이터베이스 맵을 만�
 
 
 ### <a name="option-2-create-a-shard-map-for-a-range-mapping"></a>옵션 2: 범위 매핑에 대한 분할된 데이터베이스 맵 만들기
-이 매핑 패턴을 활용하려면 테넌트 ID 값이 연속 범위여야 합니다. 또한 데이터베이스를 만들 때 범위를 간단히 건너뛰어 범위에 갭이 있을 수 있습니다.
+이 매핑 패턴을 활용하려면 테넌트 ID 값이 연속 범위여야 합니다. 또한 데이터베이스를 만들 때 범위를 건너뛰어 범위에 갭이 있을 수 있습니다.
 
     # $ShardMapManager is the shard map manager object 
     # 'RangeShardMap' is the unique identifier for the range shard map.  
@@ -143,7 +135,7 @@ ShardMapManager 개체를 사용하여 분할된 데이터베이스 맵을 만�
 
 
 ### <a name="step-4-option-3-map-the-data-for-multiple-tenants-on-a-single-database"></a>4단계 옵션 3: 단일 데이터베이스에서 다중 테넌트에 대한 데이터 매핑
-각 테넌트에 대해 ListMapping 추가를 실행합니다(위의 옵션 1). 
+각 테넌트에 대해 ListMapping 추가를 실행합니다(옵션 1). 
 
 ## <a name="checking-the-mappings"></a>매핑 확인
 기존의 분할된 데이터베이스와 이와 연결된 매핑에 대한 정보는 다음 명령을 사용하여 쿼리할 수 있습니다.  
@@ -153,24 +145,23 @@ ShardMapManager 개체를 사용하여 분할된 데이터베이스 맵을 만�
     Get-Mappings -ShardMap $ShardMap 
 
 ## <a name="summary"></a>요약
-설치를 완료한 후에는 탄력적 데이터베이스 클라이언트 라이브러리를 사용하기 시작할 수 있습니다. 또한 [데이터 종속 라우팅](sql-database-elastic-scale-data-dependent-routing.md) 및 [다중 분할된 데이터베이스 쿼리](sql-database-elastic-scale-multishard-querying.md)를 사용할 수도 있습니다.
+설치를 완료한 후에는 Elastic Database 클라이언트 라이브러리를 사용하기 시작할 수 있습니다. 또한 [데이터 종속 라우팅](sql-database-elastic-scale-data-dependent-routing.md) 및 [다중 분할된 데이터베이스 쿼리](sql-database-elastic-scale-multishard-querying.md)를 사용할 수도 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
-[Azure SQL DB-탄력적 데이터베이스 도구 스크립트](https://gallery.technet.microsoft.com/scriptcenter/Azure-SQL-DB-Elastic-731883db)에서 PowerShell 스크립트를 가져옵니다.
+[Azure SQL DB-Elastic Database 도구 스크립트](https://gallery.technet.microsoft.com/scriptcenter/Azure-SQL-DB-Elastic-731883db)에서 PowerShell 스크립트를 가져옵니다.
 
 도구는 GitHub( [Azure/elastic-db-tools](https://github.com/Azure/elastic-db-tools))에도 있습니다.
 
 분할/병합 도구를 사용하여 데이터를 다중 테넌트 모델에서 단일 테넌트 모델로 또는 반대로 이동합니다. [분할 병합 도구](sql-database-elastic-scale-get-started.md)를 참조하세요.
 
 ## <a name="additional-resources"></a>추가 리소스
-다중 테넌트 SaaS(software-as-a-service) 데이터베이스 응용 프로그램의 일반적인 데이터 아키텍처 패턴에 대한 정보는 [Azure SQL 데이터베이스를 사용한 다중 테넌트 SaaS 응용 프로그램의 설계 패턴](sql-database-design-patterns-multi-tenancy-saas-applications.md)을 참조하세요.
+다중 테넌트 SaaS(software-as-a-service) 데이터베이스 응용 프로그램의 일반적인 데이터 아키텍처 패턴에 대한 정보는 [Azure SQL Database를 사용한 다중 테넌트 SaaS 응용 프로그램의 설계 패턴](sql-database-design-patterns-multi-tenancy-saas-applications.md)을 참조하세요.
 
 ## <a name="questions-and-feature-requests"></a>질문 및 기능 요청
-의문 사항이 있으면 [SQL Database 포럼](http://social.msdn.microsoft.com/forums/azure/home?forum=ssdsgetstarted)에 문의하고, 기능에 대한 요청이 있는 경우 해당 기능을 [SQL Database 사용자 의견 포럼](https://feedback.azure.com/forums/217321-sql-database/)에 추가하세요.
+의문 사항이 있으면 [SQL Database 포럼](http://social.msdn.microsoft.com/forums/azure/home?forum=ssdsgetstarted)을 사용하고, 기능에 대한 요청이 있는 경우 해당 기능을 [SQL Database 사용자 의견 포럼](https://feedback.azure.com/forums/217321-sql-database/)에 추가하세요.
 
 <!--Image references-->
 [1]: ./media/sql-database-elastic-convert-to-use-elastic-tools/listmapping.png
 [2]: ./media/sql-database-elastic-convert-to-use-elastic-tools/rangemapping.png
 [3]: ./media/sql-database-elastic-convert-to-use-elastic-tools/multipleonsingledb.png
-
 

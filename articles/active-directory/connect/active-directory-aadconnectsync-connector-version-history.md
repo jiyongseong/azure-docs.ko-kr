@@ -1,42 +1,93 @@
 ---
-title: "커넥터 버전 릴리스 내역 | Microsoft Docs"
-description: "이 항목에서는 FIM(Forefront Identity Manager) 및 MIM(Microsoft Identity Manager)에 대한 커넥터의 모든 버전을 보여 줍니다."
+title: 커넥터 버전 릴리스 내역 | Microsoft Docs
+description: 이 항목에서는 FIM(Forefront Identity Manager) 및 MIM(Microsoft Identity Manager)에 대한 커넥터의 모든 버전을 보여 줍니다.
 services: active-directory
-documentationcenter: 
-author: AndKjell
-manager: femila
-editor: 
+documentationcenter: ''
+author: billmath
+manager: mtillman
+editor: ''
 ms.assetid: 6a0c66ab-55df-4669-a0c7-1fe1a091a7f9
 ms.service: active-directory
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 07/12/2017
-ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 3716c7699732ad31970778fdfa116f8aee3da70b
-ms.openlocfilehash: e9699abe0c1bdb6ea449c99e087ae56adb717b8d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/30/2017
-
+ms.date: 03/22/2018
+ms.author: davidste
+ms.openlocfilehash: 039e21cb3c35f8eb024ad2fca56e8a59e3182d3a
+ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/03/2018
 ---
 # <a name="connector-version-release-history"></a>커넥터 버전 릴리스 내역
 FIM(Forefront Identity Manager) 및 MIM(Microsoft Identity Manager)의 커넥터는 자주 업데이트됩니다.
 
 > [!NOTE]
-> 이 항목은 FIM 및 MIM에만 있습니다. 이러한 커넥터는 Azure AD Connect에서 지원되지 않습니다.
+> 이 항목은 FIM 및 MIM에만 있습니다. 이러한 커넥터는 Azure AD Connect에서 설치하도록 지원되지 않습니다. 출시된 커넥터는 지정된 빌드로 업그레이드할 때 AADConnect에 미리 설치됩니다.
+
 
 이 항목은 출시된 커넥터의 모든 버전을 나열합니다.
 
 관련 링크:
 
 * [최신 커넥터 다운로드](http://go.microsoft.com/fwlink/?LinkId=717495)
-* [일반 LDAP 커넥터](active-directory-aadconnectsync-connector-genericldap.md) 참조 설명서
-* [일반 SQL 커넥터](active-directory-aadconnectsync-connector-genericsql.md) 참조 설명서
-* [웹 서비스 커넥터](http://go.microsoft.com/fwlink/?LinkID=226245) 참조 설명서
-* [PowerShell 커넥터](active-directory-aadconnectsync-connector-powershell.md) 참조 설명서
-* [Lotus Domino 커넥터](active-directory-aadconnectsync-connector-domino.md) 참조 설명서
+* [일반 LDAP 커넥터](https://docs.microsoft.com/microsoft-identity-manager/reference/microsoft-identity-manager-2016-connector-genericldap) 참조 설명서
+* [일반 SQL 커넥터](https://docs.microsoft.com/microsoft-identity-manager/reference/microsoft-identity-manager-2016-connector-genericsql) 참조 설명서
+* [웹 서비스 커넥터](https://docs.microsoft.com/microsoft-identity-manager/reference/microsoft-identity-manager-2016-ma-ws) 참조 설명서
+* [PowerShell 커넥터](https://docs.microsoft.com/microsoft-identity-manager/reference/microsoft-identity-manager-2016-connector-powershell) 참조 설명서
+* [Lotus Domino 커넥터](https://docs.microsoft.com/microsoft-identity-manager/reference/microsoft-identity-manager-2016-connector-domino) 참조 설명서
+
+
+## <a name="118300"></a>1.1.830.0
+
+### <a name="fixed-issues"></a>수정된 문제:
+* ConnectorsLog System.Diagnostics.EventLogInternal.InternalWriteEvent를 해결했습니다. (메시지: 시스템에 연결된 장치가 작동하지 않습니다.)
+* 커넥터의 이 릴리스의 miiserver.exe.config에서 3.3.0.0-4.1.3.0에서 4.1.4.0으로 바인딩 리디렉션을 업데이트해야 합니다.
+* 일반 웹 서비스:
+    * 해결된 유효한 JSON 응답을 구성 도구에 저장할 수 없습니다.
+* 일반 SQL:
+    * 내보내기는 항상 삭제 작업의 업데이트 쿼리만을 생성합니다. 삭제 쿼리를 생성하도록 추가했습니다
+    * '델타 전략'이 '변경 내용 추적'인 경우 델타 가져오기 작업에 대한 개체를 가져오는 SQL 쿼리가 수정되었습니다. 이 구현이 알려진 제한에서 '변경 내용 추적' 모드를 사용하는 델타 가져오기는 다중 값 특성에서 변경 내용을 추적하지 않습니다
+    * 다중 값 특성의 마지막 값을 삭제하는 데 필요하고 이 행이 삭제하는 데 필요한 값을 제외한 다른 데이터를 포함하지 않는 경우에 삭제 쿼리를 생성할 가능성이 증가되었습니다.
+    * SP에 의해 출력 매개 변수를 구현할 때 처리하는 System.ArgumentException 
+    * varbinary(max) 형식이 있는 필드에 내보내기 작업을 수행하는 잘못된 쿼리
+    * (함수 ExportAttributes 및 GetQueryForMultiValue에서) parameterList 변수를 두 번 초기화하는 문제
+
+
+## <a name="116490-aadconnect-116490"></a>1.1.649.0(AADConnect 1.1.649.0)
+
+### <a name="fixed-issues"></a>수정된 문제:
+
+* Lotus Notes:
+  * 사용자 지정 인증자 필터링 옵션
+  * ImportOperations 클래스 가져오기에서는 ‘보기’ 모드에서 실행할 수 있는 작업과 ‘검색’ 모드에서 실행할 수 있는 작업의 정의가 수정되었습니다.
+* 일반 LDAP:
+  * OpenLDAP Directory는 entryUUI 대신 DN을 앵커로 사용합니다. 앵커 수정이 가능한 GLDAP 커넥터의 새로운 옵션
+* 일반 SQL:
+  * varbinary(max) 유형의 필드로 내보내기가 수정되었습니다.
+  * 데이터 원본의 이진 데이터를 CSEntry 개체에 추가할 때 DataTypeConversion 함수가 0바이트에서 실패했습니다. CSEntryOperationBase 클래스의 DataTypeConversion 함수가 수정되었습니다.
+
+
+
+
+### <a name="enhancements"></a>향상된 기능:
+
+* 일반 SQL:
+  * 명명되거나 명명되지 않은 매개 변수로 저장 프로시저를 실행하기 위한 모드를 구성하는 기능이 일반 SQL 관리 에이전트 구성 창의 '글로벌 매개 변수' 페이지에 추가되었습니다. '글로벌 매개 변수' 페이지에는 '명명된 매개 변수를 사용하여 저장 프로시저 실행'이라는 레이블의 확인란이 있습니다. 이는 명명된 매개 변수로 저장 프로시저를 실행할지에 대한 모드를 담당합니다.
+    * 현재 명명된 매개 변수로 저장 프로시저를 실행하는 기능은 IBM DB2 및 MSSQL 데이터베이스에서만 작동합니다. Oracle 및 MySQL 데이터베이스의 경우 이 방법이 작동하지 않습니다. 
+      * MySQL의 SQL 구문은 저장 프로시저에서 명명된 매개 변수를 지원하지 않습니다.
+      * Oracle용 ODBC 드라이버는 저장 프로시저에서 명명된 매개 변수에 대해 명명된 매개 변수를 지원하지 않습니다.
+
+## <a name="116040-aadconnect-116140"></a>1.1.604.0(AADConnect 1.1.614.0)
+
+
+### <a name="fixed-issues"></a>수정된 문제:
+
+* 일반 웹 서비스:
+  * 두 개 이상의 끝점이 있을 때 SOAP 프로젝트가 만들어지지 않도록 방지하는 문제를 해결했습니다.
+* 일반 SQL:
+  * 가져오기 작업에서 커넥터 공간에 저장할 때 GSQL이 시간을 제대로 변환하지 않았습니다. GSQL의 커넥터 공간에 대한 기본 날짜 및 시간 형식이 'yyyy-MM-dd hh:mm:ssZ'에서 'yyyy-MM-dd HH:mm:ssZ'로 변경되었습니다.
 
 ## <a name="115510-aadconnect-115530"></a>1.1.551.0(AADConnect 1.1.553.0)
 
@@ -44,25 +95,29 @@ FIM(Forefront Identity Manager) 및 MIM(Microsoft Identity Manager)의 커넥터
 
 * 일반 웹 서비스:
   * Wsconfig 도구는 REST 서비스 메서드에 대한 "샘플 요청"의 Json 배열을 제대로 변환하지 못했습니다. 이로 인해 REST 요청에 대한 이 Json 배열의 직렬화와 관련된 문제가 발생했습니다.
-  * 웹 서비스 커넥터 구성 도구는 JSON 특성 이름에 공백 기호를 사용하는 기능을 지원하지 않습니다. WSConfigTool.exe.config 파일에 대체 패턴을 수동으로 추가할 수 있습니다(예: ```<appSettings> <add key=”JSONSpaceNamePattern” value="__" /> </appSettings>```).
+  * 웹 서비스 커넥터 구성 도구는 JSON 속성 이름에 공백 기호를 사용하는 것을 지원하지 않습니다. 
+    * WSConfigTool.exe.config 파일에 대체 패턴을 수동으로 추가할 수 있습니다(예: ```<appSettings> <add key=”JSONSpaceNamePattern” value="__" /> </appSettings>```).
+> [!NOTE]
+> 다음 오류를 수신하는 내보내기에 JSONSpaceNamePattern 키가 필요합니다. 메시지: 이름이 비어 있으면 안됩니다. 
 
 * Lotus Notes:
-  * **조직/조직 구성 단위에 대해 사용자 지정 인증자 허용** 옵션이 해제된 경우 내보내기(업데이트) 중 커넥터가 실패합니다. 내보내기 흐름 후에 모든 특성이 Domino로 내보내지지만, 내보내기 시 KeyNotFoundException이 동기화에 반환됩니다. 이 문제는 아래 특성 중 하나를 변경하여 DN(UserName 특성) 변경을 시도할 때 이름 바꾸기 작업이 실패하기 때문에 발생합니다.  
-    - LastName
-    - FirstName
-    - MiddleInitial
-    - AltFullName
-    - AltFullNameLanguage
-    - ou
-    - altcommonname
+  * **조직/조직 구성 단위에 대해 사용자 지정 인증자 허용** 옵션이 해제된 경우 내보내기(업데이트) 중 커넥터가 실패합니다. 내보내기 흐름 후에 모든 특성이 Domino로 내보내지지만, 내보내기 시 KeyNotFoundException이 동기화에 반환됩니다. 
+    * 이 문제는 아래 특성 중 하나를 변경하여 DN(UserName 특성) 변경을 시도할 때 이름 바꾸기 작업이 실패하기 때문에 발생합니다.  
+      - LastName
+      - FirstName
+      - MiddleInitial
+      - AltFullName
+      - AltFullNameLanguage
+      - ou
+      - altcommonname
 
   * **조직/조직 구성 단위에 대한 사용자 지정 인증자 허용** 옵션이 설정되었지만 필수 인증자가 여전히 비어 있으면 KeyNotFoundException이 발생합니다.
 
 ### <a name="enhancements"></a>향상된 기능:
 
 * 일반 SQL:
-  * **시나리오: 다시 구현됨:** "*" 기능
-  * **솔루션 설명:** [다중 값 참조 특성 처리](active-directory-aadconnectsync-connector-genericsql.md) 접근 방식이 변경되었습니다.
+  * **시나리오: 다시 설계되고 구현됨:** "*" 기능
+  * **솔루션 설명:** [다중 값 참조 특성 처리](https://docs.microsoft.com/microsoft-identity-manager/reference/microsoft-identity-manager-2016-connector-genericsql) 접근 방식이 변경되었습니다.
 
 
 ### <a name="fixed-issues"></a>수정된 문제:
@@ -87,7 +142,7 @@ Lotus:
 
 * 일반 SQL:</br>
   **시나리오 증상:** 하나의 개체 형식에 대한 참조만 허용하고 멤버와 상호 참조하는 SQL 커넥터의 잘 알려진 제한입니다. </br>
-  **솔루션 설명:** "*" 옵션을 선택한 참조를 위한 처리 단계에서 모든 개체 형식 조합은 동기화 엔진으로 다시 반환됩니다.
+  **솔루션 설명:** “*” 옵션을 선택한 참조를 위한 처리 단계에서 모든 개체 형식 조합은 동기화 엔진으로 다시 반환됩니다.
 
 >[!Important]
 - 그러면 자리 표시자가 많이 생성됩니다.
@@ -139,7 +194,7 @@ LDAP MA의 Novel 서버에 대한 파티션과 형식이 비슷한 개체가 표
 출시 날짜: 2016년 3월
 
 **일반 SQL 커넥터**  
-의 [일반 SQL 커넥터](active-directory-aadconnectsync-connector-genericsql.md)초기 릴리스입니다.
+의 [일반 SQL 커넥터](https://docs.microsoft.com/microsoft-identity-manager/reference/microsoft-identity-manager-2016-connector-genericsql)초기 릴리스입니다.
 
 **새로운 기능:**
 
@@ -192,8 +247,23 @@ LDAP MA의 Novel 서버에 대한 파티션과 형식이 비슷한 개체가 표
 * [KB2899874](https://support.microsoft.com/kb/2899874) - 5.3.0721, 2013년 10월
 * [KB2875551](https://support.microsoft.com/kb/2875551) - 5.3.0534, 2013년 8월
 
+## <a name="troubleshooting"></a>문제 해결 
+
+> [!NOTE]
+> ECMA2 커넥터 중 하나를 사용하여 Microsoft Identity Manager 또는 AADConnect를 업데이트하는 경우입니다. 
+
+일치하도록 업그레이드할 때 커넥터 정의를 새로 고침해야 하거나, 응용 프로그램 이벤트 로그 시작 부분에서 경고 ID 6947을 보고하는 다음 오류를 수신합니다. "Assembly version in AAD Connector configuration ("X.X.XXX.X") is earlier than the actual version ("X.X.XXX.X") of "C:\Program Files\Microsoft Azure AD Sync\Extensions\Microsoft.IAM.Connector.GenericLdap.dll"("AAD 커넥터 구성의 어셈블리 버전("XXXXX.X")이 C:\Program Files\Microsoft Azure AD Sync\Extensions\Microsoft.IAM.Connector.GenericLdap.dll의 실제 버전("X.X.XXX.X")보다 이전 버전입니다").
+
+정의를 새로 고치려면:
+* 커넥터 인스턴스의 속성 열기
+* 연결/연결 대상 탭 클릭
+  * 커넥터 계정 암호 입력
+* 각 속성 탭을 차례로 클릭
+  * 이 커넥터 유형에 새로 고침 단추가 포함된 파티션 탭이 있는 경우 해당 탭에서 새로 고침 단추를 클릭합니다.
+* 모든 속성 탭에 액세스한 후 확인 단추를 클릭하여 변경 사항을 저장합니다.
+
+
 ## <a name="next-steps"></a>다음 단계
 [Azure AD Connect 동기화](active-directory-aadconnectsync-whatis.md) 구성에 대해 자세히 알아봅니다.
 
 [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)에 대해 자세히 알아봅니다.
-

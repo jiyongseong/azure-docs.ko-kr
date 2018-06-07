@@ -1,26 +1,25 @@
 ---
-title: "Azure IoT Hub에서 센서 데이터의 실시간 데이터 시각화 – Web Apps | Microsoft Docs"
-description: "Microsoft Azure App Service의 Web Apps 기능을 사용하여 센서에서 수집하여 IoT Hub로 보낸 온도 및 습도 데이터를 시각화할 수 있습니다."
+title: Azure IoT Hub에서 센서 데이터의 실시간 데이터 시각화 – Web Apps | Microsoft Docs
+description: Microsoft Azure App Service의 Web Apps 기능을 사용하여 센서에서 수집하여 IoT Hub로 보낸 온도 및 습도 데이터를 시각화할 수 있습니다.
 services: iot-hub
-documentationcenter: 
-author: shizn
+documentationcenter: ''
+author: rangv
 manager: timlt
-tags: 
-keywords: "실시간 데이터 시각화, 라이브 데이터 시각화, 센서 데이터 시각화"
+tags: ''
+keywords: 실시간 데이터 시각화, 라이브 데이터 시각화, 센서 데이터 시각화
 ms.assetid: e42b07a8-ddd4-476e-9bfb-903d6b033e91
 ms.service: iot-hub
 ms.devlang: arduino
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/29/2017
-ms.author: xshi
+ms.date: 4/11/2018
+ms.author: rangv
+ms.openlocfilehash: 0edf72595f67dd9f6b33f9bfeaf4cd98405dc3ca
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 4f30643926def3259e603a94c741b8f65427b8da
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="visualize-real-time-sensor-data-from-your-azure-iot-hub-by-using-the-web-apps-feature-of-azure-app-service"></a>Azure App Service의 Web Apps 기능을 사용하여 Azure IoT Hub에서 실시간 센서 데이터 시각화
 
@@ -50,7 +49,7 @@ ms.lasthandoff: 07/21/2017
 
 ## <a name="create-a-web-app"></a>웹앱 만들기
 
-1. [Azure Portal](https://ms.portal.azure.com/)에서 **새로 만들기** > **웹 + 모바일** > **웹앱**을 차례로 클릭합니다.
+1. [Azure Portal](https://portal.azure.com/)에서 **리소스 만들기** > **웹 + 모바일** > **웹앱**을 클릭합니다.
 2. 고유한 작업 이름을 입력하고, 구독을 확인하며, 리소스 그룹 및 위치를 지정하고, **대시보드에 고정**을 선택한 다음, **만들기**를 클릭합니다.
 
    리소스 그룹과 동일한 위치를 선택하는 것이 좋습니다. 이렇게 하면 데이터 전송 속도를 높이고 비용을 절감할 수 있습니다.
@@ -113,10 +112,12 @@ IoT Hub에서 실시간 온도 및 습도 데이터를 볼 수 있습니다.
 
 ![실시간 온도 및 습도를 보여 주는 웹앱 페이지](media/iot-hub-live-data-visualization-in-web-apps/9_web-app-page-show-real-time-temperature-humidity-azure.png)
 
+> [!NOTE]
+> 응용 프로그램 예제가 사용자 장치에서 실행 중인지 확인합니다. 그렇지 않은 경우 빈 차트를 받습니다. [사용자 장치 설정](iot-hub-raspberry-pi-kit-node-get-started.md)에 있는 자습서를 참조할 수 있습니다.
+
 ## <a name="next-steps"></a>다음 단계
 웹앱을 사용하여 IoT Hub에서 실시간 센서 데이터를 시각화했습니다.
 
 Azure IoT Hub에서 데이터를 시각화하는 다른 방법은 [Power BI를 사용하여 IoT Hub에서 실시간 센서 데이터 시각화](iot-hub-live-data-visualization-in-power-bi.md)를 참조하세요.
 
 [!INCLUDE [iot-hub-get-started-next-steps](../../includes/iot-hub-get-started-next-steps.md)]
-

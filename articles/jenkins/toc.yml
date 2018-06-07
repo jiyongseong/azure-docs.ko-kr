@@ -1,0 +1,80 @@
+- name: Azure의 Jenkins
+  href: index.yml
+- name: 개요
+  items:
+    - name: Azure에서 Jenkins 정보
+      href: overview.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: Jenkins 서버 만들기
+      href: /azure/jenkins/install-jenkins-solution-template
+- name: 자습서
+  items:
+    - name: App Service에 대한 CI/CD
+      href: /azure/jenkins/java-deploy-webapp-tutorial
+      maintainContext: true
+    - name: Kubernetes에 대한 CI/CD
+      href: /azure/container-service/kubernetes/container-service-kubernetes-jenkins
+      maintainContext: true
+    - name: Linux VM에 대한 CI/CD
+      href: /azure/virtual-machines/linux/tutorial-jenkins-github-docker-cicd
+      maintainContext: true
+    - name: 파이프라인 작업에서 Azure 리소스 만들기
+      href: /azure/jenkins/execute-cli-jenkins-pipeline
+      maintainContext: true
+    - name: Azure VM 에이전트를 사용하여 크기 조정
+      href: /azure/jenkins/jenkins-azure-vm-agents
+      maintainContext: true
+    - name: Azure Container Instances를 사용하여 빌드
+      href: /azure/container-instances/container-instances-jenkins
+      maintainContext: true
+- name: 방법
+  items:
+    - name: Azure에서 Jenkins 보안
+      href: 'https://jenkins.io/blog/2017/04/20/secure-jenkins-on-azure/'
+    - name: App Service 플러그 인 사용
+      href: deploy-jenkins-app-service-plugin.md
+    - name: Azure Storage에 게시
+      href: /azure/storage/storage-java-jenkins-continuous-integration-solution
+      maintainContext: true
+    - name: VSTS에서 Jenkins 사용
+      href: 'https://www.visualstudio.com/docs/build/apps/jenkins/build-deploy-jenkins'
+    - name: Service Fabric 앱 배포
+      href: /azure/service-fabric/service-fabric-cicd-your-linux-applications-with-jenkins
+      maintainContext: true
+- name: 샘플
+  items:
+    - name: 샘플 작업 및 스크립트
+      href: 'https://github.com/azure/jenkins'
+- name: 리소스
+  items:
+    - name: 플러그 인
+      items:
+        - name: Azure App Service 플러그 인
+          href: 'https://plugins.jenkins.io/azure-app-service'
+        - name: Azure AD 플러그 인
+          href: 'https://plugins.jenkins.io/azure-ad'
+        - name: Azure 컨테이너 에이전트 플러그 인
+          href: 'https://plugins.jenkins.io/azure-container-agents'
+        - name: Azure Container Service 플러그 인
+          href: 'https://plugins.jenkins.io/azure-acs'
+        - name: Azure 자격 증명 플러그 인
+          href: 'https://plugins.jenkins.io/azure-credentials'
+        - name: Azure Function 플러그 인
+          href: 'https://plugins.jenkins.io/azure-function'
+        - name: Azure Service Fabric 플러그 인
+          href: 'https://plugins.jenkins.io/service-fabric'
+        - name: Azure Storage 플러그인
+          href: 'https://plugins.jenkins.io/windows-azure-storage'
+        - name: Azure VM 에이전트 플러그인
+          href: 'https://plugins.jenkins.io/azure-vm-agents'
+        - name: Azure VM 확장 집합 플러그 인
+          href: 'https://plugins.jenkins.io/azure-vmss'
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: Jenkins 홈
+      href: 'https://jenkins.io/'
+    - name: Jenkins 아키텍처
+      href: /azure/architecture/reference-architectures/jenkins/
+      maintainContext: true

@@ -1,9 +1,9 @@
 ---
-title: "웹 사이트에서 ReportViewer 사용 | Microsoft Docs"
-description: "이 항목에서는 Microsoft Azure 가상 컴퓨터에 저장된 보고서를 표시하는 Visual Studio ReportViewer 컨트롤을 사용하여 Microsoft Azure 웹 사이트를 빌드하는 방법에 대해 설명합니다."
+title: 웹 사이트에서 ReportViewer 사용 | Microsoft Docs
+description: 이 항목에서는 Microsoft Azure Virtual Machine에 저장된 보고서를 표시하는 Visual Studio ReportViewer 컨트롤을 사용하여 Microsoft Azure 웹 사이트를 빌드하는 방법에 대해 설명합니다.
 services: virtual-machines-windows
 documentationcenter: na
-author: guyinacube
+author: markingmyname
 manager: erikre
 editor: monicar
 tags: azure-service-management
@@ -14,19 +14,18 @@ ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 ms.date: 01/11/2017
-ms.author: asaxton
+ms.author: maghan
+ms.openlocfilehash: af8a4a9c25005925bed3ddb78ced618e669f7f09
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: e54c3bc484b0b3b81cc495e54c17e8ef448abe91
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="use-reportviewer-in-a-web-site-hosted-in-azure"></a>Azure에서 호스트되는 웹 사이트에서 ReportViewer 사용
 > [!IMPORTANT] 
-> Azure에는 리소스를 만들고 작업하기 위한 [리소스 관리자 및 클래식](../../../azure-resource-manager/resource-manager-deployment-model.md)라는 두 가지 배포 모델이 있습니다. 이 문서에서는 클래식 배포 모델 사용에 대해 설명합니다. 새로운 배포는 대부분 리소스 관리자 모델을 사용하는 것이 좋습니다.
+> Azure에는 리소스를 만들고 작업하기 위한 [리소스 관리자 및 클래식](../../../azure-resource-manager/resource-manager-deployment-model.md)이라는 두 가지 배포 모델이 있습니다. 이 문서에서는 클래식 배포 모델 사용에 대해 설명합니다. 새로운 배포는 대부분 리소스 관리자 모델을 사용하는 것이 좋습니다.
 
-Microsoft Azure 가상 컴퓨터에 저장된 보고서를 표시하는 Visual Studio ReportViewer 컨트롤과 함께 Microsoft Azure 웹 사이트를 빌드할 수 있습니다. ReportViewer 컨트롤은 ASP.NET 웹 응용 프로그램 템플릿을 사용하여 빌드하는 웹 응용 프로그램에 있습니다.
+Microsoft Azure Virtual Machine에 저장된 보고서를 표시하는 Visual Studio ReportViewer 컨트롤과 함께 Microsoft Azure 웹 사이트를 빌드할 수 있습니다. ReportViewer 컨트롤은 ASP.NET 웹 응용 프로그램 템플릿을 사용하여 빌드하는 웹 응용 프로그램에 있습니다.
 
 > [!IMPORTANT]
 > ASP.NET MVC 웹 응용 프로그램 템플릿은 ReportViewer 컨트롤을 지원하지 않습니다.
@@ -38,7 +37,7 @@ Microsoft Azure 웹 사이트에 ReportViewer를 통합하려면 다음 작업�
 * **게시** 
 
 ## <a name="prerequisites"></a>필수 조건
-[Azure 가상 컴퓨터의 SQL Server Business Intelligence](../classic/ps-sql-bi.md)에서 "일반 권장 사항 및 모범 사례" 섹션을 검토합니다.
+[Azure Virtual Machines의 SQL Server Business Intelligence](../classic/ps-sql-bi.md)에서 "일반 권장 사항 및 모범 사례" 섹션을 검토합니다.
 
 > [!NOTE]
 > ReportViewer 컨트롤은 Visual Studio Standard Edition 이상 버전과 함께 제공됩니다. Web Developer Express Edition을 사용하려면 [MICROSOFT REPORT VIEWER 2012 런타임](https://www.microsoft.com/download/details.aspx?id=35747) 을 설치하여 ReportViewer 런타임 기능을 사용해야 합니다.
@@ -75,10 +74,10 @@ ASP.NET 응용 프로그램 온-프레미스를 호스트할 때 ReportViewer �
 3. 웹 프로젝트의 문화권 및 UI 문화권을 설정합니다. ASP.NET 웹 페이지의 문화권 및 UI 문화권을 설정하는 방법에 대한 자세한 내용은 [ASP.NET 웹 페이지 세계화를 위해 문화권 및 UI 문화권 설정 방법](http://go.microsoft.com/fwlink/?LinkId=237461)을 참조하세요.
 
 ## <a name="configuring-authentication-and-authorization"></a>인증 및 권한 부여 구성
-ReportViewer는 적절한 자격 증명을 사용하여 보고서 서버로 인증해야 하고 원하는 보고서에 액세스하는 보고서 서버에서 자격 증명의 권한을 부여해야 합니다. 인증에 대한 자세한 내용은 [Reporting Services 보고서 뷰어 컨트롤 및 Microsoft Azure 가상 컴퓨터 기반 보고서 서버](https://msdn.microsoft.com/library/azure/dn753698.aspx)백서를 참조하세요.
+ReportViewer는 적절한 자격 증명을 사용하여 보고서 서버로 인증해야 하고 원하는 보고서에 액세스하는 보고서 서버에서 자격 증명의 권한을 부여해야 합니다. 인증에 대한 자세한 내용은 [Reporting Services 보고서 뷰어 컨트롤 및 Microsoft Azure 가상 머신 기반 보고서 서버](https://msdn.microsoft.com/library/azure/dn753698.aspx)백서를 참조하세요.
 
 ## <a name="publish-the-aspnet-web-application-to-azure"></a>Azure에 ASP.NET 웹 응용 프로그램 게시
-Azure에 ASP.NET 웹 응용 프로그램을 게시하기 위한 지침은 [Visual Studio에서 Azure에 웹 응용 프로그램 마이그레이션 및 게시 방법](../../../vs-azure-tools-migrate-publish-web-app-to-cloud-service.md) 및 [Web Apps 및 ASP.NET 시작](../../../app-service-web/app-service-web-get-started-dotnet.md)을 참조하세요.
+Azure에 ASP.NET 웹 응용 프로그램을 게시하기 위한 지침은 [Visual Studio에서 Azure에 웹 응용 프로그램 마이그레이션 및 게시 방법](../../../vs-azure-tools-migrate-publish-web-app-to-cloud-service.md) 및 [Web Apps 및 ASP.NET 시작](../../../app-service/app-service-web-get-started-dotnet.md)을 참조하세요.
 
 > [!IMPORTANT]
 > Azure 배포 프로젝트 추가 또는 Azure 클라우드 서비스 프로젝트 추가 명령이 솔루션 탐색기의 바로 가기 메뉴에 나타나지 않으면 프로젝트에 대한 대상 프레임워크를 .NET Framework 4로 변경해야 할 수 있습니다.
@@ -90,8 +89,7 @@ Azure에 ASP.NET 웹 응용 프로그램을 게시하기 위한 지침은 [Visua
 ## <a name="resources"></a>리소스
 [Microsoft 보고서](http://go.microsoft.com/fwlink/?LinkId=205399)
 
-[Azure 가상 컴퓨터의 SQL Server Business Intelligence](../classic/ps-sql-bi.md)
+[Azure Virtual Machines의 SQL Server Business Intelligence](../classic/ps-sql-bi.md)
 
 [PowerShell을 사용하여 기본 모드 보고서 서버로 Azure VM 만들기](../classic/ps-sql-report.md)
-
 

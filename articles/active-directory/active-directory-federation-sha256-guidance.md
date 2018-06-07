@@ -5,7 +5,7 @@ keywords: "SHA1,SHA256,O365,페더레이션,aadconnect,adfs,ad fs,sha 변경,페
 services: active-directory
 documentationcenter: 
 author: anandyadavmsft
-manager: samueld
+manager: mtillman
 editor: 
 ms.assetid: cf6880e2-af78-4cc9-91bc-b64de4428bbd
 ms.service: active-directory
@@ -15,13 +15,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 10/31/2016
 ms.author: anandy
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f7479260c7c2e10f242b6d8e77170d4abe8634ac
-ms.openlocfilehash: c581b1468630a9f28204592c936360b72f42f0d8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/21/2017
-
-
+ms.openlocfilehash: ec7eee36888d825d65335db590731103aabbf5c2
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="change-signature-hash-algorithm-for-office-365-relying-party-trust"></a>Office 365 신뢰 당사자 트러스트에 대한 서명 해시 알고리즘 변경
 ## <a name="overview"></a>개요
@@ -50,5 +48,4 @@ AD FS(Active Directory Federation Services)는 변조될 수 없음을 확인하
 
 ## <a name="also-read"></a>참조 항목
 * [Azure AD Connect를 사용하여 Office 365 트러스트 복구](connect/active-directory-aadconnect-federation-management.md#repairthetrust)
-
 

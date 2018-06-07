@@ -1,11 +1,11 @@
 ---
-title: "Azure Resource Manager 마이그레이션에 대한 클래식 중 일반 오류 | Microsoft Docs"
-description: "이 문서에는 Azure 서비스 관리에서 Azure Resource Manager 스택으로의 IaaS 리소스 마이그레이션 중에 가장 일반적인 오류 및 해결 방법이 포함됩니다."
+title: Azure Resource Manager 마이그레이션에 대한 클래식 중 일반 오류 | Microsoft Docs
+description: 이 문서에는 Azure 서비스 관리에서 Azure Resource Manager 스택으로의 IaaS 리소스 마이그레이션 중에 가장 일반적인 오류 및 해결 방법이 포함됩니다.
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: singhkays
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
 ms.assetid: 5bc03a1b-eb1c-438c-83d9-f0e9d61f1b6a
 ms.service: virtual-machines-linux
@@ -15,14 +15,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/30/2017
 ms.author: kasing
-translationtype: Human Translation
-ms.sourcegitcommit: f41fbee742daf2107b57caa528e53537018c88c6
-ms.openlocfilehash: bc19032968117ced17f147300cd25ff6208c3cf6
-ms.lasthandoff: 03/31/2017
-
-
+ms.openlocfilehash: bfd4445ee0419d901511be262623ee49f570798f
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-
 [!INCLUDE [virtual-machines-common-migration-errors](../../../includes/virtual-machines-common-classic-resource-manager-migration-common-errors.md)]
 
 ## <a name="next-steps"></a>다음 단계

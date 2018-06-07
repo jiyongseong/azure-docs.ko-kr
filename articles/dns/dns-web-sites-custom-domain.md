@@ -1,10 +1,10 @@
 ---
-title: "웹앱에 대한 사용자 지정 DNS 레코드 만들기 | Microsoft Docs"
-description: "Azure DNS를 사용하여 웹앱에 대한 사용자 지정 도메인 DNS 레코드를 만드는 방법입니다."
+title: 웹앱에 대한 사용자 지정 DNS 레코드 만들기 | Microsoft Docs
+description: Azure DNS를 사용하여 웹앱에 대한 사용자 지정 도메인 DNS 레코드를 만드는 방법입니다.
 services: dns
 documentationcenter: na
-author: georgewallace
-manager: timlt
+author: KumudD
+manager: jeconnoc
 ms.assetid: 6c16608c-4819-44e7-ab88-306cf4d6efe5
 ms.service: dns
 ms.devlang: na
@@ -12,15 +12,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 08/16/2016
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a643f139be40b9b11f865d528622bafbe7dec939
-ms.openlocfilehash: b054a41ecd69ee1c802d8403fe4b25128f016e3c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/31/2017
-
+ms.author: kumud
+ms.openlocfilehash: 00a56a2683e95e70bb13acd6b936e766f044e1cd
+ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/03/2018
 ---
-
 # <a name="create-dns-records-for-a-web-app-in-a-custom-domain"></a>사용자 지정 도메인에서 웹앱에 대한 DNS 레코드 만들기
 
 Azure DNS를 사용하여 웹앱에 대한 사용자 지정 도메인을 호스트할 수 있습니다. 예를 들어, Azure 웹앱을 만드는 중이며 사용자가 contoso.com 또는 www.contoso.com을 FQDN으로 사용하여 액세스하도록 설정하려고 합니다.
@@ -55,9 +53,9 @@ $rs= New-AzureRMDnsRecordSet -Name "@" -RecordType "A" -ZoneName "contoso.com" -
 
 ### <a name="step-2"></a>2단계
 
-할당된 $rs 변수를 사용하여 이전에 만든 레코드 집합 "@"에 IPv4 값을 추가합니다. 할당된 IPv4 값은 웹앱의 IP 주소가 됩니다.
+할당된 $rs 변수를 사용하여 이전에 만든 레코드 집합 "\@\" 에 IPv4 값을 추가합니다. 할당된 IPv4 값은 웹앱의 IP 주소가 됩니다.
 
-웹앱의 IP 주소를 찾으려면 [Azure App Service에서 사용자 지정 도메인 이름 구성](../app-service-web/app-service-web-tutorial-custom-domain.md)의 단계를 따르세요.
+웹앱의 IP 주소를 찾으려면 [Azure App Service에서 사용자 지정 도메인 이름 구성](../app-service/app-service-web-tutorial-custom-domain.md)의 단계를 따르세요.
 
 ```powershell
 Add-AzureRMDnsRecordConfig -RecordSet $rs -Ipv4Address "<your web app IP address>"
@@ -202,5 +200,4 @@ Set-AzureRMDnsRecordSet -RecordSet $rs
 
 ## <a name="next-steps"></a>다음 단계
 
-[Configuring a custom domain name for App Service](../app-service-web/web-sites-custom-domain-name.md) (앱 서비스에 대한 사용자 지정 도메인 이름 구성)의 단계에 따라 사용자 지정 도메인을 사용하도록 웹앱을 구성합니다.
-
+[Configuring a custom domain name for App Service](../app-service/app-service-web-tutorial-custom-domain.md) (앱 서비스에 대한 사용자 지정 도메인 이름 구성)의 단계에 따라 사용자 지정 도메인을 사용하도록 웹앱을 구성합니다.

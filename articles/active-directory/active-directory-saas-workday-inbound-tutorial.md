@@ -1,27 +1,27 @@
 ---
-title: "자습서: 온-프레미스 Active Directory 및 Azure Active Directory를 사용하여 사용자를 자동으로 프로비전하도록 Workday 구성 | Microsoft Docs"
-description: "Active Directory 및 Azure Active Directory의 ID 데이터의 원본으로 Workday를 사용하는 방법에 대해 알아봅니다."
+title: '자습서: Azure Active Directory로 자동 사용자 프로비전을 위한 Workday 구성 | Microsoft Docs'
+description: Active Directory 및 Azure Active Directory의 ID 데이터의 원본으로 Workday를 사용하는 방법에 대해 알아봅니다.
 services: active-directory
 author: asmalser-msft
 documentationcenter: na
-manager: femila
+manager: mtillman
 ms.assetid: 1a2c375a-1bb1-4a61-8115-5a69972c6ad6
 ms.service: active-directory
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 05/26/2017
+ms.date: 01/26/2018
 ms.author: asmalser
-ms.translationtype: Human Translation
-ms.sourcegitcommit: fc27849f3309f8a780925e3ceec12f318971872c
-ms.openlocfilehash: f9cc94ca1fc44d10af19debab49435b265bf6e7c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/14/2017
-
-
+ms.openlocfilehash: 8dbe995ac3c6799c2fa17d9faa8be0cb74d6ee23
+ms.sourcegitcommit: 96089449d17548263691d40e4f1e8f9557561197
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/17/2018
+ms.locfileid: "34259000"
 ---
-# <a name="tutorial-configure-workday-for-automatic-user-provisioning-with-on-premises-active-directory-and-azure-active-directory"></a>자습서: 온-프레미스 Active Directory 및 Azure Active Directory를 사용하여 사용자를 자동으로 프로비전하도록 Workday 구성
+# <a name="tutorial-configure-workday-for-automatic-user-provisioning"></a>자습서: 자동 사용자 프로비전을 위한 Workday 구성
+
 이 자습서의 목표는 Workday에서 Active Directory 및 Azure Active Directory로 사람을 가져오기 위해 수행해야 하는 단계, 그리고 선택 사항으로 일부 특성을 Workday에 쓰는 방법을 보여주는 것입니다. 
 
 
@@ -36,7 +36,7 @@ ms.lasthandoff: 06/14/2017
 
 * **Workday에 이메일 주소 쓰기 저장** - Azure AD 사용자 프로비전 서비스는 선택한 Azure AD 사용자 특성(예: 이메일 주소)을 Workday에 쓸 수 있습니다.
 
-### <a name="scenarios-covered"></a>포함되는 시나리오
+### <a name="what-human-resources-scenarios-does-it-cover"></a>여기서 다루는 인적 자원 시나리오
 
 Azure AD 사용자 프로비전 서비스에서 지원되는 Workday 사용자 프로비전 워크플로는 다음과 같은 인적 자원 및 ID 수명 주기 관리 시나리오의 자동화를 지원합니다.
 
@@ -47,6 +47,20 @@ Azure AD 사용자 프로비전 서비스에서 지원되는 Workday 사용자 �
 * **직원 퇴사** - Workday에서 직원이 퇴사하면 Active Directory, Azure Active Directory 그리고 선택적으로 Office 365 및 [Azure AD에서 지원하는 기타 SaaS 응용 프로그램](active-directory-saas-app-provisioning.md)에서 해당 사용자 계정이 자동으로 비활성화됩니다.
 
 * **직원 재고용** - Workday에서 직원이 다시 고용되면 Active Directory, Azure Active Directory 그리고 선택적으로 Office 365 및 [Azure AD에서 지원하는 기타 SaaS 응용 프로그램](active-directory-saas-app-provisioning.md)에서 해당 직원의 기존 계정이 자동으로 다시 활성화되거나 다시 프로비전됩니다(기본 설정에 따라).
+
+### <a name="who-is-this-user-provisioning-solution-best-suited-for"></a>이 사용자 프로비전 솔루션에 가장 적합한 사용자
+
+이 Workday 사용자 프로비전 솔루션은 현재 공개 미리 보기 상태이며 다음과 같은 경우에 가장 적합합니다.
+
+* Workday 사용자 프로비전에 미리 작성된 클라우드 기반 솔루션을 원하는 조직
+
+* Workday에서 Active Directory 또는 Azure Active Directory로 직접 사용자 프로비전이 필요한 조직
+
+* Workday HCM 모듈에서 가져온 데이터를 사용하여 사용자를 프로비전해야 하는 조직([Get_Workers](https://community.workday.com/sites/default/files/file-hosting/productionapi/Human_Resources/v21.1/Get_Workers.html) 참조) 
+
+* Workday HCM 모듈에서 감지된 변경 내용 정보에 따라서만 하나 이상의 Active Directory 포리스트, 도메인 및 OU를 동기화하도록 사용자를 조인하고, 이동시키고, 유지해야 하는 조직([Get_Workers](https://community.workday.com/sites/default/files/file-hosting/productionapi/Human_Resources/v21.1/Get_Workers.html) 참조)
+
+* 이메일에 Office 365를 사용하는 조직
 
 
 ## <a name="planning-your-solution"></a>솔루션 계획
@@ -63,10 +77,6 @@ Workday 통합을 시작하기 전에 다음과 같은 필수 조건을 확인�
 * Active Directory에 사용자 프로비전의 경우 [온-프레미스 동기화 에이전트](https://go.microsoft.com/fwlink/?linkid=847801)를 호스트하려면 Windows Service 2012 이상을 실행하는 도메인에 가입된 서버가 필요합니다.
 * Active Directory와 Azure AD 간의 동기화를 위한 [Azure AD Connect](connect/active-directory-aadconnect.md)
 
-> [!NOTE]
-> Azure AD 테넌트가 유럽에 있는 경우 아래의 [알려진 문제](#known-issues) 섹션을 참조하세요.
-
-
 ### <a name="solution-architecture"></a>솔루션 아키텍처
 
 Azure AD는 Workday에서 Active Directory, Azure AD, SaaS 앱 등으로 프로비전하고 ID 수명 주기 관리 문제를 해결할 수 있는 다양한 프로비전 커넥터를 제공합니다. 사용하게 될 기능과 솔루션 설정 방법은 조직의 환경과 요구 사항에 따라 달라집니다. 첫 번째 단계로 조직에서 다음 항목 중 몇 개를 갖고 있으며 몇 개가 배포되었는지 점검합니다.
@@ -79,13 +89,14 @@ Azure AD는 Workday에서 Active Directory, Azure AD, SaaS 앱 등으로 프로�
 * Azure Active Directory에만 프로비전하고 Active Directory에는 프로비전하면 안 되는 사용자(예: "클라우드 전용" 사용자)가 있나요?
 * 사용자 이메일 주소를 Workday에 다시 써야 하나요?
 
+
 이러한 질문에 대답한 후에는 아래 지침에 따라 Workday 프로비전 배포를 계획할 수 있습니다.
 
 #### <a name="using-provisioning-connector-apps"></a>프로비전 커넥터 앱 사용
 
 Azure Active Directory는 Workday용으로 사전 통합된 프로비전 커넥터와 수많은 기타 SaaS 응용 프로그램을 지원합니다. 
 
-단일 프로비전 커넥터가 단일 원본 시스템의 API와 상호 작용하고, 단일 대상 시스템에 데이터를 프로비전하도록 도와줍니다. Azure AD에서 지원하는 대부분의 프로비전 커넥터는 단일 원본 및 대상 시스템용이며(예: Azure AD에서 ServiceNow로), 간단하게 Azure AD 앱 갤러리에서 문제의 앱(예: ServiceNow)을 추가하여 설치할 수 있습니다. 
+단일 프로비전 커넥터가 단일 원본 시스템의 API와 상호 작용하고, 단일 대상 시스템에 데이터를 프로비전하도록 도와줍니다. Azure AD에서 지원하는 대부분의 프로비전 커넥터는 단일 원본 및 대상 시스템용이며(예: Azure AD에서 ServiceNow로), Azure AD 앱 갤러리에서 문제의 앱(예: ServiceNow)을 추가하여 설치할 수 있습니다. 
 
 Azure AD의 프로비전 커넥터 인스턴스와 앱 인스턴스는 일대일 관계입니다.
 
@@ -96,7 +107,7 @@ Azure AD의 프로비전 커넥터 인스턴스와 앱 인스턴스는 일대일
 
 그러나 Workday 및 Active Directory를 사용할 때 여러 원본 및 대상 시스템을 고려해야 합니다.
 
-| 원본 시스템 | 대상 시스템 | 참고 사항 |
+| 원본 시스템 | 대상 시스템 | 메모 |
 | ---------- | ---------- | ---------- |
 | Workday | Active Directory 포리스트 | 각 포리스트는 고유한 대상 시스템으로 처리됨 |
 | Workday | Azure AD 테넌트 | 클라우드 전용 사용자에 필요한 경우 |
@@ -148,7 +159,7 @@ Azure AD의 프로비전 커넥터 인스턴스와 앱 인스턴스는 일대일
    
     ![보안 그룹 만들기](./media/active-directory-saas-workday-inbound-tutorial/IC750981.png "보안 그룹 만들기")
 2. **보안 그룹 만들기** 작업을 완료합니다.  
-3. **테넌트 보안 그룹의 유형**에서 통합 시스템 보안 그룹 - 제한되지 않음을 선택합니다.
+3. **테넌트 보안 그룹의 형식**에서 **통합 시스템 보안 그룹(제한되지 않음)** 을 선택합니다.
 4. 구성원이 명시적으로 추가될 보안 그룹을 만듭니다. 
    
     ![보안 그룹 만들기](./media/active-directory-saas-workday-inbound-tutorial/IC750982.png "보안 그룹 만들기")
@@ -168,17 +179,11 @@ Azure AD의 프로비전 커넥터 인스턴스와 앱 인스턴스는 일대일
     ![시스템 보안 그룹](./media/active-directory-saas-workday-inbound-tutorial/IC750985.png "시스템 보안 그룹")  
 
 ### <a name="configure-security-group-options"></a>보안 그룹 옵션 구성
-이 단계에서는 다음 도메인 보안 정책에 의해 보호되는 개체에 대한 **Get** 및 **Put** 작업을 위해 새 보안 그룹 사용 권한을 할당합니다.
-
-* 외부 계정 프로비저닝
-* 작업자 데이터: 공용 작업자 보고서
-* 작업자 데이터: 모든 위치
-* 작업자 데이터: 현재 인력 관리 정보
-* 작업자 데이터: 작업자 프로필 직함
+이 단계에서는 보안 그룹에 대한 작업자 데이터에 도메인 보안 정책 권한을 부여합니다.
 
 **보안 그룹 옵션을 구성하려면**
 
-1. 검색 상자에 도메인 보안 정책을 입력하고 **기능 영역에 대한 보안 정책** 링크를 클릭합니다.  
+1. 검색 상자에 **도메인 보안 정책**을 입력한 다음, **기능 영역에 대한 보안 정책** 링크를 클릭합니다.  
    
     ![도메인 보안 정책](./media/active-directory-saas-workday-inbound-tutorial/IC750986.png "도메인 보안 정책")  
 2. 시스템을 검색하여 **시스템** 기능 영역을 선택합니다.  **확인**을 클릭합니다.  
@@ -190,23 +195,17 @@ Azure AD의 프로비전 커넥터 인스턴스와 앱 인스턴스는 일대일
 4. **사용 권한 편집**을 클릭한 다음, **사용 권한 편집** 대화 상자 페이지에서 **Get** 및 **Put** 통합 사용 권한이 있는 보안 그룹의 목록에 새 보안 그룹을 추가합니다. 
    
     ![사용 권한 편집](./media/active-directory-saas-workday-inbound-tutorial/IC750989.png "사용 권한 편집")  
-5. 1단계를 반복하여 기능 영역을 선택하는 화면으로 돌아간 다음, 이번에는 인력 관리를 검색하고 **인력 관리 기능 영역**을 선택한 다음 **확인**을 클릭합니다.
+    
+5. 이러한 나머지 보안 정책 각각에 대해 위의 1-4단계를 반복합니다.
+
+| 작업 | 도메인 보안 정책 |
+| ---------- | ---------- | 
+| 가져오기 및 넣기 | 작업자 데이터: 공용 작업자 보고서 |
+| 가져오기 및 넣기 | 작업자 데이터: 작업 연락처 정보 |
+| 가져오기 | 작업자 데이터: 모든 위치 |
+| 가져오기 | 작업자 데이터: 현재 인력 관리 정보 |
+| 가져오기 | 작업자 데이터: 작업자 프로필 직함 |
    
-    ![도메인 보안 정책](./media/active-directory-saas-workday-inbound-tutorial/IC750990.png "도메인 보안 정책")  
-6. 인력 관리 영역에 대한 보안 정책 목록에서 **작업자 데이터: 인력 관리**를 확장하고 다음과 같은 남은 각 보안 정책에 대해 위의 4단계를 반복합니다.
-
-   * 작업자 데이터: 공용 작업자 보고서
-   * 작업자 데이터: 모든 위치
-   * 작업자 데이터: 현재 인력 관리 정보
-   * 작업자 데이터: 작업자 프로필 직함
-   
-7. 위의 1단계를 반복하여 기능 영역을 선택하는 화면으로 돌아간 다음, 이번에는 **연락처 정보**를 검색하고 인력 관리 기능 영역을 선택한 다음 **확인**을 클릭합니다.
-
-8.  인력 관리 기능 영역에 대한 보안 정책 목록에서 **작업자 데이터: 작업자 연락처 정보**를 확장하고 아래 보안 정책에 대해 위의 4단계를 반복합니다.
-
-    * 작업자 데이터: 업무용 메일
-
-    ![도메인 보안 정책](./media/active-directory-saas-workday-inbound-tutorial/IC750991.png "도메인 보안 정책")  
     
 ### <a name="activate-security-policy-changes"></a>보안 정책 변경 사항 활성화
 
@@ -225,11 +224,46 @@ Azure AD의 프로비전 커넥터 인스턴스와 앱 인스턴스는 일대일
 ## <a name="configuring-user-provisioning-from-workday-to-active-directory"></a>Workday에서 Active Directory로 사용자 프로비전 구성
 다음 지침에 따라 Workday에서 프로비전이 필요한 각 Active Directory 포리스트로 사용자 계정 프로비전을 구성합니다.
 
+### <a name="planning"></a>계획
+
+Active Directory 포리스트로 사용자 프로비전을 구성하기 전에 다음과 같은 질문을 고려하세요. 이러한 질문에 대한 답은 범위 지정 필터 및 특성 매핑을 설정하는 방법을 결정합니다. 
+
+* **이 Active Directory 포리스트로 프로비전되어야 하는 Workday의 사용자**
+
+   * *예제: Workday "회사" 특성에 "Contoso" 값이 포함되고 "Worker_Type" 특성에 "기본"이 포함되는 사용자입니다.*
+
+* **다른 OU(조직 단위)에 사용자를 라우팅하는 방법**
+
+   * *예제: Workday "Municipality" 및 "Country_Region_Reference" 특성에 정의된 대로 사무실 위치에 해당하는 OU로 사용자를 라우팅합니다.*
+
+* **Active Directory에서 다음과 같은 특성을 채우는 방법**
+
+   * 일반 이름(cn)
+      * *예제: 인적 자원에서 설정한 대로 Workday User_ID 값을 사용합니다.*
+      
+   * 직원 ID(employeeId)
+      * *예제: Workday Worker_ID 값을 사용합니다.*
+      
+   * SAM 계정 이름(sAMAccountName)
+      * *예제: Workday User_ID 값을 사용하여 잘못된 문자를 제거하도록 Azure AD 프로비전 식을 통해 필터링됩니다.*
+      
+   * 사용자 계정 이름(userPrincipalName)
+      * *예제: 도메인 이름을 추가하도록 Azure AD 프로비전 식에서 Workday User_ID 값을 사용합니다.*
+
+* **Workday와 Active Directory 간에 사용자를 일치시키는 방법**
+
+  * *예제: 특정 workday "Worker_ID" 값과 일치하는 사용자는 "employeeID"에 같은 값을 가지는 Active Directory 사용자와 일치합니다. Worker_ID 값이 Active Directory에 없는 경우 새로운 사용자를 만듭니다.*
+  
+* **일치하는 논리가 작동하기 위해 필요한 사용자 ID가 Active Directory 포리스트에 포함되었는지 여부**
+
+  * *예제: 새 Workday 배포인 경우 Active Directory를 올바른 Workday Worker_ID 값(또는 선택한 고유 ID 값)으로 미리 채워서 일치하는 논리를 최대한 단순하게 유지하는 것이 좋습니다.*
+    
+    
 ### <a name="part-1-adding-the-provisioning-connector-app-and-creating-the-connection-to-workday"></a>1부: 프로비전 커넥터 앱을 추가하고 Workday에 대한 연결 만들기
 
 **Workday에서 Active Directory로의 프로비전을 구성하려면:**
 
-1.  <https://portal.azure.com>으로 이동
+1.  <https://portal.azure.com>으로 이동합니다.
 
 2.  왼쪽 탐색 모음에서 **Azure Active Directory**를 선택합니다.
 
@@ -259,7 +293,7 @@ Azure AD의 프로비전 커넥터 인스턴스와 앱 인스턴스는 일대일
 
    * **연결 테스트** 단추를 클릭합니다. 연결 테스트가 성공하면 맨 위에서 **저장** 단추를 클릭합니다. 연결 테스트가 실패하면 Workday에서 Workday 자격 증명이 유효한지 다시 확인합니다. 
 
-![Azure 포털](./media/active-directory-saas-workday-inbound-tutorial/WD_1.PNG)
+![Azure portal](./media/active-directory-saas-workday-inbound-tutorial/WD_1.PNG)
 
 ### <a name="part-2-configure-attribute-mappings"></a>2부: 특성 매핑 구성 
 
@@ -297,7 +331,7 @@ Azure AD의 프로비전 커넥터 인스턴스와 앱 인스턴스는 일대일
 
          * **식** – 하나 이상의 Workday 특성에 따라 AD 특성에 사용자 지정 값을 쓸 수 있습니다. [자세한 내용은 식에 대한 이 문서를 참조하세요](active-directory-saas-writing-expressions-for-attribute-mappings.md).
 
-      * **원본 특성** - Workday의 사용자 특성입니다.
+      * **원본 특성** - Workday의 사용자 특성입니다. 원하는 특성이 없는 경우 [Workday 사용자 특성 목록 사용자 지정](#customizing-the-list-of-workday-user-attributes)을 참조하세요.
 
       * **기본값** – 선택 사항입니다. 원본 특성의 값이 비어 있는 경우 매핑에서 이 값을 대신 씁니다.
             이 값을 비워두는 것이 가장 일반적인 구성입니다.
@@ -316,43 +350,42 @@ Azure AD의 프로비전 커넥터 인스턴스와 앱 인스턴스는 일대일
 
 6. 매핑을 저장하려면 특성 매핑 섹션 맨 위에서 **저장**을 클릭합니다.
 
-![Azure 포털](./media/active-directory-saas-workday-inbound-tutorial/WD_2.PNG)
+![Azure portal](./media/active-directory-saas-workday-inbound-tutorial/WD_2.PNG)
 
 **아래는 몇 가지 일반적인 식을 사용한 Workday와 Active Directory 간의 특성 매핑을 보여주는 예입니다.**
 
--   parentDistinguishedName AD 특성에 매핑되는 식을 사용하여 하나 이상의 Workday 원본 특성에 따라 특정 OU에 사용자를 프로비전할 수 있습니다. 이 예에서는 Workday의 도시 데이터에 따라 사용자를 여러 OU에 배치합니다.
+-   parentDistinguishedName 특성에 매핑되는 식을 사용하여 하나 이상의 Workday 원본 특성에 따라 다른 OU에 사용자를 프로비전할 수 있습니다. 이 예제에서는 도시에 따라 사용자를 다른 OU에 배치합니다.
 
--   userPrincipalName AD 특성에 매핑되는 식은 firstName.LastName@contoso.com의 UPN을 만듭니다. 또한 잘못된 특수 문자를 바꿉니다.
+-   도메인 접미사가 있는 Workday 사용자 ID를 연결하여 Active Directory의 userPrincipalName 특성을 생성합니다.
 
--   [식을 쓰는 방법에 대한 설명서는 여기](active-directory-saas-writing-expressions-for-attribute-mappings.md)
+-   [식 작성에 대한 설명서는 여기에 있습니다](active-directory-saas-writing-expressions-for-attribute-mappings.md). 여기에는 특수 문자를 제거하는 방법에 대한 예제가 포함되어 있습니다.
 
   
 | WORKDAY 특성 | ACTIVE DIRECTORY 특성 |  ID 일치 여부 | 만들기/업데이트 |
 | ---------- | ---------- | ---------- | ---------- |
-|  **WorkerID**  |  EmployeeID | **예** | 만들기 작업 시에만 기록 | 
-|  **Municipality**   |   l   |     | 만들기 + 업데이트 |
-|  **Company**         | company   |     |  만들기 + 업데이트 |
-|  **CountryReferenceTwoLetter**      |   co |     |   만들기 + 업데이트 |
-| **CountryReferenceTwoLetter**    |  C  |     |         만들기 + 업데이트 |
-| **SupervisoryOrganization**  | department  |     |  만들기 + 업데이트 |
-|  **PreferredNameData**  |  displayName |     |   만들기 + 업데이트 |
-| **EmployeeID**    |  cn    |   |   만들기 작업 시에만 기록 |
-| **Fax**      | facsimileTelephoneNumber     |     |    만들기 + 업데이트 |
-| **FirstName**   | givenName       |     |    만들기 + 업데이트 |
+| **WorkerID**  |  EmployeeID | **예** | 만들기 작업 시에만 기록 | 
+| **UserID**    |  cn    |   |   만들기 작업 시에만 기록 |
+| **Join("@",[UserID], "contoso.com")**   | userPrincipalName     |     | 만들기 작업 시에만 기록 
+| **Replace(Mid(Replace(\[UserID\], , "(\[\\\\/\\\\\\\\\\\\\[\\\\\]\\\\:\\\\;\\\\|\\\\=\\\\,\\\\+\\\\\*\\\\?\\\\&lt;\\\\&gt;\])", , "", , ), 1, 20), , "([\\\\.)\*\$](file:///\\.)*$)", , "", , )**      |    sAMAccountName            |     |         만들기 작업 시에만 기록 |
 | **Switch(\[Active\], , "0", "True", "1",)** |  accountDisabled      |     | 만들기 + 업데이트 |
-| **Mobile**  |    mobile       |     |       만들기 작업 시에만 기록 |
-| **EmailAddress**    | mail    |     |     만들기 + 업데이트 |
+| **FirstName**   | givenName       |     |    만들기 + 업데이트 |
+| **LastName**   |   sn   |     |  만들기 + 업데이트 |
+| **PreferredNameData**  |  displayName |     |   만들기 + 업데이트 |
+| **Company**         | company   |     |  만들기 + 업데이트 |
+| **SupervisoryOrganization**  | department  |     |  만들기 + 업데이트 |
 | **ManagerReference**   | manager  |     |  만들기 + 업데이트 |
+| **BusinessTitle**   |  title     |     |  만들기 + 업데이트 | 
+| **AddressLineData**    |  streetAddress  |     |   만들기 + 업데이트 |
+| **Municipality**   |   l   |     | 만들기 + 업데이트 |
+| **CountryReferenceTwoLetter**      |   co |     |   만들기 + 업데이트 |
+| **CountryReferenceTwoLetter**    |  C  |     |         만들기 + 업데이트 |
+| **CountryRegionReference** |  st     |     | 만들기 + 업데이트 |
 | **WorkSpaceReference** | physicalDeliveryOfficeName    |     |  만들기 + 업데이트 |
 | **PostalCode**  |   postalCode  |     | 만들기 + 업데이트 |
-| **LocalReference** |  preferredLanguage  |     |  만들기 + 업데이트 |
-| **Replace(Mid(Replace(\[EmployeeID\], , "(\[\\\\/\\\\\\\\\\\\\[\\\\\]\\\\:\\\\;\\\\|\\\\=\\\\,\\\\+\\\\\*\\\\?\\ \\&lt;\\\\&gt;\])", , "", , ), 1, 20), , "([\\\\.) \*\$](file:///\\.) *$)", , "", , )**      |    sAMAccountName            |     |         만들기 작업 시에만 기록 |
-| **LastName**   |   sn   |     |  만들기 + 업데이트 |
-| **CountryRegionReference** |  st     |     | 만들기 + 업데이트 |
-| **AddressLineData**    |  streetAddress  |     |   만들기 + 업데이트 |
-| **PrimaryWorkTelephone**  |  telephoneNumber   |     | 만들기 작업 시에만 기록 |
-| **BusinessTitle**   |  title     |     |  만들기 + 업데이트 |
-| **Join("@",Replace(Replace(Replace(Replace(Replace(Replace(Replace( Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace( Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Replace(Join(".", [FirstName], [LastName]), , "([Øø])", , "oe", , ), , "[Ææ]", , "ae", , ), , "([äãàâãåáąÄÃÀÂÃÅÁĄA])", , "a", , ), , "([B])", , "b", , ), , "([CçčćÇČĆ])", , "c", , ), , "([ďĎD])", , "d", , ), , "([ëèéêęěËÈÉÊĘĚE])", , "e", , ), , "([F])", , "f", , ), , "([G])", , "g", , ), , "([H])", , "h", , ), , "([ïîìíÏÎÌÍI])", , "i", , ), , "([J])", , "j", , ), , "([K])", , "k", , ), , "([ľłŁĽL])", , "l", , ), , "([M])", , "m", , ), , "([ñńňÑŃŇN])", , "n", , ), , "([öòőõôóÖÒŐÕÔÓO])", , "o", , ), , "([P])", , "p", , ), , "([Q])", , "q", , ), , "([řŘR])", , "r", , ), , "([ßšśŠŚS])", , "s", , ), , "([TŤť])", , "t", , ), , "([üùûúůűÜÙÛÚŮŰU])", , "u", , ), , "([V])", , "v", , ), , "([W])", , "w", , ), , "([ýÿýŸÝY])", , "y", , ), , "([źžżŹŽŻZ])", , "z", , ), " ", , , "", , ), "contoso.com")**   | userPrincipalName     |     | 만들기 + 업데이트                                                   
+| **PrimaryWorkTelephone**  |  telephoneNumber   |     | 만들기 + 업데이트 |
+| **Fax**      | facsimileTelephoneNumber     |     |    만들기 + 업데이트 |
+| **Mobile**  |    mobile       |     |       만들기 + 업데이트 |
+| **LocalReference** |  preferredLanguage  |     |  만들기 + 업데이트 |                                               
 | **Switch(\[Municipality\], "OU=Standard Users,OU=Users,OU=Default,OU=Locations,DC=contoso,DC=com", "Dallas", "OU=Standard Users,OU=Users,OU=Dallas,OU=Locations,DC=contoso,DC=com", "Austin", "OU=Standard Users,OU=Users,OU=Austin,OU=Locations,DC=contoso,DC=com", "Seattle", "OU=Standard Users,OU=Users,OU=Seattle,OU=Locations,DC=contoso,DC=com", “London", "OU=Standard Users,OU=Users,OU=London,OU=Locations,DC=contoso,DC=com")**  | parentDistinguishedName     |     |  만들기 + 업데이트 |
   
 ### <a name="part-3-configure-the-on-premises-synchronization-agent"></a>3부: 온-프레미스 동기화 에이전트 구성
@@ -365,9 +398,9 @@ Active Directory 온-프레미스로 프로비전하려면 원하는 Active Dire
 
 **명령 #1**
 
-> cd C:\\Program Files\\Microsoft Azure Active Directory Synchronization Agent\\Modules\\AADSyncAgent
+> cd "C:\Program Files\Microsoft Azure AD Connect Provisioning Agent\Modules\AADSyncAgent" Agent\\Modules\\AADSyncAgent
 
-> import-module AADSyncAgent.psd1
+> Import-Module "C:\Program Files\Microsoft Azure AD Connect Provisioning Agent\Modules\AADSyncAgent\AADSyncAgent.psd1"
 
 **명령 #2**
 
@@ -381,6 +414,13 @@ Active Directory 온-프레미스로 프로비전하려면 원하는 Active Dire
 > Add-ADSyncAgentAzureActiveDirectoryConfiguration
 
 * 입력: Azure AD 테넌트의 전역 관리 사용자 이름 및 암호
+
+>[!IMPORTANT]
+>현재 사용자 지정 도메인을 사용하는 경우 작동하지 않는 전역 관리자 자격 증명으로 알려진 문제가 있습니다(예: admin@contoso.com). 해결 방법으로 onmicrosoft.com 도메인으로 전역 관리자 계정을 만들고 사용합니다(예: admin@contoso.onmicrosoft.com).
+
+>[!IMPORTANT]
+>현재 다단계 인증을 사용하도록 설정하는 경우 작동하지 않는 전역 관리자 자격 증명으로 알려진 문제가 있습니다. 해결 방법으로 전역 관리자에 대한 다단계 인증을 사용하지 않도록 설정합니다.
+
 
 **명령 #4**
 
@@ -410,22 +450,54 @@ Active Directory 온-프레미스로 프로비전하려면 원하는 Active Dire
 
 > net start aadsyncagent
 
+>[!TIP]
+>Powershell에서 "net" 명령 외에도 **Services.msc**를 사용하여 동기화 에이전트 서비스를 시작 및 중지할 수 있습니다. Powershell 명령을 실행할 때 오류가 발생하는 경우 **Microsoft Azure AD Connect Provisioning Agent**가 **Services.msc**에서 실행되고 있는지 확인합니다.
+
+![Services](./media/active-directory-saas-workday-inbound-tutorial/Services.png)  
+
+**유럽 연합에서 고객에 대한 추가 구성**
+
+Azure Active Directory 테넌트가 EU 데이터 센터 중 하나에 있으면 아래 추가 단계를 수행합니다.
+
+1. **Services.msc**를 열고 **Microsoft Azure AD Connect Provisioning Agent** 서비스를 중지합니다.
+2. 에이전트 설치 폴더(예: C:\Program Files\Microsoft Azure AD Connect Provisioning Agent)로 이동합니다.
+3. 텍스트 편집기에서 **SyncAgnt.exe.config**를 엽니다.
+4. https://manage.hub.syncfabric.windowsazure.com/Management을 **https://eu.manage.hub.syncfabric.windowsazure.com/Management**으로 바꿉니다.
+5. https://provision.hub.syncfabric.windowsazure.com/Provisioning을 **https://eu.provision.hub.syncfabric.windowsazure.com/Provisioning**으로 바꿉니다.
+6. **SyncAgnt.exe.config** 파일을 저장합니다.
+7. **Services.msc**를 열고 **Microsoft Azure AD Connect Provisioning Agent** 서비스를 시작합니다.
+
+**에이전트 문제 해결**
+
+에이전트를 호스팅하는 Windows Server 컴퓨터의 [Windows 이벤트 로그](https://technet.microsoft.com/library/cc722404(v=ws.11).aspx)는 에이전트에서 수행하는 모든 작업에 대한 이벤트를 포함합니다. 이러한 이벤트를 보려면:
+    
+1. **Eventvwr.msc**를 엽니다.
+2. **Windows 로그 > 응용 프로그램**을 선택합니다.
+3. 원본 **AADSyncAgent** 아래에서 기록된 모든 이벤트를 봅니다. 
+4. 오류 및 경고를 확인합니다.
+
+Powershell 명령에서 제공하는 Active Directory 또는 Azure Active Directory 자격 증명 중 하나에 사용 권한 문제가 있는 경우 다음과 같은 오류가 표시됩니다. 
+    
+![이벤트 로그](./media/active-directory-saas-workday-inbound-tutorial/Windows_Event_Logs.png) 
+
+
 ### <a name="part-4-start-the-service"></a>4부: 서비스 시작
-1-3부를 완료했으면 Azure 관리 포털에서 프로비전 서비스를 다시 시작할 수 있습니다.
+1-3부를 완료했으면 Azure Portal에서 프로비전 서비스를 다시 시작할 수 있습니다.
 
 1.  **프로비전** 탭에서 **프로비전 상태**를 **켜기**로 설정합니다.
 
-2. **Save**를 클릭합니다.
+2. **저장**을 클릭합니다.
 
 3. 그러면 초기 동기화가 시작되며, Workday에 있는 사용자 수에 따라 동기화에 걸리는 시간이 달라질 수 있습니다.
 
-4. Workday에서 어떤 사용자를 읽은 후 Active Directory에 추가 또는 업데이트되는지와 같은 개별 동기화 이벤트는 **감사 로그** 탭에서 볼 수 있습니다. **[감사 로그를 읽는 방법에 대한 자세한 지침은 프로비전 보고 가이드 참조](active-directory-saas-provisioning-reporting.md)**
+4. 언제든지 Azure Portal에서 **감사 로그** 탭을 확인하여 프로비전 서비스에서 수행한 작업을 확인합니다. 감사 로그는 Workday에서 어떤 사용자를 읽은 후 Active Directory에 추가 또는 업데이트되는지와 같은 프로비전 서비스에서 수행한 모든 개별 동기화 이벤트를 나열합니다. **[감사 로그를 읽는 방법에 대한 자세한 지침은 프로비전 보고 가이드 참조](active-directory-saas-provisioning-reporting.md)**
 
-5.  에이전트 컴퓨터의 Windows 응용 프로그램 로그에는 에이전트를 통해 수행된 모든 작업이 표시됩니다.
+5.  새로운 오류나 경고에 대해 에이전트를 호스팅하는 Windows Server 컴퓨터에서 [Windows 이벤트 로그](https://technet.microsoft.com/library/cc722404(v=ws.11).aspx)를 확인합니다. 이러한 이벤트는 서버에서 **Eventvwr.msc**를 시작하고 **Windows 로그 > 응용 프로그램**을 선택하여 볼 수 있습니다. 모든 프로비전 관련 메시지는 원본 **AADSyncAgent** 아래에서 로깅됩니다. 
+    
 
-6. 작업이 완료되면 아래와 같이  **프로비전** 탭에 감사 요약 보고서가 작성됩니다.
+6. 작업이 완료되면 아래와 같이 **프로비전** 탭에 감사 요약 보고서가 작성됩니다.
 
-![Azure 포털](./media/active-directory-saas-workday-inbound-tutorial/WD_3.PNG)
+![Azure portal](./media/active-directory-saas-workday-inbound-tutorial/WD_3.PNG)
 
 
 ## <a name="configuring-user-provisioning-to-azure-active-directory"></a>Azure Active Directory로 사용자 프로비전 구성
@@ -448,7 +520,7 @@ Azure AD Connect 설정에 대한 자세한 지침은 [Azure AD Connect 설명�
 
 **클라우드 전용 사용자에 대한 Workday-Azure Active Directory 프로비전을 구성하려면:**
 
-1.  <https://portal.azure.com>으로 이동합니다.
+1.  <https://portal.azure.com>로 이동합니다.
 
 2.  왼쪽 탐색 모음에서 **Azure Active Directory**를 선택합니다.
 
@@ -468,7 +540,7 @@ Azure AD Connect 설정에 대한 자세한 지침은 [Azure AD Connect 설명�
 
    * **관리자 암호 –** Workday 통합 시스템 계정의 암호를 입력합니다.
 
-   * **테넌트 URL –** 해당 테넌트의 Workday 웹 서비스 끝점에 대한 URL을 입력합니다. https://wd3-impl-services1.workday.com/ccx/service/contoso4와 같은 형태여야 하며, 여기서 contoso4를 올바른 테넌트 이름으로 바꾸고 wd3-impl을 올바른 환경 문자열로 바꾸면 됩니다(필요한 경우).
+   * **테넌트 URL –** 해당 테넌트의 Workday 웹 서비스 끝점에 대한 URL을 입력합니다. https://wd3-impl-services1.workday.com/ccx/service/contoso4와 같은 형태여야 하며, 여기서 contoso4를 올바른 테넌트 이름으로 바꾸고 wd3-impl을 올바른 환경 문자열로 바꾸면 됩니다. 이 URL을 알 수 없는 경우 Workday 통합 파트너와 협력하거나 지원 담당자에게 문의하여 사용할 올바른 URL을 확인하세요.
 
    * **알림 이메일 –** 이메일 주소를 입력하고 "오류가 발생하면 이메일 보내기" 확인란을 선택합니다.
 
@@ -513,7 +585,7 @@ Azure AD Connect 설정에 대한 자세한 지침은 [Azure AD Connect 설명�
 
       * **식** – 하나 이상의 Workday 특성에 따라 AD 특성에 사용자 지정 값을 쓸 수 있습니다. [자세한 내용은 식에 대한 이 문서를 참조하세요](active-directory-saas-writing-expressions-for-attribute-mappings.md).
 
-   * **원본 특성** - Workday의 사용자 특성입니다.
+   * **원본 특성** - Workday의 사용자 특성입니다. 원하는 특성이 없는 경우 [Workday 사용자 특성 목록 사용자 지정](#customizing-the-list-of-workday-user-attributes)을 참조하세요.
 
    * **기본값** – 선택 사항입니다. 원본 특성의 값이 비어 있는 경우 매핑에서 이 값을 대신 씁니다.
             이 값을 비워두는 것이 가장 일반적인 구성입니다.
@@ -537,13 +609,13 @@ Azure AD Connect 설정에 대한 자세한 지침은 [Azure AD Connect 설명�
 
 1.  **프로비전** 탭에서 **프로비전 상태**를 **켜기**로 설정합니다.
 
-2. **Save**를 클릭합니다.
+2. **저장**을 클릭합니다.
 
 3. 그러면 초기 동기화가 시작되며, Workday에 있는 사용자 수에 따라 동기화에 걸리는 시간이 달라질 수 있습니다.
 
 4. 개별 동기화 이벤트는 **감사 로그** 탭에서 볼 수 있습니다. **[감사 로그를 읽는 방법에 대한 자세한 지침은 프로비전 보고 가이드 참조](active-directory-saas-provisioning-reporting.md)**
 
-5. 작업이 완료되면 아래와 같이  **프로비전** 탭에 감사 요약 보고서가 작성됩니다.
+5. 작업이 완료되면 아래와 같이 **프로비전** 탭에 감사 요약 보고서가 작성됩니다.
 
 
 ## <a name="configuring-writeback-of-email-addresses-to-workday"></a>Workday로 이메일 주소 쓰기 저장 구성
@@ -553,7 +625,7 @@ Azure AD Connect 설정에 대한 자세한 지침은 [Azure AD Connect 설명�
 
 **Workday에서 Active Directory로의 프로비전을 구성하려면:**
 
-1.  <https://portal.azure.com>으로 이동
+1.  <https://portal.azure.com>으로 이동합니다.
 
 2.  왼쪽 탐색 모음에서 **Azure Active Directory**를 선택합니다.
 
@@ -598,24 +670,154 @@ Azure AD Connect 설정에 대한 자세한 지침은 [Azure AD Connect 설명�
 
 1.  **프로비전** 탭에서 **프로비전 상태**를 **켜기**로 설정합니다.
 
-2. **Save**를 클릭합니다.
+2. **저장**을 클릭합니다.
 
 3. 그러면 초기 동기화가 시작되며, Workday에 있는 사용자 수에 따라 동기화에 걸리는 시간이 달라질 수 있습니다.
 
 4. 개별 동기화 이벤트는 **감사 로그** 탭에서 볼 수 있습니다. **[감사 로그를 읽는 방법에 대한 자세한 지침은 프로비전 보고 가이드 참조](active-directory-saas-provisioning-reporting.md)**
 
-5. 작업이 완료되면 아래와 같이  **프로비전** 탭에 감사 요약 보고서가 작성됩니다.
+5. 작업이 완료되면 아래와 같이 **프로비전** 탭에 감사 요약 보고서가 작성됩니다.
+
+
+## <a name="customizing-the-list-of-workday-user-attributes"></a>Workday 사용자 특성 목록 사용자 지정
+Active Directory 및 Azure AD 둘 다에 대한 Workday 프로비저닝 앱에는 선택할 수 있는 Workday사용자 특성의 기본 목록이 포함되어 있습니다. 그러나 이러한 목록은 포괄적이지 않습니다. Workday는 Workday 테넌트에 고유할 수 있는 수백 개의 가능한 사용자 특성을 지원합니다. 
+
+Azure AD 프로비저닝 서비스는 인사 API의[Get_Workers](https://community.workday.com/sites/default/files/file-hosting/productionapi/Human_Resources/v21.1/Get_Workers.html) 작업에 노출되는 특성을 포함하도록 목록 또는 Workday 특성을 사용자 지정하는 기능을 지원합니다.
+
+이를 수행하려면 [Workday Studio](https://community.workday.com/studio-download)를 사용하여 사용하려는 특성을 나타내는 XPath 식을 추출한 다음, Azure Portal에서 고급 특성 편집기를 사용하여 프로비저닝 구성에 추가해야 합니다.
+
+**Workday 사용자 특성에 대한 XPath 식을 검색하려면**
+
+1. [Workday Studio](https://community.workday.com/studio-download)를 다운로드하고 설치합니다. 설치 관리자에 액세스하려면 Workday 커뮤니티 계정이 필요합니다.
+
+2. 이 URL에서 Workday Human_Resources WDSL 파일을 다운로드합니다. https://community.workday.com/sites/default/files/file-hosting/productionapi/Human_Resources/v21.1/Human_Resources.wsdl
+
+3. Workday Studio를 시작합니다.
+
+4. 명령 모음에서 **Workday > 테스터에서 웹 서비스 테스트** 옵션을 선택합니다.
+
+5. **외부**를 선택하고 2단계에서 다운로드한 Human_Resources WSDL 파일을 선택합니다.
+
+    ![Workday Studio](./media/active-directory-saas-workday-inbound-tutorial/WDstudio1.PNG)
+
+6. "IMPL-CC"를 실제 인스턴스 유형으로, "TENANT"를 실제 테넌트 이름으로 바꾸어 **위치** 필드를 `https://IMPL-CC.workday.com/ccx/service/TENANT/Human_Resources`로 설정합니다.
+
+7. **작업**을 **Get_Workers**로 설정합니다.
+
+8.  요청/응답 창 아래의 작은 **구성** 링크를 클릭하여 Workday 자격 증명을 설정합니다. **인증**을 선택하고 Workday 통합 시스템 계정의 사용자 이름 및 암호를 입력합니다. 사용자 이름 형식을 name@tenant로 지정하고 **WS-Security UsernameToken** 옵션을 선택된 상태로 둡니다.
+
+    ![Workday Studio](./media/active-directory-saas-workday-inbound-tutorial/WDstudio2.PNG)
+
+9. **확인**을 선택합니다.
+
+10. **요청** 창에서 아래의 XML을 붙여 넣고 **Employee_ID**를 Workday 테넌트에 있는 실제 사용자의 직원 ID로 설정합니다. 추출하려는 특성으로 채워진 사용자를 선택합니다.
+
+    ```
+    <?xml version="1.0" encoding="UTF-8"?>
+    <env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <env:Body>
+        <wd:Get_Workers_Request xmlns:wd="urn:com.workday/bsvc" wd:version="v21.1">
+          <wd:Request_References wd:Skip_Non_Existing_Instances="true">
+            <wd:Worker_Reference>
+              <wd:ID wd:type="Employee_ID">21008</wd:ID>
+            </wd:Worker_Reference>
+          </wd:Request_References>
+          <wd:Response_Group>
+            <wd:Include_Reference>true</wd:Include_Reference>
+            <wd:Include_Personal_Information>true</wd:Include_Personal_Information>
+            <wd:Include_Employment_Information>true</wd:Include_Employment_Information>
+            <wd:Include_Management_Chain_Data>true</wd:Include_Management_Chain_Data>
+            <wd:Include_Organizations>true</wd:Include_Organizations>
+            <wd:Include_Reference>true</wd:Include_Reference>
+            <wd:Include_Transaction_Log_Data>true</wd:Include_Transaction_Log_Data>
+            <wd:Include_Photo>true</wd:Include_Photo>
+            <wd:Include_User_Account>true</wd:Include_User_Account>
+            <wd:Include_Roles>true</wd:Include_Roles>
+          </wd:Response_Group>
+        </wd:Get_Workers_Request>
+      </env:Body>
+    </env:Envelope>
+    ```
+ 
+11. **요청 보내기**(녹색 화살표)를 클릭하여 명령을 실행합니다. 성공한 경우, **응답** 창에 응답이 표시됩니다. 응답에서 입력한 사용자 ID의 데이터를 확인하여 오류가 없는지 검토합니다.
+
+12. 성공한 경우 **응답** 창의 XML을 복사한 후 XML 파일로 저장합니다.
+
+13. Workday Studio의 명령 모음에서 **파일 > 파일 열기...** 를 선택하고 방금 저장한 XML 파일을 엽니다. 그러면 Workday Studio XML 편집기에서 열립니다.
+
+    ![Workday Studio](./media/active-directory-saas-workday-inbound-tutorial/WDstudio3.PNG)
+
+14. 파일 트리에서 **/env:Envelope > env:Body > wd:Get_Workers_Response > wd:Response_Data > wd:Worker**로 이동하여 사용자의 데이터를 찾습니다. 
+
+15. **wd:Worker** 아래에서 추가하려는 특성을 찾은 후 선택합니다.
+
+16. **문서 경로** 필드에서 선택한 특성에 대한 XPath 식을 복사합니다.
+
+17. 복사한 식에서 **/env:Envelope/env:Body/wd:Get_Workers_Response/wd:Response_Data/** 접두사를 제거합니다. 
+
+18. 복사한 식의 마지막 항목이 노드(예: "/wd:Birth_Date")인 경우 식 끝에 **/text()** 를 붙입니다. 마지막 항목이 특성(예: "/@wd:type")인 경우에는 이 작업이 필요하지 않습니다.
+
+19. 결과는 `wd:Worker/wd:Worker_Data/wd:Personal_Data/wd:Birth_Date/text()`와 같아야 합니다. 이 내용을 Azure Portal에 복사해야 합니다.
+
+
+**프로비저닝 구성에 사용자 지정 Workday 사용자 특성을 추가하려면**
+
+1. [Azure Portal](https://portal.azure.com)을 시작하고 이 자습서 앞부분에 설명된 것처럼 Workday 프로비저닝 응용 프로그램의 프로비저닝 섹션으로 이동합니다.
+
+2. **프로비전 상태**를 **해제**로 설정하고 **저장**을 선택합니다. 이렇게 하면 준비가 되었을 때만 변경 내용을 적용할 수 있게 됩니다.
+
+3. **매핑**에서 **온-프레미스에 관리자 동기화**(또는 **Azure AD에 작업자 동기화**)를 선택합니다.
+
+4. 다음 화면 아래로 스크롤하여 **고급 옵션 표시**를 선택합니다.
+
+5. **Workday에 대한 특성 목록 편집**을 선택합니다.
+
+    ![Workday Studio](./media/active-directory-saas-workday-inbound-tutorial/WDstudio_AAD1.PNG)
+
+6. 특성 목록에서 입력 필드가 있는 맨 아래로 스크롤합니다.
+
+7. **이름**으로 해당 특성의 표시 이름을 입력합니다.
+
+8. **형식**에 대해 특성에 해당하는 형식(**문자열**이 가장 일반적임)을 선택합니다.
+
+9. **API 식**에 대해 Workday Studio에서 복사한 XPath 식을 입력합니다. 예제: `wd:Worker/wd:Worker_Data/wd:Personal_Data/wd:Birth_Date/text()`
+
+10. **특성 추가**를 선택합니다.
+
+    ![Workday Studio](./media/active-directory-saas-workday-inbound-tutorial/WDstudio_AAD2.PNG)
+
+11. 위의 **저장**을 선택하고 대화 상자에서 **예**를 선택합니다. 특성 매핑 화면이 계속 열려 있으면 닫습니다.
+
+12. 주 **프로비전** 탭으로 돌아가 **온-프레미스에 작업자 동기화**(또는 **Azure AD에 작업자 동기화**)를 선택합니다.
+
+13. **새 매핑 추가**를 선택합니다.
+
+14. 이제 새 사용자 특성이 **원본 특성** 목록에 표시됩니다.
+
+15. 필요에 따라 새 사용자 특성에 대한 매핑을 추가합니다.
+
+16. 완료되면 **프로비전 상태**를 다시 **설정**으로 지정하고 저장합니다.
+
 
 ## <a name="known-issues"></a>알려진 문제
 
-* **유럽 로캘의 감사 로그** - 이 기술 미리 보기가 릴리스된 날짜를 기준으로, Azure AD 테넌트가 유럽 데이터 센터에 상주하는 경우 Workday 커넥터 앱의 [감사 로그](active-directory-saas-provisioning-reporting.md)가 [Azure Portal](https://portal.azure.com)에 표시되지 않는 알려진 문제가 있습니다. 이 문제에 대한 픽스가 곧 출시될 예정입니다. 가까운 시일 안에 이 페이지를 다시 방문하여 업데이트를 확인하세요. 
+* **Add-ADSyncAgentAzureActiveDirectoryConfiguration** Powershell 명령을 실행할 때 현재 사용자 지정 도메인을 사용하는 경우 작동하지 않는 전역 관리자 자격 증명으로 알려진 문제가 있습니다(예: admin@contoso.com). 해결 방법으로 Azure AD에서 onmicrosoft.com 도메인으로 전역 관리자 계정을 만들고 사용합니다(예: admin@contoso.onmicrosoft.com).
 
-## <a name="additional-resources"></a>추가 리소스
-* [자습서: Workday와 Azure Active Directory 간 Single Sign-On 구성](active-directory-saas-workday-tutorial.md)
-* [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* 유럽 연합에 있는 Azure AD 테넌트에 표시되지 않는 감사 로그와 관련된 이전 문제는 해결되었습니다. 그러나 EU의 Azure AD 테넌트에 추가 에이전트가 구성이 필요합니다. 자세한 내용은 [3부: 온-프레미스 동기화 에이전트 구성](#Part 3: Configure the on-premises synchronization agent)을 참조하세요.
+
+## <a name="gdpr-information"></a>GDPR 정보
+
+[GDPR(일반 데이터 보호 규정)](http://ec.europa.eu/justice/data-protection/reform/index_en.htm)은 EU(유럽 연합)의 데이터 보호 및 프라이버시 법률입니다. GDPR은 회사, 정부 기관, 비영리 단체 및 기타 조직에 대해 상품 및 서비스를 제공하거나 EU 거주자와 연결된 데이터를 수집하고 분석하는 규칙을 수립합니다. 
+
+Microsoft의 GDPR 스토리에 대한 자세한 내용은 [서비스 약관](https://www.microsoftvolumelicensing.com/DocumentSearch.aspx?Mode=3&DocumentTypeId=31)을 참조하세요.
+
+Active Directory에 대한 Workday 프로비전 솔루션에는 도메인에 가입된 서버에 동기화 에이전트를 설치해야 하며 이 에이전트는 개인 식별 정보를 포함할 수 있는 로그를 **Windows 이벤트 로그**에 만듭니다.
+
+Windows 이벤트 로그에 대한 데이터 보존을 구성하는 방법에 대한 내용은 [이벤트 로그에 대한 설정](https://technet.microsoft.com/library/cc952132.aspx)을 참조하세요. Windows 이벤트 로그에 대한 일반적인 정보는 [이 문서](https://msdn.microsoft.com/library/windows/desktop/aa385772.aspx)를 참조하세요.
+
 
 ## <a name="next-steps"></a>다음 단계
 
 * [프로비전 활동에 대한 로그를 검토하고 보고서를 받아 보는 방법을 살펴봅니다](https://docs.microsoft.com/azure/active-directory/active-directory-saas-provisioning-reporting).
-
+* [Workday와 Azure Active Directory 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.](active-directory-saas-workday-tutorial.md)
+* [Azure Active Directory와 다른 SaaS 응용 프로그램을 통합하는 방법을 알아봅니다.](active-directory-saas-tutorial-list.md)

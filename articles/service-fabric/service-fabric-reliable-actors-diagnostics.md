@@ -1,6 +1,6 @@
 ---
-title: "행위자 진단 및 모니터링 | Microsoft Docs"
-description: "이 문서에서는 서비스 패브릭 Reliable Actors 런타임에서 내보낸 이벤트 및 성능 카운터를 포함하여 패브릭 행위자 런타임에 있는 진단 및 성능 모니터링 기능을 설명합니다."
+title: 행위자 진단 및 모니터링 | Microsoft Docs
+description: 이 문서에서는 서비스 패브릭 Reliable Actors 런타임에서 내보낸 이벤트 및 성능 카운터를 포함하여 패브릭 행위자 런타임에 있는 진단 및 성능 모니터링 기능을 설명합니다.
 services: service-fabric
 documentationcenter: .net
 author: abhishekram
@@ -9,18 +9,16 @@ editor: vturecek
 ms.assetid: 1c229923-670a-4634-ad59-468ff781ad18
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 06/29/2017
+ms.date: 10/26/2017
 ms.author: abhisram
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 1500c02fa1e6876b47e3896c40c7f3356f8f1eed
-ms.openlocfilehash: 1c53a6bbe0152f6f2b9666e6059af7c6d02e481f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/30/2017
-
-
+ms.openlocfilehash: 9b4825be7ce7fb05b109310f21cd65cfe3819ae8
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="diagnostics-and-performance-monitoring-for-reliable-actors"></a>Reliable Actors에 대한 진단 및 성능 모니터링
 Reliable Actors 런타임에서는 [EventSource](https://msdn.microsoft.com/library/system.diagnostics.tracing.eventsource.aspx) 이벤트 및 [성능 카운터](https://msdn.microsoft.com/library/system.diagnostics.performancecounter.aspx)를 내보냅니다. 이러한 정보는 런타임이 어떻게 작동하고 있는지 파악하여 문제를 해결하고 성능을 모니터링하는 데 도움이 됩니다.
@@ -174,4 +172,3 @@ Reliable Actors 런타임은 행위자 활성화 및 비활성화와 관련하�
 * [행위자 API 참조 설명서](https://msdn.microsoft.com/library/azure/dn971626.aspx)
 * [샘플 코드](https://github.com/Azure/servicefabric-samples)
 * [PerfView의 EventSource 공급자](https://blogs.msdn.microsoft.com/vancem/2012/07/09/introduction-tutorial-logging-etw-events-in-c-system-diagnostics-tracing-eventsource/)
-

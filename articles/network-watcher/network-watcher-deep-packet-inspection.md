@@ -3,7 +3,7 @@ title: "Azure Network Watcher로 패킷 검사 | Microsoft Docs"
 description: "이 문서에서는 Network Watcher를 사용하여 VM에서 수집한 패킷에 심도 있는 검사를 수행하는 방법을 설명합니다."
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
 editor: 
 ms.assetid: 7b907d00-9c35-40f5-a61e-beb7b782276f
@@ -13,14 +13,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-translationtype: Human Translation
-ms.sourcegitcommit: 0d8472cb3b0d891d2b184621d62830d1ccd5e2e7
-ms.openlocfilehash: 62fa6a6d0cccc5545b94d4ae167f2fcc7e4cd0de
-ms.lasthandoff: 03/21/2017
-
+ms.author: jdial
+ms.openlocfilehash: 1ad6ca4abe73336ce9ce3539fdaf2a9d7dd23fa6
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="packet-inspection-with-azure-network-watcher"></a>Azure Network Watcher로 패킷 검사
 
 Network Watcher의 패킷 캡처 기능을 사용하여 포털, PowerShell, CLI, SDK와 REST API를 통해 프로그래밍 방식으로 Azure VM에서 캡처 세션을 시작 및 관리할 수 있습니다. 패킷 캡처를 통해 쉽게 사용 가능한 형식으로 정보를 제공하여 패킷 수준 데이터가 필요한 시나리오를 해결할 수 있습니다. 데이터 검사에 무료로 제공되는 도구를 활용하여 VM 간에 전송되는 통신을 검토하고 네트워크 트래픽에 대한 정보를 얻을 수 있습니다. 패킷 캡처 데이터를 사용하는 예로는, 네트워크 또는 응용 프로그램 문제 조사, 네트워크 악용 및 침입 시도 감지 또는 규정 준수 유지 관리가 있습니다. 이 문서에서는 널리 사용되는 오픈 소스 도구를 사용하여 Network Watcher에서 제공하는 패킷 캡처 파일을 여는 방법을 보여 줍니다. 연결 대기 시간 계산, 비정상적인 트래픽 식별 및 네트워킹 통계를 검사하는 방법을 보여 주는 예제도 제공합니다.
@@ -135,7 +134,6 @@ tcp.port == 111
 [6]: ./media/network-watcher-deep-packet-inspection/figure6.png
 [7]: ./media/network-watcher-deep-packet-inspection/figure7.png
 [8]: ./media/network-watcher-deep-packet-inspection/figure8.png
-
 
 
 

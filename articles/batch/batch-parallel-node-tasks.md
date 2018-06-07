@@ -1,31 +1,29 @@
 ---
-title: "병렬로 태스크를 실행하여 효율적으로 계산 리소스 사용 - Azure Batch | Microsoft Docs"
-description: "Azure 배치 풀의 각 노드에서 동시 작업을 실행하고 더 적은 수의 계산 노드를 사용하여 효율성은 높이고 비용은 낮춥니다."
+title: 병렬로 태스크를 실행하여 효율적으로 계산 리소스 사용 - Azure Batch | Microsoft Docs
+description: Azure Batch 풀의 각 노드에서 동시 작업을 실행하고 더 적은 수의 계산 노드를 사용하여 효율성은 높이고 비용은 낮춥니다.
 services: batch
 documentationcenter: .net
-author: tamram
-manager: timlt
-editor: 
+author: dlepow
+manager: jeconnoc
+editor: ''
 ms.assetid: 538a067c-1f6e-44eb-a92b-8d51c33d3e1a
 ms.service: batch
 ms.devlang: multiple
 ms.topic: article
-ms.tgt_pltfrm: vm-windows
+ms.tgt_pltfrm: ''
 ms.workload: big-compute
 ms.date: 05/22/2017
-ms.author: tamram
+ms.author: danlep
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6b6c548ca1001587e2b40bbe9ee2fcb298f40d72
-ms.openlocfilehash: c4053ded725ad7ab2acc6d5d54e8343ffb961408
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/28/2017
-
-
+ms.openlocfilehash: 5106bbbb073908af7e7e8f045fa6fb60e8a306f4
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="run-tasks-concurrently-to-maximize-usage-of-batch-compute-nodes"></a>동시에 태스크를 실행하여 Batch 계산 노드의 사용량 극대화 
 
-Azure 배치 풀의 각 계산 노드에서 동시에 둘 이상의 작업을 실행하여 풀의 더 작은 수의 노드에서 리소스 사용을 최대화할 수 있습니다. 일부 워크로드의 경우, 작업 시간이 짧아지고 비용이 낮아질 수 있습니다.
+Azure Batch 풀의 각 계산 노드에서 동시에 둘 이상의 작업을 실행하여 풀의 더 작은 수의 노드에서 리소스 사용을 최대화할 수 있습니다. 일부 워크로드의 경우, 작업 시간이 짧아지고 비용이 낮아질 수 있습니다.
 
 일부 시나리오에서는 노드의 모든 리소스를 단일 태스크에 전적으로 사용할 수 있지만 몇 가지 상황에서는 여러 태스크가 이러한 리소스를 공유할 수 있는 이점이 있습니다.
 
@@ -37,12 +35,12 @@ Azure 배치 풀의 각 계산 노드에서 동시에 둘 이상의 작업을 �
 ## <a name="example-scenario"></a>예제 시나리오 
 병렬 태스크 실행의 이점을 보여 주는 한 예로서, 태스크 응용 프로그램에 [Standard\_D1](../cloud-services/cloud-services-sizes-specs.md) 노드로 충분한 CPU 및 메모리 요구 사항이 있다고 가정해 보겠습니다. 하지만 주어진 시간에 작업을 완료하기 위해 이러한 노드가 1,000개 필요합니다.
 
-1개 CPU 코어가 있는 Standard\_D1 노드를 사용하는 대신 각각 16개 코어가 있는 [Standard\_D14](../cloud-services/cloud-services-sizes-specs.md) 노드를 사용하여 병렬 태스크 실행을 구현할 수 있습니다. 따라서 사용되는 *노드 수가 1/16로 줄기 때문에* 필요한 노드 수는 1000개가 아니라 63개입니다. 또한 대규모 응용 프로그램 파일 또는 참조 데이터가 각 노드에 대해 필요한 경우 데이터는 16개의 노드로 복사되기 때문에 작업 기간 및 효율성은 다시 개선됩니다.
+1개 CPU 코어가 있는 Standard\_D1 노드를 사용하는 대신 각각 16개 코어가 있는 [Standard\_D14](../cloud-services/cloud-services-sizes-specs.md) 노드를 사용하여 병렬 태스크 실행을 구현할 수 있습니다. 따라서 사용되는 *노드 수가 1/16로 줄기 때문에* 필요한 노드 수는 1000개가 아니라 63개입니다. 또한 대규모 응용 프로그램 파일 또는 참조 데이터가 각 노드에 대해 필요한 경우 데이터가 63개의 노드로 복사되기 때문에 작업 기간 및 효율성은 다시 개선됩니다.
 
 ## <a name="enable-parallel-task-execution"></a>병렬 작업 실행 사용
 풀 수준에서 병렬 작업 실행을 위해 계산 노드를 구성합니다. Batch .NET 라이브러리를 사용하여 풀을 만들 때 [CloudPool.MaxTasksPerComputeNode][maxtasks_net] 속성을 설정합니다. Batch REST API를 사용하는 경우 풀을 만들 때 요청 본문에 [maxTasksPerNode][rest_addpool] 요소를 설정합니다.
 
-Azure 배치를 사용하면 노드 코어의 최대 4배수의 노드 마다 최대 작업을 설정할 수 있습니다. 예를 들어, 풀이 노드 크기 “Large”로 구성되었다면(4코어) `maxTasksPerNode` 는 16으로 설정될 수 있습니다. 각 노드 크기에 대한 코어 수에 대한 자세한 내용은 [클라우드 서비스에 적합한 크기](../cloud-services/cloud-services-sizes-specs.md)를 참조하세요. 서비스 제한에 대한 자세한 내용은 [Azure 배치 서비스에 대한 할당량 및 제한](batch-quota-limit.md)을 참조하세요.
+Azure Batch를 사용하면 노드 코어의 최대 4배수의 노드 마다 최대 작업을 설정할 수 있습니다. 예를 들어, 풀이 노드 크기 “Large”로 구성되었다면(4코어) `maxTasksPerNode` 는 16으로 설정될 수 있습니다. 각 노드 크기에 대한 코어 수에 대한 자세한 내용은 [Cloud Services에 적합한 크기](../cloud-services/cloud-services-sizes-specs.md)를 참조하세요. 서비스 제한에 대한 자세한 내용은 [Azure Batch 서비스에 대한 할당량 및 제한](batch-quota-limit.md)을 참조하세요.
 
 > [!TIP]
 > 풀에 [자동 크기 조정 수식][enable_autoscaling]을 구성할 때는 `maxTasksPerNode` 값을 고려해야 합니다. 예를 들어, `$RunningTasks` 를 평가하는 수식은 노드당 작업 수 증가에 크게 영향을 받을 수 있습니다. 자세한 내용은 [Azure Batch 풀에서 자동으로 계산 노드 크기 조정](batch-automatic-scaling.md) 을 참조하세요.
@@ -126,16 +124,13 @@ Duration: 00:08:48.2423500
 >
 
 ## <a name="next-steps"></a>다음 단계
-### <a name="batch-explorer-heat-map"></a>배치 탐색기 열 지도
-Azure Batch [샘플 응용 프로그램][github_samples] 중 하나인 [Azure Batch Explorer][batch_explorer]에는 작업 실행을 시각화하는 *열 지도* 기능이 있습니다. [ParallelTasks][parallel_tasks_sample] 샘플 응용 프로그램을 실행할 때 열 지도 기능을 사용하면 각 노드에서 병렬 작업의 실행을 쉽게 시각화할 수 있습니다.
+### <a name="batchlabs-heat-map"></a>BatchLabs 열 지도
+[BatchLabs][batch_labs]는 Azure Batch 응용 프로그램을 만들고, 디버그하고, 모니터링할 수 있도록 하는 무료의 풍부한 기능을 가진 독립 실행형 클라이언트 도구입니다. BatchLabs에는 작업 실행의 시각화를 제공하는 *열 지도* 기능이 포함되어 있습니다. [ParallelTasks][parallel_tasks_sample] 샘플 응용 프로그램을 실행할 때 열 지도 기능을 사용하면 각 노드에서 병렬 작업의 실행을 쉽게 시각화할 수 있습니다.
 
-![배치 탐색기 열 지도][1]
-
-*현재 4가지 작업을 실행하는 각 노드와 4개 노드의 풀을 보여 주는 배치 탐색기 열 지도*
 
 [api_net]: http://msdn.microsoft.com/library/azure/mt348682.aspx
 [api_rest]: http://msdn.microsoft.com/library/azure/dn820158.aspx
-[batch_explorer]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp/BatchExplorer
+[batch_labs]: https://azure.github.io/BatchLabs/
 [cloudpool]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudpool.aspx
 [enable_autoscaling]: https://msdn.microsoft.com/library/azure/dn820173.aspx
 [fill_type]: https://msdn.microsoft.com/library/microsoft.azure.batch.common.computenodefilltype.aspx
@@ -145,6 +140,4 @@ Azure Batch [샘플 응용 프로그램][github_samples] 중 하나인 [Azure Ba
 [parallel_tasks_sample]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp/ArticleProjects/ParallelTasks
 [poolcreate_net]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.pooloperations.createpool.aspx
 [task_schedule]: https://msdn.microsoft.com/library/microsoft.azure.batch.cloudpool.taskschedulingpolicy.aspx
-
-[1]: ./media/batch-parallel-node-tasks\heat_map.png
 

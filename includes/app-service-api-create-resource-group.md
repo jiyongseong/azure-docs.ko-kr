@@ -1,4 +1,4 @@
-[az group create](/cli/azure/group#create) 명령을 사용하여 리소스 그룹을 만듭니다.
+[az group create](/cli/azure/group?view=azure-cli-latest#az_group_create) 명령을 사용하여 리소스 그룹을 만듭니다.
 
 [!INCLUDE [resource group intro text](resource-group.md)]
 

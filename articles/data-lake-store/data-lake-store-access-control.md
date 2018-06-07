@@ -1,8 +1,8 @@
 ---
-title: "Data Lake Store의 액세스 제어 개요 | Microsoft Docs"
-description: "Azure Data Lake Store에서 액세스 제어가 작동하는 방식을 이해합니다."
+title: Data Lake Store의 액세스 제어 개요 | Microsoft Docs
+description: Azure Data Lake Store에서 액세스 제어가 작동하는 방식을 이해합니다.
 services: data-lake-store
-documentationcenter: 
+documentationcenter: ''
 author: nitinme
 manager: jhubbard
 editor: cgronlun
@@ -12,15 +12,13 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: big-data
-ms.date: 06/29/2017
+ms.date: 03/26/2018
 ms.author: nitinme
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 303cb9950f46916fbdd58762acd1608c925c1328
-ms.openlocfilehash: 7533fe3758860111ae6c26630effedd673734b63
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/04/2017
-
-
+ms.openlocfilehash: 8fd8bd81191d2019d5fa41ce1b6a029f3587adfd
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="access-control-in-azure-data-lake-store"></a>Azure Data Lake Store에서 액세스 제어
 
@@ -126,15 +124,15 @@ Data Lake Store 계정에서 특정 작업을 수행하는 데 필요한 권한�
 
 ## <a name="viewing-permissions-in-the-azure-portal"></a>Azure Portal에서 사용 권한 보기
 
-Data Lake Store 계정의 **데이터 탐색기** 블레이드에서 **액세스**를 클릭하여 파일이나 폴더에 대한 ACL을 확인합니다. **액세스**를 클릭하여 **mydatastore** 계정 아래의 **catalog** 폴더에 대한 ACL을 확인합니다.
+Data Lake Store 계정의 **데이터 탐색기** 블레이드에서 **액세스**를 클릭하여 데이터 탐색기에서 보고 있는 파일이나 폴더에 대한 ACL을 확인합니다. **액세스**를 클릭하여 **mydatastore** 계정 아래의 **catalog** 폴더에 대한 ACL을 확인합니다.
 
 ![Data Lake Store ACL](./media/data-lake-store-access-control/data-lake-store-show-acls-1.png)
 
-이 블레이드 위쪽의 섹션에는 보유하고 있는 권한에 대한 개요가 표시됩니다. 스크린샷에서 사용자는 Bob이며, 뒤를 이어 액세스 권한이 표시됩니다. 그런 다음 **액세스** 블레이드에서 **단순 보기**를 클릭하여 단순 보기를 표시합니다.
+이 블레이드의 맨 위 섹션에 소유자 권한이 표시됩니다. (스크린샷에서 소유 사용자는 Bob입니다.) 그런 다음, 할당된 액세스 ACL이 표시됩니다. 
 
 ![Data Lake Store ACL](./media/data-lake-store-access-control/data-lake-store-show-acls-simple-view.png)
 
-**고급 보기**를 클릭하여 기본 ACL, 마스크 및 슈퍼 사용자의 개념을 보여 주는 자세한 고급 보기를 표시합니다.
+기본 ACL, 마스크 및 슈퍼 사용자의 설명이 표시된 자세한 고급 보기를 보려면 **고급 보기**를 클릭합니다.  이 블레이드는 또한 현재 폴더의 권한에 따라 자식 파일 및 폴더에 대한 액세스 및 기본 ACL을 재귀적으로 설정하는 방법을 제공합니다.
 
 ![Data Lake Store ACL](./media/data-lake-store-access-control/data-lake-store-show-acls-advance-view.png)
 
@@ -152,7 +150,7 @@ Azure에서 Data Lake Store 계정에는 다음을 포함하여 몇 가지 Azure
 * 참가자
 * 읽기 권한자
 
-Data Lake Store 계정에 대한 **소유자** 역할을 지닌 모든 사용자는 자동으로 해당 계정에 대한 슈퍼 사용자입니다. 자세한 내용은 [역할 기반 액세스 제어](../active-directory/role-based-access-control-configure.md)를 참조하세요.
+Data Lake Store 계정에 대한 **소유자** 역할을 지닌 모든 사용자는 자동으로 해당 계정에 대한 슈퍼 사용자입니다. 자세한 내용은 [역할 기반 액세스 제어](../role-based-access-control/role-assignments-portal.md)를 참조하세요.
 슈퍼 사용자 권한이 있는 사용자 지정 RBAC(역할 기반 액세스 제어) 역할을 만들려면 다음 권한이 있어야 합니다.
 - Microsoft.DataLakeStore/accounts/Superuser/action
 - Microsoft.Authorization/roleAssignments/write
@@ -166,7 +164,7 @@ Data Lake Store 계정에 대한 **소유자** 역할을 지닌 모든 사용자
 * 소유 사용자가 대상 그룹의 멤버이면 소유한 파일의 소유 그룹을 변경합니다.
 
 > [!NOTE]
-> 소유 사용자는 소유한 다른 파일의 소유 사용자를 *변경할 수 없습니다*. 슈퍼 사용자만이 파일이나 폴더의 소유 사용자를 변경할 수 있습니다.
+> 소유 사용자는 파일 또는 폴더의 소유 사용자를 *변경할 수 없습니다*. 슈퍼 사용자만이 파일이나 폴더의 소유 사용자를 변경할 수 있습니다.
 >
 >
 
@@ -179,9 +177,14 @@ POSIX ACL에서 모든 사용자는 "주 그룹"과 연결됩니다. 예를 들�
 * **사례 1** - "/" 루트 폴더입니다. 이 폴더는 Data Lake Store 계정이 만들어질 때 생성됩니다. 이 경우 소유 그룹은 계정을 만든 사용자로 설정됩니다.
 * **사례 2**(기타 모든 경우) - 새 항목을 만들 때 소유 그룹이 부모 폴더에서 복사됩니다.
 
+그렇지 않으면 소유 그룹은 다른 사용자/그룹에 할당된 사용 권한과 유사하게 동작합니다.
+
 소유 그룹은 다음에 의해 변경될 수 있습니다.
 * 모든 슈퍼 사용자
 * 소유 사용자가 대상 그룹의 구성원이기도 한 경우 소유 사용자입니다.
+
+> [!NOTE]
+> 소유 그룹은 파일 또는 폴더의 ACL을 *변경할 수 없습니다*.  소유 그룹은 루트 폴더의 경우 계정을 만든 사용자로 설정되지만 위의 **사례 1**, 단일 사용자 계정은 소유 그룹을 통한 권한 제공에 적합하지 않습니다.  해당하는 경우 올바른 사용자 그룹에 이 권한을 할당할 수 있습니다.
 
 ## <a name="access-check-algorithm"></a>액세스 검사 알고리즘
 
@@ -211,7 +214,7 @@ POSIX ACL에서 모든 사용자는 "주 그룹"과 연결됩니다. 예를 들�
 ![Data Lake Store ACL](./media/data-lake-store-access-control/data-lake-store-show-acls-mask-view.png)
 
 > [!NOTE]
-> 새 Data Lake Store 계정의 경우 루트 폴더("/")의 액세스 ACL 및 기본 ACL에 대한 마스크는 기본적으로 RWX를 사용합니다.
+> 새 Data Lake Store 계정의 경우 루트 폴더(“/”)의 액세스 ACL에 대한 마스크는 기본적으로 RWX를 사용합니다.
 >
 >
 
@@ -276,7 +279,7 @@ Data Lake Store의 ACL에 대해 자주 제기하는 몇 가지 질문은 다음
 
 ### <a name="do-i-have-to-enable-support-for-acls"></a>ACL에 대한 지원을 사용하도록 설정해야 하나요?
 
-아니요. ACL을 통한 액세스 제어는 항상 Data Lake Store 계정에 대하여 켜져 있습니다.
+번호 ACL을 통한 액세스 제어는 항상 Data Lake Store 계정에 대하여 켜져 있습니다.
 
 ### <a name="which-permissions-are-required-to-recursively-delete-a-folder-and-its-contents"></a>폴더 및 해당 내용을 재귀적으로 삭제하는 데 필요한 권한은 무엇인가요?
 
@@ -310,7 +313,7 @@ ACL의 항목은 Azure AD의 사용자에 해당하는 GUID로 저장됩니다. 
 
 ### <a name="does-data-lake-store-support-inheritance-of-acls"></a>Data Lake Store는 ACL의 상속을 지원하나요?
 
-아니요.
+아니요, 기본 ACL은 자식 파일과 부모 폴더에서 새로 만든 자식 파일 및 폴더에 대해 ACL을 설정하는 데 사용할 수 있습니다.  
 
 ### <a name="what-is-the-difference-between-mask-and-umask"></a>마스크와 umask 간의 차이는 무엇인가요?
 
@@ -319,11 +322,11 @@ ACL의 항목은 Azure AD의 사용자에 해당하는 GUID로 저장됩니다. 
 | **마스크** 속성은 모든 파일 및 폴더에서 사용할 수 있습니다. | **umask** 는 Data Lake Store 계정의 속성입니다. 따라서 Data Lake Store에는 단 하나의 umask만 있습니다.    |
 | 파일의 소유 사용자 또는 소유 그룹이나 슈퍼 사용자는 파일 또는 폴더에 대한 마스크 속성을 변경할 수 있습니다. | 슈퍼 사용자를 포함한 모든 사용자는 umask 속성을 수정할 수 없습니다. 변경할 수 없는 상수 값입니다.|
 | mask 속성은 런타임 시 액세스 검사 알고리즘에서 사용되어 사용자가 파일이나 폴더의 작업에서 수행할 수 있는 권한을 가지고 있는지 확인합니다. 마스크의 역할은 액세스 확인 시 "유효 사용 권한"을 만드는 것입니다. | umask는 액세스 검사 중에 전혀 사용되지 않습니다. umask는 폴더의 새 자식 항목에서 액세스 ACL을 결정하는 데 사용됩니다. |
-| 마스크는 액세스 확인 시 명명된 사용자, 명명된 그룹 및 소유 사용자에 적용되는 3비트 RWX 값입니다.| umask는 새로운 자식의 소유 사용자, 소유 그룹 및 **기타**에 적용되는 9비트 값입니다.|
+| 마스크는 액세스 확인 시 명명된 사용자, 소유 그룹 및 명명된 그룹에 적용되는 3비트 RWX 값입니다.| umask는 새로운 자식의 소유 사용자, 소유 그룹 및 **기타**에 적용되는 9비트 값입니다.|
 
 ### <a name="where-can-i-learn-more-about-posix-access-control-model"></a>POSIX 액세스 제어 모델에 대한 어디서 자세히 알아볼 수 있나요?
 
-* [Linux의 POSIX 액세스 제어 목록](http://www.vanemery.com/Linux/ACL/POSIX_ACL_on_Linux.html)(영문)
+* [Linux의 POSIX Access Control 목록](http://www.vanemery.com/Linux/ACL/POSIX_ACL_on_Linux.html)(영문)
 
 * [HDFS 권한 가이드](http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsPermissionsGuide.html)(영문)
 
@@ -342,4 +345,3 @@ ACL의 항목은 Azure AD의 사용자에 해당하는 GUID로 저장됩니다. 
 ## <a name="see-also"></a>참고 항목
 
 * [Azure 데이터 레이크 저장소 개요](data-lake-store-overview.md)
-

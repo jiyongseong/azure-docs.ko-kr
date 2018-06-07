@@ -1,13 +1,12 @@
 ---
-title: "Azure CLI 스크립트-Azure Cosmos DB MongoDB API 계정, 데이터베이스 및 컬렉션 만들기 | Microsoft Docs"
-description: "Azure CLI 스크립트 샘플 - Azure Cosmos DB MongoDB API 계정, 데이터베이스 및 컬렉션 만들기"
+title: Azure CLI 스크립트-Azure Cosmos DB MongoDB API 계정, 데이터베이스 및 컬렉션 만들기 | Microsoft Docs
+description: Azure CLI 스크립트 샘플 - Azure Cosmos DB MongoDB API 계정, 데이터베이스 및 컬렉션 만들기
 services: cosmos-db
 documentationcenter: cosmosdb
-author: mimig1
-manager: jhubbard
-editor: 
+author: SnehaGunda
+manager: kfile
 tags: azure-service-management
-ms.assetid: 
+ms.assetid: ''
 ms.service: cosmos-db
 ms.custom: mvc
 ms.devlang: azurecli
@@ -15,15 +14,13 @@ ms.topic: sample
 ms.tgt_pltfrm: cosmosdb
 ms.workload: database
 ms.date: 06/02/2017
-ms.author: mimig
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 4f68f90c3aea337d7b61b43e637bcfda3c98f3ea
-ms.openlocfilehash: b0bf637db90cfcb987ad43ed34cb8065d28b0fcf
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
+ms.author: sngun
+ms.openlocfilehash: 0688bc3e58ef438c8821e2dce90f71a12cc64710
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-
 # <a name="azure-cosmos-db-create-an-mongodb-api-account-using-the-azure-cli"></a>Azure Cosmos DB: Azure CLI를 사용하여 MongoDB API 계정 만들기
 
 이 샘플 CLI 스크립트는 Azure Cosmos DB MongoDB API 계정, 데이터베이스 및 컬렉션을 만듭니다. 
@@ -34,7 +31,7 @@ CLI를 로컬로 설치하여 사용하도록 선택한 경우 이 항목에서 
 
 ## <a name="sample-script"></a>샘플 스크립트
 
-[!code-azurecli-interactive[main](../../../cli_scripts/cosmosdb/create-cosmosdb-mongodb-account/create-cosmosdb-mongodb-account.sh?highlight=15-35 "Azure Cosmos DB MongoDB API 계정, 데이터베이스 및 컬렉션 만들기")]
+[!code-azurecli-interactive[main](../../../cli_scripts/cosmosdb/create-cosmosdb-mongodb-account/create-cosmosdb-mongodb-account.sh?highlight=15-35 "Create an Azure Cosmos DB MongoDB API account, database, and collection")]
 
 ## <a name="clean-up-deployment"></a>배포 정리
 
@@ -48,15 +45,14 @@ az group delete --name myResourceGroup
 
 이 스크립트는 다음 명령을 사용합니다. 테이블에 있는 각 명령은 명령에 해당하는 문서에 연결됩니다.
 
-| 명령 | 참고 사항 |
+| 명령 | 메모 |
 |---|---|
-| [az group create](/cli/azure/group#create) | 모든 리소스가 저장되는 리소스 그룹을 만듭니다. |
-| [az cosmosdb create](/cli/azure/cosmosdb#create) | Azure Cosmos DB 계정을 만듭니다. |
-| [az group delete](/cli/azure/resource#delete) | 모든 중첩 리소스를 포함한 리소스 그룹을 삭제합니다. |
+| [az group create](/cli/azure/group#az_group_create) | 모든 리소스가 저장되는 리소스 그룹을 만듭니다. |
+| [az cosmosdb create](/cli/azure/cosmosdb#az_cosmosdb_create) | Azure Cosmos DB 계정을 만듭니다. |
+| [az group delete](/cli/azure/resource#az_resource_delete) | 모든 중첩 리소스를 포함한 리소스 그룹을 삭제합니다. |
 
 ## <a name="next-steps"></a>다음 단계
 
-Azure CLI에 대한 자세한 내용은 [Azure CLI 설명서](https://docs.microsoft.com/cli/azure/overview)를 참조하세요.
+Azure CLI에 대한 자세한 내용은 [Azure CLI 설명서](https://docs.microsoft.com/cli/azure)를 참조하세요.
 
 추가 Azure Cosmos DB CLI 스크립트 샘플은 [Azure Cosmos DB CLI 설명서](../cli-samples.md)에서 확인할 수 있습니다.
-

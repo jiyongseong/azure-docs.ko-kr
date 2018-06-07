@@ -1,26 +1,20 @@
 ---
-title: "SQL Data Warehouse의 투명한 데이터 암호화(T-SQL) | Microsoft Docs"
-description: "SQL Data Warehouse의 TDE(투명한 데이터 암호화)(T-SQL)"
+title: SQL Data Warehouse의 투명한 데이터 암호화(T-SQL) | Microsoft Docs
+description: SQL Data Warehouse의 TDE(투명한 데이터 암호화)(T-SQL)
 services: sql-data-warehouse
-documentationcenter: 
-author: ronortloff
-manager: barbkess
-editor: 
-ms.assetid: 8ccefef3-1308-41ee-b336-5e491d1098ae
+author: kavithaj
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.workload: data-management
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
-ms.custom: security
-ms.date: 10/31/2016
-ms.author: rortloff;barbkess
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 74c9032aababdce91ed617cd7a4c628915b42504
-ms.lasthandoff: 04/03/2017
-
-
+ms.topic: conceptual
+ms.component: implement
+ms.date: 04/17/2018
+ms.author: kavithaj
+ms.reviewer: igorstan
+ms.openlocfilehash: d10b8f751d782f00cbc58274e4b48c501cea6f70
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
 # <a name="get-started-with-transparent-data-encryption-tde"></a>투명한 데이터 암호화(TDE) 시작
 > [!div class="op_single_selector"]
@@ -60,7 +54,7 @@ ALTER DATABASE [AdventureWorks] SET ENCRYPTION OFF;
 > 
 
 ## <a name="verifying-encryption"></a>암호화 확인
-SQL 데이터 웨어하우스에 대한 암호화 상태를 확인하려면 다음 단계를 따르세요.
+SQL Data Warehouse에 대한 암호화 상태를 확인하려면 다음 단계를 따르세요.
 
 1. 마스터 데이터베이스에서 *dbmanager* 역할의 관리자 또는 멤버인 로그인을 사용하여 **마스터** 또는 인스턴스 데이터베이스에 연결
 2. 다음 문을 실행하여 데이터베이스를 암호화합니다.
@@ -87,4 +81,3 @@ FROM
 <!--Image references-->
 
 <!--Link references-->
-

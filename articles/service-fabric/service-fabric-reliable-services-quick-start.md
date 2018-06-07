@@ -1,25 +1,24 @@
 ---
-title: "C#에서 첫 번째 Service Fabric 응용 프로그램 만들기 | Microsoft Docs"
-description: "상태 비저장 및 상태 저장 서비스를 사용하여 Microsoft Azure 서비스 패브릭 응용 프로그램 만들기 소개"
+title: C#에서 첫 번째 Service Fabric 응용 프로그램 만들기 | Microsoft Docs
+description: 상태 비저장 및 상태 저장 서비스를 사용하여 Microsoft Azure 서비스 패브릭 응용 프로그램 만들기 소개
 services: service-fabric
 documentationcenter: .net
 author: vturecek
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: d9b44d75-e905-468e-b867-2190ce97379a
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/06/2017
+ms.date: 03/16/2018
 ms.author: vturecek
-translationtype: Human Translation
-ms.sourcegitcommit: 8a531f70f0d9e173d6ea9fb72b9c997f73c23244
-ms.openlocfilehash: 813021d6239ae3cf79bb84b78f77e39c9e0783f6
-ms.lasthandoff: 03/10/2017
-
-
+ms.openlocfilehash: 6977fa0a62767cebbd1000335c6c3a33a5991c2c
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="get-started-with-reliable-services"></a>Reliable Services로 시작하기
 > [!div class="op_single_selector"]
@@ -47,7 +46,7 @@ Reliable Services를 시작하려면 몇 가지 기본 개념만 이해하면 �
 
 ![새 프로젝트 대화 상자를 사용하여 새 서비스 패브릭 응용 프로그램 만들기](media/service-fabric-reliable-services-quick-start/hello-stateless-NewProject.png)
 
-그런 다음 *HelloWorldStateless*라는 상태 비저장 서비스 프로젝트를 만듭니다.
+그런 다음, *HelloWorldStateless*라는 **.Net Core 2.0**을 사용하여 상태 비저장 서비스 프로젝트를 만듭니다.
 
 ![두 번째 대화 상자에서 상태 비저장 서비스 프로젝트 만들기](media/service-fabric-reliable-services-quick-start/hello-stateless-NewProject2.png)
 
@@ -98,7 +97,7 @@ protected override async Task RunAsync(CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        ServiceEventSource.Current.ServiceMessage(this, "Working-{0}", ++iterations);
+        ServiceEventSource.Current.ServiceMessage(this.Context, "Working-{0}", ++iterations);
 
         await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
     }
@@ -129,7 +128,7 @@ protected override async Task RunAsync(CancellationToken cancellationToken)
 
 ![서비스 패브릭 응용 프로그램에 서비스 추가](media/service-fabric-reliable-services-quick-start/hello-stateful-NewService.png)
 
-**상태 저장 서비스** 를 선택하고 *HelloWorldStateful*이라는 이름을 지정합니다. **확인**을 클릭합니다.
+**.Net Core 2.0 -> 상태 저장 서비스**를 선택하고 *HelloWorldStateful*이라고 이름을 지정합니다. **확인**을 클릭합니다.
 
 ![새 프로젝트 대화 상자를 사용하여 새 서비스 패브릭 상태 저장 서비스 만들기](media/service-fabric-reliable-services-quick-start/hello-stateful-NewProject.png)
 
@@ -155,7 +154,7 @@ protected override async Task RunAsync(CancellationToken cancellationToken)
         {
             var result = await myDictionary.TryGetValueAsync(tx, "Counter");
 
-            ServiceEventSource.Current.ServiceMessage(this, "Current Counter Value: {0}",
+            ServiceEventSource.Current.ServiceMessage(this.Context, "Current Counter Value: {0}",
                 result.HasValue ? result.Value.ToString() : "Value does not exist.");
 
             await myDictionary.AddOrUpdateAsync(tx, "Counter", 0, (key, value) => ++value);
@@ -189,7 +188,7 @@ var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<str
 신뢰할 수 있는 상태 관리자는 사용자에 대한 신뢰할 수 있는 컬렉션을 관리합니다. 언제든지 서비스의 어느 위치에서든 신뢰할 수 있는 컬렉션에 대한 신뢰할 수 있는 상태 관리자를 단순히 요청할 수 있습니다. 신뢰할 수 있는 상태 관리자는 참조를 다시 가져오도록 합니다. 클래스 멤버 변수 또는 속성에서 신뢰할 수 있는 컬렉션 인스턴스에 대한 참조를 저장하는 것이 좋습니다. 서비스 수명 주기에서 항상 참조가 인스턴스로 설정되어 있도록 특별히 주의해야 합니다. 신뢰할 수 있는 상태 관리자는 사용자를 위해 이 작업을 처리하고 반복 방문에 최적화됩니다.
 
 ### <a name="transactional-and-asynchronous-operations"></a>트랜잭션 및 비동기 작업
-```C#
+```csharp
 using (ITransaction tx = this.StateManager.CreateTransaction())
 {
     var result = await myDictionary.TryGetValueAsync(tx, "Counter-1");
@@ -228,5 +227,4 @@ using (ITransaction tx = this.StateManager.CreateTransaction())
 [응용 프로그램 업그레이드](service-fabric-application-upgrade.md)
 
 [신뢰할 수 있는 서비스에 대한 개발자 참조](https://msdn.microsoft.com/library/azure/dn706529.aspx)
-
 

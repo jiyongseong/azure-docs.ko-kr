@@ -4,7 +4,7 @@ description: "셀프 서비스 응용 프로그램 액세스와 관련된 문제
 services: active-directory
 documentationcenter: 
 author: ajamess
-manager: femila
+manager: mtillman
 ms.assetid: 
 ms.service: active-directory
 ms.workload: identity
@@ -14,14 +14,12 @@ ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
 ms.reviewer: japere
+ms.openlocfilehash: 6d4044414cfae9a79487d02709aab24998fdef0b
+ms.sourcegitcommit: d87b039e13a5f8df1ee9d82a727e6bc04715c341
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 217726709a1fdb02275de5a76a1352ea9c350600
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/21/2018
 ---
-
 # <a name="problem-using-self-service-application-access"></a>셀프 서비스 응용 프로그램 액세스를 사용할 때 발생하는 문제
 
 셀프 서비스 응용 프로그램 액세스는 사용자가 응용 프로그램을 직접 검색하도록 하고 경우에 따라 비즈니스 그룹이 해당 응용 프로그램에 대한 액세스를 승인하도록 허용하는 유용한 방법입니다. 비즈니스 그룹이 해당 액세스 패널에서 암호 Single Sign-On 응용 프로그램 권한에 대해 해당 사용자에게 할당된 자격 증명을 관리하도록 허용할 수 있습니다.
@@ -44,7 +42,7 @@ ms.lasthandoff: 07/21/2017
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -99,4 +97,3 @@ ms.lasthandoff: 07/21/2017
 
 ## <a name="next-steps"></a>다음 단계
 [셀프 서비스 그룹 관리를 위한 Azure Active Directory 설정](active-directory-accessmanagement-self-service-group-management.md)
-

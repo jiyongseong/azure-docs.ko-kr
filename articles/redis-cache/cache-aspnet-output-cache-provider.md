@@ -3,8 +3,8 @@ title: "캐시 ASP.NET 출력 캐시 공급자"
 description: "Azure Redis Cache를 사용하여 ASP.NET 페이지 출력 캐시하는 방법을 알아봅니다."
 services: redis-cache
 documentationcenter: na
-author: steved0x
-manager: douge
+author: wesmc7777
+manager: cfowler
 editor: tysonn
 ms.assetid: 78469a66-0829-484f-8660-b2598ec60fbf
 ms.service: cache
@@ -13,13 +13,12 @@ ms.topic: article
 ms.tgt_pltfrm: cache-redis
 ms.workload: tbd
 ms.date: 02/14/2017
-ms.author: sdanie
-translationtype: Human Translation
-ms.sourcegitcommit: 1429bf0d06843da4743bd299e65ed2e818be199d
-ms.openlocfilehash: 845f25637a0e48460fc76c1ee36060274b3cec38
-ms.lasthandoff: 03/22/2017
-
-
+ms.author: wesmc
+ms.openlocfilehash: 81c95949971d54833ca7a15ec5148116c94767f7
+ms.sourcegitcommit: 2a70752d0987585d480f374c3e2dba0cd5097880
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="aspnet-output-cache-provider-for-azure-redis-cache"></a>Azure Redis Cache에 대한 ASP.NET 출력 캐시 공급자
 Redis 출력 캐시 공급자는 출력 캐시 데이터에 대한 out-of-process 저장소 메커니즘입니다. 이 데이터는 완전한 HTTP 응답(페이지 출력 캐싱)에 특별히 사용됩니다. 공급자가 ASP.NET 4에 도입된 새로운 출력 캐시 공급자 확장 포인트에 연결됩니다.
@@ -92,5 +91,4 @@ Microsoft Azure 포털의 캐시 블레이드에서 값으로 특성을 구성�
 
 ## <a name="next-steps"></a>다음 단계
 [Azure Redis Cache에 대한 ASP.NET 세션 상태 제공자](cache-aspnet-session-state-provider.md)를 확인하세요.
-
 

@@ -1,30 +1,20 @@
 ---
-title: "지리적으로 분산된 Azure SQL Database 솔루션 구현 | Microsoft Docs"
-description: "Azure SQL Database와 응용 프로그램을 복제된 데이터베이스로 장애 조치하도록 구성하고 장애 조치를 테스트합니다."
+title: 지리적으로 분산된 Azure SQL Database 솔루션 구현 | Microsoft Docs
+description: Azure SQL Database와 응용 프로그램을 복제된 데이터베이스로 장애 조치하도록 구성하고 장애 조치를 테스트합니다.
 services: sql-database
-documentationcenter: 
 author: CarlRabeler
-manager: jhubbard
-editor: 
-tags: 
-ms.assetid: 
+manager: craigg
 ms.service: sql-database
 ms.custom: mvc,business continuity
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: 
-ms.date: 05/26/2017
+ms.topic: tutorial
+ms.date: 04/01/2018
 ms.author: carlrab
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 3716c7699732ad31970778fdfa116f8aee3da70b
-ms.openlocfilehash: 9f53f318e20dac9248906bdbe898ba4dacb286ac
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/30/2017
-
-
+ms.openlocfilehash: fbd239c3c8c11b1907a6d28eb95d2c0ad26cfe61
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-
 # <a name="implement-a-geo-distributed-database"></a>지리적으로 분산된 데이터베이스 구현
 
 이 자습서에서는 Azure SQL Database와 응용 프로그램을 원격 지역으로 장애 조치하도록 구성한 다음 장애 조치 계획을 테스트합니다. 다음 방법에 대해 알아봅니다. 
@@ -387,7 +377,20 @@ Java 및 Maven 환경을 설치하고 구성하는 방법에 대한 자세한 �
       -ServerName $mydrservername
    $fileovergroup.ReplicationRole
    ```
-## <a name="next-steps"></a>다음 단계 
 
-자세한 내용은 [활성 지역 복제 및 장애 조치(failover) 그룹](sql-database-geo-replication-overview.md)을 참조하세요.
+## <a name="next-steps"></a>다음 단계
+
+이 자습서에서는 Azure SQL 데이터베이스와 응용 프로그램을 원격 지역으로 장애 조치(failover)하도록 구성한 다음, 장애 조치(failover) 계획을 테스트하는 것을 알아봤습니다.  다음 방법에 대해 알아보았습니다. 
+
+> [!div class="checklist"]
+> * 데이터베이스 사용자를 만들고 권한 부여
+> * 데이터베이스 수준 방화벽 규칙 설정
+> * 지역에서 복제 장애 조치(failover) 그룹 만들기
+> * Azure SQL Database를 쿼리하기 위한 Java 응용 프로그램 만들기 및 컴파일
+> * 재해 복구 훈련 수행
+
+관리되는 인스턴스를 만드는 방법에 대해 알아보려면 다음 자습서로 이동합니다.
+
+> [!div class="nextstepaction"]
+>[관리되는 인스턴스 만들기](sql-database-managed-instance-create-tutorial-portal.md)
 

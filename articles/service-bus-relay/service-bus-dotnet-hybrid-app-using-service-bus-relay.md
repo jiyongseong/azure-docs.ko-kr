@@ -12,18 +12,15 @@ ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: dotnet
 ms.topic: hero-article
-ms.date: 06/14/2017
+ms.date: 11/02/2017
 ms.author: sethm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ef1e603ea7759af76db595d95171cdbe1c995598
-ms.openlocfilehash: 366922a083b9d18ef50e04eb8b459d2725315e1e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/16/2017
-
-
+ms.openlocfilehash: fe13de5f83fe18a85f8d46d0eee039159e1a60e9
+ms.sourcegitcommit: 95500c068100d9c9415e8368bdffb1f1fd53714e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/14/2018
 ---
 # <a name="net-on-premisescloud-hybrid-application-using-azure-wcf-relay"></a>Azure WCF 릴레이를 사용하는 .NET 온-프레미스/클라우드 하이브리드 응용 프로그램
-## <a name="introduction"></a>소개
 
 이 문서에서는 Microsoft Azure 및 Visual Studio로 하이브리드 클라우드 응용 프로그램을 구축하는 방법을 보여줍니다. 이 자습서에서는 이전에 Azure를 사용한 경험이 없다고 가정합니다. 30분 이내에 여러 Azure 리소스를 사용하는 응용 프로그램을 클라우드에서 실행할 수 있습니다.
 
@@ -54,7 +51,7 @@ ms.lasthandoff: 06/16/2017
 Azure 응용 프로그램 개발을 시작하려면 먼저 도구를 다운로드하고 개발 환경을 설정해야 합니다.
 
 1. SDK [다운로드 페이지](https://azure.microsoft.com/downloads/)에서 .NET용 Azure SDK를 설치합니다.
-2. **.NET** 열에서 사용 중인 [Visual Studio](http://www.visualstudio.com) 버전을 클릭합니다. 이 자습서의 단계에서는 Visual Studio 2015를 사용하지만 Visual Studio 2017에도 작동합니다.
+2. **.NET** 열에서 사용 중인 [Visual Studio](http://www.visualstudio.com) 버전을 클릭합니다. 이 자습서의 단계에서는 Visual Studio 2017을 사용합니다.
 3. 설치 관리자를 실행할지 또는 저장할지를 묻는 메시지가 표시되면 **실행**을 클릭합니다.
 4. **웹 플랫폼 설치 관리자**에서 **설치**를 클릭하여 설치를 계속합니다.
 5. 설치가 완료되면 앱을 개발하기 시작하는 데 필요한 내용이 모두 준비된 것입니다. SDK에는 Visual Studio에서 Azure 응용 프로그램을 쉽게 개발할 수 있는 도구가 포함되어 있습니다.
@@ -79,7 +76,7 @@ Azure에서 릴레이 기능 사용을 시작하려면 먼저 서비스 네임�
 4. **확인**을 클릭하여 **ProductsServer** 프로젝트를 만듭니다.
 5. Visual Studio용 NuGet 패키지 관리자를 이미 설치한 경우 다음 단계로 건너뜁니다. 그렇지 않으면 [NuGet][NuGet]을 방문하여 [NuGet 설치](http://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c)를 클릭합니다. 나타나는 메시지에 따라 NuGet 패키지 관리자를 설치한 후 Visual Studio를 다시 시작합니다.
 6. 솔루션 탐색기에서 **ProductsServer** 프로젝트를 마우스 오른쪽 단추로 클릭한 다음 **NuGet 패키지 관리**를 클릭합니다.
-7. **찾아보기** 탭을 클릭한 다음 `Microsoft Azure Service Bus`를 검색합니다. **WindowsAzure.ServiceBus** 패키지를 선택합니다.
+7. **찾아보기** 탭을 클릭한 다음 **WindowsAzure.ServiceBus**를 검색합니다. **WindowsAzure.ServiceBus** 패키지를 선택합니다.
 8. **설치**를 클릭하고 사용 약관에 동의합니다.
 
    ![][13]
@@ -200,6 +197,8 @@ Azure에서 릴레이 기능 사용을 시작하려면 먼저 서비스 네임�
       </behaviors>
     </system.serviceModel>
     ```
+    "transportClientEndpointBehavior"에서 발생한 오류는 단지 경고이며 이 샘플에 대한 차단 문제가 아닙니다.
+    
 13. 계속 App.config의 `<appSettings>` 요소에서 연결 문자열 값을 포털에서 이전에 얻은 연결 문자열로 바꿉니다.
 
     ```xml
@@ -232,7 +231,7 @@ Azure에서 릴레이 기능 사용을 시작하려면 먼저 서비스 네임�
     ![][18]
 
 7. **새 ASP.NET 웹 응용 프로그램** 대화 상자로 돌아와서 **확인**을 클릭하여 MVC 앱을 만듭니다.
-8. 이제 새 웹앱에 대한 Azure 리소스를 구성해야 합니다. [이 문서의 Azure 섹션에 게시](../app-service-web/app-service-web-get-started-dotnet.md)의 단계에 따릅니다. 그런 다음, 이 자습서로 돌아가 다음 단계를 진행합니다.
+8. 이제 새 웹앱에 대한 Azure 리소스를 구성해야 합니다. [이 문서의 Azure 섹션에 게시](../app-service/app-service-web-get-started-dotnet-framework.md#publish-to-azure)의 단계에 따릅니다. 그런 다음, 이 자습서로 돌아가 다음 단계를 진행합니다.
 10. 솔루션 탐색기에서 **모델**을 마우스 오른쪽 단추로 클릭하고 **추가**를 클릭한 다음 **클래스**를 클릭합니다. **이름** 상자에서 이름을 **Product.cs**로 입력합니다. 그런 다음 **추가**를 클릭합니다.
 
     ![][17]
@@ -276,7 +275,7 @@ Azure에서 릴레이 기능 사용을 시작하려면 먼저 서비스 네임�
     }
     ```
 4. 솔루션 탐색기에서 Views\Shared 폴더를 확장하고 **_Layout.cshtml**을 두 번 클릭하여 Visual Studio 편집기에서 엽니다.
-5. **내 ASP.NET 응용 프로그램**의 모든 항목을 **LITWARE 제품**으로 변경합니다.
+5. **내 ASP.NET 응용 프로그램**과 일치하는 모든 항목을 **Northwind Traders 제품**으로 변경합니다.
 6. **홈**, **정보** 및 **연락처** 링크를 제거합니다. 다음 예제에서 강조 표시된 코드를 삭제합니다.
 
     ![][41]
@@ -334,7 +333,7 @@ Azure에서 릴레이 기능 사용을 시작하려면 먼저 서비스 네임�
 
 1. 아직 열려 있지 않은 경우 [ASP.NET 응용 프로그램 만들기](#create-an-aspnet-application) 섹션에서 만든 **ProductsPortal** 프로젝트를 Visual Studio에서 다시 엽니다.
 2. "온-프레미스 서버 만들기" 섹션의 단계와 비슷하게 프로젝트 참조에 NuGet 패키지를 추가합니다. 솔루션 탐색기에서 **ProductsPortal** 프로젝트를 마우스 오른쪽 단추로 클릭한 다음, **NuGet 패키지 관리**를 클릭합니다.
-3. "Service Bus"를 검색하고 **WindowsAzure.ServiceBus** 항목을 선택합니다. 그런 다음 설치를 완료하고 이 대화 상자를 닫습니다.
+3. **WindowsAzure.ServiceBus**를 검색하고 **WindowsAzure.ServiceBus** 항목을 선택합니다. 그런 다음 설치를 완료하고 이 대화 상자를 닫습니다.
 4. 솔루션 탐색기에서 **ProductsPortal** 프로젝트를 마우스 오른쪽 단추로 클릭하고 **추가**를 클릭한 후 **기존 항목**을 클릭합니다.
 5. **ProductsServer** 콘솔 프로젝트에서 **ProductsContract.cs** 파일로 이동합니다. ProductsContract.cs를 클릭하여 강조 표시합니다. **추가** 옆의 아래쪽 화살표를 클릭한 다음 **링크로 추가**를 클릭합니다.
 
@@ -417,7 +416,7 @@ Azure에서 릴레이 기능 사용을 시작하려면 먼저 서비스 네임�
 >
 >
 
-2. 다음 단계에서 URL이 필요하므로 배포된 웹앱의 URL을 복사합니다. 또한 Visual Studio의 Azure 앱 서비스 활동 창에서 이 URL을 가져올 수도 있습니다.
+2. 다음 단계에서 URL이 필요하므로 배포된 웹앱의 URL을 복사합니다. 또한 Visual Studio의 Azure App Service 활동 창에서 이 URL을 가져올 수도 있습니다.
 
   ![][9]
 
@@ -457,7 +456,7 @@ Azure에서 릴레이 기능 사용을 시작하려면 먼저 서비스 네임�
 Azure 릴레이에 대한 자세한 내용은 다음 리소스를 참조하세요.  
 
 * [Azure 릴레이란?](relay-what-is-it.md)  
-* [릴레이 사용 방법](service-bus-dotnet-how-to-use-relay.md)  
+* [Azure 릴레이 사용 방법](relay-wcf-dotnet-get-started.md)  
 
 [0]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/hybrid.png
 [1]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/App2.png
@@ -483,4 +482,3 @@ Azure 릴레이에 대한 자세한 내용은 다음 리소스를 참조하세�
 [38]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/hy-service2.png
 [41]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/getting-started-multi-tier-40.png
 [43]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/getting-started-hybrid-43.png
-

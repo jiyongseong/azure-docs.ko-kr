@@ -1,30 +1,23 @@
 ---
-title: "웹 UI를 사용하여 Azure Kubernetes 클러스터 관리 | Microsoft Docs"
-description: "Azure Container Service에서 Kubernetes 웹 UI 사용"
+title: 웹 UI를 사용하여 Azure Kubernetes 클러스터 관리
+description: Azure Container Service에서 Kubernetes 웹 UI 사용
 services: container-service
-documentationcenter: 
 author: bburns
-manager: timlt
-editor: 
-tags: acs, azure-container-service, kubernetes
-keywords: 
-ms.assetid: 
+manager: jeconnoc
 ms.service: container-service
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
 ms.date: 02/21/2017
 ms.author: bburns
+ms.custom: mvc
+ms.openlocfilehash: 0680551d3a87c942574a4eac70fa380cc1e9b5d9
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: bfd49ea68c597b109a2c6823b7a8115608fa26c3
-ms.openlocfilehash: fbdd3c2450c5385b782d72eb90008a093f6a7298
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-
 # <a name="using-the-kubernetes-web-ui-with-azure-container-service"></a>Azure Container Service에서 Kubernetes 웹 UI 사용
+
+[!INCLUDE [aks-preview-redirect.md](../../../includes/aks-preview-redirect.md)]
 
 ## <a name="prerequisites"></a>필수 조건
 이 연습에서는 [Azure Container Service를 사용하여 Kubernetes 클러스터를 만들었다고](container-service-kubernetes-walkthrough.md) 가정합니다.
@@ -133,5 +126,4 @@ UI에서 개체를 보는 것 외에도 Kubernetes API 개체를 편집하고 �
 이렇게 하면 Pod 중 하나가 삭제되어 삭제할 복제본이 두 개가 됩니다.
 
  
-
 

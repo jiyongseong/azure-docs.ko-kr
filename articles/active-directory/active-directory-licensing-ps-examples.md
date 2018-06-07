@@ -1,30 +1,24 @@
 ---
-
-title: "Azure AD의 그룹 기반 라이선스에 대한 PowerShell 예제 | Microsoft Docs"
-description: "Azure Active Directory 그룹 기반 라이선스에 대한 PowerShell 시나리오"
+title: Azure AD의 그룹 기반 라이선스에 대한 PowerShell 예제 | Microsoft Docs
+description: Azure Active Directory 그룹 기반 라이선스에 대한 PowerShell 시나리오
 services: active-directory
-keywords: "Azure AD 라이선스"
-documentationcenter: 
+keywords: Azure AD 라이선스
+documentationcenter: ''
 author: curtand
-manager: femila
-editor: 
-ms.assetid: 
+manager: mtillman
+editor: ''
 ms.service: active-directory
-ms.devlang: na
+ms.component: users-groups-roles
 ms.topic: article
-ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 06/05/2017
+ms.date: 04/23/2018
 ms.author: curtand
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 4a322365b2764dc13b5079f2c4c0634c9c950d92
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: e372ff8f6e13c4720acc91c402acbe14e9307e06
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
-
 # <a name="powershell-examples-for-group-based-licensing-in-azure-ad"></a>Azure AD의 그룹 기반 라이선스에 대한 PowerShell 예제
 
 그룹 기반 라이선스에 대한 전체 기능은 [Azure Portal](https://portal.azure.com)을 통해 제공되며 현재 PowerShell 지원은 제한됩니다. 하지만 기존 [MSOnline PowerShell cmdlet](https://docs.microsoft.com/powershell/msonline/v1/azureactivedirectory)을 사용하여 수행할 수 있는 몇 가지 유용한 작업이 있습니다. 이 문서는 가능한 작업에 대한 예제를 제공합니다.
@@ -32,13 +26,16 @@ ms.lasthandoff: 07/08/2017
 > [!NOTE]
 > cmdlet 실행을 시작하기 전에 `Connect-MsolService` cmdlet을 실행하여 테넌트에 먼저 연결해야 합니다.
 
+> [!WARNING]
+> 이 코드는 데모 용도의 예로 제공됩니다. 사용자 환경에서 사용하려는 경우, 먼저 작은 규모로 테스트하거나 별도의 테스트 테넌트에서 테스트하는 것이 좋습니다. 환경의 특정 요구에 맞게 코드를 조정해야 할 수도 있습니다.
+
 ## <a name="view-product-licenses-assigned-to-a-group"></a>그룹에 할당된 제품 라이선스 보기
 [Get-MsolGroup](/powershell/module/msonline/get-msolgroup?view=azureadps-1.0) cmdlet은 그룹 개체를 검색하고 *라이선스* 속성을 확인하는 데 사용됩니다. 그룹에 현재 할당된 모든 제품 라이선스를 나열합니다.
 ```
 (Get-MsolGroup -ObjectId 99c4216a-56de-42c4-a4ac-e411cd8c7c41).Licenses
 | Select SkuPartNumber
 ```
-출력:
+출력
 ```
 SkuPartNumber
 -------------
@@ -63,7 +60,7 @@ Get-MsolGroup | Where {$_.Licenses} | Select `
     @{Name="Licenses";Expression={$_.Licenses | Select -ExpandProperty SkuPartNumber}}
 ```
 
-출력:
+출력
 ```
 ObjectId                             DisplayName              Licenses
 --------                             -----------              --------
@@ -74,7 +71,7 @@ c2652d63-9161-439b-b74e-fcd8228a7074 EMSandOffice             {ENTERPRISEPREMIUM
 ```
 
 ## <a name="get-statistics-for-groups-with-licenses"></a>라이선스가 있는 그룹에 대한 통계 가져오기
-라이선스가 있는 그룹에 대해 기본적인 통계를 보고할 수 있습니다. 아래 예제에는 총 사용자 수, 그룹별 라이선스가 이미 할당되어 있는 사용자 수, 그룹별 라이선스가 할당될 수 없는 사용자 수가 나열되어 있습니다.
+라이선스가 있는 그룹에 대해 기본적인 통계를 보고할 수 있습니다. 아래 예제에서 스크립트는 총 사용자 수, 그룹별 라이선스가 이미 할당되어 있는 사용자 수, 그룹별 라이선스가 할당될 수 없는 사용자 수를 나열합니다.
 
 ```
 #get all groups with licenses
@@ -118,7 +115,7 @@ Get-MsolGroup -All | Where {$_.Licenses}  | Foreach {
 ```
 
 
-출력:
+출력
 ```
 GroupName         GroupId                              GroupLicenses       TotalUserCount LicensedUserCount LicenseErrorCount
 ---------         -------                              -------------       -------------- ----------------- -----------------
@@ -137,7 +134,7 @@ Access to Offi... 11151866-5419-4d93-9141-0603bbf78b42 STANDARDPACK             
 ```
 Get-MsolGroup -HasLicenseErrorsOnly $true
 ```
-출력:
+출력
 ```
 ObjectId                             DisplayName             GroupType Description
 --------                             -----------             --------- -----------
@@ -145,7 +142,7 @@ ObjectId                             DisplayName             GroupType Descripti
 ```
 ## <a name="get-all-users-with-license-errors-in-a-group"></a>그룹에서 라이선스 오류가 있는 모든 사용자 가져오기
 
-라이선스 관련 오류가 포함된 그룹이 있는 경우 오류의 영향을 받는 모든 사용자를 나열할 수 있습니다. 다른 그룹의 오류도 가져올 수 있습니다. 하지만 이 예제에서는 사용자에 대한 **IndirectLicenseError** 항목의 **ReferencedObjectId** 속성을 확인하여 요청된 그룹과 관련된 오류만으로 결과를 제한합니다.
+라이선스 관련 오류가 포함된 그룹이 있는 경우 오류의 영향을 받는 모든 사용자를 나열할 수 있습니다. 사용자는 다른 그룹의 오류도 가져올 수 있습니다. 하지만 이 예제에서는 사용자에 대한 **IndirectLicenseError** 항목의 **ReferencedObjectId** 속성을 확인하여 요청된 그룹과 관련된 오류만으로 결과를 제한합니다.
 
 ```
 #a sample group with errors
@@ -163,7 +160,7 @@ Get-MsolGroupMember -All -GroupObjectId $groupId |
            @{Name="LicenseError";Expression={$_.IndirectLicenseErrors | Where {$_.ReferencedObjectId -eq $groupId} | Select -ExpandProperty Error}}
 ```
 
-출력:
+출력
 ```
 ObjectId                             DisplayName      License Error
 --------                             -----------      ------------
@@ -171,7 +168,7 @@ ObjectId                             DisplayName      License Error
 ```
 ## <a name="get-all-users-with-license-errors-in-the-entire-tenant"></a>전체 테넌트에서 라이선스 오류가 있는 모든 사용자 가져오기
 
-하나 이상의 그룹에서 라이선스 오류가 있는 모든 사용자를 나열하려면 다음 스크립트를 사용할 수 있습니다. 이 스크립트는 사용자당, 라이선스 오류당 한 행이 나열되기 때문에 각 오류의 소스를 명확하게 식별할 수 있습니다.
+다음 스크립트는 하나 이상의 그룹에서 라이선스 오류가 있는 모든 사용자를 가져오는 데 사용할 수 있습니다. 이 스크립트는 사용자당, 라이선스 오류당 한 행을 출력하기 때문에 각 오류의 소스를 명확하게 식별할 수 있습니다.
 
 > [!NOTE]
 > 이 스크립트는 테넌트의 모든 사용자를 열거하기 때문에 대규모 테넌트에는 적합하지 않을 수 있습니다.
@@ -189,7 +186,7 @@ Get-MsolUser -All | Where {$_.IndirectLicenseErrors } | % {
     }  
 ```
 
-출력:
+출력
 
 ```
 UserName         UserId                               GroupId                              LicenseError
@@ -203,17 +200,17 @@ Drew Fogarty     f2af28fc-db0b-4909-873d-ddd2ab1fd58c 1ebd5028-6092-41d0-9668-12
 다음은 라이선스 오류가 포함된 그룹만 검색하는 스크립트의 다른 버전입니다. 문제가 있는 그룹이 많지 않을 것으로 예상되는 시나리오에 더 적합할 수 있습니다.
 
 ```
-Get-MsolUser -All | Where {$_.IndirectLicenseErrors } | % {   
-    $user = $_;
-    $user.IndirectLicenseErrors | % {
-            New-Object Object |
-                Add-Member -NotePropertyName UserName -NotePropertyValue $user.DisplayName -PassThru |
-                Add-Member -NotePropertyName UserId -NotePropertyValue $user.ObjectId -PassThru |
-                Add-Member -NotePropertyName GroupId -NotePropertyValue $_.ReferencedObjectId -PassThru |
-                Add-Member -NotePropertyName LicenseError -NotePropertyValue $_.Error -PassThru
-        }
-    }
-```
+$groupIds = Get-MsolGroup -HasLicenseErrorsOnly $true
+    foreach ($groupId in $groupIds) {
+    Get-MsolGroupMember -All -GroupObjectId $groupId.ObjectID |
+        Get-MsolUser -ObjectId {$_.ObjectId} |
+        Where {$_.IndirectLicenseErrors -and $_.IndirectLicenseErrors.ReferencedObjectId -eq $groupId.ObjectID} |
+        Select DisplayName, `
+               ObjectId, `
+               @{Name="LicenseError";Expression={$_.IndirectLicenseErrors | Where {$_.ReferencedObjectId -eq $groupId.ObjectID} | Select -ExpandProperty Error}}
+ 
+    } 
+``` 
 
 ## <a name="check-if-user-license-is-assigned-directly-or-inherited-from-a-group"></a>사용자 라이선스가 직접 할당되었는지 또는 그룹에서 상속되었는지 확인
 
@@ -294,7 +291,7 @@ Get-MsolUser -All | where {$_.isLicensed -eq $true -and $_.Licenses.AccountSKUID
     @{Name="AssignedFromGroup";Expression={(UserHasLicenseAssignedFromGroup $_ $skuId)}}
 ```
 
-출력:
+출력
 ```
 ObjectId                             SkuId       AssignedDirectly AssignedFromGroup
 --------                             -----       ---------------- -----------------
@@ -306,7 +303,7 @@ ObjectId                             SkuId       AssignedDirectly AssignedFromGr
 ## <a name="remove-direct-licenses-for-users-with-group-licenses"></a>그룹 라이선스가 있는 사용자에 대한 직접 라이선스 제거
 이 스크립트의 용도는 동일한 라이선스를 그룹에서 이미 상속한(예: [그룹 기반 라이선스로 전환](https://docs.microsoft.com/azure/active-directory/active-directory-licensing-group-migration-azure-portal)의 일환으로) 사용자로부터 불필요한 직접 라이선스를 제거하는 것입니다.
 > [!NOTE]
-> 우선 제거할 직접 라이선스가 상속된 라이선스보다 더 많은 서비스 기능을 사용하지 않는지 검사하는 것이 중요합니다. 그렇지 않을 경우 직접 라이선스를 제거하면 사용자가 서비스 및 데이터를 액세스할 수 없게 될 수 있습니다. 현재는 어떤 서비스가 상속된 라이선스를 통해 사용되고 어떤 서비스가 직접 라이선스를 통해 사용되는지 PowerShell을 통해 확인할 수 없습니다. 스크립트에서는 우리가 아는 최소 수준의 서비스가 그룹에서 상속되는 것으로 지정하고 그에 대해 확인합니다.
+> 우선 제거할 직접 라이선스가 상속된 라이선스보다 더 많은 서비스 기능을 사용하지 않는지 검사하는 것이 중요합니다. 그렇지 않을 경우 직접 라이선스를 제거하면 사용자가 서비스 및 데이터를 액세스할 수 없게 될 수 있습니다. 현재는 어떤 서비스가 상속된 라이선스를 통해 사용되고 어떤 서비스가 직접 라이선스를 통해 사용되는지 PowerShell을 통해 확인할 수 없습니다. 스크립트에서는 우리가 아는 최소 수준의 서비스가 그룹에서 상속되는 것으로 지정하고 사용자가 예기치 않게 서비스 액세스 권한을 상실하지 않는지 확인합니다.
 
 ```
 #BEGIN: Helper functions used by the script
@@ -386,7 +383,7 @@ function GetDisabledPlansForSKU
 {
     Param([string]$skuId, [string[]]$enabledPlans)
 
-    $allPlans = Get-MsolAccountSku | where {$_.AccountSkuId -ieq $skuId} | Select -ExpandProperty ServiceStatus | Where {$_.ProvisioningStatus -ieq "PendingActivation"} | Select -ExpandProperty ServicePlan | Select -ExpandProperty ServiceName
+    $allPlans = Get-MsolAccountSku | where {$_.AccountSkuId -ieq $skuId} | Select -ExpandProperty ServiceStatus | Where {$_.ProvisioningStatus -ine "PendingActivation" -and $_.ServicePlan.TargetClass -ieq "User"} | Select -ExpandProperty ServicePlan | Select -ExpandProperty ServiceName
     $disabledPlans = $allPlans | Where {$enabledPlans -inotcontains $_}
 
     return $disabledPlans
@@ -469,7 +466,7 @@ Get-MsolGroupMember -All -GroupObjectId $groupId |
 #END: executing the script
 ```
 
-출력:
+출력
 ```
 UserId                               OperationResult                                                                                
 ------                               ---------------                                                                                
@@ -480,11 +477,10 @@ aadbe4da-c4b5-4d84-800a-9400f31d7371 User has no direct license to remove. Skipp
 
 ## <a name="next-steps"></a>다음 단계
 
-그룹의 라이선스를 관리할 수 있는 기능 집합에 대한 자세한 내용은 다음 항목을 참조하세요.
+그룹의 라이선스를 관리할 수 있는 기능 집합에 대한 자세한 내용은 다음 문서를 참조하세요.
 
 * [Azure Active Directory의 그룹 기반 라이선스란?](active-directory-licensing-whatis-azure-portal.md)
 * [Azure Active Directory에서 그룹에 라이선스 할당](active-directory-licensing-group-assignment-azure-portal.md)
 * [Azure Active Directory에서 그룹에 대한 라이선스 문제 식별 및 해결](active-directory-licensing-group-problem-resolution-azure-portal.md)
 * [Azure Active Directory에서 개별 라이선스 사용자를 그룹 기반 라이선스로 마이그레이션하는 방법](active-directory-licensing-group-migration-azure-portal.md)
 * [Azure Active Directory 그룹 기반 라이선스 추가 시나리오](active-directory-licensing-group-advanced.md)
-

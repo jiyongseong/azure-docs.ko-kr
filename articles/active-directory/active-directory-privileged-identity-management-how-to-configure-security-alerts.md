@@ -1,26 +1,23 @@
 ---
-title: "보안 경고를 구성하는 방법 | Microsoft Docs"
-description: "Azure Privileged Identity Management 확장에 대한 보안 경고를 구성하는 방법 배우기"
+title: 보안 경고를 구성하는 방법 | Microsoft Docs
+description: Azure Privileged Identity Management 확장에 대한 보안 경고를 구성하는 방법 배우기
 services: active-directory
-documentationcenter: 
-author: billmath
-manager: femila
-editor: 
-ms.assetid: 4e0c911a-36c6-42a0-8f79-a01c03d2d04f
+documentationcenter: ''
+author: curtand
+manager: mtillman
+editor: ''
 ms.service: active-directory
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
 ms.workload: identity
+ms.component: users-groups-roles
 ms.date: 06/06/2017
-ms.author: billmath
+ms.author: curtand
 ms.custom: pim
-ms.translationtype: Human Translation
-ms.sourcegitcommit: dcda8b30adde930ab373a087d6955b900365c4cc
-ms.openlocfilehash: dd8987a05c71643b49e0ac9e3c8ae43d47743225
-ms.contentlocale: ko-kr
-ms.lasthandoff: 12/29/2016
-
+ms.openlocfilehash: f77567d35d3916ab1660134959d2d26916e08a0a
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="how-to-configure-security-alerts-in-azure-ad-privileged-identity-management"></a>Azure AD Privileged Identity Management 에서 보안 경고를 구성하는 방법
 ## <a name="security-alerts"></a>보안 경고
@@ -28,13 +25,18 @@ Azure Privileged Identity Management(PIM)은 사용자의 환경에 의심스럽
 
 ![PIM 대시보드 보안 경고 - 스크린 샷][1]
 
-| 경고 | 트리거 | 권장 사항 |
-| --- | --- | --- |
-| **역할이 PIM 외부에서 할당됨** |관리자가 PIM 인터페이스 외부에서 영구적으로 역할에 할당되었습니다. |새 역할 할당을 검토합니다. 다른 서비스는 영구 관리자만 할당할 수 있으므로 필요한 경우 그것을 적격 할당으로 변경합니다. |
-| **역할이 너무 자주 활성화됨** |설정에 허용된 시간 내에 동일한 역할을 다시 활성화한 횟수가 너무 많습니다. |사용자에게 연락하여 역할을 그처럼 많이 활성화한 이유를 알아봅니다. 어쩌면 해당 작업을 끝내기에는 시간 제한이 너무 짧거나 또는 역할을 자동으로 활성화하기 위해 스크립트를 사용할 수도 있습니다. |
-| **역할이 활성화를 위해 Multi-Factor Authentication을 필요로 하지 않음** |MFA를 사용하도록 설정되지 않은 역할이 있습니다. |가장 높은 권한을 가진 역할에 MFA가 필요하지만 모든 역할을 활성화하기 위해 MFA를 사용하도록 적극 권장합니다. |
-| **관리자가 권한 있는 역할을 사용 하지 않음** |최근에 해당 역할을 활성화하지 않은 적합한 관리자가 있습니다. |더 이상 액세스가 필요 없는 사용자를 확인하기 위해 액세스 검토를 시작합니다. |
-| **전역 관리자가 너무 많음** |권장하는 것보다 전역 관리자가 많습니다. |많은 수의 전역 관리자가 있을 경우, 사용자가 필요 이상으로 많은 사용 권한을 갖게 될 가능성이 있습니다. 사용자를 낮은 권한의 역할로 이동하거나, 그 중 일부를 영구 할당 대신에 적격 할당으로 역할을 변경합니다. |
+| 경고 | 심각도 | 트리거 | 권장 사항 |
+| --- | --- | --- | --- |
+| **역할이 PIM 외부에서 할당됨** |높음 |사용자에게 PIM 인터페이스 외부에서 권한 있는 역할이 할당되었습니다. |목록의 사용자를 검토하고 PIM 외부에서 할당된 권한 있는 역할에서 할당 해제합니다. |
+| **역할이 너무 자주 활성화됨** |중간 |설정에 허용된 시간 내에 동일한 역할을 다시 활성화한 횟수가 너무 많습니다. |사용자에게 연락하여 역할을 그처럼 많이 활성화한 이유를 알아봅니다. 어쩌면 해당 작업을 끝내기에는 시간 제한이 너무 짧거나 또는 역할을 자동으로 활성화하기 위해 스크립트를 사용할 수도 있습니다. 해당 역할에 대한 정품 인증 기간이 작업을 수행할만큼 충분히 길게 설정되어 있는지 확인합니다. |
+| **역할이 활성화를 위해 Multi-Factor Authentication을 필요로 하지 않음** |중간 |MFA를 사용하도록 설정되지 않은 역할이 있습니다. |가장 높은 권한을 가진 역할에 MFA가 필요하지만 모든 역할을 활성화하기 위해 MFA를 사용하도록 적극 권장합니다. |
+| **사용자가 권한 있는 역할을 사용하지 않음** |낮음 |최근에 해당 역할을 활성화하지 않은 적합한 관리자가 있습니다. |더 이상 액세스가 필요 없는 사용자를 확인하기 위해 액세스 검토를 시작합니다. |
+| **전역 관리자가 너무 많음** |낮음 |권장하는 것보다 전역 관리자가 많습니다. |많은 수의 전역 관리자가 있을 경우, 사용자가 필요 이상으로 많은 사용 권한을 갖게 될 가능성이 있습니다. 사용자를 낮은 권한의 역할로 이동하거나, 그 중 일부를 영구 할당 대신에 적격 할당으로 역할을 변경합니다. |
+
+### <a name="severity"></a>심각도
+* **높음**: 정책 위반으로 인해 즉각적인 조치를 요구합니다. 
+* **보통**: 즉각적인 조치를 요구하지는 않지만 잠재적으로 정책이 위반될 수 있음을 나타냅니다.
+* **낮음**: 즉각적인 조치를 요구하지는 않지만 정책 변경을 제안합니다.
 
 ## <a name="configure-security-alert-settings"></a>보안 경고 설정 구성
 PIM의 일부 보안 경고를 환경 및 보안 목표에 맞게 사용자 지정할 수 있습니다. 설정 블레이드에 도달하려면 다음 단계를 수행합니다.
@@ -68,4 +70,3 @@ PIM은 서로 다른 두 조건이 충족되고, 그 두 조건을 모두 구성
 
 [1]: ./media/active-directory-privileged-identity-management-how-to-configure-security-alerts/PIM_security_dash.png
 [2]: ./media/active-directory-privileged-identity-management-how-to-configure-security-alerts/PIM_security_settings.png
-

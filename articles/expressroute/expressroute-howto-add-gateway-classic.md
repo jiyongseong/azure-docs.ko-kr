@@ -1,6 +1,6 @@
 ---
 title: "PowerShell을 사용하여 ExpressRoute용 VNet 게이트웨이 구성: classic: Azure | Microsoft Docs"
-description: "Express 경로 구성을 위해 PowerShell을 사용하여 클래식 배포 모델 VNet에 대한 VNet 게이트웨이 구성"
+description: "ExpressRoute 구성을 위해 PowerShell을 사용하여 클래식 배포 모델 VNet에 대한 VNet 게이트웨이 구성"
 documentationcenter: na
 services: expressroute
 author: charwen
@@ -15,12 +15,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/21/2017
 ms.author: charwen
-translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: aa9b7e3ac07d4da035afd549fbeebaec17b56426
-ms.lasthandoff: 04/27/2017
-
-
+ms.openlocfilehash: 195a38fa45f1c514a93980e777fb0d8238aa3f3f
+ms.sourcegitcommit: b5c6197f997aa6858f420302d375896360dd7ceb
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/21/2017
 ---
 # <a name="configure-a-virtual-network-gateway-for-expressroute-using-powershell-classic"></a>PowerShell을 사용하여 ExpressRoute용 가상 네트워크 게이트웨이 구성(클래식)
 > [!div class="op_single_selector"]
@@ -30,7 +29,7 @@ ms.lasthandoff: 04/27/2017
 > 
 > 
 
-이 문서에서는 기존 VNet에 대한 가상 네트워크(VNet) 게이트웨이를 추가하고, 크기를 조정하고, 제거하는 단계를 안내합니다. 이 구성 단계는 특히 **클래식 배포 모델** 을 사용하여 만들었으며 Express 경로 구성에서 사용할 VNet을 위한 단계입니다. 
+이 문서에서는 기존 VNet에 대한 가상 네트워크(VNet) 게이트웨이를 추가하고, 크기를 조정하고, 제거하는 단계를 안내합니다. 이 구성 단계는 특히 **클래식 배포 모델** 을 사용하여 만들었으며 ExpressRoute 구성에서 사용할 VNet을 위한 단계입니다. 
 
 [!INCLUDE [expressroute-classic-end-include](../../includes/expressroute-classic-end-include.md)]
 
@@ -44,6 +43,5 @@ ms.lasthandoff: 04/27/2017
 [!INCLUDE [expressroute-gateway-classic-ps](../../includes/expressroute-gateway-classic-ps-include.md)]
 
 ## <a name="next-steps"></a>다음 단계
-VNet 게이트웨이를 만든 후 VNet을 Express 경로 회로에 연결할 수 있습니다. [가상 네트워크를 Express 경로 회로에 연결](expressroute-howto-linkvnet-classic.md)을 참조하세요.
-
+VNet 게이트웨이를 만든 후 VNet을 ExpressRoute 회로에 연결할 수 있습니다. [Virtual Network를 ExpressRoute 회로에 연결](expressroute-howto-linkvnet-classic.md)을 참조하세요.
 

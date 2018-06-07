@@ -1,27 +1,24 @@
 ---
-title: "Windows 기반 Azure HDInsight용 Java HBase 응용 프로그램 빌드 | Microsoft Docs"
-description: "Apache Maven을 사용하여 Java 기반 Apache HBase 응용 프로그램을 빌드한 다음 Windows 기반 Azure HDInsight 클러스터에 배포하는 방법에 대해 알아봅니다."
+title: Windows 기반 Azure HDInsight용 Java HBase 응용 프로그램 빌드 | Microsoft Docs
+description: Apache Maven을 사용하여 Java 기반 Apache HBase 응용 프로그램을 빌드한 다음 Windows 기반 Azure HDInsight 클러스터에 배포하는 방법에 대해 알아봅니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: Blackmist
 manager: jhubbard
 editor: cgronlun
 tags: azure-portal
 ms.assetid: 7f4a4e02-45ab-40dd-842b-3ec034f256c9
 ms.service: hdinsight
-ms.workload: big-data
-ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 02/05/2017
 ms.author: larryfr
 ROBOTS: NOINDEX
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 83aeb23275a86e5d4706a0ad7ea72d11d71f9604
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
+ms.openlocfilehash: 84facb99b2264b48ede7306ae87a79605e6e8bed
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="use-maven-to-build-java-applications-that-use-hbase-with-windows-based-hdinsight-hadoop"></a>Maven을 사용하여 Windows 기반 HDInsight(Hadoop)에서 HBase를 사용하는 Java 응용 프로그램 빌드
 Apache Maven을 사용하여 Java로 [Apache HBase](http://hbase.apache.org/) 응용 프로그램을 만들어 빌드하는 방법을 알아봅니다. 그런 다음 Azure HDInsight(Hadoop)에서 응용 프로그램을 사용합니다.
@@ -60,7 +57,7 @@ Apache Maven을 사용하여 Java로 [Apache HBase](http://hbase.apache.org/) �
           <version>1.1.2</version>
         </dependency>
 
-    이 섹션을 통해 Maven은 프로젝트에 **hbase-client** 버전 **1.1.2**가 필요하다는 것을 인식합니다. 컴파일 시간에 이 종속성이 기본 Maven 리포지토리에서 다운로드됩니다. [Maven 중앙 리포지토리 검색](http://search.maven.org/#artifactdetails%7Corg.apache.hbase%7Chbase-client%7C0.98.4-hadoop2%7Cjar) 을 사용하여 이 종속성에 대한 자세한 정보를 확인할 수 있습니다.
+    이 섹션을 통해 Maven은 프로젝트에 **hbase-client** 버전 **1.1.2**가 필요하다는 것을 인식합니다. 컴파일 시간에 이 종속성이 기본 Maven 리포지토리에서 다운로드됩니다. [Maven 중앙 리포지토리 검색](http://search.maven.org/#artifactdetails%7Corg.apache.hbase%7Chbase-client%7C0.98.4-hadoop2%7Cjar)을 사용하여 이 종속성에 대한 자세한 정보를 확인할 수 있습니다.
 
    > [!IMPORTANT]
    > 버전 번호는 HDInsight 클러스터와 함께 제공되는 HBase 버전과 일치해야 합니다. 다음 표를 사용하여 올바른 버전 번호를 찾으세요.
@@ -525,7 +522,7 @@ Apache Maven을 사용하여 Java로 [Apache HBase](http://hbase.apache.org/) �
             $sub = Get-AzureRmSubscription -ErrorAction SilentlyContinue
             if(-not($sub))
             {
-                throw "No active Azure subscription found! If you have a subscription, use the Login-AzureRmAccount cmdlet to login to your subscription."
+                throw "No active Azure subscription found! If you have a subscription, use the Connect-AzureRmAccount cmdlet to login to your subscription."
             }
         }
 
@@ -618,4 +615,3 @@ Apache Maven을 사용하여 Java로 [Apache HBase](http://hbase.apache.org/) �
 ## <a name="troubleshooting"></a>문제 해결
 ### <a name="no-results-or-unexpected-results-when-using-start-hbaseexample"></a>Start-HBaseExample을 사용할 경우 결과가 없거나 예기치 않은 결과가 표시됨
 `-showErr` 매개 변수를 사용하여 작업을 실행하는 동안 생성된 표준 오류(STDERR)을 확인합니다.
-

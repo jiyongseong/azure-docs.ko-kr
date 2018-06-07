@@ -1,28 +1,26 @@
 ---
-title: "Azure Compute 단위 개요 | Microsoft Docs"
-description: "Linux용 Azure Compute 단위의 개념 개요 ACU에서는 Azure SKU에서 CPU 성능을 비교하는 방법을 제공합니다."
+title: Azure Compute 단위 개요 | Microsoft Docs
+description: Linux용 Azure Compute 단위의 개념 개요 ACU에서는 Azure SKU에서 CPU 성능을 비교하는 방법을 제공합니다.
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: jonbeck7
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager,azure-service-management
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
-ms.date: 07/28/2017
+ms.date: 12/05/2017
 ms.author: jonbeck
-ms.translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 250417aa1bbacb038dbff66daab7f31be202e40a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/03/2017
-
+ms.openlocfilehash: 387133bf0087d6e3fc3dc725749661235d438d27
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/20/2018
 ---
-
 # <a name="azure-compute-unit-acu"></a>ACU(Azure Compute 단위)
 
 [!INCLUDE [virtual-machines-common-acu](../../../includes/virtual-machines-common-acu.md)]

@@ -1,8 +1,8 @@
 ---
-title: "Azure HDInsight에서 ScaleR 및 SparkR 사용 | Microsoft Docs"
-description: "R Server와 HDInsight에서 ScaleR 및 SparkR을 사용합니다."
+title: Azure HDInsight에서 ScaleR 및 SparkR 사용 | Microsoft Docs
+description: R Server와 HDInsight에서 ScaleR 및 SparkR을 사용합니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: bradsev
 manager: jhubbard
 editor: cgronlun
@@ -10,40 +10,37 @@ tags: azure-portal
 ms.assetid: 5a76f897-02e8-4437-8f2b-4fb12225854a
 ms.service: hdinsight
 ms.custom: hdinsightactive
-ms.workload: big-data
-ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 06/19/2017
 ms.author: bradsev
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 7948c99b7b60d77a927743c7869d74147634ddbf
-ms.openlocfilehash: 2f79c8123eda9127596ef23a4212f66c709cebd1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
-
+ms.openlocfilehash: 4306f265bf7f52f9bc307def2256dd62e94e004f
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-
 # <a name="combine-scaler-and-sparkr-in-hdinsight"></a>HDInsight에서 ScaleR과 SparkR 결합
 
-이 문서는 **SparkR**과 조인된 항공기 지연 및 날씨에 대한 데이터에서 **ScaleR** 로지스틱 회귀 모델을 사용하여 항공기 도착 지연을 예측하는 방법을 보여줍니다. 이 시나리오에서는 분석을 위해 Microsoft R Server와 함께 사용하는 Spark에서 데이터를 조작하기 위한 ScaleR의 기능을 보여줍니다. 이러한 기술 조합을 통해 분산 처리에서 최신 기능을 적용할 수 있습니다.
+이 문서에서는 **ScaleR** 로지스틱 회귀 모델을 사용하여 항공편 도착 지연을 예측하는 방법을 보여 줍니다. 이 예제에서는 **SparkR**을 사용하여 연결되는 항공편 지연과 날씨 데이터를 사용합니다.
 
 두 패키지 모두 Hadoop의 Spark 실행 엔진에서 실행되지만 각각 고유한 각 Spark 세션이 필요하므로 메모리 내 데이터 공유에서 차단됩니다. R Server의 향후 버전에서 이 문제를 해결할 때까지는 겹치지 않는 Spark 세션을 유지하고 중간 파일을 통해 데이터를 교환하는 것이 해결 방법입니다. 아래 지침은 이러한 요구 사항을 간단하게 달성할 수 있음을 보여줍니다.
 
-여기에서는 Marin Inchiosa와 Roni Burd가 Stratata 2016에서 처음으로 발표했고 [R로 확장 가능한 데이터 과학 플랫폼 구축](http://event.on24.com/eventRegistration/console/EventConsoleNG.jsp?uimode=nextgeneration&eventid=1160288&sessionid=1&key=8F8FB9E2EB1AEE867287CD6757D5BD40&contenttype=A&eventuserid=305999&playerwidth=1000&playerheight=650&caller=previewLobby&text_language_id=en&format=fhaudio)(영문) 웹 세미나를 통해 공유한 예제를 사용하겠습니다. 이 예제에서는 SparkR을 사용하여 잘 알려져 있는 항공기 도착 지연 데이터 집합을 출도착 공항 날씨 데이터와 조인합니다. 그런 다음, 조인된 데이터는 항공기 도착 지연 예측을 위한 ScaleR 로지스틱 회귀에 대한 입력으로 사용됩니다.
+이 예제는 Mario Inchiosa와 Roni Burd가 Strata 2016에서 나눈 대화에서 처음 공유되었습니다. 이 대화는 [R을 사용하여 확장 가능한 데이터 과학 플랫폼 빌드](http://event.on24.com/eventRegistration/console/EventConsoleNG.jsp?uimode=nextgeneration&eventid=1160288&sessionid=1&key=8F8FB9E2EB1AEE867287CD6757D5BD40&contenttype=A&eventuserid=305999&playerwidth=1000&playerheight=650&caller=previewLobby&text_language_id=en&format=fhaudio)에서 찾을 수 있습니다.
 
-안내한 코드는 원래 Azure HDInsight 클러스터의 Spark에서 실행 중인 R Server용으로 작성된 것입니다. 하지만 하나의 스크립트에서 SparkR과 ScaleR을 혼합하여 사용하는 개념도 온-프레미스 환경의 컨텍스트에서 유효합니다. 다음에 나오는 예제에서는 R 및 R Server의 [ScaleR](https://msdn.microsoft.com/microsoft-r/scaler-user-guide-introduction) 라이브러리에 대한 중간 수준의 지식을 가정하고, 이 시나리오를 진행하면서 [SparkR](https://spark.apache.org/docs/2.1.0/sparkr.html)을 사용하는 방법도 소개합니다.
+이 코드는 원래 Azure HDInsight 클러스터의 Spark에서 실행 중인 R Server용으로 작성된 것입니다. 하지만 하나의 스크립트에서 SparkR과 ScaleR을 혼합하여 사용하는 개념도 온-프레미스 환경의 컨텍스트에서 유효합니다. 
+
+이 문서의 단계에서는 사용자가 R 및 R Server의 [ScaleR](https://msdn.microsoft.com/microsoft-r/scaler-user-guide-introduction) 라이브러리에 대한 중간 수준의 지식을 보유하고 있다고 가정합니다. 이 시나리오를 진행하는 동안 [SparkR](https://spark.apache.org/docs/2.1.0/sparkr.html)도 소개됩니다.
 
 ## <a name="the-airline-and-weather-datasets"></a>항공사 및 날씨 데이터 집합
 
-**AirOnTime08to12CSV** 항공사의 공용 데이터 집합에는 1987년 10월부터 2012년 12월까지 미국 내 모든 상용 항공편에 대한 항공편 도착 및 출발 세부 정보가 포함되어 있습니다. 이는 총 1억 5천만 개의 레코드를 포함하고 있는 큰 데이터 집합입니다. 압축을 풀면 4GB에 해당하는 크기입니다. [미국 정부 아카이브](http://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236)에서 제공되며, [Revolution Analytics 데이터 집합 리포지토리](http://packages.revolutionanalytics.com/datasets/AirOnTime87to12/)에 있는 303개의 별도 월간 CSV 파일 집합을 포함하는 zip 파일(AirOnTimeCSV.zip)로 더 편리하게 사용할 수 있습니다.
+항공편 데이터는 [미국 정부 아카이브](http://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236)에서 사용할 수 있습니다. [AirOnTimeCSV.zip](http://packages.revolutionanalytics.com/datasets/AirOnTime87to12/AirOnTimeCSV.zip)에서 zip 파일로도 사용 가능합니다.
 
-항공기 지연에 대한 날씨의 영향을 확인하려면 각 공항의 날씨 데이터도 필요합니다. 이 데이터는 [National Oceanic and Atmospheric Administration(미국해양대기관리처) 리포지토리](http://www.ncdc.noaa.gov/orders/qclcd/)에서 월별로 원시 형식의 zip 파일로 다운로드할 수 있습니다. 이 예제에서는 2007년 5월부터 2012년 12월까지의 날씨 데이터를 가져와서 68개 월별 zip 파일 각각에 포함된 시간별 데이터 파일을 사용했습니다. 또한 월별 zip 파일에는 기상 관측소 ID(WBAN), 연결된 공항(CallSign) 및 UTC 공항 표준 시간대 오프셋(TimeZone) 사이의 매핑(YYYYMMstation.txt)도 포함되어 있습니다. 항공편 지연과 날씨 데이터를 조인할 때 이 모든 정보가 필요합니다.
+날씨 데이터는 [National Oceanic and Atmospheric Administration(미국해양대기관리처) 리포지토리](http://www.ncdc.noaa.gov/orders/qclcd/)에서 월별로 원시 형식의 zip 파일로 다운로드할 수 있습니다. 이 예제의 경우 2007년 5월 – 2012년 12월에 대한 데이터를 다운로드하세요. 시간별 데이터 파일과 각 zip 내에 포함된 `YYYYMMMstation.txt` 파일을 사용하세요. 
 
 ## <a name="setting-up-the-spark-environment"></a>Spark 환경 설정
 
-첫 번째 단계는 Spark 환경을 설정하는 것입니다. 먼저 다음과 같이 입력 데이터 디렉터리를 포함하고 있는 디렉터리를 가리키고, Spark 계산 컨텍스트를 만들고, 정보 로깅을 위한 로깅 함수를 콘솔에 만듭니다.
+다음 코드를 사용하여 Spark 환경을 설정합니다.
 
 ```
 workDir        <- '~'  
@@ -88,7 +85,7 @@ logmsg('Start')
 logmsg(paste('Number of task nodes=',length(trackers)))
 ```
 
-다음으로 SparkR을 사용하고 SparkR 세션을 초기화할 수 있도록 "Spark_Home"을 R 패키지의 검색 경로에 추가합니다.
+다음으로, R 패키지에 대한 검색 경로에 `Spark_Home`을 추가합니다. 검색 경로에 추가하면 SparkR를 사용하고 SparkR 세션을 초기화할 수 있습니다.
 
 ```
 #..setup for use of SparkR  
@@ -120,17 +117,9 @@ sqlContext <- sparkRSQL.init(sc)
 - "WindSpeed"
 - "Altimeter"
 
-그런 다음 기상 관측소와 연결된 공항 코드를 추가하고 측정값을 현지 시간에서 UTC로 변환합니다.
+그런 다음, 기상 관측소와 연결된 공항 코드를 추가하고 측정값을 현지 시간에서 UTC로 변환합니다.
 
-기상 관측소(WBAN) 정보를 공항 코드에 매핑하는 파일을 만들어 시작합니다. 날씨 데이터에 포함된 매핑 파일에서 이 상관 관계를 가져올 수 있습니다. 날씨 데이터의 *CallSign*(예: LAX) 필드를 항공사 데이터의 *Origin*에 매핑합니다. 그러나 *WBAN*을 *AirportID*(예: LAX의 경우 12892)에 매핑하고 “wban-to-airport-id-tz.CSV”라고 하는 CSV 파일로 저장된 *TimeZone*을 포함한 사용 가능한 다른 매핑이 있었습니다. 예:
-
-| AirportID | WBAN | TimeZone
-|-----------|------|---------
-| 10685 | 54831 | -6
-| 14871 | 24232 | -8
-| .. | .. | ..
-
-다음 코드는 각 시간별 원시 날씨 데이터 파일을 읽어서 필요한 열에 하위 집합으로 넣고 기상 관측소 매핑 파일을 병합한 다음 측정값의 날씨 시간을 UTC로 조정한 후 파일의 새 버전을 기록합니다.
+기상 관측소(WBAN) 정보를 공항 코드에 매핑하는 파일을 만들어 시작합니다. 다음 코드는 각 시간별 원시 날씨 데이터 파일을 읽어서 필요한 열에 하위 집합으로 넣고 기상 관측소 매핑 파일을 병합한 다음 측정값의 날씨 시간을 UTC로 조정한 후 파일의 새 버전을 기록합니다.
 
 ```
 # Look up AirportID and Timezone for WBAN (weather station ID) and adjust time
@@ -555,11 +544,10 @@ logmsg(paste('Elapsed time=',sprintf('%6.2f',elapsed),'(sec)\n\n'))
 
 - R Server에 대한 일반 정보는 [R 시작](https://msdn.microsoft.com/microsoft-r/microsoft-r-get-started-node)(영문)을 참조하세요.
 
-- HDInsight의 R Server에 대한 자세한 내용은 [Azure HDInsight의 R Server 개요](hdinsight-hadoop-r-server-overview.md) 및 [Azure HDInsight의 R Server](hdinsight-hadoop-r-server-get-started.md)를 참조하세요.
+- HDInsight의 R Server에 대한 자세한 내용은 [Azure HDInsight의 R Server 개요](r-server/r-server-overview.md) 및 [Azure HDInsight의 R Server](r-server/r-server-get-started.md)를 참조하세요.
 
 SparkR 사용에 대한 자세한 내용은 다음을 참조하세요.
 
 - [Apache SparkR 문서](https://spark.apache.org/docs/2.1.0/sparkr.html)
 
 - Databricks의 [SparkR 개요](https://docs.databricks.com/spark/latest/sparkr/overview.html)(영문)
-

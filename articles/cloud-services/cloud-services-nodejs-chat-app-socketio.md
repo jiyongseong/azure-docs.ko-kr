@@ -1,29 +1,29 @@
 ---
-title: "Socket.io를 사용하는 Node.js 응용 프로그램 | Microsoft Docs"
-description: "Azure에 호스트된 node.js 응용 프로그램에서 socket.io를 사용하는 방법을 알아봅니다."
+title: Socket.io를 사용하는 Node.js 응용 프로그램 - Azure
+description: Azure에 호스트된 node.js 응용 프로그램에서 socket.io를 사용하는 방법을 알아봅니다.
 services: cloud-services
 documentationcenter: nodejs
-author: rmcmurray
-manager: erikre
-editor: 
+author: thraka
+manager: timlt
+editor: ''
 ms.assetid: 7f9435e0-7732-4aa1-a4df-ea0e894b847f
 ms.service: cloud-services
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: article
-ms.date: 04/25/2017
-ms.author: robmcm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 138f04f8e9f0a9a4f71e43e73593b03386e7e5a9
-ms.openlocfilehash: efa459f6b382ff22c94802e1250836d5f622b4ed
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/29/2017
-
-
+ms.date: 08/17/2017
+ms.author: adegeo
+ms.openlocfilehash: 0139c42334b53364aee8cfd29cfa771d47e2ccc8
+ms.sourcegitcommit: 909469bf17211be40ea24a981c3e0331ea182996
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
+ms.locfileid: "34011318"
 ---
 # <a name="build-a-nodejs-chat-application-with-socketio-on-an-azure-cloud-service"></a>Azure 클라우드 서비스에서 Socket.IO를 사용하여 Node.js 채팅 응용 프로그램 빌드
-Socket.IO는 node.js 서버와 클라이언트 간에 실시간 커뮤니케이션을 제공합니다. 이 자습서는 Azure에서 채팅 응용 프로그램을 기반으로 하는 socket.IO 호스팅에 대해 안내합니다. Socket.IO에 대한 자세한 내용은 <http://socket.io/>(영문)를 참조하세요.
+
+Socket.IO는 node.js 서버와 클라이언트 간에 실시간 통신을 제공합니다. 이 자습서는 Azure에서 채팅 응용 프로그램을 기반으로 하는 socket.IO 호스팅에 대해 안내합니다. Socket.IO에 대한 자세한 내용은 [socket.io](http://socket.io)를 참조하세요.
 
 아래에는 완성된 응용 프로그램의 스크린샷이 표시되어 있습니다.
 
@@ -62,7 +62,7 @@ Socket.IO는 node.js 서버와 클라이언트 간에 실시간 커뮤니케이�
 
 1. **복제** 단추를 눌러 리포지토리의 로컬 복사본을 만듭니다. **ZIP** 단추를 눌러 프로젝트를 다운로드할 수도 있습니다.
    
-   ![ZIP 다운로드 아이콘이 강조 표시된 https://github.com/LearnBoost/socket.io/tree/master/examples/chat을 표시하는 브라우저 창][chat-example-view]
+   ![ZIP 다운로드 아이콘이 강조 표시된 https://github.com/LearnBoost/socket.io/tree/master/examples/chat을 보는 브라우저 창][chat-example-view]
 2. **examples\\chat** 디렉터리를 찾을 때까지 로컬 리포지토리의 디렉터리 구조를 탐색합니다. 이 디렉터리의 내용을 이전에 만든 **C:\\node\\chatapp\\WorkerRole1** 디렉터리로 복사합니다.
    
    ![보관 파일에서 압축을 푼 examples\\chat 디렉터리의 내용을 표시하는 탐색기][chat-contents]
@@ -74,7 +74,7 @@ Socket.IO는 node.js 서버와 클라이언트 간에 실시간 커뮤니케이�
 Azure 에뮬레이터에서 응용 프로그램을 테스트하기 전에 몇 가지 항목을 수정해야 합니다. server.js 파일에 대해 다음 단계를 수행합니다.
 
 1. Visual Studio 또는 임의의 텍스트 편집기에서 **server.js** 파일을 엽니다.
-2. server.js의 시작 부분에서 **모듈 종속성** 섹션을 찾아 아래와 같이 **sio = require('..//..//lib//socket.io')**가 포함된 줄을 **sio = require('socket.io')**로 변경합니다.
+2. server.js의 시작 부분에서 **모듈 종속성** 섹션을 찾아 아래와 같이 **sio = require('..//..//lib//socket.io')** 가 포함된 줄을 **sio = require('socket.io')** 로 변경합니다.
    
        var express = require('express')
          , stylus = require('stylus')
@@ -124,7 +124,7 @@ Azure 에뮬레이터에서 응용 프로그램을 테스트하기 전에 몇 �
 4. 응용 프로그램을 테스트한 후 다음 명령을 실행하여 에뮬레이터를 중지합니다.
    
        PS C:\node\chatapp\WorkerRole1> Stop-AzureEmulator
-5. Azure에 응용 프로그램을 배포하려면 **Publish-AzureServiceProject** cmdlet을 사용합니다. 예:
+5. Azure에 응용 프로그램을 배포하려면 **Publish-AzureServiceProject** cmdlet을 사용합니다. 예: 
    
        PS C:\node\chatapp\WorkerRole1> Publish-AzureServiceProject -ServiceName mychatapp -Location "East US" -Launch
    
@@ -145,7 +145,7 @@ Azure 에뮬레이터에서 응용 프로그램을 테스트하기 전에 몇 �
 현재 응용 프로그램이 Azure에서 실행되고 있으며 Socket.IO를 사용하여 다른 클라이언트 간에 채팅 메시지를 릴레이할 수 있습니다.
 
 > [!NOTE]
-> 간단히 하기 위해 샘플은 같은 인스턴스에 연결된 사용자 간 채팅으로 제한됩니다. 즉 클라우드 서비스에서 작업자 역할 인스턴스를 두 개 만드는 경우 사용자는 같은 작업자 역할 인스턴스에 연결된 사람들과만 채팅할 수 있습니다. 응용 프로그램을 여러 역할 인스턴스와 작업하도록 조정하려면 서비스 버스 같은 기술을 사용하여 인스턴스 간에 Socket.IO 저장소 상태를 공유할 수 있습니다. 예를 들어, [Node.js에 대한 Azure SDK GitHub 리포지토리](https://github.com/WindowsAzure/azure-sdk-for-node)(영문)의 서비스 버스 큐 및 토픽 사용 샘플을 참조하세요.
+> 간단히 하기 위해 샘플은 같은 인스턴스에 연결된 사용자 간 채팅으로 제한됩니다. 즉 클라우드 서비스에서 작업자 역할 인스턴스를 두 개 만드는 경우 사용자는 같은 작업자 역할 인스턴스에 연결된 사람들과만 채팅할 수 있습니다. 응용 프로그램을 여러 역할 인스턴스와 작업하도록 조정하려면 Service Bus 같은 기술을 사용하여 인스턴스 간에 Socket.IO 저장소 상태를 공유할 수 있습니다. 예를 들어, [Node.js에 대한 Azure SDK GitHub 리포지토리](https://github.com/WindowsAzure/azure-sdk-for-node)(영문)의 Service Bus 큐 및 토픽 사용 샘플을 참조하세요.
 > 
 > 
 
@@ -174,6 +174,5 @@ Azure 에뮬레이터에서 응용 프로그램을 테스트하기 전에 몇 �
 [chat-contents]: ./media/cloud-services-nodejs-chat-app-socketio/socketio-5.png
 [The-output-of-the-npm-install-command]: ./media/cloud-services-nodejs-chat-app-socketio/socketio-7.png
 [The output of the Publish-AzureService command]: ./media/cloud-services-nodejs-chat-app-socketio/socketio-9.png
-
 
 

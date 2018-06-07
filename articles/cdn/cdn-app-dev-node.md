@@ -14,11 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: mazha
-translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: d87daad7e550c8989acc075292b17002c424411e
-
-
+ms.openlocfilehash: 46ae8cd9775432d126cbde856c1fb06ea319297e
+ms.sourcegitcommit: b5c6197f997aa6858f420302d375896360dd7ceb
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/21/2017
 ---
 # <a name="get-started-with-azure-cdn-development"></a>Azure CDN 개발 시작
 > [!div class="op_single_selector"]
@@ -367,10 +367,4 @@ Node.js용 Azure CDN SDK에 대한 참조를 보려면 [참조](http://azure.git
 Node.js용 Azure SDK에 대한 추가 설명서를 찾으려면 [전체 참조](http://azure.github.io/azure-sdk-for-node/)를 봅니다.
 
 [PowerShell](cdn-manage-powershell.md)을 사용하여 CDN 리소스를 관리합니다.
-
-
-
-
-<!--HONumber=Nov16_HO3-->
-
 

@@ -14,13 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/27/2017
 ms.author: LADocs; padmavc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c308183ffe6a01f4d4bf6f5817945629cbcedc92
-ms.openlocfilehash: e83488f4ec420c2af40d373239ba6989387da3cb
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/17/2017
-
-
+ms.openlocfilehash: 799d444632b67788520be8a777ec656076022583
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="encode-edifact-messages-for-azure-logic-apps-with-the-enterprise-integration-pack"></a>엔터프라이즈 통합 팩이 포함된 Azure Logic Apps에 대한 EDIFACT 메시지 인코딩
 
@@ -38,11 +36,11 @@ EDIFACT 메시지 인코딩 커넥터를 사용하여 EDI 및 파트너 관련 �
 
 ## <a name="encode-edifact-messages"></a>EDIFACT 메시지 인코딩
 
-1. [논리 앱 만들기](logic-apps-create-a-logic-app.md)
+1. [논리 앱 만들기](quickstart-create-first-logic-app-workflow.md)
 
 2. EDIFACT 메시지 인코딩 커넥터에는 트리거가 없으므로 요청 트리거와 마찬가지로 논리 앱을 시작하는 트리거를 추가해야 합니다. Logic App Designer에서 트리거를 추가하고 작업을 논리 앱에 추가합니다.
 
-3.    검색 상자에서 필터로 "EDIFACT"를 입력합니다. **규약 이름으로 EDIFACT 메시지 인코딩** 또는 **ID로 EDIFACT 메시지 인코딩** 중 하나를 선택합니다.
+3.  검색 상자에서 필터로 "EDIFACT"를 입력합니다. **규약 이름으로 EDIFACT 메시지 인코딩** 또는 **ID로 EDIFACT 메시지 인코딩** 중 하나를 선택합니다.
    
     ![EDIFACT 검색](media/logic-apps-enterprise-integration-edifact-encode/edifactdecodeimage1.png)  
 
@@ -52,12 +50,12 @@ EDIFACT 메시지 인코딩 커넥터를 사용하여 EDI 및 파트너 관련 �
 
     별표가 있는 속성은 필수 사항입니다.
 
-    | 속성 | 세부 정보 |
+    | 자산 | 세부 정보 |
     | --- | --- |
     | 연결 이름 * |연결의 이름을 입력합니다. |
     | 통합 계정 * |통합 계정의 이름을 입력합니다. 통합 계정 및 논리 앱이 동일한 Azure 위치에 있어야 합니다. |
 
-5.    완료되면 연결 정보는 이 예제와 유사해야 합니다. 연결 만들기를 완료하려면 **만들기**를 선택합니다.
+5.  완료되면 연결 정보는 이 예제와 유사해야 합니다. 연결 만들기를 완료하려면 **만들기**를 선택합니다.
 
     ![통합 계정 연결 세부 사항](media/logic-apps-enterprise-integration-edifact-encode/edifactencodeimage2.png)
 
@@ -100,5 +98,4 @@ EDIFACT 커넥터에 대 한 Swagger 세부 정보를 보려면 [EDIFACT](/conne
 
 ## <a name="next-steps"></a>다음 단계
 [엔터프라이즈 통합 팩에 대해 자세히 알아보기](logic-apps-enterprise-integration-overview.md "엔터프라이즈 통합 팩에 대해 알아보기") 
-
 

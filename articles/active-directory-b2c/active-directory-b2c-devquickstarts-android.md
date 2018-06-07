@@ -1,26 +1,22 @@
 ---
-title: "Azure Active Directory B2C: Android 응용 프로그램을 사용하여 토큰 가져오기 | Microsoft Docs"
-description: "이 문서에서는 Azure Active Directory B2C와 함께 AppAuth를 사용하는 Android 앱을 만들어 사용자 ID를 관리하고 사용자를 인증하는 방법을 보여 줍니다."
+title: 'Azure Active Directory B2C: Android 응용 프로그램을 사용하여 토큰 가져오기 | Microsoft Docs'
+description: 이 문서에서는 Azure Active Directory B2C와 함께 AppAuth를 사용하는 Android 앱을 만들어 사용자 ID를 관리하고 사용자를 인증하는 방법을 보여 줍니다.
 services: active-directory-b2c
 documentationcenter: android
-author: parakhj
-manager: krassk
-editor: 
-ms.assetid: d00947c3-dcaa-4cb3-8c2e-d94e0746d8b2
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
 ms.tgt_pltfrm: mobile-android
-ms.devlang: java
 ms.topic: article
 ms.date: 03/06/2017
-ms.author: parakhj
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a30a90682948b657fb31dd14101172282988cbf0
-ms.openlocfilehash: cd4b8048245be49ea79bcb1b364f2f99c56f8291
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/25/2017
-
-
+ms.author: davidmu
+ms.openlocfilehash: 6c4c9359571882fbbea4e7701305e30e0f49f460
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="azure-ad-b2c-sign-in-using-an-android-application"></a>Azure AD B2C: Android 응용 프로그램을 사용하여 로그인
 
@@ -44,8 +40,6 @@ Azure AD B2C를 사용하기 전에 디렉터리 또는 테넌트를 만들어�
 * 응용 프로그램에 **네이티브 클라이언트**를 포함합니다.
 * 앱에 할당된 **응용 프로그램 ID**를 복사합니다. 이 ID는 나중에 필요합니다.
 * 네이티브 클라이언트 **리디렉션 URI**(예: com.onmicrosoft.fabrikamb2c.exampleapp://oauth/redirect)를 설정합니다. 이 ID는 나중에도 필요합니다.
-
-[!INCLUDE [active-directory-b2c-devquickstarts-v2-apps](../../includes/active-directory-b2c-devquickstarts-v2-apps.md)]
 
 ## <a name="create-your-policies"></a>정책 만들기
 
@@ -143,5 +137,4 @@ AuthorizationRequest req = new AuthorizationRequest.Builder(
 프로세스의 나머지 단계를 완료하는 방법은 [AppAuth 가이드](https://openid.github.io/AppAuth-Android/)를 참조하세요. 작업 중인 앱으로 빠르게 시작해야 하는 경우에는 [샘플](https://github.com/Azure-Samples/active-directory-android-native-appauth-b2c)을 확인하세요. [README.md](https://github.com/Azure-Samples/active-directory-android-native-appauth-b2c/blob/master/README.md)에 나온 단계에 따라 사용자 고유의 Azure AD B2C 구성을 입력합니다.
 
 Microsoft는 사용자 의견 및 제안을 항상 환영합니다! 이 토픽을 완료하기가 어렵거나 이 콘텐츠를 개선할 사항이 있는 경우 페이지의 맨 아래에 의견을 보내주시면 감사하겠습니다. 기능 요청이 있는 경우 [UserVoice](https://feedback.azure.com/forums/169401-azure-active-directory/category/160596-b2c)에 추가해 주세요.
-
 

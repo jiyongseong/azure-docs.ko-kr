@@ -4,7 +4,7 @@ description: "관리자가 최종 사용자(직원, 학생, 다른 사용자)를
 services: active-directory
 documentationcenter: 
 author: femila
-manager: femila
+manager: mtillman
 editor: 
 tags: azure-classic-portal
 ms.assetid: 81d4461e-21c8-4fdd-9076-0e4991979f62
@@ -15,13 +15,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 05/16/2017
 ms.author: markvi
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: 3ba238e246c7a41f6489a2b3ac4e1c749267290d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
-
+ms.openlocfilehash: 173ad6f07699ca6bfa534dedc053663bba571382
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="usage-scenarios-and-deployment-considerations-for-azure-ad-join"></a>Azure AD 연결에 대한 사용 시나리오와 배포 고려 사항
 ## <a name="usage-scenarios-for-azure-ad-join"></a>Azure AD 연결에 대한 사용 시나리오
@@ -83,5 +81,4 @@ Azure Active Directory 연결(Azure AD 연결)은 현재 클라우드에서 업�
 * [Azure AD 조인에 대한 사용 시나리오에 대해 알아보기](active-directory-azureadjoin-deployment-aadjoindirect.md)
 * [Windows 10 환경용 Azure AD에 도메인 가입된 장치 연결](active-directory-azureadjoin-devices-group-policy.md)
 * [Azure AD 조인 설정](active-directory-azureadjoin-setup.md)
-
 

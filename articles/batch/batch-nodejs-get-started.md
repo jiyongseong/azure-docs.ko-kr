@@ -1,34 +1,32 @@
 ---
-title: "자습서 - Node.js용 Azure Batch 클라이언트 라이브러리 사용 | Microsoft Docs"
-description: "Azure Batch의 기본 개념을 알아보고 Node.js를 사용하여 간단한 솔루션을 빌드합니다."
+title: 자습서 - Node.js용 Azure Batch 클라이언트 라이브러리 사용 | Microsoft Docs
+description: Azure Batch의 기본 개념을 알아보고 Node.js를 사용하여 간단한 솔루션을 빌드합니다.
 services: batch
 author: shwetams
-manager: timlt
-ms.assetid: 
+manager: jeconnoc
+ms.assetid: ''
 ms.service: batch
 ms.devlang: nodejs
 ms.topic: hero-article
 ms.workload: big-compute
 ms.date: 05/22/2017
 ms.author: shwetams
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ef1e603ea7759af76db595d95171cdbe1c995598
-ms.openlocfilehash: c48171d8634a651718a0775183414f463c6a468c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/16/2017
-
+ms.openlocfilehash: bef298ea8e5710b386822f071d0644c9ddad04a2
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
-
 # <a name="get-started-with-batch-sdk-for-nodejs"></a>Node.js용 Batch SDK 시작
 
 > [!div class="op_single_selector"]
 > * [.NET](batch-dotnet-get-started.md)
 > * [Python](batch-python-tutorial.md)
-> * [Node.JS](batch-nodejs-get-started.md)
+> * [Node.js](batch-nodejs-get-started.md)
 >
 >
 
-[Azure Batch Node.js SDK](http://azure.github.io/azure-sdk-for-node/azure-batch/latest/)를 사용하여 Node.js로 Batch 클라이언트를 빌드하는 기본 사항을 알아봅니다. 일괄 처리 응용 프로그램에 대한 시나리오를 단계별로 이해한 다음 Node.js 클라이언트를 사용하여 설정해 보겠습니다.  
+[Azure Batch Node.js SDK](/javascript/api/overview/azure/batch)를 사용하여 Node.js로 Batch 클라이언트를 빌드하는 기본 사항을 알아봅니다. 일괄 처리 응용 프로그램에 대한 시나리오를 단계별로 이해한 다음 Node.js 클라이언트를 사용하여 설정해 보겠습니다.  
 
 ## <a name="prerequisites"></a>필수 조건
 이 문서에서는 사용자가 Node.js에 대한 작업 지식을 갖고 있으며 Linux에 익숙하다고 가정합니다. 또한 Batch 및 Storage 서비스를 만들 액세스 권한이 있는 Azure 계정을 갖고 있다고 가정합니다.
@@ -75,7 +73,7 @@ npm install 명령을 사용하여 Node.js용 Azure Batch SDK를 설치할 수 �
 
 ### <a name="step-2-create-an-azure-batch-account"></a>2단계: Azure Batch 계정 만들기
 
-[Azure Portal](batch-account-create-portal.md) 또는 명령줄([Powershell](batch-powershell-cmdlets-get-started.md) /[Azure cli](https://docs.microsoft.com/cli/azure/overview))에서 만들 수 있습니다.
+[Azure Portal](batch-account-create-portal.md) 또는 명령줄([Powershell](batch-powershell-cmdlets-get-started.md) /[Azure cli](/cli/azure))에서 만들 수 있습니다.
 
 다음은 Azure CLI를 통해 계정을 만드는 명령입니다.
 
@@ -130,12 +128,12 @@ Azure Batch URI는 Azure Portal의 개요 탭에서 찾을 수 있습니다. 다
 ### <a name="step-4-create-an-azure-batch-pool"></a>4단계: Azure Batch 풀 만들기
 Azure Batch 풀은 여러 VM(Batch 노드라고도 함)으로 구성됩니다. Azure Batch 서비스는 이러한 노드에 작업을 배포하고 관리합니다. 풀에 대해 다음 구성 매개 변수를 정의할 수 있습니다.
 
-* 가상 컴퓨터 이미지의 유형
-* 가상 컴퓨터 노드의 크기
-* 가상 컴퓨터 노드의 수
+* Virtual Machine 이미지의 유형
+* Virtual Machine 노드의 크기
+* Virtual Machine 노드의 수
 
 > [!Tip]
-> 가상 컴퓨터 노드의 크기와 수는 병렬로 실행하려는 작업의 수와 작업 자체에 따라 크게 달라집니다. 테스트를 통해 이상적인 수와 크기를 결정하는 것이 좋습니다.
+> Virtual Machine 노드의 크기와 수는 병렬로 실행하려는 작업의 수와 작업 자체에 따라 크게 달라집니다. 테스트를 통해 이상적인 수와 크기를 결정하는 것이 좋습니다.
 >
 >
 
@@ -156,11 +154,11 @@ var numVMs = 4
 ```
 
 > [!Tip]
-> Azure Batch 및 SKU ID에 사용할 수 있는 Linux VM 이미지 목록은 [가상 컴퓨터 이미지 목록](batch-linux-nodes.md#list-of-virtual-machine-images)을 참조하세요.
+> Azure Batch 및 SKU ID에 사용할 수 있는 Linux VM 이미지 목록은 [가상 머신 이미지 목록](batch-linux-nodes.md#list-of-virtual-machine-images)을 참조하세요.
 >
 >
 
-풀 구성이 정의되면 Azure Batch 풀을 만들 수 있습니다. Batch 풀 명령은 Azure 가상 컴퓨터 노드를 만들고, 실행할 작업을 수신할 수 있도록 노드를 준비합니다. 각 풀에는 후속 단계에서 참조할 고유 ID가 있어야 합니다.
+풀 구성이 정의되면 Azure Batch 풀을 만들 수 있습니다. Batch 풀 명령은 Azure Virtual Machine 노드를 만들고, 실행할 작업을 수신할 수 있도록 노드를 준비합니다. 각 풀에는 후속 단계에서 참조할 고유 ID가 있어야 합니다.
 
 다음은 Azure Batch 풀을 만드는 코드 조각입니다.
 
@@ -362,6 +360,5 @@ var container_list = ["con1","con2","con3","con4"]
 ## <a name="next-steps"></a>다음 단계
 
 - 이 서비스를 처음 사용하는 경우 [Azure Batch 기능 개요](batch-api-basics.md) 문서를 검토하는 것이 좋습니다.
-- Batch API에 대한 내용은 [Batch Node.js 참조](http://azure.github.io/azure-sdk-for-node/azure-batch/latest/)를 살펴보세요.
-
+- Batch API에 대한 내용은 [Batch Node.js 참조](/javascript/api/overview/azure/batch)를 살펴보세요.
 

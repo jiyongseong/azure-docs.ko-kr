@@ -14,10 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 11/21/2016
 ms.author: alkohli
-translationtype: Human Translation
-ms.sourcegitcommit: c78eda33a64d630ba18aba6a174db372eb41dde9
 ms.openlocfilehash: 768c9a1c906999f4690c9c8f7d075743ab1678ff
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="clone-from-a-backup-of-your-storsimple-virtual-array"></a>StorSimple 가상 배열의 백업에서 복제
 
@@ -120,7 +121,7 @@ Azure Portal에서 백업을 복제하려면 공유를 복제하는 경우와 �
 
 1. ILR을 수행할 때 파일 탐색기를 통해 백업을 볼 수 있습니다. 백업을 살펴보려면 특정 공유를 클릭합니다. 모든 백업을 저장하는 공유 아래에 만들어진 *.backups* 폴더를 볼 수 있습니다. 백업을 보려면 *.backups* 폴더를 확장합니다. 폴더는 전체 백업 계층 구조의 쪼개진 보기를 보여 줍니다. 이 보기는 주문형으로 만들어지며 일반적으로 몇 초 안에 만들어집니다.
    
-   마지막 백업&5;개가 이러한 방식으로 표시되며 항목 수준 복구를 수행하는 데 사용될 수 있습니다. 최근 백업&5;개에는 기본 예약된 백업 및 수동 백업이 모두 포함됩니다.
+   마지막 백업 5개가 이러한 방식으로 표시되며 항목 수준 복구를 수행하는 데 사용될 수 있습니다. 최근 백업 5개에는 기본 예약된 백업 및 수동 백업이 모두 포함됩니다.
    
    * **예약된 백업**의 이름은 &lt;장치 이름&gt;DailySchedule-YYYYMMDD-HHMMSS-UTC로 지정됩니다.
    * **수동 백업** 의 이름은 Ad-hoc-YYYYMMDD-HHMMSS-UTC로 지정됩니다.
@@ -136,10 +137,4 @@ Azure Portal에서 백업을 복제하려면 공유를 복제하는 경우와 �
 ## <a name="next-steps"></a>다음 단계
 
 [로컬 웹 UI를 사용하여 StorSimple 가상 배열을 관리](storsimple-ova-web-ui-admin.md)하는 방법에 대해 자세히 알아봅니다.
-
-
-
-
-<!--HONumber=Jan17_HO4-->
-
 

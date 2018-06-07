@@ -1,0 +1,75 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Application Gateway 설명서
+metadata:
+  title: Azure Application Gateway 설명서 - 자습서, API 참조
+  meta.description: Learn how to create application gateways. Documentation helps you plan, deploy, and manage web traffic to your Azure resources.
+  services: application-gateway
+  author: davidmu1
+  manager: jeconnocfte
+  ms.service: application-gateway
+  ms.topic: landing-page
+  ms.date: 02/01/2018
+  ms.author: davidmu
+  ms.openlocfilehash: b49cebd1a9d6554d17a9237ff33c4fcbe0d9f4f7
+  ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 04/28/2018
+abstract:
+  description: ADC(Application Deliver Controller)인 Application Gateway를 서비스로 배포하는 방법에 대해 알아봅니다. 자습서, API 참조 및 기타 설명서에서는 확장성 및 가용성이 뛰어난 웹 프런트 엔드를 빌드할 수 있는 응용 프로그램 수준 라우팅 및 부하 분산 서비스를 설정하는 방법을 보여 줍니다.
+sections:
+- title: 5분 빠른 시작
+  items:
+  - type: paragraph
+    text: Application Gateway를 사용하여 리소스에 대한 웹 트래픽을 관리하는 방법에 대해 알아보세요.
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: https://docs.microsoft.com/azure/application-gateway/media/index/portal.svg
+      text: Azure Portal
+      href: https://docs.microsoft.com/azure/application-gateway/quick-create-portal
+    - image:
+        src: https://docs.microsoft.com/azure/application-gateway/media/index/logo_powershell.svg
+      text: Azure PowerShell
+      href: https://docs.microsoft.com/azure/application-gateway/quick-create-powershell
+    - image:
+        src: https://docs.microsoft.com/azure/application-gateway/media/index/cli.svg
+      text: Azure CLI
+      href: https://docs.microsoft.com/azure/application-gateway/quick-create-cli
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: Azure에서 응용 프로그램 게이트웨이를 배포하고 관리하며 모니터링하는 방법에 대해 알아보기
+  - type: list
+    style: ordered
+    items:
+    - html: <a href="/azure/application-gateway/tutorial-manage-web-traffic-cli">응용 프로그램 게이트웨이를 사용하여 웹 트래픽을 관리합니다.</a>
+    - html: <a href="/azure/application-gateway/tutorial-restrict-web-traffic-cli">응용 프로그램 게이트웨이에서 웹 응용 프로그램 방화벽을 사용하여 웹 트래픽을 제한합니다.</a>
+    - html: <a href="/azure/application-gateway/tutorial-ssl-cli">응용 프로그램 게이트웨이에서 SSL 종료를 사용합니다.</a>
+    - html: <a href="/azure/application-gateway/tutorial-multiple-sites-cli">응용 프로그램 게이트웨이를 사용하여 여러 웹 사이트를 호스트합니다.</a>
+    - html: <a href="/azure/application-gateway/tutorial-url-route-cli">응용 프로그램 게이트웨이의 URL을 기반으로 트래픽을 라우팅합니다.</a>
+    - html: <a href="/azure/application-gateway/tutorial-url-redirect-cli">응용 프로그램 게이트웨이 풀의 특정 서버로 트래픽을 리디렉션합니다.</a>
+- title: 샘플
+  items:
+  - type: paragraph
+    text: 응용 프로그램 게이트웨이를 사용하여 웹 트래픽을 관리합니다.
+  - type: list
+    style: unordered
+    className: spaced noBullet
+    items:
+    - html: <a href="/azure/application-gateway/cli-samples">Azure CLI</a>
+    - html: <a href="/azure/application-gateway/powershell-samples">Azure PowerShell</a>
+- title: 참고 자료
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: 명령줄
+      html: <p><a href="/powershell/resourcemanager">Azure PowerShell</a></p><p><a href="/cli/azure/network/application-gateway">Azure CLI</a></p>
+    - title: 언어
+      html: <p><a href="/dotnet/api">.NET</a></p><p><a href="/java/api/com.microsoft.azure.management.network">Java</a></p><p><a href="http://azure.github.io/azure-sdk-for-node/azure-arm-network/latest/ApplicationGateways">Node.js</a></p><p><a href="http://azure-sdk-for-python.readthedocs.io/en/latest/ref/azure.mgmt.network.operations.html#azure.mgmt.network.operations.ApplicationGatewaysOperations#azure.mgmt.network.operations.ApplicationGatewaysOperations">Python</a></p>
+    - title: REST (영문)
+      html: <p><a href="https://msdn.microsoft.com/library/mt684941">Compute REST API 참조</a></p>

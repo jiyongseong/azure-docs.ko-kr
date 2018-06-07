@@ -1,51 +1,52 @@
 ---
-title: "iOS용 알림 허브 지역화된 속보 자습서"
-description: "Azure 서비스 버스 알림 허브를 사용하여 지역화된 최신 뉴스 알림을 보내는 방법에 대해 알아봅니다(iOS)."
+title: Azure Notification Hubs를 사용하여 iOS 장치에 지역화된 알림 푸시 | Microsoft Docs
+description: Azure Notification Hubs를 사용하여 iOS 장치에 지역화된 알림 푸시를 사용하는 방법
 services: notification-hubs
 documentationcenter: ios
-author: ysxu
-manager: erikre
-editor: 
+author: dimazaid
+manager: kpiteira
+editor: spelluru
 ms.assetid: 484914b5-e081-4a05-a84a-798bbd89d428
 ms.service: notification-hubs
 ms.workload: mobile
 ms.tgt_pltfrm: ios
 ms.devlang: objective-c
 ms.topic: article
-ms.date: 10/03/2016
-ms.author: yuaxu
-translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: fd2b7d9dfd4f432bbcbaa3ed76f8bec0b9677e17
-
-
+ms.date: 04/14/2018
+ms.author: dimazaid
+ms.openlocfilehash: b3d74086ee233da50138aff00d8da78aa0243a75
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
-# <a name="use-notification-hubs-to-send-localized-breaking-news-to-ios-devices"></a>알림 허브를 사용하여 iOS 장치로 지역화된 속보 보내기
+# <a name="tutorial-push-localized-notifications-to-ios-devices-using-azure-notification-hubs"></a>자습서: Azure Notification Hubs를 사용하여 iOS 장치에 지역화된 알림 푸시 
 > [!div class="op_single_selector"]
 > * [Windows 스토어 C#](notification-hubs-windows-store-dotnet-xplat-localized-wns-push-notification.md)
 > * [iOS](notification-hubs-ios-xplat-localized-apns-push-notification.md)
 > 
-> 
 
-## <a name="overview"></a>개요
-이 항목에서는 Azure 알림 허브의 [템플릿](notification-hubs-templates-cross-platform-push-messages.md) 기능을 사용하여 언어 및 장치별로 지역화된 속보 알림을 브로드캐스트하는 방법을 보여 줍니다. 이 자습서에서는 [알림 허브를 사용하여 속보 보내기]에서 만든 iOS 앱을 시작합니다. 이 자습서를 완료하면 관심 있는 범주를 등록하고, 알림을 받을 언어를 지정하고, 선택한 범주에 대한 푸시 알림만 해당 언어로 받을 수 있습니다.
+이 자습서에서는 Azure Notification Hubs의 [템플릿](notification-hubs-templates-cross-platform-push-messages.md) 기능을 사용하여 언어 및 장치별로 지역화된 속보 알림을 브로드캐스트하는 방법을 보여줍니다. 이 자습서에서는 [Notification Hubs를 사용하여 속보 보내기]에서 만든 iOS 앱을 시작합니다. 이 자습서를 완료하면 관심 있는 범주를 등록하고, 알림을 받을 언어를 지정하고, 선택한 범주에 대한 푸시 알림만 해당 언어로 받을 수 있습니다.
 
-이 시나리오는 다음과 같은 두 부분으로 구성되어 있습니다.
+이 시나리오는 두 부분으로 분류됩니다.
 
 * iOS 앱을 통해 클라이언트 장치는 언어를 지정하고 다른 속보 범주를 구독할 수 있습니다.
 * 백 엔드에서 Azure Notification Hubs의 **태그** 및 **템플릿** 기능을 사용하여 알림을 브로드캐스트합니다.
 
-## <a name="prerequisites"></a>필수 조건
-[알림 허브를 사용하여 속보 보내기] 자습서를 이미 완료하고 사용 가능한 코드가 있어야 합니다. 이 자습서는 해당 코드를 기반으로 직접 빌드됩니다.
+이 자습서에서 수행하는 단계는 다음과 같습니다.
 
-Visual Studio 2012 이상은 선택 사항입니다.
+> [!div class="checklist"]
+> * 앱 사용자 인터페이스 업데이트
+> * iOS 앱 빌드
+> * .NET 콘솔 앱에서 지역화된 템플릿 알림 보내기
+> * 장치에서 지역화된 템플릿 알림 보내기
 
-## <a name="template-concepts"></a>템플릿 개념
-[알림 허브를 사용하여 속보 보내기] 에서는 **태그** 를 사용하여 다른 뉴스 범주에 대한 알림을 구독하는 앱을 빌드했습니다.
-하지만 대부분의 앱은 여러 시장을 대상으로 하므로 지역화해야 합니다. 즉, 알림 자체의 내용을 지역화해서 올바른 장치 집합으로 전달해야 합니다.
-이 항목에서는 알림 허브의 **템플릿** 기능을 사용하여 지역화된 속보 알림을 쉽게 제공하는 방법을 보여 줍니다.
 
-참고: 지역화된 알림을 보내는 한 가지 방법은 각 태그의 여러 버전을 만드는 것입니다. 예를 들어 영어, 프랑스어 및 북경어를 지원하려면 세계 뉴스에 대한 3가지 태그 즉, "world_en", "world_fr" 및 "world_ch"가 필요합니다. 그런 다음 이러한 각 태그로 세계 뉴스의 지역화된 버전을 보내야 합니다. 이 항목에서는 템플릿을 사용하여 태그의 확산을 방지하고 여러 메시지를 보낼 필요가 없도록 합니다.
+## <a name="overview"></a>개요
+[Notification Hubs를 사용하여 속보 보내기]에서는 **태그**를 사용하여 다른 뉴스 범주에 대한 알림을 구독하는 앱을 빌드했습니다. 하지만 대부분의 앱은 여러 시장을 대상으로 하므로 지역화해야 합니다. 즉, 알림 자체의 내용을 지역화해서 올바른 장치 집합으로 전달해야 합니다. 이 자습서에서는 Notification Hubs의 **템플릿** 기능을 사용하여 지역화된 속보 알림을 쉽게 제공하는 방법을 보여줍니다.
+
+> [!NOTE]
+> 지역화된 알림을 보내는 한 가지 방법은 각 태그의 여러 버전을 만드는 것입니다. 예를 들어 영어, 프랑스어 및 북경어를 지원하려면 세계 뉴스에 대한 3가지 태그 즉, "world_en", "world_fr" 및 "world_ch"가 필요합니다. 그런 다음, 이러한 각 태그로 세계 뉴스의 지역화된 버전을 보내야 합니다. 이 항목에서는 템플릿을 사용하여 태그의 확산을 방지하고 여러 메시지를 보낼 필요가 없도록 합니다.
 
 높은 수준의 템플릿을 사용하면 특정 장치에서 알림을 받는 방법을 지정할 수 있습니다. 템플릿은 앱에서 백 엔드로 보낸 메시지에 포함된 속성을 참조하여 정확한 페이로드 형식을 지정합니다. 여기서는 모든 지원되는 언어를 포함하는 로캘을 알 수 없는 메시지를 보냅니다.
 
@@ -55,7 +56,7 @@ Visual Studio 2012 이상은 선택 사항입니다.
         "News_Mandarin": "..."
     }
 
-그런 다음 올바른 속성을 참조하는 템플릿을 사용하여 장치가 등록되도록 합니다. 예를 들어 프랑스어 뉴스를 등록하려는 iOS 앱은 다음을 등록합니다.
+그런 다음, 올바른 속성을 참조하는 템플릿을 사용하여 장치가 등록되도록 합니다. 예를 들어 프랑스어 뉴스를 등록하려는 iOS 앱은 다음 구문을 사용하여 등록합니다.
 
     {
         aps:{
@@ -63,22 +64,28 @@ Visual Studio 2012 이상은 선택 사항입니다.
         }
     }
 
-템플릿은 매우 강력한 기능입니다. 자세한 내용은 [템플릿](notification-hubs-templates-cross-platform-push-messages.md) 문서를 참조하세요.
+템플릿에 대한 자세한 내용은 [템플릿](notification-hubs-templates-cross-platform-push-messages.md) 문서를 참조하세요.
 
-## <a name="the-app-user-interface"></a>앱 사용자 인터페이스
-이제 [알림 허브를 사용하여 속보 보내기] 항목에서 만든 속보 앱을 수정하고 템플릿을 사용하여 지역화된 속보를 보냅니다.
+## <a name="prerequisites"></a>필수 조건
 
-MainStoryboard_iPhone.storyboard에서 지원되는 3가지 언어, 즉 영어, 프랑스어 및 북경어로 분할된 제어를 추가합니다.
+- [특정 iOS 장치에 푸시 알림](notification-hubs-ios-xplat-segmented-apns-push-notification.md) 자습서를 완료하고 이 자습서는 해당 코드에서 직접 빌드하므로 코드를 사용할 수 있도록 합니다.
+- Visual Studio 2012 이상은 선택 사항입니다.
+
+## <a name="update-the-app-user-interface"></a>앱 사용자 인터페이스 업데이트
+이 섹션에서는 템플릿을 사용하여 지역화된 속보를 보내도록 [Notification Hubs를 사용하여 속보 보내기] 항목에서 만든 속보 앱을 수정합니다.
+
+MainStoryboard_iPhone.storyboard에서 3가지 언어, 즉 영어, 프랑스어 및 북경어로 분할된 제어를 추가합니다.
 
 ![][13]
 
-그런 다음 아래와 같이 ViewController.h에 IBOutlet을 추가해야 합니다.
+그런 다음, 다음 이미지에서 표시된 것과 같이 ViewController.h에 IBOutlet을 추가해야 합니다.
 
 ![][14]
 
-## <a name="building-the-ios-app"></a>iOS 앱 빌드
-1. Notification.h에서 아래와 같이 *retrieveLocale* 메서드를 추가하고 저장 및 구독 메서드를 수정합니다.
+## <a name="build-the-ios-app"></a>iOS 앱 빌드
+1. Notification.h에서 다음 코드에 표시된 것과 같이 *retrieveLocale* 메서드를 추가하고 저장 및 구독 메서드를 수정합니다.
    
+    ```obj-c
         - (void) storeCategoriesAndSubscribeWithLocale:(int) locale categories:(NSSet*) categories completion: (void (^)(NSError* error))completion;
    
         - (void) subscribeWithLocale:(int) locale categories:(NSSet*) categories completion:(void (^)(NSError *))completion;
@@ -87,8 +94,10 @@ MainStoryboard_iPhone.storyboard에서 지원되는 3가지 언어, 즉 영어, 
    
         - (int) retrieveLocale;
    
+    ```
     Notification.m에서 로캘 매개 변수를 추가하고 사용자 기본값에 저장하여 *storeCategoriesAndSubscribe* 메서드를 수정합니다.
    
+    ```obj-c
         - (void) storeCategoriesAndSubscribeWithLocale:(int) locale categories:(NSSet *)categories completion:(void (^)(NSError *))completion {
             NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
             [defaults setValue:[categories allObjects] forKey:@"BreakingNewsCategories"];
@@ -97,9 +106,10 @@ MainStoryboard_iPhone.storyboard에서 지원되는 3가지 언어, 즉 영어, 
    
             [self subscribeWithLocale: locale categories:categories completion:completion];
         }
-   
+    ````
     그런 다음 로캘을 포함하도록 *subscribe* 메서드를 수정합니다.
    
+    ```obj-c
         - (void) subscribeWithLocale: (int) locale categories:(NSSet *)categories completion:(void (^)(NSError *))completion{
             SBNotificationHub* hub = [[SBNotificationHub alloc] initWithConnectionString:@"<connection string>" notificationHubPath:@"<hub name>"];
    
@@ -120,11 +130,12 @@ MainStoryboard_iPhone.storyboard에서 지원되는 3가지 언어, 즉 영어, 
    
             [hub registerTemplateWithDeviceToken:self.deviceToken name:@"localizednewsTemplate" jsonBodyTemplate:template expiryTemplate:@"0" tags:categories completion:completion];
         }
+       ```
+    You use the method *registerTemplateWithDeviceToken*, instead of *registerNativeWithDeviceToken*. When you register for a template, you have to provide the json template and also a name for the template (as the app might want to register different templates). Make sure to register your categories as tags, as you want to make sure to receive the notifciations for those news.
    
-    이제 *registerNativeWithDeviceToken* 대신 *registerTemplateWithDeviceToken* 메서드를 어떻게 사용하고 있는지 살펴봅니다. 템플릿을 등록할 때는 json 템플릿과 템플릿의 이름도 제공해야 합니다(이 앱이 다른 템플릿을 등록할 수 있으므로). 해당 뉴스에 대한 알림을 받도록 할 것이므로 범주를 태그로 등록해야 합니다.
+    Add a method to retrieve the locale from the user default settings:
    
-    사용자 기본 설정에서 로캘을 검색하기 위한 메서드를 추가합니다.
-   
+    ```obj-c
         - (int) retrieveLocale {
             NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
    
@@ -132,12 +143,15 @@ MainStoryboard_iPhone.storyboard에서 지원되는 3가지 언어, 즉 영어, 
    
             return locale < 0?0:locale;
         }
+    ```
 2. 이제 Notifications 클래스를 수정했으므로 ViewController가 새 UISegmentControl을 사용하는지 확인해야 합니다. *viewDidLoad* 메서드에 다음 줄을 추가하여 현재 선택된 로캘을 표시해야 합니다.
    
+    ```obj-c
         self.Locale.selectedSegmentIndex = [notifications retrieveLocale];
+     ```  
+    그런 다음, *subscribe* 메서드에서 *storeCategoriesAndSubscribe*에 대한 호출을 다음 코드로 변경합니다.
    
-    그런 다음 *subscribe* 메서드에서 *storeCategoriesAndSubscribe*에 대한 호출을 다음으로 변경합니다.
-   
+    ```obj-c
         [notifications storeCategoriesAndSubscribeWithLocale: self.Locale.selectedSegmentIndex categories:[NSSet setWithArray:categories] completion: ^(NSError* error) {
             if (!error) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notification" message:
@@ -148,8 +162,10 @@ MainStoryboard_iPhone.storyboard에서 지원되는 3가지 언어, 즉 영어, 
                 NSLog(@"Error subscribing: %@", error);
             }
         }];
-3. 마지막으로, 앱이 시작될 때 등록을 올바르게 새로 고칠 수 있도록 AppDelegate.m에서 *didRegisterForRemoteNotificationsWithDeviceToken* 메서드를 업데이트해야 합니다. 알림의 *subscribe* 메서드에 대한 호출을 다음으로 변경합니다.
+    ```
+3. 마지막으로, 앱이 시작될 때 등록을 올바르게 새로 고칠 수 있도록 AppDelegate.m에서 *didRegisterForRemoteNotificationsWithDeviceToken* 메서드를 업데이트해야 합니다. 알림의 *subscribe* 메서드에 대한 호출을 다음 코드로 변경합니다.
    
+    ```obj-c
         NSSet* categories = [self.notifications retrieveCategories];
         int locale = [self.notifications retrieveLocale];
         [self.notifications subscribeWithLocale: locale categories:categories completion:^(NSError* error) {
@@ -157,13 +173,15 @@ MainStoryboard_iPhone.storyboard에서 지원되는 3가지 언어, 즉 영어, 
                 NSLog(@"Error registering for notifications: %@", error);
             }
         }];
+    ```
 
 ## <a name="optional-send-localized-template-notifications-from-net-console-app"></a>(선택 사항) .NET 콘솔 앱에서 지역화된 템플릿 알림 보내기
 [!INCLUDE [notification-hubs-localized-back-end](../../includes/notification-hubs-localized-back-end.md)]
 
 ## <a name="optional-send-localized-template-notifications-from-the-device"></a>(선택 사항) 장치에서 지역화된 템플릿 알림 보내기
-Visual Studio에 액세스할 수 없거나 장치의 앱에서 직접 지역화된 템플릿 알림을 보내는 테스트만 하기를 원하는 경우입니다.  이전 자습서에 정의한 `SendNotificationRESTAPI` 메서드에 지역화된 템플릿 매개 변수를 간단히 추가할 수 있습니다.
+Visual Studio에 액세스할 수 없거나 장치의 앱에서 직접 지역화된 템플릿 알림을 보내는 테스트만 하기를 원하는 경우입니다. 이전 자습서에 정의한 `SendNotificationRESTAPI` 메서드에 지역화된 템플릿 매개 변수를 추가할 수 있습니다.
 
+    ```obj-c
         - (void)SendNotificationRESTAPI:(NSString*)categoryTag
         {
             NSURLSession* session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration
@@ -226,15 +244,14 @@ Visual Studio에 액세스할 수 없거나 장치의 앱에서 직접 지역화
 
             [dataTask resume];
         }
-
-
+    ```
 
 
 ## <a name="next-steps"></a>다음 단계
-템플릿 사용에 대한 자세한 내용은 다음을 참조하세요.
+이 자습서에서는 iOS 장치에 지역화된 알림을 보냈습니다. 특정 iOS 앱의 사용자에게 알림을 푸시하는 방법을 알아보려면 다음 자습서를 계속 진행합니다. 
 
-* [알림 허브를 통해 사용자에게 알림: ASP.NET]
-* [알림 허브를 통해 사용자에게 알림: 모바일 서비스]
+> [!div class="nextstepaction"]
+>[특정 사용자에 알림 푸시](notification-hubs-aspnet-backend-ios-apple-apns-notification.md)
 
 <!-- Images. -->
 
@@ -247,29 +264,23 @@ Visual Studio에 액세스할 수 없거나 장치의 앱에서 직접 지역화
 
 
 <!-- URLs. -->
-[방법: Service Bus Notification Hubs(iOS 앱)]: http://msdn.microsoft.com/library/jj927168.aspx
-[알림 허브를 사용하여 속보 보내기]: /manage/services/notification-hubs/breaking-news-ios
+[How To: Service Bus Notification Hubs (iOS Apps)]: http://msdn.microsoft.com/library/jj927168.aspx
+[Notification Hubs를 사용하여 속보 보내기]: /manage/services/notification-hubs/breaking-news-ios
 [Mobile Service]: /develop/mobile/tutorials/get-started
-[알림 허브를 통해 사용자에게 알림: ASP.NET]: /manage/services/notification-hubs/notify-users-aspnet
-[알림 허브를 통해 사용자에게 알림: 모바일 서비스]: /manage/services/notification-hubs/notify-users
-[앱 제출 페이지]: http://go.microsoft.com/fwlink/p/?LinkID=266582
-[내 응용 프로그램]: http://go.microsoft.com/fwlink/p/?LinkId=262039
-[Windows용 Live SDK]: http://go.microsoft.com/fwlink/p/?LinkId=262253
-[Mobile Services 시작]: /develop/mobile/tutorials/get-started/#create-new-service
-[데이터 작업 시작]: /develop/mobile/tutorials/get-started-with-data-ios
-[인증 시작]: /develop/mobile/tutorials/get-started-with-users-ios
-[푸시 알림 시작]: /develop/mobile/tutorials/get-started-with-push-ios
-[앱 사용자에 대한 푸시 알림]: /develop/mobile/tutorials/push-notifications-to-users-ios
-[스크립트를 통해 사용자 권한 부여]: /develop/mobile/tutorials/authorize-users-in-scripts-ios
-[JavaScript 및 HTML]: ../get-started-with-push-js.md
+[Notify users with Notification Hubs: ASP.NET]: /manage/services/notification-hubs/notify-users-aspnet
+[Notify users with Notification Hubs: Mobile Services]: /manage/services/notification-hubs/notify-users
+[Submit an app page]: http://go.microsoft.com/fwlink/p/?LinkID=266582
+[My Applications]: http://go.microsoft.com/fwlink/p/?LinkId=262039
+[Live SDK for Windows]: http://go.microsoft.com/fwlink/p/?LinkId=262253
+[Get started with Mobile Services]: /develop/mobile/tutorials/get-started/#create-new-service
+[Get started with data]: /develop/mobile/tutorials/get-started-with-data-ios
+[Get started with authentication]: /develop/mobile/tutorials/get-started-with-users-ios
+[Get started with push notifications]: /develop/mobile/tutorials/get-started-with-push-ios
+[Push notifications to app users]: /develop/mobile/tutorials/push-notifications-to-users-ios
+[Authorize users with scripts]: /develop/mobile/tutorials/authorize-users-in-scripts-ios
+[JavaScript and HTML]: ../get-started-with-push-js.md
 
-[Mobile Services에 대한 Windows 개발자 미리 보기 등록 단계]: ../mobile-services-windows-developer-preview-registration.md
-[wns 개체]: http://go.microsoft.com/fwlink/p/?LinkId=260591
-[알림 허브 지침]: http://msdn.microsoft.com/library/jj927170.aspx
-[iOS용 알림 허브 방법]: http://msdn.microsoft.com/library/jj927168.aspx
-
-
-
-<!--HONumber=Nov16_HO3-->
-
-
+[Windows Developer Preview registration steps for Mobile Services]: ../mobile-services-windows-developer-preview-registration.md
+[wns object]: http://go.microsoft.com/fwlink/p/?LinkId=260591
+[Notification Hubs Guidance]: http://msdn.microsoft.com/library/jj927170.aspx
+[Notification Hubs How-To for iOS]: http://msdn.microsoft.com/library/jj927168.aspx

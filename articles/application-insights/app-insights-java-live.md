@@ -1,9 +1,9 @@
 ---
-title: "이미 라이브 상태인 Java 웹앱용 Application Insights"
-description: "서버에서 이미 실행 중인 웹 응용 프로그램 모니터링 시작"
+title: 이미 라이브 상태인 Java 웹앱용 Application Insights
+description: 서버에서 이미 실행 중인 웹 응용 프로그램 모니터링 시작
 services: application-insights
 documentationcenter: java
-author: harelbr
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 12f3dbb9-915f-4087-87c9-807286030b0b
 ms.service: application-insights
@@ -12,13 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 11/10/2016
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0c4554d6289fb0050998765485d965d1fbc6ab3e
-ms.openlocfilehash: 878badf2753b4ceb471abc789e388fd784c4c42a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/13/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: b8ddd43fb19b3800840180c458268301b5ec26f6
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="application-insights-for-java-web-apps-that-are-already-live"></a>이미 라이브 상태인 Java 웹앱용 Application Insights
 
@@ -137,5 +136,4 @@ HTTP 요청에 대한 원격 분석은 개요 블레이드에 표시됩니다. (
 * [웹 테스트를 설정](app-insights-monitor-web-app-availability.md) 하여 응용 프로그램이 라이브 상태로 유지되며 응답하는지 확인할 수 있습니다.
 * [로그 추적 캡처](app-insights-java-trace-logs.md)
 * [이벤트 및 로그를 검색](app-insights-diagnostic-search.md) 하여 문제를 진단할 수 있습니다.
-
 

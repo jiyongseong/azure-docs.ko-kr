@@ -1,9 +1,9 @@
 ---
-title: "스마트 감지 - 성능 이상 | Microsoft Docs"
-description: "Application Insights는 앱 원격 분석의 스마트 분석을 수행하여 잠재적 성능 문제에 대해 경고합니다. 이 기능에는 설정이 필요하지 않습니다."
+title: 스마트 감지 - 성능 이상 | Microsoft Docs
+description: Application Insights는 앱 원격 분석의 스마트 분석을 수행하여 잠재적 성능 문제에 대해 경고합니다. 이 기능에는 설정이 필요하지 않습니다.
 services: application-insights
 documentationcenter: windows
-author: antonfrMSFT
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 6acd41b9-fbf0-45b8-b83b-117e19062dd2
 ms.service: application-insights
@@ -11,14 +11,14 @@ ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
-ms.date: 5/04/2017
-ms.author: sewhee
+ms.date: 05/04/2017
+ms.author: mbullwin; antonfr
+ms.openlocfilehash: 59b88a940e83ed89e8638b62680a57ca1514f8b0
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
 ms.translationtype: HT
-ms.sourcegitcommit: 349fe8129b0f98b3ed43da5114b9d8882989c3b2
-ms.openlocfilehash: dab2e54dedf55f0d9a0b0b4e66d101ed7df94bfa
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
+ms.locfileid: "33868937"
 ---
 # <a name="smart-detection---performance-anomalies"></a>스마트 감지 - 성능 이상
 
@@ -68,8 +68,8 @@ Application Insights가 응용 프로그램 성능이 다음과 같은 방식 �
 
 ## <a name="faq"></a>FAQ
 
-* *그렇다면, 내 데이터를 확인하고 있습니까?*
-  * 아니요. 서비스는 완전 자동입니다. 사용자는 알림만 받게 됩니다. 사용자의 데이터는 [비공개](app-insights-data-retention-privacy.md)입니다.
+* *그렇다면, 내 데이터를 확인하나요?*
+  * 번호 서비스는 완전 자동입니다. 사용자는 알림만 받게 됩니다. 사용자의 데이터는 [비공개](app-insights-data-retention-privacy.md)입니다.
 * *Application Insights를 통해 수집되는 모든 데이터를 분석하나요?*
   * 현재는 암호화되지 않습니다. 현재는 요청 응답 시간, 종속성 응답 시간 및 페이지 로드 시간을 분석합니다. 추가 메트릭에 대한 분석은 현재 서비스를 위해 작업 중입니다.
 
@@ -85,7 +85,7 @@ Application Insights가 응용 프로그램 성능이 다음과 같은 방식 �
 
   * 원격 분석 데이터에 대한 분석은 전날부터 매일 실행됩니다(UTC 표준 시간대로 하루 종일).
 * 이것이 *메트릭 경고[를 대신하나요](app-insights-alerts.md)?*
-  * 안 됩니다.  비정상이라고 간주할만한 동작을 모두 감지한다고 커밋할 수 없습니다.
+  * 번호  비정상이라고 간주할만한 동작을 모두 감지한다고 커밋할 수 없습니다.
 
 
 * *알림에 대한 응답으로 아무 작업도 수행하지 않을 경우 미리 알림이 제공되나요?*
@@ -169,7 +169,7 @@ Application Insights는 일부 사용자에게만 영향을 주거나 일부 경
 ![Azure에서 전자 메일 경고의 진단 보고서를 열려면 해당 링크를 클릭합니다.](./media/app-insights-proactive-performance-diagnostics/03.png)
 
 * **When(시간)** 에는 문제가 감지된 시간이 표시됩니다.
-* **What(내용)**에는 다음 설명이 표시됩니다.
+* **What(내용)** 에는 다음 설명이 표시됩니다.
 
   * 감지된 문제
   * 문제가 되는 동작을 표시하는 이벤트의 특징
@@ -191,4 +191,3 @@ Application Insights는 일부 사용자에게만 영향을 주거나 일부 경
 
 * [수동으로 구성된 메트릭 경고](app-insights-alerts.md)
 * [가용성 웹 테스트](app-insights-monitor-web-app-availability.md)
-

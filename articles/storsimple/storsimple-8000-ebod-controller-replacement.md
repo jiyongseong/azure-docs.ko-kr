@@ -14,13 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/02/2017
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
 ms.openlocfilehash: 45699c267d1009c4884dd164fd3f2950d6d5f555
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="replace-an-ebod-controller-on-your-storsimple-device"></a>StorSimple 장치의 EBOD 컨트롤러 교체
 
@@ -101,5 +99,4 @@ StorSimple 장치에서 오류가 발생한 EBOD 컨트롤러 모듈을 교체�
 
 ## <a name="next-steps"></a>다음 단계
 [StorSimple 하드웨어 구성 요소 교체](storsimple-8000-hardware-component-replacement.md)에 대해 자세히 알아봅니다.
-
 

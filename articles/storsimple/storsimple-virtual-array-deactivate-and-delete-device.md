@@ -14,10 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/21/2016
 ms.author: alkohli
-translationtype: Human Translation
-ms.sourcegitcommit: fd73672f97b4c16e49b2fad5e53042764f5793ca
 ms.openlocfilehash: 8dea36f92b034f8c6cdb6875634848d37f4c6606
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="deactivate-and-delete-a-storsimple-virtual-array"></a>StorSimple 가상 배열 비활성화 및 삭제
 
@@ -89,10 +90,4 @@ StorSimple 가상 배열을 비활성화하면 장치 및 해당 StorSimple 장�
 * 장애 조치 방법에 대한 정보는 [StorSimple 가상 배열 장애 조치 및 재해 복구](storsimple-virtual-array-failover-dr.md)로 이동합니다.
 
 * StorSimple 장치 관리자 서비스를 사용하는 방법을 자세히 알아보려면 [StorSimple 장치 관리자 서비스를 사용하여 StorSimple 가상 배열 관리](storsimple-virtual-array-manager-service-administration.md)로 이동하세요. 
-
-
-
-
-<!--HONumber=Nov16_HO4-->
-
 

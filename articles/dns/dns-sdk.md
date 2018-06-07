@@ -1,10 +1,10 @@
 ---
-title: ".NET SDK를 사용하여 Azure DNS에서 DNS 영역 및 레코드 집합 만들기 | Microsoft Docs"
-description: ".NET SDK를 사용하여 Azure DNS에서 DNS 영역 및 레코드 집합을 만드는 방법입니다."
+title: .NET SDK를 사용하여 Azure DNS에서 DNS 영역 및 레코드 집합 만들기 | Microsoft Docs
+description: .NET SDK를 사용하여 Azure DNS에서 DNS 영역 및 레코드 집합을 만드는 방법입니다.
 services: dns
 documentationcenter: na
-author: jtuliani
-manager: carmonm
+author: KumudD
+manager: jeconnoc
 ms.assetid: eed99b87-f4d4-4fbf-a926-263f7e30b884
 ms.service: dns
 ms.devlang: na
@@ -12,13 +12,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 09/19/2016
-ms.author: jonatul
-translationtype: Human Translation
-ms.sourcegitcommit: 5d73d1203faf485d715354e68ce2ccde32562611
-ms.openlocfilehash: c0fb0be8da1c0ca48a4d43ea027d30a0bc17fe30
-
+ms.author: kumud
+ms.openlocfilehash: 645bf755cc3cb4036104145765196fc97039c551
+ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/03/2018
 ---
-
 # <a name="create-dns-zones-and-record-sets-using-the-net-sdk"></a>.NET SDK를 사용하여 DNS 영역 및 레코드 집합 만들기
 
 .NET DNS 관리 라이브러리와 함께 DNS SDK를 사용하여 DNS 영역, 레코드 집합 및 레코드를 만들거나 삭제하거나 업데이트하는 작업을 자동화할 수 있습니다. 전체 Visual Studio 프로젝트는 [여기](https://www.microsoft.com/en-us/download/details.aspx?id=47268&WT.mc_id=DX_MVP4025064&e6b34bbe-475b-1abd-2c51-b5034bcdd6d2=True)에서 사용할 수 있습니다.
@@ -29,7 +29,7 @@ ms.openlocfilehash: c0fb0be8da1c0ca48a4d43ea027d30a0bc17fe30
 
 1. [이러한 지침](../azure-resource-manager/resource-group-authenticate-service-principal.md) 에 따라 서비스 주체 계정을 만듭니다(Azure DNS SDK 샘플 프로젝트는 암호 기반 인증을 가정함).
 2. 리소스 그룹을 만듭니다([방법은 여기에서 확인](../azure-resource-manager/resource-group-template-deploy-portal.md)).
-3. Azure RBAC를 사용하여 서비스 주체 계정 'DNS 영역 참가자' 권한을 리소스 그룹에 부여합니다([방법은 다음과 같음](../active-directory/role-based-access-control-configure.md)).
+3. Azure RBAC를 사용하여 서비스 주체 계정 'DNS 영역 참가자' 권한을 리소스 그룹에 부여합니다([방법은 다음과 같음](../role-based-access-control/role-assignments-portal.md)).
 4. Azure DNS SDK 샘플 프로젝트를 사용하는 경우 'program.cs' 파일을 다음과 같이 편집합니다.
 
    * 1단계에서 사용한 대로 tenatId, clientId(계정 ID라고도 함), 비밀(서비스 주체 계정 암호) 및 subscriptionId에 대한 올바른 값을 삽입합니다.
@@ -41,7 +41,7 @@ ms.openlocfilehash: c0fb0be8da1c0ca48a4d43ea027d30a0bc17fe30
 Azure DNS .NET SDK를 사용하려면 **Azure DNS 관리 라이브러리** NuGet 패키지 및 기타 필수 Azure 패키지를 설치해야 합니다.
 
 1. **Visual Studio**에서 프로젝트 또는 새 프로젝트를 엽니다.
-2. **도구** **>** **NuGet 패키지 관리자** **>** **솔루션의 NuGet 패키지 관리...**로 이동합니다.
+2. **도구** **>** **NuGet 패키지 관리자** **>** **솔루션의 NuGet 패키지 관리...** 로 이동합니다.
 3. **찾아보기**를 클릭하고 **시험판 포함** 확인란을 사용하도록 설정한 후, 검색 상자에 **Microsoft.Azure.Management.Dns**를 입력합니다.
 4. 패키지를 선택하고 **설치** 를 클릭하여 Visual Studio 프로젝트에 추가합니다.
 5. 또한 위의 프로세스를 반복하여 **Microsoft.Rest.ClientRuntime.Azure.Authentication** 및 **Microsoft.Azure.Management.ResourceManager** 패키지를 설치합니다.
@@ -165,9 +165,3 @@ while (page.NextPageLink != null)
 ## <a name="next-steps"></a>다음 단계
 
 다른 DNS 레코드 형식에 대한 예제를 비롯한 Azure DNS .NET SDK를 사용하는 방법의 추가 예제가 포함된 [Azure DNS .NET SDK 샘플 프로젝트](https://www.microsoft.com/en-us/download/details.aspx?id=47268&WT.mc_id=DX_MVP4025064&e6b34bbe-475b-1abd-2c51-b5034bcdd6d2=True)를 다운로드합니다.
-
-
-
-<!--HONumber=Dec16_HO4-->
-
-

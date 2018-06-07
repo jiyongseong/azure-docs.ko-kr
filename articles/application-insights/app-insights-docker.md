@@ -1,9 +1,9 @@
 ---
-title: "Azure Application Insights에서 Docker 응용 프로그램 모니터링 | Microsoft Docs"
-description: "Docker 성능 카운터, 이벤트 및 예외는 컨테이너식 앱에서 보낸 원격 분석과 함께 Application Insights에 표시될 수 있습니다."
+title: Azure Application Insights에서 Docker 응용 프로그램 모니터링 | Microsoft Docs
+description: Docker 성능 카운터, 이벤트 및 예외는 컨테이너식 앱에서 보낸 원격 분석과 함께 Application Insights에 표시될 수 있습니다.
 services: application-insights
-documentationcenter: 
-author: CFreemanwa
+documentationcenter: ''
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 27a3083d-d67f-4a07-8f3c-4edb65a0a685
 ms.service: application-insights
@@ -12,17 +12,16 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 03/14/2017
-ms.author: cfreeman
-ms.translationtype: Human Translation
-ms.sourcegitcommit: fd35f1774ffda3d3751a6fa4b6e17f2132274916
-ms.openlocfilehash: b888f3e7fd56aaf8104c1b76264a3753ca37f7c9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/16/2017
-
-
+ms.author: mbullwin
+ms.openlocfilehash: a0476e2f0bf08f76b45e1342ec38137e46008cb1
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32153696"
 ---
 # <a name="monitor-docker-applications-in-application-insights"></a>Application Insights에서 Docker 응용 프로그램 모니터링
-[Docker](https://www.docker.com/) 컨테이너의 수명 주기 이벤트 및 성능 카운터를 Application Insights에서 차트로 표시할 수 있습니다. 호스트의 컨테이너에 [Application Insights](app-insights-overview.md) 이미지를 설치하면 호스트는 물론 다른 이미지에 대한 성능 카운터가 표시됩니다.
+[Docker](https://www.docker.com/) 컨테이너의 수명 주기 이벤트 및 성능 카운터를 Application Insights에서 차트로 표시할 수 있습니다. 호스트의 컨테이너에 [Application Insights](https://hub.docker.com/r/microsoft/applicationinsights/) 이미지를 설치하면 호스트는 물론 다른 이미지에 대한 성능 카운터가 표시됩니다.
 
 Docker를 사용하여 모든 종속성이 포함된 경량 컨테이너에 앱을 배포합니다. Docker 엔진을 실행하는 모든 호스트 컴퓨터에서 앱이 실행됩니다.
 
@@ -45,6 +44,10 @@ Docker 호스트에서 [Application Insights 이미지](https://hub.docker.com/r
 2. Docker 타일을 추가합니다. **타일 추가**를 선택하고 갤러리에서 Docker 타일을 끌어다 놓은 후 **완료**를 클릭합니다. 
    
     ![예제](./media/app-insights-docker/03.png)
+
+> [!NOTE]
+> Application Insights의 개요 창은 이제 잠기고 갤러리에서 타일 추가를 허용하지 않습니다. Azure 대시보드 인터페이스를 통해 위에서 설명한 것처럼 Docker 타일을 여전히 추가할 수 있습니다.
+
 3. **Essentials** 드롭다운을 클릭하고 계측 키를 복사합니다. 이 키를 사용하여 SDK에 원격 분석을 보낼 위치를 알립니다.
 
     ![예제](./media/app-insights-docker/02-props.png)
@@ -131,4 +134,3 @@ AI SDK를 사용하여 계측되는 응용 프로그램에서 보내는 요청 �
 * [Java용 Application Insights](app-insights-java-get-started.md)
 * [Node.js용 Application Insights](app-insights-nodejs.md)
 * [ASP.NET용 Application Insights](app-insights-asp-net.md)
-

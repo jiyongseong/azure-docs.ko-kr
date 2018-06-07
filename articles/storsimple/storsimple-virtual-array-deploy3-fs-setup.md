@@ -15,11 +15,11 @@ ms.workload: NA
 ms.date: 04/17/2017
 ms.author: alkohli
 ms.custom: H1Hack27Feb2017
-translationtype: Human Translation
-ms.sourcegitcommit: f6006d5e83ad74f386ca23fe52879bfbc9394c0f
 ms.openlocfilehash: bf507fb21b314a6811db1c1e45a4356381caada1
-ms.lasthandoff: 05/03/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="deploy-storsimple-virtual-array---set-up-as-file-server-via-azure-portal"></a>StorSimple 가상 배열 배포 - Azure Portal을 통해 파일 서버로 설정
 ![](./media/storsimple-virtual-array-deploy3-fs-setup/fileserver4.png)
@@ -209,5 +209,4 @@ StorSimple 가상 배열을 구성하고 설정하기 전에 다음 사항을 �
 
 ## <a name="next-steps"></a>다음 단계
 로컬 웹 UI를 사용하여 [StorSimple 가상 배열을 관리](storsimple-ova-web-ui-admin.md)하는 방법을 알아봅니다.
-
 

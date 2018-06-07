@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/29/2017
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
 ms.openlocfilehash: dd160ede1189b0de544c8cf5db3b13228d212419
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="change-the-device-mode-on-your-storsimple-device"></a>StorSimple 장치에서 장치 모드 변경
 
@@ -165,5 +163,4 @@ StorSimple 장치를 유지 관리 모드(표준 모드에서)에 배치하여 �
 ## <a name="next-steps"></a>다음 단계
 
 StorSimple 장치에서 [표준 및 유지 관리 모드 업데이트를 적용](storsimple-update-device.md) 하는 방법을 알아봅니다.
-
 

@@ -4,9 +4,9 @@ description: "회사에서 Azure Multi-Factor Authentication을 구성하는 경
 services: multi-factor-authentication
 keywords: "Active Directory 사용 방법, 클라우드의 Active Directory, Active Directory 자습서"
 documentationcenter: 
-author: kgremban
-manager: femila
-editor: pblachar
+author: barlanmsft
+manager: mtillman
+ms.reviewer: richagi
 ms.assetid: 46f83a6a-dbdd-4375-8dc4-e7ea77c16357
 ms.service: multi-factor-authentication
 ms.workload: identity
@@ -14,14 +14,13 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 05/15/2017
-ms.author: kgremban
+ms.author: barlan
 ms.custom: end-user
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a30a90682948b657fb31dd14101172282988cbf0
-ms.openlocfilehash: 58ddf3913a5d00ee9a89a1fa112f3d55d9a815ed
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/25/2017
-
+ms.openlocfilehash: 04b8d2b8d7d84bd4c6b46507be5d597c03d9dbb0
+ms.sourcegitcommit: ded74961ef7d1df2ef8ffbcd13eeea0f4aaa3219
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/29/2018
 ---
 # <a name="set-up-my-account-for-two-step-verification"></a>2단계 인증에 내 계정 설정
 2단계 인증은 다른 사람이 침입하기 어렵게 만들어 계정을 보호하는 추가 보안 단계입니다. 이 문서를 읽고 있다면 아마도 회사 또는 학교 관리자로부터 Multi-Factor Authentication에 대한 전자 메일을 받았을 것입니다. 또는 로그인을 시도했고 추가 보안 검증을 설정하라는 메시지를 받았을 수도 있습니다. 해당되는 경우 **자동 등록 프로세스를 완료해야만 로그인할 수 있습니다**.
@@ -30,13 +29,13 @@ ms.lasthandoff: 05/25/2017
 
 ## <a name="set-up-your-account"></a>계정 설정
 
-IT 부서에서 2단계 인증을 사용하여 시작하도록 요청하는 경우 **Your admin has required that you set up this account for additional secuirty verification**(관리자의 요청에 따라 이 계정에 추가 보안 확인을 설정해야 합니다)가 표시된 화면이 나타납니다.
+회사에서 2단계 인증을 사용하여 시작하도록 요청하는 경우 **Your admin has required that you set up this account for additional secuirty verification**(관리자의 요청에 따라 이 계정에 추가 보안 확인을 설정해야 합니다)가 표시된 화면이 나타납니다.
 
 ![설정](./media/multi-factor-authentication-end-user-first-time/first.png)
 
 시작하려면 **지금 설정하세요**를 클릭합니다.
 
-로그인할 때 이와 같은 화면이 표시되지 않으면 [2단계 인증을 위한 설정 관리](multi-factor-authentication-end-user-manage-settings.md#where-to-find-the-settings-page)의 지침에 따라 확인 옵션을 관리할 수 있는 설정 페이지를 찾습니다. 
+로그인할 때 이와 같은 화면이 표시되지 않으면 [2단계 인증을 위한 설정 관리](multi-factor-authentication-end-user-manage-settings.md#where-to-find-the-settings-page)의 지침에 따라 확인 옵션을 관리할 수 있는 설정 페이지를 찾습니다.
 
 ## <a name="decide-how-you-want-to-verify-your-sign-ins"></a>로그인 확인 방법 결정
 
@@ -44,12 +43,12 @@ IT 부서에서 2단계 인증을 사용하여 시작하도록 요청하는 경�
 
 | 연락 방법 | 설명 |
 | --- | --- |
-| [모바일 앱](#use-a-mobile-app-as-the-contact-method) |- **확인 시 알림 수신.** 이 옵션은 스마트폰이나 태블릿의 인증자 앱에 푸시 알림을 보냅니다. 알림을 확인한 후 올바르면 앱에서 **인증**을 선택합니다. 회사 또는 학교에서는 인증 전에 PIN을 입력해야 할 수 있습니다.<br>- **확인 코드 사용.** 이 모드에서 인증자 앱은 30초마다 업데이트되는 확인 코드를 생성합니다. 로그인 인터페이스에 가장 최근 확인 코드를 입력합니다.<br>[Windows Phone](http://go.microsoft.com/fwlink/?Linkid=825071), [Android](http://go.microsoft.com/fwlink/?Linkid=825072) 및 [IOS](http://go.microsoft.com/fwlink/?Linkid=825073) 장치의 경우 Microsoft Authenticator 앱을 사용할 수 있습니다. |
+| [모바일 앱](#use-a-mobile-app-as-the-contact-method) |- **확인 시 알림 수신.** 이 옵션은 스마트폰이나 태블릿의 인증자 앱에 푸시 알림을 보냅니다. 알림을 확인한 후 올바르면 앱에서 **인증**을 선택합니다. 회사 또는 학교에서는 인증 전에 PIN을 입력해야 할 수 있습니다.<br>- **확인 코드 사용.** 이 모드에서 인증자 앱은 30초마다 업데이트되는 확인 코드를 생성합니다. 로그인 인터페이스에 가장 최근 확인 코드를 입력합니다.<br>Microsoft Authenticator 앱은 [Android](https://go.microsoft.com/fwlink/?linkid=866594), [iOS](https://go.microsoft.com/fwlink/?linkid=866594) 및 [Windows Phone](http://go.microsoft.com/fwlink/?Linkid=825071)에서 사용할 수 있습니다. |
 | [휴대폰 통화 또는 문자](#use-your-mobile-phone-as-the-contact-method) |- **전화 통화**는 제공한 전화 번호에 자동으로 음성 전화를 겁니다. 전화를 받고 휴대폰 키패드에서 #을 눌러 인증합니다.<br>- **문자 메시지**는 확인 코드를 포함하는 문자 메시지를 보냅니다. 텍스트에 있는 프롬프트에 따라 문자 메시지에 회신하거나 로그인 인터페이스에 제공한 확인 코드를 입력합니다. |
 | [사무실 전화 통화](#use-your-office-phone-as-the-contact-method) |제공한 전화 번호에 자동으로 음성 전화를 겁니다. 전화를 받고 휴대폰 키패드에서 #을 눌러 인증합니다. |
 
 ## <a name="use-a-mobile-app-as-the-contact-method"></a>연락 방법으로 모바일 앱 사용
-이 방법을 사용하려면 휴대폰이나 태블릿에 인증자 앱을 설치해야 합니다. 이 문서의 단계는 [Windows Phone](http://go.microsoft.com/fwlink/?Linkid=825071), [Android](http://go.microsoft.com/fwlink/?Linkid=825072) 및 [IOS](http://go.microsoft.com/fwlink/?Linkid=825073)에서 사용 가능한 Microsoft Authenticator 앱을 기준으로 합니다.
+이 방법을 사용하려면 휴대폰이나 태블릿에 인증자 앱을 설치해야 합니다. 이 문서의 단계는 [Windows Phone](http://go.microsoft.com/fwlink/?Linkid=825071), [Android](http://go.microsoft.com/fwlink/?Linkid=825072) 및 [iOS](http://go.microsoft.com/fwlink/?Linkid=825073)에서 사용할 수 있는 Microsoft Authenticator 앱을 기반으로 합니다.
 
 1. 드롭다운 목록에서 **모바일 앱**을 선택합니다.
 2. **확인 시 알림 수신** 또는 **확인 코드 사용**을 선택한 후 **설정**을 선택합니다.
@@ -107,4 +106,3 @@ QR 판독기를 사용하는 대신 모바일 앱에 수동으로 계정을 추�
 * 기본 옵션 변경 및 [2단계 인증을 위한 설정 관리](multi-factor-authentication-end-user-manage-settings.md)
 * 2단계 인증을 지원하지 않는 네이티브 장치 앱에 대해 [앱 암호](multi-factor-authentication-end-user-app-passwords.md)를 설정합니다.
 * 휴대폰 서비스가 없는 경우에도 빠르고 안전한 인증을 위해서는 [Microsoft Authenticator 앱](microsoft-authenticator-app-how-to.md)을 확인하세요.
-

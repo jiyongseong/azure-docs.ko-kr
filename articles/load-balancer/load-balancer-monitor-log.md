@@ -1,9 +1,9 @@
 ---
-title: "부하 분산 장치에 대한 작업, 이벤트 및 카운터 모니터링 | Microsoft Docs"
-description: "Azure 부하 분산 장치에 대한 경고 이벤트 및 상태 프로브 상태 로깅을 사용하도록 설정하는 방법에 대해 알아보기"
+title: 부하 분산 장치에 대한 작업, 이벤트 및 카운터 모니터링 | Microsoft Docs
+description: Azure 부하 분산 장치에 대한 경고 이벤트 및 상태 프로브 상태 로깅을 사용하도록 설정하는 방법에 대해 알아보기
 services: load-balancer
 documentationcenter: na
-author: kumudd
+author: KumudD
 manager: timlt
 tags: azure-resource-manager
 ms.assetid: 56656d74-0241-4096-88c8-aa88515d676d
@@ -12,16 +12,18 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 10/24/2016
+ms.date: 09/25/2017
 ms.author: kumud
-translationtype: Human Translation
-ms.sourcegitcommit: 503f5151047870aaf87e9bb7ebf2c7e4afa27b83
-ms.openlocfilehash: 638ecd5e02889bd8cb6e7429dfcec335feaac4a3
-ms.lasthandoff: 03/29/2017
-
+ms.openlocfilehash: dabf4bcae957559978e731636bb13554f1a68b73
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
-
 # <a name="log-analytics-for-azure-load-balancer"></a>Azure 부하 분산 장치에 대한 로그 분석
+
+>[!NOTE] 
+>Azure Load Balancer는 기본 및 표준이라는 두 가지 형식을 지원합니다. 이 문서는 기본 Load Balancer에 대해 설명합니다. 표준 Load Balancer에 대한 자세한 내용은 [표준 Load Balancer 개요](load-balancer-standard-overview.md)를 참조하세요.
 
 Azure에서 부하 분산 장치를 관리하고 문제를 해결하는 데 다양한 유형의 로그를 사용할 수 있습니다. 이러한 로그 중 일부는 포털을 통해 액세스할 수 있으며, Azure Blob Storage에서 모든 로그를 추출하고 다양한 도구(예: Excel 및 PowerBI)에서 볼 수 있습니다. 아래 목록에서 다른 종류의 로그에 대해 자세히 알아볼 수 있습니다.
 
@@ -49,9 +51,9 @@ Azure에서 부하 분산 장치를 관리하고 문제를 해결하는 데 다�
     ![포털 - 부하 분산 장치-설정](./media/load-balancer-monitor-log/load-balancer-settings.png)
 
 5. **진단** 창의 **상태** 아래에서 **설정**을 선택합니다.
-6. **저장소 계정**을 클릭합니다.
+6. **Storage 계정**을 클릭합니다.
 7. **로그** 아래에서 기존 저장소 계정을 선택하거나 새 저장소 계정을 만듭니다. 슬라이더를 사용하여 이벤트 로그에 저장된 이벤트 데이터를 유지할 날짜 수를 결정합니다. 
-8. **Save**를 클릭합니다.
+8. **저장**을 클릭합니다.
 
     ![포털 - 진단 로그](./media/load-balancer-monitor-log/load-balancer-diagnostics.png)
 
@@ -147,4 +149,3 @@ JSON 출력은 경고가 생성된 부하 분산 장치에 대한 이유를 설�
 ## <a name="next-steps"></a>다음 단계
 
 [부하 분산 장치 프로브 이해](load-balancer-custom-probe-overview.md)
-

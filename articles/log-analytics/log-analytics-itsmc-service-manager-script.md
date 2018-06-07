@@ -1,29 +1,26 @@
 ---
-title: "OMS에서 IT Service Management Connector에 연결할 Service Manager 웹앱을 만드는 자동화 스크립트 | Microsoft Docs"
-description: "자동화 스크립트를 사용하여 OMS의 IT Service Management Connector에 연결하고 ITSM 작업 항목을 중앙에서 모니터링 및 관리하는 Service Manager 웹앱을 만듭니다."
+title: Azure에서 IT Service Management Connector에 연결할 Service Manager 웹앱을 만드는 자동화 스크립트 | Microsoft Docs
+description: 자동화 스크립트를 사용하여 Azure의 IT Service Management Connector에 연결하고 ITSM 작업 항목을 중앙에서 모니터링 및 관리하는 Service Manager 웹앱을 만듭니다.
 services: log-analytics
-documentationcenter: 
+documentationcenter: ''
 author: JYOTHIRMAISURI
 manager: riyazp
-editor: 
+editor: ''
 ms.assetid: 879e819f-d880-41c8-9775-a30907e42059
 ms.service: log-analytics
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 06/15/2017
+ms.date: 01/23/2018
 ms.author: v-jysur
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ff2fb126905d2a68c5888514262212010e108a3d
-ms.openlocfilehash: ad69d82e57be8bfd9ba40dd88cbc0a979c9e1722
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/17/2017
-
-
+ms.openlocfilehash: 75c61894d5562f4bb0cb45fd8500bd9cf0f2bf8f
+ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/03/2018
 ---
-
-# <a name="create-service-manager-web-app-using-the-automated-script-preview"></a>자동화 스크립트를 사용하여 Service Manager 웹앱 만들기(미리 보기)
+# <a name="create-service-manager-web-app-using-the-automated-script"></a>자동화 스크립트를 사용하여 Service Manager 웹앱 만들기
 
 다음 스크립트를 사용하여 Service Manager 인스턴스에 대한 웹앱을 만듭니다. Service Manager 연결에 대한 자세한 내용은 [Service Manager 웹앱](log-analytics-itsmc-connections.md#create-and-deploy-service-manager-web-app-service)에 나와 있습니다.
 
@@ -38,7 +35,7 @@ ms.lasthandoff: 06/17/2017
 
 이 스크립트는 사용자가 지정한 이름(및 웹앱을 고유하게 만드는 몇 가지 추가 설정)을 사용하여 웹앱을 만듭니다. **웹앱 URL**, **클라이언트 ID** 및 **클라이언트 암호**를 생성합니다.
 
-이러한 값을 저장합니다. IT Service Management Cconnector와의 연결을 만들 때 필요합니다.
+이러한 값은 IT Service Management Cconnector와의 연결을 만들 때 필요하므로 저장합니다.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -129,7 +126,7 @@ if(!$siteNamePrefix)
     $siteNamePrefix = "smoc"
 }
 
-Add-AzureRmAccount
+Connect-AzureRmAccount
 
 $context = Set-AzureRmContext -SubscriptionName $azureSubscriptionName -WarningAction SilentlyContinue
 
@@ -195,6 +192,8 @@ Add-Type -AssemblyName System.Web
 
 $clientSecret = [System.Web.Security.Membership]::GeneratePassword(30,2).ToString()
 
+$clientSecret = $clientSecret | ConvertTo-SecureString -AsPlainText -Force
+
 try
 {
 
@@ -209,7 +208,7 @@ catch
     # Delete the deployed web app if Azure AD application fails
     Remove-AzureRmResource -ResourceGroupName $resourceGroupName -ResourceName $siteName -ResourceType Microsoft.Web/sites -Force
 
-    Write-Host "Faiure occured in Azure AD application....Try again!!"
+    Write-Host "Failure occured in Azure AD application....Try again!!"
 
     exit
 
@@ -323,4 +322,3 @@ if(!$err)
 ```
 ## <a name="next-steps"></a>다음 단계
 [하이브리드 연결 구성](log-analytics-itsmc-connections.md#configure-the-hybrid-connection).
-

@@ -1,5 +1,5 @@
 ### <a name="open-tcp-ports-in-the-windows-firewall-for-the-default-instance-of-the-database-engine"></a>Windows 방화벽에서 데이터베이스 엔진의 기본 인스턴스용 TCP 포트 열기
-1. 원격 데스크톱을 사용하여 가상 컴퓨터에 연결합니다. VM에 연결하는 방법에 대한 자세한 내용은 [원격 데스크톱으로 SQL VM 열기](../articles/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-server-provision.md#open-the-vm-with-remote-desktop)를 참조하세요.
+1. 원격 데스크톱을 사용하여 가상 머신에 연결합니다. VM에 연결하는 방법에 대한 자세한 내용은 [원격 데스크톱으로 SQL VM 열기](../articles/virtual-machines/windows/sql/virtual-machines-windows-portal-sql-server-provision.md#remotedesktop)를 참조하세요.
 2. 시작 화면에서 로그인한 후 **WF.msc**를 입력하고 ENTER를 누릅니다.
    
     ![방화벽 프로그램 시작](./media/virtual-machines-sql-server-connection-steps/12Open-WF.png)
@@ -28,35 +28,24 @@
 필요한 경우 다른 구성 요소의 추가 포트를 엽니다. 자세한 내용은 [SQL Server 액세스를 허용하도록 Windows 방화벽 구성](http://msdn.microsoft.com/library/cc646023.aspx)을 참조하십시오.
 
 ### <a name="configure-sql-server-to-listen-on-the-tcp-protocol"></a>TCP 프로토콜을 수신 대기하도록 SQL Server 구성
-1. 가상 컴퓨터에 연결되어 있는 동안 시작 페이지에서 **SQL Server 구성 관리자** 를 입력하고 ENTER 키를 누릅니다.
-   
-    ![SSCM 열기](./media/virtual-machines-sql-server-connection-steps/9Click-SSCM.png)
-2. SQL Server 구성 관리자의 콘솔 창에서 **SQL Server 네트워크 구성**을 확장합니다.
-3. 콘솔 창에서 **MSSQLSERVER용 프로토콜**(기본 인스턴스 이름)을 클릭합니다. 세부 정보 창에서 **TCP**를 마우스 오른쪽 단추로 클릭하고 아직 사용으로 설정하지 않은 경우 **사용**을 클릭합니다.
-   
-    ![TCP 사용](./media/virtual-machines-sql-server-connection-steps/10Enable-TCP.png)
-4. 콘솔 창에서 **SQL Server 서비스** 를 클릭합니다. 세부 정보 창에서 **SQL Server(*인스턴스 이름*)**(기본 인스턴스는 **SQL Server(MSSQLSERVER)**)를 마우스 오른쪽 단추로 클릭한 후 **다시 시작**을 클릭하여 SQL Server의 인스턴스를 중지했다가 다시 시작합니다.
-   
-    ![데이터베이스 엔진 다시 시작](./media/virtual-machines-sql-server-connection-steps/11Restart.png)
-5. SQL Server 구성 관리자를 닫습니다.
 
-SQL Server 데이터베이스 엔진용 프로토콜 사용 설정에 대한 자세한 내용은 [서버 네트워크 프로토콜 설정 또는 해제](http://msdn.microsoft.com/library/ms191294.aspx)를 참조하십시오.
+[!INCLUDE [Enable TCP](virtual-machines-sql-server-connection-tcp-protocol.md)]
 
 ### <a name="configure-sql-server-for-mixed-mode-authentication"></a>혼합 모드 인증을 위해 SQL Server 구성
 SQL Server 데이터베이스 엔진은 도메인 환경에서만 Windows 인증을 사용할 수 있습니다. 다른 컴퓨터에서 데이터베이스 엔진에 연결하려면 혼합 모드 인증을 위해 SQL Server를 구성하십시오. 혼합 모드 인증은 SQL Server 인증과 Windows 인증을 모두 허용합니다.
 
 > [!NOTE]
-> Azure 가상 네트워크를, 구성된 도메인 환경으로 구성한 경우, 혼합 모드 인증은 구성할 필요가 없습니다.
+> Azure Virtual Network를, 구성된 도메인 환경으로 구성한 경우, 혼합 모드 인증은 구성할 필요가 없습니다.
 > 
 > 
 
-1. 가상 컴퓨터에 연결되어 있는 동안 시작 페이지에서 **SQL Server Management Studio** 를 입력하고 선택한 아이콘을 클릭합니다.
+1. 가상 머신에 연결되어 있는 동안 시작 페이지에서 **SQL Server Management Studio** 를 입력하고 선택한 아이콘을 클릭합니다.
    
     처음으로 Management Studio를 열 때 사용자 Management Studio 환경이 만들어져야 합니다. 어느 정도 시간이 걸릴 수 있습니다.
-2. Management Studio에서 **서버에 연결** 대화 상자가 표시됩니다. **서버 이름** 상자에 개체 탐색기를 사용하여 데이터베이스 엔진에 연결할 가상 컴퓨터의 이름을 입력합니다(가상 컴퓨터 이름 대신 **(로컬)** 또는 점(.)을 **서버 이름**으로 사용할 수 있음). **Windows 인증**을 선택하고, **사용자 이름** 상자의 ***VM_이름*\로컬_관리자**를 그대로 둡니다. **Connect** 를 클릭합니다.
+2. Management Studio에서 **서버에 연결** 대화 상자가 표시됩니다. **서버 이름** 상자에 개체 탐색기를 사용하여 데이터베이스 엔진에 연결할 가상 머신의 이름을 입력합니다(가상 머신 이름 대신 **(로컬)** 또는 점(.)을 **서버 이름**으로 사용할 수 있음). **Windows 인증**을 선택하고, **사용자 이름** 상자의 ***your_VM_name*\your_local_administrator**를 그대로 둡니다. **Connect**를 클릭합니다.
    
     ![서버에 연결](./media/virtual-machines-sql-server-connection-steps/19Connect-to-Server.png)
-3. SQL Server Management Studio 개체 탐색기에서 SQL Server 인스턴스의 이름(가상 컴퓨터 이름)을 마우스 오른쪽 단추로 클릭한 후 **속성**을 클릭합니다.
+3. SQL Server Management Studio 개체 탐색기에서 SQL Server 인스턴스의 이름(가상 머신 이름)을 마우스 오른쪽 단추로 클릭한 후 **속성**을 클릭합니다.
    
     ![서버 속성](./media/virtual-machines-sql-server-connection-steps/20Server-Properties.png)
 4. **보안** 페이지의 **서버 인증**에서 **SQL Server 및 Windows 인증 모드**를 선택한 후 **확인**을 클릭합니다.
@@ -72,7 +61,7 @@ SQL Server 데이터베이스 엔진은 도메인 환경에서만 Windows 인증
 다른 컴퓨터에서 데이터베이스 엔진에 연결하려면 SQL Server 인증 로그인을 하나 이상 만들어야 합니다.
 
 1. SQL Server Management Studio 개체 탐색기에서 새 로그인을 만들 서버 인스턴스의 폴더를 확장합니다.
-2. **보안** 폴더를 마우스 오른쪽 단추로 클릭하고, **새로 만들기**를 가리키고 **로그인...**을 선택합니다.
+2. **보안** 폴더를 마우스 오른쪽 단추로 클릭하고, **새로 만들기**를 가리키고 **로그인...** 을 선택합니다.
    
     ![새 로그인](./media/virtual-machines-sql-server-connection-steps/23New-Login.png)
 3. **로그인 - 신규** 대화 상자의 **일반** 페이지에 있는 **로그인 이름** 상자에 새 사용자의 이름을 입력합니다.

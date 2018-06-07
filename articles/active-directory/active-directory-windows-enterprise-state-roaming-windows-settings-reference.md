@@ -1,11 +1,11 @@
 ---
-title: "Windows 10 로밍 설정 참조 | Microsoft Docs"
-description: "Windows 10에서 로밍 또는 백업되는 모든 설정의 전체 목록입니다."
+title: Windows 10 로밍 설정 참조 | Microsoft Docs
+description: Windows 10에서 로밍 또는 백업되는 모든 설정의 전체 목록입니다.
 services: active-directory
-keywords: "엔터프라이즈 상태 로밍, windows 클라우드"
-documentationcenter: 
+keywords: 엔터프라이즈 상태 로밍, windows 클라우드
+documentationcenter: ''
 author: tanning
-manager: femila
+manager: mtillman
 editor: curtand
 ms.assetid: 17cffc3e-2928-4235-91f7-a685bd6bdcbf
 ms.service: active-directory
@@ -15,12 +15,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/08/2017
 ms.author: markvi
-translationtype: Human Translation
-ms.sourcegitcommit: 988e7fe2ae9f837b661b0c11cf30a90644085e16
-ms.openlocfilehash: 5082ed8d2f41e72fa979b978e2ac0b0840fdcdac
-ms.lasthandoff: 04/06/2017
-
-
+ms.openlocfilehash: 741b76935b5a6d9b2a6869ef57caa0ac0dc6351a
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32159080"
 ---
 # <a name="windows-10-roaming-settings-reference"></a>Windows 10 로밍 설정 참조
 다음은 Windows 10에서 로밍 또는 백업되는 모든 설정의 전체 목록입니다. 
@@ -30,13 +30,13 @@ Windows 10의 동기화, 백업 및 복원 프레임워크에서 지원되는 �
 
 | 계정 유형 및 작업 | 데스크톱 | 모바일 |
 | --- | --- | --- |
-| Azure Active Directory: 동기화 |예 |아니요 |
-| Azure Active Directory: 백업/복원 |아니요 |아니요 |
+| Azure Active Directory: 동기화 |예 |아니오 |
+| Azure Active Directory: 백업/복원 |아니오 |아니오 |
 | Microsoft 계정: 동기화 |예 |예 |
-| Microsoft 계정: 백업/복원 |아니요 |예 |
+| Microsoft 계정: 백업/복원 |아니오 |예 |
 
 ## <a name="what-is-backup"></a>백업이란?
-Windows 설정은 동기화가 기본이지만 장치에 설치된 응용 프로그램 목록 같은 일부 설정은 백업되기만 합니다. 백업은 모바일 장치에 대해서만 사용할 수 있으며 현재 엔터프라이즈 상태 로밍 사용자를 위해서는 사용할 수 없습니다. 백업은 Microsoft 계정을 사용하고 설정 및 응용 프로그램 데이터를 OneDrive에 저장합니다. 사용자가 설정 앱을 사용하여 장치의 동기화를 비활성화하면 평소에는 동기화되는 응용 프로그램 데이터가 백업되기만 합니다. 백업 데이터는 새 장치를 처음으로 실행하는 동안 복원 작업을 통해서만 액세스할 수 있습니다. 백업은 장치 설정을 통해 비활성화할 수 있으며 사용자의 OneDrive 계정을 통해 관리 및 삭제됩니다.
+Windows 설정은 동기화가 기본이지만 장치에 설치된 응용 프로그램 목록 같은 일부 설정은 백업되기만 합니다. Backup은 모바일 장치에 대해서만 사용할 수 있으며 현재 엔터프라이즈 상태 로밍 사용자를 위해서는 사용할 수 없습니다. Backup은 Microsoft 계정을 사용하고 설정 및 응용 프로그램 데이터를 OneDrive에 저장합니다. 사용자가 설정 앱을 사용하여 장치의 동기화를 비활성화하면 평소에는 동기화되는 응용 프로그램 데이터가 백업되기만 합니다. Backup 데이터는 새 장치를 처음으로 실행하는 동안 복원 작업을 통해서만 액세스할 수 있습니다. Backup은 장치 설정을 통해 비활성화할 수 있으며 사용자의 OneDrive 계정을 통해 관리 및 삭제됩니다.
 
 ## <a name="windows-settings-overview"></a>Windows 설정 개요
 다음 설정 그룹은 Windows 10 장치에서 최종 사용자가 설정 동기화를 활성화/비활성화하는 데 사용할 수 있습니다.
@@ -48,11 +48,15 @@ Windows 설정은 동기화가 기본이지만 장치에 설치된 응용 프로
 * 간편한 액세스: 내레이터, 화상 키보드, 돋보기 
 * 기타 Windows 설정: Windows 설정 세부 정보를 참조하세요.
 
-![](./media/active-directory-enterprise-state-roaming/active-directory-enterprise-state-roaming-individual-sync-settings.png)
+![](./media/active-directory-enterprise-state-roaming/active-directory-enterprise-state-roaming-syncyoursettings.png)
 
-Edge 브라우저 설정 그룹(즐겨찾기, 읽기 목록) 동기화는 Edge 브라우저 설정 메뉴 옵션을 통해 최종 사용자가 사용하거나 사용하지 않도록 설정할 수 있습니다.
+Microsoft Edge 브라우저 설정 그룹(즐겨찾기, 읽기 목록) 동기화는 Microsoft Edge 브라우저 설정 메뉴 옵션을 통해 최종 사용자가 사용하거나 사용하지 않도록 설정할 수 있습니다.
 
-![](./media/active-directory-enterprise-state-roaming/active-directory-enterprise-state-roaming-sync-content.png)
+![](./media/active-directory-enterprise-state-roaming/active-directory-enterprise-state-roaming-edge.png)
+
+Windows 10 버전 1803 이상의 경우 Internet Explorer 설정 그룹(즐겨찾기, 입력한 URL) 동기화는 Internet Explorer 설정 메뉴 옵션을 통해 최종 사용자가 활성화하거나 비활성화할 수 있습니다. 
+
+![](./media/active-directory-enterprise-state-roaming/active-directory-enterprise-state-roaming-ie.png)
 
 ## <a name="windows-settings-details"></a>Windows 설정 세부 정보
 다음 테이블에서 설정 그룹 열의 기타 항목이 참조하는 설정은 설정 > 계정 > 설정 동기화 > 기타 Windows 설정으로 이동하여 비활성화할 수 있습니다. 
@@ -69,19 +73,19 @@ Edge 브라우저 설정 그룹(즐겨찾기, 읽기 목록) 동기화는 Edge �
 | **앱 목록**: 설치된 앱 목록 |X |backup |기타 |
 | **Bluetooth**: 모든 Bluetooth 설정 |X |X | |
 | **명령 프롬프트**: 명령 프롬프트 "기본값" 설정 |sync |X | |
-| **자격 증명**: 자격 증명 보관 |sync |sync |password |
-| **날짜, 시간 및 지역**: 자동 시간(인터넷 시간 동기화) |sync |sync |language |
-| **날짜, 시간 및 지역**: 24시간 |sync |X |language |
-| **날짜, 시간 및 지역**: 날짜 및 시간 |sync |X |language |
-| **날짜, 시간 및 지역**: 시간대 | |X |language |
-| **날짜, 시간 및 지역**: 일광 절약 시간제 |sync |X |language |
-| **날짜, 시간 및 지역**: 국가/지역 |sync |X |language |
-| **날짜, 시간 및 지역**: 시작 요일 |sync |X |language |
-| **날짜, 시간 및 지역**: 지역 형식(로캘) |sync |X |language |
-| **날짜, 시간 및 지역**: 간단한 날짜 |sync |X |language |
-| **날짜, 시간 및 지역**: 자세한 날짜 |sync |X |language |
+| **자격 증명**: 자격 증명 보관 |sync |sync |암호 |
+| **날짜, 시간 및 지역**: 자동 시간(인터넷 시간 동기화) |sync |sync |언어 |
+| **날짜, 시간 및 지역**: 24시간 |sync |X |언어 |
+| **날짜, 시간 및 지역**: 날짜 및 시간 |sync |X |언어 |
+| **날짜, 시간 및 지역**: 시간대 | |X |언어 |
+| **날짜, 시간 및 지역**: 일광 절약 시간제 |sync |X |언어 |
+| **날짜, 시간 및 지역**: 국가/지역 |sync |X |언어 |
+| **날짜, 시간 및 지역**: 시작 요일 |sync |X |언어 |
+| **날짜, 시간 및 지역**: 지역 형식(로캘) |sync |X |언어 |
+| **날짜, 시간 및 지역**: 간단한 날짜 |sync |X |언어 |
+| **날짜, 시간 및 지역**: 자세한 날짜 |sync |X |언어 |
 | **날짜, 시간 및 지역**: 간단한 시간 |sync |X |language |
-| **날짜, 시간 및 지역**: 자세한 시간 |sync |X |language |
+| **날짜, 시간 및 지역**: 자세한 시간 |sync |X |언어 |
 | **바탕 화면 개인 설정**: 바탕 화면 테마(배경, 시스템 색, 기본 시스템 소리, 화면 보호기) |sync |X |테마 |
 | **바탕 화면 개인 설정**: 슬라이드 쇼 배경 화면 |sync |X |테마 |
 | **바탕 화면 개인 설정**: 작업 표시줄 설정(위치, 자동 숨김 등) |sync |X |테마 |
@@ -116,27 +120,27 @@ Edge 브라우저 설정 그룹(즐겨찾기, 읽기 목록) 동기화는 Edge �
 | **키보드**: 스티커 켜기(기본적으로 꺼져 있음) |sync |X |간편한 액세스 |
 | **키보드**: 필터 키 켜기(기본적으로 꺼져 있음) |sync |X |간편한 액세스 |
 | **키보드**: 토글 키 켜기(기본적으로 꺼져 있음) |sync |X |간편한 액세스 |
-| **Internet Explorer**: 도메인 언어: 중국어(간체) QWERTY - 자체 학습 활성화 |sync |X |language |
-| **언어**: CHS QWERTY - 동적 후보 순위 활성화 |sync |X |language |
-| **언어**: CHS QWERTY - 문자 집합 중국어 간체 |sync |X |language |
-| **언어**: CHS QWERTY - 문자 집합 중국어 번체 |sync |X |language |
+| **Internet Explorer**: 도메인 언어: 중국어(간체) QWERTY - 자체 학습 활성화 |sync |X |언어 |
+| **언어**: CHS QWERTY - 동적 후보 순위 활성화 |sync |X |언어 |
+| **언어**: CHS QWERTY - 문자 집합 중국어 간체 |sync |X |언어 |
+| **언어**: CHS QWERTY - 문자 집합 중국어 번체 |sync |X |언어 |
 | **언어**: CHS QWERTY - 퍼지 핀잉 |sync |backup |언어 |
 | **언어**: CHS QWERTY - 퍼지 쌍 |sync |backup |언어 |
-| **언어**: CHS QWERTY - 완전 핀잉 |sync |X |language |
-| **언어**: CHS QWERTY - 이중 핀잉 |sync |X |language |
-| **언어**: CHS QWERTY - 읽기 자동 교정 |sync |X |language |
-| **언어**: CHS QWERTY - C/E 전환 키, Shift |sync |X |language |
-| **언어**: CHS QWERTY - C/E 전환 키, Ctrl |sync |X |language |
-| **언어**: CHS WUBI - 단일 문자 입력 모드 |sync |X |language |
+| **언어**: CHS QWERTY - 완전 핀잉 |sync |X |언어 |
+| **언어**: CHS QWERTY - 이중 핀잉 |sync |X |언어 |
+| **언어**: CHS QWERTY - 읽기 자동 교정 |sync |X |언어 |
+| **언어**: CHS QWERTY - C/E 전환 키, Shift |sync |X |언어 |
+| **언어**: CHS QWERTY - C/E 전환 키, Ctrl |sync |X |언어 |
+| **언어**: CHS WUBI - 단일 문자 입력 모드 |sync |X |언어 |
 | **언어**: CHS WUBI - 나머지 후보 코딩 표시 |sync |X |language |
 | **언어**: CHS WUBI - 4 코딩이 유효하지 않을 때 경고음 |sync |X |언어 |
-| **언어**: CHS 보포모포 - CJK Ext-A 포함 |sync |X |language |
-| **언어**: 일본어 IME - 예측 입력 및 사용자 지정 단어 |sync |sync |language |
-| **언어**: 한국어(KOR) IME |X |X |language |
-| **언어**: 필기 인식 |X |X |language |
-| **언어**: 언어 프로필 |sync |backup |language |
-| **언어**: 맞춤법 검사 - 맞춤법 오류 자동 수정 및 강조 표시 |sync |backup |language |
-| **언어**: 키보드 목록 |sync |backup |language |
+| **언어**: CHS 보포모포 - CJK Ext-A 포함 |sync |X |언어 |
+| **언어**: 일본어 IME - 예측 입력 및 사용자 지정 단어 |sync |sync |언어 |
+| **언어**: 한국어(KOR) IME |X |X |언어 |
+| **언어**: 필기 인식 |X |X |언어 |
+| **언어**: 언어 프로필 |sync |backup |언어 |
+| **언어**: 맞춤법 검사 - 맞춤법 오류 자동 수정 및 강조 표시 |sync |backup |언어 |
+| **언어**: 키보드 목록 |sync |backup |언어 |
 | **잠금 화면**: 모든 잠금 화면 설정 |X |X | |
 | **돋보기**: 켜기 또는 끄기(마스터 토글) |X |X |간편한 액세스 |
 | **돋보기**: 반전 색 켜기 또는 끄기(기본적으로 꺼져 있음) |sync |X |간편한 액세스 |
@@ -159,16 +163,16 @@ Edge 브라우저 설정 그룹(즐겨찾기, 읽기 목록) 동기화는 Edge �
 | **간편한 액세스**: 배경 이미지 제거(기본적으로 꺼져 있음) |sync |X |간편한 액세스 |
 | **전원 및 절전**: 모든 설정 |X |X | |
 | **시작 화면 개인 설정**: 강조 색(phone 전용) |X |sync |테마 |
-| **입력**: 맞춤법 사전 |sync |backup |language |
-| **입력**: 맞춤법이 틀린 단어 자동 교정 |sync |backup |language |
-| **입력**: 맞춤법이 틀린 단어에 강조 표시 |sync |backup |language |
-| **입력**: 입력할 때 텍스트 제안 표시 |sync |backup |language |
-| **입력할 때**: 텍스트 제안 선택 후에 공백을 추가 |sync |backup |language |
-| **입력**: 스페이스바를 두 번 탭하면 마침표 추가 |sync |backup |language |
-| **입력**: 각 문장의 첫 번째 문자를 대문자로 표기 |sync |backup |language |
-| **입력**: Shift 키를 두 번 탭하면 모든 문자를 대문자로 표기 |sync |backup |language |
-| **입력**: 입력할 때 키 소리 재생 |sync |backup |language |
-| **입력**: 터치 키보드의 개인 설정 데이터 |sync |backup |language |
+| **입력**: 맞춤법 사전 |sync |backup |언어 |
+| **입력**: 맞춤법이 틀린 단어 자동 교정 |sync |backup |언어 |
+| **입력**: 맞춤법이 틀린 단어에 강조 표시 |sync |backup |언어 |
+| **입력**: 입력할 때 텍스트 제안 표시 |sync |backup |언어 |
+| **입력할 때**: 텍스트 제안 선택 후에 공백을 추가 |sync |backup |언어 |
+| **입력**: 스페이스바를 두 번 탭하면 마침표 추가 |sync |backup |언어 |
+| **입력**: 각 문장의 첫 번째 문자를 대문자로 표기 |sync |backup |언어 |
+| **입력**: Shift 키를 두 번 탭하면 모든 문자를 대문자로 표기 |sync |backup |언어 |
+| **입력**: 입력할 때 키 소리 재생 |sync |backup |언어 |
+| **입력**: 터치 키보드의 개인 설정 데이터 |sync |backup |언어 |
 | **Wi-Fi**: Wi-Fi 프로필(WPA만) |sync |sync |암호 |
 
 ###### <a name="footnote-1"></a>각주 1
@@ -180,4 +184,3 @@ Edge 브라우저 설정 그룹(즐겨찾기, 읽기 목록) 동기화는 Edge �
 * [설정 및 데이터 로밍 FAQ](active-directory-windows-enterprise-state-roaming-faqs.md)
 * [설정 동기화에 대한 그룹 정책 및 MDM 설정](active-directory-windows-enterprise-state-roaming-group-policy-settings.md)
 * [문제 해결](active-directory-windows-enterprise-state-roaming-troubleshooting.md)
-

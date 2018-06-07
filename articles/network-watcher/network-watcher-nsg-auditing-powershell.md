@@ -1,11 +1,11 @@
 ---
-title: "Azure Network Watcher 보안 그룹 보기를 사용하여 NSG 감사 자동화 | Microsoft Docs"
-description: "이 페이지에서는 네트워크 보안 그룹의 감사를 구성하는 방법에 대한 설명을 제공합니다."
+title: Azure Network Watcher 보안 그룹 보기를 사용하여 NSG 감사 자동화 | Microsoft Docs
+description: 이 페이지에서는 네트워크 보안 그룹의 감사를 구성하는 방법에 대한 설명을 제공합니다.
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 78a01bcf-74fe-402a-9812-285f3501f877
 ms.service: network-watcher
 ms.devlang: na
@@ -13,24 +13,23 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-translationtype: Human Translation
-ms.sourcegitcommit: d60b1d44844c449e0f66dc0107a25531569d097b
-ms.openlocfilehash: a91da330e677c85f16f6f4e506613576b6507d7c
-ms.lasthandoff: 03/31/2017
-
-
+ms.author: jdial
+ms.openlocfilehash: 227ea446a75c167be27128b15de1d3c216e6856d
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34363379"
 ---
-
 # <a name="automate-nsg-auditing-with-azure-network-watcher-security-group-view"></a>Azure Network Watcher 보안 그룹 보기를 사용하여 NSG 감사 자동화
 
 고객은 흔히 인프라의 보안 상태를 확인하는 문제에 직면합니다. 이 문제는 Azure의 VM에 대해서도 마찬가지입니다. 적용된 NSG(네트워크 보안 그룹) 규칙에 따라 유사한 보안 프로필을 포함하는 것이 중요합니다. 보안 그룹 보기를 사용하여 이제 NSG 내의 VM에 적용된 규칙 목록을 가져올 수 있습니다. 골든 NSG 보안 프로필을 정의하고 매주 보안 그룹 보기를 시작하며 출력을 골든 프로필과 비교하여 보고서를 만들 수 있습니다. 이 방법으로 미리 정해진 보안 프로필을 준수하지 않는 모든 VM을 쉽게 파악할 수 있습니다.
 
-네트워크 보안 그룹에 대해 잘 모르는 경우 [네트워크 보안 개요](../virtual-network/virtual-networks-nsg.md)를 방문하세요.
+네트워크 보안 그룹에 대해 잘 모르는 경우 [네트워크 보안 개요](../virtual-network/security-overview.md)를 참조하세요.
 
 ## <a name="before-you-begin"></a>시작하기 전에
 
-이 시나리오에서는 가상 컴퓨터에서 반환된 보안 그룹 보기 결과를 알려진 적합한 기준선과 비교합니다.
+이 시나리오에서는 가상 머신에서 반환된 보안 그룹 보기 결과를 알려진 적합한 기준선과 비교합니다.
 
 이 시나리오에서는 사용자가 Network Watcher를 만드는 [Network Watcher 만들기](network-watcher-create.md)의 단계를 이미 수행했다고 가정합니다. 또한 시나리오에서는 유효한 가상 컴퓨터를 포함한 리소스 그룹을 사용할 수 있다고 가정합니다.
 
@@ -41,8 +40,8 @@ ms.lasthandoff: 03/31/2017
 이 시나리오에서는 다음을 수행합니다.
 
 - 알려진 적합한 규칙 집합 검색
-- Rest API로 가상 컴퓨터 검색
-- 가상 컴퓨터에 대한 보안 그룹 보기 가져오기
+- Rest API로 가상 머신 검색
+- 가상 머신에 대한 보안 그룹 보기 가져오기
 - 응답 평가
 
 ## <a name="retrieve-rule-set"></a>규칙 집합 검색
@@ -133,7 +132,7 @@ $networkWatcher = Get-AzureRmNetworkWatcher -Name $nw.Name -ResourceGroupName $n
 
 ## <a name="get-a-vm"></a>VM 확인
 
-`Get-AzureRmNetworkWatcherSecurityGroupView` cmdlet을 실행하려면 가상 컴퓨터가 필요합니다. 다음 예제는 VM 개체를 가져옵니다.
+`Get-AzureRmNetworkWatcherSecurityGroupView` cmdlet을 실행하려면 가상 머신이 필요합니다. 다음 예제는 VM 개체를 가져옵니다.
 
 ```powershell
 $VM = Get-AzurermVM -ResourceGroupName "testrg" -Name "testvm1"
@@ -189,8 +188,7 @@ SideIndicator            : <=
 
 ## <a name="next-steps"></a>다음 단계
 
-설정이 변경된 경우 [네트워크 보안 그룹 관리](../virtual-network/virtual-network-manage-nsg-arm-portal.md)를 참조하여 문제가 될 수 있는 네트워크 보안 그룹 및 보안 규칙을 추적합니다.
-
+설정이 변경된 경우 [네트워크 보안 그룹 관리](../virtual-network/manage-network-security-group.md)를 참조하여 문제가 될 수 있는 네트워크 보안 그룹 및 보안 규칙을 추적합니다.
 
 
 

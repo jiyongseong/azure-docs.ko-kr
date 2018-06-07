@@ -3,8 +3,8 @@ title: "DNS 영역 및 레코드 개요-Azure DNS | Microsoft Docs"
 description: "Microsoft Azure DNS에서 DNS 영역 및 레코드 호스팅에 대한 지원 개요."
 services: dns
 documentationcenter: na
-author: jtuliani
-manager: carmonm
+author: KumudD
+manager: jeconnoc
 editor: 
 ms.assetid: be4580d7-aa1b-4b6b-89a3-0991c0cda897
 ms.service: dns
@@ -13,16 +13,14 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.custom: H1Hack27Feb2017
 ms.workload: infrastructure-services
-ms.date: 12/05/2016
-ms.author: jonatul
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 9568210d4df6cfcf5b89ba8154a11ad9322fa9cc
-ms.openlocfilehash: 5818986c939c464a364c52ab31225e15130ab30e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/15/2017
-
+ms.date: 12/18/2017
+ms.author: kumud
+ms.openlocfilehash: 0a0808d3963cc037aaf113c67fd01679ee8c1d40
+ms.sourcegitcommit: b7adce69c06b6e70493d13bc02bd31e06f291a91
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/19/2017
 ---
-
 # <a name="overview-of-dns-zones-and-records"></a>DNS 영역 및 레코드 개요
 
 이 페이지는 도메인, DNS 영역, DNS 레코드 및 레코드 집합의 핵심 개념과 Azure DNS에서 지원되는 방식에 대해 설명합니다.
@@ -57,25 +55,35 @@ Azure DNS는 [와일드카드 레코드](https://en.wikipedia.org/wiki/Wildcard_
 
 와일드카드 레코드 집합을 만들려면 레코드 집합 이름 '\*'을 사용합니다. 또는 맨 왼쪽의 레이블로 '\*'가 포함된 이름을 사용할 수 있습니다(예: '\*.foo').
 
+### <a name="caa-records"></a>CAA 레코드
+
+CAA 레코드를 사용하면 도메인 소유자가 자신의 도메인에 대한 인증서를 발급할 권한이 있는 CA(인증 기관)를 지정할 수 있습니다. 이렇게 하면 일부 환경에서는 인증서가 착오 발급되는 것을 방지할 수 있습니다. CAA 레코드에는 다음 세 가지 속성이 있습니다.
+* **Flags**: [RFC](https://tools.ietf.org/html/rfc6844#section-3)마다 특별한 의미를 갖는 중요한 플래그를 나타내는 데 사용되는 0과 255 사이의 정수입니다.
+* **Tag**: ASCII 문자열이며 다음 중 하나일 수 있습니다.
+    * **issue**: 인증서(모든 유형)를 발급할 권한이 있는 CA를 지정하려는 경우에 사용합니다.
+    * **issuewild**: 인증서(와일드카드 인증서만 해당)를 발급할 권한이 있는 CA를 지정하려는 경우에 사용합니다.
+    * **iodef**: 권한이 없는 인증서 발급 요청에 대해 알릴 수 있는 메일 주소 또는 호스트 이름을 지정합니다.
+* **Value**: 선택한 특정 태그에 대한 값입니다.
+
 ### <a name="cname-records"></a>CNAME 레코드
 
 CNAME 레코드 집합은 동일한 이름의 다른 레코드 집합과 함께 존재할 수 없습니다. 예를 들어 상대 이름이 'www'인 CNAME 레코드 집합과 상대 이름이 'www'인 A 레코드를 동시에 만들 수 없습니다.
 
-영역 루트(이름 = '@')는 항상 영역을 만들 때 생성된 NS 및 SOA 레코드 집합을 포함하므로 영역 루트에 CNAME 레코드 집합을 만들 수 없습니다.
+영역 루트(이름 = '\@\')는 항상 영역을 만들 때 생성된 NS 및 SOA 레코드 집합을 포함하므로 영역 루트에 CNAME 레코드 집합을 만들 수 없습니다.
 
 이러한 제약 조건은 DNS 표준에서 발생하며 Azure DNS의 제한 사항이 아닙니다.
 
 ### <a name="ns-records"></a>NS 레코드
 
-영역 루트의 NS 레코드 집합(name '@')은 각 DNS 영역과 함께 자동으로 생성되며 영역이 삭제될 경우 자동으로 삭제됩니다(별도로 삭제할 수 없음).
+영역 루트의 NS 레코드 집합(name '\@\')은 각 DNS 영역과 함께 자동으로 생성되며 영역이 삭제될 경우 자동으로 삭제됩니다(별도로 삭제할 수 없음).
 
-이 레코드 집합에는 영역에 할당된 Azure DNS 이름 서버의 이름이 포함됩니다. 이 NS 레코드 집합에 추가 이름 서버를 추가하여 DNS 공급자가 2개 이상 있는 공동 호스팅 도메인을 지원할 수 있습니다. 또한 이 레코드 집합의 TTL 및 메타데이터를 수정할 수 있습니다. 그러나 미리 채워진 Azure DNS 이름 서버를 제거 또는 수정할 수 없습니다. 
+이 레코드 집합에는 영역에 할당된 Azure DNS 이름 서버의 이름이 포함됩니다. 이 NS 레코드 집합에 추가 이름 서버를 추가하여 DNS 공급자가 2개 이상 있는 공동 호스팅 도메인을 지원할 수 있습니다. 또한 이 레코드 집합의 TTL 및 메타데이터를 수정할 수 있습니다.또한 이 레코드 집합의 TTL 및 메타데이터를 수정할 수 있습니다. 그러나 미리 채워진 Azure DNS 이름 서버를 제거 또는 수정할 수 없습니다. 
 
 이는 영역 루트에 있는 NS 레코드 집합에만 적용됩니다. 영역의 다른 NS 레코드 집합은 제약 없이 생성, 수정 및 삭제할 수 있습니다(자식 영역을 위임하는 데 사용되므로).
 
 ### <a name="soa-records"></a>SOA 레코드
 
-SOA 레코드는 각 영역의 루트(name = '@')에서 자동으로 생성되며 영역이 삭제될 경우 자동으로 삭제됩니다.  SOA 레코드는 별도로 생성 또는 삭제할 수 없습니다.
+SOA 레코드는 각 영역의 루트(name = '\@\')에서 자동으로 생성되며 영역이 삭제될 경우 자동으로 삭제됩니다.  SOA 레코드는 별도로 생성 또는 삭제할 수 없습니다.
 
 SOA 레코드에서 'host' 속성(Azure DNS에서 제공한 기본 이름 서버 이름을 참조하도록 사전 구성됨)을 제외한 모든 속성을 수정할 수 있습니다.
 
@@ -87,7 +95,7 @@ SOA 레코드에서 'host' 속성(Azure DNS에서 제공한 기본 이름 서버
 
 [SRV 레코드](https://en.wikipedia.org/wiki/SRV_record)는 다양한 서비스에서 서버 위치를 지정하는 데 사용됩니다. Azure DNS에서 SRV 레코드를 지정할 경우
 
-* *서비스*와 *프로토콜*은 레코드 집합 이름에 포함하여 지정하고 밑줄로 접두사를 지정해야 합니다.  예를 들어 '\_sip.\_tcp.name'입니다.  영역 루트에 있는 레코드의 경우 레코드 이름에 '@'를 지정하지 않아도 되며 서비스와 프로토콜만 사용합니다(예: '\_sip.\_tcp').
+* *서비스*와 *프로토콜*은 레코드 집합 이름에 포함하여 지정하고 밑줄로 접두사를 지정해야 합니다.  예를 들어 '\_sip.\_tcp.name'입니다.  영역 루트에 있는 레코드의 경우 레코드 이름에 '\@\'를 지정하지 않아도 되며 서비스와 프로토콜만 사용합니다(예: '\_sip.\_tcp').
 * *우선 순위*, *가중치*, *포트*, *대상*은 레코드 집합에서 각 레코드의 매개 변수로 지정됩니다.
 
 ### <a name="txt-records"></a>TXT 레코드
@@ -102,7 +110,7 @@ DNS 레코드의 여러 문자열을 TXT 레코드 집합의 여러 TXT 레코�
 
 ## <a name="tags-and-metadata"></a>태그 및 메타데이터
 
-### <a name="tags"></a>태그
+### <a name="tags"></a>태그들
 
 태그는 이름-값 쌍의 목록으로, Azure Resource Manager에서 리소스에 레이블을 지정하는 데 사용됩니다.  Azure Resource Manager는 태그를 사용하여 Azure 청구서를 필터링하여 표시할 수 있으며 태그가 필요한 정책을 설정할 수 있습니다. 태그에 대한 자세한 내용은 [태그를 사용하여 Azure 리소스 구성](../azure-resource-manager/resource-group-using-tags.md)을 참조하십시오.
 
@@ -140,4 +148,3 @@ Azure DNS를 사용할 경우 다음과 같은 기본 제한이 적용됩니다.
 
 * Azure DNS 사용을 시작하려면 [DNS 영역 만들기](dns-getstarted-create-dnszone-portal.md) 및 [DNS 레코드 만들기](dns-getstarted-create-recordset-portal.md) 방법에 대해 알아보세요.
 * 기존 DNS 영역을 마이그레이션하려면 [DNS 영역 파일 가져오기 및 내보내기](dns-import-export.md) 방법에 대해 알아보세요.
-

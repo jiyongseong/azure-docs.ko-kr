@@ -1,24 +1,24 @@
 ---
-title: "Azure StorSimple 설명서 - 자습서 | Microsoft Docs"
-description: "온-프레미스 장치 및 Azure 클라우드 저장소 간의 저장소 태스크를 관리하는 통합된 저장소 솔루션인 Azure StorSimple을 사용하는 방법에 대해 알아봅니다."
+title: Azure StorSimple 설명서 - 자습서 | Microsoft Docs
+description: 온-프레미스 장치 및 Azure 클라우드 저장소 간의 저장소 태스크를 관리하는 통합된 저장소 솔루션인 Azure StorSimple을 사용하는 방법에 대해 알아봅니다.
 services: storsimple
-author: carolz
+author: czeumault
 manager: carolz
 layout: LandingPage
-ms.assetid: 
+ms.assetid: ''
 ms.service: storsimple
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: landing-page
 ms.date: 01/23/2017
 ms.author: carolz
-translationtype: Human Translation
-ms.sourcegitcommit: 54b5b8d0040dc30651a98b3f0d02f5374bf2f873
-ms.openlocfilehash: 21f24f387e96ac763419c37eeb16c75eab0bc452
-ms.lasthandoff: 04/28/2017
-
+ms.openlocfilehash: 0115c1794878296df826e7d04724a561464125d6
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
-#<a name="storsimple-documentation"></a>StorSimple 설명서
+# <a name="storsimple-documentation"></a>StorSimple 설명서
 
 온-프레미스 장치 및 Azure 클라우드 저장소 간의 저장소 태스크를 관리하는 통합된 저장소 솔루션인 Azure StorSimple을 사용하는 방법에 대해 알아봅니다. 자습서 및 기타 설명서에서는 저장소 관리, 위치 독립적인 백업 및 재해 복구를 설정하는 방법을 보여 줍니다.
 
@@ -117,7 +117,7 @@ ms.lasthandoff: 04/28/2017
 
 ---
 
-##<a name="other-storsimple-solutions"></a>기타 StorSimple 솔루션
+## <a name="other-storsimple-solutions"></a>기타 StorSimple 솔루션
 
 <ul class="panelContent cardsW">
     <li>
@@ -147,6 +147,5 @@ ms.lasthandoff: 04/28/2017
         </div>
     </li>
 </ul>
-
 
 

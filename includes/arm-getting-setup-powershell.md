@@ -26,7 +26,7 @@ Azure 구독이 아직 없는 경우 [MSDN 구독자 혜택](https://azure.micro
 
 Azure PowerShell 명령 프롬프트를 열고 다음 명령으로 Azure에 로그온합니다.
 
-    Login-AzureRmAccount
+    Connect-AzureRmAccount
 
 여러 Azure 구독이 있는 경우 다음 명령을 사용하여 Azure 구독을 나열할 수 있습니다.
 

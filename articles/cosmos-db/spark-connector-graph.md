@@ -1,34 +1,30 @@
 ---
-
-title: "Azure Cosmos DB: Spark 및 Apache TinkerPop Gremlin을 사용하여 그래프 분석 수행 | Microsoft Docs"
-description: "이 문서에서는 Spark와 TinkerPop SparkGraphComputer를 사용하여 Azure Cosmos DB에서 그래프 분석 및 병렬 계산을 설정하고 실행하는 지침을 제공합니다."
+title: 'Azure Cosmos DB: Spark 및 Apache TinkerPop Gremlin을 사용하여 그래프 분석 수행 | Microsoft Docs'
+description: 이 문서에서는 Spark와 TinkerPop SparkGraphComputer를 사용하여 Azure Cosmos DB에서 그래프 분석 및 병렬 계산을 설정하고 실행하는 지침을 제공합니다.
 services: cosmosdb
-documentationcenter: 
-author: khdang
-manager: shireest
-editor: 
+documentationcenter: ''
+author: SnehaGunda
+manager: kfile
 ms.assetid: 89ea62bb-c620-46d5-baa0-eefd9888557c
 ms.service: cosmos-db
 ms.custom: quick start connect
-ms.workload: 
+ms.workload: ''
 ms.tgt_pltfrm: na
 ms.devlang: gremlin
 ms.topic: article
-ms.date: 06/05/2017
-ms.author: khdang
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5bbeb9d4516c2b1be4f5e076a7f63c35e4176b36
-ms.openlocfilehash: 4f35ed6399df777edd90d1944f22dce91e76952f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/13/2017
-
-
+ms.date: 09/08/2017
+ms.author: sngun
+ms.openlocfilehash: f44c7d432ac9c07daf9b99dd922f1dcd5de5d58e
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="azure-cosmos-db-perform-graph-analytics-by-using-spark-and-apache-tinkerpop-gremlin"></a>Azure Cosmos DB: Spark 및 Apache TinkerPop Gremlin을 사용하여 그래프 분석 수행
 
 [Azure Cosmos DB](introduction.md)는 Microsoft에서 제공하는 전 세계에 배포된 다중 모델 데이터베이스 서비스입니다. Azure Cosmos DB의 코어인 전역 배포 및 수평적 규모 조정 기능의 이점을 활용하여 문서, 키/값 및 그래프 데이터베이스를 만들고 쿼리할 수 있습니다. Azure Cosmos DB는 [Apache TinkerPop Gremlin](graph-introduction.md)을 사용하는 OLTP(온라인 트랜잭션 처리) 그래프 워크로드를 지원합니다.
 
-[Spark](http://spark.apache.org/)는 범용 OLAP(온라인 분석 처리) 데이터 처리에 중점을 둔 Apache Software Foundation 프로젝트입니다. Spark는 Hadoop MapReduce 모델과 유사한 하이브리드 메모리 내/디스크 기반 분산형 컴퓨팅 모델을 제공합니다. Apache Spark는 클라우드에서 [Azure HDInsight](https://azure.microsoft.com/services/hdinsight/apache-spark/)를 사용하여 배포할 수 있습니다.
+[Spark](http://spark.apache.org/)는 범용 OLAP(온라인 분석 처리) 데이터 처리에 중점을 둔 Apache Software Foundation 프로젝트입니다. Spark는 Hadoop MapReduce 모델과 유사한 하이브리드 메모리 내/디스크 기반 분산형 컴퓨팅 모델을 제공합니다. Apache Spark는 클라우드에서 [Azure HDInsight](https://azure.microsoft.com/services/hdinsight/apache-spark/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)를 사용하여 배포할 수 있습니다.
 
 Azure Cosmos DB와 Spark를 결합하여 Gremlin을 사용할 때 OLTP와 OLAP 워크로드를 모두 수행할 수 있습니다. 이 빠른 시작 문서는 Azure HDInsight Spark 클러스터에서 Azure Cosmos DB에 Gremlin 쿼리를 실행하는 방법을 보여줍니다.
 
@@ -46,11 +42,11 @@ Azure HDInsight Spark 클러스터를 설정하는 방법에 대한 자세한 �
 
 먼저 다음을 수행하여 Graph API로 데이터베이스 계정을 만듭니다.
 
-[!INCLUDE [cosmos-db-create-dbaccount](../../includes/cosmos-db-create-dbaccount.md)]
+[!INCLUDE [cosmos-db-create-dbaccount](../../includes/cosmos-db-create-dbaccount-graph.md)]
 
 ## <a name="add-a-collection"></a>컬렉션 추가
 
-[!INCLUDE [cosmos-db-create-collection](../../includes/cosmos-db-create-collection.md)]
+[!INCLUDE [cosmos-db-create-collection](../../includes/cosmos-db-create-graph.md)]
 
 ## <a name="get-apache-tinkerpop"></a>Apache TinkerPop 가져오기
 
@@ -92,9 +88,9 @@ Azure HDInsight Spark 클러스터를 설정하는 방법에 대한 자세한 �
     </ivysettings>
     ``` 
 
-    b. Gremlin 콘솔 `bin/gremlin.sh`을 시작합니다.
+    나. Gremlin 콘솔 `bin/gremlin.sh`을 시작합니다.
         
-    c. 이전 단계에서 빌드한 버전 3.3.0-SNAPSHOT으로 Spark-Gremlin 플러그인을 설치합니다.
+    다. 이전 단계에서 빌드한 버전 3.3.0-SNAPSHOT으로 Spark-Gremlin 플러그인을 설치합니다.
 
     ```bash
     $ bin/gremlin.sh
@@ -179,13 +175,13 @@ Azure HDInsight Spark 클러스터를 설정하는 방법에 대한 자세한 �
 
 ## <a name="get-the-azure-cosmos-db-spark-connector"></a>Azure Cosmos DB Spark 커넥터 가져오기
 
-1. Azure Cosmos DB Spark 커넥터 `azure-documentdb-spark-0.0.3-SNAPSHOT.jar` 및 Cosmos DB Java SDK`azure-documentdb-1.10.0.jar`를 [GitHub의 Azure Cosmos DB Spark 커넥터](https://github.com/Azure/azure-cosmosdb-spark/tree/master/releases/azure-cosmosdb-spark-0.0.3_2.0.2_2.11)에서 가져옵니다.
+1. Azure Cosmos DB Spark 커넥터 `azure-cosmosdb-spark-0.0.3-SNAPSHOT.jar` 및 Cosmos DB Java SDK`azure-documentdb-1.12.0.jar`를 [GitHub의 Azure Cosmos DB Spark 커넥터](https://github.com/Azure/azure-cosmosdb-spark/tree/master/releases/azure-cosmosdb-spark-0.0.3_2.0.2_2.11)에서 가져옵니다.
 
 2. 또는 로컬에서 빌드할 수 있습니다. 최신 버전의 Spark-Gremlin이 Spark 1.6.1로 빌드되었고 Azure Cosmos DB Spark 커넥터에서 현재 사용되는 Spark 2.0.2와 호환되지 않으므로 수동으로 최신 TinkerPop3 코드를 빌드하고 jar를 설치할 수 있습니다. 다음을 수행합니다.
 
     a. Azure Cosmos DB Spark 커넥터를 복제합니다.
 
-    b. TinkerPop3 빌드(이전 단계에서 이미 수행됨). 모든 TinkerPop 3.3.0-SNAPSHOT jar를 로컬로 설치합니다.
+    나. TinkerPop3 빌드(이전 단계에서 이미 수행됨). 모든 TinkerPop 3.3.0-SNAPSHOT jar를 로컬로 설치합니다.
 
     ```bash
     mvn install:install-file -Dfile="gremlin-core-3.3.0-SNAPSHOT.jar" -DgroupId=org.apache.tinkerpop -DartifactId=gremlin-core -Dversion=3.3.0-SNAPSHOT -Dpackaging=jar
@@ -196,7 +192,7 @@ Azure HDInsight Spark 클러스터를 설정하는 방법에 대한 자세한 �
     mvn install:install-file -Dfile="tinkergraph-gremlin-3.3.0-SNAPSHOT.jar" -DgroupId=org.apache.tinkerpop -DartifactId=tinkergraph-gremlin -Dversion=3.3.0-SNAPSHOT -Dpackaging=jar`
     ```
 
-    c. `tinkerpop.version` `azure-documentdb-spark/pom.xml`를 `3.3.0-SNAPSHOT`으로 업데이트합니다.
+    다. `tinkerpop.version` `azure-documentdb-spark/pom.xml`를 `3.3.0-SNAPSHOT`으로 업데이트합니다.
     
     d. Maven으로 빌드. 필요한 jar가 `target` 및 `target/alternateLocation`에 배치됩니다.
 
@@ -228,9 +224,9 @@ Azure HDInsight Spark 클러스터를 설정하는 방법에 대한 자세한 �
     cp lib/* ~/azure-documentdb-spark
     ```
 
-    b. Ambari 대시보드에 있는 `Spark2` 섹션의 `Spark2 Clients` 리스트에서 모든 Spark 작업자 노드의 목록을 가져옵니다.
+    나. Ambari 대시보드에 있는 `Spark2` 섹션의 `Spark2 Clients` 리스트에서 모든 Spark 작업자 노드의 목록을 가져옵니다.
 
-    c. 해당 디렉터리를 각 노드에 복사합니다.
+    다. 해당 디렉터리를 각 노드에 복사합니다.
 
     ```bash
     scp -r ~/azure-documentdb-spark sshuser@wn0-cosmos:/home/sshuser
@@ -246,9 +242,9 @@ Azure HDInsight Spark 클러스터를 설정하는 방법에 대한 자세한 �
  
     a. `Custom yarn-site`에서 마스터 노드의 HDP 버전 값으로 새 속성 `hdp.version`을 추가합니다. 
      
-    b. 구성을 저장합니다. 발생한 경고를 무시할 수 있습니다. 
+    나. 구성을 저장합니다. 발생한 경고를 무시할 수 있습니다. 
      
-    c. 알림 아이콘이 나타내는 대로 YARN 및 Oozie 서비스를 다시 시작합니다.
+    다. 알림 아이콘이 나타내는 대로 YARN 및 Oozie 서비스를 다시 시작합니다.
 
 3. 마스터 노드에서 다음 환경 변수를 설정(적절하게 값을 대체)합니다.
 
@@ -332,7 +328,7 @@ Azure Cosmos DB에 그래프를 유지할 수 있는 방법을 보여주려면 �
 
     a. `graph = GraphFactory.open("conf/hadoop/gremlin-spark.properties")` 그래프를 만듭니다.
 
-    b. `graph.compute(SparkGraphComputer.class).result(GraphComputer.ResultGraph.NEW).persist(GraphComputer.Persist.EDGES).program(TraversalVertexProgram.build().traversal(graph.traversal().withComputer(Computer.compute(SparkGraphComputer.class)),"gremlin-groovy","g.V()").create(graph)).submit().get()`을 작성하기 위해 SparkGraphComputer를 사용합니다.
+    나. `graph.compute(SparkGraphComputer.class).result(GraphComputer.ResultGraph.NEW).persist(GraphComputer.Persist.EDGES).program(TraversalVertexProgram.build().traversal(graph.traversal().withComputer(Computer.compute(SparkGraphComputer.class)),"gremlin-groovy","g.V()").create(graph)).submit().get()`을 작성하기 위해 SparkGraphComputer를 사용합니다.
 
     ```bash
     gremlin> graph = GraphFactory.open("conf/hadoop/gremlin-spark.properties")
@@ -363,9 +359,9 @@ Azure Cosmos DB에 그래프를 유지할 수 있는 방법을 보여주려면 �
 
     a. Gremlin 콘솔 `bin/gremlin.sh`을 시작합니다.
 
-    b. `graph = GraphFactory.open('conf/hadoop/gremlin-spark.properties')` 구성으로 그래프를 만듭니다.
+    나. `graph = GraphFactory.open('conf/hadoop/gremlin-spark.properties')` 구성으로 그래프를 만듭니다.
 
-    c. SparkGraphComputer `g = graph.traversal().withComputer(SparkGraphComputer)`로 그래프 순회를 만듭니다.
+    다. SparkGraphComputer `g = graph.traversal().withComputer(SparkGraphComputer)`로 그래프 순회를 만듭니다.
 
     d. 다음 Gremlin 그래프 쿼리를 실행합니다.
 
@@ -408,4 +404,3 @@ Azure Cosmos DB에 그래프를 유지할 수 있는 방법을 보여주려면 �
 이 빠른 시작 문서에서는 Azure Cosmos DB와 Spark를 결합하여 그래프를 사용하는 방법을 알아 보았습니다.
 
 > [!div class="nextstepaction"]
-

@@ -1,0 +1,27 @@
+- name: Cloud Foundry 설명서
+  href: index.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: Marketplace 템플릿
+      href: 'https://azuremarketplace.microsoft.com/marketplace/apps/pivotal.pivotal-cloud-foundry'
+- name: 자습서
+  items:
+    - name: Azure에 CF 앱 배포
+      href: /azure/virtual-machines/linux/cloudfoundry-deploy-your-first-app
+    - name: Azure의 CloudFoundry
+      href: /azure/virtual-machines/linux/cloudfoundry-get-started
+    - name: CF OMS 노즐 배포
+      href: /azure/cloudfoundry/cloudfoundry-oms-nozzle
+- name: 리소스
+  items:
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: Cloud Foundry 사이트
+      href: 'https://docs.cloudfoundry.org/'
+    - name: Azure에 CF 설치
+      href: 'https://docs.pivotal.io/pivotalcf/1-11/customizing/pcf_azure.html'
+    - name: Pivotal 및 Azure
+      href: 'https://pivotal.io/partners/microsoft'
+    - name: CF용 VSTS 플러그인
+      href: 'https://github.com/Microsoft/vsts-cloudfoundry'

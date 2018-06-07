@@ -13,18 +13,56 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: data-catalog
-ms.date: 06/15/2017
+ms.date: 01/18/2018
 ms.author: maroche
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ff2fb126905d2a68c5888514262212010e108a3d
-ms.openlocfilehash: 4d818112d8b6cc07a73d2521ef229c90e0d5884b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/17/2017
-
-
+ms.openlocfilehash: 9fb7814a8412200f6d31cfb9dcaee4663d7cea97
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="whats-new-in-azure-data-catalog"></a>Azure 데이터 카탈로그의 새로운 기능
 **Azure Data Catalog**에 대한 업데이트는 정기적으로 릴리스됩니다. 일부 릴리스에서 백 엔드 서비스 기능에 초점을 맞추므로 모든 릴리스는 새로운 사용자용 기능을 포함하지 않습니다. 이 페이지는 Azure Data Catalog 서비스에 추가된 새로운 사용자용 기능을 강조 표시합니다.
+
+## <a name="whats-new-for-november-2017"></a>2017년 11월의 새로운 기능 
+2017년 11월을 기준으로 다음과 같은 기능이 Azure Data Catalog에 추가되었습니다.
+
+* 데이터 카탈로그 포털에서 특정 비즈니스 용어에 대한 직접 연결을 지원합니다. 사용자가 비즈니스 용어의 링크를 복사하여 문서, 이메일, 보고서 또는 기타 위치에 포함시켜 용어 정의에 직접 연결할 수 있습니다.
+* Azure Active Directory 서비스 주체를 지원합니다. 데이터 카탈로그 관리자는 서비스 주체를 사용하여 카탈로그에 액세스하도록 클라이언트 응용 프로그램을 인증하고, 사용자 및 보안 그룹에 권한을 부여하는 것처럼 그러한 응용 프로그램에게도 특정 권한을 부여할 수 있습니다. 자세한 내용은 [Azure Active Directory의 응용 프로그램 및 서비스 주체 개체](../active-directory/develop/active-directory-application-objects.md)를 참조하세요.
+* 데이터 카탈로그 데이터 원본 등록 도구를 사용하여 Azure SQL Database 및 Azure SQL Data Warehouse 데이터 원본에 연결할 때 Azure Active Directory 인증을 지원합니다. 자세한 내용은 [SQL Database 및 SQL Data Warehouse에서 인증을 위해 Azure Active Directory 인증 사용](../sql-database/sql-database-aad-authentication.md)을 참조하세요.
+
+
+## <a name="whats-new-for-september-2017"></a>2017년 9월의 새로운 기능 
+2017년 9월을 기준으로 다음과 같은 기능이 Azure Data Catalog에 추가되었습니다.
+
+* 데이터 원본 등록 도구를 사용하여 관련 테이블을 등록할 때 DB2 데이터 원본에서 조인 관계 메타데이터를 추출하는 것에 대한 지원
+* 데이터 원본 등록 도구를 사용하여 MongoDB 버전 3.4 데이터 원본 등록에 대한 지원
+* 데이터 카탈로그에서 데이터베이스 또는 기타 컨테이너를 제거할 때 한 번의 작업에 포함된 개체에 대한 모든 메타데이터 삭제에 대한 지원
+* 데이터 카탈로그 포털에서 검색을 구체화할 때 최대 1,000개의 태그, 비즈니스 용어집 용어 또는 다른 검색 패싯 보기에 대한 지원
+
+
+## <a name="whats-new-for-august-2017"></a>2017년 8월의 새로운 기능 
+2017년 8월을 기준으로 다음과 같은 기능이 Azure Data Catalog에 추가되었습니다.
+
+*   Data Catalog REST API를 사용하여 관계 메타데이터를 만들고 관리하는 데 새로운 개발자 샘플을 사용할 수 있습니다. *데이터 카탈로그로 관계 정보 가져오기* 샘플을 [데이터 카탈로그 코드 샘플 페이지](https://azure.microsoft.com/resources/samples/?service=data-catalog&sort=0)에서 사용할 수 있습니다. 
+* 데이터 원본 등록 도구를 사용하여 관련 테이블을 등록할 때 Teradata 데이터 원본에서 조인 관계 메타데이터를 추출하는 것에 대한 지원
+* 데이터 원본 등록 도구를 사용하여 SQL Server 데이터 원본을 등록할 때 SQL Server TVF(테이블 반환 함수) 개체에 대한 지원
+* 데이터 카탈로그 포털의 성능 및 유용성을 향상시키기 위한 여러 가지 업데이트 및 구체화
+
+## <a name="whats-new-for-july-2017"></a>2017년 7월의 새로운 기능 
+2017년 7월을 기준으로 다음과 같은 기능이 Azure Data Catalog에 추가되었습니다.
+*   다음과 같이 허용된 메타데이터 작업에 대한 보다 세분화된 제어 지원:
+    - 카탈로그 관리자는 태그 및 관련 메타데이터를 카탈로그에 기고하는 사용자의 기능을 제한하여 카탈로그에 대한 읽기 전용 액세스를 사용하도록 할 수 있습니다.
+    - 카탈로그 관리자는 카탈로그에 새 데이터 원본을 등록하는 사용자 기능을 제한할 수 있습니다.
+    - 카탈로그 관리자는 카탈로그에서 데이터 자산 메타데이터의 소유권을 갖는 사용자의 기능을 제한할 수 있습니다.
+    - 권한 관리가 용이하도록 Azure Active Directory 보안 그룹 및 사용자에게 사용 권한을 부여할 수 있습니다.
+* 다음과 같이 등록된 데이터 자산 간의 관계 및 데이터 카탈로그 포털에서 관련된 데이터 자산 검색에 대한 지원:
+    - 데이터 카탈로그 데이터 원본 등록 도구를 사용할 때 SQL Server(Azure SQL Database 포함), Oracle 및 MySQL 데이터 원본에서 관계 메타데이터 추출
+    - 데이터 카탈로그 포털에서 자산 메타데이터를 볼 때 관련 데이터 자산 검색
+    - Data Catalog REST API를 사용하여 데이터 자산 간의 관계를 정의, 검색 및 관리하는 작업
+
+데이터 카탈로그에서 사용 권한 관리에 대한 자세한 내용은 [데이터 카탈로그 및 데이터 자산에 안전하게 액세스하는 방법](data-catalog-how-to-secure-catalog.md)을 참조하세요.
+데이터 카탈로그에서 관계에 대한 자세한 내용은 [Azure Data Catalog에서 관련 데이터 자산을 보는 방법](data-catalog-how-to-view-related-data-assets.md)을 참조하세요.
 
 ## <a name="whats-new-for-june-2017"></a>2017년 6월의 새로운 기능 
 2017년 6월을 기준으로 다음과 같은 기능이 Azure Data Catalog에 추가되었습니다.
@@ -136,7 +174,7 @@ ms.lasthandoff: 06/17/2017
   * Salesforce.com - 개체
   * DB2 - 테이블, 보기 및 데이터베이스
   * PostgreSQL - 테이블, 뷰 및 데이터베이스
-* SQL Server(Azure SQL DB 및 Azure SQL 데이터 웨어하우스 포함) 데이터 원본에 대해 "SQL Server Data Tools에서 열기"가 지원됩니다.  
+* SQL Server(Azure SQL DB 및 Azure SQL Data Warehouse 포함) 데이터 원본에 대해 "SQL Server Data Tools에서 열기"가 지원됩니다.  
 * SAP HANA 보기 및 패키지 등록 및 검색을 지원합니다. 사용자는 Azure Data Catalog 데이터 원본 등록 도구를 사용하여 SAP HANA 데이터 원본을 등록할 수 있고 Azure Data Catalog 포털을 사용하여 등록된 SAP HANA 데이터 원본에 주석을 추가하고 검색할 수 있습니다.
 * Azure Data Catalog 포털에서 데이터 자산을 고정하거나 고정 해제할 수 있습니다. 사용자는 쉽게 다시 검색하고 다시 사용하기 위해 데이터 자산을 고정하도록 선택할 수 있습니다.
 * Azure Data Catalog 포털의 홈 페이지가 새로 디자인되었습니다. 새 홈페이지에는 카탈로그 전체의 활동에 대한 정보뿐만 아니라 최근에 게시된 자산, 고정된 자산 및 저장된 검색 등 현재 사용자 활동에 대한 정보가 포함되어 있습니다.
@@ -150,7 +188,7 @@ ms.lasthandoff: 06/17/2017
 ## <a name="whats-new-for-december-2015"></a>2015년 12월의 새로운 기능
 2015년 12월을 기준으로 다음과 같은 기능이 Azure Data Catalog에 추가되었습니다.
 
-* Azure SQL 데이터 웨어하우스 데이터 원본에 대해 데이터 프로필을 지원합니다. Azure SQL 데이터 웨어하우스 테이블 및 뷰를 등록할 때 사용자가 데이터 원본에서 추출된 메타데이터와 함께 데이터 프로필 메트릭을 포함하도록 선택할 수 있습니다.
+* Azure SQL Data Warehouse 데이터 원본에 대해 데이터 프로필을 지원합니다. Azure SQL Data Warehouse 테이블 및 뷰를 등록할 때 사용자가 데이터 원본에서 추출된 메타데이터와 함께 데이터 프로필 메트릭을 포함하도록 선택할 수 있습니다.
 * MySQL 개체 및 데이터베이스 등록 및 검색을 지원합니다. 사용자는 Azure Data Catalog 데이터 원본 등록 도구를 사용하여 MySQL 데이터 원본을 등록할 수 있고 Azure Data Catalog 포털을 사용하여 등록된 MySQL 데이터 원본에 주석을 추가하고 검색할 수 있습니다.
 * Teradata 데이터 원본에 대해 SPNEGO 및 Windows 인증이 지원됩니다. Teradata 테이블 및 뷰를 등록할 때 사용자는 SPNEGO 및 Windows 뿐만 아니라 LDAP 및 TD2 인증을 사용하여 Teradata에 연결하도록 선택할 수 있습니다.
 * Azure 데이터 레이크 저장소 데이터 원본을 지원합니다. Azure 데이터 카탈로그를 사용하여 Azure 데이터 레이크 저장소 데이터 원본을 지금 등록하고 검색할 수 있습니다.
@@ -159,14 +197,14 @@ ms.lasthandoff: 06/17/2017
 ## <a name="whats-new-for-november-2015"></a>2015년 11월의 새로운 기능
 2015년 11월을 기준으로 다음과 같은 기능이 Azure Data Catalog에 추가되었습니다.
 
-* Azure Data Catalog 포털 내에서 SQL Server(Azure SQL 데이터베이스 포함) 및 Oracle 데이터 원본에 대한 연결 문자열을 보고 복사할 수 있습니다. 사용자는 SQL Server 또는 Oracle 테이블, 뷰 또는 데이터베이스의 연결 정보에서 "연결 문자열 보기" 링크를 클릭하여 데이터 원본에 연결할 때 사용되는 연결 문자열을 볼 수 있습니다. ADO.NET, ODBC, OLEDB 및 JDBC 연결 문자열은 SQL Server 데이터 원본에 대해 제공됩니다. ODBC 및 OLEDB 연결 문자열은 Oracle 데이터 원본에 대해 제공됩니다.
+* Azure Data Catalog 포털 내에서 SQL Server(Azure SQL Database 포함) 및 Oracle 데이터 원본에 대한 연결 문자열을 보고 복사할 수 있습니다. 사용자는 SQL Server 또는 Oracle 테이블, 뷰 또는 데이터베이스의 연결 정보에서 "연결 문자열 보기" 링크를 클릭하여 데이터 원본에 연결할 때 사용되는 연결 문자열을 볼 수 있습니다. ADO.NET, ODBC, OLEDB 및 JDBC 연결 문자열은 SQL Server 데이터 원본에 대해 제공됩니다. ODBC 및 OLEDB 연결 문자열은 Oracle 데이터 원본에 대해 제공됩니다.
 * Teradata 테이블 및 뷰를 등록할 때 데이터 프로필을 포함할 수 있습니다.
-* SQL Server(Azure SQL DB 및 Azure SQL 데이터 웨어하우스 포함) 및 SQL Server Analysis Services, Azure 저장소 및 HDFS 원본에 대해 "Power BI Desktop에서 열기"가 지원됩니다.  
+* SQL Server(Azure SQL DB 및 Azure SQL Data Warehouse 포함) 및 SQL Server Analysis Services, Azure Storage 및 HDFS 원본에 대해 "Power BI Desktop에서 열기"가 지원됩니다.  
 * Teradata 데이터 원본에 대해 LDAP 인증이 지원됩니다. Teradata 테이블 및 뷰를 등록할 때 사용자는 LDAP 및 TD2 인증을 사용하여 Teradata에 연결하도록 선택할 수 있습니다.
 * Teradata 데이터 원본에 대해 "Excel에서 열기"가 지원됩니다.
 * Azure Data Catalog 포털에서 최신 검색어가 지원됩니다. 포털에서 검색할 때 사용자는 최근에 사용한 검색어를 선택하여 검색 속도를 높일 수 있습니다.
 * Teradata 데이터 원본 미리 보기를 지원합니다. Teradata 테이블 및 뷰를 등록할 때 사용자가 데이터 원본에서 추출된 메타데이터와 함께 스냅숏 레코드를 포함하도록 선택할 수 있습니다.
-* Azure SQL 데이터 웨어하우스 데이터 원본에 대해 "Excel에서 열기"를 지원합니다.
+* Azure SQL Data Warehouse 데이터 원본에 대해 "Excel에서 열기"를 지원합니다.
 * 수동으로 등록된 자산 데이터에 대한 열 수준 스키마 정의 및 편집을 지원합니다. Azure Data Catalog 포털을 사용하여 직접 데이터 자산을 만든 후, 사용자는 데이터 자산 속성에 있는 열 정의를 추가할 수 있습니다.
 * Azure Data Catalog를 검색할 때 특정 메타데이터를 소유하는 등록된 데이터 자산 검색이 가능하도록 "has" 쿼리를 지원합니다. Azure Data Catalog 쿼리 구문은 이제 다음을 포함합니다.
 
@@ -206,10 +244,10 @@ ms.lasthandoff: 06/17/2017
 * Hive 데이터 원본을 등록하는 경우 데이터 프로필 포함을 지원합니다.
 * 응용 프로그램과 Azure Data Catalog의 통합이 용이하도록 프로그래밍 방식의 카탈로그 API 검색을 지원합니다.
 * Azure Data Catalog 포털의 새로운 "시작" 데이터 원본 검색 환경을 지원합니다. 사용자가 Azure Data Catalog 포털에서 검색어를 입력하지 않고 "검색" 페이지에 들어가면 가장 자주 사용한 태그, 전문가, 데이터 원본 유형, 개체 유형 등 카탈로그 내용의 개요가 표시됩니다.
-* Azure SQL 데이터 웨어하우스 개체 및 데이터베이스 등록 및 검색을 지원합니다. Azure SQL 데이터 웨어하우스에 대한 추가 정보는 [SQL 데이터 웨어하우스](https://azure.microsoft.com/services/sql-data-warehouse/)를 참조하세요.
+* Azure SQL Data Warehouse 개체 및 데이터베이스 등록 및 검색을 지원합니다. Azure SQL Data Warehouse에 대한 추가 정보는 [SQL Data Warehouse](https://azure.microsoft.com/services/sql-data-warehouse/)를 참조하세요.
 * SQL Server Analysis Services과 SQL Server Reporting Services 서버를 컨테이너로 등록하고 검색할 수 있게 지원합니다. SSAS 및 SSRS 개체를 등록할 때 Azure Data Catalog가 SSAS 모델 및 SSRS 서버와 보고서 및 기타 개체에 대한 항목을 만듭니다. Azure Data Catalog 포털을 사용하여 컨테이너를 검색하고 주석을 추가할 수 있습니다. 사용자는 카탈로그 내용을 검색 및 필터링하는 것은 물론 모델 또는 서버의 내용을 검색 및 필터링할 수도 있습니다.
 * HTTP/HTTPS를 통한 SQL Server Analysis Services 개체 등록 및 검색에 대한 지원. 사용자는 이제 서버 이름 대신에 URL(예: https://servername/olap/msmdpump.dll)을 사용하여 SSAS 서버에 연결할 수 있으며 Windows 인증 외에도 기본 인증 및 익명 연결을 사용할 수 있습니다. SSAS에 대한 HTTP/HTTPS 연결의 추가 정보는 [Analysis Services에 대한 HTTP 액세스 구성](https://msdn.microsoft.com/library/gg492140.aspx)을 참조하세요.
-* HDInsight의 Hive 데이터 원본에 대한 지원. 사용자는 이제 HDInsight 데이터 원본의 Hadoop에서 Apache Hive에 대한 Hive 테이블을 등록하고 검색할 수 있습니다. HDInsight의 Hive에 대한 추가 정보는 [HDInsight 설명서 센터](../hdinsight/hdinsight-use-hive.md)를 참조하세요.
+* HDInsight의 Hive 데이터 원본에 대한 지원. 사용자는 이제 HDInsight 데이터 원본의 Hadoop에서 Apache Hive에 대한 Hive 테이블을 등록하고 검색할 수 있습니다. HDInsight의 Hive에 대한 추가 정보는 [HDInsight 설명서 센터](../hdinsight/hadoop/hdinsight-use-hive.md)를 참조하세요.
 * 컨테이너로 Oracle 데이터베이스 및 HDFS 클러스터 등록 및 검색에 대한 지원. Oracle 테이블 및 뷰 또는 HDFS를 등록하면 Azure Data Catalog에 테이블 및 뷰는 물론 데이터베이스에 대한 항목도 생성됩니다. Azure Data Catalog 포털을 사용하여 데이터베이스를 검색하고 주석을 추가할 수 있습니다. 사용자는 카탈로그 내용을 검색 및 필터링하는 것은 물론 데이터베이스 또는 클러스터의 내용을 검색 및 필터링할 수도 있습니다.
 * 알 수 없는 데이터 원본 유형의 수동 등록 지원. 사용자는 데이터 원본 등록 도구에서 명시적으로 지원하지 않는 데이터 원본에 주석을 추가하고 검색할 수 있도록 Azure Data Catalog 포털을 사용하여 데이터 원본 정보를 수동으로 입력할 수 있습니다.
 * 컨테이너로 SQL Server 데이터베이스 등록 및 검색 지원. SQL Server 테이블 및 뷰를 등록하면 Azure Data Catalog에 테이블 및 뷰는 물론 데이터베이스에 대한 항목도 생성됩니다. Azure Data Catalog 포털을 사용하여 데이터베이스를 검색하고 주석을 추가할 수 있습니다. 사용자는 카탈로그 내용을 검색 및 필터링하는 것은 물론 데이터베이스 내용을 검색 및 필터링할 수도 있습니다.
@@ -232,6 +270,5 @@ ms.lasthandoff: 06/17/2017
 * 태그 및 전문가를 위한 도구 팁은 사용자가 제공한 것과 등록된 데이터 자산에 대한 메타데이터를 쉽게 검색할 수 있도록 합니다.
 * 상단 탐색 모음에 새로운 “사용자” 단추 및 메뉴를 추가했습니다. 이 메뉴를 통해 사용자는 Azure Data Catalog에 로그온하는 데 사용된 계정을 볼 수 있고 원하는 경우 로그아웃하는 데 사용된 계정을 볼 수 있습니다. 이 메뉴는 Azure Data Catalog REST API를 사용하는 개발자에게 유용한 카탈로그 이름도 표시합니다.
 * 표준 버전에만 해당: 이제 데이터 자산에 소유자를 추가하는 경우 Azure Data Catalog에서 사용자 계정과 보안 그룹을 모두 소유자로 지원합니다. 선택한 데이터 자산에 대해 소유자로 보안 그룹을 추가하려면 있는 경우 그룹의 표시 이름 또는 그룹의 UPN 전자 메일 주소를 입력할 수 있습니다.
-* Azure Blob 저장소의 데이터 원본에 대한 지원입니다. 이제 사용자는 Azure 저장소 Blob 및 디렉터리를 등록하고 검색할 수 있습니다.
-
+* Azure Blob Storage의 데이터 원본에 대한 지원입니다. 이제 사용자는 Azure Storage Blob 및 디렉터리를 등록하고 검색할 수 있습니다.
 

@@ -4,7 +4,7 @@ description: "Azure AD로 개발 및 등록 중인 사용자 지정 응용 프�
 services: active-directory
 documentationcenter: 
 author: ajamess
-manager: femila
+manager: mtillman
 ms.assetid: 
 ms.service: active-directory
 ms.workload: identity
@@ -13,14 +13,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0d6f6fb24f1f01d703104f925dcd03ee1ff46062
-ms.openlocfilehash: 2a6831cbfb747dd134a9cc17ed0f1925d8cc62d4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/18/2017
-
+ms.openlocfilehash: c9654a9d03769bbf0e9d0e2c477ad26cefc05150
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
-
 # <a name="how-to-configure-a-new-multi-tenant-application"></a>새 다중 테넌트 응용 프로그램을 구성하는 방법
 
 앱에서 페더레이션된 SSO(Single Sign-On) 사용은 OpenID Connect, SAML 2.0 또는 WS-Fed에 대해 Azure AD를 통해 페더레이션할 때 자동으로 설정됩니다. Azure AD에 기존 세션이 이미 있음에도 불구하고 최종 사용자가 로그인해야 하는 경우 앱이 잘못 구성되었을 수 있습니다.
@@ -46,4 +44,3 @@ iOS의 경우 [iOS에서 앱 간 SSO를 사용하도록 설정](https://docs.mic
 [AzureAD v2.0 수렴형 앱에 대한 동의 및 권한 부여](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-scopes)<br>
 
 [AzureAD StackOverflow](http://stackoverflow.com/questions/tagged/azure-active-directory)
-

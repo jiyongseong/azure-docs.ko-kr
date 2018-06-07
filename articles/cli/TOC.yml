@@ -1,0 +1,9 @@
+- name: 명령줄 인터페이스(CLI)
+  href: index.yml
+  items:
+    - name: Azure PowerShell
+      href: /powershell/azure/overview
+    - name: Azure CLI(명령줄 인터페이스)
+      href: /cli/azure
+    - name: PowerShell Tools for Visual Studio 2015
+      href: 'https://adamdriscoll.gitbooks.io/powershell-tools-documentation/content/'

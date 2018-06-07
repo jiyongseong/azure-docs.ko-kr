@@ -1,0 +1,118 @@
+- name: 관리되는 서비스 ID
+  href: index.yml
+- name: 개요
+  items:
+    - name: 관리 서비스 ID 정보
+      href: overview.md
+    - name: 빠른 시작
+      items:
+        - name: VM MSI를 사용하여 Azure Resource Manager에 액세스
+          items:
+            - name: Windows VM
+              href: tutorial-windows-vm-access-arm.md
+            - name: Linux VM
+              href: tutorial-linux-vm-access-arm.md
+- name: 자습서
+  items:
+    - name: Windows VM/VMSS
+      items:
+        - name: Azure Data Lake Store 액세스
+          href: tutorial-windows-vm-access-datalake.md
+        - name: 액세스 키를 사용하여 Azure Storage 액세스
+          href: tutorial-windows-vm-access-storage.md
+        - name: SAS를 사용하여 Azure Storage 액세스
+          href: tutorial-windows-vm-access-storage-sas.md
+        - name: Azure SQL 액세스
+          href: tutorial-windows-vm-access-sql.md
+        - name: Azure Key Vault 액세스
+          href: tutorial-windows-vm-access-nonaad.md
+        - name: Azure Cosmos DB 액세스
+          href: tutorial-windows-vm-access-cosmos-db.md
+        - name: 사용자 할당 ID로 Azure Resource Manager 액세스
+          href: tutorial-windows-vm-ua-arm.md
+    - name: Linux VM/VMSS
+      items:
+        - name: Azure Data Lake Store 액세스
+          href: tutorial-linux-vm-access-datalake.md
+        - name: 액세스 키를 사용하여 Azure Storage 액세스
+          href: tutorial-linux-vm-access-storage-access-key.md
+        - name: SAS를 사용하여 Azure Storage 액세스
+          href: tutorial-linux-vm-access-storage-sas.md
+        - name: Azure Key Vault 액세스
+          href: tutorial-linux-vm-access-nonaad.md
+        - name: Azure Cosmos DB 액세스
+          href: tutorial-linux-vm-access-cosmos-db.md
+        - name: 사용자 할당 ID로 Azure Resource Manager 액세스
+          href: msi-tutorial-linux-vm-access-arm.md
+    - name: Azure Service Bus
+      href: /azure/service-bus-messaging/service-bus-managed-service-identity?context=azure/active-directory/context/msi-context
+    - name: Azure App Service 및 Functions
+      href: /azure/app-service/app-service-managed-service-identity?context=azure/active-directory/context/msi-context
+    - name: Azure Event Hubs
+      href: /azure/event-hubs/event-hubs-managed-service-identity?context=azure/active-directory/context/msi-context
+- name: 방법 가이드
+  items:
+    - name: Azure VM에 대한 ID 구성
+      items:
+        - name: 포털
+          href: qs-configure-portal-windows-vm.md
+        - name: CLI
+          href: qs-configure-cli-windows-vm.md
+        - name: PowerShell
+          href: qs-configure-powershell-windows-vm.md
+        - name: Azure Resource Manager 템플릿
+          href: qs-configure-template-windows-vm.md
+        - name: Azure SDK
+          href: qs-configure-sdk-windows-vm.md
+    - name: Azure VMSS에 대한 ID 구성
+      items:
+        - name: 포털
+          href: qs-configure-portal-windows-vmss.md
+        - name: CLI
+          href: qs-configure-cli-windows-vmss.md
+        - name: PowerShell
+          href: qs-configure-powershell-windows-vmss.md
+        - name: Azure Resource Manager 템플릿
+          href: qs-configure-template-windows-vmss.md
+    - name: VM MSI 사용
+      items:
+        - name: 액세스 토큰 획득
+          href: how-to-use-vm-token.md
+        - name: 관리되는 ID를 사용하여 Powershell 및 CLI 로그인
+          href: how-to-use-vm-sign-in.md
+        - name: Azure SDK와 함께 사용
+          href: how-to-use-vm-sdk.md
+    - name: 사용자 할당 ID 관리
+      items:
+        - name: 포털
+          href: how-to-manage-ua-identity-portal.md
+        - name: CLI
+          href: how-to-manage-ua-identity-cli.md
+        - name: PowerShell
+          href: how-to-manage-ua-identity-powershell.md
+        - name: Azure Resource Manager 템플릿
+          href: how-to-manage-ua-identity-arm.md
+- name: 참고 자료
+  items:
+    - name: CLI
+      href: /cli/azure/identity
+    - name: PowerShell
+      href: '/powershell/module/azurerm.managedserviceidentity#managed_service_identity'
+    - name: .NET
+      href: '/dotnet/api/microsoft.azure.management.resourcemanager.fluent.authentication#azure-dotnet'
+    - name: 자바
+      href: 'https://github.com/Azure/azure-libraries-for-java#ready-to-run-code-samples-for-virtual-machines'
+    - name: 파이썬
+      href: /python/api/azure.mgmt.msi
+    - name: Ruby
+      href: 'https://rubygems.org/gems/azure_mgmt_msi'
+    - name: Node.js
+      href: /javascript/api/ms-rest-azure
+    - name: Go
+      href: 'https://godoc.org/github.com/Azure/azure-sdk-for-go/services/msi/mgmt/2015-08-31-preview/msi'
+- name: 리소스
+  items:
+    - name: FAQ 및 알려진 문제
+      href: known-issues.md
+    - name: 관리 ID를 지원하는 Azure 서비스
+      href: services-support-msi.md

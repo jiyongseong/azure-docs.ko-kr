@@ -1,25 +1,25 @@
 ---
-title: "Mac OS X에서 개발 환경 설정 | Microsoft Docs"
-description: "런타임, SDK 및 도구를 설치하고 로컬 개발 클러스터를 만듭니다. 이 설정을 완료하면 Mac OS X에서 응용 프로그램을 빌드할 수 있습니다."
+title: Azure Service Fabric에서 작업하도록 Mac OS X에서 개발 환경 설정 | Microsoft Docs
+description: 런타임, SDK 및 도구를 설치하고 로컬 개발 클러스터를 만듭니다. 이 설정을 완료하면 Mac OS X에서 응용 프로그램을 빌드할 수 있습니다.
 services: service-fabric
 documentationcenter: java
 author: sayantancs
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: bf84458f-4b87-4de1-9844-19909e368deb
 ms.service: service-fabric
 ms.devlang: java
 ms.topic: get-started-article
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 04/06/2017
+ms.date: 11/17/2017
 ms.author: saysa
-translationtype: Human Translation
-ms.sourcegitcommit: 503f5151047870aaf87e9bb7ebf2c7e4afa27b83
-ms.openlocfilehash: e5d14eb0a656d67030f4c0d3d510aec0e9cafae7
-ms.lasthandoff: 03/29/2017
-
-
+ms.openlocfilehash: 3046e944726bf049b7a6771d626fea357a5abf30
+ms.sourcegitcommit: 688a394c4901590bbcf5351f9afdf9e8f0c89505
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/18/2018
+ms.locfileid: "34305204"
 ---
 # <a name="set-up-your-development-environment-on-mac-os-x"></a>Mac OS X에서 개발 환경 설정
 > [!div class="op_single_selector"]
@@ -29,70 +29,190 @@ ms.lasthandoff: 03/29/2017
 >
 >  
 
-Mac OS X를 사용하여 Service Fabric 응용 프로그램을 Linux 클러스터에서 실행하도록 빌드할 수 있습니다. 이 문서에서는 개발을 위해 Mac을 설정하는 방법을 설명합니다.
+Mac OS X를 사용하여 Azure Service Fabric 응용 프로그램을 Linux 클러스터에서 실행하도록 빌드할 수 있습니다. 이 문서에서는 개발을 위해 Mac을 설정하는 방법을 설명합니다.
 
 ## <a name="prerequisites"></a>필수 조건
-Service Fabric은 OS X에서 고유하게 실행되지 않습니다. 로컬 Service Fabric 클러스터를 실행하기 위해 Vagrant 및 VirtualBox를 사용하여 미리 구성된 Ubuntu 가상 컴퓨터를 제공합니다. 시작하기 전에 다음 항목이 필요합니다.
+Azure Service Fabric은 Mac OS X에서 기본적으로 실행되지 않습니다. 로컬 Service Fabric 클러스터를 실행하기 위해 미리 구성된 Docker 컨테이너 이미지가 제공됩니다. 시작하기 전에 다음 항목이 필요합니다.
 
-* [Vagrant(v1.8.4 이상)](http://www.vagrantup.com/downloads.html)
-* [VirtualBox](http://www.virtualbox.org/wiki/Downloads)
-
->[!NOTE]
-> Vagrant 및 VirtualBox에서 상호 간에 지원되는 버전을 사용해야 합니다. 지원되지 않는 VirtualBox 버전에서는 Vagrant가 비정상적으로 동작할 수 있습니다.
->
-
-## <a name="create-the-local-vm"></a>로컬 VM 만들기
-5개 노드의 Service Fabric 클러스터를 포함하는 로컬 VM을 만들려면 다음 단계를 수행합니다.
-
-1. `Vagrantfile` 리포지토리를 복제합니다.
-
-    ```bash
-    git clone https://github.com/azure/service-fabric-linux-vagrant-onebox.git
-    ```
-    이 단계에서는 VM을 다운로드할 위치와 함께 VM 구성을 포함하는 파일 `Vagrantfile`을 가져옵니다.
-
-
-2. 리포지토리의 로컬 클론으로 이동
-
-    ```bash
-    cd service-fabric-linux-vagrant-onebox
-    ```
-3. (선택 사항)기본 VM 설정 수정
-
-    기본적으로 로컬 VM은 다음과 같이 구성됩니다.
-
-   * 3GB의 메모리 할당
-   * Mac 호스트에서 트래픽을 통과시키는 데 IP 192.168.50.50에서 구성된 개인 호스트 네트워크 사용
-
-     이러한 설정 중 하나를 변경하거나 `Vagrantfile`의 VM에 다른 구성을 추가할 수 있습니다. 구성 옵션의 전체 목록은 [Vagrant 설명서](http://www.vagrantup.com/docs) 를 참조하세요.
-4. VM 만들기
-
-    ```bash
-    vagrant up
-    ```
-
-   이 단계에서는 미리 구성된 VM 이미지를 다운로드하고 로컬로 부팅한 다음 로컬 Service Fabric 클러스터를 설정합니다. 배포를 완료하려면 몇 분 정도가 걸립니다. 설치가 성공적으로 완료되면 출력에 클러스터가 시작되었음을 나타내는 메시지가 표시됩니다.
-
-    ![다음 VM 프로비전을 시작하는 클러스터 설치][cluster-setup-script]
+* RAM 4GB 이상
+* 최신 버전의 [Docker](https://www.docker.com/)
 
 >[!TIP]
-> VM을 다운로드하는 데 오랜 시간이 소요되면 wget 또는 curl을 사용하거나 `Vagrantfile` 파일에서 **config.vm.box_url**에 지정된 링크에 이동하여 브라우저를 통해 다운로드할 수 있습니다. 로컬에서 다운로드한 후에 `Vagrantfile` 이미지가 다운로드한 로컬 경로를 가리키도록 편집합니다. 예를 들어 /home/users/test/azureservicefabric.tp8.box에 이미지를 다운로드하는 경우 해당 경로에 **config.vm.box_url**을 설정합니다.
+>
+>Docker를 Mac에 설치하려면 [Docker 설명서](https://docs.docker.com/docker-for-mac/install/#what-to-know-before-you-install)의 단계를 따릅니다. 설치 후 [설치를 확인합니다](https://docs.docker.com/docker-for-mac/#check-versions-of-docker-engine-compose-and-machine).
 >
 
-5. http://192.168.50.50:19080/Explorer에서 Service Fabric Explorer로 이동하여 클러스터가 올바르게 설정되었는지 테스트합니다(기본 개인 네트워크 IP를 유지한다고 가정함).
+## <a name="create-a-local-container-and-set-up-service-fabric"></a>로컬 컨테이너 만들기 및 Service Fabric 설정
+로컬 Docker 컨테이너를 설정하고 Service Fabric 클러스터가 실행되도록 하려면 다음 단계를 수행합니다.
 
-    ![호스트 Mac에서 본 Service Fabric Explorer][sfx-mac]
+1. 다음 설정을 사용하여 호스트에서 Docker 디먼 구성을 업데이트하고 Docker 디먼을 다시 시작합니다. 
 
-## <a name="install-the-service-fabric-plugin-for-eclipse-neon"></a>Eclipse Neon용 Service Fabric 플러그 인 설치
+    ```json
+    {
+        "ipv6": true,
+        "fixed-cidr-v6": "fd00::/64"
+    }
+    ```
+    이러한 설정은 Docker 설치 경로의 daemon.json 파일에서 직접 업데이트할 수 있습니다.
+    
+    >[!NOTE]
+    >
+    >daemon.json 파일의 위치는 컴퓨터마다 다를 수 있습니다. 예: ~/Library/Containers/com.docker.docker/Data/database/com.docker.driver.amd64-linux/etc/docker/daemon.json.
+    >
+    >권장되는 방식은 디먼 구성 설정을 Docker에서 직접 수정하는 것입니다. **Docker 아이콘**을 선택한 다음 **기본 설정** > **디먼** > **고급**을 선택합니다.
+    >
+    >대규모 응용 프로그램을 테스트할 때에는 Docker에 할당된 리소스를 늘리는 것이 좋습니다. 이렇게 하려면 **Docker 아이콘**을 선택한 다음, **고급**을 선택하여 코어 및 메모리 수를 조정합니다.
 
-Service Fabric은 Java 서비스를 만들고 빌드하고 배포하는 프로세스를 간소화할 수 있는 **Java IDE용 Eclipse Neon**에 대한 플러그 인을 제공합니다. Service Fabric Eclipse 플러그 인 설치 또는 업데이트에 대한 일반적인 [설명서](service-fabric-get-started-eclipse.md#install-or-update-the-service-fabric-plug-in-in-eclipse-neon)에 나와 있는 설치 단계를 따르면 됩니다.
+2. 새 디렉터리에서 Service Fabric 이미지를 빌드할 `Dockerfile` 파일을 만듭니다.
 
-## <a name="using-service-fabric-eclipse-plugin-on-mac"></a>Mac에서 Service Fabric Eclipse 플러그 인 사용
+    ```dockerfile
+    FROM microsoft/service-fabric-onebox
+    WORKDIR /home/ClusterDeployer
+    RUN ./setup.sh
+    #Generate the local
+    RUN locale-gen en_US.UTF-8
+    #Set environment variables
+    ENV LANG=en_US.UTF-8
+    ENV LANGUAGE=en_US:en
+    ENV LC_ALL=en_US.UTF-8
+    EXPOSE 19080 19000 80 443
+    #Start SSH before running the cluster
+    CMD /etc/init.d/ssh start && ./run.sh
+    ```
 
-[Service Fabric Eclipse 플러그 인 설명서](service-fabric-get-started-eclipse.md)에 나와 있는 단계를 완료했는지 확인합니다. Mac 호스트에서 vagrant-guest 컨테이너를 사용하여 Service Fabric Java 응용 프로그램을 만들고 빌드하며 배포하는 단계는 다음과 같은 사항을 제외하고 대부분 일반적인 설명서와 같습니다.
+    >[!NOTE]
+    >컨테이너에 추가 프로그램 또는 종속성을 추가하도록 이 파일을 조정할 수 있습니다.
+    >예를 들어 `RUN apt-get install nodejs -y`를 추가하면 게스트 실행 파일인 `nodejs` 응용 프로그램에 대한 지원이 허용됩니다.
+    
+    >[!TIP]
+    > 기본적으로 이렇게 하면 최신 버전의 Service Fabric으로 이미지를 가져옵니다. 특정 수정 버전은 [Docker 허브](https://hub.docker.com/r/microsoft/service-fabric-onebox/) 페이지를 참조하세요.
 
-* Service Fabric Java 응용 프로그램을 성공적으로 빌드하는 데 Service Fabric 라이브러리가 필요하므로 Eclipse 프로젝트를 공유 경로에 생성해야 합니다. 기본적으로 ``Vagrantfile``이 존재하는 호스트에서 경로의 내용은 게스트에서 ``/vagrant`` 경로와 공유됩니다.
-* ``~/home/john/allprojects/`` 경로에 ``Vagrantfile``이 있는 경우 ``~/home/john/allprojects/MyActor`` 위치에 ``MyActor``라는 Service Fabric 프로젝트를 만들어야 하며 Eclipse 작업 영역에 대한 경로는 ``~/home/john/allprojects``입니다.
+3. `Dockerfile`에서 다시 사용할 수 있는 이미지를 빌드하려면 터미널을 열고 `Dockerfile`을 보관하는 디렉터리에 `cd`한 후 다음을 실행합니다.
+
+    ```bash 
+    docker build -t mysfcluster .
+    ```
+    
+    >[!NOTE]
+    >이 작업에 다소 시간이 걸릴 수 있지만 한 번만 수행하면 됩니다.
+
+4. 이제 필요할 때마다 다음을 실행하여 신속하게 Service Fabric의 로컬 복사를 시작할 수 있습니다.
+
+    ```bash 
+    docker run --name sftestcluster -d -p 19080:19080 -p 19000:19000 -p 25100-25200:25100-25200 mysfcluster
+    ```
+
+    >[!TIP]
+    >읽기 쉬운 방식으로 처리할 수 있도록 컨테이너 인스턴스의 이름을 제공합니다. 
+    >
+    >응용 프로그램을 특정 포트에서 수신 대기하는 경우 추가 `-p` 태그를 사용하여 포트를 지정해야 합니다. 예를 들어 응용 프로그램이 포트 8080에서 수신 대기하는 경우 다음 `-p` 태그를 추가합니다.
+    >
+    >`docker run -itd -p 19080:19080 -p 8080:8080 --name sfonebox microsoft/service-fabric-onebox`
+    >
+
+5. 잠시 후 클러스터가 시작되면, 다음 명령을 사용하여 로그를 보거나 대시보드로 이동하여 클러스터 상태([http://localhost:19080](http://localhost:19080))를 볼 수 있습니다.
+
+    ```bash 
+    docker logs sftestcluster
+    ```
+
+
+
+6. 작업을 모두 마쳤으면 이 명령을 사용하여 컨테이너를 중지하고 정리할 수 있습니다.
+
+    ```bash 
+    docker rm -f sftestcluster
+    ```
+
+### <a name="known-limitations"></a>알려진 제한 사항 
+ 
+ 다음은 Mac용 컨테이너에서 실행하는 로컬 클러스터의 알려진 제한 사항입니다. 
+ 
+ * DNS 서비스가 실행되지 않으며 지원되지 않음 [문제 #132](https://github.com/Microsoft/service-fabric/issues/132)
+
+## <a name="set-up-the-service-fabric-cli-sfctl-on-your-mac"></a>Mac에서 Service Fabric CLI(sfctl) 설정
+
+[Service Fabric CLI](service-fabric-cli.md#cli-mac)의 지침에 따라 Mac에 Service Fabric CLI(`sfctl`)를 설치합니다.
+CLI 명령은 클러스터, 응용 프로그램 및 서비스를 비롯한 Service Fabric 엔터티와의 상호 작용을 지원합니다.
+
+1. 응용 프로그램을 배포하기 전에 클러스터에 연결하려면 아래 명령을 실행합니다. 
+
+```bash
+sfctl cluster select --endpoint http://localhost:19080
+```
+
+## <a name="create-your-application-on-your-mac-by-using-yeoman"></a>Yeoman을 사용하여 Mac에서 응용 프로그램 만들기
+
+Service Fabric은 Yeoman 템플릿 생성기를 사용하여 터미널에서 Service Fabric 응용 프로그램을 만들 수 있는 스캐폴딩 도구를 제공합니다. 컴퓨터에서 Service Fabric Yeoman 템플릿 생성기가 작동하는지 확인하려면 다음 단계를 수행합니다.
+
+1. Node.js 및 NPM(노드 패키지 관리자)가 Mac에 설치되어 있어야 합니다. 다음과 같이 [HomeBrew](https://brew.sh/)를 사용하여 소프트웨어를 설치할 수 있습니다.
+
+    ```bash
+    brew install node
+    node -v
+    npm -v
+    ```
+2. 컴퓨터에 NPM의 [Yeoman](http://yeoman.io/) 템플릿 생성기를 설치합니다.
+
+    ```bash
+    npm install -g yo
+    ```
+3. 시작 [설명서](service-fabric-get-started-linux.md)의 단계를 수행하여 원하는 Yeoman 생성기를 설치합니다. Yeoman을 사용하여 Service Fabric 응용 프로그램을 만들려면 다음 단계를 수행합니다.
+
+    ```bash
+    npm install -g generator-azuresfjava       # for Service Fabric Java Applications
+    npm install -g generator-azuresfguest      # for Service Fabric Guest executables
+    npm install -g generator-azuresfcontainer  # for Service Fabric Container Applications
+    ```
+4. Mac에서 Service Fabric Java 응용 프로그램을 빌드하려면 JDK 버전 1.8 및 Gradle을 호스트 컴퓨터에 설치해야 합니다. 다음과 같이 [HomeBrew](https://brew.sh/)를 사용하여 소프트웨어를 설치할 수 있습니다. 
+
+    ```bash
+    brew update
+    brew cask install java
+    brew install gradle
+    ```
+
+## <a name="deploy-your-application-on-your-mac-from-the-terminal"></a>터미널에서 Mac에 응용 프로그램 배포
+
+Service Fabric 응용 프로그램을 만들고 빌드한 후 [Service Fabric CLI](service-fabric-cli.md#cli-mac)를 사용하여 응용 프로그램을 배포할 수 있습니다.
+
+1. Mac의 컨테이너 인스턴스 내에서 실행 중인 Service Fabric 클러스터에 연결합니다.
+
+    ```bash
+    sfctl cluster select --endpoint http://localhost:19080
+    ```
+
+2. 프로젝트 디렉터리 내부에서 설치 스크립트를 실행합니다.
+
+    ```bash
+    cd MyProject
+    bash install.sh
+    ```
+
+## <a name="set-up-net-core-20-development"></a>.NET Core 2.0 개발 설정
+
+[Mac용 .NET Core 2.0 SDK](https://www.microsoft.com/net/core#macos)를 설치하여 [C# Service Fabric 응용 프로그램을 만들기](service-fabric-create-your-first-linux-application-with-csharp.md) 시작합니다. .NET Core 2.0 Service Fabric 응용 프로그램용 패키지는 현재 미리 보기 상태인 NuGet.org에서 호스트됩니다.
+
+## <a name="install-the-service-fabric-plug-in-for-eclipse-on-your-mac"></a>Mac에 Eclipse용 Service Fabric 플러그 인 설치
+
+Azure Service Fabric은 Java IDE용 Eclipse Neon(이상)의 플러그 인을 제공합니다. 플러그 인은 Java 서비스를 만들고 빌드하고 배포하는 프로세스를 간소화합니다. Eclipse용 Service Fabric 플러그 인을 설치하거나 최신 버전으로 업데이트하려면 [다음 단계](service-fabric-get-started-eclipse.md#install-or-update-the-service-fabric-plug-in-in-eclipse)를 수행합니다. [Eclipse용 Service Fabric 설명서](service-fabric-get-started-eclipse.md)의 다른 단계도 적용할 수 있습니다. 응용 프로그램 빌드, 응용 프로그램에 서비스 추가, 응용 프로그램 제거 등을 수행할 수 있습니다.
+
+마지막 단계는 호스트와 공유되는 경로로 컨테이너를 인스턴스화하는 것입니다. Mac의 Docker 컨테이너로 작업하려면 플러그인에 이러한 유형의 인스턴스화가 필요합니다. 예: 
+
+```bash
+docker run -itd -p 19080:19080 -v /Users/sayantan/work/workspaces/mySFWorkspace:/tmp/mySFWorkspace --name sfonebox microsoft/service-fabric-onebox
+```
+
+특성은 다음과 같이 정의됩니다.
+* `/Users/sayantan/work/workspaces/mySFWorkspace`는 Mac에 있는 작업 영역의 정규화된 경로입니다.
+* `/tmp/mySFWorkspace`는 작업 영역을 매핑해야 하는 컨테이너 내부의 경로입니다.
+
+>[!NOTE]
+> 
+>작업 영역의 이름/경로가 다른 경우 `docker run` 명령에서 이 값을 업데이트합니다.
+> 
+>`sfonebox`가 아닌 이름으로 컨테이너를 시작하는 경우 Service Fabric 작업자 Java 응용 프로그램의 testclient.sh 파일에서 이름 값을 업데이트합니다.
+>
 
 ## <a name="next-steps"></a>다음 단계
 <!-- Links -->
@@ -101,10 +221,11 @@ Service Fabric은 Java 서비스를 만들고 빌드하고 배포하는 프로�
 * [Azure Portal에서 Service Fabric 클러스터 만들기](service-fabric-cluster-creation-via-portal.md)
 * [Azure Resource Manager를 사용하여 Service Fabric 클러스터 만들기](service-fabric-cluster-creation-via-arm.md)
 * [Service Fabric 응용 프로그램 모델 이해](service-fabric-application-model.md)
+* [Service Fabric CLI를 사용하여 응용 프로그램 관리](service-fabric-application-lifecycle-sfctl.md)
+* [Windows에서 Linux 개발 환경 준비](service-fabric-local-linux-cluster-windows.md)
 
 <!-- Images -->
 [cluster-setup-script]: ./media/service-fabric-get-started-mac/cluster-setup-mac.png
 [sfx-mac]: ./media/service-fabric-get-started-mac/sfx-mac.png
 [sf-eclipse-plugin-install]: ./media/service-fabric-get-started-mac/sf-eclipse-plugin-install.png
 [buildship-update]: https://projects.eclipse.org/projects/tools.buildship
-

@@ -1,30 +1,20 @@
 ---
-title: "Azure Analysis Services 자습서 단원 10: 파티션 만들기 | Microsoft Docs"
-description: "Azure Analysis Services 자습서 프로젝트에서 파티션을 만드는 방법을 설명합니다."
-services: analysis-services
-documentationcenter: 
+title: 'Azure Analysis Services 자습서 단원 10: 파티션 만들기 | Microsoft Docs'
+description: Azure Analysis Services 자습서 프로젝트에서 파티션을 만드는 방법을 설명합니다.
 author: minewiskan
-manager: erikre
-editor: 
-tags: 
-ms.assetid: 
+manager: kfile
 ms.service: analysis-services
-ms.devlang: NA
-ms.topic: get-started-article
-ms.tgt_pltfrm: NA
-ms.workload: na
-ms.date: 05/26/2017
+ms.topic: conceptual
+ms.date: 04/12/2018
 ms.author: owend
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 43aab8d52e854636f7ea2ff3aae50d7827735cc7
-ms.openlocfilehash: df74d9cbdcf4916c24955e491767589e72389155
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/03/2017
-
+ms.reviewer: minewiskan
+ms.openlocfilehash: 743eff21154502fc4ff651177abb8df91edb7494
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-# <a name="lesson-10-create-partitions"></a>단원 10: 파티션 만들기
-
-[!INCLUDE[analysis-services-appliesto-aas-sql2017-later](../../../includes/analysis-services-appliesto-aas-sql2017-later.md)]
+# <a name="create-partitions"></a>파티션 만들기
 
 이 단원에서는 FactInternetSales 테이블을 다른 파티션과 독립적으로 처리(새로 고침)할 수 있는 더 작은 논리적 부분으로 나누는 파티션을 만듭니다. 기본적으로 모델에 포함된 모든 테이블에는 테이블의 행과 열을 모두 포함하는 한 개의 파티션이 있습니다. FactInternetSales 테이블에 대해, 5년마다 한 개의 파티션으로, 연도별로 데이터를 나누려고 합니다. 그러면 각 파티션은 독립적으로 처리할 수 있습니다. 자세한 내용은 [파티션](https://docs.microsoft.com/sql/analysis-services/tabular-models/partitions-ssas-tabular)을 참조하세요. 
   
@@ -119,4 +109,3 @@ ms.lasthandoff: 06/03/2017
   
  ## <a name="whats-next"></a>다음 작업
 다음 단원 [단원 11: 역할 만들기](../tutorials/aas-lesson-11-create-roles.md)로 이동합니다. 
-

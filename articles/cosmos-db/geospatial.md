@@ -1,27 +1,24 @@
 ---
-title: "Azure Cosmos DB에서 지리 공간 데이터 작업 | Microsoft Docs"
-description: "Azure Cosmos DB 및 DocumentDB API를 사용하여 공간 개체를 만들고 인덱싱 및 쿼리하는 방법을 이해합니다."
+title: Azure Cosmos DB에서 지리 공간 데이터 작업 | Microsoft Docs
+description: Azure Cosmos DB 및 SQL API를 사용하여 공간 개체를 만들고 인덱싱 및 쿼리하는 방법을 이해합니다.
 services: cosmos-db
-documentationcenter: 
-author: arramac
-manager: jhubbard
-editor: monicar
+documentationcenter: ''
+author: SnehaGunda
+manager: kfile
 ms.assetid: 82ce2898-a9f9-4acf-af4d-8ca4ba9c7b8f
 ms.service: cosmos-db
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: data-services
-ms.date: 05/22/2017
-ms.author: arramac
+ms.date: 10/20/2017
+ms.author: sngun
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 80be19618bd02895d953f80e5236d1a69d0811af
-ms.openlocfilehash: d5785c81fb597e7d30eb7d3a880e7194d8358ed5
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/07/2017
-
-
+ms.openlocfilehash: 858d6c2154a74a6e5fe16c9392827cc8a6354f9c
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="working-with-geospatial-and-geojson-location-data-in-azure-cosmos-db"></a>Azure Cosmos DB에서 지리 공간 및 GeoJSON 위치 데이터 작업
 이 문서에서는 [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/)의 지리 공간 기능을 소개합니다. 이 문서를 읽은 후에는 다음과 같은 질문에 답할 수 있습니다.
@@ -30,10 +27,10 @@ ms.lasthandoff: 06/07/2017
 * SQL 및 LINQ에서 Azure Cosmos DB의 지리 공간 데이터를 쿼리하려면 어떻게 해야 하나요?
 * Azure Cosmos DB에서 공간 인덱싱을 사용하거나 사용하지 않도록 설정하려면 어떻게 해야 하나요?
 
-이 문서에는 DocumentDB API를 통해 공간 데이터를 사용하는 방법을 보여 줍니다. 코드 샘플은 이 [GitHub 프로젝트](https://github.com/Azure/azure-documentdb-dotnet/blob/master/samples/code-samples/Geospatial/Program.cs)를 참조하세요.
+이 문서에는 SQL API를 통해 공간 데이터를 사용하는 방법을 보여 줍니다. 코드 샘플은 이 [GitHub 프로젝트](https://github.com/Azure/azure-documentdb-dotnet/blob/master/samples/code-samples/Geospatial/Program.cs)를 참조하세요.
 
 ## <a name="introduction-to-spatial-data"></a>공간 데이터 소개
-공간 데이터는 공간에서 개체의 위치와 모양을 설명합니다. 대부분의 응용 프로그램에서 이러한 데이터는 지구의 개체, 즉 지리 공간 데이터에 해당합니다. 공간 데이터를 사용하여 사람, 관심 있는 장소 또는 도시나 호수 경계의 위치를 나타낼 수 있습니다. 일반적인 사용 사례에는 종종 근접 쿼리(예: "내 현재 위치 근처의 모든 커피숍 찾기")가 포함됩니다. 
+공간 데이터는 공간에서 개체의 위치와 모양을 설명합니다. 대부분의 응용 프로그램에서 이러한 데이터는 지구의 개체 및 지리 공간 데이터에 해당합니다. 공간 데이터를 사용하여 사람, 관심 있는 장소 또는 도시나 호수 경계의 위치를 나타낼 수 있습니다. 일반적인 사용 사례에는 종종 근접 쿼리(예: “내 현재 위치 근처의 모든 커피숍 찾기”)가 포함됩니다. 
 
 ### <a name="geojson"></a>GeoJSON
 Azure Cosmos DB는 인덱싱 및 지리 공간 지점 데이터의 쿼리를 지원하고 [GeoJSON 사양](https://tools.ietf.org/html/rfc7946)을 사용하여 나타납니다. GeoJSON 데이터 구조는 항상 유효한 JSON 개체이므로 특수 도구나 라이브러리 없이 Azure Cosmos DB를 사용하여 저장 및 쿼리할 수 있습니다. Azure Cosmos DB SDK는 쉽게 공간 데이터로 작업할 수 있게 해주는 도우미 클래스와 메서드를 제공합니다. 
@@ -63,7 +60,7 @@ Azure Cosmos DB는 인덱싱 및 지리 공간 지점 데이터의 쿼리를 지
 
 ```json
 {
-    "id":"documentdb-profile",
+    "id":"cosmosdb-profile",
     "screen_name":"@CosmosDB",
     "city":"Redmond",
     "topics":[ "global", "distributed" ],
@@ -81,13 +78,13 @@ Azure Cosmos DB는 인덱싱 및 지리 공간 지점 데이터의 쿼리를 지
 ```json
 {
     "type":"Polygon",
-    "coordinates":[
+    "coordinates":[ [
         [ 31.8, -5 ],
         [ 31.8, -4.7 ],
         [ 32, -4.7 ],
         [ 32, -5 ],
         [ 31.8, -5 ]
-    ]
+    ] ]
 }
 ```
 
@@ -112,7 +109,7 @@ GeoJSON 값을 포함하는 문서를 만드는 경우 컬렉션의 인덱싱 �
 
 ```json
 var userProfileDocument = {
-    "name":"documentdb",
+    "name":"cosmosdb",
     "location":{
         "type":"Point",
         "coordinates":[ -122.12, 47.66 ]
@@ -124,7 +121,7 @@ client.createDocument(`dbs/${databaseName}/colls/${collectionName}`, userProfile
 });
 ```
 
-DocumentDB API로 작업하는 경우 `Microsoft.Azure.Documents.Spatial` 네임스페이스 내에서 `Point` 및 `Polygon` 클래스를 사용하여 위치 정보를 응용 프로그램 개체 내에 포함할 수 있습니다. 이러한 클래스는 GeoJSON으로 공간 데이터 직렬화 및 역직렬화를 간소화하는 데 도움이 됩니다.
+SQL API로 작업하는 경우 `Microsoft.Azure.Documents.Spatial` 네임스페이스 내에서 `Point` 및 `Polygon` 클래스를 사용하여 위치 정보를 응용 프로그램 개체 내에 포함할 수 있습니다. 이러한 클래스는 GeoJSON으로 공간 데이터 직렬화 및 역직렬화를 간소화하는 데 도움이 됩니다.
 
 **.NET에서 지리 공간 데이터를 포함하는 문서 만들기**
 
@@ -146,7 +143,7 @@ await client.CreateDocumentAsync(
     UriFactory.CreateDocumentCollectionUri("db", "profiles"), 
     new UserProfile 
     { 
-        Name = "documentdb", 
+        Name = "cosmosdb", 
         Location = new Point (-122.12, 47.66) 
     });
 ```
@@ -157,7 +154,7 @@ await client.CreateDocumentAsync(
 지리 공간 데이터를 삽입하는 방법을 살펴보았으며, 이제 SQL 및 LINQ에서 Azure Cosmos DB를 사용하여 이 데이터를 쿼리하는 방법을 살펴보겠습니다.
 
 ### <a name="spatial-sql-built-in-functions"></a>공간 SQL 기본 제공 함수
-Azure Cosmos DB는 지리 공간 쿼리를 위해 다음과 같은 OGC(Open Geospatial Consortium) 기본 제공 함수를 지원합니다. SQL 언어의 전체 기본 제공 함수 집합에 대한 자세한 내용은 [Azure Cosmos DB 쿼리](documentdb-sql-query.md)를 참조하세요.
+Azure Cosmos DB는 지리 공간 쿼리를 위해 다음과 같은 OGC(Open Geospatial Consortium) 기본 제공 함수를 지원합니다. SQL 언어의 전체 기본 제공 함수 집합에 대한 자세한 내용은 [Azure Cosmos DB 쿼리](sql-api-sql-query.md)를 참조하세요.
 
 <table>
 <tr>
@@ -222,11 +219,11 @@ ST_WITHIN의 다각형 인수에는 단일 링만 포함될 수 있습니다. �
     }]
 
 > [!NOTE]
-> Azure Cosmos DB 쿼리에서 일치하지 않는 형식이 작동하는 방식과 비슷하게, 인수에 지정된 위치 값이 잘못되었거나 형식이 잘못된 경우 **정의되지 않음** 으로 평가되고 평가된 문서는 쿼리 결과에서 생략됩니다. 쿼리에서 결과가 반환되지 않는 경우 ST_ISVALIDDETAILED를 실행하여 공간 형식이 잘못된 이유를 디버그합니다.     
+> Azure Cosmos DB 쿼리에서 일치하지 않는 형식이 작동하는 방식과 비슷하게, 인수에 지정된 위치 값이 잘못되었거나 형식이 잘못된 경우 **정의되지 않음**으로 평가되고 평가된 문서는 쿼리 결과에서 생략됩니다. 쿼리에서 결과가 반환되지 않는 경우 ST_ISVALIDDETAILED를 실행하여 공간 형식이 잘못된 이유를 디버그합니다.     
 > 
 > 
 
-Azure Cosmos DB는 반전 쿼리 수행도 지원합니다. 즉, Azure Cosmos DB에서 다각형 또는 선을 인덱싱한 다음 지정된 점이 포함된 영역을 쿼리할 수 있습니다. 이 패턴은 일반적으로 특정 시점(예: 지정된 영역에 트럭이 출입한 시점)을 식별하기 위해 물류에서 사용됩니다. 
+Azure Cosmos DB는 반전 쿼리 수행도 지원합니다. 즉, Azure Cosmos DB에서 다각형 또는 선을 인덱싱한 다음, 지정된 점이 포함된 영역을 쿼리할 수 있습니다. 이 패턴은 일반적으로 특정 시점(예: 지정된 영역에 트럭이 출입한 시점)을 식별하기 위해 물류에서 사용됩니다. 
 
 **쿼리**
 
@@ -275,9 +272,9 @@ ST_ISVALID 및 ST_ISVALIDDETAILED를 사용하여 공간 개체가 유효한지 
     }]
 
 ### <a name="linq-querying-in-the-net-sdk"></a>.NET SDK의 LINQ 쿼리
-DocumentDB .NET SDK는 LINQ 식에서 사용하기 위한 스텁 메서드 `Distance()` 및 `Within()`도 제공합니다. DocumentDB LINQ 공급자는 이러한 메서드 호출을 동등한 SQL 기본 제공 함수 호출(각각 ST_DISTANCE 및 ST_WITHIN)로 변환합니다. 
+SQL .NET SDK는 LINQ 식에서 사용하기 위한 스텁 메서드 `Distance()` 및 `Within()`도 제공합니다. SQL LINQ 공급자는 이러한 메서드 호출을 동등한 SQL 기본 제공 함수 호출(각각 ST_DISTANCE 및 ST_WITHIN)로 변환합니다. 
 
-LINQ를 사용하여 Azure Cosmos DB 컬렉션에서 "위치" 값이 지정된 점에서 30km 반지름 내에 있는 모든 문서를 찾는 LINQ 쿼리의 예는 다음과 같습니다.
+LINQ를 사용하여 Azure Cosmos DB 컬렉션에서 “위치” 값이 지정된 점에서 30km 반지름 내에 있는 모든 문서를 찾는 LINQ 쿼리의 예는 다음과 같습니다.
 
 **거리에 대한 LINQ 쿼리**
 
@@ -324,7 +321,7 @@ LINQ 및 SQL을 사용하여 문서를 쿼리하는 방법을 살펴보았으며
 > 
 > 
 
-다음 JSON 조각은 공간 인덱싱이 사용되는 인덱싱 정책을 보여 줍니다. 즉, 공간 쿼리를 위해 문서 내에 있는 모든 GeoJSON 점을 인덱싱합니다. Azure 포털을 사용하여 인덱싱 정책을 수정하는 경우 인덱싱 정책에 대해 다음과 같은 JSON을 지정하여 컬렉션에서 공간 인덱싱을 사용하도록 설정할 수 있습니다.
+다음 JSON 코드 조각은 공간 인덱싱이 사용되는 인덱싱 정책을 보여 줍니다. 즉, 공간 쿼리를 위해 문서 내에 있는 모든 GeoJSON 점을 인덱싱합니다. Azure Portal을 사용하여 인덱싱 정책을 수정하는 경우 인덱싱 정책에 대해 다음과 같은 JSON을 지정하여 컬렉션에서 공간 인덱싱을 사용하도록 설정할 수 있습니다.
 
 **점 및 다각형에 대한 공간 인덱싱이 사용되는 컬렉션 인덱싱 정책 JSON**
 
@@ -398,7 +395,6 @@ Azure Cosmos DB에서 지리 공간 지원을 시작하는 방법을 배웠으�
 
 * [GitHub의 지리 공간 .NET 코드 샘플](https://github.com/Azure/azure-documentdb-dotnet/blob/fcf23d134fc5019397dcf7ab97d8d6456cd94820/samples/code-samples/Geospatial/Program.cs)을 사용하여 코딩 시작
 * [Azure Cosmos DB 쿼리 실습](http://www.documentdb.com/sql/demo#geospatial)에서 지리 공간 쿼리 실습
-* [Azure Cosmos DB 쿼리](documentdb-sql-query.md)에 대해 알아보기
+* [Azure Cosmos DB 쿼리](sql-api-sql-query.md)에 대해 알아보기
 * [Azure Cosmos DB 인덱싱 정책에 대해 알아보기](indexing-policies.md)
-
 

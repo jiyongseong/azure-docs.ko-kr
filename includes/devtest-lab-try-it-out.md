@@ -1,7 +1,7 @@
 ## <a name="get-started-with-azure-devtest-labs"></a>Azure DevTest Labs 시작
-Azure를 처음 사용하세요? [무료 Azure 계정 만들기](https://azure.microsoft.com/free)
+Azure를 처음 사용하세요? [평가판 Azure 계정을 만듭니다](https://azure.microsoft.com/free).
 
-이미 Azure에 계정이 있나요? 다음 단추를 클릭하여 DevTest Labs에서 랩을 만듭니다.
+이미 Azure에 계정이 있나요? DevTest Labs에서 첫 번째 랩을 시작합니다.
 
 [![몇 분 이내에 Azure DevTest Labs 시작](./media/devtest-lab-try-it-out/get-started.png)](http://go.microsoft.com/fwlink/?LinkID=627034&clcid=0x409)
 

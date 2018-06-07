@@ -1,0 +1,37 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: 개발자 도구 통합
+metadata:
+  title: 개발자 도구 통합
+  meta.description: from-team
+  services: from-team
+  author: 
+  manager: from-team
+  layout: LandingPage
+  ms.assetid: 
+  ms.service: from-team
+  ms.tgt_pltfrm: from-team
+  ms.devlang: from-team
+  ms.topic: landing-page
+  ms.date: 09/15/2017
+  ms.author: from-team
+  ms.openlocfilehash: 8ed2db241ae79b549f96581b67625114fd658c67
+  ms.sourcegitcommit: c47ef7899572bf6441627f76eb4c4ac15e487aec
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 05/04/2018
+abstract:
+  description: 
+sections:
+- title: 
+  items:
+  - type: list
+    style: cards
+    className: cardsA
+    items:
+    - html: <a href="/java/azure/intellij/azure-toolkit-for-intellij"> <img height="48" width="48" src="https://docs.microsoft.com/media/logos/logo_intellij.svg" alt=""> <br><b>IntelliJ</b></a> <p>IntelliJ용 Azure 도구 키트는 IntelliJ IDE(통합 개발 환경)에서 Azure 응용 프로그램을 쉽게 작성, 개발, 테스트 및 배포할 수 있는 템플릿과 기능을 제공합니다.</p>
+    - html: <a href="/java/azure/spring-framework/deploy-spring-boot-java-app-with-maven-plugin"> <img height="48" width="48" src="https://docs.microsoft.com/media/logos/logo_maven.svg" alt=""> <br><b>Maven</b></a> <p>Apache Maven에서 Azure Web Apps용 Maven 플러그인은 Maven 프로젝트에 Azure App Service의 원활한 통합을 제공하고, 개발자가 Azure App Service에 웹앱을 배포하는 프로세스를 간소화합니다.</p>
+    - html: <a href="/java/azure/eclipse/azure-toolkit-for-eclipse"> <img height="48" width="48" src="https://docs.microsoft.com/media/logos/logo_eclipse.svg" alt=""> <br><b>Eclipse</b></a> <p>Eclipse용 Azure 도구 키트는 Eclipse IDE(통합 개발 환경) 내부에서 클라우드 응용 프로그램을 쉽게 작성, 개발, 테스트 및 Azure에 배포할 수 있는 템플릿과 기능을 제공합니다.</p>
+    - html: <a href="/azure/ansible/"> <img height="48" width="48" src="../media/index/ansible.svg" alt=""> <br><b>Ansible</b></a> <p>클라우드 프로비전, 구성 관리 및 응용 프로그램 배포를 자동화합니다.</p>
+    - html: <a href="/azure/jenkins/"> <img height="48" width="48" src="https://docs.microsoft.com/media/logos/logo_jenkins.svg" alt=""> <br><b>Jenkins</b></a> <p>클라우드에서 앱을 빌드하고 Azure에 배포합니다.</p>
+    - html: <a href="/azure/terraform/"> <img height="48" width="48" src="../media/index/terraform.png" alt=""> <br><b>Terraform</b></a> <p>Azure에서 안정적으로 인프라를 업그레이드하고 만듭니다.</p>

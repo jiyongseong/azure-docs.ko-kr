@@ -4,7 +4,7 @@ description: "Azure 응용 프로그램에 대해 사용자 할당을 요구하�
 services: active-directory
 documentationcenter: 
 author: kgremban
-manager: femila
+manager: mtillman
 editor: 
 ms.assetid: 30b78cba-1e0f-472f-8314-f2250a9b91c3
 ms.service: active-directory
@@ -15,12 +15,11 @@ ms.topic: article
 ms.date: 05/16/2017
 ms.author: kgremban
 robots: noindex
-ms.translationtype: Human Translation
-ms.sourcegitcommit: e66b606433f8924a509f2d04dae67ff00ded6dca
-ms.openlocfilehash: f5804d258c609f2bf289dcf4d173dc67137e7691
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/07/2017
-
+ms.openlocfilehash: b02460435edca336325e472ea910b73e7895c948
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="azure-ad-and-applications-require-user-assignment"></a>Azure AD 및 응용 프로그램: 사용자 할당 요구
 ## <a name="requiring-user-assignment"></a>사용자 할당 요구
@@ -37,4 +36,3 @@ ms.lasthandoff: 02/07/2017
 
 ## <a name="next-steps"></a>다음 단계
 [!INCLUDE [active-directory-applications-guiding-developers-for-lob-applications-toc.md](../../includes/active-directory-applications-guiding-developers-for-lob-applications-toc.md)]
-

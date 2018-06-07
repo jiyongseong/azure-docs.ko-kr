@@ -5,7 +5,7 @@ keywords: "Azure Traffic Manager를 포함한 AD FS, Azure Traffic Manager를 �
 services: active-directory
 documentationcenter: 
 author: anandyadavmsft
-manager: femila
+manager: mtillman
 editor: 
 ms.assetid: a14bc870-9fad-45ed-acd5-a90ccd432e54
 ms.service: active-directory
@@ -15,11 +15,11 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.date: 09/01/2016
 ms.author: anandy;billmath
-translationtype: Human Translation
-ms.sourcegitcommit: 3170abb4f9bd7f7996b1c0dd2e20f648ea1b9fe5
-ms.openlocfilehash: e2125c56a958e8ed6b02ec7e92dd7cf4dcf326f3
-
-
+ms.openlocfilehash: e984d3d590021e3dd9e46d0f12493889b2acc229
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="high-availability-cross-geographic-ad-fs-deployment-in-azure-with-azure-traffic-manager"></a>Azure Traffic Manager를 사용하여 Azure에서 고가용성 교차 지리적 AD FS 배포
 [Azure에서 AD FS 배포](active-directory-aadconnect-azure-adfs.md) 는 Azure의 조직에 대한 간단한 AD FS 인프라를 배포할 수 있는 방법으로 단계별 지침을 제공합니다. 이 문서에서는 [Azure Traffic Manager](../traffic-manager/traffic-manager-overview.md)를 사용하여 Azure AD FS에서 교차 지리적 배포를 만드는 다음 단계를 제공합니다. Azure Traffic Manager는 인프라에서 서로 다른 요구 사항에 맞게 사용할 수 있는 라우팅 방법의 범위를 사용하여 조직에 대해 지리적으로 분배된 고가용성 및 고성능 AD FS 인프라를 만들 수 있도록 합니다.
@@ -36,7 +36,7 @@ ms.openlocfilehash: e2125c56a958e8ed6b02ec7e92dd7cf4dcf326f3
 
 * **가상 네트워크:** 추가 AD FS 인프라를 배포하려는 지역에서 새 가상 네트워크를 만들어야 합니다. 위의 다이어그램에서 각 지역에 두 개의 가상 네트워크인 Geo1 VNET과 Geo2 VNET이 표시됩니다.
 * **새 지역 VNET에서 도메인 컨트롤러 및 AD FS 서버:** 새 지역에 있는 AD FS 서버가 멀리 있는 다른 네트워크의 도메인 컨트롤러에 연결하지 않아도 인증을 완료하여 성능이 향상되도록 새 지역에서 도메인 컨트롤러를 배포하는 것이 좋습니다.
-* **저장소 계정:** 저장소 계정은 지역과 연결됩니다. 새 지역에 컴퓨터를 배포했기 때문에 지역에서 사용할 새 저장소 계정을 만들어야 합니다.  
+* **Storage 계정:** Storage 계정은 지역과 연결됩니다. 새 지역에 컴퓨터를 배포했기 때문에 지역에서 사용할 새 저장소 계정을 만들어야 합니다.  
 * **네트워크 보안 그룹:** 지역에서 만든 네트워크 보안 그룹을 다른 지역에서 저장소 계정으로 사용할 수 없습니다. 따라서 새 지역에서 INT 및 DMZ 서브넷에 대한 첫 번째 지역의 네트워크 보안 그룹과 비슷한 새 네트워크 보안 그룹을 만들어야 합니다.
 * **공용 IP 주소에 대한 DNS 레이블:** Azure Traffic Manager는 DNS 레이블을 통해서만 끝점을 참조할 수 있습니다. 따라서 외부 부하 분산 장치의 공용 IP 주소에 대한 DNS 레이블을 만들어야 합니다.
 * **Azure Traffic Manager:** Microsoft Azure Traffic Manager를 사용하면 전 세계 여러 데이터 센터에서 실행 중인 서비스 끝점에 대한 사용자 트래픽의 배포를 제어할 수 있습니다. Azure Traffic Manager는 DNS 수준에서 작동합니다. 이 관리자는 DNS 응답을 사용하여 전역으로 분산된 끝점으로 최종 사용자 트래픽을 보냅니다. 그러면 클라이언트는 해당 끝점에 직접 연결됩니다. 성능, 가중치 적용 및 우선 순위 등의 라우팅 옵션을 사용하여 조직의 요구 사항에 가장 적합한 라우팅 옵션을 쉽게 선택할 수 있습니다. 
@@ -117,15 +117,9 @@ AD FS를 테스트하는 가장 쉬운 방법은 IdpInitiatedSignon.aspx 페이�
 ## <a name="related-links"></a>관련 링크
 * [Azure에서 기본 AD FS 배포](active-directory-aadconnect-azure-adfs.md)
 * [Microsoft Azure Traffic Manager](../traffic-manager/traffic-manager-overview.md)
-* [트래픽 관리자 트래픽 라우팅 방법](../traffic-manager/traffic-manager-routing-methods.md)
+* [Traffic Manager 트래픽 라우팅 방법](../traffic-manager/traffic-manager-routing-methods.md)
 
 ## <a name="next-steps"></a>다음 단계
-* [Azure 트래픽 관리자 프로필 관리](../traffic-manager/traffic-manager-manage-profiles.md)
+* [Azure Traffic Manager 프로필 관리](../traffic-manager/traffic-manager-manage-profiles.md)
 * [끝점 추가, 사용 안 함, 사용 또는 삭제](../traffic-manager/traffic-manager-endpoints.md) 
-
-
-
-
-<!--HONumber=Nov16_HO4-->
-
 

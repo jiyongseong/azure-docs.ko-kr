@@ -1,5 +1,5 @@
 ---
-title: "ID 관리에 도움이 되는 Azure 보안 기능 | Microsoft Docs"
+title: ID 관리에 도움이 되는 Azure 보안 기능 | Microsoft Docs
 description: " 이 문서는 ID 관리에 도움이 되는 핵심 Azure 보안 기능의 개요를 제공합니다. Microsoft ID 및 액세스 관리 솔루션은 IT가 다중 요소 인증 및 조건부 액세스 정책과 같은 추가 수준의 유효성 검사를 활성화하여 회사 데이터 센터에 걸친 응용 프로그램 및 리소스에 대한 액세스 및 클라우드로 액세스를 보호하도록 도움을 줍니다. "
 services: security
 documentationcenter: na
@@ -12,14 +12,13 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/09/2017
+ms.date: 11/21/2017
 ms.author: terrylan
-translationtype: Human Translation
-ms.sourcegitcommit: 24d86e17a063164c31c312685c0742ec4a5c2f1b
-ms.openlocfilehash: bb9d08d6164ec01ce1d76fc4a23e782213ecfcd9
-ms.lasthandoff: 03/11/2017
-
-
+ms.openlocfilehash: 46e4466085200bf9042c4342ea5e6b37fd2fb701
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="azure-identity-management-security-overview"></a>Azure ID 관리 보안 개요
 Microsoft ID 및 액세스 관리 솔루션은 IT가 다중 요소 인증 및 조건부 액세스 정책과 같은 추가 수준의 유효성 검사를 활성화하여 회사 데이터 센터에 걸친 응용 프로그램 및 리소스에 대한 액세스 및 클라우드로 액세스를 보호하도록 도움을 줍니다. 고급 보안 보고, 감사 및 경고를 통해 의심스러운 작업을 모니터링하여 잠재적인 보안 문제를 완화시킵니다. [Azure Active Directory Premium](../active-directory/active-directory-editions.md) 은 수천 개의 클라우드 앱에 Single Sign-On(SaaS)을 제공하고 온-프레미스를 실행하는 웹앱에 액세스를 제공합니다.
@@ -50,25 +49,25 @@ SSO(Single Sign-On)란 단일 사용자 계정을 사용하여 한 번만 로그
 
 대부분의 조직에서는 최종 사용자 생산성을 위해 Office 365, Box, Salesforce와 같은 SaaS(Software as a Service) 응용 프로그램에 의존합니다. 지금까지 IT 담당자는 각 SaaS 응용 프로그램에서 사용자 계정을 개별적으로 만들고 업데이트해야 하며, 사용자는 각 SaaS 응용 프로그램에 대한 암호를 기억해야 했습니다.
 
-Azure AD는 온-프레미스 Active Directory를 클라우드로 확장하여 사용자가 자신의 기본 조직 계정을 사용하여 해당 도메인에 가입된 장치 및 회사 리소스뿐만 아니라 작업에 필요한 모든 웹 및 SaaS 응용 프로그램에 로그인할 수 있도록 합니다.
+Azure AD는 온-프레미스 Active Directory 환경을 클라우드로 확장하여 사용자가 자신의 기본 조직 계정을 사용하여 해당 도메인에 가입된 장치 및 회사 리소스뿐만 아니라 작업에 필요한 모든 웹 및 SaaS 응용 프로그램에 로그인할 수 있도록 합니다.
 
 사용자는 여러 사용자 이름과 암호 집합을 관리할 필요가 없을 뿐만 아니라, 조직 그룹 및 직원으로서의 상태에 따라 해당 응용 프로그램 액세스를 자동으로 프로비전하거나 프로비전을 해제할 수 있습니다. Azure AD는 SaaS 응용 프로그램에 대한 사용자의 액세스를 중앙에서 관리할 수 있는 보안 및 액세스 관리 제어를 도입했습니다.
 
 자세한 정보:
 
 * [Single Sign-On 개요](https://azure.microsoft.com/documentation/videos/overview-of-single-sign-on/)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](../active-directory/active-directory-appssoaccess-whatis.md)
-* [Azure Active Directory Single Sign-On과 SaaS 앱 통합](../active-directory/active-directory-sso-integrate-saas-apps.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](../active-directory/manage-apps/what-is-single-sign-on.md)
+* [Azure Active Directory Single Sign-On과 SaaS 앱 통합](../active-directory/active-directory-enterprise-apps-manage-sso.md)
 
 ## <a name="reverse-proxy"></a>역방향 프록시
 Azure AD Application Proxy를 사용하면 [SharePoint](https://support.office.com/article/What-is-SharePoint-97b915e6-651b-43b2-827d-fb25777f446f?ui=en-US&rs=en-US&ad=US) 사이트, [Outlook 웹앱](https://technet.microsoft.com/library/jj657718.aspx), [IIS](http://www.iis.net/) 기반 앱과 같은 온-프레미스 응용 프로그램을 개인 네트워크 내에 게시할 수 있으며 네트워크 외부 사용자가 안전하게 액세스할 수 있게 합니다. 응용 프로그램 프록시에서는 Azure AD가 지원하는 수천 개의 SaaS 응용 프로그램과 함께, 많은 유형의 온-프레미스 웹 응용 프로그램에 대한 원격 액세스 및 SSO(Single Sign-On)를 제공합니다. 직원들은 자택에서 개인용 장치를 사용하여 앱에 로그인하고 이 클라우드 기반 프록시를 통해 인증할 수 있습니다.
 
 자세한 정보:
 
-* [Azure AD 응용 프로그램 프록시 사용](../active-directory/active-directory-application-proxy-enable.md)
+* [Azure AD 응용 프로그램 프록시 사용](../active-directory/manage-apps/application-proxy-enable.md)
 * [Azure AD 응용 프로그램 프록시를 사용하여 응용 프로그램 게시](../active-directory/active-directory-application-proxy-publish.md)
-* [응용 프로그램 프록시를 사용하는 Single-Sign-On](../active-directory/active-directory-application-proxy-sso-using-kcd.md)
-* [조건부 액세스로 작업하기](../active-directory/active-directory-application-proxy-conditional-access.md)
+* [응용 프로그램 프록시를 사용하는 Single-Sign-On](../active-directory/manage-apps/application-proxy-configure-single-sign-on-with-kcd.md)
+* [조건부 액세스로 작업하기](../active-directory/manage-apps/application-proxy-integrate-with-sharepoint-server.md)
 
 ## <a name="multi-factor-authentication"></a>Multi-Factor Authentication
 Azure MFA(Multi-Factor Authentication)는 두 개 이상의 인증 방법을 사용해야 하고 사용자 로그인 및 트랜잭션에 중요한 제2의 보안 계층을 추가하는 인증 방법입니다. MFA는 간단한 로그인 프로세스에 대한 사용자 요구를 충족하는 동안 데이터와 응용 프로그램에 대한 액세스를 보호하는 데 도움이 됩니다. 전화 통화, 문자 메시지 또는 모바일 앱 알림 또는 확인 코드 및 타사 OAuth 토큰과 같은 다양한 확인 옵션을 통해 강력한 인증을 전달합니다.
@@ -76,13 +75,13 @@ Azure MFA(Multi-Factor Authentication)는 두 개 이상의 인증 방법을 사
 자세한 정보:
 
 * [Multi-Factor Authentication](https://azure.microsoft.com/documentation/services/multi-factor-authentication/)
-* [Azure Multi-Factor Authentication 정의](../multi-factor-authentication/multi-factor-authentication.md)
-* [Azure Multi-Factor Authentication 작동 방법](../multi-factor-authentication/multi-factor-authentication-how-it-works.md)
+* [Azure Multi-Factor Authentication 정의](../active-directory/authentication/multi-factor-authentication.md)
+* [Azure Multi-Factor Authentication 작동 방법](../active-directory/authentication/concept-mfa-howitworks.md)
 
 ## <a name="security-monitoring-alerts-and-machine-learning-based-reports"></a>보안 모니터링, 경고 및 기계 학습 기반 보고서
 일치하지 않는 액세스 패턴을 식별하는 보안 모니터링 및 경고 및 기계 학습 기반 보고서로 비즈니스를 보호할 수 있습니다. Azure Active Directory의 액세스 및 사용 보고서를 사용하여 조직 디렉터리의 무결성 및 보안을 볼 수 있습니다 이 정보를 사용하면 디렉터리 관리자는 가능한 보안 위험이 발생할 수 있는 위치를 보다 잘 결정하여 이러한 위험을 적절하게 완화할 수 있습니다.
 
-Azure 클래식 포털에서 보고서는 다음과 같은 방식으로 분류되어 있습니다.
+Azure Portal에서 보고서는 다음과 같은 방식으로 분류되어 있습니다.
 
 * 비정상 보고서 – 비정상으로 확인된 로그인 이벤트가 포함됩니다. 이러한 활동을 인식하고 이벤트가 의심스러운지 확인할 수 있게 해 줍니다.
 * 통합 응용 프로그램 보고서 – 클라우드 응용 프로그램이 조직에서 사용되는 방식을 파악할 수 있게 해 줍니다. Azure Active Directory는 수천 개의 클라우드 응용 프로그램과 통합을 제공합니다.
@@ -134,7 +133,7 @@ Azure AD Privileged Identity Management를 통해 다음을 할 수 있습니다
 
 자세한 정보:
 
-* [Azure AD 권한 있는 ID 관리](../active-directory/active-directory-privileged-identity-management-configure.md)
+* [Azure AD Privileged Identity Management](../active-directory/active-directory-privileged-identity-management-configure.md)
 * [Azure AD Privileged Identity Management의 역할](../active-directory/active-directory-privileged-identity-management-roles.md)
 * [Azure AD Privileged Identity Management: 사용자 역할을 추가 또는 제거하는 방법](../active-directory/active-directory-privileged-identity-management-how-to-add-role-to-user.md)
 
@@ -154,4 +153,3 @@ Microsoft의 ID에 대한 접근 방식은 솔루션은 온-프레미스 및 클
 * [하이브리드 ID 백서](http://download.microsoft.com/download/D/B/A/DBA9E313-B833-48EE-998A-240AA799A8AB/Hybrid_Identity_White_Paper.pdf)
 * [Azure Active Directory](https://azure.microsoft.com/documentation/services/active-directory/)
 * [Active Directory 팀 블로그](https://blogs.technet.microsoft.com/ad/)
-

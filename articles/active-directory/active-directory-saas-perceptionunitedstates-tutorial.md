@@ -1,10 +1,10 @@
 ---
-title: "자습서: Azure Active Directory와 Perception United States(비 UltiPro) 통합 | Microsoft Docs"
-description: "Azure Active Directory와 Perception United States(비 UltiPro) 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Azure Active Directory와 Perception United States(비 UltiPro) 통합 | Microsoft Docs'
+description: Azure Active Directory와 Perception United States(비 UltiPro) 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.reviewer: joflore
 ms.assetid: b4a8f026-cb5f-41eb-9680-68eddc33565e
 ms.service: active-directory
@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/20/2017
 ms.author: jeedes
+ms.openlocfilehash: da0529897bb02745a2346f6a0282be86923468ba
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 137671152878e6e1ee5ba398dd5267feefc435b7
-ms.openlocfilehash: 8e2f9f979f8b94e0c043d4db6e93bd7a53c3dd27
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34350120"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-perception-united-states-non-ultipro"></a>자습서: Azure Active Directory와 Perception United States(비 UltiPro) 통합
 
@@ -31,7 +31,7 @@ Perception United States(비 UltiPro)를 Azure AD와 통합하면 다음과 같�
 - 사용자가 해당 Azure AD 계정으로 Perception United States(비 UltiPro)에 자동으로 로그온(Single Sign-on)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +59,7 @@ Perception United States(비 UltiPro)의 Azure AD 통합을 구성하려면 갤�
 
 **갤러리에서 Perception United States(비 UltiPro)를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -71,7 +71,7 @@ Perception United States(비 UltiPro)의 Azure AD 통합을 구성하려면 갤�
 
     ![새 응용 프로그램 단추][3]
 
-4. 검색 상자에 **Perception United States(비 UltiPro)**를 입력하고 결과 패널에서 **Perception United States(비 UltiPro)**를 선택한 다음 **추가** 단추를 클릭하여 응용 프로그램을 추가합니다.
+4. 검색 상자에 **Perception United States(비 UltiPro)** 를 입력하고 결과 패널에서 **Perception United States(비 UltiPro)** 를 선택한 다음 **추가** 단추를 클릭하여 응용 프로그램을 추가합니다.
 
     ![결과 목록의 Perception United States(비 UltiPro)](./media/active-directory-saas-perceptionunitedstates-tutorial/tutorial_perceptionunitedstates_addfromgallery.png)
 
@@ -111,7 +111,7 @@ Perception United States(비 UltiPro)에서 Azure AD Single Sign-On을 구성하
 
     a. **식별자** 텍스트 상자에 URL `https://perception.kanjoya.com/sp`을 입력합니다.
 
-    b. **회신 URL** 텍스트 상자에 다음 패턴으로 URL을 입력합니다.`https://perception.kanjoya.com/sso?idp=<entity_id>`
+    나. **회신 URL** 텍스트 상자에 다음 패턴으로 URL을 입력합니다.`https://perception.kanjoya.com/sso?idp=<entity_id>`
 
     > [!NOTE] 
     > 이 값은 실제 값이 아닙니다. 자습서 뒷부분에 설명된 실제 회신 URL로 값을 업데이트하게 됩니다.
@@ -126,13 +126,13 @@ Perception United States(비 UltiPro)에서 Azure AD Single Sign-On을 구성하
 
 6. **Perception United States(비 UltiPro) 구성** 섹션에서 **Perception United States(비 UltiPro) 구성**을 클릭하여 **로그온 구성** 창을 엽니다. **빠른 참조 섹션**에서 **SAML 엔터티 ID**를 복사합니다.
 
-    a. **Perception United States(비 UltiPro)** 응용 프로그램이 URI 인코딩이 되려면 복사한 **SAML 엔터티 ID** 값이 필요합니다. URI 인코딩된 값을 가져오려면 다음 링크:**http://www.url-encode-decode.com/**을 사용합니다.
+    a. **Perception United States(비 UltiPro)** 응용 프로그램이 URI 인코딩이 되려면 복사한 **SAML 엔터티 ID** 값이 필요합니다. uri 인코딩 값을 가져오려면 **http://www.url-encode-decode.com/** 링크를 사용합니다.
 
-    b. URI 인코딩된 값을 얻은 후 아래에서 설명된 것과 같이 **회신 URL**과 결합합니다.
+    나. URI 인코딩된 값을 얻은 후 아래에서 설명된 것과 같이 **회신 URL**과 결합합니다.
 
     `https://perception.kanjoya.com/sso?idp=<URI encooded entity_id>`
     
-    c. **Perception United States(비 UltiPro) 도메인 및 URL** 섹션의 **회신 URL** 텍스트 상자에 위의 값을 붙여 넣습니다.
+    다. **Perception United States(비 UltiPro) 도메인 및 URL** 섹션의 **회신 URL** 텍스트 상자에 위의 값을 붙여 넣습니다.
 
     ![Perception United States(비 UltiPro) 구성](./media/active-directory-saas-perceptionunitedstates-tutorial/tutorial_perceptionunitedstates_configure.png) 
 
@@ -148,9 +148,9 @@ Perception United States(비 UltiPro)에서 Azure AD Single Sign-On을 구성하
 
     a. **회사 이름** 텍스트 상자에 **회사**의 이름을 입력합니다.
     
-    b. **계정 이름** 텍스트 상자에 **계정**의 이름을 입력합니다.
+    나. **계정 이름** 텍스트 상자에 **계정**의 이름을 입력합니다.
 
-    c. **기본 회신 전자 메일** 텍스트 상자에 유효한 **전자 메일**을 입력합니다.
+    다. **기본 회신 전자 메일** 텍스트 상자에 유효한 **전자 메일**을 입력합니다.
 
     d. **SAML 2.0**으로 **SSO ID 공급자**를 선택합니다.
 
@@ -160,9 +160,9 @@ Perception United States(비 UltiPro)에서 Azure AD Single Sign-On을 구성하
 
     a. **전자 메일**로 **SAML NameID 유형**을 선택합니다.
 
-    b. **SSO 구성 이름** 텍스트 상자에 **구성**의 이름을 입력합니다.
+    나. **SSO 구성 이름** 텍스트 상자에 **구성**의 이름을 입력합니다.
     
-    c. **ID 공급자 이름** 텍스트 상자에 Azure Portal에서 복사한 **SAML 엔터티 ID** 값을 붙여 넣습니다. 
+    다. **ID 공급자 이름** 텍스트 상자에 Azure Portal에서 복사한 **SAML 엔터티 ID** 값을 붙여 넣습니다. 
 
     d. **SAML 도메인 텍스트 상자**에 **@contoso.com**과 같은 도메인을 입력합니다.
 
@@ -200,9 +200,9 @@ Perception United States(비 UltiPro)에서 Azure AD Single Sign-On을 구성하
 
     a. **이름** 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
+    나. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
 
-    c. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
+    다. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
   
@@ -222,7 +222,7 @@ Perception United States(비 UltiPro)에서 Azure AD Single Sign-On을 구성하
 
     ![사용자 할당][201] 
 
-2. 응용 프로그램 목록에서 **Perception United States(비 UltiPro)**를 선택합니다.
+2. 응용 프로그램 목록에서 **Perception United States(비 UltiPro)** 를 선택합니다.
 
     ![응용 프로그램 목록의 Perception United States(비 UltiPro) 링크](./media/active-directory-saas-perceptionunitedstates-tutorial/tutorial_perceptionunitedstates_app.png)  
 
@@ -250,7 +250,7 @@ Perception United States(비 UltiPro)에서 Azure AD Single Sign-On을 구성하
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -267,5 +267,4 @@ Perception United States(비 UltiPro)에서 Azure AD Single Sign-On을 구성하
 [201]: ./media/active-directory-saas-perceptionunitedstates-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-perceptionunitedstates-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-perceptionunitedstates-tutorial/tutorial_general_203.png
-
 

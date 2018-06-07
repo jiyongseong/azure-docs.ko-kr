@@ -1,59 +1,53 @@
 ---
-title: "Azure Stream Analytics 쿼리 테스트 | Microsoft Docs"
-description: "Stream Analytics 작업에서 쿼리를 테스트하는 방법"
-keywords: "쿼리 테스트, 쿼리 문제 해결"
-documentation center: 
+title: 샘플 데이터를 사용하여 Azure Stream Analytics 작업 테스트
+description: Stream Analytics 작업에서 쿼리를 테스트하는 방법
+keywords: 이 문서에서는 Azure Portal을 사용하여 Azure Stream Analytics 작업을 테스트하고, 입력을 샘플링하고, 샘플 데이터를 업로드하는 방법을 설명합니다.
 services: stream-analytics
-author: jeffstokes72
-manager: jhubbard
-editor: cgronlun
-ms.assetid: 
+author: jasonwhowell
+ms.author: jasonh
+ms.reviewer: jasonh
+manager: kfile
 ms.service: stream-analytics
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: data-services
-ms.date: 04/20/2017
-ms.author: jeffstok
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: 9ca96196d2d4b898c79556867b5ff8d8be0f66dc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
-
+ms.topic: conceptual
+ms.date: 04/27/2018
+ms.openlocfilehash: 3dc9091934f3db8ededc13f74d2f302eccace4d6
+ms.sourcegitcommit: 6e43006c88d5e1b9461e65a73b8888340077e8a2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/01/2018
 ---
-# <a name="test-azure-stream-analytics-queries-in-the-azure-portal"></a>Azure Portal에서 Azure Stream Analytics 쿼리 테스트
+# <a name="test-a-stream-analytics-query-with-sample-data"></a>샘플 데이터로 Stream Analytics 쿼리 테스트
 
-Azure Stream Analytics를 사용하면 작업을 시작하거나 중지하지 않고도 Azure Portal에서 쿼리를 테스트할 수 있습니다.
+Azure Stream Analytics를 사용하면 작업을 시작하거나 중지하지 않고도 Azure Portal에서 샘플 데이터를 업로드하고 쿼리를 테스트할 수 있습니다.
 
-## <a name="test-the-input"></a>입력 테스트
+## <a name="upload-sample-data-and-test-the-query"></a>샘플 데이터 업로드 및 쿼리 테스트
 
-1. 샘플 입력 데이터를 테스트하려면 사용자 입력 중 하나를 마우스 오른쪽 단추로 클릭한 다음 **파일에서 샘플 데이터 업로드**를 선택합니다.
+1. Azure 포털에 로그인합니다. 
+
+2. 기존 Stream Analytics 작업을 찾아서 선택합니다.
+
+3. Stream Analytics 작업 페이지의 **작업 토폴로지** 제목 아래에서 **쿼리**를 선택하여 쿼리 편집기 창을 엽니다. 
+
+4. 샘플 입력 데이터로 쿼리를 테스트하려면 아무 입력을 마우스 오른쪽 단추로 클릭합니다.  **파일에서 샘플 데이터 업로드**를 선택합니다.
+
+   데이터가 JSON 형식이어야 합니다. 데이터가 CSV 등의 다른 형식인 경우 업로드하기 전에 JSON으로 변환해야 합니다. [CSV-JSON 변환기](http://www.convertcsv.com/csv-to-json.htm)와 같은 오픈 소스 변환 도구를 사용하여 데이터를 JSON으로 변환할 수 있습니다.
 
     ![Stream Analytics 쿼리 편집기 쿼리 테스트](media/stream-analytics-test-query/stream-analytics-test-query-editor-upload.png)
 
-2. 업로드가 완료되면 **테스트**를 클릭하여 입력한 샘플 데이터에 대해 이 쿼리를 테스트합니다.
+5. 업로드가 완료되면 **테스트**를 선택하여 입력한 샘플 데이터에 대해 이 쿼리를 테스트합니다.
 
     ![Stream Analytics 쿼리 편집기 샘플 데이터 테스트](media/stream-analytics-test-query/stream-analytics-test-query-editor-test.png)
 
-나중에 사용하기 위해 테스트 출력을 저장하려는 경우 사용자 쿼리의 출력이 다운로드 결과 링크와 함께 브라우저에 표시됩니다. 이제 쉽고 반복적으로 쿼리를 수정하고 반복적으로 테스트하여 출력이 어떻게 변화하는지 확인할 수 있습니다.
+6. 나중에 필요할 때 테스트 출력을 사용할 수 있도록 사용자 쿼리의 출력이 다운로드 결과에 대한 링크와 함께 브라우저에 표시됩니다. 
 
-![Stream Analytics 쿼리 편집기 샘플 출력](media/stream-analytics-test-query/stream-analytics-test-query-editor-samples-output.png)
+7. 반복해서 쿼리를 수정하고 테스트하여 출력이 어떻게 변하는지 확인합니다.
 
-쿼리에서 사용된 여러 출력을 통해 두 출력에 대한 결과를 개별적으로 볼 수 있으며 서로 쉽게 전환할 수 있습니다.
+   ![Stream Analytics 쿼리 편집기 샘플 출력](media/stream-analytics-test-query/stream-analytics-test-query-editor-samples-output.png)
 
-브라우저에 표시된 결과에 만족한다면 쿼리를 저장하고, 작업을 시작하여 오류 없이 이벤트를 처리할 수 있습니다.
+   쿼리에 여러 출력을 사용하면 각 결과가 별도의 탭에 표시되며, 간편하게 탭을 전환할 수 있습니다.
 
-## <a name="get-help"></a>도움말 보기
-
-추가 지원이 필요한 경우 [Azure Stream Analytics 포럼](https://social.msdn.microsoft.com/Forums/home?forum=AzureStreamAnalytics)을 참조하세요.
+8. 브라우저에 표시된 결과를 확인했으면 쿼리를 **저장**합니다. 그런 다음, 작업을 **시작**하여 들어오는 이벤트를 처리합니다.
 
 ## <a name="next-steps"></a>다음 단계
-
-* [Azure Stream Analytics 소개](stream-analytics-introduction.md)
-* [Azure Stream Analytics 사용 시작](stream-analytics-real-time-fraud-detection.md)
-* [Azure 스트림 분석 작업 규모 지정](stream-analytics-scale-jobs.md)
-* [Azure 스트림 분석 쿼리 언어 참조](https://msdn.microsoft.com/library/azure/dn834998.aspx)
-* [Azure Stream Analytics 관리 REST API 참조](https://msdn.microsoft.com/library/azure/dn835031.aspx)
-
+> [!div class="nextstepaction"]
+> [Azure  Stream Analytics 쿼리 언어 참조](https://msdn.microsoft.com/library/azure/dn834998.aspx)

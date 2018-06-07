@@ -1,8 +1,8 @@
 ---
-title: "HDInsight에서 Ambari Tez 보기 사용 - Azure | Microsoft Docs"
-description: "Ambari Tez 뷰를 사용하여 HDInsight에서 Tez 작업을 디버깅하는 방법을 알아봅니다."
+title: HDInsight에서 Ambari Tez 보기 사용 - Azure | Microsoft Docs
+description: Ambari Tez 뷰를 사용하여 HDInsight에서 Tez 작업을 디버깅하는 방법을 알아봅니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: Blackmist
 manager: jhubbard
 editor: cgronlun
@@ -10,17 +10,14 @@ ms.assetid: 9c39ea56-670b-4699-aba0-0f64c261e411
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 07/12/2017
+ms.topic: conceptual
+ms.date: 02/27/2018
 ms.author: larryfr
+ms.openlocfilehash: 98874377f31a435e7dd9736410c123ef623928d0
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 65d89309b9eea8544b85d16687baa90d49688d77
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="use-ambari-views-to-debug-tez-jobs-on-hdinsight"></a>HDInsight에서 Ambari 뷰를 사용하여 Tez 작업 디버깅
 
@@ -31,7 +28,7 @@ HDInsight의 Ambari Web UI에는 Tez를 사용하는 작업을 이해 및 디버
 
 ## <a name="prerequisites"></a>필수 조건
 
-* Linux 기반 HDInsight 클러스터입니다. 클러스터를 만드는 단계는 [Linux 기반 HDInsight 사용 시작](hdinsight-hadoop-linux-tutorial-get-started.md)을 참조하세요.
+* Linux 기반 HDInsight 클러스터입니다. 클러스터를 만드는 단계는 [Linux 기반 HDInsight 사용 시작](hadoop/apache-hadoop-linux-tutorial-get-started.md)을 참조하세요.
 * HTML5를 지원하는 최신 웹 브라우저
 
 ## <a name="understanding-tez"></a>Tez 이해
@@ -107,9 +104,8 @@ Tez를 사용하는 Hive 쿼리를 실행하려면 다음 단계를 사용합니
 
 ## <a name="next-steps"></a>다음 단계
 
-이제 Tez 뷰를 사용하는 방법을 배웠으므로 [HDInsight에서 Hive 사용](hdinsight-use-hive.md)에 대해 자세히 알아봅니다.
+이제 Tez 뷰를 사용하는 방법을 배웠으므로 [HDInsight에서 Hive 사용](hadoop/hdinsight-use-hive.md)에 대해 자세히 알아봅니다.
 
 Tez에서 자세한 기술 정보는 [Hortonworks의 Tez 페이지](http://hortonworks.com/hadoop/tez/)를 참조하세요.
 
 HDInsight과 함께 Ambari를 사용하는 방법에 대한 자세한 내용은 [Ambari 웹 UI를 사용하여 HDInsight 클러스터 관리](hdinsight-hadoop-manage-ambari.md)
-

@@ -1,25 +1,24 @@
 ---
-title: "Azure에서 PaaS 데이터베이스 보안 유지 | Microsoft Docs"
+title: Azure에서 PaaS 데이터베이스 보안 유지 | Microsoft Docs
 description: " PaaS 웹 및 모바일 응용 프로그램 보안을 위한 Azure SQL Database 및 SQL Data Warehouse 보안 모범 사례에 대해 자세히 알아봅니다. "
 services: security
 documentationcenter: na
 author: techlake
 manager: MBaldwin
-editor: 
-ms.assetid: 
+editor: ''
+ms.assetid: ''
 ms.service: security
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 07/11/2017
+ms.date: 11/21/2017
 ms.author: terrylan
+ms.openlocfilehash: 3e7dc4dfba001228a4d11e2b21cdeed8e7af45ac
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 18509b3fc3a73118f67583a0b087c58f0e51993c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="securing-paas-databases-in-azure"></a>Azure에서 PaaS 데이터베이스 보안 유지
 
@@ -52,12 +51,12 @@ SQL 인증 대신 Azure AD 인증을 사용하는 이점은 다음과 같습니�
 - 포함된 데이터베이스 사용자를 통해 데이터베이스 수준에서 ID를 인증합니다.
 - SQL Database에 연결되는 응용 프로그램에 대한 토큰 기반 인증을 지원합니다.
 - 도메인 동기화 없이 로컬 Azure AD에 대해 ADFS(도메인 페더레이션) 또는 기본 사용자/암호 인증을 지원합니다.
-- Azure AD는 [MFA(Multi-Factor Authentication)](../multi-factor-authentication/multi-factor-authentication.md)를 포함하는 Active Directory 유니버설 인증을 사용하는 SQL Server Management Studio를 통해 연결하도록 지원합니다. MFA는 전화 통화, 문자 메시지, 모바일 앱 알림 등의 여러 가지 간편한 검증 옵션을 제공하는 강력한 인증을 포함합니다. 자세한 내용은 [SQL 데이터베이스 및 SQL 데이터 웨어하우스를 사용한 Azure AD MFA에 대한 SSMS 지원](../sql-database/sql-database-ssms-mfa-authentication.md)을 참조하세요.
+- Azure AD는 [MFA(Multi-Factor Authentication)](../active-directory/authentication/multi-factor-authentication.md)를 포함하는 Active Directory 유니버설 인증을 사용하는 SQL Server Management Studio를 통해 연결하도록 지원합니다. MFA는 전화 통화, 문자 메시지, 모바일 앱 알림 등의 여러 가지 간편한 검증 옵션을 제공하는 강력한 인증을 포함합니다. 자세한 내용은 [SQL Database 및 SQL Data Warehouse를 사용한 Azure AD MFA에 대한 SSMS 지원](../sql-database/sql-database-ssms-mfa-authentication.md)을 참조하세요.
 
 Azure AD 인증에 대한 자세한 내용은 다음을 참조하세요.
 
-- [Azure Active Directory 인증을 사용하여 SQL 데이터베이스 또는 SQL 데이터 웨어하우스에 연결](../sql-database/sql-database-aad-authentication.md)
-- [Azure SQL 데이터 웨어하우스에 대한 인증](../sql-data-warehouse/sql-data-warehouse-authentication.md)
+- [Azure Active Directory 인증을 사용하여 SQL Database 또는 SQL Data Warehouse에 연결](../sql-database/sql-database-aad-authentication.md)
+- [Azure SQL Data Warehouse에 대한 인증](../sql-data-warehouse/sql-data-warehouse-authentication.md)
 - [Azure AD 인증을 사용하는 Azure SQL DB에 대한 토큰 기반 인증 지원](https://blogs.msdn.microsoft.com/sqlsecurity/2016/02/09/token-based-authentication-support-for-azure-sql-db-using-azure-ad-auth/)(영문)
 
 > [!NOTE]
@@ -92,4 +91,3 @@ Azure SQL은 [Always Encrypted](/sql/relational-databases/security/encryption/al
 
 - [PaaS 배포 보안](security-paas-deployments.md)
 - [Azure App Services를 사용하여 PaaS 웹 및 모바일 응용 프로그램 보안](security-paas-applications-using-app-services.md)
-

@@ -1,8 +1,8 @@
 ---
-title: "HDInsight에서 WebHCat 오류 파악 및 해결 - Azure | Microsoft Docs"
-description: "HDInsight의 WebHCat에서 반환된 일반 오류 및 문제를 해결하는 방법에 대해 알아봅니다."
+title: HDInsight에서 WebHCat 오류 파악 및 해결 - Azure | Microsoft Docs
+description: HDInsight의 WebHCat에서 반환된 일반 오류 및 문제를 해결하는 방법에 대해 알아봅니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: Blackmist
 manager: jhubbard
 editor: cgronlun
@@ -11,18 +11,14 @@ ms.assetid: 1b3d94b1-207d-4550-aece-21dc45485549
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 06/26/2017
+ms.topic: conceptual
+ms.date: 05/16/2018
 ms.author: larryfr
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 6d8162e0d64ec9fc42690392b7c822593c0c2767
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 6370bbcda2312f907f442799e6183dd6d1a9dd50
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="understand-and-resolve-errors-received-from-webhcat-on-hdinsight"></a>HDInsight WebHCat에서 받은 오류 이해 및 해결
 
@@ -50,7 +46,7 @@ HDInsight에서 WebHCat을 사용할 때 수신되는 오류 및 해결 방법�
 
 | 설정 | 기능 | 기본값 |
 | --- | --- | --- |
-| [yarn.scheduler.capacity.maximum-applications][maximum-applications] |동시에 활성화될 수 있는 최대 작업 수(보류 또는 실행 중인) |10,000 |
+| [yarn.scheduler.capacity.maximum-applications][maximum-applications] |동시에 활성화될 수 있는 최대 작업 수(보류 또는 실행 중인) |10000 |
 | [templeton.exec.max-procs][max-procs] |동시에 제공 될 수 있는 최대 요청 수 |20 |
 | [mapreduce.jobhistory.max-age-ms][max-age-ms] |작업 기록이 보존되는 기간(일) |7 일 |
 
@@ -95,4 +91,3 @@ HDInsight에서 WebHCat을 사용할 때 수신되는 오류 및 해결 방법�
 [maximum-applications]: http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.1.3/bk_system-admin-guide/content/setting_application_limits.html
 [max-procs]: https://hive.apache.org/javadocs/hcat-r0.5.0/configuration.html
 [max-age-ms]: http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.0.6.0/ds_Hadoop/hadoop-mapreduce-client/hadoop-mapreduce-client-core/mapred-default.xml
-

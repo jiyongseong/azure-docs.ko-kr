@@ -14,13 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/16/2017
 ms.author: kumud
-translationtype: Human Translation
-ms.sourcegitcommit: bb1ca3189e6c39b46eaa5151bf0c74dbf4a35228
 ms.openlocfilehash: f686685138625a53971f1fc5fc754fd22c9d67b2
-ms.lasthandoff: 03/18/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="performance-considerations-for-traffic-manager"></a>Traffic Manager 성능 고려 사항
 
 이 페이지에서는 Traffic Manager를 사용할 때의 성능 고려 사항에 대해 설명합니다. 다음과 같은 시나리오를 고려해 보세요.
@@ -86,5 +85,4 @@ Traffic Manager 프로필의 성능 및 동작을 이해하는 데 사용할 수
 [Traffic Manager 작업(REST API 참조)](http://go.microsoft.com/fwlink/?LinkId=313584)
 
 [Azure Traffic Manager cmdlet](http://go.microsoft.com/fwlink/p/?LinkId=400769)
-
 

@@ -1,29 +1,30 @@
 ---
-title: "Express를 사용하여 웹앱 빌드(Node.js) | Microsoft Docs"
-description: "클라우드 서비스 자습서를 기반으로 웹앱을 빌드하고 Express 모듈 사용 방법을 보여 주는 자습서입니다."
+title: Azure Cloud Services에 Node.js 앱 빌드 및 배포
+description: Azure Cloud Services에 Express.js 응용 프로그램 빌드 및 배포
 services: cloud-services
 documentationcenter: nodejs
-author: rmcmurray
-manager: erikre
-editor: 
+author: thraka
+manager: timlt
+editor: ''
 ms.assetid: 24f8e7ef-e90d-4554-9b1e-a9b31d5824e5
 ms.service: cloud-services
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: nodejs
 ms.topic: article
-ms.date: 04/25/2017
-ms.author: robmcm
-translationtype: Human Translation
-ms.sourcegitcommit: ff60ebaddd3a7888cee612f387bd0c50799496ac
-ms.openlocfilehash: 331d82a987aebe422ca2f560d856dad9f1b733f3
-ms.lasthandoff: 01/05/2017
-
-
+ms.date: 08/17/2017
+ms.author: adegeo
+ms.openlocfilehash: 8bb78330591b0557b036a161eb83e47b41a8fd43
+ms.sourcegitcommit: 909469bf17211be40ea24a981c3e0331ea182996
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
+ms.locfileid: "34010111"
 ---
-# <a name="build-a-nodejs-web-application-using-express-on-an-azure-cloud-service"></a>Azure 클라우드 서비스에서 Express를 사용하여 Node.js 웹 응용 프로그램 빌드
+# <a name="build-and-deploy-a-nodejs-web-application-using-express-on-an-azure-cloud-services"></a>Azure Cloud Services에서 Express를 사용하여 Node.js 웹 응용 프로그램 빌드 및 배포
+
 Node.js에는 핵심 런타임에 최소한의 기능이 들어 있습니다.
-개발자는 Node.js 응용 프로그램을 개발할 때 추가 기능을 제공하기 위해 종종 타사 모듈을 사용합니다. 이 자습서에서는 Node.js 웹 응용 프로그램을 만들기 위한 MVC 프레임워크를 제공하는 [Express][Express] 모듈을 사용하여 새 응용 프로그램을 만들어봅니다.
+개발자는 Node.js 응용 프로그램을 개발할 때 추가 기능을 제공하기 위해 종종 타사 모듈을 사용합니다. 이 자습서에서는 Node.js 웹 응용 프로그램을 만들기 위해 MVC 프레임워크를 제공하는 [Express](https://github.com/expressjs/express) 모듈을 사용하여 새 응용 프로그램을 만듭니다.
 
 아래에는 완성된 응용 프로그램의 스크린샷이 표시되어 있습니다.
 
@@ -97,7 +98,7 @@ Node.js에는 핵심 런타임에 최소한의 기능이 들어 있습니다.
    
    ![index.jade 파일의 내용](./media/cloud-services-nodejs-develop-deploy-express-app/getting-started-19.png)
    
-   Jade는 Express 응용 프로그램에서 사용하는 기본 뷰 엔진입니다. Jade 뷰 엔진에 대한 자세한 내용은 [http://jade-lang.com][http://jade-lang.com](영문)을 참조하세요.
+   Jade는 Express 응용 프로그램에서 사용하는 기본 뷰 엔진입니다. Jade 뷰 엔진에 대한 자세한 내용은 [http://jade-lang.com][http://jade-lang.com]을 참조하세요.
 2. **in Azure**를 추가하여 텍스트의 마지막 줄을 수정합니다.
    
    ![index.jade 파일, 마지막 줄: p Welcome to \#{title} in Azure](./media/cloud-services-nodejs-develop-deploy-express-app/node31.png)
@@ -123,6 +124,5 @@ Azure PowerShell 창에서 **Publish-AzureServiceProject** cmdlet을 사용하�
 [Node.js Web Application]: http://www.windowsazure.com/develop/nodejs/tutorials/getting-started/
 [Express]: http://expressjs.com/
 [http://jade-lang.com]: http://jade-lang.com
-
 
 

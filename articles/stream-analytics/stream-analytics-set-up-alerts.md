@@ -1,30 +1,21 @@
 ---
-title: "Stream Analytics에서 쿼리에 대한 경고 설정 | Microsoft Docs"
-description: "Stream Analytics 경고 이해"
-keywords: "경고 설정"
+title: Azure Stream Analytics 작업에 대한 모니터링 경고 설정
+description: 이 아티클에서는 Azure Portal을 사용하여 Azure Stream Analytics 작업에 대한 모니터링 및 경고를 설정하는 방법을 설명합니다.
 services: stream-analytics
-documentationcenter: 
-author: jeffstokes72
-manager: jhubbard
-editor: cgronlun
-ms.assetid: 9952e2cf-b335-4a5c-8f45-8d3e1eda2e20
+author: jseb225
+ms.author: jeanb
+manager: kfile
+ms.reviewer: jasonh
 ms.service: stream-analytics
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: data-services
+ms.topic: conceptual
 ms.date: 06/26/2017
-ms.author: jeffstok
-ms.translationtype: Human Translation
-ms.sourcegitcommit: bb794ba3b78881c967f0bb8687b1f70e5dd69c71
-ms.openlocfilehash: a0c9c771c273728cf35d9cd727e1570e2a9bff5a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.openlocfilehash: fb69f1b52e5b17dd6794c896969c29003a929c9b
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-# <a name="set-up-alerts-for-azure-stream-analytics-jobs"></a>Azure Stream Analytics 작업에 대한 경고 설정
-## <a name="introduction-monitor-page"></a>소개: 모니터 페이지
+# <a name="tutorial-set-up-alerts-for-azure-stream-analytics-jobs"></a>자습서: Azure Stream Analytics 작업에 대한 경고 설정
 메트릭이 지정한 조건에 도달하면 경고를 트리거하도록 경고를 설정할 수 있습니다. 예를 들어 다음과 같은 조건에 대한 경고를 설정할 수 있습니다.
 
 `If there are zero input events in the last 5 minutes, send email notification to sa-admin@example.com`
@@ -52,13 +43,12 @@ Azure Portal에서 경고를 구성에 대한 자세한 내용은 [경고 알림
 
 
 ## <a name="get-help"></a>도움말 보기
-추가 지원이 필요할 경우 [Azure 스트림 분석 포럼](https://social.msdn.microsoft.com/Forums/home?forum=AzureStreamAnalytics)
+추가 지원이 필요할 경우 [Azure Stream Analytics 포럼](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureStreamAnalytics)
 
 ## <a name="next-steps"></a>다음 단계
 * [Azure Stream Analytics 소개](stream-analytics-introduction.md)
 * [Azure Stream Analytics 사용 시작](stream-analytics-get-started.md)
-* [Azure 스트림 분석 작업 규모 지정](stream-analytics-scale-jobs.md)
-* [Azure 스트림 분석 쿼리 언어 참조](https://msdn.microsoft.com/library/azure/dn834998.aspx)
+* [Azure  Stream Analytics 작업 규모 지정](stream-analytics-scale-jobs.md)
+* [Azure  Stream Analytics 쿼리 언어 참조](https://msdn.microsoft.com/library/azure/dn834998.aspx)
 * [Azure Stream Analytics 관리 REST API 참조](https://msdn.microsoft.com/library/azure/dn835031.aspx)
-
 

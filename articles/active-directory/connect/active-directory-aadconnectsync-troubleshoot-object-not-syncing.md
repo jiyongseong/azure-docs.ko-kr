@@ -1,12 +1,12 @@
 ---
-title: "Azure AD와 동기화되지 않은 개체 문제 해결 | Microsoft Docs"
-description: "개체가 Azure AD와 동기화되지 않는 이유를 해결합니다."
+title: Azure AD와 동기화되지 않은 개체 문제 해결 | Microsoft Docs
+description: 개체가 Azure AD와 동기화되지 않는 이유를 해결합니다.
 services: active-directory
-documentationcenter: 
-author: andkjell
-manager: femila
-editor: 
-ms.assetid: 
+documentationcenter: ''
+author: billmath
+manager: mtillman
+editor: ''
+ms.assetid: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
@@ -14,16 +14,18 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/13/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2f03ba60d81e97c7da9a9fe61ecd419096248763
-ms.openlocfilehash: 3c9642e5c2da92203be2bc23820e5b6f544de660
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/04/2017
-
+ms.openlocfilehash: 5bc0fd3854488704f5368bfe1134d8fa9c959c9b
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
 # <a name="troubleshoot-an-object-that-is-not-synchronizing-to-azure-ad"></a>Azure AD와 동기화되지 않는 개체 문제 해결
 
 개체가 Azure AD와 예상대로 동기화되지 않을 경우 몇 가지 이유로 인한 것일 수 있습니다. Azure AD에서 오류 전자 메일을 받았거나 Azure AD Connect Health에 오류 메시지가 표시될 경우 [내보내기 오류 문제 해결](active-directory-aadconnect-troubleshoot-sync-errors.md)을 대신 읽어보세요. 하지만 개체가 Azure AD에 없는 문제가 발생하는 경우 이 항목을 참조하세요. 여기서는 온-프레미스 구성 요소 Azure AD Connect 동기화에서 오류를 찾는 방법을 설명합니다.
+
+>[!IMPORTANT]
+>버전 <verison> 이상인 AAD(Azure Active Directory) Connect 배포의 경우 개체 동기화 문제를 해결하는 데 마법사에서 [문제 해결 작업](active-directory-aadconnect-troubleshoot-objectsync.md)을 사용할 수 있습니다. 
 
 오류를 찾기 위해 다음 순서대로 몇 가지 위치를 확인해보겠습니다.
 
@@ -37,7 +39,7 @@ ms.lasthandoff: 03/04/2017
 Synchronization Service Manager의 작업 탭에서 문제 해결을 시작합니다. 작업 탭에서는 최근 작업의 결과를 보여 줍니다.  
 ![Sync Service Manager](./media/active-directory-aadconnectsync-troubleshoot-object-not-syncing/operations.png)  
 
-위쪽 절반에 모든 실행이 연대별 순서로 표시됩니다. 기본적으로 작업 로그는 지난 7일에 대한 정보를 유지하지만 이 설정은 [스케줄러](active-directory-aadconnectsync-feature-scheduler.md)에 따라 변동될 수 있습니다. 성공 상태를 표시하지 않는 실행을 찾아보려고 합니다. 헤더를 클릭하여 정렬을 변경할 수 있습니다.
+위쪽 절반에서 모든 실행이 시간순으로 표시됩니다. 기본적으로 작업 로그는 지난 7일에 대한 정보를 유지하지만 이 설정은 [스케줄러](active-directory-aadconnectsync-feature-scheduler.md)에 따라 변동될 수 있습니다. 성공 상태를 표시하지 않는 실행을 찾아보려고 합니다. 헤더를 클릭하여 정렬을 변경할 수 있습니다.
 
 **상태** 열은 가장 중요한 정보이며 실행에 대해 가장 심각한 문제를 보여 줍니다. 다음은 조사할 우선 순위에 따른 가장 일반적인 상태에 대한 간단한 요약입니다(여기서 *는 여러 가능한 오류 문자열을 나타냄).
 
@@ -79,7 +81,7 @@ Synchronization Service Manager의 작업 탭에서 문제 해결을 시작합�
 
 또 다른 유용한 검색 방법은 Azure AD Connect를 선택하고 **범위**에서 **보류 중인 가져오기**를 선택한 후 **추가** 확인란을 선택하는 것입니다. 이 검색은 온-프레미스 개체와 연결될 수 없는 Azure AD의 모든 동기화된 개체를 제공합니다.  
 ![커넥터 공간 검색 고아](./media/active-directory-aadconnectsync-troubleshoot-object-not-syncing/cssearchorphan.png)  
-이러한 개체는 다른 동기화 엔진 또는 다른 필터링 구성을 갖는 동기화 엔진에서 만들어졌습니다. 이 보기는 더 이상 관리되지 않는 **고아** 개체 목록입니다. 이 목록을 검토하고 [Azure AD PowerShell](http://aka.ms/aadposh) cmdlet을 사용하여 이러한 개체를 제거하는 것이 좋습니다.
+이러한 개체는 다른 동기화 엔진 또는 다른 필터링 구성을 갖는 동기화 엔진에서 만들어졌습니다. 이 보기는 더 이상 관리되지 않는 **고아** 개체 목록입니다. 이 목록을 검토하고 [Azure AD PowerShell](https://aka.ms/aadposh) cmdlet을 사용하여 이러한 개체를 제거하는 것이 좋습니다.
 
 ### <a name="cs-import"></a>CS 가져오기
 cs 개체를 열면 위쪽에 여러 개의 탭이 표시됩니다. **가져오기** 탭은 가져온 후에 준비된 데이터를 표시합니다.  
@@ -108,7 +110,7 @@ cs 개체를 열면 위쪽에 여러 개의 탭이 표시됩니다. **가져오�
 ![Sync Service Manager](./media/active-directory-aadconnectsync-troubleshoot-object-not-syncing/previewresult.png)
 
 ### <a name="log"></a>로그
-로그 페이지를 사용하여 암호 동기화 상태와 기록을 볼 수 있습니다. 자세한 내용은 [암호 동기화 문제 해결](active-directory-aadconnectsync-troubleshoot-password-synchronization.md)을 참조하세요.
+로그 페이지를 사용하여 암호 동기화 상태와 기록을 볼 수 있습니다. 자세한 내용은 [암호 해시 동기화 문제 해결](active-directory-aadconnectsync-troubleshoot-password-hash-synchronization.md)을 참조하세요.
 
 ## <a name="metaverse-object-properties"></a>메타버스 개체 속성
 일반적으로는 원본 Active Directory [커넥터 공간](#connector-space)에서 검색을 시작하는 것이 좋습니다. 하지만 메타버스에서 검색을 시작할 수도 있습니다.
@@ -137,7 +139,7 @@ cs 개체를 열면 위쪽에 여러 개의 탭이 표시됩니다. **가져오�
 - 사용자가 표시되는 각 Active Directory 포리스트. 이 표시에는 foreignSecurityPrincipals 및 Contact 개체가 포함될 수 있습니다.
 - Azure AD의 커넥터.
 
-Azure AD에 대한 커넥터가 없으면 [MV 특성](#MV-attributes)을 읽어 Azure AD로 프로비전되기 위한 기준을 확인합니다.
+Azure AD에 대한 커넥터가 없으면 [MV 특성](#mv-attributes)을 읽어 Azure AD로 프로비전되기 위한 기준을 확인합니다.
 
 이 탭을 사용하여 [커넥터 공간 개체](#connector-space-object-properties)로 이동할 수도 있습니다. 행을 선택하고 **속성**을 클릭합니다.
 
@@ -145,4 +147,3 @@ Azure AD에 대한 커넥터가 없으면 [MV 특성](#MV-attributes)을 읽어 
 [Azure AD Connect 동기화](active-directory-aadconnectsync-whatis.md) 구성에 대해 자세히 알아봅니다.
 
 [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)에 대해 자세히 알아봅니다.
-

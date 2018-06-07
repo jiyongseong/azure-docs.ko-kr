@@ -1,42 +1,35 @@
 ---
-title: "Azure B2C용 Node.js 웹앱에 로그인 추가 | Microsoft Docs"
-description: "B2C 테넌트를 사용하여 사용자가 로그인하는 Node.js 웹앱을 작성하는 방법입니다."
+title: Node.js 웹앱에 로그인 추가 - Azure Active Directory B2C
+description: Azure Active Directory B2C를 사용하여 사용자가 로그인하는 Node.js 웹앱을 작성하는 방법입니다.
 services: active-directory-b2c
-documentationcenter: 
-author: dstrockis
-manager: mbaldwin
-editor: 
-ms.assetid: db97f84a-1f24-447b-b6d2-0265c6896b27
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: javascript
-ms.topic: hero-article
+ms.topic: article
 ms.date: 03/10/2017
-ms.author: xerners
-ms.translationtype: Human Translation
-ms.sourcegitcommit: db7cb109a0131beee9beae4958232e1ec5a1d730
-ms.openlocfilehash: a4d9394983539da52105bda6cf06273205f8b0ad
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/18/2017
-
-
+ms.author: davidmu
+ms.openlocfilehash: b10b2338bfbcd449075e612ae00cc23802dce3a9
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
-
 # <a name="azure-ad-b2c-add-sign-in-to-a-nodejs-web-app"></a>Azure AD B2C: Node.js 웹앱에 로그인 추가
 
-**Passport** 는 Node.js에 대한 인증 미들웨어입니다. 매우 유연한 모듈식 Passport는 어떤 Express 기반 또는 Resitify 웹 응용 프로그램에도 원활하게 설치할 수 있습니다. 포괄적인 전략 모음이 사용자 이름 및 암호, Facebook, Twitter 등을 사용하는 인증을 지원합니다.
+**Passport** 는 Node.js에 대한 인증 미들웨어입니다. 유연한 모듈식 Passport는 어떤 Express 기반 또는 Restify 웹 응용 프로그램에도 원활하게 설치할 수 있습니다. 포괄적인 전략 모음이 사용자 이름 및 암호, Facebook, Twitter 등을 사용하는 인증을 지원합니다.
 
-Microsoft는 Azure AD(Azure Active Directory)에 대한 전략을 개발했습니다. 여기서는 이 모듈을 설치하고 Azure AD `passport-azure-ad` 플러그 인에 추가합니다.
+Azure AD(Azure Active Directory)의 경우 이 모듈을 설치한 다음 Azure AD `passport-azure-ad` 플러그 인을 추가할 수 있습니다.
 
-이렇게 하려면 다음을 수행해야 합니다.
+그러려면 다음 작업을 수행해야 합니다.
 
 1. Azure AD를 사용하여 응용 프로그램을 등록합니다.
 2. 앱을 설정하여 `passport-azure-ad` 플러그 인을 사용합니다.
 3. Passport를 사용하여 Azure AD에 로그인 및 로그아웃 요청을 실행합니다.
 4. 사용자 데이터를 인쇄합니다.
 
-이 자습서에 대한 코드는 [GitHub에서 유지 관리됩니다](https://github.com/AzureADQuickStarts/B2C-WebApp-OpenIDConnect-NodeJS). 자습서에 따라 [.zip 파일로 앱 구조를 다운로드](https://github.com/AzureADQuickStarts/B2C-WebApp-OpenIDConnect-NodeJS/archive/skeleton.zip)할 수 있습니다. 구조를 복제할 수도 있습니다.
+이 자습서에 대한 코드는 [GitHub에서 유지 관리됩니다](https://github.com/AzureADQuickStarts/B2C-WebApp-OpenIDConnect-NodeJS). 자습서에 따라 [.zip 파일로 앱 구조를 다운로드](https://github.com/AzureADQuickStarts/B2C-WebApp-OpenIDConnect-NodeJS/archive/master.zip)할 수 있습니다. 기본 구조를 복제할 수도 있습니다.
 
 ```git clone --branch skeleton https://github.com/AzureADQuickStarts/B2C-WebApp-OpenIDConnect-NodeJS.git```
 
@@ -53,9 +46,7 @@ Azure AD B2C를 사용하기 전에 디렉터리 또는 테넌트를 만들어�
 - 응용 프로그램에 **웹앱**/**웹 API**를 포함합니다.
 - **회신 URL**로 `http://localhost:3000/auth/openid/return`을 입력합니다. 이 코드 샘플에 대한 기본 URL입니다.
 - 응용 프로그램에 **응용 프로그램 암호** 를 만들고 복사합니다. 이 시간은 나중에 필요합니다. 참고로 이 값은 사용하기 전에 [XML 이스케이프](https://www.w3.org/TR/2006/REC-xml11-20060816/#dt-escape) 되어야 합니다.
-- 앱에 할당된 **응용 프로그램 ID** 를 복사합니다. 나중에도 필요합니다.
-
-[!INCLUDE [active-directory-b2c-devquickstarts-v2-apps](../../includes/active-directory-b2c-devquickstarts-v2-apps.md)]
+- 앱에 할당된 **응용 프로그램 ID**를 복사합니다. 나중에도 필요합니다.
 
 ## <a name="create-your-policies"></a>정책 만들기
 
@@ -107,7 +98,7 @@ OpenID Connect 인증 프로토콜을 사용하도록 빠른 미들웨어를 구
 프로젝트의 루트에서 `app.js` 파일을 엽니다. 다음 호출을 추가하여 `passport-azure-ad`와 함께 제공되는 `OIDCStrategy` 전략을 호출합니다.
 
 
-```JavaScript
+```javascript
 var OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
 
 // Add some logging
@@ -118,7 +109,7 @@ var log = bunyan.createLogger({
 
 로그인 요청을 처리하도록 참조한 전략을 사용합니다.
 
-```JavaScript
+```javascript
 // Use the OIDCStrategy in Passport (Section 2).
 //
 //   Strategies in Passport require a "validate" function that accepts
@@ -161,7 +152,7 @@ Passport는 Twitter, Facebook을 포함한 모든 전략에 비슷한 패턴을 
 
 Passport의 필요에 따라 로그인한 사용자를 추적할 수 있도록 하는 메서드를 추가합니다. 여기에는 사용자 정보의 직렬화 및 역직렬화가 포함됩니다.
 
-```JavaScript
+```javascript
 
 // Passport session setup. (Section 2)
 
@@ -197,7 +188,7 @@ var findByEmail = function(email, fn) {
 
 빠른 엔진을 로드하는 코드를 추가합니다. 다음 예제에서는 빠른 설치가 제공하는 기본값 `/views` 및 `/routes` 패턴의 사용을 확인할 수 있습니다.
 
-```JavaScript
+```javascript
 
 // configure Express (Section 2)
 
@@ -224,7 +215,7 @@ app.configure(function() {
 
 실제 로그인 요청을 `passport-azure-ad` 엔진에 전달하는 `POST` 경로를 추가합니다.
 
-```JavaScript
+```javascript
 
 // Our Auth routes (Section 3)
 
@@ -274,7 +265,7 @@ app.post('/auth/openid/return',
 
 우선 기본값, 로그인, 계정 및 로그아웃 메서드를 `app.js` 파일에 추가합니다.
 
-```JavaScript
+```javascript
 
 //Routes (Section 4)
 
@@ -309,7 +300,7 @@ app.get('/logout', function(req, res){
 
 `app.js`의 마지막 부분에 `/account` 경로에 사용되는 `EnsureAuthenticated` 메서드를 추가합니다.
 
-```JavaScript
+```javascript
 
 // Simple route middleware to ensure that the user is authenticated. (Section 4)
 
@@ -326,7 +317,7 @@ function ensureAuthenticated(req, res, next) {
 
 마지막으로, `app.js`에서 서버 자체를 만듭니다.
 
-```JavaScript
+```javascript
 
 app.listen(3000);
 
@@ -339,7 +330,7 @@ app.listen(3000);
 
 루트 디렉터리 아래에 `/routes/index.js` 경로를 만듭니다.
 
-```JavaScript
+```javascript
 
 /*
  * GET home page.
@@ -352,7 +343,7 @@ exports.index = function(req, res){
 
 루트 디렉터리 아래에 `/routes/user.js` 경로를 만듭니다.
 
-```JavaScript
+```javascript
 
 /*
  * GET users listing.
@@ -367,7 +358,7 @@ exports.list = function(req, res){
 
 루트 디렉터리 아래에 `/views/index.ejs` 뷰를 만듭니다. 로그인 및 로그아웃에 대한 정책을 호출하는 단순한 페이지입니다. 또한 이를 사용하여 계정 정보를 얻을 수 있습니다. 사용자가 로그인한 증명을 제공하는 요청을 통해 전달되기 때문에 조건부 `if (!user)`를 사용할 수 있습니다.
 
-```JavaScript
+```javascript
 <% if (!user) { %>
     <h2>Welcome! Please sign in.</h2>
     <a href="/login/?p=your facebook policy">Sign in with Facebook</a>
@@ -382,7 +373,7 @@ exports.list = function(req, res){
 
 `passport-azure-ad`가 사용자 요청에 포함한 추가 정보를 볼 수 있도록 루트 디렉터리에 `/views/account.ejs` 뷰를 만듭니다.
 
-```Javascript
+```javascript
 <% if (!user) { %>
     <h2>Welcome! Please sign in.</h2>
     <a href="/login">Sign in</a>
@@ -406,7 +397,7 @@ exports.list = function(req, res){
 
 전자 메일 또는 Facebook을 사용하여 앱에 등록 또는 로그인합니다. 로그아웃했다가 다른 사용자로 다시 로그인합니다.
 
-##<a name="next-steps"></a>다음 단계
+## <a name="next-steps"></a>다음 단계
 
 참조를 위해 완성된 샘플(사용자 구성 값 제외)이 [.zip 파일로 제공](https://github.com/AzureADQuickStarts/B2C-WebApp-OpenIDConnect-NodeJS/archive/complete.zip)됩니다. 또한 GitHub에서 복제할 수 있습니다.
 
@@ -426,4 +417,3 @@ You can now move on to more advanced B2C topics. You might try:
 [Customizing the your B2C App's UX >>]()
 
 -->
-

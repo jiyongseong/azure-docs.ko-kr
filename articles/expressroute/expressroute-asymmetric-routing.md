@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/10/2016
 ms.author: osamam
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6adb1dd25c24b18b834dd921c2586ef29d56dc81
 ms.openlocfilehash: 8568c13d2834a0643e15ab1814a35c92123837d1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="asymmetric-routing-with-multiple-network-paths"></a>여러 네트워크 경로를 포함한 비대칭 라우팅
 이 문서에서는 네트워크 원본과 대상 간에 여러 경로를 사용할 수 있을 때 전달 및 반환 네트워크 트래픽에서 다른 경로를 사용하는 방법을 설명합니다.
@@ -73,5 +71,4 @@ Express 경로 및 인터넷에 동일한 NAT(네트워크 주소 변환) 풀을
 
 ## <a name="asymmetric-routing-detection"></a>비대칭 라우팅 감지
 경로 추적은 네트워크 트래픽이 예상된 경로를 탐색하도록 하는 가장 좋은 방법입니다. 온-프레미스 SMTP 서버에서 Microsoft로 전달되는 트래픽이 인터넷 경로를 사용해야 하는 경우 예상된 경로 추적은 SMTP 서버에서 Office 365로 이동합니다. 결과를 통해 트래픽이 네트워크를 Express 경로가 아닌 인터넷에 남겨두는지 유효성을 검사합니다.
-
 

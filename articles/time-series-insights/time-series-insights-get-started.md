@@ -1,58 +1,67 @@
 ---
 title: "Azure Time Series Insights 환경 만들기 | Microsoft Docs"
-description: "이 자습서에서는 몇 분 안에 Time Series 환경을 만들고, 이벤트 원본에 연결하고, 이벤트 데이터 분석을 준비하는 방법을 배웁니다."
-keywords: 
+description: "이 문서에서는 Azure Portal을 사용하여 새로운 Time Series Insights 환경을 만드는 방법을 설명합니다."
 services: time-series-insights
-documentationcenter: 
-author: op-ravi
-manager: santoshb
-editor: cgronlun
-ms.assetid: 
 ms.service: time-series-insights
-ms.devlang: na
-ms.topic: get-started-article
-ms.tgt_pltfrm: na
+author: ashannon7
+ms.author: anshan
+manager: jhubbard
+editor: MicrosoftDocs/tsidocs
+ms.reviewer: v-mamcge, jasonh, kfile, anshan
 ms.workload: big-data
-ms.date: 04/21/2017
-ms.author: omravi
-translationtype: Human Translation
-ms.sourcegitcommit: 1cc1ee946d8eb2214fd05701b495bbce6d471a49
-ms.openlocfilehash: eb710795916a2d7beea75a6408a0982fb4dc8750
-ms.lasthandoff: 04/26/2017
-
+ms.topic: article
+ms.date: 11/15/2017
+ms.openlocfilehash: 20156432e17d5eca90779271bd18dc49fa988d7c
+ms.sourcegitcommit: 719dd33d18cc25c719572cd67e4e6bce29b1d6e7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/08/2018
 ---
-
 # <a name="create-a-new-time-series-insights-environment-in-the-azure-portal"></a>Azure Portal에서 Time Series Insights 환경 만들기
+이 문서에서는 Azure Portal을 사용하여 새로운 Time Series Insights 환경을 만드는 방법을 설명합니다.
 
-Time Series Insights 환경은 수신 및 저장 기능이 있는 Azure 리소스입니다. 고객은 Azure Portal을 통해 환경에 필요한 용량을 프로비전합니다.
+Time Series Insights를 사용하여 Azure IoT Hub 및 Event Hubs로 이동하는 데이터를 빠른 시간 안에 시각화하고 쿼리할 수 있으므로 대용량 시계열 데이터를 빠르게 쿼리할 수 있습니다.  이 기능은 IoT(사물 인터넷) 규모에 맞게 설계되었으며 테라바이트 단위의 데이터를 처리할 수 있습니다.
 
 ## <a name="steps-to-create-the-environment"></a>환경을 만드는 단계
-
 다음 단계에 따라 환경을 만듭니다.
 
-1.    [Azure 포털](https://portal.azure.com)에 로그인합니다.
-2.    왼쪽 위 모퉁이에서 더하기 기호(“+”)를 클릭합니다.
-3.    검색 상자에서 "Time Series Insights"를 검색합니다.
+1.  [Azure Portal](https://portal.azure.com)에 로그인합니다.
 
-  ![Time Series Insights 환경 만들기](media/get-started/getstarted-create-environment1.png)
+2.  **+새로 만들기** 단추를 선택합니다.
 
-4.    “Time Series Insights”를 선택하고 “만들기”를 클릭합니다.
+3.  **사물 인터넷** 범주를 선택하고 **Time Series Insights**를 선택합니다.
 
-  ![Time Series Insights 리소스 그룹 만들기](media/get-started/getstarted-create-environment2.png)
+   ![Time Series Insights 환경 만들기](media/time-series-insights-get-started/1-new-tsi.png)
 
-5.    환경 이름을 지정합니다. 이 이름은 [time series 탐색기](https://insights.timeseries.azure.com)에서 환경을 나타냅니다.
-6.    구독을 선택합니다. 이벤트 원본이 포함된 구독을 선택해야 합니다. Time Series Insights는 같은 구독에 있는 Azure IoT Hub 및 Event Hub 리소스를 자동으로 검색할 수 있습니다.
-7.    리소스 그룹을 선택하거나 만듭니다. 리소스 그룹은 함께 사용되는 Azure 리소스 컬렉션입니다.
-8.    호스팅 위치를 선택합니다. 데이터 센터 간에 데이터를 이동하지 못하게 하려면 이벤트 원본이 포함된 위치를 선택합니다.
-9.    가격 책정 계층을 선택합니다.
-10.    용량을 선택합니다. 환경을 만든 후 환경의 용량을 변경할 수 있습니다.
-11.    환경을 만듭니다. 로그인할 때마다 손쉽게 액세스할 수 있도록 환경을 대시보드에 고정할 수도 있습니다.
+4.  **Time Series Insights** 페이지에서 **만들기**를 선택합니다.
 
-  ![Time Series Insights를 만들고 대시보드에 고정](media/get-started/getstarted-create-environment3.png)
+5. 필수 매개 변수를 입력합니다. 다음 표에서는 각 매개 변수에 대해 설명합니다.
+   
+   ![Time Series Insights 리소스 그룹 만들기](media/time-series-insights-get-started/2-create-tsi.png)
+   
+   설정|제안 값|설명
+   ---|---|---
+   환경 이름 | 고유한 이름 | 이 이름은 [Time Series 탐색기](https://insights.timeseries.azure.com)에서 해당 환경을 나타내는 데 사용됩니다.
+   구독 | 사용자의 구독 | 구독이 여러 개인 경우 이벤트 원본을 포함하는 구독을 선택합니다. Time Series Insights는 같은 구독에 있는 Azure IoT Hub 및 Event Hub 리소스를 자동으로 검색할 수 있습니다.
+   리소스 그룹 | 새로 만들기 또는 기존 항목 사용 | 리소스 그룹은 함께 사용되는 Azure 리소스 컬렉션입니다. 예를 들어 이벤트 허브 또는 IoT Hub를 포함하는 기존 리소스 그룹을 선택할 수 있습니다. 또는 이 리소스가 다른 리소스와 관련이 없는 경우에는 새로 만들 수 있습니다.
+   위치 | 이벤트 원본에 가장 가까운 위치 | 지역 외부로 데이터를 이동할 때 지역 간 및 영역 간 대역폭 비용이 추가되고 대기 시간이 늘어나지 않도록 하기 위해 이벤트 원본 데이터를 포함하는 동일한 데이터 센터 위치를 선택하는 것이 좋습니다.
+   가격 책정 계층  | S1 | 필요한 처리량을 선택합니다. 최저 비용의 시작 용량을 사용하려면 S1을 선택합니다.
+   용량 | 1 | 용량은 선택한 SKU와 관련된 입력 속도, 저장 용량 및 비용에 적용되는 승수입니다.  환경을 만든 후 환경의 용량을 변경할 수 있습니다. 최저 비용을 원할 경우 용량 1을 선택합니다. 
+  
+6. **대시보드에 고정**을 선택하면 나중에 자신의 Time Series 환경에 가장 쉽게 액세스할 수 있습니다.
+
+   ![Time Series Insights를 만들고 대시보드에 고정](media/time-series-insights-get-started/3-pin-create.png)
+
+7. **만들기**를 선택하여 프로비전 프로세스를 시작합니다. 이 작업에 몇 분 정도가 소요됩니다.
+
+8. 배포 프로세스를 모니터링하려면 **알림** 기호(종 모양)를 선택합니다.
+
+   ![알림 보기](media/time-series-insights-get-started/4-notifications.png)
+
+배포가 성공하면 **리소스로 이동**을 선택하여 다른 속성을 구성하고, 데이터 액세스 정책을 사용하여 보안을 설정하고, 이벤트 원본을 추가하고, 기타 작업을 수행할 수 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
-
-* [Time Series Insights 포털](https://insights.timeseries.azure.com)에서 환경에 액세스하도록 [데이터 액세스 정책 정의](time-series-insights-data-access.md)
-* [이벤트 원본 만들기](time-series-insights-add-event-source.md)
-* 이벤트 원본으로 [이벤트 보내기](time-series-insights-send-events.md)
-
+* 환경을 보호하기 위한 [데이터 액세스 정책 정의](time-series-insights-data-access.md)
+* Azure Time Series Insights 환경에 [이벤트 허브 이벤트 원본 추가](time-series-insights-how-to-add-an-event-source-eventhub.md) 
+* 이벤트 원본으로 [이벤트 전송](time-series-insights-send-events.md)
+* [Time Series Insights 탐색기](https://insights.timeseries.azure.com)에서 환경 보기

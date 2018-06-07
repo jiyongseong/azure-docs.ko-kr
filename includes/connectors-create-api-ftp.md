@@ -1,7 +1,7 @@
 ### <a name="prerequisites"></a>필수 조건
 * [FTP](https://wikipedia.org/wiki/File_Transfer_Protocol) 계정  
 
-논리 앱에서 FTP 계정을 사용하려면 먼저 FTP 계정에 연결하도록 논리 앱에 권한을 부여해야 합니다. 다행히 Azure 포털의 논리 앱 내에서 이를 쉽게 수행할 수 있습니다.  
+논리 앱에서 FTP 계정을 사용하려면 먼저 FTP 계정에 연결하도록 논리 앱에 권한을 부여해야 합니다. 다행히 Azure Portal의 논리 앱 내에서 이를 쉽게 수행할 수 있습니다.  
 
 FTP 계정에 연결하도록 논리 앱에 권한을 부여하는 단계는 다음과 같습니다.  
 

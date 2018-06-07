@@ -1,9 +1,9 @@
 ---
 title: "Azure 모바일 앱에 대해 오프라인 동기화 사용(Cordova) | Microsoft Docs"
-description: "앱 서비스 모바일 앱을 사용하여 Cordova 응용 프로그램에서 오프라인 데이터를 캐시 및 동기화하는 방법을 알아봅니다."
+description: "App Service 모바일 앱을 사용하여 Cordova 응용 프로그램에서 오프라인 데이터를 캐시 및 동기화하는 방법을 알아봅니다."
 documentationcenter: cordova
-author: ggailey777
-manager: syntaxc4
+author: conceptdev
+manager: crdun
 editor: 
 services: app-service\mobile
 ms.assetid: 1a3f685d-f79d-4f8b-ae11-ff96e79e9de9
@@ -13,25 +13,24 @@ ms.tgt_pltfrm: mobile-cordova-ios
 ms.devlang: dotnet
 ms.topic: article
 ms.date: 10/30/2016
-ms.author: glenga
+ms.author: crdun
+ms.openlocfilehash: c12328a441a8cc438fa3e974863cc8adf8651b50
+ms.sourcegitcommit: df4ddc55b42b593f165d56531f591fdb1e689686
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 45e80ca672dfdb6defc6e5c1aac3d29f5479125c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/04/2018
 ---
 # <a name="enable-offline-sync-for-your-cordova-mobile-app"></a>Cordova 모바일 앱에 대해 오프라인 동기화 사용
 [!INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
 
-이 자습서에서는 Cordova용 Azure 모바일 앱의 오프라인 동기화 기능을 소개합니다. 오프라인 동기화를 사용하면 최종 사용자는 네트워크에 연결되어 있지 않을 때도 모바일 앱&mdash;데이터 보기, 추가 또는 수정&mdash;과 같은 상호 작용을 수행할 수 있습니다. 변경 내용은 로컬 데이터베이스에 저장됩니다.  장치가 다시 온라인 상태가 되면 이러한 변경 내용이 원격 서비스와 동기화됩니다.
+이 자습서에서는 Cordova용 Azure Mobile Apps의 오프라인 동기화 기능을 소개합니다. 오프라인 동기화를 사용하면 최종 사용자는 네트워크에 연결되어 있지 않을 때도 모바일 앱&mdash;데이터 보기, 추가 또는 수정&mdash;과 같은 상호 작용을 수행할 수 있습니다. 변경 내용은 로컬 데이터베이스에 저장됩니다.  장치가 다시 온라인 상태가 되면 이러한 변경 내용이 원격 서비스와 동기화됩니다.
 
-이 자습서는 [Apache Cordova 빠른 시작]자습서를 완료할 때 만든 모바일 앱에 대한 Cordova 빠른 시작 솔루션을 기반으로 합니다. 이 자습서에서는 빠른 시작 솔루션을 업데이트하여 Azure Mobile Apps의 오프라인 기능을 추가합니다.  또한 앱에서 오프라인 관련 코드를 중점적으로 다루겠습니다.
+이 자습서는 [Apache Cordova 빠른 시작]자습서를 완료할 때 만든 Mobile Apps에 대한 Cordova 빠른 시작 솔루션을 기반으로 합니다. 이 자습서에서는 빠른 시작 솔루션을 업데이트하여 Azure Mobile Apps의 오프라인 기능을 추가합니다.  또한 앱에서 오프라인 관련 코드를 중점적으로 다루겠습니다.
 
 오프라인 동기화 기능에 대한 자세한 내용은 [증분 동기화]항목을 참조하세요. API 사용에 대한 자세한 내용은 [API 설명서](https://azure.github.io/azure-mobile-apps-js-client)를 참조하세요.
 
 ## <a name="add-offline-sync-to-the-quickstart-solution"></a>오프라인 동기화를 빠른 시작 솔루션에 추가
-오프라인 동기화 코드를 앱에 추가해야 합니다. 오프라인 동기화에는 cordova-sqlite-storage 플러그 인이 필요하며 이는 Azure 모바일 앱 플러그 인이 프로젝트에 포함될 때 앱에 자동으로 추가됩니다. 빠른 시작 프로젝트에는 이러한 플러그 인이 모두 포함됩니다.
+오프라인 동기화 코드를 앱에 추가해야 합니다. 오프라인 동기화에는 cordova-sqlite-storage 플러그 인이 필요하며 이는 Azure Mobile Apps 플러그 인이 프로젝트에 포함될 때 앱에 자동으로 추가됩니다. 빠른 시작 프로젝트에는 이러한 플러그 인이 모두 포함됩니다.
 
 1. Visual Studio의 솔루션 탐색기에서 index.js를 열고 다음 코드를 이 코드로 
 
@@ -136,7 +135,7 @@ ms.lasthandoff: 07/21/2017
 
 끌어오기가 컨텍스트에 의해 추적되는 로컬 업데이트를 보류 중인 테이블에 대해 실행되는 경우 끌어오기 작업은 자동으로 푸시를 트리거합니다. 이 샘플에서 항목을 새로 고침, 추가 및 완료하는 경우 명시적인 **push** 호출이 중복될 수 있으므로 생략할 수 있습니다.
 
-제공된 코드에서 원격 todoItem 테이블에 있는 모든 레코드를 쿼리하지만 쿼리 ID 및 쿼리를 **푸시**로 전달하여 레코드를 필터링할 수도 있습니다. 자세한 내용은 *Azure 모바일 앱에서 오프라인 데이터 동기화* 에서 [증분 동기화]섹션을 참조하세요.
+제공된 코드에서 원격 todoItem 테이블에 있는 모든 레코드를 쿼리하지만 쿼리 ID 및 쿼리를 **푸시**로 전달하여 레코드를 필터링할 수도 있습니다. 자세한 내용은 *Azure Mobile Apps에서 오프라인 데이터 동기화* 에서 [증분 동기화]섹션을 참조하세요.
 
 ## <a name="optional-disable-authentication"></a>(선택 사항)인증 사용 안 함
 
@@ -171,7 +170,7 @@ ms.lasthandoff: 07/21/2017
 
 4. 앱을 닫았다가 다시 시작하여 만든 새 항목이 로컬 저장소에 유지되는지 확인합니다.
 
-5. (선택 사항) Azure SQL 데이터베이스 테이블을 보는 Visual Studio를 사용하여 백 엔드 데이터베이스에서 데이터가 변경되지 않았음을 확인합니다.
+5. (선택 사항) Azure SQL Database 테이블을 보는 Visual Studio를 사용하여 백 엔드 데이터베이스에서 데이터가 변경되지 않았음을 확인합니다.
 
     Visual Studio에서 **서버 탐색기**를 엽니다. **Azure**->**SQL Databases**에 있는 데이터베이스로 이동합니다. 데이터베이스를 마우스 오른쪽 단추로 클릭하고 **SQL Server 개체 탐색기에서 열기**를 선택합니다. 이제 SQL 데이터베이스 테이블 및 콘텐츠를 찾아볼 수 있습니다.
 
@@ -211,4 +210,3 @@ ms.lasthandoff: 07/21/2017
 [Apache Cordova SDK]: app-service-mobile-cordova-how-to-use-client-library.md
 [ASP.NET Server SDK]: app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
 [Node.js Server SDK]: app-service-mobile-node-backend-how-to-use-server-sdk.md
-

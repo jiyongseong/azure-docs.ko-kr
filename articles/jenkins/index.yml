@@ -1,0 +1,66 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Azure의 Jenkins
+metadata:
+  description: Jenkins 배포 및 Azure와 통합
+  services: multiple
+  author: rloutlaw
+  manager: justhe
+  layout: LandingPage
+  ms.service: multiple
+  ms.tgt_pltfrm: na
+  ms.devlang: devops
+  ms.topic: landing-page
+  ms.date: 11/01/2017
+  ms.author: routlaw
+  ms.custom: Jenkins
+abstract:
+  description: '오픈 소스 Jenkins 서버를 사용하여 클라우드에서 앱을 빌드하고 Azure에 배포합니다. Azure에서의 Jenkins를 설치, 구성 및 크기를 조정하고 빠른 시작, 자습서 및 샘플 파이프라인을 사용하여 앱의 CI(연속 통합)를 설정하는 방법을 알아봅니다.'
+  aside:
+    image:
+      alt: Jenkins logo
+      height: 133
+      width: 110
+      src: media/Jenkins.png
+    title: null
+sections:
+  - title: 5분 빠른 시작
+    items:
+      - type: paragraph
+        text: Azure에서 Jenkins 시스템을 만들고 앱을 빌드합니다.
+      - type: list
+        style: icon48
+        items:
+          - image:
+              src: 'https://docs.microsoft.com/azure/virtual-machines/linux/media/index/portal.svg'
+            text: Azure Portal
+            href: 'https://docs.microsoft.com/azure/jenkins/install-jenkins-solution-template'
+  - title: 단계별 자습서
+    items:
+      - type: paragraph
+        text: '앱에 연속 통합을 설정하고, 클라우드에서 에이전트를 실행하고 작업에서 Azure 서비스를 사용합니다.'
+      - type: list
+        style: ordered
+        items:
+          - html: 'CI를 <a href="/azure/jenkins/java-deploy-webapp-tutorial">Azure App Service</a>, <a href="/azure/container-service/kubernetes/container-service-kubernetes-jenkins">Kubernetes</a> 또는 <a href="/azure/virtual-machines/linux/tutorial-jenkins-github-docker-cicd">Linux VM</a>으로 설정합니다.'
+          - html: <a href="/azure/jenkins/execute-cli-jenkins-pipeline">파이프라인 작업에서 리소스를 프로비전합니다.</a>
+          - html: <a href="/azure/jenkins/jenkins-azure-vm-agents">Azure VM 에이전트를 사용하여 크기를 조정합니다.</a>
+  - title: 샘플
+    items:
+      - type: paragraph
+        text: 파이프라인에 대한 예제 스크립트 및 단계입니다.
+      - type: list
+        style: unordered
+        className: spaced noBullet
+        items:
+          - html: '<a href="https://github.com/Azure/azure-devops-utils/tree/master/jenkins">Jenkinsfile 단계 및 코드 조각</a>'
+  - title: 참조
+    items:
+      - type: list
+        style: cards
+        className: cardsD
+        items:
+          - title: 플러그 인
+            html: '<p><a href="https://plugins.jenkins.io/azure-vm-agents">Azure VM 에이전트</a><p><a href="https://plugins.jenkins.io/azure-app-service">Azure App Service</a></p><p><a href="https://plugins.jenkins.io/windows-azure-storage">Azure Storage</a></p><p><a href="https://plugins.jenkins.io/azure-container-agents">Azure 컨테이너 에이전트</a><p><a href="https://plugins.jenkins.io/azure-function">Azure Function 플러그 인</a><p><a href="https://plugins.jenkins.io/azure-acs">Azure Container Service 플러그 인</a>'
+  - type: paragraph
+    text: '<h4>Jenkins®는 Public Interest, Inc.에서 소프트웨어의 등록된 상표입니다. [Jenkins® 로고](https://wiki.jenkins.io/display/JENKINS/Logo)는 [Jenkins 프로젝트](https://jenkins.io)의 [CC BY SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)에서 라이선스를 체결했습니다.</h4>'

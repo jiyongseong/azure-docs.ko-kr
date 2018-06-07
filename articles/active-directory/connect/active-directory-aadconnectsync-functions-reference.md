@@ -3,8 +3,8 @@ title: "Azure AD 동기화 연결: 함수 참조 | Microsoft Docs"
 description: "Azure AD Connect 동기화의 선언적 프로비전 식을 참조하세요."
 services: active-directory
 documentationcenter: 
-author: andkjell
-manager: femila
+author: billmath
+manager: mtillman
 editor: 
 ms.assetid: 4f525ca0-be0e-4a2e-8da1-09b6b567ed5f
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/12/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ff2fb126905d2a68c5888514262212010e108a3d
-ms.openlocfilehash: dbd3727d3a31132c2dc1ae1bf5fade7ed969e2c9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/17/2017
-
+ms.openlocfilehash: 9ce27ca217f99b4f12ca1af0b5a178f5d61a1c89
+ms.sourcegitcommit: f1c1789f2f2502d683afaf5a2f46cc548c0dea50
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/18/2018
 ---
 # <a name="azure-ad-connect-sync-functions-reference"></a>Azure AD 동기화 연결: 함수 참조
 Azure AD Connect에서 동기화 중에 특성 값을 조작하려면 함수를 사용합니다.  
@@ -156,12 +155,6 @@ CDate 함수는 문자열에서 UTC 날짜/시간을 반환합니다. 날짜/시
 
 `CDate("2013-01-10 4:00 PM -8")`  
 "2013-01-11 12:00 AM"을 나타내는 날짜/시간을 반환합니다.
-
-
-
-
-
-
 
 
 - - -
@@ -366,7 +359,7 @@ CGuid 함수는 GUID의 문자열 표현을 이진 표현으로 변환합니다.
 * 이 패턴에서 문자열 서식: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx 또는 {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}
 
 - - -
-### <a name="contains"></a>포함
+### <a name="contains"></a>contains
 **설명:**  
 Contains 함수는 다중 값 특성에 포함된 문자열을 찾습니다.
 
@@ -399,7 +392,7 @@ ConvertFromBase64 함수는 지정된 base64 인코딩 값을 일반 문자열�
 `str ConvertFromBase64(str source, enum Encoding)`
 
 * 원본: Base64 인코딩된 문자열  
-* 인코딩: 유니코드, ASCII, UTF8
+* Encoding: 유니코드, ASCII, UTF8
 
 **예제**  
 `ConvertFromBase64("SABlAGwAbABvACAAdwBvAHIAbABkACEA")`  
@@ -547,7 +540,7 @@ DNComponent 함수는 왼쪽부터 지정된 DN 구성 요소의 값을 반환�
 * ComponentNumber: 반환할 DN 내의 구성 요소
 
 **예제:**  
-`DNComponent([dn],1)`  
+`DNComponent(CRef([dn]),1)`  
 dn이 "cn=Joe,ou=…"인 경우 Joe를 반환합니다.
 
 - - -
@@ -565,8 +558,8 @@ DNComponentRev 함수는 오른쪽(끝)부터 지정된 DN 구성 요소의 값�
 
 **예제:**  
 dn이 "cn=Joe,ou=Atlanta,ou=GA,ou=US, dc=contoso,dc=com"인 경우  
-`DNComponentRev([dn],3)`  
-`DNComponentRev([dn],1,"DC")`  
+`DNComponentRev(CRef([dn]),3)`  
+`DNComponentRev(CRef([dn]),1,"DC")`  
 모두 US를 반환합니다.
 
 - - -
@@ -616,12 +609,12 @@ FormatDateTime 함수는 날짜/시간을 지정된 형식의 문자열로 구�
 "20140905081453.0Z"를 반환할 수 있습니다.
 
 - - -
-### <a name="guid"></a>GUID
+### <a name="guid"></a>Guid
 **설명:**  
-함수 GUID는 임의의 GUID를 새로 생성합니다.
+함수 Guid는 임의의 GUID를 새로 생성합니다.
 
 **구문:**  
-`str GUID()`
+`str Guid()`
 
 - - -
 ### <a name="iif"></a>IIF
@@ -829,7 +822,7 @@ Item 함수는 다중값 특성의 항목에 대한 인덱스를 반환하는 Co
 인덱스가 범위를 초과하는 경우 오류가 나타납니다.
 
 **예제:**  
-`Mid(Item([proxyAddress],Contains([proxyAddress], "SMTP:")),6)`  
+`Mid(Item([proxyAddresses],Contains([proxyAddresses], "SMTP:")),6)`  
 기본 전자 메일 주소를 반환합니다.
 
 - - -
@@ -1183,7 +1176,7 @@ RTrim 함수는 문자열에서 후행 공백을 제거합니다.
 * condition: 특성의 한 항목을 처리할 수 있는 모든 함수입니다.
 
 **예제:**  
-`Select($item,[otherPhone],Replace($item,“-”,“”))`  
+`Select($item,[otherPhone],Replace($item,"-",""))`  
 하이픈(-)을 제거한 후에 otherPhone 다중값 특성의 모든 값을 반환합니다.
 
 - - -
@@ -1342,4 +1335,3 @@ Word 함수는 사용할 구분 기호를 설명하는 매개 변수에 따라 �
 * [선언적 프로비전 식 이해](active-directory-aadconnectsync-understanding-declarative-provisioning-expressions.md)
 * [Azure AD Connect Sync: 사용자 지정 동기화 옵션](active-directory-aadconnectsync-whatis.md)
 * [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)
-

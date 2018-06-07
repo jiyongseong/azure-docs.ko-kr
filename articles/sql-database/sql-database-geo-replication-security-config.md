@@ -1,36 +1,27 @@
 ---
-title: "재해 복구를 위해 Azure SQL Database 보안 구성 | Microsoft Docs"
-description: "이 항목에서는 데이터 센터 가동 중단 또는 다른 재해 발생 시 데이터베이스를 복원하거나 보조 서버로 장애 조치 후 보안을 구성하고 관리하기 위한 보안 고려 사항을 설명합니다."
+title: 재해 복구를 위해 Azure SQL Database 보안 구성 | Microsoft Docs
+description: 데이터베이스를 복원하거나 보조 서버로 장애 조치 후 보안을 구성하고 관리하기 위한 보안 고려 사항을 설명합니다.
 services: sql-database
-documentationcenter: na
 author: anosov1960
-manager: jhubbard
-editor: monicar
-ms.assetid: c7c898c9-69d4-4e16-8b7e-720bbb3353dd
+manager: craigg
 ms.service: sql-database
 ms.custom: business continuity
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: data-management
-ms.date: 10/13/2016
+ms.date: 04/01/2018
 ms.author: sashan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 95b8c100246815f72570d898b4a5555e6196a1a0
-ms.openlocfilehash: de5e1732dab570b80692efcdd08e4ed2d8c98800
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/18/2017
-
-
+ms.openlocfilehash: 6b4b599fee9a8ff5b4674cf26ca19b22230d6364
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="configure-and-manage-azure-sql-database-security-for-geo-restore-or-failover"></a>지역 복원 또는 장애 조치를 위해 Azure SQL Database 보안 구성 및 관리 
+
+이 항목은 [활성 지역 복제](sql-database-geo-replication-overview.md) 구성 및 제어에 대한 인증 요구 사항 및 보조 데이터베이스에 대한 사용자 액세스 설정이 필요한 단계를 설명합니다. 또한 [지역 복원](sql-database-recovery-using-backups.md#geo-restore)을 사용한 후에 복구된 데이터베이스에 대한 액세스를 활성화하는 방법도 설명합니다. 복구 옵션에 대한 자세한 내용은 [비즈니스 연속성 개요](sql-database-business-continuity.md)를 참조하세요.
 
 > [!NOTE]
 > [활성 지역 복제](sql-database-geo-replication-overview.md)는 현재 모든 서비스 계층의 모든 데이터베이스에 대해 제공됩니다.
 >  
-
-## <a name="overview-of-authentication-requirements-for-disaster-recovery"></a>재해 복구에 대한 인증 요구 사항 개요
-이 항목은 [활성 지역 복제](sql-database-geo-replication-overview.md) 구성 및 제어에 대한 인증 요구 사항 및 보조 데이터베이스에 대한 사용자 액세스 설정이 필요한 단계를 설명합니다. 또한 [지역 복원](sql-database-recovery-using-backups.md#geo-restore)을 사용한 후에 복구된 데이터베이스에 대한 액세스를 활성화하는 방법도 설명합니다. 복구 옵션에 대한 자세한 내용은 [비즈니스 연속성 개요](sql-database-business-continuity.md)를 참조하세요.
 
 ## <a name="disaster-recovery-with-contained-users"></a>포함된 사용자를 사용한 재해 복구
 master 데이터베이스에서 로그인에 매핑되어야 하는 기존 사용자와 달리 포함된 사용자는 데이터베이스 자체에서 완전히 관리됩니다. 두 가지 이점이 있습니다. 재해 복구 시나리오에서 데이터베이스는 사용자를 관리하므로 사용자는 추가 구성 없이 지역 복원을 사용하여 복구된 새로운 주 데이터베이스 또는 데이터베이스에 계속해서 연결할 수 있습니다. 로그인 관점에서 이 구성에는 잠재적인 확장성 및 성능 이점이 있습니다. 자세한 내용은 [포함된 데이터베이스 사용자 - 데이터베이스를 이식 가능하게 만들기](https://msdn.microsoft.com/library/ff929188.aspx)를 참조하세요. 
@@ -100,9 +91,8 @@ db_owner 데이터베이스 역할의 멤버, dbo 사용자 또는 서버 관리
 > 
 
 ## <a name="next-steps"></a>다음 단계
-* 데이터베이스 액세스 및 로그인 관리에 대한 자세한 내용은 [SQL 데이터베이스 보안: 데이터베이스 액세스 및 로그인 보안 관리](sql-database-manage-logins.md)를 참조하세요.
+* 데이터베이스 액세스 및 로그인 관리에 대한 자세한 내용은 [SQL Database 보안: 데이터베이스 액세스 및 로그인 보안 관리](sql-database-manage-logins.md)를 참조하세요.
 * 포함된 데이터베이스 사용자에 대한 자세한 내용은 [포함된 데이터베이스 사용자 - 데이터베이스를 이식 가능하게 만들기](https://msdn.microsoft.com/library/ff929188.aspx)를 참조하세요.
 * 활성 지역 복제를 사용 및 구성하는 방법에 대한 자세한 내용은 [활성 지역 복제](sql-database-geo-replication-overview.md)를 참조하세요.
 * 지역 복원을 사용하는 방법에 대한 내용은 [지역 복원](sql-database-recovery-using-backups.md#geo-restore)을 참조하세요.
-
 

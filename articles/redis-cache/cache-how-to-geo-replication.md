@@ -3,8 +3,8 @@ title: "Azure Redis Cache에 대해 지역에서 복제를 구성하는 방법 |
 description: "지역 간에 Azure Redis Cache 인스턴스를 복제하는 방법을 알아봅니다."
 services: redis-cache
 documentationcenter: 
-author: steved0x
-manager: douge
+author: wesmc7777
+manager: cfowler
 editor: 
 ms.assetid: 375643dc-dbac-4bab-8004-d9ae9570440d
 ms.service: cache
@@ -12,15 +12,13 @@ ms.workload: tbd
 ms.tgt_pltfrm: cache-redis
 ms.devlang: na
 ms.topic: article
-ms.date: 07/06/2017
-ms.author: sdanie
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 71b0d4add7e642487f6d67cda692c500ee78b0e6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.date: 09/15/2017
+ms.author: wesmc
+ms.openlocfilehash: 883683f6af7943fa4da49095c9a15aefd5cfa719
+ms.sourcegitcommit: 2a70752d0987585d480f374c3e2dba0cd5097880
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="how-to-configure-geo-replication-for-azure-redis-cache"></a>Azure Redis Cache에 대해 지역에서 복제를 구성하는 방법
 
@@ -103,6 +101,9 @@ ms.lasthandoff: 07/08/2017
 - [크기가 다른 두 캐시를 연결할 수 있나요?](#can-i-link-two-caches-with-different-sizes)
 - [클러스터링이 설정된 지역에서 복제를 사용할 수 있나요?](#can-i-use-geo-replication-with-clustering-enabled)
 - [VNET의 캐시에 지역에서 복제를 사용할 수 있나요?](#can-i-use-geo-replication-with-my-caches-in-a-vnet)
+- [Redis 지역에서 복제의 복제 일정이란?](#what-is-the-replication-schedule-for-redis-geo-replication)
+- [지역에서 복제에 걸리는 기간은 얼마나 되나요?](#how-long-does-geo-replication-replication-take)
+- [복제 복구 지점이 보장되나요?](#is-the-replication-recovery-point-guaranteed)
 - [PowerShell 또는 Azure CLI를 사용하여 지역에서 복제를 관리할 수 있나요?](#can-i-use-powershell-or-azure-cli-to-manage-geo-replication)
 - [Azure 지역 간에 데이터를 복제하는 비용은 어느 정도인가요?](#how-much-does-it-cost-to-replicate-my-data-across-azure-regions)
 - [연결된 캐시를 삭제하려고 할 때 작업이 실패한 이유는 무엇인가요?](#why-did-the-operation-fail-when-i-tried-to-delete-my-linked-cache)
@@ -141,6 +142,18 @@ ms.lasthandoff: 07/08/2017
 - 동일한 VNET에 있는 캐시 간의 지역에서 복제가 지원됩니다.
 - VNET의 리소스가 TCP 연결을 통해 서로 연결할 수 있는 방식으로 두 VNET이 구성된 경우에는 다른 VNET에 있는 캐시 간의 지역에서 복제도 지원됩니다.
 
+### <a name="what-is-the-replication-schedule-for-redis-geo-replication"></a>Redis 지역에서 복제의 복제 일정이란?
+
+복제는 특정 일정에 따라 진행되지 않으며 연속 및 비동기로 진행됩니다. 즉, 주 복제본에 대해 수행된 모든 쓰기는 보조 복제본에서 즉시 비동기적으로 복제됩니다.
+
+### <a name="how-long-does-geo-replication-replication-take"></a>지역에서 복제에 걸리는 기간은 얼마나 되나요?
+
+복제는 점진적이고, 비동기적이고, 연속되며, 소요되는 시간은 일반적으로 지역 간 대기 시간과는 크게 다릅니다. 특정 상황에서 특정 시간에 보조 복제본은 주 복제본의 데이터에 대해 전체 동기화를 수행해야 할 수 있습니다. 이 경우 복제 시간은 주 캐시의 부하, 캐시 컴퓨터에서 사용 가능한 대역폭, 지역 간 대기 시간 등의 다양한 요소에 따라 좌우됩니다. 예를 들어 테스트를 통해, 미국 동부 지역 및 미국 서부 지역의 전체 53GB 지리적 복제 쌍에 대한 복제 시간이 5~10분 사이일 수 있다는 것을 알게 되었습니다.
+
+### <a name="is-the-replication-recovery-point-guaranteed"></a>복제 복구 지점이 보장되나요?
+
+현재 지리적 복제 모드의 캐시의 경우 지속성 및 가져오기/내보내기 기능이 사용되지 않도록 설정됩니다. 따라서 고객이 시작한 장애 조치(Failover)의 경우나 지리적 복제 쌍 간에 복제 링크가 끊어진 경우, 보조 복제본은 주 복제본에서 동기화한 메모리 내 데이터를 해당 시점까지 유지합니다. 이러한 경우 복구 지점 보장은 제공되지 않습니다.
+
 ### <a name="can-i-use-powershell-or-azure-cli-to-manage-geo-replication"></a>PowerShell 또는 Azure CLI를 사용하여 지역에서 복제를 관리할 수 있나요?
 
 현재 지역에서 복제는 Azure Portal을 통해서만 관리할 수 있습니다.
@@ -167,5 +180,4 @@ ms.lasthandoff: 07/08/2017
 ## <a name="next-steps"></a>다음 단계
 
 [Azure Redis Cache 프리미엄 계층](cache-premium-tier-intro.md)에 대해 자세히 알아봅니다.
-
 

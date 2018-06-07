@@ -14,12 +14,11 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 08/18/2016
 ms.author: deli
-translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: 419e489e4e99935dea49b2d3f9a405013b94048c
-ms.lasthandoff: 04/27/2017
-
-
+ms.openlocfilehash: 141919ab4506b3de4c4a69670dcf54c60ee6409c
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="scheduler-powershell-cmdlets-reference"></a>스케줄러 PowerShell Cmdlet 참조
 다음 표에서는 Azure 스케줄러의 주요 cmdlet을 설명하고 참조 페이지에 연결합니다.
@@ -76,5 +75,4 @@ Get-Help <cmdlet name> -Full
  [Azure 스케줄러 제한, 기본값 및 오류 코드](scheduler-limits-defaults-errors.md)
 
  [Azure 스케줄러 아웃바운드 인증](scheduler-outbound-authentication.md)
-
 

@@ -1,29 +1,27 @@
 ---
-title: "Intel Edison - 클라우드(Node.js) - Azure IoT Hub에 Intel Edison 연결 | Microsoft Docs"
-description: "이 자습서에서는 Azure 클라우드 플랫폼으로 데이터를 보내기 위해 Intel Edison을 설정하고 Intel Edison용 Azure IoT Hub에 연결하는 방법을 알아봅니다."
+title: Intel Edison - 클라우드(Node.js) - Azure IoT Hub에 Intel Edison 연결 | Microsoft Docs
+description: 이 자습서에서는 Azure 클라우드 플랫폼으로 데이터를 보내기 위해 Intel Edison을 설정하고 Intel Edison용 Azure IoT Hub에 연결하는 방법을 알아봅니다.
 services: iot-hub
-documentationcenter: 
-author: shizn
+documentationcenter: ''
+author: rangv
 manager: timlt
-tags: 
-keywords: "azure iot intel edison, intel edison iot hub, intel edison에서 클라우드로 데이터 보내기, intel edison - 클라우드"
+tags: ''
+keywords: azure iot intel edison, intel edison iot hub, intel edison에서 클라우드로 데이터 보내기, intel edison - 클라우드
 ms.assetid: a7c9cf2d-c102-41b0-aa45-41285c6877eb
 ms.service: iot-hub
 ms.devlang: nodejs
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 6/15/2017
-ms.author: xshi
+ms.date: 4/11/2018
+ms.author: rangv
 ms.custom: H1Hack27Feb2017
+ms.openlocfilehash: 78dd623d021daa7f8cb0d52dd4e438aebe81e924
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 5a31efba704045196b5563f7bc467c773bea7805
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/20/2018
 ---
-
 # <a name="connect-intel-edison-to-azure-iot-hub-nodejs"></a>Azure IoT Hub에 Intel Edison 연결(Node.js)
 
 [!INCLUDE [iot-hub-get-started-device-selector](../../includes/iot-hub-get-started-device-selector.md)]
@@ -43,7 +41,7 @@ ms.lasthandoff: 07/21/2017
 
 ## <a name="what-you-learn"></a>학습 내용
 
-* Azure IoT Hub를 만들고 새 장치 연결 문자열을 가져오는 방법
+* Azure IoT Hub를 만들고 새 장치 연결 문자열을 가져오는 방법.
 * Edison을 Grove 온도 센서에 연결하는 방법
 * Edison에서 샘플 응용 프로그램을 실행하여 센서 데이터를 수집하는 방법
 * IoT Hub로 센서 데이터를 보내는 방법
@@ -174,7 +172,7 @@ ms.lasthandoff: 07/21/2017
 
    ![온도 센서에 연결](media/iot-hub-intel-edison-kit-node-get-started/12_configuration_tool.png)
 
-축하합니다. Edison 구성을 마쳤습니다.
+축하합니다! Edison 구성을 마쳤습니다.
 
 ## <a name="run-a-sample-application-on-intel-edison"></a>Intel Edison에 샘플 응용 프로그램 실행
 
@@ -233,4 +231,3 @@ IoT Hub로 전송되는 센서 데이터와 메시지를 보여 주는 다음 �
 샘플 응용 프로그램을 실행하여 센서 데이터를 수집하고 IoT Hub로 전송했습니다.
 
 [!INCLUDE [iot-hub-get-started-next-steps](../../includes/iot-hub-get-started-next-steps.md)]
-

@@ -1,23 +1,21 @@
 ---
-title: "Azure Active Directory B2C: 사용량 보고 API 샘플 및 정의 | Microsoft Docs"
-description: "Azure AD B2C 테넌트 사용자, 인증 및 다단계 인증에 대한 보고서를 얻는 방법에 대한 가이드 및 샘플입니다."
+title: 'Azure Active Directory B2C: 사용량 보고 API 샘플 및 정의 | Microsoft Docs'
+description: Azure AD B2C 테넌트 사용자, 인증 및 다단계 인증에 대한 보고서를 얻는 방법에 대한 가이드 및 샘플입니다.
 services: active-directory-b2c
 documentationcenter: dev-center-name
-author: rojasja
-manager: mbaldwin
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 02/08/2017
-ms.author: joroja
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 8be2bcb9179e9af0957fcee69680ac803fd3d918
-ms.openlocfilehash: 0171ce0bbeab783ac9b63c1fa02c7a9184cc5145
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/26/2017
-
+ms.date: 08/04/2017
+ms.author: davidmu
+ms.openlocfilehash: 07029181423927f0796cb85e728df416d01466e8
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="accessing-usage-reports-in-azure-ad-b2c-via-the-reporting-api"></a>보고 API를 통해 Azure AD B2C에서 사용량 보고서에 액세스
 
@@ -127,7 +125,7 @@ if ($oauth.access_token -ne $null) {
 다음 코드에서는 JSON, 이름 값 목록 및 XML로 출력을 보내는 예제를 보여 줍니다.
 ```powershell
 # to output to JSON use following line in the PowerShell sample
-$myReport.Content | Out-File -FilePath b2cUserJourneySummaryEvents.json -Force
+$myReport.Content | Out-File -FilePath name-your-file.json -Force
 
 # to output the content to a name value list
 ($myReport.Content | ConvertFrom-Json).value | Out-File -FilePath name-your-file.txt -Force
@@ -135,4 +133,3 @@ $myReport.Content | Out-File -FilePath b2cUserJourneySummaryEvents.json -Force
 # to output the content in XML use the following line
 (($myReport.Content | ConvertFrom-Json).value | ConvertTo-Xml).InnerXml | Out-File -FilePath name-your-file.xml -Force
 ```
-

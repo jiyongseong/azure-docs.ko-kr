@@ -1,30 +1,29 @@
 ---
-title: "Azure Site Recovery에서 복구 계획에 Azure Automation Runbook 추가 | Microsoft Docs"
-description: "Azure Site Recovery가 Azure Automation을 사용하여 복구 계획을 확장하는 데 어떻게 도움이 되는지 알아봅니다. Azure로 복구하는 동안 복잡한 작업을 완료하는 방법을 알아봅니다."
+title: Azure Site Recovery에서 복구 계획에 Azure Automation Runbook 추가 | Microsoft Docs
+description: Azure Site Recovery가 Azure Automation을 사용하여 복구 계획을 확장하는 데 어떻게 도움이 되는지 알아봅니다. Azure로 복구하는 동안 복잡한 작업을 완료하는 방법을 알아봅니다.
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: ruturaj
 manager: gauravd
-editor: 
+editor: ''
 ms.assetid: ecece14d-5f92-4596-bbaf-5204addb95c2
 ms.service: site-recovery
 ms.devlang: powershell
 ms.tgt_pltfrm: na
 ms.topic: article
 ms.workload: storage-backup-recovery
-ms.date: 06/23/2017
+ms.date: 05/02/2018
 ms.author: ruturajd@microsoft.com
+ms.openlocfilehash: a0a57e4a604a8cadedd5d715acf5f76a147da6d1
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: f26f4dda442320c7c224c02a38aa36dbe5d4d1a6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
 # <a name="add-azure-automation-runbooks-to-recovery-plans"></a>복구 계획에 Azure Automation Runbook 추가
 이 문서에서는 Azure Site Recovery를 Azure Automation에 통합하여 복구 계획을 확장하는 방법을 설명합니다. 복구 계획으로 Site Recovery로 보호되는 VM의 복구를 오케스트레이션할 수 있습니다. 복구 계획은 보조 클라우드로 복제 및 Azure로의 복제 모두에서 작동합니다. 복구 계획을 통해 복구를 **일관적으로 정확**하고, **반복 가능**하며, **자동화**되도록 할 수도 있습니다. VM을 Azure로 장애 조치(failover)하는 경우 Azure Automation과 통합하면 복구 계획이 확장됩니다. 이를 통해 강력한 자동화 작업을 제공하는 Runbook을 실행할 수 있습니다.
 
-Azure Automation을 처음 접하는 경우 [등록](https://azure.microsoft.com/services/automation/)하여 [샘플 스크립트를 다운로드](https://azure.microsoft.com/documentation/scripts/)할 수 있습니다. [복구 계획](https://azure.microsoft.com/blog/?p=166264)을 사용하여 Azure에 복구를 오케스트레이션하는 방법에 대한 자세한 내용은 [Azure Site Recovery](https://azure.microsoft.com/services/site-recovery/)를 참조하세요.
+Azure Automation을 처음 접하는 경우 [등록](https://azure.microsoft.com/services/automation/)하여 [샘플 스크립트를 다운로드](https://azure.microsoft.com/documentation/scripts/)할 수 있습니다. [복구 계획](./site-recovery-create-recovery-plans.md)을 사용하여 Azure에 복구를 오케스트레이션하는 방법에 대한 자세한 내용은 [Azure Site Recovery](https://azure.microsoft.com/services/site-recovery/)를 참조하세요.
 
 이 문서에서는 Azure Automation Runbook을 복구 계획에 어떻게 통합할 수 있는지 설명합니다. 이전에는 수동 개입이 필요했던 기본 작업을 자동화하는 예제를 사용합니다. 또한 다단계 복구를 단일 클릭 복구 작업으로 변환하는 방법도 설명합니다.
 
@@ -194,14 +193,14 @@ workflow AddPublicIPAndNSG {
 
 ### <a name="use-a-complex-variable-to-store-more-information"></a>복합 변수를 사용하여 자세한 정보 저장
 
-단일 스크립트에서 특정 VM의 공용 IP를 설정하는 시나리오를 고려해 보세요. 다른 시나리오에서는 서로 다른 VM(모든 VM 아님)에는 다른 NSG를 적용하려고 합니다. 모든 복구 계획에 다시 사용할 수 있는 스크립트를 만들 수 있습니다. 각 복구 계획에는 다양한 수의 VM이 포함될 수 있습니다. 예를 들어 SharePoint 복구에는 두 개의 프런트 엔드가 있습니다. 기본 LOB(기간 업무) 응용 프로그램에는 하나의 프런트 엔드만 있습니다. 각 복구 계획에 별도의 변수를 만들 수 없습니다. 
+단일 스크립트에서 특정 VM의 공용 IP를 설정하는 시나리오를 고려해 보세요. 다른 시나리오에서는 서로 다른 VM(모든 VM 아님)에는 다른 NSG를 적용하려고 합니다. 모든 복구 계획에 다시 사용할 수 있는 스크립트를 만들 수 있습니다. 각 복구 계획에는 다양한 수의 VM이 포함될 수 있습니다. 예를 들어 SharePoint 복구에는 두 개의 프런트 엔드가 있습니다. 기본 LOB(기간 업무) 응용 프로그램에는 하나의 프런트 엔드만 있습니다. 각 복구 계획에 별도의 변수를 만들 수 없습니다.
 
 다음 예제에서는 Azure Automation 계정 자산에서 새 기술을 사용하고 [복합 변수](https://msdn.microsoft.com/library/dn913767.aspx?f=255&MSPPError=-2147217396)를 만듭니다. 여러 값을 지정하여 이 작업을 수행합니다. 다음 단계를 완료하려면 Azure PowerShell을 사용해야 합니다.
 
 1. PowerShell에서 Azure 구독에 로그인합니다.
 
     ```
-    login-azurermaccount
+    Connect-AzureRmAccount
     $sub = Get-AzureRmSubscription -Name <SubscriptionName>
     $sub | Select-AzureRmSubscription
     ```
@@ -249,7 +248,7 @@ workflow AddPublicIPAndNSG {
 
 Automation 계정에 샘플 스크립트를 배포하려면 **Azure에 배포** 단추를 클릭합니다.
 
-![Azure 단추에 배포](https://azurecomcdn.azureedge.net/mediahandler/acomblog/media/Default/blog/c4803408-340e-49e3-9a1f-0ed3f689813d.png)
+[![Azure에 배포](https://azurecomcdn.azureedge.net/mediahandler/acomblog/media/Default/blog/c4803408-340e-49e3-9a1f-0ed3f689813d.png)](https://aka.ms/asr-automationrunbooks-deploy)
 
 다른 예제를 보려면 다음 비디오를 시청하세요. Azure로 2계층 WordPress 응용 프로그램을 복구하는 방법을 보여 줍니다.
 
@@ -257,9 +256,10 @@ Automation 계정에 샘플 스크립트를 배포하려면 **Azure에 배포** 
 > [!VIDEO https://channel9.msdn.com/Series/Azure-Site-Recovery/One-click-failover-of-a-2-tier-WordPress-application-using-Azure-Site-Recovery/player]
 
 
-
 ## <a name="additional-resources"></a>추가 리소스
-* [Azure Automation 서비스 실행 계정](../automation/automation-sec-configure-azure-runas-account.md)
+* [Azure Automation 서비스 실행 계정](../automation/automation-create-runas-account.md)
 * [Azure Automation 개요](http://msdn.microsoft.com/library/azure/dn643629.aspx "Azure Automation 개요")
 * [Azure Automation 샘플 스크립트](http://gallery.technet.microsoft.com/scriptcenter/site/search?f\[0\].Type=User&f\[0\].Value=SC%20Automation%20Product%20Team&f\[0\].Text=SC%20Automation%20Product%20Team "Azure Automation 샘플 스크립트")
 
+## <a name="next-steps"></a>다음 단계
+장애 조치를 실행하는 방법에 대해 [자세히 알아보세요](site-recovery-failover.md).

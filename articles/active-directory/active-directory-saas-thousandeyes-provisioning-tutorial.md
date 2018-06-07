@@ -1,28 +1,26 @@
 ---
-title: "자습서: Azure Active Directory를 사용한 자동 사용자 프로비전을 위한 ThousandEyes 구성 | Microsoft Docs"
-description: "사용자 계정을 ThousandEyes로 자동으로 프로비전 및 프로비전 해제하도록 Azure Active Directory를 구성하는 방법을 알아봅니다."
+title: '자습서: Azure Active Directory로 자동 사용자 프로비전을 위한 ThousandEyes 구성 | Microsoft Docs'
+description: 사용자 계정을 ThousandEyes로 자동으로 프로비전 및 프로비전 해제하도록 Azure Active Directory를 구성하는 방법을 알아봅니다.
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: asmalser-msft
 writer: asmalser-msft
-manager: stevenpo
+manager: mtillman
 ms.assetid: d4ca2365-6729-48f7-bb7f-c0f5ffe740a3
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/14/2017
+ms.date: 01/26/2018
 ms.author: asmalser-msft
+ms.openlocfilehash: 055355be0de1c3f589bde468da3558963e8e1383
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: e6bc2eab3cc1adcf26857ed98d920177a51455ea
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
-
-# <a name="tutorial-configuring-thousandeyes-for-automatic-user-provisioning"></a>자습서: 자동 사용자 프로비전에 대한 ThousandEyes 구성
+# <a name="tutorial-configure-thousandeyes-for-automatic-user-provisioning"></a>자습서: 자동 사용자 프로비전을 위한 ThousandEyes 구성
 
 
 이 자습서의 목적은 사용자 계정을 Azure AD에서 ThousandEyes로 자동으로 프로비전 및 프로비전 해제하도록 ThousandEyes 및 Azure AD에서 수행해야 하는 단계를 설명하는 것입니다. 
@@ -82,7 +80,7 @@ Azure Active Directory는 "할당"이라는 개념을 사용하여 어떤 사용
 
 7. 프로비전 오류 알림을 받을 개인 또는 그룹의 메일 주소를 **알림 메일** 필드에 입력하고 “오류가 발생할 경우 메일 알림 보내기” 확인란을 선택합니다.
 
-8. **Save**를 클릭합니다. 
+8. **저장**을 클릭합니다. 
 
 9. [매핑] 섹션에서 **Synchronize Azure Active Directory Users to ThousandEyes**(Azure Active Directory 사용자를 ThousandEyes에 동기화)를 선택합니다.
 
@@ -90,19 +88,18 @@ Azure Active Directory는 "할당"이라는 개념을 사용하여 어떤 사용
 
 11. ThousandEyes에 대한 Azure AD 프로비전 서비스를 사용하도록 설정하려면 **설정** 섹션에서 **프로비전 상태**를 **켜기**로 변경합니다.
 
-12. **Save**를 클릭합니다. 
+12. **저장**을 클릭합니다. 
 
-[사용자 및 그룹] 섹션에서 ThousandEyes에 할당된 모든 사용자 및/또는 그룹의 초기 동기화가 시작됩니다. 초기 동기화는 서비스가 실행되는 동안 약 20분마다 발생하는 차후 동기화보다 더 많은 시간이 걸립니다. **동기화 세부 정보** 섹션을 사용하여 진행 상태를 모니터링하고 링크를 클릭하여 프로비전 서비스에서 수행한 모든 작업을 설명하는 프로비전 작업 보고서를 확인할 수 있습니다.
+[사용자 및 그룹] 섹션에서 ThousandEyes에 할당된 모든 사용자 및/또는 그룹의 초기 동기화가 시작됩니다. 초기 동기화는 서비스가 실행되는 동안 약 40분마다 발생하는 후속 동기화보다 더 많은 시간이 걸립니다. **동기화 세부 정보** 섹션을 사용하여 진행 상태를 모니터링하고 프로비전 서비스에서 수행하는 모든 작업을 설명하는 프로비전 활동 로그에 연결된 링크를 따를 수 있습니다.
 
-Azure AD 프로비저닝 로그를 읽는 방법에 대한 자세한 내용은 [자동 사용자 계정 프로비저닝에 대한 보고](https://docs.microsoft.com/en-us/azure/active-directory/active-directory-saas-provisioning-reporting)를 참조하세요.
+Azure AD 프로비저닝 로그를 읽는 방법에 대한 자세한 내용은 [자동 사용자 계정 프로비저닝에 대한 보고](active-directory-saas-provisioning-reporting.md)를 참조하세요.
 
 
 ## <a name="additional-resources"></a>추가 리소스
 
 * [엔터프라이즈 앱에 대한 사용자 계정 프로비전 관리](active-directory-enterprise-apps-manage-provisioning.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 ## <a name="next-steps"></a>다음 단계
 
 * [프로비전 활동에 대한 로그를 검토하고 보고서를 받아 보는 방법을 살펴봅니다](active-directory-saas-provisioning-reporting.md).
-

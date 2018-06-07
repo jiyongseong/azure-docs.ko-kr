@@ -1,11 +1,11 @@
 ---
-title: "크로스-프레미스 Azure 연결에 대한 VPN 게이트웨이 설정 | Microsoft Docs"
-description: "Azure Virtual Network 게이트웨이의 VPN Gateway 설정에 대해 알아봅니다."
+title: 크로스-프레미스 Azure 연결에 대한 VPN Gateway 설정 | Microsoft Docs
+description: Azure Virtual Network 게이트웨이의 VPN Gateway 설정에 대해 알아봅니다.
 services: vpn-gateway
 documentationcenter: na
 author: cherylmc
-manager: timlt
-editor: 
+manager: jpconnock
+editor: ''
 tags: azure-resource-manager,azure-service-management
 ms.assetid: ae665bc5-0089-45d0-a0d5-bc0ab4e79899
 ms.service: vpn-gateway
@@ -13,21 +13,26 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 06/26/2017
+ms.date: 03/20/2018
 ms.author: cherylmc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 857267f46f6a2d545fc402ebf3a12f21c62ecd21
-ms.openlocfilehash: b4829398980e05f66af653eb44f2c021ad89c410
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/28/2017
-
-
+ms.openlocfilehash: 9ecd8dc40e168c2fd37e3d58ee588a0d9626a04a
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/20/2018
 ---
 # <a name="about-vpn-gateway-configuration-settings"></a>VPN Gateway 구성 설정 정보
 
 VPN Gateway는 공용 연결을 통해 가상 네트워크와 온-프레미스 위치 간에 암호화된 트래픽을 전송하는 가상 네트워크 게이트웨이의 유형입니다. 또한 VPN Gateway를 사용하여 Azure 백본에 있는 가상 네트워크 간에 트래픽을 전송할 수 있습니다.
 
-VPN 게이트웨이 연결은 각각이 구성 가능한 설정을 포함하는 여러 리소스의 구성에 따라 좌우됩니다. 이 문서의 섹션에서는 Resource Manager 배포 모델에서 생성된 가상 네트워크의 VPN Gateway와 관련된 리소스 및 설정에 대해 설명합니다. [VPN Gateway 정보](vpn-gateway-about-vpngateways.md) 문서에서 각 연결 솔루션에 대한 설명 및 토폴로지 다이어그램을 찾을 수 있습니다.
+VPN Gateway 연결은 각각이 구성 가능한 설정을 포함하는 여러 리소스의 구성에 따라 좌우됩니다. 이 문서의 섹션에서는 Resource Manager 배포 모델에서 생성된 가상 네트워크의 VPN Gateway와 관련된 리소스 및 설정에 대해 설명합니다. [VPN Gateway 정보](vpn-gateway-about-vpngateways.md) 문서에서 각 연결 솔루션에 대한 설명 및 토폴로지 다이어그램을 찾을 수 있습니다.
+
+>[!NOTE]
+> 이 문서에 나오는 값은 -GatewayType 'Vpn'을 사용하는 가상 네트워크 게이트웨이에 적용됩니다. 이러한 특정 가상 네트워크 게이트웨이가 VPN 게이트웨이라고 하는 이유입니다. ExpressRoute 게이트웨이에 대한 값은 VPN 게이트웨이에 사용하는 값과 같지 않습니다.
+>
+>-GatewayType 'ExpressRoute'에 적용되는 값에 대해서는 [ExpressRoute에 대한 가상 네트워크 게이트웨이](../expressroute/expressroute-about-virtual-network-gateways.md)를 참조하세요.
+>
+>
 
 ## <a name="gwtype"></a>게이트웨이 유형
 
@@ -36,7 +41,7 @@ VPN 게이트웨이 연결은 각각이 구성 가능한 설정을 포함하는 
 -GatewayType에 사용 가능한 값은 다음과 같습니다.
 
 * Vpn
-* Express 경로
+* ExpressRoute
 
 VPN Gateway에는 `-GatewayType` *Vpn*이 필요합니다.
 
@@ -52,32 +57,43 @@ New-AzureRmVirtualNetworkGateway -Name vnetgw1 -ResourceGroupName testrg `
 
 [!INCLUDE [vpn-gateway-gwsku-include](../../includes/vpn-gateway-gwsku-include.md)]
 
-### <a name="configure-the-gateway-sku"></a>게이트웨이 SKU 구성
+### <a name="configure-a-gateway-sku"></a>게이트웨이 SKU 구성
 
-#### <a name="azure-portal"></a>Azure 포털
+#### <a name="azure-portal"></a>Azure portal
 
 Azure Portal을 사용하여 Resource Manager 가상 네트워크 게이트웨이를 만드는 경우 드롭다운을 사용하여 게이트웨이 SKU를 선택할 수 있습니다. 표시되는 옵션은 선택한 게이트웨이 형식 및 선택한 VPN 형식에 해당합니다.
 
 #### <a name="powershell"></a>PowerShell
 
-다음 PowerShell 예제에서는 `-GatewaySku`를 VpnGw1으로 지정합니다.
+다음 PowerShell 예제에서는 `-GatewaySku`를 VpnGw1으로 지정합니다. PowerShell을 사용하여 게이트웨이를 만드는 경우 먼저 IP 구성을 만든 다음, 변수를 사용하여 참조해야 합니다. 이 예제에서 구성 변수는 $gwipconfig입니다.
 
 ```powershell
-New-AzureRmVirtualNetworkGateway -Name vnetgw1 -ResourceGroupName testrg `
--Location 'West US' -IpConfigurations $gwipconfig -GatewaySku VpnGw1 `
+New-AzureRmVirtualNetworkGateway -Name VNet1GW -ResourceGroupName TestRG1 `
+-Location 'US East' -IpConfigurations $gwipconfig -GatewaySku VpnGw1 `
 -GatewayType Vpn -VpnType RouteBased
 ```
 
-#### <a name="change-resize-a-gateway-sku"></a>게이트웨이 SKU 변경(크기 조정)
+#### <a name="azure-cli"></a>Azure CLI
 
-게이트웨이 SKU를 좀 더 강력한 SKU로 업그레이드하려면 `Resize-AzureRmVirtualNetworkGateway` PowerShell cmdlet을 사용할 수 있습니다. 또한 이 cmdlet을 사용하여 게이트웨이 SKU 크기를 다운그레이드할 수도 있습니다.
-
-다음 PowerShell 예제에서는 VpnGw2로 크기가 조정되는 게이트웨이 SKU를 보여 줍니다.
-
-```powershell
-$gw = Get-AzureRmVirtualNetworkGateway -Name vnetgw1 -ResourceGroupName testrg
-Resize-AzureRmVirtualNetworkGateway -VirtualNetworkGateway $gw -GatewaySku VpnGw2
+```azurecli
+az network vnet-gateway create --name VNet1GW --public-ip-address VNet1GWPIP --resource-group TestRG1 --vnet VNet1 --gateway-type Vpn --vpn-type RouteBased --sku VpnGw1 --no-wait
 ```
+
+###  <a name="resizechange"></a>SKU 크기 조정 또는 변경
+
+VPN 게이트웨이가 있는데 다른 게이트웨이 SKU를 사용하려는 경우 게이트웨이 SKU 크기를 조정하거나 다른 SKU로 변경할 수 있습니다. 다른 게이트웨이 SKU로 변경할 때는 기존 게이트웨이를 완전히 삭제하고 새로 작성하게 됩니다. 새로 작성하는 데는 최대 45분이 걸릴 수 있습니다. 그에 비해, 게이트웨이 SKU 크기를 조정할 때는 게이트웨이를 삭제했다가 다시 작성할 필요가 없으므로 아주 짧은 가동 중지 시간만 발생합니다. 게이트웨이 SKU를 변경하지 않고 크기를 조정할 수 있다면 그렇게 하는 것이 좋습니다. 그러나 크기 조정에 대한 규칙이 있습니다.
+
+1. VpnGw1, VpnGw2와 VpnGw3 SKU 간에 크기를 조정할 수 있습니다.
+2. 이전 게이트웨이 SKU로 작동하는 경우 Basic, Standard 및 HighPerformance SKU 간에 크기를 조정할 수 있습니다.
+3. Basic/Standard/HighPerformance SKU에서 새 VpnGw1/VpnGw2/VpnGw3 SKU까지 크기를 조정할 수 **없습니다**. 대신 새 SKU로 [변경](#change)해야 합니다.
+
+#### <a name="resizegwsku"></a>게이트웨이의 크기를 조정하려면
+
+[!INCLUDE [Resize a SKU](../../includes/vpn-gateway-gwsku-resize-include.md)]
+
+####  <a name="change"></a>이전(레거시) SKU에서 새로운 SKU로 변경하려면
+
+[!INCLUDE [Change a SKU](../../includes/vpn-gateway-gwsku-change-legacy-sku-include.md)]
 
 ## <a name="connectiontype"></a>연결 유형
 
@@ -85,7 +101,7 @@ Resource Manager 배포 모델에서 각 구성이 작동하려면 특정 가상
 
 * IPsec
 * Vnet2Vnet
-* Express 경로
+* ExpressRoute
 * VPNClient
 
 다음 PowerShell 예제에서는 *IPsec*연결 유형이 필요한 S2S 연결을 만듭니다.
@@ -145,9 +161,9 @@ New-AzureRmLocalNetworkGateway -Name LocalSite -ResourceGroupName testrg `
 -Location 'West US' -GatewayIpAddress '23.99.221.164' -AddressPrefix '10.5.51.0/24'
 ```
 
-로컬 네트워크 게이트웨이 설정을 수정해야 하는 경우도 있습니다. 예를 들어 주소 범위를 추가 또는 수정할 경우 또는 VPN 장치의 IP 주소가 변경될 때가 여기에 해당합니다. 클래식 VNet의 경우 로컬 네트워크 페이지의 클래식 포털에서 이러한 설정을 변경할 수 있습니다. Resource Manager의 경우 [PowerShell을 사용하여 로컬 네트워크 게이트웨이 설정 수정](vpn-gateway-modify-local-network-gateway.md)을 참조하세요.
+로컬 네트워크 게이트웨이 설정을 수정해야 하는 경우도 있습니다. 예를 들어 주소 범위를 추가 또는 수정할 경우 또는 VPN 장치의 IP 주소가 변경될 때가 여기에 해당합니다. [PowerShell을 사용하여 로컬 네트워크 게이트웨이 설정 수정](vpn-gateway-modify-local-network-gateway.md)을 참조하세요.
 
-## <a name="resources"></a>REST API 및 PowerShell cmdlet
+## <a name="resources"></a>REST API, PowerShell cmdlet 및 CLI
 
 VPN Gateway를 구성하기 위해 REST API, PowerShell cmdlet 또는 Azure CLI를 사용할 경우 추가 기술 리소스 및 특정 구문 요구 사항에 대해서는 다음 페이지를 참조하세요.
 

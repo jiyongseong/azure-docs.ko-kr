@@ -1,11 +1,11 @@
 ---
-title: "Azure 내부 부하 분산 장치 만들기 - PowerShell 클래식 | Microsoft Docs"
-description: "클래식 배포 모델에서 PowerShell을 사용하여 내부 부하 분산 장치를 만드는 방법에 대해 알아봅니다."
+title: Azure 내부 부하 분산 장치 만들기 - PowerShell 클래식 | Microsoft Docs
+description: 클래식 배포 모델에서 PowerShell을 사용하여 내부 부하 분산 장치를 만드는 방법에 대해 알아봅니다.
 services: load-balancer
 documentationcenter: na
-author: kumudd
-manager: timlt
-editor: 
+author: genlin
+manager: cshepard
+editor: ''
 tags: azure-service-management
 ms.assetid: 3be93168-3787-45a5-a194-9124fe386493
 ms.service: load-balancer
@@ -14,13 +14,13 @@ ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/23/2017
-ms.author: kumud
-translationtype: Human Translation
-ms.sourcegitcommit: fd5960a4488f2ecd93ba117a7d775e78272cbffd
-ms.openlocfilehash: f701fb3564c62cf8088cc4362a10c5e2c2301ae6
-
+ms.author: genli
+ms.openlocfilehash: 8b896705d90b51c056172c285a00dabeed54ebf2
+ms.sourcegitcommit: c52123364e2ba086722bc860f2972642115316ef
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
 ---
-
 # <a name="get-started-creating-an-internal-load-balancer-classic-using-powershell"></a>PowerShell을 사용하여 내부 부하 분산 장치(클래식) 만들기 시작
 
 > [!div class="op_single_selector"]
@@ -37,12 +37,12 @@ ms.openlocfilehash: f701fb3564c62cf8088cc4362a10c5e2c2301ae6
 
 [!INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
 
-## <a name="create-an-internal-load-balancer-set-for-virtual-machines"></a>가상 컴퓨터에 대한 내부 부하 분산 장치 집합 만들기
+## <a name="create-an-internal-load-balancer-set-for-virtual-machines"></a>가상 머신에 대한 내부 부하 분산 장치 집합 만들기
 
 내부 부하 분산 장치 집합과 이 집합으로 해당 트래픽을 전송할 서버를 만들려면 다음을 수행해야 합니다.
 
 1. 부하 분산 집합의 서버 간에 부하가 분산될 들어오는 트래픽의 끝점이 되는 내부 부하 분산의 인스턴스를 만듭니다.
-2. 들어오는 트래픽을 수신할 가상 컴퓨터에 해당하는 끝점을 추가합니다.
+2. 들어오는 트래픽을 수신할 가상 머신에 해당하는 끝점을 추가합니다.
 3. 부하가 분산될 트래픽을 전송하는 서버가 해당 트래픽을 내부 부하 분산 인스턴스의 VIP(가상 IP) 주소로 전송하도록 구성합니다.
 
 ### <a name="step-1-create-an-internal-load-balancing-instance"></a>1단계: 내부 부하 분산 인스턴스 만들기
@@ -98,7 +98,7 @@ Get-AzureInternalLoadBalancer 명령 표시에서 IP 주소를 확인하고 필�
 
 > [!NOTE]
 > Microsoft Azure 플랫폼에서는 다양한 관리 시나리오에 공개적으로 라우팅할 수 있는 고정 IPv4 주소를 사용합니다. IP 주소는 168.63.129.16입니다. 이 IP 주소를 방화벽으로 차단하면 안 됩니다. 예기치 않은 동작이 발생할 수 있습니다.
-> Azure 내부 부하 분산과 관련하여 이 IP 주소는 부하 분산된 집합에서 가상 컴퓨터의 상태를 확인하기 위해 부하 분산 장치에서 프로브를 모니터링하는 데 사용됩니다. 내부적으로 부하 분산된 집합의 Azure 가상 컴퓨터로 트래픽을 제한하는 네트워크 보안 그룹이 사용된 경우 168.63.129.16의 트래픽을 허용하도록 네트워크 보안 규칙을 추가해야 합니다.
+> Azure 내부 부하 분산과 관련하여 이 IP 주소는 부하 분산된 집합에서 가상 머신의 상태를 확인하기 위해 부하 분산 장치에서 프로브를 모니터링하는 데 사용됩니다. 내부적으로 부하 분산된 집합의 Azure 가상 머신으로 트래픽을 제한하는 네트워크 보안 그룹이 사용된 경우 168.63.129.16의 트래픽을 허용하도록 네트워크 보안 규칙을 추가해야 합니다.
 
 ## <a name="example-of-internal-load-balancing"></a>내부 부하 분산의 예제
 
@@ -106,17 +106,17 @@ Get-AzureInternalLoadBalancer 명령 표시에서 IP 주소를 확인하고 필�
 
 ### <a name="an-internet-facing-multi-tier-application"></a>인터넷 연결 다중 계층 응용 프로그램
 
-인터넷 연결 웹 서버 집합에 부하 분산 데이터베이스 서비스를 제공하려고 합니다. 두 서버 집합은 단일 Azure 클라우드 서비스에서 호스트됩니다. TCP 포트 1433에 대한 웹 서버 트래픽을 데이터베이스 계층의 2개 가상 컴퓨터에 배포해야 합니다. 그림 1은 구성을 보여 줍니다.
+인터넷 연결 웹 서버 집합에 부하 분산 데이터베이스 서비스를 제공하려고 합니다. 두 서버 집합은 단일 Azure 클라우드 서비스에서 호스트됩니다. TCP 포트 1433에 대한 웹 서버 트래픽을 데이터베이스 계층의 2개 가상 머신에 배포해야 합니다. 그림 1은 구성을 보여 줍니다.
 
 ![데이터베이스 계층에 대한 내부 부하 분산 집합](./media/load-balancer-internal-getstarted/IC736321.png)
 
 구성은 다음과 같이 이루어져 있습니다.
 
-* 가상 컴퓨터를 호스트하는 기존 클라우드 서비스의 이름은 mytestcloud입니다.
+* 가상 머신을 호스트하는 기존 클라우드 서비스의 이름은 mytestcloud입니다.
 * 두 기존 데이터베이스 서버 이름은 DB1, DB2입니다.
 * 웹 계층의 웹 서버는 개인 IP 주소를 사용하여 데이터베이스 계층의 데이터베이스 서버에 연결합니다. 다른 옵션은 가상 네트워크에 자체 DNS를 사용하고 내부 부하 분산 장치 집합에 A 레코드를 수동으로 등록하는 것입니다.
 
-다음 명령은 **ILBset** 라는 새 내부 부하 분산 인스턴스를 구성하고&2;개의 데이터베이스 서버에 해당하는 가상 컴퓨터에 끝점을 추가합니다.
+다음 명령은 **ILBset** 라는 새 내부 부하 분산 인스턴스를 구성하고 2개의 데이터베이스 서버에 해당하는 가상 머신에 끝점을 추가합니다.
 
 ```powershell
 $svc="mytestcloud"
@@ -189,10 +189,4 @@ Get-Help Remove-AzureInternalLoadBalancer -full
 [원본 IP 선호도를 사용하여 부하 분산 장치 배포 모드 구성](load-balancer-distribution-mode.md)
 
 [부하 분산 장치에 대한 유휴 TCP 시간 제한 설정 구성](load-balancer-tcp-idle-timeout.md)
-
-
-
-
-<!--HONumber=Feb17_HO3-->
-
 

@@ -1,108 +1,93 @@
 ---
-title: "Azure Site Recovery에서 장애 조치 및 복구의 복구 계획 만들기 | Microsoft Docs"
-description: "Azure Site Recovery에서 복구 계획을 만들고 사용자 지정하여 VM 및 물리적 서버를 장애 조치(failover)하고 복구하는 방법을 설명합니다."
+title: Azure Site Recovery에서 장애 조치 및 복구의 복구 계획 만들기 및 사용자 지정 | Microsoft Docs
+description: Azure Site Recovery에서 복구 계획을 만들고 및 사용자 지정하는 방법을 알아봅니다. 이 문서에서는 VM과 물리적 서버를 장애 조치(failover)하고 복구하는 방법을 설명합니다.
 services: site-recovery
-documentationcenter: 
+documentationcenter: ''
 author: rayne-wiselman
 manager: carmonm
-editor: 
-ms.assetid: 72408c62-fcb6-4ee2-8ff5-cab1218773f2
 ms.service: site-recovery
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: storage-backup-recovery
-ms.date: 07/23/2017
+ms.date: 03/21/2018
 ms.author: raynew
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ef1e603ea7759af76db595d95171cdbe1c995598
-ms.openlocfilehash: 618c6fead3dbad385c4ded39352eea0cfcf1b134
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/16/2017
-
+ms.openlocfilehash: e02672ea76eada2d660b20f91c4417019d4efc97
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
-# <a name="create-recovery-plans"></a>복구 계획 만들기
+# <a name="create-and-customize-recovery-plans"></a>복구 계획 만들기 및 사용자 지정
 
-
-이 문서는 [Azure Site Recovery](site-recovery-overview.md)에서 복구 계획을 만들고 사용자 지정하는 정보를 제공합니다.
-
-이 문서의 하단 또는 [Azure 복구 서비스 포럼](https://social.msdn.microsoft.com/forums/azure/home?forum=hypervrecovmgr)에서 의견이나 질문을 게시합니다.
-
- 다음을 수행하는 복구 계획을 만듭니다.
-
-* 장애 조치(failover)된 다음 함께 시작하는 컴퓨터의 그룹을 정의합니다.
-* 복구 계획 그룹에서 함께 그룹화하여 컴퓨터 간의 종속성을 모델링합니다. 예를 들어, 특정 응용프로그램을 장애 조치하고 표시하기 위해 동일한 복구 계획 그룹에서 해당 응용 프로그램에 대한 VM을 그룹화합니다.
-* 장애 조치(Failover)를 실행합니다. 복구 계획에서 테스트를 실행하고 계획되거나 계획되지 않은 장애 조치를 실행할 수 있습니다.
-
+이 문서에서는 [Azure Site Recovery](site-recovery-overview.md)에서 복구 계획을 만들고 사용자 지정하는 방법을 설명합니다. 시작하기 전에 복구 계획에 대해 [자세히 알아봅니다](recovery-plan-overview.md).
 
 ## <a name="create-a-recovery-plan"></a>복구 계획 만들기
 
-1. **복구 계획** > **복구 계획 만들기**를 클릭합니다.
-   복구 계획 이름, 원본 및 대상을 지정합니다. 원본 위치에는 장애 조치(Failover) 및 복구를 사용하도록 설정한 가상 컴퓨터가 있어야 합니다.
+1. Recovery Services 자격 증명 모음에서 **복구 계획(사이트 복구)** > **+복구 계획**을 선택합니다.
+2. **복구 계획 만들기**에서 계획의 이름을 지정합니다.
+3. 계획의 컴퓨터를 기반으로 하여 원본 및 대상을 선택하고 배포 모델에 대한 **리소스 관리자**를 선택합니다. 원본 위치에는 장애 조치(failover) 및 복구를 사용하도록 설정한 컴퓨터가 있어야 합니다. 
 
-    - VMM에서 VMM으로 복제하는 경우 **원본 유형** > **VMM**과 원본 및 대상 VMM 서버를 차례로 선택합니다. **Hyper-V**를 클릭하여 보호되는 클라우드를 확인합니다.
-    - VMM에서 Azure까지의 경우 **원본 형식** > **VMM**을 선택합니다.  원본 VMM 서버 및 **Azure**를 대상으로 선택합니다.
-    - Hyper-V 복제에서 VMM 없는 Azure까지의 경우 **원본 형식** > **Hyper-V 사이트**를 선택합니다. 이 사이트를 원본으로, **Azure**를 대상으로 선택합니다.
-    - VMware 또는 물리적 온-프레미스 서버에서 Azure까지의 경우 구성 서버를 원본으로, **Azure**를 대상으로 선택합니다.
-2. **가상 컴퓨터 선택**에서 복구 계획 내 기본 그룹(그룹 1)에 추가하고자 하는 가상 컴퓨터(또는 복제 그룹)를 선택합니다.
+   **장애 조치(Failover)** | **원본** | **대상** 
+   --- | --- | ---
+   Azure 간 | Azure 지역 |Azure 지역
+   VMware에서 Azure로 | 구성 서버 | Azure
+   물리적 컴퓨터에서 Azure로 | 구성 서버 | Azure   
+   VMM에서 관리하는 Hyper-V에서 Azure로  | VMM 표시 이름 | Azure
+   VMM을 사용하지 않는 Hyper-V에서 Azure로 | Hyper-v 사이트 이름 | Azure
+   VMM에서 VMM으로 |VMM 식별 이름 | VMM 표시 이름 
 
-## <a name="customize-and-extend-recovery-plans"></a>복구 계획 사용자 지정 및 확장
+   > [!NOTE]
+   > 복구 계획에 원본 및 대상이 동일한 컴퓨터가 포함될 수 있습니다. VMM에서 관리하는 VMware 및 Hyper-V VM을 동일한 계획에 포함할 수 없습니다. VMware VM 및 물리적 서버를 원본이 구성 서버인 동일한 계획에 포함할 수 있습니다.
 
-복구 계획을 사용자 지정 및 확장할 수 있습니다.
+2. **항목 가상 머신 선택**에서 계획에 추가할 컴퓨터(또는 복제 그룹)를 선택합니다. 그런 후 **OK**를 클릭합니다.
+    - 컴퓨터가 계획의 기본 그룹(그룹 1)에 추가됩니다. 장애 조치(failover) 후 이 그룹의 모든 컴퓨터는 동시에 시작됩니다.
+    - 지정한 원본 및 대상 위치의 컴퓨터만 선택할 수 있습니다. 
+1. **확인**을 클릭하여 계획을 만듭니다.
 
-- **새 그룹 추가**—기본 그룹에 추가 복구 계획 그룹(최대 7개)을 추가한 다음 해당 복구 계획 그룹에 컴퓨터나 복제 그룹을 추가합니다. 그룹은 추가한 순서대로 번호가 지정됩니다. 가상 컴퓨터나 복제 그룹은 1개의 복구 계획 그룹에만 포함할 수 있습니다.
-- **수동 작업 추가**—복구 계획 그룹의 앞 또는 뒤에 실행되는 수동 작업을 추가할 수 있습니다. 복구 계획을 실행하는 경우 수동 작업을 삽입하는 지점에서 중지됩니다. 대화 상자는 수동 작업이 완료되도록 지정하라는 메시지를 표시합니다.
-- **스크립트 추가**—복구 계획 그룹 앞뒤로 실행되는 스크립트를 추가할 수 있습니다. 스크립트를 추가하면 해당 그룹에 대해 새로운 작업 집합이 추가됩니다. 예를 들어, 그룹 1에 대한 사전 단계 집합이 Group 1: Pre-steps라는 이름으로 생성됩니다. 모든 사전 단계가 이 집합 내에 나열됩니다. 배포된 VMM 서버를 보유한 경우 주 사이트에만 스크립트를 추가할 수 있습니다.
-- **Azure runbook 추가**—Azure runbook을 사용하여 복구 계획을 확장할 수 있습니다. 예를 들어, 작업을 자동화하거나 단일 단계 복구를 만듭니다. [자세히 알아보세요](site-recovery-runbook-automation.md)을 확인하세요.
+## <a name="add-a-group-to-a-plan"></a>계획에 그룹 추가
 
-## <a name="add-scripts"></a>스크립트 추가
+추가 그룹을 만들고 여러 그룹에 컴퓨터를 추가하여 그룹 단위로 다른 동작을 지정할 수 있습니다. 예를 들어 장애 조치(failover) 후 그룹의 컴퓨터가 시작되어야 하는 시기를 지정하거나 그룹별로 사용자 지정 작업을 지정할 수 있습니다.
 
-복구 계획에서 PowerShell 스크립트를 사용할 수 있습니다.
-
- - 예외를 정상적으로 처리할 수 있도록 스크립트에서 try-catch 블록을 사용하는지 확인합니다.
-    - 스크립트에 예외가 있다면 실행이 중지하고 작업에 실패한 것으로 표시합니다.
-    - 오류가 발생한 경우 스크립트의 모든 남은 부분이 실행되지 않습니다.
-    - 계획되지 않은 장애 조치를 실행할 때 오류가 발생하면 복구 계획이 계속됩니다.
-    - 계획된 장애 조치를 실행할 때 오류가 발생하면 복구 계획이 중단됩니다. 스크립트를 수정하고 예상된 대로 실행되는지 확인한 다음 복구 계획을 다시 실행해야 합니다.
-- Write-host 명령이 복구 계획 스크립트에서 작동 하지 않으며 스크립트가 실패합니다. 출력을 만들려면 기본 스크립트를 실행하는 프록시 스크립트를 만듭니다. >> 명령을 사용하여 모든 출력이 표시되는지 확인합니다.
-  * 600초 이내에 반환하지 않는 경우 스크립트 시간이 초과됩니다.
-  * 모든 항목이 STDERR에 기록된다면 스크립트가 실패로 분류됩니다. 이 정보는 스크립트 실행 세부 정보에 표시됩니다.
-
-배포에서 VMM을 사용하는 경우:
-
-* 복구 계획 내 스크립트는 VMM 서비스 계정의 컨텍스트에서 실행됩니다. 이 계정에 스크립트가 위치한 원격 공유에 대한 읽기 권한이 있는지 확인합니다. VMM 서비스 계정 권한 수준에서 실행하는 스크립트를 테스트합니다.
-* VMM cmdlet은 Windows PowerShell 모듈로 배달됩니다. 모듈은 VMM 콘솔을 설치할 때 설치됩니다. 스크립트에서 다음 명령을 사용하여 스크립트에 로드될 수 있습니다.
-   - Import-Module -Name virtualmachinemanager. [자세히 알아보세요](https://technet.microsoft.com/library/hh875013.aspx)을 확인하세요.
-* VMM 배포에 최소 1개의 라이브러리 서버가 있는지 확인합니다. 기본적으로 라이브러리는 VMM 서버에 대한 경로를 공유하며, MSCVMMLibrary라는 폴더 이름으로 VMM 서버에 로컬로 위치해 있습니다.
-    * 라이브러리 공유 경로가 원격인 경우(또는 로컬이지만 MSCVMMLibrary와 공유하지 않는 경우), 공유를 다음처럼 구성합니다(\\libserver2.contoso.com\share\를 예제로 사용).
-      * 레지스트리 편집기를 열고 **HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\Azure Site Recovery\Registration**으로 이동합니다.
-      * **ScriptLibraryPath** 값을 편집하고 \\libserver2.contoso.com\share\.로 입력합니다. 전체 FQDN을 지정합니다. 공유 위치에 대한 사용 권한을 제공합니다.
-      * VMM 서비스 계정과 동일한 권한을 가진 사용자 계정을 사용하여 스크립트를 테스트해야 합니다. 테스트된 독립 실행형 스크립트가 복구 계획과 동일한 방식으로 실행되는지 확인합니다. VMM 서버에서 실행 정책을 다음과 같이 우회하도록 설정합니다.
-        * 상승된 권한을 사용하여 64 비트 Windows PowerShell 콘솔을 엽니다.
-        * 유형: **Set-executionpolicy bypass**. [자세히 알아보세요](https://technet.microsoft.com/library/ee176961.aspx)을 확인하세요.
-
-## <a name="add-a-script-or-manual-action-to-a-plan"></a>계획에 스크립트 또는 수동 작업 추가
-
-VM이나 복제 그룹을 기본 복구 계획 그룹에 추가하고 계획을 만든 후에 여기에 스크립트를 추가할 수 있습니다.
-
-1. 복구 계획을 엽니다.
-2. **단계** 목록에서 아무 항목이나 클릭하고 **스크립트** 또는 **수동 작업**을 클릭합니다.
-3. 스크립트나 작업을 선택한 항목의 앞 또는 뒤에 추가할 것인지 지정합니다. **위로 이동** 및 **아래로 이동** 단추를 사용하여 스크립트의 위치를 위/아래로 이동합니다.
-4. VMM 스크립트를 추가하면 **VMM 스크립트에 대한 장애 조치**를 선택합니다. **스크립트 경로**에서 공유에 상대 경로를 입력합니다. 아래의 VMM 예제에서 **\RPScripts\RPScript.PS1** 경로를 지정합니다.
-5. Azure Automation Runbook을 추가하는 경우 Runbook이 위치한 Azure Automation 계정을 지정하고 적절한 Azure Runbook 스크립트를 선택합니다.
-6. 복구 계획의 장애 조치를 실행하여 스크립트가 예상대로 작동하는지 확인합니다.
+1. **복구 계획**에서 계획을 마우스 오른쪽 단추로 클릭하고 **사용자 지정**을 선택합니다. 기본적으로 계획을 만든 후 계획에 추가한 모든 컴퓨터는 기본 그룹 1에 있습니다.
+2. **+그룹**을 클릭합니다. 기본적으로 추가된 순서대로 새 그룹에 번호가 지정됩니다. 최대 7개의 그룹을 사용할 수 있습니다.
+3. 새 그룹으로 이동할 컴퓨터를 선택하고 **그룹 변경**을 클릭한 다음, 새 그룹을 선택합니다. 또는 그룹 이름을 마우스 오른쪽 단추로 클릭하고 **보호된 항목**을 선택한 다음, 그룹에 컴퓨터를 추가합니다. 컴퓨터 또는 복제 그룹은 복구 계획의 한 그룹에만 속할 수 있습니다.
 
 
-### <a name="add-a-vmm-script"></a>VMM 스크립트 추가
+## <a name="add-a-script-or-manual-action"></a>스크립트 또는 수동 작업 추가
 
-VMM 원본 사이트가 있는 경우 VMM 서버에 스크립트를 생성하고 복구 계획에 포함할 수 있습니다.
+스크립트 또는 수동 작업을 추가하여 복구 계획을 사용자 지정할 수 있습니다. 다음 사항에 유의하세요.
 
-1. 라이브러리 공유에서 새 폴더를 만듭니다. 예를 들어, \<VMMServerName>\MSSCVMMLibrary\RPScripts.입니다. 원본 및 대상 VMM 서버에 놓습니다.
-2. 스크립트(예: RPScript)를 만들고 예상한 대로 작동하는지 확인합니다.
-3. 원본 및 대상 VMM 서버에서 \<VMMServerName>\MSSCVMMLibrary 위치에 스크립트를 배치합니다.
+- Azure에 복제하는 경우, Azure Automation Runbook을 복구 계획에 통합할 수 있습니다. [자세히 알아보기](site-recovery-runbook-automation.md).
+- System Center VMM에서 관리하는 Hyper-V VM을 복제하는 경우, 온-프레미스 VMM 서버에서 스크립트를 만들고 복구 계획에 포함할 수 있습니다.
+- 스크립트를 추가하면 해당 그룹에 대해 새로운 작업 집합이 추가됩니다. 예를 들어, 그룹 1에 대한 사전 단계 집합이 *Group 1: pre-steps*라는 이름으로 생성됩니다. 모든 사전 단계가 이 집합 내에 나열됩니다. VMM 서버가 배포된 경우에만 주 사이트에 스크립트를 추가할 수 있습니다.
+- 수동 작업을 추가하는 경우, 복구 계획을 실행할 때 수동 작업을 삽입한 지점에서 중지됩니다. 대화 상자는 수동 작업이 완료되도록 지정하라는 메시지를 표시합니다.
+- VMM 서버에서 스크립트를 만들려면 [이 문서](hyper-v-vmm-recovery-script.md)의 지침을 따르세요.
+- 보조 사이트로 장애 조치(failover) 중 및 보조 사이트에서 기본 사이트로 장애 복구(failback) 중 스크립트를 적용할 수 있습니다. 지원은 복제 시나리오에 따라 다릅니다.
+    
+    **시나리오** | **장애 조치(Failover)** | **장애 복구**
+    --- | --- | --- 
+    Azure 간  | Runbook | Runbook
+    VMware에서 Azure로 | Runbook | 해당 없음 
+    VMM을 사용하는 Hyper-V에서 Azure로 | Runbook | 스크립트
+    Azure에 Hyper-V 사이트 | Runbook | 해당 없음
+    VMM에서 보조 VMM으로 | 스크립트 | 스크립트
 
+1. 복구 계획에서 작업을 추가해야 하는 단계를 클릭하고 작업이 발생해야 하는 시기를 지정합니다. 가. 장애 조치(failover) 후 그룹의 컴퓨터가 시작되기 전에 작업을 수행하려면 **사전 작업 추가**를 선택합니다.
+    나. 장애 조치(failover) 후 그룹의 컴퓨터가 시작된 후 작업을 수행하려면 **사후 작업 추가**를 선택합니다. 작업 위치를 이동하려면 **위로 이동** 및 **아래로 이동** 단추를 선택합니다.
+2. **작업 삽입**에서 **스크립트** 또는 **수동 작업**을 선택합니다.
+3. 수동 작업을 추가하려면 다음을 수행합니다. 가. 작업 이름과 작업 지침을 입력합니다. 장애 조치(failover)를 실행하는 사용자에게 이러한 지침이 표시됩니다.
+    나. 모든 장애 조치(failover) 유형(테스트, 장애 조치(failover), 계획된 장애 조치(failover)(관련된 경우))에 대해 수동 작업을 추가할지 여부를 지정합니다. 그런 후 **OK**를 클릭합니다.
+4. 스크립트를 추가하려면 다음을 수행합니다. 가. VMM 스크립트를 추가하는 경우 **VMM 스크립트에 대한 장애 조치**를 선택하고 **스크립트 경로** 유형에서 공유에 대한 상대 경로를 입력합니다. 예를 들어 공유가 \\<VMMServerName>\MSSCVMMLibrary\RPScripts에 있는 경우 경로를 다음과 같이 지정합니다. \RPScripts\RPScript.PS1.
+    나. Azure Automation Runbook을 추가하는 경우 Runbook이 위치한 **Azure Automation 계정**을 지정하고 적절한 **Azure Runbook 스크립트**를 선택합니다.
+5. 복구 계획의 테스트 장애 조치(failover)를 실행하여 스크립트가 예상대로 작동하는지 확인합니다.
+
+## <a name="watch-a-video"></a>비디오 보기
+
+복구 계획을 작성하는 방법을 보여 주는 비디오를 시청합니다.
+
+
+> [!VIDEO https://www.youtube.com/embed/1KUVdtvGqw8]
 
 ## <a name="next-steps"></a>다음 단계
 
-장애 조치를 실행하는 방법에 대해 [자세히 알아보세요](site-recovery-failover.md).
+[장애 조치(failover) 실행](site-recovery-failover.md)에 대해 자세히 알아보세요.  
 
+    

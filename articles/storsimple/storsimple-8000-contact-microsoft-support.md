@@ -1,10 +1,10 @@
 ---
-title: "StorSimple 8000 시리즈에 대한 지원 티켓 로그 | Microsoft Docs"
+title: "StorSimple 8000 시리즈용 지원 티켓 또는 사례 만들기 | Microsoft 문서"
 description: "StorSimple 8000 시리즈 장치에서 지원 요청을 로깅하고 지원 세션을 시작하는 방법을 알아봅니다."
 services: storsimple
 documentationcenter: 
 author: alkohli
-manager: timlt
+manager: jeconnoc
 editor: 
 ms.assetid: 
 ms.service: storsimple
@@ -12,15 +12,13 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/27/2017
+ms.date: 01/09/2018
 ms.author: alkohli;
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 21aeecb33707c03b5994b3e394b597797e81746f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: e0df86e40d0dc1092ad7ff04f01bbc3e5e3d1c4e
+ms.sourcegitcommit: 9292e15fc80cc9df3e62731bafdcb0bb98c256e1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/10/2018
 ---
 # <a name="contact-microsoft-support"></a>Microsoft 지원에 문의
 
@@ -46,7 +44,7 @@ StorSimple 장치 관리자는 서비스 요약 블레이드 내에서 **새로�
    1. **문제점 유형** 드롭다운 목록에서 **기술**을 선택합니다.
    2. 현재 **구독**, **서비스** 유형 및 **리소스**(StorSimple 장치 관리자 서비스)가 자동으로 선택됩니다. 
    3. 구독과 관련된 여러 계획이 있는 경우 드롭다운에서 **지원 계획**을 선택합니다. 기술 지원을 사용하도록 설정하기 위해 유료 지원 계획이 필요합니다.
-   4. **다음**을 누릅니다.
+   4. **다음**을 클릭합니다.
 
        ![새 포털을 통한 MS 지원 문의](./media/storsimple-8000-contact-microsoft-support/contactsupport2.png)
 
@@ -58,7 +56,7 @@ StorSimple 장치 관리자는 서비스 요약 블레이드 내에서 **새로�
     4. 문제의 시작 날짜 및 시간을 제공합니다.
     5. **파일 업로드**에서 폴더 아이콘을 클릭하여 지원 패키지를 찾아봅니다.
     6. **진단 정보 공유**를 선택합니다.
-    7. **다음**을 누릅니다.
+    7. **다음**을 클릭합니다.
 
        ![새 포털을 통한 MS 지원 문의](./media/storsimple-8000-contact-microsoft-support/contactsupport3.png) 
 
@@ -99,7 +97,7 @@ StorSimple 장치에서 발생할 수 있는 문제를 해결하려면 Microsoft
 
 #### <a name="to-start-a-support-session"></a>지원 세션을 시작하려면
 
-1. 직렬 콘솔을 사용하여 직접 또는 원격 컴퓨터에서 텔넷 세션을 통해 장치에 액세스합니다. 이렇게 하려면 [PuTTY를 사용하여 장치 직렬 콘솔에 연결](storsimple-deployment-walkthrough.md#use-putty-to-connect-to-the-device-serial-console)의 단계를 따르세요.
+1. 직렬 콘솔을 사용하여 직접 또는 원격 컴퓨터에서 텔넷 세션을 통해 장치에 액세스합니다. 이렇게 하려면 [PuTTY를 사용하여 장치 직렬 콘솔에 연결](storsimple-8000-deployment-walkthrough-u2.md#use-putty-to-connect-to-the-device-serial-console)의 단계를 따르세요.
 2. 열린 세션에서 **Enter** 키를 눌러 명령 프롬프트를 엽니다.
 3. 직렬 콘솔 메뉴에서 옵션 1, **모든 권한으로 로그인**을 선택합니다.
 4. 프롬프트에 다음 암호를 입력합니다.
@@ -117,4 +115,4 @@ StorSimple 장치에서 발생할 수 있는 문제를 해결하려면 Microsoft
 
 ## <a name="next-steps"></a>다음 단계
 
-[StorSimple 8000 시리즈 장치와 관련된 문제를 진단하고 해결](storsimple-troubleshoot-deployment.md)하는 방법 알아보기
+[StorSimple 8000 시리즈 장치와 관련된 문제를 진단하고 해결](storsimple-8000-troubleshoot-deployment.md)하는 방법 알아보기

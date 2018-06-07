@@ -1,25 +1,24 @@
 ---
-title: "Azure Active Directory PoC 플레이 북 구현 | Microsoft Docs"
-description: "ID 및 액세스 관리 시나리오를 탐색하고 신속하게 구현"
+title: Azure Active Directory PoC 플레이 북 구현 | Microsoft Docs
+description: ID 및 액세스 관리 시나리오를 탐색하고 신속하게 구현
 services: active-directory
-keywords: "Azure Active Directory, 플레이 북, 개념 증명, PoC"
-documentationcenter: 
+keywords: Azure Active Directory, 플레이 북, 개념 증명, PoC
+documentationcenter: ''
 author: dstefanMSFT
-manager: asuthar
-ms.assetid: 
+manager: mtillman
+ms.assetid: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 4/12/2017
+ms.date: 04/12/2017
 ms.author: dstefan
-translationtype: Human Translation
-ms.sourcegitcommit: 785d3a8920d48e11e80048665e9866f16c514cf7
-ms.openlocfilehash: 298ff9b851f604b89e5672e41ab112b67990b0d6
-ms.lasthandoff: 04/12/2017
-
-
+ms.openlocfilehash: 2f01bdee5ffcc9e2f48278c7209da40ef64cc030
+ms.sourcegitcommit: c52123364e2ba086722bc860f2972642115316ef
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
 ---
 # <a name="azure-active-directory-proof-of-concept-playbook-implementation"></a>Azure Active Directory 개념 증명 플레이 북: 구현
 
@@ -88,7 +87,7 @@ ms.lasthandoff: 04/12/2017
 
 ### <a name="secure-remote-access-to-on-premises-applications"></a>온-프레미스 응용 프로그램에 대한 보안 원격 액세스
 
-1. Azure AD 전역 관리자인 Bob은 원격으로 작업하는 동안 비용 응용 프로그램과 같은 유용한 몇 가지 온-프레미스 리소스에 직원이 액세스하도록 허용해달라는 요청을 많이 받았습니다. [응용 프로그램 프록시 설명서](active-directory-application-proxy-enable.md)에 따라 커넥터를 설치하고 Expenses를 응용 프로그램 프록시 응용 프로그램으로 게시합니다. 
+1. Azure AD 전역 관리자인 Bob은 원격으로 작업하는 동안 비용 응용 프로그램과 같은 유용한 몇 가지 온-프레미스 리소스에 직원이 액세스하도록 허용해달라는 요청을 많이 받았습니다. [응용 프로그램 프록시 설명서](manage-apps/application-proxy-enable.md)에 따라 커넥터를 설치하고 Expenses를 응용 프로그램 프록시 응용 프로그램으로 게시합니다. 
 2. Bob이 외부 Expenses 응용 프로그램 URL을 원격 액세스가 필요한 직원 중 한 명인 Susie와 공유합니다. 그녀가 링크에 액세스하여 AAD 인증을 거치면 Expenses에 액세스할 수 있고 원격 작업을 하는 동안에도 생산성을 유지할 수 있습니다. 
 3. Bob은 계속해서 동일한 절차를 사용하여 온-프레미스 응용 프로그램을 추가로 게시하고 필요한 경우 사용자에게 액세스를 부여합니다. 추가적인 보안을 보장하기 위해서 게시하는 응용 프로그램 중 보다 민감한 응용 프로그램에 대해 조건부 액세스 및 Multi-Factor Authentication을 추가합니다.
 

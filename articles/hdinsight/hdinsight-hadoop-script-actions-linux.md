@@ -1,10 +1,10 @@
 ---
-title: "Linux 기반 HDInsight를 사용하여 스크립트 작업 개발 - Azure | Microsoft Docs"
-description: "Bash 스크립트를 사용하여 Linux 기반 HDInsight 클러스터를 사용자 지정하는 방법을 알아봅니다. HDInsight의 스크립트 작업 기능을 사용하면 클러스터를 생성하는 동안 또는 생성한 후에 스크립트를 실행할 수 있습니다. 클러스터 구성 설정을 변경하거나 추가 소프트웨어를 설치하는 데 스크립트를 사용할 수 있습니다."
+title: Linux 기반 HDInsight를 사용하여 스크립트 작업 개발 - Azure | Microsoft Docs
+description: Bash 스크립트를 사용하여 Linux 기반 HDInsight 클러스터를 사용자 지정하는 방법을 알아봅니다. HDInsight의 스크립트 작업 기능을 사용하면 클러스터를 생성하는 동안 또는 생성한 후에 스크립트를 실행할 수 있습니다. 클러스터 구성 설정을 변경하거나 추가 소프트웨어를 설치하는 데 스크립트를 사용할 수 있습니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: Blackmist
-manager: jhubbard
+manager: cgronlun
 editor: cgronlun
 ms.assetid: cf4c89cd-f7da-4a10-857f-838004965d3e
 ms.service: hdinsight
@@ -12,15 +12,14 @@ ms.custom: hdinsightactive
 ms.workload: big-data
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 07/31/2017
+ms.topic: conceptual
+ms.date: 04/10/2018
 ms.author: larryfr
+ms.openlocfilehash: d5df67021e997df3a6344701f50be4871a11386d
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
 ms.translationtype: HT
-ms.sourcegitcommit: c30998a77071242d985737e55a7dc2c0bf70b947
-ms.openlocfilehash: 7f1a0bd8c7e60770d376f10eaea136a55c632c5e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/02/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="script-action-development-with-hdinsight"></a>HDInsight를 사용하여 스크립트 작업 개발
 
@@ -37,9 +36,9 @@ Bash 스크립트를 사용하여 HDInsight 클러스터를 사용자 지정하�
 
 | 이 방법을 사용하여 스크립트를 적용... | 클러스터를 생성하는 동안... | 실행 중인 클러스터에서... |
 | --- |:---:|:---:|
-| Azure 포털 |✓ |✓ |
+| Azure portal |✓ |✓ |
 | Azure PowerShell |✓ |✓ |
-| Azure CLI |&nbsp; |✓ |
+| Azure CLI 1.0 |&nbsp; |✓ |
 | HDInsight .NET SDK |✓ |✓ |
 | Azure Resource Manager 템플릿 |✓ |&nbsp; |
 
@@ -69,7 +68,7 @@ HDInsight의 서로 다른 버전에는 설치된 Hadoop 서비스 및 구성 �
 
 ### <a name="bps10"></a> OS 버전 대상
 
-Linux 기반 HDInsight는 Ubuntu Linux 배포를 기반으로 합니다. HDInsight는 버전이 다르면 다른 버전의 Ubuntu에 의존하는데 이는 스크립트 동작 방식을 변경할 수 있습니다. 예를 들어 HDInsight 3.4 이전 버전은 Upstart를 사용하는 Ubuntu 버전을 기반으로 합니다. 버전 3.5는 Systemd를 사용하는 Ubuntu 16.04를 기반으로 합니다. Systemd 및 Upstart는 다른 명령에 의존하기 때문에 이를 사용하여 작업하기 위해 스크립트가 작성되어야 합니다.
+Linux 기반 HDInsight는 Ubuntu Linux 배포를 기반으로 합니다. HDInsight는 버전이 다르면 다른 버전의 Ubuntu에 의존하는데 이는 스크립트 동작 방식을 변경할 수 있습니다. 예를 들어 HDInsight 3.4 이전 버전은 Upstart를 사용하는 Ubuntu 버전을 기반으로 합니다. 버전 3.5 이상은 Systemd를 사용하는 Ubuntu 16.04를 기반으로 합니다. Systemd 및 Upstart는 다른 명령에 의존하기 때문에 이를 사용하여 작업하기 위해 스크립트가 작성되어야 합니다.
 
 HDInsight 3.4와 3.5 간의 또 다른 중요한 차이는 현재 `JAVA_HOME`이 Java 8을 가리킨다는 것입니다.
 
@@ -104,7 +103,7 @@ elif [[ $OS_VERSION == 16* ]]; then
 fi
 ```
 
-https://hdiconfigactions.blob.core.windows.net/linuxhueconfigactionv02/install-hue-uber-v02.sh에서 이러한 코드 조각을 포함하는 전체 스크립트를 찾을 수 있습니다.
+이 코드 조각이 포함된 전체 스크립트는 https://hdiconfigactions.blob.core.windows.net/linuxhueconfigactionv02/install-hue-uber-v02.sh에서 찾을 수 있습니다.
 
 HDInsight에서 사용되는 Ubuntu 버전은 [HDInsight 구성 요소 버전](hdinsight-component-versioning.md) 문서를 참조하세요.
 
@@ -119,7 +118,7 @@ Systemd와 Upstart 간의 차이점을 이해하려면 [Upstart 사용자에 대
 > [!IMPORTANT]
 > 사용된 저장소 계정은 클러스터의 기본 저장소 계정 또는 다른 모든 저장소 계정의 공용 읽기 전용 컨테이너에 있어야 합니다.
 
-예를 들어 Microsoft에서 제공하는 샘플은 저장소 계정인 [https://hdiconfigactions.blob.core.windows.net/](https://hdiconfigactions.blob.core.windows.net/) 에 저장됩니다. HDInsight 팀에서 유지 관리하는 공용, 읽기 전용 컨테이너입니다.
+예를 들어 Microsoft에서 제공하는 샘플은 [https://hdiconfigactions.blob.core.windows.net/](https://hdiconfigactions.blob.core.windows.net/) 저장소 계정에 저장됩니다. 이 위치는 HDInsight 팀에서 유지 관리하는 공용, 읽기 전용 컨테이너입니다.
 
 ### <a name="bPS4"></a>사전 컴파일한 리소스 사용
 
@@ -157,19 +156,19 @@ HDInsight는 STDOUT 및 STDERR로 작성된 스크립트 출력을 기록합니�
 > [!NOTE]
 > Ambari는 클러스터를 정상적으로 만든 경우에만 사용할 수 있습니다. 클러스터를 만드는 동안 스크립트 작업을 사용하며 만들기에 실패하는 경우 문제 해결 섹션 [스크립트 작업을 사용하여 HDInsight 클러스터 사용자 지정](hdinsight-hadoop-customize-cluster-linux.md#troubleshooting) 에서 로깅된 정보에 액세스하는 다른 방법을 확인해보세요.
 
-대부분의 유틸리티 및 설치 패키지는 STDOUT 및 STDERR에 정보를 쓰지만 추가 로깅을 추가하려 할 수도 있습니다. 텍스트를 STDOUT에 보내려면 `echo`를 사용합니다. 예:
+대부분의 유틸리티 및 설치 패키지는 STDOUT 및 STDERR에 정보를 쓰지만 추가 로깅을 추가하려 할 수도 있습니다. 텍스트를 STDOUT에 보내려면 `echo`를 사용합니다. 예: 
 
 ```bash
 echo "Getting ready to install Foo"
 ```
 
-기본적으로 `echo`는 STDOUT에 문자열을 보냅니다. STDERR에 전달하려면 `echo` 앞에 `>&2`를 추가합니다. 예:
+기본적으로 `echo`는 STDOUT에 문자열을 보냅니다. STDERR에 전달하려면 `echo` 앞에 `>&2`를 추가합니다. 예: 
 
 ```bash
 >&2 echo "An error occurred installing Foo"
 ```
 
-이는 STDOUT에 작성된 정보를 STDERR(2)로 대신 리디렉션합니다. IO 리디렉션에 대한 자세한 내용은 [http://www.tldp.org/LDP/abs/html/io-redirection.html](http://www.tldp.org/LDP/abs/html/io-redirection.html)를 참조하세요.
+이는 STDOUT에 작성된 정보를 STDERR(2)로 대신 리디렉션합니다. IO 리디렉션에 대한 자세한 내용은 [http://www.tldp.org/LDP/abs/html/io-redirection.html](http://www.tldp.org/LDP/abs/html/io-redirection.html)을 참조하세요.
 
 스크립트 동작에서 기록된 정보 보기에 대한 자세한 내용은 [스크립트 작업을 사용하여 HDInsight 클러스터 사용자 지정](hdinsight-hadoop-customize-cluster-linux.md#troubleshooting)
 
@@ -318,7 +317,7 @@ fi
 이러한 스크립트 배포를 준비할 때 수행하는 단계는 다음과 같습니다.
 
 * 사용자 지정 스크립트가 포함된 파일을 배포 중 클러스터 노드에서 액세스할 수 있는 위치에 배치합니다. 예를 들어 클러스터의 기본 저장소입니다. 공개적으로 읽을 수 있는 호스팅 서비스에 파일을 저장할 수도 있습니다.
-* 스크립트가 멱등원인지 확인합니다. 이렇게 하면 스크립트가 동일한 노드에서 여러 번 실행될 수 있습니다.
+* 스크립트가 idempotent인지 확인합니다. 이렇게 하면 스크립트가 동일한 노드에서 여러 번 실행될 수 있습니다.
 * 임시 파일 디렉터리 /tmp를 사용하여 스크립트에서 사용되는 다운로드된 파일을 보관하고 스크립트가 실행된 후 이 파일을 정리합니다.
 * OS 수준 설정 또는 Hadoop 서비스 구성 파일이 변경되면 HDInsight 서비스를 다시 시작할 수 있습니다.
 
@@ -326,7 +325,7 @@ fi
 
 스크립트 작업을 사용하여 다음 메서드를 사용하여 HDInsight 클러스터를 사용자 지정할 수 있습니다.
 
-* Azure 포털
+* Azure portal
 * Azure PowerShell
 * Azure 리소스 관리자 템플릿
 * HDInsight .NET SDK
@@ -357,7 +356,7 @@ Microsoft에서는 HDInsight 클러스터에 구성 요소를 설치하는 샘�
 > [!NOTE]
 > 다음 명령은 CRLF 줄 끝을 LF으로 변경해야 하는 것과 거의 동일합니다. 시스템에서 사용할 수 있는 유틸리티에 따라 하나를 선택합니다.
 
-| 명령 | 참고 사항 |
+| 명령 | 메모 |
 | --- | --- |
 | `unix2dos -b INFILE` |원본 파일이 .BAK 확장으로 백업됩니다. |
 | `tr -d '\r' < INFILE > OUTFILE` |OUTFILE은 끝이 LF인 버전만 포함합니다. |
@@ -379,4 +378,3 @@ Microsoft에서는 HDInsight 클러스터에 구성 요소를 설치하는 샘�
 * [스크립트 작업을 사용하여 HDInsight 클러스터 사용자 지정](hdinsight-hadoop-customize-cluster-linux.md)
 * [HDInsight.NET SDK 참조](https://msdn.microsoft.com/library/mt271028.aspx) 를 사용하여 HDInsight를 관리하는 .NET 응용 프로그램을 만드는 방법을 알아봅니다.
 * [HDInsight REST API](https://msdn.microsoft.com/library/azure/mt622197.aspx) 를 사용하여 REST를 통해 HDInsight 클러스터에서 관리 작업을 수행하는 방법을 알아봅니다.
-

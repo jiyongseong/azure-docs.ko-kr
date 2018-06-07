@@ -1,10 +1,10 @@
 ---
-title: "고정 내부 개인 IP - Azure VM - 클래식"
-description: "고정 내부 개인 IP(DIP) 및 관리 방법 이해"
+title: 고정 내부 개인 IP - Azure VM - 클래식
+description: 고정 내부 개인 IP(DIP) 및 관리 방법 이해
 services: virtual-network
 documentationcenter: na
-author: jimdial
-manager: timlt
+author: genlin
+manager: cshepard
 editor: tysonn
 ms.assetid: 93444c6f-af1b-41f8-a035-77f5c0302bf0
 ms.service: virtual-network
@@ -12,18 +12,17 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 03/22/2016
-ms.author: jdial
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 857267f46f6a2d545fc402ebf3a12f21c62ecd21
-ms.openlocfilehash: cf9ee59ca4e44ed01836c2efb1f4df5f073bf6e0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/28/2017
-
-
+ms.date: 05/18/2018
+ms.author: genli
+ms.openlocfilehash: 661d2f789ace8da68b6d65609d4584a11967a01f
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34366616"
 ---
 # <a name="how-to-set-a-static-internal-private-ip-address-using-powershell-classic"></a>PowerShell을 사용하여 고정 내부 개인 IP를 설정하는 방법(기본)
-대부분의 경우 가상 컴퓨터에 고정 내부 IP 주소를 지정할 필요가 없습니다. 가상 네트워크의 VM은 사용자가 지정한 범위의 내부 IP 주소를 자동으로 받습니다. 그러나 특정한 상황에서는 특정 VM에 고정 IP 주소를 지정하는 것이 적합한 경우도 있습니다. 예를 들어 VM에서 DNS를 실행하거나 VM을 도메인 컨트롤러로 구성하는 경우입니다. 고정 내부 IP 주소는 중지 상태 및 프로비전 해제 상태에서도 VM에 유지됩니다. 
+대부분의 경우 가상 머신에 고정 내부 IP 주소를 지정할 필요가 없습니다. 가상 네트워크의 VM은 사용자가 지정한 범위의 내부 IP 주소를 자동으로 받습니다. 그러나 특정한 상황에서는 특정 VM에 고정 IP 주소를 지정하는 것이 적합한 경우도 있습니다. 예를 들어 VM에서 DNS를 실행하거나 VM을 도메인 컨트롤러로 구성하는 경우입니다. 고정 내부 IP 주소는 중지 상태 및 프로비전 해제 상태에서도 VM에 유지됩니다. 
 
 > [!IMPORTANT]
 > Azure에는 리소스를 만들고 작업하는 [Resource Manager와 클래식](../azure-resource-manager/resource-manager-deployment-model.md)이라는 두 가지 배포 모델이 있습니다. 이 문서에서는 클래식 배포 모델 사용에 대해 설명합니다. 새로운 배포는 대부분 [Resource Manager 배포 모델](virtual-networks-static-private-ip-arm-ps.md)을 사용하는 것이 좋습니다.
@@ -109,5 +108,4 @@ IP 주소 *10.0.0.7*을 *TestVnet*이라는 이름의 VNet에서 사용할 수 �
 [인스턴스 수준 공용 IP(ILPIP)](virtual-networks-instance-level-public-ip.md)
 
 [예약된 IP REST API](https://msdn.microsoft.com/library/azure/dn722420.aspx)
-
 

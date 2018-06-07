@@ -1,9 +1,9 @@
 ---
-title: "Azure Application Insights 내 Analytics 둘러보기 | Microsoft Docs"
-description: "Application Insights의 강력한 검색 도구인 Analytics의 모든 주요 쿼리에 대한 간단한 샘플"
+title: Azure Application Insights 내 Analytics 둘러보기 | Microsoft Docs
+description: Application Insights의 강력한 검색 도구인 Analytics의 모든 주요 쿼리에 대한 간단한 샘플
 services: application-insights
-documentationcenter: 
-author: CFreemanwa
+documentationcenter: ''
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: bddf4a6d-ea8d-4607-8531-1fe197cc57ad
 ms.service: application-insights
@@ -11,30 +11,29 @@ ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
-ms.date: 05/06/2017
-ms.author: sewhee
+ms.date: 04/20/2018
+ms.author: mbullwin
+ms.openlocfilehash: b57683f5b0634c27e8604c26496a3421ae386439
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: c30998a77071242d985737e55a7dc2c0bf70b947
-ms.openlocfilehash: edcf294856582569c00f7cf49beb3a481e28d7d8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/02/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="a-tour-of-analytics-in-application-insights"></a>Application Insights의 Analytics 둘러보기
 [분석](app-insights-analytics.md)은 [Application Insights](app-insights-overview.md)의 강력한 검색 기능입니다. 다음 페이지에서는 Log Analytics 쿼리 언어에 대해 설명합니다.
 
 * **[소개 비디오 보기](https://applicationanalytics-media.azureedge.net/home_page_video.mp4)**
-* 앱이 아직 데이터를 Application Insights로 전송하지 않은 경우, **[시뮬레이션된 데이터에 대한 분석을 테스트](https://analytics.applicationinsights.io/demo)**합니다.
-* **[SQL 사용자 치트 시트](https://aka.ms/sql-analytics)**에서는 가장 일반적인 코드를 변환합니다.
+* 앱이 아직 데이터를 Application Insights로 전송하지 않은 경우, **[시뮬레이션된 데이터에 대한 분석을 테스트](https://analytics.applicationinsights.io/demo)** 합니다.
+* **[SQL 사용자 치트 시트](https://aka.ms/sql-analytics)** 에서는 가장 일반적인 코드를 변환합니다.
 
 시작하기 위해 몇 가지 기본적인 쿼리를 연습해 보겠습니다.
 
 ## <a name="connect-to-your-application-insights-data"></a>Application Insights 데이터에 연결
 Application Insights의 앱 [개요 블레이드](app-insights-dashboards.md) 에서 분석을 엽니다.
 
-![portal.azure.com을 열고 Application Insights 리소스를 열고 Analytics를 클릭합니다.](./media/app-insights-analytics-tour/001.png)
+![portal.azure.com에서 Application Insights 리소스를 열고 분석을 클릭합니다.](./media/app-insights-analytics-tour/001.png)
 
-## <a name="takehttpsdocsloganalyticsioquerylanguagequerylanguagetakeoperatorhtml-show-me-n-rows"></a>[Take](https://docs.loganalytics.io/queryLanguage/query_language_takeoperator.html): n개의 행 표시
+## <a name="takehttpsdocsloganalyticsiodocslanguage-referencetabular-operators-show-me-n-rows"></a>[Take](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators): n개의 행 표시
 사용자 작업(일반적으로 웹앱에서 받는 HTTP 요청)을 기록하는 데이터 요소는 `requests`라는 테이블에 저장됩니다. 각 행은 앱의 Application Insights SDK에서 수신된 원격 분석 데이터 요소입니다.
 
 테이블의 몇 가지 샘플 행을 검사하는 것으로 시작해 보겠습니다.
@@ -55,11 +54,21 @@ Application Insights의 앱 [개요 블레이드](app-insights-dashboards.md) �
 ![테이블을 선택하고 열을 구성](./media/app-insights-analytics-tour/040.png)
 
 > [!NOTE]
-> 웹 브라우저에서 사용할 수 있는 결과의 순서를 변경하려면 열 머리글을 클릭합니다. 단, 큰 결과 집합의 경우에는 브라우저에 다운로드되는 행의 수가 제한된다는 점을 고려해야 합니다. 이 방식으로 정렬한다고 해서 항상 최상위 항목이나 최하위 항목이 표시되지는 않습니다. 항목을 안정적으로 정렬하려면 `top` 또는 `sort` 연산자를 사용합니다.
+> 웹 브라우저에서 사용할 수 있는 결과의 순서를 변경하려면 열 머리글을 클릭합니다. 단, 큰 결과 집합의 경우에는 브라우저에 다운로드되는 행의 수가 제한된다는 점을 고려해야 합니다. 이렇게 정렬하면 반환된 결과 집합만 정렬되며 실제 최상위 또는 최하위 항목이 항상 표시되지는 아닙니다. 항목을 안정적으로 정렬하려면 `top` 또는 `sort` 연산자를 사용합니다.
 >
 >
 
-## <a name="tophttpsdocsloganalyticsioquerylanguagequerylanguagetopoperatorhtml-and-sorthttpsdocsloganalyticsioquerylanguagequerylanguagesortoperatorhtml"></a>[Top](https://docs.loganalytics.io/queryLanguage/query_language_topoperator.html) 및 [sort](https://docs.loganalytics.io/queryLanguage/query_language_sortoperator.html)
+## <a name="query-across-applications"></a>응용 프로그램 간 쿼리
+여러 Application Insights 응용 프로그램의 데이터를 결합하려는 경우 **앱** 키워드를 사용하여 테이블 이름과 함께 응용 프로그램을 지정합니다.  이 쿼리는 **union** 명령을 사용하여 두 개의 서로 다른 응용 프로그램의 요청을 결합합니다.
+
+
+```AIQL
+
+    union app('fabrikamstage').requests, app('fabrikamprod').requests
+    
+```
+
+## <a name="tophttpsdocsloganalyticsiodocslanguage-referencetabular-operatorstop-operator-and-sorthttpsdocsloganalyticsiodocslanguage-referencetabular-operatorssort-operator"></a>[Top](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/top-operator) 및 [sort](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/sort-operator)
 `take` 은(는) 빨리 확인할 결과 샘플을 가져오는 데 유용하지만 테이블의 행을 특정 순서 없이 표시합니다. 순서가 지정된 보기를 가져오려면 `top`(샘플의 경우) 또는 `sort`(전체 테이블에 대해)을(를) 사용합니다.
 
 특정 열을 기준으로 순서가 정해진 처음 n 행 표시:
@@ -83,9 +92,9 @@ Application Insights의 앱 [개요 블레이드](app-insights-dashboards.md) �
 
 결과는 같지만 조금 더 느리게 실행될 수 있습니다. `sort`의 별칭인 `order`을(를) 작성할 수도 있습니다.
 
-테이블 보기의 열 머리글을 사용하여 화면에서 결과를 정렬할 수도 있습니다. 하지만 물론 `take` 또는 `top`을(를) 사용하여 테이블의 일부만 검색했다면 검색한 레코드의 순서만 변경될 것입니다.
+테이블 보기의 열 머리글을 사용하여 화면에서 결과를 정렬할 수도 있습니다. 물론 `take` 또는 `top`을 사용하여 테이블의 일부만 검색하는 경우 열 머리글을 클릭하면 검색한 레코드의 순서만 바뀝니다.
 
-## <a name="wherehttpsdocsloganalyticsioquerylanguagequerylanguagewhereoperatorhtml-filtering-on-a-condition"></a>[Where](https://docs.loganalytics.io/queryLanguage/query_language_whereoperator.html): 조건에 대한 필터링
+## <a name="wherehttpsdocsloganalyticsiodocslanguage-referencetabular-operatorswhere-operator-filtering-on-a-condition"></a>[Where](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/where-operator): 조건에 대한 필터링
 
 특정 결과 코드를 반환하는 요청만 살펴보겠습니다.
 
@@ -106,8 +115,9 @@ Application Insights의 앱 [개요 블레이드](app-insights-dashboards.md) �
 
 <!---Read all about [scalar expressions]().--->
 
-### <a name="getting-the-right-type"></a>올바른 형식 가져오기
-성공하지 못한 요청 찾기
+### <a name="find-unsuccessful-requests"></a>성공하지 못한 요청 찾기
+
+보다 큼 비교를 사용하려면 문자열 값을 정수로 변환합니다.
 
 ```AIQL
 
@@ -124,7 +134,7 @@ Application Insights의 앱 [개요 블레이드](app-insights-dashboards.md) �
 
 ![](./media/app-insights-analytics-tour/change-time-range.png)
 
-where 절에서 `timestamp`를 언급하는 쿼리를 작성하여 시간 범위를 재정의합니다. 예:
+where 절에서 `timestamp`를 언급하는 쿼리를 작성하여 시간 범위를 재정의합니다. 예: 
 
 ```AIQL
 
@@ -158,12 +168,17 @@ where 절에서 `timestamp`를 언급하는 쿼리를 작성하여 시간 범위
     | where timestamp > datetime(2016-11-19) and timestamp < datetime(2016-11-21)
     | top 5 by duration
 
+    // Between specific day/time range
+    requests
+    | where timestamp > datetime(2018-05-17T17:06:19.892Z) and timestamp <= datetime(2018-05-18T17:06:19.892Z)
+    | where duration > 0
+
 ```
 
-[날짜 및 시간 참조](https://docs.loganalytics.io/concepts/concepts_datatypes_datetime.html)
+[날짜 및 시간 참조](https://docs.loganalytics.io/docs/Language-Reference/Data-types/datetime)
 
 
-## <a name="projecthttpsdocsloganalyticsioquerylanguagequerylanguageprojectoperatorhtml-select-rename-and-compute-columns"></a>[Project](https://docs.loganalytics.io/queryLanguage/query_language_projectoperator.html): 열 선택, 이름 바꾸기 및 계산
+## <a name="projecthttpsdocsloganalyticsiodocslanguage-referencetabular-operatorsproject-operator-select-rename-and-compute-columns"></a>[Project](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/project-operator): 열 선택, 이름 바꾸기 및 계산
 원하는 열만 선택하려면 [`project`](https://docs.loganalytics.io/queryLanguage/query_language_projectoperator.html)을(를) 사용합니다.
 
 ```AIQL
@@ -197,7 +212,7 @@ where 절에서 `timestamp`를 언급하는 쿼리를 작성하여 시간 범위
 식은 일반적인 연산자(`+`,`-`, ...)를 모두 포함할 수 있으며, 유용한 함수가 다양하게 사용됩니다.
 
 ## <a name="extend"></a>Extend
-기존 열에 열을 추가하기만 하려면 [`extend`](https://docs.loganalytics.io/queryLanguage/query_language_extendoperator.html)을(를) 사용합니다.
+기존 열에 열을 추가하기만 하려면 [`extend`](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/extend-operator)을(를) 사용합니다.
 
 ```AIQL
 
@@ -206,7 +221,7 @@ where 절에서 `timestamp`를 언급하는 쿼리를 작성하여 시간 범위
     | extend timeOfDay = floor(timestamp % 1d, 1s)
 ```
 
-기존 열을 모두 유지하려는 경우 [`extend`](https://docs.loganalytics.io/queryLanguage/query_language_extendoperator.html)을(를) 사용하면 [`project`](https://docs.loganalytics.io/queryLanguage/query_language_projectoperator.html)에 비해 표시되는 정보가 상세하지 않습니다.
+기존 열을 모두 유지하려는 경우 [`extend`](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/extend-operator)을(를) 사용하면 [`project`](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/project-operator)에 비해 표시되는 정보가 상세하지 않습니다.
 
 ### <a name="convert-to-local-time"></a>현지 시간으로 변환
 
@@ -219,8 +234,7 @@ where 절에서 `timestamp`를 언급하는 쿼리를 작성하여 시간 범위
     | extend localTime = timestamp - 8h
 ```
 
-
-## <a name="summarizehttpsdocsloganalyticsioquerylanguagequerylanguagesummarizeoperatorhtml-aggregate-groups-of-rows"></a>[요약](https://docs.loganalytics.io/queryLanguage/query_language_summarizeoperator.html): 행 그룹 집계
+## <a name="summarizehttpsdocsloganalyticsiodocslanguage-referencetabular-operatorssummarize-operator-aggregate-groups-of-rows"></a>[요약](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/summarize-operator): 행 그룹 집계
 `Summarize` 은(는) 행 그룹에서 지정된 *집계 함수* 를 적용합니다.
 
 예를 들어 웹앱이 요청에 응답하는 데 걸리는 시간은 `duration`필드에 보고됩니다. 모든 요청에 대한 평균 응답 시간을 살펴보겠습니다.
@@ -231,7 +245,7 @@ where 절에서 `timestamp`를 언급하는 쿼리를 작성하여 시간 범위
 
 ![](./media/app-insights-analytics-tour/420.png)
 
-`Summarize`은(는) 스트림의 데이터 요소를 `by` 절에서 동일하게 평가하는 그룹으로 수집합니다. `by` 식의 각 값(예: 위 예제의 경우 각 작업 이름)은 결과 테이블의 행이 됩니다.
+`Summarize`은(는) 스트림의 데이터 요소를 `by` 절에서 동일하게 평가하는 그룹으로 수집합니다. `by` 식의 각 값(예: 위 예제의 경우 각 고유 작업 이름)은 결과 테이블의 행이 됩니다.
 
 또는 하루 중 시간으로 결과를 그룹화할 수 있습니다.
 
@@ -258,7 +272,7 @@ where 절에서 `timestamp`를 언급하는 쿼리를 작성하여 시간 범위
 
 그룹의 행 수를 계산하려는 경우 `count()` 집계(및 개수 계산 작업)도 있습니다.
 
-[집계 함수](https://docs.loganalytics.io/learn/tutorials/aggregations.html)의 범위가 있습니다.
+[집계 함수](https://docs.loganalytics.io/docs/Language-Reference/Aggregation-functions)의 범위가 있습니다.
 
 ## <a name="charting-the-results"></a>결과 차트로 작성
 ```AIQL
@@ -393,13 +407,13 @@ where 절에서 `timestamp`를 언급하는 쿼리를 작성하여 시간 범위
     | project d = sessionDuration + datetime("2016-01-01"), count_
 ```
 
-마지막 줄은 날짜/시간으로 변환해야 합니다. 현재 차트의 x축은 날짜/시간인 경우에만 스칼라로 표시됩니다.
+마지막 줄은 날짜/시간으로 변환해야 합니다. 현재 차트의 x-축은 날짜/시간인 경우에만 스칼라로 표시됩니다.
 
 `where` 절은 단발 세션(sessionDuration==0)을 제외하고 x축의 길이를 설정합니다.
 
 ![](./media/app-insights-analytics-tour/290.png)
 
-## <a name="percentileshttpsdocsloganalyticsioquerylanguagequerylanguagepercentilesaggfunctionhtml"></a>[백분위수](https://docs.loganalytics.io/queryLanguage/query_language_percentiles_aggfunction.html)
+## <a name="percentileshttpsdocsloganalyticsiodocslanguage-referenceaggregation-functionspercentiles"></a>[백분위수](https://docs.loganalytics.io/docs/Language-Reference/Aggregation-functions/percentiles())
 서로 다른 세션 백분위수를 다루는 기간 범위는 무엇입니까?
 
 위의 쿼리를 사용하되 마지막 줄을 다음으로 바꿈:
@@ -460,7 +474,7 @@ where 절에서 `timestamp`를 언급하는 쿼리를 작성하여 시간 범위
 조인을 수행하기 전에 `project`을(를) 사용하여 필요한 열만 선택하는 것이 좋습니다.
 동일한 절에서 타임스탬프 열의 이름을 바꿉니다.
 
-## <a name="lethttpsdocsloganalyticsioquerylanguagequerylanguageletstatementhtml-assign-a-result-to-a-variable"></a>[Let](https://docs.loganalytics.io/queryLanguage/query_language_letstatement.html): 변수에 결과 할당
+## <a name="lethttpsdocsloganalyticsiodocslanguage-referencequery-statementslet-statement-assign-a-result-to-a-variable"></a>[Let](https://docs.loganalytics.io/docs/Language-Reference/Query-statements/Let-statement): 변수에 결과 할당
 
 `let`을 사용하여 이전 식의 일부를 분리할 수 있습니다. 결과는 변하지 않음:
 
@@ -492,7 +506,7 @@ requests
 ```
 
 
-### <a name="functions"></a>함수
+### <a name="functions"></a>Functions
 
 *Let*을 사용하여 함수를 정의합니다.
 
@@ -528,10 +542,10 @@ requests
 
 예를 들어 앱이 다음을 포함한 경우입니다.
 
-```C#
+```csharp
 
     var dimensions = new Dictionary<string, string>
-                     {{"p1", "v1"},{"p2", "v2"}};
+                     {{"p1", "v1"},{"p2.d2", "v2"}};
     var measurements = new Dictionary<string, double>
                      {{"m1", 42.0}, {"m2", 43.2}};
     telemetryClient.TrackEvent("myEvent", dimensions, measurements);
@@ -544,7 +558,6 @@ requests
     customEvents
     | extend p1 = customDimensions.p1,
       m1 = todouble(customMeasurements.m1) // cast to expected type
-
 ```
 
 사용자 지정 차원이 특정 형식인지 여부를 확인하려면
@@ -555,6 +568,18 @@ requests
     | extend p1 = customDimensions.p1,
       iff(notnull(todouble(customMeasurements.m1)), ...
 ```
+
+### <a name="special-characters"></a>특수 문자
+
+이름에 특수 문자나 언어 키워드가 있는 식별자의 경우 `['` 및 `']` 또는 `["` 및 `"]`를 사용하여 액세스해야 합니다.
+
+```AIQL
+
+    customEvents
+    | extend p2d2 = customDimensions.['p2.d2'], ...
+```
+
+[식별자 명명 규칙 참조](https://docs.loganalytics.io/docs/Learn/References/Naming-principles)
 
 ## <a name="dashboards"></a>대시보드
 가장 중요한 모든 차트와 테이블을 결합하기 위해 결과를 대시보드에 고정할 수 있습니다.
@@ -601,7 +626,7 @@ requests
 
 응용 프로그램 코드에 이러한 줄을 포함하는 사례:
 
-```C#
+```csharp
 
     telemetry.TrackEvent("Query",
        new Dictionary<string,string> {{"query", sqlCmd}},
@@ -619,7 +644,7 @@ requests
 ![사용자 지정 이벤트의 표시 속도](./media/app-insights-analytics-tour/analytics-custom-events-dimensions.png)
 
 ### <a name="custom-metrics-table"></a>사용자 지정 메트릭 테이블
-사용자 지정 메트릭 값을 보내기 위해 [TrackMetric()](app-insights-api-custom-events-metrics.md#trackmetric)을 사용하면 **customMetrics** 스트림에 결과가 나타납니다. 예:  
+사용자 지정 메트릭 값을 보내기 위해 [TrackMetric()](app-insights-api-custom-events-metrics.md#trackmetric)을 사용하면 **customMetrics** 스트림에 결과가 나타납니다. 예:   
 
 ![Application Insights 분석의 사용자 지정 메트릭](./media/app-insights-analytics-tour/analytics-custom-metrics.png)
 
@@ -704,4 +729,3 @@ Tracktrace()를 사용하여 앱에서 보낸 원격 분석 데이터나 [다른
 * [SQL 사용자 치트 시트](https://aka.ms/sql-analytics)에서는 가장 일반적인 코드를 변환합니다.
 
 [!INCLUDE [app-insights-analytics-footer](../../includes/app-insights-analytics-footer.md)]
-

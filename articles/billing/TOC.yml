@@ -1,0 +1,139 @@
+- name: Azure Billing 설명서
+  href: index.md
+- name: 시작하기
+  items:
+    - name: 예기치 않은 비용 방지
+      href: billing-getting-started.md
+    - name: 체험 계정에 포함된 서비스 만들기
+      href: billing-create-free-services-included-free-account.md
+    - name: 체험 계정에 대한 요금 부과 방지
+      href: billing-avoid-charges-free-account.md
+    - name: 요금 청구에 대한 액세스 권한 부여
+      href: billing-manage-access.md
+    - name: Office 365 계정을 사용하여 등록
+      href: billing-use-existing-office-365-account-azure-subscription.md
+    - name: Azure 계정으로 Office 365 등록
+      href: billing-use-existing-azure-account-for-office-365-subscription.md
+    - name: 관리 그룹으로 리소스 구성
+      href: billing-enterprise-mgmt-group-overview.md
+    - name: Azure Reserved Instances로 저장
+      href: billing-save-compute-costs-reservations.md
+      items:
+        - name: 예약 인스턴스를 사용하여 Virtual Machines 선불 결제
+          href: ../virtual-machines/windows/prepay-reserved-vm-instances.md?toc=/azure/billing/TOC.json
+        - name: 예약 인스턴스 관리
+          href: billing-manage-reserved-vm-instance.md
+        - name: 예약 인스턴스 할인 응용 프로그램 이해
+          href: billing-understand-vm-reservation-charges.md
+        - name: 종량제의 예약 인스턴스 사용량 이해
+          href: billing-understand-reserved-instance-usage.md
+        - name: 엔터프라이즈의 예약 인스턴스 사용량 이해
+          href: billing-understand-reserved-instance-usage-ea.md
+        - name: 예약 인스턴스 Windows 비용
+          href: billing-reserved-instance-windows-software-costs.md
+    - name: 한도 및 할당량
+      href: ../azure-subscription-service-limits.md?toc=/azure/billing/TOC.json
+- name: 방법
+  items:
+    - name: 사용량 및 비용 모니터링
+      items:
+        - name: 청구서 및 사용량 가져오기
+          href: billing-download-azure-invoice-daily-usage-date.md
+        - name: 체험 서비스 사용량 확인
+          href: billing-check-free-service-usage.md
+        - name: 요금 청구 방식
+          href: billing-understand-your-bill.md
+        - name: 청구서에서 용어 이해
+          href: billing-understand-your-invoice.md
+        - name: 사용량에서 용어 이해
+          href: billing-understand-your-usage.md
+        - name: 외부 서비스 요금 이해
+          href: billing-understand-your-azure-marketplace-charges.md
+        - name: 체험 서비스 미터 매핑 이해
+          href: billing-understand-free-service-meter-mapping.md
+        - name: 지출 한도 이해
+          href: billing-spending-limit.md
+        - name: 청구 경고 설정
+          href: billing-set-up-alerts.md
+        - name: 미지불액 해결
+          href: billing-azure-subscription-past-due-balance.md
+    - name: 구독 관리
+      items:
+        - name: 구독 또는 관리 그룹 찾기
+          href: billing-enterprise-mgmt-grp-find.md
+        - name: 관지라 역할 관리
+          href: billing-add-change-azure-subscription-administrator.md
+        - name: 구독 소유권 이전
+          href: billing-subscription-transfer.md
+        - name: 사용 해제된 구독 다시 활성화
+          href: billing-subscription-become-disable.md
+        - name: 무료 구독에서 업그레이드
+          href: billing-upgrade-azure-subscription.md
+        - name: 구독 제품 전환
+          href: billing-how-to-switch-azure-offer.md
+        - name: Azure AD 테넌트 연결
+          href: ../active-directory/active-directory-how-subscriptions-associated-directory.md?toc=/azure/billing/TOC.json
+        - name: 구독 취소
+          href: billing-how-to-cancel-azure-subscription.md
+    - name: 계정 관리
+      items:
+        - name: 프로필 편집
+          href: billing-how-to-change-azure-account-profile.md
+        - name: 결제 정보 업데이트
+          href: billing-how-to-change-credit-card.md
+        - name: 청구서에 따른 구독에 대한 요금 지불
+          href: billing-how-to-pay-by-invoice.md
+        - name: 파트너 ID 연결
+          href: billing-partner-admin-link-started.md
+        - name: 청구 계정 보기
+          href: billing-view-all-accounts.md
+    - name: 문제 해결
+      items:
+        - name: 등록 문제
+          href: 'https://support.microsoft.com/en-us/help/4042959'
+        - name: 거부된 카드
+          href: 'https://support.microsoft.com/en-us/help/4042960'
+        - name: 로그인 문제
+          href: 'https://support.microsoft.com/en-us/help/4042961'
+        - name: 구독을 찾을 수 없음
+          href: billing-no-subscriptions-found.md
+        - name: Enterprise 비용 보기 사용 안 함
+          href: billing-enterprise-mgmt-grp-troubleshoot-cost-view.md
+- name: 참고 자료
+  items:
+    - name: Azure Billing API 개요
+      href: billing-usage-rate-card-overview.md
+      items:
+        - name: Azure Billing REST API
+          href: 'https://docs.microsoft.com/rest/api/billing'
+        - name: 파트너 솔루션 – Cloud Cruiser
+          href: billing-usage-rate-card-partner-solution-cloudcruiser.md
+    - name: Azure Consumption API
+      items:
+        - name: Azure Consumption REST API
+          href: 'https://docs.microsoft.com/rest/api/consumption'
+        - name: RateCard REST API
+          href: 'https://msdn.microsoft.com/library/azure/mt219005.aspx'
+        - name: REST API 사용
+          href: 'https://msdn.microsoft.com/library/azure/mt219003.aspx'
+    - name: Enterprise Reporting 개요
+      href: billing-enterprise-api.md
+      items:
+        - name: Enterprise Reporting REST API
+          href: 'https://docs.microsoft.com/rest/api/billing/enterprise/billing-enterprise-api-balance-summary'
+    - name: 청구 코드 샘플
+      items:
+        - name: 청구서 API 코드 샘플
+          href: 'https://github.com/Azure-Samples/billing-dotnet-core-invoice-download'
+        - name: 사용량 API 코드 샘플
+          href: 'https://github.com/Azure-Samples/billing-dotnet-usage-api'
+        - name: RateCard API 코드 샘플
+          href: 'https://github.com/Azure-Samples/billing-dotnet-ratecard-api'
+- name: 리소스
+  items:
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: 지원에 문의
+      href: ../azure-supportability/how-to-create-azure-support-request.md
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'

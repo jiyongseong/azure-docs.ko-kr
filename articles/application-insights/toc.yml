@@ -1,0 +1,363 @@
+- name: Application Insights 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: Application Insights란?
+      href: app-insights-overview.md
+    - name: 성능 모니터링 개요
+      href: app-insights-detect-triage-diagnose.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: .NET
+      href: quick-monitor-portal.md
+    - name: .NET Core
+      href: app-insights-dotnetcore-quick-start.md
+    - name: Node.js
+      href: app-insights-nodejs-quick-start.md
+    - name: 자바
+      href: app-insights-java-quick-start.md
+    - name: 모바일
+      href: app-insights-mobile-center-quickstart.md
+- name: 자습서
+  items:
+    - name: 런타임 예외 찾기
+      href: app-insights-tutorial-runtime-exceptions.md
+    - name: 성능 문제 찾기
+      href: app-insights-tutorial-performance.md
+    - name: 응용 프로그램 상태에 대한 경고
+      href: app-insights-tutorial-alert.md
+    - name: 사용자 이해
+      href: app-insights-tutorial-users.md
+    - name: 사용자 지정 대시보드 만들기
+      href: app-insights-tutorial-dashboards.md
+- name: 개념
+  items:
+    - name: Azure 모니터링
+      items:
+        - name: Azure 웹앱
+          href: app-insights-azure-web-apps.md
+        - name: Azure Cloud Services
+          href: app-insights-cloudservices.md
+    - name: ASP.NET 앱 모니터링
+      items:
+        - name: 웹 앱
+          href: app-insights-asp-net.md
+        - name: 이미 라이브 상태인 웹앱
+          href: app-insights-monitor-performance-live-website-now.md
+        - name: Windows 서비스
+          href: app-insights-windows-services.md
+        - name: Windows 데스크톱
+          href: app-insights-windows-desktop.md
+        - name: ASP.NET Core
+          href: app-insights-asp-net-core.md
+        - name: 콘솔
+          href: application-insights-console.md
+        - name: 응용 프로그램 대시보드
+          href: app-insights-overview-dashboard.md
+    - name: Java 앱 모니터링
+      items:
+        - name: 웹 앱
+          href: app-insights-java-get-started.md
+        - name: 웹앱 - 런타임
+          href: app-insights-java-live.md
+        - name: Docker 앱
+          href: app-insights-docker.md
+    - name: Node.js 앱 모니터링
+      items:
+        - name: Node.js
+          href: app-insights-nodejs.md
+    - name: 웹 페이지 모니터링
+      items:
+        - name: JavaScript
+          href: app-insights-javascript.md
+    - name: Azure Functions 모니터링
+      href: ../azure-functions/functions-monitoring.md?toc=%2fazure%2fapplication-insights%2ftoc.json
+    - name: 기타 플랫폼 모니터링
+      items:
+        - name: SharePoint 사이트
+          href: app-insights-sharepoint.md
+        - name: 기타 플랫폼
+          href: app-insights-platforms.md
+- name: 방법 가이드
+  items:
+    - name: 계획 및 디자인
+      items:
+        - name: 웹앱 및 서비스 심층 진단
+          href: app-insights-devops.md
+        - name: 웹 응용 프로그램의 성능 모니터링
+          href: app-insights-web-monitor-performance.md
+        - name: '개발, 테스트 및 프로덕션 구분'
+          href: app-insights-separate-resources.md
+        - name: 여러 구성 요소를 사용하여 앱 모니터링
+          href: app-insights-monitor-multi-role-apps.md
+        - name: Application Insights에서 다음을 수행하는 방법
+          href: app-insights-how-do-i.md
+    - name: 구성
+      items:
+        - name: Azure
+          items:
+            - name: 연속 모니터링 추가
+              href: app-insights-vsts-continuous-monitoring.md
+            - name: 프로파일러
+              href: app-insights-profiler.md
+            - name: 프로파일러 활성화
+              href: enable-profiler-compute.md
+            - name: 진단
+              href: app-insights-azure-diagnostics.md
+            - name: 미리 보기
+              href: app-insights-previews.md
+        - name: ASP.NET
+          items:
+            - name: 더 많은 원격 분석 수집
+              href: app-insights-asp-net-more.md
+            - name: 예외
+              href: app-insights-asp-net-exceptions.md
+            - name: 로그 추적
+              href: app-insights-asp-net-trace-logs.md
+            - name: 성능 카운터
+              href: app-insights-performance-counters.md
+            - name: 종속성
+              href: app-insights-asp-net-dependencies.md
+            - name: 릴리스 주석
+              href: app-insights-annotations.md
+            - name: ApplicationInsights.config
+              href: app-insights-configuration-with-applicationinsights-config.md
+            - name: 스냅숏 디버거
+              href: app-insights-snapshot-debugger.md
+        - name: ASP.NET Core
+          items:
+            - name: Linux 앱 서비스에 대한 Profiler
+              href: app-insights-profiler-aspnetcore-linux.md
+        - name: J2EE
+          items:
+            - name: 로그 추적
+              href: app-insights-java-trace-logs.md
+            - name: Unix 메트릭
+              href: app-insights-java-collectd.md
+            - name: 종속성
+              href: app-insights-java-agent.md
+            - name: 필터 원격 분석
+              href: app-insights-java-filter-telemetry.md
+        - name: Alerts
+          items:
+            - name: 가용성
+              href: app-insights-monitor-web-app-availability.md
+            - name: 메트릭 경고
+              href: app-insights-alerts.md
+        - name: 스마트 검색
+          href: app-insights-proactive-diagnostics.md
+          items:
+            - name: 오류 잘못된 부분
+              href: app-insights-proactive-failure-diagnostics.md
+            - name: 성능 이상
+              href: app-insights-proactive-performance-diagnostics.md
+            - name: 추적 성능 저하
+              href: app-insights-proactive-trace-severity.md
+            - name: 예외 볼륨
+              href: app-insights-proactive-exception-volume.md
+            - name: 메모리 누수
+              href: app-insights-proactive-potential-memory-leak.md
+            - name: 리소스 사용률
+              href: app-insights-proactive-low-utilization-cloud-resources.md
+            - name: 보안 검색
+              href: app-insights-proactive-application-security-detection-pack.md
+        - name: 리소스 만들기
+          href: app-insights-create-new-resource.md
+    - name: 분석
+      items:
+        - name: Application Insights 포털
+          items:
+            - name: 대시보드
+              href: app-insights-dashboards.md
+            - name: 검색
+              href: app-insights-diagnostic-search.md
+            - name: 메트릭
+              href: app-insights-metrics-explorer.md
+            - name: 라이브 스트림
+              href: app-insights-live-stream.md
+            - name: 응용 프로그램 맵
+              href: app-insights-app-map.md
+            - name: 트랜잭션 진단
+              href: app-insights-transaction-diagnostics.md
+            - name: HockeyApp 데이터
+              href: app-insights-hockeyapp-bridge-app.md
+        - name: Visual Studio
+          items:
+            - name: F5 통찰력
+              href: app-insights-visual-studio.md
+            - name: 추세
+              href: app-insights-visual-studio-trends.md
+            - name: CodeLens
+              href: app-insights-visual-studio-codelens.md
+        - name: 사용 현황
+          items:
+            - name: 개요
+              href: app-insights-usage-overview.md
+            - name: 사용자 컨텍스트 전송
+              href: app-insights-usage-send-user-context.md
+            - name: '사용자, 세션, 이벤트'
+              href: app-insights-usage-segmentation.md
+            - name: 깔때기
+              href: usage-funnels.md
+            - name: 코호트
+              href: app-insights-usage-cohorts.md
+            - name: 영향
+              href: app-insights-usage-impact.md
+            - name: 보존
+              href: app-insights-usage-retention.md
+            - name: 사용자 흐름
+              href: app-insights-usage-flows.md
+            - name: 통합 문서
+              href: app-insights-usage-workbooks.md
+        - name: 분석
+          items:
+            - name: 개요
+              href: app-insights-analytics.md
+            - name: 사용자 지정 로그 가져오기
+              href: app-insights-analytics-import.md
+    - name: 자동화
+      items:
+        - name: Azure PowerShell 구성
+          href: app-insights-powershell.md
+        - name: 리소스 만들기
+          href: app-insights-powershell-script-create-resource.md
+        - name: 경고 설정
+          href: app-insights-powershell-alerts.md
+        - name: Azure 진단 가져오기
+          href: app-insights-powershell-azure-diagnostics.md
+        - name: Microsoft Flow 자동화
+          href: app-insights-automate-with-flow.md
+        - name: Azure 논리 앱과 자동화
+          href: automate-with-logic-apps.md
+        - name: 사용자 지정 이메일 보고서
+          href: automate-custom-reports.md
+    - name: 개발
+      items:
+        - name: 사용자 지정 이벤트 및 메트릭용 API
+          href: app-insights-api-custom-events-metrics.md
+        - name: .NET SDK에서 사용자 지정 작업 추적
+          href: application-insights-custom-operations-tracking.md
+        - name: 필터링 및 원격 분석 전처리
+          href: app-insights-api-filtering-sampling.md
+        - name: 샘플링
+          href: app-insights-sampling.md
+    - name: 관리
+      items:
+        - name: 가격 책정 및 데이터 볼륨 관리
+          href: app-insights-pricing.md
+          items:
+            - name: 엔터프라이즈 계획 세부 정보
+              href: app-insights-pricing-enterprise-details.md
+        - name: SCOM에 대해 Application Insights를 사용하여 응용 프로그램 성능 모니터링
+          href: app-insights-scom.md
+    - name: 내보내기
+      items:
+        - name: 연속 내보내기
+          href: app-insights-export-telemetry.md
+          items:
+            - name: 코드 샘플
+              items:
+                - name: Stream Analytics를 사용하여 SQL로 내보내기
+                  href: app-insights-code-sample-export-sql-stream-analytics.md
+                - name: Stream Analytics로 내보내기
+                  href: app-insights-export-stream-analytics.md
+        - name: 데이터 모델 내보내기
+          href: app-insights-export-data-model.md
+        - name: Power BI에 내보내기
+          href: app-insights-export-power-bi.md
+    - name: 보안
+      items:
+        - name: '데이터 수집, 보존 및 저장'
+          href: app-insights-data-retention-privacy.md
+        - name: '리소스, 역할 및 액세스 제어'
+          href: app-insights-resources-roles-access-control.md
+        - name: IP 주소
+          href: app-insights-ip-addresses.md
+    - name: 문제 해결
+      items:
+        - name: .NET에 대한 데이터 없음
+          href: app-insights-asp-net-troubleshoot-no-data.md
+        - name: 스냅숏 디버거
+          href: app-insights-troubleshoot-snapshot-debugger.md
+        - name: 분석
+          href: app-insights-analytics-troubleshooting.md
+        - name: 자바
+          href: app-insights-java-troubleshoot.md
+        - name: 사용 현황 분석
+          href: app-insights-usage-troubleshoot.md
+- name: 샘플
+  items:
+    - name: 코드 샘플
+      href: 'https://azure.microsoft.com/resources/samples/?service=application-insights&sort=0'
+- name: 참고 자료
+  items:
+    - name: Analytics 쿼리 언어
+      href: 'https://docs.loganalytics.io/'
+    - name: Azure PowerShell
+      href: 'https://docs.microsoft.com/powershell/module/azurerm.applicationinsights/?view=azurermps-5.7.0#monitor'
+    - name: .NET
+      href: 'https://docs.microsoft.com/dotnet/api/microsoft.applicationinsights'
+    - name: 자바
+      href: /java/api/com.microsoft.applicationinsights
+    - name: JavaScript
+      href: 'https://github.com/Microsoft/ApplicationInsights-JS/blob/master/API-reference.md'
+    - name: 데이터 액세스 API
+      href: 'https://dev.applicationinsights.io/'
+    - name: REST API
+      href: 'https://docs.microsoft.com/rest/api/application-insights/'
+    - name: 데이터 모델
+      href: application-insights-data-model.md
+      items:
+        - name: 요청
+          href: application-insights-data-model-request-telemetry.md
+        - name: 종속성
+          href: application-insights-data-model-dependency-telemetry.md
+        - name: 예외
+          href: application-insights-data-model-exception-telemetry.md
+        - name: 추적
+          href: application-insights-data-model-trace-telemetry.md
+        - name: 행사
+          href: application-insights-data-model-event-telemetry.md
+        - name: 메트릭
+          href: application-insights-data-model-metric-telemetry.md
+        - name: Context
+          href: application-insights-data-model-context.md
+    - name: 원격 분석 상관 관계
+      href: application-insights-correlation.md
+    - name: 코드 샘플
+      href: 'https://azure.microsoft.com/en-us/resources/samples/?service=application-insights'
+- name: 리소스
+  items:
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: 언어 및 플랫폼
+      href: app-insights-platforms.md
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/application-insights/'
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'
+    - name: 뉴스
+      items:
+        - name: 블로그
+          href: 'https://azure.microsoft.com/blog/tag/application-insights/'
+        - name: 서비스 업데이트
+          href: 'https://azure.microsoft.com/updates/?product=application-insights'
+        - name: SDK 릴리스 정보
+          href: app-insights-release-notes.md
+        - name: 개발자 분석 도구에 대한 릴리스 정보
+          href: app-insights-release-notes-vsix.md
+    - name: FAQ
+      href: app-insights-troubleshoot-faq.md
+    - name: 도움말
+      items:
+        - name: MSDN 포럼
+          href: 'https://social.msdn.microsoft.com/Forums/azure/home?forum=ApplicationInsights'
+        - name: 스택 오버플로
+          href: 'http://stackoverflow.com/questions/tagged/az-application-insights'
+        - name: 사용자 음성
+          href: 'https://visualstudio.uservoice.com/forums/357324-application-insights'
+        - name: 지원
+          href: 'https://azure.microsoft.com/support/'
+    - name: 동영상
+      href: 'https://azure.microsoft.com/documentation/videos/index/?services=application-insights'

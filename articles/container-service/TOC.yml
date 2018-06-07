@@ -6,3 +6,5 @@
   items:
     - name: Azure 로드맵
       href: 'https://azure.microsoft.com/roadmap/?category=containers'
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'

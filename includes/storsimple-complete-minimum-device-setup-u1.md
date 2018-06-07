@@ -16,7 +16,7 @@
 
     ![StorSimple 최소 장치 설치 네트워크 인터페이스](./media/storsimple-complete-minimum-device-setup-u1/HCS_MinDeviceSetupNetworkInterfaces2-include.png)
 
-    컨트롤러에 대한 고정 IP 주소는 장치에 대한 업데이트 서비스를 위해 사용되므로, 고정 IP는 라우팅할 수 있어야 하며 인터넷에 연결할 수 있어야 합니다. [Test-HcsmConnection][Test-HcsmConnection] cmdlet을 사용하여 고정된 컨트롤러 IP가 라우팅할 수 있는지 확인할 수 있습니다. 다음 예제는 고정된 컨트롤러 IP가 인터넷으로 라우팅되고 Microsoft 업데이트 서버에 액세스할 수 있음을 보여줍니다. 
+    컨트롤러에 대한 고정 IP 주소는 장치에 대한 업데이트 서비스를 위해 사용되므로, 고정 IP는 라우팅할 수 있어야 하며 인터넷에 연결할 수 있어야 합니다. [Test-HcsmConnection][Test] cmdlet을 사용하여 고정된 컨트롤러 IP가 라우팅할 수 있는지 확인할 수 있습니다. 다음 예제는 고정된 컨트롤러 IP가 인터넷으로 라우팅되고 Microsoft 업데이트 서버에 액세스할 수 있음을 보여줍니다. 
 
      ![라우팅 가능한 IP를 표시하는 Test-HcsmConnection](./media/storsimple-complete-minimum-device-setup-u1/Test-HcsmConnectionOutputRegisteredDevice.png)
 
@@ -24,9 +24,9 @@
    장치 **퀵 스타트** 페이지로 돌아갑니다.
    
    > [!NOTE]
-   > **구성** 페이지에 액세스하여 언제든지 다른 모든 장치 설정을 수정할 수 있습니다.
+   > **구성** 페이지로 돌아갑니다.
    > 
    > 
 
 <!--Link reference-->
-[Test-HcsmConnection]: https://technet.microsoft.com/library/dn715782(v=wps.630).aspx
+[Test]: https://technet.microsoft.com/library/dn715782(v=wps.630).aspx

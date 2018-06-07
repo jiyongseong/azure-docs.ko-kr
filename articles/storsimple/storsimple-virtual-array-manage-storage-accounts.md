@@ -14,11 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 02/27/2017
 ms.author: alkohli
-translationtype: Human Translation
-ms.sourcegitcommit: 4b5c86314bde2acb7d5723909f89691bf7ed8b98
-ms.openlocfilehash: 6bb07bc1e3ab439352b444016167541eca54f788
-ms.lasthandoff: 03/01/2017
-
+ms.openlocfilehash: a4ce2d329d0e1399cffaf886adf2b95e34b9cd7b
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-storsimple-device-manager-to-manage-storage-account-credentials-for-storsimple-virtual-array"></a>StorSimple 장치 관리자를 사용하여 StorSimple 가상 배열의 저장소 계정 자격 증명 관리
 
@@ -51,7 +51,7 @@ StorSimple 가상 배열의 StorSimple 장치 관리자 서비스 블레이드 �
 StorSimple 장치에서 사용할 수 있는 저장소 계정 자격 증명에는 다음과 같은 세 종류가 있습니다.
 
 * **자동 생성된 저장소 계정 자격 증명** – 이름 제안 시, 서비스를 처음 만들 때 이 저장소 계정 자격 증명 유형이 자동으로 생성됩니다. 이 저장소 계정 자격 증명을 만드는 방법에 대해 더 알아보려면 [새 서비스 만들기](storsimple-virtual-array-manage-service.md#create-a-service)를 참조하세요.
-* **서비스 구독의 저장소 계정 자격 증명** – 이러한 계정은 서비스와 동일한 구독과 연결된 Azure Storage 계정 자격 증명입니다. 이러한 저장소 계정 자격 증명을 만드는 방법에 대해 더 알아보려면 [Azure Storage 계정 정보](../storage/storage-create-storage-account.md)를 참조하세요.
+* **서비스 구독의 저장소 계정 자격 증명** – 이러한 계정은 서비스와 동일한 구독과 연결된 Azure Storage 계정 자격 증명입니다. 이러한 저장소 계정 자격 증명을 만드는 방법에 대해 더 알아보려면 [Azure Storage 계정 정보](../storage/common/storage-create-storage-account.md)를 참조하세요.
 * **서비스 구독 외부의 저장소 계정 자격 증명** - 이러한 계정 자격 증명은 서비스와 연결되지 않았고 서비스가 만들어지기 전에 존재했던 Azure Storage 계정 자격 증명입니다.
 
 ## <a name="add-a-storage-account-credential"></a>저장소 계정 자격 증명 추가
@@ -109,7 +109,7 @@ Azure Storage 계정 자격 증명을 추가하려면 다음 절차를 사용합
 4. 저장소 계정 자격 증명 **속성** 블레이드에서 다음을 수행합니다.
    
    1. 필요에 따라 **SSL 사용** 모드 선택을 수정할 수 있습니다.
-   2. 저장소 계정 자격 증명 선택키를 다시 생성하도록 선택할 수 있습니다. 자세한 내용은 [저장소 계정 키 다시 생성](../storage/storage-create-storage-account.md#manage-your-storage-access-keys)을 참조하세요. 새 저장소 계정 자격 증명 키를 제공합니다. Azure 저장소 계정의 경우 이 키가 기본 선택키입니다.
+   2. 저장소 계정 자격 증명 선택키를 다시 생성하도록 선택할 수 있습니다. 자세한 내용은 [저장소 계정 키 다시 생성](../storage/common/storage-create-storage-account.md#manage-your-storage-access-keys)을 참조하세요. 새 저장소 계정 자격 증명 키를 제공합니다. Azure 저장소 계정의 경우 이 키가 기본 선택키입니다.
    3. **속성** 블레이드 맨 위에 있는 **저장**을 클릭하여 설정을 저장합니다. 설정은 **저장소 계정 자격 증명** 블레이드에서 업데이트됩니다.
       
       ![저장소 계정 자격 증명 편집](./media/storsimple-virtual-array-manage-storage-accounts/ova-edit-storageacct.png)
@@ -151,5 +151,4 @@ StorSimple 장치 관리자 서비스에 변경을 알리려면 StorSimple 장�
 
 ## <a name="next-steps"></a>다음 단계
 * [StorSimple 가상 배열을 관리](storsimple-ova-web-ui-admin.md)하는 방법을 알아봅니다.
-
 

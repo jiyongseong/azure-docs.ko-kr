@@ -1,5 +1,5 @@
 ---
-title: "Azure Linux 가상 컴퓨터에서 Oracle Data Guard 구현 | Microsoft Docs"
+title: "Azure Linux 가상 머신에서 Oracle Data Guard 구현 | Microsoft Docs"
 description: "Azure 환경에서 Oracle Data Guard를 신속하게 가동하고 실행합니다."
 services: virtual-machines-linux
 documentationcenter: virtual-machines
@@ -15,17 +15,15 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 05/10/2017
 ms.author: rclaus
+ms.openlocfilehash: 822e18db4d01210d741addad4c820f51adc8f26a
+ms.sourcegitcommit: 8c3267c34fc46c681ea476fee87f5fb0bf858f9e
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 11492b85e95ddb39489e36c572af2a168b4c7af8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/09/2018
 ---
+# <a name="implement-oracle-data-guard-on-an-azure-linux-virtual-machine"></a>Azure Linux 가상 머신에서 Oracle Data Guard 구현 
 
-# <a name="implement-oracle-data-guard-on-an-azure-linux-virtual-machine"></a>Azure Linux 가상 컴퓨터에서 Oracle Data Guard 구현 
-
-Azure CLI는 명령줄 또는 스크립트에서 Azure 리소스를 만들고 관리하는 데 사용됩니다. 이 문서에서는 Azure CLI를 사용하여 Azure Marketplace 이미지에서 Oracle Database 12c 데이터베이스를 배포하는 방법을 설명합니다. 그런 다음 이 문서는 Azure VM(가상 컴퓨터)에서 Data Guard를 설치하고 구성하는 방법을 단계별로 보여 줍니다.
+Azure CLI는 명령줄 또는 스크립트에서 Azure 리소스를 만들고 관리하는 데 사용됩니다. 이 문서에서는 Azure CLI를 사용하여 Azure Marketplace 이미지에서 Oracle Database 12c 데이터베이스를 배포하는 방법을 설명합니다. 그런 다음 이 문서는 Azure VM(가상 머신)에서 Data Guard를 설치하고 구성하는 방법을 단계별로 보여 줍니다.
 
 시작하기 전에 Azure CLI가 설치되어 있는지 확인합니다. 자세한 내용은 [Azure CLI 설치 가이드](https://docs.microsoft.com/cli/azure/install-azure-cli)를 참조하세요.
 
@@ -41,7 +39,7 @@ VM을 만드는 데 사용하는 Marketplace 이미지는 Oracle:Oracle-Database
 
 ### <a name="sign-in-to-azure"></a>Azure에 로그인 
 
-[az login](/cli/azure/#login) 명령을 사용하여 Azure 구독에 로그인하고 화면의 지시를 따릅니다.
+[az login](/cli/azure/reference-index#az_login) 명령을 사용하여 Azure 구독에 로그인하고 화면의 지시를 따릅니다.
 
 ```azurecli
 az login
@@ -49,7 +47,7 @@ az login
 
 ### <a name="create-a-resource-group"></a>리소스 그룹 만들기
 
-[az group create](/cli/azure/group#create) 명령을 사용하여 리소스 그룹을 만듭니다. Azure 리소스 그룹은 Azure 리소스가 배포 및 관리되는 논리적 컨테이너입니다. 
+[az group create](/cli/azure/group#az_group_create) 명령을 사용하여 리소스 그룹을 만듭니다. Azure 리소스 그룹은 Azure 리소스가 배포 및 관리되는 논리적 컨테이너입니다. 
 
 다음 예제에서는 `westus` 위치에 `myResourceGroup`이라는 리소스 그룹을 만듭니다.
 
@@ -69,9 +67,9 @@ az vm availability-set create \
     --platform-update-domain-count 2
 ```
 
-### <a name="create-a-virtual-machine"></a>가상 컴퓨터 만들기
+### <a name="create-a-virtual-machine"></a>가상 머신 만들기
 
-[az vm create](/cli/azure/vm#create) 명령을 사용하여 VM을 만듭니다. 
+[az vm create](/cli/azure/vm#az_vm_create) 명령을 사용하여 VM을 만듭니다. 
 
 다음 예제에서는 `myVM1` 및 `myVM2`라고 하는 VM 두 개를 만듭니다. 또한 기본 키 위치에 SSH 키가 없는 경우 이 키를 만듭니다. 특정 키 집합을 사용하려면 `--ssh-key-value` 옵션을 사용합니다.
 
@@ -163,7 +161,7 @@ az network nsg rule create --resource-group myResourceGroup\
 
 ### <a name="connect-to-the-virtual-machine"></a>가상 컴퓨터에 연결
 
-다음 명령을 사용하여 가상 컴퓨터와의 SSH 세션을 만듭니다. 해당 IP 주소를 가상 컴퓨터의 `publicIpAddress` 값으로 바꿉니다.
+다음 명령을 사용하여 가상 머신과의 SSH 세션을 만듭니다. 해당 IP 주소를 가상 머신의 `publicIpAddress` 값으로 바꿉니다.
 
 ```bash 
 $ ssh azureuser@<publicIpAddress>
@@ -679,7 +677,7 @@ SQL>
 Oracle Linux에서 Data Guard의 설치 및 구성을 완료했습니다.
 
 
-## <a name="delete-the-virtual-machine"></a>가상 컴퓨터 삭제
+## <a name="delete-the-virtual-machine"></a>가상 머신 삭제
 
 더 이상 VM이 필요하지 않은 경우 다음 명령을 사용하여 리소스 그룹, VM 및 모든 관련된 리소스를 제거할 수 있습니다.
 
@@ -689,7 +687,6 @@ az group delete --name myResourceGroup
 
 ## <a name="next-steps"></a>다음 단계
 
-[자습서: 고가용성 가상 컴퓨터 만들기](../../linux/create-cli-complete.md)
+[자습서: 고가용성 가상 머신 만들기](../../linux/create-cli-complete.md)
 
 [VM 배포 Azure CLI 샘플 탐색](../../linux/cli-samples.md)
-

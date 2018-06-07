@@ -14,11 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: mazha
-translationtype: Human Translation
-ms.sourcegitcommit: 06bd0112eab46f3347dfb039a99641a37c2b0197
 ms.openlocfilehash: 2dfbc046674b2da692f30c945aee3ea25ae524eb
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="analyze-usage-statistics-with-azure-cdn-advanced-http-reports"></a>Azure CDN 고급 HTTP 보고서를 사용하여 사용 현황 통계 분석
 ## <a name="overview"></a>개요
@@ -39,7 +39,7 @@ ms.openlocfilehash: 2dfbc046674b2da692f30c945aee3ea25ae524eb
     보고서 옵션이 표시됩니다.
 
 ## <a name="geography-reports-map-based"></a>지리 보고서(맵 기반)
-콘텐츠가 요청되는 지역을 나타내는 맵을 활용하는&5;가지 보고서가 있습니다. 이러한 보고서는 전 세계 맵, 미국 맵, 캐나다 맵, 유럽 맵 및 아시아 태평양 맵입니다.
+콘텐츠가 요청되는 지역을 나타내는 맵을 활용하는 5가지 보고서가 있습니다. 이러한 보고서는 전 세계 맵, 미국 맵, 캐나다 맵, 유럽 맵 및 아시아 태평양 맵입니다.
 
 각 맵 기반 보고서는 해당 지역에서 발생하는 적중 항목의 백분율에 따라 지리적 엔터티(예: 국가, 주 및 시/도)의 순위를 지정합니다. 또한 해당 콘텐츠가 요청되는 위치를 시각화하는 데 도움이 되는 맵이 제공됩니다. 해당 지역에 나타난 요구량에 따라 지역별로 색으로 지정하여 이 작업을 수행할 수 있습니다. 밝게 음영 처리된 지역은 콘텐츠에 대한 요구가 낮은 반면, 어둡게 음영 처리된 지역은 콘텐츠에 대한 요구 수준이 높습니다.
 
@@ -78,7 +78,7 @@ ms.openlocfilehash: 2dfbc046674b2da692f30c945aee3ea25ae524eb
 ## <a name="daily-summary"></a>일일 요약
 일일 요약 보고서를 사용하면 총 적중 횟수와 특정 플랫폼을 통해 전송되는 데이터를 일 단위로 볼 수 있습니다. 이 정보는 CDN 활동 패턴을 신속하게 파악하는 데 사용할 수 있습니다. 예를 들어 이 보고서를 통해 트래픽이 예상보다 높거나 낮게 발생한 날짜를 감지할 수 있습니다.
 
-이러한 유형의 보고서를 생성하면 가로 막대형 차트는 보고서에 나와 있는 기간 동안 발생한 플랫폼별 요구량에 대한 시각적 표시를 일 단위로 제공합니다. 보고서의 각 날짜에 대한 막대를 표시하여 이를 수행합니다. 예를 들어 "지난 주"라는 기간을 선택하면&7;개의 막대가 있는 가로 막대형 차트를 생성합니다. 각 막대는 해당 날짜에 발생한 총 적중 횟수를 나타냅니다.
+이러한 유형의 보고서를 생성하면 가로 막대형 차트는 보고서에 나와 있는 기간 동안 발생한 플랫폼별 요구량에 대한 시각적 표시를 일 단위로 제공합니다. 보고서의 각 날짜에 대한 막대를 표시하여 이를 수행합니다. 예를 들어 "지난 주"라는 기간을 선택하면 7개의 막대가 있는 가로 막대형 차트를 생성합니다. 각 막대는 해당 날짜에 발생한 총 적중 횟수를 나타냅니다.
 
 그래프의 왼쪽(Y축)은 지정된 날짜에 발생한 적중 수를 나타냅니다. 그래프 바로 아래(X축)에서 보고서에 포함된 각 일에 대한 날짜(형식: YYYY-MM-DD)를 나타내는 레이블을 찾을 수 있습니다.
 
@@ -203,10 +203,4 @@ ms.openlocfilehash: 2dfbc046674b2da692f30c945aee3ea25ae524eb
 * [Microsoft Azure CDN의 실시간 통계](cdn-real-time-stats.md)
 * [규칙 엔진을 사용하여 기본 HTTP 동작 재정의](cdn-rules-engine.md)
 * [에지 성능 분석](cdn-edge-performance.md)
-
-
-
-
-<!--HONumber=Jan17_HO4-->
-
 

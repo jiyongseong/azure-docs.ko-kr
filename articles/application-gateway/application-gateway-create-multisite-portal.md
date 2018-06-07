@@ -1,144 +1,189 @@
 ---
-title: "Azure Application Gateway에서 여러 사이트 호스트 | Microsoft Docs"
-description: "이 문서에서는 Azure 포털을 통해 동일한 게이트웨이에서 여러 웹 응용 프로그램을 호스트하는 기존 Azure 응용 프로그램 게이트웨이를 구성하는 지침을 제공합니다."
-documentationcenter: na
+title: 여러 사이트를 호스팅하는 응용 프로그램 게이트웨이 만들기 - Azure Portal | Microsoft Docs
+description: Azure Portal을 사용하여 여러 사이트를 호스팅하는 응용 프로그램 게이트웨이를 만드는 방법을 알아봅니다.
 services: application-gateway
-author: georgewallace
-manager: timlt
+author: vhorne
+manager: jpconnock
 editor: tysonn
-ms.assetid: 95f892f6-fa27-47ee-b980-7abf4f2c66a9
 ms.service: application-gateway
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 01/23/2017
-ms.author: gwallace
-translationtype: Human Translation
-ms.sourcegitcommit: 8c4e33a63f39d22c336efd9d77def098bd4fa0df
-ms.openlocfilehash: 84bd62ae17b7f7ba4cd815ef1f9880679607ebce
-ms.lasthandoff: 04/20/2017
-
-
+ms.date: 01/26/2018
+ms.author: victorh
+ms.openlocfilehash: 0db4e3af1e355df2c985922012191cdc7d97d5b7
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
-# <a name="configure-an-existing-application-gateway-for-hosting-multiple-web-applications"></a>여러 웹 응용 프로그램을 호스트하는 기존 응용 프로그램 게이트웨이 구성
+# <a name="create-an-application-gateway-with-multiple-site-hosting-using-the-azure-portal"></a>Azure Portal을 사용하여 여러 사이트를 호스팅하는 응용 프로그램 게이트웨이 만들기
 
-> [!div class="op_single_selector"]
-> * [쉬운 테이블](application-gateway-create-multisite-portal.md)
-> * [Azure Resource Manager PowerShell](application-gateway-create-multisite-azureresourcemanager-powershell.md)
-> 
-> 
+Azure Portal을 사용하여 [응용 프로그램 게이트웨이](application-gateway-multi-site-overview.md)를 만들 때 [여러 웹 사이트의 호스팅](application-gateway-introduction.md)을 구성할 수 있습니다. 이 자습서에서는 가상 머신 확장 집합을 사용하여 백 엔드 풀을 만듭니다. 그런 다음, 웹 트래픽이 풀에서 적절한 서버에 도착하도록 소유한 도메인을 기준으로 수신기와 규칙을 구성합니다. 이 자습서에서는 여러 도메인을 소유하고 있으며 *www.contoso.com* 및 *www.fabrikam.com*의 예를 사용한다고 가정합니다.
 
-다중 사이트 호스팅을 통해 둘 이상의 웹 응용 프로그램을 동일한 응용 프로그램 게이트웨이에 배포할 수 있습니다. 들어오는 HTTP 요청의 호스트 헤더 존재 여부에 따라 트래픽을 수신할 수신기가 결정됩니다. 그런 다음 수신기는 게이트웨이 규칙 정의에 구성된 대로 적절한 백 엔드 풀로 트래픽을 전달합니다. SSL 사용 웹 응용 프로그램에서 응용 프로그램 게이트웨이는 SNI(서버 이름 표시) 확장에 의존하여 웹 트래픽에 대한 올바른 수신기를 선택합니다. 다중 사이트 호스팅의 일반적인 용도는 여러 웹 도메인에 대한 요청의 부하를 여러 백 엔드 서버 풀에 분산하는 것입니다. 마찬가지로 같은 루트 도메인의 여러 하위 도메인을 동일한 응용 프로그램 게이트웨이에서 호스트할 수도 있습니다.
+이 문서에서는 다음 방법을 설명합니다.
 
-## <a name="scenario"></a>시나리오
+> [!div class="checklist"]
+> * 응용 프로그램 게이트웨이 만들기
+> * 백 엔드 서버용 가상 머신 만들기
+> * 백 엔드 서버로 백 엔드 풀 만들기
+> * 수신기 및 라우팅 규칙 만들기
+> * 도메인에서 CNAME 레코드 만들기
 
-다음 예제에서 응용 프로그램 게이트웨이는 두 개의 백 엔드 서버 풀(contoso 서버 풀 및 fabrikam 서버 풀)을 통해 contoso.com 및 fabrikam.com에 대한 트래픽을 처리합니다. 유사한 설정을 사용하여 app.contoso.com 및 blog.contoso.com과 같은 하위 도메인을 호스트할 수 있습니다.
+![다중 사이트 라우팅 예](./media/application-gateway-create-multisite-portal/scenario.png)
 
-![다중 사이트 시나리오][multisite]
+Azure 구독이 아직 없는 경우 시작하기 전에 [체험 계정](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)을 만듭니다.
 
-## <a name="before-you-begin"></a>시작하기 전에
+## <a name="log-in-to-azure"></a>Azure에 로그인
 
-이 시나리오에서는 기존 응용 프로그램 게이트웨이에 다중 사이트 지원을 추가합니다. 이 시나리오를 완료하려면 기존 Application Gateway를 구성할 수 있어야 합니다. [포털을 사용하여 응용 프로그램 게이트웨이 만들기](application-gateway-create-gateway-portal.md)를 참조하여 포털에서 기본 응용 프로그램 게이트웨이를 만드는 방법을 알아봅니다.
+[http://portal.azure.com](http://portal.azure.com)에서 Azure Portal에 로그인
 
-응용 프로그램 게이트웨이를 만드는 데 필요한 단계는 다음과 같습니다.
+## <a name="create-an-application-gateway"></a>응용 프로그램 게이트웨이 만들기
 
-1. 각 사이트에 사용할 백 엔드 풀을 만듭니다.
-2. 각 사이트 Application Gateway에서 지원할 수신기를 만듭니다.
-3. 각 수신기를 적절한 백 엔드에 매핑하는 규칙을 만듭니다.
+가상 네트워크는 사용자가 만든 리소스 간의 통신에 필요합니다. 이 예제에서는 두 개의 서브넷을 만듭니다. 하나는 응용 프로그램 게이트웨이용이고, 다른 하나는 백 엔드 서버용입니다. 응용 프로그램 게이트웨이를 만드는 동시에 가상 네트워크를 만들 수 있습니다.
 
-## <a name="requirements"></a>요구 사항
+1. Azure Portal의 왼쪽 위에서 **새로 만들기**를 클릭합니다.
+2. **네트워킹**을 선택한 다음, 추천 목록에서 **Application Gateway**를 선택합니다.
+3. 응용 프로그램 게이트웨이에 대해 다음 값을 입력합니다.
 
-* **백 엔드 서버 풀:** 백 엔드 서버의 IP 주소 목록입니다. 나열된 IP 주소는 가상 네트워크 서브넷에 속하거나 공용 IP/VIP이어야 합니다. FQDN을 사용할 수도 있습니다.
-* **백 엔드 서버 풀 설정:** 모든 풀에는 포트, 프로토콜 및 쿠키 기반의 선호도와 같은 설정이 있습니다. 이러한 설정은 풀에 연결 및 풀 내의 모든 서버에 적용 됩니다.
-* **프런트 엔드 포트:** 이 포트는 응용 프로그램 게이트웨이에 열려 있는 공용 포트입니다. 트래픽이 이 포트에 도달하면, 백 엔드 서버 중의 하나로 리디렉트됩니다.
-* **수신기:** 수신기에는 프런트 엔드 포트, 프로토콜(Http 또는 Https, 이 값은 대/소문자 구분) 및 SSL 인증서 이름(SSL 오프로드를 구성하는 경우)이 있습니다. 다중 사이트 지원 응용 프로그램 게이트웨이의 경우 호스트 이름 및 SNI 표시도 추가됩니다.
-* **규칙:** 규칙은 수신기와 백 엔드 서버 풀을 바인딩하고 특정 수신기에 도달했을 때 트래픽이 전달되어야 하는 백 엔드 서버 풀을 정의합니다. 규칙은 나열된 순서대로 처리되고 트래픽은 특이성에 관계없이 일치하는 첫 번째 규칙을 통해 전달됩니다. 예를 들어 기본 수신기를 사용하는 규칙과 다중 사이트 수신기를 사용하는 규칙이 둘 다 같은 포트에 있는 경우 다중 사이트 규칙이 예상대로 작동하려면 다중 사이트 수신기를 사용하는 규칙은 기본 수신기를 사용하는 규칙 앞에 나열되어야 합니다. 
-* **인증서:** 각 수신기에는 고유한 인증서가 필요하며, 이 예에서는 다중 사이트의 수신기가 2개 만들어집니다. 이 수신기에 대해 2개의 .pfx 인증서와 해당 암호를 만들어야 합니다.
+    - *myAppGateway* - 응용 프로그램 게이트웨이의 이름
+    - *myResourceGroupAG* - 새 리소스 그룹의 이름
 
-## <a name="create-back-end-pools-for-each-site"></a>각 사이트에 사용할 백 엔드 풀 만들기
+    ![새 응용 프로그램 게이트웨이 만들기](./media/application-gateway-create-multisite-portal/application-gateway-create.png)
 
-Application Gateway에서 지원할 각 사이트에는 백 엔드 풀이 필요합니다. 이 예에서는 2개 백 엔드 풀, 즉 하나는 contoso11.com, 다른 하나는 fabrikam11.com의 백 엔드 풀이 만들어집니다.
+4. 다른 설정에 대한 기본값을 적용한 다음, **확인**을 클릭합니다.
+5. **가상 네트워크 선택**을 클릭하고 **새로 만들기**를 클릭한 다음, 가상 네트워크에 대해 다음 값을 입력합니다.
 
-### <a name="step-1"></a>1단계:
+    - *myVNet* - 가상 네트워크 이름
+    - *10.0.0.0/16* - 가상 네트워크 주소 공간
+    - *myAGSubnet* - 서브넷 이름
+    - *10.0.0.0/24* - 서브넷 주소 공간
 
-Azure 포털 ( https://portal.azure.com ) 에서 기존 응용 프로그램 게이트웨이로 이동합니다. **백엔드 풀**을 선택하고 **추가**를 클릭합니다.
+    ![가상 네트워크 만들기](./media/application-gateway-create-multisite-portal/application-gateway-vnet.png)
 
-![백 엔드 풀 추가][7]
+6. **확인**을 클릭하여 가상 네트워크 및 서브넷을 만듭니다.
+7. **공용 IP 주소 선택**을 클릭하고 **새로 만들기**를 클릭한 다음, 공용 IP 주소의 이름을 입력합니다. 이 예제에서 공용 IP 주소의 이름은 *myAGPublicIPAddress*입니다. 다른 설정에 대한 기본값을 적용한 다음, **확인**을 클릭합니다.
+8. 수신기 구성에 대한 기본값을 수락하고 웹 응용 프로그램 방화벽을 사용하지 않도록 유지한 다음, **확인**을 클릭합니다.
+9. 요약 페이지에서 설정을 검토한 다음, **확인**을 클릭하여 네트워크 리소스와 응용 프로그램 게이트웨이를 만듭니다. 응용 프로그램 게이트웨이가 생성되는 데 몇 분이 걸릴 수 있습니다. 배포가 완료될 때까지 기다렸다가 다음 섹션으로 이동합니다.
 
-### <a name="step-2"></a>2단계
+### <a name="add-a-subnet"></a>서브넷 추가
 
-**pool1** 백 엔드 풀에 대한 정보를 입력하고(백 엔드 서버의 경우 IP 주소 또는 FQDN을 추가함) **확인**을 클릭합니다.
+1. 왼쪽 메뉴에서 **모든 리소스**를 클릭한 다음, 리소스 목록에서 **myVNet**을 클릭합니다.
+2. **서브넷**을 클릭한 다음, **서브넷**을 클릭합니다.
 
-![pool1 백엔드 풀 설정][8]
+    ![서브넷 만들기](./media/application-gateway-create-multisite-portal/application-gateway-subnet.png)
 
-### <a name="step-3"></a>3단계
+3. 서브넷 이름에 *myBackendSubnet*을 입력한 다음, **확인**을 클릭합니다.
 
-백 엔드 풀 블레이드에서 **추가**를 클릭하여 **pool2** 백 엔드 풀을 추가하고(백 엔드 서버의 경우 IP 주소 또는 FQDN을 추가함) **확인**을 클릭합니다.
+## <a name="create-virtual-machines"></a>가상 머신 만들기
 
-![pool2 백엔드 풀 설정][9]
+이 예제에서는 응용 프로그램 게이트웨이에 대한 백 엔드 서버로 사용할 두 개의 가상 머신을 만듭니다. 트래픽이 올바르게 라우팅되는지 확인하기 위해 가상 머신에 IIS도 설치합니다.
 
-## <a name="create-listeners-for-each-back-end"></a>각 백 엔드 풀의 수신기 만들기
+1. **새로 만들기**를 클릭합니다.
+2. **Compute**를 클릭한 다음, 추천 목록에서 **Windows Server 2016 Datacenter**를 선택합니다.
+3. 가상 머신에 대해 다음 값을 입력합니다.
 
-응용 프로그램 게이트웨이는 HTTP 1.1 호스트 헤더를 기반으로 동일한 공용 IP 주소 및 포트에서 둘 이상의 웹 사이트를 호스트합니다. 포털에서 만든 기본 수신기에는 이 속성이 포함되지 않습니다.
+    - *contosoVM* - 가상 머신의 이름
+    - *azureuser* - 관리자 사용자 이름
+    - *Azure123456!* - 암호
+    - **기존 항목 사용**을 선택한 다음, *myResourceGroupAG*를 선택합니다.
 
-### <a name="step-1"></a>1단계
+4. **확인**을 클릭합니다.
+5. 가상 머신의 크기에 대해 **DS1_V2**를 선택하고 **선택**을 클릭합니다.
+6. 가상 네트워크에 대해 **myVNet**이 선택되어 있고 서브넷이 **myBackendSubnet**인지 확인합니다. 
+7. **사용 안 함**을 클릭하여 부팅 진단을 사용하지 않도록 설정합니다.
+8. **확인**을 클릭하고 요약 페이지에서 설정을 검토한 다음, **만들기**를 클릭합니다.
 
-기존 응용 프로그램 게이트웨이에서 **수신기**를 클릭하고 **다중 사이트**를 클릭하여 첫 번째 수신기를 추가합니다.
+### <a name="install-iis"></a>IIS 설치
 
-![수신기 개요 블레이드][1]
+1. 대화형 셸을 열고 **PowerShell**로 설정되어 있는지 확인합니다.
 
-### <a name="step-2"></a>2단계:
+    ![사용자 지정 확장 설치](./media/application-gateway-create-multisite-portal/application-gateway-extension.png)
 
-수신기의 정보를 입력합니다. 이 예에서는 SSL 종료를 구성하고 새 프런트 엔드 포트를 만듭니다. SSL 종료에 사용할 .pfx 인증서를 업로드 합니다. 이 블레이드와 표준 기본 수신기 블레이드 사이의 유일한 차이점은 호스트 이름입니다.
+2. 다음 명령을 실행하여 가상 머신에 IIS를 설치합니다. 
 
-![수신기 속성 블레이드][2]
+    ```azurepowershell-interactive
+    $publicSettings = @{ "fileUris" = (,"https://raw.githubusercontent.com/davidmu1/samplescripts/master/appgatewayurl.ps1");  "commandToExecute" = "powershell -ExecutionPolicy Unrestricted -File appgatewayurl.ps1" }
+    Set-AzureRmVMExtension `
+      -ResourceGroupName myResourceGroupAG `
+      -Location eastus `
+      -ExtensionName IIS `
+      -VMName contosoVM `
+      -Publisher Microsoft.Compute `
+      -ExtensionType CustomScriptExtension `
+      -TypeHandlerVersion 1.4 `
+      -Settings $publicSettings
+    ```
 
-### <a name="step-3"></a>3단계
+3. 두 번째 가상 머신을 만들고, 방금 완료한 단계를 사용하여 IIS를 설치합니다. Set-AzureRmVMExtension에서 VMName의 값과 이름에 *fabrikamVM*의 이름을 입력합니다.
 
-**다중 사이트**를 클릭하고 이전 단계에서 설명한 대로 두 번째 사이트의 다른 수신기를 만듭니다. 두 번째 수신기에 대해 별도의 인증서를 사용해야 합니다. 이 블레이드와 표준 기본 수신기 블레이드 사이의 유일한 차이점은 호스트 이름입니다. 수신기의 정보를 입력하고 **확인**을 클릭합니다.
+## <a name="create-backend-pools-with-the-virtual-machines"></a>가상 머신으로 백 엔드 풀 만들기
 
-![수신기 속성 블레이드][3]
+1. **모든 리소스**를 클릭한 다음, **myAppGateway**를 클릭합니다.
+2. **백 엔드 풀**을 클릭한 다음, **추가**를 클릭합니다.
+3. *contosoPool*의 이름을 입력하고 **대상 추가**를 사용하여 *contosoVM*을 추가합니다.
 
-> [!NOTE]
-> Azure 포털에서 응용 프로그램 게이트웨이의 수신기를 만드는 것은 장기 실행 작업이므로 이 시나리오에서 두 수신기를 만드는 데 시간이 걸릴 수 있습니다. 수신기가 완료되면 포털에서 다음 이미지와 같이 보여 줍니다.
+    ![백 엔드 서버 추가](./media/application-gateway-create-multisite-portal/application-gateway-multisite-backendpool.png)
 
-![수신기 개요][4]
+4. **확인**을 클릭합니다.
+5. **백엔드 풀**을 클릭한 다음, **추가**를 클릭합니다.
+6. 방금 완료한 단계를 사용하여 *fabrikamVM*으로 *fabrikamPool*을 만듭니다.
 
-## <a name="create-rules-to-map-listeners-to-backend-pools"></a>백 엔드 풀에 수신기를 매핑하는 규칙 만들기
+## <a name="create-listeners-and-routing-rules"></a>수신기 및 라우팅 규칙 만들기
 
-### <a name="step-1"></a>1단계
+1. **수신기**를 클릭한 후 **다중 사이트**를 클릭합니다.
+2. 수신기에 대해 다음 값을 입력합니다.
+    
+    - *contosoListener* - 수신기의 이름
+    - *www.contoso.com* - 이 호스트 이름 예를 사용자의 도메인 이름으로 바꿉니다.
 
-Azure 포털 ( https://portal.azure.com ) 에서 기존 응용 프로그램 게이트웨이로 이동합니다. **규칙**을 선택하고 **rule1** 기존 기본 규칙을 선택한 다음 **편집**을 클릭합니다.
+3. **확인**을 클릭합니다.
+4. *fabrikamListener* 이름을 사용하여 두 번째 수신기를 만들고 두 번째 도메인 이름을 사용합니다. 이 예제에서는 *www.fabrikam.com*이 사용됩니다.
 
-### <a name="step-2"></a>2단계
+규칙은 나열된 순서대로 처리되고 트래픽은 특이성에 관계없이 일치하는 첫 번째 규칙을 사용하여 전달됩니다. 예를 들어 기본 수신기를 사용하는 규칙과 다중 사이트 수신기를 사용하는 규칙이 둘 다 같은 포트에 있는 경우 다중 사이트 규칙이 예상대로 작동하려면 다중 사이트 수신기를 사용하는 규칙은 기본 수신기를 사용하는 규칙 앞에 나열되어야 합니다. 
 
-다음 그림과 같이 규칙 블레이드에서 입력 합니다. 첫 번째 수신기와 첫 번째 풀을 선택하고, 완료하는 경우 **저장**을 클릭합니다.
+이 예제에서는 응용 프로그램 게이트웨이가 생성되었을 때 두 개의 새 규칙을 만들고 생성된 기본 규칙을 삭제합니다. 
 
-![기존 규칙 편집][6]
+1. **규칙**을 클릭한 다음, **기본**을 클릭합니다.
+2. 이름에 *contosoRule*을 입력합니다.
+3. 수신기로 *contosoListener*를 선택합니다.
+4. 백 엔드 풀로 *contosoPool*을 선택합니다.
 
-### <a name="step-3"></a>3단계:
+    ![경로 기반 규칙 만들기](./media/application-gateway-create-multisite-portal/application-gateway-multisite-rule.png)
 
-**기본 규칙**을 클릭하여 두 번째 규칙을 만듭니다. 두 번째 수신기와 두 번째 백 엔드 풀로 양식을 작성하고 **확인**을 클릭하여 저장합니다.
+5. **확인**을 클릭합니다.
+6. *fabrikamRule*, *fabrikamListener* 및 *fabrikamPool*의 이름을 사용하여 두 번째 규칙을 만듭니다.
+7. *rule1*이라는 기본 규칙을 클릭한 후 **삭제**를 클릭하여 기본 규칙을 삭제합니다.
 
-![기본 규칙 추가 블레이드][10]
+## <a name="create-a-cname-record-in-your-domain"></a>도메인에서 CNAME 레코드 만들기
 
-이 시나리오는 Azure 포털을 통해 다중 사이트 지원을 사용하도록 기존 Application Gateway의 구성을 완료합니다.
+응용 프로그램 게이트웨이가 해당 공용 IP 주소로 생성된 후 DNS 주소를 가져와 도메인에서 CNAME 레코드를 만드는 데 사용할 수 있습니다. A 레코드를 사용할 경우 응용 프로그램 게이트웨이를 다시 시작할 때 VIP가 변경될 수 있으므로 권장되지 않습니다.
+
+1. **모든 리소스**를 클릭한 다음, **myAGPublicIPAddress**를 클릭합니다.
+
+    ![응용 프로그램 게이트웨이 DNS 주소 기록](./media/application-gateway-create-multisite-portal/application-gateway-multisite-dns.png)
+
+2. DNS 주소를 복사하고 도메인에서 새 CNAME 레코드에 대한 값으로 사용합니다.
+
+## <a name="test-the-application-gateway"></a>응용 프로그램 게이트웨이 테스트
+
+1. 브라우저의 주소 표시줄에 도메인 이름을 입력합니다. 예: http://www.contoso.com
+
+    ![응용 프로그램 게이트웨이에서 contoso 사이트 테스트](./media/application-gateway-create-multisite-portal/application-gateway-iistest.png)
+
+2. 주소를 다른 도메인으로 변경하면 다음 예제와 같은 내용이 표시됩니다.
+
+    ![응용 프로그램 게이트웨이에서 fabrikam 사이트 테스트](./media/application-gateway-create-multisite-portal/application-gateway-iistest2.png)
 
 ## <a name="next-steps"></a>다음 단계
 
-[응용 프로그램 게이트웨이-웹 응용 프로그램 방화벽](application-gateway-webapplicationfirewall-overview.md)을 사용하여 웹 사이트를 보호하는 방법을 알아봅니다.
+이 문서에서는 다음 방법에 대해 알아보았습니다.
 
-<!--Image references-->
-[1]: ./media/application-gateway-create-multisite-portal/figure1.png
-[2]: ./media/application-gateway-create-multisite-portal/figure2.png
-[3]: ./media/application-gateway-create-multisite-portal/figure3.png
-[4]: ./media/application-gateway-create-multisite-portal/figure4.png
-[5]: ./media/application-gateway-create-multisite-portal/figure5.png
-[6]: ./media/application-gateway-create-multisite-portal/figure6.png
-[7]: ./media/application-gateway-create-multisite-portal/figure7.png
-[8]: ./media/application-gateway-create-multisite-portal/figure8.png
-[9]: ./media/application-gateway-create-multisite-portal/figure9.png
-[10]: ./media/application-gateway-create-multisite-portal/figure10.png
-[multisite]: ./media/application-gateway-create-multisite-portal/multisite.png
+> [!div class="checklist"]
+> * 응용 프로그램 게이트웨이 만들기
+> * 백 엔드 서버용 가상 머신 만들기
+> * 백 엔드 서버로 백 엔드 풀 만들기
+> * 수신기 및 라우팅 규칙 만들기
+> * 도메인에서 CNAME 레코드 만들기
 
+> [!div class="nextstepaction"]
+> [응용 프로그램 게이트웨이 통해 수행할 수 있는 작업에 대한 자세한 정보](application-gateway-introduction.md)

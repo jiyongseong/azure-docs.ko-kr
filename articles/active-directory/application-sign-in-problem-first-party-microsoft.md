@@ -4,7 +4,7 @@ description: "Office 365와 같은 Azure AD를 사용하여 자사 Microsoft 응
 services: active-directory
 documentationcenter: 
 author: ajamess
-manager: femila
+manager: mtillman
 ms.assetid: 
 ms.service: active-directory
 ms.workload: identity
@@ -13,14 +13,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 3716c7699732ad31970778fdfa116f8aee3da70b
-ms.openlocfilehash: 77f8f10c764013e539480138fb1479d0326b5eef
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/30/2017
-
+ms.openlocfilehash: 1dc727f46785d2896544d8ef9098259f9ab994d1
+ms.sourcegitcommit: d87b039e13a5f8df1ee9d82a727e6bc04715c341
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/21/2018
 ---
-
 ## <a name="problems-signing-in-to-a-microsoft-application"></a>Microsoft 응용 프로그램에 로그인하는 문제
 
 타사 SaaS 응용 프로그램 또는 Single Sign-On을 위해 Azure AD와 통합하는 다른 응용 프로그램과는 약간 다른 방법으로 Microsoft 응용 프로그램(예: Office 365 Exchange, SharePoint, Yammer 등)을 할당하고 관리합니다.
@@ -49,7 +47,7 @@ ms.lasthandoff: 06/30/2017
 
 ## <a name="steps-to-troubleshoot-microsoft-application-access"></a>Microsoft 응용 프로그램 액세스 문제를 해결하는 단계
 
-사용자가 Microsoft 응용 프로그램에 로그인할 수 없는 경우 발생하는 몇 가지 일반적인 문제는 아래와 같습니다.
+사용자가 Microsoft 응용 프로그램에 로그인할 수 없는 경우 발생하는 몇 가지 일반적인 문제는 다음과 같습니다.
 
 -   먼저 확인해야 할 일반적인 문제
 
@@ -73,7 +71,7 @@ ms.lasthandoff: 06/30/2017
 
    * 사용자를 확인하거나 **라이선스를 할당합니다.** [사용자의 할당된 라이선스 확인](#check-a-users-assigned-licenses) 또는 [그룹의 할당된 라이선스 확인](#check-a-groups-assigned-licenses)
 
-   * 라이선스가 **정적 그룹****에 할당되는** 경우 해당 그룹의 **사용자가 구성원인지** 확인합니다. [사용자의 그룹 구성원 자격 확인](#check-a-users-group-memberships)
+   * 라이선스가 **정적 그룹****에 할당되는** 경우 해당 그룹의 **사용자가 구성원인지** 확인합니다. [사용자의 그룹 멤버 자격 확인](#check-a-users-group-memberships)
 
    * 라이선스가 **동적 그룹****에 할당되는** 경우 **동적 그룹 규칙을 올바르게 설정했는지** 확인합니다. [동적 그룹의 구성원 자격 조건 확인](#check-a-dynamic-groups-membership-criteria)
 
@@ -105,7 +103,7 @@ ms.lasthandoff: 06/30/2017
 
 -   [사용자의 인증 연락처 정보 확인](#check-a-users-authentication-contact-info)
 
--   [사용자의 그룹 구성원 자격 확인](#check-a-users-group-memberships)
+-   [사용자의 그룹 멤버 자격 확인](#check-a-users-group-memberships)
 
 -   [사용자의 할당된 라이선스 확인](#check-a-users-assigned-licenses)
 
@@ -117,7 +115,7 @@ ms.lasthandoff: 06/30/2017
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -135,7 +133,7 @@ ms.lasthandoff: 06/30/2017
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -155,7 +153,7 @@ ms.lasthandoff: 06/30/2017
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -165,9 +163,9 @@ ms.lasthandoff: 06/30/2017
 
 6.  관심이 있는 사용자를 **검색**하고 **행을 클릭**하여 선택합니다.
 
-7.  사용자 블레이드 맨 위에 있는 **암호 재설정** 단추를 클릭합니다.
+7.  사용자 창 맨 위에 있는 **암호 재설정** 단추를 클릭합니다.
 
-8.  표시되는 **암호 재설정** 블레이드에서 **암호 재설정** 단추를 클릭합니다.
+8.  표시되는 **암호 재설정** 창에서 **암호 재설정** 단추를 클릭합니다.
 
 9.  사용자를 위한 **임시 암호** 또는 **새 암호 입력**을 복사합니다.
 
@@ -187,7 +185,7 @@ ms.lasthandoff: 06/30/2017
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -195,9 +193,9 @@ ms.lasthandoff: 06/30/2017
 
 5.  **모든 사용자**를 클릭합니다.
 
-6.  블레이드 맨 위에 있는 **Multi-Factor Authentication** 단추를 클릭합니다.
+6.  창 맨 위에 있는 **Multi-Factor Authentication** 단추를 클릭합니다.
 
-7.  **Multi-factor Authentication 관리 포털**을 일단 로드하면 **사용자** 탭인지 확인합니다.
+7.  **Multi-Factor Authentication 관리 포털**을 일단 로드하면 **사용자** 탭인지 확인합니다.
 
 8.  검색, 필터링 또는 정렬을 사용하여 사용자 목록에서 사용자를 찾습니다.
 
@@ -211,7 +209,7 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -233,7 +231,7 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -251,7 +249,7 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -269,7 +267,7 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -305,11 +303,11 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 ### <a name="check-a-groups-membership"></a>그룹의 구성원 자격 확인
 
-그룹의 구성원 자격을 확인하려면 다음 단계를 수행합니다.
+그룹의 멤버 자격을 확인하려면 다음 단계를 수행합니다.
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -327,7 +325,7 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -347,7 +345,7 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -365,7 +363,7 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -390,7 +388,7 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -423,9 +421,9 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
-3.  필터 검색 상자에 **"Azure Active Directory**"를 입력하고 **Azure Active Directory** 항목을 선택합니다.
+3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
 4.  탐색 메뉴에서 **엔터프라이즈 응용 프로그램**을 클릭합니다.
 
@@ -446,9 +444,9 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
-3.  필터 검색 상자에 **"Azure Active Directory**"를 입력하고 **Azure Active Directory** 항목을 선택합니다.
+3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
 4.  탐색 메뉴에서 **엔터프라이즈 응용 프로그램**을 클릭합니다.
 
@@ -478,9 +476,9 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
-3.  필터 검색 상자에 **"Azure Active Directory**"를 입력하고 **Azure Active Directory** 항목을 선택합니다.
+3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
 4.  탐색 메뉴에서 **엔터프라이즈 응용 프로그램**을 클릭합니다.
 
@@ -516,17 +514,16 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 ### <a name="perform-administrator-level-consent-for-a-single-tenant-application"></a>단일 테넌트 응용 프로그램에 대해 관리자 수준 동의 작업 수행
 
--   사용 권한을 요청하는 **단일 테넌트 응용 프로그램**의 경우(예: 사용자가 개발하거나 조직에서 소유한 응용 프로그램) 전역 관리자로 로그인하고 **응용 프로그램 레지스트리 -&gt; 모든 응용 프로그램 -&gt; 앱 선택 -&gt; 필요한 권한 -** 블레이드의 맨 위에 있는 **권한 부여** 단추를 클릭하여 모든 사용자를 대신하여 **관리 수준 동의** 작업을 수행할 수 있습니다.
+-   사용 권한을 요청하는 **단일 테넌트 응용 프로그램**의 경우(예: 사용자가 개발하거나 조직에서 소유한 응용 프로그램) 전역 관리자로 로그인하고 **응용 프로그램 레지스트리 -&gt; 모든 응용 프로그램 -&gt; 앱 선택 -&gt; 필요한 권한** 창의 맨 위에 있는 **권한 부여** 단추를 클릭하여 모든 사용자를 대신하여 **관리 수준 동의** 작업을 수행할 수 있습니다.
 
--   **V1 또는 V2 응용 프로그램 모델을 사용하여 개발된 응용 프로그램**의 경우 [관리 동의 끝점 사용](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-scopes#using-the-admin-consent-endpoint)의 **디렉터리 관리에서 사용 권한 요청** 섹션 아래에 있는 지침에 따라 발생하는 이 관리자 수준 동의를 강제할 수 있습니다.
+-    **V1 또는 V2 응용 프로그램 모델을 사용하여 개발된 응용 프로그램**의 경우 [관리 동의 끝점 사용](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-scopes#using-the-admin-consent-endpoint)의 **디렉터리 관리에서 사용 권한 요청** 섹션 아래에 있는 지침에 따라 발생하는 이 관리자 수준 동의를 강제할 수 있습니다.
 
 ### <a name="perform-administrator-level-consent-for-a-multi-tenant-application"></a>다중 테넌트 응용 프로그램에 대해 관리자 수준 동의 작업 수행
 
--   권한을 요청하는 **다중 테넌트 응용 프로그램**의 경우(예: 타사 또는 Microsoft에서 개발하는 응용 프로그램) **관리 수준 동의** 작업을 수행할 수 있습니다. 전역 관리자로 로그인하고 **엔터프라이즈 응용 프로그램 -&gt; 모든 응용 프로그램 -&gt; 앱 선택 -&gt; 사용 권한** 블레이드에서 **권한 부여** 단추를 클릭합니다(곧 사용 가능).
+-   권한을 요청하는 **다중 테넌트 응용 프로그램**의 경우(예: 타사 또는 Microsoft에서 개발하는 응용 프로그램) **관리 수준 동의** 작업을 수행할 수 있습니다. 전역 관리자로 로그인하고 **엔터프라이즈 응용 프로그램 -&gt; 모든 응용 프로그램 -&gt; 앱 선택 -&gt; 사용 권한** 창에서 **권한 부여** 단추를 클릭합니다(곧 사용 가능).
 
 -   또한 [관리 동의 끝점 사용](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-scopes#using-the-admin-consent-endpoint)의 **디렉터리 관리에서 사용 권한 요청** 섹션 아래에 있는 지침에 따라 발생하는 이 관리자 수준 동의를 강제할 수 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
 [관리 동의 끝점 사용](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-scopes#using-the-admin-consent-endpoint)
-
 

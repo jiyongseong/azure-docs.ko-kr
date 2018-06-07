@@ -1,31 +1,25 @@
 ---
-title: "Kubernetes용 Azure Container Service 소개 | Microsoft Docs"
-description: "Kubernetes용 Azure Container Service를 통해 Azure에서 컨테이너 기반 응용 프로그램을 간단히 배포 및 관리할 수 있습니다."
+title: Kubernetes용 Azure Container Service 소개
+description: Kubernetes용 Azure Container Service를 통해 Azure에서 컨테이너 기반 응용 프로그램을 간단히 배포 및 관리할 수 있습니다.
 services: container-service
-documentationcenter: 
 author: gabrtv
-manager: timlt
-editor: 
-tags: acs, azure-container-service
-keywords: "Kubernetes, Docker, 컨테이너, 마이크로 서비스, Azure"
-ms.assetid: 
+manager: jeconnoc
 ms.service: container-service
-ms.devlang: na
-ms.topic: get-started-article
-ms.tgt_pltfrm: na
-ms.workload: na
+ms.topic: overview
 ms.date: 07/21/2017
 ms.author: gamonroy
-ms.custom: 
+ms.custom: mvc
+ms.openlocfilehash: f12fc0baa055e62d4f15c0e42eb7add3661ea6fc
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: bfd49ea68c597b109a2c6823b7a8115608fa26c3
-ms.openlocfilehash: ed3193cce078b4b81f269fe01a40d3aa4465782d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="introduction-to-azure-container-service-for-kubernetes"></a>Kubernetes용 Azure Container Service 소개
-Kubernetes용 Azure Container Service를 사용하면 컨테이너화된 응용 프로그램을 실행하는 미리 구성된 가상 컴퓨터의 클러스터를 보다 간편하게 만들고 구성하고 관리할 수 있습니다. 이를 통해 기존 기술을 사용하거나 크고 확장된 커뮤니티 전문 지식의 본문을 이용하여 Microsoft Azure의 컨테이너 기반 응용 프로그램을 배포하고 관리할 수 있습니다.
+
+[!INCLUDE [aks-preview-redirect.md](../../../includes/aks-preview-redirect.md)]
+
+Kubernetes용 Azure Container Service를 사용하면 컨테이너화된 응용 프로그램을 실행하는 미리 구성된 가상 머신의 클러스터를 보다 간편하게 만들고 구성하고 관리할 수 있습니다. 이를 통해 기존 기술을 사용하거나 크고 확장된 커뮤니티 전문 지식의 본문을 이용하여 Microsoft Azure의 컨테이너 기반 응용 프로그램을 배포하고 관리할 수 있습니다.
 
 Azure Container Service를 사용하면 Kubernetes 및 Docker 이미지 형식을 통해 응용 프로그램 이식성을 유지하면서 Azure의 엔터프라이즈급 기능을 활용할 수 있습니다.
 
@@ -50,7 +44,7 @@ Azure Container Service를 통해 배포된 Kubernetes의 아키텍처 다이어
 
 ![Kubernetes를 사용하도록 구성된 Azure Container Service.](media/acs-intro/kubernetes.png)
 
-## <a name="videos"></a>비디오
+## <a name="videos"></a>동영상
 
 Azure Container Services의 Kubernetes 지원(Azure Friday, 2017년 1월):
 

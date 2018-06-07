@@ -1,26 +1,24 @@
 ---
-title: "Log Analytics의 Azure Networking Analytics 솔루션 | Microsoft Docs"
-description: "Log Analytics의 Azure Networking Analytics 솔루션을 사용하여 Azure 네트워크 보안 그룹 로그와 Azure Application Gateway 로그를 검토할 수 있습니다."
+title: Log Analytics의 Azure Networking Analytics 솔루션 | Microsoft Docs
+description: Log Analytics의 Azure Networking Analytics 솔루션을 사용하여 Azure 네트워크 보안 그룹 로그와 Azure Application Gateway 로그를 검토할 수 있습니다.
 services: log-analytics
-documentationcenter: 
+documentationcenter: ''
 author: richrundmsft
 manager: ewinner
-editor: 
+editor: ''
 ms.assetid: 66a3b8a1-6c55-4533-9538-cad60c18f28b
 ms.service: log-analytics
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 02/09/2017
+ms.date: 03/20/2018
 ms.author: richrund
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 74f34bdbf5707510c682814716aa0b95c19a5503
-ms.openlocfilehash: 10ca10b2f644c29aad244abab720d2ce5586714f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/09/2017
-
-
+ms.openlocfilehash: 12172e81ed6b4d79ee200ee1ca79803ad58d6d19
+ms.sourcegitcommit: c3d53d8901622f93efcd13a31863161019325216
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/29/2018
 ---
 # <a name="azure-networking-monitoring-solutions-in-log-analytics"></a>Log Analytics의 Azure 네트워킹 모니터링 솔루션
 
@@ -30,18 +28,19 @@ Log Analytics는 네트워크를 모니터링하기 위해 다음과 같은 솔�
 * 검토할 Azure Application Gateway 분석
  * Azure Application Gateway 로그
  * Azure Application Gateway 메트릭
+* 클라우드 네트워크에서 네트워크 작업을 모니터링하고 감사하는 솔루션
+* [트래픽 분석](https://docs.microsoft.com/azure/networking/network-monitoring-overview#traffic-analytics) 
 * Azure 네트워크 보안 그룹 분석
- * Azure 네트워크 보안 그룹 로그
 
 ## <a name="network-performance-monitor-npm"></a>NPM(네트워크 성능 모니터)
 
-[네트워크 성능 모니터](log-analytics-network-performance-monitor.md) 관리 솔루션은 네트워크의 상태, 가용성 및 연결 가능성을 모니터링하는 네트워크 모니터링 솔루션입니다.  다음 항목 간의 연결을 모니터링하는 데 사용됩니다.
+[네트워크 성능 모니터](https://docs.microsoft.com/azure/networking/network-monitoring-overview) 관리 솔루션은 네트워크의 상태, 가용성 및 연결 가능성을 모니터링하는 네트워크 모니터링 솔루션입니다.  다음 항목 간의 연결을 모니터링하는 데 사용됩니다.
 
 * 공용 클라우드 및 온-프레미스
 * 데이터 센터 및 사용자 위치(지점)
 * 다중 계층 응용 프로그램의 다양한 계층을 호스팅하는 서브넷
 
-자세한 내용은 [네트워크 성능 모니터](log-analytics-network-performance-monitor.md)를 참조하세요.
+자세한 내용은 [네트워크 성능 모니터](https://docs.microsoft.com/azure/networking/network-monitoring-overview)를 참조하세요.
 
 ## <a name="azure-application-gateway-and-network-security-group-analytics"></a>Azure Application Gateway 및 네트워크 보안 그룹 분석
 솔루션을 사용하려면:
@@ -64,7 +63,7 @@ Azure Application Gateway 분석 및 네트워크 보안 그룹 분석 관리 �
 
 | 플랫폼 | 직접 에이전트 | Systems Center Operations Manager 에이전트 | Azure | Operations Manager 필요 여부 | 관리 그룹을 통해 전송되는 Operations Manager 에이전트 데이터 | 수집 빈도 |
 | --- | --- | --- | --- | --- | --- | --- |
-| Azure |![아니요](./media/log-analytics-azure-networking/oms-bullet-red.png) |![아니요](./media/log-analytics-azure-networking/oms-bullet-red.png) |![예](./media/log-analytics-azure-networking/oms-bullet-green.png) |![아니요](./media/log-analytics-azure-networking/oms-bullet-red.png) |![아니요](./media/log-analytics-azure-networking/oms-bullet-red.png) |기록될 때 |
+| Azure |  |  |&#8226; |  |  |기록될 때 |
 
 
 ## <a name="azure-application-gateway-analytics-solution-in-log-analytics"></a>Log Analytics의 Azure Application Gateway 분석 솔루션
@@ -213,9 +212,9 @@ Set-AzureRmDiagnosticSetting -ResourceId $nsg.ResourceId  -WorkspaceId $workspac
 
     | 다음 위치 대신 | 사용: |
     | --- | --- |
-    |`Type=NetworkApplicationgateways OperationName=ApplicationGatewayAccess`| `Type=AzureDiagnostics ResourceType=APPLICATIONGATEWAYS OperationName=ApplicationGatewayAccess` |
-    |`Type=NetworkApplicationgateways OperationName=ApplicationGatewayPerformance` | `Type=AzureDiagnostics ResourceType=APPLICATIONGATEWAYS OperationName=ApplicationGatewayPerformance` |
-    | `Type=NetworkSecuritygroups` | `Type=AzureDiagnostics ResourceType=NETWORKSECURITYGROUPS` |
+    | NetworkApplicationgateways &#124; where OperationName=="ApplicationGatewayAccess" | AzureDiagnostics &#124; where ResourceType="APPLICATIONGATEWAYS" and OperationName=="ApplicationGatewayAccess" |
+    | NetworkApplicationgateways &#124; where OperationName=="ApplicationGatewayPerformance" | AzureDiagnostics &#124; where ResourceType=="APPLICATIONGATEWAYS" and OperationName=ApplicationGatewayPerformance |
+    | NetworkSecuritygroups | AzureDiagnostics &#124; where ResourceType=="NETWORKSECURITYGROUPS" |
 
    + 이름에 \_s, \_d 또는 \_g 접미사가 있는 필드의 경우 첫 번째 문자를 소문자로 변경합니다.
    + 이름에 \_o 접미사가 있는 모든 필드의 경우 데이터는 중첩된 필드 이름에 기반하여 개별 필드로 분할합니다.
@@ -229,4 +228,3 @@ Set-AzureRmDiagnosticSetting -ResourceId $nsg.ResourceId  -WorkspaceId $workspac
 
 ## <a name="next-steps"></a>다음 단계
 * [Log Analytics의 로그 검색](log-analytics-log-searches.md)을 사용하여 자세한 Azure 진단 데이터를 확인합니다.
-

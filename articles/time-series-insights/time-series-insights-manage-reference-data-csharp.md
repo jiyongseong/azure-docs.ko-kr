@@ -1,37 +1,43 @@
 ---
-title: "C#을 사용하여 Azure Time Series Insights 환경에 대한 참조 데이터 관리 | Microsoft Docs"
-description: "이 자습서에서는 C#을 사용하여 Time Series Insights 환경에 대한 참조 데이터를 관리하는 방법을 다룹니다."
-keywords: 
+title: C#을 사용하여 Azure Time Series Insights 환경에 대한 참조 데이터 관리 | Microsoft Docs
+description: 이 문서에서는 C#(c-sharp) .NET 언어로 작성된 사용자 지정 응용 프로그램을 만들어 Azure Time Series Insights 환경에 대한 참조 데이터를 관리하는 방법을 설명합니다.
 services: time-series-insights
-documentationcenter: 
-author: venkatgct
-manager: almineev
-editor: cgronlun
-ms.assetid: 
 ms.service: time-series-insights
-ms.devlang: na
-ms.topic: how-to-article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 06/29/2017
+author: venkatgct
 ms.author: venkatja
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: 5646e7dbd8b8fc6b3a5d8ba3b4ea9fb58eadbe0e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
+manager: jhubbard
+editor: MicrosoftDocs/tsidocs
+ms.reviewer: jasonh, kfile, anshan
+ms.devlang: csharp
+ms.workload: big-data
+ms.topic: article
+ms.date: 03/23/2018
+ms.openlocfilehash: 61375ae3b304959d5cda37c4ce0364d566d576a5
+ms.sourcegitcommit: d74657d1926467210454f58970c45b2fd3ca088d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/28/2018
 ---
 # <a name="manage-reference-data-for-an-azure-time-series-insights-environment-by-using-c"></a>C#을 사용하여 Azure Time Series Insights 환경에 대한 참조 데이터 관리
 
-이 C# 샘플에서는 Time Series Insights 환경에 대한 참조 데이터를 관리하는 방법을 설명합니다.
-이 샘플을 실행하기 전에 다음 단계를 완료했는지 확인합니다.
-1. [이 문서](time-series-insights-add-reference-data-set.md)를 사용하여 참조 데이터 집합을 만들었습니다.
-2. 응용 프로그램을 실행할 때 사용한 액세스 토큰을 Azure Active Directory API를 통해 가져옵니다. 이 토큰을 모든 쿼리 API 요청의 `Authorization` 헤더에 전달해야 합니다. 비대화형 응용 프로그램을 설정하려면 [인증 및 권한 부여](time-series-insights-authentication-and-authorization.md) 문서를 참조하세요.
-3. 샘플의 시작 부분에 정의된 모든 상수를 올바르게 설정합니다.
+이 아티클에서는 Azure Time Series Insights 환경에 대한 참조 데이터를 관리하기 위해 컴파일할 수 있는 예제 C# 프로젝트에 대해 설명합니다.
 
-## <a name="c-sample"></a>C# 샘플
+## <a name="prerequistes"></a>필수 조건
+샘플 코드를 컴파일 및 실행하기 전에 다음 단계를 완료합니다.
+1. [참조 데이터 집합을 만듭니다](time-series-insights-add-reference-data-set.md).
 
+2. 응용 프로그램에 대한 인증 액세스 토큰을 구성합니다. Azure Active Directory API를 통해 토큰을 가져와야 합니다. 이 토큰을 모든 쿼리 API 요청의 `Authorization` 헤더에 전달합니다. 
+ 
+   비대화형 응용 프로그램을 설정하는 방법에 대한 내용은 [인증 및 권한 부여](time-series-insights-authentication-and-authorization.md)를 참조하세요.
+
+3. 샘플 코드를 편집하고 코드 시작 부분의 **#DUMMY#**에 지정된 예제 상수를 바꿉니다. 
+
+이 예제 코드는 [https://github.com/Azure-Samples/Azure-Time-Series-Insights](https://github.com/Azure-Samples/Azure-Time-Series-Insights)에도 제공됩니다.
+
+## <a name="project-references"></a>프로젝트 참조
+이 예제에서는 NuGet 패키지 `Microsoft.IdentityModel.Clients.ActiveDirectory` 및 `Newtonsoft.Json`을 추가합니다. 
+
+## <a name="c-sample-code"></a>C# 샘플 코드 
 ```csharp
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 
@@ -56,7 +62,7 @@ namespace TimeSeriesInsightsReferenceDataSampleApp
         // For automated execution under application identity,
         // use application created in Active Directory.
         // To create the application in AAD, follow the steps provided here:
-        // https://docs.microsoft.com/en-us/azure/time-series-insights/time-series-insights-authentication-and-authorization
+        // https://docs.microsoft.com/azure/time-series-insights/time-series-insights-authentication-and-authorization
 
         // SET the application ID of application registered in your Azure Active Directory
         private static string ApplicationClientId = "#DUMMY#";
@@ -156,7 +162,7 @@ namespace TimeSeriesInsightsReferenceDataSampleApp
             if (ApplicationClientId == "#DUMMY#" || ApplicationClientSecret == "#DUMMY#" || Tenant.StartsWith("#DUMMY#"))
             {
                 throw new Exception(
-                    $"Use the link {"https://docs.microsoft.com/en-us/azure/time-series-insights/time-series-insights-authentication-and-authorization"} to update the values of 'ApplicationClientId', 'ApplicationClientSecret' and 'Tenant'.");
+                    $"Use the link {"https://docs.microsoft.com/azure/time-series-insights/time-series-insights-authentication-and-authorization"} to update the values of 'ApplicationClientId', 'ApplicationClientSecret' and 'Tenant'.");
             }
 
             var authenticationContext = new AuthenticationContext(
@@ -234,5 +240,4 @@ namespace TimeSeriesInsightsReferenceDataSampleApp
 ```
 
 ## <a name="next-steps"></a>다음 단계
-
-전체 API 참조는 [참조 데이터 API](/rest/api/time-series-insights/time-series-insights-reference-reference-data-api) 문서를 참조하세요.
+[참조 데이터 API](/rest/api/time-series-insights/time-series-insights-reference-reference-data-api)

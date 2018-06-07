@@ -1,11 +1,11 @@
 ---
-title: "Azure Resource Manager 템플릿의 가상 컴퓨터 | Microsoft Azure"
-description: "Azure Resource Manager 템플릿에서 가상 컴퓨터 리소스를 정의하는 방법에 대해 알아봅니다."
+title: Azure Resource Manager 템플릿의 가상 머신 | Microsoft Azure
+description: Azure Resource Manager 템플릿에서 가상 머신 리소스를 정의하는 방법에 대해 알아봅니다.
 services: virtual-machines-windows
-documentationcenter: 
-author: davidmu1
-manager: timlt
-editor: 
+documentationcenter: ''
+author: cynthn
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
 ms.assetid: f63ab5cc-45b8-43aa-a4e7-69dc42adbb99
 ms.service: virtual-machines-windows
@@ -14,18 +14,16 @@ ms.tgt_pltfrm: vm-windows
 ms.devlang: na
 ms.topic: article
 ms.date: 07/18/2017
-ms.author: davidmu
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c308183ffe6a01f4d4bf6f5817945629cbcedc92
-ms.openlocfilehash: 907e5b80aeeee4ab2eb0466490ba9ef9b0348144
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/17/2017
-
+ms.author: cynthn
+ms.openlocfilehash: 50fb5eeea5e3d6a2f991e92ae9c188822ddb40b0
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
+# <a name="virtual-machines-in-an-azure-resource-manager-template"></a>Azure Resource Manager 템플릿의 가상 머신
 
-# <a name="virtual-machines-in-an-azure-resource-manager-template"></a>Azure Resource Manager 템플릿의 가상 컴퓨터
-
-이 문서에서는 가상 컴퓨터에 적용되는 Azure Resource Manager 템플릿의 측면을 설명합니다. 이 문서는 가상 컴퓨터를 만들기 위한 완전한 템플릿 설명하지 않습니다. 이를 위해 저장소 계정, 네트워크 인터페이스, 공용 IP 주소 및 가상 네트워크에 대한 리소스 정의가 필요합니다. 이러한 리소스를 함께 정의할 수 있는 방법에 대한 자세한 내용은 [Resource Manager 템플릿 연습](../../azure-resource-manager/resource-manager-template-walkthrough.md)을 참조하세요.
+이 문서에서는 가상 머신에 적용되는 Azure Resource Manager 템플릿의 측면을 설명합니다. 이 문서는 가상 머신을 만들기 위한 완전한 템플릿 설명하지 않습니다. 이를 위해 저장소 계정, 네트워크 인터페이스, 공용 IP 주소 및 가상 네트워크에 대한 리소스 정의가 필요합니다. 이러한 리소스를 함께 정의할 수 있는 방법에 대한 자세한 내용은 [Resource Manager 템플릿 연습](../../azure-resource-manager/resource-manager-template-walkthrough.md)을 참조하세요.
 
 갤러리에 VM 리소스를 포함하는 [많은 템플릿](https://azure.microsoft.com/documentation/templates/?term=VM)이 있습니다. 템플릿에 포함될 수 있는 모든 요소가 여기에 설명되어 있지 않습니다.
 
@@ -153,7 +151,7 @@ ms.lasthandoff: 05/17/2017
 
 ## <a name="api-version"></a>API 버전
 
-템플릿을 사용하여 리소스를 배포할 때 사용할 API의 버전을 지정해야 합니다. 예제에서는 이 apiVersion 요소를 사용하여 가상 컴퓨터 리소스를 보여 줍니다.
+템플릿을 사용하여 리소스를 배포할 때 사용할 API의 버전을 지정해야 합니다. 예제에서는 이 apiVersion 요소를 사용하여 가상 머신 리소스를 보여 줍니다.
 
 ```
 "apiVersion": "2016-04-30-preview",
@@ -165,7 +163,7 @@ ms.lasthandoff: 05/17/2017
 
 - REST API - [모든 리소스 공급자 나열](https://docs.microsoft.com/rest/api/resources/providers#Providers_List)
 - PowerShell - [Get-AzureRmResourceProvider](/powershell/module/azurerm.resources/get-azurermresourceprovider)
-- Azure CLI 2.0 - [az provider show](https://docs.microsoft.com/cli/azure/provider#show)
+- Azure CLI 2.0 - [az provider show](https://docs.microsoft.com/cli/azure/provider#az_provider_show)
 
 ## <a name="parameters-and-variables"></a>매개 변수 및 변수
 
@@ -218,7 +216,7 @@ ms.lasthandoff: 05/17/2017
 
 ## <a name="resource-loops"></a>리소스 루프
 
-응용 프로그램에 하나 이상의 가상 컴퓨터가 필요할 때 템플릿에서 복사 요소를 사용할 수 있습니다. 이 선택적 요소는 매개 변수로 지정한 VM의 수 만들기를 통해 반복합니다.
+응용 프로그램에 하나 이상의 가상 머신이 필요할 때 템플릿에서 복사 요소를 사용할 수 있습니다. 이 선택적 요소는 매개 변수로 지정한 VM의 수 만들기를 통해 반복합니다.
 
 ```
 "copy": {
@@ -238,7 +236,7 @@ ms.lasthandoff: 05/17/2017
 ```
 
 > [!NOTE] 
->이 예제에서는 가상 컴퓨터에 대해 Managed Disks를 사용합니다.
+>이 예제에서는 가상 머신에 대해 Managed Disks를 사용합니다.
 >
 >
 
@@ -253,7 +251,7 @@ ms.lasthandoff: 05/17/2017
 
 ## <a name="dependencies"></a>종속성
 
-대부분의 리소스는 제대로 작동하기 위해 다른 리소스에 따라 달라집니다. 가상 컴퓨터는 가상 네트워크와 연결되어야 하며 이를 수행하기 위해 네트워크 인터페이스가 필요합니다. [dependsOn](../../resource-group-define-dependencies.md) 요소는 VM이 생성되기 전에 네트워크 인터페이스가 사용될 준비가 되었는지 확인하는 데 사용됩니다.
+대부분의 리소스는 제대로 작동하기 위해 다른 리소스에 따라 달라집니다. 가상 머신은 가상 네트워크와 연결되어야 하며 이를 수행하기 위해 네트워크 인터페이스가 필요합니다. [dependsOn](../../resource-group-define-dependencies.md) 요소는 VM이 생성되기 전에 네트워크 인터페이스가 사용될 준비가 되었는지 확인하는 데 사용됩니다.
 
 ```
 "dependsOn": [
@@ -263,7 +261,7 @@ ms.lasthandoff: 05/17/2017
 
 리소스 관리자는 배포되는 다른 리소스에 종속되지 않는 모든 리소스를 동시에 배포합니다. 불필요한 종속성을 지정하여 실수로 배포 속도를 늦출 수 있으므로 종속성을 설정할 때 주의해야 합니다. 종속성은 여러 리소스를 통해 연결할 수 있습니다. 예를 들어 네트워크 인터페이스는 공용 IP 주소 및 가상 네트워크 리소스에 따라 다릅니다.
 
-종속성이 필수인지 어떻게 알 수 있을까요? 템플릿에서 설정한 값을 살펴봅니다. 가상 컴퓨터 리소스 정의의 요소가 동일한 템플릿에 배포된 다른 리소스를 가리키는 경우 종속성이 필요합니다. 예를 들어 예제 가상 컴퓨터는 네트워크 프로필을 정의합니다.
+종속성이 필수인지 어떻게 알 수 있을까요? 템플릿에서 설정한 값을 살펴봅니다. 가상 머신 리소스 정의의 요소가 동일한 템플릿에 배포된 다른 리소스를 가리키는 경우 종속성이 필요합니다. 예를 들어 예제 가상 머신은 네트워크 프로필을 정의합니다.
 
 ```
 "networkProfile": { 
@@ -274,23 +272,23 @@ ms.lasthandoff: 05/17/2017
 },
 ```
 
-이 속성을 설정하려면 네트워크 인터페이스가 있어야 합니다. 따라서 종속성이 필요합니다. 또한 하나의 리소스(자식)가 다른 리소스(부모) 내에서 정의될 때에도 종속성을 설정해야 합니다. 예를 들어 진단 설정 및 사용자 지정 스크립트 확장 모두는 가상 컴퓨터의 자식 리소스로 정의됩니다. 가상 컴퓨터가 있을 때까지 만들 수 없습니다. 따라서 두 리소스는 가상 컴퓨터에 따라 표시됩니다.
+이 속성을 설정하려면 네트워크 인터페이스가 있어야 합니다. 따라서 종속성이 필요합니다. 또한 하나의 리소스(자식)가 다른 리소스(부모) 내에서 정의될 때에도 종속성을 설정해야 합니다. 예를 들어 진단 설정 및 사용자 지정 스크립트 확장 모두는 가상 머신의 자식 리소스로 정의됩니다. 가상 머신이 있을 때까지 만들 수 없습니다. 따라서 두 리소스는 가상 머신에 따라 표시됩니다.
 
 ## <a name="profiles"></a>프로필
 
-몇 가지 프로필 요소는 가상 컴퓨터 리소스를 정의할 때 사용됩니다. 일부는 필요하고 일부는 선택 사항입니다. 예를 들어 hardwareProfile, osProfile, storageProfile 및 networkProfile 요소는 필요하지만 diagnosticsProfile은 선택 사항입니다. 이러한 프로필은 다음과 같은 설정을 정의합니다.
+몇 가지 프로필 요소는 가상 머신 리소스를 정의할 때 사용됩니다. 일부는 필요하고 일부는 선택 사항입니다. 예를 들어 hardwareProfile, osProfile, storageProfile 및 networkProfile 요소는 필요하지만 diagnosticsProfile은 선택 사항입니다. 이러한 프로필은 다음과 같은 설정을 정의합니다.
    
 - [크기](sizes.md)
-- [이름](../linux/infrastructure-naming-guidelines.md) 및 자격 증명
+- [이름](/architecture/best-practices/naming-conventions) 및 자격 증명
 - 디스크 및 [운영 체제 설정](cli-ps-findimage.md)
-- [네트워크 인터페이스](../../virtual-network/virtual-networks-multiple-nics.md) 
+- [네트워크 인터페이스](../../virtual-network/virtual-network-deploy-multinic-classic-ps.md) 
 - 부트 진단
 
 ## <a name="disks-and-images"></a>디스크 및 이미지
    
-Azure에서 vhd 파일은 [디스크 또는 이미지](../../storage/storage-about-disks-and-vhds-windows.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 나타낼 수 있습니다. vhd 파일에서 운영 체제가 특정 VM이 되도록 특수화된 경우 디스크를 나타냅니다. vhd 파일에서 운영 체제가 여러 VM을 만드는 데 사용되도록 일반화된 경우 이미지를 나타냅니다.   
+Azure에서 vhd 파일은 [디스크 또는 이미지](about-disks-and-vhds.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 나타낼 수 있습니다. vhd 파일에서 운영 체제가 특정 VM이 되도록 특수화된 경우 디스크를 나타냅니다. vhd 파일에서 운영 체제가 여러 VM을 만드는 데 사용되도록 일반화된 경우 이미지를 나타냅니다.   
     
-### <a name="create-new-virtual-machines-and-new-disks-from-a-platform-image"></a>플랫폼 이미지에서 새 가상 컴퓨터 및 새 디스크 만들기
+### <a name="create-new-virtual-machines-and-new-disks-from-a-platform-image"></a>플랫폼 이미지에서 새 가상 머신 및 새 디스크 만들기
 
 VM을 만들 때 사용할 운영 체제를 결정해야 합니다. imageReference 요소는 새 VM의 운영 체제를 정의하는 데 사용됩니다. 예제는 Windows Server 운영 체제에 대한 정의를 보여 줍니다.
 
@@ -324,9 +322,9 @@ Linux 운영 체제를 만들려는 경우 이 정의를 사용할 수 있습니
 },
 ```
 
-### <a name="create-new-virtual-machines-from-existing-managed-disks"></a>기존 Managed Disks에서 새 가상 컴퓨터 만들기
+### <a name="create-new-virtual-machines-from-existing-managed-disks"></a>기존 Managed Disks에서 새 가상 머신 만들기
 
-기존 디스크에서 가상 컴퓨터를 만들려는 경우 imageReference 및 osProfile 요소를 제거하고 이러한 디스크 설정을 정의합니다.
+기존 디스크에서 가상 머신을 만들려는 경우 imageReference 및 osProfile 요소를 제거하고 이러한 디스크 설정을 정의합니다.
 
 ```
 "osDisk": { 
@@ -339,9 +337,9 @@ Linux 운영 체제를 만들려는 경우 이 정의를 사용할 수 있습니
 },
 ```
 
-### <a name="create-new-virtual-machines-from-a-managed-image"></a>관리되는 이미지에서 새 가상 컴퓨터 만들기
+### <a name="create-new-virtual-machines-from-a-managed-image"></a>관리되는 이미지에서 새 가상 머신 만들기
 
-관리되는 이미지에서 가상 컴퓨터를 만들려는 경우 imageReference 요소를 변경하고 다음과 같은 디스크 설정을 정의합니다.
+관리되는 이미지에서 가상 머신을 만들려는 경우 imageReference 요소를 변경하고 다음과 같은 디스크 설정을 정의합니다.
 
 ```
 "storageProfile": { 
@@ -458,6 +456,5 @@ start.ps1 스크립트는 여러 구성 작업을 수행할 수 있습니다. �
 ## <a name="next-steps"></a>다음 단계
 
 - [Azure Resource Manager 템플릿 작성](../../resource-group-authoring-templates.md)을 사용하여 고유의 템플릿을 만듭니다.
-- [Resource Manager 템플릿을 사용하여 Windows 가상 컴퓨터 만들기](ps-template.md)를 사용하여 자신이 만든 템플릿을 배포합니다.
+- [Resource Manager 템플릿을 사용하여 Windows 가상 머신 만들기](ps-template.md)를 사용하여 자신이 만든 템플릿을 배포합니다.
 - [Azure PowerShell 모듈을 사용하여 Windows VM 만들기 및 관리](tutorial-manage-vm.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 검토하여 만든 VM을 관리하는 방법을 알아봅니다.
-

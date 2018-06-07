@@ -1,29 +1,25 @@
 ---
-title: "Azure Active Directory 그룹 기반 라이선스 추가 시나리오 | Microsoft Docs"
-description: "Azure Active Directory 그룹 기반 라이선스의 추가 시나리오"
+title: Azure Active Directory 그룹 기반 라이선스 추가 시나리오 | Microsoft Docs
+description: Azure Active Directory 그룹 기반 라이선스의 추가 시나리오
 services: active-directory
-keywords: "Azure AD 라이선스"
-documentationcenter: 
+keywords: Azure AD 라이선스
+documentationcenter: ''
 author: curtand
-manager: femila
+manager: mtillman
 editor: piotrci
-ms.assetid: 
 ms.service: active-directory
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
 ms.workload: identity
+ms.component: users-groups-roles
 ms.date: 06/02/2017
 ms.author: curtand
 ms.custom: H1Hack27Feb2017
+ms.openlocfilehash: bb8bd727618eda2a887cc9e1b739889204eb87fa
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
 ms.translationtype: HT
-ms.sourcegitcommit: 8021f8641ff3f009104082093143ec8eb087279e
-ms.openlocfilehash: 55e2e095138842f8e2d31a4f79ffb22b81d18dba
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
-
 # <a name="scenarios-limitations-and-known-issues-using-groups-to-manage-licensing-in-azure-active-directory"></a>Azure Active Directory에서 라이선스 관리를 위해 그룹을 사용하는 경우 시나리오, 제한 사항 및 알려진 문제
 
 다음 정보와 예제를 사용하면 Azure AD(Azure Active Directory) 그룹 기반 라이선스에 대해 자세히 이해할 수 있습니다.
@@ -200,6 +196,16 @@ New Value : [Users successfully assigned licenses: 6, Users for whom license ass
 >[!TIP]
 > *사용자 라이선스 변경* 관련 항목을 클릭하면 개별 사용자에게 적용된 라이선스 변경에 대한 세부 정보가 표시됩니다.
 
+## <a name="deleting-a-group-with-an-assigned-license"></a>할당된 라이선스가 있는 그룹 삭제
+
+활성 라이선스가 할당된 그룹은 삭제할 수 없습니다. 관리자는 사용자로부터 라이선스가 제거된다는 것을 인식하지 못하는 그룹을 삭제할 수도 있습니다. 이러한 이유로 그룹을 삭제하려면 먼저 그룹에서 라이선스를 제거해야 합니다.
+
+Azure Portal에서 그룹을 삭제하려고 하면 다음과 같은 오류 알림이 표시될 수 있습니다. ![그룹 삭제 실패 스크린샷](media/active-directory-licensing-group-advanced/groupdeletionfailed.png)
+
+그룹의 **라이선스** 탭으로 이동하여 할당된 라이선스가 있는지 확인합니다. 그러한 경우 해당 라이선스를 제거하고 그룹을 다시 삭제합니다.
+
+PowerShell 또는 Graph API를 통해 그룹을 삭제하려고 할 때 비슷한 오류가 표시될 수 있습니다. 온-프레미스에서 동기화된 그룹을 사용하는 경우 Azure AD에서 그룹을 삭제하지 못하면 Azure AD Connect에서 오류를 보고할 수도 있습니다. 이러한 모든 경우에는 그룹에 할당된 라이선스가 있는지 확인한 다음 먼저 이러한 라이선스를 제거합니다.
+
 ## <a name="limitations-and-known-issues"></a>제한 사항 및 알려진 문제
 
 그룹 기반 라이선스를 사용하는 경우 제한 사항 및 알려진 문제점에 대한 다음 목록을 잘 알고 있는 것이 좋습니다.
@@ -213,6 +219,8 @@ New Value : [Users successfully assigned licenses: 6, Users for whom license ass
 - 사용자가 그룹에서 제거되고 라이선스를 상실하는 경우 해당 라이선스(예: SharePoint Online)의 서비스 계획이 **일시 중단됨** 상태로 설정됩니다. 서비스 계획은 최종 사용 안 함 상태로 설정되지 않습니다. 이 예방 조치를 통해 관리자가 그룹 멤버 자격 관리에서 실수하는 경우 사용자 데이터를 실수로 제거하지 않도록 방지할 수 있습니다.
 
 - 대규모 그룹(예: 100,000명의 사용자)에 대해 라이선스를 할당하거나 수정하면 성능에 영향을 줄 수 있습니다. 특히 Azure AD 자동화에서 생성된 변경 볼륨은 Azure AD와 온-프레미스 시스템 간의 디렉터리 동기화 성능에 부정적인 영향을 줄 수 있습니다.
+
+- 로드가 높은 특정 경우에서 라이선스 처리는 지연될 수 있으며 그룹 라이선스 추가/제거 또는 그룹에서 사용자 추가/제거와 같은 변경 내용은 처리되는 데 시간이 오래 걸릴 수 있습니다. 변경 내용이 처리되는 데 24시간 이상이 걸리는 경우 조사를 허용하도록 [지원 티켓을 열어](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/supportRequest)주세요. *일반 공급*에 도달하기 전에 이 기능의 성능 특징을 향상시킬 예정입니다.
 
 - 라이선스 관리 자동화는 모든 유형의 환경 변경 사항에 자동으로 응답하지 않습니다. 예를 들어 라이선스가 부족하여 일부 사용자가 오류 상태에 있을 수 있습니다. 사용 가능한 사용자 수를 확보하기 위해 직접 할당된 일부 라이선스를 다른 사용자에게서 제거할 수 있습니다. 그러나 시스템은 이러한 변경에 자동으로 대응하지 않고 해당 오류 상태에 있는 사용자를 수정합니다.
 
@@ -228,4 +236,3 @@ New Value : [Users successfully assigned licenses: 6, Users for whom license ass
 * [Azure Active Directory에서 그룹에 라이선스 할당](active-directory-licensing-group-assignment-azure-portal.md)
 * [Azure Active Directory에서 그룹에 대한 라이선스 문제 식별 및 해결](active-directory-licensing-group-problem-resolution-azure-portal.md)
 * [Azure Active Directory에서 개별 라이선스 사용자를 그룹 기반 라이선스로 마이그레이션하는 방법](active-directory-licensing-group-migration-azure-portal.md)
-

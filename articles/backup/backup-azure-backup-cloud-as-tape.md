@@ -15,12 +15,11 @@ ms.workload: storage-backup-recovery
 ms.date: 1/10/2017
 ms.author: saurse;trinadhk;markgal
 ms.custom: H1Hack27Feb2017
-translationtype: Human Translation
-ms.sourcegitcommit: 82b7541ab1434179353247ffc50546812346bda9
 ms.openlocfilehash: f0f3152daf5f91f7c9e540797bf09b21969d2d33
-ms.lasthandoff: 03/02/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="move-your-long-term-storage-from-tape-to-the-azure-cloud"></a>장기 저장소를 테이프에서 Azure 클라우드로 이동
 Azure 백업 및 System Center Data Protection Manager 고객은 다음을 수행할 수 있습니다.
@@ -50,7 +49,7 @@ Azure 백업 및 System Center Data Protection Manager 고객은 다음을 수�
 ## <a name="example--putting-both-together"></a>예 - 두 가지를 결합
 ![샘플 화면](./media/backup-azure-backup-cloud-as-tape/samplescreen.png)
 
-1. **일 단위 보존 정책**: 매일 수행된 백업이&7;일 동안 저장됩니다.
+1. **일 단위 보존 정책**: 매일 수행된 백업이 7일 동안 저장됩니다.
 2. **주 단위 보존 정책**: 매주 토요일 자정과 오후 6시에 수행된 백업이 4주 동안 유지됩니다
 3. **월 단위 보존 정책**: 매달 마지막 주 토요일 자정과 오후 6시에 수행된 백업이 12개월 동안 유지됩니다.
 4. **연 단위 보존 정책**: 매년 3월 마지막 주 토요일 자정에 수행된 백업이 10년 동안 유지됩니다.
@@ -79,4 +78,3 @@ Azure 백업에 대한 자세한 내용은 다음을 참조하세요.
 
 * [Azure 백업 소개](backup-introduction-to-azure-backup.md)
 * [Azure 백업 시도](backup-try-azure-backup-in-10-mins.md)
-

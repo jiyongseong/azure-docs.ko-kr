@@ -4,7 +4,7 @@ description: "예기치 않게 사용자에게 Azure AD와 통합한 응용 프�
 services: active-directory
 documentationcenter: 
 author: ajamess
-manager: femila
+manager: mtillman
 ms.assetid: 
 ms.service: active-directory
 ms.workload: identity
@@ -13,14 +13,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0d6f6fb24f1f01d703104f925dcd03ee1ff46062
-ms.openlocfilehash: f32de2a8868d853e7720cffa23df6b3c59ab4a49
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/18/2017
-
+ms.openlocfilehash: 0f24ca83922cc17e94683ed1bde5ed782b93df7c
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
-
 # <a name="unexpected-consent-prompt-when-signing-in-to-an-application"></a>응용 프로그램에 로그인할 때 예기치 않은 동의 확인 프롬프트
 
 Azure Active Directory와 통합되는 많은 응용 프로그램을 실행하기 위해 다양한 리소스에 대한 권한이 필요합니다. 또한 이러한 리소스가 Azure Active Directory와 통합되면 Azure AD 동의 프레임워크를 사용하여 액세스하기 위한 사용 권한을 요청합니다. 
@@ -48,6 +46,5 @@ Azure Active Directory와 통합되는 많은 응용 프로그램을 실행하�
 -   [Azure Active Directory에서 앱, 사용 권한 및 동의(v1.0 끝점)](https://docs.microsoft.com/azure/active-directory/active-directory-apps-permissions-consent)
 
 -   [Azure Active Directory의 범위, 사용 권한 및 동의(v2.0 끝점)](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-scopes)
-
 
 

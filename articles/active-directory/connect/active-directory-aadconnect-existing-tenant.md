@@ -3,8 +3,8 @@ title: "Azure AD Connect: Azure AD가 이미 있는 경우 | Microsoft Docs"
 description: "이 문서에서는 기존 Azure AD 테넌트가 있을 때 Connect를 사용하는 방법에 대해 설명합니다."
 services: active-directory
 documentationcenter: 
-author: andkjell
-manager: femila
+author: billmath
+manager: mtillman
 editor: 
 ms.assetid: 
 ms.service: active-directory
@@ -14,14 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/13/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f59028a2f909914222236f3b3575afd0949b4277
-ms.openlocfilehash: c89e206462856d25a81729e7028065ac1cd13ef3
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/23/2017
-
+ms.openlocfilehash: fa264487c68ea5403300d9b5b9978934a639a2a4
+ms.sourcegitcommit: f1c1789f2f2502d683afaf5a2f46cc548c0dea50
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/18/2018
 ---
-
 # <a name="azure-ad-connect-when-you-have-an-existent-tenant"></a>Azure AD Connect: 기존 테넌트가 있는 경우
 Azure AD Connect를 사용하는 방법에 대한 항목 중 대부분은 새 Azure AD 테넌트로 시작하고 여기에는 사용자 또는 다른 개체가 없다고 가정하고 있습니다. 그러나 이미 Azure AD 테넌트로 시작하여 사용자와 다른 개체를 제공한 후에 Connect를 사용하려는 경우 이 문서가 도움이 됩니다.
 
@@ -53,7 +51,7 @@ Azure AD가 Connect에서 나오는 개체의 특성 값과 동일하고 Azure A
 Connect를 새로 설치하는 경우 소프트 일치와 하드 일치 사이에 실질적인 차이가 없습니다. 차이점은 재해 복구 상황에 있습니다. Azure AD Connect를 사용하여 서버를 잃어버린 경우 데이터 손실 없이 새 인스턴스를 다시 설치할 수 있습니다. sourceAnchor가 있는 개체는 초기 설치 시 Connect로 보내집니다. 그런 다음 Azure AD에서 동일하게 수행하는 것보다 훨씬 빠른 클라이언트(Azure AD Connect)에서 일치를 평가할 수 있습니다. 하드 일치는 Connect와 Azure AD 모두에서 평가되지만, 소프트 일치는 Azure AD에서만 평가됩니다.
 
 ### <a name="other-objects-than-users"></a>사용자 이외의 다른 개체
-사용자에는 일반적으로 userPrincipalName과 proxyAddresses 특성이 모두 있어 쉽게 일치시킬 수 있습니다. 그러나 보안 그룹과 같은 다른 개체에는 이러한 특성이 없습니다. 이 경우 sourceAnchor를 사용하여 하드 일치에서만 일치시킬 수 있습니다. sourceAnchor는 항상 온-프레미스에서 Base64로 변환된 **objectGUID**이므로 두 개체를 일치시켜야 할 때는 Azure AD의 값을 업데이트해야 합니다. sourceAnchor/immutableID는 포털이 아니라 PowerShell을 통해서만 업데이트할 수 있습니다.
+메일이 설정된 그룹 및 연락처의 경우 proxyAddresses에 따라 소프트 매치를 수행할 수 있습니다. 하드 매치는 사용자 전용의 sourceAnchor/immutableID(PowerShell 사용)만을 업데이트할 수 있으므로 적용되지 않습니다. 메일이 사용되지 않는 그룹의 경우 현재 소프트 매치 또는 하드 매치가 지원되지 않습니다.
 
 ## <a name="create-a-new-on-premises-active-directory-from-data-in-azure-ad"></a>Azure AD의 데이터에서 새로운 온-프레미스 Active Directory 만들기
 일부 고객은 Azure AD를 사용하는 클라우드 전용 솔루션으로 시작하고 온-프레미스 AD를 사용하지 않습니다. 나중에 온-프레미스 리소스를 사용하지만 Azure AD 데이터를 기반으로 하는 온-프레미스 AD를 구축하려고 합니다. 이 시나리오에서는 Azure AD Connect가 도움이 되지 않습니다. 온-프레미스 사용자를 만들지 않으며 온-프레미스 암호를 Azure AD에서와 동일하게 설정할 수 있는 기능이 없습니다.
@@ -62,4 +60,3 @@ Connect를 새로 설치하는 경우 소프트 일치와 하드 일치 사이�
 
 ## <a name="next-steps"></a>다음 단계
 [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)에 대해 자세히 알아봅니다.
-

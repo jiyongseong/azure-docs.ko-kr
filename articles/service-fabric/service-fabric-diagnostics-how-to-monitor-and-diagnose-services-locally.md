@@ -1,26 +1,24 @@
 ---
-title: "Windows에서 Azure 마이크로 서비스 디버그 | Microsoft Docs"
-description: "로컬 개발 컴퓨터에서 Microsoft Azure 서비스 패브릭을 사용하여 작성된 서비스를 모니터링하고 진단하는 방법에 대해 알아보세요."
+title: Windows에서 Azure 마이크로 서비스 디버그 | Microsoft Docs
+description: 로컬 개발 컴퓨터에서 Microsoft Azure 서비스 패브릭을 사용하여 작성된 서비스를 모니터링하고 진단하는 방법에 대해 알아보세요.
 services: service-fabric
 documentationcenter: .net
 author: dkkapur
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: edcc0631-ed2d-45a3-851d-2c4fa0f4a326
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 04/24/2017
+ms.date: 10/15/2017
 ms.author: dekapur
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 08998340afb2f242b9a268331607b0d1ddb9b0c6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 93cf4985e94c0af480d9f4e2e38b792cffe4df6e
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="monitor-and-diagnose-services-in-a-local-machine-development-setup"></a>로컬 컴퓨터 개발 설정에서의 모니터링 및 진단 서비스
 > [!div class="op_single_selector"]
@@ -68,5 +66,4 @@ ms.lasthandoff: 07/08/2017
 
 * [Azure 진단을 사용하여 로그를 수집하는 방법](service-fabric-diagnostics-how-to-setup-wad.md)
 * [EventFlow를 사용하여 이벤트 집계 및 수집](service-fabric-diagnostics-event-aggregation-eventflow.md)
-
 

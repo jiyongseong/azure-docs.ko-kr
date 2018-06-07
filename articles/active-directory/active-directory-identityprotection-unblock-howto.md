@@ -5,22 +5,21 @@ services: active-directory
 keywords: "Azure Active Directory ID 보호, 사용자 차단 해제"
 documentationcenter: 
 author: MarkusVi
-manager: femila
+manager: mtillman
 ms.assetid: a953d425-a3ef-41f8-a55d-0202c3f250a7
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/05/2017
+ms.date: 01/15/2018
 ms.author: markvi
 ms.reviewer: nigu
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 87c73981c74fc763fd1aec6c283e934c77008441
-ms.openlocfilehash: d17fa0ffb0c55d49487804cd28d8903107069f06
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
+ms.openlocfilehash: ab11f27ceed716ba90e9027eee1775c190d2d93f
+ms.sourcegitcommit: 384d2ec82214e8af0fc4891f9f840fb7cf89ef59
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/16/2018
 ---
 # <a name="azure-active-directory-identity-protection---how-to-unblock-users"></a>Azure Active Directory ID 보호 - 사용자를 차단 해제하는 방법
 Azure Active Directory ID 보호를 사용하여 구성된 조건을 만족하는 경우에 사용자를 차단하는 정책을 구성할 수 있습니다. 일반적으로 차단된 사용자 연락처는 데스크가 차단 해제되도록 돕습니다. 이 항목은 차단된 사용자를 해제하기 위해 수행할 수 있는 단계를 설명합니다.
@@ -58,4 +57,3 @@ Azure Active Directory ID보호를 사용하여 로그인 위험 정책 또는 �
 
 ## <a name="next-steps"></a>다음 단계
  Azure AD ID 보호에 대해 자세히 살펴보시겠습니까? [Azure Active Directory ID 보호](active-directory-identityprotection.md)를 확인하세요.
-

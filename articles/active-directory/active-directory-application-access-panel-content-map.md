@@ -1,25 +1,24 @@
 ---
-title: "응용 프로그램 액세스 패널 웹 사이트 또는 모바일 응용 프로그램을 사용하는 문제”"
-description: "응용 프로그램 액세스 패널 웹 사이트 또는 모바일 응용 프로그램을 사용하는 문제”"
+title: 응용 프로그램 액세스 패널 웹 사이트 또는 모바일 응용 프로그램을 사용하는 문제”
+description: 응용 프로그램 액세스 패널 웹 사이트 또는 모바일 응용 프로그램을 사용하는 문제”
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: ajamess
-manager: kbrint
+manager: mtillman
 ms.service: active-directory
+ms.component: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0d6f6fb24f1f01d703104f925dcd03ee1ff46062
-ms.openlocfilehash: 97d3485030b0f9f2a6036cdae14e3c37ca89fd6e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/18/2017
-
+ms.openlocfilehash: 429626fceaa6ec85989c89f35a02e121745498e4
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
-
 # <a name="problems-using-the-application-access-panel-website-or-mobile-application"></a>응용 프로그램 액세스 패널 웹 사이트 또는 모바일 응용 프로그램을 사용하는 문제
 
 
@@ -40,4 +39,3 @@ ms.lasthandoff: 04/18/2017
   다음 문서는 이 범주에서 가장 일반적인 몇 가지 문제를 해결하는 데 도움이 될 수 있습니다.
   * [셀프 서비스 응용 프로그램 액세스를 사용하는 방법을 모름](https://docs.microsoft.com/azure/active-directory/application-access-panel-self-service-applications-how-to/?/?WT.mc_id=DMC_AAD_Manage_Apps_Troubleshooting_Nav)
   * [셀프 서비스 응용 프로그램 액세스를 사용할 때 문제가 발생함](https://docs.microsoft.com/azure/active-directory/application-access-panel-self-service-applications-problem/?/?WT.mc_id=DMC_AAD_Manage_Apps_Troubleshooting_Nav)
-

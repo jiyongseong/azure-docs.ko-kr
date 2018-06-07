@@ -1,25 +1,24 @@
 ---
-title: "응용 프로그램에 로그인할 때 문제”"
-description: "응용 프로그램에 로그인할 때 문제”"
+title: 응용 프로그램에 로그인할 때 문제”
+description: 응용 프로그램에 로그인할 때 문제”
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: ajamess
-manager: kbrint
+manager: mtillman
 ms.service: active-directory
+ms.component: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0d6f6fb24f1f01d703104f925dcd03ee1ff46062
-ms.openlocfilehash: 2e6995d730089e194dcac989151af13df28a173a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/18/2017
-
+ms.openlocfilehash: 2d5b056af88f1260ac96187717fa1b946d783c3b
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
-
 # <a name="problems-when-signing-in-to-applications"></a>응용 프로그램에 로그인할 때 문제
 
 
@@ -44,4 +43,3 @@ ms.lasthandoff: 04/18/2017
   * [페더레이션된 Single Sign-On에 대해 구성된 Azure AD 갤러리 응용 프로그램에 로그인할 수 없음](https://docs.microsoft.com/azure/active-directory/application-sign-in-problem-federated-sso-gallery/?/?WT.mc_id=DMC_AAD_Manage_Apps_Troubleshooting_Nav)
   * [사용자 지정 개발된 응용 프로그램에 로그인할 수 없음](https://docs.microsoft.com/azure/active-directory/application-sign-in-problem-custom-dev/?/?WT.mc_id=DMC_AAD_Manage_Apps_Troubleshooting_Nav)
   * [Azure AD 응용 프로그램 프록시를 사용하여 온-프레미스 응용 프로그램에 로그인할 수 없음](https://docs.microsoft.com/azure/active-directory/application-sign-in-problem-on-premises-application-proxy/?/?WT.mc_id=DMC_AAD_Manage_Apps_Troubleshooting_Nav)
-

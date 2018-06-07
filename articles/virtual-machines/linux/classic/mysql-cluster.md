@@ -1,11 +1,11 @@
 ---
-title: "부하 분산된 집합으로 MySQL 클러스터화 | Microsoft Docs"
-description: "Azure에서 클래식 배포 모델을 사용하여 만든 부하 분산된 고가용성 Linux MySQL 클러스터를 설정합니다."
+title: 부하 분산된 집합으로 MySQL 클러스터화 | Microsoft Docs
+description: Azure에서 클래식 배포 모델을 사용하여 만든 부하 분산된 고가용성 Linux MySQL 클러스터를 설정합니다.
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: bureado
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-service-management
 ms.assetid: 6c413a16-e9b5-4ffe-a8a3-ae67046bbdf3
 ms.service: virtual-machines-linux
@@ -15,16 +15,16 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/14/2015
 ms.author: jparrel
-translationtype: Human Translation
-ms.sourcegitcommit: 356de369ec5409e8e6e51a286a20af70a9420193
-ms.openlocfilehash: 4eaf86c9ac3e4dc2b51b88383626eda774cab0e9
-ms.lasthandoff: 03/27/2017
-
-
+ms.openlocfilehash: e2671def47879e3d4eae000c9084cd458e29b933
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
 # <a name="use-load-balanced-sets-to-clusterize-mysql-on-linux"></a>부하 분산 집합을 사용하여 Linux에서 MySQL 클러스터화
 > [!IMPORTANT]
 > Azure에는 리소스를 만들고 사용하기 위한 별도의 두 가지 배포 모델, 즉 [Azure Resource Manager](../../../resource-manager-deployment-model.md)와 클래식 모델이 있습니다. 이 문서에서는 클래식 배포 모델 사용에 대해 설명합니다. 새로운 배포는 대부분 리소스 관리자 모델을 사용하는 것이 좋습니다. [Resource Manager 템플릿](https://azure.microsoft.com/documentation/templates/mysql-replication/)은 MySQL 클러스터를 배포해야 하는 경우에 사용할 수 있습니다.
+> [!INCLUDE [virtual-machines-common-classic-createportal](../../../../includes/virtual-machines-classic-portal.md)]
 
 이 문서에서는 Microsoft Azure에서 고가용성 Linux 기반 서비스를 배포하는 데 사용할 수 있는 다양한 접근 방법을 살펴보고, MySQL 서버 고가용성을 입문서로 살펴봅니다. 이 접근 방법을 보여 주는 비디오는 [채널 9](http://channel9.msdn.com/Blogs/Open/Load-balancing-highly-available-Linux-services-on-Windows-Azure-OpenLDAP-and-MySQL)(영문)에서 사용할 수 있습니다.
 
@@ -52,12 +52,12 @@ MySQL(NBD Cluster, Percona 및 Galera 포함) 및 여러 개의 미들웨어 솔
   * Corosync 및 Pacemaker
 
 ### <a name="affinity-group"></a>선호도 그룹
-Azure 클래식 포털에 로그인하고 **설정**을 선택하고 선호도 그룹을 만들어 솔루션에 대한 선호도 그룹을 만듭니다. 나중에 만들어진 할당된 리소스는 이 선호도 그룹에 할당됩니다.
+Azure Portal에 로그인하고 **설정**을 선택하고 선호도 그룹을 만들어 솔루션에 대한 선호도 그룹을 만듭니다. 나중에 만들어진 할당된 리소스는 이 선호도 그룹에 할당됩니다.
 
 ### <a name="networks"></a>네트워크
 새 네트워크가 만들어지고 네트워크 내에 서브넷이 만들어집니다. 이 예제에서는 내부에 /24 서브넷 하나만 있는 10.10.10.0/24 네트워크를 사용합니다.
 
-### <a name="virtual-machines"></a>가상 컴퓨터
+### <a name="virtual-machines"></a>가상 머신
 첫 번째 Ubuntu 13.10 VM이 Endorsed Ubuntu Gallery 이미지를 사용하여 만들어지며 `hadb01`이라고 합니다. 새 클라우드 서비스가 hadb라는 프로세스에서 만들어집니다. 이 이름은 더 많은 리소스가 추가될 때 서비스에서 갖추게 될 공유 부하 분산 특성을 보여 줍니다. `hadb01`을 만드는 작업은 특별하지 않으며 포털을 사용하여 완료됩니다. SSH에 대한 끝점이 자동으로 만들어지고 새 네트워크가 선택됩니다. 이제 VM에 대한 가용성 집합을 만들 수 있습니다.
 
 첫 번째 VM을 만든 후에(기술적으로 클라우드 서비스를 만들 때) 두 번째 VM, `hadb02`를 만듭니다. 두 번째 VM의 경우 포털을 사용하여 갤러리에서 Ubuntu 13.10 VM을 사용하지만 새 클라우드 서비스가 아니라 기존의 `hadb.cloudapp.net` 클라우드 서비스를 사용합니다. 네트워크 및 가용성 집합도 자동으로 선택됩니다. SSH 끝점도 만들어집니다.
@@ -339,4 +339,3 @@ Pacemaker를 처음 설치할 때는 구성이 다음과 같이 단순합니다.
 * 부하 분산 장치는 응답하는 데 5초 이상 필요하므로 응용 프로그램에서 클러스터를 인식하고 시간 제한을 더 늘려야 합니다. 앱 내 큐 및 쿼리 미들웨어와 같은 다른 아키텍처도 도움이 될 수 있습니다.
 * MySQL 튜닝을 통해 쓰기가 관리 가능한 속도로 수행되고 캐시가 가능한 한 자주 디스크로 플러시되어 메모리 손실을 최소화하도록 보장해야 합니다.
 * 쓰기 성능은 가상 스위치의 VM 상호 연결에 따라 달라집니다. 이는 DRBD에서 장치를 복제하는 데 사용하는 메커니즘이기 때문입니다.
-

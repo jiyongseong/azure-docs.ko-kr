@@ -1,11 +1,11 @@
 ---
-title: "Azure(큰 인스턴스)에서 SAP HANA 설치 | Microsoft Docs"
-description: "Azure(큰 인스턴스)에서 SAP HANA를 설치하는 방법"
+title: Azure(큰 인스턴스)에서 SAP HANA 설치 | Microsoft Docs
+description: Azure(큰 인스턴스)에서 SAP HANA를 설치하는 방법
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: hermanndms
 manager: timlt
-editor: 
+editor: ''
 ms.service: virtual-machines-linux
 ms.devlang: NA
 ms.topic: article
@@ -14,19 +14,19 @@ ms.workload: infrastructure
 ms.date: 12/01/2016
 ms.author: rclaus
 ms.custom: H1Hack27Feb2017
+ms.openlocfilehash: 768d9c31cdf019bf73a9d3b3a239c537c72725f6
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 280001f9057825b9dcd98c5180340a54e2e239cf
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
+ms.locfileid: "33778599"
 ---
 # <a name="how-to-install-and-configure-sap-hana-large-instances-on-azure"></a>Azure(큰 인스턴스)에서 SAP HANA를 설치하고 구성하는 방법
 
 다음은 이 지침을 읽기 전에 알아야 할 중요한 정의입니다. [Azure(큰 인스턴스)에서 SAP HANA 개요 및 아키텍처](https://docs.microsoft.com/azure/virtual-machines/workloads/sap/hana-overview-architecture)에서 HANA 큰 인스턴스 단위의 두 가지 다른 클래스를 도입했습니다.
 
 - SKU의 'Type I 클래스'인 S72, S72m, S144, S144m, S192 및 S192m.
-- SKU의 'Type II 클래스'인 S384, S384m, S384xm, S576, S768, 및 S960.
+- SKU의 'Type II 클래스'인 S384, S384m, S384xm, S576m, S768m 및 S960m.
 
 클래스 지정자는 HANA 큰 인스턴스 설명서 전반에서 HANA 큰 인스턴스 SKU를 기반으로 하는 다양한 기능과 요구 사항을 언급하는 데 사용됩니다.
 
@@ -93,7 +93,7 @@ HANA 시스템 복제 또는 HANA 확장 배포의 경우 두 개의 IP 주소�
 
 
 
-## <a name="storage"></a>저장소
+## <a name="storage"></a>Storage
 
 Azure(큰 인스턴스)에서 SAP HANA에 대한 저장소 레이아웃은 [SAP HANA 저장소 요구 사항](http://go.sap.com/documents/2015/03/74cdb554-5a7c-0010-82c7-eda71af511fa.html) 백서에 문서화된 SAP 권장 지침을 통해 Azure Service Management의 SAP HANA에 의해 구성됩니다. 다른 HANA 큰 인스턴스 SKU가 있는 서로 다른 볼륨의 대략적인 크기는 [Azure에서 SAP HANA(큰 인스턴스) 개요 및 아키텍처](hana-overview-architecture.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)에 설명되어 있습니다.
 
@@ -173,7 +173,7 @@ SLES 12에서 SAP HANA 구현에 적용할 수 있는 SAP Support Note:
 - [SAP Support Note #171356 – SAP Software on Linux: 일반 정보](https://launchpad.support.sap.com/#/notes/1984787)(영문)
 - [SAP Support Note #1391070 – Linux UUID 솔루션](https://launchpad.support.sap.com/#/notes/1391070)(영문)
 
-[SAP HANA용 Red Hat Enterprise Linux](https://www.redhat.com/en/resources/red-hat-enterprise-linux-sap-hana)(영문)는 HANA 큰 인스턴스에서 SAP HANA를 실행하기 위한 또 다른 제품입니다. RHEL 6.7 및 7.2 릴리스를 사용할 수 있습니다. 
+[SAP HANA용 Red Hat Enterprise Linux](https://www.redhat.com/en/resources/red-hat-enterprise-linux-sap-hana)(영문)는 HANA 큰 인스턴스에서 SAP HANA를 실행하기 위한 또 다른 제품입니다. RHEL 6.7 및 7.2 릴리스를 사용할 수 있습니다. RHEL 7.2 및 최신 릴리스만 지원되는 기본 Azure VM에 비해 HANA Large Instances는 RHEL 6.7도 지원합니다. 그러나 RHEL 7.x 버전을 사용하는 것이 좋습니다.
 
 Red Hat 관련 링크에 있는 유용한 추가 SAP 정보:
 - [Red Hat Linux 사이트의 SAP HANA](https://wiki.scn.sap.com/wiki/display/ATopics/SAP+on+Red+Hat)
@@ -476,7 +476,6 @@ rpm –qa | grep gtk2
 
 
  
-
 
 
 

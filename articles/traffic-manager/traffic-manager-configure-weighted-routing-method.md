@@ -14,14 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/20/2017
 ms.author: kumud
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 9ae7e129b381d3034433e29ac1f74cb843cb5aa6
 ms.openlocfilehash: 7aa4c9120d44ff1b3e59a57090ea04e3f8021fc4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/08/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="configure-the-weighted-traffic-routing-method-in-traffic-manager"></a>Traffic Manager에서 가중치 적용 트래픽 라우팅 방법 구성
 
 일반적인 트래픽 라우팅 방법 패턴은 클라우드 서비스와 웹 사이트를 포함하는 일련의 동일한 끝점을 제공하고 각 끝점에 라운드 로빈 방식으로 트래픽을 전송하는 것입니다. 다음 단계에서는 이 유형의 트래픽 라우팅 방법을 구성하는 방법을 간략하게 설명합니다.
@@ -41,9 +39,9 @@ ms.lasthandoff: 05/08/2017
         2. **경로**에서 슬래시  */* 를 입력합니다. 끝점을 모니터링하려면 경로와 파일 이름을 지정해야 합니다. 슬래시 "/"는 상대 경로에 유효한 입력이며 파일이 루트 디렉터리(기본값)에 있음을 나타냅니다.
         3. 페이지 위쪽에서 **저장**을 클릭합니다.
 5. 다음과 같이 사용자 구성의 변경 내용을 테스트합니다.
-    1.    포털의 검색 창에서 Traffic Manager 프로필 이름을 검색하고 표시되는 결과에서 Traffic Manager 프로필을 클릭합니다.
-    2.    **Traffic Manager** 프로필 블레이드에서 **개요**를 클릭합니다.
-    3.    **Traffic Manager 프로필** 블레이드에 사용자의 새로 만든 Traffic Manager 프로필의 DNS 이름이 표시됩니다. 이는 라우팅 형식에서 결정된 대로 올바른 끝점으로 라우팅되도록 모든 클라이언트가 사용할 수 있습니다(예를 들어 웹 브라우저를 사용하여 이동). 이 경우 모든 요청이 라운드 로빈 방식으로 각 끝점에 라우팅됩니다.
+    1.  포털의 검색 창에서 Traffic Manager 프로필 이름을 검색하고 표시되는 결과에서 Traffic Manager 프로필을 클릭합니다.
+    2.  **Traffic Manager** 프로필 블레이드에서 **개요**를 클릭합니다.
+    3.  **Traffic Manager 프로필** 블레이드에 사용자의 새로 만든 Traffic Manager 프로필의 DNS 이름이 표시됩니다. 이는 라우팅 형식에서 결정된 대로 올바른 끝점으로 라우팅되도록 모든 클라이언트가 사용할 수 있습니다(예를 들어 웹 브라우저를 사용하여 이동). 이 경우 모든 요청이 라운드 로빈 방식으로 각 끝점에 라우팅됩니다.
 6. Traffic Manager 프로필이 작동하면 회사 도메인 이름이 Traffic Manager 도메인 이름을 가리키도록 권한 있는 DNS 서버의 DNS 레코드를 편집합니다.
 
 ![Traffic Manager를 사용한 가중치 적용 트래픽 라우팅 방법 구성][1]
@@ -57,4 +55,3 @@ ms.lasthandoff: 05/08/2017
 
 <!--Image references-->
 [1]: ./media/traffic-manager-weighted-routing-method/traffic-manager-weighted-routing-method.png
-

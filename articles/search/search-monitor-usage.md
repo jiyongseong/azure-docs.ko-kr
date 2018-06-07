@@ -1,27 +1,20 @@
 ---
-title: "Azure Search 서비스의 사용량 및 통계 모니터링 | Microsoft Docs"
-description: "Microsoft Azure에서 호스팅되는 검색 서비스인 Azure 검색에 대해 리소스 소비 및 인덱스 크기를 추적합니다."
-services: search
-documentationcenter: 
-author: bernitorres
-manager: jlembicz
-editor: 
+title: Azure Search 서비스의 사용량 및 통계 모니터링 | Microsoft Docs
+description: Microsoft Azure에서 호스팅되는 Search 서비스인 Azure Search에 대해 리소스 소비 및 인덱스 크기를 추적합니다.
+author: HeidiSteen
+manager: cgronlun
 tags: azure-portal
-ms.assetid: 122948de-d29a-426e-88b4-58cbcee4bc23
+services: search
 ms.service: search
 ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: required
-ms.date: 05/01/2017
-ms.author: betorres
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 71fea4a41b2e3a60f2f610609a14372e678b7ec4
-ms.openlocfilehash: 16cb5a1e16a59200f0e731622398efcf24c3f777
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/10/2017
-
-
+ms.topic: conceptual
+ms.date: 11/09/2017
+ms.author: heidist
+ms.openlocfilehash: 286569eef8e17909ecab017b67b0ffc044a4bfe4
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="monitoring-an-azure-search-service"></a>Azure Search 서비스 모니터링
 
@@ -32,7 +25,7 @@ Azure Search는 검색 서비스의 사용량 및 성능을 추적하기 위한 
 
 Azure Search는 다음 세 가지 메트릭에 대한 데이터를 수집합니다.
 
-* 검색 대기 시간: 검색 쿼리를 처리하는 데 필요한 검색 서비스의 시간을 1분마다 집계합니다.
+* 검색 대기 시간: 검색 쿼리를 처리하는 데 필요한 Search 서비스의 시간을 1분마다 집계합니다.
 * QPS(초당 검색 쿼리 수): 초당 수신된 검색 쿼리 수를 1분마다 집계합니다.
 * 제한된 검색 쿼리 백분율: 제한된 검색 쿼리의 비율을 1분마다 집계합니다.
 
@@ -51,7 +44,7 @@ Azure Search는 다음 세 가지 메트릭에 대한 데이터를 수집합니�
 리소스 사용량을 모니터링하려면 [포털](https://portal.azure.com)에서 서비스에 대한 개수와 통계를 봅니다.
 
 1. [포털](https://portal.azure.com)에 로그인합니다.
-2. Azure 검색 서비스의 서비스 대시보드를 엽니다. 홈페이지에서 서비스에 대한 타일을 찾거나 표시줄에 있는 찾아보기에서 서비스를 탐색할 수 있습니다.
+2. Azure Search 서비스의 서비스 대시보드를 엽니다. 홈페이지에서 서비스에 대한 타일을 찾거나 표시줄에 있는 찾아보기에서 서비스를 탐색할 수 있습니다.
 
 사용 섹션에는 사용 가능한 리소스의 어떤 부분이 현재 사용 중인지 알려주는 측정기가 포함됩니다. 인덱스, 문서, 저장소에 대한 서비스당 제한에 대한 정보는 [서비스 제한](search-limits-quotas-capacity.md)을 참조하세요.
 
@@ -63,7 +56,7 @@ Azure Search는 다음 세 가지 메트릭에 대한 데이터를 수집합니�
 >
 
 ### <a name="using-the-rest-api"></a>REST API 사용
-Azure 검색 REST API와 .NET SDK는 모두 서비스 메트릭에 대한 프로그래밍 방식 액세스를 제공합니다.  [인덱서](https://msdn.microsoft.com/library/azure/dn946891.aspx)를 사용하여 Azure SQL Database나 Azure Cosmos DB에서 인덱스를 로드하는 경우, 추가 API를 사용하여 필요한 숫자를 얻을 수 있습니다.
+Azure Search REST API와 .NET SDK는 모두 서비스 메트릭에 대한 프로그래밍 방식 액세스를 제공합니다.  [인덱서](https://msdn.microsoft.com/library/azure/dn946891.aspx)를 사용하여 Azure SQL Database나 Azure Cosmos DB에서 인덱스를 로드하는 경우, 추가 API를 사용하여 필요한 숫자를 얻을 수 있습니다.
 
 * [인덱스 통계 가져오기](/rest/api/searchservice/get-index-statistics)
 * [문서 수 계산](/rest/api/searchservice/count-documents)
@@ -98,10 +91,10 @@ PowerShell 또는 Azure CLI를 사용하려면 [여기](https://docs.microsoft.c
 각 Blob는 **레코드** 라는 하나의 루트 개체를 포함하며 여기에는 로그 개체의 배열이 포함됩니다.
 각 Blob에는 같은 시간 중에 발생한 모든 작업에 대한 레코드가 포함됩니다.
 
-| 이름 | 형식 | 예 | 참고 사항 |
+| Name | type | 예 | 메모 |
 | --- | --- | --- | --- |
-| 실시간 |datetime |"2015-12-07T00:00:43.6872559Z" |작업 타임스탬프 |
-| resourceId |string |"/SUBSCRIPTIONS/11111111-1111-1111-1111-111111111111/<br/>RESOURCEGROUPS/DEFAULT/PROVIDERS/<br/> MICROSOFT.SEARCH/SEARCHSERVICES/SEARCHSERVICE" |ResourceId |
+| 실시간 |Datetime |"2015-12-07T00:00:43.6872559Z" |작업 타임스탬프 |
+| ResourceId |string |"/SUBSCRIPTIONS/11111111-1111-1111-1111-111111111111/<br/>RESOURCEGROUPS/DEFAULT/PROVIDERS/<br/> MICROSOFT.SEARCH/SEARCHSERVICES/SEARCHSERVICE" |ResourceId |
 | operationName |string |"Query.Search" |작업 이름 |
 | operationVersion |string |"2015-02-28" |사용된 api-version |
 | 카테고리 |string |"OperationLogs" |constant |
@@ -111,7 +104,7 @@ PowerShell 또는 Azure CLI를 사용하려면 [여기](https://docs.microsoft.c
 | properties |object |다음 테이블 참조 |데이터별 작업을 포함하는 개체 |
 
 **속성 스키마**
-| 이름 | 형식 | 예 | 참고 사항 |
+| Name | type | 예 | 메모 |
 | --- | --- | --- | --- |
 | 설명 |string |"GET /indexes('content')/docs" |작업의 끝점 |
 | 쿼리 |string |"?search=AzureSearch&$count=true&api-version=2015-02-28" |쿼리 매개 변수 |
@@ -119,11 +112,11 @@ PowerShell 또는 Azure CLI를 사용하려면 [여기](https://docs.microsoft.c
 | IndexName |string |"testindex" |작업과 연결된 인덱스의 이름 |
 
 #### <a name="metrics-schema"></a>메트릭 스키마
-| 이름 | 형식 | 예 | 참고 사항 |
+| Name | type | 예 | 메모 |
 | --- | --- | --- | --- |
-| resourceId |string |"/SUBSCRIPTIONS/11111111-1111-1111-1111-111111111111/<br/>RESOURCEGROUPS/DEFAULT/PROVIDERS/<br/>MICROSOFT.SEARCH/SEARCHSERVICES/SEARCHSERVICE" |리소스 ID |
+| ResourceId |string |"/SUBSCRIPTIONS/11111111-1111-1111-1111-111111111111/<br/>RESOURCEGROUPS/DEFAULT/PROVIDERS/<br/>MICROSOFT.SEARCH/SEARCHSERVICES/SEARCHSERVICE" |리소스 ID |
 | metricName |string |"Latency" |메트릭 이름 |
-| 실시간 |datetime |"2015-12-07T00:00:43.6872559Z" |작업의 타임스탬프 |
+| 실시간 |Datetime |"2015-12-07T00:00:43.6872559Z" |작업의 타임스탬프 |
 | average |int |64 |메트릭 시간 간격에 원시 샘플의 평균 값 |
 | minimum |int |37 |메트릭 시간 간격에 원시 샘플의 최소 값 |
 | maximum |int |78 |메트릭 시간 간격에 원시 샘플의 최대 값 |
@@ -149,7 +142,7 @@ Azure Search는 미리 정의된 차트와 테이블을 사용하여 검색 트�
 ## <a name="next-steps"></a>다음 단계
 기존 서비스에 대해 파티션과 복제본의 할당 균형을 조정하는 방법에 대한 지침은 [복제본 및 파티션 확장](search-limits-quotas-capacity.md)을 검토하세요.
 
-서비스 관리에 대한 자세한 내용은 [Microsoft Azure에서 검색 서비스 관리](search-manage.md) 또는 튜닝 지침은 [성능 및 최적화](search-performance-optimization.md)를 방문하십시오.
+서비스 관리에 대한 자세한 내용은 [Microsoft Azure에서 Search 서비스 관리](search-manage.md) 또는 튜닝 지침은 [성능 및 최적화](search-performance-optimization.md)를 방문하십시오.
 
 놀라운 보고서 만들기에 대해 자세히 알아보세요. 자세한 내용은 [Power BI Desktop 시작](https://powerbi.microsoft.com/documentation/powerbi-desktop-getting-started/)을 참조하세요.
 
@@ -158,4 +151,3 @@ Azure Search는 미리 정의된 차트와 테이블을 사용하여 검색 트�
 [2]: ./media/search-monitor-usage/AzureSearch-Monitor1.PNG
 [3]: ./media/search-monitor-usage/AzureSearch-Enable-Monitoring.PNG
 [4]: ./media/search-monitor-usage/AzureSearch-PowerBI-Dashboard.png
-

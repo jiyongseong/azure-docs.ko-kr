@@ -1,10 +1,10 @@
 ---
-title: "내부 부하 분산 장치에서 Azure Application Gateway 사용 - PowerShell | Microsoft Docs"
-description: "이 페이지에서는 Azure Resource Manager용 ILB(내부 부하 분산 장치)를 사용하여 Azure 응용 프로그램 게이트웨이를 만들고, 구성하고, 시작하고, 삭제하기 위한 지침을 제공합니다."
+title: 내부 부하 분산 장치에서 Azure Application Gateway 사용 - PowerShell | Microsoft Docs
+description: 이 페이지에서는 Azure Resource Manager용 ILB(내부 부하 분산 장치)를 사용하여 Azure 응용 프로그램 게이트웨이를 만들고, 구성하고, 시작하고, 삭제하기 위한 지침을 제공합니다.
 documentationcenter: na
 services: application-gateway
-author: georgewallace
-manager: timlt
+author: vhorne
+manager: jpconnock
 editor: tysonn
 ms.assetid: 75cfd5a2-e378-4365-99ee-a2b2abda2e0d
 ms.service: application-gateway
@@ -13,13 +13,12 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/23/2017
-ms.author: gwallace
+ms.author: victorh
+ms.openlocfilehash: a558a5f4f1e19be7b15721c8f99dc5a2d7b396bc
+ms.sourcegitcommit: c47ef7899572bf6441627f76eb4c4ac15e487aec
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: d218eab7e9f124e4825a8a781b4eeb0dcca58b4a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/04/2018
 ---
 # <a name="create-an-application-gateway-with-an-internal-load-balancer-ilb-by-using-azure-resource-manager"></a>Azure 리소스 관리자를 사용하여 ILB(내부 부하 분산 장치)에서 응용 프로그램 게이트웨이 만들기
 
@@ -27,14 +26,14 @@ ms.lasthandoff: 07/21/2017
 > * [Azure 클래식 PowerShell](application-gateway-ilb.md)
 > * [Azure Resource Manager PowerShell](application-gateway-ilb-arm.md)
 
-Azure 응용 프로그램 게이트웨이는 인터넷 연결 VIP 또는 ILB(내부 부하 분산 장치) 끝점이라고 알려진 인터넷에 노출되지 않은 내부 끝점을 사용하여 구성할 수 있습니다. ILB를 사용하여 게이트웨이를 구성하는 것은 인터넷에 노출되지 않은 비즈니스 응용 프로그램의 내부 라인에 대해 유용합니다. 또한 인터넷에 노출되지 않은 보안 경계에 앉아 있는 다중 계층 응용 프로그램 내에 포함된 서비스 및 계층에 유용하지만 여전히 라운드 로빈 부하 분산, 세션 인력 또는 SSL(Secure Sockets Layer) 종료가 필요합니다.
+Azure Application Gateway는 인터넷 연결 VIP 또는 ILB(내부 부하 분산 장치) 끝점이라고 알려진 인터넷에 노출되지 않은 내부 끝점을 사용하여 구성할 수 있습니다. ILB를 사용하여 게이트웨이를 구성하는 것은 인터넷에 노출되지 않은 비즈니스 응용 프로그램의 내부 라인에 대해 유용합니다. 또한 인터넷에 노출되지 않은 보안 경계에 앉아 있는 다중 계층 응용 프로그램 내에 포함된 서비스 및 계층에 유용하지만 여전히 라운드 로빈 부하 분산, 세션 인력 또는 SSL(Secure Sockets Layer) 종료가 필요합니다.
 
 이 문서는 ILB와 응용 프로그램 게이트웨이 구성 단계를 안내합니다.
 
 ## <a name="before-you-begin"></a>시작하기 전에
 
-1. 웹 플랫폼 설치 관리자를 사용하는 Azure PowerShell cmdlet의 최신 버전을 설치합니다. **다운로드 페이지** 의 [Windows PowerShell](https://azure.microsoft.com/downloads/)섹션에서 최신 버전을 다운로드하여 설치할 수 있습니다.
-2. 응용 프로그램 게이트웨이에 대한 가상 네트워크 및 서브넷을 만듭니다. 서브넷을 사용 중인 가상 컴퓨터 또는 클라우드 배포가 없는지 확인합니다. 응용 프로그램 게이트웨이는 가상 네트워크 서브넷에서 단독이어야 합니다.
+1. 웹 플랫폼 설치 관리자를 사용하여 Azure PowerShell cmdlet의 최신 버전을 설치합니다. **다운로드 페이지** 의 [Windows PowerShell](https://azure.microsoft.com/downloads/)섹션에서 최신 버전을 다운로드하여 설치할 수 있습니다.
+2. Application Gateway에 대한 가상 네트워크 및 서브넷을 만듭니다. 서브넷을 사용 중인 가상 머신 또는 클라우드 배포가 없는지 확인합니다. Application Gateway는 가상 네트워크 서브넷에서 단독이어야 합니다.
 3. 응용 프로그램 게이트웨이를 사용하도록 구성된 서버가 존재하거나 가상 네트워크나 공용 IP/VIP가 할당된 해당 끝점이 만들어져야 합니다.
 
 ## <a name="what-is-required-to-create-an-application-gateway"></a>응용 프로그램 게이트웨이를 만드는 데 필요한 것은 무엇입니까?
@@ -52,19 +51,19 @@ Resource Manager를 사용하면 응용 프로그램 게이트웨이를 만드�
 
 다음은 응용 프로그램 게이트웨이를 만드는 데 필요한 단계입니다.
 
-1. 리소스 관리자에 대한 리소스 그룹 만들기
+1. Resource Manager에 대한 리소스 그룹 만들기
 2. 응용 프로그램 게이트웨이에 대한 가상 네트워크 및 서브넷 만들기
 3. 응용 프로그램 게이트웨이 구성 개체 만들기
 4. 응용 프로그램 게이트웨이 리소스 만들기
 
-## <a name="create-a-resource-group-for-resource-manager"></a>리소스 관리자에 대한 리소스 그룹 만들기
+## <a name="create-a-resource-group-for-resource-manager"></a>Resource Manager에 대한 리소스 그룹 만들기
 
 Azure 리소스 관리자 cmdlet을 사용하려면 PowerShell 모드로 전환해야 합니다. 자세한 내용은 [Resource Manager에서 Windows PowerShell](../powershell-azure-resource-manager.md)사용을 참조하세요.
 
 ### <a name="step-1"></a>1단계
 
 ```powershell
-Login-AzureRmAccount
+Connect-AzureRmAccount
 ```
 
 ### <a name="step-2"></a>2단계
@@ -85,7 +84,7 @@ Get-AzureRmSubscription
 Select-AzureRmSubscription -Subscriptionid "GUID of subscription"
 ```
 
-### <a name="step-4"></a>4단계
+### <a name="step-4"></a>4단계:
 
 새 리소스 그룹을 만듭니다. 기존 리소스 그룹을 사용하는 경우에는 이 단계를 건너뛰세요.
 
@@ -101,7 +100,7 @@ Azure 리소스 관리자를 사용하려면 모든 리소스 그룹이 위치�
 
 다음 예제에서는 Resource Manager를 사용하여 가상 네트워크를 만드는 방법을 보여 줍니다.
 
-### <a name="step-1"></a>1단계:
+### <a name="step-1"></a>1단계
 
 ```powershell
 $subnetconfig = New-AzureRmVirtualNetworkSubnetConfig -Name subnet01 -AddressPrefix 10.0.0.0/24
@@ -109,7 +108,7 @@ $subnetconfig = New-AzureRmVirtualNetworkSubnetConfig -Name subnet01 -AddressPre
 
 이 단계에서는 주소 범위 10.0.0.0/24를 가상 네트워크를 만드는 데 사용할 서브넷 변수에 할당합니다.
 
-### <a name="step-2"></a>2단계:
+### <a name="step-2"></a>2단계
 
 ```powershell
 $vnet = New-AzureRmVirtualNetwork -Name appgwvnet -ResourceGroupName appgw-rg -Location "West US" -AddressPrefix 10.0.0.0/16 -Subnet $subnetconfig
@@ -117,7 +116,7 @@ $vnet = New-AzureRmVirtualNetwork -Name appgwvnet -ResourceGroupName appgw-rg -L
 
 이 단계에서는 접두사 10.0.0.0/16과 서브넷 10.0.0.0/24를 사용하여 미국 서부 지역에 리소스 그룹 "appgw-rg"에서 "appgwvnet"이라는 가상 네트워크를 만듭니다.
 
-### <a name="step-3"></a>3단계:
+### <a name="step-3"></a>3단계
 
 ```powershell
 $subnet = $vnet.subnets[0]
@@ -127,13 +126,13 @@ $subnet = $vnet.subnets[0]
 
 ## <a name="create-an-application-gateway-configuration-object"></a>응용 프로그램 게이트웨이 구성 개체 만들기
 
-### <a name="step-1"></a>1단계:
+### <a name="step-1"></a>1단계
 
 ```powershell
 $gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name gatewayIP01 -Subnet $subnet
 ```
 
-이 단계에서는 "gatewayIP01"이라는 응용 프로그램 게이트웨이 IP 구성을 만듭니다. 응용 프로그램 게이트웨이는 시작되면 구성된 서브넷에서 IP 주소를 선택하고 백 엔드 IP 풀의 IP 주소로 네트워크 트래픽을 라우팅합니다. 인스턴스마다 하나의 IP 주소를 사용합니다.
+이 단계에서는 "gatewayIP01"이라는 응용 프로그램 게이트웨이 IP 구성을 만듭니다. Application Gateway는 시작되면 구성된 서브넷에서 IP 주소를 선택하고 백 엔드 IP 풀의 IP 주소로 네트워크 트래픽을 라우팅합니다. 인스턴스마다 하나의 IP 주소를 사용합니다.
 
 ### <a name="step-2"></a>2단계
 
@@ -143,7 +142,7 @@ $pool = New-AzureRmApplicationGatewayBackendAddressPool -Name pool01 -BackendIPA
 
 이 단계에서는 IP 주소가 "10.1.1.8, 10.1.1.9, 10.1.1.10"인 "pool01"이라는 백 엔드 IP 주소 풀을 구성합니다. 이러한 IP 주소는 프런트 엔드 IP 끝점에서 들어오는 네트워크 트래픽을 수신합니다. 사용자 고유의 응용 프로그램 IP 주소 끝점을 추가하려면 이전 IP 주소를 바꿉니다.
 
-### <a name="step-3"></a>3단계:
+### <a name="step-3"></a>3단계
 
 ```powershell
 $poolSetting = New-AzureRmApplicationGatewayBackendHttpSettings -Name poolsetting01 -Port 80 -Protocol Http -CookieBasedAffinity Disabled
@@ -151,7 +150,7 @@ $poolSetting = New-AzureRmApplicationGatewayBackendHttpSettings -Name poolsettin
 
 이 단계에서는 백 엔드 풀에서 부하가 분산된 네트워크 트래픽에 대해 Application Gateway 설정 "poolsetting01"을 구성합니다.
 
-### <a name="step-4"></a>4단계
+### <a name="step-4"></a>4단계:
 
 ```powershell
 $fp = New-AzureRmApplicationGatewayFrontendPort -Name frontendport01  -Port 80
@@ -183,7 +182,7 @@ $rule = New-AzureRmApplicationGatewayRequestRoutingRule -Name rule01 -RuleType B
 
 이 단계에서는 "rule01"라는 부하 분산 장치 라우팅 규칙을 만들고 부하 분산 장치 동작을 구성합니다.
 
-### <a name="step-8"></a>8단계:
+### <a name="step-8"></a>8단계
 
 ```powershell
 $sku = New-AzureRmApplicationGatewaySku -Name Standard_Small -Tier Standard -Capacity 2
@@ -274,6 +273,5 @@ ILB에서 사용되도록 응용 프로그램 게이트웨이를 구성하려면
 보다 자세한 내용을 원한다면 일반적 부하 분산 옵션을 참조:
 
 * [Azure 부하 분산 장치](https://azure.microsoft.com/documentation/services/load-balancer/)
-* [Azure 트래픽 관리자](https://azure.microsoft.com/documentation/services/traffic-manager/)
-
+* [Azure Traffic Manager](https://azure.microsoft.com/documentation/services/traffic-manager/)
 

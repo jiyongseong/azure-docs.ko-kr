@@ -1,9 +1,9 @@
 ---
-title: "Azure AD Connect: Single Sign On에 SAML 2.0 ID 공급자 사용 | Microsoft Docs"
-description: "이 항목에서는 Single Sign-On에 SAML 2.0 호환 Idp를 사용하는 방법을 설명합니다."
+title: 'Azure AD Connect: Single Sign On에 SAML 2.0 ID 공급자 사용 | Microsoft Docs'
+description: 이 항목에서는 Single Sign-On에 SAML 2.0 호환 Idp를 사용하는 방법을 설명합니다.
 services: active-directory
 author: billmath
-manager: femila
+manager: mtillman
 ms.custom: it-pro
 ms.service: active-directory
 ms.workload: identity
@@ -12,14 +12,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/13/2017
 ms.author: billmath
+ms.openlocfilehash: 46c65e0efdc91b70c5d0d2afdf83d7205efc8057
+ms.sourcegitcommit: a0be2dc237d30b7f79914e8adfb85299571374ec
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 048697f87383662506fb851bb3ea510c2cddf043
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/13/2018
 ---
-
 #  <a name="use-a-saml-20-identity-provider-idp-for-single-sign-on"></a>Single Sign-On에 SAML 2.0 IdP(ID 공급자) 사용
 
 이 항목에서는 SAML 2.0 호환 SP-Lite 프로필 기반 ID 공급자를 기본 STS(보안 토큰 서비스)/ID 공급자로 사용하는 방법에 대한 정보를 제공합니다. 이 기능은 사용자 디렉터리 및 암호 저장소가 SAML 2.0을 사용하여 액세스할 수 있는 온-프레미스에 이미 있는 경우에 유용합니다. 이 기존 사용자 디렉터리는 Office 365 및 다른 Azure AD 보안 리소스에 로그온하는 데 사용할 수 있습니다. SAML 2.0 SP-Lite 프로필은 널리 사용되는 SAML(Security Assertion Markup Language ) 페더레이션 ID 표준을 기준으로 하여 로그온 및 특성 교환 프레임워크를 제공합니다.
@@ -48,7 +46,7 @@ Microsoft는 Office 365와 같은 Microsoft 클라우드 서비스를 올바르�
 SAML 2.0 ID 공급자 출력 메시지를 제공된 샘플 추적과 가능한 한 유사하게 유지하는 것이 좋습니다. 또한 가능한 경우 제공된 Azure AD 메타데이터의 특정 특성 값을 사용하도록 합니다. 출력 메시지가 적절하다고 생각되면 아래 설명된 대로 Microsoft 연결 분석기를 사용해서 테스트할 수 있습니다.
 
 Azure AD 메타데이터는 URL [https://nexus.microsoftonline-p.com/federationmetadata/saml20/federationmetadata.xml](http://https://nexus.microsoftonline-p.com/federationmetadata/saml20/federationmetadata.xml)에서 다운로드할 수 있습니다.
-Office 365의 중국 특정 인스턴스를 사용하는 중국 고객의 경우 다음 페더레이션 끝점 [https://nexus.partner.microsoftonline-p.cn/federationmetadata/saml20/federationmetadata.xml](https://nexus.partner.microsoftonline-p.cn/federationmetadata/saml20/federationmetadata.xml)을 사용해야 합니다.
+Office 365의 중국 특정 인스턴스를 사용하는 중국 고객의 경우 다음 페더레이션 끝점을 사용해야 합니다. [https://nexus.partner.microsoftonline-p.cn/federationmetadata/saml20/federationmetadata.xml](https://nexus.partner.microsoftonline-p.cn/federationmetadata/saml20/federationmetadata.xml)
 
 ## <a name="saml-protocol-requirements"></a>SAML 프로토콜 요구 사항
 이 섹션에서는 메시지 서식을 올바르게 지정하는 데 도움을 주기 위해 요청 및 응답 메시지 쌍을 함께 처리하는 방법을 자세히 설명합니다.
@@ -164,7 +162,7 @@ SAML 2.0 ID 공급자와 Azure AD 간의 통신을 사용하도록 설정해야 
 ## <a name="install-windows-powershell-for-sign-on-with-saml-20-identity-provider"></a>SAML 2.0 ID 공급자로 로그온하기 위해 Windows PowerShell 설치
 Azure AD 로그온에 사용하기 위해 SAML 2.0 ID 공급자를 구성하고 다음에 수행할 단계는 Windows PowerShell용 Azure Active Directory 모듈을 다운로드하고 설치하는 것입니다. 일단 설치되면 이러한 cmdlet을 사용하여 Azure AD 도메인을 페더레이션된 도메인으로 구성합니다.
 
-Windows PowerShell용 Azure Active Directory 모듈은 Azure AD에서 조직 데이터를 관리하기 위한 다운로드입니다. 이 모듈은 Windows PowerShell에 cmdlet 집합을 설치합니다. 이러한 cmdlet을 사용하여 Azure AD 및 구독된 모든 클라우드 서비스에 대한 Single Sign-On 액세스를 설정합니다. cmdlet을 다운로드하고 설치하는 방법에 대한 지침은 [http://technet.microsoft.com/library/jj151815.aspx](http://technet.microsoft.com/library/jj151815.aspx)를 참조하세요.
+Windows PowerShell용 Azure Active Directory 모듈은 Azure AD에서 조직 데이터를 관리하기 위한 다운로드입니다. 이 모듈은 Windows PowerShell에 cmdlet 집합을 설치합니다. 이러한 cmdlet을 사용하여 Azure AD 및 구독된 모든 클라우드 서비스에 대한 Single Sign-On 액세스를 설정합니다. cmdlet을 다운로드하고 설치하는 방법에 대한 지침을 [http://technet.microsoft.com/library/jj151815.aspx](http://technet.microsoft.com/library/jj151815.aspx)를 참조하세요.
 
 ## <a name="set-up-a-trust-between-your-saml-identity-provider-and-azure-ad"></a>SAML ID 공급자 및 Azure AD 간에 트러스트 설정
 Azure AD 도메인에서 페더레이션을 구성하기 전에 사용자 지정 도메인을 먼저 구성해야 합니다. Microsoft에서 제공하는 기본 도메인은 페더레이션할 수 없습니다. Microsoft의 기본 도메인은 "onmicrosoft.com"으로 끝납니다.
@@ -212,7 +210,7 @@ Azure AD에 새 사용자 추가를 자동화하고 온-프레미스 디렉터�
         -LicenseAssignment "samlp2test:ENTERPRISEPACK" 
         -UsageLocation "US" ` 
 
-"New-MsolUser" 체크 아웃에 대한 자세한 내용은 [http://technet.microsoft.com/library/dn194096.aspx](http://technet.microsoft.com/library/dn194096.aspx)를 참조하세요.
+“New-MsolUser” 체크 아웃에 대한 자세한 내용은 [http://technet.microsoft.com/library/dn194096.aspx](http://technet.microsoft.com/library/dn194096.aspx)을 참조하세요.
 
 >[!NOTE]
 >"UserPrinciplName" 값은 SAML 2.0 클레임의 "IDPEmail"에 대해 전송하는 값과 일치해야 하고 "ImmutableID" 값은 "NameID" 어설션에 전송된 값과 일치해야 합니다.
@@ -244,7 +242,7 @@ Microsoft는 SAML 2.0 기반된 ID 공급자를 테스트하는 데 사용할 �
 
 
 
-1. [https://testconnectivity.microsoft.com/?tabid=Client](https://testconnectivity.microsoft.com/?tabid=Client)에서 연결 분석기를 다운로드합니다.
+1. 연결 분석기를 [https://testconnectivity.microsoft.com/?tabid=Client](https://testconnectivity.microsoft.com/?tabid=Client)에서 다운로드합니다.
 2.  지금 설치를 클릭하여 이 도구를 다운로드하여 설치하기 시작합니다.
 3.  "Office 365, Azure 또는 Azure Active Directory를 사용하는 다른 서비스와 페더레이션을 설정할 수 없습니다."를 선택합니다.
 4.  이 도구가 다운로드되고 실행되면 연결 진단 창이 표시됩니다. 이 도구는 페더레이션 연결을 테스트하는 과정을 안내합니다.
@@ -271,4 +269,3 @@ Single Sign-On이 올바르게 설정되어 있는지 확인하려면 다음 단
 - [Azure AD Connect를 사용하여 Active Directory Federation Services 관리 및 사용자 지정](active-directory-aadconnect-federation-management.md)
 - [Azure AD 페더레이션 호환성 목록](active-directory-aadconnect-federation-compatibility.md)
 - [Azure AD Connect 사용자 지정 설치](active-directory-aadconnect-get-started-custom.md)
-

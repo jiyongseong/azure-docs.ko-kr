@@ -1,29 +1,22 @@
 ---
-title: "Azure DC/OS 클러스터용 파일 공유| Microsoft Docs"
+title: "Azure DC/OS 클러스터용 파일 공유"
 description: "Azure Container Service에서 DC/OS 클러스터에 파일 공유 만들기 및 탑재"
 services: container-service
-documentationcenter: 
 author: julienstroheker
 manager: dcaro
-editor: 
-tags: acs, azure-container-service
-keywords: "Docker, 컨테이너, 마이크로 서비스, Mesos, Azure, FileShare, cifs"
-ms.assetid: 
 ms.service: container-service
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
+ms.topic: tutorial
 ms.date: 06/07/2017
 ms.author: juliens
+ms.custom: mvc
+ms.openlocfilehash: c1c318f4204efd24a2d9d3d83bb1cb71f5775bdb
+ms.sourcegitcommit: 5d3e99478a5f26e92d1e7f3cec6b0ff5fbd7cedf
 ms.translationtype: HT
-ms.sourcegitcommit: bfd49ea68c597b109a2c6823b7a8115608fa26c3
-ms.openlocfilehash: a44f8ab0c3e96a5b96156a7a4326fe337ca2eaa5
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/06/2017
 ---
 # <a name="create-and-mount-a-file-share-to-a-dcos-cluster"></a>DC/OS 클러스터에 파일 공유 만들기 및 탑재
+
 이 문서에서는 Azure에서 파일 공유를 만들어서 DC/OS 클러스터의 각 에이전트 및 마스터에 탑재하는 방법을 설명합니다. 파일 공유를 설정하면 구성, 액세스, 로그 등과 같은 클러스터 전반에서 파일을 간편하게 공유할 수 있습니다. 이 자습서에서는 다음 태스크를 완료합니다.
 
 > [!div class="checklist"]
@@ -66,23 +59,23 @@ az storage share create -n $DCOS_PERS_SHARE_NAME
 
 먼저, Azure Storage 계정 이름과 선택키가 필요합니다. 다음 명령을 실행하여 이 정보를 가져옵니다. 이러한 값을 이후 단계에서 사용하도록 적어둡니다.
 
-저장소 계정 이름:
+Storage 계정 이름:
 
 ```azurecli-interactive
-STORAGE_ACCT=$(az storage account list --resource-group myResourceGroup --query "[?contains(name,'mystorageaccount')].[name]" -o tsv)
+STORAGE_ACCT=$(az storage account list --resource-group $DCOS_PERS_RESOURCE_GROUP --query "[?contains(name, '$DCOS_PERS_STORAGE_ACCOUNT_NAME')].[name]" -o tsv)
 echo $STORAGE_ACCT
 ```
 
-저장소 계정 선택키:
+Storage 계정 선택키:
 
 ```azurecli-interactive
-az storage account keys list --resource-group myResourceGroup --account-name $STORAGE_ACCT --query "[0].value" -o tsv
+az storage account keys list --resource-group $DCOS_PERS_RESOURCE_GROUP --account-name $STORAGE_ACCT --query "[0].value" -o tsv
 ```
 
 다음으로 DC/OS 마스터의 FQDN을 가져와서 변수에 저장합니다.
 
 ```azurecli-interactive
-FQDN=$(az acs list --resource-group myResourceGroup --query "[0].masterProfile.fqdn" --output tsv)
+FQDN=$(az acs list --resource-group $DCOS_PERS_RESOURCE_GROUP --query "[0].masterProfile.fqdn" --output tsv)
 ```
 
 마스터 노드에 개인 키를 복사합니다. 이 키는 클러스터의 모든 노드와 SSH 연결을 만드는 데 필요합니다. 클러스터를 만들 때 기본값이 아닌 값이 사용된 경우 사용자 이름을 업데이트합니다. 
@@ -105,6 +98,7 @@ ssh azureuser@$FQDN
 #!/bin/bash
 
 # Azure storage account name and access key
+SHARE_NAME=dcosshare
 STORAGE_ACCT_NAME=mystorageaccount
 ACCESS_KEY=mystorageaccountKey
 
@@ -112,10 +106,10 @@ ACCESS_KEY=mystorageaccountKey
 sudo apt-get update && sudo apt-get -y install cifs-utils
 
 # Create the local folder that will contain our share
-if [ ! -d "/mnt/share/dcosshare" ]; then sudo mkdir -p "/mnt/share/dcosshare" ; fi
+if [ ! -d "/mnt/share/$SHARE_NAME" ]; then sudo mkdir -p "/mnt/share/$SHARE_NAME" ; fi
 
 # Mount the share under the previous local folder created
-sudo mount -t cifs //$STORAGE_ACCT_NAME.file.core.windows.net/dcosshare /mnt/share/dcosshare -o vers=3.0,username=$STORAGE_ACCT_NAME,password=$ACCESS_KEY,dir_mode=0777,file_mode=0777
+sudo mount -t cifs //$STORAGE_ACCT_NAME.file.core.windows.net/$SHARE_NAME /mnt/share/$SHARE_NAME -o vers=3.0,username=$STORAGE_ACCT_NAME,password=$ACCESS_KEY,dir_mode=0777,file_mode=0777
 ```
 **getNodesRunScript.sh**라는 두 번째 파일을 만들고 파일에 다음 내용을 복사합니다. 
 

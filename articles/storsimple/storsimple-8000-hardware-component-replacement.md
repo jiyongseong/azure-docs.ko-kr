@@ -15,13 +15,11 @@ ms.workload: TBD
 ms.date: 06/02/2017
 ms.author: alkohli
 ms.custom: 
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
 ms.openlocfilehash: 6de50c5031db59176bdf17ecc69b934559220f6a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="replace-a-hardware-component-on-your-storsimple-8000-series-device"></a>StorSimple 8000 시리즈 장치에서 하드웨어 구성 요소 교체
 
@@ -137,5 +135,4 @@ StorSimple 장치에 사용할 수 있는 FRU(필드 교체 장치)는 다음과
 
 ## <a name="next-steps"></a>다음 단계
 StorSimple 하드웨어 구성 요소를 교체하기 전에 모든 [안전 정보](storsimple-safety.md) 를 검토하세요.
-
 

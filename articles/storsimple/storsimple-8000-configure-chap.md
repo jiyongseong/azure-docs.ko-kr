@@ -1,26 +1,25 @@
 ---
-title: "StorSimple 8000 시리즈 장치에 대한 CHAP 구성 | Microsoft Docs"
-description: "StorSimple 장치에 CHAP(Challenge Handshake 인증 프로토콜)를 구성하는 방법을 설명합니다."
+title: StorSimple 8000 시리즈 장치에 대한 CHAP 구성 | Microsoft Docs
+description: StorSimple 장치에 CHAP(Challenge Handshake 인증 프로토콜)를 구성하는 방법을 설명합니다.
 services: storsimple
-documentationcenter: 
+documentationcenter: ''
 author: alkohli
 manager: timlt
-editor: 
-ms.assetid: 
+editor: ''
+ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: TBD
-ms.date: 07/03/2017
+ms.date: 05/09/2018
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 61e0877187759d76b6f7efcef0a5ed8bec8500fe
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: c1a558769ffaa52ed2e996a2b537a5ea409101bd
+ms.sourcegitcommit: 909469bf17211be40ea24a981c3e0331ea182996
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
+ms.locfileid: "34012661"
 ---
 # <a name="configure-chap-for-your-storsimple-device"></a>StorSimple 장치에 대한 CHAP 구성
 
@@ -60,7 +59,7 @@ StorSimple 장치에서 CHAP 설정은 다음과 같은 방법으로 구성할 �
    3. 암호를 확인합니다.
 
        ![CHAP 초기자](./media/storsimple-8000-configure-chap/configure-chap6.png)
-3. **Save**를 클릭합니다. 확인 메시지가 표시됩니다. **확인** 을 클릭하여 변경 내용을 저장합니다.
+3. **저장**을 클릭합니다. 확인 메시지가 표시됩니다. **확인** 을 클릭하여 변경 내용을 저장합니다.
 
 #### <a name="to-configure-one-way-authentication-on-the-windows-host-server"></a>Windows 호스트 서버에서 일방 인증을 구성하려면
 1. Windows 호스트 서버에서 iSCSI 초기자를 시작합니다.
@@ -79,8 +78,8 @@ StorSimple 장치에서 CHAP 설정은 다음과 같은 방법으로 구성할 �
 4. **고급 설정** 대화 상자에서:
    
    1. **CHAP 로그온 사용** 확인란을 선택합니다.
-   2. **이름** 필드에 클래식 포털에서 CHAP 초기자에 지정한 사용자 이름을 입력합니다.
-   3. **대상 암호** 필드에 클래식 포털에서 CHAP 초기자에 지정한 암호를 입력합니다.
+   2. **이름** 필드에는 Azure Portal에서 CHAP 초기자에 지정한 사용자 이름을 입력합니다.
+   3. **대상 암호** 필드에는 Azure Portal에서 CHAP 초기자에 지정한 암호를 입력합니다.
    4. **확인**을 클릭합니다.
       
        ![고급 설정 일반](./media/storsimple-configure-chap/IC740946.png)
@@ -114,7 +113,7 @@ Windows 호스트 서버에서 CHAP를 구성하는 방법에 대한 자세한 �
    3. 암호를 확인합니다.
 
        ![CHAP 초기자](./media/storsimple-8000-configure-chap/configure-chap11.png)
-4. **Save**를 클릭합니다. 확인 메시지가 표시됩니다. **확인** 을 클릭하여 변경 내용을 저장합니다.
+4. **저장**을 클릭합니다. 확인 메시지가 표시됩니다. **확인** 을 클릭하여 변경 내용을 저장합니다.
 
 #### <a name="to-configure-bidirectional-authentication-on-the-windows-host-server"></a>Windows 호스트 서버에서 양방향 인증을 구성하려면
 
@@ -133,8 +132,8 @@ Windows 호스트 서버에서 CHAP를 구성하는 방법에 대한 자세한 �
 8. **고급 속성** 대화 상자에서 다음을 수행합니다.
    
    1. **CHAP 로그온 사용** 확인란을 선택합니다.
-   2. **이름** 필드에 클래식 포털에서 CHAP 초기자에 지정한 사용자 이름을 입력합니다.
-   3. **대상 암호** 필드에 클래식 포털에서 CHAP 초기자에 지정한 암호를 입력합니다.
+   2. **이름** 필드에는 Azure Portal에서 CHAP 초기자에 지정한 사용자 이름을 입력합니다.
+   3. **대상 암호** 필드에는 Azure Portal에서 CHAP 초기자에 지정한 암호를 입력합니다.
    4. **상호 인증 수행** 확인란을 선택합니다.
       
        ![고급 설정 상호 인증](./media/storsimple-configure-chap/IC740950.png)
@@ -172,5 +171,4 @@ CHAP 구성이 올바르지 않은 경우 **인증 실패** 오류 메시지가 
 
 * [StorSimple 보안](storsimple-8000-security.md)에 대해 자세히 알아봅니다.
 * [StorSimple 장치 관리자 서비스를 사용하여 StorSimple 장치를 관리하는 방법](storsimple-8000-manager-service-administration.md)에 대해 자세히 알아봅니다.
-
 

@@ -1,11 +1,11 @@
 ---
-title: "자동 크기 조정 및 가상 컴퓨터 크기 집합 | Microsoft Docs"
-description: "진단 및 자동 크기 조정 리소스를 사용하여 규모 집합의 가상 컴퓨터를 자동적으로 크기 조정하는 방법을 알아봅니다."
+title: Azure 가상 머신 확장 집합을 사용한 자동 크기 조정 개요 | Microsoft Docs
+description: 성능이나 확정된 일정에 따라 Azure 가상 머신 확장 집합의 크기를 자동으로 조정할 수 있는 다양한 방법을 알아봅니다.
 services: virtual-machine-scale-sets
-documentationcenter: 
-author: Thraka
-manager: timlt
-editor: 
+documentationcenter: ''
+author: iainfoulds
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
 ms.assetid: d29a3385-179e-4331-a315-daa7ea5701df
 ms.service: virtual-machine-scale-sets
@@ -13,243 +13,136 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 06/05/2017
-ms.author: adegeo
+ms.date: 10/19/2017
+ms.author: iainfou
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6efa2cca46c2d8e4c00150ff964f8af02397ef99
-ms.openlocfilehash: 06ff9d9ae1dd8256f0d22c1a60ed6a85554f1f17
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/01/2017
-
-
+ms.openlocfilehash: 03053f8427fbd20b0a7288d930dca258ee3070b6
+ms.sourcegitcommit: d74657d1926467210454f58970c45b2fd3ca088d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/28/2018
 ---
-# <a name="how-to-use-automatic-scaling-and-virtual-machine-scale-sets"></a>자동 크기 조정 및 가상 컴퓨터 규모 집합 사용 방법
-크기 집합에서 수행되는 가상 컴퓨터 자동 크기 조정은 성능 요구 사항에 일치하기 위해 필요에 따라 집합에서 컴퓨터를 만들거나 삭제하는 것입니다. 작업량이 증가하면 작업을 효과적으로 수행할 수 있도록 응용 프로그램에 추가 리소스가 필요할 수 있습니다.
+# <a name="overview-of-autoscale-with-azure-virtual-machine-scale-sets"></a>Azure 가상 머신 확장 집합을 사용한 자동 크기 조정 개요
+Azure 가상 머신 확장 집합은 응용 프로그램을 실행하는 VM 인스턴스의 수를 자동으로 늘리거나 줄입니다. 자동화되고 탄력적인 이 동작은 관리 오버헤드를 줄여 응용 프로그램의 성능을 모니터링하고 최적화합니다. 긍정적인 고객 만족을 위해 최소한으로 허용되는 성능을 정의하는 규칙을 만듭니다. 정의된 임계값이 충족되면 자동 크기 조정 규칙에 따라 확장 집합의 용량을 조정하는 작업을 수행합니다. 확정된 시간에 확장 집합의 용량을 자동으로 늘리거나 줄이도록 이벤트를 예약할 수도 있습니다. 이 문서에서는 사용 가능한 성능 메트릭과 자동 크기 조정에서 수행할 수 있는 작업에 대해 간략히 설명합니다.
 
-자동 크기 조정은 관리 오버헤드를 줄이기 위해 자동화된 프로세스입니다. 오버헤드를 줄이면 지속적으로 시스템 성능을 모니터링하거나 리소스 관리 방법을 결정할 필요가 없습니다. 크기 조정은 탄력적인 프로세스입니다. 부하가 증가하면 더 많은 리소스를 추가할 수 있습니다. 수요가 감소할 경우 비용을 최소화하고 성능 수준을 유지하기 위해 리소스를 제거할 수 있습니다.
 
-Azure Resource Manager 템플릿, Azure PowerShell, Azure CLI 또는 Azure Portal을 사용하여 크기 집합에 자동 크기 조정을 설정합니다.
+## <a name="benefits-of-autoscale"></a>자동 크기 조정의 이점
+응용 프로그램에 대한 요구가 증가하면 확장 집합의 VM 인스턴스에 대한 로드도 증가합니다. 증가된 로드가 단순한 요구가 아닌 일관된 요구인 경우 확장 집합의 VM 인스턴스 수를 늘리도록 자동 크기 조정 규칙을 구성할 수 있습니다.
 
-## <a name="set-up-scaling-by-using-resource-manager-templates"></a>리소스 관리자 템플릿을 사용하여 크기 조정 설정
-각 응용 프로그램의 리소스를 개별적으로 배포하고 관리하는 대신, 모든 리소스를 하나의 조정된 작업으로 배포하는 템플릿을 사용합니다. 템플릿에서 응용 프로그램 리소스를 정의하고 다양한 환경에 대한 배포 매개 변수를 지정합니다. 템플릿은 배포에 대한 값을 생성하는 데 사용할 수 있는 식과 JSON으로 구성됩니다. 자세한 내용은 [Azure Resource Manager 템플릿 작성](../azure-resource-manager/resource-group-authoring-templates.md)을 살펴보세요.
+이러한 VM 인스턴스가 만들어지고 응용 프로그램이 배포되면 확장 집합에서 부하 분산 장치를 통해 트래픽을 분산하기 시작합니다. 모니터링할 메트릭(예: CPU 또는 메모리), 응용 프로그램 로드가 지정된 임계값을 충족해야 하는 기간 및 확장 집합에 추가할 VM 인스턴스 수를 제어합니다.
 
-템플릿에서 용량 요소를 지정합니다.
+저녁이나 주말에는 응용 프로그램에 대한 요구가 줄어들 수 있습니다. 이 감소된 로드가 일정 기간 동안 일관성 있게 유지될 경우 확장 집합의 VM 인스턴스 수를 줄이도록 자동 크기 조정 규칙을 구성할 수 있습니다. 이 규모 감축 작업은 현재 요구를 충족하는 데 필요한 인스턴스 수만 실행하므로 확장 집합을 실행하는 데 드는 비용을 줄여줍니다.
 
-```json
-"sku": {
-  "name": "Standard_A0",
-  "tier": "Standard",
-  "capacity": 3
-},
-```
 
-용량은 집합에 있는 가상 컴퓨터의 수를 식별합니다. 다른 값으로 템플릿을 배포하여 용량을 수동으로 변경할 수 있습니다. 단순히 용량을 변경하기 위해 템플릿을 배포하고 있는 경우 업데이트된 용량의 SKU 요소만을 포함할 수 있습니다.
+## <a name="use-host-based-metrics"></a>호스트 기반 메트릭 사용
+VM 인스턴스에서 기본 제공 호스트 메트릭을 사용할 수 있는 자동 크기 조정 규칙을 만들 수 있습니다. 호스트 메트릭을 사용하면 추가 에이전트 및 데이터 컬렉션을 설치하거나 구성할 필요 없이 확장 집합의 VM 인스턴스 성능에 대한 가시성을 얻을 수 있습니다. 이러한 메트릭을 사용하는 자동 크기 조정 규칙은 CPU 사용량, 메모리 요구 또는 디스크 액세스에 대응하여 VM 인스턴스 수를 확장하거나 축소할 수 있습니다.
 
-**autoscaleSettings** 리소스와 진단 확장을 조합하여 확장 집합의 용량을 자동으로 변경할 수 있습니다.
+호스트 기반 메트릭을 사용하는 자동 크기 조정 규칙은 다음 도구 중 하나로 만들 수 있습니다.
 
-### <a name="configure-the-azure-diagnostics-extension"></a>Azure 진단 확장 구성
-규모 집합의 각 가상 컴퓨터에서 메트릭을 수집할 수 있는 경우에만 자동 크기 조정을 수행할 수 있습니다. Azure 진단 확장은 자동 크기 조정 리소스의 메트릭 수집 요구 사항을 충족하는 모니터링 및 진단 기능을 제공합니다. 리소스 관리자 템플릿의 일부로 확장을 설치할 수 있습니다.
+- [Azure Portal](virtual-machine-scale-sets-autoscale-portal.md)
+- [Azure PowerShell](tutorial-autoscale-powershell.md)
+- [Azure CLI 2.0](tutorial-autoscale-cli.md)
+- [Azure 템플릿](tutorial-autoscale-template.md)
 
-이 예제에서는 진단 확장을 구성하는 템플릿에 사용되는 변수를 보여 줍니다.
+더 자세한 성능 메트릭을 사용하는 자동 크기 조정 규칙을 만들려면 [VM 인스턴스에서 Azure 진단 확장을 설치 및 구성](#in-guest-vm-metrics-with-the-azure-diagnostics-extension)하거나 [App Insights를 사용하도록 응용 프로그램을 구성](#application-level-metrics-with-app-insights)할 수 있습니다.
 
-```json
-"diagnosticsStorageAccountName": "[concat(parameters('resourcePrefix'), 'saa')]",
-"accountid": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/', resourceGroup().name,'/providers/', 'Microsoft.Storage/storageAccounts/', variables('diagnosticsStorageAccountName'))]",
-"wadlogs": "<WadCfg> <DiagnosticMonitorConfiguration overallQuotaInMB=\"4096\" xmlns=\"http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration\"> <DiagnosticInfrastructureLogs scheduledTransferLogLevelFilter=\"Error\"/> <WindowsEventLog scheduledTransferPeriod=\"PT1M\" > <DataSource name=\"Application!*[System[(Level = 1 or Level = 2)]]\" /> <DataSource name=\"Security!*[System[(Level = 1 or Level = 2)]]\" /> <DataSource name=\"System!*[System[(Level = 1 or Level = 2)]]\" /></WindowsEventLog>",
-"wadperfcounter": "<PerformanceCounters scheduledTransferPeriod=\"PT1M\"><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\Thread Count\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Thread Count\" locale=\"en-us\"/></PerformanceCounterConfiguration></PerformanceCounters>",
-"wadcfgxstart": "[concat(variables('wadlogs'),variables('wadperfcounter'),'<Metrics resourceId=\"')]",
-"wadmetricsresourceid": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',resourceGroup().name ,'/providers/','Microsoft.Compute/virtualMachineScaleSets/',parameters('vmssName'))]",
-"wadcfgxend": "[concat('\"><MetricAggregation scheduledTransferPeriod=\"PT1H\"/><MetricAggregation scheduledTransferPeriod=\"PT1M\"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>')]"
-```
+호스트 기반 메트릭, Azure 진단 확장이 있는 게스트 내 VM 메트릭 및 App Insights를 사용하는 자동 크기 조정 규칙에서 사용할 수 있는 구성 설정은 다음과 같습니다.
 
-템플릿이 배포될 때 매개 변수가 제공됩니다. 이 예제에서 데이터가 저장되는 저장소 계정 이름 및 데이터가 수집되는 확장 집합 이름이 제공됩니다. 또한 이 Windows Server 예제에서는 Thread Count 성능 카운터가 수집됩니다. Windows 또는 Linux에 있는 모든 사용 가능한 성능 카운터가 진단 정보 수집에 사용될 수 있고 확장 구성에 포함될 수도 있습니다.
+### <a name="metric-sources"></a>메트릭 원본
+자동 크기 조정 규칙은 다음 원본 중 하나의 메트릭을 사용할 수 있습니다.
 
-이 예제에서는 템플릿의 확장 정의를 보여 줍니다.
+| 메트릭 원본        | 사용 사례                                                                                                                     |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------|
+| 현재 확장 집합    | 추가 에이전트를 설치하거나 구성할 필요가 없는 호스트 기반 메트릭의 경우                                  |
+| Storage 계정      | Azure 진단 확장에서 Azure 저장소에 성능 메트릭을 기록한 다음 자동 크기 조정 규칙을 트리거하는 데 이 메트릭을 사용합니다. |
+| Service Bus 큐    | 응용 프로그램 또는 다른 구성 요소에서 Azure Service Bus 큐에 있는 메시지를 전송하여 규칙을 트리거 할 수 있습니다.                   |
+| Application Insights | 응용 프로그램에 설치되어 앱에서 메트릭을 직접 스트림하는 계측 패키지입니다.                         |
 
-```json
-"extensionProfile": {
-  "extensions": [
-    {
-      "name": "Microsoft.Insights.VMDiagnosticsSettings",
-      "properties": {
-        "publisher": "Microsoft.Azure.Diagnostics",
-        "type": "IaaSDiagnostics",
-        "typeHandlerVersion": "1.5",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-          "xmlCfg": "[base64(concat(variables('wadcfgxstart'),variables('wadmetricsresourceid'),variables('wadcfgxend')))]",
-          "storageAccount": "[variables('diagnosticsStorageAccountName')]"
-        },
-        "protectedSettings": {
-          "storageAccountName": "[variables('diagnosticsStorageAccountName')]",
-          "storageAccountKey": "[listkeys(variables('accountid'), variables('apiVersion')).key1]",
-          "storageAccountEndPoint": "https://core.windows.net"
-        }
-      }
-    }
-  ]
-}
-```
 
-진단 확장을 실행할 때 데이터는 지정한 저장소 계정에 위치한 테이블에 저장되고 수집됩니다. **WADPerformanceCounters** 테이블에서 수집된 데이터를 찾을 수 있습니다.
+### <a name="autoscale-rule-criteria"></a>자동 크기 조정 규칙 조건
+자동 크기 조정 규칙을 만들 때 사용할 수 있는 호스트 기반 메트릭은 다음과 같습니다. Azure 진단 확장 또는 App Insights를 사용하면 자동 크기 조정 규칙에서 모니터링하고 사용할 메트릭을 정의합니다.
 
-![](./media/virtual-machine-scale-sets-autoscale-overview/ThreadCountBefore2.png)
+| 메트릭 이름               |
+|---------------------------|
+| 백분율 CPU            |
+| 네트워크 인                |
+| 네트워크 아웃               |
+| 디스크 읽기 바이트           |
+| 디스크 쓰기 바이트          |
+| 디스크 읽기 작업/초  |
+| 디스크 쓰기 작업/초 |
+| 남은 CPU 크레딧     |
+| 사용된 CPU 크레딧      |
 
-### <a name="configure-the-autoscalesettings-resource"></a>autoScaleSettings 리소스 구성
-autoScaleSettings 리소스는 크기 집합에 있는 가상 컴퓨터의 수를 늘릴지 또는 줄일지를 결정하기 위해 진단 확장의 정보를 사용합니다.
+지정된 메트릭을 모니터링하는 자동 크기 조정 규칙을 만들면 규칙에서 다음 메트릭 집계 작업 중 하나를 확인합니다.
 
-이 예제에서는 템플릿의 리소스 구성을 보여 줍니다.
+| 집계 유형 |
+|------------------|
+| 평균          |
+| 최소          |
+| 최대          |
+| 합계            |
+| 마지막             |
+| 개수            |
 
-```json
-{
-  "type": "Microsoft.Insights/autoscaleSettings",
-  "apiVersion": "2015-04-01",
-  "name": "[concat(parameters('resourcePrefix'),'as1')]",
-  "location": "[resourceGroup().location]",
-  "dependsOn": [
-    "[concat('Microsoft.Compute/virtualMachineScaleSets/',parameters('vmSSName'))]"
-  ],
-  "properties": {
-    "enabled": true,
-    "name": "[concat(parameters('resourcePrefix'),'as1')]",
-    "profiles": [
-      {
-        "name": "Profile1",
-        "capacity": {
-          "minimum": "1",
-          "maximum": "10",
-          "default": "1"
-        },
-        "rules": [
-          {
-            "metricTrigger": {
-              "metricName": "\\Processor(_Total)\\Thread Count",
-              "metricNamespace": "",
-              "metricResourceUri": "[concat('/subscriptions/',subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Compute/virtualMachineScaleSets/', parameters('vmSSName'))]",
-              "timeGrain": "PT1M",
-              "statistic": "Average",
-              "timeWindow": "PT5M",
-              "timeAggregation": "Average",
-              "operator": "GreaterThan",
-              "threshold": 650
-            },
-            "scaleAction": {
-              "direction": "Increase",
-              "type": "ChangeCount",
-              "value": "1",
-              "cooldown": "PT5M"
-            }
-          },
-          {
-            "metricTrigger": {
-              "metricName": "\\Processor(_Total)\\Thread Count",
-              "metricNamespace": "",
-              "metricResourceUri": "[concat('/subscriptions/',subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Compute/virtualMachineScaleSets/', parameters('vmSSName'))]",
-              "timeGrain": "PT1M",
-              "statistic": "Average",
-              "timeWindow": "PT5M",
-              "timeAggregation": "Average",
-              "operator": "LessThan",
-              "threshold": 550
-            },
-            "scaleAction": {
-              "direction": "Decrease",
-              "type": "ChangeCount",
-              "value": "1",
-              "cooldown": "PT5M"
-            }
-          }
-        ]
-      }
-    ],
-    "targetResourceUri": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Compute/virtualMachineScaleSets/', parameters('vmSSName'))]"
-  }
-}
-```
+다음 연산자 중 하나를 사용하여 메트릭과 정의된 임계값을 비교하면 자동 크기 조정 규칙이 트리거됩니다.
 
-위의 예제에서는 자동 크기 조정 작업을 정의하기 위해 두 가지 규칙이 생성됩니다. 첫 번째 규칙은 규모 확장 작업을 정의하고 두 번째 규칙은 규모 축소 작업을 정의합니다. 다음 값이 규칙에 제공됩니다.
+| 연산자                 |
+|--------------------------|
+| 다음보다 큼             |
+| 다음보다 크거나 같음 |
+| 다음보다 적음                |
+| 다음보다 작거나 같음    |
+| 다음과 같음                 |
+| 다음과 같지 않음             |
 
-| 규칙 | 설명 |
-| ---- | ----------- |
-| metricName        | 이 값은 진단 확장에 대한 wadperfcounter 변수에 정의한 성능 카운터와 동일합니다. 위의 예제에서는 스레드 수 카운터를 사용합니다.    |
-| metricResourceUri | 이 값은 가상 컴퓨터 크기 집합의 리소스 식별자입니다. 이 식별자는 리소스 그룹 이름, 리소스 공급자 이름 및 크기 조정을 위한 규모 집합 이름을 포함합니다. |
-| timeGrain         | 이 값은 수집되는 메트릭의 세분성입니다. 위의 예제에서는 1분 간격으로 데이터를 수집합니다. 이 값은 timeWindow와 함께 사용됩니다. |
-| statistic         | 이 값은 자동 크기 조정 작업을 수용하기 위해 메트릭을 결합하는 방법을 결정합니다. 가능한 값은 평균, 최소, 최대입니다. |
-| timeWindow        | 이 값은 인스턴스 데이터가 수집되는 시간 범위입니다. 5분에서 12시간 사이여야 합니다. |
-| timeAggregation   | 이 값은 시간이 지남에 따라 수집된 데이터가 결합되어야 하는 방법을 결정합니다. 기본값은 평균입니다. 가능한 값은 평균, 최소, 최대, 마지막, 합계, 개수입니다. |
-| operator          | 이 값은 메트릭 데이터와 임계값을 비교하는 데 사용되는 연산자입니다. 가능한 값은 Equals, NotEquals, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual입니다. |
-| threshold         | 이 값은 크기 조정 작업을 트리거하는 값입니다. **규모 확장** 및 **규모 축소** 작업의 임계값 사이에 충분한 차이가 있는지 확인해야 합니다. 두 작업에서 동일한 값을 설정하면 시스템은 차이가 일정하다고 예상하여 크기 조정 동작을 구현하지 못하게 합니다. 예를 들어 앞의 예제에서 두 값을 모두 스레드 600으로 설정할 수 없습니다. |
-| direction         | 이 값은 임계값이 달성되었을 때 수행되는 동작을 결정합니다. 가능한 값은 증가 또는 감소입니다. |
-| 형식              | 이 값은 발생되어야 하는 동작의 유형이며 ChangeCount로 설정되어 있어야 합니다. |
-| value             | 이 값은 확장 집합에서 추가되거나 제거된 가상 컴퓨터의 수입니다. 이 값은 1 이상이어야 합니다. |
-| cooldown          | 이 값은 다음 작업이 발생하기 전에 마지막 크기 조정 작업 이후에 대기 시간입니다. 이 값은 1분에서 1주 사이여야 합니다. |
 
-사용하는 성능 카운터에 따라 템플릿 구성에서 일부 요소가 다르게 사용됩니다. 다음 예제에서 성능 카운터는 Thread Count이며 규모 확장 작업에 대한 임계값은 650, 규모 축소 작업에 대한 임계값은 550입니다. %Processor Time과 같은 카운터를 사용할 경우 크기 조정 작업을 판단하는 CPU 사용 백분율을 임계값으로 설정합니다.
+### <a name="actions-when-rules-trigger"></a>규칙 트리거 시 작업
+자동 크기 조정 규칙이 트리거되면 다음 방법 중 하나를 사용하여 확장 집합의 크기를 자동으로 조정할 수 있습니다.
 
-크기 조정 작업을 트리거하는 경우 템플릿의 값을 기준으로 높은 부하와 같은 설정 용량이 증가합니다. 예를 들어 용량이 3, 크기 조정 작업 값이 1로 설정된 규모 집합에서
+| 크기 조정 작업     | 사용 사례                                                                                                                               |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| 다음을 기준으로 개수 늘이기   | 만들 VM 인스턴스의 고정된 수입니다. VM 수가 적은 확장 집합에 유용합니다.                                           |
+| 다음을 기준으로 백분율 늘이기 | 백분율 기준에 따라 VM 인스턴스가 증가합니다. 고정된 증가에 따라 성능이 눈에 띄게 향상되지 않는 대규모 확장 집합에 적합합니다. |
+| 다음으로 개수 늘이기   | 원하는 최대 크기에 도달하는 데 필요한 만큼의 VM 인스턴스를 만듭니다.                                                            |
+| 다음으로 개수 줄이기   | 제거할 VM 인스턴스의 고정된 수입니다. VM 수가 적은 확장 집합에 유용합니다.                                           |
+| 다음을 기준으로 백분율 줄이기 | 백분율 기준에 따라 VM 인스턴스가 감소합니다. 고정된 증가에 따라 리소스 사용량 및 비용이 눈에 띄게 줄어들지 않는 대규모 확장 집합에 적합합니다. |
+| 다음으로 개수 줄이기   | 원하는 최소 크기에 도달하는 데 필요한 만큼의 VM 인스턴스를 제거합니다.                                                            |
 
-![](./media/virtual-machine-scale-sets-autoscale-overview/ResourceExplorerBefore.png)
 
-현재 부하가 평균 스레드 수를 임계값인 650 이상으로 증가시키는 경우:
+## <a name="in-guest-vm-metrics-with-the-azure-diagnostics-extension"></a>Azure 진단 확장이 있는 게스트 내 VM 메트릭
+Azure 진단 확장은 VM 인스턴스 내부에서 실행되는 에이전트입니다. 에이전트는 성능 메트릭을 모니터링하고 Azure 저장소에 저장합니다. 이러한 성능 메트릭에는 디스크에 대한 *AverageReadTime* 또는 CPU에 대한 *PercentIdleTime*과 같은 VM 상태에 대한 자세한 정보가 포함됩니다. CPU 사용률이나 메모리 사용량 외에도 VM 성능에 대한 자세한 인식에 따라 자동 크기 조정 규칙을 만들 수 있습니다.
 
-![](./media/virtual-machine-scale-sets-autoscale-overview/ThreadCountAfter.png)
+Azure 진단 확장을 사용하려면 VM 인스턴스에 대한 Azure 저장소 계정을 만들고, Azure 진단 에이전트를 설치한 다음, 특정 성능 카운터를 저장소 계정에 스트림하도록 VM을 구성해야 합니다.
 
-집합의 용량을 1씩 증가시키는 **규모 확장** 작업을 트리거합니다.
+자세한 내용은 [Linux VM](../virtual-machines/linux/diagnostic-extension.md) 또는 [Windows VM](../virtual-machines/windows/ps-extensions-diagnostics.md)에서 Azure 진단 확장을 사용하도록 설정하는 방법에 대한 문서를 참조하세요.
 
-```json
-"sku": {
-  "name": "Standard_A0",
-  "tier": "Standard",
-  "capacity": 4
-},
-```
 
-결과적으로 확장 집합에 가상 컴퓨터가 추가됩니다.
+## <a name="application-level-metrics-with-app-insights"></a>App Insights를 사용한 응용 프로그램 수준 메트릭
+응용 프로그램 성능에 대한 가시성을 높이려면 Application Insights를 사용할 수 있습니다. 앱을 모니터링하고 원격 분석을 Azure로 보내는 작은 계측 패키지를 응용 프로그램에 설치합니다. 응용 프로그램의 응답 시간, 페이지 로드 성능 및 세션 수와 같은 메트릭을 모니터링할 수 있습니다. 고객 만족에 영향을 줄 수 있는 실행 가능한 정보에 따라 규칙을 트리거할 때 이러한 응용 프로그램 메트릭을 사용하여 세분화되고 포함된 수준의 자동 크기 조정 규칙을 만들 수 있습니다.
 
-![](./media/virtual-machine-scale-sets-autoscale-overview/ResourceExplorerAfter.png)
+Application Insights에 대한 자세한 내용은 [Application Insights란?](../application-insights/app-insights-overview.md)을 참조하세요.
 
-5분의 휴지 기간 후 컴퓨터의 평균 스레드 수가 600개 이상으로 유지되는 경우 집합에 다른 컴퓨터가 추가됩니다. 평균 스레드 수가 550개 미만으로 유지되는 경우 규모 집합의 용량이 1씩 감소하며 집합에서 컴퓨터 하나가 제거됩니다.
 
-## <a name="set-up-scaling-using-azure-powershell"></a>Azure PowerShell을 사용하여 크기 조정 설정
+## <a name="scheduled-autoscale"></a>예약된 자동 크기 조정
+일정에 따라 자동 크기 조정 규칙을 만들 수도 있습니다. 이러한 일정 기반 규칙을 사용하면 고정된 시간에 VM 인스턴스 수를 자동으로 조정할 수 있습니다. 성능 기반 규칙을 사용하면 자동 크기 조정 규칙이 트리거되고 새 VM 인스턴스가 프로비전되기 전에 응용 프로그램의 성능에 영향을 줄 수 있습니다. 이러한 요구를 예상할 수 있는 경우 VM 인스턴스가 추가로 프로비전되어 추가적인 고객 사용 및 응용 프로그램 요구에 대비할 수 있습니다.
 
-PowerShell을 사용하여 자동 크기 조정을 설정하는 예제를 보려면 [Azure Monitor PowerShell 빠른 시작 샘플](../monitoring-and-diagnostics/insights-powershell-samples.md)을 참조하세요.
+다음 예제는 일정 기반 자동 크기 규칙의 사용에 도움이 되는 시나리오입니다.
 
-## <a name="set-up-scaling-using-azure-cli"></a>Azure CLI를 사용하여 크기 조정 설정
+- 고객의 요구가 증가하는 경우 근무일의 시작 시 VM 인스턴스의 수를 자동으로 확장합니다. 근무일이 끝나면 응용 프로그램을 많이 사용하지 않는 밤 동안의 리소스 비용을 최소화하기 위해 VM 인스턴스의 수를 자동으로 축소합니다.
+- 부서에서 월 또는 회계 주기의 특정 부분에서 응용 프로그램을 많이 사용하는 경우 VM 인스턴스의 수를 자동으로 조정하여 추가 요구를 수용합니다.
+- 마케팅 이벤트, 판촉 또는 휴일 판매가 있는 경우 예상되는 고객 수요에 대비하여 VM 인스턴스의 수를 자동으로 조정할 수 있습니다. 
 
-Azure CLI를 사용하여 자동 크기 조정을 설정하는 예제를 보려면 [Azure Monitor 플랫폼 간 CLI 빠른 시작 샘플](../monitoring-and-diagnostics/insights-cli-samples.md)을 참조하세요.
-
-## <a name="set-up-scaling-using-the-azure-portal"></a>Azure Portal을 사용하여 크기 조정 설정
-
-Azure Portal을 사용하여 자동 크기 조정을 설정하는 예제를 보려면 [Azure Portal을 사용하여 Virtual Machine Scale Set 만들기](virtual-machine-scale-sets-portal-create.md)를 참조하세요.
-
-## <a name="investigate-scaling-actions"></a>크기 조정 작업 조사
-
-* **Azure 포털**  
-포털을 사용하여 현재 제한된 양의 정보를 얻을 수 있습니다.
-
-* **Azure 리소스 탐색기**  
-확장 집합의 현재 상태를 탐색하는 데 가장 적합한 도구입니다. 이 경로를 따르고 사용자가 만든 규모 집합의 인스턴스 보기가 표시되어야 합니다.  
-**구독 > {사용자 구독} > resourceGroups > {사용자 리소스 그룹} > 공급자 > Microsoft.Compute > virtualMachineScaleSets > {사용자 확장 집합} > virtualMachines**
-
-* **Azure PowerShell**  
-이 명령을 사용하여 몇 가지 정보를 가져옵니다.
-
-  ```powershell
-  Get-AzureRmResource -name vmsstest1 -ResourceGroupName vmsstestrg1 -ResourceType Microsoft.Compute/virtualMachineScaleSets -ApiVersion 2015-06-15
-  Get-Autoscalesetting -ResourceGroup rainvmss -DetailedOutput
-  ```
-
-* 다른 컴퓨터와 마찬가지로 jumpbox 가상 컴퓨터에 연결한 다음 개별 프로세스를 모니터링하도록 규모 집합의 가상 컴퓨터에 원격으로 액세스할 수 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
-* 구성된 자동 크기 조정을 사용하여 크기 집합을 만드는 방법에 대한 예제를 보려면 [가상 컴퓨터 크기 집합에서 자동으로 컴퓨터 크기 조정](virtual-machine-scale-sets-windows-autoscale.md) 을 살펴보세요.
+다음 도구 중 하나를 사용하여 호스트 기반 메트릭을 사용하는 자동 크기 조정 규칙을 만들 수 있습니다.
 
-* [Azure Monitor PowerShell 빠른 시작 샘플](../monitoring-and-diagnostics/insights-powershell-samples.md)에서 Azure Monitor 모니터링 기능 예제를 찾아보세요.
+- [Azure PowerShell](tutorial-autoscale-powershell.md)
+- [Azure CLI 2.0](tutorial-autoscale-cli.md)
+- [Azure 템플릿](tutorial-autoscale-template.md)
 
-* [크기 자동 조정 작업을 사용하여 Azure Monitor에서 전자 메일 및 웹후크 경고 알림 보내기](../monitoring-and-diagnostics/insights-autoscale-to-webhook-email.md)에서 알림 기능에 대해 알아보세요.
+이 개요에서는 자동 크기 조정 규칙을 사용하여 수평으로 크기를 조정하고, 확장 집합의 VM 인스턴스 *수*를 늘리거나 줄이는 방법에 대해 자세히 설명했습니다. 또한 수직으로 크기를 조정하여 VM 인스턴스의 *크기*를 늘리거나 줄일 수도 있습니다. 자세한 내용은 [가상 머신 확장 집합을 사용하여 수직으로 자동 크기 조정](virtual-machine-scale-sets-vertical-scale-reprovision.md)을 참조하세요.
 
-* [감사 로그를 사용하여 Azure Monitor에서 전자 메일 및 웹후크 경고 알림을 보내는](../monitoring-and-diagnostics/insights-auditlog-to-webhook-email.md) 방법에 대해 알아보세요.
+VM 인스턴스 관리 방법에 대한 자세한 내용은 [Azure PowerShell을 사용하여 가상 머신 확장 집합 관리](virtual-machine-scale-sets-windows-manage.md)를 참조하세요.
 
-* [고급 자동 크기 조정 시나리오](virtual-machine-scale-sets-advanced-autoscale.md)에 대해 자세히 알아봅니다.
-
+자동 크기 조정 규칙이 트리거될 때 경고를 생성하는 방법에 대한 자세한 내용은 [Azure Monitor에서 자동 크기 조정 작업을 사용하여 메일 및 webhook 경고 알림 보내기](../monitoring-and-diagnostics/insights-autoscale-to-webhook-email.md)를 참조하세요. [Azure Monitor에서 감사 로그를 사용하여 메일 및 webhook 경고 알림을 보낼](../monitoring-and-diagnostics/insights-auditlog-to-webhook-email.md) 수도 있습니다.

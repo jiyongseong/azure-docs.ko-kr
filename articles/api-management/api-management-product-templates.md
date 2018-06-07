@@ -3,7 +3,7 @@ title: "Azure API Management의 제품 템플릿 | Microsoft Docs"
 description: "Azure API Management 개발자 포털에서 제품 페이지의 콘텐츠를 사용자 지정하는 방법을 알아봅니다."
 services: api-management
 documentationcenter: 
-author: miaojiang
+author: vladvino
 manager: erikre
 editor: 
 ms.assetid: 49f9254c-4c5f-4ed4-9c8d-798f44e805ee
@@ -14,10 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/09/2017
 ms.author: apimpm
-translationtype: Human Translation
-ms.sourcegitcommit: 77fd7b5b339a8ede8a297bec96f91f0a243cc18d
-ms.openlocfilehash: 393b10042f35afabf00672f9015f714e211a9d43
-
+ms.openlocfilehash: dae757231d8f2ff7fcd8e032d941c0fa9f192796
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="product-templates-in-azure-api-management"></a>Azure API Management의 제품 템플릿
 Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사용하여 개발자 포털 페이지의 콘텐츠를 사용자 지정하는 기능을 제공합니다. 이러한 템플릿에서 [DotLiquid](http://dotliquidmarkup.org/) 구문 및 [DotLiquid for Designers](https://github.com/dotliquid/dotliquid/wiki/DotLiquid-for-Designers) 및 제공된 지역화 [String 리소스](api-management-template-resources.md#strings), [Glyph 리소스](api-management-template-resources.md#glyphs) 및 [Page 컨트롤](api-management-page-controls.md)의 집합과 같은 편집기를 사용하여 필요에 따라 페이지 콘텐츠를 유연하게 구성할 수 있습니다.  
@@ -31,7 +32,7 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 > [!NOTE]
 >  다음 문서에는 샘플 기본 템플릿이 포함되어 있지만 지속적인 향상으로 인해 변경될 수 있습니다. 원하는 개별 템플릿으로 이동하여 개발자 포털에서 라이브 기본 템플릿을 볼 수 있습니다. 템플릿 작업에 대한 자세한 내용은 [템플릿을 사용하여 API Management 개발자 포털을 사용자 지정하는 방법](https://azure.microsoft.com/documentation/articles/api-management-developer-portal-templates/)을 참조하세요.  
   
-##  <a name="a-nameproductlista-product-list"></a><a name="ProductList"></a> 제품 목록  
+##  <a name="ProductList"></a> 제품 목록  
  **제품 목록** 템플릿을 통해 개발자 포털에서 제품 목록 페이지의 본문을 사용자 지정할 수 있습니다.  
   
  ![제품 목록](./media/api-management-product-templates/APIM_ProductsListTemplatePage.png "APIM_ProductsListTemplatePage")  
@@ -73,7 +74,7 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
   
 ### <a name="data-model"></a>데이터 모델  
   
-|속성|유형|설명|  
+|속성|형식|설명|  
 |--------------|----------|-----------------|  
 |페이징|[페이징](api-management-template-data-model-reference.md#Paging) 엔터티.|제품 컬렉션에 대한 페이징 정보입니다.|  
 |필터링|[필터링](api-management-template-data-model-reference.md#Filtering) 엔터티.|제품 목록 페이지에 대한 필터링 정보입니다.|  
@@ -117,7 +118,7 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 }  
 ```  
   
-##  <a name="a-nameproducta-product"></a><a name="Product"></a> 제품  
+##  <a name="Product"></a> 제품  
  **제품** 템플릿을 통해 개발자 포털에서 제품 페이지의 본문을 사용자 지정할 수 있습니다.  
   
  ![개발자 포털 제품 페이지](./media/api-management-product-templates/APIM_ProductPage.png "APIM_ProductPage")  
@@ -198,7 +199,7 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
   
 ### <a name="data-model"></a>데이터 모델  
   
-|속성|유형|설명|  
+|속성|형식|설명|  
 |--------------|----------|-----------------|  
 |제품|[제품](api-management-template-data-model-reference.md#Product)|지정된 제품.|  
 |IsDeveloperSubscribed|부울|현재 사용자가 이 제품을 구독하는지 여부입니다.|  
@@ -258,8 +259,3 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 
 ## <a name="next-steps"></a>다음 단계
 템플릿 작업에 대한 자세한 내용은 [템플릿을 사용하여 API Management 개발자 포털을 사용자 지정하는 방법](api-management-developer-portal-templates.md)을 참조하세요.
-
-
-<!--HONumber=Jan17_HO2-->
-
-

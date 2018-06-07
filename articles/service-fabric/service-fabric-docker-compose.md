@@ -1,79 +1,104 @@
 ---
-title: "Azure Service Fabric Docker Compose 미리 보기"
-description: "Azure Service Fabric은 Service Fabric을 사용하여 기존 컨테이너를 보다 쉽게 조정할 수 있도록 Docker Compose 형식을 수락합니다. 이 지원은 현재 미리 보기로 제공되고 있습니다."
+title: Azure Service Fabric Docker Compose 배포 미리 보기
+description: Azure Service Fabric은 Service Fabric을 사용하여 기존 컨테이너를 보다 쉽게 조정할 수 있도록 Docker Compose 형식을 수락합니다. 이 지원은 현재 미리 보기로 제공되고 있습니다.
 services: service-fabric
 documentationcenter: .net
 author: mani-ramaswamy
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: ab49c4b9-74a8-4907-b75b-8d2ee84c6d90
 ms.service: service-fabric
 ms.devlang: dotNet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 7/27/2017
+ms.date: 2/23/2018
 ms.author: subramar
+ms.openlocfilehash: 318898598617ba54b3f8f777bfeca0223d0d296c
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: f4899748ee191a64156c0e2fae87c195ae4dbc8c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
-# <a name="docker-compose-application-support-in-azure-service-fabric-preview"></a>Azure Service Fabric의 Docker Compose 응용 프로그램 지원(미리 보기)
+# <a name="docker-compose-deployment-support-in-azure-service-fabric-preview"></a>Azure Service Fabric의 Docker Compose 배포 지원(미리 보기)
 
-Docker는 다중 컨테이너 응용 프로그램을 정의하기 위해 [docker-compose.yml](https://docs.docker.com/compose) 파일을 사용합니다. Docker에 익숙한 고객이 Azure Service Fabric에서 기존 컨테이너 응용 프로그램을 쉽게 조정하도록 하기 위해 플랫폼에 기본적으로 Docker Compose에 대한 미리 보기 지원을 포함했습니다. Service Fabric은 `docker-compose.yml` 파일의 버전 3 이상을 수락할 수 있습니다. 
+Docker는 다중 컨테이너 응용 프로그램을 정의하기 위해 [docker-compose.yml](https://docs.docker.com/compose) 파일을 사용합니다. Docker에 익숙한 고객이 Azure Service Fabric에서 기존 컨테이너 응용 프로그램을 쉽게 조정하도록 하기 위해 플랫폼에 기본적으로 Docker Compose 배포에 대한 미리 보기 지원을 포함했습니다. Service Fabric은 `docker-compose.yml` 파일의 버전 3 이상을 수락할 수 있습니다. 
 
 이 지원은 미리 보기로 제공되므로 Compose 지시문의 하위 집합만 지원됩니다. 예를 들어 응용 프로그램 업그레이드는 지원되지 않습니다. 그러나 응용 프로그램을 업그레이드하는 대신 항상 제거한 후 배포할 수 있습니다.
 
-이 미리 보기를 사용하려면 Azure Portal을 통해 미리 보기 SDK(버전 255.255.x.x)를 설치한 클러스터를 만듭니다. 
+이 미리 보기를 사용하려면 해당하는 SDK와 함께 Azure Portal을 통해 Service Fabric 런타임 버전 5.7 이상을 사용하여 클러스터를 만듭니다. 
 
 > [!NOTE]
-> 이 기능은 미리 보기로 제공되며 지원되지 않습니다.
+> 이 기능은 미리 보기로 제공되며 프로덕션에서 지원되지 않습니다.
+> 다음 예제는 런타임 버전 6.0 및 SDK 버전 2.8을 기준으로 합니다.
 
 ## <a name="deploy-a-docker-compose-file-on-service-fabric"></a>Service Fabric에서 Docker Compose 파일 배포
 
-다음 명령은 다른 Service Fabric 응용 프로그램과 유사하게 모니터링하고 관리할 수 있는 Service Fabric 응용 프로그램(이전 예제의 `fabric:/TestContainerApp`)을 만듭니다. 상태 쿼리에 대해서는 지정된 응용 프로그램 이름을 사용할 수 있습니다.
+다음 명령은 다른 모든 Service Fabric 응용 프로그램과 같이 모니터링하고 관리할 수 있는 Service Fabric 응용 프로그램(`fabric:/TestContainerApp`이라 함)을 만듭니다. 상태 쿼리에 대해서는 지정된 응용 프로그램 이름을 사용할 수 있습니다.
+Service Fabric은 "DeploymentName"을 Compose 배포의 식별자로 인식합니다.
 
 ### <a name="use-powershell"></a>PowerShell 사용
 
-PowerShell에서 다음 명령을 실행하여 docker-compose.yml 파일에서 Service Fabric Compose 응용 프로그램을 만듭니다.
+PowerShell에서 다음 명령을 실행하여 docker-compose.yml 파일에서 Service Fabric Compose 배포를 만듭니다.
 
 ```powershell
-New-ServiceFabricComposeApplication -ApplicationName fabric:/TestContainerApp -Compose docker-compose.yml [-RegistryUserName <>] [-RegistryPassword <>] [-PasswordEncrypted]
+New-ServiceFabricComposeDeployment -DeploymentName TestContainerApp -Compose docker-compose.yml [-RegistryUserName <>] [-RegistryPassword <>] [-PasswordEncrypted]
 ```
 
-`RegistryUserName` 및 `RegistryPassword`는 컨테이너 레지스트리 사용자 이름 및 암호를 가리킵니다. 응용 프로그램을 완료한 후에는 다음 명령을 사용하여 그 상태를 확인할 수 있습니다.
+`RegistryUserName` 및 `RegistryPassword`는 컨테이너 레지스트리 사용자 이름 및 암호를 가리킵니다. 배포를 완료한 후 다음 명령을 사용하여 그 상태를 확인할 수 있습니다.
 
 ```powershell
-Get-ServiceFabricComposeApplicationStatus -ApplicationName fabric:/TestContainerApp -GetAllPages
+Get-ServiceFabricComposeDeploymentStatus -DeploymentName TestContainerApp
 ```
 
-PowerShell을 통해 Compose 응용 프로그램을 삭제하려면 다음 명령을 사용합니다.
+PowerShell을 통해 Compose 배포를 삭제하려면 다음 명령을 사용합니다.
 
 ```powershell
-Remove-ServiceFabricComposeApplication  -ApplicationName fabric:/TestContainerApp
+Remove-ServiceFabricComposeDeployment  -DeploymentName TestContainerApp
 ```
 
-### <a name="use-azure-cli-20"></a>Azure CLI 2.0 사용
+PowerShell을 통해 Compose 배포 업그레이드를 시작하려면 다음 명령을 사용합니다.
 
-또는 다음 Azure CLI 명령을 사용할 수 있습니다.
-
-```azurecli
-az sf compose create --application-id fabric:/TestContainerApp --compose-file docker-compose.yml [ [ --repo-user --repo-pass --encrypted ] | [ --repo-user ] ] [ --timeout ]
+```powershell
+Start-ServiceFabricComposeDeploymentUpgrade -DeploymentName TestContainerApp -Compose docker-compose-v2.yml -Monitored -FailureAction Rollback
 ```
 
-응용 프로그램을 만든 후에는 다음 명령을 사용하여 그 상태를 확인할 수 있습니다.
+업그레이드가 수락되면 다음 명령을 사용하여 업그레이드 진행률을 추적할 수 있습니다.
 
-```azurecli
-az sf compose status --application-id TestContainerApp [ --timeout ]
+```powershell
+Get-ServiceFabricComposeDeploymentUpgrade -Deployment TestContainerApp
 ```
 
-Compose 응용 프로그램을 삭제하려면 다음 명령을 사용합니다.
+### <a name="use-azure-service-fabric-cli-sfctl"></a>Azure Service Fabric CLI(sfctl) 사용
+
+또는 다음 Service Fabric CLI 명령을 사용할 수 있습니다.
 
 ```azurecli
-az sf compose remove  --application-id TestContainerApp [ --timeout ]
+sfctl compose create --deployment-name TestContainerApp --file-path docker-compose.yml [ [ --user --encrypted-pass ] | [ --user --has-pass ] ] [ --timeout ]
+```
+
+배포를 만든 후 다음 명령을 사용하여 그 상태를 확인할 수 있습니다.
+
+```azurecli
+sfctl compose status --deployment-name TestContainerApp [ --timeout ]
+```
+
+Compose 배포를 삭제하려면 다음 명령을 사용합니다.
+
+```azurecli
+sfctl compose remove  --deployment-name TestContainerApp [ --timeout ]
+```
+
+Compose 배포 업그레이드를 시작하려면 다음 명령을 사용합니다.
+
+```azurecli
+sfctl compose upgrade --deployment-name TestContainerApp --file-path docker-compose-v2.yml [ [ --user --encrypted-pass ] | [ --user --has-pass ] ] [--upgrade-mode Monitored] [--failure-action Rollback] [ --timeout ]
+```
+
+업그레이드가 수락되면 다음 명령을 사용하여 업그레이드 진행률을 추적할 수 있습니다.
+
+```azurecli
+sfctl compose upgrade-status --deployment-name TestContainerApp
 ```
 
 ## <a name="supported-compose-directives"></a>지원되는 Compose 지시문
@@ -103,7 +128,7 @@ Compose 파일에 지정하는 서비스 이름이 정규화된 도메인 이름
 
 예를 들어 지정된 응용 프로그램 이름이 `fabric:/SampleApp/MyComposeApp`인 경우 `<ServiceName>.MyComposeApp.SampleApp`은 등록된 DNS 이름이 됩니다.
 
-## <a name="differences-between-compose-instance-definition-and-service-fabric-application-model-type-definition"></a>Compose(인스턴스 정의) 및 Service Fabric 응용 프로그램 모델(형식 정의) 간 차이
+## <a name="compose-deployment-instance-definition-versus-service-fabric-app-model-type-definition"></a>Compose 배포(인스턴스 정의) 및 Service Fabric 앱 모델(형식 정의)
 
 docker-compose.yml 파일은 해당 속성 및 구성을 포함하는 컨테이너의 배포 가능 집합을 설명합니다.
 예를 들어 파일에는 환경 변수 및 포트가 포함될 수 있습니다. 배치 제약 조건, 리소스 제한, DNS 이름과 같은 배포 매개 변수는 docker-compose.yml 파일에도 지정할 수 있습니다.
@@ -117,9 +142,4 @@ docker-compose.yml 파일은 해당 속성 및 구성을 포함하는 컨테이�
 ## <a name="next-steps"></a>다음 단계
 
 * [Service Fabric 응용 프로그램 모델](service-fabric-application-model.md)에 대해 자세히 알아보기
-
-## <a name="related-articles"></a>관련 문서
-
-* [Service Fabric 및 Azure CLI 2.0 시작](service-fabric-azure-cli-2-0.md)
-* [Service Fabric XPlat CLI 시작](service-fabric-azure-cli.md)
-
+* [Service Fabric CLI 시작](service-fabric-cli.md)

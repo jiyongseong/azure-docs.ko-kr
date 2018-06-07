@@ -1,11 +1,11 @@
 ---
-title: "Azure 네트워크 보안 모범 사례 | Microsoft Docs"
-description: "보안 네트워크 환경을 만드는 데 유용한 Azure의 몇 가지 핵심 기능 알아보기"
+title: Azure 네트워크 보안 모범 사례 | Microsoft Docs
+description: 보안 네트워크 환경을 만드는 데 유용한 Azure의 몇 가지 핵심 기능 알아보기
 services: virtual-network
 documentationcenter: na
 author: tracsman
 manager: rossort
-editor: 
+editor: ''
 ms.assetid: d169387a-1243-4867-a602-01d6f2d8a2a1
 ms.service: virtual-network
 ms.devlang: na
@@ -14,16 +14,15 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/03/2017
 ms.author: jonor
-translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: 243c1cd5ebf34f2d8a8fda234fa3875298390336
-ms.lasthandoff: 04/27/2017
-
-
+ms.openlocfilehash: cf015f4857a22b755813d0be1af5a55a8b7b6535
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34360475"
 ---
-
 # <a name="microsoft-cloud-services-and-network-security"></a>Microsoft Cloud Services 및 네트워크 보안
-Microsoft 클라우드 서비스는 대규모 서비스와 인프라, 엔터프라이즈급 기능 및 여러 하이브리드 연결 옵션을 제공합니다. 고객은 인터넷이나, 사설 네트워크 연결을 제공하는 Azure Express 경로를 통해 이러한 서비스에 액세스할 수 있습니다. 고객은 Microsoft Azure 플랫폼을 통해 인프라를 클라우드로 자연스럽게 확장하고 다중 계층 아키텍처를 빌드할 수 있습니다. 또한 타사 보안 서비스 및 가상 어플라이언스를 통해 향상된 기능을 구현할 수 있습니다. 이 백서에서는 Express 경로를 통해 액세스하는 Microsoft 클라우드 서비스 사용할 때 고객이 고려해야 하는 보안 및 아키텍처 문제에 대해 개괄적으로 설명합니다 또한 Azure Virtual Network에서 더 안전한 서비스를 만드는 과정을 다룹니다.
+Microsoft 클라우드 서비스는 대규모 서비스와 인프라, 엔터프라이즈급 기능 및 여러 하이브리드 연결 옵션을 제공합니다. 고객은 인터넷이나, 사설 네트워크 연결을 제공하는 Azure ExpressRoute를 통해 이러한 서비스에 액세스할 수 있습니다. 고객은 Microsoft Azure 플랫폼을 통해 인프라를 클라우드로 자연스럽게 확장하고 다중 계층 아키텍처를 빌드할 수 있습니다. 또한 타사 보안 서비스 및 가상 어플라이언스를 통해 향상된 기능을 구현할 수 있습니다. 이 백서에서는 ExpressRoute를 통해 액세스하는 Microsoft 클라우드 서비스 사용할 때 고객이 고려해야 하는 보안 및 아키텍처 문제에 대해 개괄적으로 설명합니다 또한 Azure Virtual Network에서 더 안전한 서비스를 만드는 과정을 다룹니다.
 
 ## <a name="fast-start"></a>빠른 시작
 다음 논리 차트를 통해 Azure 플랫폼에서 사용 가능한 여러 보안 기술의 특정 예를 확인할 수 있습니다. 빠른 참조를 원하는 경우 사용자의 사례에 가장 적합한 예제를 찾습니다. 자세한 설명을 원하는 경우 이 백서를 계속 읽어 보세요.
@@ -79,11 +78,11 @@ Microsoft에서는 클라우드 인프라 보호를 위해 상당한 투자를 �
 
 1.    **DDoS 방지**: DDoS 방지는 대규모 인터넷 기반 공격으로부터 Azure 플랫폼 자체를 보호하는 Azure의 물리적 네트워크 계층입니다. 이러한 공격에서는 여러 "봇" 노드를 사용하여 인터넷 서비스 과부하를 시도합니다. Azure에는 모든 인바운드, 아웃바운드 및 Azure 지역 연결 간에 강력한 DDoS 방지 메시가 있습니다. 이 DDoS 방지 계층은 사용자가 구성 가능한 속성이 없으며 고객이 액세스할 수 없습니다. DDoS 보호 계층은 대규모 공격으로부터 플랫폼으로써 Azure를 보호하고 아웃바운드 트래픽 및 크로스 Azure 지역 트래픽도 모니터링합니다. 고객은 VNet에서 네트워크 가상 어플라이언스를 사용하여 플랫폼 수준 보호를 통과하지 않는 소규모 공격에 대해 추가 복원력 계층을 구성할 수 있습니다. 실제 DDoS의 예로는 인터넷 연결 IP 주소가 대규모 DDoS 공격을 당한 경우 Azure에서 공격 근원지를 감지하고 원하는 대상에 도달하기 전에 잘못된 트래픽을 삭제합니다. 거의 모든 경우에 공격받은 끝점은 공격의 영향을 받지 않습니다. 끝점이 영향을 받는 경우는 드문데, 트래픽은 다른 끝점에 영향을 받지 않으며 공격받은 끝점에만 영향을 받습니다. 따라서 다른 고객 및 서비스는 해당 공격으로 인한 영향을 알지 못합니다. Azure DDoS는 대규모 공격만 찾는다는 점에 주의해야 합니다. 플랫폼 수준 보호 임계값이 초과되기 전에 특정 서비스가 과부하될 수 있습니다. 예를 들어 Azure 플랫폼 수준 DDoS 보호에서 위협을 등록하기 전에 DDoS 공격에 의해 단일 A0 IIS 서버의 웹 사이트가 오프라인으로 사용될 수 있습니다.
 
-2.    **공용 IP 주소**: 공용 IP 주소(서비스 끝점, 공용 IP 주소, Application Gateway, 사용자 리소스로 라우팅되는 인터넷에 공용 IP 주소를 제공하는 기타 Azure 기능)를 통해 클라우드 서비스 또는 리소스 그룹은 노출된 공용 인터넷 IP 주소 및 포트를 포함할 수 있습니다. 끝점에서는 NAT(Network Address Translation)를 사용하여 트래픽을 Azure Virtual Network상의 내부 주소와 포트로 라우팅합니다. 이 경로가 외부 트래픽을 가상 네트워크 내부로 전달하는 기본 방법입니다. 공용 IP 주소는 사용자가 구성하여 어떤 트래픽을 안으로 들이며, 가상 네트워크의 어느 부분에서 어떻게 전환하느냐를 결정할 수 있습니다.
+2.  **공용 IP 주소**: 공용 IP 주소(서비스 끝점, 공용 IP 주소, Application Gateway, 사용자 리소스로 라우팅되는 인터넷에 공용 IP 주소를 제공하는 기타 Azure 기능)를 통해 클라우드 서비스 또는 리소스 그룹은 노출된 공용 인터넷 IP 주소 및 포트를 포함할 수 있습니다. 끝점에서는 NAT(Network Address Translation)를 사용하여 트래픽을 Azure Virtual Network상의 내부 주소와 포트로 라우팅합니다. 이 경로가 외부 트래픽을 가상 네트워크 내부로 전달하는 기본 방법입니다. 공용 IP 주소는 사용자가 구성하여 어떤 트래픽을 안으로 들이며, 가상 네트워크의 어느 부분에서 어떻게 전환하느냐를 결정할 수 있습니다.
 
 트래픽이 Virtual Network에 도달하면 작동하는 많은 기능이 있습니다. Azure Virtual Network는 고객이 워크로드를 연결하고 기본 네트워크 수준의 보안을 적용하는 토대입니다. 다음 기능과 특성을 갖는 Azure의 고객용 사설 네트워크(Virtual Network 계층)입니다.
 
-* **트래픽 격리**: Virtual Network는 Azure 플랫폼에서 트래픽 격리 경계입니다. 두 Virtual Network를 같은 고객이 만들었다 하더라도, 한 Virtual Network의 VM(가상 컴퓨터)은 다른 가상 네트워크의 VM과 직접 통신할 수 없습니다. 격리는 고객 VM과 통신이 가상 네트워크 안에서 비공개 상태를 유지하는 데 있어 중요한 속성입니다.
+* **트래픽 격리**: Virtual Network는 Azure 플랫폼에서 트래픽 격리 경계입니다. 두 Virtual Network를 같은 고객이 만들었다 하더라도, 한 Virtual Network의 VM(가상 머신)은 다른 가상 네트워크의 VM과 직접 통신할 수 없습니다. 격리는 고객 VM과 통신이 가상 네트워크 안에서 비공개 상태를 유지하는 데 있어 중요한 속성입니다.
 
 >[!NOTE]
 >트래픽 격리는 가상 네트워크에 대한 트래픽 *인바운드*만 나타냅니다. 기본적으로 VNet에서 인터넷으로 아웃바운드 트래픽이 허용되지만 NSG에 필요한 경우 차단할 수 있습니다.
@@ -91,7 +90,7 @@ Microsoft에서는 클라우드 인프라 보호를 위해 상당한 투자를 �
 >
 
 * **다중 계층 토폴로지**: 가상 네트워크에서는 고객이 서브넷을 할당하고 워크로드의 서로 다른 요소나 "계층"에 별도의 주소 공간을 지정하여 다중 계층 토폴로지를 정의할 수 있습니다. 이러한 논리적 그룹화 및 토폴로지를 통해 고객은 워크로드 유형에 따른 다양한 액세스 정책을 정의하고 계층 간의 트래픽 흐름을 제어할 수 있습니다.
-* **크로스 프레미스 연결**: 고객은 Virtual Network와 다중 온-프레미스 사이트 간 또는 Azure의 다른 Virtual Network 간에 크로스 프레미스 연결을 설정할 수 있습니다. 연결을 생성하려면 고객은 VNet Peering, Azure VPN Gateway, 타사 네트워크 가상 어플라이언스 또는 ExpressRoute를 사용할 수 있습니다. Azure는 표준 IPsec/IKE 프로토콜 및 Express 경로 개인 연결을 사용한 사이트 간(S2S) VPN을 지원합니다.
+* **크로스 프레미스 연결**: 고객은 Virtual Network와 다중 온-프레미스 사이트 간 또는 Azure의 다른 Virtual Network 간에 크로스 프레미스 연결을 설정할 수 있습니다. 연결을 생성하려면 고객은 VNet Peering, Azure VPN Gateway, 타사 네트워크 가상 어플라이언스 또는 ExpressRoute를 사용할 수 있습니다. Azure는 표준 IPsec/IKE 프로토콜 및 ExpressRoute 개인 연결을 사용한 사이트 간(S2S) VPN을 지원합니다.
 * **NSG**를 통해 고객은 원하는 네트워크 인터페이스, 개별 VM 또는 가상 서브넷 상세 수준에서 규칙을 만들 수 있습니다. 고객은 크로스 프레미스 연결을 통한 고객 네트워크 상의 시스템이나 직접 인터넷 통신을 통해서 고객 네트워크 시스템으로부터 Virtual Network 내 워크로드 간 통신을 허용하거나 거부하여 액세스를 제어할 수 있습니다.
 * **UDR** 및 **IP 전달**을 통해 고객은 Virtual Network 내 여러 계층 간 통신 경로를 정의할 수 있습니다. 고객은 보안 경계 정책 적용, 감사 및 검사를 위해 방화벽, IDS/IPS 및 기타 가상 어플라이언스를 배포하고 이러한 보안 어플라이언스를 통해 네트워크 트래픽을 라우팅할 수 있습니다.
 * Azure Marketplace의 **네트워크 가상 어플라이언스**: 방화벽, 부하 분산 장치, IDS/IPS 등의 보안 어플라이언스는 Azure Marketplace와 VM 이미지 갤러리에서 사용할 수 있습니다. 고객은 이러한 어플라이언스를 가상 네트워크, 특히 보안 경계(경계 네트워크 서브넷 포함)에 배포하여 다중 계층 보안 네트워크 환경을 완성할 수 있습니다.
@@ -145,7 +144,7 @@ Microsoft에서는 클라우드 인프라 보호를 위해 상당한 투자를 �
 ### <a name="questions-to-be-asked-when-building-network-boundaries"></a>네트워크 경계 빌드 중 질문에 대한 대답
 이 섹션에서 특별히 언급하지 않은 한, 용어 "네트워크"를 말할 때는 구독 관리자가 만든 사설 Azure Virtual Network를 의미합니다. 이 용어가 Azure 내 기본 실제 네트워크를 의미하는 것은 아닙니다.
 
-또한 Azure Virtual Network는 기존 온-프레미스 네트워크를 확장하는 데도 종종 사용됩니다. 사이트 간 또는 Express 경로 하이브리드 네트워킹 솔루션을 경계 네트워크 아키텍처에 통합할 수 있습니다. 이 하이브리드 링크는 네트워크 보안 경계를 구성할 때 고려해야 하는 중요한 요소입니다.
+또한 Azure Virtual Network는 기존 온-프레미스 네트워크를 확장하는 데도 종종 사용됩니다. 사이트 간 또는 ExpressRoute 하이브리드 네트워킹 솔루션을 경계 네트워크 아키텍처에 통합할 수 있습니다. 이 하이브리드 링크는 네트워크 보안 경계를 구성할 때 고려해야 하는 중요한 요소입니다.
 
 경계 네트워크 및 다중 보안 경계와의 네트워크를 빌드할 때는 다음 3가지 중요한 질문을 고려해야 합니다.
 
@@ -206,7 +205,7 @@ Azure와 온-프레미스 네트워크 간에 경계가 필요할 경우 보안 
 - 서브넷 모두에 적용되는 네트워크 보안 그룹
 - 응용 프로그램 웹 서버("IIS01")를 나타내는 Windows 서버
 - 응용 프로그램 백 엔드 서버("AppVM01", "AppVM02")를 나타내는 두 Windows 서버
-- DNS 서버("DNS01")를 나타내는 Windows Server
+- DNS 서버("DNS01")를 나타내는 Windows 서버
 - 응용 프로그램 웹 서버에 연결된 공용 IP
 
 스크립트 및 Azure Resource Manager 템플릿은 [상세 빌드 지침][Example1]을 참조하세요.
@@ -222,7 +221,7 @@ Azure와 온-프레미스 네트워크 간에 경계가 필요할 경우 보안 
 선언적으로 인바운드 트래픽에 대해 다음 규칙이 빌드됩니다.
 
 1. 내부 DNS 트래픽(포트 53)이 허용됩니다.
-2. 인터넷에서 모든 가상 컴퓨터로 RDP 트래픽(포트 3389)가 허용됩니다.
+2. 인터넷에서 모든 Virtual Machine으로 RDP 트래픽(포트 3389)가 허용됩니다.
 3. 인터넷에서 웹 서버(IIS01)로 HTTP 트래픽(포트 80)이 허용됩니다.
 4. IIS01에서 AppVM1로 모든 트래픽(모든 포트)가 허용됩니다.
 5. 인터넷에서 전체 Virtual Network(두 서브넷)으로 모든 트래픽(모든 포트)가 거부됩니다.
@@ -255,7 +254,7 @@ Azure와 온-프레미스 네트워크 간에 경계가 필요할 경우 보안 
 * 네트워크 가상 어플라이언스(이 예제의 경우 프런트 엔드 서브넷에 연결된 방화벽)
 * 응용 프로그램 웹 서버("IIS01")를 나타내는 Windows 서버
 * 응용 프로그램 백 엔드 서버("AppVM01", "AppVM02")를 나타내는 두 Windows 서버
-* DNS 서버("DNS01")를 나타내는 Windows Server
+* DNS 서버("DNS01")를 나타내는 Windows 서버
 
 스크립트 및 Azure Resource Manager 템플릿은 [상세 빌드 지침][Example2]을 참조하세요.
 
@@ -270,7 +269,7 @@ Azure와 온-프레미스 네트워크 간에 경계가 필요할 경우 보안 
 선언적으로 인바운드 트래픽에 대해 다음 규칙이 빌드됩니다.
 
 1. 내부 DNS 트래픽(포트 53)이 허용됩니다.
-2. 인터넷에서 모든 가상 컴퓨터로 RDP 트래픽(포트 3389)가 허용됩니다.
+2. 인터넷에서 모든 Virtual Machine으로 RDP 트래픽(포트 3389)가 허용됩니다.
 3. 네트워크 가상 어플라이언스(방화벽)에 대한 모든 인터넷 트래픽(모든 포트)가 허용됩니다.
 4. IIS01에서 AppVM1로 모든 트래픽(모든 포트)가 허용됩니다.
 5. 인터넷에서 전체 Virtual Network(두 서브넷)으로 모든 트래픽(모든 포트)가 거부됩니다.
@@ -306,7 +305,7 @@ Azure와 온-프레미스 네트워크 간에 경계가 필요할 경우 보안 
 * 네트워크 가상 어플라이언스(이 예제의 경우 SecNet 서브넷에 연결된 방화벽)
 * 응용 프로그램 웹 서버("IIS01")를 나타내는 Windows 서버
 * 응용 프로그램 백 엔드 서버("AppVM01", "AppVM02")를 나타내는 두 Windows 서버
-* DNS 서버("DNS01")를 나타내는 Windows Server
+* DNS 서버("DNS01")를 나타내는 Windows 서버
 
 스크립트 및 Azure Resource Manager 템플릿은 [상세 빌드 지침][Example3]을 참조하세요.
 
@@ -351,7 +350,7 @@ VNETLocal은 항상 특정 네트워크의 가상 네트워크를 구성하는 �
 > [!NOTE]
 > 이제 UDR은 ExpressRoute 회로가 연결된 게이트웨이 서브넷에 적용될 수 있습니다.
 >
-> Express 경로 또는 사이트 간 네트워킹에서 경계 네트워크를 사용하도록 설정하는 방법은 예제 3과 4에 설명되어 있습니다.
+> ExpressRoute 또는 사이트 간 네트워킹에서 경계 네트워크를 사용하도록 설정하는 방법은 예제 3과 4에 설명되어 있습니다.
 >
 >
 
@@ -427,7 +426,7 @@ NVA(네트워크 가상 어플라이언스)를 사용한 하이브리드 네트�
 위의 그림에서 보듯이 인터넷을 통한 VPN 연결(사이트 간)을 사용하여 NVA를 통해 온-프레미스 네트워크를 Azure Virtual Network에 연결합니다.
 
 > [!NOTE]
-> Azure 공용 피어링 옵션을 활성화한 상태로 Express 경로를 사용할 경우, 고정 경로를 만들어야 합니다. 이 정적 경로는 ExpressRoute 연결을 경유하지 않고 회사 인터넷으로 NVA VPN IP 주소를 라우팅해야 합니다. ExpressRoute Azure 공용 피어링 옵션에 필요한 NAT가 VPN 세션을 차단할 수 있기 때문입니다.
+> Azure 공용 피어링 옵션을 활성화한 상태로 ExpressRoute를 사용할 경우, 고정 경로를 만들어야 합니다. 이 정적 경로는 ExpressRoute 연결을 경유하지 않고 회사 인터넷으로 NVA VPN IP 주소를 라우팅해야 합니다. ExpressRoute Azure 공용 피어링 옵션에 필요한 NAT가 VPN 세션을 차단할 수 있기 때문입니다.
 >
 >
 
@@ -463,7 +462,7 @@ Azure VPN 게이트웨이를 사용한 하이브리드 네트워킹을 예제 1 
 이전 그림에서 보듯이 인터넷을 통한 VPN 연결(사이트 간)을 사용하여 Azure VPN 게이트웨이를 통해 온-프레미스 네트워크를 Azure Virtual Network에 연결합니다.
 
 > [!NOTE]
-> Azure 공용 피어링 옵션을 활성화한 상태로 Express 경로를 사용할 경우, 고정 경로를 만들어야 합니다. 이 정적 경로는 ExpressRoute WAN을 경유하지 않고 회사 인터넷으로 NVA VPN IP 주소를 라우팅해야 합니다. ExpressRoute Azure 공용 피어링 옵션에 필요한 NAT가 VPN 세션을 차단할 수 있기 때문입니다.
+> Azure 공용 피어링 옵션을 활성화한 상태로 ExpressRoute를 사용할 경우, 고정 경로를 만들어야 합니다. 이 정적 경로는 ExpressRoute WAN을 경유하지 않고 회사 인터넷으로 NVA VPN IP 주소를 라우팅해야 합니다. ExpressRoute Azure 공용 피어링 옵션에 필요한 NAT가 VPN 세션을 차단할 수 있기 때문입니다.
 >
 >
 
@@ -488,9 +487,9 @@ Azure Virtual Network에 대한 사이트 간 VPN 하이브리드 네트워크 �
 [![16]][16]
 
 #### <a name="environment-description"></a>환경 설명
-Express 경로 사설 피어링 연결을 사용한 하이브리드 네트워킹은 예제 1 또는 2에서 설명한 경계 네트워크 유형에 추가할 수 있습니다.
+ExpressRoute 사설 피어링 연결을 사용한 하이브리드 네트워킹은 예제 1 또는 2에서 설명한 경계 네트워크 유형에 추가할 수 있습니다.
 
-위의 그림에서처럼 Express 경로 사설 피어링은 온-프레미스 네트워크와 Azure Virtual Network 간의 직접 연결을 제공합니다. 트래픽은 서비스 공급자 네트워크와 Microsoft Azure 네트워크만을 통과하며 인터넷에는 접촉하지 않습니다.
+위의 그림에서처럼 ExpressRoute 사설 피어링은 온-프레미스 네트워크와 Azure Virtual Network 간의 직접 연결을 제공합니다. 트래픽은 서비스 공급자 네트워크와 Microsoft Azure 네트워크만을 통과하며 인터넷에는 접촉하지 않습니다.
 
 > [!TIP]
 > ExpressRoute를 사용하여 기업 네트워크 트래픽을 인터넷과 분리합니다. Express 공급자로부터의 Service Level Agreements(서비스 수준 약정)도 허용됩니다. Azure 게이트웨이는 ExpressRoute를 통해 최대 10Gbps를 전달할 수 있지만, 사이트 간 VPN의 경우 Azure 게이트웨이 최대 처리량은 200Mbps입니다.
@@ -515,9 +514,9 @@ ExpressRoute 사설 피어링 네트워크 연결을 추가하면 안전하며 �
 ## <a name="references"></a>참조
 ### <a name="helpful-websites-and-documentation"></a>유용한 웹 사이트 및 설명서
 * Azure Resource Manager를 사용한 Azure 액세스:
-* PowerShell을 통한 Azure 액세스: [https://docs.microsoft.com/powershell/azureps-cmdlets-docs/](/powershell/azure/overview)
+* PowerShell을 사용하여 Azure 액세스: [https://docs.microsoft.com/powershell/azureps-cmdlets-docs/](/powershell/azure/overview)
 * 가상 네트워킹 설명서: [https://docs.microsoft.com/azure/virtual-network/](https://docs.microsoft.com/azure/virtual-network/)
-* 네트워크 보안 그룹 설명서: [https://docs.microsoft.com/azure/virtual-network/virtual-networks-nsg](virtual-network/virtual-networks-nsg.md)
+* 네트워크 보안 그룹 설명서: [https://docs.microsoft.com/azure/virtual-network/virtual-networks-nsg](virtual-network/security-overview.md)
 * 사용자 정의 라우팅 설명서: [https://docs.microsoft.com/azure/virtual-network/virtual-networks-udr-overview](virtual-network/virtual-networks-udr-overview.md)
 * Azure 가상 게이트웨이: [https://docs.microsoft.com/azure/vpn-gateway/](https://docs.microsoft.com/azure/vpn-gateway/)
 * 사이트 간 VPN: [https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-create-site-to-site-rm-powershell](vpn-gateway/vpn-gateway-create-site-to-site-rm-powershell.md)
@@ -539,8 +538,8 @@ ExpressRoute 사설 피어링 네트워크 연결을 추가하면 안전하며 �
 [13]: ./media/best-practices-network-security/example4networklogical.png "NVA 관점에서의 논리적 네트워크"
 [14]: ./media/best-practices-network-security/example5designoptions.png "사이트 간 하이브리드 네트워크를 통해 Azure 게이트웨이에 연결된 DMZ"
 [15]: ./media/best-practices-network-security/example5designs2s.png "사이트 간 VPN을 사용하는 Azure 게이트웨이가 있는 DMZ"
-[16]: ./media/best-practices-network-security/example6designoptions.png "Azure 게이트웨이 연결 Express 경로 하이브리드 네트워크가 있는 DMZ"
-[17]: ./media/best-practices-network-security/example6designexpressroute.png "Express 경로 연결을 사용하는 Azure 게이트웨이가 있는 DMZ"
+[16]: ./media/best-practices-network-security/example6designoptions.png "Azure 게이트웨이 연결 ExpressRoute 하이브리드 네트워크가 있는 DMZ"
+[17]: ./media/best-practices-network-security/example6designexpressroute.png "ExpressRoute 연결을 사용하는 Azure 게이트웨이가 있는 DMZ"
 
 <!--Link References-->
 [TrustCenter]: https://azure.microsoft.com/support/trust-center/compliance/
@@ -552,4 +551,3 @@ ExpressRoute 사설 피어링 네트워크 연결을 추가하면 안전하며 �
 [Example6]: ./virtual-network/virtual-networks-hybrid-expressroute-asm.md
 [Example7]: ./virtual-network/virtual-networks-vnet2vnet-direct-asm.md
 [Example8]: ./virtual-network/virtual-networks-vnet2vnet-transit-asm.md
-

@@ -15,11 +15,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 07/20/2016
 ms.author: jehollan
-translationtype: Human Translation
-ms.sourcegitcommit: b92f954680603891ced503a1134791312b5214f0
-ms.openlocfilehash: a992fa17a07d6167297c4cf5fe9fb3b58181d7df
-
-
+ms.openlocfilehash: 05dd4ae3c4ee439d66401a3f5595f9104051f8ee
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="get-started-with-the-query-action"></a>쿼리 작업 시작
 쿼리 작업을 사용하면 배치 및 배열을 통해 다음을 수행하는 워크플로를 완료할 수 있습니다.
@@ -27,7 +27,7 @@ ms.openlocfilehash: a992fa17a07d6167297c4cf5fe9fb3b58181d7df
 * 데이터베이스에서 모든 높은 우선순위 레코드에 대한 작업을 만듭니다.
 * 전자 메일에 대한 모든 PDF 첨부 파일을 Azure Blob에 저장합니다.
 
-논리 앱에서 쿼리 작업 사용을 시작하려면 [논리 앱 만들기](../logic-apps/logic-apps-create-a-logic-app.md)를 참조하세요.
+논리 앱에서 쿼리 작업 사용을 시작하려면 [논리 앱 만들기](../logic-apps/quickstart-create-first-logic-app-workflow.md)를 참조하세요.
 
 ## <a name="use-the-query-action"></a>쿼리 작업 사용
 작업은 논리 앱에 정의된 워크플로에 의해 수행되는 작업입니다. [작업에 대해 자세히 알아봅니다](connectors-overview.md).  
@@ -49,10 +49,12 @@ ms.openlocfilehash: a992fa17a07d6167297c4cf5fe9fb3b58181d7df
     이 작업은 필터 요구 사항을 충족하는 결과만 포함하는 새 배열을 출력합니다.
 6. 도구 모음의 왼쪽 위 모서리를 클릭하여 저장하면 논리 앱이 저장하고 게시합니다(활성화).
 
-## <a name="query-action"></a>쿼리 작업
-여기에는 이 커넥터가 지원하는 작업에 대한 세부 정보가 나와 있습니다. 커넥터에는 한 개의 가능한 작업이 있습니다.
+\* HTTP 끝점을 호출하고 JSON 응답을 수신하는 경우 _JSON 구문 분석_ 작업을 사용하여 JSON 응답을 구문 분석합니다. 이 단계를 수행하지 않으면 _필터 배열_에 본문만 표시되고 JSON 페이로드 구조는 알 수 없습니다.
 
-| 작업 | 설명 |
+## <a name="query-action"></a>쿼리 작업
+여기에는 이 커넥터가 지원하는 동작에 대한 세부 정보가 나와 있습니다. 커넥터에는 한 개의 가능한 작업이 있습니다.
+
+| 조치 | 설명 |
 | --- | --- |
 | 배열 필터링 |배열에 있는 각 항목에 대한 조건을 평가하고 결과를 반환 |
 
@@ -61,7 +63,7 @@ ms.openlocfilehash: a992fa17a07d6167297c4cf5fe9fb3b58181d7df
 
 ### <a name="filter-array"></a>배열 필터링
 HTTP 아웃바운드 요청을 하는 작업에 대한 입력 필드는 다음과 같습니다.
-*는 필수 필드임을 의미합니다.
+A*는 필수 필드 임을 의미합니다.
 
 | 표시 이름 | 속성 이름 | 설명 |
 | --- | --- | --- |
@@ -78,11 +80,5 @@ HTTP 요청에 대한 출력 세부 정보는 다음과 같습니다.
 | 필터링된 배열 |array |각 필터링된 결과에 대한 개체를 포함하는 배열 |
 
 ## <a name="next-steps"></a>다음 단계
-이제 플랫폼을 사용해 보고 [논리 앱을 만듭니다](../logic-apps/logic-apps-create-a-logic-app.md). [API 목록](apis-list.md)에서 논리 앱의 사용 가능한 다른 커넥터를 확인할 수 있습니다.
-
-
-
-
-<!--HONumber=Jan17_HO3-->
-
+이제 플랫폼을 사용해 보고 [논리 앱을 만듭니다](../logic-apps/quickstart-create-first-logic-app-workflow.md). [API 목록](apis-list.md)에서 논리 앱의 사용 가능한 다른 커넥터를 확인할 수 있습니다.
 

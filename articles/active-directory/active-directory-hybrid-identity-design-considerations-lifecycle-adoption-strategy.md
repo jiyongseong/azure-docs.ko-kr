@@ -1,10 +1,10 @@
 ---
-title: "Azure Active Directory 하이브리드 ID 설계 고려 사항 - 하이브리드 ID 수명 주기 채택 전략 확인 | Microsoft Docs"
+title: "Azure의 하이브리드 ID 디자인 - 수명 주기 채택 전략 | Microsoft Docs"
 description: "각 수명 주기 단계에 사용할 수 있는 옵션에 따라 하이브리드 ID 관리 작업을 정의하는 데 도움이 됩니다."
 documentationcenter: 
 services: active-directory
 author: billmath
-manager: femila
+manager: mtillman
 editor: 
 ms.assetid: 420b6046-bd9b-4fce-83b0-72625878ae71
 ms.service: active-directory
@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 07/18/2017
 ms.author: billmath
+ms.custom: seohack1
+ms.openlocfilehash: bfa74c7557819bbef334fc94eb42e5ba83cf3fee
+ms.sourcegitcommit: f1c1789f2f2502d683afaf5a2f46cc548c0dea50
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 18b40486a66d8e092a8af299460145989a1ab99d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/18/2018
 ---
 # <a name="determine-hybrid-identity-lifecycle-adoption-strategy"></a>하이브리드 ID 수명 주기 채택 전략 결정
 이 작업에서 하이브리드 ID 솔루션에 대한 ID 관리 전략을 정의하여 [하이브리드 ID 관리 작업 확인](active-directory-hybrid-identity-design-considerations-hybrid-id-management-tasks.md)에 정의된 비즈니스 요구 사항을 충족합니다.
@@ -100,5 +100,4 @@ ID 동기화 프로세스
 
 ## <a name="see-also"></a>참고 항목
 [설계 고려 사항 개요](active-directory-hybrid-identity-design-considerations-overview.md)
-
 

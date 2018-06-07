@@ -1,11 +1,11 @@
 ---
-title: "파일 수준의 SAP HANA Azure 백업 | Microsoft Docs"
-description: "Azure 가상 컴퓨터에는 SAP HANA에 대한 두 가지 주요 백업 방법이 있습니다. 이 문서에서는 파일 수준의 SAP HANA Azure 백업에 대해 설명합니다"
+title: 파일 수준의 SAP HANA Azure Backup | Microsoft Docs
+description: Azure 가상 머신에는 SAP HANA에 대한 두 가지 주요 백업 방법이 있습니다. 이 문서에서는 파일 수준의 SAP HANA Azure Backup에 대해 설명합니다
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: hermanndms
 manager: timlt
-editor: 
+editor: ''
 ms.service: virtual-machines-linux
 ms.devlang: NA
 ms.topic: article
@@ -13,21 +13,19 @@ ums.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 3/13/2017
 ms.author: rclaus
+ms.openlocfilehash: 5db0ceb1648b5afa278e1cbe1c42fce8033bfdc1
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: b7e17b83afb7306b74b8769f31188642b54566ca
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
-
-# <a name="sap-hana-azure-backup-on-file-level"></a>파일 수준의 SAP HANA Azure 백업
+# <a name="sap-hana-azure-backup-on-file-level"></a>파일 수준의 SAP HANA Azure Backup
 
 ## <a name="introduction"></a>소개
 
-이 문서는 3부로 구성된 SAP HANA 백업 관련 문서 시리즈의 일부입니다. [Azure Virtual Machines의 SAP HANA 백업 가이드](./sap-hana-backup-guide.md)에서 시작에 대한 개요와 정보를 제공하고, [저장소 스냅숏에 기반한 SAP HANA 백업](./sap-hana-backup-storage-snapshots.md)에서 저장소 스냅숏을 기반으로 하는 백업 옵션을 설명합니다.
+이 문서는 3부로 구성된 SAP HANA 백업 관련 문서 시리즈의 일부입니다. [Azure Virtual Machines의 SAP HANA Backup 가이드](./sap-hana-backup-guide.md)에서 시작에 대한 개요와 정보를 제공하고, [저장소 스냅숏에 기반한 SAP HANA 백업](./sap-hana-backup-storage-snapshots.md)에서 저장소 스냅숏을 기반으로 하는 백업 옵션을 설명합니다.
 
-Azure VM 크기를 살펴보면 GS5에서 64개 디스크가 연결된 데이터 디스크를 허용한다는 것을 알 수 있습니다. 대용량 SAP HANA 시스템의 경우 데이터와 로그 파일을 유지하는 데 많은 수의 디스크를 이미 사용하고 있으므로 소프트웨어 RAID와 결합하여 디스크 IO 처리량을 최적화할 수도 있습니다. 이 경우 SAP HANA 백업 파일을 어디에 저장할 것인지, 시간이 지남에 따라 연결된 데이터 디스크를 채울 수 있는지 등의 의문을 갖게 됩니다. Azure VM 크기 표에 대해서는 [Azure의 Linux 가상 컴퓨터 크기](../../linux/sizes.md)를 참조하세요.
+Azure VM 크기를 살펴보면 GS5에서 64개 디스크가 연결된 데이터 디스크를 허용한다는 것을 알 수 있습니다. 대용량 SAP HANA 시스템의 경우 데이터와 로그 파일을 유지하는 데 많은 수의 디스크를 이미 사용하고 있으므로 소프트웨어 RAID와 결합하여 디스크 IO 처리량을 최적화할 수도 있습니다. 이 경우 SAP HANA 백업 파일을 어디에 저장할 것인지, 시간이 지남에 따라 연결된 데이터 디스크를 채울 수 있는지 등의 의문을 갖게 됩니다. Azure VM 크기 표에 대해서는 [Azure의 Linux 가상 머신 크기](../../linux/sizes.md)를 참조하세요.
 
 현재 Azure Backup 서비스에서 사용할 수 있는 SAP HANA 백업 통합은 없습니다. 파일 수준에서 백업/복원을 관리하는 표준 방법은 SAP HANA Studio 또는 SAP HANA SQL 문을 통해 파일 기반 백업을 수행하는 것입니다. 자세한 내용은 [SAP HANA SQL 및 시스템 보기 참조](https://help.sap.com/hana/SAP_HANA_SQL_and_System_Views_Reference_en.pdf)(영문)를 참조하세요.
 
@@ -37,9 +35,9 @@ Azure VM 크기를 살펴보면 GS5에서 64개 디스크가 연결된 데이터
 
 간단하고 직관적인 선택으로 보이지만 몇 가지 고려 사항이 있습니다. 앞에서 설명한 대로 Azure VM에 연결할 수 있는 데이터 디스크의 수는 제한됩니다. 데이터베이스와 디스크 처리량 요구 사항의 크기에 따라 VM의 파일 시스템에 SAP HANA 백업 파일을 저장할 수 있는 용량이 부족할 수 있으므로 여러 데이터 디스크에서 스트라이핑을 사용하는 소프트웨어 RAID가 포함될 수 있습니다. 테라바이트 단위의 데이터를 처리할 때 이러한 백업 파일을 이동하고 파일 크기 제한과 성능을 관리하기 위한 다양한 옵션이 이 문서의 뒷부분에 나와 있습니다.
 
-전체 용량과 관련하여 더 많은 유연성을 제공하는 또 다른 옵션은 Azure Blob 저장소입니다. 단일 Blob은 1TB로 제한되지만, 단일 Blob 컨테이너의 총 용량은 현재 500TB입니다. 또한 고객은 소위 &quot;멋진&quot; Blob 저장소를 선택할 수 있으며, 이 경우 비용상의 혜택이 있습니다. 멋진 Blob 저장소에 대한 자세한 내용은 [Azure Blob Storage: 핫 및 쿨 저장소 계층](../../../storage/storage-blob-storage-tiers.md)을 참조하세요.
+전체 용량과 관련하여 더 많은 유연성을 제공하는 또 다른 옵션은 Azure Blob 저장소입니다. 단일 Blob은 1TB로 제한되지만, 단일 Blob 컨테이너의 총 용량은 현재 500TB입니다. 또한 고객은 소위 &quot;멋진&quot; Blob 저장소를 선택할 수 있으며, 이 경우 비용상의 혜택이 있습니다. 멋진 Blob 저장소에 대한 자세한 내용은 [Azure Blob Storage: 핫 및 쿨 저장소 계층](../../../storage/blobs/storage-blob-storage-tiers.md)을 참조하세요.
 
-보안을 강화하려면 지리적 복제된 저장소 계정을 사용하여 SAP HANA 백업을 저장합니다. 저장소 계정 복제에 대한 자세한 내용은 [Azure Storage 복제](../../../storage/storage-redundancy.md)를 참조하세요.
+보안을 강화하려면 지리적 복제된 저장소 계정을 사용하여 SAP HANA 백업을 저장합니다. 저장소 계정 복제에 대한 자세한 내용은 [Azure Storage 복제](../../../storage/common/storage-redundancy.md)를 참조하세요.
 
 지리적 복제된 전용 백업 저장소 계정에 SAP HANA 백업 전용 VHD를 배치할 수 있습니다. 그렇지 않으면 지리적 복제된 저장소 계정 또는 다른 지역에 있는 저장소 계정에 SAP HANA 백업을 보관하는 VHD를 복사할 수 있습니다.
 
@@ -51,7 +49,7 @@ Azure 백업은 전체 VM을 백업할 뿐만 아니라 게스트 OS에 설치�
 
 ## <a name="azure-blobxfer-utility-details"></a>Azure blobxfer 유틸리티 정보
 
-Azure 저장소에 디렉터리와 파일을 저장하려면 CLI 또는 PowerShell을 사용하거나 [Azure SDK](https://azure.microsoft.com/downloads/) 중 하나를 사용하여 도구를 개발할 수 있습니다. 또한 Azure 저장소에 데이터를 복사하는 데 즉시 사용할 수 있는 유틸리티인 AzCopy도 있지만, 이는 Windows 전용입니다([AzCopy 명령줄 유틸리티로 데이터 전송](../../../storage/storage-use-azcopy.md) 참조).
+Azure 저장소에 디렉터리와 파일을 저장하려면 CLI 또는 PowerShell을 사용하거나 [Azure SDK](https://azure.microsoft.com/downloads/) 중 하나를 사용하여 도구를 개발할 수 있습니다. 또한 Azure 저장소에 데이터를 복사하는 데 즉시 사용할 수 있는 유틸리티인 AzCopy도 있지만, 이는 Windows 전용입니다([AzCopy 명령줄 유틸리티로 데이터 전송](../../../storage/common/storage-use-azcopy.md) 참조).
 
 따라서 blobxfer 유틸리티가 SAP HANA 백업 파일을 복사하는 데 사용되었습니다. 이 유틸리티는 프로덕션 환경에서 많은 고객이 사용하는 오픈 소스이며 [GitHub](https://github.com/Azure/blobxfer)에서 사용할 수 있습니다. 이 도구를 사용하면 Azure Blob 저장소 또는 Azure 파일 공유에 데이터를 직접 복사할 수 있습니다. 또한 여러 파일이 있는 디렉터리를 복사하는 경우 md5 해시 또는 자동 병렬 처리와 같은 유용한 기능을 다양하게 제공합니다.
 
@@ -71,7 +69,7 @@ Azure 저장소에 디렉터리와 파일을 저장하려면 CLI 또는 PowerShe
 
 ## <a name="copy-sap-hana-backup-files-to-azure-blob-storage"></a>Azure Blob 저장소에 SAP HANA 백업 파일 복사
 
-2016년 12월 현재 SAP HANA 백업 파일을 신속하게 저장하는 가장 좋은 옵션은 Azure Blob 저장소입니다. Azure의 GS5 VM에서 실행되는 단일 Blob 컨테이너는 500TB 크기로 제한되지만, 대부분의 SAP HANA 시스템에 충분한 크기이며 SAP HANA 백업을 충분하게 유지할 수 있습니다. 고객은 &quot;핫&quot; 및 &quot;콜드&quot; Blob 저장소 중에서 선택할 수 있습니다([Azure Blob Storage: 핫 및 쿨 저장소 계층](../../../storage/storage-blob-storage-tiers.md) 참조).
+2016년 12월 현재 SAP HANA 백업 파일을 신속하게 저장하는 가장 좋은 옵션은 Azure Blob 저장소입니다. Azure의 GS5 VM에서 실행되는 단일 Blob 컨테이너는 500TB 크기로 제한되지만, 대부분의 SAP HANA 시스템에 충분한 크기이며 SAP HANA 백업을 충분하게 유지할 수 있습니다. 고객은 &quot;핫&quot; 및 &quot;콜드&quot; Blob 저장소 중에서 선택할 수 있습니다([Azure Blob Storage: 핫 및 쿨 저장소 계층](../../../storage/blobs/storage-blob-storage-tiers.md) 참조).
 
 blobxfer 도구를 사용하면 SAP HANA 백업 파일을 직접 Azure Blob 저장소에 쉽게 복사할 수 있습니다.
 
@@ -139,7 +137,7 @@ NFS 공유는 SAP HANA 서버와 같이 빠른 스트라이프 세트였습니�
 
 ## <a name="copy-sap-hana-backup-files-to-azure-file-service"></a>Azure 파일 서비스에 SAP HANA 백업 파일 복사
 
-Azure Linux VM 내에 Azure 파일 공유를 탑재할 수 있습니다. [Linux에서 Azure File Storage를 사용하는 방법](../../../storage/storage-how-to-use-files-linux.md) 문서에서 작업을 수행하는 방법에 대해 자세히 설명합니다. 현재 Azure 파일 공유당 5TB의 할당량 제한이 있으며, 파일당 파일 크기 제한은 1TB입니다. 저장소 제한에 대한 내용은 [Azure Storage 확장성 및 성능 목표](../../../storage/storage-scalability-targets.md)를 참조하세요.
+Azure Linux VM 내에 Azure 파일 공유를 탑재할 수 있습니다. [Linux에서 Azure File Storage를 사용하는 방법](../../../storage/files/storage-how-to-use-files-linux.md) 문서에서 작업을 수행하는 방법에 대해 자세히 설명합니다. 현재 Azure 파일 공유당 5TB의 할당량 제한이 있으며, 파일당 파일 크기 제한은 1TB입니다. 저장소 제한에 대한 내용은 [Azure Storage 확장성 및 성능 목표](../../../storage/common/storage-scalability-targets.md)를 참조하세요.
 
 그러나 테스트한 결과 SAP HANA 백업이 현재 이러한 종류의 CIFS 탑재와 직접 작동하지 않습니다. 또한 [SAP Note 1820529](https://launchpad.support.sap.com/#/notes/1820529)에서도 CIFS를 권장하지 않는다고 명시하고 있습니다.
 
@@ -158,7 +156,6 @@ Azure Linux VM 내에 Azure 파일 공유를 탑재할 수 있습니다. [Linux�
 Azure파일에 SAP HANA 백업 파일을 저장할 때 SAP HANA 파일 백업에서 이를 직접 지원하는 경우 이 작업은 향후 흥미로운 옵션이 될 수 있습니다. 또는 NFS를 통해 Azure 파일을 탑재할 수 있는 경우 최대 할당량 제한이 5TB보다 훨씬 큽니다.
 
 ## <a name="next-steps"></a>다음 단계
-* [Azure Virtual Machines의 SAP HANA 백업 가이드](sap-hana-backup-guide.md) - 시작에 대한 개요 및 정보를 제공합니다.
+* [Azure Virtual Machines의 SAP HANA Backup 가이드](sap-hana-backup-guide.md) - 시작에 대한 개요 및 정보를 제공합니다.
 * [저장소 스냅숏에 기반한 SAP HANA 백업](sap-hana-backup-storage-snapshots.md) - 저장소 스냅숏을 기반으로 하는 백업 옵션을 설명합니다.
 * [Azure의 SAP HANA(큰 인스턴스) 고가용성 및 재해 복구](hana-overview-high-availability-disaster-recovery.md) - Azure의 SAP HANA(큰 인스턴스)에 대한 고가용성 및 재해 복구 계획을 설정하는 방법을 알아봅니다.
-

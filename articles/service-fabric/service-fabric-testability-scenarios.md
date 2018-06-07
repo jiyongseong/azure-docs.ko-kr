@@ -1,6 +1,6 @@
 ---
-title: "Azure 마이크로 서비스에 대한 비정상 상황 및 장애 조치(Failover) 테스트 만들기 | Microsoft 문서"
-description: "서비스 패브릭 Chaos 테스트 및 장애 조치 테스트 시나리오를 통해 결함을 유도하고 서비스의 신뢰성을 확인합니다."
+title: Azure 마이크로 서비스에 대한 비정상 상황 및 장애 조치(Failover) 테스트 만들기 | Microsoft 문서
+description: 서비스 패브릭 Chaos 테스트 및 장애 조치 테스트 시나리오를 통해 결함을 유도하고 서비스의 신뢰성을 확인합니다.
 services: service-fabric
 documentationcenter: .net
 author: motanv
@@ -9,18 +9,16 @@ editor: toddabel
 ms.assetid: 8eee7e89-404a-4605-8f00-7e4d4fb17553
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 06/07/2017
 ms.author: motanv
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 7033955fa9c18b2fa1a28d488ad5268d598de287
-ms.openlocfilehash: 8975df6b0fe594b092c9890352c7b3787733d8db
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/24/2017
-
-
+ms.openlocfilehash: d9c05ba2b98af5ef26ef5b5a7ae0995512df4e75
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="testability-scenarios"></a>테스트 용이성 시나리오
 클라우드 인프라 같은 대규모 분산 시스템은 본질적으로 불안정합니다. Azure 서비스 패브릭은 개발자에게 불안정한 인프라를 기반으로 실행되는 서비스를 작성할 수 있는 기능을 제공합니다. 고품질 서비스를 작성하려면 개발자는 이처럼 불안정한 인프라에서 서비스의 안정성을 테스트하도록 유도할 수 있어야 합니다.
@@ -255,4 +253,3 @@ Connect-ServiceFabricCluster $connection
 
 Invoke-ServiceFabricFailoverTestScenario -TimeToRunMinute $timeToRun -MaxServiceStabilizationTimeoutSec $maxStabilizationTimeSecs -WaitTimeBetweenFaultsSec $waitTimeBetweenFaultsSec -ServiceName $serviceName -PartitionKindSingleton
 ```
-

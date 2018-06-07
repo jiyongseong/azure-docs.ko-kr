@@ -14,10 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/21/2016
 ms.author: manuaery
-translationtype: Human Translation
-ms.sourcegitcommit: c78eda33a64d630ba18aba6a174db372eb41dde9
 ms.openlocfilehash: a75e68c84a50977b162ca4d3a4a02936ca78cb6b
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-the-storsimple-device-manager-service-to-troubleshoot-the-storsimple-virtual-array"></a>StorSimple 장치 관리자 서비스를 사용하여 StorSimple 가상 배열 문제 해결
 ## <a name="overview"></a>개요
@@ -42,10 +43,4 @@ StorSimple 가상 배열에 발생하는 일반적인 문제 중 일부를 확�
 
 ## <a name="next-steps"></a>다음 단계
 [지원 티켓 사용](storsimple-virtual-array-log-support-ticket.md) 방법 알아보기
-
-
-
-
-<!--HONumber=Jan17_HO4-->
-
 

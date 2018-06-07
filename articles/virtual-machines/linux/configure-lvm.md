@@ -1,10 +1,10 @@
 ---
-title: "Linux를 실행하는 가상 컴퓨터에 LVM 구성 | Microsoft Docs"
-description: "Azure에서 Linux에 LVM을 구성하는 방법에 대해 알아봅니다."
+title: Linux를 실행하는 가상 머신에 LVM 구성 | Microsoft Docs
+description: Azure에서 Linux에 LVM을 구성하는 방법에 대해 알아봅니다.
 services: virtual-machines-linux
 documentationcenter: na
 author: szarkos
-manager: timlt
+manager: jeconnoc
 editor: tysonn
 tag: azure-service-management,azure-resource-manager
 ms.assetid: 7f533725-1484-479d-9472-6b3098d0aecc
@@ -15,15 +15,14 @@ ms.devlang: na
 ms.topic: article
 ms.date: 02/02/2017
 ms.author: szark
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 7926627aaa3f0da935131f491d927ab5cb4b35c9
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: 9a22426d0422585714cb78d541a84d55d2fce6e0
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="configure-lvm-on-a-linux-vm-in-azure"></a>Azure에서 Linux VM에 LVM 구성
-이 문서에서는 Azure 가상 컴퓨터의 LVM(논리 볼륨 관리자)을 구성하는 방법을 설명합니다. 가상 컴퓨터에 연결된 모든 디스크에 LVM을 구성할 수 있지만 기본적으로 대부분의 클라우드 이미지는 OS 디스크에 LVM을 구성하지 않습니다. 이는 OS 디스크가 동일한 배포와 형식의 다른 VM에 연결되어 있는 경우(예: 복구 시나리오 중), 중복 볼륨 그룹에 대한 문제를 방지하기 위함입니다. 따라서 데이터 디스크에만 LVM을 사용하는 것이 좋습니다.
+이 문서에서는 Azure 가상 컴퓨터의 LVM(논리 볼륨 관리자)을 구성하는 방법을 설명합니다. 가상 머신에 연결된 모든 디스크에 LVM을 구성할 수 있지만 기본적으로 대부분의 클라우드 이미지는 OS 디스크에 LVM을 구성하지 않습니다. 이는 OS 디스크가 동일한 배포와 형식의 다른 VM에 연결되어 있는 경우(예: 복구 시나리오 중), 중복 볼륨 그룹에 대한 문제를 방지하기 위함입니다. 따라서 데이터 디스크에만 LVM을 사용하는 것이 좋습니다.
 
 ## <a name="linear-vs-striped-logical-volumes"></a>선형 및 스트라이프 논리 볼륨 비교
 LVM을 사용하여 단일 저장소 볼륨에 여러 실제 디스크를 결합할 수 있습니다. 기본적으로 LVM은 일반적으로 선형 논리 볼륨을 만듭니다. 즉, 실제 저장소가 함께 연결되어 있습니다. 이 경우 일반적으로 읽기/쓰기 작업은 단일 디스크로만 전송됩니다. 반면 읽기 및 쓰기가 볼륨 그룹에 포함된 여러 디스크에 분산되는 스트라이프 논리 볼륨을 만들 수도 있습니다(예: RAID0과 유사함). 성능상의 이유로 논리 볼륨을 스트라이프하여 읽기 및 쓰기가 연결된 모든 데이터 디스크를 사용하는 것이 좋습니다.
@@ -31,7 +30,7 @@ LVM을 사용하여 단일 저장소 볼륨에 여러 실제 디스크를 결합
 이 문서에는 여러 개의 데이터 디스크를 단일 볼륨 그룹으로 결합한 다음 스트라이프 논리 볼륨을 만드는 방법을 설명합니다. 아래 단계는 대부분의 배포로 작업하도록 다소 일반화되어 있습니다. 대부분의 경우 Azure의 LVM을 관리하기 위한 유틸리티 및 워크플로는 다른 환경과 근본적으로 다릅니다. 늘 그렇듯이 특정 배포로 LVM을 사용하는 설명서 및 모범 사례의 경우 Linux 공급업체에도 문의하시기 바랍니다.
 
 ## <a name="attaching-data-disks"></a>데이터 디스크 연결
-하나의 디스크가 LVM을 사용하는 경우 일반적으로 두 개 이상의 빈 데이터 디스크로 시작합니다. IO 요구 사항에 따라 표준 저장소에 저장된 디스크(디스크당 최대 500IO/ps) 또는 프리미엄 저장소에 저장된 디스크(디스크당 최대 5000IO/ps)를 연결할 수 있습니다. Linux 가상 컴퓨터에 데이터 디스크를 프로비전 및 연결하는 방법은 이 문서에서 자세히 다루지 않습니다. Azure에서 빈 데이터 디스크를 Linux 가상 컴퓨터에 연결하는 방법에 대한 자세한 내용은 Microsoft Azure 문서 [디스크 연결](add-disk.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)을 참조하세요.
+하나의 디스크가 LVM을 사용하는 경우 일반적으로 두 개 이상의 빈 데이터 디스크로 시작합니다. IO 요구 사항에 따라 Standard Storage에 저장된 디스크(디스크당 최대 500IO/ps) 또는 Premium Storage에 저장된 디스크(디스크당 최대 5000IO/ps)를 연결할 수 있습니다. Linux 가상 컴퓨터에 데이터 디스크를 프로비전 및 연결하는 방법은 이 문서에서 자세히 다루지 않습니다. Azure에서 빈 데이터 디스크를 Linux 가상 머신에 연결하는 방법에 대한 자세한 내용은 Microsoft Azure 문서 [디스크 연결](add-disk.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) 을 참조하세요.
 
 ## <a name="install-the-lvm-utilities"></a>LVM 유틸리티 설치
 * **Ubuntu**
@@ -178,4 +177,3 @@ Linux VM에서 TRIM 지원을 사용하는 두 가지 방법이 있습니다. �
     # sudo yum install util-linux
     # sudo fstrim /datadrive
     ```
-

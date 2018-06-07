@@ -14,13 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/27/2016
 ms.author: LADocs; padmavc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a30a90682948b657fb31dd14101172282988cbf0
-ms.openlocfilehash: a7920b2509fe368c6f7d55e17fe0bf0020c4562c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.openlocfilehash: 4acae9f1837069c494985ff1456979490485f609
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="decode-as2-messages-for-azure-logic-apps-with-the-enterprise-integration-pack"></a>엔터프라이즈 통합 팩이 포함된 Azure Logic Apps에 대한 AS2 메시지 디코딩 
 
@@ -37,7 +35,7 @@ ms.lasthandoff: 07/06/2017
 
 ## <a name="decode-as2-messages"></a>AS2 메시지 디코딩
 
-1. [논리 앱 만들기](../logic-apps/logic-apps-create-a-logic-app.md)
+1. [논리 앱 만들기](../logic-apps/quickstart-create-first-logic-app-workflow.md)
 
 2. AS2 메시지 디코딩 커넥터에는 트리거가 없으므로 요청 트리거와 마찬가지로 논리 앱을 시작하는 트리거를 추가해야 합니다. Logic App Designer에서 트리거를 추가하고 작업을 논리 앱에 추가합니다.
 
@@ -51,7 +49,7 @@ ms.lasthandoff: 07/06/2017
 
     별표가 있는 속성은 필수 사항입니다.
 
-    | 속성 | 세부 정보 |
+    | 자산 | 세부 정보 |
     | --- | --- |
     | 연결 이름 * |연결의 이름을 입력합니다. |
     | 통합 계정 * |통합 계정의 이름을 입력합니다. 통합 계정 및 논리 앱이 동일한 Azure 위치에 있어야 합니다. |
@@ -64,7 +62,7 @@ ms.lasthandoff: 07/06/2017
    
     ![통합 연결 생성](media/logic-apps-enterprise-integration-as2-decode/as2decodeimage4.png) 
 
-    예:
+    예: 
 
     ![요청 출력에서 본문 및 헤더를 선택합니다.](media/logic-apps-enterprise-integration-as2-decode/as2decodeimage5.png) 
 
@@ -93,5 +91,4 @@ AS2 디코딩 커넥터는 다음과 같은 태스크를 수행합니다.
 
 ## <a name="next-steps"></a>다음 단계
 [엔터프라이즈 통합 팩에 대해 자세히 알아보기](logic-apps-enterprise-integration-overview.md) 
-
 

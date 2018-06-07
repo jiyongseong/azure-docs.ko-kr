@@ -1,6 +1,6 @@
 ### <a name="prerequisites"></a>필수 조건
 * Azure 계정의 경우 [무료 계정](https://azure.microsoft.com/free)
-* [Azure Blob Storage 계정](../articles/storage/storage-create-storage-account.md)은 저장소 계정 이름 및 해당 선택키를 포함합니다. 이 정보는 Azure 포털에서 저장소 계정의 속성에 나열됩니다. [Azure Storage](../articles/storage/storage-introduction.md)에 대해 자세히 읽어봅니다.
+* [Azure Blob Storage 계정](../articles/storage/common/storage-create-storage-account.md)은 저장소 계정 이름 및 해당 선택키를 포함합니다. 이 정보는 Azure 포털에서 저장소 계정의 속성에 나열됩니다. [Azure Storage](../articles/storage/common/storage-introduction.md)에 대해 자세히 읽어봅니다.
 
 논리 앱에서 Azure Blob 저장소 계정을 사용하기 전에 Azure Blob 저장소 계정에 연결합니다. Azure Portal의 논리 앱 내에서 이 작업을 쉽게 수행할 수 있습니다.  
 

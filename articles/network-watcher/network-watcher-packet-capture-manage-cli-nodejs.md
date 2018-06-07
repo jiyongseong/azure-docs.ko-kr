@@ -1,11 +1,11 @@
 ---
-title: "Azure Network Watcher를 사용하여 패킷 캡처 관리 - Azure CLI 1.0 | Microsoft Docs"
-description: "이 페이지에서는 Azure CLI 1.0을 사용하여 Network Watcher의 패킷 캡처 기능을 관리하는 방법에 대해 설명합니다."
+title: Azure Network Watcher를 사용하여 패킷 캡처 관리 - Azure CLI 1.0 | Microsoft Docs
+description: 이 페이지에서는 Azure CLI 1.0을 사용하여 Network Watcher의 패킷 캡처 기능을 관리하는 방법에 대해 설명합니다.
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: cb0c1d10-f7f2-4c34-b08c-f73452430be8
 ms.service: network-watcher
 ms.devlang: na
@@ -13,19 +13,18 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c785ad8dbfa427d69501f5f142ef40a2d3530f9e
-ms.openlocfilehash: 91588910334859c1ea77186674d5bfb31b311b36
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
+ms.author: jdial
+ms.openlocfilehash: c74d1a94971495f7cd5f5bed42b33869fa9710d9
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32185388"
 ---
-
 # <a name="manage-packet-captures-with-azure-network-watcher-using-azure-cli-10"></a>Azure CLI 1.0에서 Azure Network Watcher를 사용하여 패킷 캡처 관리
 
 > [!div class="op_single_selector"]
-> - [Azure 포털](network-watcher-packet-capture-manage-portal.md)
+> - [Azure Portal](network-watcher-packet-capture-manage-portal.md)
 > - [PowerShell](network-watcher-packet-capture-manage-powershell.md)
 > - [CLI 1.0](network-watcher-packet-capture-manage-cli-nodejs.md)
 > - [CLI 2.0](network-watcher-packet-capture-manage-cli.md)
@@ -47,16 +46,16 @@ Network Watcher 패킷 캡처를 사용하면 가상 컴퓨터 간에 트래픽�
 이 문서에서는 사용자에게 다음 리소스가 있는 것으로 가정합니다.
 
 - 패킷 캡처를 만들려는 영역의 Network Watcher 인스턴스
-- 패킷 캡처 확장을 사용하는 가상 컴퓨터
+- 패킷 캡처 확장을 사용하는 Virtual Machine
 
 > [!IMPORTANT]
-> 패킷 캡처에는 가상 컴퓨터에서 실행되는 에이전트가 필요합니다. 에이전트는 확장으로 설치됩니다. VM 확장에 대한 지침은 [Virtual Machine 확장 및 기능](../virtual-machines/windows/extensions-features.md)을 참조하세요.
+> 패킷 캡처에는 가상 머신에서 실행되는 에이전트가 필요합니다. 에이전트는 확장으로 설치됩니다. VM 확장에 대한 지침은 [Virtual Machine 확장 및 기능](../virtual-machines/windows/extensions-features.md)을 참조하세요.
 
 ## <a name="install-vm-extension"></a>VM 확장 설치
 
 ### <a name="step-1"></a>1단계
 
-`azure vm extension set` cmdlet을 실행하여 게스트 가상 컴퓨터에 패킷 캡처 에이전트를 설치합니다.
+ph x="1" /> cmdlet을 실행하여 게스트 가상 머신에 패킷 캡처 에이전트를 설치합니다.
 
 Windows Virtual Machines의 경우:
 
@@ -64,15 +63,15 @@ Windows Virtual Machines의 경우:
 azure vm extension set -g resourceGroupName -m virtualMachineName -p Microsoft.Azure.NetworkWatcher -r AzureNetworkWatcherExtension -n NetworkWatcherAgentWindows -o 1.4
 ```
 
-Linux 가상 컴퓨터의 경우:
+Linux 가상 머신의 경우:
 
 ```azurecli
 azure vm extension set -g resourceGroupName -m virtualMachineName -p Microsoft.Azure.NetworkWatcher -r AzureNetworkWatcherExtension -n NetworkWatcherAgentLinux -o 1.4
 ````
 
-### <a name="step-2"></a>2단계:
+### <a name="step-2"></a>2단계
 
-에이전트가 설치되어 있는지 확인하려면 `vm extension get` cmdlet을 실행하고 리소스 그룹과 가상 컴퓨터 이름을 전달합니다. 결과 목록을 확인하여 에이전트가 설치되어 있는지 확인합니다.
+에이전트가 설치되어 있는지 확인하려면 `vm extension get` cmdlet을 실행하고 리소스 그룹과 가상 머신 이름을 전달합니다. 결과 목록을 확인하여 에이전트가 설치되어 있는지 확인합니다.
 
 ```azurecli
 azure vm extension get -g resourceGroupName -m virtualMachineName
@@ -91,7 +90,7 @@ info:    vm extension get command OK
 
 ## <a name="start-a-packet-capture"></a>패킷 캡처 시작
 
-이전 단계가 완료되면 패킷 캡처 에이전트는 가상 컴퓨터에 설치됩니다.
+이전 단계가 완료되면 패킷 캡처 에이전트는 가상 머신에 설치됩니다.
 
 ### <a name="step-1"></a>1단계
 
@@ -220,9 +219,8 @@ https://{storageAccountName}.blob.core.windows.net/network-watcher-logs/subscrip
 
 ## <a name="next-steps"></a>다음 단계
 
-[경고로 트리거된 패킷 캡처 만들기](network-watcher-alert-triggered-packet-capture.md)를 확인하여 가상 컴퓨터 경고로 패킷 캡처를 자동화하는 방법을 알아봅니다.
+[경고로 트리거된 패킷 캡처 만들기](network-watcher-alert-triggered-packet-capture.md)를 확인하여 가상 머신 경고로 패킷 캡처를 자동화하는 방법을 알아봅니다.
 
-[IP 흐름 확인 확인](network-watcher-check-ip-flow-verify-portal.md)을 방문하여 특정 트래픽이 VM에서 허용되는지 알아봅니다.
+[IP 흐름 확인 확인](diagnose-vm-network-traffic-filtering-problem.md)을 방문하여 특정 트래픽이 VM에서 허용되는지 알아봅니다.
 
 <!-- Image references -->
-

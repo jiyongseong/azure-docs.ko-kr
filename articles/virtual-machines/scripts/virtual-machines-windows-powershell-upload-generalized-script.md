@@ -13,17 +13,15 @@ ms.devlang: na
 ms.topic: sample
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
-ms.date: 05/18/2017
+ms.date: 01/02/2017
 ms.author: cynthn
 ms.custom: mvc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5edc47e03ca9319ba2e3285600703d759963e1f3
-ms.openlocfilehash: f4b5b6767a6f870020d558155933caef417f0639
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/01/2017
-
+ms.openlocfilehash: 9534ce2a32ac57a441535cfa26f2981b804182d1
+ms.sourcegitcommit: 9ea2edae5dbb4a104322135bef957ba6e9aeecde
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/03/2018
 ---
-
 # <a name="sample-script-to-upload-a-vhd-to-azure-and-create-a-new-vm"></a>Azure에 VHD를 업로드하고 새 VM을 만드는 샘플 스크립트
 
 이 스크립트는 일반화된 VM에서 로컬 .vhd 파일을 가져와서 Azure에 업로드하고, Managed Disk 이미지를 만들고, 새 VM을 만드는 데 사용합니다.
@@ -130,11 +128,11 @@ Remove-AzureRmResourceGroup -Name $resourceGroup
 
 이 스크립트는 다음 명령을 사용하여 배포합니다. 테이블에 있는 각 항목은 명령에 해당하는 문서에 연결됩니다.
 
-| 명령                                                                                                             | 참고 사항                                                                                                                                                                                |
+| 명령                                                                                                             | 메모                                                                                                                                                                                |
 |---------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [New-AzureRmResourceGroup](/powershell/module/azurerm.resources/new-azurermresourcegroup)                           | 모든 리소스가 저장되는 리소스 그룹을 만듭니다.                                                                                                                          |
 | [New-AzureRmStorageAccount](/powershell/module/azurerm.resources/new-azurermstorageaccount)                         | 저장소 계정을 만듭니다.                                                                                                                                                           |
-| [Add-AzureRmVhd](/powershell/module/azurerm.resources/add-azurermvhd)                                               | 온-프레미스 가상 컴퓨터에서 Azure의 클라우드 저장소 계정에 있는 blob으로 가상 하드 디스크를 업로드합니다.                                                                       |
+| [Add-AzureRmVhd](/powershell/module/azurerm.resources/add-azurermvhd)                                               | 온-프레미스 가상 머신에서 Azure의 클라우드 저장소 계정에 있는 blob으로 가상 하드 디스크를 업로드합니다.                                                                       |
 | [New-AzureRmImageConfig](/powershell/module/azurerm.resources/new-azurermimageconfig)                               | 구성 가능한 이미지 개체를 만듭니다.                                                                                                                                                 |
 | [Set-AzureRmImageOsDisk](/powershell/module/azurerm.resources/set-azurermimageosdisk)                               | 이미지 개체의 운영 체제 디스크 속성을 설정합니다.                                                                                                                        |
 | [New-AzureRmImage](/powershell/module/azurerm.resources/new-azurermimage)                                           | 새 이미지를 만듭니다.                                                                                                                                                                 |
@@ -146,16 +144,15 @@ Remove-AzureRmResourceGroup -Name $resourceGroup
 | [New-AzureRmNetworkSecurityGroup](/powershell/module/azurerm.resources/new-azurermnetworksecuritygroup)             | 네트워크 보안 그룹을 만듭니다.                                                                                                                                                    |
 | [Get-AzureRmVirtualNetwork](/powershell/module/azurerm.resources/get-azurermvirtualnetwork)                         | 리소스 그룹의 가상 네트워크를 가져옵니다.                                                                                                                                          |
 | [New-AzureRmVMConfig](/powershell/module/azurerm.resources/new-azurermvmconfig)                                     | VM 구성을 만듭니다. 이 구성은 VM 이름, 운영 체제 및 관리자 자격 증명 등의 정보를 포함합니다. 이 구성은 VM을 만드는 중에 사용됩니다. |
-| [Set-AzureRmVMSourceImage](/powershell/module/azurerm.resources/set-azurermvmsourceimage)                           | 가상 컴퓨터에 대한 이미지를 지정합니다.                                                                                                                                            |
-| [Set-AzureRmVMOSDisk](/powershell/module/azurerm.resources/set-azurermvmosdisk)                                     | 가상 컴퓨터의 운영 체제 디스크 속성을 설정합니다.                                                                                                                      |
-| [Set-AzureRmVMOperatingSystem](/powershell/module/azurerm.resources/set-azurermvmoperatingsystem)                   | 가상 컴퓨터의 운영 체제 디스크 속성을 설정합니다.                                                                                                                      |
-| [Add-AzureRmVMNetworkInterface](/powershell/module/azurerm.resources/add-azurermvmnetworkinterface)                 | 가상 컴퓨터에 네트워크 인터페이스를 추가합니다.                                                                                                                                       |
-| [New-AzureRmVM](/powershell/module/azurerm.resources/new-azurermvm)                                                 | 가상 컴퓨터를 만듭니다.                                                                                                                                                            |
+| [Set-AzureRmVMSourceImage](/powershell/module/azurerm.resources/set-azurermvmsourceimage)                           | 가상 머신에 대한 이미지를 지정합니다.                                                                                                                                            |
+| [Set-AzureRmVMOSDisk](/powershell/module/azurerm.resources/set-azurermvmosdisk)                                     | 가상 머신의 운영 체제 디스크 속성을 설정합니다.                                                                                                                      |
+| [Set-AzureRmVMOperatingSystem](/powershell/module/azurerm.resources/set-azurermvmoperatingsystem)                   | 가상 머신의 운영 체제 디스크 속성을 설정합니다.                                                                                                                      |
+| [Add-AzureRmVMNetworkInterface](/powershell/module/azurerm.resources/add-azurermvmnetworkinterface)                 | 가상 머신에 네트워크 인터페이스를 추가합니다.                                                                                                                                       |
+| [New-AzureRmVM](/powershell/module/azurerm.resources/new-azurermvm)                                                 | 가상 머신을 만듭니다.                                                                                                                                                            |
 | [Remove-AzureRmResourceGroup](/powershell/module/azurerm.resources/remove-azurermresourcegroup)                     | 리소스 그룹 및 포함된 모든 리소스를 제거합니다.                                                                                                                         |
 
 ## <a name="next-steps"></a>다음 단계
 
 Azure PowerShell 모듈에 대한 자세한 내용은 [Azure PowerShell 설명서](/powershell/azure/overview)를 참조하세요.
 
-추가 가상 컴퓨터 PowerShell 스크립트 샘플은 [Azure Windows VM 설명서](../windows/powershell-samples.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)에서 확인할 수 있습니다.
-
+추가 가상 머신 PowerShell 스크립트 샘플은 [Azure Windows VM 설명서](../windows/powershell-samples.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)에서 확인할 수 있습니다.

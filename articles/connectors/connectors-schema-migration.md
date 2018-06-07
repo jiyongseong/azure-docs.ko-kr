@@ -15,11 +15,11 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.date: 08/23/2016
 ms.author: deonhe
-translationtype: Human Translation
-ms.sourcegitcommit: 30abc823a72431dfd12f1051434191ea904533f6
 ms.openlocfilehash: a5a73a9f124e5339b61dbc49021444a208a471f0
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="how-to-migrate-logic-apps-to-schema-version-2015-08-01-preview"></a>스키마 버전 2015-08-01-미리 보기에 논리 앱을 마이그레이션하는 방법
 기존 논리 앱을 새 스키마로 이동하려면 다음을 수행합니다.  
@@ -50,11 +50,5 @@ ms.openlocfilehash: a5a73a9f124e5339b61dbc49021444a208a471f0
 
 
 
-
-
-
-
-
-<!--HONumber=Jan17_HO3-->
 
 

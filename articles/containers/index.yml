@@ -1,0 +1,103 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: 컨테이너용 Azure
+metadata:
+  document_id: 
+  title: 컨테이너용 Azure - 자습서, API 참조
+  description: 컨테이너에 대한 훌륭한 빠른 시작, 자습서 및 도구를 찾아볼 수 있는 아래 리소스를 사용하여 Azure에서 앱 개발을 시작합니다.
+  keywords: Azure, 컨테이너, Docker, API, Kubernetes
+  author: bketelsen
+  ms.author: brketels
+  manager: listonb
+  ms.date: 09/14/2017
+  ms.topic: article
+  ms.prod: azure
+  featureFlags:
+  - clicktale
+  ms.technology: azure
+  ms.devlang: multiple
+  ms.service: multiple
+  ms.openlocfilehash: 39de19dc8c536d33150b9da368a2236ef8571ef3
+  ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 05/07/2018
+sections:
+- items:
+  - type: markdown
+    text: >
+      컨테이너에 대한 훌륭한 자습서 및 도구를 찾아볼 수 있는 아래 리소스를 사용하여 Azure에서 앱 개발을 시작합니다.
+- items:
+  - type: list
+    style: cards
+    className: cardsM
+    columns: 2
+    items:
+    - href: https://docs.microsoft.com/azure/container-instances/container-instances-quickstart
+      html: <p>Azure Container Instances와 컨테이너화된 앱 만들기</p>
+      image:
+        src: https://docs.microsoft.com/media/common/i_get-started.svg
+      title: 시작
+    - href: https://docs.microsoft.com/azure/container-service/kubernetes/cli-samples
+      html: <p>Azure Container Service에 대한 Azure CLI 샘플</p>
+      image:
+        src: https://docs.microsoft.com/media/common/i_code-samples.svg
+      title: 코드 샘플
+- title: 5분 빠른 시작
+  items:
+  - type: paragraph
+    text: Azure 서비스로 컨테이너를 사용하는 방법을 알아봅니다.
+  - type: list
+    style: cards
+    className: cardsM
+    columns: 2
+    items:
+    - href: ../aks/kubernetes-walkthrough.md
+      title: AKS(Azure Kubernetes Service)를 사용하여 Kubernetes 클러스터 만들기
+      image:
+        src: /azure/media/index/ContainerService.svg
+    - href: https://docs.microsoft.com/azure/service-fabric/service-fabric-quickstart-containers
+      title: Service Fabric을 사용하여 Windows 컨테이너 응용 프로그램 배포
+      image:
+        src: /azure/media/index/Fabric.svg
+    - href: https://docs.microsoft.com/azure/app-service/containers/quickstart-docker-go
+      title: 컨테이너용 Azure Web Apps로 컨테이너화된 앱 만들기
+      image:
+        src: https://docs.microsoft.com/media/logos/logo_linux.svg
+    - href: https://docs.microsoft.com/azure/container-registry/container-registry-get-started-azure-cli
+      title: Azure Container Registry에서 개인 Docker 레지스트리 만들기
+      image:
+        src: /azure/media/index/container-registry.svg
+- title: Azure 및 컨테이너에 대한 무료 Pluralsight 동영상 교육
+  items:
+  - type: list
+    style: cards
+    className: cardsM
+    columns: 3
+    items:
+    - href: https://www.pluralsight.com/courses/azure-vms-getting-started?twoid=d6abac77-7dcc-4d33-9e03-f85e78989f02
+      image:
+        src: https://docs.microsoft.com/media/logos/logo_pluralsight.svg
+      title: Microsoft Azure Virtual Machines - 시작
+- title: 샘플
+  items:
+  - type: list
+    style: unordered
+    items:
+    - html: <a href="https://azure.microsoft.com/resources/samples/app-service-java-deploy-image-from-acr-to-linux/">서비스로 시작 - 컨테이너 레지스트리로 Linux 웹앱 관리 - Java</a>
+    - html: <a href="https://azure.microsoft.com/resources/samples/service-fabric-containers/">Service Fabric 컨테이너 샘플</a>
+    - html: <a href="https://azure.microsoft.com/resources/samples/container-service-python-manage/">Azure 클러스터의 Docker 컨테이너에 배포 및 연결(영문)</a>
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: AKS(Azure Kubernetes Service)를 사용하는 방법을 알아봅니다.
+  - type: list
+    style: unordered
+    items:
+    - html: <a href="/azure/aks/tutorial-kubernetes-prepare-app">응용 프로그램에서 컨테이너 이미지 만들기</a>
+    - html: <a href="/azure/aks/tutorial-kubernetes-prepare-acr">Azure Container Registry에 컨테이너 이미지 업로드</a>
+    - html: <a href="/azure/aks/tutorial-kubernetes-deploy-cluster">AKS 클러스터 배포</a>
+    - html: <a href="/azure/aks/tutorial-kubernetes-deploy-application">Kubernetes에서 컨테이너 이미지 실행</a>
+    - html: <a href="/azure/aks/tutorial-kubernetes-scale">응용 프로그램 및 Kubernetes 인프라 크기 조정</a>
+    - html: <a href="/azure/aks/tutorial-kubernetes-app-update">Kubernetes에서 실행 중인 응용 프로그램 업데이트</a>
+    - html: <a href="/azure/aks/tutorial-kubernetes-monitor">Log Analytics를 사용하여 Kubernetes 모니터링</a>

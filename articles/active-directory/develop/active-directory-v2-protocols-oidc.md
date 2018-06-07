@@ -1,27 +1,28 @@
 ---
-title: "Azure Active Directory v2.0 및 OpenID Connect 프로토콜 | Microsoft Docs"
-description: "OpenID Connect 인증 프로토콜의 Azure AD v2.0 구현을 사용하여 웹 응용 프로그램을 빌드합니다."
+title: Azure Active Directory v2.0 및 OpenID Connect 프로토콜 | Microsoft Docs
+description: OpenID Connect 인증 프로토콜의 Azure AD v2.0 구현을 사용하여 웹 응용 프로그램을 빌드합니다.
 services: active-directory
-documentationcenter: 
-author: dstrockis
-manager: mbaldwin
-editor: 
+documentationcenter: ''
+author: CelesteDG
+manager: mtillman
+editor: ''
 ms.assetid: a4875997-3aac-4e4c-b7fe-2b4b829151ce
 ms.service: active-directory
+ms.component: develop
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 02/08/2017
-ms.author: dastrock
+ms.date: 04/18/2018
+ms.author: celested
+ms.reviewer: hirsin
 ms.custom: aaddev
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 3d5ad974c01e0ee3954da4f990da87338b2d1756
-ms.openlocfilehash: 63b7e8bda46858d92dc128befdeb189cab53680f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/23/2017
-
-
+ms.openlocfilehash: a0cd077b1c6530c5794c92f131dffb814f5b341d
+ms.sourcegitcommit: e14229bb94d61172046335972cfb1a708c8a97a5
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/14/2018
+ms.locfileid: "34157720"
 ---
 # <a name="azure-active-directory-v20-and-the-openid-connect-protocol"></a>Azure Active Directory v2.0 및 OpenID Connect 프로토콜
 OpenID Connect는 웹 응용 프로그램에 사용자를 안전하게 로그인하는 데 사용할 수 있는 OAuth 2.0 기반의 인증 프로토콜입니다. v2.0 끝점의 OpenID Connect 구현을 사용하는 경우 로그인 및 API 액세스를 웹 기반 앱에 추가할 수 있습니다. 이 문서에서는 언어 독립적인 방식으로 이를 수행하는 방법을 보여 주며, Microsoft 오픈 소스 라이브러리를 사용하지 않고 HTTP 메시지를 보내고 받는 방법을 설명합니다.
@@ -31,7 +32,7 @@ OpenID Connect는 웹 응용 프로그램에 사용자를 안전하게 로그인
 > 
 > 
 
-[OpenID Connect](http://openid.net/specs/openid-connect-core-1_0.html)는 OAuth를 통해 Single Sign-On을 수행할 수 있도록 OAuth 2.0 *권한 부여* 프로토콜을 확장하여 *인증* 프로토콜로 사용합니다. OpenID Connect는 클라이언트가 사용자 ID를 확인할 수 있게 하는 보안 토큰인 *ID 토큰*의 개념을 소개합니다. ID 토큰은 사용자에 대한 기본 프로필 정보도 가져옵니다. OpenID Connect는 OAuth 2.0을 확장하기 때문에 앱에서 [권한 부여 서버](active-directory-v2-protocols.md#the-basics)로 보안이 유지되는 리소스에 액세스하는 데 사용할 수 있는 *액세스 토큰*을 안전하게 획득할 수 있습니다. 서버에서 호스트되고 브라우저를 통해 액세스되는 [웹 응용 프로그램](active-directory-v2-flows.md#web-apps) 을 빌드하는 경우 OpenID Connect를 사용하는 것이 좋습니다.
+[OpenID Connect](http://openid.net/specs/openid-connect-core-1_0.html)는 OAuth를 통해 Single Sign-On을 수행할 수 있도록 OAuth 2.0 *권한 부여* 프로토콜을 확장하여 *인증* 프로토콜로 사용합니다. OpenID Connect는 클라이언트가 사용자 ID를 확인할 수 있게 하는 보안 토큰인 *ID 토큰*의 개념을 소개합니다. ID 토큰은 사용자에 대한 기본 프로필 정보도 가져옵니다. OpenID Connect는 OAuth 2.0을 확장하기 때문에 앱에서 [권한 부여 서버](active-directory-v2-protocols.md#the-basics)로 보안이 유지되는 리소스에 액세스하는 데 사용할 수 있는 *액세스 토큰*을 안전하게 획득할 수 있습니다. 또한 v2.0 엔드포인트는 Azure AD에 등록된 타사 앱이 Web API와 같은 안전한 리소스에 대한 액세스 토큰을 발급할 수 있도록 허용합니다. 액세스 토큰을 발급하도록 응용 프로그램을 설정하는 방법에 대한 자세한 내용은 [v2.0 엔드포인트로 앱을 등록하는 방법](active-directory-v2-app-registration.md)을 참조하세요. 서버에서 호스트되고 브라우저를 통해 액세스되는 [웹 응용 프로그램](active-directory-v2-flows.md#web-apps) 을 빌드하는 경우 OpenID Connect를 사용하는 것이 좋습니다.
 
 ## <a name="protocol-diagram-sign-in"></a>프로토콜 다이어그램: 로그인
 가장 기본적인 로그인 흐름은 다음 다이어그램에 표시된 단계를 포함합니다. 이 문서에서는 각 단계를 자세히 설명합니다.
@@ -44,6 +45,9 @@ OpenID Connect는 앱이 로그인을 수행하는 데 필요한 대부분의 �
 ```
 https://login.microsoftonline.com/{tenant}/v2.0/.well-known/openid-configuration
 ```
+> [!TIP] 
+> 사용해 보세요. [https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration](https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration)을 클릭하여 `common` 테넌트 구성을 확인합니다. 
+>
 
 `{tenant}`는 4개의 값 중 하나를 가질 수 있습니다.
 
@@ -54,7 +58,7 @@ https://login.microsoftonline.com/{tenant}/v2.0/.well-known/openid-configuration
 | `consumers` |개인 Microsoft 계정이 있는 사용자만 응용 프로그램에 로그인할 수 있습니다. |
 | `8eaef023-2b34-4da1-9baa-8bc8c9d6a490` 또는 `contoso.onmicrosoft.com` |특정 Azure AD 테넌트의 회사 또는 학교 계정이 있는 사용자만 응용 프로그램에 로그인할 수 있습니다. Azure AD 테넌트의 친숙한 도메인 이름 또는 테넌트의 GUID 식별자를 사용할 수 있습니다. |
 
-메타데이터는 간단한 JSON(JavaScript Object Notation) 문서입니다. 예제를 보려면 다음 코드 조각을 참조하세요. 이 조각의 내용은 [OpenID Connect 사양](https://openid.net)에 자세히 설명되어 있습니다.
+메타데이터는 간단한 JSON(JavaScript Object Notation) 문서입니다. 예제를 보려면 다음 코드 조각을 참조하세요. 이 조각의 내용은 [OpenID Connect 사양](https://openid.net/specs/openid-connect-discovery-1_0.html#rfc.section.4.2)에 자세히 설명되어 있습니다.
 
 ```
 {
@@ -80,7 +84,10 @@ https://login.microsoftonline.com/{tenant}/v2.0/.well-known/openid-configuration
 * `response_type` 매개 변수는 `id_token`을(를) 포함해야 합니다.
 * 요청은 `nonce` 매개 변수를 포함해야 합니다.
 
-예:
+> [!IMPORTANT]
+> ID 토큰을 성공적으로 요청하려면 [등록 포털](https://apps.dev.microsoft.com)의 앱 등록에서 웹 클라이언트에 대한 **[암시적 권한 부여](active-directory-v2-protocols-implicit.md)** 를 사용하도록 설정되어 있어야 합니다. 사용하도록 설정되어 있지 않으면 `unsupported_response` 오류, 즉 "'response_type' 입력 매개 변수에 제공된 값은 이 클라이언트에 허용되지 않습니다. 필요한 값은 'code'입니다."가 반환됩니다.
+
+예: 
 
 ```
 // Line breaks are for legibility only.
@@ -96,8 +103,8 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 ```
 
 > [!TIP]
-> 이 요청을 실행하려면 다음 링크를 클릭하세요. 로그인하면 브라우저가 주소 표시줄에서 ID 토큰과 함께 https://localhost/myapp/으로 리디렉션됩니다. 이 요청은 `response_mode=query`를 사용합니다(학습 용도로만). `response_mode=form_post`를 사용하는 것이 좋습니다.
-> <a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=id_token&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&scope=openid&response_mode=query&state=12345&nonce=678910" target="_blank">https://login.microsoftonline.com/common/oauth2/v2.0/authorize...</a>
+> 이 요청을 실행하려면 다음 링크를 클릭하세요. 로그인하면 브라우저가 주소 표시줄에서 ID 토큰과 함께 https://localhost/myapp/으로 리디렉션됩니다. 이 요청은 `response_mode=fragment`를 사용합니다(학습 용도로만). `response_mode=form_post`를 사용하는 것이 좋습니다.
+> <a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=id_token&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&scope=openid&response_mode=fragment&state=12345&nonce=678910" target="_blank">https://login.microsoftonline.com/common/oauth2/v2.0/authorize...</a>
 > 
 > 
 
@@ -109,11 +116,11 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 | redirect_uri |권장 |앱이 인증 응답을 보내고 받을 수 있는 앱의 리디렉션 URI입니다. URL로 인코딩되어야 한다는 점을 제외하고 포털에서 등록한 리디렉션 URI 중 하나와 정확히 일치해야 합니다. |
 | scope |필수 |공백으로 구분된 범위 목록입니다. OpenID Connect의 경우 동의 UI에서 "로그인" 권한으로 해석되는 `openid`범위가 포함되어야 합니다. 동의를 요청하기 위해 이 요청에 다른 범위를 포함할 수도 있습니다. |
 | nonce |필수 |앱에서 생성한 요청에 포함되는 값이며, 결과 id_token 값에 클레임으로 포함됩니다. 앱은 이 값을 확인하여 토큰 재생 공격을 완화할 수 있습니다. 이 값은 일반적으로 요청의 출처를 식별하는 데 사용할 수 있는 임의의 고유 문자열입니다. |
-| response_mode |권장 |결과 권한 부여 코드를 앱에 다시 보내는 데 사용해야 하는 방법을 지정합니다. `query`, `form_post` 또는 `fragment` 중 하나일 수 있습니다. 웹 응용 프로그램의 경우 응용 프로그램에 대한 가장 안전한 토큰 전송을 보장하기 위해 `response_mode=form_post`를 사용하는 것이 좋습니다. |
+| response_mode |권장 |결과 권한 부여 코드를 앱에 다시 보내는 데 사용해야 하는 방법을 지정합니다. `form_post` 또는 `fragment`일 수 있습니다. 웹 응용 프로그램의 경우 응용 프로그램에 대한 가장 안전한 토큰 전송을 보장하기 위해 `response_mode=form_post`를 사용하는 것이 좋습니다. |
 | state |권장 |토큰 응답에도 반환되는 요청에 포함된 값입니다. 원하는 모든 콘텐츠의 문자열일 수 있습니다. 일반적으로 [교차 사이트 요청 위조 공격을 방지](http://tools.ietf.org/html/rfc6749#section-10.12)하기 위해 임의로 생성된 고유 값이 사용됩니다. 또한 상태는 인증 요청이 발생하기 전에 앱에서 사용자 상태에 대한 정보(예: 사용한 페이지 또는 보기)를 인코딩하는 데 사용됩니다. |
 | prompt |옵션 |필요한 사용자 상호 작용 유형을 나타냅니다. 이 경우 유효한 값은 `login`, `none` 및 `consent`뿐입니다. `prompt=login` 클레임은 사용자가 해당 요청에 자격 증명을 입력하도록 하여 Single-Sign On을 무효화합니다. `prompt=none` 클레임은 반대입니다. 이 클레임은 사용자에게 어떤 대화형 메시지도 표시되지 않도록 합니다. Single-Sign On을 통해 요청이 자동으로 완료될 수 없는 경우에 v2.0 끝점은 오류를 반환합니다. `prompt=consent` 클레임은 사용자가 로그인 한 후 OAuth 동의 대화 상자를 트리거합니다. 이 대화 상자에서는 앱에 권한을 부여하도록 사용자에게 요청합니다. |
 | login_hint |옵션 |사용자 이름을 미리 알고 있는 경우 이 매개 변수를 사용하여 사용자를 위해 로그인 페이지의 사용자 이름 및 전자 메일 주소 필드를 미리 채울 수 있습니다. 앱에서는 종종 `preferred_username` 클레임을 사용하여 이전 로그인에서 사용자 이름을 이미 추출한 후 재인증 과정에서 이 매개 변수를 사용합니다. |
-| domain_hint |옵션 |이 값은 `consumers` 또는 `organizations`일 수 있습니다. 포함된 경우, v2.0 로그인 페이지를 거친 사용자가 좀 더 효율적인 사용자 경험을 가질 수 있도록 전자 메일 기반 검색 프로세스를 건너뜁니다. 앱에서는 종종 ID 토큰에서 `tid` 클레임을 추출하여 재인증 과정에서 이 매개 변수를 사용합니다. `tid` 클레임 값이 `9188040d-6c67-4c5b-b112-36a304b66dad`인 경우 `domain_hint=consumers`를 사용합니다. 그렇지 않으면 `domain_hint=organizations`를 사용합니다. |
+| domain_hint |옵션 |이 값은 `consumers` 또는 `organizations`일 수 있습니다. 포함된 경우, v2.0 로그인 페이지를 거친 사용자가 좀 더 효율적인 사용자 경험을 가질 수 있도록 전자 메일 기반 검색 프로세스를 건너뜁니다. 앱에서는 종종 ID 토큰에서 `tid` 클레임을 추출하여 재인증 과정에서 이 매개 변수를 사용합니다. `tid` 클레임 값이 `9188040d-6c67-4c5b-b112-36a304b66dad`(Microsoft 계정 소비자 테넌트)인 경우 `domain_hint=consumers`를 사용합니다. 그렇지 않으면 `domain_hint=organizations`를 사용합니다. |
 
 이 시점에서 사용자에게 자격 증명을 입력하고 인증을 완료하라는 메시지가 표시됩니다. v2.0 끝점은 사용자가 `scope` 쿼리 매개 변수에 표시된 사용 권한에 동의했는지도 확인합니다. 사용자가 이러한 사용 권한 중 하나에 동의하지 않은 경우 v2.0 끝점은 필요한 사용 권한에 동의하라는 메시지를 표시합니다. [권한, 동의 및 다중 테넌트 앱](active-directory-v2-scopes.md)에 대해 자세히 알아볼 수 있습니다.
 
@@ -192,12 +199,12 @@ post_logout_redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
 
 | 매개 변수 | 조건 | 설명 |
 | ----------------------- | ------------------------------- | ------------ |
-| post_logout_redirect_uri | 권장 | 성공적으로 로그아웃한 후에 사용자가 리디렉션되는 URL입니다. 매개 변수를 포함하지 않을 경우 사용자에게는 v2.0 끝점에 의해 생성된 일반 메시지가 표시됩니다. URL은 앱 등록 포털에서 응용 프로그램에 등록한 리디렉션 URI 중 하나와 일치해야 합니다.  |
+| post_logout_redirect_uri | 권장 | 성공적으로 로그아웃한 후에 사용자가 리디렉션되는 URL입니다. 매개 변수를 포함하지 않을 경우 사용자에게는 v2.0 끝점에 의해 생성된 일반 메시지가 표시됩니다. URL은 앱 등록 포털에서 응용 프로그램에 등록한 리디렉션 URI 중 하나와 일치해야 합니다. |
 
 ## <a name="single-sign-out"></a>Single Sign-Out
-사용자를 `end_session_endpoint`에 리디렉션하는 경우 v2.0 끝점은 브라우저에서 사용자의 세션을 지웁니다. 하지만 사용자는 인증을 위해 Microsoft 계정을 사용하는 다른 응용 프로그램에 여전히 로그인되어 있을 수 있습니다. 사용자를 동시에 로그아웃하도록 해당 응용 프로그램을 활성화하려면 v2.0 끝점은 현재 사용자가 로그인된 모든 응용 프로그램의 등록된 `LogoutUrl`에 HTTP GET 요청을 보냅니다. 응용 프로그램은 사용자를 식별하는 모든 세션을 지우고 `200` 요청을 반환하여 이 요청에 응답해야 합니다.  응용 프로그램에서 단일 로그아웃을 지원하려는 경우 응용 프로그램 코드에서 해당 `LogoutUrl`을 구현해야 합니다.  앱 등록 포털에서 `LogoutUrl`을 설정할 수 있습니다.
+사용자를 `end_session_endpoint`에 리디렉션하는 경우 v2.0 끝점은 브라우저에서 사용자의 세션을 지웁니다. 하지만 사용자는 인증을 위해 Microsoft 계정을 사용하는 다른 응용 프로그램에 여전히 로그인되어 있을 수 있습니다. 사용자를 동시에 로그아웃하도록 해당 응용 프로그램을 활성화하려면 v2.0 끝점은 현재 사용자가 로그인된 모든 응용 프로그램의 등록된 `LogoutUrl`에 HTTP GET 요청을 보냅니다. 응용 프로그램은 사용자를 식별하는 모든 세션을 지우고 `200` 요청을 반환하여 이 요청에 응답해야 합니다. 응용 프로그램에서 단일 로그아웃을 지원하려는 경우 응용 프로그램 코드에서 해당 `LogoutUrl`을 구현해야 합니다. 앱 등록 포털에서 `LogoutUrl`을 설정할 수 있습니다.
 
-## <a name="protocol-diagram-token-acquisition"></a>프로토콜 다이어그램: 토큰 가져오기
+## <a name="protocol-diagram-access-token-acquisition"></a>프로토콜 다이어그램: 액세스 토큰 가져오기
 대부분의 웹앱은 사용자를 로그인할 뿐만 아니라 OAuth를 사용하여 해당 사용자 대신 웹 서비스에 액세스해야 합니다. 이 시나리오에서는 OAuth 권한 부여 코드 흐름을 사용하여 액세스 토큰을 가져오는 데 사용할 수 있는 권한 부여 코드를 획득하는 동시에 사용자 인증에 OpenID Connect를 사용합니다.
 
 전체 OpenID Connect 로그인 및 토큰 획득 흐름은 다음 다이어그램과 유사합니다. 각 단계는 문서의 다음 섹션에서 자세히 설명합니다.
@@ -214,7 +221,7 @@ GET https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize?
 client_id=6731de76-14a6-49ae-97bc-6eba6914391e        // Your registered Application ID
 &response_type=id_token%20code
 &redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F       // Your registered redirect URI, URL encoded
-&response_mode=form_post                              // 'query', 'form_post', or 'fragment'
+&response_mode=form_post                              // 'form_post' or 'fragment'
 &scope=openid%20                                      // Include both 'openid' and scopes that your app needs  
 offline_access%20                                         
 https%3A%2F%2Fgraph.microsoft.com%2Fmail.read
@@ -223,8 +230,8 @@ https%3A%2F%2Fgraph.microsoft.com%2Fmail.read
 ```
 
 > [!TIP]
-> 이 요청을 실행하려면 다음 링크를 클릭하세요. 로그인하면 브라우저가 주소 표시줄에서 ID 토큰 및 코드와 함께 https://localhost/myapp/으로 리디렉션됩니다. 이 요청은 `response_mode=query`를 사용합니다(학습 용도로만). `response_mode=form_post`를 사용하는 것이 좋습니다.
-> <a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=id_token%20code&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&response_mode=query&scope=openid%20offline_access%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read&state=12345&nonce=678910" target="_blank">https://login.microsoftonline.com/common/oauth2/v2.0/authorize...</a>
+> 이 요청을 실행하려면 다음 링크를 클릭하세요. 로그인하면 브라우저가 주소 표시줄에서 ID 토큰 및 코드와 함께 https://localhost/myapp/으로 리디렉션됩니다. 이 요청은 `response_mode=fragment`를 사용합니다(학습 용도로만). `response_mode=form_post`를 사용하는 것이 좋습니다.
+> <a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=id_token%20code&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&response_mode=fragment&scope=openid%20offline_access%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read&state=12345&nonce=678910" target="_blank">https://login.microsoftonline.com/common/oauth2/v2.0/authorize...</a>
 > 
 > 
 
@@ -266,4 +273,3 @@ error=access_denied&error_description=the+user+canceled+the+authentication
 가능한 오류 코드 및 권장되는 클라이언트 응답에 대한 설명은 [권한 부여 끝점 오류에 대한 오류 코드](#error-codes-for-authorization-endpoint-errors)를 참조하세요.
 
 권한 부여 코드와 ID 토큰이 있는 경우 사용자로 로그인하여 액세스 토큰을 대신 가져올 수 있습니다. 사용자로 로그인하려면 [정확히 위에 설명된 대로](#validate-the-id-token) ID 토큰의 유효성을 검사해야 합니다. 액세스 토큰을 얻으려면 [OAuth 프로토콜 설명서](active-directory-v2-protocols-oauth-code.md#request-an-access-token)에 설명된 단계를 따릅니다.
-

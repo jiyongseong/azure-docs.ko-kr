@@ -1,10 +1,10 @@
 ---
-title: "자습서: OfficeSpace Software와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory 및 OfficeSpace Software 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: OfficeSpace Software와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory 및 OfficeSpace Software 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.reviewer: joflore
 ms.assetid: 95d8413f-db98-4e2c-8097-9142ef1af823
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/27/2017
 ms.author: jeedes
+ms.openlocfilehash: 5f8698e50f9740d46a5cec708e3d5ae6bf1043ce
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 54774252780bd4c7627681d805f498909f171857
-ms.openlocfilehash: 43d2ecfe851d8f6c43cd4ce7fc4bd872818f4137
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-officespace-software"></a>자습서: OfficeSpace Software와 Azure Active Directory 통합
 
@@ -31,7 +30,7 @@ OfficeSpace Software를 Azure AD와 통합하면 다음과 같은 이점이 제�
 - 사용자가 해당 Azure AD 계정으로 OfficeSpace Software에 자동으로 로그온(Single Sign-on)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +58,7 @@ OfficeSpace Software의 Azure AD 통합을 구성하려면 갤러리의 OfficeSp
 
 **갤러리에서 OfficeSpace Software를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -111,7 +110,7 @@ OfficeSpace Software에서 Azure AD Single Sign-on을 구성하고 테스트하�
 
     a. **로그온 URL** 텍스트 상자에서 다음 패턴으로 URL을 입력합니다. `https://<company name>.officespacesoftware.com/users/sign_in/saml`
 
-    b. **식별자** 텍스트 상자에서 `<company name>.officespacesoftware.com` 패턴을 사용하여 URL을 입력합니다.
+    나. **식별자** 텍스트 상자에서 `<company name>.officespacesoftware.com` 패턴을 사용하여 URL을 입력합니다.
 
     > [!NOTE] 
     > 이러한 값은 실제 값이 아닙니다. 실제 로그온 URL 및 식별자로 값을 업데이트합니다. [OfficeSpace Software 클라이언트 지원 팀](mailto:support@officespacesoftware.com)에 문의하여 이러한 값을 받을 수 있습니다. 
@@ -125,7 +124,7 @@ OfficeSpace Software에서 Azure AD Single Sign-on을 구성하고 테스트하�
     | 특성 이름 | 특성 값 |
     | --- | --- |    
     | email | user.mail |
-    | name | user.displayname |
+    | 이름 | user.displayname |
     | first_name | user.givenname |
     | last_name | user.surname |
 
@@ -135,9 +134,9 @@ OfficeSpace Software에서 Azure AD Single Sign-on을 구성하고 테스트하�
 
     ![특성 구성](./media/active-directory-saas-officespace-tutorial/tutorial_attribute_05.png)
     
-    b. **이름** 텍스트 상자에서 해당 행에 표시된 특성 이름을 입력합니다.
+    나. **이름** 텍스트 상자에서 해당 행에 표시된 특성 이름을 입력합니다.
     
-    c. **값** 목록에서 해당 행에 대해 표시된 특성을 입력합니다.
+    다. **값** 목록에서 해당 행에 대해 표시된 특성을 입력합니다.
     
     d. **확인**을 클릭합니다.
  
@@ -169,9 +168,9 @@ OfficeSpace Software에서 Azure AD Single Sign-on을 구성하고 테스트하�
 
     a. **로그아웃 공급자 URL** 텍스트 상자에 Azure Portal에서 복사한 **로그아웃 URL** 값을 붙여 넣습니다.
 
-    b. **클라이언트 IDP 대상 URL** 텍스트 상자에 Azure Portal에서 복사한 **SAML Single Sign-On 서비스 URL** 값을 붙여 넣습니다.
+    나. **클라이언트 IDP 대상 URL** 텍스트 상자에 Azure Portal에서 복사한 **SAML Single Sign-On 서비스 URL** 값을 붙여 넣습니다.
 
-    c. Azure Portal에서 복사한 **지문** 값을 **클라이언트 IDP 인증서 지문** 텍스트 상자에 붙여 넣습니다. 
+    다. Azure Portal에서 복사한 **지문** 값을 **클라이언트 IDP 인증서 지문** 텍스트 상자에 붙여 넣습니다. 
 
     d. **설정 저장**을 클릭합니다.
 
@@ -206,9 +205,9 @@ OfficeSpace Software에서 Azure AD Single Sign-on을 구성하고 테스트하�
 
     a. **이름** 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
+    나. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
 
-    c. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
+    다. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -260,7 +259,7 @@ OfficeSpace Software에서 Azure AD Single Sign-on을 구성하고 테스트하�
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -277,5 +276,4 @@ OfficeSpace Software에서 Azure AD Single Sign-on을 구성하고 테스트하�
 [201]: ./media/active-directory-saas-officespace-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-officespace-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-officespace-tutorial/tutorial_general_203.png
-
 

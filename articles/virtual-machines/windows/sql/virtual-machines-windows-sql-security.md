@@ -1,11 +1,11 @@
 ---
-title: "Azure의 SQL Server에 대한 보안 고려 사항 | Microsoft Docs"
-description: "이 항목에서는 Azure Virtual Machine에서 실행되는 SQL Server 보안에 대한 일반적인 지침을 제공합니다."
+title: Azure의 SQL Server에 대한 보안 고려 사항 | Microsoft Docs
+description: 이 항목에서는 Azure Virtual Machine에서 실행되는 SQL Server 보안에 대한 일반적인 지침을 제공합니다.
 services: virtual-machines-windows
 documentationcenter: na
 author: rothja
-manager: jhubbard
-editor: 
+manager: craigg
+editor: ''
 tags: azure-service-management
 ms.assetid: d710c296-e490-43e7-8ca9-8932586b71da
 ms.service: virtual-machines-sql
@@ -13,21 +13,20 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
-ms.date: 06/02/2017
+ms.date: 03/23/2018
 ms.author: jroth
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 80be19618bd02895d953f80e5236d1a69d0811af
-ms.openlocfilehash: 4ad9156e481eac0bae32bca35a2b126363e5d8b6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/07/2017
-
-
+ms.openlocfilehash: bba9f62a78dea4db1d88f877029796739b023e46
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34365205"
 ---
-# <a name="security-considerations-for-sql-server-in-azure-virtual-machines"></a>Azure 가상 컴퓨터의 SQL Server에 대한 보안 고려 사항
+# <a name="security-considerations-for-sql-server-in-azure-virtual-machines"></a>Azure Virtual Machines의 SQL Server에 대한 보안 고려 사항
 
 이 항목에는 Azure VM(Virtual Machine)에서 SQL Server 인스턴스로의 보안 액세스를 설정하는 데 도움이 되는 전반적인 보안 지침이 포함되어 있습니다.
 
-Azure는 가상 컴퓨터에서 실행되는 SQL Server로 호환되는 솔루션을 제작할 수 있도록 하는 몇 가지 산업 규정 및 표준을 준수합니다. Azure 규정 준수에 대한 자세한 내용은 [Azure 보안 센터](https://azure.microsoft.com/support/trust-center/)를 참조하세요.
+Azure는 가상 머신에서 실행되는 SQL Server로 호환되는 솔루션을 제작할 수 있도록 하는 몇 가지 산업 규정 및 표준을 준수합니다. Azure 규정 준수에 대한 자세한 내용은 [Azure 보안 센터](https://azure.microsoft.com/support/trust-center/)를 참조하세요.
 
 [!INCLUDE [learn-about-deployment-models](../../../../includes/learn-about-deployment-models-both-include.md)]
 
@@ -42,19 +41,19 @@ SQL Server 가상 컴퓨터를 만들 때는 컴퓨터 및 SQL Server에 대한 
 
 ## <a name="secure-connections"></a>보안 연결
 
-갤러리 이미지를 사용하여 SQL Server 가상 컴퓨터를 만들 때 **SQL Server 연결** 옵션은 **로컬(VM 내부)**, **개인(가상 네트워크 내)** 또는 **공용(인터넷)** 중에서 선택할 수 있게 해줍니다.
+갤러리 이미지를 사용하여 SQL Server 가상 머신을 만들 때 **SQL Server 연결** 옵션은 **로컬(VM 내부)**, **개인(Virtual Network 내)** 또는 **공용(인터넷)** 중에서 선택할 수 있게 해줍니다.
 
 ![SQL Server 연결](./media/virtual-machines-windows-sql-security/sql-vm-connectivity-option.png)
 
 최상의 보안을 위해 해당 시나리오에 대해 가장 제한적인 옵션을 선택합니다. 예를 들어 같은 VM에 있는 SQL Server에 액세스하는 응용 프로그램을 실행 중인 경우 **로컬**이 가장 안전한 선택 사항입니다. SQL Server에 액세스해야 하는 Azure 응용 프로그램을 실행 중인 경우 **개인**은 지정된 [Azure Virtual Network](../../../virtual-network/virtual-networks-overview.md) 내에 있는 SQL Server로의 통신만 보호합니다. SQL Server VM에 대한 **공용**(인터넷) 액세스가 필요한 경우 이 항목의 모범 사례를 따라 공격 노출 영역을 줄이도록 합니다.
 
-포털에서 선택한 옵션은 VM NSG([네트워크 보안 그룹 ](../../../virtual-network/virtual-networks-nsg.md))에 대해 인바운드 보안 규칙을 사용하여 가상 컴퓨터에 대한 네트워크 트래픽을 허용하거나 거부합니다. SQL Server 포트(기본값 1433)에 대한 트래픽을 허용하도록 인바운드 NSG 규칙을 수정하거나 새 인바운드 NSG 규칙을 만들 수 있습니다. 이 포트를 통해 통신할 수 있는 특정 IP 주소를 지정할 수도 있습니다.
+포털에서 선택한 옵션은 VM NSG([네트워크 보안 그룹 ](../../../virtual-network/security-overview.md))에 대해 인바운드 보안 규칙을 사용하여 가상 머신에 대한 네트워크 트래픽을 허용하거나 거부합니다. SQL Server 포트(기본값 1433)에 대한 트래픽을 허용하도록 인바운드 NSG 규칙을 수정하거나 새 인바운드 NSG 규칙을 만들 수 있습니다. 이 포트를 통해 통신할 수 있는 특정 IP 주소를 지정할 수도 있습니다.
 
 ![네트워크 보안 그룹 규칙](./media/virtual-machines-windows-sql-security/sql-vm-network-security-group-rules.png)
 
 네트워크 트래픽을 제한하기 위한 NSG 규칙 외에 가상 컴퓨터에서 Windows 방화벽을 사용할 수도 있습니다.
 
-클래식 배포 모델이 적용된 끝점을 사용하는 경우 사용하지 않는 모든 끝점을 가상 컴퓨터에서 제거합니다. 끝점에서 ACL을 사용하는 방법에 대한 지침은 [끝점에 대한 ACL 관리](../classic/setup-endpoints.md#manage-the-acl-on-an-endpoint)를 참조하세요. Resource Manager를 사용하는 VM에는 이렇게 할 필요가 없습니다.
+클래식 배포 모델이 적용된 끝점을 사용하는 경우 사용하지 않는 모든 끝점을 가상 머신에서 제거합니다. 끝점에서 ACL을 사용하는 방법에 대한 지침은 [끝점에 대한 ACL 관리](../classic/setup-endpoints.md#manage-the-acl-on-an-endpoint)를 참조하세요. Resource Manager를 사용하는 VM에는 이렇게 할 필요가 없습니다.
 
 마지막으로, Azure Virtual Machine에서 SQL Server 데이터베이스 엔진의 인스턴스에 대해 암호화된 연결 사용을 고려합니다. 서명된 인증서로 SQL server 인스턴스를 구성합니다. 자세한 내용은 [데이터베이스 엔진에 암호화된 연결 사용](https://docs.microsoft.com/sql/database-engine/configure-windows/enable-encrypted-connections-to-the-database-engine) 및 [연결 문자열 구문](https://msdn.microsoft.com/library/ms254500.aspx)을 참조하세요.
 
@@ -83,7 +82,7 @@ SQL Server가 기본 포트가 아닌 포트에서 수신 대기하는 경우 �
 
 - 모든 계정에 복잡하고 강력한 암호를 사용합니다. 강력한 암호를 만드는 방법에 대한 자세한 내용은 [강력한 암호 만들기](https://support.microsoft.com/instantanswers/9bd5223b-efbe-aa95-b15a-2fb37bef637d/create-a-strong-password) 문서를 참조하세요.
 
-- 기본적으로 Azure는 SQL Server 가상 컴퓨터를 설치하는 동안 Windows 인증을 선택합니다. 따라서 **SA** 로그인이 사용하지 않도록 설정되고 설치 프로그램에서 암호를 할당합니다. **SA** 로그인을 사용하거나 사용하도록 설정하지 않는 것이 좋습니다. SQL 로그인이 있어야 하는 경우 다음 전략 중 하나를 사용합니다.
+- 기본적으로 Azure는 SQL Server Virtual Machine을 설치하는 동안 Windows 인증을 선택합니다. 따라서 **SA** 로그인이 사용하지 않도록 설정되고 설치 프로그램에서 암호를 할당합니다. **SA** 로그인을 사용하거나 사용하도록 설정하지 않는 것이 좋습니다. SQL 로그인이 있어야 하는 경우 다음 전략 중 하나를 사용합니다.
 
   - **sysadmin** 멤버 자격이 있는 고유한 이름을 가진 SQL 계정을 만듭니다. 포털에서 프로비전하는 동안 **SQL 인증**을 사용하도록 설정하여 이렇게 할 수 있습니다.
 
@@ -100,6 +99,5 @@ SQL Server가 기본 포트가 아닌 포트에서 수신 대기하는 경우 �
 
 성능에 대한 모범 사례에도 관심이 있으면 [Azure Virtual Machines의 SQL Server에 대한 성능 모범 사례](virtual-machines-windows-sql-performance.md)를 참조하세요.
 
-Azure VM에서 SQL Server 실행과 관련된 다른 항목은 [Azure Virtual Machines의 SQL Server 개요](virtual-machines-windows-sql-server-iaas-overview.md)를 참조하세요.
-
+Azure VM에서 SQL Server 실행과 관련된 다른 항목은 [Azure Virtual Machines의 SQL Server 개요](virtual-machines-windows-sql-server-iaas-overview.md)를 참조하세요. SQL Server 가상 머신에 대한 질문이 있으면 [질문과 대답](virtual-machines-windows-sql-server-iaas-faq.md)을 참조하세요.
 

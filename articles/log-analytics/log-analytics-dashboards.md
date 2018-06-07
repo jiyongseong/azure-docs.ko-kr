@@ -1,30 +1,32 @@
 ---
-title: "Azure Log Analytics에서 사용자 지정 대시보드 만들기 | Microsoft Docs"
-description: "이 가이드는 Log Analytics 대시보드가 저장된 모든 로그 검색을 시각화하여 환경을 보는 단일 렌즈를 제공하는 방법을 이해하는 데 도움이 됩니다."
+title: Azure Log Analytics에서 사용자 지정 대시보드 만들기 | Microsoft Docs
+description: 이 가이드는 Log Analytics 대시보드가 저장된 모든 로그 검색을 시각화하여 환경을 보는 단일 렌즈를 제공하는 방법을 이해하는 데 도움이 됩니다.
 services: log-analytics
-documentationcenter: 
+documentationcenter: ''
 author: MGoedtel
 manager: carmonm
-editor: 
+editor: ''
 ms.assetid: abb07f6c-b356-4f15-85f5-60e4415d0ba2
 ms.service: log-analytics
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 04/12/2017
+ms.date: 08/08/2017
 ms.author: magoedte
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a0c8af30fbed064001c3fd393bf0440aa1cb2835
-ms.openlocfilehash: a8c9766bf066a7f0dfd28ebb4e41bf0eaf3f05bd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/28/2017
-
-
+ms.openlocfilehash: 7eaa74655b009e3154e2cc4f09d5599040ec4589
+ms.sourcegitcommit: 909469bf17211be40ea24a981c3e0331ea182996
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
 # <a name="create-a-custom-dashboard-for-use-in-log-analytics"></a>Log Analytics에서 사용할 사용자 지정 대시보드 만들기
+
 이 가이드는 Log Analytics 대시보드가 저장된 모든 로그 검색을 시각화하여 환경을 보는 단일 렌즈를 제공하는 방법을 이해하는 데 도움이 됩니다.
+
+>[!NOTE]
+> 더 이상 기존의 **내 대시보드**를 편집할 수 없습니다. 이 기능은 점점 사용하지 않고 있습니다.
 
 ![예제 대시보드](./media/log-analytics-dashboards/oms-dashboards-example-dash.png)
 
@@ -86,4 +88,3 @@ OMS 포털에서 만든 모든 사용자 지정 대시보드는 OMS 모바일 �
 
 ## <a name="next-steps"></a>다음 단계
 * 알림을 생성하고 문제를 해결하기 위해 Log Analytics에서 [경고](log-analytics-alerts.md)를 만듭니다.
-

@@ -1,10 +1,10 @@
 ---
-title: "자습서: SAML SSO for Confluence by resolution GmbH와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory 및 SAML SSO for Confluence by resolution GmbH 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: SAML SSO for Confluence by resolution GmbH와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory 및 SAML SSO for Confluence by resolution GmbH 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: 6b47d483-d3a3-442d-b123-171e3f0f7486
 ms.service: active-directory
 ms.workload: identity
@@ -13,13 +13,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 05/18/2017
 ms.author: jeedes
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5edc47e03ca9319ba2e3285600703d759963e1f3
-ms.openlocfilehash: 9a36d686ba39b5168860a20e8c4db357888df6a7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/01/2017
-
-
+ms.openlocfilehash: 6593a53cc05771b6001aed1316233b5d17fe0f24
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-saml-sso-for-confluence-by-resolution-gmbh"></a>자습서: SAML SSO for Confluence by resolution GmbH와 Azure Active Directory 통합
 
@@ -31,7 +29,7 @@ SAML SSO for Confluence by resolution GmbH와 Azure AD를 통합하면 다음과
 - 사용자가 해당 Azure AD 계정으로 SAML SSO for Confluence by resolution GmbH에 자동으로 로그온(Single Sign-On)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -60,7 +58,7 @@ Azure AD에 SAML SSO for Confluence by resolution GmbH를 통합하도록 구성
 
 **갤러리에서 SAML SSO for Confluence by resolution GmbH를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Active Directory][1]
 
@@ -90,11 +88,11 @@ SAML SSO for Confluence by resolution GmbH에서 Azure AD의 **사용자 이름*
 
 SAML SSO for Confluence by resolution GmbH에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구성 요소를 완료해야 합니다.
 
-1. **[Azure AD Single Sign-On 구성](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
-2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
+1. **[Configuring Azure AD Single Sign-On](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
+2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On 테스트하는 데 사용합니다.
 3. **[SAML SSO for Confluence by resolution GmbH 테스트 사용자 만들기](#creating-a-saml-sso-for-confluence-by-resolution-gmbh-test-user)** - Britta Simon의 Azure AD 표현과 연결된 해당 사용자를 SAML SSO for Confluence by resolution GmbH에 만듭니다.
 4. **[Azure AD 테스트 사용자 할당](#assigning-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Testing Single Sign-On](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
+5. **[Single Sign-On 테스트](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
 
 ### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -104,23 +102,23 @@ SAML SSO for Confluence by resolution GmbH에서 Azure AD Single Sign-On을 구�
 
 1. Azure Portal의 **SAML SSO for Confluence by resolution GmbH** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single Sign-On** 대화 상자에서 **모드**를 **SAML 기반 로그온**으로 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/tutorial_samlssoconfluence_samlbase.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/tutorial_samlssoconfluence_samlbase.png)
 
 3. **IDP** 시작 모드에서 응용 프로그램을 구성하려면 **SAML SSO for Confluence by resolution GmbH 도메인 및 URL** 섹션에서 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/tutorial_samlssoconfluence_url_1.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/tutorial_samlssoconfluence_url_1.png)
 
     a. **식별자** 텍스트 상자에서 `https://<server-base-url>/plugins/servlet/samlsso` 패턴을 사용하여 URL을 입력합니다.
 
-    b. **회신 URL** 텍스트 상자에 다음 패턴으로 URL을 입력합니다.`https://<server-base-url>/plugins/servlet/samlsso`
+    나. **회신 URL** 텍스트 상자에 다음 패턴으로 URL을 입력합니다.`https://<server-base-url>/plugins/servlet/samlsso`
 
 4. **고급 URL 설정 표시**를 선택합니다. **SP** 시작 모드에서 응용 프로그램을 구성하려면:
 
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/tutorial_samlssoconfluence_url_2.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/tutorial_samlssoconfluence_url_2.png)
 
     **로그온 URL** 텍스트 상자에서 다음 패턴으로 URL을 입력합니다. `https://<server-base-url>/plugins/servlet/samlsso`
      
@@ -129,68 +127,95 @@ SAML SSO for Confluence by resolution GmbH에서 Azure AD Single Sign-On을 구�
 
 5. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 메타데이터 파일을 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/tutorial_samlssoconfluence_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/tutorial_samlssoconfluence_certificate.png) 
 
 6. **저장** 단추를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/tutorial_general_400.png)    
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/tutorial_general_400.png)  
     
 7. 다른 웹 브라우저 창에서 **SAML SSO for Confluence by resolution GmbH 관리 포털**에 관리자로 로그인합니다.
 
 8. 마우스로 선 위를 가리키고 **추가 기능**을 클릭합니다.
     
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/addon1.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon1.png)
 
 9. [관리자 액세스] 페이지로 리디렉션됩니다. 암호를 입력하고 **확인** 단추를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/addon2.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon2.png)
 
 10. **ATLASSIAN MARKETPLACE** 탭 아래에서 **새 추가 기능 찾기**를 클릭합니다. 
 
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/addon.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon.png)
 
 11. **SAML Single Sign On(SSO) for Confluence**를 검색하고 **설치** 단추를 클릭하여 새 SAML 플러그 인을 설치합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/addon7.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon7.png)
 
 12. 플러그 인 설치가 시작됩니다. **닫기**를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/addon8.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon8.png)
 
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/addon9.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon9.png)
 
-13.    **관리**를 클릭합니다.
+13. **관리**를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/addon10.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon10.png)
     
 14. **구성**을 클릭하여 새 플러그 인을 구성합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/addon11.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon11.png)
 
 15. 또한 새로운 이 플러그 인은 **사용자 및 보안** 탭 아래에도 있습니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/addon3.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon3.png)
     
-16. **SAML SingleSignOn 플러그 인 구성** 페이지에서 **추가 ID 공급자 추가** 단추를 클릭하여 ID 공급자의 설정을 구성합니다.
+16. **SAML SingleSignOn 플러그인 구성** 페이지에서 **새 IdP 추가** 단추를 클릭하여 ID 공급자의 설정을 구성합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/addon4.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon4.png)
 
-17. 이 페이지에서 다음 단계를 수행합니다.
+17. **SAML ID 공급자 설정** 페이지에서 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/addon5.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon5a.png)
  
-    a. ID 공급자의 **이름**(예: Azure AD)을 추가합니다.
+    a. **Azure AD**를 IdP 유형으로 설정합니다.
     
-    b. ID 공급자의 **설명**(예: Azure AD)을 추가합니다.
+    나. ID 공급자의 **이름**(예: Azure AD)을 추가합니다.
+    
+    다. ID 공급자의 **설명**(예: Azure AD)을 추가합니다.
+    
+    d. **다음**을 클릭합니다.
+    
+18. **ID 공급자 구성** 페이지에서 **다음** 단추를클릭합니다.
 
-    c. **XML**을 클릭하고 Azure Portal에서 다운로드한 **메타데이터** 파일을 선택합니다.
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon5b.png)
 
-    d. **로드** 단추를 클릭합니다.
+19. **SAML IdP 메타데이터 가져오기** 페이지에서 다음 단계를 수행합니다.
 
-    e. IdP 메타데이터를 읽고 스크린샷에서 강조 표시된 대로 필드를 채웁니다.    
-18. **설정 저장** 단추를 클릭하여 해당 설정을 저장합니다.
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon5c.png)
 
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/addon6.png)
+    a. **파일 로드** 단추를 클릭하고 5단계에서 다운로드한 메타데이터 XML 파일을 선택합니다.
+
+    나. **가져오기** 단추를 클릭합니다.
+    
+    다. 가져오기가 완료될 때까지 잠시 대기합니다.
+    
+    d. **다음** 단추를 클릭합니다.
+    
+20. **사용자 ID 특성 및 변환** 페이지에서 **다음** 단추를 클릭합니다.
+
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon5d.png)
+    
+21. **사용자 만들기 및 업데이트** 페이지에서 **저장 및 다음**을 클릭하여 설정을 저장합니다.   
+    
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon6a.png)
+    
+22. **설정 테스트** 페이지에서 **테스트 건너뛰기 및 수동으로 구성**을 클릭하여 사용자 테스트를 한 번 건너뜁니다. 다음 섹션에서 수행되며 Azure Portal에서 몇 가지 설명이 필요합니다. 
+    
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon6b.png)
+    
+23. **테스트 건너뛰기의 의미...**  내용이 담긴 대화 상자가 표시되면 **확인**을 클릭합니다.
+    
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/addon6c.png)
 
 > [!TIP]
 > 이제 앱을 설정하는 동안 [Azure Portal](https://portal.azure.com) 내에서 이러한 지침의 간결한 버전을 읽을 수 있습니다.  **Active Directory > 엔터프라이즈 응용 프로그램** 섹션에서 이 앱을 추가한 후에는 **Single Sign-On** 탭을 클릭하고 맨 아래에 있는 **구성** 섹션을 통해 포함된 설명서에 액세스하면 됩니다. 포함된 설명서 기능에 대한 자세한 내용은 [Azure AD 포함된 설명서]( https://go.microsoft.com/fwlink/?linkid=845985)에서 확인할 수 있습니다.
@@ -220,9 +245,9 @@ SAML SSO for Confluence by resolution GmbH에서 Azure AD Single Sign-On을 구�
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -245,9 +270,9 @@ SAML SSO for Confluence by resolution GmbH에서 프로비전은 수동 작업�
 
     a. **사용자 이름** 텍스트 상자에서 Britta Simon과 같은 사용자의 이메일 주소를 입력합니다.
 
-    b. **전체 이름** 텍스트 상자에서 Britta Simon과 같은 사용자의 전체 이름을 입력합니다.
+    나. **전체 이름** 텍스트 상자에서 Britta Simon과 같은 사용자의 전체 이름을 입력합니다.
 
-    c. **전자 메일** 텍스트 상자에서 Brittasimon@contoso.com과 같은 사용자의 이메일 주소를 입력합니다.
+    다. **전자 메일** 텍스트 상자에서 Brittasimon@contoso.com과 같은 사용자의 이메일 주소를 입력합니다.
 
     d. **암호** 텍스트 상자에서 Britta Simon에 대한 암호를 입력합니다.
 
@@ -269,7 +294,7 @@ SAML SSO for Confluence by resolution GmbH에서 프로비전은 수동 작업�
 
 2. 응용 프로그램 목록에서 **SAML SSO for Confluence by resolution GmbH**를 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-samlssoconfluence-tutorial/tutorial_samlssoconfluence_app.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-samlssoconfluence-tutorial/tutorial_samlssoconfluence_app.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -295,7 +320,7 @@ SAML SSO for Confluence by resolution GmbH에서 프로비전은 수동 작업�
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -312,5 +337,4 @@ SAML SSO for Confluence by resolution GmbH에서 프로비전은 수동 작업�
 [201]: ./media/active-directory-saas-samlssoconfluence-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-samlssoconfluence-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-samlssoconfluence-tutorial/tutorial_general_203.png
-
 

@@ -12,15 +12,13 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 02/02/2017
+ms.date: 09/15/2017
 ms.author: terrylan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f532f1aea9b8c4be6707862be4001099aa3c1d32
-ms.openlocfilehash: 1a6e5e915745dd3588fbc54b353daa947b1c4289
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.openlocfilehash: 726b59c45e2eb18eebe28a180db23336ae141408
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="provide-security-contact-details-in-azure-security-center"></a>Azure 보안 센터의 보안 연락처 세부 정보 제공
 Azure 보안 센터는 아직 없는 경우 Azure 구독에 대한 보안 연락처 세부 정보를 제공하는 것을 권장합니다. 이 정보는 MSRC(Microsoft 보안 대응 센터)에서 불법적인 또는 권한 없는 당사자가 고객 데이터에 액세스한 것을 발견하는 경우 사용자에게 연락하기 위해 Microsoft에서 사용됩니다. MSRC는 Azure 네트워크 및 인프라의 선택 보안 모니터링을 수행하고 타사에서 위협 인텔리전스 및 남용 불만 사항을 받습니다.
@@ -33,17 +31,18 @@ Azure 보안 센터는 아직 없는 경우 Azure 구독에 대한 보안 연락
 >
 
 ## <a name="implement-the-recommendation"></a>권장 사항 구현
-1. **권장 사항** 블레이드에서 **보안 연락처 세부 정보 제공**을 선택합니다.
+1. **권장 사항**에서 **보안 연락처 정보 제공**을 선택합니다.
    ![보안 연락처 제공][1]
-2. **보안 연락처 세부 정보 제공**블레이드가 열립니다. 연락처 정보를 제공할 Azure 구독을 선택합니다.
+2. 연락처 정보를 제공할 Azure 구독을 선택합니다.
+3. **보안 정책 - 전자 메일 알림**이 열립니다.
+
    ![보안 연락처 세부 정보 제공][2]
-3. 두 번째 **보안 연락처 세부 정보 제공** 블레이드가 열립니다.
 
    * 쉼표로 구분하여 보안 연락처 전자 메일 주소 또는 주소를 입력합니다. 입력할 수 있는 전자 메일 주소 수에 제한이 없습니다.
    * 하나의 보안 연락처 국제 전화 번호를 입력합니다.
    * 심각도 높은 경고에 대해 전자 메일을 받으려면 **경고에 대한 전자 메일 받기**옵션을 설정합니다.
    * 향후에는 구독 소유자에게 전자 메일 알림을 보내는 옵션도 제공될 예정입니다. 이 옵션은 현재 회색으로 표시됩니다.
-   * **확인** 을 선택하여 보안 연락처 정보를 구독에 적용합니다.
+   * **저장**을 선택하여 보안 연락처 정보를 구독에 적용합니다.
 
 ## <a name="see-also"></a>참고 항목
 보안 센터에 대한 자세한 내용은 다음을 참조하세요.
@@ -59,4 +58,3 @@ Azure 보안 센터는 아직 없는 경우 Azure 구독에 대한 보안 연락
 <!--Image references-->
 [1]: ./media/security-center-provide-security-contacts/provide-contacts.png
 [2]:./media/security-center-provide-security-contacts/provide-contact-details.png
-

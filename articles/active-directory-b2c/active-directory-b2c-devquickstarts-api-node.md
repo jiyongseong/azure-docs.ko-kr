@@ -1,26 +1,22 @@
 ---
-title: "Azure AD B2C: Node.js를 사용하여 Web API 보안 유지 | Microsoft Docs"
-description: "B2C 테넌트에서 토큰을 수락하는 Node.js Web API를 빌드하는 방법"
+title: 'Azure AD B2C: Node.js를 사용하여 Web API 보안 유지 | Microsoft Docs'
+description: B2C 테넌트에서 토큰을 수락하는 Node.js Web API를 빌드하는 방법
 services: active-directory-b2c
-documentationcenter: 
-author: dstrockis
-manager: mbaldwin
-editor: 
-ms.assetid: fc2b9af8-fbda-44e0-962a-8b963449106a
+documentationcenter: ''
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.devlang: javascript
-ms.topic: hero-article
+ms.topic: article
 ms.date: 01/07/2017
-ms.author: xerners
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 3b5d9162e2d39e2b0f011383a478545644c57861
-ms.openlocfilehash: c9742c7f505417577857889ef307083afb9bab18
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/14/2017
-
-
+ms.author: davidmu
+ms.openlocfilehash: 3ce0e43beec41599c842cd273cb7230660bdf8d8
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="azure-ad-b2c-secure-a-web-api-by-using-nodejs"></a>Azure AD B2C: Node.js를 사용하여 Web API 보안 유지
 <!-- TODO [AZURE.INCLUDE [active-directory-b2c-devquickstarts-web-switcher](../../includes/active-directory-b2c-devquickstarts-web-switcher.md)]-->
@@ -37,7 +33,7 @@ Azure AD(Azure Active Directory) B2C로 OAuth 2.0 액세스 토큰을 사용하�
 이 샘플을 수행하려면 다음을 수행해야 합니다.
 
 1. Azure AD에 응용 프로그램을 등록합니다.
-2. Passport의 `azure-ad-passport` 플러그 인을 사용하도록 응용 프로그램을 설정합니다.
+2. Passport의 `passport-azure-ad` 플러그 인을 사용하도록 응용 프로그램을 설정합니다.
 3. "to-do list" Web API를 호출하도록 클라이언트 응용 프로그램을 구성합니다.
 
 ## <a name="get-an-azure-ad-b2c-directory"></a>Azure AD B2C 디렉터리 가져오기
@@ -49,9 +45,7 @@ Azure AD B2C를 사용하기 전에 디렉터리 또는 테넌트를 만들어�
 * 응용 프로그램에서 **웹앱/웹 API** 포함
 * **회신 URL**로 `http://localhost/TodoListService`을 입력합니다. 이 코드 샘플에 대한 기본 URL입니다.
 * 응용 프로그램에 **응용 프로그램 암호** 를 만들고 복사합니다. 이 데이터가 나중에 필요합니다. 참고로 이 값은 사용하기 전에 [XML 이스케이프](https://www.w3.org/TR/2006/REC-xml11-20060816/#dt-escape) 되어야 합니다.
-* 앱에 할당된 **응용 프로그램 ID** 를 복사합니다. 이 데이터가 나중에 필요합니다.
-
-[!INCLUDE [active-directory-b2c-devquickstarts-v2-apps](../../includes/active-directory-b2c-devquickstarts-v2-apps.md)]
+* 앱에 할당된 **응용 프로그램 ID**를 복사합니다. 이 데이터가 나중에 필요합니다.
 
 ## <a name="create-your-policies"></a>정책 만들기
 Azure AD B2C에서 모든 사용자 환경은 [정책](active-directory-b2c-reference-policies.md)에 의해 정의됩니다. 이 앱은 등록 및 로그인이라는 두 가지 ID 환경을 포함합니다. [정책 참조 문서](active-directory-b2c-reference-policies.md#create-a-sign-up-policy)에서 설명한 대로 각 형식에 하나의 정책을 만들어야 합니다.  세 가지 정책을 만들 때 다음을 확인합니다.
@@ -67,7 +61,7 @@ Azure AD B2C에서 모든 사용자 환경은 [정책](active-directory-b2c-refe
 Azure AD B2C에서 정책 작동 방법을 알아보려면 [.NET 웹앱 시작 자습서](active-directory-b2c-devquickstarts-web-dotnet.md)를 시작합니다.
 
 ## <a name="download-the-code"></a>코드 다운로드
-이 자습서에 대한 코드는 [GitHub에서 유지 관리됩니다](https://github.com/AzureADQuickStarts/B2C-WebAPI-NodeJS). 진행하면서 샘플을 빌드하기 위해 [골격 프로젝트를 .zip 파일로 다운로드](https://github.com/AzureADQuickStarts/B2C-WebAPI-NodeJS/archive/skeleton.zip)할 수 있습니다. 구조를 복제할 수도 있습니다.
+이 자습서에 대한 코드는 [GitHub에서 유지 관리](https://github.com/AzureADQuickStarts/B2C-WebAPI-NodeJS)됩니다. 진행하면서 샘플을 빌드하기 위해 [골격 프로젝트를 .zip 파일로 다운로드](https://github.com/AzureADQuickStarts/B2C-WebAPI-NodeJS/archive/skeleton.zip)할 수 있습니다. 기본 구조를 복제할 수도 있습니다.
 
 ```
 git clone --branch skeleton https://github.com/AzureADQuickStarts/B2C-WebAPI-NodeJS.git
@@ -762,4 +756,3 @@ Restify 및 OAuth를 사용하여 REST API를 구현했습니다. 이제 충분�
 이제 다음과 같이 좀 더 고급 항목으로 이동할 수 있습니다.
 
 [B2C로 iOS를 사용하여 Web API에 연결](active-directory-b2c-devquickstarts-ios.md)
-

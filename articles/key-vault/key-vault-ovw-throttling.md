@@ -1,17 +1,22 @@
 ---
-ms.assetid: 
-title: "Azure Key Vault 제한 지침 | Microsoft Docs"
-ms.service: key-vault
-author: BrucePerlerMS
-ms.author: bruceper
+title: Azure Key Vault 제한 지침
+description: Key Vault 제한은 리소스의 과용을 방지하기 위해 동시 호출 수를 제한합니다.
+services: key-vault
+documentationcenter: ''
+author: lleonard-msft
 manager: mbaldwin
-ms.date: 06/21/2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6adaf7026d455210db4d7ce6e7111d13c2b75374
-ms.openlocfilehash: fe700e22c5323c2a0bdc315e349cd119798bcf40
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/22/2017
-
+tags: ''
+ms.assetid: 9b7d065e-1979-4397-8298-eeba3aec4792
+ms.service: key-vault
+ms.workload: identity
+ms.topic: article
+ms.date: 05/10/2018
+ms.author: alleonar
+ms.openlocfilehash: 59968f2bccbe2828ebe5fb33c57ed28d4f8509b6
+ms.sourcegitcommit: c52123364e2ba086722bc860f2972642115316ef
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
 ---
 # <a name="azure-key-vault-throttling-guidance"></a>Azure Key Vault 제한 지침
 
@@ -50,6 +55,5 @@ HTTP 오류 코드 429가 발생할 경우 지수 백오프 접근법을 사용�
 
 ## <a name="see-also"></a>참고 항목
 
-Microsoft 클라우드의 제한에 대한 더 자세한 소개는 [제한 패턴](https://docs.microsoft.com/azure/architecture/patterns/throttling)을 참조하세요.
-
+Microsoft Cloud의 제한에 대한 더 자세한 소개는 [제한 패턴](https://docs.microsoft.com/azure/architecture/patterns/throttling)을 참조하세요.
 

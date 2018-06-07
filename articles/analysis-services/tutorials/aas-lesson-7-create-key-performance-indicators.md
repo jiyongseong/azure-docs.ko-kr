@@ -1,30 +1,20 @@
 ---
-title: "Azure Analysis Services 자습서 단원 7: 핵심 성과 지표 만들기 | Microsoft Docs"
-description: "Azure Analysis Services 자습서 프로젝트에서 핵심 성과 지표를 만드는 방법을 설명합니다."
-services: analysis-services
-documentationcenter: 
+title: 'Azure Analysis Services 자습서 단원 7: 핵심 성과 지표 만들기 | Microsoft Docs'
+description: Azure Analysis Services 자습서 프로젝트에서 핵심 성과 지표를 만드는 방법을 설명합니다.
 author: minewiskan
-manager: erikre
-editor: 
-tags: 
-ms.assetid: 
+manager: kfile
 ms.service: analysis-services
-ms.devlang: NA
-ms.topic: get-started-article
-ms.tgt_pltfrm: NA
-ms.workload: na
-ms.date: 05/26/2017
+ms.topic: conceptual
+ms.date: 04/12/2018
 ms.author: owend
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 43aab8d52e854636f7ea2ff3aae50d7827735cc7
-ms.openlocfilehash: d78808421dd5acd907aa9e9000bb3b770a42c061
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/03/2017
-
+ms.reviewer: minewiskan
+ms.openlocfilehash: 8534640822030a7aa93c8eafe2a1b1a4a8bc5bc4
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-# <a name="lesson-7-create-key-performance-indicators"></a>단원 7: 핵심 성과 지표 만들기
-
-[!INCLUDE[analysis-services-appliesto-aas-sql2017-later](../../../includes/analysis-services-appliesto-aas-sql2017-later.md)]
+# <a name="create-key-performance-indicators"></a>핵심 성과 지표 만들기
 
 이 단원에서는 KPI(핵심 성과 지표)를 만듭니다. KPI는 *대상* 값에 대해, *기본* 측정값에 정의되고 측정값 또는 절대값으로도 정의된 값의 성과를 측정하는 데 사용됩니다. 보고 클라이언트 응용 프로그램에서, 비즈니스 전문가는 KPI를 통해 비즈니스 성공 요약 및 추세 파악을 신속하고 간편하게 파악할 수 있습니다. 자세한 내용은 [KPI](https://docs.microsoft.com/sql/analysis-services/tabular-models/kpis-ssas-tabular)를 참조하세요.
   
@@ -49,7 +39,7 @@ ms.lasthandoff: 06/03/2017
 
     이 측정값을 KPI에 대한 기본 측정값으로 제공합니다.  
   
-4.  **InternetCurrentQuarterSalesPerformance** > **KPI 만들기**를 마우스 오른쪽 단추로 클릭합니다.   
+4.  측정값 표에서 **InternetCurrentQuarterSalesPerformance** > **KPI 만들기**를 마우스 오른쪽 단추로 클릭합니다.   
   
 5.  KPI(핵심 성과 지표) 대화 상자의 **대상**에서 **절대값**을 선택한 후 **1.1**을 입력합니다.  
   
@@ -88,4 +78,3 @@ ms.lasthandoff: 06/03/2017
 [단원 8: 큐브 뷰 만들기](../tutorials/aas-lesson-8-create-perspectives.md)
   
   
-

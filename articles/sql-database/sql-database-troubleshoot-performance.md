@@ -1,28 +1,22 @@
 ---
-title: "모니터링 및 성능 튜닝 - Azure SQL Database | Microsoft Docs"
-description: "평가 및 개선을 통한 Azure SQL Database의 성능 튜닝 관련 팁."
+title: 모니터링 및 성능 튜닝 - Azure SQL Database | Microsoft Docs
+description: 평가 및 개선을 통한 Azure SQL Database의 성능 튜닝 관련 팁.
 services: sql-database
-documentationcenter: 
 author: v-shysun
-manager: felixwu
-editor: 
-keywords: "sql 성능 튜닝, 데이터베이스 성능 튜닝, sql 성능 튜닝 팁, SQL Database 성능 튜닝"
-ms.assetid: eb7b3f66-3b33-4e1b-84fb-424a928a6672
+manager: craigg
+editor: ''
+keywords: sql 성능 튜닝, 데이터베이스 성능 튜닝, sql 성능 튜닝 팁, SQL Database 성능 튜닝
 ms.service: sql-database
 ms.custom: monitor & tune
-ms.workload: data-management
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 06/13/2017
+ms.date: 04/01/2018
 ms.author: v-shysun
-ms.translationtype: Human Translation
-ms.sourcegitcommit: fc27849f3309f8a780925e3ceec12f318971872c
-ms.openlocfilehash: 7a2f1199a56e0bd32eafef9f420879c756673e7f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/14/2017
-
-
+ms.openlocfilehash: 710d517621cb9d4d9d2e9bf29e4facf7d75ab481
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32187835"
 ---
 # <a name="monitoring-and-performance-tuning"></a>모니터링 및 성능 튜닝
 
@@ -43,7 +37,7 @@ Azure SQL Database를 사용하면 데이터베이스 사용량을 쉽게 모니
 이러한 보고서 또는 뷰를 사용하여 몇 가지 문제를 파악하는 경우 Azure SQL Database의 성능을 향상시키는 데 사용할 수 있는 기술을 찾으려면 [성능 지침 항목](sql-database-performance-guidance.md)을 참조하세요.
 
 > [!IMPORTANT] 
-> Microsoft Azure 및 SQL 데이터베이스에 대한 업데이트와 동기화 상태를 유지하려면 항상 최신 버전의 Management Studio를 사용하는 것이 좋습니다. [SQL Server Management Studio를 업데이트합니다](https://msdn.microsoft.com/library/mt238290.aspx).
+> Microsoft Azure 및 SQL Database에 대한 업데이트와 동기화 상태를 유지하려면 항상 최신 버전의 Management Studio를 사용하는 것이 좋습니다. [SQL Server Management Studio를 업데이트합니다](https://msdn.microsoft.com/library/mt238290.aspx).
 >
 
 ## <a name="optimize-database-to-improve-performance"></a>데이터베이스 최적화로 성능 개선
@@ -56,8 +50,8 @@ Azure SQL Database를 사용하면 [성능 튜닝 권장 사항](sql-database-ad
 
 ## <a name="improving-database-performance-with-more-resources"></a>보다 많은 리소스와 함께 데이터베이스 성능 개선
 
-마지막으로, 데이터베이스의 성능을 향상시킬 수 있는 실행 가능한 항목이 더 없으면 Azure SQL Database에서 사용할 수 있는 리소스의 양을 변경할 수 있습니다. 독립 실행형 데이터베이스의 [서비스 계층](sql-database-service-tiers.md)을 변경하여 더 많은 리소스를 할당하거나 탄력적 풀의 eDTU를 언제든지 늘릴 수 있습니다.
-1. 독립 실행형 데이터베이스의 경우 필요에 따라 [서비스 계층을 변경](sql-database-service-tiers.md) 하여 데이터베이스 성능을 개선할 수 있습니다.
+마지막으로, 데이터베이스의 성능을 향상시킬 수 있는 실행 가능한 항목이 더 없으면 Azure SQL Database에서 사용할 수 있는 리소스의 양을 변경할 수 있습니다. 독립 실행형 데이터베이스의 [DTU 서비스 계층](sql-database-service-tiers-dtu.md)을 변경하여 더 많은 리소스를 할당하거나 탄력적 풀의 eDTU를 언제든지 늘릴 수 있습니다. 또는 [vCore 기반 구매 모델(미리 보기)](sql-database-service-tiers-vcore.md)을 사용하는 경우 서비스 계층을 변경하거나 데이터베이스에 할당된 리소스를 늘릴 수 있습니다. 
+1. 독립 실행형 데이터베이스의 경우 필요에 따라 [서비스 계층을 변경](sql-database-service-tiers-dtu.md)하거나 [리소스를 계산](sql-database-service-tiers-vcore.md)하여 데이터베이스 성능을 개선할 수 있습니다.
 2. 여러 데이터베이스의 경우 [탄력적 풀](sql-database-elastic-pool-guidance.md)을 사용하여 자동으로 리소스 규모를 조정할 수 있습니다.
 
 ## <a name="tune-and-refactor-application-or-database-code"></a>응용 프로그램 또는 데이터베이스 코드 조정 및 리팩터링
@@ -67,6 +61,6 @@ Azure SQL Database를 사용하면 [성능 튜닝 권장 사항](sql-database-ad
 
 ## <a name="next-steps"></a>다음 단계
 
-- Azure SQL Database에서 자동 튜닝을 사용하도록 설정하고 자동 튜닝 기능으로 워크로드를 완벽하게 관리하려면 [자동 튜닝 사용](sql-database-automatic-tuning-enable.md)을 참조하세요.
+- Azure SQL Database에서 자동 조정을 사용하도록 설정하고 자동 조정 기능으로 작업을 완벽하게 관리하려면 [자동 조정 사용](sql-database-automatic-tuning-enable.md)을 참조하세요.
 - 수동 튜닝을 사용하려면 [Azure Portal에서 튜닝 권장 사항](sql-database-advisor-portal.md)을 검토하고 쿼리의 성능을 개선하는 권장 사항을 직접 적용합니다.
 - [Azure SQL Database 서비스 계층](sql-database-performance-guidance.md)을 변경하여 데이터베이스에 제공되는 리소스를 변경합니다.

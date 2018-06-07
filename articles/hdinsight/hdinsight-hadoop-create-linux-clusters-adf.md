@@ -1,102 +1,64 @@
 ---
-title: "Data Factory를 사용하여 주문형 Hadoop 클러스터 만들기 - Azure HDInsight | Microsoft Docs"
-description: "Azure Data Factory를 사용하여 HDInsight에서 주문형 Hadoop 클러스터를 만드는 방법을 알아봅니다."
+title: '자습서: Data Factory를 사용하여 Azure HDInsight에서 주문형 Hadoop 클러스터 만들기 | Microsoft Docs'
+description: Azure Data Factory를 사용하여 HDInsight에서 주문형 Hadoop 클러스터를 만드는 방법을 알아봅니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 tags: azure-portal
-author: spelluru
+author: nitinme
 manager: jhubbard
 editor: cgronlun
 ms.assetid: 1f3b3a78-4d16-4d99-ba6e-06f7bb185d6a
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 07/20/2017
-ms.author: spelluru
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5bbeb9d4516c2b1be4f5e076a7f63c35e4176b36
-ms.openlocfilehash: 657c436cc45bb3818f89b922d74e03cae894778e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/13/2017
-
+ms.topic: conceptual
+ms.date: 05/07/2018
+ms.author: nitinme
+ms.openlocfilehash: 53ff14e00b88f6d182579ba0d9df630fae9b3d78
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
-# <a name="create-on-demand-hadoop-clusters-in-hdinsight-using-azure-data-factory"></a>Azure Data Factory를 사용하여 HDInsight에서 주문형 Hadoop 클러스터 만들기
+# <a name="tutorial-create-on-demand-hadoop-clusters-in-hdinsight-using-azure-data-factory"></a>자습서: Azure Data Factory를 사용하여 HDInsight에서 주문형 Hadoop 클러스터 만들기
 [!INCLUDE [selector](../../includes/hdinsight-create-linux-cluster-selector.md)]
 
-[Azure Data Factory](../data-factory/data-factory-introduction.md) 는 데이터의 이동과 변환을 조율하고 자동화하는 클라우드 기반의 데이터 통합 서비스입니다. 입력 데이터 조각을 처리하고 처리가 완료되면 클러스터를 삭제하기 위해 HDInsight Hadoop 클러스터를 적시에 만들 수 있습니다. 주문형 HDInsight Hadoop 클러스터를 사용할 때의 이점은 다음과 같습니다.
+이 문서에서는 필요할 때 Azure Data Factory를 사용하여 Azure HDInsight에서 Hadoop 클러스터를 만드는 방법을 알아봅니다. 그런 후 Azure Data Factory에서 데이터 파이프라인을 사용하여 Hive 작업을 실행하고 클러스터를 삭제합니다. 이 자습서를 마치면 클러스터 생성, 작업 실행 및 클러스터 삭제가 일정에 따라 수행되는 빅 데이터 작업 실행을 운용하는 방법을 알게 됩니다.
 
-- HDInsight Hadoop 클러스터에서 실행 중인 작업(및 간략히 구성 가능한 유휴 시간)에만 시간을 할애합니다. HDInsight 클러스터에 대한 결제는 사용 여부에 관계없이 분당으로 비례 배분됩니다. Data Factory에서 주문형 HDInsight 연결된 서비스를 사용할 때 클러스터는 주문 시 생성됩니다. 그리고 작업이 완료되면 클러스터가 자동으로 삭제됩니다. 따라서 작업 실행 시간 및 잠깐의 유휴 시간(TTL 설정)에 대해서만 지불합니다.
-- Data Factory 파이프라인을 사용하여 워크플로를 만들 수 있습니다. 예를 들어 온-프레미스 SQL Server에서 Azure Blob Storage로 데이터를 복사하는 파이프라인을 포함하고 주문형 HDInsight Hadoop 클러스터에서 Hive 스크립트 및 Pig 스크립트를 실행하여 데이터를 처리할 수 있습니다. 그런 다음 결과 데이터를 사용할 BI 응용 프로그램에 대한 Azure SQL Data Warehouse에 복사합니다.
-- 주기적(매시간, 매일, 매주, 매월 등)으로 워크플로 실행을 예약할 수 있습니다.
+이 자습서에서 다루는 작업은 다음과 같습니다. 
 
-Azure Data Factory에서 데이터 팩터리에는 하나 이상의 데이터 파이프라인이 포함될 수 있습니다. 데이터 파이프라인은 하나 이상의 활동을 포함합니다. 두 가지 유형의 활동이 있으며 [데이터 이동 활동](../data-factory/data-factory-data-movement-activities.md) 및 [데이터 변환 활동](../data-factory/data-factory-data-transformation-activities.md)입니다. 데이터 이동 활동(현재는, 복사 작업만)을 사용하여 원본 데이터 저장소에서 대상 데이터 저장소로 데이터를 이동합니다. 데이터 변환 활동을 사용하여 데이터를 변환/처리합니다. HDInsight Hive 작업은 Data Factory에서 지원하는 데이터 변환 활동 중 하나입니다. 이 자습서에서는 Hive 변환 작업을 사용합니다.
+> [!div class="checklist"]
+> * Azure 저장소 계정 만들기
+> * Azure Data Factory 작업 이해
+> * Azure Portal을 사용하여 데이터 팩터리 만들기
+> * 연결된 서비스 만들기
+> * 파이프라인을 만듭니다.
+> * 파이프라인 트리거
+> * 파이프라인 모니터링
+> * 출력 확인
 
-고유한 HDInsight Hadoop 클러스터 또는 주문형 HDInsight Hadoop 클러스터를 사용하도록 hive 작업을 구성할 수 있습니다. 이 자습서에서 데이터 팩터리 파이프라인의 Hive 작업은 주문형 HDInsight 클러스터를 사용하도록 구성됩니다. 따라서 데이터 조각을 처리하기 위해 작업을 실행하면 과정은 다음과 같습니다.
-
-1. 조각을 처리하기 위해 HDInsight Hadoop 클러스터가 자동으로 적시에 생성됩니다.  
-2. 입력 데이터는 클러스터에서 HiveQL 스크립트를 실행하여 처리됩니다.
-3. 처리가 완료된 후 HDInsight Hadoop 클러스터가 삭제되고 클러스터는 구성된 시간(timeToLive 설정) 동안 유휴 상태입니다 이 timeToLive 유휴 시간에 처리를 위해 다음 데이터 조각이 제공되면 조각을 처리하는 데 동일한 클러스터가 사용됩니다.  
-
-이 자습서에서 hive 작업과 관련된 HiveQL 스크립트는 다음 작업을 수행합니다.
-
-1. Azure Blob Storage에 저장된 원시 웹 로그 데이터를 참조하는 외부 테이블을 만듭니다.
-2. 원시 데이터를 연도별, 월별로 분할합니다.
-3. 분할된 데이터를 Azure Blob Storage에 저장합니다.
-
-이 자습서에서 hive 작업과 관련된 HiveQL 스크립트는 Azure Blob Storage에 저장된 원시 웹 로그 데이터를 참조하는 외부 테이블을 만듭니다. 다음은 입력 파일의 각 월에 대한 샘플 행입니다.
-
-```
-2014-01-01,02:01:09,SAMPLEWEBSITE,GET,/blogposts/mvc4/step2.png,X-ARR-LOG-ID=2ec4b8ad-3cf0-4442-93ab-837317ece6a1,80,-,1.54.23.196,Mozilla/5.0+(Windows+NT+6.3;+WOW64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/31.0.1650.63+Safari/537.36,-,http://weblogs.asp.net/sample/archive/2007/12/09/asp-net-mvc-framework-part-4-handling-form-edit-and-post-scenarios.aspx,\N,200,0,0,53175,871
-2014-02-01,02:01:10,SAMPLEWEBSITE,GET,/blogposts/mvc4/step7.png,X-ARR-LOG-ID=d7472a26-431a-4a4d-99eb-c7b4fda2cf4c,80,-,1.54.23.196,Mozilla/5.0+(Windows+NT+6.3;+WOW64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/31.0.1650.63+Safari/537.36,-,http://weblogs.asp.net/sample/archive/2007/12/09/asp-net-mvc-framework-part-4-handling-form-edit-and-post-scenarios.aspx,\N,200,0,0,30184,871
-2014-03-01,02:01:10,SAMPLEWEBSITE,GET,/blogposts/mvc4/step7.png,X-ARR-LOG-ID=d7472a26-431a-4a4d-99eb-c7b4fda2cf4c,80,-,1.54.23.196,Mozilla/5.0+(Windows+NT+6.3;+WOW64)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/31.0.1650.63+Safari/537.36,-,http://weblogs.asp.net/sample/archive/2007/12/09/asp-net-mvc-framework-part-4-handling-form-edit-and-post-scenarios.aspx,\N,200,0,0,30184,871
-```
-
-HiveQL 스크립트는 원시 데이터를 연도별, 월별로 분할합니다. 이전 입력을 기반으로 세 개의 출력 폴더를 만듭니다. 각 폴더에는 각 월의 항목과 함께 파일이 포함되어 있습니다.
-
-```
-adfgetstarted/partitioneddata/year=2014/month=1/000000_0
-adfgetstarted/partitioneddata/year=2014/month=2/000000_0
-adfgetstarted/partitioneddata/year=2014/month=3/000000_0
-```
-
-Hive 작업 외에도 데이터 팩터리의 데이터 변환 활동 목록은 [Azure Data Factory를 사용한 분석 및 변환](../data-factory/data-factory-data-transformation-activities.md)을 참조하세요.
-
-> [!NOTE]
-> 현재, Azure Data Factory에서 HDInsight 클러스터 버전 3.2 만들기만 할 수 있습니다.
+Azure 구독이 아직 없는 경우 시작하기 전에 [체험](https://azure.microsoft.com/free/) 계정을 만듭니다.
 
 ## <a name="prerequisites"></a>필수 조건
-이 문서의 지침을 시작하기 전에 다음 항목이 있어야 합니다.
 
-* [Azure 구독](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/).
-* Azure PowerShell.
+* Azure PowerShell. 자세한 내용은 [Azure PowerShell 설치 및 구성](https://docs.microsoft.com/powershell/azure/install-azurerm-ps?view=azurermps-5.7.0)을 참조하세요.
 
-[!INCLUDE [use-latest-version](../../includes/hdinsight-use-latest-powershell.md)]
+* Azure Active Directory 서비스 주체. 서비스 주체를 만든 후에는 연결된 문서의 지침을 사용하여 **응용 프로그램 ID** 및 **인증 키**를 검색해야 합니다. 이 자습서의 뒷부분에서 이러한 값이 필요합니다. 또한 서비스 주체가 클러스터를 만든 구독 또는 리소스 그룹의 *참가자* 역할의 구성원인지 확인합니다. 필요한 값을 검색하고 적절한 역할을 할당하는 방법에 대한 지침은 [Azure Active Directory 서비스 주체 만들기](../azure-resource-manager/resource-group-create-service-principal-portal.md)를 참조하세요.
 
-### <a name="prepare-storage-account"></a>저장소 계정 준비
-이 시나리오에서는 최대 3개의 저장소 계정을 사용할 수 있습니다.
+## <a name="create-an-azure-storage-account"></a>Azure 저장소 계정 만들기
 
-- HDInsight 클러스터에 대한 기본 저장소 계정
-- 입력 데이터에 대한 저장소 계정
-- 출력 데이터에 대한 저장소 계정
+이 섹션에서는 주문형으로 만든 HDInsight 클러스터에 대한 기본 저장소로 사용할 수 있는 저장소 계정을 만듭니다. 이 저장소 계정은 클러스터에서 실행되는 샘플 Hive 작업을 시뮬레이트하는 데 사용하는 샘플 HiveQL 스크립트(**hivescript.hql**)를 포함합니다.
 
-자습서를 간단하게 만들기 위해 1개의 저장소 계정을 3가지 용도로 사용합니다. 이 섹션에 있는 Azure PowerShell 샘플 스크립트는 다음 작업을 수행합니다.
+이 섹션에서는 Azure PowerShell 스크립트를 사용하여 저장소 계정을 만들고 저장소 계정 내의 필수 파일에 추가로 복사합니다. 이 섹션에 있는 Azure PowerShell 샘플 스크립트는 다음 작업을 수행합니다.
 
 1. Azure에 로그인합니다.
-2. Azure 리소스 그룹 만들기
-3. Azure 저장소 계정 만들기
-4. 저장소 계정에 Blob 컨테이너 만들기
-5. Blob 컨테이너에 다음 두 파일 복사
-
-   * 입력 데이터 파일: [https://hditutorialdata.blob.core.windows.net/adfhiveactivity/inputdata/input.log](https://hditutorialdata.blob.core.windows.net/adfhiveactivity/inputdata/input.log)
-   * HiveQL 스크립트: [https://hditutorialdata.blob.core.windows.net/adfhiveactivity/script/partitionweblogs.hql](https://hditutorialdata.blob.core.windows.net/adfhiveactivity/script/partitionweblogs.hql)
-
-     두 파일은 공용 Blob 컨테이너에 저장되어 있습니다.
+2. Azure 리소스 그룹을 만듭니다.
+3. Azure Storage 계정을 만듭니다.
+4. 저장소 계정에 Blob 컨테이너를 만듭니다.
+5. 샘플 HiveQL 스크립트(**hivescript.hql**)를 Blob 컨테이너에 복사합니다. 스크립트는 [https://hditutorialdata.blob.core.windows.net/adfv2hiveactivity/hivescripts/hivescript.hql](https://hditutorialdata.blob.core.windows.net/adfhiveactivity/script/partitionweblogs.hql)에서 사용할 수 있습니다. 샘플 스크립트를 이미 다른 공용 Blob 컨테이너에서 사용할 수 있습니다. 아래의 PowerShell 스크립트는 만든 Azure Storage 계정에 이러한 파일의 복사본을 만듭니다.
 
 
-**저장소를 준비하고 Azure PowerShell을 사용하여 파일을 복사하려면**
+**Azure PowerShell을 사용하여 저장소 계정을 만들고 파일을 복사하려면**
 > [!IMPORTANT]
 > 스크립트로 생성될 Azure 리소스 그룹 및 Azure Storage 계정 이름을 지정합니다.
 > 스크립트에 출력된 **리소스 그룹 이름**, **저장소 계정 이름** 및 **저장소 계정 키**를 적어 둡니다. 다음 섹션에 필요합니다.
@@ -107,7 +69,7 @@ $storageAccountName = "<Azure Storage Account Name>"
 $location = "East US 2"
 
 $sourceStorageAccountName = "hditutorialdata"  
-$sourceContainerName = "adfhiveactivity"
+$sourceContainerName = "adfv2hiveactivity"
 
 $destStorageAccountName = $storageAccountName
 $destContainerName = "adfgetstarted" # don't change this value.
@@ -117,8 +79,12 @@ $destContainerName = "adfgetstarted" # don't change this value.
 ####################################
 #region - Connect to Azure subscription
 Write-Host "`nConnecting to your Azure subscription ..." -ForegroundColor Green
+<<<<<<< HEAD
+Login-AzureRmAccount
+=======
 try{Get-AzureRmContext}
-catch{Login-AzureRmAccount}
+catch{Connect-AzureRmAccount}
+>>>>>>> refs/remotes/MicrosoftDocs/release-build-hdinsight-2018
 #endregion
 
 ####################################
@@ -175,425 +141,215 @@ write-host "Storage Account Key: $destStorageAccountKey"
 Write-host "`nScript completed" -ForegroundColor Green
 ```
 
-PowerShell 스크립트에 대해 도움이 필요한 경우 [Azure Storage에서 Azure PowerShell 사용](../storage/storage-powershell-guide-full.md)을 참조하세요. 대신 Azure CLI를 사용하려는 경우 Azure CLI 스크립트에 대한 [부록](#appendix) 섹션을 참조하세요.
+**저장소 계정 만들기를 확인하려면**
 
-**저장소 계정 및 그 내용을 검사하려면**
-
-1. [Azure 포털](https://portal.azure.com)에 로그인합니다.
-2. 왼쪽 창에서 **리소스 그룹** 을 클릭합니다.
+1. [Azure Portal](https://portal.azure.com)에 로그인합니다.
+2. 왼쪽 창에서 **리소스 그룹** 을 선택합니다.
 3. PowerShell 스크립트에서 만든 리소스 그룹 이름을 두 번 클릭합니다. 나열된 리소스 그룹이 너무 많은 경우 필터를 사용합니다.
-4. **리소스** 타일에서 리소스 그룹을 다른 프로젝트와 공유하지 않는 한 하나의 리소스가 나열됩니다. 그 리소스는 이전에 지정한 이름의 저장소 계정입니다. 저장소 계정 이름을 클릭합니다.
-5. **Blob** 타일을 클릭합니다.
-6. **adfgetstarted** 컨테이너를 클릭합니다. **inputdata** 및 **script**라는 두 폴더가 표시됩니다.
-7. 폴더를 열고 폴더에서 파일을 확인합니다. inputdata에는 입력 데이터가 있는 input.log 파일이 포함되며 스크립트 폴더에는 HiveQL 스크립트 파일이 포함됩니다.
+4. **리소스** 타일에서 리소스 그룹을 다른 프로젝트와 공유하지 않는 한, 하나의 리소스가 나열됩니다. 그 리소스는 이전에 지정한 이름의 저장소 계정입니다. 저장소 계정 이름을 선택합니다.
+5. **Blob** 타일을 선택합니다.
+6. **adfgetstarted** 컨테이너를 선택합니다. **hivescripts**라는 폴더가 표시됩니다.
+7. 이 폴더를 열고 예제 스크립트 파일 **hivescript.hql**이 포함되어 있는지 확인합니다.
 
-## <a name="create-a-data-factory-using-resource-manager-template"></a>Resource Manager 템플릿을 사용하여 데이터 팩터리 만들기
-저장소 계정, 입력 데이터 및 HiveQL 스크립트가 준비되었으면 Azure Data Factory를 만들 준비가 된 것입니다. 데이터 팩터리는 여러 가지 방법으로 만들 수 있습니다. 이 자습서에서는 Azure Portal을 사용하여 Azure Resource Manager 템플릿을 배포하여 데이터 팩터리를 만듭니다. 또한 [Azure CLI](../azure-resource-manager/resource-group-template-deploy-cli.md) 및 [Azure PowerShell](../azure-resource-manager/resource-group-template-deploy.md#deploy-local-template)을 사용하여 Resource Manager 템플릿을 배포할 수도 있습니다. 기타 데이터 팩터리 만들기 방법은 [자습서: 첫 번째 데이터 팩터리 빌드](../data-factory/data-factory-build-your-first-pipeline.md)를 참조하세요.
+## <a name="understand-the-azure-data-factory-activity"></a>Azure Data Factory 작업 이해
 
-1. Azure에 로그인하여 Azure Portal에서 Azure Resource Manager 템플릿을 열려면 다음 이미지를 클릭합니다. 템플릿은 https://hditutorialdata.blob.core.windows.net/adfhiveactivity/data-factory-hdinsight-on-demand.json에 있습니다. 템플릿에 정의된 엔터티에 대한 자세한 내용은 [템플릿의 Data Factory 엔터티](#data-factory-entities-in-the-template) 섹션을 참조하세요. 
+[Azure Data Factory](../data-factory/introduction.md)는 데이터의 이동 및 변환을 조율하고 자동화합니다. Azure Data Factory는 입력 데이터 조각을 처리하고 처리가 완료되면 클러스터를 삭제하기 위해 HDInsight Hadoop 클러스터를 적시에 만들 수 있습니다. 
 
-    <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fhditutorialdata.blob.core.windows.net%2Fadfhiveactivity%2Fdata-factory-hdinsight-on-demand.json" target="_blank"><img src="./media/hdinsight-hadoop-create-linux-clusters-adf/deploy-to-azure.png" alt="Deploy to Azure"></a>
-2. **리소스 그룹** 설정에 대해 **Use existing**(기존 항목 사용) 옵션을 선택하고 이전 단계에서 만든 리소스 그룹의 이름을 선택합니다(PowerShell 스크립트 사용).
-3. 데이터 팩터리의 이름(**Data Factory Name**)을 입력합니다. 이 이름은 전역적으로 고유해야 합니다.
-4. 이전 단계에서 기록해 둔 **저장소 계정 이름** 및 **저장소 계정 키**를 입력합니다.
-5. **사용 약관**을 읽은 다음 위에 명시된 **사용 약관에 동의함**을 선택합니다.
-6. **대시보드에 고정** 옵션을 선택합니다.
-6. **구매/만들기**를 클릭합니다. 대시보드에 **템플릿 배포 중**이라는 타일이 표시됩니다. 리소스 그룹에 대한 **리소스 그룹** 블레이드가 열릴 때까지 기다립니다. 리소스 그룹 이름이 제목으로 표시된 타일을 클릭하여 리소스 그룹 블레이드를 열 수도 있습니다.
-6. 리소스 그룹 블레이드가 아직 열리지 않은 경우 타일을 클릭하여 리소스 그룹을 엽니다. 이제 저장소 계정 리소스 외에 하나 이상의 데이터 팩터리 리소스가 나열됩니다.
-7. 데이터 팩터리의 이름을 클릭합니다(**Data Factory Name** 매개 변수에 대해 지정한 값).
-8. Data Factory 블레이드에서 **다이어그램** 타일을 클릭합니다. 다이어그램은 입력 데이터 집합 및 출력 데이터 집합이 있는 하나의 작업을 보여 줍니다.
+Azure Data Factory에서 데이터 팩터리에는 하나 이상의 데이터 파이프라인이 포함될 수 있습니다. 데이터 파이프라인은 하나 이상의 활동을 포함합니다. 활동에는 다음 두 가지 유형이 있습니다.
 
-    ![Azure Data Factory HDInsight 주문형 hive 작업 파이프라인 다이어그램](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-adf-pipeline-diagram.png)
+* [데이터 이동 활동](../data-factory/copy-activity-overview.md) - 데이터 이동 활동을 사용하여 원본 데이터 저장소에서 대상 데이터 저장소로 데이터를 이동합니다.
+* [데이터 변환 활동](../data-factory/transform-data.md) 데이터 변환 활동을 사용하여 데이터를 변환/처리합니다. HDInsight Hive 작업은 Data Factory에서 지원하는 데이터 변환 활동 중 하나입니다. 이 자습서에서는 Hive 변환 작업을 사용합니다.
 
-    이름은 Resource Manager 템플릿에 정의됩니다.
-9. **AzureBlobOutput**을 두 번 클릭합니다.
-10. **최근 업데이트된 조각**에 하나의 조각이 표시됩니다. 상태가 **진행 중**이면 **준비**로 변경될 때까지 기다립니다. HDInsight 클러스터를 만들려면 보통 약 **20분** 정도 걸립니다.
+이 문서에서는 주문형 HDInsight Hadoop 클러스터를 만들도록 Hive 작업을 구성합니다. 데이터를 처리하기 위해 작업을 실행하면 과정은 다음과 같습니다.
 
-### <a name="check-the-data-factory-output"></a>데이터 팩터리 출력 확인
+1. 조각을 처리하기 위해 HDInsight Hadoop 클러스터가 자동으로 적시에 생성됩니다. 
 
-1. 마지막 세션에서와 동일한 절차를 사용하여 Adfgetstarted 컨테이너의 컨테이너들을 확인합니다. **adfgetsarted**외에도 두 개의 새 컨테이너가 있습니다.
+2. 입력 데이터는 클러스터에서 HiveQL 스크립트를 실행하여 처리됩니다. 이 자습서에서 hive 작업과 관련된 HiveQL 스크립트는 다음 작업을 수행합니다.
 
-   * `adf<yourdatafactoryname>-linkedservicename-datetimestamp` 패턴을 따르는 이름을 가진 컨테이너. 이 컨테이너는 HDInsight 클러스터의 기본 컨테이너입니다.
-   * adfjobs: 이 컨테이너는 ADF 작업 로그에 대한 컨테이너입니다.
+    * 기존 테이블(*hivesampletable*)을 사용하여 다른 테이블(**HiveSampleOut**)을 만듭니다.
+    * **HiveSampleOut** 테이블을 원본 *hivesampletable*의 특정 열로만 채웁니다.
 
-     데이터 팩터리 출력은 Resource Manager 템플릿에 구성된 대로 **afgetstarted**에 저장됩니다.
-2. **adfgetstarted**를 클릭합니다.
-3. **partitioneddata**를 두 번 클릭합니다. 모든 웹 로그가 2014년에 지정되었으므로 **year=2014** 폴더가 표시됩니다.
+3. 처리가 완료된 후 HDInsight Hadoop 클러스터가 삭제되고 클러스터는 구성된 시간(timeToLive 설정) 동안 유휴 상태입니다 이 timeToLive 유휴 시간에 처리를 위해 다음 데이터 조각이 제공되면 조각을 처리하는 데 동일한 클러스터가 사용됩니다.  
 
-    ![Azure Data Factory HDInsight 주문형 hive 작업 파이프라인 출력](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-adf-output-year.png)
+## <a name="create-a-data-factory"></a>데이터 팩터리를 만듭니다.
 
-    목록을 드릴다운하면 1월, 2월 및 3월에 대한 3개 폴더가 표시됩니다. 각 월에 대한 로그가 있습니다.
+1. [Azure Portal](https://portal.azure.com/)에 로그인합니다.
 
-    ![Azure Data Factory HDInsight 주문형 hive 작업 파이프라인 출력](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-adf-output-month.png)
+2. Azure Portal에서 **리소스 만들기** > **데이터 + 분석** > **Data Factory**를 차례로 선택합니다.
 
-## <a name="data-factory-entities-in-the-template"></a>템플릿의 데이터 팩터리 엔터티
-데이터 팩터리를 위한 최상위 Resource Manager 템플릿은 다음과 같습니다.
+    ![포털의 Azure Data Factory](./media/hdinsight-hadoop-create-linux-clusters-adf/data-factory-azure-portal.png "포털의 Azure Data Factory")
 
-```json
-{
-    "contentVersion": "1.0.0.0",
-    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "parameters": { ...
-    },
-    "variables": { ...
-    },
-    "resources": [
-        {
-            "name": "[parameters('dataFactoryName')]",
-            "apiVersion": "[variables('apiVersion')]",
-            "type": "Microsoft.DataFactory/datafactories",
-            "location": "westus",
-            "resources": [
-                { ... },
-                { ... },
-                { ... },
-                { ... }
-            ]
-        }
-    ]
-}
-```
+2. 다음 스크린샷에서 표시된 대로 값을 입력하거나 선택합니다.
 
-### <a name="define-data-factory"></a>데이터 팩터리 정의
-다음 예제에서처럼 Resource Manager 템플릿에서 데이터 팩터리를 정의합니다.  
+    ![Azure Portal을 사용하여 Azure Data Factory 만들기](./media/hdinsight-hadoop-create-linux-clusters-adf/create-data-factory-portal.png "Azure Portal을 사용하여 Azure Data Factory 만들기")
 
-```json
-"resources": [
-{
-    "name": "[parameters('dataFactoryName')]",
-    "apiVersion": "[variables('apiVersion')]",
-    "type": "Microsoft.DataFactory/datafactories",
-    "location": "westus",
-}
-```
-dataFactoryName은 템플릿을 배포할 때 지정하는 데이터 팩터리의 이름입니다. 데이터 팩터리는 현재 미국 동부, 미국 서부 및 북유럽 하위 지역에서만 지원됩니다.
+    다음 값을 입력하거나 선택합니다.
+    
+    |자산  |설명  |
+    |---------|---------|
+    |**Name** |  데이터 팩터리의 이름을 입력합니다. 이 이름은 전역적으로 고유해야 합니다.|
+    |**구독**     |  Azure 구독을 선택합니다. |
+    |**리소스 그룹**     | **기존 항목 사용**을 선택하고 PowerShell 스크립트를 사용하여 만든 리소스 그룹을 선택합니다. |
+    |**버전**     | **V2(미리 보기)** 를 선택합니다. |
+    |**위치**:     | 이 위치는 이전에 리소스 그룹을 만드는 동안 지정한 위치로 자동으로 설정됩니다. 이 자습서에서 위치는 **미국 동부 2**로 설정됩니다. |
+    
 
-### <a name="defining-entities-within-the-data-factory"></a>데이터 팩터리 내에서 엔터티 정의
-다음 데이터 팩터리 엔터티는 JSON 템플릿에 정의됩니다.
+3. **대시보드에 고정**을 선택하고 **만들기**를 선택합니다. 포털 대시보드에 **배포 제출 중**이라는 제목의 새 타일이 표시됩니다. 데이터 팩터리를 만드는 데는 2 ~ 4분 정도 걸릴 수 있습니다.
 
-* [Azure 저장소 연결된 서비스](#azure-storage-linked-service)
-* [HDInsight 주문형 연결된 서비스](#hdinsight-on-demand-linked-service)
-* [Azure Blob 입력 데이터 집합](#azure-blob-input-dataset)
-* [Azure Blob 출력 데이터 집합:](#azure-blob-output-dataset)
-* [복사 작업을 포함하는 데이터 파이프라인](#data-pipeline)
+    ![템플릿 배포 진행률](./media/hdinsight-hadoop-create-linux-clusters-adf/deployment-progress-tile.png "템플릿 배포 진행률") 
+ 
+4. 데이터 팩터리를 만든 후 포털에는 해당 데이터 팩토리에 대한 개요가 표시됩니다.
 
-#### <a name="azure-storage-linked-service"></a>Azure 저장소 연결된 서비스
-Azure Storage 연결된 서비스는 Azure Storage 계정을 데이터 팩터리에 연결합니다. 이 자습서에서는 기본 HDInsight 저장소 계정, 입력 데이터 저장소 및 출력 데이터 저장소로 동일한 저장소 계정이 사용됩니다. 따라서 Azure Storage 연결된 서비스 하나만 정의합니다. 연결된 서비스 정의에서 Azure Storage 계정의 이름 및 키를 지정합니다. Azure Storage 연결된 서비스를 정의하는 데 사용되는 JSON 속성에 대한 자세한 내용은 [Azure Storage 연결된 서비스](../data-factory/data-factory-azure-blob-connector.md#azure-storage-linked-service)를 참조하세요.
+    ![Azure Data Factory 개요](./media/hdinsight-hadoop-create-linux-clusters-adf/data-factory-portal-overview.png "Azure Data Factory 개요")
 
-```json
-{
-    "name": "[variables('storageLinkedServiceName')]",
-    "type": "linkedservices",
-    "dependsOn": [ "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'))]" ],
-    "apiVersion": "[variables('apiVersion')]",
-    "properties": {
-        "type": "AzureStorage",
-        "typeProperties": {
-            "connectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('storageAccountName'),';AccountKey=',parameters('storageAccountKey'))]"
-        }
-    }
-}
-```
-**connectionString**은 storageAccountName 및 storageAccountKey 매개 변수를 사용합니다. 템플릿을 배포하는 동안 다음 매개 변수 값을 지정합니다.  
+5. **작성 및 모니터링**을 선택하여 Azure Data Factory 작성 및 모니터링 포털을 시작합니다.
 
-#### <a name="hdinsight-on-demand-linked-service"></a>HDInsight 주문형 연결된 서비스
-주문형 HDInsight 연결된 서비스 정의에서 Data Factory 서비스에 사용된 구성 매개 변수에 대한 값을 지정하여 런타임에 HDInsight Hadoop 클러스터를 만듭니다. HDInsight 주문형 연결된 서비스를 정의하는 데 사용되는 JSON 속성에 대한 자세한 내용은 [연결된 서비스 계산](../data-factory/data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service) 문서를 참조하세요.  
+## <a name="create-linked-services"></a>연결된 서비스 만들기
 
-```json
+이 섹션에서는 데이터 팩터리 내에서 연결된 2개의 서비스를 작성합니다.
 
-{
-    "type": "linkedservices",
-    "name": "[variables('hdInsightOnDemandLinkedServiceName')]",
-    "dependsOn": [
-        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'))]",
-        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/linkedservices/', variables('storageLinkedServiceName'))]"
-    ],
-    "apiVersion": "[variables('apiVersion')]",
-    "properties": {
-        "type": "HDInsightOnDemand",
-        "typeProperties": {
-            "version": "3.5",
-            "clusterSize": 1,
-            "timeToLive": "00:05:00",
-            "osType": "Linux",
-            "sshUserName": "myuser",                            
-            "sshPassword": "MyPassword!",
-            "linkedServiceName": "[variables('storageLinkedServiceName')]"
-        }
-    }
-}
-```
-다음 사항에 유의하세요.
+- Azure Storage 계정을 데이터 팩터리에 연결하는 **Azure Storage 연결된 서비스**. 이 저장소는 주문형 HDInsight 클러스터에서 사용됩니다. 또한 클러스터에서 실행되는 Hive 스크립트를 포함합니다.
+- **주문형 HDInsight 연결된 서비스**. Azure Data Factory는 HDInsight 클러스터를 자동으로 만들고 Hive 스크립트를 실행합니다. 그런 다음 클러스터가 미리 구성된 시간 동안 유휴 상태를 유지하면 HDInsight 클러스터를 삭제합니다.
 
-* Data Factory는 사용자 대신 **Linux 기반** HDInsight 클러스터를 만듭니다.
-* HDInsight Hadoop 클러스터는 저장소 계정과 동일한 지역에 생성됩니다.
-* *timeToLive* 설정을 확인합니다. 데이터 팩터리는 클러스터가 30분 동안 유휴 상태가 지속되면 클러스터를 자동으로 삭제합니다.
-* HDInsight 클러스터는 JSON(**linkedServiceName**)에서 지정한 Blob Storage에 **기본 컨테이너**를 만듭니다. HDInsight는 클러스터가 삭제될 때 이 컨테이너를 삭제하지 않습니다. 이 동작은 의도된 것입니다. 주문형 HDInsight 연결된 서비스에서는 기존 라이브 클러스터(**timeToLive**)가 없는 한 슬라이스를 처리해야 할 때마다 HDInsight 클러스터가 만들어지며 처리가 완료되면 삭제됩니다.
+###  <a name="create-an-azure-storage-linked-service"></a>Azure Storage 연결된 서비스 만들기
 
-자세한 내용은 [주문형 HDInsight 연결된 서비스](../data-factory/data-factory-compute-linked-services.md#azure-hdinsight-on-demand-linked-service) 를 참조하세요.
+1. **시작하기** 페이지의 왼쪽 창에서 **편집** 아이콘을 선택합니다.
 
-> [!IMPORTANT]
-> 많은 조각이 처리될수록 Azure Blob 저장소에 컨테이너가 많아집니다. 작업의 문제 해결을 위해 이 항목들이 필요하지 않다면 저장소 비용을 줄이기 위해 삭제할 수 있습니다. 이 컨테이너의 이름은 "adf**yourdatafactoryname**-**linkedservicename**-datetimestamp" 패턴을 따릅니다. [Microsoft 저장소 탐색기](http://storageexplorer.com/) 같은 도구를 사용하여 Azure Blob 저장소에서 컨테이너를 삭제합니다.
+    ![Azure Data Factory 연결된 서비스 만들기](./media/hdinsight-hadoop-create-linux-clusters-adf/data-factory-edit-tab.png "Azure Data Factory 연결된 서비스 만들기")
 
-#### <a name="azure-blob-input-dataset"></a>Azure Blob 입력 데이터 집합
-입력 데이터 집합 정의에서 입력 데이터를 포함하는 Blob 컨테이너, 폴더 및 파일의 이름을 지정합니다. Azure Blob 데이터 집합을 정의하는 데 사용되는 JSON 속성에 대한 자세한 내용은 [Azure Blob 데이터 집합 속성](../data-factory/data-factory-azure-blob-connector.md#dataset-properties)을 참조하세요.
+2. 창의 왼쪽 아래 모서리에서 **연결**을 선택하고 **+ 새로 만들기**를 선택합니다.
 
-```json
+    ![Azure Data Factory에서 연결 만들기](./media/hdinsight-hadoop-create-linux-clusters-adf/data-factory-create-new-connection.png "Azure Data Factory에서 연결 만들기")
 
-{
-    "type": "datasets",
-    "name": "[variables('blobInputDatasetName')]",
-    "dependsOn": [
-        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'))]",
-        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/linkedServices/', variables('storageLinkedServiceName'))]"
-    ],
-    "apiVersion": "[variables('apiVersion')]",
-    "properties": {
-        "type": "AzureBlob",
-        "linkedServiceName": "[variables('storageLinkedServiceName')]",
-        "typeProperties": {
-            "fileName": "input.log",
-            "folderPath": "adfgetstarted/inputdata",
-            "format": {
-                "type": "TextFormat",
-                "columnDelimiter": ","
-            }
-        },
-        "availability": {
-            "frequency": "Month",
-            "interval": 1
-        },
-        "external": true,
-        "policy": {}
-    }
-}
+3. **새 연결된 서비스** 대화 상자에서 **Azure Blob 저장소**를 선택한 다음 **계속**을 선택합니다.
 
-```
+    ![Data Factory에 대한 Azure Storage 연결된 서비스 만들기](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-data-factory-storage-linked-service.png "Data Factory에 대한 Azure Storage 연결된 서비스 만들기")
 
-JSON 정의에서 다음과 같은 특정 설정을 확인합니다.
+4. 저장소 연결된 서비스에 대한 이름을 지정하고, PowerShell 스크립트의 일부로 만든 Azure Storage 계정을 선택한 후 **마침**을 선택합니다.
 
-```json
-"fileName": "input.log",
-"folderPath": "adfgetstarted/inputdata",
-```
+    ![Azure Storage 연결된 서비스의 이름 제공](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-data-factory-storage-linked-service-details.png "Azure Storage 연결된 서비스의 이름 제공")
 
-#### <a name="azure-blob-output-dataset"></a>Azure Blob 출력 데이터 집합
-출력 데이터 집합 정의에서 출력 데이터를 포함하는 Blob 컨테이너 및 폴더의 이름을 지정합니다. Azure Blob 데이터 집합을 정의하는 데 사용되는 JSON 속성에 대한 자세한 내용은 [Azure Blob 데이터 집합 속성](../data-factory/data-factory-azure-blob-connector.md#dataset-properties)을 참조하세요.  
+### <a name="create-an-on-demand-hdinsight-linked-service"></a>주문형 HDInsight 연결된 서비스 만들기
 
-```json
+1. **+ 새로 만들기** 단추를 다시 선택하여 또 하나의 연결된 서비스를 만듭니다.
 
-{
-    "type": "datasets",
-    "name": "[variables('blobOutputDatasetName')]",
-    "dependsOn": [
-        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'))]",
-        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/linkedServices/', variables('storageLinkedServiceName'))]"
-    ],
-    "apiVersion": "[variables('apiVersion')]",
-    "properties": {
-        "type": "AzureBlob",
-        "linkedServiceName": "[variables('storageLinkedServiceName')]",
-        "typeProperties": {
-            "folderPath": "adfgetstarted/partitioneddata",
-            "format": {
-                "type": "TextFormat",
-                "columnDelimiter": ","
-            }
-        },
-        "availability": {
-            "frequency": "Month",
-            "interval": 1,
-            "style": "EndOfInterval"
-        }
-    }
-}
-```
+2. **새 연결된 서비스** 창에서 **Compute** > **Azure HDInsight**를 선택한 후 **계속**을 선택합니다.
 
-folderPath는 출력 데이터를 포함하는 폴더에 대한 경로를 지정합니다.
+    ![Azure Data Factory에 대한 HDInsight 연결된 서비스 만들기](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-data-factory-linked-service.png "Azure Data Factory에 대한 HDInsight 연결된 서비스 만들기")
 
-```json
-"folderPath": "adfgetstarted/partitioneddata",
-```
+3. **새 연결된 서비스** 창에서 필요한 값을 입력합니다.
 
-[데이터 집합 가용성](../data-factory/data-factory-create-datasets.md#dataset-availability) 설정은 다음과 같습니다.
+    ![HDInsight 연결된 서비스의 값 제공](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-data-factory-linked-service-details.png "HDInsight 연결된 서비스의 값 제공")
 
-```json
-"availability": {
-    "frequency": "Month",
-    "interval": 1,
-    "style": "EndOfInterval"
-},
-```
+    다음 값을 입력하고 나머지를 기본값으로 둡니다.
 
-Azure Data Factory에서 출력 데이터 집합 가용성이 파이프라인을 유도합니다. 이 예에서, 월의 마지막 날(EndOfInterval)에 조각이 매달 생성됩니다. 자세한 내용은 [데이터 팩터리 예약 및 실행](../data-factory/data-factory-scheduling-and-execution.md)을 참조하세요.
+    | 자산 | 설명 |
+    | --- | --- |
+    | Name | HDInsight 연결된 서비스의 이름을 입력합니다. |
+    | type | **주문형 HDInsight**를 선택합니다. |
+    | Azure Storage 연결된 서비스 | 이전에 만든 Storage 연결된 서비스를 선택합니다. |
+    | 클러스터 유형 | **hadoop**을 선택합니다. |
+    | TTL(Time to live) | HDInsight 클러스터를 자동으로 삭제하기 전에 사용할 수 있는 기간을 지정합니다.|
+    | 서비스 주체 ID | 필수 구성의 일부로 만든 Azure Active Directory 서비스 주체의 응용 프로그램 ID를 제공합니다. |
+    | 서비스 주체 키 | Azure Active Directory 서비스 주체에 대한 인증 키를 제공합니다. |
+    | 클러스터 이름 접두사 | 데이터 팩터리에 의해 만들어진 모든 클러스터 유형에 접두사로 추가될 값을 제공합니다. |
+    | 리소스 그룹 | 이전에 사용했던 PowerShell 스크립트의 일부로 만든 리소스 그룹을 선택합니다.| 
+    | 클러스터 SSH 사용자 이름 | SSH 사용자 이름을 입력합니다. |
+    | 클러스터 SSH 암호 | SSH 사용자에 대한 암호를 제공합니다. |
 
-#### <a name="data-pipeline"></a>데이터 파이프라인
-주문형 Azure HDInsight 클러스터에서 Hive 스크립트를 실행하여 데이터를 변환하는 파이프라인을 정의합니다. 이 예에서 파이프라인을 정의하는 데 사용된 JSON 요소에 대한 자세한 설명은 [파이프라인 JSON](../data-factory/data-factory-create-pipelines.md#pipeline-json)을 참조하세요.
+    **마침**을 선택합니다.
 
-```json
-{
-    "type": "datapipelines",
-    "name": "[parameters('dataFactoryName')]",
-    "dependsOn": [
-        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'))]",
-        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/linkedServices/', variables('storageLinkedServiceName'))]",
-        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/linkedServices/', variables('hdInsightOnDemandLinkedServiceName'))]",
-        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/datasets/', variables('blobInputDatasetName'))]",
-        "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/datasets/', variables('blobOutputDatasetName'))]"
-    ],
-    "apiVersion": "[variables('apiVersion')]",
-    "properties": {
-        "description": "Azure Data Factory pipeline with an Hadoop Hive activity",
-        "activities": [
-            {
-                "type": "HDInsightHive",
-                "typeProperties": {
-                    "scriptPath": "adfgetstarted/script/partitionweblogs.hql",
-                    "scriptLinkedService": "[variables('storageLinkedServiceName')]",
-                    "defines": {
-                        "inputtable": "[concat('wasb://adfgetstarted@', parameters('storageAccountName'), '.blob.core.windows.net/inputdata')]",
-                        "partitionedtable": "[concat('wasb://adfgetstarted@', parameters('storageAccountName'), '.blob.core.windows.net/partitioneddata')]"
-                    }
-                },
-                "inputs": [
-                    {
-                        "name": "AzureBlobInput"
-                    }
-                ],
-                "outputs": [
-                    {
-                        "name": "AzureBlobOutput"
-                    }
-                ],
-                "policy": {
-                    "concurrency": 1,
-                    "retry": 3
-                },
-                "name": "RunSampleHiveActivity",
-                "linkedServiceName": "HDInsightOnDemandLinkedService"
-            }
-        ],
-        "start": "2016-01-01T00:00:00Z",
-        "end": "2016-01-31T00:00:00Z",
-        "isPaused": false
-    }
-}
-```
+## <a name="create-a-pipeline"></a>파이프라인을 만듭니다.
 
-파이프라인에는 HDInsightHive 작업 한 가지가 포함됩니다. 시작 및 종료 날짜 모두 2016년 1월에 있으므로 한 달에 대한 데이터(조각)만 처리됩니다. 작업에 대한 *start* 및 *end*가 모두 과거 날짜이므로 Data Factory는 해당 월에 대한 데이터를 즉시 처리합니다. end가 미래 날짜이면 데이터 팩터리는 시간이 되면 다른 조각을 만듭니다. 자세한 내용은 [데이터 팩터리 예약 및 실행](../data-factory/data-factory-scheduling-and-execution.md)을 참조하세요.
+1. **+**(더하기) 단추를 선택한 다음 **파이프라인**을 선택합니다.
+
+    ![Azure Data Factory에서 파이프라인 만들기](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-data-factory-create-pipeline.png "Azure Data Factory에서 파이프라인 만들기")
+
+2. **활동** 도구 상자에서 **HDInsight**를 펼치고, **Hive** 활동을 파이프라인 디자이너 화면으로 끌어 옵니다. **일반** 탭에서 활동의 이름을 제공합니다.
+
+    ![Data Factory 파이프라인에 활동 추가](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-data-factory-add-hive-pipeline.png "Data Factory 파이프라인에 활동 추가")
+
+3. Hive 활동을 선택했는지 확인하고, **HDI 클러스터** 탭을 선택하고 **HDInsight 연결된 서비스** 드롭다운에서 HDInsight에 대해 이전에 만든 연결된 서비스를 선택합니다.
+
+    ![파이프라인의 HDInsight 클러스터에 대한 자세한 설명 제공](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-hive-activity-select-hdinsight-linked-service.png "파이프라인의 HDInsight 클러스터에 대한 자세한 설명 제공")
+
+4. **스크립트** 탭을 선택하고 다음 단계를 완료합니다.
+
+    a. **스크립트 연결된 서비스**에 대해 **HDIStorageLinkedService**를 선택합니다. 이 값은 이전에 만든 저장소 연결된 서비스입니다.
+
+    나. **파일 경로**로 **저장소 찾아보기**를 선택하고 샘플 Hive 스크립트를 사용할 수 있는 위치로 이동합니다. 이전에 PowerShell 스크립트를 실행한 경우 이 위치는 `adfgetstarted/hivescripts/hivescript.hql`입니다.
+
+    ![파이프라인의 Hive 스크립트 세부 정보 제공](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-data-factory-provide-script-path.png "파이프라인의 Hive 스크립트 세부 정보 제공")
+
+    다. **고급** > **매개 변수** 아래에서 **스크립트에서 자동 채우기**를 선택합니다. 이 옵션은 런타임에 값을 필요로 하는 Hive 스크립트의 매개 변수를 찾습니다. 사용 하는 스크립트(**hivescript.hql**)에는 **Output** 매개 변수가 있습니다. `wasb://<Container>@<StorageAccount>.blob.core.windows.net/outputfolder/` 형식을 사용하여 Azure Storage의 기존 폴더를 가리키는 값을 제공합니다. 경로는 대/소문자를 구분합니다. 스크립트의 출력을 저장할 경로입니다.
+
+    ![Hive 스크립트에 대한 매개 변수 제공](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-data-factory-provide-script-parameters.png "Hive 스크립트에 대한 매개 변수 제공")
+
+5. 파이프라인에 대한 유효성을 검사하려면 **유효성 검사**를 선택합니다. **>>**(오른쪽 화살표) 단추를 선택하여 유효성 검사 창을 닫습니다.
+
+    ![Azure Data Factory 파이프라인 유효성 검사](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-data-factory-validate-all.png "Azure Data Factory 파이프라인 유효성 검사")
+
+5. 마지막으로 **모두 게시**를 선택하여 Azure Data Factory에 아티팩트를 게시합니다.
+
+    ![Azure Data Factory 파이프라인 게시](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-data-factory-publish-pipeline.png "Azure Data Factory 파이프라인 게시")
+
+## <a name="trigger-a-pipeline"></a>파이프라인 트리거
+
+1. 디자이너 화면의 도구 모음에서 **트리거** > **지금 트리거**를 선택합니다.
+
+    ![Azure Data Factory 파이프라인 트리거](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-data-factory-trigger-pipeline.png "Azure Data Factory 파이프라인 트리거")
+
+2. 팝업 사이드바에서 **마침**을 선택합니다.
+
+## <a name="monitor-a-pipeline"></a>파이프라인 모니터링
+
+1. 왼쪽의 **모니터** 탭으로 전환합니다. **파이프라인 실행** 목록에 파이프라인 실행이 표시됩니다. **상태** 열에서 실행 상태를 확인합니다.
+
+    ![Azure Data Factory 파이프라인 모니터링](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-data-factory-monitor-pipeline.png "Azure Data Factory 파이프라인 모니터링")
+
+2. **새로 고침**을 선택하여 상태를 새로 고칩니다.
+
+3. **활동 실행 보기** 아이콘을 선택하여 파이프라인와 연결된 활동 실행을 볼 수도 있습니다. 아래 스크린샷에서는 만든 파이프라인에 활동이 하나만 있기 때문에 활동 실행이 하나만 표시됩니다. 이전 보기로 돌아가려면 페이지 위쪽의 **파이프라인**을 선택합니다.
+
+    ![Azure Data Factory 파이프라인 활동 모니터링](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-data-factory-monitor-pipeline-activity.png "Azure Data Factory 파이프라인 활동 모니터링")
+
+
+## <a name="verify-the-output"></a>출력 확인
+
+1. 출력을 확인하려면 Azure Portal에서 이 자습서에 사용한 저장소 계정으로 이동합니다. 다음 폴더 또는 컨테이너가 표시됩니다.
+
+    - 파이프라인의 일부로 실행된 Hive 스크립트의 출력을 포함하는 **adfgerstarted/outputfolder**가 표시됩니다.
+
+    - **adfhdidatafactory-\<linked-service-name>-\<timestamp>** 컨테이너가 표시됩니다. 이 컨테이너는 파이프라인 실행의 일부로 생성된 HDInsight 클러스터의 기본 저장소 위치입니다.
+
+    - Azure Data Factory 작업 로그가 있는 **adfjobs** 컨테이너가 표시됩니다.  
+
+        ![Azure Data Factory 파이프라인 출력 확인](./media/hdinsight-hadoop-create-linux-clusters-adf/hdinsight-data-factory-verify-output.png "Azure Data Factory 파이프라인 출력 확인")
+
 
 ## <a name="clean-up-the-tutorial"></a>자습서 정리
 
-### <a name="delete-the-blob-containers-created-by-on-demand-hdinsight-cluster"></a>주문형 HDInsight 클러스터에 생성된 Blob 컨테이너 삭제
-주문형 HDInsight 연결된 서비스에서는 기존 라이브 클러스터(timeToLive)가 없는 한 조각을 처리해야 할 때마다 HDInsight 클러스터가 만들어지며 처리가 완료되면 클러스터가 삭제됩니다. 각 클러스터에 대해 Azure Data Factory는 클러스터에 대한 기본 저장소 계정으로 사용되는 Azure Blob Storage에 Blob 컨테이너를 만듭니다. HDInsight 클러스터가 삭제되어도 기본 Blob 저장소 컨테이너와 연결된 저장소 계정은 삭제되지 않습니다. 이 동작은 의도된 것입니다. 많은 조각이 처리될수록 Azure Blob 저장소에 컨테이너가 많아집니다. 작업의 문제 해결을 위해 이 항목들이 필요하지 않다면 저장소 비용을 줄이기 위해 삭제할 수 있습니다. 이러한 컨테이너의 이름은 `adfyourdatafactoryname-linkedservicename-datetimestamp` 패턴을 따릅니다.
+주문형 HDInsight 클러스터 생성을 사용할 경우에는 HDInsight 클러스터를 명시적으로 삭제할 필요가 없습니다. 클러스터는 파이프라인을 만드는 동안 제공한 구성에 따라 삭제됩니다. 그러나 클러스터를 삭제한 후에도 해당 클러스터와 연결된 저장소 계정이 계속 존재합니다. 이 동작은 데이터 무결성을 유지하기 위해 의도적으로 제공됩니다. 그러나 데이터를 유지하지 않으려면 만든 저장소 계정을 삭제할 수 있습니다.
 
-**adfjobs** 및 **adfyourdatafactoryname-linkedservicename-datetimestamp** 폴더를 삭제합니다. adfjobs 컨테이너는 Azure Data Factory의 작업 로그를 포함합니다.
+또한 이 자습서에 대해 만든 전체 리소스 그룹을 삭제할 수 있습니다. 이렇게 하면 만든 저장소 계정 및 Azure Data Factory가 삭제됩니다.
 
 ### <a name="delete-the-resource-group"></a>리소스 그룹 삭제
-[Azure Resource Manager](../azure-resource-manager/resource-group-overview.md)는 솔루션을 그룹으로 배포, 관리 및 모니터링하는 데 사용됩니다.  리소스 그룹을 삭제하면 그룹 내의 모든 구성 요소가 삭제됩니다.  
 
-1. [Azure 포털](https://portal.azure.com)에 로그인합니다.
-2. 왼쪽 창에서 **리소스 그룹** 을 클릭합니다.
-3. PowerShell 스크립트에서 만든 리소스 그룹 이름을 클릭합니다. 나열된 리소스 그룹이 너무 많은 경우 필터를 사용합니다. 새 블레이드에서 리소스 그룹을 엽니다.
+1. [Azure Portal](https://portal.azure.com)에 로그인합니다.
+2. 왼쪽 창에서 **리소스 그룹** 을 선택합니다.
+3. PowerShell 스크립트에서 만든 리소스 그룹 이름을 선택합니다. 나열된 리소스 그룹이 너무 많은 경우 필터를 사용합니다. 이렇게 하면 리소스 그룹이 열립니다.
 4. **리소스** 타일에서 리소스 그룹을 다른 프로젝트와 공유하지 않는 한 기본 저장소 계정과 데이터 팩터리가 나열됩니다.
-5. 블레이드 맨 위의 **삭제**를 클릭합니다. 이렇게 하면 저장소 계정 및 저장소 계정에 저장된 데이터도 삭제됩니다.
-6. 삭제를 확인하려면 리소스 그룹 이름을 입력하고 **삭제**를 클릭합니다.
+5. **리소스 그룹 삭제**를 선택합니다. 이렇게 하면 저장소 계정 및 저장소 계정에 저장된 데이터도 삭제됩니다.
 
-리소스 그룹을 삭제할 때 저장소 계정을 삭제하지 않으려는 경우 기본 저장소 계정에서 비즈니스 데이터를 구분하여 다음 아키텍처를 고려할 수 있습니다. 이 경우 비즈니스 데이터가 있는 저장소 계정에 대해 하나의 리소스 그룹을 포함하고 HDInsight 연결된 서비스용 기본 저장소 계정 및 데이터 팩터리에 대해 다른 리소스 그룹을 포함합니다. 두 번째 리소스 그룹을 삭제할 경우 비즈니스 데이터 저장소 계정에 영향을 주지 않습니다. 이렇게 하려면 다음을 수행합니다.
+    ![리소스 그룹 삭제](./media/hdinsight-hadoop-create-linux-clusters-adf/delete-resource-group.png "리소스 그룹 삭제")
 
-* 다음을 Resource Manager 템플릿에서 Microsoft.DataFactory/datafactories 리소스와 함께 최상위 수준 리소스 그룹에 추가합니다. 저장소 계정을 만듭니다.
+6. 삭제를 확인하려면 리소스 그룹 이름을 입력하고 **삭제**를 선택합니다.
 
-    ```json
-    {
-        "name": "[parameters('defaultStorageAccountName')]",
-        "type": "Microsoft.Storage/storageAccounts",
-        "location": "[parameters('location')]",
-        "apiVersion": "[variables('defaultApiVersion')]",
-        "dependsOn": [ ],
-        "tags": {
 
-        },
-        "properties": {
-            "accountType": "Standard_LRS"
-        }
-    },
-    ```
-* 새 저장소 계정에 새 연결된 서비스 지점을 추가합니다.
-
-    ```json
-    {
-        "dependsOn": [ "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'))]" ],
-        "type": "linkedservices",
-        "name": "[variables('defaultStorageLinkedServiceName')]",
-        "apiVersion": "[variables('apiVersion')]",
-        "properties": {
-            "type": "AzureStorage",
-            "typeProperties": {
-                "connectionString": "[concat('DefaultEndpointsProtocol=https;AccountName=',parameters('defaultStorageAccountName'),';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('defaultStorageAccountName')), variables('defaultApiVersion')).key1)]"
-            }
-        }
-    },
-    ```
-* 추가 dependsOn 및 additionalLinkedServiceNames로 HDInsight 주문형 연결된 서비스를 구성합니다.
-
-    ```json
-    {
-        "dependsOn": [
-            "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'))]",
-            "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/linkedservices/', variables('defaultStorageLinkedServiceName'))]",
-            "[concat('Microsoft.DataFactory/dataFactories/', parameters('dataFactoryName'), '/linkedservices/', variables('storageLinkedServiceName'))]"
-
-        ],
-        "type": "linkedservices",
-        "name": "[variables('hdInsightOnDemandLinkedServiceName')]",
-        "apiVersion": "[variables('apiVersion')]",
-        "properties": {
-            "type": "HDInsightOnDemand",
-            "typeProperties": {
-                "version": "3.5",
-                "clusterSize": 1,
-                "timeToLive": "00:05:00",
-                "osType": "Linux",
-                "sshUserName": "myuser",                            
-                "sshPassword": "MyPassword!",
-                "linkedServiceName": "[variables('storageLinkedServiceName')]",
-                "additionalLinkedServiceNames": "[variables('defaultStorageLinkedServiceName')]"
-            }
-        }
-    },            
-    ```
 ## <a name="next-steps"></a>다음 단계
-이 문서에서는 Azure Data Factory를 사용하여 주문형 HDInsight 클러스터를 만들고 Hive 작업을 처리하는 방법을 알아보았습니다. 자세히 알아보려면 다음을 참조하세요.
+이 문서에서는 Azure Data Factory를 사용하여 주문형 HDInsight 클러스터를 만들고 Hive 작업을 실행하는 방법을 알아보았습니다. 사용자 지정 구성을 사용하여 HDInsight 클러스터를 만드는 방법을 알아보려면 다음 문서를 계속 진행합니다.
 
-* [Hadoop 자습서: HDInsight에서 Linux 기반 Hadoop 사용 시작](hdinsight-hadoop-linux-tutorial-get-started.md)
-* [HDInsight에서 Linux 기반 Hadoop 클러스터 만들기](hdinsight-hadoop-provision-linux-clusters.md)
-* [HDInsight 설명서](https://azure.microsoft.com/documentation/services/hdinsight/)
-* [데이터 팩터리 설명서](https://azure.microsoft.com/documentation/services/data-factory/)
+> [!div class="nextstepaction"]
+>[사용자 지정 구성을 사용하여 Azure HDInsight 클러스터 만들기](hdinsight-hadoop-provision-linux-clusters.md)
 
-## <a name="appendix"></a>부록
-
-### <a name="azure-cli-script"></a>Azure CLI 스크립트
-Azure PowerShell을 사용하는 대신 Azure CLI를 사용하여 자습서를 수행할 수 있습니다. Azure CLI를 사용하려면 다음 지침에 따라 먼저 Azure CLI를 설치합니다.
-
-[!INCLUDE [use-latest-version](../../includes/hdinsight-use-latest-cli.md)]
-
-#### <a name="use-azure-cli-to-prepare-the-storage-and-copy-the-files"></a>Azure CLI를 사용하여 저장소 준비 및 파일 복사
-
-```
-azure login
-
-azure config mode arm
-
-azure group create --name "<Azure Resource Group Name>" --location "East US 2"
-
-azure storage account create --resource-group "<Azure Resource Group Name>" --location "East US 2" --type "LRS" <Azure Storage Account Name>
-
-azure storage account keys list --resource-group "<Azure Resource Group Name>" "<Azure Storage Account Name>"
-azure storage container create "adfgetstarted" --account-name "<Azure Storage AccountName>" --account-key "<Azure Storage Account Key>"
-
-azure storage blob copy start "https://hditutorialdata.blob.core.windows.net/adfhiveactivity/inputdata/input.log" --dest-account-name "<Azure Storage Account Name>" --dest-account-key "<Azure Storage Account Key>" --dest-container "adfgetstarted"
-azure storage blob copy start "https://hditutorialdata.blob.core.windows.net/adfhiveactivity/script/partitionweblogs.hql" --dest-account-name "<Azure Storage Account Name>" --dest-account-key "<Azure Storage Account Key>" --dest-container "adfgetstarted"
-```
-
-컨테이너 이름은 *adfgetstarted*입니다. 그대로 유지합니다. 그렇지 않으면 Resource Manager 템플릿을 업데이트해야 합니다. 이 CLI 스크립트에 대해 도움이 필요한 경우 [Azure 저장소에서 Azure CLI 사용](../storage/storage-azure-cli.md)을 참조하세요.
 

@@ -1,10 +1,10 @@
 ---
-title: "자습서: SAP Business ByDesign과 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory 및 SAP Business ByDesign 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: SAP Business ByDesign과 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory 및 SAP Business ByDesign 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.reviewer: joflore
 ms.assetid: 82938920-33ba-47cb-b141-511b46d19e66
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/25/2017
 ms.author: jeedes
+ms.openlocfilehash: 23a0f202cabf39036a3a405894c814655e3f3cd9
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
-ms.openlocfilehash: ab76a0ac1ef954efd3c66e6f565514b889ed9444
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-sap-business-bydesign"></a>자습서: SAP Business ByDesign과 Azure Active Directory 통합
 
@@ -31,7 +30,7 @@ SAP Business ByDesign을 Azure AD와 통합하면 다음과 같은 이점이 제
 - 사용자가 해당 Azure AD 계정으로 SAP Business ByDesign에 자동으로 로그온(Single Sign-On)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +58,7 @@ SAP Business ByDesign의 Azure AD 통합을 구성하려면 갤러리의 SAP Bus
 
 **갤러리에서 SAP Business ByDesign을 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -111,7 +110,7 @@ SAP Business ByDesign에서 Azure AD Single Sign-On을 구성하고 테스트하
 
     a. **로그온 URL** 텍스트 상자에서 다음 패턴으로 URL을 입력합니다. `https://<servername>.sapbydesign.com`
 
-    b. **식별자** 텍스트 상자에서 `https://<servername>.sapbydesign.com` 패턴을 사용하여 URL을 입력합니다.
+    나. **식별자** 텍스트 상자에서 `https://<servername>.sapbydesign.com` 패턴을 사용하여 URL을 입력합니다.
 
     > [!NOTE] 
     > 이러한 값은 실제 값이 아닙니다. 실제 로그온 URL 및 식별자로 값을 업데이트합니다. 이러한 값을 얻으려면 [SAP Business ByDesign 클라이언트 지원 팀](https://www.sap.com/products/cloud-analytics.support.html)에 문의하세요.
@@ -122,7 +121,7 @@ SAP Business ByDesign에서 Azure AD Single Sign-On을 구성하고 테스트하
     
     a. **사용자 ID** 목록에서 **ExtractMailPrefix()** 함수를 선택합니다.
     
-    b. **메일** 목록에서 구현에 사용할 사용자 특성을 선택합니다. 예를 들어, EmployeeID를 고유한 사용자 식별자로 사용하고자 하고 ExtensionAttribute2에 특성 값을 저장했다면 user.extensionattribute2를 선택합니다.     
+    나. **메일** 목록에서 구현에 사용할 사용자 특성을 선택합니다. 예를 들어, EmployeeID를 고유한 사용자 식별자로 사용하고자 하고 ExtensionAttribute2에 특성 값을 저장했다면 user.extensionattribute2를 선택합니다.     
 
 5. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 메타데이터 파일을 저장합니다.
 
@@ -140,11 +139,11 @@ SAP Business ByDesign에서 Azure AD Single Sign-On을 구성하고 테스트하
    
     a. 관리자 권한으로 SAP Business ByDesign 포털에 로그인합니다.
    
-    b. **응용 프로그램 및 사용자 관리 일반 작업**으로 이동하여 **ID 공급자** 탭을 클릭합니다.
+    나. **응용 프로그램 및 사용자 관리 일반 작업**으로 이동하여 **ID 공급자** 탭을 클릭합니다.
    
-    c. **새 ID 공급자**를 클릭하고 Azure Portal에서 다운로드한 메타데이터 XML 파일을 선택합니다. 시스템은 메타데이터를 가져와서 필수 서명 인증서 및 암호화 인증서를 자동으로 업로드합니다.
+    다. **새 ID 공급자**를 클릭하고 Azure Portal에서 다운로드한 메타데이터 XML 파일을 선택합니다. 시스템은 메타데이터를 가져와서 필수 서명 인증서 및 암호화 인증서를 자동으로 업로드합니다.
    
-    ![Single Sign-On 구성](./media/active-directory-saas-sapbusinessbydesign-tutorial/tutorial_sapbusinessbydesign_54.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-sapbusinessbydesign-tutorial/tutorial_sapbusinessbydesign_54.png)
    
     d. **어설션 소비자 서비스 URL**을 SAML 요청에 포함하려면 **어설션 소비자 서비스 URL 포함**을 선택합니다.
    
@@ -154,11 +153,11 @@ SAP Business ByDesign에서 Azure AD Single Sign-On을 구성하고 테스트하
    
     g. **내 시스템** 탭을 클릭합니다.
    
-    ![Single Sign-On 구성](./media/active-directory-saas-sapbusinessbydesign-tutorial/tutorial_sapbusinessbydesign_52.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-sapbusinessbydesign-tutorial/tutorial_sapbusinessbydesign_52.png)
    
     h. Azure Portal에서 복사한 **SAML Single Sign-On 서비스 URL**을 **Azure AD 로그온 URL** 텍스트 상자에 붙여넣습니다.
    
-    ![Single Sign-on 구성](./media/active-directory-saas-sapbusinessbydesign-tutorial/tutorial_sapbusinessbydesign_53.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-sapbusinessbydesign-tutorial/tutorial_sapbusinessbydesign_53.png)
    
     i. 직원이 **수동 ID 공급자 선택**을 선택하여 사용자 ID 및 암호 또는 SSO를 사용하는 로그온 중 하나를 수동으로 선택할 수 있는지 여부를 지정합니다.
    
@@ -209,9 +208,9 @@ SAP Business ByDesign에서 Azure AD Single Sign-On을 구성하고 테스트하
 
     a. **이름** 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
+    나. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
 
-    c. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
+    다. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -261,7 +260,7 @@ SAP Business ByDesign에서 Azure AD Single Sign-On을 구성하고 테스트하
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 <!--Image references-->
 
@@ -276,5 +275,4 @@ SAP Business ByDesign에서 Azure AD Single Sign-On을 구성하고 테스트하
 [201]: ./media/active-directory-saas-sapbusinessbydesign-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-sapbusinessbydesign-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-sapbusinessbydesign-tutorial/tutorial_general_203.png
-
 

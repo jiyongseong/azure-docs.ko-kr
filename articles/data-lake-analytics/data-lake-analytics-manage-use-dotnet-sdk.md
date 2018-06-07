@@ -14,12 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: big-data
 ms.date: 06/18/2017
 ms.author: saveenr
+ms.openlocfilehash: 0f8a95f96ce4c816dfb9132923faa9a9bf20c205
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 058601f416ee9ae50d90149764c3991cc1f2923b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="manage-azure-data-lake-analytics-using-azure-net-sdk"></a>Azure .NET SDK를 사용하여 Azure Data Lake Analytics 관리
 [!INCLUDE [manage-selector](../../includes/data-lake-analytics-selector-manage.md)]
@@ -223,7 +222,7 @@ if (adlaClient.Account.Exists(rg, adla))
 데이터 레이크 분석은 현재 다음 데이터 원본을 지원합니다.
 
 * [Azure 데이터 레이크 저장소](../data-lake-store/data-lake-store-overview.md)
-* [Azure Storage 계정](../storage/storage-introduction.md)
+* [Azure Storage 계정](../storage/common/storage-introduction.md)
 
 ### <a name="link-to-an-azure-storage-account"></a>Azure Storage 계정에 대한 링크
 
@@ -428,4 +427,3 @@ adlaAccountClient.ComputePolicies.CreateOrUpdate(rg, adla, "GaryMcDaniel", newPo
 * [Microsoft Azure 데이터 레이크 분석 개요](data-lake-analytics-overview.md)
 * [Azure 포털을 사용하여 Azure Data Lake Analytics 관리](data-lake-analytics-manage-use-portal.md)
 * [Azure 포털을 사용하여 Azure Data Lake Analytics 작업 모니터링 및 문제 해결](data-lake-analytics-monitor-and-troubleshoot-jobs-tutorial.md)
-

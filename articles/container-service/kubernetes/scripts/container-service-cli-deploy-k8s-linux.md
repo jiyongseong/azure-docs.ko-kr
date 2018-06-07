@@ -1,14 +1,14 @@
 ---
-title: "Azure CLI 스크립트 샘플 - ACS Linux Kubernetes 클러스터 만들기 | Microsoft Docs"
-description: "Azure CLI 스크립트 샘플 - ACS Linux Kubernetes 클러스터 만들기"
+title: Azure CLI 스크립트 샘플 - ACS Linux Kubernetes 클러스터 만들기 | Microsoft Docs
+description: Azure CLI 스크립트 샘플 - ACS Linux Kubernetes 클러스터 만들기
 services: container-service
-documentationcenter: 
+documentationcenter: ''
 author: neilpeterson
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: acs, azure-container-service
-keywords: "Docker, 컨테이너, 마이크로 서비스, Kubernetes, DC/OS, Azure"
-ms.assetid: 
+keywords: Docker, 컨테이너, 마이크로 서비스, Kubernetes, DC/OS, Azure
+ms.assetid: ''
 ms.service: container-service
 ms.devlang: azurecli
 ms.topic: sample
@@ -16,14 +16,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 05/30/2017
 ms.author: nepeters
+ms.openlocfilehash: 0ae5c7c371f48eb4d9dd2d48efe7d26b44fbcdbe
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: bfd49ea68c597b109a2c6823b7a8115608fa26c3
-ms.openlocfilehash: c6a392217f84f549f2cae3c68fed85b9f888db77
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-
 # <a name="create-an-azure-container-service-kubernetes-linux-cluster"></a>Azure Container Service Kubernetes Linux 클러스터 만들기
 
 이 샘플에서는 Linux 기반 컨테이너에서 Kubernetes를 실행하는 Azure Container Service 클러스터를 만듭니다.
@@ -56,15 +54,14 @@ az group delete --name myResourceGroup
 
 이 스크립트는 다음 명령을 사용하여 배포합니다. 테이블에 있는 각 항목은 명령에 해당하는 문서에 연결됩니다.
 
-| 명령 | 참고 사항 |
+| 명령 | 메모 |
 |---|---|
-| [az group create](https://docs.microsoft.com/cli/azure/group#create) | 모든 리소스가 저장되는 리소스 그룹을 만듭니다. |
-| [az acs create](https://docs.microsoft.com/cli/azure/acs#create) | ACS 클러스터를 만듭니다. |
+| [az group create](https://docs.microsoft.com/cli/azure/group#az_group_create) | 모든 리소스가 저장되는 리소스 그룹을 만듭니다. |
+| [az acs create](https://docs.microsoft.com/cli/azure/acs#az_acs_create) | ACS 클러스터를 만듭니다. |
 
 ## <a name="next-steps"></a>다음 단계
 
-Azure CLI에 대한 자세한 내용은 [Azure CLI 설명서](https://docs.microsoft.com/cli/azure/overview)를 참조하세요.
+Azure CLI에 대한 자세한 내용은 [Azure CLI 설명서](https://docs.microsoft.com/cli/azure)를 참조하세요.
 
 추가 Azure Container Service CLI 스크립트 샘플은 [Azure Container Service 설명서](../cli-samples.md)에서 확인할 수 있습니다.
-
 

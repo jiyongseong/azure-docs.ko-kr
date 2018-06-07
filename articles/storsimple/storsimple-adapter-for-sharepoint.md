@@ -1,11 +1,11 @@
 ---
-title: "SharePoint용 StorSimple 어댑터 설치 | Microsoft Docs"
-description: "SharePoint 서버 팜에서 SharePoint용 StorSimple 어댑터를 설치 및 구성하거나 제거하는 방법을 설명합니다."
+title: SharePoint용 StorSimple 어댑터 설치 | Microsoft Docs
+description: SharePoint 서버 팜에서 SharePoint용 StorSimple 어댑터를 설치 및 구성하거나 제거하는 방법을 설명합니다.
 services: storsimple
 documentationcenter: NA
 author: SharS
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 36c20b75-f2e5-4184-a6b5-9c5e618f79b2
 ms.service: storsimple
 ms.devlang: NA
@@ -14,13 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/06/2017
 ms.author: v-sharos
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 8910471e09b9ecc797005818538ccfc6a91c68a9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 2e1b231a5cf13d2655ff66c7e48752729c580f48
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="install-and-configure-the-storsimple-adapter-for-sharepoint"></a>SharePoint용 StorSimple 어댑터 설치 및 구성
 ## <a name="overview"></a>개요
@@ -239,7 +237,7 @@ Blob을 SQL Server 콘텐츠 데이터베이스로 다시 이동한 후 다음 �
 2. SharePoint용 StorSimple 어댑터 설치 관리자를 두 번 클릭합니다. 설치 마법사가 시작됩니다.
    
     ![설치 마법사](./media/storsimple-adapter-for-sharepoint/sasp2.png)
-3. **다음**을 누릅니다. 다음 페이지가 나타납니다.
+3. **다음**을 클릭합니다. 다음 페이지가 나타납니다.
    
     ![설치 마법사 제거 페이지](./media/storsimple-adapter-for-sharepoint/sasp3.png)
 4. **제거** 를 클릭하여 제거 프로세스를 선택합니다. 다음 페이지가 나타납니다.
@@ -263,5 +261,4 @@ Blob을 SQL Server 콘텐츠 데이터베이스로 다시 이동한 후 다음 �
 [3]: https://technet.microsoft.com/library/ff628583(v=office.14).aspx
 [4]: https://technet.microsoft.com/library/ff628569(v=office.14).aspx
 [5]: https://technet.microsoft.com/library/ff628583(v=office.15).aspx
-[8]: https://technet.microsoft.com/en-us/library/ff943565.aspx
-
+[8]: https://technet.microsoft.com/library/ff943565.aspx

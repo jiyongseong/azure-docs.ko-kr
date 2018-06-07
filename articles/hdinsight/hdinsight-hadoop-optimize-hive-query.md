@@ -1,8 +1,8 @@
 ---
-title: "Azure HDInsight에서 Hive 쿼리를 최적화 | Microsoft Docs"
-description: "HDInsight에서 Hadoop에 대한 Hive 쿼리를 최적화하는 방법에 대해 알아봅니다."
+title: Azure HDInsight에서 Hive 쿼리를 최적화 | Microsoft Docs
+description: HDInsight에서 Hadoop에 대한 Hive 쿼리를 최적화하는 방법에 대해 알아봅니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: mumian
 manager: jhubbard
 editor: cgronlun
@@ -11,17 +11,14 @@ ms.assetid: d6174c08-06aa-42ac-8e9b-8b8718d9978e
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 04/26/2016
+ms.topic: conceptual
+ms.date: 05/14/2018
 ms.author: jgao
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 54b5b8d0040dc30651a98b3f0d02f5374bf2f873
-ms.openlocfilehash: 7d269a5805da405e4e5f7a3caf5a58fa454b9abb
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/28/2017
-
+ms.openlocfilehash: e844b4f1e9898347da6af589dbfe41bf2ad3ab69
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="optimize-hive-queries-in-azure-hdinsight"></a>Azure HDInsight에서 Hive 쿼리를 최적화
 
@@ -38,7 +35,7 @@ ms.lasthandoff: 04/28/2017
 
     ![scaleout_1][image-hdi-optimize-hive-scaleout_2]
 
-HDInsight에서 지원하는 다른 가상 컴퓨터에 대한 자세한 내용은 [HDInsight 가격](https://azure.microsoft.com/pricing/details/hdinsight/)을 참조하세요.
+HDInsight에서 지원하는 다른 가상 머신에 대한 자세한 내용은 [HDInsight 가격](https://azure.microsoft.com/pricing/details/hdinsight/)을 참조하세요.
 
 ## <a name="enable-tez"></a>TCP 사용
 
@@ -54,7 +51,7 @@ HDInsight에서 지원하는 다른 가상 컴퓨터에 대한 자세한 내용�
 * **컨테이너를 다시 사용**합니다. 가능할 때마다 Tez가 컨테이너를 다시 시작하여 컨테이너 시작으로 인한 대기 시간이 줄어듭니다.
 * **연속 최적화 기술**. 일반적으로 최적화는 컴파일 단계 중에 수행됩니다. 런타임 중 더 나은 최적화를 허용하는 입력에 대한 자세한 정보를 제공합니다. Tez는 계획을 런타임 단계로 추가로 최적화할 수 있는 연속 최적화 기법을 사용합니다.
 
-이러한 개념에 대한 자세한 내용은 [Apache Tez](http://hortonworks.com/hadoop/tez/)를 참조하세요.
+이러한 개념에 대한 자세한 내용은 [Apache TEZ](http://hortonworks.com/hadoop/tez/)를 참조하세요.
 
 아래 설정을 사용하여 쿼리를 접두사로 지정하여 모든 Hive 쿼리 Tez를 사용할 수 있습니다.
 
@@ -114,7 +111,7 @@ Hive 분할은 원시 데이터를 자체 디렉터리가 있는 각 파티션�
 자세한 내용은 [분할된 테이블](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-PartitionedTables)을 참조하세요.
 
 ## <a name="use-the-orcfile-format"></a>ORCFile 형식 사용
-Hive는 다양한 파일 형식을 지원합니다. 예:
+Hive는 다양한 파일 형식을 지원합니다. 예: 
 
 * **텍스트**: 기본 파일 형식으로 대부분의 시나리오와 작동합니다.
 * **Avro**: 상호 운용성 시나리오에 대해 제대로 작동합니다.
@@ -138,7 +135,7 @@ ORC 형식을 사용하려면 먼저 *Stored as ORC*절로 테이블을 만듭�
     PARTITIONED BY(L_SHIPDATE STRING)
     STORED AS ORC;
 
-다음으로 스테이징 테이블에서 ORC 테이블로 데이터를 삽입합니다. 예:
+다음으로 스테이징 테이블에서 ORC 테이블로 데이터를 삽입합니다. 예: 
 
     INSERT INTO TABLE lineitem_orc
     SELECT L_ORDERKEY as L_ORDERKEY, 
@@ -181,14 +178,13 @@ ORC 형식에 대한 자세한 내용은 [여기](https://cwiki.apache.org/confl
 ## <a name="next-steps"></a>다음 단계
 이 기사에서는 몇가지 일반적인 하이브 쿼리 최적화 방법을 배웠습니다. 자세한 내용은 다음 문서를 참조하세요.
 
-* [HDInsight에서 Apache Hive 사용](hdinsight-use-hive.md)
+* [HDInsight에서 Apache Hive 사용](hadoop/hdinsight-use-hive.md)
 * [HDInsight의 Hive를 사용하여 비행 지연 데이터 분석](hdinsight-analyze-flight-delay-data.md)
 * [HDInsight에서 Hive를 사용하여 Twitter 데이터 분석](hdinsight-analyze-twitter-data.md)
-* [HDInsight의 Hadoop에서 Hive 쿼리 콘솔을 사용하여 센서 데이터 분석](hdinsight-hive-analyze-sensor-data.md)
-* [HDInsight와 함께 Hive를 사용하여 웹 사이트의 로그 분석](hdinsight-hive-analyze-website-log.md)
+* [HDInsight의 Hadoop에서 Hive 쿼리 콘솔을 사용하여 센서 데이터 분석](hadoop/apache-hive-analyze-sensor-data.md)
+* [HDInsight와 함께 Hive를 사용하여 웹 사이트의 로그 분석](hadoop/apache-hive-analyze-website-log.md)
 
 [image-hdi-optimize-hive-scaleout_1]: ./media/hdinsight-hadoop-optimize-hive-query/scaleout_1.png
 [image-hdi-optimize-hive-scaleout_2]: ./media/hdinsight-hadoop-optimize-hive-query/scaleout_2.png
 [image-hdi-optimize-hive-tez_1]: ./media/hdinsight-hadoop-optimize-hive-query/tez_1.png
 [image-hdi-optimize-hive-partitioning_1]: ./media/hdinsight-hadoop-optimize-hive-query/partitioning_1.png
-

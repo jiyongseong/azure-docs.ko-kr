@@ -1,32 +1,28 @@
 ---
-title: "Azure Batch 서비스 API를 사용하여 Azure Storage에 작업 및 태스크 출력 유지 | Microsoft Docs"
-description: "Batch 서비스 API를 사용하여 Azure Storage에 Batch 작업 및 태스크 출력을 유지하는 방법을 알아봅니다."
+title: Azure Batch 서비스 API를 사용하여 Azure Storage에 작업 및 태스크 출력 유지 | Microsoft Docs
+description: Batch 서비스 API를 사용하여 Azure Storage에 Batch 작업 및 태스크 출력을 유지하는 방법을 알아봅니다.
 services: batch
-author: tamram
-manager: timlt
-editor: 
+author: dlepow
+manager: jeconnoc
+editor: ''
 ms.service: batch
 ms.devlang: multiple
 ms.topic: article
-ms.tgt_pltfrm: vm-windows
+ms.tgt_pltfrm: ''
 ms.workload: big-compute
 ms.date: 06/16/2017
-ms.author: tamram
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 31ecec607c78da2253fcf16b3638cc716ba3ab89
-ms.openlocfilehash: b3a4e8f9c8580ad4c7899964dbfe99ad74e0c744
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/23/2017
-
-
+ms.author: danlep
+ms.openlocfilehash: ee8622525adcc698bf920b0c3379cc3065798a19
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/20/2018
 ---
-
-
 # <a name="persist-task-data-to-azure-storage-with-the-batch-service-api"></a>Batch 서비스 API를 사용하여 Azure Storage에 태스크 데이터 유지
 
 [!INCLUDE [batch-task-output-include](../../includes/batch-task-output-include.md)]
 
-2017-05-01 버전 이상에서는 Batch 서비스 API에서 가상 컴퓨터 구성으로 풀에서 실행되는 태스크 및 작업 관리자 태스크의 출력 데이터를 Azure Storage에 유지하도록 지원합니다. 태스크를 추가할 때 Azure Storage의 컨테이너를 태스크 출력의 대상으로 지정할 수 있습니다. 그런 다음 태스크가 완료되면 Batch 서비스에서 해당 컨테이너에 출력 데이터를 씁니다.
+2017-05-01 버전 이상에서는 Batch 서비스 API에서 가상 머신 구성으로 풀에서 실행되는 태스크 및 작업 관리자 태스크의 출력 데이터를 Azure Storage에 유지하도록 지원합니다. 태스크를 추가할 때 Azure Storage의 컨테이너를 태스크 출력의 대상으로 지정할 수 있습니다. 그런 다음 태스크가 완료되면 Batch 서비스에서 해당 컨테이너에 출력 데이터를 씁니다.
 
 Batch 서비스 API를 사용하여 태스크 출력을 유지하는 이점은 태스크가 실행되는 응용 프로그램을 수정할 필요가 없다는 것입니다. 대신 클라이언트 응용 프로그램을 간단하게 약간만 수정하면 태스크를 만드는 코드 내에서 태스크 출력을 유지할 수 있습니다.   
 
@@ -54,7 +50,7 @@ await conainer.CreateIfNotExists();
 
 ## <a name="get-a-shared-access-signature-for-the-container"></a>컨테이너에 대한 공유 액세스 서명 가져오기
 
-컨테이너를 만든 후에는 컨테이너에 대한 쓰기 액세스 권한이 있는 SAS(공유 액세스 서명)를 가져옵니다. SAS는 컨테이너에 대해 위임된 액세스를 제공합니다. SAS는 지정된 권한 집합 및 지정된 시간 간격으로 액세스 권한을 부여합니다. Batch 서비스에는 컨테이너에 태스크 출력을 기록하는 쓰기 권한이 있는 SAS가 필요합니다. SAS에 대한 자세한 내용은 [Azure Storage에서 \(SAS\)(공유 액세스 서명) 사용](../storage/storage-dotnet-shared-access-signature-part-1.md)을 참조하세요.
+컨테이너를 만든 후에는 컨테이너에 대한 쓰기 액세스 권한이 있는 SAS(공유 액세스 서명)를 가져옵니다. SAS는 컨테이너에 대해 위임된 액세스를 제공합니다. SAS는 지정된 권한 집합 및 지정된 시간 간격으로 액세스 권한을 부여합니다. Batch 서비스에는 컨테이너에 태스크 출력을 기록하는 쓰기 권한이 있는 SAS가 필요합니다. SAS에 대한 자세한 내용은 [Azure Storage에서 \(SAS\)(공유 액세스 서명) 사용](../storage/common/storage-dotnet-shared-access-signature-part-1.md)을 참조하세요.
 
 Azure Storage API를 사용하여 SAS를 가져오면 API에서 SAS 토큰 문자열을 반환합니다. 이 토큰 문자열에는 SAS가 유효한 권한과 간격을 포함하여 SAS의 모든 매개 변수가 포함됩니다. SAS를 사용하여 Azure Storage의 컨테이너에 액세스하려면 SAS 토큰 문자열을 리소스 URI에 추가해야 합니다. 리소스 URI는 추가된 SAS 토큰과 함께 Azure Storage에 대해 인증된 액세스를 제공합니다.
 
@@ -146,7 +142,7 @@ https://myaccount.blob.core.windows.net/mycontainer/task1/output.txt
 https://myaccount.blob.core.windows.net/mycontainer/task2/output.txt
 ```
 
-Azure Storage의 가상 디렉터리에 대한 자세한 내용은 [컨테이너의 Blob 나열](../storage/storage-dotnet-how-to-use-blobs.md#list-the-blobs-in-a-container)에 있는 Blob 나열을 참조하세요.
+Azure Storage의 가상 디렉터리에 대한 자세한 내용은 [컨테이너의 Blob 나열](../storage/blobs/storage-quickstart-blobs-dotnet.md#list-the-blobs-in-a-container)에 있는 Blob 나열을 참조하세요.
 
 
 ## <a name="diagnose-file-upload-errors"></a>파일 업로드 오류 진단
@@ -181,10 +177,10 @@ C# 이외의 언어로 개발하는 경우 파일 규칙 표준을 직접 구현
 
 ## <a name="code-sample"></a>코드 샘플
 
-[PersistOutputs][github_persistoutputs] 샘플 프로젝트는 GitHub의 [Azure 배치 코드 샘플][github_samples] 중 하나입니다. 이 Visual Studio 솔루션에서는 .NET용 Batch 클라이언트 라이브러리를 사용하여 영구 저장소에 태스크 출력을 유지하는 방법을 보여 줍니다. 샘플을 실행하려면 다음 단계를 수행합니다.
+[PersistOutputs][github_persistoutputs] 샘플 프로젝트는 GitHub의 [Azure Batch 코드 샘플][github_samples] 중 하나입니다. 이 Visual Studio 솔루션에서는 .NET용 Batch 클라이언트 라이브러리를 사용하여 영구 저장소에 태스크 출력을 유지하는 방법을 보여 줍니다. 샘플을 실행하려면 다음 단계를 수행합니다.
 
 1. **Visual Studio 2015 이상**에서 프로젝트를 엽니다.
-2. Microsoft.Azure.Batch.Samples.Common 프로젝트에서 배치 및 저장소 **계정 자격 증명**을 **AccountSettings.settings**에 추가합니다.
+2. Microsoft.Azure.Batch.Samples.Common 프로젝트에서 Batch 및 Storage **계정 자격 증명**을 **AccountSettings.settings**에 추가합니다.
 3. **빌드** 합니다(하지만 실행하지 않음). 메시지가 표시되면 모든 NuGet 패키지를 복원합니다.
 4. Azure 포털을 사용하여 [PersistOutputsTask](batch-application-packages.md) 에 대한 **응용 프로그램 패키지**를 업로드합니다. `PersistOutputsTask.exe` 및 종속 어셈블리를 .zip 패키지에 포함하고, 응용 프로그램 ID를 "PersistOutputsTask"로, 응용 프로그램 패키지 버전을 "1.0"으로 설정합니다.
 5. **PersistOutputs** 프로젝트를 **시작**(실행)합니다.
@@ -198,4 +194,3 @@ C# 이외의 언어로 개발하는 경우 파일 규칙 표준을 직접 구현
 
 [github_persistoutputs]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp/ArticleProjects/PersistOutputs
 [github_samples]: https://github.com/Azure/azure-batch-samples
-

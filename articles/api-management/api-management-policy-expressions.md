@@ -1,39 +1,36 @@
 ---
-title: "Azure API Management 정책 식 | Microsoft Docs"
-description: "Azure API Management에서 정책 식에 대해 자세히 알아봅니다."
+title: Azure API Management 정책 식 | Microsoft Docs
+description: Azure API Management에서 정책 식에 대해 자세히 알아봅니다.
 services: api-management
-documentationcenter: 
-author: miaojiang
+documentationcenter: ''
+author: vladvino
 manager: erikre
-editor: 
+editor: ''
 ms.assetid: ea160028-fc04-4782-aa26-4b8329df3448
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 01/09/2017
+ms.date: 11/28/2017
 ms.author: apimpm
-translationtype: Human Translation
-ms.sourcegitcommit: 538f282b28e5f43f43bf6ef28af20a4d8daea369
-ms.openlocfilehash: d96dde8c74141d000c1f7c5fd9ef624ff5e46953
-ms.lasthandoff: 04/07/2017
-
+ms.openlocfilehash: 0ecfade830b2123257b8039d5f0c26f19f3f3fc6
+ms.sourcegitcommit: 8aab1aab0135fad24987a311b42a1c25a839e9f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/16/2018
 ---
 # <a name="api-management-policy-expressions"></a>API Management 정책 식
-정책 식 구문은 C# 6.0입니다. 각 식에서 암시적으로 제공된 [컨텍스트](api-management-policy-expressions.md#ContextVariables) 변수와 .NET Framework 형식의 허용된 [하위 집합](api-management-policy-expressions.md#CLRTypes)에 액세스합니다.  
-  
-> [!NOTE]
->  정책 식에 대한 자세한 내용은 [정책 식](https://azure.microsoft.com/documentation/videos/policy-expressions-in-azure-api-management/) 비디오를 참조하세요.  
->   
->  정책 식을 사용한 정책 구성에 대한 데모는 [클라우드 표지 에피소드 177: Vlad Vinogradsky와 함께 하는 추가 API Management 기능](https://azure.microsoft.com/documentation/videos/episode-177-more-api-management-features-with-vlad-vinogradsky/)(영문)을 참조하세요. 이 비디오에는 다음 정책 식 데모가 포함됩니다.  
->   
->  -   10:30 - [쿼리 문자열 매개 변수 설정](api-management-transformation-policies.md#SetQueryStringParameter) 및 [HTTP 헤더 설정](api-management-transformation-policies.md#SetHTTPheader) 정책을 사용하여 백 엔드 서비스에 컨텍스트 정보를 제공하기 위해 API 수준에서 정책을 적용하는 방법을 보여 줍니다. 12분 10초 재생 시점에는 개발자 포털에서 작업을 호출하는 데모가 있으며, 여기서 작동 중인 정책을 볼 수 있습니다.  
-> -   13:50 - [JWT 유효성 검사](api-management-access-restriction-policies.md#ValidateJWT) 정책을 사용하여 토큰 클레임 기반 작업에 대해 미리 권한을 부여하는 방법을 보여 줍니다. 15분으로 빨리 감기하여 정책 편집기에 구성된 정책을 본 다음 18분 50초로 빨리 감기하여 필수 권한 부여 토큰 포함 및 제외 모두의 경우로 개발자 포털에서 작업 호출의 데모를 볼 수 있습니다.  
-> -   21:00 - [API 검사기](https://azure.microsoft.com/documentation/articles/api-management-howto-api-inspector/) 추적을 사용하여 정책이 어떻게 평가되고 평가 결과가 어떻게 되는지 보는 방법을 보여 줍니다.  
-> -   25:25 - [캐시에서 가져오기](api-management-caching-policies.md#GetFromCache) 및 [캐시에 저장](api-management-caching-policies.md#StoreToCache) 정책과 함께 정책 식을 사용하여 지원 서비스의 `Cache-Control` 지시문에 지정된 대로 백 엔드 서비스의 응답 캐싱과 일치하는 API Management 응답 캐싱 기간을 구성하는 방법을 보여 줍니다.  
-> -   34:30 - [흐름 제어](api-management-advanced-policies.md#choose) 및 [본문 설정](api-management-transformation-policies.md#SetBody) 정책을 사용하여 백 엔드 서비스에서 받은 응답의 데이터 요소를 제거하여 콘텐츠 필터링을 수행하는 방법을 보여 줍니다. 31분 50초 재생 시점에서 시작하는 [Dark Sky Forecast API](https://developer.forecast.io/)(영문) 개요를 확인하세요.  
-> -   이 비디오에 사용된 정책 문을 다운로드하려면 [api-management-samples/policies](https://github.com/Azure/api-management-samples/tree/master/policies) github 리포지토리를 참조하세요.  
+이 문서에서는 C# 7 정책 식 구문에 대해 설명합니다. 각 식에서 암시적으로 제공된 [컨텍스트](api-management-policy-expressions.md#ContextVariables) 변수와 .NET Framework 형식의 허용된 [하위 집합](api-management-policy-expressions.md#CLRTypes)에 액세스합니다.  
+
+자세한 내용은 다음을 참조하세요.
+
+- 백 엔드 서비스에 컨텍스트 정보를 제공하는 방법을 참조합니다. [쿼리 문자열 매개 변수 설정](api-management-transformation-policies.md#SetQueryStringParameter) 및 [HTTP 헤더 설정](api-management-transformation-policies.md#SetHTTPheader) 정책을 사용하여 이 정보를 제공합니다.
+- [JWT 유효성 검사](api-management-access-restriction-policies.md#ValidateJWT) 정책을 사용하여 토큰 클레임에 따라 작업에 대한 액세스 권한을 미리 부여하는 방법을 참조합니다.   
+- [API 검사기](https://azure.microsoft.com/documentation/articles/api-management-howto-api-inspector/) 추적을 사용하여 정책을 평가하는 방법 및 평가 결과를 확인하는 방법을 참조합니다.  
+- [캐시에서 가져오기](api-management-caching-policies.md#GetFromCache) 및 [캐시에 저장](api-management-caching-policies.md#StoreToCache) 정책이 있는 식을 사용하여 API Management 응답 캐싱을 구성하는 방법을 참조합니다. 백 엔드 서비스의 `Cache-Control` 지시문에 지정된 대로 백 엔드 서비스의 응답 캐싱과 일치하는 기간을 설정합니다.  
+- 콘텐츠 필터링을 수행하는 방법을 참조합니다. [흐름 제어](api-management-advanced-policies.md#choose) 및 [본문 설정](api-management-transformation-policies.md#SetBody) 정책을 사용하여 백 엔드에서 받은 응답의 데이터 요소를 제거합니다. 
+- 정책 문을 다운로드하려면 [api-management-samples/policies](https://github.com/Azure/api-management-samples/tree/master/policies) github 리포지토리를 참조합니다.  
   
   
 ##  <a name="Syntax"></a> 구문  
@@ -71,7 +68,7 @@ ms.lasthandoff: 04/07/2017
  정책 참조에서 다르게 지정하지 않는 한, 식은 어떤 API Management [정책](api-management-policies.md)에서든 특성 값 또는 텍스트 값으로 사용될 수 있습니다.  
   
 > [!IMPORTANT]
->  정책 식을 사용하는 경우 정책을 정의할 때 정책 식에 대해 제한된 검증만 이루어집니다. 식은 게이트웨이에 의해 인바운드 또는 아웃바운드 파이프라인에서 런타임으로 실행되므로 정책 식에서 생성한 런타임 예외로 인해 API 호출에서 런타임 오류가 발생합니다.  
+>  정책 식을 사용하는 경우 정책을 정의할 때 정책 식에 대해 제한된 검증만 이루어집니다. 식은 런타임 시 게이트웨이에 의해 실행됩니다. 정책 식에 의해 생성된 모든 예외는 런타임 오류가 발생합니다.  
   
 ##  <a name="CLRTypes"></a> 정책 식에 허용된 .NET Framework 형식  
  다음 표에서는 .NET Framework 형식과 정책 식에 허용된 멤버를 보여 줍니다.  
@@ -140,7 +137,7 @@ ms.lasthandoff: 04/07/2017
 |System.Text.RegularExpressions.Group|Captures, Success|  
 |System.Text.RegularExpressions.GroupCollection|Count, Item|  
 |System.Text.RegularExpressions.Match|Empty, Groups, Result|  
-|System.Text.RegularExpressions.Regex|.ctor, IsMatch, Match, Matches, Replace|  
+|System.Text.RegularExpressions.Regex|(Constructor),IsMatch, Match, Matches, Replace|  
 |System.Text.RegularExpressions.RegexOptions|Compiled, IgnoreCase, IgnorePatternWhitespace, Multiline, None, RightToLeft, Singleline|  
 |System.TimeSpan|모두|  
 |System.Tuple|모두|  
@@ -172,9 +169,9 @@ ms.lasthandoff: 04/07/2017
   
 |컨텍스트 변수|허용된 메서드, 속성 및 매개 변수 값|  
 |----------------------|-------------------------------------------------------|  
-|context|Api: IApi<br /><br /> 배포<br /><br /> LastError<br /><br /> 작업<br /><br /> 제품<br /><br /> 요청<br /><br /> RequestId: string<br /><br /> 응답<br /><br /> 구독<br /><br /> Tracing: bool<br /><br /> 사용자<br /><br /> Variables:IReadOnlyDictionary<string, object><br /><br /> void Trace(message: string)|  
-|context.Api|Id: string<br /><br /> Name: string<br /><br /> Path: string<br /><br /> ServiceUrl: IUrl|  
-|context.Deployment|Region: string<br /><br /> ServiceName: string|  
+|context|Api: IApi<br /><br /> 배포<br /><br /> Elapsed: TimeSpan - 타임스탬프 값과 현재 시간 사이의 시간 간격<br /><br /> LastError<br /><br /> 작업<br /><br /> 제품<br /><br /> 요청<br /><br /> RequestId: Guid - 고유한 요청 식별자<br /><br /> response<br /><br /> 구독<br /><br /> Timestamp: DateTime - 요청이 수신된 시점<br /><br /> Tracing: bool - 추적의 설정 여부를 나타냅니다. <br /><br /> 사용자<br /><br /> Variables: IReadOnlyDictionary<string, object><br /><br /> void Trace(message: string)|  
+|context.Api|Id: string<br /><br /> IsRevisionCurrent: bool<br /><br />  Name: string<br /><br /> Path: string<br /><br /> Revision: string<br /><br /> ServiceUrl: IUrl<br /><br /> Version: string |  
+|context.Deployment|Region: string<br /><br /> ServiceName: string<br /><br /> Certificates: IReadOnlyDictionary<string, X509Certificate2>|  
 |context.LastError|Source: string<br /><br /> Reason: string<br /><br /> Message: string<br /><br /> Scope: string<br /><br /> Section: string<br /><br /> Path: string<br /><br /> PolicyId: string<br /><br /> context.LastError에 대한 자세한 내용은 [오류 처리](api-management-error-handling-policies.md)를 참조하세요.|  
 |context.Operation|Id: string<br /><br /> Method: string<br /><br /> Name: string<br /><br /> UrlTemplate: string|  
 |context.Product|Apis: IEnumerable<IApi\><br /><br /> ApprovalRequired: bool<br /><br /> Groups: IEnumerable<IGroup\><br /><br /> Id: string<br /><br /> Name: string<br /><br /> State: enum ProductState {NotPublished, Published}<br /><br /> SubscriptionLimit: int?<br /><br /> SubscriptionRequired: bool|  
@@ -193,13 +190,25 @@ ms.lasthandoff: 04/07/2017
 |string IUrl.Query.GetValueOrDefault(queryParameterName: string, defaultValue: string)|queryParameterName: string<br /><br /> defaultValue: string<br /><br /> 쉼표로 구분된 쿼리 매개 변수 값 또는 `defaultValue`(매개 변수가 없는 경우)를 반환합니다.|  
 |T context.Variables.GetValueOrDefault<T\>(variableName: string, defaultValue: T)|variableName: string<br /><br /> defaultValue: T<br /><br /> `T` 형식으로 캐스팅되는 변수 값 또는 `defaultValue`(변수가 없는 경우)를 반환합니다.<br /><br /> 이 메서드는 지정된 형식이 반환된 변수의 실제 형식과 일치하지 않는 경우 예외를 발생시킵니다.|  
 |BasicAuthCredentials AsBasic(input: this string)|input: string<br /><br /> 입력 매개 변수에 유효한 HTTP 기본 인증 권한 부여 요청 헤더 값이 포함된 경우 메서드는 `BasicAuthCredentials` 형식의 개체를 반환하고 그렇지 않은 경우 null을 반환합니다.|  
-|bool TryParseBasic(input: this string, result: out BasicAuthCredentials)|input: string<br /><br /> result: out BasicAuthCredentials<br /><br /> 입력 매개 변수에 유효한 HTTP 기본 인증 권한 부여 요청 헤더 값이 포함된 경우 메서드는 `true`를 반환하고 결과 매개 변수는 `BasicAuthCredentials` 형식의 값을 포함합니다. 그렇지 않은 경우 메서드는 `false`를 반환합니다.|  
+|bool TryParseBasic(input: this string, result: out BasicAuthCredentials)|input: string<br /><br /> result: out BasicAuthCredentials<br /><br /> 입력 매개 변수가 요청 헤더에 유효한 HTTP 기본 인증 권한 부여 값을 포함하는 경우 메서드는 `true`를 반환하고 결과 매개 변수는 `BasicAuthCredentials` 형식의 값을 포함합니다. 그렇지 않은 경우 메서드는 `false`를 반환합니다.|  
 |BasicAuthCredentials|Password: string<br /><br /> UserId: string|  
 |Jwt AsJwt(input: this string)|input: string<br /><br /> 입력 매개 변수에 유효한 JWT 토큰 값이 포함된 경우 메서드는 `Jwt` 형식의 개체를 반환하고 그렇지 않은 경우 `null`을 반환합니다.|  
 |bool TryParseJwt(input: this string, result: out Jwt)|input: string<br /><br /> result: out Jwt<br /><br /> 입력 매개 변수에 유효한 JWT 토큰 값이 포함된 경우 메서드는 `true`를 반환하고 결과 매개 변수는 `Jwt` 형식의 값을 포함합니다. 그렇지 않은 경우 메서드는 `false`를 반환합니다.|  
 |Jwt|Algorithm: string<br /><br /> Audience: IEnumerable<string\><br /><br /> Claims: IReadOnlyDictionary<string, string[]><br /><br /> ExpirationTime: DateTime?<br /><br /> Id: string<br /><br /> Issuer: string<br /><br /> NotBefore: DateTime?<br /><br /> Subject: string<br /><br /> Type: string|  
 |string Jwt.Claims.GetValueOrDefault(claimName: string, defaultValue: string)|claimName: string<br /><br /> defaultValue: string<br /><br /> 쉼표로 구분된 클레임 값 또는 `defaultValue`(헤더가 없는 경우)를 반환합니다.|
+|byte[] Encrypt(input: this byte[], alg: string, key:byte[], iv:byte[])|input - 암호화할 일반 텍스트<br /><br />alg - 대칭 암호화 알고리즘의 이름<br /><br />key - 암호화 키<br /><br />iv - 초기화 벡터<br /><br />암호화된 일반 텍스트를 반환합니다.|
+|byte[] Encrypt(input: this byte[], alg: System.Security.Cryptography.SymmetricAlgorithm)|input - 암호화할 일반 텍스트<br /><br />alg - 암호화 알고리즘<br /><br />암호화된 일반 텍스트를 반환합니다.|
+|byte[] Encrypt(input: this byte[], alg: System.Security.Cryptography.SymmetricAlgorithm, key:byte[], iv:byte[])|input - 암호화할 일반 텍스트<br /><br />alg - 암호화 알고리즘<br /><br />key - 암호화 키<br /><br />iv - 초기화 벡터<br /><br />암호화된 일반 텍스트를 반환합니다.|
+|byte[] Decrypt(input: this byte[], alg: string, key:byte[], iv:byte[])|input - 해독할 암호 텍스트<br /><br />alg - 대칭 암호화 알고리즘의 이름<br /><br />key - 암호화 키<br /><br />iv - 초기화 벡터<br /><br />일반 텍스트를 반환합니다.|
+|byte[] Decrypt(input: this byte[], alg: System.Security.Cryptography.SymmetricAlgorithm)|input - 해독할 암호 텍스트<br /><br />alg - 암호화 알고리즘<br /><br />일반 텍스트를 반환합니다.|
+|byte[] Decrypt(input: this byte[], alg: System.Security.Cryptography.SymmetricAlgorithm, key:byte[], iv:byte[])|input - input - 해독할 암호 텍스트<br /><br />alg - 암호화 알고리즘<br /><br />key - 암호화 키<br /><br />iv - 초기화 벡터<br /><br />일반 텍스트를 반환합니다.|
+
 
 ## <a name="next-steps"></a>다음 단계
-정책으로 작업하는 방법에 대한 자세한 내용은 [API Management의 정책](api-management-howto-policies.md)을 참조하세요.  
 
+정책으로 작업하는 방법에 대한 자세한 내용은 다음을 참조하세요.
+
++ [API Management의 정책](api-management-howto-policies.md)
++ [API 변환](transform-api.md)
++ [정책 참조](api-management-policy-reference.md)(정책 문 및 해당 설정에 대한 전체 목록)
++ [정책 샘플](policy-samples.md)   

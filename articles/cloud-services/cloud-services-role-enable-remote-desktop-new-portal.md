@@ -1,11 +1,11 @@
 ---
-title: "Azure 클라우드 서비스의 역할에 대해 원격 데스크톱 연결 사용 | Microsoft Docs"
-description: "원격 데스크톱 연결을 허용하기 위해 Azure 클라우드 서비스 응용 프로그램을 구성하는 방법"
+title: Azure Cloud Services의 역할에 대해 원격 데스크톱 연결 사용 | Microsoft Docs
+description: 원격 데스크톱 연결을 허용하기 위해 Azure 클라우드 서비스 응용 프로그램을 구성하는 방법
 services: cloud-services
-documentationcenter: 
+documentationcenter: ''
 author: mmccrory
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 73ea1d64-1529-4d72-b58e-f6c10499e6bb
 ms.service: cloud-services
 ms.workload: tbd
@@ -14,31 +14,28 @@ ms.devlang: na
 ms.topic: article
 ms.date: 11/28/2016
 ms.author: mmccrory
-ms.translationtype: Human Translation
-ms.sourcegitcommit: cc9e81de9bf8a3312da834502fa6ca25e2b5834a
-ms.openlocfilehash: fc9b84d151144ae9cb49beacdf525fdc356818a6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/11/2017
-
-
+ms.openlocfilehash: 2169fd95f51b468770a2e1e4c185d493babf220f
+ms.sourcegitcommit: a0be2dc237d30b7f79914e8adfb85299571374ec
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/12/2018
 ---
-# <a name="enable-remote-desktop-connection-for-a-role-in-azure-cloud-services"></a>Azure 클라우드 서비스의 역할에 대해 원격 데스크톱 연결 사용
+# <a name="enable-remote-desktop-connection-for-a-role-in-azure-cloud-services"></a>Azure Cloud Services의 역할에 대해 원격 데스크톱 연결 사용
+
 > [!div class="op_single_selector"]
-> * [Azure 포털](cloud-services-role-enable-remote-desktop-new-portal.md)
-> * [Azure 클래식 포털](cloud-services-role-enable-remote-desktop.md)
+> * [Azure Portal](cloud-services-role-enable-remote-desktop-new-portal.md)
 > * [PowerShell](cloud-services-role-enable-remote-desktop-powershell.md)
-> * [Visual Studio](../vs-azure-tools-remote-desktop-roles.md)
->
->
+> * [Visual Studio](cloud-services-role-enable-remote-desktop-visual-studio.md)
 
 원격 데스크톱을 사용하면 Azure에서 실행 중인 역할의 데스크톱에 액세스할 수 있습니다. 원격 데스크톱 연결을 사용하여 응용 프로그램 실행 중에 응용 프로그램 문제를 진단하고 해결할 수 있습니다.
 
 서비스 정의에 원격 데스크톱 모듈을 포함하여 개발 중에 원격 데스크톱 연결을 사용하도록 설정하거나 원격 데스크톱 확장을 통해 원격 데스크톱을 사용 하도록 선택할 수 있습니다. 권장되는 방법은 원격 데스크톱 확장을 사용하는 것입니다. 이 방법을 사용하면 응용 프로그램이 배포된 후에도 응용 프로그램을 다시 배포할 필요 없이 원격 데스크톱을 사용하도록 설정할 수 있습니다.
 
 ## <a name="configure-remote-desktop-from-the-azure-portal"></a>Azure Portal에서 원격 데스크톱 구성
-Azure Portal에서는 응용 프로그램이 배포된 후에도 원격 데스크톱을 사용 가능하게 설정할 수 있도록 원격 데스크톱 확장 접근 방법을 사용합니다. 클라우드 서비스의 **원격 데스크톱** 블레이드에서 원격 데스크톱을 사용하도록 설정하거나 가상 컴퓨터에 연결하는 데 사용되는 로컬 관리자 계정, 인증에 사용되는 인증서를 변경하고 만료 날짜를 설정할 수 있습니다.
 
-1. **클라우드 서비스**, 클라우드 서비스의 이름, **원격 데스크톱**을 차례로 클릭합니다.
+Azure Portal에서는 응용 프로그램이 배포된 후에도 원격 데스크톱을 사용 가능하게 설정할 수 있도록 원격 데스크톱 확장 접근 방법을 사용합니다. 클라우드 서비스의 **원격 데스크톱** 설정에서 원격 데스크톱을 사용하도록 설정하거나 가상 머신에 연결하는 데 사용되는 로컬 관리자 계정, 인증에 사용되는 인증서를 변경하고 만료 날짜를 설정할 수 있습니다.
+
+1. **Cloud Services**, 클라우드 서비스의 이름, **원격 데스크톱**을 차례로 선택합니다.
 
     ![클라우드 서비스 원격 데스크톱](./media/cloud-services-role-enable-remote-desktop-new-portal/CloudServices_Remote_Desktop.png)
 
@@ -49,17 +46,17 @@ Azure Portal에서는 응용 프로그램이 배포된 후에도 원격 데스�
     ![클라우드 서비스 원격 데스크톱](./media/cloud-services-role-enable-remote-desktop-new-portal/CloudServices_Remote_Desktop_Details.png)
 
    > [!WARNING]
-   > 처음으로 원격 데스크톱을 사용하도록 설정한 후 확인(확인 표시)을 클릭하면 모든 역할 인스턴스가 다시 시작됩니다. 다시 부팅되지 않도록 하려면 암호를 암호화하는 데 사용되는 인증서가 역할에 설치되어 있어야 합니다. 다시 시작되지 않도록 하려면 [클라우드 서비스에 대 한 인증서를 업로드](cloud-services-configure-ssl-certificate.md#step-3-upload-a-certificate) 하고 이 대화 상자로 돌아옵니다.
-   >
-   >
-3. **역할**에서 업데이트할 역할을 선택하거나 모든 역할을 선택하려면 **모두**를 선택합니다.
+   > 처음으로 원격 데스크톱을 사용하도록 설정한 후 **확인**(확인 표시)을 선택하면 모든 역할 인스턴스가 다시 시작됩니다. 다시 부팅되지 않도록 하려면 암호를 암호화하는 데 사용되는 인증서가 역할에 설치되어 있어야 합니다. 다시 시작되지 않도록 하려면 [클라우드 서비스에 대 한 인증서를 업로드](cloud-services-configure-ssl-certificate-portal.md#step-3-upload-a-certificate) 하고 이 대화 상자로 돌아옵니다.
 
-4. 구성 업데이트를 마치면 **저장**을 클릭합니다. 역할 인스턴스가 연결을 수신할 준비가 되기까지 몇 분 정도 걸립니다.
+4. **역할**에서 업데이트할 역할을 선택하거나 모든 역할을 선택하려면 **모두**를 선택합니다.
+
+5. 구성 업데이트를 마치면 **저장**을 선택합니다. 역할 인스턴스가 연결을 수신할 준비가 되기까지 몇 분 정도 걸립니다.
 
 ## <a name="remote-into-role-instances"></a>원격으로 역할 인스턴스 액세스
+
 역할에 대해 원격 데스크톱이 사용 가능하게 설정되면 Azure Portal에서 직접 연결을 시작할 수 있습니다.
 
-1. **인스턴스**를 클릭하여 **인스턴스** 블레이드를 엽니다.
+1. **인스턴스**를 클릭하여 **인스턴스** 설정을 엽니다.
 2. 원격 데스크톱이 구성된 역할 인스턴스를 선택합니다.
 3. **연결**을 클릭하여 역할 인스턴스에 대한 RDP 파일을 다운로드합니다.
 
@@ -72,6 +69,4 @@ Azure Portal에서는 응용 프로그램이 배포된 후에도 원격 데스�
 
 ## <a name="additional-resources"></a>추가 리소스
 
-[Cloud Services를 구성하는 방법](cloud-services-how-to-configure.md)
-[Cloud Services FAQ - 원격 데스크톱](cloud-services-faq.md#remote-desktop)
-
+[Cloud Services를 구성하는 방법](cloud-services-how-to-configure-portal.md)

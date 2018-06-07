@@ -14,10 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/21/2016
 ms.author: manuaery
-translationtype: Human Translation
-ms.sourcegitcommit: c78eda33a64d630ba18aba6a174db372eb41dde9
 ms.openlocfilehash: 284e404c44505a98d9e0ed5abe87cd945415af56
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-the-service-summary-blade-for-storsimple-device-manager-connected-to-storsimple-virtual-array"></a>StorSimple 가상 배열에 연결된 StorSimple Device Manager에 대한 서비스 요약 블레이드 사용
 ## <a name="overview"></a>개요
@@ -45,10 +46,4 @@ StorSimple Device Manager 내에서 수행된 다양한 작업을 보려면 Stor
 
 ## <a name="next-steps"></a>다음 단계
 로컬 웹 UI를 사용하여 [StorSimple 가상 배열을 관리](storsimple-ova-web-ui-admin.md)하는 방법을 알아봅니다.
-
-
-
-
-<!--HONumber=Jan17_HO4-->
-
 

@@ -1,30 +1,23 @@
 ---
-title: "SQL Data Warehouse에 SQL 코드 마이그레이션| Microsoft Docs"
-description: "솔루션 개발을 위한 Azure SQL 데이터 웨어하우스로 SQL 코드를 마이그레이션하기 위한 팁"
+title: SQL Data Warehouse에 SQL 코드 마이그레이션| Microsoft Docs
+description: 솔루션 개발을 위한 Azure SQL Data Warehouse로 SQL 코드를 마이그레이션하기 위한 팁
 services: sql-data-warehouse
-documentationcenter: NA
-author: sqlmojo
-manager: jhubbard
-editor: 
-ms.assetid: 19c252a3-0e41-4eec-9d3e-09a68c7e7add
+author: jrowlandjones
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: migrate
-ms.date: 06/23/2017
-ms.author: joeyong;barbkess
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 1500c02fa1e6876b47e3896c40c7f3356f8f1eed
-ms.openlocfilehash: c6e6b890f5e2d0e31b10bbb6803adad02bf60248
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/30/2017
-
-
+ms.topic: conceptual
+ms.component: implement
+ms.date: 04/17/2018
+ms.author: jrj
+ms.reviewer: igorstan
+ms.openlocfilehash: b17e8e306c01bef4c58658b35f3a67d0e721633c
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
-# <a name="migrate-your-sql-code-to-sql-data-warehouse"></a>SQL 데이터 웨어하우스에 SQL 코드 마이그레이션
-이 문서는 다른 데이터베이스에서 SQL Data Warehouse로 코드를 마이그레이션하는 경우 수행해야 하는 코드 변경 사항을 설명합니다. 일부 SQL 데이터 웨어하우스 기능은 원래 분산 방식으로 작동하도록 디자인되었기 때문에 크게 성능을 향상시킬 수 있습니다. 그러나 성능 및 확장을 유지하려면 일부 기능은 사용할 수 없습니다.
+# <a name="migrate-your-sql-code-to-sql-data-warehouse"></a>SQL Data Warehouse에 SQL 코드 마이그레이션
+이 문서는 다른 데이터베이스에서 SQL Data Warehouse로 코드를 마이그레이션하는 경우 수행해야 하는 코드 변경 사항을 설명합니다. 일부 SQL Data Warehouse 기능은 원래 분산 방식으로 작동하도록 디자인되었기 때문에 크게 성능을 향상시킬 수 있습니다. 그러나 성능 및 확장을 유지하려면 일부 기능은 사용할 수 없습니다.
 
 ## <a name="common-t-sql-limitations"></a>일반적인 T-SQL 제한 사항
 다음 목록에서는 SQL Data Warehouse에서 지원하지 않는 가장 일반적인 기능을 간략하게 설명합니다. 링크를 따라 이동하면 지원되지 않는 기능에 대한 대안을 확인할 수 있습니다.
@@ -34,8 +27,7 @@ ms.lasthandoff: 06/30/2017
 * [병합 문][merge statement]
 * 데이터베이스 간 조인
 * [커서][cursors]
-* <seg>
-  [INSERT..EXEC][INSERT..EXEC]</seg>
+* [INSERT..EXEC][INSERT..EXEC]
 * output 절
 * 인라인 사용자 정의 함수
 * 다중 문 함수
@@ -58,7 +50,7 @@ ms.lasthandoff: 06/30/2017
 다행히 대부분의 이러한 제한을 해결할 수 있습니다. 위에서 언급한 개발 관련 문서에 대한 설명이 제공됩니다.
 
 ## <a name="supported-cte-features"></a>지원되는 CTE 기능
-CTE(공용 테이블 식)는 SQL 데이터 웨어하우스에서 부분적으로 지원됩니다.  현재 지원되는 CTE 기능은 다음과 같습니다.
+CTE(공용 테이블 식)는 SQL Data Warehouse에서 부분적으로 지원됩니다.  현재 지원되는 CTE 기능은 다음과 같습니다.
 
 * SELECT 문에서 CTE를 지정할 수 있습니다.
 * CREATE VIEW 문에서 CTE를 지정할 수 있습니다.
@@ -70,7 +62,7 @@ CTE(공용 테이블 식)는 SQL 데이터 웨어하우스에서 부분적으로
 * CTE에 여러 개의 CTE 쿼리 정의를 정의할 수 있습니다.
 
 ## <a name="cte-limitations"></a>CTE 제한 사항
-공용 테이블 식은 SQL 데이터 웨어하우스에서 다음을 포함하여 몇 가지 제한 사항이 있습니다.
+공용 테이블 식은 SQL Data Warehouse에서 다음을 포함하여 몇 가지 제한 사항이 있습니다.
 
 * CTE는 단일 SELECT 문 뒤에 와야 합니다. INSERT, UPDATE, DELETE 및 MERGE 문은 지원되지 않습니다.
 * 자체에 대한 참조를 포함하는 공통 테이블 식(재귀 공통 테이블 식)은 지원되지 않습니다(아래 섹션 참조).
@@ -80,7 +72,7 @@ CTE(공용 테이블 식)는 SQL 데이터 웨어하우스에서 부분적으로
 * Sp_prepare에 의해 준비된 문에서 사용할 경우 CTE는 PDW에서 다른 SELECT 문과 동일한 방식으로 작동합니다. 그러나 sp_prepare를 통해 준비된 CETAS의 일부로 CTE를 사용할 경우 sp_prepare에 대해 구현되는 바인딩 방식이 다르기 때문에 동작이 SQL Server 및 다른 PDW와 다를 수 있습니다. CTE를 참조하는 SELECT 문이 CTE에 없는 잘못된 열을 사용할 경우 오류를 감지하지 않고 sp_prepare를 통과합니다. 대신 sp_execute 동안 오류가 throw됩니다.
 
 ## <a name="recursive-ctes"></a>재귀 CTE
-재귀 CTE는 SQL 데이터 웨어하우스에서 지원되지 않습니다.  재귀 CTE의 마이그레이션은 복잡할 수 있지만 가장 좋은 프로세스는 여러 단계로 분할하는 것입니다. 재귀 중간 쿼리를 반복할 때 일반적으로 루프를 사용하여 임시 테이블을 채울 수 있습니다. 임시 테이블을 채우고 나면 데이터를 단일 결과 집합으로 반환할 수 있습니다. [롤업/큐브/그룹화 집합 옵션을 사용하는 GROUP BY 절][group by clause with rollup / cube / grouping sets options] 문서에서 `GROUP BY WITH CUBE`를 해결하는 데 사용한 것과 비슷한 방법입니다.
+재귀 CTE는 SQL Data Warehouse에서 지원되지 않습니다.  재귀 CTE의 마이그레이션은 복잡할 수 있지만 가장 좋은 프로세스는 여러 단계로 분할하는 것입니다. 재귀 중간 쿼리를 반복할 때 일반적으로 루프를 사용하여 임시 테이블을 채울 수 있습니다. 임시 테이블을 채우고 나면 데이터를 단일 결과 집합으로 반환할 수 있습니다. [롤업/큐브/그룹화 집합 옵션을 사용하는 GROUP BY 절][group by clause with rollup / cube / grouping sets options] 문서에서 `GROUP BY WITH CUBE`를 해결하는 데 사용한 것과 비슷한 방법입니다.
 
 ## <a name="unsupported-system-functions"></a>지원되지 않는 시스템 함수
 지원하지 않는 일부 시스템 함수도 있습니다. 일반적으로 데이터 웨어하우징에서 사용될 수 있는 일부 기본 함수는 다음과 같습니다.
@@ -139,4 +131,3 @@ SELECT TOP 1 row_count FROM LastRequestRowCounts ORDER BY step_index DESC
 <!--MSDN references-->
 
 <!--Other Web references-->
-

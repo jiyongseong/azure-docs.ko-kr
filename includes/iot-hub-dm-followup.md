@@ -20,4 +20,4 @@ IoT 솔루션을 확장하고 여러 장치에서 메서드 호출을 예약하�
 
 [lnk-fwupdate]: ../articles/iot-hub/iot-hub-node-node-firmware-update.md
 [lnk-tutorial-jobs]: ../articles/iot-hub/iot-hub-node-node-schedule-jobs.md
-[lnk-iot-edge]: ../articles/iot-hub/iot-hub-linux-iot-edge-get-started.md
+[lnk-iot-edge]: ../articles/iot-edge/tutorial-simulate-device-linux.md

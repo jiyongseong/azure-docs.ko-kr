@@ -1,11 +1,11 @@
 ---
-title: "Azure Security Center 및 Azure SQL Database 서비스 | Microsoft Docs"
-description: "이 문서에서는 Security Center가 Azure SQL Database 서비스에서 데이터를 보호하는 데 어떻게 도움이 되는지 보여 줍니다."
+title: Azure Security Center 및 Azure SQL Database 서비스 | Microsoft Docs
+description: 이 문서에서는 Security Center가 Azure SQL Database 서비스에서 데이터를 보호하는 데 어떻게 도움이 되는지 보여 줍니다.
 services: sql-database
 documentationcenter: na
 author: TerryLanfear
 manager: MBaldwin
-editor: 
+editor: ''
 ms.assetid: f109adfd-daed-4257-9692-2042a1399480
 ms.service: security-center
 ms.devlang: na
@@ -14,12 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 02/02/2017
 ms.author: terrylan
-translationtype: Human Translation
-ms.sourcegitcommit: 5d51a5ef3387b4c00079547b0f44ffe1f96bd77c
-ms.openlocfilehash: 46dd298a5664d914e55d45c5b7599d5983287476
-ms.lasthandoff: 02/17/2017
-
-
+ms.openlocfilehash: b507a62db9a80866005cb63d2008fb14612b516f
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="azure-security-center-and-azure-sql-database-service"></a>Azure Security Center 및 Azure SQL Database 서비스
 [Azure Security Center](https://azure.microsoft.com/documentation/services/security-center/)를 통해 위협을 예방하고 감지하며 대응할 수 있습니다. 이는 Azure 구독에 대해 통합된 보안 모니터링 및 정책 관리를 제공하고 다른 방법으로 발견되지 않을 수 있는 위협을 감지하는 데 도움이 되며 보안 솔루션의 광범위한 환경에서 작동합니다.
@@ -34,15 +33,15 @@ ms.lasthandoff: 02/17/2017
 * 보안 문제를 신속하게 파악하고 해결합니다.
 * [Azure SQL Database 위협 감지](../sql-database/sql-database-threat-detection.md)에 대한 경고를 통합합니다.
 
-Security Center는 SQL Database 리소스를 보호하는 것 외에도, Azure 가상 컴퓨터, Cloud Services, App Services, 가상 네트워크 등에 대한 보안 모니터링 및 관리도 제공합니다. [여기](security-center-intro.md)에서 보안에 대해 자세히 알아보세요.
+Security Center는 SQL Database 리소스를 보호하는 것 외에도, Azure 가상 머신, Cloud Services, App Services, 가상 네트워크 등에 대한 보안 모니터링 및 관리도 제공합니다. [여기](security-center-intro.md)에서 보안에 대해 자세히 알아보세요.
 
 ## <a name="prerequisites"></a>필수 조건
 보안 센터를 시작하려면 Microsoft Azure에 대한 구독이 있어야 합니다. 보안 센터의 무료 계층은 구독을 사용하여 사용하도록 설정됩니다. 보안 센터의 무료 및 표준 계층에 대한 자세한 내용은 [보안 센터 가격 책정](https://azure.microsoft.com/pricing/details/security-center/)을 참조하세요.
 
-보안 센터는 역할 기반 액세스를 지원합니다. 역할 기반 액세스 제어(RBAC)에 대해 자세히 알아보려면 [Azure Active Directory 역할 기반 액세스 제어](../active-directory/role-based-access-control-configure.md)를 참조하세요. 보안 센터 FAQ에서는 [보안 센터에서 권한 처리 방법](security-center-faq.md#permissions)에 대한 정보를 제공합니다.
+보안 센터는 역할 기반 액세스를 지원합니다. 역할 기반 액세스 제어(RBAC)에 대해 자세히 알아보려면 [Azure Active Directory 역할 기반 Access Control](../role-based-access-control/role-assignments-portal.md)을 참조하세요. 보안 센터 FAQ에서는 [보안 센터에서 권한 처리 방법](security-center-faq.md#permissions)에 대한 정보를 제공합니다.
 
 ## <a name="access-security-center"></a>보안 센터 엑세스
-[Azure 포털](https://azure.microsoft.com/features/azure-portal/)에서 보안 센터에 액세스합니다. [포털에 로그인](https://portal.azure.com/)하고 **보안 센터 옵션**을 선택합니다.
+[Azure 포털](https://azure.microsoft.com/features/azure-portal/)에서 Security Center에 액세스합니다. [포털에 로그인](https://portal.azure.com/)하고 **보안 센터 옵션**을 선택합니다.
 
 ![보안 센터 옵션][1]
 
@@ -69,13 +68,13 @@ SQL 감사 및 SQL 투명한 데이터 암호화(TDE)에 대한 권장 사항을
 
 | 권장 사항 | 설명 |
 | --- | --- |
-| [SQL Server에서 감사 및 위협 감지 사용](security-center-enable-auditing-on-sql-servers.md) |SQL Database 서버에 대한 감사 및 위협 감지를 켜는 것이 좋습니다. (SQL Database 서비스만 해당. 가상 컴퓨터에서 실행 중인 Microsoft SQL Server는 포함하지 않음) |
-| [SQL 데이터베이스에서 감사 및 위협 감지 사용](security-center-enable-auditing-on-sql-databases.md) |SQL Database 데이터베이스에 대한 감사 및 위협 감지를 켜는 것이 좋습니다. (SQL Database 서비스만 해당. 가상 컴퓨터에서 실행 중인 Microsoft SQL Server는 포함하지 않음) |
+| [SQL Server에서 감사 및 위협 감지 사용](security-center-enable-auditing-on-sql-servers.md) |SQL Database 서버에 대한 감사 및 위협 감지를 켜는 것이 좋습니다. (SQL Database 서비스만 해당. 가상 머신에서 실행 중인 Microsoft SQL Server는 포함하지 않음) |
+| [SQL 데이터베이스에서 감사 및 위협 감지 사용](security-center-enable-auditing-on-sql-databases.md) |SQL Database 데이터베이스에 대한 감사 및 위협 감지를 켜는 것이 좋습니다. (SQL Database 서비스만 해당. 가상 머신에서 실행 중인 Microsoft SQL Server는 포함하지 않음) |
 | [투명한 데이터 암호화 사용](security-center-enable-transparent-data-encryption.md) |SQL Database에 대해 암호화를 활성화하는 것이 좋습니다. (SQL Database 서비스만 해당) |
 
 Azure 리소스에 대한 권장 사항을 보려면 Security Center 블레이드에서 **권장 사항** 타일을 선택합니다. **권장 사항** 블레이드에서 자세한 내용을 볼 권장 사항을 선택합니다. 이 예제에서는 **SQL Server에서 감사 및 위협 감지 사용**을 선택하겠습니다.
 
-![추천][4]
+![권장 사항][4]
 
 아래와 같이 보안 센터에서 감사 및 위협 감지가 사용되지 않은 SQL Server를 보여 줍니다. 감사를 켠 후에는 보안 경고를 받을 수 있도록 위협 감지 설정 및 전자 메일 설정을 구성할 수 있습니다. 위협 감지는 데이터베이스에 대한 잠재적인 보안 위협을 나타내는 비정상적인 데이터베이스 활동을 감지할 때 이를 경고합니다. 경고는 보안 센터 대시보드에 표시됩니다.
 ![감사 및 위협 감지][5]
@@ -116,4 +115,3 @@ Security Center는 [Azure SQL 위협 감지](../sql-database/sql-database-threat
 [6]: ./media/security-center-sql-database/monitor-health.png
 [7]: ./media/security-center-sql-database/alert.png
 [8]: ./media/security-center-sql-database/sql-injection.png
-

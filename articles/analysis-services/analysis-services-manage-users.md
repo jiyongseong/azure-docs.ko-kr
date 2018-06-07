@@ -1,32 +1,23 @@
 ---
-title: "Azure Analysis Services의 인증 및 사용자 권한 | Microsoft Docs"
-description: "Azure Analysis Services의 인증 및 사용자 권한에 대해 알아봅니다."
-services: analysis-services
-documentationcenter: 
+title: Azure Analysis Services의 인증 및 사용자 권한 | Microsoft Docs
+description: Azure Analysis Services의 인증 및 사용자 권한에 대해 알아봅니다.
 author: minewiskan
-manager: erikre
-editor: 
-tags: 
-ms.assetid: 
+manager: kfile
 ms.service: analysis-services
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: na
-ms.date: 06/26/2016
+ms.topic: conceptual
+ms.date: 04/12/2018
 ms.author: owend
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 857267f46f6a2d545fc402ebf3a12f21c62ecd21
-ms.openlocfilehash: 766b2fc3b68d223d80de1da9ef36aec269fe0de9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/28/2017
-
-
+ms.reviewer: minewiskan
+ms.openlocfilehash: ede05667d794267443babacaa8b016206d86ab2c
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="authentication-and-user-permissions"></a>인증 및 사용자 권한
 Azure Analysis Services는 ID 관리 및 사용자 인증에 Azure AD(Azure Active Directory)를 사용합니다. Azure Analysis Services 서버를 만들거나, 관리하거나, 이 서버에 연결하는 모든 사용자는 동일한 구독의 [Azure AD 테넌트](../active-directory/active-directory-administer.md)에 유효한 사용자 ID가 있어야 합니다.
 
-Azure Analysis Services는 [Azure AD B2B 공동 작업](../active-directory/active-directory-b2b-what-is-azure-ad-b2b.md)을 지원합니다. B2B를 사용하여 Azure AD 디렉터리의 게스트 사용자로 조직 외부의 사용자를 초대할 수 있습니다. 게스트는 다른 Azure AD 테넌트 디렉터리나 모든 유효한 메일 주소에서 가져올 수 있습니다. 초대된 사용자가 Azure에서 메일로 보낸 초대를 수락하면 사용자 ID가 테넌트 디렉터리에 추가됩니다. 그러면 해당 ID를 보안 그룹에 추가하거나 서버 관리자 또는 데이터베이스 역할의 멤버로 추가할 수 있습니다.
+Azure Analysis Services는 [Azure AD B2B 공동 작업](../active-directory/active-directory-b2b-what-is-azure-ad-b2b.md)을 지원합니다. B2B를 사용하여 Azure AD 디렉터리의 게스트 사용자로 조직 외부의 사용자를 초대할 수 있습니다. 게스트는 다른 Azure AD 테넌트 디렉터리나 모든 유효한 메일 주소에서 가져올 수 있습니다. 초대된 사용자가 Azure에서 메일로 보낸 초대를 수락하면 사용자 ID가 테넌트 디렉터리에 추가됩니다. 해당 ID를 보안 그룹에 추가하거나 서버 관리자 또는 데이터베이스 역할의 멤버로 추가할 수 있습니다.
 
 ![Azure Analysis Services 인증 아키텍처](./media/analysis-services-manage-users/aas-manage-users-arch.png)
 
@@ -37,8 +28,11 @@ Azure Analysis Services는 [Azure AD B2B 공동 작업](../active-directory/acti
 
 Excel 및 Power BI Desktop 같은 클라이언트 응용 프로그램과 SSMS 및 SSDT 같은 도구는 최신 릴리스로 업데이트될 때 최신 버전의 라이브러리를 설치합니다. Power BI Desktop, SSMS 및 SSDT는 매월 업데이트됩니다. Excel은 [Office 365로 업데이트](https://support.office.com/en-us/article/When-do-I-get-the-newest-features-in-Office-2016-for-Office-365-da36192c-58b9-4bc9-8d51-bb6eed468516)됩니다. Office 365 업데이트는 자주 수행되지 않으며 일부 조직에서는 지연 채널을 사용합니다. 즉, 업데이트가 최대 3개월까지 지연됩니다.
 
- 사용하는 클라이언트 응용 프로그램이나 도구에 따라 인증 유형 및 로그인 방법이 달라질 수 있습니다. 각 응용 프로그램은 Azure Analysis Services와 같은 클라우드 서비스에 연결하는 다양한 기능을 지원할 수 있습니다.
+사용하는 클라이언트 응용 프로그램이나 도구에 따라 인증 유형 및 로그인 방법이 달라질 수 있습니다. 각 응용 프로그램은 Azure Analysis Services와 같은 클라우드 서비스에 연결하는 다양한 기능을 지원할 수 있습니다.
 
+Power BI Desktop, SSDT 및 SSMS는 Azure MFA(Multi-factor Authentication)를 지원하는 대화형메서드인 Active Directory 유니버설 인증을 지원합니다. Azure MFA는 간단한 로그인 프로세스를 제공하는 동시에 데이터와 응용 프로그램에 대한 액세스를 보호하는 데 도움이 됩니다. 전화 통화, 문자 메시지, 모바일 앱 알림 등의 몇 가지 간편한 검증 옵션을 제공하는 강력한 인증을 포함합니다. Azure AD를 사용하는 대화형 MFA는 유효성 검사를 위한 팝업 대화 상자를 표시할 수 있습니다. **유니버설 인증을 권장**합니다.
+
+Windows 계정을 사용하여 Azure에 로그인하고 유니버설 인증을 선택하거나 사용 가능하지 않은 경우(Excel), [AD FS(Active Directory Federation Services)](../active-directory/connect/active-directory-aadconnect-azure-adfs.md)가 필요합니다. 페더레이션, Azure AD 및 Office 365 사용자는 온-프레미스 자격 증명을 사용하여 인증되며 Azure 리소스에 액세스할 수 있습니다.
 
 ### <a name="sql-server-management-studio-ssms"></a>SSMS(SQL Server Management Studio)
 Azure Analysis Services 서버는 Windows 인증, Active Directory 암호 인증 및 Active Directory 유니버설 인증을 사용하여 [SSMS V17.1](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms) 이상에서 연결하는 것을 지원합니다. 일반적으로 다음과 같은 이유로 Active Directory 유니버설 인증을 사용하는 것이 좋습니다.
@@ -50,10 +44,10 @@ Azure Analysis Services 서버는 Windows 인증, Active Directory 암호 인증
 *  MFA(Multi-Factor Authentication)를 지원합니다. Azure MFA는 전화 통화, 문자 메시지, PIN을 사용하는 스마트 카드, 모바일 앱 알림 등 여러 가지 인증 옵션을 사용하여 데이터 및 응용 프로그램에 대한 액세스를 보호합니다. Azure AD를 사용하는 대화형 MFA는 유효성 검사를 위한 팝업 대화 상자를 표시할 수 있습니다.
 
 ### <a name="sql-server-data-tools-ssdt"></a>SSDT(SQL Server Data Tools)
-SSDT는 MFA를 지원하는 Active Directory 유니버설 인증을 사용하여 Azure Analysis Services에 연결합니다. 처음으로 배포하면 사용자에게 조직 ID(메일)를 사용하여 Azure에 로그인하라는 메시지가 표시됩니다. 사용자는 배포되는 서버에 대해 서버 관리자 권한이 있는 계정으로 Azure에 로그인해야 합니다. 처음으로 Azure에 로그인하면 토큰이 할당됩니다. SSDT는 나중에 다시 연결하기 위해 토큰을 메모리에 캐시합니다.
+SSDT는 MFA를 지원하는 Active Directory 유니버설 인증을 사용하여 Azure Analysis Services에 연결합니다. 처음으로 배포하면 사용자에게 Azure에 로그인하라는 메시지가 표시됩니다. 사용자는 배포되는 서버에 대해 서버 관리자 권한이 있는 계정으로 Azure에 로그인해야 합니다. 처음으로 Azure에 로그인하면 토큰이 할당됩니다. SSDT는 나중에 다시 연결하기 위해 토큰을 메모리에 캐시합니다.
 
 ### <a name="power-bi-desktop"></a>Power BI Desktop
-Power BI Desktop은 MFA를 지원하는 Active Directory 유니버설 인증을 사용하여 Azure Analysis Services에 연결합니다. 처음으로 연결하면 사용자에게 조직 ID(메일)를 사용하여 Azure에 로그인하라는 메시지가 표시됩니다. 사용자는 서버 관리자 또는 데이터베이스 역할에 포함되어 있는 계정으로 Azure에 로그인해야 합니다.
+Power BI Desktop은 MFA를 지원하는 Active Directory 유니버설 인증을 사용하여 Azure Analysis Services에 연결합니다. 처음으로 연결하면 사용자에게 Azure에 로그인하라는 메시지가 표시됩니다. 사용자는 서버 관리자 또는 데이터베이스 역할에 포함되어 있는 계정으로 Azure에 로그인해야 합니다.
 
 ### <a name="excel"></a>Excel
 Excel 사용자는 Windows 계정, 조직 ID(메일 주소) 또는 외부 메일 주소를 사용하여 서버에 연결할 수 있습니다. 외부 메일 ID는 게스트 사용자로 Azure AD에 있어야 합니다.
@@ -62,14 +56,13 @@ Excel 사용자는 Windows 계정, 조직 ID(메일 주소) 또는 외부 메일
 
 **서버 관리자**는 Azure Analysis Services 서버 인스턴스와 관련이 있습니다. 서버 관리자는 Azure Portal, SSMS 및 SSDT 같은 도구에 연결하여 데이터베이스 추가, 사용자 역할 관리 등의 작업을 수행합니다. 기본적으로 서버를 만드는 사용자는 Analysis Services 서버 관리자로 자동 추가됩니다. 다른 관리자는 Azure Portal이나 SSMS를 사용하여 추가할 수 있습니다. 서버 관리자는 동일한 구독의 Azure AD 테넌트에 계정이 있어야 합니다. 자세한 내용은 [서버 관리자 관리](analysis-services-server-admins.md)를 참조하세요. 
 
-
 **데이터베이스 사용자**는 Excel 또는 Power BI와 같은 클라이언트 응용 프로그램을 사용하여 model 데이터베이스에 연결합니다. 사용자는 데이터베이스 역할에 추가되어야 합니다. 데이터베이스 역할은 데이터베이스에 대해 관리자, 처리 또는 읽기 권한을 정의합니다. 관리자 권한이 있는 역할의 데이터베이스 사용자는 서버 관리자와 다르다는 점을 이해해야 합니다. 그러나 기본적으로 서버 관리자는 데이터베이스 관리자이기도 합니다. 자세한 내용은 [데이터베이스 역할 및 사용자 관리](analysis-services-database-users.md)를 참조하세요.
 
 **Azure 리소스 소유자**. 리소스 소유자는 Azure 구독에 대한 리소스를 관리합니다. 리소스 소유자는 Azure Portal의 **액세스 제어**나 Azure Resource Manager 템플릿을 사용하여 구독 내에서 소유자 또는 참가자 역할에 Azure AD 사용자 ID를 추가할 수 있습니다. 
 
 ![Azure Portal의 액세스 제어](./media/analysis-services-manage-users/aas-manage-users-rbac.png)
 
-이 수준의 역할은 포털에서 완료할 수 있거나 Azure Resource Manager 템플릿을 사용하여 작업을 수행해야 하는 사용자 또는 계정에 적용됩니다. 자세한 내용은 [역할 기반 액세스 제어](../active-directory/role-based-access-control-what-is.md)를 참조하세요. 
+이 수준의 역할은 포털에서 완료할 수 있거나 Azure Resource Manager 템플릿을 사용하여 작업을 수행해야 하는 사용자 또는 계정에 적용됩니다. 자세한 내용은 [역할 기반 Access Control](../role-based-access-control/overview.md)을 참조하세요. 
 
 
 ## <a name="database-roles"></a>데이터베이스 역할
@@ -85,4 +78,4 @@ Excel 사용자는 Windows 계정, 조직 ID(메일 주소) 또는 외부 메일
 [Azure Active Directory 그룹을 사용하여 리소스에 대한 액세스 관리](../active-directory/active-directory-manage-groups.md)   
 [데이터베이스 역할 및 사용자 관리](analysis-services-database-users.md)  
 [서버 관리자 관리](analysis-services-server-admins.md)  
-[역할 기반 액세스 제어](../active-directory/role-based-access-control-what-is.md)  
+[역할 기반 Access Control](../role-based-access-control/overview.md)  

@@ -3,8 +3,8 @@ title: "Azure AD Connect Sync: 운영 작업 및 고려 사항 | Microsoft Docs"
 description: "이 항목에서는 Azure AD Connect Sync 및 이 구성 요소를 운영하기 위한 준비 방법에 대한 운영 작업을 설명합니다."
 services: active-directory
 documentationcenter: 
-author: AndKjell
-manager: femila
+author: billmath
+manager: mtillman
 editor: 
 ms.assetid: b29c1790-37a3-470f-ab69-3cee824d220d
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 07/13/2017
 ms.author: billmath
+ms.openlocfilehash: 0dfdae45ef7508337a1233c651d355d83b9f0430
+ms.sourcegitcommit: f1c1789f2f2502d683afaf5a2f46cc548c0dea50
 ms.translationtype: HT
-ms.sourcegitcommit: 349fe8129b0f98b3ed43da5114b9d8882989c3b2
-ms.openlocfilehash: b7583a1556bb1113f349a78890768451e39c6878
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/18/2018
 ---
 # <a name="azure-ad-connect-sync-operational-tasks-and-consideration"></a>Azure AD Connect Sync: 운영 작업 및 고려 사항
 이 항목은 Azure AD Connect Sync에 대한 관리 작업을 설명하는 것을 목표로 합니다.
@@ -34,6 +33,11 @@ ms.lasthandoff: 07/26/2017
 스테이징 모드에 있는 서버로 서버를 활성화하기 전에 구성을 변경하고 변경을 미리 볼 수 있습니다. 또한 프로덕션 환경에 해당 변경 사항을 적용하기 전에 필요한지를 확인하기 위해 전체 가져오기 및 동기화를 실행할 수 있습니다.
 
 설치 중에 서버를 선택하여 **스테이징 모드**로 둘 수 있습니다. 이 작업은 서버가 가져오기 및 동기화에 대해 활성화하도록 하지만 내보내기는 수행하지 않습니다. 설치 중에 이러한 기능을 선택하더라도 스테이징 모드에 있는 서버는 암호 동기화 또는 비밀번호 쓰기 저장을 실행하지 않습니다. 스테이징 모드를 해제하면 서버가 내보내기를 시작하고 암호 동기화 및 비밀번호 쓰기 저장을 사용하도록 설정합니다.
+
+> [!NOTE]
+> 암호 해시 동기화 기능이 사용되도록 설정된 Azure AD Connect를 사용한다고 가정합니다. 준비 모드에서 서버는 온-프레미스 AD의 암호 변경에 대한 동기화를 중지합니다. 준비 모드를 사용되지 않도록 설정하면 서버는 마지막에 중단한 암호 변경부터 동기화를 다시 시작합니다. 서버가 오랫 동안 준비 모드를 유지할 경우 서버가 해당 기간 동안 발생한 모든 암변호 경 내용을 동기화하는 데 다소 시간이 걸릴 수 있습니다.
+>
+>
 
 여전히 동기화 서비스 관리자를 사용하여 강제로 내보낼 수 있습니다.
 
@@ -69,11 +73,18 @@ ms.lasthandoff: 07/26/2017
 #### <a name="verify"></a>Verify
 1. cmd 프롬프트를 시작하고 `%ProgramFiles%\Microsoft Azure AD Sync\bin`로 이동합니다.
 2. 실행: `csexport "Name of Connector" %temp%\export.xml /f:x` 동기화 서비스에서 커넥터의 이름을 찾을 수 있습니다. Azure AD에 "contoso.com – AAD"와 유사한 이름이 있습니다.
-3. 섹션 [CSAnalyzer](#appendix-csanalyzer)의 PowerShell 스크립트를 `csanalyzer.ps1`이라는 파일에 복사합니다.
-4. PowerShell 창을 열고 PowerShell 스크립트를 만든 폴더로 이동합니다.
-5. `.\csanalyzer.ps1 -xmltoimport %temp%\export.xml`을 실행합니다.
-6. 이제 Microsoft Excel에서 검사할 수 있는 **processedusers1.csv**라는 파일이 있습니다. Azure AD로 내보낼 준비가 된 모든 변경 내용은 이 파일에 포함됩니다.
-7. 내보내려는 변경 사항이 예정될 때까지 데이터 또는 구성에 필요한 변경을 수행하고 이러한 단계(가져오기 및 동기화 및 확인)를 다시 실행합니다.
+3. 실행: `CSExportAnalyzer %temp%\export.xml > %temp%\export.csv` %temp%에 Microsoft Excel에서 검사할 수 있는 export.csv라는 파일이 있습니다. 이 파일은 내보낼 수 있는 모든 변경 내용을 포함합니다.
+4. 내보내려는 변경 사항이 예정될 때까지 데이터 또는 구성에 필요한 변경을 수행하고 이러한 단계(가져오기 및 동기화 및 확인)를 다시 실행합니다.
+
+**export.csv 파일 이해** 파일은 대부분 따로 설명이 필요하지 않습니다. 콘텐츠를 이해하기 위한 일부 약어입니다.
+* OMODT - 개체 수정 형식입니다. 개체 수준에서 작업이 추가, 업데이트 또는 삭제 중 어떤 것인지를 나타냅니다.
+* AMODT - 특성 수정 형식입니다. 특성 수준에서 작업이 추가, 업데이트 또는 삭제 중 어떤 것인지를 나타냅니다.
+
+**일반 식별자 검색** export.csv 파일에는 내보내려는 모든 변경 내용이 들어 있습니다. 각 행은 커넥터 공간에 있는 개체의 변경 사항에 해당하며 개체는 DN 특성으로 식별됩니다. DN 특성은 커넥터 공간에서 개체에 할당된 고유한 식별자입니다. export.csv에서 많은 행/변경 사항을 분석할 때 DN 특성만으로는 변경 사항이 있는 개체를 파악하기 어려울 수 있습니다. 변경 사항을 분석하는 과정을 단순화하려면 csanalyzer.ps1 PowerShell 스크립트를 사용합니다. 스크립트는 개체의 공통 식별자(예: displayName, userPrincipalName)를 검색합니다. 스크립트를 사용하려면 다음을 수행합니다.
+1. 섹션 [CSAnalyzer](#appendix-csanalyzer)의 PowerShell 스크립트를 `csanalyzer.ps1`이라는 파일에 복사합니다.
+2. PowerShell 창을 열고 PowerShell 스크립트를 만든 폴더로 이동합니다.
+3. `.\csanalyzer.ps1 -xmltoimport %temp%\export.xml`을 실행합니다.
+4. 이제 Microsoft Excel에서 검사할 수 있는 **processedusers1.csv**라는 파일이 있습니다. 이 파일은 DN 특성에서 공통 식별자(예: displayName 및 userPrincipalName)로의 매핑을 제공합니다. 현재는 내보내려는 실제 특성 변경 사항이 포함되어 있지 않습니다.
 
 #### <a name="switch-active-server"></a>활성 서버 전환
 1. Azure AD로 내보내지 않으므로 현재 활성 서버에서 서버를 해제하거나(DirSync/FIM Azure AD Sync) 스테이징 모드로 설정합니다(Azure AD Connect).
@@ -91,7 +102,7 @@ ms.lasthandoff: 07/26/2017
 
 * 필요할 때 다시 작성합니다.
 * **스테이징 모드**라고 하는 예비 대기 서버가 있습니다.
-* 가상 컴퓨터를 사용합니다.
+* 가상 머신을 사용합니다.
 
 기본 제공 SQL Express 데이터베이스를 사용하지 않는 경우 [SQL 고가용성](#sql-high-availability) 섹션도 또한 검토해야 합니다.
 
@@ -105,8 +116,8 @@ ms.lasthandoff: 07/26/2017
 
 자세한 내용은 [스테이징 모드](#staging-mode)를 참조하세요.
 
-### <a name="use-virtual-machines"></a>가상 컴퓨터 사용
-일반적이며 지원되는 메서드는 가상 컴퓨터에서 동기화 엔진을 실행하는 것입니다. 호스트에는 문제가 있는 경우 동기화 엔진 서버로 이미지를 다른 서버에 마이그레이션할 수 있습니다.
+### <a name="use-virtual-machines"></a>가상 머신 사용
+일반적이며 지원되는 메서드는 가상 머신에서 동기화 엔진을 실행하는 것입니다. 호스트에는 문제가 있는 경우 동기화 엔진 서버로 이미지를 다른 서버에 마이그레이션할 수 있습니다.
 
 ### <a name="sql-high-availability"></a>SQL 고가용성
 Azure AD Connect와 함께 제공되는 SQL Server Express를 사용하지 않는 경우 SQL Server에 대한 고가용성을 고려해야 합니다. 지원되는 고가용성 솔루션은 SQL 클러스터링 및 AOA(Always On 가용성 그룹)를 포함합니다. 지원되지 않는 솔루션은 미러링을 포함합니다.
@@ -250,7 +261,7 @@ do
 } while ($reader.Read)
 
 #need to write out any users that didn't get picked up in a batch of 1000
-#export the collection of users as as CSV
+#export the collection of users as CSV
 Write-Host Writing processedusers${outputfilecount}.csv -ForegroundColor Yellow
 $objOutputUsers | Export-Csv -path processedusers${outputfilecount}.csv -NoTypeInformation
 ```
@@ -260,4 +271,3 @@ $objOutputUsers | Export-Csv -path processedusers${outputfilecount}.csv -NoTypeI
 
 * [Azure AD Connect 동기화: 동기화의 이해 및 사용자 지정](active-directory-aadconnectsync-whatis.md)  
 * [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)  
-

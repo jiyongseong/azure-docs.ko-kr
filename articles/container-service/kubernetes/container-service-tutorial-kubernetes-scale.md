@@ -1,30 +1,23 @@
 ---
-title: "Azure Container Service 자습서 - 응용 프로그램 크기 조정 | Microsoft Docs"
-description: "Azure Container Service 자습서 - 응용 프로그램 크기 조정"
+title: Azure Container Service 자습서 - 응용 프로그램 크기 조정
+description: Azure Container Service 자습서 - 응용 프로그램 크기 조정
 services: container-service
-documentationcenter: 
 author: dlepow
-manager: timlt
-editor: 
-tags: acs, azure-container-service
-keywords: "Docker, 컨테이너, 마이크로 서비스, Kubernetes, Azure"
-ms.assetid: 
+manager: jeconnoc
 ms.service: container-service
-ms.devlang: aurecli
-ms.topic: sample
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 07/25/2017
+ms.topic: tutorial
+ms.date: 09/14/2017
 ms.author: danlep
+ms.custom: mvc
+ms.openlocfilehash: f643c09f00b23cd14e85e83ed0cf7ab7a13c7646
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: bfd49ea68c597b109a2c6823b7a8115608fa26c3
-ms.openlocfilehash: c851e40cd03e98e04f10973321c10525c2d8d8e9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-
 # <a name="scale-kubernetes-pods-and-kubernetes-infrastructure"></a>Kubernetes Pod 및 Kubernetes 인프라 크기 조정
+
+[!INCLUDE [aks-preview-redirect.md](../../../includes/aks-preview-redirect.md)]
 
 자습서를 수행하고 있다면 Azure Container Service에서 작동하는 Kubernetes 클러스터가 있으며 Azure Voting 앱을 배포한 상태입니다. 
 
@@ -35,13 +28,13 @@ ms.lasthandoff: 07/25/2017
 > * 앱 프런트 엔드를 실행하는 Pod 자동 크기 조정 구성
 > * Kubernetes Azure 에이전트 노드 크기 조정
 
-후속 자습서에서는 Azure Vote 응용 프로그램을 업데이트하고, Kubernetes 클러스터를 모니터링하도록 Operations Management Suite를 구성합니다.
+후속 자습서에서는 Azure Vote 응용 프로그램을 업데이트하고, Kubernetes 클러스터를 모니터링하도록 Log Analytics를 구성합니다.
 
 ## <a name="before-you-begin"></a>시작하기 전에
 
-이전 자습서에서는 응용 프로그램을 컨테이너 이미지에 패키지하고, 이 이미지를 Azure Container Registry에 업로드하고, Kubernetes 클러스터를 만들었습니다. 그런 다음 Kubernetes 클러스터에서 응용 프로그램을 실행했습니다. 이러한 단계를 수행하지 않은 경우 수행하려면 [자습서 1 - 컨테이너 이미지 만들기](./container-service-tutorial-kubernetes-prepare-app.md)로 돌아갑니다. 
+이전 자습서에서는 응용 프로그램을 컨테이너 이미지에 패키지하고, 이 이미지를 Azure Container Registry에 업로드하고, Kubernetes 클러스터를 만들었습니다. 그런 다음 Kubernetes 클러스터에서 응용 프로그램을 실행했습니다. 
 
-최소한 이 자습서에는 실행 중인 응용 프로그램이 있는 Kubernetes 클러스터가 필요합니다.
+이러한 단계를 수행하지 않은 경우 수행하려면 [자습서 1 - 컨테이너 이미지 만들기](./container-service-tutorial-kubernetes-prepare-app.md)로 돌아갑니다. 
 
 ## <a name="manually-scale-pods"></a>수동으로 Pod 크기 조정
 
@@ -51,7 +44,7 @@ ms.lasthandoff: 07/25/2017
 kubectl get pods
 ```
 
-출력:
+출력
 
 ```bash
 NAME                               READY     STATUS    RESTARTS   AGE
@@ -71,7 +64,7 @@ kubectl scale --replicas=5 deployment/azure-vote-front
 kubectl get pods
 ```
 
-출력:
+출력
 
 ```bash
 NAME                                READY     STATUS    RESTARTS   AGE
@@ -110,7 +103,7 @@ kubectl autoscale deployment azure-vote-front --cpu-percent=50 --min=3 --max=10
 kubectl get hpa
 ```
 
-출력:
+출력
 
 ```bash
 NAME               REFERENCE                     TARGETS    MINPODS   MAXPODS   REPLICAS   AGE
@@ -121,7 +114,7 @@ Azure Vote 앱에 최소 부하를 적용한 상태로 몇 분이 지나면 Pod 
 
 ## <a name="scale-the-agents"></a>에이전트 크기 조정
 
-이전 자습서에서 기본 명령을 사용하여 Kubernetes 클러스터를 만든 경우 이 클러스터에는 세 개의 에이전트 노드가 있습니다. 클러스터에 대한 컨테이너 워크로드를 더 늘리거나 줄일 계획인 경우 수동으로 에이전트 수를 조정할 수 있습니다. [az acs scale](/cli/azure/acs#scale) 명령을 사용하고 `--new-agent-count` 매개 변수로 에이전트 수를 지정합니다.
+이전 자습서에서 기본 명령을 사용하여 Kubernetes 클러스터를 만든 경우 이 클러스터에는 세 개의 에이전트 노드가 있습니다. 클러스터에 대한 컨테이너 워크로드를 더 늘리거나 줄일 계획인 경우 수동으로 에이전트 수를 조정할 수 있습니다. [az acs scale](/cli/azure/acs#az_acs_scale) 명령을 사용하고 `--new-agent-count` 매개 변수로 에이전트 수를 지정합니다.
 
 다음 예제에서는 *myK8sCluster*라는 Kubernetes 클러스터의 에이전트 노드 수를 4개로 늘립니다. 이 명령은 완료되는 데 2~3분이 걸립니다.
 
@@ -159,5 +152,4 @@ az acs scale --resource-group=myResourceGroup --name=myK8SCluster --new-agent-co
 
 > [!div class="nextstepaction"]
 > [Kubernetes에서 응용 프로그램 업데이트](./container-service-tutorial-kubernetes-app-update.md)
-
 

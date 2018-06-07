@@ -1,25 +1,24 @@
 ---
-title: "Windows 및 Linux IaaS VM용 Azure Disk Encryption | Microsoft Docs"
-description: "이 문서에서는 Windows 및 Linux IaaS VM용 Microsoft Azure Disk Encryption에 대한 개요를 제공합니다."
+title: Windows 및 Linux IaaS VM용 Azure Disk Encryption | Microsoft Docs
+description: 이 문서에서는 Windows 및 Linux IaaS VM용 Microsoft Azure Disk Encryption에 대한 개요를 제공합니다.
 services: security
 documentationcenter: na
-author: YuriDio
-manager: swadhwa
-editor: TomSh
+author: DevTiw
+manager: avibm
+editor: barclayn
 ms.assetid: d3fac8bb-4829-405e-8701-fa7229fb1725
 ms.service: security
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 04/07/2017
-ms.author: kakhan
+ms.date: 03/13/2018
+ms.author: devtiw
+ms.openlocfilehash: 813124ae7c0dd76a27dcbaea6f0d7aa19bc1e49c
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: 7bf5d568e59ead343ff2c976b310de79a998673b
-ms.openlocfilehash: ab95c39a3b5c4ac2c07bf5de36abbdc22fde7e7d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/01/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="azure-disk-encryption-for-windows-and-linux-iaas-vms"></a>Windows 및 Linux IaaS VM용 Azure 디스크 암호화
 Microsoft Azure는 데이터 프라이버시, 데이터 독립성을 보장하기 위해 노력하고 있으며 암호화 키를 암호화, 제어 및 관리하고 데이터 액세스를 제어 및 감사하는 광범위한 고급 기술을 통해 Azure 호스팅 데이터를 제어할 수 있도록 합니다. 또한 Azure 고객에게 비즈니스 요구에 가장 잘 맞는 솔루션을 선택할 수 있는 유연성을 제공합니다. 이 문서에는 "Windows 및 Linux IaaS VM용 Azure 디스크 암호화"라는 새로운 기술 솔루션을 소개하여 조직의 보안 및 규정 준수 약정에 따라 데이터를 보호하도록 합니다. 이 문서에서는 지원되는 시나리오와 사용자 환경을 비롯하여 Azure 디스크 암호화 기능을 사용하는 방법에 대한 자세한 지침을 제공합니다.
@@ -28,7 +27,7 @@ Microsoft Azure는 데이터 프라이버시, 데이터 독립성을 보장하�
 > 특정 권장 사항으로 인해 데이터, 네트워크 또는 계산 리소스 사용량이 증가할 수 있으며 이로 인해 라이선스 또는 구독 비용이 발생합니다.
 
 ## <a name="overview"></a>개요
-Azure Disk Encryption은 Windows 및 Linux IaaS 가상 컴퓨터 디스크를 암호화할 수 있도록 하는 새로운 기능입니다. Azure Disk Encryption은 업계 표준인 Windows의 [BitLocker](https://technet.microsoft.com/library/cc732774.aspx) 기능과 Linux의 [DM-Crypt](https://en.wikipedia.org/wiki/Dm-crypt) 기능을 활용하여 OS 및 데이터 디스크를 위한 볼륨 암호화를 제공합니다. 또한 고객이 Key Vault 구독에서 디스크 암호화 키 및 암호를 관리 및 제어할 수 있도록 [Azure Key Vault](https://azure.microsoft.com/documentation/services/key-vault/)에 통합되어 있습니다. 이 솔루션은 가상 컴퓨터 디스크에 있는 모든 데이터가 미사용 시 Azure Storage에 암호화되도록 합니다.
+Azure Disk Encryption은 Windows 및 Linux IaaS 가상 머신 디스크를 암호화할 수 있도록 하는 새로운 기능입니다. Azure Disk Encryption은 업계 표준인 Windows의 [BitLocker](https://technet.microsoft.com/library/cc732774.aspx) 기능과 Linux의 [DM-Crypt](https://en.wikipedia.org/wiki/Dm-crypt) 기능을 활용하여 OS 및 데이터 디스크를 위한 볼륨 암호화를 제공합니다. 또한 고객이 Key Vault 구독에서 디스크 암호화 키 및 암호를 관리 및 제어할 수 있도록 [Azure Key Vault](https://azure.microsoft.com/documentation/services/key-vault/)에 통합되어 있습니다. 이 솔루션은 가상 머신 디스크에 있는 모든 데이터가 미사용 시 Azure Storage에 암호화되도록 합니다.
 
 Windows 및 Linux IaaS VM용 Azure Disk Encryption은 이제 Standard VM 및 Premium Storage를 사용하는 VM을 위한 모든 Azure 공용 지역 및 AzureGov 지역에서 **일반 공급**으로 제공됩니다.
 
@@ -41,8 +40,8 @@ Azure 디스크 암호화 솔루션은 다음의 고객 시나리오를 지원�
 * Windows IaaS VM에서 암호화 사용 안 함
 * Linux IaaS VM에 대한 데이터 드라이브에서 암호화 사용 안 함
 * 관리 디스크 VM의 암호화 사용
-* 기존의 암호화된 Premium Storage 이외 VM의 암호화 설정 업데이트
-* 키 암호화 키를 사용하여 암호화된 VM의 백업 및 복원
+* 기존의 암호화된 Premium Storage VM 및 비 Premium Storage VM의 암호화 설정 업데이트
+* 암호화된 VM 백업 및 복원
 
 이 솔루션은 Microsoft Azure에서 사용되도록 설정될 경우 IaaS VM에 대해 다음 시나리오를 지원합니다.
 
@@ -55,8 +54,10 @@ Azure 디스크 암호화 솔루션은 다음의 고객 시나리오를 지원�
 * 탑재 경로가 있는 볼륨에서 암호화 사용
 * mdadm을 사용하여 디스크 스트라이프(RAID)로 구성된 Linux VM에서 암호화 사용
 * 데이터 디스크에 대해 LVM을 사용하여 Linux VM에서 암호화 사용
+* OS 및 데이터 디스크용 Linux LVM 7.3에서 암호화 사용 
 * Storage 공간으로 구성된 Windows VM에서 암호화 사용
-* 기존의 암호화된 Premium Storage 이외 VM의 암호화 설정 업데이트
+* 기존의 암호화된 Premium Storage VM 및 비 Premium Storage VM의 암호화 설정 업데이트
+* KEK(키 암호화 키)를 사용하는 시나리오와 사용하지 않는 시나리오 모두에서 암호화된 VM의 백업 및 복원
 * 모든 Azure 공용 지역 및 AzureGov 지역 지원됨
 
 이 솔루션은 다음 시나리오, 기능 및 기술을 지원하지 않습니다.
@@ -65,15 +66,9 @@ Azure 디스크 암호화 솔루션은 다음의 고객 시나리오를 지원�
 * Linux IaaS VM에 대한 OS 드라이브에서 암호화 사용 안 함
 * OS 드라이브가 Linux Iaas VM에 대해 암호화되는 경우 데이터 드라이브에 암호화 사용 안 함
 * 클래식 VM 만들기 방법을 사용하여 만든 IaaS VM
-* Windows 및 Linux IaaS VM 고객 사용자 지정 이미지에 암호화를 사용하는 기능은 지원되지 않습니다. Linux LVM OS 디스크에 암호화를 사용하는 기능은 현재 지원되지 않습니다. 이 지원은 곧 제공될 예정입니다.
+* Windows 및 Linux IaaS VM 고객 사용자 지정 이미지에 암호화를 사용하는 기능은 지원되지 않습니다.
 * 온-프레미스 키 관리 서비스와의 통합
 * Azure 파일(공유 파일 시스템), NFS(네트워크 파일 시스템), 동적 볼륨, 소프트웨어 기반 RAID 시스템으로 구성된 Windows VM
-* 키 암호화 키를 사용하지 않고 암호화된 VM의 백업 및 복원입니다.
-* 기존의 암호화된 Premium Storage VM의 암호화 설정을 업데이트합니다.
-
-> [!NOTE]
-> 암호화된 VM의 백업 및 복원은 KEK 구성으로 암호화된 VM에 대해서만 지원됩니다. KEK 없이 암호화된 VM에서는 지원되지 않습니다. KEK는 VM 암호화를 사용하도록 설정하는 선택적 매개 변수입니다. 곧 지원될 예정입니다.
-> 기존의 암호화된 Premium Storage VM의 암호화 설정 업데이트는 지원되지 않습니다. 곧 지원될 예정입니다.
 
 ### <a name="encryption-features"></a>암호화 기능
 Azure IaaS VM에 대한 Azure Disk Encryption을 사용하도록 설정하고 배포할 때 제공된 구성에 따라 다음 기능이 활성화됩니다.
@@ -84,11 +79,8 @@ Azure IaaS VM에 대한 Azure Disk Encryption을 사용하도록 설정하고 �
 * Linux IaaS VM에 대한 데이터 드라이브에서 암호화 사용 안 함(OS 드라이브가 암호화되지 않는 경우에만)
 * 사용자의 Key Vault 구독에서 암호화 키 및 비밀 보호
 * 암호화된 IaaS VM의 암호화 상태 보고
-* IaaS 가상 컴퓨터에서 디스크 암호화 구성 설정 제거
+* IaaS 가상 머신에서 디스크 암호화 구성 설정 제거
 * Azure Backup 서비스로 암호화된 VM 백업 및 복원
-
-> [!NOTE]
-> 암호화된 VM의 백업 및 복원은 KEK 구성으로 암호화된 VM에 대해서만 지원됩니다. KEK 없이 암호화된 VM에서는 지원되지 않습니다. KEK는 VM 암호화를 사용하도록 설정하는 선택적 매개 변수입니다.
 
 Windows 및 Linux 솔루션용 IaaS VM에 대한 Azure Disk Encryption에는 다음 내용이 포함됩니다.
 
@@ -149,32 +141,7 @@ OS 드라이브가 암호화되는 경우 Linux에 데이터 디스크 암호화
 > [!NOTE]
 > Windows Server 2008 R2의 경우 Azure에서 암호화를 사용하도록 설정하기 전에 .NET Framework 4.5를 설치해야 합니다. 선택적 업데이트인 Windows Server 2008 R2 x64 기반 시스템용 Microsoft .NET Framework 4.5.2([KB2901983](https://support.microsoft.com/kb/2901983))를 설치하여 Windows 업데이트에서 설치할 수 있습니다.
 
-* Azure Disk Encryption은 다음과 같은 Azure 갤러리 기반 Linux 서버 배포판 및 버전에서 지원됩니다.
-
-| Linux 배포 | 버전 | 암호화에 지원되는 볼륨 유형|
-| --- | --- |--- |
-| Ubuntu | 16.04-DAILY-LTS | OS 및 데이터 디스크 |
-| Ubuntu | 14.04.5-DAILY-LTS | OS 및 데이터 디스크 |
-| Ubuntu | 12.10 | 데이터 디스크  |
-| Ubuntu | 12.04 | 데이터 디스크  |
-| RHEL | 7.3 | OS 및 데이터 디스크 |
-| RHEL | 7.2 | OS 및 데이터 디스크 |
-| RHEL | 6.8 | OS 및 데이터 디스크 |
-| RHEL | 6.7 | 데이터 디스크  |
-| CentOS | 7.3 | OS 및 데이터 디스크 |
-| CentOS | 7.2n | OS 및 데이터 디스크 |
-| CentOS | 6.8 | OS 및 데이터 디스크 |
-| CentOS | 7.1 | 데이터 디스크  |
-| CentOS | 7.0 | 데이터 디스크  |
-| CentOS | 6.7 | 데이터 디스크  |
-| CentOS | 6.6 | 데이터 디스크  |
-| CentOS | 6.5 | 데이터 디스크  |
-| openSUSE | 13.2 | 데이터 디스크  |
-| SLES | 12 SP1 | 데이터 디스크  |
-| SLES | 12-SP1(Premium) | 데이터 디스크  |
-| SLES | HPC 12 | 데이터 디스크  |
-| SLES | 11-SP4(Premium) | 데이터 디스크  |
-| SLES | 11 SP4 | 데이터 디스크  |
+* Azure Disk Encryption은 특정 Azure 갤러리 기반 Linux 서버 배포판 및 버전에서 지원됩니다.  현재 지원되는 버전 목록은 [Azure Disk Encryption FAQ](https://docs.microsoft.com/azure/security/azure-security-disk-encryption-faq)를 참조하세요.
 
 * Azure Disk Encryption은 Key Vault 및 VM이 동일한 Azure 하위 지역 및 구독에 있어야 합니다.
 
@@ -186,16 +153,16 @@ OS 드라이브가 암호화되는 경우 Linux에 데이터 디스크 암호화
 * Azure AD 응용 프로그램에 대한 Key Vault 액세스 정책을 설정하고 구성하려면 이 문서의 *필수 조건* 섹션에서 **Azure AD 응용 프로그램에 대한 Key Vault 액세스 정책 설정**을 참조하세요.
 * 미리 암호화된 Windows VHD를 준비하려면 *부록*에서 **미리 암호화된 Windows VHD 준비**를 참조하세요.
 * 미리 암호화된 Windows VHD를 준비하려면 *부록*에서 **미리 암호화된 Windows VHD 준비** 섹션을 참조하세요.
-* Azure 플랫폼은 가상 컴퓨터 OS 볼륨을 부팅하고 해독할 때 가상 컴퓨터에서 사용할 수 있도록 Key Vault에서 암호화 키 또는 암호에 액세스해야 합니다. Azure 플랫폼에 권한을 부여하려면 Key Vault에서 **EnabledForDiskEncryption** 속성을 설정합니다. 자세한 내용은 부록에서**Azure Disk Encryption을 위한 Key Vault 설정 및 구성**을 참조하세요.
+* Azure 플랫폼은 가상 머신 OS 볼륨을 부팅하고 해독할 때 가상 머신에서 사용할 수 있도록 Key Vault에서 암호화 키 또는 암호에 액세스해야 합니다. Azure 플랫폼에 권한을 부여하려면 Key Vault에서 **EnabledForDiskEncryption** 속성을 설정합니다. 자세한 내용은 부록에서**Azure Disk Encryption을 위한 Key Vault 설정 및 구성**을 참조하세요.
 * Key Vault 비밀 및 KEK URL 버전을 지정해야 합니다. Azure에서 이 버전 관리 제한을 적용합니다. 유효한 비밀과 KEK URL은 다음 예제를 참조하세요.
 
-  * 올바른 비밀 URL 예제: *https://contosovault.vault.azure.net/secrets/BitLockerEncryptionSecretWithKek/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*
-  * 올바른 KEK URL 예제: *https://contosovault.vault.azure.net/keys/diskencryptionkek/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*
+  * 올바른 비밀 URL의 예제: *https://contosovault.vault.azure.net/secrets/BitLockerEncryptionSecretWithKek/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*
+  * 올바른 KEK URL의 예제: *https://contosovault.vault.azure.net/keys/diskencryptionkek/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*
 
 * Azure Disk Encryption은 Key Vault 비밀 및 KEK URL의 일부로 포트 번호 지정을 지원하지 않습니다. 지원 또는 지원되지 않는 Key Vault URL에 대한 예는 다음을 참조하세요.
 
-  * 허용되지 않는 Key Vault URL *https://contosovault.vault.azure.net:443/secrets/contososecret/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*
-  * 허용되는 Key Vault URL: *https://contosovault.vault.azure.net/secrets/contososecret/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*
+  * 허용되지 않는 키 자격 증명 모음 URL  *https://contosovault.vault.azure.net:443/secrets/contososecret/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*
+  * 허용 가능한 키 자격 증명 모음 URL  *https://contosovault.vault.azure.net/secrets/contososecret/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*
 
 * Azure Disk Encryption 기능을 사용하도록 설정하려면 IaaS VM이 다음 네트워크 끝점 구성 요구 사항을 충족해야 합니다.
   * Key Vault에 연결할 토큰을 얻으려면 IaaS VM에서 Azure Active Directory 끝점인 \[login.microsoftonline.com\]에 연결할 수 있어야 합니다.
@@ -205,7 +172,7 @@ OS 드라이브가 암호화되는 경우 Linux에 데이터 디스크 암호화
   > [!NOTE]
   > 보안 정책이 Azure VM에서 인터넷으로 액세스를 제한하는 경우 이전 URI를 확인하고 IP에 대한 아웃바운드 연결을 허용하도록 특정 규칙을 구성할 수 있습니다.
   >
-  >방화벽 뒤에 있는 Azure Key Vault 구성 및 액세스(https://docs.microsoft.com/en-us/azure/key-vault/key-vault-access-behind-firewall)
+  >방화벽 뒤에 있는 Azure Key Vault를 구성 및 액세스하려면(https://docs.microsoft.com/azure/key-vault/key-vault-access-behind-firewall)
 
 * Azure PowerShell SDK의 최신 버전을 사용하여 Azure 디스크 암호화를 구성합니다. 최신 버전의 [Azure PowerShell 릴리스](https://github.com/Azure/azure-powershell/releases) 다운로드
 
@@ -221,12 +188,12 @@ OS 드라이브가 암호화되는 경우 Linux에 데이터 디스크 암호화
  > 스냅숏 또는 백업이 Azure Disk Encryption 외부에 아직 만들어지지 않은 경우에는 -skipVmBackup 매개 변수를 사용해서는 안 됩니다. 
 
 * Azure Disk Encryption 솔루션은 Windows IaaS VM에 대해 BitLocker 외부 키 보호기를 사용합니다. 도메인 가입 VM의 경우 TPM 보호기를 적용하는 그룹 정책을 푸시하지 마십시오. "호환되는 TPM이 없이 BitLocker 허용"에 대한 그룹 정책 정보는 [BitLocker 그룹 정책 참조](https://technet.microsoft.com/library/ee706521)를 참조하세요.
-* 사용자 지정 그룹 정책을 사용하는 도메인 가입 가상 컴퓨터의 Bitlocker 정책은 다음 설정을 포함해야 합니다. `Configure user storage of bitlocker recovery information -> Allow 256-bit recovery key` Bitlocker의 사용자 지정 그룹 정책 설정이 호환되지 않으면 Azure Disk Encryption이 실패합니다. 올바른 정책 설정이 없는 컴퓨터에서 새 정책을 적용하고 강제로 새 정책을 업데이트(gpupdate.exe /force)한 다음 다시 시작해야 합니다.  
+* 사용자 지정 그룹 정책을 사용하는 도메인 가입 가상 머신의 Bitlocker 정책은 다음 설정을 포함해야 합니다. `Configure user storage of bitlocker recovery information -> Allow 256-bit recovery key` Bitlocker의 사용자 지정 그룹 정책 설정이 호환되지 않으면 Azure Disk Encryption이 실패합니다. 올바른 정책 설정이 없는 컴퓨터에서 새 정책을 적용하고 강제로 새 정책을 업데이트(gpupdate.exe /force)한 다음 다시 시작해야 합니다.  
 * Azure AD 응용 프로그램을 만들고 Key Vault를 만들거나 기존 Key Vault를 설정하고 암호화를 사용하려면 [Azure Disk Encryption 필수 요소 PowerShell 스크립트](https://github.com/Azure/azure-powershell/blob/master/src/ResourceManager/Compute/Commands.Compute/Extension/AzureDiskEncryption/Scripts/AzureDiskEncryptionPreRequisiteSetup.ps1)를 참조하세요.
 * Azure CLI를 사용하여 디스크 암호화 필수 구성 요소를 구성하려면 [이 Bash 스크립트](https://github.com/ejarvi/ade-cli-getting-started)를 참조하세요.
-* Azure Backup 서비스를 사용하여 암호화된 VM을 백업 및 복원하려는데, Azure Disk Encryption으로 암호화가 사용하도록 설정되어 있다면, Azure Disk Encryption 키 구성을 사용하여 VM을 암호화해야 합니다. Backup 서비스는 KEK 구성만을 사용하여 암호화된 VM을 지원합니다. [Azure Backup 암호화로 암호화된 가상 컴퓨터를 백업 및 복원하는 방법](https://docs.microsoft.com/en-us/azure/backup/backup-azure-vms-encryption)을 참조하세요.
+* Azure Backup 서비스를 사용하여 암호화된 VM을 백업 및 복원하려는데, Azure Disk Encryption으로 암호화가 사용하도록 설정되어 있다면, Azure Disk Encryption 키 구성을 사용하여 VM을 암호화해야 합니다. Backup 서비스는 KEK 구성 및 KEK를 사용하지 않는 구성을 사용하여 암호화된 VM을 지원합니다. [Azure Backup 암호화로 암호화된 가상 머신을 백업 및 복원하는 방법](https://docs.microsoft.com/azure/backup/backup-azure-vms-encryption)을 참조하세요.
 
-* Linux OS 볼륨을 암호화할 때 프로세스가 끝나면 현재 VM을 다시 시작해야 합니다. 이 작업은 포털, PowerShell 또는 CLI를 통해 수행할 수 있습니다.   암호화 진행률을 추적하려면 Get-AzureRmVMDiskEncryptionStatus https://docs.microsoft.com/en-us/powershell/module/azurerm.compute/get-azurermvmdiskencryptionstatus에 의해 반환되는 상태 메시지를 주기적으로 폴링합니다.  암호화가 완료되면 이 명령에 의해 반환되는 상태 메시지가 이를 나타냅니다.  예를 들어 "ProgressMessage: OS 디스크가 성공적으로 암호화되었으므로 VM을 재부팅하십시오."입니다. 이 시점에서 VM을 다시 시작하여 사용할 수 있습니다.  
+* Linux OS 볼륨을 암호화할 때 프로세스가 끝나면 현재 VM을 다시 시작해야 합니다. 이 작업은 포털, PowerShell 또는 CLI를 통해 수행할 수 있습니다.   암호화의 진행률을 추적하려면 Get-AzureRmVMDiskEncryptionStatus https://docs.microsoft.com/powershell/module/azurerm.compute/get-azurermvmdiskencryptionstatus에서 반환된 상태 메시지를 정기적으로 폴링합니다.  암호화가 완료되면 이 명령에 의해 반환되는 상태 메시지가 이를 나타냅니다. 예를 들어 "ProgressMessage: OS 디스크가 성공적으로 암호화되었으므로 VM을 재부팅하십시오."입니다. 이 시점에서 VM을 다시 시작하여 사용할 수 있습니다.  
 
 * Linux용 Azure Disk Encryption을 사용하려면 암호화하기 전에 데이터 디스크에 Linux의 탑재된 파일 시스템이 있어야 합니다.
 
@@ -234,8 +201,7 @@ OS 드라이브가 암호화되는 경우 Linux에 데이터 디스크 암호화
 
 * Azure Disk Encryption은 위에서 언급한 필수 조건을 충족하는 Azure 갤러리 지원 이미지에서만 지원됩니다. 고객 사용자 지정 이미지는 이러한 이미지에 있을 수 있는 사용자 지정 파티션 구성표 및 프로세스 동작으로 인해 지원되지 않습니다. 또한 초기에 필수 조건을 충족했지만 작성 후 수정된 갤러리 이미지 기반 VM도 호환되지 않을 수 있습니다.  이러한 이유로 Linux VM을 암호화하기 위한 권장 절차는 클린 갤러리 이미지에서 시작하여 VM을 암호화한 다음 필요에 따라 사용자 지정 소프트웨어 또는 데이터를 VM에 추가하는 것입니다.  
 
-> [!NOTE]
-> 암호화된 VM의 백업 및 복원은 KEK 구성으로 암호화된 VM에 대해서만 지원됩니다. KEK 없이 암호화된 VM에서는 지원되지 않습니다. KEK는 VM을 사용하도록 설정하는 선택적 매개 변수입니다.
+* Azure Disk Encryption 및 로컬 데이터 볼륨 - 암호화 키를 안전하게 보관하기 위한 Windows용 Bek 볼륨 및 Linux IaaS VM용 /mnt/azure_bek_disk. 이 디스크의 내용은 삭제하거나 편집하지 않아야 합니다. IaaS VM의 암호화 작업에 암호화 키가 필요하므로 이 디스크를 분리하지 않도록 합니다. 볼륨에 포함된 README 파일에 추가 세부 정보가 들어 있습니다.
 
 #### <a name="set-up-the-azure-ad-application-in-azure-active-directory"></a>Azure Active Directory에서 Azure AD 응용 프로그램 설정
 Azure에서 실행 중인 VM에서 암호화를 사용하도록 설정해야 하는 경우 Azure Disk Encryption이 암호화 키를 생성하고 Key Vault에 기록합니다. Key Vault에서 암호화 키를 관리하려면 Azure AD 인증이 필요합니다.
@@ -255,31 +221,29 @@ Azure AD 응용 프로그램을 만들려면 다음 PowerShell cmdlet을 사용�
 > [!NOTE]
 > $azureAdApplication.ApplicationId는 Azure AD ClientID이며 $aadClientSecret은 나중에 Azure Disk Encryption을 설정하는 데 사용할 클라이언트 비밀입니다. Azure AD 클라이언트 비밀을 적절하게 보호합니다.
 
-##### <a name="setting-up-the-azure-ad-client-id-and-secret-from-the-azure-classic-portal"></a>Azure 클래식 포털에서 Azure AD 클라이언트 ID 및 비밀 설정
-[Azure 클래식 포털]( https://manage.windowsazure.com)을 사용하여 Azure AD 클라이언트 ID 및 비밀을 설정할 수도 있습니다. 이 작업을 수행하려면 다음을 수행합니다.
+##### <a name="setting-up-the-azure-ad-client-id-and-secret-from-the-azure-portal"></a>Azure Portal에서 Azure AD 클라이언트 ID 및 비밀 설정
+Azure Portal을 사용하여 Azure AD 클라이언트 ID 및 비밀을 설정할 수도 있습니다. 이 작업을 수행하려면 다음을 수행합니다.
 
-1. **Active Directory** 탭을 클릭합니다.
+1. **모든 서비스 > Azure Active Directory**를 선택합니다.
 
- ![Azure 디스크 암호화](./media/azure-security-disk-encryption/disk-encryption-fig3.png)
+ ![Azure 디스크 암호화](./media/azure-security-disk-encryption/aad-service.png)
 
-2. **응용 프로그램 추가**를 클릭하고 응용 프로그램 이름을 입력합니다.
+2. **앱 등록 > 새 응용 프로그램 등록**을 선택합니다.
 
- ![Azure 디스크 암호화](./media/azure-security-disk-encryption/disk-encryption-fig4.png)
+ ![Azure 디스크 암호화](./media/azure-security-disk-encryption/aad-app-registration.png)
 
-3. 화살표 단추를 클릭하고 응용 프로그램 속성을 구성합니다.
+3. 요청된 정보를 제공하고, 응용 프로그램을 만듭니다.
 
- ![Azure 디스크 암호화](./media/azure-security-disk-encryption/disk-encryption-fig5.png)
+ ![Azure 디스크 암호화](./media/azure-security-disk-encryption/aad-create-app.png)
 
-4. 왼쪽 하단에 있는 확인 표시를 클릭하여 마칩니다. 응용 프로그램 구성 페이지가 나타나고 Azure AD 클라이언트 ID는 페이지의 맨 아래에 표시 됩니다.
+4. 새로 만든 응용 프로그램을 선택하여 응용 프로그램 ID를 포함한 해당 속성을 봅니다.  응용 프로그램에 대한 키를 만들려면 **설정 > 키**를 선택하고, 키에 대한 설명 및 만료를 추가하고, **저장**을 클릭합니다.
 
- ![Azure 디스크 암호화](./media/azure-security-disk-encryption/disk-encryption-fig6.png)
+ ![Azure 디스크 암호화](./media/azure-security-disk-encryption/aad-create-pw.png)
 
-5. **저장** 단추를 클릭하여 Azure AD 클라이언트 비밀을 저장합니다. 키 텍스트 상자에서 Azure AD 클라이언트 비밀을 확인합니다. 비밀을 적절하게 보호합니다.
+5. 생성된 암호 값을 복사하고 적절하게 보호합니다.
 
- ![Azure 디스크 암호화](./media/azure-security-disk-encryption/disk-encryption-fig7.png)
+ ![Azure 디스크 암호화](./media/azure-security-disk-encryption/aad-save-pw.png)
 
- > [!NOTE]
- > Azure 클래식 포털에서는 위의 흐름이 지원되지 않습니다.
 
 ##### <a name="use-an-existing-application"></a>기존 응용 프로그램 사용
 다음 명령을 실행하려면 [Azure AD PowerShell 모듈](https://technet.microsoft.com/library/jj151815.aspx)을 가져와 사용합니다.
@@ -405,7 +369,7 @@ Key Vault를 만들려면 다음 옵션 중 하나를 사용합니다.
 * ["101-Key-Vault-Create" Resource Manager 템플릿](https://github.com/Azure/azure-quickstart-templates/tree/master/101-key-vault-create)
 * [Azure PowerShell Key Vault cmdlet](/powershell/module/azurerm.keyvault/#key_vault)
 * Azure 리소스 관리자
-* [Key Vault를 보호](https://docs.microsoft.com/en-us/azure/key-vault/key-vault-secure-your-key-vault)하는 방법
+* [Key Vault를 보호](https://docs.microsoft.com/azure/key-vault/key-vault-secure-your-key-vault)하는 방법
 
 > [!NOTE]
 > 구독에 대한 Key Vault 설정이 이미 있는 경우 다음 섹션으로 건너뜁니다.
@@ -459,8 +423,8 @@ Azure 플랫폼은 VM을 부팅하고 볼륨을 해독할 수 있도록 Key Vaul
 
 | 매개 변수 | 설명 |
 | --- | --- |
-| adminUserName | 가상 컴퓨터의 관리 사용자 이름 |
-| adminPassword | 가상 컴퓨터의 관리 사용자 암호 |
+| adminUserName | 가상 머신의 관리 사용자 이름 |
+| adminPassword | 가상 머신의 관리 사용자 암호 |
 | newStorageAccountName | OS 및 데이터 VHD를 저장할 저장소 계정의 이름 |
 | vmSize | VM의 크기. 현재 표준 A, D 및 G 시리즈만 지원됩니다. |
 | virtualNetworkName | VM NIC가 속해야 하는 VNet의 이름 |
@@ -605,7 +569,7 @@ CLI 명령을 사용하여 Azure에서 기존 또는 실행 중인 IaaS Windows 
 | AADClientSecret | Key Vault에 비밀을 쓸 수 있는 권한이 있는 Azure AD 응용 프로그램의 클라이언트 ID |
 | keyVaultName | BitLocker 키가 업로드될 Key Vault의 이름. cmdlet `(Get-AzureRmKeyVault -ResourceGroupName <yourResourceGroupName>). Vaultname`을 사용하여 가져올 수 있습니다. |
 |  keyEncryptionKeyURL | 생성된 BitLocker 키를 암호화하는 데 사용되는 주요 암호화 키의 URL. UseExistingKek 드롭다운 목록에서 **nokek**를 선택하면 이 매개 변수가 선택 사항입니다. UseExistingKek 드롭다운 목록에서 **kek**를 선택하면 _keyEncryptionKeyURL_ 값을 반드시 입력해야 합니다. |
-| volumeType | 암호화 작업을 수행할 볼륨의 유형. 지원되는 유효한 값은 _OS_ 또는 _All_(RHEL 7.2, CentOS 7.2, Ubuntu 16.04의 경우)이고 다른 모든 배포판의 경우 _Data_입니다. |
+| volumeType | 암호화 작업을 수행할 볼륨의 유형. 지원되는 유효한 값은 _OS_ 또는 _모두_입니다. (위의 필수 조건 섹션에서 지원되는 Linux 배포판과 OS 버전을 확인하세요.) |
 | sequenceVersion | BitLocker 작업의 시퀀스 버전. 동일한 VM에서 디스크 암호화 작업이 수행될 때마다 이 버전 번호가 증가합니다. |
 | vmName | 암호화 작업을 수행할 VM의 이름. |
 | passPhrase | 데이터 암호화 키로 강력한 암호를 입력합니다. |
@@ -642,14 +606,14 @@ CLI 명령을 사용하여 Azure에서 기존 또는 실행 중인 IaaS Windows 
  ```
 
 ### <a name="get-the-encryption-status-of-an-encrypted-iaas-vm"></a>암호화된 IaaS VM의 암호화 상태 가져오기
-Azure Resource Manager, [PowerShell cmdlet](/powershell/azure/overview) 또는 CLI 명령을 사용하여 암호화 상태를 가져올 수 있습니다. 다음 섹션에서는 Azure 클래식 포털 및 CLI 명령을 사용하여 암호화 상태를 가져오는 방법에 대해 설명합니다.
+Azure Resource Manager, [PowerShell cmdlet](/powershell/azure/overview) 또는 CLI 명령을 사용하여 암호화 상태를 가져올 수 있습니다. 다음 섹션에서는 Azure Portal 및 CLI 명령을 사용하여 암호화 상태를 가져오는 방법에 대해 설명합니다.
 
 #### <a name="get-the-encryption-status-of-an-encrypted-windows-vm-by-using-azure-resource-manager"></a>Azure Resource Manager를 사용하여 암호화된 Windows VM의 암호화 상태 가져오기
 다음을 수행하여 Azure Resource Manager에서 IaaS VM의 암호화 상태를 가져올 수 있습니다.
 
-1. [Azure 클래식 포털](https://portal.azure.com/)에 로그인하고 왼쪽 메뉴에서 **가상 컴퓨터**를 클릭하여 구독에서 가상 컴퓨터의 요약 보기를 확인합니다. **구독** 드롭다운 목록에서 구독 이름을 선택하여 가상 컴퓨터 보기를 필터링할 수 있습니다.
+1. [Azure Portal](https://portal.azure.com/)에 로그인하고 왼쪽 메뉴에서 **가상 머신**를 클릭하여 구독에서 가상 머신의 요약 보기를 확인합니다. **구독** 드롭다운 목록에서 구독 이름을 선택하여 가상 머신 보기를 필터링할 수 있습니다.
 
-2. **가상 컴퓨터** 페이지 위쪽에서 **열**을 클릭합니다.
+2. **가상 머신** 페이지 위쪽에서 **열**을 클릭합니다.
 
 3. **열 선택** 블레이드에서 **디스크 암호화**를 선택한 후 **업데이트**를 클릭합니다. 다음 그림에 표시된 것처럼 각 VM에 대한 _사용_ 또는 _사용 안 함_ 암호화 상태를 보여주는 디스크 암호화 열이 표시됩니다.
 
@@ -725,7 +689,7 @@ Linux VM의 경우 [실행 중인 Linux VM에서 암호화 사용 안 함](https
 | sequenceVersion | BitLocker 작업의 시퀀스 버전. 동일한 VM에서 디스크 암호 해독 작업이 수행될 때마다 이 버전 번호가 증가합니다. |
 
 ##### <a name="disable-encryption-on-an-existing-or-running-iaas-vm"></a>기존 또는 실행 중인 IaaS VM에서 암호화 사용 안 함
-PowerShell cmdlet을 사용하여 기존 또는 실행 중인 IaaS VM에서 암호화를 사용하지 않도록 설정하려면 [`Disable-AzureRmVMDiskEncryption`](/powershell/module/azurerm.compute/disable-azurermvmdiskencryption)을 참조하세요. 이 cmdlet에는 Windows 및 Linux VM을 둘 다 지원합니다. 암호화를 사용하지 않도록 설정하려면 가상 컴퓨터에서 확장을 설치합니다. _이름_ 매개 변수를 지정하지 않으면 _Windows VM용 AzureDiskEncryption_ 기본 이름을 포함한 확장이 만들어집니다.
+PowerShell cmdlet을 사용하여 기존 또는 실행 중인 IaaS VM에서 암호화를 사용하지 않도록 설정하려면 [`Disable-AzureRmVMDiskEncryption`](/powershell/module/azurerm.compute/disable-azurermvmdiskencryption)을 참조하세요. 이 cmdlet에는 Windows 및 Linux VM을 둘 다 지원합니다. 암호화를 사용하지 않도록 설정하려면 가상 머신에서 확장을 설치합니다. _이름_ 매개 변수를 지정하지 않으면 _Windows VM용 AzureDiskEncryption_ 기본 이름을 포함한 확장이 만들어집니다.
 
 Linux VM에서는 AzureDiskEncryptionForLinux 확장이 사용됩니다.
 
@@ -734,21 +698,21 @@ Linux VM에서는 AzureDiskEncryptionForLinux 확장이 사용됩니다.
 
 ### <a name="enable-encryption-on-pre-encrypted-iaas-vm-with-azure-managed-disk"></a>Azure 관리 디스크를 사용하여 미리 암호화된 IaaS VM에 대한 암호화 사용
 Azure 관리 디스크 ARM 템플릿을 사용하여 미리 암호화된 VHD를 통해 암호화된 VM 만들기(다음에 있는 ARM 템플릿 사용)   
-[미리 암호화된 VHD/저장소 BLOB를 통해 암호화된 관리 디스크 새로 만들기](https://github.com/Azure/azure-quickstart-templates/tree/master/201-create-encrypted-managed-disk)
+[미리 암호화된 VHD/저장소 Blob에서 새로운 암호화된 관리 디스크 만들기](https://github.com/Azure/azure-quickstart-templates/tree/master/201-create-encrypted-managed-disk)
 
 ### <a name="enable-encryption-on-a-new-linux-iaas-vm-with-azure-managed-disk"></a>Azure 관리 디스크를 사용하여 새로운 Linux IaaS VM에 대한 암호화 사용
 Azure 관리 디스크 ARM 템플릿을 사용하여 암호화된 Linux IaaS VM 새로 만들기(다음에 있는 ARM 템플릿 사용)   
-[전체 디스크 암호화를 사용하여 RHEL 7.2 배포](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vm-full-disk-encrypted-rhel)
+[전체 디스크 암호화로 RHEL 7.2 배포](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vm-full-disk-encrypted-rhel)
 
 ### <a name="enable-encryption-on-a-new-windows-iaas-vm-with-azure-managed-disk"></a>Azure 관리 디스크를 사용하여 새로운 Windows IaaS VM에 대한 암호화 사용
  Azure 관리 디스크 ARM 템플릿을 사용하여 암호화된 Linux IaaS VM 새로 만들기(다음에 있는 ARM 템플릿 사용)   
- [갤러리 이미지로 암호화된 Windows IaaS 관리 디스크 VM 새로 만들기](https://github.com/Azure/azure-quickstart-templates/tree/master/201-encrypt-create-new-vm-gallery-image-managed-disks)
+ [갤러리 이미지에서 새로운 암호화된 Windows IaaS 관리 디스크 VM 만들기](https://github.com/Azure/azure-quickstart-templates/tree/master/201-encrypt-create-new-vm-gallery-image-managed-disks)
 
   > [!NOTE]
-  >Azure Disk Encryption을 사용하기 전에 외부에 관리 디스크 기반 VM 인스턴스에 대해 스냅숏을 만들고 백업해야 합니다.  포털에서 관리 디스크의 스냅숏을 만들거나 Azure Backup을 사용할 수 있습니다.  백업은 암호화 중에 예기치 않은 오류가 발생할 경우 복구 옵션으로 사용할 수 있습니다.  백업을 만들면 Set-AzureRmVMDiskEncryptionExtension cmdlet에 -skipVmBackup 매개 변수를 지정하여 관리 디스크를 암호화하는 데 사용할 수 있습니다.  이 명령은 백업을 만들고 이 매개 변수가 지정될 때까지 관리 디스크 기반 VM에 대해 실패합니다.    
+  >Azure Disk Encryption을 사용하기 전에 외부에 관리 디스크 기반 VM 인스턴스에 대해 스냅숏을 만들고 백업해야 합니다.  포털에서 관리 디스크의 스냅숏을 만들거나 Azure Backup을 사용할 수 있습니다.  Backup은 암호화 중에 예기치 않은 오류가 발생할 경우 복구 옵션으로 사용할 수 있습니다.  백업을 만들면 Set-AzureRmVMDiskEncryptionExtension cmdlet에 -skipVmBackup 매개 변수를 지정하여 관리 디스크를 암호화하는 데 사용할 수 있습니다.  이 명령은 백업을 만들고 이 매개 변수가 지정될 때까지 관리 디스크 기반 VM에 대해 실패합니다.    
  
 ### <a name="update-encryption-settings-of-an-existing-encrypted-non-premium-vm"></a>기존의 암호화된 프리미엄 이외 VM의 암호화 설정 업데이트
-  VM 실행에 사용되는 기존의 Azure Disk Encryption 지원 인터페이스[PS cmdlet, CLI 또는 ARM 템플릿]를 사용하여 Windows VM의 AAD 클라이언트 ID/비밀, 키 암호화 키[KEK], BitLocker 암호화 키 또는 Linux VM의 암호 같은 암호화 설정을 업데이트하세요. 암호화 설정 업데이트는 비Premium Storage에서 지원하는 VM에만 지원됩니다. Premium Storage에서 지원하는 VM에는 지원되지 않습니다.
+  VM 실행에 사용되는 기존의 Azure Disk Encryption 지원 인터페이스[PS cmdlet, CLI 또는 ARM 템플릿]를 사용하여 Windows VM의 AAD 클라이언트 ID/비밀, 키 암호화 키[KEK], BitLocker 암호화 키 또는 Linux VM의 암호 같은 암호화 설정을 업데이트하세요. 암호화 설정 업데이트는 Premium Storage VM과 비 Premium Storage VM에서 모두 지원됩니다.
 
 ## <a name="appendix"></a>부록
 ### <a name="connect-to-your-subscription"></a>구독에 연결
@@ -756,7 +720,7 @@ Azure 관리 디스크 ARM 템플릿을 사용하여 암호화된 Linux IaaS VM 
 
 1. Azure PowerShell 세션을 시작하고 다음 명령을 사용하여 Azure 계정에 로그인합니다.
 
-    `Login-AzureRmAccount`
+    `Connect-AzureRmAccount`
 
 2. 여러 구독이 있고 사용할 구독을 지정하려면 다음을 입력하여 계정에 대한 구독을 확인합니다.
 
@@ -816,14 +780,10 @@ OS 파티션을 압축하고 BitLocker에 대한 컴퓨터를 준비하려면 �
 > BitLocker를 사용하여 외부 키를 가져오기 위해서는 별도의 데이터/리소스 VHD로 VM을 준비합니다.
 
 #### <a name="encrypting-an-os-drive-on-a-running-linux-vm"></a>실행 중인 Linux VM에서 OS 드라이브 암호화
-실행 중인 Linux VM에서 OS 드라이브 암호화는 다음과 같은 배포판에서 지원됩니다.
-
-* RHEL 7.2
-* CentOS 7.2
-* Ubuntu 16.04
 
 ##### <a name="prerequisites-for-os-disk-encryption"></a>OS 디스크 암호화를 위한 필수 조건
 
+* VM은 [Azure Disk Encryption FAQ](https://docs.microsoft.com/azure/security/azure-security-disk-encryption-faq#what-linux-distributions-does-azure-disk-encryption-support)에 나열된 것과 같이 OS 디스크 암호화와 호환되는 배포를 사용해야 합니다. 
 * Azure Resource Manager의 Marketplace 이미지에서 VM을 만들어야 합니다.
 * 4GB 이상의 RAM이 있는 Azure VM(권장 크기는 7GB)이 있어야 합니다.
 * (RHEL 및 CentOS) SELinux를 사용하지 않도록 설정합니다. SELinux를 사용하지 않도록 설정하려면 VM에 대한 [SELinux 사용자 및 관리자 가이드](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/SELinux_Users_and_Administrators_Guide/sect-Security-Enhanced_Linux-Working_with_SELinux-Changing_SELinux_Modes.html#sect-Security-Enhanced_Linux-Enabling_and_Disabling_SELinux-Disabling_SELinux)에서 "4.4.2. SELinux 사용 안 함"을 참조하세요.
@@ -860,7 +820,7 @@ OS 파티션을 압축하고 BitLocker에 대한 컴퓨터를 준비하려면 �
     OsVolumeEncryptionSettings : Microsoft.Azure.Management.Compute.Models.DiskEncryptionSettings
     ProgressMessage            : OS disk successfully encrypted, reboot the VM
     ```
-VM을 다시 부팅하기 전에 VM의 [부트 진단](https://azure.microsoft.com/en-us/blog/boot-diagnostics-for-virtual-machines-v2/)을 저장하는 것이 좋습니다.
+VM을 다시 부팅하기 전에 VM의 [부트 진단](https://azure.microsoft.com/blog/boot-diagnostics-for-virtual-machines-v2/)을 저장하는 것이 좋습니다.
 
 #### <a name="monitoring-os-encryption-progress"></a>OS 암호화 진행 상태 모니터링
 OS 암호화 진행 상태를 모니터링하는 방법은 세 가지가 있습니다.
@@ -894,7 +854,7 @@ OS 암호화 진행 상태를 모니터링하는 방법은 세 가지가 있습�
 
  ![VM 인스턴스 보기](./media/azure-security-disk-encryption/vm-instanceview.png)
 
-* [부트 진단](https://azure.microsoft.com/en-us/blog/boot-diagnostics-for-virtual-machines-v2/)을 살펴봅니다. ADE 확장의 메시지에는 `[AzureDiskEncryption]`이라는 접두사가 붙습니다.
+* [부트 진단](https://azure.microsoft.com/blog/boot-diagnostics-for-virtual-machines-v2/)을 살펴봅니다. ADE 확장의 메시지에는 `[AzureDiskEncryption]`이라는 접두사가 붙습니다.
 
 * SSH를 통해 VM에 로그온하고 다음에서 확장 로그를 가져옵니다.
 
@@ -926,7 +886,7 @@ OS 암호화 진행 상태를 모니터링하는 방법은 세 가지가 있습�
 
  ![Ubuntu 16.04 설치](./media/azure-security-disk-encryption/ubuntu-1604-preencrypted-fig5.png)
 
-6. [이 지침](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-create-upload-ubuntu/)을 사용하여 Azure에 업로드하기 위한 VM을 준비합니다. 마지막 단계(VM 프로비전 해제)를 아직 실행하지 마세요.
+6. [이 지침](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-create-upload-ubuntu/)을 사용하여 Azure에 업로드하기 위한 VM을 준비합니다. 마지막 단계(VM 프로비전 해제)를 아직 실행하지 마세요.
 
 다음을 수행하여 Azure로 작업할 암호화를 구성합니다.
 
@@ -1004,7 +964,7 @@ OS 암호화 진행 상태를 모니터링하는 방법은 세 가지가 있습�
 
  ![openSUSE 13.2 설치](./media/azure-security-disk-encryption/opensuse-encrypt-fig2.png)
 
-3. [Azure용 SLES 또는 openSUSE 가상 컴퓨터 준비](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-suse-create-upload-vhd/#prepare-opensuse-131)의 지침에 따라 Azure에 업로드할 VM을 준비합니다. 마지막 단계(VM 프로비전 해제)를 아직 실행하지 마세요.
+3. [Azure용 SLES 또는 openSUSE 가상 머신 준비](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-suse-create-upload-vhd/#prepare-opensuse-131)의 지침에 따라 Azure에 업로드할 VM을 준비합니다. 마지막 단계(VM 프로비전 해제)를 아직 실행하지 마세요.
 
 Azure로 작업할 암호화를 구성하려면 다음을 수행합니다.
 1. /etc/dracut.conf를 편집하고 다음 줄을 추가합니다.
@@ -1080,7 +1040,7 @@ to:
 
  ![CentOS 7 설치](./media/azure-security-disk-encryption/centos-encrypt-fig4.png)
 
-5. [Azure용 CentOS 기반 가상 컴퓨터 준비](https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-create-upload-centos/#centos-70)의 "CentOS 7.0+" 지침에 따라 Azure에 업로드할 VM을 준비합니다. 마지막 단계(VM 프로비전 해제)를 아직 실행하지 마세요.
+5. [Azure용 CentOS 기반 가상 머신 준비](https://azure.microsoft.com/documentation/articles/virtual-machines-linux-create-upload-centos/#centos-70)의 "CentOS 7.0+" 지침에 따라 Azure에 업로드할 VM을 준비합니다. 마지막 단계(VM 프로비전 해제)를 아직 실행하지 마세요.
 
 6. 이제 VM을 프로비전 해제하고 [VHD를 Azure에 업로드](#upload-encrypted-vhd-to-an-azure-storage-account)할 수 있습니다.
 
@@ -1159,7 +1119,7 @@ BitLocker 암호화 또는 DM-Crypt 암호화를 사용하도록 설정한 후�
 
 
 #### <a name="disk-encryption-secret-not-encrypted-with-a-kek"></a>KEK로 암호화되지 않은 디스크 암호화 암호
-Key Vault에서 비밀을 설정하려면 [Set-AzureKeyVaultSecret](/powershell/module/azurerm.keyvault/set-azurekeyvaultsecret)을 사용합니다. Windows 가상 컴퓨터의 경우 bek 파일이 base64 문자열로 인코딩된 후 `Set-AzureKeyVaultSecret` cmdlet을 사용하여 Key Vault로 업로드됩니다. Linux의 경우 암호는 base64 문자열로 인코딩된 후 Key Vault로 업로드됩니다. 또한 Key Vault에서 비밀을 만들 때 다음 태그가 설정되었는지 확인합니다.
+Key Vault에서 비밀을 설정하려면 [Set-AzureKeyVaultSecret](/powershell/module/azurerm.keyvault/set-azurekeyvaultsecret)을 사용합니다. Windows 가상 머신의 경우 bek 파일이 base64 문자열로 인코딩된 후 `Set-AzureKeyVaultSecret` cmdlet을 사용하여 Key Vault로 업로드됩니다. Linux의 경우 암호는 base64 문자열로 인코딩된 후 Key Vault로 업로드됩니다. 또한 Key Vault에서 비밀을 만들 때 다음 태그가 설정되었는지 확인합니다.
 
     # This is the passphrase that was provided for encryption during the distribution installation
     $passphrase = "contoso-password"
@@ -1294,10 +1254,6 @@ OS 디스크를 연결할 때 `$KeyEncryptionKey` 및 `$secretUrl`을 전달합�
             -KeyEncryptionKeyVaultId $KeyVault.ResourceId `
             -KeyEncryptionKeyURL $KeyEncryptionKey.Id
 
-## <a name="download-this-guide"></a>이 가이드 다운로드
-[TechNet 갤러리](https://gallery.technet.microsoft.com/Azure-Disk-Encryption-for-a0018eb0)에서 이 가이드를 다운로드할 수 있습니다.
-
 ## <a name="for-more-information"></a>Blob에 대한 자세한 내용은
 [Azure PowerShell를 사용하여 Azure Disk Encryption 탐색 - 1부](http://blogs.msdn.com/b/azuresecurity/archive/2015/11/16/explore-azure-disk-encryption-with-azure-powershell.aspx?wa=wsignin1.0)  
 [Azure PowerShell를 사용하여 Azure Disk Encryption 탐색 - 2부](http://blogs.msdn.com/b/azuresecurity/archive/2015/11/21/explore-azure-disk-encryption-with-azure-powershell-part-2.aspx)
-

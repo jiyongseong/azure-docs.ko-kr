@@ -1,26 +1,24 @@
 ---
-title: "Ruby를 사용하여 MySQL용 Azure Database에 연결 | Microsoft Docs"
+title: "Ruby를 사용하여 Azure Database for MySQL에 연결"
 description: "이 빠른 시작에서는 MySQL용 Azure Database에서 데이터를 연결하고 쿼리하는 데 사용할 수 있는 몇 가지 Ruby 코드 샘플을 제공합니다."
 services: mysql
 author: jasonwhowell
 ms.author: jasonh
-manager: jhubbard
+manager: kfile
 editor: jasonwhowell
 ms.service: mysql-database
 ms.custom: mvc
 ms.devlang: ruby
-ms.topic: hero-article
-ms.date: 07/13/2017
+ms.topic: quickstart
+ms.date: 02/28/2018
+ms.openlocfilehash: 84898a5bc3afd21aa6b922b4074fd09b4315dd6e
+ms.sourcegitcommit: c765cbd9c379ed00f1e2394374efa8e1915321b9
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: e54f1dccbae060c52f48bfeb277c045b99a91715
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/28/2018
 ---
-
 # <a name="azure-database-for-mysql-use-ruby-to-connect-and-query-data"></a>MySQL용 Azure Database: Ruby를 사용하여 데이터 연결 및 쿼리
-이 빠른 시작에서는 Windows, Ubuntu Linux 및 Mac 플랫폼에서 [Ruby](https://www.ruby-lang.org) 응용 프로그램 및 [mysql2](https://rubygems.org/gems/mysql2) gem을 사용하여 MySQL용 Azure Database에 연결하는 방법을 보여 줍니다. SQL 문을 사용하여 데이터베이스의 데이터를 쿼리, 삽입, 업데이트 및 삭제하는 방법을 보여 줍니다. 이 문서에서는 Ruby를 사용하여 개발하는 데 익숙하고 MySQL용 Azure Database를 처음 사용한다고 가정합니다.
+이 빠른 시작에서는 Windows, Ubuntu Linux 및 Mac 플랫폼에서 [Ruby](https://www.ruby-lang.org) 응용 프로그램 및 [mysql2](https://rubygems.org/gems/mysql2) gem을 사용하여 MySQL용 Azure Database에 연결하는 방법을 보여 줍니다. SQL 문을 사용하여 데이터베이스의 데이터를 쿼리, 삽입, 업데이트 및 삭제하는 방법을 보여 줍니다. 이 항목에서는 Ruby를 사용하여 개발하는 데 익숙하고 MySQL용 Azure Database를 처음 사용한다고 가정합니다.
 
 ## <a name="prerequisites"></a>필수 조건
 이 빠른 시작에서는 다음과 같은 가이드 중 하나에서 만들어진 리소스를 시작 지점으로 사용합니다.
@@ -56,18 +54,17 @@ Ruby, Gem 및 MySQL2 라이브러리를 자신의 컴퓨터에 설치합니다.
 ## <a name="get-connection-information"></a>연결 정보 가져오기
 MySQL용 Azure Database에 연결하는 데 필요한 연결 정보를 가져옵니다. 정규화된 서버 이름 및 로그인 자격 증명이 필요합니다.
 
-1. [Azure 포털](https://portal.azure.com/)에 로그인합니다.
-2. Azure Portal의 왼쪽 메뉴에서 **모든 리소스**를 클릭하고 만든 서버를 검색합니다(예: **myserver4demo**).
-3. **myserver4demo** 서버 이름을 클릭합니다.
-4. 서버의 **속성** 페이지를 선택합니다. **서버 이름** 및 **서버 관리자 로그인 이름**을 기록해 둡니다.
- ![MySQL용 Azure Database - 서버 관리자 로그인](./media/connect-ruby/1_server-properties-name-login.png)
-5. 서버 로그인 정보를 잊어버린 경우 **개요** 페이지로 이동하여 서버 관리자 로그인 이름을 확인하고 필요한 경우 암호를 다시 설정합니다.
+1. [Azure Portal](https://portal.azure.com/)에 로그인합니다.
+2. Azure Portal의 왼쪽 메뉴에서 **모든 리소스**를 클릭한 다음, 방금 만든 서버를 검색합니다(예: **mydemoserver**).
+3. 서버 이름을 클릭합니다.
+4. 서버의 **개요** 패널에 있는 **서버 이름**과 **서버 관리자 로그인 이름**을 기록해 둡니다. 암호를 잊어버리면 이 패널에서 암호를 재설정할 수 있습니다.
+ ![MySQL용 Azure Database 서버 이름](./media/connect-ruby/1_server-overview-name-login.png)
 
 ## <a name="run-ruby-code"></a>Ruby 코드 실행 
 1. 아래 섹션에서 Ruby 코드를 텍스트 파일에 붙여넣고 .rb 파일 확장명이 포함된 프로젝트 폴더에 저장합니다(예: `C:\rubymysql\createtable.rb` 또는 `/home/username/rubymysql/createtable.rb`).
 2. 코드를 실행하려면 명령 프롬프트 또는 Bash 셸을 시작합니다. 디렉터리를 프로젝트 폴더로 변경합니다(예: `cd rubymysql`).
-3. 그런 다음 응용 프로그램을 실행하려면 ruby 명령 다음에 파일 이름을 입력합니다(예: `ruby createtable.rb`).
-4. Windows OS에서 ruby 응용 프로그램이 경로 환경 변수에 없는 경우 전체 경로를 사용하여 노드 응용 프로그램을 시작해야 할 수도 있습니다(예: `"c:\Ruby23-x64\bin\ruby.exe" createtable.rb`).
+3. 그런 다음 응용 프로그램을 실행하려면 Ruby 명령 다음에 파일 이름을 입력합니다(예: `ruby createtable.rb`).
+4. Windows OS에서 Ruby 응용 프로그램이 경로 환경 변수에 없는 경우 전체 경로를 사용하여 노드 응용 프로그램을 시작해야 할 수도 있습니다(예: `"c:\Ruby23-x64\bin\ruby.exe" createtable.rb`).
 
 ## <a name="connect-and-create-a-table"></a>테이블 연결 및 생성
 **CREATE TABLE** SQL 문 다음에 테이블에 행을 추가하는 **INSERT INTO** SQL 문을 사용하여 테이블을 연결 및 생성하려면 다음 코드를 사용합니다.
@@ -80,9 +77,9 @@ require 'mysql2'
 
 begin
     # Initialize connection variables.
-    host = String('myserver4demo.mysql.database.azure.com')
+    host = String('mydemoserver.mysql.database.azure.com')
     database = String('quickstartdb')
-    username = String('myadmin@myserver4demo')
+    username = String('myadmin@mydemoserver')
     password = String('yourpassword')
 
     # Initialize connection object.
@@ -117,7 +114,7 @@ end
 ## <a name="read-data"></a>데이터 읽기
 **SELECT** SQL 문을 사용하여 데이터를 연결하고 읽으려면 다음 코드를 사용하세요. 
 
-이 코드는 [mysql2::client](http://www.rubydoc.info/gems/mysql2/0.4.8) 클래스 .new() 메서드를 사용하여 MySQL용 Azure 데이터베이스에 연결합니다. 그런 다음 [query()](http://www.rubydoc.info/gems/mysql2/0.4.8#Usage) 메서드를 호출하여 SELECT 명령을 실행합니다. 그런 다음 종료하기 전에 [close()](http://www.rubydoc.info/gems/mysql2/0.4.8/Mysql2/Client#close-instance_method) 메서드를 호출하여 연결을 닫습니다.
+이 코드는 [mysql2::client](http://www.rubydoc.info/gems/mysql2/0.4.8) class.new() 메서드를 사용하여 MySQL용 Azure Database에 연결합니다. 그런 다음 [query()](http://www.rubydoc.info/gems/mysql2/0.4.8#Usage) 메서드를 호출하여 SELECT 명령을 실행합니다. 그런 다음 종료하기 전에 [close()](http://www.rubydoc.info/gems/mysql2/0.4.8/Mysql2/Client#close-instance_method) 메서드를 호출하여 연결을 닫습니다.
 
 `host`, `database`, `username` 및 `password` 문자열은 원하는 값으로 바꾸세요. 
 
@@ -126,9 +123,9 @@ require 'mysql2'
 
 begin
     # Initialize connection variables.
-    host = String('myserver4demo.mysql.database.azure.com')
+    host = String('mydemoserver.mysql.database.azure.com')
     database = String('quickstartdb')
-    username = String('myadmin@myserver4demo')
+    username = String('myadmin@mydemoserver')
     password = String('yourpassword')
 
     # Initialize connection object.
@@ -165,9 +162,9 @@ require 'mysql2'
 
 begin
     # Initialize connection variables.
-    host = String('myserver4demo.mysql.database.azure.com')
+    host = String('mydemoserver.mysql.database.azure.com')
     database = String('quickstartdb')
-    username = String('myadmin@myserver4demo')
+    username = String('myadmin@mydemoserver')
     password = String('yourpassword')
 
     # Initialize connection object.
@@ -202,9 +199,9 @@ require 'mysql2'
 
 begin
     # Initialize connection variables.
-    host = String('myserver4demo.mysql.database.azure.com')
+    host = String('mydemoserver.mysql.database.azure.com')
     database = String('quickstartdb')
-    username = String('myadmin@myserver4demo')
+    username = String('myadmin@mydemoserver')
     password = String('yourpassword')
 
     # Initialize connection object.
@@ -229,4 +226,3 @@ end
 ## <a name="next-steps"></a>다음 단계
 > [!div class="nextstepaction"]
 > [내보내기 및 가져오기를 사용하여 데이터베이스 마이그레이션](./concepts-migrate-import-export.md)
-

@@ -12,13 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 03/17/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ebfed89674dc132bd5d93f34a8b5ed5ab12bd73e
-ms.openlocfilehash: 3e7cb9dfbc3a0985794294c94d331f12829c2bdc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/16/2016
-
+ms.author: mbullwin
+ms.openlocfilehash: 418c391f896ac60f509b963f0aff70ad699fc43b
+ms.sourcegitcommit: e462e5cca2424ce36423f9eff3a0cf250ac146ad
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/01/2017
 ---
 # <a name="application-insights-telemetry-in-visual-studio-codelens"></a>Visual Studio CodeLens에서 Application Insights 원격 분석
 웹앱의 코드에 있는 메서드는 런타임 예외 및 요청 응답 시간에 대한 원격 분석을 사용하여 주석이 추가될 수 있습니다. 응용 프로그램에 [Azure Application Insights](app-insights-overview.md)를 설치하는 경우 원격 분석은 Visual Studio [CodeLens](https://msdn.microsoft.com/library/dn269218.aspx)에 표시됩니다. 즉, 각 함수의 상단에 있는 메모에서 해당 함수가 참조된 횟수 또는 마지막으로 편집한 사용자 등 유용한 정보를 볼 수 있습니다.
@@ -79,5 +78,4 @@ ms.lasthandoff: 11/16/2016
 | **[Visual Studio Online에서 Application Insights로 작업](app-insights-visual-studio.md)**<br/>원격 분석을 검색하고, CodeLens에서 데이터를 확인하며, Application Insights를 구성합니다. Visual Studio 내에서 모두 수행할 수 있습니다. |![프로젝트를 마우스 오른쪽 단추로 클릭하고 Application Insights 및 검색을 선택합니다.](./media/app-insights-visual-studio-codelens/34.png) |
 | **[더 많은 데이터 추가](app-insights-asp-net-more.md)**<br/>사용량, 가용성, 종속성, 예외를 모니터링합니다. 로깅 프레임 워크의 추적을 통합합니다. 사용자 지정 원격 분석을 작성합니다. |![Visual studio](./media/app-insights-visual-studio-codelens/64.png) |
 | **[Application Insights 포털 사용](app-insights-dashboards.md)**<br/>대시보드, 강력한 분석 및 진단 도구, 경고, 응용 프로그램의 라이브 종속성 맵 및 원격 분석 내보내기입니다. |![Visual studio](./media/app-insights-visual-studio-codelens/62.png) |
-
 

@@ -1,10 +1,10 @@
 ---
-title: "Azure 앱 서비스를 사용하여 Xamarin.iOS 앱에 푸시 알림 추가"
-description: "Azure 앱 서비스를 사용하여Xamarin.iOS 앱에 푸시 알림을 전송하는 방법을 알아봅니다."
+title: "Azure App Service를 사용하여 Xamarin.iOS 앱에 푸시 알림 추가"
+description: "Azure App Service를 사용하여Xamarin.iOS 앱에 푸시 알림을 전송하는 방법을 알아봅니다."
 services: app-service\mobile
 documentationcenter: xamarin
-author: ggailey777
-manager: syntaxc4
+author: conceptdev
+manager: crdun
 editor: 
 ms.assetid: 2921214a-49f8-45e1-a306-a85ce21defca
 ms.service: app-service-mobile
@@ -13,13 +13,12 @@ ms.tgt_pltfrm: mobile-xamarin-ios
 ms.devlang: dotnet
 ms.topic: article
 ms.date: 10/12/2016
-ms.author: glenga
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: 185a32376dd1c40fd480e16d3ac7607ac798afae
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
+ms.author: crdun
+ms.openlocfilehash: b8d5a8d8725e2e9412cef7c377b17a77f34be27d
+ms.sourcegitcommit: df4ddc55b42b593f165d56531f591fdb1e689686
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/04/2018
 ---
 # <a name="add-push-notifications-to-your-xamarinios-app"></a>Xamarin.iOS 앱에 푸시 알림 추가
 [!INCLUDE [app-service-mobile-selector-get-started-push](../../includes/app-service-mobile-selector-get-started-push.md)]
@@ -29,7 +28,7 @@ ms.lasthandoff: 11/17/2016
 
 다운로드한 빠른 시작 서버 프로젝트를 사용하지 않는 경우 푸시 알림 확장 패키지가 필요합니다. 자세한 내용은 [Azure Mobile Apps용 .NET 백 엔드 서버 SDK 사용](app-service-mobile-dotnet-backend-how-to-use-server-sdk.md)을 참조하세요.
 
-## <a name="prerequisites"></a>필수 조건
+## <a name="prerequisites"></a>필수 구성 요소
 * [Xamarin.iOS 빠른 시작 자습서](app-service-mobile-xamarin-ios-get-started.md) 를 완료합니다.
 * 실제 iOS 장치. 푸시 알림은 iOS 시뮬레이터에서 지원되지 않습니다.
 
@@ -80,7 +79,7 @@ ms.lasthandoff: 11/17/2016
         }
 4. 동일한 파일에서 **RegisteredForRemoteNotifications** 이벤트를 재정의합니다. 이 코드에서는 서버에서 지원하는 모든 플랫폼에서 전송되는 간단한 템플릿 알림을 등록하게 됩니다.
    
-    알림 허브를 사용하는 템플릿에 대한 자세한 내용은 [템플릿](../notification-hubs/notification-hubs-templates-cross-platform-push-messages.md)을 참조하세요.
+    Notification Hubs를 사용하는 템플릿에 대한 자세한 내용은 [템플릿](../notification-hubs/notification-hubs-templates-cross-platform-push-messages.md)을 참조하세요.
 
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
         {
@@ -118,7 +117,7 @@ ms.lasthandoff: 11/17/2016
             }
         }
 
-이제 앱이 푸시 알림을 지원하도록 업데이트됩니다.
+이제 푸시 알림을 지원하도록 앱이 업데이트됩니다.
 
 ## <a name="test"></a>앱에서 푸시 알림 테스트
 1. **실행** 단추를 눌러 프로젝트를 빌드하고 iOS 지원 장치에서 앱을 시작한 다음, **확인**을 클릭하여 푸시 알림을 수락합니다.
@@ -136,7 +135,6 @@ ms.lasthandoff: 11/17/2016
 <!-- Images. -->
 
 <!-- URLs. -->
-
 
 
 

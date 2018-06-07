@@ -8,7 +8,7 @@ Azure AD(Active Directory)에서 [Azure Resource Manager][lnk-authenticate-arm]�
 1. 다음 명령을 사용하여 Azure 구독에 로그인합니다.
 
     ```powershell
-    Login-AzureRmAccount
+    Connect-AzureRmAccount
     ```
 
 1. Azure 구독이 여러 개 있는 경우 Azure에 로그인하면 자격 증명과 연결된 모든 Azure 구독에 액세스할 수 있습니다. 다음 명령을 사용하여 사용할 수 있는 Azure 구독을 나열합니다.
@@ -28,20 +28,20 @@ Azure AD(Active Directory)에서 [Azure Resource Manager][lnk-authenticate-arm]�
 3. 다음 명령을 사용하여 새 Azure Active Directory 응용 프로그램을 만듭니다. 자리 표시자는 바꿉니다.
    
    * **{표시 이름}:** **MySampleApp**과 같은 응용 프로그램의 표시 이름입니다.
-   * **{홈페이지 URL}:** **http://mysampleapp/home**과 같은 앱의 홈페이지의 URL입니다. 이 URL이 실제 응용 프로그램을 가리킬 필요는 없습니다.
-   * **{응용 프로그램 식별자}:** **http://mysampleapp**과 같은 고유 식별자입니다. 이 URL이 실제 응용 프로그램을 가리킬 필요는 없습니다.
+   * **{홈페이지 URL}:** 앱의 홈페이지에 대한 URL입니다(예: **http://mysampleapp/home**). 이 URL이 실제 응용 프로그램을 가리킬 필요는 없습니다.
+   * **{응용 프로그램 식별자}:** 고유 식별자입니다(예: **http://mysampleapp**). 이 URL이 실제 응용 프로그램을 가리킬 필요는 없습니다.
    * **{암호}:** 앱에서 인증하기 위해 사용할 암호입니다.
      
      ```powershell
      New-AzureRmADApplication -DisplayName {Display name} -HomePage {Home page URL} -IdentifierUris {Application identifier} -Password {Password}
      ```
 4. 만든 응용 프로그램의 **ApplicationId** 를 적어 둡니다. 나중에 필요합니다.
-5. 다음 명령을 사용하여 새 서비스 주체를 만듭니다. 이전 단계에서 **{MyApplicationId}**를 **ApplicationId**로 바꿉니다.
+5. 다음 명령을 사용하여 새 서비스 주체를 만듭니다. 이전 단계에서 **{MyApplicationId}** 를 **ApplicationId**로 바꿉니다.
    
     ```powershell
     New-AzureRmADServicePrincipal -ApplicationId {MyApplicationId}
     ```
-6. 다음 명령을 사용하여 역할 할당을 설정합니다. **{MyApplicationId}**를 **ApplicationId**로 바꿉니다.
+6. 다음 명령을 사용하여 역할 할당을 설정합니다. **{MyApplicationId}** 를 **ApplicationId**로 바꿉니다.
    
     ```powershell
     New-AzureRmRoleAssignment -RoleDefinitionName Owner -ServicePrincipalName {MyApplicationId}

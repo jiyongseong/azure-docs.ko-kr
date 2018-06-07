@@ -4,7 +4,7 @@ description: "하이브리드 ID 디자인 고려 사항 가이드를 읽은 후
 documentationcenter: 
 services: active-directory
 author: billmath
-manager: femila
+manager: mtillman
 editor: 
 ms.assetid: 02d48768-ea9e-4bfe-ae54-b54c4bd0a789
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 07/18/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: cfb4104dd58f2af8b3ffed7491c91ae6c6557ddc
-ms.openlocfilehash: ba0d31a8f718cc5577fe779061db2144d4295cbb
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/05/2017
-
+ms.openlocfilehash: 29c045af81134847321d9ef69943f0154e9ee5a0
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="azure-active-directory-hybrid-identity-design-considerations--next-steps"></a>Azure Active Directory 하이브리드 ID 디자인 고려 사항 - 다음 단계
 요구 사항을 정의하고 모바일 장치 관리 솔루션에 대한 모든 옵션을 검토했으므로 사용자와 조직에 적합한 지원 인프라 배포에 대한 다음 단계를 수행할 준비가 되었습니다.
@@ -49,5 +48,4 @@ ms.lasthandoff: 05/05/2017
 
 ## <a name="see-also"></a>참고 항목
 [디자인 고려 사항 개요](active-directory-hybrid-identity-design-considerations-overview.md)
-
 

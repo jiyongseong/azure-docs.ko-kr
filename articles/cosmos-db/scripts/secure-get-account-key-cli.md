@@ -1,13 +1,12 @@
 ---
-title: "Azure CLI 스크립트 - Azure Cosmos DB에 대한 계정 키 가져오기 | Microsoft Docs"
-description: "Azure CLI 스크립트 샘플 - Azure Cosmos DB의 계정 키 가져오기"
+title: Azure CLI 스크립트 - Azure Cosmos DB에 대한 계정 키 가져오기 | Microsoft Docs
+description: Azure CLI 스크립트 샘플 - Azure Cosmos DB의 계정 키 가져오기
 services: cosmos-db
 documentationcenter: cosmosdb
-author: mimig1
-manager: jhubbard
-editor: 
+author: SnehaGunda
+manager: kfile
 tags: azure-service-management
-ms.assetid: 
+ms.assetid: ''
 ms.service: cosmos-db
 ms.custom: mvc
 ms.devlang: azurecli
@@ -15,15 +14,13 @@ ms.topic: sample
 ms.tgt_pltfrm: cosmosdb
 ms.workload: database
 ms.date: 06/02/2017
-ms.author: mimig
+ms.author: sngun
+ms.openlocfilehash: 7d0f982d02cbaf660246497e88d29c709cd941a3
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 3df211cdc8878033c8b792da00cce9773ae57a36
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-
 # <a name="get-account-keys-for-azure-cosmos-db-using-the-azure-cli"></a>Azure CLI를 사용하여 Azure Cosmos DB의 계정 키 가져오기
 
 이 샘플은 모든 종류의 Azure Cosmos DB 계정의 계정 키를 가져옵니다.  
@@ -34,7 +31,7 @@ CLI를 로컬로 설치하여 사용하도록 선택한 경우 이 항목에서 
 
 ## <a name="sample-script"></a>샘플 스크립트
 
-[!code-azurecli-interactive[기본](../../../cli_scripts/cosmosdb/scale-cosmosdb-get-account-key/secure-cosmosdb-get-account-key.sh?highlight=22-25 "Azure Cosmos DB 계정 키 가져오기")]
+[!code-azurecli-interactive[main](../../../cli_scripts/cosmosdb/scale-cosmosdb-get-account-key/secure-cosmosdb-get-account-key.sh?highlight=22-25 "Get Azure Cosmos DB account keys")]
 
 ## <a name="clean-up-deployment"></a>배포 정리
 
@@ -48,16 +45,15 @@ az group delete --name myResourceGroup
 
 이 스크립트는 다음 명령을 사용합니다. 테이블에 있는 각 명령은 명령에 해당하는 문서에 연결됩니다.
 
-| 명령 | 참고 사항 |
+| 명령 | 메모 |
 |---|---|
-| [az group create](/cli/azure/group#create) | 모든 리소스가 저장되는 리소스 그룹을 만듭니다. |
-| [az cosmosdb update](https://docs.microsoft.com/cli/azure/cosmosdb#update) | Azure Cosmos DB 계정을 업그레이드합니다. |
-| [az cosmosdb list-keys](https://docs.microsoft.com/cli/azure/cosmosdb#list-keys) | SQL Database를 호스팅하는 논리 서버를 만듭니다. |
-| [az group delete](https://docs.microsoft.com/cli/azure/group#delete) | 모든 중첩 리소스를 포함한 리소스 그룹을 삭제합니다. |
+| [az group create](/cli/azure/group#az_group_create) | 모든 리소스가 저장되는 리소스 그룹을 만듭니다. |
+| [az cosmosdb update](https://docs.microsoft.com/cli/azure/cosmosdb#az_cosmosdb_update) | Azure Cosmos DB 계정을 업그레이드합니다. |
+| [az cosmosdb list-keys](https://docs.microsoft.com/cli/azure/cosmosdb#az_cosmosdb_list_keys) | SQL Database를 호스팅하는 논리 서버를 만듭니다. |
+| [az group delete](https://docs.microsoft.com/cli/azure/group#az_group_delete) | 모든 중첩 리소스를 포함한 리소스 그룹을 삭제합니다. |
 
 ## <a name="next-steps"></a>다음 단계
 
-Azure CLI에 대한 자세한 내용은 [Azure CLI 설명서](https://docs.microsoft.com/cli/azure/overview)를 참조하세요.
+Azure CLI에 대한 자세한 내용은 [Azure CLI 설명서](https://docs.microsoft.com/cli/azure)를 참조하세요.
 
 추가 Azure Cosmos DB CLI 스크립트 샘플은 [Azure Cosmos DB CLI 설명서](../cli-samples.md)에서 확인할 수 있습니다.
-

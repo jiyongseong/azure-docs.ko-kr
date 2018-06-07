@@ -1,8 +1,8 @@
 ---
-title: "OMS Log Analytics에서 Syslog 메시지 수집 및 분석 | Microsoft Docs"
-description: "Syslog는 Linux에 공통되는 이벤트 로깅 프로토콜입니다. 이 문서에서는 Log Analytics의 Syslog 메시지 수집을 구성하는 방법을 설명하고, OMS 리포지토리에 생성되는 레코드에 대한 자세한 정보를 제공합니다."
+title: OMS Log Analytics에서 Syslog 메시지 수집 및 분석 | Microsoft Docs
+description: Syslog는 Linux에 공통되는 이벤트 로깅 프로토콜입니다. 이 문서에서는 Log Analytics의 Syslog 메시지 수집을 구성하는 방법을 설명하고, OMS 리포지토리에 생성되는 레코드에 대한 자세한 정보를 제공합니다.
 services: log-analytics
-documentationcenter: 
+documentationcenter: ''
 author: mgoedtel
 manager: carmonm
 editor: tysonn
@@ -12,14 +12,13 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 07/12/2017
+ms.date: 09/28/2017
 ms.author: magoedte;bwren
+ms.openlocfilehash: 011eaf1a4705f9078225b9b871f81b4333b05ee8
+ms.sourcegitcommit: 909469bf17211be40ea24a981c3e0331ea182996
 ms.translationtype: HT
-ms.sourcegitcommit: 137671152878e6e1ee5ba398dd5267feefc435b7
-ms.openlocfilehash: 7513f405d5c7c05a8e6e2b7b0e6313f23a319c84
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
 # <a name="syslog-data-sources-in-log-analytics"></a>Log Analytics의 Syslog 데이터 원본
 Syslog는 Linux에 공통되는 이벤트 로깅 프로토콜입니다.  응용 프로그램은 로컬 컴퓨터에 저장되거나 Syslog 수집기에 배달될 수 있는 메시지를 전송합니다.  Linux용 OMS 에이전트를 설치하면 에이전트에 메시지를 전달하도록 로컬 Syslog 디먼이 구성됩니다.  그러면 에이전트는 Log Analytics에 해당 메시지를 보내며 OMS 리포지토리에 해당 레코드가 만들어집니다.  
@@ -32,12 +31,12 @@ Syslog는 Linux에 공통되는 이벤트 로깅 프로토콜입니다.  응용 
 ![Syslog 수집](media/log-analytics-data-sources-syslog/overview.png)
 
 ## <a name="configuring-syslog"></a>Syslog 구성
-Linux용 OMS 에이전트는 해당 구성에 지정된 기능 및 심각도에 따라서만 이벤트를 수집합니다.  OMS 포털을 통해 또는 Linux 에이전트의 구성 파일을 관리하여 Syslog를 구성할 수 있습니다.
+Linux용 OMS 에이전트는 해당 구성에 지정된 기능 및 심각도에 따라서만 이벤트를 수집합니다.  Azure Portal을 통해 또는 Linux 에이전트의 구성 파일을 관리하여 Syslog를 구성할 수 있습니다.
 
-### <a name="configure-syslog-in-the-oms-portal"></a>OMS 포털에서 Syslog 구성
-[Log Analytics 설정의 데이터 메뉴](log-analytics-data-sources.md#configuring-data-sources)에서 Syslog를 구성합니다.  이 구성은 각 Linux 에이전트의 구성 파일에 전달됩니다.
+### <a name="configure-syslog-in-the-azure-portal"></a>Azure Portal에서 Syslog 구성
+[Log Analytics 고급 설정의 데이터 메뉴](log-analytics-data-sources.md#configuring-data-sources)에서 Syslog를 구성합니다.  이 구성은 각 Linux 에이전트의 구성 파일에 전달됩니다.
 
-해당 이름을 입력하고 **+**에서 Syslog를 구성합니다.  각 기능에 대해, 선택한 심각도의 메시지만 수집됩니다.  수집하려는 특정 기능의 심각도를 확인합니다.  이벤트를 필터링하는 추가 조건을 제공할 수는 없습니다.
+해당 이름을 입력하고 **+** 에서 Syslog를 구성합니다.  각 기능에 대해, 선택한 심각도의 메시지만 수집됩니다.  수집하려는 특정 기능의 심각도를 확인합니다.  이벤트를 필터링하는 추가 조건을 제공할 수는 없습니다.
 
 ![Syslog 구성](media/log-analytics-data-sources-syslog/configure.png)
 
@@ -184,9 +183,9 @@ OMS 에이전트는 포트 25224에서 로컬 클라이언트의 Syslog 메시�
 ## <a name="syslog-record-properties"></a>Syslog 레코드 속성
 Syslog 레코드는 **Syslog** 형식이며, 다음 표의 속성이 있습니다.
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 |:--- |:--- |
-| 컴퓨터 |이벤트가 수집된 컴퓨터입니다. |
+| Computer |이벤트가 수집된 컴퓨터입니다. |
 | Facility |메시지를 생성한 시스템의 부분을 정의합니다. |
 | HostIP |메시지를 보내는 시스템의 IP 주소입니다. |
 | HostName |메시지를 보내는 시스템의 이름입니다. |
@@ -200,23 +199,12 @@ Syslog 레코드는 **Syslog** 형식이며, 다음 표의 속성이 있습니�
 
 | 쿼리 | 설명 |
 |:--- |:--- |
-| Type=Syslog |모든 Syslog입니다. |
-| Type=Syslog SeverityLevel=error |심각도가 오류인 모든 Syslog 레코드입니다. |
-| Type=Syslog &#124; measure count() by Computer |컴퓨터별 Syslog 레코드 수입니다. |
-| Type=Syslog &#124; measure count() by Facility |기능별 Syslog 레코드 수입니다. |
-
->[!NOTE]
-> 작업 영역을 [새 Log Analytics 쿼리 언어](log-analytics-log-search-upgrade.md)로 업그레이드한 경우에는 위의 쿼리가 다음과 같이 변경됩니다.
-
-> | 쿼리 | 설명 |
-|:--- |:--- |
 | syslog |모든 Syslog입니다. |
 | Syslog &#124; where SeverityLevel == "error" |심각도가 오류인 모든 Syslog 레코드입니다. |
 | Syslog &#124; summarize AggregatedValue = count() by Computer |컴퓨터별 Syslog 레코드 수입니다. |
 | Syslog &#124; summarize AggregatedValue = count() by Facility |기능별 Syslog 레코드 수입니다. |
 
 ## <a name="next-steps"></a>다음 단계
-* 데이터 원본 및 솔루션에서 수집한 데이터를 분석하기 위해 [로그 검색](log-analytics-log-searches.md) 에 대해 알아봅니다.
+* 데이터 원본 및 솔루션에서 수집한 데이터를 분석하기 위해 [로그 검색](log-analytics-log-searches.md)에 대해 알아봅니다.
 * [사용자 지정 필드](log-analytics-custom-fields.md)를 사용하여 syslog 레코드의 데이터를 개별 필드로 구문 분석합니다.
 * [Linux 에이전트를 구성](log-analytics-linux-agents.md)합니다.
-

@@ -3,8 +3,8 @@ title: "Azure CLI 스크립트 샘플 - 클러스터링이 포함된 프리미�
 description: "Azure CLI 스크립트 샘플 - 클러스터링이 포함된 프리미엄 계층 Azure Redis Cache 만들기"
 services: redis-cache
 documentationcenter: 
-author: steved0x
-manager: douge
+author: wesmc7777
+manager: cfowler
 editor: 
 tags: azure-service-management
 ms.assetid: 07bcceae-2521-4fe3-b88f-ed833104ddd2
@@ -13,15 +13,14 @@ ms.devlang: azurecli
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: tbd
-ms.date: 04/14/2017
-ms.author: sdanie
-translationtype: Human Translation
-ms.sourcegitcommit: e851a3e1b0598345dc8bfdd4341eb1dfb9f6fb5d
-ms.openlocfilehash: 87d0fe4c3eaa8f7b75343a36a069ecdac8241d74
-ms.lasthandoff: 04/15/2017
-
+ms.date: 08/30/2017
+ms.author: wesmc
+ms.openlocfilehash: fb97d19d50ac9845c2495bd167a9cd30805d464b
+ms.sourcegitcommit: 8c3267c34fc46c681ea476fee87f5fb0bf858f9e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/09/2018
 ---
-
 # <a name="create-a-premium-azure-redis-cache-with-clustering"></a>클러스터링이 포함된 프리미엄 Azure Redis Cache 만들기
 
 이 시나리오에서는 활성화된 클러스터링 및 2개의 분할이 포함된 6GB 프리미엄 계층 Azure Redis Cache를 만드는 방법에 대해 배웁니다.
@@ -38,14 +37,14 @@ ms.lasthandoff: 04/15/2017
 
 이 스크립트는 다음 명령을 사용하여 리소스 그룹과 클러스터링 활성화가 포함된 프리미엄 계층 Redis Cache를 만듭니다. 테이블에 있는 각 명령은 명령에 해당하는 문서에 연결됩니다.
 
-| 명령 | 참고 사항 |
+| 명령 | 메모 |
 |---|---|
-| [az group create](https://docs.microsoft.com/cli/azure/group#create) | 모든 리소스가 저장되는 리소스 그룹을 만듭니다. |
-| [az redis create](https://docs.microsoft.com/cli/azure/redis#create) | Redis Cache 인스턴스를 만듭니다. |
+| [az group create](https://docs.microsoft.com/cli/azure/group#az_group_create) | 모든 리소스가 저장되는 리소스 그룹을 만듭니다. |
+| [az redis create](https://docs.microsoft.com/cli/azure/redis#az_redis_create) | Redis Cache 인스턴스를 만듭니다. |
 
 
 ## <a name="next-steps"></a>다음 단계
 
-Azure CLI에 대한 자세한 내용은 [Azure CLI 설명서](https://docs.microsoft.com/cli/azure/overview)를 참조하세요.
+Azure CLI에 대한 자세한 내용은 [Azure CLI 설명서](https://docs.microsoft.com/cli/azure)를 참조하세요.
 
 추가 Azure Redis Cache CLI 스크립트 샘플은 [Azure Redis Cache 설명서](../cli-samples.md)에서 확인할 수 있습니다.

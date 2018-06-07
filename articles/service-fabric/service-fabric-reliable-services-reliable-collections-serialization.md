@@ -1,6 +1,6 @@
 ---
-title: "Azure Service Fabric의 신뢰할 수 있는 컬렉션 개체 serialization | Microsoft Docs"
-description: "Azure Service Fabric 신뢰할 수 있는 컬렉션 개체 serialization"
+title: Azure Service Fabric의 신뢰할 수 있는 컬렉션 개체 serialization | Microsoft Docs
+description: Azure Service Fabric 신뢰할 수 있는 컬렉션 개체 serialization
 services: service-fabric
 documentationcenter: .net
 author: mcoskun
@@ -9,18 +9,16 @@ editor: masnider,rajak
 ms.assetid: 9d35374c-2d75-4856-b776-e59284641956
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: required
 ms.date: 5/8/2017
 ms.author: mcoskun
-ms.translationtype: Human Translation
-ms.sourcegitcommit: d9ae8e8948d82b9695d7d144d458fe8180294084
-ms.openlocfilehash: c14794b71ce7340d9e90a56d781c712e247ded06
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/23/2017
-
-
+ms.openlocfilehash: b02d8924749abb0e2fe815b555d55767bf1e5cc1
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="reliable-collection-object-serialization-in-azure-service-fabric"></a>Azure Service Fabric의 신뢰할 수 있는 컬렉션 개체 serialization
 신뢰할 수 있는 컬렉션은 해당 항목을 복제하고 유지하여 컴퓨터 장애 및 정전이 발생해도 지속되도록 합니다.
@@ -58,7 +56,7 @@ Reliable State Manager에는 다음 형식에 대한 기본 제공 직렬 변환
 
 [IReliableStateManager.TryAddStateSerializer<T>](https://docs.microsoft.com/dotnet/api/microsoft.servicefabric.data.ireliablestatemanager.tryaddstateserializer--1?Microsoft_ServiceFabric_Data_IReliableStateManager_TryAddStateSerializer__1_Microsoft_ServiceFabric_Data_IStateSerializer___0__)는 지정된 형식 T에 대한 사용자 지정 직렬 변환기를 등록하는 데 사용됩니다. 이 등록은 StatefulServiceBase 생성 시 수행되어 복구가 시작되기 전에 신뢰할 수 있는 모든 컬렉션이 적절한 직렬 변환기에 액세스하여 영구 데이터를 읽을 수 있도록 해야 합니다.
 
-```C#
+```csharp
 public StatefulBackendService(StatefulServiceContext context)
   : base(context)
   {
@@ -81,7 +79,7 @@ public StatefulBackendService(StatefulServiceContext context)
 
 다음은 4가지 속성을 포함하는 OrderKey라는 사용자 지정 형식 예제입니다.
 
-```C#
+```csharp
 public class OrderKey : IComparable<OrderKey>, IEquatable<OrderKey>
 {
     public byte Warehouse { get; set; }
@@ -100,7 +98,7 @@ public class OrderKey : IComparable<OrderKey>, IEquatable<OrderKey>
 다음은 IStateSerializer<OrderKey>의 구현 예제입니다.
 baseValue를 사용하는 읽기 및 쓰기 오버로드는 이후 버전과의 호환성을 위해 해당 오버로드를 호출합니다.
 
-```C#
+```csharp
 public class OrderKeySerializer : IStateSerializer<OrderKey>
 {
   OrderKey IStateSerializer<OrderKey>.Read(BinaryReader reader)
@@ -157,4 +155,3 @@ public class OrderKeySerializer : IStateSerializer<OrderKey>
   * [업그레이드 매개 변수](service-fabric-application-upgrade-parameters.md)를 사용하여 응용 프로그램 업그레이드 방법을 제어합니다.
   * [고급 항목](service-fabric-application-upgrade-advanced.md)을 참조하여 응용 프로그램을 업그레이드하는 동안 고급 기능을 사용하는 방법에 대해 알아봅니다.
   * [응용 프로그램 업그레이드 문제 해결](service-fabric-application-upgrade-troubleshooting.md)의 단계를 참조하여 응용 프로그램 업그레이드 중 발생하는 일반적인 문제를 해결합니다.
-

@@ -1,26 +1,25 @@
 ---
-title: "Windows 장치의 Azure Portal 상의 여기에서 가져올 수 없습니다 | Microsoft Docs"
-description: "여기에서 가져올 수 없는 위치 및 이 대화 상자에서 실행되지 않도록 방지하기 위해 확인할 점에 대해 알아봅니다."
+title: Windows 장치의 Azure Portal 상의 여기에서 가져올 수 없습니다 | Microsoft Docs
+description: 여기에서 가져올 수 없는 위치 및 이 대화 상자에서 실행되지 않도록 방지하기 위해 확인할 점에 대해 알아봅니다.
 services: active-directory
-keywords: "장치 기반 조건부 액세스, 장치 등록, 장치 등록 사용, 장치 등록 및 MDM"
-documentationcenter: 
+keywords: 장치 기반 조건부 액세스, 장치 등록, 장치 등록 사용, 장치 등록 및 MDM
+documentationcenter: ''
 author: MarkusVi
-manager: femila
+manager: mtillman
 ms.assetid: 8ad0156c-0812-4855-8563-6fbff6194174
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: get-started-article
-ms.date: 07/05/2017
+ms.date: 01/15/2018
 ms.author: markvi
 ms.reviewer: jairoc
+ms.openlocfilehash: 5ad9b01d3821b481fe3255c821e8674dcb26b322
+ms.sourcegitcommit: 384d2ec82214e8af0fc4891f9f840fb7cf89ef59
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 16543c7bb7b6b236dcc24093c9963bc218ca1fa6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/16/2018
 ---
 # <a name="you-cant-get-there-from-here-on-a-windows-device"></a>Windows 장치 상에서 '여기에서 가져올 수 없습니다'
 
@@ -41,13 +40,13 @@ ms.lasthandoff: 07/21/2017
 
 ## <a name="supported-browser"></a>지원되는 브라우저
 
-관리자가 조건부 액세스 정책을 구성한 경우, 지원되는 브라우저를 사용하여 조직의 리소스를 액세스할 수 있습니다. Windows 장치에서는 **Internet Explorer** 및 **Edge**만 지원됩니다.
+관리자가 조건부 액세스 정책을 구성한 경우, 지원되는 브라우저를 사용하여 조직의 리소스를 액세스할 수 있습니다. Windows 장치에서는 **Internet Explorer** 및 **Microsoft Edge**만 지원됩니다.
 
 오류 페이지의 세부 정보 섹션을 보면 리소스에 액세스할 수 없는 이유가 지원되지 않는 브라우저 때문인지 여부를 쉽게 알 수 있습니다.
 
 ![지원되지 않은 브라우저에 대한 "여기에서 가져올 수 없습니다" 메시지](./media/active-directory-conditional-access-device-remediation/02.png "시나리오")
 
-유일하게 수정된 부분은 응용 프로그램이 장치 플랫폼에 지원하는 브라우저를 사용하는 것입니다. 지원되는 브라우저의 전체 목록은 [지원되는 브라우저](active-directory-conditional-access-supported-apps.md#supported-browsers-for-device-based-policies)를 참조하세요.  
+유일하게 수정된 부분은 응용 프로그램이 장치 플랫폼에 지원하는 브라우저를 사용하는 것입니다. 지원되는 브라우저의 전체 목록은 [지원되는 브라우저](active-directory-conditional-access-supported-apps.md)를 참조하세요.  
 
 
 ## <a name="supported-versions-of-windows"></a>지원되는 Windows 버전
@@ -159,6 +158,5 @@ ms.lasthandoff: 07/21/2017
 
 
 ## <a name="next-steps"></a>다음 단계
-[Azure Active Directory 조건부 액세스](active-directory-conditional-access.md)
-
+[Azure Active Directory 조건부 액세스](active-directory-conditional-access-azure-portal.md)
 

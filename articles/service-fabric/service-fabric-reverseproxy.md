@@ -1,6 +1,6 @@
 ---
-title: "Azure Service Fabric 역방향 프록시 | Microsoft Docs"
-description: "Service Fabric의 역방향 프록시를 사용하여 클러스터 내부 및 외부에서 마이크로 서비스와 통신"
+title: Azure Service Fabric 역방향 프록시 | Microsoft Docs
+description: Service Fabric의 역방향 프록시를 사용하여 클러스터 내부 및 외부에서 마이크로 서비스와 통신
 services: service-fabric
 documentationcenter: .net
 author: BharatNarasimman
@@ -9,36 +9,43 @@ editor: vturecek
 ms.assetid: 47f5c1c1-8fc8-4b80-a081-bc308f3655d3
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: required
-ms.date: 04/07/2017
+ms.date: 11/03/2017
 ms.author: bharatn
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 09f24fa2b55d298cfbbf3de71334de579fbf2ecd
-ms.openlocfilehash: 80669943f5b9f9d55cc6395c4dab76b32fc72c8f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/08/2017
-
-
+ms.openlocfilehash: 21e1e3041d7b1f4dc205355f6c0b8d4fd2e82775
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="reverse-proxy-in-azure-service-fabric"></a>Azure Service Fabric의 역방향 프록시
-Azure Service Fabric에 기본 제공되는 역방향 프록시에서는 HTTP 끝점을 노출하는 Service Fabric 클러스터의 마이크로 서비스를 처리합니다.
+Azure Service Fabric에 기본 제공되는 역방향 프록시는 Service Fabric 클러스터 탐색에서 마이크로 서비스의 실행을 지원하고 http 끝점이 있는 타 서비스와 통신합니다.
 
 ## <a name="microservices-communication-model"></a>마이크로 서비스 통신 모델
-Service Fabric의 마이크로 서비스는 일반적으로 가상 컴퓨터의 일부를 클러스터에서 실행하고 여러 가지 이유로 한 가상 컴퓨터를 다른 VM으로 이동할 수 있습니다. 따라서 마이크로 서비스에 대한 끝점은 동적으로 변할 수 있습니다. 마이크로 서비스와 통신하는 일반적인 패턴은 다음 확인 루프입니다.
+서비스 패브릭의 마이크로 서비스는 클러스터의 노드 하위 집합에서 실행되며 여러 가지 이유로 노드 간에 마이그레이션할 수 있습니다. 따라서 마이크로 서비스에 대한 끝점은 동적으로 변할 수 있습니다. 클러스터에서 다른 서비스를 찾아 통신하기 위해 마이크로 서비스는 다음 단계를 거쳐야 합니다.
 
-1. 처음에는 이름 지정 서비스를 통해 서비스 위치를 확인합니다.
+1. 이름 지정 서비스를 통해 서비스 위치를 확인합니다.
 2. 서비스에 연결합니다.
-3. 연결 실패의 원인을 결정하고 필요한 경우 서비스 위치를 다시 확인합니다.
+3. 연결 실패 시 적용하는 서비스 확인 및 재시도 정책을 구현하는 루프에서 앞의 단계 래핑
 
-이 프로세스는 일반적으로 서비스 확인 및 재시도 정책을 구현하는 재시도 루프에 클라이언트 쪽 통신 라이브러리의 매핑을 포함합니다.
 자세한 내용은 [서비스와 연결 및 통신](service-fabric-connect-and-communicate-with-services.md)을 참조하세요.
 
 ### <a name="communicating-by-using-the-reverse-proxy"></a>역방향 프록시를 사용하여 통신
-Service Fabric의 역방향 프록시는 클러스터의 모든 노드에서 실행됩니다. 클라이언트를 대신하여 전체 서비스 확인 프로세스를 수행한 다음 클라이언트 요청을 전달합니다. 따라서 클러스터에서 실행되는 클라이언트는 클라이언트 쪽 HTTP 통신 라이브러리를 사용하여 동일한 노드에서 로컬로 실행되는 역방향 프록시를 사용하여 대상 서비스와 대화할 수 있습니다.
+역방향 프록시는 모든 노드에서 실행되고 클라이언트 서비스를 대신하여 끝점 확인, 자동 재시도 및 기타 연결 실패를 처리하는 서비스입니다. 역방향 프록시는 클라이언트 서비스로부터의 요청을 처리하므로 다양한 정책을 적용하도록 구성될 수 있습니다. 역방향 프록시를 통해 클라이언트 서비스가 클라이언트 쪽 HTTP 통신 라이브러리를 사용할 수 있으며, 서비스에서 특수 확인 및 재시도 논리가 필요하지 않습니다. 
+
+역방향 프록시는 클라이언트 서비스가 다른 서비스에 요청을 보내는 데 사용할 수 있게 로컬 노드에서 하나 이상의 끝점을 공개합니다.
 
 ![내부 통신][1]
+
+> [!NOTE]
+> **지원되는 플랫폼**
+>
+> Service Fabric의 역방향 프록시는 현재 다음 플랫폼을 지원합니다.
+> * *Windows 클러스터*: Windows 8 이상 또는 Windows Server 2012 이상
+> * *Linux 클러스터*: 역방향 프록시는 현재 Linux 클러스터에 사용할 수 없습니다.
+>
 
 ## <a name="reaching-microservices-from-outside-the-cluster"></a>클러스터 외부에서 마이크로 서비스에 연결
 마이크로 서비스에 대한 기본 외부 통신 모델은 옵트인 모델이며, 여기서 각 서비스는 외부 클라이언트에서 직접 액세스될 수 없습니다. 마이크로 서비스와 외부 클라이언트 간의 네트워크 경계인 [Azure Load Balancer](../load-balancer/load-balancer-overview.md)는 네트워크 주소 변환을 수행하고 외부 요청을 내부 IP:port 끝점에 전달합니다. 마이크로 서비스의 끝점에서 외부 클라이언트에 직접 액세스할 수 있도록 하려면 먼저 클러스터의 서비스가 사용하는 각 포트에 트래픽을 전달하도록 부하 분산 장치를 구성해야 합니다. 그뿐 아니라 대부분 마이크로 서비스( 특히 상태 저장 마이크로 서비스)가 클러스터의 모든 노드에 있는 것은 아닙니다. 마이크로 서비스는 장애 조치(Failover) 시 노드 간을 이동할 수 있습니다. 이러한 경우 부하 분산 장치를 트래픽을 전달할 복제본의 대상 노드 위치를 효과적으로 확인할 수 없습니다.
@@ -109,9 +116,7 @@ http://10.0.0.5:10592/3f0d39ad-924b-4233-b4a7-02617c6308a6-130834621071472715/
 * `http://10.0.0.5:10592/3f0d39ad-924b-4233-b4a7-02617c6308a6-130834621071472715/api/users/6`
 
 ## <a name="special-handling-for-port-sharing-services"></a>포트 공유 서비스에 대한 특수 처리
-Azure Application Gateway는 서비스 주소의 다시 확인을 시도하고 서비스에 연결할 수 없는 경우 요청을 재시도합니다. 이는 클라이언트 코드가 자체 서비스 확인 및 확인 루프를 구현할 필요가 없으므로 Application Gateway의 주요 이점이 됩니다.
-
-일반적으로 서비스에 연결할 수 없는 경우 서비스 인스턴스 또는 복제가 일반적인 수명 주기의 일부로 다른 노드로 이동된 것입니다. 이 경우 Application Gateway는 끝점이 더 이상 원래 확인된 주소에 열려 있지 않음을 나타내는 네트워크 연결 오류를 수신할 수 있습니다.
+Service Fabric 역방향 프록시는 서비스 주소의 다시 확인을 시도하고 서비스에 연결할 수 없는 경우 요청을 재시도합니다. 일반적으로 서비스에 연결할 수 없는 경우 서비스 인스턴스 또는 복제가 일반적인 수명 주기의 일부로 다른 노드로 이동된 것입니다. 이 경우 역방향 프록시는 끝점이 더 이상 원래 확인된 주소에 열려 있지 않음을 나타내는 네트워크 연결 오류를 수신할 수 있습니다.
 
 그러나 복제 또는 서비스 인스턴스는 호스트 프로세스를 공유할 수 있으며 다음을 비롯하여 http.sys 기반 웹 서버에 의해 호스팅될 경우 포트를 공유할 수도 있습니다.
 
@@ -119,23 +124,32 @@ Azure Application Gateway는 서비스 주소의 다시 확인을 시도하고 �
 * [ASP.NET 코어 WebListener](https://docs.asp.net/latest/fundamentals/servers.html#weblistener)
 * [카타나](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.OwinSelfHost/)
 
-이 상황에서 웹 서버는 호스트 프로세스에서 사용할 수 있고 요청에 응답할 가능성이 있지만 확인된 서비스 인스턴스 또는 복제는 더 이상 호스트에서 사용할 수 없습니다. 이 경우 게이트웨이는 웹 서버에서 HTTP 404 응답을 수신합니다. 따라서 HTTP 404에는 다음과 같은 두 가지 의미가 있습니다.
+이 상황에서 웹 서버는 호스트 프로세스에서 사용할 수 있고 요청에 응답할 가능성이 있지만 확인된 서비스 인스턴스 또는 복제는 더 이상 호스트에서 사용할 수 없습니다. 이 경우 게이트웨이는 웹 서버에서 HTTP 404 응답을 수신합니다. 따라서 HTTP 404 응답은 다음과 같은 두 가지 의미를 가질 수 있습니다.
 
 - 사례 #1: 서비스 주소가 올바르지만 사용자가 요청한 리소스가 없습니다.
 - 사례 #2: 서비스 주소가 올바르지 않고 사용자가 요청한 리소스가 다른 노드에 있을 수 있습니다.
 
-첫 번째 경우는 사용자 오류로 간주되는 일반적인 HTTP 404입니다. 그러나 두 번째 경우에 사용자는 존재하는 리소스를 요청했습니다. 서비스 자체가 이동되었으므로 Application Gateway에서 해당 서비스를 찾을 수 없습니다. Application Gateway는 주소를 다시 확인하고 요청을 다시 시도해야 합니다.
+첫 번째 경우는 사용자 오류로 간주되는 일반적인 HTTP 404입니다. 그러나 두 번째 경우에 사용자는 존재하는 리소스를 요청했습니다. 서비스 자체가 이동되어 역방향 프록시가 해당 서비스를 찾을 수 없습니다. 역방향 프록시가 주소를 다시 확인하고 요청을 다시 시도해야 합니다.
 
-그러므로 Application Gateway는 두 경우를 구별하는 방법이 필요합니다. 이러한 구별을 하려면 서버에서 제공하는 힌트가 필요합니다.
+그러므로 역방향 프록시가 두 경우를 구별할 수 있는 방법이 필요합니다. 이러한 구별을 하려면 서버에서 제공하는 힌트가 필요합니다.
 
-* 기본적으로 Application Gateway는 사례 # 2를 가정하여 요청을 다시 확인하고 다시 실행하려고 시도합니다.
-* Application Gateway에 대해 사례 #1을 나타내려면 서비스가 다음과 같은 HTTP 응답 헤더를 반환해야 합니다.
+* 기본적으로 역방향 프록시는 사례 # 2를 가정하여 요청을 다시 확인하고 다시 실행하려고 시도합니다.
+* 역방향 프록시에 사례 #1이라는 것을 알리려면 서비스가 다음과 같은 HTTP 응답 헤더를 반환해야 합니다.
 
   `X-ServiceFabric : ResourceNotFound`
 
-이 HTTP 응답 헤더는 요청한 리소스가 존재하지 않는 일반적인 HTTP 404 상황을 나타내며, Application Gateway는 서비스 주소를 다시 확인하려고 시도하지 않습니다.
+이 HTTP 응답 헤더는 요청한 리소스가 존재하지 않는 일반적인 HTTP 404 상황을 나타내며, 역방향 프록시는 서비스 주소를 다시 확인하려고 시도하지 않습니다.
 
 ## <a name="setup-and-configuration"></a>설정 및 구성
+
+### <a name="enable-reverse-proxy-via-azure-portal"></a>Azure Portal을 통해 역방향 프록시 사용
+
+Azure Portal은 새 Service Fabric 클러스터를 만드는 동안 역방향 프록시를 사용하는 옵션을 제공합니다.
+**Service Fabric 클러스터 만들기**, 2단계: 클러스터 구성, 노드 유형 구성에서 "역방향 프록시 사용"으로 확인란을 선택합니다.
+보안 역방향 프록시를 구성하기 위해 SSL 인증서는 3단계: 보안, 클러스터 보안 설정 구성에서 지정되고, "역방향 프록시에 대한 SSL 인증서 포함" 확인란을 선택하고, 인증서 세부 정보를 입력하면 됩니다.
+
+### <a name="enable-reverse-proxy-via-azure-resource-manager-templates"></a>Azure Resource Manager 템플릿을 통해 역방향 프록시 사용
+
 [Azure Resource Manager 템플릿](service-fabric-cluster-creation-via-arm.md)을 사용하여 클러스터에 대해 Service Fabric의 역방향 프록시를 사용하도록 설정할 수 있습니다.
 
 인증서로 보안 역방향 프록시를 구성하고 인증서 롤오버를 처리하기 위한 Azure Resource Manager 템플릿 샘플에 대해서는 [보안 클러스터에서 HTTPS 역방향 프록시 구성](https://github.com/ChackDan/Service-Fabric/tree/master/ARM Templates/ReverseProxySecureSample#configure-https-reverse-proxy-in-a-secure-cluster)을 참조하세요.
@@ -243,7 +257,7 @@ Azure Application Gateway는 서비스 주소의 다시 확인을 시도하고 �
     ```
 
 ### <a name="supporting-a-reverse-proxy-certificate-thats-different-from-the-cluster-certificate"></a>클러스터 인증서와 다른 역방향 프록시 인증서 지원
- 역방향 프록시 인증서가 클러스터를 보호하는 인증서와 다른 경우 이전에 지정한 인증서를 가상 컴퓨터에 설치하고 ACL(액세스 제어 목록)에 추가하여 Service Fabric에서 액세스할 수 있게 합니다. 이 작업은 **virtualMachineScaleSets** [리소스 형식 섹션](../resource-group-authoring-templates.md)에서 수행할 수 있습니다. 설치의 경우 해당 인증서를 osProfile에 추가합니다. 템플릿의 확장 섹션은 ACL의 인증서를 업데이트할 수 있습니다.
+ 역방향 프록시 인증서가 클러스터를 보호하는 인증서와 다른 경우 이전에 지정한 인증서를 가상 머신에 설치하고 ACL(액세스 제어 목록)에 추가하여 Service Fabric에서 액세스할 수 있게 합니다. 이 작업은 **virtualMachineScaleSets** [리소스 형식 섹션](../resource-group-authoring-templates.md)에서 수행할 수 있습니다. 설치의 경우 해당 인증서를 osProfile에 추가합니다. 템플릿의 확장 섹션은 ACL의 인증서를 업데이트할 수 있습니다.
 
   ```json
   {
@@ -303,7 +317,7 @@ Azure Application Gateway는 서비스 주소의 다시 확인을 시도하고 �
 * [Reliable Services 원격을 사용하여 원격 프로시저 호출](service-fabric-reliable-services-communication-remoting.md)
 * [Reliable Services에서 OWIN을 사용하는 Web API](service-fabric-reliable-services-communication-webapi.md)
 * [Reliable Services를 사용한 WCF 통신](service-fabric-reliable-services-communication-wcf.md)
+* 추가적인 역방향 프록시 구성 옵션은 [Service Fabric 클러스터 설정 사용자 지정](service-fabric-cluster-fabric-settings.md)의 응용 프로그램 게이트웨이/HTTP 섹션을 참조하세요.
 
 [0]: ./media/service-fabric-reverseproxy/external-communication.png
 [1]: ./media/service-fabric-reverseproxy/internal-communication.png
-

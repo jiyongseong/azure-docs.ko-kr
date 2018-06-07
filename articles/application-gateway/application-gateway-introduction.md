@@ -1,109 +1,83 @@
 ---
-title: "Azure Application Gateway 소개 | Microsoft Docs"
-description: "이 페이지는 게이트웨이 크기, HTTP 부하 분산, 쿠키 기반의 세션 선호도 및 SSL 오프로드를 비롯하여 Application Gateway 서비스 계층 7 부하 분산의 개요를 제공합니다."
-documentationcenter: na
+title: Azure Application Gateway란?
+description: Azure 응용 프로그램 게이트웨이를 사용하여 응용 프로그램에 대한 웹 트래픽을 관리하는 방법을 알아봅니다.
 services: application-gateway
-author: georgewallace
-manager: timlt
-editor: tysonn
-ms.assetid: b37a2473-4f0e-496b-95e7-c0594e96f83e
+author: vhorne
+manager: jpconnock
 ms.service: application-gateway
-ms.devlang: na
-ms.topic: hero-article
-ms.tgt_pltfrm: na
-ms.custom: H1Hack27Feb2017
+ms.topic: overview
+ms.custom: mvc
 ms.workload: infrastructure-services
-ms.date: 07/10/2017
-ms.author: gwallace
+ms.date: 4/9/2018
+ms.author: victorh
+ms.openlocfilehash: 3824eacb355c323a1850f6863ae2b99970c62cfb
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: 54774252780bd4c7627681d805f498909f171857
-ms.openlocfilehash: 396d8b9532eb55341670ad61bd4c2a16882b35e4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-# <a name="overview-of-application-gateway"></a>Application Gateway에 대한 개요
+# <a name="what-is-azure-application-gateway"></a>Azure Application Gateway란?
 
-Microsoft Azure Application Gateway는 ADC(응용 프로그램 배달 컨트롤러)를 서비스로 제공하는 전용 가상 어플라이언스입니다. 응용 프로그램에 다양한 레이어 7 부하 분산 기능을 제공합니다. 따라서 고객은 Application Gateway에 CPU 집약적인 SSL 종료를 오프로드하여 웹 팜 생산성을 최적화할 수 있습니다. 또한 들어오는 트래픽의 라운드 로빈 배포, 쿠키 기반 세션 선호도, URL 경로 기반 라우팅 및 단일 Application Gateway의 여러 웹 사이트를 호스트할 수 있는 능력을 비롯한 다른 계층 7 라우팅 기능이 제공됩니다. WAF(웹 응용 프로그램 방화벽) 또한 Application Gateway WAF SKU의 일부로 제공됩니다. 일반적인 웹 취약점 및 악용으로부터 웹 응용 프로그램을 보호합니다. Application Gateway는 인터넷 연결 게이트웨이, 내부 전용 게이트웨이 또는 둘의 조합으로 구성할 수 있습니다. 
+Azure Application Gateway는 웹 응용 프로그램에 대한 트래픽을 관리할 수 있도록 하는 웹 트래픽 부하 분산 장치입니다. 
 
-![시나리오](./media/application-gateway-introduction/scenario.png)
+기존 부하 분산 장치는 전송 계층(OSI 계층 4 - TCP 및 UDP)에서 작동하고 원본 IP 주소와 포트를 기반으로 대상 IP 주소와 포트에 트래픽을 라우팅합니다. 하지만 Application Gateway를 사용하면 훨씬 더 달라질 수 있습니다. 예를 들어 들어오는 URL을 기반으로 하는 트래픽을 라우팅할 수 있습니다. 따라서 `/images`가 들어오는 URL에 있는 경우 이미지에 대해 구성된 서버(풀 라고도 함)의 특정 집합에 트래픽을 라우팅할 수 있습니다. `/video`가 URL에 있는 경우 해당 트래픽은 비디오에 대해 최적화된 다른 풀로 라우팅됩니다.
 
-## <a name="features"></a>기능
+![imageURLroute](./media/application-gateway-url-route-overview/figure1-720.png)
 
-현재 Application Gateway는 다음 기능을 제공합니다.
+이 유형의 라우팅은 응용 프로그램 계층(OSI 계층 7) 부하 분산이라고 합니다. Azure Application Gateway는 URL 기반 라우팅 및 기타 작업을 수행할 수 있습니다. 다음 기능이 Azure Application Gateway에 포함되어 있습니다. 
+
+## <a name="url-based-routing"></a>URL 기반 라우팅
+
+URL 경로 기반 라우팅을 사용하여 요청의 URL 경로에 따라 트래픽을 백 엔드 서버 풀로 라우팅할 수 있습니다. 시나리오 중 하나는 여러 콘텐츠 형식에 대한 요청을 서로 다른 풀로 라우팅하는 것입니다.
+
+예를 들어 `http://contoso.com/video/*`에 대한 요청은 VideoServerPool로 라우팅되고, `http://contoso.com/images/*`에 대한 요청은 ImageServerPool로 라우팅됩니다. 경로 패턴과 일치하는 항목이 없는 경우 DefaultServerPool이 선택됩니다.
+
+## <a name="redirection"></a>리디렉션
+
+일반적으로 여러 웹 응용 프로그램에서 자동 HTTP - HTTPS 리디렉션을 지원하여 응용 프로그램 및 해당 사용자 간 모든 통신이 암호화된 경로를 통해 이루어지도록 합니다. 
+
+이전에는 HTTP에서 수신하는 요청을 HTTPS로 리디렉션하는 것이 유일한 목적인 전용 풀 만들기와 같은 기술을 사용했습니다. Application Gateway에서 Application Gateway의 트래픽을 리디렉션하는 기능을 지원합니다. 이를 통해 응용 프로그램 구성이 간소화되고, 리소스 사용이 최적화되고, 전역 및 경로 기반 리디렉션을 비롯한 새로운 리디렉션 시나리오가 지원됩니다. Application Gateway 리디렉션 지원은 HTTP - HTTPS 리디렉션으로만 제한되지 않습니다. 이는 일반 리디렉션 메커니즘이므로 규칙을 사용하여 정의하는 모든 포트 간에서 리디렉션할 수 있습니다. 외부 사이트로의 리디렉션도 지원합니다.
+
+Application Gateway 리디렉션 지원에서는 다음과 같은 기능을 제공합니다.
+
+- Gateway의 한 포트에서 다른 포트로의 전역 리디렉션. 한 사이트에서 HTTP - HTTPS 리디렉션이 가능합니다.
+- 경로 기반 리디렉션. 이러한 종류의 리디렉션에서는 `/cart/*`로 표시되는 쇼핑 카트 영역과 같이 특정 사이트 영역에서만 HTTP - HTTPS 리디렉션이 가능합니다.
+- 외부 사이트로 리디렉션.
+
+## <a name="multiple-site-hosting"></a>다중 사이트 호스팅
+
+다중 사이트 호스팅을 통해 동일한 응용 프로그램 게이트웨이 인스턴스에서 둘 이상의 웹 사이트를 구성할 수 있습니다. 이 기능을 사용하면 최대 20개의 웹 사이트를 하나의 Application Gateway로 추가하여 배포에 보다 효율적인 토폴로지를 구성할 수 있습니다. 각 웹 사이트는 고유한 풀로 이동할 수 있습니다. 예를 들어 응용 프로그램 게이트웨이는 ContosoServerPool 및 FabrikamServerPool이라는 두 개의 서버 풀에서 `contoso.com` 및 `fabrikam.com`에 대한 트래픽을 사용할 수 있습니다.
+
+`http://contoso.com`에 대한 요청은 ContosoServerPool로 라우팅되고, `http://fabrikam.com`에 대한 요청은 FabrikamServerPool로 라우팅됩니다.
+
+마찬가지로 같은 부모 도메인의 하위 도메인 두 개를 동일한 응용 프로그램 게이트웨이 배포에서 호스트할 수 있습니다. 하위 도메인을 사용하는 예제에는 단일 Application Gateway 배포에 호스팅되는 `http://blog.contoso.com` 및 `http://app.contoso.com`이 포함됩니다.
+
+## <a name="session-affinity"></a>세션 선호도
+
+쿠키 기반 세션 선호도 기능은 동일한 서버에서 사용자 세션을 유지하려는 경우에 유용합니다. Application Gateway는 게이트웨이 관리형 쿠키를 사용하여 사용자 세션에서 동일한 서버에 후속 트래픽을 처리하도록 지시할 수 있습니다. 이는 세션 상태가 사용자 세션의 서버에 로컬로 저장된 경우에 특히 중요합니다.
+
+## <a name="secure-sockets-layer-ssl-termination"></a>SSL(Secure Sockets Layer) 종료
+
+Application Gateway는 게이트웨이에서 SSL 종료를 지원합니다. 그 후의 트래픽은 일반적으로 암호화되지 않은 상태로 백 엔드 서버로 흐릅니다. 이 기능을 사용하면 비용이 많이 드는 암호화 및 암호 해독 오버헤드로부터 웹 서버의 부담을 줄일 수 있습니다. 그러나 서버에 암호화되지 않은 통신을 허용할 수 없는 경우도 있습니다. 이는 보안 요구 사항, 규정 준수 요구 사항 때문이거나 응용 프로그램이 보안 연결만 수락하는 것이기 때문일 수 있습니다. 이러한 응용 프로그램을 위해 Application Gateway에서 종단 간 SSL 암호화를 지원합니다.
+
+## <a name="web-application-firewall"></a>웹 응용 프로그램 방화벽
+
+WAF(웹 응용 프로그램 방화벽)는 일반적인 악용 및 취약점으로부터 웹 응용 프로그램에 대해 중앙 집중화된 보호를 제공하는 Application Gateway의 기능입니다. WAF는 [OWASP(Open Web Application Security Project) 핵심 규칙 집합](https://www.owasp.org/index.php/Category:OWASP_ModSecurity_Core_Rule_Set_Project) 3.0 또는 2.2.9의 규칙에 기반합니다. 
+
+웹 응용 프로그램의 널리 알려진 취약점을 악용하는 악의적인 공격이 점점 많아지고 있습니다. 이러한 공격으로는 SQL 삽입 공격, 사이트 간 스크립팅 공격 등이 있습니다. 응용 프로그램 코드로 이러한 공격을 방어하기란 매우 어려울 수 있으며 응용 프로그램 토폴로지의 다양한 계층에서 엄격한 유지 관리, 패치 적용 및 모니터링이 필요할 수 있습니다. 중앙 집중식 웹 응용 프로그램 방화벽을 통해 보안 관리가 훨씬 간단해지고 응용 프로그램 관리자에게 위협 또는 침입으로부터 효과적인 보호를 제공합니다. 또한 WAF 솔루션은 각각의 웹 응용 프로그램을 보호하는 대신 중앙의 위치에서 알려진 취약점에 패치를 적용하여 보다 신속하게 보안 위협에 대응할 수 있습니다. 기존 Application Gateway는 웹 응용 프로그램 방화벽을 사용한 Application Gateway로 쉽게 변환될 수 있습니다.
+
+## <a name="websocket-and-http2-traffic"></a>Websocket 및 HTTP/2 트래픽
+
+Application Gateway는 WebSocket 및 HTTP/2 프로토콜에 대한 네이티브 지원을 제공합니다. WebSocket 지원을 선택적으로 사용하거나 사용하지 않도록 설정하는 사용자 구성 가능 설정은 없습니다. HTTP/2 지원은 Azure PowerShell을 사용하여 활성화할 수 있습니다.
+ 
+WebSocket 및 HTTP/2 프로토콜을 사용하면 장기 실행 TCP 연결을 통해 서버와 클라이언트 간의 전이중 통신을 수행할 수 있습니다. 이를 사용하면 웹 서버와 클라이언트 간의 대화형 통신이 가능하며, HTTP 기반 구현에서 필요에 따라 폴링하지 않고도 양방향 통신을 수행할 수 있습니다. 프로토콜은 HTTP와 달리 오버헤드가 낮고 여러 요청/응답에 동일한 TCP 연결을 다시 사용하므로 리소스를 보다 효율적으로 사용할 수 있습니다. 이러한 프로토콜은 기존의 HTTP 포트 80 및 443을 통해 작동하도록 디자인되었습니다.
 
 
-* **[웹 응용 프로그램 방화벽](application-gateway-webapplicationfirewall-overview.md)** - Azure Application Gateway의 WAF(웹 응용 프로그램 방화벽)는 SQL 삽입, 사이트 간 스크립팅 공격, 세션 하이재킹 등의 일반적인 웹 기반 공격으로부터 웹 응용 프로그램을 보호합니다.
-* **HTTP 부하 분산** - Application Gateway는 라운드 로빈 부하 분산을 제공합니다. 부하 분산은 계층 7에서 수행되고 HTTP(S) 트래픽에 대해서만 사용됩니다.
-* **쿠키 기반 세션 선호도** - 쿠키 기반 세션 선호도 기능은 동일한 백 엔드에서 사용자 세션을 유지하려는 경우에 유용합니다. Application Gateway는 게이트웨이 관리형 쿠키를 사용하여 사용자 세션에서 동일한 백 엔드에 후속 트래픽을 처리하도록 지시할 수 있습니다. 이 기능은 세션 상태가 사용자 세션의 백 엔드 서버에 로컬로 저장된 경우에 특히 중요합니다.
-* **[SSL(Secure Sockets Layer) 오프로드](application-gateway-ssl-arm.md)** - 이 기능은 웹 서버에서 HTTPS 트래픽을 해독하는 것과 같은 비용이 많이 드는 태스크를 담당합니다. 웹 서버는 Application Gateway에서 SSL 연결을 종료하고 암호화되지 않은 서버에 대한 요청을 전달하여 암호 해독의 부담을 줄입니다.  Application Gateway는 응답을 다시 암호화한 후 클라이언트에 다시 보냅니다. 이 기능은 백 엔드가 Azure에서 Application Gateway와 동일한 보안 가상 네트워크에 있는 경우에 유용합니다.
-* **[종단 간 SSL](application-gateway-backend-ssl.md)** - Application Gateway는 트래픽의 종단 간 암호화를 지원합니다. Application Gateway는 이를 위해 Application Gateway에서 SSL 연결을 종료합니다. 그러면 게이트웨이에서 트래픽에 라우팅 규칙을 적용하고, 패킷을 다시 암호화하고, 정의된 라우팅 규칙에 따라 적절한 백 엔드에 패킷을 전달합니다. 웹 서버의 모든 응답은 동일한 프로세스를 거쳐 최종 사용자에게 돌아갑니다.
-* **[URL 기반 콘텐츠 라우팅](application-gateway-url-route-overview.md)** - 이 기능은 다른 트래픽에 다른 백 엔드 서버를 사용하는 기능을 제공합니다. 웹 서버의 폴더 또는 CDN에 대한 트래픽을 다른 백 엔드로 라우팅할 수 있습니다. 이 기능은 특정 콘텐츠에 서비스를 제공하지 않는 백 엔드에 대한 불필요한 부하를 줄입니다.
-* **[다중 사이트 라우팅](application-gateway-multi-site-overview.md)** - Application Gateway를 사용하면 단일 Application Gateway에서 최대 20개의 웹 사이트를 통합할 수 있습니다.
-* **[Websocket 지원](application-gateway-websocket.md)** - Application Gateway의 또 다른 장점은 Websocket에 대한 네이티브 지원이라는 점입니다.
-* **[상태 모니터링](application-gateway-probe-overview.md)** - Application Gateway는 기본적인 백 엔드 리소스 상태 모니터링 및 보다 구체적인 시나리오를 모니터링하기 위한 사용자 지정 프로브를 제공합니다.
-* **[요청 리디렉션](application-gateway-redirect-overview.md)** - HTTP 요청을 HTTPS 수신기로 리디렉션하는 기능을 제공합니다.
-* **[다중 테넌트 백 엔드 지원](application-gateway-web-app-overview.md)**  - 응용 프로그램 게이트웨이는 Azure Web Apps 및 API Gateway 같은 다중 테넌트 백 엔드 서비스를 백 엔드 풀 멤버로 구성하는 기능을 지원합니다. 
-* **[고급 진단](application-gateway-diagnostics.md)** - Application Gateway는 전체 진단 및 액세스 로그를 제공합니다. 방화벽 로그는 WAF를 사용할 수 있는 Application Gateway 리소스에 사용할 수 있습니다.
-
-## <a name="benefits"></a>이점
-
-Application Gateway는 다음과 같은 경우에 유용합니다.
-
-* 동일한 사용자/클라이언트 세션의 요청이 동일한 백 엔드 가상 컴퓨터에 도달해야 하는 응용 프로그램. 이러한 응용 프로그램의 예로는 쇼핑 카트 응용 프로그램 및 웹 메일 서버가 있습니다.
-* 웹 서버 팜에 대한 SSL 종료 오버 헤드를 제거합니다.
-* Content Delivery Network와 같은 응용 프로그램은 다른 서버로 라우팅 또는 부하 분산을 위해 여러 HTTP 요청을 동일한 장기 실행 TCP 연결에서 요구합니다.
-* websocket 트래픽을 지원하는 응용 프로그램
-* SQL 삽입, 사이트 간 스크립팅 공격, 세션 하이재킹과 같은 일반적인 웹 기반 공격으로부터 웹 응용 프로그램을 보호합니다.
-* 논리적인 트래픽 분배는 URL 경로 또는 도메인 헤더와 같은 다른 라우팅을 기반으로 합니다.
-
-Application Gateway는 전적으로 Azure에 의해 관리되고, 확장성 및 고가용성을 제공합니다. 관리 효율성을 향상시키기 위한 풍부한 진단 및 로깅 기능을 제공합니다. 응용 프로그램 게이트웨이를 만들 때 끝점(공용 VIP 또는 내부 ILB IP)이 연결되어 수신 네트워크 트래픽에 사용됩니다. VIP 또는 ILB IP는 전송 수준(TCP/UDP)에서 작동하는 Azure Load Balancer를 통해 제공되며 Application Gateway 작업자 인스턴스에 들어오는 모든 네트워크 트래픽의 부하를 분산합니다. 그런 다음 Application Gateway는 가상 컴퓨터, 클라우드 서비스, 내부 또는 외부 IP 주소인지 확인하여 해당 구성에 따라 HTTP/HTTPS 트래픽을 라우팅합니다.
-
-Azure 관리 서비스와 비슷한 부하 분산 Application Gateway는 Azure 소프트웨어 부하 분산 뒤에서 계층 7 부하 분산 장치를 프로비전하는 것을 허용합니다. Traffic Manager는 다음 이미지와 같이 시나리오를 완료하는 데 사용될 수 있습니다. 여기서 Traffic Manager는 다른 지역에 있는 여러 응용 프로그램 게이트웨이 리소스에 트래픽의 리디렉션 및 가용성을 제공하는 반면 응용 프로그램 게이트웨이는 지역 간 계층 7 부하 분산을 제공합니다. 이 시나리오의 예제는 [Azure 클라우드에서 부하 분산 서비스 사용](../traffic-manager/traffic-manager-load-balancing-azure.md)에서 확인할 수 있습니다.
-
-![Traffic Manager 및 Application Gateway 시나리오](./media/application-gateway-introduction/tm-lb-ag-scenario.png)
-
-[!INCLUDE [load-balancer-compare-tm-ag-lb-include.md](../../includes/load-balancer-compare-tm-ag-lb-include.md)]
-
-## <a name="gateway-sizes-and-instances"></a>게이트웨이 크기 및 인스턴스
-
-Application Gateway는 현재 **소형**, **중형** 및 **대형**의 3가지 크기를 제공합니다. 소규모 인스턴스 크기는 개발 및 테스트 시나리오를 위해 사용 됩니다.
-
-구독당 최대 50개의 응용 프로그램 게이트웨이를 만들 수 있으며 각 응용 프로그램 게이트웨이에는 최대 10개의 인스턴스가 있을 수 있습니다. 각 Application Gateway는 http 수신기 20개로 구성할 수 있습니다. Application Gateway의 전체 목록은 [Application Gateway 서비스 제한](../azure-subscription-service-limits.md?toc=%2fazure%2fapplication-gateway%2ftoc.json#application-gateway-limits)을 참조하세요.
-
-다음 표에서는 활성화된 SSL 오프로드로 각 응용 프로그램 게이트웨이 인스턴스의 평균 성능 처리량을 보여 줍니다.
-
-| 백 엔드 페이지 응답 | 작음 | 중간 | 큼 |
-| --- | --- | --- | --- |
-| 6K |7.5Mbps |13Mbps |50Mbps |
-| 100K |35Mbps |100Mbps |200Mbps |
-
-> [!NOTE]
-> 이러한 값은 응용 프로그램 게이트웨이 처리량에 대한 대략적인 값입니다. 실제 처리량은 평균 페이지 크기, 백 엔드 인스턴스의 위치 및 페이지 처리 시간 등 다양한 환경 세부 사항에 따라 달라집니다. 정확한 성능 수치를 얻으려면 자체 테스트를 실행해야 합니다. 이러한 값은 용량 계획 지침에 대해서만 제공됩니다.
-
-## <a name="health-monitoring"></a>상태 모니터링
-
-Azure Application Gateway는 기본 및 사용자 지정 상태 프로브를 통해 백 엔드 인스턴스의 상태를 자동으로 모니터링합니다. 상태 프로브를 사용하여 정상 호스트만 트래픽에 응답하도록 보장합니다. 자세한 내용은 [Application Gateway 상태 모니터링 개요](application-gateway-probe-overview.md)를 참조하세요.
-
-## <a name="configuring-and-managing"></a>구성 및 관리
-
-Azure Application Gateway는 구성된 경우 끝점으로 공용 IP, 개인 IP 또는 둘 다를 가질 수 있습니다. Application Gateway는 고유한 서브넷의 가상 네트워크 내에서 구성됩니다. Application Gateway에 대해 만들거나 사용된 서브넷은 다른 유형의 리소스를 포함할 수 없습니다. 그리고 서브넷에 허용되는 유일한 리소스는 다른 Application Gateway입니다. 백 엔드 리소스를 보호하려면 응용 프로그램 게이트웨이와 같은 가상 네트워크의 다른 서브넷에 백 엔드 서버를 포함하면 됩니다. 이 서브넷은 백 엔드 응용 프로그램에 필요하지 않습니다. 응용 프로그램 게이트웨이가 ip 주소에 연결할 수 있는 한, 응용 프로그램 게이트웨이는 백 엔드 서버에 ADC 기능을 제공할 수 있습니다. 
-
-REST API, PowerShell cmdlets, Azure CLI 또는 [Azure Portal](https://portal.azure.com/)을 사용하여 Application Gateway를 만들고 관리할 수 있습니다. Application Gateway에 대한 추가 질문은 [Application Gateway FAQ](application-gateway-faq.md)를 방문하여 일반적인 질문과 대답 목록을 보세요.
-
-## <a name="pricing"></a>가격
-
-가격 책정은 시간 당 게이트웨이 인스턴스 요금 및 데이터 처리 충전을 기반으로 합니다. WAF SKU에 대한 시간당 게이트웨이 요금은 표준 SKU 요금과 다릅니다. 이 요금 정보는 [Application Gateway 가격 책정 정보](https://azure.microsoft.com/pricing/details/application-gateway/)에서 확인할 수 있습니다. 데이터 처리 요금은 동일하게 유지됩니다.
-
-## <a name="faq"></a>FAQ
-
-Application Gateway에 대한 자주 묻는 질문은 [Application Gateway FAQ](application-gateway-faq.md)를 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
 
-Application Gateway에 대해 학습한 후에 [응용 프로그램 게이트웨이를 만들](application-gateway-create-gateway-portal.md)거나 [응용 프로그램 게이트웨이 SSL 오프로드를 만들](application-gateway-ssl-arm.md)어서 HTTPS 연결의 부하를 분산할 수 있습니다.
+요구 사항 및 환경에 따라 Azure Portal, Azure PowerShell 또는 Azure CLI 중 하나를 사용하여 테스트 Application Gateway를 만들 수 있습니다.
 
-URL 기반 콘텐츠 라우팅을 사용하여 응용 프로그램 게이트웨이를 만드는 방법에 대한 자세한 내용은 [URL 기반 라우팅을 사용하여 응용 프로그램 게이트웨이 만들기](application-gateway-create-url-route-arm-ps.md)를 참조하세요.
-
-Azure의 다른 주요 네트워킹 기능 중 일부에 대해 알아보려면 [Azure 네트워킹]((../networking/networkingoverview.md)을 참조하세요.
-
+- [빠른 시작: Azure Application Gateway를 통해 웹 트래픽 보내기 - Azure Portal](quick-create-portal.md)
+- [빠른 시작: Azure Application Gateway를 통해 웹 트래픽 보내기 - Azure PowerShell](quick-create-powershell.md)
+- [빠른 시작: Azure Application Gateway를 통해 웹 트래픽 보내기 - Azure CLI](quick-create-cli.md)

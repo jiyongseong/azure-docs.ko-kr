@@ -12,16 +12,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 05/04/2017
+ms.date: 08/08/2017
 ms.author: dobett
+ms.openlocfilehash: 6b100e65aba604fd8becb02c3a205b3348872bc4
+ms.sourcegitcommit: 933af6219266cc685d0c9009f533ca1be03aa5e9
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 8b16f163b20a4dd31857838ddafcc7ba36ac9817
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/18/2017
 ---
-
 # <a name="configure-iot-hub-file-uploads-using-azure-cli"></a>Azure CLI를 사용하여 IoT Hub 파일 업로드 구성
 
 [!INCLUDE [iot-hub-file-upload-selector](../../includes/iot-hub-file-upload-selector.md)]
@@ -33,7 +31,7 @@ ms.lasthandoff: 07/21/2017
 * 활성 Azure 계정. 계정이 없는 경우 몇 분 내에 [계정][lnk-free-trial]을 만들 수 있습니다.
 * [Azure CLI 2.0][lnk-CLI-install].
 * Azure IoT Hub - IoT Hub가 없는 경우 `az iot hub create` [명령][lnk-cli-create-iothub]을 사용하여 IoT Hub를 만들거나, 포털을 사용하여 [IoT Hub를 만들][lnk-portal-hub] 수 있습니다.
-* Azure 저장소 계정. Azure Storage 계정이 없는 경우 [Azure CLI 2.0 - 저장소 계정 관리][lnk-manage-storage]를 사용하여 저장소 계정을 만들거나, 포털을 사용하여 [저장소 계정을 만들][lnk-portal-storage] 수 있습니다.
+* Azure Storage 계정. Azure Storage 계정이 없는 경우 [Azure CLI 2.0 - 저장소 계정 관리][lnk-manage-storage]를 사용하여 저장소 계정을 만들거나, 포털을 사용하여 [저장소 계정을 만들][lnk-portal-storage] 수 있습니다.
 
 ## <a name="sign-in-and-set-your-azure-account"></a>Azure 계정 로그인 및 설정
 
@@ -63,7 +61,7 @@ Azure 계정에 로그인하고 구독을 선택합니다.
 
 다음 단계에서는 **클래식** 배포 모델이 아니라 **Resource Manager** 배포 모델을 사용하여 저장소 계정을 만들었다고 가정합니다.
 
-장치에서 파일 업로드를 구성하려면 IoT Hub와 동일한 구독에 Azure 저장소 계정의 연결 문자열이 필요합니다. 또한 저장소 계정에 Blob 컨테이너의 이름도 필요합니다. 다음 명령을 사용하여 저장소 계정 키를 검색합니다.
+장치에서 파일 업로드를 구성하려면 Azure 저장소 계정에 대한 연결 문자열이 필요합니다. 저장소 계정은 IoT Hub와 동일한 구독 내에 있어야 합니다. 또한 저장소 계정에 Blob 컨테이너의 이름도 필요합니다. 다음 명령을 사용하여 저장소 계정 키를 검색합니다.
 
 ```azurecli
 az storage account show-connection-string --name {your storage account name} --resource-group {your storage account resource group}
@@ -91,7 +89,7 @@ az storage account show-connection-string --name {your storage account name} --r
 
 구성에는 다음 값이 필요합니다.
 
-**저장소 컨테이너**: 현재 Azure 구독에 있는 Azure 저장소 계정의 Blob 컨테이너로 IoT Hub와 연결됩니다. 이전 섹션에서 필요한 저장소 계정 정보를 검색했습니다. IoT Hub는 파일을 업로드하는 경우에 사용할 장치에 대한 이 Blob 컨테이너에 쓰기 권한이 있는 SAS URI를 자동으로 생성합니다.
+**저장소 컨테이너**: 현재 Azure 구독에 있는 Azure Storage 계정의 Blob 컨테이너로 IoT Hub와 연결됩니다. 이전 섹션에서 필요한 저장소 계정 정보를 검색했습니다. IoT Hub는 파일을 업로드하는 경우에 사용할 장치에 대한 이 Blob 컨테이너에 쓰기 권한이 있는 SAS URI를 자동으로 생성합니다.
 
 **업로드된 파일에 대한 알림 받기**: 파일 업로드 알림을 사용하거나 사용하지 않도록 설정합니다.
 
@@ -135,7 +133,7 @@ az iot hub show --name {your iot hub name}
 
 ## <a name="next-steps"></a>다음 단계
 
-IoT Hub의 파일 업로드 기능에 대한 자세한 내용은 IoT Hub 개발자 가이드의 [장치에서 파일 업로드][lnk-upload]를 참조하세요.
+IoT Hub의 파일 업로드 기능에 대한 자세한 내용은 [장치에서 파일 업로드][lnk-upload]를 참조하세요.
 
 Azure IoT Hub를 관리하는 방법에 대한 자세한 내용을 알아보려면 다음 링크를 따라가세요.
 
@@ -146,7 +144,7 @@ Azure IoT Hub를 관리하는 방법에 대한 자세한 내용을 알아보려�
 IoT Hub의 기능을 추가로 탐색하려면 다음을 참조하세요.
 
 * [IoT Hub 개발자 가이드][lnk-devguide]
-* [IoT Edge에서 장치 시뮬레이션][lnk-iotedge]
+* [Azure IoT Edge를 사용하여 에지 장치에 AI 배포][lnk-iotedge]
 * [처음부터 IoT 솔루션 보안 유지][lnk-securing]
 
 [13]: ./media/iot-hub-configure-file-upload/file-upload-settings.png
@@ -160,7 +158,7 @@ IoT Hub의 기능을 추가로 탐색하려면 다음을 참조하세요.
 [lnk-monitor]: iot-hub-operations-monitoring.md
 
 [lnk-devguide]: iot-hub-devguide.md
-[lnk-iotedge]: iot-hub-linux-iot-edge-simulated-device.md
+[lnk-iotedge]: ../iot-edge/tutorial-simulate-device-linux.md
 [lnk-securing]: iot-hub-security-ground-up.md
 
 
@@ -173,6 +171,6 @@ IoT Hub의 기능을 추가로 탐색하려면 다음을 참조하세요.
 [lnk-az-resource-command]: https://docs.microsoft.com/cli/azure/resource
 [lnk-az-iot-command]: https://docs.microsoft.com/cli/azure/iot
 [lnk-iot-pricing]: https://azure.microsoft.com/pricing/details/iot-hub/
-[lnk-manage-storage]: ../storage/storage-azure-cli.md#manage-storage-accounts
-[lnk-portal-storage]: ../storage/storage-create-storage-account.md
-[lnk-cli-create-iothub]: https://docs.microsoft.com/cli/azure/iot/hub#create
+[lnk-manage-storage]:../storage/common/storage-azure-cli.md#manage-storage-accounts
+[lnk-portal-storage]:../storage/common/storage-create-storage-account.md
+[lnk-cli-create-iothub]: https://docs.microsoft.com/cli/azure/iot/hub#az_iot_hub_create

@@ -1,26 +1,25 @@
 ---
-title: "ESP8266에서 클라우드로 - Sparkfun ESP8266 Thing Dev를 Azure IoT Hub에 연결 | Microsoft Docs"
-description: "이 자습서에서는 Azure 클라우드 플랫폼으로 데이터를 보내기 위해 Sparkfun ESP8266 Thing Dev를 설정하고 해당 Azure IoT Hub에 연결하는 방법을 알아봅니다."
+title: ESP8266에서 클라우드로 - Sparkfun ESP8266 Thing Dev를 Azure IoT Hub에 연결 | Microsoft Docs
+description: 이 자습서에서는 Azure 클라우드 플랫폼으로 데이터를 보내기 위해 Sparkfun ESP8266 Thing Dev를 설정하고 해당 Azure IoT Hub에 연결하는 방법을 알아봅니다.
 services: iot-hub
-documentationcenter: 
-author: shizn
+documentationcenter: ''
+author: rangv
 manager: timlt
-tags: 
-keywords: 
+tags: ''
+keywords: ''
 ms.assetid: 587fe292-9602-45b4-95ee-f39bba10e716
 ms.service: iot-hub
 ms.devlang: arduino
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/15/2017
-ms.author: xshi
+ms.date: 4/11/2018
+ms.author: rangv
+ms.openlocfilehash: e6837d0312217d8e27e3639b8220f5016a2505a6
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 9b3d968379d38ac4e4080de7eae6ffea89f73a49
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/20/2018
 ---
 # <a name="connect-sparkfun-esp8266-thing-dev-to-azure-iot-hub-in-the-cloud"></a>Sparkfun ESP8266 Thing Dev를 클라우드의 Azure IoT Hub에 연결
 
@@ -134,7 +133,7 @@ Ubuntu를 사용하는 경우 일반 사용자에게 Sparkfun ESP8266 Thing Dev�
 
 1. 명령 프롬프트 또는 터미널 창을 엽니다.
 1. 응용 프로그램 예제를 저장하려는 폴더로 이동합니다.
-1. 다음 명령을 실행합니다.
+1. 다음 명령 실행:
 
    ```bash
    git clone https://github.com/Azure-Samples/iot-hub-SparkFun-ThingDev-client-app.git
@@ -192,6 +191,14 @@ Arduino IDE에 Sparkfun ESP8266 Thing Dev 패키지를 설치합니다.
 1. Arduino IDE에서 **도구** > **포트**를 차례로 클릭한 다음 Sparkfun ESP8266 Thing Dev에 대한 직렬 포트를 클릭합니다.
 1. **스케치** > **업로드**를 차례로 클릭하여 샘플 응용 프로그램을 빌드하고 Sparkfun ESP8266 Thing Dev에 배포합니다.
 
+> [!Note]
+> macOS를 사용하는 경우 업로드하는 동안 다음 메시지가 표시될 수 있습니다. `warning: espcomm_sync failed`,`error: espcomm_open failed`. 터미널 창을 열고 아래 작업을 완료하여 이 문제를 해결합니다.
+> ```bash
+> cd /System/Library/Extensions/IOUSBFamily.kext/Contents/PlugIns
+> sudo mv AppleUSBFTDI.kext AppleUSBFTDI.disabled
+> sudo touch /System/Library/Extensions
+> ```
+
 ### <a name="enter-your-credentials"></a>자격 증명 입력
 
 업로드를 성공적으로 완료했으면 단계에 따라 자격 증명을 입력합니다.
@@ -219,4 +226,3 @@ Arduino IDE에 Sparkfun ESP8266 Thing Dev 패키지를 설치합니다.
 IoT Hub에 Sparkfun ESP8266 Thing Dev를 성공적으로 연결하고 캡처한 센서 데이터를 IoT Hub에 보냈습니다. 
 
 [!INCLUDE [iot-hub-get-started-next-steps](../../includes/iot-hub-get-started-next-steps.md)]
-

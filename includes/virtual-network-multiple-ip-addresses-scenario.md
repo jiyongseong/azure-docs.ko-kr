@@ -10,4 +10,4 @@
 NIC를 만들 때 IP 구성이 NIC에 연결되고 VM을 만들 때 NIC가 VM에 연결됩니다. 시나리오에 사용되는 IP 주소 유형은 예시입니다. 필요한 모든 IP 주소 및 할당 유형을 지정할 수 있습니다.
 
 > [!NOTE]
-> 이 문서의 단계를 통해 모든 IP 구성을 단일 NIC에 할당하면 여러 IP 구성도 다중 NIC VM의 모든 NIC에 할당할 수 있습니다. 여러 NIC로 VM을 만드는 방법에 대해 자세히 알아보려면 [여러 NIC를 사용하여 VM 만들기](../articles/virtual-network/virtual-network-deploy-multinic-arm-ps.md) 문서를 참조하세요.
+> 이 문서의 단계를 통해 모든 IP 구성을 단일 NIC에 할당하면 여러 IP 구성도 다중 NIC VM의 모든 NIC에 할당할 수 있습니다. 여러 NIC로 VM을 만드는 방법에 대해 자세히 알아보려면 [여러 NIC를 사용하여 VM 만들기](../articles/virtual-machines/windows/multiple-nics.md) 문서를 참조하세요.

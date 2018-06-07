@@ -3,7 +3,7 @@ title: "Azure Application Insights 데이터 모델 | Microsoft Docs"
 description: "JSON의 연속 내보내기에서 내보내고 필터로 사용하는 속성을 설명합니다."
 services: application-insights
 documentationcenter: 
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: cabad41c-0518-4669-887f-3087aef865ea
 ms.service: application-insights
@@ -12,13 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 03/21/2016
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 785d3a8920d48e11e80048665e9866f16c514cf7
-ms.openlocfilehash: 3084bb344976bc542e78a55a1c27c4dedc111af0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/12/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: 86aef6ba93224bbbb41bc7e651aaeec394fd8718
+ms.sourcegitcommit: e462e5cca2424ce36423f9eff3a0cf250ac146ad
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/01/2017
 ---
 # <a name="application-insights-export-data-model"></a>Application Insights 데이터 모델 내보내기
 이 테이블은 [Application Insights](app-insights-overview.md) SDK에서 포털로 전송된 원격 분석의 속성을 나열합니다.
@@ -351,4 +350,3 @@ TrackMetric()에서 생성합니다.
 * [Application Insights](app-insights-overview.md)
 * [연속 내보내기](app-insights-export-telemetry.md)
 * [코드 샘플](app-insights-export-telemetry.md#code-samples)
-

@@ -1,29 +1,28 @@
 ---
-title: "Azure CLI 1.0을 사용하여 Linux VM 만들기 | Microsoft Docs"
-description: "Azure CLI 1.0을 사용하여 Azure에서 Linux VM 만들기"
+title: Azure CLI 1.0을 사용하여 Linux VM 만들기 | Microsoft Docs
+description: Azure CLI 1.0을 사용하여 Azure에서 Linux VM 만들기
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: vlivech
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 ms.assetid: facb1115-2b4e-4ef3-9905-330e42beb686
 ms.service: virtual-machines-linux
 ms.devlang: NA
-ms.topic: 
+ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 12/15/2016
 ms.author: v-livech
-translationtype: Human Translation
-ms.sourcegitcommit: 6ea03adaabc1cd9e62aa91d4237481d8330704a1
-ms.openlocfilehash: edfdb04ad8afc28f5a89d41a45a1704c7a4c6098
-ms.lasthandoff: 04/06/2017
-
-
+ms.openlocfilehash: ea9eab1a02a29005917848ed54ab8ba160b89b63
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="create-a-linux-vm-using-the-azure-cli-10"></a>Azure CLI 1.0을 사용하여 Linux VM 만들기
 
-이 문서에서는 Azure 명령줄 인터페이스(CLI)의 `azure vm quick-create` 명령을 사용하여 Azure에서 Linux 가상 컴퓨터(VM)를 신속하게 배포하는 방법을 보여 줍니다. `quick-create` 명령은 개념을 신속하게 프로토타입하거나 테스트하는 데 사용할 수 있는 기본 인프라 내에 VM을 배포합니다.
+이 문서에서는 Azure 명령줄 인터페이스(CLI)의 `azure vm quick-create` 명령을 사용하여 Azure에서 Linux 가상 머신(VM)를 신속하게 배포하는 방법을 보여 줍니다. `quick-create` 명령은 개념을 신속하게 프로토타입하거나 테스트하는 데 사용할 수 있는 기본 인프라 내에 VM을 배포합니다.
 
 > [!NOTE]
 Azure CLI 2.0을 사용하여 VM을 만들려면 [Azure CLI를 사용하여 VM 만들기](../windows/quick-create-cli.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)를 참조하세요.
@@ -48,7 +47,7 @@ azure vm quick-create -M ~/.ssh/id_rsa.pub -Q CoreOS
 
 ## <a name="vm-quick-create-aliases"></a>VM quick-create 별칭
 
-배포를 선택하는 빠른 방법은 가장 일반적인 OS 배포에 매핑된 Azure CLI 별칭을 사용하는 것입니다. 다음 테이블에 별칭이 나열되어 있습니다(Azure CLI 버전 0.10 현재). `quick-create`을 사용하는 모든 배포는 기본적으로 더 빠른 프로비전 및 고성능 디스크 액세스를 제공하는 SSD(반도체 드라이브) 저장소에서 지원되는 VM에 대해 이루어집니다. (이러한 별칭은 Azure에 사용할 수 있는 배포의 작은 부분을 나타냅니다. [웹에서](https://azure.microsoft.com/marketplace/virtual-machines/) [PowerShell을 통해 이미지를 검색](../windows/cli-ps-findimage.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)하여 Azure Marketplace에 있는 이미지를 더 많이 찾거나 [고유의 사용자 지정 이미지를 업로드합니다](create-upload-generic.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).)
+배포를 선택하는 빠른 방법은 가장 일반적인 OS 배포에 매핑된 Azure CLI 별칭을 사용하는 것입니다. 다음 테이블에 별칭이 나열되어 있습니다(Azure CLI 버전 0.10 현재). `quick-create`을 사용하는 모든 배포는 기본적으로 더 빠른 프로비전 및 고성능 디스크 액세스를 제공하는 SSD(반도체 드라이브) 저장소에서 지원되는 VM에 대해 이루어집니다. (이러한 별칭은 Azure에 사용할 수 있는 배포의 작은 부분을 나타냅니다. [웹에서](https://azure.microsoft.com/marketplace/virtual-machines/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) [PowerShell을 통해 이미지를 검색](../windows/cli-ps-findimage.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)하여 Azure Marketplace에 있는 이미지를 더 많이 찾거나 [고유의 사용자 지정 이미지를 업로드합니다](create-upload-generic.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).)
 
 | Alias | 게시자 | 제안 | SKU | 버전 |
 |:--- |:--- |:--- |:--- |:--- |
@@ -67,7 +66,7 @@ azure vm quick-create -M ~/.ssh/id_rsa.pub -Q CoreOS
 * VM 이름
 * 위치(좋은 기본값은 `westus` 또는 `westeurope`입니다.)
 * linux(원하는 OS가 무엇인지 Azure에 알림)
-* username
+* 사용자 이름
 
 다음 예제는 추가 메시지 표시가 필요하지 않도록 모든 값을 지정합니다. `~/.ssh/id_rsa.pub`을 ssh-rsa 형식의 공개 키 파일로 포함하고 있으면 해당 파일은 있는 그대로 작동합니다.
 
@@ -204,9 +203,7 @@ myAdminUser@myVM:~$
 ## <a name="next-steps"></a>다음 단계
 `azure vm quick-create` 명령은 Bash 셸에 로그인하고 작업할 수 있도록 VM을 신속하게 배포하는 방법입니다. 그러나 `vm quick-create` 를 사용하면 광범위한 제어가 불가능하며 더 복잡한 환경을 만들 수도 없습니다.  이러한 문서 중 하나를 수행하여 인프라에 대해 사용자 지정된 Linux VM을 배포할 수 있습니다.
 
-* [Azure Resource Manager 템플릿을 사용하여 특정 배포 만들기](../windows/cli-deploy-templates.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 * [Azure CLI 명령을 직접 사용하여 Linux VM에 대한 고유한 사용자 지정 환경 만들기](create-cli-complete.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 * [템플릿을 사용하여 Azure에서 SSH 보안 Linux VM 만들기](create-ssh-secured-vm-from-template.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 
 [다양한 명령으로 `docker-machine` Azure 드라이버를 사용하여 Linux VM을 Docker 호스트로 신속하게 만들 수 있습니다](docker-machine.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
-

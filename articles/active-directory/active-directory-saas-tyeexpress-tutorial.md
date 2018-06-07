@@ -1,10 +1,10 @@
 ---
-title: "자습서: T&E Express와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory 및 T&E Express 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: T&E Express와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory 및 T&E Express 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: B42374E5-2559-4309-8EF2-820BEE7EBB0C
 ms.service: active-directory
 ms.workload: identity
@@ -13,12 +13,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/03/2017
 ms.author: jeedes
-translationtype: Human Translation
-ms.sourcegitcommit: 0b53a5ab59779dc16825887b3c970927f1f30821
-ms.openlocfilehash: 869e5284c71904fcc817ceee0f39d94fab1bc6f3
-ms.lasthandoff: 04/07/2017
-
-
+ms.openlocfilehash: 8d3980b6169c8a9fc60c04e527814159082a46e4
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-te-express"></a>자습서: T&E Express와 Azure Active Directory 통합
 
@@ -30,7 +29,7 @@ T&E Express를 Azure AD와 통합하면 다음과 같은 이점이 제공됩니�
 - 사용자가 해당 Azure AD 계정으로 T&E Express에 자동으로 로그온(Single Sign-On)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure 관리 포털에서 계정을 관리할 수 있습니다.
 
-Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](active-directory-appssoaccess-whatis.md)을 참조하세요.
+Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](manage-apps/what-is-single-sign-on.md)을 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -58,7 +57,7 @@ T&E Express의 Azure AD 통합을 구성하려면 갤러리의 T&E Express를 �
 
 **갤러리에서 T&E Express를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure 관리 포털](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure 관리 포털](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Active Directory][1]
 
@@ -87,11 +86,11 @@ Single Sign-On이 작동하려면 Azure AD 사용자에 해당하는 T&E Express
 
 T&E Express에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구성 요소를 완료해야 합니다.
 
-1. **[Azure AD Single Sign-On 구성](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
-2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
+1. **[Configuring Azure AD Single Sign-On](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
+2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On 테스트하는 데 사용합니다.
 3. **[T&E Express 테스트 사용자 만들기](#creating-a-te-express-test-user)** - Britta Simon의 Azure AD 표현과 연결된 해당 사용자를 T&E Express에 만듭니다.
 4. **[Azure AD 테스트 사용자 할당](#assigning-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Testing Single Sign-On](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
+5. **[Single Sign-On 테스트](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
 
 ### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -101,42 +100,42 @@ T&E Express에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다
 
 1. Azure 관리 포털의 **T&E Express** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-On 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single sign on** 대화 상자에서 **모드**로 **SAML 기반 로그온**을 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-On 구성](./media/active-directory-saas-tyeexpress-tutorial/tutorial_tyeexpress_samlbase.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-tyeexpress-tutorial/tutorial_tyeexpress_samlbase.png)
 
 3. **T&E Express 도메인 및 URL** 섹션에서 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-tyeexpress-tutorial/tutorial_tyeexpress_url.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-tyeexpress-tutorial/tutorial_tyeexpress_url.png)
 
     a. **식별자** 텍스트 상자에 해당 값으로 `https://<domain>.tyeexpress.com`을 입력합니다.
 
-    b. **회신 URL** 텍스트 상자에 다음 패턴으로 URL을 입력합니다.`https://<domain>.tyeexpress.com/authorize/samlConsume.aspx`
+    나. **회신 URL** 텍스트 상자에 다음 패턴으로 URL을 입력합니다.`https://<domain>.tyeexpress.com/authorize/samlConsume.aspx`
 
     > [!NOTE] 
     > 이러한 값은 실제 값이 아닙니다. 실제 식별자 및 회신 URL로 해당 값을 업데이트해야 합니다. 식별자에는 고유한 문자열 값을 사용하는 것이 좋습니다. 이러한 값을 얻으려면 [T&E Express 지원 팀](http://www.tyeexpress.com/contacto.aspx)에 문의하세요.
 
 5. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 XML 파일을 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-tyeexpress-tutorial/tutorial_tyeexpress_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-tyeexpress-tutorial/tutorial_tyeexpress_certificate.png) 
 
 6. **저장** 단추를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-tyeexpress-tutorial/tutorial_general_400.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-tyeexpress-tutorial/tutorial_general_400.png)
 
 8. **T&E Express** 측에 Single Sign-On을 구성하려면 관리자 자격 증명을 사용하여 SAML Single Sign-On 없이 T&E express 응용 프로그램에 로그인합니다.
 
 9. **관리** 탭 아래에서 **SAML 도메인**을 클릭하여 SAML 설정 페이지를 엽니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-tyeexpress-tutorial/tye-SAML.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-tyeexpress-tutorial/tye-SAML.png)
 
-10. **Activar(활성화)** 옵션을 **아니요**에서 **SI(예)**로 선택합니다. **ID 공급자 메타데이터** 텍스트 상자에 Azure Portal에서 다운로드한 메타데이터 XML을 붙여 넣습니다.
+10. **Activar(활성화)** 옵션을 **아니요**에서 **SI(예)** 로 선택합니다. **ID 공급자 메타데이터** 텍스트 상자에 Azure Portal에서 다운로드한 메타데이터 XML을 붙여 넣습니다.
 
-    ![Single Sign-On 구성](./media/active-directory-saas-tyeexpress-tutorial/tyeAdmin.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-tyeexpress-tutorial/tyeAdmin.png)
 
-11. **Guardar(저장)** 단추를 클릭하여 설정을 저장합니다.    
+11. **Guardar(저장)** 단추를 클릭하여 설정을 저장합니다. 
 
 
 ### <a name="creating-an-azure-ad-test-user"></a>Azure AD 테스트 사용자 만들기
@@ -164,9 +163,9 @@ T&E Express에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -183,7 +182,7 @@ T&E Express의 경우 프로비전은 수동 작업입니다.
 
     ![직원 추가](./media/active-directory-saas-tyeexpress-tutorial/tye-adminusers.png)
 
-3. 홈 페이지에서 **+**를 클릭하여 사용자를 추가합니다.
+3. 홈 페이지에서 **+** 를 클릭하여 사용자를 추가합니다.
 
     ![직원 추가](./media/active-directory-saas-tyeexpress-tutorial/tye-usershome.png)
 
@@ -208,7 +207,7 @@ T&E Express의 경우 프로비전은 수동 작업입니다.
 
 2. 응용 프로그램 목록에서 **T&E Express**를 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-tyeexpress-tutorial/tutorial_tyeexpress_app.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-tyeexpress-tutorial/tutorial_tyeexpress_app.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -233,7 +232,7 @@ T&E Express의 경우 프로비전은 수동 작업입니다.
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -250,5 +249,4 @@ T&E Express의 경우 프로비전은 수동 작업입니다.
 [201]: ./media/active-directory-saas-tyeexpress-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-tyeexpress-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-tyeexpress-tutorial/tutorial_general_203.png
-
 

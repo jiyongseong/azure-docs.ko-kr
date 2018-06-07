@@ -14,11 +14,11 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 08/18/2016
 ms.author: deli
-translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
 ms.openlocfilehash: db6b1c196cb468f41c7a7ce34758de346b522abb
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="scheduler-limits-and-defaults"></a>스케줄러 제한 및 기본값
 ## <a name="scheduler-quotas-limits-defaults-and-throttles"></a>스케줄러 할당량, 제한, 기본값 및 한계
@@ -45,10 +45,4 @@ ms.openlocfilehash: db6b1c196cb468f41c7a7ce34758de346b522abb
  [Azure 스케줄러 고가용성 및 안정성](scheduler-high-availability-reliability.md)
 
  [Azure 스케줄러 아웃바운드 인증](scheduler-outbound-authentication.md)
-
-
-
-
-<!--HONumber=Nov16_HO3-->
-
 

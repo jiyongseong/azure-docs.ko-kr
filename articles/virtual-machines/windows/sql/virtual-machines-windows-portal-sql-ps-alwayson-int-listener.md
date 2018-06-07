@@ -1,10 +1,10 @@
 ---
-title: "Always On 가용성 그룹 수신기 구성 - Microsoft Azure | Microsoft 문서"
-description: "하나 이상의 IP 주소를 갖는 내부 부하 분산 장치를 사용하여 Azure Resource Manager 모델에서 가용성 그룹 수신기를 구성합니다."
+title: Always On 가용성 그룹 수신기 구성 - Microsoft Azure | Microsoft 문서
+description: 하나 이상의 IP 주소를 갖는 내부 부하 분산 장치를 사용하여 Azure Resource Manager 모델에서 가용성 그룹 수신기를 구성합니다.
 services: virtual-machines
 documentationcenter: na
 author: MikeRayMSFT
-manager: jhubbard
+manager: craigg
 editor: monicar
 ms.assetid: 14b39cde-311c-4ddf-98f3-8694e01a7d3b
 ms.service: virtual-machines-sql
@@ -14,13 +14,11 @@ ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 ms.date: 05/22/2017
 ms.author: mikeray
-ms.translationtype: Human Translation
-ms.sourcegitcommit: e72275ffc91559a30720a2b125fbd3d7703484f0
-ms.openlocfilehash: 800a37dba526a43e490c7bdff55e3b48e5234a20
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/05/2017
-
-
+ms.openlocfilehash: 11aecd9b2bc1bc1521a0e27fc3cd06fe7426a26d
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="configure-one-or-more-always-on-availability-group-listeners---resource-manager"></a>하나 이상의 Always On 가용성 그룹 수신기 구성 - Resource Manager
 이 문서에서는 다음을 수행하는 방법을 보여 줍니다.
@@ -28,15 +26,15 @@ ms.lasthandoff: 05/05/2017
 * PowerShell cmdlet을 사용하여 SQL Server 가용성 그룹에 대한 내부 부하 분산 장치를 만듭니다.
 * 둘 이상의 가용성 그룹에 대한 추가 IP 주소를 부하 분산 장치에 추가합니다. 
 
-가용성 그룹 수신기는 데이터베이스 액세스를 위해 클라이언트에서 연결하는 가상 네트워크 이름입니다. Azure 가상 컴퓨터에서 부하 분산 장치는 수신기에 대한 IP 주소를 보유합니다. 부하 분산 장치는 프로브 포트에서 수신 대기하는 SQL Server의 인스턴스로 트래픽을 라우팅합니다. 일반적으로 가용성 그룹은 내부 부하 분산 장치를 사용합니다. Azure 내부 부하 분산 장치는 하나 이상의 IP 주소를 호스트할 수 있습니다. 각 IP 주소는 특정 프로브 포트를 사용합니다. 이 문서에서는 PowerShell을 사용하여 부하 분산 장치를 만들거나 SQL Server 가용성 그룹에 대한 기존 부하 분산 장치에 IP 주소를 추가하는 방법을 보여 줍니다. 
+가용성 그룹 수신기는 데이터베이스 액세스를 위해 클라이언트에서 연결하는 가상 네트워크 이름입니다. Azure 가상 머신에서 부하 분산 장치는 수신기에 대한 IP 주소를 보유합니다. 부하 분산 장치는 프로브 포트에서 수신 대기하는 SQL Server의 인스턴스로 트래픽을 라우팅합니다. 일반적으로 가용성 그룹은 내부 부하 분산 장치를 사용합니다. Azure 내부 부하 분산 장치는 하나 이상의 IP 주소를 호스트할 수 있습니다. 각 IP 주소는 특정 프로브 포트를 사용합니다. 이 문서에서는 PowerShell을 사용하여 부하 분산 장치를 만들거나 SQL Server 가용성 그룹에 대한 기존 부하 분산 장치에 IP 주소를 추가하는 방법을 보여 줍니다. 
 
-내부 부하 분산 장치에 여러 IP 주소를 할당하는 기능은 Azure에 새로 추가되었으며 Resource Manager 모델에서만 사용할 수 있습니다. 이 작업을 완료하려면 Resource Manager 모델의 Azure 가상 컴퓨터에 SQL Server 가용성 그룹이 배포되어야 합니다. 두 SQL Server 가상 컴퓨터는 동일한 가용성 집합에 속해야 합니다. [Microsoft 템플릿](virtual-machines-windows-portal-sql-alwayson-availability-groups.md)을 사용하여 Azure Resource Manager에서 가용성 그룹을 자동으로 만들 수 있습니다. 이 템플릿은 내부 부하 분산 장치를 포함하는 가용성 그룹을 자동으로 만듭니다. 원하는 경우 [수동으로 Always On 가용성 그룹을 구성](virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md)할 수 있습니다.
+내부 부하 분산 장치에 여러 IP 주소를 할당하는 기능은 Azure에 새로 추가되었으며 Resource Manager 모델에서만 사용할 수 있습니다. 이 작업을 완료하려면 Resource Manager 모델의 Azure 가상 머신에 SQL Server 가용성 그룹이 배포되어야 합니다. 두 SQL Server 가상 머신은 동일한 가용성 집합에 속해야 합니다. [Microsoft 템플릿](virtual-machines-windows-portal-sql-alwayson-availability-groups.md)을 사용하여 Azure Resource Manager에서 가용성 그룹을 자동으로 만들 수 있습니다. 이 템플릿은 내부 부하 분산 장치를 포함하는 가용성 그룹을 자동으로 만듭니다. 원하는 경우 [수동으로 Always On 가용성 그룹을 구성](virtual-machines-windows-portal-sql-availability-group-tutorial.md)할 수 있습니다.
 
 이 항목을 수행하려면 가용성 그룹이 이미 구성되어 있어야 합니다.  
 
 관련 항목은 다음과 같습니다.
 
-* [Azure VM의 Always On 가용성 그룹 구성(GUI)](virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md)   
+* [Azure VM의 Always On 가용성 그룹 구성(GUI)](virtual-machines-windows-portal-sql-availability-group-tutorial.md)   
 * [Azure 리소스 관리자 및 PowerShell을 사용하여 VNet-VNet 연결 구성](../../../vpn-gateway/vpn-gateway-vnet-vnet-rm-ps.md)
 
 [!INCLUDE [Start your PowerShell session](../../../../includes/sql-vm-powershell.md)]
@@ -50,10 +48,10 @@ SQL Server 액세스를 허용하도록 Windows 방화벽을 구성합니다. �
 > 
 > 
 
-다음 PowerShell 스크립트는 내부 부하 분산 장치를 만들고, 부하 분산 규칙을 구성하고, 부하 분산 장치에 대한 IP 주소를 설정합니다. 이 스크립트를 실행하려면 Windows PowerShell ISE를 열고 스크립트 창으로 스크립트를 붙여 넣습니다. `Login-AzureRMAccount`를 사용하여 PowerShell에 로그인합니다. 여러 Azure 구독이 있는 경우 `Select-AzureRmSubscription ` 사용하여 구독을 설정합니다. 
+다음 PowerShell 스크립트는 내부 부하 분산 장치를 만들고, 부하 분산 규칙을 구성하고, 부하 분산 장치에 대한 IP 주소를 설정합니다. 이 스크립트를 실행하려면 Windows PowerShell ISE를 열고 스크립트 창으로 스크립트를 붙여 넣습니다. `Connect-AzureRmAccount`를 사용하여 PowerShell에 로그인합니다. 여러 Azure 구독이 있는 경우 `Select-AzureRmSubscription ` 사용하여 구독을 설정합니다. 
 
 ```powershell
-# Login-AzureRmAccount
+# Connect-AzureRmAccount
 # Select-AzureRmSubscription -SubscriptionId <xxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx>
 
 $ResourceGroupName = "<Resource Group Name>" # Resource group name
@@ -114,7 +112,7 @@ foreach($VMName in $VMNames)
 다음 스크립트는 기존 부하 분산 장치에 새 IP 주소를 추가합니다. ILB는 부하 분산 프런트 엔드 포트에 대해 수신기 포트를 사용합니다. 이 포트는 SQL Server에서 수신 대기 중인 포트일 수 있습니다. SQL Server의 기본 인스턴스의 경우 포트는 1433입니다. 가용성 그룹에 대한 부하 분산 규칙에는 부동 IP(Direct Server Return)가 필요하므로 백 엔드 포트는 프런트 엔드 포트와 동일합니다. 사용자 환경에 맞게 변수를 업데이트합니다. 
 
 ```powershell
-# Login-AzureRmAccount
+# Connect-AzureRmAccount
 # Select-AzureRmSubscription -SubscriptionId <xxxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx>
 
 $ResourceGroupName = "<ResourceGroup>"          # Resource group name
@@ -160,7 +158,7 @@ $ILB | Add-AzureRmLoadBalancerRuleConfig -Name $LBConfigRuleName -FrontendIpConf
 
 1. SQL Server Management Studio를 시작하고 주 복제본에 연결합니다.
 
-1. **Always On 고가용성** | **가용성 그룹** | **가용성 그룹 수신기**로 이동합니다. 
+1. **AlwaysOn 고가용성** | **가용성 그룹** | **가용성 그룹 수신기**로 이동합니다. 
 
 1. 이제 장애 조치(Failover) 클러스터 관리자에서 만든 수신기 이름이 표시됩니다. 수신기 이름을 마우스 오른쪽 단추로 클릭하고 **속성**을 클릭합니다.
 
@@ -198,10 +196,10 @@ SQLCMD 연결은 주 복제본을 호스트하는 SQL Server 인스턴스에 자
 
 
 ## <a name="for-more-information"></a>Blob에 대한 자세한 내용은
-자세한 내용은 [수동으로 Azure VM의 Always On 가용성 그룹 구성](virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md)을 참조하세요.
+자세한 내용은 [수동으로 Azure VM의 Always On 가용성 그룹 구성](virtual-machines-windows-portal-sql-availability-group-tutorial.md)을 참조하세요.
 
 ## <a name="powershell-cmdlets"></a>PowerShell cmdlet
-다음 PowerShell cmdlet을 사용하여 Azure 가상 컴퓨터에 대한 내부 부하 분산 장치를 만듭니다.
+다음 PowerShell cmdlet을 사용하여 Azure 가상 머신에 대한 내부 부하 분산 장치를 만듭니다.
 
 * [New-AzureRmLoadBalancer](http://msdn.microsoft.com/library/mt619450.aspx)는 부하 분산 장치를 만듭니다. 
 * [New-AzureRMLoadBalancerFrontendIpConfig](http://msdn.microsoft.com/library/mt603510.aspx)는 부하 분산 장치에 대한 프런트 엔드 IP 구성을 만듭니다. 
@@ -209,4 +207,3 @@ SQLCMD 연결은 주 복제본을 호스트하는 SQL Server 인스턴스에 자
 * [New-AzureRmLoadBalancerBackendAddressPoolConfig](http://msdn.microsoft.com/library/mt603791.aspx)는 부하 분산 장치에 대한 백 엔드 주소 풀 구성을 만듭니다. 
 * [New-AzureRmLoadBalancerProbeConfig](http://msdn.microsoft.com/library/mt603847.aspx)는 부하 분산 장치에 대한 프로브 구성을 만듭니다.
 * [Remove-AzureRmLoadBalancer](http://msdn.microsoft.com/library/mt603862.aspx)는 Azure 리소스 그룹에서 부하 분산 장치를 제거합니다.
-

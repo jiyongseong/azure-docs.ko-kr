@@ -5,22 +5,21 @@ services: active-directory
 keywords: "Azure Active Directory ID 보호, Cloud App Discovery, 응용 프로그램 관리, 보안, 위험, 위험 수준, 취약성, 보안 정책, 용어집"
 documentationcenter: 
 author: MarkusVi
-manager: femila
+manager: mtillman
 ms.assetid: 833119a5-33d6-4482-adda-fa35218c72c3
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/12/2017
+ms.date: 01/15/2018
 ms.author: markvi
 ms.reviewer: nigu
-ms.translationtype: Human Translation
-ms.sourcegitcommit: dcda8b30adde930ab373a087d6955b900365c4cc
-ms.openlocfilehash: f31188ed3216034ef8ec056023472844ec4debd6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 12/29/2016
-
+ms.openlocfilehash: 30cf3911d0f22e2d9351fc606cd6697ef437e452
+ms.sourcegitcommit: 384d2ec82214e8af0fc4891f9f840fb7cf89ef59
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/16/2018
 ---
 # <a name="azure-active-directory-identity-protection-glossary"></a>Azure Active Directory ID 보호 용어집
 ### <a name="at-risk-user"></a>위험(사용자)
@@ -38,7 +37,7 @@ ms.lasthandoff: 12/29/2016
 ### <a name="credentials"></a>자격 증명
 로컬 및 네트워크 리소스에 대한 액세스 권한을 얻는 데 사용되는 ID 및 ID의 증명을 포함하는 정보입니다. 자격 증명의 예는 사용자 이름 및 암호, 스마트 카드 및 인증서가 있습니다.
 
-### <a name="event"></a>이벤트
+### <a name="event"></a>행사
 Azure Active Directory에서 작업의 기록입니다.
 
 ### <a name="false-positive-risk-event"></a>가양성(위험 이벤트)
@@ -163,5 +162,4 @@ Azure Active Directory에서 ID를 인증하는 프로세스 또는 동작이며
 
 ## <a name="see-also"></a>참고 항목
 * [Azure Active Directory ID 보호](active-directory-identityprotection.md)
-
 

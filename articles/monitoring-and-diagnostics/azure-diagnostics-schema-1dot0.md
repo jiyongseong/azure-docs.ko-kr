@@ -14,13 +14,11 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 05/15/2017
 ms.author: robb
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 66f733d7602a8d26627fcc205f357e7a4a266d11
-ms.openlocfilehash: c749a0929d292913e03fa7340bbbebad411fb44d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/22/2017
-
-
+ms.openlocfilehash: a8fdfb52d5091d3fc9779657737c7430fcfada51
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="azure-diagnostics-10-configuration-schema"></a>Azure 진단 1.0 구성 스키마
 > [!NOTE]
@@ -276,4 +274,3 @@ http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration
 |특성|형식|설명|  
 |---------------|----------|-----------------|  
 |**name**|string|필수입니다. 수집할 로그를 지정하는 XPath 식입니다.|  
-

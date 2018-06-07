@@ -14,11 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: mazha
-translationtype: Human Translation
-ms.sourcegitcommit: dccb945e170bd3e3f23283359db25e574a2d4296
 ms.openlocfilehash: e9b9522de6b2c54dc794b00100ffe358296ecfdd
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="real-time-stats-in-microsoft-azure-cdn"></a>Microsoft Azure CDN의 실시간 통계
 [!INCLUDE [cdn-premium-feature](../../includes/cdn-premium-feature.md)]
@@ -92,10 +92,4 @@ HTTP 상태 코드의 목록은 그래프 바로 위에 표시됩니다. 이 목
 * [Azure CDN에서 실시간 경고](cdn-real-time-alerts.md)
 * [고급 HTTP 보고서](cdn-advanced-http-reports.md)
 * [사용 패턴](cdn-analyze-usage-patterns.md)
-
-
-
-
-<!--HONumber=Jan17_HO4-->
-
 

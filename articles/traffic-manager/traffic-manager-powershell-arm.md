@@ -1,6 +1,6 @@
 ---
-title: "Azure에서 PowerShell을 사용하여 Traffic Manager 관리 | Microsoft Docs"
-description: "Azure Resource Manager과 함께 Traffic Manager용 powershell 사용"
+title: Azure에서 PowerShell을 사용하여 Traffic Manager 관리 | Microsoft Docs
+description: Azure Resource Manager과 함께 Traffic Manager용 powershell 사용
 services: traffic-manager
 documentationcenter: na
 author: kumudd
@@ -13,14 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/16/2017
 ms.author: kumud
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: a2a6ca04ca8043bc0ed142310ad3e7b55100d228
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
+ms.openlocfilehash: 951e845e23a1ed0cbdc83fc24a97a545f00c52ad
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
-
 # <a name="using-powershell-to-manage-traffic-manager"></a>PowerShell을 사용하여 Traffic Manager 관리
 
 Azure의 서비스용 관리 인터페이스로는 기본적으로 Azure Resource Manager가 사용됩니다. Azure Resource Manager 기반 API 및 도구를 사용하여 Azure Traffic Manager 프로파일을 관리할 수 있습니다.
@@ -37,7 +35,7 @@ Azure Traffic Manager는 Traffic Manager 프로필을 호출하는 설정 모음
 
 이러한 지침은 Microsoft Azure PowerShell을 사용합니다. 다음 문서는 Azure PowerShell 설치 및 구성하는 방법을 설명합니다.
 
-* [Azure PowerShell 설치 및 구성 방법](/powershell/azure/overview)
+* [Azure PowerShell 설치 및 구성하는 방법](/powershell/azure/overview)
 
 이 문서의 예제에서는 기존 리소스 그룹이 있다고 가정합니다. 다음 명령을 사용하여 리소스 그룹을 만들 수 있습니다.
 
@@ -60,7 +58,7 @@ $profile = New-AzureRmTrafficManagerProfile -Name MyProfile -ResourceGroupName M
 
 | 매개 변수 | 설명 |
 | --- | --- |
-| 이름 |Traffic Manager 프로필 리소스의 ARM 리소스 이름입니다. 동일한 리소스 그룹의 프로필 이름은 고유해야 합니다. 이 이름은 DNS 쿼리에 사용되는 DNS 이름과 구분됩니다. |
+| Name |Traffic Manager 프로필 리소스의 ARM 리소스 이름입니다. 동일한 리소스 그룹의 프로필 이름은 고유해야 합니다. 이 이름은 DNS 쿼리에 사용되는 DNS 이름과 구분됩니다. |
 | ResourceGroupName |프로필 리소스가 포함된 리소스 그룹의 이름. |
 | TrafficRoutingMethod |DNS 쿼리에 대한 응답으로 반환되는 끝점을 결정하는 데 사용되는 트래픽 라우팅 메서드를 지정합니다. 가능한 값은 '성능', '가중' 또는 '우선 순위'입니다. |
 | RelativeDnsName |이 Traffic Manager 프로필을 통해 제공되는 DNS 이름의 호스트 이름 부분을 지정합니다. 이 값은 프로필의 FQDN(정규화된 도메인 이름)을 형성하여 Azure Traffic Manager가 사용하는 DNS 도메인 이름과 결합됩니다. 예를 들어 'contoso'의 값이 'contoso.trafficmanager.net.'이 되도록 설정합니다. |
@@ -114,8 +112,8 @@ Traffic Manager 끝점에는 세 가지 종류가 있습니다.
 
 Azure 끝점는 Azure에서 호스팅되는 서비스를 나타냅니다. 두 가지 유형의 Azure 끝점이 지원됩니다.
 
-1. Azure 웹앱
-2. Azure PublicIpAddress 리소스(부하 분산 장치 또는 가상 컴퓨터 NIC에 연결할 수 있음). publicIpAddress에는 Traffic Manager에서 사용되도록 지정된 DNS 이름이 있어야 합니다.
+1. Azure Web Apps
+2. Azure PublicIpAddress 리소스(부하 분산 장치 또는 가상 머신 NIC에 연결할 수 있음). publicIpAddress에는 Traffic Manager에서 사용되도록 지정된 DNS 이름이 있어야 합니다.
 
 각 경우에 다음이 해당됩니다.
 
@@ -205,6 +203,18 @@ Set-AzureRmTrafficManagerProfile -TrafficManagerProfile $profile
 ```powershell
 $child = Get-AzureRmTrafficManagerEndpoint -Name child -ResourceGroupName MyRG
 New-AzureRmTrafficManagerEndpoint -Name child-endpoint -ProfileName parent -ResourceGroupName MyRG -Type NestedEndpoints -TargetResourceId $child.Id -EndpointStatus Enabled -EndpointLocation "North Europe" -MinChildEndpoints 2
+```
+
+## <a name="adding-endpoints-from-another-subscription"></a>다른 구독에서 엔드포인트 추가
+
+Traffic Manager는 다른 구독의 엔드포인트에서 사용할 수 있습니다. Traffic Manager에 필요한 입력을 검색하려면 추가하려는 엔드포인트로 구독을 전환해야 합니다. 그런 다음, Traffic Manager 프로필을 포함하는 구독으로 전환하고 여기에 엔드포인트를 추가해야 합니다. 아래 예제에서는 공용 IP 주소로 이 작업을 수행하는 방법을 보여줍니다.
+
+```powershell
+Set-AzureRmContext -SubscriptionId $EndpointSubscription
+$ip = Get-AzureRmPublicIpAddress -Name $IpAddresName -ResourceGroupName $EndpointRG
+
+Set-AzureRmContext -SubscriptionId $trafficmanagerSubscription
+New-AzureRmTrafficManagerEndpoint -Name $EndpointName -ProfileName $ProfileName -ResourceGroupName $TrafficManagerRG -Type AzureEndpoints -TargetResourceId $ip.Id -EndpointStatus Enabled
 ```
 
 ## <a name="update-a-traffic-manager-endpoint"></a>Traffic Manager 끝점 업데이트
@@ -313,4 +323,3 @@ Get-AzureRmTrafficManagerProfile -Name MyProfile -ResourceGroupName MyRG | Remov
 [Traffic Manager 모니터링](traffic-manager-monitoring.md)
 
 [Traffic Manager 성능 고려 사항](traffic-manager-performance-considerations.md)
-

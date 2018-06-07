@@ -1,34 +1,35 @@
 ---
-title: Add users for Azure Stack ADFS | Microsoft Docs
-description: Learn how to add users for ADFS deployments of Azure Stack
+title: "Azure 스택 ADFS에 대 한 사용자 추가 | Microsoft Docs"
+description: "Azure 스택의 ad FS 배포에 대 한 사용자를 추가 하는 방법에 알아봅니다"
 services: azure-stack
 documentationcenter: 
-author: HeathL17
-manager: byronr
+author: jeffgilb
+manager: femila
 editor: 
 ms.service: azure-stack
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/10/2017
-ms.author: helaw
-ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 5ff45235cffead8c665d5c8610edca3c787ac267
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.date: 02/21/2018
+ms.author: jeffgilb
+ms.reviewer: unknown
+ms.openlocfilehash: 5774750edc5b7380275d4f20aee3be47f2f62b4d
+ms.sourcegitcommit: fbba5027fa76674b64294f47baef85b669de04b7
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/24/2018
 ---
-# <a name="add-users-in-the-azure-stack-development-kit"></a>Add users in the Azure Stack Development Kit
+# <a name="add-users-in-the-azure-stack-development-kit"></a>Azure 스택 개발 키트에서 사용자를 추가 합니다.
 
-To add additional users to the Development Kit deployment, you must add them to the Azure Stack Development Kit directory using Microsoft Management Console from the Azure Stack host computer.
-1.  On the Azure Stack host computer, open Microsoft Management Console.
-2.  Click **File > Add or remove snap-in**.
-3.  Select **Active Directory Users and Computers** > **AzureStack.local** > **Users**.
-4.  Click **Action** > **New** > **User**.
-5.  In the New Object – User window, provide and confirm a password
-6.  Click **Next** to finalize the values and click Finish to create the user.
+*적용 대상: Azure 스택 개발 키트*
 
+개발 키트 배포에 사용자를 추가 하려면 Azure 스택 호스트 컴퓨터에서 Microsoft Management Console을 사용 하 여 Azure 스택 개발 키트 디렉터리에 추가 해야 있습니다.
+1.  Azure 스택 호스트 컴퓨터에서 Microsoft Management Console을 엽니다.
+2.  클릭 **파일 > 추가 / 스냅인 제거**합니다.
+3.  선택 **Active Directory 사용자 및 컴퓨터** > **AzureStack.local** > **사용자**합니다.
+4.  클릭 **동작** > **새** > **사용자**합니다.
+5.  새 개체 – 사용자 창에서에서 입력 하 고 암호를 확인 합니다.
+6.  클릭 **다음** 하 값을 마무리 하 고 사용자를 만들 마침을 클릭 합니다.
 
 

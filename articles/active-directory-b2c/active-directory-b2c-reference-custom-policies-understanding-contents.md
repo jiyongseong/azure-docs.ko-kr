@@ -1,28 +1,22 @@
 ---
-title: "Azure Active Directory B2C: 시작 팩의 사용자 지정 정책 이해 | Microsoft Docs"
-description: "Azure Active Directory B2C 사용자 지정 정책에 대한 항목"
+title: 'Azure Active Directory B2C: 시작 팩의 사용자 지정 정책 이해 | Microsoft Docs'
+description: Azure Active Directory B2C 사용자 지정 정책에 대한 항목
 services: active-directory-b2c
-documentationcenter: 
-author: rojasja
-manager: krassk
-editor: rojasja
-ms.assetid: 
+documentationcenter: ''
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: article
-ms.devlang: na
 ms.date: 04/25/2017
-ms.author: joroja
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2db2ba16c06f49fd851581a1088df21f5a87a911
-ms.openlocfilehash: 9847bcfcc139a769847678c1cca6a8b9c3a30e93
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/09/2017
-
-
+ms.author: davidmu
+ms.openlocfilehash: 12f63bc42f8450f086ed9f0e8d598c9c91a0c3d4
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
-
 # <a name="understanding-the-custom-policies-of-the-azure-ad-b2c-custom-policy-starter-pack"></a>Azure AD B2C 사용자 지정 정책 시작 팩의 사용자 지정 정책 이해
 
 이 섹션에서는 **시작 팩**과 함께 제공되고 *B2C_1A_base_extensions 정책*의 상속을 통해 사용자 고유의 정책을 작성하는 데 활용되는 B2C_1A_base 정책의 모든 핵심 요소를 나열합니다.
@@ -40,12 +34,12 @@ ms.lasthandoff: 05/09/2017
 
 이 스키마는 다음과 같은 세 가지 섹션으로 구분됩니다.
 
-1.    첫 번째 섹션은 사용자 경험이 제대로 작동하는 데 필요한 최소 클레임을 나열합니다.
-2.    두 번째 섹션은 다른 클레임 공급자에 전달할 쿼리 문자열 매개 변수 및 기타 특수 매개 변수(특히 인증을 위한 login.microsoftonline.com)에 필요한 클레임을 나열합니다. **이러한 클레임을 수정하지 마세요**.
-3.    마지막으로 세 번째 섹션은 사용자로부터 수집하여 디렉터리에 저장하고 로그인 중에 토큰에 전송되는 추가, 선택적인 클레임을 나열합니다. 사용자로부터 수집 및/또는 토큰에 전송되는 새 클레임 유형을 이 섹션에 추가할 수 있습니다.
+1.  첫 번째 섹션은 사용자 경험이 제대로 작동하는 데 필요한 최소 클레임을 나열합니다.
+2.  두 번째 섹션은 다른 클레임 공급자에 전달할 쿼리 문자열 매개 변수 및 기타 특수 매개 변수(특히 인증을 위한 login.microsoftonline.com)에 필요한 클레임을 나열합니다. **이러한 클레임을 수정하지 마세요**.
+3.  마지막으로 세 번째 섹션은 사용자로부터 수집하여 디렉터리에 저장하고 로그인 중에 토큰에 전송되는 추가, 선택적인 클레임을 나열합니다. 사용자로부터 수집 및/또는 토큰에 전송되는 새 클레임 유형을 이 섹션에 추가할 수 있습니다.
 
 > [!IMPORTANT]
-> 클레임 스키마는 암호 및 사용자 이름과 같은 특정 스키마에 대한 제한을 포함합니다. 보안 프레임워크(TF) 정책은 Azure AD를 다른 클레임 공급자로 처리하며 모든 해당 제한 사항이 프리미엄 정책에서 모델링됩니다. 더 많은 제한 사항을 추가하도록 정책을 수정하거나 사용자 고유의 제한을 포함할 자격 증명 저장소에 대해 다른 클레임 공급자를 사용할 수 있습니다.
+> 클레임 스키마는 암호 및 사용자 이름과 같은 특정 스키마에 대한 제한을 포함합니다. TF(보안 프레임워크) 정책은 Azure AD를 다른 클레임 공급자로 처리하며 모든 해당 제한 사항이 사용자 지정 정책에서 모델링됩니다. 더 많은 제한 사항을 추가하도록 정책을 수정하거나 사용자 고유의 제한을 포함할 자격 증명 저장소에 대해 다른 클레임 공급자를 사용할 수 있습니다.
 
 사용 가능한 클레임 유형은 다음과 같습니다.
 
@@ -57,12 +51,12 @@ ms.lasthandoff: 05/09/2017
 |-------------|-------------|
 | *UserId* | 사용자 이름 |
 | *signInName* | 로그인 이름 |
-| *tenantId* | Azure AD B2C Premium에서 사용자 개체의 테넌트 식별자(ID) |
-| *objectId* | Azure AD B2C Premium에서 사용자 개체의 개체 식별자(ID) |
+| *tenantId* | Azure AD B2C에서 사용자 개체의 테넌트 식별자(ID) |
+| *objectId* | Azure AD B2C에서 사용자 개체의 개체 식별자(ID) |
 | *암호* | 암호 |
 | *newPassword* | |
 | *reenterPassword* | |
-| *passwordPolicies* | 암호 강도, 만료 등을 결정하기 위해 Azure AD B2C Premium에 사용된 암호 정책 |
+| *passwordPolicies* | 암호 강도, 만료 등을 결정하기 위해 Azure AD B2C에 사용된 암호 정책 |
 | *sub* | |
 | *alternativeSecurityId* | |
 | *identityProvider* | |
@@ -72,9 +66,9 @@ ms.lasthandoff: 05/09/2017
 | *email* | 사용자에게 연락하는 데 사용할 수 있는 이메일 주소 |
 | *signInNamesInfo.emailAddress* | 사용자가 로그인에 사용할 수 있는 이메일 주소 |
 | *otherMails* | 사용자에게 연결하는 데 사용할 수 있는 이메일 주소 |
-| *userPrincipalName* | Azure AD B2C Premium에 저장된 사용자 이름 |
+| *userPrincipalName* | Azure AD B2C에 저장된 사용자 이름 |
 | *upnUserName* | 사용자 계정 이름을 만들기 위한 사용자 이름 |
-| *mailNickName* | Azure AD B2C Premium에 저장된 사용자의 메일 별명 |
+| *mailNickName* | Azure AD B2C에 저장된 사용자의 메일 별명 |
 | *newUser* | |
 | *executed-SelfAsserted-Input* | 사용자로부터 특성을 수집할지 여부를 지정하는 클레임 |
 | *executed-PhoneFactor-Input* | 사용자로부터 새 전화 번호를 수집할지 여부를 지정하는 클레임 |
@@ -220,4 +214,3 @@ ms.lasthandoff: 05/09/2017
 | *SignUpOrSignIn* | |
 | *EditProfile* | |
 | *PasswordReset* | |
-

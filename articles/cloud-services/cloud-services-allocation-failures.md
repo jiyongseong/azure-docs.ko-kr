@@ -1,6 +1,6 @@
 ---
 title: "클라우드 서비스 할당 실패 문제 해결 | Microsoft Docs"
-description: "Azure에서 클라우드 서비스 배포 시 할당 실패 문제 해결"
+description: "Azure에서 Cloud Services 배포 시 할당 실패 문제 해결"
 services: azure-service-management, cloud-services
 documentationcenter: 
 author: simonxjx
@@ -12,17 +12,16 @@ ms.service: cloud-services
 ms.workload: na
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
-ms.topic: article
-ms.date: 7/26/2017
+ms.topic: troubleshooting
+ms.date: 11/03/2017
 ms.author: v-six
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 219dcbfdca145bedb570eb9ef747ee00cc0342eb
-ms.openlocfilehash: c91a34eb34a73abe5c5ac2bb6aeb08c818a97856
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
+ms.openlocfilehash: 33d017d0e09e9b288b0514e85c8865f83a8a2fa1
+ms.sourcegitcommit: 3df3fcec9ac9e56a3f5282f6c65e5a9bc1b5ba22
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/04/2017
 ---
-# <a name="troubleshooting-allocation-failure-when-you-deploy-cloud-services-in-azure"></a>Azure에서 클라우드 서비스 배포 시 할당 실패 문제 해결
+# <a name="troubleshooting-allocation-failure-when-you-deploy-cloud-services-in-azure"></a>Azure에서 Cloud Services 배포 시 할당 실패 문제 해결
 ## <a name="summary"></a>요약
 클라우드 서비스에 인스턴스를 배포하거나 새 웹 또는 작업자 역할 인스턴스를 추가할 때 Microsoft Azure는 계산 리소스를 할당합니다. 이러한 작업을 수행하면서 Azure 구독 제한에 도달하기 전에 오류를 수신하는 경우도 있습니다. 이 문서는 일부 일반적인 할당 오류의 이유를 설명하고 가능한 수정을 제안합니다. 서비스 배포를 계획하는 사용자에게 이 정보가 유용할 수 있습니다.
 
@@ -50,7 +49,7 @@ Azure 데이터 센터의 서버는 클러스터로 분할되어 있습니다. �
 * 스테이징 슬롯에 배포하는 경우 - 클라우드 서비스가 두 슬롯 중 하나에 배포된 경우 전체 클라우드 서비스가 특정 클러스터에 고정됩니다.  이는 프로덕션 슬롯에 이미 배포가 있을 경우 프로덕션 슬롯과 동일한 클러스터에만 새 스테이징 배포를 할당할 수 있다는 의미입니다. 클러스터의 용량이 거의 찼을 경우 요청이 실패할 수 있습니다.
 * 크기 조정 - 기존 클라우드 서비스에 새 인스턴스를 추가할 때는 동일한 클러스터에 할당해야 합니다.  작은 크기 조정 요청은 대부분 할당할 수 있지만 항상 가능한 것은 아닙니다. 클러스터의 용량이 거의 찼을 경우 요청이 실패할 수 있습니다.
 * 선호도 그룹 - 클라우드 서비스가 선호도 그룹에 고정되어 있지 않는 한, 빈 클라우드 서비스에 새로 배포할 경우 해당 영역에 있는 클러스터의 패브릭에 의해서만 할당할 수 있습니다. 동일한 선호도 그룹에 대한 배포는 동일한 클러스터에서 시도됩니다. 클러스터의 용량이 거의 찼을 경우 요청이 실패할 수 있습니다.
-* 선호도 그룹 vNet - 이전에는 가상 네트워크가 영역이 아닌 선호도 그룹에 연결되었고 이러한 가상 네트워크의 클라우드 서비스는 선호도 그룹 클러스터에 고정되었습니다. 이 가상 네트워크 형식에 대한 배포는 고정된 클러스터에서 시도됩니다. 클러스터의 용량이 거의 찼을 경우 요청이 실패할 수 있습니다.
+* 선호도 그룹 vNet - 이전에는 Virtual Network가 영역이 아닌 선호도 그룹에 연결되었고 이러한 Virtual Network의 클라우드 서비스는 선호도 그룹 클러스터에 고정되었습니다. 이 가상 네트워크 형식에 대한 배포는 고정된 클러스터에서 시도됩니다. 클러스터의 용량이 거의 찼을 경우 요청이 실패할 수 있습니다.
 
 ## <a name="solutions"></a>솔루션
 1. 새 클라우드 서비스에 다시 배포 - 이 솔루션은 플랫폼이 해당 영역의 모든 클러스터에서 선택할 수 있으므로 가장 성공률이 높습니다.
@@ -71,5 +70,4 @@ Azure 데이터 센터의 서버는 클러스터로 분할되어 있습니다. �
      ```
    * 위의 #2에 따라 서비스의 CSCFG에 새 ReservedIP를 지정해야 합니다.
 4. 새 배포에 대한 선호도 그룹 제거 - 선호도 그룹은 더 이상 권장되지 않습니다. 위의 #1에 따라 새 클라우드 서비스를 배포합니다. 클라우드 서비스가 선호도 그룹에 없는지 확인합니다.
-5. 지역 가상 네트워크로 변환 - [선호도 그룹에서 지역 VNet(가상 네트워크)으로 마이그레이션하는 방법](../virtual-network/virtual-networks-migrate-to-regional-vnet.md)을 참조하세요.
-
+5. 지역 Virtual Network로 변환 - [선호도 그룹에서 지역 VNet(Virtual Network)으로 마이그레이션하는 방법](../virtual-network/virtual-networks-migrate-to-regional-vnet.md)을 참조하세요.

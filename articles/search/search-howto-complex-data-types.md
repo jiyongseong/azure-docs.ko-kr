@@ -1,27 +1,19 @@
 ---
-title: "Azure Search에서 복합 데이터 형식을 모델링하는 방법 | Microsoft Docs"
-description: "일반 행 집합 및 컬렉션 데이터 형식을 사용하여 Azure Search 인덱스에서 중첩된 데이터 또는 계층적 데이터 구조를 모델링할 수 있습니다."
-services: search
-documentationcenter: 
-author: LiamCa
-manager: pablocas
-editor: 
+title: Azure Search에서 복합 데이터 형식을 모델링하는 방법 | Microsoft Docs
+description: 일반 행 집합 및 컬렉션 데이터 형식을 사용하여 Azure Search 인덱스에서 중첩된 데이터 또는 계층적 데이터 구조를 모델링할 수 있습니다.
+author: brjohnstmsft
+manager: jlembicz
+ms.author: brjohnst
 tags: complex data types; compound data types; aggregate data types
-ms.assetid: e4bf86b4-497a-4179-b09f-c1b56c3c0bb2
+services: search
 ms.service: search
-ms.devlang: na
-ms.workload: search
-ms.topic: article
-ms.tgt_pltfrm: na
+ms.topic: conceptual
 ms.date: 05/01/2017
-ms.author: liamca
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 71fea4a41b2e3a60f2f610609a14372e678b7ec4
-ms.openlocfilehash: d576fd7bb267ae7a100589413185b595e3b2be42
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/10/2017
-
-
+ms.openlocfilehash: 81298bedd43a89ea948753dffc5f80248f5429ca
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="how-to-model-complex-data-types-in-azure-search"></a>Azure Search에서 복합 데이터 형식을 모델링하는 방법
 Azure Search 인덱스를 채우는 데 사용되는 외부 데이터 집합에는 가끔 테이블 형식의 행 집합으로 깔끔하게 분류되지 않는 계층적 또는 중첩된 하위 구조가 포함됩니다. 이러한 구조의 예에는 한 고객에 대한 여러 위치와 전화 번호, 단일 SKU에 대한 여러 색과 크기, 한 권의 책에 대한 여러 저자 등이 포함될 수 있습니다. 모델링 용어에서는 이러한 구조를 *복합 데이터 형식*, *복합형 데이터 형식*, *복합성 데이터 형식* 또는 *집계 데이터 형식*이라고도 합니다.
@@ -68,7 +60,7 @@ Azure Search 인덱스를 채우는 데 사용되는 외부 데이터 집합에�
 ‘id’, ‘name’ 및 ‘company’라는 이름의 필드를 Azure Search 인덱스 내의 일대일 필드로 쉽게 매핑할 수 있습니다. ‘locations’ 필드에는 위치 ID 집합과 위치 설명이 있는 위치 배열이 포함됩니다. Azure Search에 이를 지원하는 데이터 형식이 없는 경우 다른 방법으로 Azure Search에서 모델링해야 합니다. 
 
 > [!NOTE]
-> 이 기술은 Kirk Evans의 블로그 게시물 [Indexing DocumentDB with Azure Search](https://blogs.msdn.microsoft.com/kaevans/2015/03/09/indexing-documentdb-with-azure-seach/)(Azure Search를 사용하여 DocumentDB 인덱싱)에도 설명되어 있습니다. 여기에서 [컬렉션](https://msdn.microsoft.com/library/azure/dn798938.aspx)(또는 문자열 배열)인 `locationsID` 및 `locationsDescription`라는 필드가 있는 "데이터 평면화"라는 기술을 보여줍니다.   
+> 이 기술은 Kirk Evans의 블로그 게시물 [Indexing Azure Cosmos DB with Azure Search](https://blogs.msdn.microsoft.com/kaevans/2015/03/09/indexing-documentdb-with-azure-seach/)(Azure Search를 사용하여 Azure Cosmos DB 인덱싱)에도 설명되어 있습니다. 여기에서 [컬렉션](https://msdn.microsoft.com/library/azure/dn798938.aspx)(또는 문자열 배열)인 `locationsID` 및 `locationsDescription`라는 필드가 있는 “데이터 평면화”라는 기술을 보여 줍니다.   
 > 
 > 
 
@@ -104,7 +96,7 @@ var index = new Index()
 * ‘Home Office’에서 근무하는 사용자 수를 계산합니다.  
 * ‘Home Office’에서 근무하는 사용자 중 이들이 근무하는 다른 사무실과 각 위치의 사용자 수를 표시합니다.  
 
-이 기술은 위치 ID와 위치 설명을 함께 사용하여 검색을 수행해야 할 때 유용합니다. 예:
+이 기술은 위치 ID와 위치 설명을 함께 사용하여 검색을 수행해야 할 때 유용합니다. 예: 
 
 * Home Office가 있고 위치 ID가 4인 사용자를 모두 찾습니다.  
 
@@ -119,7 +111,7 @@ var index = new Index()
 
 그러나 이제 데이터가 개별 필드로 분류되어 Jen Campbell에 대한 Home Office가 `locationsID 3` 또는 `locationsID 4`에 연결된 것을 알 수가 없습니다.  
 
-이러한 경우 인덱스에서 모든 데이터를 단일 컬렉션으로 결합한 다른 필드를 정의합니다.  이 예제에서는 이 필드를 `locationsCombined`라고 하고 `||`를 사용하여 콘텐츠를 분리합니다. 이때 콘텐츠에 고유한 문자 집합이라고 생각되는 다른 구분 기호를 선택할 수 있습니다. 예: 
+이러한 경우 인덱스에서 모든 데이터를 단일 컬렉션으로 결합한 다른 필드를 정의합니다.  이 예제에서는 이 필드를 `locationsCombined`라고 하고 `||`를 사용하여 콘텐츠를 분리합니다. 이때 콘텐츠에 고유한 문자 집합이라고 생각되는 다른 구분 기호를 선택할 수 있습니다. 예:  
 
 ![샘플 데이터, 구분 기호가 있는 2행](./media/search-howto-complex-data-types/sample-data-2.png)
 
@@ -129,7 +121,7 @@ var index = new Index()
 * ‘Home Office’에서 근무하며 위치 ID가 ‘4’인 사용자를 검색합니다. 
 
 ## <a name="limitations"></a>제한 사항
-이 기술은 여러 시나리오에서 유용하지만 모든 경우에 적용되지는 않습니다.  예:
+이 기술은 여러 시나리오에서 유용하지만 모든 경우에 적용되지는 않습니다.  예: 
 
 1. 복합 데이터 형식에 정적 필드 집합이 없고 가능성 있는 모든 형식을 단일 필드에 매핑할 수 없는 경우 
 2. 중첩된 개체를 업데이트하는 데 Azure Search 인덱스에서 업데이트해야 할 항목을 정확하게 결정하기 위해 추가 작업이 필요한 경우
@@ -138,6 +130,5 @@ var index = new Index()
 복합 JSON 데이터 집합을 Azure Search로 인덱싱하고 이 [GitHub 리포지토리](https://github.com/liamca/AzureSearchComplexTypes)에서 이 데이터 집합에 대해 여러 가지 쿼리를 수행하는 방법에 대한 예를 볼 수 있습니다.
 
 ## <a name="next-step"></a>다음 단계
-[복합 데이터 형식의 기본 지원에 대해 응답](https://feedback.azure.com/forums/263029-azure-search) 하고 기능 구현과 관련하여 고려해야 할 추가 입력을 제공합니다. Twitter를 통해 @liamca에 직접 연락할 수도 있습니다.
-
+Azure Search UserVoice에서 [복합 데이터 형식의 기본 지원에 대해 응답](https://feedback.azure.com/forums/263029-azure-search) 하고 기능 구현과 관련하여 고려해야 할 추가 입력을 제공합니다. Twitter를 통해 @liamca에 직접 연락할 수도 있습니다.
 

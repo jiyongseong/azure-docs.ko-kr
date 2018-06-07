@@ -13,14 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 02/01/2017
 ms.author: LADocs; padmavc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f6006d5e83ad74f386ca23fe52879bfbc9394c0f
-ms.openlocfilehash: 89cd987cee841ea24dce85c0249e0eb3489c8d90
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/03/2017
-
+ms.openlocfilehash: 3fea93f558d5a4ef62550fd1f6486903cb812930
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="connect-to-an-on-premises-sap-system-from-logic-apps-with-the-sap-connector"></a>SAP 커넥터를 사용하여 Logic Apps에서 온-프레미스 SAP 시스템에 연결 
 
 온-프레미스 데이터 게이트웨이를 사용하면 온-프레미스에 있는 데이터를 관리하고 리소스에 안전하게 액세스할 수 있습니다. 이 항목에서는 온-프레미스 SAP 시스템에 Logic Apps를 연결하는 방법을 보여 줍니다. 이 예제에서 논리 앱은 HTTP를 통한 IDOC를 요청하고 응답을 다시 보냅니다.    
@@ -36,9 +34,7 @@ ms.lasthandoff: 05/03/2017
 
 - 데이터 게이트웨이를 설치한 컴퓨터에서 최신 SAP 클라이언트 라이브러리를 다운로드하여 설치합니다. 다음 SAP 버전 중 하나를 사용할 수 있습니다. 
     - SAP Server
-        - SAP ECC 6.0 Unicode
-        - SAP ECC 6.0 Unicode, EHP 4.0
-        - SAP ECC 6.0, EHP 7.0 및 모든 이전 EHP 버전
+        - .NET Connector(NCo) 3.0을 지원하는 SAP 서버
  
     - SAP Client
         - SAP .NET Connector(NCo) 3.0
@@ -94,4 +90,3 @@ Azure Logic Apps 및 커넥터 개선에 도움을 주려면 [Azure Logic Apps �
 
 - [엔터프라이즈 통합 팩](../logic-apps/logic-apps-enterprise-integration-overview.md)에서 유효성 검사, 변환을 수행하는 방법과 기타 BizTalk 유사 함수에 대해서도 알아봅니다. 
 - Logic Apps에서 [온-프레미스 데이터에 연결](../logic-apps/logic-apps-gateway-connection.md)
-

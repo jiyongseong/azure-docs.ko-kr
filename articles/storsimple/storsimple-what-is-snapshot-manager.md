@@ -15,12 +15,11 @@ ms.workload: TBD
 ms.date: 02/27/2017
 ms.author: v-sharos
 ms.custom: H1Hack27Feb2017
-translationtype: Human Translation
-ms.sourcegitcommit: 43eb76f2d51c586f3cd44d4d34b307257a655182
 ms.openlocfilehash: 38c197c7bc57110b29b1d8cb789d5b7310823da2
-ms.lasthandoff: 02/28/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="an-introduction-to-storsimple-snapshot-manager"></a>StorSimple Snapshot Manager 소개
 
@@ -140,5 +139,4 @@ StorSimple 스냅숏 관리자를 사용하여 차후의 백업 작업, 예약�
 ## <a name="next-steps"></a>다음 단계
 * [StorSimple 스냅숏 관리자를 사용하여 StorSimple 솔루션을 관리](storsimple-snapshot-manager-admin.md)하는 방법을 자세히 알아봅니다.
 * [StorSimple 스냅숏 관리자 다운로드](https://www.microsoft.com/download/details.aspx?id=44220)
-
 

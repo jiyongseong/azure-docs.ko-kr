@@ -14,12 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/09/2017
 ms.author: amsriva
-ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
 ms.openlocfilehash: 645f68d836babf11f32fc391e6dacc9430f0070c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="application-gateway-multiple-site-hosting"></a>응용 프로그램 게이트웨이 다중 사이트 호스팅
 
@@ -130,5 +129,4 @@ http://contoso.com에 대한 요청은 ContosoServerPool로 라우팅되고, htt
 ## <a name="next-steps"></a>다음 단계
 
 다중 사이트 호스팅에 대해 알아본 후에는 [다중 사이트 호스팅을 사용하여 응용 프로그램 게이트웨이 만들기](application-gateway-create-multisite-azureresourcemanager-powershell.md) 로 이동해 둘 이상의 웹 응용 프로그램 지원 기능으로 응용 프로그램 게이트웨이를 만듭니다.
-
 

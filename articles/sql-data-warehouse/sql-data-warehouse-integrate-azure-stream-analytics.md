@@ -1,49 +1,42 @@
 ---
-title: "SQL Data Warehouse와 함께 Azure Stream Analytics 사용 | Microsoft Docs"
-description: "솔루션 개발을 위한 Azure SQL 데이터 웨어하우스와 함께 Azure 스트림 분석 사용을 위한 팁"
+title: SQL Data Warehouse와 함께 Azure Stream Analytics 사용 | Microsoft Docs
+description: 솔루션 개발을 위한 Azure SQL Data Warehouse와 함께 Azure Stream Analytics 사용을 위한 팁
 services: sql-data-warehouse
-documentationcenter: NA
-author: ckarst
-manager: barbkess
-editor: 
-ms.assetid: 8aeb2247-20c5-4a29-b327-30a8ce09dfdc
+author: kavithaj
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: integrate
-ms.date: 10/31/2016
-ms.author: cakarst;barbkess
-ms.translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: d1c328ec609cc27a42fb6b30897d7f0b466134e7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/03/2017
-
-
+ms.topic: conceptual
+ms.component: consume
+ms.date: 04/17/2018
+ms.author: kavithaj
+ms.reviewer: igorstan
+ms.openlocfilehash: 76cbbddca70d3bc8091dbea383213446adac533e
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
-# <a name="use-azure-stream-analytics-with-sql-data-warehouse"></a>SQL 데이터 웨어하우스와 함께 Azure 스트림 분석 사용
-Azure 스트림 분석은 완전히 관리되는 서비스로, 클라우드의 스트리밍 데이터에 대해 대기 시간이 짧고 확장성이 뛰어난 고가용성의 복합 이벤트 처리 기능을 제공합니다. [Azure Stream Analytics 소개][Introduction to Azure Stream Analytics]를 읽어 기본 사항을 배울 수 있습니다. [Azure Stream Analytics를 사용하여 시작][Get started using Azure Stream Analytics] 자습서에 따라 Stream Analytics로 종단간 솔루션을 만드는 방법에 대해 알 수 있습니다.
+# <a name="use-azure-stream-analytics-with-sql-data-warehouse"></a>SQL Data Warehouse와 함께 Azure Stream Analytics 사용
+Azure Stream Analytics는 완전히 관리되는 서비스로, 클라우드의 스트리밍 데이터에 대해 대기 시간이 짧고 확장성이 뛰어난 고가용성의 복합 이벤트 처리 기능을 제공합니다. [Azure Stream Analytics 소개][Introduction to Azure Stream Analytics]를 읽어 기본 사항을 배울 수 있습니다. [Azure Stream Analytics를 사용하여 시작][Get started using Azure Stream Analytics] 자습서에 따라 Stream Analytics로 종단간 솔루션을 만드는 방법에 대해 알 수 있습니다.
 
-이 문서에서 스크림 분석 작업에 대한 출력 싱크로 Azure SQL 데이터 웨어하우스 데이터베이스를 사용하는 방법에 대해 배웁니다.
+이 문서에서 스크림 분석 작업에 대한 출력 싱크로 Azure SQL Data Warehouse 데이터베이스를 사용하는 방법에 대해 배웁니다.
 
 ## <a name="prerequisites"></a>필수 조건
 먼저, [Azure Stream Analytics를 사용하여 시작][Get started using Azure Stream Analytics] 자습서에서 다음 단계를 실행합니다.  
 
 1. 이벤트 허브 입력 만들기
 2. 이벤트 생성기 응용 프로그램 구성 및 시작
-3. 스트림 분석 작업 프로비전
+3. Stream Analytics 작업 프로비전
 4. 작업 입력 및 쿼리 지정
 
-그런 다음 SQL 데이터 웨어하우스 데이터베이스를 만듭니다.
+그런 다음 SQL Data Warehouse 데이터베이스를 만듭니다.
 
-## <a name="specify-job-output-azure-sql-data-warehouse-database"></a>작업 출력 지정: Azure SQL 데이터 웨어하우스 데이터베이스
+## <a name="specify-job-output-azure-sql-data-warehouse-database"></a>작업 출력 지정: Azure SQL Data Warehouse 데이터베이스
 ### <a name="step-1"></a>1단계
 Stream Analytics 작업에서 페이지 위쪽의 **출력**을 클릭한 다음 **출력 추가**를 클릭합니다.
 
 ### <a name="step-2"></a>2단계
-SQL 데이터베이스를 선택하고 다음을 클릭합니다.
+SQL Database를 선택하고 다음을 클릭합니다.
 
 ![][add-output]
 
@@ -52,10 +45,10 @@ SQL 데이터베이스를 선택하고 다음을 클릭합니다.
 
 * *출력 별칭*: 이 작업 출력의 이름을 입력합니다.
 * *구독*:
-  * SQL 데이터 웨어하우스가 스트림 분석 작업과 동일한 구독 내에 있는 경우 현재 구독에서 SQL 데이터베이스 사용을 선택할 수 있습니다.
-  * 데이터베이스가 다른 구독에 있는 경우 다른 구독에서 SQL 데이터베이스 사용을 선택합니다.
+  * SQL Data Warehouse가 Stream Analytics 작업과 동일한 구독 내에 있는 경우 현재 구독에서 SQL Database 사용을 선택할 수 있습니다.
+  * 데이터베이스가 다른 구독에 있는 경우 다른 구독에서 SQL Database 사용을 선택합니다.
 * *데이터베이스*: 대상 데이터베이스의 이름을 지정합니다.
-* *서버 이름*: 방금 지정한 데이터베이스에 대한 서버 이름을 지정합니다. Azure 클래식 포털을 사용하여 찾을 수 있습니다.
+* *서버 이름*: 방금 지정한 데이터베이스에 대한 서버 이름을 지정합니다. Azure Portal을 사용하여 찾을 수 있습니다.
 
 ![][server-name]
 
@@ -65,8 +58,8 @@ SQL 데이터베이스를 선택하고 다음을 클릭합니다.
 
 ![][add-database]
 
-### <a name="step-4"></a>4단계
-확인 단추를 클릭하여 이 작업 출력을 추가하고 스트림 분석이 데이터베이스에 성공적으로 연결될 수 있는지 확인합니다.
+### <a name="step-4"></a>4단계:
+확인 단추를 클릭하여 이 작업 출력을 추가하고 Stream Analytics가 데이터베이스에 성공적으로 연결될 수 있는지 확인합니다.
 
 ![][test-connection]
 
@@ -95,4 +88,3 @@ SQL 데이터베이스를 선택하고 다음을 클릭합니다.
 
 <!--Other Web references-->
 [Azure Stream Analytics documentation]: http://azure.microsoft.com/documentation/services/stream-analytics/
-

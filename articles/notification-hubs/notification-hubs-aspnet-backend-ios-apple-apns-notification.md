@@ -1,10 +1,10 @@
 ---
-title: ".NET 백 엔드를 통한 Azure 알림 허브의 iOS 사용자 알림"
-description: "Azure에서 사용자에게 푸시 알림을 보내는 방법에 대해 알아봅니다. 코드 샘플은 백 엔드용 .NET API 및 Objective-C로 작성되었습니다."
+title: Azure Notification Hubs를 사용하여 특정 사용자에게 알림 푸시 | Microsoft Docs
+description: Azure Notification Hubs를 사용하여 특정 사용자에게 푸시 알림을 보내는 방법을 알아봅니다.
 documentationcenter: ios
-author: ysxu
-manager: erikre
-editor: 
+author: dimazaid
+manager: kpiteira
+editor: spelluru
 services: notification-hubs
 ms.assetid: 1f7d1410-ef93-4c4b-813b-f075eed20082
 ms.service: notification-hubs
@@ -12,36 +12,45 @@ ms.workload: mobile
 ms.tgt_pltfrm: ios
 ms.devlang: objective-c
 ms.topic: article
-ms.date: 10/03/2016
-ms.author: yuaxu
-translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: 0fa7a886e1ecb0a90b6aebc1dbf9ef0c6ce1acf1
-
-
+ms.date: 04/13/2018
+ms.author: dimazaid
+ms.openlocfilehash: 36d70c40e3de7bd38cdfc566da37060cdcea9060
+ms.sourcegitcommit: 6116082991b98c8ee7a3ab0927cf588c3972eeaa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2018
+ms.locfileid: "33777538"
 ---
-# <a name="azure-notification-hubs-notify-users-for-ios-with-net-backend"></a>.NET 백 엔드를 통한 Azure 알림 허브의 iOS 사용자 알림
+# <a name="tutorial-push-notifications-to-specific-users-using-azure-notification-hubs"></a>자습서: Azure Notification Hubs를 사용하여 특정 사용자에게 알림 푸시
 [!INCLUDE [notification-hubs-selector-aspnet-backend-notify-users](../../includes/notification-hubs-selector-aspnet-backend-notify-users.md)]
 
-## <a name="overview"></a>개요
-Azure의 푸시 알림 지원을 통해 사용하기 쉬운 다중 플랫폼 및 규모 확장 푸시 인프라에 액세스할 수 있어, 모바일 플랫폼용 소비자 응용 프로그램 및 엔터프라이즈 응용 프로그램 모두에 대한 푸시 알림을 매우 간단하게 구현할 수 있습니다. 이 자습서에서는 Azure 알림 허브를 사용하여 특정 장치에서 특정 앱 사용자에게 푸시 알림을 보내는 방법을 보여 줍니다. [앱 백 엔드에서 등록](notification-hubs-push-notification-registration-management.md#registration-management-from-a-backend) 지침 항목에 나와 있는 대로 ASP.NET WebAPI 백 엔드는 클라이언트를 인증하고 알림을 생성하는 데 사용됩니다.
+이 자습서에서는 Azure Notification Hubs를 사용하여 특정 장치에서 특정 앱 사용자에게 푸시 알림을 보내는 방법을 보여 줍니다. [앱 백 엔드에서 등록](notification-hubs-push-notification-registration-management.md#registration-management-from-a-backend) 지침 항목에 나와 있는 대로 ASP.NET WebAPI 백 엔드는 클라이언트를 인증하고 알림을 생성하는 데 사용됩니다.
 
-> [!NOTE]
-> 이 자습서에서는 [알림 허브 시작(iOS)](notification-hubs-ios-apple-push-notification-apns-get-started.md)에 설명된 대로 알림 허브를 만들고 구성했다고 가정합니다 이 자습서는 [보안 푸시(iOS)](notification-hubs-aspnet-backend-ios-push-apple-apns-secure-notification.md) 자습서의 필수 조건이기도 합니다.
-> Mobile Apps을 백 엔드 서비스로 사용하려는 경우 [Mobile Apps 푸시 시작](../app-service-mobile/app-service-mobile-ios-get-started-push.md)을 참조하세요.
-> 
-> 
+이 자습서에서 수행하는 단계는 다음과 같습니다.
+
+> [!div class="checklist"]
+> * WebAPI 프로젝트 만들기
+> * WebAPI 백 엔드에 클라이언트 인증
+> * WebAPI 백 엔드를 사용하여 알림 등록
+> * WebAPI 백 엔드에서 알림 보내기
+> * 새 WebAPI 백 엔드 게시
+> * iOS 앱 수정
+> * 응용 프로그램 테스트
+
+## <a name="prerequisites"></a>필수 조건
+이 자습서에서는 [Notification Hubs 시작(iOS)](notification-hubs-ios-apple-push-notification-apns-get-started.md)에 설명된 대로 Notification Hubs를 만들고 구성했다고 가정합니다 이 자습서는 [보안 푸시(iOS)](notification-hubs-aspnet-backend-ios-push-apple-apns-secure-notification.md) 자습서의 필수 조건이기도 합니다.
+Mobile Apps을 백 엔드 서비스로 사용하려는 경우 [Mobile Apps 푸시 시작](../app-service-mobile/app-service-mobile-ios-get-started-push.md)을 참조하세요.
 
 [!INCLUDE [notification-hubs-aspnet-backend-notifyusers](../../includes/notification-hubs-aspnet-backend-notifyusers.md)]
 
 ## <a name="modify-your-ios-app"></a>iOS 앱 수정
-1. [알림 허브 시작(iOS)](notification-hubs-ios-apple-push-notification-apns-get-started.md) 자습서에서 만든 단일 페이지 보기 앱을 엽니다
+1. [Notification Hubs 시작(iOS)](notification-hubs-ios-apple-push-notification-apns-get-started.md) 자습서에서 만든 단일 페이지 보기 앱을 엽니다
    
    > [!NOTE]
    > 이 섹션에서는 빈 조직 이름을 사용하여 프로젝트를 구성했다고 가정합니다. 이렇게 구성하지 않았으면 모든 클래스 이름 앞에 조직 이름을 추가해야 합니다.
    > 
    > 
-2. Main.storyboard에서 개체 라이브러리에서 스크린샷에 표시된 다음 구성 요소를 추가합니다.
+2. `Main.storyboard`에서 개체 라이브러리에서 스크린샷에 표시된 구성 요소를 추가합니다.
    
     ![][1]
    
@@ -53,10 +62,11 @@ Azure의 푸시 알림 지원을 통해 사용하기 쉬운 다중 플랫폼 및
    * **APNS**: Apple 플랫폼 알림 서비스로 알림을 보낼 수 있는 레이블 및 스위치입니다.
    * **받는 사람 사용자 이름**: 자리 표시자 텍스트가 있는 UITextField, *받는 사람 사용자 이름 태그*, GCM 레이블 바로 아래이며 왼쪽 및 오른쪽 여백으로 제한되고 GCM 레이블 아래입니다.
 
-    일부 구성 요소는 [알림 허브(iOS) 시작](notification-hubs-ios-apple-push-notification-apns-get-started.md) 자습서에 추가됩니다.
+    일부 구성 요소는 [Notification Hubs(iOS) 시작](notification-hubs-ios-apple-push-notification-apns-get-started.md) 자습서에 추가됩니다.
 
 1. **Ctrl** 보기의 구성 요소에서 ViewController.h로 끌어서 이 새 콘센트를 추가합니다.
    
+    ```obj-c
         @property (weak, nonatomic) IBOutlet UITextField *UsernameField;
         @property (weak, nonatomic) IBOutlet UITextField *PasswordField;
         @property (weak, nonatomic) IBOutlet UITextField *RecipientField;
@@ -72,11 +82,15 @@ Azure의 푸시 알림 지원을 통해 사용하기 쉬운 다중 플랫폼 및
         @property (weak, nonatomic) IBOutlet UISwitch *APNSSwitch;
    
         - (IBAction)LogInAction:(id)sender;
-2. ViewController.h에서 다음 `#define` 를 import 문을 바로 아래 추가합니다. *<백 엔드 끝점 입력\>* 자리 표시자를 이전 섹션에서 앱 백 엔드를 배포하는 데 사용한 대상 URL로 대체합니다. 예: *http://you_backend.azurewebsites.net*
+    ```
+2. ViewController.h에서 다음 `#define`를 import 문 뒤에 추가합니다. *<백 엔드 끝점 입력\>* 자리 표시자를 이전 섹션에서 앱 백 엔드를 배포하는 데 사용한 대상 URL로 대체합니다. 예를 들어 *http://you_backend.azurewebsites.net*입니다.
    
+    ```obj-c
         #define BACKEND_ENDPOINT @"<Enter Your Backend Endpoint>"
+    ```
 3. 프로젝트에서 사용자가 만든 ASP.NET 백 엔드를 사용하여 **RegisterClient**라는 새 **Cocoa Touch 클래스**를 인터페이스에 만듭니다. `NSObject`에서 상속하는 클래스를 만듭니다. 그런 후 RegisterClient.h에 다음 코드를 추가합니다.
-   
+
+    ```obj-c   
         @interface RegisterClient : NSObject
    
         @property (strong, nonatomic) NSString* authenticationHeader;
@@ -87,8 +101,10 @@ Azure의 푸시 알림 지원을 통해 사용하기 쉬운 다중 플랫폼 및
         -(instancetype) initWithEndpoint:(NSString*)Endpoint;
    
         @end
-4. RegisterClient.m에서 `@interface` 섹션을 업데이트합니다.
-   
+    ```
+4. `RegisterClient.m`에서 `@interface` 섹션을 업데이트합니다.
+
+    ```obj-c   
         @interface RegisterClient ()
    
         @property (strong, nonatomic) NSURLSession* session;
@@ -102,8 +118,10 @@ Azure의 푸시 알림 지원을 통해 사용하기 쉬운 다중 플랫폼 및
                     tags:(NSSet*)tags andCompletion:(void(^)(NSURLResponse*, NSError*))completion;
    
         @end
-5. RegisterClient.m의 `@implementation` 를 코드로 다음 코드로 바꿉니다.
+    ```
+5. RegisterClient.m의 `@implementation` 섹션을 다음 코드로 바꿉니다.
 
+    ```obj-c
         @implementation RegisterClient
 
         // Globals used by RegisterClient
@@ -260,19 +278,23 @@ Azure의 푸시 알림 지원을 통해 사용하기 쉬운 다중 플랫폼 및
         }
 
         @end
+    ```
 
-    위의 코드는 NSURLSession를 사용하여 앱 백 엔드에 대한 REST 호출을 수행하고 NSUserDefaults를 사용하여 알림 허브에서 반환된 registrationId를 로컬로 저장하는, 지침 문서 [앱 백 엔드에서 등록](notification-hubs-push-notification-registration-management.md#registration-management-from-a-backend) 에서 설명된 논리를 구현합니다.
+    이 코드는 NSURLSession를 사용하여 앱 백 엔드에 대한 REST 호출을 수행하고 NSUserDefaults를 사용하여 알림 허브에서 반환된 registrationId를 로컬로 저장하는, 지침 문서 [앱 백 엔드에서 등록](notification-hubs-push-notification-registration-management.md#registration-management-from-a-backend)에서 설명된 논리를 구현합니다.
 
     이 클래스가 제대로 작동하려면 **authorizationHeader** 속성을 설정해야 합니다. 이 속성은 로그인 후에 **ViewController** 클래스에 의해 설정됩니다.
 
 1. ViewController.h에서 RegisterClient.h에 대한 `#import` 문을 추가합니다. 그런 다음 장치 토큰에 대한 선언 및 `@interface` 섹션에서 `RegisterClient` 인스턴스에 대한 참조를 추가합니다.
-   
+
+    ```obj-c   
         #import "RegisterClient.h"
    
         @property (strong, nonatomic) NSData* deviceToken;
         @property (strong, nonatomic) RegisterClient* registerClient;
+    ```
 2. ViewController.m에서, 개인 메서드 선언을 `@interface` 섹션에 추가합니다.
    
+    ```obj-c
         @interface ViewController () <UITextFieldDelegate, NSURLConnectionDataDelegate, NSXMLParserDelegate>
    
         // create the Authorization header to perform Basic authentication with your app back-end
@@ -280,14 +302,13 @@ Azure의 푸시 알림 지원을 통해 사용하기 쉬운 다중 플랫폼 및
                         AndPassword:(NSString*)password;
    
         @end
+    ```
 
-> [!NOTE]
-> 다음 코드 조각은 보안 인증 체계가 아닙니다. **createAndSetAuthenticationHeaderWithUsername:AndPassword:** 구현을 레지스터 클라이언트 클래스(예: OAuth, Active Directory)에서 사용할 인증 토큰을 생성하는 특정 인증 메커니즘으로 대체해야 합니다.
-> 
-> 
-
-1. 그런 다음 ViewController.m의 `@implementation` 에 장치 토큰 및 인증 헤더 설정을 위한 구현을 추가하는 다음 코드를 추가합니다.
+    > [!NOTE]
+    > 다음 코드 조각은 보안 인증 체계가 아닙니다. **createAndSetAuthenticationHeaderWithUsername:AndPassword:** 구현을 레지스터 클라이언트 클래스(예: OAuth, Active Directory)에서 사용할 인증 토큰을 생성하는 특정 인증 메커니즘으로 대체해야 합니다.
+1. 그런 다음, `ViewController.m`의 `@implementation` 섹션에 장치 토큰 및 인증 헤더 설정을 위한 구현을 추가하는 다음 코드를 추가합니다.
    
+    ```obj-c
         -(void) setDeviceToken: (NSData*) deviceToken
         {
             _deviceToken = deviceToken;
@@ -310,27 +331,72 @@ Azure의 푸시 알림 지원을 통해 사용하기 쉬운 다중 플랫폼 및
             [textField resignFirstResponder];
             return YES;
         }
+    ```
    
     장치 토큰 설정이 어떻게 로그인 단추를 활성화하는지에 주목하세요. 이는 로그인 작업 중에 보기 컨트롤러가 푸시 알림을 앱 백 엔드에 등록하기 때문입니다. 따라서 장치 토큰이 제대로 설정되기 전에는 로그인 작업에 액세스하지 못하게 해야 합니다. 로그인 작업이 토큰 설정 전에 발생하는 경우 푸시 등록에서 로그인을 분리할 수 있습니다.
 2. ViewController.m에서 다음 스니펫을 사용하여 **로그인** 단추에 대한 작업 메소드 및 ASP.NET 백엔드를 사용하여 알림 메시지를 보내는 메서드를 구현합니다.
    
-       - (IBAction)LogInAction:(id)sender {   // create authentication header and set it in register client   NSString* username = self.UsernameField.text;   NSString* password = self.PasswordField.text;
+    ```obj-c
+       - (IBAction)LogInAction:(id)sender {
+           // create authentication header and set it in register client
+           NSString* username = self.UsernameField.text;
+           NSString* password = self.PasswordField.text;
    
            [self createAndSetAuthenticationHeaderWithUsername:username AndPassword:password];
    
-           __weak ViewController* selfie = self;   [self.registerClient registerWithDeviceToken:self.deviceToken tags:nil       andCompletion:^(NSError* error) {       if (!error) {           dispatch_async(dispatch_get_main_queue(),           ^{               selfie.SendNotificationButton.enabled = YES;               [self MessageBox:@"Success" message:@"Registered successfully!"];           });       }   }]; }
+           __weak ViewController* selfie = self;
+           [self.registerClient registerWithDeviceToken:self.deviceToken tags:nil
+               andCompletion:^(NSError* error) {
+               if (!error) {
+                   dispatch_async(dispatch_get_main_queue(),
+                   ^{
+                       selfie.SendNotificationButton.enabled = YES;
+                       [self MessageBox:@"Success" message:@"Registered successfully!"];
+                   });
+               }
+           }];
+       }
 
-        - (void)SendNotificationASPNETBackend:(NSString*)pns UsernameTag:(NSString*)usernameTag            Message:(NSString*)message {    NSURLSession* session = [NSURLSession        sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil        delegateQueue:nil];
+        - (void)SendNotificationASPNETBackend:(NSString*)pns UsernameTag:(NSString*)usernameTag
+                    Message:(NSString*)message
+        {
+            NSURLSession* session = [NSURLSession
+                sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil
+                delegateQueue:nil];
 
-            // PNS 및 사용자 이름 태그를 REST URL을 포함한 매개 변수로 ASP.NET 백 엔드에 전달합니다    NSURL* requestURL = [NSURL URLWithString:[NSString        stringWithFormat:@"%@/api/notifications?pns=%@&to_tag=%@", BACKEND_ENDPOINT, pns,        usernameTag]];
+            // Pass the pns and username tag as parameters with the REST URL to the ASP.NET backend
+            NSURL* requestURL = [NSURL URLWithString:[NSString
+                stringWithFormat:@"%@/api/notifications?pns=%@&to_tag=%@", BACKEND_ENDPOINT, pns,
+                usernameTag]];
 
-            NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:requestURL];    [request setHTTPMethod:@"POST"];
+            NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:requestURL];
+            [request setHTTPMethod:@"POST"];
 
-            // 등록 클라이언트에서 모의 authenticationheader를 가져옵니다    NSString* authorizationHeaderValue = [NSString stringWithFormat:@"Basic %@",        self.registerClient.authenticationHeader];    [request setValue:authorizationHeaderValue forHTTPHeaderField:@"Authorization"];
+            // Get the mock authenticationheader from the register client
+            NSString* authorizationHeaderValue = [NSString stringWithFormat:@"Basic %@",
+                self.registerClient.authenticationHeader];
+            [request setValue:authorizationHeaderValue forHTTPHeaderField:@"Authorization"];
 
-            //알림 메시지 본문을 추가합니다    [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];    [request setHTTPBody:[message dataUsingEncoding:NSUTF8StringEncoding]];
+            //Add the notification message body
+            [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+            [request setHTTPBody:[message dataUsingEncoding:NSUTF8StringEncoding]];
 
-            // ASP.NET 백 엔드에서 보내기 알림 REST API를 실행합니다     NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)    {        NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*) response;        if (error || httpResponse.statusCode != 200)        {            NSString* status = [NSString stringWithFormat:@"Error Status for %@: %d\nError: %@\n",                                pns, httpResponse.statusCode, error];            dispatch_async(dispatch_get_main_queue(),            ^{                // Append text because all 3 PNS calls may also have information to view                [self.sendResults setText:[self.sendResults.text stringByAppendingString:status]];            });            NSLog(status);        }
+            // Execute the send notification REST API on the ASP.NET Backend
+            NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request
+                completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+            {
+                NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*) response;
+                if (error || httpResponse.statusCode != 200)
+                {
+                    NSString* status = [NSString stringWithFormat:@"Error Status for %@: %d\nError: %@\n",
+                                        pns, httpResponse.statusCode, error];
+                    dispatch_async(dispatch_get_main_queue(),
+                    ^{
+                        // Append text because all 3 PNS calls may also have information to view
+                        [self.sendResults setText:[self.sendResults.text stringByAppendingString:status]];
+                    });
+                    NSLog(status);
+                }
 
                 if (data != NULL)
                 {
@@ -338,17 +404,19 @@ Azure의 푸시 알림 지원을 통해 사용하기 쉬운 다중 플랫폼 및
                     [xmlParser setDelegate:self];
                     [xmlParser parse];
                 }
-            }];    [dataTask resume]; }
-
+            }];
+            [dataTask resume];
+        }
+    ```
 
 1. **알림 보내기** 단추의 작업을 업데이트하여 ASP.NET 백엔드를 사용하고 스위치에서 사용하도록 설정된 모든 PNS를 보냅니다.
 
+    ```obj-c
         - (IBAction)SendNotificationMessage:(id)sender
         {
             //[self SendNotificationRESTAPI];
             [self SendToEnabledPlatforms];
         }
-
 
         -(void)SendToEnabledPlatforms
         {
@@ -365,17 +433,19 @@ Azure의 푸시 알림 지원을 통해 사용하기 쉬운 다중 플랫폼 및
             if ([self.APNSSwitch isOn])
                 [self SendNotificationASPNETBackend:@"apns" UsernameTag:self.RecipientField.text Message:json];
         }
-
-
+    ```
 
 1. **ViewDidLoad**함수에서 다음을 추가하여 RegisterClient 인스턴스를 인스턴스화하고 텍스트 필드에 대한 대리자를 설정합니다.
    
+    ```obj-c
        self.UsernameField.delegate = self;
        self.PasswordField.delegate = self;
        self.RecipientField.delegate = self;
        self.registerClient = [[RegisterClient alloc] initWithEndpoint:BACKEND_ENDPOINT];
-2. 이제 **AppDelegate.m**에서 **application:didRegisterForPushNotificationWithDeviceToken:** 메서드의 모든 콘텐츠를 제거하고 다음으로 바꾸어 보기 컨트롤러에 APN에서 검색된 최신 장치 토큰이 포함되게 합니다.
+    ```
+2. 이제 **AppDelegate.m**에서 `application:didRegisterForPushNotificationWithDeviceToken:` 메서드의 모든 콘텐츠를 제거하고 다음으로 바꾸어 보기 컨트롤러에 APN에서 검색된 최신 장치 토큰이 포함되게 합니다.
    
+    ```obj-c
        // Add import to the top of the file
        #import "ViewController.h"
    
@@ -385,33 +455,37 @@ Azure의 푸시 알림 지원을 통해 사용하기 쉬운 다중 플랫폼 및
            ViewController* rvc = (ViewController*) self.window.rootViewController;
            rvc.deviceToken = deviceToken;
        }
+    ```
 3. 마지막으로 **AppDelegate.m**에서 다음 메서드가 있는지 확인합니다.
-   
+
+    ```obj-c   
        - (void)application:(UIApplication *)application didReceiveRemoteNotification: (NSDictionary *)userInfo {
            NSLog(@"%@", userInfo);
            [self MessageBox:@"Notification" message:[[userInfo objectForKey:@"aps"] valueForKey:@"alert"]];
        }
+    ```
 
 ## <a name="test-the-application"></a>응용 프로그램 테스트
 1. XCode에서는 실제 iOS 장치에서 앱을 실행합니다(푸시 알림은 시뮬레이터에서 작동하지 않음).
-2. iOS 앱 UI에서 사용자 이름과 암호를 입력합니다. 임의 문자열일 수 있지만 같은 문자열 값이어야 합니다. 그런 다음 **Log In**을 클릭합니다.
+2. iOS 앱 UI에서 사용자 이름과 암호에 동일한 값을 입력합니다. 그런 다음 **Log In**을 클릭합니다.
    
     ![][2]
 3. 등록 성공을 알리는 팝업이 표시됩니다. **확인**을 클릭합니다.
    
     ![][3]
 4. **받는 사람 사용자 이름 태그* 텍스트 필드에 다른 장치에서 등록에 사용되는 사용자 이름 태그를 입력합니다.
-5. 알림 메시지를 입력하고 **알림 보내기**를 클릭합니다.  받는 사람 사용자 이름 태그로 등록된 장치만이 알림 메시지를 받습니다.  이러한 사용자에만 전송됩니다.
+5. 알림 메시지를 입력하고 **알림 보내기**를 클릭합니다. 받는 사람 사용자 이름 태그로 등록된 장치만이 알림 메시지를 받습니다. 이러한 사용자에만 전송됩니다.
    
     ![][4]
+
+## <a name="next-steps"></a>다음 단계
+이 자습서에서는 등록에 태그가 연결된 특정 사용자에게 알림을 푸시하는 방법을 배웠습니다. 위치 기반 알림을 푸시하는 방법을 알아보려면 다음 자습서를 계속 진행합니다. 
+
+> [!div class="nextstepaction"]
+>[위치 기반 알림 푸시](notification-hubs-push-bing-spartial-data-geofencing-notification.md)
+
 
 [1]: ./media/notification-hubs-aspnet-backend-ios-notify-users/notification-hubs-ios-notify-users-interface.png
 [2]: ./media/notification-hubs-aspnet-backend-ios-notify-users/notification-hubs-ios-notify-users-enter-user-pwd.png
 [3]: ./media/notification-hubs-aspnet-backend-ios-notify-users/notification-hubs-ios-notify-users-registered.png
 [4]: ./media/notification-hubs-aspnet-backend-ios-notify-users/notification-hubs-ios-notify-users-enter-msg.png
-
-
-
-<!--HONumber=Nov16_HO3-->
-
-

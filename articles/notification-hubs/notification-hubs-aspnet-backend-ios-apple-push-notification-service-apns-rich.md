@@ -1,26 +1,26 @@
 ---
-title: "Azure 알림 허브 다양한 푸시"
-description: "Azure에서 iOS 앱에 다양한 푸시 알림을 보내는 방법에 대해 알아봅니다. 코드 샘플은 Objective-C 및 C#으로 작성되었습니다."
+title: Azure Notification Hubs 다양한 푸시
+description: Azure에서 iOS 앱에 다양한 푸시 알림을 보내는 방법에 대해 알아봅니다. 코드 샘플은 Objective-C 및 C#으로 작성되었습니다.
 documentationcenter: ios
 services: notification-hubs
-author: ysxu
-manager: erikre
-editor: 
+author: dimazaid
+manager: kpiteira
+editor: spelluru
 ms.assetid: 590304df-c0a4-46c5-8ef5-6a6486bb3340
 ms.service: notification-hubs
 ms.workload: mobile
 ms.tgt_pltfrm: ios
 ms.devlang: objective-c
 ms.topic: article
-ms.date: 06/29/2016
-ms.author: yuaxu
-translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: 394efdc2dfaff0666bc23d8a448b0a00d414da99
-
-
+ms.date: 04/25/2018
+ms.author: dimazaid
+ms.openlocfilehash: 21ed7dd1120958576651703283a0732e3843546d
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
-# <a name="azure-notification-hubs-rich-push"></a>Azure 알림 허브 다양한 푸시
+# <a name="azure-notification-hubs-rich-push"></a>Azure Notification Hubs 다양한 푸시
 ## <a name="overview"></a>개요
 사용자에게 즉각적인 풍부한 콘텐츠를 제공하기 위해 응용 프로그램은 일반 텍스트 이상을 푸시할 수 있습니다. 이러한 알림은 사용자 조작을 촉진하고 URL, 소리, 이미지/쿠폰 등의 콘텐츠를 제공합니다. 이 자습서는 [사용자에게 알림](notification-hubs-aspnet-backend-ios-apple-apns-notification.md) 항목을 기반으로 하며 페이로드(예: 이미지)를 통합하는 푸시 알림을 보내는 방법을 보여줍니다.
 
@@ -355,9 +355,3 @@ ms.openlocfilehash: 394efdc2dfaff0666bc23d8a448b0a00d414da99
 [IOS2]: ./media/notification-hubs-aspnet-backend-ios-rich-push/rich-push-ios-2.png
 [IOS3]: ./media/notification-hubs-aspnet-backend-ios-rich-push/rich-push-ios-3.png
 [IOS4]: ./media/notification-hubs-aspnet-backend-ios-rich-push/rich-push-ios-4.png
-
-
-
-<!--HONumber=Nov16_HO3-->
-
-

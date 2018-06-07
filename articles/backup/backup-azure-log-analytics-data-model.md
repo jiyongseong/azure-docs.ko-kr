@@ -1,11 +1,11 @@
 ---
-title: "Azure Backup용 Log Analytics 데이터 모델"
-description: "이 문서에서는 Azure Backup 데이터에 대한 Log Analytics 데이터 모델 세부 정보에 대해 설명합니다."
+title: Azure Backup용 Log Analytics 데이터 모델
+description: 이 문서에서는 Azure Backup 데이터에 대한 Log Analytics 데이터 모델 세부 정보에 대해 설명합니다.
 services: backup
-documentationcenter: 
+documentationcenter: ''
 author: JPallavi
 manager: vijayts
-editor: 
+editor: ''
 ms.assetid: dfd5c73d-0d34-4d48-959e-1936986f9fc0
 ms.service: backup
 ms.devlang: na
@@ -15,15 +15,14 @@ ms.workload: storage-backup-recovery
 ms.date: 07/24/2017
 ms.author: pajosh
 ms.custom: H1Hack27Feb2017
+ms.openlocfilehash: d55ec8ac4416fe0a082812584552462292b6dbb7
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
 ms.translationtype: HT
-ms.sourcegitcommit: bfd49ea68c597b109a2c6823b7a8115608fa26c3
-ms.openlocfilehash: 041a8835a1dd185739b23d4073fd5811bb4490b5
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
 # <a name="log-analytics-data-model-for-azure-backup-data"></a>Azure Backup 데이터용 Log Analytics 데이터 모델
-이 문서에서는 보고 데이터를 Log Analytics로 푸시하는 데 사용되는 데이터 모델에 대해 설명합니다. 이 데이터 모델을 사용하면 사용자 지정 쿼리, 대시보드를 만들고 OMS에서 이를 활용할 수 있습니다. 
+이 문서에서는 보고 데이터를 Log Analytics로 푸시하는 데 사용되는 데이터 모델에 대해 설명합니다. 이 데이터 모델을 사용하면 사용자 지정 쿼리, 대시보드를 만들고 Log Analytics에서 이를 활용할 수 있습니다. 
 
 ## <a name="using-azure-backup-data-model"></a>Azure Backup 데이터 모델 사용
 데이터 모델의 일부로 제공되는 다음 필드를 사용하여 요구 사항에 따라 시각적 개체, 사용자 지정 쿼리 및 대시보드를 만들 수 있습니다.
@@ -119,7 +118,7 @@ ms.lasthandoff: 07/25/2017
 | 리소스 |텍스트 |데이터가 수집되는 리소스이며, Recovery Services 자격 증명 모음 이름이 표시됩니다. |
 | ProtectedServerUniqueId_s |텍스트 |이 작업이 속한 보호 대상의 고유 ID |
 | VaultUniqueId_s |텍스트 |이 작업이 속한 보호 대상의 고유 ID |
-| JobOperation_s |텍스트 |실행되는 작업에 대한 동작(예: 백업, 복원, 백업 구성) |
+| JobOperation_s |텍스트 |실행되는 작업에 대한 동작(예: Backup, 복원, Backup 구성) |
 | JobStatus_s |텍스트 |완료된 작업의 상태(예: Completed, Failed) |
 | JobFailureCode_s |텍스트 |발생한 작업 실패로 인한 오류 코드 문자열 |
 | JobStartDateTime_s |날짜/시간 |작업 실행이 시작된 날짜 및 시간 |
@@ -241,7 +240,7 @@ ms.lasthandoff: 07/25/2017
 | ResourceProvider |텍스트 |데이터가 수집되는 리소스 공급자(Microsoft.RecoveryServices)를 나타냅니다. |
 | ResourceType |텍스트 |데이터가 수집되는 리소스의 종류(Vaults)를 나타냅니다. |
 
-### <a name="storage"></a>저장소
+### <a name="storage"></a>Storage
 이 표에서는 저장소 관련 필드에 대한 세부 정보를 제공합니다.
 
 | 필드 | 데이터 형식 | 설명 |
@@ -287,5 +286,4 @@ ms.lasthandoff: 07/25/2017
 | ResourceType |텍스트 |데이터가 수집되는 리소스의 종류(Vaults)를 나타냅니다. |
 
 ## <a name="next-steps"></a>다음 단계
-Azure Backup 보고서를 만들기 위한 데이터 모델을 검토한 후에는 Log Analytics 및 OMS에서 [대시보드를 만들](../log-analytics/log-analytics-dashboards.md) 수 있습니다.
-
+Azure Backup 보고서를 만들기 위한 데이터 모델을 검토한 후에는 Log Analytics에서 [대시보드를 만들](../log-analytics/log-analytics-dashboards.md) 수 있습니다.

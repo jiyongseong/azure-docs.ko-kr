@@ -1,10 +1,10 @@
 ---
-title: "자습서: Azure Active Directory와 Zoho 통합 | Microsoft Docs"
-description: "Azure Active Directory와 Zoho 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Azure Active Directory와 Zoho 통합 | Microsoft Docs'
+description: Azure Active Directory와 Zoho 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.reviewer: joflore
 ms.assetid: 9874e1f3-ade5-42e7-a700-e08b3731236a
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/24/2017
 ms.author: jeedes
+ms.openlocfilehash: d332dd65d660106a9f296ea57f89379f07ced027
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
-ms.openlocfilehash: f0688cb75584ada805b944d2ef5409d66ab37339
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-zoho"></a>자습서: Zoho와 Azure Active Directory 통합
 
@@ -31,7 +30,7 @@ Zoho를 Azure AD와 통합하면 다음과 같은 이점이 제공됩니다.
 - 사용자가 해당 Azure AD 계정으로 Zoho에 자동으로 로그온(Single Sign-On)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +58,7 @@ Zoho의 Azure AD 통합을 구성하려면 갤러리의 Zoho를 관리되는 Saa
 
 **갤러리에서 Zoho를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -114,7 +113,7 @@ Zoho에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구
     > [!NOTE] 
     > 이 값은 실제 값이 아닙니다. 이 값을 실제 로그온 URL로 업데이트합니다. 이 값을 얻으려면 [Zoho 클라이언트 지원 팀](https://www.zoho.com/mail/contact.html)에 문의하세요. 
  
-4. **SAML 서명 인증서** 섹션에서 **인증서(Base64)**를 클릭한 후 컴퓨터에 인증서 파일을 저장합니다.
+4. **SAML 서명 인증서** 섹션에서 **인증서(Base64)** 를 클릭한 후 컴퓨터에 인증서 파일을 저장합니다.
 
     ![인증서 다운로드 링크](./media/active-directory-saas-zoho-mail-tutorial/tutorial_zoho_certificate.png) 
 
@@ -142,9 +141,9 @@ Zoho에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구
    
     a. Azure Portal에서 복사한 **SAML Single Sign-On 서비스 URL**을 **로그인 URL** 텍스트 상자에 붙여넣습니다.
    
-    b. Azure Portal에서 복사한 **로그아웃 URL**을 **Logout Page URL**(로그아웃 페이지 URL) 텍스트 상자에 붙여넣습니다.
+    나. Azure Portal에서 복사한 **로그아웃 URL**을 **Logout Page URL**(로그아웃 페이지 URL) 텍스트 상자에 붙여넣습니다.
    
-    c. Azure Portal에서 복사한 **암호 변경 URL**을 **암호 변경 URL** 텍스트 상자에 붙여넣습니다.
+    다. Azure Portal에서 복사한 **암호 변경 URL**을 **암호 변경 URL** 텍스트 상자에 붙여넣습니다.
        
     d. Azure Portal에서 다운로드한 Base-64로 인코딩된 인증서를 메모장에서 열고, 콘텐츠를 클립보드에 복사한 다음, **PublicKey** 텍스트 상자에 붙여넣습니다.
    
@@ -181,9 +180,9 @@ Zoho에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구
 
     a. **이름** 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
+    나. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
 
-    c. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
+    다. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -210,9 +209,9 @@ Azure AD 사용자가 Zoho mail에 로그인할 수 있도록 하려면 사용�
    
     a. **이름** 텍스트 상자에 사용자의 이름(예: **Britta**)을 입력합니다.
 
-    b. **성** 텍스트 상자에 사용자의 성(예: **Simon**)을 입력합니다.
+    나. **성** 텍스트 상자에 사용자의 성(예: **Simon**)을 입력합니다.
 
-    c. **전자 메일 ID** 텍스트 상자에 사용자의 전자 메일 ID(예: **brittasimon@contoso.com**)를 입력합니다.
+    다. **전자 메일 ID** 텍스트 상자에 사용자의 전자 메일 ID(예: **brittasimon@contoso.com**)를 입력합니다.
 
     d. **암호** 텍스트 상자에 사용자 암호를 입력합니다.
    
@@ -261,7 +260,7 @@ Azure AD 사용자가 Zoho mail에 로그인할 수 있도록 하려면 사용�
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -278,5 +277,4 @@ Azure AD 사용자가 Zoho mail에 로그인할 수 있도록 하려면 사용�
 [201]: ./media/active-directory-saas-zoho-mail-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-zoho-mail-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-zoho-mail-tutorial/tutorial_general_203.png
-
 

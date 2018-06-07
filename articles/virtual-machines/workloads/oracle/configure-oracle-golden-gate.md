@@ -15,14 +15,12 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 05/19/2017
 ms.author: rclaus
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 7948c99b7b60d77a927743c7869d74147634ddbf
-ms.openlocfilehash: a05711357d345267647c02e42336fd37c09e1bff
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
+ms.openlocfilehash: c99023d794dfb3b78b26ef721d89302e126f5cb1
+ms.sourcegitcommit: 8c3267c34fc46c681ea476fee87f5fb0bf858f9e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/09/2018
 ---
-
 # <a name="implement-oracle-golden-gate-on-an-azure-linux-vm"></a>Azure Linux VM에서 Oracle Golden Gate 구현 
 
 명령줄 또는 스크립트에서 Azure 리소스를 만들고 관리하는 데 Azure CLI가 사용됩니다. 이 가이드에서는 Azure CLI를 사용하여 Azure Marketplace 갤러리 이미지에서 Oracle 12c 데이터베이스를 배포하는 방법을 자세히 설명합니다. 
@@ -52,7 +50,7 @@ Unix 편집기 vi를 잘 알고 있고 x11(X Windows)을 기본적으로 이해�
 
 ### <a name="sign-in-to-azure"></a>Azure에 로그인 
 
-[az login](/cli/azure/#login) 명령을 사용하여 Azure 구독에 로그인합니다. 그런 다음 화면에 나타나는 지침에 따릅니다.
+[az login](/cli/azure/reference-index#az_login) 명령을 사용하여 Azure 구독에 로그인합니다. 그런 다음 화면에 나타나는 지침에 따릅니다.
 
 ```azurecli
 az login
@@ -60,7 +58,7 @@ az login
 
 ### <a name="create-a-resource-group"></a>리소스 그룹 만들기
 
-[az group create](/cli/azure/group#create) 명령을 사용하여 리소스 그룹을 만듭니다. Azure 리소스 그룹은 Azure 리소스가 배포되며 관리될 수 있는 논리적 컨테이너입니다. 
+[az group create](/cli/azure/group#az_group_create) 명령을 사용하여 리소스 그룹을 만듭니다. Azure 리소스 그룹은 Azure 리소스가 배포되며 관리될 수 있는 논리적 컨테이너입니다. 
 
 다음 예제는 `westus` 위치에 `myResourceGroup`이라는 리소스 그룹을 만듭니다.
 
@@ -80,9 +78,9 @@ az vm availability-set create \
     --platform-update-domain-count 2
 ```
 
-### <a name="create-a-virtual-machine"></a>가상 컴퓨터 만들기
+### <a name="create-a-virtual-machine"></a>가상 머신 만들기
 
-[az vm create](/cli/azure/vm#create) 명령을 사용하여 VM을 만듭니다. 
+[az vm create](/cli/azure/vm#az_vm_create) 명령을 사용하여 VM을 만듭니다. 
 
 다음 예제에서는 `myVM1` 및 `myVM2`라고 하는 VM 두 개를 만듭니다. 기본 키 위치에 SSH 키가 없는 경우 이 키를 만듭니다. 특정 키 집합을 사용하려면 `--ssh-key-value` 옵션을 사용합니다.
 
@@ -172,7 +170,7 @@ az network nsg rule create --resource-group myResourceGroup\
 
 ### <a name="connect-to-the-virtual-machine"></a>가상 컴퓨터에 연결
 
-다음 명령을 사용하여 가상 컴퓨터와의 SSH 세션을 만듭니다. 해당 IP 주소를 가상 컴퓨터의 `publicIpAddress`로 바꿉니다.
+다음 명령을 사용하여 가상 머신과의 SSH 세션을 만듭니다. 해당 IP 주소를 가상 머신의 `publicIpAddress`로 바꿉니다.
 
 ```bash 
 ssh <publicIpAddress>
@@ -245,7 +243,7 @@ ORACLE_SID 및 ORACLE_HOME 변수를 설정합니다.
 
 ```bash
 $ ORACLE_HOME=/u01/app/oracle/product/12.1.0/dbhome_1; export ORACLE_HOME
-$ ORACLE_SID=gg1; export ORACLE_SID
+$ ORACLE_SID=cdb1; export ORACLE_SID
 $ LD_LIBRARY_PATH=ORACLE_HOME/lib; export LD_LIBRARY_PATH
 ```
 
@@ -255,7 +253,7 @@ $ LD_LIBRARY_PATH=ORACLE_HOME/lib; export LD_LIBRARY_PATH
 # add oracle home
 export ORACLE_HOME=/u01/app/oracle/product/12.1.0/dbhome_1
 # add oracle sid
-export ORACLE_SID=gg1
+export ORACLE_SID=cdb1
 # add Oracle library path
 export LD_LIBRARY_PATH=$ORACLE_HOME/lib
 ```
@@ -797,7 +795,7 @@ myVM2에서 상태 및 기록을 보려면 다음 명령을 실행합니다.
 이렇게 하면 Oracle linux에서 Golden Gate의 설치 및 구성이 완료됩니다.
 
 
-## <a name="delete-the-virtual-machine"></a>가상 컴퓨터 삭제
+## <a name="delete-the-virtual-machine"></a>가상 머신 삭제
 
 더 이상 필요하지 않은 경우 다음 명령을 사용하여 리소스 그룹, VM 및 모든 관련된 리소스를 제거할 수 있습니다.
 
@@ -807,7 +805,6 @@ az group delete --name myResourceGroup
 
 ## <a name="next-steps"></a>다음 단계
 
-[고가용성 가상 컴퓨터 만들기 자습서](../../linux/create-cli-complete.md)
+[고가용성 가상 머신 만들기 자습서](../../linux/create-cli-complete.md)
 
 [VM 배포 CLI 샘플 탐색](../../linux/cli-samples.md)
-

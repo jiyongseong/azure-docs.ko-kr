@@ -1,10 +1,10 @@
 ---
-title: "자습서: Bonusly와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory 및 Bonusly 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Bonusly와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory 및 Bonusly 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.reviewer: joflore
 ms.assetid: 29fea32a-fa20-47b2-9e24-26feb47b0ae6
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/19/2017
 ms.author: jeedes
+ms.openlocfilehash: 8133ec95bf0cbf6a9ce4ca1ad224d03ac593c940
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
-ms.openlocfilehash: 29a88b2efdb9f0f33f7933bc654a5a0fdf589c5a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-bonusly"></a>자습서: Bonusly와 Azure Active Directory 통합
 
@@ -31,7 +30,7 @@ Bonusly를 Azure AD와 통합하면 다음과 같은 이점이 제공됩니다.
 - 사용자가 해당 Azure AD 계정으로 Bonusly SSO(Single Sign-On)에 자동으로 로그온되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +58,7 @@ Bonusly의 Azure AD 통합을 구성하려면 갤러리의 Bonusly를 관리되�
 
 **갤러리에서 Bonusly를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -98,7 +97,7 @@ Bonusly에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 
 
 1. Azure Portal의 **Bonusly** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single Sign-On** 대화 상자에서 **모드**를 **SAML 기반 로그온**으로 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
@@ -121,7 +120,7 @@ Bonusly에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 
 
     ![Single Sign-On 구성 저장 단추](./media/active-directory-saas-bonus-tutorial/tutorial_general_400.png)
 
-6. **Bonusly 구성** 섹션에서 **Bonusly 구성**을 클릭하여 **로그온 구성** 창을 엽니다. **빠른 참조 섹션**에서 **SAML 엔터티 ID 및 SAML Single Sign-On 서비스 URL**을 복사합니다.
+6. **Bonusly 구성** 섹션에서 **Bonusly 구성**을 클릭하여 **로그온 구성** 창을 엽니다. **빠른 참조** 섹션에서 **SAML 엔터티 ID 및 SAML Single Sign-On 서비스 URL**을 복사합니다.
 
     ![Bonusly 구성](./media/active-directory-saas-bonus-tutorial/tutorial_bonusly_configure.png) 
 
@@ -138,13 +137,13 @@ Bonusly에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 
    
     a. Azure Portal에서 복사한 **SAML Single Sign-On 서비스 URL** 값을 **IdP SSO 대상 URL** 텍스트 상자에 붙여 넣습니다.
    
-    b. Azure Portal에서 복사한 **SAML 엔터티 ID** 값을 **IdP 발급자** 텍스트 상자에 붙여 넣습니다. 
+    나. Azure Portal에서 복사한 **SAML 엔터티 ID** 값을 **IdP 발급자** 텍스트 상자에 붙여 넣습니다. 
 
-    c. Azure Portal에서 복사한 **SAML Single Sign-On 서비스 URL** 값을 **IdP 로그인 URL** 텍스트 상자에 붙여 넣습니다.
+    다. Azure Portal에서 복사한 **SAML Single Sign-On 서비스 URL** 값을 **IdP 로그인 URL** 텍스트 상자에 붙여 넣습니다.
 
     d. Azure Portal에서 복사한 **지문** 값을 **인증서 지문** 텍스트 상자에 붙여 넣습니다.
    
-11. **Save**를 클릭합니다.
+11. **저장**을 클릭합니다.
 
 > [!TIP]
 > 이제 앱을 설정하는 동안 [Azure Portal](https://portal.azure.com) 내에서 이러한 지침의 간결한 버전을 읽을 수 있습니다.  **Active Directory > 엔터프라이즈 응용 프로그램** 섹션에서 이 앱을 추가한 후에는 **Single Sign-On** 탭을 클릭하고 맨 아래에 있는 **구성** 섹션을 통해 포함된 설명서에 액세스하면 됩니다. 포함된 설명서 기능에 대한 자세한 내용은 [Azure AD 포함된 설명서]( https://go.microsoft.com/fwlink/?linkid=845985)에서 확인할 수 있습니다.
@@ -175,9 +174,9 @@ Bonusly에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -215,11 +214,11 @@ Azure AD 사용자가 Bonusly에 로그인할 수 있도록 하려면 Bonusly로
 
     a. **이름** 텍스트 상자에 사용자의 이름(예: **Britta**)을 입력합니다.
 
-    b. **성** 텍스트 상자에 사용자의 성(예: **Simon**)을 입력합니다.
+    나. **성** 텍스트 상자에 사용자의 성(예: **Simon**)을 입력합니다.
  
-    c. **메일** 텍스트 상자에 **brittasimon@contoso.com**과 같은 사용자의 메일 주소를 입력합니다.
+    다. **메일** 텍스트 상자에 **brittasimon@contoso.com**과 같은 사용자의 메일 주소를 입력합니다.
 
-    d. **Save**를 클릭합니다.
+    d. **저장**을 클릭합니다.
    
      >[!NOTE]
      >Azure AD 계정 보유자는 활성화되기 전에 계정을 확인하기 위한 링크를 포함하는 전자 메일을 받습니다.
@@ -264,7 +263,7 @@ Azure AD 사용자가 Bonusly에 로그인할 수 있도록 하려면 Bonusly로
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -281,5 +280,4 @@ Azure AD 사용자가 Bonusly에 로그인할 수 있도록 하려면 Bonusly로
 [201]: ./media/active-directory-saas-bonus-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-bonus-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-bonus-tutorial/tutorial_general_203.png
-
 

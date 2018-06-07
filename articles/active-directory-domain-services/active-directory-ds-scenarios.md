@@ -4,7 +4,7 @@ description: "Azure AD 도메인 서비스용 배포 시나리오"
 services: active-directory-ds
 documentationcenter: 
 author: mahesh-unnikrishnan
-manager: stevenpo
+manager: mtillman
 editor: curtand
 ms.assetid: c5216ec9-4c4f-4b7e-830b-9d70cf176b20
 ms.service: active-directory-ds
@@ -12,14 +12,13 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 03/06/2017
+ms.date: 09/21/2017
 ms.author: maheshu
-translationtype: Human Translation
-ms.sourcegitcommit: dcda8b30adde930ab373a087d6955b900365c4cc
-ms.openlocfilehash: 359653f29adc538a4fe2f2143e8132bdd9a9d15b
-ms.lasthandoff: 12/29/2016
-
-
+ms.openlocfilehash: 11844fb8fabada9d863fe4adf0839ae6fa2ed101
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="deployment-scenarios-and-use-cases"></a>배포 시나리오 및 사용 사례
 이 섹션에서는 Azure AD(Active Directory) 도메인 서비스에서 이익이 되는 몇 가지 시나리오 및 사용 사례를 살펴보겠습니다.
@@ -38,7 +37,7 @@ Azure Active Directory Domain Services를 사용하여 효율적인 방식으로
 이 배포 시나리오에 대한 다음 중요 사항을 고려하십시오.
 
 * Azure AD 도메인 서비스에서 제공하는 관리되는 도메인은 단일 플랫 OU(조직 구성 단위) 구조를 기본으로 제공합니다. 모든 도메인에 가입된 컴퓨터는 단일 플랫 OU에 상주합니다. 그러나 사용자 지정 OU를 만들도록 선택할 수 있습니다.
-* Azure AD 도메인 서비스는 각 사용자 및 컴퓨터 컨테이너에 기본 제공 GPO 형태로 단순한 그룹 정책을 지원합니다. OU/부서로 GP를 대상으로 하거나 WMI 필터링을 수행하고 사용자 지정 GPO를 만들 수 없습니다.
+* Azure AD 도메인 서비스는 각 사용자 및 컴퓨터 컨테이너에 기본 제공 GPO 형태로 단순한 그룹 정책을 지원합니다. 사용자 지정 GPO를 만들 수 있으며 사용자 지정 OU로 지정할 수 있습니다.
 * Azure AD 도메인 서비스는 기본 AD 컴퓨터 개체 스키마를 지원합니다. 컴퓨터 개체의 스키마를 확장할 수 없습니다.
 
 ## <a name="lift-and-shift-an-on-premises-application-that-uses-ldap-bind-authentication-to-azure-infrastructure-services"></a>LDAP 바인딩 인증을 사용하는 온-프레미스 응용 프로그램을 Azure 인프라 서비스에 들어올려서 옮기기
@@ -77,10 +76,13 @@ Contoso에는 웹 프런트 엔드, SQL server 및 백 엔드 FTP 서버를 포�
 * 응용 프로그램이 인증에 사용자 이름/암호를 사용합니다. Azure AD 도메인 서비스에서 인증서/스마트 카드 기반 인증을 지원하지 않습니다.
 * 사용자는 관리되는 도메인에 대해 직접 암호를 변경할 수 없습니다. 최종 사용자가 Azure AD의 셀프 서비스 암호 변경 메커니즘을 사용하거나 온-프레미스 디렉터리에 대해 암호를 바꿀 수 있습니다. 이러한 변경은 관리되는 도메인에서 자동으로 동기화되고 사용할 수 있습니다.
 
-## <a name="azure-remoteapp"></a>Azure RemoteApp
-Azure RemoteApp을 통해 Contoso의 관리자는 도메인에 가입된 컬렉션을 만들 수 있습니다. 이 기능을 통해 Azure RemoteApp에서 제공되는 원격 응용 프로그램을 도메인에 가입된 컴퓨터에서 실행하고 Windows 통합 인증을 사용하여 다른 리소스에 액세스할 수 있습니다. Contoso는 Azure AD 도메인 서비스를 사용하여 Azure RemoteApp 도메인에 가입된 컬렉션에서 사용하는 관리되는 도메인을 제공할 수 있습니다.
+## <a name="windows-server-remote-desktop-services-deployments-in-azure"></a>Azure에서 Windows Server 원격 데스크톱 서비스 배포
+Azure AD Domain Services를 사용하여 Azure에 배포된 원격 데스크톱 서버에 관리되는 AD 도메인 서비스를 제공할 수 있습니다.
 
-![Azure RemoteApp](./media/active-directory-domain-services-scenarios/azure-remoteapp.png)
+이 배포 시나리오에 대한 자세한 내용은 [RDS 배포와 Azure AD Domain Services를 통합](https://docs.microsoft.com/windows-server/remote/remote-desktop-services/rds-azure-adds)하는 방법을 참조하세요.
 
-이 배포 시나리오에 대한 자세한 내용은 원격 데스크톱 서비스 블로그 문서인 [Azure RemoteApp 및 Azure AD Domain Services로 워크로드 전환](http://blogs.msdn.com/b/rds/archive/2016/01/19/lift-and-shift-your-workloads-with-azure-remoteapp-and-azure-ad-domain-services.aspx)을 참조하세요.
 
+## <a name="domain-joined-hdinsight-clusters-preview"></a>도메인에 가입된 HDInsight 클러스터(미리 보기)
+Apache Ranger를 사용하여 Azure AD Domain Services 관리되는 도메인에 가입된 Azure HDInsight 클러스터를 설정할 수 있습니다. Apache Ranger를 통해 Hive 정책을 생성 및 적용하고, 사용자(예: 데이터 과학자)가 Excel, Tableau 등의 ODBC 기반 도구를 사용하여 Hive에 연결할 수 있도록 허용합니다. Microsoft는 조만간 HBase, Spark, Storm 등의 다른 워크로드를 도메인에 가입된 HDInsight에 추가하기 위해 준비 중입니다.
+
+이 배포 시나리오에 대한 자세한 내용은 [도메인에 가입된 HDInsight 클러스터를 구성](../hdinsight/domain-joined/apache-domain-joined-configure.md)하는 방법을 참조하세요.

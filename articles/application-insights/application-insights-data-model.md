@@ -11,13 +11,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: multiple
 ms.topic: article
 ms.date: 04/25/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 8f987d079b8658d591994ce678f4a09239270181
-ms.openlocfilehash: 587d73bc91aa10b79c1d1488f98f05b73801d8c8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/18/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: b14eea46e773a4b92ba20cd3121cd258f86307c9
+ms.sourcegitcommit: e462e5cca2424ce36423f9eff3a0cf250ac146ad
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/01/2017
 ---
 # <a name="application-insights-telemetry-data-model"></a>Application Insights 원격 분석 데이터 모델
 
@@ -31,7 +30,7 @@ Application Insights에서 수집한 데이터를 통해 다음과 같은 일반
 
 * [**요청**](application-insights-data-model-request-telemetry.md) - 앱에서 받은 요청을 기록하기 위해 생성됩니다. 예를 들어 Application Insights 웹 SDK는 웹앱에서 받은 각 HTTP 요청에 대한 요청 원격 분석 항목을 자동으로 생성합니다. 
 
-    **작업**은 요청을 처리하는 실행 스레드입니다. 또한 [코드를 작성](app-insights-api-custom-events-metrics.md#trackrequest)하여 정기적으로 데이터를 처리하는 웹 작업 또는 함수의 "절전 모드 해제"와 같은 다른 유형의 작업을 모니터링할 수 있습니다.  각 작업에는 ID가 있습니다. 이 ID를 사용하여 앱에서 요청을 처리하는 동안 생성된 모든 원격 분석을 그룹화(application-insights-correlation.md)할 수 있습니다. 각 작업은 성공하거나 실패하며 일정 기간 동안 지속됩니다.
+    **작업**은 요청을 처리하는 실행 스레드입니다. 또한 [코드를 작성](app-insights-api-custom-events-metrics.md#trackrequest)하여 정기적으로 데이터를 처리하는 웹 작업 또는 함수의 "절전 모드 해제"와 같은 다른 유형의 작업을 모니터링할 수 있습니다.  각 작업에는 ID가 있습니다. 이 ID를 사용하여 앱에서 요청을 처리하는 동안 생성된 모든 원격 분석을 [그룹화](application-insights-correlation.md)할 수 있습니다. 각 작업은 성공하거나 실패하며 일정 기간 동안 지속됩니다.
 * [**예외**](application-insights-data-model-exception-telemetry.md) - 일반적으로 작업이 실패하게 하는 예외를 나타냅니다.
 * [**종속성**](application-insights-data-model-dependency-telemetry.md) - REST API 또는 SQL과 같은 외부 서비스나 저장소에 대한 앱의 호출을 나타냅니다. ASP.NET에서 SQL에 대한 종속성 호출은 `System.Data`으로 정의됩니다. HTTP 끝점에 대한 호출은 `System.Net`으로 정의됩니다. 
 
@@ -57,4 +56,3 @@ Application Insights 데이터 모델은 응용 프로그램 원격 분석을 �
 - [원격 분석을 확장 및 필터링](app-insights-api-filtering-sampling.md)하는 방법을 알아봅니다.
 - [샘플링](app-insights-sampling.md)을 사용하여 데이터 모델을 기준으로 하는 원격 분석의 양을 최소화합니다.
 - Application Insights에서 지원되는 [플랫폼](app-insights-platforms.md)을 확인합니다.
-

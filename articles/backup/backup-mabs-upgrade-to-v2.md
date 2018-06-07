@@ -1,12 +1,12 @@
 ---
-title: "Azure Backup Server v2 설치 | Microsoft Docs"
-description: "Azure Backup Server v2에서는 VM, 파일 및 폴더, 워크로드 등을 보호하기 위한 향상된 백업 기능을 제공합니다. Azure Backup Server v2를 설치하거나 이 버전으로 업그레이드하는 방법을 알아봅니다."
+title: Azure Backup Server v2 설치 | Microsoft Docs
+description: Azure Backup Server v2에서는 VM, 파일 및 폴더, 워크로드 등을 보호하기 위한 향상된 백업 기능을 제공합니다. Azure Backup Server v2를 설치하거나 이 버전으로 업그레이드하는 방법을 알아봅니다.
 services: backup
-documentationcenter: 
+documentationcenter: ''
 author: markgalioto
 manager: carmonm
-editor: 
-ms.assetid: 
+editor: ''
+ms.assetid: ''
 ms.service: backup
 ms.workload: storage-backup-recovery
 ms.tgt_pltfrm: na
@@ -14,17 +14,15 @@ ms.devlang: na
 ms.topic: article
 ms.date: 05/15/2017
 ms.author: masaran;markgal
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a1ba750d2be1969bfcd4085a24b0469f72a357ad
-ms.openlocfilehash: bd7694374034faa5ef1df84397580d80e3f40e43
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
+ms.openlocfilehash: dd7b76d9e06bc82ffd75f12131c2c247da05cc91
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
-
 # <a name="install-azure-backup-server-v2"></a>Azure Backup Server v2 설치
 
-Azure Backup Server를 사용하여 VM(가상 컴퓨터), 워크로드, 파일 및 폴더 등을 보호할 수 있습니다. Azure Backup Server v2는 Azure Backup Server v1을 기반으로 빌드되고 v1에서 사용할 수 없는 새로운 기능을 제공합니다. v1 및 v2의 기능 비교에 대해서는 [Azure Backup Server 보호 매트릭스](backup-mabs-protection-matrix.md)를 참조하세요. 
+Azure Backup Server를 사용하여 VM(가상 머신), 워크로드, 파일 및 폴더 등을 보호할 수 있습니다. Azure Backup Server v2는 Azure Backup Server v1을 기반으로 빌드되고 v1에서 사용할 수 없는 새로운 기능을 제공합니다. v1 및 v2의 기능 비교에 대해서는 [Azure Backup Server 보호 매트릭스](backup-mabs-protection-matrix.md)를 참조하세요. 
 
 Backup Server v2의 추가 기능은 Backup Server v1의 업그레이드입니다. 하지만 Backup Server v1은 Backup Server v2를 설치하기 위한 필수 구성 요소가 아닙니다. Backup Server v1에서 Backup Server v2로 업그레이드하려면 Backup Server v2를 Backup Server 보호 서버에 설치합니다. 기존 Backup Server 설정은 그대로 유지됩니다.
 
@@ -38,7 +36,7 @@ Backup Server v2를 Windows Server 2012 R2 또는 Windows Server 2016에 설치�
 ## <a name="upgrade-backup-server-to-v2"></a>Backup Server를 v2로 업그레이드
 Backup Server v1에서 Backup Server v2로 업그레이드하려면 설치에 필수 업데이트가 있는지 확인합니다.
 
-- 보호된 서버에서 [보호 에이전트를 업데이트](backup-mabs-upgrade-to-v2.md#update-the-dpm-protection-agent)합니다.
+- 보호된 서버에서 [보호 에이전트를 업데이트](backup-mabs-upgrade-to-v2.md#update-the-data-protection-manager-protection-agent)합니다.
 - Windows Server 2012 R2를 Windows Server 2016으로 업그레이드합니다.
 - 모든 프로덕션 서버에서 Azure Backup Server 원격 관리자를 업그레이드합니다.
 - 백업이 프로덕션 서버를 다시 시작하지 않고 계속하도록 설정되어 있는지 확인합니다.
@@ -241,6 +239,39 @@ Backup Server에서는 업데이트에 System Center Data Protection Manager 보
 4. 네트워크에 연결되지 않은 클라이언트 컴퓨터의 경우 컴퓨터가 네트워크에 연결될 때까지 **에이전트 상태** 열에는 **업데이트 보류 중** 상태가 표시됩니다.
 
   클라이언트 컴퓨터가 네트워크에 연결된 후 클라이언트 컴퓨터에 대한 **에이전트 업데이트** 열에는 **업데이트 중** 상태가 표시됩니다.
+  
+### <a name="move-legacy-protection-groups-from-old-version-and-sync-the-new-version-with-azure"></a>이전 버전에서 레거시 보호 그룹 이동 및 새 버전과 Azure 동기화
+
+Azure Backup Server와 OS가 모두 업데이트되면 Modern Backup Storage를 사용하여 새 데이터 원본을 보호할 준비가 된 것입니다. 이미지 보호된 데이터 원본은 Azure Backup Server에 있는 것처럼 레거시 방법으로 계속 보호되지만, 완전 새로운 보호 기능은 Modern Backup Storage를 사용합니다.
+
+아래 단계는 보호의 레거시 모드에서 Modern Backup Storage로 데이터 원본을 마이그레이션하는 것입니다.
+
+• 새 볼륨을 DPM 저장소 풀에 추가하고 원하는 경우 친숙한 이름과 데이터 원본 태그를 할당합니다.
+• 레거시 모드의 각 데이터 원본의 경우 데이터 원본의 보호를 중지하고 “보호된 데이터를 보존”합니다.  이렇게 하면 마이그레이션 후 이전 복구 지점을 복구할 수 있게 됩니다.
+
+• 새 PG를 만들고 새 형식을 사용하여 저장할 수 있는 데이터 원본을 선택합니다.
+• DPM은 레거시 백업 저장소에서 Modern Backup Storage 볼륨으로 로컬에서 복제본 복사를 수행합니다.
+참고: 이 작업은 사후 복구 작업으로 간주됩니다. • 그런 다음 모든 새로운 동기화 및 복구 지점은 Modern Backup Storage에 저장됩니다.
+• 이전 복구 지점은 만료되면 사용할 수 없게 되며 결과적으로 디스크 공간은 늘어납니다.
+• 모든 기존 볼륨이 이전 저장소에서 삭제되면 디스크를 Azure Backup 및 시스템에서 제거할 수 있습니다.
+• Azure DPMDB를 백업합니다.
+
+파트 2:-중요 항목 > 새 서버는 원래 Azure Backup Server와 같은 이름으로 지정되어야 합니다. 이전 저장소 풀 및 DPMDB을 사용하여 복구 지점을 유지하려는 경우 새 Azure Backup Server의 이름을 변경할 수 없습니다. 복원에 필요하므로 DPMDB의 백업본을 가지고 있어야 합니다.
+
+1) 원래 Azure Backup Server를 종료하거나 끕니다.
+2) 활성 디렉터리에서 컴퓨터 계정을 다시 설정합니다.
+3) 새 컴퓨터에 Server 2016을 설치하고 원래 Azure Backup Server와 동일한 컴퓨터 이름으로 지정합니다.
+4) 도메인 조인
+5) Azure Backup Server V2 설치(DPM 저장소 풀 디스크를 이전 서버에서 이동 및 가져오기)
+6) 파트 2의 끝에서 가져온 DPMDB 복원
+7) 저장소를 원래 백업 서버에서 새 서버로 연결합니다.
+8) SQL에서 DPMDB 복원
+9) 새 서버의 관리 명령줄에서 Microsoft Azure Backup 설치 위치 및 bin 폴더로 cd
+
+경로 예: C:\windows\system32>cd "c:\Program Files\Microsoft Azure Backup\DPM\DPM\bin\
+Azure Backup, DPMSYNC -SYNC 실행
+
+10) DPMSYNC -SYNC 실행 이전 것을 옮기는 대신 DPM Storage 풀에 새 디스크를 추가했다면 DPMSYNC -Reallocatereplica 실행
 
 ## <a name="new-powershell-cmdlets-in-v2"></a>v2의 새로운 PowerShell cmdlet
 
@@ -255,5 +286,4 @@ Azure Backup Server v2를 설치하면 두 개의 새로운 cmdlet을 사용할 
 - [Backup Server를 사용하여 VMware 서버 백업](backup-azure-backup-server-vmware.md)
 - [Backup Server를 사용하여 SQL Server 백업](backup-azure-sql-mabs.md)
 - [Backup Server에서 Modern Backup Storage 사용](backup-mabs-add-storage.md)
-
 

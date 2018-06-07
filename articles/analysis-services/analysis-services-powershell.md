@@ -1,27 +1,19 @@
 ---
-title: "PowerShell을 사용하여 Azure Analysis Services 관리 | Microsoft Docs"
-description: "PowerShell 사용한 Azure Analysis Services 관리입니다."
-services: analysis-services
-documentationcenter: 
+title: PowerShell을 사용하여 Azure Analysis Services 관리 | Microsoft Docs
+description: PowerShell 사용한 Azure Analysis Services 관리입니다.
 author: minewiskan
-manager: erikre
-editor: 
-ms.assetid: 
+manager: kfile
 ms.service: analysis-services
-ms.workload: data-management
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
-ms.date: 07/19/2017
+ms.topic: reference
+ms.date: 04/12/2018
 ms.author: owend
+ms.reviewer: minewiskan
+ms.openlocfilehash: c7315835bca446c4cae592f4bdd58a733b203655
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 5d50ee78da27149278edbd9521ddae8fcfe42c3b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-
 # <a name="manage-azure-analysis-services-with-powershell"></a>PowerShell을 사용하여 Azure Analysis Services 관리
 
 이 문서에서는 Azure Analysis Services 서버 및 데이터베이스 관리 작업을 수행하는 데 사용되는 PowerShell cmdlet에 대해 설명합니다. 
@@ -31,19 +23,20 @@ ms.lasthandoff: 07/21/2017
 ## <a name="permissions"></a>권한
 대부분의 PowerShell 작업에는 관리하는 Analysis Services 서버에 대해 관리자 권한이 있어야 합니다. 예약된 PowerShell 작업은 무인 작업입니다. 스케줄러를 실행하는 계정에는 Analysis Services 서버에 대해 관리자 권한이 있어야 합니다. 
 
-AzureRm cmdlet을 사용하여 서버를 운영하려면 사용자의 계정 또는 스케줄러를 실행하는 계정이 [Azure 역할 기반 액세스 제어(RBAC)](../active-directory/role-based-access-control-what-is.md)의 리소스에 대한 소유자 역할에도 속해야 합니다. 
+AzureRm cmdlet을 사용하여 서버를 운영하려면 사용자의 계정 또는 스케줄러를 실행하는 계정이 [Azure 역할 기반 Access Control(RBAC)](../role-based-access-control/overview.md)의 리소스에 대한 소유자 역할에도 속해야 합니다. 
 
 ## <a name="server-operations"></a>서버 작업 
 Azure Analysis Services cmdlet은 [AzureRM.AnalysisServices](https://www.powershellgallery.com/packages/AzureRM.AnalysisServices) 구성 요소 모듈에 포함되어 있습니다. AzureRM cmdlet 모듈을 설치하려면 PowerShell 갤러리의 [Azure Resource Manager cmdlet](/powershell/azure/overview)을 참조하세요.
 
 |Cmdlet|설명| 
 |------------|-----------------| 
-|[Export-AzureAnalysisServicesInstance](/powershell/module/azurerm.analysisservices/export-azureanalysisservicesinstancelog)|로그를 파일에 내보냅니다.| 
+|[Add-AzureAnalysisServicesAccount](/powershell/module/azurerm.analysisservices/add-azureanalysisservicesaccount)|Azure Analysis Services 서버 cmdlet 요청에 사용할 인증된 계정을 추가합니다.| 
 |[Get-AzureRmAnalysisServicesServer](/powershell/module/azurerm.analysisservices/get-azurermanalysisservicesserver)|서버 인스턴스에 대한 세부 정보를 가져옵니다.|  
-|[New-AzureRmAnalysisServicesServer](/powershell/module/azurerm.analysisservices/new-azurermanalysisservicesserver)|서버 인스턴스를 만듭니다.|
+|[New-AzureRmAnalysisServicesServer](/powershell/module/azurerm.analysisservices/new-azurermanalysisservicesserver)|서버 인스턴스를 만듭니다.|   
 |[Remove-AzureRmAnalysisServicesServer](/powershell/module/azurerm.analysisservices/remove-azurermanalysisservicesserver)|서버 인스턴스를 제거합니다.|  
-|[Suspend-AzureRmAnalysisServicesServer](/powershell/module/azurerm.analysisservices/suspend-azurermanalysisservicesserver)|서버 인스턴스를 일시 중단합니다.| 
+|[Restart-AzureAnalysisServicesInstance](/powershell/module/azurerm.analysisservices/restart-azureanalysisservicesinstance)|현재 로그인된 환경에서 Add-AzureAnalysisServicesAccount 명령에 지정된 Analysis Services 서버 인스턴스를 다시 시작합니다.|  
 |[Resume-AzureRmAnalysisServicesServer](/powershell/module/azurerm.analysisservices/resume-azurermanalysisservicesserver)|서버 인스턴스를 다시 시작합니다.|  
+|[Suspend-AzureRmAnalysisServicesServer](/powershell/module/azurerm.analysisservices/suspend-azurermanalysisservicesserver)|서버 인스턴스를 일시 중단합니다.| 
 |[Set-AzureRmAnalysisServicesServer](/powershell/module/azurerm.analysisservices/set-azurermanalysisservicesserver)|서버 인스턴스를 수정합니다.|   
 |[Test-AzureRmAnalysisServicesServer](/powershell/module/azurerm.analysisservices/test-azurermanalysisservicesserver)|서버 인스턴스의 존재 여부를 테스트합니다.| 
 
@@ -73,4 +66,3 @@ SqlServer 모듈은 TMSL(테이블 형식 모델 스크립트 언어) 쿼리 또
 * [SSMS 다운로드](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms)   
 * [SqlServer module in PowerShell Gallery](https://www.powershellgallery.com/packages/SqlServer)(PowerShell 갤러리의 SqlServer 모듈)    
 * [Tabular Model Programming for Compatibility Level 1200 and higher](https://msdn.microsoft.com/library/mt712541.aspx)(호환성 수준 1200 이상에 대한 테이블 형식 모델 프로그래밍)
-

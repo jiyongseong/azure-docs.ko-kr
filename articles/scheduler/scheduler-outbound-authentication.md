@@ -14,13 +14,11 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 08/15/2016
 ms.author: deli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: dcda8b30adde930ab373a087d6955b900365c4cc
 ms.openlocfilehash: e345b2e22daae5b24c23645f7d2636f66df630ff
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="scheduler-outbound-authentication"></a>스케줄러 아웃바운드 인증
 인증을 요구하는 서비스를 호출하기 위해 스케줄러 작업이 필요할 수 있습니다. 이를 통해, 호출된 서비스가 스케줄러 작업이 리소스에 액세스 가능한지 여부를 결정할 수 있습니다. 이러한 서비스 중 일부에는 다른 Azure 서비스, Salesforce.com, Facebook 및 보안 사용자 지정 웹사이트가 포함됩니다.
@@ -393,5 +391,4 @@ Date: Wed, 16 Mar 2016 19:10:02 GMT
  [Azure 스케줄러 고가용성 및 안정성](scheduler-high-availability-reliability.md)
 
  [Azure 스케줄러 제한, 기본값 및 오류 코드](scheduler-limits-defaults-errors.md)
-
 

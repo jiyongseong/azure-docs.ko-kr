@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/05/2017
 ms.author: adegeo
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 7b1b50f71158e62da6b8ceb741a5b8cf9795e3a4
-ms.openlocfilehash: cbe7da8670693a6bbc895ce06f000b6a7d6f0ae1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
+ms.openlocfilehash: 1c1b3aa86dc8211de0c07c9fb68da5685c86f551
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="how-to-configure-and-run-startup-tasks-for-a-cloud-service"></a>클라우드 서비스에 대한 시작 작업 구성 및 실행 방법
 시작 작업을 사용하여 역할이 시작되기 전에 작업을 수행할 수 있습니다. 수행하려는 작업은 구성 요소 설치, COM 구성 요소 등록, 레지스트리 키 설정 또는 장기 실행 프로세스를 시작을 포함합니다.
@@ -168,4 +167,3 @@ RoleEnvironment 클래스의 멤버를 기반으로 한 환경 변수는 **변�
 [값]: https://msdn.microsoft.com/library/azure/gg557552.aspx#Variable
 [RoleInstanceValue]: https://msdn.microsoft.com/library/azure/gg557552.aspx#RoleInstanceValue
 [RoleEnvironment]: https://msdn.microsoft.com/library/azure/microsoft.windowsazure.serviceruntime.roleenvironment.aspx
-

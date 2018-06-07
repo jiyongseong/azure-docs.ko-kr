@@ -1,149 +1,105 @@
 ---
-title: "Azure Active Directory 연결 응용 프로그램의 장치 기반 조건부 액세스 정책 설정 | Microsoft Docs"
-description: "Azure AD 연결 응용 프로그램에 대한 장치 기반 조건부 액세스를 설정합니다."
+title: Azure Active Directory 장치 기반 조건부 액세스 정책 구성 | Microsoft Docs
+description: Azure Active Directory 장치 기반 조건부 액세스 정책을 구성하는 방법을 알아봅니다.
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: MarkusVi
-manager: femila
-editor: 
+manager: mtillman
+editor: ''
 ms.assetid: a27862a6-d513-43ba-97c1-1c0d400bf243
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 08/02/2017
+ms.date: 05/08/2018
 ms.author: markvi
 ms.reviewer: jairoc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 1e7e764bdb1e883c28c137292de6a3ef8873e473
-ms.openlocfilehash: e4b8622fc6d06be480a2de057070155b12746133
-ms.contentlocale: ko-kr
-ms.lasthandoff: 12/29/2016
-
+ms.openlocfilehash: 07957d5ec843c414813d69b7084915bcd70a5a61
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
+ms.locfileid: "33930860"
 ---
-# <a name="set-device-based-conditional-access-policy-for-azure-active-directory-connected-applications"></a>Azure Active Directory 연결 응용 프로그램의 장치 기반 조건부 액세스 정책 설정
-Azure AD(Azure Active Directory) 장치 기반 조건부 액세스를 사용하면 다음으로부터 조직의 리소스를 보호할 수 있습니다.
+# <a name="configure-azure-active-directory-device-based-conditional-access-policies"></a>Azure Active Directory 장치 기반 조건부 액세스 정책 구성
 
-* 알 수 없거나 관리되지 않는 장치에서 시도하는 액세스
-* 조직의 보안 정책을 준수하지 않는 장치
+[Azure AD(Azure Active Directory) 조건부 액세스](active-directory-conditional-access-azure-portal.md)를 사용하여 권한 있는 사용자가 리소스에 액세스하는 방법을 제어할 수 있습니다. 예를 들어 특정 리소스에 대한 액세스를 관리되는 장치로 제한할 수 있습니다. 관리되는 장치를 요구하는 조건부 액세스 정책을 장치 기반 조건부 액세스 정책이라고도 합니다.
 
-조건부 액세스에 대한 개요는 [Azure Active Directory 조건부 액세스](active-directory-conditional-access.md)를 참조하세요.
+이 항목에서는 Azure AD 연결 응용 프로그램에 대한 장치 기반 조건부 액세스를 구성할 수 있는 방법을 설명합니다. 
 
-장치 기반 조건부 액세스 정책을 설정하여 보호할 수 있는 응용 프로그램은 다음과 같습니다.
 
-* Office 365 SharePoint Online(조직의 사이트와 문서 보호)
-* Office 365 Exchange Online(조직의 전자 메일 보호)
-* Azure AD 인증에 연결되는 SaaS(Software as a Service)
-* Azure AD 응용 프로그램 프록시 서비스를 통해 게시되는 온-프레미스 응용 프로그램
+## <a name="before-you-begin"></a>시작하기 전에
 
-Azure Portal에서 장치 기반 조건부 액세스 정책을 설정하려면 디렉터리의 특정 응용 프로그램으로 이동합니다.
+장치 기반 조건부 액세스는 **Azure AD 조건부 액세스**와 **Azure AD 장치 관리**를 함께 연결합니다. 이러한 내용에 익숙하지 않은 경우 먼저 다음 항목을 읽어보세요.
 
-  ![Azure Portal 디렉터리의 응용 프로그램 목록](./media/active-directory-conditional-access-policy-connected-applications/01.png "응용프로그램")
+- **[Azure Active Directory의 조건부 액세스](active-directory-conditional-access-azure-portal.md)** - 이 항목에서는 조건부 액세스 및 관련 용어에 대한 개념적 개요를 제공합니다.
 
-응용 프로그램을 선택한 다음 **구성** 탭을 클릭하여 조건부 액세스 정책을 설정합니다.  
+- **[Azure Active Directory의 장치 관리 소개](device-management-introduction.md)**  - 이 항목에서는 Azure AD에 장치를 연결할 때 사용할 수 있는 다양한 옵션에 대해 간략히 설명합니다. 
 
-  ![응용 프로그램 구성](./media/active-directory-conditional-access-policy-connected-applications/02.png "장치 기반 액세스 규칙")
 
-장치 기반 조건부 액세스 정책을 설정하려면 **장치 기반 액세스 규칙** 섹션의 **액세스 규칙 사용**에서 **설정**을 선택합니다.
 
-장치 기반 조건부 액세스 정책의 세 가지 구성 요소는 다음과 같습니다.
+## <a name="managed-devices"></a>관리되는 장치  
 
-* **적용 대상** - 정책이 적용되는 사용자의 범위입니다.
-* **장치 규칙** - 응용 프로그램에 액세스하기 전에 장치에서 충족해야 하는 조건입니다.
-* **응용 프로그램 적용** - 정책이 적용되는 클라이언트 응용 프로그램(네이티브 대 브라우저)입니다.
+모바일 우선, 클라우드 우선 세계에서 Azure Active Directory는 어디에서나 장치, 앱 및 서비스에 대한 Single Sign-On을 가능하게 합니다. 작업 환경의 특정 리소스의 경우, 적절한 사용자에게 액세스 권한을 부여하는 것만으로 충분하지 않을 수 있습니다. 적절한 사용자 외에도, 관리되는 장치를 사용하여 액세스 시도를 수행할 수 있도록 해야 할 수 있습니다.
+
+관리되는 장치는 보안 및 규정 준수 표준을 충족하는 장치입니다. 간단히 말해서 관리되는 장치는 *일종*의 조직 제어 하에 있는 장치입니다. Azure AD에서 관리되는 장치의 필수 조건은 Azure AD에 등록된 것입니다. 장치를 등록하면 장치 개체 형태로 장치의 ID가 만들어집니다. 이 개체는 Azure에서 장치에 대한 상태 정보를 추적하는 데 사용됩니다. Azure AD 관리자는 이미 이 개체를 사용하여 장치의 상태를 토글(설정/해제)할 수 있습니다.
   
-  ![장치 기반 액세스 정책의 세 가지 구성 요소](./media/active-directory-conditional-access-policy-connected-applications/03.png "장치 기반 액세스 규칙")
+![장치 기반 조건](./media/active-directory-conditional-access-policy-connected-applications/32.png)
 
-## <a name="select-the-users-the-policy-applies-to"></a>정책이 적용되는 사용자 선택
-**적용 대상** 섹션에서 이 정책이 적용되는 사용자 범위를 선택할 수 있습니다.
+Azure AD에 등록된 장치를 가져오는 데는 세 가지 옵션이 있습니다.
 
-사용자에 대한 액세스 정책 범위를 만드는 경우 다음 두 가지 옵션이 제공됩니다.
+- **[Azure AD 등록 장치](device-management-introduction.md#azure-ad-registered-devices)**  - Azure AD에 등록된 개인 장치를 가져옵니다.
 
-* **모든 사용자** - 응용 프로그램에 액세스하는 모든 사용자에게 정책을 적용합니다.
-* **그룹** - 특정 그룹에 속한 사용자에 대해서만 정책을 적용하도록 제한합니다.
+- **[Azure AD 조인 장치](device-management-introduction.md#azure-ad-joined-devices)**  - 등록된 Azure AD에 등록된 온-프레미스 AD에 조인되지 않은 조직의 Windows 10 장치를 가져옵니다. 
 
-![모든 사용자 또는 그룹에 정책 적용](./media/active-directory-conditional-access-policy-connected-applications/11.png "적용 대상")
+- **[Azure AD 조인 장치](device-management-introduction.md#hybrid-azure-ad-joined-devices)**  - Azure AD에 등록된 온-프레미스 AD에 조인된 Windows 10 장치를 가져옵니다.
 
- 정책에서 사용자를 제외하려면 **제외** 확인란을 선택합니다. 이는 특정 사용자가 일시적으로 응용 프로그램에 액세스할 수 있도록 권한을 부여해야 하는 경우에 유용합니다. 예를 들어 일부 사용자가 조건부 액세스에 준비되지 않은 장치를 사용하는 경우 이 옵션을 선택합니다. 이러한 장치로는 아직 등록되지 않았거나 조건을 준수하지 않는 장치일 수 있습니다.
+관리되는 장치가 되려면, 등록된 장치는 하이브리드 Azure AD 조인 장치 또는 준수 상태로 표시된 장치가 될 수 있습니다.  
 
-## <a name="select-the-conditions-that-devices-must-meet"></a>장치에서 준수해야 하는 조건 선택
-**장치 규칙**을 사용하여 장치에서 응용 프로그램에 액세스할 수 있도록 허용하는 조건을 설정합니다.
+![장치 기반 조건](./media/active-directory-conditional-access-policy-connected-applications/47.png)
 
-이러한 장치 종류에 대한 장치 기반 조건부 액세스를 설정할 수 있는 장치 유형은 다음과 같습니다.
 
-* Windows 10 1주년 업데이트, Windows 8.1 및 Windows 7
-* Windows Server 2016, Windows Server 2012 R2, Windows Server 2012 및 Windows Server 2008 R2
-* iOS 장치(iPad, iPhone)
-* Android 장치
+ 
+## <a name="require-hybrid-azure-ad-joined-devices"></a>하이브리드 Azure AD 조인된 장치 필요
 
-Mac은 곧 지원될 예정입니다.
+조건부 액세스 정책에서 **하이브리드 Azure AD 조인 장치 필요**를 선택하면 관리되는 장치를 사용해서만 선택한 클라우드 앱에 액세스할 수 있도록 명시할 수 있습니다. 
 
-  ![장치에 정책 적용](./media/active-directory-conditional-access-policy-connected-applications/04.png "응용 프로그램")
+![장치 기반 조건](./media/active-directory-conditional-access-policy-connected-applications/10.png)
 
-> [!NOTE]
-> 도메인 가입과 Azure AD 가입의 차이점에 대한 자세한 내용은 [작업 공간에서 Windows 10 장치 사용](active-directory-azureadjoin-windows10-devices.md)을 참조하세요.
-> 
-> 
+이 설정은 온-프레미스 Azure AD에 조인된 Windows 10 장치에만 적용됩니다. 등록된 Windows 10 장치를 가져오기 위한 [자동화된 프로세스](device-management-hybrid-azuread-joined-devices-setup.md)인 하이브리드 Azure AD 조인을 사용하여 이러한 장치를 Azure AD에만 등록할 수 있습니다. 
 
-장치 규칙에 대한 두 가지 옵션이 있습니다.
+![장치 기반 조건](./media/active-directory-conditional-access-policy-connected-applications/45.png)
 
-* **모든 장치가 준수해야 합니다.** - 응용 프로그램에 액세스하는 모든 장치 플랫폼에서 정책을 준수해야 합니다. 장치 기반 조건부 액세스를 지원하지 않는 플랫폼에서 실행되는 장치의 액세스는 거부됩니다.
-* **선택한 장치만 준수해야 합니다.** - 특정 장치 플랫폼에서만 정책을 준수해야 합니다. 선택하지 않은 다른 플랫폼 또는 응용 프로그램에 액세스할 수 있는 다른 플랫폼의 액세스는 허용됩니다.
-  
-  ![장치 규칙의 범위 설정](./media/active-directory-conditional-access-policy-connected-applications/05.png "응용 프로그램")
+하이브리드 Azure AD 조인 장치를 관리되는 장치로 어떻게 만드나요?  온-프레미스 AD에 조인된 장치의 경우, 이러한 장치에 대한 제어는 장치를 관리하는 **SCCM(System Center Configuration Manager)** 또는 **GP(그룹 정책)** 과 같은 관리 솔루션을 사용하여 시행되는 것으로 가정합니다. Azure AD가 이러한 방법 중 어떤 것을 장치에 적용할지 결정할 방법이 없기 때문에 하이브리드 Azure AD 조인 장치를 요구하는 것은 관리되는 장치를 필요로 하는 비교적 약한 메커니즘입니다. 온-프레미스 도메인에 가입된 장치에 적용되는 방법이 관리되는 장치(이러한 장치가 하이브리드 Azure AD 조인 장치이기도 하다면)를 구성할 만큼 충분히 강력한지 여부를 판단하는 것은 관리자의 몫입니다.
 
-Intune 또는 Azure AD와 통합된 타사 모바일 장치 관리 시스템의 디렉터리에서 **준수**로 표시된 Azure AD 가입 장치는 해당 정책을 준수합니다.
 
-도메인 가입 장치에서 해당 정책을 준수하는 경우는 다음과 같습니다.
+## <a name="require-device-to-be-marked-as-compliant"></a>장치를 준수 상태로 표시해야 함
 
-* Azure AD에 등록된 경우 - 대부분의 조직에서 도메인 가입 장치는 신뢰할 수 있는 장치로 간주합니다.
-* System Center Configuration Manager의 Azure AD에서 **준수**로 표시됩니다.
-  
-  ![정책을 준수하는 도메인 가입 장치](./media/active-directory-conditional-access-policy-connected-applications/06.png "장치 규칙")
+*장치를 준수 상태로 표시해야 하는* 옵션은 관리되는 장치를 요청하는 가장 강력한 형태입니다.
 
-Intune 또는 Azure AD와 통합된 타사 모바일 장치 관리 시스템의 디렉터리에서 **준수**로 표시된 Windows 개인 장치는 해당 정책을 준수합니다.
+![장치 기반 조건](./media/active-directory-conditional-access-policy-connected-applications/11.png)
 
-Intune의 디렉터리에서 **준수**로 표시된 비 Windows 장치는 해당 정책을 준수합니다.
+이 옵션을 사용하려면 장치를 Azure AD에 등록해야 하며 다음과 같이 준수 상태로도 표시되어야 합니다.
+         
+- Intune 
+- Azure AD 통합을 통해 Windows 10 장치를 관리하는 타사 모바일 장치 관리 시스템 
+ 
+![장치 기반 조건](./media/active-directory-conditional-access-policy-connected-applications/46.png)
 
-> [!NOTE]
-> 다른 관리 시스템에서 장치 준수를 위해 Azure AD를 설정하는 방법에 대한 자세한 내용은 [Azure Active Directory 조건부 액세스](active-directory-conditional-access.md)를 참조하세요.
-> 
-> 
 
-장치 기반 액세스 정책에 대해 하나 이상의 장치 플랫폼을 선택할 수 있습니다. 여기에는 Android, iOS, Windows Mobile(Windows 8.1 휴대폰 및 태블릿) 및 Windows(모든 Windows 10 장치를 포함하여 다른 모든 Windows 장치)가 포함됩니다.
-선택한 플랫폼에 대해서만 정책 평가가 수행됩니다. 액세스를 시도하는 장치에서 선택한 플랫폼 중 하나를 실행하지 않더라도 사용자에게 액세스 권한이 있으면 장치에서 해당 응용 프로그램에 액세스할 수 있습니다. 어떤 장치 정책도 평가되지 않습니다.
 
-![장치 규칙을 위한 플랫폼 선택](./media/active-directory-conditional-access-policy-connected-applications/07.png "장치 규칙")
+준수 상태로 표시된 장치의 경우 다음과 같이 가정할 수 있습니다. 
 
-## <a name="set-policy-evaluation-for-a-type-of-application"></a>응용 프로그램 유형별 정책 평가 설정
-**응용 프로그램 적용** 섹션에서 정책을 통해 사용자 또는 장치 액세스에 대해 평가할 응용 프로그램의 유형을 설정합니다.
+- 직원이 회사 데이터에 액세스하는 데 사용하는 모바일 장치가 관리됩니다.
+- 직원이 사용하는 모바일 앱이 관리됩니다.
+- 직원이 정보에 액세스하고 공유하는 방식을 제어함으로써 회사 정보가 보호됩니다.
+- 장치와 해당 앱은 회사 보안 요구 사항을 준수합니다.
 
-포함될 응용 프로그램 유형에 대한 두 가지 옵션은 다음과 같습니다.
 
-* 브라우저 및 네이티브 응용 프로그램용
-* 네이티브 응용 프로그램 전용
 
-![브라우저 또는 네이티브 응용 프로그램 선택](./media/active-directory-conditional-access-policy-connected-applications/08.png "응용 프로그램")
-
-응용 프로그램에 대한 액세스 정책을 적용하려면 **브라우저 및 네이티브 응용 프로그램용**을 선택합니다. 그런 후에 다음 응용 프로그램을 포함할 수 있습니다.
-
-* 브라우저(예: Windows 10의 Microsoft Edge 또는 iOS의 Safari)
-* 모든 플랫폼에서 ADAL(Active Directory Authentication Library)을 사용하는 응용 프로그램 또는 Windows 10에서 WAM(WebAccountManager) API를 사용하는 응용 프로그램
-
-> [!NOTE]
-> 장치 기반 인증 기관 보호 응용 프로그램에 액세스하는 사용자에 대한 브라우저 지원 및 기타 고려 사항은 [Azure Active Directory 조건부 액세스](active-directory-conditional-access.md)를 참조하세요.
-> 
-> 
-
-## <a name="help-protect-email-access-from-exchange-activesync-based-applications"></a>Exchange ActiveSync 기반 응용 프로그램의 전자 메일 액세스 보호
-Office 365 Exchange Online 응용 프로그램에서 Exchange ActiveSync를 사용하면 Exchange ActiveSync 기반 메일 응용 프로그램에 대한 전자 메일 액세스를 차단할 수 있습니다.
-
-![Exchange ActiveSync 준수 장치 옵션](./media/active-directory-conditional-access-policy-connected-applications/09.png "응용 프로그램")
-
-![전자 메일에 액세스하기 위한 준수 장치 필요](./media/active-directory-conditional-access-policy-connected-applications/10.png "응용 프로그램")
 
 ## <a name="next-steps"></a>다음 단계
-* [Azure Active Directory 조건부 액세스](active-directory-conditional-access.md)
 
+환경에서 장치 기반 조건부 액세스 정책을 구성하기 전에 [Azure Active Directory의 조건부 액세스 모범 사례](active-directory-conditional-access-best-practices.md)를 확인해야 합니다.
 

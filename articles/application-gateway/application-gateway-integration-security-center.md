@@ -1,29 +1,26 @@
 ---
-title: "Azure Security Center와의 Application Gateway 통합 | Microsoft Docs"
-description: "이 페이지에서는 Application Gateway가 Azure Security Center에 통합되는 방법에 대한 정보를 제공합니다."
+title: Azure Security Center와의 Application Gateway 통합 | Microsoft Docs
+description: 이 페이지에서는 Application Gateway가 Azure Security Center에 통합되는 방법에 대한 정보를 제공합니다.
 documentationcenter: na
 services: application-gateway
-author: georgewallace
-manager: timlt
-editor: 
+author: vhorne
+manager: jpconnock
+editor: ''
 ms.assetid: e5ea5cf9-3b41-4b85-a12c-e758bff7f3ec
 ms.service: application-gateway
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
-ms.custom: 
+ms.custom: ''
 ms.workload: infrastructure-services
 ms.date: 06/07/2017
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 09f24fa2b55d298cfbbf3de71334de579fbf2ecd
-ms.openlocfilehash: 737cdff3140be68cf9d6d396b470dd09c65c52f2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/08/2017
-
-
+ms.author: victorh
+ms.openlocfilehash: b3a4abf4d0f408cdb49020d831b50d943c3467dd
+ms.sourcegitcommit: c47ef7899572bf6441627f76eb4c4ac15e487aec
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/04/2018
 ---
-
 # <a name="overview-of-integration-between-application-gateway-and-azure-security-center"></a>Application Gateway와 Azure Security Center 간의 통합 개요
 
 Application Gateway와 Security Center에서 웹 응용 프로그램 리소스를 보호하는 방법에 대해 알아봅니다. Application Gateway WAF(웹 응용 프로그램 방화벽)는 [Security Center](../security-center/security-center-intro.md)와 통합되어 사용자 환경에서 보호되지 않는 웹 응용 프로그램에 대한 위협을 방지, 검색 및 대응할 수 있는 완벽한 보기를 제공합니다.
@@ -34,43 +31,43 @@ Application Gateway WAF는 악용 및 취약성으로부터 웹 응용 프로그
 
 ![Security Center와의 통합][1]
 
-웹 응용 프로그램 방화벽과 관련된 권장 사항을 클릭하면 권장 사항의 세부 정보를 보여 주는 새 블레이드가 열립니다.
+웹 응용 프로그램 방화벽과 관련된 권장 사항을 클릭하면 권장 사항의 세부 정보를 보여 주는 새 페이지가 열립니다.
 
 ## <a name="add-a-web-application-firewall-to-an-existing-resource"></a>기존 리소스에 웹 응용 프로그램 방화벽 추가
 
-**추가 서비스** > **보안 + ID** > **Security Center**로 차례로 이동하고, **Security Center - 개요** 블레이드에서 **응용 프로그램**을 클릭합니다. **Security Center - 응용 프로그램** 블레이드의 표에는 Security Center를 통해 구독에서 검색한 응용 프로그램 목록이 있습니다.
+**모든 서비스** > **보안 + ID** > **Security Center**로 차례로 이동하고, **Security Center - 개요**에서 **응용 프로그램**을 클릭합니다. **Security Center - 응용 프로그램**의 표에는 Security Center를 통해 구독에서 검색한 응용 프로그램 목록이 있습니다.
 
 ![웹 응용 프로그램][3]
 
-중요한 문제가 있는 웹 응용 프로그램을 클릭하면 **응용 프로그램 보안 상태** 블레이드가 표시됩니다. 아래 이미지에서는 웹 응용 프로그램 방화벽에서 보호되지 않는 웹 응용 프로그램을 보여 줍니다. 
+중요한 문제가 있는 웹 응용 프로그램을 클릭하면 **응용 프로그램 보안 상태** 페이지가 표시됩니다. 아래 이미지에서는 웹 응용 프로그램 방화벽에서 보호되지 않는 웹 응용 프로그램을 보여 줍니다. 
 
 ![보호되지 않는 웹 리소스][2]
 
-**권장 사항** 아래에서 **웹 응용 프로그램 방화벽 추가**를 클릭하여 **웹 응용 프로그램 방화벽 추가** 블레이드를 엽니다.
+**권장 사항** 아래에서 **웹 응용 프로그램 방화벽 추가**를 클릭하여 **웹 응용 프로그램 방화벽 추가** 페이지를 엽니다.
 
-기존 Application Gateway가 없거나 새 Application Gateway를 만들려면, **새 웹 응용 프로그램 방화벽 만들기** 블레이드에서 **새로 만들기**, **Microsoft - Application Gateway**를 차례로 클릭합니다. 이를 통해 응용 프로그램 게이트웨이를 단계적으로 만듭니다. 이 시점에서 웹 응용 프로그램을 보호되는 리소스로 추가하면 Security Center에서 이 리소스가 웹 응용 프로그램 방화벽으로 보호되고 있는지를 추적합니다. 이 경우 백 엔드 풀 멤버로는 추가하지 않습니다.
+기존 Application Gateway가 없거나 새 Application Gateway를 만들려면, **새 웹 응용 프로그램 방화벽 만들기**에서 **새로 만들기**, **Microsoft - Application Gateway**를 차례로 클릭합니다. 이를 통해 응용 프로그램 게이트웨이를 단계적으로 만듭니다. 이 시점에서 웹 응용 프로그램을 보호되는 리소스로 추가하면 Security Center에서 이 리소스가 웹 응용 프로그램 방화벽으로 보호되고 있는지를 추적합니다. 이 경우 백 엔드 풀 멤버로는 추가하지 않습니다.
 
 기존 응용 프로그램 게이트웨이가 있는 경우 **기존 솔루션 사용** 아래에서 선택할 수 있습니다.
 
-![웹 응용 프로그램 방화벽 추가 블레이드][4]
+![웹 응용 프로그램 방화벽 추가 페이지][4]
 
-Security Center를 통해 응용 프로그램 게이트웨이에 웹 응용 프로그램을 추가하더라도 해당 리소스가 백 엔드 풀 멤버로 추가되지 않습니다. 이렇게 하려면 응용 프로그램 게이트웨이 리소스에서 직접 수행해야 합니다.
+Security Center를 통해 응용 프로그램 게이트웨이에 웹 응용 프로그램을 추가하더라도 해당 리소스가 백 엔드 풀 멤버로 추가되지 않습니다. 이는 응용 프로그램 게이트웨이 리소스에서 직접 추가해야 합니다.
 
 ## <a name="add-a-resource-to-an-existing-web-application-firewall"></a>기존 웹 응용 프로그램 방화벽에 리소스 추가
 
-**추가 서비스** > **보안 + ID** > **Security Center**로 차례로 이동하고, **Security Center - 개요** 블레이드에서 **파트너 솔루션**을 클릭합니다. 기존 Security Center 인식 응용 프로그램 게이트웨이가 **파트너 솔루션** 블레이드에 표시됩니다.
+**모든 서비스** > **보안 + ID** > **Security Center**로 차례로 이동하고, **Security Center - 개요**에서 **파트너 솔루션**을 클릭합니다. 기존 Security Center 인식 응용 프로그램 게이트웨이가 **파트너 솔루션** 페이지에 표시됩니다.
 
 ![파트너 솔루션][7]
 
-**앱 연결**을 클릭하여 **링크 응용 프로그램 연결** 블레이드를 엽니다. 여기서는 기존 응용 프로그램을 선택할 수 있는 옵션이 제공됩니다. 보호할 응용 프로그램을 선택하고 **확인**을 클릭합니다. 이 경우 웹 응용 프로그램은 응용 프로그램 게이트웨이의 백 엔드 풀에 추가되지 않습니다. 이렇게 하면 Security Center에서 추적할 수 있도록 리소스를 보호된 리소스로 설정합니다. 리소스를 백 엔드 풀 멤버로 추가하려면 응용 프로그램 게이트웨이에서 수행해야 합니다. 즉 현재 블레이드에서 **솔루션 콘솔**을 클릭하여 웹 응용 프로그램을 백 엔드 풀에 추가할 수 있는 응용 프로그램 게이트웨이 리소스로 가져오면 됩니다.
+**앱 연결**을 클릭하여 **링크 응용 프로그램 연결** 페이지를 엽니다. 여기서는 기존 응용 프로그램을 선택할 수 있는 옵션이 제공됩니다. 보호할 응용 프로그램을 선택하고 **확인**을 클릭합니다. 이 경우 웹 응용 프로그램은 응용 프로그램 게이트웨이의 백 엔드 풀에 추가되지 않습니다. 이렇게 하면 Security Center에서 추적할 수 있도록 리소스를 보호된 리소스로 설정합니다. 리소스를 백 엔드 풀 멤버로 추가하려면 응용 프로그램 게이트웨이에서 수행해야 합니다. 즉 현재 페이지에서 **솔루션 콘솔**을 클릭하여 웹 응용 프로그램을 백 엔드 풀에 추가할 수 있는 응용 프로그램 게이트웨이 리소스로 가져오면 됩니다.
 
 ![파트너 솔루션 응용 프로그램][6]
 
 ## <a name="finalize-configuration"></a>구성 완료
 
-Security Center에서는 응용 프로그램 게이트웨이에 추가한 응용 프로그램을 보호된 리소스로 추적합니다.  이 리소스의 상태를 모니터링하고, 해당 리소스가 응용 프로그램 게이트웨이에서 보호되는지 확인합니다. 다음 단계는 가상 컴퓨터의 개인 IP, 공용 IP 또는 NIC를 응용 프로그램 게이트웨이의 백 엔드 풀에 추가하는 것입니다. **응용 프로그램 보호 마무리**에 대한 추가 권장 사항은 이 작업을 완료할 때까지 표시되며, 리소스를 추가하면 표시되지 않습니다.
+Security Center에서는 응용 프로그램 게이트웨이에 추가한 응용 프로그램을 보호된 리소스로 추적합니다.  이 리소스의 상태를 모니터링하고, 해당 리소스가 응용 프로그램 게이트웨이에서 보호되는지 확인합니다. 다음 단계는 가상 머신의 개인 IP, 공용 IP 또는 NIC를 응용 프로그램 게이트웨이의 백 엔드 풀에 추가하는 것입니다. **응용 프로그램 보호 마무리**에 대한 추가 권장 사항은 이 작업을 완료할 때까지 표시되며, 리소스를 추가하면 표시되지 않습니다.
 
-![웹 응용 프로그램 방화벽 추가 블레이드][5]
+![웹 응용 프로그램 방화벽 추가 페이지][5]
 
 ## <a name="security-alerts"></a>보안 경고
 
@@ -84,7 +81,7 @@ Security Center에서 **검색** > **보안 경고**로 차례로 이동합니�
 
 ## <a name="next-steps"></a>다음 단계
 
-기존 응용 프로그램 게이트웨이에서 웹 응용 프로그램 방화벽을 사용하도록 설정하는 방법을 알아보려면 [웹 응용 프로그램 방화벽이 있는 Azure Application Gateway 만들기 또는 업데이트](application-gateway-web-application-firewall-portal.md#add-web-application-firewall-to-an-existing-application-gateway)를 참조하세요.
+기존 응용 프로그램 게이트웨이에서 웹 응용 프로그램 방화벽을 사용하도록 설정하는 방법을 알아보려면 [웹 응용 프로그램 방화벽이 있는 Azure Application Gateway 만들기 또는 업데이트](application-gateway-web-application-firewall-portal.md)를 참조하세요.
 
 [1]: ./media/application-gateway-integration-security-center/figure1.png
 [2]: ./media/application-gateway-integration-security-center/figure2.png

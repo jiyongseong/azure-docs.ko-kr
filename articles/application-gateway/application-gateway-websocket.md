@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/08/2017
 ms.author: amsriva
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 09f24fa2b55d298cfbbf3de71334de579fbf2ecd
 ms.openlocfilehash: 75b06ddd02da231b7813c609c848c75e42116da5
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/08/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="overview-of-websocket-support-in-application-gateway"></a>Application Gateway의 WebSocket 지원 개요
 
@@ -124,5 +122,4 @@ WebSocket이 작동되려면 사용자의 백 엔드가 구성된 포트(대개 
 ## <a name="next-steps"></a>다음 단계
 
 WebSocket 지원에 대해 알아본 후에 [Application Gateway 만들기](application-gateway-create-gateway.md)로 이동하여 WebSocket 활성화 웹 응용 프로그램을 시작합니다.
-
 

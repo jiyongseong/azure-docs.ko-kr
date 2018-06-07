@@ -1,8 +1,8 @@
 ---
-title: "Azure Data Lake Store Spark 성능 조정 지침 | Microsoft Docs"
-description: "Azure Data Lake Store Spark 성능 조정 지침"
+title: Azure Data Lake Store Spark 성능 조정 지침 | Microsoft Docs
+description: Azure Data Lake Store Spark 성능 조정 지침
 services: data-lake-store
-documentationcenter: 
+documentationcenter: ''
 author: stewu
 manager: amitkul
 editor: stewu
@@ -10,15 +10,13 @@ ms.assetid: ebde7b9f-2e51-4d43-b7ab-566417221335
 ms.service: data-lake-store
 ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
 ms.date: 12/19/2016
 ms.author: stewu
-translationtype: Human Translation
-ms.sourcegitcommit: 29d4a361f98c63dab30155855d603a809eb804c8
-ms.openlocfilehash: 2109744fb7ffdfafb7a86bbea355e119718af099
-
-
+ms.openlocfilehash: a807bea13063d2a0b3c1c71ddb6c98aa2d2568d3
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="performance-tuning-guidance-for-spark-on-hdinsight-and-azure-data-lake-store"></a>HDInsight의 Spark 및 Azure Data Lake Store에 대한 성능 조정 지침
 
@@ -26,11 +24,11 @@ Spark에서 성능을 조정할 때 클러스터에서 실행될 앱 수를 고�
 
 ## <a name="prerequisites"></a>필수 조건
 
-* **Azure 구독**. [Azure 무료 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
+* **Azure 구독**. [Azure 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
 * **Azure 데이터 레이크 저장소 계정**. 만드는 방법에 대한 지침은 [Azure 데이터 레이크 저장소 시작](data-lake-store-get-started-portal.md)
 * **Azure HDInsight 클러스터** 입니다. [Data Lake Store가 있는 HDInsight 클러스터 만들기](data-lake-store-hdinsight-hadoop-use-portal.md)를 참조하세요. 클러스터에 대한 원격 데스크톱을 사용하도록 설정해야 합니다.
-* **Azure Data Lake Store에서 실행 중인 Spark 클러스터**.  자세한 내용은 [HDInsight Spark 클러스터를 사용하여 Data Lake Store의 데이터 분석](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-apache-spark-use-with-data-lake-store)을 참조하세요.
-* **ADLS에서 성능 조정 지침**.  일반적인 성능 개념은 [Data Lake Store 성능 조정 지침](https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-performance-tuning-guidance)을 참조하세요. 
+* **Azure Data Lake Store에서 실행 중인 Spark 클러스터**.  자세한 내용은 [HDInsight Spark 클러스터를 사용하여 Data Lake Store의 데이터 분석](https://docs.microsoft.com/azure/hdinsight/hdinsight-apache-spark-use-with-data-lake-store)을 참조하세요.
+* **ADLS에서 성능 조정 지침**.  일반적인 성능 개념은 [Data Lake Store 성능 조정 지침](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-performance-tuning-guidance)을 참조하세요. 
 
 ## <a name="parameters"></a>매개 변수
 
@@ -48,9 +46,9 @@ Spark 작업을 실행할 때 ADLS에서 성능을 향상시키기 위해 조정
 
 **Executor-cores** 실행기당 사용된 코어 양을 설정하며 이 값에 따라 실행기당 실행할 수 있는 병렬 스레드 수가 결정됩니다.  예를 들어 executor-cores = 2인 경우 각 실행기는 실행기에서 2개의 병렬 태스크를 실행할 수 있습니다.  필요한 executor-cores는 작업에 따라 달라집니다.  I/O가 많은 작업에는 태스크당 큰 메모리가 필요하지 않으므로 각 실행기에서 더 많은 병렬 태스크를 처리할 수 있습니다.
 
-기본적으로 HDInsight에서 Spark를 실행할 때 각 물리적 코어에 대해&2;개의 가상 YARN 코어가 정의됩니다.  이 값은 여러 스레드에서 동시성 및 컨텍스트 전환 횟수 간에 적절한 균형을 제공합니다.  
+기본적으로 HDInsight에서 Spark를 실행할 때 각 물리적 코어에 대해 2개의 가상 YARN 코어가 정의됩니다.  이 값은 여러 스레드에서 동시성 및 컨텍스트 전환 횟수 간에 적절한 균형을 제공합니다.  
 
-## <a name="guidance"></a>인도
+## <a name="guidance"></a>지침
 
 Data Lake Store의 데이터로 작업하는 Spark 분석 워크로드를 실행하는 동안 Data Lake Store의 성능을 극대화하려면 최신 HDInsight 버전을 사용하는 것이 좋습니다. 작업이 I/O 집약적인 경우 성능 개선을 위해 특정 매개 변수를 구성할 수 있습니다.  Azure Data Lake Store는 높은 처리량을 처리할 수 있는 확장성 높은 저장소 플랫폼입니다.  작업이 주로 읽기 또는 쓰기를 구성하는 경우 Azure Data Lake Store 간의 I/O에 대한 동시성이 증가하면 성능도 향상될 수 있습니다.
 
@@ -118,10 +116,4 @@ num-executors 수를 높게 설정한다고 성능이 반드시 향상되는 것
     num-executors = Min (memory constraint, CPU constraint)
     num-executors = Min (16, 16)
     num-executors = 16    
-
-
-
-
-<!--HONumber=Jan17_HO2-->
-
 

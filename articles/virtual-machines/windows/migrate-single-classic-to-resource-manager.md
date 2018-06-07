@@ -1,13 +1,13 @@
 ---
-title: "클래식 VM을 ARM 관리 디스크 VM으로 마이그레이션 | Microsoft Docs"
-description: "Resource Manager 배포 모델에서는 단일 Azure VM을 클래식 배포 모델에서 Managed Disks로 마이그레이션합니다."
+title: 클래식 VM을 ARM 관리 디스크 VM으로 마이그레이션 | Microsoft Docs
+description: Resource Manager 배포 모델에서는 단일 Azure VM을 클래식 배포 모델에서 Managed Disks로 마이그레이션합니다.
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
@@ -15,19 +15,17 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/15/2017
 ms.author: cynthn
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ef1e603ea7759af76db595d95171cdbe1c995598
-ms.openlocfilehash: 4bae56abfdc609ad40e6fbefe120493f1cd4e66d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/16/2017
-
-
+ms.openlocfilehash: d0307b26741a6bbbf29626e670467cdd72697646
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
+ms.locfileid: "33943584"
 ---
-
 # <a name="manually-migrate-a-classic-vm-to-a-new-arm-managed-disk-vm-from-the-vhd"></a>VHD에서 클래식 VM을 새 ARM 관리 디스크 VM으로 수동으로 마이그레이션 
 
 
-이 섹션을 통해 Resource Manager 배포 모델에서는 기존 Azure VM을 클래식 배포 모델에서 [Managed Disks](../../storage/storage-managed-disks-overview.md)로 마이그레이션할 수 있습니다.
+이 섹션을 통해 Resource Manager 배포 모델에서는 기존 Azure VM을 클래식 배포 모델에서 [Managed Disks](managed-disks-overview.md)로 마이그레이션할 수 있습니다.
 
 
 ## <a name="plan-for-the-migration-to-managed-disks"></a>Managed Disks로 마이그레이션 계획 수립
@@ -41,8 +39,8 @@ Azure Managed Disks를 사용할 수 있는 위치를 선택합니다. 프리미
 
 ### <a name="vm-sizes"></a>VM 크기
 
-프리미엄 Managed Disks를 마이그레이션하는 경우 VM 크기를 VM이 위치한 지역에서 제공하는 Premium Storage 지원 가능 크기로 업데이트해야 합니다. Premium Storage를 사용할 수 있는 VM 크기를 검토합니다. Azure VM 크기 사양은 [가상 컴퓨터의 크기](sizes.md)에 나열되어 있습니다.
-프리미엄 저장소와 작동하는 가상 컴퓨터의 성능 특징을 검토하고 워크로드에 가장 적합한 VM 크기를 선택합니다. VM에서 디스크 트래픽을 제어하기에 충분한 대역폭을 사용할 수 있는지 확인합니다.
+프리미엄 Managed Disks를 마이그레이션하는 경우 VM 크기를 VM이 위치한 지역에서 제공하는 Premium Storage 지원 가능 크기로 업데이트해야 합니다. Premium Storage를 사용할 수 있는 VM 크기를 검토합니다. Azure VM 크기 사양은 [가상 머신의 크기](sizes.md)에 나열되어 있습니다.
+Premium Storage와 작동하는 가상 머신의 성능 특징을 검토하고 워크로드에 가장 적합한 VM 크기를 선택합니다. VM에서 디스크 트래픽을 제어하기에 충분한 대역폭을 사용할 수 있는지 확인합니다.
 
 ### <a name="disk-sizes"></a>디스크 크기
 
@@ -52,7 +50,7 @@ VM에서 사용할 수 있는 프리미엄 관리 디스크에는 7가지 형식
 
 | 프리미엄 디스크 유형  | P4    | P6    | P10   | P20   | P30   | P40   | P50   | 
 |---------------------|-------|-------|-------|-------|-------|-------|-------|
-| 디스크 크기           | 128GB| 512GB| 128GB| 512GB            | 1,024GB(1TB)    | 2,048GB(2TB)    | 4,095GB(4TB)    | 
+| 디스크 크기           | 128GB| 512 GB| 128GB| 512 GB            | 1,024GB(1TB)    | 2,048GB(2TB)    | 4,095GB(4TB)    | 
 | 디스크당 IOPS       | 120   | 240   | 500   | 2,300              | 5,000              | 7,500              | 7,500              | 
 | 디스크당 처리량 | 초당 25MB  | 초당 50MB  | 초당 100MB | 초당 150MB | 초당 200MB | 초당 250MB | 초당 250MB | 
 
@@ -62,7 +60,7 @@ VM에서 사용할 수 있는 표준 관리 디스크에는 7가지 형식이 �
 
 | 표준 디스크 유형  | S4               | S6               | S10              | S20              | S30              | S40              | S50              | 
 |---------------------|---------------------|---------------------|------------------|------------------|------------------|------------------|------------------| 
-| 디스크 크기           | 30GB            | 64GB            | 128GB           | 512GB           | 1,024GB(1TB)   | 2,048GB(2TB)    | 4,095GB(4TB)   | 
+| 디스크 크기           | 30GB            | 64GB            | 128GB           | 512 GB           | 1,024GB(1TB)   | 2,048GB(2TB)    | 4,095GB(4TB)   | 
 | 디스크당 IOPS       | 500              | 500              | 500              | 500              | 500              | 500             | 500              | 
 | 디스크당 처리량 | 60 MB per second | 60 MB per second | 60 MB per second | 60 MB per second | 60 MB per second | 60 MB per second | 60 MB per second | 
 
@@ -75,7 +73,7 @@ VM에서 사용할 수 있는 표준 관리 디스크에는 7가지 형식이 �
 
 ### <a name="pricing"></a>가격
 
-[Managed Disks에 대한 가격 책정](https://azure.microsoft.com/en-us/pricing/details/managed-disks/)을 검토합니다. 프리미엄 Managed Disks의 가격 책정은 관리되지 않는 프리미엄 디스크와 같습니다. 하지만 표준 Managed Disks의 가격 책정은 관리되지 않는 표준 디스크와 다릅니다.
+[Managed Disks에 대한 가격 책정](https://azure.microsoft.com/pricing/details/managed-disks/)을 검토합니다. 프리미엄 Managed Disks의 가격 책정은 관리되지 않는 프리미엄 디스크와 같습니다. 하지만 표준 Managed Disks의 가격 책정은 관리되지 않는 표준 디스크와 다릅니다.
 
 
 ## <a name="checklist"></a>검사 목록
@@ -94,6 +92,8 @@ VM에서 사용할 수 있는 표준 관리 디스크에는 7가지 형식이 �
 ## <a name="migrate-the-vm"></a>VM 마이그레이션
 
 응용 프로그램의 가동 중지 시간을 준비합니다. 원활한 마이그레이션 작업을 수행하려면 현재 시스템에서 모든 처리를 중지해야 합니다. 그런 다음 새 플랫폼으로 마이그레이션할 수 있는 일관된 상태로 가져올 수 있습니다. 가동 중지 시간은 디스크에서 마이그레이션할 데이터 양에 따라 달라집니다.
+
+이 파트에는 Azure PowerShell 모듈 버전 6.0.0 이상이 필요합니다. ` Get-Module -ListAvailable AzureRM`을 실행하여 버전을 찾습니다. 업그레이드해야 하는 경우 [Azure PowerShell 모듈 설치](/powershell/azure/install-azurerm-ps)를 참조하세요. 또한 `Connect-AzureRmAccount`을 실행하여 Azure와 연결해야 합니다.
 
 
 1.  먼저, 공통 매개 변수를 설정합니다.
@@ -124,11 +124,11 @@ VM에서 사용할 수 있는 표준 관리 디스크에는 7가지 형식이 �
 
 2.  클래식 VM에서 VHD를 사용하여 관리되는 OS 디스크를 만듭니다.
 
-    $osVhdUri 매개 변수에 OS VHD의 전체 URI를 제공했는지 확인합니다. 또한 마이그레이션하는 디스크의 종류(프리미엄 또는 표준)에 따라 **-AccountType**을 **PremiumLRS** 또는 **StandardLRS**로 입력합니다.
+    $osVhdUri 매개 변수에 OS VHD의 전체 URI를 제공했는지 확인합니다. 또한 마이그레이션하는 디스크의 종류(프리미엄 또는 표준)에 따라 **-AccountType**을 **Premium_LRS** 또는 **Standard_LRS**로 입력합니다.
 
     ```powershell
     $osDisk = New-AzureRmDisk -DiskName $osDiskName -Disk (New-AzureRmDiskConfig '
-    -AccountType PremiumLRS -Location $location -CreateOption Import -SourceUri $osVhdUri) '
+    -AccountType Premium_LRS -Location $location -CreateOption Import -SourceUri $osVhdUri) '
     -ResourceGroupName $resourceGroupName
     ```
 
@@ -137,14 +137,14 @@ VM에서 사용할 수 있는 표준 관리 디스크에는 7가지 형식이 �
     ```powershell
     $VirtualMachine = New-AzureRmVMConfig -VMName $virtualMachineName -VMSize $virtualMachineSize
     $VirtualMachine = Set-AzureRmVMOSDisk -VM $VirtualMachine -ManagedDiskId $osDisk.Id '
-    -StorageAccountType PremiumLRS -DiskSizeInGB 128 -CreateOption Attach -Windows
+    -StorageAccountType Premium_LRS -DiskSizeInGB 128 -CreateOption Attach -Windows
     ```
 
 4.  데이터 VHD 파일에서 관리되는 데이터 디스크를 만들고 새 VM에 추가합니다.
 
     ```powershell
     $dataDisk1 = New-AzureRmDisk -DiskName $dataDiskName -Disk (New-AzureRmDiskConfig '
-    -AccountType PremiumLRS -Location $location -CreationDataCreateOption Import '
+    -AccountType Premium_LRS -Location $location -CreationDataCreateOption Import '
     -SourceUri $dataVhdUri ) -ResourceGroupName $resourceGroupName
     
     $VirtualMachine = Add-AzureRmVMDataDisk -VM $VirtualMachine -Name $dataDiskName '
@@ -175,6 +175,5 @@ VM에서 사용할 수 있는 표준 관리 디스크에는 7가지 형식이 �
 
 ## <a name="next-steps"></a>다음 단계
 
-- 가상 컴퓨터에 연결합니다. 자세한 내용은 [Windows를 실행하는 Azure 가상 컴퓨터에 연결하고 로그온하는 방법](connect-logon.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)을 참조하세요.
-
+- 가상 머신에 연결합니다. 자세한 내용은 [Windows를 실행하는 Azure 가상 머신에 연결하고 로그온하는 방법](connect-logon.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)을 참조하세요.
 

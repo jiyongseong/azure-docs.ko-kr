@@ -1,27 +1,24 @@
 ---
-title: "TTL(Time To Live)을 사용하여 Azure Cosmos DB의 데이터 만료 | Microsoft Docs"
-description: "TTL을 사용하여 Microsoft Azure Cosmos DB는 일정 기간 후에 시스템에서 문서를 자동으로 삭제하는 기능을 제공합니다."
+title: TTL(Time To Live)을 사용하여 Azure Cosmos DB의 데이터 만료 | Microsoft Docs
+description: TTL을 사용하여 Microsoft Azure Cosmos DB는 일정 기간 후에 시스템에서 문서를 자동으로 삭제하는 기능을 제공합니다.
 services: cosmos-db
-documentationcenter: 
+documentationcenter: ''
 keywords: TTL(Time to live)
-author: arramac
-manager: jhubbard
-editor: 
+author: SnehaGunda
+manager: kfile
 ms.assetid: 25fcbbda-71f7-414a-bf57-d8671358ca3f
 ms.service: cosmos-db
 ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 05/25/2017
-ms.author: arramac
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a643f139be40b9b11f865d528622bafbe7dec939
-ms.openlocfilehash: 6f1c43ca0113dc7579b0fc3743d3314c16ce78a4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/31/2017
-
-
+ms.date: 08/29/2017
+ms.author: sngun
+ms.openlocfilehash: 13f2caa631817a5745f39b44faccb11252a2d549
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
 # <a name="expire-data-in-azure-cosmos-db-collections-automatically-with-time-to-live"></a>TTL(Time To Live)을 사용하여 자동으로 Azure Cosmos DB 컬렉션의 데이터 만료
 응용 프로그램은 방대한 양의 데이터을 생성하고 저장할 수 있습니다. 컴퓨터에서 생성한 이벤트 데이터, 로그 및 사용자 세션 정보와 같은 이 데이터 중 일부는 한정된 기간에만 사용할 수 있습니다. 데이터가 응용 프로그램의 요구를 넘게 되면 이 데이터를 삭제하고 응용 프로그램의 저장소 요구를 줄이는 것이 안전합니다.
@@ -43,7 +40,7 @@ TTL 기능은 컬렉션 수준 및 문서 수준 등 두 가지 수준으로 TTL
    * 속성은 DefaultTTL이 상위 컬렉션에 있는 경우에 적용할 수 있습니다.
    * 상위 컬렉션에 대한 DefaultTTL 값을 재정의합니다.
 
-문서가 만료되는 즉시(`ttl` + `_ts` >= 현재 서버 시간) 문서는 "만료"된 것으로 표시됩니다. 이 시간 이후에 어떤 작업도 이러한 문서에 허용되지 않으며 수행되는 쿼리 결과에서 제외됩니다. 문서는 시스템에서 물리적으로 삭제되고 나중에 선택적으로 백그라운드에서 삭제됩니다. 이는 컬렉션 예산에서 [RU(요청 단위)](request-units.md) 를 사용하지 않습니다.
+문서가 만료되는 즉시(`ttl` + `_ts` <= 현재 서버 시간) 문서는 “만료”된 것으로 표시됩니다. 이 시간 이후에 어떤 작업도 이러한 문서에 허용되지 않으며 수행되는 쿼리 결과에서 제외됩니다. 문서는 시스템에서 물리적으로 삭제되고 나중에 선택적으로 백그라운드에서 삭제됩니다. 이는 컬렉션 예산에서 [RU(요청 단위)](request-units.md) 를 사용하지 않습니다.
 
 위의 논리는 다음 행렬에 표시될 수 있습니다.
 
@@ -54,7 +51,7 @@ TTL 기능은 컬렉션 수준 및 문서 수준 등 두 가지 수준으로 TTL
 | 문서에서 TTL = n |문서 수준에서 아무 것도 재정의하지 않습니다. 문서에서 TTL은 시스템에 의해 해석되지 않습니다. |TTL = n인 문서는 간격 n(초) 후에 만료됩니다. 다른 문서는 간격 -1을 상속하며 만료되지 않습니다. |TTL = n인 문서는 간격 n(초) 후에 만료됩니다. 다른 문서는 컬렉션에서 "n" 간격을 상속합니다. |
 
 ## <a name="configuring-ttl"></a>TTL 구성
-기본적으로 TTL(Time To Live)은 모든 Cosmos DB 컬렉션 및 문서에서 사용되지 않습니다.
+기본적으로 TTL(Time To Live)은 모든 Cosmos DB 컬렉션 및 문서에서 사용되지 않습니다. TTL은 프로그래밍 방식으로 또는 Azure Portal의 해당 컬렉션에 대한 **설정**에서 설정할 수 있습니다. 
 
 ## <a name="enabling-ttl"></a>TTL 사용
 컬렉션 또는 컬렉션 내 문서에서 TTL을 사용하려면 컬렉션의 DefaultTTL 속성을 -1 또는 0이 아닌 양수로 설정해야 합니다. DefaultTTL을 -1로 설정하면 기본적으로 컬렉션에 있는 모든 문서가 계속 존재하지만 Cosmos DB 서비스는 이 기본값을 재정의한 문서에 대해 이 컬렉션을 모니터링해야 합니다.
@@ -127,7 +124,7 @@ TTL 기능은 컬렉션 수준 및 문서 수준 등 두 가지 수준으로 TTL
     Document readDocument = response.Resource;
     readDocument.TimeToLive = 60 * 30 * 30; // update time to live
     
-    response = await client.ReplaceDocumentAsync(salesOrder);
+    response = await client.ReplaceDocumentAsync(readDocument);
 
 ## <a name="removing-ttl-from-a-document"></a>문서에서 TTL 제거
 문서에서 TTL을 설정했지만 해당 문서가 더 이상 만료되지 않게 하려면 문서를 검색하고 TTL 필드를 제거하여 서버에 있는 문서를 바꿀 수 있습니다. 문서에서 TTL 필드를 제거하면 컬렉션의 기본값이 적용됩니다. 문서가 만료되지 않도록 중지하고 컬렉션에서 상속하지 않으려면 TTL 값을 -1로 설정해야 합니다.
@@ -139,7 +136,7 @@ TTL 기능은 컬렉션 수준 및 문서 수준 등 두 가지 수준으로 TTL
     Document readDocument = response.Resource;
     readDocument.TimeToLive = null; // inherit the default TTL of the collection
     
-    response = await client.ReplaceDocumentAsync(salesOrder);
+    response = await client.ReplaceDocumentAsync(readDocument);
 
 ## <a name="disabling-ttl"></a>TTL 사용 안 함
 컬렉션에서 TTL을 사용하지 않고 만료된 문서를 찾는 백그라운드 프로세스를 중지하려면 컬렉션에서 DefaultTTL 속성을 삭제해야 합니다. 이 속성을 삭제하는 것은 -1로 설정하는 것과 다릅니다. -1로 설정하면 컬렉션에 추가된 새 문서는 계속 존재하게 되지만 컬렉션에 있는 특정 문서에서 이를 재정의할 수 있습니다. 컬렉션에서 이 속성을 완전히 제거하면 이전의 기본값을 명시적으로 재정의한 문서가 있더라도 문서가 만료되지 않습니다.
@@ -151,6 +148,11 @@ TTL 기능은 컬렉션 수준 및 문서 수준 등 두 가지 수준으로 TTL
     
     await client.ReplaceDocumentCollectionAsync(collection);
 
+<a id="ttl-and-index-interaction"></a> 
+## <a name="ttl-and-index-interaction"></a>TTL 및 인덱스 상호 작용
+컬렉션에서 TTL 설정을 추가하거나 변경하면 기본 인덱스를 변경합니다. TTL 값이 Off에서 On으로 변경되면 컬렉션 인덱스가 다시 작성됩니다. 인덱싱 모드가 일관될 때 인덱싱 정책을 변경하는 경우 사용자는 인덱스에 대한 변경을 알지 못합니다. 인덱싱 모드가 지연으로 설정된 경우 인덱스는 항상 따라 잡고 TTL 값이 변경되면 인덱스는 처음부터 다시 만들어집니다. TTL 값이 변경되고 인덱스 모드가 지연으로 설정된 경우 인덱스 다시 작성 중에 수행된 쿼리는 전체 또는 올바른 결과를 반환하지 않습니다.
+
+반환된 정확한 데이터가 필요한 경우 인덱싱 모드가 지연으로 설정된 경우 TTL 값을 변경하지 마십시오. 이상적으로 일관된 쿼리 결과를 보장하도록 일관된 인덱스를 선택해야 합니다. 
 
 ## <a name="faq"></a>FAQ
 **TTL의 비용은 얼마인가요?**
@@ -175,5 +177,4 @@ TTL은 문서 전체에 적용됩니다. 문서의 일부만 만료하고 싶다
 
 ## <a name="next-steps"></a>다음 단계
 Azure Cosmos DB에 대한 자세한 내용은 서비스 [*설명서*](https://azure.microsoft.com/documentation/services/cosmos-db/) 페이지를 참조하세요.
-
 

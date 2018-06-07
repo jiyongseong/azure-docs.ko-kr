@@ -1,0 +1,67 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: "Azure Automation 사용자 설명서"
+metadata:
+  document_id: 
+  title: "Azure Automation 설명서 - 자습서, API 참조"
+  description: "Azure Automation 사용 방법 알아보기"
+  services: automation
+  author: georgewallace
+  manager: carmonm
+  ms.service: automation
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 12/13/2017
+  ms.author: gwallace
+  ms.openlocfilehash: b2b155480cd43ce8daa0b4916b244910f094a032
+  ms.sourcegitcommit: c4cc4d76932b059f8c2657081577412e8f405478
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 01/11/2018
+abstract:
+  description: "Automation을 사용하여 하이브리드 환경에서 운영 작업을 구성하고 자동화하는 방법을 알아봅니다. 자습서, API 참조 및 기타 설명서에서는 프로세스를 자동화하고, 업데이트 관리를 수행하고, 원하는 상태 구성을 사용하고, 변경 내용을 추적하고, 인벤토리를 수집하는 방법을 보여줍니다."
+sections:
+- title: "5분 빠른 시작"
+  items:
+  - type: paragraph
+    text: "Automation을 사용하여 Azure 및 하이브리드 환경을 자동화하고 구성하는 방법을 알아봅니다."
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: /azure/automation/media/index/automation.svg
+      text: "Automation 계정 만들기"
+      href: /azure/automation/automation-quickstart-create-account
+    - image:
+        src: /azure/automation/media/index/runbook.svg
+      text: "Runbook 만들기"
+      href: /azure/automation/automation-quickstart-create-runbook
+    - image:
+        src: /azure/automation/media/index/dscconfig.svg
+      text: "DSC 구성 만들기"
+      href: /azure/automation/automation-quickstart-dsc-configuration
+- title: "단계별 자습서"
+  items:
+  - type: paragraph
+    text: "Azure 및 하이브리드 환경을 통합, 배포 및 관리하는 방법을 알아봅니다."
+  - type: list
+    style: ordered
+    items:
+    - html: "<a href=\"/azure/automation/automation-watchers-tutorial\">감시자 작업 구성</a>"
+    - html: "<a href=\"/azure/automation/automation-tutorial-update-management\">VM에서 업데이트 관리</a>"
+    - html: "<a href=\"/azure/automation/automation-onboard-solutions\">대규모 등록</a>"
+    - html: "<a href=\"/azure/automation/automation-tutorial-installed-software\">VM에 설치된 소프트웨어 식별</a>"
+    - html: "<a href=\"/azure/automation/automation-tutorial-troubleshoot-changes\">VM에서 변경 내용 문제 해결</a>"
+- title: "참조"
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: "명령줄"
+      html: <p><a href="/powershell/module/azurerm.automation">PowerShell</a></p>
+    - title: "언어"
+      html: <p><a href="/dotnet/api/microsoft.azure.management.automation">.NET</a></p>
+    - title: "REST (영문)"
+      html: <p><a href="/rest/api/automation">Automation REST API</a></p>

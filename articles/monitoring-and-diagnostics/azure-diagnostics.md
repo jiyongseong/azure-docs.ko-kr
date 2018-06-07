@@ -1,31 +1,34 @@
 ---
-title: "Azure 진단 개요 | Microsoft Docs"
-description: "클라우드 서비스, 가상 컴퓨터 및 서비스 패브릭에서 디버깅, 성능 측정, 모니터링, 트래픽 분석을 위해 Azure 진단 사용"
+title: Azure 진단 확장 개요 | Microsoft Docs
+description: 클라우드 서비스, 가상 머신 및 서비스 패브릭에서 디버깅, 성능 측정, 모니터링, 트래픽 분석을 위해 Azure 진단 사용
 services: multiple
 documentationcenter: .net
 author: rboucher
-manager: 
-editor: 
+manager: ''
+editor: ''
 ms.assetid: baad40d8-c915-4f93-b486-8b160bf33463
 ms.service: multiple
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: dotnet
 ms.topic: article
-ms.date: 03/18/2017
+ms.date: 05/01/2018
 ms.author: robb
-translationtype: Human Translation
-ms.sourcegitcommit: 197ebd6e37066cb4463d540284ec3f3b074d95e1
-ms.openlocfilehash: e2d3a6725ee53dc6d6986b185fac143901ba6955
-ms.lasthandoff: 03/31/2017
-
-
+ms.openlocfilehash: daeaddefa461e71fcc62af4efc4fb7084b237cf9
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
+ms.locfileid: "33886398"
 ---
-# <a name="what-is-azure-diagnostics"></a>Azure 진단이란?
-Azure 진단은 배포된 응용 프로그램에서 진단 데이터를 수집할 수 있도록 하는 Azure 내 기능입니다. 다양한 원본에서 진단 확장을 사용할 수 있습니다. Azure 클라우드 서비스 웹 및 작업자 역할, Microsoft Windows 및 서비스 패브릭을 실행하는 Azure 가상 컴퓨터에서 현재 지원되고 있습니다. 다른 Azure 서비스에는 별도의 자체 진단이 있습니다.
+# <a name="what-is-azure-diagnostics-extension"></a>Azure 진단 확장이란?
+Azure 진단 확장은 배포된 응용 프로그램에서 진단 데이터를 수집할 수 있도록 하는 Azure 내의 에이전트입니다. 다양한 원본에서 진단 확장을 사용할 수 있습니다. Azure Cloud Service(클래식) 웹 및 작업자 역할, Virtual Machines, 가상 머신 확장 집합 및 Service Fabric에서 현재 지원되고 있습니다. 다른 Azure 서비스에는 여러 진단 메서드가 있습니다. [Azure의 모니터링 개요](monitoring-overview.md)를 참조하세요. 
+
+## <a name="linux-agent"></a>Linux 에이전트
+[Linux 버전의 확장](../virtual-machines/linux/diagnostic-extension.md)은 Linux를 실행하는 Virtual Machines에 사용할 수 있습니다. 수집되는 통계 및 동작은 Windows 버전에 따라 다릅니다. 
 
 ## <a name="data-you-can-collect"></a>수집할 수 있는 데이터
-Azure 진단에서는 다음과 같은 유형의 데이터를 수집할 수 있습니다.
+Azure 진단 확장은 다음과 같은 유형의 데이터를 수집할 수 있습니다.
 
 | 데이터 원본 | 설명 |
 | --- | --- |
@@ -39,44 +42,42 @@ Azure 진단에서는 다음과 같은 유형의 데이터를 수집할 수 있�
 | 사용자 지정 오류 로그 |응용 프로그램 또는 서비스에서 생성한 로그 |
 | Azure 진단 인프라 로그 |진단 자체에 대한 정보입니다. |
 
-Azure 진단 확장은 이 데이터를 Azure Storage 계정에 전송하거나 [Application Insights](../application-insights/app-insights-cloudservices.md)와 같은 서비스에 보낼 수 있습니다. 디버깅 및 문제 해결, 성능 측정, 리소스 사용 모니터링, 트래픽 분석 및 용량 계획, 감사 등에 데이터를 사용할 수 있습니다.
+## <a name="data-storage"></a>데이터 저장소
+확장은 해당 데이터를 지정한 [Azure Storage 계정](azure-diagnostics-storage.md)에 저장합니다. 
 
-## <a name="versioning"></a>버전 관리
-[Azure Diagnostics Versioning History(Azure 진단 버전 관리 기록)](azure-diagnostics-versioning-history.md)를 참조하세요.
+이 데이터를 [Application Insights](../application-insights/app-insights-cloudservices.md)에 보낼 수도 있습니다. 또한 [이벤트 허브](../event-hubs/event-hubs-what-is-event-hubs.md)로 스트리밍할 수도 있습니다. 그러면 비 Azure 모니터링 서비스에 보낼 수 있습니다. 
+
+
+## <a name="versioning-and-configuration-schema"></a>버전 관리 및 구성 스키마
+[Azure 진단 버전 기록 및 스키마](azure-diagnostics-versioning-history.md)를 참조하세요.
+
 
 ## <a name="next-steps"></a>다음 단계
 진단을 수집할 서비스를 선택하고 다음 문서를 사용하여 시작합니다. 특정 작업에 대한 참조로 일반 Azure 진단 링크를 사용합니다.
 
-## <a name="web-apps"></a>웹앱
-웹앱에서는 Azure 진단을 사용하지 마세요. [웹앱](../app-service-web/web-sites-enable-diagnostic-log.md)에서 관련 정보 찾기
-
-## <a name="cloud-services-using-azure-diagnostics"></a>Azure 진단을 사용하는 클라우드 서비스
-* Visual Studio를 사용하는 경우 시작하려면 [Visual Studio를 사용하여 클라우드 서비스 응용 프로그램 추적](../vs-azure-tools-debug-cloud-services-virtual-machines.md)을 참조하세요. 그렇지 않은 경우 다음을 참조하세요.
+## <a name="cloud-services-using-azure-diagnostics"></a>Azure 진단을 사용하는 Cloud Services
+* Visual Studio를 사용하는 경우 시작하려면 [Visual Studio를 사용하여 Cloud Services 응용 프로그램 추적](../vs-azure-tools-debug-cloud-services-virtual-machines.md) 을 참조하세요. 그렇지 않은 경우 다음을 참조하세요.
 * [Azure 진단을 사용하여 클라우드 서비스를 모니터링하는 방법](../cloud-services/cloud-services-how-to-monitor.md)
-* [클라우드 서비스 응용 프로그램에서 Azure 진단 설정](../cloud-services/cloud-services-dotnet-diagnostics.md)
+* [Cloud Services 응용 프로그램에서 Azure 진단 설정](../cloud-services/cloud-services-dotnet-diagnostics.md)
 
 고급 항목의 경우 다음을 참조하세요.
 
-* [클라우드 서비스용 Application Insights에서 Azure 진단 사용](../application-insights/app-insights-cloudservices.md)
-* [Azure 진단으로 클라우드 서비스 응용 프로그램의 흐름 추적](../cloud-services/cloud-services-dotnet-diagnostics-trace-flow.md)
-* [PowerShell을 사용하여 클라우드 서비스에 진단 설정](../virtual-machines/windows/ps-extensions-diagnostics.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+* [Cloud Services용 Application Insights에서 Azure 진단 사용](../application-insights/app-insights-cloudservices.md)
+* [Azure 진단으로 Cloud Services 응용 프로그램의 흐름 추적](../cloud-services/cloud-services-dotnet-diagnostics-trace-flow.md)
+* [PowerShell을 사용하여 Cloud Services에 진단 설정](../virtual-machines/windows/ps-extensions-diagnostics.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
 
-## <a name="virtual-machines-using-azure-diagnostics"></a>Azure 진단을 사용하는 가상 컴퓨터
-* Visual Studio를 사용하는 경우 시작하려면 [Visual Studio를 사용하여 Azure Virtual Machine 추적](../vs-azure-tools-debug-cloud-services-virtual-machines.md)을 참조하세요. 그렇지 않은 경우 다음을 참조하세요.
+## <a name="virtual-machines"></a>Virtual Machines
+* Visual Studio를 사용하는 경우 시작하려면 [Visual Studio를 사용하여 Azure Virtual Machines 추적](../vs-azure-tools-debug-cloud-services-virtual-machines.md)을 참조하세요. 그렇지 않은 경우 다음을 참조하세요.
 * [Azure Virtual Machine에서 Azure 진단 설정](../virtual-machines-dotnet-diagnostics.md)
 
 고급 항목의 경우 다음을 참조하세요.
 
-* [PowerShell을 사용하여 Azure Virtual Machine에서 진단 설정](../virtual-machines/windows/ps-extensions-diagnostics.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
-* [Azure Resource Manager 템플릿을 사용하여 모니터링 및 진단 기능으로 Windows 가상 컴퓨터 만들기](../virtual-machines/windows/extensions-diagnostics-template.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+* [PowerShell을 사용하여 Azure Virtual Machines에서 진단 설정](../virtual-machines/windows/ps-extensions-diagnostics.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+* [Azure Resource Manager 템플릿을 사용하여 모니터링 및 진단 기능으로 Windows 가상 머신 만들기](../virtual-machines/windows/extensions-diagnostics-template.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
 
-## <a name="service-fabric-using-azure-diagnostics"></a>Azure 진단을 사용하는 서비스 패브릭
+## <a name="service-fabric"></a>Service Fabric
 [Service Fabric 응용 프로그램 모니터링](../service-fabric/service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally.md)에서 시작합니다. 이 문서를 사용하면 왼쪽의 탐색 트리에서 다른 여러 서비스 패브릭 진단 문서를 사용할 수 있습니다.
 
-## <a name="general-azure-diagnostics-articles"></a>일반 Azure 진단 문서
-* [Azure 진단 스키마 구성](https://msdn.microsoft.com/library/azure/mt634524.aspx) - 스키마 파일을 변경하여 진단 데이터를 수집하고 경로를 지정하는 방법에 대해 알아봅니다. Visual Studio를 사용하여 스키마 파일을 변경할 수도 있습니다.
-* [Azure Storage에 Azure 진단 데이터가 저장되는 방법](../cloud-services/cloud-services-dotnet-diagnostics-storage.md) - 진단 데이터가 작성되는 Blob 및 테이블의 이름을 알아봅니다.
-* [Azure 진단에서 성능 카운터 사용](../cloud-services/cloud-services-dotnet-diagnostics-performance-counters.md)에 대해 알아봅니다.
-* [Azure 진단 정보를 Application Insights로 전송](azure-diagnostics-configure-application-insights.md)에 대해 알아봅니다.
+## <a name="general-articles"></a>일반 문서
+* [Azure 진단에서 성능 카운터 사용](../cloud-services/diagnostics-performance-counters.md)에 대해 알아봅니다.
 * 진단을 시작하거나 Azure Storage 테이블에서 데이터를 찾는 데 문제가 있는 경우 [Azure 진단 문제 해결](azure-diagnostics-troubleshooting.md)을 참조하세요.
-

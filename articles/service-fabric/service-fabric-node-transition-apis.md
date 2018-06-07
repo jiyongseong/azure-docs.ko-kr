@@ -1,28 +1,26 @@
 ---
-title: "Azure 마이크로 서비스 테스트를 위한 클러스터 노드 시작 및 중지 | Microsoft Docs"
-description: "클러스터 노드를 시작 및 중지하여 Service Fabric 응용 프로그램을 테스트하기 위해 오류 주입을 사용하는 방법을 살펴봅니다."
+title: Azure 마이크로 서비스 테스트를 위한 클러스터 노드 시작 및 중지 | Microsoft Docs
+description: 클러스터 노드를 시작 및 중지하여 Service Fabric 응용 프로그램을 테스트하기 위해 오류 주입을 사용하는 방법을 살펴봅니다.
 services: service-fabric
 documentationcenter: .net
 author: LMWF
 manager: rsinha
-editor: 
+editor: ''
 ms.assetid: f4e70f6f-cad9-4a3e-9655-009b4db09c6d
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 6/12/2017
 ms.author: lemai
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f7edee399717ecb96fb920d0a938da551101c9e1
-ms.openlocfilehash: 5f76100007466f2baf4e067de963486f47fbf857
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/24/2017
-
-
+ms.openlocfilehash: 0ed18097fa18101c237b4408d26dd1bc9c5d5648
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
+ms.locfileid: "34212581"
 ---
-
 # <a name="replacing-the-start-node-and-stop-node-apis-with-the-node-transition-api"></a>시작 노드 및 중지 노드 API를 노드 전환 API로 바꾸기
 
 ## <a name="what-do-the-stop-node-and-start-node-apis-do"></a>시작 노드 및 중지 노드 API는 어떤 작업을 수행하나요?
@@ -44,7 +42,7 @@ ms.lasthandoff: 01/24/2017
 
 **사용 현황**
 
-노드 전환 API가 호출 시 예외를 throw하지 않으면 시스템은 해당 비동기 작업을 수락하고 실행합니다.  호출이 성공했다고 해서 작업이 이미 완료된 것을 의미하지는 않습니다.  작업의 현재 상태에 대한 정보를 가져오려면 이 작업에 대해 노드 전환 API(관리: [GetNodeTransitionProgressAsync()][gntp])를 호출할 때 사용되는 GUID를 사용하여 노드 전환 진행률 API를 호출합니다.  노드 전환 진행률 API는 NodeTransitionProgress 개체를 반환합니다.  이 개체의 State 속성은 작업의 현재 상태를 지정합니다.  상태가 "실행 중"이면 작업이 실행되고 있는 것입니다.  상태가 완료됨이면 작업이 오류 없이 완료된 것입니다.  상태가 실패인 경우 작업을 실행하는 동안 문제가 발생한 것입니다.  Result 속성의 Exception 속성은 발생한 문제가 어떤 것인지를 나타냅니다.  State 속성에 대한 자세한 내용은 https://docs.microsoft.com/dotnet/api/system.fabric.testcommandprogressstate 를 참조하고, 코드 예제에 대해서는 아래의 "샘플 사용" 섹션을 참조하세요.
+노드 전환 API가 호출 시 예외를 throw하지 않으면 시스템은 해당 비동기 작업을 수락하고 실행합니다.  호출이 성공했다고 해서 작업이 이미 완료된 것을 의미하지는 않습니다.  작업의 현재 상태에 대한 정보를 가져오려면 이 작업에 대해 노드 전환 API(관리: [GetNodeTransitionProgressAsync()][gntp])를 호출할 때 사용되는 GUID를 사용하여 노드 전환 진행률 API를 호출합니다.  노드 전환 진행률 API는 NodeTransitionProgress 개체를 반환합니다.  이 개체의 State 속성은 작업의 현재 상태를 지정합니다.  상태가 "실행 중"이면 작업이 실행되고 있는 것입니다.  상태가 완료됨이면 작업이 오류 없이 완료된 것입니다.  상태가 실패인 경우 작업을 실행하는 동안 문제가 발생한 것입니다.  Result 속성의 Exception 속성은 발생한 문제가 어떤 것인지를 나타냅니다.  State 속성에 대한 자세한 내용은 https://docs.microsoft.com/dotnet/api/system.fabric.testcommandprogressstate를 참조하고, 코드 예제는 아래의 "샘플 사용" 섹션을 참조하세요.
 
 
 **중지된 노드와 작동 중단된 노드 간 구분** 노드가 노드 전환 API를 사용하여 *중지된* 경우 노드 쿼리의 출력(관리: [GetNodeListAsync()][nodequery], PowerShell: [Get-ServiceFabricNode][nodequeryps])에는 이 노드의 *IsStopped* 속성 값이 true임이 표시됩니다.  이 값은 *Down*으로 표시되는 *NodeStatus* 속성 값과 다릅니다.  *NodeStatus* 속성 값이 *Down*이지만 *IsStopped*가 false이면 노드는 노드 전환 API를 사용하여 중지되지 않은 것이며 다른 이유로 인해 *Down* 상태인 것입니다.  *IsStopped* 속성이 true이고 *NodeStatus* 속성이 *Down*이면 노드 전환 API를 사용하여 중지된 것입니다.
@@ -290,4 +288,3 @@ ms.lasthandoff: 01/24/2017
 [nodequeryps]: https://docs.microsoft.com/powershell/servicefabric/vlatest/Get-ServiceFabricNode?redirectedfrom=msdn
 [snt]: https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient.testmanagementclient#System_Fabric_FabricClient_TestManagementClient_StartNodeTransitionAsync_System_Fabric_Description_NodeTransitionDescription_System_TimeSpan_System_Threading_CancellationToken_
 [gntp]: https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient.testmanagementclient#System_Fabric_FabricClient_TestManagementClient_GetNodeTransitionProgressAsync_System_Guid_System_TimeSpan_System_Threading_CancellationToken_
-

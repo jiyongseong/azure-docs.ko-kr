@@ -1,33 +1,28 @@
 ---
-title: "Visual Studio를 사용하여 Azure 클라우드 서비스에 대한 역할 구성 | Microsoft Docs"
-description: "Visual Studio를 사용하여 Azure 클라우드 서비스에 대한 역할을 설정하고 구성하는 방법에 대해 알아봅니다."
+title: Visual Studio를 사용하여 Azure 클라우드 서비스에 대한 역할 구성 | Microsoft Docs
+description: Visual Studio를 사용하여 Azure 클라우드 서비스에 대한 역할을 설정하고 구성하는 방법에 대해 알아봅니다.
 services: visual-studio-online
-documentationcenter: na
-author: TomArcher
+author: ghogen
 manager: douge
-editor: 
-ms.assetid: d397ef87-64e5-401a-aad5-7f83f1022e16
-ms.service: multiple
-ms.devlang: dotnet
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: multiple
+assetId: d397ef87-64e5-401a-aad5-7f83f1022e16
+ms.prod: visual-studio-dev15
+ms.technology: vs-azure
+ms.workload: azure
+ms.topic: conceptual
 ms.date: 03/21/2017
-ms.author: tarcher
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 424d8654a047a28ef6e32b73952cf98d28547f4f
-ms.openlocfilehash: 9e79f275b8de045892517ec33581b72195a81f32
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/22/2017
-
-
+ms.author: ghogen
+ms.openlocfilehash: 09e6c3a9c27342ef27d49674d62ccf74d70d2e0f
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="configure-azure-cloud-service-roles-with-visual-studio"></a>Visual Studio를 사용하여 Azure 클라우드 서비스 역할 구성
-Azure 클라우드 서비스에는 하나 이상의 작업자 또는 웹 역할이 포함될 수 있습니다. 각 역할에 대해 해당 역할을 설정하는 방법을 정의하고 해당 역할을 실행하는 방법을 구성해야 합니다. 클라우드 서비스의 역할에 대한 자세한 내용은 [Azure 클라우드 서비스 소개](https://channel9.msdn.com/Series/Windows-Azure-Cloud-Services-Tutorials/Introduction-to-Windows-Azure-Cloud-Services)를 참조하세요. 
+Azure 클라우드 서비스에는 하나 이상의 작업자 또는 웹 역할이 포함될 수 있습니다. 각 역할에 대해 해당 역할을 설정하는 방법을 정의하고 해당 역할을 실행하는 방법을 구성해야 합니다. 클라우드 서비스의 역할에 대한 자세한 내용은 [Azure Cloud Services 소개](https://channel9.msdn.com/Series/Windows-Azure-Cloud-Services-Tutorials/Introduction-to-Windows-Azure-Cloud-Services)를 참조하세요. 
 
 클라우드 서비스에 대한 정보는 다음 파일에 저장됩니다.
 
-- **ServiceDefinition.csdef** - 서비스 정의 파일은 필요한 역할, 끝점 및 가상 컴퓨터 크기를 포함하여 클라우드 서비스의 런타임 설정을 정의합니다. 역할이 실행 중일 때 `ServiceDefinition.csdef`에 저장된 데이터는 변경할 수 없습니다.
+- **ServiceDefinition.csdef** - 서비스 정의 파일은 필요한 역할, 끝점 및 가상 머신 크기를 포함하여 클라우드 서비스의 런타임 설정을 정의합니다. 역할이 실행 중일 때 `ServiceDefinition.csdef`에 저장된 데이터는 변경할 수 없습니다.
 - **ServiceConfiguration.cscfg** - 서비스 구성 파일은 실행되는 역할의 인스턴스 수와 역할에 대해 정의된 설정 값을 구성합니다. 역할이 실행 중인 동안 `ServiceConfiguration.cscfg`에 저장된 데이터는 변경할 수 있습니다.
 
 역할 실행 방법을 제어하는 설정에 대해 다른 값을 저장하기 위해 여러 서비스 구성을 정의할 수 있습니다. 각 배포 환경에 대해 서로 다른 서비스 구성을 사용할 수 있습니다. 예를 들어 저장소 계정 연결 문자열을 설정하여 로컬 서비스 구성에서 로컬 Azure 저장소 에뮬레이터를 사용하고, 다른 서비스 구성을 만들어 클라우드에서 Azure 저장소를 사용할 수 있습니다.
@@ -60,7 +55,7 @@ Visual Studio에서 Azure 클라우드 서비스를 만들 때 두 개의 서비
     ![Azure 클라우드 서비스에 대한 서비스 구성 목록](./media/vs-azure-tools-configure-roles-for-cloud-service/cloud-service-service-configuration-property.png)
 
 ## <a name="change-the-number-of-role-instances"></a>역할 인스턴스 수 변경
-클라우드 서비스의 성능을 개선하기 위해 실행 중인 역할의 인스턴스 수를 사용자 수 또는 특정 역할에 대해 예상되는 부하에 따라 변경할 수 있습니다. Azure에서 클라우드 서비스를 실행하는 경우 별도의 가상 컴퓨터가 역할의 각 인스턴스에 대해 생성됩니다. 이렇게 하면 이 클라우드 서비스의 배포에 대한 청구에 영향을 줍니다. 대금 청구에 대한 자세한 내용은 [Microsoft Azure 청구서 이해](billing/billing-understand-your-bill.md)를 참조하세요.
+클라우드 서비스의 성능을 개선하기 위해 실행 중인 역할의 인스턴스 수를 사용자 수 또는 특정 역할에 대해 예상되는 부하에 따라 변경할 수 있습니다. Azure에서 클라우드 서비스를 실행하는 경우 별도의 가상 머신이 역할의 각 인스턴스에 대해 생성됩니다. 이렇게 하면 이 클라우드 서비스의 배포에 대한 청구에 영향을 줍니다. 대금 청구에 대한 자세한 내용은 [Microsoft Azure 청구서 이해](billing/billing-understand-your-bill.md)를 참조하세요.
 
 1. Visual Studio에서 Azure 클라우드 서비스 프로젝트를 만들거나 엽니다.
 
@@ -76,7 +71,7 @@ Visual Studio에서 Azure 클라우드 서비스를 만들 때 두 개의 서비
    
     ![서비스 구성 목록](./media/vs-azure-tools-configure-roles-for-cloud-service/role-configuration-properties-page-select-configuration.png)
 
-1. **인스턴스 수** 텍스트 상자에서 이 역할에 대해 시작하려는 인스턴스 수를 입력합니다. Azure에 클라우드 서비스를 게시할 때 각 인스턴스는 별도의 가상 컴퓨터에서 실행됩니다.
+1. **인스턴스 수** 텍스트 상자에서 이 역할에 대해 시작하려는 인스턴스 수를 입력합니다. Azure에 클라우드 서비스를 게시할 때 각 인스턴스는 별도의 가상 머신에서 실행됩니다.
 
     ![인스턴스 수 업데이트](./media/vs-azure-tools-configure-roles-for-cloud-service/role-configuration-properties-page-instance-count.png)
 
@@ -229,7 +224,7 @@ Visual Studio에서 Azure 클라우드 서비스를 만들 때 두 개의 서비
 
     - **이름** - 새 로컬 저장소에 사용할 이름을 입력합니다.
     - **크기(MB)** - 새 로컬 저장소에 필요한 크기(MB)를 입력합니다.
-    - **역할 재생에서 정리** - 이 옵션을 선택하면 역할에 대한 가상 컴퓨터를 재활용할 때 새 로컬 저장소의 데이터를 제거합니다.
+    - **역할 재생에서 정리** - 이 옵션을 선택하면 역할에 대한 가상 머신을 재활용할 때 새 로컬 저장소의 데이터를 제거합니다.
 
 1. 로컬 저장소 항목을 삭제하려면 해당 항목을 선택한 다음 **로컬 저장소 제거**를 선택합니다.
 
@@ -263,7 +258,7 @@ Visual Studio에서 Azure 클라우드 서비스를 만들 때 두 개의 서비
 
 이전 섹션의 코드로 만든 파일을 보려면 다음 단계를 수행합니다.
     
-1.  Windows 알림 영역에서 Azure 아이콘을 마우스 오른쪽 단추로 클릭하고, 상황에 맞는 메뉴에서 **계산 에뮬레이터 UI 표시**를 선택합니다. 
+1.  Windows 알림 영역에서 Azure 아이콘을 마우스 오른쪽 단추로 클릭하고, 상황에 맞는 메뉴에서 **Compute 에뮬레이터 UI 표시**를 선택합니다. 
 
     ![Azure 계산 에뮬레이터 표시](./media/vs-azure-tools-configure-roles-for-cloud-service/show-compute-emulator.png)
 
@@ -271,7 +266,7 @@ Visual Studio에서 Azure 클라우드 서비스를 만들 때 두 개의 서비
 
     ![Azure 계산 에뮬레이터](./media/vs-azure-tools-configure-roles-for-cloud-service/compute-emulator.png)
 
-1. **Microsoft Azure 계산 에뮬레이터** 메뉴에서 **도구** > **로컬 저장소 열기**를 선택합니다.
+1. **Microsoft Azure Compute 에뮬레이터** 메뉴에서 **도구** > **로컬 저장소 열기**를 선택합니다.
 
     ![로컬 저장소 메뉴 항목 열기](./media/vs-azure-tools-configure-roles-for-cloud-service/compute-emulator-open-local-store-menu.png)
 
@@ -279,5 +274,4 @@ Visual Studio에서 Azure 클라우드 서비스를 만들 때 두 개의 서비
 
 ## <a name="next-steps"></a>다음 단계
 [Azure 프로젝트 구성](vs-azure-tools-configuring-an-azure-project.md)을 읽고 Visual Studio에서 Azure 프로젝트에 대해 자세히 알아봅니다. [스키마 참조](https://msdn.microsoft.com/library/azure/dd179398)를 읽고 클라우드 서비스 스키마에 대해 자세히 알아봅니다.
-
 

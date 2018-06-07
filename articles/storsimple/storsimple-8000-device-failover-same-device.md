@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/23/2017
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
 ms.openlocfilehash: acc8929dc3476e9590e8e4d9526b38b7c0719570
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="fail-over-your-storsimple-physical-device-to-same-device"></a>StorSimple 물리적 장치를 동일한 장치로 장애 조치(failover)
 
@@ -84,5 +82,4 @@ ms.lasthandoff: 07/08/2017
 
 * 장애 조치(failover)를 수행한 후에 [StorSimple 장치 비활성화 또는 삭제](storsimple-8000-deactivate-and-delete-device.md)를 해야 할 수도 있습니다.
 * StorSimple 장치 관리자 서비스를 사용하는 방법에 대한 자세한 내용을 보려면 [Use the StorSimple Device Manager service to administer your StorSimple device](storsimple-8000-manager-service-administration.md)(StorSimple 장치 관리자 서비스를 사용하여 StorSimple 장치 관리)로 이동하세요.
-
 

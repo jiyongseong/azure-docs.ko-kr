@@ -1,26 +1,24 @@
 ---
-title: "일반적으로 발생되는 FabricClient 예외 | Microsoft Docs"
-description: "응용 프로그램 및 클러스터 관리 작업을 수행하는 동안 FabricClient API에 의해 발생될 수 있는 일반적인 예외 및 오류를 설명합니다."
+title: 일반적으로 발생되는 FabricClient 예외 | Microsoft Docs
+description: 응용 프로그램 및 클러스터 관리 작업을 수행하는 동안 FabricClient API에 의해 발생될 수 있는 일반적인 예외 및 오류를 설명합니다.
 services: service-fabric
 documentationcenter: .net
 author: rwike77
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: bb821313-b221-479f-b08e-36cf07e60a07
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 06/01/2017
+ms.date: 12/18/2017
 ms.author: ryanwi
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 491f61afe899c746c193f0d3703d3212f9258e63
-ms.openlocfilehash: 578046d6939b90cb58d457087bb465006630b4c1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
-
+ms.openlocfilehash: 31defde289643b2adfd6e15bb8417b5498ba65d1
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="common-exceptions-and-errors-when-working-with-the-fabricclient-apis"></a>FabricClient API로 작업하는 경우 일반적인 예외 및 오류
 [FabricClient](https://docs.microsoft.com/dotnet/api/system.fabric.fabricclient#System_Fabric_FabricClient) API를 사용하여 클러스터 및 응용 프로그램 관리자가 Service Fabric 응용 프로그램, 서비스 또는 클러스터에서 관리 작업을 수행할 수 있습니다. 예를 들어 응용 프로그램 배포, 업그레이드 및 제거, 클러스터 상태 확인 또는 서비스를 테스트합니다. 응용 프로그램 개발자 및 클러스터 관리자는 FabricClient API를 사용하여 서비스 패브릭 클러스터 및 응용 프로그램을 관리하기 위한 도구를 개발할 수 있습니다.
@@ -49,5 +47,4 @@ FabricClient를 사용하여 수행할 수 있는 다양한 유형의 작업이 
 | InvalidX509Store |X509 인증서 저장소를 열 수 없습니다. |
 | InvalidSubjectName |주체 이름이 올바르지 않습니다. |
 | InvalidAllowedCommonNameList |일반 이름 목록 문자열의 형식이 올바르지 않습니다. 쉼표로 구분된 목록이어야 합니다. |
-
 

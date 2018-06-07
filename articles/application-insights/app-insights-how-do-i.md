@@ -3,7 +3,7 @@ title: "Azure Application Insights에서 어떻게 할까요? | Microsoft Docs"
 description: "Application Insights의 FAQ"
 services: application-insights
 documentationcenter: 
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 48b2b644-92e4-44c3-bc14-068f1bbedd22
 ms.service: application-insights
@@ -12,13 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 04/04/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 125f05f5dce5a0e4127348de5b280f06c3491d84
-ms.openlocfilehash: 618fcfa3354ef5900d89546ffb7c222a852fe4f8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/22/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: a32127f14c93012b5ace11ff982824f9ecba7d94
+ms.sourcegitcommit: e462e5cca2424ce36423f9eff3a0cf250ac146ad
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/01/2017
 ---
 # <a name="how-do-i--in-application-insights"></a>Application Insights에서 다음을 수행하는 방법
 ## <a name="get-an-email-when-"></a>전자 메일을 받는 경우
@@ -99,7 +98,7 @@ ms.lasthandoff: 05/22/2017
 
 또는
 
-* SharePoint를 대시보드로 사용하여 SharePoint 웹 파트에 데이터를 표시 합니다. [연속 내보내기 및 스트림 분석을 사용하여 SQL로 내보냅니다](app-insights-code-sample-export-sql-stream-analytics.md).  PowerView를 사용하여 데이터베이스를 검사하고 PowerView에 대한 SharePoint 웹 파트를 만듭니다.
+* SharePoint를 대시보드로 사용하여 SharePoint 웹 파트에 데이터를 표시 합니다. [연속 내보내기 및 Stream Analytics를 사용하여 SQL로 내보냅니다](app-insights-code-sample-export-sql-stream-analytics.md).  PowerView를 사용하여 데이터베이스를 검사하고 PowerView에 대한 SharePoint 웹 파트를 만듭니다.
 
 <a name="search-specific-users"></a>
 
@@ -163,4 +162,3 @@ ms.lasthandoff: 05/22/2017
 ### <a name="to-display-more-performance-counters"></a>더 많은 성능 카운터를 표시하려면
 * 먼저 [새 차트를 추가하고](app-insights-metrics-explorer.md) 제공한 기본 집합에 카운터가 있는지 확인합니다.
 * 없으면 [성능 카운터 모듈에서 수집한 집합에 카운터를 추가합니다](app-insights-performance-counters.md).
-

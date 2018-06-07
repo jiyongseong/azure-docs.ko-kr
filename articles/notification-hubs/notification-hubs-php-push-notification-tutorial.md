@@ -1,34 +1,33 @@
 ---
-title: "PHP에서 알림 허브를 사용하는 방법"
-description: "PHP 백 엔드에서 Azure 알림 허브를 사용하는 방법에 대해 알아봅니다."
+title: PHP에서 Notification Hubs를 사용하는 방법
+description: PHP 백 엔드에서 Azure Notification Hubs를 사용하는 방법에 대해 알아봅니다.
 services: notification-hubs
-documentationcenter: 
-author: ysxu
-manager: erikre
-editor: 
+documentationcenter: ''
+author: dimazaid
+manager: kpiteira
+editor: spelluru
 ms.assetid: 0156f994-96d0-4878-b07b-49b7be4fd856
 ms.service: notification-hubs
 ms.workload: mobile
 ms.tgt_pltfrm: php
 ms.devlang: php
 ms.topic: article
-ms.date: 06/07/2016
-ms.author: yuaxu
-translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: c81ab9004bf71007395d2545c4e44b07c865aa9d
-ms.lasthandoff: 11/17/2016
-
-
+ms.date: 04/14/2018
+ms.author: dimazaid
+ms.openlocfilehash: 930da7cca312ac6233b337dd7ddac478c3bbee7b
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
-# <a name="how-to-use-notification-hubs-from-php"></a>PHP에서 알림 허브를 사용하는 방법
+# <a name="how-to-use-notification-hubs-from-php"></a>PHP에서 Notification Hubs를 사용하는 방법
 [!INCLUDE [notification-hubs-backend-how-to-selector](../../includes/notification-hubs-backend-how-to-selector.md)]
 
-MSDN 항목 [알림 허브 REST API](http://msdn.microsoft.com/library/dn223264.aspx)에 설명된 대로 알림 허브 REST 인터페이스를 사용하여 Java/PHP/Ruby 백 엔드에서 모든 알림 허브 기능에 액세스할 수 있습니다.
+MSDN 항목 [Notification Hubs REST API](http://msdn.microsoft.com/library/dn223264.aspx)에 설명된 대로 Notification Hubs REST 인터페이스를 사용하여 Java/PHP/Ruby 백 엔드에서 모든 Notification Hubs 기능에 액세스할 수 있습니다.
 
 이 항목에서는 다음 방법을 보여 줍니다.
 
-* PHP에서 알림 허브 기능에 대한 REST 클라이언트를 빌드하는 방법
+* PHP에서 Notification Hubs 기능에 대한 REST 클라이언트를 빌드하는 방법
 * 선택한 모바일 플랫폼에 대한 [시작 자습서](notification-hubs-ios-apple-push-notification-apns-get-started.md) 에 따라 PHP에서 백 엔드 부분을 구현합니다.
 
 ## <a name="client-interface"></a>클라이언트 인터페이스
@@ -46,10 +45,10 @@ iOS 기본 알림을 보내려면 다음을 수행합니다.
     $hub->sendNotification($notification, null);
 
 ## <a name="implementation"></a>구현
-아직 하지 않았으면 백 엔드를 구현해야 하는 [시작 자습서] 의 마지막 섹션까지 수행하세요.
+아직 수행하지 않았으면 백 엔드를 구현해야 하는 [시작 자습서]의 마지막 섹션까지 수행합니다.
 필요하면 [PHP REST 래퍼 샘플]에서 코드를 사용하고 직접 [자습서 완료](#complete-tutorial) 섹션으로 이동할 수도 있습니다.
 
-전체 REST 래퍼를 구현하는 방법에 대한 자세한 내용은 [MSDN](http://msdn.microsoft.com/library/dn530746.aspx)을 참조하세요. 이 섹션에서는 알림 허브 REST 끝점에 액세스하는 데 필요한 기본 단계의 PHP 구현에 대해 설명합니다.
+전체 REST 래퍼를 구현하는 방법에 대한 자세한 내용은 [MSDN](http://msdn.microsoft.com/library/dn530746.aspx)을 참조하세요. 이 섹션에서는 Notification Hubs REST 끝점에 액세스하는 데 필요한 기본 단계의 PHP 구현에 대해 설명합니다.
 
 1. 연결 문자열 구문 분석
 2. 인증 토큰 생성
@@ -135,7 +134,7 @@ iOS 기본 알림을 보내려면 다음을 수행합니다.
 
 이 클래스는 기본 알림 본문(또는 템플릿 알림의 경우 속성 집합) 및 형식(기본 플랫폼 또는 템플릿)과 플랫폼 특정 속성(예: Apple 만료 속성 및 WNS 헤더)이 포함된 헤더 집합에 대한 컨테이너입니다.
 
-모든 사용할 수 있는 옵션은 [알림 허브 REST API 설명서](http://msdn.microsoft.com/library/dn495827.aspx) 및 특정 알림 플랫폼의 형식을 참조하세요.
+모든 사용할 수 있는 옵션은 [Notification Hubs REST API 설명서](http://msdn.microsoft.com/library/dn495827.aspx) 및 특정 알림 플랫폼의 형식을 참조하세요.
 
 이제 이 클래스를 사용하여 **NotificationHub** 클래스 내부에서 알림 보내기 메서드를 쓸 수 있습니다.
 
@@ -198,10 +197,10 @@ iOS 기본 알림을 보내려면 다음을 수행합니다.
 
 위의 메서드는 알림을 보내기 위한 올바른 본문과 헤더가 있는 알림 허브의 /messages 끝점으로 HTTP POST 요청을 보냅니다.
 
-## <a name="a-namecomplete-tutorialacomplete-the-tutorial"></a><a name="complete-tutorial"></a>자습서 완료
+## <a name="complete-tutorial"></a>자습서 완료
 이제 PHP 백 엔드에서 알림을 보내 시작 자습서를 완료할 수 있습니다.
 
-알림 허브 클라이언트를 초기화합니다( [시작 자습서]에 설명된 대로 연결 문자열 및 허브 이름 대체).
+Notification Hubs 클라이언트를 초기화합니다( [시작 자습서]에 설명된 대로 연결 문자열 및 허브 이름 대체).
 
     $hub = new NotificationHub("connection string", "hubname");    
 
@@ -244,15 +243,14 @@ iOS 기본 알림을 보내려면 다음을 수행합니다.
 이제 PHP 코드를 실행하면 대상 장치에 나타나는 알림이 생성되어야 합니다.
 
 ## <a name="next-steps"></a>다음 단계
-이 항목에서는 알림 허브에 대한 단순한 Java REST 클라이언트를 만드는 방법을 알아보았습니다. 여기에서 다음을 할 수 있습니다.
+이 항목에서는 Notification Hubs에 대한 단순한 Java REST 클라이언트를 만드는 방법을 알아보았습니다. 여기에서 다음을 할 수 있습니다.
 
 * 위의 모든 코드가 포함된 전체 [PHP REST 래퍼 샘플]을 다운로드합니다.
-* [속보 자습서]에서 알림 허브 태그 지정 기능에 대해 계속 알아봅니다.
+* [속보 자습서]에서 Notification Hubs 태그 지정 기능에 대해 계속 알아봅니다.
 * [사용자에게 알림 자습서]에서 개별 사용자에게 알림을 게시하는 방법을 알아봅니다.
 
 자세한 내용은 [PHP 개발자 센터](/develop/php/)를 참조하세요.
 
 [PHP REST 래퍼 샘플]: https://github.com/Azure/azure-notificationhubs-samples/tree/master/notificationhubs-rest-php
 [시작 자습서]: http://azure.microsoft.com/documentation/articles/notification-hubs-ios-get-started/
-
 

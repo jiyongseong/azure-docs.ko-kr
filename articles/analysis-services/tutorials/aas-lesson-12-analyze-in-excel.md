@@ -1,34 +1,24 @@
 ---
-title: "Azure Analysis Services 자습서 단원 12: Excel에서 분석 | Microsoft Docs"
-description: "Azure Analysis Services 자습서 프로젝트에서 Excel에서 분석을 사용하는 방법을 설명합니다."
-services: analysis-services
-documentationcenter: 
+title: 'Azure Analysis Services 자습서 단원 12: Excel에서 분석 | Microsoft Docs'
+description: Azure Analysis Services 자습서 프로젝트에서 Excel에서 분석을 사용하는 방법을 설명합니다.
 author: minewiskan
-manager: erikre
-editor: 
-tags: 
-ms.assetid: 
+manager: kfile
 ms.service: analysis-services
-ms.devlang: NA
-ms.topic: get-started-article
-ms.tgt_pltfrm: NA
-ms.workload: na
-ms.date: 05/26/2017
+ms.topic: conceptual
+ms.date: 04/12/2018
 ms.author: owend
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 43aab8d52e854636f7ea2ff3aae50d7827735cc7
-ms.openlocfilehash: 6f47de43ff8d94de22f8b7c12fa0707a8d7ffbbc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/03/2017
-
+ms.reviewer: minewiskan
+ms.openlocfilehash: 17dba7be2acab18108dc50a5c16d55e0e720cbcc
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-# <a name="lesson-12-analyze-in-excel"></a>단원 12: Excel에서 분석
-
-[!INCLUDE[analysis-services-appliesto-aas-sql2017-later](../../../includes/analysis-services-appliesto-aas-sql2017-later.md)]
+# <a name="analyze-in-excel"></a>Excel에서 분석
 
 이 단원에서는 Excel에서 분석 기능을 사용하여 Microsoft Excel을 열고 모델 작업 영역에 대한 연결을 자동으로 만들고 피벗 테이블을 워크시트에 자동으로 추가합니다. Excel에서 분석 기능은 모델을 배포하기 전에 모델 디자인의 효율성을 테스트하기 위한 쉽고 빠른 방법을 제공합니다. 이 단원에서는 어떠한 데이터 분석도 수행하지 않습니다. 이 단원의 목적은 모델 작성자인 사용자가 모델 디자인을 테스트하는 데 사용할 수 있는 도구를 습득하게 하는 것입니다.   
   
-이 단원을 완료하려면 SSDT와 같은 컴퓨터에 Excel이 설치되어 있어야 합니다.
+이 단원을 완료하려면 Excel이 Visual Studio와 동일한 컴퓨터에 설치되어 있어야 합니다.
   
 이 단원을 완료하기 위한 예상 시간: **5분**  
   
@@ -83,4 +73,3 @@ ms.lasthandoff: 06/03/2017
   
   
   
-

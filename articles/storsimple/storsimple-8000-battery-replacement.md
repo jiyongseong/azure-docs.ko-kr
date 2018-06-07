@@ -4,7 +4,7 @@ description: "StorSimple 장치의 백업 배터리 모듈을 꺼내고 교체 �
 services: storsimple
 documentationcenter: 
 author: alkohli
-manager: timlt
+manager: jeconnoc
 editor: 
 ms.assetid: 
 ms.service: storsimple
@@ -12,15 +12,13 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: TBD
-ms.date: 06/05/2017
+ms.date: 01/09/2018
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 174a3163082594ea6a49b7f5a78857848f8f0566
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: f8071cde67017ff031418f0d97da15a618c4969b
+ms.sourcegitcommit: 9292e15fc80cc9df3e62731bafdcb0bb98c256e1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/10/2018
 ---
 # <a name="replace-the-backup-battery-module-on-your-storsimple-device"></a>StorSimple 장치의 백업 배터리 모듈 교체
 
@@ -69,7 +67,7 @@ StorSimple 장치에 대한 백업 배터리 모듈은 FRU(현장 교체 장치)
    | 4 |PCM 정상 |
    | 5 |DC 전원 오류 |
    | 6 |배터리 정상 |
-3. 오류가 발생한 배터리가 있는 PCM을 꺼내려면 [PCM 꺼내기](storsimple-power-cooling-module-replacement.md#remove-a-pcm)의 단계를 따르세요.
+3. 오류가 발생한 배터리가 있는 PCM을 꺼내려면 [PCM 꺼내기](storsimple-8000-power-cooling-module-replacement.md#remove-a-pcm)의 단계를 따르세요.
 4. PCM을 꺼낸 후 다음 그림과 같이 배터리 모듈 핸들을 들고 위로 회전해서 당겨 배터리를 꺼냅니다.
    
     ![PCM에서 배터리 꺼내기](./media/storsimple-battery-replacement/IC741019.png)
@@ -84,7 +82,7 @@ StorSimple 장치의 기본 엔클로저의 PCM에 교체 배터리 모듈을 �
 #### <a name="to-install-the-battery-module"></a>배터리 모듈을 설치하려면
 1. 백업 배터리 모듈을 PCM에 올바른 방향으로 놓습니다.
 2. 배터리 모듈 핸들을 아래로 완전히 눌러 커넥터를 장착합니다.
-3. [StorSimple 장치의 전원 및 냉각 모듈 교체](storsimple-power-cooling-module-replacement.md)의 지침에 따라 기본 엔클로저의 PCM을 교체합니다.
+3. [StorSimple 장치의 전원 및 냉각 모듈 교체](storsimple-8000-power-cooling-module-replacement.md)의 지침에 따라 기본 엔클로저의 PCM을 교체합니다.
 4. 바꾸기가 완료되면 Azure Portal에서 장치로 이동한 후 **모니터** > **하드웨어 상태**로 이동합니다. 설치가 성공적으로 수행되었는지 확인하려면 배터리 상태를 확인합니다. 녹색 상태는 배터리가 정상임을 나타냅니다.
 
 ## <a name="maintain-the-backup-battery-module"></a>백업 배터리 모듈 유지 관리
@@ -109,5 +107,4 @@ Azure Portal에서 **모니터** 블레이드의 **하드웨어 상태**는 배�
 
 ## <a name="next-steps"></a>다음 단계
 [StorSimple 하드웨어 구성 요소 교체](storsimple-8000-hardware-component-replacement.md)에 대해 자세히 알아봅니다.
-
 

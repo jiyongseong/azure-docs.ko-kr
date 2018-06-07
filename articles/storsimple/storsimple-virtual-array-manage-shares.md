@@ -14,10 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/21/2016
 ms.author: manuaery
-translationtype: Human Translation
-ms.sourcegitcommit: 19177fe13db2aefcef7fcf37ea8fef2fa99c728f
 ms.openlocfilehash: e5c62689de36baa175001f5f4f70d87568876ef0
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-the-storsimple-device-manager-service-to-manage-shares-on-the-storsimple-virtual-array"></a>StorSimple 장치 관리자 서비스를 사용하여 StorSimple 가상 배열에서 공유 관리
 
@@ -142,10 +143,4 @@ StorSimple 서비스 요약 블레이드의 **공유** 메뉴에서는 지정된
 
 ## <a name="next-steps"></a>다음 단계
 [StorSimple 공유를 복제](storsimple-virtual-array-clone.md)하는 방법에 대해 알아봅니다.
-
-
-
-
-<!--HONumber=Jan17_HO4-->
-
 

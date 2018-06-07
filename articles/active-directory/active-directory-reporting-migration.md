@@ -1,38 +1,34 @@
 ---
-title: "Azure Portal에서 작업 보고서 찾기 | Microsoft Docs"
-description: "Azure Portal에서 Azure Active Directory 작업 보고서를 찾는 방법을 알아봅니다."
+title: Azure Portal에서 Azure Active Directory 사용자 작업 보고서 찾기 | Microsoft Docs
+description: Azure Portal에서 Azure Active Directory 사용자 작업 보고서가 어디에 위치하는지 알아봅니다.
 services: active-directory
-documentationcenter: 
-author: MarkusVi
-manager: femila
-editor: 
-ms.assetid: d93521f8-dc21-4feb-aaff-4bb300f04812
+documentationcenter: ''
+author: curtand
+manager: mtillman
+editor: ''
 ms.service: active-directory
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 07/19/2017
-ms.author: dhanyahk;markvi
+ms.component: users-groups-roles
+ms.date: 12/06/2017
+ms.author: curtand
 ms.reviewer: dhanyahk
+ms.openlocfilehash: 985bdc3c00549844958c23a83496a019d7a31944
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: f1875582476c3817b9eb0082b6548cc15043cb98
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="find-activity-reports-in-the-azure-portal"></a>Azure Portal에서 작업 보고서 찾기
 
-Azure 클래식 포털에서 Azure Portal로 전환하면 새로운 Azure AD(Azure Active Directory) 작업 로그를 볼 수 있습니다. 최근에 [블로그 게시물](https://blogs.technet.microsoft.com/enterprisemobility/2016/11/08/azuread-weve-just-turned-on-detailed-auditing-and-sign-in-logs-in-the-new-azure-portal/)을 통해 Azure Portal에서 작업 중인 리소스와 관련된 작업 로그를 보는 방법을 설명드렸습니다. 이 문서에서는 Azure 클래식 포털 및 Azure Portal에서 사용한 보고서를 찾는 방법을 설명합니다.
+이 문서에서는 Azure Portal에서 Azure Active Directory 사용자 작업 보고서를 찾는 방법을 설명합니다.
 
 ## <a name="whats-new"></a>새로운 기능
 
-Azure 클래식 포털의 보고서는 다음과 같은 범주로 분류됩니다.
-
-1.  보안 보고서
-2.  작업 보고서
-3.  통합 앱 보고서
+Azure 클래식 포털의 보고서는 다음과 같은 범주로 구분됩니다.
+* 보안 보고서
+* 작업 보고서
+* 통합 앱 보고서
 
 ### <a name="activity-and-integrated-app-reports"></a>활동 및 통합 앱 보고서
 
@@ -44,14 +40,14 @@ Azure Portal의 컨텍스트 기반 보고서의 경우 기존 보고서가 단�
 
 다음과 같은 보고서가 이 보기에 통합되었습니다.
 
--   감사 보고서
--   암호 재설정 활동
--   암호 재설정 등록 활동
--   셀프 서비스 그룹 작업
--   Office 365 그룹 이름 변경
--   계정 프로비전 활동
--   암호 롤오버 상태
--   계정 프로비전 오류
+* 감사 보고서
+* 암호 재설정 활동
+* 암호 재설정 등록 활동
+* 셀프 서비스 그룹 작업
+* Office 365 그룹 이름 변경
+* 계정 프로비전 활동
+* 암호 롤오버 상태
+* 계정 프로비전 오류
 
 
 개선된 응용 프로그램 사용 현황 보고서가 **로그인** 보기에 포함되었습니다. 이 보기를 보려면 **Azure Active Directory** 블레이드의 **작업**에서 **로그인**을 선택합니다.
@@ -156,4 +152,3 @@ Azure Portal의 **Azure Active Directory** 블레이드 **보안** 섹션에서�
 ## <a name="next-steps"></a>다음 단계
 
 보고 개요는 [Azure Active Directory 보고](active-directory-reporting-azure-portal.md)를 참조하세요.
-

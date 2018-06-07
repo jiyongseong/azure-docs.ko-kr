@@ -1,11 +1,11 @@
 ---
-title: "Azure Automation에서 Runbook을 사용하여 Log Analytics 데이터 수집 | Microsoft Docs"
-description: "Azure Automation에서 Runbook을 만들어 Log Analytics에서 분석할 수 있게 OMS 리포지토리에 데이터를 수집하는 과정을 안내하는 단계별 자습서입니다."
+title: Azure Automation에서 Runbook을 사용하여 Log Analytics 데이터 수집 | Microsoft Docs
+description: Azure Automation에서 Runbook을 만들어 Log Analytics에서 분석할 수 있게 OMS 리포지토리에 데이터를 수집하는 과정을 안내하는 단계별 자습서입니다.
 services: log-analytics
-documentationcenter: 
+documentationcenter: ''
 author: bwren
 manager: carmonm
-editor: 
+editor: ''
 ms.assetid: a831fd90-3f55-423b-8b20-ccbaaac2ca75
 ms.service: operations-management-suite
 ms.workload: na
@@ -14,13 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 05/27/2017
 ms.author: bwren
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a643f139be40b9b11f865d528622bafbe7dec939
-ms.openlocfilehash: 59f674c9c6404da7f5384539189f41a4ba1a939a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/31/2017
-
-
+ms.openlocfilehash: 0784e2317fbc98561b486547654ca27bb30e76c3
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="collect-data-in-log-analytics-with-an-azure-automation-runbook"></a>Azure Automation Runbook을 사용하여 Log Analytics에서 데이터 수집
 에이전트의 [데이터 원본](../log-analytics/log-analytics-data-sources.md)을 비롯한 다양한 원본에서 Log Analytics으로 대량의 데이터를 수집할 수 있고 [Azure에서 수집된 데이터](../log-analytics/log-analytics-azure-storage.md)도 가져올 수 있습니다.  이러한 표준 원본을 통해 액세스할 수 없는 데이터를 수집해야 하는 경우도 있습니다.  이러한 경우 [HTTP 데이터 수집기 API](../log-analytics/log-analytics-data-collector-api.md)를 사용하여 REST API 클라이언트에서 Log Analytics로 데이터를 쓸 수 있습니다.  이 데이터 수집을 수행하는 일반적인 방법은 Azure Automation에서 Runbook을 사용하는 것입니다.   
@@ -59,18 +57,18 @@ Runbook에서 [모듈](../automation/automation-integration-modules.md)을 사�
 ## <a name="2-create-automation-variables"></a>2. Automation 변수 만들기
 [Automation 변수](..\automation\automation-variables.md)는 Automation 계정의 모든 Runbook에서 사용할 수 있는 값을 포함합니다.  이러한 변수를 사용하면 실제 Runbook을 편집하지 않고도 이러한 값을 변경할 수 있으므로 훨씬 유연하게 작업할 수 있습니다. HTTP 데이터 수집기 API의 모든 요청에는 OMS 작업 영역의 ID 및 키가 필요하며 변수 자산은 이 정보를 저장하는 데 이상적입니다.  
 
-![변수](media/operations-management-suite-runbook-datacollect/variables.png)
+![variables](media/operations-management-suite-runbook-datacollect/variables.png)
 
 1. Azure Portal에서 Automation 계정으로 이동합니다.
 2. **공유 리소스**에서 **변수**를 선택합니다.
 2. **변수 추가**를 클릭하고 다음 표에 나오는 두 가지 변수를 만듭니다.
 
-| 속성 | 작업 영역 ID 값 | 작업 영역 키 값 |
+| 자산 | 작업 영역 ID 값 | 작업 영역 키 값 |
 |:--|:--|:--|
-| 이름 | WorkspaceId | WorkspaceKey |
-| 유형 | 문자열 | 문자열 |
+| Name | WorkspaceId | WorkspaceKey |
+| type | 문자열 | 문자열 |
 | 값 | Log Analytics 작업 영역의 작업 영역 ID를 붙여 넣습니다. | Log Analytics 작업 영역의 기본 또는 보조 키와 함께 붙여 넣습니다. |
-| 암호화 | 아니요 | 예 |
+| 암호화 | 아니오 | 예 |
 
 
 
@@ -99,7 +97,7 @@ Azure Automation은 포털에 Runbook을 편집하고 테스트할 수 있는 �
         # Code copied from the runbook AzureAutomationTutorial.
         $connectionName = "AzureRunAsConnection"
         $servicePrincipalConnection=Get-AutomationConnection -Name $connectionName         
-        Add-AzureRmAccount `
+        Connect-AzureRmAccount `
             -ServicePrincipal `
             -TenantId $servicePrincipalConnection.TenantId `
             -ApplicationId $servicePrincipalConnection.ApplicationId `
@@ -173,7 +171,7 @@ Runbook이 올바르게 작동하는지 확인한 후에는 프로덕션 환경�
 
 1. Runbook에 대한 속성의 **Runbook 설정**에서 **로깅 및 추적**을 선택합니다.
 2. **상세 레코드 기록**에 대한 설정을 **설정**으로 변경합니다.
-3. **Save**를 클릭합니다.
+3. **저장**을 클릭합니다.
 
 ## <a name="8-schedule-runbook"></a>8. Runbook 예약
 모니터링 데이터를 수집하는 Runbook을 시작하는 가장 일반적인 방법은 자동으로 실행되도록 예약하는 것입니다.  이를 위해 [Azure Automation에서 일정](../automation/automation-schedules.md)을 만들고 Runbook에 첨부하면 됩니다.
@@ -184,13 +182,13 @@ Runbook이 올바르게 작동하는지 확인한 후에는 프로덕션 환경�
 2. **일정 추가** > **Runbook에 일정 연결** > **새 일정 만들기**를 클릭합니다.
 5. 일정에 대해 다음 값을 입력하고 **만들기**를 클릭합니다.
 
-| 속성 | 값 |
+| 자산 | 값 |
 |:--|:--|
-| 이름 | AutomationJobs-Hourly |
+| Name | AutomationJobs-Hourly |
 | Starts | 현재 시간보다 적어도 5분 이후의 아무 시간이나 선택합니다. |
 | 되풀이 | Recurring |
 | Recur every | 1시간 |
-| Set expiration | 아니요 |
+| Set expiration | 아니오 |
 
 일정을 만든 후에는 이 일정에 따라 Runbook이 시작될 때마다 사용되는 매개 변수 값을 설정해야 합니다.
 
@@ -201,7 +199,7 @@ Runbook이 올바르게 작동하는지 확인한 후에는 프로덕션 환경�
 ## <a name="9-verify-runbook-starts-on-schedule"></a>9. Runbook이 일정에 맞게 시작되는지 확인
 Runbook이 시작될 때마다 [작업이 만들어지고](../automation/automation-runbook-execution.md) 모든 출력이 로깅됩니다.  실제로는 Runbook이 수집하는 작업과 같습니다.  일정 시작 시간이 경과된 후 Runbook에 대한 작업을 확인하여 Runbook이 예상대로 시작되었는지 확인할 수 있습니다.
 
-![작업](media/operations-management-suite-runbook-datacollect/jobs.png)
+![교육](media/operations-management-suite-runbook-datacollect/jobs.png)
 
 1. Runbook에 대한 속성의 **리소스**에서 **작업**을 선택합니다.
 2. Runbook이 시작될 때마다 작업 목록이 표시됩니다.

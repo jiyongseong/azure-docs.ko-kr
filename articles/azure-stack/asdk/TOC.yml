@@ -1,0 +1,89 @@
+- name: Azure 스택 개발 키트 설명서
+  href: index.yml
+- name: 개요
+  expanded: true
+  items:
+    - name: ASDK 무엇입니까?
+      href: asdk-what-is.md
+    - name: ASDK 릴리스 정보
+      href: asdk-release-notes.md
+- name: 자습서
+  items:
+    - name: 1. ASDK 배포
+      items:
+        - name: '-ASDK 설치 관리자 배포'
+          href: asdk-deploy.md
+        - name: 배포 ASDK-PowerShell
+          href: asdk-deploy-powershell.md
+        - name: ASDK 다시 배포
+          href: asdk-redeploy.md
+    - name: 2. 마켓플레이스 항목을 추가 합니다.
+      items:
+        - name: Azure에서 다운로드
+          href: asdk-marketplace-item.md
+        - name: 로컬 소스에서 추가
+          href: asdk-marketplace-item-offline.md
+    - name: 3. IaaS에 서비스 제공
+      href: asdk-offer-services.md
+    - name: 4. 제품 구독
+      href: asdk-subscribe-services.md
+    - name: 5. 계획 및 업데이트 제공
+      href: asdk-update-offers.md
+    - name: 6. 서식 파일에서 VM 만들기
+      href: asdk-create-vm-template.md
+- name: 개념
+  items:
+    - name: 배포 계획 고려 사항
+      href: asdk-deploy-considerations.md
+    - name: 개발 키트 아키텍처
+      href: asdk-architecture.md
+    - name: ASDK 관리 기본 사항
+      href: asdk-admin-basics.md
+    - name: 고급 평가 작업
+      href: asdk-advanced-eval.md
+- name: 방법
+  items:
+    - name: 설치 프로그램은 ASDK
+      items:
+        - name: 다운로드 하 고 개발 키트를 압축 합니다.
+          href: asdk-download.md
+        - name: ASDK 호스트 컴퓨터를 준비 합니다.
+          href: asdk-prepare-host.md
+        - name: ASDK 설치
+          href: asdk-install.md
+        - name: 배포 후 구성
+          href: asdk-post-deploy.md
+    - name: ASDK 등록
+      href: asdk-register.md
+    - name: Azure 스택 원격 분석 설정 구성
+      href: asdk-telemetry.md
+    - name: 시작 및 중지는 ASDK
+      href: asdk-start-stop.md
+    - name: 문제 해결
+      href: asdk-troubleshooting.md
+- name: 참조
+  items:
+    - name: Azure Stack PowerShell
+      href: /powershell/azure/azure-stack/overview?view=azurestackps-1.2.10
+    - name: Azure Stack CLI
+      href: /cli/azure/?view=azure-cli-2017-03-09-profile
+- name: 관련 항목
+  items:
+    - name: Azure Stack 연산자 설명서
+      href: /azure/azure-stack/
+    - name: Azure Stack 사용자 설명서
+      href: /azure/azure-stack/user/
+- name: 리소스
+  items:
+    - name: Azure 스택 로드맵
+      href: 'https://azure.microsoft.com/roadmap/?tag=azure-stack'
+    - name: Azure 스택 MSDN 포럼
+      href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureStack'
+    - name: Azure 스택 설명서 사용자 의견
+      href: 'https://feedback.azure.com/forums/344565-azure-stack?category_id=160275'
+    - name: 가격 정보
+      href: 'https://azure.microsoft.com/overview/azure-stack/how-to-buy/'
+    - name: 스택 오버플로
+      href: 'http://stackoverflow.com/questions/tagged/azure-stack'
+    - name: 교육 및 인증
+      href: 'https://docs.microsoft.com/azure/azure-stack/azure-stack-train-and-cert'

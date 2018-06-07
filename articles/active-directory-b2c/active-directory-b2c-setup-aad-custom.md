@@ -1,10 +1,10 @@
 ---
-title: "Azure Active Directory B2C: 사용자 지정 정책을 사용하여 Azure AD 공급자 추가 | Microsoft Docs"
-description: "Azure Active Directory B2C 사용자 지정 정책에 대해 알아봅니다."
+title: 'Azure Active Directory B2C: 사용자 지정 정책을 사용하여 Azure AD 공급자 추가 | Microsoft Docs'
+description: Azure Active Directory B2C 사용자 지정 정책에 대해 알아봅니다.
 services: active-directory-b2c
-documentationcenter: 
+documentationcenter: ''
 author: parakhj
-manager: krassk
+manager: mtillman
 editor: parakhj
 ms.assetid: 31f0dfe5-1ad0-4a25-a53b-8acc71bcea72
 ms.service: active-directory-b2c
@@ -14,12 +14,12 @@ ms.topic: article
 ms.devlang: na
 ms.date: 04/04/2017
 ms.author: parakhj
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 495a695466c47c6030716d97c52b3bbf5ce9bf99
-ms.openlocfilehash: 6c073d70debfdc3560405955d65fa9ccaa7d8b1f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/02/2017
-
+ms.openlocfilehash: 40943c135746925929daf7ebae4714ef70eeda51
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32140226"
 ---
 # <a name="azure-active-directory-b2c-sign-in-by-using-azure-ad-accounts"></a>Azure Active Directory B2C: Azure AD 계정을 사용하여 로그인
 
@@ -46,22 +46,25 @@ ms.lasthandoff: 08/02/2017
 >[!NOTE]
 > 조직의 Azure AD 테넌트로 "contoso.com"을 사용하고, 다음 지침에서는 "fabrikamb2c.onmicrosoft.com"을 Azure AD B2C 테넌트로 사용합니다.
 
-1. [Azure 포털](https://portal.azure.com)에 로그인합니다.
-1. 위쪽 막대에서 계정을 선택합니다. **디렉터리** 목록에서 응용 프로그램을 등록하려는 조직의 Azure AD 테넌트(contoso.com)를 선택합니다.
-1. 왼쪽 창에서 **더 많은 서비스**를 클릭하고 "앱 등록"을 검색합니다.
-1. **새 응용 프로그램 등록**을 선택합니다.
-1. 응용 프로그램의 이름(예: `Azure AD B2C App`)을 입력합니다.
-1. 응용 프로그램 종류에 대해 **웹앱/API**를 선택합니다.
-1. **로그온 URL**에 대해 다음 URL을 입력합니다. 여기서 `yourtenant`는 Azure AD B2C 테넌트의 이름(`fabrikamb2c.onmicrosoft.com`)으로 바뀝니다.
+1. [Azure Portal](https://portal.azure.com)에 로그인합니다.
+2. 위쪽 막대에서 계정을 선택합니다. **디렉터리** 목록에서 응용 프로그램을 등록하려는 조직의 Azure AD 테넌트(contoso.com)를 선택합니다.
+3. 왼쪽 창에서 **더 많은 서비스**를 클릭하고 "앱 등록"을 검색합니다.
+4. **새 응용 프로그램 등록**을 선택합니다.
+5. 응용 프로그램의 이름(예: `Azure AD B2C App`)을 입력합니다.
+6. 응용 프로그램 종류에 대해 **웹앱/API**를 선택합니다.
+7. **로그온 URL**에 대해 다음 URL을 입력합니다. 여기서 `yourtenant`는 Azure AD B2C 테넌트의 이름(`fabrikamb2c.onmicrosoft.com`)으로 바뀝니다.
+
+    >[!NOTE]
+    >"yourtenant"의 값은 **로그온 URL**에서 모두 소문자여야 합니다.
 
     ```
     https://login.microsoftonline.com/te/yourtenant.onmicrosoft.com/oauth2/authresp
     ```
 
-1. 응용 프로그램 ID를 저장합니다.
-1. 새로 만든 응용 프로그램을 선택합니다.
-1. **설정** 블레이드 아래에서 **키**를 선택합니다.
-1. 새 키를 만들고 저장합니다. 이 키는 다음 섹션의 단계에서 사용합니다.
+8. 응용 프로그램 ID를 저장합니다.
+9. 새로 만든 응용 프로그램을 선택합니다.
+10. **설정** 블레이드 아래에서 **키**를 선택합니다.
+11. 키 설명을 입력하고, 기간을 선택한 다음, **저장**을 클릭합니다. 키 값이 표시됩니다. 이 키는 다음 섹션의 단계에서 사용되므로 복사합니다.
 
 ## <a name="add-the-azure-ad-key-to-azure-ad-b2c"></a>Azure AD B2C에 Azure AD 키 추가
 
@@ -220,4 +223,3 @@ Azure AD 끝점에서 토큰을 가져오려면 Azure AD B2C에서 Azure AD와 �
 ## <a name="next-steps"></a>다음 단계
 
 [AADB2CPreview@microsoft.com](mailto:AADB2CPreview@microsoft.com)에 대한 피드백을 제공합니다.
-

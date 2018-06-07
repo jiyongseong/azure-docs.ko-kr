@@ -1,11 +1,11 @@
 ---
-title: "Azure DMZ 예제 – NSG를 사용하여 간단한 DMZ 빌드| Microsoft Docs"
-description: "NSG(네트워크 보안 그룹)를 사용하여 DMZ 빌드"
+title: Azure DMZ 예제 – NSG를 사용하여 간단한 DMZ 빌드| Microsoft Docs
+description: NSG(네트워크 보안 그룹)를 사용하여 DMZ 빌드
 services: virtual-network
 documentationcenter: na
 author: tracsman
 manager: rossort
-editor: 
+editor: ''
 ms.assetid: f8622b1d-c07d-4ea6-b41c-4ae98d998fff
 ms.service: virtual-network
 ms.devlang: na
@@ -14,12 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/03/2017
 ms.author: jonor
-translationtype: Human Translation
-ms.sourcegitcommit: cb2e480a45871ad0c956dc976de955ca48ecdfd0
 ms.openlocfilehash: ed172d552e1e4c9ee27c58abcd7ad2d98df21579
-ms.lasthandoff: 01/05/2017
-
-
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
 # <a name="example-1--build-a-simple-dmz-using-nsgs-with-classic-powershell"></a>예제 1 – 클래식 PowerShell로 NSG를 사용하여 간단한 DMZ 빌드
 [보안 경계 모범 사례 페이지로 돌아가기][HOME]
@@ -30,7 +29,7 @@ ms.lasthandoff: 01/05/2017
 > 
 >
 
-이 예에서는&4;개의 Windows Server 및 네트워크 보안 그룹이 포함된 기본 DMZ를 만듭니다. 이 예제는 각 단계를 자세히 이해할 수 있도록 각각의 관련 PowerShell 명령을 설명합니다. 트래픽 시나리오 섹션에서는 DMZ에서 방어 계층을 진행하는 방법에 대한 심층적인 단계별 설명도 제공합니다. 마지막으로, 참조 섹션에서는 다양한 시나리오를 사용하여 테스트 및 실험하기 위한 환경을 구축하는 전체 코드와 지침을 제공합니다. 
+이 예에서는 4개의 Windows Server 및 네트워크 보안 그룹이 포함된 기본 DMZ를 만듭니다. 이 예제는 각 단계를 자세히 이해할 수 있도록 각각의 관련 PowerShell 명령을 설명합니다. 트래픽 시나리오 섹션에서는 DMZ에서 방어 계층을 진행하는 방법에 대한 심층적인 단계별 설명도 제공합니다. 마지막으로, 참조 섹션에서는 다양한 시나리오를 사용하여 테스트 및 실험하기 위한 환경을 구축하는 전체 코드와 지침을 제공합니다. 
 
 ![NSG와 인바운드 DMZ][1]
 
@@ -38,13 +37,13 @@ ms.lasthandoff: 01/05/2017
 이 예에서 구독은 다음 리소스를 포함합니다.
 
 * 두 클라우드 서비스: "FrontEnd001" 및 "BackEnd001"
-* "FrontEnd" 및 "BackEnd"의 두 서브넷을 포함하는 가상 네트워크 "CorpNetwork"
+* "FrontEnd" 및 "BackEnd"의 두 서브넷을 포함하는 Virtual Network "CorpNetwork"
 * 서브넷 모두에 적용되는 네트워크 보안 그룹
 * 응용 프로그램 웹 서버("IIS01")를 나타내는 Windows 서버
 * 응용 프로그램 백 엔드 서버("AppVM01", "AppVM02")를 나타내는 두 Windows 서버
-* DNS 서버("DNS01")를 나타내는 Windows Server
+* DNS 서버("DNS01")를 나타내는 Windows 서버
 
-참조 섹션에는 이 예제에서 설명한 대부분의 환경을 빌드하는 PowerShell 스크립트가 있습니다. VM 및 가상 네트워크 구축은 예제 스크립트로 수행하지만 이 문서에서는 자세히 설명하지 않습니다. 
+참조 섹션에는 이 예제에서 설명한 대부분의 환경을 빌드하는 PowerShell 스크립트가 있습니다. VM 및 Virtual Network 구축은 예제 스크립트로 수행하지만 이 문서에서는 자세히 설명하지 않습니다. 
 
 환경을 구축하려면
 
@@ -62,7 +61,7 @@ ms.lasthandoff: 01/05/2017
 다음 섹션에서는 네트워크 보안 그룹을 설명하고 PowerShell 스크립트의 핵심 줄을 살펴보는 방법으로 이 예제의 작동 방식을 자세히 설명합니다.
 
 ## <a name="network-security-groups-nsg"></a>네트워크 보안 그룹(NSG)
-이 예제에서는 NSG 그룹을 빌드한 후&6;개의 규칙을 로드합니다. 
+이 예제에서는 NSG 그룹을 빌드한 후 6개의 규칙을 로드합니다. 
 
 > [!TIP]
 > 일반적으로 특정 "허용" 규칙을 먼저 만든 후 보다 일반적인 "거부" 규칙을 만들어야 합니다. 할당된 우선순위에 따라 먼저 평가할 규칙이 결정됩니다. 특정 규칙에 적용할 트래픽이 발견되면 규칙을 더 이상 평가하지 않습니다. NSG 규칙은 인바운드 또는 아웃바운드 방향으로 적용할 수 있습니다(서브넷 관점에서).
@@ -94,7 +93,7 @@ ms.lasthandoff: 01/05/2017
 
 2. 이 예의 첫 번째 규칙에서는 백 엔드 서브넷에서 DNS 서버에 대해 모든 내부 네트워크 간 DNS 트래픽을 허용합니다. 규칙은 몇 가지 중요한 매개 변수를 포함합니다.
    
-   * "Type"은 이 규칙이 적용되는 트래픽 흐름의 방향을 나타냅니다. 방향은 서브넷 또는 가상 컴퓨터의 관점에서 옵니다(이 NSG가 바인딩되는 위치에 따라). 따라서 Type이 "Inbound"이고 트래픽이 서브넷에 들어가는 경우 규칙이 적용되고 서브넷에서 나가는 트래픽에는 이 규칙이 적용되지 않습니다.
+   * "Type"은 이 규칙이 적용되는 트래픽 흐름의 방향을 나타냅니다. 방향은 서브넷 또는 Virtual Machine의 관점에서 옵니다(이 NSG가 바인딩되는 위치에 따라). 따라서 Type이 "Inbound"이고 트래픽이 서브넷에 들어가는 경우 규칙이 적용되고 서브넷에서 나가는 트래픽에는 이 규칙이 적용되지 않습니다.
    * "Priority"는 트래픽 흐름이 평가되는 순서를 설정합니다. 번호가 낮을수록 우선순위가 높습니다. 특정 트래픽 흐름에 규칙이 적용되는 경우 더 이상 규칙이 처리되지 않습니다. 따라서 우선순위 1인 규칙에서는 트래픽을 허용하고 우선순위 2인 규칙에서는 트래픽을 거부하고 두 규칙 모두 트래픽에 적용된다면 트래픽 흐름이 허용됩니다(규칙 1의 우선순위가 높으므로 해당 규칙이 적용되고 다른 규칙은 적용되지 않음).
    * "Action"은 이 규칙의 영향을 받는 트래픽을 차단하거나 허용할지를 나타냅니다.
 
@@ -172,7 +171,7 @@ ms.lasthandoff: 01/05/2017
 #### <a name="allowed-internet-to-web-server"></a>(*허용*) 인터넷에서 웹 서버
 1. 인터넷 사용자가 FrontEnd001.CloudApp.Net에서 HTTP 페이지를 요청합니다(인터넷 연결 클라우드 서비스).
 2. 클라우드 서비스는 포트 80에서 열린 끝점을 통해 IIS01(웹 서버)로 트래픽을 전달합니다.
-3. 프런트엔드 서브넷은 인바운드 규칙 처리를 시작합니다.
+3. 프런트 엔드 서브넷에서 인바운드 규칙 처리를 시작합니다.
    1. NSG 규칙 1(DNS)이 적용되지 않고 다음 규칙으로 이동합니다.
    2. NSG 규칙 2(RDP)가 적용되지 않고 다음 규칙으로 이동합니다.
    3. NSG 규칙 3(인터넷에서 IIS01로)이 적용되고 트래픽이 허용되며 규칙 처리를 중지합니다.
@@ -204,7 +203,7 @@ ms.lasthandoff: 01/05/2017
 
 #### <a name="allowed-web-server-dns-look-up-on-dns-server"></a>(*허용*) DNS 서버에서 웹 서버 DNS 조회
 1. 웹 서버인 IIS01은 www.data.gov에서 데이터 피드를 요구하지만 주소를 확인해야 합니다.
-2. VNet에 대한 네트워크 구성에서 DNS01(백 엔드 서브넷에서&10;.0.2.4)을 주 DNS 서버로 나열하며 IIS01은 DNS01로 DNS 요청을 보냅니다.
+2. VNet에 대한 네트워크 구성에서 DNS01(백 엔드 서브넷에서 10.0.2.4)을 주 DNS 서버로 나열하며 IIS01은 DNS01로 DNS 요청을 보냅니다.
 3. 프런트 엔드 서브넷에 아웃바운드 규칙이 없고 트래픽이 허용됩니다.
 4. 백 엔드 서브넷이 인바운드 규칙 처리를 시작합니다.
    * NSG 규칙 1(DNS)이 적용되고 트래픽이 허용되며 규칙 처리를 중지합니다.
@@ -590,5 +589,4 @@ Else { Write-Host "Validation passed, now building the environment." -Foreground
 <!--Link References-->
 [HOME]: ../best-practices-network-security.md
 [SampleApp]: ./virtual-networks-sample-app.md
-
 

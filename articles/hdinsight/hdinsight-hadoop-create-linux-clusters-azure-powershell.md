@@ -1,8 +1,8 @@
 ---
-title: "PowerShell를 사용하여 Hadoop 클러스터 만들기 - Azure HDInsight | Microsoft Docs"
-description: "Azure PowerShell을 사용하여 Linux 기반 HDInsight에서 Hadoop, HBase, Storm 또는 Spark 클러스터를 만드는 방법에 대해 알아봅니다."
+title: PowerShell를 사용하여 Hadoop 클러스터 만들기 - Azure HDInsight | Microsoft Docs
+description: Azure PowerShell을 사용하여 Linux 기반 HDInsight에서 Hadoop, HBase, Storm 또는 Spark 클러스터를 만드는 방법에 대해 알아봅니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: nitinme
 manager: jhubbard
 editor: cgronlun
@@ -11,18 +11,14 @@ ms.assetid: 4208deca-d64a-45e1-8948-2673d5d7678c
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 05/10/2017
+ms.topic: conceptual
+ms.date: 02/21/2018
 ms.author: nitinme
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5bbeb9d4516c2b1be4f5e076a7f63c35e4176b36
-ms.openlocfilehash: ca75974e6ec4f60739137d4cb5458bbfd735de3e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/13/2017
-
-
+ms.openlocfilehash: 57ae7c3cab6c0084bb43585f65d79ae6cc265356
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="create-linux-based-clusters-in-hdinsight-using-azure-powershell"></a>Azure PowerShell을 사용하여 HDInsight에서 Linux 기반 클러스터 만들기
 
@@ -51,13 +47,13 @@ Azure PowerShell은 Microsoft Azure에서 작업의 배포와 관리를 제어 �
 Azure PowerShell을 사용하여 HDInsight 클러스터를 만들려면 다음 절차를 완료해야 합니다.
 
 * Azure 리소스 그룹 만들기
-* Azure 저장소 계정 만들기
+* Azure Storage 계정 만들기
 * Azure Blob 컨테이너 만들기
 * HDInsight 클러스터 만들기
 
 다음 스크립트는 새 클러스터를 만드는 방법을 보여 줍니다.
 
-[!code-powershell[기본](../../powershell_scripts/hdinsight/create-cluster/create-cluster.ps1?range=5-71)]
+[!code-powershell[main](../../powershell_scripts/hdinsight/create-cluster/create-cluster.ps1?range=5-71)]
 
 클러스터 로그인에 대해 지정한 값은 클러스터의 Hadoop 사용자 계정을 만드는 데 사용됩니다. 이 계정을 사용하여 웹 UI 또는 REST API 등의 클러스터에서 호스팅된 서비스에 연결합니다.
 
@@ -76,7 +72,7 @@ SSH 사용자에 대해 지정한 값은 클러스터의 SSH 사용자를 만드
 
 다음 스크립트는 HDInsight 클러스터 유형에 R Server를 구성하기 위해 구성 개체를 만듭니다. 이 구성은 에지 노드, RStudio, 추가 저장소 계정을 활성화합니다.
 
-[!code-powershell[기본](../../powershell_scripts/hdinsight/create-cluster/create-cluster-with-config.ps1?range=59-98)]
+[!code-powershell[main](../../powershell_scripts/hdinsight/create-cluster/create-cluster-with-config.ps1?range=59-98)]
 
 > [!WARNING]
 > HDInsight 클러스터와 다른 위치에서는 저장소 계정을 사용할 수 없습니다. 이 예제를 사용할 경우 서버와 동일한 위치에 추가 저장소 계정을 만듭니다.
@@ -100,27 +96,25 @@ HDInsight 클러스터를 성공적으로 만들었으므로 다음 리소스를
 
 ### <a name="hadoop-clusters"></a>Hadoop 클러스터
 
-* [HDInsight에서 Hive 사용](hdinsight-use-hive.md)
-* [HDInsight에서 Pig 사용](hdinsight-use-pig.md)
-* [HDInsight와 함께 MapReduce 사용](hdinsight-use-mapreduce.md)
+* [HDInsight에서 하이브 사용](hadoop/hdinsight-use-hive.md)
+* [HDInsight에서 Pig 사용](hadoop/hdinsight-use-pig.md)
+* [HDInsight와 함께 MapReduce 사용](hadoop/hdinsight-use-mapreduce.md)
 
 ### <a name="hbase-clusters"></a>HBase 클러스터
 
-* [HDInsight에서 HBase 시작](hdinsight-hbase-tutorial-get-started-linux.md)
-* [HDInsight에서 HBase용 Java 응용 프로그램 개발](hdinsight-hbase-build-java-maven-linux.md)
+* [HDInsight에서 HBase 시작](hbase/apache-hbase-tutorial-get-started-linux.md)
+* [HDInsight에서 HBase용 Java 응용 프로그램 개발](hbase/apache-hbase-build-java-maven-linux.md)
 
 ### <a name="storm-clusters"></a>Storm 클러스터
 
-* [HDInsight에서 Storm용 Java 토폴로지 개발](hdinsight-storm-develop-java-topology.md)
-* [HDInsight의 Storm에서 Python 구성 요소 사용](hdinsight-storm-develop-python-topology.md)
-* [HDInsight에서 Storm을 사용하는 토폴로지 배포 및 모니터링](hdinsight-storm-deploy-monitor-topology-linux.md)
+* [HDInsight에서 Storm용 Java 토폴로지 개발](storm/apache-storm-develop-java-topology.md)
+* [HDInsight의 Storm에서 Python 구성 요소 사용](storm/apache-storm-develop-python-topology.md)
+* [HDInsight에서 Storm을 사용하는 토폴로지 배포 및 모니터링](storm/apache-storm-deploy-monitor-topology-linux.md)
 
 ### <a name="spark-clusters"></a>Spark 클러스터
 
-* [Scala를 사용하여 독립 실행형 응용 프로그램 만들기](hdinsight-apache-spark-create-standalone-application.md)
-* [Livy를 사용하여 Spark 클러스터에서 원격으로 작업 실행](hdinsight-apache-spark-livy-rest-interface.md)
-* [BI와 Spark: BI 도구와 함께 HDInsight에서 Spark를 사용하여 대화형 데이터 분석 수행](hdinsight-apache-spark-use-bi-tools.md)
-* [기계 학습과 Spark: 음식 검사 결과를 예측하는 데 HDInsight의 Spark 사용](hdinsight-apache-spark-machine-learning-mllib-ipython.md)
-* [Spark 스트리밍: HDInsight에서 Spark를 사용하여 실시간 스트리밍 응용 프로그램 빌드](hdinsight-apache-spark-eventhub-streaming.md)
-
+* [Scala를 사용하여 독립 실행형 응용 프로그램 만들기](spark/apache-spark-create-standalone-application.md)
+* [Livy를 사용하여 Spark 클러스터에서 원격으로 작업 실행](spark/apache-spark-livy-rest-interface.md)
+* [BI와 Spark: BI 도구와 함께 HDInsight에서 Spark를 사용하여 대화형 데이터 분석 수행](spark/apache-spark-use-bi-tools.md)
+* [Machine Learning과 Spark: 음식 검사 결과를 예측하는 데 HDInsight의 Spark 사용](spark/apache-spark-machine-learning-mllib-ipython.md)
 

@@ -4,7 +4,7 @@ description: "Azure Virtual Machines에서 SQL Server에 대한 Always On 가용
 services: virtual-machines
 documentationcenter: na
 author: MikeRayMSFT
-manager: jhubbard
+manager: craigg
 editor: monicar
 ms.assetid: d1f291e9-9af2-41ba-9d29-9541e3adcfcf
 ms.service: virtual-machines-sql
@@ -12,28 +12,26 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
-ms.date: 05/01/2017
+ms.date: 02/16/2017
 ms.author: mikeray
-ms.translationtype: Human Translation
-ms.sourcegitcommit: afa23b1395b8275e72048bd47fffcf38f9dcd334
-ms.openlocfilehash: 09fed7e785708d4afe64905de973becc188181d7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/13/2017
-
-
+ms.openlocfilehash: 0399f9ef969098216e080140a67f81725b670115
+ms.sourcegitcommit: d87b039e13a5f8df1ee9d82a727e6bc04715c341
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/21/2018
 ---
 # <a name="configure-a-load-balancer-for-an-always-on-availability-group-in-azure"></a>Azure에서 Always On 가용성 그룹에 대한 부하 분산 장치 구성
-이 문서에서는 Azure Resource Manager로 실행 중인 Azure Virtual Machines에서 SQL Server Always On 가용성 그룹에 대한 부하 분산 장치를 만드는 방법을 설명합니다. SQL Server 인스턴스가 Azure 가상 컴퓨터에 있는 경우 가용성 그룹을 사용하려면 부하 분산 장치가 필요합니다. 부하 분산 장치는 가용성 그룹 수신기의 IP 주소를 저장합니다. 가용성 그룹이 여러 지역에 분산된 경우 각 지역에 부하 분산 장치가 있어야 합니다.
+이 문서에서는 Azure Resource Manager로 실행 중인 Azure Virtual Machines에서 SQL Server Always On 가용성 그룹에 대한 부하 분산 장치를 만드는 방법을 설명합니다. SQL Server 인스턴스가 Azure 가상 머신에 있는 경우 가용성 그룹을 사용하려면 부하 분산 장치가 필요합니다. 부하 분산 장치는 가용성 그룹 수신기의 IP 주소를 저장합니다. 가용성 그룹이 여러 지역에 분산된 경우 각 지역에 부하 분산 장치가 있어야 합니다.
 
-이 작업을 완료하려면 Resource Manager로 실행 중인 Azure Virtual Machines에 SQL Server 가용성 그룹이 배포되어야 합니다. 두 SQL Server 가상 컴퓨터는 동일한 가용성 집합에 속해야 합니다. [Microsoft 템플릿](virtual-machines-windows-portal-sql-alwayson-availability-groups.md)을 사용하여 Resource Manager에서 가용성 그룹을 자동으로 만들 수 있습니다. 이 템플릿은 내부 부하 분산 장치를 자동으로 만듭니다. 
+이 작업을 완료하려면 Resource Manager로 실행 중인 Azure Virtual Machines에 SQL Server 가용성 그룹이 배포되어야 합니다. 두 SQL Server 가상 머신은 동일한 가용성 집합에 속해야 합니다. [Microsoft 템플릿](virtual-machines-windows-portal-sql-alwayson-availability-groups.md)을 사용하여 Resource Manager에서 가용성 그룹을 자동으로 만들 수 있습니다. 이 템플릿은 내부 부하 분산 장치를 자동으로 만듭니다. 
 
-원하는 경우 [수동으로 가용성 그룹을 구성](virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md)할 수 있습니다.
+원하는 경우 [수동으로 가용성 그룹을 구성](virtual-machines-windows-portal-sql-availability-group-tutorial.md)할 수 있습니다.
 
 이 문서를 진행하려면 가용성 그룹이 이미 구성되어 있어야 합니다.  
 
 관련 항목은 다음과 같습니다.
 
-* [Azure VM의 Always On 가용성 그룹 구성(GUI)](virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md)   
+* [Azure VM의 Always On 가용성 그룹 구성(GUI)](virtual-machines-windows-portal-sql-availability-group-tutorial.md)   
 * [Azure 리소스 관리자 및 PowerShell을 사용하여 VNet-VNet 연결 구성](../../../vpn-gateway/vpn-gateway-vnet-vnet-rm-ps.md)
 
 이 문서를 통해 Azure Portal에서 부하 분산 장치를 만들고 구성합니다. 프로세스 완료 후에는 가용성 그룹 수신기에 대한 부하 분산 장치에서 IP 주소를 사용하도록 클러스터를 구성합니다.
@@ -54,7 +52,7 @@ ms.lasthandoff: 05/13/2017
 ### <a name="step-1-create-the-load-balancer-and-configure-the-ip-address"></a>1단계: 부하 분산 장치 만들기 및 IP 주소 구성
 먼저, 부하 분산 장치를 만듭니다. 
 
-1. Azure 포털에서 SQL Server 가상 컴퓨터를 포함하는 리소스 그룹을 엽니다. 
+1. Azure 포털에서 SQL Server 가상 머신을 포함하는 리소스 그룹을 엽니다. 
 
 2. 리소스 그룹에서 **추가**를 클릭합니다.
 
@@ -91,13 +89,13 @@ Azure에서 백 엔드 주소 풀 *백 엔드 풀*이 호출됩니다. 이 경�
 
 4. **백 엔드 풀 추가**에서 **이름**에 백 엔드 풀의 이름을 입력합니다.
 
-5. **가상 컴퓨터**에서 **가상 컴퓨터 추가**를 클릭합니다. 
+5. **가상 머신**에서 **가상 머신 추가**를 클릭합니다. 
 
-6. **가상 컴퓨터 선택**에서 **가용성 집합 선택**을 클릭하고 SQL Server 가상 컴퓨터가 속한 가용성 집합을 지정합니다.
+6. **가상 머신 선택**에서 **가용성 집합 선택**을 클릭하고 SQL Server 가상 머신이 속한 가용성 집합을 지정합니다.
 
-7. 가용성 집합을 선택한 후 **가상 컴퓨터 선택**을 클릭하고, 가용성 그룹에서 SQL Server 인스턴스를 호스트하는 가상 컴퓨터를 두 개 선택한 후 **선택**을 클릭합니다. 
+7. 가용성 집합을 선택한 후 **가상 머신 선택**을 클릭하고, 가용성 그룹에서 SQL Server 인스턴스를 호스트하는 가상 머신을 두 개 선택한 후 **선택**을 클릭합니다. 
 
-8. **확인**을 클릭하여 **가상 컴퓨터 선택** 및 **백 엔드 풀 추가**에 대한 블레이드를 닫습니다. 
+8. **확인**을 클릭하여 **가상 머신 선택** 및 **백 엔드 풀 추가**에 대한 블레이드를 닫습니다. 
 
 Azure에서 백 엔드 주소 풀에 대한 설정이 업데이트됩니다. 이제 가용성 집합에는 두 개의 SQL Server 인스턴스에 대한 풀이 있습니다.
 
@@ -186,7 +184,7 @@ Azure는 프로브를 만든 후 가용성 그룹에 대한 수신기가 있는 
 
 4. **포트** 상자에서 이전에 사용한 $EndpointPort(1433이 기본값임)를 사용하여 가용성 그룹 수신기에 대한 포트 번호를 지정한 다음 **확인**을 클릭합니다.
 
-이제 Resource Manager 모드에서 실행 중인 Azure 가상 컴퓨터에 가용성 그룹이 생겼습니다. 
+이제 Resource Manager 모드에서 실행 중인 Azure 가상 머신에 가용성 그룹이 생겼습니다. 
 
 ## <a name="test-the-connection-to-the-listener"></a>수신기에 대한 연결 테스트
 다음을 수행하여 연결을 테스트합니다.
@@ -226,9 +224,9 @@ Azure Portal을 사용하여 부하 분산 장치에 IP 주소를 추가하려�
    |:-----|:----
    |**Name** |프로브를 식별하는 이름입니다.
    |**프로토콜** |TCP
-   |**포트** |사용하지 않는 TCP 포트를 모든 가상 컴퓨터에서 사용할 수 있어야 합니다. 다른 용도로는 사용할 수 없습니다. 두 수신기가 동일한 프로브 포트를 사용할 수 없습니다. 
+   |**포트** |사용하지 않는 TCP 포트를 모든 가상 머신에서 사용할 수 있어야 합니다. 다른 용도로는 사용할 수 없습니다. 두 수신기가 동일한 프로브 포트를 사용할 수 없습니다. 
    |**간격** |프로브 시도 간격입니다. 기본값(5)을 사용하세요.
-   |**비정상 임계값** |이 연속 임계값을 실패하면 가상 컴퓨터를 비정상으로 간주합니다.
+   |**비정상 임계값** |이 연속 임계값을 실패하면 가상 머신을 비정상으로 간주합니다.
 
 8. **확인**을 클릭하여 프로브를 저장합니다. 
 
@@ -243,7 +241,7 @@ Azure Portal을 사용하여 부하 분산 장치에 IP 주소를 추가하려�
    |**프로토콜** |TCP
    |**포트** |SQL Server 인스턴스에서 사용하는 포트를 사용합니다. 변경하지 않을 경우 기본 인스턴스는 포트 1433을 사용합니다. 
    |**백 엔드 포트** |**포트**와 동일한 값을 사용합니다.
-   |**백 엔드 풀** |SQL Server 인스턴스가 포함된 가상 컴퓨터를 포함하는 풀입니다. 
+   |**백 엔드 풀** |SQL Server 인스턴스가 포함된 가상 머신을 포함하는 풀입니다. 
    |**상태 프로브** |만든 프로브를 선택합니다.
    |**세션 지속성** |없음
    |**유휴 제한 시간(분)** |기본값(4)
@@ -255,7 +253,7 @@ Azure Portal을 사용하여 부하 분산 장치에 IP 주소를 추가하려�
 
 수신기의 IP 주소를 추가한 후에는 다음을 수행하여 추가 가용성 그룹을 구성할 수 있습니다. 
 
-1. 새 IP 주소의 프로브 포트가 두 SQL Server 가상 컴퓨터에서 모두 열려 있는지 확인합니다. 
+1. 새 IP 주소의 프로브 포트가 두 SQL Server 가상 머신에서 모두 열려 있는지 확인합니다. 
 
 2. [클러스터 관리자에서 클라이언트 액세스 지점을 추가합니다](#addcap).
 
@@ -272,7 +270,34 @@ Azure Portal을 사용하여 부하 분산 장치에 IP 주소를 추가하려�
 
 새 IP 주소를 사용하도록 가용성 그룹을 구성한 후에는 수신기에 대한 연결을 구성합니다. 
 
+## <a name="add-load-balancing-rule-for-distributed-availability-group"></a>분산 가용성 그룹에 대한 부하 분산 규칙 추가
+
+가용성 그룹이 분산 가용성 그룹에 참여하는 경우 부하 분산 장치에 추가 규칙이 필요합니다. 이 규칙은 분산 가용성 그룹 수신기에서 사용하는 포트를 저장합니다.
+
+>[!IMPORTANT]
+>이 단계는 가용성 그룹이 [분산 가용성 그룹](http://docs.microsoft.com/sql/database-engine/availability-groups/windows/configure-distributed-availability-groups)에 참여하는 경우에만 적용됩니다. 
+
+1. 분산 가용성 그룹에 참여하는 각 서버의 분산 가용성 그룹 수신기 TCP 포트에 인바운드 규칙을 만듭니다. 설명서의 많은 예제에서는 5022를 사용합니다. 
+
+1. Azure Portal에서 부하 분산 장치를 클릭한 다음, **부하 분산 규칙**, **+추가**를 차례로 클릭합니다. 
+
+1. 다음 설정을 사용하여 부하 분산 규칙을 만듭니다.
+
+   |설정 |값
+   |:-----|:----
+   |**Name** |분산 가용성 그룹에 대한 부하 분산 규칙을 식별하는 이름입니다. 
+   |**프런트 엔드 IP 주소** |가용성 그룹과 동일한 프런트 엔드 IP 주소를 사용합니다.
+   |**프로토콜** |TCP
+   |**포트** |5022 - [분산 가용성 그룹 끝점 수신기](http://docs.microsoft.com/sql/database-engine/availability-groups/windows/configure-distributed-availability-groups)의 포트입니다.</br> 사용 가능한 모든 포트일 수 있습니다.  
+   |**백 엔드 포트** | 5022 - **포트**와 동일한 값을 사용합니다.
+   |**백 엔드 풀** |SQL Server 인스턴스가 포함된 가상 머신을 포함하는 풀입니다. 
+   |**상태 프로브** |만든 프로브를 선택합니다.
+   |**세션 지속성** |없음
+   |**유휴 제한 시간(분)** |기본값(4)
+   |**부동 IP(Direct Server Return)** | 사용
+
+분산 가용성 그룹에 참여하는 다른 가용성 그룹의 부하 분산 장치에 대해 이 단계를 반복합니다.
+
 ## <a name="next-steps"></a>다음 단계
 
 - [다른 지역의 Azure Virtual Machines에서 SQL Server Always On 가용성 그룹 구성](virtual-machines-windows-portal-sql-availability-group-dr.md)
-

@@ -1,8 +1,8 @@
 ---
-title: "HDInsight(Hadoop)에서 Giraph 설치 및 사용 - Azure | Microsoft Docs"
-description: "스크립트 작업을 사용하여 Linux 기반 HDInsight 클러스터에 Giraph를 설치하는 방법에 대해 알아봅니다. 스크립트 작업을 사용하면 클러스터 구성을 변경하거나 서비스 및 유틸리티를 설치하여 생성 중 클러스터를 사용자 지정할 수 있습니다."
+title: HDInsight(Hadoop)에서 Giraph 설치 및 사용 - Azure | Microsoft Docs
+description: 스크립트 작업을 사용하여 Linux 기반 HDInsight 클러스터에 Giraph를 설치하는 방법에 대해 알아봅니다. 스크립트 작업을 사용하면 클러스터 구성을 변경하거나 서비스 및 유틸리티를 설치하여 생성 중 클러스터를 사용자 지정할 수 있습니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: Blackmist
 manager: jhubbard
 editor: cgronlun
@@ -10,18 +10,15 @@ tags: azure-portal
 ms.assetid: 9fcac906-8f06-4002-9fe8-473e42f8fd0f
 ms.service: hdinsight
 ms.custom: hdinsightactive
-ms.workload: big-data
-ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 07/31/2017
+ms.topic: conceptual
+ms.date: 04/23/2018
 ms.author: larryfr
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 658616d1979e617a7d80a989b8e80246a9091fdf
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
+ms.openlocfilehash: 03e72c29bedf6a3125a5ae0272e93cdf58632bc6
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="install-giraph-on-hdinsight-hadoop-clusters-and-use-giraph-to-process-large-scale-graphs"></a>HDInsight Hadoop 클러스터에 Giraph를 설치하고 Giraph를 사용하여 대규모 그래프를 처리합니다.
 
@@ -73,11 +70,11 @@ HDInsight 클러스터에서 Giraph를 설치하는 샘플 스크립트는 다�
 
 1. [Linux 기반 HDInsight 클러스터 만들기](hdinsight-hadoop-create-linux-clusters-portal.md)의 단계를 사용하여 클러스터를 만들기 시작하지만 완료하지 마세요.
 
-2. **선택적 구성** 블레이드에서 **스크립트 동작**을 선택하고 다음 정보를 제공합니다.
+2. **선택적 구성** 섹션에서 **스크립트 동작**을 선택하고 다음 정보를 제공합니다.
 
    * **이름**: 스크립트 동작의 이름을 입력합니다.
 
-   * **스크립트 URI**: https://hdiconfigactions.blob.core.windows.net/linuxgiraphconfigactionv01/giraph-installer-v01.sh
+   * **SCRIPT URI**: https://hdiconfigactions.blob.core.windows.net/linuxgiraphconfigactionv01/giraph-installer-v01.sh
 
    * **HEAD**: 이 항목 선택
 
@@ -87,7 +84,7 @@ HDInsight 클러스터에서 Giraph를 설치하는 샘플 스크립트는 다�
 
    * **PARAMETERS**: 이 필드는 공백으로 둡니다.
 
-3. **스크립트 동작**의 아래 쪽에서 **선택** 단추를 사용하여 구성을 저장합니다. 마지막으로 **선택적 구성** 블레이드의 아래 쪽에서 **선택** 단추를 사용하여 선택적 구성 정보를 저장합니다.
+3. **스크립트 동작**의 아래 쪽에서 **선택** 단추를 사용하여 구성을 저장합니다. 마지막으로 **선택적 구성** 섹션의 아래 쪽에서 **선택** 단추를 사용하여 선택적 구성 정보를 저장합니다.
 
 4. [Linux 기반 HDInsight 클러스터 만들기](hdinsight-hadoop-create-linux-clusters-portal.md)에서 설명한 대로 클러스터를 계속 만듭니다.
 
@@ -141,7 +138,7 @@ HDInsight 클러스터에서 Giraph를 설치하는 샘플 스크립트는 다�
 
     이 명령에 사용되는 매개 변수를 다음 테이블에서 설명합니다.
 
-   | 매개 변수를 포함해야 합니다. | 기능 |
+   | 매개 변수 | 기능 |
    | --- | --- |
    | `jar` |예를 포함하는 jar 파일입니다. |
    | `org.apache.giraph.GiraphRunner` |예를 시작하는 데 사용되는 클래스입니다. |
@@ -155,7 +152,7 @@ HDInsight 클러스터에서 Giraph를 설치하는 샘플 스크립트는 다�
 
     이 밖에 Giraph 샘플과 함께 사용된 기타 매개 변수에 대한 자세한 내용은 [Giraph 빠른 시작](http://giraph.apache.org/quick_start.html)을 참조하세요.
 
-6. 작업이 완료되면 결과는 **/example/out/shotestpathss** 디렉터리에 저장됩니다. 출력 파일 이름은 **part-m-**으로 시작하고 첫 번째, 두 번째 파일 등을 나타내는 숫자로 끝납니다. 다음 명령을 사용하여 출력을 봅니다.
+6. 작업이 완료되면 결과는 **/example/out/shotestpathss** 디렉터리에 저장됩니다. 출력 파일 이름은 **part-m-** 으로 시작하고 첫 번째, 두 번째 파일 등을 나타내는 숫자로 끝납니다. 다음 명령을 사용하여 출력을 봅니다.
 
     ```bash
     hdfs dfs -text /example/output/shortestpaths/*
@@ -180,4 +177,3 @@ HDInsight 클러스터에서 Giraph를 설치하는 샘플 스크립트는 다�
 * [HDInsight 클러스터에서 Hue 설치 및 사용](hdinsight-hadoop-hue-linux.md)입니다.
 
 * [HDInsight 클러스터에 Solr 설치](hdinsight-hadoop-solr-install-linux.md).
-

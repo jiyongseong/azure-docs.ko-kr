@@ -1,0 +1,1 @@
+MSI에 대해 잘 모른다면 [관리 서비스 ID 개요](~/articles/active-directory/pp/msi-overview.md)를 확인하고 [시스템 할당 및 사용자 할당 MSI의 차이점](~/articles/active-directory/pp/msi-overview.md#how-does-it-work)**을 살펴보십시오**. 아직 Azure 계정이 없으면 계속하기 전에 [평가판 계정](https://azure.microsoft.com/free/)에 등록해야 합니다.

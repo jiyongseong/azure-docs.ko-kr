@@ -1,7 +1,7 @@
 ---
-title: "Hadoop 스택 추적 오류 메시지 - Azure HDInsight | Microsoft Docs"
-description: "Azire HDInsight의 Hadoop 스택 추적 오류 메시지의 인덱스입니다. 문제 해결 정보를 보려면 목록에서 오류를 찾습니다."
-keywords: "스택 추적, 오류 메시지"
+title: Hadoop 스택 추적 오류 메시지 - Azure HDInsight | Microsoft Docs
+description: Azire HDInsight의 Hadoop 스택 추적 오류 메시지의 인덱스입니다. 문제 해결 정보를 보려면 목록에서 오류를 찾습니다.
+keywords: 스택 추적, 오류 메시지
 services: hdinsight
 documentationcenter: NA
 author: mumian
@@ -11,18 +11,14 @@ ms.assetid: 310051e5-5e2f-4be2-9780-2e8c0430e52d
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: big-data
-ms.date: 04/26/2017
+ms.topic: conceptual
+ms.date: 05/14/2018
 ms.author: jgao
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 3bbc9e9a22d962a6ee20ead05f728a2b706aee19
-ms.openlocfilehash: ef647b4414cc3f338719eff8ccd403abaefd41b5
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/10/2017
-
-
+ms.openlocfilehash: 7b0bb58dcf255ee14dd18de3a3ac7489ae0ed1de
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="index-of-hadoop-in-hdinsight-troubleshooting-articles"></a>HDInsight에서 Hadoop의 인덱스 문제 해결 문서
 문서는 오류의 유형별로 구성됩니다.
@@ -36,9 +32,7 @@ ms.lasthandoff: 06/10/2017
 
 ## <a name="more-troubleshooting-articles"></a>추가 문제 해결 문서
 * [Linux에서 HDInsight 사용에 관한 정보](hdinsight-hadoop-linux-information.md)
-* [HDInsight에서 Hadoop 디버그: 로그 보기 및 오류 메시지 해석](hdinsight-debug-jobs.md)
 * [HDInsight의 Linux 기반 Hadoop에서 YARN 응용 프로그램 로그에 액세스](hdinsight-hadoop-access-yarn-app-logs-linux.md)
 * [Linux 기반 HDInsight에서 Hadoop 서비스에 힙 덤프 사용](hdinsight-hadoop-collect-debug-heap-dump-linux.md)
 * [Azure HDInsight에서 Hadoop 구성 요소에 대한 릴리스 정보](hdinsight-release-notes.md)
-
 

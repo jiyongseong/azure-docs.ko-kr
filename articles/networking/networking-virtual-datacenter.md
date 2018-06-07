@@ -1,6 +1,6 @@
 ---
-title: "Microsoft Azure 가상 데이터 센터 | Microsoft Docs"
-description: "Azure에서 가상 데이터 센터를 구축하는 방법을 알아봅니다."
+title: 'Microsoft Azure Virtual Datacenter: 네트워크 측면 | Microsoft Docs'
+description: Azure에서 가상 데이터 센터를 구축하는 방법을 알아봅니다.
 services: networking
 author: tracsman
 manager: rossort
@@ -9,21 +9,20 @@ ms.service: virtual-network
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 05/26/2017
+ms.date: 04/3/2018
 ms.author: jonor
+ms.openlocfilehash: a62d52e30b04b525dc8ff685ed6c3033d6029542
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
 ms.translationtype: HT
-ms.sourcegitcommit: 8021f8641ff3f009104082093143ec8eb087279e
-ms.openlocfilehash: 487c2dc22acc5194ef103ebef01c62c887580335
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
+ms.locfileid: "33942448"
 ---
-
-# <a name="microsoft-azure-virtual-data-center"></a>Microsoft Azure 가상 데이터 센터
+# <a name="microsoft-azure-virtual-datacenter-a-network-perspective"></a>Microsoft Azure Virtual Datacenter: 네트워크 측면
 **Microsoft Azure**: 더 빠른 이동, 비용 절감, 온-프레미스 앱 및 데이터 통합
 
 ## <a name="overview"></a>개요
-중대한 변경 없이 온-프레미스 응용 프로그램을 Azure로 마이그레이션하면("리프트 및 시프트" 접근 방법) 조직은 안전하고 비용 효율적인 인프라의 혜택을 누릴 수 있습니다. 그러나 클라우드 컴퓨팅의 기민성을 활용하기 위해 기업은 Azure 기능을 이용하는 방식으로 아키텍처를 전환해야 합니다. Microsoft Azure는 대규모 서비스와 인프라, 엔터프라이즈급 기능과 안정성, 여러 하이브리드 연결 옵션을 제공합니다. 고객은 인터넷이나, 사설 네트워크 연결을 제공하는 Azure Express 경로를 통해 이러한 클라우드 서비스에 액세스할 수 있습니다. 고객은 Microsoft Azure 플랫폼을 통해 인프라를 클라우드로 자연스럽게 확장하고 다중 계층 아키텍처를 빌드할 수 있습니다. 또한 Microsoft 파트너는 Azure에서 실행하도록 최적화된 보안 서비스 및 가상 어플라이언스를 제공하여 향상된 기능을 지원합니다.
+중대한 변경 없이 온-프레미스 응용 프로그램을 Azure로 마이그레이션하면("리프트 및 시프트" 접근 방법) 조직은 안전하고 비용 효율적인 인프라의 혜택을 누릴 수 있습니다. 그러나 클라우드 컴퓨팅의 기민성을 활용하기 위해 기업은 Azure 기능을 이용하는 방식으로 아키텍처를 전환해야 합니다. Microsoft Azure는 대규모 서비스와 인프라, 엔터프라이즈급 기능과 안정성, 여러 하이브리드 연결 옵션을 제공합니다. 고객은 인터넷이나, 사설 네트워크 연결을 제공하는 Azure ExpressRoute를 통해 이러한 클라우드 서비스에 액세스할 수 있습니다. 고객은 Microsoft Azure 플랫폼을 통해 인프라를 클라우드로 자연스럽게 확장하고 다중 계층 아키텍처를 빌드할 수 있습니다. 또한 Microsoft 파트너는 Azure에서 실행하도록 최적화된 보안 서비스 및 가상 어플라이언스를 제공하여 향상된 기능을 지원합니다.
 
 이 문서는 많은 고객들이 클라우드로의 집단 전환을 고려할 때 직면하게 되는 구조적 규모, 성능 및 보안 문제를 해결하는 데 사용할 수 있는 패턴 및 디자인 개요를 제공합니다. 보안 요구 사항 및 비용 최적화를 집중적으로 다루면서 다양한 조직의 IT 역할을 시스템의 관리 및 거버넌스에 맞춰 조정하는 방법도 다룹니다.
 
@@ -50,7 +49,7 @@ vDC는 다음과 같은 시나리오에서 기업이 워크로드 및 응용 프
 -   워크로드에 대해 공유 또는 중앙 집중식 보안과 액세스 요구 사항 구현
 -   대기업에 적합하게 DevOps 및 중앙 집중식 IT 혼합
 
-vDC의 장점을 효과적으로 발휘하는 데 있어서 핵심적인 요인은 [Azure VNet][VNet], [NSG][NSG], [VNet 피어링][VNetPeering], [UDR(사용자 정의 경로)][UDR] 및 [RBAC(역할 기반 액세스 제어)]가 제공되는 Azure ID[RBAC] 등의 Azure 기능이 혼합된 중앙 집중식 토폴로지(허브 및 스포크)입니다.
+vDC의 장점을 효과적으로 발휘하는 데 있어서 핵심적인 요인은 [Azure VNet][VNet], [NSG][NSG], [VNet 피어링][VNetPeering], [UDR(사용자 정의 경로)][UDR] 및 [RBAC(역할 기반 Access Control)]가 제공되는 Azure ID[RBAC] 등의 Azure 기능이 혼합된 중앙 집중식 토폴로지(허브 및 스포크)입니다.
 
 ## <a name="who-needs-a-virtual-data-center"></a>가상 데이터 센터는 누구에게 필요할까요?
 여러 워크로드를 Azure로 이동해야 하는 모든 Azure 고객은 공통 리소스 사용을 통해 혜택을 얻을 수 있습니다. 그 규모에 따라, 단일 응용 프로그램도 vDC를 구축하는 데 사용되는 패턴 및 구성 요소를 통해 이점을 얻을 수 있습니다.
@@ -72,18 +71,18 @@ ID 및 디렉터리 서비스는 온-프레미스 및 클라우드에서 모든 
 
 모든 대기업은 vDC 내부 및 vDC 간의 개별 ID, 인증, 권한 부여, 역할 및 권한의 관리를 설명하는 ID 관리 프로세스를 정의해야 합니다. 이 프로세스의 목표는 비용, 가동 중지 시간 및 반복적인 수동 작업을 줄이면서 보안 및 생산성을 높이는 것입니다.
 
-엔터프라이즈/조직은 다양한 LOB(기간 업무)를 위한 까다로운 서비스 조합을 요구할 수 있으며, 직원들은 종종 프로젝트마다 다른 역할을 맡게 됩니다. vDC에서는 적절한 거버넌스에 따라 시스템이 실행되도록 하기 위해 구체적으로 역할이 정의된 각 팀 간에 적절한 협력이 필요합니다. 책임, 액세스 및 권한 구조가 매우 복잡할 수 있습니다. vDC의 ID 관리는 [*AAD(Azure Active Directory)*][AAD] 및 RBAC(역할 기반 액세스 제어)를 통해 구현됩니다.
+엔터프라이즈/조직은 다양한 LOB(기간 업무)를 위한 까다로운 서비스 조합을 요구할 수 있으며, 직원들은 종종 프로젝트마다 다른 역할을 맡게 됩니다. vDC에서는 적절한 거버넌스에 따라 시스템이 실행되도록 하기 위해 구체적으로 역할이 정의된 각 팀 간에 적절한 협력이 필요합니다. 책임, 액세스 및 권한 구조가 매우 복잡할 수 있습니다. vDC의 ID 관리는 [*AAD(Azure Active Directory)*][AAD] 및 RBAC(역할 기반 Access Control)를 통해 구현됩니다.
 
 디렉터리 서비스는 매일의 항목 및 네트워크 리소스를 찾고, 관리하고, 운영하고, 구성하기 위한 공유 정보 인프라입니다. 이러한 리소스에는 볼륨, 폴더, 파일, 프린터, 사용자, 그룹, 장치 및 기타 개체가 포함될 수 있습니다. 네트워크의 각 리소스는 디렉터리 서버에서 개체로 간주됩니다. 리소스에 대한 정보는 해당 리소스 또는 개체와 연결된 특성 모음으로 저장됩니다.
 
 모든 Microsoft Online 비즈니스 서비스는 로그온 및 기타 ID가 필요로 할 때 AAD(Azure Active Directory)를 사용합니다. Azure Active Directory는 핵심 디렉터리 서비스, 고급 ID 관리 및 응용 프로그램 액세스 관리를 통합하는 포괄적이고 항상 사용가능한 ID 및 액세스 관리 클라우드 솔루션입니다. AAD는 온-프레미스 Active Directory와 통합되어 모든 클라우드 기반 및 로컬로 호스트된(온-프레미스) 응용 프로그램에 대한 Single Sign-On을 허용할 수 있습니다. 온-프레미스 Active Directory의 사용자 특성은 AAD와 자동으로 동기화될 수 있습니다.
 
-vDC의 모든 사용 권한을 할당하기 위해 전역 관리자가 필요하지는 않습니다. 대신, 각 특정 부서(또는 디렉터리 서비스의 사용자 또는 서비스 그룹)는 vDC 내에서 자체 리소스를 관리하는 데 필요한 권한을 가질 수 있습니다. 사용 권한을 구성할 때는 균형을 유지해야 합니다. 너무 많은 권한을 부여하면 성능 효율성이 저하될 수 있고, 권한이 너무 적거나 느슨하면 보안 위험이 높아질 수 있습니다. Azure RBAC(역할 기반 액세스 제어)는 vDC 리소스에 대한 세밀한 액세스 관리를 제공하여 이 문제를 해결하도록 도와줍니다.
+vDC의 모든 사용 권한을 할당하기 위해 전역 관리자가 필요하지는 않습니다. 대신, 각 특정 부서(또는 디렉터리 서비스의 사용자 또는 서비스 그룹)는 vDC 내에서 자체 리소스를 관리하는 데 필요한 권한을 가질 수 있습니다. 사용 권한을 구성할 때는 균형을 유지해야 합니다. 너무 많은 권한을 부여하면 성능 효율성이 저하될 수 있고, 권한이 너무 적거나 느슨하면 보안 위험이 높아질 수 있습니다. Azure 역할 기반 Access Control(RBAC)은 vDC 리소스에 대한 세밀한 액세스 관리를 제공하여 이 문제를 해결하도록 도와줍니다.
 
 ##### <a name="security-infrastructure"></a>*보안 인프라*
-vDC의 컨텍스트에서 보안 인프라는 주로 vDC의 특정 가상 네트워크 세그먼트의 트래픽 분리와 vDC 전체의 수신 및 송신 흐름 제어 방법과 관련이 있습니다. Azure는 배포 간에 허가되지 않고 의도하지 않은 트래픽을 방지하는 다중 테넌트 아키텍처를 기반으로 하며, VNet(가상 네트워크) 격리, ACL(액세스 제어 목록), 부하 분산 장치 및 IP 필터와 트래픽 흐름 정책을 사용합니다. NAT(네트워크 주소 변환)는 외부 트래픽에서 내부 네트워크 트래픽을 분리합니다.
+vDC의 컨텍스트에서 보안 인프라는 주로 vDC의 특정 가상 네트워크 세그먼트의 트래픽 분리와 vDC 전체의 수신 및 송신 흐름 제어 방법과 관련이 있습니다. Azure는 배포 간에 허가되지 않고 의도하지 않은 트래픽을 방지하는 다중 테넌트 아키텍처를 기반으로 하며, VNet(Virtual Network) 격리, ACL(액세스 제어 목록), 부하 분산 장치 및 IP 필터와 트래픽 흐름 정책을 사용합니다. NAT(네트워크 주소 변환)는 외부 트래픽에서 내부 네트워크 트래픽을 분리합니다.
 
-Azure 패브릭은 인프라 리소스를 테넌트 워크로드에 할당하고 VM(가상 컴퓨터)와의 통신을 관리합니다. Azure 하이퍼바이저는 VM 간의 메모리 및 프로세스 분리를 적용하고 네트워크 트래픽을 게스트 OS 테넌트로 안전하게 라우팅합니다.
+Azure 패브릭은 인프라 리소스를 테넌트 워크로드에 할당하고 VM(가상 머신)와의 통신을 관리합니다. Azure 하이퍼바이저는 VM 간의 메모리 및 프로세스 분리를 적용하고 네트워크 트래픽을 게스트 OS 테넌트로 안전하게 라우팅합니다.
 
 ##### <a name="connectivity-to-the-cloud"></a>*클라우드에 대한 연결*
 vDC는 고객, 파트너 및/또는 내부 사용자에 서비스를 제공하기 위해 외부 네트워크와 연결할 수 있어야 합니다. 즉, 인터넷 뿐만 아니라 온-프레미스 네트워크 및 데이터 센터에도 연결되어야 합니다.
@@ -99,7 +98,7 @@ vDC는 고객, 파트너 및/또는 내부 사용자에 서비스를 제공하�
 ExpressRoute 연결을 배포할 때는 ExpressRoute 서비스 공급자와 연계해야 합니다. 빠르게 시작해야 하는 고객의 경우 처음에는 사이트 간 VPN을 사용하여 vDC와 온-프레미스 리소스 간에 연결을 설정한 다음 ExpressRoute 연결로 마이그레이션하는 것이 일반적입니다.
 
 ##### <a name="connectivity-within-the-cloud"></a>*클라우드 내의 연결*
-[VNet][VNet] 및 [VNet 피어링][VNetPeering]은 vDC 내의 기본적인 네트워킹 연결 서비스입니다. VNet은 vDC 리소스에 대한 자연스러운 격리 경계를 보장하며 VNet 피어링을 통해 동일한 Azure 지역 내의 다양한 VNet 간에 상호 통신이 허용됩니다. VNet 내부 및 VNet 간의 트래픽 제어는 액세스 제어 목록을 통해 지정된 보안 규칙 집합([네트워크 보안 그룹][NSG]), [네트워크 가상 어플라이언스][NVA] 및 UDR([사용자 지정 라우팅 테이블][UDR])에 부합되어야 합니다.
+[VNet][VNet] 및 [VNet 피어링][VNetPeering]은 vDC 내의 기본적인 네트워킹 연결 서비스입니다. VNet은 vDC 리소스에 대한 자연스러운 격리 경계를 보장하며 VNet 피어링을 통해 동일한 Azure 지역 내의 다양한 VNet 간에 또는 지역 간에 상호 통신이 허용됩니다. VNet 내부 및 VNet 간의 트래픽 제어는 Access Control 목록을 통해 지정된 보안 규칙 집합([네트워크 보안 그룹][NSG]), [네트워크 가상 어플라이언스][NVA] 및 UDR([사용자 지정 라우팅 테이블][UDR])에 부합되어야 합니다.
 
 ## <a name="virtual-data-center-overview"></a>가상 데이터 센터 개요
 
@@ -126,7 +125,7 @@ vDC는 여러 스포크 간에 공유 허브 인프라를 사용하여 전체 �
 ##### <a name="subscription-limits-and-multiple-hubs"></a>구독 제한 및 다중 허브
 Azure에서 모든 구성 요소는 유형에 관계없이 Azure 구독에 배포됩니다. 다른 Azure 구독에서 Azure 구성 요소를 분리하면 차별화된 액세스 및 권한 부여 수준을 설정하는 것과 같은 다양한 LOB에 대한 요구 사항을 충족할 수 있습니다.
 
-모든 IT 시스템의 경우처럼 플랫폼 제한은 있지만, 단일 vDC를 많은 수의 스포크로 확장할 수 있습니다. 허브 배포는 특정 Azure 구독에 구속되므로 제한 사항 및 한도가 적용됩니다(예를 들어 VNet 피어링의 최대 수, [Azure 구독 및 서비스 한도, 할당량 및 제약 조건][ Limits] 참조). 이러한 한도가 문제가 될 수 있는 경우 단일 허브-스포크에서 허브 및 스포크 클러스터로 모델을 확장함으로써 아키텍처를 추가적으로 확장할 수 있습니다. 하나 이상의 Azure 지역에 있는 여러 허브를 Express Route 또는 사이트 간 VPN을 사용하여 상호 연결할 수 있습니다.
+모든 IT 시스템의 경우처럼 플랫폼 제한은 있지만, 단일 vDC를 많은 수의 스포크로 확장할 수 있습니다. 허브 배포는 특정 Azure 구독에 구속되므로 제한 사항 및 한도가 적용됩니다(예를 들어 VNet 피어링의 최대 수, [Azure 구독 및 서비스 한도, 할당량 및 제약 조건][ Limits] 참조). 이러한 한도가 문제가 될 수 있는 경우 단일 허브-스포크에서 허브 및 스포크 클러스터로 모델을 확장함으로써 아키텍처를 추가적으로 확장할 수 있습니다. 하나 이상의 Azure 지역에 있는 여러 허브를 VNet 피어링, Express Route 또는 사이트 간 VPN을 사용하여 상호 연결할 수 있습니다.
 
 [![2]][2]
 
@@ -158,9 +157,9 @@ Azure에서는 복잡한 토폴로지를 허용하지만 vDC 개념의 핵심 �
 
 대부분의 조직에서는 다음과 같은 그룹 변형을 사용하여 역할을 기본적으로 분류합니다.
 
--   *중앙 IT 그룹(Corp)*은 인프라(예: 네트워킹 및 보안) 구성 요소를 제어하기 위한 소유권을 가지므로 구독에서는 참가자의 역할(허브에 대한 제어권)을 가지고 스포크에서는 네트워크 참가자 권한을 가져야 합니다. 대기업에서는 이러한 관리 책임을 네트워크 작업(CorpNetOps) 그룹(네트워킹 전용) 및 보안 작업(CorpSecOps) 그룹(방화벽 및 보안 정책 담당)과 같은 여러 팀 간에 분할하는 경우가 많습니다. 이러한 특정 경우 이러한 사용자 지정 역할 할당을 위해 2개의 다른 그룹을 만들어야 합니다.
--   *개발 및 테스트(AppDevOps) 그룹*은 워크로드(앱 또는 서비스)를 배포하는 일을 담당합니다. 이 그룹은 IaaS 배포를 위한 가상 컴퓨터 참가자의 역할 및/또는 하나 이상의 PaaS 참가자 역할을 담당합니다([Azure 역할 기반 액세스 제어의 기본 제공 역할][Roles] 참조). 필요에 따라 개발 및 테스트 팀에서 허브 또는 특정 스포크 내에서 보안 정책(NSG) 및 라우팅 정책(UDR)에 대한 가시성을 확보해야 할 수 있습니다. 따라서 워크로드에 대한 참가자 역할 외에, 이 그룹에는 Network Reader 역할이 필요합니다.
--   *작업 및 유지 관리 그룹(CorpInfraOps 또는 AppInfraOps)*은 프로덕션 환경에서 워크로드를 관리하는 일을 담당합니다. 이 그룹은 프로덕션 구독에서 워크로드에 대해 구독 참가자여야 합니다. 일부 조직에서는 프로덕션 환경에서 잠재적 구성 문제를 해결하기 위해 프로덕션 및 중앙 허브 구독에서 구독 참가자 역할을 갖는 추가 에스컬레이션 지원 팀 그룹이 필요한지 여부도 평가할 수 있습니다.
+-   *중앙 IT 그룹(Corp)* 은 인프라(예: 네트워킹 및 보안) 구성 요소를 제어하기 위한 소유권을 가지므로 구독에서는 참가자의 역할(허브에 대한 제어권)을 가지고 스포크에서는 네트워크 참가자 권한을 가져야 합니다. 대기업에서는 이러한 관리 책임을 네트워크 작업(CorpNetOps) 그룹(네트워킹 전용) 및 보안 작업(CorpSecOps) 그룹(방화벽 및 보안 정책 담당)과 같은 여러 팀 간에 분할하는 경우가 많습니다. 이러한 특정 경우 이러한 사용자 지정 역할 할당을 위해 2개의 다른 그룹을 만들어야 합니다.
+-   *개발 및 테스트(AppDevOps) 그룹*은 워크로드(앱 또는 서비스)를 배포하는 일을 담당합니다. 이 그룹은 IaaS 배포를 위한 Virtual Machine 참가자의 역할 및/또는 하나 이상의 PaaS 참가자 역할을 담당합니다([Azure 역할 기반 Access Control의 기본 제공 역할][Roles] 참조). 필요에 따라 개발 및 테스트 팀에서 허브 또는 특정 스포크 내에서 보안 정책(NSG) 및 라우팅 정책(UDR)에 대한 가시성을 확보해야 할 수 있습니다. 따라서 워크로드에 대한 참가자 역할 외에, 이 그룹에는 Network Reader 역할이 필요합니다.
+-   *작업 및 유지 관리 그룹(CorpInfraOps 또는 AppInfraOps)* 은 프로덕션 환경에서 워크로드를 관리하는 일을 담당합니다. 이 그룹은 프로덕션 구독에서 워크로드에 대해 구독 참가자여야 합니다. 일부 조직에서는 프로덕션 환경에서 잠재적 구성 문제를 해결하기 위해 프로덕션 및 중앙 허브 구독에서 구독 참가자 역할을 갖는 추가 에스컬레이션 지원 팀 그룹이 필요한지 여부도 평가할 수 있습니다.
 
 vDC는 허브를 관리하는 중앙 IT 그룹에 대해 만든 그룹이 워크로드 수준에서 유지되도록 구성됩니다. 허브 리소스를 관리하는 것 외에도, 중앙 IT 그룹만 외부 액세스 및 구독에 대한 최상위 권한을 제어할 수 있습니다. 그러나 워크로드 그룹은 중앙 IT 부서와는 별도로 해당 VNet의 리소스 및 권한을 제어할 수 있습니다.
 
@@ -190,13 +189,13 @@ IT 인프라 팀의 주요 작업 중 하나는 엔터프라이즈에서 IP 주�
 인프라 구성 요소는 다음과 같은 기능을 포함합니다.
 
 -   [**ID 및 디렉터리 서비스**][AAD]. Azure의 모든 리소스 종류에 대한 액세스는 디렉터리 서비스에 저장된 ID에 의해 제어됩니다. 디렉터리 서비스는 사용자 목록 뿐만 아니라 특정 Azure 구독의 리소스에 대한 액세스 권한도 저장합니다. 이러한 서비스는 클라우드 전용으로 존재하거나 Active Directory에 저장된 온-프레미스 ID와 동기화될 수 있습니다.
--   [**가상 네트워크**][VPN]. 가상 네트워크는 vDC의 주요 구성 요소 중 하나이며 Azure 플랫폼에서 트래픽 격리 경계를 만들 수 있도록 합니다. 가상 네트워크는 각각이 특정 IP 네트워크 접두사(서브넷)를 갖는 단일 또는 여러 가상 네트워크 세그먼트로 구성됩니다. 가상 네트워크는 IaaS 가상 컴퓨터 및 PaaS 서비스가 개인 통신을 구성할 수 있는 내부 경계 영역을 정의합니다. 두 가상 네트워크를 같은 구독에서 같은 고객이 만들었다 하더라도, 한 가상 네트워크의 VM(및 PaaS 서비스)이 다른 가상 네트워크의 VM(및 PaaS 서비스)과 직접 통신할 수 없습니다. 격리는 고객 VM과 통신이 가상 네트워크 안에서 비공개 상태를 유지하는 데 있어 중요한 속성입니다.
--   [**UDR**][UDR]. 가상 네트워크의 트래픽은 기본적으로 시스템 라우팅 테이블을 기준으로 라우팅됩니다. 사용자 정의 경로는 네트워크 관리자가 시스템 라우팅 테이블의 동작을 덮어쓰고 가상 네트워크 내에서 통신 경로를 정의하기 위해 하나 이상의 서브넷에 연결할 수 있는 사용자 지정 라우팅 테이블입니다. UDR이 있으면 스포크의 송신 트래픽이 허브 및 스포크에 있는 특정 사용자 지정 VM 및/또는 네트워크 가상 어플라이언스와 부하 분산 장치를 통해 전송될 수 있습니다.
+-   [**Virtual Network**][VPN]. Virtual Network는 vDC의 주요 구성 요소 중 하나이며 Azure 플랫폼에서 트래픽 격리 경계를 만들 수 있도록 합니다. Virtual Network는 각각이 특정 IP 네트워크 접두사(서브넷)를 갖는 단일 또는 여러 가상 네트워크 세그먼트로 구성됩니다. Virtual Network는 IaaS 가상 머신 및 PaaS 서비스가 개인 통신을 구성할 수 있는 내부 경계 영역을 정의합니다. 두 가상 네트워크를 같은 구독에서 같은 고객이 만들었다 하더라도, 한 가상 네트워크의 VM(및 PaaS 서비스)이 다른 가상 네트워크의 VM(및 PaaS 서비스)과 직접 통신할 수 없습니다. 격리는 고객 VM과 통신이 가상 네트워크 안에서 비공개 상태를 유지하는 데 있어 중요한 속성입니다.
+-   [**UDR**][UDR]. Virtual Network의 트래픽은 기본적으로 시스템 라우팅 테이블을 기준으로 라우팅됩니다. 사용자 정의 경로는 네트워크 관리자가 시스템 라우팅 테이블의 동작을 덮어쓰고 가상 네트워크 내에서 통신 경로를 정의하기 위해 하나 이상의 서브넷에 연결할 수 있는 사용자 지정 라우팅 테이블입니다. UDR이 있으면 스포크의 송신 트래픽이 허브 및 스포크에 있는 특정 사용자 지정 VM 및/또는 네트워크 가상 어플라이언스와 부하 분산 장치를 통해 전송될 수 있습니다.
 -   [**NSG**][NSG]. 네트워크 보안 그룹은 IP 원본, IP 대상, 프로토콜, IP 원본 포트 및 IP 대상 포트에서 트래픽 필터링 역할을 하는 보안 규칙의 목록입니다. NSG는 서브넷 또는 Azure VM에 연결된 가상 NIC 카드 또는 둘 다에 적용될 수 있습니다. NSG는 허브 및 스포크에서 올바른 흐름 제어를 구현하는 데 중요합니다. NSG에서 제공하는 보안 수준은 사용자가 열어둔 포트의 기능 및 해당 용도에 해당합니다. 고객은 IPtables 또는 Windows 방화벽 같은 호스트 기반 방화벽을 사용하여 VM 기준 필터를 추가로 적용해야 합니다.
--   **DNS** vDC의 VNet에 있는 리소스의 이름 확인은 DNS를 통해 제공됩니다. 기본 DNS의 이름 확인 범위는 VNet으로 제한됩니다. 일반적으로 사용자 지정 DNS 서비스를 공용 서비스의 일부로 허브에 배포해야 하지만 DNS 서비스의 주요 소비자는 스포크에 있습니다. 필요한 경우 고객은 스포크에 DNS 영역을 위임하여 계층형 DNS 구조를 만들 수 있습니다.
--   [**구독][SubMgmt] 및 [리소스 그룹 관리][RGMgmt]**. 구독은 Azure에서 여러 리소스 그룹을 만들기 위한 기본 경계를 정의합니다. 구독의 리소스는 리소스 그룹이라는 논리적 컨테이너에 함께 통합됩니다. 리소스 그룹은 vDC의 리소스를 구성하기 위한 논리 그룹을 나타냅니다.
--   [**RBAC**][RBAC]. RBAC를 통해 조직 역할을 특정 Azure 리소스에 액세스하기 위한 권한에 매핑하여 사용자가 일부 작업만 수행하도록 제한할 수 있습니다. RBAC를 사용하면 특정 범위 내의 사용자, 그룹 및 응용 프로그램에 적절한 역할을 할당하여 액세스 권한을 부여할 수 있습니다. 역할 할당의 범위는 Azure 구독, 리소스 그룹 또는 단일 리소스일 수 있습니다. RBAC는 권한 상속을 허용합니다. 부모 범위에서 할당된 역할은 역할 내에 포함된 하위 항목에 대한 액세스를 부여합니다. RBAC를 사용하면 업무를 분리하고 사용자에게 해당 작업을 수행하는 데 필요한 만큼의 권한만 부여할 수 있습니다. 예를 들어 RBAC를 사용하여 한 명의 직원은 구독의 가상 컴퓨터를 관리하도록 하고, 다른 직원은 동일한 구독 내에서 SQL DB를 관리하도록 할 수 있습니다.
--   [**VNet 피어링**][VNetPeering]. vDC의 인프라를 만드는 데 사용되는 기본 기능은 Azure 데이터 센터의 네트워크를 통해 동일한 지역의 두 VNet(가상 네트워크)을 연결하는 VNet 피어링입니다.
+-   [**DNS**][DNS]. vDC의 VNet에 있는 리소스의 이름 확인은 DNS를 통해 제공됩니다. Azure는 [공용][DNS] 및 [개인][PrivateDNS] 이름 확인 둘 다를 위한 DNS 서비스를 제공합니다. 개인 영역은 가상 네트워크 내와 가상 네트워크 간에서 이름 확인을 제공합니다. 개인 영역은 동일한 지역의 가상 네트워크 간뿐만 아니라 지역 및 구독 간에도 걸쳐 있습니다. 공용 확인을 위해 Azure DNS는 DNS 도메인에 대한 호스팅 서비스를 제공하고 Microsoft Azure 인프라를 사용하는 이름 확인을 제공합니다. Azure에 도메인을 호스트하면 다른 Azure 서비스와 동일한 자격 증명, API, 도구 및 대금 청구를 사용하여 DNS 레코드를 관리할 수 있습니다.
+-   [**구독**][SubMgmt] 및 [**리소스 그룹 관리**][RGMgmt]. 구독은 Azure에서 여러 리소스 그룹을 만들기 위한 기본 경계를 정의합니다. 구독의 리소스는 리소스 그룹이라는 논리적 컨테이너에 함께 통합됩니다. 리소스 그룹은 vDC의 리소스를 구성하기 위한 논리 그룹을 나타냅니다.
+-   [**RBAC**][RBAC]. RBAC를 통해 조직 역할을 특정 Azure 리소스에 액세스하기 위한 권한에 매핑하여 사용자가 일부 작업만 수행하도록 제한할 수 있습니다. RBAC를 사용하면 특정 범위 내의 사용자, 그룹 및 응용 프로그램에 적절한 역할을 할당하여 액세스 권한을 부여할 수 있습니다. 역할 할당의 범위는 Azure 구독, 리소스 그룹 또는 단일 리소스일 수 있습니다. RBAC는 권한 상속을 허용합니다. 부모 범위에서 할당된 역할은 역할 내에 포함된 하위 항목에 대한 액세스를 부여합니다. RBAC를 사용하면 업무를 분리하고 사용자에게 해당 작업을 수행하는 데 필요한 만큼의 권한만 부여할 수 있습니다. 예를 들어 RBAC를 사용하여 한 명의 직원은 구독의 가상 머신을 관리하도록 하고, 다른 직원은 동일한 구독 내에서 SQL DB를 관리하도록 할 수 있습니다.
+-   [**VNet 피어링**][VNetPeering]. vDC의 인프라를 만드는 데 사용되는 기본 기능은 Azure 데이터 센터 네트워크를 통해 동일한 지역에서 또는 지역 간의 Azure 전 세계 백본을 사용하여 두 VNet(가상 네트워크)을 연결하는 VNet 피어링입니다.
 
 #### <a name="component-type-perimeter-networks"></a>구성 요소 유형: 경계 네트워크
 [경계 네트워크][DMZ] 구성 요소(DMZ 네트워크라고도 함)를 사용하면 인터넷 연결 뿐만 아니라 온-프레미스 또는 물리적 데이터 센터 네트워크와의 네트워크 연결을 제공할 수 있습니다. 이 네트워크는 네트워크 및 보안 팀이 대부분의 시간을 보내는 위치이기도 합니다.
@@ -205,7 +204,7 @@ IT 인프라 팀의 주요 작업 중 하나는 엔터프라이즈에서 IP 주�
 
 경계 네트워크 구성 요소는 다음과 같은 기능을 제공합니다.
 
--   [가상 네트워크][VNet], [UDR][UDR], [NSG][NSG]
+-   [Virtual Network][VNet], [UDR][UDR], [NSG][NSG]
 -   [네트워크 가상 어플라이언스][NVA]
 -   [부하 분산 장치][ALB]
 -   [Application Gateway][AppGW] / [WAF][WAF]
@@ -217,7 +216,7 @@ IT 인프라 팀의 주요 작업 중 하나는 엔터프라이즈에서 IP 주�
 
 위의 다이어그램에는 둘 다 허브에 있으며 인터넷과 온-프레미스 네트워크에 액세스할 수 있는 두 개의 경계 네트워크 적용을 보여 줍니다. 단일 허브에서 인터넷의 경계 네트워크는 다양한 WAF(웹 응용 프로그램 방화벽) 및/또는 방화벽 팜을 사용하여 많은 수의 LOB를 지원하도록 확장될 수 있습니다.
 
-[**가상 네트워크**][VNet] 허브는 일반적으로 다른 유형의 서비스를 호스트하기 위해 여러 서브넷이 있는 VNet에 구축되어 NVA, WAF 및 Azure Application Gateway를 통해 인터넷으로 들어오거나 인터넷에서 나가는 트래픽을 필터링하고 조사합니다.
+[**Virtual Network**][VNet] 허브는 일반적으로 다른 유형의 서비스를 호스트하기 위해 여러 서브넷이 있는 VNet에 구축되어 NVA, WAF 및 Azure Application Gateway를 통해 인터넷으로 들어오거나 인터넷에서 나가는 트래픽을 필터링하고 조사합니다.
 
 [**UDR**][UDR] UDR을 사용하여 고객은 보안 경계 정책 적용, 감사 및 검사를 위해 방화벽, IDS/IPS 및 기타 가상 어플라이언스를 배포하고 이러한 보안 어플라이언스를 통해 네트워크 트래픽을 라우팅할 수 있습니다. UDR은 vDC에서 사용되는 특정 사용자 지정 VM, 네트워크 가상 어플라이언스 및 내부 부하 분산 장치를 통한 트래픽 전송을 보장하기 위해 허브 및 스포크 둘 다에서 생성될 수 있습니다. 스포크에 있는 VM에서 생성된 트래픽이 올바른 가상 어플라이언스로 전송되도록 하기 위해 UDR은 내부 부하 분산 장치의 프런트 엔드 IP 주소를 다음 홉으로 설정하여 스포크의 서브넷에 설정되어야 합니다. 내부 부하 분산 장치는 내부 트래픽을 가상 어플라이언스(부하 분산 장치 백 엔드 풀)에 배포합니다.
 
@@ -246,6 +245,8 @@ IT 인프라 팀의 주요 작업 중 하나는 엔터프라이즈에서 IP 주�
 
 Azure는 Azure 호스티드 리소스의 동작을 추적하기 위한 다양한 유형의 로깅 및 모니터링 서비스를 제공합니다. Azure의 워크로드 거버넌스 및 제어는 로그 데이터 수집 뿐만 아니라 보고된 특정 이벤트를 기준으로 작업을 트리거하는 기능을 토대로 제공됩니다.
 
+[**Azure Monitor**][Monitor] - Azure에는 모니터링 공간에서 특정 역할이나 태스크를 개별적으로 수행하는 여러 서비스가 포함됩니다. 이러한 서비스는 응용 프로그램 및 응용 프로그램을 지원하는 Azure 리소스로부터 원격 분석데이터를 수집하고 분석하고 조치를 취하는 포괄적인 솔루션을 제공합니다. 이러한 서비스가 하이브리드 모니터링 환경을 제공하기 위해 중요한 온-프레미스 리소스를 모니터링하기 위해 작동할 수도 있습니다. 사용 가능한 도구와 데이터를 이해하는 것이 응용 프로그램에 대한 전체 모니터링 전략을 개발하는 첫 번째 단계입니다.
+
 Azure에는 다음과 같은 2가지 주요 로그 유형이 있습니다.
 
 -   [**활동 로그**][ActLog]("작업 로그"라고도 함)는 Azure 구독에 있는 리소스에서 수행된 작업에 대한 정보를 제공합니다. 이러한 로그는 구독에 대한 제어 평면 이벤트를 보고합니다. 모든 Azure 리소스는 감사 로그를 생성합니다.
@@ -261,9 +262,11 @@ vDC에서는 NSG 로그, 특히 다음 정보를 추적하는 것이 중요합�
 
 모든 로그는 감사, 정적 분석 또는 백업 목적으로 Azure Storage 계정에 저장될 수 있습니다. 로그가 Azure Storage 계정에 저장되면 고객은 다양한 유형의 프레임워크를 사용하여 이 데이터를 검색, 준비, 분석, 시각화한 후 클라우드 리소스의 상태를 보고할 수 있습니다.
 
-대기업은 온-프레미스 시스템을 모니터링하기 위한 표준 프레임워크를 이미 구입했을 것이며 클라우드 배포에서 생성된 로그를 통합하도록 이러한 프레임워크를 확장할 수 있습니다. 모든 로깅을 클라우드에서 유지하려는 조직의 경우 [Microsoft OMS(Operations Management Suite)][OMS]가 적절합니다. OMS는 클라우드 기반 서비스로 구현되므로 인프라 서비스에 대한 최소한의 투자로 빠르게 실행할 수 있습니다. 또한 OMS는 System Center Operations Manger와 같은 System Center 구성 요소와 통합하여 기존 관리 투자를 클라우드로 확장할 수 있습니다.
+대기업은 온-프레미스 시스템을 모니터링하기 위한 표준 프레임워크를 이미 구입했을 것이며 클라우드 배포에서 생성된 로그를 통합하도록 이러한 프레임워크를 확장할 수 있습니다. 모든 로깅을 클라우드에서 유지하려는 조직의 경우 [Log Analytics][LogAnalytics]가 적절합니다. Log Analytics는 클라우드 기반 서비스로 구현되므로 인프라 서비스에 대한 최소한의 투자로 빠르게 실행할 수 있습니다. 또한 Log Analytics는 System Center Operations Manger와 같은 System Center 구성 요소와 통합하여 기존 관리 투자를 클라우드로 확장할 수 있습니다.
 
-OMS Log Analytics는 운영 체제, 응용 프로그램, 인프라 클라우드 구성 요소에 의해 생성된 로그 및 성능 데이터를 수집하고, 상호 연관 짓고, 검색, 작업을 수행하는 데 도움이 되는 OMS 프레임워크의 구성 요소입니다. 이 기능은 통합된 검색 및 사용자 지정 대시보드를 사용하여 vDC의 모든 작업과 관련된 모든 레코드를 분석함으로써 실시간으로 전반적인 작업을 이해할 수 있도록 합니다.
+Log Analytics는 운영 체제, 응용 프로그램, 인프라 클라우드 구성 요소에서 생성된 로그 및 성능 데이터를 수집하고, 상호 연관 짓고, 검색하고, 실행하는 데 도움이 되는Azure의 서비스입니다. 이 기능은 통합된 검색 및 사용자 지정 대시보드를 사용하여 vDC의 모든 작업과 관련된 모든 레코드를 분석함으로써 실시간으로 전반적인 작업을 이해할 수 있도록 합니다.
+
+OMS 내의 [NPM(네트워크 성능 모니터)][NPM] 솔루션은 Azure 네트워크와 온-프레미스 네트워크의 단일 보기를 포함하여 전체적인 자세한 네트워크 정보를 제공할 수 있습니다. ExpressRoute 및 공용 서비스에 대한 특정 모니터를 사용합니다.
 
 #### <a name="component-type-workloads"></a>구성 요소 유형: 워크로드
 워크로드 구성 요소는 실제 응용 프로그램 및 서비스가 있는 위치입니다. 응용 프로그램 개발 팀이 대부분의 시간을 보내는 위치이기도 합니다.
@@ -278,7 +281,7 @@ LOB(기간 업무) 응용 프로그램은 엔터프라이즈의 진행 중인 �
 -   **데이터 기반**. LOB 응용 프로그램은 데이터 집약적이어서 데이터베이스 또는 다른 저장소에 자주 액세스합니다.
 -   **통합형**. LOB 응용 프로그램은 조직 내부 또는 외부의 다른 시스템과 통합됩니다.
 
-**고객 관련 웹 사이트(인터넷 또는 내부 연결)** 인터넷과 상호 작용하는 대부분의 응용 프로그램은 웹 사이트입니다. Azure에서는 IaaS VM 또는 [Azure Web Apps][WebApps] 사이트(PaaS)에서 웹 사이트를 실행하는 기능을 제공합니다. Azure Web Apps는 VNet과의 통합을 지원하여 vDC 스포크에서 웹앱의 배포를 허용합니다. VNET 통합을 사용하면 응용 프로그램에 대한 인터넷 끝점을 노출할 필요가 없으며, 대신 리소스에 대해 개인 VNet의 개인 비인터넷 라우팅 가능 주소를 사용할 수 있습니다.
+**고객 관련 웹 사이트(인터넷 또는 내부 연결)** 인터넷과 상호 작용하는 대부분의 응용 프로그램은 웹 사이트입니다. Azure에서는 IaaS VM 또는 [Azure Web Apps][WebApps] 사이트(PaaS)에서 웹 사이트를 실행하는 기능을 제공합니다. Azure Web Apps는 VNet과의 통합을 지원하여 vDC 스포크에서 웹앱의 배포를 허용합니다. 인터넷 연결 웹 사이트에서는 VNET 통합을 사용하면 응용 프로그램에 대한 인터넷 끝점을 노출할 필요가 없으며, 대신 개인 VNet의 개인 비인터넷 라우팅 가능 주소를 통해 리소스를 사용할 수 있습니다.
 
 **빅 데이터/분석** 데이터를 매우 큰 볼륨으로 확장해야 하는 경우 데이터베이스가 제대로 확장되지 않을 수 있습니다. Hadoop 기술은 많은 수의 노드에서 동시에 분산 쿼리를 실행하는 시스템을 제공합니다. 고객은 IaaS VM 또는 PaaS([HDInsight][HDI]) 중 하나에서 데이터 작업을 실행할 수 있습니다. HDInsight는 위치 기반 VNet으로의 배포를 지원하며, vDC의 스포크에 있는 클러스터에 배포할 수 있습니다.
 
@@ -290,7 +293,7 @@ LOB(기간 업무) 응용 프로그램은 엔터프라이즈의 진행 중인 �
 [![10]][10]
 
 ### <a name="multiple-vdc"></a>여러 vDC
-지금까지 이 문서에서는 단일 vDC를 집중적으로 살펴보고 복원력 있는 vDC에 기여하는 기본 구성 요소와 아키텍처를 설명했습니다. Azure Load Balancer, NVA, 가용성 집합, 크기 집합과 같은 Azure 기능과 기타 메커니즘은 프로덕션 서비스에 견고한 SLA 수준을 구축할 수 있는 시스템을 구현하도록 합니다.
+지금까지 이 문서에서는 단일 vDC를 집중적으로 살펴보고 복원력 있는 vDC에 기여하는 기본 구성 요소와 아키텍처를 설명했습니다. Azure Load Balancer, NVA, 가용성 집합, 확장 집합과 같은 Azure 기능과 기타 메커니즘은 프로덕션 서비스에 견고한 SLA 수준을 구축할 수 있는 시스템을 구현하도록 합니다.
 
 그러나 단일 vDC는 단일 지역 내에 호스트되며 대규모 작동 중단에 취약하여 전체 지역에 영향을 줄 수 있습니다. 높은 SLA를 달성하려는 고객은 동일한 프로젝트를 다른 지역에 있는 두 개 이상의 vDC로 배포하여 서비스를 보호해야 합니다.
 
@@ -310,18 +313,19 @@ Azure 데이터 센터는 전 세계 여러 지역에 있습니다. 고객은 �
 
 여러 다른 vDC에 있는 응용 프로그램의 동기화 또는 하트비트 모니터링을 위해서는 이러한 vDC 간에 통신이 설정되어야 합니다. 다른 지역에 있는 두 vDC는 다음을 통해 연결될 수 있습니다.
 
+-   VNet 피어링 - VNet 피어링은 여러 지역의 허브를 연결할 수 있습니다
 -   vDC가 동일한 ExpressRoute 회로에 연결될 경우 ExpressRoute 전용 피어링
 -   회사 백본을 통해 연결된 여러 ExpressRoute 회로 및 ExpressRoute 회로로 연결된 vDC 메시
 -   각 Azure 지역에 있는 vDC 허브 간의 사이트 간 VPN 연결
 
-일반적으로 ExpressRoute 연결은 Microsoft 백본을 통해 전송할 경우 대역폭이 더 높아지고 대기 시간이 일관되게 유지되므로 선호되는 기본 메커니즘입니다.
+일반적으로 VNet 피어링 또는 ExpressRoute 연결은 Microsoft 백본을 통해 전송할 경우 대역폭이 더 높아지고 대기 시간이 일관되게 유지되므로 선호되는 기본 메커니즘입니다.
 
 다른 지역에 있는 두 개 이상의 다른 vDC 간에 분산된 응용 프로그램의 유효성을 검사할 수 있는 마법의 레시피는 없습니다. 고객은 네트워크 검증 테스트를 통해 연결의 대기 시간 및 대역폭을 확인하고 동기 또는 비동기 데이터 복제가 적절한지 여부와 작업에 대해 최적의 RTO(복구 시간 목표)를 구현할 수 있는지를 검토해야 합니다.
 
 #### <a name="mechanism-to-divert-traffic-between-dc"></a>DC 간에 트래픽을 전환하는 메커니즘
 한 DC에 수신되는 트래픽을 다른 DC로 전환하는 효과적인 기법은 DNS를 기준으로 합니다. [Azure Traffic Manager][TM]는 DNS(Domain Name System) 메커니즘을 사용하여 최종 사용자 트래픽을 특정 vDC에서 가장 적절한 공용 끝점으로 전송합니다. 프로브를 통해, Traffic Manager는 여러 다른 vDC의 공용 끝점에 대한 서비스 상태를 주기적으로 확인하고, 끝점에 장애가 발생할 경우 자동으로 보조 vDC로 라우팅합니다.
 
-Traffic Manager는 Azure 공용 끝점에서 작동하며 트래픽을 제어하고 적절한 vDC의 Azure VM 및 웹앱으로 전환하는 데 사용될 수 있습니다. Traffic Manager는 전체 Azure 지역에 장애가 발생하더라도 복원되며, 몇 가지 조건(예: 특정 vDC의 서비스 장애 또는 클라이언트에 대해 네트워크 대기 시간이 가장 낮은 vDC 선택)에 따라 여러 다른 vDC에 있는 서비스 끝점에 대한 사용자 트래픽 분산을 제어할 수 있습니다.
+Traffic Manager는 Azure 공용 끝점에서 작동하며 트래픽을 제어하고 적절한 vDC의 Azure VM 및 Web Apps로 전환하는 데 사용될 수 있습니다. Traffic Manager는 전체 Azure 지역에 장애가 발생하더라도 복원되며, 몇 가지 조건(예: 특정 vDC의 서비스 장애 또는 클라이언트에 대해 네트워크 대기 시간이 가장 낮은 vDC 선택)에 따라 여러 다른 vDC에 있는 서비스 끝점에 대한 사용자 트래픽 분산을 제어할 수 있습니다.
 
 ### <a name="conclusion"></a>결론
 가상 데이터 센터는 클라우드에 대한 데이터 센터 마이그레이션 접근 방법으로, Azure에서 특성 및 기능 조합을 사용하여 클라우드 리소스 사용을 최대화하고 비용을 절감하고 시스템 거버넌스를 단순화하는 확장 가능한 아키텍처를 만듭니다. vDC 개념은 허브-스포크 토폴로지를 기준으로 하며 허브에 일반적인 공유 서비스를 제공하고 스포크에서 특정 응용 프로그램/워크로드를 허용합니다. vDC는 여러 다른 부서(중앙 IT, DevOps, 운영 및 유지 관리)가 고유한 역할 및 업무를 진행하면서 서로 함께 협력하는 회사 역할 구조와 일치합니다. vDC는 "리프트 및 시프트" 마이그레이션에 대한 요구 사항을 충족할 뿐만 아니라 네이티브 클라우드 배포에도 많은 이점을 제공합니다.
@@ -332,9 +336,9 @@ Traffic Manager는 Azure 공용 끝점에서 작동하며 트래픽을 제어하
 | | | |
 |-|-|-|
 |네트워크 기능|부하 분산|연결|
-|[Azure Virtual Networks][VNet]</br>[네트워크 보안 그룹][NSG]</br>[NSG 로그][NSGLog]</br>[사용자 정의 라우팅][UDR].</br>[네트워크 가상 어플라이언스][NVA]</br>[공용 IP 주소][PIP]|[Azure Load Balancer(L3)][ALB]</br>[Application Gateway(L7)][AppGW]</br>[웹 응용 프로그램 방화벽][WAF]</br>[Azure Traffic Manager][TM] |[VNet 피어링][VNetPeering]</br>[가상 사설망][VPN]</br>[ExpressRoute][ExR]
+|[Azure Virtual Networks][VNet]</br>[네트워크 보안 그룹][NSG]</br>[NSG 로그][NSGLog]</br>[사용자 정의 라우팅][UDR].</br>[네트워크 가상 어플라이언스][NVA]</br>[공용 IP 주소][PIP]</br>[DNS]|[Azure Load Balancer(L3)][ALB]</br>[Application Gateway(L7)][AppGW]</br>[웹 응용 프로그램 방화벽][WAF]</br>[Azure Traffic Manager][TM] |[VNet 피어링][VNetPeering]</br>[가상 사설망][VPN]</br>[ExpressRoute][ExR]
 |ID</br>|모니터링</br>|모범 사례</br>|
-|[Azure Active Directory][AAD]</br>[Multi-Factor Authentication][MFA]</br>[역할 기반 액세스 제어][RBAC]</br>[기본 AAD 역할][Roles] |[활동 로그][ActLog]</br>[진단 로그][DiagLog]</br>[Microsoft Operations Management Suite][OMS]</br> |[경계 네트워크 모범 사례][DMZ]</br>[구독 관리][SubMgmt]</br>[리소스 그룹 관리][RGMgmt]</br>[Azure 구독 제한][Limits] |
+|[Azure Active Directory][AAD]</br>[Multi-Factor Authentication][MFA]</br>[역할 기반 Access Control][RBAC]</br>[기본 AAD 역할][Roles] |[Azure Monitor][Monitor]</br>[활동 로그][ActLog]</br>[진단 로그][DiagLog]</br>[Microsoft Operations Management Suite][OMS]</br>[네트워크 성능 모니터][NPM]|[경계 네트워크 모범 사례][DMZ]</br>[구독 관리][SubMgmt]</br>[리소스 그룹 관리][RGMgmt]</br>[Azure 구독 제한][Limits] |
 |기타 Azure 서비스|
 |[Azure Web Apps][WebApps]</br>[HDInsights(Hadoop)][HDI]</br>[Event Hubs][EventHubs]</br>[Service Bus][ServiceBus]|
 
@@ -360,12 +364,14 @@ Traffic Manager는 Azure 공용 끝점에서 작동하며 트래픽을 제어하
 
 <!--Link References-->
 [Limits]: https://docs.microsoft.com/azure/azure-subscription-service-limits
-[Roles]: https://docs.microsoft.com/azure/active-directory/role-based-access-built-in-roles
+[Roles]: https://docs.microsoft.com/azure/role-based-access-control/built-in-roles
 [VNet]: https://docs.microsoft.com/azure/virtual-network/virtual-networks-overview
-[NSG]: https://docs.microsoft.com/azure/virtual-network/virtual-networks-nsg 
+[NSG]: https://docs.microsoft.com/azure/virtual-network/virtual-networks-nsg
+[DNS]: https://docs.microsoft.com/azure/dns/dns-overview
+[PrivateDNS]: https://docs.microsoft.com/azure/dns/private-dns-overview
 [VNetPeering]: https://docs.microsoft.com/azure/virtual-network/virtual-network-peering-overview 
 [UDR]: https://docs.microsoft.com/azure/virtual-network/virtual-networks-udr-overview 
-[RBAC]: https://docs.microsoft.com/azure/active-directory/role-based-access-control-what-is
+[RBAC]: https://docs.microsoft.com/azure/role-based-access-control/overview
 [MFA]: https://docs.microsoft.com/azure/multi-factor-authentication/multi-factor-authentication
 [AAD]: https://docs.microsoft.com/azure/active-directory/active-directory-whatis
 [VPN]: https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpngateways 
@@ -378,13 +384,14 @@ Traffic Manager는 Azure 공용 끝점에서 작동하며 트래픽을 제어하
 [PIP]: https://docs.microsoft.com/azure/virtual-network/resource-groups-networking#public-ip-address
 [AppGW]: https://docs.microsoft.com/azure/application-gateway/application-gateway-introduction
 [WAF]: https://docs.microsoft.com/azure/application-gateway/application-gateway-web-application-firewall-overview
+[Monitor]: https://docs.microsoft.com/azure/monitoring-and-diagnostics/
 [ActLog]: https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-activity-logs 
 [DiagLog]: https://docs.microsoft.com/azure/monitoring-and-diagnostics/monitoring-overview-of-diagnostic-logs
 [NSGLog]: https://docs.microsoft.com/azure/virtual-network/virtual-network-nsg-manage-log
 [OMS]: https://docs.microsoft.com/azure/operations-management-suite/operations-management-suite-overview
-[WebApps]: https://docs.microsoft.com/azure/app-service-web/
+[NPM]: https://docs.microsoft.com/azure/log-analytics/log-analytics-network-performance-monitor
+[WebApps]: https://docs.microsoft.com/azure/app-service/
 [HDI]: https://docs.microsoft.com/azure/hdinsight/hdinsight-hadoop-introduction
 [EventHubs]: https://docs.microsoft.com/azure/event-hubs/event-hubs-what-is-event-hubs 
 [ServiceBus]: https://docs.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview
 [TM]: https://docs.microsoft.com/azure/traffic-manager/traffic-manager-overview
-

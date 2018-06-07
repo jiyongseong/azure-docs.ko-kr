@@ -1,97 +1,181 @@
 ---
-title: "SSL 오프로드 구성 - Azure Application Gateway - Azure Portal | Microsoft Docs"
-description: "이 페이지에서는 포털을 사용하여 SSL 오프로드와 함께 응용 프로그램 게이트웨이를 만드는 지침을 제공합니다."
-documentationcenter: na
+title: SSL 종료로 응용 프로그램 게이트웨이 만들기 - Azure Portal | Microsoft Docs
+description: Azure Portal을 사용하여 응용 프로그램 게이트웨이를 만들고 SSL 종료를 위한 인증서를 추가하는 방법을 알아봅니다.
 services: application-gateway
-author: georgewallace
-manager: timlt
+author: vhorne
+manager: jpconnock
 editor: tysonn
-ms.assetid: 8373379a-a26a-45d2-aa62-dd282298eff3
+tags: azure-resource-manager
 ms.service: application-gateway
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 01/23/2017
-ms.author: gwallace
-translationtype: Human Translation
-ms.sourcegitcommit: 0bec803e4b49f3ae53f2cc3be6b9cb2d256fe5ea
-ms.openlocfilehash: a9cb2d921d1be226661311d91367b2b6f44fa0dc
-ms.lasthandoff: 03/24/2017
-
-
+ms.date: 01/26/2018
+ms.author: victorh
+ms.openlocfilehash: 10796000f913428e39a0ffbd0aa2cbe0c515eb7a
+ms.sourcegitcommit: c47ef7899572bf6441627f76eb4c4ac15e487aec
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/04/2018
 ---
-# <a name="configure-an-application-gateway-for-ssl-offload-by-using-the-portal"></a>포털을 사용하여 SSL 오프로드에 대한 응용 프로그램 게이트웨이 구성
+# <a name="create-an-application-gateway-with-ssl-termination-using-the-azure-portal"></a>Azure Portal을 사용하여 SSL 종료로 응용 프로그램 게이트웨이 만들기
 
-> [!div class="op_single_selector"]
-> * [쉬운 테이블](application-gateway-ssl-portal.md)
-> * [Azure Resource Manager PowerShell](application-gateway-ssl-arm.md)
-> * [Azure 클래식 PowerShell](application-gateway-ssl.md)
+Azure Portal을 사용하여 백엔드 서버에 가상 시스템을 사용하는 SSL 종료용 인증서가 있는 [응용 프로그램 게이트웨이](application-gateway-introduction.md)를 만들 수 있습니다.
 
-Azure 응용 프로그램 게이트웨이 구성을 사용하여 웹 팜에서 발생하는 비용이 많이 드는 SSL(Secure Sockets Layer) 암호 해독 작업을 방지하기 위한 게이트웨이에서 SSL 세션을 종료합니다. SSL 오프로드는 또한 프런트 엔드 서버 설치 및 웹 응용 프로그램의 관리를 간소화합니다.
+이 문서에서는 다음 방법을 설명합니다.
 
-## <a name="scenario"></a>시나리오
+> [!div class="checklist"]
+> * 자체 서명된 인증서 만들기
+> * 인증서가 있는 응용 프로그램 게이트웨이 만들기
+> * 백 엔드 서버로 사용되는 가상 머신 만들기
 
-다음 시나리오에서는 기존 응용 프로그램 게이트웨이에서 SSL 오프로드를 구성하는 과정을 살펴봅니다. 이 시나리오에서는 [응용 프로그램 게이트웨이 만들기](application-gateway-create-gateway-portal.md)단계를 이미 수행한 것으로 가정합니다.
+Azure 구독이 아직 없는 경우 시작하기 전에 [체험 계정](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)을 만듭니다.
 
-## <a name="before-you-begin"></a>시작하기 전에
+## <a name="log-in-to-azure"></a>Azure에 로그인
 
-응용 프로그램 게이트웨이에서 SSL 오프로드를 구성하려면 인증서가 필요합니다. 이 인증서는 응용 프로그램 게이트웨이에 로드되며 SSL을 통해 전송된 트래픽을 암호화 및 해독하는 데 사용됩니다. 인증서는 개인 정보 교환(.pfx) 형식이어야 합니다. 이 파일 형식을 사용하면 응용 프로그램 게이트웨이에서 트래픽의 암호화 및 암호 해독을 수행하는 데 필요한 개인 키를 내보낼 수 있습니다.
+[http://portal.azure.com](http://portal.azure.com)에서 Azure Portal에 로그인
 
-## <a name="add-an-https-listener"></a>HTTPS 수신기 추가
+## <a name="create-a-self-signed-certificate"></a>자체 서명된 인증서 만들기
 
-HTTPS 수신기는 구성에 따라 트래픽을 확인하며, 백 엔드 풀로 트래픽을 라우팅하도록 도와줍니다.
+이 섹션에서는 [New-SelfSignedCertificate](https://docs.microsoft.com/powershell/module/pkiclient/new-selfsignedcertificate)를 사용하여 응용 프로그램 게이트웨이에 대한 수신기를 만들 때 Azure Portal에 업로드하는 자체 서명된 인증서를 만듭니다.
 
-### <a name="step-1"></a>1단계
+로컬 컴퓨터에서 Windows PowerShell 창을 관리자로 엽니다. 다음 명령을 실행하여 인증서를 만듭니다.
 
-Azure 포털로 이동하여 기존 응용 프로그램 게이트웨이를 선택합니다.
+```powershell
+New-SelfSignedCertificate \
+  -certstorelocation cert:\localmachine\my \
+  -dnsname www.contoso.com
+```
 
-### <a name="step-2"></a>2단계
+다음과 같은 응답이 표시됩니다.
 
-수신기를 클릭한 다음 추가 단추를 클릭하여 수신기를 추가합니다.
+```
+PSParentPath: Microsoft.PowerShell.Security\Certificate::LocalMachine\my
 
-![응용 프로그램 게이트웨이 개요 블레이드][1]
+Thumbprint                                Subject
+----------                                -------
+E1E81C23B3AD33F9B4D1717B20AB65DBB91AC630  CN=www.contoso.com
 
-### <a name="step-3"></a>3단계
+Use [Export-PfxCertificate](https://docs.microsoft.com/powershell/module/pkiclient/export-pfxcertificate) with the Thumbprint that was returned to export a pfx file from the certificate:
+```
 
-수신기에 대한 필수 정보를 입력하고 .pfx 인증서를 업로드합니다. 완료되면 확인을 클릭합니다.
+```powershell
+$pwd = ConvertTo-SecureString -String "Azure123456!" -Force -AsPlainText
+Export-PfxCertificate \
+  -cert cert:\localMachine\my\E1E81C23B3AD33F9B4D1717B20AB65DBB91AC630 \
+  -FilePath c:\appgwcert.pfx \
+  -Password $pwd
+```
 
-**이름** - 이 값은 수신기의 이름입니다.
+## <a name="create-an-application-gateway"></a>응용 프로그램 게이트웨이 만들기
 
-**프런트 엔드 IP 구성** - 이 값은 수신기에 사용되는 프런트 엔드 IP 구성입니다.
+가상 네트워크는 사용자가 만든 리소스 간의 통신에 필요합니다. 이 예제에서는 두 개의 서브넷을 만듭니다. 하나는 응용 프로그램 게이트웨이용이고, 다른 하나는 백 엔드 서버용입니다. 응용 프로그램 게이트웨이를 만드는 동시에 가상 네트워크를 만들 수 있습니다.
 
-**프런트 엔드 포트(이름/포트)** - 응용 프로그램 게이트웨이의 프런트 엔드에서 사용되는 포트 및 실제로 사용되는 포트의 이름입니다.
+1. Azure Portal의 왼쪽 위에서 **새로 만들기**를 클릭합니다.
+2. **네트워킹**을 선택한 다음, 추천 목록에서 **Application Gateway**를 선택합니다.
+3. 응용 프로그램 게이트웨이의 이름으로 *myAppGateway*를 입력하고 새 리소스 그룹에 대해 *myResourceGroupAG*를 입력합니다.
+4. 다른 설정에 대한 기본값을 적용한 다음, **확인**을 클릭합니다.
+5. **가상 네트워크 선택**을 클릭하고 **새로 만들기**를 클릭한 다음, 가상 네트워크에 대해 다음 값을 입력합니다.
 
-**프로토콜** - 프런트 엔드에 https가 사용되는지 또는 http가 사용되는지를 결정하는 스위치입니다.
+    - *myVNet* - 가상 네트워크 이름
+    - *10.0.0.0/16* - 가상 네트워크 주소 공간
+    - *myAGSubnet* - 서브넷 이름
+    - *10.0.0.0/24* - 서브넷 주소 공간
 
-**인증서(이름/암호)** - SSL 오프로드를 사용하는 경우 이 설정에는 .pfx 인증서가 필요하며, 이름 및 암호가 필요합니다.
+    ![가상 네트워크 만들기](./media/application-gateway-ssl-portal/application-gateway-vnet.png)
 
-![수신기 추가 블레이드][2]
+6. **확인**을 클릭하여 가상 네트워크 및 서브넷을 만듭니다.
+7. **공용 IP 주소 선택**을 클릭하고 **새로 만들기**를 클릭한 다음, 공용 IP 주소의 이름을 입력합니다. 이 예제에서 공용 IP 주소의 이름은 *myAGPublicIPAddress*입니다. 다른 설정에 대한 기본값을 적용한 다음, **확인**을 클릭합니다.
+8. 수신기의 프로토콜에 대해 **HTTPS**를 누르고 포트가 **443**으로 정의되어 있는지 확인합니다.
+9. 폴더 아이콘을 클릭하고 이전에 만든 *appgwcert.pfx* 인증서를 찾아서 업로드합니다.
+10. 인증서의 이름에 *mycert1*을 입력하고 암호에 *Azure123456!* 를 입력한 다음, **확인**을 클릭합니다.
 
-## <a name="create-a-rule-and-associate-it-to-the-listener"></a>규칙을 만들고 수신기에 연결
+    ![새 응용 프로그램 게이트웨이 만들기](./media/application-gateway-ssl-portal/application-gateway-create.png)
 
-이제 수신기가 만들어졌습니다. 수신기에서 트래픽을 처리할 규칙을 만들 차례입니다. 규칙은 쿠키 기반 세션 선호도가 사용되는지 여부를 비롯하여 여러 구성 설정, 프로토콜, 포트 및 상태 프로브에 따라 백 엔드 풀에 트래픽이 라우팅되는 방식을 정의합니다.
+11. 요약 페이지에서 설정을 검토한 다음, **확인**을 클릭하여 네트워크 리소스와 응용 프로그램 게이트웨이를 만듭니다. 응용 프로그램 게이트웨이가 생성되는 데 몇 분이 걸릴 수 있습니다. 배포가 완료될 때까지 기다렸다가 다음 섹션으로 이동합니다.
 
-### <a name="step-1"></a>1단계
+### <a name="add-a-subnet"></a>서브넷 추가
 
-응용 프로그램 게이트웨이의 **규칙**을 클릭한 다음 추가를 클릭합니다.
+1. 왼쪽 메뉴에서 **모든 리소스**를 클릭한 다음, 리소스 목록에서 **myVNet**을 클릭합니다.
+2. **서브넷**을 클릭한 다음, **서브넷**을 클릭합니다.
 
-![앱 게이트웨이 규칙 블레이드][3]
+    ![서브넷 만들기](./media/application-gateway-ssl-portal/application-gateway-subnet.png)
 
-### <a name="step-2"></a>2단계
+3. 서브넷 이름에 *myBackendSubnet*을 입력한 다음, **확인**을 클릭합니다.
 
-**기본 규칙 추가** 블레이드에서 규칙의 이름을 입력하고 이전 단계에서 만든 수신기를 선택합니다. 적절한 백 엔드 풀 및 http 설정을 선택하고 **확인**
+## <a name="create-backend-servers"></a>백 엔드 서버 만들기
 
-![https 설정 창][4]
+이 예제에서는 응용 프로그램 게이트웨이에 대한 백 엔드 서버로 사용할 두 개의 가상 머신을 만듭니다. 또한 응용 프로그램 게이트웨이가 성공적으로 만들어 졌는지 확인하기 위해 가상 머신에 IIS를 설치합니다.
 
-이제 설정이 응용 프로그램 게이트웨이에 저장됩니다. 이러한 설정의 저장 프로세스에는 약간의 시간이 걸릴 수 있으며, 그런 다음 포털 또는 PowerShell을 통해 볼 수 있습니다. 저장이 완료되면 응용 프로그램 게이트웨이에서 트래픽의 암호화 및 암호 해독을 처리합니다. 응용 프로그램 게이트웨이와 백 엔드 웹 서버 간의 모든 트래픽은 http를 통해 처리됩니다. Https를 통해 시작된 경우에는 클라이언트와의 모든 통신이 암호화된 상태로 클라이언트에 반환됩니다.
+### <a name="create-a-virtual-machine"></a>가상 머신 만들기
+
+1. **새로 만들기**를 클릭합니다.
+2. **Compute**를 클릭한 다음, 추천 목록에서 **Windows Server 2016 Datacenter**를 선택합니다.
+3. 가상 머신에 대해 다음 값을 입력합니다.
+
+    - *myVM* - 가상 머신의 이름
+    - *azureuser* - 관리자 사용자 이름
+    - *Azure123456!* - 암호
+    - **기존 항목 사용**을 선택한 다음, *myResourceGroupAG*를 선택합니다.
+
+4. **확인**을 클릭합니다.
+5. 가상 머신의 크기에 대해 **DS1_V2**를 선택하고 **선택**을 클릭합니다.
+6. 가상 네트워크에 대해 **myVNet**이 선택되어 있고 서브넷이 **myBackendSubnet**인지 확인합니다. 
+7. **사용 안 함**을 클릭하여 부팅 진단을 사용하지 않도록 설정합니다.
+8. **확인**을 클릭하고 요약 페이지에서 설정을 검토한 다음, **만들기**를 클릭합니다.
+
+### <a name="install-iis"></a>IIS 설치
+
+1. 대화형 셸을 열고 **PowerShell**로 설정되어 있는지 확인합니다.
+
+    ![사용자 지정 확장 설치](./media/application-gateway-ssl-portal/application-gateway-extension.png)
+
+2. 다음 명령을 실행하여 가상 머신에 IIS를 설치합니다. 
+
+    ```azurepowershell-interactive
+    Set-AzureRmVMExtension `
+      -ResourceGroupName myResourceGroupAG `
+      -ExtensionName IIS `
+      -VMName myVM `
+      -Publisher Microsoft.Compute `
+      -ExtensionType CustomScriptExtension `
+      -TypeHandlerVersion 1.4 `
+      -SettingString '{"commandToExecute":"powershell Add-WindowsFeature Web-Server; powershell Add-Content -Path \"C:\\inetpub\\wwwroot\\Default.htm\" -Value $($env:computername)"}' `
+      -Location EastUS
+    ```
+
+3. 두 번째 가상 머신을 만들고, 방금 완료한 단계를 사용하여 IIS를 설치합니다. Set-AzureRmVMExtension의 이름 및 VMName에 대해 *myVM2*를 입력합니다.
+
+### <a name="add-backend-servers"></a>백 엔드 서버 추가
+
+3. **모든 리소스**를 클릭한 다음, **myAppGateway**를 클릭합니다.
+4. **백 엔드 풀**을 클릭합니다. 기본 풀이 응용 프로그램 게이트웨이와 함께 자동으로 생성되었습니다. **appGateayBackendPool**을 클릭합니다.
+5. **대상 추가**를 클릭하여 생성된 각각의 가상 머신을 백 엔드 풀에 추가합니다.
+
+    ![백 엔드 서버 추가](./media/application-gateway-ssl-portal/application-gateway-backend.png)
+
+6. **저장**을 클릭합니다.
+
+## <a name="test-the-application-gateway"></a>응용 프로그램 게이트웨이 테스트
+
+1. **모든 리소스**를 클릭한 다음, **myAGPublicIPAddress**를 클릭합니다.
+
+    ![응용 프로그램 게이트웨이 공용 IP 주소 기록](./media/application-gateway-ssl-portal/application-gateway-ag-address.png)
+
+2. 공용 IP 주소를 복사하여 브라우저의 주소 표시줄에 붙여넣습니다. 자체 서명된 인증서를 사용하는 경우 보안 경고를 수락하려면 세부 정보를 선택한 다음 웹 페이지로 이동을 선택합니다.
+
+    ![보안 경고](./media/application-gateway-ssl-portal/application-gateway-secure.png)
+
+    그러면 보안 IIS 웹 사이트가 다음 예제와 같이 표시됩니다.
+
+    ![응용 프로그램 게이트웨이의 기준 URL 테스트](./media/application-gateway-ssl-portal/application-gateway-iistest.png)
 
 ## <a name="next-steps"></a>다음 단계
 
-Azure 응용 프로그램 게이트웨이를 사용하여 사용자 지정 상태 프로브를 구성하는 방법을 알아보려면 [사용자 지정 상태 프로브 만들기](application-gateway-create-gateway-portal.md)를 참조하세요.
+이 자습서에서는 다음 방법에 대해 알아보았습니다.
 
-[1]: ./media/application-gateway-ssl-portal/figure1.png
-[2]: ./media/application-gateway-ssl-portal/figure2.png
-[3]: ./media/application-gateway-ssl-portal/figure3.png
-[4]: ./media/application-gateway-ssl-portal/figure4.png
+> [!div class="checklist"]
+> * 자체 서명된 인증서 만들기
+> * 인증서가 있는 응용 프로그램 게이트웨이 만들기
+> * 백 엔드 서버로 사용되는 가상 머신 만들기
 
+응용 프로그램 게이트웨이 및 관련 리소스에 대해 자세히 알아보려면 방법 문서를 참조하세요.

@@ -1,30 +1,20 @@
 ---
-title: "Azure Analysis Services 자습서 단원 5: 계산된 열 만들기 | Microsoft Docs"
-description: "Azure Analysis Services 자습서 프로젝트에서 계산된 열을 만드는 방법을 설명합니다."
-services: analysis-services
-documentationcenter: 
+title: 'Azure Analysis Services 자습서 단원 5: 계산된 열 만들기 | Microsoft Docs'
+description: Azure Analysis Services 자습서 프로젝트에서 계산된 열을 만드는 방법을 설명합니다.
 author: minewiskan
-manager: erikre
-editor: 
-tags: 
-ms.assetid: 
+manager: kfile
 ms.service: analysis-services
-ms.devlang: NA
-ms.topic: get-started-article
-ms.tgt_pltfrm: NA
-ms.workload: na
-ms.date: 06/01/2017
+ms.topic: conceptual
+ms.date: 04/12/2018
 ms.author: owend
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 43aab8d52e854636f7ea2ff3aae50d7827735cc7
-ms.openlocfilehash: 893371145d77e156843271907aeef0c3756d0403
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/03/2017
-
+ms.reviewer: minewiskan
+ms.openlocfilehash: fa4a092fd811572136bf355de3545a2c847a5ed9
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-# <a name="lesson-5-create-calculated-columns"></a>단원 5: 계산된 열 만들기
-
-[!INCLUDE[analysis-services-appliesto-aas-sql2017-later](../../../includes/analysis-services-appliesto-aas-sql2017-later.md)]
+# <a name="create-calculated-columns"></a>계산된 열 만들기
 
 이 단원에서는 계산된 열을 추가하여 모델에서 데이터를 만듭니다. 쿼리 편집기를 사용하거나 여기에서처럼 나중에 모델 디자이너에서 데이터 가져오기를 사용할 때 계산된 열(사용자 지정 열로)을 만들 수 있습니다. 자세한 내용은 [계산된 열](https://docs.microsoft.com/sql/analysis-services/tabular-models/ssas-calculated-columns)을 참조하세요.
   
@@ -138,4 +128,3 @@ ProductCategoryName 계산된 열은 DimProductCategory 테이블에서 EnglishP
   
   
   
-

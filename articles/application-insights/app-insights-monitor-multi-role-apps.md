@@ -1,9 +1,9 @@
 ---
-title: "여러 구성 요소, 마이크로 서비스 및 컨테이너에 대한 Azure Application Insights 지원 | Microsoft Docs"
-description: "여러 구성 요소 또는 역할로 이루어진 앱에서 성능 및 사용량을 모니터링합니다."
+title: 여러 구성 요소, 마이크로 서비스 및 컨테이너에 대한 Azure Application Insights 지원 | Microsoft Docs
+description: 여러 구성 요소 또는 역할로 이루어진 앱에서 성능 및 사용량을 모니터링합니다.
 services: application-insights
-documentationcenter: 
-author: CFreemanwa
+documentationcenter: ''
+author: mrbullwinkle
 manager: carmonm
 ms.service: application-insights
 ms.workload: tbd
@@ -11,13 +11,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 05/17/2017
-ms.author: sewhee
+ms.author: mbullwin
+ms.openlocfilehash: 9b03aff140eec5b355383447f0a815220d6408e3
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
 ms.translationtype: HT
-ms.sourcegitcommit: 141270c353d3fe7341dfad890162ed74495d48ac
-ms.openlocfilehash: d8b466caba7201a5bb8612e773ad61943f6d1cf2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="monitor-multi-component-applications-with-application-insights-preview"></a>Application Insights(미리 보기)로 다중 구성 요소 응용 프로그램 모니터링
 
@@ -43,13 +42,13 @@ ms.lasthandoff: 07/25/2017
 
 * 응용 프로그램의 각 구성 요소에 Application Insights 패키지의 **최신 시험판을 설치**합니다. 
 * 응용 프로그램의 모든 구성 요소에 대해 **단일 Application Insights 리소스를 공유**합니다.
-* 미리 보기 블레이드에서 **다중 역할 Application Map을 활성화**합니다.
+* 미리 보기 블레이드에서 **복합 Application Map을 활성화**합니다.
 
 해당 형식에 적절한 방법을 사용하여 응용 프로그램의 각 구성 요소를 구성합니다. ([ASP.NET](app-insights-asp-net.md), [Java](app-insights-java-get-started.md), [Node.js](app-insights-nodejs.md), [JavaScript](app-insights-javascript.md).)
 
 ### <a name="1-install-the-latest-pre-release-package"></a>1. 최신 시험판 패키지 설치
 
-각 서버 구성 요소에 대한 프로젝트에서 Appication Insights 패키지를 업데이트하거나 설치합니다. Visual Studio를 사용하는 경우:
+각 서버 구성 요소에 대한 프로젝트에서 Application Insights 패키지를 업데이트하거나 설치합니다. Visual Studio를 사용하는 경우:
 
 1. 프로젝트를 마우스 오른쪽 단추로 클릭하고 **NuGet 패키지 관리**를 선택합니다. 
 2. **시험판 포함**을 선택합니다.
@@ -74,9 +73,9 @@ ms.lasthandoff: 07/25/2017
 ![계측 키를 .config 파일에 복사합니다.](./media/app-insights-monitor-multi-role-apps/copy-instrumentation-key.png)
 
 
-### <a name="3-enable-multi-role-application-map"></a>3. 다중 역할 Application Map 활성화
+### <a name="3-enable-composite-application-map"></a>3. 복합 응용 프로그램 맵 활성화
 
-Azure Portal에서 응용 프로그램에 대한 리소스를 엽니다. 미리 보기 블레이드에서 *다중 역할 Application Map*을 활성화합니다.
+Azure Portal에서 응용 프로그램에 대한 리소스를 엽니다. CONFIGURE 부제 아래에서 미리 보기를 클릭하여 미리 보기 블레이드를 엽니다. 미리 보기 블레이드에서 *복합 Application Map*을 활성화합니다.
 
 ### <a name="4-enable-docker-metrics-optional"></a>4. Docker 메트릭 사용(선택 사항) 
 
@@ -129,4 +128,3 @@ Azure Portal에서 응용 프로그램에 대한 리소스를 엽니다. 미리 
 ## <a name="next-steps"></a>다음 단계
 
 * [개발, 테스트 및 프로덕션의 원격 분석 구분](app-insights-separate-resources.md)
-

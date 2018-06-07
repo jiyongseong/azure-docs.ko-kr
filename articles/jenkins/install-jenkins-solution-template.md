@@ -1,150 +1,94 @@
 ---
-title: "Azure의 Linux(Ubuntu) VM에서 첫 번째 Jenkins 마스터 만들기"
-description: "솔루션 템플릿을 활용하여 Jenkins를 배포합니다."
-services: app-service\web
-documentationcenter: 
-author: mlearned
-manager: douge
-editor: 
-ms.assetid: 8bacfe3e-7f0b-4394-959a-a88618cb31e1
+title: Azure에서 Jenkins 서버 만들기
+description: Jenkins 솔루션 템플릿에서 Azure Linux 가상 머신에 Jenkins를 설치하고 샘플 Java 응용 프로그램을 빌드합니다.
+author: tomarcher
+manager: rloutlaw
 ms.service: multiple
 ms.workload: web
-ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: hero-article
-ms.date: 6/7/2017
-ms.author: mlearned
+ms.topic: article
+ms.date: 03/12/2018
+ms.author: tarcher
 ms.custom: Jenkins
+ms.openlocfilehash: c9f86ab2536d3c598bb8c7084524395b41f18db0
+ms.sourcegitcommit: 8aab1aab0135fad24987a311b42a1c25a839e9f3
 ms.translationtype: HT
-ms.sourcegitcommit: 7bf5d568e59ead343ff2c976b310de79a998673b
-ms.openlocfilehash: f892ec7bd61124f7958a50ebdfb49c7310d4ee18
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/01/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/16/2018
 ---
+# <a name="create-a-jenkins-server-on-an-azure-linux-vm-from-the-azure-portal"></a>Azure Portal에서 Azure Linux VM에 Jenkins 서버 만들기
 
-# <a name="create-your-first-jenkins-master-on-a-linux-ubuntu-vm-on-azure"></a>Azure의 Linux(Ubuntu) VM에서 첫 번째 Jenkins 마스터 만들기
+이 빠른 시작은 Azure에서 사용 가능하도록 구성된 도구와 플러그 인을 사용하여 Ubuntu Linux VM에 [Jenkins](https://jenkins.io)를 설치하는 방법을 보여줍니다. 작업을 완료하면 [GitHub](https://github.com)에서 샘플 Java 앱을 빌드하는 Jenkins 서버가 Azure에서 실행됩니다.
 
-이 빠른 시작은 Linux(Ubuntu 14.04 LTS) VM에 Azure와 함께 작동하도록 구성된 도구 및 플러그 인과 함께 안정적인 최신 버전인 Jenkins를 설치하는 방법을 보여 줍니다. 도구로는 다음이 있습니다.
-<ul>
-<li>소스 제어를 위한 Git</li>
-<li>안전하게 연결하기 위한 Azure 자격 증명 플러그 인</li>
-<li>탄력적인 빌드, 테스트 및 연속 통합을 위한 Azure VM 에이전트 플러그 인</li>
-<li>아티팩트 저장을 위한 Azure Storage 플러그 인</li>
-<li>스크립트를 사용하여 앱을 배포하기 위한 Azure CLI</li>
-</ul>
+## <a name="prerequisites"></a>필수 조건
 
-이 자습서에서는 다음 방법에 대해 알아봅니다.
+* Azure 구독
+* 컴퓨터의 명령줄에서 SSH에 대한 액세스(Bash 셸 또는 [PuTTY](http://www.putty.org/) 등)
 
-> [!div class="checklist"]
-> * 평가판 Azure 계정을 만듭니다.
-> * 솔루션 템플릿을 사용하여 Azure VM에 Jenkins 마스터를 만듭니다. 
-> * Jenkins에 대한 초기 구성을 수행합니다.
-> * 제안된 플러그 인을 설치합니다.
+[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 
-Azure 구독이 아직 없는 경우 시작하기 전에 [무료 계정](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)을 만듭니다.
+## <a name="create-the-jenkins-vm-from-the-solution-template"></a>솔루션 템플릿에서 Jenkins VM 만들기
+Jenkins는 단일 Jenkins 설치가 많은 수의 프로젝트를 호스트하거나 빌드 또는 테스트에 필요한 다양한 환경을 제공할 수 있도록 하나 이상의 에이전트에 작업을 위임하는 모델을 지원합니다. 이 섹션의 단계는 Azure에서 Jenkins 서버를 설치 및 구성하는 과정을 안내합니다.
 
-## <a name="create-the-vm-in-azure-by-deploying-the-solution-template-for-jenkins"></a>Jenkins에 대한 솔루션 템플릿을 배포하여 Azure에서 VM 만들기
-
-Azure 빠른 시작 템플릿을 사용하여 Azure에 복잡한 기술을 빠르고 안정적으로 배포할 수 있습니다.  Azure Resource Manager를 사용하면 [선언적 템플릿](https://azure.microsoft.com/en-us/resources/templates/?term=jenkins)을 통해 응용 프로그램을 프로비전할 수 있습니다. 단일 템플릿에서 여러 서비스를 해당 종속성과 함께 배포할 수 있습니다. 동일한 템플릿을 사용하여 응용 프로그램 수명 주기의 각 단계 중에 응용 프로그램을 반복해서 배포합니다.
-
-이 템플릿에 대한 [계획 및 가격](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/bitnami.jenkins?tab=PlansAndPrice) 정보를 보고 비용 옵션을 파악합니다.
-
-[Jenkins에 대한 마켓플레이스 이미지](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/azure-oss.jenkins?tab=Overview)로 이동하여 **지금 가져오기**를 클릭합니다.  
-
-Azure Portal에서 **만들기**를 클릭합니다.  이 템플릿에서는 템플릿 모델 드롭다운을 사용하지 않도록 리소스 관리자를 사용해야 합니다.
-   
-![Azure Portal 대화 상자](./media/install-jenkins-solution-template/ap-create.png)
-
-**기본 설정 구성** 탭에서:
-
-![기본 설정 구성](./media/install-jenkins-solution-template/ap-basic.png)
-
-* Jenkins 인스턴스에 이름을 제공합니다.
-* VM 디스크 유형을 선택합니다.  프로덕션 워크로드의 경우 성능 향상을 위해 더 큰 VM과 SSD를 선택합니다.  Azure 디스크 유형에 대한 자세한 내용은 [여기](https://docs.microsoft.com/en-us/azure/storage/storage-premium-storage)서 확인할 수 있습니다.
-* 사용자 이름: 길이 요구 사항을 충족해야 하며 예약어나 지원되지 않는 문자는 포함하지 않아야 합니다. "admin"과 같은 이름은 허용되지 않습니다.  사용자 이름 및 암호 요구 사항에 대한 자세한 내용은 [여기](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/faq)를 참조하세요.
-* 인증 유형: 암호 또는 [SSH 공개 키](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ssh-from-windows)로 보호되는 인스턴스를 만듭니다. 암호를 사용하는 경우 1개의 소문자, 1개의 대문자, 1개의 대문자, 1개의 숫자 및 1개의 특수 문자 요구 사항 중 세 가지를 충족해야 합니다.
-* Jenkins 릴리스 형식을 **LTS**로 유지합니다.
-* 구독을 선택합니다.
-* 리소스 그룹을 만들거나 비어 있는 기존 리소스 그룹을 사용합니다. 
-* 위치를 선택합니다.
-
-**추가 옵션 구성** 탭에서:
-
-![추가 옵션 설정](./media/install-jenkins-solution-template/ap-addtional.png)
-
-* Jenkins 마스터를 고유하게 식별하는 도메인 이름 레이블을 제공합니다.
-
-**확인**을 클릭하고 다음 단계로 이동합니다. 
-
-유효성 검사를 통과했으면 **확인**을 클릭하여 템플릿 및 매개 변수를 다운로드합니다. 
-
-다음으로, **구매**를 선택하여 모든 리소스를 프로비전합니다.
-
-## <a name="setup-ssh-port-forwarding"></a>SSH 포트 전달 설정
-
-기본적으로 Jenkins 인스턴스는 http 프로토콜을 사용하고 포트 8080에서 수신 대기합니다. 사용자는 보안되지 않는 프로토콜을 통해 인증을 수행하지 않아야 합니다.
-    
-로컬 컴퓨터에서 Jenkins UI를 보기 위해 포트 전달을 설정합니다.
-
-### <a name="if-you-are-using-windows"></a>Windows를 사용하는 경우:
-
-PuTTY를 설치하고 Jenkins를 보호하기 위해 암호를 사용하는 경우 이 명령을 실행합니다.
-```
-putty.exe -ssh -L 8080:localhost:8080 <username>@<Domain name label>.<location>.cloudapp.azure.com
-```
-* 로그인하려면 암호를 입력합니다.
-
-![로그인하려면 암호를 입력합니다.](./media/install-jenkins-solution-template/jenkins-pwd.png)
-
-SSH를 사용하는 경우 이 명령을 실행합니다.
-```
-putty -i <private key file including path> -L 8080:localhost:8080 <username>@<Domain name label>.<location>.cloudapp.azure.com
-```
-
-### <a name="if-you-are-using-linux-or-mac"></a>Linux 또는 Mac을 사용 중인 경우:
-
-Jenkins 마스터를 보호하기 위해 암호를 사용하는 경우 이 명령을 실행합니다.
-```
-ssh -L 8080:localhost:8080 <username>@<Domain name label>.<location>.cloudapp.azure.com
-```
-* 로그인하려면 암호를 입력합니다.
-
-SSH를 사용하는 경우 이 명령을 실행합니다.
-```
-ssh -i <private key file including path> -L 8080:localhost:8080 <username>@<Domain name label>.<location>.cloudapp.azure.com
-```
+[!INCLUDE [jenkins-install-from-azure-marketplace-image](../../includes/jenkins-install-from-azure-marketplace-image.md)]
 
 ## <a name="connect-to-jenkins"></a>Jenkins에 연결
-터널을 시작한 후 로컬 컴퓨터에서 http://localhost:8080/으로 이동합니다.
 
-초기 관리자 암호로 Jenkins 대시보드의 잠금을 처음으로 해제합니다.
+웹 브라우저에서 가상 머신(예: http://jenkins2517454.eastus.cloudapp.azure.com/))으로 이동합니다. Jenkins 콘솔은 보안되지 않은 HTTP를 통해 액세스할 수 없으므로 SSH 터널을 사용하여 컴퓨터에서 안전하게 Jenkins 콘솔에 액세스하는 지침이 이 페이지에서 제공됩니다.
+
+![Jenkins 잠금 해제](./media/install-jenkins-solution-template/jenkins-ssh-instructions.png)
+
+명령줄 페이지에서 `ssh` 명령을 사용하여 터널을 설정하고, 솔루션 템플릿에서 가상 머신을 설정하는 경우 이전에 선택한 가상 머신 관리 사용자의 이름으로 `username`을 바꿉니다.
+
+```bash
+ssh -L 127.0.0.1:8080:localhost:8080 jenkinsadmin@jenkins2517454.eastus.cloudapp.azure.com
+```
+
+터널을 시작한 후에 로컬 컴퓨터에서 http://localhost:8080/으로 이동합니다. 
+
+Jenkins VM에 SSH를 통해 연결되어 있는 동안 명령줄에서 다음 명령을 실행하여 초기 암호를 가져옵니다.
+
+```bash
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+
+이 초기 암호를 사용하여 Jenkins 대시보드를 처음으로 잠금 해제합니다.
 
 ![Jenkins 잠금 해제](./media/install-jenkins-solution-template/jenkins-unlock.png)
 
-토큰을 가져오려면 VM으로 SSH를 수행하고 `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`를 실행합니다.
-
-![Jenkins 잠금 해제](./media/install-jenkins-solution-template/jenkins-ssh.png)
-
-제안된 플러그 인을 설치하라는 메시지가 표시됩니다.
-
-다음으로 Jenkins 마스터의 관리 사용자를 만듭니다.
-
-Jenkins 인스턴스를 사용할 준비가 되었습니다. http://\<방금 만든 인스턴스의 공용 DNS 이름\>으로 이동하여 읽기 전용 보기에 액세스할 수 있습니다.
+다음 페이지에서 **Install suggested plugins**(권장 플러그 인 설치)를 선택하고, Jenkins 대시보드에 액세스하는 데 사용한 Jenkins 관리 사용자를 만듭니다.
 
 ![Jenkins가 준비되었습니다.](./media/install-jenkins-solution-template/jenkins-welcome.png)
 
+이제 Jenkins 서버는 코드를 빌드할 준비가 되었습니다.
+
+## <a name="create-your-first-job"></a>첫 번째 작업 만들기
+
+Jenkins 콘솔에서 **Create new jobs**(새 작업 만들기)를 선택하고 이름은 **mySampleApp**으로 지정하고 **Freestyle project**(프리스타일 프로젝트)를 선택한 후 **OK**(확인)를 선택합니다.
+
+![새 작업 만들기](./media/install-jenkins-solution-template/jenkins-new-job.png) 
+
+**소스 코드 관리** 탭을 선택하고, **Git** 사용을 설정한 다음, **리포지토리 URL** 필드에 다음 URL을 입력합니다. `https://github.com/spring-guides/gs-spring-boot.git`
+
+![Git 리포지토리 정의](./media/install-jenkins-solution-template/jenkins-job-git-configuration.png) 
+
+**빌드** 탭을 선택한 후 **빌드 단계 추가**, **Gradle 스크립트 호출**을 선택합니다. **Gradle 래퍼 사용**을 선택한 후 **래퍼 위치**에 `complete`를 입력하고 **작업**에 `build`를 입력합니다.
+
+![Gradle 래퍼를 사용하여 빌드](./media/install-jenkins-solution-template/jenkins-job-gradle-config.png) 
+
+**고급..**을 선택하고 **루트 빌드 스크립트** 필드에 `complete`를 입력합니다. **저장**을 선택합니다.
+
+![Gradle 래퍼 빌드 단계에서 고급 설정을 지정](./media/install-jenkins-solution-template/jenkins-job-gradle-advances.png) 
+
+## <a name="build-the-code"></a>코드 빌드
+
+**지금 빌드**를 선택하여 코드를 컴파일하고 샘플 앱을 패키징합니다. 빌드가 완료되면 프로젝트에 대한 **작업 영역** 링크를 선택합니다.
+
+![작업 영역으로 이동하여 빌드에서 JAR 파일 가져오기](./media/install-jenkins-solution-template/jenkins-access-workspace.png) 
+
+`complete/build/libs`로 이동하여 `gs-spring-boot-0.1.0.jar`이 있으면 빌드가 성공한 것입니다. 이제 Azure에서 Jenkins 서버로 고유한 프로젝트를 빌드할 준비가 되었습니다.
+
 ## <a name="next-steps"></a>다음 단계
 
-이 자습서에서는 다음을 수행했습니다.
-
-> [!div class="checklist"]
-> * 솔루션 템플릿으로 Jenkins 마스터를 만들었습니다.
-> * Jenkins의 초기 구성을 수행했습니다.
-> * 플러그 인을 설치했습니다.
-
-이 링크를 따라 Jenkins와 연속 통합을 위해 Azure VM 에이전트를 사용하는 방법을 확인합니다.
-
 > [!div class="nextstepaction"]
-> [Jenkins 에이전트로 Azure VM](jenkins-azure-vm-agents.md)
-
+> [Azure VM을 Jenkins 에이전트로 추가](jenkins-azure-vm-agents.md)

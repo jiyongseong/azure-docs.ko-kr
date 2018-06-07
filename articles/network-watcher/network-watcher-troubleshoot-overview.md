@@ -1,11 +1,11 @@
 ---
-title: "Azure Network Watcher의 리소스 문제 해결 소개 | Microsoft Docs"
-description: "이 페이지는 Network Watcher 리소스 문제 해결 기능에 대한 개요를 제공합니다."
+title: Azure Network Watcher의 리소스 문제 해결 소개 | Microsoft Docs
+description: 이 페이지는 Network Watcher 리소스 문제 해결 기능에 대한 개요를 제공합니다.
 services: network-watcher
 documentationcenter: na
-author: georgewallace
-manager: timlt
-editor: 
+author: jimdial
+manager: jeconnoc
+editor: ''
 ms.assetid: c1145cd6-d1cf-4770-b1cc-eaf0464cc315
 ms.service: network-watcher
 ms.devlang: na
@@ -13,18 +13,17 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 06/19/2017
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a1ba750d2be1969bfcd4085a24b0469f72a357ad
-ms.openlocfilehash: 3ae4701914fb759efe7a890d5906f231c1def2e2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
+ms.author: jdial
+ms.openlocfilehash: 2f8a41834c1451d80c53cfed4bae3b7e36281702
+ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/03/2018
+ms.locfileid: "32779263"
 ---
-
 # <a name="introduction-to-resource-troubleshooting-in-azure-network-watcher"></a>Azure Network Watcher의 리소스 문제 해결 소개
 
-Virtual Network 게이트웨이는 온-프레미스 리소스 및 Azure 내 다른 가상 네트워크 간의 연결을 제공합니다. 이러한 게이트웨이 및 해당 연결을 모니터링하는 것은 통신이 끊기지 않도록 하는 데 중요합니다. Network Watcher는 Virtual Network 게이트웨이 및 연결 문제를 해결하는 기능을 제공합니다. 이것은 포털, PowerShell, CLI 또는 REST API를 통해 호출할 수 있습니다. Network Watcher가 호출되면 Virtual Network 게이트웨이 또는 연결의 상태를 진단하거나 해당 결과를 반환합니다. 이 요청은 장기 실행 트랜잭션이며 진단이 완료되면 결과가 반환됩니다.
+Virtual Network 게이트웨이는 온-프레미스 리소스 및 Azure 내 다른 가상 네트워크 간의 연결을 제공합니다. 게이트웨이 및 해당 연결을 모니터링하는 것은 통신이 끊기지 않도록 하는 데 중요합니다. Network Watcher는 게이트웨이 및 연결 문제를 해결하는 기능을 제공합니다. 이 기능은 포털, PowerShell, Azure CLI 또는 REST API를 통해 호출할 수 있습니다. 호출하면 Network Watcher가 게이트웨이 또는 연결의 상태를 진단하고 적절한 결과를 반환합니다. 요청은 장기 실행 트랜잭션입니다. 진단이 완료되면 결과가 반환됩니다.
 
 ![portal][2]
 
@@ -52,28 +51,28 @@ Virtual Network 게이트웨이는 온-프레미스 리소스 및 Azure 내 다�
 
 | 오류 유형 | 이유 | 로그|
 |---|---|---|
-| NoFault | 오류가 발견되지 않은 경우를 나타냅니다. |예|
-| GatewayNotFound | 게이트웨이를 찾을 수 없거나 게이트웨이가 프로비저닝되지 않았습니다. |아니요|
-| PlannedMaintenance |  게이트웨이 인스턴스가 유지 관리되고 있습니다.  |아니요|
-| UserDrivenUpdate | 사용자 업데이트를 진행 중인 경우를 나타냅니다. 크기 조정 작업일 수 있습니다. | 아니요 |
-| VipUnResponsive | 게이트웨이의 기본 인스턴스에 연결할 수 없습니다. 상태 검색에 실패하면 발생합니다. | 아니요 |
-| PlatformInActive | 플랫폼에 문제가 있습니다. | 아니요|
-| ServiceNotRunning | 기본 서비스가 실행되고 있지 않습니다. | 아니요|
-| NoConnectionsFoundForGateway | 게이트웨이에 연결이 존재하지 않습니다. 단지 경고일 뿐입니다.| 아니요|
-| ConnectionsNotConnected | 연결이 연결되지 않습니다. 단지 경고일 뿐입니다.| 예|
+| NoFault | 오류가 발견되지 않은 경우 |예|
+| GatewayNotFound | 게이트웨이를 찾을 수 없거나 게이트웨이가 프로비저닝되지 않았습니다. |아니오|
+| PlannedMaintenance |  게이트웨이 인스턴스가 유지 관리되고 있습니다.  |아니오|
+| UserDrivenUpdate | 이 오류는 사용자 업데이트를 진행 중인 경우 발생합니다. 업데이트는 크기 조정 작업일 수 있습니다. | 아니오 |
+| VipUnResponsive | 이 오류는 게이트웨이의 주 인스턴스가 상태 프로브 실패로 인해 연결할 수 없을 때 발생합니다. | 아니오 |
+| PlatformInActive | 플랫폼에 문제가 있습니다. | 아니오|
+| ServiceNotRunning | 기본 서비스가 실행되고 있지 않습니다. | 아니오|
+| NoConnectionsFoundForGateway | 게이트웨이에 연결이 존재하지 않습니다. 이 오류는 단지 경고일 뿐입니다.| 아니오|
+| ConnectionsNotConnected | 연결이 연결되지 않습니다. 이 오류는 단지 경고일 뿐입니다.| 예|
 | GatewayCPUUsageExceeded | 현재 게이트웨이 CPU 사용량이 95%를 초과했습니다. | 예 |
 
 ### <a name="connection"></a>연결
 
 | 오류 유형 | 이유 | 로그|
 |---|---|---|
-| NoFault | 오류가 발견되지 않은 경우를 나타냅니다. |예|
-| GatewayNotFound | 게이트웨이를 찾을 수 없거나 게이트웨이가 프로비저닝되지 않았습니다. |아니요|
-| PlannedMaintenance | 게이트웨이 인스턴스가 유지 관리되고 있습니다.  |아니요|
-| UserDrivenUpdate | 사용자 업데이트를 진행 중인 경우를 나타냅니다. 크기 조정 작업일 수 있습니다.  | 아니요 |
-| VipUnResponsive | 게이트웨이의 기본 인스턴스에 연결할 수 없습니다. 상태 검색에 실패하면 발생합니다. | 아니요 |
-| ConnectionEntityNotFound | 연결 구성이 없습니다. | 아니요 |
-| ConnectionIsMarkedDisconnected | 연결이 "연결 끊김"으로 표시되었습니다. |아니요|
+| NoFault | 오류가 발견되지 않은 경우 |예|
+| GatewayNotFound | 게이트웨이를 찾을 수 없거나 게이트웨이가 프로비저닝되지 않았습니다. |아니오|
+| PlannedMaintenance | 게이트웨이 인스턴스가 유지 관리되고 있습니다.  |아니오|
+| UserDrivenUpdate | 이 오류는 사용자 업데이트를 진행 중인 경우 발생합니다. 업데이트는 크기 조정 작업일 수 있습니다.  | 아니오 |
+| VipUnResponsive | 이 오류는 게이트웨이의 주 인스턴스가 상태 프로브 실패로 인해 연결할 수 없을 때 발생합니다. | 아니오 |
+| ConnectionEntityNotFound | 연결 구성이 없습니다. | 아니오 |
+| ConnectionIsMarkedDisconnected | 연결이 “연결 끊김”으로 표시되었습니다. |아니오|
 | ConnectionNotConfiguredOnGateway | 기본 서비스에 연결이 구성되어 있지 않습니다. | 예 |
 | ConnectionMarkedStandy | 기본 서비스가 대기로 표시되었습니다.| 예|
 | 인증 | 미리 공유한 키가 일치하지 않습니다. | 예|
@@ -83,13 +82,13 @@ Virtual Network 게이트웨이는 온-프레미스 리소스 및 Azure 내 다�
 
 ## <a name="supported-gateway-types"></a>지원되는 게이트웨이 유형
 
-다음 목록은 Network Watcher 문제 해결로 지원되는 게이트웨이 및 연결을 보여줍니다.
+다음 표에는 Network Watcher 문제 해결로 지원되는 게이트웨이 및 연결이 나열되어 있습니다.
+
 |  |  |
 |---------|---------|
 |**게이트웨이 유형**   |         |
 |VPN      | 지원됨        |
 |ExpressRoute | 지원되지 않음 |
-|HyperNet | 지원되지 않음|
 |**VPN 유형** | |
 |경로 기반 | 지원됨|
 |정책 기반 | 지원되지 않음|
@@ -97,7 +96,6 @@ Virtual Network 게이트웨이는 온-프레미스 리소스 및 Azure 내 다�
 |IPSec| 지원됨|
 |VNet2Vnet| 지원됨|
 |ExpressRoute| 지원되지 않음|
-|HyperNet| 지원되지 않음|
 |VPNClient| 지원되지 않음|
 
 ## <a name="log-files"></a>로그 파일
@@ -109,7 +107,7 @@ Virtual Network 게이트웨이는 온-프레미스 리소스 및 Azure 내 다�
 > [!NOTE]
 > 일부 경우에는 로그 파일의 하위 집합만 저장소에 기록됩니다.
 
-Azure Storage 계정에서 파일을 다운로드하는 방법에 대한 지침은 [.NET을 사용하여 Azure Blob Storage 시작](../storage/storage-dotnet-how-to-use-blobs.md)을 참조하세요. 사용할 수 있는 다른 도구는 저장소 탐색기입니다. 저장소 탐색기에 대한 자세한 내용은 여기에 있는 [저장소 탐색기](http://storageexplorer.com/) 링크에서 찾을 수 있습니다.
+Azure Storage 계정에서 파일을 다운로드하는 방법에 대한 지침은 [.NET을 사용하여 Azure Blob Storage 시작](../storage/blobs/storage-dotnet-how-to-use-blobs.md)을 참조하세요. 사용할 수 있는 다른 도구는 저장소 탐색기입니다. 저장소 탐색기에 대한 자세한 내용은 여기에 있는 [저장소 탐색기](http://storageexplorer.com/) 링크에서 찾을 수 있습니다.
 
 ### <a name="connectionstatstxt"></a>ConnectionStats.txt
 
@@ -214,9 +212,8 @@ Elapsed Time            330 sec
 
 ## <a name="next-steps"></a>다음 단계
 
-[게이트웨이 문제 해결 - Azure Portal](network-watcher-troubleshoot-manage-portal.md)을 방문하여 포털을 통해 VPN Gateway 및 연결을 진단하는 방법을 알아봅니다.
+게이트웨이 또는 게이트웨이 연결 문제를 진단하는 방법은 [네트워크 간 통신 문제 진단](diagnose-communication-problem-between-networks.md)을 참조하세요.
 <!--Image references-->
 
 [1]: ./media/network-watcher-troubleshoot-overview/GatewayTenantWorkerLogs.png
 [2]: ./media/network-watcher-troubleshoot-overview/portal.png
-

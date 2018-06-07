@@ -4,7 +4,7 @@ description: "Azure AD를 사용하여 개발한 응용 프로그램에 로그�
 services: active-directory
 documentationcenter: 
 author: ajamess
-manager: femila
+manager: mtillman
 ms.assetid: 
 ms.service: active-directory
 ms.workload: identity
@@ -13,14 +13,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0d6f6fb24f1f01d703104f925dcd03ee1ff46062
-ms.openlocfilehash: 51fac8adc2fe11aac005b4c0c0e9b67bbca8fa6e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/18/2017
-
+ms.openlocfilehash: 57b620f45d1985351064020e122c088584bcdcf5
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
-
 # <a name="problems-signing-in-to-an-custom-developed-application"></a>사용자 지정 개발 응용 프로그램에 로그인하는 문제
 
 앱에 로그인하지 못하게 될 수 있는 여러 가지 오류가 있습니다. 이 문제가 발생하는 가장 큰 이유는 앱이 잘못 구성되었기 때문입니다.
@@ -42,4 +40,3 @@ ms.lasthandoff: 04/18/2017
 [Azure AD v2.0 수렴형 앱에 대한 동의 및 권한 부여](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-scopes)<br>
 
 [Azure AD StackOverflow](http://stackoverflow.com/questions/tagged/azure-active-directory>)
-

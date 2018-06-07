@@ -1,33 +1,34 @@
 ---
-title: "Azure Cosmos DB: Golang 및 Azure Portal에서 MongoDB API 콘솔 앱 빌드 | Microsoft Docs"
-description: "Azure Cosmos DB에 연결 및 쿼리하는 데 사용할 수 있는 Golang 코드 샘플을 제시합니다."
+title: 'Azure Cosmos DB: Golang 및 Azure Portal에서 MongoDB API 콘솔 앱 빌드 | Microsoft Docs'
+description: Azure Cosmos DB에 연결 및 쿼리하는 데 사용할 수 있는 Golang 코드 샘플을 제시합니다.
 services: cosmos-db
 author: Durgaprasad-Budhwani
-manager: jhubbard
-editor: mimig1
+manager: kfile
 ms.service: cosmos-db
-ms.topic: hero-article
+ms.topic: quickstart
 ms.date: 07/21/2017
-ms.author: mimig
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 138f04f8e9f0a9a4f71e43e73593b03386e7e5a9
-ms.openlocfilehash: a7da42f4b84b77ad0a82004a56f7712c31567449
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/29/2017
-
+ms.author: sngun
+ms.custom: mvc
+ms.openlocfilehash: d5ac2f683308385b2bd4ca422cf00abaa37735fd
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-
 # <a name="azure-cosmos-db-build-a-mongodb-api-console-app-with-golang-and-the-azure-portal"></a>Azure Cosmos DB: Golang 및 Azure Portal에서 MongoDB API 콘솔 앱 빌드
 
 Azure Cosmos DB는 전 세계에 배포된 Microsoft의 다중 모델 데이터베이스 서비스입니다. Azure Cosmos DB의 핵심인 전역 배포 및 수평적 크기 조정 기능의 이점을 활용하여 문서, 키/값 및 그래프 데이터베이스를 빠르게 만들고 쿼리할 수 있습니다.
 
-이 빠른 시작은 [Golang](https://golang.org/)로 작성된 기존의 [MongoDB](https://docs.microsoft.com/en-us/azure/cosmos-db/mongodb-introduction) 앱을 사용하는 방법을 보여주고 MongoDB 클라이언트 연결을 지원하는 Azure Cosmos DB 데이터베이스에 연결합니다.
+이 빠른 시작에서는 [Golang](https://golang.org/)으로 작성된 기존 MongoDB 앱을 사용하고, [MongoDB API](mongodb-introduction.md)를 통해 MongoDB 클라이언트 연결을 지원하는 Azure Cosmos DB 데이터베이스에 연결하는 방법을 보여 줍니다.
 
 즉, Golang 응용 프로그램은 MongoDB API를 사용하여 데이터베이스에 연결됩니다. Azure Cosmos DB에 데이터가 저장되는 응용 프로그램에 대해 투명합니다.
 
 ## <a name="prerequisites"></a>필수 조건
 
-- Azure 구독. Azure 구독이 아직 없는 경우 시작하기 전에 [무료 계정](https://azure.microsoft.com/free) 을 만듭니다.
+- Azure 구독. Azure 구독이 아직 없는 경우 시작하기 전에 [무료 계정](https://azure.microsoft.com/free) 을 만듭니다. 
+
+  [!INCLUDE [cosmos-db-emulator-mongodb](../../includes/cosmos-db-emulator-mongodb.md)]
+
 - [Go](https://golang.org/dl/) 및 [Go](https://golang.org/) 언어에 대한 기본 지식입니다.
 - Jetbrains의 [Gogland](https://www.jetbrains.com/go/), Microsoft의 [Visual Studio Code](https://code.visualstudio.com/) 또는 [Atom](https://atom.io/)과 같은 IDE입니다. 이 자습서에서는 Goglang을 사용합니다.
 
@@ -78,7 +79,9 @@ Azure Cosmos DB는 전 세계에 배포된 Microsoft의 다중 모델 데이터�
 
 ## <a name="review-the-code"></a>코드 검토
 
-main.go에서 어떤 상황이 발생하고 있는지 빠르게 살펴보겠습니다. 
+이 단계는 옵션입니다. 데이터베이스 리소스를 코드로 만드는 방법을 알아보려는 경우 다음 코드 조각을 검토할 수 있습니다. 그렇지 않으면 [앱 실행](#run-the-app)으로 넘어갈 수 있습니다. 
+
+다음 코드 조각은 모두 main.go 파일에서 가져옵니다.
 
 ### <a name="connecting-the-go-app-to-azure-cosmos-db"></a>Go 앱을 Azure Cosmos DB에 연결
 
@@ -221,7 +224,7 @@ if err != nil {
 
 Azure Portal로 돌아가서 데이터 탐색기에서 문서를 확인합니다.
 
-1. 왼쪽 탐색 메뉴에서 **데이터 탐색기(미리 보기)**를 클릭하고 **golang-coach**, **package**를 확장한 후 **문서**를 클릭합니다. **문서** 탭에서 \_id를 클릭하면 오른쪽 창에 문서가 표시됩니다. 
+1. 왼쪽 탐색 메뉴에서 **데이터 탐색기(미리 보기)** 를 클릭하고 **golang-coach**, **package**를 확장한 후 **문서**를 클릭합니다. **문서** 탭에서 \_id를 클릭하면 오른쪽 창에 문서가 표시됩니다. 
 
     ![새로 만든 문서를 표시하는 데이터 탐색기](./media/create-mongodb-golang/golang-cosmos-db-data-explorer.png)
     
@@ -233,10 +236,7 @@ Azure Portal로 돌아가서 데이터 탐색기에서 문서를 확인합니다
 
 ## <a name="clean-up-resources"></a>리소스 정리
 
-이 앱을 계속 사용하지 않으려면 Azure Portal에서 다음 단계에 따라 이 빠른 시작에서 만든 리소스를 모두 삭제합니다.
-
-1. Azure Portal의 왼쪽 메뉴에서 **리소스 그룹**을 클릭한 다음 만든 리소스의 이름을 클릭합니다. 
-2. 리소스 그룹 페이지에서 **삭제**를 클릭하고 텍스트 상자에서 삭제할 리소스의 이름을 입력한 다음 **삭제**를 클릭합니다.
+[!INCLUDE [cosmosdb-delete-resource-group](../../includes/cosmos-db-delete-resource-group.md)]
 
 ## <a name="next-steps"></a>다음 단계
 
@@ -244,4 +244,3 @@ Azure Portal로 돌아가서 데이터 탐색기에서 문서를 확인합니다
 
 > [!div class="nextstepaction"]
 > [MongoDB API용 Azure Cosmos DB로 데이터 가져오기](mongodb-migrate.md)
-

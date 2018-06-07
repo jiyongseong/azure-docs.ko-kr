@@ -1,8 +1,8 @@
 ---
-title: "명령줄을 사용하여 Hadoop 클러스터 만들기 - Azure HDInsight | Microsoft Docs"
-description: "플랫폼 간 Azure CLI 1.0을 사용하여 HDInsight 클러스터를 만드는 방법을 알아봅니다."
+title: 명령줄을 사용하여 Hadoop 클러스터 만들기 - Azure HDInsight | Microsoft Docs
+description: 플랫폼 간 Azure CLI 1.0을 사용하여 HDInsight 클러스터를 만드는 방법을 알아봅니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: Blackmist
 manager: jhubbard
 editor: cgronlun
@@ -11,18 +11,14 @@ ms.assetid: 50b01483-455c-4d87-b754-2229005a8ab9
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 06/26/2017
+ms.topic: conceptual
+ms.date: 02/27/2018
 ms.author: larryfr
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 8f2fcb46789d000cd66164508f1159338dcae5f9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: e56829c771ae47933f79c519920a20c1308873fe
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="create-hdinsight-clusters-using-the-azure-cli"></a>Azure CLI를 사용하여 HDInsight 클러스터 만들기
 
@@ -31,23 +27,24 @@ ms.lasthandoff: 07/08/2017
 이 문서의 단계는 Azure CLI 1.0을 사용하여 HDInsight 3.5 클러스터 만들기 과정을 연습합니다.
 
 > [!IMPORTANT]
-> Linux는 HDInsight 버전 3.4 이상에서 사용되는 유일한 운영 체제입니다. 자세한 내용은 [Windows에서 HDInsight 사용 중지](hdinsight-component-versioning.md#hdinsight-windows-retirement)를 참조하세요.
-
+> 이 항목에서는 Azure CLI 1.0을 사용하여 HDInsight 클러스터를 만드는 방법을 설명합니다. 이 버전의 CLI는 더 이상 사용되지 않으며, Azure CLI 2.0에는 HDInsight 클러스터를 만드는 기능 지원이 추가되지 않았습니다.
+>
+> Azure PowerShell을 사용하여 HDInsight 클러스터를 만들 수도 있습니다. 자세한 내용은 [Azure PowerShell을 사용하여 HDInsight 클러스터 만들기](hdinsight-hadoop-create-linux-clusters-azure-powershell.md) 문서를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
 [!INCLUDE [delete-cluster-warning](../../includes/hdinsight-delete-cluster-warning.md)]
 
-* **Azure 구독**. [Azure 무료 평가판](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/)을 참조하세요.
+* **Azure 구독**. [Azure 평가판](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/)을 참조하세요.
 
 * **Azure CLI**. 이 문서의 단계는 Azure CLI 버전 0.10.14에서 마지막으로 테스트되었습니다.
 
     > [!IMPORTANT]
-    > 이 문서의 단계는 Azure CLI 2.0에서 작동하지 않습니다. Azure CLI 2.0은 HDInsight 클러스터 만들기를 지원하지 않습니다.
+    > Azure CLI 1.0은 더 이상 사용되지 않으며, Azure CLI 2.0에는 HDInsight 클러스터를 만드는 기능 지원이 추가되지 않았습니다.
 
 ## <a name="log-in-to-your-azure-subscription"></a>Azure 구독에 로그인합니다.
 
-[Azure CLI(Azure 명령줄 인터페이스)에서 Azure 구독에 연결](../xplat-cli-connect.md) 에서 설명된 단계에 따라 **login** 메서드를 사용하여 구독에 연결합니다.
+[Azure CLI(Azure 명령줄 인터페이스)에서 Azure 구독에 연결](/cli/azure/authenticate-azure-cli) 에서 설명된 단계에 따라 **login** 메서드를 사용하여 구독에 연결합니다.
 
 ## <a name="create-a-cluster"></a>클러스터 만들기
 
@@ -135,18 +132,17 @@ Azure CLI를 사용하여 HDInsight 클러스터를 정상적으로 만들었으
 
 ### <a name="hadoop-clusters"></a>Hadoop 클러스터
 
-* [HDInsight에서 Hive 사용](hdinsight-use-hive.md)
-* [HDInsight에서 Pig 사용](hdinsight-use-pig.md)
-* [HDInsight와 함께 MapReduce 사용](hdinsight-use-mapreduce.md)
+* [HDInsight에서 하이브 사용](hadoop/hdinsight-use-hive.md)
+* [HDInsight에서 Pig 사용](hadoop/hdinsight-use-pig.md)
+* [HDInsight와 함께 MapReduce 사용](hadoop/hdinsight-use-mapreduce.md)
 
 ### <a name="hbase-clusters"></a>HBase 클러스터
 
-* [HDInsight에서 HBase 시작](hdinsight-hbase-tutorial-get-started-linux.md)
-* [HDInsight에서 HBase용 Java 응용 프로그램 개발](hdinsight-hbase-build-java-maven-linux.md)
+* [HDInsight에서 HBase 시작](hbase/apache-hbase-tutorial-get-started-linux.md)
+* [HDInsight에서 HBase용 Java 응용 프로그램 개발](hbase/apache-hbase-build-java-maven-linux.md)
 
 ### <a name="storm-clusters"></a>Storm 클러스터
 
-* [HDInsight에서 Storm용 Java 토폴로지 개발](hdinsight-storm-develop-java-topology.md)
-* [HDInsight의 Storm에서 Python 구성 요소 사용](hdinsight-storm-develop-python-topology.md)
-* [HDInsight에서 Storm을 사용하는 토폴로지 배포 및 모니터링](hdinsight-storm-deploy-monitor-topology-linux.md)
-
+* [HDInsight에서 Storm용 Java 토폴로지 개발](storm/apache-storm-develop-java-topology.md)
+* [HDInsight의 Storm에서 Python 구성 요소 사용](storm/apache-storm-develop-python-topology.md)
+* [HDInsight에서 Storm을 사용하는 토폴로지 배포 및 모니터링](storm/apache-storm-deploy-monitor-topology-linux.md)

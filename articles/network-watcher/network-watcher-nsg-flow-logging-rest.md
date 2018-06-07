@@ -3,7 +3,7 @@ title: "Azure Network Watcher를 사용하여 네트워크 보안 그룹 흐름 
 description: "이 페이지에서는 REST API를 사용하여 Azure Network Watcher의 네트워크 보안 그룹 흐름 로그를 관리하는 방법을 설명합니다."
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
 editor: 
 ms.assetid: 2ab25379-0fd3-4bfe-9d82-425dfc7ad6bb
@@ -13,17 +13,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c785ad8dbfa427d69501f5f142ef40a2d3530f9e
-ms.openlocfilehash: c89a2ab4c39978771c940a819493b4e2283d5f9f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
-
+ms.author: jdial
+ms.openlocfilehash: 4444e83adecdc1afa170a184705b9be3be67c026
+ms.sourcegitcommit: b5c6197f997aa6858f420302d375896360dd7ceb
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/21/2017
 ---
-
-
 # <a name="configuring-network-security-group-flow-logs-using-rest-api"></a>REST API를 사용하여 네트워크 보안 그룹 흐름 로그 구성
 
 > [!div class="op_single_selector"]
@@ -198,7 +194,7 @@ armclient post "https://management.azure.com/subscriptions/${subscriptionId}/Res
 저장소 계정이 지정되어 있으면 패킷 캡처 파일은 다음 위치에서 저장소 계정에 저장됩니다.
 
 ```
-https://{storageAccountName}.blob.core.windows.net/insights-logs-networksecuritygroupflowevent/resourceId%3D/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.network/networksecuritygroups/{nsgName}/{year}/{month}/{day}/PT1H.json
+https://{storageAccountName}.blob.core.windows.net/insights-logs-networksecuritygroupflowevent/resourceId=/SUBSCRIPTIONS/{subscriptionID}/RESOURCEGROUPS/{resourceGroupName}/PROVIDERS/MICROSOFT.NETWORK/NETWORKSECURITYGROUPS/{nsgName}/y={year}/m={month}/d={day}/h={hour}/m=00/macAddress={macAddress}/PT1H.json
 ```
 
 ## <a name="next-steps"></a>다음 단계
@@ -206,4 +202,3 @@ https://{storageAccountName}.blob.core.windows.net/insights-logs-networksecurity
 [PowerBI를 사용하여 NSG 흐름 로그를 시각화](network-watcher-visualize-nsg-flow-logs-power-bi.md)하는 방법 알아보기
 
 [오픈 소스 도구를 사용하여 NSG 흐름 로그를 시각화](network-watcher-visualize-nsg-flow-logs-open-source-tools.md)하는 방법 알아보기
-

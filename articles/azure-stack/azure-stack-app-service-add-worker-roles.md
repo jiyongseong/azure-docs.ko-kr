@@ -1,134 +1,118 @@
 ---
-title: Scale out worker roles in App Services - Azure Stack  | Microsoft Docs
-description: Detailed guidance for scaling Azure Stack App Services
+title: Azure 스택 앱 서비스-에 작업자 역할을 수평적 | Microsoft Docs
+description: Azure 스택 앱 서비스를 크기 조정 하기 위한 세부 지침
 services: azure-stack
-documentationcenter: 
-author: kathm
-manager: slinehan
-editor: anwestg
+documentationcenter: ''
+author: apwestgarth
+manager: stefsch
+editor: ''
 ms.assetid: 3cbe87bd-8ae2-47dc-a367-51e67ed4b3c0
 ms.service: azure-stack
 ms.workload: app-service
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 4/6/2017
-ms.author: kathm
-translationtype: Human Translation
-ms.sourcegitcommit: 6a06d35eeda2662de89a94c274848c827dc24bfa
-ms.openlocfilehash: 2abcb15789c52b64534b4ff69392ccd49f20142f
-ms.lasthandoff: 01/25/2017
-
-
+ms.date: 05/18/2018
+ms.author: anwestg
+ms.reviewer: brenduns
+ms.openlocfilehash: 04a93bc841d553296dca7635151c14892970121c
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
-# <a name="app-service-on-azure-stack-adding-more-worker-roles"></a>App Service on Azure Stack: Adding more worker roles 
+# <a name="app-service-on-azure-stack-add-more-infrastructure-or-worker-roles"></a>Azure 스택 앱 서비스: 더 많은 인프라 또는 작업자 역할 추가
 
-This document provides instructions about how to scale App Service on Azure Stack worker roles. It contains steps for creating additional worker roles to support applications of any size.
+*적용 대상: Azure 스택 통합 시스템과 Azure 스택 개발 키트*  
+
+이 문서에서는 Azure 스택 인프라 및 작업자 역할에서 응용 프로그램 서비스를 확장 하는 방법에 대 한 지침을 제공 합니다. 모든 규모의 응용 프로그램을 지원 하도록 추가 작업자 역할을 만들기 위한 단계를 포함 합니다.
 
 > [!NOTE]
-> If your Azure Stack POC Environment does not have more than 96-GB RAM you may have difficulties adding additional capacity.
+> Azure 스택 환경에 96 g B RAM 이상 문제가 용량 추가 할 수 있습니다.
 
-App Service on Azure Stack, by default, supports free and shared worker tiers. To add other worker tiers, you need to add more worker roles.
+기본적으로 Azure 스택 앱 서비스는 무료 및 공유 작업자 계층을 지원합니다. 다른 작업자 계층을 추가 하려면 다른 작업자 역할을 추가 해야 합니다.
 
-If you are not sure what was deployed with the default App Service on Azure Stack installation, you can review additional information in the [App Service on Azure Stack overview](azure-stack-app-service-overview.md).
+Azure 스택 설치에서 기본 응용 프로그램 서비스와 함께 배포 된 내용을 확실 하지 않은 경우의 추가 정보를 검토할 수 있습니다는 [개요 Azure 스택 앱 서비스](azure-stack-app-service-overview.md)합니다.
 
-There are two ways to add additional capacity to App Service on Azure Stack:
-1.  [Add additional workers directly from with within the App Service Resource Provider Admin](#Add-additional-workers-directly-from-within-the-App-Service-Resource-Provider-Admin).
-2.  [Create additional VMs manually and add them to the App Service Resource Provider](#Create-additional-VMs-manually-and-add-them-to-the-App-Service-Resource-Provider).
+Azure 스택 앱 서비스를 azure 가상 컴퓨터 크기 집합을 사용 하 여 모든 역할 하 고 따라서는이 작업의 크기 조정 기능 이용 합니다. 따라서 응용 프로그램 서비스 관리자를 통해 수행 됩니다 작업자 계층의 모든 크기 조정
 
-## <a name="add-additional-workers-directly-within-the-app-service-resource-provider-admin"></a>Add additional workers directly within the App Service Resource Provider Admin.
+> [!IMPORTANT]
+> 현재 Azure 스택 릴리스 정보에서 식별 한 대로 포털에서 가상 컴퓨터 크기 집합의 크기를 조정, 따라서 PowerShell 예제를 사용 하 여 확장할 수는 없습니다.
+>
+>
 
-1.  Log in to the Azure Stack portal as the service administrator;
-2.  Browse to **Resource Providers** and select the **App Service Resource Provider Admin**. ![Azure Stack Resource Providers][1]
-3.  Click **Roles**.  Here you see the breakdown of all App Service roles deployed.
-4.  Click the option **New Role Instance** ![Add new role instance][2]
-5.  In the **New Role Instance** blade:
-    1. Choose how many additional **role instances** you would like to add.  In the preview, there is a maximum of 10.
-    2. Select the **role type**.  In this preview, this option is limited to Web Worker.
-    3. Select the **worker tier** you would like to deploy this worker into, default choices are Small, Medium, Large, or Shared.  If, you have created your own worker tiers, your worker tiers will also be available for selection.
-    4. Click **OK** to deploy the additional workers
-6.  App Service on Azure Stack will now add the additional VMs, configure them, install all the required software and mark them as ready when this process is complete.  This process can take approximately 80 minutes.
-7.  You can monitor the progress of the readiness of the new workers by viewing the workers in the **roles** blade.
+## <a name="add-additional-workers-with-powershell"></a>PowerShell과 함께 추가 작업자 추가
+
+1. [PowerShell에서 Azure 스택 관리자 환경을 설정합니다](azure-stack-powershell-configure-admin.md)
+
+2. 이 예제를 사용 하 여 크기 집합을 확장 하려면:
+   ```powershell
+   
+    ##### Scale out the AppService Role instances ######
+   
+    # Set context to AzureStack admin.
+    Login-AzureRmAccount -EnvironmentName AzureStackAdmin
+                                                 
+    ## Name of the Resource group where AppService is deployed.
+    $AppServiceResourceGroupName = "AppService.local"
+
+    ## Name of the ScaleSet : e.g. FrontEndsScaleSet, ManagementServersScaleSet, PublishersScaleSet , LargeWorkerTierScaleSet,      MediumWorkerTierScaleSet, SmallWorkerTierScaleSet, SharedWorkerTierScaleSet
+    $ScaleSetName = "SharedWorkerTierScaleSet"
+
+    ## TotalCapacity is sum of the instances needed at the end of operation. 
+    ## e.g. if your VMSS has 1 instance(s) currently and you need 1 more the TotalCapacity should be set to 2
+    $TotalCapacity = 2  
+
+    # Get current scale set
+    $vmss = Get-AzureRmVmss -ResourceGroupName $AppServiceResourceGroupName -VMScaleSetName $ScaleSetName
+
+    # Set and update the capacity
+    $vmss.sku.capacity = $TotalCapacity
+    Update-AzureRmVmss -ResourceGroupName $AppServiceResourceGroupName -Name $ScaleSetName -VirtualMachineScaleSet $vmss 
+   ```    
+
+   > [!NOTE]
+   > 이 단계는 다양 한 유형의 역할 및 인스턴스 수에 따라 완료 하는 데 시간이 걸릴 수 있습니다.
+   >
+   >
+
+3. 앱 서비스 관리에 새 역할 인스턴스 상태를 모니터링, 개별 역할 인스턴스 상태를 확인 하려면 역할 유형 목록에서를 클릭 합니다.
+
+## <a name="add-additional-workers-directly-within-the-app-service-resource-provider-admin"></a>앱 서비스 리소스 공급자 관리자 내에서 직접 추가 작업자 추가
+
+1. 서비스 관리자로 Azure 스택 관리 포털에 로그인 합니다.
+
+2. 찾아 **응용 프로그램 서비스**합니다.
+
+    ![](media/azure-stack-app-service-add-worker-roles/image01.png)
+
+3. **역할**을 클릭합니다. 여기에 배포 된 모든 앱 서비스 역할의 분석 결과 볼 있습니다.
+
+4. 확장 하 고 클릭 한 다음 원하는 종류의 행을 마우스 오른쪽 단추로 클릭 **ScaleSet**합니다.
+
+    ![](media/azure-stack-app-service-add-worker-roles/image02.png)
+
+5. 클릭 **배율**, 선택, 크기를 조정 하 고 클릭 하려는 인스턴스의 수 **저장**합니다.
+
+    ![](media/azure-stack-app-service-add-worker-roles/image03.png)
+
+6. Azure 스택 앱 서비스는 이제 추가 Vm 추가, 구성, 모든 필수 소프트웨어를 설치 및이 프로세스가 완료 되 면 준비로 표시 합니다. 이 프로세스는 약 80 분 걸릴 수 있습니다.
+
+7. 근로자에 게 확인 하 여 새 역할의 준비의 진행 상황을 모니터링할 수 있습니다는 **역할** 블레이드입니다.
+
+## <a name="result"></a>결과
+
+이들이 완전히 하 게 배포 하 고, 작업 자가 레이어로 프로그램 작업을 배포 하는 사용자에 대해 사용할 수 있습니다. 다음 기본적으로 사용할 수 있는 여러 가격 책정 계층의 예를 보여줍니다. 특정 작업자 계층에 대 한 사용 가능한 자가 있는지, 해당 가격 책정 계층을 선택할 수 있는 옵션 ´ ù입니다.
+
+![](media/azure-stack-app-service-add-worker-roles/image04.png)
 
 >[!NOTE]
->  In this preview, the integrated New Role Instance flow is limited to Worker Roles and deploy VMs of size A1 only.  We will be expanding this capability in a future release.
+> 프런트 엔드 또는 게시자 역할 관리를 확장 하려면 해당 역할 유형 수평 확장 해야 합니다를 추가 합니다. 
+>
+>
 
-## <a name="manually-adding-additional-capacity-to-app-service-on-azure-stack"></a>Manually adding additional capacity to App Service on Azure Stack.
+관리, 프런트 엔드 또는 게시자 역할을 확장 하려면 적절 한 역할 유형을 선택한 후 동일한 단계를 따릅니다. 컨트롤러 크기 집합으로 배포 되지 않습니다 및 따라서 두 으로만 모든 프로덕션 배포에 대 한 설치 시간에 있습니다.
 
-The following steps are required to add additional roles:
+### <a name="next-steps"></a>다음 단계
 
-1. [Create a new virtual machine](#step-1-create-a-new-vm-to-support-the-new-instance-size)
-2. [Configure the virtual machine](#step-2-configure-the-virtual-machine)
-3. [Configure the web worker role in the Azure Stack portal](#step-3-configure-the-web-worker-role-in-the-azure-stack-portal)
-4. [Configure app service plans](#step-4-configure-app-service-plans)
-
-## <a name="step-1-create-a-new-vm-to-support-the-new-instance-size"></a>Step 1: Create a new VM to support the new instance size
-Create a virtual machine as described in [this article](azure-stack-provision-vm.md), ensuring that the following selections are made:
-
-* User name and password: Provide the same user name and password you provided when you installed App Service on Azure Stack.
-* Subscription: Use the default provider subscription.
-* Resource group: Choose **AppService-LOCAL**.
-
-> [!NOTE]
-> Store the virtual machines for worker roles in the same resource group as App Service on Azure Stack is deployed to. (This is recommended for this release.)
-> 
-> 
-
-## <a name="step-2-configure-the-virtual-machine"></a>Step 2: Configure the Virtual Machine
-Once the deployment has completed, the following configuration is required to support the web worker role:
-
-1. Browse to the **AppService-LOCAL** resource group in the portal and select the new machine you created in Step 1.
-2. Click connect in the VM blade to download the remote desktop profile.  Open the profile to open a remote desktop session to your VM.
-3. Log in to the VM using the username and password you specified in Step 1.
-4. Open PowerShell by clicking the **Start** button and typing PowerShell. Right-click **PowerShell.exe**, and select **Run as administrator** to open PowerShell in administrator mode.
-5. Copy and paste each of the following commands (one at a time) into the PowerShell window, and press enter:
-   
-   ```netsh advfirewall firewall set rule group="File and Printer Sharing" new enable=Yes```
-   ```netsh advfirewall firewall set rule group="Windows Management Instrumentation (WMI)" new enable=yes```
-   ```reg add HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\system /v LocalAccountTokenFilterPolicy /t REG\_DWORD /d 1 /f```
-   
-6. Close your remote desktop session.
-7. Restart the VM from the portal.
-
-> [!NOTE]
-> These are minimum requirements for App Service on Azure Stack. They are the default settings of the Windows 2012 R2 image included with Azure Stack. The instructions have been provided for future reference, and for those using a different image.
-> 
-> 
-
-## <a name="step-3-configure-the-worker-role-in-the-azure-stack-portal"></a>Step 3: Configure the worker role in the Azure Stack portal
-1. Open the portal as the service administrator on **ClientVM**.
-2. Navigate to **Resource Providers** &gt; **App Service Resource Provider Admin**.![App Service Resource Provider Admin][3]
-3. In the settings blade, click **Roles**.![App Service Resource Provider Roles][4]
-4. Click **Add Role Instance**.
-5. In the textbox for **Server Name** enter the **IP Address** of the server you created earlier (in Section 1).
-6. Select the **Role Type** you would like to add - Controller, Management Server, Front End, Web Worker, Publisher, or File Server.  In this instance, select Web Worker.
-7. Click the **Tier** you would like to deploy the new instance to (small, medium, large, or shared).  If you have created your own worker tiers these will also be available for selection.
-8. Click **OK.**
-9. Go back to the **Roles** view
-10. Click the row corresponding to the Role Type and Worker Tier combination you assigned your VM to.
-11. Look for the Server Name you just added. Review the status column, and wait to move to the next step until the status is "Ready." This can take approximately 80 minutes. ![App Service Resource Provider Role Ready][5]
-
-## <a name="step-4-configure-app-service-plans"></a>Step 4: Configure app service plans
-
-1. Sign in to the portal on the ClientVM.
-2. Navigate to **New** &gt; **Web and Mobile**.
-3. Select the type of application you would like to deploy.
-4. Provide the information for the application, and then select **AppService Plan / Location**.
-    1. Click **Create New**.
-    2. Create your plan, selecting the corresponding pricing tier for the plan.
-
-> [!NOTE]
-> You can create multiple plans while on this blade. Before you deploy, however, ensure you have selected the appropriate plan.
-> 
-> 
-
-The following shows an example of the multiple pricing tiers available by default.  You notice that if there are no available workers for a particular worker tier, the option to choose the corresponding pricing tier is unavailable.![App Service on Azure Stack Default Pricing Tiers][6]
-
-<!--Image references-->
-[1]: ./media/azure-stack-app-service-add-worker-roles/azure-stack-resource-providers.png
-[2]: ./media/azure-stack-app-service-add-worker-roles/app-service-new-role-instance.png
-[3]: ./media/azure-stack-app-service-add-worker-roles/app-service-resource-provider-admin.png
-[4]: ./media/azure-stack-app-service-add-worker-roles/app-service-resource-provider-roles.png
-[5]: ./media/azure-stack-app-service-add-worker-roles/app-service-resource-provider-role-ready.png
-[6]: ./media/azure-stack-app-service-add-worker-roles/app-service-resource-provider-pricing-tier.png
-
+[배포 소스 구성](azure-stack-app-service-configure-deployment-sources.md)

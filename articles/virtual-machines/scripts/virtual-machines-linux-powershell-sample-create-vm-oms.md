@@ -16,14 +16,12 @@ ms.workload: infrastructure
 ms.date: 03/01/2017
 ms.author: nepeters
 ms.custom: mvc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: 3bc55c8c657ce9772cbbce9c0c719b579c781690
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
+ms.openlocfilehash: cd23f71221efb62d2547b2b683ca8e2218403a2d
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="create-an-operations-management-suite-monitored-vm-with-powershell"></a>PowerShell로 Operations Management Suite 모니터링 VM 만들기
 
 이 스크립트는 Azure Virtual Machine을 만들고 OMS(Operations Management Suite) 에이전트를 설치하고 OMS 작업 영역을 사용하여 시스템을 등록합니다. 스크립트를 실행하면 가상 컴퓨터가 OMS 콘솔에 표시됩니다.
@@ -34,7 +32,7 @@ ms.lasthandoff: 04/27/2017
 
 ## <a name="sample-script"></a>샘플 스크립트
 
-[!code-powershell[main](../../../powershell_scripts/virtual-machine/create-vm-monitor-oms/create-vm-monitor-oms.ps1 "VM OMS 만들기")]
+[!code-powershell[main](../../../powershell_scripts/virtual-machine/create-vm-monitor-oms/create-vm-monitor-oms.ps1 "Create VM OMS")]
 
 ## <a name="clean-up-deployment"></a>배포 정리 
 
@@ -68,4 +66,3 @@ Remove-AzureRmResourceGroup -Name myResourceGroup
 Azure PowerShell 모듈에 대한 자세한 내용은 [Azure PowerShell 설명서](/powershell/azure/overview)를 참조하세요.
 
 추가 가상 컴퓨터 PowerShell 스크립트 샘플은 [Azure Linux VM 설명서](../linux/powershell-samples.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)에서 확인할 수 있습니다.
-

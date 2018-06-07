@@ -5,21 +5,20 @@ services: active-directory
 keywords: "Azure Active Directory, 플레이 북, 개념 증명, PoC"
 documentationcenter: 
 author: dstefanMSFT
-manager: asuthar
+manager: mtillman
 ms.assetid: 
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 4/12/2017
+ms.date: 04/12/2017
 ms.author: dstefan
-translationtype: Human Translation
-ms.sourcegitcommit: 785d3a8920d48e11e80048665e9866f16c514cf7
-ms.openlocfilehash: 2a555326e5bb2eb7b89e80be721b20488c4f7a2d
-ms.lasthandoff: 04/12/2017
-
-
+ms.openlocfilehash: ff4a8601b619837d835ec25c26b1f7e69b46ae85
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="azure-active-directory-proof-of-concept-playbook-ingredients"></a>Azure Active Directory 개념 증명 플레이 북 구성 
 
@@ -35,7 +34,7 @@ PoC를 규정하는 테마를 정의하면 비즈니스 목표에 맞게 노력�
 ## <a name="environment"></a>Environment
 
 PoC를 전달하는 환경의 세부 정보를 확인하는 것이 중요합니다. 이상적으로는 PoC가 완료된 후에 환경을 구축할 수 있습니다. 목표 환경은 중요하며, 가능한 한 실제와 같이 유지하면서도 제약이나 추가 고려 사항에 따른 오버헤드를 고려해야 합니다. PoC에 대한 일반적인 환경은 다음과 같습니다.
-* **프로덕션:** 시나리오가 라이브 환경에서 구현되며, 이미 Microsoft 클라우드 서비스(프로덕션 AD, Office 365, Azure AD 테넌트/SSO 솔루션)가 배포되어 있습니다. 
+* **프로덕션:** 시나리오가 라이브 환경에서 구현되며, 이미 Microsoft Cloud 서비스(프로덕션 AD, Office 365, Azure AD 테넌트/SSO 솔루션)가 배포되어 있습니다. 
 * **UAT(사용자 수용 테스트)/개발 환경:** 프로덕션과 유사한 테스트 데이터를 포함하는 테스트 인프라(병렬 AD 및 잠재적으로 Azure AD 테넌트/SSO 솔루션)가 있습니다. 일반적으로 테스트 환경은 엔터프라이즈의 여러 프로젝트 간에 공유됩니다.
 
 이 가이드의 시나리오 대부분은 기본적으로 추가가 가능합니다. 따라서 PoC 외부 사용자에게 영향을 주지 않으면서 프로덕션 테넌트에 배포될 수 있습니다. 이 문서 전체에서는 테넌트 차원에서 영향을 미치는 시나리오를 살펴볼 것입니다. 이러한 경우 프로덕션이 아닌 환경을 고려하려고 할 수 있습니다. 

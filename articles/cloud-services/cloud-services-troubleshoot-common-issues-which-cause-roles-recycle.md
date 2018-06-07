@@ -10,17 +10,16 @@ tags: top-support-issue
 ms.assetid: 533930d1-8035-4402-b16a-cf887b2c4f85
 ms.service: cloud-services
 ms.devlang: na
-ms.topic: article
+ms.topic: troubleshooting
 ms.tgt_pltfrm: na
 ms.workload: tbd
-ms.date: 7/26/2017
+ms.date: 11/03/2017
 ms.author: v-six
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 7c28fda22a08ea40b15cf69351e1b0aff6bd0a95
-ms.openlocfilehash: 47a9736fd6498d15305fb2296446c61e709ad0b8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/07/2017
-
+ms.openlocfilehash: 7f513a7d3fe44cbbf06855059c87c10ddceef7c9
+ms.sourcegitcommit: 3df3fcec9ac9e56a3f5282f6c65e5a9bc1b5ba22
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/04/2017
 ---
 # <a name="common-issues-that-cause-roles-to-recycle"></a>역할을 재활용하게 하는 일반적인 문제
 이 문서에서는 배포 문제의 일반적인 몇 가지 원인을 설명하고 이러한 문제를 해결하기 위한 문제 해결 팁을 제공합니다. 응용 프로그램에 문제가 있다는 것을 역할 인스턴스가 시작에 실패하거나 초기화, 사용 중, 및 중지 상태를 반복할 경우에 알 수 있습니다.
@@ -52,7 +51,7 @@ Azure에 응용 프로그램 패키지를 배포하기 전에 `DiagnosticsConnec
 
 * `DiagnosticsConnectionString` 설정이 Azure의 유효한 저장소 계정을 가리킵니다.  
   기본적으로 이 설정은 에뮬레이트된 저장소 계정을 가리키므로 응용 프로그램 패키지를 배포하기 전에 이 설정을 명시적으로 변경해야 합니다. 이 설정을 변경하지 않는 경우 역할 인스턴스가 진단 모니터링을 시작하려고 할 때 예외가 throw됩니다. 역할 인스턴스가 무기한 재활용되게 할 수 있습니다.
-* 연결 문자열은 다음과 같은 [형식](../storage/storage-configure-connection-string.md)으로 지정해야 합니다. (HTTPS 프로토콜을 지정해야 합니다.) *MyAccountName*을 저장소 계정의 이름으로 바꾸고 *MyAccountKey*를 선택키로 바꿉니다.    
+* 연결 문자열은 다음과 같은 [형식](../storage/common/storage-configure-connection-string.md)으로 지정해야 합니다. (HTTPS 프로토콜을 지정해야 합니다.) *MyAccountName*을 저장소 계정의 이름으로 바꾸고 *MyAccountKey*를 선택키로 바꿉니다.    
 
         DefaultEndpointsProtocol=https;AccountName=MyAccountName;AccountKey=MyAccountKey
 
@@ -70,4 +69,3 @@ SSL에서 웹 역할을 실행하려면 내보낸 관리 인증서가 개인 키
 [OnStart]: https://msdn.microsoft.com/library/microsoft.windowsazure.serviceruntime.roleentrypoint.onstart.aspx
 [OnStop]: https://msdn.microsoft.com/library/microsoft.windowsazure.serviceruntime.roleentrypoint.onstop.aspx
 [실행]: https://msdn.microsoft.com/library/microsoft.windowsazure.serviceruntime.roleentrypoint.run.aspx
-

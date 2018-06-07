@@ -1,27 +1,27 @@
 ---
-title: "ADAL을 사용하여 Android에서 앱 간 SSO를 사용하도록 설정하는 방법 | Microsoft Docs"
-description: "ADAL SDK의 기능을 사용하여 응용 프로그램에서 Single Sign On을 활성화하는 방법입니다. "
+title: ADAL을 사용하여 Android에서 앱 간 SSO를 사용하도록 설정하는 방법 | Microsoft Docs
+description: 'ADAL SDK의 기능을 사용하여 응용 프로그램에서 Single Sign On을 활성화하는 방법입니다. '
 services: active-directory
-documentationcenter: 
-author: danieldobalian
-manager: mbaldwin
-editor: 
+documentationcenter: ''
+author: CelesteDG
+manager: mtillman
+editor: ''
 ms.assetid: 40710225-05ab-40a3-9aec-8b4e96b6b5e7
 ms.service: active-directory
+ms.component: develop
 ms.workload: identity
 ms.tgt_pltfrm: android
 ms.devlang: java
 ms.topic: article
 ms.date: 04/07/2017
-ms.author: dadobali
+ms.author: celested
+ms.reviewer: dadobali
 ms.custom: aaddev
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 1cc1ee946d8eb2214fd05701b495bbce6d471a49
-ms.openlocfilehash: 510a1827f432c4db2190deff016a886dd79eebc9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/26/2017
-
-
+ms.openlocfilehash: ee27b1d4dcc091ef570e2b0aef32273af986d3f9
+ms.sourcegitcommit: e14229bb94d61172046335972cfb1a708c8a97a5
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/14/2018
 ---
 # <a name="how-to-enable-cross-app-sso-on-android-using-adal"></a>ADAL을 사용하여 Android에서 앱 간 SSO를 사용하도록 설정하는 방법
 사용자가 자격 증명을 한 번만 입력하고 응용 프로그램에서 자동으로 작동되도록 SSO(Single Sign-on)를 제공하는 것은 이제 고객에게 필요합니다. 종종 전화 통화 또는 문자로 전송하는 코드와 같은 추가 요소(2FA)로 결합된 작은 화면에서 자신의 사용자 이름 및 암호를 입력하는 어려움은 사용자가 제품에 대해 이를 한 번 이상 수행해야 하는 경우 빠른 불만족을 가져 옵니다.
@@ -88,7 +88,7 @@ Microsoft ID SDK가 응용 프로그램의 공유 저장소와 작업하여 SSO�
 브로커 지원 로그인은 브로커 응용 프로그램 내에서 발생하고 Microsoft ID 플랫폼을 적용하는 장치의 모든 응용 프로그램에서 자격 증명을 공유하도록 브로커의 저장소와 보안을 사용하는 로그인 환경입니다. 즉, 응용 프로그램은 사용자가 로그인하도록 브로커를 사용합니다. iOS 및 Android에서 해당 브로커는 고객이 독립적으로 설치하거나 사용자에 대한 장치를 관리하는 회사에서 장치에 푸시할 수 있는 다운로드 가능한 응용 프로그램을 통해 제공됩니다. 이 응용 프로그램 유형의 예는 iOS에서 Microsoft Authenticator 응용 프로그램입니다. Windows에서 이 기능은 기술적으로 웹 인증 브로커로 알려진 운영 체제에 기본적으로 제공된 계정 선택기로 제공됩니다.
 환경은 플랫폼별로 다르며 올바르게 관리되지 않는 경우 사용자에게 작업 중단이 발생할 수 있습니다. Facebook 응용 프로그램을 설치하고 다른 응용 프로그램에서 Facebook Connect를 사용하는 경우 아마도 이 패턴과 가장 친숙할 것입니다. Microsoft ID 플랫폼은 동일한 패턴을 사용합니다.
 
-iOS의 경우 이는 Microsoft Authenticator 응용 프로그램이 사용자가 로그인하려는 계정을 선택하도록 포그라운드로 오는 동안 응용 프로그램이 백그라운드로 전송되는 "전환" 애니메이션이 됩니다.  
+iOS의 경우 이는 Microsoft Authenticator 응용 프로그램이 사용자가 로그인하려는 계정을 선택하도록 포그라운드로 오는 동안 응용 프로그램이 백그라운드로 전송되는 "전환" 애니메이션이 됩니다. 
 
 Android 및 Windows의 경우 계정 선택기가 사용자에게 덜 방해가 되는 응용 프로그램 맨 위에 표시됩니다.
 
@@ -251,5 +251,4 @@ MANAGE_ACCOUNTS
 
 ### <a name="youve-configured-sso"></a>SSO를 구성했습니다.
 이제 Microsoft ID SDK는 자동으로 응용 프로그램에서 자격 증명을 공유하고 장치에 있는 경우 브로커를 호출합니다.
-
 

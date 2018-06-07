@@ -1,28 +1,29 @@
 ---
-title: "Azure AD Cordova 시작 | Microsoft 문서"
-description: "로그인을 위해 Azure AD와 통합되고 OAuth를 사용하여 Azure AD로 보호되는 API를 호출하는 Cordova 응용 프로그램을 빌드하는 방법."
+title: Azure AD Cordova 시작 | Microsoft Docs
+description: 로그인을 위해 Azure AD와 통합되고 OAuth를 사용하여 Azure AD로 보호되는 API를 호출하는 Cordova 응용 프로그램을 빌드하는 방법.
 services: active-directory
-documentationcenter: 
-author: vibronet
-manager: mbaldwin
-editor: 
+documentationcenter: ''
+author: CelesteDG
+manager: mtillman
+editor: ''
 ms.assetid: b1a8d7bd-7ad6-44d5-8ccb-5255bb623345
 ms.service: active-directory
+ms.component: develop
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: javascript
 ms.topic: article
-ms.date: 01/07/2017
-ms.author: vittorib
+ms.date: 11/30/2017
+ms.author: celested
 ms.custom: aaddev
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0d7333f9752a9e03c1087a4bc588284b418d8926
-ms.openlocfilehash: 4a80252f139d653ff8788b3c1a6a075448cb48e7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/14/2017
-
+ms.openlocfilehash: 6d6d514875aa675bf160ee08a3e94b58944020ee
+ms.sourcegitcommit: e14229bb94d61172046335972cfb1a708c8a97a5
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/14/2018
+ms.locfileid: "34156734"
 ---
-# <a name="integrate-azure-ad-with-an-apache-cordova-app"></a>Azure AD를 Apache Cordova 앱에 통합
+# <a name="azure-ad-cordova-getting-started"></a>Azure AD Cordova 시작
 [!INCLUDE [active-directory-devquickstarts-switcher](../../../includes/active-directory-devquickstarts-switcher.md)]
 
 [!INCLUDE [active-directory-devguide](../../../includes/active-directory-devguide.md)]
@@ -34,7 +35,7 @@ Cordova 플러그 인은 iOS, Android, Windows 스토어 및 Windows Phone에서
 이 자습서에서는 ADAL(Active Directory 인증 라이브러리)에 대한 Apache Cordova 플러그 인을 사용하고 다음 기능을 추가하여 간단한 앱을 개선해봅니다.
 
 * 단 몇 줄의 코드로, 사용자를 인증하고 토큰을 가져옵니다.
-* 해당 토큰을 사용하여 해당 디렉터리를 쿼리하고 결과를 표시하는 Graph API를 호출합니다.  
+* 해당 토큰을 사용하여 해당 디렉터리를 쿼리하고 결과를 표시하는 Graph API를 호출합니다. 
 * 사용자에 대한 인증 프롬프트를 최소화하기 위해 ADAL 토큰 캐시를 사용합니다.
 
 이러한 기능 개선을 위해서는 다음을 수행해야 합니다.
@@ -48,7 +49,7 @@ Cordova 플러그 인은 iOS, Android, Windows 스토어 및 Windows Phone에서
 이 자습서를 완료하려면 다음이 필요합니다.
 
 * 앱 개발 권한이 있는 계정이 있는 Azure AD 테넌트
-* Apache Cordova를 사용하도록 구성된 개발 환경.  
+* Apache Cordova를 사용하도록 구성된 개발 환경. 
 
 위의 두 항목을 모두 설정한 경우 1단계를 바로 진행합니다.
 
@@ -57,7 +58,7 @@ Azure AD 테넌트가 없는 경우 [여기에서 가져오는 방법에 대한 
 컴퓨터에 Apache Cordova를 설정하지 않으려면 다음을 설치하세요.
 
 * [Git](http://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-* [Node.JS](https://nodejs.org/download/)
+* [Node.js](https://nodejs.org/download/)
 * [Cordova CLI](https://cordova.apache.org/)(`npm install -g cordova` NPM 패키지 관리자를 통해 쉽게 설치 가능)
 
 이전 설치는 PC와 Mac 둘 다에서 작동합니다.
@@ -87,9 +88,9 @@ Azure AD 테넌트가 없는 경우 [여기에서 가져오는 방법에 대한 
 
 Azure AD는 알려진 응용 프로그램으로만 토큰을 발급합니다. 앱에서 Azure AD를 사용하려면 먼저 테넌트에서 해당 항목을 만들어야 합니다. 테넌트에 새 응용 프로그램을 등록하려면
 
-1. [Azure 포털](https://portal.azure.com)에 로그인합니다.
+1. [Azure Portal](https://portal.azure.com)에 로그인합니다.
 2. 위쪽 막대에서 계정을 클릭합니다. **디렉터리** 목록에서 응용 프로그램을 등록할 Azure AD 테넌트를 선택합니다.
-3. 왼쪽 창에서 **더 많은 서비스**를 클릭하고 **Azure Active Directory**를 선택합니다.
+3. 왼쪽 창에서 **모든 서비스**를 클릭한 다음, **Azure Active Directory**를 선택합니다.
 4. **앱 등록**을 클릭하고 **추가**를 선택합니다.
 5. 프롬프트에 따라 새 **네이티브 클라이언트 응용 프로그램**을 만듭니다. (Cordova 앱이 HTML 기반이기는 하지만 여기서는 네이티브 클라이언트 응용 프로그램을 만듭니다. **네이티브 클라이언트 응용 프로그램** 옵션을 선택해야 하며 그렇지 않으면 응용 프로그램이 작동하지 않습니다.)
   * **이름**은 사용자에게 응용 프로그램을 설명합니다.
@@ -99,8 +100,8 @@ Azure AD는 알려진 응용 프로그램으로만 토큰을 발급합니다. �
 
 `DirSearchClient Sample`을 실행하려면 새로 만든 앱에 Azure AD Graph API를 쿼리하는 권한을 부여합니다.
 
-1. **설정** 페이지에서 **필요한 사용 권한**, **추가**를 차례로 선택합니다.  
-2. Azure Active Directory 응용 프로그램의 경우 API로 **Microsoft Graph**를 선택하고 **위임된 권한**에서 **로그인한 사용자로 디렉터리 액세스** 권한을 추가합니다.  이렇게 하면 응용 프로그램은 Graph API에서 사용자를 쿼리할 수 있습니다.
+1. **설정** 페이지에서 **필요한 사용 권한**, **추가**를 차례로 선택합니다. 
+2. Azure Active Directory 응용 프로그램의 경우 API로 **Microsoft Graph**를 선택하고 **위임된 권한**에서 **로그인한 사용자로 디렉터리 액세스** 권한을 추가합니다. 이렇게 하면 응용 프로그램은 Graph API에서 사용자를 쿼리할 수 있습니다.
 
 ## <a name="step-2-clone-the-sample-app-repository"></a>2단계: 샘플 앱 리포지토리 복제
 셸 또는 명령줄에서 다음 명령을 입력합니다.
@@ -244,7 +245,7 @@ var authority = "https://login.microsoftonline.com/common",
 
 앱을 실행하는 구체적인 단계는 플랫폼에 따라 다릅니다.
 
-### <a name="windows-10"></a>Windows 10
+### <a name="windows-10"></a>윈도우 10
    태블릿/PC: `cordova run windows --archs=x64 -- --appx=uap`
 
    모바일(Windows 10 모바일 장치가 PC에 연결되어야 함): `cordova run windows --archs=arm -- --appx=uap --phone`
@@ -259,7 +260,7 @@ var authority = "https://login.microsoftonline.com/common",
    > 처음 실행하는 동안 개발자 라이선스를 확인하기 위해 로그인하라는 메시지가 표시될 수 있습니다. 자세한 내용은 [개발자 라이선스](https://msdn.microsoft.com/library/windows/apps/hh974578.aspx)를 참조하세요.
 
 ### <a name="windows-phone-81"></a>Windows Phone 8.1
-   연결된 장치에서 실행하려면: `cordova run windows --device -- --phone`
+   연결된 장치에서 실행하려면 `cordova run windows --device -- --phone`
 
    기본 에뮬레이터에서 실행하려면: `cordova emulate windows -- --phone`
 
@@ -268,7 +269,7 @@ var authority = "https://login.microsoftonline.com/common",
 ### <a name="android"></a>Android
    연결된 장치에서 실행하려면: `cordova run android --device`
 
-   기본 에뮬레이터에서 실행하려면: `cordova emulate android`
+   기본 에뮬레이터에서 실행하려면 `cordova emulate android`
 
    이전에 "필수 조건" 섹션에서 설명한 대로 AVD Manager를 사용하여 에뮬레이터 인스턴스를 만들었는지 확인합니다.
 
@@ -292,4 +293,3 @@ var authority = "https://login.microsoftonline.com/common",
 이제 좀 더 자세하고 좀 더 흥미로운 시나리오를 진행해 보겠습니다. 다음을 시도해 볼 수 있습니다. [Azure AD를 사용하여 Node.js Web API 보안 유지](active-directory-devquickstarts-webapi-nodejs.md).
 
 [!INCLUDE [active-directory-devquickstarts-additional-resources](../../../includes/active-directory-devquickstarts-additional-resources.md)]
-

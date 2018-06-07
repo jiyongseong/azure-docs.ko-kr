@@ -14,12 +14,11 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 09/06/2016
 ms.author: adegeo
-translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: f7db9b175d4a72a1530e4c283a816e80130de65f
-ms.lasthandoff: 04/27/2017
-
-
+ms.openlocfilehash: 8dd9724981860c9cd4ccc443cc2bfdc465811e7c
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="enable-diagnostics-in-azure-cloud-services-using-powershell"></a>PowerShell을 사용하여 Azure 클라우드 서비스에 진단 사용
 Azure 진단 확장을 사용하여 클라우드 서비스로부터 응용 프로그램 로그, 성능 카운터 등과 같은 진단 데이터를 수집할 수 있습니다. 이 문서는 PowerShell을 사용하여 클라우드 서비스에 대해 Azure 진단 확장을 사용하도록 설정하는 방법을 설명합니다.  이 문서에 요구되는 필수 조건은 [Azure PowerShell 설치 및 구성하는 방법](/powershell/azure/overview) 을 참조하세요.
@@ -138,4 +137,3 @@ Remove-AzureServiceDiagnosticsExtension -ServiceName "MyService" -Role "WebRole"
 * 문제 해결을 위한 Azure 진단 및 기타 기법 사용에 대한 추가 지침은 [Azure 클라우드 서비스 및 가상 컴퓨터에서 진단 사용](cloud-services-dotnet-diagnostics.md)을 참조하세요.
 * [진단 구성 스키마](https://msdn.microsoft.com/library/azure/dn782207.aspx) 는 진단 확장에 대한 다양한 XML 구성 옵션을 설명합니다.
 * 가상 컴퓨터에 대해 진단 확장을 사용하도록 설정하는 방법을 알아보려면 [Azure 리소스 관리자 템플릿을 사용한 모니터링 및 진단으로 Windows 가상 컴퓨터 만들기(영문)](../virtual-machines/windows/extensions-diagnostics-template.md)
-

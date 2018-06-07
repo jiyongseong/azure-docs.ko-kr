@@ -11,17 +11,15 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: Java
 ms.topic: article
-ms.date: 04/27/2017
+ms.date: 08/10/2017
 ms.author: sethm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 8f291186c6a68dea8aa00b846a2e6f3ad0d7996c
-ms.openlocfilehash: 285f3bc3faeffc94c639658ba375910bc4463e25
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/28/2017
-
-
+ms.openlocfilehash: 170f431525ffdc93a01fc085e48e69c3a774968e
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-# <a name="how-to-use-service-bus-queues"></a>서비스 버스 큐를 사용하는 방법
+# <a name="how-to-use-service-bus-queues-with-java"></a>Java에서 Service Bus 큐를 사용하는 방법
 [!INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
 
 이 문서에서는 서비스 버스 큐를 사용하는 방법을 설명합니다. 샘플은 Java로 작성되었으며 [Java용 Azure SDK][Azure SDK for Java]를 사용합니다. 여기서 다루는 시나리오에는 **큐 만들기**, **메시지 보내기 및 받기**, **큐 삭제** 등이 포함됩니다.
@@ -48,7 +46,7 @@ import javax.xml.datatype.*;
 ## <a name="create-a-queue"></a>큐 만들기
 **ServiceBusContract** 클래스를 통해 Service Bus 큐에 대한 관리 작업을 수행할 수 있습니다. **ServiceBusContract** 개체는 관리에 필요한 SAS 토큰 사용 권한을 캡슐화하는 적합한 구성으로 생성되며, Azure와의 통신 지점은 **ServiceBusContract** 클래스뿐입니다.
 
-**ServiceBusService** 클래스는 큐를 만들고 열거 및 삭제하기 위한 메서드를 제공합니다. 아래 예제에서는 **ServiceBusService** 개체를 사용하여 "HowToSample" 네임스페이스로 "TestQueue" 큐를 만드는 방법을 보여 줍니다.
+**ServiceBusService** 클래스는 큐를 만들고 열거 및 삭제하기 위한 메서드를 제공합니다. 아래 예제에서는 **ServiceBusService** 개체를 사용하여 `HowToSample` 네임스페이스로 `TestQueue` 큐를 만드는 방법을 보여줍니다.
 
 ```java
 Configuration config =
@@ -73,7 +71,7 @@ catch (ServiceException e)
 }
 ```
 
-**QueueInfo**에는 큐의 속성을 조정하는 데 사용할 수 있는 메서드가 있습니다. 예를 들어 큐에 전송되는 메시지에 적용할 기본 TTL(Time-To-Live) 값을 설정할 수 있습니다. 다음 예제에서는 최대 크기가 5GB인 `TestQueue` 큐를 만드는 방법을 보여 줍니다.
+`QueueInfo`에는 큐의 속성을 조정하는 데 사용할 수 있는 메서드가 있습니다. 예를 들어 큐에 전송되는 메시지에 적용할 기본 TTL(Time-To-Live) 값을 설정할 수 있습니다. 다음 예제에서는 최대 크기가 5GB인 `TestQueue` 큐를 만드는 방법을 보여 줍니다.
 
 ````java
 long maxSizeInMegabytes = 5120;
@@ -82,7 +80,7 @@ queueInfo.setMaxSizeInMegabytes(maxSizeInMegabytes);
 CreateQueueResult result = service.createQueue(queueInfo);
 ````
 
-**ServiceBusContract** 개체의 **listQueues** 메서드를 사용하여 서비스 네임스페이스 내에 지정된 이름의 큐가 이미 있는지 확인할 수 있습니다.
+**ServiceBusContract** 개체의 `listQueues` 메서드를 사용하여 서비스 네임스페이스 내에 지정된 이름의 큐가 이미 있는지 확인할 수 있습니다.
 
 ## <a name="send-messages-to-a-queue"></a>큐에 메시지 보내기
 Service Bus 큐에 메시지를 보내기 위해 응용 프로그램은 **ServiceBusContract** 개체를 가져옵니다. 다음 코드는 위에서 `HowToSample` 네임스페이스 내에서 이전에 만든 `TestQueue` 큐에 대한 메시지를 보내는 방법을 보여 줍니다.
@@ -198,4 +196,3 @@ catch (Exception e) {
 [Azure Toolkit for Eclipse]: https://msdn.microsoft.com/library/azure/hh694271.aspx
 [Queues, topics, and subscriptions]: service-bus-queues-topics-subscriptions.md
 [BrokeredMessage]: /dotnet/api/microsoft.servicebus.messaging.brokeredmessage
-

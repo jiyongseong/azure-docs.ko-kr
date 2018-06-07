@@ -1,11 +1,11 @@
 ---
-title: "Excel 및 SOA를 위한 HPC 팩 클러스터 | Microsoft Docs"
-description: "Azure의 HPC Pack 클러스터에서 대규모 Excel 및 SOA 워크로드 실행 시작"
+title: Excel 및 SOA를 위한 HPC 팩 클러스터 | Microsoft Docs
+description: Azure의 HPC Pack 클러스터에서 대규모 Excel 및 SOA 워크로드 실행 시작
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: dlepow
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager,hpc-pack
 ms.assetid: cb6a9abe-caf3-44da-b911-849a50f6cfb3
 ms.service: virtual-machines-windows
@@ -15,16 +15,14 @@ ms.tgt_pltfrm: vm-windows
 ms.workload: big-compute
 ms.date: 06/01/2017
 ms.author: danlep
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 43aab8d52e854636f7ea2ff3aae50d7827735cc7
-ms.openlocfilehash: acd2ee7fb94c43493ffd9ffee157f2c3e795b63e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/03/2017
-
-
+ms.openlocfilehash: aaf26e04fdb38fd76f4ab8211f9fdda8ebafd668
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="get-started-running-excel-and-soa-workloads-on-an-hpc-pack-cluster-in-azure"></a>Azure의 HPC Pack 클러스터에서 Excel 및 SOA 작업 실행 시작
-이 문서에서는 Azure 빠른 시작 템플릿 또는 Azure PowerShell 배포 스크립트(선택 사항)를 사용하여 Azure 가상 컴퓨터에 Microsoft HPC Pack 2012 R2 클러스터를 배포하는 방법을 설명합니다. 이 클러스터는 HPC Pack을 사용하여 Microsoft Excel 또는 SOA(서비스 지향 아키텍처) 작업을 실행하도록 설계된 Azure Marketplace VM 이미지를 사용합니다. 클러스터를 사용하여 온-프레미스 클라이언트 컴퓨터에서 Excel HPC 및 SOA 서비스를 실행할 수 있습니다. Excel HPC 서비스에는 Excel 통합 문서 오프로딩 및 Excel 사용자 정의 함수, 즉 UDF가 포함됩니다.
+이 문서에서는 Azure 빠른 시작 템플릿 또는 Azure PowerShell 배포 스크립트(선택 사항)를 사용하여 Azure 가상 머신에 Microsoft HPC Pack 2012 R2 클러스터를 배포하는 방법을 설명합니다. 이 클러스터는 HPC Pack을 사용하여 Microsoft Excel 또는 SOA(서비스 지향 아키텍처) 작업을 실행하도록 설계된 Azure Marketplace VM 이미지를 사용합니다. 클러스터를 사용하여 온-프레미스 클라이언트 컴퓨터에서 Excel HPC 및 SOA 서비스를 실행할 수 있습니다. Excel HPC 서비스에는 Excel 통합 문서 오프로딩 및 Excel 사용자 정의 함수, 즉 UDF가 포함됩니다.
 
 > [!IMPORTANT] 
 > 이 문서는 HPC Pack 2012 R2의 기능, 템플릿 및 스크립트를 기준으로 합니다. 이 시나리오는 현재 HPC Pack 2016에서 지원되지 않습니다.
@@ -40,7 +38,7 @@ ms.lasthandoff: 06/03/2017
 * **클라이언트 컴퓨터** -클러스터에 샘플 Excel 및 SOA 작업을 제출하기 위한 Windows 기반 클라이언트 컴퓨터가 필요합니다. 또한 Azure PowerShell 클러스터 배포 방법을 선택하는 경우 해당 배포 스크립트를 실행하기 위한 Windows 컴퓨터도 필요합니다.
 * **Azure 구독** - Azure 구독이 없는 경우 몇 분 만에 [무료 계정](https://azure.microsoft.com/pricing/free-trial/) 을 만들 수 있습니다.
 * **코어 할당량** - 멀티 코어 VM 크기를 사용하여 여러 클러스터 노드를 배포하려는 경우 특히 코어 할당량을 늘려야 할 수 있습니다. Azure 빠른 시작 템플릿을 사용하는 경우 Azure 지역별로 Resource Manager의 코어 할당량이 설정됩니다. 이 경우 특정 지역의 할당량을 늘려야 할 수 있습니다. [Azure 구독 제한, 할당량 및 제약 조건](../../azure-subscription-service-limits.md)을 참조하세요. 할당량을 늘리려면 무료로 [온라인 고객 지원 요청을 개설](https://azure.microsoft.com/blog/2014/06/04/azure-limits-quotas-increase-requests/) 합니다.
-* **Microsoft Office 라이선스** - Microsoft Excel과 함께 마켓플레이스 HPC Pack 2012 R2 VM 이미지를 사용하여 컴퓨터 노드를 배포하는 경우 30일 평가 버전의 Microsoft Excel Professional Plus 2013이 설치됩니다. 평가 기간이 종료된 후에 작업을 계속 실행하기 위해 Excel을 정품 인증하려면 유효한 Microsoft Office 라이선스를 제공해야 합니다. 이 문서의 뒷부분에 나오는 [Excel 활성화](#excel-activation) 를 참조하세요. 
+* **Microsoft Office 라이선스** - Microsoft Excel과 함께 Marketplace HPC Pack 2012 R2 VM 이미지를 사용하여 컴퓨터 노드를 배포하는 경우 30일 평가 버전의 Microsoft Excel Professional Plus 2013이 설치됩니다. 평가 기간이 종료된 후에 작업을 계속 실행하기 위해 Excel을 정품 인증하려면 유효한 Microsoft Office 라이선스를 제공해야 합니다. 이 문서의 뒷부분에 나오는 [Excel 활성화](#excel-activation) 를 참조하세요. 
 
 ## <a name="step-1-set-up-an-hpc-pack-cluster-in-azure"></a>1단계. Azure에서 HPC Pack 클러스터 설정
 여기서는 HPC Pack 2012 R2 클러스터를 설정하는 두 가지 방법을 설명합니다. 첫 번째 방법은 Azure 빠른 시작 템플릿과 Azure 포털을 사용하는 것이고, 두 번째 방법은 Azure PowerShell 배포 스크립트를 사용하는 것입니다.
@@ -64,15 +62,15 @@ Azure 빠른 시작 템플릿을 사용하여 Azure 포털에서 HPC Pack 클러
    ![매개 변수 입력][parameters-new-portal]
    
    > [!NOTE]
-   > 헤드 노드 VM은 Windows Server 2012 R2에서 HPC Pack 2012 R2의 [최신 마켓플레이스 이미지](https://azure.microsoft.com/marketplace/partners/microsoft/hpcpack2012r2onwindowsserver2012r2/) 로부터 자동으로 생성됩니다. 현재 이미지는 HPC Pack 2012 R2 업데이트 3을 기반으로 합니다.
+   > 헤드 노드 VM은 Windows Server 2012 R2에서 HPC Pack 2012 R2의 [최신 Marketplace 이미지](https://azure.microsoft.com/marketplace/partners/microsoft/hpcpack2012r2onwindowsserver2012r2/) 로부터 자동으로 생성됩니다. 현재 이미지는 HPC Pack 2012 R2 업데이트 3을 기반으로 합니다.
    > 
-   > 컴퓨터 노드 VM은 선택한 컴퓨터 노드 제품군의 최신 이미지로부터 생성됩니다. Microsoft Excel Professional Plus 2013 평가 버전을 포함하는 최신 HPC 팩 계산 노드 이미지에 대해 **ComputeNodeWithExcel** 옵션을 선택합니다. 일반 SOA 세션 또는 Excel UDF 오프로딩용 클러스터를 배포하려면 Excel을 설치하지 않고 **ComputeNode** 옵션을 선택합니다.
+   > Compute 노드 VM은 선택한 컴퓨터 노드 제품군의 최신 이미지로부터 생성됩니다. Microsoft Excel Professional Plus 2013 평가 버전을 포함하는 최신 HPC 팩 계산 노드 이미지에 대해 **ComputeNodeWithExcel** 옵션을 선택합니다. 일반 SOA 세션 또는 Excel UDF 오프로딩용 클러스터를 배포하려면 Excel을 설치하지 않고 **ComputeNode** 옵션을 선택합니다.
    > 
    > 
    
-   b. 구독을 선택합니다.
+   나. 구독을 선택합니다.
    
-   c. *hpc01RG*와 같은 클러스터용 리소스 그룹을 만듭니다.
+   다. *hpc01RG*와 같은 클러스터용 리소스 그룹을 만듭니다.
    
    d. 리소스 그룹의 위치(예: 미국 중부)를 선택합니다.
    
@@ -83,7 +81,7 @@ Azure 빠른 시작 템플릿을 사용하여 Azure 포털에서 HPC Pack 클러
    
     <!-- ![Connect to the head node][connect] -->
    
-   b. 인증서 관리자의 표준 절차에 따라 개인 키 없이 Cert:\LocalMachine\My 아래에 있는 헤드 노드 인증서를 내보냅니다. 이 예제에서는 *CN = hpc01.eastus.cloudapp.azure.com*을 내보냅니다.
+   나. 인증서 관리자의 표준 절차에 따라 개인 키 없이 Cert:\LocalMachine\My 아래에 있는 헤드 노드 인증서를 내보냅니다. 이 예제에서는 *CN = hpc01.eastus.cloudapp.azure.com*을 내보냅니다.
    
    ![인증서 내보내기][cert]
 
@@ -363,4 +361,3 @@ NetTcp 바인딩을 사용하려면 구성이 온-프레미스 클러스터에 �
 [endpoint]: ./media/excel-cluster-hpcpack/endpoint.png
 [endpoint-new-portal]: ./media/excel-cluster-hpcpack/endpoint-new-portal.png
 [udf]: ./media/excel-cluster-hpcpack/udf.png
-

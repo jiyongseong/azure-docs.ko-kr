@@ -1,6 +1,6 @@
 ---
-title: "Log Analytics의 사용자 지정 필드 | Microsoft Docs"
-description: "Log Analytics의 사용자 지정 필드를 사용하면 수집된 레코드의 속성에 추가되는 OMS 데이터를 통해 자체 검색 가능한 필드를 만들 수 있습니다.  이 문서는 사용자 지정 필드를 만드는 프로세스를 설명하고 샘플 이벤트에 대한 자세한 연습을 제공합니다."
+title: "Azure Log Analytics의 사용자 지정 필드 | Microsoft Docs"
+description: "Log Analytics의 사용자 지정 필드를 사용하면 수집된 레코드의 속성에 추가하는 Log Analytics 레코드에서 자체 검색 가능한 필드를 만들 수 있습니다.  이 문서는 사용자 지정 필드를 만드는 프로세스를 설명하고 샘플 이벤트에 대한 자세한 연습을 제공합니다."
 services: log-analytics
 documentationcenter: 
 author: bwren
@@ -12,16 +12,16 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 10/18/2016
+ms.date: 01/23/2018
 ms.author: bwren
-translationtype: Human Translation
-ms.sourcegitcommit: 219dcbfdca145bedb570eb9ef747ee00cc0342eb
-ms.openlocfilehash: b98dcbcf219276bb9a7fd24e7f8c8c8eba806cf0
-
-
+ms.openlocfilehash: f0f3311f35f954f81560cad21e7f0e3bc850a094
+ms.sourcegitcommit: 28178ca0364e498318e2630f51ba6158e4a09a89
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/24/2018
 ---
 # <a name="custom-fields-in-log-analytics"></a>Log Analytics의 사용자 지정 필드
-Log Analytics의 **사용자 지정 필드** 기능을 사용하면 자체적으로 검색 가능한 필드를 추가하여 OMS 리포지토리의 기존 레코드를 확장할 수 있습니다.  사용자 지정 필드는 동일한 레코드의 다른 속성에서 추출한 데이터로 자동으로 채워집니다.
+Log Analytics의 **사용자 지정 필드** 기능을 사용하면 자체적으로 검색 가능한 필드를 추가하여 Log Analytics의 기존 레코드를 확장할 수 있습니다.  사용자 지정 필드는 동일한 레코드의 다른 속성에서 추출한 데이터로 자동으로 채워집니다.
 
 ![사용자 지정 필드 개요](media/log-analytics-custom-fields/overview.png)
 
@@ -40,8 +40,7 @@ Log Analytics의 **사용자 지정 필드** 기능을 사용하면 자체적으
 다음 섹션은 사용자 지정 필드를 만드는 절차를 제공합니다.  이 문서의 맨 아래에 샘플 추출 연습이 있습니다.
 
 > [!NOTE]
-> 사용자 지정 필드는 특정 조건에 일치하는 레코드가 OMS 데이터 저장소에 추가되면 채워지기 때문에, 사용자 지정 필드가 생성된 후에 수집된 레코드에만 나타납니다.  사용자 지정 필드는 생성 당시 데이터 저장소에 이미 있었던 레코드에는 추가되지 않습니다.
-> 
+> 사용자 지정 필드는 특정 조건에 일치하는 레코드가 Log Analytics에 추가되면 채워지기 때문에, 사용자 지정 필드가 생성된 후에 수집된 레코드에만 나타납니다.  사용자 지정 필드는 생성 당시 데이터 저장소에 이미 있었던 레코드에는 추가되지 않습니다.
 > 
 
 ### <a name="step-1--identify-records-that-will-have-the-custom-field"></a>1단계 – 사용자 지정 필드를 갖게 될 레코드를 식별합니다.
@@ -72,7 +71,7 @@ Log Analytics의 **사용자 지정 필드** 기능을 사용하면 자체적으
 7. 사용자 지정 필드를 다른 레코드 속성처럼 사용합니다.  이것을 사용하여 데이터를 집계하고 그룹화하며 새로운 통찰을 생성하는 데도 사용할 수 있습니다.
 
 ## <a name="viewing-custom-fields"></a>사용자 지정 필드 보기
-OMS 대시보드 **설정** 타일의 관리 그룹에서 모든 사용자 지정 필드 목록을 볼 수 있습니다.  **데이터**를 선택한 다음 **사용자 지정 필드**를 선택하여 작업 영역 내 모든 사용자 지정 필드의 목록을 표시합니다.  
+Azure Portal에서 Log Analytics 작업 영역의 **고급 설정** 메뉴에서 관리 그룹의 모든 사용자 지정 필드 목록을 볼 수 있습니다  **데이터**를 선택한 다음 **사용자 지정 필드**를 선택하여 작업 영역 내 모든 사용자 지정 필드의 목록을 표시합니다.  
 
 ![사용자 지정 필드](media/log-analytics-custom-fields/list.png)
 
@@ -141,10 +140,4 @@ DPMRA 서비스를 포함하는 레코드로 스크롤하고 동일한 프로세
 ## <a name="next-steps"></a>다음 단계
 * 조건에 대한 사용자 지정 필드를 사용하여 쿼리를 빌드하기 위해 [검색 로그](log-analytics-log-searches.md) 에 대해 알아봅니다.
 * 사용자 지정 필드를 사용하여 구문 분석하는 [사용자 지정 로그 파일](log-analytics-data-sources-custom-logs.md)을 모니터링합니다.
-
-
-
-
-<!--HONumber=Nov16_HO3-->
-
 

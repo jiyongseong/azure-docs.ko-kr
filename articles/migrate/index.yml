@@ -1,0 +1,26 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Azure Migrate 설명서
+metadata:
+  title: 'Azure Migrate 설명서 - 자습서, API 참조 | Microsoft Docs'
+  description: Azure로의 마이그레이션을 위해 온-프레미스 컴퓨터를 평가하는 방법에 대해 알아봅니다.
+  services: migration-planner
+  author: rayne-wiselman
+  manager: carmonm
+  ms.service: migration
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 11/22/2017
+  ms.author: raynew
+abstract:
+  description: 'Azure Migrate는 Azure로의 마이그레이션을 위해 온-프레미스 컴퓨터의 적합성을 검색 및 평가하고, 실행 중인 Azure VM을 위한 크기 조정 및 비용 예상안을 제공합니다.'
+sections:
+  - title: 단계별 자습서
+    items:
+      - type: paragraph
+        text: Azure로의 마이그레이션을 위해 VMware VM을 평가하는 방법에 대해 알아봅니다.
+      - type: list
+        style: unordered
+        items:
+          - html: <a href="tutorial-assessment-vmware">온-프레미스 VMware VM 검색 및 평가</a>

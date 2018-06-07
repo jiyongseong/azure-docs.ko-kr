@@ -1,11 +1,11 @@
 ---
-title: "Azure CLI를 사용하여 Resource Manager로 VM 마이그레이션 | Microsoft Docs"
-description: "이 문서에서는 플랫폼 지원 방식의 Azure CLI를 사용하여 클래식에서 Azure Resource Manager로 리소스를 마이그레이션하는 과정을 안내합니다."
+title: Azure CLI를 사용하여 Resource Manager로 VM 마이그레이션 | Microsoft Docs
+description: 이 문서에서는 플랫폼 지원 방식의 Azure CLI를 사용하여 클래식에서 Azure Resource Manager로 리소스를 마이그레이션하는 과정을 안내합니다.
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: singhkays
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
 ms.assetid: d6f5a877-05b6-4127-a545-3f5bede4e479
 ms.service: virtual-machines-linux
@@ -15,15 +15,14 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/30/2017
 ms.author: kasing
-translationtype: Human Translation
-ms.sourcegitcommit: 6ea03adaabc1cd9e62aa91d4237481d8330704a1
-ms.openlocfilehash: a63d758570b09b37b8e51c639267f729521d9ae0
-ms.lasthandoff: 04/06/2017
-
-
+ms.openlocfilehash: f986246e74305789eb2978a95fd6a3e51accd25e
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="migrate-iaas-resources-from-classic-to-azure-resource-manager-by-using-azure-cli"></a>Azure CLI를 사용하여 클래식에서 Azure Resource Manager로 IaaS 리소스 마이그레이션
-이러한 단계에서는 Azure CLI(명령줄 인터페이스) 명령을 사용하여 클래식 배포 모델의 laaS(Infrastructure as a Service) 리소스를 Azure Resource Manager 배포 모델로 마이그레이션하는 방법을 보여 줍니다. 이 문서는 [Azure CLI](../../cli-install-nodejs.md)가 필요합니다.
+이러한 단계에서는 Azure CLI(명령줄 인터페이스) 명령을 사용하여 클래식 배포 모델의 laaS(Infrastructure as a Service) 리소스를 Azure Resource Manager 배포 모델로 마이그레이션하는 방법을 보여 줍니다. 이 문서는 [Azure CLI 1.0](../../cli-install-nodejs.md)이 필요합니다. Azure CLI 2.0은 Azure Resource Manager 리소스에만 적용할 수 있으므로 이 마이그레이션에 사용할 수 없습니다.
 
 > [!NOTE]
 > 여기에 설명된 모든 작업은 idempotent 방식입니다. 지원되지 않는 기능 또는 구성 오류 이외의 문제가 발생하는 경우 준비, 중단 또는 커밋 작업을 다시 시도하는 것이 좋습니다. 그러면 플랫폼에서 작업을 다시 시도합니다.
@@ -38,7 +37,7 @@ ms.lasthandoff: 04/06/2017
 ## <a name="step-1-prepare-for-migration"></a>1단계: 마이그레이션 준비
 클래식에서 Resource Manager로 IaaS 리소스 마이그레이션을 평가하는 몇 가지 모범 사례가 있습니다.
 
-* [지원되지 않는 구성 또는 기능 목록](../windows/migration-classic-resource-manager-overview.md)을 읽어보세요. 지원되지 않는 구성 또는 기능을 사용하는 가상 컴퓨터가 있다면, 해당 기능/구성 지원이 발표되기를 기다리는 것이 좋습니다. 아니면, 필요에 맞을 경우 마이그레이션이 가능하도록 해당 기능을 제거하거나 해당 구성을 사용하지 않을 수 있습니다.
+* [지원되지 않는 구성 또는 기능 목록](../windows/migration-classic-resource-manager-overview.md)을 읽어보세요. 지원되지 않는 구성 또는 기능을 사용하는 가상 머신이 있다면, 해당 기능/구성 지원이 발표되기를 기다리는 것이 좋습니다. 아니면, 필요에 맞을 경우 마이그레이션이 가능하도록 해당 기능을 제거하거나 해당 구성을 사용하지 않을 수 있습니다.
 * 현재 인프라 및 응용 프로그램을 배포하는 스크립트를 자동화한 경우 마이그레이션을 위해 해당 스크립트를 사용하여 유사한 테스트 설정을 만들어봅니다. 또는 Azure 포털을 사용하여 샘플 환경을 설정할 수도 있습니다.
 
 > [!IMPORTANT]
@@ -49,7 +48,7 @@ ms.lasthandoff: 04/06/2017
 > 
 
 ## <a name="step-2-set-your-subscription-and-register-the-provider"></a>2단계: 구독 설정 및 공급자 등록
-마이그레이션 시나리오의 경우 클래식 및 Resource Manager에 대한 환경을 설정해야 합니다. [Azure CLI를 설치](../../cli-install-nodejs.md)하고 [구독을 선택](../../xplat-cli-connect.md)합니다.
+마이그레이션 시나리오의 경우 클래식 및 Resource Manager에 대한 환경을 설정해야 합니다. [Azure CLI를 설치](../../cli-install-nodejs.md)하고 [구독을 선택](/cli/azure/authenticate-azure-cli)합니다.
 
 계정에 로그인합니다.
 
@@ -78,14 +77,14 @@ ms.lasthandoff: 04/06/2017
 
     azure config mode asm
 
-## <a name="step-3-make-sure-you-have-enough-azure-resource-manager-virtual-machine-cores-in-the-azure-region-of-your-current-deployment-or-vnet"></a>3단계: 현재 배포의 Azure 지역 또는 VNET에 Azure Resource Manager 가상 컴퓨터 코어가 충분한지 확인
+## <a name="step-3-make-sure-you-have-enough-azure-resource-manager-virtual-machine-vcpus-in-the-azure-region-of-your-current-deployment-or-vnet"></a>3단계: 현재 배포의 Azure 지역 또는 VNET에 Azure Resource Manager Virtual Machine vCPU가 충분한지 확인
 이 단계를 위해 `arm` 모드로 전환해야 합니다. 다음 명령을 사용하여 이 작업을 수행합니다.
 
 ```
 azure config mode arm
 ```
 
-다음 CLI 명령을 사용하여 Azure Resource Manager에 있는 현재 코어 양을 확인합니다. 코어 할당량에 대한 자세한 내용은 [제한 및 Azure Resource Manager](../../azure-subscription-service-limits.md#limits-and-the-azure-resource-manager)를 참조하세요.
+다음 CLI 명령을 사용하여 Azure Resource Manager에 있는 현재 vCPU 수를 확인할 수 있습니다. vCPU 할당량에 대한 자세한 내용은 [제한 및 Azure Resource Manager](../../azure-subscription-service-limits.md#limits-and-the-azure-resource-manager)를 참조하세요.
 
 ```
 azure vm list-usage -l "<Your VNET or Deployment's Azure region"
@@ -96,7 +95,7 @@ azure vm list-usage -l "<Your VNET or Deployment's Azure region"
     azure config mode asm
 
 
-## <a name="step-4-option-1---migrate-virtual-machines-in-a-cloud-service"></a>4단계: 옵션 1 - 클라우드 서비스에서 가상 컴퓨터 마이그레이션
+## <a name="step-4-option-1---migrate-virtual-machines-in-a-cloud-service"></a>4단계: 옵션 1 - 클라우드 서비스에서 가상 머신 마이그레이션
 다음 명령을 사용하여 클라우드 서비스 목록을 가져와서 마이그레이션할 클라우드 서비스를 선택합니다. 클라우드 서비스의 VM이 가상 네트워크이거나 VM에 웹/작업자 역할이 있으면, 오류 메시지가 표시됩니다.
 
     azure service list
@@ -111,7 +110,7 @@ azure vm list-usage -l "<Your VNET or Deployment's Azure region"
 azure service deployment validate-migration <serviceName> <deploymentName> new "" "" ""
 ```
 
-마이그레이션을 위해 클라우드 서비스의 가상 컴퓨터를 준비합니다. 두 가지 옵션 중 선택할 수 있습니다.
+마이그레이션을 위해 클라우드 서비스의 가상 머신을 준비합니다. 두 가지 옵션 중 선택할 수 있습니다.
 
 VM을 플랫폼에서 만든 가상 네트워크에 마이그레이션하려면, 다음 명령을 사용합니다.
 
@@ -135,7 +134,7 @@ CLI 또는 Azure 포털을 사용하여 준비된 리소스에 대한 구성을 
 
 
 
-## <a name="step-4-option-2----migrate-virtual-machines-in-a-virtual-network"></a>4단계: 옵션 2 - 가상 네트워크에서 가상 컴퓨터 마이그레이션
+## <a name="step-4-option-2----migrate-virtual-machines-in-a-virtual-network"></a>4단계: 옵션 2 - 가상 네트워크에서 가상 머신 마이그레이션
 마이그레이션할 가상 네트워크를 선택합니다. 가상 네트워크에 웹/작업자 역할이 포함되어 있거나 지원되지 않는 구성을 포함하는 VM이 있으면, 유효성 검사 오류 메시지가 표시됩니다.
 
 다음 명령을 사용하여 구독의 모든 가상 네트워크를 가져옵니다.
@@ -158,7 +157,7 @@ azure network vnet validate-migration <virtualNetworkName>
 
     azure network vnet prepare-migration <virtualNetworkName>
 
-CLI 또는 Azure 포털을 사용하여 준비된 가상 컴퓨터에 대한 구성을 확인합니다. 마이그레이션할 준비가 되지 않았으며 이전 상태로 되돌아가려면 다음 명령을 사용합니다.
+CLI 또는 Azure 포털을 사용하여 준비된 가상 머신에 대한 구성을 확인합니다. 마이그레이션할 준비가 되지 않았으며 이전 상태로 되돌아가려면 다음 명령을 사용합니다.
 
     azure network vnet abort-migration <virtualNetworkName>
 
@@ -167,7 +166,7 @@ CLI 또는 Azure 포털을 사용하여 준비된 가상 컴퓨터에 대한 구
     azure network vnet commit-migration <virtualNetworkName>
 
 ## <a name="step-5-migrate-a-storage-account"></a>5단계: 저장소 계정 마이그레이션
-가상 컴퓨터 마이그레이션이 완료되면 저장소 계정을 마이그레이션하는 것이 좋습니다.
+가상 머신 마이그레이션이 완료되면 저장소 계정을 마이그레이션하는 것이 좋습니다.
 
 다음 명령을 사용하여 마이그레이션을 위한 저장소 계정을 준비합니다.
 
@@ -190,4 +189,3 @@ CLI 또는 Azure 포털을 사용하여 준비된 저장소 계정에 대한 구
 * [클래식에서 Azure Resource Manager로의 IaaS 리소스 마이그레이션을 지원하기 위한 커뮤니티 도구](../windows/migration-classic-resource-manager-community-tools.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
 * [가장 일반적인 마이그레이션 오류 검토](migration-classic-resource-manager-errors.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 * [클래식에서 Azure Resource Manager로의 IaaS 리소스 마이그레이션과 관련된 가장 자주 묻는 질문 검토](migration-classic-resource-manager-faq.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-

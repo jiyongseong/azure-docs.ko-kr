@@ -1,32 +1,31 @@
 ---
-title: "Azure IoT Hub를 사용하여 장치 펌웨어 업데이트(노드) | Microsoft Docs"
-description: "장치 펌웨어 업데이트를 시작하려면 Azure IoT Hub에서 장치 관리를 사용하는 방법입니다. Node.js용 Azure IoT SDK를 사용하여 시뮬레이션된 장치 앱 및 펌웨어 업데이트를 트리거하는 서비스 앱을 구현합니다."
+title: Azure IoT Hub를 사용하여 장치 펌웨어 업데이트(노드) | Microsoft Docs
+description: 장치 펌웨어 업데이트를 시작하려면 Azure IoT Hub에서 장치 관리를 사용하는 방법입니다. Node.js용 Azure IoT SDK를 사용하여 시뮬레이션된 장치 앱 및 펌웨어 업데이트를 트리거하는 서비스 앱을 구현합니다.
 services: iot-hub
 documentationcenter: .net
 author: juanjperez
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 70b84258-bc9f-43b1-b7cf-de1bb715f2cf
 ms.service: iot-hub
 ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 02/06/2017
+ms.date: 09/07/2017
 ms.author: juanpere
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 4ba60cee8848079935111ed3de480081a4aa58f6
-ms.openlocfilehash: 30a707ec15d592c8a10905e13a75ea2f6e52cccc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/06/2017
-
-
+ms.openlocfilehash: e8ef556793534c9eb8300ee262a4b134960f862a
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="use-device-management-to-initiate-a-device-firmware-update-nodenode"></a>장치 관리를 사용하여 장치 펌웨어 업데이트 시작(노드/노드)
 [!INCLUDE [iot-hub-selector-firmware-update](../../includes/iot-hub-selector-firmware-update.md)]
 
-## <a name="introduction"></a>소개
-[장치 관리 시작][lnk-dm-getstarted] 자습서에서 [장치 쌍][lnk-devtwin] 및 [직접 메서드][lnk-c2dmethod] 기본 형식을 사용하여 장치를 원격으로 다시 부팅하는 방법을 보았습니다. 이 자습서는 동일한 IoT Hub 기본 형식을 사용하며 종단 간 시뮬레이션된 펌웨어 업데이트를 수행하는 방법을 보여주고 지침을 제공합니다.  이러한 패턴이 Intel Edison 장치 샘플에 대한 펌웨어 업데이트 구현에 사용됩니다.
+[장치 관리 시작][lnk-dm-getstarted] 자습서에서 [장치 쌍][lnk-devtwin] 및 [직접 메서드][lnk-c2dmethod] 기본 형식을 사용하여 장치를 원격으로 다시 부팅하는 방법을 살펴보았습니다. 이 자습서는 동일한 IoT Hub 기본 형식을 사용하며 종단 간 시뮬레이션된 펌웨어 업데이트를 수행하는 방법을 보여주고 지침을 제공합니다.  이러한 패턴이 Intel Edison 장치 샘플에 대한 펌웨어 업데이트 구현에 사용됩니다.
+
+[!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-whole.md)]
 
 이 자습서에서는 다음을 수행하는 방법에 대해 설명합니다.
 
@@ -41,7 +40,7 @@ ms.lasthandoff: 02/06/2017
 
 이 자습서를 완료하려면 다음이 필요합니다.
 
-* Node.js 버전 0.12.x 이상, <br/>  Windows 또는 Linux에서 이 자습서를 위해 Node.js를 설치하는 방법에 대해서는 [개발 환경 준비][lnk-dev-setup]에서 설명합니다.
+* Node.js 버전 4.0.x 이상 <br/>  Windows 또는 Linux에서 이 자습서를 위해 Node.js를 설치하는 방법에 대해서는 [개발 환경 준비][lnk-dev-setup]에서 설명합니다.
 * 활성 Azure 계정. 계정이 없는 경우 몇 분 안에 [무료 계정][lnk-free-trial]을 만들 수 있습니다.
 
 IoT hub 허브를 만들고 IoT Hub 연결 문자열을 확보하려면 [장치 관리 시작](iot-hub-node-node-device-management-get-started.md) 문서의 내용을 수행하세요.
@@ -58,7 +57,7 @@ IoT hub 허브를 만들고 IoT Hub 연결 문자열을 확보하려면 [장치 
     ```
     npm init
     ```
-2. **triggerfwupdateondevice** 폴더의 명령 프롬프트에서 다음 명령을 실행하여 **azure-iot-hub** 및 **azure-iot-device-mqtt** 장치 SDK 패키지를 설치합니다.
+2. **triggerfwupdateondevice** 폴더의 명령 프롬프트에서 다음 명령을 실행하여 **azure-iot-hub** 패키지를 설치합니다.
    
     ```
     npm install azure-iothub --save
@@ -155,4 +154,3 @@ IoT 솔루션을 확장하고 여러 장치에서 메서드 호출을 예약하�
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdk-node/tree/master/doc/node-devbox-setup.md
 [lnk-free-trial]: http://azure.microsoft.com/pricing/free-trial/
 [lnk-transient-faults]: https://msdn.microsoft.com/library/hh680901(v=pandp.50).aspx
-

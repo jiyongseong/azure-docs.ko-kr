@@ -1,6 +1,6 @@
 ---
-title: "Azure 리소스 관리자 개요 | Microsoft Docs"
-description: "Azure에서 리소스 배포, 관리 및 Access Control용 Azure 리소스 관리자 사용 방법을 설명합니다."
+title: Azure 리소스 관리자 개요 | Microsoft Docs
+description: Azure에서 리소스 배포, 관리 및 Access Control용 Azure 리소스 관리자 사용 방법을 설명합니다.
 services: azure-resource-manager
 documentationcenter: na
 author: tfitzmac
@@ -9,27 +9,27 @@ editor: tysonn
 ms.assetid: 76df7de1-1d3b-436e-9b44-e1b3766b3961
 ms.service: azure-resource-manager
 ms.devlang: na
-ms.topic: get-started-article
+ms.topic: overview
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 07/19/2017
+ms.date: 01/30/2018
 ms.author: tomfitz
+ms.openlocfilehash: bff67bc617a0dfba10b3150aaa8bae92e84304b8
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: b382225b9e355148279181fbf6238eb1e08f382d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34359971"
 ---
 # <a name="azure-resource-manager-overview"></a>Azure Resource Manager 개요
-응용 프로그램에 대한 인프라는 일반적으로 가상 컴퓨터, 저장소 계정 및 가상 네트워크 또는 웹앱, 데이터베이스, 데이터베이스 서버 및 타사 서비스 등의 많은 구성 요소를 만듭니다. 이러한 구성 요소를 별도 엔터티로 표시하지 않으면, 대신 관련된 단일 엔터티의 상호 종속적으로 부분으로 표시됩니다. 그룹으로 배포, 관리 및 모니터링하려고 합니다. Azure 리소스 관리자를 사용하면 솔루션에서 리소스를 그룹으로 사용할 수 있습니다. 조정된 단일 작업에서 솔루션에 대한 모든 리소스를 배포, 업데이트 또는 삭제할 수 있습니다. 배포용 템플릿을 사용하고 이 템플릿을 테스트, 스테이징 및 프로덕션과 같은 여러 환경에서 사용할 수 있습니다. 리소스 관리자는 보안, 감사 및 태그 기능을 제공하여 배포 후에 리소스를 관리할 수 있습니다. 
+응용 프로그램에 대한 인프라는 일반적으로 가상 머신, 저장소 계정 및 가상 네트워크 또는 웹앱, 데이터베이스, 데이터베이스 서버 및 타사 서비스 등의 많은 구성 요소를 만듭니다. 이러한 구성 요소를 별도 엔터티로 표시하지 않으면, 대신 관련된 단일 엔터티의 상호 종속적으로 부분으로 표시됩니다. 그룹으로 배포, 관리 및 모니터링하려고 합니다. Azure 리소스 관리자를 사용하면 솔루션에서 리소스를 그룹으로 사용할 수 있습니다. 조정된 단일 작업에서 솔루션에 대한 모든 리소스를 배포, 업데이트 또는 삭제할 수 있습니다. 배포용 템플릿을 사용하고 이 템플릿을 테스트, 스테이징 및 프로덕션과 같은 여러 환경에서 사용할 수 있습니다. 리소스 관리자는 보안, 감사 및 태그 기능을 제공하여 배포 후에 리소스를 관리할 수 있습니다. 
 
 ## <a name="terminology"></a>용어
 Azure Resource Manager가 처음이라면 익숙하지 않은 용어가 있을 수 있습니다.
 
-* **리소스** - Azure를 통해 사용할 수 있는 관리 가능한 항목입니다. 몇 가지 일반적인 리소스는 가상 컴퓨터, 저장소 계정, 웹앱, 데이터베이스 및 가상 네트워크이지만 더 많은 종류가 있습니다.
+* **리소스** - Azure를 통해 사용할 수 있는 관리 가능한 항목입니다. 몇 가지 일반적인 리소스는 가상 머신, 저장소 계정, 웹앱, 데이터베이스 및 가상 네트워크이지만 더 많은 종류가 있습니다.
 * **리소스 그룹** - Azure 솔루션에 관련된 리소스를 보유하는 컨테이너입니다. 리소스 그룹에는 솔루션에 대한 모든 리소스 또는 그룹으로 관리하려는 해당 리소스만 포함될 수 있습니다. 사용자의 조직에 가장 적합한 내용에 따라 리소스 그룹에 리소스를 어떻게 할당할지 결정합니다. [리소스 그룹](#resource-groups)을 참조하세요.
-* **리소스 공급자** - Resource Manager를 통해 배포하고 관리할 수 있는 리소스를 제공하는 서비스입니다. 각 리소스 공급자는 배포된 리소스로 작업하기 위한 작업을 제공합니다. 몇 가지 일반 리소스 공급자는 가상 컴퓨터 리소스를 제공하는 Microsoft.Compute, 저장소 계정 리소스를 제공하는 Microsoft.Storage 및 웹앱에 관련된 리소스를 제공하는 Microsoft.Web입니다. [리소스 공급자](#resource-providers)를 참조하세요.
+* **리소스 공급자** - Resource Manager를 통해 배포하고 관리할 수 있는 리소스를 제공하는 서비스입니다. 각 리소스 공급자는 배포된 리소스로 작업하기 위한 작업을 제공합니다. 몇 가지 일반 리소스 공급자는 가상 머신 리소스를 제공하는 Microsoft.Compute, 저장소 계정 리소스를 제공하는 Microsoft.Storage 및 웹앱에 관련된 리소스를 제공하는 Microsoft.Web입니다. [리소스 공급자](#resource-providers)를 참조하세요.
 * **Resource Manager 템플릿** - 리소스 그룹에 배포한 하나 이상의 리소스를 정의하는 JSON(JavaScript Object Notation) 파일입니다. 또한 배포된 리소스 간의 종속성을 정의합니다. 템플릿은 리소스를 일관되고 반복적으로 배포하는 데 사용할 수 있습니다. [템플릿 배포](#template-deployment)를 참조하세요.
 * **선언적 구문** - 항목을 만드는 프로그래밍 명령의 시퀀스를 작성하지 않고도 "만들려는 대상은 다음과 같습니다"라고 선언하는 구문입니다. Resource Manager 템플릿은 선언적 구문의 예입니다. 파일에서 Azure에 배포하는 인프라에 대한 속성을 정의합니다. 
 
@@ -53,15 +53,13 @@ Azure Resource Manager가 처음이라면 익숙하지 않은 용어가 있을 �
 
 ![리소스 관리자 요청 모델](./media/resource-group-overview/consistent-management-layer.png)
 
-## <a name="guidance"></a>인도
+## <a name="guidance"></a>지침
 다음 제안으로 솔루션으로 작업할 때 Resource Manager를 완벽하게 활용할 수 있습니다.
 
 1. 명령적 명령을 사용하는 대신 리소스 관리자 템플릿의 선언적 구문을 통해 인프라를 정의하고 배포합니다.
 2. 템플릿에서 모든 배포 및 구성 단계를 정의합니다. 솔루션을 설정하기 위해 수동 단계가 없어야 합니다.
 3. 명령적 명령을 실행하여 앱 또는 컴퓨터를 시작하거나 중지하는 등 리소스를 관리합니다.
 4. 리소스 그룹에서 동일한 수명 주기로 리소스를 정렬합니다. 리소스의 모든 다른 구성에 태그를 사용합니다.
-
-템플릿에 대한 권장 사항은 [Azure Resource Manager 템플릿 생성 모범 사례](resource-manager-template-best-practices.md)를 참조하세요.
 
 엔터프라이즈에서 리소스 관리자를 사용하여 구독을 효과적으로 관리할 수 있는 방법에 대한 지침은 [Azure 엔터프라이즈 스캐폴드 - 규범적 구독 거버넌스](resource-manager-subscription-governance.md)를 참조하세요.
 
@@ -138,15 +136,13 @@ REQUEST BODY
 
 ![계층 템플릿](./media/resource-group-overview/tier-templates.png)
 
-템플릿 설계에 대한 더 많은 제안은 [Azure Resource Manager 템플릿 설계의 패턴](best-practices-resource-manager-design-templates.md)을 참조하세요. 중첩된 템플릿에 대한 자세한 내용은 [Azure Resource Manager에서 연결된 템플릿 사용](resource-group-linked-templates.md)을 참조하세요.
+중첩된 템플릿에 대한 자세한 내용은 [Azure Resource Manager에서 연결된 템플릿 사용](resource-group-linked-templates.md)을 참조하세요.
 
-배포 자동화에 대한 4가지 시리즈는 [Azure Virtual Machines에 대한 응용 프로그램 배포 자동화](../virtual-machines/windows/dotnet-core-1-landing.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 참조하세요. 이 시리즈에서는 응용 프로그램 아키텍처, 액세스 및 보안, 가용성 및 규모, 응용 프로그램 배포에 대해 다룹니다.
-
-리소스가 올바른 순서로 생성되도록 Azure Resource Manager가 종속성을 분석합니다. 한 리소스가 다른 리소스(예: 디스크에 대한 저장소 계정을 필요로 하는 가상 컴퓨터)의 값에 의존하는 경우 종속성을 설정합니다. 자세한 정보는 [Azure 리소스 관리자 템플릿에서 종속성 정의](resource-group-define-dependencies.md)를 참조하세요.
+리소스가 올바른 순서로 생성되도록 Azure Resource Manager가 종속성을 분석합니다. 한 리소스가 다른 리소스(예: 디스크에 대한 저장소 계정을 필요로 하는 가상 머신)의 값에 의존하는 경우 종속성을 설정합니다. 자세한 정보는 [Azure 리소스 관리자 템플릿에서 종속성 정의](resource-group-define-dependencies.md)를 참조하세요.
 
 또한 인프라의 업데이트에 대한 템플릿을 사용할 수 있습니다. 예를 들어 솔루션에 리소스를 추가할 수 있으며 이미 배포된 리소스에 대한 구성 규칙을 추가할 수 있습니다. 템플릿에서 리소스 만들기를 지정하지만 해당 리소스가 이미 존재하는 경우 Azure Resource Manager는 새 자산을 만드는 대신 업데이트를 수행합니다. Azure 리소스 관리자는 새 것과 동일한 상태로 기존 자산을 업데이트합니다.  
 
-리소스 관리자는 설치에 포함되지 않은 특정 소프트웨어를 설치하는 등의 추가 작업을 할 때 시나리오에 대한 확장을 제공합니다. DSC, Chef 또는 Puppet와 같은 구성 관리 서비스를 이미 사용 중인 경우 확장을 사용하여 해당 서비스로 작업을 계속할 수 있습니다. 가상 컴퓨터 확장에 대한 자세한 내용은 [가상 컴퓨터 확장 및 기능 정보](../virtual-machines/windows/extensions-features.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 참조하세요. 
+리소스 관리자는 설치에 포함되지 않은 특정 소프트웨어를 설치하는 등의 추가 작업을 할 때 시나리오에 대한 확장을 제공합니다. DSC, Chef 또는 Puppet와 같은 구성 관리 서비스를 이미 사용 중인 경우 확장을 사용하여 해당 서비스로 작업을 계속할 수 있습니다. 가상 머신 확장에 대한 자세한 내용은 [가상 머신 확장 및 기능 정보](../virtual-machines/windows/extensions-features.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 참조하세요. 
 
 마지막으로 템플릿은 앱에 대한 소스 코드의 일부가 됩니다. 소스 코드 리포지토리를 확인하고 앱이 발전하면 업데이트할 수 있습니다. Visual Studio를 통해 템플릿을 편집할 수 있습니다.
 
@@ -162,7 +158,7 @@ REQUEST BODY
 
 리소스는 태그를 공유하는 동일한 리소스 그룹에 있을 필요가 없습니다. 조직의 모든 사용자가 실수로 약간 다른 태그 (예: "dept" 대신 "department")를 적용하지 않고 일반 태그를 사용하는지 확인하려면 사용자 고유의 태그 분류를 만들 수 있습니다.
 
-다음 예제에서는 가상 컴퓨터에 적용된 태그를 보여 줍니다.
+다음 예제에서는 가상 머신에 적용된 태그를 보여 줍니다.
 
 ```json
 "resources": [    
@@ -214,13 +210,13 @@ Azure는 다음 4개의 플랫폼 역할을 제공합니다.
 
 Azure는 몇 가지 리소스 특정 역할도 제공합니다. 몇 가지 일반적인 경우는 다음과 같습니다.
 
-1. 가상 컴퓨터 참여자는 가상 컴퓨터를 관리할 수 있지만 그에 대한 액세스 권한을 부여할 수 없고 연결된 가상 네트워크 또는 저장소 계정을 관리할 수 없음
+1. Virtual Machine 참여자는 가상 머신을 관리할 수 있지만 그에 대한 액세스 권한을 부여할 수 없고 연결된 가상 네트워크 또는 저장소 계정을 관리할 수 없음
 2. 네트워크 참여자는 모든 네트워크 리소스를 관리할 수 있지만 그에 대한 액세스 권한을 부여할 수 없음
-3. 저장소 계정 참여자는 저장소 계정을 관리할 수 있지만 그에 대한 액세스 권한을 부여할 수 없음
+3. Storage 계정 참여자는 Storage 계정을 관리할 수 있지만 그에 대한 액세스 권한을 부여할 수 없음
 4. SQL Server 참여자는 해당 보안 관련 정책을 제외한 SQL 서버 및 데이터베이스를 관리할 수 있음
 5. 웹 사이트 참여자는 웹 사이트를 관리할 수 있으나 여기에 연결된 웹 계획은 관리할 수 없음
 
-역할 및 허용되는 작업의 전체 목록은 [RBAC: 기본 제공 역할](../active-directory/role-based-access-built-in-roles.md)을 참조하세요. 역할 기반 Access Control에 대한 자세한 내용은 [Azure 역할 기반 Access Control](../active-directory/role-based-access-control-configure.md)를 참조하세요. 
+역할 및 허용되는 작업의 전체 목록은 [RBAC: 기본 제공 역할](../role-based-access-control/built-in-roles.md)을 참조하세요. 역할 기반 Access Control에 대한 자세한 내용은 [Azure 역할 기반 Access Control](../role-based-access-control/role-assignments-portal.md)를 참조하세요. 
 
 경우에 따라 리소스에 액세스하는 코드 또는 스크립트를 실행하려고 하지만 사용자의 자격 증명으로 실행하지 않으려 할 수 있습니다. 대신, 응용 프로그램에 대한 서비스 주체를 호출하는 ID를 만들고 서비스 주체에 대한 적절한 역할을 할당하려고 합니다. Resource Manager를 사용하면 응용 프로그램에 대한 자격 증명을 만들고 프로그래밍 방식으로 응용 프로그램을 인증할 수 있습니다. 서비스 주체를 만드는 방법에 대해 알아보려면 다음 항목 중 하나를 참조하세요.
 
@@ -254,7 +250,7 @@ JSON을 사용하여 정책을 정의하고 구독 전체 또는 리소스 그�
 }
 ```
 
-더 다양한 유형의 정책을 만들 수 있습니다. 자세한 내용은 [정책을 사용하여 리소스 및 컨트롤 액세스 관리](resource-manager-policy.md)를 참조하세요.
+더 다양한 유형의 정책을 만들 수 있습니다. 자세한 내용은 [Azure Policy란?](../azure-policy/azure-policy-introduction.md)을 참조하세요.
 
 ## <a name="sdks"></a>SDK
 Azure SDK는 여러 언어 및 플랫폼에 사용할 수 있습니다. 이러한 언어 구현은 각각 해당 에코 시스템 패키지 관리자 및 GitHub를 통해 사용할 수 있습니다.
@@ -292,4 +288,3 @@ Azure SDK는 여러 언어 및 플랫폼에 사용할 수 있습니다. 이러�
 
 
 [powershellref]: https://docs.microsoft.com/powershell/resourcemanager/azurerm.resources/v3.2.0/azurerm.resources
-

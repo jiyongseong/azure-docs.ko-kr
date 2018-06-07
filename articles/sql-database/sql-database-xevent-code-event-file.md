@@ -1,27 +1,19 @@
 ---
-title: "SQL Database에 대한 XEvent 이벤트 파일 코드 | Microsoft Docs"
-description: "Azure SQL Database에서 확장 이벤트의 이벤트 파일 대상을 보여주는 2단계 코드 샘플에 대해 PowerShell 및 Transact-SQL을 제공합니다. Azure 저장소는 이 시나리오의 필수 부분입니다."
+title: SQL Database에 대한 XEvent 이벤트 파일 코드 | Microsoft Docs
+description: Azure SQL Database에서 확장 이벤트의 이벤트 파일 대상을 보여주는 2단계 코드 샘플에 대해 PowerShell 및 Transact-SQL을 제공합니다. Azure Storage는 이 시나리오의 필수 부분입니다.
 services: sql-database
-documentationcenter: 
 author: MightyPen
-manager: jhubbard
-editor: 
-tags: 
-ms.assetid: bbb10ecc-739f-4159-b844-12b4be161231
+manager: craigg
 ms.service: sql-database
 ms.custom: monitor & tune
-ms.workload: data-management
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 02/06/2017
+ms.date: 04/01/2018
 ms.author: genemi
+ms.openlocfilehash: c8a8561c6241968419c5014bf2a37cca05723e81
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
 ms.translationtype: HT
-ms.sourcegitcommit: 3bbc9e9a22d962a6ee20ead05f728a2b706aee19
-ms.openlocfilehash: aeaed63e00b77f885312204f17f024af462dbf25
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/19/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="event-file-target-code-for-extended-events-in-sql-database"></a>SQL Database의 확장 이벤트에 대한 이벤트 파일 대상 코드
 
@@ -29,14 +21,14 @@ ms.lasthandoff: 07/19/2017
 
 확장 이벤트에 대한 정보를 캡처하고 보고하는 확실한 방법을 위한 전체 코드 샘플이 필요할 수 있습니다.
 
-Microsoft SQL Server의 [이벤트 파일 대상](http://msdn.microsoft.com/library/ff878115.aspx) 을 사용하여 이벤트 출력을 로컬 하드 드라이브 파일에 저장합니다. 하지만 이러한 파일은 Azure SQL Database에서 사용할 수 없습니다. 대신 Azure 저장소 서비스를 사용하여 이벤트 파일 대상을 지원합니다.
+Microsoft SQL Server의 [이벤트 파일 대상](http://msdn.microsoft.com/library/ff878115.aspx) 을 사용하여 이벤트 출력을 로컬 하드 드라이브 파일에 저장합니다. 하지만 이러한 파일은 Azure SQL Database에서 사용할 수 없습니다. 대신 Azure Storage 서비스를 사용하여 이벤트 파일 대상을 지원합니다.
 
 이 항목에서는 2단계 코드 샘플을 제공합니다.
 
-* 클라우드에서 Azure 저장소 컨테이너를 만드는 PowerShell.
+* 클라우드에서 Azure Storage 컨테이너를 만드는 PowerShell.
 * Transact-SQL:
   
-  * Azure 저장소 컨테이너를 이벤트 파일 대상에 할당합니다.
+  * Azure Storage 컨테이너를 이벤트 파일 대상에 할당합니다.
   * 이벤트 세션 등을 만들고 시작합니다.
 
 ## <a name="prerequisites"></a>필수 조건
@@ -54,7 +46,7 @@ Microsoft SQL Server의 [이벤트 파일 대상](http://msdn.microsoft.com/libr
   
   * 이 모듈은 **New-AzureStorageAccount**등의 명령을 제공합니다.
 
-## <a name="phase-1-powershell-code-for-azure-storage-container"></a>1단계: Azure 저장소 컨테이너용 PowerShell 코드
+## <a name="phase-1-powershell-code-for-azure-storage-container"></a>1단계: Azure Storage 컨테이너용 PowerShell 코드
 
 이 PowerShell은 2단계 코드 샘플의 1단계입니다.
 
@@ -70,132 +62,121 @@ Microsoft SQL Server의 [이벤트 파일 대상](http://msdn.microsoft.com/libr
 
 ![스크립트를 실행하려면 Azure 모듈이 설치된 PowerShell ISE가 준비되어 있어야 합니다.][30_powershell_ise]
 
-
 ### <a name="powershell-code"></a>PowerShell 코드
+
+이 PowerShell 스크립트는 AzureRm 모듈에 대해 Import-Module cmdlet을 이미 실행했다고 가정합니다. 참조 설명서를 보려면 [PowerShell 모듈 브라우저](https://docs.microsoft.com/powershell/module/)를 참조하세요.
 
 ```powershell
 ## TODO: Before running, find all 'TODO' and make each edit!!
 
+cls;
+
 #--------------- 1 -----------------------
 
-
-# You can comment out or skip this Add-AzureAccount
-# command after the first run.
-# Current PowerShell environment retains the successful outcome.
-
-'Expect a pop-up window in which you log in to Azure.'
-
-
-Add-AzureAccount
+'Script assumes you have already logged your PowerShell session into Azure.
+But if not, run  Connect-AzureRmAccount (or  Connect-AzureRmAccount), just one time.';
+#Connect-AzureRmAccount;   # Same as  Connect-AzureRmAccount.
 
 #-------------- 2 ------------------------
 
-
 '
 TODO: Edit the values assigned to these variables, especially the first few!
-'
+';
 
 # Ensure the current date is between
 # the Expiry and Start time values that you edit here.
 
-$subscriptionName    = 'YOUR_SUBSCRIPTION_NAME'
-$policySasExpiryTime = '2016-01-28T23:44:56Z'
-$policySasStartTime  = '2015-08-01'
+$subscriptionName    = 'YOUR_SUBSCRIPTION_NAME';
+$resourceGroupName   = 'YOUR_RESOURCE-GROUP-NAME';
 
+$policySasExpiryTime = '2018-08-28T23:44:56Z';
+$policySasStartTime  = '2017-10-01';
 
-$storageAccountName     = 'gmstorageaccountxevent'
-$storageAccountLocation = 'West US'
-$contextName            = 'gmcontext'
-$containerName          = 'gmcontainerxevent'
-$policySasToken         = 'gmpolicysastoken'
+$storageAccountLocation = 'West US';
+$storageAccountName     = 'YOUR_STORAGE_ACCOUNT_NAME';
+$contextName            = 'YOUR_CONTEXT_NAME';
+$containerName          = 'YOUR_CONTAINER_NAME';
+$policySasToken         = ' ? ';
 
-
-# Leave this value alone, as 'rwl'.
-$policySasPermission = 'rwl'
+$policySasPermission = 'rwl';  # Leave this value alone, as 'rwl'.
 
 #--------------- 3 -----------------------
-
 
 # The ending display lists your Azure subscriptions.
 # One should match the $subscriptionName value you assigned
 #   earlier in this PowerShell script. 
 
-'Choose an existing subscription for the current PowerShell environment.'
+'Choose an existing subscription for the current PowerShell environment.';
 
-
-Select-AzureSubscription -SubscriptionName $subscriptionName
-
+Select-AzureRmSubscription -Subscription $subscriptionName;
 
 #-------------- 4 ------------------------
 
-
 '
 Clean up the old Azure Storage Account after any previous run, 
-before continuing this new run.'
-
+before continuing this new run.';
 
 If ($storageAccountName)
 {
-    Remove-AzureStorageAccount -StorageAccountName $storageAccountName
+    Remove-AzureRmStorageAccount `
+        -Name              $storageAccountName `
+        -ResourceGroupName $resourceGroupName;
 }
 
 #--------------- 5 -----------------------
 
-[System.DateTime]::Now.ToString()
+[System.DateTime]::Now.ToString();
 
 '
 Create a storage account. 
 This might take several minutes, will beep when ready.
-  ...PLEASE WAIT...'
+  ...PLEASE WAIT...';
 
-New-AzureStorageAccount `
-    -StorageAccountName $storageAccountName `
-    -Location           $storageAccountLocation
+New-AzureRmStorageAccount `
+    -Name              $storageAccountName `
+    -Location          $storageAccountLocation `
+    -ResourceGroupName $resourceGroupName `
+    -SkuName           'Standard_LRS';
 
-[System.DateTime]::Now.ToString()
-
-[System.Media.SystemSounds]::Beep.Play()
-
+[System.DateTime]::Now.ToString();
+[System.Media.SystemSounds]::Beep.Play();
 
 '
-Get the primary access key for your storage account.
-'
+Get the access key for your storage account.
+';
 
+$accessKey_ForStorageAccount = `
+    (Get-AzureRmStorageAccountKey `
+        -Name              $storageAccountName `
+        -ResourceGroupName $resourceGroupName
+        ).Value[0];
 
-$primaryAccessKey_ForStorageAccount = `
-    (Get-AzureStorageKey `
-        -StorageAccountName $storageAccountName).Primary
-
-"`$primaryAccessKey_ForStorageAccount = $primaryAccessKey_ForStorageAccount"
+"`$accessKey_ForStorageAccount = $accessKey_ForStorageAccount";
 
 'Azure Storage Account cmdlet completed.
 Remainder of PowerShell .ps1 script continues.
-'
+';
 
 #--------------- 6 -----------------------
-
 
 # The context will be needed to create a container within the storage account.
 
 'Create a context object from the storage account and its primary access key.
-'
+';
 
 $context = New-AzureStorageContext `
     -StorageAccountName $storageAccountName `
-    -StorageAccountKey  $primaryAccessKey_ForStorageAccount
-
+    -StorageAccountKey  $accessKey_ForStorageAccount;
 
 'Create a container within the storage account.
-'
-
+';
 
 $containerObjectInStorageAccount = New-AzureStorageContainer `
     -Name    $containerName `
-    -Context $context
-
+    -Context $context;
 
 'Create a security policy to be applied to the SAS token.
-'
+';
 
 New-AzureStorageContainerStoredAccessPolicy `
     -Container  $containerName `
@@ -203,42 +184,41 @@ New-AzureStorageContainerStoredAccessPolicy `
     -Policy     $policySasToken `
     -Permission $policySasPermission `
     -ExpiryTime $policySasExpiryTime `
-    -StartTime  $policySasStartTime 
+    -StartTime  $policySasStartTime;
 
 '
 Generate a SAS token for the container.
-'
+';
 Try
 {
     $sasTokenWithPolicy = New-AzureStorageContainerSASToken `
         -Name    $containerName `
         -Context $context `
-        -Policy  $policySasToken
+        -Policy  $policySasToken;
 }
 Catch 
 {
-    $Error[0].Exception.ToString()
+    $Error[0].Exception.ToString();
 }
 
 #-------------- 7 ------------------------
 
-
 'Display the values that YOU must edit into the Transact-SQL script next!:
-'
+';
 
-"storageAccountName: $storageAccountName"
-"containerName:      $containerName"
-"sasTokenWithPolicy: $sasTokenWithPolicy"
+"storageAccountName: $storageAccountName";
+"containerName:      $containerName";
+"sasTokenWithPolicy: $sasTokenWithPolicy";
 
 '
 REMINDER: sasTokenWithPolicy here might start with "?" character, which you must exclude from Transact-SQL.
-'
+';
 
 '
-(Later, return here to delete your Azure Storage account. See the preceding - Remove-AzureStorageAccount -StorageAccountName $storageAccountName)'
+(Later, return here to delete your Azure Storage account. See the preceding  Remove-AzureRmStorageAccount -Name $storageAccountName)';
 
 '
-Now shift to the Transact-SQL portion of the two-part code sample!'
+Now shift to the Transact-SQL portion of the two-part code sample!';
 
 # EOFile
 ```
@@ -246,7 +226,7 @@ Now shift to the Transact-SQL portion of the two-part code sample!'
 
 스크립트가 종료될 때 PowerShell 스크립트가 인쇄하는 몇 가지 명명된 값을 기록해 둡니다. 다음 2단계에서 Transact-SQL 스크립트로 해당 값을 편집해야 합니다.
 
-## <a name="phase-2-transact-sql-code-that-uses-azure-storage-container"></a>2단계: Azure 저장소 컨테이너를 사용하는 Transact-SQL 코드
+## <a name="phase-2-transact-sql-code-that-uses-azure-storage-container"></a>2단계: Azure Storage 컨테이너를 사용하는 Transact-SQL 코드
 
 * 이 코드 샘플의 1단계에서 Azure Storage 컨테이너를 만드는 PowerShell 스크립트를 실행했습니다.
 * 다음으로, 2단계에서 다음 Transact-SQL 스크립트는 컨테이너를 사용해야 합니다.
@@ -270,7 +250,7 @@ PowerShell 스크립트가 종료될 때 몇 가지 명명된 값을 인쇄했�
 ### <a name="transact-sql-code"></a>Transact-SQL 코드
 
 ```sql
----- TODO: First, run the PowerShell portion of this two-part code sample.
+---- TODO: First, run the earlier PowerShell portion of this two-part code sample.
 ---- TODO: Second, find every 'TODO' in this Transact-SQL file, and edit each.
 
 ---- Transact-SQL code for Event File target on Azure SQL Database.
@@ -537,22 +517,22 @@ Microsoft SQL Server에서 위의 Transact-SQL 샘플을 실행하는 경우를 
 * **CREATE MASTER KEY** 및 **CREATE CREDENTIAL**에는 Transact-SQL 종류의 문이 필요하지 않습니다.
 * **CREATE EVENT SESSION** 문의 **ADD TARGET** 절에서 **filename=**에 지정된 Http 값을 **C:\myfile.xel**와 같은 전체 경로 문자열로 바꾸겠습니다.
   
-  * Azure 저장소 계정은 사용하지 않습니다.
+  * Azure Storage 계정은 사용하지 않습니다.
 
 ## <a name="more-information"></a>자세한 정보
 
-Azure 저장소 서비스에서 계정 및 컨테이너에 대한 자세한 내용은 다음을 참조하세요.
+Azure Storage 서비스에서 계정 및 컨테이너에 대한 자세한 내용은 다음을 참조하세요.
 
-* [.NET에서 Blob 저장소를 사용하는 방법](../storage/storage-dotnet-how-to-use-blobs.md)
+* [.NET에서 Blob 저장소를 사용하는 방법](../storage/blobs/storage-dotnet-how-to-use-blobs.md)
 * [컨테이너, BLOB, 메타데이터 이름 명명 및 참조](http://msdn.microsoft.com/library/azure/dd135715.aspx)
 * [루트 컨테이너 사용](http://msdn.microsoft.com/library/azure/ee395424.aspx)
 * [단원 1: Azure 컨테이너에 저장된 액세스 정책 및 공유 액세스 서명 만들기](http://msdn.microsoft.com/library/dn466430.aspx)
   * [단원 2: 공유 액세스 서명을 사용하여 SQL Server 자격 증명 만들기](http://msdn.microsoft.com/library/dn466435.aspx)
+* [Microsoft SQL Server의 확장 이벤트](https://docs.microsoft.com/sql/relational-databases/extended-events/extended-events).
 
 <!--
 Image references.
 -->
 
 [30_powershell_ise]: ./media/sql-database-xevent-code-event-file/event-file-powershell-ise-b30.png
-
 

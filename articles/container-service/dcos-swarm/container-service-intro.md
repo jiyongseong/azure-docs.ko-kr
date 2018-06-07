@@ -1,31 +1,23 @@
 ---
-title: "Azure 클라우드에서 Docker 컨테이너 호스트 | Microsoft Docs"
-description: "Azure 컨테이너 서비스는 컨테이너화된 응용 프로그램을 실행하는 미리 구성된 가상 컴퓨터의 클러스터를 간단히 만들고 구성하고 관리하는 방법을 제공합니다."
+title: Azure 클라우드에서 Docker 컨테이너 호스팅
+description: Azure 컨테이너 서비스는 컨테이너화된 응용 프로그램을 실행하는 미리 구성된 가상 머신의 클러스터를 간단히 만들고 구성하고 관리하는 방법을 제공합니다.
 services: container-service
-documentationcenter: 
 author: rgardler
-manager: timlt
-editor: 
-tags: acs, azure-container-service
-keywords: "Docker, 컨테이너, 마이크로 서비스, Mesos, Azure"
-ms.assetid: 52da4163-1182-4b2e-be00-4951e5c1da16
+manager: jeconnoc
 ms.service: container-service
-ms.devlang: na
-ms.topic: get-started-article
-ms.tgt_pltfrm: na
-ms.workload: na
+ms.topic: overview
 ms.date: 03/01/2017
 ms.author: rogardle
-ms.custom: H1Hack27Feb2017
+ms.custom: H1Hack27Feb2017, mvc
+ms.openlocfilehash: d89e9b4dcfe44648f1e3ddd95fb01b62a36295df
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: bfd49ea68c597b109a2c6823b7a8115608fa26c3
-ms.openlocfilehash: d51f0fab9cd7904071c70f23aa6e424682b4b667
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="introduction-to-docker-container-hosting-solutions-with-azure-container-service"></a>Azure Container Service를 사용한 Docker 컨테이너 호스팅 소개 
-Azure 컨테이너 서비스를 사용하면 컨테이너화된 응용 프로그램을 실행하는 미리 구성된 가상 컴퓨터의 클러스터를 보다 간편하게 만들고 구성하고 관리할 수 있습니다. Azure 컨테이너 서비스는 일반적인 오픈 소스 예약 및 오케스트레이션 도구의 최적화된 구성을 사용합니다. 이를 통해 기존 기술을 사용하거나 크고 확장된 커뮤니티 전문 지식의 본문을 이용하여 Microsoft Azure의 컨테이너 기반 응용 프로그램을 배포하고 관리할 수 있습니다.
+
+Azure 컨테이너 서비스를 사용하면 컨테이너화된 응용 프로그램을 실행하는 미리 구성된 가상 머신의 클러스터를 보다 간편하게 만들고 구성하고 관리할 수 있습니다. Azure 컨테이너 서비스는 일반적인 오픈 소스 예약 및 오케스트레이션 도구의 최적화된 구성을 사용합니다. 이를 통해 기존 기술을 사용하거나 크고 확장된 커뮤니티 전문 지식의 본문을 이용하여 Microsoft Azure의 컨테이너 기반 응용 프로그램을 배포하고 관리할 수 있습니다.
 
 ![Azure 컨테이너 서비스는 Azure의 여러 호스트에서 컨테이너화된 응용 프로그램을 관리하는 방법을 제공합니다.](./media/acs-intro/acs-cluster-new.png)
 
@@ -94,7 +86,7 @@ Kubernetes는 인기 있는 프로덕션급 오픈 소스 컨테이너 오케스
 * API 기반 자동화된 롤아웃 및 롤백
 * 자동 복구
 
-## <a name="videos"></a>비디오
+## <a name="videos"></a>동영상
 Azure Container Service 시작(101):  
 
 > [!VIDEO https://channel9.msdn.com/Shows/Azure-Friday/Azure-Container-Service-101/player]

@@ -1,33 +1,26 @@
 ---
-title: "Azure SQL 데이터 웨어하우스용 PowerShell cmdlet"
-description: "데이터베이스를 일시 중지하고 다시 시작하는 방법을 포함하여 Azure SQL 데이터 웨어하우스용 PowerShell cmdlet을 확인합니다."
+title: Azure SQL Data Warehouse용 PowerShell cmdlet
+description: 데이터베이스를 일시 중지하고 다시 시작하는 방법을 포함하여 Azure SQL Data Warehouse용 PowerShell cmdlet을 확인합니다.
 services: sql-data-warehouse
-documentationcenter: NA
 author: kevinvngo
-manager: jhubbard
-editor: 
-ms.assetid: 6f0d5772-f05f-4cc8-9749-4adb153dfd50
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: reference
-ms.date: 10/31/2016
-ms.author: kevin;barbkess
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 538f282b28e5f43f43bf6ef28af20a4d8daea369
-ms.openlocfilehash: d30a49a79e74c575dd6daba9a260c18822a26462
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/07/2017
-
-
+ms.topic: conceptual
+ms.component: manage
+ms.date: 04/17/2018
+ms.author: kevin
+ms.reviewer: igorstan
+ms.openlocfilehash: 43bf1bcb1ccbb82fc15cddde85e06cac0abfd9c7
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
-# <a name="powershell-cmdlets-and-rest-apis-for-sql-data-warehouse"></a>SQL 데이터 웨어하우스용 PowerShell cmdlet 및 REST API
-많은 SQL 데이터 웨어하우스 관리 작업을 Azure PowerShell cmdlet 또는 REST API를 사용하여 관리할 수 있습니다.  다음은 PowerShell 명령을 사용하여 SQL 데이터 웨어하우스의 일반적인 작업을 자동화하는 방법에 대한 몇 가지 예제입니다.  유용한 REST 예제는 [REST를 사용하여 확장성 관리][Manage scalability with REST] 문서를 참조하세요.
+# <a name="powershell-cmdlets-and-rest-apis-for-sql-data-warehouse"></a>SQL Data Warehouse용 PowerShell cmdlet 및 REST API
+많은 SQL Data Warehouse 관리 작업을 Azure PowerShell cmdlet 또는 REST API를 사용하여 관리할 수 있습니다.  다음은 PowerShell 명령을 사용하여 SQL Data Warehouse의 일반적인 작업을 자동화하는 방법에 대한 몇 가지 예제입니다.  유용한 REST 예제는 [REST를 사용하여 확장성 관리][Manage scalability with REST] 문서를 참조하세요.
 
 > [!NOTE]
-> SQL 데이터 웨어하우스에서 Azure PowerShell을 사용하려면 Azure PowerShell 버전 1.0.3 이상을 설치해야 합니다.  **Get-Module -ListAvailable -Name Azure**를 실행하여 버전을 확인할 수 있습니다.  최신 버전은 [Microsoft 웹 플랫폼 설치 관리자][Microsoft Web Platform Installer]를 통해 설치할 수 있습니다.  최신 버전 설치에 대한 자세한 내용은 [Azure PowerShell 설치 및 구성 방법][How to install and configure Azure PowerShell]을 참조하세요.
+> SQL Data Warehouse에서 Azure PowerShell을 사용하려면 Azure PowerShell 버전 1.0.3 이상을 설치해야 합니다.  **Get-Module -ListAvailable -Name Azure**를 실행하여 버전을 확인할 수 있습니다.  최신 버전은 [Microsoft 웹 플랫폼 설치 관리자][Microsoft Web Platform Installer]를 통해 설치할 수 있습니다.  최신 버전 설치에 대한 자세한 내용은 [Azure PowerShell 설치 및 구성 방법][How to install and configure Azure PowerShell]을 참조하세요.
 > 
 > 
 
@@ -36,12 +29,12 @@ ms.lasthandoff: 04/07/2017
 2. PowerShell 프롬프트에서 다음 명령을 실행하여 Azure Resource Manager에 로그인하고 구독을 선택합니다.
    
     ```PowerShell
-    Login-AzureRmAccount
+    Connect-AzureRmAccount
     Get-AzureRmSubscription
     Select-AzureRmSubscription -SubscriptionName "MySubscription"
     ```
 
-## <a name="pause-sql-data-warehouse-example"></a>SQL 데이터 웨어하우스 일시 중지 예제
+## <a name="pause-sql-data-warehouse-example"></a>SQL Data Warehouse 일시 중지 예제
 "Server01."라는 서버에서 호스트하는 "Database02"라는 데이터베이스를 일시 중지합니다.  서버는 "ResourceGroup1."이라는 Azure 리소스 그룹 내에 있습니다.
 
 ```Powershell
@@ -55,7 +48,7 @@ $resultDatabase = $database | Suspend-AzureRmSqlDatabase
 $resultDatabase
 ```
 
-## <a name="start-sql-data-warehouse-example"></a>SQL 데이터 웨어하우스 시작 예제
+## <a name="start-sql-data-warehouse-example"></a>SQL Data Warehouse 시작 예제
 "Server01."이라는 서버에서 호스트하는 "Database02"라는 데이터베이스의 작동을 다시 시작합니다. 서버는 "ResourceGroup1."이라는 리소스 그룹 내에 있습니다.
 
 ```Powershell
@@ -100,7 +93,7 @@ PowerShell로 자동화할 수 있는 다른 작업은 [Azure SQL Database Cmdle
 
 <!--Article references-->
 [How to install and configure Azure PowerShell]: /powershell/azureps-cmdlets-docs
-[Create a SQL Data Warehouse using PowerShell]: ./sql-data-warehouse-get-started-provision-powershell.md
+[Create a SQL Data Warehouse using PowerShell]: ./create-data-warehouse-powershell.md
 [Database restore]: ./sql-data-warehouse-restore-database-powershell.md
 [Manage scalability with REST]: ./sql-data-warehouse-manage-compute-rest-api.md
 
@@ -121,4 +114,3 @@ PowerShell로 자동화할 수 있는 다른 작업은 [Azure SQL Database Cmdle
 
 <!--Other Web references-->
 [Microsoft Web Platform Installer]: https://aka.ms/webpi-azps
-

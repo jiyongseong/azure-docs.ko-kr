@@ -1,9 +1,9 @@
 ---
-title: "Application Insights를 사용하여 SharePoint 사이트 모니터링"
-description: "새 계측 키를 사용하여 새 응용 프로그램 모니터링 시작"
+title: Application Insights를 사용하여 SharePoint 사이트 모니터링
+description: 새 계측 키를 사용하여 새 응용 프로그램 모니터링 시작
 services: application-insights
-documentationcenter: 
-author: CFreemanwa
+documentationcenter: ''
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 2bfe5910-d673-4cf6-a5c1-4c115eae1be0
 ms.service: application-insights
@@ -11,14 +11,13 @@ ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: get-started-article
-ms.date: 03/24/2016
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 41ce9b0e323c0938b6db98b99d8d687d1ed0f0ef
-ms.openlocfilehash: 3977cbc0f111de39621a875cce2d6714559a73fd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
+ms.date: 04/01/2018
+ms.author: mbullwin
+ms.openlocfilehash: 9eb7f74a365b51431aabd78de3c6d36c3c969bb6
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="monitor-a-sharepoint-site-with-application-insights"></a>Application Insights를 사용하여 SharePoint 사이트 모니터링
 Azure Application Insights는 응용 프로그램의 가용성, 성능 및 사용량을 모니터링합니다. 여기에서는 SharePoint 사이트에 맞게 설정하는 방법을 알아봅니다.
@@ -26,14 +25,30 @@ Azure Application Insights는 응용 프로그램의 가용성, 성능 및 사�
 ## <a name="create-an-application-insights-resource"></a>Application Insights 리소스 만들기
 [Azure 포털](https://portal.azure.com)에서 새 Application Insights 리소스를 만듭니다. 응용 프로그램 유형으로 ASP.NET을 선택합니다.
 
-![속성 클릭, 키 선택 및 ctrl+C 누르기](./media/app-insights-sharepoint/01-new.png)
+![속성 클릭, 키 선택 및 ctrl+C 누르기](./media/app-insights-sharepoint/001.png)
 
-열리는 블레이드에서 앱의 성능 및 사용 데이터를 볼 수 있습니다. 다음에 Azure에 로그인할 때 다시 이 블레이드로 돌아가려면 시작 화면에서 해당 타일을 찾아야 합니다. 또는 찾아보기를 클릭하여 찾아야 합니다.
+열리는 창에서 앱의 성능 및 사용 데이터를 볼 수 있습니다. 다음에 Azure에 로그인할 때 다시 이 블레이드로 돌아가려면 시작 화면에서 해당 타일을 찾아야 합니다. 또는 찾아보기를 클릭하여 찾아야 합니다.
 
-## <a name="add-our-script-to-your-web-pages"></a>웹 페이지에 스크립트 추가
-빠른 시작에서 웹 페이지용 스크립트를 가져옵니다.
+## <a name="add-the-script-to-your-web-pages"></a>웹 페이지에 스크립트 추가
 
-![](./media/app-insights-sharepoint/02-monitor-web-page.png)
+```HTML
+<!-- 
+To collect end-user usage analytics about your application, 
+insert the following script into each page you want to track.
+Place this code immediately before the closing </head> tag,
+and before any other scripts. Your first data will appear 
+automatically in just a few seconds.
+-->
+<script type="text/javascript">
+var appInsights=window.appInsights||function(a){
+  function b(a){c[a]=function(){var b=arguments;c.queue.push(function(){c[a].apply(c,b)})}}var c={config:a},d=document,e=window;setTimeout(function(){var b=d.createElement("script");b.src=a.url||"https://az416426.vo.msecnd.net/scripts/a/ai.0.js",d.getElementsByTagName("script")[0].parentNode.appendChild(b)});try{c.cookie=d.cookie}catch(a){}c.queue=[];for(var f=["Event","Exception","Metric","PageView","Trace","Dependency"];f.length;)b("track"+f.pop());if(b("setAuthenticatedUserContext"),b("clearAuthenticatedUserContext"),b("startTrackEvent"),b("stopTrackEvent"),b("startTrackPage"),b("stopTrackPage"),b("flush"),!a.disableExceptionTracking){f="onerror",b("_"+f);var g=e[f];e[f]=function(a,b,d,e,h){var i=g&&g(a,b,d,e,h);return!0!==i&&c["_"+f](a,b,d,e,h),i}}return c
+  }({
+      instrumentationKey:"<your instrumentation key>"
+  });
+  
+window.appInsights=appInsights,appInsights.queue&&0===appInsights.queue.length&&appInsights.trackPageView();
+</script>
+```
 
 추적하려는 모든 페이지의 &lt;/head&gt; 태그 바로 앞에 스크립트를 삽입합니다. 웹 사이트에 마스터 페이지가 있는 경우 이 페이지에 스크립트를 넣을 수 있습니다. 예를 들어 ASP.NET MVC 프로젝트에서는 View\Shared\_Layout.cshtml에 추가합니다.
 
@@ -145,6 +160,5 @@ function onRequestFail(sender, args) {
 * [Application Insights](app-insights-overview.md) 
 
 <!--Link references-->
-
 
 

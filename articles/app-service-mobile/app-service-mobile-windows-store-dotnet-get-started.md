@@ -3,8 +3,8 @@ title: "Mobile Apps에서 사용하는 UWP(유니버설 Windows 플랫폼) 만�
 description: "이 자습서에 따라 Azure 모바일 앱 백 엔드를 사용하여 C#, Visual Basic 또는 JavaScript로 UWP(범용 Windows 플랫폼) 앱 개발을 시작할 수 있습니다."
 services: app-service\mobile
 documentationcenter: windows
-author: ggailey777
-manager: syntaxc4
+author: conceptdev
+manager: crdun
 editor: 
 ms.assetid: 47124296-2908-4d92-85e0-05c4aa6db916
 ms.service: app-service-mobile
@@ -13,19 +13,18 @@ ms.tgt_pltfrm: mobile-windows
 ms.devlang: dotnet
 ms.topic: hero-article
 ms.date: 10/01/2016
-ms.author: glenga
+ms.author: crdun
+ms.openlocfilehash: 508989e0e2daeac7922d61ff692ee4579139cfc8
+ms.sourcegitcommit: df4ddc55b42b593f165d56531f591fdb1e689686
 ms.translationtype: HT
-ms.sourcegitcommit: 99523f27fe43f07081bd43f5d563e554bda4426f
-ms.openlocfilehash: 5408e032670dda7f149c442e08f52b02abe23f05
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/05/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/04/2018
 ---
 # <a name="create-a-windows-app"></a>Windows 앱 만들기
 [!INCLUDE [app-service-mobile-selector-get-started](../../includes/app-service-mobile-selector-get-started.md)]
 
 ## <a name="overview"></a>개요
-이 자습서에서는 UWP(범용 Windows 플랫폼) 앱에 클라우드 기반 백 엔드 서비스를 추가하는 방법을 보여 줍니다. 자세한 내용은 [모바일 앱 정의](app-service-mobile-value-prop.md)를 참조하세요. 다음은 완성된 앱의 화면 캡처입니다.
+이 자습서에서는 UWP(범용 Windows 플랫폼) 앱에 클라우드 기반 백 엔드 서비스를 추가하는 방법을 보여 줍니다. 자세한 내용은 [Mobile Apps 정의](app-service-mobile-value-prop.md)를 참조하세요. 다음은 완성된 앱의 화면 캡처입니다.
 
 ![완료된 데스크톱 앱](./media/app-service-mobile-windows-store-dotnet-get-started/mobile-quickstart-completed-desktop.png)   
 데스크톱에서 실행
@@ -35,7 +34,7 @@ ms.lasthandoff: 08/05/2017
 
 먼저 이 자습서를 완료해야만 UWP 앱용 다른 모든 모바일 앱 자습서를 학습할 수 있습니다.
 
-## <a name="prerequisites"></a>필수 조건
+## <a name="prerequisites"></a>필수 구성 요소
 이 자습서를 완료하려면 다음이 필요합니다.
 
 * 활성 Azure 계정. 계정이 없는 경우 Azure 평가판을 등록하고 최대 10개의 무료 모바일 앱을 가져올 수 있습니다. 이러한 앱은 평가판 사용 기간이 끝난 후에도 계속 사용할 수 있습니다. 자세한 내용은 [Azure 무료 체험](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
@@ -74,7 +73,7 @@ ms.lasthandoff: 08/05/2017
 * [앱에 인증 추가](app-service-mobile-windows-store-dotnet-get-started-users.md)  
   ID 공급자를 사용하여 앱 사용자를 인증하는 방법을 알아봅니다.
 * [앱에 푸시 알림 추가](app-service-mobile-windows-store-dotnet-get-started-push.md)  
-  앱에 푸시 알림 지원을 추가하고 모바일 앱 백 엔드를 구성하여 푸시 알림을 보내는 Azure 알림 허브를 사용하는 방법을 알아봅니다.
+  앱에 푸시 알림 지원을 추가하고 모바일 앱 백 엔드를 구성하여 푸시 알림을 보내는 Azure Notification Hubs를 사용하는 방법을 알아봅니다.
 * [앱에 오프라인 동기화 사용](app-service-mobile-windows-store-dotnet-get-started-offline-data.md)  
   모바일 앱 백 엔드를 사용하여 앱에 오프라인 지원을 추가하는 방법을 알아봅니다. 오프라인 동기화를 사용하면 최종 사용자는 네트워크에 연결되어 있지 않을 때도 모바일 앱&mdash;데이터 보기, 추가 또는 수정&mdash;과 같은 상호 작용을 수행할 수 있습니다.
 
@@ -84,4 +83,3 @@ ms.lasthandoff: 08/05/2017
 [Mobile App SDK]: http://go.microsoft.com/fwlink/?LinkId=257545
 [Azure portal]: https://portal.azure.com/
 [Visual Studio Community 2015]: https://go.microsoft.com/fwLink/p/?LinkID=534203
-

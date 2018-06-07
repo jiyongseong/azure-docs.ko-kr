@@ -15,18 +15,17 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 07/18/2016
 ms.author: jehollan; LADocs
-translationtype: Human Translation
-ms.sourcegitcommit: 757d6f778774e4439f2c290ef78cbffd2c5cf35e
-ms.openlocfilehash: a881336bcb2384aaa57a75483c0e6fcd97096905
-ms.lasthandoff: 04/10/2017
-
-
+ms.openlocfilehash: 0487dbedddee684c75420bd66effe2c963a18624
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="get-started-with-the-http--swagger-action"></a>HTTP + Swagger 동작 시작
 
 논리 앱 워크플로에서 HTTP + Swagger 동작을 사용할 경우 [Swagger 문서](https://swagger.io)를 통해 REST 끝점에 대한 최고급 커넥터를 만들 수 있습니다. 최고급 논리 앱 디자이너 환경이 있는 모든 REST 끝점을 호출하도록 Logic Apps를 확장할 수도 있습니다.
 
-커넥터로 Logic Apps를 만드는 방법을 알아보려면 [새 논리 앱 만들기](../logic-apps/logic-apps-create-a-logic-app.md)를 참조하세요.
+커넥터로 Logic Apps를 만드는 방법을 알아보려면 [새 논리 앱 만들기](../logic-apps/quickstart-create-first-logic-app-workflow.md)를 참조하세요.
 
 ## <a name="use-http--swagger-as-a-trigger-or-an-action"></a>HTTP + Swagger를 트리거 또는 동작으로 사용합니다.
 
@@ -56,7 +55,7 @@ HTTP + Swagger 트리거 및 동작은 [HTTP 동작](connectors-native-http.md)�
 
 Azure Storage에서 Swagger를 생성, 구성 및 저장하는 단계는 다음과 같습니다.
 
-1. [Azure Blob 저장소를 사용하여 Azure Storage 계정을 만듭니다](../storage/storage-create-storage-account.md). 이 단계를 수행하려면 **공용 액세스**에 대한 사용 권한을 설정합니다.
+1. [Azure Blob 저장소를 사용하여 Azure Storage 계정을 만듭니다](../storage/common/storage-create-storage-account.md). 이 단계를 수행하려면 **공용 액세스**에 대한 사용 권한을 설정합니다.
 
 2. Blob에 대해 CORS를 사용하도록 설정합니다. 
 
@@ -85,7 +84,7 @@ Azure Storage에서 Swagger를 생성, 구성 및 저장하는 단계는 다음�
 ## <a name="http--swagger-actions"></a>HTTP + Swagger 동작
 동작은 논리 앱에 정의된 워크플로에 의해 수행되는 작업입니다. [작업에 대해 자세히 알아봅니다.](connectors-overview.md) HTTP + Swagger 커넥터에는 1개의 가능한 동작이 있습니다.
 
-| 작업 | 설명 |
+| 조치 | 설명 |
 | --- | --- |
 | HTTP + Swagger |HTTP 호출을 수행하고 응답 콘텐츠를 반환합니다. |
 
@@ -100,9 +99,9 @@ Swagger 메타데이터를 지원하는 HTTP 아웃바운드 요청을 만듭니
 | --- | --- | --- |
 | Method* |메서드 |사용할 HTTP 동사 |
 | URI* |uri |HTTP 요청에 대한 URI |
-| 헤더 |헤더 |포함할 HTTP 헤더의 JSON 개체 |
+| 헤더 |headers |포함할 HTTP 헤더의 JSON 개체 |
 | 본문 |본문 |HTTP 요청 본문 |
-| 인증 |authentication |요청에 사용할 인증 자세한 내용은 [HTTP 커넥터](connectors-native-http.md#authentication)를 참조하세요. |
+| 인증 |인증 |요청에 사용할 인증 자세한 내용은 [HTTP 커넥터](connectors-native-http.md#authentication)를 참조하세요. |
 
 **출력 세부 정보**
 
@@ -130,5 +129,5 @@ HTTP 응답
 - - -
 ## <a name="next-steps"></a>다음 단계
 
-* [논리 앱 만들기](../logic-apps/logic-apps-create-a-logic-app.md)
+* [논리 앱 만들기](../logic-apps/quickstart-create-first-logic-app-workflow.md)
 * [다른 커넥터 찾기](apis-list.md)

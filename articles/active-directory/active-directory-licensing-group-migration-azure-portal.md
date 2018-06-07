@@ -1,31 +1,25 @@
 ---
-
-title: "Azure Active Directory에서 개별 라이선스 사용자를 그룹으로 마이그레이션하는 방법 | Microsoft Docs"
-description: "Azure Active Directory를 사용하여 개별 라이선스 사용자를 그룹 기반 라이선스로 전환하는 방법"
+title: Azure Active Directory에서 사용자 라이선스 사용자를 그룹 기반 라이선스로 마이그레이션 | Microsoft Docs
+description: Azure Active Directory를 사용하여 개별 라이선스 사용자를 그룹 기반 라이선스로 전환하는 방법
 services: active-directory
-keywords: "Azure AD 라이선스"
-documentationcenter: 
+keywords: Azure AD 라이선스
+documentationcenter: ''
 author: curtand
-manager: femila
-editor: 
-ms.assetid: 
+manager: mtillman
+editor: ''
 ms.service: active-directory
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 06/05/2017
+ms.component: users-groups-roles
+ms.date: 01/14/2018
 ms.author: curtand
-ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 72b2d9142479f9ba0380c5bd2dd82734e370dee7
-ms.openlocfilehash: d7c5ba12738c4713517743ae8c44e236c5e1a210
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/08/2017
-
-
+ms.custom: seohack1
+ms.openlocfilehash: ed95ba1329ba3052fab3d81327d23475e9902d8a
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
-
 # <a name="how-to-add-licensed-users-to-a-group-for-licensing-in-azure-active-directory"></a>Azure Active Directory에서 라이선스에 대해 라이선스 사용자를 그룹에 추가하는 방법
 
 개별 사용자에게 라이선스를 할당하기 위해 "직접 할당"을 통해, 즉 PowerShell 스크립트 또는 기타 도구를 사용하여 조직의 사용자에게 기존 라이선스가 배포되었을 수 있습니다. 조직에서 그룹 기반 라이선스를 사용하여 라이선스를 관리하려는 경우 기존 솔루션을 그룹 기반 라이선스로 원활하게 대체하기 위한 마이그레이션 계획이 필요하게 됩니다.
@@ -93,4 +87,3 @@ ms.lasthandoff: 03/08/2017
 * [Azure Active Directory의 그룹 기반 라이선스란?](active-directory-licensing-whatis-azure-portal.md)
 * [Azure Active Directory에서 그룹에 대한 라이선스 문제 식별 및 해결](active-directory-licensing-group-problem-resolution-azure-portal.md)
 * [Azure Active Directory 그룹 기반 라이선스 추가 시나리오](active-directory-licensing-group-advanced.md)
-

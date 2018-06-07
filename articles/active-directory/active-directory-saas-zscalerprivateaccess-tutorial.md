@@ -1,10 +1,10 @@
 ---
-title: "자습서: Azure Active Directory와 ZPA(Zscaler Private Access) 통합 | Microsoft Docs"
-description: "Azure Active Directory 및 ZPA(Zscaler Private Access) 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Azure Active Directory와 ZPA(Zscaler Private Access) 통합 | Microsoft Docs'
+description: Azure Active Directory 및 ZPA(Zscaler Private Access) 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: 83711115-1c4f-4dd7-907b-3da24b37c89e
 ms.service: active-directory
 ms.workload: identity
@@ -13,12 +13,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 02/06/2017
 ms.author: jeedes
-translationtype: Human Translation
-ms.sourcegitcommit: c81f23603cfbbc916c148c61bd3de52ef1db36ac
-ms.openlocfilehash: 5c598bfa5b6725d21a89df54dbcb3314cc631d80
-ms.lasthandoff: 02/15/2017
-
-
+ms.openlocfilehash: 1d5434c57a95e53e4fe37c33f3fe11585fc3177f
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-zscaler-private-access-zpa"></a>자습서: Azure Active Directory와 ZPA(Zscaler Private Access) 통합
 
@@ -30,7 +29,7 @@ ZPA(Zscaler Private Access)를 Azure AD와 통합하면 다음과 같은 이점�
 - 사용자가 해당 Azure AD 계정으로 ZPA(Zscaler Private Access)에 자동으로 로그온(Single Sign-on)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure 관리 포털에서 계정을 관리할 수 있습니다.
 
-Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](active-directory-appssoaccess-whatis.md)을 참조하세요.
+Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](manage-apps/what-is-single-sign-on.md)을 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -47,7 +46,7 @@ ZPA(Zscaler Private Access)와 Azure AD 통합을 구성하려면 다음 항목�
 이 자습서의 단계를 테스트하려면 다음 권장 사항을 준수해야 합니다.
 
 - 꼭 필요한 경우가 아니면 프로덕션 환경을 사용하지 않도록 합니다.
-- Azure AD 평가판 환경이 없으면 [여기](https://azure.microsoft.com/pricing/free-trial/)에서&1;개월 평가판을 얻을 수 있습니다.
+- Azure AD 평가판 환경이 없으면 [여기](https://azure.microsoft.com/pricing/free-trial/)에서 1개월 평가판을 얻을 수 있습니다.
 
 
 ## <a name="scenario-description"></a>시나리오 설명
@@ -62,7 +61,7 @@ ZPA(Zscaler Private Access)의 Azure AD 통합을 구성하려면 갤러리의 Z
 
 **갤러리에서 ZPA(Zscaler Private Access)를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure 관리 포털](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure 관리 포털](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Active Directory][1]
 
@@ -74,11 +73,11 @@ ZPA(Zscaler Private Access)의 Azure AD 통합을 구성하려면 갤러리의 Z
 
     ![응용 프로그램][3]
 
-4. 검색 상자에서 **ZPA(Zscaler Private Access)**를 입력합니다.
+4. 검색 상자에서 **ZPA(Zscaler Private Access)** 를 입력합니다.
 
     ![Azure AD 테스트 사용자 만들기](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_zscalerprivateaccess_001.png)
 
-5. 결과 창에서 **ZPA(Zscaler Private Access)**를 선택하고 **추가** 단추를 클릭하여 응용 프로그램을 추가합니다.
+5. 결과 창에서 **ZPA(Zscaler Private Access)** 를 선택하고 **추가** 단추를 클릭하여 응용 프로그램을 추가합니다.
 
     ![Azure AD 테스트 사용자 만들기](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_zscalerprivateaccess_0001.png)
 
@@ -92,11 +91,11 @@ Single Sign-On이 작동하려면 Azure AD에서 Azure AD 사용자에 해당하
 
 ZPA(Zscaler Private Access)에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구성 요소를 완료해야 합니다.
 
-1. **[Azure AD Single Sign-On 구성](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
-2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
+1. **[Configuring Azure AD Single Sign-On](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
+2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On 테스트하는 데 사용합니다.
 3. **[ZPA(Zscaler Private Access) 테스트 사용자 만들기](#creating-a-zscaler-private-access-(zpa)-test-user)** - Britta Simon의 Azure AD 표현과 연결된 해당 사용자를 ZPA(Zscaler Private Access)에 만듭니다.
 4. **[Azure AD 테스트 사용자 할당](#assigning-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Testing Single Sign-On](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
+5. **[Single Sign-On 테스트](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
 
 ### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -106,42 +105,42 @@ ZPA(Zscaler Private Access)에서 Azure AD Single Sign-On을 구성하고 테스
 
 1. Azure 관리 포털의 **ZPA(Zscaler Private Access)** 응용 프로그램 통합 페이지에서 **Single sign-on**을 클릭합니다.
 
-    ![Single Sign-On 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single sign on** 대화 상자에서 **모드**로 **SAML 기반 로그온**을 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-On 구성](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_general_300.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_general_300.png)
     
 3. **ZPA(Zscaler Private Access) 도메인 및 URL** 섹션에서 다음 단계를 수행합니다.
     
-    ![Single Sign-On 구성](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_zscalerprivateaccess_01.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_zscalerprivateaccess_01.png)
 
     a. **로그온 URL** 텍스트 상자에서 다음 패턴 `https://samlsp.private.zscaler.com/auth/login?domain=<your-domain-name>`을 사용하여 URL을 입력합니다.
 
-    b. **식별자** 텍스트 상자에 `https://samlsp.private.zscaler.com/auth/metadata`를 입력합니다.
+    나. **식별자** 텍스트 상자에 `https://samlsp.private.zscaler.com/auth/metadata`를 입력합니다.
 
     > [!NOTE] 
     > 이러한 값은 실제 값이 아닙니다. 실제 로그온 URL 및 식별자로 값을 업데이트해야 합니다. 식별자에는 고유한 URL 값을 사용하는 것이 좋습니다. 이러한 값을 얻으려면 [ZPA(Zscaler Private Access) 지원 팀](https://help.zscaler.com/zpa-submit-ticket)에 문의하세요.
 
 4. **SAML 서명 인증서** 섹션에서 **새 인증서 만들기**를 클릭합니다.
 
-    ![Single Sign-On 구성](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_general_400.png)     
+    ![Configure Single Sign-On](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_general_400.png)   
 
 5. **새 인증서 만들기** 대화 상자에서 달력 아이콘을 클릭하고 **만료 날짜**를 선택합니다. 그런 후 **저장** 단추를 클릭합니다.
 
-    ![Single Sign-On 구성](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_general_500.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_general_500.png)
 
 6. **SAML 서명 인증서** 섹션에서 **새 인증서 활성화**를 선택한 후 **저장** 단추를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_zscalerprivateaccess_02.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_zscalerprivateaccess_02.png)
 
 7. 팝업 **롤오버 인증서** 창에서 **확인**을 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_general_600.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_general_600.png)
 
 8. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 메타데이터 파일을 저장합니다.
 
-    ![Single Sign-On 구성](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_zscalerprivateaccess_03.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_zscalerprivateaccess_03.png) 
 
 9. 다른 웹 브라우저 창에서 관리자 권한으로 ZPA(Zscaler Private Access) 회사 사이트에 로그인합니다.
 
@@ -159,7 +158,7 @@ ZPA(Zscaler Private Access)에서 Azure AD Single Sign-On을 구성하고 테스
 
     a. **파일 선택**을 클릭하고 다운로드한 메타데이터 파일을 업로드합니다.
 
-    b. **저장** 단추를 클릭합니다.
+    나. **저장** 단추를 클릭합니다.
     
 
 
@@ -188,9 +187,9 @@ ZPA(Zscaler Private Access)에서 Azure AD Single Sign-On을 구성하고 테스
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다. 
 
@@ -213,9 +212,9 @@ ZPA(Zscaler Private Access)에서 Azure AD Single Sign-On을 구성하고 테스
 
     ![사용자 할당][201] 
 
-2. 응용 프로그램 목록에서 **ZPA(Zscaler Private Access)**를 선택합니다.
+2. 응용 프로그램 목록에서 **ZPA(Zscaler Private Access)** 를 선택합니다.
 
-    ![Single Sign-On 구성](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_zscalerprivateaccess_50.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-zscalerprivateaccess-tutorial/tutorial_zscalerprivateaccess_50.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -243,7 +242,7 @@ ZPA(Zscaler Private Access)에서 Azure AD Single Sign-On을 구성하고 테스
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 

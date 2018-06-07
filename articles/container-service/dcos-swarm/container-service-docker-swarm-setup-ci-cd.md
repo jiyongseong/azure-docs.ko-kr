@@ -1,27 +1,20 @@
 ---
-title: "Azure Container Service 및 Swarm을 사용한 CI/CD | Microsoft Docs"
-description: "Docker Swarm, Azure 컨테이너 레지스트리 및 Visual Studio Team Services와 Azure Container Service를 사용하여 다중 컨테이너 .NET Core 응용 프로그램 연속 배달"
+title: Azure Container Service 및 Swarm을 사용한 CI/CD
+description: Docker Swarm, Azure 컨테이너 레지스트리 및 Visual Studio Team Services와 Azure Container Service를 사용하여 다중 컨테이너 .NET Core 응용 프로그램 연속 배달
 services: container-service
-documentationcenter: " "
 author: jcorioland
-manager: pierlag
-tags: acs, azure-container-service
-keywords: "Docker, 컨테이너, 마이크로서비스, Swarm, Azure, Visual Studio Team Services, DevOps"
+manager: jeconnoc
 ms.service: container-service
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
 ms.date: 12/08/2016
 ms.author: jucoriol
+ms.custom: mvc
+ms.openlocfilehash: 81a07fdfe1c862bc30fb9d567db9a393c0610990
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: bfd49ea68c597b109a2c6823b7a8115608fa26c3
-ms.openlocfilehash: b6687b4e5df73e61acc599133e53385987742937
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-
 # <a name="full-cicd-pipeline-to-deploy-a-multi-container-application-on-azure-container-service-with-docker-swarm-using-visual-studio-team-services"></a>Visual Studio Team Services를 사용하여 Docker Swarm을 포함한 Azure Container Service에 있는 다중 컨테이너 응용 프로그램을 배포하는 전체 CI/CD 파이프라인
 
 클라우드를 위한 최신 응용 프로그램을 개발할 때 어려운 문제 중 하나는 이러한 응용 프로그램을 지속적으로 전달할 수 있다는 점입니다. 이 문서에서는 Docker Swarm, Azure 컨테이너 레지스트리, Visual Studio Team Services 빌드 및 릴리스 관리와 함께 Azure Container Service를 사용하여 전체 CI/CD(연속 통합 및 배포) 파이프라인을 구현하는 방법에 대해 알아봅니다.
@@ -170,7 +163,7 @@ CI/CD 파이프라인에 도달하기 전에 Azure의 컨테이너 레지스트�
 
     ![Visual Studio Team Services - 작성 파일 업데이트](./media/container-service-docker-swarm-setup-ci-cd/vsts-build-replace-build-number.png)
 
-    b. 릴리스에서 사용할 수 있도록 빌드 아티팩트인 업데이트된 작성 파일을 삭제하는 작업입니다. 자세한 내용은 다음과 같은 화면을 참조하세요.
+    나. 릴리스에서 사용할 수 있도록 빌드 아티팩트인 업데이트된 작성 파일을 삭제하는 작업입니다. 자세한 내용은 다음과 같은 화면을 참조하세요.
 
     ![Visual Studio Team Services - 작성 파일 게시](./media/container-service-docker-swarm-setup-ci-cd/vsts-publish-compose.png) 
 
@@ -230,4 +223,3 @@ Visual Studio Team Services를 사용하면 [환경에서 릴리스를 관리](h
 ## <a name="next-steps"></a>다음 단계
 
 * Visual Studio Team Services를 사용하는 CI/CD에 대한 자세한 내용은 [VSTS 빌드 개요](https://www.visualstudio.com/docs/build/overview)를 참조하세요.
-

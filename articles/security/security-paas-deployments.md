@@ -1,25 +1,24 @@
 ---
-title: "PaaS 배포 보안 | Microsoft Docs"
+title: PaaS 배포 보안 | Microsoft Docs
 description: " PaaS와 다른 클라우드 서비스 모델의 보안 이점을 이해하고 Azure PaaS 배포를 보호하기 위한 권장 사례에 대해 알아봅니다. "
 services: security
 documentationcenter: na
 author: techlake
 manager: MBaldwin
 editor: techlake
-ms.assetid: 
+ms.assetid: ''
 ms.service: security
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/21/2017
+ms.date: 11/21/2017
 ms.author: terrylan
-translationtype: Human Translation
-ms.sourcegitcommit: 1429bf0d06843da4743bd299e65ed2e818be199d
-ms.openlocfilehash: f218fe7e59e46683b544fd83bfea505b7cbe2d59
-ms.lasthandoff: 03/22/2017
-
-
+ms.openlocfilehash: f19c52629a997687692eef9bce2e13b2b7894052
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="securing-paas-deployments"></a>PaaS 배포 보안
 
@@ -88,12 +87,12 @@ PaaS 배포와 기존 온-프레미스 배포 간의 또 다른 중요한 차이
 
 - **키 또는 자격 증명을 잃지 마세요.** PaaS 배포를 보호하려면 키와 자격 증명을 반드시 안전하게 보호해야 합니다. 키와 자격 증명을 잃어 버리는 것은 일반적인 문제입니다. 좋은 해결 방법 중 하나는 HSM(하드웨어 보안 모듈)에 키와 비밀을 저장할 수 있는 중앙 집중식 솔루션을 사용하는 것입니다. Azure에서는 [Azure Key Vault](../key-vault/key-vault-whatis.md)를 사용하여 HSM을 클라우드에 제공하고 있습니다.
 - **원본 코드 또는 GitHub에 자격 증명 및 기타 비밀을 넣지 마세요.** 키 및 자격 증명을 잃어 버리는 것보다 나쁜 것은 권한이 없는 사람이 권한을 얻는 것입니다. 공격자는 봇 기술을 이용하여 GitHub와 같은 코드 리포지토리에 저장된 키와 비밀을 찾을 수 있습니다. 따라서 공개 원본 코드 리포지토리에 키와 비밀 정보를 넣지 두면 안됩니다.
-- **하이브리드 PaaS 및 IaaS 서비스에서 VM 관리 인터페이스를 보호합니다.** IaaS 및 PaaS 서비스는 VM(가상 컴퓨터)에서 실행됩니다. 서비스 종류에 따라 이러한 VM을 원격으로 직접 관리할 수 있는 몇 가지 관리 인터페이스를 사용할 수 있습니다. [SSH(보안 셸)](https://en.wikipedia.org/wiki/Secure_Shell), [RDP(원격 데스크톱 프로토콜)](https://support.microsoft.com/kb/186607) 및 [원격 PowerShell](https://msdn.microsoft.com/powershell/reference/5.1/microsoft.powershell.core/enable-psremoting)과 같은 원격 관리 프로토콜을 사용할 수 있습니다. 일반적으로 인터넷에서 VM에 대해 직접 원격 액세스를 사용하지 않는 것이 좋습니다. 가능하다면 Azure 가상 네트워크에 가상 사설망을 사용하는 것과 같은 다른 방법을 사용해야 합니다. 다른 방법을 사용할 수 없는 경우 복잡한 암호 구문을 사용하고, 가능한 경우 2단계 인증(예: [Azure Multi-Factor Authentication](../multi-factor-authentication/multi-factor-authentication.md))을 사용해야 합니다.
+- **하이브리드 PaaS 및 IaaS 서비스에서 VM 관리 인터페이스를 보호하세요.**  IaaS 및 PaaS 서비스는 VM(가상 머신)에서 실행됩니다. 서비스 종류에 따라 이러한 VM을 원격으로 직접 관리할 수 있는 몇 가지 관리 인터페이스를 사용할 수 있습니다. [SSH(보안 셸)](https://en.wikipedia.org/wiki/Secure_Shell), [RDP(원격 데스크톱 프로토콜)](https://support.microsoft.com/kb/186607) 및 [원격 PowerShell](https://msdn.microsoft.com/powershell/reference/5.1/microsoft.powershell.core/enable-psremoting)과 같은 원격 관리 프로토콜을 사용할 수 있습니다. 일반적으로 인터넷에서 VM에 대해 직접 원격 액세스를 사용하지 않는 것이 좋습니다. 가능하다면 Azure 가상 네트워크에 가상 사설망을 사용하는 것과 같은 다른 방법을 사용해야 합니다. 다른 방법을 사용할 수 없는 경우 복잡한 암호 구문을 사용하고, 가능한 경우 2단계 인증(예: [Azure Multi-Factor Authentication](../active-directory/authentication/multi-factor-authentication.md))을 사용해야 합니다.
 - **강력한 인증 및 권한 부여 플랫폼을 사용합니다.**
 
   - 사용자 지정 사용자 저장소 대신 Azure AD의 페더레이션 ID를 사용합니다. 페더레이션 ID를 사용하면 플랫폼 기반 접근 방식을 활용하고 권한 있는 ID 관리를 파트너에게 위임합니다. 페더레이션 ID 접근 방식은 직원이 해고되고 여러 ID와 권한 부여 시스템을 통해 정보를 반영해야 하는 경우에 특히 중요합니다.
   - 사용자 지정 코드 대신 플랫폼에서 제공하는 인증 및 권한 부여 메커니즘을 사용합니다. 이는 사용자 지정 인증 코드를 개발하면 오류가 발생할 수 있기 때문입니다. 대부분의 개발자는 보안 전문가가 아니며 인증 및 권한 부여의 미묘한 측면과 최신 개발 정보를 알지 못할 것입니다. 상용 코드(예: Microsoft 개발 코드)는 종종 광범위하게 보안을 검토되고 있습니다.
-  - 다단계 인증을 사용합니다. 다단계 인증은 인증의 사용자 이름과 암호 유형에 내재된 보안 약점을 방지할 수 있기 때문에 인증 및 권한 부여의 현재 표준입니다. Azure 관리(포털/원격 PowerShell) 인터페이스와 고객 대면 서비스에 대한 액세스는 [Azure MFA(Multi-Factor Authentication)](../multi-factor-authentication/multi-factor-authentication.md)을 사용하도록 설계되고 구성되어야 합니다.
+  - 다단계 인증을 사용합니다. 다단계 인증은 인증의 사용자 이름과 암호 유형에 내재된 보안 약점을 방지할 수 있기 때문에 인증 및 권한 부여의 현재 표준입니다. Azure 관리(포털/원격 PowerShell) 인터페이스와 고객 대면 서비스에 대한 액세스는 [Azure MFA(Multi-Factor Authentication)](../active-directory/authentication/multi-factor-authentication.md)을 사용하도록 설계되고 구성되어야 합니다.
   - OAuth2 및 Kerberos와 같은 표준 인증 프로토콜을 사용합니다. 이러한 프로토콜은 광범위하게 검토되었으며 인증 및 권한 부여를 위한 플랫폼 라이브러리의 일부로 구현될 수 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
@@ -101,9 +100,9 @@ PaaS 배포와 기존 온-프레미스 배포 간의 또 다른 중요한 차이
 
 - [Azure App Service](security-paas-applications-using-app-services.md)
 - [Azure SQL Database 및 Azure SQL Data Warehouse](security-paas-applications-using-sql.md)
-- Azure 저장소
+- Azure Storage
 - Azure REDIS Cache
-- Azure 서비스 버스
+- Azure Service Bus
 - 웹 응용 프로그램 방화벽
 
 <!--Image references-->
@@ -111,4 +110,3 @@ PaaS 배포와 기존 온-프레미스 배포 간의 또 다른 중요한 차이
 [2]: ./media/security-paas-deployments/responsibility-zones.png
 [3]: ./media/security-paas-deployments/advantages-of-paas.png
 [4]: ./media/security-paas-deployments/identity-perimeter.png
-

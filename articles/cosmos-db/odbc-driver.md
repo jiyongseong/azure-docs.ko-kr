@@ -1,29 +1,25 @@
 ---
-title: "BI 분석 도구를 사용하여 Azure Cosmos DB에 연결 | Microsoft Docs"
-description: "BI 및 데이터 분석 소프트웨어에서 정규화된 데이터를 볼 수 있도록 Azure Cosmos DB ODBC 드라이버를 사용하여 테이블 및 뷰를 만드는 방법을 알아봅니다."
-keywords: "odbc, odbc 드라이버"
+title: BI 분석 도구를 사용하여 Azure Cosmos DB에 연결 | Microsoft Docs
+description: BI 및 데이터 분석 소프트웨어에서 정규화된 데이터를 볼 수 있도록 Azure Cosmos DB ODBC 드라이버를 사용하여 테이블 및 뷰를 만드는 방법을 알아봅니다.
+keywords: odbc, odbc 드라이버
 services: cosmos-db
-author: mimig1
-manager: jhubbard
-editor: 
-documentationcenter: 
+author: SnehaGunda
+manager: kfile
+documentationcenter: ''
 ms.assetid: 9967f4e5-4b71-4cd7-8324-221a8c789e6b
 ms.service: cosmos-db
 ms.workload: data-services
 ms.tgt_pltfrm: na
 ms.devlang: rest-api
 ms.topic: article
-ms.date: 05/24/2017
-ms.author: mimig
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a643f139be40b9b11f865d528622bafbe7dec939
-ms.openlocfilehash: 2df792c00b7a789dbefa64bfe0245f1ad73c3faa
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/31/2017
-
-
+ms.date: 03/22/2018
+ms.author: sngun
+ms.openlocfilehash: 360161ec0485259029be0bbd5194911e484a57e5
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-
 # <a name="connect-to-azure-cosmos-db-using-bi-analytics-tools-with-the-odbc-driver"></a>ODBC 드라이버와 함께 BI 분석 도구를 사용하여 Azure Cosmos DB에 연결
 
 Azure Cosmos DB ODBC 드라이버를 사용하면 SQL Server Integration Services, Power BI Desktop 및 Tableau와 같은 BI 분석 도구를 사용하여 Azure Cosmos DB에 연결할 수 있으므로 해당 솔루션에서 Azure Cosmos DB 데이터 시각화를 분석하고 만들 수 있습니다.
@@ -41,9 +37,11 @@ Azure Cosmos DB는 스키마 없는 데이터베이스이기 때문에 응용 �
 
 1. 다음 중에서 환경에 맞는 드라이버를 다운로드합니다.
 
-    * Windows 64비트용 [Microsoft Azure Cosmos DB ODBC 64-bit.msi](https://aka.ms/documentdb-odbc-64x64)
-    * Windows 32비트 또는 64비트용 [Microsoft Azure Cosmos DB ODBC 32x64-bit.msi](https://aka.ms/documentdb-odbc-32x64)
-    * Windows 32비트용 [Microsoft Azure Cosmos DB ODBC 32-bit.msi](https://aka.ms/documentdb-odbc-32x32)
+    | 설치 관리자 | 지원되는 운영 체제| 
+    |---|---| 
+    |Windows 64비트용 [Microsoft Azure Cosmos DB ODBC 64-bit.msi](https://aka.ms/documentdb-odbc-64x64)| 64비트 버전의 Windows 8.1 이상, Windows 8, Windows 7, Windows Server 2012 R2, Windows Server 2012 및 Windows Server 2008 R2.| 
+    |Windows 32비트 또는 64비트용 [Microsoft Azure Cosmos DB ODBC 32x64-bit.msi](https://aka.ms/documentdb-odbc-32x64)| 64비트 버전의 Windows 8.1 이상, Windows 8, Windows 7, Windows XP, Windows Vista, Windows Server 2012 R2, Windows Server 2012, Windows Server 2008 R2 및 Windows Server 2003| 
+    |Windows 32비트용 [Microsoft Azure Cosmos DB ODBC 32-bit.msi](https://aka.ms/documentdb-odbc-32x32)|32비트 버전의 Windows 8.1 이상, Windows 8, Windows 7, Windows XP 및 Windows Vista|
 
     msi 파일을 로컬로 실행합니다. 그러면 **Microsoft Azure Cosmos DB ODBC 드라이버 설치 마법사**가 시작됩니다. 
 2. 기본 입력으로 ODBC 드라이버를 설치하여 설치 마법사를 완료합니다.
@@ -61,9 +59,9 @@ Azure Cosmos DB는 스키마 없는 데이터베이스이기 때문에 응용 �
     ![Azure Cosmos DB ODBC 드라이버 DSN 설정 창](./media/odbc-driver/odbc-driver-dsn-setup.png)
     - **데이터 원본 이름**: ODBC DSN에 대한 고유한 이름입니다 이 이름은 Azure Cosmos DB 계정에 고유하므로 여러 계정이 있는 경우 적절히 이름을 지정합니다.
     - **설명**: 데이터 원본에 대한 짧은 설명입니다.
-    - **호스트**: Azure Cosmos DB 계정에 대한 URI입니다. 다음 스크린샷처럼 Azure Portal의 Azure Cosmos DB 키 블레이드에서 이 URI를 검색할 수 있습니다. 
-    - **액세스 키**: 다음 스크린샷처럼 Azure Portal의 Azure Cosmos DB 키 블레이드에 있는 기본 또는 보조 읽기-쓰기/읽기 전용 키입니다. DSN가 읽기 전용 데이터 처리 및 보고에 사용되는 경우 읽기 전용 키를 사용하는 것이 좋습니다.
-    ![Azure Cosmos DB 키 블레이드](./media/odbc-driver/odbc-driver-keys.png)
+    - **호스트**: Azure Cosmos DB 계정에 대한 URI입니다. 다음 스크린샷처럼 Azure Portal의 Azure Cosmos DB 키 페이지에서 이 URI를 검색할 수 있습니다. 
+    - **액세스 키**: 다음 스크린샷처럼 Azure Portal의 Azure Cosmos DB 키 페이지에 있는 기본 또는 보조 읽기-쓰기/읽기 전용 키입니다. DSN가 읽기 전용 데이터 처리 및 보고에 사용되는 경우 읽기 전용 키를 사용하는 것이 좋습니다.
+    ![Azure Cosmos DB 키 페이지](./media/odbc-driver/odbc-driver-keys.png)
     - **액세스 키 암호화**: 이 컴퓨터의 사용자 수에 따라 가장 적합한 옵션을 선택합니다. 
 4. Azure Cosmos DB 계정에 연결할 수 있는지 확인하려면 **테스트** 단추를 클릭합니다. 
 5. **고급 옵션**을 클릭하고 다음 값을 설정합니다.
@@ -72,7 +70,7 @@ Azure Cosmos DB는 스키마 없는 데이터베이스이기 때문에 응용 �
     - **스키마 파일**: 다양한 옵션이 있습니다.
         - 기본적으로 이 항목을 있는 그대로(비어 있음) 두면 드라이버는 첫 번째 페이지 데이터에서 모든 컬렉션을 검색하여 각 컬렉션의 스키마를 확인합니다. 이 작업을 컬렉션 매핑이라고 합니다. 정의된 스키마 파일이 없이 경우 이 드라이버는 각 드라이버 세션을 검색하므로, DSN을 사용하는 응용 프로그램의 시작 시간이 더 늘어날 수 있습니다. 따라서 DSN에 대한 스키마 파일을 항상 연결하는 것이 좋습니다.
         - 스키마 파일이 이미 있는 경우([스키마 편집기](#schema-editor)를 사용하여 만들었을 수 있음) **찾아보기**를 클릭하고 해당 파일로 이동한 후 **저장**을 클릭하고 **확인**을 클릭합니다.
-        - 새 스키마를 만들려면 **확인**을 클릭하고 주 창에서 **스키마 편집기**를 클릭합니다. 그런 후 [스키마 편집기](#schema-editor) 정보로 이동합니다. 새 스키마 파일을 만들 때 **고급 옵션** 창으로 돌아가 새로 만든 스키마 파일을 포함해야 합니다.
+        - 새 스키마를 만들려면 **확인**을 클릭하고 주 창에서 **스키마 편집기**를 클릭합니다. 그런 후 [스키마 편집기](#schema-editor) 정보로 이동합니다. 새 스키마 파일을 만든 후 **고급 옵션** 창으로 돌아가 새로 만든 스키마 파일을 포함해야 합니다.
 
 6. 작업을 완료하고 **Azure Cosmos DB ODBC 드라이버 DSN 설정** 창을 닫으면 새 사용자 DSN이 사용자 DSN 탭에 추가됩니다.
 
@@ -109,16 +107,66 @@ Azure Cosmos DB는 스키마 없는 데이터베이스이기 때문에 응용 �
 
     a. **특성** 상자에 구분 기호 속성의 이름을 입력합니다. 이것은 문서에서 샘플링 범위로 지정하려는 속성(예: City)입니다. 그런 후 Enter 키를 누릅니다. 
 
-    b. 방금 입력한 특성에 대한 특정 값으로 샘플링 범위를 지정하려는 경우 선택 상자에서 해당 특성을 선택하고 **값** 상자에 값(예: Seattle)을 입력하고 Enter 키를 누릅니다. 특성에 대해 여러 값을 계속 추가할 수 있습니다. 값을 입력할 때 올바른 속성이 선택되어 있는지 확인하기만 하면 됩니다.
+    나. 방금 입력한 특성에 대한 특정 값으로 샘플링 범위를 지정하려는 경우 선택 상자에서 해당 특성을 선택하고 **값** 상자에 값(예: Seattle)을 입력하고 Enter 키를 누릅니다. 특성에 대해 여러 값을 계속 추가할 수 있습니다. 값을 입력할 때 올바른 속성이 선택되어 있는지 확인하기만 하면 됩니다.
 
     예를 들어 **특성** 값으로 City를 포함하고 city 값이 New York과 Dubai인 행만 포함하도록 테이블을 제한하려면 특성 상자에 City를 입력하고 **값** 상자에 New York을 입력한 후 Dubai를 입력합니다.
 4. **확인**을 클릭합니다. 
 5. 샘플링하려는 컬렉션에 대한 매핑 정의를 완료한 후 **스키마 편집기** 창에서 **샘플**을 클릭합니다.
      각 열에 대해 SQL 열 이름, SQL 형식, SQL 길이(해당되는 경우), 소수 자릿수(해당되는 경우), 전체 자릿수(해당되는 경우) 및 null 허용을 수정할 수 있습니다.
-    - 쿼리 결과에서 해당 열을 제외하려면 **Hide Column**을 **true**로 설정합니다. Hide Column = true로 표시된 열은 스키마의 일부이지만 선택 및 프로젝션의 경우에는 반환되지 않습니다. 예를 들어 "_"로 시작하는 모든 Azure Cosmos DB 시스템 필수 속성을 숨길 수 있습니다.
+    - 쿼리 결과에서 해당 열을 제외하려면 **Hide Column**을 **true**로 설정합니다. Hide Column = true로 표시된 열은 스키마의 일부이지만 선택 및 프로젝션의 경우에는 반환되지 않습니다. 예를 들어 `_`로 시작하는 모든 Azure Cosmos DB 시스템 필수 속성을 숨길 수 있습니다.
     - **id** 열은 정규화된 스키마에서 기본 키로 사용되기 때문에 숨길 수 없는 유일한 필드입니다. 
 6. 스키마 정의를 끝낸 후에 **파일** | **저장**을 클릭한 후 스키마를 저장할 디렉터리로 이동하고 **저장**을 클릭합니다.
 7. **Azure Cosmos DB ODBC 드라이버 DSN 설정** 창으로 돌아가 **고급 옵션**을 클릭합니다. 그런 다음 **스키마 파일** 상자에서 저장된 스키마 파일로 이동한 후 **확인**을 클릭합니다. **확인**을 다시 클릭하여 DSN을 저장합니다. 이렇게 하면 만든 스키마가 DSN에 저장됩니다. 
+
+## <a name="optional-set-up-linked-server-connection"></a>(선택 사항) 연결된 서버 연결 설정
+
+연결된 서버 연결을 설정하여 SSMS(SQL Server Management Studio)에서 Azure Cosmos DB를 쿼리할 수 있습니다.
+
+1. 예를 들어 `SDS Name`으로 명명된 [2단계](#connect)에서 설명된 대로 시스템 데이터 원본을 만듭니다.
+2. [SQL Server Management Studio 설치](https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms).
+3. SSMS 쿼리 편집기에서 다음 명령을 사용하여 데이터 원본에 대한 연결된 서버 개체 `DEMOCOSMOS`을 만듭니다. `DEMOCOSMOS`을 연결된 서버의 이름으로, `SDS Name`는 시스템 데이터 원본 이름으로 바꿉니다.
+
+    ```sql
+    USE [master]
+    GO
+    
+    EXEC master.dbo.sp_addlinkedserver @server = N'DEMOCOSMOS', @srvproduct=N'', @provider=N'MSDASQL', @datasrc=N'SDS Name'
+    
+    EXEC master.dbo.sp_addlinkedsrvlogin @rmtsrvname=N'DEMOCOSMOS', @useself=N'False', @locallogin=NULL, @rmtuser=NULL, @rmtpassword=NULL
+    
+    GO
+    ```
+    
+새 연결된 서버 이름을 보려면 연결된 서버 목록을 새로 고칩니다.
+
+![SSMS의 연결된 서버](./media/odbc-driver/odbc-driver-linked-server-ssms.png)
+
+### <a name="query-linked-database"></a>연결된 데이터베이스 쿼리
+
+연결된 데이터베이스를 쿼리하려면 SSMS 쿼리를 입력합니다. 이 예제에서는 쿼리가 `customers`이라 명명된 컬렉션의 테이블에서 선택합니다.
+
+```sql
+SELECT * FROM OPENQUERY(DEMOCOSMOS, 'SELECT *  FROM [customers].[customers]')
+```
+
+쿼리를 실행합니다. 결과는 다음과 비슷합니다.
+
+```
+attachments/  1507476156    521 Bassett Avenue, Wikieup, Missouri, 5422   "2602bc56-0000-0000-0000-59da42bc0000"   2015-02-06T05:32:32 +05:00 f1ca3044f17149f3bc61f7b9c78a26df
+attachments/  1507476156    167 Nassau Street, Tuskahoma, Illinois, 5998   "2602bd56-0000-0000-0000-59da42bc0000"   2015-06-16T08:54:17 +04:00 f75f949ea8de466a9ef2bdb7ce065ac8
+attachments/  1507476156    885 Strong Place, Cassel, Montana, 2069       "2602be56-0000-0000-0000-59da42bc0000"   2015-03-20T07:21:47 +04:00 ef0365fb40c04bb6a3ffc4bc77c905fd
+attachments/  1507476156    515 Barwell Terrace, Defiance, Tennessee, 6439     "2602c056-0000-0000-0000-59da42bc0000"   2014-10-16T06:49:04 +04:00      e913fe543490432f871bc42019663518
+attachments/  1507476156    570 Ruby Street, Spokane, Idaho, 9025       "2602c156-0000-0000-0000-59da42bc0000"   2014-10-30T05:49:33 +04:00 e53072057d314bc9b36c89a8350048f3
+```
+
+> [!NOTE]
+> 연결된 Cosmos DB 서버는 네 부분으로 된 이름 지정을 지원하지 않습니다. 오류는 다음 메시지와 비슷하게 반환됩니다.
+
+```
+Msg 7312, Level 16, State 1, Line 44
+
+Invalid use of schema or catalog for OLE DB provider "MSDASQL" for linked server "DEMOCOSMOS". A four-part name was supplied, but the provider does not expose the necessary interfaces to use a catalog or schema.
+``` 
 
 ## <a name="optional-creating-views"></a>(선택 사항) 뷰 만들기
 샘플링 프로세스의 일부로 뷰를 정의하고 만들 수 있습니다. 이러한 뷰는 SQL 뷰와 비슷합니다. 읽기 전용이며, 정의된 Azure Cosmos DB SQL의 선택 및 프로젝션으로 범위가 지정됩니다. 
@@ -151,5 +199,4 @@ Azure Cosmos DB는 스키마 없는 데이터베이스이기 때문에 응용 �
 
 ## <a name="next-steps"></a>다음 단계
 
-Azure Cosmos DB에 대한 자세한 내용은 [Azure Cosmos DB란?](introduction.md)을 참조하세요.
-
+Azure Cosmos DB에 대한 자세한 내용은 [Azure Cosmos DB 시작](introduction.md)을 참조하세요.

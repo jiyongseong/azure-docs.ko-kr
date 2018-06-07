@@ -1,29 +1,31 @@
 ---
-title: "Azure Load Balancer의 IPv6에 대한 개요 | Microsoft Docs"
-description: "Azure Load Balancer 및 부하 분산된 VM에 대한 IPv6 지원 이해하기."
+title: Azure Load Balancer의 IPv6에 대한 개요 | Microsoft Docs
+description: Azure Load Balancer 및 부하 분산된 VM에 대한 IPv6 지원 이해하기.
 services: load-balancer
 documentationcenter: na
-author: kumudd
-manager: timlt
-editor: 
-keywords: "ipv6, Azure Load Balancer, 이중 스택, 공용 IP, 기본 ipv6, 모바일, iot"
+author: KumudD
+manager: jeconnoc
+editor: ''
+keywords: ipv6, Azure Load Balancer, 이중 스택, 공용 IP, 기본 ipv6, 모바일, iot
 ms.assetid: 6a1d583f-a305-40fd-a94b-fa42e1943bbb
 ms.service: load-balancer
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 09/14/2016
+ms.date: 09/25/2017
 ms.author: kumud
+ms.openlocfilehash: 9622ad4922aa98efe093e7f809a490a8797eb1fd
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 8cca857314ecf37ef51700fd25aef228515ecd0a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
-
 # <a name="overview-of-ipv6-for-azure-load-balancer"></a>Azure Load Balancer의 IPv6에 대한 개요
+
+
+>[!NOTE] 
+>Azure Load Balancer는 기본 및 표준이라는 두 가지 형식을 지원합니다. 이 문서는 기본 Load Balancer에 대해 설명합니다. 표준 Load Balancer에 대한 자세한 내용은 [표준 Load Balancer 개요](load-balancer-standard-overview.md)를 참조하세요.
 
 인터넷 연결 부하 분산 장치는 IPv6 주소를 사용해 배포할 수 있습니다. IPv4 연결 외에도 다음과 같은 기능을 사용할 수 있습니다.
 
@@ -69,7 +71,7 @@ Azure Resource Manager를 통해 배포된 VM에 대한 네이티브 IPv6 지원
 * 공용 IPv6 주소는 VM에 할당할 수 없습니다. 부하 분산 장치에만 할당할 수 있습니다.
 * 공용 IPv6 주소에 대해 역방향 DNS 조회를 구성할 수 없습니다.
 * IPv6 주소를 사용하는 VM은 Azure Cloud Service의 멤버가 될 수 없습니다. Azure Virtual Network (VNet)에 연결될 수 있으며 IPv4 주소를 통해 서로 통신합니다.
-* 개인 IPv6 주소를 리소스 그룹의 개별 VM에 배포할 수 있지만 크기 집합을 통해 리소스 그룹에 배포할 수는 없습니다.
+* 개인 IPv6 주소를 리소스 그룹의 개별 VM에 배포할 수 있지만 확장 집합을 통해 리소스 그룹에 배포할 수는 없습니다.
 * Azure VM은 IPv6를 통해 다른 VM, 다른 Azure 서비스 또는 온-프레미스 장치에 연결할 수 없습니다. 단지 IPv6를 통해 Azure Load Balancer와 통신할 수 있습니다. 그러나 IPv4를 사용하면 이러한 다른 리소스와 통신할 수 있습니다.
 * IPv4에 대한 Network Security Group (NSG) 보호는 이중 스택 (IPv6+IPv4) 배포에서 지원됩니다. NSG는 IPv6 끝점에 적용되지 않습니다.
 * VM의 IPv6 끝점은 인터넷에 직접 노출되지 않습니다. 부하 분산 장치 뒤에.있습니다. 부하 분산 장치 규칙에 지정된 포트만 IPv6를 통해 액세스할 수 있습니다.
@@ -85,4 +87,3 @@ IPv6를 사용하여 부하 분산 장치를 배포하는 방법을 알아봅니
 * [템플릿을 사용하여 IPv6와 함께 부하 분산 장치 배포하기](load-balancer-ipv6-internet-template.md)
 * [Azure PowerShell을 사용하여 IPv6와 함께 부하 분산 장치 배포하기](load-balancer-ipv6-internet-ps.md)
 * [Azure CLI를 사용하여 IPv6와 함께 부하 분산 장치 배포하기](load-balancer-ipv6-internet-cli.md)
-

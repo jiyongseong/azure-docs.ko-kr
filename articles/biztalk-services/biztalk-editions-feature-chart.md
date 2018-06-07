@@ -14,13 +14,11 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.date: 11/07/2016
 ms.author: mandia
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5edc47e03ca9319ba2e3285600703d759963e1f3
 ms.openlocfilehash: 718b57a801a9ba62a0154ae42da2ac0c0741f203
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/01/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="biztalk-services-editions-chart"></a>BizTalk 서비스: 버전 차트
 
@@ -256,5 +254,4 @@ Azure 포털에서 Azure BizTalk 서비스를 만들려면 [BizTalk 서비스: A
 * [BizTalk 서비스: 제한](biztalk-throttling-thresholds.md)<br/>
 * [BizTalk 서비스: 발급자 이름 및 발급자 키](biztalk-issuer-name-issuer-key.md)<br/>
 * [Azure BizTalk 서비스 SDK로 시작하는 방법](http://go.microsoft.com/fwlink/p/?LinkID=302335)<br/>
-
 

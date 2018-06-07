@@ -1,31 +1,31 @@
 ---
-title: "Azure에서 처음 부팅 시 Linux VM 사용자 지정 | Microsoft Docs"
-description: "Cloud-init 및 Key Vault를 사용하여 Azure에서 처음 부팅 시 Linux VM을 사용자 지정하는 방법에 대해 알아봅니다."
+title: 자습서 - Azure의 클라우드로 Linux VM 사용자 지정 | Microsoft Docs
+description: 이 자습서에서는 cloud-init 및 Key Vault를 사용하여 Azure에서 처음 부팅 시 Linux VM을 사용자 지정하는 방법에 대해 알아봅니다.
 services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: iainfoulds
-manager: timlt
+manager: jeconnoc
 editor: tysonn
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 05/02/2017
+ms.date: 12/13/2017
 ms.author: iainfou
 ms.custom: mvc
+ms.openlocfilehash: fa1e95263559906ebfd0df82b2756043e38852a6
+ms.sourcegitcommit: 688a394c4901590bbcf5351f9afdf9e8f0c89505
 ms.translationtype: HT
-ms.sourcegitcommit: f9003c65d1818952c6a019f81080d595791f63bf
-ms.openlocfilehash: c148ca2a2a098f5f0c4ff94846c318b59b4864f4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/09/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/18/2018
+ms.locfileid: "34305160"
 ---
+# <a name="tutorial---how-to-use-cloud-init-to-customize-a-linux-virtual-machine-in-azure-on-first-boot"></a>자습서 - cloud-init를 사용하여 첫 번째 부팅 시 Azure에서 Linux 가상 머신을 사용자 지정하는 방법
 
-# <a name="how-to-customize-a-linux-virtual-machine-on-first-boot"></a>처음 부팅 시 Linux 가상 컴퓨터를 사용자 지정하는 방법
-이전 자습서에서는 VM(가상 컴퓨터)에 SSH를 적용하고 NGINX를 수동으로 설치하는 방법에 대해 알아보았습니다. 빠르고 일관된 방식으로 VM을 만들려면 일반적으로 자동화 기능이 필요합니다. 처음 부팅 시 VM을 사용자 지정하는 일반적인 방법은 [cloud-init](https://cloudinit.readthedocs.io)를 사용하는 것입니다. 이 자습서에서는 다음 방법에 대해 알아봅니다.
+이전 자습서에서는 VM(가상 머신)에 SSH를 적용하고 NGINX를 수동으로 설치하는 방법에 대해 알아보았습니다. 빠르고 일관된 방식으로 VM을 만들려면 일반적으로 자동화 기능이 필요합니다. 처음 부팅 시 VM을 사용자 지정하는 일반적인 방법은 [cloud-init](https://cloudinit.readthedocs.io)를 사용하는 것입니다. 이 자습서에서는 다음 방법에 대해 알아봅니다.
 
 > [!div class="checklist"]
 > * cloud-init 구성 파일 만들기
@@ -34,30 +34,30 @@ ms.lasthandoff: 08/09/2017
 > * Key Vault를 사용하여 안전하게 인증서 저장
 > * cloud-init를 사용하여 NGINX 배포 자동화
 
-
 [!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
 
-CLI를 로컬로 설치하여 사용하도록 선택한 경우 이 자습서에서 Azure CLI 버전 2.0.4 이상을 실행해야 합니다. `az --version`을 실행하여 버전을 찾습니다. 설치 또는 업그레이드해야 하는 경우 [Azure CLI 2.0 설치]( /cli/azure/install-azure-cli)를 참조하세요.  
-
-
+CLI를 로컬로 설치하여 사용하도록 선택한 경우 이 자습서에서 Azure CLI 버전 2.0.30 이상을 실행해야 합니다. `az --version`을 실행하여 버전을 찾습니다. 설치 또는 업그레이드해야 하는 경우 [Azure CLI 2.0 설치]( /cli/azure/install-azure-cli)를 참조하세요.
 
 ## <a name="cloud-init-overview"></a>Cloud-init 개요
 [Cloud-init](https://cloudinit.readthedocs.io)는 처음 부팅 시 Linux VM을 사용자 지정하는 데 널리 사용되는 방법입니다. Cloud-init를 사용하여 패키지를 설치하고 파일을 쓰거나, 사용자 및 보안을 구성할 수 있습니다. 초기 부팅 프로세스 중에 cloud-init가 실행되면 구성을 적용하기 위한 추가 단계나 필요한 에이전트가 없습니다.
 
-Cloud-init는 배포에서도 작동합니다. 예를 들어, 패키지를 설치하는 데 **apt-get install** 또는 **yum install**은 사용하지 않습니다. 대신 설치할 패키지 목록을 정의할 수 있고 선택한 배포판의 기본 패키지 관리 도구를 cloud-init에서 자동으로 사용합니다.
+Cloud-init는 배포에서도 작동합니다. 예를 들어, 패키지를 설치하는 데 **apt-get install** 또는 **yum install**은 사용하지 않습니다. 대신 설치할 패키지 목록을 정의할 수 있습니다. cloud-init에서 선택한 배포판의 기본 패키지 관리 도구를 자동으로 사용합니다.
 
 당사는 파트너와 협력하여 파트너가 Azure에 제공하는 이미지에 cloud-init를 포함하고 이러한 이미지에서 cloud-init가 작동하도록 설정하고 있습니다. 다음 표에서는 Azure 플랫폼 이미지에서 현재 cloud-init 가용성을 간략하게 설명합니다.
 
 | Alias | 게시자 | 제안 | SKU | 버전 |
 |:--- |:--- |:--- |:--- |:--- |:--- |
-| UbuntuLTS |Canonical |UbuntuServer |14.04.4-LTS |최신 |
+| UbuntuLTS |Canonical |UbuntuServer |16.04-LTS |최신 |
+| UbuntuLTS |Canonical |UbuntuServer |14.04.5-LTS |최신 |
 | CoreOS |CoreOS |CoreOS |Stable |최신 |
+| | OpenLogic | CentOS | 7-CI | 최신 |
+| | RedHat | RHEL | 7-RAW-CI | 최신
 
 
 ## <a name="create-cloud-init-config-file"></a>cloud-init 구성 파일 만들기
 cloud-init의 실제 동작을 확인하려면 NGINX를 설치하고 간단한 'Hello World' Node.js 앱을 실행하는 VM을 만듭니다. 다음 cloud-init 구성은 필요한 패키지를 설치하고 Node.js 앱을 만든 다음 앱을 초기화하고 시작합니다.
 
-*cloud-init.txt*라는 파일을 만들고 다음 구성을 붙여넣습니다.
+현재 셸에서 *cloud-init.txt*라는 파일을 만들고 다음 구성을 붙여 넣습니다. 예를 들어 로컬 컴퓨터에 없는 Cloud Shell에서 파일을 만듭니다. 원하는 모든 편집기를 사용할 수 있습니다. `sensible-editor cloud-init.txt`를 입력하여 파일을 만들고 사용할 수 있는 편집기의 목록을 봅니다. 전체 cloud-init 파일, 특히 첫 줄이 올바르게 복사되었는지 확인합니다.
 
 ```yaml
 #cloud-config
@@ -103,35 +103,35 @@ runcmd:
 
 cloud-init 구성 옵션에 대한 자세한 내용은 [cloud-init 구성 예제](https://cloudinit.readthedocs.io/en/latest/topics/examples.html)를 참조하세요.
 
-## <a name="create-virtual-machine"></a>가상 컴퓨터 만들기
-VM을 만들려면 먼저 [az group create](/cli/azure/group#create)를 사용하여 리소스 그룹을 만듭니다. 다음 예제에서는 *eastus* 위치에 *myResourceGroupAutomate*라는 리소스 그룹을 만듭니다.
+## <a name="create-virtual-machine"></a>가상 머신 만들기
+VM을 만들려면 먼저 [az group create](/cli/azure/group#az_group_create)를 사용하여 리소스 그룹을 만듭니다. 다음 예제에서는 *eastus* 위치에 *myResourceGroupAutomate*라는 리소스 그룹을 만듭니다.
 
 ```azurecli-interactive 
 az group create --name myResourceGroupAutomate --location eastus
 ```
 
-이제 [az vm create](/cli/azure/vm#create)로 VM을 만듭니다. `--custom-data` 매개 변수를 사용하여 cloud-init 구성 파일을 전달합니다. 현재 작업 디렉터리 외부에 파일을 저장한 경우 *cloud-init.txt* 구성의 전체 경로를 제공합니다. 다음 예제에서는 *myAutomatedVM*이라는 VM을 만듭니다.
+이제 [az vm create](/cli/azure/vm#az_vm_create)로 VM을 만듭니다. `--custom-data` 매개 변수를 사용하여 cloud-init 구성 파일을 전달합니다. 현재 작업 디렉터리 외부에 파일을 저장한 경우 *cloud-init.txt* 구성의 전체 경로를 제공합니다. 다음 예제에서는 *myAutomatedVM*이라는 VM을 만듭니다.
 
 ```azurecli-interactive 
 az vm create \
     --resource-group myResourceGroupAutomate \
     --name myVM \
-    --image Canonical:UbuntuServer:14.04.4-LTS:latest \
+    --image UbuntuLTS \
     --admin-username azureuser \
     --generate-ssh-keys \
     --custom-data cloud-init.txt
 ```
 
-VM을 만들고 패키지를 설치하고 앱을 시작하는 데 몇 분 정도 걸립니다. VM이 만들어지면 Azure CLI에 표시된 `publicIpAddress`를 기록해 둡니다. 이 주소는 웹 브라우저를 통해 Node.js 앱에 액세스할 때 사용됩니다.
+VM을 만들고 패키지를 설치하고 앱을 시작하는 데 몇 분 정도 걸립니다. Azure CLI에서 프롬프트로 반환한 후 실행을 계속하는 백그라운드 작업이 있습니다. 앱에 액세스하려면 몇 분이 걸릴 수 있습니다. VM이 만들어지면 Azure CLI에 표시된 `publicIpAddress`를 기록해 둡니다. 이 주소는 웹 브라우저를 통해 Node.js 앱에 액세스할 때 사용됩니다.
 
-웹 트래픽이 VM에 도달하도록 허용하려면 [az vm open-port](/cli/azure/vm#open-port)를 사용하여 인터넷에서 포트 80을 엽니다.
+웹 트래픽이 VM에 도달하도록 허용하려면 [az vm open-port](/cli/azure/vm#az_vm_open_port)를 사용하여 인터넷에서 포트 80을 엽니다.
 
 ```azurecli-interactive 
 az vm open-port --port 80 --resource-group myResourceGroupAutomate --name myVM
 ```
 
 ## <a name="test-web-app"></a>Web App 테스트
-이제 웹 브라우저를 열고 주소 표시줄에 *http://<publicIpAddress>*를 입력할 수 있습니다. VM 만들기 프로세스에서 사용자 고유의 공용 IP 주소를 제공합니다. Node.js 앱은 다음 예제와 같이 표시됩니다.
+이제 웹 브라우저를 열고 주소 표시줄에 *http://<publicIpAddress>* 를 입력할 수 있습니다. VM 만들기 프로세스에서 사용자 고유의 공용 IP 주소를 제공합니다. Node.js 앱은 다음 예제와 같이 표시됩니다.
 
 ![실행 중인 NGINX 사이트 보기](./media/tutorial-automate-vm-deployment/nginx.png)
 
@@ -149,10 +149,10 @@ Azure Key Vault는 암호화 키 및 비밀(인증서 또는 암호)을 보호�
 - VM 만들기 및 인증서 삽입
 
 ### <a name="create-an-azure-key-vault"></a>Azure Key Vault 만들기
-먼저 [az keyvault create](/cli/azure/keyvault#create)를 사용하여 Key Vault를 만들고 VM 배포 시에 사용할 수 있도록 설정합니다. 각 Key Vault에는 고유한 이름이 필요하며 모두 소문자여야 합니다. 다음 예제에서 *<mykeyvault>*를 사용자 고유의 Key Vault 이름으로 바꿉니다.
+먼저 [az keyvault create](/cli/azure/keyvault#az_keyvault_create)를 사용하여 Key Vault를 만들고 VM 배포 시에 사용할 수 있도록 설정합니다. 각 Key Vault에는 고유한 이름이 필요하며 모두 소문자여야 합니다. 다음 예제에서 *mykeyvault*를 사용자 고유의 Key Vault 이름으로 바꿉니다.
 
 ```azurecli-interactive 
-keyvault_name=<mykeyvault>
+keyvault_name=mykeyvault
 az keyvault create \
     --resource-group myResourceGroupAutomate \
     --name $keyvault_name \
@@ -160,7 +160,7 @@ az keyvault create \
 ```
 
 ### <a name="generate-certificate-and-store-in-key-vault"></a>인증서 생성 및 Key Vault에 저장
-프로덕션 사용을 위해 [az keyvault certificate import](/cli/azure/keyvault/certificate#import)를 사용하여 신뢰할 수 있는 공급자가 서명한 유효한 인증서를 가져와야 합니다. 이 자습서에서는 다음 예제를 통해 [az keyvault certificate create](/cli/azure/keyvault/certificate#create)를 사용하여 기본 인증서 정책을 사용하는 자체 서명된 인증서를 생성할 수 있는 방법을 보여 줍니다.
+프로덕션 사용을 위해 [az keyvault certificate import](/cli/azure/keyvault/certificate#az_keyvault_certificate_import)를 사용하여 신뢰할 수 있는 공급자가 서명한 유효한 인증서를 가져와야 합니다. 이 자습서에서는 다음 예제를 통해 [az keyvault certificate create](/cli/azure/keyvault/certificate#az_keyvault_certificate_create)를 사용하여 기본 인증서 정책을 사용하는 자체 서명된 인증서를 생성할 수 있는 방법을 보여 줍니다.
 
 ```azurecli-interactive 
 az keyvault certificate create \
@@ -171,21 +171,21 @@ az keyvault certificate create \
 
 
 ### <a name="prepare-certificate-for-use-with-vm"></a>VM에 사용할 인증서 준비
-VM 만들기 프로세스 동안 인증서를 사용하려면 [az keyvault secret list-versions](/cli/azure/keyvault/secret#list-versions)를 사용하여 인증서 ID를 가져옵니다. [az vm format-secret](/cli/azure/vm#format-secret)를 사용하여 인증서를 변환합니다. 다음 예제에서는 다음 단계의 사용 편의성을 위해 변수에 이러한 명령의 출력을 할당합니다.
+VM 만들기 프로세스 동안 인증서를 사용하려면 [az keyvault secret list-versions](/cli/azure/keyvault/secret#az_keyvault_secret_list_versions)를 사용하여 인증서 ID를 가져옵니다. VM에는 부팅 시 삽입하는 특정 형식의 인증서가 필요하므로 [az vm format-secret](/cli/azure/vm#az_vm_format_secret)을 사용하여 인증서를 변환합니다. 다음 예제에서는 다음 단계의 사용 편의성을 위해 변수에 이러한 명령의 출력을 할당합니다.
 
 ```azurecli-interactive 
 secret=$(az keyvault secret list-versions \
           --vault-name $keyvault_name \
           --name mycert \
           --query "[?attributes.enabled].id" --output tsv)
-vm_secret=$(az vm format-secret --secret "$secret")
+vm_secret=$(az vm secret format --secret "$secret")
 ```
 
 
 ### <a name="create-cloud-init-config-to-secure-nginx"></a>NGINX를 보호할 cloud-init 구성 만들기
-VM을 만들 때 인증서와 키는 보호되는 */var/lib/waagent/* 디렉터리에 저장됩니다. VM에 인증서 추가 및 NGINX 구성을 자동화하기 위해 이전 예제에서 cloud-init 구성을 확장할 수 있습니다.
+VM을 만들 때 인증서와 키는 보호되는 */var/lib/waagent/* 디렉터리에 저장됩니다. VM에 인증서 추가 및 NGINX 구성을 자동화하기 위해 이전 예제에서 업데이트된 cloud-init 구성을 사용할 수 있습니다.
 
-*cloud-init-secured.txt*라는 파일을 만들고 다음 구성을 붙여넣습니다.
+*cloud-init-secured.txt*라는 파일을 만들고 다음 구성을 붙여 넣습니다. 다시, Cloud Shell을 사용하는 경우 로컬 컴퓨터가 아닌 해당 위치에서 cloud-init 구성 파일을 만듭니다. `sensible-editor cloud-init-secured.txt`를 사용하여 파일을 만들고 사용할 수 있는 편집기의 목록을 봅니다. 전체 cloud-init 파일, 특히 첫 줄이 올바르게 복사되었는지 확인합니다.
 
 ```yaml
 #cloud-config
@@ -237,22 +237,22 @@ runcmd:
 ```
 
 ### <a name="create-secure-vm"></a>보안 VM 만들기
-이제 [az vm create](/cli/azure/vm#create)로 VM을 만듭니다. 인증서 데이터는 `--secrets` 매개 변수를 사용하여 Key Vault에서 삽입됩니다. 이전 예제와 마찬가지로 `--custom-data` 매개 변수를 사용하여 cloud-init 구성을 전달합니다.
+이제 [az vm create](/cli/azure/vm#az_vm_create)로 VM을 만듭니다. 인증서 데이터는 `--secrets` 매개 변수를 사용하여 Key Vault에서 삽입됩니다. 이전 예제와 마찬가지로 `--custom-data` 매개 변수를 사용하여 cloud-init 구성을 전달합니다.
 
 ```azurecli-interactive 
 az vm create \
     --resource-group myResourceGroupAutomate \
     --name myVMSecured \
-    --image Canonical:UbuntuServer:14.04.4-LTS:latest \
+    --image UbuntuLTS \
     --admin-username azureuser \
     --generate-ssh-keys \
     --custom-data cloud-init-secured.txt \
     --secrets "$vm_secret"
 ```
 
-VM을 만들고 패키지를 설치하고 앱을 시작하는 데 몇 분 정도 걸립니다. VM이 만들어지면 Azure CLI에 표시된 `publicIpAddress`를 기록해 둡니다. 이 주소는 웹 브라우저를 통해 Node.js 앱에 액세스할 때 사용됩니다.
+VM을 만들고 패키지를 설치하고 앱을 시작하는 데 몇 분 정도 걸립니다. Azure CLI에서 프롬프트로 반환한 후 실행을 계속하는 백그라운드 작업이 있습니다. 앱에 액세스하려면 몇 분이 걸릴 수 있습니다. VM이 만들어지면 Azure CLI에 표시된 `publicIpAddress`를 기록해 둡니다. 이 주소는 웹 브라우저를 통해 Node.js 앱에 액세스할 때 사용됩니다.
 
-보안 웹 트래픽이 VM에 도달하도록 허용하려면 [az vm open-port](/cli/azure/vm#open-port)를 사용하여 인터넷에서 포트 443을 엽니다.
+보안 웹 트래픽이 VM에 도달하도록 허용하려면 [az vm open-port](/cli/azure/vm#az_vm_open_port)를 사용하여 인터넷에서 포트 443을 엽니다.
 
 ```azurecli-interactive 
 az vm open-port \
@@ -262,7 +262,7 @@ az vm open-port \
 ```
 
 ### <a name="test-secure-web-app"></a>보안 Web App 테스트
-이제 웹 브라우저를 열고 주소 표시줄에 *https://<publicIpAddress>*를 입력할 수 있습니다. VM 만들기 프로세스에서 사용자 고유의 공용 IP 주소를 제공합니다. 자체 서명된 인증서를 사용하는 경우 보안 경고를 허용합니다.
+이제 웹 브라우저를 열고 주소 표시줄에 *https://<publicIpAddress>* 를 입력할 수 있습니다. VM 만들기 프로세스에서 사용자 고유의 공용 IP 주소를 제공합니다. 자체 서명된 인증서를 사용하는 경우 보안 경고를 허용합니다.
 
 ![웹 브라우저 보안 경고 허용](./media/tutorial-automate-vm-deployment/browser-warning.png)
 
@@ -285,4 +285,3 @@ az vm open-port \
 
 > [!div class="nextstepaction"]
 > [사용자 지정 VM 이미지 만들기](./tutorial-custom-images.md)
-

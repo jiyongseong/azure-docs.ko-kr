@@ -1,11 +1,11 @@
 ---
-title: "사용자 지정 프로브 만들기 - Azure Application Gateway - Azure Portal | Microsoft Docs"
-description: "포털을 사용하여 응용 프로그램 게이트웨이에 대한 사용자 지정 프로브를 만드는 방법을 알아봅니다."
+title: 사용자 지정 프로브 만들기 - Azure Application Gateway - Azure Portal | Microsoft Docs
+description: 포털을 사용하여 Application Gateway에 대한 사용자 지정 프로브를 만드는 방법을 알아봅니다.
 services: application-gateway
 documentationcenter: na
-author: georgewallace
-manager: timlt
-editor: 
+author: vhorne
+manager: jpconnock
+editor: ''
 tags: azure-resource-manager
 ms.assetid: 33fd5564-43a7-4c54-a9ec-b1235f661f97
 ms.service: application-gateway
@@ -14,18 +14,18 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 04/26/2017
-ms.author: gwallace
+ms.author: victorh
+ms.openlocfilehash: 45737c1c378ec56a5e2bedec8c1f7b7bc7ba6225
+ms.sourcegitcommit: c47ef7899572bf6441627f76eb4c4ac15e487aec
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 65e9bba4ce9ac41ae2a9a8c3fa7f661165fc1403
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/04/2018
+ms.locfileid: "33203917"
 ---
-# <a name="create-a-custom-probe-for-application-gateway-by-using-the-portal"></a>포털을 사용하여 응용 프로그램 게이트웨이에 대한 사용자 지정 프로브 만들기
+# <a name="create-a-custom-probe-for-application-gateway-by-using-the-portal"></a>포털을 사용하여 Application Gateway에 대한 사용자 지정 프로브 만들기
 
 > [!div class="op_single_selector"]
-> * [Azure 포털](application-gateway-create-probe-portal.md)
+> * [Azure Portal](application-gateway-create-probe-portal.md)
 > * [Azure Resource Manager PowerShell](application-gateway-create-probe-ps.md)
 > * [Azure 클래식 PowerShell](application-gateway-create-probe-classic-ps.md)
 
@@ -33,13 +33,13 @@ ms.lasthandoff: 07/21/2017
 
 ## <a name="before-you-begin"></a>시작하기 전에
 
-응용 프로그램 게이트웨이 아직 없는 경우 방문 [응용 프로그램 게이트웨이 만들기](application-gateway-create-gateway-portal.md)를 참조하여 사용할 응용 프로그램 게이트웨이를 만듭니다.
+Application Gateway 아직 없는 경우 방문 [Application Gateway 만들기](application-gateway-create-gateway-portal.md)를 참조하여 사용할 Application Gateway를 만듭니다.
 
 ## <a name="createprobe"></a>프로브 만들기
 
 프로브는 포털을 통해 두 단계 프로세스로 구성됩니다. 첫 번째 단계는 프로브를 만드는 것입니다. 두 번째 단계로 응용 프로그램 게이트웨이의 백 엔드 http 설정에 프로브를 추가합니다.
 
-1. [Azure 포털](https://portal.azure.com)에 로그인합니다. 아직 계정이 없는 경우 [1개월 평가판](https://azure.microsoft.com/free)에 등록할 수 있습니다.
+1. [Azure 포털](https://portal.azure.com) 에 로그인합니다. 아직 계정이 없는 경우 [1개월 평가판](https://azure.microsoft.com/free)에 등록할 수 있습니다.
 
 1. Azure Portal의 [즐겨찾기] 창에서 [모든 리소스]를 클릭합니다. [모든 리소스] 블레이드에서 응용 프로그램 게이트웨이를 클릭합니다. 선택한 구독에 이미 여러 리소스가 있는 경우 [이름으로 필터링...]에서 partners.contoso.net을 입력합니다. 응용 프로그램 게이트웨이에 간편하게 액세스할 수 있는 상자입니다.
 
@@ -54,7 +54,7 @@ ms.lasthandoff: 07/21/2017
   |**Name**|customProbe|포털에서 액세스할 수 있는 프로브의 이름입니다.|
   |**프로토콜**|HTTP 또는 HTTPS | 상태 프로브에서 사용하는 프로토콜입니다.|
   |**호스트**|예: contoso.com|프로브에 사용되는 호스트 이름입니다. 다중 사이트를 Application Gateway에 구성하는 경우에만 적용할 수 있습니다. 그렇지 않으면 '127.0.0.1'을 사용합니다. 이 값은 VM 호스트 이름과 다릅니다.|
-  |**Path**|/ 또는 다른 경로|사용자 지정 프로브의 전체 url 중 나머지 부분입니다. 유효한 경로는 '/'로 시작합니다. http://contoso.com의 기본 경로로 '/'만 사용합니다. |
+  |**Path**|/ 또는 다른 경로|사용자 지정 프로브의 전체 url 중 나머지 부분입니다. 유효한 경로는 '/'로 시작합니다. http://contoso.com의 기본 경로에 '/'만 사용합니다. |
   |**간격(초)**|30|상태를 확인하기 위해 프로브가 실행되는 주기입니다. 30초 이하 값을 설정하는 것은 권장되지 않습니다.|
   |**시간 제한(초)**|30|프로브에서 시간 초과되기 전에 대기하는 시간입니다. 시간 제한 간격은 http 호출이 백 엔드 상태 페이지를 사용하도록 설정할 수 있을만큼 충분히 높아야 합니다.|
   |**비정상 임계값**|3|비정상으로 간주되는 실패한 시도 횟수입니다. 임계값이 0이면 상태 확인에 실패한 경우 백 엔드는 즉시 비정상인 것으로 결정됩니다.|
@@ -81,5 +81,4 @@ Azure Application Gateway를 사용하여 SSL 오프로드를 구성하는 방�
 
 [1]: ./media/application-gateway-create-probe-portal/figure1.png
 [2]: ./media/application-gateway-create-probe-portal/figure2.png
-
 

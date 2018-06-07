@@ -1,30 +1,29 @@
 ---
-title: "Service Fabric 앱의 용량 계획 | Microsoft Docs"
-description: "서비스 패브릭 응용 프로그램에 필요한 계산 노드 수를 확인하는 방법 설명"
+title: Service Fabric 앱의 용량 계획 | Microsoft Docs
+description: 서비스 패브릭 응용 프로그램에 필요한 계산 노드 수를 확인하는 방법 설명
 services: service-fabric
 documentationcenter: .net
 author: mani-ramaswamy
 manager: markfuss
-editor: 
+editor: ''
 ms.assetid: 9fa47be0-50a2-4a51-84a5-20992af94bea
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 7/27/2017
+ms.date: 2/23/2018
 ms.author: subramar
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 1e6ae31b3ef2d9baf578b199233e61936aa3528e
-ms.openlocfilehash: caeb0569de89b1af7b87f393601c7aa1a1e293dc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/03/2017
-
+ms.openlocfilehash: ac8abbdbbe9125ea036d837c08e1089aa6d1e55d
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="capacity-planning-for-service-fabric-applications"></a>서비스 패브릭 응용 프로그램의 용량 계획
 이 문서에서는 Azure 서비스 패브릭 응용 프로그램을 실행하는 데 필요한 리소스(CPU, RAM, 디스크 저장소) 양을 추정하는 방법을 배웁니다. 대부분의 경우 시간이 지나면서 리소스 요구 사항도 변합니다. 일반적으로 서비스를 개발/테스트하는 단계에서는 리소스가 적게 필요하고, 프로덕션 단계로 넘어가서 응용 프로그램의 인기가 높아지면 더 많은 리소스가 필요하게 됩니다. 응용 프로그램을 설계할 때에는 현재의 장기 요구 사항을 고려하고 고객의 높은 요구 사항에 따라 서비스를 확장할 수 있도록 선택을 내리도록 합니다.
 
- 서비스 패브릭 클러스터를 만들 때 클러스터를 구성할 VM(가상 컴퓨터) 종류를 결정합니다. 각 VM과 함께 제한된 양의 리소스가 CPU(코어 및 속도), 네트워크 대역폭, RAM 및 디스크 저장소의 형태로 제공됩니다. 시간이 지나면서 서비스가 성장하면 더 많은 리소스를 제공하는 VM으로 업그레이드하거나 클러스터에 더 많은 VM을 추가할 수 있습니다. 후자를 선택하려면 클러스터에 동적으로 추가되는 새 VM을 활용할 수 있도록 처음부터 서비스를 설계해야 합니다.
+ 서비스 패브릭 클러스터를 만들 때 클러스터를 구성할 VM(가상 머신) 종류를 결정합니다. 각 VM과 함께 제한된 양의 리소스가 CPU(코어 및 속도), 네트워크 대역폭, RAM 및 디스크 저장소의 형태로 제공됩니다. 시간이 지나면서 서비스가 성장하면 더 많은 리소스를 제공하는 VM으로 업그레이드하거나 클러스터에 더 많은 VM을 추가할 수 있습니다. 후자를 선택하려면 클러스터에 동적으로 추가되는 새 VM을 활용할 수 있도록 처음부터 서비스를 설계해야 합니다.
 
 일부 서비스는 VM 자체에서 데이터를 거의 또는 전혀 관리하지 않습니다. 따라서 이러한 서비스에 대한 용량 계획은 주로 성능에 초점을 맞춥니다. 즉, VM의 해당 CPU(코어 및 속도)를 선택해야 합니다. 또한 네트워크 대역폭을 고려해야 하고 네트워크 전송 빈도와 전송되는 데이터 양을 고려해야 합니다. 서비스 사용량이 증가하더라도 서비스가 원활하게 수행될 수 있도록 클러스터에 더 많은 VM을 추가하여 모든 VM에 네트워크 요청을 분산할 수 있습니다.
 
@@ -67,4 +66,3 @@ Number of Nodes = (DB_Size * RF)/Node_Size
 
 <!--Link references--In actual articles, you only need a single period before the slash-->
 [10]: service-fabric-concepts-partitioning.md
-

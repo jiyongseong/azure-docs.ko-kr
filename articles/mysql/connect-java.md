@@ -1,46 +1,46 @@
 ---
-title: "Java를 사용하여 MySQL용 Azure Database에 연결 | Microsoft Docs"
+title: "Java를 사용하여 Azure Database for MySQL에 연결"
 description: "이 빠른 시작에서는 MySQL 데이터베이스용 Azure Database의 데이터를 연결하고 쿼리하는 데 사용할 수 있는 Java 코드 샘플을 제공합니다."
 services: mysql
 author: jasonwhowell
 ms.author: jasonh
-manager: jhubbard
+manager: kfile
 editor: jasonwhowell
 ms.service: mysql-database
-ms.custom: mvc
-ms.topic: hero-article
+ms.custom: mvc, devcenter
+ms.topic: quickstart
 ms.devlang: java
-ms.date: 06/20/2017
+ms.date: 02/28/2018
+ms.openlocfilehash: efc1fd07f09bd0bae3c21b9d63c04020abc7832e
+ms.sourcegitcommit: c765cbd9c379ed00f1e2394374efa8e1915321b9
 ms.translationtype: HT
-ms.sourcegitcommit: 141270c353d3fe7341dfad890162ed74495d48ac
-ms.openlocfilehash: 6ffcf3b38a3d868dfa10ea2e2a9d097441387d4f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/28/2018
 ---
-
 # <a name="azure-database-for-mysql-use-java-to-connect-and-query-data"></a>MySQL용 Azure Database: Java를 사용하여 데이터 연결 및 쿼리
-이 빠른 시작에서는 Java 응용 프로그램을 사용하여 MySQL용 Azure Database에 연결하는 방법을 보여줍니다. SQL 문을 사용하여 데이터베이스의 데이터를 쿼리, 삽입, 업데이트 및 삭제하는 방법을 보여 줍니다. 이 문서의 단계에서는 개발자가 Java를 사용하여 개발하는 것에 익숙하고 MySQL용 Azure Database 작업에 익숙하지 않다고 가정합니다.
+이 빠른 시작에서는 Java 응용 프로그램과 [MySQL 커넥터/J](https://dev.mysql.com/downloads/connector/j/) JDBC 드라이버를 사용하여 Azure Database for MySQL에 연결하는 방법을 보여 줍니다. SQL 문을 사용하여 데이터베이스의 데이터를 쿼리, 삽입, 업데이트 및 삭제하는 방법을 보여 줍니다. 이 문서에서는 Java를 사용하여 개발하는 데 익숙하고 Azure Database for MySQL을 처음 사용한다고 가정합니다.
+
+[MySQL 커넥터 예제 페이지](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-examples.html)에는 다른 많은 예제와 샘플 코드가 있습니다.
 
 ## <a name="prerequisites"></a>필수 조건
-이 빠른 시작에서는 다음과 같은 가이드 중 하나에서 만들어진 리소스를 시작 지점으로 사용합니다.
-- [Azure Portal을 사용한 MySQL용 Azure Database 서버 만들기](./quickstart-create-mysql-server-database-using-azure-portal.md)
-- [Azure CLI를 사용한 MySQL용 Azure Database 서버 만들기](./quickstart-create-mysql-server-database-using-azure-cli.md)
+1. 이 빠른 시작에서는 다음과 같은 가이드 중 하나에서 만들어진 리소스를 시작 지점으로 사용합니다.
+   - [Azure Portal을 사용한 MySQL용 Azure Database 서버 만들기](./quickstart-create-mysql-server-database-using-azure-portal.md)
+   - [Azure CLI를 사용한 MySQL용 Azure Database 서버 만들기](./quickstart-create-mysql-server-database-using-azure-cli.md)
 
-다음과 같은 작업도 필요합니다.
-- JDBC 드라이버 [MySQL 커넥터/J](https://dev.mysql.com/downloads/connector/j/) 다운로드
-- 응용 프로그램 classpath에 JDBC jar 파일(예: mysql-connector-java-5.1.42-bin.jar)을 포함합니다. 이 문제가 있는 경우 해당 환경(예: [Apache Tomcat](https://tomcat.apache.org/tomcat-7.0-doc/class-loader-howto.html) 또는 [Java SE](http://docs.oracle.com/javase/7/docs/technotes/tools/windows/classpath.html))에 대한 설명서에서 클래스 경로 세부 사항을 참조하세요.
-- 방화벽이 응용 프로그램에 열려 있고 SSL 설정이 응용 프로그램에 맞게 조정되어 있는 등 MySQL용 Azure Database 연결 보안이 올바른 연결에 맞게 구성되어 있는지 확인합니다.
+2. 방화벽이 응용 프로그램에 열려 있고 SSL 설정이 응용 프로그램에 맞게 조정되어 있는 등 MySQL용 Azure Database 연결 보안이 올바른 연결에 맞게 구성되어 있는지 확인합니다.
+
+3. 다음 방법 중 하나를 사용하여 MySQL 커넥터/J 커넥터를 가져옵니다.
+   - Maven 패키지 [mysql-connector-java](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22mysql%22%20AND%20a%3A%22mysql-connector-java%22)를 사용하여 프로젝트에 대한 POM 파일에 [mysql 종속성](https://mvnrepository.com/artifact/mysql/mysql-connector-java/5.1.6)을 포함시킵니다.
+   - [MySQL 커넥터/J](https://dev.mysql.com/downloads/connector/j/) JDBC 드라이버를 다운로드하고 응용 프로그램 클래스 경로에 JDBC jar 파일(예: mysql-connector-java-5.1.42-bin.jar)을 포함시킵니다. 클래스 경로 문제가 있는 경우 환경(예: [Apache Tomcat](https://tomcat.apache.org/tomcat-7.0-doc/class-loader-howto.html) 또는 [Java SE](http://docs.oracle.com/javase/7/docs/technotes/tools/windows/classpath.html))의 클래스 경로 세부 사항에 대한 설명서를 참조하세요.
 
 ## <a name="get-connection-information"></a>연결 정보 가져오기
 MySQL용 Azure Database에 연결하는 데 필요한 연결 정보를 가져옵니다. 정규화된 서버 이름 및 로그인 자격 증명이 필요합니다.
 
-1. [Azure 포털](https://portal.azure.com/)에 로그인합니다.
-2. 왼쪽 창에서 **모든 리소스**를 클릭하고 만든 서버를 검색합니다(예: **myserver4demo**).
+1. [Azure Portal](https://portal.azure.com/)에 로그인합니다.
+2. Azure Portal의 왼쪽 메뉴에서 **모든 리소스**를 클릭한 다음, 방금 만든 서버를 검색합니다(예: **mydemoserver**).
 3. 서버 이름을 클릭합니다.
-4. 서버의 **속성** 페이지를 선택합니다. **서버 이름** 및 **서버 관리자 로그인 이름**을 기록해 둡니다.
- ![MySQL용 Azure Database 서버 이름](./media/connect-java/1_server-properties-name-login.png)
-5. 서버 로그인 정보를 잊어버린 경우 **개요** 페이지로 이동하여 서버 관리자 로그인 이름을 확인하고 필요한 경우 암호를 다시 설정합니다.
+4. 서버의 **개요** 패널에 있는 **서버 이름**과 **서버 관리자 로그인 이름**을 기록해 둡니다. 암호를 잊어버리면 이 패널에서 암호를 재설정할 수 있습니다.
+ ![MySQL용 Azure Database 서버 이름](./media/connect-java/1_server-overview-name-login.png)
 
 ## <a name="connect-create-table-and-insert-data"></a>테이블 연결, 생성 및 데이터 삽입
 **INSERT** SQL 문이 있는 함수를 사용하여 데이터를 연결하고 로드하려면 다음 코드를 사용하세요. [getConnection()](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-usagenotes-connect-drivermanager.html) 메서드는 MySQL에 연결하는 데 사용됩니다. [createStatement()](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-usagenotes-statements.html) 및 execute() 메서드는 테이블을 삭제하고 생성하는 데 사용됩니다. prepareStatement 개체는 매개 변수 값을 바인딩하는 setString() 및 setInt()를 사용하여 insert 명령을 작성하는 데 사용됩니다. executeUpdate() 메서드는 각 매개 변수 집합에 값을 삽입하는 명령을 실행합니다. 
@@ -56,9 +56,9 @@ public class CreateTableInsertRows {
     public static void main (String[] args)  throws Exception
     {
         // Initialize connection variables. 
-        String host = "myserver4demo.mysql.database.azure.com";
+        String host = "mydemoserver.mysql.database.azure.com";
         String database = "quickstartdb";
-        String user = "myadmin@myserver4demo";
+        String user = "myadmin@mydemoserver";
         String password = "<server_admin_password>";
 
         // check that the driver is installed
@@ -158,9 +158,9 @@ public class ReadTable {
     public static void main (String[] args)  throws Exception
     {
         // Initialize connection variables.
-        String host = "myserver4demo.mysql.database.azure.com";
+        String host = "mydemoserver.mysql.database.azure.com";
         String database = "quickstartdb";
-        String user = "myadmin@myserver4demo";
+        String user = "myadmin@mydemoserver";
         String password = "<server_admin_password>";
 
         // check that the driver is installed
@@ -244,9 +244,9 @@ public class UpdateTable {
     public static void main (String[] args)  throws Exception
     {
         // Initialize connection variables. 
-        String host = "myserver4demo.mysql.database.azure.com";
+        String host = "mydemoserver.mysql.database.azure.com";
         String database = "quickstartdb";
-        String user = "myadmin@myserver4demo";
+        String user = "myadmin@mydemoserver";
         String password = "<server_admin_password>";
 
         // check that the driver is installed
@@ -325,9 +325,9 @@ public class DeleteTable {
     public static void main (String[] args)  throws Exception
     {
         // Initialize connection variables.
-        String host = "myserver4demo.mysql.database.azure.com";
+        String host = "mydemoserver.mysql.database.azure.com";
         String database = "quickstartdb";
-        String user = "myadmin@myserver4demo";
+        String user = "myadmin@mydemoserver";
         String password = "<server_admin_password>";
         
         // check that the driver is installed
@@ -394,6 +394,7 @@ public class DeleteTable {
 ```
 
 ## <a name="next-steps"></a>다음 단계
+[MySQL 커넥터/J 예제 페이지](https://dev.mysql.com/doc/connector-j/5.1/en/connector-j-examples.html)에는 다른 많은 예제와 샘플 코드가 있습니다.
+
 > [!div class="nextstepaction"]
 > [덤프 및 복원을 사용하여 MySQL Database를 MySQL용 Azure Database로 마이그레이션](concepts-migrate-dump-restore.md)
-

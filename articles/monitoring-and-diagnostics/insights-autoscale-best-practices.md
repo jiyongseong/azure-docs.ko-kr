@@ -1,6 +1,6 @@
 ---
 title: "자동 크기 조정에 대한 모범 사례 | Microsoft Docs"
-description: "Azure에서 웹앱, 가상 컴퓨터 크기 집합 및 Cloud Services에 대한 자동 크기 조정 패턴"
+description: "Azure에서 Web Apps, Virtual Machine 확장 집합 및 Cloud Services에 대한 자동 크기 조정 패턴"
 author: anirudhcavale
 manager: orenr
 editor: 
@@ -14,15 +14,14 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/07/2017
 ms.author: ancav
+ms.openlocfilehash: d5b33b15c315c7538bba7bf9ae067946f3b6d3c4
+ms.sourcegitcommit: fa28ca091317eba4e55cef17766e72475bdd4c96
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 54dad831287376db7fb2dc46e4591be1499dc072
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/14/2017
 ---
 # <a name="best-practices-for-autoscale"></a>자동 크기 조정에 대한 모범 사례
-이 문서에서는 Azure에서 자동으로 크기를 조정하기 위한 모범 사례를 설명합니다. Azure Monitor 자동 크기 조정은 [가상 컴퓨터 크기 집합](https://azure.microsoft.com/services/virtual-machine-scale-sets/), [Cloud Services](https://azure.microsoft.com/services/cloud-services/) 및 [App Service - Web Apps](https://azure.microsoft.com/services/app-service/web/)에만 적용됩니다. 다른 Azure 서비스에는 다른 크기 조정 방법이 사용됩니다.
+이 문서에서는 Azure에서 자동으로 크기를 조정하기 위한 모범 사례를 설명합니다. Azure Monitor 자동 크기 조정은 [가상 컴퓨터 확장 집합](https://azure.microsoft.com/services/virtual-machine-scale-sets/), [Cloud Services](https://azure.microsoft.com/services/cloud-services/) 및 [App Service - Web Apps](https://azure.microsoft.com/services/app-service/web/)에만 적용됩니다. 다른 Azure 서비스에는 다른 크기 조정 방법이 사용됩니다.
 
 ## <a name="autoscale-concepts"></a>자동 크기 조정 개념
 * 하나의 리소스에는 *하나의* 자동 크기 조정 설정만 있을 수 있습니다.
@@ -31,23 +30,20 @@ ms.lasthandoff: 07/21/2017
   자동 크기 조정 설정에는 최대, 최소 및 기본 인스턴스 값이 있습니다.
 * 자동 크기 조정 작업에서는 항상 규모 확장 또는 규모 감축에 대해 구성된 임계값에 도달했는지 확인하여 크기를 조정할 연관된 메트릭을 읽습니다. [Azure Monitor 자동 크기 조정 공통 메트릭](insights-autoscale-common-metrics.md)에서 자동 크기 조정을 통해 크기를 조정할 수 있는 메트릭 목록을 볼 수 있습니다.
 * 모든 임계값은 인스턴스 수준에서 계산됩니다. 예를 들어 "인스턴스 수가 2일 때 평균 CPU가 80%를 초과하면 1인스턴스만큼 규모 확장"은 모든 인스턴스에서 평균 CPU가 80%보다 높은 경우에 규모를 확장함을 의미합니다.
-* 항상 메일을 통해 오류 알림이 제공됩니다. 특히, 대상 리소스의 소유자, 참가자 및 읽기 권한자에게 메일이 제공됩니다. 또한 자동 크기 조정이 오류에서 복구하여 정상적으로 작동하기 시작하면 항상 *복구* 메일이 제공됩니다.
-* 성공적인 크기 조정 작업 알림을 메일과 webhook를 통해 받도록 옵트인할 수 있습니다.
+* 모든 자동 크기 조정 실패는 활동 로그에 기록됩니다. 그러므로 자동 크기 조정 오류가 있을 때마다 전자 메일, SMS, 웹후크 등을 통해 알림을 받을 수 있도록 [활동 로그 경고](./monitoring-activity-log-alerts.md)를 구성할 수 있습니다.
+* 마찬가지로, 모든 성공한 크기 조정 작업도 활동 로그에 게시됩니다. 그러므로 성공한 자동 크기 조정 작업이 있을 때마다 전자 메일, SMS, 웹후크 등을 통해 알림을 받을 수 있도록 활동 로그 경고를 구성할 수 있습니다. 또한 크기 조정 설정의 알림 탭을 통해 성공적인 크기 조정 작업에 대한 알림을 받도록 전자 메일 또는 웹후크 알림을 구성할 수도 있습니다.
 
 ## <a name="autoscale-best-practices"></a>자동 크기 조정 모범 사례
 자동 크기 조정을 사용할 때 다음 모범 사례를 따르세요.
 
-### <a name="ensure-the-maximum-and-minimum-values-are-different-and-have-an-adequate-margin-between-them"></a>최대값과 최소값이 다르고 둘 사이의 간격이 적당한지 확인
-최소값=2, 최대값=2 및 현재 인스턴스 수가 2인 설정이 있는 경우에는 발생할 수 있는 크기 조정 동작이 없습니다. 최대 인스턴스 수와 최소 인스턴스 수 간에 적당한 간격을 유지하세요(두 숫자 모두 포함). 자동 크기 조정은 항상 이러한 한도 사이에서 크기를 조정합니다.
+### <a name="ensure-the-maximum-and-minimum-values-are-different-and-have-an-adequate-margin-between-them"></a>최댓값과 최솟값이 다르고 둘 사이의 간격이 적당한지 확인
+최솟값=2, 최댓값=2 및 현재 인스턴스 수가 2인 설정이 있는 경우에는 발생할 수 있는 크기 조정 동작이 없습니다. 최대 인스턴스 수와 최소 인스턴스 수 간에 적당한 간격을 유지하세요(두 숫자 모두 포함). 자동 크기 조정은 항상 이러한 한도 사이에서 크기를 조정합니다.
 
-### <a name="manual-scaling-is-reset-by-autoscale-min-and-max"></a>수동 크기 조정이 자동 크기 조정 최소값 및 최대값으로 다시 설정됨
-인스턴스 수를 최대값 위 또는 아래 값으로 수동으로 업데이트하면 자동 크기 조정 엔진이 최소값(아래인 경우) 또는 최대값(위인 경우)으로 다시 자동으로 크기를 조정합니다. 예를 들어 3 및 6 사이의 범위를 설정할 수 있습니다. 실행 중인 인스턴스가 하나 있는 경우 자동 크기 조정 엔진은 다음 실행 시 3개 인스턴스로 확장합니다. 마찬가지로, 다음 실행에서는 8개의 인스턴스에서 6개로 규모 감축합니다.  수동 크기 조정은 자동 크기 조정 규칙을 재설정하지 않은 경우 극히 임시적입니다.
+### <a name="manual-scaling-is-reset-by-autoscale-min-and-max"></a>수동 크기 조정이 자동 크기 조정 최솟값 및 최댓값으로 다시 설정됨
+인스턴스 수를 최댓값 위 또는 아래 값으로 수동으로 업데이트하면 자동 크기 조정 엔진이 최솟값(아래인 경우) 또는 최댓값(위인 경우)으로 다시 자동으로 크기를 조정합니다. 예를 들어 3 및 6 사이의 범위를 설정할 수 있습니다. 실행 중인 인스턴스가 하나 있는 경우 자동 크기 조정 엔진은 다음 실행 시 3개 인스턴스로 확장합니다. 마찬가지로, 크기 조정 인스턴스를 8개로 수동 설정하면 다음에 실행되는 자동 크기 조정에서는 그 다음 실행 시 6개 인스턴스로 다시 돌아갑니다.  수동 크기 조정은 자동 크기 조정 규칙을 재설정하지 않은 경우 극히 임시적입니다.
 
 ### <a name="always-use-a-scale-out-and-scale-in-rule-combination-that-performs-an-increase-and-decrease"></a>항상 증가 및 감소를 수행하는 규모 확장 및 감축 규칙 조합 사용
-이 조합의 한 부분만 사용하는 경우에는 자동 크기 조정에서 최대값 또는 최소값에 도달할 때까지 해당 부분만 규모를 확장하거나 감축합니다.
-
-### <a name="do-not-switch-between-the-azure-portal-and-the-azure-classic-portal-when-managing-autoscale"></a>자동 크기 조정을 관리할 때 Azure 포털 및 Azure 클래식 포털 간에 전환 금지
-Cloud Services 및 App Services(Web Apps)의 경우 Azure 포털(portal.azure.com)을 사용하여 자동 크기 조정 설정을 만들고 관리합니다. 가상 컴퓨터 크기 집합의 경우 PowerShellH, CLI 또는 REST API를 사용하여 자동 크기 조정 설정을 만들고 관리합니다. 자동 크기 조정 구성을 관리할 때 Azure 클래식 포털(manage.windowsazure.com)과 Azure 포털(portal.azure.com) 간에 전환 금지 Azure 클래식 포털과 해당 기본 백 엔드에는 제한이 있습니다. 그래픽 사용자 인터페이스를 사용하여 자동 크기 조정을 관리하려면 Azure 포털로 이동합니다. Azure 리소스 탐색기를 통해 자동 크기 조정 PowerShell, CLI 또는 REST API를 사용할 수 있습니다.
+이 조합의 한 부분만 사용하는 경우에는 자동 크기 조정에서 최댓값 또는 최솟값에 도달할 때까지 해당 부분만 규모를 확장하거나 감축합니다.
 
 ### <a name="choose-the-appropriate-statistic-for-your-diagnostics-metric"></a>진단 메트릭에 적절한 통계 선택
 진단 메트릭의 경우 크기를 조정할 메트릭으로 *평균*, *최소*, *최대* 및 *합계* 중에서 선택할 수 있습니다. 가장 일반적인 통계는 *평균*입니다.
@@ -55,7 +51,7 @@ Cloud Services 및 App Services(Web Apps)의 경우 Azure 포털(portal.azure.co
 ### <a name="choose-the-thresholds-carefully-for-all-metric-types"></a>모든 메트릭 유형에 대해 신중하게 임계값 선택
 현실적인 상황을 기반으로 서로 다른 규모 확장 및 규모 감축 임계값을 신중하게 선택하는 것이 좋습니다.
 
-아래 예와 같이 확장 및 감축 조건에 동일하거나 매우 유사한 임계값을 사용하는 자동 크기 조정 설정은 *권장되지 않습니다* .
+아래 예와 같이 확장 및 감축 조건에 동일하거나 매우 유사한 임계값을 사용하는 자동 크기 조정 설정은 *권장되지 않습니다*.
 
 * 스레드 수가 600 이하인 경우 인스턴스 수 1개 증가
 * 스레드 수가 600 이상인 경우 인스턴스 수 1개 감소
@@ -84,7 +80,7 @@ Cloud Services 및 App Services(Web Apps)의 경우 Azure 포털(portal.azure.co
 5. 다음 자동 크기 조정 확인 시 CPU는 계속해서 50으로 감소합니다. 다시 평가에서 50 x 3 인스턴스 = 150/2 인스턴스 = 75이며, 이는 규모 확장 임계값 80보다 낮으므로 인스턴스 2개로 성공적으로 감축합니다.
 
 ### <a name="considerations-for-scaling-threshold-values-for-special-metrics"></a>특정 메트릭의 임계값 조정에 대한 고려 사항
- 저장소 또는 서비스 버스 큐 길이 메트릭과 같은 특정 메트릭의 경우 임계값은 현재 인스턴스 수당 사용 가능한 평균 메시지 수입니다. 이 메트릭에 대한 임계값을 신중하게 선택해야 합니다.
+ 저장소 또는 Service Bus 큐 길이 메트릭과 같은 특정 메트릭의 경우 임계값은 현재 인스턴스 수당 사용 가능한 평균 메시지 수입니다. 이 메트릭에 대한 임계값을 신중하게 선택해야 합니다.
 
 동작을 보다 잘 이해할 수 있도록 예를 들어 살펴보겠습니다.
 
@@ -114,9 +110,9 @@ Cloud Services 및 App Services(Web Apps)의 경우 Azure 포털(portal.azure.co
 
 아래 그림에는 최소 인스턴스 = 2이고 최대 인스턴스 = 10인 기본 프로필의 자동 크기 조정 설정을 보여 줍니다. 이 예제에서는 큐의 메시지 수가 10보다 큰 경우 규모를 확장하고, 큐의 메시지 수가 3보다 작은 경우 규모를 감축하도록 규칙이 구성되어 있습니다. 따라서 지금은 리소스의 크기를 2에서 10 사이로 조정할 수 있습니다.
 
-또한 월요일에 설정된 되풀이 프로필이 있습니다. 이는 최소 인스턴스 = 2, 최대 인스턴스 = 12에 대해 설정되어 있습니다. 따라서 월요일에는 자동 크기 조정에서 처음이 이 조건을 확인하여 인스턴스 수가 2인 경우 새 최소값 3으로 크기를 조정합니다. 자동 크기 조정에서 일치하는 이 프로필 조건을 계속 찾는 한 이 프로필에 대해 구성된 CPU 기반 규모 확장/감축 규칙만 처리합니다. 이 경우 큐 길이를 확인하지 않습니다. 그러나 큐 길이 조건도 확인하려는 경우 기본 프로필의 이러한 규칙을 월요일 프로필에도 포함해야 합니다.
+또한 월요일에 설정된 되풀이 프로필이 있습니다. 이는 최소 인스턴스 = 3, 최대 인스턴스 = 10에 대해 설정되어 있습니다. 따라서 월요일에는 자동 크기 조정에서 처음이 이 조건을 확인하여 인스턴스 수가 2인 경우 새 최소값 3으로 크기를 조정합니다. 자동 크기 조정에서 일치하는 이 프로필 조건을 계속 찾는 한 이 프로필에 대해 구성된 CPU 기반 규모 확장/감축 규칙만 처리합니다. 이 경우 큐 길이를 확인하지 않습니다. 그러나 큐 길이 조건도 확인하려는 경우 기본 프로필의 이러한 규칙을 월요일 프로필에도 포함해야 합니다.
 
-마찬가지로, 자동 크기 조정이 다시 기본 프로필로 전환하는 경우에는 먼저 최소값 및 최대값 조건이 충족되는지 확인합니다. 이때 인스턴스 수가 12인 경우 기본 프로필에 허용되는 최대값인 10으로 규모를 감축합니다.
+마찬가지로, 자동 크기 조정이 다시 기본 프로필로 전환하는 경우에는 먼저 최솟값 및 최댓값 조건이 충족되는지 확인합니다. 이때 인스턴스 수가 12인 경우 기본 프로필에 허용되는 최댓값인 10으로 규모를 감축합니다.
 
 ![자동 크기 조정 설정](./media/insights-autoscale-best-practices/insights-autoscale-best-practices-2.png)
 
@@ -144,16 +140,18 @@ Cloud Services 및 App Services(Web Apps)의 경우 Azure 포털(portal.azure.co
 기본 인스턴스 수는 메트릭을 사용할 수 없을 때 자동 크기 조정에서 서비스 크기를 조정하는 인스턴스 수이므로 중요합니다. 따라서 워크로드에 안전한 기본 인스턴스 수를 선택해야 합니다.
 
 ### <a name="configure-autoscale-notifications"></a>자동 크기 조정 알림 구성
-자동 크기 조정에서는 다음 조건 중 하나가 발생한 경우 리소스 관리자 및 참가자에게 메일로 알려 줍니다.
+자동 크기 조정은 다음 조건 중 하나가 발생할 경우 활동 로그에 게시됩니다.
 
-* 자동 크기 조정 서비스에서 작업에 실패한 경우
-* 자동 크기 조정 서비스에서 크기 조정 결정을 내리는 데 메트릭을 사용할 수 없는 경우
-* 크기 조정 결정을 내리는 데 메트릭을 다시 사용할 수 있게 된(복구) 경우
-  위 조건 외에 성공적인 크기 조정 동작에 대한 알림을 받도록 메일 또는 webhook 알림을 구성할 수 있습니다.
-  
+* 자동 크기 조정에서 크기 조정 작업이 생성되는 경우
+* 자동 크기 조정 서비스에서 크기 조정 작업을 성공적으로 완료하는 경우
+* 자동 크기 조정 서비스에서 크기 조정 작업에 실패한 경우.
+* 자동 크기 조정 서비스에서 크기 조정 결정을 내리는 데 메트릭을 사용할 수 없는 경우.
+* 크기 조정 결정을 내리는 데 메트릭을 다시 사용할 수 있게 된(복구) 경우.
+
 또한 활동 로그 경고를 사용하여 자동 크기 조정 엔진의 상태를 모니터링할 수도 있습니다. 다음은 [구독의 모든 자동 크기 조정 엔진 작업을 모니터링하기 위한 활동 로그 경고 만들기](https://github.com/Azure/azure-quickstart-templates/tree/master/monitor-autoscale-alert) 또는 [구독에서 실패한 모든 자동 크기 조정 규모 감축/규모 확장 작업을 모니터링하기 위한 활동 로그 경고 만들기](https://github.com/Azure/azure-quickstart-templates/tree/master/monitor-autoscale-failed-alert) 예제입니다.
+
+활동 로그 경고를 사용하는 것 외에, 크기 조정 설정의 알림 탭을 통해 성공적인 크기 조정 작업에 대한 알림을 받도록 전자 메일 또는 웹후크 알림을 구성할 수도 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
 - [구독의 모든 자동 크기 조정 엔진 작업을 모니터링하기 위한 활동 로그 경고를 만듭니다.](https://github.com/Azure/azure-quickstart-templates/tree/master/monitor-autoscale-alert)
 - [구독에서 실패한 모든 자동 크기 조정 규모 감축/규모 확장 작업을 모니터링하기 위한 활동 로그 경고를 만듭니다.](https://github.com/Azure/azure-quickstart-templates/tree/master/monitor-autoscale-failed-alert)
-

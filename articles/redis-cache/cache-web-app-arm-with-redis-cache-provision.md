@@ -3,8 +3,8 @@ title: "Redis Cache가 포함된 웹앱 프로비전"
 description: "Redis Cache가 포함된 웹앱을 배포하려면 Azure 리소스 관리자 템플릿을 사용합니다."
 services: app-service
 documentationcenter: 
-author: steved0x
-manager: erickson-doug
+author: wesmc7777
+manager: cfowler
 editor: 
 ms.assetid: 6e99c71f-ef8e-4570-a307-e4c059e60c35
 ms.service: app-service
@@ -13,14 +13,12 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 01/06/2017
-ms.author: sdanie
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 9568210d4df6cfcf5b89ba8154a11ad9322fa9cc
-ms.openlocfilehash: 810c1cedd4fe0bd6ecdf9bd32dfb241f5f345300
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/15/2017
-
-
+ms.author: wesmc
+ms.openlocfilehash: b787b3f2caaff5535557c03c45b058e1bbb0c77d
+ms.sourcegitcommit: 2a70752d0987585d480f374c3e2dba0cd5097880
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="create-a-web-app-plus-redis-cache-using-a-template"></a>템플릿을 사용하여 Redis Cache가 포함된 웹앱 만들기
 이 항목에서는 Redis Cache가 포함된 Azure 웹앱을 배포하는 Azure 리소스 관리자 템플릿을 만드는 방법을 배웁니다. 어떤 리소스를 배포할지 정의하는 방법 및 배포를 실행할 때 매개 변수를 지정하는 방법을 알게 됩니다. 배포를 위해 이 템플릿을 사용하거나 요구 사항에 맞게 사용자 지정을 할 수 있습니다.
@@ -127,4 +125,3 @@ ms.lasthandoff: 05/15/2017
 
 ### <a name="azure-cli"></a>Azure CLI
     azure group deployment create --template-uri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-web-app-with-redis-cache/azuredeploy.json -g ExampleDeployGroup
-

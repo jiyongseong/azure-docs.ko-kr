@@ -1,3 +1,19 @@
+---
+title: 포함 파일
+description: 포함 파일
+services: virtual-network
+author: jimdial
+ms.service: virtual-network
+ms.topic: include
+ms.date: 04/09/2018
+ms.author: jdial
+ms.custom: include file
+ms.openlocfilehash: 1febadbbf7821988600d6feddc94fce25d15e989
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
+---
 ## <a name="os-config"></a>VM 운영 체제에 IP 주소 추가
 
 여러 개인 IP 주소를 사용하여 만든 VM에 연결하고 로그인합니다. VM에 추가한 모든 개인 IP 주소(기본 포함)를 수동으로 추가해야 합니다. VM 운영 체제에 대한 다음 단계를 완료합니다.
@@ -13,16 +29,16 @@
     * **IP 주소**: *기본* 개인 IP 주소를 입력합니다.
     * **서브넷 마스크**: 서브넷을 기준으로 설정됩니다. 예를 들어 서브넷이 /24이면 서브넷 마스크는 255.255.255.0입니다.
     * **기본 게이트웨이**: 서브넷의 첫 번째 IP 주소입니다. 서브넷이 10.0.0.0/24이면 게이트웨이 IP 주소는 10.0.0.1입니다.
-    * **다음 DNS 서버 주소 사용** 을 클릭하고 다음 값을 입력합니다.
+    * **다음 DNS 서버 주소 사용** 을 선택하고 다음 값을 입력합니다.
         * **기본 설정 DNS 서버**: 자체 DNS 서버를 사용하지 않는 경우 168.63.129.16을 입력합니다.  자체 DNS 서버를 사용하는 경우 서버의 IP 주소를 입력합니다.
-    * **고급** 단추를 클릭하고 추가 IP 주소를 추가합니다. 8단계에 나열된 각 보조 개인 IP 주소를 기본 IP 주소에 대해 지정된 것과 동일한 서브넷을 갖는 NIC에 추가합니다.
-        >[!WARNING] 
-        >위의 단계를 제대로 따르지 않으면 VM에 대한 연결이 손실될 수 있습니다. 계속하기 전에 5단계에서 입력한 정보가 정확한지 확인합니다.
+    * **고급** 단추를 선택하고 추가 IP 주소를 추가합니다. 이전 단계에서 Azure 네트워크 인터페이스에 추가한 각각의 보조 개인 IP 주소를 Azure 네트워크 인터페이스에 할당된 기본 IP 주소에 할당되어 있는 Windows 네트워크 인터페이스에 추가합니다.
+
+        가상 머신의 운영 체제 내에서 Azure Virtual Machine에 할당된 공용 IP 주소는 절대 수동으로 할당하면 안 됩니다. 운영 체제 내에서 IP 주소를 수동으로 설정하는 경우 Azure [네트워크 인터페이스](../articles/virtual-network/virtual-network-network-interface-addresses.md#change-ip-address-settings)에 할당된 개인 IP 주소와 동일한 주소인지 확인합니다. 두 주소가 같지 않으면 가상 머신에 대한 연결이 끊어질 수 있습니다. [개인 IP 주소](../articles/virtual-network/virtual-network-network-interface-addresses.md#private) 설정에 대해 자세히 알아봅니다. Azure 공용 IP 주소는 절대 운영 체제 내에서 할당하지 않아야 합니다.
 
     * **확인**을 클릭하여 TCP/IP 설정을 닫은 다음 **확인**을 다시 클릭하여 어댑터 설정을 닫습니다. RDP 연결이 다시 설정됩니다.
 
 6. 명령 프롬프트에서 *ipconfig /all*을 입력합니다. 추가한 모든 IP 주소가 표시되고 DHCP는 해제됩니다.
-
+7. Azure에서 Windows에 대한 기본 IP 주소로 기본 IP 구성의 개인 IP 주소를 사용하도록 Windows를 구성합니다. 자세한 내용은 [여러 개의 IP 주소가 있는 Azure Windows VM에서 인터넷 액세스 없음](https://support.microsoft.com/help/4040882/no-internet-access-from-azure-windows-vm-that-has-multiple-ip-addresse)을 참조하세요. 
 
 ### <a name="validation-windows"></a>유효성 검사(Windows)
 

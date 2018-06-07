@@ -1,31 +1,24 @@
 ---
-title: "Dapper와 함께 탄력적 데이터베이스 클라이언트 라이브러리 사용 | Microsoft Docs"
-description: "Dapper과 함께 탄력적 데이터베이스 클라이언트 라이브러리 사용"
+title: Dapper와 함께 탄력적 데이터베이스 클라이언트 라이브러리 사용 | Microsoft Docs
+description: Dapper과 함께 탄력적 데이터베이스 클라이언트 라이브러리 사용
 services: sql-database
-documentationcenter: 
-manager: jhubbard
-author: torsteng
-ms.assetid: 463d2676-3b19-47c2-83df-f8c50492c9d2
+manager: craigg
+author: stevestein
 ms.service: sql-database
 ms.custom: scale out apps
-ms.workload: sql-database
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 05/27/2016
-ms.author: torsteng
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 10b40214ad4c7d7bb7999a5abce1c22100b617d8
-ms.openlocfilehash: 01369360fa10ae39e2f9b435d877de0171574286
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/13/2017
-
-
+ms.date: 04/01/2018
+ms.author: sstein
+ms.openlocfilehash: 99b2b1b475fddc32f36636cbd792883d6a02aee7
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="using-elastic-database-client-library-with-dapper"></a>Dapper과 함께 탄력적 데이터베이스 클라이언트 라이브러리 사용
-이 문서는 Dapper에 의존하여 응용 프로그램을 만들 개발자를 위한 것이지만, 구현 분할 확장 데이터 계층 응용 프로그램을 생성하기 위해 [탄력적 데이터베이스 도구](sql-database-elastic-scale-introduction.md) 를 수용하고 싶은 개발자들도 사용 가능합니다.  이 문서에서는 탄력적 데이터베이스 도구와 통합하기 위해 Dapper 기반 응용 프로그램에서 수행해야 하는 변경에 대해 설명합니다. 여기서는 Dapper를 사용하여 탄력적 데이터베이스의 분할된 데이터베이스 관리 및 데이터 종속 라우팅을 작성하는 방법에 대해 중점적으로 설명합니다. 
+이 문서는 Dapper를 기반으로 응용 프로그램을 작성하는 개발자뿐만 아니라 데이터 계층 규모를 확장하도록 분할을 구현하는 응용 프로그램을 만들기 위해 [탄력적 데이터베이스 도구](sql-database-elastic-scale-introduction.md)를 받아들이려는 개발자를 대상으로 합니다.  이 문서에서는 탄력적 데이터베이스 도구와 통합하기 위해 Dapper 기반 응용 프로그램에서 수행해야 하는 변경에 대해 설명합니다. 여기서는 Dapper를 사용하여 탄력적 데이터베이스 분할 관리 및 데이터 종속 라우팅을 작성하는 방법에 대해 중점적으로 설명합니다. 
 
-**샘플 코드**: [Azure SQL 데이터베이스-Dapper 통합에 대한 탄력적 데이터베이스 도구](https://code.msdn.microsoft.com/Elastic-Scale-with-Azure-e19fc77f).
+**샘플 코드**: [Azure SQL Database-Dapper 통합에 대한 Elastic Database 도구](https://code.msdn.microsoft.com/Elastic-Scale-with-Azure-e19fc77f).
 
 **Dapper**와 **DapperExtensions**는 Azure SQL Database의 탄력적 데이터베이스 클라이언트와 쉽게 통합할 수 있습니다. 응용 프로그램에서는 새로운 [SqlConnection](http://msdn.microsoft.com/library/system.data.sqlclient.sqlconnection.aspx) 개체를 만들고 열 때 [클라이언트 라이브러리](http://msdn.microsoft.com/library/azure/dn765902.aspx)의 [OpenConnectionForKey](http://msdn.microsoft.com/library/azure/dn807226.aspx) 호출을 사용하도록 변경하여 데이터 종속 라우팅을 사용할 수 있습니다. 이 경우 응용 프로그램에서 새 연결을 만들고 열 때만 해당 호출을 사용하도록 변경됩니다. 
 
@@ -47,13 +40,13 @@ Dapper 어셈블리를 확인하려면 [Dapper.net](http://www.nuget.org/package
 
 분할된 데이터베이스 맵 관리자는 동시 shardlet 관리 작업이 수행될 때 데이터베이스에서 발생할 수 있는 shardlet 데이터 뷰 불일치 현상을 방지합니다. 이를 위해, 분할된 데이터베이스 맵이 라이브러리내의 기존 응용 프로그램용 데이터베이스 연결을 조정합니다. 분할된 데이터베이스 관리 작업 수행 시 shardlet이 영향을 받을 수 있는 경우 분할된 데이터베이스 맵 기능은 데이터베이스 연결을 자동으로 종료할 수 있습니다. 
 
-따라서 Dapper에 대한 연결을 만드는 기존 방식을 사용하는 대신 [OpenConnectionForKey](http://msdn.microsoft.com/library/azure/dn824099.aspx)메서드를 사용해야 합니다. 이 메서드를 사용하면 분할된 데이터베이스 간을 데이터가 이동할 때 모든 유효성 검사가 수행되며 연결이 제대로 관리됩니다.
+따라서 Dapper에 대한 연결을 만드는 기존 방식을 사용하는 대신 [OpenConnectionForKey 메서드](http://msdn.microsoft.com/library/azure/dn824099.aspx)를 사용해야 합니다. 이 메서드를 사용하면 분할된 데이터베이스 간을 데이터가 이동할 때 모든 유효성 검사가 수행되며 연결이 제대로 관리됩니다.
 
 ### <a name="requirements-for-dapper-integration"></a>Dapper 통합을 위한 요구 사항
 탄력적 데이터베이스 클라이언트 라이브러리와 Dapper API를 모두 사용할 때는 다음 속성을 유지해야 합니다.
 
 * **규모 확장**: 응용 프로그램의 용량 요구 사항에 따라 분할된 응용 프로그램의 데이터 계층에서 데이터베이스를 필요한 만큼 추가하거나 제거합니다. 
-* **일관성**: 응용 프로그램은 분할을 사용하여 규모 확장되므로 데이터 종속 라우팅을 수행해야 합니다. 이를 위해 라이브러리의 데이터 종속 라우팅 기능을 사용합니다. 특히 손상이나 잘못된 쿼리 결과를 방지하기 위해 분할된 데이터베이스 맵을 통해 조정되는 연결에서 보장하는 유효성 검사 및 일관성을 유지해야 합니다. 이렇게 하면 예를 들어 지정된 shardlet이 분할/병합 API를 사용하여 현재 다른 분할된 데이터베이스로 이동되어 있는 경우 해당 shardlet에 대한 연결이 거부되거나 중지됩니다.
+* **일관성**: 응용 프로그램은 분할을 사용하여 규모가 확장되므로 데이터 종속 라우팅을 수행해야 합니다. 이를 위해 라이브러리의 데이터 종속 라우팅 기능을 사용합니다. 특히 손상이나 잘못된 쿼리 결과를 방지하기 위해 분할된 데이터베이스 맵을 통해 조정되는 연결에서 보장하는 유효성 검사 및 일관성을 유지해야 합니다. 이렇게 하면 예를 들어 지정된 shardlet이 분할/병합 API를 사용하여 현재 다른 분할된 데이터베이스로 이동되어 있는 경우 해당 shardlet에 대한 연결이 거부되거나 중지됩니다.
 * **개체 매핑**: 응용 프로그램의 클래스와 기본 데이터베이스 구조 간 변환을 수행하기 위해 Dapper에서 제공하는 편리한 매핑 기능을 유지합니다. 
 
 다음 섹션에서는 **Dapper** 및 **DapperExtensions**를 기반으로 하는 응용 프로그램에 대한 이러한 요구 사항 관련 지침을 제공합니다.
@@ -112,7 +105,7 @@ DDR 연결이 포함된 **using** 블록에서는 블록 내의 모든 데이터
 ## <a name="data-dependent-routing-with-dapper-and-dapperextensions"></a>Dapper 및 DapperExtensions를 사용한 데이터 종속 라우팅
 Dapper에는 데이터베이스 응용 프로그램을 개발할 때 데이터베이스에서 추가적인 편의 기능과 추상화를 제공할 수 있는 추가 확장 에코시스템이 포함되어 있습니다. 이러한 기능의 한 가지 예가 DapperExtensions입니다. 
 
-응용 프로그램에서 DapperExtensions를 사용하더라도 데이터베이스 연결 작성 및 관리 방식은 변경되지 않습니다. 즉, 응용 프로그램이 계속 연결을 열며 확장 메서드에는 일반 SQL 클라이언트 연결 개체가 사용됩니다. 위에서 설명한 것처럼 [OpenConnectionForKey](http://msdn.microsoft.com/library/azure/dn807226.aspx) 를 사용할 수 있습니다. 다음의 코드 샘플에 나와 있는 것처럼 변경되는 부분은 더 이상 T-SQL 문을 작성할 필요가 없다는 것뿐입니다.
+응용 프로그램에서 DapperExtensions를 사용하더라도 데이터베이스 연결 작성 및 관리 방식은 변경되지 않습니다. 즉, 응용 프로그램이 계속 연결을 열며 확장 메서드에는 일반 SQL 클라이언트 연결 개체가 사용됩니다. 위에서 설명한 것처럼 [OpenConnectionForKey](http://msdn.microsoft.com/library/azure/dn807226.aspx) 를 사용할 수 있습니다. 다음 코드 샘플에서 볼 수 있듯이 유일한 변경 사항은 더 이상 T-SQL 문을 작성할 필요가 없다는 것입니다.
 
     using (SqlConnection sqlconn = shardingLayer.ShardMap.OpenConnectionForKey(
                     key: tenantId2, 
@@ -163,10 +156,9 @@ Microsoft Patterns & Practices 팀은 응용 프로그램 개발자들이 클라
 * 요청이 있는 경우 모든 데이터베이스 처리가 요청에서 제공된 분할 키로 식별되는 단일 분할된 데이터베이스에 포함된다고 가정합니다. 그러나 분할 키를 제공할 수 없는 등의 경우도 있으므로 이 가정이 항상 적용되는 것은 아닙니다. 이를 해결하려면 탄력적 데이터베이스 클라이언트 라이브러리가 [MultiShardQuery class](http://msdn.microsoft.com/library/azure/microsoft.azure.sqldatabase.elasticscale.query.multishardexception.aspx)를 포함해야 합니다. 이 클래스는 여러 분할된 데이터베이스에 대한 쿼리를 위해 연결 추상화를 구현합니다. MultiShardQuery와 Dapper를 함께 사용하는 방법에 대해서는 이 문서에서 설명하지 않습니다.
 
 ## <a name="conclusion"></a>결론
-Dapper 및 DapperExtensions를 사용하는 응용 프로그램에서는 Azure SQL 데이터베이스의 탄력적 데이터베이스 도구를 쉽게 활용할 수 있습니다. 이 문서에서 대략적으로 설명한 단계를 수행하면 이러한 응용 프로그램은 새로운 [SqlConnection](http://msdn.microsoft.com/library/system.data.sqlclient.sqlconnection.aspx) 개체를 만들고 열 때 탄력적 데이터베이스 클라이언트 라이브러리의 [OpenConnectionForKey](http://msdn.microsoft.com/library/azure/dn807226.aspx) 호출을 사용하도록 변경하여 도구의 데이터 종속 라우팅 기능을 사용할 수 있습니다. 이 경우 응용 프로그램에서 새 연결을 만들고 여는 위치에서만 해당 호출을 사용하도록 변경하면 됩니다. 
+Dapper 및 DapperExtensions를 사용하는 응용 프로그램에서는 Azure SQL Database의 Elastic Database 도구를 쉽게 활용할 수 있습니다. 이 문서에서 대략적으로 설명한 단계를 수행하면 이러한 응용 프로그램은 새로운 [SqlConnection](http://msdn.microsoft.com/library/system.data.sqlclient.sqlconnection.aspx) 개체를 만들고 열 때 탄력적 데이터베이스 클라이언트 라이브러리의 [OpenConnectionForKey](http://msdn.microsoft.com/library/azure/dn807226.aspx) 호출을 사용하도록 변경하여 도구의 데이터 종속 라우팅 기능을 사용할 수 있습니다. 이 경우 응용 프로그램에서 새 연결을 만들고 여는 위치에서만 해당 호출을 사용하도록 변경하면 됩니다. 
 
 [!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 
 <!--Image references-->
 [1]: ./media/sql-database-elastic-scale-working-with-dapper/dapperimage1.png
-

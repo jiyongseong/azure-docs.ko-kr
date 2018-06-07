@@ -1,8 +1,8 @@
 ---
-title: "Azure PowerShell을 사용하여 Azure Data Lake Analytics 관리 | Microsoft Docs"
-description: "Data Lake Analytics 계정, 데이터 원본, 작업 및 카탈로그 항목을 관리하는 방법을 알아봅니다. "
+title: Azure PowerShell을 사용하여 Azure Data Lake Analytics 관리 | Microsoft Docs
+description: 'Data Lake Analytics 계정, 데이터 원본, 작업 및 카탈로그 항목을 관리하는 방법을 알아봅니다. '
 services: data-lake-analytics
-documentationcenter: 
+documentationcenter: ''
 author: matt1883
 manager: jhubbard
 editor: cgronlun
@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: big-data
 ms.date: 07/23/2017
 ms.author: mahi
+ms.openlocfilehash: 96360eabefcbbdf36ef3bd83b0c6de45c1a6f3cc
+ms.sourcegitcommit: c47ef7899572bf6441627f76eb4c4ac15e487aec
 ms.translationtype: HT
-ms.sourcegitcommit: fff84ee45818e4699df380e1536f71b2a4003c71
-ms.openlocfilehash: b79f6dd20d2e8e298b8d1824b70ff9f0d0fde9aa
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/01/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/04/2018
+ms.locfileid: "33205247"
 ---
 # <a name="manage-azure-data-lake-analytics-using-azure-powershell"></a>Azure PowerShell을 사용하여 Azure 데이터 레이크 분석 관리
 [!INCLUDE [manage-selector](../../includes/data-lake-analytics-selector-manage.md)]
@@ -51,16 +51,16 @@ $location = "<Location>"
 구독 ID를 사용하여 로그인합니다.
 
 ```powershell
-Login-AzureRmAccount -SubscriptionId $subId
+Connect-AzureRmAccount -SubscriptionId $subId
 ```
 
 구독 이름을 사용하여 로그인합니다.
 
 ```
-Login-AzureRmAccount -SubscriptionName $subname 
+Connect-AzureRmAccount -SubscriptionName $subname 
 ```
 
-`Login-AzureRmAccount` cmdlet은 항상 자격 증명을 묻는 메시지를 표시합니다. 다음 cmdlet을 사용하면 메시지가 표시되지 않게 할 수 있습니다.
+`Connect-AzureRmAccount` cmdlet은 항상 자격 증명을 묻는 메시지를 표시합니다. 다음 cmdlet을 사용하면 메시지가 표시되지 않게 할 수 있습니다.
 
 ```powershell
 # Save login session information
@@ -70,7 +70,7 @@ Save-AzureRmProfile -Path D:\profile.json
 Select-AzureRmProfile -Path D:\profile.json 
 ```
 
-## <a name="managing-accounts"></a>계정 관리
+## <a name="manage-accounts"></a>계정 관리
 
 ### <a name="create-a-data-lake-analytics-account"></a>Data Lake 분석 계정 만들기
 
@@ -92,7 +92,7 @@ New-AdlStore -ResourceGroupName $rg -Name $adls -Location $location
 New-AdlAnalyticsAccount -ResourceGroupName $rg -Name $adla -Location $location -DefaultDataLake $adls
 ```
 
-### <a name="get-information-about-an-account"></a>계정에 대한 정보 가져오기
+### <a name="get-acount-information"></a>계정 정보 가져오기
 
 계정에 대한 세부 정보를 가져옵니다.
 
@@ -100,19 +100,19 @@ New-AdlAnalyticsAccount -ResourceGroupName $rg -Name $adla -Location $location -
 Get-AdlAnalyticsAccount -Name $adla
 ```
 
-특정 Data Lake Analytics 계정의 존재 여부를 확인합니다. 이 cmdlet은 `True` 또는 `False`를 반환합니다.
+특정 Data Lake Analytics 계정의 존재 여부를 확인합니다. 이 cmdlet은 `$true` 또는 `$false`를 반환합니다.
 
 ```powershell
 Test-AdlAnalyticsAccount -Name $adla
 ```
 
-특정 Data Lake Store 계정이 있는지 확인합니다. 이 cmdlet은 `True` 또는 `False`를 반환합니다.
+특정 Data Lake Store 계정이 있는지 확인합니다. 이 cmdlet은 `$true` 또는 `$false`를 반환합니다.
 
 ```powershell
 Test-AdlStoreAccount -Name $adls
 ```
 
-### <a name="listing-accounts"></a>계정 나열
+### <a name="list-accounts"></a>계정 나열
 
 현재 구독 내의 Data Lake Analytics 계정을 나열합니다.
 
@@ -126,56 +126,13 @@ Get-AdlAnalyticsAccount
 Get-AdlAnalyticsAccount -ResourceGroupName $rg
 ```
 
-## <a name="managing-firewall-rules"></a>방화벽 규칙 관리
-
-방화벽 규칙을 나열합니다.
-
-```powershell
-Get-AdlAnalyticsFirewallRule -Account $adla
-```
-
-방화벽 규칙을 추가합니다.
-
-```powershell
-$ruleName = "Allow access from on-prem server"
-$startIpAddress = "<start IP address>"
-$endIpAddress = "<end IP address>"
-
-Add-AdlAnalyticsFirewallRule -Account $adla -Name $ruleName -StartIpAddress $startIpAddress -EndIpAddress $endIpAddress
-```
-
-방화벽 규칙을 변경합니다.
-
-```powershell
-Set-AdlAnalyticsFirewallRule -Account $adla -Name $ruleName -StartIpAddress $startIpAddress -EndIpAddress $endIpAddress
-```
-
-방화벽 규칙을 제거합니다.
-
-```powershell
-Remove-AdlAnalyticsFirewallRule -Account $adla -Name $ruleName
-```
-
-
-
-Azure IP 주소를 허용합니다.
-
-```powershell
-Set-AdlAnalyticsAccount -Name $adla -AllowAzureIpState Enabled
-```
-
-```powershell
-Set-AdlAnalyticsAccount -Name $adla -FirewallState Enabled
-Set-AdlAnalyticsAccount -Name $adla -FirewallState Disabled
-```
-
-## <a name="managing-data-sources"></a>데이터 원본 관리
+## <a name="manage-data-sources"></a>데이터 원본 관리
 Azure Data Lake Analytics는 현재 다음 데이터 원본을 지원합니다.
 
-* [Azure 데이터 레이크 저장소](../data-lake-store/data-lake-store-overview.md)
-* [Azure 저장소](../storage/storage-introduction.md)
+* [Azure Data Lake Storage](../data-lake-store/data-lake-store-overview.md)
+* [Azure Storage](../storage/common/storage-introduction.md)
 
-Analytics 계정을 만들 때 Data Lake Store 계정이 기본 데이터 원본이 되도록 지정해야 합니다. 기본 데이터 레이크 저장소 계정은 작업 메타데이터 및 작업 감사 로그를 저장하는 데 사용됩니다. Data Lake Analytics 계정을 만든 후 Data Lake Store 계정 및/또는 Azure 저장소 계정을 더 추가할 수 있습니다. 
+Analytics 계정을 만들 때 Data Lake Store 계정이 기본 데이터 원본이 되도록 지정해야 합니다. 기본 데이터 레이크 저장소 계정은 작업 메타데이터 및 작업 감사 로그를 저장하는 데 사용됩니다. Data Lake Analytics 계정을 만든 후 Data Lake Store 계정 및/또는 Azure Storage 계정을 더 추가할 수 있습니다. 
 
 ### <a name="find-the-default-data-lake-store-account"></a>기본 데이터 레이크 저장소 계정 찾기
 
@@ -240,7 +197,6 @@ $script | Out-File $scriptpath
 Submit-AdlJob -AccountName $adla -Script $script -Name "Demo"
 ```
 
-
 ### <a name="submit-a-file-as-a-u-sql-script"></a>파일을 U-SQL 스크립트로 제출
 
 ```powershell
@@ -259,15 +215,13 @@ Submit-AdlJob -AccountName $adla –ScriptPath $scriptpath -Name "Demo"
 Get-AdlJob -Account $adla
 ```
 
+### <a name="list-the-top-n-jobs"></a>상위 N개 작업 나열
 
-### <a name="list-a-specific-number-of-jobs"></a>특정 수의 작업 나열
-
-기본적으로 작업 목록은 제출 시간을 기준으로 정렬됩니다. 따라서 최근에 제출한 작업이 먼저 표시됩니다. 기본적으로 ADLA 계정에서는 180일 동안의 작업을 저장하지만 Ge-AdlJob cmdlet은 기본적으로 처음 500개 작업만 반환합니다. 특정 수의 작업을 나열하려면 -Top 매개 변수를 사용합니다.
+기본적으로 작업 목록은 제출 시간을 기준으로 정렬됩니다. 따라서 최근에 제출한 작업이 먼저 표시됩니다. ADLA 계정은 기본적으로 작업을 180일 동안 기억하지만, Ge-AdlJob cmdlet은 기본적으로 처음 500개 작업만 반환합니다. 특정 수의 작업을 나열하려면 -Top 매개 변수를 사용합니다.
 
 ```powershell
 $jobs = Get-AdlJob -Account $adla -Top 10
 ```
-
 
 ### <a name="list-jobs-based-on-the-value-of-job-property"></a>작업 속성 값을 기준으로 작업 나열
 
@@ -309,7 +263,6 @@ Get-AdlJob -Account $adla -State Ended -Result Succeeded
 Get-AdlJob -Account $adla -State Ended -Result Failed
 ```
 
-
 `-Submitter` 매개 변수를 사용하면 작업을 제출한 사람을 식별할 수 있습니다.
 
 ```powershell
@@ -329,86 +282,9 @@ $d = [DateTime]::Now.AddDays(-7)
 Get-AdlJob -Account $adla -SubmittedAfter $d
 ```
 
-### <a name="common-scenarios-for-listing-jobs"></a>작업을 나열하기 위한 일반적인 시나리오
+### <a name="analyzing-job-history"></a>작업 기록 분석
 
-
-```
-# List jobs submitted in the last five days and that successfully completed.
-$d = (Get-Date).AddDays(-5)
-Get-AdlJob -Account $adla -SubmittedAfter $d -State Ended -Result Succeeded
-
-# List all failed jobs submitted by "joe@contoso.com" within the past seven days.
-Get-AdlJob -Account $adla `
-    -Submitter "joe@contoso.com" `
-    -SubmittedAfter (Get-Date).AddDays(-7) `
-    -Result Failed
-```
-
-## <a name="filtering-a-list-of-jobs"></a>작업 목록 필터링
-
-현재 PowerShell 세션에 작업 목록이 있으면, 일반 PowerShell cmdlet을 사용하여 목록을 필터링할 수 있습니다.
-
-지난 24시간 동안에 제출된 작업으로 작업 목록을 필터링합니다.
-
-```
-$upperdate = Get-Date
-$lowerdate = $upperdate.AddHours(-24)
-$jobs | Where-Object { $_.EndTime -ge $lowerdate }
-```
-
-지난 24시간 동안에 종료된 작업으로 작업 목록을 필터링합니다.
-
-```
-$upperdate = Get-Date
-$lowerdate = $upperdate.AddHours(-24)
-$jobs | Where-Object { $_.SubmitTime -ge $lowerdate }
-```
-
-실행이 시작된 작업으로 작업 목록을 필터링합니다. 컴파일 시 작업이 실패할 수 있습니다. 따라서 작업은 시작되지 않습니다. 실제로 실행이 시작되었지만 실패로 끝난 실패한 작업을 살펴보겠습니다.
-
-```powershell
-$jobs | Where-Object { $_.StartTime -ne $null }
-```
-
-### <a name="analyzing-a-list-of-jobs"></a>작업 목록 분석
-
-`Group-Object` cmdlet을 사용하여 작업 목록을 분석할 수 있습니다.
-
-```
-# Count the number of jobs by Submitter
-$jobs | Group-Object Submitter | Select -Property Count,Name
-
-# Count the number of jobs by Result
-$jobs | Group-Object Result | Select -Property Count,Name
-
-# Count the number of jobs by State
-$jobs | Group-Object State | Select -Property Count,Name
-
-#  Count the number of jobs by DegreeOfParallelism
-$jobs | Group-Object DegreeOfParallelism | Select -Property Count,Name
-```
-분석을 수행할 때 Job 개체에 속성을 추가하여 필터링과 그룹화를 더 간단하게 만들면 유용할 수 있습니다. 다음 코드 조각에서는 계산된 속성으로 JobInfo에 주석을 다는 방법을 보여 줍니다.
-
-```
-function annotate_job( $j )
-{
-    $dic1 = @{
-        Label='AUHours';
-        Expression={ ($_.DegreeOfParallelism * ($_.EndTime-$_.StartTime).TotalHours)}}
-    $dic2 = @{
-        Label='DurationSeconds';
-        Expression={ ($_.EndTime-$_.StartTime).TotalSeconds}}
-    $dic3 = @{
-        Label='DidRun';
-        Expression={ ($_.StartTime -ne $null)}}
-
-    $j2 = $j | select *, $dic1, $dic2, $dic3
-    $j2
-}
-
-$jobs = Get-AdlJob -Account $adla -Top 10
-$jobs = $jobs | %{ annotate_job( $_ ) }
-```
+Azure PowerShell을 사용하여 Data Lake 분석에서 실행된 작업의 기록을 분석하는 것은 강력한 기술입니다. 사용량 및 비용에 대해 이해하는 데 사용할 수 있습니다. [작업 기록 분석 샘플 리포지토리](https://github.com/Azure-Samples/data-lake-analytics-powershell-job-history-analysis)를 확인하여 자세히 알아볼 수 있습니다.  
 
 ## <a name="get-information-about-pipelines-and-recurrences"></a>파이프라인 및 되풀이에 대한 정보 가져오기
 
@@ -416,7 +292,6 @@ $jobs = $jobs | %{ annotate_job( $_ ) }
 
 ```powershell
 $pipelines = Get-AdlJobPipeline -Account $adla
-
 $pipeline = Get-AdlJobPipeline -Account $adla -PipelineId "<pipeline ID>"
 ```
 
@@ -602,6 +477,48 @@ Write-Host '$adla' " = ""$adla_name"" "
 Write-Host '$adls' " = ""$adla_defadlsname"" "
 ```
 
+## <a name="manage-firewall-rules"></a>방화벽 규칙 관리
+
+### <a name="list-firewall-rules"></a>방화벽 규칙 나열
+
+```powershell
+Get-AdlAnalyticsFirewallRule -Account $adla
+```
+
+### <a name="add-a-firewall-rule"></a>방화벽 규칙 추가
+
+```powershell
+$ruleName = "Allow access from on-prem server"
+$startIpAddress = "<start IP address>"
+$endIpAddress = "<end IP address>"
+
+Add-AdlAnalyticsFirewallRule -Account $adla -Name $ruleName -StartIpAddress $startIpAddress -EndIpAddress $endIpAddress
+```
+
+### <a name="change-a-firewall-rule"></a>방화벽 규칙 변경
+
+```powershell
+Set-AdlAnalyticsFirewallRule -Account $adla -Name $ruleName -StartIpAddress $startIpAddress -EndIpAddress $endIpAddress
+```
+
+### <a name="remove-a-firewall-rule"></a>방화벽 규칙 제거
+
+```powershell
+Remove-AdlAnalyticsFirewallRule -Account $adla -Name $ruleName
+```
+
+### <a name="allow-azure-ip-addresses"></a>Azure IP 주소를 허용합니다.
+
+```powershell
+Set-AdlAnalyticsAccount -Name $adla -AllowAzureIpState Enabled
+```
+
+```powershell
+Set-AdlAnalyticsAccount -Name $adla -FirewallState Enabled
+Set-AdlAnalyticsAccount -Name $adla -FirewallState Disabled
+```
+
+
 ## <a name="working-with-azure"></a>Azure 작업
 
 ### <a name="get-details-of-azurerm-errors"></a>AzureRm 오류에 대한 세부 정보 가져오기
@@ -675,93 +592,10 @@ foreach ($sub in $subs)
 
 ## <a name="create-a-data-lake-analytics-account-using-a-template"></a>템플릿을 사용하여 Data Lake Analytics 계정 만들기
 
-또한 다음 PowerShell 스크립트를 통해 Azure 리소스 그룹 템플릿을 사용할 수도 있습니다.
+[템플릿을 사용하여 Data Lake Analytics 계정 만들기](https://github.com/Azure-Samples/data-lake-analytics-create-account-with-arm-template) 샘플을 사용하는 Azure 리소스 그룹 템플릿을 사용할 수도 있습니다.
 
-```powershell
-$subId = "<Your Azure Subscription ID>"
-
-$rg = "<New Azure Resource Group Name>"
-$location = "<Location (such as East US 2)>"
-$adls = "<New Data Lake Store Account Name>"
-$adla = "<New Data Lake Analytics Account Name>"
-
-$deploymentName = "MyDataLakeAnalyticsDeployment"
-$armTemplateFile = "<LocalFolderPath>\azuredeploy.json"  # update the JSON template path 
-
-# Log in to Azure
-Login-AzureRmAccount -SubscriptionId $subId
-
-# Create the resource group
-New-AzureRmResourceGroup -Name $rg -Location $location
-
-# Create the Data Lake Analytics account with the default Data Lake Store account.
-$parameters = @{"adlAnalyticsName"=$adla; "adlStoreName"=$adls}
-New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $rg -TemplateFile $armTemplateFile -TemplateParameterObject $parameters 
-```
-
-자세한 내용은 [Azure Resource Manager 템플릿을 사용하여 응용 프로그램 배포](../azure-resource-manager/resource-group-template-deploy.md) 및 [Azure Resource Manager 템플릿 작성](../azure-resource-manager/resource-group-authoring-templates.md)을 참조하세요.
-
-**예제 템플릿**
-
-다음 텍스트를 `.json` 파일로 저장한 후 이전의 PowerShell 스크립트를 통해 템플릿을 사용합니다. 
-
-```json
-{
-  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "adlAnalyticsName": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the Data Lake Analytics account to create."
-      }
-    },
-    "adlStoreName": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the Data Lake Store account to create."
-      }
-    }
-  },
-  "resources": [
-    {
-      "name": "[parameters('adlStoreName')]",
-      "type": "Microsoft.DataLakeStore/accounts",
-      "location": "East US 2",
-      "apiVersion": "2015-10-01-preview",
-      "dependsOn": [ ],
-      "tags": { }
-    },
-    {
-      "name": "[parameters('adlAnalyticsName')]",
-      "type": "Microsoft.DataLakeAnalytics/accounts",
-      "location": "East US 2",
-      "apiVersion": "2015-10-01-preview",
-      "dependsOn": [ "[concat('Microsoft.DataLakeStore/accounts/',parameters('adlStoreName'))]" ],
-      "tags": { },
-      "properties": {
-        "defaultDataLakeStoreAccount": "[parameters('adlStoreName')]",
-        "dataLakeStoreAccounts": [
-          { "name": "[parameters('adlStoreName')]" }
-        ]
-      }
-    }
-  ],
-  "outputs": {
-    "adlAnalyticsAccount": {
-      "type": "object",
-      "value": "[reference(resourceId('Microsoft.DataLakeAnalytics/accounts',parameters('adlAnalyticsName')))]"
-    },
-    "adlStoreAccount": {
-      "type": "object",
-      "value": "[reference(resourceId('Microsoft.DataLakeStore/accounts',parameters('adlStoreName')))]"
-    }
-  }
-}
-```
 
 ## <a name="next-steps"></a>다음 단계
 * [Microsoft Azure 데이터 레이크 분석 개요](data-lake-analytics-overview.md)
 * [Azure Portal](data-lake-analytics-get-started-portal.md) | [Azure PowerShell](data-lake-analytics-get-started-powershell.md) | [CLI 2.0](data-lake-analytics-get-started-cli2.md)을 사용하여 Data Lake Analytics 시작
 * [Azure Portal](data-lake-analytics-manage-use-portal.md) | [Azure PowerShell](data-lake-analytics-manage-use-powershell.md) | [CLI](data-lake-analytics-manage-use-cli.md)를 사용하여 Azure Data Lake Analytics 관리 
-

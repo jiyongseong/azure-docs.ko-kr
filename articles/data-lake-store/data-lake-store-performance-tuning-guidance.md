@@ -1,8 +1,8 @@
 ---
-title: "Azure Data Lake Store 성능 조정 지침 | Microsoft Docs"
-description: "Azure Data Lake Store 성능 조정 지침"
+title: Azure Data Lake Store 성능 조정 지침 | Microsoft Docs
+description: Azure Data Lake Store 성능 조정 지침
 services: data-lake-store
-documentationcenter: 
+documentationcenter: ''
 author: stewu
 manager: amitkul
 editor: cgronlun
@@ -10,17 +10,14 @@ ms.assetid: ebde7b9f-2e51-4d43-b7ab-566417221335
 ms.service: data-lake-store
 ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
 ms.date: 06/30/2017
 ms.author: stewu
-ms.translationtype: Human Translation
-ms.sourcegitcommit: b1d56fcfb472e5eae9d2f01a820f72f8eab9ef08
-ms.openlocfilehash: e7ea83465328bd4c7479dec4093cd94700463854
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.openlocfilehash: 29b662aa2f30083b444483554a78d53f0d05cb7f
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
+ms.locfileid: "34196987"
 ---
 # <a name="tuning-azure-data-lake-store-for-performance"></a>Azure Data Lake Store의 성능 조정
 
@@ -44,18 +41,18 @@ Azure의 VM 또는 온-프레미스 컴퓨터를 사용하는 경우 적절한 �
 
 ### <a name="network-connectivity-to-azure-data-lake-store"></a>Azure Data Lake Store에 대한 네트워크 연결
 
-원본 데이터와 Azure Data Lake Store 간의 네트워크 연결에서 병목 상태가 발생하는 경우도 있습니다. 원본 데이터가 온-프레미스인 경우 [Azure ExpressRoute](https://azure.microsoft.com/en-us/services/expressroute/)와 함께 전용 링크를 사용하는 것이 좋습니다. 원본 데이터가 Azure에 있는 경우 데이터가 Data Lake Store와 동일한 Azure 지역에 있을 때 성능이 가장 좋습니다.
+원본 데이터와 Azure Data Lake Store 간의 네트워크 연결에서 병목 상태가 발생하는 경우도 있습니다. 원본 데이터가 온-프레미스인 경우 [Azure ExpressRoute](https://azure.microsoft.com/services/expressroute/)와 함께 전용 링크를 사용하는 것이 좋습니다. 원본 데이터가 Azure에 있는 경우 데이터가 Data Lake Store와 동일한 Azure 지역에 있을 때 성능이 가장 좋습니다.
 
 ### <a name="configure-data-ingestion-tools-for-maximum-parallelization"></a>최대 병렬 처리를 위해 데이터 수집 도구 구성
 
-위의 원본 하드웨어 및 네트워크 연결 병목 상태를 해결했으면 수집 도구를 구성할 준비가 되었습니다. 다음 표에는 몇 가지 일반적인 수집 도구에 대한 주요 설정이 요약되어 있으며, 각 도구에 대한 심층 분석 성능 튜닝 문서가 제공됩니다.  시나리오에 사용할 도구에 대한 자세한 내용은 이 [문서](https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-data-scenarios)를 참조하세요.
+위의 원본 하드웨어 및 네트워크 연결 병목 상태를 해결했으면 수집 도구를 구성할 준비가 되었습니다. 다음 표에는 몇 가지 일반적인 수집 도구에 대한 주요 설정이 요약되어 있으며, 각 도구에 대한 심층 분석 성능 튜닝 문서가 제공됩니다.  시나리오에 사용할 도구에 대한 자세한 내용은 이 [문서](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-data-scenarios)를 참조하세요.
 
 | 도구               | 설정     | 자세한 정보                                                                 |
 |--------------------|------------------------------------------------------|------------------------------|
-| PowerShell       | PerFileThreadCount, ConcurrentFileCount |  [링크](https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-get-started-powershell#performance-guidance-while-using-powershell)   |
-| AdlCopy    | Azure Data Lake Analytics 단위  |   [링크](https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-copy-data-azure-storage-blob#performance-considerations-for-using-adlcopy)         |
-| DistCp            | -m(mapper)   | [링크](https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-copy-data-wasb-distcp#performance-considerations-while-using-distcp)                             |
-| Azure 데이터 팩터리| parallelCopies    | [링크](../data-factory/data-factory-copy-activity-performance.md)                          |
+| PowerShell       | PerFileThreadCount, ConcurrentFileCount |  [링크](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-get-started-powershell#performance-guidance-while-using-powershell) |
+| AdlCopy    | Azure Data Lake Analytics 단위  |   [링크](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-copy-data-azure-storage-blob#performance-considerations-for-using-adlcopy)         |
+| DistCp            | -m(mapper)   | [링크](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-copy-data-wasb-distcp#performance-considerations-while-using-distcp)                             |
+| Azure 데이터 팩터리| parallelCopies    | [링크](../data-factory/copy-activity-performance.md)                          |
 | Sqoop           | fs.azure.block.size, -m(mapper)    |   [링크](https://blogs.msdn.microsoft.com/bigdatasupport/2015/02/17/sqoop-job-performance-tuning-in-hdinsight-hadoop/)        |
 
 ## <a name="structure-your-data-set"></a>데이터 집합 구성
@@ -68,7 +65,7 @@ Azure의 VM 또는 온-프레미스 컴퓨터를 사용하는 경우 적절한 �
 
 일반적으로 성능을 향상하려면 데이터를 더 큰 파일로 구성합니다.  경험상, 데이터 집합을 256MB 이상의 파일로 구성합니다. 이미지, 이진 데이터 등과 같이 병렬로 처리할 수 없는 경우도 있습니다.  이 경우 개별 파일을 2GB 미만으로 유지하는 것이 좋습니다.
 
-때로는 다수의 작은 파일로 이루어진 원시 데이터에 대한 데이터 파이프라인의 제어가 제한됩니다.  다운스트림 응용 프로그램에 사용할 더 큰 파일을 생성하는 "처리" 프로세스를 포함하는 것이 좋습니다.  
+때로는 다수의 작은 파일로 이루어진 원시 데이터에 대한 데이터 파이프라인의 제어가 제한됩니다.  다운스트림 응용 프로그램에 사용할 더 큰 파일을 생성하는 "처리" 프로세스를 포함하는 것이 좋습니다.
 
 ### <a name="organizing-time-series-data-in-folders"></a>시계열 데이터를 폴더로 구성
 
@@ -125,7 +122,7 @@ HDInsight 클러스터 내에 있는 3개의 계층을 튜닝하여 컨테이너
 
 워크로드에 따라 항상 필요한 최소 YARN 컨테이너 크기가 있습니다. 너무 작은 컨테이너를 선택하면 작업에서 메모리 부족 문제가 발생합니다. 일반적으로 YARN 컨테이너는 1GB 이상이어야 합니다. 3GB YARN 컨테이너도 흔히 볼 수 있습니다. 일부 워크로드의 경우 더 큰 YARN 컨테이너가 필요할 수도 있습니다.  
 
-**YARN 컨테이너당 코어 수를 늘립니다.**  각 컨테이너에 할당된 코어 수를 늘려 각 컨테이너에서 실행되는 병렬 태스크 수를 늘립니다.  이 방법은 컨테이너당 여러 태스크를 실행하는 Spark 등의 응용 프로그램에 적합합니다.  각 컨테이너에서 단일 스레드를 실행하는 경우 Hive 등의 응용 프로그램에서는 컨테이너당 코어 수보다 컨테이너 수를 늘리는 것이 좋습니다.   
+**YARN 컨테이너당 코어 수를 늘립니다.**  각 컨테이너에 할당된 코어 수를 늘려 각 컨테이너에서 실행되는 병렬 태스크 수를 늘립니다.  이 방법은 컨테이너당 여러 태스크를 실행하는 Spark 등의 응용 프로그램에 적합합니다.  각 컨테이너에서 단일 스레드를 실행하는 경우 Hive 등의 응용 프로그램에서는 컨테이너당 코어 수보다 컨테이너 수를 늘리는 것이 좋습니다.
 
 ### <a name="workload-layer"></a>워크로드 계층
 
@@ -147,4 +144,3 @@ HDInsight 클러스터 내에 있는 3개의 계층을 튜닝하여 컨테이너
 ## <a name="see-also"></a>참고 항목
 * [Azure 데이터 레이크 저장소 개요](data-lake-store-overview.md)
 * [Azure 데이터 레이크 분석 시작](../data-lake-analytics/data-lake-analytics-get-started-portal.md)
-

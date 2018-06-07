@@ -1,12 +1,12 @@
 ---
-title: "NetBackup에서 백업 대상으로 StorSimple 8000 시리즈 구성 | Microsoft Docs"
-description: "Veritas NetBackup을 사용한 StorSimple 백업 대상 구성에 대해 설명합니다."
+title: NetBackup에서 백업 대상으로 StorSimple 8000 시리즈 구성 | Microsoft Docs
+description: Veritas NetBackup을 사용한 StorSimple 백업 대상 구성에 대해 설명합니다.
 services: storsimple
-documentationcenter: 
+documentationcenter: ''
 author: harshakirank
 manager: matd
-editor: 
-ms.assetid: 
+editor: ''
+ms.assetid: ''
 ms.service: storsimple
 ms.devlang: na
 ms.topic: article
@@ -14,14 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/15/2017
 ms.author: hkanna
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ff2fb126905d2a68c5888514262212010e108a3d
-ms.openlocfilehash: 613fd0c1164ac34d36d5f21d07dfdf00c8aad614
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/17/2017
-
+ms.openlocfilehash: b1878c181a77ac6d54654fc55228907743243c45
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
-
 # <a name="storsimple-as-a-backup-target-with-netbackup"></a>NetBackup에서 백업 대상으로 StorSimple 구성
 
 ## <a name="overview"></a>개요
@@ -99,9 +97,9 @@ StorSimple에 대한 자세한 내용은 [StorSimple 8000 시리즈: 하이브�
 
 **기본 및 보조 백업의 StorSimple 용량**
 
-| 백업 시나리오  | 로컬 저장소 용량  | 클라우드 저장소 용량  |
+| Backup 시나리오  | 로컬 저장소 용량  | 클라우드 저장소 용량  |
 |---|---|---|
-| 기본 백업  | RPO(복구 지점 목표)를 충족하기 위해 빠른 복구용 로컬 저장소에 최근 백업 저장 | 클라우드 용량에 적합한 백업 기록(RPO) |
+| 기본 백업  | RPO(복구 지점 목표)를 충족하기 위해 빠른 복구용 로컬 저장소에 최근 백업 저장 | 클라우드 용량에 적합한 Backup 기록(RPO) |
 | 보조 백업 | 클라우드 용량에 백업 데이터의 보조 복사본을 저장할 수 있습니다.  | 해당 없음  |
 
 ## <a name="storsimple-as-a-primary-backup-target"></a>기본 백업 대상인 StorSimple
@@ -213,7 +211,7 @@ StorSimple은 Azure 클라우드와 통합된 솔루션이기 때문에 StorSimp
 -   StorSimple 볼륨에 Windows Server 인덱싱을 사용하지 않도록 설정합니다.
 -   StorSimple 볼륨에서가 아니라 원본 호스트에서 바이러스 백신 검사를 실행합니다.
 -   [작업 관리자]에서 기본 [Windows Server 유지 관리](https://msdn.microsoft.com/library/windows/desktop/hh848037.aspx)를 해제합니다. 다음 방법 중 하나로 이 작업을 수행합니다.
-    - [Windows 작업 스케줄러]에서 [유지 관리 구성 도구]를 해제합니다.
+    - [Windows 작업 Scheduler]에서 [유지 관리 구성 도구]를 해제합니다.
     - Windows Sysinternals에서 [PsExec](https://technet.microsoft.com/sysinternals/bb897553.aspx)을 다운로드합니다. PsExec을 다운로드한 후 관리자 권한으로 Windows PowerShell을 실행하고 다음을 입력합니다.
       ```powershell
       psexec \\%computername% -s schtasks /change /tn “MicrosoftWindowsTaskSchedulerMaintenance Configurator" /disable
@@ -230,7 +228,7 @@ StorSimple은 Azure 클라우드와 통합된 솔루션이기 때문에 StorSimp
 -   NetBackup 데이터베이스는 서버에 대해 로컬이어야 하고 StorSimple 볼륨에 상주하지 않아야 합니다.
 -   재난 복구를 위해 NetBackup 데이터베이스를 StorSimple 볼륨에 백업합니다.
 -   이 솔루션에 대해 NetBackup 전체 및 증분 백업(NetBackup에서는 차등 증분 백업이라고도 함)을 지원합니다. 가상 및 차등 증분 백업을 사용하지 않는 것이 좋습니다.
--   백업 데이터 파일에는 특정 작업에 대한 데이터만 포함되어야 합니다. 예를 들어 다른 작업에 미디어 추가가 허용되지 않습니다.
+-   Backup 데이터 파일에는 특정 작업에 대한 데이터만 포함되어야 합니다. 예를 들어 다른 작업에 미디어 추가가 허용되지 않습니다.
 
 최신 NetBackup 설정 및 이러한 요구 사항을 구현하는 모범 사례에 대해서는 [www.veritas.com](https://www.veritas.com)에서 NetBackup 설명서를 참조하세요.
 
@@ -250,7 +248,7 @@ StorSimple은 Azure 클라우드와 통합된 솔루션이기 때문에 StorSimp
 
 앞서의 가정에 따라 매월 및 매년 전체 백업에 대해 26TiB의 계층화된 StorSimple 볼륨을 만듭니다. 매일 증분 백업 각각에 대해 5TiB의 계층화된 StorSimple 볼륨을 만듭니다.
 
-| 백업 유형 보존 | 크기(TiB) | GFS 승수\* | 총 용량(TiB)  |
+| Backup 유형 보존 | 크기(TiB) | GFS 승수\* | 총 용량(TiB)  |
 |---|---|---|---|
 | 매주 전체 | 1 | 4  | 4 |
 | 매일 증분 | 0.5 | 20(주기는 월별 주 수와 동일함) | 12(추가 할당량의 경우 2) |
@@ -319,7 +317,7 @@ StorSimple은 Azure 클라우드와 통합된 솔루션이기 때문에 StorSimp
 
     ![NetBackup 관리 콘솔 - 새 정책 추가 대화 상자](./media/storsimple-configure-backup-target-using-netbackup/nbimage7.png)
 
-3.  [백업 정책 구성 마법사]에서 원하는 백업 유형을 선택한 후 **다음**을 선택합니다.
+3.  [Backup 정책 구성 마법사]에서 원하는 백업 유형을 선택한 후 **다음**을 선택합니다.
 
     ![NetBackup 관리 콘솔 - 백업 유형 선택](./media/storsimple-configure-backup-target-using-netbackup/nbimage8.png)
 
@@ -392,9 +390,9 @@ StorSimple은 Azure 클라우드와 통합된 솔루션이기 때문에 StorSimp
 
 다음 표에서는 로컬 디스크 및 StorSimple 디스크에서 백업을 실행하도록 설정하는 방법을 보여 줍니다. 여기에는 개별 용량 및 전체 용량에 대한 요구 사항이 있습니다.
 
-### <a name="backup-configuration-and-capacity-requirements"></a>백업 구성 및 용량 요구 사항
+### <a name="backup-configuration-and-capacity-requirements"></a>Backup 구성 및 용량 요구 사항
 
-| 백업 유형 및 보존 | 구성된 저장소 | 크기(TiB) | GFS 승수 | 총 용량\*(TiB) |
+| Backup 유형 및 보존 | 구성된 저장소 | 크기(TiB) | GFS 승수 | 총 용량\*(TiB) |
 |---|---|---|---|---|
 | 1주차(전체 및 증분) |로컬 디스크(단기)| 1 | 1 | 1 |
 | StorSimple 2-4주 |StorSimple 디스크(장기) | 1 | 4 | 4 |
@@ -434,7 +432,7 @@ NetBackup은 저장소와 미디어 관리를 위해 다양한 옵션을 제공�
 
 2.  스냅숏의 이름을 입력한 다음 **추가**를 선택합니다.
 
-3.  **새 작업** 대화 상자의 **속성** 탭에서 **작업**에 대해 **백업**을 선택합니다. **대상 저장소**, **보존 유형** 및 **보존 기간**에 대해 원하는 값을 선택합니다. **확인**을 선택합니다.
+3.  **새 작업** 대화 상자의 **속성** 탭에서 **작업**에 대해 **Backup**을 선택합니다. **대상 저장소**, **보존 유형** 및 **보존 기간**에 대해 원하는 값을 선택합니다. **확인**을 선택합니다.
 
     ![NetBackup 관리 콘솔 - 새 작업 대화 상자](./media/storsimple-configure-backup-target-using-netbackup/nbimage22.png)
 
@@ -467,7 +465,7 @@ NetBackup은 저장소와 미디어 관리를 위해 다양한 옵션을 제공�
     ![NetBackup 관리 콘솔 - 증분 백업을 위한 일정 변경 대화 상자](./media/storsimple-configure-backup-target-using-netbackup/nbimage28.png)
 
 
-| 백업 유형 보존 | 크기(TiB) | GFS 승수\* | 총 용량(TiB)  |
+| Backup 유형 보존 | 크기(TiB) | GFS 승수\* | 총 용량(TiB)  |
 |---|---|---|---|
 | 매주 전체 |  1  |  4 | 4  |
 | 매일 증분  | 0.5  | 20(주기는 월별 주 수와 동일함) | 12(추가 할당량의 경우 2) |
@@ -491,9 +489,9 @@ StorSimple 클라우드 스냅숏은 StorSimple 장치에 있는 데이터를 �
 > [!NOTE]
 > StorSimple 스냅숏을 삭제하기 전에 규정 준수 및 데이터 보존 영향을 신중하게 평가합니다. 사후 백업 스크립트를 실행하는 방법에 대한 자세한 내용은 [NetBackup 설명서](http://www.veritas.com/docs/000094423)(영문)를 참조하세요.
 
-### <a name="backup-lifecycle"></a>백업 주기
+### <a name="backup-lifecycle"></a>Backup 주기
 
-![백업 주기 다이어그램](./media/storsimple-configure-backup-target-using-netbackup/backuplifecycle.png)
+![Backup 주기 다이어그램](./media/storsimple-configure-backup-target-using-netbackup/backuplifecycle.png)
 
 ### <a name="requirements"></a>요구 사항
 
@@ -505,48 +503,12 @@ StorSimple 클라우드 스냅숏은 StorSimple 장치에 있는 데이터를 �
 ### <a name="to-start-or-delete-a-cloud-snapshot"></a>클라우드 스냅숏을 시작하거나 삭제하려면
 
 1.  [Azure PowerShell 설치](/powershell/azure/overview)
-2.  [게시 설정 및 구독 정보를 다운로드하여 가져옵니다](https://msdn.microsoft.com/library/dn385850.aspx).
-3.  Azure 클래식 포털에서 리소스 이름 및 [StorSimple Manager 서비스의 등록 키](storsimple-deployment-walkthrough-u2.md#step-2-get-the-service-registration-key)를 가져옵니다.
-4.  스크립트를 실행하는 서버에서 관리자 권한으로 PowerShell을 실행합니다. 다음 명령을 입력합니다.
-
-    `Get-AzureStorSimpleDeviceBackupPolicy –DeviceName <device name>`
-
-    백업 정책 ID를 적어둡니다.
-5.  [메모장]에서 다음 코드를 사용하여 새 PowerShell 스크립트를 만듭니다.
-
-    다음 코드 조각을 복사하여 붙여넣습니다.
-    ```powershell
-    Import-AzurePublishSettingsFile "c:\\CloudSnapshot Snapshot\\myAzureSettings.publishsettings"
-    Disable-AzureDataCollection
-    $ApplianceName = <myStorSimpleApplianceName>
-    $RetentionInDays = 20
-    $RetentionInDays = -$RetentionInDays
-    $Today = Get-Date
-    $ExpirationDate = $Today.AddDays($RetentionInDays)
-    Select-AzureStorSimpleResource -ResourceName "myResource" –RegistrationKey
-    Start-AzureStorSimpleDeviceBackupJob –DeviceName $ApplianceName -BackupType CloudSnapshot -BackupPolicyId <BackupId> -Verbose
-    $CompletedSnapshots =@()
-    $CompletedSnapshots = Get-AzureStorSimpleDeviceBackup -DeviceName $ApplianceName
-    Write-Host "The Expiration date is " $ExpirationDate
-    Write-Host
-
-    ForEach ($SnapShot in $CompletedSnapshots)
-    {
-        $SnapshotStartTimeStamp = $Snapshot.CreatedOn
-        if ($SnapshotStartTimeStamp -lt $ExpirationDate)
-
-        {
-            $SnapShotInstanceID = $SnapShot.InstanceId
-            Write-Host "This snpashotdate was created on " $SnapshotStartTimeStamp.Date.ToShortDateString()
-            Write-Host "Instance ID " $SnapShotInstanceID
-            Write-Host "This snpashotdate is older and needs to be deleted"
-            Write-host "\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#"
-            Remove-AzureStorSimpleDeviceBackup -DeviceName $ApplianceName -BackupId $SnapShotInstanceID -Force -Verbose
-        }
-    }
-    ```
-      Azure 게시 설정을 저장한 위치와 동일한 위치에 PowerShell 스크립트를 저장합니다. 예를 들어 C:\CloudSnapshot\StorSimpleCloudSnapshot.ps1로 저장합니다.
-6.  NetBackup의 백업 작업에 스크립트를 추가합니다. 이렇게 하려면 NetBackup 작업 옵션의 전처리 및 후처리 명령을 편집합니다.
+2. [Manage-CloudSnapshots.ps1](https://github.com/anoobbacker/storsimpledevicemgmttools/blob/master/Manage-CloudSnapshots.ps1) PowerShell 스크립트를 다운로드 및 설치합니다.
+3. 스크립트를 실행하는 서버에서 관리자 권한으로 PowerShell을 실행합니다. `-WhatIf $true`를 포함하는 스크립트를 실행하여 스크립트가 어떻게 변경되는지 확인합니다. 유효성 검사가 완료되면 `-WhatIf $false`를 전달합니다. 아래 명령을 실행합니다.
+```powershell
+.\Manage-CloudSnapshots.ps1 -SubscriptionId [Subscription Id] -TenantId [Tenant ID] -ResourceGroupName [Resource Group Name] -ManagerName [StorSimple Device Manager Name] -DeviceName [device name] -BackupPolicyName [backup policyname] -RetentionInDays [Retention days] -WhatIf [$true or $false]
+```
+4.  NetBackup의 백업 작업에 스크립트를 추가합니다. 이렇게 하려면 NetBackup 작업 옵션의 전처리 및 후처리 명령을 편집합니다.
 
 > [!NOTE]
 > 매일 백업 작업의 끝에서 StorSimple 클라우드 스냅숏 백업 정책을 후처리 스크립트로 실행하는 것이 좋습니다. RPO 및 RTO를 충족할 수 있도록 백업 응용 프로그램 환경을 백업 및 복원하는 방법에 대한 자세한 내용은 백업 설계자에게 문의하세요.
@@ -562,11 +524,11 @@ StorSimple 장치에서 복원하면 모든 블록 저장소 장치에서 복원
 
 재해는 다양한 요인으로 발생할 수 있습니다. 다음 표에서는 일반적인 재해 복구 시나리오를 나열합니다.
 
-| 시나리오 | 영향 | 복구 방법 | 참고 사항 |
+| 시나리오 | 영향 | 복구 방법 | 메모 |
 |---|---|---|---|
-| StorSimple 장치 오류 | 백업 및 복원 작업이 중단됩니다. | 실패한 장치를 교체하고 [StorSimple 장애 조치 및 재해 복구](storsimple-device-failover-disaster-recovery.md)를 수행합니다. | 장치 복구 후에 복원을 수행해야 하는 경우 전체 데이터 작업 집합이 클라우드에서 새 장치로 검색됩니다. 모든 작업이 클라우드 속도로 수행됩니다. 인덱스 및 카탈로그 재검색 프로세스로 인해 모든 백업 세트를 검색하고 클라우드 계층에서 로컬 장치 계층으로 가져오므로 많은 시간이 소요될 수 있습니다. |
-| NetBackup 서버 오류 | 백업 및 복원 작업이 중단됩니다. | 백업 서버를 다시 빌드하고 데이터베이스 복원을 수행합니다. | 재해 복구 사이트에서 NetBackup 서버를 다시 빌드하거나 복원해야 합니다. 데이터베이스를 가장 최근의 지점으로 복원합니다. 복원된 NetBackup 데이터베이스가 최신 백업 작업과 동기화되지 않은 경우 인덱싱 및 카탈로그가 필요합니다. 이 인덱스 및 카탈로그 재검색 프로세스로 인해 모든 백업 세트를 검색하고 클라우드 계층에서 로컬 장치 계층으로 가져올 수 있습니다. 그러면 더욱 시간이 많이 걸립니다. |
-| 백업 서버와 StorSimple이 모두 손실되는 사이트 오류 | 백업 및 복원 작업이 중단됩니다. | 먼저 StorSimple을 복원한 다음 NetBackup을 복원합니다. | 먼저 StorSimple을 복원한 다음 NetBackup을 복원합니다. 장치 복구 후에 복원을 수행해야 하는 경우 전체 데이터 작업 집합이 클라우드에서 새 장치로 검색됩니다. 모든 작업이 클라우드 속도로 수행됩니다. |
+| StorSimple 장치 오류 | Backup 및 복원 작업이 중단됩니다. | 실패한 장치를 교체하고 [StorSimple 장애 조치 및 재해 복구](storsimple-device-failover-disaster-recovery.md)를 수행합니다. | 장치 복구 후에 복원을 수행해야 하는 경우 전체 데이터 작업 집합이 클라우드에서 새 장치로 검색됩니다. 모든 작업이 클라우드 속도로 수행됩니다. 인덱스 및 카탈로그 재검색 프로세스로 인해 모든 백업 세트를 검색하고 클라우드 계층에서 로컬 장치 계층으로 가져오므로 많은 시간이 소요될 수 있습니다. |
+| NetBackup 서버 오류 | Backup 및 복원 작업이 중단됩니다. | 백업 서버를 다시 빌드하고 데이터베이스 복원을 수행합니다. | 재해 복구 사이트에서 NetBackup 서버를 다시 빌드하거나 복원해야 합니다. 데이터베이스를 가장 최근의 지점으로 복원합니다. 복원된 NetBackup 데이터베이스가 최신 백업 작업과 동기화되지 않은 경우 인덱싱 및 카탈로그가 필요합니다. 이 인덱스 및 카탈로그 재검색 프로세스로 인해 모든 백업 세트를 검색하고 클라우드 계층에서 로컬 장치 계층으로 가져올 수 있습니다. 그러면 더욱 시간이 많이 걸립니다. |
+| 백업 서버와 StorSimple이 모두 손실되는 사이트 오류 | Backup 및 복원 작업이 중단됩니다. | 먼저 StorSimple을 복원한 다음 NetBackup을 복원합니다. | 먼저 StorSimple을 복원한 다음 NetBackup을 복원합니다. 장치 복구 후에 복원을 수행해야 하는 경우 전체 데이터 작업 집합이 클라우드에서 새 장치로 검색됩니다. 모든 작업이 클라우드 속도로 수행됩니다. |
 
 ## <a name="references"></a>참조
 
@@ -581,4 +543,3 @@ StorSimple 장치에서 복원하면 모든 블록 저장소 장치에서 복원
 
 - [백업 세트에서 복원](storsimple-restore-from-backup-set-u2.md)하는 방법에 대해 자세히 알아보세요.
 - [장치 장애 조치 및 재해 복구](storsimple-device-failover-disaster-recovery.md)를 수행하는 방법에 대해 자세히 알아보세요.
-

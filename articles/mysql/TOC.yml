@@ -19,7 +19,7 @@
           href: connect-java.md
         - name: .Net
           href: connect-csharp.md
-        - name: Python
+        - name: 파이썬
           href: connect-python.md
         - name: Node.js
           href: connect-nodejs.md
@@ -29,20 +29,24 @@
           href: connect-cpp.md
         - name: Go
           href: connect-go.md
+        - name: MySQL Workbench
+          href: connect-workbench.md
 - name: 자습서
   items:
     - name: 1 - 데이터베이스 설계
       items:
-        - name: Azure 포털
+        - name: Azure portal
           href: tutorial-design-database-using-portal.md
         - name: Azure CLI
           href: tutorial-design-database-using-cli.md
     - name: 2 - Web App 만들기
       items:
         - name: Wordpress - Portal
-          href: ../app-service-web/app-service-web-create-web-app-from-marketplace.md?toc=%2fazure%2fmysql%2ftoc.json
-        - name: PHP - Azure CLI
-          href: ../app-service-web/app-service-web-tutorial-php-mysql.md?toc=%2fazure%2fmysql%2ftoc.json
+          href: 'https://portal.azure.com/#create/WordPress.WordPress'
+        - name: MySQL을 사용하는 PHP
+          href: ../app-service/app-service-web-tutorial-php-mysql.md?toc=%2fazure%2fmysql%2ftoc.json
+        - name: MySQL을 사용하는 Java
+          href: ../app-service/app-service-web-tutorial-java-mysql.md?toc=%2fazure%2fmysql%2ftoc.json
 - name: 샘플
   items:
     - name: Azure CLI
@@ -55,12 +59,14 @@
           href: concepts-servers.md
         - name: 지원되는 버전
           href: concepts-supported-versions.md
+        - name: 서버 로그
+          href: concepts-server-logs.md
+        - name: 고가용성
+          href: concepts-high-availability.md
     - name: 리소스
       items:
         - name: 가격 책정 계층
-          href: concepts-service-tiers.md
-        - name: 계산 단위
-          href: concepts-compute-unit-and-storage.md
+          href: concepts-pricing-tiers.md
         - name: 제한
           href: concepts-limits.md
     - name: 데이터 액세스 및 보안
@@ -69,36 +75,50 @@
           href: concepts-firewall-rules.md
         - name: SSL 구성
           href: concepts-ssl-connection-security.md
+    - name: 비즈니스 연속성
+      items:
+        - name: 개요
+          href: concepts-business-continuity.md
+        - name: Backup 및 복원
+          href: concepts-backup.md
+    - name: 모니터
+      href: concepts-monitoring.md
     - name: 개발
       items:
-        - name: 연결 라이브러리
-          href: concepts-connection-libraries.md
+        - name: 드라이버 및 도구 호환성
+          href: concepts-compatibility.md
         - name: 응용 프로그램 개발
           href: concepts-database-application-development.md
+- name: 방법 가이드
+  items:
+    - name: 서버 관리
+      items:
+        - name: Azure portal
+          href: howto-create-manage-server-portal.md
+    - name: 방화벽 규칙
+      items:
+        - name: Azure portal
+          href: howto-manage-firewall-using-portal.md
+        - name: Azure CLI
+          href: howto-manage-firewall-using-cli.md
+    - name: 서버 복원
+      items:
+        - name: Azure portal
+          href: howto-restore-server-portal.md
+        - name: Azure CLI
+          href: howto-restore-server-cli.md
     - name: 데이터베이스 마이그레이션
       items:
         - name: 덤프 및 복원
           href: concepts-migrate-dump-restore.md
         - name: 가져오기 및 내보내기
           href: concepts-migrate-import-export.md
-- name: 방법 가이드
-  items:
-    - name: 서버 관리
-      items:
-        - name: Azure 포털
-          href: howto-create-manage-server-portal.md
-    - name: 방화벽 규칙
-      items:
-        - name: Azure 포털
-          href: howto-manage-firewall-using-portal.md
-        - name: Azure CLI
-          href: howto-manage-firewall-using-cli.md
-    - name: 서버 복원
-      items:
-        - name: Azure 포털
-          href: howto-restore-server-portal.md
+        - name: 최소 가동 중지 시간 마이그레이션
+          href: howto-migrate-online.md
     - name: 응용 프로그램 연결
       items:
+        - name: 사용자 만들기
+          href: howto-create-users.md
         - name: 연결 문자열
           href: howto-connection-string.md
         - name: SSL 구성
@@ -107,9 +127,27 @@
           href: howto-connect-webapp.md
     - name: 서버 매개 변수 구성
       items:
-        - name: Azure 포털
+        - name: Azure portal
           href: howto-server-parameters.md
-- name: 참조
+        - name: Azure CLI
+          href: howto-configure-server-parameters-using-cli.md
+    - name: 서버 로그 액세스
+      items:
+        - name: Azure portal
+          href: howto-configure-server-logs-in-portal.md
+        - name: Azure CLI
+          href: howto-configure-server-logs-in-cli.md
+    - name: 모니터
+      items:
+        - name: 메트릭에 대한 경고 만들기
+          href: howto-alert-on-metric.md
+    - name: 문제 해결
+      items:
+        - name: 쿼리 성능 문제 해결
+          href: howto-troubleshoot-query-performance.md
+        - name: sys 스키마에서 보기를 사용하는 방법
+          href: howto-troubleshoot-sys-schema.md
+- name: 참고 자료
   items:
     - name: Azure CLI
       href: /cli/azure/mysql
@@ -117,6 +155,8 @@
       href: /rest/api/mysql
 - name: 리소스
   items:
+    - name: 배포 템플릿
+      href: 'https://azure.microsoft.com/resources/templates/?resourceType=Microsoft.Dbformysql'
     - name: Azure 로드맵
       href: 'https://azure.microsoft.com/roadmap/?category=databases'
     - name: 가격
@@ -125,7 +165,7 @@
       href: 'https://social.msdn.microsoft.com/forums/security/en-US/home?forum=AzureDatabaseforMySQL'
     - name: 스택 오버플로
       href: 'http://stackoverflow.com/questions/tagged/azure-database-mysql'
-    - name: 비디오
+    - name: 동영상
       href: videos.md
     - name: 기능 요청
       href: 'https://feedback.azure.com/forums/597982-azure-database-for-mysql'
@@ -133,3 +173,7 @@
       href: 'https://azure.microsoft.com/regions/services/'
     - name: 지원 옵션
       href: 'https://azure.microsoft.com/support/options/'
+    - name: 고객 사례
+      href: 'https://customers.microsoft.com/en-us/search?sq="Azure%20Database%20for%20MySQL%20"'
+    - name: 데이터베이스 마이그레이션 가이드
+      href: 'https://datamigration.microsoft.com/'

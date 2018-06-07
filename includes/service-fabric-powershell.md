@@ -1,0 +1,2 @@
+> [!IMPORTANT]
+> Service Fabric과 함께 사용되는 두 개의 PowerShell 모듈이 있습니다. [Azure PowerShell](/powershell/azure/install-azurerm-ps?view=azurermps-4.4.0)을 사용하여 Azure 호스티드 Service Fabric 클러스터와 같은 Azure 리소스를 관리합니다. [Azure Service Fabric SDK](../articles/service-fabric/service-fabric-get-started.md)를 사용하여 (호스트되는 위치에 관계 없이) Service Fabric 클러스터에 직접 연결하고 클러스터, 응용 프로그램 및 서비스를 관리합니다. 

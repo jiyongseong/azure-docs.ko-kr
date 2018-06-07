@@ -1,28 +1,19 @@
 ---
-title: "Azure Analysis Services 고가용성 | Microsoft 문서"
-description: "Azure Analysis Services 고가용성 보장."
-services: analysis-services
-documentationcenter: 
+title: Azure Analysis Services 고가용성 | Microsoft 문서
+description: Azure Analysis Services 고가용성 보장.
 author: minewiskan
-manager: erikre
-editor: 
-ms.assetid: 
+manager: kfile
 ms.service: analysis-services
-ms.workload: data-management
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
-ms.date: 06/01/2017
+ms.topic: conceptual
+ms.date: 04/12/2018
 ms.author: owend
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 43aab8d52e854636f7ea2ff3aae50d7827735cc7
-ms.openlocfilehash: 0a9bdf3afba87ba1e7a1047907ab9eeb0ef8a842
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/03/2017
-
-
+ms.reviewer: minewiskan
+ms.openlocfilehash: f8252e47224b96d43551ad389148a1ce4349c308
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-
 # <a name="analysis-services-high-availability"></a>Analysis Services 고가용성
 이 문서에서는 Azure Analysis Services 서버에 대한 고가용성을 보장하는 방법을 설명합니다. 
 
@@ -32,14 +23,14 @@ ms.lasthandoff: 06/03/2017
 
 * 다른 지역의 중복 서버에 모델을 배포합니다. 이 방법을 적용할 경우 모든 서버가 동기화되도록 기본 서버와 중복 서버에서 모두 병렬로 데이터를 처리해야 합니다.
 
-* 기본 서버에서 데이터베이스를 백업하고 중복 서버에 복원합니다. 예를 들어 야간에 Azure Storage에 백업하는 작업을 자동화하고 다른 지역의 다른 중복 서버로 복원할 수 있습니다. 
+* 기본 서버에서 데이터베이스를 [백업](analysis-services-backup.md)하고 중복 서버에서 복원합니다. 예를 들어 야간에 Azure Storage에 백업하는 작업을 자동화하고 다른 지역의 다른 중복 서버로 복원할 수 있습니다. 
 
 어느 경우에나 기본 서버에서 작동 중단이 발생하면 다른 지역 데이터 센터의 서버에 연결하기 위해 보고 클라이언트에서 연결 문자열을 변경해야 합니다. 이 변경은 마지막 수단으로, 치명적인 지역 데이터 센터 작동 중단이 발생한 경우에만 고려해야 합니다. 모든 클라이언트에서 연결을 업데이트하기 전에 기본 서버를 호스트하는 데이터 센터 작동 중단 상태에서 다시 온라인 상태로 전환될 가능성이 높습니다. 
 
-
+보고 클라이언트에서 연결 문자열을 변경하지 않기 위해 주 서버에 대한 서버 [별칭](analysis-services-server-alias.md)을 만들 수 있습니다. 주 서버가 다운되면 다른 지역에서 중복 서버를 가리키도록 별칭을 변경할 수 있습니다. 주 서버에서 엔드포인트 상태 검사를 코딩하여 서버 이름에 대한 별칭을 자동화할 수 있습니다. 상태 검사가 실패하는 경우 동일한 엔드포인트를 다른 지역의 중복 서버로 보낼 수 있습니다. 
 
 ## <a name="related-information"></a>관련 정보
-[백업 및 복원](analysis-services-backup.md)   
-[Azure Analysis Services 관리](analysis-services-manage.md) 
-
+[Backup 및 복원](analysis-services-backup.md)   
+[Azure Analysis Services 관리](analysis-services-manage.md)   
+[별칭 서버 이름](analysis-services-server-alias.md) 
 

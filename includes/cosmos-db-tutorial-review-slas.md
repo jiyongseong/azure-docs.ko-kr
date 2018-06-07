@@ -1,7 +1,11 @@
-이제 앱이 가동되고 실행되므로 비즈니스 연속성을 보장하고 고가용성을 보장하기 위해 사용자 액세스를 감시할 수 있습니다. Azure Portal을 사용하여 가용성, 대기 시간, 처리량 및 컬렉션의 일관성을 검토할 수 있습니다. 
+계정에 있는 리소스의 처리량, 저장소, 가용성, 대기 시간 및 일관성은 Azure Portal에서 모니터링됩니다. 이러한 메트릭을 빠르게 살펴보겠습니다. 
 
-[Azure Cosmos DB SLA(서비스 수준 계약)](https://azure.microsoft.com/support/legal/sla/documentdb/)와 연결된 각 그래프에서 SLA 및 실제 사용량을 충족하는 데 필요한 할당량을 표시하는 선을 제공하여 데이터베이스 성능을 명확하게 보여 줍니다. 저장소 사용량, 분당 요청 수와 같은 추가 메트릭도 포털에 포함됩니다.
+1. 탐색 메뉴에서 **메트릭** 을 클릭합니다.
 
-* Azure Portal 왼쪽 창의 **모니터링** 아래에서 **메트릭**을 클릭합니다.
+   ![Azure Portal의 메트릭](./media/cosmos-db-tutorial-review-slas/metrics.png)
 
-   ![샘플 데이터를 사용한 Todo 앱](./media/cosmos-db-tutorial-review-slas/azure-cosmosdb-portal-metrics-slas.png)
+2. Azure Cosmos DB에서 제공한 메트릭을 인식하도록 각 탭을 클릭합니다. 
+
+    [Azure Cosmos DB SLA(서비스 수준 계약)](https://azure.microsoft.com/support/legal/sla/cosmos-db/)와 연결된 각 차트에서는 SLA가 손상되었는지를 표시하는 줄을 제공합니다. Azure Cosmos DB를 통해 메트릭의 이 도구 모음을 사용하여 투명하게 SLA를 모니터링할 수 있습니다. 
+
+   ![Azure Cosmos DB 메트릭 도구 모음](./media/cosmos-db-tutorial-review-slas/metrics-suite.png)

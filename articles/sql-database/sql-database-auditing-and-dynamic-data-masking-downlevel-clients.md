@@ -1,29 +1,20 @@
 ---
-title: "Azure SQL Database의 테이블 감사, TDS 리디렉션 및 IP 끝점 | Microsoft Docs"
-description: "Azure SQL Database에서 테이블 감사를 구현할 때 감사, TDS 리디렉션 및 IP 끝점 변경 내용에 대해 알아봅니다."
+title: Azure SQL Database의 테이블 감사, TDS 리디렉션 및 IP 끝점 | Microsoft Docs
+description: Azure SQL Database에서 테이블 감사를 구현할 때 감사, TDS 리디렉션 및 IP 끝점 변경 내용에 대해 알아봅니다.
 services: sql-database
-documentationcenter: 
 author: giladm
-manager: jhubbard
-editor: 
-ms.assetid: 4ef19ed1-e798-43a2-ad99-0e563f93ab53
+manager: craigg
 ms.service: sql-database
 ms.custom: security
-ms.workload: data-management
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 05/31/2017
+ms.date: 04/01/2018
 ms.author: giladm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5edc47e03ca9319ba2e3285600703d759963e1f3
-ms.openlocfilehash: 1447a75758475dd6536ef1bcd0e8432e5618dab8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/01/2017
-
-
+ms.openlocfilehash: d1114d6c5073aa6e60d6fb700989fb3d205ee914
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-
 # <a name="sql-database----downlevel-clients-support-and-ip-endpoint-changes-for-table-auditing"></a>SQL Database - 하위 클라이언트 지원 및 테이블 감사에 대한 IP 끝점 변경
 
 > [!IMPORTANT]
@@ -85,4 +76,3 @@ TDS 버전 7.3 이하를 지원하는 "하위 클라이언트"의 경우, 연결
 | 캐나다 동부 |40.86.227.82, 40.86.225.194 |
 | 영국 북부 |13.87.101.18, 13.87.100.232 |
 | 영국 남부 2 |13.87.32.202, 13.87.32.226 |
-

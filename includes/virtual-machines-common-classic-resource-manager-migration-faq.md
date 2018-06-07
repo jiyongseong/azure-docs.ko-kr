@@ -1,8 +1,25 @@
+---
+title: 포함 파일
+description: 포함 파일
+services: virtual-machines
+author: jpconnock
+ms.service: virtual-machines
+ms.topic: include
+ms.date: 05/18/2018
+ms.author: jeconnoc
+ms.custom: include file
+ms.openlocfilehash: 15cbfb9babe38ba6acaf4312735ab839af3f2d99
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34371306"
+---
 # <a name="frequently-asked-questions-about-classic-to-azure-resource-manager-migration"></a>클래식에서 Azure Resource Manager 마이그레이션에 대한 질문과 대답
 
-## <a name="does-this-migration-plan-affect-any-of-my-existing-services-or-applications-that-run-on-azure-virtual-machines"></a>이 마이그레이션 계획이 Azure 가상 컴퓨터에서 실행되는 기존 서비스 또는 응용 프로그램에 영향을 미치나요? 
+## <a name="does-this-migration-plan-affect-any-of-my-existing-services-or-applications-that-run-on-azure-virtual-machines"></a>이 마이그레이션 계획이 Azure 가상 머신에서 실행되는 기존 서비스 또는 응용 프로그램에 영향을 미치나요? 
 
-아니요. VM(클래식)은 일반 공급 제품에서 완전하게 지원되는 서비스입니다. 이러한 리소스를 사용하여 Microsoft Azure에서 작업 공간을 확장할 수 있습니다.
+번호 VM(클래식)은 일반 공급 제품에서 완전하게 지원되는 서비스입니다. 이러한 리소스를 사용하여 Microsoft Azure에서 작업 공간을 확장할 수 있습니다.
 
 ## <a name="what-happens-to-my-vms-if-i-dont-plan-on-migrating-in-the-near-future"></a>가까운 미래에 마이그레이션할 계획이 없는 경우 내 VM은 어떻게 됩니까? 
 
@@ -26,15 +43,30 @@ Microsoft는 기존 클래식 API와 리소스 모델을 중단할 계획이 없
 
 ## <a name="do-i-have-to-buy-another-express-route-circuit-if-i-have-to-use-iaas-under-resource-manager"></a>Resource Manager에서 IaaS를 활용해야 할 경우 다른 Express 경로 회로를 구매해야 하나요? 
 
-안 됩니다. 최근에 [클래식에서 Resource Manager 배포 모델로의 Express 경로 회로 이동](../articles/expressroute/expressroute-move.md)을 사용하도록 설정했습니다. 이미 Express 경로 회로가 있는 경우 새로 구입하지 않아도 됩니다.
+번호 최근에 [클래식에서 Resource Manager 배포 모델로의 ExpressRoute 회로 이동](../articles/expressroute/expressroute-move.md)을 사용하도록 설정했습니다. 이미 ExpressRoute 회로가 있는 경우 새로 구입하지 않아도 됩니다.
 
-## <a name="what-if-i-had-configured-role-based-access-control-policies-for-my-classic-iaas-resources"></a>클래식 IaaS 리소스에 대해 역할 기반 액세스 제어 정책을 구성한 경우 어떻게 되나요? 
+## <a name="what-if-i-had-configured-role-based-access-control-policies-for-my-classic-iaas-resources"></a>클래식 IaaS 리소스에 대해 역할 기반 Access Control 정책을 구성한 경우 어떻게 되나요? 
 
 마이그레이션 중에는 리소스가 클래식에서 Resource Manager로 전환됩니다. 따라서 마이그레이션 후 필요한 RBAC 정책 업데이트를 계획하는 것이 좋습니다.
 
-## <a name="what-if-im-using-azure-site-recovery-or-azure-backup-today"></a>현재 Azure Site Recovery 또는 Azure 백업을 사용하고 있으면 어떻게 되나요? 
+## <a name="i-backed-up-my-classic-vms-in-a-vault-can-i-migrate-my-vms-from-classic-mode-to-resource-manager-mode-and-protect-them-in-a-recovery-services-vault"></a>자격 증명 모음에 내 클래식 VM을 백업했습니다. 클래식 모드에서 Resource Manager 모드로 내 VM을 마이그레이션하고 Recovery Services 자격 증명 모음에서 보호할 수 있나요?
 
-백업이 설정된 가상 컴퓨터를 마이그레이션하려면 [백업 자격 증명 모음에 내 클래식 VM을 백업했습니다. 이제 클래식 모드에서 Resource Manager 모드로 내 VM을 마이그레이션하려고 합니다. 복구 서비스 자격 증명 모음에서 어떻게 백업하나요?](../articles/backup/backup-azure-backup-ibiza-faq.md)백업 자격 증명 모음에서 클래식 VM을 백업했습니다. 이제 클래식 모드에서 Resource Manager 모드로 내 VM을 마이그레이션하려고 합니다.  복구 서비스 자격 증명 모음에서 백업하려면 어떻게 해야 하나요?
+클래식 모드에서 Resource Manager 모드로 VM을 이동하는 <a name="vault">경우</a> 마이그레이션 이전에 생성된 백업은 새로 마이그레이션된 Resource Manager VM으로 마이그레이션되지 않습니다. 하지만 클래식 VM의 백업을 보관하려는 경우 마이그레이션 전에 다음 단계를 수행하세요. 
+
+1. Recovery Services 자격 증명 모음에서 **보호된 항목** 탭으로 이동하고 VM을 선택합니다. 
+2. [보호 중지](../articles/backup/backup-azure-manage-vms.md#stop-protecting-virtual-machines)를 클릭합니다. *연결된 백업 데이터 삭제* 옵션을 **검사하지 않음**으로 둡니다.
+
+> [!NOTE]
+> 데이터를 보존할 때까지 백업 인스턴스 비용이 청구됩니다. 백업 복사본은 보존 범위에 따라 정리됩니다. 그러나 마지막 백업 복사본은 백업 데이터를 명시적으로 삭제할 때까지 항상 유지됩니다. 가상 머신의 보존 범위를 확인하고, 이러한 보존 범위가 경과한 경우 자격 증명 모음에서 보호된 항목에 대해 "백업 데이터 삭제"를 트리거하는 것이 좋습니다. 
+>
+>
+
+가상 머신을 Resource Manager 모드로 마이그레이션하려면 
+
+1. VM에서 백업/스냅숏 확장을 삭제합니다.
+2. 클래식 모드에서 Resource Manager 모드로 가상 머신을 마이그레이션합니다. 가상 머신에 해당하는 저장소 및 네트워크 정보가 Resource Manager 모드로 마이그레이션되도록 합니다.
+
+또한 마이그레이션된 VM을 백업하려는 경우 가상 머신 관리 블레이드로 이동하여 [백업을 사용하도록 설정](../articles/backup/quick-backup-vm-portal.md#enable-backup-on-a-vm)합니다.
 
 ## <a name="can-i-validate-my-subscription-or-resources-to-see-if-theyre-capable-of-migration"></a>내 구독 또는 리소스에서 마이그레이션이 가능한지 확인할 수 있나요? 
 
@@ -56,6 +88,6 @@ Microsoft는 기존 클래식 API와 리소스 모델을 중단할 계획이 없
 
 구독 간 권한 부여 링크를 사용하는 ExpressRoute 회로는 가동 중지 시간 없이 자동으로 마이그레이션할 수 없습니다. 여기에서는 수동 단계를 사용하여 마이그레이션하는 방법을 소개합니다. 해당 단계와 자세한 내용은 [클래식에서 Resource Manager 배포 모델로 ExpressRoute 회로 및 연결된 가상 네트워크 마이그레이션](../articles/expressroute/expressroute-migration-classic-resource-manager.md)을 참조하세요.
 
-## <a name="i-got-a-message-vm-is-reporting-the-overall-agent-status-as-not-ready-hence-the-vm-cannot-be-migrated-ensure-that-the-vm-agent-is-reporting-overall-agent-status-as-ready-or-vm-contains-extension-whose-status-is-not-being-reported-from-the-vm-hence-this-vm-cannot-be-migrated-"></a>*"VM은 전반적인 에이전트 상태를 준비되지 않음으로 보고합니다. 따라서 VM은 마이그레이션할 수 없습니다. VM 에이전트가 전반적인 에이전트 상태를 준비로 보고하는지 확인하십시오."* 또는 *"VM에는 VM가 보고하지 않은 상태의 확장명이 포함되어 있습니다. 따라서 이 VM은 마이그레이션할 수 없습니다."라는 메시지를 받았습니다. *
+## <a name="i-got-the-message-vm-is-reporting-the-overall-agent-status-as-not-ready-hence-the-vm-cannot-be-migrated-ensure-that-the-vm-agent-is-reporting-overall-agent-status-as-ready-or-vm-contains-extension-whose-status-is-not-being-reported-from-the-vm-hence-this-vm-cannot-be-migrated"></a>*"VM은 전반적인 에이전트 상태를 준비되지 않음으로 보고합니다. 따라서 VM은 마이그레이션할 수 없습니다. VM 에이전트가 전반적인 에이전트 상태를 준비된 상태"* 로 보고하고 있는지 또는 *"VM에서 보고되지 않은 상태의 확장이 VM에 포함되어 있는지 확인합니다. 따라서 이 VM은 마이그레이션할 수 없습니다."* 라는 메시지를 받았습니다.
 
-VM이 인터넷에 아웃바운드 연결하지 못하는 경우 이 메시지가 수신됩니다. VM 에이전트는 아웃 바운드 연결을 사용하여 Azure 저장소 계정에 연결해 5분 마다 에이전트 상태를 업데이트합니다.
+VM이 인터넷에 아웃바운드 연결하지 못하는 경우 이 메시지가 수신됩니다. VM 에이전트는 아웃 바운드 연결을 사용하여 Azure Storage 계정에 연결해 5분 마다 에이전트 상태를 업데이트합니다.

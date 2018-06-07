@@ -1,30 +1,26 @@
 ---
-title: "클라우드 탐색기를 사용하여 Azure 리소스 관리 | Microsoft Docs"
-description: "클라우드 탐색기를 사용하여 Visual Studio 내에서 Azure 리소스를 검색 및 관리하는 방법에 대해 알아봅니다."
+title: 클라우드 탐색기를 사용하여 Azure 리소스 관리 | Microsoft Docs
+description: 클라우드 탐색기를 사용하여 Visual Studio 내에서 Azure 리소스를 검색 및 관리하는 방법에 대해 알아봅니다.
 services: visual-studio-online
-documentationcenter: na
-author: TomArcher
+author: ghogen
 manager: douge
-editor: 
-ms.assetid: 6347dc53-f497-49d5-b29b-e8b9f0e939d7
-ms.service: multiple
-ms.devlang: dotnet
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: multiple
+assetId: 6347dc53-f497-49d5-b29b-e8b9f0e939d7
+ms.prod: visual-studio-dev15
+ms.technology: vs-azure
+ms.workload: azure
+ms.topic: conceptual
 ms.date: 03/25/2017
-ms.author: tarcher
-translationtype: Human Translation
-ms.sourcegitcommit: 356de369ec5409e8e6e51a286a20af70a9420193
-ms.openlocfilehash: ca20927377e84e76c8148deef075f2d6bfb11137
-ms.lasthandoff: 03/27/2017
-
-
+ms.author: ghogen
+ms.openlocfilehash: 9d8ae465e80ab38c1d7b0f6082865c110c0ff06b
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="manage-the-resources-associated-with-your-azure-accounts-in-visual-studio-cloud-explorer"></a>Visual Studio 클라우드 탐색기에서 Azure 계정과 연결된 리소스 관리
 클라우드 탐색기를 사용하여 Azure 리소스 및 리소스 그룹을 보고, 해당 속성을 검사하고, Visual Studio 내에서 핵심 개발자 진단 작업을 수행할 수 있습니다. 
 
-[Azure Portal](http://go.microsoft.com/fwlink/p/?LinkID=525040)에서와 마찬가지로 클라우드 탐색기는 Azure Resource Manager 스택을 토대로 구축되었습니다. 따라서 클라우드 탐색기는 Azure 리소스 그룹과 같은 리소스 및 논리 앱과 API 앱과 같은 Azure 서비스를 이해하고 RBAC([역할 기반 액세스 제어](active-directory/role-based-access-control-configure.md))를 지원합니다. 
+[Azure Portal](http://go.microsoft.com/fwlink/p/?LinkID=525040)에서와 마찬가지로 클라우드 탐색기는 Azure Resource Manager 스택을 토대로 구축되었습니다. 따라서 클라우드 탐색기는 Azure 리소스 그룹과 같은 리소스 및 논리 앱과 API 앱과 같은 Azure 서비스를 이해하고 RBAC([역할 기반 액세스 제어](role-based-access-control/role-assignments-portal.md))를 지원합니다. 
 
 ## <a name="prerequisites"></a>필수 조건
 - **Azure 워크로드**가 선택된 [Visual Studio 2017](https://www.visualstudio.com/downloads/) 또는 [Microsoft Azure SDK for .NET 2.9](https://www.microsoft.com/en-us/download/details.aspx?id=51657)가 있는 이전 버전의 Visual Studio
@@ -75,7 +71,7 @@ Azure 리소스를 보려면 **리소스 종류** 또는 **리소스 그룹** �
 
 1. 상황에 맞는 메뉴에서 원하는 보기를 선택합니다. 
 
-    - **리소스 종류** 보기 - [Azure Portal](http://go.microsoft.com/fwlink/p/?LinkID=525040)에서 사용되는 일반적인 보기로, 웹앱, 저장소 계정 및 가상 컴퓨터와 같은 형식으로 분류된 Azure 리소스를 보여 줍니다. 
+    - **리소스 종류** 보기 - [Azure Portal](http://go.microsoft.com/fwlink/p/?LinkID=525040)에서 사용되는 일반적인 보기로, 웹앱, 저장소 계정 및 가상 머신과 같은 형식으로 분류된 Azure 리소스를 보여 줍니다. 
     - **리소스 그룹** 보기 - 연관된 Azure 리소스 그룹으로 Azure 리소스를 분류합니다. 리소스 그룹은 일반적으로 특정 응용 프로그램에서 사용되는 Azure 리소스 번들입니다. Azure 리소스 그룹에 대한 자세한 내용은 [Azure Resource Manager 개요](./azure-resource-manager/resource-group-overview.md)를 참조하세요.
 
     다음 이미지는 두 리소스 보기를 비교해서 보여 줍니다.
@@ -103,4 +99,3 @@ Azure 계정 구독에서 특정 이름의 리소스를 찾으려면 클라우�
 ![클라우드 탐색기에서 리소스 찾기](./media/vs-azure-tools-resources-managing-with-cloud-explorer/search-for-resources.png)
 
 **검색** 상자에 문자를 입력하면 해당 문자와 일치하는 리소스만 리소스 트리에 나타납니다.
-

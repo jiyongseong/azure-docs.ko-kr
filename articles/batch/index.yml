@@ -1,0 +1,76 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: "Batch 설명서"
+metadata:
+  title: "Batch 설명서 - 자습서, API 참조 | Microsoft Docs"
+  description: "클라우드에서 Batch를 사용하여 대규모 병렬 및 HPC(고성능 컴퓨팅) 응용 프로그램을 효율적으로 실행합니다. 인프라를 수동으로 구성하거나 관리하지 않고 병렬 또는 대규모로 응용 프로그램을 실행하도록 Azure 계산 리소스를 정의합니다. 요구 사항에 따라 계산 집약적 작업을 예약하고 계산 리소스를 동적으로 추가하거나 제거합니다. 빠른 시작, 자습서 및 샘플을 통해 Azure Batch를 사용하는 방법을 알아보세요."
+  services: batch
+  author: czeumault
+  manager: carolz
+  ms.service: batch
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 11/30/2017
+  ms.author: carolz
+  ms.openlocfilehash: 6ab5c490887a6b8f9b1330438188f6463a37c54d
+  ms.sourcegitcommit: c765cbd9c379ed00f1e2394374efa8e1915321b9
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 02/28/2018
+abstract:
+  description: "클라우드에서 Batch를 사용하여 대규모 병렬 및 HPC(고성능 컴퓨팅) 응용 프로그램을 효율적으로 실행합니다. 인프라를 수동으로 구성하거나 관리하지 않고 병렬 또는 대규모로 응용 프로그램을 실행하도록 Azure 계산 리소스를 정의합니다. 요구 사항에 따라 계산 집약적 작업을 예약하고 계산 리소스를 동적으로 추가하거나 제거합니다. 빠른 시작, 자습서 및 샘플을 통해 Azure Batch를 사용하는 방법을 알아보세요."
+sections:
+- title: "5분 빠른 시작"
+  items:
+  - type: paragraph
+    text: "Azure에서 첫 번째 Batch 작업을 실행하는 방법을 알아봅니다."
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: https://docs.microsoft.com/en-us/media/common/i_cligeneric.svg
+      text: Azure CLI
+      href: quick-create-cli
+    - image:
+        src: https://docs.microsoft.com/en-us/media/common/i_portal.svg
+      text: Azure Portal
+      href: quick-create-portal
+    - image:
+        src: https://docs.microsoft.com/en-us/media/logos/logo_NET.svg
+      text: .NET
+      href: quick-run-dotnet
+    - image:
+        src: https://docs.microsoft.com/en-us/media/logos/logo_python.svg
+      text: "파이썬"
+      href: quick-run-python
+- title: "단계별 자습서"
+  items:
+  - type: paragraph
+    text: "Batch에서 계산 집약적 워크로드를 실행하는 방법을 알아봅니다."
+  - type: list
+    style: ordered
+    items:
+    - html: "<a href=\"tutorial-parallel-dotnet\">.NET SDK를 사용하여 병렬 파일 처리</a>"
+    - html: "<a href=\"tutorial-parallel-python\">Python SDK를 사용하여 병렬 파일 처리</a>"
+    - html: "<a href=\"tutorial-rendering-cli\">Arnold를 사용하여 렌더링하는 장면</a>"
+    - html: "<a href=\"tutorial-r-doazureparallel\">병렬 R 시뮬레이션</a>"
+- title: "샘플"
+  items:
+  - type: list
+    style: unordered
+    className: spaced noBullet
+    items:
+    - html: <a href="cli-samples">Azure CLI</a>
+- title: "참고 자료"
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: "명령줄"
+      html: <p><a href="/cli/azure/batch">Azure CLI</a></p><p><a href="/powershell/module/azurerm.batch">Azure PowerShell</a></p>
+    - title: "언어"
+      html: <p><a href="/dotnet/api/overview/azure/batch">.NET</a></p><p><a href="/java/api/overview/azure/batch">Java</a></p><p><a href="/javascript/api/overview/azure/batch">Node.js</a></p><p><a href="/python/api/overview/azure/batch">Python</a></p>
+    - title: "REST (영문)"
+      html: "<p><a href=\"/rest/api/batchservice\">Batch 서비스 REST API</a></p><p><a href=\"/rest/api/batchmanagement/\">Batch 관리 REST API</a></p>"

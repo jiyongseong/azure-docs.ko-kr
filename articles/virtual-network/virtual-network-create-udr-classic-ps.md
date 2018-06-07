@@ -1,11 +1,11 @@
 ---
-title: "Azure Virtual Network에서 라우팅 제어 - PowerShell - 클래식 | Microsoft Docs"
-description: "PowerShell을 사용하여 VNet에서 라우팅을 제어하는 방법 알아보기 | 클래식"
+title: Azure Virtual Network에서 라우팅 제어 - PowerShell - 클래식 | Microsoft Docs
+description: PowerShell을 사용하여 VNet에서 라우팅을 제어하는 방법 알아보기 | 클래식
 services: virtual-network
 documentationcenter: na
-author: jimdial
-manager: carmonm
-editor: 
+author: genlin
+manager: cshepard
+editor: ''
 tags: azure-service-management
 ms.assetid: d8d07c16-cbe5-4536-acd6-870269346fe3
 ms.service: virtual-network
@@ -14,20 +14,18 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/02/2016
-ms.author: jdial
-translationtype: Human Translation
-ms.sourcegitcommit: 6d749e5182fbab04adc32521303095dab199d129
-ms.openlocfilehash: e9564d223cb85529f1fa97bc398d35c6debcedae
-ms.lasthandoff: 03/22/2017
-
-
+ms.author: genli
+ms.openlocfilehash: 930676a396ae316ec761ba5d03ad1a1d0fd7a425
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="control-routing-and-use-virtual-appliances-classic-using-powershell"></a>PowerShell 사용하여 라우팅 제어 및 가상 어플라이언스(클래식) 사용
 
 > [!div class="op_single_selector"]
-> * [PowerShell](virtual-network-create-udr-arm-ps.md)
-> * [Azure CLI](virtual-network-create-udr-arm-cli.md)
-> * [템플릿](virtual-network-create-udr-arm-template.md)
+> * [PowerShell](tutorial-create-route-table-powershell.md)
+> * [Azure CLI](tutorial-create-route-table-cli.md)
 > * [PowerShell(클래식)](virtual-network-create-udr-classic-ps.md)
 > * [CLI(클래식)](virtual-network-create-udr-classic-cli.md)
 
@@ -117,4 +115,3 @@ FW1 VM에 IP 전달을 사용하도록 설정하려면 다음 단계를 완료�
     Get-AzureVM -Name FW1 -ServiceName TestRGFW `
     | Set-AzureIPForwarding -Enable
     ```
-

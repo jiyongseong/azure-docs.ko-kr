@@ -1,4 +1,4 @@
-## <a name="microsoft-open-source-code-of-conduct"></a>Microsoft 오픈 소스 준수 사항
+﻿## <a name="microsoft-open-source-code-of-conduct"></a>Microsoft 오픈 소스 준수 사항
 
 이 프로젝트에는 [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/)(Microsoft 오픈 소스 준수 사항)이 적용됩니다.
 자세한 내용은 [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)(준수 사항 FAQ)를 참조하거나 [opencode@microsoft.com](mailto:opencode@microsoft.com)에 추가 질문 또는 의견을 알려주세요.
@@ -24,7 +24,7 @@ Microsoft에서는 Microsoft 커뮤니티(사용자, 고객, 파트너, 핵심 A
 커뮤니티 참가자는 GitHub UI를 사용하거나 리포지토리를 분기하여 참가할 수 있습니다. 직원이 기술 문서 집합에 참가하는 방법에 대한 자세한 내용을 알아보려면 [내부 참가자 가이드](https://review.docs.microsoft.com/en-us/help/contribute/?branch=master)를 방문해야 합니다.
 
 ## <a name="repository-organization"></a>리포지토리 조직
-azure-docs 리포지토리의 콘텐츠는 https://docs.microsoft.com/azure에 있는 설명서의 구성을 따릅니다. 이 리포지토리에는 두 개의 루트 폴더가 포함됩니다.
+azure-docs 리포지토리의 콘텐츠는 https://docs.microsoft.com/azure 에 있는 설명서의 구성을 따릅니다. 이 리포지토리에는 두 개의 루트 폴더가 포함됩니다. 이 리포지토리에는 두 개의 루트 폴더가 포함됩니다.
 
 ### <a name="articles"></a>\articles
 *\articles* 폴더는 *.md* 확장명의 markdown 파일 형식의 설명서를 포함합니다. 일반적으로 문서는 Azure 서비스별로 그룹화됩니다.

@@ -13,15 +13,13 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: data-catalog
-ms.date: 05/15/2017
+ms.date: 01/18/2018
 ms.author: maroche
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 532ff423ff53567b6ce40c0ea7ec09a689cee1e7
-ms.openlocfilehash: 3f7eb053db6b6a545990f31f64628594f7f3e2c1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/06/2017
-
-
+ms.openlocfilehash: 48b13eef0960afb4aab68923fb97b5b9c14a3d9f
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="register-data-sources-in-azure-data-catalog"></a>Azure Data Catalog에서 데이터 원본 등록
 ## <a name="introduction"></a>소개
@@ -89,4 +87,3 @@ Azure Data Catalog는 기업 데이터 원본의 등록 시스템 및 검색 역
 
 ## <a name="next-steps"></a>다음 단계
 데이터 원본 등록에 대한 자세한 내용은 [Azure Data Catalog 시작](data-catalog-get-started.md) 자습서를 참조하세요.
-

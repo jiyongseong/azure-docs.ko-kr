@@ -1,10 +1,10 @@
 ---
-title: "동기화된 Azure AD Connect Health 사용 | Microsoft Docs"
-description: "Azure AD Connect 동기화를 모니터링하는 방법을 설명하는 Azure AD Connect Health 페이지입니다."
+title: 동기화된 Azure AD Connect Health 사용 | Microsoft Docs
+description: Azure AD Connect 동기화를 모니터링하는 방법을 설명하는 Azure AD Connect Health 페이지입니다.
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: karavar
-manager: femila
+manager: mtillman
 ms.assetid: 1dfbeaba-bda2-4f68-ac89-1dbfaf5b4015
 ms.service: active-directory
 ms.workload: identity
@@ -14,15 +14,14 @@ ms.topic: get-started-article
 ms.date: 07/18/2017
 ms.author: billmath
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: b9a3b64d9de48f17a295ca7a9ea58cf26e8f83ed
-ms.openlocfilehash: f5d5f238f8f57c8dcf7a3759274f9d565e73ecce
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/28/2017
-
+ms.openlocfilehash: cff8be88e23d57545a9926df366289c6ba264886
+ms.sourcegitcommit: d74657d1926467210454f58970c45b2fd3ca088d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/28/2018
 ---
 # <a name="monitor-azure-ad-connect-sync-with-azure-ad-connect-health"></a>Azure AD Connect Health를 사용하여 Azure AD Connect 동기화 모니터링
-다음 문서는 Azure AD Connect Health와 함께 Azure AD Connect (동기화) 모니터링에 중점을 둡니다.  Azure AD Connect Health와 함께 AD FS 모니터링에 대한 내용은 [AD FS와 함께 Azure AD Connect Health 사용](active-directory-aadconnect-health-adfs.md)을 참조하세요. 또한 Azure AD Connect Health와 함께 Active Directory 도메인 서비스를 모니터링하는 방법에 대한 정보는 [AD DS와 함께 Azure AD Connect Health 사용](active-directory-aadconnect-health-adds.md)을 참조하세요.
+다음 문서는 Azure AD Connect Health와 함께 Azure AD Connect (동기화) 모니터링에 중점을 둡니다.  Azure AD Connect Health와 함께 AD FS 모니터링에 대한 내용은 [AD FS와 함께 Azure AD Connect Health 사용](active-directory-aadconnect-health-adfs.md)을 참조하세요. 또한 Azure AD Connect Health와 함께 Active Directory Domain Services를 모니터링하는 방법에 대한 정보는 [AD DS와 함께 Azure AD Connect Health 사용](active-directory-aadconnect-health-adds.md)을 참조하세요.
 
 ![동기화에 대한 Azure AD Connect Health](./media/active-directory-aadconnect-health-sync/sync-blade.png)
 
@@ -36,7 +35,7 @@ ms.lasthandoff: 02/28/2017
 ### <a name="limited-evaluation-of-alerts"></a>제한된 경고 평가
 Azure AD Connect가 기본 구성을 사용하지 않으면(예: 특성 필터링이 기본 구성에서 사용자 지정 구성으로 변경된 경우) Azure AD Connect Health 에이전트가 Azure AD Connect와 관련된 오류 이벤트를 업로드하지 않습니다.
 
-이로 인해 서비스의 경고 평가가 제한됩니다. Azure 포털에서 해당 서비스 아래에 이 조건을 나타내는 배너가 표시될 것입니다.
+이로 인해 서비스의 경고 평가가 제한됩니다. Azure Portal에서 해당 서비스 아래에 이 조건을 나타내는 배너가 표시될 것입니다.
 
 ![동기화에 대한 Azure AD Connect Health](./media/active-directory-aadconnect-health-sync/banner.png)
 
@@ -68,8 +67,7 @@ Azure AD Connect가 기본 구성을 사용하지 않으면(예: 특성 필터�
 * 보고서에서는 동기화 클라이언트를 통해 기록된 오류를 포함합니다(Azure AD Connect 1.1.281.0 버전 이상)
 * 동기화 엔진의 마지막 동기화 작업에서 발생한 오류를 포함합니다 (Azure AD 커넥터에 “내보내기”).
 * 동기화에 대한 Azure AD Connect Health agent에는 최신 데이터를 포함하는 보고서에 필요한 끝점의 아웃바운드 연결이 있어야 합니다.
-* 보고서는 동기화를 위한 Azure AD Connect Health 에이전트에서 업로드한 데이터를 사용하여 **30분 마다 업데이트**됩니다.
-  다음과 같은 주요 기능을 제공합니다.
+* 보고서는 동기화를 위한 Azure AD Connect Health 에이전트에서 업로드한 데이터를 사용하여 **30분 마다 업데이트**됩니다. 다음과 같은 주요 기능을 제공합니다.
 
   * 오류 분류
   * 범주별 오류에 따른 개체의 목록
@@ -85,11 +83,12 @@ Azure AD Connect가 기본 구성을 사용하지 않으면(예: 특성 필터�
 | 중복 특성 |proxyAddresses, UserPrincipalName 같은 테넌트 내에서 고유해야 하는 Azure AD에서 하나 이상의 특성의 값이 중복된 개체를 만들거나 업데이트하려고 시도할 때의 오류 |
 | 데이터 불일치 |소프트 일치가 동기화 오류가 발생하는 개체와 일치하도록 하는 데 실패할 경우발생하는 오류 |
 | 데이터 유효성 검사 실패 |UserPrincipalName와 같은 중요한 특성에서 지원되지 않는 문자 등 잘못된 데이터로 인한 오류, Azure AD에 기록되기 전에 유효성 검사에 실패하는 서식 오류. |
+| 페더레이션된 도메인 변경 | 여러 계정에서 서로 다른 페더레이션된 도메인을 사용하는 경우 오류가 발생합니다. |
 | 큰 특성 |하나 이상의 특성의 허용 되는 크기, 길이 또는 개수보다 클 때 발생하는 오류 |
 | 기타 |위 범주에 맞지 않는 다른 모든 오류 의견에 따라 이 범주는 하위 범주로 분할됩니다. |
 
 ![동기화 오류 보고서 요약](./media/active-directory-aadconnect-health-sync/errorreport01.png)
-![동기화 오류 보고서 범주](./media/active-directory-aadconnect-health-sync/errorreport02.png)
+![동기화 오류 보고서 범주](./media/active-directory-aadconnect-health-sync/SyncErrorByTypes.PNG)
 
 ### <a name="list-of-objects-with-error-per-category"></a>범주별 오류에 따른 개체의 목록
 각 범주에 대해 자세히 알아보면 해당 범주의 오류가 포함된 개체의 목록을 제공합니다.

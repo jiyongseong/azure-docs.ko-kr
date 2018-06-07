@@ -1,11 +1,11 @@
 ---
-title: "Azure에서 HPC 팩 클러스터에 작업 제출 | Microsoft Docs"
-description: "Azure에서 HPC 팩 클러스터로 작업을 제출하기 위해 온-프레미스 컴퓨터를 설정하는 방법"
+title: Azure에서 HPC 팩 클러스터에 작업 제출 | Microsoft Docs
+description: Azure에서 HPC 팩 클러스터로 작업을 제출하기 위해 온-프레미스 컴퓨터를 설정하는 방법
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: dlepow
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager,azure-service-management,hpc-pack
 ms.assetid: 78f6833c-4aa6-4b3e-be71-97201abb4721
 ms.service: virtual-machines-windows
@@ -13,14 +13,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-multiple
 ms.workload: big-compute
-ms.date: 10/14/2016
+ms.date: 05/14/2018
 ms.author: danlep
-translationtype: Human Translation
-ms.sourcegitcommit: 197ebd6e37066cb4463d540284ec3f3b074d95e1
-ms.openlocfilehash: d5953f1e1dd2deb4d871bd67352a6a5b2ae13dbf
-ms.lasthandoff: 03/31/2017
-
-
+ms.openlocfilehash: 025ff3dea365ab75af55f107da1fb7331861eb06
+ms.sourcegitcommit: d78bcecd983ca2a7473fff23371c8cfed0d89627
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/14/2018
+ms.locfileid: "34166372"
 ---
 # <a name="submit-hpc-jobs-from-an-on-premises-computer-to-an-hpc-pack-cluster-deployed-in-azure"></a>온-프레미스 컴퓨터에서 Azure에 배포된 HPC 팩 클러스터로 HPC 작업 제출
 [!INCLUDE [learn-about-deployment-models](../../../includes/learn-about-deployment-models-both-include.md)]
@@ -30,9 +30,9 @@ Azure의 [Microsoft HPC 팩](https://technet.microsoft.com/library/cc514029) 클
 ![Azure의 클러스터로 작업 제출][jobsubmit]
 
 ## <a name="prerequisites"></a>필수 조건
-* **Azure VM에 배포된 HPC 팩 헤드 노드** - [Azure 빠른 시작 템플릿](https://azure.microsoft.com/documentation/templates/) 또는 [Azure PowerShell 스크립트](classic/hpcpack-cluster-powershell-script.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fclassic%2ftoc.json)와 같은 자동화된 도구를 사용하여 헤드 노드 및 클러스터를 배포하는 것이 좋습니다. 이 문서의 단계를 완료하려면 헤드 노드의 DNS 이름 및 클러스터 관리자 자격 증명이 필요합니다.
+* **Azure VM에 배포된 HPC 팩 헤드 노드** - [Azure 빠른 시작 템플릿](https://azure.microsoft.com/documentation/templates/)과 같은 자동화된 도구를 사용하여 헤드 노드 및 클러스터를 배포하는 것이 좋습니다. 이 문서의 단계를 완료하려면 헤드 노드의 DNS 이름 및 클러스터 관리자 자격 증명이 필요합니다.
 * **클라이언트 컴퓨터** - HPC 팩 클라이언트 유틸리티를 실행할 수 있는 Windows 또는 Windows Server 클라이언트 컴퓨터가 필요합니다([시스템 요구 사항](https://technet.microsoft.com/library/dn535781.aspx) 참조). HPC 팩 웹 포털 또는 REST API를 사용하여 작업을 제출하려는 경우 사용자가 선택한 모든 클라이언트 컴퓨터를 사용할 수 있습니다.
-* **HPC 팩 설치 미디어** - HPC Pack 클라이언트 유틸리티를 설치하려면 [Microsoft Download Center](http://go.microsoft.com/fwlink/?LinkId=328024)에서 최신 버전의 HPC 팩(HPC 팩 2012 R2)용 무료 설치 패키지를 사용할 수 있습니다. 헤드 노드 VM에 설치된 HPC 팩과 동일한 버전의 HPC 팩을 다운로드해야 합니다.
+* **HPC 팩 설치 미디어** - HPC 팩 클라이언트 유틸리티를 설치하려면 [Microsoft 다운로드 센터](https://www.microsoft.com/download/details.aspx?id=56360)에서 최신 HPC 팩 버전의 체험 설치 패키지를 사용할 수 있습니다. 헤드 노드 VM에 설치된 HPC 팩과 동일한 버전의 HPC 팩을 다운로드해야 합니다.
 
 ## <a name="step-1-install-and-configure-the-web-components-on-the-head-node"></a>1단계: 헤드 노드에 웹 구성 요소 설치 및 구성
 HTTPS를 통해 클러스터로 작업을 제출하도록 REST 인터페이스를 설정하려면 HPC 팩 헤드 노드에 HPC 팩 웹 구성 요소를 구성합니다. 아직 설치되지 않았으면 먼저 HpcWebComponents.msi 설치 파일을 실행하여 웹 구성 요소를 설치합니다. 그런 다음 HPC PowerShell 스크립트 **Set-HPCWebComponents.ps1**을 실행하여 구성 요소를 구성합니다.
@@ -40,7 +40,7 @@ HTTPS를 통해 클러스터로 작업을 제출하도록 REST 인터페이스�
 자세한 절차는 [Microsoft HPC 팩 웹 구성 요소 설치](http://technet.microsoft.com/library/hh314627.aspx)를 참조하세요.
 
 > [!TIP]
-> 일부 HPC Pack용 Azure 빠른 시작 템플릿은 웹 구성을 자동으로 설치하고 구성합니다. [HPC 팩 IaaS 배포 스크립트](classic/hpcpack-cluster-powershell-script.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fclassic%2ftoc.json) 를 사용하여 클러스터를 만드는 경우 배포의 일환으로 웹 구성 요소를 선택적으로 설치 및 구성할 수 있습니다.
+> HPC 팩 클러스터에 대한 특정 Azure 빠른 시작 템플릿은 웹 구성 요소를 자동으로 설치하고 구성합니다.
 > 
 > 
 
@@ -82,7 +82,7 @@ HTTPS를 통해 클러스터로 작업을 제출하도록 REST 인터페이스�
     ```
 
 ## <a name="step-2-install-the-hpc-pack-client-utilities-on-an-on-premises-computer"></a>2단계: 온-프레미스 컴퓨터에 HPC 팩 클라이언트 유틸리티 설치
-컴퓨터에 HPC Pack 클라이언트 유틸리티를 설치하려면 [Microsoft 다운로드 센터](http://go.microsoft.com/fwlink/?LinkId=328024)에서 HPC Pack 설치 파일(전체 설치)을 다운로드합니다. 설치를 시작할 때 **HPC Pack 클라이언트 유틸리티**에 대한 설정 옵션을 선택합니다.
+컴퓨터에 HPC Pack 클라이언트 유틸리티를 설치하려면 [Microsoft 다운로드 센터](https://www.microsoft.com/download/details.aspx?id=56360)에서 HPC Pack 설치 파일(전체 설치)을 다운로드합니다. 설치를 시작할 때 **HPC Pack 클라이언트 유틸리티**에 대한 설정 옵션을 선택합니다.
 
 HPC 팩 클라이언트 도구를 사용하여 헤드 노드 VM으로 작업을 제출하려면 헤드 노드에서 인증서를 내보내고 클라이언트 컴퓨터에 설치해야 합니다. 인증서는 .CER 형식이어야 합니다.
 
@@ -92,7 +92,7 @@ HPC 팩 클라이언트 도구를 사용하여 헤드 노드 VM으로 작업을 
 2. 콘솔 트리에서 **인증서 - 로컬 컴퓨터** > **개인**을 확장한 다음 **인증서**를 클릭합니다.
 3. [1단계: 헤드 노드에 웹 구성 요소 설치 및 구성](#step-1:-install-and-configure-the-web-components-on-the-head-node)에서 HPC Pack 웹 구성 요소에 구성한 인증서를 찾습니다(예: CN=&lt;*HeadNodeDnsName*&gt;.cloudapp.net).
 4. 인증서를 마우스 오른쪽 단추로 클릭하고 **모든 작업** > **내보내기**를 클릭합니다.
-5. 인증서 내보내기 마법사에서 **다음**을 클릭하고 **아니요, 개인 키를 내보내지 않습니다.**를 선택합니다.
+5. 인증서 내보내기 마법사에서 **다음**을 클릭하고 **아니요, 개인 키를 내보내지 않습니다.** 를 선택합니다.
 6. 마법사의 나머지 단계를 따라 인증서를 DER 인코딩 이진 X.509(.CER) 형식으로 내보냅니다.
 
 **클라이언트 컴퓨터로 인증서를 가져오려면**
@@ -139,9 +139,9 @@ HPC 팩 클라이언트 도구를 사용하여 헤드 노드 VM으로 작업을 
    
     a. 클라이언트 컴퓨터의 제어판에서 자격 증명 관리자를 시작합니다.
    
-    b. **Windows 자격 증명** > **일반 자격 증명 추가**를 클릭합니다.
+    나. **Windows 자격 증명** > **일반 자격 증명 추가**를 클릭합니다.
    
-    c. 구성한 클러스터 관리자 또는 다른 클러스터 사용자의 인터넷 주소(예: https://&lt;HeadNodeDnsName&gt;.cloudapp.net/HpcScheduler 또는 https://&lt;HeadNodeDnsName&gt;.&lt;region&gt;.cloudapp.azure.com/HpcScheduler)와 사용자 이름(&lt;도메인 이름&gt;\\&lt;사용자 이름&gt;) 및 암호를 지정합니다.
+    다. 구성한 클러스터 관리자 또는 다른 클러스터 사용자의 인터넷 주소(예: https://&lt;HeadNodeDnsName&gt;.cloudapp.net/HpcScheduler 또는 https://&lt;HeadNodeDnsName&gt;.&lt;region&gt;.cloudapp.azure.com/HpcScheduler)와 사용자 이름(&lt;도메인 이름&gt;\\&lt;사용자 이름&gt;) 및 암호를 지정합니다.
 2. 클라이언트 컴퓨터에서 HPC 작업 관리자를 시작합니다.
 3. **헤드 노드 선택** 대화 상자에서 Azure 헤드 노드의 URL을 입력합니다(예: https://&lt;HeadNodeDnsName&gt;.cloudapp.net 또는 https://&lt;HeadNodeDnsName&gt;.&lt;region&gt;.cloudapp.azure.com).
    
@@ -174,4 +174,3 @@ HPC 팩 클라이언트 도구를 사용하여 헤드 노드 VM으로 작업을 
 
 <!--Image references-->
 [jobsubmit]: ./media/virtual-machines-windows-hpcpack-cluster-submit-jobs/jobsubmit.png
-

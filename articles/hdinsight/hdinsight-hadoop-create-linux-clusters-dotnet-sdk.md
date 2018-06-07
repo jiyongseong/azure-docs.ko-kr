@@ -1,8 +1,8 @@
 ---
-title: ".NET를 사용하여 Hadoop 클러스터 만들기 - Azure HDInsight | Microsoft Docs"
-description: "HDInsight .NET SDK를 사용하여 Linux 기반 HDInsight에서 Hadoop, HBase, Storm 또는 Spark 클러스터를 만드는 방법을 알아봅니다."
+title: .NET를 사용하여 Hadoop 클러스터 만들기 - Azure HDInsight | Microsoft Docs
+description: HDInsight .NET SDK를 사용하여 Linux 기반 HDInsight에서 Hadoop, HBase, Storm 또는 Spark 클러스터를 만드는 방법을 알아봅니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: mumian
 manager: jhubbard
 editor: cgronlun
@@ -11,23 +11,21 @@ ms.assetid: 9c74e3dc-837f-4c90-bbb1-489bc7124a3d
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 04/27/2017
+ms.topic: conceptual
+ms.date: 05/14/2018
 ms.author: jgao
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5bbeb9d4516c2b1be4f5e076a7f63c35e4176b36
-ms.openlocfilehash: 823508c0bd9e379361dd26f70b3960259a8d4292
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/13/2017
-
+ms.openlocfilehash: 8523b012d6ceaf116e6849abaf8952bbde8b41b3
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="create-linux-based-clusters-in-hdinsight-using-the-net-sdk"></a>.NET SDK를 사용하여 HDInsight에서 Linux 기반 클러스터 만들기
 
 [!INCLUDE [selector](../../includes/hdinsight-create-linux-cluster-selector.md)]
 
-HDInsight .NET SDK는 .NET Framework 응용 프로그램에서 HDInsight로 더 쉽게 작업하도록 지원하는 .NET 클라이언트 라이브러리를 제공합니다. 이 문서에서는 .NET SDK를 사용하여 Linux 기반 HDInsight 클러스터를 만드는 방법을 보여 줍니다.
+
+.NET SDK를 사용하여 Azure HDInsight 클러스터에서 Hadoop 클러스터를 만드는 방법을 알아봅니다.
 
 > [!IMPORTANT]
 > 이 문서의 단계에서는 하나의 작업자 노드가 있는 클러스터를 만듭니다. 클러스터 만들기에서 또는 클러스터를 만든 후 확장하여 32개 이상의 작업자 노드를 계획하는 경우 최소한 코어 8개와 14GB RAM을 가진 헤드 노드 크기를 선택해야 합니다.
@@ -38,15 +36,15 @@ HDInsight .NET SDK는 .NET Framework 응용 프로그램에서 HDInsight로 더 
 
 [!INCLUDE [delete-cluster-warning](../../includes/hdinsight-delete-cluster-warning.md)]
 
-* **Azure 구독**. [Azure 무료 평가판](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/)을 참조하세요.
-* **Azure Storage 계정** [저장소 계정 만들기](../storage/storage-create-storage-account.md#create-a-storage-account)를 참조하세요.
+* **Azure 구독**. [Azure 평가판](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/)을 참조하세요.
+* **Azure Storage 계정** [저장소 계정 만들기](../storage/common/storage-create-storage-account.md#create-a-storage-account)를 참조하세요.
 * **Visual Studio 2013, Visual Studio 2015 또는 Visual Studio 2017**
 
 ## <a name="create-clusters"></a>클러스터 만들기
 
 1. Visual Studio 2017을 엽니다.
 2. 새 Visual C# 콘솔 응용 프로그램을 만듭니다.
-3. **도구** 메뉴에서 **Nuget 패키지 관리자**, **패키지 관리자 콘솔**을 차례로 클릭합니다.
+3. **도구** 메뉴에서 **NuGet 패키지 관리자**, **패키지 관리자 콘솔**을 차례로 클릭합니다.
 4. 콘솔에서 다음 명령을 실행하여 패키지를 설치합니다.
 
     ```powershell
@@ -90,7 +88,7 @@ HDInsight .NET SDK는 .NET Framework 응용 프로그램에서 HDInsight로 더 
             private const string NewClusterLocation = "EAST US 2";     // Must be the same as the default Storage account
             private const OSType NewClusterOSType = OSType.Linux;
             private const string NewClusterType = "Hadoop";
-            private const string NewClusterVersion = "3.5";
+            private const string NewClusterVersion = "3.6";
             private const string NewClusterUsername = "admin";
             private const string NewClusterPassword = "<Enter HTTP User Password>";
             private const string NewClusterSshUserName = "sshuser";
@@ -192,7 +190,7 @@ HDInsight .NET SDK는 .NET Framework 응용 프로그램에서 HDInsight로 더 
     ```
 
 6. 클래스 멤버 값을 대체합니다.
-7. **F5** 키를 눌러 응용 프로그램을 실행합니다. 콘솔 창이 열리고 응용 프로그램의 상태가 표시되며 또한 Azure 계정 자격 증명을 입력하라는 메시지가 표시됩니다. HDInsight 클러스터를 만들려면 몇 분정도 걸릴 수 있습니다. 일반적으로 15분 정도입니다.
+7. **F5** 키를 눌러 응용 프로그램을 실행합니다. 콘솔 창이 열리고 응용 프로그램의 상태가 표시되며 또한 Azure 계정 자격 증명을 입력하라는 메시지가 표시됩니다. Azure 계정 자격 증명을 입력하라는 메시지가 표시됩니다. 일반적으로 15분 정도입니다.
 
 ## <a name="use-bootstrap"></a>부트스트랩 사용
 
@@ -379,30 +377,27 @@ HDInsight 클러스터를 만드는 동안 문제가 발생할 경우 [액세스
 HDInsight 클러스터를 성공적으로 만들었으므로 다음을 사용하여 클러스터 작업을 수행하는 방법을 알아봅니다. 
 
 ### <a name="hadoop-clusters"></a>Hadoop 클러스터
-* [HDInsight에서 Hive 사용](hdinsight-use-hive.md)
-* [HDInsight에서 Pig 사용](hdinsight-use-pig.md)
-* [HDInsight와 함께 MapReduce 사용](hdinsight-use-mapreduce.md)
+* [HDInsight에서 하이브 사용](hadoop/hdinsight-use-hive.md)
+* [HDInsight에서 Pig 사용](hadoop/hdinsight-use-pig.md)
+* [HDInsight와 함께 MapReduce 사용](hadoop/hdinsight-use-mapreduce.md)
 
 ### <a name="hbase-clusters"></a>HBase 클러스터
-* [HDInsight에서 HBase 시작](hdinsight-hbase-tutorial-get-started-linux.md)
-* [HDInsight에서 HBase용 Java 응용 프로그램 개발](hdinsight-hbase-build-java-maven-linux.md)
+* [HDInsight에서 HBase 시작](hbase/apache-hbase-tutorial-get-started-linux.md)
+* [HDInsight에서 HBase용 Java 응용 프로그램 개발](hbase/apache-hbase-build-java-maven-linux.md)
 
 ### <a name="storm-clusters"></a>Storm 클러스터
-* [HDInsight에서 Storm용 Java 토폴로지 개발](hdinsight-storm-develop-java-topology.md)
-* [HDInsight의 Storm에서 Python 구성 요소 사용](hdinsight-storm-develop-python-topology.md)
-* [HDInsight에서 Storm을 사용하는 토폴로지 배포 및 모니터링](hdinsight-storm-deploy-monitor-topology-linux.md)
+* [HDInsight에서 Storm용 Java 토폴로지 개발](storm/apache-storm-develop-java-topology.md)
+* [HDInsight의 Storm에서 Python 구성 요소 사용](storm/apache-storm-develop-python-topology.md)
+* [HDInsight에서 Storm을 사용하는 토폴로지 배포 및 모니터링](storm/apache-storm-deploy-monitor-topology-linux.md)
 
 ### <a name="spark-clusters"></a>Spark 클러스터
-* [Scala를 사용하여 독립 실행형 응용 프로그램 만들기](hdinsight-apache-spark-create-standalone-application.md)
-* [Livy를 사용하여 Spark 클러스터에서 원격으로 작업 실행](hdinsight-apache-spark-livy-rest-interface.md)
-* [BI와 Spark: BI 도구와 함께 HDInsight에서 Spark를 사용하여 대화형 데이터 분석 수행](hdinsight-apache-spark-use-bi-tools.md)
-* [기계 학습과 Spark: 음식 검사 결과를 예측하는 데 HDInsight의 Spark 사용](hdinsight-apache-spark-machine-learning-mllib-ipython.md)
-* [Spark 스트리밍: HDInsight에서 Spark를 사용하여 실시간 스트리밍 응용 프로그램 빌드](hdinsight-apache-spark-eventhub-streaming.md)
-
+* [Scala를 사용하여 독립 실행형 응용 프로그램 만들기](spark/apache-spark-create-standalone-application.md)
+* [Livy를 사용하여 Spark 클러스터에서 원격으로 작업 실행](spark/apache-spark-livy-rest-interface.md)
+* [BI와 Spark: BI 도구와 함께 HDInsight에서 Spark를 사용하여 대화형 데이터 분석 수행](spark/apache-spark-use-bi-tools.md)
+* [Machine Learning과 Spark: 음식 검사 결과를 예측하는 데 HDInsight의 Spark 사용](spark/apache-spark-machine-learning-mllib-ipython.md)
 ### <a name="run-jobs"></a>작업 실행
-* [.NET SDK를 사용하여 HDInsight에서 Hive 작업 실행](hdinsight-hadoop-use-hive-dotnet-sdk.md)
-* [.NET SDK를 사용하여 HDInsight에서 Pig 작업 실행](hdinsight-hadoop-use-pig-dotnet-sdk.md)
-* [.NET SDK를 사용하여 HDInsight에서 Sqoop 작업 실행](hdinsight-hadoop-use-sqoop-dotnet-sdk.md)
+* [.NET SDK를 사용하여 HDInsight에서 Hive 작업 실행](hadoop/apache-hadoop-use-hive-dotnet-sdk.md)
+* [.NET SDK를 사용하여 HDInsight에서 Pig 작업 실행](hadoop/apache-hadoop-use-pig-dotnet-sdk.md)
+* [.NET SDK를 사용하여 HDInsight에서 Sqoop 작업 실행](hadoop/apache-hadoop-use-sqoop-dotnet-sdk.md)
 * [HDInsight에서 Oozie 작업 실행](hdinsight-use-oozie.md)
-
 

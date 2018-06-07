@@ -1,31 +1,27 @@
 ---
-title: "Azure에서 여러 NIC를 사용하는 Windows VM 만들기 및 관리 | Microsoft Docs"
-description: "Azure PowerShell 또는 Resource Manager 템플릿을 사용하여 여러 NIC가 연결된 Windows VM을 만들고 관리하는 방법을 알아봅니다."
+title: Azure에서 여러 NIC를 사용하는 Windows VM 만들기 및 관리 | Microsoft Docs
+description: Azure PowerShell 또는 Resource Manager 템플릿을 사용하여 여러 NIC가 연결된 Windows VM을 만들고 관리하는 방법을 알아봅니다.
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 ms.assetid: 9bff5b6d-79ac-476b-a68f-6f8754768413
 ms.service: virtual-machines-windows
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
-ms.date: 07/05/2017
+ms.date: 09/26/2017
 ms.author: iainfou
-ms.translationtype: Human Translation
-ms.sourcegitcommit: bb794ba3b78881c967f0bb8687b1f70e5dd69c71
-ms.openlocfilehash: 92f5181dbf36ef0f7e2568d557faa7c5f2144ad9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.openlocfilehash: 776ae83990a7799102c69347196a72a68561ee6b
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="create-and-manage-a-windows-virtual-machine-that-has-multiple-nics"></a>여러 NIC가 있는 Windows 가상 컴퓨터 만들기 및 관리
-Azure의 VM(가상 컴퓨터)에는 여러 가상 NIC(네트워크 인터페이스 카드)가 연결될 수 있습니다. 일반적인 시나리오는 프런트 엔드 및 백 엔드 연결에 다른 서브넷을 사용하거나 모니터링 또는 백업 솔루션 전용 네트워크를 두는 것입니다. 이 문서에서는 여러 NIC가 연결된 VM을 만드는 방법을 설명합니다. 또한 기존 VM에서 NIC를 추가하거나 제거하는 방법을 알아봅니다. [VM 크기](sizes.md) 가 다르면 다양한 NIC가 지원되므로 그에 따라 VM 크기를 지정하도록 합니다.
-
-자체 PowerShell 스크립트 내에서 여러 NIC를 만드는 방법을 비롯한 자세한 내용은 [다중 NIC VM 배포](../../virtual-network/virtual-network-deploy-multinic-arm-ps.md)를 참조하세요.
+Azure의 VM(가상 머신)에는 여러 가상 NIC(네트워크 인터페이스 카드)가 연결될 수 있습니다. 일반적인 시나리오는 프런트 엔드 및 백 엔드 연결에 다른 서브넷을 사용하거나 모니터링 또는 백업 솔루션 전용 네트워크를 두는 것입니다. 이 문서에서는 여러 NIC가 연결된 VM을 만드는 방법을 설명합니다. 또한 기존 VM에서 NIC를 추가하거나 제거하는 방법을 알아봅니다. [VM 크기](sizes.md) 가 다르면 다양한 NIC가 지원되므로 그에 따라 VM 크기를 지정하도록 합니다.
 
 ## <a name="prerequisites"></a>필수 조건
 먼저 [최신 버전의 Azure PowerShell을 설치 및 구성](/powershell/azure/overview)했는지 확인합니다.
@@ -80,9 +76,9 @@ $myNic2 = New-AzureRmNetworkInterface -ResourceGroupName "myResourceGroup" `
     -SubnetId $backEnd.Id
 ```
 
-또한 일반적으로 [네트워크 보안 그룹](../../virtual-network/virtual-networks-nsg.md) 또는 [부하 분산 장치](../../load-balancer/load-balancer-overview.md)를 만들어 VM에서 트래픽을 관리하고 분산합니다. [좀 더 자세한 다중 NIC VM](../../virtual-network/virtual-network-deploy-multinic-arm-ps.md) 문서에서 네트워크 보안 그룹 생성 및 NIC 할당에 대해 안내합니다.
+또한 일반적으로 VM에 대한 네트워크 트래픽을 필터링하기 위해 [네트워크 보안 그룹](../../virtual-network/security-overview.md)을 만들고, 여러 VM 간에 트래픽을 분산하기 위해 [부하 분산 장치](../../load-balancer/load-balancer-overview.md)를 만듭니다.
 
-### <a name="create-the-virtual-machine"></a>가상 컴퓨터 만들기
+### <a name="create-the-virtual-machine"></a>가상 머신 만들기
 이제 VM 구성 빌드를 시작합니다. VM 크기마다 VM에 추가할 수 있는 NIC의 총수가 제한되어 있습니다. 자세한 내용은 [Windows VM 크기](sizes.md)를 참조하세요.
 
 1. 다음과 같이 `$cred` 변수에 VM 자격 증명을 설정합니다.
@@ -120,14 +116,16 @@ $myNic2 = New-AzureRmNetworkInterface -ResourceGroupName "myResourceGroup" `
     $vmConfig = Add-AzureRmVMNetworkInterface -VM $vmConfig -Id $myNic2.Id
     ```
 
-5. 마지막으로 [New-AzureRmVM](/powershell/module/azurerm.compute/new-azurermvm)을 사용하여 VM을 만듭니다.
+5. [New-AzureRmVM](/powershell/module/azurerm.compute/new-azurermvm)을 사용하여 VM을 만듭니다.
 
     ```powershell
     New-AzureRmVM -VM $vmConfig -ResourceGroupName "myResourceGroup" -Location "EastUs"
     ```
 
+6. [여러 NIC에 대한 운영 체제 구성](#configure-guest-os-for-multiple-nics)의 단계를 완료하여 OS에 보조 NIC에 대한 경로를 추가합니다.
+
 ## <a name="add-a-nic-to-an-existing-vm"></a>기존 VM에 NIC 추가
-기존 VM에 가상 NIC를 추가하고 VM을 할당 취소하고 가상 NIC를 추가한 다음 VM을 시작합니다.
+기존 VM에 가상 NIC를 추가하고 VM을 할당 취소하고 가상 NIC를 추가한 다음 VM을 시작합니다. [VM 크기](sizes.md) 가 다르면 다양한 NIC가 지원되므로 그에 따라 VM 크기를 지정하도록 합니다. 필요한 경우 [VM의 크기를 조정](resize-vm.md)할 수 있습니다.
 
 1. [Stop-AzureRmVM](/powershell/module/azurerm.compute/stop-azurermvm)을 사용하여 VM을 할당 취소합니다. 다음 예제에서는 *myResourceGroup*에서 *myVM*이라는 VM의 할당을 취소합니다.
 
@@ -179,6 +177,8 @@ $myNic2 = New-AzureRmNetworkInterface -ResourceGroupName "myResourceGroup" `
     ```powershell
     Start-AzureRmVM -ResourceGroupName "myResourceGroup" -Name "myVM"
     ```
+
+5. [여러 NIC에 대한 운영 체제 구성](#configure-guest-os-for-multiple-nics)의 단계를 완료하여 OS에 보조 NIC에 대한 경로를 추가합니다.
 
 ## <a name="remove-a-nic-from-an-existing-vm"></a>기존 VM에서 NIC 제거
 기존 VM에서 가상 NIC를 제거하고 VM을 할당 취소하고 가상 NIC를 제거한 다음 VM을 시작합니다.
@@ -235,10 +235,65 @@ Azure Resource Manager 템플릿은 여러 NIC를 만드는 것과 같이 배포
 "name": "[concat('myNic', copyIndex())]", 
 ```
 
-[Resource Manager 템플릿을 사용하여 여러 NIC 만들기](../../virtual-network/virtual-network-deploy-multinic-arm-template.md)의 전체 예제를 읽어볼 수 있습니다.
+[Resource Manager 템플릿을 사용하여 여러 NIC 만들기](../../virtual-network/template-samples.md)의 전체 예제를 읽어볼 수 있습니다.
+
+[여러 NIC에 대한 운영 체제 구성](#configure-guest-os-for-multiple-nics)의 단계를 완료하여 OS에 보조 NIC에 대한 경로를 추가합니다.
+
+## <a name="configure-guest-os-for-multiple-nics"></a>여러 NIC에 대한 게스트 OS 구성
+
+Azure에서는 가상 머신에 연결된 첫 번째(기본) 네트워크 인터페이스에 기본 게이트웨이를 할당합니다. 가상 머신에 연결된 추가(보조) 네트워크 인터페이스에는 기본 게이트웨이를 할당하지 않습니다. 따라서 보조 네트워크 인터페이스가 있는 서브넷 외부의 리소스와는 기본적으로 통신할 수 없습니다. 하지만 보조 네트워크 인터페이스는 서브넷 외부의 리소스와 통신할 수 있습니다. 단, 통신을 사용하도록 설정하는 단계는 운영 체제에 따라 다릅니다.
+
+1. Windows 명령 프롬프트에서 `route print` 명령을 실행합니다. 여기서는 연결된 네트워크 인터페이스가 두 개인 가상 머신에 대해 다음과 유사한 출력이 반환됩니다.
+
+    ```
+    ===========================================================================
+    Interface List
+    3...00 0d 3a 10 92 ce ......Microsoft Hyper-V Network Adapter #3
+    7...00 0d 3a 10 9b 2a ......Microsoft Hyper-V Network Adapter #4
+    ===========================================================================
+    ```
+ 
+    이 예제에서는 **Microsoft Hyper-V Network Adapter #4**(인터페이스 7)가 기본 게이트웨이가 할당되지 않은 보조 네트워크 인터페이스입니다.
+
+2. 명령 프롬프트에서 `ipconfig` 명령을 실행하여 보조 네트워크 인터페이스에 할당된 IP 주소를 확인합니다. 이 예제에서는 192.168.2.4가 인터페이스 7에 할당되어 있습니다. 보조 네트워크 인터페이스에 대해서는 기본 게이트웨이 주소가 반환되지 않습니다.
+
+3. 보조 네트워크 인터페이스의 서브넷 외부의 주소를 대상으로 하는 모든 트래픽을 서브넷의 게이트웨이로 라우팅하려면 다음 명령을 실행합니다.
+
+    ```
+    route add -p 0.0.0.0 MASK 0.0.0.0 192.168.2.1 METRIC 5015 IF 7
+    ```
+
+    서브넷의 게이트웨이 주소는 서브넷에 대해 정의된 주소 범위에서 첫 번째 IP 주소(.1로 끝남)입니다. 모든 트래픽을 서브넷 외부로 라우팅하지 않으려면 대신 특정 대상에 개별 경로를 추가할 수 있습니다. 예를 들어, 보조 네트워크 인터페이스에서 트래픽을 192.168.3.0 네트워크로만 라우팅하려는 경우 다음 명령을 입력합니다.
+
+      ```
+      route add -p 192.168.3.0 MASK 255.255.255.0 192.168.2.1 METRIC 5015 IF 7
+      ```
+  
+4. 예를 들어 192.168.3.0 네트워크의 리소스와 통신이 성공했는지 확인하려면 다음 명령을 입력해 인터페이스 7(192.168.2.4)을 사용하여 192.168.3.4를 ping합니다.
+
+    ```
+    ping 192.168.3.4 -S 192.168.2.4
+    ```
+
+    다음 명령을 사용하여 ping하는 장치의 Windows 방화벽을 통해 ICMP를 열어야 할 수도 있습니다.
+  
+      ```
+      netsh advfirewall firewall add rule name=Allow-ping protocol=icmpv4 dir=in action=allow
+      ```
+  
+5. 추가된 경로가 경로 테이블에 있는지 확인하려면 `route print` 명령을 입력합니다. 다음 텍스트와 유사한 출력이 반환됩니다.
+
+    ```
+    ===========================================================================
+    Active Routes:
+    Network Destination        Netmask          Gateway       Interface  Metric
+              0.0.0.0          0.0.0.0      192.168.1.1      192.168.1.4     15
+              0.0.0.0          0.0.0.0      192.168.2.1      192.168.2.4   5015
+    ```
+
+    **게이트웨이** 아래에 *192.168.1.1*로 나열된 경로는 기본적으로 기본 네트워크 인터페이스용 경로입니다. **게이트웨이** 아래에서 *192.168.2.1*인 경로가 추가한 경로입니다.
 
 ## <a name="next-steps"></a>다음 단계
 여러 NIC가 있는 VM을 만들 때 [Windows VM 크기](sizes.md)를 검토합니다. 각 VM 크기가 지원하는 NIC의 최대 수에 유의합니다. 
-
 
 

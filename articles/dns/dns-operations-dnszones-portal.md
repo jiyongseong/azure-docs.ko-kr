@@ -1,9 +1,9 @@
 ---
-title: "Azure DNS에서 DNS 영역 관리 - Azure Portal | Microsoft Docs"
-description: "Azure Portal을 사용하여 DNS 영역을 관리할 수 있습니다. 이 문서에서는 Azure DNS에서 DNS 영역을 업데이트, 삭제 및 만드는 방법을 설명합니다."
+title: Azure DNS에서 DNS 영역 관리 - Azure Portal | Microsoft Docs
+description: Azure Portal을 사용하여 DNS 영역을 관리할 수 있습니다. 이 문서에서는 Azure DNS에서 DNS 영역을 업데이트, 삭제 및 만드는 방법을 설명합니다.
 services: dns
 documentationcenter: na
-author: georgewallace
+author: KumudD
 manager: timlt
 ms.service: dns
 ms.devlang: na
@@ -11,13 +11,12 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/18/2017
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5edc47e03ca9319ba2e3285600703d759963e1f3
-ms.openlocfilehash: 69a509612e6204fc93dd42bf2fe69cb165b5777c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/01/2017
-
+ms.author: kumud
+ms.openlocfilehash: 3fbf59010e690ac022e4363eddebe1cfbba53d13
+ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/03/2018
 ---
 # <a name="how-to-manage-dns-zones-in-the-azure-portal"></a>Azure Portal에서 DNS 영역을 관리하는 방법
 
@@ -31,8 +30,8 @@ ms.lasthandoff: 06/01/2017
 
 ## <a name="create-a-dns-zone"></a>DNS 영역 만들기
 
-1. Azure 포털에 로그인합니다.
-2. 허브 메뉴에서 **새로 만들기 > 네트워킹 >**을 클릭한 다음 **DNS 영역**을 클릭하여 DNS 영역 블레이드 만들기를 엽니다.
+1. Azure Portal에 로그인
+2. 허브 메뉴에서 **리소스 만들기 > 네트워킹 >** 을 클릭한 다음, **DNS 영역**을 클릭하여 DNS 영역 블레이드 만들기를 엽니다.
 
     ![DNS 영역](./media/dns-operations-dnszones-portal/openzone650.png)
 

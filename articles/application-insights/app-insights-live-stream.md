@@ -1,9 +1,9 @@
 ---
-title: "Azure Application Insights의 사용자 지정 메트릭 및 진단을 사용한 라이브 메트릭 스트림 | Microsoft Docs"
-description: "사용자 지정 메트릭으로 웹앱을 실시간으로 모니터링하고 오류, 추적 및 이벤트의 라이브 피드를 통해 문제를 진단할 수 있습니다."
+title: Azure Application Insights의 사용자 지정 메트릭 및 진단을 사용한 라이브 메트릭 스트림 | Microsoft Docs
+description: 사용자 지정 메트릭으로 웹앱을 실시간으로 모니터링하고 오류, 추적 및 이벤트의 라이브 피드를 통해 문제를 진단할 수 있습니다.
 services: application-insights
-documentationcenter: 
-author: SoubhagyaDash
+documentationcenter: ''
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 1f471176-38f3-40b3-bc6d-3f47d0cbaaa2
 ms.service: application-insights
@@ -12,15 +12,14 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 05/24/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c785ad8dbfa427d69501f5f142ef40a2d3530f9e
-ms.openlocfilehash: 68820f9c018b1076bae8dc0195906d0f34590748
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
+ms.author: mbullwin; Soubhagya.Dash
+ms.openlocfilehash: 3b17344af099ea8b5d2554d5f6045a10641ff861
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
+ms.locfileid: "34193430"
 ---
-
 # <a name="live-metrics-stream-monitor--diagnose-with-1-second-latency"></a>라이브 메트릭 스트림: 1초 대기 시간으로 모니터링 및 진단 
 
 [Application Insights](app-insights-overview.md)의 라이브 메트릭 스트림을 사용하여 프로덕션 웹 응용 프로그램에서 실시간 심장 박동을 검사합니다. 메트릭과 성능 카운터를 선택 및 필터링하여 서비스에 지장 없이 실시간으로 확인합니다. 실패한 요청 및 예외 샘플에서 스택 추적을 검사합니다. [프로파일러](app-insights-profiler.md), [스냅숏 디버거](app-insights-snapshot-debugger.md) 및 [성능 테스트](app-insights-monitor-web-app-availability.md#performance-tests)와 함께 라이브 메트릭 스트림은 라이브 웹 사이트에 강력하고 비침해적인 진단 도구를 제공합니다.
@@ -39,7 +38,7 @@ ms.lasthandoff: 05/26/2017
 
 라이브 메트릭 스트림은 현재 온-프레미스를 실행 중인 ASP.NET 앱 또는 클라우드에서 사용할 수 있습니다. 
 
-## <a name="get-started"></a>시작
+## <a name="get-started"></a>시작하기
 
 1. 아직 ASP.NET 웹앱 또는 [Windows 서버 앱](app-insights-windows-services.md)에 [Application Insights를 설치](app-insights-asp-net.md)하지 않은 경우 지금 설치합니다. 
 2. Application Insights 패키지의 **최신 버전으로 업데이트**합니다. Visual Studio에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **Nuget 패키지 관리**를 선택합니다. **업데이트** 탭을 열어 **시험판 포함**을 선택하고 모든 Microsoft.ApplicationInsights.* 패키지를 선택합니다.
@@ -117,21 +116,69 @@ Application Insights 원격 분석 외에, 스트림 옵션 중에서 선택하�
 ![API 키 만들기](./media/app-insights-live-stream/live-metrics-apikeycreate.png)
 
 ### <a name="add-api-key-to-configuration"></a>구성에 API 키 추가
+
+### <a name="classic-aspnet"></a>클래식 ASP.NET
+
 applicationinsights.config 파일에서 QuickPulseTelemetryModule에 AuthenticationApiKey를 추가합니다.
 ``` XML
 
 <Add Type="Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse.QuickPulseTelemetryModule, Microsoft.AI.PerfCounterCollector">
       <AuthenticationApiKey>YOUR-API-KEY-HERE</AuthenticationApiKey>
-</Add> 
+</Add>
 
 ```
 또는 코드에서 QuickPulseTelemetryModule에 설정합니다.
 
-``` C#
+```csharp
+using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse;
+using Microsoft.ApplicationInsights.Extensibility;
 
-    module.AuthenticationApiKey = "YOUR-API-KEY-HERE";
+             TelemetryConfiguration configuration = new TelemetryConfiguration();
+            configuration.InstrumentationKey = "YOUR-IKEY-HERE";
+
+            QuickPulseTelemetryProcessor processor = null;
+
+            configuration.TelemetryProcessorChainBuilder
+                .Use((next) =>
+                {
+                    processor = new QuickPulseTelemetryProcessor(next);
+                    return processor;
+                })
+                        .Build();
+
+            var QuickPulse = new QuickPulseTelemetryModule()
+            {
+
+                AuthenticationApiKey = "YOUR-API-KEY"
+            };
+            QuickPulse.Initialize(configuration);
+            QuickPulse.RegisterTelemetryProcessor(processor);
+            foreach (var telemetryProcessor in configuration.TelemetryProcessors)
+                {
+                if (telemetryProcessor is ITelemetryModule telemetryModule)
+                    {
+                    telemetryModule.Initialize(configuration);
+                    }
+                }
 
 ```
+
+### <a name="aspnet-core-requires-application-insights-aspnet-core-sdk-230-beta-or-greater"></a>ASP.NET Core(Application Insights ASP.NET Core SDK 2.3.0 베타 이상 필요)
+
+다음과 같이 startup.cs 파일을 수정합니다.
+
+먼저 추가
+
+``` C#
+using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse;
+```
+
+그런 다음, ConfigureServices 메서드 내에 다음을 추가합니다.
+
+``` C#
+services.ConfigureTelemetryModule<QuickPulseTelemetryModule>( module => module.AuthenticationApiKey = "YOUR-API-KEY-HERE");
+```
+
 
 그러나 연결된 모든 서버를 인식하고 신뢰하는 경우 인증된 채널을 사용하지 않고 사용자 지정 필터를 시도할 수 있습니다. 이 옵션은 6개월 동안 사용할 수 있습니다. 이 재정의는 새 세션마다 한 번씩 또는 새 서버가 온라인 상태가 될 때마다 필요합니다.
 

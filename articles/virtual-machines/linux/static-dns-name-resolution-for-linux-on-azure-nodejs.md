@@ -1,13 +1,13 @@
 ---
-title: "Azure에서 VM 이름 확인을 위해 내부 DNS 사용 | Microsoft Docs"
-description: "Azure에서 VM 이름 확인을 위해 내부 DNS 사용"
+title: Azure에서 VM 이름 확인을 위해 내부 DNS 사용 | Microsoft Docs
+description: Azure에서 VM 이름 확인을 위해 내부 DNS 사용
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: vlivech
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
@@ -15,14 +15,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 12/05/2016
 ms.author: v-livech
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 72efef9eb7a2ab61743fa54c5340160de89f6ece
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: 73ecbb5bfcc99eb4507cac24b0539a04c3d8f521
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-
 # <a name="using-internal-dns-for-vm-name-resolution-on-azure"></a>Azure에서 VM 이름 확인을 위해 내부 DNS 사용
 
 이 문서에서는 가상 NIC 카드(VNic) 및 DNS 레이블 이름을 사용하여 Linux VM에 대해 정적 내부 DNS 이름을 설정하는 방법을 보여 줍니다. 정적 DNS 이름은 이 문서에서 사용되는 Jenkins 빌드 서버 또는 Git 서버와 같은 영구 인프라 서비스에 사용됩니다.
@@ -96,7 +94,7 @@ azure group create myResourceGroup \
 
 ## <a name="create-the-vnet"></a>VNet 만들기
 
-첫 번째 단계는 VM을 시작할 VNet을 빌드하는 것입니다.  VNet은 이 연습을 위한 서브넷을 포함합니다.  Azure VNet에 대한 자세한 내용은 [Azure CLI를 사용하여 가상 네트워크 만들기](../../virtual-network/virtual-networks-create-vnet-arm-cli.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)를 참조하세요.
+첫 번째 단계는 VM을 시작할 VNet을 빌드하는 것입니다.  VNet은 이 연습을 위한 서브넷을 포함합니다.  Azure VNet에 대한 자세한 내용은 [가상 네트워크 만들기](../../virtual-network/manage-virtual-network.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#create-a-virtual-network)를 참조하세요.
 
 ```azurecli
 azure network vnet create myVNet \
@@ -107,7 +105,7 @@ azure network vnet create myVNet \
 
 ## <a name="create-the-nsg"></a>NSG 만들기
 
-서브넷은 기존 네트워크 보안 그룹을 기초로 빌드되므로 서브넷 전에 NSG를 구축합니다.  Azure NSG는 네트워크 계층에서 방화벽과 동일합니다.  Azure NSG에 대한 자세한 내용은 [Azure CLI에서 NSG를 만드는 방법](../../virtual-network/virtual-networks-create-nsg-arm-cli.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)을 참조하세요.
+서브넷은 기존 네트워크 보안 그룹을 기초로 빌드되므로 서브넷 전에 NSG를 구축합니다.  Azure NSG는 네트워크 계층에서 방화벽과 동일합니다.  Azure NSG에 대한 자세한 내용은 [Azure CLI에서 NSG를 만드는 방법](../../virtual-network/tutorial-filter-network-traffic-cli.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)을 참조하세요.
 
 ```azurecli
 azure network nsg create myNSG \
@@ -183,8 +181,5 @@ azure vm create jenkins \
 기존 리소스를 호출하기 위해 CLI 플래그를 사용하여 Azure에서 기존 네트워크 내에 VM을 배포하도록 지시합니다.  다시 말해, VNet 및 서브넷이 배포되면 Azure 지역 내에서 정적 또는 영구적으로 리소스로 유지할 수 있습니다.  
 
 ## <a name="next-steps"></a>다음 단계
-
-* [Azure Resource Manager 템플릿을 사용하여 특정 배포 만들기](../windows/cli-deploy-templates.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 * [Azure CLI 명령을 직접 사용하여 Linux VM에 대한 고유한 사용자 지정 환경 만들기](create-cli-complete.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 * [템플릿을 사용하여 Azure에서 Linux VM 만들기](create-ssh-secured-vm-from-template.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-

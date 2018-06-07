@@ -12,15 +12,14 @@ ms.service: virtual-machines-windows
 ms.workload: na
 ms.tgt_pltfrm: vm-windows
 ms.devlang: na
-ms.topic: article
-ms.date: 12/16/2016
+ms.topic: troubleshooting
+ms.date: 11/03/2016
 ms.author: cjiang
-translationtype: Human Translation
-ms.sourcegitcommit: 356de369ec5409e8e6e51a286a20af70a9420193
-ms.openlocfilehash: 990914e3d9541e8574ce6ba0bf6c996cb394470a
-ms.lasthandoff: 03/27/2017
-
-
+ms.openlocfilehash: 5a1ad33bd8c287910458d26a96858e85c689fb16
+ms.sourcegitcommit: adf6a4c89364394931c1d29e4057a50799c90fc0
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/09/2017
 ---
 # <a name="troubleshoot-classic-deployment-issues-with-creating-a-new-windows-virtual-machine-in-azure"></a>Azure에서 새 Windows 가상 컴퓨터 생성 관련 클래식 배포 문제 해결
 [!INCLUDE [virtual-machines-troubleshoot-deployment-new-vm-selectors](../../../../includes/virtual-machines-windows-troubleshoot-deployment-new-vm-selectors-include.md)]
@@ -29,6 +28,7 @@ ms.lasthandoff: 03/27/2017
 
 > [!IMPORTANT] 
 > Azure에는 리소스를 만들고 작업하기 위한 [리소스 관리자 및 클래식](../../../resource-manager-deployment-model.md)라는 두 가지 배포 모델이 있습니다. 이 문서에서는 클래식 배포 모델 사용에 대해 설명합니다. 새로운 배포는 대부분 리소스 관리자 모델을 사용하는 것이 좋습니다. 이 문서의 Resource Manager 버전은 [여기](../../virtual-machines-windows-troubleshoot-deployment-new-vm.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 참조하세요.
+> [!INCLUDE [virtual-machines-common-classic-createportal](../../../../includes/virtual-machines-classic-portal.md)]
 
 [!INCLUDE [support-disclaimer](../../../../includes/support-disclaimer.md)]
 
@@ -91,5 +91,4 @@ Azure 포털에서 **찾아보기** > **가상 컴퓨터** > *Windows 가상 컴
 
 ## <a name="next-steps"></a>다음 단계
 중지된 Windows VM을 시작하거나 Azure에서 기존 Windows VM의 크기를 조정할 때 문제가 발생하면 [Azure의 기존 Windows 가상 컴퓨터 재시작 또는 크기 조정 관련 클래식 배포 문제 해결](virtual-machines-windows-classic-restart-resize-error-troubleshooting.md)을 참조하세요.
-
 

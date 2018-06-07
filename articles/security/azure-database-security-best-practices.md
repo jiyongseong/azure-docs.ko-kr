@@ -1,27 +1,25 @@
 ---
-title: "Azure 데이터베이스 보안 모범 사례 | Microsoft Docs"
-description: "이 문서에서는 Azure 데이터베이스 보안을 위한 일단의 모범 사례를 제공합니다."
+title: Azure 데이터베이스 보안 모범 사례 | Microsoft Docs
+description: 이 문서에서는 Azure 데이터베이스 보안을 위한 일단의 모범 사례를 제공합니다.
 services: security
 documentationcenter: na
 author: unifycloud
-manager: swadhwa
+manager: mbaldwin
 editor: tomsh
-ms.assetid: 
+ms.assetid: ''
 ms.service: security
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 07/21/2017
+ms.date: 11/21/2017
 ms.author: tomsh
+ms.openlocfilehash: 81acf90f0d600c0c3dafa2a4ccd2f8564fd18c9a
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
 ms.translationtype: HT
-ms.sourcegitcommit: 79bebd10784ec74b4800e19576cbec253acf1be7
-ms.openlocfilehash: 5bd6fe0dd369b3bbc7ca0d697c964badda557cb8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/03/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
-
 # <a name="azure-database-security-best-practices"></a>Azure 데이터베이스 보안 모범 사례
 
 보안은 데이터베이스 관리에서 가장 중요하며 항상 Azure SQL Database의 최우선 순위였습니다. HIPAA, ISO 27001/27002, PCI DSS 수준 1 등을 포함한 대부분의 규정 또는 보안 요구 사항을 충족할 수 있도록 데이터베이스를 철저히 보호할 수 있습니다. 보안 규정 준수 인증의 최신 목록은 [Microsoft Azure 보안 센터 사이트](http://azure.microsoft.com/support/trust-center/services/)에서 제공합니다. 또한 규정 요구 사항에 따라 특정 Azure 데이터 센터에 데이터베이스를 배치하도록 선택할 수도 있습니다.
@@ -49,13 +47,13 @@ ms.lasthandoff: 08/03/2017
 
 ## <a name="use-firewall-rules-to-restrict-database-access"></a>방화벽 규칙을 사용하여 데이터베이스 액세스 제한
 
-Microsoft Azure SQL 데이터베이스는 Azure 및 기타 인터넷 기반 응용 프로그램의 관계형 데이터베이스 서비스를 제공합니다. 액세스 보안을 제공하기 위해 SQL Database는 IP 주소로 연결을 제한하는 방화벽 규칙, 사용자가 자신의 ID를 증명하도록 요구하는 인증 메커니즘 및 특정 작업과 데이터에 대한 사용자를 제한하는 권한 부여 메커니즘을 사용하여 액세스를 제어합니다. 방화벽은 권한이 있는 컴퓨터를 지정할 때까지 데이터베이스 서버에 대한 모든 액세스를 금지합니다. 방화벽은 각 요청이 시작된 IP 주소의 데이터베이스에 대한 액세스를 허용합니다.
+Microsoft Azure SQL Database는 Azure 및 기타 인터넷 기반 응용 프로그램의 관계형 데이터베이스 서비스를 제공합니다. 액세스 보안을 제공하기 위해 SQL Database는 IP 주소로 연결을 제한하는 방화벽 규칙, 사용자가 자신의 ID를 증명하도록 요구하는 인증 메커니즘 및 특정 작업과 데이터에 대한 사용자를 제한하는 권한 부여 메커니즘을 사용하여 액세스를 제어합니다. 방화벽은 권한이 있는 컴퓨터를 지정할 때까지 데이터베이스 서버에 대한 모든 액세스를 금지합니다. 방화벽은 각 요청이 시작된 IP 주소의 데이터베이스에 대한 액세스를 허용합니다.
 
 ![방화벽 규칙](./media/azure-database-security-best-practices/azure-database-security-best-practices-Fig1.png)
 
-Azure SQL 데이터베이스 서비스는 TCP 포트 1433을 통해서만 사용할 수 있습니다. 사용자의 컴퓨터에서 SQL 데이터베이스에 액세스하려면 클라이언트 컴퓨터 방화벽이 TCP 포트 1433을 통해 나가는 TCP 통신을 허용해야 합니다. 다른 응용 프로그램에 필요하지 않은 경우 방화벽 규칙을 사용하여 1433 TCP 포트에서 인바운드 연결을 차단합니다.
+Azure SQL Database 서비스는 TCP 포트 1433을 통해서만 사용할 수 있습니다. 사용자의 컴퓨터에서 SQL Database에 액세스하려면 클라이언트 컴퓨터 방화벽이 TCP 포트 1433을 통해 나가는 TCP 통신을 허용해야 합니다. 다른 응용 프로그램에 필요하지 않은 경우 방화벽 규칙을 사용하여 1433 TCP 포트에서 인바운드 연결을 차단합니다.
 
-연결 프로세스의 일부로 Azure 가상 컴퓨터에서 연결은 각 작업자 역할에 대한 고유한 다른 IP 주소 및 포트에 리디렉션됩니다. 포트 번호의 범위는 11000~11999입니다. TCP 포트에 대한 자세한 내용은 [ADO.NET 4.5 및 SQL Database2에 대한 1433 이외의 포트](https://docs.microsoft.com/azure/sql-database/sql-database-develop-direct-route-ports-adonet-v12)를 참조하세요.
+연결 프로세스의 일부로 Azure 가상 머신에서 연결은 각 작업자 역할에 대한 고유한 다른 IP 주소 및 포트에 리디렉션됩니다. 포트 번호의 범위는 11000~11999입니다. TCP 포트에 대한 자세한 내용은 [ADO.NET 4.5 및 SQL Database2에 대한 1433 이외의 포트](https://docs.microsoft.com/azure/sql-database/sql-database-develop-direct-route-ports-adonet-v12)를 참조하세요.
 
 > [!Note]
 > SQL Database의 방화벽 규칙에 대한 자세한 내용은 [SQL Database 방화벽 규칙](https://docs.microsoft.com/azure/sql-database/sql-database-firewall-configure)을 참조하세요.
@@ -90,7 +88,7 @@ SQL Database는 인증을 위해 두 가지 인증 유형, 즉 SQL 인증 및 Az
 -   Azure AD 인증에서는 포함된 데이터베이스 사용자를 통해 데이터베이스 수준에서 ID를 인증합니다.
 -   Azure AD는 SQL Database에 연결되는 응용 프로그램에 대한 토큰 기반 인증을 지원합니다.
 -   Azure AD 인증은 도메인 동기화 없이 로컬 Azure Active Directory에 대해 ADFS(도메인 페더레이션) 또는 기본 사용자/암호 인증을 지원합니다.
--   Azure AD는 MFA(Multi-Factor Authentication)를 포함하는 Active Directory 유니버설 인증을 사용하는 SQL Server Management Studio를 통해 연결하도록 지원합니다. MFA는 전화 통화, 문자 메시지, 모바일 앱 알림 등의 여러 가지 간편한 검증 옵션을 제공하는 강력한 인증을 포함합니다. 자세한 내용은 [SQL 데이터베이스 및 SQL 데이터 웨어하우스를 사용한 Azure AD MFA에 대한 SSMS 지원](https://docs.microsoft.com/azure/sql-database/sql-database-ssms-mfa-authentication)을 참조하세요.
+-   Azure AD는 MFA(Multi-Factor Authentication)를 포함하는 Active Directory 유니버설 인증을 사용하는 SQL Server Management Studio를 통해 연결하도록 지원합니다. MFA는 전화 통화, 문자 메시지, 모바일 앱 알림 등의 여러 가지 간편한 검증 옵션을 제공하는 강력한 인증을 포함합니다. 자세한 내용은 [SQL Database 및 SQL Data Warehouse를 사용한 Azure AD MFA에 대한 SSMS 지원](https://docs.microsoft.com/azure/sql-database/sql-database-ssms-mfa-authentication)을 참조하세요.
 
 구성 단계에는 Azure Active Directory 인증의 구성 및 사용을 위한 다음 절차가 포함됩니다.
 
@@ -114,7 +112,7 @@ TDE를 사용하여 데이터베이스를 암호화하는 경우 [BPE(버퍼 풀
 보안 관리자나 데이터베이스 관리자처럼 권한이 부여된 사용자는 TDE를 사용하여 데이터베이스를 암호화된 경우에도 데이터에 액세스할 수 있으므로 아래 권장 사항을 준수해야 합니다.
 
 -   데이터베이스 수준 SQL 인증을 사용해야 합니다.
--   [RBAC 역할](https://docs.microsoft.com/azure/active-directory/role-based-access-control-what-is)을 사용하는 Azure AD 인증을 사용해야 합니다.
+-   [RBAC 역할](https://docs.microsoft.com/azure/role-based-access-control/overview)을 사용하는 Azure AD 인증을 사용해야 합니다.
 -   사용자와 응용 프로그램이 인증에 별도의 계정을 사용해야 합니다. 이렇게 하면 사용자와 응용 프로그램에 부여되는 사용 권한을 제한하고 악의적인 활동의 위험을 줄일 수 있습니다.
 -   고정된 데이터베이스 역할(예: db_datareader 또는 db_datawriter)을 사용하여 데이터베이스 수준 보안을 구현하거나 응용 프로그램에 대한 사용자 지정 역할을 만들어 선택한 데이터베이스 개체에 명시적 권한을 부여할 수 있습니다.
 
@@ -133,13 +131,13 @@ TDE를 사용하여 데이터베이스를 암호화하는 경우 [BPE(버퍼 풀
 
 온-프레미스 또는 오프-프레미스에 있는 개별 워크스테이션에서 Azure로의 액세스를 보호해야 하는 조직의 경우 [지점 및 사이트 간 VPN](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-point-to-site-create)을 사용하는 것이 좋습니다.
 
-대용량 데이터 집합은 [Express 경로](https://azure.microsoft.com/services/expressroute/) 같은 전용 고속 WAN 링크를 통해 이동할 수 있습니다. Express 경로를 사용하기로 선택하는 경우 [SSL/TLS](https://support.microsoft.com/kb/257591) 또는 기타 프로토콜을 사용하여 응용 프로그램 수준에서 데이터를 암호화하면 보안 수준을 더욱 높일 수 있습니다.
+대용량 데이터 집합은 [ExpressRoute](https://azure.microsoft.com/services/expressroute/) 같은 전용 고속 WAN 링크를 통해 이동할 수 있습니다. ExpressRoute를 사용하기로 선택하는 경우 [SSL/TLS](https://support.microsoft.com/kb/257591) 또는 기타 프로토콜을 사용하여 응용 프로그램 수준에서 데이터를 암호화하면 보안 수준을 더욱 높일 수 있습니다.
 
-Azure 포털을 통해 Azure 저장소와 상호 작용하는 경우 모든 트랜잭션이 HTTPS를 통해 발생합니다. 또한 HTTPS를 통해 [저장소 REST API](https://msdn.microsoft.com/library/azure/dd179355.aspx)를 사용하여 [Azure Storage](https://azure.microsoft.com/services/storage/) 및 [Azure SQL Database](https://azure.microsoft.com/services/sql-database/)와 상호 작용할 수 있습니다.
+Azure Portal을 통해 Azure Storage와 상호 작용하는 경우 모든 트랜잭션이 HTTPS를 통해 발생합니다. 또한 HTTPS를 통해 [저장소 REST API](https://msdn.microsoft.com/library/azure/dd179355.aspx)를 사용하여 [Azure Storage](https://azure.microsoft.com/services/storage/) 및 [Azure SQL Database](https://azure.microsoft.com/services/sql-database/)와 상호 작용할 수 있습니다.
 
 전송 중인 데이터 보호에 실패하는 조직은 [가로채기(man-in-the-middle) 공격](https://technet.microsoft.com/library/gg195821.aspx), [도청](https://technet.microsoft.com/library/gg195641.aspx) 및 세션 하이재킹에 좀 더 취약합니다. 이러한 공격은 기밀 데이터에 대한 액세스 권한을 획득하기 위한 첫 번째 단계일 수 있습니다.
 
-Azure VPN 옵션에 대한 자세한 내용은 [VPN Gateway 계획 및 설계](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-plan-design) 문서를 참조하세요.
+Azure VPN 옵션에 대한 자세한 내용은 [VPN Gateway 계획 및 설계](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-plan-design) 문서를 참조하세요.
 
 ## <a name="enable-database-auditing"></a>데이터베이스 감사 사용
 SQL Server 데이터베이스 엔진 또는 개별 데이터베이스의 인스턴스를 감사하는 작업에는 데이터베이스 엔진에서 발생하는 이벤트를 추적하고 기록하는 작업이 포함됩니다. SQL Server 감사를 사용하면 서버 수준 이벤트에 대한 서버 감사 사양과 데이터베이스 수준 이벤트에 대한 데이터베이스 감사 사양을 포함할 수 있는 서버 감사를 만들 수 있습니다. 감사 이벤트는 이벤트 로그 또는 감사 파일에 기록될 수 있습니다.
@@ -172,4 +170,3 @@ Azure 데이터베이스는 다양한 조직 및 규정 준수 요구 사항을 
 - 방화벽 규칙에 대해 자세히 알아보려면 [방화벽 규칙](https://docs.microsoft.com/azure/sql-database/sql-database-firewall-configure)을 참조하세요.
 - 사용자와 로그인에 대해 알아보려면 [로그인 관리](https://docs.microsoft.com/azure/sql-database/sql-database-manage-logins)를 참조하세요.
 - 자습서는 [Azure SQL Database 보안](https://docs.microsoft.com/azure/sql-database/sql-database-security-tutorial)을 참조하세요.
-

@@ -1,28 +1,24 @@
 ---
-title: "힙 덤프를 사용하여 Hadoop 서비스 디버깅 및 분석 - Azure | Microsoft Docs"
-description: "자동으로 Hadoop 서비스에 대한 힙 덤프를 수집하고 디버깅 및 분석을 위해 Azure Blob 저장소 계정 내부에 배치합니다."
+title: 힙 덤프를 사용하여 Hadoop 서비스 디버깅 및 분석 - Azure | Microsoft Docs
+description: 자동으로 Hadoop 서비스에 대한 힙 덤프를 수집하고 디버깅 및 분석을 위해 Azure Blob 저장소 계정 내부에 배치합니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 tags: azure-portal
 author: mumian
 manager: jhubbard
 editor: cgronlun
 ms.assetid: e4ec4ebb-fd32-4668-8382-f956581485c4
 ms.service: hdinsight
-ms.workload: big-data
-ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 05/25/2017
 ms.author: jgao
 ROBOTS: NOINDEX
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 6d1d4d47d279eb7a1f0bf1f587445683f0ace7a0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 0721d20987008e5cc6370c6e853440ce93edcfa9
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="collect-heap-dumps-in-blob-storage-to-debug-and-analyze-hadoop-services"></a>Blob 저장소에서 힙 덤프를 수집하여 Hadoop 서비스 디버그 및 분석
 [!INCLUDE [heapdump-selector](../../includes/hdinsight-selector-heap-dump.md)]
@@ -67,4 +63,3 @@ ms.lasthandoff: 07/08/2017
     clusterInfo.MapReduceConfiguration.ConfigurationCollection.Add(new KeyValuePair<string, string>("javaargs.jobhistoryserver.XX:+HeapDumpOnOutOfMemoryError", "-XX:+HeapDumpOnOutOfMemoryError"));
 
     clusterInfo.MapReduceConfiguration.ConfigurationCollection.Add(new KeyValuePair<string, string>("javaargs.jobhistoryserver.XX:HeapDumpPath", "-XX:HeapDumpPath=c:\\Dumps\\jobhistoryserver_%date:~4,2%_%date:~7,2%_%date:~10,2%_%time:~0,2%_%time:~3,2%_%time:~6,2%.hprof"));
-

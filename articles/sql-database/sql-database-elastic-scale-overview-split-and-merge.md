@@ -1,26 +1,19 @@
 ---
-title: "확장된 클라우드 데이터베이스 간 데이터 이동 | Microsoft Docs"
-description: "탄력적 데이터베이스 API를 사용하여 자체 호스팅되는 서비스를 통해 분할된 데이터베이스를 조작하고 데이터를 이동하는 방법에 대해 설명합니다."
+title: 확장된 클라우드 데이터베이스 간 데이터 이동 | Microsoft Docs
+description: 탄력적 데이터베이스 API를 사용하여 자체 호스팅되는 서비스를 통해 분할된 데이터베이스를 조작하고 데이터를 이동하는 방법에 대해 설명합니다.
 services: sql-database
-documentationcenter: 
-manager: jhubbard
-author: ddove
-ms.assetid: 204fd902-0397-4185-985a-dea3ed7c7d9f
+manager: craigg
+author: stevestein
 ms.service: sql-database
 ms.custom: scale out apps
-ms.workload: sql-database
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 10/24/2016
-ms.author: ddove
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 10b40214ad4c7d7bb7999a5abce1c22100b617d8
-ms.openlocfilehash: b2e45a77b900092390a2ca66a8d1286193023f29
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/17/2017
-
-
+ms.date: 04/01/2018
+ms.author: sstein
+ms.openlocfilehash: c70279bd52f7b0b0e0cbc27742eca93d9af5e630
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="moving-data-between-scaled-out-cloud-databases"></a>확장된 클라우드 데이터베이스 간 데이터 이동
 갑자기 앱 수요가 엄청나게 증가한 상황에 처한 SaaS(Software as a Service) 개발자는 이러한 급증을 처리해야 합니다. 따라서 더 많은 데이터베이스(분할 된 데이터베이스)를 추가합니다. 데이터 무결성을 해치지 않고 어떻게 새 데이터베이스에 데이터를 재배포할 수 있을까요? **분할-병합 도구** 를 사용하여 제약 조건이 지정된 데이터베이스의 데이터를 새 데이터베이스로 이동합니다.  
@@ -32,14 +25,14 @@ ms.lasthandoff: 02/17/2017
 ## <a name="download"></a>다운로드
 [Microsoft.Azure.SqlDatabase.ElasticScale.Service.SplitMerge](http://www.nuget.org/packages/Microsoft.Azure.SqlDatabase.ElasticScale.Service.SplitMerge/)
 
-## <a name="documentation"></a>설명서
+## <a name="documentation"></a>문서화
 1. [탄력적 데이터베이스 분할/병합 도구 자습서](sql-database-elastic-scale-configure-deploy-split-and-merge.md)
 2. [분할-병합 보안 구성](sql-database-elastic-scale-split-merge-security-configuration.md)
 3. [분할-병합 보안 고려 사항](sql-database-elastic-scale-split-merge-security-configuration.md)
 4. [분할된 데이터베이스 맵 관리](sql-database-elastic-scale-shard-map-management.md)
 5. [확장하기 위해 기존 데이터베이스 마이그레이션](sql-database-elastic-convert-to-use-elastic-tools.md)
 6. [탄력적 데이터베이스 도구](sql-database-elastic-scale-introduction.md)
-7. [탄력적 데이터베이스 도구 용어집](sql-database-elastic-scale-glossary.md)
+7. [Elastic Database 도구 용어집](sql-database-elastic-scale-glossary.md)
 
 ## <a name="why-use-the-split-merge-tool"></a>분할-병합 도구를 사용해야 하는 이유
 **유연성**
@@ -63,7 +56,7 @@ ms.lasthandoff: 02/17/2017
 
 분할-병합은 고객 호스트 서비스로 제공됩니다. Microsoft Azure 구독에서 서비스를 배포하고 호스트해야 합니다. NuGet에서 다운로드하는 패키지에는 특정 배포에 대한 정보를 완료하기 위한 구성 템플릿이 있습니다. 자세한 내용은 [분할-병합 자습서](sql-database-elastic-scale-configure-deploy-split-and-merge.md) 를 참조하세요. 서비스가 Azure 구독에서 실행되므로 서비스의 대부분 보안 측면을 제어하고 구성할 수 있습니다. 기본 템플릿에는 SSL, 인증서 기반 클라이언트 인증, 저장된 자격 증명에 대한 암호화, DoS 보호 및 IP 제한 사항을 구성할 수 있는 옵션이 있습니다. [분할-병합 보안 구성](sql-database-elastic-scale-split-merge-security-configuration.md)문서에서 보안 측면에 대한 자세한 내용을 확인할 수 있습니다.
 
-배포된 기본 서비스는 하나의 작업자 및 하나의 웹 역할로 실행됩니다. 각 서비스는 Azure 클라우드 서비스에서 A1 VM 크기를 사용합니다. 패키지를 배포할 때 이러한 설정을 수정할 수 없지만 Azure 포털을 통해 실행 중인 클라우드 서비스에 배포한 후에는 변경할 수 있습니다. 기술적인 이유로 두 개 이상의 인스턴스에 대해 작업자 역할을 구성하지 않아야 합니다. 
+배포된 기본 서비스는 하나의 작업자 및 하나의 웹 역할로 실행됩니다. 각 서비스는 Azure Cloud Services에서 A1 VM 크기를 사용합니다. 패키지를 배포할 때 이러한 설정을 수정할 수 없지만 Azure 포털을 통해 실행 중인 클라우드 서비스에 배포한 후에는 변경할 수 있습니다. 기술적인 이유로 두 개 이상의 인스턴스에 대해 작업자 역할을 구성하지 않아야 합니다. 
 
 **분할된 데이터베이스 맵 통합**
 
@@ -119,7 +112,7 @@ ms.lasthandoff: 02/17/2017
 분할-병합 서비스 패키지에는 웹 역할 및 작업자 역할이 포함됩니다. 웹 역할은 대화식으로 분할-병합 요청을 제출하는 데 사용됩니다. 사용자 인터페이스의 주요 구성 요소는 다음과 같습니다.
 
 * Operation Type: 작업 유형은 이 요청에 대해 서비스에서 수행하는 작업의 종류를 제어하는 라디오 단추입니다. 분할, 병합 및 이동 시나리오 중에서 선택할 수 있습니다. 이전에 제출된 작업을 취소할 수도 있습니다. 범위 분할된 데이터베이스 맵에 분할, 병합 및 이동 요청을 사용할 수 있습니다. 목록 분할된 데이터베이스 맵은 이동 작업만 지원합니다.
-* Shard Map: 요청 매개 변수의 다음 섹션에서는 분할된 데이터베이스 맵과 분할된 데이터베이스 맵을 호스트하는 데이터베이스에 대한 정보를 다룹니다. 특히, Azure SQL 데이터베이스 서버의 이름과 shardmap을 호스트하는 데이터베이스의 이름, 분할된 데이터베이스 맵 데이터베이스에 연결하는 자격 증명, 마지막으로 분할된 데이터베이스 맵의 이름을 제공해야 합니다. 현재 작업은 단일 자격 증명 집합만 허용합니다. 이러한 자격 증명에는 분할된 데이터베이스 맵과 분할된 데이터베이스의 사용자 데이터를 변경할 수 있는 권한이 있어야 합니다.
+* Shard Map: 요청 매개 변수의 다음 섹션에서는 분할된 데이터베이스 맵과 분할된 데이터베이스 맵을 호스트하는 데이터베이스에 대한 정보를 다룹니다. 특히, Azure SQL Database 서버의 이름과 shardmap을 호스트하는 데이터베이스의 이름, 분할된 데이터베이스 맵 데이터베이스에 연결하는 자격 증명, 마지막으로 분할된 데이터베이스 맵의 이름을 제공해야 합니다. 현재 작업은 단일 자격 증명 집합만 허용합니다. 이러한 자격 증명에는 분할된 데이터베이스 맵과 분할된 데이터베이스의 사용자 데이터를 변경할 수 있는 권한이 있어야 합니다.
 * Source Range (split and merge): 분할 및 병합 작업은 해당 하위 키 및 상위 키를 사용하여 범위를 처리합니다. 바인딩되지 않은 상위 키 값으로 작업을 지정하려면 “High key is max” 확인란을 선택하고 상위 키 필드를 비워 둡니다. 지정한 범위 키 값은 분할된 데이터베이스 맵의 매핑 및 해당 경계와 정확히 일치하지 않아도 됩니다. 범위 경계를 지정하지 않으면 서비스가 가장 가까운 범위를 자동으로 유추합니다. GetMappings.ps1 PowerShell 스크립트를 사용하여 지정한 분할된 데이터베이스 맵에서 현재 매핑을 검색할 수 있습니다.
 * Split Source Behavior(split): 분할 작업의 경우 원본 범위를 분할할 지점을 정의해야 합니다. 분할을 수행할 위치에 분할 키를 제공하여 이 작업을 수행합니다. 라디오 단추를 사용하여 범위의 하단 부분(분할 키 제외)을 이동할지 아니면 범위의 상단 부분(분할 키 포함)을 이동할지를 정의합니다.
 * Source Shardlet (move): 이동 작업은 원본을 기술하는 범위가 필요하지 않으므로 분할 또는 병합 작업과 다릅니다. 이동의 원본은 이동할 분할 키 값으로 식별될 뿐입니다.
@@ -177,10 +170,10 @@ ms.lasthandoff: 02/17/2017
 
     Set-AzureServiceDiagnosticsExtension -StorageContext $storageContext -DiagnosticsConfigurationPath $config_path -ServiceName $service_name -Slot Production -Role "SplitMergeWorker" 
 
-[Azure 클라우드 서비스 및 가상 컴퓨터에서 진단 사용](../cloud-services/cloud-services-dotnet-diagnostics.md)에서 진단 설정을 구성 및 배포하는 방법에 자세한 내용을 확인할 수 있습니다. 
+[Azure Cloud Services 및 Virtual Machines에서 진단 사용](../cloud-services/cloud-services-dotnet-diagnostics.md)에서 진단 설정을 구성 및 배포하는 방법에 자세한 내용을 확인할 수 있습니다. 
 
 ## <a name="retrieve-diagnostics"></a>진단 검색
-서버 탐색기 트리의 Azure 부분에 있는 Visual Studio 서버 탐색기에서 진단에 쉽게 액세스할 수 있습니다. Visual Studio 인스턴스를 열고 메뉴 모음에서 보기와 서버 탐색기를 차례로 클릭합니다. Azure 아이콘을 클릭하여 Azure 구독에 연결합니다. 그런 다음 Azure -> 저장소-> <your storage account>-> 테이블 -> WADLogsTable로 이동합니다. 자세한 내용은 [서버 탐색기로 저장소 리소스 찾아보기](http://msdn.microsoft.com/library/azure/ff683677.aspx)를 참조하세요. 
+서버 탐색기 트리의 Azure 부분에 있는 Visual Studio 서버 탐색기에서 진단에 쉽게 액세스할 수 있습니다. Visual Studio 인스턴스를 열고 메뉴 모음에서 보기와 서버 탐색기를 차례로 클릭합니다. Azure 아이콘을 클릭하여 Azure 구독에 연결합니다. 그런 다음 Azure -> 저장소-> <your storage account>-> 테이블 -> WADLogsTable로 이동합니다. 자세한 내용은 [서버 탐색기로 Storage 리소스 찾아보기](http://msdn.microsoft.com/library/azure/ff683677.aspx)를 참조하세요. 
 
 ![WADLogsTable][2]
 
@@ -189,7 +182,7 @@ ms.lasthandoff: 02/17/2017
 ![구성][3]
 
 ## <a name="performance"></a>성능
-일반적으로 Azure SQL 데이터베이스에서 성능 서비스 계층이 높고 뛰어날수록 더 나은 성능을 기대할 수 있습니다. 서비스 계층이 높을수록 IO, CPU 및 메모리 할당을 높이면 분할/병합 서비스를 사용하는 대량 복사 및 삭제 작업의 효율이 높아집니다. 이런 이유로 정의되고 제한된 기간 해당 데이터베이스에 대해서만 서비스 계층을 증가시킵니다.
+일반적으로 Azure SQL Database에서 성능 서비스 계층이 높고 뛰어날수록 더 나은 성능을 기대할 수 있습니다. 서비스 계층이 높을수록 IO, CPU 및 메모리 할당을 높이면 분할/병합 서비스를 사용하는 대량 복사 및 삭제 작업의 효율이 높아집니다. 이런 이유로 정의되고 제한된 기간 해당 데이터베이스에 대해서만 서비스 계층을 증가시킵니다.
 
 서비스는 정상적인 작업의 일부로 유효성 검사 쿼리를 수행합니다. 이러한 유효성 검사 쿼리는 대상 범위의 예기치 않은 데이터 존재를 확인하고 일관성 있는 상태에서 모든 분할/병합/이동 작업이 시작되는지 확인합니다. 이러한 쿼리는 모두 요청 정의의 일부로 제공된 배치 크기 작업의 범위로 정의된 분할 키 범위에 대해 작동합니다. 그리고 이러한 쿼리는 분할 키를 선행 열로 포함하는 인덱스가 있는 경우에 최상의 성능을 보입니다. 
 
@@ -217,5 +210,4 @@ ms.lasthandoff: 02/17/2017
 [1]:./media/sql-database-elastic-scale-overview-split-and-merge/split-merge-overview.png
 [2]:./media/sql-database-elastic-scale-overview-split-and-merge/diagnostics.png
 [3]:./media/sql-database-elastic-scale-overview-split-and-merge/diagnostics-config.png
-
 

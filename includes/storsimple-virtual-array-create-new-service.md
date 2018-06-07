@@ -2,7 +2,7 @@
 
 1.  URL <https://portal.azure.com/>에서 Microsoft 계정 자격 증명을 사용하여 Azure Portal에 로그온합니다. 정부 포털에서 장치를 배포하는 경우 <https://portal.azure.us/>에 로그인합니다.
 
-2.  Azure Portal에서 **+새로 만들기** &gt; **저장소** &gt; **StorSimple 가상 시리즈**를 클릭합니다.
+2.  Azure Portal에서 **+리소스 만들기** &gt; **저장소** &gt; **StorSimple 가상 시리즈**를 클릭합니다.
 
     ![새 서비스 만들기](./media/storsimple-virtual-array-create-new-service/createnewservice2.png) 
 
@@ -18,11 +18,11 @@
 
         -   Azure에 StorSimple 장치에 배포하려는 기존 워크로드가 있는 경우에는 해당 데이터 센터를 사용하는 것이 좋습니다.
 
-        -   StorSimple 장치 관리자 및 Azure Storage는 두 곳의 다른 위치에 있을 수 있습니다. 이 경우, StorSimple 장치 관리자 및 Azure Storage 계정을 별도로 만들어야 합니다. Azure Storage 계정을 만들려면 Azure Portal의 Azure Storage 서비스로 이동하고 [Azure Storage 계정 만들기](https://azure.microsoft.com/documentation/articles/storage-create-storage-account/#create-a-storage-account)의 단계를 수행합니다. 이 계정을 만든 후에 [서비스에 대한 새 저장소 계정 구성](https://azure.microsoft.com/en-us/documentation/articles/storsimple-deployment-walkthrough/#configure-a-new-storage-account-for-the-service)의 단계를 수행하여 StorSimple 장치 관리자 서비스에 추가합니다.
+        -   StorSimple 장치 관리자 및 Azure Storage는 두 곳의 다른 위치에 있을 수 있습니다. 이 경우, StorSimple 장치 관리자 및 Azure Storage 계정을 별도로 만들어야 합니다. Azure Storage 계정을 만들려면 Azure Portal의 Azure Storage 서비스로 이동하고 [Azure Storage 계정 만들기](https://azure.microsoft.com/documentation/articles/storage-create-storage-account/#create-a-storage-account)의 단계를 수행합니다. 이 계정을 만든 후에 [서비스에 대한 새 저장소 계정 구성](https://azure.microsoft.com/documentation/articles/storsimple-deployment-walkthrough/#configure-a-new-storage-account-for-the-service)의 단계를 수행하여 StorSimple 장치 관리자 서비스에 추가합니다.
 
         -   정부 포털에서 가상 장치를 배포하는 경우 미국 아이오와 및 미국 버지니아 위치에서 StorSimple 장치 관리자 서비스를 사용할 수 있습니다.
 
-    5.  **새 Azure 저장소 계정 만들기** 를 선택하여 서비스를 포함하는 저장소 계정을 자동으로 만듭니다. **저장소 계정 이름**을 지정합니다. 다른 위치에 있는 데이터가 필요하면 확인란의 선택을 취소합니다.
+    5.  **새 Azure 저장소 계정 만들기** 를 선택하여 서비스를 포함하는 저장소 계정을 자동으로 만듭니다. **Storage 계정 이름**을 지정합니다. 다른 위치에 있는 데이터가 필요하면 확인란의 선택을 취소합니다.
 
     6.  대시보드에서 이 서비스에 대한 빠른 링크가 필요한 경우 **대시보드에 고정**을 확인하세요.
 

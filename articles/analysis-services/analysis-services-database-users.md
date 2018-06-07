@@ -1,27 +1,18 @@
 ---
-title: "Azure Analysis Services에서 데이터베이스 역할 및 사용자 관리 | Microsoft Docs"
-description: "Azure의 Analysis Services 서버에서 데이터베이스 역할 및 사용자를 관리하는 방법을 알아봅니다."
-services: analysis-services
-documentationcenter: 
+title: Azure Analysis Services에서 데이터베이스 역할 및 사용자 관리 | Microsoft Docs
+description: Azure의 Analysis Services 서버에서 데이터베이스 역할 및 사용자를 관리하는 방법을 알아봅니다.
 author: minewiskan
-manager: erikre
-editor: 
-tags: 
-ms.assetid: 
+manager: kfile
 ms.service: analysis-services
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: na
-ms.date: 06/26/2016
+ms.topic: conceptual
+ms.date: 04/12/2018
 ms.author: owend
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 857267f46f6a2d545fc402ebf3a12f21c62ecd21
-ms.openlocfilehash: c1a8321c3c03dc9022048e39b3c8614ae683b955
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/28/2017
-
-
+ms.reviewer: minewiskan
+ms.openlocfilehash: 3c35fb1ee70544b8b01bbadaf72ee38145179b27
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="manage-database-roles-and-users"></a>데이터베이스 역할 및 사용자 관리
 
@@ -152,5 +143,4 @@ SSMS에서 또는 PowerShell을 사용하여 XMLA 창에서 TMSL 스크립트를
   [서버 관리자 관리](analysis-services-server-admins.md)   
   [PowerShell을 사용하여 Azure Analysis Services 관리](analysis-services-powershell.md)  
   [TMSL(테이블 형식 모델 스크립트 언어) 참조](https://docs.microsoft.com/sql/analysis-services/tabular-model-scripting-language-tmsl-reference)
-
 

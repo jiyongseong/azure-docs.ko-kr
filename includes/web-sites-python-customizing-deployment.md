@@ -21,10 +21,10 @@ Azure는 **다음 조건 모두가 참일 경우**응용 프로그램에서 Pyth
     \.deployment
     \deploy.cmd
 
-[Azure 명령줄 인터페이스][Azure 명령줄 인터페이스]를 사용하여 파일을 만들 수 있습니다.  프로젝트 폴더에서 다음 명령을 사용합니다.
+[Azure 명령줄 인터페이스][Azure command-line interface]를 사용하여 파일을 만들 수 있습니다.  프로젝트 폴더에서 다음 명령을 사용합니다.
 
     azure site deploymentscript --python
 
 이러한 파일이 존재하지 않으면 Azure는 임시 배포 스크립트를 만들고 실행합니다.  위의 명령을 사용하여 만드는 것과 같습니다.
 
-[Azure 명령줄 인터페이스]: http://azure.microsoft.com/downloads/
+[Azure command-line interface]: http://azure.microsoft.com/downloads/

@@ -1,157 +1,230 @@
 ---
-title: "Azure CLI를 사용하여 리소스 관리 | Microsoft Docs"
-description: "Azure 명령줄 인터페이스 (CLI)를 사용하여 Azure 리소스 및 그룹 관리"
-editor: 
+title: Azure CLI를 사용하여 리소스 관리 | Microsoft Docs
+description: Azure 명령줄 인터페이스 (CLI)를 사용하여 Azure 리소스 및 그룹 관리
+editor: ''
 manager: timlt
-documentationcenter: 
+documentationcenter: ''
 author: tfitzmac
 services: azure-resource-manager
-ms.assetid: bb0af466-4f65-4559-ac3a-43985fa096ff
 ms.service: azure-resource-manager
 ms.workload: multiple
 ms.tgt_pltfrm: vm-multiple
 ms.devlang: na
-ms.topic: article
-ms.date: 08/22/2016
+ms.topic: conceptual
+ms.date: 10/06/2017
 ms.author: tomfitz
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5bbeb9d4516c2b1be4f5e076a7f63c35e4176b36
-ms.openlocfilehash: 3ad4e68b90979fd7f9d3ddf5278e65e19cb07152
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/13/2017
-
-
+ms.openlocfilehash: 90dd1b6b7e65178f6b339e4ac0bb781fb74a25a6
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="use-the-azure-cli-to-manage-azure-resources-and-resource-groups"></a>Azure 리소스 및 리소스 그룹 관리를 위해 Azure CLI 사용
-> [!div class="op_single_selector"]
-> * [포털](resource-group-portal.md) 
-> * [Azure CLI](xplat-cli-azure-resource-manager.md)
-> * [Azure PowerShell](powershell-azure-resource-manager.md)
-> * [REST API](resource-manager-rest-api.md)
-> 
-> 
 
-Azure 명령줄 인터페이스 (Azure CLI)는 리소스 관리자를 사용하여 리소스를 배포하고 관리하는 데 사용할 수 있는 몇 가지 도구 중 하나입니다. 이 문서에서는 리소스 관리자 모드에서 Azure CLI를 사용하여 Azure 리소스 및 리소스 그룹을 관리하는 일반적인 방법을 소개합니다. 리소스를 배포하기 위해 CLI를 사용하는 방법에 대한 정보는 [Resource Manager 템플릿 및 Azure CLI를 사용하여 리소스 배포](resource-group-template-deploy-cli.md)를 참조하세요. Azure 리소스 및 Resource Manager에 대한 기본 지식은 [Azure Resource Manager 개요](resource-group-overview.md)를 참조하세요.
+이 문서에서는 Azure CLI 및 Azure Resource Manager를 사용하여 솔루션을 관리하는 방법을 알아봅니다. Resource Manager에 익숙하지 않은 경우에는 [Resource Manager 개요](resource-group-overview.md) 참조하세요. 이 문서에서는 관리 작업에 중점을 둡니다. 다음을 수행합니다.
 
-> [!NOTE]
-> Azure CLI를 사용하여 Azure 리소스를 관리하려면 `azure login` 명령을 사용하여 [Azure CLI를 설치](../cli-install-nodejs.md)하고 [Azure에 로그인](../xplat-cli-connect.md)합니다. CLI가 리소스 관리자 모드에 있는지 확인합니다.(`azure config mode arm`를 실행함) 이러한 작업이 완료되면 사용할 준비가 된 것입니다.
-> 
-> 
+1. 리소스 그룹 만들기
+2. 리소스 그룹에 리소스 추가
+3. 리소스에 태그 추가
+4. 이름 또는 태그 값을 기반으로 리소스 쿼리
+5. 리소스에 대하 잠금 적용 및 제거
+6. 리소스 그룹 삭제
 
-## <a name="get-resource-groups-and-resources"></a>리소스 그룹 및 리소스 가져오기
-### <a name="resource-groups"></a>리소스 그룹
-구독 및 해당 위치에서 모든 리소스 그룹 목록을 가져오려면 이 명령을 실행합니다.
+이 문서에서는 Resource Manager 템플릿을 구독에 배포하는 방법을 보여 주지 않습니다. 해당 내용은 [Resource Manager 템플릿과 Azure CLI로 리소스 배포](resource-group-template-deploy-cli.md)를 참조하세요.
 
-    azure group list
+[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
 
+CLI를 로컬에서 설치하고 사용하려면 [Azure CLI 2.0 설치](/cli/azure/install-azure-cli)를 참조하세요.
 
-### <a name="resources"></a>리소스
- 이름이 *testRG*인 리소스 등, 그룹의 모든 리소스를 나열하려면 다음 명령을 사용합니다.
+## <a name="set-subscription"></a>구독 설정
 
-    azure resource list testRG
+구독이 둘 이상인 경우에는 다른 구독으로 전환할 수 있습니다. 우선 계정에 대한 모든 구독을 살펴보겠습니다.
 
-이름이 *MyUbuntuVM*인 VM 등, 그룹 내의 개별 리소스를 보려면 다음과 같은 명령을 사용합니다.
+```azurecli-interactive
+az account list
+```
 
-    azure resource show testRG MyUbuntuVM Microsoft.Compute/virtualMachines -o "2015-06-15"
+사용되는 구독 및 사용이 해제된 구독 목록이 반환됩니다.
 
-**Microsoft.Compute/virtualMachines** 매개 변수에 유의하세요. 이 매개 변수는 정보를 요청하는 대상 리소스의 유형을 나타냅니다.
-
-> [!NOTE]
-> **list** 명령이 아닌 **azure resource** 명령을 사용할 경우 **-o** 매개 변수를 사용하여 리소스의 API 버전을 지정해야 합니다. API 버전에 관해 확실하지 않은 경우 템플릿 파일을 참조하여 리소스의 apiVersion 필드를 찾아봅니다. Resource Manager의 API 버전에 대한 자세한 내용은 [리소스 공급자 및 형식](resource-manager-supported-services.md)을 참조하세요.
-> 
-> 
-
-`--json` 매개 변수는 보통 리소스 세부 정보를 볼 때 유용하게 사용됩니다. 일부 값이 중첩된 구조이거나 컬렉션이기 때문에 이 매개 변수를 사용하면 출력을 읽기가 훨씬 수월합니다. 다음 예제에서는 **show** 명령의 결과를 JSON 문서로 반환하는 방법을 보여 줍니다.
-
-    azure resource show testRG MyUbuntuVM Microsoft.Compute/virtualMachines -o "2015-06-15" --json
-
-> [!NOTE]
-> 원하는 경우 &gt; 문자를 사용하여 파일에 출력되도록 하여 JSON 데이터를 파일에 저장합니다. 예:
-> 
-> `azure resource show testRG MyUbuntuVM Microsoft.Compute/virtualMachines -o "2015-06-15" --json > myfile.json`
-> 
-> 
-
-### <a name="tags"></a>태그
-[!INCLUDE [resource-manager-tag-resources-cli](../../includes/resource-manager-tag-resources-cli.md)]
-
-## <a name="manage-resources"></a>리소스 관리
-리소스 그룹에 저장소 계정과 같은 리소스를 추가하려면 다음과 비슷한 명령을 실행합니다.
-
-    azure resource create testRG MyStorageAccount "Microsoft.Storage/storageAccounts" "westus" -o "2015-06-15" -p "{\"accountType\": \"Standard_LRS\"}"
-
-**-o** 매개 변수를 사용하여 리소스의 API 버전을 지정하는 외에도 **-p** 매개 변수를 사용하여 JSON 형식 문자열을 필수 또는 추가적인 속성과 함께 전달합니다.
-
-가상 컴퓨터 리소스와 같은 기존 리소스를 삭제하려면 다음과 같은 명령을 사용합니다.
-
-    azure resource delete testRG MyUbuntuVM Microsoft.Compute/virtualMachines -o "2015-06-15"
-
-다른 리소스 그룹 또는 구독에 기존 리소스를 이동하려면 **azure resource move** 명령을 사용합니다. 다음 예제에서는 Redis Cache를 새 리소스 그룹으로 이동하는 방법을 보여 줍니다. **-i** 매개 변수에서 이동할 리소스 ID를 쉼표로 구분한 목록을 제공합니다.
-
-    azure resource move -i "/subscriptions/{guid}/resourceGroups/OldRG/providers/Microsoft.Cache/Redis/examplecache" -d "NewRG"
-
-## <a name="control-access-to-resources"></a>리소스에 대한 액세스 제어
-Azure CLI를 사용하여 Azure 리소스에 대한 액세스를 제어하는 정책을 만들고 관리할 수 있습니다. 정책 정의 및 리소스에 정책 할당에 관한 배경 지식은 [정책을 사용하여 리소스 및 컨트롤 액세스 관리](resource-manager-policy.md)를 참조하세요.
-
-예를 들어, 위치가 미국 서부 또는 미국 북중부가 아닌 모든 요청을 거부하도록 다음 정책을 정의하고 정책 정의 파일인 policy.json에 저장합니다.
-
-    {
-    "if" : {
-        "not" : {
-        "field" : "location",
-        "in" : ["westus" ,  "northcentralus"]
-        }
-    },
-    "then" : {
-        "effect" : "deny"
+```json
+[
+  {
+    "cloudName": "AzureCloud",
+    "id": "<guid>",
+    "isDefault": true,
+    "name": "Example Subscription One",
+    "registeredProviders": [],
+    "state": "Enabled",
+    "tenantId": "<guid>",
+    "user": {
+      "name": "example@contoso.org",
+      "type": "user"
     }
-    }
+  },
+  ...
+]
+```
 
-그런 다음 **policy definition create**명령을 실행합니다.
+구독 하나가 기본 구독으로 표시됩니다. 이 구독은 작업의 현재 컨텍스트입니다. 다른 구독으로 전환하려면 **az account set** 명령을 사용하여 구독 이름을 제공합니다.
 
-    azure policy definition create MyPolicy -p c:\temp\policy.json
+```azurecli-interactive
+az account set -s "Example Subscription Two"
+```
 
-이 명령은 다음과 유사한 출력을 표시합니다.
+현재 구독 컨텍스트를 표시하려면 매개 변수 없이 **az account show**를 사용합니다.
 
-    + Creating policy definition MyPolicy data:    PolicyName:             MyPolicy data:    PolicyDefinitionId:     /subscriptions/########-####-####-####-############/providers/Microsoft.Authorization/policyDefinitions/MyPolicy
+```azurecli-interactive
+az account show
+```
 
-    data:    PolicyType:             Custom data:    DisplayName:            undefined data:    Description:            undefined data:    PolicyRule:             field=location, in=[westus, northcentralus], effect=deny
+## <a name="create-a-resource-group"></a>리소스 그룹 만들기
 
- 정책을 원하는 범위에 할당하려면 이전 명령에서 반환된 **PolicyDefinitionId**를 사용합니다. 다음 예제에서 이 범위는 해당 구독이지만 리소스 그룹이나 개별 리소스에 범위를 지정할 수 있습니다.
+구독에 리소스를 배포하려면 리소스를 포함하는 리소스 그룹을 만들어야 합니다.
 
-    azure policy assignment create MyPolicyAssignment -p /subscriptions/########-####-####-####-############/providers/Microsoft.Authorization/policyDefinitions/MyPolicy -s /subscriptions/########-####-####-####-############/
+리소스 그룹을 만들려면 **az group create** 명령을 사용합니다. 이 명령은 **name** 매개 변수를 사용하여 리소스 그룹에 대한 이름을 지정하고 **location** 매개 변수를 사용하여 위치를 지정합니다.
 
-**policy definition show**, **policy definition set** 및 **policy definition delete** 명령을 사용하여 정책 정의를 가져오거나, 변경하거나 또는 없앨 수 있습니다.
+```azurecli-interactive
+az group create --name TestRG1 --location "South Central US"
+```
 
-마찬가지로, **policy assignment show**, **policy assignment set** 및 **policy assignment delete** 명령을 사용하여 정책 할당을 가져오거나, 변경하거나 또는 없앨 수 있습니다.
+다음 형식으로 출력됩니다.
 
-## <a name="export-a-resource-group-as-a-template"></a>리소스 그룹을 템플릿으로 내보내기
-기존 리소스 그룹에 대해 해당 리스소 그룹의 리소스 관리자 템플릿을 볼 수 있습니다. 템플릿을 내보내면 다음과 같은 두 가지 이점이 있습니다.
+```json
+{
+  "id": "/subscriptions/<subscription-id>/resourceGroups/TestRG1",
+  "location": "southcentralus",
+  "managedBy": null,
+  "name": "TestRG1",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null
+}
+```
 
-1. 모든 인프라가 템플릿에 정의되어 있기 때문에 향후 솔루션 배포를 간단하게 자동화할 수 있습니다.
-2. 솔루션을 나타내는 JSON을 살펴보면서 템플릿 구문에 익숙해질 수 있습니다.
+나중에 리소스 그룹을 검색해야 하는 경우 다음 명령을 사용합니다.
 
-Azure CLI를 사용하여 리소스 그룹의 현재 상태를 나타내는 템플릿을 내보내거나 특정 배포에 사용된 템플릿을 다운로드할 수 있습니다.
+```azurecli-interactive
+az group show --name TestRG1
+```
 
-* **리소스 그룹에 대한 템플릿 내보내기** - 리소스 그룹을 변경했고 현재 상태의 JSON 표현을 검색해야 하는 경우 유용합니다. 그러나 생성된 템플릿에는 최소한의 매개 변수만 포함되고 변수는 포함되지 않습니다. 템플릿의 값은 대부분 하드 코드됩니다. 생성된 템플릿을 배포하기 전에, 다양한 환경에 맞게 배포를 사용자 지정할 수 있도록 더 많은 값을 매개 변수로 변환할 수 있습니다.
-  
-    리소스 그룹에 대한 템플릿을 로컬 디렉터리로 내보내려면 다음 예제처럼 `azure group export` 명령을 실행합니다. (운영 체제 환경에 맞게 적합한 로컬 디렉터리로 대체)
-  
-        azure group export testRG ~/azure/templates/
-* **특정 배포에 대한 템플릿 다운로드** -- 리소스를 배포하는 데 사용된 실제 템플릿을 살펴보아야 하는 경우에 유용합니다. 이 템플릿에는 원래 배포에 대해 정의된 모든 매개 변수와 변수가 포함됩니다. 그러나 조직 내 다른 사람이 템플릿에 정의된 범위를 넘어서 리소스 그룹을 변경할 경우 이 템플릿은 리소스 그룹의 현재 상태를 나타내지 않습니다.
-  
-    특정 배포에 사용한 템플릿을 로컬 디렉터리에 다운로드하려면 `azure group deployment template download` 명령을 실행합니다. 예:
-  
-        azure group deployment template download TestRG testRGDeploy ~/azure/templates/downloads/
+구독의 리소스 그룹을 모두 가져오려면 다음 명령을 사용합니다.
 
-> [!NOTE]
-> 템플릿 내보내기는 미리 보기 버전이며, 템플릿 내보내기를 지원하지 않는 리소스 유형도 있습니다. 템플릿 내보내기를 시도할 때 일부 리소스를 내보내지 못했다는 오류가 표시될 수 있습니다. 필요한 경우 템플릿을 다운로드한 후 템플릿에서 이러한 리소스를 수동으로 정의합니다.
-> 
-> 
+```azurecli-interactive
+az group list
+```
+
+## <a name="add-resources-to-a-resource-group"></a>리소스 그룹에 리소스 추가
+
+리소스를 리소스 그룹에 추가하려면 **az resource create** 명령을 사용하거나 만드는 리소스의 종류에 해당하는 명령(예: **az storage account create**)을 사용합니다. 리소스의 종류에 해당하는 명령에는 새 리소스에 필요한 속성의 매개 변수가 포함되기 때문에 이 명령을 사용하는 것이 보다 간편할 수 있습니다. **az resource create**를 사용하는 경우 속성을 설정하라는 메시지를 표시하지 않으려면 설정할 속성을 모두 알아야 합니다.
+
+하지만 스크립트를 통해 리소스를 추가하면 새 리소스가 Resource Manager 템플릿에 존재하지 않기 때문에 나중에 혼동을 일으킬 수 있습니다. 템플릿을 사용하면 솔루션을 안정적이고 반복적으로 배포할 수 있습니다.
+
+다음 명령을 사용해 저장소 계정을 만듭니다. 예제에 표시된 이름을 사용하는 대신 저장소 계정에 대한 고유 이름을 제공합니다. 이름은 길이가 3자에서 24자 사이여야 하고 숫자 및 소문자만 사용해야 합니다. 예제에 표시된 이름을 사용하면 해당 이름을 이미 사용 중이기 때문에 오류가 표시됩니다.
+
+```azurecli-interactive
+az storage account create -n myuniquestorage -g TestRG1 -l westus --sku Standard_LRS
+```
+
+나중에 이 리소스를 검색해야 하는 경우 다음 명령을 사용합니다.
+
+```azurecli-interactive
+az storage account show --name myuniquestorage --resource-group TestRG1
+```
+
+## <a name="add-a-tag"></a>태그 추가
+
+태그를 사용하면 다양한 속성에 따라 리소스를 구성할 수 있습니다. 예를 들어 동일한 부서에 속하는 여러 리소스 그룹에 몇 가지 리소스를 둘 수 있습니다. 리소스에 부서 태그 및 값을 적용하여 동일한 범주에 속하는 것으로 표시할 수 있습니다. 또는 리소스가 프로덕션 환경에서 사용되는지 또는 테스트 환경에서 사용되는지를 표시할 수 있습니다. 이 문서에서는 태그를 하나의 리소스에만 적용하지만, 사용자 환경에서는 모든 리소스에 적용하는 것이 가장 적합합니다.
+
+다음 명령은 저장소 계정에 두 개의 태그를 적용합니다.
+
+```azurecli-interactive
+az resource tag --tags Dept=IT Environment=Test -g TestRG1 -n myuniquestorage --resource-type "Microsoft.Storage/storageAccounts"
+```
+
+태그는 단일 개체로 업데이트됩니다. 이미 태그가 포함된 리소스에 태그를 추가하려면 우선 기존 태그를 검색합니다. 기존 태그가 포함된 개체에 새 태그를 추가하고 리소스에 모든 태그를 다시 적용합니다.
+
+```azurecli-interactive
+jsonrtag=$(az resource show -g TestRG1 -n myuniquestorage --resource-type "Microsoft.Storage/storageAccounts" --query tags)
+rt=$(echo $jsonrtag | tr -d '"{},' | sed 's/: /=/g')
+az resource tag --tags $rt Project=Redesign -g TestRG1 -n myuniquestorage --resource-type "Microsoft.Storage/storageAccounts"
+```
+
+## <a name="search-for-resources"></a>리소스 검색
+
+다양한 검색 조건으로 리소스를 검색하려면 **az resource list** 명령을 사용합니다.
+
+* 이름별로 리소스를 가져오려면 **name** 매개 변수를 제공합니다.
+
+  ```azurecli-interactive
+  az resource list -n myuniquestorage
+  ```
+
+* 리소스 그룹의 리소스를 모두 가져오려면 **resource-group** 매개 변수를 제공합니다.
+
+  ```azurecli-interactive
+  az resource list --resource-group TestRG1
+  ```
+
+* 태그 이름 및 값을 사용하여 리소스를 모두 가져오려면 **tag** 매개 변수를 제공합니다.
+
+  ```azurecli-interactive
+  az resource list --tag Dept=IT
+  ```
+
+* 특정 리소스 종류에 해당하는 리소스를 모두 가져오려면 **resource-type** 매개 변수를 제공합니다.
+
+  ```azurecli-interactive
+  az resource list --resource-type "Microsoft.Storage/storageAccounts"
+  ```
+
+## <a name="get-resource-id"></a>리소스 ID 가져오기
+
+많은 명령에서 리소스 ID를 매개 변수로 사용합니다. 리소스 ID를 가져와서 변수에 저장하려면 다음을 사용합니다.
+
+```azurecli-interactive
+webappID=$(az resource show -g exampleGroup -n exampleSite --resource-type "Microsoft.Web/sites" --query id --output tsv)
+```
+
+## <a name="lock-a-resource"></a>리소스 잠금
+
+중요한 리소스가 실수로 삭제되거나 수정되지 않도록 해야 하는 경우에는 리소스에 잠금을 적용합니다. **CanNotDelete** 또는 **ReadOnly**를 지정할 수 있습니다.
+
+관리 잠금을 만들거나 삭제하려면 `Microsoft.Authorization/*` 또는 `Microsoft.Authorization/locks/*` 작업에 대한 액세스 권한이 있어야 합니다. 기본 제공 역할의 경우 소유자 및 사용자 액세스 관리자에게만 이러한 작업의 권한이 부여됩니다.
+
+잠금을 적용하려면 다음 명령을 사용합니다.
+
+```azurecli-interactive
+az lock create --lock-type CanNotDelete --resource-name myuniquestorage --resource-group TestRG1 --resource-type Microsoft.Storage/storageAccounts --name storagelock
+```
+
+앞의 예제에서 잠긴 리소스는 잠금이 제거될 때까지 삭제될 수 없습니다. 잠금을 제거하려면 다음을 사용합니다.
+
+```azurecli-interactive
+az lock delete --name storagelock --resource-group TestRG1 --resource-type Microsoft.Storage/storageAccounts --resource-name myuniquestorage
+```
+
+잠금 설정에 대한 자세한 내용은 [Azure Resource Manager를 사용하여 리소스 잠그기](resource-group-lock-resources.md)를 참조하세요.
+
+## <a name="remove-resources-or-resource-group"></a>리소스 또는 리소스 그룹 제거
+리소스 또는 리소스 그룹을 제거할 수 있습니다. 리소스 그룹을 제거하면 리소스 그룹에 포함된 리소스도 모두 제거됩니다.
+
+* 리소스 그룹에서 리소스를 삭제하려면 삭제할 리소스 종류에 대해 delete 명령을 사용합니다. 이 명령은 리소스를 삭제하지만 리소스 그룹은 삭제하지 않습니다.
+
+  ```azurecli-interactive
+  az storage account delete -n myuniquestorage -g TestRG1
+  ```
+
+* 리소스 그룹 및 모든 해당 리소스를 삭제하려면 **az group delete** 명령을 사용합니다.
+
+  ```azurecli-interactive
+  az group delete -n TestRG1
+  ```
+
+두 명령 실행 시에는 모두 리소스 또는 리소스 그룹을 제거할지를 묻는 메시지가 표시됩니다.
 
 ## <a name="next-steps"></a>다음 단계
-* Azure CLI를 사용하여 배포 작업의 자세한 내용을 보고 배포 오류의 문제를 해결하려면 [배포 작업 보기](resource-manager-deployment-operations.md)를 참조하세요.
-* CLI를 사용하여 리소스에 액세스하도록 응용 프로그램이나 스크립트를 설정하려면 [Azure CLI를 사용하여 리소스에 액세스하는 서비스 주체 만들기](resource-group-authenticate-service-principal-cli.md)를 참조하세요.
+* Resource Manager 템플릿을 만드는 방법에 대한 자세한 내용은 [Azure Resource Manager 템플릿 작성](resource-group-authoring-templates.md)을 참조하세요.
+* 템플릿 배포에 대한 자세한 내용은 [Azure Resource Manager 템플릿을 사용하여 응용 프로그램 배포](resource-group-template-deploy-cli.md)를 참조하세요.
+* 기존 리소스를 새 리소스 그룹으로 이동할 수 있습니다. 예제를 보려면 [새 리소스 그룹 또는 구독으로 리소스 이동](resource-group-move-resources.md)을 참조하세요.
 * 엔터프라이즈에서 리소스 관리자를 사용하여 구독을 효과적으로 관리할 수 있는 방법에 대한 지침은 [Azure 엔터프라이즈 스캐폴드 - 규범적 구독 거버넌스](resource-manager-subscription-governance.md)를 참조하세요.
-
-

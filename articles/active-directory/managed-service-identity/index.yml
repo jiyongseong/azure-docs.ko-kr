@@ -1,0 +1,69 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Azure Active Directory 관리 서비스 ID 설명서
+metadata:
+  document_id: 
+  title: Azure Active Directory 관리 서비스 ID 설명서
+  description: MSI(관리 서비스 ID)를 사용하여 소스 코드에서 자격 증명을 유지할 필요 없이 Azure 클라우드 서비스에 안전하게 인증하는 방법을 알아봅니다.
+  services: active-directory
+  ms.component: msi
+  author: daveba
+  manager: mtillman
+  ms.service: active-directory
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 03/16/2018
+  ms.author: daveba
+  ms.openlocfilehash: ca90d9d2bb3fffb65d2cefe156d0425de9634bdd
+  ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 05/20/2018
+abstract:
+  description: MSI(관리 서비스 ID)는 Azure AD(Azure Active Directory)에서 자동으로 관리되는 ID를 Azure 서비스에 제공합니다. 이 ID를 사용하면 Azure AD 인증을 지원하는 모든 서비스에 인증할 수 있으므로 코드에 어떤 자격 증명도 포함할 필요가 없습니다.  빠른 시작 및 자습서를 사용하여 관리 서비스 ID를 만들고 관리하는 방법을 알아봅니다.
+sections:
+- title: 5분 빠른 시작
+  items:
+  - type: paragraph
+    text: MSI(관리 서비스 ID)를 사용하여 Azure Resource Manager API에 액세스하는 방법을 알아봅니다.
+  - type: list
+    style: unordered
+    items:
+    - html: <a href="/azure/active-directory/managed-service-identity/tutorial-windows-vm-access-arm">Windows Azure Virtual Machine에서 Azure Resource Manager에 액세스</a>
+    - html: <a href="/azure/active-directory/managed-service-identity/tutorial-linux-vm-access-arm">Linux Azure Virtual Machine에서 Azure Resource Manager에 액세스</a>
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: MSI(관리 서비스 ID)를 사용하여 Azure 리소스에 안전하게 액세스하는 방법을 알아봅니다.
+  - type: paragraph
+    text: Windows VM/VMSS
+  - type: list
+    style: unordered
+    items:
+    - html: <a href="/azure/active-directory/managed-service-identity/tutorial-windows-vm-access-datalake">Azure Data Lake Store에 액세스</a>
+    - html: <a href="/azure/active-directory/managed-service-identity/tutorial-windows-vm-access-storage">액세스 키를 사용하여 Azure Storage에 액세스</a>
+    - html: <a href="/azure/active-directory/managed-service-identity/tutorial-windows-vm-access-sql">Azure SQL에 액세스</a>
+    - html: <a href="/azure/active-directory/managed-service-identity/tutorial-windows-vm-access-nonaad">Azure Key Vault에 액세스</a>
+    - html: <a href="/azure/active-directory/managed-service-identity/tutorial-windows-vm-access-cosmos-db">Azure Cosmos DB에 액세스</a>
+    - html: <a href="/azure/active-directory/managed-service-identity/tutorial-windows-vm-ua-arm">사용자 할당 ID로 Azure Resource Manager에 액세스</a>
+  - type: paragraph
+    text: Linux VM/VMSS
+  - type: list
+    style: unordered
+    items:
+    - html: <a href="/azure/active-directory/managed-service-identity/tutorial-linux-vm-access-datalake">Azure Data Lake Store에 액세스</a>
+    - html: <a href="/azure/active-directory/managed-service-identity/tutorial-linux-vm-access-storage-access-key">액세스 키를 사용하여 Azure Storage에 액세스</a>
+    - html: <a href="/azure/active-directory/managed-service-identity/tutorial-linux-vm-access-nonaad">Azure Key Vault에 액세스</a>
+    - html: <a href="/azure/active-directory/managed-service-identity/tutorial-linux-vm-access-cosmos-db">Azure Cosmos DB에 액세스</a>
+    - html: <a href="/azure/active-directory/managed-service-identity/msi-tutorial-linux-vm-access-arm">사용자 할당 ID로 Azure Resource Manager에 액세스</a>
+- title: 참고 자료
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: 명령줄
+      html: <p><a href="/powershell/module/azurerm.managedserviceidentity#managed_service_identity">Azure PowerShell</a></p><p><a href="/cli/azure/identity">Azure CLI</a></p>
+    - title: 언어
+      html: <p><a href="/dotnet/api/microsoft.azure.management.resourcemanager.fluent.authentication#azure-dotnet">.NET</a></p><p><a href="https://github.com/Azure/azure-libraries-for-java#ready-to-run-code-samples-for-virtual-machines">Java</a></p><p><a href="/javascript/api/ms-rest-azure">Node.js</a></p><p><a href="/python/api/azure.mgmt.msi">Python</a></p></p><a href="https://rubygems.org/gems/azure_mgmt_msi">Ruby</a></p></p><a href="https://godoc.org/github.com/Azure/azure-sdk-for-go/services/msi/mgmt/2015-08-31-preview/msi">Go</a></p>

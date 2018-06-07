@@ -1,9 +1,9 @@
 ---
-title: "Azure Key Vault 로깅 | Microsoft Docs"
-description: "이 자습서를 사용하여 Azure 키 자격 증명 모음 로깅을 시작할 수 있습니다."
+title: Azure Key Vault 로깅 | Microsoft Docs
+description: 이 자습서를 사용하여 Azure Key Vault 로깅을 시작할 수 있습니다.
 services: key-vault
-documentationcenter: 
-author: cabailey
+documentationcenter: ''
+author: barclayn
 manager: mbaldwin
 tags: azure-resource-manager
 ms.assetid: 43f96a2b-3af8-4adc-9344-bc6041fface8
@@ -12,17 +12,16 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: hero-article
-ms.date: 07/19/2017
-ms.author: cabailey
-ms.translationtype: Human Translation
-ms.sourcegitcommit: be3ac7755934bca00190db6e21b6527c91a77ec2
-ms.openlocfilehash: 924fce8245a88fd7c12636182336e503237fe4dc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/03/2017
-
+ms.date: 10/16/2017
+ms.author: barclayn
+ms.openlocfilehash: e7dcb3778de31258f4aa3c946ffa214d87cb858a
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-# <a name="azure-key-vault-logging"></a>Azure 키 자격 증명 모음 로깅
-Azure 키 자격 증명 모음은 대부분 지역에서 사용할 수 있습니다. 자세한 내용은 [키 자격 증명 모음 가격 책정 페이지](https://azure.microsoft.com/pricing/details/key-vault/)를 참조하세요.
+# <a name="azure-key-vault-logging"></a>Azure Key Vault 로깅
+Azure Key Vault는 대부분 지역에서 사용할 수 있습니다. 자세한 내용은 [키 자격 증명 모음 가격 책정 페이지](https://azure.microsoft.com/pricing/details/key-vault/)를 참조하세요.
 
 ## <a name="introduction"></a>소개
 하나 이상의 키 자격 증명 모음을 만든 후 키 자격 증명 모음이 액세스되는 방법, 시기 및 사용자를 모니터링하려는 경우가 있습니다. Azure 저장소 계정에 제공하는 정보를 저장하는 키 자격 증명 모음에 대한 로깅을 사용하여 이를 수행할 수 있습니다. **insights-logs-auditevent** 라는 새 컨테이너가 지정된 저장소 계정에 대해 자동으로 만들어지고 여러 키 자격 증명 모음에 대한 로그를 수집하기 위해 이 저장소 계정을 사용할 수 있습니다.
@@ -32,16 +31,16 @@ Azure 키 자격 증명 모음은 대부분 지역에서 사용할 수 있습니
 * 표준 Azure 액세스 제어 메서드를 사용하여 액세스할 수 있는 사용자를 제한하여 로그를 보호합니다.
 * 더 이상 저장소 계정에 유지하지 않으려는 로그를 삭제합니다.
 
-이 자습서를 사용하면 저장소 계정을 만들고 로깅을 활성화하고 수집되는 로깅 정보를 해석하는 Azure 키 자격 증명 모음을 시작하는 데 도움이 됩니다.  
+이 자습서를 사용하면 저장소 계정을 만들고 로깅을 활성화하고 수집되는 로깅 정보를 해석하는 Azure Key Vault를 시작하는 데 도움이 됩니다.  
 
 > [!NOTE]
-> 이 자습서는 키 자격 증명 모음, 키 또는 암호를 만드는 방법에 대한 지침을 다루지 않습니다. 자세한 내용은 [Azure 키 자격 증명 모음 시작](key-vault-get-started.md)을 참조하세요. 또는 플랫폼 간 명령줄 인터페이스 지침에 대한 참조는 [이 해당 자습서](key-vault-manage-with-cli2.md)를 참조하세요.
+> 이 자습서는 키 자격 증명 모음, 키 또는 암호를 만드는 방법에 대한 지침을 다루지 않습니다. 이에 대한 설명은 [Azure Key Vault 시작](key-vault-get-started.md)을 참조하세요. 또는 플랫폼 간 명령줄 인터페이스 지침에 대한 참조는 [이 해당 자습서](key-vault-manage-with-cli2.md)를 참조하세요.
 >
-> 현재는 Azure 포털에서 Azure 키 자격 증명 모음을 구성할 수 없습니다. 대신, 이 Azure PowerShell 지침을 사용합니다.
+> 현재는 Azure Portal에서 Azure Key Vault를 구성할 수 없습니다. 대신, 이 Azure PowerShell 지침을 사용합니다.
 >
 >
 
-Azure 키 자격 증명 모음에 대한 개요는 [Azure 키 자격 증명 모음이란?](key-vault-whatis.md)
+Azure Key Vault에 대한 개요는 [Azure Key Vault란?](key-vault-whatis.md)
 
 ## <a name="prerequisites"></a>필수 조건
 이 자습서를 완료하려면 다음이 필요합니다.
@@ -53,7 +52,7 @@ Azure 키 자격 증명 모음에 대한 개요는 [Azure 키 자격 증명 모�
 ## <a id="connect"></a>구독에 연결
 Azure PowerShell 세션을 시작하고 다음 명령 사용하여 Azure 계정에 로그인합니다.  
 
-    Login-AzureRmAccount
+    Connect-AzureRmAccount
 
 팝업 브라우저 창에 Azure 계정 사용자 이름 및 암호를 입력합니다. Azure PowerShell은 이 계정과 연관된 모든 구독을 받고 기본적으로 첫 번째 구독을 사용합니다.
 
@@ -134,7 +133,7 @@ Azure PowerShell 구성에 관한 자세한 내용은 [Azure PowerShell 설치 �
     Get-AzureStorageBlob -Container $container -Context $sa.Context
 출력은 다음과 유사합니다.
 
-**Container Uri: https://contosokeyvaultlogs.blob.core.windows.net/insights-logs-auditevent**
+**컨테이너 URI: https://contosokeyvaultlogs.blob.core.windows.net/insights-logs-auditevent**
 
 **Name**
 
@@ -151,7 +150,7 @@ Azure PowerShell 구성에 관한 자세한 내용은 [Azure PowerShell 설치 �
 
 여러 리소스에 대한 로그를 수집하는 데 동일한 저장소 계정을 사용할 수 있으므로 Blob 이름에 있는 전체 리소스 ID는 필요한 Blob에 액세스하거나 다운로드하는 데 매우 유용합니다. 하지만 그 전에 먼저 모든 Blob을 다운로드하는 방법을 다룹니다.
 
-먼저 Blob을 다운로드할 폴더를 만듭니다. 예:
+먼저 Blob을 다운로드할 폴더를 만듭니다. 예: 
 
     New-Item -Path 'C:\Users\username\ContosoKeyVaultLogs' -ItemType Directory -Force
 
@@ -165,7 +164,7 @@ Azure PowerShell 구성에 관한 자세한 내용은 [Azure PowerShell 설치 �
 
 이 두 번째 명령을 실행할 때 Blob 이름의 **/** 구분 기호는 대상 폴더 아래에 전체 폴더 구조를 만들고 이 구조는 Blob을 파일로 다운로드하고 저장하는 데 사용됩니다.
 
-선택적으로 Blob을 다운로드하려면 와일드카드를 사용합니다. 예:
+선택적으로 Blob을 다운로드하려면 와일드카드를 사용합니다. 예: 
 
 * 여러 키 자격 증명 모음이 있고 CONTOSOKEYVAULT3이라는 하나의 키 자격 증명 모음에 대한 로그를 다운로드하려는 경우:
 
@@ -212,7 +211,7 @@ Azure PowerShell 구성에 관한 자세한 내용은 [Azure PowerShell 설치 �
 | 필드 이름 | 설명 |
 | --- | --- |
 | 실시간 |날짜 및 시간(UTC) |
-| resourceId |Azure 리소스 관리자 리소스 ID. Key Vault 로그의 경우 이는 항상 Key Vault 리소스 ID입니다. |
+| ResourceId |Azure 리소스 관리자 리소스 ID. Key Vault 로그의 경우 이는 항상 Key Vault 리소스 ID입니다. |
 | operationName |다음 표에 설명된 대로 작업의 이름입니다. |
 | operationVersion |클라이언트에서 요청한 REST API 버전입니다. |
 | 카테고리 |키 자격 증명 모음 로그의 경우 AuditEvent는 단일의 사용 가능한 값입니다. |
@@ -225,7 +224,7 @@ Azure PowerShell 구성에 관한 자세한 내용은 [Azure PowerShell 설치 �
 | ID |REST API 요청을 수행할 때 제공된 토큰의 ID입니다. Azure PowerShell cmdlet에서 발생하는 요청의 경우처럼 이는 보통 "사용자", "서비스 주체" 또는 "사용자+appId"의 조합입니다. |
 | properties |이 필드는 작업(작업 이름)에 따라 다른 정보가 포함됩니다. 대부분의 경우 클라이언트 정보(클라이언트에서 전달한 useragent 문자열), 정확한 REST API 요청 URI 및 HTTP 상태 코드를 포함합니다. 또한 개체가 요청의 결과로 반환되면(예: KeyCreate 또는 VaultGet) 키 URI(“ID”로), 자격 증명 모음 URI 또는 암호 URI도 포함합니다. |
 
-**operationName** 필드 값은 ObjectVerb 형식입니다. 예:
+**operationName** 필드 값은 ObjectVerb 형식입니다. 예: 
 
 * 모든 주요 자격 증명 모음 작업은 `VaultGet`, `VaultCreate` 등의 'Vault`<action>`' 형식입니다.
 * 모든 주요 작업은 `KeySign`, `KeyList` 등의 'Key`<action>`' 형식입니다.
@@ -236,32 +235,32 @@ Azure PowerShell 구성에 관한 자세한 내용은 [Azure PowerShell 설치 �
 | operationName | REST API 명령 |
 | --- | --- |
 | 인증 |Azure Active Directory 끝점을 통해 |
-| VaultGet |[키 자격 증명 모음에 대한 정보 가져오기](https://msdn.microsoft.com/en-us/library/azure/mt620026.aspx) |
-| VaultPut |[키 자격 증명 모음 만들기 또는 업데이트](https://msdn.microsoft.com/en-us/library/azure/mt620025.aspx) |
-| VaultDelete |[키 자격 증명 모음 삭제](https://msdn.microsoft.com/en-us/library/azure/mt620022.aspx) |
+| VaultGet |[키 자격 증명 모음에 대한 정보 가져오기](https://msdn.microsoft.com/library/azure/mt620026.aspx) |
+| VaultPut |[키 자격 증명 모음 만들기 또는 업데이트](https://msdn.microsoft.com/library/azure/mt620025.aspx) |
+| VaultDelete |[키 자격 증명 모음 삭제](https://msdn.microsoft.com/library/azure/mt620022.aspx) |
 | VaultPatch |[키 자격 증명 모음 업데이트](https://msdn.microsoft.com/library/azure/mt620025.aspx) |
-| VaultList |[리소스 그룹의 모든 키 자격 증명 모음 목록](https://msdn.microsoft.com/en-us/library/azure/mt620027.aspx) |
-| KeyCreate |[키 만들기](https://msdn.microsoft.com/en-us/library/azure/dn903634.aspx) |
-| KeyGet |[키에 대한 정보 가져오기](https://msdn.microsoft.com/en-us/library/azure/dn878080.aspx) |
-| KeyImport |[자격 증명 모음으로 키 가져오기](https://msdn.microsoft.com/en-us/library/azure/dn903626.aspx) |
-| KeyBackup |[키 백업](https://msdn.microsoft.com/en-us/library/azure/dn878058.aspx). |
-| KeyDelete |[키 삭제](https://msdn.microsoft.com/en-us/library/azure/dn903611.aspx) |
-| KeyRestore |[키 복원](https://msdn.microsoft.com/en-us/library/azure/dn878106.aspx) |
-| KeySign |[키로 서명](https://msdn.microsoft.com/en-us/library/azure/dn878096.aspx) |
-| KeyVerify |[키로 확인](https://msdn.microsoft.com/en-us/library/azure/dn878082.aspx) |
-| KeyWrap |[키 래핑](https://msdn.microsoft.com/en-us/library/azure/dn878066.aspx) |
-| KeyUnwrap |[키 래핑 취소](https://msdn.microsoft.com/en-us/library/azure/dn878079.aspx) |
-| KeyEncrypt |[키로 암호화](https://msdn.microsoft.com/en-us/library/azure/dn878060.aspx) |
-| KeyDecrypt |[키로 암호 해독](https://msdn.microsoft.com/en-us/library/azure/dn878097.aspx) |
-| KeyUpdate |[키 업데이트](https://msdn.microsoft.com/en-us/library/azure/dn903616.aspx) |
-| KeyList |[자격 증명 모음에 키 나열](https://msdn.microsoft.com/en-us/library/azure/dn903629.aspx) |
-| KeyListVersions |[키 버전 나열](https://msdn.microsoft.com/en-us/library/azure/dn986822.aspx) |
-| SecretSet |[암호 만들기](https://msdn.microsoft.com/en-us/library/azure/dn903618.aspx) |
-| SecretGet |[암호 가져오기](https://msdn.microsoft.com/en-us/library/azure/dn903633.aspx) |
-| SecretUpdate |[암호 업데이트](https://msdn.microsoft.com/en-us/library/azure/dn986818.aspx) |
-| SecretDelete |[암호 삭제](https://msdn.microsoft.com/en-us/library/azure/dn903613.aspx) |
-| SecretList |[자격 증명 모음에 암호 나열](https://msdn.microsoft.com/en-us/library/azure/dn903614.aspx) |
-| SecretListVersions |[암호 버전 나열](https://msdn.microsoft.com/en-us/library/azure/dn986824.aspx) |
+| VaultList |[리소스 그룹의 모든 키 자격 증명 모음 목록](https://msdn.microsoft.com/library/azure/mt620027.aspx) |
+| KeyCreate |[키 만들기](https://msdn.microsoft.com/library/azure/dn903634.aspx) |
+| KeyGet |[키에 대한 정보 가져오기](https://msdn.microsoft.com/library/azure/dn878080.aspx) |
+| KeyImport |[자격 증명 모음으로 키 가져오기](https://msdn.microsoft.com/library/azure/dn903626.aspx) |
+| KeyBackup |[키 Backup](https://msdn.microsoft.com/library/azure/dn878058.aspx). |
+| KeyDelete |[키 삭제](https://msdn.microsoft.com/library/azure/dn903611.aspx) |
+| KeyRestore |[키 복원](https://msdn.microsoft.com/library/azure/dn878106.aspx) |
+| KeySign |[키로 서명](https://msdn.microsoft.com/library/azure/dn878096.aspx) |
+| KeyVerify |[키로 확인](https://msdn.microsoft.com/library/azure/dn878082.aspx) |
+| KeyWrap |[키 래핑](https://msdn.microsoft.com/library/azure/dn878066.aspx) |
+| KeyUnwrap |[키 래핑 취소](https://msdn.microsoft.com/library/azure/dn878079.aspx) |
+| KeyEncrypt |[키로 암호화](https://msdn.microsoft.com/library/azure/dn878060.aspx) |
+| KeyDecrypt |[키로 암호 해독](https://msdn.microsoft.com/library/azure/dn878097.aspx) |
+| KeyUpdate |[키 업데이트](https://msdn.microsoft.com/library/azure/dn903616.aspx) |
+| KeyList |[자격 증명 모음에 키 나열](https://msdn.microsoft.com/library/azure/dn903629.aspx) |
+| KeyListVersions |[키 버전 나열](https://msdn.microsoft.com/library/azure/dn986822.aspx) |
+| SecretSet |[암호 만들기](https://msdn.microsoft.com/library/azure/dn903618.aspx) |
+| SecretGet |[암호 가져오기](https://msdn.microsoft.com/library/azure/dn903633.aspx) |
+| SecretUpdate |[암호 업데이트](https://msdn.microsoft.com/library/azure/dn986818.aspx) |
+| SecretDelete |[암호 삭제](https://msdn.microsoft.com/library/azure/dn903613.aspx) |
+| SecretList |[자격 증명 모음에 암호 나열](https://msdn.microsoft.com/library/azure/dn903614.aspx) |
+| SecretListVersions |[암호 버전 나열](https://msdn.microsoft.com/library/azure/dn986824.aspx) |
 
 ## <a id="loganalytics"></a>Log Analytics 사용
 
@@ -270,9 +269,8 @@ Log Analytics에서 Azure Key Vault 솔루션을 사용하여 Azure Key Vault Au
 ## <a id="next"></a>다음 단계
 웹 응용 프로그램에서 Azure Key Vault를 사용하는 자습서는 [웹 응용 프로그램에서 Azure Key Vault 사용](key-vault-use-from-web-application.md)을 참조하세요.
 
-프로그래밍 참조는 [Azure 주요 자격 증명 모음 개발자 가이드](key-vault-developers-guide.md)를 참조하세요.
+프로그래밍 참조는 [Azure Key Vault 개발자 가이드](key-vault-developers-guide.md)를 참조하세요.
 
 Azure Key Vault의 Azure PowerShell 1.0 cmdlet 목록은 [Azure Key Vault Cmdlet](/powershell/module/azurerm.keyvault/#key_vault)을 참조하세요.
 
 Azure Key Vault을 사용하는 키 회전 및 로그 감사에 대한 자습서는 [종단 간 키 회전 및 감사를 사용하여 Key Vault를 설정하는 방법](key-vault-key-rotation-log-monitoring.md)을 참조하세요.
-

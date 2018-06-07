@@ -3,7 +3,7 @@ title: "Azure Network Watcher에서 패킷 캡처 소개 | Microsoft Docs"
 description: "이 페이지는 Network Watcher 패킷 캡처 기능에 대한 개요를 제공합니다."
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
 editor: 
 ms.assetid: 3a81afaa-ecd9-4004-b68e-69ab56913356
@@ -13,16 +13,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 67ee6932f417194d6d9ee1e18bb716f02cf7605d
-ms.openlocfilehash: 4fdd007c2cfad7b42f26ab2cacfba06d95c8dad3
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
-
+ms.author: jdial
+ms.openlocfilehash: 152cc8fb61aa6115c7b5863e4d798db9e7aa5b7c
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="introduction-to-variable-packet-capture-in-azure-network-watcher"></a>Azure Network Watcher에서 변수 패킷 캡처 소개
 
 Network Watcher 변수 패킷을 사용하면 가상 컴퓨터 간에 트래픽을 추적하는 패킷 캡처 세션을 만들 수 있습니다. 패킷 캡처를 통해 사후 및 사전 대응적으로 네트워크 예외를 진단할 수 있습니다. 또한 네트워크 침입에 대한 정보를 가져오는 네트워크 통계를 수집하는 것을 포함하여 클라이언트 서버 간 통신을 디버깅할 수 있습니다.
@@ -60,7 +57,6 @@ Network Watcher 변수 패킷을 사용하면 가상 컴퓨터 간에 트래픽�
 
 <!--Image references-->
 [1]: ./media/network-watcher-packet-capture-overview/figure1.png
-
 
 
 

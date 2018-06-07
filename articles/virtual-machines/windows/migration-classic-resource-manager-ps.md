@@ -1,11 +1,11 @@
 ---
-title: "PowerShell을 사용하여 Resource Manager로 마이그레이션 | Microsoft Docs"
-description: "이 문서에서는 Azure PowerShell 명령을 사용하여 VM(가상 컴퓨터), VNET(가상 네트워크), 저장소 계정 등의 IaaS 리소스를 플랫폼 지원 방식으로 클래식에서 ARM(Azure Resource Manager)으로 마이그레이션하는 과정을 안내합니다."
+title: PowerShell을 사용하여 Resource Manager로 마이그레이션 | Microsoft Docs
+description: 이 문서에서는 Azure PowerShell 명령을 사용하여 VM(가상 머신), VNET(가상 네트워크), 저장소 계정 등의 IaaS 리소스를 플랫폼 지원 방식으로 클래식에서 ARM(Azure Resource Manager)으로 마이그레이션하는 과정을 안내합니다.
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: singhkays
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
 ms.assetid: 2b3dff9b-2e99-4556-acc5-d75ef234af9c
 ms.service: virtual-machines-windows
@@ -15,12 +15,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/30/2017
 ms.author: kasing
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: 7520e07700680fa4129a9babff30202218cefa71
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
+ms.openlocfilehash: a57337acadafe40839e16d6a31861ff7c892c071
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="migrate-iaas-resources-from-classic-to-azure-resource-manager-by-using-azure-powershell"></a>Azure PowerShell을 사용하여 클래식에서 Azure Resource Manager로 IaaS 리소스 마이그레이션
 이러한 단계에서는 Azure PowerShell 명령을 사용하여 클래식 배포 모델의 laaS(Infrastructure as a Service) 리소스를 Azure Resource Manager 배포 모델로 마이그레이션하는 방법을 보여 줍니다.
@@ -39,7 +38,7 @@ ms.lasthandoff: 07/04/2017
 ## <a name="step-1-plan-for-migration"></a>1단계: 마이그레이션 계획
 클래식에서 Resource Manager로 IaaS 리소스 마이그레이션을 평가하는 몇 가지 모범 사례가 있습니다.
 
-* [지원/지원되지 않는 기능 및 구성](migration-classic-resource-manager-overview.md)을 읽어봅니다. 지원되지 않는 구성 또는 기능을 사용하는 가상 컴퓨터가 있다면, 해당 구성/기능 지원이 발표되기를 기다리는 것이 좋습니다. 필요에 따라서는 마이그레이션이 가능하도록 해당 기능을 제거하거나 구성 외부로 이동할 수도 있습니다.
+* [지원/지원되지 않는 기능 및 구성](migration-classic-resource-manager-overview.md)을 읽어봅니다. 지원되지 않는 구성 또는 기능을 사용하는 가상 머신이 있다면, 해당 구성/기능 지원이 발표되기를 기다리는 것이 좋습니다. 필요에 따라서는 마이그레이션이 가능하도록 해당 기능을 제거하거나 구성 외부로 이동할 수도 있습니다.
 * 현재 인프라 및 응용 프로그램을 배포하는 스크립트를 자동화한 경우 마이그레이션을 위해 해당 스크립트를 사용하여 유사한 테스트 설정을 만들어봅니다. 또는 Azure 포털을 사용하여 샘플 환경을 설정할 수도 있습니다.
 
 > [!IMPORTANT]
@@ -60,7 +59,7 @@ Azure PowerShell을 설치하는 두 가지 주요 옵션으로 [PowerShell 갤�
 이 마이그레이션을 수행하려면 [Azure Portal](https://portal.azure.com)에 구독에 대한 공동 관리자로 추가되어야 합니다.
 
 1. [Azure 포털](https://portal.azure.com)에 로그인합니다.
-2. 허브 메뉴에서 **구독**을 선택합니다. 표시되지 않으면 **추가 서비스**를 선택합니다.
+2. 허브 메뉴에서 **구독**을 선택합니다. 표시되지 않으면 **모든 서비스**를 선택합니다.
 3. 적절한 등록 항목을 찾은 다음 **내 역할** 필드를 확인합니다. 공동 관리자의 경우 값은 _계정 관리자_여야 합니다.
 
 공동 관리자를 추가할 수 없으면 구독에 대한 서비스 관리자 또는 공동 관리자에게 추가해 줄 것을 요청합니다.   
@@ -71,7 +70,7 @@ Azure PowerShell을 설치하는 두 가지 주요 옵션으로 [PowerShell 갤�
 Resource Manager 모델에 대한 계정으로 로그인합니다.
 
 ```powershell
-    Login-AzureRmAccount
+    Connect-AzureRmAccount
 ```
 
 다음 명령으로 사용 가능한 구독을 가져옵니다.
@@ -127,8 +126,8 @@ Resource Manager 모델에 대한 계정으로 로그인합니다.
 
 <br>
 
-## <a name="step-5-make-sure-you-have-enough-azure-resource-manager-virtual-machine-cores-in-the-azure-region-of-your-current-deployment-or-vnet"></a>5단계: 현재 배포의 Azure 지역 또는 VNET에 Azure Resource Manager 가상 컴퓨터 코어가 충분한지 확인
-다음 powershell 명령을 사용하여 Azure Resource Manager에 있는 현재 코어 수를 확인할 수 있습니다. 코어 할당량에 대한 자세한 내용은 [제한 및 Azure Resource Manager](../../azure-subscription-service-limits.md#limits-and-the-azure-resource-manager)를 참조하세요.
+## <a name="step-5-make-sure-you-have-enough-azure-resource-manager-virtual-machine-vcpus-in-the-azure-region-of-your-current-deployment-or-vnet"></a>5단계: 현재 배포의 Azure 지역 또는 VNET에 Azure Resource Manager Virtual Machine vCPU가 충분한지 확인
+다음 PowerShell 명령을 사용하여 Azure Resource Manager에 있는 현재 vCPU 수를 확인할 수 있습니다. vCPU 할당량에 대한 자세한 내용은 [제한 및 Azure Resource Manager](../../azure-subscription-service-limits.md#limits-and-the-azure-resource-manager)를 참조하세요.
 
 이 예제에서는 **미국 서부** 지역의 사용 가능 여부를 확인합니다. 예제 지역 이름을 사용자 고유의 이름으로 바꿉니다.
 
@@ -142,7 +141,7 @@ Get-AzureRmVMUsage -Location "West US"
 >
 >
 
-## <a name="step-61-option-1---migrate-virtual-machines-in-a-cloud-service-not-in-a-virtual-network"></a>6.1단계: 옵션 1 - 클라우드 서비스(가상 네트워크가 아님)에서 가상 컴퓨터 마이그레이션
+## <a name="step-61-option-1---migrate-virtual-machines-in-a-cloud-service-not-in-a-virtual-network"></a>6.1단계: 옵션 1 - 클라우드 서비스(가상 네트워크가 아님)에서 가상 머신 마이그레이션
 다음 명령을 사용하여 클라우드 서비스 목록을 가져와서 마이그레이션할 클라우드 서비스를 선택합니다. 클라우드 서비스의 VM이 가상 네트워크에 있거나 웹 또는 작업자 역할을 포함하는 경우 명령을 오류 메시지를 반환합니다.
 
 ```powershell
@@ -157,7 +156,7 @@ Get-AzureRmVMUsage -Location "West US"
     $deploymentName = $deployment.DeploymentName
 ```
 
-마이그레이션을 위해 클라우드 서비스의 가상 컴퓨터를 준비합니다. 두 가지 옵션 중 선택할 수 있습니다.
+마이그레이션을 위해 클라우드 서비스의 가상 머신을 준비합니다. 두 가지 옵션 중 선택할 수 있습니다.
 
 * **옵션 1. VM을 플랫폼에서 만든 가상 네트워크에 마이그레이션**
 
@@ -223,11 +222,11 @@ PowerShell 또는 Azure 포털을 사용하여 준비된 리소스에 대한 구
     Move-AzureService -Commit -ServiceName $serviceName -DeploymentName $deploymentName
 ```
 
-## <a name="step-61-option-2---migrate-virtual-machines-in-a-virtual-network"></a>6.1단계: 옵션 2 - 가상 네트워크에서 가상 컴퓨터 마이그레이션
+## <a name="step-61-option-2---migrate-virtual-machines-in-a-virtual-network"></a>6.1단계: 옵션 2 - 가상 네트워크에서 가상 머신 마이그레이션
 
-가상 네트워크에서 가상 컴퓨터를 마이그레이션하려면 가상 네트워크를 마이그레이션합니다. 가상 컴퓨터는 가상 네트워크와 함께 자동으로 마이그레이션됩니다. 마이그레이션할 가상 네트워크를 선택합니다.
+가상 네트워크에서 가상 머신을 마이그레이션하려면 가상 네트워크를 마이그레이션합니다. 가상 머신은 가상 네트워크와 함께 자동으로 마이그레이션됩니다. 마이그레이션할 가상 네트워크를 선택합니다.
 > [!NOTE]
-> 가상 컴퓨터의 VHD(OS 및 데이터) 파일을 사용하여 Managed Disks를 사용하는 새로운 Resource Manager 가상 컴퓨터를 만들어서 [단일 클래식 가상 컴퓨터를 마이그레이션](migrate-single-classic-to-resource-manager.md)합니다.
+> 가상 머신의 VHD(OS 및 데이터) 파일을 사용하여 Managed Disks를 사용하는 새로운 Resource Manager 가상 머신을 만들어서 [단일 클래식 가상 머신을 마이그레이션](migrate-single-classic-to-resource-manager.md)합니다.
 <br>
 
 > [!NOTE]
@@ -256,7 +255,7 @@ PowerShell 또는 Azure 포털을 사용하여 준비된 리소스에 대한 구
     Move-AzureVirtualNetwork -Prepare -VirtualNetworkName $vnetName
 ```
 
-Azure PowerShell 또는 Azure 포털을 사용하여 준비된 가상 컴퓨터에 대한 구성을 확인합니다. 마이그레이션할 준비가 되지 않았으며 이전 상태로 되돌아가려면 다음 명령을 사용합니다.
+Azure PowerShell 또는 Azure 포털을 사용하여 준비된 가상 머신에 대한 구성을 확인합니다. 마이그레이션할 준비가 되지 않았으며 이전 상태로 되돌아가려면 다음 명령을 사용합니다.
 
 ```powershell
     Move-AzureVirtualNetwork -Abort -VirtualNetworkName $vnetName
@@ -269,13 +268,13 @@ Azure PowerShell 또는 Azure 포털을 사용하여 준비된 가상 컴퓨터�
 ```
 
 ## <a name="step-62-migrate-a-storage-account"></a>6.2단계 저장소 계정 마이그레이션
-가상 컴퓨터 마이그레이션이 완료되면 저장소 계정을 마이그레이션하는 것이 좋습니다.
+가상 머신 마이그레이션이 완료되면 저장소 계정을 마이그레이션하는 것이 좋습니다.
 
 저장소 계정을 마이그레이션하기 전에 이전의 필수 요소 검사를 수행하세요.
 
-* **디스크가 저장소 계정에 저장되는 클래식 가상 컴퓨터 마이그레이션**
+* **디스크가 저장소 계정에 저장되는 클래식 가상 머신 마이그레이션**
 
-    이전 명령은 저장소 계정에서 모든 클래식 VM 디스크의 RoleName 및 DiskName 속성을 반환합니다. RoleName은 디스크가 연결된 가상 컴퓨터의 이름입니다. 이전 명령이 디스크를 반환하면 저장소 계정을 마이그레이션하기 전에 디스크가 연결된 가상 컴퓨터를 마이그레이션해야 합니다.
+    이전 명령은 저장소 계정에서 모든 클래식 VM 디스크의 RoleName 및 DiskName 속성을 반환합니다. RoleName은 디스크가 연결된 가상 머신의 이름입니다. 이전 명령이 디스크를 반환하면 저장소 계정을 마이그레이션하기 전에 디스크가 연결된 가상 머신을 마이그레이션해야 합니다.
     ```powershell
      $storageAccountName = 'yourStorageAccountName'
       Get-AzureDisk | where-Object {$_.MediaLink.Host.Contains($storageAccountName)} | Select-Object -ExpandProperty AttachedTo -Property `
@@ -349,4 +348,3 @@ Azure PowerShell 또는 Azure 포털을 사용하여 준비된 저장소 계정�
 * [클래식에서 Azure Resource Manager로의 IaaS 리소스 마이그레이션을 지원하기 위한 커뮤니티 도구](migration-classic-resource-manager-community-tools.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
 * [가장 일반적인 마이그레이션 오류 검토](migration-classic-resource-manager-errors.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
 * [클래식에서 Azure Resource Manager로의 IaaS 리소스 마이그레이션과 관련된 가장 자주 묻는 질문 검토](migration-classic-resource-manager-faq.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
-

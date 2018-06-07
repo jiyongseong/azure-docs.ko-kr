@@ -1,11 +1,11 @@
 ---
-title: "Azure Application Gateway 만들기 - Azure CLI 1.0 | Microsoft Docs"
-description: "Resource Manager에서 Azure CLI 1.0을 사용하여 Application Gateway를 만드는 방법 알아보기"
+title: Azure Application Gateway 만들기 - Azure CLI 1.0 | Microsoft Docs
+description: Resource Manager에서 Azure CLI 1.0을 사용하여 Application Gateway를 만드는 방법 알아보기
 services: application-gateway
 documentationcenter: na
-author: georgewallace
-manager: timlt
-editor: 
+author: vhorne
+manager: jpconnock
+editor: ''
 tags: azure-resource-manager
 ms.assetid: c2f6516e-3805-49ac-826e-776b909a9104
 ms.service: application-gateway
@@ -14,18 +14,18 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 07/31/2017
-ms.author: gwallace
+ms.author: victorh
+ms.openlocfilehash: 3d67e896da5e616e443fc4e1edd9aaafb0f0e2f9
+ms.sourcegitcommit: c47ef7899572bf6441627f76eb4c4ac15e487aec
 ms.translationtype: HT
-ms.sourcegitcommit: fff84ee45818e4699df380e1536f71b2a4003c71
-ms.openlocfilehash: e7b16e789e0f241aa8ca2292aacb2bccde8777ee
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/01/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/04/2018
+ms.locfileid: "33201874"
 ---
 # <a name="create-an-application-gateway-by-using-the-azure-cli"></a>Azure CLI를 사용하여 Application Gateway 만들기
 
 > [!div class="op_single_selector"]
-> * [쉬운 테이블](application-gateway-create-gateway-portal.md)
+> * [Azure Portal](application-gateway-create-gateway-portal.md)
 > * [Azure Resource Manager PowerShell](application-gateway-create-gateway-arm.md)
 > * [Azure 클래식 PowerShell](application-gateway-create-gateway.md)
 > * [Azure Resource Manager 템플릿](application-gateway-create-gateway-arm-template.md)
@@ -34,18 +34,18 @@ ms.lasthandoff: 08/01/2017
 > 
 > 
 
-Azure 응용 프로그램 게이트웨이는 계층 7 부하 분산 장치입니다. 클라우드 또는 온-프레미스이든 상관없이 서로 다른 서버 간에 장애 조치(Failover), 성능 라우팅 HTTP 요청을 제공합니다. 응용 프로그램 게이트웨이의 응용 프로그램 전달 기능에는 HTTP 부하 분산, 쿠키 기반 세션 선호도, SSL(Secure Sockets Layer) 오프로드, 사용자 지정 상태 프로브, 다중 사이트 지원 등이 있습니다.
+Azure Application Gateway는 계층 7 부하 분산 장치입니다. 클라우드 또는 온-프레미스이든 상관없이 서로 다른 서버 간에 장애 조치(Failover), 성능 라우팅 HTTP 요청을 제공합니다. 응용 프로그램 게이트웨이의 응용 프로그램 전달 기능에는 HTTP 부하 분산, 쿠키 기반 세션 선호도, SSL(Secure Sockets Layer) 오프로드, 사용자 지정 상태 프로브, 다중 사이트 지원 등이 있습니다.
 
 ## <a name="prerequisite-install-the-azure-cli"></a>필수 조건: Azure CLI 설치
 
-이 문서의 단계를 수행하려면 [Mac, Linux 및 Windows용 Azure 명령줄 인터페이스(Azure CLI)를 설치](../xplat-cli-install.md)하고 [Azure에 로그온](../xplat-cli-connect.md)해야 합니다. 
+이 문서의 단계를 수행하려면 [Mac, Linux 및 Windows용 Azure 명령줄 인터페이스(Azure CLI)를 설치](../xplat-cli-install.md)하고 [Azure에 로그온](/cli/azure/authenticate-azure-cli)해야 합니다. 
 
 > [!NOTE]
 > Azure 계정이 없는 경우 계정이 필요합니다. [여기서 무료 평가판](../active-directory/sign-up-organization.md)에 등록합니다.
 
 ## <a name="scenario"></a>시나리오
 
-이 시나리오에서는 Azure 포털을 사용하여 응용 프로그램 게이트웨이를 만드는 방법을 알아봅니다.
+이 시나리오에서는 Azure Portal을 사용하여 응용 프로그램 게이트웨이를 만드는 방법을 알아봅니다.
 
 이 시나리오에서는 다음을 수행합니다.
 
@@ -58,7 +58,7 @@ Azure 응용 프로그램 게이트웨이는 계층 7 부하 분산 장치입니
 
 ## <a name="before-you-begin"></a>시작하기 전에
 
-Azure 응용 프로그램 게이트웨이에는 자체 서브넷이 필요합니다. 가상 네트워크를 만들 때 여러 서브넷을 둘 수 있는 충분한 주소 공간이 있는지 확인합니다. Application Gateway를 서브넷에 배포한 경우 추가 Application Gateway를 서브넷에 추가할 수 있습니다.
+Azure Application Gateway에는 자체 서브넷이 필요합니다. 가상 네트워크를 만들 때 여러 서브넷을 둘 수 있는 충분한 주소 공간이 있는지 확인합니다. Application Gateway를 서브넷에 배포한 경우 추가 Application Gateway를 서브넷에 추가할 수 있습니다.
 
 ## <a name="log-in-to-azure"></a>Azure에 로그인
 
@@ -68,7 +68,7 @@ Azure 응용 프로그램 게이트웨이에는 자체 서브넷이 필요합니
 azure login
 ```
 
-앞의 예제를 입력하면 코드가 제공됩니다. 브라우저에서 https://aka.ms/devicelogin으로 이동하여 로그인 프로세스를 계속합니다.
+앞의 예제를 입력하면 코드가 제공됩니다. 브라우저에서 https://aka.ms/devicelogin으로 이동하여 로그인 프로세스를 계속 진행합니다.
 
 ![장치 로그인을 보여 주는 cmd][1]
 
@@ -161,4 +161,3 @@ azure network application-gateway create \
 [1]: ./media/application-gateway-create-gateway-cli-nodejs/figure1.png
 [2]: ./media/application-gateway-create-gateway-cli-nodejs/figure2.png
 [3]: ./media/application-gateway-create-gateway-cli-nodejs/figure3.png
-

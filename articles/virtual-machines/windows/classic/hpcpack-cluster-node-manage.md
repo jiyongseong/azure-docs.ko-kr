@@ -1,11 +1,11 @@
 ---
-title: "HPC 팩 클러스터 계산 노드 관리 | Microsoft Docs"
-description: "Azure에서 HPC 팩 2012 R2 클러스터 계산 노드를 추가, 제거, 시작, 중지하는 PowerShell 스크립트 도구에 대해 알아보세요."
+title: HPC 팩 클러스터 계산 노드 관리 | Microsoft Docs
+description: Azure에서 HPC 팩 2012 R2 클러스터 계산 노드를 추가, 제거, 시작, 중지하는 PowerShell 스크립트 도구에 대해 알아보세요.
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: dlepow
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-service-management,hpc-pack
 ms.assetid: 4193f03b-94e9-4704-a7ad-379abde063a9
 ms.service: virtual-machines-windows
@@ -15,12 +15,11 @@ ms.tgt_pltfrm: vm-multiple
 ms.workload: big-compute
 ms.date: 12/29/2016
 ms.author: danlep
-translationtype: Human Translation
-ms.sourcegitcommit: 356de369ec5409e8e6e51a286a20af70a9420193
-ms.openlocfilehash: dc9f354191b9e80ff6a01bd401a874c6998bda79
-ms.lasthandoff: 03/27/2017
-
-
+ms.openlocfilehash: 453f53be15b24b96f183b4935cc45fc97ad058bd
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="manage-the-number-and-availability-of-compute-nodes-in-an-hpc-pack-cluster-in-azure"></a>Azure의 HPC 팩 클러스터에 있는 계산 노드의 수 및 가용성 관리
 Azure VM에 HPC Pack 2012 R2 클러스터를 만든 경우 클러스터에서 일부 계산 노드 VM을 손쉽게 추가, 제거, 시작(프로비전), 중지(프로비전 해제)할 수 있어야 합니다. 이러한 작업을 하려면 헤드 노드 VM에 설치된 Azure PowerShell 스크립트를 실행합니다. 이러한 스크립트로 HPC 팩 클러스터 리소스의 수와 가용성을 관리하여 비용을 관리할 수 있습니다.
@@ -60,7 +59,7 @@ Add-HPCIaaSNode.ps1 [-ServiceName] <String> [-ImageName] <String>
 ```
 ### <a name="parameters"></a>매개 변수
 * **ServiceName**: 새 계산 노드 VM이 추가될 클라우드 서비스의 이름입니다.
-* **ImageName**: Azure VM 이미지 이름으로, Azure 클래식 포털 또는 Azure PowerShell cmdlet **Get-AzureVMImage**를 통해 가져올 수 있습니다. 이 이미지는 다음 요구 사항을 충족해야 합니다.
+* **ImageName**: Azure VM 이미지 이름으로, Azure Portal 또는 Azure PowerShell cmdlet **Get-AzureVMImage**를 통해 가져올 수 있습니다. 이 이미지는 다음 요구 사항을 충족해야 합니다.
   
   1. Windows 운영 체제를 설치해야 합니다.
   2. HPC 팩을 계산 노드 역할로 설치해야 합니다.
@@ -71,7 +70,7 @@ Add-HPCIaaSNode.ps1 [-ServiceName] <String> [-ImageName] <String>
 * **DomainUserPassword**: 도메인 사용자의 암호입니다.
 * **NodeNameSeries**(선택 사항): 계산 노드의 명명 패턴입니다. 형식은 &lt;*Root\_Name*&gt;&lt;*Start\_Number*&gt;%이어야 합니다. 예를 들어 MyCN%10%은 MyCN11부터 시작하는 계산 노드 이름의 시리즈를 의미합니다. 이 매개 변수를 지정하지 않을 경우 스크립트는 HPC 클러스터에서 구성된 노드 명명 시리즈를 사용합니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 다음 예제는 VM 이미지인 *hpccnimage1*을 기준으로 클라우드 서비스 *hpcservice1*에 20개의 대형 크기 컴퓨터 노드 VM을 추가합니다.
 
 ```PowerShell
@@ -99,7 +98,7 @@ Remove-HPCIaaSNode.ps1 -Node <Object> [-DeleteVHD] [-Force] [-Confirm] [<CommonP
 * **확인**(선택 사항): 명령을 실행하기 전 확인 메시지를 표시합니다.
 * **WhatIf**: 실제로 명령을 실행하지 않고 명령을 실행할 경우에 상황에 대해 설명하는 설정입니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 다음 예제는 이름이 *HPCNode-CN-*으로 시작하는 노드를 오프라인으로 강제 전환한 다음 노드와 관련 디스크를 제거합니다.
 
 ```PowerShell
@@ -119,7 +118,7 @@ Start-HPCIaaSNode.ps1 -Node <Object> [<CommonParameters>]
 * **Name**: 시작할 클러스터 노드의 이름입니다. 와일드카드가 지원됩니다. 매개 변수 설정 이름은 Name입니다. **Name** 및 **Node** 매개 변수를 모두 지정할 수 없습니다.
 * **Node**- 시작할 노드의 HpcNode 개체로 HPC PowerShell cmdlet [Get-HpcNode](https://technet.microsoft.com/library/dn887927.aspx)를 통해 얻을 수 있습니다. 매개 변수 설정 이름은 Node입니다. **Name** 및 **Node** 매개 변수를 모두 지정할 수 없습니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 다음 예제는 이름이 *HPCNode-CN-*로 시작하는 노드를 시작합니다.
 
 ```PowerShell
@@ -141,7 +140,7 @@ Stop-HPCIaaSNode.ps1 -Node <Object> [-Force] [<CommonParameters>]
 * **Node**: 중지할 노드의 HpcNode 개체로 HPC PowerShell cmdlet [Get-HpcNode](https://technet.microsoft.com/library/dn887927.aspx)를 통해 얻을 수 있습니다. 매개 변수 설정 이름은 Node입니다. **Name** 및 **Node** 매개 변수를 모두 지정할 수 없습니다.
 * **Force**(선택 사항): HPC 노드를 중지하기 전에 HPC 노드를 오프라인으로 강제 전환하는 설정입니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 다음 예제는 이름이 *HPCNode-CN-* 로 시작하는 노드를 오프라인으로 강제 전환한 다음 노드를 중지합니다.
 
 ```PowerShell
@@ -150,5 +149,4 @@ Stop-HPCIaaSNode.ps1 –Name HPCNodeCN-* -Force
 
 ## <a name="next-steps"></a>다음 단계
 * 클러스터 노드를 현재 클러스터 작업의 워크로드에 따라 자동으로 증가 또는 축소하려면 [클러스터 워크로드에 따라 Azure에서 HPC 팩 클러스터 리소스를 자동으로 증가 및 축소](hpcpack-cluster-node-autogrowshrink.md)를 참조하세요.
-
 

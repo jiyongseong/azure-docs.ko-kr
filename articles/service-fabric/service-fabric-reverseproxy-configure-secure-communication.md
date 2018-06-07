@@ -1,25 +1,23 @@
 ---
-title: "Azure Service Fabric 역방향 프록시 보안 통신 | Microsoft Docs"
-description: "안전한 종단 간 통신을 사용하려면 역방향 프록시를 구성합니다."
+title: Azure Service Fabric 역방향 프록시 보안 통신 | Microsoft Docs
+description: 안전한 종단 간 통신을 사용하려면 역방향 프록시를 구성합니다.
 services: service-fabric
 documentationcenter: .net
 author: kavyako
 manager: vipulm
-ms.assetid: 
+ms.assetid: ''
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: required
-ms.date: 05/09/2017
+ms.date: 08/10/2017
 ms.author: kavyako
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a30a90682948b657fb31dd14101172282988cbf0
-ms.openlocfilehash: 89102e8b7bc01768742ed3e5e2bd8a9fd6c62ee8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/25/2017
-
-
+ms.openlocfilehash: 237a72fd282b29d3032675ccf3fb350f8db59ef7
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="connect-to-a-secure-service-with-the-reverse-proxy"></a>역방향 프록시를 사용하여 보안 서비스 연결
 
@@ -153,8 +151,7 @@ ApplicationGateway/Http 요소의 parameters 섹션에서 값이 **None**인 **A
 이 구성 항목 목록에 서버 인증서의 지문이 있으면 역방향 프록시가 SSL 연결에 성공합니다. 그렇지 않으면 연결을 종료하고 502(잘못된 게이트웨이)와 함께 클라이언트의 요청에 실패합니다. HTTP 상태 줄에 "잘못된 SSL 인증서"라는 구문이 포함됩니다.
 
 ## <a name="endpoint-selection-logic-when-services-expose-secure-as-well-as-unsecured-endpoints"></a>서비스가 보안 끝점과 비보안 끝점을 노출할 때 끝점 선택 논리
-Service Fabric은 서비스에 대한 다중 끝점 구성을 지원합니다. 
-          [서비스 매니페스트에서 리소스 지정](service-fabric-service-manifest-resources.md)을 참조하세요.
+Service Fabric은 서비스에 대한 다중 끝점 구성을 지원합니다. [서비스 매니페스트에서 리소스 지정](service-fabric-service-manifest-resources.md)을 참조하세요.
 
 역방향 프록시는 **ListenerName** 쿼리 매개 변수를 기반으로 요청을 전달할 끝점 중 하나를 선택합니다. 이 값이 지정되지 않은 경우 끝점 목록에서 아무 끝점이나 선택할 수 있습니다. 이제 HTTP 또는 HTTPS 끝점을 선택할 수 있습니다. 역방향 프록시가 “보안 전용 모드”로 작동하게 하려는 시나리오/요구 사항이 있을 수 있습니다. 즉, 보안 역방향 프록시가 비보안 끝점으로 요청을 전달하지 않도록 하고 싶습니다. 이렇게 하려면 ApplicationGateway/Http 요소의 parameters 섹션에서 값이 **true**인 **SecureOnlyMode** 구성 항목을 지정합니다.   
 
@@ -199,4 +196,3 @@ SSL 종료는 역방향 프록시에서 발생하며 모든 클라이언트 인�
 * [Reliable Services 원격을 사용하여 원격 프로시저 호출](service-fabric-reliable-services-communication-remoting.md)
 * [Reliable Services에서 OWIN을 사용하는 Web API](service-fabric-reliable-services-communication-webapi.md)
 * [클러스터 인증서 관리](service-fabric-cluster-security-update-certs-azure.md)
-

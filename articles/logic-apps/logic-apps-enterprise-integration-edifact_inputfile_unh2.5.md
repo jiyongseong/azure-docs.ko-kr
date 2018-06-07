@@ -14,13 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/27/2017
 ms.author: LADocs; padmavc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f6006d5e83ad74f386ca23fe52879bfbc9394c0f
-ms.openlocfilehash: 90c9b65062acbe78196e220ba167997d44cdce90
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/03/2017
-
-
+ms.openlocfilehash: 62ad8183cc6e9f56255b2729a04ee7710d00a21a
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="how-to-handle-edifact-documents-having-unh25-segment"></a>UNH2.5 세그먼트를 포함하는 EDIFACT 문서를 처리하는 방법
 EDIFACT 문서에 UNH2.5가 표시되면 스키마 조회에 사용되고 있는 것입니다. 

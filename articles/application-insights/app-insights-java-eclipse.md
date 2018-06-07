@@ -1,9 +1,9 @@
 ---
-title: "Eclipse에서 Java를 사용하여 Application Insights 시작하기 | Microsoft 문서"
-description: "Application Insights를 사용하여 성능 및 사용량 모니터링을 Java 웹 사이트에 추가하기 위해 Eclipse 플러그인을 사용합니다."
+title: Eclipse에서 Java를 사용하여 Application Insights 시작하기 | Microsoft 문서
+description: Application Insights를 사용하여 성능 및 사용량 모니터링을 Java 웹 사이트에 추가하기 위해 Eclipse 플러그인을 사용합니다.
 services: application-insights
 documentationcenter: java
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: e88c9f53-cd90-4abc-b097-1f170937908e
 ms.service: application-insights
@@ -12,13 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 12/12/2016
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0c4554d6289fb0050998765485d965d1fbc6ab3e
-ms.openlocfilehash: 8922c65a1755343e19072a0594b800838a5e1cf9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/13/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: 3cddfb918f98dfd41e84a6cc5473df6e26d1a482
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="get-started-with-application-insights-with-java-in-eclipse"></a>Eclipse에서 Java를 사용하여 Application Insights 시작하기
 Application Insights SDK가 Java 웹 응용 프로그램에서 원격 분석을 전송하므로 사용량 및 성능을 분석할 수 있습니다. Application Insights용 Eclipse 플러그인이 프로젝트에 SDK를 자동으로 설치하므로 기본 원격 분석을 이용할 수 있을 뿐 아니라 사용자 지정 원격 분석 작성에 사용할 수 있습니다.   
@@ -29,7 +28,7 @@ Application Insights SDK가 Java 웹 응용 프로그램에서 원격 분석을 
 
 필요한 사항:
 
-* Oracle JRE 1.6 이상
+* JRE 1.7 또는 1.8
 * [Microsoft Azure](https://azure.microsoft.com/)구독.
 * [Java EE Developers용 Eclipse IDE](http://www.eclipse.org/downloads/), Indigo 이상.
 * Windows 7 이상 또는 Windows Server 2008 이상
@@ -40,7 +39,7 @@ Application Insights SDK가 Java 웹 응용 프로그램에서 원격 분석을 
 1. Eclipse에서 도움말, 새 소프트웨어 설치를 클릭합니다.
 
     ![도움말, 새 소프트웨어 설치](./media/app-insights-java-eclipse/0-plugin.png)
-2. SDK는 http://dl.microsoft.com/eclipse의 Azure 도구 키트에 있습니다.
+2. SDK는 Azure 도구 키트의 http://dl.microsoft.com/eclipse에 있습니다.
 3. **모든 업데이트 사이트 문의...**
 
     ![Application Insights SDK의 경우 모든 업데이트 사이트 문의 지우기](./media/app-insights-java-eclipse/1-plugin.png)
@@ -48,7 +47,7 @@ Application Insights SDK가 Java 웹 응용 프로그램에서 원격 분석을 
 각 Java 프로젝트에 대한 나머지 단계를 따릅니다.
 
 ## <a name="create-an-application-insights-resource-in-azure"></a>Azure에서 Application Insights 리소스 만들기
-1. [Azure 포털](https://portal.azure.com)에 로그인합니다.
+1. [Azure Portal](https://portal.azure.com)에 로그인합니다.
 2. 새 Application Insights 리소스를 만듭니다. Java 웹 응용 프로그램에 대한 응용 프로그램 종류를 설정합니다.  
 
     ![+를 클릭하고 Application Insights 선택](./media/app-insights-java-eclipse/01-create.png)  
@@ -148,7 +147,7 @@ HTML 파일의 헤드에 있는 코드 조각을 삽입 합니다.
 ### <a name="collect-additional-performance-counters"></a>추가 성능 카운터 수집
 추가 성능 카운터가 수집되도록 지정할 수 있습니다.
 
-#### <a name="jmx-counters-exposed-by-the-java-virtual-machine"></a>JMX 카운터(Java 가상 컴퓨터를 통해 노출됨)
+#### <a name="jmx-counters-exposed-by-the-java-virtual-machine"></a>JMX 카운터(Java Virtual Machine을 통해 노출됨)
 
 ```XML
 
@@ -236,4 +235,3 @@ Java 웹 응용 프로그램에 몇 줄의 코드를 삽입하여 이를 사용�
 [metrics]: app-insights-metrics-explorer.md
 [track]: app-insights-api-custom-events-metrics.md
 [usage]: app-insights-javascript.md
-

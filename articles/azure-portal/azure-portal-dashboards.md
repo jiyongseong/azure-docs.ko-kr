@@ -1,32 +1,27 @@
 ---
-title: "Azure Portal 대시보드 | Microsoft Docs"
-description: "이 문서에서는 Azure Portal에서 대시보드를 만들고 편집하는 방법을 설명합니다."
+title: Azure Portal 대시보드 만들기 및 공유 | Microsoft Docs
+description: 이 문서에서는 Azure Portal에서 대시보드를 만들고 편집하는 방법을 설명합니다.
 services: azure-portal
-documentationcenter: 
+documentationcenter: ''
 author: sewatson
-manager: timlt
+manager: doubeby
 editor: tysonn
 ms.assetid: ff422f36-47d2-409b-8a19-02e24b03ffe7
-ms.service: multiple
+ms.service: azure-portal
 ms.devlang: NA
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: na
 ms.date: 09/06/2016
 ms.author: sewatson
-translationtype: Human Translation
-ms.sourcegitcommit: ebc5dbf790ca6012cfe9a7ea9ccee9fdacb46ffd
-ms.openlocfilehash: dc5b6f194a7e34d5061b9fa2e4a6123f54f6c14a
-
-
+ms.openlocfilehash: 3bdeb3255c8dc97d2867eca0b9cdec8223d31b21
+ms.sourcegitcommit: d78bcecd983ca2a7473fff23371c8cfed0d89627
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/14/2018
 ---
-# <a name="creating-and-sharing-dashboards-in-the-azure-portal"></a>Azure Portal에서 대시보드 만들기 및 공유
-여러 개의 대시보드를 만들고 Azure 구독에 액세스할 수 있는 다른 사용자와 공유할 수 있습니다.  이 게시물에서는 대시보드 만들기/편집, 게시 및 액세스 관리의 기본 사항을 알아봅니다.
-
-## <a name="customizing-dashboards-versus-blades"></a>대시보드 및 블레이드 사용자 지정
-몇 달 전에 대시보드를 출시했기 때문에 블레이드사용자 지정이 꾸준히 감소하고 대시보드 사용자 지정이 급증했습니다. 이 강력한 사용 추세는 블레이드를 통한 대시보드의 사용자 지정을 선호한다는 것을 보여 줍니다. 해당 추세를 지원하기 위해 블레이드를 사용자 지정하는 기능을 제거하고 대시보드 기능을 향상시키는 데 주력할 예정입니다. 블레이드를 사용자 지정한 경우 사용자 지정은 곧 제거됩니다. 해당 사용자 지정을 유지하려면 사용자 지정된 타일을 대시보드에 고정합니다. 타일을 오른쪽 단추로 클릭하고 다음 이미지에 보이는 대로 **대시보드에 고정**을 선택합니다.
-
-![사용자 지정된 타일 저장](./media/azure-portal-dashboards/save-customization.png)
+# <a name="create-and-share-dashboards-in-the-azure-portal"></a>Azure Portal에서 대시보드 만들기 및 공유
+여러 개의 대시보드를 만들고 Azure 구독에 액세스할 수 있는 다른 사용자와 공유할 수 있습니다.  이 문서에서는 대시보드 만들기, 편집, 게시 및 액세스 관리의 기본 사항을 알아봅니다.
 
 ## <a name="create-a-dashboard"></a>대시보드 만들기
 대시보드를 만들려면 현재 대시보드 이름 옆에 있는 **새 대시보드** 단추를 선택합니다.  
@@ -80,7 +75,7 @@ Markdown 타일 및 대시보드에 고정된 리소스 그룹이 있으므로 �
 
 ![대시보드 공유](./media/azure-portal-dashboards/share-dashboard.png)
 
-게시하려는 대시보드에 대한 구독 및 리소스 그룹을 선택하라는 메시지가 표시됩니다. 에코시스템에 대시보드를 매끄럽게 통합하기 위해 공유 대시보드를 Azure 리소스로 구현했습니다(따라서 전자 메일 주소를 입력하여 공유할 수 없습니다).  포털에서 대부분 타일에 표시되는 정보에 대한 액세스는 [Azure 역할 기반 액세스 제어](../active-directory/role-based-access-control-configure.md)로 제어됩니다. 액세스 제어 관점에서 공유 대시보드는 가상 컴퓨터 또는 저장소 계정과 차이가 없습니다.  
+게시하려는 대시보드에 대한 구독 및 리소스 그룹을 선택하라는 메시지가 표시됩니다. 에코시스템에 대시보드를 매끄럽게 통합하기 위해 공유 대시보드를 Azure 리소스로 구현했습니다(따라서 전자 메일 주소를 입력하여 공유할 수 없습니다).  포털에서 대부분 타일에 표시되는 정보에 대한 액세스는 [Azure 역할 기반 Access Control](../role-based-access-control/role-assignments-portal.md)로 제어됩니다. 액세스 제어 관점에서 공유 대시보드는 가상 머신 또는 저장소 계정과 차이가 없습니다.  
 
 Azure 구독을 보유하고 구독의 **소유자**, **참여자** 또는 **읽기 권한자** 역할에 할당된 팀의 구성원이 있다고 가정해 보겠습니다.  소유자 또는 참여자인 사용자는 해당 구독 내에서 대시보드를 나열, 보기, 만들기, 수정 또는 삭제할 수 있습니다.  읽기 권한자인 사용자는 대시보드를 나열 및 볼 수 있지만 수정 또는 삭제할 수 없습니다.  읽기 권한자 액세스를 보유한 사용자는 공유 대시보드에 대한 로컬 편집을 만들 수 있지만 해당 변경 내용을 서버로 다시 게시할 수 없습니다.  그러나 사용하기 위해 대시보드의 개인 복사본을 만들 수 있습니다.  늘 그렇듯이 대시보드의 개별 타일은 해당하는 리소스에 따라 고유한 액세스 제어 규칙을 적용합니다.  
 
@@ -92,17 +87,11 @@ Azure 구독을 보유하고 구독의 **소유자**, **참여자** 또는 **읽
 
 ![리소스 그룹에 대시보드 게시](./media/azure-portal-dashboards/publish-to-resource-group.png)
 
-대시보드를 게시한 후에 **공유 + 액세스** 제어 창이 새로 고쳐지고 대시보드에 대한 사용자 액세스를 관리하는 링크를 포함하여 게시된 대시보드에 대한 정보를 보여 줍니다.  이 링크는 Azure 리소스에 대한 액세스를 관리하는 데 사용되는 표준 역할 기반 액세스 제어 블레이드를 시작합니다.  언제든지 **공유**를 선택하여 이 보기로 돌아올 수 있습니다.
+대시보드를 게시한 후에 **공유 + 액세스** 제어 창이 새로 고쳐지고 대시보드에 대한 사용자 액세스를 관리하는 링크를 포함하여 게시된 대시보드에 대한 정보를 보여 줍니다.  이 링크는 Azure 리소스에 대한 액세스를 관리하는 데 사용되는 표준 역할 기반 Access Control 블레이드를 시작합니다.  언제든지 **공유**를 선택하여 이 보기로 돌아올 수 있습니다.
 
 ![액세스 제어 관리](./media/azure-portal-dashboards/manage-access.png)
 
 ## <a name="next-steps"></a>다음 단계
 * 리소스를 관리하려면 [포털을 통한 Azure 리소스 관리](../azure-resource-manager/resource-group-portal.md)를 참조하세요.
 * 리소스를 배포하려면 [Resource Manager 템플릿 및 Azure Portal을 사용하여 리소스 배포](../azure-resource-manager/resource-group-template-deploy-portal.md)를 참조하세요.
-
-
-
-
-<!--HONumber=Dec16_HO4-->
-
 

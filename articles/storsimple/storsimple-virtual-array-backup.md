@@ -15,11 +15,11 @@ ms.workload: TBD
 ms.date: 02/27/2017
 ms.author: alkohli
 ms.custom: H1Hack27Feb2017
-translationtype: Human Translation
-ms.sourcegitcommit: ed759edbf4548bc0d6c041ca825ddb392430795b
 ms.openlocfilehash: c926f0c80ce56cac3106ad97ec3ec2e18a8e2cc6
-ms.lasthandoff: 03/01/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="back-up-shares-or-volumes-on-your-storsimple-virtual-array"></a>StorSimple 가상 배열에서 공유 또는 볼륨 백업
 
@@ -114,5 +114,4 @@ StorSimple 가상 배열에는 하루 중 지정된 시간(22:30)에 시작하�
 ## <a name="next-steps"></a>다음 단계
 
 [StorSimple 가상 배열 관리](storsimple-ova-web-ui-admin.md)에 대해 자세히 알아봅니다.
-
 

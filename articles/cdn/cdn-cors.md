@@ -1,11 +1,11 @@
 ---
-title: "CORS에서 Azure CDN 사용 | Microsoft Docs"
-description: "CORS(크로스-원본 자원 공유)와 함께 CDN(콘텐츠 배달 네트워크)을 사용하는 방법을 알아봅니다."
+title: CORS에서 Azure CDN 사용 | Microsoft Docs
+description: CORS(크로스-원본 자원 공유)와 함께 CDN(Content Delivery Network)을 사용하는 방법을 알아봅니다.
 services: cdn
-documentationcenter: 
+documentationcenter: ''
 author: zhangmanling
 manager: erikre
-editor: 
+editor: ''
 ms.assetid: 86740a96-4269-4060-aba3-a69f00e6f14e
 ms.service: cdn
 ms.workload: tbd
@@ -14,11 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: mazha
-translationtype: Human Translation
-ms.sourcegitcommit: 06bd0112eab46f3347dfb039a99641a37c2b0197
-ms.openlocfilehash: 7070397f6e69b21add75bad8220f0b8ebe36d266
-
-
+ms.openlocfilehash: f9429e88525e27c0b6bad29d1927d53d05dfbcc8
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="using-azure-cdn-with-cors"></a>CORS에서 Azure CDN 사용
 ## <a name="what-is-cors"></a>CORS의 정의
@@ -35,7 +35,7 @@ CORS 요청에는 *간단한 요청*과 *복잡한 요청*의 두 가지 유형�
 
 2. 서버는 다음으로 응답할 수 있습니다.
 
-   * 허용되는 원본 사이트를 나타내는 응답의 **Access-Control-Allow-Origin** 헤더 예:
+   * 허용되는 원본 사이트를 나타내는 응답의 **Access-Control-Allow-Origin** 헤더 예: 
 
      `Access-Control-Allow-Origin: https://www.contoso.com`
 
@@ -67,7 +67,7 @@ Azure CDN의 CORS는 **Access-Control-Allow-Origin** 헤더가 와일드카드(*
 
 요청의 [Origin](cdn-rules-engine.md) 헤더를 확인하는 **규칙을 만들어야** 합니다.  유효한 원본인 경우 규칙은 요청에 제공된 원본을 사용하여 **Access-Control-Allow-Origin** 헤더를 설정합니다.  **Origin** 헤더에 지정된 원본이 허용되지 않을 경우 규칙은 **Access-Control-Allow-Origin** 헤더를 생략하며 이로 인해 브라우저가 요청을 거부하게 됩니다. 
 
-규칙 엔진을 사용하여 이러한 작업을 수행하는 방법은 두 가지입니다.  두 경우 모두 파일 원본 서버의 **Access-Control-Allow-Origin** 헤더가 완전히 무시되고 CDN의 규칙 엔진이 허용되는 CORS 원본을 완전하게 관리합니다.
+규칙 엔진을 사용하여 이러한 작업을 수행하는 방법은 두 가지입니다. 두 경우 모두 파일 원본 서버의 **Access-Control-Allow-Origin** 헤더가 무시되고 CDN의 규칙 엔진이 허용되는 CORS 원본을 완전하게 관리합니다.
 
 #### <a name="one-regular-expression-with-all-valid-origins"></a>유효한 모든 원본을 포함하는 단일 정규식
 이 경우 허용하려는 모든 원본을 포함하는 정규식을 만듭니다. 
@@ -75,7 +75,7 @@ Azure CDN의 CORS는 **Access-Control-Allow-Origin** 헤더가 와일드카드(*
     https?:\/\/(www\.contoso\.com|contoso\.com|www\.microsoft\.com|microsoft.com\.com)$
 
 > [!TIP]
-> **Verizon의 Azure CDN** 은 [Perl 호환 정규식](http://pcre.org/) 을 정규식에 대한 엔진으로 사용합니다.  [Regular Expressions 101](https://regex101.com/) 과 같은 도구를 사용하여 정규식이 유효한지 검사할 수 있습니다.  "/" 문자는 정규식에서 유효하며 이스케이프할 필요가 없지만 일부 정규식 유효성 검사기에서는 이 문자의 이스케이프를 모범 사례로 간주하고 예상합니다.
+> **Verizon의 Azure CDN Premium**은 [Perl 호환 정규식](http://pcre.org/)를 정규식에 대한 엔진으로 사용합니다.  [Regular Expressions 101](https://regex101.com/) 과 같은 도구를 사용하여 정규식이 유효한지 검사할 수 있습니다.  "/" 문자는 정규식에서 유효하며 이스케이프할 필요가 없지만 일부 정규식 유효성 검사기에서는 이 문자의 이스케이프를 모범 사례로 간주하고 예상합니다.
 > 
 > 
 
@@ -93,12 +93,6 @@ Azure CDN의 CORS는 **Access-Control-Allow-Origin** 헤더가 와일드카드(*
 > 
 > 
 
-### <a name="azure-cdn-standard"></a>Azure CDN 표준
-Azure CDN 표준 프로필에서 와일드카드 원본을 사용하지 않고 여러 원본에 대해 허용되는 유일한 메커니즘은 [쿼리 문자열 캐싱](cdn-query-string.md)을 사용하는 것입니다.  CDN 끝점에 대해 쿼리 문자열 설정을 사용하도록 지정하고 허용된 각 도메인의 요청에 대해 고유한 쿼리 문자열을 사용해야 합니다. 이렇게 하면 CDN은 고유한 각 쿼리 문자열에 대해 별도의 개체를 캐싱합니다. 그렇지만 이 방법은 동일한 파일의 여러 복사본이 CDN에 캐시되므로 이상적이지 않습니다.  
-
-
-
-
-<!--HONumber=Jan17_HO4-->
-
+### <a name="azure-cdn-standard-profiles"></a>Azure CDN 표준 프로필
+Azure CDN 표준 프로필(**Microsoft의 Azure CDN 표준**, **Akamai의 Azure CDN 표준** 및 **Verizon의 Azure CDN 표준**)에서 와일드카드 원본을 사용하지 않고 여러 원본을 사용할 수 있도록 하는 유일한 메커니즘은 [쿼리 문자열 캐싱](cdn-query-string.md)을 사용하는 것입니다. CDN 끝점에 대해 쿼리 문자열 설정을 사용하도록 지정하고 허용된 각 도메인의 요청에 대해 고유한 쿼리 문자열을 사용하도록 설정합니다. 이렇게 하면 CDN은 고유한 각 쿼리 문자열에 대해 별도의 개체를 캐싱합니다. 그렇지만 이 방법은 동일한 파일의 여러 복사본이 CDN에 캐시되므로 이상적이지 않습니다.  
 

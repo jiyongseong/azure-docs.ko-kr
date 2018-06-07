@@ -1,26 +1,24 @@
 ---
-title: "데이터 저장소에 완료된 작업 및 태스크의 결과 또는 로그 유지 - Azure Batch | Microsoft Docs"
-description: "Batch 작업 및 태스크의 출력 데이터를 유지하기 위한 다양한 옵션을 알아봅니다. Azure Storage 또는 다른 데이터 저장소에 데이터를 유지할 수 있습니다."
+title: 데이터 저장소에 완료된 작업 및 태스크의 결과 또는 로그 유지 - Azure Batch | Microsoft Docs
+description: Batch 작업 및 태스크의 출력 데이터를 유지하기 위한 다양한 옵션을 알아봅니다. Azure Storage 또는 다른 데이터 저장소에 데이터를 유지할 수 있습니다.
 services: batch
-author: tamram
-manager: timlt
-editor: 
+author: dlepow
+manager: jeconnoc
+editor: ''
 ms.assetid: 16e12d0e-958c-46c2-a6b8-7843835d830e
 ms.service: batch
 ms.devlang: multiple
 ms.topic: article
-ms.tgt_pltfrm: vm-windows
+ms.tgt_pltfrm: ''
 ms.workload: big-compute
 ms.date: 06/16/2017
-ms.author: tamram
+ms.author: danlep
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ff2fb126905d2a68c5888514262212010e108a3d
-ms.openlocfilehash: 3ca93e823f02b1483ed290cf89de191937d1e2c3
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/17/2017
-
-
+ms.openlocfilehash: cb8b1ca3514e27221e95cb2def823c8f89d151e5
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/20/2018
 ---
 # <a name="persist-job-and-task-output"></a>작업 및 태스크 출력 유지
 
@@ -49,13 +47,13 @@ Batch는 Azure Storage에서 태스크 출력 파일의 이름을 지정하기 �
 
 Batch 솔루션을 디자인할 때 작업 및 태스크 출력과 관련된 다음 요소를 고려해 보세요.
 
-* **계산 노드 수명**: 계산 노드는 특히 자동 크기 조정 가능한 풀에서 일시적인 경우가 많습니다. 노드가 존재하는 동안과 태스크에 대해 설정한 파일 보존 기간 내에서만 노드에서 실행되는 태스크의 출력을 사용할 수 있습니다. 태스크가 완료된 후 필요할 수 있는 출력을 태스크에서 생성하는 경우 태스크는 출력 파일을 Azure Storage와 같은 영구 저장소에 업로드해야 합니다.
+* **Compute 노드 수명**: Compute 노드는 특히 자동 크기 조정 가능한 풀에서 일시적인 경우가 많습니다. 노드가 존재하는 동안과 태스크에 대해 설정한 파일 보존 기간 내에서만 노드에서 실행되는 태스크의 출력을 사용할 수 있습니다. 태스크가 완료된 후 필요할 수 있는 출력을 태스크에서 생성하는 경우 태스크는 출력 파일을 Azure Storage와 같은 영구 저장소에 업로드해야 합니다.
 
 * **출력 저장소**: Azure Storage는 태스크 출력을 위한 데이터 저장소로 권장되지만 모든 영구 저장소를 사용할 수 있습니다. Azure Storage에 태스크 출력을 쓰는 것은 Batch 서비스 API에 통합되어 있습니다. 다른 형태의 영구 저장소를 사용하는 경우 태스크 출력을 유지하기 위해 응용 프로그램 논리를 직접 작성해야 합니다.   
 
 * **출력 검색**: 태스크 출력을 유지하고 있는 경우 풀의 계산 노드에서 태스크 출력을 직접 검색하거나 Azure Storage 또는 다른 데이터 저장소에서 태스크 출력을 검색할 수 있습니다. 태스크의 출력을 계산 노드에서 직접 검색하려면 파일 이름과 노드에서의 해당 출력 위치가 필요합니다. Azure Storage에 태스크 출력을 유지하는 경우 Azure Storage SDK를 사용하여 출력 파일을 다운로드하려면 Azure Storage의 파일에 대한 전체 경로가 필요합니다.
 
-* **출력 보기**: Azure Portal에서 배치 태스크로 이동하여 **노드의 파일**을 선택한 경우 관심 있는 출력 파일만 표시되는 것이 아니라 태스크와 연관된 모든 파일이 표시됩니다. 계산 노드의 파일은 노드가 존재하는 동안 해당 태스크에 대해 설정한 파일 보존 기간 내에서만 사용할 수 있습니다. Azure Storage에 유지한 태스크 출력을 보려면 Azure Portal 또는 Azure Storage 클라이언트 응용 프로그램(예: [Azure Storage 탐색기][storage_explorer])을 사용할 수 있습니다. 포털이나 다른 도구를 사용하여 Azure Storage의 출력 데이터를 보려면 파일의 위치를 파악하여 직접 이동해야 합니다.
+* **출력 보기**: Azure Portal에서 Batch 태스크로 이동하여 **노드의 파일**을 선택한 경우 관심 있는 출력 파일만 표시되는 것이 아니라 태스크와 연관된 모든 파일이 표시됩니다. 계산 노드의 파일은 노드가 존재하는 동안 해당 태스크에 대해 설정한 파일 보존 기간 내에서만 사용할 수 있습니다. Azure Storage에 유지한 태스크 출력을 보려면 Azure Portal 또는 Azure Storage 클라이언트 응용 프로그램(예: [Azure Storage 탐색기][storage_explorer])을 사용할 수 있습니다. 포털이나 다른 도구를 사용하여 Azure Storage의 출력 데이터를 보려면 파일의 위치를 파악하여 직접 이동해야 합니다.
 
 ## <a name="options-for-persisting-output"></a>출력 유지 옵션
 
@@ -96,7 +94,7 @@ Batch 서비스 API를 사용하여 태스크 출력을 유지하는 방법에 �
 다음과 같은 경우에는 .NET용 Batch 파일 규칙 라이브러리를 사용하여 태스크 출력을 유지할 수 있습니다.
 
 - 태스크가 계속 실행되는 동안 Azure Storage로 데이터를 스트리밍하려고 합니다.
-- 클라우드 서비스 구성 또는 가상 컴퓨터 구성으로 만든 풀에서 데이터를 유지하려고 합니다.
+- 클라우드 서비스 구성 또는 가상 머신 구성으로 만든 풀에서 데이터를 유지하려고 합니다.
 - 작업의 클라이언트 응용 프로그램 또는 다른 태스크에서 ID별 또는 용도별로 태스크 출력 파일을 찾고 다운로드해야 합니다. 
 - 초기 결과의 검사점 확인(check-pointing) 또는 초기 업로드를 수행하려고 합니다.
 - Azure Portal에서 태스크 출력을 확인하려고 합니다.
@@ -128,4 +126,3 @@ GitHub의 [PersistOutputs][github_persistoutputs] 샘플 프로젝트는 .NET용
 [nuget_package]: https://www.nuget.org/packages/Microsoft.Azure.Batch.Conventions.Files
 [portal]: https://portal.azure.com
 [storage_explorer]: http://storageexplorer.com/
-

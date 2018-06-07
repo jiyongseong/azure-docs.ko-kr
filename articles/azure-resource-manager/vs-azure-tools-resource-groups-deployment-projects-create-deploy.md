@@ -1,6 +1,6 @@
 ---
-title: "Visual Studio Azure 리소스 그룹 프로젝트 | Microsoft Docs"
-description: "Visual Studio를 사용하여 Azure 리소스 그룹 프로젝트를 만들고 Azure에 리소스를 배포합니다."
+title: Visual Studio Azure 리소스 그룹 프로젝트 | Microsoft Docs
+description: Visual Studio를 사용하여 Azure 리소스 그룹 프로젝트를 만들고 Azure에 리소스를 배포합니다.
 services: azure-resource-manager
 documentationcenter: na
 author: tfitzmac
@@ -9,31 +9,31 @@ editor: tysonn
 ms.assetid: 4bd084c8-0842-4a10-8460-080c6a085bec
 ms.service: azure-resource-manager
 ms.devlang: multiple
-ms.topic: get-started-article
+ms.topic: tutorial
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 07/10/2017
+ms.date: 04/09/2018
 ms.author: tomfitz
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c1cd1450d5921cf51f720017b746ff9498e85537
-ms.openlocfilehash: 14fbfbc5abd6d95744832d9b39e377bbffe652ac
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/14/2017
-
+ms.openlocfilehash: bd2869b35d92ea92261223131476d7cc8eb854eb
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34360107"
 ---
 # <a name="creating-and-deploying-azure-resource-groups-through-visual-studio"></a>Visual Studio를 통해 Azure 리소스 그룹 만들기 및 배포
-Visual Studio 및 [Azure SDK](https://azure.microsoft.com/downloads/)를 사용하여 Azure로 인프라 및 코드를 배포하는 프로젝트를 만들 수 있습니다. 예를 들어 앱에 대한 웹 호스트, 웹 사이트 및 데이터베이스를 정의하고 코드와 함께 해당 인프라를 배포할 수 있습니다. 또는 가상 컴퓨터, 가상 네트워크 및 저장소 계정을 정의하고 가상 컴퓨터에서 실행되는 스크립트와 함께 해당 인프라를 배포할 수 있습니다. **Azure 리소스 그룹** 배포 프로젝트는 하나의 반복 작업에 필요한 모든 리소스를 배포할 수 있습니다. 리소스 배포 및 관리에 대한 자세한 내용은 [Azure 리소스 관리자 개요](resource-group-overview.md)를 참조하세요.
+Visual Studio 및 [Azure SDK](https://azure.microsoft.com/downloads/)를 사용하여 Azure로 인프라 및 코드를 배포하는 프로젝트를 만들 수 있습니다. 예를 들어 앱에 대한 웹 호스트, 웹 사이트 및 데이터베이스를 정의하고 코드와 함께 해당 인프라를 배포할 수 있습니다. 또는 Virtual Machine, Virtual Network 및 Storage 계정을 정의하고 Virtual Machine에서 실행되는 스크립트와 함께 해당 인프라를 배포할 수 있습니다. **Azure 리소스 그룹** 배포 프로젝트는 하나의 반복 작업에 필요한 모든 리소스를 배포할 수 있습니다. 리소스 배포 및 관리에 대한 자세한 내용은 [Azure 리소스 관리자 개요](resource-group-overview.md)를 참조하세요.
 
 Azure 리소스 그룹 프로젝트는 Azure에 배포한 리소스를 정의하는 Azure Resource Manager JSON 템플릿을 포함합니다. 리소스 관리자 템플릿의 요소에 대한 자세한 내용은 [Azure 리소스 관리자 템플릿 작성](resource-group-authoring-templates.md)을 참조하세요. Visual Studio는 이러한 템플릿을 편집할 수 있도록 하고 템플릿으로 작업을 간소화하는 도구를 제공합니다.
 
-이 문서에서는 웹앱 및 SQL Database를 배포합니다. 그러나 모든 종류의 리소스에 대해서도 거의 동일한 단계를 거칩니다. 가상 컴퓨터와 관련된 리소스를 손쉽게 배포할 수 있습니다. Visual Studio는 일반 시나리오를 배포하기 위한 다양한 서로 다른 시작 템플릿을 제공합니다.
+이 문서에서는 웹앱 및 SQL Database를 배포합니다. 그러나 모든 종류의 리소스에 대해서도 거의 동일한 단계를 거칩니다. Virtual Machine과 관련된 리소스를 손쉽게 배포할 수 있습니다. Visual Studio는 일반 시나리오를 배포하기 위한 다양한 서로 다른 시작 템플릿을 제공합니다.
 
 이 문서에서는 Visual Studio 2017을 보여 줍니다. Visual Studio 2015 업데이트 2 및 Microsoft Azure SDK for .NET 2.9 또는 Azure SDK 2.9와 함께 Visual Studio 2013을 사용하는 경우 환경은 대부분 동일합니다. Azure SDK 2.6 이상의 버전을 사용할 수 있지만 사용자 인터페이스 환경이 이 문서에 표시된 것과 다를 수 있습니다. 이 단계를 시작하기 전에 최신 버전의 [Azure SDK](https://azure.microsoft.com/downloads/) 를 설치하는 것이 좋습니다. 
 
 ## <a name="create-azure-resource-group-project"></a>Azure 리소스 그룹 프로젝트 만들기
 이 절차에서 **웹앱 + SQL** 템플릿으로 Azure 리소스 그룹 프로젝트를 만듭니다.
 
-1. Visual Studio에서 **파일**, **새 프로젝트**를 선택하고 **C#** 또는 **Visual Basic**을 선택합니다. 그런 다음 **클라우드**, **Azure 리소스 그룹** 프로젝트를 차례로 선택합니다.
+1. Visual Studio에서 **파일**, **새 프로젝트**를 선택하고, **C#** 또는 **Visual Basic**을 선택합니다. (어떤 언어를 선택하든 이러한 프로젝트에는 JSON 및 PowerShell 콘텐츠만 들어 있어 나중 단계에 영향을 미치지 않습니다.) 그런 다음 **클라우드**, **Azure 리소스 그룹** 프로젝트를 차례로 선택합니다.
    
     ![Cloud Deployment 프로젝트](./media/vs-azure-tools-resource-groups-deployment-projects-create-deploy/create-project.png)
 2. Azure 리소스 관리자에 배포하려는 템플릿을 선택합니다. 배포하려는 프로젝트의 유형에 따라 다양한 옵션이 있습니다. 이 문서의 경우 **웹앱 + SQL** 템플릿을 선택합니다.
@@ -79,7 +79,7 @@ JSON 개요 창의 맨 위에 있는 **리소스 추가** 버튼을 선택하거
 
 ![리소스 추가](./media/vs-azure-tools-resource-groups-deployment-projects-create-deploy/add-resource.png)
 
-이 자습서의 경우 **저장소 계정** 을 선택하고 이름을 지정합니다. 11개 미만의 문자이며 숫자 및 소문자만을 포함하는 이름을 제공합니다.
+이 자습서의 경우 **Storage 계정** 을 선택하고 이름을 지정합니다. 11개 미만의 문자이며 숫자 및 소문자만을 포함하는 이름을 제공합니다.
 
 ![저장소 추가](./media/vs-azure-tools-resource-groups-deployment-projects-create-deploy/add-storage.png)
 
@@ -149,7 +149,7 @@ Visual Studio는 또한 템플릿을 편집하는 경우 사용 가능한 속성
 5. **배포** 단추를 선택하여 Azure에 프로젝트를 배포합니다. Visual Studio 인스턴스의 외부에서 PowerShell 콘솔이 열립니다. 메시지가 표시되면 PowerShell 콘솔에 SQL Server 관리자 암호를 입력합니다. **PowerShell 콘솔은 다른 항목 뒤에 숨겨지거나 작업 표시줄에서 최소화될 수 있습니다.** 이 콘솔을 찾아서 암호를 제공합니다.
    
    > [!NOTE]
-   > Visual Studio에서는 Azure PowerShell cmdlet을 설치하도록 요청할 수 있습니다. 리소스 그룹을 성공적으로 배포하려면 Azure PowerShell cmdlet이 필요합니다. 메시지가 표시되면 설치합니다.
+   > Visual Studio에서는 Azure PowerShell cmdlet을 설치하도록 요청할 수 있습니다. 리소스 그룹을 성공적으로 배포하려면 Azure PowerShell cmdlet이 필요합니다. 메시지가 표시되면 설치합니다. 자세한 내용은 [Azure PowerShell 설치 및 구성](/powershell/azure/install-azurerm-ps)을 참조하세요.
    > 
    > 
 6. 배포는 몇 분 정도가 걸릴 수 있습니다. **출력** 창에 배포의 상태가 표시됩니다. 배포가 완료되면 마지막 메시지는 다음과 유사한 내용으로 성공적인 배포를 나타냅니다.
@@ -167,7 +167,7 @@ Visual Studio는 또한 템플릿을 편집하는 경우 사용 가능한 속성
     ![배포된 Azure 리소스 그룹](./media/vs-azure-tools-resource-groups-deployment-projects-create-deploy/redeploy.png)
 
 ## <a name="deploy-code-with-your-infrastructure"></a>인프라를 사용하여 코드 배포
-이 시점에서 앱에 대한 인프라를 배포했지만 프로젝트와 함께 배포된 실제 코드가 없습니다. 이 문서에서는 배포하는 동안 웹앱 및 SQL Database 테이블을 배포하는 방법을 보여 줍니다. 웹앱 대신 가상 컴퓨터를 배포하는 경우 배포의 일부로 컴퓨터에 일부 코드를 실행하려고 합니다. 웹앱에 대한 코드 배포 또는 가상 컴퓨터 설정을 위한 절차는 거의 동일합니다.
+이 시점에서 앱에 대한 인프라를 배포했지만 프로젝트와 함께 배포된 실제 코드가 없습니다. 이 문서에서는 배포하는 동안 웹앱 및 SQL Database 테이블을 배포하는 방법을 보여 줍니다. 웹앱 대신 Virtual Machine을 배포하는 경우 배포의 일부로 컴퓨터에 일부 코드를 실행하려고 합니다. 웹앱에 대한 코드 배포 또는 Virtual Machine 설정을 위한 절차는 거의 동일합니다.
 
 1. Visual Studio 솔루션에 프로젝트를 추가합니다. 솔루션을 마우스 오른쪽 단추로 클릭하고 **추가** > **새 프로젝트**를 선택합니다.
    
@@ -217,8 +217,103 @@ Visual Studio는 또한 템플릿을 편집하는 경우 사용 가능한 속성
     
      ![배포된 앱 표시](./media/vs-azure-tools-resource-groups-deployment-projects-create-deploy/show-deployed-app.png)
 
+## <a name="add-an-operations-dashboard-to-your-deployment"></a>배포에 작업 대시보드 추가
+이제 솔루션을 만들었으므로 최종 단계로 이동하고 작동해 볼 시간입니다. Visual Studio 인터페이스를 통해 사용할 수 있는 리소스로만 제한되지 않습니다. JSON에 리소스로 정의된 공유 대시보드의 사용을 활용할 수 있습니다. 템플릿을 편집하고 사용자 지정 리소스를 추가하여 이 작업을 수행합니다. 
+
+1. WebsiteSqlDeploy.json 파일을 열고 리소스 섹션을 닫기 전 저장소 계정 리소스 후에 다음 json 블록의 코드를 추가합니다.
+
+```json
+    ,{
+      "properties": {
+        "lenses": {
+          "0": {
+            "order": 0,
+            "parts": {
+              "0": {
+                "position": {
+                  "x": 0,
+                  "y": 0,
+                  "colSpan": 4,
+                  "rowSpan": 6
+                },
+                "metadata": {
+                  "inputs": [
+                    {
+                      "name": "resourceGroup",
+                      "isOptional": true
+                    },
+                    {
+                      "name": "id",
+                      "value": "[resourceGroup().id]",
+                      "isOptional": true
+                    }
+                  ],
+                  "type": "Extension/HubsExtension/PartType/ResourceGroupMapPinnedPart"
+                }
+              },
+              "1": {
+                "position": {
+                  "x": 4,
+                  "y": 0,
+                  "rowSpan": 3,
+                  "colSpan": 4
+                },
+                "metadata": {
+                  "inputs": [],
+                  "type": "Extension[azure]/HubsExtension/PartType/MarkdownPart",
+                  "settings": {
+                    "content": {
+                      "settings": {
+                        "content": "__Customizations__\n\nUse this dashboard to create and share the operational views of services critical to the application performing. To customize simply pin components to the dashboard and then publish when you're done. Others will see your changes when you publish and share the dashboard.\n\nYou can customize this text too. It supports plain text, __Markdown__, and even limited HTML like images <img width='10' src='https://portal.azure.com/favicon.ico'/> and <a href='https://azure.microsoft.com' target='_blank'>links</a> that open in a new tab.\n",
+                        "title": "Operations",
+                        "subtitle": "[resourceGroup().name]"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "metadata": {
+          "model": {
+            "timeRange": {
+              "value": {
+                "relative": {
+                  "duration": 24,
+                  "timeUnit": 1
+                }
+              },
+              "type": "MsPortalFx.Composition.Configuration.ValueTypes.TimeRange"
+            }
+          }
+        }
+      },
+      "apiVersion": "2015-08-01-preview",
+      "name": "[concat('ARM-',resourceGroup().name)]",
+      "type": "Microsoft.Portal/dashboards",
+      "location": "[resourceGroup().location]",
+      "tags": {
+        "hidden-title": "[concat('OPS-',resourceGroup().name)]"
+      }
+    }
+}
+```
+
+2. 리소스 그룹을 다시 배포하고 Azure Portal에서 대시보드를 볼 때 선택 항목의 목록에 추가한 공유 대시보드가 나타납니다. 
+
+    ![사용자 지정 대시보드](./media/vs-azure-tools-resource-groups-deployment-projects-create-deploy/view-custom-dashboards.png)
+
+
+
+   > [!NOTE] 
+   > RBAC 그룹을 사용하여 대시보드에 대한 액세스를 관리하고 배포된 후 리소스에 사용자 지정을 게시할 수 있습니다. 리소스 그룹을 다시 배포하면 템플릿의 기본값으로 다시 설정됩니다. 사용자 지정으로 템플릿을 업데이트하는 것이 좋습니다. 이를 수행하는 방법에 대한 도움말은 [Azure 대시보드를 프로그래밍 방식으로 만들기](../azure-portal/azure-portal-dashboards-create-programmatically.md)를 참조하세요.
+
+
+    ![사용자 지정 대시보드](./media/vs-azure-tools-resource-groups-deployment-projects-create-deploy/Ops-DemoSiteGroup-dashboard.png)
+    
+    
 ## <a name="next-steps"></a>다음 단계
 * 포털을 통한 리소스 관리에 대한 내용은 [Azure Portal을 사용하여 Azure 리소스 관리](resource-group-portal.md)를 참조하세요.
 * 템플릿에 대한 자세한 내용은 [Azure Resource Manager 템플릿 작성](resource-group-authoring-templates.md)을 참조하세요.
-
 

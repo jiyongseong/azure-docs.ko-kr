@@ -1,6 +1,6 @@
 ---
 title: "Linux VM 배포 클래식 문제 해결 | Microsoft Docs"
-description: "Azure에서 새 Linux 가상 컴퓨터를 만드는 경우 클래식 배포 문제 해결"
+description: "Azure에서 새 Linux 가상 머신을 만드는 경우 클래식 배포 문제 해결"
 services: virtual-machines-linux
 documentationcenter: 
 author: JiangChen79
@@ -12,30 +12,29 @@ ms.service: virtual-machines-linux
 ms.workload: na
 ms.tgt_pltfrm: vm-linux
 ms.devlang: na
-ms.topic: article
+ms.topic: troubleshooting
 ms.date: 09/06/2016
 ms.author: cjiang
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 35b8ae033425e16fb53cc3127f300e1fb919a2f2
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: 581fbaa477bd603fea5fdc0ef77c6ef7498b7897
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
-# <a name="troubleshoot-classic-deployment-issues-with-creating-a-new-linux-virtual-machine-in-azure"></a>Azure에서 새 Linux 가상 컴퓨터 생성 관련 클래식 배포 문제 해결
+# <a name="troubleshoot-classic-deployment-issues-with-creating-a-new-linux-virtual-machine-in-azure"></a>Azure에서 새 Linux 가상 머신 생성 관련 클래식 배포 문제 해결
 [!INCLUDE [virtual-machines-troubleshoot-deployment-new-vm-selectors](../../../../includes/virtual-machines-linux-troubleshoot-deployment-new-vm-selectors-include.md)]
 
 [!INCLUDE [virtual-machines-troubleshoot-deployment-new-vm-opening](../../../../includes/virtual-machines-troubleshoot-deployment-new-vm-opening-include.md)]
 
 > [!IMPORTANT] 
-> Azure에는 리소스를 만들고 작업하기 위한 [리소스 관리자 및 클래식](../../../resource-manager-deployment-model.md)라는 두 가지 배포 모델이 있습니다. 이 문서에서는 클래식 배포 모델 사용에 대해 설명합니다. 새로운 배포는 대부분 리소스 관리자 모델을 사용하는 것이 좋습니다. 이 문서의 Resource Manager 버전은 [여기](../troubleshoot-deployment-new-vm.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)를 참조하세요.
+> Azure에는 리소스를 만들고 작업하기 위한 [리소스 관리자 및 클래식](../../../resource-manager-deployment-model.md)이라는 두 가지 배포 모델이 있습니다. 이 문서에서는 클래식 배포 모델 사용에 대해 설명합니다. 새로운 배포는 대부분 리소스 관리자 모델을 사용하는 것이 좋습니다. 이 문서의 Resource Manager 버전은 [여기](../troubleshoot-deployment-new-vm.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)를 참조하세요.
 
 [!INCLUDE [support-disclaimer](../../../../includes/support-disclaimer.md)]
 
 ## <a name="collect-audit-logs"></a>감사 로그 수집
 문제 해결을 시작하려면 문제와 관련된 오류를 파악하기 위해 감사 로그를 수집합니다.
 
-Azure 포털에서 **찾아보기** > **가상 컴퓨터** > *Windows 가상 컴퓨터* > **설정** > **감사 로그**를 클릭합니다.
+Azure 포털에서 **찾아보기** > **가상 머신** > *Windows 가상 머신* > **설정** > **감사 로그**를 클릭합니다.
 
 [!INCLUDE [virtual-machines-troubleshoot-deployment-new-vm-issue1](../../../../includes/virtual-machines-troubleshoot-deployment-new-vm-issue1-include.md)]
 
@@ -51,7 +50,7 @@ Azure 포털에서 **찾아보기** > **가상 컴퓨터** > *Windows 가상 컴
 
 **해결 방법:**
 
-이 두 가지 오류를 모두 해결하려면, 온-프레미스에 있는 원본 VHD를, OS와 같은 설정(일반화/특수화)으로 업로드합니다. 일반화된 것으로 업로드하려면, 먼저 프로비전 해제를 실행해야 합니다. 자세한 내용은 [Linux 운영 체제를 포함한 가상 하드 디스크 만들기 및 업로드](create-upload-vhd.md) 를 참조하세요.
+이 두 가지 오류를 모두 해결하려면, 온-프레미스에 있는 원본 VHD를, OS와 같은 설정(일반화/특수화)으로 업로드합니다. 일반화된 것으로 업로드하려면, 먼저 프로비전 해제를 실행해야 합니다. 자세한 내용은 [Linux 운영 체제를 포함한 가상 하드 디스크 만들기 및 업로드](create-upload-vhd-classic.md) 를 참조하세요.
 
 **캡처 오류:**
 
@@ -61,7 +60,7 @@ Azure 포털에서 **찾아보기** > **가상 컴퓨터** > *Windows 가상 컴
 
 **해결 방법:**
 
-이 두 가지 오류를 모두 해결하려면, 현재 이미지를 포털에서 제거하고, OS와 같은 설정(일반화/특수화)으로 [현재 VHD에서 다시 캡처](capture-image.md) 합니다.
+이 두 가지 오류를 모두 해결하려면, 현재 이미지를 포털에서 제거하고, OS와 같은 설정(일반화/특수화)으로 [현재 VHD에서 다시 캡처](capture-image-classic.md) 합니다.
 
 ## <a name="issue-custom-gallery-marketplace-image-allocation-failure"></a>문제: 사용자 지정/ 갤러리/ 마켓플레이스 이미지; 할당 오류
 이 오류는 요청을 수용할 여유 공간이 없거나 요청되는 VM 크기를 지원할 수 없는 클러스터로 새 VM 요청이 전송된 상황에서 발생합니다. 동일한 클라우드 서비스에 일련의 다른 VM을 혼합하는 것은 불가능합니다. 따라서 클라우드 서비스에서 지원할 수 있는 것과 다른 크기의 VM을 새로 만들려고 하면, 계산 요청이 실패합니다.
@@ -90,6 +89,5 @@ Azure 포털에서 **찾아보기** > **가상 컴퓨터** > *Windows 가상 컴
 * [기존 가상 네트워크를 연결](https://azure.microsoft.com/blog/vnet-to-vnet-connecting-virtual-networks-in-azure-across-different-regions/) 합니다. [지역 가상 네트워크](https://azure.microsoft.com/blog/2014/05/14/regional-virtual-networks/)에 대한 자세한 내용을 참조하세요. 또는 [선호도 그룹 기반 가상 네트워크를 지역 가상 네트워크로 마이그레이션](https://azure.microsoft.com/blog/2014/11/26/migrating-existing-services-to-regional-scope/)한 다음 새 VM을 만들 수 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
-중지된 Linux VM을 시작하거나 Azure에서 기존 Linux VM의 크기를 조정할 때 문제가 발생하면 [Azure의 기존 Linux 가상 컴퓨터 재시작 또는 크기 조정 관련 클래식 배포 문제 해결](restart-resize-error-troubleshooting.md)을 참조하세요.
-
+중지된 Linux VM을 시작하거나 Azure에서 기존 Linux VM의 크기를 조정할 때 문제가 발생하면 [Azure의 기존 Linux Virtual Machine 재시작 또는 크기 조정 관련 클래식 배포 문제 해결](restart-resize-error-troubleshooting.md)을 참조하세요.
 

@@ -1,6 +1,6 @@
 ---
 title: "Azure에서 Windows VM 배포 문제 해결 | Microsoft Docs"
-description: "Azure에서 새 Windows 가상 컴퓨터 생성 시 Resource Manager 배포 문제 해결"
+description: "Azure에서 새 Windows 가상 머신 생성 시 Resource Manager 배포 문제 해결"
 services: virtual-machines-windows, azure-resource-manager
 documentationcenter: 
 author: JiangChen79
@@ -13,16 +13,14 @@ ms.workload: na
 ms.tgt_pltfrm: vm-windows
 ms.devlang: na
 ms.topic: article
-ms.date: 06/26/2017
+ms.date: 11/03/2017
 ms.author: cjiang
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: 7453a6525b053e73fd8c935d578ffa9604d6e021
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
-
+ms.openlocfilehash: fff29f6cfed4989386ca5bbd12184dce525add76
+ms.sourcegitcommit: 3f33787645e890ff3b73c4b3a28d90d5f814e46c
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/03/2018
 ---
 # <a name="troubleshoot-deployment-issues-when-creating-a-new-windows-vm-in-azure"></a>Azure에서 새 Windows VM 생성 시 배포 문제 해결
 [!INCLUDE [virtual-machines-troubleshoot-deployment-new-vm-opening](../../../includes/virtual-machines-troubleshoot-deployment-new-vm-opening-include.md)]
@@ -65,7 +63,7 @@ VM 배포 문제 및 질문은 [Azure에서 Windows 가상 컴퓨터 배포 문�
 
 **해결 방법**
 
-이 두 가지 오류를 모두 해결하려면, 현재 이미지를 포털에서 제거하고, OS와 같은 설정(일반화/특수화)으로 [현재 VHD에서 다시 캡처](vhd-copy.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)합니다.
+이 두 가지 오류를 모두 해결하려면, 현재 이미지를 포털에서 제거하고, OS와 같은 설정(일반화/특수화)으로 [현재 VHD에서 다시 캡처](create-vm-specialized.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)합니다.
 
 ## <a name="issue-customgallerymarketplace-image-allocation-failure"></a>문제: 사용자 지정/갤러리/마켓플레이스 이미지, 할당 오류
 이 오류는 요청되는 VM 크기를 지원할 수 없거나 요청을 수용할 여유 공간이 없는 클러스터에 새 VM 요청이 고정된 상황에서 발생합니다.
@@ -77,7 +75,7 @@ VM 배포 문제 및 질문은 [Azure에서 Windows 가상 컴퓨터 배포 문�
 * 더 작은 VM 크기를 사용하여 요청을 다시 시도합니다.
 * 요청한 VM의 크기를 변경할 수 없으면:
   * 가용성 집합의 VM을 모두 중지합니다.
-    **리소스 그룹** > *사용자의 리소스 그룹* > **리소스** > *사용자의 가용성 집합* > **가상 컴퓨터** > *사용자의 가상 컴퓨터* > **중지**를 클릭합니다.
+    **리소스 그룹** > *사용자의 리소스 그룹* > **리소스** > *사용자의 가용성 집합* > **Virtual Machines** > *사용자의 가상 머신* > **중지**를 클릭합니다.
   * VM을 모두 중지한 후에, 원하는 크기로 VM을 새로 만듭니다.
   * 먼저 VM을 시작한 후에 중지된 각각의 VM을 선택하고 **시작**을 클릭합니다.
 
@@ -91,6 +89,5 @@ VM 배포 문제 및 질문은 [Azure에서 Windows 가상 컴퓨터 배포 문�
   * 새 VM을 동일한 가상 네트워크에 추가합니다.
 
 ## <a name="next-steps"></a>다음 단계
-중지된 Windows VM을 시작하거나 Azure에서 기존 Windows VM의 크기를 조정할 때 문제가 발생하면 [Azure의 기존 Windows 가상 컴퓨터 재시작 또는 크기 조정 관련 Resource Manager 배포 문제 해결](restart-resize-error-troubleshooting.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)을 참조하세요.
-
+중지된 Windows VM을 시작하거나 Azure에서 기존 Windows VM의 크기를 조정할 때 문제가 발생하면 [Azure의 기존 Windows Virtual Machine 재시작 또는 크기 조정 관련 Resource Manager 배포 문제 해결](restart-resize-error-troubleshooting.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)을 참조하세요.
 

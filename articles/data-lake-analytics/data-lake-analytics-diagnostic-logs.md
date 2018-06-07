@@ -1,25 +1,23 @@
 ---
-title: "Azure Data Lake Analytics에 대한 진단 로그 보기 | Microsoft Docs"
-description: "Azure Data Lake Analytics에 대한 진단 로그를 설정하고 액세스하는 방법을 이해합니다. "
+title: Azure Data Lake Analytics에 대한 진단 로그 보기 | Microsoft Docs
+description: 'Azure Data Lake Analytics에 대한 진단 로그를 설정하고 액세스하는 방법을 이해합니다. '
 services: data-lake-analytics
-documentationcenter: 
-author: Blackmist
-manager: jhubbard
-editor: cgronlun
+documentationcenter: ''
+author: jasonwhowell
+ms.author: jasonh
+manager: kfile
 ms.assetid: cf5633d4-bc43-444e-90fc-f90fbd0b7935
 ms.service: data-lake-analytics
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: big-data
-ms.date: 07/31/2017
-ms.author: larryfr
+ms.date: 02/12/2018
+ms.openlocfilehash: efec1e00e9c2da519028f7e6ff094a0f0876df79
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
 ms.translationtype: HT
-ms.sourcegitcommit: 7bf5d568e59ead343ff2c976b310de79a998673b
-ms.openlocfilehash: f5fe6db423f1f2faeaf51e25be9b8f5b551e2a16
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/01/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="accessing-diagnostic-logs-for-azure-data-lake-analytics"></a>Azure Data Lake Analytics에 대한 진단 로그에 액세스
 
@@ -37,11 +35,9 @@ ms.lasthandoff: 08/01/2017
 
     ![진단을 켜서 감사 및 요청 로그 수집](./media/data-lake-analytics-diagnostic-logs/turn-on-logging.png)
 
-3. __진단 설정__에서 상태를 __켜기__로 설정하고 로깅 옵션을 선택합니다.
+3. __진단 설정__에서 이 로깅 구성에 __이름__을 입력하고 로깅 옵션을 선택합니다.
 
     ![진단을 켜서 감사 및 요청 로그 수집](./media/data-lake-analytics-diagnostic-logs/enable-diagnostic-logs.png "진단 로그 활성화")
-
-   * 진단 로깅을 사용하려면 **상태**를 **켜기**로 설정합니다.
 
    * 세 가지 방법으로 데이터를 저장/처리하도록 선택할 수 있습니다.
 
@@ -54,39 +50,19 @@ ms.lasthandoff: 08/01/2017
 
    * __저장소 계정에 보관__의 경우 데이터를 보관할 일 수를 지정합니다.
 
-   * __저장__을 클릭합니다.
+   * __Save__를 클릭합니다.
 
         > [!NOTE]
         > __저장__ 단추를 클릭하기 전에 __저장소 계정에 보관__, __이벤트 허브로 스트리밍__ 또는 __Log Analytics로 보내기__를 선택해야 합니다.
 
-진단 설정을 사용하도록 설정했으면 __진단 로그__ 블레이드로 돌아가서 로그를 볼 수 있습니다.
+### <a name="use-the-azure-storage-account-that-contains-log-data"></a>로그 데이터를 포함하는 Azure Storage 계정 사용
 
-## <a name="view-logs"></a>로그 보기
-
-### <a name="use-the-data-lake-analytics-view"></a>Data Lake Analytics 보기 사용
-
-1. Data Lake Analytics 계정 블레이드의 **모니터링** 아래에서 **진단 로그**를 선택한 다음 로그를 표시할 항목을 선택합니다.
-
-    ![진단 로깅 보기](./media/data-lake-analytics-diagnostic-logs/view-diagnostic-logs.png "진단 로그 보기")
-
-2. 로그는 **감사 로그**와 **요청 로그**로 분류됩니다.
-
-    ![로그 항목](./media/data-lake-analytics-diagnostic-logs/diagnostic-log-entries.png)
-
-   * 요청 로그는 Data Lake Analytics 계정에 대한 모든 API 요청을 캡처합니다.
-   * 감사 로그는 요청 로그와 비슷하지만 작업의 훨씬 더 세부적인 분석 결과를 제공합니다. 예를 들어, 요청 로그에서 단일 업로드 API 호출은 감사 로그에서 여러 "추가" 작업을 발생시킬 수 있습니다.
-
-3. 로그 항목에 대한 **다운로드** 링크를 클릭하여 해당 로그를 다운로드합니다.
-
-### <a name="use-the-azure-data-lake-storage-account-that-contains-log-data"></a>로그 데이터를 포함하는 Azure Data Lake 저장소 계정 사용
-
-1. 로깅을 위한 Data Lake Analytics와 연결된 Azure Data Lake 저장소 계정 블레이드를 열고 __Blob__을 클릭합니다. **Blob service** 블레이드는 두 개의 컨테이너를 나열합니다.
-
-    ![진단 로깅 보기](./media/data-lake-analytics-diagnostic-logs/view-diagnostic-logs-storage-account.png "진단 로그 보기")
+1. 로깅 데이터를 유지하는 Blob 컨테이너를 표시하려면 로깅을 위해 Data Lake Analytics에 사용되는 Azure Storage 계정을 열고 __Blob__을 클릭합니다.
 
    * **insights-logs-audit** 컨테이너는 감사 로그를 포함합니다.
    * **insights-logs-requests** 컨테이너는 요청 로그를 포함합니다.
-2. 이러한 컨테이너 내에서 로그는 다음 구조로 저장됩니다.
+
+2. 이러한 컨테이너 내에서 로그는 다음 파일 구조로 저장됩니다.
 
         resourceId=/
           SUBSCRIPTIONS/
@@ -153,12 +129,12 @@ ms.lasthandoff: 08/01/2017
 
 #### <a name="request-log-schema"></a>요청 로그 스키마
 
-| Name | 형식 | 설명 |
+| Name | type | 설명 |
 | --- | --- | --- |
 | 실시간 |문자열 |로그의 타임스탬프(UTC) |
-| resourceId |문자열 |작업이 수행되는 리소스의 식별자 |
+| ResourceId |문자열 |작업이 수행되는 리소스의 식별자 |
 | 카테고리 |문자열 |로그 범주 예: **Requests** |
-| operationName |String |기록된 작업의 이름 예를 들어 GetAggregatedJobHistory |
+| operationName |문자열 |기록된 작업의 이름 예를 들어 GetAggregatedJobHistory |
 | resultType |문자열 |작업의 상태, 예를 들어 200 |
 | callerIpAddress |문자열 |요청한 클라이언트의 IP 주소 |
 | CorrelationId |문자열 |로그의 식별자입니다. 이 값을 사용하여 관련된 로그 항목의 집합을 그룹화할 수 있습니다. |
@@ -167,10 +143,10 @@ ms.lasthandoff: 08/01/2017
 
 #### <a name="request-log-properties-schema"></a>요청 로그 속성 스키마
 
-| Name | 형식 | 설명 |
+| Name | type | 설명 |
 | --- | --- | --- |
-| HttpMethod |String |작업에 사용된 HTTP 메서드 예를 들어 GET |
-| Path |문자열 |작업이 수행된 경로 |
+| HttpMethod |문자열 |작업에 사용된 HTTP 메서드 예를 들어 GET |
+| path |문자열 |작업이 수행된 경로 |
 | RequestContentLength |int |HTTP 요청의 콘텐츠 길이 |
 | ClientRequestId |문자열 |이 요청을 고유하게 식별하는 식별자 |
 | StartTime |문자열 |서버가 요청을 받은 시간 |
@@ -205,15 +181,15 @@ ms.lasthandoff: 08/01/2017
 
 #### <a name="audit-log-schema"></a>감사 로그 스키마
 
-| Name | 형식 | 설명 |
+| Name | type | 설명 |
 | --- | --- | --- |
 | 실시간 |문자열 |로그의 타임스탬프(UTC) |
-| resourceId |문자열 |작업이 수행되는 리소스의 식별자 |
+| ResourceId |문자열 |작업이 수행되는 리소스의 식별자 |
 | 카테고리 |문자열 |로그 범주 예: **Audit**. |
-| operationName |String |기록된 작업의 이름 예를 들어 JobSubmitted |
+| operationName |문자열 |기록된 작업의 이름 예를 들어 JobSubmitted |
 | resultType |문자열 |작업 상태(operationName)에 대한 하위 상태입니다. |
 | resultSignature |문자열 |작업 상태(operationName)에 추가 세부 정보입니다. |
-| ID |문자열 |작업을 요청한 사용자입니다. 예: susan@contoso.com. |
+| ID |문자열 |작업을 요청한 사용자입니다. 예: susan@contoso.com |
 | properties |JSON |자세한 내용은 다음 섹션(감사 로그 속성 스키마)을 참조하세요. |
 
 > [!NOTE]
@@ -223,7 +199,7 @@ ms.lasthandoff: 08/01/2017
 
 #### <a name="audit-log-properties-schema"></a>감사 로그 속성 스키마
 
-| Name | 형식 | 설명 |
+| Name | type | 설명 |
 | --- | --- | --- |
 | JobId |문자열 |작업에 할당된 ID |
 | JobName |문자열 |작업에 대해 제공된 이름 |
@@ -242,4 +218,3 @@ Azure Data Lake Analytics에서는 로그 데이터를 처리하고 분석하는
 
 ## <a name="next-steps"></a>다음 단계
 * [Azure Data Lake Analytics 개요](data-lake-analytics-overview.md)
-

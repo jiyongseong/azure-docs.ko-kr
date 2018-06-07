@@ -3,7 +3,7 @@ title: "Azure Network Watcher 및 오픈 소스 도구를 사용하여 네트워
 description: "이 페이지에서는 Capanalysis와 함께 Network Watcher 패킷 캡처를 사용하여 VM과 주고 받는 트래픽을 시각화하는 방법을 설명합니다."
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
 editor: 
 ms.assetid: 936d881b-49f9-4798-8e45-d7185ec9fe89
@@ -13,14 +13,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-translationtype: Human Translation
-ms.sourcegitcommit: 50d82847fb629880f298f79f9ab791a13836f01c
-ms.openlocfilehash: e27bb694d0cbcf1ff7c9d8ca4682a79c8b5c5cb1
-ms.lasthandoff: 03/31/2017
-
+ms.author: jdial
+ms.openlocfilehash: 61abda6053fe743e294f309df3a6e1041052ec6e
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="visualize-network-traffic-patterns-to-and-from-your-vms-using-open-source-tools"></a>오픈 소스 도구를 사용하여 VM과 주고 받는 네트워크 트래픽 패턴 시각화
 
 패킷 캡처에는 네트워크 과학 수사 및 상세한 패킷 검사를 수행할 수 있는 네트워크 데이터가 포함됩니다. 패킷 캡처를 분석하여 네트워크에 대한 정보를 파악할 수 있는 여러 오픈 소스 도구가 있습니다. 이러한 도구 중 하나는 오픈 소스 패킷 캡처 시각화 도구인 CapAnalysis입니다. 패킷 캡처 데이터 시각화는 네트워크의 패턴 및 오류에 대한 정보를 신속하게 얻을 수 있는 유용한 방법입니다. 또한 시각화는 이러한 정보를 손쉽게 공유할 수 있는 수단을 제공합니다.
@@ -110,4 +109,3 @@ Network Watcher의 패킷 캡처 기능을 사용하면 네트워크 과학 수�
 [9]: ./media/network-watcher-using-open-source-tools/figure9.png
 [10]: ./media/network-watcher-using-open-source-tools/figure10.png
 [11]: ./media/network-watcher-using-open-source-tools/figure11.png
-

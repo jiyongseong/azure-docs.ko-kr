@@ -1,26 +1,25 @@
 ---
-title: "테넌트를 제한하여 클라우드 앱에 대한 액세스 관리 - Azure | Microsoft Docs"
-description: "테넌트 제한을 사용하여 Azure AD 테넌트를 기준으로 앱에 액세스할 수 있는 사용자를 관리하는 방법입니다."
+title: 테넌트를 제한하여 클라우드 앱에 대한 액세스 관리 - Azure | Microsoft Docs
+description: 테넌트 제한을 사용하여 Azure AD 테넌트를 기준으로 앱에 액세스할 수 있는 사용자를 관리하는 방법입니다.
 services: active-directory
-documentationcenter: 
-author: kgremban
-manager: femila
+documentationcenter: ''
+author: barbkess
+manager: mtillman
 editor: yossib
-ms.assetid: 
 ms.service: active-directory
+ms.component: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 05/10/2017
-ms.author: kgremban
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 9568210d4df6cfcf5b89ba8154a11ad9322fa9cc
-ms.openlocfilehash: 7288f8fa173f8018570cd17aa7274f56a4eead41
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/15/2017
-
-
+ms.date: 05/15/2018
+ms.author: barbkess
+ms.reviewer: richagi
+ms.openlocfilehash: 6584db755a586fcf5fd7318f9396b797edeaf0ad
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="use-tenant-restrictions-to-manage-access-to-saas-cloud-applications"></a>테넌트 제한을 사용하여 SaaS 클라우드 응용 프로그램에 대한 액세스 관리
 
@@ -30,7 +29,7 @@ ms.lasthandoff: 05/15/2017
 
 테넌트 제한은 조직 사용자에게 액세스가 허용된 테넌트 목록을 지정할 수 있는 기능을 제공합니다. 그러면 Azure AD는 이러한 허용된 테넌트에 대해서만 액세스를 허가합니다.
 
-이 문서는 Office 365에 대한 테넌트 제한을 중점적으로 설명하지만 Single Sign-On을 위해 Azure AD와 함께 최신 인증 프로토콜을 사용하는 모든 SaaS 클라우드 앱에도 이 기능을 사용할 수 있습니다. Office 365에서 사용되는 테넌트와는 다른 Azure AD 테넌트에서 SaaS 앱을 사용하는 경우 필요한 모든 테넌트가 허용되는지 확인합니다. 클라우드 SaaS 앱에 대한 자세한 내용은 [Active Directory Marketplace](https://azure.microsoft.com/en-us/marketplace/active-directory/)를 참조하세요.
+이 문서는 Office 365에 대한 테넌트 제한을 중점적으로 설명하지만 Single Sign-On을 위해 Azure AD와 함께 최신 인증 프로토콜을 사용하는 모든 SaaS 클라우드 앱에도 이 기능을 사용할 수 있습니다. Office 365에서 사용되는 테넌트와는 다른 Azure AD 테넌트에서 SaaS 앱을 사용하는 경우 필요한 모든 테넌트가 허용되는지 확인합니다. 클라우드 SaaS 앱에 대한 자세한 내용은 [Active Directory Marketplace](https://azure.microsoft.com/marketplace/active-directory/)를 참조하세요.
 
 ## <a name="how-it-works"></a>작동 방법
 
@@ -114,7 +113,9 @@ Office 365 응용 프로그램은 테넌트 제한을 완전히 지원하기 위
 
 테넌트 제한은 현재, Office 365 브라우저 기반 응용 프로그램(Office 포털, Yammer, SharePoint 사이트, 웹용 Outlook 등)에서 지원됩니다. 씩 클라이언트(Outlook, 비즈니스용 Skype, Word, Excel, PowerPoint 등) 테넌트 제한은 최신 인증을 사용하는 경우에만 적용할 수 있습니다.  
 
-최신 인증을 지원하는 Outlook 및 비즈니스용 Skype 클라이언트는 최신 인증이 사용되도록 설정되지 않은 테넌트에 대해 레거시 프로토콜을 사용하여 테넌트 제한을 효과적으로 우회할 수 있습니다. Windows의 Outlook에서 고객은 최종 사용자가 프로필에 승인되지 않은 메일 계정을 추가하는 것을 방지하는 제한을 구현하도록 선택할 수 있습니다. 예제를 보려면 [비기본 Exchange 계정 추가 금지](http://gpsearch.azurewebsites.net/default.aspx?ref=1) 그룹 정책 설정을 참조하세요. Windows가 아닌 플랫폼의 Outlook과 모든 플랫폼의 비즈니스용 Skype에서는 현재 테넌트 제한을 완벽하게 지원하지 않습니다.
+최신 인증을 지원하는 Outlook 및 비즈니스용 Skype 클라이언트는 최신 인증이 사용되도록 설정되지 않은 테넌트에 대해 레거시 프로토콜을 사용하여 테넌트 제한을 효과적으로 우회할 수 있습니다. 레거시 프로토콜을 사용하는 응용 프로그램은 인증하는 동안 login.microsoftonline.com, login.microsoft.com 또는 login.windows.net에 접속하는 경우 테넌트 제한으로 차단될 수 있습니다.
+
+Windows의 Outlook에서 고객은 최종 사용자가 프로필에 승인되지 않은 메일 계정을 추가하는 것을 방지하는 제한을 구현하도록 선택할 수 있습니다. 예제를 보려면 [비기본 Exchange 계정 추가 금지](http://gpsearch.azurewebsites.net/default.aspx?ref=1) 그룹 정책 설정을 참조하세요. Windows가 아닌 플랫폼의 Outlook과 모든 플랫폼의 비즈니스용 Skype에서는 현재 테넌트 제한을 완벽하게 지원하지 않습니다.
 
 ## <a name="testing"></a>테스트
 
@@ -124,17 +125,17 @@ Office 365 응용 프로그램은 테넌트 제한을 완전히 지원하기 위
 
 Fiddler는 HTTP 헤더 삽입을 비롯하여 HTTP/HTTPS 트래픽을 캡처하고 수정하는 데 사용할 수 있는 무료 웹 디버깅 프록시입니다. 테넌트 제한을 테스트하도록 Fiddler를 구성하려면 다음 단계를 수행합니다.
 
-1.    [Fiddler 다운로드하고 설치합니다](http://www.telerik.com/fiddler).
-2.    [Fiddler 도움말 설명서](http://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS)에 따라 HTTPS 트래픽 암호를 해독하도록 Fiddler를 구성합니다.
-3.    사용자 지정 규칙을 사용하여 *Restrict-Access-To-Tenants* 및 *Restrict-Access-Context* 머리글을 삽입하도록 Fiddler를 구성합니다.
-  1. Fiddler Web Debugger 도구에서 **Rules** 메뉴를 선택하고 **Customize Rules...**를 선택하여 CustomRules 파일을 엽니다.
+1.  [Fiddler 다운로드하고 설치합니다](http://www.telerik.com/fiddler).
+2.  [Fiddler 도움말 설명서](http://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS)에 따라 HTTPS 트래픽 암호를 해독하도록 Fiddler를 구성합니다.
+3.  사용자 지정 규칙을 사용하여 *Restrict-Access-To-Tenants* 및 *Restrict-Access-Context* 머리글을 삽입하도록 Fiddler를 구성합니다.
+  1. Fiddler Web Debugger 도구에서 **Rules** 메뉴를 선택하고 **Customize Rules...** 를 선택하여 CustomRules 파일을 엽니다.
   2. 다음 줄은 *OnBeforeRequest* 함수 맨 앞에 추가합니다. \<tenant domain\>을 테넌트에 등록된 도메인(예: contoso.onmicrosoft.com)으로 바꿉니다. \<directory ID\>를 테넌트의 Azure AD GUID 식별자로 바꿉니다.
 
   ```
   if (oSession.HostnameIs("login.microsoftonline.com") || oSession.HostnameIs("login.microsoft.com") || oSession.HostnameIs("login.windows.net")){      oSession.oRequest["Restrict-Access-To-Tenants"] = "<tenant domain>";      oSession.oRequest["Restrict-Access-Context"] = "<directory ID>";}
   ```
 
-  여러 테넌트를 허용해야 하는 경우 쉼표로 테넌트 이름을 구분합니다. 예:
+  여러 테넌트를 허용해야 하는 경우 쉼표로 테넌트 이름을 구분합니다. 예: 
 
   ```
   oSession.oRequest["Restrict-Access-To-Tenants"] = "contoso.onmicrosoft.com,fabrikam.onmicrosoft.com";
@@ -148,8 +149,8 @@ Fiddler를 구성한 후 **파일** 메뉴로 이동하고 **트래픽 캡처**�
 
 프록시 인프라의 기능에 따라 사용자에게 설정을 단계별로 롤아웃할 수 있습니다. 다음은 고려해야 할 몇 가지 고급 옵션입니다.
 
-1.    일반 사용자는 프로덕션 프록시 인프라를 계속 사용할 수 있지만 PAC 파일을 사용하여 테스트 사용자는 테스트 프록시 인프라를 가리키도록 합니다.
-2.    일부 프록시 서버는 그룹을 사용하여 다양한 구성을 지원할 수 있습니다.
+1.  일반 사용자는 프로덕션 프록시 인프라를 계속 사용할 수 있지만 PAC 파일을 사용하여 테스트 사용자는 테스트 프록시 인프라를 가리키도록 합니다.
+2.  일부 프록시 서버는 그룹을 사용하여 다양한 구성을 지원할 수 있습니다.
 
 특정 세부 정보에 대해서는 프록시 서버 설명서를 참조하세요.
 
@@ -158,4 +159,3 @@ Fiddler를 구성한 후 **파일** 메뉴로 이동하고 **트래픽 캡처**�
 - [업데이트된 Office 365 최신 인증](https://blogs.office.com/2015/11/19/updated-office-365-modern-authentication-public-preview/) 참조
 
 - [Office 365 URL 및 IP 주소 범위](https://support.office.com/article/Office-365-URLs-and-IP-address-ranges-8548a211-3fe7-47cb-abb1-355ea5aa88a2) 검토
-

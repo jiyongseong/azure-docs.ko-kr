@@ -1,31 +1,31 @@
 ---
-title: "Azure Cosmos DB: .NET의 Graph API를 사용하여 개발 | Microsoft Docs"
-description: ".NET을 사용하는 Azure Cosmos DB의 DocumentDB API를 통해 개발하는 방법에 대해 알아봅니다."
+title: 'Azure Cosmos DB: .NET의 Graph API를 사용하여 개발 | Microsoft Docs'
+description: .NET을 사용하는 Azure Cosmos DB의 SQL API를 통해 개발하는 방법에 대해 알아봅니다.
 services: cosmos-db
-documentationcenter: 
-author: dennyglee
-manager: jhubbard
-editor: 
+documentationcenter: ''
+author: luisbosquez
+manager: kfile
+editor: ''
 ms.assetid: cc8df0be-672b-493e-95a4-26dd52632261
 ms.service: cosmos-db
-ms.workload: 
+ms.workload: ''
 ms.tgt_pltfrm: na
 ms.devlang: dotnet
-ms.topic: article
-ms.date: 05/10/2017
-ms.author: denlee
+ms.topic: tutorial
+ms.date: 01/02/2018
+ms.author: lbosq
 ms.custom: mvc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a643f139be40b9b11f865d528622bafbe7dec939
-ms.openlocfilehash: 94909fd1db426267eb60e5d7f4d753de82ca0377
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/31/2017
-
+ms.openlocfilehash: 1843e37d9baf1ab264db96109eb5ffd0704e35b7
+ms.sourcegitcommit: 96089449d17548263691d40e4f1e8f9557561197
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/17/2018
+ms.locfileid: "34271292"
 ---
 # <a name="azure-cosmos-db-develop-with-the-graph-api-in-net"></a>Azure Cosmos DB: .NET의 Graph API를 사용하여 개발
 Azure Cosmos DB는 전 세계에 배포된 Microsoft의 다중 모델 데이터베이스 서비스입니다. Azure Cosmos DB의 핵심인 전역 배포 및 수평적 크기 조정 기능의 이점을 활용하여 문서, 키/값 및 그래프 데이터베이스를 빠르게 만들고 쿼리할 수 있습니다. 
 
-이 자습서에서는 Azure Portal을 사용하여 Azure Cosmos DB 계정을 만드는 방법 및 그래프 데이터베이스와 컨테이너를 만드는 방법을 보여 줍니다. 그런 다음 응용 프로그램에서 [Graph API](graph-sdk-dotnet.md)(미리 보기)를 사용하여 4명의 사람으로 구성된 간단한 소셜 네트워크를 만든 다음 Gremlin을 사용하여 그래프를 순회하고 쿼리합니다.
+이 자습서에서는 Azure Portal을 사용하여 Azure Cosmos DB 계정을 만드는 방법 및 그래프 데이터베이스와 컨테이너를 만드는 방법을 보여 줍니다. 그런 다음, 응용 프로그램에서 [Graph API](graph-sdk-dotnet.md)를 사용하여 4명으로 구성된 간단한 소셜 네트워크를 만든 다음 Gremlin을 사용하여 그래프를 트래버스하고 쿼리합니다.
 
 이 자습서에서 다루는 작업은 다음과 같습니다.
 
@@ -45,7 +45,7 @@ Gremlin은 쓰기 작업(DML)과 쿼리 및 순회 작업을 지원하는 함수
 다음 항목이 있는지 확인합니다.
 
 * 활성 Azure 계정. 계정이 없는 경우 [무료 계정](https://azure.microsoft.com/free/)에 등록할 수 있습니다. 
-    * 또는 이 자습서에 [Azure DocumentDB 에뮬레이터](local-emulator.md)를 사용할 수 있습니다.
+    * 또는 이 자습서에 [로컬 에뮬레이터](local-emulator.md)를 사용할 수 있습니다.
 * [Visual Studio](http://www.visualstudio.com/).
 
 ## <a name="create-database-account"></a>데이터베이스 계정 만들기
@@ -54,7 +54,6 @@ Azure Portal에서 Azure Cosmos DB 계정을 만들어 보겠습니다.
 
 > [!TIP]
 > * Azure Cosmos DB 계정이 이미 있나요? 그렇다면 [Visual Studio 솔루션 설치](#SetupVS)로 건너뜁니다.
-> * Azure DocumentDB 계정이 있나요? 그렇다면 이 계정은 이제 Azure Cosmos DB 계정이 되며, [Visual Studio 솔루션 설치](#SetupVS)를 건너뛸 수 있습니다.  
 > * Azure Cosmos DB 에뮬레이터를 사용하는 경우 [Azure Cosmos DB 에뮬레이터](local-emulator.md)의 단계에 따라 에뮬레이터를 설치하고 [Visual Studio 솔루션 설치](#SetupVS)로 건너뜁니다. 
 >
 > 
@@ -64,12 +63,12 @@ Azure Portal에서 Azure Cosmos DB 계정을 만들어 보겠습니다.
 ## <a id="SetupVS"></a>Visual Studio 솔루션 설치
 1. 컴퓨터에서 **Visual Studio**를 엽니다.
 2. **파일** 메뉴에서 **새로 만들기**와 **프로젝트**를 차례로 선택합니다.
-3. **새 프로젝트** 대화 상자에서 **템플릿** / **Visual C#** / **콘솔 앱(.NET Framework)**을 선택하고, 프로젝트 이름을 지정한 다음, **확인**을 클릭합니다.
-4. **솔루션 탐색기**에서 Visual Studio 솔루션 아래에 있는 새 콘솔 응용 프로그램을 마우스 오른쪽 단추로 클릭한 다음 **NuGet 패키지 관리...**를 클릭합니다.
+3. **새 프로젝트** 대화 상자에서 **템플릿** / **Visual C#** / **콘솔 앱(.NET Framework)** 을 선택하고, 프로젝트 이름을 지정한 다음, **확인**을 클릭합니다.
+4. **솔루션 탐색기**에서 Visual Studio 솔루션 아래에 있는 새 콘솔 응용 프로그램을 마우스 오른쪽 단추로 클릭한 다음 **NuGet 패키지 관리...** 를 클릭합니다.
 5. **NuGet** 탭에서 **찾아보기**를 클릭하고 검색 상자에서 **Microsoft.Azure.Graphs**를 입력하고 **시험판 버전 포함**을 선택합니다. .
 6. 결과 내에서 **Microsoft.Azure.Graphs**를 찾고 **설치**를 클릭합니다.
    
-   솔루션 변경 내용을 검토하는 메시지가 표시되면 **확인**을 클릭합니다. 라이선스 승인에 관한 메시지가 표시되면 **동의합니다.**를 클릭합니다.
+   솔루션 변경 내용을 검토하는 메시지가 표시되면 **확인**을 클릭합니다. 라이선스 승인에 관한 메시지가 표시되면 **동의합니다.** 를 클릭합니다.
    
     `Microsoft.Azure.Graphs` 라이브러리는 Gremlin 작업을 실행하기 위한 `CreateGremlinQuery<T>` 단일 확장 메서드를 제공합니다. Gremlin은 쓰기 작업(DML)과 쿼리 및 순회 작업을 지원하는 함수형 프로그래밍 언어입니다. 이 문서에서는 몇 가지 예제를 적용하여 Gremlin을 시작합니다. [Gremlin 쿼리](gremlin-support.md)에는 Azure Cosmos DB의 Gremlin 기능에 대한 자세한 연습이 있습니다.
 
@@ -87,7 +86,7 @@ Azure Portal에서 Azure Cosmos DB 계정으로 이동하고 **키**를 클릭�
 
 포털에서 URI를 복사하고 `Endpoint` 끝점 속성 위에 붙여넣습니다. 그런 다음 포털에서 기본 키를 복사하고 `AuthKey` 속성 위에 붙여넣습니다. 
 
-![자습서에서 C# 응용 프로그램을 만드는 데 사용하는 Azure Portal의 스크린샷입니다. Azure Cosmos DB 탐색에서 강조 표시된 키 단추 및 키 블레이드에서 강조 표시된 URI와 키 값이 있는 Azure Cosmos DB 계정을 보여 줍니다.][키] 
+![자습서에서 C# 응용 프로그램을 만드는 데 사용하는 Azure Portal의 스크린샷입니다. Azure Cosmos DB 탐색에서 강조 표시된 키 단추 및 키 블레이드에서 강조 표시된 URI와 PRIMARY KEY 값이 있는 Azure Cosmos DB 계정을 보여 줍니다.](./media/tutorial-develop-graph-dotnet/keys.png) 
  
 ## <a id="instantiate"></a>DocumentClient 인스턴스화 
 다음으로 **DocumentClient**의 새 인스턴스를 만듭니다.  
@@ -98,7 +97,7 @@ DocumentClient client = new DocumentClient(new Uri(endpoint), authKey);
 
 ## <a id="create-database"></a>데이터베이스 만들기 
 
-이제 [DocumentDB .NET SDK](documentdb-sdk-dotnet.md)에서 **DocumentClient** 클래스의 [CreateDatabaseAsync](https://msdn.microsoft.com/library/azure/microsoft.azure.documents.client.documentclient.createdatabaseasync.aspx) 메서드 또는 [CreateDatabaseIfNotExistsAsync](https://msdn.microsoft.com/library/microsoft.azure.documents.client.documentclient.createdatabaseifnotexistsasync.aspx) 메서드를 사용하여 Azure Cosmos DB [데이터베이스](documentdb-resources.md#databases)를 만듭니다.  
+이제 [SQL .NET SDK](sql-api-sdk-dotnet.md)에서 **DocumentClient** 클래스의 [CreateDatabaseAsync](https://msdn.microsoft.com/library/azure/microsoft.azure.documents.client.documentclient.createdatabaseasync.aspx) 메서드 또는 [CreateDatabaseIfNotExistsAsync](https://msdn.microsoft.com/library/microsoft.azure.documents.client.documentclient.createdatabaseifnotexistsasync.aspx) 메서드를 사용하여 Azure Cosmos DB [데이터베이스](sql-api-resources.md#databases)를 만듭니다.  
 
 ```csharp 
 Database database = await client.CreateDatabaseIfNotExistsAsync(new Database { Id = "graphdb" }); 
@@ -112,7 +111,7 @@ Database database = await client.CreateDatabaseIfNotExistsAsync(new Database { I
 DocumentCollection graph = await client.CreateDocumentCollectionIfNotExistsAsync( 
     UriFactory.CreateDatabaseUri("graphdb"), 
     new DocumentCollection { Id = "graphcollz" }, 
-    new RequestOptions { OfferThroughput = 1000 }); 
+    new RequestOptions { OfferThroughput = 400 }); 
 ``` 
 
 ## <a id="serializing"></a>.NET 개체로 꼭짓점 및 가장자리 직렬화
@@ -123,7 +122,7 @@ Azure Cosmos DB는 꼭짓점, 가장자리 및 속성에 대한 JSON 스키마�
 `Microsoft.Azure.Graphs.Elements` 네임스페이스는 잘 정의된 .NET 개체에 대한 GraphSON 응답을 역직렬화하기 위해 `Vertex`, `Edge`, `Property` 및 `VertexProperty` 클래스를 제공합니다.
 
 ## <a name="run-gremlin-using-creategremlinquery"></a>CreateGremlinQuery를 사용하여 Gremlin 실행
-Gremlin은 SQL과 마찬가지로 읽기, 쓰기 및 쿼리 작업을 지원합니다. 예를 들어 다음 코드 조각에서는 `CreateGremlinQuery<T>`를 사용하여 꼭짓점과 가장자리를 만들고 몇 가지 샘플 쿼리를 수행하며, `ExecuteNextAsync`와 HasMoreResults를 사용하여 이러한 결과를 비동기적으로 반복하는 방법을 보여 줍니다.
+Gremlin은 SQL과 마찬가지로 읽기, 쓰기 및 쿼리 작업을 지원합니다. 예를 들어 다음 코드 조각에서는 `CreateGremlinQuery<T>`를 사용하여 꼭짓점과 가장자리를 만들고 몇 가지 샘플 쿼리를 수행하며, `ExecuteNextAsync`와 `HasMoreResults`를 사용하여 이러한 결과를 비동기적으로 반복하는 방법을 보여줍니다.
 
 ```cs
 Dictionary<string, string> gremlinQueries = new Dictionary<string, string>
@@ -170,13 +169,13 @@ foreach (KeyValuePair<string, string> gremlinQuery in gremlinQueries)
 
 ## <a name="add-vertices-and-edges"></a>꼭짓점 및 가장자리 추가
 
-이전 섹션에서 자세히 설명한 Gremlin 문을 살펴보겠습니다. 먼저 Gremlin의 `addV` 메서드를 사용하는 몇 가지 꼭짓점이 있습니다. 예를 들어 다음 코드 조각에서는 이름, 성 및 나이에 대한 속성이 있는 "Person" 형식의 "Thomas Andersen" 꼭짓점을 만듭니다.
+이전 섹션에서 표시된 Gremlin 문에 대해 자세히 살펴보겠습니다. 먼저 Gremlin의 `addV` 메서드를 사용하여 몇 가지 꼭짓점을 추가합니다. 예를 들어 다음 코드 조각에서는 이름 및 나이에 대한 속성이 있는 "person" 형식의 "Thomas Andersen" 꼭짓점을 만듭니다.
 
 ```cs
 // Create a vertex
 IDocumentQuery<Vertex> createVertexQuery = client.CreateGremlinQuery<Vertex>(
     graphCollection, 
-    "g.addV('person').property('firstName', 'Thomas')");
+    "g.addV('person').property('firstName', 'Thomas').property('age', 44)");
 
 while (createVertexQuery.HasMoreResults)
 {
@@ -287,4 +286,3 @@ Gremlin을 사용하여 필터 식을 혼합하고, `loop` 단계를 사용하�
 
 > [!div class="nextstepaction"]
 > [Gremlin을 사용하여 쿼리](tutorial-query-graph.md)
-

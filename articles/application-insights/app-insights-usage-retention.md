@@ -1,9 +1,9 @@
 ---
-title: "Azure Application Insights를 사용한 웹 응용 프로그램의 사용자 재방문 주기 분석 | Microsoft Docs"
-description: "앱으로 돌아온 사용자는 몇 명이나 되나요?"
+title: Azure Application Insights를 사용한 웹 응용 프로그램의 사용자 재방문 주기 분석 | Microsoft Docs
+description: 앱으로 돌아온 사용자는 몇 명이나 되나요?
 services: application-insights
-documentationcenter: 
-author: botatoes
+documentationcenter: ''
+author: mrbullwinkle
 manager: carmonm
 ms.service: application-insights
 ms.workload: tbd
@@ -11,41 +11,35 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: multiple
 ms.topic: article
 ms.date: 05/03/2017
-ms.author: cfreeman
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 71fea4a41b2e3a60f2f610609a14372e678b7ec4
-ms.openlocfilehash: 17f6062537714fbef7c8509261ac4875f8a44b6e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/10/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: bafe9579cc783dbc5c851e626e3b9bea0c559520
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
-
 # <a name="user-retention-analysis-for-web-applications-with-application-insights"></a>Application Insights를 사용한 웹 응용 프로그램의 사용자 재방문 주기 분석
 
-[Azure Application Insights](app-insights-overview.md)의 재방문 주기 블레이드는 앱으로 돌아온 사용자 수와 특정 작업을 수행하거나 목표를 달성하는 빈도를 분석하는 데 도움을 줍니다. 예를 들어 게임 사이트를 실행하는 경우 게임에서 진 후에 사이트로 돌아오는 사용자 수와 이긴 후에 돌아온 사용자 수를 비교할 수 있습니다. 이러한 지식이 있으면 사용자 환경 및 비즈니스 전략을 둘 다 향상시킬 수 있습니다.
+[Azure Application Insights](app-insights-overview.md)의 재방문 주기 기능은 앱으로 돌아온 사용자 수와 특정 작업을 수행하거나 목표를 달성하는 빈도를 분석하는 데 도움을 줍니다. 예를 들어 게임 사이트를 실행하는 경우 게임에서 진 후에 사이트로 돌아오는 사용자 수와 이긴 후에 돌아온 사용자 수를 비교할 수 있습니다. 이러한 지식이 있으면 사용자 환경 및 비즈니스 전략을 둘 다 향상시킬 수 있습니다.
 
-## <a name="get-started"></a>시작
+## <a name="get-started"></a>시작하기
 
-Application Insights 포털의 재방문 주기 블레이드에서 아직 데이터가 표시되지 않으면 [사용 도구 시작 방법을 알아봅니다](app-insights-usage-overview.md).
+Application Insights 포털의 재방문 주기 도구에서 아직 데이터가 표시되지 않으면 [사용 도구 시작 방법을 알아봅니다](app-insights-usage-overview.md).
 
 ## <a name="the-retention-tool"></a>재방문 주기 도구
 
 ![재방문 주기 도구](./media/app-insights-usage-retention/retention.png)
 
-a. 개요 페이지는 항상 있습니다. 또한 여러 다른 매개 변수 설정을 사용하여 명명된 보고서를 저장할 수 있습니다. 리소스에 대한 액세스 권한이 있는 다른 사용자가 보고서를 볼 수 있도록 공유에 저장합니다.
+1. 도구 모음을 사용하면 사용자가 새 재방문 주기 보고서를 만들고, 기존 재방문 주기 보고서를 열고, 현재 재방문 주기 보고서 저장하거나 저장된 보고서로 만들어진 변경 내용을 되돌리고, 보고서에서 데이터 새로 고치고, 이메일 또는 직접 링크를 통해 보고서를 공유하고 설명서 페이지에 액세스할 수 있습니다. 
+2. 기본적으로 재방문 주기는 기간에 따라 작업을 한 후 다시 방문하고 다른 작업을 한 모든 사용자를 보여 줍니다. 다른 이벤트의 조합을 선택하여 특정 사용자 작업에 대한 범위를 좁힐 수 있습니다.
+3. 속성에 대해 하나 이상의 필터를 추가합니다. 예를 들어 특정 국가 또는 하위 지역에 있는 사용자에 집중할 수 있습니다. 필터를 설정한 후에 **업데이트**를 클릭합니다. 
+4. 전체 재방문 주기 차트는 선택한 기간에 걸친 사용자 재방문 주기의 요약을 보여 줍니다. 
+5. 표는 #2의 쿼리 작성기에 따라 재방문한 사용자 수를 보여 줍니다. 각 행은 표시된 기간에 이벤트를 실행한 사용자의 코호트를 표시합니다. 행의 각 셀은 이후 기간에 1번 이상 돌아온 해당 코호트 수를 표시합니다. 일부 사용자는 둘 이상의 기간에 돌아올 수 있습니다. 
+6. insights 카드는 상위 5개 시작 이벤트 및 상위 5개 반환되는 이벤트를 표시하여 사용자가 자신의 재방문 주기 보고서를 더 잘 이해할 수 있도록 합니다. 
 
-b. 기본적으로 차트는 앱에서 수신된 사용자 지정 이벤트 또는 페이지 보기를 사용한 모든 사용자 수를 계산합니다. 사용자 하나 또는 서브넷을 선택하여 특정 사용자 활동을 집중적으로 확인합니다. 
+![재방문 주기 마우스 가리키기](./media/app-insights-usage-retention/hover.png)
 
-c. 속성에 대해 하나 이상의 필터를 추가합니다. 예를 들어 특정 국가 또는 하위 지역에 있는 사용자에 집중할 수 있습니다. 필터를 설정한 후에 **업데이트**를 클릭합니다.
-
-d. **기본값 복원**을 클릭하면 항상 사용자 지정 필터 및 이벤트 필터가 지워집니다.
-
-e. 요약 차트는 선택한 기간에 걸친 합계를 보여 줍니다.
-
-f. 이 표는 특정 기간 내에 돌아와서 선택한 작업을 반복한 사용자의 수를 표시합니다. 각 행은 표시된 기간에 선택된 작업 중 하나를 실행한 사용자의 코호트를 표시합니다. 행의 각 셀은 이후 기간에 1번 이상 돌아온 해당 코호트 수를 표시합니다. 일부 사용자는 둘 이상의 기간에 돌아올 수 있습니다.
-
-차트의 시간 범위 동안 앱을 사용한 모든 사람은 차트에서 정확히 하나의 행에 표시됩니다. 각 사용자는 차트의 시간 범위 내에서 선택한 작업을 처음 수행했던 기간에 계산됩니다. 따라서 첫 번째 행에 더 큰 수가 포함되게 됩니다.
-
+사용자가 셀의 의미를 설명하는 분석 단추 및 도구 팁에 액세스하려면 재방문 주기 도구에서 셀을 마우스로 가리키면 됩니다. 분석 단추를 통해 셀에서 사용자를 생성하는 미리 입력된 쿼리를 사용하여 분석 도구로 이동합니다. 
 
 ## <a name="use-business-events-to-track-retention"></a>비즈니스 이벤트를 사용하여 재방문 주기 추적
 
@@ -61,7 +55,7 @@ f. 이 표는 특정 기간 내에 돌아와서 선택한 작업을 반복한 �
 
 또는 ASP.NET 서버 코드:
 
-```C#
+```csharp
    telemetry.TrackEvent("won game");
 ```
 
@@ -69,9 +63,12 @@ f. 이 표는 특정 기간 내에 돌아와서 선택한 작업을 반복한 �
 
 
 ## <a name="next-steps"></a>다음 단계
-
-* [사용 현황 개요](app-insights-usage-overview.md)
-* [사용자 및 세션](app-insights-usage-segmentation.md)
-* [사용자 지정 이벤트 코딩](app-insights-api-custom-events-metrics.md)
+- 사용 현황 환경을 활성화하려면 [사용자 지정 이벤트](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#trackevent) 또는 [페이지 보기](https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#page-views) 보내기를 시작합니다.
+- 사용자 지정 이벤트 또는 페이지 보기를 이미 보낸 경우 사용자가 서비스를 사용하는 방법에 대해 알아보려면 사용 현황 도구를 살펴봅니다.
+    - [사용자, 세션, 이벤트](app-insights-usage-segmentation.md)
+    - [깔때기](usage-funnels.md)
+    - [사용자 흐름](app-insights-usage-flows.md)
+    - [통합 문서](app-insights-usage-workbooks.md)
+    - [사용자 컨텍스트 추가](app-insights-usage-send-user-context.md)
 
 

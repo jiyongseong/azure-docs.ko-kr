@@ -1,10 +1,10 @@
 ---
-title: "VM(클래식)에 대한 개인 IP 주소 구성 - Azure CLI 1.0 | Microsoft Docs"
-description: "Azure CLI(명령줄 인터페이스) 1.0을 사용하여 가상 컴퓨터(클래식)에 대한 개인 IP 주소를 구성하는 방법에 대해 알아봅니다."
+title: VM(클래식)에 대한 개인 IP 주소 구성 - Azure CLI 1.0 | Microsoft Docs
+description: Azure CLI(명령줄 인터페이스) 1.0을 사용하여 가상 머신(클래식)에 대한 개인 IP 주소를 구성하는 방법에 대해 알아봅니다.
 services: virtual-network
 documentationcenter: na
-author: jimdial
-manager: timlt
+author: genlin
+manager: cshepard
 editor: tysonn
 tags: azure-service-management
 ms.assetid: 17386acf-c708-4103-9b22-ff9bf04b778d
@@ -14,16 +14,15 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/15/2016
-ms.author: jdial
+ms.author: genli
 ms.custom: H1Hack27Feb2017
-translationtype: Human Translation
-ms.sourcegitcommit: 0d8472cb3b0d891d2b184621d62830d1ccd5e2e7
-ms.openlocfilehash: ed0fe2fea20671063395b9ff089599853278989d
-ms.lasthandoff: 03/21/2017
-
-
+ms.openlocfilehash: a18877167d04fdb039070d5315390a846925fd29
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
-# <a name="configure-private-ip-addresses-for-a-virtual-machine-classic-using-the-azure-cli-10"></a>Azure CLI 1.0을 사용하여 가상 컴퓨터(클래식)에 대한 개인 IP 주소 구성
+# <a name="configure-private-ip-addresses-for-a-virtual-machine-classic-using-the-azure-cli-10"></a>Azure CLI 1.0을 사용하여 가상 머신(클래식)에 대한 개인 IP 주소 구성
 
 [!INCLUDE [virtual-networks-static-private-ip-selectors-classic-include](../../includes/virtual-networks-static-private-ip-selectors-classic-include.md)]
 
@@ -38,7 +37,7 @@ ms.lasthandoff: 03/21/2017
 ## <a name="how-to-specify-a-static-private-ip-address-when-creating-a-vm"></a>VM을 만들 때 정적 개인 IP 주소를 지정하는 방법
 위의 시나리오를 기반으로 *TestService*라는 새 클라우드 서비스에 *DNS01*이라는 VM을 만들려면 다음 단계를 수행합니다.
 
-1. Azure CLI를 처음 사용하는 경우 [Azure CLI 설치 및 구성](../cli-install-nodejs.md) 을 참조하고 Azure 계정 및 구독을 선택하는 부분까지 관련 지침을 따릅니다.
+1. Azure CLI를 처음 사용하는 경우 [Azure CLI 설치 및 구성](../cli-install-nodejs.md)을 참조하고 Azure 계정 및 구독을 선택하는 부분까지 관련 지침을 따릅니다.
 2. **azure service create** 명령을 실행하여 클라우드 서비스를 만듭니다.
    
         azure service create TestService --location uscentral
@@ -116,9 +115,12 @@ ms.lasthandoff: 03/21/2017
     info:    Updating network configuration
     info:    vm static-ip set command OK
 
+## <a name="set-ip-addresses-within-the-operating-system"></a>운영 체제 내에서 IP 주소 설정
+
+반드시 필요한 경우가 아니면, VM의 운영 체제 내에서 Azure Virtual Machine에 할당된 개인 IP를 고정적으로 할당하는 것은 바람직하지 않습니다. 운영 체제 내에서 개인 IP 주소를 수동으로 설정하는 경우 Azure VM에 할당된 개인 IP 주소와 동일한 주소인지 확인합니다. 두 주소가 같지 않으면 가상 머신에 대한 연결이 끊어질 수 있습니다. 가상 머신의 운영 체제 내에서 Azure Virtual Machine에 할당된 공용 IP 주소는 절대 수동으로 할당하면 안 됩니다.
+
 ## <a name="next-steps"></a>다음 단계
 * [예약된 공용 IP](virtual-networks-reserved-public-ip.md) 주소에 대해 알아봅니다.
 * [ILPIP(인스턴스 수준 공용 IP)](virtual-networks-instance-level-public-ip.md) 주소에 대해 알아봅니다.
 * [예약된 IP REST API](https://msdn.microsoft.com/library/azure/dn722420.aspx)를 참조합니다.
-
 

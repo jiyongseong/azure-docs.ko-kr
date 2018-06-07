@@ -1,13 +1,13 @@
 ---
-title: "Azure에서 cloud-init를 사용하여 생성 중인 Linux VM 사용자 지정 | Microsoft Docs"
-description: "Azure CLI 1.0에서 cloud-init를 사용하여 생성 중인 Linux VM을 사용자 지정하는 방법"
+title: Azure에서 cloud-init를 사용하여 생성 중인 Linux VM 사용자 지정 | Microsoft Docs
+description: Azure CLI 1.0에서 cloud-init를 사용하여 생성 중인 Linux VM을 사용자 지정하는 방법
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: vlivech
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
@@ -15,12 +15,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 10/26/2016
 ms.author: v-livech
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 0b6150bca333188666935b3c9aa02c4b33690db9
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: 2e9182a18a2827ed7f54f5fd042e5934b3b1fd5c
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="use-cloud-init-to-customize-a-linux-vm-during-creation-with-the-azure-cli-10"></a>Azure CLI 1.0에서 cloud-init를 사용하여 생성 중인 Linux VM 사용자 지정
 이 문서에서는 cloud-init 스크립트를 사용하여 호스트 이름 설정, 설치된 패키지 업데이트, 사용자 계정 관리를 수행하는 방법을 설명합니다.  VM을 만드는 중에 Azure CLI에서 cloud-init 스크립트를 호출합니다.  이 문서의 내용을 실행하기 위해 필요한 사항:
@@ -101,11 +100,11 @@ Azure에서는 다음의 세 가지 방법으로 배포 또는 부팅 중인 Lin
 | Alias | 게시자 | 제안 | SKU | 버전 | cloud-init |
 |:--- |:--- |:--- |:--- |:--- |:--- |
 | CentOS |OpenLogic |Centos |7.2 |최신 |no |
-| CoreOS |CoreOS |CoreOS |Stable |최신 |yes |
+| CoreOS |CoreOS |CoreOS |Stable |최신 |예 |
 | Debian |credativ |Debian |8 |최신 |no |
 | openSUSE |SUSE |openSUSE |13.2 |최신 |no |
 | RHEL |Redhat |RHEL |7.2 |최신 |no |
-| UbuntuLTS |Canonical |UbuntuServer |14.04.4-LTS |최신 |yes |
+| UbuntuLTS |Canonical |UbuntuServer |14.04.4-LTS |최신 |예 |
 
 Microsoft는 파트너와 협력하여 파트너가 Azure에 제공하는 이미지에 cloud-init를 포함하고 이러한 이미지에서 cloud-init가 작동하도록 설정하고 있습니다.
 
@@ -269,8 +268,7 @@ myCloudInitAddedAdminUser:x:1000:
 ## <a name="next-steps"></a>다음 단계
 cloud-init은 부팅 시 Linux VM을 수정하는 표준 방식의 하나로 자리잡고 있습니다. Azure에는 부팅 시에 또는 실행 중에 Linux VM을 수정할 수 있는 VM 확장도 있습니다. 예를 들어 VM을 실행하는 동안 Azure VMAccessExtension을 사용하여 SSH 또는 사용자 정보를 다시 설정할 수 있습니다. cloud-init을 사용하는 경우 암호를 다시 설정하려면 VM을 다시 부팅해야 합니다.
 
-[가상 컴퓨터 확장 및 기능 정보](../windows/extensions-features.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+[가상 머신 확장 및 기능 정보](../windows/extensions-features.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 
 [VMAccess 확장을 사용하여 사용자, SSH 관리 및 Azure Linux VM의 디스크 검사 또는 복구](using-vmaccess-extension.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-
 

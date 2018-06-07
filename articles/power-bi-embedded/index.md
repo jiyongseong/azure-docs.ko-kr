@@ -1,21 +1,22 @@
 ---
-title: "Azure Power BI Embedded 설명서 - 자습서, API 참조 | Microsoft Docs"
-description: "앱에 Power BI 데이터 시각화 및 대화형 보고서를 포함하는 방법에 대해 알아봅니다. 자습서, API, 참조 및 기타 설명서입니다."
+title: Azure Power BI Embedded 설명서 - 자습서, API 참조 | Microsoft Docs
+description: 앱에 Power BI 데이터 시각화 및 대화형 보고서를 포함하는 방법에 대해 알아봅니다. 자습서, API, 참조 및 기타 설명서입니다.
 services: power-bi-embedded
-author: carolz
-manager: carolz
+author: markingmyname
+manager: kfile
 layout: LandingPage
-ms.assetid: 
+ms.assetid: ''
 ms.service: power-bi-embedded
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: landing-page
-ms.date: 01/23/2017
-ms.author: carolz
-translationtype: Human Translation
-ms.sourcegitcommit: 48f9fe41b94016e54a2ec622df9684b7dcd4dfed
-ms.openlocfilehash: c1e12dc71ce823425971beeb9db1cc5abd2aa12b
-
+ms.date: 09/28/2017
+ms.author: maghan
+ms.openlocfilehash: 9f1c80bd0274a9d606e69b19170c62337b68c74a
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="power-bi-embedded-documentation"></a>Power BI Embedded 설명서
 
@@ -23,13 +24,13 @@ Power BI embedded를 사용하여 응용 프로그램에 데이터 시각화 및
 
 <ul class="panelContent cardsFTitle">
     <li>
-        <a href="/azure/power-bi-embedded/power-bi-embedded-what-is-power-bi-embedded">
+        <a href="/azure/power-bi-embedded/what-is-power-bi-embedded">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="media/index/power-bi-embedded.svg" alt="" />
+                            <img src="media/index/power-bi-logo.svg" alt="Power BI logo" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -59,7 +60,7 @@ Power BI embedded를 사용하여 응용 프로그램에 데이터 시각화 및
         </a>
     </li>
     <li>
-        <a href="/azure/power-bi-embedded/power-bi-embedded-get-started">
+        <a href="/azure/power-bi-embedded/get-started">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
@@ -77,7 +78,7 @@ Power BI embedded를 사용하여 응용 프로그램에 데이터 시각화 및
         </a>
     </li>
     <li>
-        <a href="/azure/power-bi-embedded/power-bi-embedded-get-started-sample">
+        <a href="https://powerbi.microsoft.com/documentation/powerbi-developer-embed-sample-app-owns-data/">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
@@ -87,7 +88,7 @@ Power BI embedded를 사용하여 응용 프로그램에 데이터 시각화 및
                         </div>
                     </div>
                     <div class="cardText">
-                        <h3>샘플 갤러리를 통해 Power BI 보고서 만들기 시작</h3>
+                        <h3>응용 프로그램 예제에서 포함된 보고서를 시작합니다.</h3>
                     </div>
                 </div>
             </div>
@@ -98,14 +99,14 @@ Power BI embedded를 사용하여 응용 프로그램에 데이터 시각화 및
 
 ---
 
-<h2>참조</h2>
+<h2>참고 자료</h2>
 <ul class="panelContent cardsW">
     <li>
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
                     <div class="cardText">
-                        <h3>명령줄</h3>
+                        <h3>PowerShell</h3>
                         <p><a href="/powershell/resourcemanager/azurerm.powerbiembedded/v2.3.0/azurerm.powerbiembedded">PowerShell</a></p>
                     </div>
                 </div>
@@ -119,8 +120,9 @@ Power BI embedded를 사용하여 응용 프로그램에 데이터 시각화 및
                     <div class="cardText">
                         <h3>언어</h3>
                         <p><a href="/dotnet/api/microsoft.azure.management.powerbiembedded">.NET</a></p>
-                        <p><a href="https://www.nuget.org/profiles/powerbi">.NET SDK 다운로드</a></p>
-                        <p><a href="https://github.com/Microsoft/PowerBI-JavaScript">JavaScript</a></p>
+                        <p><a href="https://www.nuget.org/packages/Microsoft.PowerBI.Api/">.NET SDK 다운로드</a></p>
+                        <p><a href="https://microsoft.github.io/PowerBI-JavaScript/">JavaScript</a></p>
+                        <p><a href="https://www.nuget.org/packages/Microsoft.PowerBI.JavaScript/">JavaScript SDK 다운로드</a></p>
                    </div>
                 </div>
             </div>
@@ -132,17 +134,11 @@ Power BI embedded를 사용하여 응용 프로그램에 데이터 시각화 및
                 <div class="card">
                     <div class="cardText">
                         <h3>REST (영문)</h3>
-                        <p><a href="/rest/api/powerbiembedded/">REST API 참조</a></p>
+                        <p><a href="https://docs.microsoft.com/rest/api/power-bi-embedded/">Azure Resource Manager REST API 참조</a></p>
+                        <p><a href="https://msdn.microsoft.com/library/mt147898.aspx">REST API 참조</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </li>
 </ul>
-
-
-
-
-<!--HONumber=Feb17_HO2-->
-
-

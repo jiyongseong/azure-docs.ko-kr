@@ -1,37 +1,36 @@
 ---
-title: "Azure의 Azure Security Center 및 Windows 가상 컴퓨터 | Microsoft Docs"
-description: "Azure Security Center를 사용하여 Azure Windows 가상 컴퓨터의 보안을 유지하는 방법에 대해 알아봅니다."
+title: 자습서 - Azure에서 Windows VM을 위한 Azure Security Center 사용 | Microsoft Docs
+description: 이 자습서에서는 Azure에서 Windows 가상 머신을 보호하고 안전하게 하는 데 유용한 Azure Security Center 기능에 대해 알아봅니다.
 services: virtual-machines-windows
 documentationcenter: virtual-machines
-author: neilpeterson
-manager: timlt
+author: cynthn
+manager: jeconnoc
 editor: tysonn
-tags: azure-service-management
-ms.assetid: 
+tags: azure-resource-manager
+ms.assetid: ''
 ms.service: virtual-machines-windows
 ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
 ms.date: 05/01/2017
-ms.author: nepeters
+ms.author: cynthn
 ms.custom: mvc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c308183ffe6a01f4d4bf6f5817945629cbcedc92
-ms.openlocfilehash: ec4b06a341f74e021a8745bfb324358c0a12b6ec
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/17/2017
-
+ms.openlocfilehash: b573208107b07b47b471d9c5247b362ef144099e
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-# <a name="monitor-virtual-machine-security-by-using-azure-security-center"></a>Azure Security Center를 사용하여 가상 컴퓨터 보안 모니터링
+# <a name="tutorial-use-azure-security-center-to-monitor-windows-virtual-machines"></a>자습서: Azure Security Center를 사용하여 Windows 가상 머신 모니터링
 
 Azure Security Center를 사용하면 Azure 리소스 보안 사례에 대한 가시성을 얻을 수 있습니다. Security Center는 통합 보안 모니터링 기능을 제공합니다. 다른 방법으로는 눈에 띄지 않을 수 있는 위협을 검색할 수 있습니다. 이 자습서에서는 Azure Security Center에 대해 알아보고 다음을 수행하는 방법에 대해 설명합니다.
- 
+
 > [!div class="checklist"]
 > * 데이터 수집 설정
 > * 보안 정책 설정
 > * 구성 상태 문제 보기 및 수정
-> * 검색된 위협 검토  
+> * 검색된 위협 검토
 
 ## <a name="security-center-overview"></a>Security Center 개요
 
@@ -43,7 +42,7 @@ Security Center 대시보드에 액세스하려면 Azure Portal의 메뉴에서 
 
 Security Center는 데이터 검색 외에도 검색된 문제에 대한 권장 사항을 제공합니다. 예를 들어 연결된 네트워크 보안 그룹 없이 VM을 배포한 경우 Security Center에서 수행할 수 있는 재구성 단계와 함께 권장 사항을 표시합니다. Security Center의 컨텍스트를 벗어나지 않으면서 자동화된 재구성을 얻을 수 있습니다.  
 
-![추천](./media/tutorial-azure-security/recommendations.png)
+![권장 사항](./media/tutorial-azure-security/recommendations.png)
 
 ## <a name="set-up-data-collection"></a>데이터 수집 설정
 
@@ -91,8 +90,8 @@ VM 보안 구성을 확인하려면 먼저 Security Center 데이터 수집을 �
 
 리소스 상태를 보려면
 
-1.  Security Center 대시보드의 **리소스 보안 상태**에서 **계산**을 선택합니다. 
-2.  **계산** 블레이드에서 **가상 컴퓨터**를 선택합니다. 이 보기는 모든 VM의 구성 상태에 대한 요약을 제공합니다.
+1.  Security Center 대시보드의 **리소스 보안 상태**에서 **Compute**를 선택합니다. 
+2.  **Compute** 블레이드에서 **가상 머신**를 선택합니다. 이 보기는 모든 VM의 구성 상태에 대한 요약을 제공합니다.
 
 ![상태 계산](./media/tutorial-azure-security/compute-health.png)
 
@@ -111,7 +110,7 @@ Azure Security Center가 구성 데이터로 채워지기 시작하면 설정한
 
 대부분의 경우 Security Center에서는 Security Center의 컨텍스트를 벗어나지 않으면서 권장 사항을 처리하기 위해 취할 수 있는 실행 가능한 단계를 제공합니다. 다음 예제에서는 Security Center에서 무제한 인바운드 규칙이 있는 네트워크 보안 그룹을 검색합니다. 권장 사항 페이지에서 **인바운드 규칙 편집** 단추를 선택할 수 있습니다. 규칙을 수정하는 데 필요한 UI가 나타납니다. 
 
-![추천](./media/tutorial-azure-security/remediation.png)
+![권장 사항](./media/tutorial-azure-security/remediation.png)
 
 권장 사항이 해결되면 해결되었다고 표시됩니다. 
 
@@ -149,4 +148,3 @@ Visual Studio Team Services 및 IIS를 실행하는 Windows VM을 사용하여 C
 
 > [!div class="nextstepaction"]
 > [Visual Studio Team Services CI/CD 파이프라인](./tutorial-vsts-iis-cicd.md)
-

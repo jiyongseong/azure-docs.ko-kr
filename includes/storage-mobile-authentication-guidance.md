@@ -12,7 +12,7 @@
 > 
 > 
 
-공유 키 인증을 사용하면 [연결 문자열](../articles/storage/storage-configure-connection-string.md)이 만들어집니다. 연결 문자열은 다음과 같이 구성됩니다.  
+공유 키 인증을 사용하면 [연결 문자열](../articles/storage/common/storage-configure-connection-string.md)이 만들어집니다. 연결 문자열은 다음과 같이 구성됩니다.  
 
 * **DefaultEndpointsProtocol** - HTTP 또는 HTTPS를 선택할 수 있습니다. 그러나 HTTPS를 사용하는 것이 좋습니다.
 * **계정 이름** - 저장소 계정의 이름입니다.
@@ -36,5 +36,5 @@
    
    `"SharedAccessSignature=sv=2015-04-05&ss=b&srt=sco&sp=rw&se=2016-07-21T18%3A00%3A00Z&sig=3ABdLOJZosCp0o491T%2BqZGKIhafF1nlM3MzESDDD3Gg%3D;BlobEndpoint=https://youraccount.blob.core.windows.net"`
 
-위에 표시된 것처럼 SAS을 사용하는 경우, 응용 프로그램에서 계정 키가 노출되지 않습니다. [공유 액세스 서명: SAS 모델 이해](../articles/storage/storage-dotnet-shared-access-signature-part-1.md)를 확인하여 SAS 및 SAS 사용 모범 사례에 대해 자세히 알아볼 수 있습니다.
+위에 표시된 것처럼 SAS을 사용하는 경우, 응용 프로그램에서 계정 키가 노출되지 않습니다. [공유 액세스 서명: SAS 모델 이해](../articles/storage/common/storage-dotnet-shared-access-signature-part-1.md)를 확인하여 SAS 및 SAS 사용 모범 사례에 대해 자세히 알아볼 수 있습니다.
 

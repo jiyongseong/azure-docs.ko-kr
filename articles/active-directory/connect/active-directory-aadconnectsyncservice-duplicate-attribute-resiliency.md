@@ -3,8 +3,8 @@ title: "ID 동기화 및 중복 특성 복원력 | Microsoft Docs"
 description: "Azure AD Connect를 사용하여 디렉터리 동기화 동안 UPN 또는 ProxyAddress 충돌을 사용하여 개체를 처리하는 방법의 새 동작입니다."
 services: active-directory
 documentationcenter: 
-author: MarkusVi
-manager: femila
+author: billmath
+manager: mtillman
 editor: 
 ms.assetid: 537a92b7-7a84-4c89-88b0-9bce0eacd931
 ms.service: active-directory
@@ -12,14 +12,13 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/12/2017
+ms.date: 01/15/2018
 ms.author: markvi
+ms.openlocfilehash: 975abed469a78573553c0879b33181d2a58ec48c
+ms.sourcegitcommit: f1c1789f2f2502d683afaf5a2f46cc548c0dea50
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 7a8700e70f64851a0c5e5e8c6b31ec7a6884a96c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/18/2018
 ---
 # <a name="identity-synchronization-and-duplicate-attribute-resiliency"></a>ID 동기화 및 중복 특성 복원력
 중복 특성 복원력은 Microsoft의 동기화 도구 중 하나를 실행하는 경우 **UserPrincipalName** 및 **ProxyAddress**의 충돌로 발생하는 마찰을 제거하는 Azure Active Directory의 기능입니다.
@@ -127,7 +126,7 @@ Office 365 관리 센터에서 디렉터리 동기화 오류를 보는 방법에
 중복 특성 충돌이 있는 개체가 이 새 동작으로 처리되는 경우 알림은 테넌트에 대한 기술 알림 문의로 전송되는 표준 ID 동기화 오류 보고서 전자 메일에 포함됩니다. 그러나 이 동작에서 중요한 변경 사항이 있습니다. 이전에 중복 특성 충돌에 대한 정보는 충돌이 해결될 때까지 모든 후속 오류 보고서에 포함됩니다. 이 새 동작으로 지정된 충돌에 대한 오류 알림이 충돌 특성이 격리되는 시간에 한 번만 나타납니다.
 
 ProxyAddress 충돌에 대한 메일 알림의 예제는 다음과 같습니다.  
-    ![활성 사용자](./media/active-directory-aadconnectsyncservice-duplicate-attribute-resiliency/6.png "Active Users")  
+    ![활성 사용자](./media/active-directory-aadconnectsyncservice-duplicate-attribute-resiliency/6.png "활성 사용자")  
 
 ## <a name="resolving-conflicts"></a>충돌 해결
 이러한 오류에 대한 문제 해결 전략 및 해결 방법은 중복 특성 오류가 이전에 처리된 방식과 다르지 않습니다. 유일한 차이점은 타이머 작업은 서비스쪽 테넌트를 통해 스윕하여 충돌이 해결되면 적절한 개체에 문제의 특성을 자동으로 추가한다는 점입니다.
@@ -140,32 +139,32 @@ ProxyAddress 충돌에 대한 메일 알림의 예제는 다음과 같습니다.
 **핵심 동작:**
 
 1. 특정 특성 구성이 있는 개체는 격리되는 중복 특성과 달리 내보내기 오류가 계속 수신됩니다.  
-   예:
+   예: 
    
     a. 새로운 사용자가 **Joe@contoso.com**의 UPN과 ProxyAddress **smtp:Joe@contoso.com**로 AD에서 만들어집니다.
    
-    b. 이 개체의 속성이 ProxyAddress가 **SMTP:Joe@contoso.com**인 기존 그룹과 충돌합니다.
+    나. 이 개체의 속성이 ProxyAddress가 **SMTP:Joe@contoso.com**인 기존 그룹과 충돌합니다.
    
-    c. 내보낼 때 충돌 특성이 격리되는 대신 **ProxyAddress 충돌** 오류가 발생합니다. 복구 기능이 활성화되기 전에 수행되므로 각 후속 동기화 주기 시 작업이 다시 시도됩니다.
+    다. 내보낼 때 충돌 특성이 격리되는 대신 **ProxyAddress 충돌** 오류가 발생합니다. 복구 기능이 활성화되기 전에 수행되므로 각 후속 동기화 주기 시 작업이 다시 시도됩니다.
 2. 두 그룹이 동일한 SMTP 주소로 온-프레미스가 생성되는 경우 하나는 첫 번째 시도에서 표준 중복 **ProxyAddress** 오류로 프로비전하지 못합니다. 그러나 다음 동기화 주기 시 중복 값은 제대로 격리됩니다.
 
 **Office 포털 보고서**:
 
 1. UPN 충돌 집합에서 두 개체에 대한 자세한 오류 메시지는 같습니다. 이는 실제로 하나에만 변경된 데이터가 있는 경우 둘 모두 해당 UPN을 변경 / 격리했음을 나타냅니다.
-2. UPN 충돌에 대한 자세한 오류 메시지는 해당 UPN을 변경하고 격리한 사용자에 대한 잘못된 displayName을 보여 줍니다. 예:
+2. UPN 충돌에 대한 자세한 오류 메시지는 해당 UPN을 변경하고 격리한 사용자에 대한 잘못된 displayName을 보여 줍니다. 예: 
    
     a. **사용자 A**는 먼저 **UPN = User@contoso.com**과 동기화합니다.
    
-    b. **사용자 B**는 **UPN = User@contoso.com**과 동기화하려고 시도합니다.
+    나. **사용자 B**는 **UPN = User@contoso.com**과 동기화하려고 시도합니다.
    
-    c. **사용자 B**의 UPN은 **User1234@contoso.onmicrosoft.com**로 변경되며 **User@contoso.com**이 **DirSyncProvisioningErrors**에 추가됩니다.
+    다. **사용자 B**의 UPN은 **User1234@contoso.onmicrosoft.com**로 변경되며 **User@contoso.com**이 **DirSyncProvisioningErrors**에 추가됩니다.
    
     d. **사용자 B**에 대한 오류 메시지는 **사용자 A**가 이미 **User@contoso.com**을 UPN으로 가지고 있음을 나타내야 하지만 **사용자 B** 고유의 displayName을 보여 줍니다.
 
 **ID 동기화 오류 보고서**:
 
 *이 문제를 해결하는 방법에 대한 단계*의 링크가 잘못되었습니다.  
-    ![활성 사용자](./media/active-directory-aadconnectsyncservice-duplicate-attribute-resiliency/6.png "Active Users")  
+    ![활성 사용자](./media/active-directory-aadconnectsyncservice-duplicate-attribute-resiliency/6.png "활성 사용자")  
 
 [https://aka.ms/duplicateattributeresiliency](https://aka.ms/duplicateattributeresiliency)를 가리켜야 합니다.
 
@@ -173,5 +172,4 @@ ProxyAddress 충돌에 대한 메일 알림의 예제는 다음과 같습니다.
 * [Azure AD Connect 동기화](active-directory-aadconnectsync-whatis.md)
 * [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)
 * [Office 365에서 디렉터리 동기화 오류 확인](https://support.office.com/en-us/article/Identify-directory-synchronization-errors-in-Office-365-b4fc07a5-97ea-4ca6-9692-108acab74067)
-
 

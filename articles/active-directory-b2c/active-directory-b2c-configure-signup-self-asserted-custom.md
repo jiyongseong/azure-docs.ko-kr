@@ -1,25 +1,21 @@
 ---
-title: "Azure Active Directory B2C: 사용자 지정 정책에서 등록 수정 및 자체 어설션된 공급자 구성"
-description: "등록에 클레임을 추가하고 사용자 입력을 구성하는 연습"
+title: 'Azure Active Directory B2C: 사용자 지정 정책에서 등록 수정 및 자체 어설션된 공급자 구성'
+description: 등록에 클레임을 추가하고 사용자 입력을 구성하는 연습
 services: active-directory-b2c
-documentationcenter: 
-author: rojasja
-manager: krassk
-editor: tbd
-ms.assetid: 
+documentationcenter: ''
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: article
-ms.devlang: na
 ms.date: 04/29/2017
-ms.author: joroja
-ms.translationtype: Human Translation
-ms.sourcegitcommit: d9ae8e8948d82b9695d7d144d458fe8180294084
-ms.openlocfilehash: 8731ff3a42e12d145bc259597812aded8333a095
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/23/2017
-
+ms.author: davidmu
+ms.openlocfilehash: b9ea48f0700509194602dd15ff42c7c689685a53
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="azure-active-directory-b2c-modify-sign-up-to-add-new-claims-and-configure-user-input"></a>Azure Active Directory B2C: 새 클레임을 추가하도록 등록 수정 및 사용자 입력 구성
 
@@ -36,7 +32,7 @@ ms.lasthandoff: 05/23/2017
 
 
 ## <a name="define-the-claim-its-display-name-and-the-user-input-type"></a>클레임, 해당 표시 이름 및 사용자 입력 형식을 정의합니다.
-사용자에게 도시를 요청해 보겠습니다.  TrustFrameWorkExtensions 정책 파일의 `<ClaimsSchema>` 요소에 다음 요소를 추가합니다.
+사용자에게 도시를 요청해 보겠습니다.  TrustFrameworkBase 정책 파일의 `<ClaimsSchema>` 요소에 다음 요소를 추가합니다.
 
 ```xml
 <ClaimType Id="city">
@@ -286,4 +282,3 @@ ms.lasthandoff: 05/23/2017
 <TechnicalProfile Id="AAD-UserWriteUsingAlternativeSecurityId">
 <TechnicalProfile Id="AAD-UserReadUsingAlternativeSecurityId">
 ```
-

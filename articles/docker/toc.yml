@@ -1,0 +1,33 @@
+- name: Docker 설명서
+  href: index.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: Docker Marketplace 템플릿
+      href: 'https://azuremarketplace.microsoft.com/en-us/marketplace/apps/CanonicalandMSOpenTech.DockerOnUbuntuServer1404LTS'
+- name: 자습서
+  items:
+    - name: Docker 및 PostgreSQL을 사용하는 Python 웹앱
+      href: /azure/app-service-web/app-service-web-tutorial-docker-python-postgresql-app
+    - name: Docker Swarm 및 VSTS를 사용하는 CI/CD
+      href: /azure/container-service/container-service-docker-swarm-mode-setup-ci-cd-acs-engine
+    - name: 'Docker, Jenkins 및 Linux를 사용하는 CI/CD'
+      href: /azure/virtual-machines/linux/tutorial-jenkins-github-docker-cicd
+- name: 방법 가이드
+  items:
+    - name: Docker VM 확장
+      href: /azure/virtual-machines/linux/dockerextension
+    - name: Docker 컴퓨터
+      href: /azure/virtual-machines/linux/docker-machine
+    - name: Docker 컨테이너 레지스트리
+      href: /azure/container-registry/container-registry-get-started-portal
+- name: 리소스
+  items:
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: Docker Azure 드라이버
+      href: 'https://docs.docker.com/machine/drivers/azure/'
+    - name: Docker Azure 사이트
+      href: 'https://www.docker.com/docker-azure'
+    - name: Docker 사이트
+      href: 'https://docker.com'

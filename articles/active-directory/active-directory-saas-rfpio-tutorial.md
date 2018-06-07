@@ -1,10 +1,10 @@
 ---
-title: "자습서: RFPIO와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory와 RFPIO 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: RFPIO와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory와 RFPIO 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: 87187076-7b50-4247-814f-f217b052703f
 ms.service: active-directory
 ms.workload: identity
@@ -13,13 +13,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/16/2017
 ms.author: jeedes
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 3716c7699732ad31970778fdfa116f8aee3da70b
-ms.openlocfilehash: 26a8bb17dad5a01b401ce7f9b484f09822825cbf
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/30/2017
-
-
+ms.openlocfilehash: 915b6f9c96bc8dbab54e770340acf795df92a3fb
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-rfpio"></a>자습서: RFPIO와 Azure Active Directory 통합
 
@@ -31,7 +29,7 @@ RFPIO를 Azure AD와 통합하면 다음과 같은 이점이 제공됩니다.
 - 사용자가 해당 Azure AD 계정으로 RFPIO를에 자동으로 로그온(Single Sign-on)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](active-directory-appssoaccess-whatis.md)을 참조하세요.
+Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](manage-apps/what-is-single-sign-on.md)을 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +57,7 @@ RFPIO의 Azure AD 통합을 구성하려면 갤러리의 RFPIO를 관리되는 S
 
 ### <a name="to-add-rfpio-from-the-gallery"></a>갤러리에서 RFPIO를 추가하려면
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 선택합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 선택합니다. 
 
     ![Active Directory][1]
 
@@ -102,70 +100,70 @@ RFPIO에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 �
 
 1. Azure Portal의 **RFPIO** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single Sign-On** 대화 상자에서 **모드**를 **SAML 기반 로그온**으로 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/tutorial_rfpio_samlbase.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/tutorial_rfpio_samlbase.png)
 
 3. **RFPIO 도메인 및 URL** 섹션에서 **IDP** 시작 모드로 응용 프로그램을 구성하려는 경우 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/tutorial_rfpio_url.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/tutorial_rfpio_url.png)
 
     a. **식별자** 텍스트 상자에 URL `https://www.rfpio.com`을 입력합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/tutorial_rfpio_url1.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/tutorial_rfpio_url1.png)
 
-    b. **고급 URL 설정 표시**를 선택합니다.
+    나. **고급 URL 설정 표시**를 선택합니다.
 
-    c. **릴레이 상태** 텍스트 상자에 문자열 값을 입력합니다. 이 값을 얻으려면 [RFPIO 지원 팀](https://www.rfpio.com/contact/)에 문의하세요. 
+    다. **릴레이 상태** 텍스트 상자에 문자열 값을 입력합니다. 이 값을 얻으려면 [RFPIO 지원 팀](https://www.rfpio.com/contact/)에 문의하세요. 
 
 4. **고급 URL 설정 표시**를 선택합니다. **SP** 시작 모드에서 응용 프로그램을 구성하려면: 
 
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/tutorial_rfpio_url2.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/tutorial_rfpio_url2.png)
 
     **로그온 URL** 텍스트 상자에 URL `https://www.app.rfpio.com`을 입력합니다.
 
 5. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 메타데이터 파일을 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/tutorial_rfpio_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/tutorial_rfpio_certificate.png) 
 
 6. **저장** 단추를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/tutorial_general_400.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/tutorial_general_400.png)
 
 7. 다른 웹 브라우저 창에서 **RFPIO** 웹 사이트에 관리자로 로그인합니다.
 
 8. 왼쪽 아래 모서리 드롭다운을 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/app1.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/app1.png)
 
 9. **조직 설정**을 클릭합니다. 
 
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/app2.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/app2.png)
 
 10. **기능 및 통합**을 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/app4.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/app4.png)
 
 11. **SAML SSO 구성**에서 **편집**을 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/app3.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/app3.png)
 
 12. 이 섹션에서 다음 작업을 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/app5.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/app5.png)
     
     a. **다운로드한 메타데이터 XML**의 내용을 복사하여 **ID 구성** 필드에 붙여넣습니다.
 
     > [!NOTE]
     >다운로드한 **메타데이터 XML**의 내용을 복사하려면 **메모장++** 또는 적절한 **XML 편집기**를 사용합니다. 
 
-    b. **유효성 검사**를 클릭합니다.
+    나. **유효성 검사**를 클릭합니다.
 
-    c. **유효성 검사**를 클릭한 후 **SAML(Enabled)**(SAML(사용))을 설정으로 전환합니다.
+    다. **유효성 검사**를 클릭한 후 **SAML(Enabled)**(SAML(사용))을 설정으로 전환합니다.
 
-    d. **Submit**를 클릭합니다.
+    d. **제출**을 클릭합니다.
 
 > [!TIP]
 > 이제 앱을 설정하는 동안 [Azure Portal](https://portal.azure.com) 내에서 이러한 지침의 간결한 버전을 읽을 수 있습니다.  **Active Directory > 엔터프라이즈 응용 프로그램** 섹션에서 이 앱을 추가한 후에는 **Single Sign-On** 탭을 클릭하고 맨 아래에 있는 **구성** 섹션을 통해 포함된 설명서에 액세스하면 됩니다. 포함된 설명서 기능에 대한 자세한 내용은 [Azure AD 포함된 설명서]( https://go.microsoft.com/fwlink/?linkid=845985)에서 확인할 수 있습니다.
@@ -196,9 +194,9 @@ RFPIO에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 �
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -213,29 +211,29 @@ RFPIO의 경우 프로비전은 수동 작업입니다.
 
 2. 왼쪽 아래 모서리 드롭다운을 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/app1.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/app1.png)
 
 3. **조직 설정**을 클릭합니다. 
 
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/app2.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/app2.png)
 
 4. **TEAM MEMBERS**(팀 멤버)를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/app6.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/app6.png)
 
 5. **멤버 추가**를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/app7.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/app7.png)
 
 6. **새 멤버 추가** 섹션에서 다음 작업을 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/app8.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/app8.png)
 
     a. **Enter one email per line**(줄당 하나의 메일 입력) 필드에 **메일 주소**를 입력합니다.
 
-    b. 요구 사항에 따라 **역할**을 선택합니다.
+    나. 요구 사항에 따라 **역할**을 선택합니다.
 
-    c. **멤버 추가**를 클릭합니다.
+    다. **멤버 추가**를 클릭합니다.
         
     > [!NOTE]
     > Azure Active Directory 계정 보유자는 활성화되기 전에 메일을 받고 링크를 따라 계정을 확인합니다.
@@ -254,7 +252,7 @@ RFPIO의 경우 프로비전은 수동 작업입니다.
 
 2. 응용 프로그램 목록에서 **RFPIO**를 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-rfpio-tutorial/tutorial_rfpio_app.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-rfpio-tutorial/tutorial_rfpio_app.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -280,7 +278,7 @@ RFPIO의 경우 프로비전은 수동 작업입니다.
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS 앱을 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 <!--Image references-->
 
@@ -295,5 +293,4 @@ RFPIO의 경우 프로비전은 수동 작업입니다.
 [201]: ./media/active-directory-saas-rfpio-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-rfpio-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-rfpio-tutorial/tutorial_general_203.png
-
 

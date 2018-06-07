@@ -1,45 +1,43 @@
 ---
-title: "SQL Data Warehouse의 사용자 정의 스키마 | Microsoft Docs"
-description: "솔루션 개발을 위한 Azure SQL 데이터 웨어하우스의 Transact-SQL 스키마 사용을 위한 팁"
+title: SQL Data Warehouse의 사용자 정의 스키마 사용 | Microsoft Docs
+description: 솔루션 개발을 위해 Azure SQL Data Warehouse의 T-SQL 사용자 정의 스키마 사용을 위한 팁입니다.
 services: sql-data-warehouse
-documentationcenter: NA
-author: jrowlandjones
-manager: jhubbard
-editor: 
-ms.assetid: 52af5bd5-d5d3-4f9b-8704-06829fb924e3
+author: ronortloff
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: t-sql
-ms.date: 10/31/2016
-ms.author: jrj;barbkess
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: dfb58956ad6637cf0f50b4c052ab98fb7c26139d
-ms.lasthandoff: 04/03/2017
-
-
+ms.topic: conceptual
+ms.component: implement
+ms.date: 04/17/2018
+ms.author: rortloff
+ms.reviewer: igorstan
+ms.openlocfilehash: c18e6d34416390ae7e93b69b28d508a540f7b1ab
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
-# <a name="user-defined-schemas-in-sql-data-warehouse"></a>SQL 데이터 웨어하우스의 사용자 정의 스키마
+# <a name="using-user-defined-schemas-in-sql-data-warehouse"></a>SQL Data Warehouse의 사용자 정의 스키마 사용
+솔루션 개발을 위해 Azure SQL Data Warehouse의 T-SQL 사용자 정의 스키마 사용을 위한 팁입니다.
+
+## <a name="schemas-for-application-boundaries"></a>응용 프로그램 경계에 대한 스키마
+
 일반적인 데이터 웨어하우스는 작업, 도메인 또는 보안에 따라 응용 프로그램 경계를 만들기 위해 별도 데이터베이스를 사용합니다. 예를 들어, 기존의 SQL Server 데이터 웨어하우스는 스테이징 데이터베이스, 데이터 웨어하우스 데이터베이스 및 일부 데이터마트 데이터베이스를 포함할 수 있습니다. 이 토폴로지에서 각 데이터베이스는 아키텍처에서 워크로드 및 보안 경계로 작동합니다.
 
-반면, SQL 데이터 웨어하우스는 하나의 데이터베이스 내에서 전체 데이터 웨어하우스 워크로드를 실행합니다. 데이터베이스 간 조인은 허용되지 않습니다. 따라서 SQL 데이터 웨어하우스는 웨어하우스에서 사용된 모든 테이블을 하나의 데이터베이스 내에 저장할 것으로 예상합니다.
+반면, SQL Data Warehouse는 하나의 데이터베이스 내에서 전체 데이터 웨어하우스 워크로드를 실행합니다. 데이터베이스 간 조인은 허용되지 않습니다. 따라서 SQL Data Warehouse는 웨어하우스에서 사용된 모든 테이블을 하나의 데이터베이스 내에 저장할 것으로 예상합니다.
 
 > [!NOTE]
-> SQL 데이터 웨어하우스는 모든 종류의 데이터베이스 간 쿼리를 지원하지 않습니다. 따라서 이 패턴을 활용하는 데이터 웨어하우스 구현을 수정해야 합니다.
+> SQL Data Warehouse는 모든 종류의 데이터베이스 간 쿼리를 지원하지 않습니다. 따라서 이 패턴을 활용하는 데이터 웨어하우스 구현을 수정해야 합니다.
 > 
 > 
 
-## <a name="recommendations"></a>추천
+## <a name="recommendations"></a>권장 사항
 사용자 정의 스키마를 사용하여 워크로드, 보안, 도메인 및 기능 경계를 통합하기 위한 권장 사항입니다.
 
-1. SQL 데이터 웨어하우스 데이터베이스를 사용하여 전체 데이터 웨어하우스 워크로드를 실행합니다.
-2. SQL 데이터 웨어하우스 데이터베이스 하나를 사용하여 기존 데이터 웨어하우스 환경을 통합합니다.
+1. SQL Data Warehouse 데이터베이스를 사용하여 전체 데이터 웨어하우스 워크로드를 실행합니다.
+2. SQL Data Warehouse 데이터베이스 하나를 사용하여 기존 데이터 웨어하우스 환경을 통합합니다.
 3. **사용자 정의 스키마** 를 활용하여 데이터베이스를 사용하여 이전에 구현된 경계를 제공합니다.
 
-사용자 정의 스키마를 이전에 사용하지 않은 경우, 초기 상태입니다. SQL 데이터 웨어하우스 데이터베이스에서 사용자 정의 스키마에 대한 기준으로 이전 데이터베이스 이름을 사용하면 됩니다.
+사용자 정의 스키마를 이전에 사용하지 않은 경우, 초기 상태입니다. SQL Data Warehouse 데이터베이스에서 사용자 정의 스키마에 대한 기준으로 이전 데이터베이스 이름을 사용하면 됩니다.
 
 스키마가 이미 사용된 경우 몇 가지 옵션이 있습니다.
 
@@ -48,7 +46,7 @@ ms.lasthandoff: 04/03/2017
 3. 이전 스키마 구조를 다시 만들도록 추가 스키마의 테이블 위에 뷰를 구현하여 레거시 스키마 이름을 유지합니다.
 
 > [!NOTE]
-> 첫 번째 검사에서 옵션 3은 가장 매력적인 옵션처럼 보일 수 있습니다. 그러나 자세히 보면 어렵습니다. 뷰는 SQL 데이터 웨어하우스에서만 읽혀집니다. 기본 테이블에 대해 모든 데이터 또는 테이블을 수정해야 합니다. 또한 옵션 3은 시스템으로의 뷰 레이어를 소개합니다. 이미 아키텍처에서 뷰를 사용 중인 경우 추가로 고려할 수 있습니다.
+> 첫 번째 검사에서 옵션 3은 가장 매력적인 옵션처럼 보일 수 있습니다. 그러나 자세히 보면 어렵습니다. 뷰는 SQL Data Warehouse에서만 읽혀집니다. 기본 테이블에 대해 모든 데이터 또는 테이블을 수정해야 합니다. 또한 옵션 3은 시스템으로의 뷰 레이어를 소개합니다. 이미 아키텍처에서 뷰를 사용 중인 경우 추가로 고려할 수 있습니다.
 > 
 > 
 
@@ -122,14 +120,5 @@ FROM    [edw].customer
 > 
 
 ## <a name="next-steps"></a>다음 단계
-더 많은 개발 팁은 [개발 개요][development overview]를 참조하세요.
-
-<!--Image references-->
-
-<!--Article references-->
-[development overview]: sql-data-warehouse-overview-develop.md
-
-<!--MSDN references-->
-
-<!--Other Web references-->
+더 많은 개발 팁은 [개발 개요](sql-data-warehouse-overview-develop.md)를 참조하세요.
 

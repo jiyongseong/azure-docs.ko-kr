@@ -14,11 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/14/2016
 ms.author: douglasl
-translationtype: Human Translation
-ms.sourcegitcommit: bcb0a66425439522e0c9a353798ac70505b91e39
 ms.openlocfilehash: ceb355d2ba872ed5d3886c6dc82ca75b1854db0a
-
-
+ms.sourcegitcommit: b5c6197f997aa6858f420302d375896360dd7ceb
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/21/2017
 ---
 # <a name="enable-transparent-data-encryption-tde-for-stretch-database-on-azure"></a>Azure에서 Stretch Database에 대해 TDE(투명한 데이터 암호화)를 사용하도록 설정
 > [!div class="op_single_selector"]
@@ -58,9 +58,3 @@ TDE는 데이터베이스 암호화 키라는 대칭 키를 사용하여 전체 
 
 
 <!--Link references-->
-
-
-
-<!--HONumber=Jan17_HO4-->
-
-

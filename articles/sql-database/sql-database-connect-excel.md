@@ -1,28 +1,21 @@
 ---
-title: "SQL Database에 Excel 연결 | Microsoft Docs"
-description: "Microsoft Excel을 클라우드의 Azure SQL 데이터베이스에 연결하는 방법을 알아봅니다. 보고 및 데이터 탐색을 위해 Excel로 데이터를 가져옵니다."
+title: SQL Database에 Excel 연결 | Microsoft Docs
+description: Microsoft Excel을 클라우드의 Azure SQL 데이터베이스에 연결하는 방법을 알아봅니다. 보고 및 데이터 탐색을 위해 Excel로 데이터를 가져옵니다.
 services: sql-database
-keywords: "SQL에 Excel 연결, Excel로 데이터 가져오기"
-documentationcenter: 
+keywords: SQL에 Excel 연결, Excel로 데이터 가져오기
 author: joseidz
-manager: jhubbard
-editor: 
-ms.assetid: 906924bc-2707-48d3-bac6-397976a0409d
+manager: craigg
 ms.service: sql-database
 ms.custom: develop apps
-ms.workload: data-management
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 03/10/2017
-ms.author: jhubbard
-ms.translationtype: Human Translation
-ms.sourcegitcommit: e851a3e1b0598345dc8bfdd4341eb1dfb9f6fb5d
-ms.openlocfilehash: 6a9993aa31142681f3f6c57684913bf932fd5e7d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/15/2017
-
-
+ms.author: craigg
+ms.openlocfilehash: 6f2894d65240580346b99d203f8289652d8e6618
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34364093"
 ---
 # <a name="connect-excel-to-an-azure-sql-database-and-create-a-report"></a>Azure SQL 데이터베이스에 Excel 연결 및 보고서 만들기
 
@@ -32,37 +25,35 @@ ms.lasthandoff: 04/15/2017
 
 또한 Excel의 사본이 필요합니다. 이 문서는 [Microsoft Excel 2016](https://products.office.com/)를 사용합니다.
 
-## <a name="connect-excel-to-a-sql-database-and-create-an-odc-file"></a>SQL 데이터베이스에 Excel 연결 및 odc 파일 만들기
+## <a name="connect-excel-to-a-sql-database-and-load-data"></a>SQL 데이터베이스에 Excel 연결 및 데이터 로드
 1. Excel을 SQL 데이터베이스에 연결하려면 Excel을 연 다음 새 통합 문서를 만들거나 기존 Excel 통합 문서를 엽니다.
-2. 페이지 위쪽에 있는 메뉴 모음에서 **데이터**, **기타 원본에서** 및 **SQL Server에서**를 차례로 클릭합니다.
+2. 페이지 상단의 메뉴 막대에서 **데이터** 탭을 선택하고 **데이터 가져오기**를 선택한 다음, [위치: Azure]와 **위치: Azure SQL Database**를 차례로 선택합니다. 
    
    ![데이터 원본 선택: SQL 데이터베이스에 Excel을 연결합니다.](./media/sql-database-connect-excel/excel_data_source.png)
    
    데이터 연결 마법사가 열립니다.
-3. **데이터베이스 서버에 연결** 대화 상자에서 <*servername*>**.database.windows.net** 형식에서 연결하려는 SQL Database **서버 이름**을 입력합니다. 예를 들어 **adworkserver.database.windows.net**입니다.
-4. **로그온 자격 증명**에서 **다음 사용자 이름 및 암호 사용**을 클릭하고 SQL Database 서버를 만들 때 설정한 **사용자 이름** 및 **암호**를 입력한 후 **다음**을 클릭합니다.
+3. **데이터베이스 서버에 연결** 대화 상자에서 <*servername*>**.database.windows.net** 형식에서 연결하려는 SQL Database **서버 이름**을 입력합니다. 예를 들어, **msftestserver.database.windows.net**입니다. 선택적으로 데이터베이스 이름을 입력합니다. **확인**을 선택하여 자격 증명 창을 엽니다. 
+
+   ![server-name.png](media/sql-database-connect-excel/server-name.png)
+
+1. **SQL Server 데이터베이스** 대화 상자에서 왼쪽의 **데이터베이스**를 선택한 다음, 연결할 SQL 데이터베이스 서버의 **사용자 이름**과 **암호**를 입력합니다. **연결**을 선택하여 **탐색기**를 엽니다. 
+
+  ![서버 이름 및 로그인 자격 증명 입력](./media/sql-database-connect-excel/connect-to-server.png)
    
-   ![서버 이름 및 로그인 자격 증명 입력](./media/sql-database-connect-excel/connect-to-server.png)
+  > [!TIP]
+  > 네트워크 환경에 따라 SQL Database 서버에서 클라이언트 IP 주소에서 트래픽을 허용하지 않는 경우 연결할 수 없거나 연결이 끊길 수 있습니다. [Azure 포털](https://portal.azure.com/)로 이동하고 SQL Server를 클릭하고 서버를 클릭하며 설정 아래에서 방화벽을 클릭하고 클라이언트 IP 주소를 추가합니다. 자세한 내용은 [방화벽 설정 구성 방법](sql-database-configure-firewall-settings.md) 을 참조하세요.
    
-   > [!TIP]
-   > 네트워크 환경에 따라 SQL 데이터베이스 서버에서 클라이언트 IP 주소에서 트래픽을 허용하지 않는 경우 연결할 수 없거나 연결이 끊길 수 있습니다. [Azure 포털](https://portal.azure.com/)로 이동하고 SQL Server를 클릭하고 서버를 클릭하며 설정 아래에서 방화벽을 클릭하고 클라이언트 IP 주소를 추가합니다. 자세한 내용은 [방화벽 설정 구성 방법](sql-database-configure-firewall-settings.md) 을 참조하세요.
-   > 
-   > 
-5. **데이터베이스 및 테이블 선택** 대화 상자에서 목록에서 작업할 데이터베이스를 선택한 후 작업할 테이블 또는 뷰(**vGetAllCategories** 선택)를 클릭한 후 **다음**을 클릭합니다.
+   
+5. **탐색기**의 목록에서 작업할 데이터베이스를 선택하고, 작업할 테이블 또는 보기를 선택한(여기서는 **vGetAllCategories** 선택) 후에 **로드**를 선택하여 SQL Azure 데이터베이스에서 Excel 스프레드시트로 데이터를 이동합니다.
    
     ![데이터베이스 및 테이블 선택](./media/sql-database-connect-excel/select-database-and-table.png)
    
-    **데이터 연결 파일 저장 및 마침** 대화 상자가 열리고 여기에 Excel에서 사용하는 Office 데이터베이스 연결(*.odc) 파일에 대한 정보를 제공합니다. 기본값을 그대로 두거나 선택 항목을 사용자 지정할 수 있습니다.
-6. 기본값을 그대로 두지만 특히 **파일 이름** 은 적어둡니다. **설명**, **친숙한 이름** 및 **검색 키워드**를 통해 사용자는 연결할 대상을 기억하고 연결을 찾을 수 있습니다. odc 파일에 저장된 연결 정보를 원하는 경우 **항상 이 파일을 사용하여 데이터 새로 고침**을 클릭하여 연결할 때 업데이트할 수 있도록 한 후 **마침**을 클릭합니다.
-   
-    ![odc 파일 저장](./media/sql-database-connect-excel/save-odc-file.png)
-   
-    **데이터 가져오기** 대화 상자가 나타납니다.
 
 ## <a name="import-the-data-into-excel-and-create-a-pivot-chart"></a>Excel로 데이터 가져오기 및 피벗 차트 만들기
-이제 연결을 설정했고 데이터 및 연결 정보로 파일을 만들었으며 데이터를 가져올 준비가 됩니다.
+연결을 설정한 후에는 데이터를 로드하는 방법과 관련하여 여러 옵션이 있습니다. 예를 들어, 다음 단계에서는 SQL Database에 있는 데이터를 기반으로 피벗 차트를 만듭니다. 
 
-1. **데이터 가져오기** 대화 상자에서 워크시트의 데이터를 표시하기 위해 원하는 옵션을 클릭한 후 **확인**을 클릭합니다. **PivotChart**를 선택했습니다. 또한 **새 워크시트**를 만들거나 **이 데이터를 데이터 모델에 추가하도록** 선택할 수도 있습니다. 데이터 모델에 대한 자세한 내용은 [Excel에서 데이터 모델 만들기](https://support.office.com/article/Create-a-Data-Model-in-Excel-87E7A54C-87DC-488E-9410-5C75DBCB0F7B)를 참조하세요. **속성** 을 클릭하여 이전 단계에서 만든 odc 파일에 대한 정보를 탐색하고 데이터를 새로 고치는 옵션을 선택합니다.
+1. 이전 섹션의 단계를 따릅니다. 단, 이번에는 **로드**를 선택하는 대신 **로드** 드롭다운에서 **Load to**(로드 위치)를 선택합니다.
+2. 그런 다음, 현재 통합 문서에서 이 데이터를 표시할 방법을 선택합니다. **PivotChart**를 선택했습니다. 또한 **새 워크시트**를 만들거나 **이 데이터를 데이터 모델에 추가하도록** 선택할 수도 있습니다. 데이터 모델에 대한 자세한 내용은 [Excel에서 데이터 모델 만들기](https://support.office.com/article/Create-a-Data-Model-in-Excel-87E7A54C-87DC-488E-9410-5C75DBCB0F7B)를 참조하세요. 
    
     ![Excel에서 데이터에 대한 형식 선택](./media/sql-database-connect-excel/import-data.png)
    
@@ -72,14 +63,39 @@ ms.lasthandoff: 04/15/2017
     ![데이터베이스 보고서를 구성합니다.](./media/sql-database-connect-excel/power-pivot-results.png)
 
 > [!TIP]
-> 다른 Excel 통합 문서 및 워크시트를 데이터베이스에 연결하려면 **데이터**, **연결**, **추가**를 차례로 클릭하고 목록에서 만든 연결을 선택한 후 **열기**를 클릭합니다.
-> ![다른 통합 문서에서 연결 열기](./media/sql-database-connect-excel/open-from-another-workbook.png)
-> 
-> 
+> 다른 Excel 통합 문서 및 워크시트를 데이터베이스에 연결하려면 **데이터** 탭을 선택하고 **최근 원본**을 선택하여 **최근 원본** 대화 상자를 시작합니다. 여기서, 목록에서 만든 연결을 선택한 다음, **열기**를 클릭합니다.
+> ![최신 연결](media/sql-database-connect-excel/recent-connections.png)
+ 
+## <a name="create-a-permanent-connection-using-odc-file"></a>.odc 파일을 사용하여 영구 연결 만들기
+연결 세부 정보를 영구적으로 저장하려면 .odc 파일을 만들고 이 연결을 **기존 연결** 대화 상자에서 선택 가능한 옵션으로 지정하면 됩니다. 
+
+1. 페이지 상단의 메뉴 모음에서 **데이터** 탭을 선택한 다음, **기존 연결**을 선택하여 **기존 연결** 대화 상자를 시작합니다. 
+    1. **더 찾아보기**를 선택하여 **데이터 원본 선택** 대화 상자를 엽니다.   
+    2. **+NewSqlServerConnection.odc** 파일을 선택한 후 **열기**를 선택하여 **데이터 연결 마법사**를 엽니다.
+
+    ![새 연결](media/sql-database-connect-excel/new-connection.png)
+
+2. **데이터 연결 마법사**에서 서버 이름과 SQL Database 자격 증명을 입력합니다. **다음**을 선택합니다. 
+    1. 드롭다운에서 데이터가 포함된 데이터베이스를 선택합니다. 
+    2. 원하는 테이블 또는 보기를 선택합니다. 여기서는 vGetAllCategories를 선택했습니다.
+    3. **다음**을 선택합니다. 
+
+    ![데이터 연결 마법사](media/sql-database-connect-excel/data-connection-wizard.png) 
+
+3. 파일의 위치와 **파일 이름**을 선택한 다음, 데이터 연결 마법사의 다음 화면에서 **이름**을 선택합니다. 파일에 암호를 저장하도록 선택할 수도 있지만, 이 경우에는 원치 않는 액세스에 데이터가 노출될 수도 있습니다. 준비가 되면 **마침**을 선택합니다. 
+
+    ![데이터 연결 저장](media/sql-database-connect-excel/save-data-connection.png)
+
+4. 데이터를 가져올 방법을 선택합니다. 여기서는 피벗 테이블을 만들도록 선택했습니다. **속성**을 선택하여 연결의 속성을 수정할 수도 있습니다. 준비가 되면 **확인**을 선택합니다. 파일에 암호를 저장하도록 선택하지 않은 경우에는 자격 증명을 입력하라는 메시지가 표시됩니다. 
+
+    ![데이터 가져오기](media/sql-database-connect-excel/import-data2.png)
+
+5. **데이터** 탭을 확장하고 **기존 연결**을 선택하여 새 연결이 저장되었는지 확인합니다. 
+
+    ![기존 연결](media/sql-database-connect-excel/existing-connection.png)
 
 ## <a name="next-steps"></a>다음 단계
-* 고급 쿼리 및 분석을 위해 [SQL Server Management Studio를 사용하여 SQL 데이터베이스에 연결](sql-database-connect-query-ssms.md) 하는 방법에 대해 알아보세요.
+* 고급 쿼리 및 분석을 위해 [SQL Server Management Studio를 사용하여 SQL Database에 연결](sql-database-connect-query-ssms.md) 하는 방법에 대해 알아보세요.
 * [탄력적 풀](sql-database-elastic-pool.md)의 이점에 대해 알아보세요.
-* [백 엔드에서 SQL 데이터베이스에 연결할 웹 응용 프로그램을 만드는](../app-service-web/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database.md)방법에 대해 알아보세요.
-
+* [백 엔드에서 SQL Database에 연결할 웹 응용 프로그램을 만드는](../app-service/app-service-web-tutorial-dotnet-sqldatabase.md)방법에 대해 알아보세요.
 

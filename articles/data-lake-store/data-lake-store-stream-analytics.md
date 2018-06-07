@@ -1,48 +1,39 @@
 ---
-title: "Stream Analytics에서 Data Lake Store로 데이터 스트리밍 | Microsoft 문서"
-description: "Azure 스트림 분석을 사용하여 Azure Data Lake 저장소에 데이터 스트리밍"
+title: Stream Analytics에서 Data Lake Store로 데이터 스트리밍 | Microsoft 문서
+description: Azure Stream Analytics를 사용하여 Azure Data Lake 저장소에 데이터 스트리밍
 services: data-lake-store,stream-analytics
-documentationcenter: 
+documentationcenter: ''
 author: nitinme
 manager: jhubbard
 editor: cgronlun
 ms.assetid: edb58e0b-311f-44b0-a499-04d7e6c07a90
 ms.service: data-lake-store
 ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 06/29/2017
+ms.topic: conceptual
+ms.date: 01/30/2018
 ms.author: nitinme
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 4ecf4f8594f7a274bec231fb74c4caa22c3cc354
-ms.openlocfilehash: b5f2ae124ca3276e15e0d1f75d655ec346bf8ee8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/06/2017
-
-
+ms.openlocfilehash: 7ff59957cf7700af79425aa005444a135b7ee098
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
-# <a name="stream-data-from-azure-storage-blob-into-data-lake-store-using-azure-stream-analytics"></a>Azure 스트림 분석을 사용하여 Azure 저장소 Blob에서 Data Lake 저장소에 데이터 스트리밍
-이 문서는 Azure 스트림 분석 작업에 대한 출력으로 Azure Data Lake 저장소를 사용하는 방법을 알아봅니다. 이 문서에서는 Azure 저장소 Blob(입력)에서 데이터를 읽고 Data Lake 저장소(출력)에 데이터를 기록하는 간단한 시나리오를 보여줍니다.
-
-> [!NOTE]
-> 이 때 [Azure 클래식 포털](https://manage.windowsazure.com)에서만 스트림 분석에 대한 Data Lake Store 출력을 만들고 구성할 수 있습니다. 따라서 이 자습서의 일부는 Azure 클래식 포털을 사용합니다.
->
->
+# <a name="stream-data-from-azure-storage-blob-into-data-lake-store-using-azure-stream-analytics"></a>Azure Stream Analytics를 사용하여 Azure Storage Blob에서 Data Lake 저장소에 데이터 스트리밍
+이 문서는 Azure Stream Analytics 작업에 대한 출력으로 Azure Data Lake 저장소를 사용하는 방법을 알아봅니다. 이 문서에서는 Azure Storage Blob(입력)에서 데이터를 읽고 Data Lake 저장소(출력)에 데이터를 기록하는 간단한 시나리오를 보여줍니다.
 
 ## <a name="prerequisites"></a>필수 조건
 이 자습서를 시작하기 전에 다음이 있어야 합니다.
 
 * **Azure 구독**. [Azure 무료 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
 
-* **Azure Storage 계정**. 이 계정에서 Blob 컨테이너를 사용하여 스트림 분석 작업에 대한 데이터를 입력합니다. 이 자습서의 경우 **storageforasa**라는 저장소 계정 및 **storageforasacontainer**라는 계정 내의 컨테이너가 있다고 가정합니다. 컨테이너를 만든 후에 샘플 데이터 파일을 거기에 업로드합니다. 
+* **Azure Storage 계정**. 이 계정에서 Blob 컨테이너를 사용하여 Stream Analytics 작업에 대한 데이터를 입력합니다. 이 자습서의 경우 **storageforasa**라는 저장소 계정 및 **storageforasacontainer**라는 계정 내의 컨테이너가 있다고 가정합니다. 컨테이너를 만든 후에 샘플 데이터 파일을 거기에 업로드합니다. 
   
 * **Azure Data Lake Store 계정**. [Azure Portal을 사용하여 Azure Data Lake Store 시작](data-lake-store-get-started-portal.md)에 있는 지침을 따릅니다. **asadatalakestore**라는 Data Lake Store 계정이 있다고 가정합니다. 
 
-## <a name="create-a-stream-analytics-job"></a>스트림 분석 작업 만들기
-입력 원본 및 출력 대상을 포함하는 스트림 분석 작업을 만들어 시작합니다. 이 자습서의 경우 원본은 Azure blob 컨테이너이고 대상은 Data Lake 저장소입니다.
+## <a name="create-a-stream-analytics-job"></a>Stream Analytics 작업 만들기
+입력 원본 및 출력 대상을 포함하는 Stream Analytics 작업을 만들어 시작합니다. 이 자습서의 경우 원본은 Azure blob 컨테이너이고 대상은 Data Lake 저장소입니다.
 
-1. [Azure 포털](https://portal.azure.com)에 로그인합니다.
+1. [Azure Portal](https://portal.azure.com)에 로그인합니다.
 
 2. 왼쪽 창에서 **Stream Analytics 작업**을 클릭한 후 **추가**를 클릭합니다.
 
@@ -66,11 +57,11 @@ ms.lasthandoff: 01/06/2017
     * **원본 형식**으로 **데이터 스트림**을 선택합니다.
     * **원본**으로 **Blob Storage**를 선택합니다.
     * **구독**에 대해 **현재 구독의 Blob Storage 사용**을 선택합니다.
-    * **저장소 계정**에서 필수 조건의 일부로 만든 저장소 계정을 선택합니다. 
+    * **Storage 계정**에서 필수 조건의 일부로 만든 Storage 계정을 선택합니다. 
     * **컨테이너**에 대해 선택한 저장소 계정에서 만든 컨테이너를 선택합니다.
     * **이벤트 직렬화 형식**으로 **CSV**를 선택합니다.
     * **구분 기호**로 **탭**을 선택합니다.
-    * **인코딩**으로 **UTF-8**을 선택합니다.
+    * **Encoding**으로 **UTF-8**을 선택합니다.
 
     **만들기**를 클릭합니다. 이제 포털에 입력이 추가되고 연결을 테스트합니다.
 
@@ -99,11 +90,11 @@ ms.lasthandoff: 01/06/2017
     * **시간 형식**의 경우, 접두사 경로에 시간 토큰을 사용한 경우 파일을 구성하는 시간 형식을 지정합니다.
     * **이벤트 직렬화 형식**으로 **CSV**를 선택합니다.
     * **구분 기호**로 **탭**을 선택합니다.
-    * **인코딩**으로 **UTF-8**을 선택합니다.
+    * **Encoding**으로 **UTF-8**을 선택합니다.
     
     **만들기**를 클릭합니다. 이제 포털에 출력이 추가되고 연결을 테스트합니다.
     
-## <a name="run-the-stream-analytics-job"></a>스트림 분석 작업 실행
+## <a name="run-the-stream-analytics-job"></a>Stream Analytics 작업 실행
 
 1. Stream Analytics 작업을 실행하려면 **쿼리** 탭에서 쿼리를 실행해야 합니다. 이 자습서에서는 아래의 화면 캡처와 같이 작업 입력 및 출력 별칭으로 자리 표시자를 대체하여 샘플 쿼리를 실행할 수 있습니다.
 
@@ -115,7 +106,7 @@ ms.lasthandoff: 01/06/2017
 
     **시작**을 클릭하여 작업을 시작합니다. 작업을 시작하는 데 최대 몇 분이 걸릴 수 있습니다.
 
-3. Blob에서 데이터를 선택하는 작업을 트리거하려면 샘플 데이터 파일을 Blob 컨테이너에 복사합니다. [Azure Data Lake Git 리포지토리](https://github.com/Azure/usql/tree/master/Examples/Samples/Data/AmbulanceData/Drivers.txt)에서 샘플 데이터 파일을 가져올 수 있습니다. 이 자습서에서는 **vehicle1_09142014.csv** 파일을 복사하겠습니다. [Azure 저장소 탐색기](http://storageexplorer.com/)와 같은 다양한 클라이언트를 사용하여 Blob 컨테이너에 데이터를 업로드할 수 있습니다.
+3. Blob에서 데이터를 선택하는 작업을 트리거하려면 샘플 데이터 파일을 Blob 컨테이너에 복사합니다. [Azure Data Lake Git 리포지토리](https://github.com/Azure/usql/tree/master/Examples/Samples/Data/AmbulanceData/Drivers.txt)에서 샘플 데이터 파일을 가져올 수 있습니다. 이 자습서에서는 **vehicle1_09142014.csv** 파일을 복사하겠습니다. [Azure Storage 탐색기](http://storageexplorer.com/)와 같은 다양한 클라이언트를 사용하여 Blob 컨테이너에 데이터를 업로드할 수 있습니다.
 
 4. **개요** 탭의 **모니터링** 아래에서 데이터가 처리된 방식을 확인합니다.
 
@@ -129,4 +120,3 @@ ms.lasthandoff: 01/06/2017
 
 ## <a name="see-also"></a>참고 항목
 * [HDInsight 클러스터를 만들어 Data Lake 저장소 사용](data-lake-store-hdinsight-hadoop-use-portal.md)
-

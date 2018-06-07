@@ -2,7 +2,7 @@
 title: "Azure Operations Management Suite(OMS) 설명서 - 자습서 | Microsoft Docs"
 description: "OMS(Microsoft Operations Management Suite)는 온-프레미스 및 클라우드 인프라를 관리 및 보호하도록 도와주는 Microsoft의 클라우드 기반 IT 관리 솔루션입니다. 이 문서는 OMS에 포함된 다양한 서비스를 식별하고 자세한 내용에 대한 링크를 제공합니다."
 services: operations-management-suite
-author: carolz
+author: czeumault
 manager: carolz
 layout: LandingPage
 ms.assetid: 
@@ -12,10 +12,11 @@ ms.devlang: na
 ms.topic: landing-page
 ms.date: 01/23/2017
 ms.author: carolz
-translationtype: Human Translation
-ms.sourcegitcommit: ccfbd45def1ecf036a2464f560aa89817c37b419
-ms.openlocfilehash: 54b3ce2c8c3966ee36350fed71bdc48aa5bffa63
-
+ms.openlocfilehash: 12f959376d4923e4e2481e37108ade632ac14902
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="what-is-operations-management-suite-oms"></a>OMS(Operations Management Suite)란?
 OMS(Microsoft Operations Management Suite)는 온-프레미스 및 클라우드 인프라를 관리 및 보호하도록 도와주는 Microsoft의 클라우드 기반 IT 관리 솔루션입니다.  OMS는 클라우드 기반 서비스로 구현되므로 인프라 서비스에 대한 최소한의 투자로 빠르게 실행할 수 있습니다.  새로운 기능이 자동으로 제공되므로 지속적 유지 관리 및 업그레이드 비용을 절감할 수 있습니다.
@@ -48,13 +49,7 @@ Azure Automation은 [PowerShell DSC](../automation/automation-dsc-overview.md)�
 
 ## <a name="next-steps"></a>다음 단계
 * [Log Analytics](http://azure.microsoft.com/documentation/services/log-analytics)에 대해 알아보기
-* [Azure 자동화](../automation/automation-intro.md)에 대해 알아보기
-* [Azure 백업](http://azure.microsoft.com/documentation/services/backup)에 대해 알아보기
+* [Azure Automation](../automation/automation-intro.md)에 대해 알아보기
+* [Azure Backup](http://azure.microsoft.com/documentation/services/backup)에 대해 알아보기
 * [Azure Site Recovery](http://azure.microsoft.com/documentation/services/site-recovery)에 대해 알아보기
-
-
-
-
-<!--HONumber=Feb17_HO2-->
-
 

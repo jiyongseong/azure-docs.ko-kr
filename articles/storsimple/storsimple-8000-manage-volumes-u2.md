@@ -4,7 +4,7 @@ description: "StorSimple 볼륨을 추가, 수정, 모니터링 및 삭제하는
 services: storsimple
 documentationcenter: NA
 author: alkohli
-manager: timlt
+manager: jeconnoc
 editor: 
 ms.assetid: 
 ms.service: storsimple
@@ -12,14 +12,13 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 07/19/2017
+ms.date: 12/08/2017
 ms.author: alkohli
+ms.openlocfilehash: c9c575f42e6c8730b9404c62fb60e710d9d3bc80
+ms.sourcegitcommit: 094061b19b0a707eace42ae47f39d7a666364d58
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 09f4de79ab9b0cdfafd10c7c7c29b0f8e6304f14
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="use-the-storsimple-device-manager-service-to-manage-volumes-update-3-or-later"></a>StorSimple 장치 관리자 서비스를 사용하여 볼륨 관리(업데이트 3 이후)
 
@@ -120,11 +119,7 @@ StorSimple 8000 시리즈 장치를 배포하는 동안 [볼륨을 만들었습�
       
        8100 장치에 8.5TB(최대 허용 크기)의 로컬 고정 볼륨을 프로비전하면 해당 장치에서 사용 가능한 로컬 공간이 모두 소진됩니다. 따라서 계층화된 볼륨의 작업 집합을 호스트할 로컬 공간이 장치에 없기 때문에 더 이상 계층화된 볼륨을 만들 수 없습니다. 기존 계층화된 볼륨도 사용 가능한 공간에 영향을 줍니다. 예를 들어 대략 106TB의 계층화된 볼륨이 있는 8100 장치에서는 로컬 고정 볼륨에 대해 4TB의 공간만 사용할 수 있습니다.
 
-    6. **연결된 호스트** 필드에서 화살표를 클릭합니다. 
-
-        ![연결된 호스트](./media/storsimple-8000-manage-volumes-u2/step5createvol2.png)
-
-    7. **연결된 호스트** 블레이드에서 기존 ACR을 선택하거나 새 ACR을 추가합니다. 새 ACR을 선택하는 경우 ACR의 **이름**을 입력하고 Windows 호스트의 IQN(**iSCSI Qualified Name**)을 입력합니다. IQN이 없는 경우 [Windows Server 호스트의 IQN 가져오기](#get-the-iqn-of-a-windows-server-host)로 이동합니다. **만들기**를 클릭합니다. 지정한 설정으로 볼륨이 만들어집니다.
+    6. **연결된 호스트** 필드에서 화살표를 클릭합니다. **연결된 호스트** 블레이드에서 기존 ACR을 선택하거나 새 ACR을 추가합니다. 새 ACR을 선택하는 경우 ACR의 **이름**을 입력하고 Windows 호스트의 IQN(**iSCSI Qualified Name**)을 입력합니다. IQN이 없는 경우 [Windows Server 호스트의 IQN 가져오기](#get-the-iqn-of-a-windows-server-host)로 이동합니다. **만들기**를 클릭합니다. 지정한 설정으로 볼륨이 만들어집니다.
 
         ![만들기 클릭](./media/storsimple-8000-manage-volumes-u2/step5createvol3.png)
 
@@ -333,5 +328,4 @@ StorSimple 8000 시리즈 장치를 배포하는 동안 [볼륨을 만들었습�
 
 * [StorSimple 볼륨 복제](storsimple-8000-clone-volume-u2.md)방법에 대해 배웁니다.
 * [StorSimple 장치 관리자 서비스를 사용하여 StorSimple 장치를 관리](storsimple-8000-manager-service-administration.md)하는 방법을 알아봅니다.
-
 

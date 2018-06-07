@@ -1,11 +1,11 @@
 ---
-title: "Azure Mobile Apps용 Apache Cordova 플러그인 사용 방법"
-description: "Azure Mobile Apps용 Apache Cordova 플러그인 사용 방법"
+title: Azure Mobile Apps용 Apache Cordova 플러그인 사용 방법
+description: Azure Mobile Apps용 Apache Cordova 플러그인 사용 방법
 services: app-service\mobile
 documentationcenter: javascript
-author: ggailey777
-manager: syntaxc4
-editor: 
+author: conceptdev
+manager: crdun
+editor: ''
 ms.assetid: a56a1ce4-de0c-4f3c-8763-66252c52aa59
 ms.service: app-service-mobile
 ms.workload: mobile
@@ -13,18 +13,18 @@ ms.tgt_pltfrm: mobile-html
 ms.devlang: javascript
 ms.topic: article
 ms.date: 10/30/2016
-ms.author: glenga
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 013956232d1fdfdc1f35741c25294a37b7e9bd92
-ms.openlocfilehash: 61aa9e5c004decff18337efe3b1baacfcf9279dc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/07/2017
-
+ms.author: crdun
+ms.openlocfilehash: 6fb8be96c9793e96f1f7d2ad8e212d056d7e9ba5
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32152589"
 ---
 # <a name="how-to-use-apache-cordova-client-library-for-azure-mobile-apps"></a>Azure Mobile Apps용 Apache Cordova 클라이언트 라이브러리를 사용하는 방법
 [!INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
 
-이 가이드에서는 최신 [Azure Mobile Apps용 Apache Cordova 플러그 인]을 사용하여 일반적인 시나리오를 수행하는 방법을 알려줍니다. Azure Mobile Apps를 처음 접하는 경우 먼저 [Mobile Apps 빠른 시작]을 완료하여 백 엔드를 만들고, 테이블을 만든 다음 미리 빌드된 Apache Cordova 프로젝트를 다운로드합니다. 이 가이드에서는 클라이언트 쪽 Apache Cordova 플러그 인에 초점을 둡니다.
+이 가이드에서는 최신 [Azure Mobile Apps용 Apache Cordova 플러그 인]을 사용하여 일반적인 시나리오를 수행하는 방법을 알려줍니다. Azure Mobile Apps를 처음 접하는 경우 먼저 [Azure Mobile Apps 빠른 시작] 을 완료하여 백 엔드를 만들고, 테이블을 만든 다음 미리 빌드된 Apache Cordova 프로젝트를 다운로드합니다. 이 가이드에서는 클라이언트 쪽 Apache Cordova 플러그 인에 초점을 둡니다.
 
 ## <a name="supported-platforms"></a>지원되는 플랫폼
 이 SDK는 iOS, Android 및 Windows 장치에서 Apache Cordova v6.0.0 이상을 지원합니다.  지원되는 플랫폼은 다음과 같습니다.
@@ -106,7 +106,7 @@ Apache Cordova 앱에 인증을 사용할 때는 다음 Cordova 플러그 인을
              "https://localhost:3000"
          ],
 
-    URL을 서비스의 URL로 바꿉니다.  예를 들면 " http://localhost:3000 "(Node.js 샘플 서비스) 또는 " http://localhost:4400 "(Ripple 서비스)이 있습니다.  그러나 이러한 URL은 예제일 뿐입니다. 예에서 언급된 서비스를 포함하여 사용자의 상황이 다를 수 있습니다.
+    URL을 서비스의 URL로 바꿉니다.  예를 들면 " http://localhost:3000"(Node.js 샘플 서비스) 또는 "http://localhost:4400"(Ripple 서비스)이 있습니다.  그러나 이러한 URL은 예제일 뿐입니다. 예에서 언급된 서비스를 포함하여 사용자의 상황이 다를 수 있습니다.
 8. 화면 오른쪽 위에 있는 **읽기/쓰기** 단추를 클릭합니다.
 9. 녹색 **배치** 단추를 클릭합니다.
 
@@ -163,7 +163,7 @@ pushHandler.on('error', function (error) {
 });
 ```
 
-알림 허브 SDK를 사용하여 서버에서 푸시 알림을 보냅니다.  클라이언트에서 직접 푸시 알림을 보내지 마세요. 이렇게 하면 Notification Hubs 또는 PNS에 대한 서비스 거부 공격을 트리거하는 데 이용될 수 있습니다.  이러한 공격의 결과로 PNS가 트래픽을 차단할 수 있습니다.
+Notification Hubs SDK를 사용하여 서버에서 푸시 알림을 보냅니다.  클라이언트에서 직접 푸시 알림을 보내지 마세요. 이렇게 하면 Notification Hubs 또는 PNS에 대한 서비스 거부 공격을 트리거하는 데 이용될 수 있습니다.  이러한 공격의 결과로 PNS가 트래픽을 차단할 수 있습니다.
 
 ## <a name="more-information"></a>자세한 정보
 
@@ -171,7 +171,7 @@ pushHandler.on('error', function (error) {
 
 <!-- URLs. -->
 [Azure Portal]: https://portal.azure.com
-[Mobile Apps 빠른 시작]: app-service-mobile-cordova-get-started.md
+[Azure Mobile Apps 빠른 시작]: app-service-mobile-cordova-get-started.md
 [인증 시작]: app-service-mobile-cordova-get-started-users.md
 [Add authentication to your app]: app-service-mobile-cordova-get-started-users.md
 
@@ -181,5 +181,4 @@ pushHandler.on('error', function (error) {
 [phonegap-plugin-push]: https://www.npmjs.com/package/phonegap-plugin-push
 [cordova-plugin-device]: https://www.npmjs.com/package/cordova-plugin-device
 [cordova-plugin-inappbrowser]: https://www.npmjs.com/package/cordova-plugin-inappbrowser
-[Query object documentation]: https://msdn.microsoft.com/en-us/library/azure/jj613353.aspx
-
+[Query object documentation]: https://msdn.microsoft.com/library/azure/jj613353.aspx

@@ -1,11 +1,11 @@
 ---
-title: "Azure Application Gateway 리디렉션 개요 | Microsoft Docs"
-description: "Azure Application Gateway의 리디렉션 기능에 대해 알아봅니다."
+title: Azure Application Gateway 리디렉션 개요 | Microsoft Docs
+description: Azure Application Gateway의 리디렉션 기능에 대해 알아봅니다.
 services: application-gateway
 documentationcenter: na
 author: amsriva
-manager: timlt
-editor: 
+manager: jpconnock
+editor: ''
 tags: azure-resource-manager
 ms.service: application-gateway
 ms.devlang: na
@@ -14,14 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 07/18/2017
 ms.author: amsriva
+ms.openlocfilehash: e6352873ea055965b433fbf3e6e46162890e5fec
+ms.sourcegitcommit: c47ef7899572bf6441627f76eb4c4ac15e487aec
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: ea9ae8373ff67bf9557b06bbc8a4b0d82a03e2d0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/04/2018
 ---
-
 # <a name="application-gateway-redirect-overview"></a>Application Gateway 리디렉션 개요
 
 일반적으로 여러 웹 응용 프로그램에서 자동 HTTP - HTTPS 리디렉션을 지원하여 응용 프로그램 및 해당 사용자 간 모든 통신이 암호화된 경로를 통해 이루어지도록 합니다. 이전에는 HTTP에서 수신하는 요청을 HTTPS로 리디렉션하는 것이 유일한 목적인 전용 백 엔드 풀 만들기와 같은 기술을 고객이 사용했습니다.  이제 Application Gateway에서 Application Gateway의 트래픽을 리디렉션하는 기능을 지원합니다. 이를 통해 응용 프로그램 구성이 간소화되고, 리소스 사용이 최적화되고, 전역 및 경로 기반 리디렉션을 비롯한 새로운 리디렉션 시나리오가 지원됩니다. Application Gateway 리디렉션 지원은 HTTP -> HTTPS 리디렉션으로만 제한되지 않습니다. 일반적인 리디렉션 메커니즘으로, Application Gateway의 한 수신기에서 수신한 트래픽을 다른 수신기로 리디렉션할 수 있습니다. 외부 사이트로의 리디렉션도 지원합니다. Application Gateway 리디렉션 지원에서는 다음과 같은 기능을 제공합니다.
@@ -37,4 +35,3 @@ ms.lasthandoff: 07/21/2017
 ### <a name="next-steps"></a>다음 단계
 
 [응용 프로그램 게이트웨이에서 URL 리디렉션 구성](application-gateway-configure-redirect-powershell.md)
-

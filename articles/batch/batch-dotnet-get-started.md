@@ -1,11 +1,11 @@
 ---
-title: "자습서 - .NET용 Azure Batch 클라이언트 라이브러리 사용 | Microsoft Docs"
-description: "Azure Batch의 기본 개념을 알아보고 .NET을 사용하여 간단한 솔루션을 빌드합니다."
+title: 자습서 - .NET용 Azure Batch 클라이언트 라이브러리 사용 | Microsoft Docs
+description: Azure Batch의 기본 개념을 알아보고 .NET을 사용하여 간단한 솔루션을 빌드합니다.
 services: batch
 documentationcenter: .net
-author: tamram
-manager: timlt
-editor: 
+author: dlepow
+manager: jeconnoc
+editor: ''
 ms.assetid: 76cb9807-cbc1-405a-8136-d1e53e66e82b
 ms.service: batch
 ms.devlang: dotnet
@@ -13,25 +13,24 @@ ms.topic: hero-article
 ms.tgt_pltfrm: na
 ms.workload: big-compute
 ms.date: 06/28/2017
-ms.author: tamram
+ms.author: danlep
 ms.custom: H1Hack27Feb2017
+ms.openlocfilehash: dbd96187ad73a9c7e27b28f137e25fe66e2944ad
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
 ms.translationtype: HT
-ms.sourcegitcommit: 22aa82e5cbce5b00f733f72209318c901079b665
-ms.openlocfilehash: 1dc728cf6497d8ba0d35a7e41e51a52c5ca6d7df
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/24/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
 # <a name="get-started-building-solutions-with-the-batch-client-library-for-net"></a>.NET용 Batch 클라이언트 라이브러리를 사용한 솔루션 빌드 시작
 
 > [!div class="op_single_selector"]
 > * [.NET](batch-dotnet-get-started.md)
 > * [Python](batch-python-tutorial.md)
-> * [Node.JS](batch-nodejs-get-started.md)
+> * [Node.js](batch-nodejs-get-started.md)
 >
 >
 
-이 문서에서는 C# 응용 프로그램 예제를 단계별로 설명하면서 [Azure Batch][azure_batch] 및 [Batch .NET][net_api] 라이브러리의 기본에 대해 알아봅니다. 샘플 응용 프로그램에서 Batch 서비스를 활용하여 클라우드에서 병렬 워크로드를 처리하는 방법과 파일 준비 및 검색을 위해 [Azure Storage](../storage/storage-introduction.md)와 상호 작용하는 방식을 살펴봅니다. 일반적인 Batch 응용 프로그램 워크플로를 습득하고 작업, 태스크, 풀 및 계산 노드와 같은 Batch의 주요 구성 요소에 대해 이해합니다.
+이 문서에서는 C# 응용 프로그램 예제를 단계별로 설명하면서 [Azure Batch][azure_batch] 및 [Batch .NET][net_api] 라이브러리의 기본에 대해 알아봅니다. 샘플 응용 프로그램에서 Batch 서비스를 활용하여 클라우드에서 병렬 워크로드를 처리하는 방법과 파일 준비 및 검색을 위해 [Azure Storage](../storage/common/storage-introduction.md)와 상호 작용하는 방식을 살펴봅니다. 일반적인 Batch 응용 프로그램 워크플로를 습득하고 작업, 태스크, 풀 및 계산 노드와 같은 Batch의 주요 구성 요소에 대해 이해합니다.
 
 ![Batch 솔루션 워크플로(기본)][11]<br/>
 
@@ -41,12 +40,8 @@ ms.lasthandoff: 07/24/2017
 ### <a name="accounts"></a>계정
 * **Azure 계정**: Azure 구독이 아직 없는 경우 [무료 Azure 계정][azure_free_account]을 만듭니다.
 * **Batch 계정**: Azure 구독이 있으면 [Azure Batch 계정을 만듭니다](batch-account-create-portal.md).
-* **Storage 계정**: [Azure 저장소 계정 정보](../storage/storage-create-storage-account.md)의 [저장소 계정 만들기](../storage/storage-create-storage-account.md#create-a-storage-account) 섹션을 참조하세요.
+* **저장소 계정**: Batch의 저장소 계정 옵션은 [Batch 기능 개요](batch-api-basics.md#azure-storage-account)를 참조하세요.
 
-> [!IMPORTANT]
-> Batch는 현재 [Azure Storage 계정 정보](../storage/storage-create-storage-account.md)의 5단계 [저장소 계정 만들기](../storage/storage-create-storage-account.md#create-a-storage-account)에서 설명한 대로 **범용** 저장소 계정 유형*만* 지원합니다.
->
->
 
 ### <a name="visual-studio"></a>Visual Studio
 샘플 프로젝트를 빌드하려면 **Visual Studio 2015 이상**이 있어야 합니다. [Visual Studio 제품 개요][visual_studio]에서 Visual Studio의 무료 및 평가판 버전을 찾을 수 있습니다.
@@ -56,14 +51,14 @@ ms.lasthandoff: 07/24/2017
 
 `\azure-batch-samples\CSharp\ArticleProjects\DotNetTutorial`
 
-### <a name="azure-batch-explorer-optional"></a>Azure Batch 탐색기(선택 사항)
-[Azure Batch 탐색기][github_batchexplorer]는 GitHub의 [azure-batch-samples][github_samples] 리포지토리에 포함된 무료 유틸리티입니다. 이 자습서를 완료하는 것이 필수는 아니지만 Batch 솔루션을 개발하고 디버깅하는 과정에서 유용할 수 있습니다.
+### <a name="batchlabs-optional"></a>BatchLabs(선택 사항)
+[BatchLabs][github_batchlabs]는 Azure Batch 응용 프로그램을 만들고, 디버그하고, 모니터링할 수 있도록 하는 무료의 풍부한 기능을 가진 독립 실행형 클라이언트 도구입니다. 이 자습서를 완료하는 것이 필수는 아니지만 Batch 솔루션을 개발하고 디버깅하는 과정에서 유용할 수 있습니다.
 
 ## <a name="dotnettutorial-sample-project-overview"></a>DotNetTutorial 샘플 프로젝트 개요
 *DotNetTutorial* 코드 샘플은 두 프로젝트 **DotNetTutorial** 및 **TaskApplication**으로 구성된 Visual Studio 솔루션입니다.
 
-* **DotNetTutorial** 은 계산 노드(가상 컴퓨터)에서 병렬 워크로드를 실행하기 위해 Batch 및 Storage 서비스와 상호 작용하는 클라이언트 응용 프로그램입니다. DotNetTutorial은 로컬 워크스테이션에서 실행합니다.
-* **TaskApplication** 은 실제 작업을 수행하기 위해 Azure의 계산 노드에서 실행하는 프로그램입니다. 이 예제에서 `TaskApplication.exe` 는 Azure Storage에서 다운로드한 파일(입력 파일)의 텍스트를 구문 분석합니다. 그 후 입력 파일에 표시되는 맨 위 단어 세 개를 포함하는 텍스트 파일(출력 파일)을 생성합니다. 출력 파일을 만든 후에 TaskApplication이 Azure Storage에 파일을 업로드합니다. 이렇게 하면 클라이언트 응용 프로그램에서 다운로드가 가능해 집니다. TaskApplication은 Batch 서비스의 여러 계산 노드에서 병렬로 실행합니다.
+* **DotNetTutorial**은 계산 노드(가상 머신)에서 병렬 워크로드를 실행하기 위해 Batch 및 Storage 서비스와 상호 작용하는 클라이언트 응용 프로그램입니다. DotNetTutorial은 로컬 워크스테이션에서 실행합니다.
+* **TaskApplication**은 실제 작업을 수행하기 위해 Azure의 계산 노드에서 실행하는 프로그램입니다. 이 예제에서 `TaskApplication.exe`는 Azure Storage에서 다운로드한 파일(입력 파일)의 텍스트를 구문 분석합니다. 그 후 입력 파일에 표시되는 맨 위 단어 세 개를 포함하는 텍스트 파일(출력 파일)을 생성합니다. 출력 파일을 만든 후에 TaskApplication이 Azure Storage에 파일을 업로드합니다. 이렇게 하면 클라이언트 응용 프로그램에서 다운로드가 가능해 집니다. TaskApplication은 Batch 서비스의 여러 계산 노드에서 병렬로 실행합니다.
 
 다음 다이어그램은 클라이언트 응용 프로그램, *DotNetTutorial*, 태스크에서 실행하는 응용 프로그램, *TaskApplication*에서 수행되는 기본 작업을 보여 줍니다. 이러한 기본 워크플로는 Batch를 사용하여 만드는 많은 계산 솔루션의 일반적인 형태입니다. Batch 서비스에서 사용 가능한 모든 기능을 보여 주지 않지만 거의 모든 Batch 시나리오는 이 워크플로의 일부를 포함합니다.
 
@@ -74,12 +69,12 @@ ms.lasthandoff: 07/24/2017
 [**3단계.**](#step-3-create-batch-pool) Batch **풀**을 만듭니다.<br/>
   &nbsp;&nbsp;&nbsp;&nbsp;**3a.** **StartTask** 풀은 노드가 풀에 연결되면 태스크 이진 파일(TaskApplication)을 노드에 다운로드합니다.<br/>
 [**4단계.**](#step-4-create-batch-job) Batch **작업**을 만듭니다.<br/>
-[**5단계.**](#step-5-add-tasks-to-job) 작업에 **태스크** 를 추가합니다.<br/>
+[**5단계.**](#step-5-add-tasks-to-job) 작업에 **태스크**를 추가합니다.<br/>
   &nbsp;&nbsp;&nbsp;&nbsp;**5a.** 태스크는 노드에서 실행되도록 예약됩니다.<br/>
     &nbsp;&nbsp;&nbsp;&nbsp;**5b.** 각 태스크는 Azure Storage에서 입력 데이터를 다운로드한 다음 실행을 시작합니다.<br/>
 [**6단계.**](#step-6-monitor-tasks) 태스크를 모니터링합니다.<br/>
   &nbsp;&nbsp;&nbsp;&nbsp;**6a.** 태스크가 완료되면 출력 데이터를 Azure Storage에 업로드합니다.<br/>
-[**7단계.**](#step-7-download-task-output) Storage에서 태스크 출력을 다운로드합니다.
+[**7단계.**](#step-7-download-task-output) 저장소에서 태스크 출력을 다운로드합니다.
 
 언급한 바와 같이, 모든 Batch 솔루션이 정확히 이러한 단계를 수행하는 것은 아니며, 훨씬 더 많은 단계를 포함할 수 있지만, *DotNetTutorial* 샘플 응용 프로그램은 Batch 솔루션에서 찾을 수 있는 일반적인 프로세스를 보여줍니다.
 
@@ -103,14 +98,9 @@ private const string StorageAccountName = "";
 private const string StorageAccountKey  = "";
 ```
 
-> [!IMPORTANT]
-> 위에서 설명한 대로 현재 Azure Storage에서 **범용** 저장소 계정에 대한 자격 증명을 지정해야 입니다. Batch 응용 프로그램은 **범용** 저장소 계정 내에서 Blob Storage를 사용합니다. *Blob 저장소* 계정 유형을 선택하여 만든 Storage 계정에 대한 자격 증명을 지정하지 않습니다.
->
->
-
 [Azure Portal][azure_portal]의 각 서비스의 계정 블레이드 내에서 Batch 및 Storage 계정 자격 증명을 찾을 수 있습니다.
 
-![포털에서 자격 증명 일괄 처리][9]
+![포털에서 자격 증명 Batch][9]
 ![포털의 Storage 자격 증명][10]<br/>
 
 자격 증명으로 프로젝트를 업데이트했으므로 솔루션 탐색기에서 솔루션을 마우스 오른쪽 단추로 클릭하고 **솔루션 빌드**를 클릭합니다. 메시지가 표시되면 모든 NuGet 패키지 복원을 확인합니다.
@@ -128,7 +118,7 @@ private const string StorageAccountKey  = "";
 ![Azure Storage에 컨테이너 만들기][1]
 <br/>
 
-Batch에는 Azure Storage와의 상호 작용을 위해 기본 제공되는 지원이 포함됩니다. Storage 계정 내의 컨테이너는 Batch 계정에서 실행되는 태스크에 필요한 파일을 제공합니다. 컨테이너는 태스크가 생성하는 출력 데이터를 저장할 공간도 제공합니다. *DotNetTutorial* 클라이언트 응용 프로그램이 실행하는 첫 번째 작업은 [Azure Blob Storage](../storage/storage-introduction.md)에 세 개의 컨테이너를 만드는 것입니다.
+배치에는 Azure 저장소와의 상호 작용을 위해 기본 제공되는 지원이 포함됩니다. Storage 계정 내의 컨테이너는 Batch 계정에서 실행되는 태스크에 필요한 파일을 제공합니다. 컨테이너는 태스크가 생성하는 출력 데이터를 저장할 공간도 제공합니다. *DotNetTutorial* 클라이언트 응용 프로그램이 실행하는 첫 번째 작업은 [Azure Blob Storage](../storage/common/storage-introduction.md)에 세 개의 컨테이너를 만드는 것입니다.
 
 * **응용 프로그램**: 이 컨테이너는 태스크가 실행하는 응용 프로그램은 물론 DLL과 같은 모든 종속 파일을 저장합니다.
 * **입력**: 태스크가 *입력* 컨테이너에서 처리할 데이터 파일을 다운로드합니다.
@@ -152,7 +142,7 @@ CloudStorageAccount storageAccount =
 CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 ```
 
-응용 프로그램 전체적으로 `blobClient` 참조를 사용하여 매개 변수로 많은 메서드에 전달합니다. 이 예는 위를 즉시 따르는 코드 블록에 있으며 여기에서 `CreateContainerIfNotExistAsync` 를 호출하여 실제로 컨테이너를 만듭니다.
+응용 프로그램 전체적으로 `blobClient` 참조를 사용하여 매개 변수로 많은 메서드에 전달합니다. 이 예는 위를 즉시 따르는 코드 블록에 있으며 여기에서 `CreateContainerIfNotExistAsync`를 호출하여 실제로 컨테이너를 만듭니다.
 
 ```csharp
 // Use the blob client to create the containers in Azure Storage if they don't
@@ -188,7 +178,7 @@ private static async Task CreateContainerIfNotExistAsync(
 컨테이너를 만든 후 이제 응용 프로그램은 작업에 의해 사용될 파일을 업로드할 수 있습니다.
 
 > [!TIP]
-> [.NET에서 Blob Storage를 사용하는 방법](../storage/storage-dotnet-how-to-use-blobs.md)에서는 Azure Storage 컨테이너 및 Blob을 사용한 작업의 개요를 제공합니다. Batch 작업 시작 단계 읽기 목록의 거의 위쪽에 있습니다.
+> [.NET에서 Blob Storage를 사용하는 방법](../storage/blobs/storage-dotnet-how-to-use-blobs.md)에서는 Azure Storage 컨테이너 및 Blob을 사용한 작업의 개요를 제공합니다. Batch 작업 시작 단계 읽기 목록의 거의 위쪽에 있습니다.
 >
 >
 
@@ -286,7 +276,7 @@ DotNetTutorial 샘플 응용 프로그램은 JobPreparationTask 또는 JobReleas
 * **컨테이너 공유 액세스 서명**: 각 태스크는 계산 노드에서 작업을 완료하면 해당 출력 파일을 Azure Storage의 *출력* 컨테이너에 업로드합니다. 이렇게 하려면 TaskApplication은 파일을 업로드하는 경우 경로의 일부로 컨테이너에 쓰기 액세스를 제공하는 컨테이너 공유 액세스 서명을 사용합니다. 컨테이너 공유 액세스 서명 가져오기는 BLOB 공유 액세스 서명을 가져올 때와 유사한 방식으로 수행됩니다. DotNetTutorial에서 이렇게 하기 위해 `GetContainerSasUrl` 도우미 메서드가 [CloudBlobContainer.GetSharedAccessSignature][net_sas_container]를 호출하는 것을 확인할 수 있습니다. “6단계: 작업 모니터링"에서 TaskApplication이 컨테이너 공유 액세스 서명을 사용하는 방법에 대해 자세히 알아봅니다.
 
 > [!TIP]
-> 공유 액세스 서명에 대해 두 부분으로 이루어진 시리즈, [1부: 공유 액세스 서명(SAS) 모델 이해](../storage/storage-dotnet-shared-access-signature-part-1.md) 및 [2부: Blob Storage를 통해 공유 액세스 서명(SAS) 만들기 및 사용](../storage/storage-dotnet-shared-access-signature-part-2.md)을 확인하여 Storage 계정의 데이터에 대한 보안 액세스 제공에 대한 자세한 내용을 확인합니다.
+> 공유 액세스 서명에 대해 두 부분으로 이루어진 시리즈, [1부: 공유 액세스 서명(SAS) 모델 이해](../storage/common/storage-dotnet-shared-access-signature-part-1.md) 및 [2부: Blob Storage를 통해 공유 액세스 서명(SAS) 만들기 및 사용](../storage/blobs/storage-dotnet-shared-access-signature-part-2.md)을 확인하여 Storage 계정의 데이터에 대한 보안 액세스 제공에 대한 자세한 내용을 확인합니다.
 >
 >
 
@@ -294,7 +284,7 @@ DotNetTutorial 샘플 응용 프로그램은 JobPreparationTask 또는 JobReleas
 ![Batch 풀 만들기][3]
 <br/>
 
-Batch **풀** 은 Batch가 작업의 태스크를 실행하는 계산 노드(가상 컴퓨터)의 컬렉션입니다.
+Batch **풀** 은 Batch가 작업의 태스크를 실행하는 계산 노드(가상 머신)의 컬렉션입니다.
 
 Azure Storage API를 사용하여 응용 프로그램 및 데이터 파일을 Storage 계정에 업로드하면 *DotNetTutorial*이 Batch .NET 라이브러리에서 제공한 API를 사용하여 Batch 서비스에 대한 호출을 시작합니다. 이 코드는 먼저 [BatchClient][net_batchclient]를 만듭니다.
 
@@ -324,7 +314,7 @@ private static async Task CreatePoolIfNotExistAsync(BatchClient batchClient, str
         pool = batchClient.PoolOperations.CreatePool(
             poolId: poolId,
             targetDedicatedComputeNodes: 3,                                             // 3 compute nodes
-            virtualMachineSize: "small",                                                // single-core, 1.75 GB memory, 225 GB disk
+            virtualMachineSize: "small",                                                // single-vCPU, 1.75 GB memory, 225 GB disk
             cloudServiceConfiguration: new CloudServiceConfiguration(osFamily: "4"));   // Windows Server 2012 R2
 
         // Create and assign the StartTask that will be executed when compute nodes join the pool.
@@ -370,7 +360,7 @@ private static async Task CreatePoolIfNotExistAsync(BatchClient batchClient, str
 - 사용자가 준비하고 제공하는 사용자 지정 이미지입니다. 사용자 지정 이미지에 대한 자세한 내용은 [Batch를 사용하여 대규모 병렬 계산 솔루션 개발](batch-api-basics.md#pool)을 참조하세요.
 
 > [!IMPORTANT]
-> Batch의 계산 리소스에 대한 요금이 부과됩니다. 비용을 최소화하려면 샘플을 실행하기 전에 `targetDedicatedComputeNodes` 을 1로 낮출 수 있습니다.
+> Batch의 계산 리소스에 대한 요금이 부과됩니다. 비용을 최소화하려면 샘플을 실행하기 전에 `targetDedicatedComputeNodes`를 1로 낮출 수 있습니다.
 >
 >
 
@@ -393,7 +383,7 @@ private static async Task CreatePoolIfNotExistAsync(BatchClient batchClient, str
 ## <a name="step-4-create-batch-job"></a>4단계: Batch 작업 만들기
 ![Batch 작업 만들기][4]<br/>
 
-Batch **작업** 은 태스크의 컬렉션이며 계산 노드의 풀과 관련됩니다. 작업의 태스크는 연결된 풀의 계산 노드에서 실행됩니다.
+Batch **작업**은 태스크의 컬렉션이며 계산 노드의 풀과 관련됩니다. 작업의 태스크는 연결된 풀의 계산 노드에서 실행됩니다.
 
 워크로드와 관련된 태스크를 구성하고 추적하는 것뿐만 아니라, 작업(더 나아가, 태스크)에 대한 최대 실행 시간은 물론 Batch 계정 내 다른 작업 대비 작업 우선 순위와 같은 제약 조건을 부과하는 데도 작업을 사용합니다. 하지만 이 예제에서 작업은 3단계에서 만든 풀에만 연결됩니다. 추가적으로 구성되는 다른 속성은 없습니다.
 
@@ -469,9 +459,9 @@ private static async Task<List<CloudTask>> AddTasksAsync(
 
 위의 코드 조각의 `foreach` 루프 내에서 태스크에 대한 명령줄이 *TaskApplication.exe*에 전달되는 세 개의 명령줄 인수로 구성되어 있는 것을 확인할 수 있습니다.
 
-1. **첫 번째 인수** 는 처리할 파일의 경로입니다. 노드에 있는 것과 같은 파일에 대한 로컬 경로입니다. 위의 `UploadFileToContainerAsync` 에 ResourceFile 개체를 처음으로 만드는 경우 이 속성(ResourceFile 생성자에 대한 매개 변수로)에 대해 파일 이름이 사용됩니다. 따라서 *TaskApplication.exe*와 동일한 디렉터리에서 파일을 찾을 수 있습니다.
-2. **두 번째 인수** 는 상위 *N* 단어를 출력 파일에 써야 한다는 것을 지정합니다. 샘플에서 상위 세 개 단어를 출력 파일에 쓸 수 있도록 하드 코드됩니다.
-3. **세 번째 인수**는 Azure Storage의 **출력** 컨테이너에 쓰기 액세스를 제공하는 공유 액세스 서명(SAS)입니다. *TaskApplication.exe* 는 Azure Storage에 출력 파일을 업로드할 때 공유 액세스 서명 URL을 사용합니다. TaskApplication 프로젝트의 `Program.cs` 파일에 포함된 `UploadFileToContainer` 메서드에서 이를 위한 코드를 찾을 수 있습니다.
+1. **첫 번째 인수**는 처리할 파일의 경로입니다. 노드에 있는 것과 같은 파일에 대한 로컬 경로입니다. 위의 `UploadFileToContainerAsync`에 ResourceFile 개체를 처음으로 만드는 경우 이 속성(ResourceFile 생성자에 대한 매개 변수로)에 대해 파일 이름이 사용됩니다. 따라서 *TaskApplication.exe*와 동일한 디렉터리에서 파일을 찾을 수 있습니다.
+2. **두 번째 인수**는 상위 *N* 단어를 출력 파일에 써야 한다는 것을 지정합니다. 샘플에서 상위 세 개 단어를 출력 파일에 쓸 수 있도록 하드 코드됩니다.
+3. **세 번째 인수**는 Azure Storage의 **출력** 컨테이너에 쓰기 액세스를 제공하는 공유 액세스 서명(SAS)입니다. *TaskApplication.exe*는 Azure Storage에 출력 파일을 업로드할 때 공유 액세스 서명 URL을 사용합니다. TaskApplication 프로젝트의 `Program.cs` 파일에 포함된 `UploadFileToContainer` 메서드에서 이를 위한 코드를 찾을 수 있습니다.
 
 ```csharp
 // NOTE: From project TaskApplication Program.cs
@@ -702,7 +692,7 @@ if (response != "n" && response != "no")
 >
 
 ## <a name="run-the-dotnettutorial-sample"></a>*DotNetTutorial* 샘플 실행
-샘플 응용 프로그램을 실행하는 경우 콘솔 출력은 다음과 유사하게 됩니다. 실행 중에 풀의 계산 노드가 시작되는 동안 `Awaiting task completion, timeout in 00:30:00...` 에서 일시 중지가 발생합니다. [Azure Portal][azure_portal]을 사용하여 실행 중 및 실행 후에 풀, 계산 노드, 작업 및 태스크를 모니터링합니다. [Azure portal][azure_portal] 또는 [Azure Storage 탐색기][storage_explorers]를 사용하여 응용 프로그램에서 만든 Storage 리소스(컨테이너 및 Blob)를 봅니다.
+샘플 응용 프로그램을 실행하는 경우 콘솔 출력은 다음과 유사하게 됩니다. 실행 중에 풀의 계산 노드가 시작되는 동안 `Awaiting task completion, timeout in 00:30:00...`에서 일시 중지가 발생합니다. [Azure Portal][azure_portal]을 사용하여 실행 중 및 실행 후에 풀, 계산 노드, 작업 및 태스크를 모니터링합니다. [Azure portal][azure_portal] 또는 [Azure Storage 탐색기][storage_explorers]를 사용하여 응용 프로그램에서 만든 Storage 리소스(컨테이너 및 Blob)를 봅니다.
 
 기본 구성에서 응용 프로그램을 실행하는 경우 일반적인 실행 시간은 **약 5분** 입니다.
 
@@ -745,12 +735,13 @@ Sample complete, hit ENTER to exit...
 * 이 서비스를 처음 사용하는 경우 [Azure Batch 기능 개요](batch-api-basics.md) 문서를 검토하는 것이 좋습니다.
 * [Batch 학습 경로][batch_learning_path]의 **개발 세부 정보** 아래에서 다른 Batch 개발 문서를 시작하세요.
 * [TopNWords][github_topnwords] 샘플의 Batch를 사용하여 "상위 n개 단어" 워크로드 처리의 다른 구현을 확인하세요.
+* 라이브러리의 최신 변경 사항은 Batch .NET [릴리스 정보](https://github.com/Azure/azure-sdk-for-net/blob/psSdkJson6/src/SDKs/Batch/DataPlane/changelog.md#azurebatch-release-notes)를 검토합니다.
 
 [azure_batch]: https://azure.microsoft.com/services/batch/
 [azure_free_account]: https://azure.microsoft.com/free/
 [azure_portal]: https://portal.azure.com
 [batch_learning_path]: https://azure.microsoft.com/documentation/learning-paths/batch/
-[github_batchexplorer]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp/BatchExplorer
+[github_batchlabs]: https://azure.github.io/BatchLabs/
 [github_dotnettutorial]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp/ArticleProjects/DotNetTutorial
 [github_samples]: https://github.com/Azure/azure-batch-samples
 [github_samples_common]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp/Common
@@ -805,4 +796,3 @@ Sample complete, hit ENTER to exit...
 [9]: ./media/batch-dotnet-get-started/credentials_batch_sm.png "포털의 Batch 자격 증명"
 [10]: ./media/batch-dotnet-get-started/credentials_storage_sm.png "포털의 Storage 자격 증명"
 [11]: ./media/batch-dotnet-get-started/batch_workflow_minimal_sm.png "Batch 솔루션 워크플로(최소 다이어그램)"
-

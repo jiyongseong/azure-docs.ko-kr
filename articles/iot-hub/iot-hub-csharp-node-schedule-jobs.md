@@ -1,11 +1,11 @@
 ---
-title: "Azure IoT Hub(.NET/노드)를 사용하여 작업 예약 | Microsoft 문서"
-description: "여러 장치에서 직접 메서드를 호출하여 Azure IoT Hub 작업을 예약하는 방법입니다. Node.js용 Azure IoT 장치 SDK를 사용하여 시뮬레이션된 장치 앱을 구현하고 .NET용 Azure IoT 서비스 SDK를 사용하여 작업을 실행하는 서비스 앱을 구현합니다."
+title: Azure IoT Hub(.NET/노드)를 사용하여 작업 예약 | Microsoft 문서
+description: 여러 장치에서 직접 메서드를 호출하여 Azure IoT Hub 작업을 예약하는 방법입니다. Node.js용 Azure IoT 장치 SDK를 사용하여 시뮬레이션된 장치 앱을 구현하고 .NET용 Azure IoT 서비스 SDK를 사용하여 작업을 실행하는 서비스 앱을 구현합니다.
 services: iot-hub
 documentationcenter: .net
 author: juanjperez
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 2233356e-b005-4765-ae41-3a4872bda943
 ms.service: iot-hub
 ms.devlang: multiple
@@ -14,12 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 07/10/2017
 ms.author: juanpere
+ms.openlocfilehash: 360daf918051ce901a81f96d1873dc90af238e19
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: a8f4f34aa99c4a9966957cac213ec9170de80a46
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="schedule-and-broadcast-jobs-netnodejs"></a>작업 예약 및 브로드캐스트(.NET/Node.js)
 
@@ -38,6 +37,8 @@ Azure IoT Hub를 사용하여 수백만 대의 장치를 업데이트하는 작�
 * 장치 쌍 및 속성: [장치 쌍 시작][lnk-get-started-twin] 및 [자습서: 장치 쌍 속성을 사용하는 방법][lnk-twin-props]
 * 직접 메서드: [IoT Hub 개발자 가이드 - 직접 메서드][lnk-dev-methods] 및 [자습서: 직접 메서드 사용][lnk-c2d-methods]
 
+[!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-whole.md)]
+
 이 자습서에서는 다음을 수행하는 방법에 대해 설명합니다.
 
 * 백 엔드 앱에 의해 호출될 수 있는 **lockDoor**라는 직접 메서드를 구현하는 장치 앱을 만듭니다. 또한 이 장치 앱은 백 엔드 앱에서 원하는 속성 변경 내용을 수신합니다.
@@ -52,8 +53,8 @@ Azure IoT Hub를 사용하여 수백만 대의 장치를 업데이트하는 작�
 이 자습서를 완료하려면 다음이 필요합니다.
 
 * Visual Studio 2015 또는 Visual Studio 2017.
-* Node.js 버전 0.12.x 이상. Windows 또는 Linux에서 이 자습서를 위해 Node.js를 설치하는 방법은 [개발 환경 준비][lnk-dev-setup] 문서에 설명되어 있습니다.
-* 활성 Azure 계정. 계정이 없는 경우 몇 분 내에 [계정][lnk-free-trial]을 만들 수 있습니다.
+* Node.js 버전 4.0.x 이상 Windows 또는 Linux에서 이 자습서를 위해 Node.js를 설치하는 방법은 [개발 환경 준비][lnk-dev-setup] 문서에 설명되어 있습니다.
+* 활성 Azure 계정. 계정이 없는 경우 몇 분 내에 [무료 계정][lnk-free-trial]을 만들 수 있습니다.
 
 [!INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
 
@@ -81,6 +82,7 @@ Azure IoT Hub를 사용하여 수백만 대의 장치를 업데이트하는 작�
 1. 다음 `using` 문이 기본 문에 아직 없으면 추가합니다.
 
     ```csharp
+    using System.Threading;
     using System.Threading.Tasks;
     ```
 
@@ -118,7 +120,7 @@ Azure IoT Hub를 사용하여 수백만 대의 장치를 업데이트하는 작�
             "deviceId='myDeviceId'",
             directMethod,
             DateTime.Now,
-            10);
+            (long)TimeSpan.FromMinutes(2).TotalSeconds);
 
         Console.WriteLine("Started Method Job");
     }
@@ -138,7 +140,7 @@ Azure IoT Hub를 사용하여 수백만 대의 장치를 업데이트하는 작�
             "deviceId='myDeviceId'",
             twin,
             DateTime.Now,
-            10);
+            (long)TimeSpan.FromMinutes(2).TotalSeconds);
 
         Console.WriteLine("Started Twin Update Job");
     }
@@ -234,7 +236,7 @@ Azure IoT Hub를 사용하여 수백만 대의 장치를 업데이트하는 작�
 1. **simDevice.js** 파일을 저장하고 닫습니다.
 
 > [!NOTE]
-> 간단히 하기 위해 이 자습서에서는 다시 시도 정책을 구현하지 않습니다. 프로덕션 코드에서는 MSDN 문서 [일시적인 오류 처리][lnk-transient-faults]에서 제시한 대로 다시 시도 정책(예: 지수 백오프)을 구현해야 합니다.
+> 간단히 하기 위해 이 자습서에서는 재시도 정책을 구현하지 않습니다. 프로덕션 코드에서는 MSDN 문서 [일시적인 오류 처리][lnk-transient-faults]에서 제시한 대로 다시 시도 정책(예: 지수 백오프)을 구현해야 합니다.
 
 ## <a name="run-the-apps"></a>앱 실행
 
@@ -258,7 +260,7 @@ Azure IoT Hub를 사용하여 수백만 대의 장치를 업데이트하는 작�
 
 IoT Hub 및 장치 관리 패턴(예: 원격 무선 펌웨어 업데이트)을 계속 시작하려면 [자습서: 펌웨어 업데이트를 수행하는 방법][lnk-fwupdate]을 참조하세요
 
-계속해서 IoT Hub를 시작하려면 [IoT Edge 시작][lnk-iot-edge]을 참조하세요.
+Azure IoT Edge로 AI를 에지 장치에 배포하는 방법을 자세히 알아보려면 [IoT Edge 시작][lnk-iot-edge]을 참조하세요.
 
 <!-- images -->
 [img-servicenuget]: media/iot-hub-csharp-node-schedule-jobs/servicesdknuget.png
@@ -270,9 +272,8 @@ IoT Hub 및 장치 관리 패턴(예: 원격 무선 펌웨어 업데이트)을 �
 [lnk-c2d-methods]: iot-hub-node-node-direct-methods.md
 [lnk-dev-methods]: iot-hub-devguide-direct-methods.md
 [lnk-fwupdate]: iot-hub-node-node-firmware-update.md
-[lnk-iot-edge]: iot-hub-linux-iot-edge-get-started.md
+[lnk-iot-edge]: ../iot-edge/tutorial-simulate-device-linux.md
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdk-node/blob/master/doc/node-devbox-setup.md
 [lnk-free-trial]: http://azure.microsoft.com/pricing/free-trial/
 [lnk-transient-faults]: https://msdn.microsoft.com/library/hh680901(v=pandp.50).aspx
 [lnk-nuget-service-sdk]: https://www.nuget.org/packages/Microsoft.Azure.Devices/
-

@@ -3,7 +3,7 @@ title: "Azure Application Insights 데이터 보존 및 저장소 | Microsoft Do
 description: "보존 및 개인 정보 취급 방침"
 services: application-insights
 documentationcenter: 
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: a6268811-c8df-42b5-8b1b-1d5a7e94cbca
 ms.service: application-insights
@@ -12,13 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 04/07/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 785d3a8920d48e11e80048665e9866f16c514cf7
-ms.openlocfilehash: d82f27c9a657a97f23b60ade352e4d2a87166233
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/12/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: 1818e564acb0e9b5fa620d6f38db141811ca9777
+ms.sourcegitcommit: 2a70752d0987585d480f374c3e2dba0cd5097880
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="data-collection-retention-and-storage-in-application-insights"></a>Application Insights 데이터 수집, 보존 및 저장소
 
@@ -100,16 +99,16 @@ Visual Studio를 사용하여 앱을 개발하는 경우 디버그(F5) 모드에
 Microsoft는 서비스를 제공하기 위한 목적으로만 데이터를 사용합니다.
 
 ## <a name="where-is-the-data-held"></a>데이터가 저장되는 위치는 어디인가요?
-* 미국 또는 유럽입니다. 새 Application Insights 리소스를 만들 때 위치를 선택할 수 있습니다. 
+* 미국, 유럽 또는 동남 아시아에 있습니다. 새 Application Insights 리소스를 만들 때 위치를 선택할 수 있습니다. 
 
 
-#### <a name="does-that-mean-my-app-has-to-be-hosted-in-the-usa-or-europe"></a>내 앱을 미국이나 유럽에서 호스트해야 한다는 뜻인가요?
-* 아니요. 응용 프로그램은 자체 온-프레미스 호스트 또는 클라우드의 어디에서나 실행할 수 있습니다.
+#### <a name="does-that-mean-my-app-has-to-be-hosted-in-the-usa-europe-or-southeast-asia"></a>내 앱을 미국, 유럽 또는 동남 아시아에서 호스트해야 한다는 뜻인가요?
+* 번호 응용 프로그램은 자체 온-프레미스 호스트 또는 클라우드의 어디에서나 실행할 수 있습니다.
 
 ## <a name="how-secure-is-my-data"></a>내 데이터는 어느 정도 안전한가요?
 Application Insights는 Azure 서비스입니다. 보안 정책은 [Azure 보안, 개인 정보 보호 및 규정 준수 백서](http://go.microsoft.com/fwlink/?linkid=392408)에 설명되어 있습니다.
 
-데이터는 Microsoft Azure 서버에 저장됩니다. Azure 포털 계정의 경우 [Azure 보안, 개인 정보 및 규정 준수 문서](http://go.microsoft.com/fwlink/?linkid=392408)에 계정 제한 사항이 설명되어 있습니다.
+데이터는 Microsoft Azure 서버에 저장됩니다. Azure Portal 계정의 경우 [Azure 보안, 개인 정보 및 규정 준수 문서](http://go.microsoft.com/fwlink/?linkid=392408)에 계정 제한 사항이 설명되어 있습니다.
 
 Microsoft 직원의 사용자 데이터에 대한 액세스는 제한되어 있습니다. Microsoft에서는 사용자가 허락한 경우에만, 그리고 Application Insights 사용을 지원하는 데 필요한 경우에 사용자 데이터에 액세스합니다. 
 
@@ -167,7 +166,7 @@ SDK는 플랫폼마다 다르며, 설치할 수 있는 여러 구성 요소가 �
 | [호출 TrackMetric][api] |숫자 값<br/>**속성** |
 | [호출 추적*][api] |이벤트 이름<br/>**속성** |
 | [호출 TrackException][api] |**예외**<br/>스택 덤프<br/>**속성** |
-| SDK는 데이터를 수집할 수 없습니다. 예: <br/> - 성능 카운터에 액세스할 수 없음<br/> - 원격 분석 이니셜라이저 예외 |SDK 진단 |
+| SDK는 데이터를 수집할 수 없습니다. 예:  <br/> - 성능 카운터에 액세스할 수 없음<br/> - 원격 분석 이니셜라이저 예외 |SDK 진단 |
 
 [다른 플랫폼에 대한 SDK][platforms]의 경우 해당 문서를 참조하세요.
 
@@ -213,5 +212,4 @@ SDK는 플랫폼마다 다르며, 설치할 수 있는 여러 구성 요소가 �
 [pricing]: http://azure.microsoft.com/pricing/details/application-insights/
 [redfield]: app-insights-monitor-performance-live-website-now.md
 [start]: app-insights-overview.md
-
 

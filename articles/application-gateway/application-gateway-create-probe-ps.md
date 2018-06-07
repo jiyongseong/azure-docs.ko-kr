@@ -1,11 +1,11 @@
 ---
-title: "사용자 지정 프로브 만들기 - Azure Application Gateway - PowerShell | Microsoft Docs"
-description: "리소스 관리자에서 PowerShell을 사용하여 응용 프로그램 게이트웨이에 대한 사용자 지정 프로브를 만드는 방법에 대해 알아봅니다."
+title: 사용자 지정 프로브 만들기 - Azure Application Gateway - PowerShell | Microsoft Docs
+description: 리소스 관리자에서 PowerShell을 사용하여 Application Gateway에 대한 사용자 지정 프로브를 만드는 방법에 대해 알아봅니다.
 services: application-gateway
 documentationcenter: na
-author: georgewallace
-manager: timlt
-editor: 
+author: vhorne
+manager: jpconnock
+editor: ''
 tags: azure-resource-manager
 ms.assetid: 68feb660-7fa4-4f69-a7e4-bdd7bdc474db
 ms.service: application-gateway
@@ -14,19 +14,17 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 04/26/2017
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: b54fe5267d87a41eb9e81d5d1dc9b1b16c5c5e88
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
-
+ms.author: victorh
+ms.openlocfilehash: 5180e659851a0ef5dbe92c451a9e2ba545821d07
+ms.sourcegitcommit: c47ef7899572bf6441627f76eb4c4ac15e487aec
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/04/2018
 ---
-# <a name="create-a-custom-probe-for-azure-application-gateway-by-using-powershell-for-azure-resource-manager"></a>Azure 리소스 관리자에 대해 PowerShell을 사용하여 Azure 응용 프로그램 게이트웨이에 대한 사용자 지정 프로브 만들기
+# <a name="create-a-custom-probe-for-azure-application-gateway-by-using-powershell-for-azure-resource-manager"></a>Azure Resource Manager에 대해 PowerShell을 사용하여 Azure Application Gateway에 대한 사용자 지정 프로브 만들기
 
 > [!div class="op_single_selector"]
-> * [Azure 포털](application-gateway-create-probe-portal.md)
+> * [Azure Portal](application-gateway-create-probe-portal.md)
 > * [Azure Resource Manager PowerShell](application-gateway-create-probe-ps.md)
 > * [Azure 클래식 PowerShell](application-gateway-create-probe-classic-ps.md)
 
@@ -41,10 +39,10 @@ ms.lasthandoff: 04/27/2017
 
 ### <a name="sign-in-and-create-resource-group"></a>로그인하여 리소스 그룹 만들기
 
-1. `Login-AzureRmAccount`을 사용하여 인증합니다.
+1. `Connect-AzureRmAccount`을 사용하여 인증합니다.
 
   ```powershell
-  Login-AzureRmAccount
+  Connect-AzureRmAccount
   ```
 
 1. 계정에 대한 구독을 가져옵니다.
@@ -86,7 +84,7 @@ $subnet = $vnet.Subnets[0]
 
 ### <a name="create-a-public-ip-address-for-the-front-end-configuration"></a>프런트 엔드 구성에 대한 공용 IP 주소 만들기
 
-미국 서부 지역에 리소스 그룹 **appgw-rg**에서 공용 IP 리소스 **publicIP01**을 만듭니다. 이 예제에서는 응용 프로그램 게이트웨이의 프런트 엔드 IP 주소에 공용 IP 주소를 사용합니다.  응용 프로그램 게이트웨이를 사용하려면 공용 IP 주소에 동적으로 만들어진 DNS 이름이 있어야 하므로 공용 IP 주소를 만드는 동안에는 `-DomainNameLabel`을 지정할 수 없습니다.
+미국 서부 지역의 리소스 그룹 **appgw-rg**에 공용 IP 리소스 **publicIP01**을 만듭니다. 이 예제에서는 응용 프로그램 게이트웨이의 프런트 엔드 IP 주소에 공용 IP 주소를 사용합니다.  응용 프로그램 게이트웨이를 사용하려면 공용 IP 주소에 동적으로 만들어진 DNS 이름이 있어야 하므로 공용 IP 주소를 만드는 동안에는 `-DomainNameLabel`을 지정할 수 없습니다.
 
 ```powershell
 $publicip = New-AzureRmPublicIpAddress -ResourceGroupName appgw-rg -Name publicIP01 -Location 'West US' -AllocationMethod Dynamic
@@ -207,5 +205,4 @@ DnsSettings              : {
 ## <a name="next-steps"></a>다음 단계
 
 [SSL 오프로드 구성](application-gateway-ssl-arm.md)을 방문하여 SSL 오프로드를 구성하는 방법을 알아봅니다.
-
 

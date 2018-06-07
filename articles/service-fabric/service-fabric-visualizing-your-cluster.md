@@ -1,38 +1,73 @@
 ---
-title: "Service Fabric Explorer를 사용하여 클러스터 시각화 | Microsoft Docs"
-description: "서비스 패브릭 탐색기는 Microsoft Azure 서비스 패브릭 클러스터에서 클라우드 응용 프로그램 및 노드를 검사 및 관리하기 위한 웹 기반 도구입니다."
+title: Azure Service Fabric Explorer를 사용하여 클러스터 시각화 | Microsoft Docs
+description: Service Fabric Explorer는 Microsoft Azure Service Fabric 클러스터에서 클라우드 응용 프로그램 및 노드를 검사 및 관리하기 위한 응용 프로그램입니다.
 services: service-fabric
 documentationcenter: .net
-author: rwike77
-manager: timlt
-editor: 
+author: mikkelhegn
+manager: msfussell
+editor: ''
 ms.assetid: c875b993-b4eb-494b-94b5-e02f5eddbd6a
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 06/12/2017
-ms.author: ryanwi
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5bbeb9d4516c2b1be4f5e076a7f63c35e4176b36
-ms.openlocfilehash: c58de22e29b6403e88bf22bdfe704a25757cdfca
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/13/2017
-
-
+ms.date: 02/02/2018
+ms.author: mikhegn
+ms.openlocfilehash: 916742d89447af4097d37b5d78e97ff86c12834c
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
+ms.locfileid: "34210184"
 ---
 # <a name="visualize-your-cluster-with-service-fabric-explorer"></a>서비스 패브릭 탐색기로 클러스터 시각화
-서비스 패브릭 탐색기는 Azure 서비스 패브릭 클러스터에서 응용 프로그램 및 노드를 검사 및 관리하기 위한 웹 기반 도구입니다. 클러스터의 실행 여부와 관계없이 항상 사용할 수 있도록 서비스 패브릭 탐색기가 클러스터 내에서 직접 호스트됩니다.
+
+SFX(Service Fabric Explorer)는 Azure Service Fabric 클러스터를 검사하고 관리하기 위한 오픈 소스 도구입니다. Service Fabric Explorer는 Windows 및 Linux용 데스크톱 응용 프로그램입니다. MacOS는 곧 지원될 예정입니다.
+
+## <a name="service-fabric-explorer-download"></a>Service Fabric Explorer 다운로드
+
+Service Fabric Explorer를 데스크톱 응용 프로그램으로 다운로드하려면 다음 링크를 사용합니다.
+
+- Windows
+  - https://aka.ms/sfx-windows
+
+- Linux
+  - https://aka.ms/sfx-linux-x86
+  - https://aka.ms/sfx-linux-x64
+
+- macOS
+  - https://aka.ms/sfx-macos
+
+> [!NOTE]
+> 데스크톱 버전의 Service Fabric Explorer는 클러스터 지원 버전보다 더 많거나 적은 기능을 제공할 수 있습니다. 전체 기능 호환성을 위해 클러스터에 배포된 Service Fabric Explorer 버전으로 대체할 수 있습니다.
+>
+>
+
+### <a name="running-service-fabric-explorer-from-the-cluster"></a>클러스터에서 Service Fabric Explorer 실행
+
+Service Fabric Explorer는 Service Fabric 클러스터의 HTTP 관리 끝점에도 호스트됩니다. 웹 브라우저에서 SFX를 시작하려면 아무 브라우저에서나 클러스터의 HTTP 관리 엔드포인트로 이동합니다(예: https://clusterFQDN:19080).
+
+개발자 워크스테이션 설정의 경우 https://localhost:19080/Explorer로 이동하여 로컬 클러스터에서 Service Fabric Explorer를 시작할 수 있습니다. 이 문서를 참조하여 [개발 환경을 준비](service-fabric-get-started.md)하세요.
+
+## <a name="connect-to-a-service-fabric-cluster"></a>Service Fabric 클러스터에 연결
+Service Fabric 클러스터를 연결하려면 클러스터 관리 끝점(FQDN/IP) 및 HTTP 관리 끝점 포트(기본적으로 19080)가 필요합니다. 예: https://mysfcluster.westus.cloudapp.azure.com:19080. "localhost에 연결" 확인란을 사용하여 워크스테이션에서 로컬 클러스터에 연결합니다.
+
+### <a name="connect-to-a-secure-cluster"></a>보안 클러스터에 연결
+인증서 또는 AAD(Azure Active Directory)를 사용하여 서비스 패브릭 클라이언트에 대한 클라이언트 액세스를 제어할 수 있습니다.
+
+보안 클러스터에 연결하려는 경우 클러스터의 구성에 따라 클라이언트 인증서를 제시하거나 AAD를 사용하여 로그인해야 합니다.
 
 ## <a name="video-tutorial"></a>비디오 자습서
 
 Service Fabric Explorer를 사용하는 방법을 알아보려면 다음 Microsoft Virtual Academy 비디오를 시청하세요.
 
-[<center><img src="./media/service-fabric-visualizing-your-cluster/SfxVideo.png" WIDTH="360" HEIGHT="244"></center>](https://mva.microsoft.com/en-US/training-courses/building-microservices-applications-on-azure-service-fabric-16747?l=bBTFg46yC_9806218965)
+> [!NOTE]
+> 이 비디오에서는 데스크톱 버전이 아닌 Service Fabric 클러스터에 호스트된 Service Fabric Explorer를 보여 줍니다.
+>
+>
 
-## <a name="connect-to-service-fabric-explorer"></a>서비스 패브릭 탐색기에 연결
-[개발 환경 준비](service-fabric-get-started.md)에 대한 지침을 따른 경우 http://localhost:19080/Explorer로 이동하여 로컬 클러스터에서 Service Fabric Explorer를 시작할 수 있습니다.
+[<center><img src="./media/service-fabric-visualizing-your-cluster/SfxVideo.png" WIDTH="360" HEIGHT="244"></center>](https://mva.microsoft.com/en-US/training-courses/building-microservices-applications-on-azure-service-fabric-16747?l=bBTFg46yC_9806218965)
 
 ## <a name="understand-the-service-fabric-explorer-layout"></a>서비스 패브릭 탐색기 레이아웃 이해
 왼쪽의 트리를 사용하여 서비스 패브릭 탐색기를 탐색할 수 있습니다. 트리의 루트에서 클러스터 대시보드는 응용 프로그램 및 노드 상태에 대한 요약을 포함하여 클러스터에 대한 개요를 제공합니다.
@@ -70,25 +105,6 @@ Service Fabric Explorer를 사용하는 방법을 알아보려면 다음 Microso
 > [!TIP]
 > 각 요소 옆의 줄임표를 클릭하여 동일한 작업을 수행할 수 있습니다.
 >
->
-
-다음 테이블에서는 각 엔터티에 사용할 수 있는 작업을 나열합니다.
-
-| **엔터티** | **작업** | **설명** |
-| --- | --- | --- |
-| 응용 프로그램 형식 |프로 비전 해제 형식 |클러스터의 이미지 저장소에서 응용 프로그램 패키지 제거 해당 형식의 모든 응용 프로그램을 먼저 제거해야 합니다. |
-| 응용 프로그램 |응용 프로그램 삭제 |모든 서비스와 해당 상태를 포함하여(있는 경우) 응용 프로그램을 삭제합니다. |
-| 부여 |서비스 삭제 |서비스 및 해당 상태(있는 경우)를 삭제합니다. |
-| 노드 |활성화 |노드 활성화 |
-| 노드 | 비활성화(일시 중지) | 현재 상태에서 노드를 일시 중지합니다. 서비스는 계속 실행하지만 가동 중단 또는 데이터 불일치를 방지하는 데 필요한 경우가 아니면 서비스 패브릭은 아무것도 사전에 이동하지 않습니다. 이 작업은 검사하는 동안 이동하지 않도록 특정 노드에 디버깅 서비스를 사용하도록 설정하는 데 일반적으로 사용됩니다. | |
-| 노드 | 비활성화(다시 시작) | 안전하게 노드에서 모든 메모리 내 서비스를 이동하고 영구 서비스를 닫습니다. 호스트 프로세스 또는 컴퓨터를 다시 시작해야 할 때 일반적으로 사용됩니다. | |
-| 노드 | 비활성화(데이터 제거) | 안전하게 충분한 예비 복제본을 작성한 후에 노드에 실행하는 모든 서비스를 닫습니다. 노드(또는 최소한 저장소)가 위원회에서 영구적으로 제거될 때 일반적으로 사용됩니다. | |
-| 노드 | 노드 상태 제거 | 클러스터에서 노드의 복제본에 대한 정보를 제거합니다. 이미 실패한 노드를 복구할 수 없다고 간주하는 경우 일반적으로 사용됩니다. | |
-| 노드 | 다시 시작 | 노드를 다시 시작하여 노드 오류를 시뮬레이션합니다. 자세한 내용은 [여기](/powershell/module/servicefabric/restart-servicefabricnode?view=azureservicefabricps)를 참조하세요. | |
-
-많은 작업이 안전하지 않으므로 작업이 완료되기 전에 실행할 것인지 묻는 메시지가 나타납니다.
-
-> [!TIP]
 > 서비스 패브릭 탐색기를 통해 수행할 수 있는 모든 작업은 PowerShell 또는 REST API를 통해 수행할 수 있으므로 자동화를 사용하도록 설정할 수 있습니다.
 >
 >
@@ -98,27 +114,11 @@ Service Fabric Explorer를 사용하는 방법을 알아보려면 다음 Microso
 ![Service Fabric Explorer에서 응용 프로그램 인스턴스 만들기][sfx-create-app-instance]
 
 > [!NOTE]
-> Service Fabric Explorer를 통해 만든 응용 프로그램 인스턴스는 현재 매개 변수화될 수 없습니다. 이러한 프로그램은 기본 매개 변수 값을 사용하여 만들어집니다.
+> Service Fabric Explorer는 응용 프로그램 인스턴스를 만들 때 매개 변수를 지원하지 않습니다. 응용 프로그램 인스턴스는 기본 매개 변수 값을 사용합니다.
 >
 >
-
-## <a name="connect-to-a-remote-service-fabric-cluster"></a>원격 서비스 패브릭 클러스터에 연결
-클러스터의 끝점을 알고 있고 충분한 권한이 있으면 어느 브라우저에서든 Service Fabric Explorer에 액세스할 수 있습니다. Service Fabric Explorer는 클러스터에서 실행되는 또 다른 서비스이기 때문입니다.
-
-### <a name="discover-the-service-fabric-explorer-endpoint-for-a-remote-cluster"></a>서비스 패브릭 탐색기에서 원격 클러스터의 끝점 검색
-지정된 클러스터를 위한 Service Fabric Explorer에 도달하려면 브라우저를 다음으로 연결합니다.
-
-http://&lt;your-cluster-endpoint&gt;:19080/Explorer
-
-Azure 클러스터의 경우 Azure Portal의 클러스터 필수 창에서도 전체 URL을 사용할 수 있습니다.
-
-### <a name="connect-to-a-secure-cluster"></a>보안 클러스터에 연결
-인증서 또는 AAD(Azure Active Directory)를 사용하여 서비스 패브릭 클라이언트에 대한 클라이언트 액세스를 제어할 수 있습니다.
-
-보안 클러스터에 Service Fabric Explorer를 연결하려고 하는 경우 클러스터의 구성에 따라 클라이언트 인증서를 제시하거나 AAD를 사용하여 로그인해야 합니다.
 
 ## <a name="next-steps"></a>다음 단계
-* [테스트 용이성 개요](service-fabric-testability-overview.md)
 * [Visual Studio에서 서비스 패브릭 응용 프로그램 관리](service-fabric-manage-application-in-visual-studio.md)
 * [PowerShell을 사용하여 서비스 패브릭 응용 프로그램 배포](service-fabric-deploy-remove-applications.md)
 
@@ -129,4 +129,3 @@ Azure 클러스터의 경우 Azure Portal의 클러스터 필수 창에서도 �
 [sfx-service-essentials]: ./media/service-fabric-visualizing-your-cluster/SfxServiceEssentials.png
 [sfx-delete-application]: ./media/service-fabric-visualizing-your-cluster/SfxDeleteApplication.png
 [sfx-create-app-instance]: ./media/service-fabric-visualizing-your-cluster/SfxCreateAppInstance.png
-

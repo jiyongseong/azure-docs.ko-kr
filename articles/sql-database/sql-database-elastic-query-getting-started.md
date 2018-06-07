@@ -1,26 +1,19 @@
 ---
-title: "확장된 클라우드 데이터베이스에서 보고(수평 분할) | Microsoft Docs"
-description: "데이터베이스 간 쿼리 사용 방법"
+title: 확장된 클라우드 데이터베이스에서 보고(수평 분할) | Microsoft Docs
+description: 복수 데이터베이스에 대해 보고하려면 교차 데이터베이스 쿼리를 사용합니다.
 services: sql-database
-documentationcenter: 
-manager: jhubbard
-author: ddove
-ms.assetid: c81ef5e3-41e9-4fd2-8631-868f2e168147
+manager: craigg
+author: MladjoA
 ms.service: sql-database
 ms.custom: scale out apps
-ms.workload: sql-database
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 05/23/2016
-ms.author: ddove
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 757d6f778774e4439f2c290ef78cbffd2c5cf35e
-ms.openlocfilehash: b817577d835f2f4a912356366ab24d1f812e1e11
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/10/2017
-
-
+ms.date: 04/01/2018
+ms.author: mlandzic
+ms.openlocfilehash: e9e0588cc38bc7c29e81a1ae288ae116e3d50279
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="report-across-scaled-out-cloud-databases-preview"></a>확장된 클라우드 데이터베이스에서 보고(미리 보기)
 [탄력적 쿼리](sql-database-elastic-query-overview.md)를 사용하여 단일 연결 지점의 여러 Azure SQL 데이터베이스에서 보고서를 만들 수 있습니다. 데이터베이스를 가로로 분할해야 합니다("분할됨"이라고도 함).
@@ -30,12 +23,12 @@ ms.lasthandoff: 04/10/2017
 쿼리에 필요한 SQL 개체를 알아보려면 [수평 분할된 데이터베이스에 쿼리](sql-database-elastic-query-horizontal-partitioning.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
-[탄력적 데이터베이스 도구 샘플 시작](sql-database-elastic-scale-get-started.md)을 다운로드하고 실행하세요.
+[Elastic Database 도구 샘플 시작](sql-database-elastic-scale-get-started.md)을 다운로드하고 실행하세요.
 
 ## <a name="create-a-shard-map-manager-using-the-sample-app"></a>샘플 응용 프로그램을 사용하여 분할된 데이터베이스 맵 관리자 만들기
 분할된 데이터베이스 안의 삽입된 데이터에 따라 여느 분할된 데이터 베이스와 마찬가지로 분할된 데이터 베이스 관리자를 만들수 있습니다. 이미 분할된 데이터가 설치되어 있는 분할된 데이터베이스가 있다면, 다음 단계들을 건너뛰고 다음 섹션으로 이동합니다.
 
-1. **탄력적 데이터베이스 도구 응용 프로그램** 을 빌드하고 실행하세요. [샘플 앱 다운로드 및 실행](sql-database-elastic-scale-get-started.md#download-and-run-the-sample-app)섹션에서 7단계까지 수행합니다. 7단계를 끝내면 다음 명령 프롬프트를 볼 수 있습니다.
+1. **Elastic Database 도구 응용 프로그램** 을 빌드하고 실행하세요. [샘플 앱 다운로드 및 실행](sql-database-elastic-scale-get-started.md#download-and-run-the-sample-app)섹션에서 7단계까지 수행합니다. 7단계를 끝내면 다음 명령 프롬프트를 볼 수 있습니다.
 
     ![명령 프롬프트][1]
 2. 명령 창에 "1"을 입력하고 **Enter**키를 누릅니다. 이 명령은 분할된 데이터베이스 관리자를 생성 및 두 분할된 데이터베이스를 추가합니다. 그런 다음 "3"을 입력하고 **Enter**키를 누릅니다: 작업을 4번 반복합니다. 이 명령은 분할된 데이터베이스에 샘플 데이터행을 삽입합니다.
@@ -43,7 +36,7 @@ ms.lasthandoff: 04/10/2017
 
    ![Visual Studio 확인][2]
 
-   이 시점에 데이터베이스 간 쿼리는 탄력적 데이터베이스 클라이언트 라이브러리를 통해 지원됩니다. 예를 들면, 명령창에 있는 옵션4를 이용합니다. 다중 분할된 데이터베이스 쿼리에서 나온 결과는 항상 모든 분할된 데이터베이스의 **UNION ALL** 입니다.
+   이 시점에 데이터베이스 간 쿼리는 Elastic Database 클라이언트 라이브러리를 통해 지원됩니다. 예를 들면, 명령창에 있는 옵션4를 이용합니다. 다중 분할된 데이터베이스 쿼리에서 나온 결과는 항상 모든 분할된 데이터베이스의 **UNION ALL** 입니다.
 
    다음 섹션에서는 분할 된 데이터베이스 간 데이터의 다양한 쿼리를 지원하는 샘플 데이터베이스 끝점을 만듭니다.
 
@@ -116,7 +109,7 @@ ElasticDBQuery 데이터베이스에서 다음쿼리를 실행 합니다.
 3. **기타 원본에서**을 클릭하고 **SQL Server에서**를 클릭합니다.
 
    ![다른 원본에서 Excel 가져오기][5]
-4. **데이터 연결 마법사** 에서 서버 이름 및 로그인 자격 증명을 입력합니다. 그런 후 **Next**를 클릭합니다.
+4. **데이터 연결 마법사** 에서 서버 이름 및 로그인 자격 증명을 입력합니다. 그런 후 **Next** 를 클릭합니다.
 5. 대화 상자에서 **원하는 데이터를 포함하는 데이터베이스를 선택**하고 **ElasticDBQuery** 데이터베이스를 선택합니다.
 6. 목록 보기에서 **사용자**테이블을 선택하고 **다음**을 클릭합니다. **마침**을 클릭합니다.
 7. **데이터 가져오기** 양식에서, **통합 문서에서 원하는 데이터를 보는 방법을 선택**하고 **테이블**을 선택하고 **확인**을 클릭합니다.
@@ -126,9 +119,9 @@ ElasticDBQuery 데이터베이스에서 다음쿼리를 실행 합니다.
 이제 Excel의 강력한 데이터 시각화 함수를 사용할 수 있습니다. 탄력적 쿼리 데이터 베이스의 데이터 통합 도구 및 BI과 연결하기 위해 서버 이름, 데이터베이스 이름, 자격 증명과 연결 문자열을 사용할 수 있습니다. SQL Server 도구에 대한 데이터 소스로 지원 되는지 확인 합니다. 탄력적 쿼리 데이터베이스 및 기타 SQL Server 데이터베이스와 마찬가지로 외부 테이블 및 도구와 연결할 수 있는 SQL Server 테이블을 참조할 수 있습니다.
 
 ### <a name="cost"></a>비용
-탄력적 데이터베이스 쿼리 기능을 사용 하는 것은 무료입니다.
+Elastic Database 쿼리 기능을 사용 하는 것은 무료입니다.
 
-가격 정보는 [SQL 데이터베이스 가격 정보](https://azure.microsoft.com/pricing/details/sql-database/)를 참조하세요.
+가격 정보는 [SQL Database 가격 정보](https://azure.microsoft.com/pricing/details/sql-database/)를 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
 
@@ -146,4 +139,3 @@ ElasticDBQuery 데이터베이스에서 다음쿼리를 실행 합니다.
 [4]: ./media/sql-database-elastic-query-getting-started/details.png
 [5]: ./media/sql-database-elastic-query-getting-started/exel-sources.png
 <!--anchors-->
-

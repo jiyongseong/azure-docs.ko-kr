@@ -1,13 +1,13 @@
 ---
-title: "SCP를 사용하여 Azure Linux VM 간에 파일 이동 | Microsoft Docs"
-description: "SCP 및 SSH 키 쌍을 사용하여 Azure에서 Linux VM 간에 안전하게 파일을 이동합니다."
+title: SCP를 사용하여 Azure Linux VM 간에 파일 이동 | Microsoft Docs
+description: SCP 및 SSH 키 쌍을 사용하여 Azure에서 Linux VM 간에 안전하게 파일을 이동합니다.
 services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: dlepow
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.workload: infrastructure
 ms.tgt_pltfrm: vm-linux
@@ -15,14 +15,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/12/2017
 ms.author: danlep
+ms.openlocfilehash: 0231e402848e617a46ca70470ba4d3272ace59f7
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 8eb958bb5c8450baecb0b7b4c24db1778a1dec1d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-
 # <a name="move-files-to-and-from-a-linux-vm-using-scp"></a>SCP를 사용하여 Linux VM 간에 파일 이동
 
 이 문서에서는 보안 복사본(SCP)를 사용하여 워크스테이션에서 Azure Linux VM으로 또는 Azure Linux VM에서 워크스테이션으로 파일을 이동하는 방법을 보여 줍니다. 워크스테이션과 Linux VM 간에 신속하고 안전하게 파일을 이동하는 것은 Azure 인프라 관리의 중요한 부분입니다. 
@@ -78,5 +76,3 @@ scp -r azureuser@myserver.eastus.cloudapp.com:/home/azureuser/logs/. /tmp/
 ## <a name="next-steps"></a>다음 단계
 
 * [VMAccess 확장을 사용하여 사용자, SSH 관리 및 Azure Linux VM의 디스크 검사 또는 복구](using-vmaccess-extension.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-* [SSHD를 구성하여 Linux VM에 SSH 암호 사용 안 함](mac-disable-ssh-password-usage.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-

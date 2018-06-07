@@ -1,34 +1,32 @@
 ---
-title: "PHP용 Azure 웹 및 작업자 역할 만들기 | Microsoft Docs"
-description: "Azure 클라우드 서비스에서 PHP 웹 및 작업자 역할을 만들고 PHP 런타임을 구성하는 방법을 설명하는 가이드입니다."
-services: 
+title: PHP용 Azure 웹 및 작업자 역할 만들기
+description: Azure 클라우드 서비스에서 PHP 웹 및 작업자 역할을 만들고 PHP 런타임을 구성하는 방법을 설명하는 가이드입니다.
+services: ''
 documentationcenter: php
-author: rmcmurray
-manager: erikre
-editor: 
+author: msangapu
+manager: cfowler
 ms.assetid: 9f7ccda0-bd96-4f7b-a7af-fb279a9e975b
 ms.service: cloud-services
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: PHP
 ms.topic: article
-ms.date: 04/25/2017
-ms.author: robmcm
-translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: 89092e75d10ece044be61ceba0baf16c9e1599be
-ms.lasthandoff: 04/27/2017
-
-
+ms.date: 04/11/2018
+ms.author: msangapu
+ms.openlocfilehash: b9f350870dde71666d269aaae9cb7c14aaac5aad
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
 # <a name="how-to-create-php-web-and-worker-roles"></a>PHP 웹 및 작업자 역할을 만드는 방법
 ## <a name="overview"></a>개요
 이 가이드는 Windows 개발 환경에서 PHP 웹이나 작업자 역할을 만들고, 사용 가능한 "기본 제공" 버전에서 특정 PHP 버전을 선택하여 PHP 구성을 변경하고, 확장을 사용하고, 마지막으로 Azure에 배포하는 방법을 보여 줍니다. 또한 사용자 지정 구성 및 확장으로 제공하는 PHP 런타임을 사용하도록 웹 또는 작업자 역할을 구성하는 방법도 설명합니다.
 
 ## <a name="what-are-php-web-and-worker-roles"></a>PHP 웹 및 작업자 역할이란?
-Azure는 응용 프로그램을 실행하기 위한 세 가지 계산 모델인 Azure App Service, Azure 가상 컴퓨터 및 Azure Cloud Services를 제공합니다. 이 세 모델은 모두 PHP를 지원합니다. 웹 및 작업자 역할을 포함하는 Cloud Services는 *PaaS(Platform as a Service)*를 제공합니다. Cloud Services 안에서 웹 역할은 프런트 엔드 웹 응용 프로그램을 호스팅할 전용 IIS(인터넷 정보 서비스) 웹 서버를 제공합니다. 작업자 역할은 비동기, 장기 실행 또는 영구 작업을 사용자 조작 또는 입력과 독립적으로 실행할 수 있습니다.
+Azure는 응용 프로그램을 실행하기 위한 세 가지 계산 모델인 Azure App Service, Azure Virtual Machines 및 Azure Cloud Services를 제공합니다. 이 세 모델은 모두 PHP를 지원합니다. 웹 및 작업자 역할을 포함하는 Cloud Services는 *PaaS(Platform as a Service)* 를 제공합니다. Cloud Services 안에서 웹 역할은 프런트 엔드 웹 응용 프로그램을 호스팅할 전용 IIS(인터넷 정보 서비스) 웹 서버를 제공합니다. 작업자 역할은 비동기, 장기 실행 또는 영구 작업을 사용자 조작 또는 입력과 독립적으로 실행할 수 있습니다.
 
-이러한 옵션에 대한 자세한 내용은 [Azure에서 제공하는 계산 호스팅 옵션](cloud-services/cloud-services-choose-me.md)을 참조하세요.
+이러한 옵션에 대한 자세한 내용은 [Azure에서 제공하는 Compute 호스팅 옵션](cloud-services/cloud-services-choose-me.md)을 참조하세요.
 
 ## <a name="download-the-azure-sdk-for-php"></a>PHP용 Azure SDK 다운로드(영문)
 [PHP용 Azure SDK]는 여러 구성 요소로 구성됩니다. 이 문서에서는 이러한 구성 요소 중 두 가지인 Azure PowerShell 및 Azure 에뮬레이터를 사용합니다. 이러한 두 구성 요소는 Microsoft 웹 플랫폼 설치 관리자를 통해 설치할 수 있습니다. 자세한 내용은 [Azure PowerShell을 설치 및 구성하는 방법](/powershell/azure/overview)을 참조하세요.
@@ -179,7 +177,7 @@ PHP 5.4.0           http://nodertncu.blob.core...   False
 6. 아래 [응용 프로그램 게시](#publish-your-application) 섹션에 설명된 대로 응용 프로그램을 게시합니다.
 
 ## <a name="run-your-application-in-the-compute-and-storage-emulators"></a>계산 및 저장소 에뮬레이터에서 응용 프로그램 실행 
-Azure 에뮬레이터는 클라우드에 배포하기 전에 Azure 응용 프로그램을 테스트할 수 있는 로컬 환경을 제공합니다. 에뮬레이터와 Azure 환경 사이에는 약간의 차이가 있습니다. 이해하기 쉽도록 [개발 및 테스트에 Azure Storage 에뮬레이터 사용](storage/storage-use-emulator.md)을 참조하세요.
+Azure 에뮬레이터는 클라우드에 배포하기 전에 Azure 응용 프로그램을 테스트할 수 있는 로컬 환경을 제공합니다. 에뮬레이터와 Azure 환경 사이에는 약간의 차이가 있습니다. 이해하기 쉽도록 [개발 및 테스트에 Azure Storage 에뮬레이터 사용](storage/common/storage-use-emulator.md)을 참조하세요.
 
 계산 에뮬레이터를 사용하려면 PHP를 로컬로 설치해야 합니다. 계산 에뮬레이터는 로컬 PHP 설치를 사용하여 응용 프로그램을 실행합니다.
 
@@ -214,4 +212,3 @@ Azure 에뮬레이터는 클라우드에 배포하기 전에 Azure 응용 프로
 [sql native client]: http://msdn.microsoft.com/sqlserver/aa937733.aspx
 [sqlsrv drivers]: http://php.net/sqlsrv
 [sqlncli.msi x64 설치 관리자]: http://go.microsoft.com/fwlink/?LinkID=239648
-

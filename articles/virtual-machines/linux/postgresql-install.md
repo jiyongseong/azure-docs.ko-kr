@@ -1,11 +1,11 @@
 ---
-title: "Linux VM에서 PostgreSQL 설정 | Microsoft Docs"
-description: "Azure Linux 가상 컴퓨터에 PostgreSQL을 설치하고 구성하는 방법을 알아봅니다."
+title: Linux VM에서 PostgreSQL 설정 | Microsoft Docs
+description: Azure Linux 가상 컴퓨터에 PostgreSQL을 설치하고 구성하는 방법을 알아봅니다.
 services: virtual-machines-linux
-documentationcenter: 
-author: SuperScottz
-manager: timlt
-editor: 
+documentationcenter: ''
+author: iainfoulds
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager,azure-service-management
 ms.assetid: 1a747363-0cc5-4ba3-9be7-084dfeb04651
 ms.service: virtual-machines-linux
@@ -14,18 +14,17 @@ ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 02/01/2016
-ms.author: mingzhan
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 0bccdc1cfdbda06b57da8cd662373ef137768672
-ms.lasthandoff: 04/03/2017
-
-
+ms.author: iainfou
+ms.openlocfilehash: 7741f861c5697da1e453c0d613b4b762511cf555
+ms.sourcegitcommit: d74657d1926467210454f58970c45b2fd3ca088d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/28/2018
 ---
 # <a name="install-and-configure-postgresql-on-azure"></a>Azure에서 PostgreSQL 설치 및 구성
 PostgreSQL은 Oracle 및 DB2와 유사한 고급 오픈 소스 데이터베이스입니다. 전체 ACID 규정 준수, 신뢰할 수 있는 트랜잭션 처리 및 다중 버전 동시성 제어와 같은 엔터프라이즈 기능이 포함됩니다. 또한 ANSI SQL 및 SQL/MED(Oracle, MySQL, MongoDB 등에 대한 외부 데이터 래퍼 포함)와 같은 표준을 지원합니다. 12개 이상의 프로시저 언어, GIN 및 GiST 인덱스, 공간 데이터 지원 및 JSON에 대한 여러 NoSQL 같은 기능 또는 키 값 기반 응용 프로그램에 대한 지원을 통해 확장성을 높일 수 있습니다.
 
-이 문서에서는 Linux를 실행하는 Azure 가상 컴퓨터에서 PostgreSQL을 설치 및 구성하는 방법을 알아봅니다.
+이 문서에서는 Linux를 실행하는 Azure 가상 머신에서 PostgreSQL을 설치 및 구성하는 방법을 알아봅니다.
 
 [!INCLUDE [learn-about-deployment-models](../../../includes/learn-about-deployment-models-both-include.md)]
 
@@ -238,5 +237,4 @@ Postgres 데이터베이스를 만듭니다.
 
 ## <a name="get-more-information-about-postgresql"></a>PostgreSQL에 대한 자세한 정보 얻기
 Azure Linux VM에서 PostgreSQL의 설치를 완료하면 Azure에서 사용하여 즐길 수 있습니다. PostgreSQL에 대해 자세히 알아보려면 [PostgreSQL 웹 사이트](http://www.postgresql.org/)를 방문하세요.
-
 

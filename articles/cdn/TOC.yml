@@ -1,0 +1,176 @@
+- name: CDN 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: Azure CDN이란?
+      href: cdn-overview.md
+    - name: 제품 기능 비교
+      href: cdn-features.md
+- name: 빠른 시작
+  items:
+    - name: 프로필 및 끝점 만들기
+      href: cdn-create-new-endpoint.md
+- name: 자습서
+  items:
+    - name: Azure CDN을 웹앱에 추가
+      href: cdn-add-to-web-app.md
+    - name: 사용자 지정 도메인 추가
+      href: cdn-map-content-to-custom-domain.md
+    - name: 사용자 지정 도메인에 HTTPS 구성
+      href: cdn-custom-ssl.md
+    - name: 캐싱 규칙 설정
+      href: cdn-caching-rules-tutorial.md
+- name: 샘플
+  items:
+    - name: 코드 샘플
+      href: 'https://azure.microsoft.com/resources/samples/?service=cdn'
+- name: 개념
+  items:
+    - name: 캐싱 작동 방식
+      href: cdn-how-caching-works.md
+- name: 방법 가이드
+  items:
+    - name: 통합
+      items:
+        - name: Storage
+          items:
+            - name: 저장소 계정 통합
+              href: cdn-create-a-storage-account-with-cdn.md
+            - name: SAS 저장소 지원
+              href: cdn-sas-storage-support.md
+        - name: 크로스-원본 자원 공유
+          href: cdn-cors.md
+    - name: 콘텐츠 최적화
+      items:
+        - name: 최적화 개요
+          href: cdn-optimization-overview.md
+          items:
+            - name: 대용량 파일 최적화
+              href: cdn-large-file-optimization.md
+            - name: 미디어 스트리밍 최적화
+              href: cdn-media-streaming-optimization.md
+            - name: 동적 사이트 가속
+              href: cdn-dynamic-site-acceleration.md
+    - name: 관리
+      items:
+        - name: Azure PowerShell로 관리
+          href: cdn-manage-powershell.md
+        - name: 국가별 액세스 제한
+          href: cdn-restrict-access-by-country.md
+        - name: 파일을 압축하여 성능 향상
+          href: cdn-improve-performance.md
+        - name: 캐싱 동작 제어
+          items:
+            - name: 캐싱 작동 방식
+              href: cdn-how-caching-works.md
+            - name: 캐싱 규칙을 사용하여 캐싱 동작 제어
+              href: cdn-caching-rules.md
+            - name: 쿼리 문자열별 캐시 콘텐츠
+              items:
+                - name: 표준 계층
+                  href: cdn-query-string.md
+                - name: 프리미엄 계층
+                  href: cdn-query-string-premium.md
+            - name: 캐시된 자산 삭제
+              href: cdn-purge-endpoint.md
+            - name: 캐시된 자산 미리 로드
+              href: cdn-preload-endpoint.md
+        - name: TTL(Time to Live) 구성
+          items:
+            - name: Azure 웹 콘텐츠
+              href: cdn-manage-expiration-of-cloud-service-content.md
+            - name: Azure Blob 저장소
+              href: cdn-manage-expiration-of-blob-content.md
+        - name: 토큰 인증
+          href: cdn-token-auth.md
+        - name: 리소스 모니터링
+          href: cdn-resource-health.md
+        - name: 규칙을 사용하여 동작 재정의
+          href: cdn-rules-engine.md
+        - name: 실시간 경고 받기
+          href: cdn-real-time-alerts.md
+        - name: HTTP/2 지원
+          href: cdn-http2.md
+    - name: 분석
+      items:
+        - name: Azure CDN 사용 패턴 분석
+          href: cdn-log-analysis.md
+          items:
+            - name: Azure 진단 로그
+              href: cdn-azure-diagnostic-logs.md
+            - name: Verizon의 Azure CDN에 대한 분석 도구
+              items:
+                - name: Verizon의 코어 보고서
+                  href: cdn-analyze-usage-patterns.md
+                - name: Verizon의 사용자 지정 보고서
+                  href: cdn-verizon-custom-reports.md
+            - name: Verizon의 Azure CDN Premium에 대한 분석 도구
+              items:
+                - name: 고급 HTTP 보고서 생성
+                  href: cdn-advanced-http-reports.md
+                - name: 실시간 통계 보기
+                  href: cdn-real-time-stats.md
+                - name: 에지 노드 성능 분석
+                  href: cdn-edge-performance.md
+    - name: 개발
+      items:
+        - name: .NET
+          href: cdn-app-dev-net.md
+        - name: Node.js
+          href: cdn-app-dev-node.md
+    - name: 문제 해결
+      items:
+        - name: 404 상태
+          href: cdn-troubleshoot-endpoint.md
+        - name: 파일 압축
+          href: cdn-troubleshoot-compression.md
+- name: 참고 자료
+  items:
+    - name: 규칙 엔진 참조
+      href: cdn-rules-engine-reference.md
+      items:
+        - name: 규칙 엔진 조건식
+          href: cdn-rules-engine-reference-conditional-expressions.md
+        - name: 규칙 엔진 일치 조건
+          href: cdn-rules-engine-reference-match-conditions.md
+        - name: 규칙 엔진 기능
+          href: cdn-rules-engine-reference-features.md
+        - name: HTTP 변수
+          href: cdn-http-variables.md
+    - name: Verizon별 HTTP 헤더
+      href: cdn-verizon-http-headers.md
+      items:
+        - name: X-EC-Debug 헤더
+          href: cdn-http-debug-headers.md
+    - name: Azure PowerShell
+      href: /powershell/module/azurerm.cdn
+    - name: .NET
+      href: /dotnet/api/microsoft.azure.management.cdn
+    - name: 자바
+      href: /java/api/com.microsoft.azure.management.cdn
+    - name: REST (영문)
+      href: /rest/api/cdn/
+- name: 리소스
+  items:
+    - name: Azure CDN POP 위치
+      items:
+        - name: 지역별 POP 위치
+          href: cdn-pop-locations.md
+        - name: 약어별 POP 위치
+          href: cdn-pop-abbreviations.md
+    - name: Azure CDN 청구 이해
+      href: cdn-billing.md
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: MSDN 포럼
+      href: 'https://social.msdn.microsoft.com/Forums/home?forum=azurecdn'
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/cdn/'
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'
+    - name: 서비스 업데이트
+      href: 'https://azure.microsoft.com/updates/?product=cdn'
+    - name: 스택 오버플로
+      href: 'http://stackoverflow.com/questions/tagged/azure-cdn'
+    - name: 동영상
+      href: 'https://azure.microsoft.com/documentation/videos/index/?services=cdn'

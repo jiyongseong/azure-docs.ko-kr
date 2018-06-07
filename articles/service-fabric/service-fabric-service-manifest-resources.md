@@ -1,31 +1,30 @@
 ---
-title: "Service Fabric 서비스 끝점 지정 | Microsoft Docs"
-description: "HTTPS 끝점을 설정하는 방법을 포함하여 서비스 매니페스트에서 끝점 리소스를 설명하는 방법"
+title: Service Fabric 서비스 끝점 지정 | Microsoft Docs
+description: HTTPS 끝점을 설정하는 방법을 포함하여 서비스 매니페스트에서 끝점 리소스를 설명하는 방법
 services: service-fabric
 documentationcenter: .net
 author: mani-ramaswamy
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: da36cbdb-6531-4dae-88e8-a311ab71520d
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 7/27/2017
+ms.date: 2/23/2018
 ms.author: subramar
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 503f5151047870aaf87e9bb7ebf2c7e4afa27b83
-ms.openlocfilehash: 9cfdb94d1e030fe9d467389acf8894d79efd17d1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/29/2017
-
+ms.openlocfilehash: ce2bc8cc8d9b149b16aee9c5e601d9872621e277
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="specify-resources-in-a-service-manifest"></a>서비스 매니페스트에서 리소스 지정
 ## <a name="overview"></a>개요
 서비스 매니페스트를 사용하면 컴파일된 코드를 변경하지 않고도 서비스에서 사용하는 리소스를 선언/변경할 수 있게 해줍니다. Azure 서비스 패브릭은 서비스에 대한 끝점 리소스 구성을 지원합니다. 서비스 매니페스트에 지정된 리소스에 대한 액세스는 응용 프로그램 매니페스트의 SecurityGroup을 통해 제어할 수 있습니다. 리소스를 선언하면 배포 시에 이러한 리소스를 변경할 수 있으며 즉, 서비스에 새로운 구성 메커니즘을 도입하지 않아도 됩니다. ServiceManifest.xml 파일에 대한 스키마 정의는 Service Fabric SDK 및 도구와 함께 *C:\Program Files\Microsoft SDKs\Service Fabric\schemas\ServiceFabricServiceModel.xsd*에 설치됩니다.
 
-## <a name="endpoints"></a>끝점
+## <a name="endpoints"></a>Endpoints
 서비스 매니페스트에 끝점 리소스가 정의되면 서비스 패브릭에서는 포트가 명시적으로 지정되지 않을 경우 예약된 응용 프로그램 포트 범위에 포함되는 포트를 할당합니다. 예를 들어 이 단락 다음에 제공된 매니페스트 코드 조각에 지정된 끝점 *ServiceEndpoint1* 을 보세요. 또한 서비스에서 리소스의 특정 포트를 요청할 수도 있습니다. 다른 클러스터 노드에서 실행되는 서비스 복제본을 다른 포트 번호에 할당할 수 있으며, 같은 노드에서 실행되는 서비스의 복제본은 포트를 공유합니다. 그러면 서비스 복제본은 복제 및 클라이언트 요청의 수신 대기를 위해 필요한 경우 이러한 포트를 사용할 수 있습니다.
 
 ```xml
@@ -34,6 +33,17 @@ ms.lasthandoff: 03/29/2017
     <Endpoint Name="ServiceEndpoint1" Protocol="http"/>
     <Endpoint Name="ServiceEndpoint2" Protocol="http" Port="80"/>
     <Endpoint Name="ServiceEndpoint3" Protocol="https"/>
+  </Endpoints>
+</Resources>
+```
+
+단일 서비스 패키지에 여러 코드 패키지가 있으면 해당 코드 패키지가 **끝점** 섹션에서도 참조되어야 합니다.  예를 들어 **ServiceEndpoint2a** 및 **ServiceEndpoint2b**가 다른 코드 패키지를 참조하는 동일한 서비스 패키지의 끝점이면, 각 끝점에 해당하는 코드 패키지는 다음과 같이 구분됩니다.
+
+```xml
+<Resources>
+  <Endpoints>
+    <Endpoint Name="ServiceEndpoint2a" Protocol="http" Port="802" CodePackageRef="Code1"/>
+    <Endpoint Name="ServiceEndpoint2b" Protocol="http" Port="801" CodePackageRef="Code2"/>
   </Endpoints>
 </Resources>
 ```
@@ -107,7 +117,7 @@ HTTPS에 대해 설정해야 하는 예제 ApplicationManifest는 다음과 같�
                      xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Parameters>
-    <Parameter Name="Stateful1_MinReplicaSetSize" DefaultValue="2" />
+    <Parameter Name="Stateful1_MinReplicaSetSize" DefaultValue="3" />
     <Parameter Name="Stateful1_PartitionCount" DefaultValue="1" />
     <Parameter Name="Stateful1_TargetReplicaSetSize" DefaultValue="3" />
   </Parameters>
@@ -128,7 +138,7 @@ HTTPS에 대해 설정해야 하는 예제 ApplicationManifest는 다음과 같�
 
          The attribute ServiceTypeName below must match the name defined in the imported ServiceManifest.xml file. -->
     <Service Name="Stateful1">
-      <StatefulService ServiceTypeName="Stateful1Type" TargetReplicaSetSize="[Stateful1_TargetReplicaSetSize]" MinReplicaSetSize="[Stateful1_MinReplicaSetSize]">
+      <StatefulService ServiceTypeName="Stateful1Type" TargetReplicaSetSize="[Stateful1_TargetReplicaSetSize]" MinReplicaSetSize="[Stateful1_ ]">
         <UniformInt64Partition PartitionCount="[Stateful1_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
       </StatefulService>
     </Service>
@@ -139,3 +149,65 @@ HTTPS에 대해 설정해야 하는 예제 ApplicationManifest는 다음과 같�
 </ApplicationManifest>
 ```
 
+Linux 클러스터의 경우 **내** 저장소는 기본적으로 **/var/lib/sfcerts** 폴더입니다.
+
+
+## <a name="overriding-endpoints-in-servicemanifestxml"></a>ServiceManifest.xml에서 끝점 재정의
+
+ApplicationManifest에서 ConfigOverrides 섹션의 형제로 지정될 ResourceOverrides 섹션을 추가합니다. 이 섹션에서는 ServiceManiifest에 지정된 resources 섹션의 Endpoints 섹션에 대한 재정의를 지정할 수 있습니다. 엔드포인트 재정의는 런타임 5.7.217/SDK 2.7.217 이상에서만 지원됩니다.
+
+ApplicationParameters를 사용하여 ServiceManifest에서 EndPoint를 재정의하려면 ApplicationManifest를 다음과 같이 변경합니다.
+
+ServiceManifestImport 섹션에서 새 섹션 "ResourceOverrides"를 추가합니다.
+
+```xml
+<ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="Stateless1Pkg" ServiceManifestVersion="1.0.0" />
+    <ConfigOverrides />
+    <ResourceOverrides>
+      <Endpoints>
+        <Endpoint Name="ServiceEndpoint" Port="[Port]" Protocol="[Protocol]" Type="[Type]" />
+        <Endpoint Name="ServiceEndpoint1" Port="[Port1]" Protocol="[Protocol1] "/>
+      </Endpoints>
+    </ResourceOverrides>
+        <Policies>
+           <EndpointBindingPolicy CertificateRef="TestCert1" EndpointRef="ServiceEndpoint"/>
+        </Policies>
+  </ServiceManifestImport>
+```
+
+Parameters에서 아래 내용을 추가합니다.
+
+```xml
+  <Parameters>
+    <Parameter Name="Port" DefaultValue="" />
+    <Parameter Name="Protocol" DefaultValue="" />
+    <Parameter Name="Type" DefaultValue="" />
+    <Parameter Name="Port1" DefaultValue="" />
+    <Parameter Name="Protocol1" DefaultValue="" />
+  </Parameters>
+```
+
+예를 들어 응용 프로그램을 배포하는 동안 다음 값을 ApplicationParameters로 제공할 수 있습니다.
+
+```powershell
+PS C:\> New-ServiceFabricApplication -ApplicationName fabric:/myapp -ApplicationTypeName "AppType" -ApplicationTypeVersion "1.0.0" -ApplicationParameter @{Port='1001'; Protocol='https'; Type='Input'; Port1='2001'; Protocol='http'}
+```
+
+참고: ApplicationParameters에 제공된 값이 비어 있으면 해당 EndPointName에 대한 ServiceManifest에 제공된 기본값으로 돌아갑니다.
+
+예: 
+
+ServiceManifest에서 다음을 지정했습니다.
+
+```xml
+  <Resources>
+    <Endpoints>
+      <Endpoint Name="ServiceEndpoint1" Protocol="tcp"/>
+    </Endpoints>
+  </Resources>
+```
+
+또한 Applications 매개 변수에 대한 Port1 및 Protocol1 값은 null이거나 비어 있습니다. 포트는 여전히 ServiceFabric에 의해 결정됩니다. 또한 Protocol은 tcp가 됩니다.
+
+잘못된 값을 지정한다고 가정해 보겠습니다. Port의 경우처럼 int 대신 문자열 값 "Foo"를 지정했습니다.  New-ServiceFabricApplication 명령은 다음 오류와 함께 실패합니다. 'ResourceOverrides' 섹션에서 이름이 'ServiceEndpoint1'이고 특성이 'Port1'인 재정의 매개 변수가 잘못되었습니다. 지정된 값은 'Foo'이지만 'int'가 필요합니다.

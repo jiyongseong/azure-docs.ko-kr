@@ -1,0 +1,52 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Azure IoT Hub Device Provisioning 서비스 설명서
+metadata:
+  title: 'Azure IoT Hub Device Provisioning 서비스 설명서 - 자습서, API 참조'
+  meta.description: Overview of Azure IoT Hub Device Provisioning Service.
+  services: iot-dps
+  author: nberdy
+  manager: timlt
+  ms.service: iot-dps
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 01/23/2017
+  ms.author: nberdy
+abstract:
+  description: 'IoT Hub Device Provisioning Service는 IoT Hub를 위한 도우미 서비스로, 사람이 개입할 필요 없이 적기에 올바른 IoT Hub에 무인 프로비전이 가능하여 고객은 안전하고 확장성이 뛰어난 방식으로 수백만 대의 장치를 프로비전할 수 있습니다. 빠른 시작, 자습서 및 샘플을 사용하여 IoT Hub에 장치를 프로비전하는 방법을 알아봅니다.'
+sections:
+  - title: 5분 빠른 시작
+    items:
+      - type: paragraph
+        text: 첫 번째 장치 프로비전 서비스 인스턴스를 설정하고 IoT Hub에 시뮬레이션된 장치를 프로비전하는 방법을 알아봅니다.
+      - type: list
+        style: icon48
+        items:
+          - image:
+              src: /azure/sql-database/media/index/portal.svg
+            text: 자동 프로비전 설정
+            href: /azure/iot-dps/quick-setup-auto-provision
+          - image:
+              src: /azure/sql-database/media/index/portal.svg
+            text: 시뮬레이션된 장치 만들기
+            href: /azure/iot-dps/quick-create-simulated-device
+  - title: 단계별 자습서
+    items:
+      - type: paragraph
+        text: IoT Hub Device Provisioning Service를 사용하여 단일 또는 여러 IoT Hub에 보안이 활성화된 장치를 자동으로 프로비전하는 방법을 알아봅니다.
+      - type: list
+        style: ordered
+        items:
+          - html: <a href="/azure/iot-dps/tutorial-set-up-cloud">클라우드 리소스 구성</a>
+          - html: <a href="/azure/iot-dps/tutorial-set-up-device">Azure에 연결하도록 장치 설정</a>
+          - html: <a href="/azure/iot-dps/tutorial-provision-device-to-hub">단일 IoT Hub에 장치 프로비전</a>
+          - html: <a href="/azure/iot-dps/tutorial-provision-multiple-hubs">부하 분산된 여러 IoT Hubs에 장치 프로비전</a>
+  - title: 참조
+    items:
+      - type: list
+        style: cards
+        className: cardsD
+        items:
+          - title: REST (영문)
+            html: <p><a href="/rest/api/iot-dps">REST API</a></p>

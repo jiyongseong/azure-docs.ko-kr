@@ -1,11 +1,11 @@
 ---
-title: "Azure CDN 끝점 제거 | Microsoft Docs"
-description: "Azure CDN 끝점에서 캐시된 콘텐츠를 모두 제거하는 방법을 알아봅니다."
+title: Azure CDN 끝점 제거 | Microsoft Docs
+description: Azure CDN 끝점에서 캐시된 콘텐츠를 모두 제거하는 방법을 알아봅니다.
 services: cdn
-documentationcenter: 
+documentationcenter: ''
 author: zhangmanling
 manager: erikre
-editor: 
+editor: ''
 ms.assetid: 0b50230b-fe82-4740-90aa-95d4dde8bd4f
 ms.service: cdn
 ms.workload: tbd
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: mazha
-translationtype: Human Translation
-ms.sourcegitcommit: eb46368541551feff1b28642f9343e508ef47b95
-ms.openlocfilehash: b035c232bb58d653960190d4974cc3789d55a51d
-ms.lasthandoff: 02/14/2017
-
-
+ms.openlocfilehash: 262a8f7385ba5f74d21991772599540260a145fc
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="purge-an-azure-cdn-endpoint"></a>Azure CDN 끝점 제거
 ## <a name="overview"></a>개요
@@ -35,7 +34,7 @@ Azure CDN 가장자리 노드는 자산의 TTL(Time-to-Live)이 만료될 때 �
 이 자습서는 끝점의 모든 가장자리 노드에서 자산을 제거하는 과정을 안내합니다.
 
 ## <a name="walkthrough"></a>연습
-1. [Azure 포털](https://portal.azure.com)에서 제거하려는 끝점을 포함하는 CDN 프로필로 이동합니다.
+1. [Azure Portal](https://portal.azure.com)에서 제거하려는 끝점을 포함하는 CDN 프로필로 이동합니다.
 2. CDN 프로필 블레이드에서 제거 단추를 클릭합니다.
    
     ![CDN 프로필 블레이드](./media/cdn-purge-endpoint/cdn-profile-blade.png)
@@ -69,12 +68,11 @@ Azure CDN 가장자리 노드는 자산의 TTL(Time-to-Live)이 만료될 때 �
     ![제거 단추](./media/cdn-purge-endpoint/cdn-purge-button.png)
 
 > [!IMPORTANT]
-> 제거 요청은 **Verizon의 Azure CDN**(Standard 및 Premium)으로 처리하려면 약 2-3분, **Akamai의 Azure CDN**으로 처리하려면 약 7분이 소요됩니다.  Azure CDN은 동시 제거 요청이 항상 50개로 제한됩니다. 
+> 제거 요청은 **Verizon의 Azure CDN**(표준 및 프리미엄)으로 처리하려면 약 2-3분, **Akamai의 Azure CDN**으로 처리하려면 약 7분이 소요됩니다.  Azure CDN은 프로필 수준에서 동시 제거 요청이 항상 50개로 제한됩니다. 
 > 
 > 
 
 ## <a name="see-also"></a>참고 항목
 * [Azure CDN 끝점에 자산 미리 로드](cdn-preload-endpoint.md)
 * [Azure CDN REST API 참조 - 끝점 제거 또는 미리 로드](https://msdn.microsoft.com/library/mt634451.aspx)
-
 

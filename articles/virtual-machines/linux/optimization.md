@@ -1,11 +1,11 @@
 ---
-title: "Azure에서 Linux VM 최적화 | Microsoft Docs"
-description: "Azure에서 최적의 성능을 위해 Linux VM을 설정하도록 하는 몇 가지 최적화 팁을 알아봅니다"
-keywords: "linux 가상 컴퓨터, 가상 컴퓨터 linux, ubuntu 가상 컴퓨터"
+title: Azure에서 Linux VM 최적화 | Microsoft Docs
+description: Azure에서 최적의 성능을 위해 Linux VM을 설정하도록 하는 몇 가지 최적화 팁을 알아봅니다
+keywords: linux 가상 컴퓨터, 가상 컴퓨터 linux, ubuntu 가상 컴퓨터
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: rickstercdn
-manager: timlt
+manager: jeconnoc
 editor: tysonn
 tags: azure-resource-manager
 ms.assetid: 8baa30c8-d40e-41ac-93d0-74e96fe18d4c
@@ -16,35 +16,34 @@ ms.devlang: na
 ms.topic: article
 ms.date: 09/06/2016
 ms.author: rclaus
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: cdc3aad210418463368cc8b93459f2075bc413c2
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: 75bba953a7a5737f0388e53a9f6f38dd8324eb83
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
 # <a name="optimize-your-linux-vm-on-azure"></a>Azure에서 Linux VM 최적화
-Linux 가상 컴퓨터(VM) 만들기는 명령줄 또는 포털에서 수행하는 것이 쉽습니다. 이 자습서에서는 Microsoft Azure Platform에서 해당 성능을 최적화하도록 설정하는 방법을 보여줍니다. 이 항목에서는 Ubuntu Server VM을 사용 하지만 [템플릿으로 사용자 고유의 이미지](create-upload-generic.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)를 사용하여 Linux 가상 컴퓨터를 만들 수도 있습니다.  
+Linux 가상 머신(VM) 만들기는 명령줄 또는 포털에서 수행하는 것이 쉽습니다. 이 자습서에서는 Microsoft Azure Platform에서 해당 성능을 최적화하도록 설정하는 방법을 보여줍니다. 이 항목에서는 Ubuntu Server VM을 사용 하지만 [템플릿으로 사용자 고유의 이미지](create-upload-generic.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)를 사용하여 Linux 가상 머신을 만들 수도 있습니다.  
 
 ## <a name="prerequisites"></a>필수 조건
-이 항목에서는 사용하는 Azure 구독([무료 평가판 등록](https://azure.microsoft.com/pricing/free-trial/))이 이미 있으며 Azure 구독에 VM을 이미 프로비전했다고 가정합니다. [VM을 만들기](quick-create-cli.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) 전에 최신 [Azure CLI 2.0](/cli/azure/install-az-cli2)을 설치하고 [az login](/cli/azure/#login)을 사용하여 Azure 구독에 로그인했는지 확인합니다.
+이 항목에서는 사용하는 Azure 구독([무료 평가판 등록](https://azure.microsoft.com/pricing/free-trial/))이 이미 있으며 Azure 구독에 VM을 이미 프로비전했다고 가정합니다. [VM을 만들기](quick-create-cli.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) 전에 최신 [Azure CLI 2.0](/cli/azure/install-az-cli2)을 설치하고 [az login](/cli/azure/reference-index#az_login)을 사용하여 Azure 구독에 로그인했는지 확인합니다.
 
 ## <a name="azure-os-disk"></a>Azure OS 디스크
 Azure에서 Linux VM을 만들면 이에 연결된 두 개의 디스크가 있습니다. **/dev/sda**는 OS 디스크이며 **/dev/sdb**는 임시 디스크입니다.  OS 디스크(**/dev/sda**)는 신속한 VM 부팅 시간에 최적화되고 워크로드에 좋은 성능을 제공하지 않으므로 운영 체제 이외에 사용하지 않습니다. 데이터에 대한 영구적이고 최적화된 저장소를 얻기 위해 VM에 하나 이상의 디스크를 연결하려고 합니다. 
 
 ## <a name="adding-disks-for-size-and-performance-targets"></a>크기 및 성능 대상에 디스크 추가
-VM 크기에 따라 A 시리즈에 16개, D 시리즈에 32개 및 G 시리즈에 64개의 디스크를 최대로 연결할 수 있고 각각 최대 크기는 1TB입니다. 공간 및 IOps 요구 사항에 따라 필요한 만큼 디스크를 더 추가합니다. 각 디스크의 성능 목표는 표준 저장소의 경우 최대 500IOps이며 프리미엄 저장소의 경우 디스크당 최대 5000IOps입니다.  Premium Storage에 대한 자세한 내용은 [Premium Storage: Azure VM용 고성능 저장소](../../storage/storage-premium-storage.md)를 참조하세요.
+VM 크기에 따라 A 시리즈에 16개, D 시리즈에 32개 및 G 시리즈에 64개의 디스크를 최대로 연결할 수 있고 각각 최대 크기는 1TB입니다. 공간 및 IOps 요구 사항에 따라 필요한 만큼 디스크를 더 추가합니다. 각 디스크의 성능 목표는 Standard Storage의 경우 최대 500IOps이며 Premium Storage의 경우 디스크당 최대 5000IOps입니다.  Premium Storage에 대한 자세한 내용은 [Premium Storage: Azure VM용 고성능 저장소](../windows/premium-storage.md)를 참조하세요.
 
-**읽기 전용** 또는 **해당 없음**으로 캐시를 설정한 Premium Storage 디스크에서 가장 높은 IOps를 수행하기 위해 Linux에서 파일 시스템을 탑재하는 동안 **장벽**을 사용하지 않도록 설정해야 합니다. 프리미엄 저장소 백업 디스크에 쓰기는 이러한 캐시 설정에 대해 내구성이 있기 때문에 장벽이 필요하지 않습니다.
+**읽기 전용** 또는 **해당 없음**으로 캐시를 설정한 Premium Storage 디스크에서 가장 높은 IOps를 수행하기 위해 Linux에서 파일 시스템을 탑재하는 동안 **장벽**을 사용하지 않도록 설정해야 합니다. Premium Storage 백업 디스크에 쓰기는 이러한 캐시 설정에 대해 내구성이 있기 때문에 장벽이 필요하지 않습니다.
 
 * **reiserFS**를 사용하는 경우 탑재 옵션 `barrier=none`을 사용하여 장벽을 사용하지 않도록 설정합니다(장벽 사용의 경우 `barrier=flush` 사용).
 * **ext3/ext4**를 사용하는 경우 탑재 옵션 `barrier=0`을 사용하여 장벽을 사용하지 않도록 설정합니다(장벽 사용의 경우 `barrier=1` 사용).
 * **XFS**를 사용하는 경우 탑재 옵션 `nobarrier`을 사용하여 장벽을 사용하지 않도록 설정합니다(장벽 사용의 경우 `barrier` 옵션 사용).
 
 ## <a name="unmanaged-storage-account-considerations"></a>관리되지 않는 저장소 계정 고려 사항
-Azure CLI 2.0을 사용하여 VM을 만들 때 기본 작업은 Azure Managed Disks를 사용하는 것입니다.  이들 디스크는 Azure 플랫폼을 통해 처리되며 디스크를 저장할 위치나 준비가 필요하지 않습니다.  관리되지 않는 디스크는 저장소 계정이 필요하며 추가 성능 고려 사항이 있습니다.  관리 디스크에 대한 자세한 내용은 [Azure Managed Disks 개요](../../storage/storage-managed-disks-overview.md)를 참조하세요.  다음 섹션에서는 관리되지 않는 디스크를 사용하는 경우에만 성능 고려 사항을 설명합니다.  권장되는 기본 저장소 솔루션은 Managed Disks를 사용하는 것입니다.
+Azure CLI 2.0을 사용하여 VM을 만들 때 기본 작업은 Azure Managed Disks를 사용하는 것입니다.  이들 디스크는 Azure 플랫폼을 통해 처리되며 디스크를 저장할 위치나 준비가 필요하지 않습니다.  관리되지 않는 디스크는 저장소 계정이 필요하며 추가 성능 고려 사항이 있습니다.  관리 디스크에 대한 자세한 내용은 [Azure Managed Disks 개요](../windows/managed-disks-overview.md)를 참조하세요.  다음 섹션에서는 관리되지 않는 디스크를 사용하는 경우에만 성능 고려 사항을 설명합니다.  권장되는 기본 저장소 솔루션은 Managed Disks를 사용하는 것입니다.
 
-관리되지 않는 디스크를 사용하여 VM을 만들 경우 가까운 근접성을 제공하고 네트워크 대기 시간을 최소화하기 위해 VM과 동일한 지역에 위치한 저장소 계정에서 디스크를 연결해야 합니다.  각 표준 저장소 계정에는 최대 20,000IOps 및 500TB 크기의 용량이 포함됩니다.  이러한 제한은 만든 OS 디스크 및 데이터 디스크를 비롯한 약 40개의 많이 사용되는 디스크에 적용됩니다. 프리미엄 저장소 계정의 경우 최대 IOps 제한이 없지만 크기는 32TB로 제한됩니다. 
+관리되지 않는 디스크를 사용하여 VM을 만들 경우 가까운 근접성을 제공하고 네트워크 대기 시간을 최소화하기 위해 VM과 동일한 지역에 위치한 저장소 계정에서 디스크를 연결해야 합니다.  각 표준 저장소 계정에는 최대 20,000IOps 및 500TB 크기의 용량이 포함됩니다.  이러한 제한은 만든 OS 디스크 및 데이터 디스크를 비롯한 약 40개의 많이 사용되는 디스크에 적용됩니다. Premium Storage 계정의 경우 최대 IOps 제한이 없지만 크기는 32TB로 제한됩니다. 
 
 높은 IOps 워크로드를 다루고 디스크에 Standard Storage를 선택한 경우 여러 저장소 계정에 디스크를 분할하여 Standard Storage 계정에 대한 20,000IOps 제한을 넘지 않아야 합니다. VM은 다른 저장소 계정 및 저장소 계정 유형에서 혼합된 디스크를 포함하여 최적의 구성을 달성할 수 있습니다.
  
@@ -57,7 +56,7 @@ Azure VM을 Ubuntu 또는 CoreOS 이미지에서 가져온 경우 CustomData를 
 
 Ubuntu Cloud Images에서는 cloud-init를 사용하여 스왑 파티션을 구성하해야 합니다. 자세한 내용은 [AzureSwapPartitions](https://wiki.ubuntu.com/AzureSwapPartitions)을 참조하세요.
 
-cloud-init를 지원하지 않는 이미지의 경우 Azure Marketplace에서 배포된 VM 이미지에는 OS와 통합된 VM Linux 에이전트가 있습니다. 이 에이전트를 사용하면 VM에서 다양한 Azure 서비스와 상호 작용할 수 있습니다. Azure 마켓플레이스에서 표준 이미지를 배포한 경우 다음을 수행하여 Linux 스왑 파일 설정을 올바르게 구성해야 합니다.
+cloud-init를 지원하지 않는 이미지의 경우 Azure Marketplace에서 배포된 VM 이미지에는 OS와 통합된 VM Linux 에이전트가 있습니다. 이 에이전트를 사용하면 VM에서 다양한 Azure 서비스와 상호 작용할 수 있습니다. Azure Marketplace에서 표준 이미지를 배포한 경우 다음을 수행하여 Linux 스왑 파일 설정을 올바르게 구성해야 합니다.
 
 **/etc/waagent.conf** 파일에서 두 개의 항목을 찾아 수정합니다. 전용 스왑 파일의 존재 여부 및 스왑 파일의 크기를 제어합니다. 수정하려는 매개 변수는 `ResourceDisk.EnableSwap=N` 및 `ResourceDisk.SwapSizeMB=0`입니다. 
 
@@ -76,7 +75,7 @@ Mem:       3525156     804168    2720988        408       8428     633192
 Swap:       524284          0     524284
 ```
 
-## <a name="io-scheduling-algorithm-for-premium-storage"></a>프리미엄 저장소에 대한 I/O 일정 알고리즘
+## <a name="io-scheduling-algorithm-for-premium-storage"></a>Premium Storage에 대한 I/O 일정 알고리즘
 2.6.18 Linux 커널로 기본 I/O 일정 알고리즘은 최종 기한에서 CFQ로 변경되었습니다(완전히 공정한 큐 대기 알고리즘). 임의 액세스 I/O 패턴의 경우 CFQ와 최종 기한 간의 성능 차이의 차이는 무시할 수 있는 정도입니다.  디스크 I/O 패턴이 대부분 순차적인 SSD 기반 디스크의 경우 NOOP 또는 최종 기한 알고리즘으로 다시 전환하면 I/O 성능을 높일 수 있습니다.
 
 ### <a name="view-the-current-io-scheduler"></a>현재 I/O 스케줄러 보기
@@ -132,9 +131,7 @@ echo 'echo noop >/sys/block/sda/queue/scheduler' >> /etc/rc.local
 
 추가 리소스에 대한 몇 가지 유용한 링크: 
 
-* [프리미엄 저장소: Azure 가상 컴퓨터 작업을 위한 고성능 저장소](../../storage/storage-premium-storage.md)
-* [Azure Linux 에이전트 사용자 가이드](../windows/agent-user-guide.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-* [Azure Linux VM에서 MySQL 성능 최적화](classic/optimize-mysql.md?toc=%2fazure%2fvirtual-machines%2flinux%2fclassic%2ftoc.json)
-* [Linux에서 소프트웨어 RAID 구성](configure-raid.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-
-
+* [Premium Storage: Azure Virtual Machine 워크로드를 위한 고성능 저장소](premium-storage.md)
+* [Azure Linux 에이전트 사용자 가이드](../extensions/agent-linux.md)
+* [Azure Linux VM에서 MySQL 성능 최적화](classic/optimize-mysql.md)
+* [Linux에서 소프트웨어 RAID 구성](configure-raid.md)

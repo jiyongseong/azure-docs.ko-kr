@@ -14,23 +14,18 @@ ms.devlang: na
 ms.topic: article
 ms.date: 05/18/2017
 ms.author: adegeo
-ms.translationtype: Human Translation
-ms.sourcegitcommit: be747170a0d8a7a6defd790a3f8a122c4d397671
-ms.openlocfilehash: e746decaea19477e52aba3ce714d8dd10140602e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/23/2017
-
+ms.openlocfilehash: 0eea38cdb9827ab6e322025ff344ebbab0e83da3
+ms.sourcegitcommit: 1fbaa2ccda2fb826c74755d42a31835d9d30e05f
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/22/2018
 ---
-
 # <a name="how-to-configure-auto-scaling-for-a-cloud-service-in-the-portal"></a>포털에서 클라우드 서비스 크기 자동 조정을 구성하는 방법
-> [!div class="op_single_selector"]
-> * [Azure Portal](cloud-services-how-to-scale-portal.md)
-> * [Azure 클래식 포털](cloud-services-how-to-scale.md)
 
 규모 감축 또는 규모 확장 작업을 트리거하는 클라우드 서비스 작업자 역할에 대해 조건을 설정할 수 있습니다. 역할에 대한 조건은 CPU, 디스크 또는 역할의 네트워크 부하를 기반으로 할 수 있습니다. 메시지 큐 또는 구독에 연결된 일부 다른 Azure 리소스의 메트릭을 기준으로 조건을 설정할 수도 있습니다.
 
 > [!NOTE]
-> 이 문서에서는 클라우드 서비스 웹 및 작업자 역할에 중점을 둡니다. 가상 컴퓨터(클래식)를 직접 만든 경우 이 가상 컴퓨터는 클라우드 서비스에서 호스트됩니다. 표준 가상 컴퓨터를 [가용성 집합](../virtual-machines/windows/classic/configure-availability.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fclassic%2ftoc.json)에 연결하여 규모를 조정하고 수동으로 켜거나 끌 수 있습니다.
+> 이 문서에서는 클라우드 서비스 웹 및 작업자 역할에 중점을 둡니다. 가상 머신(클래식)를 직접 만든 경우 이 가상 머신은 클라우드 서비스에서 호스트됩니다. 표준 가상 머신을 [가용성 집합](../virtual-machines/windows/classic/configure-availability-classic.md)에 연결하여 규모를 조정하고 수동으로 켜거나 끌 수 있습니다.
 
 ## <a name="considerations"></a>고려 사항
 응용 프로그램의 크기 조정을 구성하기 전에 다음 내용을 고려해야 합니다.
@@ -39,11 +34,13 @@ ms.lasthandoff: 05/23/2017
 
     역할 인스턴스가 클수록 더 많은 코어를 사용합니다. 응용 프로그램의 크기는 구독에 대한 코어 제한 내에서만 조정할 수 있습니다. 예를 들어 구독의 코어 제한이 20이라고 해보겠습니다. 중간 크기의 클라우드 서비스 두 대에서 응용 프로그램을 실행할 경우(총 코어 수 4개), 구독에 있는 다른 클라우드 서비스 배포를 나머지 16코어까지만 확장할 수 있습니다. 크기에 대한 자세한 내용은 [클라우드 서비스 크기](cloud-services-sizes-specs.md)를 참조하세요.
 
-* 큐 메시지 임계값에 따라 크기를 조정할 수 있습니다. 큐 사용 방법에 대한 자세한 내용은 [큐 저장소 서비스를 사용하는 방법](../storage/storage-dotnet-how-to-use-queues.md)을 참조하세요.
+* 큐 메시지 임계값에 따라 크기를 조정할 수 있습니다. 큐 사용 방법에 대한 자세한 내용은 [Queue Storage 서비스를 사용하는 방법](../storage/queues/storage-dotnet-how-to-use-queues.md)을 참조하세요.
 
 * 구독에 연결된 다른 리소스의 크기도 조정할 수 있습니다.
 
 * 응용 프로그램의 가용성을 높이려면 응용 프로그램이 두 개 이상의 역할 인스턴스와 함께 배포되는지 확인해야 합니다. 자세한 내용은 [서비스 수준 계약](https://azure.microsoft.com/support/legal/sla/)을 참조하세요.
+
+* 자동 크기 조정은 모든 역할이 **준비** 상태에 있는 경우에만 발생합니다.  
 
 
 ## <a name="where-scale-is-located"></a>크기 조정 기능이 제공되는 위치
@@ -114,4 +111,3 @@ ms.lasthandoff: 05/23/2017
 3. 크기를 조정할 역할의 인스턴스입니다.
 
 크기 조정 설정을 구성한 후 맨 위에 있는 **저장** 아이콘을 선택합니다.
-

@@ -1,9 +1,9 @@
 ---
-title: "Azure Application Insights의 응용 프로그램 맵 | Microsoft Docs"
-description: "앱 구성 요소 간 종속성의 시각적 프레젠테이션은 KPI 및 경고로 레이블이 지정되었습니다."
+title: Azure Application Insights의 응용 프로그램 맵 | Microsoft Docs
+description: 응용 프로그램 맵을 사용하여 복잡한 응용 프로그램 토폴로지 모니터링
 services: application-insights
-documentationcenter: 
-author: SoubhagyaDash
+documentationcenter: ''
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 3bf37fe9-70d7-4229-98d6-4f624d256c36
 ms.service: application-insights
@@ -12,26 +12,53 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 03/14/2017
-ms.author: cfreeman
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 71fea4a41b2e3a60f2f610609a14372e678b7ec4
-ms.openlocfilehash: e76a31a8eaa249ab064d180bfd7ed158ef32c85a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/10/2017
-
-
+ms.author: mbullwin; Soubhagya.Dash
+ms.openlocfilehash: a02d345c0f624f2d1694b4b9622bf3c82c009429
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
-# <a name="application-map-in-application-insights"></a>Application Insights의 응용 프로그램 맵
-[ Application Insights](app-insights-overview.md)에서 응용 프로그램 맵은 응용 프로그램 구성 요소의 종속성 관계를 시각적으로 레이아웃합니다. 각 구성 요소는 부하, 성능, 오류 및 경고와 같은 KPI를 보여 주어 성능 문제 또는 실패를 유발하는 모든 구성 요소를 발견할 수 있도록 합니다. 구성 요소부터 Application Insights 이벤트와 같은 보다 자세한 진단까지 클릭하면서 살펴볼 수 있습니다. 앱에서 Azure 서비스를 사용하는 경우 SQL Database Advisor 권장 사항과 같은 Azure 진단도 살펴볼 수 있습니다.
+# <a name="application-map-triage-distributed-applications"></a>응용 프로그램 맵: 분산 응용 프로그램 심사
+응용 프로그램 맵을 사용하면 분산된 응용 프로그램의 모든 구성 요소에서 성능 병목 상태 또는 실패 핫스폿을 찾는 데 도움이 됩니다. 맵의 각 노드는 응용 프로그램 구성 요소 또는 해당 종속성을 나타내며 상태 KPI 및 경고 상태를 나타냅니다. 구성 요소부터 Application Insights 이벤트와 같은 보다 자세한 진단까지 클릭하면서 살펴볼 수 있습니다. 앱에서 Azure 서비스를 사용하는 경우 SQL Database Advisor 권장 사항과 같은 Azure 진단도 살펴볼 수 있습니다.
 
-다른 차트와 같이 Azure 대시보드에 응용 프로그램 맵을 고정할 수 있으며 이 때 완벽하게 작동됩니다. 
+## <a name="what-is-a-component"></a>구성 요소란?
 
-## <a name="open-the-application-map"></a>응용 프로그램 맵을 엽니다.
-응용 프로그램에 대한 개요 블레이드에서 맵을 엽니다.
+구성 요소는 독립적으로 배포할 수 있는 분산/마이크로 서비스 응용 프로그램의 부분입니다. 개발자 및 운영 팀은 이러한 응용 프로그램 구성 요소에서 생성된 원격 분석에 대한 코드 수준의 가시성 또는 액세스 권한을 갖습니다. 
 
-![앱 맵 열기](./media/app-insights-app-map/01.png)
+* 구성 요소는 팀/조직에서 액세스할 수 없는 SQL, EventHub 등과 같은 "관찰된" 외부 종속성(코드 또는 원격 분석)과 다릅니다.
+* 구성 요소는 서버/역할/컨테이너 인스턴스의 수에 관계없이 실행됩니다.
+* 구성 요소는 별도의 Application Insights 계측 키(구독이 다른 경우에도) 또는 단일 Application Insights 계측 키에 보고하는 다른 역할일 수 있습니다. 맵 미리 보기 환경은 구성 요소를 설정 방식에 관계없이 표시합니다.
 
-![앱 맵](./media/app-insights-app-map/02.png)
+## <a name="composite-application-map-preview"></a>복합 응용 프로그램 맵(미리 보기)
+*이것은 초기 미리 보기이며, 이 맵에 계속 추가할 예정입니다. 새 환경에 대한 사용자 의견을 환영합니다. 미리 보기와 클래식 환경 간을 쉽게 전환할 수 있습니다.*
+
+[미리 보기 목록](app-insights-previews.md)에서 "복합 응용 프로그램 맵"을 사용하도록 설정하거나 오른쪽 위 구석에 있는 토글에서 "맵 미리 보기"를 클릭합니다. 클래식 환경으로 다시 전환하려면 이 토글을 사용할 수 있습니다.
+![맵 미리 보기 사용](media/app-insights-app-map/preview-from-classic.png)
+
+>[!Note]
+이 미리 보기는 이전 "다중 역할 응용 프로그램 맵" 미리 보기를 대신합니다. 이제 이 미리 보기를 사용하여 응용 프로그램 구성 요소 종속성의 여러 수준에서 전체 토폴로지를 볼 수 있습니다. 사용자 의견을 주시기 바랍니다. 앞으로 클래식 맵이 지원하는 것과 비슷한 기능을 더 추가할 예정입니다.
+
+여러 수준의 관련된 응용 프로그램 구성 요소의 전체 응용 프로그램 토폴로지를 볼 수 있습니다. 구성 요소는 다른 Application Insights 리소스이거나 단일 리소스 내의 다른 역할일 수 있습니다. 앱은 Application Insights SDK가 설치된 서버 간에 수행된 HTTP 종속성 호출을 따라 구성 요소를 찾습니다. 
+
+이러한 환경은 구성 요소를 점진적으로 검색으로 시작됩니다. 미리 보기를 처음 로드할 때 이 구성 요소와 관련된 구성 요소를 검색하기 위해 쿼리 집합이 트리거됩니다. 왼쪽 위 구석에 있는 단추는 검색된 응용 프로그램의 구성 요소 수로 업데이트됩니다. 
+![맵 미리 보기](media/app-insights-app-map/preview.png)
+
+"맵 구성 요소 업데이트"를 클릭하면 맵이 해당 시점까지 검색된 모든 구성 요소로 새로 고쳐집니다.
+![로드된 맵 미리 보기](media/app-insights-app-map/components-loaded-hierarchical.png)
+
+모든 구성 요소가 단일 Application Insights 리소스 내의 역할인 경우 이 검색 단계가 필요하지 않습니다. 이러한 응용 프로그램에 대한 초기 로드 시에는 모든 구성 요소가 포함됩니다.
+
+새 환경의 주요 목표 중 하나는 수백 가지 구성 요소가 있는 복잡한 토폴로지를 시각화할 수 있는 것입니다. 새로운 환경은 확대/축소를 지원하며 확대 시 세부 정보를 추가합니다. 축소하여 더 많은 구성 요소를 한 눈에 볼 수도 있고, 실패율이 더 높은 구성 요소를 찾을 수 있습니다. 
+
+![확대/축소 수준](media/app-insights-app-map/zoom-levels.png)
+
+모든 구성 요소를 클릭하여 관련 정보를 확인하고, 해당 구성 요소에 대한 성능 및 실패 심사 환경으로 이동합니다.
+
+![플라이아웃](media/app-insights-app-map/preview-flyout.png)
+
+
+## <a name="classic-application-map"></a>클래식 응용 프로그램 맵
 
 지도에서는 다음을 보여 줍니다.
 
@@ -39,6 +66,8 @@ ms.lasthandoff: 05/10/2017
 * 클라이언트 쪽 구성 요소(JavaScript SDK를 사용하여 모니터링됨)
 * 서버 쪽 구성 요소
 * 클라이언트 및 서버 구성 요소의 종속성
+
+![앱 맵](./media/app-insights-app-map/02.png)
 
 종속성 링크 그룹을 확장하고 축소할 수 있습니다.
 
@@ -100,22 +129,6 @@ Azure에서 호스팅되는 구성 요소의 경우 옵션은 직접 링크를 �
 ![리소스 상태](./media/app-insights-app-map/resource-health.png)
 
 리소스 이름을 클릭하여 해당 리소스에 대한 표준 개요 메트릭을 볼 수 있습니다.
-
-## <a name="end-to-end-system-app-maps"></a>종단 간 시스템 앱 맵
-
-*SDK 버전 2.3 이상 필요합니다.*
-
-응용 프로그램에 여러 구성 요소(예: 백 엔드 서비스 및 웹앱)가 있는 경우 하나의 통합된 앱 맵에 모두 표시할 수 있습니다.
-
-![필터 설정](./media/app-insights-app-map/multi-component-app-map.png)
-
-앱은 Application Insights SDK가 설치된 서버 간에 수행된 HTTP 종속성 호출을 따라 서버 노드를 찾습니다. 각 Application Insights 리소스는 하나의 서버를 포함하는 것으로 간주됩니다.
-
-### <a name="multi-role-app-map-preview"></a>다중 역할 앱 맵(미리 보기)
-
-미리 보기 다중 역할 앱 맵 기능을 사용하면 여러 서버가 같은 Application Insights 리소스/계측 키에 데이터를 전송하는 앱 맵을 사용할 수 있습니다. 맵의 서버는 원격 분석 항목에 대한 cloud_RoleName 속성별로 분할됩니다. 미리 보기 블레이드에서 *다중 역할 응용 프로그램 맵*을 *설정*으로 지정하여 이 구성을 사용하도록 설정합니다.
-
-이 접근 방법은 마이크로 서비스 응용 프로그램 또는 단일 Application Insights 리소스를 내에서 여러 서버 간에 이벤트의 상관 관계를 파악하려는 기타 시나리오에서 적절할 수 있습니다.
 
 ## <a name="video"></a>비디오
 

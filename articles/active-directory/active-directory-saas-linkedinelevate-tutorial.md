@@ -1,10 +1,10 @@
 ---
-title: "자습서: LinkedIn Elevate와 Azure Active Directory 통합 | Microsoft 문서"
-description: "Azure Active Directory와 LinkedIn Elevate 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: LinkedIn Elevate와 Azure Active Directory 통합 | Microsoft 문서'
+description: Azure Active Directory와 LinkedIn Elevate 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: 2ad9941b-c574-42c3-bd0f-5d6ec68537ef
 ms.service: active-directory
 ms.workload: identity
@@ -13,13 +13,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/31/2017
 ms.author: jeedes
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a643f139be40b9b11f865d528622bafbe7dec939
-ms.openlocfilehash: 5949ae254233aa32384aab50b188fdd6527787a0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/31/2017
-
-
+ms.openlocfilehash: 3e82cf4ccdc09cd6505994f9db952ac718342bf2
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-linkedin-elevate"></a>자습서: LinkedIn Elevate와 Azure Active Directory 통합
 
@@ -31,7 +29,7 @@ LinkedIn Elevate를 Azure AD와 통합하면 다음과 같은 이점이 제공�
 - 사용자의 Azure AD 계정으로 LinkedIn Elevate에 자동으로 로그온(Single Sign-on)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure 관리 포털에서 계정을 관리할 수 있습니다.
 
-Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](active-directory-appssoaccess-whatis.md)을 참조하세요.
+Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](manage-apps/what-is-single-sign-on.md)을 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +57,7 @@ LinkedIn Elevate가 Azure AD로 통합되도록 구성하려면 LinkedIn Elevate
 
 **갤러리에서 LinkedIn Elevate를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure 관리 포털](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure 관리 포털](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Active Directory][1]
 
@@ -84,11 +82,11 @@ Single Sign-On이 작동하려면 Azure AD에서 Azure AD 사용자에 해당하
 
 LinkedIn Elevate에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구성 요소를 완료해야 합니다.
 
-1. **[Azure AD Single Sign-On 구성](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
-2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
+1. **[Configuring Azure AD Single Sign-On](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
+2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On 테스트하는 데 사용합니다.
 3. **[LinkedIn Elevate 테스트 사용자 만들기](#creating-a-linkedin-elevate-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
 4. **[Azure AD 테스트 사용자 할당](#assigning-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Testing Single Sign-On](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
+5. **[Single Sign-On 테스트](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
 
 ### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -98,39 +96,39 @@ LinkedIn Elevate에서 Azure AD Single Sign-On을 구성하고 테스트하려�
 
 1. Azure 관리 포털의 **LinkedIn Elevate** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single sign on** 대화 상자에서 **모드**로 **SAML 기반 로그온**을 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-on 구성](./media/active-directory-saas-linkedinElevate-tutorial/tutorial-linkedin_01.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-linkedinElevate-tutorial/tutorial-linkedin_01.png)
 
 3. 다른 웹 브라우저 창에서 LinkedIn Elevate 테넌트에 관리자로 로그인합니다.
 
 4. **계정 센터**의 **설정** 아래에서 **전역 설정**을 클릭합니다. 드롭다운 목록에서 **Elevate - Elevate AAD 테스트**를 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-linkedinElevate-tutorial/tutorial_linkedin_admin_01.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-linkedinElevate-tutorial/tutorial_linkedin_admin_01.png)
 
 5. **OR Click Here to load and copy individual fields from the form**(또는 양식에서 개별 필드를 로드하여 복사하려면 여기를 클릭)을 클릭하고 **엔터티 Id** 및 **ACS(Assertion Consumer Access) URL**을 복사합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-linkedinElevate-tutorial/tutorial_linkedin_admin_03.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-linkedinElevate-tutorial/tutorial_linkedin_admin_03.png)
 
 6. **IdP 시작** 모드에서 SSO를 구성하려면 Azure Portal의 **LinkedIn Elevate 도메인 및 URL**에서 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-linkedinElevate-tutorial/tutorial_linkedin_signon_01.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-linkedinElevate-tutorial/tutorial_linkedin_signon_01.png)
 
     a. **식별자** 텍스트 상자에 LinkedIn 포털에서 복사한 **엔티티 ID**를 입력합니다. 
 
-    b. **회신 URL** 텍스트 상자에 LinkedIn 포털에서 복사한 **ACS(Assertion Consumer Access) URL**을 입력합니다.
+    나. **회신 URL** 텍스트 상자에 LinkedIn 포털에서 복사한 **ACS(Assertion Consumer Access) URL**을 입력합니다.
 
 7. **SP 시작**에서 SSO를 구성하려면 구성 섹션에서 고급 URL 설정 표시 옵션을 클릭하고 다음 패턴으로 로그인 URL을 구성합니다.
 
     `https://www.linkedin.com/checkpoint/enterprise/login/<AccountId>?application=elevate&applicationInstanceId=<InstanceId>` 
     
-    ![Single Sign-On 구성](./media/active-directory-saas-linkedinElevate-tutorial/tutorial_linkedin_signon_02.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-linkedinElevate-tutorial/tutorial_linkedin_signon_02.png) 
     
 8. LinkedIn Elevate 응용 프로그램은 특정 형식의 SAML 어설션이 필요하기 때문에 SAML 토큰 특성 구성에 사용자 지정 특성 매핑을 추가해야 합니다. 다음 스크린샷은 이에 대한 예제를 보여 줍니다. **사용자 ID**의 기본값은 **user.userprincipalname**이지만 LinkedIn Elevate에는 이것이 사용자의 전자 메일 주소와 매핑되어야 합니다. 목록에서 **user.mail** 특성을 사용하거나 조직 구성을 기반으로 적절한 특성 값을 사용할 수 있기 위해서입니다. 
 
-    ![Single Sign-on 구성](./media/active-directory-saas-linkedinElevate-tutorial/updateusermail.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-linkedinElevate-tutorial/updateusermail.png)
 
 9. **사용자 특성** 섹션에서 **기타 모든 사용자 특성 보기 및 편집**을 클릭하고 특성을 설정합니다. **department**라는 또 다른 클레임을 추가하고 값을 **user.department**에 매핑해야 합니다.
 
@@ -138,32 +136,32 @@ LinkedIn Elevate에서 Azure AD Single Sign-On을 구성하고 테스트하려�
     | --- | --- |    
     | department| user.department |
 
-    ![Azure AD 테스트 사용자 만들기](./media/active-directory-saas-linkedinElevate-tutorial/userattribute.png)
+      ![Azure AD 테스트 사용자 만들기](./media/active-directory-saas-linkedinElevate-tutorial/userattribute.png)
 
-       a. Click on Add attribute to open the attribute details page add the department attribute as shown below-
+      a. [특성 추가]를 클릭하여 특성 세부 정보 페이지를 열고, 아래와 같이 부서 특성을 추가합니다.
 
-       ![Creating an Azure AD test user](./media/active-directory-saas-linkedinElevate-tutorial/adduserattribute.png)
+      ![Azure AD 테스트 사용자 만들기](./media/active-directory-saas-linkedinElevate-tutorial/adduserattribute.png)
 
-       b. Click on **Ok** to save the attribute.
+      나. **확인**을 클릭하여 해당 특성을 저장합니다.
 
-    c. 특성 **emailaddress**의 이름을 **email**로 변경합니다.
+      다. 특성 **emailaddress**의 이름을 **email**로 변경합니다.
 
 
 10. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 XML 파일을 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-linkedinElevate-tutorial/tutorial-linkedinElevate_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-linkedinElevate-tutorial/tutorial-linkedinElevate_certificate.png) 
 
-11. **Save**를 클릭합니다.
+11. **저장**을 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-linkedinElevate-tutorial/tutorial_general_400.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-linkedinElevate-tutorial/tutorial_general_400.png)
 
 12. **LinkedIn 관리 설정** 섹션으로 이동합니다. XML 파일 업로드 옵션을 클릭하여 Azure Portal에서 방금 다운로드한 XML 파일을 업로드합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-linkedinElevate-tutorial/tutorial_linkedin_metadata_03.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-linkedinElevate-tutorial/tutorial_linkedin_metadata_03.png)
 
 13. **설정**을 클릭하여 SSO를 사용하도록 설정합니다. SSO 상태가 **연결 안 됨**에서 **연결됨**으로 변경됩니다.
 
-    ![Single Sign-On 구성](./media/active-directory-saas-linkedinElevate-tutorial/tutorial_linkedin_admin_05.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-linkedinElevate-tutorial/tutorial_linkedin_admin_05.png)
 
 ### <a name="creating-an-azure-ad-test-user"></a>Azure AD 테스트 사용자 만들기
 이 섹션의 목적은 Azure 관리 포털에서 Britta Simon이라는 테스트 사용자를 만드는 것입니다.
@@ -190,9 +188,9 @@ LinkedIn Elevate에서 Azure AD Single Sign-On을 구성하고 테스트하려�
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다. 
 
@@ -216,7 +214,7 @@ Linked Elevate 응용 프로그램이 JIT(Just-in-time) 사용자 프로비저�
 
 2. 응용 프로그램 목록에서 **LinkedIn Elevate**를 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-linkedinElevate-tutorial/tutorial-linkedinElevate_0001.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-linkedinElevate-tutorial/tutorial-linkedinElevate_0001.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -242,7 +240,7 @@ Linked Elevate 응용 프로그램이 JIT(Just-in-time) 사용자 프로비저�
 
 * [자습서: Azure Active Directory를 사용한 자동 사용자 프로비전을 위한 LinkedIn Elevate 구성](active-directory-saas-linkedinelevate-provisioning-tutorial.md)
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 <!--Image references-->

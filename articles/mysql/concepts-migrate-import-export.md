@@ -1,22 +1,20 @@
 ---
-title: "Azure Database for MySQL의 가져오기 및 내보내기 | Microsoft Docs"
-description: "이 문서에서는 MySQL Workbench와 같은 도구를 사용하여 Azure Database for MySQL에서 데이터베이스를 가져오고 내보내는 일반적인 방법을 설명합니다."
+title: Azure Database for MySQL의 가져오기 및 내보내기
+description: 이 문서에서는 MySQL Workbench와 같은 도구를 사용하여 Azure Database for MySQL에서 데이터베이스를 가져오고 내보내는 일반적인 방법을 설명합니다.
 services: mysql
-author: v-chenyh
-ms.author: v-chenyh
-manager: jhubbard
+author: ajlam
+ms.author: andrela
+manager: kfile
 editor: jasonwhowell
 ms.service: mysql-database
 ms.topic: article
-ms.date: 06/13/2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a1ba750d2be1969bfcd4085a24b0469f72a357ad
-ms.openlocfilehash: 2164562af60442375b96a51f820a65d4d4a6f257
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
+ms.date: 03/20/2018
+ms.openlocfilehash: 74b8c6afc5167225414f467f76f08c0e53bbade5
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
-
 # <a name="migrate-your-mysql-database-by-using-import-and-export"></a>가져오기 및 내보내기를 사용하여 MySQL 데이터베이스 마이그레이션
 이 문서에서는 MySQL Workbench를 사용하여 Azure Database for MySQL 서버로 데이터를 가져오고 내보내는 두 가지 일반적인 방법을 설명합니다. 
 
@@ -35,9 +33,9 @@ MySQL용 Azure 데이터베이스로 마이그레이션할 때 가져오기 및 
 ## <a name="create-a-database-on-the-azure-database-for-mysql-server"></a>Azure Database for MySQL 서버에서 데이터베이스 만들기
 데이터를 마이그레이션하려는 Azure Database for MySQL 서버에서 빈 데이터베이스를 만듭니다. MySQL Workbench, Toad 또는 Navicat과 같은 도구를 사용하여 데이터베이스를 만듭니다. 이 데이터베이스는 덤프된 데이터를 포함하는 데이터베이스와 이름이 같을 수 있고 다른 이름의 데이터베이스를 만들 수도 있습니다.
 
-연결하려면 Azure Database for MySQL의 **속성** 페이지에서 연결 정보를 찾습니다.
+연결하려면 Azure Database for MySQL의 **개요**에서 연결 정보를 찾습니다.
 
-![Azure Portal에서 연결 정보 찾기](./media/concepts-migrate-import-export/1_server-properties-name-login.png)
+![Azure Portal에서 연결 정보 찾기](./media/concepts-migrate-import-export/1_server-overview-name-login.png)
 
 MySQL Workbench에 연결 정보를 추가합니다.
 
@@ -47,7 +45,7 @@ MySQL Workbench에 연결 정보를 추가합니다.
 MySQL 도구를 사용하여 다음과 같은 시나리오에서 Azure MySQL 데이터베이스에 데이터베이스를 가져오고 내보낼 수 있습니다. 다른 시나리오에서는 [덤프 및 복원](concepts-migrate-dump-restore.md) 방법을 대신 사용하는 것이 유용할 수 있습니다. 
 
 - 기존 MySQL 데이터베이스에서 Azure MySQL 데이터베이스로 가져오도록 몇 가지 테이블을 선택적으로 선택해야 할 때 가져오기 및 내보내기 기술을 사용하는 것이 좋습니다.  이렇게 하면 시간과 리소스를 절약하도록 마이그레이션에서 불필요한 테이블을 생략할 수 있습니다. 예를 들어 [mysqlpump](https://dev.mysql.com/doc/refman/5.7/en/mysqlpump.html#option_mysqlpump_include-tables)로 `--include-tables` 또는 `--exclude-tables` 스위치를 사용하고 [mysqldump](https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html#option_mysqldump_tables) 덤프로 `--tables` 스위치를 사용합니다.
-- 테이블 이외의 다른 데이터베이스 개체를 이동할 때 명시적으로 만듭니다. 마이그레이션하려는 제약 조건(기본 키, 외래 키, 인덱스), 뷰, 함수, 프로시저, 트리거 및 다른 모든 데이터베이스 개체를 포함합니다.
+- 테이블 이외의 다른 데이터베이스 개체를 이동할 때 해당 개체를 명시적으로 만듭니다. 마이그레이션하려는 제약 조건(기본 키, 외래 키, 인덱스), 뷰, 함수, 프로시저, 트리거 및 다른 모든 데이터베이스 개체를 포함합니다.
 - MySQL 데이터베이스 이외의 외부 데이터 원본에서 데이터를 마이그레이션하는 경우 플랫 파일을 만들고 [mysqlimport](https://dev.mysql.com/doc/refman/5.7/en/mysqlimport.html)를 사용하여 가져옵니다.
 
 데이터베이스의 모든 테이블이 데이터를 Azure Database for MySQL로 로드할 때 InnoDB 저장소 엔진을 사용하도록 합니다. Azure Database for MySQL은 InnoDB 저장소 엔진만을 지원하므로 대체 저장소 엔진을 지원하지 않습니다. 테이블에 대체 저장소 엔진이 필요한 경우 Azure Database for MySQL로 마이그레이션 전에 InnoDB 엔진 형식으로 사용하도록 변환해야 합니다. 
@@ -87,7 +85,7 @@ MySQL Workbench에는 데이터 내보내기 및 가져오기 방법이 2가지 
 다음 예제에서는 CSV 파일에서 테이블을 가져옵니다.
 1. 가져올 데이터베이스의 테이블을 마우스 오른쪽 단추로 클릭합니다. 
 2. 가져올 CSV 파일을 찾아서 선택한 후 **다음**을 클릭합니다. 
-3. 대상 테이블(신규 또는 기존)을 선택하고 **가져오기 전에 테이블 자르기** 확인란을 선택하거나 선택 취소합니다. **다음**을 누릅니다.
+3. 대상 테이블(신규 또는 기존)을 선택하고 **가져오기 전에 테이블 자르기** 확인란을 선택하거나 선택 취소합니다. **다음**을 클릭합니다.
 4. 가져올 인코딩 및 열을 선택한 후 **다음**을 클릭합니다. 
 5. **데이터 가져오기** 페이지에서 **다음**을 클릭합니다. 마법사는 그에 따라 데이터를 가져옵니다.
 
@@ -116,4 +114,3 @@ MySQL Workbench에는 데이터 내보내기 및 가져오기 방법이 2가지 
 
 ## <a name="next-steps"></a>다음 단계
 다른 마이그레이션 방법으로 [Azure Database for MySQL에서 덤프 및 복원을 사용하여 MySQL 데이터베이스 마이그레이션](concepts-migrate-dump-restore.md)을 참조하세요. 
-

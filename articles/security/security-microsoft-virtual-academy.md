@@ -12,13 +12,13 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 11/18/2016
+ms.date: 11/21/2017
 ms.author: terrylan
-translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: baf6476c6dfc0db29d51d5b0b1643b1ff099a808
-
-
+ms.openlocfilehash: dfcd248be48109203e91c93231d89d1d650a4b96
+ms.sourcegitcommit: 62eaa376437687de4ef2e325ac3d7e195d158f9f
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/22/2017
 ---
 # <a name="azure-security-courses-from-microsoft-virtual-academy"></a>Microsoft Virtual Academy의 Azure 보안 교육 과정
 Microsoft Virtual Academy는 개발자, IT 및 데이터 전문가, 학생들이 최신 기술을 배우고 스킬을 구축하며 경력을 발전시켜 나갈 수 있게 도와 주기 위한 무료 온라인 교육을 제공합니다.
@@ -51,7 +51,7 @@ Microsoft 클라우드 데이터 플랫폼 솔루션의 기능과 특징에 알�
 
 [Microsoft Azure IaaS 심층 분석](https://mva.microsoft.com/en-us/training-courses/microsoft-azure-iaas-deep-dive-14339?l=PtppYVQgB_8300115888)
 
-Microsoft Azure 인프라 기능을 사용하는 방법에 대해 알아봅니다. IT 전문가라면 이전에 Azure 경험이 없어도 됩니다. 과정을 그대로 따라 가면 Azure VM, Azure 가상 네트워크 및 크로스-프레미스 연결을 생성하고 구성하여 클라우드에서 실행할 수 있습니다. 과정 전반에서 기능 및 고려 사항이 포함되어 있습니다.
+Microsoft Azure 인프라 기능을 사용하는 방법에 대해 알아봅니다. IT 전문가라면 이전에 Azure 경험이 없어도 됩니다. 과정을 그대로 따라 가면 Azure VM, Azure Virtual Network 및 크로스-프레미스 연결을 생성하고 구성하여 클라우드에서 실행할 수 있습니다. 과정 전반에서 기능 및 고려 사항이 포함되어 있습니다.
 
 [IT 전문가를 위한 Azure 보안 시작](https://mva.microsoft.com/training-courses/getting-started-with-azure-security-for-the-it-professional-11165?l=HfHzCXSAB_7404300474)
 
@@ -64,9 +64,3 @@ Microsoft Azure 인프라 기능을 사용하는 방법에 대해 알아봅니�
 [Azure Rights Management 서비스 핵심 기술](https://mva.microsoft.com/en-us/training-courses/azure-rights-management-services-core-skills-10500?l=QLoxMwuCB_1805094681)
 
 정보 보호가 조직에서 반드시 "갖춰야 할" 요구 사항인 이유와 장치와 클라우드 전반에서 이동하든지 권한 관리가 조직의 지적 재산권을 보호하는 방법을 알아봅니다. Microsoft 전문가로부터 실습 활동과 기술 노하우를 얻습니다.
-
-
-
-<!--HONumber=Nov16_HO3-->
-
-

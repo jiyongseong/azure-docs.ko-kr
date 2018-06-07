@@ -14,12 +14,12 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 02/08/2017
 ms.author: alkohli
-translationtype: Human Translation
-ms.sourcegitcommit: 0b28c5e93dc8f53597b1d2fa6f4ae154acf16068
 ms.openlocfilehash: c8cb51093142146fc7d43b51a62d949f6cc38988
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="deploy-storsimple-virtual-array-for-cloud-solution-provider-program"></a>클라우드 솔루션 공급자 프로그램용 StorSimple 가상 배열 배포
 
 ## <a name="overview"></a>개요
@@ -104,9 +104,3 @@ ms.openlocfilehash: c8cb51093142146fc7d43b51a62d949f6cc38988
 
 - CSP의 StorSimple에 대한 추가 질문이 있으면 [CSP의 StorSimple: 질문과 대답](storsimple-partner-csp-faq.md)으로 이동합니다.
 - StorSimple을 배포할 준비가 되면 [CSP에서 StorSimple 배포](storsimple-partner-csp-deploy.md)로 이동합니다.
-
-
-
-<!--HONumber=Feb17_HO2-->
-
-

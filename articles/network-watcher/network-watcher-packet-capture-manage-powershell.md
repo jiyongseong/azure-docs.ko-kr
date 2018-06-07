@@ -1,11 +1,11 @@
 ---
-title: "Azure Network Watcher를 사용하여 패킷 캡처 관리 - PowerShell | Microsoft Docs"
-description: "이 페이지에서는 PowerShell을 사용하여 Network Watcher의 패킷 캡처 기능을 관리하는 방법에 대해 설명합니다."
+title: Azure Network Watcher를 사용하여 패킷 캡처 관리 - PowerShell | Microsoft Docs
+description: 이 페이지에서는 PowerShell을 사용하여 Network Watcher의 패킷 캡처 기능을 관리하는 방법에 대해 설명합니다.
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 04d82085-c9ea-4ea1-b050-a3dd4960f3aa
 ms.service: network-watcher
 ms.devlang: na
@@ -13,19 +13,18 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c785ad8dbfa427d69501f5f142ef40a2d3530f9e
-ms.openlocfilehash: abd3b3641da80ee835fac85b4bde68594449e451
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
+ms.author: jdial
+ms.openlocfilehash: 6ffb1aec91899b54a153e264e346910caee84cc0
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32186786"
 ---
-
 # <a name="manage-packet-captures-with-azure-network-watcher-using-powershell"></a>PowerShell에서 Azure Network Watcher를 사용하여 패킷 캡처 관리
 
 > [!div class="op_single_selector"]
-> - [Azure 포털](network-watcher-packet-capture-manage-portal.md)
+> - [Azure Portal](network-watcher-packet-capture-manage-portal.md)
 > - [PowerShell](network-watcher-packet-capture-manage-powershell.md)
 > - [CLI 1.0](network-watcher-packet-capture-manage-cli-nodejs.md)
 > - [CLI 2.0](network-watcher-packet-capture-manage-cli.md)
@@ -46,10 +45,10 @@ Network Watcher 패킷 캡처를 사용하면 가상 컴퓨터 간에 트래픽�
 
 * 패킷 캡처를 만들려는 영역의 Network Watcher 인스턴스
 
-* 패킷 캡처 확장을 사용하는 가상 컴퓨터
+* 패킷 캡처 확장을 사용하는 Virtual Machine
 
 > [!IMPORTANT]
-> 패킷 캡처에는 가상 컴퓨터 확장 `AzureNetworkWatcherExtension`이 필요합니다. Windows VM에서 확장을 설치하려면 [Windows용 Azure Network Watcher 에이전트 가상 컴퓨터 확장](../virtual-machines/windows/extensions-nwa.md)을 방문하고 Linux VM인 경우 [Linux용 Azure Network Watcher 에이전트 가상 컴퓨터 확장](../virtual-machines/linux/extensions-nwa.md)을 방문하세요.
+> 패킷 캡처에는 가상 머신 확장 `AzureNetworkWatcherExtension`이 필요합니다. Windows VM에서 확장을 설치하려면 [Windows용 Azure Network Watcher 에이전트 가상 머신 확장](../virtual-machines/windows/extensions-nwa.md)을 방문하고 Linux VM인 경우 [Linux용 Azure Network Watcher 에이전트 가상 머신 확장](../virtual-machines/linux/extensions-nwa.md)을 방문하세요.
 
 ## <a name="install-vm-extension"></a>VM 확장 설치
 
@@ -61,12 +60,12 @@ $VM = Get-AzureRmVM -ResourceGroupName testrg -Name VM1
 
 ### <a name="step-2"></a>2단계
 
-다음 예에서는 `Set-AzureRmVMExtension` cmdlet을 실행하는 데 필요한 확장 정보를 검색합니다. 이 cmdlet을 사용하면 게스트 가상 컴퓨터에 패킷 캡처 에이전트가 설치됩니다.
+다음 예에서는 `Set-AzureRmVMExtension` cmdlet을 실행하는 데 필요한 확장 정보를 검색합니다. 이 cmdlet을 사용하면 게스트 가상 머신에 패킷 캡처 에이전트가 설치됩니다.
 
 > [!NOTE]
 > `Set-AzureRmVMExtension` cmdlet을 완료하는 데는 몇 분 정도 걸릴 수 있습니다.
 
-Windows 가상 컴퓨터의 경우:
+Windows Virtual Machines의 경우:
 
 ```powershell
 $AzureNetworkWatcherExtension = Get-AzureRmVMExtensionImage -Location WestCentralUS -PublisherName Microsoft.Azure.NetworkWatcher -Type NetworkWatcherAgentWindows -Version 1.4.13.0
@@ -74,7 +73,7 @@ $ExtensionName = "AzureNetworkWatcherExtension"
 Set-AzureRmVMExtension -ResourceGroupName $VM.ResourceGroupName  -Location $VM.Location -VMName $VM.Name -Name $ExtensionName -Publisher $AzureNetworkWatcherExtension.PublisherName -ExtensionType $AzureNetworkWatcherExtension.Type -TypeHandlerVersion $AzureNetworkWatcherExtension.Version.Substring(0,3)
 ```
 
-Linux 가상 컴퓨터의 경우:
+Linux 가상 머신의 경우:
 
 ```powershell
 $AzureNetworkWatcherExtension = Get-AzureRmVMExtensionImage -Location WestCentralUS -PublisherName Microsoft.Azure.NetworkWatcher -Type NetworkWatcherAgentLinux -Version 1.4.13.0
@@ -92,7 +91,7 @@ RequestId IsSuccessStatusCode StatusCode ReasonPhrase
 
 ### <a name="step-3"></a>3단계
 
-에이전트가 설치되어 있는지 확인하려면 `Get-AzureRmVMExtension` cmdlet을 실행하고 가상 컴퓨터 이름과 확장 이름을 전달합니다.
+에이전트가 설치되어 있는지 확인하려면 `Get-AzureRmVMExtension` cmdlet을 실행하고 가상 머신 이름과 확장 이름을 전달합니다.
 
 ```powershell
 Get-AzureRmVMExtension -ResourceGroupName $VM.ResourceGroupName  -VMName $VM.Name -Name $ExtensionName
@@ -122,7 +121,7 @@ ForceUpdateTag          :
 
 ## <a name="start-a-packet-capture"></a>패킷 캡처 시작
 
-이전 단계가 완료되면 패킷 캡처 에이전트는 가상 컴퓨터에 설치됩니다.
+이전 단계가 완료되면 패킷 캡처 에이전트는 가상 머신에 설치됩니다.
 
 ### <a name="step-1"></a>1단계
 
@@ -153,12 +152,12 @@ $filter2 = New-AzureRmPacketCaptureFilterConfig -Protocol UDP
 > [!NOTE]
 > 패킷 캡처를 위해 여러 필터를 정의할 수 있습니다.
 
-### <a name="step-4"></a>4단계
+### <a name="step-4"></a>4단계:
 
 `New-AzureRmNetworkWatcherPacketCapture` cmdlet을 실행하여 패킷 캡처 프로세스를 시작하고 이전 단계에서 검색한 필수 값을 전달합니다.
 ```powershell
 
-New-AzureRmNetworkWatcherPacketCapture -NetworkWatcher $networkWatcher -TargetVirtualMachineId $vm.Id -PacketCaptureName "PacketCaptureTest" -StorageAccountId $storageAccount.id -TimeLimitInSeconds 60 -Filters $filter1, $filter2
+New-AzureRmNetworkWatcherPacketCapture -NetworkWatcher $networkWatcher -TargetVirtualMachineId $vm.Id -PacketCaptureName "PacketCaptureTest" -StorageAccountId $storageAccount.id -TimeLimitInSeconds 60 -Filter $filter1, $filter2
 ```
 
 다음 예제는 `New-AzureRmNetworkWatcherPacketCapture` cmdlet 실행 시 예상된 출력입니다.
@@ -278,12 +277,11 @@ https://{storageAccountName}.blob.core.windows.net/network-watcher-logs/subscrip
 
 ## <a name="next-steps"></a>다음 단계
 
-[경고로 트리거된 패킷 캡처 만들기](network-watcher-alert-triggered-packet-capture.md)를 확인하여 가상 컴퓨터 경고로 패킷 캡처를 자동화하는 방법을 알아봅니다.
+[경고로 트리거된 패킷 캡처 만들기](network-watcher-alert-triggered-packet-capture.md)를 확인하여 가상 머신 경고로 패킷 캡처를 자동화하는 방법을 알아봅니다.
 
-[IP 흐름 확인 확인](network-watcher-check-ip-flow-verify-portal.md)을 방문하여 특정 트래픽이 VM에서 허용되는지 알아봅니다.
+[IP 흐름 확인 확인](diagnose-vm-network-traffic-filtering-problem.md)을 방문하여 특정 트래픽이 VM에서 허용되는지 알아봅니다.
 
 <!-- Image references -->
-
 
 
 

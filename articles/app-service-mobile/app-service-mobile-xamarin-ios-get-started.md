@@ -1,10 +1,10 @@
 ---
 title: "Xamarin.iOS 앱용 Azure App Service Mobile Apps 시작 | Microsoft Docs"
-description: "이 자습서에 따라 모바일 앱을 사용하여 Xamarin.iOS 개발을 시작할 수 있습니다."
+description: "이 자습서에 따라 Mobile Apps를 사용하여 Xamarin.iOS 개발을 시작할 수 있습니다."
 services: app-service\mobile
 documentationcenter: xamarin
-author: ggailey777
-manager: syntaxc4
+author: conceptdev
+manager: crdun
 editor: 
 ms.assetid: 14428794-52ad-4b51-956c-deb296cafa34
 ms.service: app-service-mobile
@@ -13,13 +13,12 @@ ms.tgt_pltfrm: mobile-xamarin-ios
 ms.devlang: dotnet
 ms.topic: hero-article
 ms.date: 10/01/2016
-ms.author: syntaxc4
+ms.author: crdun
+ms.openlocfilehash: 8b890630d352619da86c3017426e24f55ef016d9
+ms.sourcegitcommit: df4ddc55b42b593f165d56531f591fdb1e689686
 ms.translationtype: HT
-ms.sourcegitcommit: 99523f27fe43f07081bd43f5d563e554bda4426f
-ms.openlocfilehash: 8dc965df2cd45366970effb29f246b0045a94717
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/05/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/04/2018
 ---
 # <a name="create-a-xamarinios-app"></a>Xamarin.iOS 앱 만들기
 [!INCLUDE [app-service-mobile-selector-get-started](../../includes/app-service-mobile-selector-get-started.md)]
@@ -27,9 +26,9 @@ ms.lasthandoff: 08/05/2017
 ## <a name="overview"></a>개요
 이 자습서에서는 Azure 모바일 앱 백 엔드를 사용하여 클라우드 기반 백 엔드 서비스를 Xamarin.iOS 모바일 앱에 추가하는 방법을 보여 줍니다.  새 모바일 앱 백 엔드와 앱 데이터를 Azure에 저장하는 간단한 *할 일 모음* Xamarin.iOS 앱을 만듭니다.
 
-이 자습서를 완료해야 Azure 앱 서비스에서 모바일 앱 기능을 사용하는 방법에 대한 다른 모든 Xamarin.iOS 자습서를 진행할 수 있습니다.
+이 자습서를 완료해야 Azure App Service에서 Mobile Apps 기능을 사용하는 방법에 대한 다른 모든 Xamarin.iOS 자습서를 진행할 수 있습니다.
 
-## <a name="prerequisites"></a>필수 조건
+## <a name="prerequisites"></a>필수 구성 요소
 이 자습서를 완료하려면 다음 필수 구성 요소가 필요합니다.
 
 * 활성 Azure 계정. 계정이 없는 경우 Azure 평가판을 등록하고 최대 10개의 무료 모바일 앱을 가져옵니다. 이러한 앱은 평가판 사용 기간이 끝난 후에도 계속 사용할 수 있습니다. 자세한 내용은 [Azure 무료 체험](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
@@ -74,7 +73,7 @@ ms.lasthandoff: 08/05/2017
 * [앱에 오프라인 동기화 추가](app-service-mobile-xamarin-ios-get-started-offline-data.md)
 * [앱에 인증 추가 ](app-service-mobile-xamarin-ios-get-started-users.md)
 * [Xamarin.Android 앱에 푸시 알림 추가](app-service-mobile-xamarin-ios-get-started-push.md)
-* [Azure 모바일 앱에 관리되는 클라이언트를 사용하는 방법](app-service-mobile-dotnet-how-to-use-client-library.md)
+* [Azure Mobile Apps에 관리되는 클라이언트를 사용하는 방법](app-service-mobile-dotnet-how-to-use-client-library.md)
 
 <!-- Anchors. -->
 [Getting started with mobile app backends]:#getting-started
@@ -89,4 +88,3 @@ ms.lasthandoff: 08/05/2017
 
 <!-- URLs. -->
 [Azure 포털]: https://portal.azure.com/
-

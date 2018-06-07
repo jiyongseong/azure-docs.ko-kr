@@ -1,28 +1,27 @@
 ---
-title: "Android용 Azure Mobile Apps SDK를 사용하는 방법 | Microsoft Docs"
-description: "Android용 Azure Mobile Apps SDK를 사용하는 방법"
+title: Android용 Azure Mobile Apps SDK를 사용하는 방법 | Microsoft Docs
+description: Android용 Azure Mobile Apps SDK를 사용하는 방법
 services: app-service\mobile
 documentationcenter: android
-author: ggailey777
-manager: syntaxc4
+author: conceptdev
+manager: crdun
 ms.assetid: 5352d1e4-7685-4a11-aaf4-10bd2fa9f9fc
 ms.service: app-service-mobile
 ms.workload: mobile
 ms.tgt_pltfrm: mobile-android
 ms.devlang: java
 ms.topic: article
-ms.date: 04/25/2017
-ms.author: glenga
+ms.date: 11/16/2017
+ms.author: crdun
+ms.openlocfilehash: d89aa308ab8f6684cebbec49bbefdcb54d77c886
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 4b15d024ca6d5bbafe83d321a64021aecd78c4a8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
 # <a name="how-to-use-the-azure-mobile-apps-sdk-for-android"></a>Android용 Azure Mobile Apps SDK를 사용하는 방법
 
-이 가이드에서는 모바일 앱용 Android 클라이언트 SDK를 사용하여 다음과 같은 일반적인 시나리오를 구현하는 방법을 보여줍니다.
+이 가이드에서는 Mobile Apps용 Android 클라이언트 SDK를 사용하여 다음과 같은 일반적인 시나리오를 구현하는 방법을 보여줍니다.
 
 * 데이터 쿼리(삽입, 업데이트 및 삭제).
 * 인증.
@@ -66,10 +65,10 @@ Android용 Azure Mobile Apps SDK는 휴대폰 및 태블릿 폼 팩터용 API �
 2. *dependencies* 태그 내의 *모듈 앱* 수준 **build.gradle** 파일에 이 코드를 추가합니다.
 
     ```text
-    compile 'com.microsoft.azure:azure-mobile-android:3.3.0'
+    compile 'com.microsoft.azure:azure-mobile-android:3.4.0@aar'
     ```
 
-    현재 최신 버전은 3.3.0입니다. 지원되는 버전은 [bintray][14]에 나열되어 있습니다.
+    현재 최신 버전은 3.4.0입니다. 지원되는 버전은 [bintray][14]에 나열되어 있습니다.
 
 ### <a name="enable-internet"></a>인터넷 권한 사용
 
@@ -100,7 +99,7 @@ MobileServiceClient mClient = new MobileServiceClient(
 
 클라이언트는 활동 또는 컨텍스트(예제의 `this` 매개 변수)에 대한 액세스도 필요합니다.  MobileServiceClient 생성은 `AndroidManifest.xml` 파일에 언급된 활동의 `onCreate()` 메서드 내에서 수행되어야 합니다.
 
-가장 좋은 방법은 서버 통신을 자체(singleton 패턴) 클래스로 추상화하는 것입니다.  이런 경우 서비스를 적절히 구성하려면 활동을 생성자 내에서 전달해야 합니다.  예:
+가장 좋은 방법은 서버 통신을 자체(singleton 패턴) 클래스로 추상화하는 것입니다.  이런 경우 서비스를 적절히 구성하려면 활동을 생성자 내에서 전달해야 합니다.  예: 
 
 ```java
 package com.example.appname.services;
@@ -108,7 +107,7 @@ package com.example.appname.services;
 import android.content.Context;
 import com.microsoft.windowsazure.mobileservices.*;
 
-public AzureServiceAdapter {
+public class AzureServiceAdapter {
     private String mMobileBackendUrl = "https://myappname.azurewebsites.net";
     private Context mContext;
     private MobileServiceClient mClient;
@@ -199,7 +198,7 @@ Azure Mobile Apps 백 엔드 테이블은 5개의 특수 필드를 정의하며 
 * `byte[] version`: 일반적으로 문자열로 표시되며 버전도 서버에 의해 설정됩니다.
 * `boolean deleted`: 레코드가 삭제되었지만 아직 제거되지 않았음을 나타냅니다.  `deleted`를 클래스에서 속성으로 사용하지 마십시오.
 
-`id` 필드는 필수입니다.  `updatedAt` 필드 및 `version` 필드는 오프라인 동기화에(각각 증분 동기화 및 충돌 해결을 위해) 사용됩니다.  `createdAt` 필드는 참조 필드이며 클라이언트에서 사용되지 않습니다.  이름은 속성의 "across-the-wire" 이름이며 조정할 수 없습니다.  하지만 [gson][3] 라이브러리를 사용하여 개체와 "across-the-wire" 이름 사이에 매핑을 만들 수 있습니다.  예:
+`id` 필드는 필수입니다.  `updatedAt` 필드 및 `version` 필드는 오프라인 동기화에(각각 증분 동기화 및 충돌 해결을 위해) 사용됩니다.  `createdAt` 필드는 참조 필드이며 클라이언트에서 사용되지 않습니다.  이름은 속성의 "across-the-wire" 이름이며 조정할 수 없습니다.  하지만 [gson][3] 라이브러리를 사용하여 개체와 "across-the-wire" 이름 사이에 매핑을 만들 수 있습니다.  예: 
 
 ```java
 package com.example.zumoappname;
@@ -225,18 +224,18 @@ public class ToDoItem
 
     @com.google.gson.annotations.SerializedName("createdAt")
     private DateTimeOffset mCreatedAt;
-    public DateTimeOffset getUpdatedAt() { return mCreatedAt; }
-    protected DateTimeOffset setUpdatedAt(DateTimeOffset createdAt) { mCreatedAt = createdAt; }
+    public DateTimeOffset getCreatedAt() { return mCreatedAt; }
+    protected void setCreatedAt(DateTimeOffset createdAt) { mCreatedAt = createdAt; }
 
     @com.google.gson.annotations.SerializedName("updatedAt")
     private DateTimeOffset mUpdatedAt;
     public DateTimeOffset getUpdatedAt() { return mUpdatedAt; }
-    protected DateTimeOffset setUpdatedAt(DateTimeOffset updatedAt) { mUpdatedAt = updatedAt; }
+    protected void setUpdatedAt(DateTimeOffset updatedAt) { mUpdatedAt = updatedAt; }
 
     @com.google.gson.annotations.SerializedName("version")
     private String mVersion;
-    public String getText() { return mVersion; }
-    public final void setText(String version) { mVersion = version; }
+    public String getVersion() { return mVersion; }
+    public final void setVersion(String version) { mVersion = version; }
 
     public ToDoItem() { }
 
@@ -448,7 +447,7 @@ do {
 
 ### <a name="chaining"></a>방법: 쿼리 메서드 연결
 
-백 엔드 테이블을 쿼리하는 데 사용되는 메서드를 연결할 수 있습니다. 쿼리 메서드를 연결하면 정렬 및 페이징되는 필터링된 행의 특정 열을 선택할 수 있습니다. 상당히 복잡한 논리 필터를 만들 수 있습니다.  각 쿼리 메서드는 쿼리 개체를 반환합니다. 일련의 메서드를 종료하고 실제로 쿼리를 실행하려면 **execute** 메서드를 호출합니다. 예:
+백 엔드 테이블을 쿼리하는 데 사용되는 메서드를 연결할 수 있습니다. 쿼리 메서드를 연결하면 정렬 및 페이징되는 필터링된 행의 특정 열을 선택할 수 있습니다. 상당히 복잡한 논리 필터를 만들 수 있습니다.  각 쿼리 메서드는 쿼리 개체를 반환합니다. 일련의 메서드를 종료하고 실제로 쿼리를 실행하려면 **execute** 메서드를 호출합니다. 예: 
 
 ```java
 List<ToDoItem> results = mToDoTable
@@ -479,7 +478,7 @@ List<ToDoItem> results = mToDoTable
 * 화면 레이아웃
 * 두 요소를 연결하는 어댑터
 
-샘플 코드에서는 모바일 앱 SQL Azure 테이블 **ToDoItem** 의 데이터를 배열로 반환합니다. 이 활동은 데이터 응용 프로그램에서 매우 흔한 패턴입니다.  데이터베이스 쿼리는 종종 클라이언트에서 목록 또는 배열로 가져오는 행 컬렉션을 반환합니다. 이 샘플에서 배열은 데이터 원본입니다.  코드는 장치에 나타나는 데이터 뷰를 정의하는 화면 레이아웃을 지정합니다.  이 두 요소는 어댑터(이 코드에서 **ArrayAdapter&lt;ToDoItem&gt;** 클래스의 확장)를 통해 바인딩됩니다.
+샘플 코드에서는 Mobile Apps SQL Azure 테이블 **ToDoItem** 의 데이터를 배열로 반환합니다. 이 활동은 데이터 응용 프로그램에서 매우 흔한 패턴입니다.  데이터베이스 쿼리는 종종 클라이언트에서 목록 또는 배열로 가져오는 행 컬렉션을 반환합니다. 이 샘플에서 배열은 데이터 원본입니다.  코드는 장치에 나타나는 데이터 뷰를 정의하는 화면 레이아웃을 지정합니다.  이 두 요소는 어댑터(이 코드에서 **ArrayAdapter&lt;ToDoItem&gt;** 클래스의 확장)를 통해 바인딩됩니다.
 
 #### <a name="layout"></a>레이아웃 정의
 
@@ -518,7 +517,7 @@ public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> {
 }
 ```
 
-어댑터의 **getView** 메서드를 다시 정의합니다. 예:
+어댑터의 **getView** 메서드를 다시 정의합니다. 예: 
 
 ```
     @Override
@@ -822,7 +821,7 @@ AsyncTask<Void, Void, Void> initializeStore(MobileServiceClient mClient)
 온라인 테이블의 경우 `.getTable()`을 사용합니다.  오프라인 테이블의 경우 `.getSyncTable()`을 사용합니다.
 
 ```java
-MobileServiceTable<ToDoItem> mToDoTable = mClient.getSyncTable("ToDoItem", ToDoItem.class);
+MobileServiceSyncTable<ToDoItem> mToDoTable = mClient.getSyncTable("ToDoItem", ToDoItem.class);
 ```
 
 온라인 테이블에서 사용할 수 있는 모든 메서드(필터링, 정렬, 페이징, 데이터 삽입, 데이터 업데이트 및 데이터 삭제 포함)는 온라인 및 오프라인 테이블에서 동일하게 작동합니다.
@@ -983,7 +982,7 @@ dependencies {
     compile 'com.google.guava:guava:18.0'
     compile 'com.android.support:customtabs:23.0.1'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
-    compile 'com.microsoft.azure:azure-mobile-android:3.2.0@aar'
+    compile 'com.microsoft.azure:azure-mobile-android:3.4.0@aar'
     compile 'com.microsoft.azure:azure-notifications-handler:1.0.1@jar'
 }
 ```
@@ -1102,7 +1101,7 @@ dependencies {
 * **INSERT-AUTHORITY-HERE** 를 응용 프로그램이 프로비전된 테넌트의 이름으로 바꿉니다. 형식은 https://login.microsoftonline.com/contoso.onmicrosoft.com이어야 합니다.
 * **INSERT-RESOURCE-ID-HERE** 를 모바일 앱 백 엔드에 대한 클라이언트 ID로 바꿉니다. 포털의 Azure **Active Directory 설정**에 있는 **고급** 탭에서 클라이언트 ID를 가져올 수 있습니다.
 * **INSERT-CLIENT-ID-HERE** 를 네이티브 클라이언트 응용 프로그램에서 복사한 클라이언트 ID로 바꿉니다.
-* HTTPS 체계를 사용하여 **INSERT-REDIRECT-URI-HERE** 를 사이트의 */.auth/login/done* 끝점으로 바꿉니다. 이 값은 *https://contoso.azurewebsites.net/.auth/login/done*과 유사합니다.
+* HTTPS 체계를 사용하여 **INSERT-REDIRECT-URI-HERE** 를 사이트의 */.auth/login/done* 끝점으로 바꿉니다. 이 값은 *https://contoso.azurewebsites.net/.auth/login/done*과 비슷해야 합니다.
 
 ```java
 private AuthenticationContext mContext;
@@ -1312,7 +1311,6 @@ client.setGsonBuilder(
 [19]: http://www.odata.org/documentation/odata-version-3-0/
 [20]: http://hashtagfail.com/post/46493261719/mobile-services-android-querying
 [21]: https://github.com/Azure-Samples/azure-mobile-apps-android-quickstart
-[22]: app-service-mobile-how-to-configure-active-directory-authentication.md
+[22]: ../app-service/app-service-mobile-how-to-configure-active-directory-authentication.md
 [Future]: http://developer.android.com/reference/java/util/concurrent/Future.html
 [AsyncTask]: http://developer.android.com/reference/android/os/AsyncTask.html
-

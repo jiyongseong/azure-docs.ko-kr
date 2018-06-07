@@ -10,7 +10,7 @@
 ### <a name="unregister-a-process-server-that-is-in-a-disconnected-state"></a>연결 해제된 상태인 프로세스 서버 등록 취소
 
 > [!WARNING]
-> 아래 단계는 프로세스 서버가 설치된 가상 컴퓨터를 복구할 방법이 없는 경우 사용해야 합니다.
+> 아래 단계는 프로세스 서버가 설치된 가상 머신을 복구할 방법이 없는 경우 사용해야 합니다.
 
 1. 관리자 권한으로 구성 서버에 로그온합니다.
 2. 관리 명령 프롬프트를 열고 `%ProgramData%\ASR\home\svsystems\bin` 디렉터리를 찾습니다.

@@ -1,0 +1,43 @@
+- name: Azure Policy 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: Azure 정책 개요
+      href: azure-policy-introduction.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: 정책 할당 - 포털
+      href: assign-policy-definition.md
+    - name: 정책 할당 - PowerShell
+      href: assign-policy-definition-ps.md
+    - name: 정책 할당 - Azure CLI
+      href: assign-policy-definition-cli.md
+- name: 자습서
+  items:
+    - name: Azure 정책 만들기 및 관리
+      href: create-manage-policy.md
+- name: 샘플
+  items:
+    - name: 정책 템플릿
+      href: json-samples.md
+- name: 개념
+  items:
+    - name: Azure Policy 정의 구조
+      href: policy-definition.md
+- name: 방법 가이드
+  items:
+    - name: 프로그래밍 방식으로 정책 만들기
+      href: policy-insights.md
+- name: 참고 자료
+  items:
+    - name: Azure CLI
+      href: /cli/azure/policy
+    - name: Azure PowerShell
+      href: '/powershell/module/azurerm.resources/#policies'
+- name: 리소스
+  items:
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'

@@ -1,10 +1,9 @@
 ---
-title: "ApplicationInsights.config 참조 - Azure | Microsoft Docs"
-description: "데이터 수집 모듈을 사용하거나 사용하지 않도록 설정하고 성능 카운터 및 기타 매개 변수를 추가합니다."
+title: ApplicationInsights.config 참조 - Azure | Microsoft Docs
+description: 데이터 수집 모듈을 사용하거나 사용하지 않도록 설정하고 성능 카운터 및 기타 매개 변수를 추가합니다.
 services: application-insights
-documentationcenter: 
-author: OlegAnaniev-MSFT
-editor: alancameronwills
+documentationcenter: ''
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 6e397752-c086-46e9-8648-a1196e8078c2
 ms.service: application-insights
@@ -12,23 +11,26 @@ ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
-ms.date: 05/3/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 71fea4a41b2e3a60f2f610609a14372e678b7ec4
-ms.openlocfilehash: 52b5be98742c9bf0834c12136416e856af5d99cc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/10/2017
-
+ms.date: 05/03/2017
+ms.author: mbullwin; olegan
+ms.openlocfilehash: 670600d4370be0b675c71d1c6cf09b17c7bd2597
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
+ms.locfileid: "33869073"
 ---
 # <a name="configuring-the-application-insights-sdk-with-applicationinsightsconfig-or-xml"></a>ApplicationInsights.config 또는 .xml로 Application Insights SDK 구성
 Application Insights.NET SDK는  NuGet 패키지의 숫자로 구성됩니다. [코어 패키지](http://www.nuget.org/packages/Microsoft.ApplicationInsights) Application Insights에 원격 분석을 보내는 경우에 API를 제공합니다. [추가 패키지](http://www.nuget.org/packages?q=Microsoft.ApplicationInsights)는 해당 컨텍스트 및 응용 프로그램에서 원격 분석을 자동으로 추적하기 위해 원격 분석 *모듈* 및 *이니셜라이저*를 제공합니다. 구성 파일을 조정하여 모듈을 활성화하거나 비활성화하고 이 중 일부 모듈의 매개 변수를 설정할 수 있습니다.
 
-구성 파일의 이름은 응용 프로그램 유형에 따라 `ApplicationInsights.config` 또는 `ApplicationInsights.xml`입니다. [대부분 버전의 SDK는 설치][start]할 때 프로젝트에 자동으로 추가됩니다. 또한 [IIS 서버의 상태 모니터][redfield]에 의해 또는 [Azure 웹사이트 또는 VM에 대한 Appplication Insights 확장](app-insights-azure-web-apps.md)을 선택하는 경우 웹앱에 추가됩니다.
+구성 파일의 이름은 응용 프로그램 유형에 따라 `ApplicationInsights.config` 또는 `ApplicationInsights.xml`입니다. [대부분 버전의 SDK는 설치][start]할 때 프로젝트에 자동으로 추가됩니다. 또한 [IIS 서버의 상태 모니터][redfield]에 의해 또는 [Azure 웹 사이트 또는 VM에 대한 Application Insights 확장](app-insights-azure-web-apps.md)을 선택하는 경우 웹앱에 추가됩니다.
 
 [웹 페이지에서 SDK][client]를 제어할 동급의 파일은 없습니다.
 
 이 문서는 구성 파일에서 참조하는 섹션, SDK의 구성 요소를 제어하는 방법 및 해당 구성 요소를 로드하는 NuGet 패키지를 설명합니다.
+
+> [!NOTE]
+> ApplicationInsights.config 및 .xml 지침은 .NET Core SDK에 적용되지 않습니다. .NET Core 응용 프로그램에 대한 변경의 경우 일반적으로 appsettings.json 파일을 사용합니다. 이 예제는 [스냅숏 디버거 설명서](https://docs.microsoft.com/azure/application-insights/app-insights-snapshot-debugger#configure-snapshot-collection-for-aspnet-core-20-applications)에서 찾을 수 있습니다.
 
 ## <a name="telemetry-modules-aspnet"></a>원격 분석 모듈(ASP.NET)
 각 원격 분석 모듈은 특정 형식의 데이터를 수집하고 코어 API를 사용하여 데이터를 전송합니다. 모듈은 다른 NuGet 패키지에 의해 설치되며 이는 .config 파일에 필요한 줄을 추가합니다.
@@ -126,7 +128,6 @@ Microsoft.ApplicationInsights 패키지는 SDK의 [코어 API](https://msdn.micr
 * `SyntheticTelemetryInitializer` 또는 `SyntheticUserAgentTelemetryInitializer`는 가용성 테스트 또는 검색 엔진 봇과 같은 가상 소스에서 요청을 처리하는 경우 모든 원격 분석 항목의 `User`, `Session` 및 `Operation` 컨텍스트 속성을 업데이트합니다. 기본적으로 [메트릭 탐색기](app-insights-metrics-explorer.md) 는 가상 원격 분석을 표시하지 않습니다.
 
     `<Filters>` 는 요청의 식별 속성을 설정합니다.
-* `UserAgentTelemetryInitializer`은 `User-Agent` HTTP 헤더 기반의 모든 원격 분석 항목의 `User` 컨텍스트의 `UserAgent` 속성을 업데이트합니다.
 * `UserTelemetryInitializer`은 사용자의 브라우저에서 실행되는 Application insights JavaScript 계측 코드에 의해 제공된 `ai_user` 쿠키의 추출된 값을 사용하여 모든 원격 분석 항목에 대한 `User` 컨텍스트의 `Id` 및 `AcquisitionDate`속성을 업데이트합니다.
 * `WebTestTelemetryInitializer` 는 [가용성 테스트](app-insights-monitor-web-app-availability.md)의 HTTP 요청에 대한 사용자 ID, 세션 ID 및 가상 원본 속성을 설정합니다.
   `<Filters>` 는 요청의 식별 속성을 설정합니다.
@@ -239,7 +240,7 @@ SDK의 메모리 내 저장소에 저장할 수 있는 원격 분석 항목의 �
 
 표준 원격 분석 모듈을 비롯한 TelemetryClient의 모든 인스턴스에 대한 키를 설정하려면 TelemetryConfiguration.Active에 키를 설정합니다. ASP.NET 서비스의 global.aspx.cs와 같은 초기화 메서드에 키를 설정합니다.
 
-```C#
+```csharp
 
     protected void Application_Start()
     {
@@ -252,7 +253,7 @@ SDK의 메모리 내 저장소에 저장할 수 있는 원격 분석 항목의 �
 
 특정 이벤트 집합을 다른 리소스로 보내려는 경우 특정 TelemetryClient에 대한 키를 설정할 수 있습니다.
 
-```C#
+```csharp
 
     var tc = new TelemetryClient();
     tc.Context.InstrumentationKey = "----- my key ----";
@@ -262,6 +263,91 @@ SDK의 메모리 내 저장소에 저장할 수 있는 원격 분석 항목의 �
 ```
 
 새 키를 얻으려면 [Application Insights 포털에서 새 리소스를 만듭니다][new].
+
+
+
+## <a name="applicationid-provider"></a>응용 프로그램 ID 공급자
+
+_v2.6.0에서 시작 가능_
+
+이 공급자의 목적은 계측 키에 따라 응용 프로그램 ID를 조회하는 것입니다. 응용 프로그램 ID는 RequestTelemetry 및 DependencyTelemetry에 포함되며 포털에서 상관 관계를 결정하는 데 사용됩니다.
+
+이는 코드 또는 구성에서 `TelemetryConfiguration.ApplicationIdProvider`를 설정하여 사용할 수 있습니다.
+
+### <a name="interface-iapplicationidprovider"></a>인터페이스: IApplicationIdProvider
+
+```csharp
+public interface IApplicationIdProvider
+{
+    bool TryGetApplicationId(string instrumentationKey, out string applicationId);
+}
+```
+
+
+[Microsoft.ApplicationInsights](https://www.nuget.org/packages/Microsoft.ApplicationInsights) sdk에서 `ApplicationInsightsApplicationIdProvider` 및 `DictionaryApplicationIdProvider`라는 두 가지 구현을 제공합니다.
+
+### <a name="applicationinsightsapplicationidprovider"></a>ApplicationInsightsApplicationIdProvider
+
+프로필 API에 대한 래퍼입니다. 요청을 스로틀하고 결과를 캐시합니다.
+
+이 공급자는 [Microsoft.ApplicationInsights.DependencyCollector](https://www.nuget.org/packages/Microsoft.ApplicationInsights.DependencyCollector) 또는 [Microsoft.ApplicationInsights.Web](https://www.nuget.org/packages/Microsoft.ApplicationInsights.Web/) 중 하나를 설치할 때 사용자 구성 파일에 추가됩니다.
+
+이 클래스에는 선택적 속성 `ProfileQueryEndpoint`가 있습니다.
+기본적으로 `https://dc.services.visualstudio.com/api/profiles/{0}/appId`로 설정되어 있습니다.
+이 구성에 대한 프록시를 구성해야 하는 경우 기준 주소를 프록시하고 "/api/profiles/{0}/appId"를 포함하는 것이 좋습니다. 해당 '{0}'는 요청에 따라 런타임에 계측 키로 대체됩니다.
+
+#### <a name="example-configuration-via-applicationinsightsconfig"></a>ApplicationInsights.config를 통해 구성 예제:
+```xml
+<ApplicationInsights>
+    ...
+    <ApplicationIdProvider Type="Microsoft.ApplicationInsights.Extensibility.Implementation.ApplicationId.ApplicationInsightsApplicationIdProvider, Microsoft.ApplicationInsights">
+        <ProfileQueryEndpoint>https://dc.services.visualstudio.com/api/profiles/{0}/appId</ProfileQueryEndpoint>
+    </ApplicationIdProvider>
+    ...
+</ApplicationInsights>
+```
+
+#### <a name="example-configuration-via-code"></a>코드를 통한 구성 예제:
+```csharp
+TelemetryConfiguration.Active.ApplicationIdProvider = new ApplicationInsightsApplicationIdProvider();
+```
+
+### <a name="dictionaryapplicationidprovider"></a>DictionaryApplicationIdProvider
+
+구성된 계측 키/응용 프로그램 ID 쌍을 사용하는 정적 공급자입니다.
+
+이 클래스에는 속성 `Defined`가 있으며, 이는 계측 키 - 응용 프로그램 ID 쌍의 사전<string,string>입니다.
+
+이 클래스에는 선택적 속성 `Next`가 있습니다. 이는 구성에서 존재하지 않는 계측 키가 요청되는 경우 사용할 다른 공급자를 구성하는 데 사용할 수 있습니다.
+
+#### <a name="example-configuration-via-applicationinsightsconfig"></a>ApplicationInsights.config를 통해 구성 예제:
+```xml
+<ApplicationInsights>
+    ...
+    <ApplicationIdProvider Type="Microsoft.ApplicationInsights.Extensibility.Implementation.ApplicationId.DictionaryApplicationIdProvider, Microsoft.ApplicationInsights">
+        <Defined>
+            <Type key="InstrumentationKey_1" value="ApplicationId_1"/>
+            <Type key="InstrumentationKey_2" value="ApplicationId_2"/>
+        </Defined>
+        <Next Type="Microsoft.ApplicationInsights.Extensibility.Implementation.ApplicationId.ApplicationInsightsApplicationIdProvider, Microsoft.ApplicationInsights" />
+    </ApplicationIdProvider>
+    ...
+</ApplicationInsights>
+```
+
+#### <a name="example-configuration-via-code"></a>코드를 통한 구성 예제:
+```csharp
+TelemetryConfiguration.Active.ApplicationIdProvider = new DictionaryApplicationIdProvider{
+ Defined = new Dictionary<string, string>
+    {
+        {"InstrumentationKey_1", "ApplicationId_1"},
+        {"InstrumentationKey_2", "ApplicationId_2"}
+    }
+};
+```
+
+
+
 
 ## <a name="next-steps"></a>다음 단계
 [API에 대해 자세히 알아보세요][api].
@@ -276,4 +362,3 @@ SDK의 메모리 내 저장소에 저장할 수 있는 원격 분석 항목의 �
 [new]: app-insights-create-new-resource.md
 [redfield]: app-insights-monitor-performance-live-website-now.md
 [start]: app-insights-overview.md
-

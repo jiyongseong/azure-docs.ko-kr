@@ -1,56 +1,56 @@
 ---
-title: "개발 및 테스트 환경에 게시하기 위해 Windows PowerShell 스크립트 사용하기 | Microsoft Docs"
-description: "Visual Studio에서 Windows PowerShell 스크립트를 사용하여 개발 및 테스트 환경에 게시하는 방법을 알아보세요."
+title: 개발 및 테스트 환경에 게시하기 위해 Windows PowerShell 스크립트 사용하기 | Microsoft Docs
+description: Visual Studio에서 Windows PowerShell 스크립트를 사용하여 개발 및 테스트 환경에 게시하는 방법을 알아보세요.
 services: visual-studio-online
-documentationcenter: na
-author: TomArcher
+author: ghogen
 manager: douge
-editor: 
-ms.assetid: 5fff1301-5469-4d97-be88-c85c30f837c1
-ms.service: multiple
-ms.devlang: dotnet
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: multiple
+assetId: 5fff1301-5469-4d97-be88-c85c30f837c1
+ms.prod: visual-studio-dev15
+ms.technology: vs-azure
+ms.workload: azure
+ms.topic: conceptual
 ms.date: 11/11/2016
-ms.author: tarcher
-translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: d5e9a300dcea137bf0d3db2da2dfb5c2e6a152af
-ms.lasthandoff: 04/27/2017
-
-
+ms.author: ghogen
+ms.openlocfilehash: 866575a483e705e1c972a0b56d98f26e9cf0c631
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="using-windows-powershell-scripts-to-publish-to-dev-and-test-environments"></a>Windows PowerShell 스크립트를 사용하여 개발 및 테스트 환경에 게시
-Visual Studio에서 웹 응용 프로그램을 만들 경우 Windows PowerShell 스크립트를 만든 다음 나중에 Azure에 Azure 앱 서비스 또는 가상 컴퓨터로 웹 사이트 게시를 자동화하는 데 사용할 수 있습니다. Visual Studio 편집기에서 요구 사항에 맞게 Windows PowerShell 스크립트를 편집 및 확장하거나 스크립트를 기존 빌드, 테스트, 게시 스크립트와 통합할 수 있습니다.
+
+Visual Studio에서 웹 응용 프로그램을 만들 경우 Windows PowerShell 스크립트를 만든 다음 나중에 Azure에 Azure App Service 또는 가상 머신으로 웹 사이트 게시를 자동화하는 데 사용할 수 있습니다. Visual Studio 편집기에서 요구 사항에 맞게 Windows PowerShell 스크립트를 편집 및 확장하거나 스크립트를 기존 빌드, 테스트, 게시 스크립트와 통합할 수 있습니다.
 
 이러한 스크립트를 사용하면 일시적으로 사용할 사이트의 사용자 지정 버전(개발 및 테스트 환경이라고도 함)을 프로비저닝할 수 있습니다. 예를 들어 Azure 가상 컴퓨터 또는 웹 사이트의 스테이징 슬롯에 특정 버전의 웹 사이트를 설정하고 테스트 제품군 실행, 버그 재현, 버그 수정 사항 테스트, 제안된 변경 사항 시험, 데모 또는 프레젠테이션을 위한 사용자 지정 환경 설정을 수행할 수 있습니다. 프로젝트를 게시하는 스크립트를 만든 다음 필요에 따라 스크립트를 다시 실행하여 동일한 환경을 다시 만들거나 웹 응용 프로그램의 자체 빌드로 스크립트를 실행하여 테스트를 위한 사용자 지정 환경을 만들 수 있습니다.
 
-## <a name="what-you-need"></a>필요한 항목
-* Azure SDK 2.3 이상 자세한 내용은 [Visual Studio 다운로드](http://go.microsoft.com/fwlink/?LinkID=624384)를 참조하세요.
+## <a name="prerequisites"></a>필수 조건
 
-웹 프로젝트의 스크립트를 생성하기 위해 Azure SDK는 필요하지 않습니다. 이 기능은 클라우드 서비스의 웹 역할이 아닌 웹 프로젝트용입니다.
-
-* Azure PowerShell 0.7.4 이상 자세한 내용은 [Azure PowerShell 설치 및 구성 방법](/powershell/azure/overview) 을 참조하세요.
+* Azure SDK 2.3 이상 [Visual Studio 다운로드](http://go.microsoft.com/fwlink/?LinkID=624384)를 참조하세요. (웹 프로젝트용 스크립트를 생성하기 위해 Azure SDK는 필요하지 않습니다. 이 기능은 클라우드 서비스의 웹 역할이 아닌 웹 프로젝트용입니다.)
+* Azure PowerShell 0.7.4 이상 [Azure PowerShell 설치 및 구성 방법](/powershell/azure/overview)을 참조하세요.
 * [Windows PowerShell 3.0](http://go.microsoft.com/?linkid=9811175) 이상
 
 ## <a name="additional-tools"></a>추가 도구
+
 Azure 개발 시 Visual Studio에서 PowerShell을 사용하기 위한 추가 도구와 리소스를 사용할 수 있습니다. [Visual Studio용 PowerShell](http://go.microsoft.com/fwlink/?LinkId=404012)을 참조하세요.
 
 ## <a name="generating-the-publish-scripts"></a>게시 스크립트 생성
-새 프로젝트를 만들 때 [이 지침](virtual-machines/windows/classic/web-app-visual-studio.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fclassic%2ftoc.json)을 따라 웹 사이트를 호스팅하는 가상 컴퓨터의 게시 스크립트를 생성할 수 있습니다. 또한 [Azure App Service에서 웹앱용 게시 스크립트를 생성](app-service-web/app-service-web-get-started-dotnet.md)할 수도 있습니다.
+
+새 프로젝트를 만들 때 [이 지침](virtual-machines/windows/classic/web-app-visual-studio.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fclassic%2ftoc.json)을 따라 웹 사이트를 호스팅하는 가상 컴퓨터의 게시 스크립트를 생성할 수 있습니다. 또한 [Azure App Service에서 웹앱용 게시 스크립트를 생성](app-service/app-service-web-get-started-dotnet.md)할 수도 있습니다.
 
 ## <a name="scripts-that-visual-studio-generates"></a>Visual Studio에서 생성하는 스크립트
-Visual Studio는 2개의 Windows PowerShell 파일이 포함되어 있는 솔루션 수준 폴더 **PublishScripts** , 가상 컴퓨터 또는 웹 사이트의 게시 스크립트, 스크립트에 사용할 수 있는 함수가 포함된 모듈을 만듭니다. Visual Studio는 또한 배포하는 프로젝트의 상세 정보를 지정하는 JSON 형식으로 파일을 생성합니다.
+
+Visual Studio는 2개의 Windows PowerShell 파일이 포함되어 있는 솔루션 수준 폴더 **PublishScripts** , 가상 머신 또는 웹 사이트의 게시 스크립트, 스크립트에 사용할 수 있는 함수가 포함된 모듈을 만듭니다. Visual Studio는 또한 배포하는 프로젝트의 상세 정보를 지정하는 JSON 형식으로 파일을 생성합니다.
 
 ### <a name="windows-powershell-publish-script"></a>Windows PowerShell 게시 스크립트
-게시 스크립트에는 웹 사이트 또는 가상 컴퓨터에 배포하기 위한 구체적 게시 단계가 포함되어 있습니다. Visual Studio는 Windows PowerShell 배포를 위한 구문 색 지정을 제공합니다. 함수의 도움말을 사용할 수 있으며 달라진 요구 사항에 맞게 스크립트의 함수를 자유롭게 편집할 수 있습니다.
+
+게시 스크립트에는 웹 사이트 또는 가상 머신에 배포하기 위한 구체적 게시 단계가 포함되어 있습니다. Visual Studio는 Windows PowerShell 배포를 위한 구문 색 지정을 제공합니다. 함수의 도움말을 사용할 수 있으며 달라진 요구 사항에 맞게 스크립트의 함수를 자유롭게 편집할 수 있습니다.
 
 ### <a name="windows-powershell-module"></a>Windows PowerShell 모듈
-Visual Studio에서 생성하는 Windows PowerShell 모듈에는 게시 스크립트가 사용하는 함수가 포함되어 있습니다. 이러한 함수는 Azure PowerShell 함수이며 수정할 수 없습니다. 자세한 내용은 [Azure PowerShell 설치 및 구성 방법](/powershell/azure/overview) 을 참조하세요.
+
+Visual Studio에서 생성하는 Windows PowerShell 모듈에는 게시 스크립트가 사용하는 함수가 포함되어 있습니다. 이러한 Azure PowerShell 함수는 수정할 수 없습니다. [Azure PowerShell 설치 및 구성 방법](/powershell/azure/overview)을 참조하세요.
 
 ### <a name="json-configuration-file"></a>JSON 구성 파일
-JSON 파일은 **Configurations** 폴더에 생성되며 Azure에 배포할 리소스를 정확히 지정하는 구성 데이터가 포함되어 있습니다. 웹 사이트를 만든 경우 Visual Studio가 생성하는 파일의 이름은 project-name-WAWS-dev.json이며 가상 컴퓨터를 만든 경우에는 project name-VM-dev.json입니다. 다음은 웹 사이트를 만들 때 생성된 JSON 구성 파일의 예입니다. 대부분의 값은 따로 설명이 필요하지 않습니다. 웹 사이트 이름은 Azure에서 생성하므로 프로젝트 이름과 일치하지 않을 수 있습니다.
+JSON 파일은 **Configurations** 폴더에 생성되며 Azure에 배포할 리소스를 정확히 지정하는 구성 데이터가 포함되어 있습니다. 웹 사이트를 만든 경우 Visual Studio가 생성하는 파일의 이름은 project-name-WAWS-dev.json이며 가상 머신을 만든 경우에는 project name-VM-dev.json입니다. 다음은 웹 사이트를 만들 때 생성된 JSON 구성 파일의 예입니다. 대부분의 값은 따로 설명이 필요하지 않습니다. 웹 사이트 이름은 Azure에서 생성하므로 프로젝트 이름과 일치하지 않을 수 있습니다.
 
 ```json
 {
@@ -73,7 +73,8 @@ JSON 파일은 **Configurations** 폴더에 생성되며 Azure에 배포할 리�
     }
 }
 ```
-가상 컴퓨터를 만들면 JSON 구성 파일이 다음과 유사합니다. 클라우드 서비스가 가상 컴퓨터의 컨테이너로 생성됩니다. 가상 컴퓨터에 HTTP 및 HTTPS를 통한 웹 액세스에 사용할 일반적 끝점이 포함되어 있으며, 웹 배포용 끝점도 포함되어 있어 로컬 컴퓨터, 원격 데스크톱 및 Windows PowerShell에서 웹 사이트에 게시할 수 잇습니다.
+
+가상 컴퓨터를 만들면 JSON 구성 파일이 다음과 유사합니다. 클라우드 서비스가 가상 머신의 컨테이너로 생성됩니다. 가상 머신에 HTTP 및 HTTPS를 통한 웹 액세스에 사용할 일반적 끝점이 포함되어 있으며, 웹 배포용 끝점도 포함되어 있어 로컬 컴퓨터, 원격 데스크톱 및 Windows PowerShell에서 웹 사이트에 게시할 수 잇습니다.
 
 ```json
 {
@@ -139,19 +140,21 @@ JSON 파일은 **Configurations** 폴더에 생성되며 Azure에 배포할 리�
 }
 ```
 
-JSON 구성을 편집하여 게시 스크립트를 실행할 때 발생하는 결과를 변경할 수 있습니다. `cloudService` 및 `virtualMachine` 섹션은 필수이며 `databases` 섹션은 필요하지 않을 경우 삭제할 수 있습니다. Visual Studio에서 생성한 기본 구성 파일에 비어 있는 속성은 선택 사항입니다. 기본 구성 파일에 값이 있는 속성은 필수 속성입니다.
+JSON 구성을 편집하여 게시 스크립트를 실행할 때 발생하는 결과를 변경할 수 있습니다. `cloudService` 및 `virtualMachine` 섹션은 필수이며 `databases` 섹션은 필요하지 않을 경우 삭제할 수 있습니다. Visual Studio에서 생성한 기본 구성 파일이 비어 있는 속성은 선택 사항이고, 기본 구성 파일에 값이 있는 속성은 필수 속성입니다.
 
-Azure에 단일 프로덕션 사이트가 아닌 여러 배포 환경(슬롯이라고 함)이 포함된 웹 사이트가 있을 경우 JSON 구성 파일에서 웹 사이트 이름에 슬롯 이름을 포함할 수 있습니다. 예를 들어 이름이 **mysite**인 웹 사이트와 **test**라는 슬롯이 있을 경우 URI는 mysite-test.cloudapp.net이지만 구성 파일에서 사용해야 할 올바른 이름은 mysite(test)입니다. 구독에 웹 사이트와 슬롯이 이미 있는 경우에만 이렇게 할 수 있습니다. 없을 경우에는 슬롯을 지정하지 않고 스크립트를 실행한 다음 [Azure 클래식 포털](http://go.microsoft.com/fwlink/?LinkID=213885)에 슬롯을 만들고 수정한 웹 사이트 이름으로 스크립트를 실행합니다. 웹앱의 배포 슬롯에 대한 자세한 내용은 [Azure App Service에서 웹앱에 대한 스테이징 환경 설정](app-service-web/web-sites-staged-publishing.md)을 참조하세요.
+Azure에 단일 프로덕션 사이트가 아닌 여러 배포 환경(슬롯이라고 함)이 포함된 웹 사이트가 있을 경우 JSON 구성 파일에서 웹 사이트 이름에 슬롯 이름을 포함할 수 있습니다. 예를 들어 이름이 **mysite**인 웹 사이트와 **test**라는 슬롯이 있을 경우 URI는 `mysite-test.cloudapp.net`이지만 구성 파일에서 사용해야 할 올바른 이름은 mysite(test)입니다. 구독에 웹 사이트와 슬롯이 이미 있는 경우에만 이렇게 할 수 있습니다. 없을 경우에는 슬롯을 지정하지 않고 스크립트를 실행한 다음 [Azure Portal](https://portal.azure.com/)에 슬롯을 만들고 수정한 웹 사이트 이름으로 스크립트를 실행합니다. 웹앱의 배포 슬롯에 대한 자세한 내용은 [Azure App Service에서 웹앱에 대한 스테이징 환경 설정](app-service/web-sites-staged-publishing.md)을 참조하세요.
 
 ## <a name="how-to-run-the-publish-scripts"></a>게시 스크립트 실행 방법
-이전에 Windows PowerShell 스크립트를 실행한 적이 없는 경우 우선 스크립트를 실행할 수 있도록 실행 정책을 설정해야 합니다. 이 기능은 사용자가 맬웨어 또는 바이러스에 취약한 Windows PowerShell 스크립트를 실행하지 못하도록 방지하는 보안 기능입니다.
+
+이전에 Windows PowerShell 스크립트를 실행한 적이 없는 경우 우선 스크립트를 실행할 수 있도록 실행 정책을 설정해야 합니다. 이 정책은 사용자가 맬웨어 또는 바이러스에 취약한 Windows PowerShell 스크립트를 실행하지 못하도록 방지하는 보안 기능입니다.
 
 ### <a name="run-the-script"></a>스크립트 실행
-1. 프로젝트의 웹 배포 패키지를 만듭니다. 웹 배포 패키지는 웹 사이트 또는 가상 컴퓨터에 복사하려는 파일이 포함된 압축 아카이브(.zip 파일)입니다. Visual Studio에서 모든 웹 응용 프로그램에 사용할 웹 배포 패키지를 만들 수 있습니다.
+
+1. 프로젝트의 웹 배포 패키지를 만듭니다. 웹 배포 패키지는 웹 사이트 또는 가상 머신에 복사하려는 파일이 포함된 압축 아카이브(.zip 파일)입니다. Visual Studio에서 모든 웹 응용 프로그램에 사용할 웹 배포 패키지를 만들 수 있습니다.
 
 ![웹 배포 패키지 만들기](./media/vs-azure-tools-publishing-using-powershell-scripts/IC767885.png)
 
-자세한 내용은 [방법: Visual Studio에서 웹 배포 패키지 만들기](https://msdn.microsoft.com/library/dd465323.aspx)를 참조하세요. 또한 이 항목의 뒷부분의 **게시 스크립트 사용자 지정 및 확장** 섹션에서 설명하는 대로 웹 배포 패키지 생성을 자동화할 수 있습니다.
+자세한 내용은 [방법: Visual Studio에서 웹 배포 패키지 만들기](https://msdn.microsoft.com/library/dd465323.aspx)를 참조하세요. 또한 이 항목의 뒷부분의 [게시 스크립트 사용자 지정 및 확장[(#customizing-and-extending-publish-scripts)]에서 설명하는 대로 웹 배포 패키지 생성을 자동화할 수 있습니다.
 
 1. **솔루션 탐색기**에서 스크립트의 상황에 맞는 메뉴를 연 다음 **PowerShell ISE로 열기**를 선택합니다.
 2. 이 컴퓨터에서 Windows PowerShell 스크립트를 처음으로 실행하는 경우 관리자 권한으로 명령 프롬프트 창을 열고 다음 명령을 입력합니다.
@@ -168,15 +171,15 @@ Azure에 단일 프로덕션 사이트가 아닌 여러 배포 환경(슬롯이�
 
     메시지가 표시되면 사용자 이름과 암호를 입력합니다.
 
-    스크립트를 자동화하면 이 방법으로 Azure 자격 증명을 제공할 수 없습니다. 대신 .publishsettings 파일을 사용하여 자격 증명을 제공해야 합니다. 한 번만 **Get-AzurePublishSettingsFile** 명령을 사용하여 Azure에서 파일을 다운로드한 다음 **Import-AzurePublishSettingsFile**을 사용하여 파일을 가져옵니다. 자세한 지침은 [Azure PoweShell 설치 및 구성 방법](/powershell/azure/overview)을 참조하세요.
+    스크립트를 자동화하면 이 방법으로 Azure 자격 증명을 제공할 수 없습니다. 대신 `.publishsettings` 파일을 사용하여 자격 증명을 제공해야 합니다. 한 번만 **Get-AzurePublishSettingsFile** 명령을 사용하여 Azure에서 파일을 다운로드한 다음 **Import-AzurePublishSettingsFile**을 사용하여 파일을 가져옵니다. 자세한 지침은 [Azure PoweShell 설치 및 구성 방법](/powershell/azure/overview)을 참조하세요.
 
-4. (선택 사항) 웹 응용 프로그램을 게시하지 않고 가상 컴퓨터, 데이터베이스, 웹 사이트와 같은 Azure 리소스를 만들려면 **-Configuration** 인수를 JSON 구성 파일로 설정하고 **Publish-WebApplication.ps1** 명령을 사용합니다. 이 명령줄은 JSON 구성 파일을 사용하여 만들 리소스를 결정합니다. 여기서 다른 명령줄 인스턴스에 대해 기본 설정을 사용하므로 리소스를 만들지만 웹 응용 프로그램을 게시하지 않습니다. –Verbose 옵션으로 진행 상황에 대한 자세한 정보를 확인할 수 있습니다.
+4. (선택 사항) 웹 응용 프로그램을 게시하지 않고 가상 머신, 데이터베이스, 웹 사이트와 같은 Azure 리소스를 만들려면 **-Configuration** 인수를 JSON 구성 파일로 설정하고 **Publish-WebApplication.ps1** 명령을 사용합니다. 이 명령줄은 JSON 구성 파일을 사용하여 만들 리소스를 결정합니다. 여기서 다른 명령줄 인스턴스에 대해 기본 설정을 사용하므로 리소스를 만들지만 웹 응용 프로그램을 게시하지 않습니다. –Verbose 옵션으로 진행 상황에 대한 자세한 정보를 확인할 수 있습니다.
 
     ```powershell
     Publish-WebApplication.ps1 -Verbose –Configuration C:\Path\WebProject-WAWS-dev.json
     ```
 
-5. 다음 예제 중 하나와 같이 **Publish-WebApplication.ps1** 명령을 사용하여 스크립트를 호출하고 웹 응용 프로그램을 게시합니다. 구독 이름, 게시 패키지 이름, 가상 컴퓨터 자격 증명, 데이터베이스 서버 자격 증명과 같은 다른 인수의 기본 설정을 재정의하려면 이러한 매개 변수를 지정합니다. 게시 프로세스의 진행률을 자세히 보려면 **-Verbose** 옵션을 사용합니다.
+5. 다음 예제 중 하나와 같이 **Publish-WebApplication.ps1** 명령을 사용하여 스크립트를 호출하고 웹 응용 프로그램을 게시합니다. 구독 이름, 게시 패키지 이름, 가상 머신 자격 증명, 데이터베이스 서버 자격 증명과 같은 다른 인수의 기본 설정을 재정의하려면 이러한 매개 변수를 지정합니다. 게시 프로세스의 진행률을 자세히 보려면 **-Verbose** 옵션을 사용합니다.
 
     ```powershell
     Publish-WebApplication.ps1 –Configuration C:\Path\WebProject-WAWS-dev-json `
@@ -186,7 +189,7 @@ Azure에 단일 프로덕션 사이트가 아닌 여러 배포 환경(슬롯이�
     -Verbose
     ```
 
-    가상 컴퓨터를 만드는 경우 다음과 유사한 명령을 사용합니다. 이 예제는 여러 데이터베이스의 자격 증명을 지정하는 방법을 보여 줍니다. 이러한 스크립트가 만드는 가상 컴퓨터에서 SSL 인증서는 신뢰할 수 있는 루트 인증 기관에서 제공한 인증서가 아닙니다. 따라서 **–AllowUntrusted** 옵션을 사용해야 합니다.
+    가상 머신을 만드는 경우 다음과 유사한 명령을 사용합니다. 이 예제는 여러 데이터베이스의 자격 증명을 지정하는 방법을 보여 줍니다. 이러한 스크립트가 만드는 가상 머신에서 SSL 인증서는 신뢰할 수 있는 루트 인증 기관에서 제공한 인증서가 아닙니다. 따라서 **–AllowUntrusted** 옵션을 사용해야 합니다.
 
     ```powershell
     Publish-WebApplication.ps1 `
@@ -237,7 +240,7 @@ Azure에 단일 프로덕션 사이트가 아닌 여러 배포 환경(슬롯이�
     }
     ```
 
-3. `New-WebDeployPackage`을(를) 다음 코드로 바꾸고 `$msbuildCmd` 생성 줄에서 자리 표시자를 바꿉니다. 이 코드는 Visual Studio 2015용입니다. Visual Studio 2013을 사용하는 경우 **VisualStudioVersion** 속성을 `12.0` 미만으로 변경합니다.
+3. `New-WebDeployPackage`을(를) 다음 코드로 바꾸고 `$msbuildCmd` 생성 줄에서 자리 표시자를 바꿉니다. 이 코드는 Visual Studio 2017용입니다. Visual Studio 2015를 사용하는 경우 **VisualStudioVersion** 속성을 `14.0`(Visual Studio 2013은 `12.0`)으로 변경해야 합니다.
 
     ```powershell
     function New-WebDeployPackage
@@ -245,12 +248,12 @@ Azure에 단일 프로덕션 사이트가 아닌 여러 배포 환경(슬롯이�
         #Write a function to build and package your web application
     ```
 
-    웹 응용 프로그램을 빌드하려면 MsBuild.exe를 사용합니다. 도움말은 [http://go.microsoft.com/fwlink/?LinkId=391339](http://go.microsoft.com/fwlink/?LinkId=391339)에서 MSBuild 명령줄을 참조하세요.
+    웹 응용 프로그램을 빌드하려면 MsBuild.exe를 사용합니다. 도움말은 [http://go.microsoft.com/fwlink/?LinkId=391339](http://go.microsoft.com/fwlink/?LinkId=391339)에서 MSBuild 명령줄 참조를 참조
 
     ```powershell
     Write-VerboseWithTime 'Build-WebDeployPackage: Start'
 
-    $msbuildCmd = '"{0}" "{1}" /T:Rebuild;Package /P:VisualStudioVersion=14.0 /p:OutputPath="{2}\MSBuildOutputPath" /flp:logfile=msbuild.log,v=d' -f (Get-MSBuildCmd), $ProjectFile, $scriptDirectory
+    $msbuildCmd = '"{0}" "{1}" /T:Rebuild;Package /P:VisualStudioVersion=15.0 /p:OutputPath="{2}\MSBuildOutputPath" /flp:logfile=msbuild.log,v=d' -f (Get-MSBuildCmd), $ProjectFile, $scriptDirectory
 
     Write-VerboseWithTime ('Build-WebDeployPackage: ' + $msbuildCmd)
     ```
@@ -279,7 +282,7 @@ return $WebDeployPackage
 }
 ```
 
-1. 이 줄보다 먼저 `New-WebDeployPackage` 함수를 호출합니다. 웹 앱의 경우 `$Config = Read-ConfigFile $Configuration`, 가상 컴퓨터의 경우 `$Config = Read-ConfigFile $Configuration -HasWebDeployPackage:([Bool]$WebDeployPackage)`.
+1. 이 줄보다 먼저 `New-WebDeployPackage` 함수를 호출합니다. 웹 앱의 경우 `$Config = Read-ConfigFile $Configuration`, 가상 머신의 경우 `$Config = Read-ConfigFile $Configuration -HasWebDeployPackage:([Bool]$WebDeployPackage)`.
 
     ```powershell
     if($ProjectFile)
@@ -288,7 +291,7 @@ return $WebDeployPackage
     }
     ```
 
-2. 다음 예제 명령줄과 같이 `$Project` 인수 전달을 사용하여 명령줄에서 사용자 지정 스크립트를 호출합니다.
+2. 다음 예제와 같이 `$Project` 인수 전달을 사용하여 명령줄에서 사용자 지정 스크립트를 호출합니다.
 
     ```powershell
     .\Publish-WebApplicationVM.ps1 -Configuration .\Configurations\WebApplication5-VM-dev.json `
@@ -309,17 +312,17 @@ Windows PowerShell 명령 프롬프트에서 사용할 수 있는 함수에 대�
 | --- | --- |
 | Add-AzureSQLDatabase |새 Azure SQL 데이터베이스를 만듭니다. |
 | Add-AzureSQLDatabases |Visual Studio에서 생성하는 JSON 구성 파일의 값으로 Azure SQL Database를 만듭니다. |
-| Add-AzureVM |Azure 가상 컴퓨터를 만들고 배포된 VM의 URL을 반환합니다. 함수가 필수 구성 요소를 설정한 다음 **New-AzureVM** 함수(Azure 모듈)를 호출하여 새 가상 컴퓨터를 만듭니다. |
-| Add-AzureVMEndpoints |가상 컴퓨터에 새 입력 끝점을 추가하고 새 끝점으로 가상 컴퓨터를 반환합니다. |
-| Add-AzureVMStorage |현재 구독에 새 Azure 저장소 계정을 만듭니다. 계정 이름은 "devtest"로 시작하고 그 다음에 고유한 영숫자 문자열이 포함됩니다. 함수에서 새 저장소 계정의 이름을 반환합니다. 새 저장소 계정에 대해 위치 또는 선호도 그룹을 지정해야 합니다. |
+| Add-AzureVM |Azure 가상 머신을 만들고 배포된 VM의 URL을 반환합니다. 함수가 필수 구성 요소를 설정한 다음 **New-AzureVM** 함수(Azure 모듈)를 호출하여 새 가상 머신을 만듭니다. |
+| Add-AzureVMEndpoints |가상 머신에 새 입력 끝점을 추가하고 새 끝점으로 가상 머신을 반환합니다. |
+| Add-AzureVMStorage |현재 구독에 새 Azure 저장소 계정을 만듭니다. 계정 이름은 "devtest"로 시작하고 그 다음에 고유한 영숫자 문자열이 포함됩니다. 함수에서 새 저장소 계정의 이름을 반환합니다. 새 저장소 계정에 대해 위치 또는 선호도 그룹을 지정합니다. |
 | Add-AzureWebsite |지정된 이름 및 위치로 웹 사이트를 만듭니다. 이 함수는 Azure 모듈에서 **New-AzureWebsite** 함수라고 합니다. 구독에 이미 지정된 이름의 웹 사이트가 없을 경우 이 함수는 웹 사이트를 만들고 웹 사이트 개체를 반환합니다. 그렇지 않으면 `$null`를 반환합니다. |
-| 백업-구독 |현재 Azure 구독을 스크립트 범위의 `$Script:originalSubscription` 변수에 저장합니다. 이 함수는 현재 Azure 구독(`Get-AzureSubscription -Current`에서 가져옴) 및 해당 저장소 계정, 이 스크립트로 변경된 구독(`$UserSpecifiedSubscription` 변수에 저장) 및 해당 저장소 계정을 스크립트 범위에 저장합니다. 이러한 값을 저장하면 원래 현재 상태가 변경된 경우 `Restore-Subscription` 등의 함수를 사용하여 현재 구독 및 저장소 계정을 현재 상태로 복원할 수 있습니다. |
-| Find-AzureVM |지정된 Azure 가상 컴퓨터를 가져옵니다. |
+| Backup-구독 |현재 Azure 구독을 스크립트 범위의 `$Script:originalSubscription` 변수에 저장합니다. 이 함수는 현재 Azure 구독(`Get-AzureSubscription -Current`에서 가져옴) 및 해당 저장소 계정, 이 스크립트로 변경된 구독(`$UserSpecifiedSubscription` 변수에 저장) 및 해당 저장소 계정을 스크립트 범위에 저장합니다. 이러한 값을 저장하면 원래 현재 상태가 변경된 경우 `Restore-Subscription` 등의 함수를 사용하여 현재 구독 및 저장소 계정을 현재 상태로 복원할 수 있습니다. |
+| Find-AzureVM |지정된 Azure 가상 머신을 가져옵니다. |
 | Format-DevTestMessageWithTime |메시지 앞에 날짜와 시간을 추가합니다. 이 함수는 오류 및 자세한 정보 표시 스트림에 작성되는 메시지를 위해 설계되었습니다. |
 | Get-AzureSQLDatabaseConnectionString |연결 문자열을 조립하여 Azure SQL 데이터베이스에 연결합니다. |
-| Get-AzureVMStorage |지정된 위치 또는 선호도 그룹에 이름 패턴이 "devtest*"(대소문자 구분)인 첫 번째 저장소 계정의 이름을 반환합니다. "devtest*" 저장소 계정이 위치 또는 선호도 그룹과 일치하지 않을 경우 함수에서 무시합니다. 위치 또는 선호도 그룹을 지정해야 합니다. |
+| Get-AzureVMStorage |지정된 위치 또는 선호도 그룹에 이름 패턴이 "devtest *"(대소문자 구분)인 첫 번째 저장소 계정의 이름을 반환합니다. "devtest*" 저장소 계정이 위치 또는 선호도 그룹과 일치하지 않을 경우 함수에서 무시합니다. 위치 또는 선호도 그룹을 지정합니다. |
 | Get-MSDeployCmd |MsDeploy.exe 도구를 실행하는 명령을 반환합니다. |
-| New-AzureVMEnvironment |JSON 구성 파일의 값과 일치하는 구독에서 가상 컴퓨터를 검색하거나 만듭니다. |
+| New-AzureVMEnvironment |JSON 구성 파일의 값과 일치하는 구독에서 가상 머신을 검색하거나 만듭니다. |
 | Publish-WebPackage |MsDeploy.exe 및 웹 게시 패키지인 .Zip 파일을 사용하여 리소스를 웹 사이트에 배포합니다. 이 함수는 출력을 생성하지 않습니다. MSDeploy.exe에 대한 호출이 실패할 경우 함수가 예외를 throw합니다. 더 자세한 출력을 가져오려면 **-Verbose** 옵션을 사용합니다. |
 | Publish-WebPackageToVM |매개 변수 값을 확인한 다음 **Publish-WebPackage** 함수를 호출합니다. |
 | Read-ConfigFile |JSON 구성 파일의 유효성을 검사하고 선택한 값의 해시 테이블을 반환합니다. |
@@ -336,12 +339,11 @@ Windows PowerShell 명령 프롬프트에서 사용할 수 있는 함수에 대�
 
 | 함수 이름 | 설명 |
 | --- | --- |
-| New-AzureWebApplicationEnvironment |웹 사이트, 가상 컴퓨터와 같은 Azure 리소스를 만듭니다. |
+| New-AzureWebApplicationEnvironment |웹 사이트, 가상 머신과 같은 Azure 리소스를 만듭니다. |
 | New-WebDeployPackage |이 함수는 구현되지 않았습니다. 이 함수에 명령을 추가하여 프로젝트를 빌드할 수 있습니다. |
 | Publish-AzureWebApplication |Azure에 웹 응용 프로그램을 게시합니다. |
-| Publish-WebApplication |Visual Studio 웹 프로젝트를 위한 웹 앱, 가상 컴퓨터, SQL 데이터베이스, 저장소 계정을 만들고 배포합니다. |
+| Publish-WebApplication |Visual Studio 웹 프로젝트를 위한 Web Apps, 가상 머신, SQL 데이터베이스, 저장소 계정을 만들고 배포합니다. |
 | Test-WebApplication |이 함수는 구현되지 않았습니다. 이 함수에 명령을 추가하여 응용 프로그램을 테스트할 수 있습니다. |
 
 ## <a name="next-steps"></a>다음 단계
 [Windows PowerShell을 사용하여 스크립팅](https://technet.microsoft.com/library/bb978526.aspx)을 읽어 PowerShell 스크립팅에 대해 자세히 알아보고 [스크립트 센터](https://azure.microsoft.com/documentation/scripts/)에서 기타 Azure PowerShell 스크립트에 대해 알아보세요.
-

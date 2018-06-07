@@ -1,37 +1,43 @@
 ---
-title: "효율적인 목록 쿼리 디자인 - Azure Batch | Microsoft Docs"
-description: "풀, 작업, 태스크 및 계산 노드와 같은 배치 리소스에 대한 정보를 요청할 때 쿼리를 필터링하여 성능을 향상시킵니다."
+title: 효율적인 목록 쿼리 디자인 - Azure Batch | Microsoft Docs
+description: 풀, 작업, 태스크 및 계산 노드와 같은 Batch 리소스에 대한 정보를 요청할 때 쿼리를 필터링하여 성능을 향상시킵니다.
 services: batch
 documentationcenter: .net
-author: tamram
-manager: timlt
-editor: 
+author: dlepow
+manager: jeconnoc
+editor: ''
 ms.assetid: 031fefeb-248e-4d5a-9bc2-f07e46ddd30d
 ms.service: batch
 ms.devlang: multiple
 ms.topic: article
-ms.tgt_pltfrm: vm-windows
+ms.tgt_pltfrm: ''
 ms.workload: big-compute
-ms.date: 02/27/2017
-ms.author: tamram
+ms.date: 08/02/2017
+ms.author: danlep
 ms.custom: H1Hack27Feb2017
-translationtype: Human Translation
-ms.sourcegitcommit: 6b6c548ca1001587e2b40bbe9ee2fcb298f40d72
-ms.openlocfilehash: 791b7a22e5b7edd2e31f6ab01131530a8053ac2b
-ms.lasthandoff: 02/28/2017
-
-
+ms.openlocfilehash: 330350d6ac6838ea5b09763fe1f73fab1934710c
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="create-queries-to-list-batch-resources-efficiently"></a>쿼리를 만들어서 효율적으로 Batch 리소스 나열
 
-여기에서 [배치 .NET][api_net] 라이브러리를 사용하여 작업, 태스크 및 계산 노드를 쿼리할 때 서비스에서 반환되는 데이터의 양을 줄여 Azure 배치 응용 프로그램의 성능을 향상시키는 방법을 알아봅니다.
+여기에서 [Batch .NET][api_net] 라이브러리를 사용하여 작업, 태스크 및 계산 노드를 쿼리할 때 서비스에서 반환되는 데이터의 양을 줄여 Azure Batch 응용 프로그램의 성능을 향상시키는 방법을 알아봅니다.
 
-거의 모든 배치 응용 프로그램은 정기적으로 배치 서비스를 쿼리하는 특정 형식의 모니터링 또는 다른 작업을 수행해야 합니다. 예를 들어 대기 중인 태스크가 작업에 남아 있는지 여부를 확인하려면 작업의 모든 태스크에 대한 데이터를 가져와야 합니다. 풀의 노드 상태를 확인하려면 풀의 모든 노드에서 데이터를 가져와야 합니다. 이 문서에서는 가장 효율적인 방법으로 이러한 쿼리를 실행하는 방법에 대해 설명합니다.
+거의 모든 Batch 응용 프로그램은 정기적으로 Batch 서비스를 쿼리하는 특정 형식의 모니터링 또는 다른 작업을 수행해야 합니다. 예를 들어 대기 중인 태스크가 작업에 남아 있는지 여부를 확인하려면 작업의 모든 태스크에 대한 데이터를 가져와야 합니다. 풀의 노드 상태를 확인하려면 풀의 모든 노드에서 데이터를 가져와야 합니다. 이 문서에서는 가장 효율적인 방법으로 이러한 쿼리를 실행하는 방법에 대해 설명합니다.
+
+> [!NOTE]
+> Batch 서비스는 작업 내 태스크를 계산하는 일반적인 시나리오에 대한 특별한 API 지원을 제공합니다. 목록 쿼리를 사용하는 대신, [Get Task Counts][rest_get_task_counts] 연산을 호출할 수 있습니다. Get Task Counts 연산은 보류 중, 실행 중 또는 완료 태스크 수, 성공 또는 실패한 태스크 수를 나타냅니다. Get Task Counts는 목록 쿼리보다 더 효율적입니다. 자세한 내용은 [상태별 작업 계수(미리 보기)](batch-get-task-counts.md)를 참조하세요. 
+>
+> 2017-06-01.5.1 이전의 Batch 서비스 버전에서는 Get Task Counts 연산을 사용할 수 없습니다. 이전 버전의 서비스를 사용하는 경우, 대신 목록 쿼리를 사용하여 작업의 태스크를 계산하세요.
+>
+> 
 
 ## <a name="meet-the-detaillevel"></a>DetailLevel 충족
-프로덕션 배치 응용 프로그램에서 작업, 태스크 및 계산 노드 같은 엔터티가 수천 개 있을 수 있습니다. 이러한 리소스에 대한 정보를 요청할 때는 잠재적으로 각 쿼리에서 대량의 데이터를 배치 서비스에서 응용 프로그램으로 "아슬아슬하게 전달"해야 합니다. 쿼리에서 반환하는 항목의 수와 정보의 형식을 제한하여 쿼리의 속도를 높이고, 그 결과로 응용 프로그램의 성능도 향상시킬 수 있습니다.
+프로덕션 Batch 응용 프로그램에서 작업, 태스크 및 계산 노드 같은 엔터티가 수천 개 있을 수 있습니다. 이러한 리소스에 대한 정보를 요청할 때는 잠재적으로 각 쿼리에서 대량의 데이터를 Batch 서비스에서 응용 프로그램으로 "아슬아슬하게 전달"해야 합니다. 쿼리에서 반환하는 항목의 수와 정보의 형식을 제한하여 쿼리의 속도를 높이고, 그 결과로 응용 프로그램의 성능도 향상시킬 수 있습니다.
 
-이 [배치 .NET][api_net] API 코드 조각은 각 태스크의 속성 *모두*와 함께 작업과 관련된 *모든* 태스크를 나열합니다.
+이 [Batch .NET][api_net] API 코드 조각은 각 태스크의 속성 *모두*와 함께 작업과 관련된 *모든* 태스크를 나열합니다.
 
 ```csharp
 // Get a collection of all of the tasks and all of their properties for job-001
@@ -53,15 +59,15 @@ IPagedEnumerable<CloudTask> completedTasks =
     batchClient.JobOperations.ListTasks("job-001", detailLevel);
 ```
 
-이 예제 시나리오에서 수천 개의 태스크가 작업에 있다면 두 번째 쿼리의 결과는 대개 첫 번째 결과보다 더 빨리 반환됩니다. 배치 .NET API를 사용하여 항목을 나열할 때 ODATADetailLevel 사용에 대한 자세한 내용은 [아래](#efficient-querying-in-batch-net)에 포함되어 있습니다.
+이 예제 시나리오에서 수천 개의 태스크가 작업에 있다면 두 번째 쿼리의 결과는 대개 첫 번째 결과보다 더 빨리 반환됩니다. Batch .NET API를 사용하여 항목을 나열할 때 ODATADetailLevel 사용에 대한 자세한 내용은 [아래](#efficient-querying-in-batch-net)에 포함되어 있습니다.
 
 > [!IMPORTANT]
-> 응용 프로그램의 최고 효율성과 성능을 위해 *항상* .NET API 목록 호출에 ODATADetailLevel 개체를 제공하는 것이 좋습니다. 세부 정보 수준을 지정하여 배치 서비스 응답 시간을 낮추고, 네트워크 사용률을 개선하며 클라이언트 응용 프로그램의 메모리 사용을 최소화하는 데 도움이 될 수 있습니다.
+> 응용 프로그램의 최고 효율성과 성능을 위해 *항상* .NET API 목록 호출에 ODATADetailLevel 개체를 제공하는 것이 좋습니다. 세부 정보 수준을 지정하여 Batch 서비스 응답 시간을 낮추고, 네트워크 사용률을 개선하며 클라이언트 응용 프로그램의 메모리 사용을 최소화하는 데 도움이 될 수 있습니다.
 > 
 > 
 
 ## <a name="filter-select-and-expand"></a>Filter, select 및 expand
-[배치 .NET][api_net] 및 [배치 REST][api_rest] API는 목록에 반환되는 항목 수와 각각에 대해 반환되는 정보의 크기를 줄일 수 있습니다. 이렇게 하려면 목록 쿼리를 수행할 때 **filter**, **select** 및 **expand 문자열**을 지정합니다.
+[Batch .NET][api_net] 및 [Batch REST][api_rest] API는 목록에 반환되는 항목 수와 각각에 대해 반환되는 정보의 크기를 줄일 수 있습니다. 이렇게 하려면 목록 쿼리를 수행할 때 **filter**, **select** 및 **expand 문자열**을 지정합니다.
 
 ### <a name="filter"></a>Filter
 filter 문자열은 반환되는 항목 수를 줄이는 식입니다. 예를 들어, 한 작업에 대해 실행 중인 태스크만 나열하거나 태스크를 실행할 준비가 된 계산 노드만 나열할 수 있습니다.
@@ -90,7 +96,7 @@ expand 문자열은 특정 정보를 얻는 데 필요한 API 호출 수를 줄�
 > 
 
 ### <a name="rules-for-filter-select-and-expand-strings"></a>filter, select, expand 문자열 규칙
-* [배치 .NET][api_net] 또는 다른 배치 SDK 중 하나를 사용하는 경우에도 filter, select, expand 문자열의 속성 이름은 [배치 REST][api_rest] API에서와 동일하게 나타나야 합니다.
+* [Batch .NET][api_net] 또는 다른 Batch SDK 중 하나를 사용하는 경우에도 filter, select, expand 문자열의 속성 이름은 [Batch REST][api_rest] API에서와 동일하게 나타나야 합니다.
 * 모든 속성 이름은 대/소문자를 구분하지만, 속성 값은 대/소문자를 구분하지 않습니다.
 * 날짜/시간 문자열은 두 형식 중 하나가 될 수 있으며 `DateTime`으로 시작해야 합니다.
   
@@ -99,14 +105,14 @@ expand 문자열은 특정 정보를 얻는 데 필요한 API 호출 수를 줄�
 * 부울 문자열은 `true` 또는 `false`입니다.
 * 잘못된 속성이나 연산자를 지정한 경우 `400 (Bad Request)` 오류가 발생합니다.
 
-## <a name="efficient-querying-in-batch-net"></a>배치 .NET에서 효율적인 쿼리
-[배치 .NET][api_net] API 안에서 [ODATADetailLevel][odata] 클래스를 filter, select 및 expand 문자열에 사용하여 작업을 나열합니다. ODataDetailLevel 클래스에는 생성자 내에 지정되어 있거나 개체에 직접 설정된 세 개의 공용 문자열 속성이 있습니다. ODataDetailLevel 개체를 [ListPools][net_list_pools], [ListJobs][net_list_jobs] 및 [ListTasks][net_list_tasks]와 같은 다양한 목록 작업에 매개 변수로 전달합니다.
+## <a name="efficient-querying-in-batch-net"></a>Batch .NET에서 효율적인 쿼리
+[Batch .NET][api_net] API 안에서 [ODATADetailLevel][odata] 클래스를 filter, select 및 expand 문자열에 사용하여 작업을 나열합니다. ODataDetailLevel 클래스에는 생성자 내에 지정되어 있거나 개체에 직접 설정된 세 개의 공용 문자열 속성이 있습니다. ODataDetailLevel 개체를 [ListPools][net_list_pools], [ListJobs][net_list_jobs] 및 [ListTasks][net_list_tasks]와 같은 다양한 목록 작업에 매개 변수로 전달합니다.
 
 * [ODATADetailLevel][odata].[FilterClause][odata_filter]: 반환되는 항목 수를 제한합니다.
 * [ODATADetailLevel][odata].[SelectClause][odata_select]: 각 항목에 반환되는 속성 값을 지정합니다.
 * [ODATADetailLevel][odata].[ExpandClause][odata_expand]: 각 항목에 대한 별도 호출 대신 단일 API 호출의 모든 항목에 대한 데이터를 검색합니다.
 
-다음 코드 조각에서는 풀의 특정 집합에 대한 통계에 대해 배치 서비스를 효율적으로 쿼리하기 위해 배치 .NET API를 사용합니다. 이 시나리오에서 배치 사용자는 테스트 및 프로덕션 풀을 가집니다. 테스트 풀 ID는 "test"를 접두사로 사용하고 프로덕션 풀 ID는 "prod"를 접두사로 사용합니다. 이 코드 조각에서 *myBatchClient* 는 다음과 같은 [BatchClient](https://msdn.microsoft.com/library/azure/microsoft.azure.batch.batchclient) 클래스의 인스턴스를 적절하게 초기화합니다.
+다음 코드 조각에서는 풀의 특정 집합에 대한 통계에 대해 Batch 서비스를 효율적으로 쿼리하기 위해 Batch .NET API를 사용합니다. 이 시나리오에서 Batch 사용자는 테스트 및 프로덕션 풀을 가집니다. 테스트 풀 ID는 "test"를 접두사로 사용하고 프로덕션 풀 ID는 "prod"를 접두사로 사용합니다. 이 코드 조각에서 *myBatchClient* 는 다음과 같은 [BatchClient](https://msdn.microsoft.com/library/azure/microsoft.azure.batch.batchclient) 클래스의 인스턴스를 적절하게 초기화합니다.
 
 ```csharp
 // First we need an ODATADetailLevel instance on which to set the filter, select,
@@ -139,7 +145,7 @@ List<CloudPool> testPools =
 > 
 > 
 
-## <a name="batch-rest-to-net-api-mappings"></a>배치 REST를 .NET API에 매핑
+## <a name="batch-rest-to-net-api-mappings"></a>Batch REST를 .NET API에 매핑
 filter, select 및 expand 문자열의 속성 이름은 이름과 대소문자 모두 해당 REST API 항목을 반영 *해야 합니다* . 다음 표는 .NET과 REST API 간의 매핑을 제공합니다.
 
 ### <a name="mappings-for-filter-strings"></a>filter 문자열 매핑
@@ -160,10 +166,10 @@ filter, select 및 expand 문자열의 속성 이름은 이름과 대소문자 �
 | [PoolOperations.ListPools][net_list_pools] |[계정에 풀 나열][rest_list_pools] |
 
 ### <a name="mappings-for-select-strings"></a>select 문자열 매핑
-* **배치 .NET 형식**: 배치 .NET API 형식.
+* **Batch .NET 형식**: Batch .NET API 형식.
 * **REST API 엔터티**: 이 열의 각 페이지에는 형식에 대한 REST API 속성 이름을 나열하는 하나 이상의 표가 들어 있습니다. 이러한 속성 이름은 *select* 문자열을 구성할 때 사용됩니다. [ODATADetailLevel.SelectClause][odata_select] 문자열을 구성할 때 이와 동일한 속성을 사용합니다.
 
-| 배치 .NET 형식 | REST API 엔터티 |
+| Batch .NET 형식 | REST API 엔터티 |
 | --- | --- |
 | [Certificate][net_cert] |[인증서 정보 가져오기][rest_get_cert] |
 | [CloudJob][net_job] |[작업 정보 가져오기][rest_get_job] |
@@ -173,20 +179,20 @@ filter, select 및 expand 문자열의 속성 이름은 이름과 대소문자 �
 | [CloudTask][net_task] |[태스크 정보 가져오기][rest_get_task] |
 
 ## <a name="example-construct-a-filter-string"></a>예: filter 문자열 구성
-[ODATADetailLevel.FilterClause][odata_filter]에 대한 filter 문자열을 구성할 때는 "filter 문자열에 대한 매핑"에서 위의 표를 참조하여 수행하려는 목록 작업에 해당하는 REST API 설명서 페이지를 찾을 수 있습니다. 해당 페이지의 첫 번째 다중 행 표에 필터링 가능한 속성과 지원되는 연산자가 있습니다. 예를 들어, 종료 코드가&0;이 아닌 모든 태스크를 검색하려는 경우 [작업과 연결된 태스크 목록][rest_list_tasks]의 이 행은 적용 가능한 속성 문자열과 허용 가능한 연산자를 지정합니다.
+[ODATADetailLevel.FilterClause][odata_filter]에 대한 filter 문자열을 구성할 때는 "filter 문자열에 대한 매핑"에서 위의 표를 참조하여 수행하려는 목록 작업에 해당하는 REST API 설명서 페이지를 찾을 수 있습니다. 해당 페이지의 첫 번째 다중 행 표에 필터링 가능한 속성과 지원되는 연산자가 있습니다. 예를 들어, 종료 코드가 0이 아닌 모든 태스크를 검색하려는 경우 [작업과 연결된 태스크 목록][rest_list_tasks]의 이 행은 적용 가능한 속성 문자열과 허용 가능한 연산자를 지정합니다.
 
-| 속성 | 허용되는 연산 | 형식 |
+| 자산 | 허용되는 연산 | 유형 |
 |:--- |:--- |:--- |
 | `executionInfo/exitCode` |`eq, ge, gt, le , lt` |`Int` |
 
-따라서 종료 코드가&0;이 아닌 모든 작업을 나열하기 위한 filter 문자열은 다음과 같게 됩니다.
+따라서 종료 코드가 0이 아닌 모든 작업을 나열하기 위한 filter 문자열은 다음과 같게 됩니다.
 
 `(executionInfo/exitCode lt 0) or (executionInfo/exitCode gt 0)`
 
 ## <a name="example-construct-a-select-string"></a>예: select 문자열 구성
 [ODATADetailLevel.SelectClause][odata_select]를 구성하려면 "select 문자열에 대한 매핑"에서 위의 표를 참조하고 나열하는 엔터티 형식에 해당하는 REST API 페이지로 이동합니다. 해당 페이지의 첫 번째 다중 행 표에 선택 가능한 속성과 지원되는 연산자가 있습니다. 목록의 각 태스크에 대해 ID와 명령줄만 검색하려면 [태스크 관련 정보 가져오기][rest_get_task]의 해당하는 표에서 이 행을 찾을 수 있습니다.
 
-| 속성 | 형식 | 참고 |
+| 자산 | 유형 | 메모 |
 |:--- |:--- |:--- |
 | `id` |`String` |`The ID of the task.` |
 | `commandLine` |`String` |`The command line of the task.` |
@@ -216,7 +222,7 @@ Sample complete, hit ENTER to continue...
 경과된 시간에서 보는 것처럼 반환되는 항목 수와 속성을 제한하여 쿼리 응답 시간을 크게 낮출 수 있습니다. 이 샘플 프로젝트와 다른 샘플 프로젝트가 GitHub의 [azure-batch-samples][github_samples] 리포지토리에 있습니다.
 
 ### <a name="batchmetrics-library-and-code-sample"></a>BatchMetrics 라이브러리 및 코드 샘플
-위의 EfficientListQueries 코드 샘플 외에도 [azure-batch-samples][github_samples] GitHub 리포지토리에서 [BatchMetrics][batch_metrics] 프로젝트를 찾을 수 있습니다. BatchMetrics 샘플 프로젝트는 배치 API를 사용하여 Azure 배치 작업 진행률을 효율적으로 모니터링하는 방법을 보여 줍니다.
+위의 EfficientListQueries 코드 샘플 외에도 [azure-batch-samples][github_samples] GitHub 리포지토리에서 [BatchMetrics][batch_metrics] 프로젝트를 찾을 수 있습니다. BatchMetrics 샘플 프로젝트는 배치 API를 사용하여 Azure Batch 작업 진행률을 효율적으로 모니터링하는 방법을 보여 줍니다.
 
 [BatchMetrics][batch_metrics] 샘플은 자체 프로젝트로 통합할 수 있는 .NET 클래스 라이브러리 프로젝트 및 라이브러리의 사용을 연습하고 설명하는 간단한 명령줄 프로그램을 포함합니다.
 
@@ -239,10 +245,10 @@ internal static ODATADetailLevel OnlyChangedAfter(DateTime time)
 
 ## <a name="next-steps"></a>다음 단계
 ### <a name="parallel-node-tasks"></a>병렬 노드 작업
-[동시 노드 작업으로 Azure Batch 계산 리소스 사용 극대화](batch-parallel-node-tasks.md) 는 배치 응용 프로그램 성능과 관련된 다른 문서입니다. 일부 유형의 작업은 더 크지만 더 적은 계산 노드에서의 병렬 작업 실행에서 이점을 얻을 수 있습니다. 이러한 시나리오에 대한 자세한 내용은 문서의 [예제 시나리오](batch-parallel-node-tasks.md#example-scenario) 를 확인하세요.
+[동시 노드 작업으로 Azure Batch 계산 리소스 사용 극대화](batch-parallel-node-tasks.md) 는 Batch 응용 프로그램 성능과 관련된 다른 문서입니다. 일부 유형의 작업은 더 크지만 더 적은 계산 노드에서의 병렬 작업 실행에서 이점을 얻을 수 있습니다. 이러한 시나리오에 대한 자세한 내용은 문서의 [예제 시나리오](batch-parallel-node-tasks.md#example-scenario) 를 확인하세요.
 
-### <a name="batch-forum"></a>배치 포럼
-MSDN의 [Azure 배치 포럼][forum]은 Batch를 설명하고 서비스에 대한 질문을 하는 데 많은 도움이 됩니다. 유용한 "고정" 게시물을 참조하고 배치 솔루션을 빌드하는 동안 질문이 생기면 즉시 게시합니다.
+### <a name="batch-forum"></a>Batch 포럼
+MSDN의 [Azure Batch 포럼][forum]은 Batch를 설명하고 서비스에 대한 질문을 하는 데 많은 도움이 됩니다. 유용한 "고정" 게시물을 참조하고 Batch 솔루션을 빌드하는 동안 질문이 생기면 즉시 게시합니다.
 
 [api_net]: http://msdn.microsoft.com/library/azure/mt348682.aspx
 [api_net_listjobs]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.joboperations.listjobs.aspx
@@ -293,3 +299,4 @@ MSDN의 [Azure 배치 포럼][forum]은 Batch를 설명하고 서비스에 대�
 [net_schedule]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudjobschedule.aspx
 [net_task]: https://msdn.microsoft.com/library/azure/microsoft.azure.batch.cloudtask.aspx
 
+[rest_get_task_counts]: https://docs.microsoft.com/rest/api/batchservice/get-the-task-counts-for-a-job

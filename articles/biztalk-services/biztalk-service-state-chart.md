@@ -1,5 +1,5 @@
 ---
-title: "BizTalk 서비스의 여러 상태에서 허용되는 작업 | Microsoft Docs"
+title: "BizTalk Services의 여러 상태에서 허용되는 작업 | Microsoft Docs"
 description: "중지, 시작, 다시 시작, 일시 중단, 계속, 삭제, 크기 조정, 업데이트 구성 및 백업 등 여러 MABS 상태에서 허용되는 작업"
 services: biztalk-services
 documentationcenter: 
@@ -14,13 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 11/08/2016
 ms.author: mandia
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 331c03cd0819aa4935f9b486ff38f54d23d6a7fd
-ms.openlocfilehash: e3d5f89b1c8525f791e73667d6f7cd6a999ab971
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
-
+ms.openlocfilehash: 05470e75fc7b46603c8fce3a98c66ac6a24758a8
+ms.sourcegitcommit: dcf5f175454a5a6a26965482965ae1f2bf6dca0a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/10/2017
 ---
 # <a name="what-you-can-and-cant-do-using-the-biztalk-service-state"></a>BizTalk 서비스 상태를 사용하여 수행할 수 있는 작업과 수행할 수 없는 작업
 
@@ -28,7 +26,7 @@ ms.lasthandoff: 11/17/2016
 
 BizTalk 서비스의 현재 상태에 따라 BizTalk 서비스에서 수행할 수 있는 작업이나 수행할 수 없는 작업이 있습니다.
 
-예를 들어 Azure 클래식 포털에서 새로운 BizTalk 서비스를 프로비전합니다. 프로비전이 성공적으로 완료되면 BizTalk 서비스가 `active` 상태입니다. 활성 상태에서 BizTalk 서비스를 중지, 일시 중단 및 삭제할 수 있습니다. BizTalk 서비스를 중지한 경우 중지에 실패하면 BizTalk 서비스가 `StopFailed` 상태로 전환됩니다. `StopFailed` 상태에서는 BizTalk 서비스를 다시 시작할 수 있습니다. 재개와 같은 허용되지 않는 작업을 시도한 경우 다음과 같은 오류가 발생합니다.
+예를 들어 새로운 BizTalk Service를 프로비전합니다. 프로비전이 성공적으로 완료되면 BizTalk 서비스가 `active` 상태입니다. 활성 상태에서 BizTalk 서비스를 중지, 일시 중단 및 삭제할 수 있습니다. BizTalk 서비스를 중지한 경우 중지에 실패하면 BizTalk 서비스가 `StopFailed` 상태로 전환됩니다. `StopFailed` 상태에서는 BizTalk 서비스를 다시 시작할 수 있습니다. 재개와 같은 허용되지 않는 작업을 시도한 경우 다음과 같은 오류가 발생합니다.
 
 `Operation not allowed`
 
@@ -54,12 +52,10 @@ BizTalk 서비스의 현재 상태에 따라 BizTalk 서비스에서 수행할 �
 
 
 ## <a name="see-also"></a>참고 항목
-* [Azure 클래식 포털을 사용하여 BizTalk 서비스 만들기](http://go.microsoft.com/fwlink/p/?LinkID=302280)<br/>
-* [BizTalk 서비스의 대시보드, 모니터 및 크기 조정 탭에서 수행할 수 있는 작업](http://go.microsoft.com/fwlink/p/?LinkID=302281)<br/>
+* [BizTalk Services의 대시보드, 모니터 및 크기 조정 탭에서 수행할 수 있는 작업](http://go.microsoft.com/fwlink/p/?LinkID=302281)<br/>
 * [BizTalk Services의 Developer, Basic, Standard 및 Premium Edition에서 제공되는 기능](http://go.microsoft.com/fwlink/p/?LinkID=302279)<br/>
 * [BizTalk Services를 백업 및 복원하는 방법](http://go.microsoft.com/fwlink/p/?LinkID=329873)<br/>
 * [BizTalk Services에 설명된 제한](http://go.microsoft.com/fwlink/p/?LinkID=302282)<br/>
-* [BizTalk Services에 대한 Service Bus 및 액세스 제어 발급자 이름 및 발급자 키 값 검색](http://go.microsoft.com/fwlink/p/?LinkID=303941)<br/>
-* [Azure BizTalk 서비스 SDK로 시작하는 방법](http://go.microsoft.com/fwlink/p/?LinkID=302335)
-
+* [BizTalk Services에 대한 Service Bus 및 Access Control 발급자 이름 및 발급자 키 값 검색](http://go.microsoft.com/fwlink/p/?LinkID=303941)<br/>
+* [Azure BizTalk Services SDK로 시작하는 방법](http://go.microsoft.com/fwlink/p/?LinkID=302335)
 

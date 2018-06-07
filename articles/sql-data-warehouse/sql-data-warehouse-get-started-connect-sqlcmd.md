@@ -1,32 +1,25 @@
 ---
-title: "Azure SQL Data Warehouse sqlcmd에 연결 | Microsoft Azure"
-description: "[sqlcmd][sqlcmd] 명령줄 유틸리티를 사용하여 Azure SQL Data Warehouse에 연결하고 쿼리합니다."
+title: Azure SQL Data Warehouse sqlcmd에 연결 | Microsoft Azure
+description: '[sqlcmd][sqlcmd] 명령줄 유틸리티를 사용하여 Azure SQL Data Warehouse에 연결하고 쿼리합니다.'
 services: sql-data-warehouse
-documentationcenter: NA
-author: antvgski
-manager: jhubbard
-editor: 
-ms.assetid: 6e2b69e5-4806-4e91-9ea1-e2b63bf28c46
+author: kavithaj
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: get-started-article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: connect
-ms.date: 10/31/2016
-ms.author: anvang;barbkess
-ms.translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 3508cdf6dcfa3d7122e1e3b635f3cd37863dbf62
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/03/2017
-
-
+ms.topic: conceptual
+ms.component: consume
+ms.date: 04/17/2018
+ms.author: kavithaj
+ms.reviewer: igorstan
+ms.openlocfilehash: a4399382445cef5732262520986281ea440f7d51
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
-# <a name="connect-to-sql-data-warehouse-with-sqlcmd"></a>sqlcmd를 사용하여 SQL 데이터 웨어하우스에 연결
+# <a name="connect-to-sql-data-warehouse-with-sqlcmd"></a>sqlcmd를 사용하여 SQL Data Warehouse에 연결
 > [!div class="op_single_selector"]
 > * [Power BI](sql-data-warehouse-get-started-visualize-with-power-bi.md)
-> * [Azure 기계 학습](sql-data-warehouse-get-started-analyze-with-azure-machine-learning.md)
+> * [Azure Machine Learning](sql-data-warehouse-get-started-analyze-with-azure-machine-learning.md)
 > * [Visual Studio](sql-data-warehouse-query-visual-studio.md)
 > * [sqlcmd](sql-data-warehouse-get-started-connect-sqlcmd.md) 
 > * [SSMS](sql-data-warehouse-query-ssms.md)
@@ -100,4 +93,3 @@ sqlcmd에서 사용할 수 있는 옵션에 대한 세부 정보는 [sqlcmd 설�
 [Azure portal]: https://portal.azure.com
 
 <!--Other Web references-->
-

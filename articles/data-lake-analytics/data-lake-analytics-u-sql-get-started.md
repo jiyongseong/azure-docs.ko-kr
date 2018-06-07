@@ -1,8 +1,8 @@
 ---
-title: "U-SQL 언어 시작 | Microsoft Docs"
-description: "U-SQL 언어의 기본 사항에 대해 알아봅니다."
+title: U-SQL 언어 시작 | Microsoft Docs
+description: U-SQL 언어의 기본 사항에 대해 알아봅니다.
 services: data-lake-analytics
-documentationcenter: 
+documentationcenter: ''
 author: saveenr
 manager: saveenr
 editor: cgronlun
@@ -14,19 +14,18 @@ ms.tgt_pltfrm: na
 ms.workload: big-data
 ms.date: 06/23/2017
 ms.author: saveenr
+ms.openlocfilehash: e7efdac8b032055b5344f34f5f9ad2679bddb107
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: a193590504fc3706a7c1f1562e94a8a80da03e75
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="get-started-with-u-sql"></a>U-SQL 시작
 U-SQL은 선언적 SQL을 명령적 C#에 결합하여 규모에 관계 없이 데이터를 처리할 수 있도록 하는 언어입니다. U-SQL의 확장성 있는 분산 쿼리 기능을 통해 Azure SQL Database와 같은 관계형 저장소의 데이터를 효율적으로 분석할 수 있습니다. U-SQL을 사용하면 읽기에 대한 스키마를 적용하고 사용자 지정 논리 및 UDF를 삽입하여 구조화되지 않은 데이터를 처리할 수 있습니다. 또한 U-SQL에는 모든 규모에서 실행하는 방법을 세부적으로 제어할 수 있게 해주는 확장성이 포함되어 있습니다. 
 
 ## <a name="learning-resources"></a>학습 리소스
 
-* [U-SQL 자습서]에서는 대부분의 U-SQL 언어에 대한 안내식 연습 과정을 제공합니다. U-SQL을 학습하려는 모든 개발자는 이 문서를 읽어보는 것이 좋습니다.
+* [U-SQL 자습서](http://aka.ms/usqltutorial)에서는 대부분의 U-SQL 언어에 대한 안내식 연습 과정을 제공합니다. U-SQL을 학습하려는 모든 개발자는 이 문서를 읽어보는 것이 좋습니다.
 * **U-SQL 언어 구문**에 대한 자세한 내용은 [U-SQL 언어 참조](http://go.microsoft.com/fwlink/p/?LinkId=691348)를 참조하세요.
 * **U-SQL 디자인 철학**을 이해하려면 Visual Studio 블로그 게시물 [Introducing U-SQL – A Language that makes Big Data Processing Easy(U-SQL 소개 - 빅 데이터 처리를 수월하게 해주는 언어)](https://blogs.msdn.microsoft.com/visualstudio/2015/09/28/introducing-u-sql-a-language-that-makes-big-data-processing-easy/)를 참조하세요.
 
@@ -227,9 +226,8 @@ U-SQL HAVING 절은 HAVING 조건을 만족하는 그룹으로 출력을 제한�
         ORDER BY TotalDuration DESC
         USING Outputters.Csv();
 
-고급 집계 시나리오의 경우 U-SQL 참조 설명서에서 [집계, 분석 및 참조 기능](https://msdn.microsoft.com/en-us/library/azure/mt621335.aspx)을 참조하세요.
+고급 집계 시나리오의 경우 U-SQL 참조 설명서에서 [집계, 분석 및 참조 기능](https://msdn.microsoft.com/library/azure/mt621335.aspx)을 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
 * [Microsoft Azure 데이터 레이크 분석 개요](data-lake-analytics-overview.md)
 * [Visual Studio용 데이터 레이크 도구를 사용하여 U-SQL 스크립트 개발](data-lake-analytics-data-lake-tools-get-started.md)
-

@@ -1,26 +1,22 @@
 ---
-title: "Power BI를 사용하여 Data Lake Store 데이터 분석 | Microsoft 문서"
-description: "Power BI를 사용하여 Azure Data Lake 저장소에 저장된 데이터 분석"
+title: Power BI를 사용하여 Data Lake Store 데이터 분석 | Microsoft 문서
+description: Power BI를 사용하여 Azure Data Lake 저장소에 저장된 데이터 분석
 services: data-lake-store
-documentationcenter: 
+documentationcenter: ''
 author: nitinme
 manager: jhubbard
 editor: cgronlun
 ms.assetid: 57d19d27-e135-49d9-a7ea-46c48ef4e3bd
 ms.service: data-lake-store
 ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 05/10/2017
+ms.topic: conceptual
+ms.date: 02/21/2018
 ms.author: nitinme
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 59f072c7a8272fc04e1d662c0ab17e7ee4500fa6
-ms.openlocfilehash: f965e3a5067dd8dd2ac6dc29446c7f5b50cdd450
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/07/2017
-
-
+ms.openlocfilehash: 08660bd1c434c9404fa53a33be209b7a3c4d9372
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="analyze-data-in-data-lake-store-by-using-power-bi"></a>Power BI를 사용하여 Data Lake 저장소의 데이터 분석
 이 문서에서는 Power BI Desktop을 사용하여 Azure Data Lake 저장소에 저장된 데이터를 분석하고 시각화하는 방법에 대해 알아봅니다.
@@ -28,7 +24,7 @@ ms.lasthandoff: 02/07/2017
 ## <a name="prerequisites"></a>필수 조건
 이 자습서를 시작하기 전에 다음이 있어야 합니다.
 
-* **Azure 구독**. [Azure 무료 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
+* **Azure 구독**. [Azure 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
 * **Azure Data Lake Store 계정**. [Azure Portal을 사용하여 Azure Data Lake Store 시작](data-lake-store-get-started-portal.md)에 있는 지침을 따릅니다. 이 문서에서는 이미 **mybidatalakestore**라는 Data Lake Store 계정을 만들어 샘플 데이터 파일(**Drivers.txt**)을 업로드했다고 가정합니다. 이 샘플 파일은 [Azure Data Lake Git 리포지토리](https://github.com/Azure/usql/tree/master/Examples/Samples/Data/AmbulanceData/Drivers.txt)에서 다운로드할 수 있습니다.
 * **Power BI Desktop**. [Microsoft 다운로드 센터](https://www.microsoft.com/en-us/download/details.aspx?id=45331)에서 다운로드할 수 있습니다. 
 
@@ -101,5 +97,4 @@ Power BI Desktop에서 시각화를 만들고 나면, Power BI 서비스에 게�
 
 ## <a name="see-also"></a>참고 항목
 * [Data Lake 분석을 사용하여 Data Lake 저장소의 데이터 분석](../data-lake-analytics/data-lake-analytics-get-started-portal.md)
-
 

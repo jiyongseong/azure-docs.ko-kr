@@ -13,15 +13,13 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: data-catalog
-ms.date: 05/15/2017
+ms.date: 01/18/2018
 ms.author: maroche
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 07584294e4ae592a026c0d5890686eaf0b99431f
-ms.openlocfilehash: 63f951fbfc9ab5adad8f9225c2827abcbdb7f784
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/02/2017
-
-
+ms.openlocfilehash: 156710ad50349e8a3632e31c7752387d4449a65d
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="azure-data-catalog-common-scenarios"></a>Azure 데이터 카탈로그 일반적인 시나리오
 이 문서에서는 조직에서 Azure Data Catalog를 통해 기존 데이터 원본에서 더 많은 가치를 얻을 수 있는 일반적인 시나리오를 보여줍니다.
@@ -69,4 +67,3 @@ Azure Data Catalog를 사용하면 조직에서 이 반복되는 활동을 없�
 일반적으로 데이터 전문가들은 이메일을 통해서 또는 팀 SharePoint 사이트에 Word 문서를 공유하여 자신이 알고 있는 정보를 설명하려고 노력합니다. 이렇게 하는 것이 중요할 수도 있지만, 어떤 문서가 있으며 해당 문서를 어떻게 찾을 수 있는지 과연 사람들이 알 수 있을까요?
 
 Azure Data Catalog를 사용하면 중앙의 단일 위치에서 조직의 정보를 저장 및 공유하고 간편하게 검색할 수 있습니다. Data Catalog에서 데이터 전문가는 데이터 자산에 직접 주석을 달고 기존 설명서에 대한 링크를 제공할 수 있습니다. 조직 구성원은 카탈로그를 사용하여 데이터 원본을 검색할 때 원본 자체 외에도 기존에는 조직 내 전문가의 머리 속에만 존재하던 정보까지 찾을 수 있습니다.
-

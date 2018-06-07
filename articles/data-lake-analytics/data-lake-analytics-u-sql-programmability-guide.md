@@ -1,8 +1,8 @@
 ---
-title: "Azure Data Lake에 대한 U-SQL 프로그래밍 기능 가이드 | Microsoft Docs"
-description: "클라우드 기반 빅 데이터 플랫폼을 만들 수 있는 Azure Data Lake의 서비스 집합에 대해 알아봅니다."
+title: Azure Data Lake에 대한 U-SQL 프로그래밍 기능 가이드 | Microsoft Docs
+description: 클라우드 기반 빅 데이터 플랫폼을 만들 수 있는 Azure Data Lake의 서비스 집합에 대해 알아봅니다.
 services: data-lake-analytics
-documentationcenter: 
+documentationcenter: ''
 author: saveenr
 manager: saveenr
 ms.assetid: 63be271e-7c44-4d19-9897-c2913ee9599d
@@ -13,15 +13,12 @@ ms.tgt_pltfrm: na
 ms.workload: big-data
 ms.date: 06/30/2017
 ms.author: saveenr
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: e4e298475d7be7d51c8bd55be498371ed6ce77a9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
-
+ms.openlocfilehash: 400057b5ce79cdcf6c7651462e9f497bf647e930
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
-
 # <a name="u-sql-programmability-guide"></a>U-SQL 프로그래밍 기능 가이드
 
 U-SQL은 빅 데이터 유형의 워크로드를 위해 설계된 쿼리 언어입니다. U-SQL의 고유한 기능 중 하나는 SQL과 같은 선언적 언어와 C#에서 제공하는 확장성 및 프로그래밍 기능을 결합한 것입니다. 이 가이드에서는 C#에서 사용할 수 있는 U-SQL 언어의 확장성과 프로그래밍 기능을 집중적으로 설명합니다.
@@ -36,94 +33,91 @@ U-SQL은 빅 데이터 유형의 워크로드를 위해 설계된 쿼리 언어�
 
 ```
 @a  = 
-    SELECT * FROM 
-        (VALUES
-            ("Contoso",   1500.0, "2017-03-39"),
-            ("Woodgrove", 2700.0, "2017-04-10")
-        ) AS 
-              D( customer, amount );
+  SELECT * FROM 
+    (VALUES
+       ("Contoso",   1500.0, "2017-03-39"),
+       ("Woodgrove", 2700.0, "2017-04-10")
+    ) AS D( customer, amount, date );
+
 @results =
-    SELECT
-        customer,
+  SELECT
+    customer,
     amount,
     date
-    FROM @a;    
+  FROM @a;    
 ```
 
-@a라는 RowSet를 정의하고 @a를 통해 @results라는 RowSet를 만듭니다.
+이 스크립트는 두 개의 행 집합, `@a`과 `@results`를 정의합니다. `@results` 행 집합은 `@a`에서 정의됩니다.
 
 ## <a name="c-types-and-expressions-in-u-sql-script"></a>U-SQL 스크립트의 C# 형식 및 식
 
-U-SQL 식은 `AND`, `OR` 및 `NOT`과 같은 U-SQL 논리 연산자와 결합된 C# 식입니다. U-SQL 식은 SELECT, EXTRACT, WHERE, HAVING, GROUP BY 및 DECLARE와 함께 사용할 수 있습니다.
-
-예를 들어 다음 스크립트는 SELECT 절의 DateTime 문자열 값을 구문 분석합니다.
+U-SQL 식은 `AND`, `OR` 및 `NOT`과 같은 U-SQL 논리 연산자와 결합된 C# 식입니다. U-SQL 식은 SELECT, EXTRACT, WHERE, HAVING, GROUP BY 및 DECLARE와 함께 사용할 수 있습니다. 예를 들어 다음 스크립트는 문자열을 DateTime 값으로 구문 분석합니다.
 
 ```
 @results =
-    SELECT
-        customer,
+  SELECT
+    customer,
     amount,
     DateTime.Parse(date) AS date
-    FROM @a;    
+  FROM @a;    
 ```
 
-다음 스크립트는 DECLARE 문의 DateTime 문자열 값을 구문 분석합니다.
+다음 코드 조각은 DECLARE 문에서 문자열을 DateTime 값으로 구문 분석합니다.
 
 ```
-DECLARE @d DateTime = ToDateTime.Date("2016/01/01");
+DECLARE @d = DateTime.Parse("2016/01/01");
 ```
 
 ### <a name="use-c-expressions-for-data-type-conversions"></a>데이터 형식 변환에 C# 식 사용
+
 다음 예제는 C# 식을 사용하여 datetime 데이터 변환을 수행하는 방법을 보여줍니다. 이 특정 시나리오에서 datetime 문자열 데이터는 자정 00:00:00 시간 표기법을 사용하는 표준 datetime으로 변환됩니다.
 
 ```
-DECLARE @dt String = "2016-07-06 10:23:15";
+DECLARE @dt = "2016-07-06 10:23:15";
 
 @rs1 =
-    SELECT 
-        Convert.ToDateTime(Convert.ToDateTime(@dt).ToString("yyyy-MM-dd")) AS dt,
-        dt AS olddt
-    FROM @rs0;
-OUTPUT @rs1 TO @output_file USING Outputters.Text();
+  SELECT 
+    Convert.ToDateTime(Convert.ToDateTime(@dt).ToString("yyyy-MM-dd")) AS dt,
+    dt AS olddt
+  FROM @rs0;
+
+OUTPUT @rs1 
+  TO @output_file 
+  USING Outputters.Text();
 ```
 
 ### <a name="use-c-expressions-for-todays-date"></a>오늘 날짜에 C# 식 사용
-오늘 날짜를 가져오려면 다음 C# 식을 사용할 수 있습니다.
 
-```
-DateTime.Now.ToString("M/d/yyyy")
-```
+오늘 날짜를 끌어오려면 `DateTime.Now.ToString("M/d/yyyy")` C# 식을 사용할 수 있습니다.
 
 다음은 스크립트에서 이 식을 사용하는 방법의 예입니다.
 
 ```
 @rs1 =
-    SELECT
-        MAX(guid) AS start_id,
-        MIN(dt) AS start_time,
-        MIN(Convert.ToDateTime(Convert.ToDateTime(dt<@default_dt?@default_dt:dt).ToString("yyyy-MM-dd"))) AS start_zero_time,
-        MIN(USQL_Programmability.CustomFunctions.GetFiscalPeriod(dt)) AS start_fiscalperiod,
-        DateTime.Now.ToString("M/d/yyyy") AS Nowdate,
-        user,
-        des
-    FROM @rs0
-    GROUP BY user, des;
+  SELECT
+    MAX(guid) AS start_id,
+    MIN(dt) AS start_time,
+    MIN(Convert.ToDateTime(Convert.ToDateTime(dt<@default_dt?@default_dt:dt).ToString("yyyy-MM-dd"))) AS start_zero_time,
+    MIN(USQL_Programmability.CustomFunctions.GetFiscalPeriod(dt)) AS start_fiscalperiod,
+    DateTime.Now.ToString("M/d/yyyy") AS Nowdate,
+    user,
+    des
+  FROM @rs0
+  GROUP BY user, des;
 ```
-
-
-
 ## <a name="using-net-assemblies"></a>.NET 어셈블리 사용
-U-SQL 확장성 모델은 사용자 지정 코드를 추가할 수 있는 기능에 크게 의존합니다. 현재 U-SQL은 사용자 고유의 Microsoft .NET 기반 코드(특히 C#)를 손쉽게 추가할 수 있는 방법을 제공합니다. 하지만 다른 .NET 언어(예: VB.NET 또는 F#)로 작성된 사용자 지정 코드를 추가할 수도 있습니다. 
+
+U-SQL 확장성 모델은 .NET 어셈블리에서 사용자 지정 코드를 추가할 수 있는 기능에 크게 의존합니다. 
 
 ### <a name="register-a-net-assembly"></a>.NET 어셈블리 등록
 
-CREATE ASSEMBLY 문을 사용하여 U-SQL 데이터베이스에 .NET 어셈블리를 배치합니다. 데이터베이스에 어셈블리가 배치되면 U-SQL 스크립트가 REFERENCE ASSEMBLY 문을 통해 이러한 어셈블리를 사용할 수 있습니다. 
+`CREATE ASSEMBLY` 문을 사용하여 .NET 어셈블리를 U-SQL Database에 배치합니다. 그런 다음 U-SQL 스크립트에서 `REFERENCE ASSEMBLY` 문을 사용하여 이러한 어셈블리를 사용할 수 있습니다. 
 
 다음 코드는 어셈블리를 등록하는 방법을 보여 줍니다.
 
 ```
 CREATE ASSEMBLY MyDB.[MyAssembly]
-    FROM "/myassembly.dll";
+   FROM "/myassembly.dll";
 ```
 
 다음 코드는 어셈블리를 참조하는 방법을 보여 줍니다.
@@ -143,7 +137,6 @@ REFERENCE ASSEMBLY MyDB.[MyAssembly];
 업로드된 각 어셈블리 DLL, 리소스 파일(예: 다양한 런타임), 네이티브 어셈블리 또는 구성 파일의 크기는 최대 400MB입니다. DEPLOY RESOURCE를 통해 또는 참조 어셈블리를 통해 배포된 리소스 및 추가 파일의 총 크기는 3GB를 초과할 수 없습니다.
 
 마지막으로 U-SQL 데이터베이스마다 지정된 어셈블리 버전을 하나만 포함할 수 있습니다. 예를 들어 NewtonSoft Json.Net 라이브러리의 버전 7과 버전 8이 모두 필요하면 서로 다른 두 데이터베이스에 등록해야 합니다. 또한 각 스크립트는 지정된 어셈블리 DLL의 한 가지 버전만 참조할 수 있습니다. 이러한 점에서 U-SQL은 C# 어셈블리 관리 및 버전 관리 의미 체계를 따릅니다.
-
 
 ## <a name="use-user-defined-functions-udf"></a>UDF(사용자 정의 함수) 사용
 U-SQL UDF(사용자 정의 함수)는 매개 변수를 받아들이고, 작업(예: 복잡한 계산)을 수행하며, 해당 작업의 결과를 값으로 반환하는 프로그래밍 루틴입니다. UDF의 반환 값은 단지 단일 스칼라일 수 있습니다. U-SQL UDF는 다른 C# 스칼라 함수와 같이 U-SQL 기본 스크립트에서 호출할 수 있습니다.
@@ -248,9 +241,7 @@ namespace USQL_Programmability
 
             return "Q" + FiscalQuarter.ToString() + ":" + FiscalMonth.ToString();
         }
-
     }
-
 }
 ```
 
@@ -555,7 +546,7 @@ public class MyTypeFormatter : IFormatter<MyType>
 
 일반 C# 형식으로 U-SQL UDT 정의는 +/==/!= 등의 연산자에 대한 재정의를 포함할 수 있습니다. 정적 메서드도 포함할 수 있습니다. 예를 들어 U-SQL MIN 집계 함수에 이 UDT를 매개 변수로 사용하는 경우 < 연산자 override를 정의해야 합니다.
 
-이 가이드의 앞부분에서 Qn:Pn(Q1:P10) 형식의 특정 날짜로 회계 기간을 식별하는 예제를 보여 주었습니다. 다음 예제에서는 회계 기간 값에 대한 사용자 지정 형식을 정의하는 방법을 보여 줍니다.
+이 가이드의 앞부분에서 `Qn:Pn (Q1:P10)` 형식의 특정 날짜를 회계 기간으로 식별하는 예제를 보여 주었습니다. 다음 예제에서는 회계 기간 값에 대한 사용자 지정 형식을 정의하는 방법을 보여 줍니다.
 
 다음은 사용자 지정 UDT 및 IFormatter 인터페이스가 포함된 코드 숨김 섹션의 예제입니다.
 
@@ -658,9 +649,9 @@ var result = new FiscalPeriod(binaryReader.ReadInt16(), binaryReader.ReadInt16()
 }
 ```
 
-정의된 형식에는 두 개의 숫자(Quarter 및 Month)가 포함되어 있습니다. 여기서 ==/!=/>/< 연산자 및 ToString() 정적 메서드가 정의됩니다.
+정의된 형식에는 두 개의 숫자(Quarter 및 Month)가 포함되어 있습니다. 여기서는 `==/!=/>/<` 연산자 및 `ToString()` 정적 메서드가 정의됩니다.
 
-앞에서 설명한 대로 UDT는 SELECT 식에서 사용할 수 있지만, 사용자 지정 직렬화 없이는 OUTPUTTER/EXTRACTOR에서 사용할 수 없습니다. ToString()을 사용하여 문자열로 직렬화하거나 사용자 지정 OUTPUTTER/EXTRACTOR와 함께 사용해야 합니다.
+앞에서 설명한 대로 UDT는 SELECT 식에서 사용할 수 있지만, 사용자 지정 직렬화 없이는 OUTPUTTER/EXTRACTOR에서 사용할 수 없습니다. `ToString()`을 사용하여 문자열로 직렬화하거나 사용자 지정 OUTPUTTER/EXTRACTOR와 함께 사용해야 합니다.
 
 이제 UDT 사용법에 대해 살펴보겠습니다. 코드 숨김 섹션에서 GetFiscalPeriod 함수를 다음과 같이 변경했습니다.
 
@@ -912,7 +903,7 @@ UDAGG(사용자 정의 집계)는 U-SQL에 제공되지 않는 집계 관련 함
 
 UDAGG(사용자 정의 집계) 기본 클래스 정의는 다음과 같습니다.
 
-```c#
+```csharp
     [SqlUserDefinedAggregate]
     public abstract class IAggregate<T1, T2, TResult> : IAggregate
     {
@@ -961,7 +952,7 @@ public abstract class IAggregate<T1, T2, TResult> : IAggregate
 * T2: Accumulate의 두 번째 매개 변수
 * TResult: Terminate의 반환 형식
 
-예:
+예: 
 
 ```
 public class GuidAggregate : IAggregate<string, int, int>
@@ -1373,7 +1364,7 @@ public class HTMLOutputter : IOutputter
     }
 
     // The Close method is used to write the footer to the file. It's executed only once, after all rows
-    public override void Close().
+    public override void Close()
     {
     //Reference to IO.Stream object - g_writer
     StreamWriter streamWriter = new StreamWriter(g_writer, this.encoding);
@@ -1489,7 +1480,7 @@ OUTPUT @rs0 TO @output_file USING new USQL_Programmability.HTMLOutputter(isHeade
 
 앞의 예에서 설명했듯이, 기본 스크립트로 개체 인스턴스를 작성하지 않기 위해 함수 래퍼를 만들 수 있습니다.
 
-```c#
+```csharp
         // Define the factory classes
         public static class Factory
         {
@@ -1805,7 +1796,7 @@ CROSS APPLY new MyNameSpace.MyApplier (parameter: “value”) AS alias([columns
 
 또는 래퍼 팩터리 메서드 호출을 통해 호출될 수 있습니다.
 
-```c#
+```csharp
     CROSS APPLY MyNameSpace.MyApplier (parameter: “value”) AS alias([columns types]…);
 ```
 
@@ -1880,7 +1871,7 @@ CombinerMode 열거형은 다음 값을 포함할 수 있습니다.
 
 주요 프로그래밍 개체:
 
-```c#
+```csharp
     public override IEnumerable<IRow> Combine(IRowset left, IRowset right,
         IUpdatableRow output
 ```
@@ -2123,7 +2114,7 @@ public class EmptyUserReducer : IReducer
 **SqlUserDefinedReducer**는 UDR(사용자 정의 리듀서) 정의의 선택적 특성이며, IsRecursive 속성을 정의하는 데 사용됩니다.
 
 * bool IsRecursive    
-* **true**는 idempotent 유형의 리듀서인지 여부를 나타냅니다.
+* **true** = 이 리듀서가 결합적이고 교환 가능한지 여부를 나타냅니다.
 
 주 프로그래밍 개체는 **input** 및 **output**입니다. input 개체는 입력 행을 열거하는 데 사용됩니다. Output 개체는 감소 작업의 결과로 출력 행을 설정하는 데 사용됩니다.
 
@@ -2220,4 +2211,3 @@ OUTPUT @rs2
     TO @output_file 
     USING Outputters.Text();
 ```
-

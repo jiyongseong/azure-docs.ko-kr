@@ -3,7 +3,7 @@ title: "Azure Application Insights의 대시보드 및 탐색 | Microsoft Docs"
 description: "키 APM 차트 및 쿼리의 뷰를 만듭니다."
 services: application-insights
 documentationcenter: 
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 39b0701b-2fec-4683-842a-8a19424f67bd
 ms.service: application-insights
@@ -12,14 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: multiple
 ms.topic: article
 ms.date: 03/14/2017
-ms.author: cfreeman
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0c4554d6289fb0050998765485d965d1fbc6ab3e
-ms.openlocfilehash: e6efa8c05c51b0438912738c3c5fcad4bc12b8f4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/13/2017
-
-
+ms.author: mbullwin
+ms.openlocfilehash: 5ec0412dc91a7e5c28ee9ee820df9584ffa80cd8
+ms.sourcegitcommit: c765cbd9c379ed00f1e2394374efa8e1915321b9
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="navigation-and-dashboards-in-the-application-insights-portal"></a>Application Insights 포털에서 탐색 및 대시보드
 [프로젝트에서 Application Insights를 설정](app-insights-overview.md)하면 앱의 성능 및 사용에 대한 원격 분석 데이터가 [Azure Portal](https://portal.azure.com)에서 프로젝트의 Application Insights 리소스에 나타납니다.
@@ -64,7 +62,7 @@ ms.lasthandoff: 04/13/2017
 * 시간 범위 24시간 초과: (시간 범위)/60
 
 ### <a name="pin-any-query-in-analytics"></a>분석에서 모든 쿼리를 고정
-[공유](#share-dashboards-with-your-team) 대시보드에 [분석 차트를 고정](app-insights-analytics-using.md#pin-to-dashboard)할 수도 있습니다. 그러면 임의 쿼리의 차트를 표준 메트릭과 함께 추가할 수 있습니다. (이 기능에 대한 요금이 청구됩니다.)
+[공유](#share-dashboards-with-your-team) 대시보드에 [분석 차트를 고정](app-insights-analytics-using.md#pin-to-dashboard)할 수도 있습니다. 그러면 임의 쿼리의 차트를 표준 메트릭과 함께 추가할 수 있습니다. 
 
 결과는 1시간마다 자동으로 다시 계산됩니다. 즉시 다시 계산하려면 새로 고침 아이콘을 클릭합니다. 브라우저 새로 고침은 다시 계산하지 않습니다.
 
@@ -100,6 +98,9 @@ ms.lasthandoff: 04/13/2017
 
 [역할 및 액세스 제어](app-insights-resources-roles-access-control.md)에 대해 알아보세요.
 
+## <a name="create-dashboards-programmatically"></a>대시보드를 프로그래밍 방식으로 만들기
+[Azure Resource Manager](https://docs.microsoft.com/azure/azure-portal/azure-portal-dashboards-create-programmatically) 및 간단한 JSON 편집기를 사용하여 대시보드 생성을 자동화할 수 있습니다.
+
 ## <a name="app-navigation"></a>앱 탐색
 개요 블레이드는 앱에 대한 자세한 정보를 제공하는 게이트웨이입니다.
 
@@ -116,7 +117,6 @@ ms.lasthandoff: 04/13/2017
 
 ### <a name="essentials-tab"></a>Essentials 탭
 * [계측 키](app-insights-create-new-resource.md#copy-the-instrumentation-key) - 이 앱 리소스를 식별합니다.
-* 가격 - 기능을 사용할 수 있게 하고 볼륨 한도를 설정합니다.
 
 ### <a name="app-navigation-bar"></a>앱 탐색 모음
 ![왼쪽 탐색 모음](./media/app-insights-dashboards/app-left-nav-bar.png)
@@ -152,7 +152,7 @@ ms.lasthandoff: 04/13/2017
 설정
 
 * [**잠금**](../azure-resource-manager/resource-group-lock-resources.md) - Azure 리소스를 잠급니다.
-* [**스크립트 자동화**](app-insights-powershell.md) - Azure 리소스의 정의를 내보내서 새로운 리소스의 템플릿으로 사용합니다.
+* [**스크립트 Automation**](app-insights-powershell.md) - Azure 리소스의 정의를 내보내서 새로운 리소스의 템플릿으로 사용합니다.
 
 
 ## <a name="video"></a>비디오
@@ -166,4 +166,3 @@ ms.lasthandoff: 04/13/2017
 | [메트릭 탐색기](app-insights-metrics-explorer.md)<br/>필터 및 세그먼트 메트릭 |![검색 예제](./media/app-insights-dashboards/64.png) |
 | [진단 검색](app-insights-diagnostic-search.md)<br/>이벤트 찾기 및 검사, 관련 이벤트, 버그 만들기 |![검색 예제](./media/app-insights-dashboards/61.png) |
 | [분석](app-insights-analytics.md)<br/>강력한 쿼리 언어 |![검색 예제](./media/app-insights-dashboards/63.png) |
-

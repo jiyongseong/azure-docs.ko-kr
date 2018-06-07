@@ -1,12 +1,12 @@
 ---
-title: "Azure CLI(az.py)를 사용하여 IoT Hub 만들기 | Microsoft Docs"
-description: "플랫폼 간 Azure CLI 2.0(az.py)을 사용하여 Azure IoT hub를 만드는 방법"
+title: Azure CLI(az.py)를 사용하여 IoT Hub 만들기 | Microsoft Docs
+description: 플랫폼 간 Azure CLI 2.0(az.py)을 사용하여 Azure IoT hub를 만드는 방법
 services: iot-hub
 documentationcenter: .net
 author: dominicbetts
 manager: timlt
-editor: 
-ms.assetid: 
+editor: ''
+ms.assetid: ''
 ms.service: iot-hub
 ms.devlang: azurecli
 ms.topic: article
@@ -14,12 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/16/2017
 ms.author: dobett
+ms.openlocfilehash: c89ecc31754d355d6469d54dcd45e1cc2ef106f0
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 161089159999a4a63a39b059e69a08b7a9297445
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="create-an-iot-hub-using-the-azure-cli-20"></a>Azure CLI 2.0을 사용하여 IoT Hub 만들기
 
@@ -36,7 +35,7 @@ Azure CLI 2.0(az.py)을 사용하여 Azure IoT Hub를 프로그래밍 방식으�
 
 이 자습서를 완료하려면 다음이 필요합니다.
 
-* 활성 Azure 계정. 계정이 없는 경우 몇 분 내에 [계정][lnk-free-trial]을 만들 수 있습니다.
+* 활성 Azure 계정. 계정이 없는 경우 몇 분 내에 [무료 계정][lnk-free-trial]을 만들 수 있습니다.
 * [Azure CLI 2.0][lnk-CLI-install].
 
 ## <a name="sign-in-and-set-your-azure-account"></a>Azure 계정 로그인 및 설정
@@ -90,7 +89,6 @@ Azure CLI를 사용하여 리소스 그룹을 만든 다음 IoT Hub를 추가합
 > [!NOTE]
 > 이전 명령은 청구 대상인 S1 가격 책정 계층에 IoT Hub를 만듭니다. 자세한 내용은 [Azure IoT Hub 가격 책정][lnk-iot-pricing]을 참조하세요.
 >
->
 
 ## <a name="remove-an-iot-hub"></a>IoT Hub 제거
 
@@ -129,4 +127,3 @@ IoT Hub의 기능을 추가로 탐색하려면 다음을 참조하세요.
 [lnk-iot-pricing]: https://azure.microsoft.com/pricing/details/iot-hub/
 [lnk-devguide]: iot-hub-devguide.md
 [lnk-portal]: iot-hub-create-through-portal.md 
-

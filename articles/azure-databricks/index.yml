@@ -1,0 +1,66 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Azure Databricks 설명서
+metadata:
+  title: Azure Databricks 설명서 - 자습서 | Microsoft Docs
+  description: 빠른 시작 및 여기에서 제공된 다른 링크를 사용하여 Azure Databricks를 사용하는 방법에 대해 알아봅니다. Azure Databricks는 Microsoft Azure Cloud Services 플랫폼에 대해 최적화된 Apache Spark 기반 분석 플랫폼입니다.
+  services: azure-databricks
+  author: nitinme
+  manager: cgronlun
+  ms.service: azure-databricks
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 03/19/2018
+  ms.author: nitinme
+  ms.openlocfilehash: 2c0bbbe6d9799258b983723c5d6980754a9908ae
+  ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 03/23/2018
+abstract:
+  description: 빠른 시작 및 여기에서 제공된 다른 링크를 사용하여 Azure Databricks를 사용하는 방법에 대해 알아봅니다. Azure Databricks는 Microsoft Azure Cloud Services 플랫폼에 대해 최적화된 Apache Spark 기반 분석 플랫폼입니다. Apache Spark의 기반으로 설계된 Databricks는 Azure와 통합되어 원클릭 설정, 간소화된 워크플로 및 데이터 과학자, 데이터 엔지니어, 비즈니스 분석가가 공동 작업할 수 있도록 하는 대화형 작업 영역을 제공합니다.
+  aside:
+    image:
+      alt: 
+      height: 110
+      src: media/index/video.png
+      width: 250
+    title: Azure Databricks 소개(3:38)
+    href: https://azure.microsoft.com/resources/videos/connect-2017-introduction-to-azure-databricks/
+    width: 250
+sections:
+- title: 5분 빠른 시작
+  items:
+  - type: paragraph
+    text: Azure Databricks 작업 영역인 Spark 클러스터를 만들고 다음을 사용하여 작업을 실행하는 방법에 대해 알아봅니다.
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: /azure/azure-databricks/media/index/portal.svg
+      text: Azure portal
+      href: /azure/azure-databricks/quickstart-create-databricks-workspace-portal
+    - image:
+        src: /azure/azure-databricks/media/index/logo_azure_resource_manager.svg
+      text: Resource Manager 템플릿
+      href: /azure/azure-databricks/quickstart-create-databricks-workspace-resource-manager-template
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: Azure Databricks를 사용하는 방법을 알아봅니다.
+  - type: list
+    style: ordered
+    items:
+    - html: <a href="/azure/azure-databricks/databricks-extract-load-sql-data-warehouse">데이터 추출, 변환 및 로드</a>
+    - html: <a href="/azure/azure-databricks/databricks-stream-from-eventhubs">Event Hubs에서 데이터 스트리밍</a>
+    - html: <a href="/azure/azure-databricks/databricks-sentiment-analysis-cognitive-services">Cognitive Services를 사용한 감정 분석</a>
+    - html: <a href="https://docs.azuredatabricks.net/spark/latest/structured-streaming/kafka.html" target="_blank">HDInsight Kafka에서 데이터 스트리밍</a>
+- title: 참고 자료
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: REST (영문)
+      html: <p><a href="/rest/api/databricks">REST API</a></p>

@@ -1,27 +1,24 @@
 ---
-title: "PowerShell: Data Lake Store를 추가 기능 저장소로 사용하는 Azure HDInsight 클러스터 | Microsoft Docs"
+title: 'PowerShell: Data Lake Store를 추가 기능 저장소로 사용하는 Azure HDInsight 클러스터 | Microsoft Docs'
 services: data-lake-store,hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: nitinme
 manager: jhubbard
 editor: cgronlun
 ms.assetid: 164ada5a-222e-4be2-bd32-e51dbe993bc0
 ms.service: data-lake-store
 ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 06/08/2017
+ms.topic: conceptual
+ms.date: 01/30/2018
 ms.author: nitinme
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 245ce9261332a3d36a36968f7c9dbc4611a019b2
-ms.openlocfilehash: 7a7069adab5742a9dae2833c13a1db57337a41a0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/09/2017
-
-
+ms.openlocfilehash: 4c08dac95a2d2b52f1a1d28f6933b94ad4db10b7
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="use-azure-powershell-to-create-an-hdinsight-cluster-with-data-lake-store-as-additional-storage"></a>Azure PowerShell을 사용하여 Data Lake Store를 (추가 저장소로) 사용하여 HDInsight 클러스터 만들기
+
 > [!div class="op_single_selector"]
 > * [포털 사용](data-lake-store-hdinsight-hadoop-use-portal.md)
 > * [PowerShell 사용(기본 저장소의 경우)](data-lake-store-hdinsight-hadoop-use-powershell-for-default-storage.md)
@@ -54,7 +51,7 @@ PowerShell을 사용하여 데이터 레이크 저장소와 함께 작동하도�
 ## <a name="prerequisites"></a>필수 조건
 이 자습서를 시작하기 전에 다음이 있어야 합니다.
 
-* **Azure 구독**. [Azure 무료 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
+* **Azure 구독**. [Azure 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
 * **Azure PowerShell 1.0 이상**. [Azure PowerShell 설치 및 구성 방법](/powershell/azure/overview)을 참조하세요.
 * **Windows SDK**. [여기](https://dev.windows.com/en-us/downloads)에서 설치할 수 있습니다. 이를 사용하여 보안 인증서를 만듭니다.
 * **Azure Active Directory 서비스 사용자**. 이 자습서의 단계에서는 Azure AD에서 서비스 사용자를 만드는 방법에 대한 지침을 제공합니다. 그러나 서비스 사용자를 만들려면 Azure AD 관리자여야 합니다. Azure AD 관리자인 경우 이 필수 조건을 건너뛰고 자습서를 진행할 수 있습니다.
@@ -67,7 +64,7 @@ PowerShell을 사용하여 데이터 레이크 저장소와 함께 작동하도�
 1. 바탕 화면에서 새 Azure PowerShell 창을 열고 다음 코드 조각을 입력합니다. 로그인하라는 메시지가 표시되면 구독 관리자/소유자 중 하나로 로그인해야 합니다.
 
         # Log in to your Azure account
-        Login-AzureRmAccount
+        Connect-AzureRmAccount
 
         # List all the subscriptions associated to your account
         Get-AzureRmSubscription
@@ -124,7 +121,8 @@ PowerShell을 사용하여 데이터 레이크 저장소와 함께 작동하도�
 
 
 ## <a name="set-up-authentication-for-role-based-access-to-data-lake-store"></a>데이터 레이크 저장소에 대한 역할 기반 액세스를 위한 인증 설정
-모든 Azure 구독은 Azure Active Directory와 연결됩니다. Azure 클래식 포털 또는 Azure 리소스 관리자 API를 사용하여 구독 리소스에 액세스하는 사용자와 서비스는 먼저 해당 Azure Active Directory에 인증해야 합니다. Azure 리소스에 대한 적절한 역할을 할당하여 Azure 구독과 서비스에 액세스 권한을 부여합니다.  서비스의 경우 서비스 주체는 Azure Active Directory(AAD)의 서비스를 식별합니다. 이 섹션에서는 서비스 주체를 만들고 Azure PowerShell을 통해 역할을 할당하여 HDInsight, Azure 리소스(이전에 만든 Azure 데이터 레이크 저장소 계정)에 대한 액세스와 같은 응용 프로그램 서비스를 부여하는 방법을 보여 줍니다.
+
+모든 Azure 구독은 Azure Active Directory와 연결됩니다. Azure Portal 또는 Azure Resource Manager API를 사용하여 구독 리소스에 액세스하는 사용자와 서비스는 먼저 해당 Azure Active Directory에 인증해야 합니다. Azure 리소스에 대한 적절한 역할을 할당하여 Azure 구독과 서비스에 액세스 권한을 부여합니다.  서비스의 경우 서비스 주체는 Azure Active Directory(AAD)의 서비스를 식별합니다. 이 섹션에서는 서비스 주체를 만들고 Azure PowerShell을 통해 역할을 할당하여 HDInsight, Azure 리소스(이전에 만든 Azure 데이터 레이크 저장소 계정)에 대한 액세스와 같은 응용 프로그램 서비스를 부여하는 방법을 보여 줍니다.
 
 Azure 데이터 레이크에 대한 Active Directory 인증을 설정하려면 다음 작업을 수행해야 합니다.
 
@@ -132,6 +130,7 @@ Azure 데이터 레이크에 대한 Active Directory 인증을 설정하려면 �
 * Azure Active Directory 및 서비스 주체의 응용 프로그램 만들기
 
 ### <a name="create-a-self-signed-certificate"></a>자체 서명된 인증서 만들기
+
 이 섹션의 단계를 진행하기 전에 [Windows SDK](https://dev.windows.com/en-us/downloads) 가 설치되어 있는지 확인합니다. 또한 인증서가 만들어지는 **C:\mycertdir**과 같은 디렉터리가 만들어져 있어야 합니다.
 
 1. PowerShell 창에서 Windows SDK를 설치한 위치로 이동(일반적으로 `C:\Program Files (x86)\Windows Kits\10\bin\x86`)하고 [MakeCert][makecert] 유틸리티를 사용하여 자체 서명된 인증서와 개인 키를 만듭니다. 다음 명령을 사용합니다.
@@ -149,13 +148,14 @@ Azure 데이터 레이크에 대한 Active Directory 인증을 설정하려면 �
     메시지가 표시되면 이전에 지정한 개인 키 암호를 입력합니다. **-po** 매개 변수에 대해 지정한 값은 .pfx 파일에 연관된 암호입니다. 명령을 성공적으로 완료한 후 지정한 인증서 디렉터리에서 CertFile.pfx도 또한 확인해야 합니다.
 
 ### <a name="create-an-azure-active-directory-and-a-service-principal"></a>Azure Active Directory 및 서비스 주체 만들기
+
 이 섹션에서는 Azure Active Directory 응용 프로그램용 서비스 주체를 만들고, 서비스 주체에 역할을 할당하고, 인증서를 제공하여 서비스 주체로 인증하는 단계를 수행합니다. 다음 명령을 실행하여 Azure Active Directory에서 응용 프로그램을 만듭니다.
 
 1. PowerShell 콘솔 창에 다음 cmdlet을 붙여 넣습니다. **-DisplayName** 속성에 대해 지정한 값이 고유한지 확인합니다. 또한 **-HomePage** 및 **-IdentiferUris**에 대한 값은 자리 표시자이며 확인되지 않습니다.
 
         $certificateFilePath = "$certificateFileDir\CertFile.pfx"
 
-        $password = Read-Host –Prompt "Enter the password" # This is the password you specified for the .pfx file
+        $password = Read-Host -Prompt "Enter the password" # This is the password you specified for the .pfx file
 
         $certificatePFX = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2($certificateFilePath, $password)
 
@@ -266,8 +266,8 @@ HDInsight 클러스터를 구성한 후에 클러스터에서 테스트 작업�
 `hdfs dfs -put` 명령을 사용하여 일부 파일을 데이터 레이크 저장소에 업로드한 다음 `hdfs dfs -ls`을(를) 사용하여 파일이 성공적으로 업로드되었는지 여부를 확인할 수도 있습니다.
 
 ## <a name="see-also"></a>참고 항목
+* [Azure HDInsight 클러스터에 Data Lake Store 사용](../hdinsight/hdinsight-hadoop-use-data-lake-store.md)
 * [포털: HDInsight 클러스터를 만들어 데이터 레이크 저장소 사용](data-lake-store-hdinsight-hadoop-use-portal.md)
 
 [makecert]: https://msdn.microsoft.com/library/windows/desktop/ff548309(v=vs.85).aspx
 [pvk2pfx]: https://msdn.microsoft.com/library/windows/desktop/ff550672(v=vs.85).aspx
-

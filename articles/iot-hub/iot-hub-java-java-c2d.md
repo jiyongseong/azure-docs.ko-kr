@@ -1,11 +1,11 @@
 ---
-title: "Azure IoT Hub(Java)를 사용한 클라우드-장치 메시지 | Microsoft Docs"
-description: "Java용 Azure IoT SDK를 사용하여 Azure IoT Hub에서 장치로 클라우드-장치 메시지를 보내는 방법입니다. 클라우드-장치 메시지를 받는 시뮬레이트된 장치 앱을 수정하고 클라우드-장치 메시지를 보내는 백 엔드 앱을 수정합니다."
+title: Azure IoT Hub(Java)를 사용한 클라우드-장치 메시지 | Microsoft Docs
+description: Java용 Azure IoT SDK를 사용하여 Azure IoT Hub에서 장치로 클라우드-장치 메시지를 보내는 방법입니다. 클라우드-장치 메시지를 받는 시뮬레이트된 장치 앱을 수정하고 클라우드-장치 메시지를 보내는 백 엔드 앱을 수정합니다.
 services: iot-hub
 documentationcenter: java
 author: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 7f785ea8-e7c2-40c5-87ef-96525e9b9e1e
 ms.service: iot-hub
 ms.devlang: java
@@ -14,18 +14,18 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/28/2017
 ms.author: dobett
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: a6cfd7d3f1dd41968004ae93b1d6aa9977e6f55a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
-
+ms.openlocfilehash: 4c748f01a83c7f569953f7c7f2fc5631ca0efd17
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="send-cloud-to-device-messages-with-iot-hub-java"></a>IoT Hub(Java)를 사용하여 클라우드-장치 메시지 보내기
 [!INCLUDE [iot-hub-selector-c2d](../../includes/iot-hub-selector-c2d.md)]
 
 Azure IoT Hub는 수백만 개의 장치와 솔루션 백 엔드 간에 안정적이고 안전한 양방향 통신이 가능하도록 지원하는 완전히 관리되는 서비스입니다. [IoT Hub 시작하기] 자습서에서는 IoT Hub를 만들고 그 안에 장치 ID를 프로비전하고 장치-클라우드 메시지를 보내는 시뮬레이션된 장치 앱을 코딩하는 방법을 보여 줍니다.
+
+[!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-whole.md)]
 
 이 자습서는 [IoT Hub 시작하기]를 토대로 작성되었습니다. 이 항목에서는 다음 방법을 설명합니다.
 
@@ -79,7 +79,7 @@ Azure IoT Hub는 수백만 개의 장치와 솔루션 백 엔드 간에 안정�
     ```
 
     > [!NOTE]
-    > 전송으로 MQTT 또는 AMQP 대신 HTTP을 사용하는 경우 **DeviceClient** 인스턴스는 IoT Hub의 메시지를 자주(25분 미만 간격으로) 확인합니다. MQTT, AMQP 및 HTTP 지원과 IoT Hub 제한 간의 차이점에 대한 자세한 내용은 [IoT Hub 개발자 가이드][IoT Hub developer guide - C2D]를 참조하세요.
+    > 전송으로 MQTT 또는 AMQP 대신 HTTPS를 사용하는 경우 **DeviceClient** 인스턴스는 IoT Hub의 메시지를 자주(25분 미만 간격으로) 확인합니다. MQTT, AMQP 및 HTTPS 지원과 IoT Hub 제한 간의 차이점에 대한 자세한 내용은 [IoT Hub 개발자 가이드][IoT Hub developer guide - C2D]를 참조하세요.
 
 4. Maven을 사용하여 **simulated-device** 앱을 빌드하려면 simulated-device 폴더의 명령 프롬프트에서 다음 명령을 실행합니다.
 
@@ -105,7 +105,7 @@ Azure IoT Hub는 수백만 개의 장치와 솔루션 백 엔드 간에 안정�
     <dependency>
       <groupId>com.microsoft.azure.sdk.iot</groupId>
       <artifactId>iot-service-client</artifactId>
-      <version>1.5.22</version>
+      <version>1.7.23</version>
     </dependency>
     ```
 
@@ -124,7 +124,7 @@ Azure IoT Hub는 수백만 개의 장치와 솔루션 백 엔드 간에 안정�
     import java.net.URISyntaxException;
     ```
 
-7. **App** 클래스에 다음 클래스 수준 변수를 추가하고 **{yourhubconnectionstring}** 및 **{yourdeviceid}**를 앞에서 기록해둔 값으로 바꿉니다.
+7. **App** 클래스에 다음 클래스 수준 변수를 추가하고 **{yourhubconnectionstring}** 및 **{yourdeviceid}** 를 앞에서 기록해둔 값으로 바꿉니다.
 
     ```java
     private static final String connectionString = "{yourhubconnectionstring}";
@@ -198,7 +198,7 @@ Azure IoT Hub는 수백만 개의 장치와 솔루션 백 엔드 간에 안정�
 
 이 자습서에서 클라우드-장치 메시지를 보내고 받는 방법을 알아보았습니다. 
 
-IoT Hub를 사용하는 전체 종단 간 솔루션의 예를 보려면 [Azure IoT Suite]를 참조하세요.
+IoT Hub를 사용하는 전체 종단 간 솔루션의 예를 보려면 [Azure IoT 원격 모니터링 솔루션 가속기]를 참조하세요.
 
 IoT Hub를 사용하여 솔루션을 개발하는 방법에 대한 자세한 내용은 [IoT Hub 개발자 가이드]를 참조하세요.
 
@@ -210,10 +210,10 @@ IoT Hub를 사용하여 솔루션을 개발하는 방법에 대한 자세한 내
 [IoT Hub 시작하기]: iot-hub-java-java-getstarted.md
 [IoT Hub developer guide - C2D]: iot-hub-devguide-messaging.md
 [IoT Hub 개발자 가이드]: iot-hub-devguide.md
-[Azure IoT 개발자 센터]: http://www.azure.com/develop/iot
+[Azure IoT 개발자 센터]: http://azure.microsoft.com/develop/iot
 [lnk-free-trial]: http://azure.microsoft.com/pricing/free-trial/
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdk-java
 [일시적인 오류 처리]: https://msdn.microsoft.com/library/hh680901(v=pandp.50).aspx
 [Azure Portal]: https://portal.azure.com
-[Azure IoT Suite]: https://azure.microsoft.com/documentation/suites/iot-suite/
+[Azure IoT 원격 모니터링 솔루션 가속기]: https://azure.microsoft.com/documentation/suites/iot-suite/
 [lnk-maven-service-search]: http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22iot-service-client%22%20g%3A%22com.microsoft.azure.sdk.iot%22

@@ -1,33 +1,31 @@
 ---
 title: "Azure Time Series Insights 환경의 크기를 조정하는 방법 | Microsoft Docs"
-description: "이 자습서에서는 Azure Time Series Insights 환경의 크기를 조정하는 방법을 다룹니다."
-keywords: 
+description: "이 문서에서는 Azure Time Series Insights 환경의 크기를 조정하는 방법을 설명합니다. Azure Portal을 사용하여 가격 책정 SKU 내에서 용량을 추가하거나 뺍니다."
 services: time-series-insights
-documentationcenter: 
-author: sandshadow
-manager: almineev
-editor: cgronlun
-ms.assetid: 
 ms.service: time-series-insights
-ms.devlang: na
-ms.topic: how-to-article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 04/19/2017
+author: sandshadow
 ms.author: edett
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 7f8b63c22a3f5a6916264acd22a80649ac7cd12f
-ms.openlocfilehash: 8f6c66ea2173c98179ec899d6626c2ab6f7ec4b6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/01/2017
-
+manager: jhubbard
+editor: MicrosoftDocs/tsidocs
+ms.reviewer: v-mamcge, jasonh, kfile, anshan
+ms.devlang: csharp
+ms.workload: big-data
+ms.topic: article
+ms.date: 11/15/2017
+ms.openlocfilehash: edcd9561778998c4df09cc5014f8b8ba81c0e369
+ms.sourcegitcommit: 7d107bb9768b7f32ec5d93ae6ede40899cbaa894
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/16/2017
 ---
 # <a name="how-to-scale-your-time-series-insights-environment"></a>Time Series Insights 환경의 크기를 조정하는 방법
 
-이 자습서에서는 Time Series Insights 환경의 크기를 조정하는 방법을 다룹니다.
+이 문서에서는 Azure Portal을 사용하여 Time Series Insights 환경의 환경 용량을 변경하는 방법에 대해 설명합니다. 용량은 선택한 SKU와 관련된 입력 속도, 저장 용량 및 비용에 적용되는 승수입니다. 
 
-> [!NOTE]
-> SKU 형식 전반에서의 강화는 허용되지 않습니다. S1 SKU를 사용한 환경은 S2 환경으로 변환할 수 없습니다.
+Azure Portal을 사용하여 지정된 가격 책정 SKU 내에서 용량을 늘리거나 줄일 수 있습니다. 
+
+그러나 가격 책정 계층 SKU의 변경은 허용되지 않습니다. 예를 들어, S1 가격 책정 SKU가 있는 환경은 S2로 변환될 수 없으며 그 반대의 경우도 마찬가지입니다. 
+
 
 ## <a name="s1-sku-ingress-rates-and-capacities"></a>S1 SKU 수신 속도 및 용량
 
@@ -45,12 +43,21 @@ ms.lasthandoff: 05/01/2017
 
 용량은 연속해서 크기가 조정되므로 용량 2의 S1 SKU는 일일 2GB(2백만) 이벤트 수신 속도 및 매달 60GB(6천만 이벤트)를 지원합니다.
 
-## <a name="changing-the-capacity-of-your-environment"></a>사용자 환경의 용량 변경
+## <a name="change-the-capacity-of-your-environment"></a>사용자 환경의 용량 변경
+1. Azure Portal에서 Time Series Insights 환경을 찾아 선택합니다. 
 
-1. Azure Portal에서 용량을 변경할 환경을 선택합니다.
-1. 설정에서 구성을 클릭합니다.
-1. 용량 슬라이더를 사용하여 수신 속도 및 저장소 용량에 대한 요구 사항을 충족하는 용량을 선택합니다.
+2. Time Series Insights 환경에 대한 메뉴에서 **구성**을 선택합니다.
+
+   ![configure.png](media/scale-your-environment/configure.png)
+
+3. **용량** 슬라이더를 조정하여 수신 속도 및 저장소 용량에 대한 요구 사항을 충족하는 용량을 선택합니다. **수신 속도**, **저장소 용량** 및 **예상 비용** 업데이트가 변경으로 인한 영향을 동적으로 보여줍니다. 
+
+   ![슬라이더](media/scale-your-environment/slider.png)
+
+   또는 슬라이더의 오른쪽에 있는 텍스트 상자에 용량 승수를 입력할 수 있습니다. 
+
+4. **저장**을 선택하여 환경을 확장할 수 있습니다. 진행률 표시기에는 변경 내용이 커밋될 때까지 일시적으로 표시됩니다. 
 
 ## <a name="next-steps"></a>다음 단계
-
-* 새 용량이 제한을 방지하기에 충분한지 확인합니다. 자세한 내용은 [여기](time-series-insights-diagnose-and-solve-problems.md)에서 *사용자 환경이 제한될 수 있습니다* 섹션을 참조하세요.
+> [!div class="nextstepaction"]
+> [새 용량이 제한을 방지하기에 충분한지 확인합니다](time-series-insights-diagnose-and-solve-problems.md).

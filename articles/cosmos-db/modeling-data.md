@@ -1,12 +1,11 @@
 ---
-title: "NoSQL 데이터베이스의 문서 데이터 모델링 | Microsoft Docs"
-description: "NoSQL 데이터베이스의 데이터 모델링에 대해 알아봅니다."
-keywords: "데이터 모델링"
+title: NoSQL 데이터베이스의 문서 데이터 모델링 | Microsoft Docs
+description: NoSQL 데이터베이스의 데이터 모델링에 대해 알아봅니다.
+keywords: 데이터 모델링
 services: cosmos-db
-author: arramac
-manager: jhubbard
-editor: mimig1
-documentationcenter: 
+author: SnehaGunda
+manager: kfile
+documentationcenter: ''
 ms.assetid: 69521eb9-590b-403c-9b36-98253a4c88b5
 ms.service: cosmos-db
 ms.workload: data-services
@@ -14,14 +13,12 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 05/29/2016
-ms.author: arramac
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a643f139be40b9b11f865d528622bafbe7dec939
-ms.openlocfilehash: 16c387fe574243544cf54cf283c7713ddcaa1942
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/31/2017
-
-
+ms.author: sngun
+ms.openlocfilehash: 8704c8b9278406b56475d30d149e33055278ef70
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="modeling-document-data-for-nosql-databases"></a>NoSQL 데이터베이스의 문서 데이터 모델링
 Azure Cosmos DB와 같은 스키마가 없는 데이터베이스에서는 데이터 모델을 매우 쉽게 변경할 수 있지만, 데이터를 고려할 어느 정도의 시간이 필요합니다. 
@@ -41,7 +38,7 @@ Azure Cosmos DB와 같은 문서 저장소에서 데이터 모델링을 시작�
 
 자세한 설명을 시작하기 전에 먼저 이전 단계로 돌아가서 관계형 데이터베이스에서 모델링을 수행하는 방법에 대해 살펴보겠습니다. 다음 예제에서는 관계형 데이터베이스에서 사용자가 저장되는 방법을 보여 줍니다. 
 
-![관계형 데이터베이스 모델](./media/documentdb-modeling-data/relational-data-model.png)
+![관계형 데이터베이스 모델](./media/sql-api-modeling-data/relational-data-model.png)
 
 관계형 데이터베이스를 사용할 때 우리는 정규화가 중요하다고 배웠습니다.
 
@@ -73,7 +70,7 @@ Azure Cosmos DB와 같은 문서 저장소에서 데이터 모델링을 시작�
             }
         ],
         "contactDetails": [
-            {"email: "thomas@andersen.com"},
+            {"email": "thomas@andersen.com"},
             {"phone": "+1 555 555-5555", "extension": 5555}
         ] 
     }
@@ -292,7 +289,7 @@ Azure Cosmos DB와 같은 문서 저장소에서 데이터 모델링을 시작�
 ### <a name="how-do-i-model-manymany-relationships"></a>다대다 관계는 어떻게 모델링할 수 있을까요?
 관계형 데이터베이스에서 *다대다* 관계는 다른 테이블의 레코드를 단순히 하나로 조인하는 조인 테이블을 사용해서 모델링되는 경우가 많습니다. 
 
-![테이블 조인](./media/documentdb-modeling-data/join-table.png)
+![테이블 조인](./media/sql-api-modeling-data/join-table.png)
 
 여기에서도 문서를 사용해서 동일한 방식을 따르고 다음과 비슷하게 보이는 데이터 모델을 만들고 싶을 수도 있습니다.
 
@@ -397,5 +394,4 @@ Azure Cosmos DB와 같은 문서 저장소에서 데이터 모델링을 시작�
 
 Azure Cosmos DB에 대한 자세한 내용은 서비스의 [설명서](https://azure.microsoft.com/documentation/services/cosmos-db/) 페이지를 참조하세요. 
 
-여러 파티션에 데이터를 분할하는 방법에 대한 자세한 내용은 [Azure Cosmos DB에서 데이터 분할](documentdb-partition-data.md)을 참조하세요. 
-
+여러 파티션에 데이터를 분할하는 방법에 대한 자세한 내용은 [Azure Cosmos DB에서 데이터 분할](sql-api-partition-data.md)을 참조하세요. 

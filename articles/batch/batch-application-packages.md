@@ -1,26 +1,25 @@
 ---
-title: "계산 노드에 응용 프로그램 패키지 설치 - Azure Batch | Microsoft Docs"
-description: "Azure Batch의 응용 프로그램 패키지 기능을 사용하여 Batch 계산 노드에 설치할 여러 응용 프로그램 및 버전을 간편하게 관리하세요."
+title: 계산 노드에 응용 프로그램 패키지 설치 - Azure Batch | Microsoft Docs
+description: Azure Batch의 응용 프로그램 패키지 기능을 사용하여 Batch 계산 노드에 설치할 여러 응용 프로그램 및 버전을 간편하게 관리하세요.
 services: batch
 documentationcenter: .net
-author: tamram
-manager: timlt
-editor: 
+author: dlepow
+manager: jeconnoc
+editor: ''
 ms.assetid: 3b6044b7-5f65-4a27-9d43-71e1863d16cf
 ms.service: batch
 ms.devlang: multiple
 ms.topic: article
-ms.tgt_pltfrm: vm-windows
+ms.tgt_pltfrm: ''
 ms.workload: big-compute
-ms.date: 07/20/2017
-ms.author: tamram
+ms.date: 04/06/2018
+ms.author: danlep
 ms.custom: H1Hack27Feb2017
+ms.openlocfilehash: f982e859892965379b7ffb08e15dd1cf51b9801f
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
 ms.translationtype: HT
-ms.sourcegitcommit: 22aa82e5cbce5b00f733f72209318c901079b665
-ms.openlocfilehash: fcca9c9bb0aca96d740feb9450458a7c3b8de379
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/24/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
 # <a name="deploy-applications-to-compute-nodes-with-batch-application-packages"></a>응용 프로그램을 배포하여 Batch 응용 프로그램 패키지에서 노드 계산
 
@@ -30,9 +29,9 @@ Azure Batch의 응용 프로그램 패키지 기능은 풀의 계산 노드에 �
 
 > [!NOTE]
 > 
-> 응용 프로그램 패키지는 2017년 7월 5일 이후에 만들어진 모든 Batch 풀에서 지원됩니다. 2016년 3월 10일에서 2017년 7월 5일 사이에 만들어진 Batch 풀에서는 Clound Service 구성을 사용하여 풀을 만든 경우에만 이러한 패키지가 지원됩니다. 2016년 3월 10일 이전에 만들어진 Batch 풀은 응용 프로그램 패키지를 지원하지 않습니다.
+> 응용 프로그램 패키지는 2017년 7월 5일 이후에 만들어진 모든 Batch 풀에서 지원됩니다. 2016년 3월 10일에서 2017년 7월 5일 사이에 만들어진 Batch 풀에서는 Cloud Service 구성을 사용하여 풀을 만든 경우에만 이러한 패키지가 지원됩니다. 2016년 3월 10일 이전에 만들어진 Batch 풀은 응용 프로그램 패키지를 지원하지 않습니다.
 >
-> 응용 프로그램 패키지를 만들고 관리하는 API는 [Batch Management .NET][[api_net_mgmt]] 라이브러리의 일부입니다. 계산 노드에서 응용 프로그램 패키지를 설치하는 API는 [Batch .NET][api_net] 라이브러리의 일부입니다.  
+> 응용 프로그램 패키지를 만들고 관리하는 API는 [Batch Management .NET][api_net_mgmt] 라이브러리의 일부입니다. 계산 노드에서 응용 프로그램 패키지를 설치하는 API는 [Batch .NET][api_net] 라이브러리의 일부입니다. 다른 언어의 경우 상응하는 기능을 Batch API에서 제공합니다. 
 >
 > 여기서 설명하는 응용 프로그램 패키지 기능은 이전 버전의 서비스에서 사용할 수 있는 Batch 앱 기능을 대체합니다.
 > 
@@ -40,13 +39,6 @@ Azure Batch의 응용 프로그램 패키지 기능은 풀의 계산 노드에 �
 
 ## <a name="application-package-requirements"></a>응용 프로그램 패키지 요구 사항
 응용 프로그램 패키지를 사용하려면 Batch 계정에 [Azure Storage 계정을 연결](#link-a-storage-account)해야 합니다.
-
-이 기능은 [Batch REST API][api_rest] 버전 2015-12-01.2.2 및 해당 [Batch .NET][api_net] 라이브러리 버전 3.1.0에서 도입되었습니다. Batch를 사용할 때에는 항상 최신 API 버전을 사용하는 것이 좋습니다.
-
-> [!NOTE]
-> 응용 프로그램 패키지는 2017년 7월 5일 이후에 만들어진 모든 Batch 풀에서 지원됩니다. 2016년 3월 10일에서 2017년 7월 5일 사이에 만들어진 Batch 풀에서는 Cloud Service 구성을 사용하여 풀을 만든 경우에만 이러한 패키지가 지원됩니다. 2016년 3월 10일 이전에 만들어진 Batch 풀은 응용 프로그램 패키지를 지원하지 않습니다.
->
->
 
 ## <a name="about-applications-and-application-packages"></a>응용 프로그램 및 응용 프로그램 패키지 정보
 Azure Batch 내에서 *응용 프로그램* 이란 풀의 계산 노드에 자동으로 다운로드할 수 있는 버전이 지정된 이진 파일의 집합을 말합니다. *응용 프로그램 패키지*는 이러한 이진 파일의 *특정 집합*을 말하며, 지정된 응용 프로그램 *버전*을 나타냅니다.
@@ -78,7 +70,7 @@ Batch에서 응용 프로그램은 하나 이상의 응용 프로그램을 포�
 ### <a name="benefits-of-application-packages"></a>응용 프로그램 패키지의 이점
 응용 프로그램 패키지는 Batch 솔루션의 코드를 단순화하고, 태스크에서 실행하는 응용 프로그램을 관리하는 데 필요한 오버헤드를 낮출 수 있습니다.
 
-응용 프로그램 패키지를 사용하면 풀의 시작 태스크가 노드에 설치할 개별 리소스 파일의 긴 목록을 지정할 필요가 없습니다. Azure Storage 또는 노드에서 응용 프로그램 파일의 여러 버전을 수동으로 관리할 필요가 없습니다. 저장소 계정의 파일에 대한 액세스 권한을 제공하기 위해 [SAS URL](../storage/storage-dotnet-shared-access-signature-part-1.md) 을 생성할 필요가 없습니다. Batch는 Azure Storage와 함께 백그라운드에서 작동하여 응용 프로그램 패키지를 저장하고 계산 노드에 배포합니다.
+응용 프로그램 패키지를 사용하면 풀의 시작 태스크가 노드에 설치할 개별 리소스 파일의 긴 목록을 지정할 필요가 없습니다. Azure Storage 또는 노드에서 응용 프로그램 파일의 여러 버전을 수동으로 관리할 필요가 없습니다. Storage 계정의 파일에 대한 액세스 권한을 제공하기 위해 [SAS URL](../storage/common/storage-dotnet-shared-access-signature-part-1.md) 을 생성할 필요가 없습니다. Batch는 Azure Storage와 함께 백그라운드에서 작동하여 응용 프로그램 패키지를 저장하고 계산 노드에 배포합니다.
 
 > [!NOTE] 
 > 리소스 파일 및 환경 변수를 포함한 시작 태스크의 전체 크기는 32768자 이하여야 합니다. 시작 태스크가 이 제한을 초과하는 경우 응용 프로그램 패키지 사용은 또 다른 옵션입니다. 리소스 파일을 포함하는 압축된 보관 파일을 만들어 Blob으로 Azure Storage에 업로드한 다음 시작 태스크의 명령줄에서 압축을 풀 수도 있습니다. 
@@ -86,50 +78,50 @@ Batch에서 응용 프로그램은 하나 이상의 응용 프로그램을 포�
 >
 
 ## <a name="upload-and-manage-applications"></a>응용 프로그램 업로드 및 관리
-[Azure portal][portal] 또는 [Batch 관리 .NET](batch-management-dotnet.md)라이브러리를 사용하여 Batch 계정에서 응용 프로그램 패키지를 관리합니다. 다음 섹션에서는 먼저 저장소 계정을 연결하는 방법을 보여 준 다음 응용 프로그램 및 패키지를 추가하고 포털에서 관리하는 방법을 설명합니다.
+[Azure portal][portal] 또는 Batch Management API를 사용하여 Batch 계정에서 응용 프로그램 패키지를 관리합니다. 다음 섹션에서는 먼저 Storage 계정을 연결하는 방법을 보여 준 다음 응용 프로그램 및 패키지를 추가하고 포털에서 관리하는 방법을 설명합니다.
 
-### <a name="link-a-storage-account"></a>저장소 계정 연결
-응용 프로그램 패키지를 사용하려면 먼저 Azure Storage 계정을 Batch 계정에 연결해야 합니다. 저장소 계정을 아직 구성하지 않은 경우 **Batch 계정** 블레이드에서 **응용 프로그램** 타일을 처음으로 클릭하면 Azure Portal에서 경고를 표시합니다.
+### <a name="link-a-storage-account"></a>Storage 계정 연결
+응용 프로그램 패키지를 사용하려면 먼저 [Azure Storage 계정](batch-api-basics.md#azure-storage-account)을 Batch 계정에 연결해야 합니다. Storage 계정을 아직 구성하지 않은 경우 Batch 계정에서 **응용 프로그램** 타일을 처음으로 클릭하면 Azure Portal에서 경고를 표시합니다.
 
-> [!IMPORTANT]
-> Batch는 현재 [Azure storage 계정 정보](../storage/storage-create-storage-account.md)의 5단계 [저장소 계정 만들기](../storage/storage-create-storage-account.md#create-a-storage-account)에 설명된 대로 **범용** 저장소 계정 유형*만* 지원합니다. Azure Storage 계정을 Batch 계정에 연결할 경우 **범용** 저장소 계정*만* 연결합니다.
-> 
-> 
+
 
 ![Azure Portal의 '저장소 계정이 구성되지 않음' 경고][9]
 
-Batch 서비스는 연결된 저장소 계정을 사용하여 응용 프로그램 패키지를 저장합니다. 계정 두 개를 연결한 후에 Batch는 연결된 저장소 계정에 저장된 패키지를 계산 노드에 자동으로 배포할 수 있습니다. 저장소 계정을 Batch 계정에 연결하려면 **경고** 블레이드에서 **저장소 계정 설정**을 클릭한 다음 **저장소 계정** 블레이드에서 **저장소 계정**을 클릭합니다.
+Batch 서비스는 연결된 Storage 계정을 사용하여 응용 프로그램 패키지를 저장합니다. 계정 두 개를 연결한 후에 Batch는 연결된 Storage 계정에 저장된 패키지를 계산 노드에 자동으로 배포할 수 있습니다. Storage 계정을 Batch 계정에 연결하려면 **경고** 창에서 **Storage 계정**을 클릭한 다음, **Storage 계정**을 다시 클릭합니다.
 
 ![Azure portal에서 저장소 계정 블레이드 선택][10]
 
-*특별히* Batch 계정과 함께 사용할 저장소 계정을 만들었으면 여기에서 선택하는 것이 좋습니다. 저장소 계정을 만드는 방법에 대한 자세한 내용은 [Azure storage 계정 정보](../storage/storage-create-storage-account.md)의 "저장소 계정 만들기"를 참조하세요. 저장소 계정을 만든 후에 **저장소 계정** 블레이드를 사용하여 Batch 계정에 연결할 수 있습니다.
+*특별히* Batch 계정과 함께 사용할 Storage 계정을 만들었으면 여기에서 선택하는 것이 좋습니다. Storage 계정을 만든 후에 **Storage 계정** 창을 사용하여 Batch 계정에 연결할 수 있습니다.
 
-> [!WARNING]
-> Batch 서비스는 Azure Storage를 사용하여 응용 프로그램 패키지를 블록 Blob으로 저장합니다. 블록 Blob 데이터에 대한 [요금이 정상적으로 청구][storage_pricing]됩니다. 비용을 최소화할 수 있도록 응용 프로그램 패키지의 크기와 숫자에 신경 쓰고, 사용하지 않는 패키지를 주기적으로 제거해 주세요.
+> [!NOTE] 
+> 현재 [방화벽 규칙](../storage/common/storage-network-security.md)이 구성된 Azure Storage 계정에는 응용 프로그램 패키지를 사용할 수 없습니다.
+> 
+
+Batch 서비스는 Azure Storage를 사용하여 응용 프로그램 패키지를 블록 Blob으로 저장합니다. 블록 Blob 데이터에 대한 [요금이 정상적으로 청구][storage_pricing]됩니다. 비용을 최소화할 수 있도록 응용 프로그램 패키지의 크기와 숫자에 신경 쓰고, 사용하지 않는 패키지를 주기적으로 제거해 주세요.
 > 
 > 
 
 ### <a name="view-current-applications"></a>현재 응용 프로그램 보기
-Batch 계정의 응용 프로그램을 보려면 **Batch 계정** 블레이드 왼쪽에 있는 메뉴의 **응용 프로그램** 메뉴 항목을 클릭합니다.
+Batch 계정의 응용 프로그램을 보려면 **Batch 계정**이 표시되는 동안 왼쪽의 **응용 프로그램** 메뉴 항목을 클릭합니다.
 
 ![응용 프로그램 타일][2]
 
-이 메뉴 옵션을 선택하면 **응용 프로그램** 블레이드가 열립니다.
+이 메뉴 옵션을 선택하면 **응용 프로그램** 창이 열립니다.
 
 ![응용 프로그램 나열][3]
 
-**응용 프로그램** 블레이드는 계정의 각 응용 프로그램 ID 및 다음 속성을 표시합니다.
+이 창은 계정의 각 응용 프로그램 ID 및 다음 속성을 표시합니다.
 
 * **패키지**: 이 응용 프로그램과 연결된 버전 번호입니다.
 * **기본 버전**: 풀에 대해 응용 프로그램을 지정할 때 버전을 표시하지 않으면 설치되는 응용 프로그램 버전입니다. 이 설정은 선택 사항입니다.
 * **업데이트 허용**: 패키지의 업데이트, 삭제 및 추가 기능을 허용하는지 여부를 지정하는 값입니다. 이 값을 **아니요**로 설정하면 응용 프로그램에 패키지 업데이트 및 삭제를 사용할 수 없습니다. 새 응용 프로그램 패키지 버전만 추가할 수 있습니다. 기본값은 **예**입니다.
 
 ### <a name="view-application-details"></a>응용 프로그램 세부 정보 보기
-응용 프로그램에 대한 세부 정보가 포함된 블레이드를 열려면 **응용 프로그램** 블레이드에서 응용 프로그램을 선택합니다.
+응용 프로그램에 대한 세부 정보를 확인하려면 **응용 프로그램** 창에서 응용 프로그램을 선택합니다.
 
 ![응용 프로그램 세부 정보][4]
 
-응용 프로그램 세부 정보 블레이드에서 응용 프로그램에 대해 다음 설정을 구성할 수 있습니다.
+응용 프로그램 세부 정보에서 응용 프로그램에 대해 다음 설정을 구성할 수 있습니다.
 
 * **업데이트 허용**: 해당 응용 프로그램 패키지를 업데이트하거나 삭제할 수 있는지를 지정합니다. 이 문서에서 아래의 "응용 프로그램 패키지 업데이트 또는 삭제"를 참조하세요.
 * **기본 버전**: 계산 노드에 배포할 기본 응용 프로그램 패키지를 지정합니다.
@@ -138,11 +130,11 @@ Batch 계정의 응용 프로그램을 보려면 **Batch 계정** 블레이드 �
 ### <a name="add-a-new-application"></a>새 응용 프로그램 추가
 새 응용 프로그램을 만들려면 응용 프로그램 패키지를 추가하고 고유한 새 응용 프로그램 ID를 지정합니다. 새 응용 프로그램 ID를 사용하여 추가하는 첫 번째 응용 프로그램 패키지도 새 응용 프로그램을 만듭니다.
 
-**응용 프로그램** 블레이드에서 **추가**를 클릭하여 **새 응용 프로그램** 블레이드를 엽니다.
+**응용 프로그램** > **추가**를 클릭합니다.
 
 ![Azure portal의 새 응용 프로그램 블레이드][5]
 
-**새 응용 프로그램** 블레이드는 새 응용 프로그램 및 응용 프로그램 패키지의 설정을 지정하는 다음 필드를 제공합니다.
+**새 응용 프로그램** 창은 새 응용 프로그램 및 응용 프로그램 패키지의 설정을 지정하는 다음 필드를 제공합니다.
 
 **응용 프로그램 ID**
 
@@ -166,28 +158,28 @@ Batch 계정의 응용 프로그램을 보려면 **Batch 계정** 블레이드 �
 
 이 필드는 응용 프로그램 실행에 필요한 응용 프로그램 이진 파일 및 모든 지원 파일을 포함하는 .zip 파일을 지정합니다. **파일 선택** 상자 또는 폴더 아이콘을 클릭하여 응용 프로그램의 파일이 포함된 .zip 파일을 찾고 선택합니다.
 
-파일을 선택했으면 **확인** 을 클릭하여 Azure Storage에 업로드를 시작합니다. 업로드 작업이 완료되면 포털에서 알림을 표시하고 블레이드를 닫습니다. 업로드하는 파일의 크기 및 네트워크 연결 속도에 따라 작업 시간이 달라질 수 있습니다.
+파일을 선택했으면 **확인** 을 클릭하여 Azure Storage에 업로드를 시작합니다. 업로드 작업이 완료되면 포털에서 알림을 표시합니다. 업로드하는 파일의 크기 및 네트워크 연결 속도에 따라 작업 시간이 달라질 수 있습니다.
 
 > [!WARNING]
-> 업로드 작업이 완료되기 전에 **새 응용 프로그램** 블레이드를 닫지 마세요. 만약 닫으면 업로드 프로세스가 중지됩니다.
+> 업로드 작업이 완료되기 전에 **새 응용 프로그램** 창을 닫지 않습니다. 만약 닫으면 업로드 프로세스가 중지됩니다.
 > 
 > 
 
 ### <a name="add-a-new-application-package"></a>새 응용 프로그램 패키지 추가
-기존 응용 프로그램에 대한 새 응용 프로그램 패키지 버전을 추가하려면 **응용 프로그램** 블레이드에서 응용 프로그램을 선택하고, **패키지**를 클릭한 다음 **추가**를 클릭하여 **패키지 추가** 블레이드를 엽니다.
+기존 응용 프로그램에 대한 응용 프로그램 패키지 버전을 추가하려면 **응용 프로그램** 창에서 응용 프로그램을 선택하고, **패키지** > **추가**를 클릭합니다.
 
 ![Azure portal의 응용 프로그램 패키지 추가 블레이드][8]
 
-여기서 볼 수 있듯이 필드가 **새 응용 프로그램** 블레이드의 필드와 일치하지만 **응용 프로그램 ID** 상자는 비활성화되어 있습니다. 새 응용 프로그램에서 수행한 대로 새 패키지의 **버전**을 지정하고, **응용 프로그램 패키지** .zip 파일을 찾은 다음 **확인**을 클릭하여 패키지를 업로드합니다.
+여기서 볼 수 있듯이 필드가 **새 응용 프로그램** 창의 필드와 일치하지만 **응용 프로그램 ID** 상자는 비활성화되어 있습니다. 새 응용 프로그램에서 수행한 대로 새 패키지의 **버전**을 지정하고, **응용 프로그램 패키지** .zip 파일을 찾은 다음 **확인**을 클릭하여 패키지를 업로드합니다.
 
 ### <a name="update-or-delete-an-application-package"></a>응용 프로그램 패키지 업데이트 또는 삭제
-기존 응용 프로그램 패키지를 업데이트하거나 삭제하려면 해당 응용 프로그램의 세부 정보 블레이드를 연 다음 **패키지**를 클릭하여 **패키지** 블레이드를 열고, 수정하려는 응용 프로그램 패키지의 행에서 **...(줄임표)**를 클릭하여 수행할 작업을 선택합니다.
+기존 응용 프로그램 패키지를 업데이트하거나 삭제하려면 해당 응용 프로그램의 세부 정보를 연 다음, **패키지**를 클릭하고, 수정할 응용 프로그램 패키지 행에서 **...(줄임표)** 를 클릭하여 수행할 작업을 선택합니다.
 
 ![Azure portal에서 패키지 업데이트 또는 삭제][7]
 
 **업데이트**
 
-**업데이트**를 클릭하면 *패키지 업데이트* 블레이드가 표시됩니다. 이 블레이드는 *새 응용 프로그램 패키지* 블레이드와 비슷하지만, 패키지 선택 필드만 활성화되므로 업로드할 새 ZIP 파일을 지정할 수 있습니다.
+**업데이트**를 클릭하면 **패키지 업데이트** 창이 표시됩니다. 이 창은 **새 응용 프로그램 패키지** 창과 비슷하지만, 패키지 선택 필드만 활성화되므로 업로드할 새 ZIP 파일을 지정할 수 있습니다.
 
 ![Azure portal의 패키지 업데이트 블레이드][11]
 
@@ -263,11 +255,11 @@ Windows:
 AZ_BATCH_APP_PACKAGE_APPLICATIONID#version
 ```
 
-Linux 노드에서는 형식이 약간 다릅니다. 마침표(.), 하이픈(-) 및 숫자 기호(#)가 환경 변수에서 밑줄로 표시됩니다. 예:
+Linux 노드에서는 형식이 약간 다릅니다. 마침표(.), 하이픈(-) 및 숫자 기호(#)가 환경 변수에서 밑줄로 표시됩니다. 또한 응용 프로그램 ID의 대/소문자는 유지됩니다. 예: 
 
 ```
 Linux:
-AZ_BATCH_APP_PACKAGE_APPLICATIONID_version
+AZ_BATCH_APP_PACKAGE_applicationid_version
 ```
 
 `APPLICATIONID` 및 `version`은 배포를 위해 지정한 응용 프로그램 및 패키지 버전에 해당하는 값입니다. 예를 들어 Windows 노드에 *blender* 응용 프로그램의 2.7 버전을 설치하도록 지정하면 태스크 명령줄은 다음 환경 변수를 사용하여 해당 파일에 액세스합니다.
@@ -277,14 +269,14 @@ Windows:
 AZ_BATCH_APP_PACKAGE_BLENDER#2.7
 ```
 
-Linux 노드에서는 환경 변수를 다음 형식으로 지정합니다.
+Linux 노드에서는 환경 변수를 다음 형식으로 지정합니다. 마침표(.), 하이픈(-) 및 숫자 기호(#)를 밑줄로 평면화하고 응용 프로그램 ID의 대/소문자를 유지합니다.
 
 ```
 Linux:
-AZ_BATCH_APP_PACKAGE_BLENDER_2_7
+AZ_BATCH_APP_PACKAGE_blender_2_7
 ``` 
 
-응용 프로그램 패키지를 업로드할 때 계산 노드에 배포할 기본 버전을 지정할 수 있습니다. 응용 프로그램의 기본 버전을 지정하면 응용 프로그램 참조 시 버전 접미사를 생략할 수 있습니다. [응용 프로그램 업로드 및 관리](#upload-and-manage-applications)에서 표시된 것처럼 Azure Portal의 응용 프로그램 블레이드에서 기본 응용 프로그램 버전을 지정할 수 있습니다.
+응용 프로그램 패키지를 업로드할 때 계산 노드에 배포할 기본 버전을 지정할 수 있습니다. 응용 프로그램의 기본 버전을 지정하면 응용 프로그램 참조 시 버전 접미사를 생략할 수 있습니다. [응용 프로그램 업로드 및 관리](#upload-and-manage-applications)에서 표시된 것처럼 Azure Portal의 **응용 프로그램** 창에서 기본 응용 프로그램 버전을 지정할 수 있습니다.
 
 예를 들어 *blender* 응용 프로그램에 대해 기본 버전으로 "2.7"을 설정한 경우 태스크가 다음 환경 변수를 참조하면 Windows 노드에서 버전 2.7을 실행합니다.
 
@@ -308,7 +300,7 @@ CloudTask blenderTask = new CloudTask(taskId, commandLine);
 기존 풀이 이미 응용 프로그램 패키지를 통해 구성된 경우 해당 풀에 대해 새 패키지를 지정할 수 있습니다. 풀에 대한 새 패키지 참조를 지정하면 다음이 적용됩니다.
 
 * Batch 서비스는 풀에 조인하는 모든 새 노드와 다시 부팅되거나 이미지로 다시 설치되는 기존 노드에 새로 지정된 패키지를 설치합니다.
-* 패키지 참조를 업데이트할 때 이미 풀에 있는 계산 노드는 새 응용 프로그램 패키지를 자동으로 설치하지 않습니다. 이러한 계산 노드를 재부팅하거나 이미지로 다시 설치하여 새 패키지를 받아야 합니다.
+* 패키지 참조를 업데이트할 때 이미 풀에 있는 Compute 노드는 새 응용 프로그램 패키지를 자동으로 설치하지 않습니다. 이러한 계산 노드를 재부팅하거나 이미지로 다시 설치하여 새 패키지를 받아야 합니다.
 * 새 패키지가 배포될 때 만들어진 환경 변수는 새 응용 프로그램 패키지 참조를 반영합니다.
 
 이 예에서는 기존 풀의 *blender* 응용 프로그램 2.7 버전이 [CloudPool][net_cloudpool].[ApplicationPackageReferences][net_cloudpool_pkgref] 중 하나로 구성되었습니다. 풀의 노드를 2.76b 버전으로 업데이트하려면 새 버전을 사용하여 [ApplicationPackageReference][net_pkgref]를 지정하고 변경 내용을 커밋합니다.
@@ -349,11 +341,11 @@ foreach (ApplicationSummary app in applications)
 
 ## <a name="next-steps"></a>다음 단계
 * 또한 [Batch REST API][api_rest]는 응용 프로그램 패키지로 작업하도록 지원합니다. 예를 들어 REST API를 사용하여 설치할 패키지를 지정하는 방법에 대한 자세한 내용은 [계정에 풀 추가][rest_add_pool]에서 [applicationPackageReferences][rest_add_pool_with_packages] 요소를 참조하세요. Batch REST API를 사용하여 응용 프로그램 정보를 얻는 방법에 대한 자세한 내용은 [응용 프로그램][rest_applications]을 참조하세요.
-* 프로그래밍 방식으로 [Batch 관리 .NET으로 Azure Batch 계정 및 할당량 관리](batch-management-dotnet.md)를 수행하는 방법을 알아보세요. [Batch 관리.NET][api_net_mgmt] 라이브러리는 Batch 응용 프로그램 또는 서비스에 대한 계정 만들기 및 삭제 기능을 사용하도록 설정할 수 있습니다.
+* 프로그래밍 방식으로 [Batch 관리 .NET으로 Azure Batch 계정 및 할당량 관리](batch-management-dotnet.md)를 수행하는 방법을 알아보세요. [Batch 관리.NET][api_net_mgmt] 라이브러리는 Batch 응용 프로그램 또는 서비스에 대해 계정 만들기 및 삭제 기능을 활성화할 수 있습니다.
 
 [api_net]: https://docs.microsoft.com/dotnet/api/overview/azure/batch/client?view=azure-dotnet
 [api_net_mgmt]: https://docs.microsoft.com/dotnet/api/overview/azure/batch/management?view=azure-dotnet
-[api_rest]: https://docs.microsoft.com/en-us/rest/api/batchservice/
+[api_rest]: https://docs.microsoft.com/rest/api/batchservice/
 [batch_mgmt_nuget]: https://www.nuget.org/packages/Microsoft.Azure.Management.Batch/
 [github_samples]: https://github.com/Azure/azure-batch-samples
 [storage_pricing]: https://azure.microsoft.com/pricing/details/storage/
@@ -377,8 +369,7 @@ foreach (ApplicationSummary app in applications)
 [5]: ./media/batch-application-packages/app_pkg_05.png "Azure portal의 새 응용 프로그램 블레이드"
 [7]: ./media/batch-application-packages/app_pkg_07.png "Azure portal의 패키지 업데이트 또는 삭제 드롭다운"
 [8]: ./media/batch-application-packages/app_pkg_08.png "Azure portal의 새 응용 프로그램 패키지 블레이드"
-[9]: ./media/batch-application-packages/app_pkg_09.png "연결된 저장소 계정 없음 경고"
+[9]: ./media/batch-application-packages/app_pkg_09.png "연결된 Storage 계정 없음 경고"
 [10]: ./media/batch-application-packages/app_pkg_10.png "포털에서 저장소 계정 블레이드 선택"
 [11]: ./media/batch-application-packages/app_pkg_11.png "Azure portal의 패키지 업데이트 블레이드"
 [12]: ./media/batch-application-packages/app_pkg_12.png "Azure portal의 패키지 삭제 확인 대화 상자"
-

@@ -1,28 +1,28 @@
 ---
-title: "Azure Load Balancer 문제 해결 | Microsoft Docs"
-description: "Azure Load Balancer의 알려진 문제 해결"
+title: Azure Load Balancer 문제 해결 | Microsoft Docs
+description: Azure Load Balancer의 알려진 문제 해결
 services: load-balancer
 documentationcenter: na
-author: RamanDhillon
-manager: timlt
-editor: 
-ms.assetid: 
+author: chadmath
+manager: cshepard
+editor: ''
+ms.assetid: ''
 ms.service: load-balancer
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 07/10/2017
-ms.author: kumud
+ms.date: 09/25/2017
+ms.author: genli
+ms.openlocfilehash: 294bb6dd780d1df642d6e793b29267da1e8b8336
+ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: df5c836abbf09889f4859170359c0ee6c1b03378
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/03/2018
 ---
-
 # <a name="troubleshoot-azure-load-balancer"></a>Azure Load Balancer 문제 해결
+
+[!INCLUDE [load-balancer-basic-sku-include.md](../../includes/load-balancer-basic-sku-include.md)]
 
 이 페이지에서는 일반적인 Azure Load Balancer 질문에 대한 문제 해결 정보를 제공합니다. Load Balancer 연결을 사용할 수 없을 때 가장 일반적인 증상은 다음과 같습니다. 
 - Load Balancer 뒤의 VM이 상태 프로브에 응답하지 않습니다. 
@@ -54,7 +54,7 @@ VM이 정상 상태인데도 프로브에 응답하지 않을 경우 한 가지 
 3. 포트 상태가 **LISTENING**으로 표시되지 않으면 해당 포트를 구성합니다. 
 4. 또는 **LISTENING**으로 표시되는 다른 포트를 선택한 후 부하 분산 장치 구성을 적절하게 업데이트합니다.              
 
-###<a name="cause-3-firewall-or-a-network-security-group-is-blocking-the-port-on-the-load-balancer-backend-pool-vms"></a>원인 3: 방화벽 또는 네트워크 보안 그룹이 부하 분산 장치 백 엔드 풀 VM에서 포트를 차단하고 있습니다.  
+### <a name="cause-3-firewall-or-a-network-security-group-is-blocking-the-port-on-the-load-balancer-backend-pool-vms"></a>원인 3: 방화벽 또는 네트워크 보안 그룹이 부하 분산 장치 백 엔드 풀 VM에서 포트를 차단하고 있습니다.  
 VM의 방화벽이 프로브 포트를 차단하고 있거나 서브넷 또는 VM에 구성된 하나 이상의 네트워크 보안 그룹이 프로브가 포트에 연결하도록 허용하지 않을 경우 VM이 상태 프로브에 응답할 수 없게 됩니다.          
 
 **유효성 검사 및 해결**
@@ -103,9 +103,7 @@ VM이 데이터 트래픽에 응답하지 않을 경우 대상 포트가 참여 
 
 서브넷 또는 VM에 구성된 하나 이상의 네트워크 보안 그룹이 원본 IP 또는 포트를 차단하는 경우 VM이 응답할 수 없습니다.
 
-* 백 엔드 VM에 구성된 네트워크 보안 그룹을 나열합니다. 자세한 내용은 다음을 참조하세요.
-    -  [포털을 사용하여 네트워크 보안 그룹 관리](../virtual-network/virtual-network-manage-nsg-arm-portal.md)
-    -  [PowerShell을 사용하여 네트워크 보안 그룹 관리](../virtual-network/virtual-network-manage-nsg-arm-ps.md)
+* 백 엔드 VM에 구성된 네트워크 보안 그룹을 나열합니다. 자세한 내용은 [네트워크 보안 그룹 관리](../virtual-network/manage-network-security-group.md)를 참조하세요.
 * 네트워크 보안 그룹 목록에서 다음을 확인합니다.
     - 데이터 포트에서 들어오거나 나가는 트래픽에 간섭이 있습니다. 
     - VM 또는 서브넷의 NIC에 대해 Load Balancer 프로브 및 트래픽을 허용하는 기본 규칙보다 우선 순위가 더 높은 **모두 거부** 네트워크 보안 그룹 규칙(네트워크 보안 그룹은 프로브 포트에 해당하는 168.63.129.16의 부하 분산 장치 IP를 허용해야 함). 
@@ -134,5 +132,4 @@ ILB VIP가 VNet 내에 구성되어 있고 참가자 백 엔드 VM 중 하나가
 ## <a name="next-steps"></a>다음 단계
 
 앞의 단계에서 문제가 해결되지 않으면 [지원 티켓](https://azure.microsoft.com/support/options/)을 엽니다.
-
 

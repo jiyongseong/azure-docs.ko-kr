@@ -1,8 +1,8 @@
 ---
-title: "Virtual Network에서 Application Gateway와 함께 Azure API Management를 사용하는 방법 | Microsoft Docs"
-description: "내부 Virtual Network에서 프론트 엔드로 Application Gateway(WAF)와 함께 Azure API Management를 설정하고 구성하는 방법 알아보기"
+title: Virtual Network에서 Application Gateway와 함께 Azure API Management를 사용하는 방법 | Microsoft Docs
+description: 내부 Virtual Network에서 프론트 엔드로 Application Gateway(WAF)와 함께 Azure API Management를 설정하고 구성하는 방법 알아보기
 services: api-management
-documentationcenter: 
+documentationcenter: ''
 author: solankisamir
 manager: kjoshi
 editor: antonba
@@ -12,15 +12,14 @@ ms.workload: mobile
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 01/16/2017
+ms.date: 09/19/2017
 ms.author: sasolank
-ms.translationtype: Human Translation
-ms.sourcegitcommit: db18dd24a1d10a836d07c3ab1925a8e59371051f
-ms.openlocfilehash: f9160be8c0fb3cff9efdd22ff623a4827ce3946f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/15/2017
-
-
+ms.openlocfilehash: 595abcaafdea5cde3f868567bac7fb9cf0ee424b
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
+ms.locfileid: "33936108"
 ---
 # <a name="integrate-api-management-in-an-internal-vnet-with-application-gateway"></a>내부 VNET에서 Application Gateway와 API Management 통합 
 
@@ -34,6 +33,16 @@ Virtual Network 내에서만 액세스할 수 있도록 내부 모드의 Virtual
 * 단일 API Management 리소스를 사용하며 외부 소비자가 사용할 수 있는 API Management에서 정의된 API의 하위 집합을 갖습니다.
 * 공용 인터넷에서 API Management에 대한 액세스를 켜기 및 끄기로 전환하는 턴키 방법을 제공합니다. 
 
+## <a name="prerequisites"></a>필수 조건
+
+이 문서에 설명한 단계를 수행하려면 다음 항목이 있어야 합니다.
+
++ 활성 Azure 구독.
+
+    [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
+
++ APIM 인스턴스. 자세한 내용은 [Azure API Management 인스턴스 만들기](get-started-create-service-instance.md)를 참조하세요.
+
 ##<a name="scenario"> </a> 시나리오
 이 문서에서는 내부 및 외부 소비자가 단일 API Management 서비스를 사용하여 온-프레미스 및 클라우드 API에서 단일 프런트 엔드 역할을 하도록 만드는 방법을 다룹니다. Application Gateway에서 사용 가능한 PathBasedRouting 기능을 사용하여 외부 소비에 대해 API(예제에서 녹색으로 강조 표시됨)의 하위 집합만을 노출하는 방법을 확인할 수도 있습니다.
 
@@ -43,9 +52,9 @@ Virtual Network 내에서만 액세스할 수 있도록 내부 모드의 Virtual
 
 ## <a name="before-you-begin"> </a> 시작하기 전에
 
-1. 웹 플랫폼 설치 관리자를 사용하는 Azure PowerShell cmdlet의 최신 버전을 설치합니다. **다운로드 페이지** 의 [Windows PowerShell](https://azure.microsoft.com/downloads/)섹션에서 최신 버전을 다운로드하여 설치할 수 있습니다.
+1. 웹 플랫폼 설치 관리자를 사용하는 Azure PowerShell cmdlet의 최신 버전을 설치합니다. **다운로드 페이지** 의 [Windows PowerShell](https://azure.microsoft.com/downloads/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)섹션에서 최신 버전을 다운로드하여 설치할 수 있습니다.
 2. Virtual Network를 만들고 API Management 및 Application Gateway에 대한 별도 서브넷을 만듭니다. 
-3. Virtual Network에 대한 사용자 지정 DNS 서버를 만들려면 배포를 시작하기 전에 수행합니다. Virtual Network의 새 서브넷에서 만든 가상 컴퓨터가 모든 Azure 서비스 끝점을 확인하고 액세스할 수 있도록 하여 작동을 이중으로 확인합니다.
+3. Virtual Network에 대한 사용자 지정 DNS 서버를 만들려면 배포를 시작하기 전에 수행합니다. Virtual Network의 새 서브넷에서 만든 가상 머신이 모든 Azure 서비스 끝점을 확인하고 액세스할 수 있도록 하여 작동을 이중으로 확인합니다.
 
 ## <a name="what-is-required-to-create-an-integration-between-api-management-and-application-gateway"></a>API Management 및 Application Gateway 간에 통합을 만드는 데 무엇이 필요한가요?
 
@@ -59,7 +68,7 @@ Virtual Network 내에서만 액세스할 수 있도록 내부 모드의 Virtual
 
 ## <a name="overview-steps"> </a> API Management 및 Application Gateway 통합에 필요한 단계 
 
-1. 리소스 관리자에 대한 리소스 그룹을 만듭니다.
+1. Resource Manager에 대한 리소스 그룹을 만듭니다.
 2. Application Gateway에 대한 Virtual Network, 서브넷 및 공용 IP를 만듭니다. API Management에 대한 다른 서브넷을 만듭니다.
 3. 위에서 만든 VNET 서브넷 내에서 API Management 서비스를 만들고 내부 모드로 사용해야 합니다.
 4. API Management 서비스에서 사용자 지정 도메인 이름을 설정합니다.
@@ -67,16 +76,16 @@ Virtual Network 내에서만 액세스할 수 있도록 내부 모드의 Virtual
 6. Application Gateway 리소스를 만듭니다.
 7. CNAME을 Application Gateway 리소스의 공용 DNS 이름에서 API Management 프록시 호스트 이름으로 만듭니다.
 
-## <a name="create-a-resource-group-for-resource-manager"></a>리소스 관리자에 대한 리소스 그룹 만들기
+## <a name="create-a-resource-group-for-resource-manager"></a>Resource Manager에 대한 리소스 그룹 만들기
 
-Azure PowerShell의 최신 버전을 사용하고 있는지 확인합니다. 자세한 내용은 [Resource Manager에서 Windows PowerShell 사용](../powershell-azure-resource-manager.md)을 참조하세요.
+Azure PowerShell의 최신 버전을 사용하고 있는지 확인합니다. 자세한 내용은 [Resource Manager에서 Windows PowerShell 사용](https://docs.microsoft.com/azure/azure-resource-manager/powershell-azure-resource-manager)을 참조하세요.
 
-### <a name="step-1"></a>1단계:
+### <a name="step-1"></a>1단계
 
 Azure에 로그인
 
 ```powershell
-Login-AzureRmAccount
+Connect-AzureRmAccount
 ```
 
 자격 증명을 사용하여 인증합니다.<BR>
@@ -126,7 +135,7 @@ $apimsubnet = New-AzureRmVirtualNetworkSubnetConfig -Name "apim02" -AddressPrefi
 $vnet = New-AzureRmVirtualNetwork -Name "appgwvnet" -ResourceGroupName "apim-appGw-RG" -Location "West US" -AddressPrefix "10.0.0.0/16" -Subnet $appgatewaysubnet,$apimsubnet
 ```
 
-### <a name="step-4"></a>4단계
+### <a name="step-4"></a>4단계:
 
 다음 단계에 대한 서브넷 변수 할당
 
@@ -148,7 +157,7 @@ $apimVirtualNetwork = New-AzureRmApiManagementVirtualNetwork -Location "West US"
 Virtual Network 내부에 API Management 서비스를 만듭니다.
 
 ```powershell
-$apimService = New-AzureRmApiManagement -ResourceGroupName "apim-appGw-RG" -Location "West US" -Name "ContosoApi" -Organization "Contoso" -AdminEmail "admin@contoso.com" -VirtualNetwork $apimVirtualNetwork -VpnType "Internal" -Sku "Premium"
+$apimService = New-AzureRmApiManagement -ResourceGroupName "apim-appGw-RG" -Location "West US" -Name "ContosoApi" -Organization "Contoso" -AdminEmail "admin@contoso.com" -VirtualNetwork $apimVirtualNetwork -VpnType "Internal" -Sku "Developer"
 ```
 위의 명령이 성공한 후에 액세스하려면 [내부 VNET API Management 서비스에 액세스하는 데 필요한 DNS 구성](api-management-using-with-internal-vnet.md#apim-dns-configuration)을 참조하세요.
 
@@ -183,9 +192,9 @@ $publicip = New-AzureRmPublicIpAddress -ResourceGroupName "apim-appGw-RG" -name 
 
 응용 프로그램 게이트웨이를 만들기 전에 모든 구성 항목을 설정해야 합니다. 다음 단계 응용 프로그램 게이트웨이 리소스에 필요한 구성 항목을 만듭니다.
 
-### <a name="step-1"></a>1단계:
+### <a name="step-1"></a>1단계
 
-**gatewayIP01**이라는 응용 프로그램 게이트웨이 IP 구성을 만듭니다. 응용 프로그램 게이트웨이는 시작되면 구성된 서브넷에서 IP 주소를 선택하고 백 엔드 IP 풀의 IP 주소로 네트워크 트래픽을 라우팅합니다. 인스턴스마다 하나의 IP 주소를 사용합니다.
+**gatewayIP01**이라는 응용 프로그램 게이트웨이 IP 구성을 만듭니다. Application Gateway는 시작되면 구성된 서브넷에서 IP 주소를 선택하고 백 엔드 IP 풀의 IP 주소로 네트워크 트래픽을 라우팅합니다. 인스턴스마다 하나의 IP 주소를 사용합니다.
 
 ```powershell
 $gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name "gatewayIP01" -Subnet $appgatewaysubnetdata
@@ -206,7 +215,7 @@ $fp01 = New-AzureRmApplicationGatewayFrontendPort -Name "port01"  -Port 443
 $fipconfig01 = New-AzureRmApplicationGatewayFrontendIPConfig -Name "frontend1" -PublicIPAddress $publicip
 ```
 
-### <a name="step-4"></a>4단계
+### <a name="step-4"></a>4단계:
 
 Application Gateway의 인증서가 전달되는 트래픽을 암호화하고 해독하는 데 사용되도록 구성합니다.
 
@@ -290,7 +299,7 @@ $dummyPathRule = New-AzureRmApplicationGatewayPathRuleConfig -Name "nonexistenta
 $echoapiRule = New-AzureRmApplicationGatewayPathRuleConfig -Name "externalapis" -Paths "/echo/*" -BackendAddressPool $apimProxyBackendPool -BackendHttpSettings $apimPoolSetting
 ```
 
-경로가 API Management에서 사용하려는 경로 규칙과 일치하지 않으면 규칙 경로 맵 구성이 **dummyBackendPool**이라는 기본 백 엔드 주소 풀도 구성합니다. 예를 들어 http://api.contoso.net/calc/*는 일치하지 않는 트래픽의 기본 풀로 정의되어 있으므로 **dummyBackendPool**로 이동합니다.
+경로가 API Management에서 사용하려는 경로 규칙과 일치하지 않으면 규칙 경로 맵 구성이 **dummyBackendPool**이라는 기본 백 엔드 주소 풀도 구성합니다. 예를 들어 http://api.contoso.net/calc/sum은 일치하지 않는 트래픽의 기본 풀로 정의되어 있으므로 **dummyBackendPool**로 이동합니다.
 
 ```powershell
 $urlPathMap = New-AzureRmApplicationGatewayUrlPathMapConfig -Name "urlpathmap" -PathRules $echoapiRule, $dummyPathRule -DefaultBackendAddressPool $dummyBackendPool -DefaultBackendHttpSettings $dummyBackendSetting
@@ -321,7 +330,7 @@ WAF를 "방지" 모드로 구성합니다.
 $config = New-AzureRmApplicationGatewayWebApplicationFirewallConfiguration -Enabled $true -FirewallMode "Prevention"
 ```
 
-## <a name="create-application-gateway"></a>응용 프로그램 게이트웨이 만들기
+## <a name="create-application-gateway"></a>Application Gateway 만들기
 
 이전 단계의 모든 구성 개체를 사용하여 Application Gateway를 만듭니다.
 
@@ -344,10 +353,9 @@ VNET에서 구성된 Azure API Management는 온-프레미스 또는 클라우�
 
 ##<a name="next-steps"> </a> 다음 단계
 * Azure Application Gateway에 대한 자세한 정보
-  * [응용 프로그램 게이트웨이 개요](../application-gateway/application-gateway-introduction.md)
+  * [Application Gateway 개요](../application-gateway/application-gateway-introduction.md)
   * [Application Gateway 웹 응용 프로그램 방화벽](../application-gateway/application-gateway-webapplicationfirewall-overview.md)
   * [경로 기반 라우팅을 사용하는 Application Gateway](../application-gateway/application-gateway-create-url-route-arm-ps.md)
 * API Management 및 VNET에 대한 자세한 정보
   * [VNET 내에서만 사용할 수 있는 API Management 사용](api-management-using-with-internal-vnet.md)
   * [VNET에서 API Management 사용](api-management-using-with-vnet.md)
-

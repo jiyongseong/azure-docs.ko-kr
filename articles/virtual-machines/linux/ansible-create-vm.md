@@ -1,37 +1,36 @@
 ---
-title: "Azure에서 Ansible을 사용하여 기본 Linux VM 만들기 | Microsoft Docs"
-description: "Azure에서 Ansible을 사용하여 기본 Linux 가상 컴퓨터를 만들고 관리하는 방법을 알아봅니다"
+title: Azure에서 Ansible을 사용하여 기본 Linux VM 만들기 | Microsoft Docs
+description: Azure에서 Ansible을 사용하여 기본 Linux 가상 머신을 만들고 관리하는 방법을 알아봅니다
 services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: iainfoulds
-manager: timlt
+manager: jeconnoc
 editor: na
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 05/25/2017
+ms.date: 12/18/2017
 ms.author: iainfou
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a643f139be40b9b11f865d528622bafbe7dec939
-ms.openlocfilehash: 526f3522334450564500c4ba0e401a683cae55f6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/31/2017
-
+ms.openlocfilehash: a2bf047d5a08bfd3df6a6c76116d2b9b9ab81fad
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
+ms.locfileid: "33896166"
 ---
-
-# <a name="create-a-basic-virtual-machine-in-azure-with-ansible"></a>Azure에서 Ansible을 사용하여 기본 가상 컴퓨터 만들기
-Ansible을 사용하면 사용자 환경에서 리소스의 배포 및 구성을 자동화할 수 있습니다. Azure에서 Ansible을 사용하여 다른 리소스와 동일한 방식으로 VM(가상 컴퓨터)을 관리할 수 있습니다. 이 문서에서는 Ansible을 사용하여 기본 VM을 만드는 방법을 보여 줍니다. 또한 [Ansible을 사용하여 전체 VM 환경을 만드는](ansible-create-complete-vm.md) 방법도 배울 수 있습니다.
+# <a name="create-a-basic-virtual-machine-in-azure-with-ansible"></a>Azure에서 Ansible을 사용하여 기본 가상 머신 만들기
+Ansible을 사용하면 사용자 환경에서 리소스의 배포 및 구성을 자동화할 수 있습니다. Azure에서 Ansible을 사용하여 다른 리소스와 동일한 방식으로 VM(가상 머신)을 관리할 수 있습니다. 이 문서에서는 Ansible을 사용하여 기본 VM을 만드는 방법을 보여 줍니다. 또한 [Ansible을 사용하여 전체 VM 환경을 만드는](ansible-create-complete-vm.md) 방법도 배울 수 있습니다.
 
 
 ## <a name="prerequisites"></a>필수 조건
 Ansible을 사용하여 Azure 리소스를 관리하려면 다음이 필요합니다.
 
 - 호스트 시스템에 설치된 Ansible 및 Azure Python SDK 모듈
-    - [Ubuntu 16.04 LTS](ansible-install-configure.md#ubuntu-1604-lts), [CentOS 7.3](ansible-install-configure.md#centos-73) 및 [SLES 12.2 SP2](ansible-install-configure.md#sles-122-sp2)에 Ansible 설치
+    - [CentOS 7.4](ansible-install-configure.md#centos-74), [Ubuntu 16.04 LTS](ansible-install-configure.md#ubuntu-1604-lts) 및 [SLES 12 SP2](ansible-install-configure.md#sles-12-sp2)에 Ansible 설치
 - Azure 자격 증명 및 이를 사용하도록 구성된 Ansible
     - [Azure 자격 증명 만들기 및 Ansible 구성](ansible-install-configure.md#create-azure-credentials)
 - Azure CLI 버전 2.0.4 이상 `az --version`을 실행하여 버전을 찾습니다. 
@@ -39,13 +38,13 @@ Ansible을 사용하여 Azure 리소스를 관리하려면 다음이 필요합�
 
 
 ## <a name="create-supporting-azure-resources"></a>지원 Azure 리소스 만들기
-이 예제에서는 기존 인프라에 VM을 배포하는 runbook을 만듭니다. 먼저 [az group create](/cli/azure/vm#create)를 사용하여 리소스 그룹을 만듭니다. 다음 예제에서는 *eastus* 위치에 *myResourceGroup*이라는 리소스 그룹을 만듭니다.
+이 예제에서는 기존 인프라에 VM을 배포하는 runbook을 만듭니다. 먼저 [az group create](/cli/azure/vm#az_vm_create)를 사용하여 리소스 그룹을 만듭니다. 다음 예제에서는 *eastus* 위치에 *myResourceGroup*이라는 리소스 그룹을 만듭니다.
 
 ```azurecli
 az group create --name myResourceGroup --location eastus
 ```
 
-[az network vnet create](/cli/azure/network/vnet#create)를 사용하여 VM의 가상 네트워크를 만듭니다. 다음 예제에서는 *myVnet*이라는 가상 네트워크와 *mySubnet*이라는 서브넷을 만듭니다.
+[az network vnet create](/cli/azure/network/vnet#az_network_vnet_create)를 사용하여 VM의 가상 네트워크를 만듭니다. 다음 예제에서는 *myVnet*이라는 가상 네트워크와 *mySubnet*이라는 서브넷을 만듭니다.
 
 ```azurecli
 az network vnet create \
@@ -58,7 +57,7 @@ az network vnet create \
 
 
 ## <a name="create-and-run-ansible-playbook"></a>Ansible Playbook 만들기 및 실행
-**azure_create_vm.yml**이라는 Ansible Playbook을 만들고 다음 내용을 붙여넣습니다. 이 예제에서는 단일 VM을 만들고 SSH 자격 증명을 구성합니다. 다음과 같이 *key_data* 쌍으로 사용자 고유의 공개 키 데이터를 입력합니다.
+*azure_create_vm.yml*이라는 Ansible Playbook을 만들고 다음 내용을 붙여넣습니다. 이 예제에서는 단일 VM을 만들고 SSH 자격 증명을 구성합니다. 다음과 같이 *key_data* 쌍으로 사용자 고유의 전체 공개 키 데이터를 입력합니다.
 
 ```yaml
 - name: Create Azure VM

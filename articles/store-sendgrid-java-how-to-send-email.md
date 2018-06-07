@@ -1,7 +1,7 @@
 ---
-title: "SendGrid 메일 서비스를 사용하는 방법(Java) | Microsoft Docs"
-description: "Azure에서 SendGrid 메일 서비스를 사용하여 메일을 보내는 방법을 알아봅니다. 코드 샘플은 Java로 작성되었습니다."
-services: 
+title: SendGrid 메일 서비스를 사용하는 방법(Java) | Microsoft Docs
+description: Azure에서 SendGrid 메일 서비스를 사용하여 메일을 보내는 방법을 알아봅니다. 코드 샘플은 Java로 작성되었습니다.
+services: ''
 documentationcenter: java
 author: thinkingserious
 manager: sendgrid
@@ -14,11 +14,12 @@ ms.devlang: Java
 ms.topic: article
 ms.date: 10/30/2014
 ms.author: elmer.thomas@sendgrid.com; erika.berkland@sendgrid.com; vibhork
-translationtype: Human Translation
-ms.sourcegitcommit: dcda8b30adde930ab373a087d6955b900365c4cc
-ms.openlocfilehash: 85a0e302626ca14ac039ee6f662f372ddbeb62c5
-
-
+ms.openlocfilehash: cadd771a516270faf23f18a36f54fa9a1541e6d5
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34364902"
 ---
 # <a name="how-to-send-email-using-sendgrid-from-java"></a>Java의 SendGrid를 사용하여 메일을 보내는 방법
 이 가이드에서는 Azure에서 SendGrid 전자 메일 서비스로 일반 프로그래밍 작업을 수행하는 방법을 보여 줍니다. 샘플은 Java로 작성되었습니다. **전자 메일 생성**, **전자 메일 보내기**, **첨부 파일 추가**, **필터 사용**, **속성 업데이트** 등의 시나리오를 다룹니다. SendGrid 및 전자 메일 보내기에 대한 자세한 내용은 [다음 단계](#next-steps) 섹션을 참조하세요.
@@ -33,13 +34,13 @@ SendGrid는 사용자 지정 통합을 쉽게 만드는 유연한 API와 함께 
 * 고객 문의 전달
 * 응용 프로그램의 전자 메일 알림
 
-자세한 내용은 <http://sendgrid.com>(영문)을 참조하세요.
+자세한 내용은 <http://sendgrid.com>을 참조하세요.
 
 ## <a name="create-a-sendgrid-account"></a>SendGrid 계정 만들기
 [!INCLUDE [sendgrid-sign-up](../includes/sendgrid-sign-up.md)]
 
 ## <a name="how-to-use-the-javaxmail-libraries"></a>방법: javax.mail 라이브러리 사용
-예를 들어 javax.mail 라이브러리를 <http://www.oracle.com/technetwork/java/javamail>(영문)에서 얻어 코드로 가져옵니다. 상위 수준에서, javax.mail 라이브러리를 사용하여 SMTP를 통해 전자 메일을 보내는 프로세스는 다음과 같습니다.
+javax.mail 라이브러리를 가져오고(예: <http://www.oracle.com/technetwork/java/javamail>에서) 코드로 가져옵니다. 상위 수준에서, javax.mail 라이브러리를 사용하여 SMTP를 통해 전자 메일을 보내는 프로세스는 다음과 같습니다.
 
 1. SMTP 서버를 포함한 SMTP 값을 지정합니다. SendGrid는 smtp.sendgrid.net입니다.
 
@@ -81,7 +82,7 @@ SendGrid는 사용자 지정 통합을 쉽게 만드는 유연한 API와 함께 
        Authenticator auth = new SMTPAuthenticator();
        Session mailSession = Session.getDefaultInstance(properties, auth);
 3. 메시지를 만들고 **받는 사람**, **보낸 사람**, **제목** 및 내용 값을 할당합니다. [방법: 전자 메일 만들기](#how-to-create-an-email) 섹션에 나와 있습니다.
-4. *javax.mail.Transport* 개체를 통해 메시지를 보냅니다. [방법: 전자 메일 보내기][방법: 전자 메일 보내기] 섹션에 나와 있습니다.
+4. *javax.mail.Transport* 개체를 통해 메시지를 보냅니다. [방법: 전자 메일 보내기][#how-to-send-an-email] 섹션에 나와 있습니다.
 
 ## <a name="how-to-create-an-email"></a>방법: 전자 메일 만들기
 다음은 메일 값을 지정하는 방법을 보여 줍니다.
@@ -158,7 +159,7 @@ SendGrid는 *필터*사용을 통해 추가 전자 메일 기능을 제공합니
           {\"enable\":1}}}}");
 
 ## <a name="how-to-update-email-properties"></a>방법: 전자 메일 속성 업데이트
-일부 전자 메일 속성을 **set*Property***를 사용하여 덮어쓰거나 **add*Property***를 사용하여 추가할 수 있습니다.
+일부 이메일 속성은 **set Property**를 사용하여 덮어쓰거나 **add Property**를 사용하여 추가할 수 있습니다.
 
 예를 들어 **ReplyTo** 주소를 지정하려면 다음을 사용하십시오.
 
@@ -182,7 +183,7 @@ SendGrid 메일 서비스에 관한 기본적인 사항들을 익혔으며 자�
 * Azure 배포에서 SendGrid를 사용하는 방법을 보여 주는 샘플: [Azure 배포에서 Java의 SendGrid를 사용하여 전자 메일을 보내는 방법](store-sendgrid-java-how-to-send-email-example.md)
 * SendGrid Java SDK: <https://sendgrid.com/docs/Code_Examples/java.html>
 * SendGrid API 설명서: <https://sendgrid.com/docs/API_Reference/index.html>
-* Azure 고객을 위한 SendGrid 특가 제공: <https://sendgrid.com/windowsazure.html>
+* Azure 고객을 위한 SendGrid 특별 제공: <https://sendgrid.com/windowsazure.html>
 
 [http://sendgrid.com]: https://sendgrid.com
 [http://sendgrid.com/pricing.html]: http://sendgrid.com/pricing.html
@@ -194,9 +195,3 @@ SendGrid 메일 서비스에 관한 기본적인 사항들을 익혔으며 자�
 [http://sendgrid.com/azure.html]: https://sendgrid.com/windowsazure.html
 [클라우드 기반 전자 메일 서비스]: https://sendgrid.com/email-solutions
 [트랜잭션 전자 메일 발송]: https://sendgrid.com/transactional-email
-
-
-
-<!--HONumber=Dec16_HO2-->
-
-

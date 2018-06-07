@@ -1,12 +1,12 @@
 ---
-title: "Azure Data Lake U-SQL SDK를 사용하여 U-SQL 로컬 실행 및 테스트 규모 조정 | Microsoft Docs"
-description: "Azure Data Lake U-SQL SDK를 사용하여 로컬 워크스테이션의 명령줄 및 프로그래밍 인터페이스로 U-SQL 작업 로컬 실행 및 테스트 크기를 조정하는 방법을 알아봅니다."
+title: Azure Data Lake U-SQL SDK를 사용하여 U-SQL 로컬 실행 및 테스트 규모 조정 | Microsoft Docs
+description: Azure Data Lake U-SQL SDK를 사용하여 로컬 워크스테이션의 명령줄 및 프로그래밍 인터페이스로 U-SQL 작업 로컬 실행 및 테스트 크기를 조정하는 방법을 알아봅니다.
 services: data-lake-analytics
-documentationcenter: 
-author: 
-manager: 
-editor: 
-ms.assetid: 
+documentationcenter: ''
+author: ''
+manager: ''
+editor: ''
+ms.assetid: ''
 ms.service: data-lake-analytics
 ms.devlang: na
 ms.topic: article
@@ -14,15 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: big-data
 ms.date: 03/01/2017
 ms.author: yanacai
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a1ba750d2be1969bfcd4085a24b0469f72a357ad
 ms.openlocfilehash: 55242bcf644ca0e7f30cfe7eada2130451c36e64
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
-
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
-
 # <a name="scale-u-sql-local-run-and-test-with-azure-data-lake-u-sql-sdk"></a>Azure Data Lake U-SQL SDK를 사용하여 U-SQL 로컬 실행 및 테스트 규모 조정
 
 U-SQL 스크립트를 개발할 때 클라우드로 제출하기 전에 로컬에서 U-SQL 스크립트를 실행하고 테스트하는 것이 일반적입니다. Azure Data Lake는 이 시나리오에 대해 Azure Data Lake U-SQL SDK라는 Nuget 패키지를 제공합니다. 이를 통해 U-SQL 로컬 실행 및 테스트 규모를 쉽게 조정할 수 있습니다. 이 U-SQL 테스트를 CI(연속 통합) 시스템에 통합하여 컴파일 및 테스트를 자동화할 수도 있습니다.
@@ -340,13 +337,13 @@ LocalRunHelper.exe는 U-SQL 로컬 컴파일, 실행 등을 위한 프로그래�
 
 public LocalRunHelper([System.IO.TextWriter messageOutput = null])
 
-|매개 변수|형식|설명|
+|매개 변수|유형|설명|
 |---------|----|-----------|
 |messageOutput|System.IO.TextWriter|출력 메시지의 경우 콘솔을 사용하도록 null로 설정|
 
 **속성**
 
-|속성|형식|설명|
+|자산|유형|설명|
 |--------|----|-----------|
 |AlgebraPath|string|대수 파일의 경로입니다(대수 파일은 컴파일 결과 중 하나임).|
 |CodeBehindReferences|string|스크립트에 추가 코드 숨김 참조가 있으면 경로를 ';'으로 구분합니다.|
@@ -372,7 +369,7 @@ public LocalRunHelper([System.IO.TextWriter messageOutput = null])
 
 **메서드**
 
-|메서드|설명|Return|매개 변수를 포함해야 합니다.|
+|방법|설명|Return|매개 변수|
 |------|-----------|------|---------|
 |public bool DoCompile()|U-SQL 스크립트를 컴파일합니다.|성공 시 True입니다.| |
 |public bool DoExec()|컴파일된 결과를 실행합니다.|성공 시 True입니다.| |
@@ -398,4 +395,3 @@ E_CSC_SYSTEM_INTERNAL: 내부 오류입니다. 파일 또는 어셈블리 'Scope
 * 더 복잡한 쿼리를 보려면 [Azure Data Lake Analytics을 사용하여 웹 사이트 로그 분석](data-lake-analytics-analyze-weblogs.md)을 참조하세요.
 * 작업 세부 정보를 보려면, [Azure Data lake Analytics 작업에 대한 작업 브라우저 및 작업 보기 사용하기](data-lake-analytics-data-lake-tools-view-jobs.md)를 참조하세요.
 * 꼭짓점 실행 보기를 사용하려면 [Data Lake Tools for Visual Studio에서 Vertex Execution View 사용](data-lake-analytics-data-lake-tools-use-vertex-execution-view.md)을 참조하세요.
-

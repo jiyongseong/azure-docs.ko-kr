@@ -1,11 +1,11 @@
 ---
-title: "응용 프로그램에 대한 동의를 수행할 때 예기치 않은 오류 | Microsoft Docs"
-description: "응용 프로그램에 대한 동의 프로세스 도중 발생할 수 있는 오류 및 사용자가 할 수 있는 조치를 설명합니다."
+title: 응용 프로그램에 대한 동의를 수행할 때 예기치 않은 오류 | Microsoft Docs
+description: 응용 프로그램에 대한 동의 프로세스 도중 발생할 수 있는 오류 및 사용자가 할 수 있는 조치를 설명합니다.
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: ajamess
-manager: femila
-ms.assetid: 
+manager: mtillman
+ms.assetid: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
@@ -13,14 +13,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0d6f6fb24f1f01d703104f925dcd03ee1ff46062
-ms.openlocfilehash: 21dabdcf0697b38ad3598ee8126a1bd62007efb5
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/18/2017
-
+ms.openlocfilehash: bbc0cee8a44773c025c6174eaf7eccaba81b8d1b
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
-
 # <a name="unexpected-error-when-performing-consent-to-an-application"></a>응용 프로그램에 대한 동의를 수행할 때 예기치 않은 오류
 
 이 문서에서는 응용 프로그램에 대한 동의 프로세스 도중 발생할 수 있는 오류에 대해 설명합니다. 오류 메시지를 포함하지 않는 예기치 않은 동의 프롬프트의 문제를 해결하려는 경우 [Azure AD의 인증 시나리오](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-scenarios)를 참조하세요.
@@ -78,6 +76,5 @@ Azure Active Directory와 통합되는 많은 응용 프로그램을 작동시�
 [Azure Active Directory에서 앱, 사용 권한 및 동의(v1 끝점)](https://docs.microsoft.com/azure/active-directory/active-directory-apps-permissions-consent)<br>
 
 [Azure Active Directory의 범위, 사용 권한 및 동의(v2.0 끝점)](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-scopes)
-
 
 

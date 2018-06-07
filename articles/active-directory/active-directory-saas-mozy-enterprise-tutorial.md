@@ -1,10 +1,10 @@
 ---
-title: "자습서: Mozy Enterprise와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory와 Mozy Enterprise 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Mozy Enterprise와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory와 Mozy Enterprise 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: 489b5e62-85c2-45c9-8766-326632d48114
 ms.service: active-directory
 ms.workload: identity
@@ -13,13 +13,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/27/2017
 ms.author: jeedes
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: ac73aadcb8205f24f9d2dbce5af76f53bbcb9753
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
-
+ms.openlocfilehash: 37b0cdce9b77b304a24ff3419f618f193fb2ad52
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-mozy-enterprise"></a>자습서: Mozy Enterprise와 Azure Active Directory 통합
 
@@ -31,7 +29,7 @@ Mozy Enterprise를 Azure AD와 통합하면 다음과 같은 이점이 제공됩
 - 사용자의 Azure AD 계정으로 Mozy Enterprise에 자동으로 로그온(Single Sign-On)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +57,7 @@ Mozy Enterprise의 Azure AD 통합을 구성하려면 갤러리의 Mozy Enterpri
 
 **갤러리에서 Mozy Enterprise를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Active Directory][1]
 
@@ -88,11 +86,11 @@ Mozy Enterprise에서 Azure AD의 **사용자 이름** 값을 **Username** 값�
 
 Mozy Enterprise에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구성 요소를 완료해야 합니다.
 
-1. **[Azure AD Single Sign-On 구성](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
-2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
+1. **[Configuring Azure AD Single Sign-On](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
+2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On 테스트하는 데 사용합니다.
 3. **[Mozy Enterprise 테스트 사용자 만들기](#creating-a-mozy-enterprise-test-user)** - Britta Simon의 Azure AD 표현과 연결되는 대응 사용자를 Mozy Enterprise에 만듭니다.
 4. **[Azure AD 테스트 사용자 할당](#assigning-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Testing Single Sign-On](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
+5. **[Single Sign-On 테스트](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
 
 ### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -102,32 +100,32 @@ Mozy Enterprise에서 Azure AD Single Sign-On을 구성하고 테스트하려면
 
 1. Azure Portal의 **Mozy Enterprise** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single Sign-On** 대화 상자에서 **모드**를 **SAML 기반 로그온**으로 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-on 구성](./media/active-directory-saas-mozy-enterprise-tutorial/tutorial_mozyenterprise_samlbase.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-mozy-enterprise-tutorial/tutorial_mozyenterprise_samlbase.png)
 
 3. **Mozy 엔터프라이즈 도메인 및 URL** 섹션에서 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-mozy-enterprise-tutorial/tutorial_mozyenterprise_url.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-mozy-enterprise-tutorial/tutorial_mozyenterprise_url.png)
 
     **로그온 URL** 텍스트 상자에서 다음 패턴으로 URL을 입력합니다. `https://<tenantname>.Mozyenterprise.com`
 
     > [!NOTE] 
     > 이 값은 실제 값이 아닙니다. 이 값을 실제 로그온 URL로 업데이트합니다. 이 값을 얻으려면 [Mozy Enterprise 클라이언트 지원 팀](http://support.mozy.com/)에 문의하세요.
 
-4. **SAML 서명 인증서** 섹션에서 **인증서(Base64)**를 클릭한 후 컴퓨터에 인증서 파일을 저장합니다.
+4. **SAML 서명 인증서** 섹션에서 **인증서(Base64)** 를 클릭한 후 컴퓨터에 인증서 파일을 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-mozy-enterprise-tutorial/tutorial_mozyenterprise_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-mozy-enterprise-tutorial/tutorial_mozyenterprise_certificate.png) 
 
 5. **저장** 단추를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-mozy-enterprise-tutorial/tutorial_general_400.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-mozy-enterprise-tutorial/tutorial_general_400.png)
 
 6. **Mozy Enterprise 구성** 섹션에서 **Mozy Enterprise 구성**을 클릭하여 **로그온 구성** 창을 엽니다. **빠른 참조 섹션**에서 **SAML 엔터티 ID 및 SAML Single Sign-On 서비스 URL**을 복사합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-mozy-enterprise-tutorial/tutorial_mozyenterprise_configure.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-mozy-enterprise-tutorial/tutorial_mozyenterprise_configure.png) 
 
 7. 다른 웹 브라우저 창에서 Mozy Enterprise 회사 사이트에 관리자로 로그인합니다.
 
@@ -141,9 +139,9 @@ Mozy Enterprise에서 Azure AD Single Sign-On을 구성하고 테스트하려면
    
    a. **디렉터리 서비스**를 **공급자**로 선택합니다.
    
-   b. **LDAP 푸시 사용**을 선택합니다.
+   나. **LDAP 푸시 사용**을 선택합니다.
    
-   c. **SAML 인증** 탭을 클릭합니다.
+   다. **SAML 인증** 탭을 클릭합니다.
    
    d. Azure Portal에서 복사한 **SAML Single Sign-On 서비스 URL**을 **인증 URL** 텍스트 상자에 붙여넣습니다.
    
@@ -184,9 +182,9 @@ Mozy Enterprise에서 Azure AD Single Sign-On을 구성하고 테스트하려면
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -214,9 +212,9 @@ Azure AD 사용자가 Mozy Enterprise에 로그인할 수 있도록 하려면 Mo
    
    a. **그룹 선택** 목록에서 그룹을 선택합니다.
    
-   b. **사용자 유형** 목록에서 유형을 선택합니다.
+   나. **사용자 유형** 목록에서 유형을 선택합니다.
    
-   c. **사용자 이름** 텍스트 상자에 Azure AD 사용자의 이름을 입력합니다.
+   다. **사용자 이름** 텍스트 상자에 Azure AD 사용자의 이름을 입력합니다.
    
    d. **이메일** 텍스트 상자에 Azure AD 사용자의 이메일 주소를 입력합니다.
    
@@ -241,7 +239,7 @@ Azure AD 사용자가 Mozy Enterprise에 로그인할 수 있도록 하려면 Mo
 
 2. 응용 프로그램 목록에서 **Mozy Enterprise**를 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-mozy-enterprise-tutorial/tutorial_mozyenterprise_app.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-mozy-enterprise-tutorial/tutorial_mozyenterprise_app.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -267,7 +265,7 @@ Azure AD 사용자가 Mozy Enterprise에 로그인할 수 있도록 하려면 Mo
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 <!--Image references-->
 
@@ -282,5 +280,4 @@ Azure AD 사용자가 Mozy Enterprise에 로그인할 수 있도록 하려면 Mo
 [201]: ./media/active-directory-saas-mozy-enterprise-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-mozy-enterprise-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-mozy-enterprise-tutorial/tutorial_general_203.png
-
 

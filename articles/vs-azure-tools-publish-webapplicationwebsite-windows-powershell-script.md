@@ -1,24 +1,21 @@
 ---
-title: "Publish-WebApplicationWebSite(Windows PowerShell 스크립트) | Microsoft Docs"
-description: "Azure 웹 사이트에 웹 프로젝트를 게시하는 방법에 대해 알아봅니다. 없는 경우 이 스크립트는 Azure 구독에 필요한 리소스를 만듭니다."
+title: Publish-WebApplicationWebSite(Windows PowerShell 스크립트) | Microsoft Docs
+description: Azure 웹 사이트에 웹 프로젝트를 게시하는 방법에 대해 알아봅니다. 없는 경우 이 스크립트는 Azure 구독에 필요한 리소스를 만듭니다.
 services: visual-studio-online
-documentationcenter: na
-author: TomArcher
+author: ghogen
 manager: douge
-editor: 
-ms.assetid: 63cfaa2d-f04d-40dc-8677-345385c278d5
-ms.service: multiple
-ms.devlang: dotnet
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: multiple
+assetId: 63cfaa2d-f04d-40dc-8677-345385c278d5
+ms.prod: visual-studio-dev15
+ms.technology: vs-azure
+ms.workload: azure
+ms.topic: conceptual
 ms.date: 11/11/2016
-ms.author: tarcher
-translationtype: Human Translation
-ms.sourcegitcommit: 219dcbfdca145bedb570eb9ef747ee00cc0342eb
-ms.openlocfilehash: 6942ea67050b86dc8f5a4c9d71ebd8ebd83ad0a2
-
-
+ms.author: ghogen
+ms.openlocfilehash: b540734f17ed11e4c438e1248ed9612fb892e89a
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="publish-webapplicationwebsite-windows-powershell-script"></a>Publish-WebApplicationWebSite (Windows PowerShell 스크립트)
 ## <a name="syntax"></a>구문
@@ -58,7 +55,7 @@ Azure 웹 사이트에 웹 프로젝트를 게시합니다. 없는 경우 스크
 | Accept Wildcard Characters? |false |
 
 ## <a name="webdeploypackage"></a>WebDeployPackage
-웹 사이트에 게시하는 웹 배포 패키지에 대한 경로입니다. Visual Studio에서 웹 게시 마법사를 사용하여 이 패키지를 만들 수 있습니다. 자세한 내용은 [Azure 클라우드 서비스 및 ASP.NET으로 시작하기](http://go.microsoft.com/fwlink/p/?LinkID=623089)를 참조하세요.
+웹 사이트에 게시하는 웹 배포 패키지에 대한 경로입니다. Visual Studio에서 웹 게시 마법사를 사용하여 이 패키지를 만들 수 있습니다. 자세한 내용은 [Azure Cloud Services 및 ASP.NET으로 시작하기](http://go.microsoft.com/fwlink/p/?LinkID=623089)를 참조하세요.
 
 | 매개 변수 | 기본값 |
 | --- | --- |
@@ -124,10 +121,4 @@ JSON 구성 파일은 배포될 내용의 세부 정보를 지정합니다. 해�
 
 ## <a name="next-steps"></a>다음 단계
 자세한 내용은 [Publish-WebApplicationVM(Windows PowerShell 스크립트)](vs-azure-tools-publish-webapplicationvm.md)
-
-
-
-
-<!--HONumber=Nov16_HO3-->
-
 

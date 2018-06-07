@@ -1,153 +1,171 @@
 ---
-title: "C#에서 첫 번째 행위자 기반 Azure 마이크로 서비스 만들기 | Microsoft Docs"
-description: "이 자습서에서는 서비스 패브릭 Reliable Actors를 사용하여 간단한 행위자 기반 서비스를 생성, 디버깅 및 배포하는 과정을 단계별로 안내합니다."
+title: C#에서 첫 번째 행위자 기반 Azure 마이크로 서비스 만들기 | Microsoft Docs
+description: 이 자습서에서는 서비스 패브릭 Reliable Actors를 사용하여 간단한 행위자 기반 서비스를 생성, 디버깅 및 배포하는 과정을 단계별로 안내합니다.
 services: service-fabric
 documentationcenter: .net
 author: vturecek
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: d4aebe72-1551-4062-b1eb-54d83297f139
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 06/29/2017
+ms.date: 03/16/2018
 ms.author: vturecek
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6efa2cca46c2d8e4c00150ff964f8af02397ef99
-ms.openlocfilehash: 3f447e049ccd33c77f422e8aa703ad6646f9ffa2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/01/2017
-
-
+ms.openlocfilehash: 32d3fa09c863c47753267e97e7c4730dff869887
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="getting-started-with-reliable-actors"></a>Reliable Actors 시작
 > [!div class="op_single_selector"]
 > * [Windows에서 C#](service-fabric-reliable-actors-get-started.md)
 > * [Linux에서 Java](service-fabric-reliable-actors-get-started-java.md)
-> 
-> 
 
-이 문서는 Azure 서비스 패브릭 Reliable Actors의 기본 개념을 설명하고 Visual Studio에서 간단한 Reliable Actor 응용 프로그램을 생성, 디버깅 및 배포하는 과정을 안내합니다.
+이 문서에서는 Visual Studio에서 간단한 Reliable Actor 응용 프로그램을 만들고 디버그하는 과정을 안내합니다. Reliable Actors에 대한 자세한 내용은 [Service Fabric Reliable Actors 소개](service-fabric-reliable-actors-introduction.md)를 참조하세요.
 
-## <a name="installation-and-setup"></a>설치 및 설정
-시작하기 전에 컴퓨터에 서비스 패브릭 개발 환경이 설정되어 있는지 확인합니다.
-이를 설정하려면 [개발 환경을 설정하는 방법](service-fabric-get-started.md)에 대한 자세한 지침을 참조하세요.
+## <a name="prerequisites"></a>필수 조건
 
-## <a name="basic-concepts"></a>기본 개념
-Reliable Actors를 시작하려면 몇 가지 기본 개념만 이해하면 됩니다.
-
-* **행위자 서비스**. Reliable Actors는 서비스 패브릭 인프라에 배포될 수 있는 Reliable Services에 패키징됩니다. 행위자 인스턴스는 명명된 서비스 인스턴스에서 활성화됩니다.
-* **행위자 등록**. Reliable Services와 마찬가지로 Reliable Actor 서비스를 Service Fabric 런타임에 등록해야 합니다. 또한 행위자 형식을 행위자 런타임에 등록해야 합니다.
-* **행위자 인터페이스**. 행위자 인터페이스는 행위자에 대한 강력한 형식의 공용 인터페이스를 정의하는 데 사용됩니다. Reliable Actor 모델 용어에서 행위자 인터페이스는 행위자가 이해하고 처리할 수 있는 메시지의 유형을 정의합니다. 행위자 인터페이스는 다른 행위자 또는 클라이언트 응용 프로그램에서 메시지를 행위자에게 "보내는"(비동기) 데 사용됩니다. Reliable Actors는 여러 인터페이스를 구현할 수 있습니다.
-* **ActorProxy 클래스**. ActorProxy 클래스는 클라이언트 응용 프로그램에서 행위자 인터페이스를 통해 노출되는 메서드를 호출하는 데 사용됩니다. ActorProxy 클래스는 다음 두 가지 중요한 기능을 제공합니다.
-  
-  * 이름 확인: 클러스터에서 행위자를 찾을 수 있습니다(호스트되는 클러스터의 노드 찾기).
-  * 오류 처리: 메서드 호출을 다시 시도하고 행위자를 클러스터의 다른 노드로 재배치해야 하는 경우 등의 오류가 발생한 후 행위자의 위치를 다시 파악할 수 있습니다.
-
-행위자 인터페이스와 관련된 다음 규칙을 확인하면 도움이 됩니다.
-
-* 행위자 인터페이스 메서드는 오버로드할 수 없습니다.
-* 행위자 인터페이스 메서드에는 out, ref 또는 선택적 매개 변수가 없어야 합니다.
-* 제네릭 인터페이스는 지원되지 않습니다.
+시작하기 전에 컴퓨터에 Visual Studio를 비롯한 Service Fabric 개발 환경이 설정되어 있는지 확인합니다. 자세한 내용은 [개발 환경 설정 방법](service-fabric-get-started.md)을 참조하세요.
 
 ## <a name="create-a-new-project-in-visual-studio"></a>Visual Studio에서 새 프로젝트 만들기
-관리자 권한으로 Visual Studio 2015 또는 Visual Studio 2017을 시작하고 새로운 Service Fabric 응용 프로그램 프로젝트를 만듭니다.
+
+관리자 권한으로 Visual Studio 2015 이상을 시작하고 새로운 **Service Fabric 응용 프로그램** 프로젝트를 만듭니다.
 
 ![Visual Studio용 서비스 패브릭 도구 - 새 프로젝트][1]
 
-다음 대화 상자에서 만들려는 프로젝트의 형식을 선택할 수 있습니다.
+다음 대화 상자의 **.Net Core 2.0**에서 **행위자 서비스**를 선택하고 서비스의 이름을 입력합니다.
 
 ![서비스 패브릭 프로젝트 템플릿][5]
 
-HelloWorld 프로젝트의 경우 서비스 패브릭 Reliable Actors 서비스를 사용해 보겠습니다.
-
-솔루션을 만들고 나면 다음과 같은 구조로 표시됩니다.
+만든 프로젝트는 다음과 같은 구조를 표시합니다.
 
 ![서비스 패브릭 프로젝트 구조][2]
 
-## <a name="reliable-actors-basic-building-blocks"></a>신뢰할 수 있는 행위자 기본 구성 요소
-일반적으로 Reliable Actors 솔루션은 다음 3개 프로젝트로 구성됩니다.
+## <a name="examine-the-solution"></a>솔루션 검사
 
-* **응용 프로그램 프로젝트(MyActorApplication)**. 배포를 위해 모든 서비스를 함께 패키지하는 프로젝트입니다. 응용 프로그램을 관리하기 위한 *ApplicationManifest.xml* 및 PowerShell 스크립트가 포함되어 있습니다.
-* **인터페이스 프로젝트(MyActor.Interfaces)**. 행위자에 대한 인터페이스 정의가 포함된 프로젝트입니다. MyActor.Interfaces 프로젝트에서 솔루션의 행위자에 의해 사용될 인터페이스를 정의할 수 있습니다. 행위자 인터페이스는 모든 프로젝트에서 어떤 이름으로든 정의될 수 있지만 인터페이스는 행위자 구현과 행위자를 호출하는 클라이언트에서 공유되는 행위자 계약을 정의하므로 일반적으로 행위자 구현과 별개이고 다른 여러 프로젝트에서 공유될 수 있는 어셈블리에서 정의하는 것이 좋습니다.
+솔루션에는 3개의 프로젝트가 포함되어 있습니다.
+
+* **응용 프로그램 프로젝트(MyApplication)**. 이 프로젝트는 배포를 위해 모든 서비스를 함께 패키지합니다. 응용 프로그램을 관리하기 위한 *ApplicationManifest.xml* 및 PowerShell 스크립트가 포함되어 있습니다.
+
+* **인터페이스 프로젝트(HelloWorld.Interfaces)**. 이 프로젝트는 행위자에 대한 인터페이스 정의를 포함합니다. 행위자 인터페이스는 임의 이름의 모든 프로젝트에 정의할 수 있습니다.  인터페이스는 행위자 구현 및 행위자를 호출하는 클라이언트에 의해 공유되는 행위자 계약을 정의합니다.  클라이언트 프로젝트가 의존하므로, 일반적으로 행위자 구현과는 별도의 어셈블리에 정의하는 것이 적절합니다.
+
+* **행위자 서비스 프로젝트(HelloWorld)**. 이 프로젝트는 행위자를 호스트할 Service Fabric 서비스를 정의합니다. 행위자의 구현 *HellowWorld.cs*를 포함합니다. 행위자 구현은 기본 형식(`Actor`)에서 파생되는 클래스로서, *MyActor.Interfaces* 프로젝트에 정의된 인터페이스를 구현합니다. 또한 행위자 클래스는 `ActorService` 인스턴스 및 `ActorId`를 허용하고 이를 기본 `Actor` 클래스에 전달하는 생성자를 구현해야 합니다.
+    
+    이 프로젝트에는 `ActorRuntime.RegisterActorAsync<T>()`를 사용하여 행위자 클래스를 Service Fabric 런타임에 등록하는 *Program.cs*도 포함되어 있습니다. `HelloWorld` 클래스는 이미 등록되어 있습니다. 프로젝트에 추가된 추가 행위자 구현을 `Main()` 메서드에도 등록해야 합니다.
+
+## <a name="customize-the-helloworld-actor"></a>HelloWorld 행위자 사용자 지정
+
+이 프로젝트 템플릿은 `IHelloWorld` 인터페이스의 일부 메서드를 정의한 후 `HelloWorld` 행위자 구현에 구현합니다.  행위자 서비스가 간단한 "Hello World" 문자열을 반환하도록 해당 메서드를 대체합니다.
+
+*HelloWorld.Interfaces* 프로젝트의 *IHelloWorld.cs* 파일에서 인터페이스 정의를 다음과 같이 바꿉니다.
 
 ```csharp
-public interface IMyActor : IActor
+public interface IHelloWorld : IActor
 {
-    Task<string> HelloWorld();
+    Task<string> GetHelloWorldAsync();
 }
 ```
 
-* **행위자 서비스 프로젝트(MyActor)**. 행위자를 호스트할 서비스 패브릭 서비스를 정의하는 데 사용되는 프로젝트입니다. 행위자의 구현을 포함합니다. 행위자 구현은 기본 형식( `Actor` )에서 파생되는 클래스로서, MyActor.Interfaces 프로젝트에 정의된 인터페이스를 구현합니다. 또한 행위자 클래스는 `ActorService` 인스턴스 및 `ActorId`를 허용하고 이를 기본 `Actor` 클래스에 전달하는 생성자를 구현해야 합니다. 그러면 플랫폼 종속성의 생성자 종속성 주입이 허용됩니다.
+**HelloWorld** 프로젝트의 **HelloWorld.cs**에서 전체 클래스 정의를 다음과 같이 바꿉니다.
 
 ```csharp
 [StatePersistence(StatePersistence.Persisted)]
-class MyActor : Actor, IMyActor
+internal class HelloWorld : Actor, IHelloWorld
 {
-    public MyActor(ActorService actorService, ActorId actorId)
+    public HelloWorld(ActorService actorService, ActorId actorId)
         : base(actorService, actorId)
     {
     }
 
-    public Task<string> HelloWorld()
+    public Task<string> GetHelloWorldAsync()
     {
-        return Task.FromResult("Hello world!");
+        return Task.FromResult("Hello from my reliable actor!");
     }
 }
 ```
 
-행위자 서비스는 서비스 패브릭 런타임에서 서비스 유형에 등록되어야 합니다. 행위자 서비스에서 행위자 인스턴스를 실행하려면 행위자 서비스에 행위자 유형이 등록되어야 합니다. `ActorRuntime` 등록 메서드가 행위자에 대한 이 작업을 수행합니다.
+**Ctrl+Shift+B**를 눌러 프로젝트를 빌드하고 모든 내용이 컴파일되는지 확인합니다.
 
-```csharp
-internal static class Program
-{
-    private static void Main()
+## <a name="add-a-client"></a>클라이언트 추가
+
+행위자 서비스를 호출하는 간단한 콘솔 응용 프로그램을 만듭니다.
+
+1. 솔루션 탐색기에서 솔루션을 마우스 오른쪽 단추로 클릭하고 **추가** > **새 프로젝트...** 를 클릭합니다.
+
+2. **.NET Core** 프로젝트 형식에서 **콘솔 응용 프로그램(.NET Core)** 을 선택합니다.  프로젝트 이름을 *ActorClient*로 지정합니다.
+    
+    ![새 프로젝트 추가 대화 상자][6]    
+    
+    > [!NOTE]
+    > 콘솔 응용 프로그램은 일반적으로 Service Fabric에서 클라이언트로 사용하는 앱 유형이 아니지만 로컬 Service Fabric 클러스터를 사용하여 디버그 및 테스트하기 위한 편리한 예제를 만들어줍니다.
+
+3. 콘솔 응용 프로그램은 인터페이스 프로젝트와의 호환성과 기타 종속성을 유지하기 위해 64비트 응용 프로그램이어야 합니다.  솔루션 탐색기에서 **ActorClient** 프로젝트를 마우스 오른쪽 단추로 클릭하고 **속성**을 클릭합니다.  **빌드** 탭에서 **플랫폼 대상**을 **x64**로 설정합니다.
+    
+    ![빌드 속성][8]
+
+4. 클라이언트 프로젝트에는 Reliable Actors NuGet 패키지가 필요합니다.  **도구** > **NuGet 패키지 관리자** > **패키지 관리자 콘솔**을 클릭합니다.  패키지 관리자 콘솔에서 다음 명령을 입력합니다.
+    
+    ```powershell
+    Install-Package Microsoft.ServiceFabric.Actors -IncludePrerelease -ProjectName ActorClient
+    ```
+
+    NuGet 패키지 및 모든 해당 종속성이 ActorClient 프로젝트에 설치됩니다.
+
+5. 클라이언트 프로젝트에는 인터페이스 프로젝트에 대한 참조도 필요합니다.  ActorClient 프로젝트에서 마우스 오른쪽 단추로 **종속성**을 클릭한 다음 **참조 추가...** 를 클릭합니다.  **프로젝트 > 솔루션**(아직 선택하지 않은 경우)을 선택하고 **HelloWorld.Interfaces** 옆의 확인란을 선택합니다.  **확인**을 클릭합니다.
+    
+    ![참조 추가 대화 상자][7]
+
+6. ActorClient 프로젝트에서 *Program.cs*의 전체 내용을 다음 코드로 바꿉니다.
+    
+    ```csharp
+    using System;
+    using System.Threading.Tasks;
+    using Microsoft.ServiceFabric.Actors;
+    using Microsoft.ServiceFabric.Actors.Client;
+    using HelloWorld.Interfaces;
+    
+    namespace ActorClient
     {
-        try
+        class Program
         {
-            ActorRuntime.RegisterActorAsync<MyActor>(
-                (context, actorType) => new ActorService(context, actorType, () => new MyActor())).GetAwaiter().GetResult();
-
-            Thread.Sleep(Timeout.Infinite);
-        }
-        catch (Exception e)
-        {
-            ActorEventSource.Current.ActorHostInitializationFailed(e.ToString());
-            throw;
+            static void Main(string[] args)
+            {
+                IHelloWorld actor = ActorProxy.Create<IHelloWorld>(ActorId.CreateRandom(), new Uri("fabric:/MyApplication/HelloWorldActorService"));
+                Task<string> retval = actor.GetHelloWorldAsync();
+                Console.Write(retval.Result);
+                Console.ReadLine();
+            }
         }
     }
-}
+    ```
 
-```
+## <a name="running-and-debugging"></a>실행 및 디버그
 
-Visual Studio에서 새 프로젝트를 시작하고 하나의 행위자 정의만 있는 경우, 등록은 기본적으로 Visual Studio에서 생성하는 코드에 포함됩니다. 서비스에서 다른 행위자를 정의하는 경우 다음을 사용하여 행위자 등록을 추가해야 합니다.
+**F5** 키를 눌러 Service Fabric 개발 클러스터에서 로컬로 응용 프로그램을 빌드, 배포 및 실행합니다.  배포 프로세스가 진행되는 동안 **출력** 창에서 진행률을 볼 수 있습니다.
 
-```csharp
- ActorRuntime.RegisterActorAsync<MyOtherActor>();
+![서비스 패브릭 디버깅 출력 창][3]
 
-```
+출력에 *The application is ready*가 포함되면 ActorClient 응용 프로그램을 사용하여 서비스를 테스트할 수 있습니다.  솔루션 탐색기에서 마우스 오른쪽 단추로 **ActorClient** 프로젝트를 클릭하고 **디버그** > **새 인스턴스 시작**을 클릭합니다.  명령줄 응용 프로그램에는 행위자 서비스의 출력이 표시됩니다.
+
+![응용 프로그램 출력][9]
 
 > [!TIP]
 > 서비스 패브릭 행위자 런타임에서는 일부 [행위자 메서드와 관련된 이벤트 및 성능 카운터](service-fabric-reliable-actors-diagnostics.md#actor-method-events-and-performance-counters)를 내보냅니다. 진단 및 성능 모니터링에 유용합니다.
-> 
-> 
-
-## <a name="debugging"></a>디버그
-Visual Studio용 서비스 패브릭 도구는 로컬 컴퓨터에서 디버깅을 지원합니다. F5 키를 눌러서 디버깅 세션을 시작할 수 있습니다. Visual Studio는 (필요한 경우) 패키지를 작성합니다. 또한 로컬 서비스 패브릭 클러스터에 응용 프로그램을 배포하고 디버거를 연결합니다.
-
-배포 프로세스가 진행되는 동안 **출력** 창에서 진행률을 볼 수 있습니다.
-
-![서비스 패브릭 디버깅 출력 창][3]
 
 ## <a name="next-steps"></a>다음 단계
 [Reliable Actors가 Service Fabric 플랫폼을 사용하는 방법](service-fabric-reliable-actors-platform.md)에 대해 자세히 알아봅니다.
 
-<!--Image references-->
+
 [1]: ./media/service-fabric-reliable-actors-get-started/reliable-actors-newproject.PNG
 [2]: ./media/service-fabric-reliable-actors-get-started/reliable-actors-projectstructure.PNG
 [3]: ./media/service-fabric-reliable-actors-get-started/debugging-output.PNG
 [4]: ./media/service-fabric-reliable-actors-get-started/vs-context-menu.png
 [5]: ./media/service-fabric-reliable-actors-get-started/reliable-actors-newproject1.PNG
-
+[6]: ./media/service-fabric-reliable-actors-get-started/new-console-app.png
+[7]: ./media/service-fabric-reliable-actors-get-started/add-reference.png
+[8]: ./media/service-fabric-reliable-actors-get-started/build-props.png
+[9]: ./media/service-fabric-reliable-actors-get-started/app-output.png

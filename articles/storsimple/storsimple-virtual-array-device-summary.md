@@ -14,10 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/29/2016
 ms.author: manuaery
-translationtype: Human Translation
-ms.sourcegitcommit: c78eda33a64d630ba18aba6a174db372eb41dde9
 ms.openlocfilehash: 35413d597c3b6b1c7600241a78572b63f982d175
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-the-device-summary-blade-for-storsimple-device-manager-connected-to-storsimple-virtual-array"></a>StorSimple 가상 배열에 연결된 StorSimple 장치 관리자에 대한 장치 요약 블레이드 사용
 
@@ -54,10 +55,4 @@ Essentials 영역은 상태, 모델, 소프트웨어 버전뿐만 아니라 배�
 - [StorSimple 가상 배열에서 공유 관리](storsimple-virtual-array-manage-shares.md)
     
 - [StorSimple 가상 배열에서 볼륨 관리](storsimple-virtual-array-manage-volumes.md)
-
-
-
-
-<!--HONumber=Jan17_HO4-->
-
 

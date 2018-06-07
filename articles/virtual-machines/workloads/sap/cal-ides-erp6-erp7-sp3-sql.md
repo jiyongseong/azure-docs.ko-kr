@@ -16,13 +16,11 @@ ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
 ms.date: 09/16/2016
 ms.author: hermannd
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 31ecec607c78da2253fcf16b3638cc716ba3ab89
 ms.openlocfilehash: 91eed294077ff72d0760018b10c98f32db88f3be
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/23/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="deploy-sap-ides-ehp7-sp3-for-sap-erp-60-on-azure"></a>Azure에서 SAP IDES EHP7 SP3 for SAP ERP 6.0 배포
 이 문서에서는 SAP CAL(SAP 클라우드 어플라이언스 라이브러리) 3.0을 통해 Azure에서 SQL Server 및 Windows OS와 함께 실행되는 SAP IDES 시스템을 배포하는 방법을 설명합니다. 스크린샷은 단계별 프로세스를 보여 줍니다. 다른 솔루션을 배포하려면 동일한 단계를 수행합니다.
@@ -126,5 +124,4 @@ Windows 및 SQL Server를 기반으로 SAP IDE 솔루션을 배포하려면 먼�
 몇 시간 이내에 정상 SAP IDES 시스템이 Azure에 배포됩니다.
 
 SAP CAL 구독을 구입한 경우 SAP는 Azure에서 SAP CAL을 통해 배포를 완벽하게 지원합니다. 지원 큐는 BC-VCM-CAL입니다.
-
 

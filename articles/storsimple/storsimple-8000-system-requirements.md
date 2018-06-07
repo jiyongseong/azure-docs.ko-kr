@@ -12,14 +12,13 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: TBD
-ms.date: 07/10/2017
+ms.date: 09/28/2017
 ms.author: alkohli
+ms.openlocfilehash: 1a9cdf31c5924d22d968cd99383417ba371cd1c3
+ms.sourcegitcommit: 9cc3d9b9c36e4c973dd9c9028361af1ec5d29910
 ms.translationtype: HT
-ms.sourcegitcommit: 8021f8641ff3f009104082093143ec8eb087279e
-ms.openlocfilehash: 4c339c531dae5724a174c2b22cb379bdb3214a4f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/23/2018
 ---
 # <a name="storsimple-8000-series-software-high-availability-and-networking-requirements"></a>StorSimple 8000 시리즈 소프트웨어, 높은 가용성 및 네트워킹 요구 사항
 
@@ -61,22 +60,22 @@ Microsoft Azure StorSimple 시작을 환영합니다. 이 문서에서는 중요
 
 StorSimple 장치는 잠긴 장치입니다. 하지만 iSCSI, 클라우드 및 관리 트래픽에 허용하도록 포트가 방화벽에서 열려야 합니다. 다음 표에서 방화벽에서 열려야 하는 포트를 나열합니다. 이 테이블에서 *인* 또는 *인바운드*는 장치에 대한 들어오는 클라이언트 요청 액세스에서 방향을 참조합니다. *아웃* 또는 *아웃바운드*는 배포 후 데이터를 외부로 보내는 StorSimple 장치에서 방향을 참조합니다.
 
-| 포트 번호 <sup>1, 2</sup> | 인 또는 아웃 | 포트 범위 | 필수 | 참고 사항 |
+| 포트 번호 <sup>1, 2</sup> | 인 또는 아웃 | 포트 범위 | 필수 | 메모 |
 | --- | --- | --- | --- | --- |
-| TCP 80(HTTP)<sup>3</sup> |아웃 |WAN |아니요 |<ul><li>업데이트 복구를 위한 인터넷 액세스에는 아웃바운드 포트가 사용됩니다.</li><li>아웃바운드 웹 프록시는 사용자가 구성할 수 있습니다.</li><li>시스템 업데이트를 허용하려면 컨트롤러 고정 IP에 대해 이 포트도 오픈되어야 합니다.</li></ul> |
+| TCP 80(HTTP)<sup>3</sup> |아웃 |WAN |아니오 |<ul><li>업데이트 복구를 위한 인터넷 액세스에는 아웃바운드 포트가 사용됩니다.</li><li>아웃바운드 웹 프록시는 사용자가 구성할 수 있습니다.</li><li>시스템 업데이트를 허용하려면 컨트롤러 고정 IP에 대해 이 포트도 오픈되어야 합니다.</li></ul> |
 | TCP 443(HTTPS)<sup>3</sup> |아웃 |WAN |예 |<ul><li>아웃바운드 포트는 클라우드의 데이터에 액세스하는 데 사용됩니다.</li><li>아웃바운드 웹 프록시는 사용자가 구성할 수 있습니다.</li><li>시스템 업데이트를 허용하려면 컨트롤러 고정 IP에 대해 이 포트도 오픈되어야 합니다.</li><li>이 포트도 가비지 수집을 위한 두 컨트롤러에 대해 사용됩니다.</li></ul> |
 | UDP 53(DNS) |아웃 |WAN |일부 경우에는 메모를 참조하십시오. |이 포트는 인터넷 기반 DNS 서버로 사용하는 경우에만 필요합니다. |
 | UDP 123(NTP) |아웃 |WAN |일부 경우에는 메모를 참조하십시오. |이 포트는 인터넷 기반 NTP 서버로 사용하는 경우에만 필요합니다. |
 | TCP 9354 |아웃 |WAN |예 |아웃바운드 포트는 StorSimple 장치에서 StorSimple 장치 관리자 서비스와 통신하는 데 사용됩니다. |
-| 3260(iSCSI) |내용 |LAN |아니요 |이 포트는 iSCSI를 통해 데이터에 액세스하는 데 사용됩니다. |
-| 5985 |내용 |LAN |아니요 |인바운드 포트는 StorSimple 장치와의 통신을 위해 StorSimple 스냅숏 관리자에 사용됩니다.<br>이 포트는 HTTP를 통해 StorSimple용 Windows PowerShell에 원격으로 연결할 때에도 사용됩니다. |
-| 5986 |내용 |LAN |아니요 |이 포트는 HTTPS를 통해 StorSimple에 대해 Windows PowerShell에 원격으로 연결할 때 사용됩니다. |
+| 3260(iSCSI) |그런 다음 |LAN |아니요 |이 포트는 iSCSI를 통해 데이터에 액세스하는 데 사용됩니다. |
+| 5985 |그런 다음 |LAN |아니요 |인바운드 포트는 StorSimple 장치와의 통신을 위해 StorSimple 스냅숏 관리자에 사용됩니다.<br>이 포트는 HTTP를 통해 StorSimple용 Windows PowerShell에 원격으로 연결할 때에도 사용됩니다. |
+| 5986 |그런 다음 |LAN |아니요 |이 포트는 HTTPS를 통해 StorSimple에 대해 Windows PowerShell에 원격으로 연결할 때 사용됩니다. |
 
 <sup>1</sup> 인바운드 포트는 공용 인터넷에서 열릴 필요가 없습니다.
 
 <sup>2</sup> 여러 포트가 게이트웨이 구성을 수행하는 경우 아웃바운드 라우팅된 트래픽 순서는 아래 [포트 라우팅](#routing-metric)에 설명된 포트 라우팅 순서에 따라 결정됩니다.
 
-<sup>3</sup> StorSimple 장치에서 IP가 고정된 컨트롤러는 라우팅할 수 있어야 하며 인터넷에 직접 또는 구성된 웹 프록시를 통해 연결할 수 있어야 합니다. 고정 IP 주소는 장치에 대한 업데이트를 제공하는 데 사용됩니다. 장치 컨트롤러가 고정 IP를 통해 인터넷에 연결되는 경우 StorSimple 장치를 업데이트할 수 없습니다.
+<sup>3</sup> StorSimple 장치에서 IP가 고정된 컨트롤러는 라우팅할 수 있어야 하며 인터넷에 직접 또는 구성된 웹 프록시를 통해 연결할 수 있어야 합니다. 고정 IP 주소는 가비지 수집 및 장치에 대한 업데이트를 제공하는 데 사용됩니다. 장치 컨트롤러가 고정 IP를 통해 인터넷에 연결되는 경우 StorSimple 장치를 업데이트할 수 없으며 가비지 수집이 제대로 작동하지 않습니다.
 
 > [!IMPORTANT]
 > 방화벽이 StorSimple 장치 및 Azure 사이의 모든 SSL 트래픽을 수정하거나 암호를 해독하지 않도록 해야 합니다.
@@ -84,7 +83,7 @@ StorSimple 장치는 잠긴 장치입니다. 하지만 iSCSI, 클라우드 및 �
 
 ### <a name="url-patterns-for-firewall-rules"></a>방화벽 규칙에 대한 URL 패턴
 
-네트워크 관리자는 URL 패턴을 기준으로 하는 고급 방화벽 규칙이 인바운드 및 아웃바운드 트래픽을 필터링하도록 구성할 수 있습니다. StorSimple 장치 및 StorSimple 장치 관리자 서비스는 Azure Service Bus, Azure Active Directory 액세스 제어, 저장소 계정 및 Microsoft 업데이트 서버 등의 다른 Microsoft 응용 프로그램에 의존합니다. 이러한 응용 프로그램과 연결된 URL 패턴을 사용하여 방화벽 규칙을 구성할 수 있습니다. 이러한 응용 프로그램과 연결된 URL 패턴은 달라질 수 있습니다. 따라서 네트워크 관리자는 StorSimple에 대한 방화벽 규칙을 모니터링하고 필요에 따라 업데이트해야 합니다.
+네트워크 관리자는 URL 패턴을 기준으로 하는 고급 방화벽 규칙이 인바운드 및 아웃바운드 트래픽을 필터링하도록 구성할 수 있습니다. StorSimple 장치 및 StorSimple 장치 관리자 서비스는 Azure Service Bus, Azure Active Directory Access Control, 저장소 계정 및 Microsoft 업데이트 서버 등의 다른 Microsoft 응용 프로그램에 의존합니다. 이러한 응용 프로그램과 연결된 URL 패턴을 사용하여 방화벽 규칙을 구성할 수 있습니다. 이러한 응용 프로그램과 연결된 URL 패턴은 달라질 수 있습니다. 따라서 네트워크 관리자는 StorSimple에 대한 방화벽 규칙을 모니터링하고 필요에 따라 업데이트해야 합니다.
 
 StorSimple 고정 IP 주소에 따라 대부분의 경우에서 자유롭게 아웃바운드 트래픽에 대한 방화벽 규칙을 설정하는 것이 좋습니다. 그러나 보안 환경을 만드는 데 필요한 고급 방화벽 규칙을 설정하려면 아래 정보를 사용할 수 있습니다.
 
@@ -96,7 +95,7 @@ StorSimple 고정 IP 주소에 따라 대부분의 경우에서 자유롭게 아
 
 | URL 패턴 | 구성 요소/기능 | 장치 IP |
 | --- | --- | --- |
-| `https://*.storsimple.windowsazure.com/*`<br>`https://*.accesscontrol.windows.net/*`<br>`https://*.servicebus.windows.net/*`<br>`https://login.windows.net` |StorSimple 장치 관리자 서비스<br>액세스 제어 서비스<br>Azure 서비스 버스<br>인증 서비스 |클라우드 사용 네트워크 인터페이스 |
+| `https://*.storsimple.windowsazure.com/*`<br>`https://*.accesscontrol.windows.net/*`<br>`https://*.servicebus.windows.net/*`<br>`https://login.windows.net` |StorSimple 장치 관리자 서비스<br>Access Control Service<br>Azure Service Bus<br>인증 서비스 |클라우드 사용 네트워크 인터페이스 |
 | `https://*.backup.windowsazure.com` |장치 등록 |데이터 0만 해당 |
 | `http://crl.microsoft.com/pki/*`<br>`http://www.microsoft.com/pki/*` |인증서 해지 |클라우드 사용 네트워크 인터페이스 |
 | `https://*.core.windows.net/*` <br>`https://*.data.microsoft.com`<br>`http://*.msftncsi.com` |Azure 저장소 계정 및 모니터링 |클라우드 사용 네트워크 인터페이스 |
@@ -108,7 +107,7 @@ StorSimple 고정 IP 주소에 따라 대부분의 경우에서 자유롭게 아
 
 | URL 패턴 | 구성 요소/기능 | 장치 IP |
 | --- | --- | --- |
-| `https://*.storsimple.windowsazure.us/*`<br>`https://*.accesscontrol.usgovcloudapi.net/*`<br>`https://*.servicebus.usgovcloudapi.net/*`<br>`https://login-us.microsoftonline.com` |StorSimple 장치 관리자 서비스<br>액세스 제어 서비스<br>Azure 서비스 버스<br>인증 서비스 |클라우드 사용 네트워크 인터페이스 |
+| `https://*.storsimple.windowsazure.us/*`<br>`https://*.accesscontrol.usgovcloudapi.net/*`<br>`https://*.servicebus.usgovcloudapi.net/*`<br>`https://login.microsoftonline.us` |StorSimple 장치 관리자 서비스<br>Access Control Service<br>Azure Service Bus<br>인증 서비스 |클라우드 사용 네트워크 인터페이스 |
 | `https://*.backup.windowsazure.us` |장치 등록 |데이터 0만 해당 |
 | `http://crl.microsoft.com/pki/*`<br>`http://www.microsoft.com/pki/*` |인증서 해지 |클라우드 사용 네트워크 인터페이스 |
 | `https://*.core.usgovcloudapi.net/*` <br>`https://*.data.microsoft.com`<br>`http://*.msftncsi.com` |Azure 저장소 계정 및 모니터링 |클라우드 사용 네트워크 인터페이스 |
@@ -127,7 +126,7 @@ StorSimple에 대해 다수의 네트워크 인터페이스와 게이트웨이�
 * 미리 결정된 값 집합이 네트워크 인터페이스에 할당되었습니다.
 * 클라우드를 사용하거나 클라우드를 사용하지 않지만 게이트웨이가 구성되어 있는 다양한 네트워크 인터페이스에 대해 값이 할당된 아래의 예제 테이블을 고려해 보세요. 여기에 할당된 값은 예제입니다.
 
-    | 네트워크 인터페이스 | 클라우드 사용 | 클라우드 미사용(게이트웨이 구성됨) |
+    | Linux | 클라우드 사용 | 클라우드 미사용(게이트웨이 구성됨) |
     |-----|---------------|---------------------------|
     | Data 0  | 1            | -                        |
     | Data 1  | 2            | 20                       |
@@ -249,4 +248,3 @@ StorSimple 장치에 연결된 호스트의 고가용성을 위해 이러한 모
 
 <!--Reference links-->
 [1]: https://technet.microsoft.com/library/cc731844(v=WS.10).aspx
-

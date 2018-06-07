@@ -3,8 +3,8 @@ title: "Azure AD Connect Sync Service Manager 메타버스 검색 | Microsoft Do
 description: "Azure AD Connect의 Synchronization Service Manager에 있는 메타버스 검색 탭을 이해합니다."
 services: active-directory
 documentationcenter: 
-author: andkjell
-manager: femila
+author: billmath
+manager: mtillman
 editor: 
 ms.assetid: 20234dd4-3328-4817-b7ff-268f953d376d
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/13/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2f03ba60d81e97c7da9a9fe61ecd419096248763
-ms.openlocfilehash: dcb58fb00cfaa891825930cf5c34c9dab1c15dec
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/04/2017
-
+ms.openlocfilehash: d62542f905a76788852649eec92234a62e3d4853
+ms.sourcegitcommit: f1c1789f2f2502d683afaf5a2f46cc548c0dea50
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/18/2018
 ---
 # <a name="sync-service-manager-metaverse-search"></a>Sync Service Manager 메타버스 검색
 
@@ -33,4 +32,3 @@ ms.lasthandoff: 03/04/2017
 [Azure AD Connect 동기화](active-directory-aadconnectsync-whatis.md) 구성에 대해 자세히 알아봅니다.
 
 [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)에 대해 자세히 알아봅니다.
-

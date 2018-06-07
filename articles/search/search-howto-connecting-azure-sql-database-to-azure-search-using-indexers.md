@@ -1,34 +1,28 @@
 ---
-title: "인덱서를 사용하여 Azure Search에 Azure SQL Database 연결 | Microsoft Docs"
-description: "인덱서를 사용하여 Azure SQL 데이터베이스에서 Azure 검색 인덱스로 데이터를 가져오는 방법에 대해 알아봅니다."
-services: search
-documentationcenter: 
+title: 인덱서를 사용하여 Azure Search에 Azure SQL Database 연결 | Microsoft Docs
+description: 인덱서를 사용하여 Azure SQL Database에서 Azure Search 인덱스로 데이터를 가져오는 방법에 대해 알아봅니다.
 author: chaosrealm
-manager: pablocas
-editor: 
-ms.assetid: e9bbf352-dfff-4872-9b17-b1351aae519f
+manager: jlembicz
+services: search
 ms.service: search
 ms.devlang: rest-api
-ms.workload: search
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.date: 07/13/2017
+ms.topic: conceptual
+ms.date: 04/20/2018
 ms.author: eugenesh
+ms.openlocfilehash: 5545b2e40777496ab8c808a8c2692b346d3509c5
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 49f614fdf3ba84de238139387ea97ee62077b072
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
+ms.locfileid: "33778344"
 ---
-
-# <a name="connecting-azure-sql-database-to-azure-search-using-indexers"></a>인덱서를 사용하여 Azure 검색에 Azure SQL 데이터베이스 연결
+# <a name="connecting-azure-sql-database-to-azure-search-using-indexers"></a>인덱서를 사용하여 Azure Search에 Azure SQL Database 연결
 
 [Azure Search 인덱스](search-what-is-an-index.md)를 쿼리하기 전에 데이터를 채워야 합니다. 데이터가 Azure SQL 데이터베이스에 있는 경우 **Azure SQL Database용 Azure Search 인덱서**(또는 줄여서 **Azure SQL 인덱서**)를 사용하여 인덱싱 프로세스를 자동화할 수 있으므로 작성할 코드의 양과 신경 써야 할 인프라가 줄어듭니다.
 
 이 문서에서는 [인덱서](search-indexer-overview.md) 사용 원리를 다루지만 Azure SQL 데이터베이스에서만 사용할 수 있는 기능(예: 통합 변경 내용 추적)에 대해서도 설명합니다. 
 
-Azure SQL 데이터베이스 외에도 Azure Search는 [Azure Cosmos DB](search-howto-index-documentdb.md), [Azure Blob Storage](search-howto-indexing-azure-blob-storage.md) 및 [Azure Table Storage](search-howto-indexing-azure-tables.md)에 대한 인덱서를 제공합니다. 다른 데이터 원본에 대한 지원을 요청하려면 [Azure Search 피드백 포럼](https://feedback.azure.com/forums/263029-azure-search/)에 의견을 남겨 주시기 바랍니다.
+Azure SQL 데이터베이스 외에도 Azure Search는 [Azure Cosmos DB](search-howto-index-cosmosdb.md), [Azure Blob Storage](search-howto-indexing-azure-blob-storage.md) 및 [Azure Table Storage](search-howto-indexing-azure-tables.md)에 대한 인덱서를 제공합니다. 다른 데이터 원본에 대한 지원을 요청하려면 [Azure Search 피드백 포럼](https://feedback.azure.com/forums/263029-azure-search/)에 의견을 남겨 주시기 바랍니다.
 
 ## <a name="indexers-and-data-sources"></a>인덱서 및 데이터 원본
 
@@ -46,7 +40,7 @@ Azure SQL 데이터베이스 외에도 Azure Search는 [Azure Cosmos DB](search-
 
 * [Azure Portal](https://portal.azure.com)의 데이터 가져오기 마법사
 * Azure Search [.NET SDK](https://docs.microsoft.com/dotnet/api/microsoft.azure.search.models.indexer?view=azure-dotnet)
-* Azure Search [REST API](https://docs.microsoft.com/en-us/rest/api/searchservice/indexer-operations)
+* Azure Search [REST API](https://docs.microsoft.com/rest/api/searchservice/indexer-operations)
 
 이 문서에서는 REST API를 사용하여 **인덱서** 및 **데이터 원본**을 만듭니다.
 
@@ -60,12 +54,15 @@ Azure SQL 데이터베이스 외에도 Azure Search는 [Azure Cosmos DB](search-
 | 실시간 데이터 동기화가 필요하지 않습니다. | 인덱서는 최대 5분마다 테이블을 다시 인덱싱할 수 있습니다. 데이터가 자주 변경되고 변경 내용을 몇 초 또는 몇 분 이내에 인덱스에 반영해야 하는 경우에는 [REST API](https://docs.microsoft.com/rest/api/searchservice/AddUpdate-or-Delete-Documents) 또는 [.NET SDK](search-import-data-dotnet.md)를 사용하여 업데이트된 행을 직접 푸시하는 것이 좋습니다. |
 | 증분 인덱싱 가능 | 데이터 집합이 크고 일정에 따라 인덱서를 실행하려는 경우 Azure Search에서 새 행, 변경된 행 및 삭제된 행을 효율적으로 식별할 수 있어야 합니다. 비-증분 인덱싱은 주문 시(일정을 따르지 않고) 인덱싱하거나 100,000 미만의 행을 인덱싱하는 경우에만 허용됩니다. 자세한 내용은 아래의 [변경 및 삭제된 행 캡처](#CaptureChangedRows)를 참조하세요. |
 
+> [!NOTE] 
+> Azure Search는 SQL Server 인증만 지원합니다. Azure Active Directory 암호 인증에 대한 지원이 필요한 경우 이 [UserVoice 제안](https://feedback.azure.com/forums/263029-azure-search/suggestions/33595465-support-azure-active-directory-password-authentica)에 투표하세요.
+
 ## <a name="create-an-azure-sql-indexer"></a>Azure SQL 인덱서 만들기
 
 1. 데이터 원본을 만듭니다.
 
    ```
-    POST https://myservice.search.windows.net/datasources?api-version=2016-09-01
+    POST https://myservice.search.windows.net/datasources?api-version=2017-11-11
     Content-Type: application/json
     api-key: admin-key
 
@@ -84,7 +81,7 @@ Azure SQL 데이터베이스 외에도 Azure Search는 [Azure Cosmos DB](search-
 3. 이름을 지정하고 데이터 원본 및 대상 인덱스를 참조하여 인덱서는 만듭니다.
 
     ```
-    POST https://myservice.search.windows.net/indexers?api-version=2016-09-01
+    POST https://myservice.search.windows.net/indexers?api-version=2017-11-11
     Content-Type: application/json
     api-key: admin-key
 
@@ -97,7 +94,7 @@ Azure SQL 데이터베이스 외에도 Azure Search는 [Azure Cosmos DB](search-
 
 이 방법으로 만든 인덱서에는 일정이 없습니다. 만들어지면 자동으로 한 번 실행됩니다. 언제든지 **run indexer** 요청을 사용하여 다시 실행할 수 있습니다.
 
-    POST https://myservice.search.windows.net/indexers/myindexer/run?api-version=2016-09-01
+    POST https://myservice.search.windows.net/indexers/myindexer/run?api-version=2017-11-11
     api-key: admin-key
 
 인덱서 동작의 몇 가지 측면(예: 배치 크기, 인덱서 실행에 실패하기 전에 건너뛸 수 있는 문서 수)을 사용자 지정할 수 있습니다. 자세한 내용은 [인덱서 API 만들기](https://docs.microsoft.com/rest/api/searchservice/Create-Indexer)를 참조하세요.
@@ -106,7 +103,7 @@ Azure 서비스에서 데이터베이스에 연결하도록 허용해야 할 수
 
 인덱서 상태 및 실행 기록(인덱싱된 항목 수, 오류 등)을 모니터링하려면 **indexer status** 요청을 사용합니다.
 
-    GET https://myservice.search.windows.net/indexers/myindexer/status?api-version=2016-09-01
+    GET https://myservice.search.windows.net/indexers/myindexer/status?api-version=2017-11-11
     api-key: admin-key
 
 응답은 다음과 같아야 합니다.
@@ -148,7 +145,7 @@ Azure 서비스에서 데이터베이스에 연결하도록 허용해야 할 수
 ## <a name="run-indexers-on-a-schedule"></a>일정에 따라 인덱서 실행
 일정에 따라 주기적으로 실행되도록 인덱서를 정렬할 수도 있습니다. 이렇게 하려면 인덱서를 만들거나 업데이트할 때 **schedule** 속성을 추가합니다. 아래 예제에서는 인덱서를 업데이트하는 PUT 요청을 보여 줍니다.
 
-    PUT https://myservice.search.windows.net/indexers/myindexer?api-version=2016-09-01
+    PUT https://myservice.search.windows.net/indexers/myindexer?api-version=2017-11-11
     Content-Type: application/json
     api-key: admin-key
 
@@ -191,7 +188,7 @@ SQL 데이터베이스에서 [변경 내용 추적](https://docs.microsoft.com/s
 
 + 데이터베이스 버전 요구 사항:
   * SQL Server 2012 SP3 이상(Azure VM에서 SQL Server를 사용하는 경우)
-  * Azure SQL 데이터베이스 V12(Azure SQL 데이터베이스를 사용하는 경우)
+  * Azure SQL Database V12(Azure SQL Database를 사용하는 경우)
 + 테이블만(뷰 제외). 
 + 데이터베이스에서 테이블에 대해 [변경 내용 추적을 설정](https://docs.microsoft.com/sql/relational-databases/track-changes/enable-and-disable-change-tracking-sql-server)합니다. 
 + 테이블에서 복합 기본 키(두 개 이상의 열을 포함하는 기본 키)가 없습니다.  
@@ -285,13 +282,13 @@ SQL 통합 변경 내용 추적 정책을 사용할 때는 별도의 데이터 �
 <a name="TypeMapping"></a>
 
 ## <a name="mapping-between-sql-and-azure-search-data-types"></a>SQL과 Azure Search 데이터 형식 사이의 매핑
-| SQL 데이터 형식 | 허용되는 대상 인덱스 필드 유형 | 참고 사항 |
+| SQL 데이터 형식 | 허용되는 대상 인덱스 필드 유형 | 메모 |
 | --- | --- | --- |
 | bit |Edm.Boolean, Edm.String | |
 | int, smallint, tinyint |Edm.Int32, Edm.Int64, Edm.String | |
 | bigint |Edm.Int64, Edm.Int64, Edm.String | |
 | real, float |Edm.Double, Edm.String | |
-| smallmoney, money decimal numeric |Edm.String |Azure 검색에서는 decimal 형식을 Edm.Double로 변환하면 정밀도가 떨어지기 때문에 이를 지원하지 않습니다. |
+| smallmoney, money decimal numeric |Edm.String |Azure Search에서는 decimal 형식을 Edm.Double로 변환하면 정밀도가 떨어지기 때문에 이를 지원하지 않습니다. |
 | char, nchar, varchar, nvarchar |Edm.String<br/>Collection(Edm.String) |SQL 문자열은 문자열이 JSON 배열을 나타내는 경우 Collection(Edm.String) 필드를 채우는 데 사용할 수 있습니다. `["red", "white", "blue"]` |
 | smalldatetime, datetime, datetime2, date, datetimeoffset |Edm.DateTimeOffset, Edm.String | |
 | uniqueidentifer |Edm.String | |
@@ -358,4 +355,3 @@ SQL 인덱서는 여러 구성 설정을 노출합니다.
 + 인덱서가 실행될 때 인덱싱되는 테이블에 미해결 트랜잭션이 있는지 확인할 수 있습니다(예를 들어 모든 테이블 업데이트가 일정에 따라 일괄 처리되고 Azure Search 인덱서 일정이 테이블 업데이트 일정과 겹치지 않도록 설정됨).  
 
 + 모든 누락된 행을 선택하기 위해 전체 다시 인덱싱을 정기적으로 수행합니다. 
-

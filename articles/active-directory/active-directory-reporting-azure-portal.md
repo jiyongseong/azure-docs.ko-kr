@@ -4,7 +4,7 @@ description: "Azure Active Directory 보고에 대한 일반적 개요를 제공
 services: active-directory
 documentationcenter: 
 author: MarkusVi
-manager: femila
+manager: mtillman
 editor: 
 ms.assetid: 6141a333-38db-478a-927e-526f1e7614f4
 ms.service: active-directory
@@ -12,15 +12,14 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 07/13/2017
+ms.date: 01/15/2018
 ms.author: markvi
 ms.reviewer: dhanyahk
+ms.openlocfilehash: 66c53b84e1e820178083b3ae703e0a1feada187f
+ms.sourcegitcommit: 384d2ec82214e8af0fc4891f9f840fb7cf89ef59
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 738c8f4a56586b87f03973ec258b0a3023affa60
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/16/2018
 ---
 # <a name="azure-active-directory-reporting"></a>Azure Active Directory 보고
 

@@ -1,43 +1,30 @@
 ---
-title: "IDENTITY를 사용하여 서로게이트 키 만들기 | Microsoft Docs"
-description: "IDENTITY를 사용하여 테이블에 서로게이트 키를 만드는 방법에 대해 알아봅니다."
+title: IDENTITY를 사용하여 서로게이트 키 만들기 - Azure SQL Data Warehouse| Microsoft Docs
+description: Azure SQL Data Warehouse의 테이블에 IDENTITY 속성을 사용하여 서로게이트 키를 만들기 위한 권장 사항 및 예제입니다.
 services: sql-data-warehouse
-documentationcenter: NA
-author: jrowlandjones
-manager: jhubbard
-editor: 
-ms.assetid: faa1034d-314c-4f9d-af81-f5a9aedf33e4
+author: ronortloff
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.date: 06/13/2017
-ms.author: jrj;barbkess
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: 3ab5d159e6eaeb830135fe134e108b0e4de4b7d6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
-
+ms.topic: conceptual
+ms.component: implement
+ms.date: 04/17/2018
+ms.author: rortloff
+ms.reviewer: igorstan
+ms.openlocfilehash: ab028705f5af7c37017d2e697240b7d3436f5f71
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
-# <a name="create-surrogate-keys-by-using-identity"></a>IDENTITY를 사용하여 서로게이트 키 만들기
-> [!div class="op_single_selector"]
-> * [개요][Overview]
-> * [데이터 형식][Data Types]
-> * [배포][Distribute]
-> * [인덱스][Index]
-> * [파티션][Partition]
-> * [통계][Statistics]
-> * [임시][Temporary]
-> * [ID][Identity]
-> 
-> 
+# <a name="using-identity-to-create-surrogate-keys-in-azure-sql-data-warehouse"></a>Azure SQL Data Warehouse에서 IDENTITY를 사용하여 서로게이트 키 만들기
+Azure SQL Data Warehouse의 테이블에 IDENTITY 속성을 사용하여 서로게이트 키를 만들기 위한 권장 사항 및 예제입니다.
 
-데이터 웨어하우스 모델을 설계하는 경우 많은 데이터 모델러는 해당 테이블에 서로게이트 키를 만들려고 합니다. 로드 성능에 영향을 주지 않고 간단하고 효과적으로 이 목표를 달성하기 위해 IDENTITY 속성을 사용할 수 있습니다. 
+## <a name="what-is-a-surrogate-key"></a>서로게이트 키란?
+테이블의 서로게이트 키는 각 행에 대해 고유 식별자가 있는 열입니다. 이 키는 테이블 데이터에서 생성되지 않습니다. 데이터 웨어하우스 모델을 설계하는 경우 데이터 모델러는 해당 테이블에 서로게이트 키를 만들려고 합니다. 로드 성능에 영향을 주지 않고 간단하고 효과적으로 이 목표를 달성하기 위해 IDENTITY 속성을 사용할 수 있습니다.  
 
-## <a name="get-started-with-identity"></a>IDENTITY 시작
+## <a name="creating-a-table-with-an-identity-column"></a>IDENTITY 열이 있는 테이블 만들기
+IDENTITY 속성은 로드 성능에 영향을 주지 않고 데이터 웨어하우스의 모든 배포에 확장하도록 설계되었습니다. 따라서 IDENTITY를 구현하여 이러한 목표를 달성합니다. 
+
 다음 문과 유사한 구문을 사용하여 테이블을 처음 만드는 경우 테이블이 IDENTITY 속성을 가졌다고 정의할 수 있습니다.
 
 ```sql
@@ -54,8 +41,7 @@ WITH
 
 테이블을 채우는 데 `INSERT..SELECT`를 사용할 수 있습니다.
 
-## <a name="behavior"></a>동작
-IDENTITY 속성은 로드 성능에 영향을 주지 않고 데이터 웨어하우스의 모든 배포에 확장하도록 설계되었습니다. 따라서 IDENTITY를 구현하여 이러한 목표를 달성합니다. 이 섹션에는 보다 완전하게 이해할 수 있도록 구현의 미묘한 차이를 강조 표시합니다.  
+이 섹션의 나머지 부분에는 보다 완전하게 이해할 수 있도록 구현의 미묘한 차이를 강조 표시합니다.  
 
 ### <a name="allocation-of-values"></a>값 할당
 IDENTITY 속성은 서로게이트 값을 할당한 순서를 보장하지 않습니다. 해당 순서는 SQL Server 및 Azure SQL Database의 동작을 반영합니다. 그러나 Azure SQL Data Warehouse에서 보장되지 않는다는 점이 더욱 분명합니다. 
@@ -102,7 +88,7 @@ DBCC PDW_SHOWSPACEUSED('dbo.T1');
 ### <a name="create-table-as-select"></a>CREATE TABLE AS SELECT
 CTAS(CREATE TABLE AS SELECT)의 경우 SELECT..INTO에서 설명한 동일한 SQL Server 동작을 따릅니다. 그러나 문의 `CREATE TABLE` 부분에 있는 열 정의에서 IDENTITY 속성을 지정할 수 없습니다. CTAS의 `SELECT` 부분에서 IDENTITY 함수를 사용할 수 없습니다. 테이블을 채우려면 `CREATE TABLE`를 사용하여 `INSERT..SELECT` 다음의 테이블을 정의해야 합니다.
 
-## <a name="explicitly-insert-values-into-an-identity-column"></a>IDENTITY 열에 값을 명시적으로 삽입 
+## <a name="explicitly-inserting-values-into-an-identity-column"></a>IDENTITY 열에 값을 명시적으로 삽입 
 SQL Data Warehouse는 `SET IDENTITY_INSERT <your table> ON|OFF` 구문을 지원합니다. 이 구문을 사용하여 명시적으로 값을 IDENTITY 열에 삽입할 수 있습니다.
 
 많은 데이터 모델러는 해당 차원에 있는 특정 행에 미리 정의된 음수 값을 사용하려고 합니다. 예를 들어 -1 또는 "알 수 없는 멤버" 행입니다. 
@@ -126,11 +112,10 @@ FROM    dbo.T1
 ;
 ```    
 
-## <a name="load-data-into-a-table-with-identity"></a>IDENTITY가 있는 테이블에 데이터 로드
+## <a name="loading-data"></a>데이터 로드
 
 IDENTITY 속성이 존재한다는 것은 데이터 로딩 코드와 몇 가지 관련이 있습니다. 이 섹션에서는 IDENTITY를 사용하여 테이블로 데이터를 로드하는 몇 가지 기본 패턴을 강조 표시합니다. 
 
-### <a name="load-data-with-polybase"></a>PolyBase를 사용하여 데이터 로드
 IDENTITY를 사용하여 테이블에 데이터를 로드하고 서로게이트 키를 생성하려면 테이블을 만든 다음 INSERT..SELECT 또는 INSERT..VALUES를 사용하여 로드합니다.
 
 다음 예제에서는 기본 패턴을 강조 표시합니다.
@@ -162,28 +147,16 @@ DBCC PDW_SHOWSPACEUSED('dbo.T1');
 ```
 
 > [!NOTE] 
-> 현재 IDENTITY 열이 있는 테이블에 데이터를 로드 하는 경우 `CREATE TABLE AS SELECT`를 사용할 수 없습니다.
+> 현재 IDENTITY 열이 있는 테이블에 데이터를 로드 하는 경우 CREATE TABLE AS SELEC을 사용할 수 없습니다.
 > 
 
-BCP(대량 복사 프로그램) 도구를 사용하여 데이터를 로드하는 방법에 대한 자세한 내용은 다음 문서를 참조하세요.
+데이터 로드에 대한 자세한 내용은 [Azure SQL Data Warehouse에 대한 ELT(추출, 로드 및 변환) 설계](design-elt-data-loading.md) 및 [로딩 모범 사례](guidance-for-loading-data.md)를 참조하세요.
 
-- [PolyBase로 로드하기][]
-- [PolyBase 모범 사례][]
 
-### <a name="load-data-with-bcp"></a>BCP를 사용하여 데이터 로드
-BCP는 SQL Data Warehouse로 데이터를 로드하는 데 사용할 수 있는 명령줄 도구입니다. 해당 매개 변수(-E) 중 하나는 IDENTITY 열이 있는 테이블에 데이터를 로드할 때 BCP의 동작을 제어합니다. 
+## <a name="system-views"></a>시스템 뷰
+[sys.identity_columns](/sql/relational-databases/system-catalog-views/sys-identity-columns-transact-sql) 카탈로그 뷰를 사용하여 IDENTITY 속성이 있는 열을 식별할 수 있습니다.
 
--E를 지정하는 경우 IDENTITY를 포함한 열의 입력 파일에 보관된 값이 유지됩니다. -E를 지정하지 *않는* 경우 이 열의 값은 무시됩니다. ID 열이 포함되지 않는 경우 데이터가 정상적으로 로드됩니다. 속성의 증분 및 초기값 정책에 따라 값이 생성됩니다.
-
-BCP를 사용하여 데이터를 로드하는 방법에 대한 자세한 내용은 다음 문서를 참조하세요.
-
-- [BCP로 로드하기][]
-- [MSDN의 BCP][]
-
-## <a name="catalog-views"></a>카탈로그 뷰
-SQL Data Warehouse는 `sys.identity_columns` 카탈로그 뷰를 지원합니다. IDENTITY 속성이 있는 열을 식별하는 데 이 뷰를 사용할 수 있습니다.
-
-이 예제에서는 데이터베이스 스키마를 보다 잘 이해할 수 있도록 다른 시스템 카탈로그 뷰와 `sys.identity_columns`를 통합하는 방법을 보여줍니다.
+이 예제에서는 데이터베이스 스키마를 보다 잘 이해할 수 있도록 다른 시스템 카탈로그 뷰와 sys.identity_column`을 통합하는 방법을 보여줍니다.
 
 ```sql
 SELECT  sm.name
@@ -204,28 +177,27 @@ AND     tb.name = 'T1'
 ```
 
 ## <a name="limitations"></a>제한 사항
-IDENTITY 속성은 다음과 같은 시나리오에서 사용할 수 없습니다.
+IDENTITY 속성을 사용할 수 없는 경우:
 - 열 데이터 형식이 INT 또는 BIGINT가 아닌 경우
 - 열이 배포 키인 경우
 - 테이블이 외부 테이블인 경우 
 
 SQL Data Warehouse에서 다음과 같은 관련 함수가 지원되지 않습니다.
 
-- [IDENTITY()][]
-- [@@IDENTITY][]
-- [SCOPE_IDENTITY][]
-- [IDENT_CURRENT][]
-- [IDENT_INCR][]
-- [IDENT_SEED][]
-- [DBCC CHECK_IDENT()][]
+- [IDENTITY()](/sql/t-sql/functions/identity-function-transact-sql)
+- [@@IDENTITY](/sql/t-sql/functions/identity-transact-sql)
+- [SCOPE_IDENTITY](/sql/t-sql/functions/scope-identity-transact-sql)
+- [IDENT_CURRENT](/sql/t-sql/functions/ident-current-transact-sql)
+- [IDENT_INCR](/sql/t-sql/functions/ident-incr-transact-sql)
+- [IDENT_SEED](/sql/t-sql/functions/ident-seed-transact-sql)
+- [DBCC CHECK_IDENT()](/sql/t-sql/database-console-commands/dbcc-checkident-transact-sql)
 
-## <a name="tasks"></a>작업
+## <a name="common-tasks"></a>일반 작업
 
-이 섹션에서는 IDENTITY 열을 사용하여 작업할 때 일반적인 작업을 수행하는 데 사용할 수 있는 몇 가지 샘플 코드를 제공합니다.
+이 섹션에서는 IDENTITY 열을 사용하여 작업할 때 일반적인 작업을 수행하는 데 사용할 수 있는 몇 가지 샘플 코드를 제공합니다. 
 
-> [!NOTE] 
-> 열 C1은 다음과 같은 모든 작업의 IDENTITY입니다.
-> 
+열 C1은 다음과 같은 모든 작업의 IDENTITY입니다.
+ 
  
 ### <a name="find-the-highest-allocated-value-for-a-table"></a>테이블에 가장 높게 할당된 값을 확인합니다.
 `MAX()` 함수를 사용하여 배포된 테이블에 할당된 가장 높은 값을 확인합니다.
@@ -256,40 +228,5 @@ AND     tb.name = 'T1'
 
 ## <a name="next-steps"></a>다음 단계
 
-* 테이블 개발에 대해 자세히 알아보려면 [테이블 개요][Overview], [테이블 데이터 형식][Data Types], [테이블 배포][Distribute], [테이블 인덱싱][Index], [테이블 분할][Partition] 및 [임시 테이블][Temporary]을 참조하세요. 
-* 모범 사례에 대한 자세한 내용은 [SQL Data Warehouse 모범 사례][SQL Data Warehouse Best Practices]를 참조하세요.  
-
-<!--Image references-->
-
-<!--Article references-->
-[Overview]: ./sql-data-warehouse-tables-overview.md
-[Data Types]: ./sql-data-warehouse-tables-data-types.md
-[Distribute]: ./sql-data-warehouse-tables-distribute.md
-[Index]: ./sql-data-warehouse-tables-index.md
-[Partition]: ./sql-data-warehouse-tables-partition.md
-[Statistics]: ./sql-data-warehouse-tables-statistics.md
-[Temporary]: ./sql-data-warehouse-tables-temporary.md
-[Identity]: ./sql-data-warehouse-tables-identity.md
-[SQL Data Warehouse Best Practices]: ./sql-data-warehouse-best-practices.md
-
-[BCP로 로드하기]: https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-load-with-bcp/
-[PolyBase로 로드하기]: https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-load-from-azure-blob-storage-with-polybase/
-[PolyBase 모범 사례]: https://docs.microsoft.com/azure/sql-data-warehouse/sql-data-warehouse-load-polybase-guide/
-
-
-<!--MSDN references-->
-[Identity property]: https://msdn.microsoft.com/library/ms186775.aspx
-[sys.identity_columns]: https://msdn.microsoft.com/library/ms187334.aspx
-[IDENTITY()]: https://msdn.microsoft.com/library/ms189838.aspx
-[@@IDENTITY]: https://msdn.microsoft.com/library/ms187342.aspx
-[SCOPE_IDENTITY]: https://msdn.microsoft.com/library/ms190315.aspx
-[IDENT_CURRENT]: https://msdn.microsoft.com/library/ms175098.aspx
-[IDENT_INCR]: https://msdn.microsoft.com/library/ms189795.aspx
-[IDENT_SEED]: https://msdn.microsoft.com/library/ms189834.aspx
-[DBCC CHECK_IDENT()]: https://msdn.microsoft.com/library/ms176057.aspx
-
-[MSDN의 BCP]: https://msdn.microsoft.com/library/ms162802.aspx
-  
-
-<!--Other Web references-->  
+* 테이블 개발에 대해 자세히 알아보려면 [테이블 개요][개요]를 참조하세요.  
 

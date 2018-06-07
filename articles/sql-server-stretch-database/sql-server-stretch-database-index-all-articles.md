@@ -14,11 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 10/05/2016
 ms.author: DouglasL
-translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
 ms.openlocfilehash: 33f23d324a843165d7fe6016ee626e369acfc958
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="all-topics-for-azure-sql-server-stretch-database-service"></a>Azure SQL Server Stretch Database 서비스에 대한 모든 토픽
 이 토픽에서는 Azure의 **SQL Server Stretch Database** 서비스에 직접 적용되는 모든 항목을 나열합니다. 이 웹 페이지에서 **Ctrl+F**를 사용해 키워드를 검색하여 현재 관심 있는 항목을 찾을 수 있습니다.
@@ -55,12 +55,6 @@ ms.openlocfilehash: 33f23d324a843165d7fe6016ee626e369acfc958
 ## <a name="backup-and-recovery"></a>백업 및 복구
 | &nbsp; | 제목 | 설명 |
 | ---:|:--- |:--- |
-| 14 |[스트레치 지원 데이터베이스 백업](sql-server-stretch-database-backup.md) |스트레치 지원 데이터베이스를 백업하는 방법을 알아봅니다. |
-| 15 |[스트레치 지원 데이터베이스 복원](sql-server-stretch-database-restore.md) |스트레치 지원 데이터베이스를 복원하는 방법을 알아봅니다. |
-
-
-
-
-<!--HONumber=Nov16_HO3-->
-
+| 14 |[스트레치 지원 데이터베이스 백업](sql-server-stretch-database-backup.md) |스트레치\-지원 데이터베이스를 백업하는 방법을 알아봅니다. |
+| 15 |[스트레치 지원 데이터베이스 복원](sql-server-stretch-database-restore.md) |스트레치\-지원 데이터베이스를 복원하는 방법을 알아봅니다. |
 

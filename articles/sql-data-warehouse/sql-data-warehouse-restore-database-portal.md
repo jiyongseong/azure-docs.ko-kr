@@ -1,27 +1,20 @@
 ---
-title: "Azure SQL Data Warehouse 복원(Azure Portal) | Microsoft Docs"
-description: "Azure SQL Data Warehouse 복원을 위한 Azure Portal 작업"
+title: Azure SQL Data Warehouse 복원(Azure Portal) | Microsoft Docs
+description: Azure SQL Data Warehouse 복원을 위한 Azure Portal 작업
 services: sql-data-warehouse
-documentationcenter: NA
-author: Lakshmi1812
-manager: barbkess
-editor: 
-ms.assetid: b0aef539-7657-4b0e-9899-74098f5c21bc
+author: kevinvngo
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: backup-restore
-ms.date: 09/21/2016
-ms.author: lakshmir;barbkess
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 763ae02d1196a924bbf89e423871af2ec22e9e6c
-ms.openlocfilehash: 84f582e8d767466ce9dec83203ec78047648caea
-ms.contentlocale: ko-kr
-ms.lasthandoff: 12/21/2016
-
-
+ms.topic: conceptual
+ms.component: manage
+ms.date: 04/17/2018
+ms.author: kevin
+ms.reviewer: igorstan
+ms.openlocfilehash: 6268f500d44bf7ceaaccbcc8e2c2134b42032197
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
 # <a name="restore-azure-sql-data-warehouse-portal"></a>Azure SQL Data Warehouse 복원(포털)
 > [!div class="op_single_selector"]
@@ -106,7 +99,7 @@ Azure SQL Database 버전의 무중단 업무 방식 기능에 대해 알아보�
 [PowerShell]: ./sql-data-warehouse-restore-database-powershell.md
 [REST]: ./sql-data-warehouse-restore-database-rest-api.md
 [Configure your database after recovery]: ../sql-database/sql-database-disaster-recovery.md#configure-your-database-after-recovery
-[Request a DTU quota change]: ./sql-data-warehouse-get-started-create-support-ticket.md#request-quota-change
+[Request a DTU quota change]: ./sql-data-warehouse-get-started-create-support-ticket.md
 
 <!--MSDN references-->
 
@@ -114,4 +107,3 @@ Azure SQL Database 버전의 무중단 업무 방식 기능에 대해 알아보�
 
 <!--Other Web references-->
 [Azure portal]: https://portal.azure.com/
-

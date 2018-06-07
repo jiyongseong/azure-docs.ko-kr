@@ -1,11 +1,11 @@
 ---
-title: "Log Analytics의 Azure Key Vault 솔루션 | Microsoft Docs"
-description: "Log Analytics에서 Azure Key Vault 솔루션을 사용하여 Azure Key Vault 로그를 검토할 수 있습니다."
+title: Log Analytics의 Azure Key Vault 솔루션 | Microsoft Docs
+description: Log Analytics에서 Azure Key Vault 솔루션을 사용하여 Azure Key Vault 로그를 검토할 수 있습니다.
 services: log-analytics
-documentationcenter: 
+documentationcenter: ''
 author: richrundmsft
 manager: jochan
-editor: 
+editor: ''
 ms.assetid: 5e25e6d6-dd20-4528-9820-6e2958a40dae
 ms.service: log-analytics
 ms.workload: na
@@ -14,13 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 02/09/2017
 ms.author: richrund
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 74f34bdbf5707510c682814716aa0b95c19a5503
-ms.openlocfilehash: 708bf39b69cf798ac44aca65cf7dee6fa9a24591
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/09/2017
-
-
+ms.openlocfilehash: 9c4b16ec11d1990de687014c5385314f0e0c602a
+ms.sourcegitcommit: d74657d1926467210454f58970c45b2fd3ca088d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/28/2018
 ---
 # <a name="azure-key-vault-analytics-solution-in-log-analytics"></a>Log Analytics의 Azure Key Vault Analytics 솔루션
 
@@ -76,7 +74,7 @@ Azure Blob Storage에 로그를 작성할 필요가 없으며 데이터를 수�
 
 | 플랫폼 | 직접 에이전트 | Systems Center Operations Manager 에이전트 | Azure | Operations Manager 필요 여부 | 관리 그룹을 통해 전송되는 Operations Manager 에이전트 데이터 | 수집 빈도 |
 | --- | --- | --- | --- | --- | --- | --- |
-| Azure |![아니요](./media/log-analytics-azure-keyvault/oms-bullet-red.png) |![아니요](./media/log-analytics-azure-keyvault/oms-bullet-red.png) |![예](./media/log-analytics-azure-keyvault/oms-bullet-green.png) |![아니요](./media/log-analytics-azure-keyvault/oms-bullet-red.png) |![아니요](./media/log-analytics-azure-keyvault/oms-bullet-red.png) | 도착 시 |
+| Azure |  |  |&#8226; |  |  | 도착 시 |
 
 ## <a name="use-azure-key-vault"></a>Azure Key Vault 사용
 [솔루션을 설치](https://azuremarketplace.microsoft.com/marketplace/apps/Microsoft.KeyVaultAnalyticsOMS?tab=Overview)한 후 Log Analytics의 **개요** 페이지에서 **Azure Key Vault** 타일을 클릭하여 Key Vault 데이터를 봅니다.
@@ -103,9 +101,9 @@ Azure Blob Storage에 로그를 작성할 필요가 없으며 데이터를 수�
 ## <a name="log-analytics-records"></a>Log Analytics 레코드
 Azure Key Vault 솔루션은 Azure Diagnostics에서 [AuditEvent logs](../key-vault/key-vault-logging.md)에서 수집된 **KeyVaults** 형식의 레코드를 분석합니다.  이러한 레코드의 속성은 다음 표에 있습니다.  
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 |:--- |:--- |
-| 형식 |*AzureDiagnostics* |
+| 유형 |*AzureDiagnostics* |
 | SourceSystem |*Azure* |
 | callerIpAddress |요청한 클라이언트의 IP 주소입니다. |
 | Category | *AuditEvent* |
@@ -139,7 +137,7 @@ Azure Key Vault 솔루션은 Azure Diagnostics에서 [AuditEvent logs](../key-va
 2. [솔루션 갤러리에서 Log Analytics 솔루션 추가](log-analytics-add-solutions.md)에서 설명한 프로세스를 사용하여 Azure Key Vault 솔루션을 사용하도록 설정합니다.
 3. 새 데이터 형식을 사용하도록 저장된 쿼리, 대시보드 또는 경고를 업데이트합니다.
   + KeyVaults에서 AzureDiagnostics로 형식을 변경합니다. ResourceType을 사용하여 Key Vault 로그로 필터링할 수 있습니다.
-  - `Type=KeyVaults` 대신 `Type=AzureDiagnostics ResourceType=VAULTS`를 사용합니다.
+  - `KeyVaults` 대신 `AzureDiagnostics | where ResourceType'=="VAULTS"`를 사용합니다.
   + 필드: (필드 이름은 대/소문자를 구분함)
   - 이름에 \_s, \_d 또는 \_g 접미사가 있는 필드의 경우 첫 번째 문자를 소문자로 변경합니다.
   - 이름에 \_o 접미사가 있는 모든 필드의 경우 데이터는 중첩된 필드 이름에 기반하여 개별 필드로 분할합니다. 예를 들어 호출자의 UPN은 `identity_claim_http_schemas_xmlsoap_org_ws_2005_05_identity_claims_upn_s` 필드에 저장됩니다.
@@ -154,4 +152,3 @@ Azure Key Vault 솔루션은 Azure Diagnostics에서 [AuditEvent logs](../key-va
 
 ## <a name="next-steps"></a>다음 단계
 * [Log Analytics의 로그 검색](log-analytics-log-searches.md)을 사용하여 자세한 Azure Key Vault 데이터를 확인합니다.
-

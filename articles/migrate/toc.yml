@@ -1,0 +1,48 @@
+- name: Azure Migrate 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: Azure Migrate 정보
+      href: migrate-overview.md
+- name: 자습서
+  items:
+    - name: VMware VM 검색 및 평가
+      href: tutorial-assessment-vmware.md
+- name: 개념
+  items:
+    - name: 수집기 개념
+      href: concepts-collector.md
+    - name: 평가 계산
+      href: concepts-assessment-calculation.md
+    - name: 종속성 시각화
+      href: concepts-dependency-visualization.md
+- name: 방법 가이드
+  items:
+    - name: 온-프레미스 리소스를 Azure로 마이그레이션
+      items:
+        - name: 시나리오 개요 - 온-프레미스 리소스를 Azure로 마이그레이션
+          href: migrate-scenarios-overview.md
+        - name: 시나리오 1 - Azure로 마이그레이션할 온-프레미스 리소스 평가
+          href: migrate-scenarios-assessment.md
+        - name: 시나리오 2 - Azure로 신속한 마이그레이션 전환
+          href: migrate-scenarios-lift-and-shift.md
+    - name: 대규모 환경 검색 및 평가
+      href: how-to-scale-assessment.md
+    - name: 컴퓨터 그룹화
+      href: how-to-create-a-group.md
+    - name: 컴퓨터 종속성을 사용하여 컴퓨터 그룹화
+      href: how-to-create-group-machine-dependencies.md
+    - name: 그룹 종속성을 사용하여 그룹 상세 검색
+      href: how-to-create-group-dependencies.md
+    - name: 평가 사용자 지정
+      href: how-to-modify-assessment.md
+    - name: 평가 후 컴퓨터 마이그레이션
+      href: how-to-get-migration-tool.md
+    - name: Azure Migrate 문제 해결
+      href: troubleshooting-general.md
+- name: 리소스
+  items:
+    - name: Azure Migrate
+      href: 'https://azure.microsoft.com/migrate'
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'

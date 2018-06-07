@@ -1,26 +1,21 @@
 ---
-title: "Azure Active Directory B2C: 테넌트 생성 문제 해결 | Microsoft Docs"
-description: "Azure Active Directory 또는 Azure Active Directory B2C 테넌트 생성과 관련된 문제 및 해결 방법입니다."
+title: 'Azure Active Directory B2C: 테넌트 생성 문제 해결 | Microsoft Docs'
+description: Azure Active Directory 또는 Azure Active Directory B2C 테넌트 생성과 관련된 문제 및 해결 방법입니다.
 services: active-directory-b2c
-documentationcenter: 
-author: swkrish
-manager: mbaldwin
-editor: bryanla
-ms.assetid: 7ba4c6b2-161b-45b5-b3bd-ccb662f5d7a0
+documentationcenter: ''
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 12/06/2016
-ms.author: swkrish
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 857267f46f6a2d545fc402ebf3a12f21c62ecd21
-ms.openlocfilehash: 81af4536fc223319369aff262d42149cfbf1a1e9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/28/2017
-
-
+ms.author: davidmu
+ms.openlocfilehash: 3daf232d7fb1f95c390c1e6b8c168ec585484c65
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="troubleshoot-creating-an-azure-active-directory-or-azure-active-directory-b2c-tenant"></a>Azure Active Directory 또는 Azure Active Directory B2C 테넌트 생성 문제 해결 
 
@@ -36,5 +31,4 @@ ms.lasthandoff: 06/28/2017
     "B2C 테넌트 'contosob2c' 생성을 완료할 수 없습니다. 자세한 지침을 보려면 이 [링크](http://go.microsoft.com/fwlink/?LinkID=624192&clcid=0x409)를 방문하세요."
 * 기존 Azure AD B2C 테넌트를 삭제하고 동일한 도메인 이름으로 다시 만들 때 발생하는 알려진 문제가 있습니다. 새 Azure AD B2C 테넌트를 만들 때는 다른 도메인 이름을 사용해야 합니다.
 * 이러한 해결 방법이 효과가 없으면 Azure 지원에 문의하세요. 자세한 내용은 [Azure AD B2C에 대한 파일 지원 요청](active-directory-b2c-support.md)을 참조하세요.
-
 

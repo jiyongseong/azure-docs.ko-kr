@@ -11,15 +11,14 @@ ms.service: virtual-machines
 ms.workload: virtual-machines
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 7/15/2017
+ms.topic: troubleshooting
+ms.date: 11/03/2017
 ms.author: delhan
+ms.openlocfilehash: 8bf2a55563772e26239445732b2b08df677436ef
+ms.sourcegitcommit: 3df3fcec9ac9e56a3f5282f6c65e5a9bc1b5ba22
 ms.translationtype: HT
-ms.sourcegitcommit: 8021f8641ff3f009104082093143ec8eb087279e
-ms.openlocfilehash: f07108f5d7a792dcc9aae8a4fe889878db168bc6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/04/2017
 ---
 # <a name="supportability-of-adding-azure-vms-to-an-existing-availability-set"></a>기존 가용성 집합에 Azure VM 추가의 지원 가능성
 
@@ -37,3 +36,5 @@ ms.lasthandoff: 07/21/2017
 |Dv3||확인|확인|확인|확인|확인|
 
 다른 모든 시리즈는 특정 하드웨어가 필요하기 때문에 동일한 가용성 집합에 있을 수 없습니다.
+
+전용 RDMA 백 엔드 네트워크에 대한 요구 사항으로 인해 A8/A9 VM 크기를 혼합할 수 없습니다.

@@ -1,30 +1,20 @@
 ---
-title: "Azure Analysis Services 자습서 추가 단원: 불규칙한 계층 구조 | Microsoft Docs"
-description: "Azure Analysis Services 자습서에서 불규칙한 계층 구조를 수정하는 방법을 설명합니다."
-services: analysis-services
-documentationcenter: 
+title: 'Azure Analysis Services 자습서 추가 단원: 불규칙한 계층 구조 | Microsoft Docs'
+description: Azure Analysis Services 자습서에서 불규칙한 계층 구조를 수정하는 방법을 설명합니다.
 author: minewiskan
-manager: erikre
-editor: 
-tags: 
-ms.assetid: 
+manager: kfile
 ms.service: analysis-services
-ms.devlang: NA
-ms.topic: get-started-article
-ms.tgt_pltfrm: NA
-ms.workload: na
-ms.date: 05/26/2017
+ms.topic: conceptual
+ms.date: 04/12/2018
 ms.author: owend
-ms.translationtype: Human Translation
-ms.sourcegitcommit: e72275ffc91559a30720a2b125fbd3d7703484f0
-ms.openlocfilehash: 36acf2b20a4c3acab8050eb9c5489c8ee53e4d4e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/05/2017
-
+ms.reviewer: minewiskan
+ms.openlocfilehash: 955bc57bbf5f8bc3f0d91350f885d5dc77db93a8
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="supplemental-lesson---ragged-hierarchies"></a>추가 단원 - 불규칙한 계층 구조
-
-[!INCLUDE[analysis-services-appliesto-aas-sql2017-later](../../../includes/analysis-services-appliesto-aas-sql2017-later.md)]
 
 이 추가 단원에서는 다양한 수준에서 빈 값(멤버)을 포함하는 계층 구조를 피벗할 때 발생하는 일반적인 문제를 해결합니다. 예를 들어, 고위 관리자가 부하 직원으로 부서별 관리자와 비관리자를 포함하는 조직을 들 수 있습니다. 또는 워싱턴 D.C., 바티칸 시티처럼 일부 도시는 상위 시/도가 없는 국가-지역-도시로 구성된 지리적 계층 구조가 있습니다. 계층 구조에 빈 멤버가 있는 경우 보통 서로 다르거나 불규칙한 수준으로 내려갑니다.
 
@@ -54,8 +44,8 @@ ms.lasthandoff: 05/05/2017
     | 표 1           | 열       | 필터 방향   | 표 2     | 열      | Active |
     |-------------------|--------------|--------------------|-------------|-------------|--------|
     | FactResellerSales | OrderDateKey | 기본값            | DimDate     | Date        | 예    |
-    | FactResellerSales | DueDate      | 기본값            | DimDate     | Date        | 아니요     |
-    | FactResellerSales | ShipDateKey  | 기본값            | DimDate     | Date        | 아니요     |
+    | FactResellerSales | DueDate      | 기본값            | DimDate     | Date        | 아니오     |
+    | FactResellerSales | ShipDateKey  | 기본값            | DimDate     | Date        | 아니오     |
     | FactResellerSales | ProductKey   | 기본값            | DimProduct  | ProductKey  | 예    |
     | FactResellerSales | EmployeeKey  | 두 테이블로 | DimEmployee | EmployeeKey | 예    |
 
@@ -78,22 +68,22 @@ ms.lasthandoff: 05/05/2017
 
     **Level2** 
     ```
-    =LOOKUPVALUE(DimEmployee[FullName],DimEmployee[EmployeeKey],PATHITEM([Path],1,2)) 
+    =LOOKUPVALUE(DimEmployee[FullName],DimEmployee[EmployeeKey],PATHITEM([Path],2,1)) 
     ```
 
     **Level3** 
     ```
-    =LOOKUPVALUE(DimEmployee[FullName],DimEmployee[EmployeeKey],PATHITEM([Path],1,3)) 
+    =LOOKUPVALUE(DimEmployee[FullName],DimEmployee[EmployeeKey],PATHITEM([Path],3,1)) 
     ```
 
     **Level4** 
     ```
-    =LOOKUPVALUE(DimEmployee[FullName],DimEmployee[EmployeeKey],PATHITEM([Path],1,4)) 
+    =LOOKUPVALUE(DimEmployee[FullName],DimEmployee[EmployeeKey],PATHITEM([Path],4,1)) 
     ```
 
     **Level5** 
     ```
-    =LOOKUPVALUE(DimEmployee[FullName],DimEmployee[EmployeeKey],PATHITEM([Path],1,5)) 
+    =LOOKUPVALUE(DimEmployee[FullName],DimEmployee[EmployeeKey],PATHITEM([Path],5,1)) 
     ```
 
 6.  **DimEmployee** 테이블에서 **Organization**이라는 이름의 [계층 구조](../tutorials/aas-lesson-9-create-hierarchies.md)를 만듭니다. 다음 열을 순서대로 추가합니다. **Level1**, **Level2**, **Level3**, **Level4**, **Level5**

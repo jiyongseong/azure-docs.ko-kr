@@ -1,25 +1,24 @@
 ---
-title: "Azure AD Connect: 사용자 지정 설치 | Microsoft Docs"
-description: "이 문서는 Azure AD Connect에 대한 사용자 지정 설치 옵션에 대해 자세히 설명합니다. Azure AD Connect를 통해 Active Directory를 설치하려면 다음 지침을 사용합니다."
+title: 'Azure AD Connect: 사용자 지정 설치 | Microsoft Docs'
+description: 이 문서는 Azure AD Connect에 대한 사용자 지정 설치 옵션에 대해 자세히 설명합니다. Azure AD Connect를 통해 Active Directory를 설치하려면 다음 지침을 사용합니다.
 services: active-directory
-keywords: "Azure AD Connect의 정의, Active Directory 설치, Azure AD에 대한 필수 구성 요소"
-documentationcenter: 
+keywords: Azure AD Connect의 정의, Active Directory 설치, Azure AD에 대한 필수 구성 요소
+documentationcenter: ''
 author: billmath
-manager: femila
+manager: mtillman
 ms.assetid: 6d42fb79-d9cf-48da-8445-f482c4c536af
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: get-started-article
-ms.date: 08/02/2017
+ms.date: 05/02/2018
 ms.author: billmath
+ms.openlocfilehash: d7d1beff419ed2bf4c58f0646cd6c8aacf8e5e7b
+ms.sourcegitcommit: d28bba5fd49049ec7492e88f2519d7f42184e3a8
 ms.translationtype: HT
-ms.sourcegitcommit: 79bebd10784ec74b4800e19576cbec253acf1be7
-ms.openlocfilehash: 1580e2841790b7c1b6c9540da4940eef2c487256
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/03/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
 ---
 # <a name="custom-installation-of-azure-ad-connect"></a>Azure AD Connect의 사용자 지정 설치
 설치에 더 많은 옵션이 필요한 경우 Azure AD Connect **사용자 지정 설정**을 사용합니다. 여러 포리스트가 있는 경우 또한 빠른 설치에서 다루지 않는 선택적 기능을 구성하려는 경우에 사용합니다. [**빠른 설치**](active-directory-aadconnect-get-started-express.md) 옵션이 배포 또는 토폴로지 옵션을 충족하지 않는 경우에 사용합니다.
@@ -39,24 +38,23 @@ DirSync를 업그레이드하는 등 사용자 지정된 설정이 토폴로지�
 
 | 선택적 구성 | 설명 |
 | --- | --- |
-| 기존 SQL Server 사용 |SQL Server 이름 및 인스턴스 이름을 지정할 수 있습니다. 사용하려는 데이터베이스 서버가 이미 있는 경우 이 옵션을 선택합니다. SQL Server에서 찾아보기를 사용하도록 설정하지 않은 경우 **인스턴스 이름** 에 인스턴스 이름, 쉼표 및 포트 번호를 차례로 입력합니다. |
-| 기존 서비스 계정 사용 |기본적으로 Azure AD Connect에서는 사용할 동기화 서비스에 대한 가상 서비스 계정을 사용합니다. 원격 SQL Server를 사용하거나 인증이 필요한 프록시를 사용하는 경우 **관리 서비스 계정** 또는 도메인의 서비스 계정을 사용하고 암호를 알고 있어야 합니다. 이러한 경우에 사용할 계정을 입력합니다. 설치를 실행하는 사용자가 SQL에서 SA이므로 서비스 계정에 대한 로그인을 만들 수 있도록 합니다. [Azure AD Connect 계정 및 사용 권한](active-directory-aadconnect-accounts-permissions.md#azure-ad-connect-sync-service-account) |
+| 기존 SQL Server 사용 |SQL Server 이름 및 인스턴스 이름을 지정할 수 있습니다. 사용하려는 데이터베이스 서버가 이미 있는 경우 이 옵션을 선택합니다. SQL Server에서 찾아보기를 사용하도록 설정하지 않은 경우 **인스턴스 이름**에 인스턴스 이름, 쉼표 및 포트 번호를 차례로 입력합니다. |
+| 기존 서비스 계정 사용 |기본적으로 Azure AD Connect에서는 사용할 동기화 서비스에 대한 가상 서비스 계정을 사용합니다. 원격 SQL Server를 사용하거나 인증이 필요한 프록시를 사용하는 경우 **관리 서비스 계정** 또는 도메인의 서비스 계정을 사용하고 암호를 알고 있어야 합니다. 이러한 경우에 사용할 계정을 입력합니다. 설치를 실행하는 사용자가 SQL에서 SA이므로 서비스 계정에 대한 로그인을 만들 수 있도록 합니다.  [Azure AD Connect 계정 및 권한](active-directory-aadconnect-accounts-permissions.md#azure-ad-connect-sync-service-account)을 참조하세요. </br></br>최신 빌드를 사용하면 이제는 SQL 관리자가 대역 외에서 데이터베이스를 프로비전한 후 데이터베이스 소유권이 있는 Azure AD Connect 관리자가 설치할 수 있습니다.  자세한 내용은 [SQL 위임된 관리자 권한을 사용하여 Azure AD Connect 설치](active-directory-aadconnect-sql-delegation.md)를 참조하세요.|
 | 사용자 지정 동기화 그룹 지정 |기본적으로 Azure AD Connect에서는 동기화 서비스를 설치할 때 서버에 로컬 그룹 4개를 만듭니다. 이 그룹은 Administrators 그룹, Operators 그룹, Browse 그룹, Password Reset 그룹입니다. 여기서 사용자의 고유한 그룹을 지정할 수 있습니다. 그룹은 서버에서 로컬이어야 하며 도메인에서 찾을 수 없습니다. |
 
 ### <a name="user-sign-in"></a>사용자 로그인
 필수 구성 요소를 설치한 후 사용자가 Single Sign-On 방법을 선택하라는 메시지가 표시됩니다. 다음 테이블에서 사용 가능한 옵션에 대한 간략한 설명을 제공합니다. 로그인 메서드에 대한 전체 설명은 [사용자 로그인](active-directory-aadconnect-user-signin.md)을 참조하세요.
 
-![사용자 로그인](./media/active-directory-aadconnect-get-started-custom/usersignin2.png)
+![사용자 로그인](./media/active-directory-aadconnect-get-started-custom/usersignin4.png)
 
 | SSO(Single Sign-On) 옵션 | 설명 |
 | --- | --- |
-| 암호 동기화 |사용자는 자신의 온-프레미스 네트워크에서 사용하는 것과 동일한 암호를 사용하여 Office 365와 같은 Microsoft 클라우드 서비스에 로그인할 수 있습니다. 사용자 암호는 암호 해시로 Azure AD에 동기화되며 클라우드에서 인증이 이루어집니다. 자세한 내용은 [암호 동기화](active-directory-aadconnectsync-implement-password-synchronization.md)를 참조하세요. |
-|통과 인증(미리 보기)|사용자는 자신의 온-프레미스 네트워크에서 사용하는 것과 동일한 암호를 사용하여 Office 365와 같은 Microsoft 클라우드 서비스에 로그인할 수 있습니다.  사용자 암호가 온-프레미스 Active Directory 컨트롤러를 통해 전달되어 검증됩니다.
+| 암호 해시 동기화 |사용자는 자신의 온-프레미스 네트워크에서 사용하는 것과 동일한 암호를 사용하여 Office 365와 같은 Microsoft 클라우드 서비스에 로그인할 수 있습니다. 사용자 암호는 암호 해시로 Azure AD에 동기화되며 클라우드에서 인증이 이루어집니다. 자세한 내용은 [암호 해시 동기화](active-directory-aadconnectsync-implement-password-hash-synchronization.md)를 참조하세요. |
+|통과 인증|사용자는 자신의 온-프레미스 네트워크에서 사용하는 것과 동일한 암호를 사용하여 Office 365와 같은 Microsoft 클라우드 서비스에 로그인할 수 있습니다.  사용자 암호는 유효성을 검사하기 위해 온-프레미스 Active Directory 도메인 컨트롤러로 전달됩니다.
 | AD FS로 페더레이션 |사용자는 자신의 온-프레미스 네트워크에서 사용하는 것과 동일한 암호를 사용하여 Office 365와 같은 Microsoft 클라우드 서비스에 로그인할 수 있습니다.  사용자는 로그인하기 위해 자신의 온-프레미스 AD FS 인스턴스로 리디렉션되며 온-프레미스로 인증이 이루어집니다. |
-| 구성하지 않음 |기능이 설치 및 구성되지 않았습니다. 이미 타사 페더레이션 서버 또는 다른 기존 솔루션이 있는 경우 이 옵션을 선택합니다. |
-|Single Sign-On을 사용하도록 설정|이 옵션은 암호 동기화 및 통과 인증 모두로 사용 가능하며 기업 네트워크에서 데스크톱 사용자를 위한 single sign on 환경을 제공합니다.  자세한 내용은 [Single sign-on](active-directory-aadconnect-sso.md)을 참조하세요. </br>AD FS 고객의 경우 AD FS에서 동일한 수준의 single sign on을 이미 제공하므로 이 옵션을 사용할 수 없습니다.</br>(PTA가 동시에 릴리스되지 않은 경우)
-|로그인 옵션|이 옵션은 암호 동기화 고객에게 제공되며 기업 네트워크에서 데스크톱 사용자를 위한 single sign on 환경을 제공합니다.  </br>자세한 내용은 [Single sign-on](active-directory-aadconnect-sso.md)을 참조하세요. </br>AD FS 고객의 경우 AD FS에서 동일한 수준의 single sign on을 이미 제공하므로 이 옵션을 사용할 수 없습니다.
-
+| PingFederate을 사용한 페더레이션|사용자는 자신의 온-프레미스 네트워크에서 사용하는 것과 동일한 암호를 사용하여 Office 365와 같은 Microsoft 클라우드 서비스에 로그인할 수 있습니다.  사용자는 로그인하기 위해 자신의 온-프레미스 PingFederate 인스턴스로 리디렉션되며 온-프레미스로 인증이 이루어집니다. |
+| 구성하지 않음 |사용자 로그인 기능이 설치 및 구성되지 않습니다. 이미 타사 페더레이션 서버 또는 다른 기존 솔루션이 있는 경우 이 옵션을 선택합니다. |
+|Single Sign-On을 사용하도록 설정|이 옵션은 암호 동기화 및 통과 인증 모두로 사용 가능하며 기업 네트워크에서 데스크톱 사용자를 위한 single sign on 환경을 제공합니다. 자세한 내용은 [Single sign-on](active-directory-aadconnect-sso.md)을 참조하세요. </br>AD FS 고객의 경우 AD FS에서 동일한 수준의 single sign on을 이미 제공하므로 이 옵션을 사용할 수 없습니다.</br>
 
 ### <a name="connect-to-azure-ad"></a>Azure에 연결
 Azure AD에 연결 화면에서, 전역 관리자 계정 및 암호를 입력합니다. 이전 페이지에서 **AD FS로 페더레이션**을 선택한 경우 페더레이션을 사용하도록 설정하려는 도메인의 계정으로 로그인하지 마십시오. Azure AD 디렉터리와 함께 제공되는 기본 **onmicrosoft.com** 도메인에서 계정을 사용하는 것이 좋습니다.
@@ -71,7 +69,7 @@ Azure AD에 연결 화면에서, 전역 관리자 계정 및 암호를 입력합
 
 오류가 발생하고 연결에 문제가 있는 경우 [연결 문제 해결](active-directory-aadconnect-troubleshoot-connectivity.md)을 참조하세요.
 
-## <a name="pages-under-the-section-sync"></a>섹션 동기화의 페이지
+## <a name="pages-under-the-sync-section"></a>동기화 섹션의 페이지
 
 ### <a name="connect-your-directories"></a>디렉터리에 연결
 Active Directory 도메인 서비스에 연결하려면 Azure AD Connect에 충분한 권한이 있는 계정의 포리스트 이름과 자격 증명이 필요합니다.
@@ -82,25 +80,24 @@ Active Directory 도메인 서비스에 연결하려면 Azure AD Connect에 충�
 
 | 옵션 | 설명 |
 | --- | --- |
-| 기존 계정 사용 | 디렉터리 동기화 중에 AD 포리스트에 연결하기 위해 Azure AD Connect를 사용할 기존 AD DS 계정을 제공하려면 이 옵션을 선택합니다. NetBios 또는 FQDN 형식으로 도메인 부분을 입력할 수 있습니다(예: FABRIKAM\syncuser 또는 fabrikam.com\syncuser). 기본 읽기 권한만 필요하기 때문에 이 계정은 일반 사용자 계정일 수 있습니다. 그러나 시나리오에 따라 더 많은 사용 권한이 할 수 있습니다. 자세한 내용은 [Azure AD Connect 계정 및 권한](active-directory-aadconnect-accounts-permissions.md#create-the-ad-ds-account)을 참조하세요. |
 | 새 계정 만들기 | Azure AD Connect 마법사에서 디렉터리 동기화 중에 AD 포리스트에 연결하기 위해 Azure AD Connect에 필요한 AD DS 계정을 만들게 하려면 이 옵션을 선택합니다. 이 옵션을 선택하면 엔터프라이즈 관리자 계정의 사용자 이름과 암호를 입력합니다. Azure AD Connect 마법사에서 제공된 엔터프라이즈 관리자 계정을 사용하여 필요한 AD DS 계정을 만듭니다. NetBios 또는 FQDN 형식으로 도메인 부분을 입력할 수 있습니다(예: FABRIKAM\administrator 또는 fabrikam.com\administrator). |
+| 기존 계정 사용 | 디렉터리 동기화 중에 AD 포리스트에 연결하기 위해 Azure AD Connect를 사용할 기존 AD DS 계정을 제공하려면 이 옵션을 선택합니다. NetBios 또는 FQDN 형식으로 도메인 부분을 입력할 수 있습니다(예: FABRIKAM\syncuser 또는 fabrikam.com\syncuser). 기본 읽기 권한만 필요하기 때문에 이 계정은 일반 사용자 계정일 수 있습니다. 그러나 시나리오에 따라 더 많은 사용 권한이 할 수 있습니다. 자세한 내용은 [Azure AD Connect 계정 및 권한](active-directory-aadconnect-accounts-permissions.md#create-the-ad-ds-account)을 참조하세요. |
 
 ![연결 디렉터리](./media/active-directory-aadconnect-get-started-custom/connectdir02.png)
-
 
 ### <a name="azure-ad-sign-in-configuration"></a>Azure AD 로그인 구성
 이 페이지를 사용하면 온-프레미스 AD DS에 있는 UPN 도메인을 검토하고 이는 Azure AD에서 확인됩니다. 또한 이 페이지를 사용하면 userPrincipalName에 사용할 특성을 구성할 수 있습니다.
 
 ![확인되지 않은 도메인](./media/active-directory-aadconnect-get-started-custom/aadsigninconfig.png)  
-**추가되지 않음** 및 **확인되지 않음**으로 표시된 모든 도메인을 검토합니다. 사용한 해당 도메인을 Azure AD에서 확인하도록 합니다. 도메인을 확인한 경우 새로 고침 기호를 클릭합니다. 자세한 내용은 [도메인 추가 및 확인](../active-directory-add-domain.md)을 참조하세요.
+**추가되지 않음** 및 **확인되지 않음**으로 표시된 모든 도메인을 검토합니다. 사용한 해당 도메인을 Azure AD에서 확인하도록 합니다. 도메인을 확인한 경우 새로 고침 기호를 클릭합니다. 자세한 내용은 [도메인 추가 및 확인](../active-directory-domains-add-azure-portal.md)을 참조하세요.
 
-**UserPrincipalName** - 특성 userPrincipalName은 사용자가 Azure AD 및 Office 365에 로그인할 때 사용하는 특성입니다. UPN-접미사로 알려진 사용된 도메인은 사용자가 동기화되기 전에 Azure AD에서 확인해야 합니다. Microsoft에서는 기본 특성 userPrincipalName을 유지하는 것을 권장합니다. 이 특성이 라우팅할 수 없고 확인할 수 없는 경우 다른 특성을 선택할 수 있습니다. 예를 들어 로그인 ID를 보관하는 특성으로 전자 메일을 선택할 수 있습니다. userPrincipalName 이외의 다른 특성을 사용하는 것을 **대체 ID**라고 합니다. 대체 ID 특성 값은 RFC822 표준을 따라야 합니다. 대체 ID는 암호 동기화 및 페더레이션과 함께 사용할 수 있습니다.
+**UserPrincipalName** - 특성 userPrincipalName은 사용자가 Azure AD 및 Office 365에 로그인할 때 사용하는 특성입니다. UPN-접미사로 알려진 사용된 도메인은 사용자가 동기화되기 전에 Azure AD에서 확인해야 합니다. Microsoft에서는 기본 특성 userPrincipalName을 유지하는 것을 권장합니다. 이 특성이 라우팅할 수 없고 확인할 수 없는 경우 다른 특성을 선택할 수 있습니다. 예를 들어 로그인 ID를 보관하는 특성으로 전자 메일을 선택할 수 있습니다. userPrincipalName 이외의 다른 특성을 사용하는 것을 **대체 ID**라고 합니다. 대체 ID 특성 값은 RFC822 표준을 따라야 합니다. 대체 ID는 암호 동기화 및 페더레이션과 함께 사용할 수 있습니다. 특성의 값이 하나뿐이어도 Active Directory에 다중 값으로 정의하면 안 됩니다.
 
 >[!NOTE]
 > 통과 인증을 사용하도록 설정한 경우 마법사를 진행하려면 하나 이상의 검증된 도메인이 있어야 합니다.
 
 > [!WARNING]
-> 대체 ID를 사용하면 모든 Office 365 워크로드 부하와 호환되지 않습니다. 자세한 내용은 [대체 로그인 ID 구성](https://technet.microsoft.com/library/dn659436.aspx)을 참조하세요.
+> 대체 ID를 사용하면 모든 Office 365 워크로드 부하와 호환되지 않습니다. 자세한 내용은 [대체 로그인 ID 구성](https://docs.microsoft.com/windows-server/identity/ad-fs/operations/configuring-alternate-login-id)을 참조하세요.
 >
 >
 
@@ -169,8 +166,8 @@ sourceAnchor 특성은 사용자 개체의 수명 동안 변경할 수 없는 �
 | Exchange 하이브리드 배포 |Exchange 하이브리드 배포 기능을 통해 온-프레미스 및 Office 365에서 모두 Exchange 사서함을 동시에 존재하게 할 수 있습니다. Azure AD Connect에서는 [특성](active-directory-aadconnectsync-attributes-synchronized.md#exchange-hybrid-writeback) 의 특정 집합을 Azure AD에서 온-프레미스 디렉터리로 다시 동기화합니다. |
 | Exchange 메일 공용 폴더 | Exchange 메일 공용 폴더 기능을 사용하면 온-프레미스 Active Directory의 메일 사용이 가능한 공용 폴더 개체를 Azure AD로 동기화할 수 있습니다. |
 | Azure AD 앱 및 특성 필터링 |Azure AD 앱 및 특성 필터링을 사용하여 동기화된 특성 집합을 사용자 지정할 수 있습니다. 이 옵션은 마법사에 구성 페이지를 두 개 더 추가합니다. 자세한 내용은 [Azure AD 앱 및 특성 필터링](#azure-ad-app-and-attribute-filtering)을 참조하세요. |
-| 암호 동기화 |페더레이션을 로그인 솔루션으로 선택한 경우 이 옵션을 사용하도록 설정할 수 있습니다. 암호 동기화는 백업 옵션으로 사용할 수 있습니다. 자세한 내용은 [암호 동기화](active-directory-aadconnectsync-implement-password-synchronization.md)를 참조하세요. </br></br>통과 인증을 선택한 경우 레거시 클라이언트 지원을 보장하고 백업 옵션으로 이 옵션이 기본적으로 사용됩니다. 자세한 내용은 [암호 동기화](active-directory-aadconnectsync-implement-password-synchronization.md)를 참조하세요.|
-| 비밀번호 쓰기 저장 |비밀번호 쓰기 저장을 사용하도록 설정하면 Azure AD에서 이루어지는 암호 변경 사항이 온-프레미스 디렉터리에 다시 기록됩니다. 자세한 내용은 [암호 관리 시작](../active-directory-passwords-getting-started.md)을 참조하세요. |
+| 암호 해시 동기화 |페더레이션을 로그인 솔루션으로 선택한 경우 이 옵션을 사용하도록 설정할 수 있습니다. 그럼 다음, 암호 해시 동기화는 백업 옵션으로 사용할 수 있습니다. 자세한 내용은 [암호 해시 동기화](active-directory-aadconnectsync-implement-password-hash-synchronization.md)를 참조하세요. </br></br>통과 인증을 선택한 경우 이 옵션을 또한 백업 옵션으로 레거시 클라이언트 지원을 보장하도록 사용할 수 있습니다. 자세한 내용은 [암호 해시 동기화](active-directory-aadconnectsync-implement-password-hash-synchronization.md)를 참조하세요.|
+| 비밀번호 쓰기 저장 |비밀번호 쓰기 저장을 사용하도록 설정하면 Azure AD에서 이루어지는 암호 변경 사항이 온-프레미스 디렉터리에 다시 기록됩니다. 자세한 내용은 [암호 관리 시작](../authentication/quickstart-sspr.md)을 참조하세요. |
 | 그룹 쓰기 저장 |**Office 365 그룹** 기능을 사용하는 경우 이 그룹을 온-프레미스 Active Directory에 표시할 수 있습니다. 이 옵션은 Exchange가 온-프레미스 Active Directory에 있는 경우 사용할 수 있습니다. 자세한 내용은 [그룹 쓰기 저장](active-directory-aadconnect-feature-preview.md#group-writeback)을 참조하세요. |
 | 장치 쓰기 저장 |Azure AD의 장치 개체를 조건부 액세스 시나리오에 대한 온-프레미스 Active Directory에 쓰기 저장할 수 있습니다. 자세한 내용은 [Azure AD Connect에서 장치 쓰기 저장 사용](active-directory-aadconnect-feature-device-writeback.md)을 참조하세요. |
 | 디렉터리 확장 특성 동기화 |디렉터리 확장 특성 동기화를 사용하도록 설정하면 지정된 특성이 Azure AD에 동기화됩니다. 자세한 내용은 [디렉터리 확장](active-directory-aadconnectsync-feature-directory-extensions.md)을 참조하세요. |
@@ -232,12 +229,15 @@ Azure AD Connect 도구에서 추가한 각 포리스트에 대해 도메인 관
 ## <a name="configuring-federation-with-ad-fs"></a>AD FS로 페더레이션 구성
 Azure AD Connect를 사용하여 AD FS를 구성하는 것은 단 몇 번의 클릭으로 간단합니다. 구성하기 전에 다음 사항이 필요합니다.
 
-* 원격 관리가 사용 가능한 페더레이션 서버용 Windows Server 2012 R2 서버
-* 원격 관리가 사용 가능한 웹 응용 프로그램 프록시 서버용 Windows Server 2012 R2 서버
+* 원격 관리가 사용 가능한 페더레이션 서버용 Windows Server 2012 R2 이상 서버
+* 원격 관리가 사용 가능한 웹 응용 프로그램 프록시 서버용 Windows Server 2012 R2 이상 서버
 * 사용할 페더레이션 서비스 이름에 대한 SSL 인증서(예: sts.contoso.com)
 
+>[!NOTE]
+>페더레이션 트러스트를 관리하는 데 사용하지 않는 경우에도 Azure AD Connect를 사용하여 AD FS 팜의 SSL 인증서를 업데이트할 수 있습니다.
+
 ### <a name="ad-fs-configuration-pre-requisites"></a>AD FS 구성 필수 조건
-Azure AD Connect를 사용하여 AD FS 팜을 구성하려면, 원격 서버에서 WinRM이 활성화되도록 합니다. [테이블 3 - Azure AD Connect 및 페더레이션 서버/WAP](active-directory-aadconnect-ports.md#table-3---azure-ad-connect-and-ad-fs-federation-serverswap)에 나열된 포트 요구 사항을 살펴봅니다.
+Azure AD Connect를 사용하여 AD FS 팜을 구성하려면, 원격 서버에서 WinRM이 활성화되도록 합니다. [페더레이션 필수 구성 요소](active-directory-aadconnect-prerequisites.md#prerequisites-for-federation-installation-and-configuration)에서 다른 작업이 완료되었는지 확인합니다. [테이블 3 - Azure AD Connect 및 페더레이션 서버/WAP](active-directory-aadconnect-ports.md#table-3---azure-ad-connect-and-ad-fs-federation-serverswap)에 나열된 포트 요구 사항을 살펴봅니다.
 
 ### <a name="create-a-new-ad-fs-farm-or-use-an-existing-ad-fs-farm"></a>새 AD FS 팜을 만들거나 기존 AD FS 팜 사용
 기존 AD FS 팜을 사용하거나 새 AD FS 팜을 만들도록 선택할 수 있습니다. 새로 만들기를 선택하는 경우 SSL 인증서를 제공해야 합니다. SSL 인증서가 암호로 보호된 경우 암호를 묻는 메시지가 나타납니다.
@@ -246,8 +246,11 @@ Azure AD Connect를 사용하여 AD FS 팜을 구성하려면, 원격 서버에�
 
 기존 AD FS 팜을 사용하도록 선택한 경우 AD FS와 Azure AD 간의 트러스트 관계를 구성하는 화면으로 이동합니다.
 
+>[!NOTE]
+>Azure AD Connect는 AD FS 팜을 하나만 관리하는 데 사용할 수 있습니다. 선택한 AD FS 팜에 구성된 Azure AD와 기존 페더레이션 트러스트가 있는 경우 트러스트는 Azure AD Connect에서 다시 처음부터 만들어집니다.
+
 ### <a name="specify-the-ad-fs-servers"></a>AD FS 서버 지정
-AD FS를 설치하려는 서버를 입력합니다. 용량 계획 요구 사항에 따라 하나 이상의 서버를 추가할 수 있습니다. 이 구성을 수행하기 전에 모든 서버를 Active Directory에 조인합니다. Microsoft에서는 테스트 및 파일럿 배포를 위해 단일 AD FS 서버를 설치하는 것이 좋습니다. 그런 다음 초기 구성 후 Azure AD Connect를 다시 실행하여 규모 필요에 맞게 더 많은 서버를 추가 및 배포합니다.
+AD FS를 설치하려는 서버를 입력합니다. 용량 계획 요구 사항에 따라 하나 이상의 서버를 추가할 수 있습니다. 이 구성을 수행하기 전에 모든 AD FS 서버(WAP 서버에는 필요하지 않음)를 Active Directory에 조인합니다. Microsoft에서는 테스트 및 파일럿 배포를 위해 단일 AD FS 서버를 설치하는 것이 좋습니다. 그런 다음 초기 구성 후 Azure AD Connect를 다시 실행하여 규모 필요에 맞게 더 많은 서버를 추가 및 배포합니다.
 
 > [!NOTE]
 > 이 구성을 수행하기 전에 모든 서버가 AD 도메인에 조인되었는지 확인 하십시오.
@@ -260,7 +263,7 @@ AD FS를 설치하려는 서버를 입력합니다. 용량 계획 요구 사항�
 웹 응용 프로그램 프록시 서버로 사용할 서버를 입력합니다. 웹 응용 프로그램 프록시 서버는 DMZ(엑스트라넷 연결)에 배포되며 엑스트라넷에서 인증 요청을 지원합니다. 용량 계획 요구 사항에 따라 하나 이상의 서버를 추가할 수 있습니다. Microsoft에서는 테스트 및 파일럿 배포를 위해 단일 웹 응용 프로그램 프록시 서버를 설치하는 것이 좋습니다. 그런 다음 초기 구성 후 Azure AD Connect를 다시 실행하여 규모 필요에 맞게 더 많은 서버를 추가 및 배포합니다. 인트라넷에서 인증을 충족하기 위해 동일한 수의 프록시 서버를 두는 것이 좋습니다.
 
 > [!NOTE]
-> <li> 사용할 계정이 AD FS 서버의 로컬 관리자가 아닌 경우 관리자 자격 증명에 대한 메시지가 표시됩니다.</li>
+> <li> 사용할 계정이 WAP 서버의 로컬 관리자가 아닌 경우 관리자 자격 증명을 요구하는 메시지가 표시됩니다.</li>
 > <li> 이 단계를 실행하기 전에 Azure AD Connect 서버와 웹 응용 프로그램 프록시 서버 간에 HTTP/HTTPS 연결이 되어 있는지 확인합니다.</li>
 > <li> 인증 요청이 진행될 수 있도록 웹 응용 프로그램 서버와 AD FS 서버 간에 HTTP/HTTPS 연결이 되어 있는지 확인합니다.</li>
 >
@@ -279,6 +282,9 @@ AD FS 서비스가 Active Directory에서 사용자를 인증하고 사용자 �
 
 그룹 관리 서비스 계정 선택했는데 Active Directory에서 이 기능을 사용한 적이 없는 경우 엔터프라이즈 관리자 자격 증명에 대한 메시지가 표시됩니다. 이러한 자격 증명은 키 저장소를 시작하고 Active Directory에서 기능을 사용하도록 설정하는 데 사용됩니다.
 
+> [!NOTE]
+> Azure AD Connect는 AD FS 서비스가 이미 도메인에서 SPN으로 등록되어 있는지 검색하기 위한 검사를 수행합니다.  AD DS에서는 중복된 SPN의 동시 등록을 허용하지 않습니다.  중복된 SPN이 없으면 SPN을 제거할 때까지 계속 진행할 수 없습니다.
+
 ![AD FS 서비스 계정](./media/active-directory-aadconnect-get-started-custom/adfs5.png)
 
 ### <a name="select-the-azure-ad-domain-that-you-wish-to-federate"></a>페더레이션하려는 Azure AD 도메인을 선택합니다.
@@ -287,7 +293,7 @@ AD FS 서비스가 Active Directory에서 사용자를 인증하고 사용자 �
 ![Azure AD 도메인](./media/active-directory-aadconnect-get-started-custom/adfs6.png)
 
 ### <a name="verify-the-azure-ad-domain-selected-for-federation"></a>페더레이션에 선택한 Azure AD 도메인 확인
-페더레이션할 도메인을 선택하면 Azure AD Connect가 확인되지 않은 도메인을 확인하는 데 필요한 정보를 제공합니다. 이 정보를 사용하는 방법은 [도메인 추가 및 확인](../active-directory-add-domain.md)을 참조하세요.
+페더레이션할 도메인을 선택하면 Azure AD Connect가 확인되지 않은 도메인을 확인하는 데 필요한 정보를 제공합니다. 이 정보를 사용하는 방법은 [도메인 추가 및 확인](../active-directory-domains-add-azure-portal.md)을 참조하세요.
 
 ![Azure AD 도메인](./media/active-directory-aadconnect-get-started-custom/verifyfeddomain.png)
 
@@ -296,6 +302,39 @@ AD FS 서비스가 Active Directory에서 사용자를 인증하고 사용자 �
 >
 >
 
+## <a name="configuring-federation-with-pingfederate"></a>PingFederate로 페더레이션 구성
+Azure AD Connect를 사용하여 PingFederate를 구성하는 방법은 클릭 몇 번으로 간단하게 처리할 수 있습니다. 구성하기 전에 다음 사항이 필요합니다.  하지만 다음과 같은 필수 구성 요소가 필요합니다.
+- PingFederate 8.4 이상.  자세한 내용은 [Azure Active Directory 및 Office 365와 PingFederate 통합](https://docs.pingidentity.com/bundle/O365IG20_sm_integrationGuide/page/O365IG_c_integrationGuide.html)을 참조하세요.
+- 사용할 페더레이션 서비스 이름에 대한 SSL 인증서(예: sts.contoso.com)
+
+### <a name="verify-the-domain"></a>도메인 확인
+PingFederate을 사용한 페더레이션을 선택한 후에는 페더레이션할 도메인을 확인하라는 메시지가 표시됩니다.  드롭다운 상자에서 도메인을 선택합니다.
+
+![도메인 확인](./media/active-directory-aadconnect-get-started-custom/ping1.png)
+
+### <a name="export-the-pingfederate-settings"></a>PingFederate 설정 내보내기
+
+
+PingFederate는 각 페더레이션된 Azure 도메인의 페더레이션 서버로 구성해야 합니다.  [설정 내보내기] 단추를 클릭하고 이 정보를 PingFederate 관리자와 공유합니다.  페더레이션 서버 관리자가 구성을 업데이트한 다음, PingFederate 서버 URL 및 포트 번호를 제공할 것입니다. 그러면 Azure AD Connect가 메타데이터 설정을 확인할 수 있습니다.  
+
+![도메인 확인](./media/active-directory-aadconnect-get-started-custom/ping2.png)
+
+유효성 검사 문제를 해결하려면 PingFederate 관리자에게 문의하세요.  다음은 Azure와 유효한 트러스트 관계가 없는 PingFederate 서버의 예입니다.
+
+![신뢰](./media/active-directory-aadconnect-get-started-custom/ping5.png)
+
+
+
+
+### <a name="verify-federation-connectivity"></a>페더레이션 연결 확인
+Azure AD Connect는 이전 단계에서 PingFederate 메타데이터에서 검색된 인증 엔드포인트의 유효성을 검사하려고 시도합니다.  Azure AD Connect는 먼저 로컬 DNS 서버를 사용하여 엔드포인트를 확인하려고 시도합니다.  그 다음에는 외부 DNS 공급자를 사용하여 엔드포인트를 확인하려고 시도합니다.  유효성 검사 문제를 해결하려면 PingFederate 관리자에게 문의하세요.  
+
+![연결 확인](./media/active-directory-aadconnect-get-started-custom/ping3.png)
+
+### <a name="verify-federation-login"></a>페더레이션 로그인 확인
+마지막으로, 페더레이션된 도메인에 로그인하여 새로 구성된 페더레이션된 로그인 흐름을 확인할 수 있습니다. 이 작업에 성공하면 PingFederate을 사용한 페더레이션이 성공적으로 구성됩니다.
+![로그인 확인](./media/active-directory-aadconnect-get-started-custom/ping4.png)
+
 ## <a name="configure-and-verify-pages"></a>페이지 구성 및 확인
 이 페이지에서 구성이 이루어집니다.
 
@@ -303,6 +342,7 @@ AD FS 서비스가 Active Directory에서 사용자를 인증하고 사용자 �
 > 설치를 계속하기 전에 페더레이션을 구성한 경우 [페더레이션 서버에 대 한 이름 확인](active-directory-aadconnect-prerequisites.md#name-resolution-for-federation-servers)을 구성했는지 확인합니다.
 >
 >
+
 
 ![구성할 준비 완료](./media/active-directory-aadconnect-get-started-custom/readytoconfigure2.png)
 
@@ -331,8 +371,9 @@ AD FS 서비스가 Active Directory에서 사용자를 인증하고 사용자 �
 
 ![Verify](./media/active-directory-aadconnect-get-started-custom/adfs7.png)
 
-또한 다음 확인 단계를 수행합니다.
+통합형 인증의 유효성 검사가 성공하려면 다음 테스트 중 하나 이상을 수동으로 수행해야 합니다.
 
+* 동기화가 완료되면 Azure AD Connect에서 페더레이션 로그인 확인 추가 작업을 사용하여 원하는 온-프레미스 사용자 계정에 대한 인증을 확인합니다.
 * 인트라넷의 도메인 가입된 컴퓨터에서, 브라우저에서 로그인할 수 있는지 유효성 검사: https://myapps.microsoft.com에 연결하고 로그인된 계정으로 로그인을 확인합니다. 기본 제공 AD DS 관리자 계정은 동기화되지 않으며 확인을 위해 사용할 수 없습니다.
 * 엑스트라넷에서, 장치에서 로그인 할 수 있는지 유효성을 검사합니다. 홈 컴퓨터 또는 모바일 장치에서 https://myapps.microsoft.com에 연결하고 자격 증명을 제공합니다.
 * 리치 클라이언트 로그인 유효성을 검사합니다. https://testconnectivity.microsoft.com에 연결하고 **Office 365** 탭 및 **Office 365 Single Sign-on 테스트**를 선택합니다.
@@ -347,4 +388,3 @@ Azure AD Connect를 설치했으므로 [설치를 확인하고 라이선스를 �
 공통 항목인 [스케줄러 및 동기화를 트리거하는 방법](active-directory-aadconnectsync-feature-scheduler.md)에 대해 자세히 알아봅니다.
 
 [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)에 대해 자세히 알아봅니다.
-

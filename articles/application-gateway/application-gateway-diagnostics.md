@@ -1,27 +1,22 @@
 ---
-title: "Application Gateway에 대한 액세스 로그, 성능 로그, 백 엔드 상태 및 메트릭 모니터링 | Microsoft Docs"
-description: "Application Gateway에 대한 액세스 및 성능 로그를 사용하고 관리하는 방법을 알아봅니다"
+title: Application Gateway에 대한 액세스 로그, 성능 로그, 백 엔드 상태 및 메트릭 모니터링
+description: Application Gateway에 대한 액세스 및 성능 로그를 사용하고 관리하는 방법을 알아봅니다
 services: application-gateway
-documentationcenter: na
 author: amitsriva
 manager: rossort
-editor: tysonn
 tags: azure-resource-manager
-ms.assetid: 300628b8-8e3d-40ab-b294-3ecc5e48ef98
 ms.service: application-gateway
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 01/17/2017
+ms.date: 4/2/2018
 ms.author: amitsriva
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5bbeb9d4516c2b1be4f5e076a7f63c35e4176b36
-ms.openlocfilehash: 122a08fbe95e4e3c2eaba8a8d8558f2d638120d0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/13/2017
-
-
+ms.openlocfilehash: 982ae712320cb390b1822de6a7a3980ebfb6251e
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="back-end-health-diagnostic-logs-and-metrics-for-application-gateway"></a>Application Gateway에 대한 백 엔드 상태, 진단 로그 및 메트릭
 
@@ -29,9 +24,9 @@ Azure Application Gateway를 사용하여 다음과 같은 방법으로 리소�
 
 * [백 엔드 상태](#back-end-health) - Application Gateway는 Azure Portal과 PowerShell을 통해 백 엔드 풀에 있는 서버의 상태를 모니터링하는 기능을 제공합니다. 또한 성능 진단 로그를 통해 백 엔드 풀의 상태도 확인할 수 있습니다.
 
-* [로그](#diagnostic-logs) - 로그를 사용하면 모니터링하기 위해 리소스에서 성능, 액세스 및 기타 데이터를 저장하거나 사용할 수 있습니다.
+* [로그](#diagnostic-logging) - 로그를 사용하면 모니터링하기 위해 리소스에서 성능, 액세스 및 기타 데이터를 저장하거나 사용할 수 있습니다.
 
-* [메트릭](#metrics) - Application Gateway에는 현재 메트릭이 하나만 있습니다. 이 메트릭은 응용 프로그램 게이트웨이의 처리량을 초당 바이트 수로 측정합니다.
+* [메트릭](#metrics): 현재 Application Gateway는 성능 카운터를 보여주는 7개 메트릭을 제공합니다.
 
 ## <a name="back-end-health"></a>백 엔드 상태
 
@@ -97,12 +92,12 @@ az network application-gateway show-backend-health --resource-group AdatumAppGat
 }
 ```
 
-## <a name="diagnostic-logs"></a>진단 로그
+## <a name="diagnostic-logging"></a>진단 로그
 
 Azure에서 다양한 유형의 로그를 사용하여 Application Gateway를 관리하고 문제를 해결할 수 있습니다. 이러한 로그 중 일부는 포털을 통해 액세스할 수 있습니다. 모든 로그는 Azure Blob 저장소에서 추출하고 다양한 도구(예: [Log Analytics](../log-analytics/log-analytics-azure-networking-analytics.md),Excel 및 Power BI)에서 볼 수 있습니다. 다음 목록에서 다른 종류의 로그에 대해 자세히 알아볼 수 있습니다.
 
 * **활동 로그** - [Azure 활동 로그](../monitoring-and-diagnostics/insights-debugging-with-events.md)(이전의 작업 로그 및 감사 로그)를 사용하여 Azure 구독에 제출된 모든 작업과 상태를 확인할 수 있습니다. 활동 로그 항목은 기본적으로 수집되고 Azure Portal에서 볼 수 있습니다.
-* **액세스 로그** - 이 로그를 사용하여 Application Gateway 액세스 패턴을 확인하고 호출자의 IP, 요청된 URL, 응답 대기 시간, 반환 코드, 입/출력 바이트 수 등 중요한 정보를 분석할 수 있습니다. 액세스 로그는 300초마다 수집됩니다. 이 로그에는 응용 프로그램 게이트웨이 인스턴스당 하나의 레코드가 포함됩니다. Application Gateway 인스턴스는 'instanceId' 속성으로 식별할 수 있습니다.
+* **액세스 로그** - 이 로그를 사용하여 Application Gateway 액세스 패턴을 확인하고 호출자의 IP, 요청된 URL, 응답 대기 시간, 반환 코드, 입/출력 바이트 수 등 중요한 정보를 분석할 수 있습니다. 액세스 로그는 300초마다 수집됩니다. 이 로그에는 Application Gateway 인스턴스당 하나의 레코드가 포함됩니다. Application Gateway 인스턴스는 'instanceId' 속성으로 식별할 수 있습니다.
 * **성능 로그** - 이 로그를 사용하여 Application Gateway 인스턴스를 수행하는 방법을 확인할 수 있습니다. 이 로그는 인스턴스 단위로 처리된 총 요청 수, 처리량(바이트), 실패한 요청 수, 정상 및 비정상 백 엔드 인스턴스 수 등의 성능 정보를 캡처합니다. 성능 로그는 60초마다 수집됩니다.
 * **방화벽 로그** - 이 로그를 사용하면 웹 응용 프로그램 방화벽으로 구성된 응용 프로그램 게이트웨이의 검색 모드 또는 방지 모드를 통해 로깅된 요청을 확인할 수 있습니다.
 
@@ -111,7 +106,7 @@ Azure에서 다양한 유형의 로그를 사용하여 Application Gateway를 �
 
 로그 저장에는 세 가지 옵션이 있습니다.
 
-* **저장소 계정** - 로그를 장기간 저장하고 필요할 때 검토하는 경우에 가장 적합합니다.
+* **Storage 계정** - 로그를 장기간 저장하고 필요할 때 검토하는 경우에 가장 적합합니다.
 * **이벤트 허브** - 다른 SEIM(보안 정보 및 이벤트 관리) 도구와 통합하여 리소스에 대한 알림을 얻을 수 있는 좋은 옵션입니다.
 * **Log Analytics** - 일반적으로 응용 프로그램을 실시간 모니터링하거나 추세를 파악하는 데 가장 적합합니다.
 
@@ -123,7 +118,7 @@ Azure에서 다양한 유형의 로그를 사용하여 Application Gateway를 �
 
     ![포털: 저장소 계정의 리소스 ID](./media/application-gateway-diagnostics/diagnostics1.png)
 
-2. 로깅을 사용할 응용 프로그램 게이트웨이의 리소스 ID를 적어 둡니다. 이 값은 형식은 /subscriptions/\<subscriptionId\>/resourceGroups/\<리소스 그룹 이름\>/providers/Microsoft.Network/applicationGateways/\<응용 프로그램 게이트웨이 이름\>입니다. 포털을 사용하여 이 정보를 찾을 수 있습니다.
+2. 로깅을 사용할 Application Gateway의 리소스 ID를 적어 둡니다. 이 값은 형식은 /subscriptions/\<subscriptionId\>/resourceGroups/\<리소스 그룹 이름\>/providers/Microsoft.Network/applicationGateways/\<응용 프로그램 게이트웨이 이름\>입니다. 포털을 사용하여 이 정보를 찾을 수 있습니다.
 
     ![포털: 응용 프로그램 게이트웨이의 리소스 ID](./media/application-gateway-diagnostics/diagnostics2.png)
 
@@ -154,9 +149,9 @@ Azure에서 다양한 유형의 로그를 사용하여 Application Gateway를 �
 
    ![구성 프로세스 시작][2]
 
-4. 기존 OMS(Operations Management Suite) 작업 영역을 선택하거나 새 작업 영역을 만듭니다. 이 예제에서는 기존 작업 영역을 사용합니다.
+4. 기존 Log Analytics 작업 영역을 선택하거나 새로운 작업 영역을 만듭니다. 이 예제에서는 기존 작업 영역을 사용합니다.
 
-   ![OMS 작업 영역에 대한 옵션][3]
+   ![Log Analytics 작업 영역의 옵션][3]
 
 5. 설정을 확인하고 **저장**을 클릭합니다.
 
@@ -178,7 +173,7 @@ Azure에서는 기본적으로 활동 로그를 생성합니다. 이러한 로�
 |clientPort     | 요청에 대한 원래 포트       |
 |httpMethod     | 요청에서 사용된 HTTP 메서드       |
 |requestUri     | 받은 요청의 URI        |
-|RequestQuery     | **Server-Routed**: 요청을 보낸 백 엔드 풀 인스턴스입니다. </br> **X-AzureApplicationGateway-LOG-ID**: 요청에 사용된 상관 관계 ID입니다. 백 엔드 서버에서 트래픽 문제를 해결하는 데 사용할 수 있습니다. </br>**SERVER-STATUS**: Application Gateway에서 백 엔드로부터 받은 HTTP 응답 코드       |
+|RequestQuery     | **Server-Routed**: 요청을 보낸 백 엔드 풀 인스턴스입니다.</br>**X-AzureApplicationGateway-LOG-ID**: 요청에 사용된 상관 관계 ID입니다. 백 엔드 서버에서 트래픽 문제를 해결하는 데 사용할 수 있습니다. </br>**SERVER-STATUS**: Application Gateway에서 백 엔드로부터 받은 HTTP 응답 코드       |
 |UserAgent     | HTTP 요청 헤더의 사용자 에이전트        |
 |httpStatus     | Application Gateway에서 클라이언트로 반환한 HTTP 상태 코드       |
 |httpVersion     | 요청의 HTTP 버전        |
@@ -318,9 +313,30 @@ Azure [Log Analytics](../log-analytics/log-analytics-azure-networking-analytics.
 
 ## <a name="metrics"></a>메트릭
 
-메트릭은 포털에서 성능 카운터를 볼 수 있는 특정 Azure 리소스에 대한 기능입니다. Application Gateway의 경우 현재 메트릭 하나만 사용할 수 있습니다. 이 메트릭은 처리량이며 포털에서 볼 수 있습니다. 응용 프로그램 게이트웨이를 찾아 **메트릭**을 클릭합니다. 값을 보려면 **사용 가능한 메트릭** 섹션에서 처리량을 선택합니다. 다음 이미지에서는 여러 시간 범위의 데이터를 표시하는 데 사용할 수 있는 필터가 있는 예를 볼 수 있습니다.
+메트릭은 포털에서 성능 카운터를 볼 수 있는 특정 Azure 리소스에 대한 기능입니다. Application Gateway에는 다음 메트릭이 지원됩니다.
 
-![필터가 있는 메트릭 보기][5]
+- **현재 연결**
+- **실패한 요청**
+- **정상 호스트 수**
+
+   특정 백 엔드 풀의 정상/비정상 호스트를 표시하도록 백 엔드 풀 기준으로 필터링 할 수 있습니다.
+
+
+- **응답 상태**
+
+   2xx, 3xx, 4xx 및 5xx 범주로 응답을 표시하도록 응답 상태 코드 분산을 더욱 세분화할 수 있습니다.
+
+- **처리량**
+- **총 요청 수**
+- **비정상 호스트 수**
+
+   특정 백 엔드 풀의 정상/비정상 호스트를 표시하도록 백 엔드 풀 기준으로 필터링 할 수 있습니다.
+
+응용 프로그램 게이트웨이를 찾아 **모니터링** 아래에서 **메트릭**을 클릭합니다. 사용 가능한 값을 보려면 **메트릭** 드롭다운 목록을 선택합니다.
+
+다음 이미지에서는 최근 30분 동안 표시된 세 가지 메트릭을 포함한 예제가 표시됩니다.
+
+[![](media/application-gateway-diagnostics/figure5.png "메트릭 보기")](media/application-gateway-diagnostics/figure5-lb.png#lightbox)
 
 현재 지원되는 메트릭 목록을 보려면 [Azure Monitor에서 지원되는 메트릭](../monitoring-and-diagnostics/monitoring-supported-metrics.md)을 참조하세요.
 
@@ -372,4 +388,3 @@ Azure [Log Analytics](../log-analytics/log-analytics-azure-networking-analytics.
 [8]: ./media/application-gateway-diagnostics/figure8.png
 [9]: ./media/application-gateway-diagnostics/figure9.png
 [10]: ./media/application-gateway-diagnostics/figure10.png
-

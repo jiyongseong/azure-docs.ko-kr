@@ -1,6 +1,22 @@
-1. [Azure 포털](https://portal.azure.com)에 로그인합니다.
+---
+title: 포함 파일
+description: 포함 파일
+services: virtual-machines
+author: cynthn
+ms.service: virtual-machines
+ms.topic: include
+ms.date: 03/09/2018
+ms.author: cynthn
+ms.custom: include file
+ms.openlocfilehash: d4075f644ed1ce42479e35544f0e1442488f78eb
+ms.sourcegitcommit: 8aab1aab0135fad24987a311b42a1c25a839e9f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/16/2018
+---
+1. [Azure Portal](https://portal.azure.com)에 로그인합니다.
 
-2. 왼쪽 위에서 **새로 만들기 > 계산 > Windows Server 2016 Datacenter**를 클릭합니다.
+2. 왼쪽 위에서 시작하여 **리소스 만들기** > **계산** > **Windows Server 2016 Datacenter**를 클릭합니다.
 
     ![포털에서 Azure VM 이미지로 이동](./media/virtual-machines-common-portal-create-fqdn/marketplace-new.png)
 
@@ -12,7 +28,7 @@
 
 기본 사항 블레이드에는 가상 컴퓨터에 대한 관리 정보가 필요합니다.
 
-1. 가상 컴퓨터의 **이름**을 입력합니다. 이 예제에서 _HeroVM_은 가상 컴퓨터의 이름입니다. 이름은 1-15자 길이여야 하며 특수 문자를 포함할 수 없습니다.
+1. 가상 머신의 **이름**을 입력합니다. 이 예제에서 _HeroVM_은 가상 머신의 이름입니다. 이름은 1-15자 길이여야 하며 특수 문자를 포함할 수 없습니다.
 
 2. **사용자 이름** 및 VM에서 로컬 계정을 만드는 데 사용되는 강력한 **암호**를 입력합니다. 로컬 계정은 VM에 로그온하고 VM을 관리하는 데 사용됩니다. 이 예제에서 _azureuser_는 사용자 이름입니다.
 
@@ -41,7 +57,7 @@ VM 크기를 선택하고 **선택**을 클릭하여 계속 진행합니다. 이
 
 설정 블레이드에서는 저장소 및 네트워크 옵션을 요청합니다. 기본 설정을 적용할 수 있습니다. Azure는 필요에 따라 적절한 항목을 만듭니다.
 
-지원하는 가상 컴퓨터 크기를 선택한 경우 디스크 유형에서 프리미엄(SSD)을 선택하여 Azure Premium Storage를 사용해 볼 수 있습니다.
+지원하는 가상 머신 크기를 선택한 경우 디스크 유형에서 프리미엄(SSD)을 선택하여 Azure Premium Storage를 사용해 볼 수 있습니다.
 
 변경 작업이 완료되면 **확인**을 클릭합니다.
 
@@ -49,8 +65,8 @@ VM 크기를 선택하고 **선택**을 클릭하여 계속 진행합니다. 이
 
 요약 블레이드에는 이전 블레이드에서 지정한 설정이 나열됩니다. 이미지를 만들 준비가 되면 **확인**을 클릭합니다.
 
- ![가상 컴퓨터의 지정된 설정을 제공하는 요약 블레이드 보고서](./media/virtual-machines-common-portal-create-fqdn/summary-blade-classic.png)
+ ![가상 머신의 지정된 설정을 제공하는 요약 블레이드 보고서](./media/virtual-machines-common-portal-create-fqdn/summary-blade-classic.png)
 
-가상 컴퓨터가 만들어지면 포털의 **모든 리소스** 아래에 새 가상 컴퓨터가 나열되고, 대시보드에 가상 컴퓨터의 타일이 표시됩니다. 해당 클라우드 서비스 및 저장소 계정도 생성되고 나열됩니다. 가상 컴퓨터와 클라우드 서비스가 둘 다 자동으로 시작되고 해당 상태가 **실행 중**으로 나열됩니다.
+가상 머신이 만들어지면 포털의 **모든 리소스** 아래에 새 가상 머신이 나열되고, 대시보드에 가상 머신의 타일이 표시됩니다. 해당 클라우드 서비스 및 저장소 계정도 생성되고 나열됩니다. 가상 컴퓨터와 클라우드 서비스가 둘 다 자동으로 시작되고 해당 상태가 **실행 중**으로 나열됩니다.
 
- ![가상 컴퓨터의 VM 에이전트 및 끝점 구성](./media/virtual-machines-common-portal-create-fqdn/portal-with-new-vm.png)
+ ![가상 머신의 VM 에이전트 및 끝점 구성](./media/virtual-machines-common-portal-create-fqdn/portal-with-new-vm.png)

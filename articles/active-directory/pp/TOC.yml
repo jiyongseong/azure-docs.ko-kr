@@ -1,0 +1,4 @@
+- name: VM MSI를 사용하여 Azure Storage에 액세스
+  items:
+    - name: 액세스 키를 사용하는 Linux VM에서
+      href: msi-tutorial-linux-vm-access-storage.md

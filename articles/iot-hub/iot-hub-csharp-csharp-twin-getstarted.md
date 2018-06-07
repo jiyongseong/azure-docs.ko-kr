@@ -1,11 +1,11 @@
 ---
-title: "Azure IoT Hub 장치 쌍 시작(.NET/.NET) | Microsoft Docs"
-description: "Azure IoT Hub 장치 쌍을 사용하여 태그를 추가한 다음 IoT Hub 쿼리를 사용하는 방법입니다. .NET용 Azure IoT 장치 SDK를 사용하여 시뮬레이트된 장치 앱을 구현하고 .NET용 Azure IoT 서비스 SDK를 사용하여 태그를 추가하고 IoT Hub 쿼리를 실행하는 서비스 앱을 구현합니다."
+title: Azure IoT Hub 장치 쌍 시작(.NET/.NET) | Microsoft Docs
+description: Azure IoT Hub 장치 쌍을 사용하여 태그를 추가한 다음 IoT Hub 쿼리를 사용하는 방법입니다. .NET용 Azure IoT 장치 SDK를 사용하여 시뮬레이트된 장치 앱을 구현하고 .NET용 Azure IoT 서비스 SDK를 사용하여 태그를 추가하고 IoT Hub 쿼리를 실행하는 서비스 앱을 구현합니다.
 services: iot-hub
 documentationcenter: node
 author: dsk-2015
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: f7e23b6e-bfde-4fba-a6ec-dbb0f0e005f4
 ms.service: iot-hub
 ms.devlang: node
@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 05/15/2017
 ms.author: dkshir
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 8f987d079b8658d591994ce678f4a09239270181
-ms.openlocfilehash: 6073d594117e69676b753a1e3af25fffa3583a2b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/18/2017
-
-
+ms.openlocfilehash: b337e463ac4aefd7e4644af4c2cdcad4f3c5300a
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="get-started-with-device-twins-netnet"></a>장치 쌍(.NET/.NET) 시작
 [!INCLUDE [iot-hub-selector-twin-get-started](../../includes/iot-hub-selector-twin-get-started.md)]
@@ -45,15 +43,13 @@ ms.lasthandoff: 05/18/2017
 
 [!INCLUDE [iot-hub-get-started-create-device-identity-portal](../../includes/iot-hub-get-started-create-device-identity-portal.md)]
 
-프로그래밍 방식으로 장치 ID를 만들려면 [.NET을 사용하여 IoT Hub에 시뮬레이트된 장치 연결][lnk-device-identity-csharp] 문서의 해당 섹션을 참조하세요.
-
 ## <a name="create-the-service-app"></a>서비스 응용 프로그램 만들기
 이 섹션에서는 **myDeviceId**와 연결된 장치 쌍에 위치 메타데이터를 추가하는 .NET 콘솔 앱(C# 사용)을 만듭니다. 그런 다음 IoT Hub에 저장된 장치 쌍을 쿼리하여 미국에 있는 장치를 선택한 다음 셀룰러 연결을 보고하는 장치를 선택합니다.
 
 1. Visual Studio에서 **콘솔 응용 프로그램** 프로젝트 템플릿을 사용하여 Visual C# Windows 클래식 데스크톱 프로젝트를 최신 솔루션에 추가합니다. 프로젝트의 이름을 **AddTagsAndQuery**로 지정합니다.
    
     ![새 Visual C# Windows 클래식 데스크톱 프로젝트][img-createapp]
-1. 솔루션 탐색기에서 **AddTagsAndQuery** 프로젝트를 마우스 오른쪽 단추로 클릭한 다음 **NuGet 패키지 관리...**를 클릭합니다.
+1. 솔루션 탐색기에서 **AddTagsAndQuery** 프로젝트를 마우스 오른쪽 단추로 클릭한 다음 **NuGet 패키지 관리...** 를 클릭합니다.
 1. **NuGet 패키지 관리자** 창에서 **찾아보기**를 선택하고 **microsoft.azure.devices**를 검색합니다. **설치**를 설치하여 **Microsoft.Azure.Devices** 패키지를 설치한 후 사용 약관에 동의합니다. 이 프로시저에서는 [Azure IoT 서비스 SDK][lnk-nuget-service-sdk] NuGet 패키지 및 종속 항목에 참조를 다운로드, 설치 및 추가합니다.
    
     ![NuGet 패키지 관리자 창][img-servicenuget]
@@ -101,7 +97,7 @@ ms.lasthandoff: 05/18/2017
         Console.WriteLine("Press Enter to exit.");
         Console.ReadLine();
 
-1. 솔루션 탐색기에서 **시작 프로젝트 설정...**을 열고 **AddTagsAndQuery** 프로젝트의 **작업**이 **시작**인지 확인합니다. 솔루션을 빌드하십시오.
+1. 솔루션 탐색기에서 **시작 프로젝트 설정...** 을 열고 **AddTagsAndQuery** 프로젝트의 **작업**이 **시작**인지 확인합니다. 솔루션을 빌드하십시오.
 1. **AddTagsAndQuery** 프로젝트를 마우스 오른쪽 단추로 클릭하고 **디버그**를 선택한 후 **새 인스턴스 시작**을 선택하여 이 응용 프로그램을 실행합니다. **Redmond43**에 위치한 모든 장치를 요청하는 쿼리에 대한 결과로는 하나의 장치를 보고 셀룰러 네트워크를 사용하는 장치에 대해서는 결과를 제한하는 쿼리에 대한 결과로는 아무 장치도 볼 수 없어야 합니다.
    
     ![창에서 쿼리 결과][img-addtagapp]
@@ -115,7 +111,7 @@ ms.lasthandoff: 05/18/2017
    
     ![새 Visual C# Windows 클래식 장치 앱][img-createdeviceapp]
     
-1. [솔루션 탐색기]에서 **ReportConnectivity** 프로젝트를 마우스 오른쪽 단추로 클릭한 다음, **NuGet 패키지 관리...**를 클릭합니다.
+1. [솔루션 탐색기]에서 **ReportConnectivity** 프로젝트를 마우스 오른쪽 단추로 클릭한 다음, **NuGet 패키지 관리...** 를 클릭합니다.
 1. **NuGet 패키지 관리자** 창에서 **찾아보기**를 선택하고 **microsoft.azure.devices.client**를 검색합니다. **설치**를 선택하여 **Microsoft.Azure.Devices.Client** 패키지를 설치한 후 사용 약관에 동의합니다. 이 절차에서는 [Azure IoT 장치 SDK][lnk-nuget-client-sdk] NuGet 패키지 및 해당 종속 항목에 참조를 다운로드, 설치 및 추가합니다.
    
     ![NuGet 패키지 관리자 창 클라이언트 앱][img-clientnuget]
@@ -189,7 +185,7 @@ ms.lasthandoff: 05/18/2017
        Console.WriteLine("Press Enter to exit.");
        Console.ReadLine();
 
-1. [솔루션 탐색기]에서 **시작 프로젝트 설정...**을 열고 **ReportConnectivity** 프로젝트의 **작업**이 **시작**인지 확인합니다. 솔루션을 빌드하십시오.
+1. [솔루션 탐색기]에서 **시작 프로젝트 설정...** 을 열고 **ReportConnectivity** 프로젝트의 **작업**이 **시작**인지 확인합니다. 솔루션을 빌드하십시오.
 1. **ReportConnectivity** 프로젝트를 마우스 오른쪽 단추로 클릭하고 **디버그**를 선택한 후 **새 인스턴스 시작**을 선택하여 이 응용 프로그램을 실행합니다. 쌍 정보를 가져온 다음 연결을 *보고된 속성*으로 보내는 메시지가 표시됩니다.
    
     ![장치 앱을 실행하여 연결 보고][img-rundeviceapp]
@@ -235,5 +231,4 @@ ms.lasthandoff: 05/18/2017
 [lnk-twin-how-to-configure]: iot-hub-csharp-node-twin-how-to-configure.md
 
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdk-node/blob/master/doc/node-devbox-setup.md
-
 

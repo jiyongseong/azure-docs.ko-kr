@@ -1,11 +1,11 @@
 ---
-title: "Azure Security Center 위협 인텔리전스 보고서 | Microsoft Docs"
-description: "이 문서는 조사하는 중에 Azure Security Center 위협 인텔리전스 보고서를 사용하여 보안 경고에 관한 자세한 정보를 확인하는 데 도움이 됩니다."
+title: Azure Security Center 위협 인텔리전스 보고서 | Microsoft Docs
+description: 이 문서는 조사하는 중에 Azure Security Center 위협 인텔리전스 보고서를 사용하여 보안 경고에 관한 자세한 정보를 확인하는 데 도움이 됩니다.
 services: security-center
 documentationcenter: na
-author: YuriDio
-manager: swadhwa
-editor: 
+author: terrylan
+manager: mbaldwin
+editor: ''
 ms.assetid: 5662e312-e8c2-4736-974e-576eeb333484
 ms.service: security-center
 ms.devlang: na
@@ -14,12 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 03/30/2017
 ms.author: yurid
-translationtype: Human Translation
-ms.sourcegitcommit: 3cba38d95535ff5ed3cd62aac5c0aa04a310f48c
-ms.openlocfilehash: 99c5ea06a0970c360eb711a8b10894d416146693
-ms.lasthandoff: 01/31/2017
-
-
+ms.openlocfilehash: 1ef615fe4ef5a0ce9c002fb00c678bc77fd61440
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
 # <a name="azure-security-center-threat-intelligence-report"></a>Azure Security Center 위협 인텔리전스 보고서
 이 문서에서는 Azure Security Center 위협 인텔리전스 보고서를 사용하여 보안 경고를 생성한 위협에 관한 자세한 정보를 확인하는 방식에 대해 설명합니다.
@@ -67,13 +66,12 @@ Security Center에는 세 가지 유형의 위협 보고서가 있는데 공격�
 여기서는 해당 보고서의 PDF 파일을 다운로드하여 감지된 보안 문제에 대해 자세히 파악하고 제공된 정보에 기반한 조치를 수행할 수 있습니다.
 
 ## <a name="see-also"></a>참고 항목
-이 문서에서는 보안 경고에 대해 조사하는 중에 Azure Security Center 위협 인텔리전스 보고서를 사용 방법을 살펴보았습니다. Azure 보안 센터에 대한 자세한 내용은 다음을 참조하세요.
+이 문서에서는 보안 경고에 대해 조사하는 중에 Azure Security Center 위협 인텔리전스 보고서를 사용 방법을 살펴보았습니다. Azure Security Center에 대한 자세한 내용은 다음을 참조하세요.
 
-* [Azure 보안 센터 FAQ](security-center-faq.md)로 설정합니다. 서비스 사용에 관한 질문과 대답을 찾습니다.
+* [Azure Security Center FAQ](security-center-faq.md)로 설정합니다. 서비스 사용에 관한 질문과 대답을 찾습니다.
 * [사고 대응에 Azure Security Center 활용](security-center-incident-response.md)
 * [Azure Security Center 감지 기능](security-center-detection-capabilities.md)
 * [Azure Security Center planning and operations guide](security-center-planning-and-operations-guide.md)로 설정합니다. 디자인 고려 사항을 계획하고 이해하여 Azure Security Center를 채택하는 방법을 알아봅니다.
 * [Azure Security Center에서 보안 경고 관리 및 대응](security-center-managing-and-responding-alerts.md) 보안 경고를 관리하고 응답하는 방법을 알아봅니다.
-* [Azure 보안 센터에서 보안 인시던트 처리](security-center-incident.md)
+* [Azure Security Center에서 보안 인시던트 처리](security-center-incident.md)
 * [Azure 보안 블로그](http://blogs.msdn.com/b/azuresecurity/). Azure 보안 및 규정 준수에 관한 블로그 게시물을 찾습니다.
-

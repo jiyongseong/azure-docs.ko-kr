@@ -1,0 +1,65 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Azure Stack 연산자 설명서
+metadata:
+  document_id: cbf798da-6f1a-7d4d-7707-5d5e02589e22
+  title: Azure Stack 연산자 설명서 - 자습서, API 참조
+  description: Azure 스택을 사용 하 여 데이터 센터에서 Azure 서비스를 제공 하는 방법을 설명 합니다. 알아보고 개발 키트 또는 통합형된 시스템 환경에서 기능을 설명 합니다.
+  services: azure-stack
+  author: jeffgilb
+  manager: femila
+  ms.service: azure-stack
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 04/13/2018
+  ms.author: jeffgilb
+  ms.openlocfilehash: 9da39d733c51c637fdf13d1fb9c5649276ea8a23
+  ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+  ms.translationtype: MT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 04/23/2018
+abstract:
+  description: Microsoft Azure Stack은 데이터 센터에서 Azure 서비스를 제공할 수 있게 해주는 하이브리드 클라우드 플랫폼 제품입니다. Azure 스택 통합형된 시스템 인프라를 관리 하는 방법 및 서비스 퀵 스타트 및 자습서를 제공 하는 방법에 알아봅니다.<br/><br/>Azure 스택에 대 한 앱을 빌드에 사용되는지와 서비스를 사용 하는 Azure 스택 사용자 인 경우 참조 우리의 <a href="/azure/azure-stack/user">사용자 용 설명 문서</a>합니다.<br/><br/>Azure 스택 연산자에는 Azure 스택 개발 키트 (ASDK)를 다운로드 하 고 무료로 사용할 수 있는 Azure 스택의 단일 노드 배포 관심 있는 경우 참조 우리의 <a href="/azure/azure-stack/asdk">ASDK 설명서</a>합니다.
+sections:
+- title: 빠른 시작
+  items:
+  - type: paragraph
+    text: 하드웨어를 설정 하 고 Azure 스택 개발 키트 배포 키를 누릅니다.
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: https://docs.microsoft.com/media/common/i_deploy.svg
+      text: Azure Stack 개발 키트 배포
+      href: azure-stack-deploy-overview.md
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: Azure 스택 배포에 서비스를 추가 하는 방법에 알아봅니다.
+  - type: list
+    style: ordered
+    items:
+    - html: <a href="/azure/azure-stack/azure-stack-tutorial-tenant-vm">Azure 스택에 가상 컴퓨터를 제공 합니다.</a>
+    - html: <a href="/azure/azure-stack/azure-stack-tutorial-sql-server">Azure 스택에 SQL 데이터베이스를 제공 합니다.</a>
+    - html: <a href="/azure/azure-stack/azure-stack-tutorial-app-service">Azure 스택에서 웹 앱을 제공 합니다.</a>
+- title: >
+    무료 Pluralsight 동영상 교육
+  items:
+  - type: list
+    style: cards
+    className: cardsFTitle
+    items:
+    - title: Azure Stack 기본 사항 알아보기
+      href: https://www.pluralsight.com/courses/microsoft-azure-stack-big-picture?twoid=26658a98-62ff-48e5-aa5f-2741523aea54
+      image:
+        src: https://docs.microsoft.com/media/logos/logo_pluralsight.svg
+        href: https://www.pluralsight.com/courses/microsoft-azure-stack-big-picture?twoid=26658a98-62ff-48e5-aa5f-2741523aea54
+- title: 참조
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: 명령줄
+      html: <p><a href="/powershell/azure/azure-stack/overview?view=azurestackps-1.2.10">Azure Stack PowerShell</a></p>

@@ -1,171 +1,171 @@
 ---
-title: "웹 응용 프로그램 방화벽이 있는 Azure Application Gateway 만들기 또는 업데이트 | Microsoft Docs"
-description: "포털을 사용하여 웹 응용 프로그램 방화벽이 있는 Application Gateway를 만드는 방법에 대해 알아보기"
+title: 웹 응용 프로그램 방화벽이 있는 응용 프로그램 게이트웨이 만들기 - Azure Portal | Microsoft Docs
+description: Azure Portal을 사용하여 웹 응용 프로그램 방화벽이 있는 응용 프로그램 게이트웨이를 만드는 방법에 대해 알아봅니다.
 services: application-gateway
-documentationcenter: na
-author: georgewallace
-manager: timlt
+author: vhorne
+manager: jpconnock
 editor: tysonn
 tags: azure-resource-manager
-ms.assetid: b561a210-ed99-4ab4-be06-b49215e3255a
 ms.service: application-gateway
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 05/03/2017
-ms.author: gwallace
+ms.date: 01/26/2018
+ms.author: victorh
+ms.openlocfilehash: 9967813b193159b68aa0f008dae4440aa6e533dc
+ms.sourcegitcommit: c47ef7899572bf6441627f76eb4c4ac15e487aec
 ms.translationtype: HT
-ms.sourcegitcommit: 137671152878e6e1ee5ba398dd5267feefc435b7
-ms.openlocfilehash: 3ee146a0be3c3338cf0037e2ec92a3b8d0c05a4e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/04/2018
 ---
+# <a name="create-an-application-gateway-with-a-web-application-firewall-using-the-azure-portal"></a>Azure Portal을 사용하여 웹 응용 프로그램 방화벽이 있는 응용 프로그램 게이트웨이를 만듭니다.
 
-# <a name="create-an-application-gateway-with-web-application-firewall-by-using-the-portal"></a>포털을 사용하여 웹 응용 프로그램 방화벽이 있는 Application Gateway 만들기
+Azure Portal을 사용하여 WAF([웹 응용 프로그램 방화벽](application-gateway-web-application-firewall-overview.md))이 있는 [응용 프로그램 게이트웨이](application-gateway-introduction.md)를 만들 수 있습니다. WAF는 [OWASP](https://www.owasp.org/index.php/Category:OWASP_ModSecurity_Core_Rule_Set_Project) 규칙을 사용하여 응용 프로그램을 보호합니다. 이러한 규칙에는 SQL 삽입, 사이트 간 스크립팅 공격 및 세션 하이재킹과 같은 공격으로부터의 보호가 포함됩니다.
 
-> [!div class="op_single_selector"]
-> * [Azure 포털](application-gateway-web-application-firewall-portal.md)
-> * [Azure Resource Manager PowerShell](application-gateway-web-application-firewall-powershell.md)
+이 문서에서는 다음 방법을 설명합니다.
 
-웹 응용 프로그램 방화벽을 사용하도록 설정된 응용 프로그램 게이트웨이를 만드는 방법에 대해 알아봅니다.
+> [!div class="checklist"]
+> * WAF를 사용하는 응용 프로그램 게이트웨이 만들기
+> * 백 엔드 서버로 사용되는 가상 머신 만들기
+> * 저장소 계정 만들기 및 진단 구성
 
-Azure Application Gateway의 웹 응용 프로그램 방화벽(WAF)은 SQL 삽입 공격, 사이트 간 스크립팅 공격, 세션 하이재킹 등의 일반적인 웹 기반 공격으로부터 웹 응용 프로그램을 보호합니다. 웹 응용 프로그램은 다양한 OWASP 상위 10 일반적인 웹 취약점으로부터 보호합니다.
+![웹 응용 프로그램 방화벽 예제](./media/application-gateway-web-application-firewall-portal/scenario-waf.png)
 
-## <a name="scenarios"></a>시나리오
+## <a name="log-in-to-azure"></a>Azure에 로그인
 
-이 문서에는 두 가지 시나리오가 있습니다.
+[http://portal.azure.com](http://portal.azure.com)에서 Azure Portal에 로그인
 
-첫 번째 시나리오에서는 [웹 응용 프로그램 방화벽을 사용하여 Application Gateway를 만드는 방법](#create-an-application-gateway-with-web-application-firewall)에 대해 알아봅니다.
+## <a name="create-an-application-gateway"></a>응용 프로그램 게이트웨이 만들기
 
-두 번째 시나리오에서는 [기존 Application Gateway에 웹 응용 프로그램 방화벽을 추가하는 방법](#add-web-application-firewall-to-an-existing-application-gateway)에 대해 알아봅니다.
+가상 네트워크는 사용자가 만든 리소스 간의 통신에 필요합니다. 이 예제에서는 두 개의 서브넷을 만듭니다. 하나는 응용 프로그램 게이트웨이용이고, 다른 하나는 백 엔드 서버용입니다. 응용 프로그램 게이트웨이를 만드는 동시에 가상 네트워크를 만들 수 있습니다.
 
-![예제 시나리오][scenario]
+1. Azure Portal의 왼쪽 위에서 **새로 만들기**를 클릭합니다.
+2. **네트워킹**을 선택한 다음, 추천 목록에서 **Application Gateway**를 선택합니다.
+3. 응용 프로그램 게이트웨이에 대해 다음 값을 입력합니다.
 
-> [!NOTE]
-> 초기 배포 중이 아닌 경우 응용 프로그램 게이트웨이를 구성하면 사용자 지정 상태 프로브, 백 엔드 풀 주소, 추가 규칙 등 응용 프로그램 게이트웨이에 대한 추가 구성이 구성됩니다.
+    - *myAppGateway* - 응용 프로그램 게이트웨이의 이름
+    - *myResourceGroupAG* - 새 리소스 그룹
+    - 응용 프로그램 게이트웨이의 계층에 *WAF*를 선택합니다.
 
-## <a name="before-you-begin"></a>시작하기 전에
+    ![새 응용 프로그램 게이트웨이 만들기](./media/application-gateway-web-application-firewall-portal/application-gateway-create.png)
 
-Azure 응용 프로그램 게이트웨이에는 자체 서브넷이 필요합니다. 가상 네트워크를 만들 때 여러 서브넷을 둘 수 있는 충분한 주소 공간이 있는지 확인합니다. Application Gateway를 서브넷에 배포한 경우 추가 Application Gateway를 서브넷에 추가할 수 있습니다.
+4. 다른 설정에 대한 기본값을 적용한 다음, **확인**을 클릭합니다.
+5. **가상 네트워크 선택**을 클릭하고 **새로 만들기**를 클릭한 다음, 가상 네트워크에 대해 다음 값을 입력합니다.
 
-##<a name="add-web-application-firewall-to-an-existing-application-gateway"></a> 기존 Application Gateway에 웹 응용 프로그램 방화벽 추가
+    - *myVNet* - 가상 네트워크 이름
+    - *10.0.0.0/16* - 가상 네트워크 주소 공간
+    - *myAGSubnet* - 서브넷 이름
+    - *10.0.0.0/24* - 서브넷 주소 공간
 
-이 예제에서는 방지 모드에서 웹 응용 프로그램 방화벽을 지원하도록 기존 Application Gateway를 업데이트합니다.
+    ![가상 네트워크 만들기](./media/application-gateway-web-application-firewall-portal/application-gateway-vnet.png)
 
-1. Azure Portal의 **즐겨찾기** 창에서 **모든 리소스**를 클릭합니다. **모든 리소스** 블레이드에서 기존 Application Gateway를 클릭합니다. 선택한 구독에 이미 여러 개의 리소스가 있는 경우 **이름을 기준으로 필터링...**에 이름 입력합니다. DNS 영역에 간편하게 액세스할 수 있는 상자입니다.
+6. **확인**을 클릭하여 가상 네트워크 및 서브넷을 만듭니다.
+7. **공용 IP 주소 선택**을 클릭하고 **새로 만들기**를 클릭한 다음, 공용 IP 주소의 이름을 입력합니다. 이 예제에서 공용 IP 주소의 이름은 *myAGPublicIPAddress*입니다. 다른 설정에 대한 기본값을 적용한 다음, **확인**을 클릭합니다.
+8. 수신기 구성에 대한 기본값을 수락하고 웹 응용 프로그램 방화벽을 사용하지 않도록 유지한 다음, **확인**을 클릭합니다.
+9. 요약 페이지에서 설정을 검토한 다음, **확인**을 클릭하여 네트워크 리소스와 응용 프로그램 게이트웨이를 만듭니다. 응용 프로그램 게이트웨이가 생성되는 데 몇 분이 걸릴 수 있습니다. 배포가 완료될 때까지 기다렸다가 다음 섹션으로 이동합니다.
 
-   ![Application Gateway 만들기][1]
+### <a name="add-a-subnet"></a>서브넷 추가
 
-1. **웹 응용 프로그램 방화벽**을 클릭하고 응용 프로그램 게이트웨이 설정을 업데이트합니다. 완료되면 **저장**
+1. 왼쪽 메뉴에서 **모든 리소스**를 클릭한 다음, 리소스 목록에서 **myVNet**을 클릭합니다.
+2. **서브넷**을 클릭한 다음, **서브넷**을 클릭합니다.
 
-    웹 응용 프로그램 방화벽을 지원하도록 기존 Application Gateway를 업데이트하는 설정은 다음과 같습니다.
+    ![서브넷 만들기](./media/application-gateway-web-application-firewall-portal/application-gateway-subnet.png)
 
-   | **설정** | **값** | **세부 정보**
-   |---|---|---|
-   |**WAF 계층으로 업그레이드**| 선택 | Application Gateway의 계층을 WAF 계층으로 설정합니다.|
-   |**방화벽 상태**| 사용 | 사용 | 이 설정은 WAF에서 방화벽을 사용합니다.|
-   |**방화벽 모드** | 방지 | 웹 응용 프로그램 방화벽이 악의적인 트래픽을 처리하는 방식에 대한 설정입니다. **검색** 모드는 이벤트를 기록하기만 하는 반면 **방지** 모드는 이벤트를 기록하고 악의적인 트래픽을 중지합니다.|
-   |**규칙 집합**|3.0|이 설정은 백 엔드 풀 멤버를 보호하는 데 사용되는 [코어 규칙 집합](application-gateway-web-application-firewall-overview.md#core-rule-sets)을 결정합니다.|
-   |**사용하지 않는 규칙 구성**|다름|가능한 가양성을 방지하기 위해 이 설정은 특정 [규칙 및 규칙 그룹](application-gateway-crs-rulegroups-rules.md)을 사용하지 않도록 설정할 수 있도록 합니다.|
+3. 서브넷 이름에 *myBackendSubnet*을 입력한 다음, **확인**을 클릭합니다.
 
-    >[!NOTE]
-    > 기존 응용 프로그램 게이트웨이를 WAF SKU로 업그레이드할 때 SKU 크기는 **중형**으로 변경됩니다. 구성이 완료된 후 이 크기를 다시 구성할 수 있습니다.
+## <a name="create-backend-servers"></a>백 엔드 서버 만들기
 
-    ![기본 설정이 표시된 블레이드][2-1]
+이 예제에서는 응용 프로그램 게이트웨이에 대한 백 엔드 서버로 사용할 두 개의 가상 머신을 만듭니다. 또한 응용 프로그램 게이트웨이가 성공적으로 만들어 졌는지 확인하기 위해 가상 머신에 IIS를 설치합니다.
 
-    > [!NOTE]
-    > 웹 응용 프로그램 방화벽 로그를 보려면 진단을 활성화하고 ApplicationGatewayFirewallLog를 선택해야 합니다. 테스트 목적으로 인스턴스 수 1을 선택할 수 있습니다. 그러나 두 개 미만의 인스턴스 수는 SLA에서 다루지 않으므로 권장되지 않는다는 점을 알아야 합니다. 웹 응용 프로그램 방화벽을 사용하는 경우 소형 게이트웨이를 사용할 수 없습니다.
+### <a name="create-a-virtual-machine"></a>가상 머신 만들기
 
-## <a name="create-an-application-gateway-with-web-application-firewall"></a>웹 응용 프로그램 방화벽을 사용하여 Application Gateway를 만드는 방법
+1. **새로 만들기**를 클릭합니다.
+2. **Compute**를 클릭한 다음, 추천 목록에서 **Windows Server 2016 Datacenter**를 선택합니다.
+3. 가상 머신에 대해 다음 값을 입력합니다.
 
-이 시나리오에서는 다음을 수행합니다.
+    - *myVM* - 가상 머신의 이름
+    - *azureuser* - 관리자 사용자 이름
+    - *Azure123456!* - 암호
+    - **기존 항목 사용**을 선택한 다음, *myResourceGroupAG*를 선택합니다.
 
-* 두 인스턴스를 사용하여 중형 웹 응용 프로그램 방화벽 Application Gateway를 만듭니다.
-* 예약된 CIDR 블록이 10.0.0.0/16이고 이름이 AdatumAppGatewayVNET인 가상 네트워크를 만듭니다.
-* CIDR 블록으로 10.0.0.0/28을 사용하는 Appgatewaysubnet이라고 하는 서브넷을 만듭니다.
-* SSL 오프로드용 인증서를 구성합니다.
+4. **확인**을 클릭합니다.
+5. 가상 머신의 크기에 대해 **DS1_V2**를 선택하고 **선택**을 클릭합니다.
+6. 가상 네트워크에 대해 **myVNet**이 선택되어 있고 서브넷이 **myBackendSubnet**인지 확인합니다. 
+7. **사용 안 함**을 클릭하여 부팅 진단을 사용하지 않도록 설정합니다.
+8. **확인**을 클릭하고 요약 페이지에서 설정을 검토한 다음, **만들기**를 클릭합니다.
 
-1. [Azure 포털](https://portal.azure.com)에 로그인합니다. 아직 계정이 없는 경우 [1개월 평가판](https://azure.microsoft.com/free)을 등록할 수 있습니다.
-1. 포털의 즐겨찾기 창에서 **새로 만들기**를 클릭합니다.
-1. **새로 만들기** 블레이드에서 **네트워킹**을 클릭합니다. 다음 그림과 같이 **네트워킹** 블레이드에서 **Application Gateway**를 클릭합니다.
-1. Azure 포털로 이동하여 **새로 만들기** > **네트워킹** > **응용 프로그램 게이트웨이**를 클릭합니다.
+### <a name="install-iis"></a>IIS 설치
 
-    ![Application Gateway 만들기][1]
+1. 대화형 셸을 열고 **PowerShell**로 설정되어 있는지 확인합니다.
 
-1. 표시되는 **기본 사항** 블레이드에서 다음 값을 입력한 다음 **확인**을 클릭합니다.
+    ![사용자 지정 확장 설치](./media/application-gateway-web-application-firewall-portal/application-gateway-extension.png)
 
-   | **설정** | **값** | **세부 정보**
-   |---|---|---|
-   |**Name**|AdatumAppGateway|Application Gateway의 이름|
-   |**계층**|WAF|사용 가능한 값은 표준 또는 WAF입니다. [웹 응용 프로그램 방화벽](application-gateway-web-application-firewall-overview.md)을 방문하여 WAF에 대해 자세히 알아보세요.|
-   |**SKU 크기**|중간|표준 계층을 선택할 때 제공되는 옵션으로 소형, 중형 및 대형이 있습니다. WAF 계층을 선택할 때 옵션은 중간 및 대형 뿐입니다.|
-   |**인스턴스 수**|2|고가용성을 위한 Application Gateway의 인스턴스 수입니다. 인스턴스 수 1은 테스트 목적으로만 사용해야 합니다.|
-   |**구독**|[구독 이름]|응용 프로그램 게이트웨이를 만들 구독을 선택합니다.|
-   |**리소스 그룹**|**새로 만들기:** AdatumAppGatewayRG|리소스 그룹을 만듭니다. 리소스 그룹 이름은 선택한 구독 내에서 고유해야 합니다. 리소스 그룹에 대해 자세히 알아보려면 [Resource Manager](../azure-resource-manager/resource-group-overview.md?toc=%2fazure%2fapplication-gateway%2ftoc.json#resource-groups) 개요 문서를 참조하세요.|
-   |**위치**:|미국 서부||
+2. 다음 명령을 실행하여 가상 머신에 IIS를 설치합니다. 
 
-   ![기본 설정이 표시된 블레이드][2-2]
+    ```azurepowershell-interactive
+    Set-AzureRmVMExtension `
+      -ResourceGroupName myResourceGroupAG `
+      -ExtensionName IIS `
+      -VMName myVM `
+      -Publisher Microsoft.Compute `
+      -ExtensionType CustomScriptExtension `
+      -TypeHandlerVersion 1.4 `
+      -SettingString '{"commandToExecute":"powershell Add-WindowsFeature Web-Server; powershell Add-Content -Path \"C:\\inetpub\\wwwroot\\Default.htm\" -Value $($env:computername)"}' `
+      -Location EastUS
+    ```
 
-1. **가상 네트워크** 아래에 표시되는 **설정** 블레이드에서 **가상 네트워크 선택**을 클릭합니다. 그러면 **가상 네트워크 선택** 블레이드가 열립니다.  **새로 만들기**를 클릭하여 **가상 네트워크 만들기** 블레이드를 엽니다.
+3. 두 번째 가상 머신을 만들고, 방금 완료한 단계를 사용하여 IIS를 설치합니다. Set-AzureRmVMExtension의 이름 및 VMName에 대해 *myVM2*를 입력합니다.
 
-   ![가상 네트워크 선택][2]
+### <a name="add-backend-servers"></a>백 엔드 서버 추가
 
-1. **가상 네트워크 만들기** 블레이드에서 다음 값을 입력한 다음 **확인**을 클릭합니다. 그러면 **가상 네트워크 만들기** 및 **가상 네트워크 선택** 블레이드가 닫힙니다. 또한 **설정** 블레이드의 **서브넷** 필드가 선택한 서브넷으로 채워집니다.
+1. **모든 리소스**를 클릭한 다음, **myAppGateway**를 클릭합니다.
+2. **백 엔드 풀**을 클릭합니다. 기본 풀이 응용 프로그램 게이트웨이와 함께 자동으로 생성되었습니다. **appGateayBackendPool**을 클릭합니다.
+3. **대상 추가**를 클릭하여 생성된 각각의 가상 머신을 백 엔드 풀에 추가합니다.
 
-   |**설정** | **값** | **세부 정보** |
-   |---|---|---|
-   |**Name**|AdatumAppGatewayVNET|Application Gateway의 이름|
-   |**주소 공간**|10.0.0.0/16| 가상 네트워크에 대한 주소 공간|
-   |**서브넷 이름**|AppGatewaySubnet|Application Gateway의 서브넷 이름|
-   |**서브넷 주소 범위**|10.0.0.0/28| 이 서브넷을 사용하면 백 엔드 풀 멤버가 가상 네트워크에서 추가 서브넷을 사용할 수 있습니다.|
+    ![백 엔드 서버 추가](./media/application-gateway-web-application-firewall-portal/application-gateway-backend.png)
 
-1. **설정** 블레이드의 **프런트 엔드 IP 구성**에서 **IP 주소 유형**으로 **공용**을 선택합니다.
+4. **저장**을 클릭합니다.
 
-1. **설정** 블레이드의 **공용 IP 주소**에서 **공용 IP 주소 선택**을 클릭합니다. 그러면 **공용 IP 주소 선택** 블레이드가 열립니다. 여기서 **새로 만들기**를 클릭합니다.
+## <a name="create-a-storage-account-and-configure-diagnostics"></a>저장소 계정 만들기 및 진단 구성
 
-   ![공용 IP 선택][3]
+## <a name="create-a-storage-account"></a>저장소 계정 만들기
 
-1. **공용 IP 주소 만들기** 블레이드에서 기본값을 그대로 적용하고 **확인**을 클릭합니다. 그러면 **공용 IP 주소 선택** 블레이드, **공용 IP 주소 만들기** 블레이드가 닫히고, **공용 IP 주소**가 선택한 공용 IP 주소로 채워집니다.
+이 자습서에서 응용 프로그램 게이트웨이는 저장소 계정을 사용하여 검색 및 방지 목적으로 데이터를 저장합니다. Log Analytics 또는 Event Hub를 사용하여 데이터를 기록할 수도 있습니다.
 
-1. **설정** 블레이드의 **수신기 구성**에서 **프로토콜** 아래에 있는 **HTTP**를 클릭합니다. **https**를 사용하려면 인증서가 필요합니다. 인증서의 개인 키가 필요하므로 인증서의 .pfx 내보내기 및 파일의 암호를 제공해야 합니다.
+1. Azure Portal의 왼쪽 위에 있는 **새로 만들기**를 클릭합니다.
+2. **저장소**를 선택한 다음, **저장소 계정 - Blob, 파일, 테이블, 큐**를 선택합니다.
+3. 저장소 계정의 이름을 입력하고 리소스 그룹에 **기존 그룹 사용**을 선택한 다음, **myResourceGroupAG**를 선택합니다. 이 예제에서 저장소 계정 이름은 *myagstore1*입니다. 다른 설정에 대한 기본값을 적용한 다음, **만들기**를 클릭합니다.
 
-1. **WAF** 설정을 구성합니다.
+## <a name="configure-diagnostics"></a>진단 구성
 
-   |**설정** | **값** | **세부 정보** |
-   |---|---|---|
-   |**방화벽 상태**| 사용| 이 설정은 WAF를 켜고 끕니다.|
-   |**방화벽 모드** | 방지| 이 설정은 WAF가 악의적인 트래픽에 대해 수행하는 작업을 결정합니다. **검색** 을 선택하면 트래픽이 기록되기만 합니다.  **방지**를 선택하면 트래픽이 기록되고 403 권한 없음 응답에 따라 중지됩니다.|
+ApplicationGatewayAccessLog, ApplicationGatewayPerformanceLog 및 ApplicationGatewayFirewallLog 로그에 데이터를 기록하도록 진단을 구성합니다.
 
+1. 왼쪽 메뉴에서 **모든 리소스**를 클릭한 다음, *myAppGateway*를 선택합니다.
+2. 모니터링에서 **진단 로그**를 클릭합니다.
+3. **진단 설정 추가**를 클릭합니다.
+4. 진단 설정의 이름으로 *myDiagnosticsSettings*를 입력합니다.
+5. **저장소 계정에 보관**을 선택한 다음, **구성**을 클릭하여 이전에 만든 *myagstore1* 저장소 계정을 선택합니다.
+6. 수집하고 유지할 응용 프로그램 게이트웨이 로그를 선택합니다.
+7. **저장**을 클릭합니다.
 
-1. 요약 페이지를 검토하고 **확인**을 클릭합니다.  이제 응용 프로그램 게이트웨이가 만들어지고 대기 상태가 됩니다.
+    ![진단 구성](./media/application-gateway-web-application-firewall-portal/application-gateway-diagnostics.png)
 
-1. 응용 프로그램 게이트웨이를 만든 후에는 포털에서 해당 응용 프로그램 게이트웨이로 이동하여 응용 프로그램 게이트웨이 구성을 계속합니다.
+## <a name="test-the-application-gateway"></a>응용 프로그램 게이트웨이 테스트
 
-    ![응용 프로그램 게이트웨이 리소스 보기][10]
+1. [개요] 화면에서 응용 프로그램 게이트웨이에 대한 공용 IP 주소를 찾습니다. **모든 리소스**를 클릭한 다음, **myAGPublicIPAddress**를 클릭합니다.
 
-이러한 단계에서는 수신기, 백 엔드 풀, 백 엔드 http 설정 및 규칙에 대한 기본 설정으로 기본 Application Gateway를 만듭니다. 프로비전에 성공하면 배포에 맞게 이러한 설정을 수정할 수 있습니다.
+    ![응용 프로그램 게이트웨이에 대한 공용 IP 주소 기록](./media/application-gateway-web-application-firewall-portal/application-gateway-record-ag-address.png)
 
-> [!NOTE]
-> 기본 웹 응용 프로그램 방화벽 구성을 사용하여 만든 응용 프로그램 게이트웨이는 보호를 위해 CRS 3.0으로 구성됩니다.
+2. 공용 IP 주소를 복사한 다음, 브라우저의 주소 표시줄에 붙여넣습니다.
+
+    ![응용 프로그램 게이트웨이 테스트](./media/application-gateway-web-application-firewall-portal/application-gateway-iistest.png)
 
 ## <a name="next-steps"></a>다음 단계
 
-다음으로 Azure DNS 또는 다른 DNS 공급자를 사용하여 [공용 IP 주소](../dns/dns-custom-domain.md#public-ip-address)에 대한 사용자 지정 도메인 별칭을 구성하는 방법을 알아볼 수 있습니다.
+이 문서에서는 다음 방법에 대해 알아보았습니다.
 
-[Application Gateway 진단](application-gateway-diagnostics.md)을 방문하여 진단 로깅을 구성하는 방법 및 웹 응용 프로그램 방화벽을 통해 검색 또는 방지되는 이벤트를 기록하는 방법에 대해 알아보기
+> [!div class="checklist"]
+> * WAF를 사용하는 응용 프로그램 게이트웨이 만들기
+> * 백 엔드 서버로 사용되는 가상 머신 만들기
+> * 저장소 계정 만들기 및 진단 구성
 
-[사용자 지정 상태 프로브 만들기](application-gateway-create-probe-portal.md)
-
-[SSL 오프로드 구성](application-gateway-ssl-portal.md)
-
-<!--Image references-->
-[1]: ./media/application-gateway-web-application-firewall-portal/figure1.png
-[2]: ./media/application-gateway-web-application-firewall-portal/figure2.png
-[2-1]: ./media/application-gateway-web-application-firewall-portal/figure2-1.png
-[2-2]: ./media/application-gateway-web-application-firewall-portal/figure2-2.png
-[3]: ./media/application-gateway-web-application-firewall-portal/figure3.png
-[10]: ./media/application-gateway-web-application-firewall-portal/figure10.png
-[scenario]: ./media/application-gateway-web-application-firewall-portal/scenario.png
-
+응용 프로그램 게이트웨이 및 관련 리소스에 대해 자세히 알아보려면 방법 문서를 참조하세요.

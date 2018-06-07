@@ -14,11 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 09/21/2016
 ms.author: alkohli
-translationtype: Human Translation
-ms.sourcegitcommit: 219dcbfdca145bedb570eb9ef747ee00cc0342eb
-ms.openlocfilehash: 85911fcc66dcedff0d43bd986bce4500a1a2f00b
-
-
+ms.openlocfilehash: db03b3cd668bf8e35913872ac4225de6d4d3edd1
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="supported-hardware-for-the-10-gbe-network-interfaces-on-your-storsimple-device"></a>StorSimple 장치의 10GbE 네트워크 인터페이스에 대해 지원되는 하드웨어
 ## <a name="overview"></a>개요
@@ -57,7 +57,7 @@ Microsoft는 다음과 같은 소형 폼팩터 플러그형(SFP) 트랜시버, �
 | 스위치 운영 체제 버전 |JunOS 12.3R9.4 |
 | 블레이드 모델 |포트 등록(PIC 0) |
 | 송수신 장치 제조사 |Juniper |
-| 송수신 장치 모델 |부품 번호 740-021308  <br></br>  부품 번호 740-030658 |
+| 송수신 장치 모델 |부품 번호 740-021308  <br></br> 부품 번호 740-030658 |
 | 송수신 장치 펌웨어 버전 |Rev 01 버전 0.0(보고됨) |
 | 케이블 모델 |이중 점퍼 LC/LC 50/125µ, OM3, LSZH |
 | StorSimple 모델 |8600 |
@@ -122,10 +122,4 @@ Microsoft는 다음과 같은 소형 폼팩터 플러그형(SFP) 트랜시버, �
 
 ## <a name="next-steps"></a>다음 단계
 [StorSimple 하드웨어 구성 요소 및 상태에 대해 자세히 알아보기](storsimple-monitor-hardware-status.md)
-
-
-
-
-<!--HONumber=Nov16_HO3-->
-
 

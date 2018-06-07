@@ -1,91 +1,151 @@
 ---
-title: "SQL Data Warehouse의 테이블 개요 | Microsoft Docs"
-description: "Azure SQL 데이터 웨어하우스 테이블로 시작"
+title: 테이블 디자인 - Azure SQL Data Warehouse | Microsoft Docs
+description: Azure SQL Data Warehouse의 테이블 디자인을 소개합니다.
 services: sql-data-warehouse
-documentationcenter: NA
-author: shivaniguptamsft
-manager: jhubbard
-editor: 
-ms.assetid: 2114d9ad-c113-43da-859f-419d72604bdf
+author: ronortloff
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: tables
-ms.date: 06/29/2016
-ms.author: shigu;jrj
+ms.topic: conceptual
+ms.component: implement
+ms.date: 04/17/2018
+ms.author: rortloff
+ms.reviewer: igorstan
+ms.openlocfilehash: d299ff0d8e719040d503852af6056d9d87738b7d
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: c16fef2f302dbc56f257eaf2f0d2b68b6a3c1852
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
-# <a name="overview-of-tables-in-sql-data-warehouse"></a>SQL 데이터 웨어하우스의 테이블 개요
-> [!div class="op_single_selector"]
-> * [개요][Overview]
-> * [데이터 형식][Data Types]
-> * [배포][Distribute]
-> * [인덱스][Index]
-> * [파티션][Partition]
-> * [통계][Statistics]
-> * [임시][Temporary]
-> 
-> 
+# <a name="designing-tables-in-azure-sql-data-warehouse"></a>Azure SQL Data Warehouse의 테이블 디자인
 
-SQL 데이터 웨어하우스에서 테이블을 만드는 과정은 간단합니다.  기본 [CREATE TABLE][CREATE TABLE] 구문은 다른 데이터베이스를 사용하면서 가장 익숙해졌을 수 있는 일반적인 구문을 따릅니다.  테이블을 만들려면 테이블 및 열에 이름을 지정하고 각 열의 데이터 형식을 정의하면 됩니다.  다른 데이터베이스에서 테이블을 작성했으므로 이 작업은 아주 익숙해 보일 수도 있습니다.
+Azure SQL Data Warehouse의 테이블 디자인에 대한 주요 개념을 알아봅니다. 
 
-```sql  
-CREATE TABLE Customers (FirstName VARCHAR(25), LastName VARCHAR(25))
- ``` 
+## <a name="determine-table-category"></a>테이블 범주 확인 
 
-위의 예제에서는 FirstName 및 LastName의 두 열을 가진 Customers라는 테이블을 만듭니다.  각 열은 VARCHAR(25) 데이터 형식으로 정의됩니다. 이 형식에서는 데이터가 25자로 제한됩니다.  이러한 기본적인 테이블 특성 및 기타 특성은 다른 데이터베이스와 거의 동일합니다.  데이터 형식이 각 열에 대해 정의되어 데이터 무결성을 보장합니다.  I/O를 줄임으로써 성능 향상을 위해 인덱스를 추가할 수 있습니다.  데이터를 수정해야 하는 경우 성능 향상을 위해 분할을 추가할 수 있습니다.
+[스타 스키마](https://en.wikipedia.org/wiki/Star_schema)는 데이터를 팩트 및 차원 테이블로 구성합니다. 일부 테이블은 팩트 또는 차원 테이블로 이동하기 전의 통합 또는 준비 데이터에 사용됩니다. 테이블을 디자인할 때 테이블 데이터가 팩트, 차원 또는 통합 테이블에 속하는지를 결정합니다. 이 결정은 적절한 테이블 구조 및 배포를 알려줍니다. 
 
-SQL Data Warehouse 테이블 [이름 바꾸기][RENAME] 작업은 다음과 같습니다.
+- **팩트 테이블**에는 일반적으로 트랜잭션 시스템에서 생성된 다음, 데이터 웨어하우스에 로드된 정량적 데이터가 있습니다. 예를 들어 소매점에서 판매 트랜잭션을 매일 생성한 다음 분석을 위해 데이터 웨어하우스의 팩트 테이블에 데이터를 로드합니다.
 
-```sql  
-RENAME OBJECT Customer TO CustomerOrig; 
- ```
+- **차원 테이블**에는 변경될 수 있지만 일반적으로 드물게 변경되는 특성 데이터가 있습니다. 예를 들어 고객의 이름과 주소는 차원 테이블에 저장되고, 고객 프로필이 변경될 때만 업데이트됩니다. 대형 팩트 테이블의 크기를 최소화하기 위해 고객의 이름과 주소는 팩트 테이블의 모든 행에 있지 않아도 됩니다. 대신, 팩트 테이블과 차원 테이블에서 고객 ID를 공유할 수 있습니다. 쿼리는 두 테이블을 조인하여 고객 프로필과 트랜잭션을 연결할 수 있습니다. 
+
+- **통합 테이블**에서는 데이터를 통합하거나 준비할 수 있습니다. 통합 테이블을 일반 테이블, 외부 테이블 또는 임시 테이블로 만들 수 있습니다. 예를 들어 준비 테이블에 데이터를 로드하고 준비 중인 데이터에 대한 변환을 수행한 다음 프로덕션 테이블에 데이터를 삽입할 수 있습니다.
+
+## <a name="schema-and-table-names"></a>스키마 및 테이블 이름
+SQL Data Warehouse에서 데이터 웨어하우스는 데이터베이스 유형 중 하나입니다. 데이터 웨어하우스의 모든 테이블은 동일한 데이터베이스에 포함됩니다.  여러 데이터 웨어하우스에서 테이블을 조인할 수 없습니다. 이 동작은 데이터베이스 간 조인을 지원하는 SQL Server와 다릅니다. 
+
+SQL Server 데이터베이스에서는 스키마 이름에 fact, dim 또는 integrate를 사용할 수 있습니다. SQL Server 데이터베이스를 SQL Data Warehouse로 마이그레이션하는 경우 모든 팩트, 차원 및 통합 테이블을 SQL Data Warehouse의 한 스키마로 마이그레이션하는 것이 가장 좋습니다. 예를 들어 [WideWorldImportersDW](/sql/sample/world-wide-importers/database-catalog-wwi-olap) 샘플 데이터 웨어하우스의 모든 테이블을 wwi라는 하나의 스키마 내에 저장할 수 있습니다. 다음 코드에서는 wwi라는 [사용자 정의 스키마](/sql/t-sql/statements/create-schema-transact-sql)를 만듭니다.
+
+```sql
+CREATE SCHEMA wwi;
+```
+
+SQL Data Warehouse의 테이블 구성을 표시하려면 fact, dim 및 int를 테이블 이름의 접두사로 사용할 수 있습니다. 다음 표는 WideWorldImportersDW의 일부 스키마 및 테이블 이름을 보여 줍니다. SQL Server의 이름과 SQL Data Warehouse의 이름을 비교합니다. 
+
+| WideWorldImportersDW 테이블  | 테이블 형식 | SQL Server | SQL Data Warehouse |
+|:-----|:-----|:------|:-----|
+| City | 차원 | Dimension.City | wwi.DimCity |
+| 순서 | 팩트 | Fact.Order | wwi.FactOrder |
+
+
+## <a name="table-persistence"></a>테이블 지속성 
+
+테이블의 데이터는 Azure Storage에 영구적으로 또는 일시적으로 저장되거나 데이터 웨어하우스 외부의 데이터 저장소에 저장됩니다.
+
+### <a name="regular-table"></a>일반 테이블
+
+일반 테이블의 데이터는 데이터 웨어하우스의 일부로 Azure Storage에 저장됩니다. 세션이 열려 있는지 여부에 관계없이 테이블과 데이터가 지속됩니다.  다음 예제에서는 두 개의 열이 있는 일반 테이블을 만듭니다. 
+
+```sql
+CREATE TABLE MyTable (col1 int, col2 int );  
+```
+
+### <a name="temporary-table"></a>임시 테이블
+임시 테이블은 세션 기간 동안만 유지됩니다. 임시 테이블을 사용하여 다른 사용자가 임시 결과를 볼 수 없게 하고 정리할 필요를 줄일 수 있습니다.  임시 테이블은 로컬 저장소를 활용하므로 일부 작업에 대해 더 빠른 성능을 제공할 수 있습니다.  자세한 내용은 [임시 테이블](sql-data-warehouse-tables-temporary.md)을 참조하세요.
+
+### <a name="external-table"></a>외부 테이블
+외부 테이블은 Azure Storage Blob 또는 Azure Data Lake Store에 있는 데이터를 가리킵니다. CREATE TABLE AS SELECT 문과 함께 사용하는 경우 외부 테이블에서 선택하면 데이터를 SQL Data Warehouse로 가져옵니다. 따라서 외부 테이블은 데이터 로드에 유용합니다. 로드 자습서는 [PolyBase를 사용하여 Azure Blob Storage에서 데이터 로드](load-data-from-azure-blob-storage-using-polybase.md)를 참조하세요.
+
+## <a name="data-types"></a>데이터 형식
+SQL Data Warehouse는 가장 일반적으로 사용되는 데이터 형식을 지원합니다. 지원되는 데이터 형식의 목록은 CREATE TABLE 문의 [CREATE TABLE 참조의 데이터 형식](/sql/t-sql/statements/create-table-azure-sql-data-warehouse#DataTypes)을 참조하세요. 데이터 형식의 크기를 최소화하면 쿼리 성능 향상에 도움이 됩니다. 데이터 형식 사용에 대한 지침은 [데이터 형식](sql-data-warehouse-tables-data-types.md)을 참조하세요.
 
 ## <a name="distributed-tables"></a>분산 테이블
-SQL 데이터 웨어하우스와 같은 분산 시스템에 의해 도입된 새로운 기본 특성은 **배포 열**입니다.  배포 열은 표현 그대로입니다.  백그라운드에서 데이터를 분산 또는 분할하는 방법을 결정하는 열입니다.  배포 열을 지정하지 않고 테이블을 만들면 테이블이 **라운드 로빈**을 사용하여 자동으로 분산됩니다.  일부 시나리오에서는 라운드 로빈 테이블로 충분할 수 있지만 배포 열을 정의하면 쿼리 중에 데이터 이동을 크게 줄일 수 있으므로 성능이 최적화됩니다.  테이블에 적은 양의 데이터가 있는 경우 **복제** 배포 유형을 사용하여 테이블을 만들도록 선택하면 데이터가 각 계산 노드로 복사되므로 쿼리 실행 시에 데이터 이동 작업이 줄어듭니다. 배포 열을 선택하는 방법에 대한 자세한 내용을 [테이블 배포][Distribute] 를 참조하세요.
+SQL Data Warehouse의 기본 기능은 60개의 [분산](massively-parallel-processing-mpp-architecture.md#distributions)에 걸쳐 있는 테이블에 저장하고 운영할 수 있는 방법입니다.  테이블은 라운드 로빈, 해시 또는 복제 방법을 사용하여 분산됩니다.
 
-## <a name="indexing-and-partitioning-tables"></a>테이블 인덱싱 및 분할
-더욱 수준 높은 방식으로 SQL 데이터 웨어하우스를 사용하고 성능을 최적화하기 위해 테이블 디자인에 대해 알아보려고 할 수 있습니다.  자세히 알아보려면 [테이블 데이터 형식][Data Types], [테이블 배포][Distribute], [테이블 인덱싱][Index], [테이블 분할][Partition]에 대한 문서를 참조하세요.
+### <a name="hash-distributed-tables"></a>해시 분산 테이블
+해시 분산은 분산 열의 값에 따라 행을 분산합니다. 해시 분산 테이블은 대형 테이블에서 쿼리 조인에 대해 높은 성능을 달성하도록 설계되었습니다. 배포 열의 선택에 영향을 주는 여러 요인이 있습니다. 
 
-## <a name="table-statistics"></a>테이블 통계
-통계는 SQL 데이터 웨어하우스의 성능을 극대화하는 데 매우 중요합니다.  Azure SQL Database에서 예상할 수 있는 것처럼 SQL Data Warehouse는 통계를 아직 자동으로 만들고 업데이트하지 않으므로 쿼리의 성능을 극대화하기 위해 [통계][Statistics]에 대한 문서를 반드시 읽어야 합니다.
+자세한 내용은 [분산 테이블에 대한 디자인 지침](sql-data-warehouse-tables-distribute.md)을 참조하세요.
 
-## <a name="temporary-tables"></a>임시 테이블
-임시 테이블은 로그온 중에만 존재하고 다른 사용자는 볼 수 없는 테이블입니다.  임시 테이블은 다른 사람들이 일시적인 결과를 보지 못하도록 하여 정리할 필요를 없애주는 유용한 방법일 수 있습니다.  임시 테이블은 로컬 저장소를 활용하므로 일부 작업에 대해 더 빠른 성능을 제공할 수 있습니다.  임시 테이블에 대한 자세한 내용은 [임시 테이블][Temporary] 문서를 참조하세요.
+### <a name="replicated-tables"></a>복제된 테이블
+복제된 테이블에는 모든 계산 노드에서 사용할 수 있는 테이블의 전체 복사본이 있습니다. 복제된 테이블을 조인할 때는 데이터를 이동할 필요가 없으므로 복제된 테이블에 대한 쿼리는 빠르게 실행됩니다. 하지만 복제 시 추가 저장소가 필요하며 대형 테이블에는 비효율적입니다. 
 
-## <a name="external-tables"></a>외부 테이블
-Polybase 테이블이라고도 하는 외부 테이블은 SQL 데이터 웨어하우스에서 쿼리될 수 있지만 SQL 데이터 웨어하우스 외부의 데이터를 가리킬 수 있는 테이블입니다.  예를 들어 Azure Blob 저장소의 파일을 가리키는 외부 테이블을 만들 수 있습니다.  외부 테이블을 만들고 쿼리하는 방법에 대한 자세한 내용은 [Polybase 사용하여 데이터 로드][Load data with Polybase]를 참조하세요.  
+자세한 내용은 [복제된 테이블에 대한 디자인 지침](design-guidance-for-replicated-tables.md)을 참조하세요.
+
+### <a name="round-robin-tables"></a>라운드 로빈 테이블
+라운드 로빈 테이블은 테이블 행을 모든 분산에서 균일하게 배포합니다. 행은 무작위로 분산됩니다. 라운드 로빈 테이블에 대한 데이터 로드는 빠릅니다.  그러나 쿼리에는 다른 배포 방법보다 더 많은 데이터 이동이 필요할 수 있습니다. 
+
+자세한 내용은 [분산 테이블에 대한 디자인 지침](sql-data-warehouse-tables-distribute.md)을 참조하세요.
+
+
+### <a name="common-distribution-methods-for-tables"></a>테이블에 대한 일반적인 분산 방법
+테이블 범주에 따라 선택할 테이블 배포 옵션이 결정되는 경우가 많습니다. 
+
+| 테이블 범주 | 권장 배포 옵션 |
+|:---------------|:--------------------|
+| 팩트           | 클러스터형 columnstore 인덱스와 함께 해시 배포를 사용합니다. 동일한 배포 열에서 두 해시 테이블을 조인하면 성능이 향상됩니다. |
+| 차원      | 작은 테이블에는 복제를 사용합니다. 테이블이 너무 커서 각 계산 노드에 저장할 수 없는 경우 해시 분산을 사용합니다. |
+| 스테이징        | 준비 테이블에는 라운드 로빈을 사용합니다. CTAS를 사용하면 빠르게 로드됩니다. 데이터가 준비 테이블에 있으면 INSERT...SELECT를 사용하여 데이터를 프로덕션 테이블로 이동합니다. |
+
+## <a name="table-partitions"></a>테이블 파티션
+분할된 테이블은 데이터 범위에 따라 테이블 행에 저장하고 작업을 수행합니다. 예를 들어 테이블을 일, 월 또는 연도별로 분할할 수 있습니다. 쿼리 검색을 파티션 내의 데이터로 제한하는 파티션 제거를 통해 쿼리 성능을 향상시킬 수 있습니다. 파티션 전환을 통해 데이터를 유지 관리할 수도 있습니다. SQL Data Warehouse의 데이터는 이미 분산되어 있으므로 파티션이 너무 많으면 쿼리 성능이 느려질 수 있습니다. 자세한 내용은 [분할 지침](sql-data-warehouse-tables-partition.md)을 참조하세요.
+
+## <a name="columnstore-indexes"></a>Columnstore 인덱스
+기본적으로 SQL Data Warehouse는 테이블을 클러스터형 columnstore 인덱스로 저장합니다. 이러한 형태의 데이터 저장소는 대형 테이블에서 데이터 압축률과 쿼리 성능이 높습니다.  일반적으로 클러스터형 columnstore 인덱스가 가장 좋은 옵션이지만 클러스터형 인덱스 또는 힙이 적절한 저장소 구조인 경우도 있습니다.
+
+columnstore 기능 목록은 [columnstore 인덱스의 새로운 기능](/sql/relational-databases/indexes/columnstore-indexes-whats-new)을 참조하세요. columnstore 인덱스 성능을 향상하려면 [columnstore 인덱스의 행 그룹 품질 최대화](sql-data-warehouse-memory-optimizations-for-columnstore-compression.md)를 참조하세요.
+
+## <a name="statistics"></a>통계
+쿼리 최적화 프로그램은 쿼리 실행 계획을 만들 때 열 수준 통계를 사용합니다. 쿼리 성능을 향상하려면 개별 열, 특히 쿼리 조인에 사용되는 열에 대한 통계를 만드는 것이 중요합니다. 통계 생성 및 업데이트는 자동으로 수행되지 않습니다. 테이블을 만든 후 [통계를 생성](/sql/t-sql/statements/create-statistics-transact-sql)합니다. 많은 행을 추가하거나 변경한 후에는 통계를 업데이트합니다. 예를 들어 로드 후 통계를 업데이트합니다. 자세한 내용은 [통계 가이드](sql-data-warehouse-tables-statistics.md)를 참조하세요.
+
+## <a name="commands-for-creating-tables"></a>테이블을 만드는 명령
+테이블을 새로운 빈 테이블로 만들 수 있습니다. 테이블을 만들고 select 문의 결과로 채울 수도 있습니다. 다음은 테이블을 만드는 T-SQL 명령입니다.
+
+| T-SQL 문 | 설명 |
+|:----------------|:------------|
+| [CREATE TABLE](/sql/t-sql/statements/create-table-azure-sql-data-warehouse) | 모든 테이블 열과 옵션을 정의하여 빈 테이블을 만듭니다. |
+| [CREATE EXTERNAL TABLE](/sql/t-sql/statements/create-external-table-transact-sql) | 외부 테이블을 만듭니다. 테이블 정의는 SQL Data Warehouse에 저장됩니다. 테이블 데이터는 Azure Blob Storage 또는 Azure Data Lake Store에 저장됩니다. |
+| [CREATE TABLE AS SELECT](/sql/t-sql/statements/create-table-as-select-azure-sql-data-warehouse) | select 문의 결과로 새 테이블을 채웁니다. 테이블 열과 데이터 형식은 select 문의 결과를 기반으로 합니다. 데이터를 가져오기 위해 이 문은 외부 테이블에서 선택할 수 있습니다. |
+| [CREATE EXTERNAL TABLE AS SELECT](/sql/t-sql/statements/create-external-table-as-select-transact-sql) | select 문의 결과를 외부 위치로 내보내 새 외부 테이블을 만듭니다.  위치는 Azure Blob Storage 또는 Azure Data Lake Store입니다. |
+
+## <a name="aligning-source-data-with-the-data-warehouse"></a>원본 데이터를 데이터 웨어하우스에 맞춤
+
+데이터 웨어하우스 테이블은 다른 데이터 원본의 데이터를 로드하여 채워집니다. 로드를 성공적으로 수행하려면 원본 데이터에 있는 열의 개수와 데이터 형식이 데이터 웨어하우스의 테이블 정의와 일치해야 합니다. 맞출 데이터를 가져오는 것이 테이블 디자인의 가장 어려운 부분일 수 있습니다. 
+
+여러 데이터 저장소에서 데이터를 가져오는 경우 데이터 웨어하우스로 데이터를 가져와 통합 테이블에 저장할 수 있습니다. 데이터가 통합 테이블에 저장되면 SQL Data Warehouse의 기능을 사용하여 변환 작업을 수행할 수 있습니다. 데이터가 준비되면 프로덕션 테이블에 삽입할 수 있습니다.
 
 ## <a name="unsupported-table-features"></a>지원되지 않는 테이블 기능
-SQL 데이터 웨어하우스에는 다른 데이터베이스에서 제공하는 동일한 테이블 기능을 많이 포함하지만 아직 지원되지 않는 기능도 일부 있습니다.  다음은 아직 지원되지 않는 일부 테이블 기능 목록입니다.
+SQL Data Warehouse는 다른 데이터베이스에서 제공하는 테이블 기능을 모두는 아니지만 대부분 지원합니다.  다음 목록은 SQL Data Warehouse에서 지원되지 않는 일부 테이블 기능을 보여 줍니다.
 
-| 지원되지 않는 기능 |
-| --- |
-| 기본 키, 외래 키, 고유 및 검사 [테이블 제약 조건][Table Constraints] |
-| [고유 인덱스][Unique Indexes] |
-| [계산된 열][Computed Columns] |
-| [스파스 열][Sparse Columns] |
-| [사용자 정의 형식][User-Defined Types] |
-| [시퀀스][Sequence] |
-| [트리거][Triggers] |
-| [인덱싱된 뷰][Indexed Views] |
-| [동의어][Synonyms] |
+- PRIMARY KEY, FOREIGN KEY, UNIQUE, CHECK [테이블 제약 조건](/sql/t-sql/statements/alter-table-table-constraint-transact-sql)
+
+- [계산된 열](/sql/t-sql/statements/alter-table-computed-column-definition-transact-sql)
+- [인덱싱된 뷰](/sql/relational-databases/views/create-indexed-views)
+- [시퀀스](/sql/t-sql/statements/create-sequence-transact-sql)
+- [스파스 열](/sql/relational-databases/tables/use-sparse-columns)
+- [대리 키](). [ID](sql-data-warehouse-tables-identity.md)로 구현합니다.
+- [동의어](/sql/t-sql/statements/create-synonym-transact-sql)
+- [트리거](/sql/t-sql/statements/create-trigger-transact-sql)
+- [고유 인덱스](/sql/t-sql/statements/create-index-transact-sql)
+- [사용자 정의 형식](/sql/relational-databases/native-client/features/using-user-defined-types)
 
 ## <a name="table-size-queries"></a>테이블 크기 쿼리
-60개의 각 배포에서 한 테이블에 사용되는 공간 및 행을 식별하는 한 가지 간단한 방법은 [DBCC PDW_SHOWSPACEUSED][DBCC PDW_SHOWSPACEUSED]를 사용하는 것입니다.
+60개의 각 배포에서 한 테이블에 사용되는 공간 및 행을 식별하는 한 가지 간단한 방법은 [DBCC PDW_SHOWSPACEUSED](/sql/t-sql/database-console-commands/dbcc-pdw-showspaceused-transact-sql)를 사용하는 것입니다.
 
 ```sql
 DBCC PDW_SHOWSPACEUSED('dbo.FactInternetSales');
 ```
 
-그러나 DBCC 명령을 사용하면 작업이 상당히 제한될 수 있습니다.  DMV(동적 관리 뷰)를 사용하면 훨씬 더 많은 세부 정보를 볼 수 있을 뿐만 아니라 쿼리 결과를 보다 강력하게 제어할 수 있습니다.  먼저 이 문서 및 다른 문서의 많은 예제에서 참조되는 이 뷰를 만들어보세요.
+그러나 DBCC 명령을 사용하면 작업이 상당히 제한될 수 있습니다.  DMV(동적 관리 뷰)는 DBCC 명령보다 자세한 내용을 표시합니다. 먼저 이 뷰를 만듭니다.
 
 ```sql
 CREATE VIEW dbo.vTableSizes
@@ -200,7 +260,8 @@ FROM size
 ```
 
 ### <a name="table-space-summary"></a>테이블 공간 요약
-이 쿼리는 테이블에 의해 행 및 공간을 반환합니다.  가장 큰 테이블이 어느 테이블인지 그리고 해당 테이블이 라운드 로빈인지, 복제되는지 또는 해시 분산되는지 확인하는 것이 좋은 쿼리입니다.  해시 분산 테이블의 경우 배포 열도 보여 줍니다.  대부분의 경우 가장 큰 테이블은 클러스터된 columnstore 인덱스로 배포된 해시여야 합니다.
+
+이 쿼리는 테이블에 의해 행 및 공간을 반환합니다.  가장 큰 테이블이 어느 테이블인지, 해당 테이블이 라운드 로빈, 복제 또는 해시 분산인지 확인할 수 있습니다.  해시 분산 테이블의 경우 쿼리에서 배포 열을 보여 줍니다.  
 
 ```sql
 SELECT 
@@ -231,6 +292,7 @@ ORDER BY
 ```
 
 ### <a name="table-space-by-distribution-type"></a>배포 유형별 테이블 공간
+
 ```sql
 SELECT 
      distribution_policy_name
@@ -245,6 +307,7 @@ GROUP BY distribution_policy_name
 ```
 
 ### <a name="table-space-by-index-type"></a>인덱스 유형별 테이블 공간
+
 ```sql
 SELECT 
      index_type_desc
@@ -259,6 +322,7 @@ GROUP BY index_type_desc
 ```
 
 ### <a name="distribution-space-summary"></a>배포 공간 요약
+
 ```sql
 SELECT 
     distribution_id
@@ -274,34 +338,4 @@ ORDER BY    distribution_id
 ```
 
 ## <a name="next-steps"></a>다음 단계
-자세히 알아보려면 [테이블 데이터 형식][Data Types], [테이블 배포][Distribute], [테이블 인덱싱][Index],  [테이블 분할][Partition], [테이블 통계 유지 관리][Statistics] 및 [임시 테이블][Temporary]에 대한 문서를 참조하세요.  모범 사례에 대한 자세한 내용은 [SQL Data Warehouse 모범 사례][SQL Data Warehouse Best Practices]를 참조하세요.
-
-<!--Image references-->
-
-<!--Article references-->
-[Overview]: ./sql-data-warehouse-tables-overview.md
-[Data Types]: ./sql-data-warehouse-tables-data-types.md
-[Distribute]: ./sql-data-warehouse-tables-distribute.md
-[Index]: ./sql-data-warehouse-tables-index.md
-[Partition]: ./sql-data-warehouse-tables-partition.md
-[Statistics]: ./sql-data-warehouse-tables-statistics.md
-[Temporary]: ./sql-data-warehouse-tables-temporary.md
-[SQL Data Warehouse Best Practices]: ./sql-data-warehouse-best-practices.md
-[Load data with Polybase]: ./sql-data-warehouse-load-from-azure-blob-storage-with-polybase.md
-
-<!--MSDN references-->
-[CREATE TABLE]: https://msdn.microsoft.com/library/mt203953.aspx
-[RENAME]: https://msdn.microsoft.com/library/mt631611.aspx
-[DBCC PDW_SHOWSPACEUSED]: https://msdn.microsoft.com/library/mt204028.aspx
-[Table Constraints]: https://msdn.microsoft.com/library/ms188066.aspx
-[Computed Columns]: https://msdn.microsoft.com/library/ms186241.aspx
-[Sparse Columns]: https://msdn.microsoft.com/library/cc280604.aspx
-[User-Defined Types]: https://msdn.microsoft.com/library/ms131694.aspx
-[Sequence]: https://msdn.microsoft.com/library/ff878091.aspx
-[Triggers]: https://msdn.microsoft.com/library/ms189799.aspx
-[Indexed Views]: https://msdn.microsoft.com/library/ms191432.aspx
-[Synonyms]: https://msdn.microsoft.com/library/ms177544.aspx
-[Unique Indexes]: https://msdn.microsoft.com/library/ms188783.aspx
-
-<!--Other Web references-->
-
+데이터 웨어하우스에 대한 테이블을 만든 후 다음 단계는 테이블에 데이터를 로드하는 것입니다.  로드에 대한 자습서는 [SQL Data Warehouse에 데이터 로드](load-data-wideworldimportersdw.md)를 참조하세요.

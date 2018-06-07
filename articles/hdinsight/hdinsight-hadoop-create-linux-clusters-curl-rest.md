@@ -1,28 +1,24 @@
 ---
-title: "Azure REST API를 사용하여 Hadoop 클러스터 만들기 - Azure | Microsoft Docs"
-description: "Azure REST API에 Azure Resource Manager 템플릿을 제출하여 HDInsight 클러스터를 만드는 방법을 알아봅니다."
+title: Azure REST API를 사용하여 Hadoop 클러스터 만들기 - Azure | Microsoft Docs
+description: Azure REST API에 Azure Resource Manager 템플릿을 제출하여 HDInsight 클러스터를 만드는 방법을 알아봅니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: Blackmist
-manager: jhubbard
+manager: cgronlun
 editor: cgronlun
 tags: azure-portal
 ms.assetid: 98be5893-2c6f-4dfa-95ec-d4d8b5b7dcb5
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 05/17/2017
+ms.topic: conceptual
+ms.date: 05/02/2018
 ms.author: larryfr
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 1b257b5a021a682990fb615d7c9aae4fc9160dd4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 9c2779c692e944bed62d7ae9b76bb8929e62e5f3
+ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/03/2018
 ---
 # <a name="create-hadoop-clusters-using-the-azure-rest-api"></a>Azure REST API를 사용하여 Hadoop 클러스터 만들기
 
@@ -132,7 +128,7 @@ Azure Resource Manager 템플릿은 **리소스 그룹**과 그 안의 모든 �
 
                    },
                    "properties": {
-                       "clusterVersion": "3.5",
+                       "clusterVersion": "3.6",
                        "osType": "Linux",
                        "clusterDefinition": {
                            "kind": "[parameters('clusterType')]",
@@ -231,7 +227,7 @@ Azure Resource Manager 템플릿은 **리소스 그룹**과 그 안의 모든 �
 ## <a name="create-a-service-principal"></a>서비스 주체 만들기
 
 > [!NOTE]
-> 이러한 단계는 [Azure CLI를 사용하여 리소스에 액세스하기 위한 서비스 주체 만들기](../azure-resource-manager/resource-group-authenticate-service-principal-cli.md#create-service-principal-with-password) 문서의 *암호를 사용하여 서비스 주체 만들기* 섹션의 요약된 버전입니다. 이러한 단계에서는 Azure REST API에 인증하는 데 사용되는 서비스 주체를 만듭니다.
+> 이러한 단계는 [Azure CLI를 사용하여 리소스에 액세스하기 위한 서비스 주체 만들기](../azure-resource-manager/resource-group-authenticate-service-principal-cli.md) 문서의 *암호를 사용하여 서비스 주체 만들기* 섹션의 요약된 버전입니다. 이러한 단계에서는 Azure REST API에 인증하는 데 사용되는 서비스 주체를 만듭니다.
 
 1. 명령줄에서 다음 명령을 사용하여 Azure 구독을 나열합니다.
 
@@ -363,18 +359,17 @@ HDInsight 클러스터를 성공적으로 만들었으므로 다음을 사용하
 
 ### <a name="hadoop-clusters"></a>Hadoop 클러스터
 
-* [HDInsight에서 Hive 사용](hdinsight-use-hive.md)
-* [HDInsight에서 Pig 사용](hdinsight-use-pig.md)
-* [HDInsight와 함께 MapReduce 사용](hdinsight-use-mapreduce.md)
+* [HDInsight에서 하이브 사용](hadoop/hdinsight-use-hive.md)
+* [HDInsight에서 Pig 사용](hadoop/hdinsight-use-pig.md)
+* [HDInsight와 함께 MapReduce 사용](hadoop/hdinsight-use-mapreduce.md)
 
 ### <a name="hbase-clusters"></a>HBase 클러스터
 
-* [HDInsight에서 HBase 시작](hdinsight-hbase-tutorial-get-started-linux.md)
-* [HDInsight에서 HBase용 Java 응용 프로그램 개발](hdinsight-hbase-build-java-maven-linux.md)
+* [HDInsight에서 HBase 시작](hbase/apache-hbase-tutorial-get-started-linux.md)
+* [HDInsight에서 HBase용 Java 응용 프로그램 개발](hbase/apache-hbase-build-java-maven-linux.md)
 
 ### <a name="storm-clusters"></a>Storm 클러스터
 
-* [HDInsight에서 Storm용 Java 토폴로지 개발](hdinsight-storm-develop-java-topology.md)
-* [HDInsight의 Storm에서 Python 구성 요소 사용](hdinsight-storm-develop-python-topology.md)
-* [HDInsight에서 Storm을 사용하는 토폴로지 배포 및 모니터링](hdinsight-storm-deploy-monitor-topology-linux.md)
-
+* [HDInsight에서 Storm용 Java 토폴로지 개발](storm/apache-storm-develop-java-topology.md)
+* [HDInsight의 Storm에서 Python 구성 요소 사용](storm/apache-storm-develop-python-topology.md)
+* [HDInsight에서 Storm을 사용하는 토폴로지 배포 및 모니터링](storm/apache-storm-deploy-monitor-topology-linux.md)

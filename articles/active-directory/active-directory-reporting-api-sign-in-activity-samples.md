@@ -1,26 +1,25 @@
 ---
-title: "Azure Active Directory 로그인 활동 보고서 API 샘플 | Microsoft Docs"
-description: "Azure Active Directory Reporting API를 시작하는 방법"
+title: Azure Active Directory 로그인 활동 보고서 API 샘플 | Microsoft Docs
+description: Azure Active Directory Reporting API를 시작하는 방법
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: MarkusVi
-manager: femila
-editor: 
+manager: mtillman
+editor: ''
 ms.assetid: c41c1489-726b-4d3f-81d6-83beb932df9c
 ms.service: active-directory
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 07/15/2017
+ms.date: 01/15/2018
 ms.author: dhanyahk;markvi
 ms.reviewer: dhanyahk
+ms.openlocfilehash: c76ac75acdb1645ee6cc5b496aadccbd1daf2d79
+ms.sourcegitcommit: d74657d1926467210454f58970c45b2fd3ca088d
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 7fc2b59fe37ed2ffe85925c457300ef8fd83c3c7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/28/2018
 ---
 # <a name="azure-active-directory-sign-in-activity-report-api-samples"></a>Azure Active Directory 로그인 활동 보고서 API 샘플
 이 항목은 Azure Active Directory Reporting API에 대한 항목 컬렉션의 일부입니다.  
@@ -42,7 +41,7 @@ Azure AD Reporting은 코드 또는 관련된 도구를 사용하여 로그인 �
     $ClientSecret   = "<clientSecret>"         # Should be a ~44 character string insert your info here
     $loginURL       = "https://login.microsoftonline.com/"
     $tenantdomain   = "<tenantDomain>"
-    $ daterange            # For example, contoso.onmicrosoft.com
+    $daterange            # For example, contoso.onmicrosoft.com
 
     $7daysago = "{0:s}" -f (get-date).AddDays(-7) + "Z"
     # or, AddMinutes(-5)
@@ -88,5 +87,4 @@ Azure AD Reporting은 코드 또는 관련된 도구를 사용하여 로그인 �
 * 이 항목의 샘플을 사용자 지정하시겠습니까? [Azure Active Directory 로그인 활동 API 참조](active-directory-reporting-api-sign-in-activity-reference.md)를 확인하세요. 
 * Azure Active Directory Reporting API를 사용하는 전체적인 개요를 확인하려는 경우 [Azure Active Directory Reporting API 시작](active-directory-reporting-api-getting-started.md)을 참조하세요.
 * Azure Active Directory Reporting에 대한 자세한 내용을 알아보려면 [Azure Active Directory Reporting 가이드](active-directory-reporting-guide.md)를 참조하세요.  
-
 

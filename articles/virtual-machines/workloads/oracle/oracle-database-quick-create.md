@@ -15,17 +15,15 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 07/17/2017
 ms.author: rclaus
+ms.openlocfilehash: 4f760165fa8a93bbb7646539af748b647fe63bba
+ms.sourcegitcommit: 059dae3d8a0e716adc95ad2296843a45745a415d
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 8683b016c4db2c66fb1dd994405b70c3d137a7fc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/09/2018
 ---
-
 # <a name="create-an-oracle-database-in-an-azure-vm"></a>Azure VM에서 Oracle 데이터베이스 만들기
 
-이 가이드에서는 Oracle 12c 데이터베이스를 만들기 위해 Azure CLI를 사용하여 [Oracle 마켓플레이스 갤러리 이미지](https://azuremarketplace.microsoft.com/marketplace/apps/Oracle.OracleDatabase12102EnterpriseEdition?tab=Overview)에서 Azure 가상 컴퓨터를 배포하는 방법에 대해 자세히 설명합니다. 서버가 배포된 후 Oracle 데이터베이스를 구성하려면 SSH를 통해 연결합니다. 
+이 가이드에서는 Oracle 12c 데이터베이스를 만들기 위해 Azure CLI를 사용하여 [Oracle 마켓플레이스 갤러리 이미지](https://azuremarketplace.microsoft.com/marketplace/apps/Oracle.OracleDatabase12102EnterpriseEdition?tab=Overview)에서 Azure 가상 머신을 배포하는 방법에 대해 자세히 설명합니다. 서버가 배포된 후 Oracle 데이터베이스를 구성하려면 SSH를 통해 연결합니다. 
 
 Azure 구독이 아직 없는 경우 시작하기 전에 [무료 계정](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)을 만듭니다.
 
@@ -35,7 +33,7 @@ CLI를 로컬로 설치하여 사용하도록 선택한 경우 이 빠른 시작
 
 ## <a name="create-a-resource-group"></a>리소스 그룹 만들기
 
-[az group create](/cli/azure/group#create) 명령을 사용하여 리소스 그룹을 만듭니다. Azure 리소스 그룹은 Azure 리소스가 배포 및 관리되는 논리적 컨테이너입니다. 
+[az group create](/cli/azure/group#az_group_create) 명령을 사용하여 리소스 그룹을 만듭니다. Azure 리소스 그룹은 Azure 리소스가 배포 및 관리되는 논리적 컨테이너입니다. 
 
 다음 예제에서는 *eastus* 위치에 *myResourceGroup*이라는 리소스 그룹을 만듭니다.
 
@@ -44,7 +42,7 @@ az group create --name myResourceGroup --location eastus
 ```
 ## <a name="create-virtual-machine"></a>가상 컴퓨터 만들기
 
-VM(가상 컴퓨터)을 만들려면 [az vm create](/cli/azure/vm#create) 명령을 사용합니다. 
+VM(가상 머신)을 만들려면 [az vm create](/cli/azure/vm#az_vm_create) 명령을 사용합니다. 
 
 다음 예제는 `myVM`라는 VM을 만듭니다. 또한 기본 키 위치에 SSH 키가 없는 경우 이 키를 만듭니다. 특정 키 집합을 사용하려면 `--ssh-key-value` 옵션을 사용합니다.  
 
@@ -272,7 +270,7 @@ Oracle 데이터베이스는 기본적으로 VM을 다시 시작할 때 자동�
 
 마지막 작업은 일부 외부 끝점을 구성하는 것입니다. VM을 보호하는 Azure 네트워크 보안 그룹을 설정하려면 먼저 VM에서 SSH 세션을 종료합니다(이전 단계에서 다시 부팅 할 때 SSH에서 제외되어 있어야 함). 
 
-1.  Oracle 데이터베이스에 원격으로 액세스하는 데 사용하는 끝점을 열려면 다음과 같이 [az network nsg rule create](/cli/azure/network/nsg/rule#create)를 사용하여 네트워크 보안 그룹 규칙을 만듭니다. 
+1.  Oracle 데이터베이스에 원격으로 액세스하는 데 사용하는 끝점을 열려면 다음과 같이 [az network nsg rule create](/cli/azure/network/nsg/rule#az_network_nsg_rule_create)를 사용하여 네트워크 보안 그룹 규칙을 만듭니다. 
 
     ```azurecli-interactive
     az network nsg rule create \
@@ -284,7 +282,7 @@ Oracle 데이터베이스는 기본적으로 VM을 다시 시작할 때 자동�
         --destination-port-range 1521
     ```
 
-2.  Oracle EM Express에 원격으로 액세스하는 데 사용하는 끝점을 열려면 다음과 같이 [az network nsg rule create](/cli/azure/network/nsg/rule#create)를 사용하여 네트워크 보안 그룹 규칙을 만듭니다.
+2.  Oracle EM Express에 원격으로 액세스하는 데 사용하는 끝점을 열려면 다음과 같이 [az network nsg rule create](/cli/azure/network/nsg/rule#az_network_nsg_rule_create)를 사용하여 네트워크 보안 그룹 규칙을 만듭니다.
 
     ```azurecli-interactive
     az network nsg rule create \
@@ -296,7 +294,7 @@ Oracle 데이터베이스는 기본적으로 VM을 다시 시작할 때 자동�
         --destination-port-range 5502
     ```
 
-3. 필요한 경우 다음과 같이 [az network public-ip show](/cli/azure/network/public-ip#show)를 사용하여 VM의 공용 IP 주소를 다시 가져옵니다.
+3. 필요한 경우 다음과 같이 [az network public-ip show](/cli/azure/network/public-ip#az_network_public_ip_show)를 사용하여 VM의 공용 IP 주소를 다시 가져옵니다.
 
     ```azurecli-interactive
     az network public-ip show \
@@ -318,7 +316,7 @@ Oracle 데이터베이스는 기본적으로 VM을 다시 시작할 때 자동�
 
 ## <a name="clean-up-resources"></a>리소스 정리
 
-Azure에서 첫 번째 Oracle 데이터베이스 탐색이 끝나고 VM이 더 이상 필요하지 않은 경우 [az group delete](/cli/azure/group#delete) 명령을 사용하여 리소스 그룹, VM 및 모든 관련 리소스를 제거할 수 있습니다.
+Azure에서 첫 번째 Oracle 데이터베이스 탐색이 끝나고 VM이 더 이상 필요하지 않은 경우 [az group delete](/cli/azure/group#az_group_delete) 명령을 사용하여 리소스 그룹, VM 및 모든 관련 리소스를 제거할 수 있습니다.
 
 ```azurecli-interactive 
 az group delete --name myResourceGroup

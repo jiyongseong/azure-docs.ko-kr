@@ -1,10 +1,10 @@
 ---
-title: "Azure 알림 허브 보안 푸시"
-description: "Azure에서 iOS 앱에 보안 푸시 알림을 보내는 방법에 대해 알아봅니다. 코드 샘플은 Objective-C 및 C#으로 작성되었습니다."
+title: Azure Notification Hubs 보안 푸시
+description: Azure에서 iOS 앱에 보안 푸시 알림을 보내는 방법에 대해 알아봅니다. 코드 샘플은 Objective-C 및 C#으로 작성되었습니다.
 documentationcenter: ios
-author: ysxu
-manager: erikre
-editor: 
+author: dimazaid
+manager: kpiteira
+editor: spelluru
 services: notification-hubs
 ms.assetid: 17d42b0a-2c80-4e35-a1ed-ed510d19f4b4
 ms.service: notification-hubs
@@ -12,15 +12,15 @@ ms.workload: mobile
 ms.tgt_pltfrm: ios
 ms.devlang: objective-c
 ms.topic: article
-ms.date: 06/29/2016
-ms.author: yuaxu
-translationtype: Human Translation
-ms.sourcegitcommit: dcda8b30adde930ab373a087d6955b900365c4cc
-ms.openlocfilehash: e5f09fb3716303bb21fe7442aa6fa8832174838e
-
-
+ms.date: 04/25/2018
+ms.author: dimazaid
+ms.openlocfilehash: d3ba967a164a35af5bf66f7e74d5f95b5dc2a37f
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
-# <a name="azure-notification-hubs-secure-push"></a>Azure 알림 허브 보안 푸시
+# <a name="azure-notification-hubs-secure-push"></a>Azure Notification Hubs 보안 푸시
 > [!div class="op_single_selector"]
 > * [Windows 범용](notification-hubs-aspnet-backend-windows-dotnet-wns-secure-push-notification.md)
 > * [iOS](notification-hubs-aspnet-backend-ios-push-apple-apns-secure-notification.md)
@@ -42,19 +42,19 @@ Microsoft Azure의 푸시 알림 지원을 통해 사용하기 쉬운 다중 플
    * 장치가 보안 페이로드를 요청하는 백 엔드에 접속합니다.
    * 앱이 장치에서 페이로드를 알림으로 표시할 수 있습니다.
 
-앞의 흐름과 이 자습서에서는 사용자가 로그인한 후 장치가 인증 토큰을 로컬 저장소에 저장한다고 가정합니다. 이렇게 하면 장치가 이 토큰을 사용하여 알림의 보안 페이로드를 검색할 수 있으므로 매우 원활한 환경이 보장됩니다. 응용 프로그램이 인증 토큰을 장치에 저장하지 않거나 이 토큰이 만료될 수 없으면 알림 수신 시 장치 앱은 사용자에게 앱을 시작할지 묻는 메시지가 포함된 일반 알림을 표시해야 합니다. 그리고 나서 앱은 사용자를 인증하고 알림 페이로드를 표시합니다.
+앞의 흐름과 이 자습서에서는 사용자가 로그인한 후 장치가 인증 토큰을 로컬 저장소에 저장한다고 가정합니다. 이렇게 하면 장치가 이 토큰을 사용하여 알림의 보안 페이로드를 검색할 수 있으므로 원활한 환경이 보장됩니다. 응용 프로그램이 인증 토큰을 장치에 저장하지 않거나 이 토큰이 만료될 수 없으면 알림 수신 시 장치 앱은 사용자에게 앱을 시작할지 묻는 메시지가 포함된 일반 알림을 표시해야 합니다. 그리고 나서 앱은 사용자를 인증하고 알림 페이로드를 표시합니다.
 
 이 보안 푸시 자습서에서는 푸시 알림을 안전하게 보내는 방법을 보여 줍니다. 이 자습서는 [사용자에게 알림](notification-hubs-aspnet-backend-ios-apple-apns-notification.md) 자습서를 기반으로 빌드되므로 해당 자습서의 단계를 먼저 완료해야 합니다.
 
 > [!NOTE]
-> 이 자습서에서는 [알림 허브 시작(iOS)](notification-hubs-ios-apple-push-notification-apns-get-started.md)에 설명된 대로 알림 허브를 만들고 구성했다고 가정합니다
+> 이 자습서에서는 [Notification Hubs 시작(iOS)](notification-hubs-ios-apple-push-notification-apns-get-started.md)에 설명된 대로 Notification Hubs를 만들고 구성했다고 가정합니다
 > 
 > 
 
 [!INCLUDE [notification-hubs-aspnet-backend-securepush](../../includes/notification-hubs-aspnet-backend-securepush.md)]
 
 ## <a name="modify-the-ios-project"></a>iOS 프로젝트 수정
-알림의 *id* 만 보내도록 앱 백 엔드를 수정했으므로 해당 알림을 처리하고 백 엔드를 콜백하여 표시할 보안 메시지를 검색하도록 iOS 앱을 변경해야 합니다.
+알림의 *ID* 만 보내도록 앱 백 엔드를 수정했으므로 해당 알림을 처리하고 백 엔드를 콜백하여 표시할 보안 메시지를 검색하도록 iOS 앱을 변경해야 합니다.
 
 이 목표를 달성하려면 앱 백 엔드에서 보안 콘텐츠를 검색하는 논리를 작성해야 합니다.
 
@@ -154,9 +154,3 @@ Microsoft Azure의 푸시 알림 지원을 통해 사용하기 쉬운 다중 플
 3. iOS 앱 UI에서 **로그인**을 클릭합니다. 그리고 나서 **푸시 보내기**를 클릭합니다. 알림 센터에 보안 알림이 표시되는지 확인해야 합니다.
 
 [IOS1]: ./media/notification-hubs-aspnet-backend-ios-secure-push/secure-push-ios-1.png
-
-
-
-<!--HONumber=Dec16_HO2-->
-
-

@@ -1,0 +1,282 @@
+- name: Azure Search 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: Azure Search란?
+      href: search-what-is-azure-search.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: 인지 검색 시도
+      href: cognitive-search-quickstart-blob.md
+    - name: 서비스 만들기
+      href: search-create-service-portal.md
+    - name: 포털
+      items:
+        - name: 인덱스 만들기
+          href: search-create-index-portal.md
+        - name: 데이터 가져오기
+          href: search-import-data-portal.md
+        - name: 검색 탐색기
+          href: search-explorer.md
+    - name: .NET
+      items:
+        - name: 인덱스 만들기
+          href: search-create-index-dotnet.md
+        - name: 데이터 가져오기
+          href: search-import-data-dotnet.md
+        - name: 검색
+          href: search-query-dotnet.md
+    - name: REST (영문)
+      items:
+        - name: 인덱스 만들기
+          href: search-create-index-rest-api.md
+        - name: 데이터 가져오기
+          href: search-import-data-rest-api.md
+        - name: 검색
+          href: search-query-rest-api.md
+        - name: REST 클라이언트로 테스트
+          href: search-fiddler.md
+- name: 자습서
+  items:
+    - name: 인식 검색 개발
+      href: cognitive-search-tutorial-blob.md
+    - name: Azure SQL Database 인덱싱
+      href: search-indexer-tutorial.md
+    - name: Azure Blob 인덱싱
+      href: search-semi-structured-data.md
+    - name: .NET에서 동의어 추가
+      href: search-synonyms-tutorial-sdk.md
+    - name: 포털 연습
+      href: search-get-started-portal.md
+- name: 샘플
+  items:
+    - name: Azure 코드 샘플
+      href: 'https://azure.microsoft.com/resources/samples/?service=search'
+    - name: GitHub 샘플
+      href: 'https://github.com/Azure-Samples/?utf8=%E2%9C%93&query=search'
+- name: 개념
+  items:
+    - name: 인지 검색(미리 보기)
+      href: cognitive-search-concept-intro.md
+    - name: 전체 텍스트 검색
+      href: search-lucene-query-architecture.md
+    - name: 언어 분석
+      href: search-analyzers.md
+    - name: 인덱싱
+      href: search-what-is-data-import.md
+    - name: 인덱스 정의
+      href: search-what-is-an-index.md
+    - name: 인덱서
+      href: search-indexer-overview.md
+- name: 방법 가이드
+  items:
+    - name: 계획 및 디자인
+      items:
+        - name: 계층 선택
+          href: search-sku-tier.md
+        - name: 서비스 제한
+          href: search-limits-quotas-capacity.md
+        - name: 파티션 및 복제본 할당
+          href: search-capacity-planning.md
+        - name: 다중 테넌트 지원을 위한 디자인 패턴
+          href: search-modeling-multitenant-saas-applications.md
+        - name: 성능 및 최적화
+          href: search-performance-optimization.md
+    - name: 보안
+      items:
+        - name: 보안 개요
+          href: search-security-overview.md
+        - name: 서비스 키 관리
+          href: search-security-api-keys.md
+        - name: 역할 기반 관리자 액세스
+          href: search-security-rbac.md
+        - name: 보안 필터
+          href: search-security-trimming-for-azure-search.md
+        - name: AAD ID에 대한 필터링
+          href: search-security-trimming-for-azure-search-with-aad.md
+    - name: 개발
+      items:
+        - name: API 버전
+          href: search-api-versions.md
+        - name: .NET으로 작성된 개발
+          href: search-howto-dotnet-sdk.md
+        - name: Node.js로 작성된 개발
+          href: search-get-started-nodejs.md
+        - name: Java로 작성된 개발
+          href: search-get-started-java.md
+        - name: SDK 업그레이드
+          items:
+            - name: .NET SDK 5.0
+              href: search-dotnet-sdk-migration-version-5.md
+            - name: .NET SDK 3.0
+              href: search-dotnet-sdk-migration.md
+            - name: .NET SDK 1.1
+              href: search-dotnet-sdk-migration-version-1.md
+            - name: .NET 관리 SDK
+              href: search-dotnet-mgmt-sdk-migration.md
+        - name: REST API 업그레이드
+          href: search-api-migration.md
+        - name: 복합 데이터 형식 모델링
+          href: search-howto-complex-data-types.md
+        - name: 동시 업데이트 처리
+          href: search-howto-concurrency.md
+        - name: 페이징 결과
+          href: search-pagination-page-layout.md
+    - name: 텍스트 분석
+      items:
+        - name: 언어 분석기
+          href: 'https://docs.microsoft.com/rest/api/searchservice/language-support'
+        - name: 사용자 지정 분석기
+          href: 'https://docs.microsoft.com/rest/api/searchservice/custom-analyzers-in-azure-search'
+    - name: 인덱싱 데이터
+      items:
+        - name: Azure Blob Storage 인덱서
+          href: search-howto-indexing-azure-blob-storage.md
+        - name: Azure 테이블 저장소 인덱서
+          href: search-howto-indexing-azure-tables.md
+        - name: Azure SQL 인덱서
+          href: search-howto-connecting-azure-sql-database-to-azure-search-using-indexers.md
+        - name: Azure Cosmos DB 인덱서
+          href: search-howto-index-cosmosdb.md
+        - name: 인덱스 CSV blob
+          href: search-howto-index-csv-blobs.md
+        - name: 인덱스 JSON blob
+          href: search-howto-index-json-blobs.md
+        - name: Azure VM에서 SQL Server에 대한 인덱서 연결 구성
+          href: search-howto-connecting-azure-sql-iaas-to-azure-search-using-indexers.md
+        - name: 인덱서의 필드 매핑
+          href: search-indexer-field-mappings.md
+        - name: 인덱스 다시 작성
+          href: search-howto-reindex.md
+    - name: 인지 검색(미리 보기)
+      items:
+        - name: 기술 집합 정의
+          href: cognitive-search-defining-skillset.md
+        - name: 주석 참조
+          href: cognitive-search-concept-annotations-syntax.md
+        - name: 인덱스 필드에 매핑
+          href: cognitive-search-output-field-mapping.md
+        - name: 이미지에서 정보 처리 및 추출
+          href: cognitive-search-concept-image-scenarios.md
+        - name: 사용자 지정 기술 통합
+          href: cognitive-search-custom-skill-interface.md
+        - name: 예제 - 사용자 지정 기술
+          href: cognitive-search-create-custom-skill-example.md
+        - name: 문제 해결 팁
+          href: cognitive-search-concept-troubleshooting.md
+    - name: 전체 텍스트 검색
+      items:
+        - name: 기본 쿼리 생성
+          href: search-query-overview.md
+        - name: 단순 쿼리 구문
+          href: 'https://docs.microsoft.com/rest/api/searchservice/simple-query-syntax-in-azure-search'
+        - name: Lucene 쿼리 구문
+          href: 'https://docs.microsoft.com/rest/api/searchservice/lucene-query-syntax-in-azure-search'
+        - name: Lucene 구문 쿼리 예제
+          href: search-query-lucene-examples.md
+        - name: 패싯 탐색
+          href: search-faceted-navigation.md
+        - name: 점수 매기기 프로필
+          href: 'https://docs.microsoft.com/rest/api/searchservice/add-scoring-profiles-to-a-search-index'
+        - name: 제안
+          href: 'https://docs.microsoft.com/rest/api/searchservice/suggesters'
+        - name: 동의어(미리 보기)
+          href: search-synonyms.md
+    - name: 필터
+      items:
+        - name: 필터 개요
+          href: search-filters.md
+        - name: 패싯 필터
+          href: search-filters-facets.md
+        - name: 필터 식 구문
+          href: 'https://docs.microsoft.com/rest/api/searchservice/odata-expression-syntax-for-azure-search'
+    - name: 관리 및 분석
+      items:
+        - name: 관리(포털)
+          href: search-manage.md
+        - name: PowerShell(Azure Search)
+          href: search-manage-powershell.md
+        - name: 사용량 및 통계 모니터링
+          href: search-monitor-usage.md
+        - name: 트래픽 분석 검색
+          href: search-traffic-analytics.md
+- name: 참고 자료
+  items:
+    - name: .NET
+      href: /dotnet/api/?term=microsoft.azure.search
+    - name: .NET(관리)
+      href: /dotnet/api/?term=microsoft.azure.management.search
+    - name: Python(관리)
+      href: 'http://azure-sdk-for-python.readthedocs.io/en/latest/ref/azure.mgmt.search.html'
+    - name: REST (영문)
+      href: /rest/api/searchservice
+      items:
+        - name: \2017-11-11-Preview
+          href: search-api-2017-11-11-preview.md
+    - name: REST(관리)
+      href: /rest/api/searchmanagement
+    - name: 인지 검색(미리 보기)
+      items:
+        - name: 2017-11-11-Preview(REST)
+          href: search-api-2017-11-11-preview.md
+          items:
+            - name: 기술 집합 만들기(미리 보기)
+              href: ref-create-skillset.md
+            - name: 인덱서 만들기(미리 보기)
+              href: ref-create-indexer.md
+        - name: 미리 정의된 기술
+          href: cognitive-search-predefined-skills.md
+          items:
+            - name: 핵심 문구 추출
+              href: cognitive-search-skill-keyphrases.md
+            - name: 언어 검색
+              href: cognitive-search-skill-language-detection.md
+            - name: 명명된 엔터티 인식
+              href: cognitive-search-skill-named-entity-recognition.md
+            - name: 텍스트 병합기
+              href: cognitive-search-skill-textmerger.md
+            - name: 텍스트 나누기
+              href: cognitive-search-skill-textsplit.md
+            - name: 데이터
+              href: cognitive-search-skill-sentiment.md
+            - name: 이미지 분석
+              href: cognitive-search-skill-image-analysis.md
+            - name: OCR
+              href: cognitive-search-skill-ocr.md
+            - name: 쉐이퍼
+              href: cognitive-search-skill-shaper.md
+- name: 리소스
+  items:
+    - name: FAQ - 질문과 대답
+      href: search-faq-frequently-asked-questions.md
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/search/'
+    - name: 서비스 업데이트
+      href: 'https://azure.microsoft.com/updates/?product=search'
+    - name: 인지 검색 설명서
+      href: cognitive-search-resources-documentation.md
+    - name: 코스웨어 및 자습서
+      items:
+        - name: 비디오 및 자습서
+          href: search-video-demo-tutorial-list.md
+        - name: Virtual Academy
+          href: 'https://mva.microsoft.com/training-courses/using-windows-azure-search-10540?l=ADkxnd97_9304984382'
+    - name: 데모 사이트
+      items:
+        - name: 검색 분석기 데모
+          href: 'http://alice.unearth.ai/'
+        - name: 라이브 데모 앱
+          href: 'https://searchsamples.azurewebsites.net/'
+        - name: 작업 목록 앱
+          href: 'http://aka.ms/azjobsdemo'
+    - name: 파트너 및 커뮤니티
+      items:
+        - name: Azure Search MSDN 포럼
+          href: 'https://social.msdn.microsoft.com/forums/azure/home?forum=AzureSearch'
+        - name: 스택 오버플로
+          href: 'http://stackoverflow.com/questions/tagged/azure-search'
+        - name: '블로그: 관계형 데이터 모델링'
+          href: 'http://blogs.technet.com/b/onsearch/archive/2015/09/08/modeling-the-adventureworks-inventory-database-for-azure-search.aspx'
+        - name: '블로그: 다단계 패싱'
+          href: 'http://blogs.technet.com/b/onsearch/archive/2015/09/09/multi-level-taxonomy-facets-in-azure-search.aspx'

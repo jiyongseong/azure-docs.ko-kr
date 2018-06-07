@@ -3,8 +3,8 @@ title: "Visual Studio에서 Azure 코드 최적화 | Microsoft Docs"
 description: "Visual Studio에서 Azure 코드 최적화 도구를 사용하여 더욱 강력하고 성능이 뛰어난 코드를 만드는 방법에 대해 알아보세요."
 services: visual-studio-online
 documentationcenter: na
-author: TomArcher
-manager: douge
+author: cawa
+manager: paulyuk
 editor: 
 ms.assetid: ed48ee06-e2d2-4322-af22-07200fb16987
 ms.service: multiple
@@ -13,12 +13,12 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: multiple
 ms.date: 11/11/2016
-ms.author: tarcher
-translationtype: Human Translation
-ms.sourcegitcommit: 01623fa76175091439d5a571fb8b8f96aee01c4c
-ms.openlocfilehash: a07496a2d5eb52dd3c4092105e45b70b6e9f69cd
-
-
+ms.author: cawa
+ms.openlocfilehash: a606c8e7d8b730b67bd8481656e099900eb39fbc
+ms.sourcegitcommit: 9ae92168678610f97ed466206063ec658261b195
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/17/2017
 ---
 # <a name="optimizing-your-azure-code"></a>Azure 코드 최적화
 Microsoft Azure를 사용하는 앱을 프로그래밍할 경우 클라우드 환경에서 앱 안정성, 동작 및 성능 문제를 방지하기 위해 몇 가지 코딩 방법을 따라야 합니다. Microsoft는 이와 같이 자주 발생하는 문제를 인식 및 식별하고 해결해 주는 Azure 코드 분석 도구를 제공합니다. 이 도구는 Visual Studio에서 NuGet을 통해 다운로드할 수 있습니다.
@@ -465,10 +465,4 @@ public class BlogsController : Controller
 ```
 
 ## <a name="next-steps"></a>다음 단계
-Azure 앱 최적화 및 문제 해결에 대한 자세한 내용은 [Visual Studio를 사용하여 Azure App Service에서 웹앱 문제 해결](app-service-web/web-sites-dotnet-troubleshoot-visual-studio.md)을 참조하세요.
-
-
-
-<!--HONumber=Dec16_HO2-->
-
-
+Azure 앱 최적화 및 문제 해결에 대한 자세한 내용은 [Visual Studio를 사용하여 Azure App Service에서 웹앱 문제 해결](app-service/web-sites-dotnet-troubleshoot-visual-studio.md)을 참조하세요.

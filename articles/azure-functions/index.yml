@@ -8,21 +8,26 @@ metadata:
   services: functions
   author: czeumault
   manager: carolz
-  ms.service: virtual-machines\linux
+  ms.service: functions
   ms.tgt_pltfrm: na
   ms.devlang: na
   ms.topic: landing-page
   ms.date: 01-23-2017
   ms.author: carolz
+  ms.openlocfilehash: dd4d795e7740cb991c37969f148df8e0a08fa96e
+  ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 05/08/2018
 abstract:
-  description: 'Azure Functions는 인프라를 명시적으로 프로비전 또는 관리하지 않고도 필요 시 코드를 실행할 수 있는 서버를 사용하지 않는 계산 서비스입니다. Azure Functions를 사용하여 다양한 이벤트에 대한 응답으로 스크립트 또는 코드 조각을 실행합니다. 빠른 시작, 자습서 및 샘플을 통해 Azure Functions를 사용하는 방법을 알아보세요.'
+  description: Azure Functions는 인프라를 명시적으로 프로비전 또는 관리하지 않고도 필요 시 코드를 실행할 수 있는 <a href="https://azure.microsoft.com/overview/serverless-computing/">서버를 사용하지 않는</a> 계산 서비스입니다. Azure Functions를 사용하여 다양한 이벤트에 대한 응답으로 스크립트 또는 코드 조각을 실행합니다. 빠른 시작, 자습서 및 샘플을 통해 Azure Functions를 사용하는 방법을 알아보세요.
   aside:
     image:
       alt: 
       height: 110
       src: media/index/video-thumb-get-started.png
-      width: 250  
-    title: 'Azure Functions 시작. (2:39)'
+      width: 250
+    title: Azure Functions 시작. (2:39)
     href: https://azure.microsoft.com/en-us/resources/videos/get-started-with-azure-functions/
     width: 250
 sections:
@@ -32,24 +37,28 @@ sections:
     text: 다음을 통해 생성된 이벤트에 따라 실행되는 함수를 만드는 방법을 알아봅니다.
   - type: list
     style: icon48
-    items: 
-    - image: 
-        src: media/index/http.svg
+    items:
+    - image:
+        src: https://docs.microsoft.com/media/common/i_http.svg
       text: http
       href: /azure/azure-functions/functions-create-first-azure-function
-    - image: 
+    - image:
         src: media/index/stopwatch.svg
       text: 타이머
       href: /azure/azure-functions/functions-create-scheduled-function
-    - image: 
+    - image:
         src: media/index/octokitty.svg
       text: GitHub 웹후크
       href: /azure/azure-functions/functions-create-github-webhook-triggered-function
-    - image: 
+    - image:
+        src: media/index/cosmosdb.svg
+      text: Azure Cosmos DB
+      href: /azure/azure-functions/functions-create-cosmos-db-triggered-function
+    - image:
         src: media/index/blob.svg
       text: Blob
       href: /azure/azure-functions/functions-create-storage-blob-triggered-function
-    - image: 
+    - image:
         src: media/index/storage.svg
       text: 큐
       href: /azure/azure-functions/functions-create-storage-queue-triggered-function
@@ -57,9 +66,9 @@ sections:
     text: '로컬에서 개발하고 디버그하는 방법 알아보기:'
   - type: list
     style: icon48
-    items: 
-    - image: 
-        src: /media/logos/logo_visual-studio.svg
+    items:
+    - image:
+        src: https://docs.microsoft.com/media/logos/logo_visual-studio.svg
       text: Visual Studio
       href: /azure/azure-functions/functions-create-your-first-function-visual-studio
 - title: 단계별 자습서
@@ -71,6 +80,9 @@ sections:
     items:
     - html: <a href="/azure/azure-functions/functions-twitter-email">Azure Logic Apps와 통합되는 함수 만들기</a>
     - html: <a href="/azure/azure-functions/functions-create-serverless-api">Azure Functions를 사용하여 서버 없는 API 만들기</a>
+    - html: <a href="/azure/azure-functions/functions-openapi-definition">함수에 대한 OpenAPI 정의 만들기</a>
+    - html: <a href="/azure/event-grid/resize-images-on-storage-blob-upload-event">Event Grid를 사용하여 업로드된 이미지 크기 자동 조정</a>
+    - html: <a href="https://docs.microsoft.com/learn/build-serverless-app/index">서버를 사용하지 않는 웹 응용 프로그램을 만들어 Cosmos DB에서 그림 호스팅</a>
 - title: 샘플
   items:
   - type: list
@@ -78,7 +90,7 @@ sections:
     className: spaced noBullet
     items:
     - html: <a href="/azure/azure-functions/functions-cli-samples">Azure CLI</a>
-- title: 참조
+- title: 참고 자료
   items:
   - type: list
     style: cards
@@ -89,5 +101,4 @@ sections:
     - title: REST (영문)
       html: <p><a href="/azure/azure-functions/functions-api-definition">OpenAPI</a></p>
     - title: 바인딩
- 
-      html: <p><a href="/azure/azure-functions/functions-bindings-storage-blob">Blob 저장소</a></p><p><a href="/azure/azure-functions/functions-bindings-timer">Cosmos DB</a></p><p><a href="/azure/azure-functions/functions-bindings-event-hubs">이벤트 허브</a></p><p><a href="/azure/azure-functions/functions-bindings-external-file">외부 파일</a></p><p><a href="/azure/azure-functions/functions-bindings-http-webhook">HTTP 및 webhook</a></p><p><a href="/azure/azure-functions/functions-bindings-mobile-apps">모바일 앱</a></p><p><a href="/azure/azure-functions/functions-bindings-notification-hubs">알림 허브</a></p><p><a href="/azure/azure-functions/functions-bindings-storage-queue">큐 저장소</a></p><p><a href="/azure/azure-functions/functions-bindings-sendgrid">SendGrid</a></p><p><a href="/azure/azure-functions/functions-bindings-service-bus">서비스 버스</a></p><p><a href="/azure/azure-functions/functions-bindings-storage-table">Table Storage</a></p><p><a href="/azure/azure-functions/functions-bindings-timer">타이머</a></p><p><a href="/azure/azure-functions/functions-bindings-twilio">Twilio 출력 바인딩</a></p>
+      html: <p><a href="/azure/azure-functions/functions-bindings-storage-blob">Blob storage</a></p><p><a href="/azure/azure-functions/functions-bindings-documentdb">Azure Cosmos DB</a></p><p><a href="/azure/azure-functions/functions-bindings-event-hubs">이벤트 허브</a></p><p><a href="/azure/azure-functions/functions-bindings-external-file">외부 파일</a></p><p><a href="/azure/azure-functions/functions-bindings-http-webhook">HTTP 및 webhook</a></p><p><a href="/azure/azure-functions/functions-bindings-mobile-apps">Mobile Apps</a></p><p><a href="/azure/azure-functions/functions-bindings-notification-hubs">Notification Hubs</a></p><p><a href="/azure/azure-functions/functions-bindings-storage-queue">큐 저장소</a></p><p><a href="/azure/azure-functions/functions-bindings-sendgrid">SendGrid</a></p><p><a href="/azure/azure-functions/functions-bindings-service-bus">Service Bus</a></p><p><a href="/azure/azure-functions/functions-bindings-storage-table">Table Storage</a></p><p><a href="/azure/azure-functions/functions-bindings-timer">타이머</a></p><p><a href="/azure/azure-functions/functions-bindings-twilio">Twilio 출력 바인딩</a></p>

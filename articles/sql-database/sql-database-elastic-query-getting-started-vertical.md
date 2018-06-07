@@ -1,31 +1,24 @@
 ---
-title: "데이터베이스 간 쿼리 시작(수직 분할) | Microsoft Docs"
-description: "수직 분할 데이터베이스에서 탄력적 데이터베이스 쿼리를 사용하는 방법"
+title: 데이터베이스 간 쿼리 시작(수직 분할) | Microsoft Docs
+description: 수직 분할 데이터베이스에서 탄력적 데이터베이스 쿼리를 사용하는 방법
 services: sql-database
-documentationcenter: 
-manager: jhubbard
-author: torsteng
-ms.assetid: e5b44b10-c432-4f96-b20e-08615ff4d5dd
+manager: craigg
+author: stevestein
 ms.service: sql-database
 ms.custom: scale out apps
-ms.workload: sql-database
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 05/23/2016
-ms.author: torsteng
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 430fed27780076738e319dabca4cc9abaed70691
-ms.openlocfilehash: 594760d5c52ac3724a0b8dd882e76ca3302ee8ba
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/22/2017
-
-
+ms.date: 04/01/2018
+ms.author: sstein
+ms.openlocfilehash: c7bf6816b457f7e193f53336c48f5e205722067e
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="get-started-with-cross-database-queries-vertical-partitioning-preview"></a>데이터베이스 간 쿼리 시작(수직 분할)(미리 보기)
-Azure SQL 데이터베이스에 탄력적 데이터베이스 쿼리 (미리 보기)를 사용 하면 단일 연결 지점을 사용하여 여러 데이터베이스에 걸쳐 있는 T-SQL 쿼리를 실행할 수 있습니다. 이 항목은 [데이터베이스 수직 분할](sql-database-elastic-query-vertical-partitioning.md)에 적용됩니다.  
+Azure SQL Database에 Elastic Database 쿼리 (미리 보기)를 사용 하면 단일 연결 지점을 사용하여 여러 데이터베이스에 걸쳐 있는 T-SQL 쿼리를 실행할 수 있습니다. 이 항목은 [데이터베이스 수직 분할](sql-database-elastic-query-vertical-partitioning.md)에 적용됩니다.  
 
-완료되면 여러 관계형 데이터베이스에 걸쳐 있는 쿼리를 수행 하는 Azure SQL 데이터베이스를 사용과 구성방법을 알아봅니다. 
+완료되면 여러 관계형 데이터베이스에 걸쳐 있는 쿼리를 수행 하는 Azure SQL Database를 사용과 구성방법을 알아봅니다. 
 
 탄력적 데이터베이스 쿼리 기능에 대한 자세한 내용은 [Azure SQL Database 탄력적 데이터베이스 쿼리 개요](sql-database-elastic-query-overview.md)를 참조하세요. 
 
@@ -102,9 +95,9 @@ Azure SQL 데이터베이스에 탄력적 데이터베이스 쿼리 (미리 보�
     ON CustomerInformation.CustomerID = OrderInformation.CustomerID 
 
 ## <a name="cost"></a>비용
-현재 Azure SQL 데이터베이스 가격에는 탄력적 데이터베이스 쿼리 기능이 포함되어 있습니다.  
+현재 Azure SQL Database 가격에는 Elastic Database 쿼리 기능이 포함되어 있습니다.  
 
-가격 정보는 [SQL 데이터베이스 가격 정보](https://azure.microsoft.com/pricing/details/sql-database)를 참조하세요. 
+가격 정보는 [SQL Database 가격 정보](https://azure.microsoft.com/pricing/details/sql-database)를 참조하세요. 
 
 ## <a name="next-steps"></a>다음 단계
 

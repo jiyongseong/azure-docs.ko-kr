@@ -1,0 +1,58 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: "Azure의 Ansible 설명서"
+metadata:
+  title: "Azure의 Ansible 설명서 - 자습서, 샘플, 참조 및 리소스"
+  meta.description: Learn how to use Ansible to automate cloud provisioning, configuration management, and application deployments.
+  services: terraform
+  author: tomarcher
+  manager: routlaw
+  ms.service: ansible
+  ms.tgt_pltfrm: na
+  ms.devlang: devops
+  ms.topic: landing-page
+  ms.date: 01/18/2018
+  ms.author: tarcher
+  ms.openlocfilehash: b3e9ae46eaef25af6d290231a48850cd1ef43153
+  ms.sourcegitcommit: ded74961ef7d1df2ef8ffbcd13eeea0f4aaa3219
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 01/29/2018
+abstract:
+  description: "<a href=\"http://www.ansible.com\">Ansible</a>을 사용하여 클라우드 프로비전, 구성 관리 및 응용 프로그램 배포를 자동화합니다."
+sections:
+- title: "5분 빠른 시작"
+  items:
+  - type: paragraph
+    text: "Ansible을 구성하고 Azure에서 Linux VM을 만드는 데 사용합니다."
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: /azure/media/index/azure_dev-9.svg
+      text: "Ansible 구성"
+      href: /azure/virtual-machines/linux/ansible-install-configure?toc=%2Fen-us%2Fazure%2Fansible%2Ftoc.json&bc=%2Fen-us%2Fazure%2Fbread%2Ftoc.json
+    - image:
+        src: /azure/media/index/VirtualMachine.svg
+      text: "Linux VM 만들기"
+      href: /azure/virtual-machines/linux/ansible-create-vm?toc=%2Fen-us%2Fazure%2Fansible%2Ftoc.json&bc=%2Fen-us%2Fazure%2Fbread%2Ftoc.json
+- title: "단계별 자습서"
+  items:
+  - type: paragraph
+    text: "Ansible를 사용하여 Azure 계산 및 네트워킹 인프라를 만들고 관리하는 방법에 대해 알아봅니다."
+  - type: list
+    style: unordered
+    items:
+    - html: "<a href=\"/azure/virtual-machines/linux/ansible-create-complete-vm?toc=%2Fen-us%2Fazure%2Fansible%2Ftoc.json&bc=%2Fen-us%2Fazure%2Fbread%2Ftoc.json\">가상 네트워크, 공용 IP 주소 및 가상 네트워크 인터페이스 카드를 비롯한 Linux 가상 머신을 만듭니다.</a>"
+    - html: "<a href=\"./ansible-run-playbook-in-cloudshell\">Azure Virtual Machine에 연결하고 Cloud Shell에서 Ansible 플레이 북을 실행합니다.</a>"
+    - html: "<a href=\"./ansible-manage-azure-dynamic-inventories\">Azure 리소스의 동적 인벤토리를 만들고 관리합니다.</a>"
+- title: "참고 자료"
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: "플레이 북 역할"
+      html: <p><a href="https://galaxy.ansible.com/Azure/azure_modules/">azure_module</a></p><p><a href="https://galaxy.ansible.com/Azure/azure_preview_modules/">azure_preview_module</a></p>
+    - title: "릴리스 및 기능"
+      html: "<p><a href=\"./ansible-matrix.md\">모듈 및 역할을 위한 기능 매트릭스</a></p>"

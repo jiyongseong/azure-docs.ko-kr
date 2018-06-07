@@ -1,8 +1,8 @@
 ---
-title: "Azure AD Connect: 장치 쓰기 저장 사용 | Microsoft Docs"
-description: "이 문서는 Azure AD Connect를 사용하여 장치 쓰기 저장을 사용하는 방법을 자세히 설명합니다."
+title: 'Azure AD Connect: 장치 쓰기 저장 사용 | Microsoft Docs'
+description: 이 문서는 Azure AD Connect를 사용하여 장치 쓰기 저장을 사용하는 방법을 자세히 설명합니다.
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: billmath
 manager: femila
 editor: curtand
@@ -12,14 +12,14 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/13/2017
+ms.date: 05/08/2018
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: b1d56fcfb472e5eae9d2f01a820f72f8eab9ef08
-ms.openlocfilehash: 310dcb176c2e1556af4ed0e0f50ea77c4644ec98
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
+ms.openlocfilehash: c813be558df9dc3bdfd9850402b9458f1fdf971a
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34353820"
 ---
 # <a name="azure-ad-connect-enabling-device-writeback"></a>Azure AD Connect: 장치 쓰기 저장 사용
 > [!NOTE]
@@ -31,67 +31,56 @@ ms.lasthandoff: 07/06/2017
 
 * 장치에 따라 ADFS(2012 R2 이상) 보호된 응용 프로그램에 조건부 액세스를 사용하도록 설정합니다.(신뢰 당사자 트러스트)
 
-응용 프로그램에 대한 액세스 권한이 신뢰할 수 있는 장치에 부여된 추가 보안 및 보증을 제공합니다. 조건부 액세스에 대한 자세한 내용은 [조건부 액세스로 위험 관리](../active-directory-conditional-access.md) 및 [Azure Active Directory Device Registration을 사용하여 온-프레미스 조건부 액세스 설정](../active-directory-conditional-access-automatic-device-registration-setup.md)을 참조하세요.
+응용 프로그램에 대한 액세스 권한이 신뢰할 수 있는 장치에 부여된 추가 보안 및 보증을 제공합니다. 조건부 액세스에 대한 자세한 내용은 [조건부 액세스로 위험 관리](../active-directory-conditional-access-azure-portal.md) 및 [Azure Active Directory Device Registration을 사용하여 온-프레미스 조건부 액세스 설정](../active-directory-conditional-access-automatic-device-registration-setup.md)을 참조하세요.
 
 > [!IMPORTANT]
 > <li>장치는 사용자와 동일한 포리스트에 있어야 합니다. 장치가 단일 포리스트에 쓰기 저장해야 하기 때문에 이 기능은 현재 여러 사용자 포리스트에서 배포를 지원하지 않습니다.</li>
 > <li>온-프레미스 Active Directory 포리스트에 하나의 장치 등록 구성 개체를 추가할 수 있습니다. 이 기능은 온-프레미스 Active Directory가 여러 Azure AD 디렉터리에 동기화되는 토폴로지와 호환되지 않습니다.</li>> 
 
 ## <a name="part-1-install-azure-ad-connect"></a>1부: Azure AD Connect 설치
-1. 사용자 지정 또는 Express 설정을 사용하여 Azure AD Connect를 설치합니다. Microsoft는 장치 쓰기 저장을 사용하도록 설정하기 전에 모든 사용자 및 그룹을 성공적으로 동기화하고 시작할 것을 권장합니다.
+사용자 지정 또는 Express 설정을 사용하여 Azure AD Connect를 설치합니다. Microsoft는 장치 쓰기 저장을 사용하도록 설정하기 전에 모든 사용자 및 그룹을 성공적으로 동기화하고 시작할 것을 권장합니다.
 
-## <a name="part-2-prepare-active-directory"></a>2부: Active Directory 준비
-쓰기 저장 장치를 사용하기 위한 준비는 다음 단계를 따릅니다.
+## <a name="part-2-enable-device-writeback-in-azure-ad-connect"></a>2부: Azure AD Connect에서 장치 쓰기 저장 사용
+1. 설치 마법사를 다시 실행합니다. [추가 작업] 페이지에서 **장치 옵션 구성**을 선택하고 **다음**을 클릭합니다. 
 
-1. Azure AD Connect를 설치한 컴퓨터에서 관리자 모드로 PowerShell을 시작합니다.
-2. Active Directory PowerShell 모듈이 설치되지 않은 경우 다음 명령을 사용하여 설치합니다.
-   
-   `Add-WindowsFeature RSAT-AD-PowerShell`
-3. Azure Active Directory PowerShell 모듈이 설치되지 않은 경우 [Windows PowerShell용 Azure Active Directory 모듈(64비트 버전)](http://go.microsoft.com/fwlink/p/?linkid=236297)을 다운로드하고 설치합니다. 이 구성 요소는 Azure AD Connect 설치된 로그인 도우미에서 종속성을 갖습니다.
-4. 엔터프라이즈 관리자 자격 증명으로 다음 명령을 실행하고 PowerShell을 끝냅니다.
-   
-   `Import-Module 'C:\Program Files\Microsoft Azure Active Directory Connect\AdPrep\AdSyncPrep.psm1'`
-   
-   `Initialize-ADSyncDeviceWriteback {Optional:–DomainName [name] Optional:-AdConnectorAccount [account]}`
+    ![장치 옵션 구성](./media/active-directory-aadconnect-feature-device-writeback/deviceoptions.png)
 
-구성 네임스페이스를 변경해야 하므로 엔터프라이즈 관리자 자격 증명이 필요합니다. 도메인 관리자의 사용 권한으로는 부족합니다.
+    >[!NOTE]
+    > 새로운 장치 구성 옵션은 버전 1.1.819.0 이상에서만 사용할 수 있습니다.
 
-![장치 쓰기 저장 사용을 위한 Powershell](./media/active-directory-aadconnect-feature-device-writeback/powershell.png)
+2. 장치 옵션 페이지에서 **장치 쓰기 저장 구성**을 선택합니다. **장치 쓰기 저장을 사용하지 않도록 설정** 옵션은 장치 쓰기 저장을 사용하기 전에는 사용할 수 없습니다. **다음**을 클릭하여 마법사의 다음 페이지로 이동합니다.
+    ![장치 작업 선택](./media/active-directory-aadconnect-feature-device-writeback/configuredevicewriteback1.png)
 
-설명:
-
-* 존재하지 않는 경우 CN=Device Registration Configuration,CN=Services,CN=Configuration,[forest-dn]에서 새 컨테이너 및 개체를 생성하고 구성합니다.
-* 존재하지 않는 경우 CN=RegisteredDevices,[domain-dn]에서 새 컨테이너 및 개체를 생성하고 구성합니다. 이 컨테이너에서 장치 개체를 만듭니다.
-* Active Directory에서 장치를 관리하려면 Azure AD 커넥터 계정에 필요한 사용 권한을 설정합니다.
-* Azure AD Connect가 여러 포리스트에 설치되었더라도 하나의 포리스트에서 실행해야 합니다.
-
-매개 변수:
-
-* DomainName: 장치 개체를 만드는 Active Directory 도메인입니다. 참고: 지정된 Active Directory 포리스트에 대한 모든 장치는 단일 도메인에 만들어집니다.
-* AdConnectorAccount: 디렉터리에서 개체를 관리하기 위해 Azure AD Connect에서 사용하는 Active Directory 계정입니다. Azure AD Connect Sync에서 AD에 연결하기 위해 사용하는 계정입니다. 기본 설정을 사용하여 설치한 경우 접두사가 MSOL_인 계정입니다.
-
-## <a name="part-3-enable-device-writeback-in-azure-ad-connect"></a>3부: Azure AD Connect에서 장치 쓰기 저장 사용
-다음 절차를 사용하여 Azure AD Connect에서 장치 쓰기 저장을 사용합니다.
-
-1. 설치 마법사를 다시 실행합니다. 추가 작업 페이지에서 **동기화 옵션 사용자 지정**을 선택하고 **다음**을 클릭합니다.
-   ![사용자 지정 설치 사용자 지정 동기화 옵션](./media/active-directory-aadconnect-feature-device-writeback/devicewriteback2.png)
-2. 옵션 기능 페이지에서 장치 쓰기 저장은 더 이상 회색으로 나타나지 않습니다. Azure AD Connect 준비 단계가 완료되지 않은 경우 장치 쓰기 저장은 옵션 기능 페이지에서 회색으로 표시됩니다. 장치 쓰기 저장에 대한 상자를 선택하고 **다음**을 클릭합니다. 확인란이 계속 비활성화되어 있는 경우 [문제 해결 섹션](#the-writeback-checkbox-is-still-disabled)을 참조하세요.
-   ![사용자 지정 설치 장치 쓰기 저장 선택적 기능](./media/active-directory-aadconnect-feature-device-writeback/devicewriteback3.png)
 3. 쓰기 저장 페이지에서 기본 장치 쓰기 저장 포리스트로 제공된 도메인이 표시됩니다.
-   ![사용자 지정 설치 장치 쓰기 저장 대상 포리스트](./media/active-directory-aadconnect-feature-device-writeback/devicewriteback4.png)
-4. 추가로 구성을 변경하지 않고 마법사의 설치를 완료합니다. 필요한 경우 [Azure AD Connect의 사용자 지정 설치](active-directory-aadconnect-get-started-custom.md)를 참조하세요.
+   ![사용자 지정 설치 장치 쓰기 저장 대상 포리스트](./media/active-directory-aadconnect-feature-device-writeback/writebackforest.png)
 
-## <a name="enable-conditional-access"></a>조건부 액세스 사용
-이 시나리오를 사용하기 위한 자세한 지침은 [Azure Active Directory 장치 등록을 사용하여 온-프레미스 조건부 액세스 설정](../active-directory-conditional-access-automatic-device-registration-setup.md)내에서 사용할 수 있습니다.
+4. **장치 컨테이너** 페이지에서는 active directory를 준비하는 다음과 같은 두 가지 옵션을 제공합니다.
+
+    a. **엔터프라이즈 관리자 자격 증명 제공**: 장치를 다시 써야 하는 포리스트에 대한 엔터프라이즈 관리자 자격 증명을 제공하면 Azure AD Connect는 장치 쓰기 저장을 구성하는 동안 자동으로 포리스트를 준비합니다.
+
+    나. **PowerShell 스크립트 다운로드**: Azure AD Connect는 장치 쓰기 저장에 대한 active directory를 준비할 수 있는 PowerShell 스크립트를 자동으로 생성합니다. Azure AD Connect에서 엔터프라이즈 관리자 자격 증명을 제공할 수 없는 경우 PowerShell 스크립트를 다운로드하면 됩니다. 장치를 다시 써야 하는 포리스트의 엔터프라이즈 관리자에게 다운로드한 **CreateDeviceContainer.psq** PowerShell 스크립트를 제공합니다.
+    ![active diretory 포리스트 준비](./media/active-directory-aadconnect-feature-device-writeback/devicecontainercreds.png)
+    
+    active directory 포리스트를 준비하기 위해 다음 작업이 수행됩니다.
+    * 존재하지 않는 경우 CN=Device Registration Configuration,CN=Services,CN=Configuration,[forest-dn]에서 새 컨테이너 및 개체를 생성하고 구성합니다.
+    * 존재하지 않는 경우 CN=RegisteredDevices,[domain-dn]에서 새 컨테이너 및 개체를 생성하고 구성합니다. 이 컨테이너에서 장치 개체를 만듭니다.
+    * Active Directory에서 장치를 관리하려면 Azure AD 커넥터 계정에 필요한 사용 권한을 설정합니다.
+    * Azure AD Connect가 여러 포리스트에 설치되었더라도 하나의 포리스트에서 실행해야 합니다.
 
 ## <a name="verify-devices-are-synchronized-to-active-directory"></a>장치의 Active Directory에 동기화 여부 확인
 장치 쓰기 저장은 이제 제대로 작동해야 합니다. AD에 장치 개체를 다시 쓰기 저장하는 데 최대 3시간이 걸릴 수 있습니다.  장치가 제대로 동기화되었는지 확인하려면 동기화 규칙을 완료한 후에 다음을 수행합니다.
 
 1. Active Directory 관리 센터를 시작합니다.
 2. 페더레이션된 도메인 내에서 RegisteredDevices를 확장합니다.
+
    ![Active Directory 관리 센터 등록 장치](./media/active-directory-aadconnect-feature-device-writeback/devicewriteback5.png)
+
 3. 현재 등록된 장치가 나열됩니다.
+
    ![Active Directory 관리 센터 등록 장치 목록](./media/active-directory-aadconnect-feature-device-writeback/devicewriteback6.png)
+
+## <a name="enable-conditional-access"></a>조건부 액세스 사용
+이 시나리오를 사용하기 위한 자세한 지침은 [Azure Active Directory 장치 등록을 사용하여 온-프레미스 조건부 액세스 설정](../active-directory-conditional-access-automatic-device-registration-setup.md)내에서 사용할 수 있습니다.
 
 ## <a name="troubleshooting"></a>문제 해결
 ### <a name="the-writeback-checkbox-is-still-disabled"></a>쓰기 저장 확인란이 계속 비활성화되어 있음
@@ -104,7 +93,7 @@ ms.lasthandoff: 07/06/2017
 * 초기화 스크립트에서 제공하는 계정이 Active Directory Connector에서 사용하는 올바른 사용자인지 확인합니다. 이를 확인하려면 다음 단계를 수행하세요.
   * 시작 메뉴에서 **동기화 서비스**를 엽니다.
   * **커넥터** 탭을 엽니다.
-  * 형식이 Active Directory 도메인 서비스인 커넥터를 찾아 선택합니다.
+  * 형식이 Active Directory Domain Services인 커넥터를 찾아 선택합니다.
   * **작업** 아래에서 **속성**을 선택합니다.
   * **Active Directory 포리스트에 연결**로 이동합니다. 이 화면에 지정된 도메인 및 사용자 이름이 스크립트에 제공된 계정과 일치하는지 확인합니다.
     ![동기화 서비스 관리자의 커넥터 계정](./media/active-directory-aadconnect-feature-device-writeback/connectoraccount.png)
@@ -134,10 +123,9 @@ Active Directory의 구성 확인:
 ![문제 해결, 장치 등록 구성에 대한 권한 확인](./media/active-directory-aadconnect-feature-device-writeback/troubleshoot6.png)
 
 ## <a name="additional-information"></a>추가 정보
-* [조건부 액세스를 사용한 위험 관리](../active-directory-conditional-access.md)
+* [조건부 액세스를 사용한 위험 관리](../active-directory-conditional-access-azure-portal.md)
 * [Azure Active Directory Device Registration을 사용하여 온-프레미스 조건부 액세스 설정](../active-directory-device-registration-on-premises-setup.md)
 
 ## <a name="next-steps"></a>다음 단계
 [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)에 대해 자세히 알아봅니다.
-
 

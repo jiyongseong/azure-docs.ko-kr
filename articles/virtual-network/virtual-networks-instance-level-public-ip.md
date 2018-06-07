@@ -1,10 +1,10 @@
 ---
-title: "Azure 인스턴스 수준 공용 IP(클래식) 주소 | Microsoft Docs"
-description: "ILPIP(인스턴스 수준 공용 IP) 주소 및 PowerShell을 사용하여 이를 관리하는 방법을 알아봅니다."
+title: Azure 인스턴스 수준 공용 IP(클래식) 주소 | Microsoft Docs
+description: ILPIP(인스턴스 수준 공용 IP) 주소 및 PowerShell을 사용하여 이를 관리하는 방법을 알아봅니다.
 services: virtual-network
 documentationcenter: na
-author: jimdial
-manager: timlt
+author: genlin
+manager: cshepard
 editor: tysonn
 ms.assetid: 07eef6ec-7dfe-4c4d-a2c2-be0abfb48ec5
 ms.service: virtual-network
@@ -13,14 +13,12 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/10/2016
-ms.author: jdial
-ms.translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 773043f2841ec7539b0d49357dec6bcb9f4f78a1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/03/2017
-
-
+ms.author: genli
+ms.openlocfilehash: 4b4350e6b1616450ce45f9e947cc3b639a341ae7
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="instance-level-public-ip-classic-overview"></a>인스턴스 수준 공용 Ip(클래식) 개요
 ILPIP(인스턴스 수준 공용 IP)는 해당 VM 또는 역할 인스턴스가 상주하는 클라우드 서비스가 아닌 VM 또는 Cloud Services 역할 인스턴스에 직접 할당할 수 있는 공용 IP 주소입니다. ILPIP는 클라우드 서비스에 할당된 VIP(가상 IP)의 위치를 차지하지 않습니다. VM 또는 역할 인스턴스에 직접 연결을 사용할 수 있는 추가 IP 주소입니다.
@@ -45,7 +43,7 @@ Azure에서 클라우드 서비스를 만들면 해당 DNS A 레코드가 자동
 ## <a name="why-would-i-request-an-ilpip"></a>ILPIP를 요청하는 이유
 클라우드 서비스 VIP:&lt;포트 번호&gt;를 사용하지 않고 직접 할당된 IP 주소로 VM 또는 역할 인스턴스에 연결할 수 있게 하려면 VM 또는 역할 인스턴스에 대한 ILPIP를 요청합니다.
 
-* **활성 FTP** - VM에 ILPIP를 할당하면 어떤 포트에서도 트래픽을 수신할 수 있습니다. 끝점이 없어도 VM에서 트래픽을 수신할 수 있습니다.  FTP 프로토콜에 대한 자세한 내용은 (https://en.wikipedia.org/wiki/File_Transfer_Protocol#Protocol_overview)[FTP Protocol Overview] 를 참조하세요.
+* **활성 FTP** - VM에 ILPIP를 할당하면 어떤 포트에서도 트래픽을 수신할 수 있습니다. 끝점이 없어도 VM에서 트래픽을 수신할 수 있습니다.  FTP 프로토콜에 대한 자세한 내용은 (https://en.wikipedia.org/wiki/File_Transfer_Protocol#Protocol_overview)[FTP 프로토콜 개요]를 참조하세요.
 * **아웃바운드 IP** - VM에서 발생하는 아웃바운드 트래픽은 원본으로 ILPIP에 매핑되며 ILPIP는 외부 엔터티에 대한 VM을 고유하게 식별합니다.
 
 > [!NOTE]
@@ -93,7 +91,7 @@ Get-AzureVM -Name FTPInstance -ServiceName FTPService
     AvailabilitySetName         : 
     DNSName                     : http://ftpservice888.cloudapp.net/
     Status                      : ReadyRole
-    GuestAgentStatus            :     Microsoft.WindowsAzure.Commands.ServiceManagement.Model.GuestAgentStatus
+    GuestAgentStatus            :   Microsoft.WindowsAzure.Commands.ServiceManagement.Model.GuestAgentStatus
     ResourceExtensionStatusList : {Microsoft.Compute.BGInfo}
     PublicIPAddress             : 104.43.142.188
     PublicIPName                : ftpip
@@ -149,4 +147,3 @@ Cloud Services 역할 인스턴스에 ILPIP를 추가하려면 다음 단계를 
 ## <a name="next-steps"></a>다음 단계
 * 클래식 배포 모델에서 [IP 주소 지정](virtual-network-ip-addresses-overview-classic.md) 이 어떻게 작동하는지 이해합니다.
 * [예약된 IP](virtual-networks-reserved-public-ip.md)에 대해 자세히 알아봅니다.
-

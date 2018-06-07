@@ -1,13 +1,13 @@
-- name: Kubernetes가 있는 ACS
+- name: Azure의 Kubernetes
   href: ./index.yml
 - name: 개요
   items:
-    - name: 컨테이너 서비스 정보
+    - name: Azure의 Kubernetes
       href: container-service-intro-kubernetes.md
 - name: 빠른 시작
   expanded: true
   items:
-    - name: Kubernetes Linux
+    - name: Azure의 Kubernetes
       href: container-service-kubernetes-walkthrough.md
 - name: 자습서
   items:
@@ -23,36 +23,30 @@
       href: container-service-tutorial-kubernetes-scale.md
     - name: 6 - 응용 프로그램 업데이트
       href: container-service-tutorial-kubernetes-app-update.md
-    - name: 7 - OMS로 모니터링
+    - name: 7 - Log Analytics로 모니터링
       href: container-service-tutorial-kubernetes-monitor.md
-- name: 샘플
-  items:
-    - name: Azure CLI
-      href: cli-samples.md
 - name: 개념
   items:
-    - name: 컨테이너 보안
-      href: container-service-security.md
     - name: 서비스 사용자 - Kubernetes
       href: container-service-kubernetes-service-principal.md
 - name: 방법 가이드
   items:
-    - name: Windows를 사용한 Kubernetes 빠른 시작
+    - name: Windows를 사용하는 Kubernetes
       href: container-service-kubernetes-windows-walkthrough.md
-    - name: 컨테이너 관리 - Kubernetes UI
+    - name: Kubernetes 웹 인터페이스
       href: container-service-kubernetes-ui.md
-    - name: Helm 차트 배포
+    - name: Helm 차트 사용
       href: container-service-kubernetes-helm.md
-    - name: Kubernetes 및 Jenkins를 사용하는 CI/CD
-      href: container-service-kubernetes-jenkins.md
-    - name: ACR 및 ACS에서 초안 사용
+    - name: Azure 파일에서 데이터 유지
+      href: ../../aks/azure-files.md?toc=%2fazure%2fcontainer-service%2fkubernetes%2ftoc.json
+    - name: ACS에서 초안 사용
       href: container-service-draft-up.md
-    - name: ACS 클러스터와 연결
-      href: container-service-connect.md
-    - name: ACS 클러스터 확장
+    - name: 클러스터 크기 조정
       href: container-service-scale.md
     - name: 모니터
       items:
+        - name: Log Analytics로 모니터링
+          href: container-service-kubernetes-oms.md
         - name: Datadog로 모니터링
           href: container-service-kubernetes-datadog.md
         - name: Sysdig로 모니터링
@@ -65,12 +59,16 @@
           href: container-service-deploy-spring-boot-app-on-linux.md
         - name: Azure Container Service의 Kubernetes 클러스터에 Spring Boot 응용 프로그램 배포
           href: container-service-deploy-spring-boot-app-on-kubernetes.md
-- name: 참조
+        - name: fabric8 Maven 플러그 인을 사용하여 Spring Boot 앱 배포
+          href: container-service-deploy-spring-boot-app-using-fabric8-maven-plugin.md
+- name: 참고 자료
   items:
-    - name: Azure CLI 2.0
+    - name: Azure CLI
       href: /cli/azure/acs
+    - name: PowerShell
+      href: /powershell/module/azurerm.compute
     - name: REST (영문)
-      href: /rest/api/compute/containerservices
+      href: /rest/api/container-service
 - name: 리소스
   items:
     - name: Azure 로드맵
@@ -85,5 +83,5 @@
       href: 'https://azure.microsoft.com/regions/services/'
     - name: 스택 오버플로
       href: 'http://stackoverflow.com/questions/tagged/azure-container-service'
-    - name: 비디오
+    - name: 동영상
       href: 'https://azure.microsoft.com/resources/videos/index/?services=container-service&sort=newest'

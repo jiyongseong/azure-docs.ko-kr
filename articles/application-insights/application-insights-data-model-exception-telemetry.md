@@ -1,9 +1,9 @@
 ---
-title: "Azure Application Insights 원격 분석 데이터 모델 - 예외 원격 분석 | Microsoft 문서"
-description: "예외 원격 분석을 위한 Azure Application Insights 데이터 모델"
+title: Azure Application Insights 원격 분석 데이터 모델 - 예외 원격 분석 | Microsoft 문서
+description: 예외 원격 분석을 위한 Azure Application Insights 데이터 모델
 services: application-insights
 documentationcenter: .net
-author: SergeyKanzhelev
+author: mrbullwinkle
 manager: carmonm
 ms.service: application-insights
 ms.workload: TBD
@@ -11,13 +11,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: multiple
 ms.topic: article
 ms.date: 04/25/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: 49d2429c01fe3fde2e51e4344904f55e43eea1cd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
+ms.author: mbullwin; sergkanz
+ms.openlocfilehash: 036670c46a0ff40dd7b20a03c90f10513395cd71
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
 # <a name="exception-telemetry-application-insights-data-model"></a>예외 원격 분석: Application Insights 데이터 모델
 
@@ -50,4 +49,3 @@ ms.lasthandoff: 04/27/2017
 - Application Insights 형식 및 데이터 모델에 대한 자세한 내용은 [데이터 모델](application-insights-data-model.md)을 참조하세요.
 - [Application Insights를 사용하여 웹앱에서 예외를 진단](app-insights-asp-net-exceptions.md)하는 방법을 알아봅니다.
 - Application Insights에서 지원되는 [플랫폼](app-insights-platforms.md)을 확인합니다.
-

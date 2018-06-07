@@ -1,55 +1,38 @@
 ---
-title: "SSMS: Azure SQL Database에서 데이터 연결 및 쿼리 | Microsoft Docs"
-description: "SQL Server Management Studio(SSMS)를 사용하여 SQL Database에 연결하는 방법을 알아봅니다. 그런 다음 Transact-SQL(T-SQL) 문을 실행하여 데이터를 쿼리하고 편집합니다."
-metacanonical: 
-keywords: "SQL Database에 연결, SQL Server Management Studio"
+title: 'SSMS: Azure SQL Database에서 데이터 연결 및 쿼리 | Microsoft Docs'
+description: SQL Server Management Studio(SSMS)를 사용하여 SQL Database에 연결하는 방법을 알아봅니다. 그런 다음 Transact-SQL(T-SQL) 문을 실행하여 데이터를 쿼리하고 편집합니다.
+keywords: SQL Database에 연결, SQL Server Management Studio
 services: sql-database
-documentationcenter: 
 author: CarlRabeler
-manager: jhubbard
-editor: 
-ms.assetid: 7cd2a114-c13c-4ace-9088-97bd9d68de12
+manager: craigg
 ms.service: sql-database
 ms.custom: mvc,DBs & servers
-ms.workload: data-management
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: hero-article
-ms.date: 05/26/2017
+ms.topic: quickstart
+ms.date: 04/01/2018
 ms.author: carlrab
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 2835a72fc90d1fd39af73c6907648908e5d9fdeb
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 0d930cc200d8f8df30927ba7d2f942b2eb8a85a7
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="azure-sql-database-use-sql-server-management-studio-to-connect-and-query-data"></a>Azure SQL Database: SQL Server Management Studio를 사용하여 데이터에 연결 및 쿼리
 
-SSMS([SQL Server Management Studio](https://msdn.microsoft.com/library/ms174173.aspx))는 Microsoft Windows의 SQL Server에서 SQL Database에 이르는 모든 SQL 인프라를 관리할 수 있는 통합된 환경입니다. 이 빠른 시작은 SSMS를 사용하여 Azure SQL Database에 연결한 후 Transact-SQL 문을 사용하여 데이터베이스에서 데이터를 쿼리, 삽입, 업데이트 및 삭제하는 방법을 보여 줍니다. 
+SSMS([SQL Server Management Studio][ssms-install-latest-84g])는 Microsoft Windows의 SQL Server에서 SQL Database에 이르는 모든 SQL 인프라를 관리할 수 있는 통합된 환경입니다. 이 빠른 시작은 SSMS를 사용하여 Azure SQL Database에 연결한 후 Transact-SQL 문을 사용하여 데이터베이스에서 데이터를 쿼리, 삽입, 업데이트 및 삭제하는 방법을 보여 줍니다. 
 
 ## <a name="prerequisites"></a>필수 조건
 
 이 빠른 시작은 다음과 같은 빠른 시작 중 하나에서 만들어진 리소스를 시작 지점으로 사용합니다.
 
-- [DB 만들기 - 포털](sql-database-get-started-portal.md)
-- [DB 만들기 - CLI](sql-database-get-started-cli.md)
-- [DB 만들기 - PowerShell](sql-database-get-started-powershell.md)
+[!INCLUDE [prerequisites-create-db](../../includes/sql-database-connect-query-prerequisites-create-db-includes.md)]
 
-시작하기 전에 최신 버전의 [SSMS](https://msdn.microsoft.com/library/mt238290.aspx)를 설치했는지 확인합니다. 
+#### <a name="install-the-latest-ssms"></a>최신 SSMS 설치
+
+시작하기 전에 최신 버전의 [SSMS][ssms-install-latest-84g]를 설치했는지 확인합니다. 
 
 ## <a name="sql-server-connection-information"></a>SQL 서버 연결 정보
 
-Azure SQL Database에 연결하는 데 필요한 연결 정보를 가져옵니다. 다음 절차에는 정규화된 서버 이름, 데이터베이스 이름 및 로그인 정보가 필요합니다.
-
-1. [Azure Portal](https://portal.azure.com/)에 로그인합니다.
-2. 왼쪽 메뉴에서 **SQL Database**를 선택하고 **SQL Database** 페이지에서 데이터베이스를 클릭합니다. 
-3. 데이터베이스의 **개요** 페이지에서 아래 이미지와 같이 정규화된 서버 이름을 검토합니다. 서버 이름 위로 마우스를 가져가면 **복사하려면 클릭** 옵션이 표시됩니다.
-
-   ![연결 정보](./media/sql-database-connect-query-dotnet/server-name.png) 
-
-4. Azure SQL Database 서버의 로그인 정보를 잊어버린 경우 SQL Database 서버 페이지로 이동하여 서버 관리자 이름을 확인하고 필요한 경우 암호를 다시 설정합니다. 
+[!INCLUDE [prerequisites-server-connection-info](../../includes/sql-database-connect-query-prerequisites-server-connection-info-includes.md)]
 
 ## <a name="connect-to-your-database"></a>데이터베이스 연결
 
@@ -63,13 +46,14 @@ SQL Server Management Studio를 사용하여 Azure SQL Database 서버에 연결
 
 2. **서버에 연결** 대화 상자에서 다음 정보를 입력합니다.
 
-   | 설정       | 제안 값 | 설명 | 
-   | ------------ | ------------------ | ------------------------------------------------- | 
+   | 설정      | 제안 값    | 설명 | 
+   | ------------ | ------------------ | ----------- | 
    | **서버 유형** | 데이터베이스 엔진 | 이 값은 필수입니다. |
    | **서버 이름** | 정규화된 서버 이름 | 이름은 **mynewserver20170313.database.windows.net**과 같아야 합니다. |
    | **인증** | SQL Server Authentication | SQL 인증은 이 자습서에서 구성한 유일한 인증 유형입니다. |
    | **로그인** | 서버 관리자 계정 | 서버를 만들 때 지정한 계정입니다. |
    | **암호** | 서버 관리자 계정의 암호 | 서버를 만들 때 지정한 암호입니다. |
+   ||||
 
    ![서버 연결](./media/sql-database-connect-query-ssms/connect.png)  
 
@@ -166,6 +150,7 @@ SQL Server Management Studio를 사용하여 Azure SQL Database 서버에 연결
 
 - Transact-SQL를 사용하여 서버와 데이터베이스를 만들어 관리하는 방법에 대한 자세한 내용은 [Azure SQL Database 서버 및 데이터베이스](sql-database-servers-databases.md)를 참조하세요.
 - SSMS에 대한 자세한 내용은 [SQL Server Management Studio 사용](https://msdn.microsoft.com/library/ms174173.aspx)을 참조하세요.
+- Azure Portal을 사용하여 연결하고 쿼리하려면 [Azure Portal SQL 쿼리 편집기를 사용하여 연결 및 쿼리](sql-database-connect-query-portal.md)를 참조하세요.
 - Visual Studio 코드를 사용하여 연결 및 쿼리하려면 [Visual Studio 코드를 사용하여 연결 및 쿼리](sql-database-connect-query-vscode.md)를 참조하세요.
 - .NET을 사용하여 연결 및 쿼리하려면 [.NET을 사용하여 연결 및 쿼리](sql-database-connect-query-dotnet.md)를 참조하세요.
 - PHP를 사용하여 연결 및 쿼리하려면 [PHP를 사용하여 연결 및 쿼리](sql-database-connect-query-php.md)를 참조하세요.
@@ -173,4 +158,9 @@ SQL Server Management Studio를 사용하여 Azure SQL Database 서버에 연결
 - Java를 사용하여 연결 및 쿼리하려면 [Java를 사용하여 연결 및 쿼리](sql-database-connect-query-java.md)를 참조하세요.
 - Python을 사용하여 연결 및 쿼리하려면 [Python을 사용하여 연결 및 쿼리](sql-database-connect-query-python.md)를 참조하세요.
 - Ruby를 사용하여 연결 및 쿼리하려면 [Ruby를 사용하여 연결 및 쿼리](sql-database-connect-query-ruby.md)를 참조하세요.
+
+
+<!-- Article link references. -->
+
+[ssms-install-latest-84g]: https://docs.microsoft.com/sql/ssms/sql-server-management-studio-ssms
 

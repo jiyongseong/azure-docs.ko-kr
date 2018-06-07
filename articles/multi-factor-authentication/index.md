@@ -2,8 +2,8 @@
 title: "Azure Multi-factor Authentication 설명서 - 자습서, API 참조 | Microsoft Docs"
 description: "간단한 로그인 프로세스를 제공하는 검증 메서드의 범위에서 Multi-Factor Authentication을 배포하는 방법에 대해 알아봅니다. 자습서, SDK, 등입니다."
 services: multi-factor-authentication
-author: carolz
-manager: carolz
+author: czeumault
+manager: mtillman
 layout: LandingPage
 ms.assetid: 
 ms.service: multi-factor-authentication
@@ -12,12 +12,12 @@ ms.devlang: na
 ms.topic: landing-page
 ms.date: 01/23/2017
 ms.author: carolz
-translationtype: Human Translation
-ms.sourcegitcommit: acd9ead9012043bc6db8c32add86bb7797fcf8c9
-ms.openlocfilehash: c4aaa14007bf441f99ef6599bda411bcaed92a92
-
+ms.openlocfilehash: 0d3da75ec1fb8e2a69ffa8927bd31d69cf261852
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
-
 # <a name="multi-factor-authentication-documentation"></a>Multi-Factor Authentication 설명서
 
 2단계 ID 검증 시스템인 Azure Multi-Factor Authentication을 배포하고 관리하는 방법에 대해 알아봅니다. 자습서, SDK 및 기타 설명서에서는 간단한 로그인 프로세스를 제공하는 동시에 검증 메서드의 범위에서 강력한 인증을 제공하는 방법을 보여 줍니다.
@@ -116,11 +116,5 @@ ms.openlocfilehash: c4aaa14007bf441f99ef6599bda411bcaed92a92
 </ul>
 
 ---
-
-
-
-
-
-<!--HONumber=Feb17_HO2-->
 
 

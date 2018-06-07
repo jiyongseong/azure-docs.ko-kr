@@ -14,15 +14,12 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/29/2017
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: e94a01c87886b59816c7ea1a4e78825836e6e6e7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 36058ad69ea670998b50cf9038741c294a5b79ab
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="use-the-storsimple-device-manager-service-to-manage-your-storage-account-credentials"></a>StorSimple 장치 관리자 서비스를 사용하여 저장소 계정 자격 증명 관리
 
 ## <a name="overview"></a>개요
@@ -57,7 +54,7 @@ StorSimple 장치 관리자 서비스 블레이드의 **구성** 섹션에서는
 StorSimple 장치에서 사용할 수 있는 저장소 계정에는 다음과 같은 세 종류가 있습니다.
 
 * **자동 생성된 저장소 계정** – 이름 제안 시, 서비스를 처음 만들 때 이 저장소 계정 유형이 자동으로 생성됩니다. 이 저장소 계정을 만드는 방법에 대해 자세히 알아보려면 [온-프레미스 StorSimple 장치 배포](storsimple-8000-deployment-walkthrough-u2.md)에서 [1단계: 새 서비스 만들기](storsimple-8000-deployment-walkthrough-u2.md#step-1-create-a-new-service)를 참조하세요. 
-* **서비스 구독의 저장소 계정** – 이러한 계정은 서비스와 동일한 구독과 연결된 Azure 저장소 계정입니다. 이러한 저장소 계정을 만드는 방법에 대해 더 알아보려면 [Azure 저장소 계정 정보](../storage/storage-create-storage-account.md)를 참조하세요. 
+* **서비스 구독의 저장소 계정** – 이러한 계정은 서비스와 동일한 구독과 연결된 Azure 저장소 계정입니다. 이러한 저장소 계정을 만드는 방법에 대해 더 알아보려면 [Azure 저장소 계정 정보](../storage/common/storage-create-storage-account.md)를 참조하세요. 
 * **서비스 구독 외의 저장소 계정** - 이러한 계정은 서비스와 연결되지 않았고 서비스가 만들어지기 전에 존재했던 Azure 저장소 계정입니다.
 
 ## <a name="add-a-storage-account"></a>저장소 계정 추가
@@ -181,5 +178,4 @@ StorSimple 장치 관리자 서비스에 변경을 알리려면 StorSimple 장�
 ## <a name="next-steps"></a>다음 단계
 * [StorSimple 보안](storsimple-8000-security.md)에 대해 자세히 알아봅니다.
 * [StorSimple 장치 관리자 서비스를 사용하여 StorSimple 장치를 관리하는 방법](storsimple-8000-manager-service-administration.md)에 대해 자세히 알아봅니다.
-
 

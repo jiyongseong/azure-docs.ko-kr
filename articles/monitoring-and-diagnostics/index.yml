@@ -1,0 +1,72 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Azure Monitor 설명서
+metadata:
+  title: 'Azure Monitor 설명서 - 자습서, API 참조 | Microsoft Docs'
+  description: 'Azure Monitor는 Microsoft Azure의 전체 모니터링 솔루션의 일부이며, 성능을 추적하고 보안을 유지하며 추세를 파악하는 데 도움을 줍니다. 빠른 시작 및 자습서를 사용하여 감사하고, 경고를 만들고, 데이터를 보관하는 방법을 알아봅니다.'
+  services: monitoring-and-diagnostics
+  author: czeumault
+  manager: carolz
+  ms.service: monitoring-and-diagnostics
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 09/18/2017
+  ms.author: carolz
+abstract:
+  description: 'Azure Monitor는 Microsoft Azure의 전체 모니터링 솔루션의 일부이며, 성능을 추적하고 보안을 유지하며 추세를 파악하는 데 도움을 줍니다. 빠른 시작 및 자습서를 사용하여 감사하고, 경고를 만들고, 데이터를 보관하는 방법을 알아봅니다.'
+sections:
+  - title: 5분 빠른 시작
+    items:
+      - type: paragraph
+        text: Azure 응용 프로그램에서 특정 조건이 발생했을 때 알림을 수신하는 방법을 알아봅니다.
+      - type: list
+        style: icon48
+        items:
+          - image:
+              src: 'https://docs.microsoft.com/media/common/Chart.svg'
+            text: 메트릭 모니터링
+            href: monitor-quick-resource-metric-alert-portal
+          - image:
+              src: 'https://docs.microsoft.com/media/common/i_alert.svg'
+            text: 구독 감사 및 경고
+            href: monitor-quick-audit-notify-action-in-subscription
+  - title: 단계별 자습서
+    items:
+      - type: paragraph
+        text: 자동 크기 조정 및 모니터링 데이터 보관 방법을 알아봅니다.
+      - type: list
+        style: ordered
+        items:
+          - html: <a href="monitor-tutorial-autoscale-performance-schedule">일정 또는 응용 프로그램 성능에 기반한 자동 크기 조정</a>
+          - html: <a href="monitor-tutorial-archive-monitoring-data">모니터링 데이터 보관</a>
+  - title: Pluralsight 비디오 교육 체험
+    items:
+      - type: list
+        style: cards
+        className: cardsFTitle
+        items:
+          - title: IaaS 모니터링 시작
+            href: 'https://app.pluralsight.com/library/courses/azure-iaas-monitoring-management-getting-started/table-of-contents'
+            image:
+              src: 'https://docs.microsoft.com/media/logos/logo_pluralsight.svg'
+              href: 'https://app.pluralsight.com/library/courses/azure-iaas-monitoring-management-getting-started/table-of-contents'
+          - title: Microsoft Azure에서 인프라 관리
+            href: 'https://app.pluralsight.com/library/courses/managing-infrastructure-microsoft-azure-getting-started'
+            image:
+              src: 'https://docs.microsoft.com/media/logos/logo_pluralsight.svg'
+              href: 'https://app.pluralsight.com/library/courses/managing-infrastructure-microsoft-azure-getting-started'
+  - title: 참조
+    items:
+      - type: list
+        style: cards
+        className: cardsD
+        items:
+          - title: 명령줄
+            html: <p><a href="/cli/azure/monitor?view=azure-cli-latest">Azure CLI</a></p><p><a href="/powershell/module/azurerm.insights">Azure PowerShell</a></p>
+          - title: REST (영문)
+            html: <p><a href="/rest/api/monitor/">REST (영문)</a></p>
+          - title: 모니터링
+            html: '<p><a href="monitoring-supported-metrics">지원되는 메트릭</a></p><p><a href="monitoring-diagnostic-logs-schema">진단 로그 서비스, 범주 및 스키마</a></p><p><a href="monitoring-activity-log-schema">활동 로그 이벤트 스키마</a></p>'
+          - title: 진단
+            html: <p><a href="azure-diagnostics-schema">Azure 진단 확장 스키마</a></p>

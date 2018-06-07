@@ -1,11 +1,11 @@
 ---
 title: Azure Resource Health FAQ | Microsoft Docs
-description: "Azure Resource Health 개요"
+description: Azure Resource Health 개요
 services: Resource health
 documentationcenter: dev-center-name
 author: BernardoAMunoz
-manager: 
-editor: 
+manager: ''
+editor: ''
 ms.assetid: 85cc88a4-80fd-4b9b-a30a-34ff3782855f
 ms.service: service-health
 ms.devlang: na
@@ -14,14 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: Supportability
 ms.date: 07/05/2017
 ms.author: BernardoAMunoz
+ms.openlocfilehash: 5155faac6051f5a586255148f77a52a90745673e
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 794117b6f383bdd1851681864e99b3c1ef077f86
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
-
 # <a name="azure-resource-health-faq"></a>Azure Resource Health FAQ
 Azure Resource Health에 대해 자주 묻는 질문과 답변에 대해 알아보세요.
 
@@ -35,7 +33,7 @@ Resource Health는 Azure 문제가 리소스에 영향을 주는 경우 진단 �
 리소스 상태에서는 [리소스 유형](resource-health-checks-resource-types.md)에 따라 다양한 검사를 수행합니다. 이러한 검사는 3가지 문제 유형을 구현하도록 설계되었습니다. 
 - 계획되지 않은 이벤트(예: 예기치 않은 호스트 재부팅)
 - 계획된 이벤트(예약된 호스트 OS 업데이트)
-- 사용자 작업으로 트리거된 이벤트(예: 사용자가 가상 컴퓨터를 다시 부팅)
+- 사용자 작업으로 트리거된 이벤트(예: 사용자가 가상 머신을 다시 부팅)
 
 ## <a name="what-does-each-of-the-health-status-mean"></a>각 상태는 무엇을 의미하나요?
 3가지 상태가 있습니다.
@@ -82,15 +80,13 @@ Resource Health를 통해 지원되는 상태 검사 및 리소스 유형 목록
 - 미국 국방부 중부
 - 독일 중부
 - 독일 북동부
-- 중국 동부
-- 중국 북부
 
-## <a name="how-is-resource-health-different-from-the-service-health-dashboard-or-the-azure-portal-service-notifications"></a>Resource Health는 서비스 상태 대시보드 또는 Azure Portal 서비스 알림과 어떻게 다른가요?
-Resource Health에서 제공하는 정보는 Azure Resource Health 대시보드에서 제공하는 정보보다 더 구체적입니다.
+## <a name="how-is-resource-health-different-from-azure-status-or-the-service-health-dashboard"></a>Resource Health는 Azure 상태 또는 Service Health 대시보드와 어떻게 다른가요?
+Resource Health에서 제공하는 정보는 Azure 상태 또는 Service Health 대시보드에서 제공하는 정보보다 더 구체적입니다.
 
-[Azure 상태](https://status.azure.com)와 포털 서비스 알림은 광범위한 고객 집합(예: Azure 지역)에 영향을 주는 서비스 문제를 알려주지만, Resource Health는 특정 리소스에만 관련된 보다 세분화된 이벤트를 노출합니다. 예를 들어 호스트가 예기치 않게 재부팅되는 경우 Resource Health는 가상 컴퓨터가 해당 호스트에서 실행 중인 고객에게만 경고합니다.
+[Azure 상태](https://status.azure.com)와 Service Health 대시보드는 광범위한 고객 집합(예: Azure 지역)에 영향을 주는 서비스 문제를 알려주는 반면, Resource Health는 특정 리소스에만 관련된 더 세분화된 이벤트를 노출합니다. 예를 들어 호스트가 예기치 않게 재부팅되는 경우 Resource Health는 가상 머신이 해당 호스트에서 실행 중인 고객에게만 경고합니다.
 
-리소스에 영향을 주는 이벤트에 대한 충분한 가시성을 제공하는 것이 중요하며 Resource Health는 서비스 알림 및 서비스 상태 대시보드에 게시된 이벤트를 표시합니다.
+리소스에 영향을 주는 이벤트에 대한 충분한 가시성을 제공하는 것이 중요하며 Resource Health는 Service Health 대시보드에 게시된 이벤트를 표시합니다.
 
 ## <a name="do-i-need-to-activate-resource-health-for-each-resource"></a>각 리소스에 대해 Resource Health를 활성화해야 하나요?
 아니요, 상태 정보는 Resource Health를 통해 제공되는 모든 리소스 유형에 대해 사용 가능합니다. 
@@ -109,4 +105,3 @@ Resource Health는 상태에 따라 문제 해결에 소요되는 시간을 줄�
 Resource Health에 대해 알아봅니다.
 -  [Azure Resource Health 개요](Resource-health-overview.md)
 -  [Azure Resource Health를 통해 사용할 수 있는 리소스 유형 및 상태 검사](resource-health-checks-resource-types.md)
-

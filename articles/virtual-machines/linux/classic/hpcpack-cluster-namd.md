@@ -1,11 +1,11 @@
 ---
-title: "Linux VM에서 Microsoft HPC 팩으로 NAMD 실행 | Microsoft Docs"
-description: "Azure에서 Microsoft HPC 팩을 배포하고 여러 Linux 컴퓨터 노드에서 charmrun으로 NAMD 시뮬레이션을 실행합니다."
+title: Linux VM에서 Microsoft HPC 팩으로 NAMD 실행 | Microsoft Docs
+description: Azure에서 Microsoft HPC 팩을 배포하고 여러 Linux 컴퓨터 노드에서 charmrun으로 NAMD 시뮬레이션을 실행합니다.
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: dlepow
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-service-management,azure-resource-manager,hpc-pack
 ms.assetid: 76072c6b-ac35-4729-ba67-0d16f9443bd7
 ms.service: virtual-machines-linux
@@ -15,12 +15,11 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: big-compute
 ms.date: 10/13/2016
 ms.author: danlep
+ms.openlocfilehash: 61dd49d4bd3183b6b9a78036d6d7d01798e4dc89
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 46d71ebd493004bc1ac1b7634722d2abe8b67343
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
 # <a name="run-namd-with-microsoft-hpc-pack-on-linux-compute-nodes-in-azure"></a>Azure의 Linux 계산 노드에서 Microsoft HPC 팩을 사용하여 NAMD 실행
 이 문서는 Azure Virtual Machines에서 Linux HPC(고성능 컴퓨팅) 워크로드를 실행하는 한 가지 방법을 보여줍니다. 여기서는 Linux 계산 노드를 사용하여 Azure에 [Microsoft HPC 팩](https://technet.microsoft.com/library/cc514029) 클러스터를 설정하고 [NAMD](http://www.ks.uiuc.edu/Research/namd/) 시뮬레이션을 실행하여 규모가 큰 생체 분자 시스템을 계산하고 시각화합니다.  
@@ -29,8 +28,6 @@ ms.lasthandoff: 07/21/2017
 
 * **NAMD**(Nanoscale Molecular Dynamics 프로그램용)는 수백 만 원자를 포함하는 규모가 큰 생체 분자 시스템의 고성능 시뮬레이션을 위해 설계된 병렬 분자 동적 패키지입니다. 이러한 시스템의 예로는 바이러스, 세포 구조, 거대한 단백질 등이 있습니다. NAMD는 일반적인 시뮬레이션의 경우 수백 개의 코어로 확장되며 가장 큰 규모의 시뮬레이션의 경우 500,000 코어 이상까지 확장됩니다.
 * **Microsoft HPC 팩**은 온-프레미스 컴퓨터 또는 Azure Virtual Machines의 클러스터에서 대규모 HPC 및 병렬 응용 프로그램을 실행할 수 있는 기능을 제공합니다. 원래 Windows HPC 워크로드용 솔루션으로 개발된 HPC 팩은 이제 HPC 팩 클러스터에 배포된 Linux 계산 노드 VM에서 Linux HPC 응용 프로그램의 실행도 지원합니다. 소개는 [Azure에서 HPC Pack 클러스터의 Linux 계산 노드 시작](hpcpack-cluster.md) 을 참조하세요.
-
-Azure에서 Linux HPC 워크로드를 실행하기 위한 다른 옵션을 보려면 [배치 및 고성능 컴퓨팅에 대한 기술 리소스](../../../batch/batch-hpc-solutions.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 * **Linux 계산 노드가 포함된 HPC 팩 클러스터** - [Azure Resource Manager 템플릿](https://azure.microsoft.com/marketplace/partners/microsofthpc/newclusterlinuxcn/) 또는 [Azure PowerShell 스크립트](hpcpack-cluster-powershell-script.md)를 사용하여 Azure에서 Linux 계산 노드가 포함된 HPC 팩 클러스터를 배포합니다. 각 옵션 사용 시의 필수 구성 요소 및 단계는 [Azure에서 HPC 팩 클러스터의 Linux 계산 노드 시작](hpcpack-cluster.md) 을 참조하세요. PowerShell 스크립트 배포 옵션을 선택하는 경우 이 문서 끝에 나오는 샘플 파일의 샘플 구성 파일을 참조하세요. 이 파일은 Windows Server 2012 R2 헤드 노드 및 4개 크기의 대형 CentOS 6.6 계산 노드로 구성된 Azure 기반 HPC 팩 클러스터를 구성합니다. 이 파일을 환경에 맞게 사용자 지정합니다.
@@ -44,7 +41,7 @@ Azure에서 Linux HPC 워크로드를 실행하기 위한 다른 옵션을 보�
 Linux **ssh-keygen** 명령을 실행하여 공개 키 및 개인 키를 포함하는 RSA 키 쌍을 간편하게 생성할 수 있습니다.
 
 1. Linux 컴퓨터에 로그온합니다.
-2. 다음 명령을 실행합니다.
+2. 다음 명령 실행:
    
    ```bash
    ssh-keygen -t rsa
@@ -87,7 +84,7 @@ Linux **ssh-keygen** 명령을 실행하여 공개 키 및 개인 키를 포함�
 > 
 
 ## <a name="set-up-a-file-share-for-linux-nodes"></a>사용자가 액세스할 파일 공유를 설정합니다.
-이제 SMB 파일 공유를 설정하고 모든 Linux 노드에서 공유 폴더를 탑재하여 Linux 노드에서 일반 경로로 NAMD 파일에 액세스할 수 있도록 합니다. 다음은 헤드 노드에 공유 폴더를 탑재하는 단계입니다. 현재 Azure 파일 서비스를 지원하지 않는 CentOS 6.6과 같은 배포의 경우 공유를 사용하는 것이 좋습니다. Linux 노드에서 Azure 파일 공유를 지원하는 경우 [Linux에서 Azure File Storage 사용 방법](../../../storage/storage-how-to-use-files-linux.md)을 참조하세요. HPC 팩의 추가 파일 공유 옵션에 대해서는 [Azure에서 HPC 팩 클러스터의 Linux 계산 노드 시작](hpcpack-cluster.md)을 참조하세요.
+이제 SMB 파일 공유를 설정하고 모든 Linux 노드에서 공유 폴더를 탑재하여 Linux 노드에서 일반 경로로 NAMD 파일에 액세스할 수 있도록 합니다. 다음은 헤드 노드에 공유 폴더를 탑재하는 단계입니다. 현재 Azure 파일 서비스를 지원하지 않는 CentOS 6.6과 같은 배포의 경우 공유를 사용하는 것이 좋습니다. Linux 노드에서 Azure 파일 공유를 지원하는 경우 [Linux에서 Azure File Storage 사용 방법](../../../storage/files/storage-how-to-use-files-linux.md)을 참조하세요. HPC 팩의 추가 파일 공유 옵션에 대해서는 [Azure에서 HPC 팩 클러스터의 Linux 계산 노드 시작](hpcpack-cluster.md)을 참조하세요.
 
 1. 헤드 노드에서 폴더를 만들고 읽기/쓰기 권한을 설정하여 모든 사용자에게 공유합니다. 이 예에서, \\\\CentOS66HN\Namd는 폴더의 이름이고 여기서 CentOS66HN은 헤드 노드의 호스트 이름입니다.
 2. 공유 폴더에 namd2라는 하위 폴더를 만듭니다. namd2에 namdsample이라는 또 다른 하위 폴더를 만듭니다.
@@ -211,7 +208,7 @@ host <Name of node2> ++cpus <Cores of node2>
 …
 ```
 
-예:
+예: 
 
 ```
 group main
@@ -399,4 +396,3 @@ exit ${RTNSTS}
 [creds]:media/hpcpack-cluster-namd/creds.png
 [task_details]:media/hpcpack-cluster-namd/task_details.png
 [vmd_view]:media/hpcpack-cluster-namd/vmd_view.png
-

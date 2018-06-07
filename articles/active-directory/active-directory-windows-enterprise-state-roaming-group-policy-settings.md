@@ -1,4 +1,3 @@
-
 ---
 title: "그룹 정책 및 MDM 설정 | Microsoft Docs"
 description: "회사 소유의 장치에 사용해야 하는 그룹 정책 및 MDM(모바일 장치 관리) 설정에 대한 정보를 제공합니다. 이러한 정책은 사용자의 장치 전체에 적용됩니다."
@@ -6,7 +5,7 @@ services: active-directory
 keywords: "엔터프라이즈 상태 로밍에 대한 그룹 정책 및 MDM 설정이란, 엔터프라이즈 상태 로밍, windows 클라우드"
 documentationcenter: 
 author: tanning
-manager: femila
+manager: mtillman
 editor: curtand
 ms.assetid: 6471a9b3-8dd4-4237-89d1-bfbeca9f8252
 ms.service: active-directory
@@ -16,12 +15,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/08/2017
 ms.author: markvi
-translationtype: Human Translation
-ms.sourcegitcommit: 6bdec7bf35bb4a233200def36c0e697baaf15fec
-ms.openlocfilehash: 5ca48cf3cc4b2f4d86463e36c73de47e386cff25
-ms.lasthandoff: 01/05/2017
-
-
+ms.openlocfilehash: 588084481ffc5cbbeed34e9527271179fa359ed5
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="group-policy-and-mdm-settings"></a>그룹 정책 및 MDM 설정
 이러한 정책은 사용자의 장치 전체에 적용되므로 회사 소유의 장치에만 그룹 정책 및 MDM(모바일 장치 관리) 설정을 사용하세요. 개인의 설정 동기화를 비활성화하는 MDM 정책을 적용하면 사용자 소유의 장치가 해당 장치 사용에 부정적인 영향을 미치게 됩니다. 뿐만 아니라 해당 장치의 다른 사용자도 정책의 영향을 받습니다.
@@ -60,5 +58,4 @@ MDM 정책 설정은 Windows 10 및 Windows 10 Mobile에 모두 적용됩니다.
 * [설정 및 데이터 로밍 FAQ](active-directory-windows-enterprise-state-roaming-faqs.md)
 * [Windows 10 로밍 설정 참조](active-directory-windows-enterprise-state-roaming-windows-settings-reference.md)
 * [문제 해결](active-directory-windows-enterprise-state-roaming-troubleshooting.md)
-
 

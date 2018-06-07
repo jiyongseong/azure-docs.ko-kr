@@ -1,4 +1,4 @@
-프리미엄 캐시를 만들려면 [Azure Portal](https://portal.azure.com)에 로그인하고 **새로 만들기** > **데이터베이스** > **Redis Cache**를 클릭합니다.
+프리미엄 캐시를 만들려면 [Azure Portal](https://portal.azure.com)에 로그인하고 **리소스 만들기** > **데이터베이스** > **Redis Cache**를 클릭합니다.
 
 ![캐시 만들기](media/redis-cache-premium-create/redis-cache-new-cache-menu.png)
 

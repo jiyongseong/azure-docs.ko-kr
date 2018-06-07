@@ -1,26 +1,21 @@
 ---
-title: "Azure Active Directory B2C: 인증 코드 흐름 | Microsoft Docs"
-description: "OpenID Connect 인증 프로토콜의 Azure Active Directory 구현을 사용하여 웹앱을 빌드하는 방법을 알아봅니다."
+title: 인증 코드 흐름 - Azure AD B2C | Microsoft Docs
+description: Azure AD B2C 및 OpenID Connect 인증 프로토콜을 사용하여 웹앱 빌드 방법을 알아봅니다.
 services: active-directory-b2c
-documentationcenter: 
-author: dstrockis
-manager: mbaldwin
-editor: 
-ms.assetid: c371aaab-813a-4317-97df-b62e2f53d865
+documentationcenter: ''
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 01/07/2017
-ms.author: dastrock
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 857267f46f6a2d545fc402ebf3a12f21c62ecd21
-ms.openlocfilehash: 50ac9a0d95a581e696817364e94134abc089bfdf
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/28/2017
-
-
+ms.date: 08/16/2017
+ms.author: davidmu
+ms.openlocfilehash: d8ed5747f29f969535bbafc1624d9d02e54c8418
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
 # <a name="azure-active-directory-b2c-oauth-20-authorization-code-flow"></a>Azure Active Directory B2C: OAuth 2.0 인증 코드 흐름
 장치에 설치된 앱에서 OAuth 2.0 인증 코드 권한 부여를 사용하여 Web API와 같은 보호된 리소스에 대한 액세스 권한을 얻을 수 있습니다. OAuth 2.0의 Azure AD B2C(Azure Active Directory B2C) 구현을 사용하면 모바일 및 데스크톱 앱에 등록, 로그인 및 기타 ID 관리 작업을 추가할 수 있습니다. 이 문서는 언어 독립적입니다. 이 문서에서는 오픈 소스 라이브러리를 사용하지 않고 HTTP 메시지를 보내고 받는 방법을 설명합니다.
@@ -89,7 +84,7 @@ client_id=90c0fe63-bcf2-44d5-8fb7-b8bbc0b29dc6
 | p |필수 |실행되는 정책입니다. Azure AD B2C 디렉터리에 생성된 정책의 이름입니다. 정책 이름 값은 **b2c\_1\_**로 시작해야 합니다. 정책에 대한 자세한 내용은 [Azure AD B2C 기본 제공 정책](active-directory-b2c-reference-policies.md)을 참조하세요. |
 | prompt |옵션 |필요한 사용자 상호 작용 유형입니다. 현재 유효한 값은 `login`뿐이며, 강제로 사용자가 해당 요청에 자격 증명을 입력하도록 합니다. Single Sign-On은 적용되지 않습니다. |
 
-이때 사용자에게 정책의 워크플로를 완료하도록 요청됩니다. 해당 사용자 이름과 암호 입력, 소셜 ID로 로그인, 디렉터리에 등록 또는 다른 많은 단계가 포함될 수 있습니다. 사용자 작업은 정책을 정의한 방식에 따라 다릅니다.
+이 시점에서 정책의 워크플로를 완료하도록 사용자에게 요청합니다. 이 경우 사용자 이름과 암호를 입력하거나, 소셜 ID로 로그인하거나, 디렉터리를 등록하거나, 다른 단계를 수행할 수도 있습니다. 사용자 작업은 정책을 정의한 방식에 따라 다릅니다.
 
 사용자가 정책을 완료하면 Azure AD에서 앱에 대한 응답을 `redirect_uri`에 사용한 값으로 반환합니다. `response_mode` 매개 변수에 지정된 메서드를 사용합니다. 응답은 실행된 정책과 별개로, 각 사용자 작업 시나리오에서 정확히 동일합니다.
 
@@ -104,7 +99,7 @@ code=AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrq...        // the auth
 | 매개 변수 | 설명 |
 | --- | --- |
 | 코드 |앱이 요청한 권한 부여 코드입니다. 앱은 인증 코드를 사용하여 대상 리소스에 대한 액세스 토큰을 요청할 수 있습니다. 인증 코드는 수명이 매우 짧습니다. 일반적으로 약 10분 후에 만료됩니다. |
-| state |전체 설명은 이전 섹션의 첫 번째 표를 참조하세요. 요청에 `state` 매개 변수가 포함되어 있으면 동일한 값이 응답에도 나타나야 합니다. 앱은 요청 및 응답의 `state` 값이 동일한지 확인해야 합니다. |
+| state |전체 설명은 이전 섹션의 첫 번째 표를 참조하세요. 요청에 `state` 매개 변수가 포함되어 있으면 동일한 값이 응답에도 나타나야 합니다. 앱에서 요청 및 응답의 `state` 값이 동일한지 확인해야 합니다. |
 
 앱이 적절하게 처리할 수 있도록 오류 응답을 리디렉션 URI로 전송할 수도 있습니다.
 
@@ -119,7 +114,7 @@ error=access_denied
 | --- | --- |
 | error |발생한 오류 유형을 분류하는 데 사용할 수 있는 오류 코드 문자열입니다. 문자열을 사용하여 오류에 대응할 수도 있습니다. |
 | error_description |인증 오류의 근본 원인을 식별하도록 도울 수 있는 특정 오류 메시지입니다. |
-| state |전체 설명은 앞의 표를 참조하세요. 요청에 `state` 매개 변수가 포함되어 있으면 동일한 값이 응답에도 나타나야 합니다. 앱은 요청 및 응답의 `state` 값이 동일한지 확인해야 합니다. |
+| state |잎의 표에 나와 있는 전체 설명을 참조하세요. 요청에 `state` 매개 변수가 포함되어 있으면 동일한 값이 응답에도 나타나야 합니다. 앱은 요청 및 응답의 `state` 값이 동일한지 확인해야 합니다. |
 
 ## <a name="2-get-a-token"></a>2. 토큰 가져오기
 인증 코드를 받았으므로 이제 POST 요청을 `/token` 끝점으로 전송하여 `code`를 의도한 리소스에 대한 토큰으로 교환할 수 있습니다. Azure AD B2C에서 토큰을 요청할 수 있는 리소스는 앱 자체의 백 엔드 Web API뿐입니다. 자체 토큰을 요청하는 데 사용되는 규칙은 앱의 클라이언트 ID를 범위로 사용하는 것입니다.
@@ -139,7 +134,7 @@ grant_type=authorization_code&client_id=90c0fe63-bcf2-44d5-8fb7-b8bbc0b29dc6&sco
 | client_id |필수 |[Azure Portal](https://portal.azure.com)에서 앱에 할당된 응용 프로그램 ID입니다. |
 | grant_type |필수 |권한 부여 유형입니다. 인증 코드 흐름에서 권한 부여 유형은 `authorization_code`여야 합니다. |
 | scope |권장 |공백으로 구분된 범위 목록입니다. 단일 범위 값은 요청된 사용 권한을 모두 Azure AD에 나타냅니다. 클라이언트 ID를 범위로 사용할 경우 동일한 클라이언트 ID가 나타내는 사용자 고유의 서비스 또는 Web API에 대해 사용할 수 있는 액세스 토큰이 앱에 필요합니다.  `offline_access` 범위는 리소스에 대한 장기 액세스를 위해 앱에 새로 고침 토큰이 필요함을 나타냅니다.  `openid` 범위를 사용하여 Azure AD B2C에서 ID 토큰을 요청할 수도 있습니다. |
-| 코드 |필수 |흐름의 첫 번째 레그에서 얻은 인증 코드입니다. |
+| 코드 |필수 |흐름의 첫 번째 단계에서 얻은 권한 부여 코드입니다. |
 | redirect_uri |필수 |인증 코드를 받은 응용 프로그램의 리디렉션 URI입니다. |
 
 성공적인 토큰 응답은 다음과 같습니다.
@@ -199,8 +194,9 @@ grant_type=refresh_token&client_id=90c0fe63-bcf2-44d5-8fb7-b8bbc0b29dc6&scope=90
 
 | 매개 변수 | Required? | 설명 |
 | --- | --- | --- |
-| p |필수 |원본 새로 고침 토큰을 얻는 데 사용된 정책입니다. 이 요청에 다른 정책을 사용할 수 없습니다. 이 매개 변수는 POST 본문이 아니라 *쿼리 문자열*에 추가해야 합니다. |
-| client_id |권장 |[Azure Portal](https://portal.azure.com)에서 앱에 할당된 응용 프로그램 ID입니다. |
+| p |필수 |원래의 새로 고침 토큰을 얻는 데 사용된 정책입니다. 이 요청에 다른 정책을 사용할 수 없습니다. 이 매개 변수는 POST 본문이 아니라 *쿼리 문자열*에 추가해야 합니다. |
+| client_id |필수 |[Azure Portal](https://portal.azure.com)에서 앱에 할당된 응용 프로그램 ID입니다. |
+| client_secret |필수 |[Azure Portal](https://portal.azure.com)에서 client_id에 연결된 client_secret |
 | grant_type |필수 |권한 부여 유형입니다. 이 인증 코드 흐름 레그에서 권한 부여 유형은 `refresh_token`여야 합니다. |
 | scope |권장 |공백으로 구분된 범위 목록입니다. 단일 범위 값은 요청된 사용 권한을 모두 Azure AD에 나타냅니다. 클라이언트 ID를 범위로 사용할 경우 동일한 클라이언트 ID가 나타내는 사용자 고유의 서비스 또는 Web API에 대해 사용할 수 있는 액세스 토큰이 앱에 필요합니다.  `offline_access` 범위는 리소스에 대한 장기 액세스를 위해 앱에 새로 고침 토큰이 필요함을 나타냅니다.  `openid` 범위를 사용하여 Azure AD B2C에서 ID 토큰을 요청할 수도 있습니다. |
 | redirect_uri |옵션 |인증 코드를 받은 응용 프로그램의 리디렉션 URI입니다. |
@@ -218,7 +214,7 @@ grant_type=refresh_token&client_id=90c0fe63-bcf2-44d5-8fb7-b8bbc0b29dc6&scope=90
     "refresh_token": "AAQfQmvuDy8WtUv-sd0TBwWVQs1rC-Lfxa_NDkLqpg50Cxp5Dxj0VPF1mx2Z...",
 }
 ```
-| 매개 변수를 포함해야 합니다. | 설명 |
+| 매개 변수 | 설명 |
 | --- | --- |
 | not_before |epoch 시간에서 토큰은 유효한 것으로 간주되는 시간입니다. |
 | token_type |토큰 형식 값입니다. Azure AD는 전달자 유형만 지원합니다. |
@@ -236,7 +232,7 @@ grant_type=refresh_token&client_id=90c0fe63-bcf2-44d5-8fb7-b8bbc0b29dc6&scope=90
 }
 ```
 
-| 매개 변수를 포함해야 합니다. | 설명 |
+| 매개 변수 | 설명 |
 | --- | --- |
 | error |발생한 오류 유형을 분류하는 데 사용할 수 있는 오류 코드 문자열입니다. 문자열을 사용하여 오류에 대응할 수도 있습니다. |
 | error_description |인증 오류의 근본 원인을 식별하도록 도울 수 있는 특정 오류 메시지입니다. |
@@ -247,5 +243,4 @@ grant_type=refresh_token&client_id=90c0fe63-bcf2-44d5-8fb7-b8bbc0b29dc6&scope=90
 1. [Azure AD B2C 디렉터리를 만듭니다](active-directory-b2c-get-started.md). 요청에 디렉터리의 이름을 사용합니다.
 2. [응용 프로그램을 만들어](active-directory-b2c-app-registration.md) 응용 프로그램 ID 및 리디렉션 URI를 얻습니다. 앱에 네이티브 클라이언트를 포함합니다.
 3. [정책을 만들어](active-directory-b2c-reference-policies.md) 정책 이름을 얻습니다.
-
 

@@ -1,27 +1,19 @@
 ---
-title: "Stream Analytics 이벤트 처리를 사용하여 실시간 이벤트 처리 | Microsoft Docs"
-description: "실시간 이벤트 처리 및 분석을 구현하기 위해 Azure 서비스가 어떻게 상호 운용되는지 알아보세요."
-keywords: "실시간 처리, 이벤트 처리, 참조 아키텍처"
-services: stream-analytics,event-hubs,storage,sql-database
-documentationcenter: 
-author: jeffstokes72
-manager: jhubbard
-editor: 
-ms.assetid: 11af48bc-313c-4527-8c80-91088dc9f3c6
+title: Azure Stream Analytics 이벤트 처리를 사용하여 실시간 이벤트 처리
+description: 이 문서에서는 Azure Stream Analytics를 사용하여 실시간 이벤트 처리 및 분석을 달성하기 위한 참조 아키텍처를 설명합니다.
+services: stream-analytics
+author: jseb225
+ms.author: jeanb
+manager: kfile
+ms.reviewer: jasonh
 ms.service: stream-analytics
-ms.workload: big-data
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 01/24/2017
-ms.author: jeffstok
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: 5160d1c092103f4e7d2bf73c08c2ad5085d7d7a0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
-
+ms.openlocfilehash: 8a5d426d67916e010c7fff048eebdc77b93c5c38
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="reference-architecture-real-time-event-processing-with-microsoft-azure-stream-analytics"></a>참조 아키텍처: Microsoft Azure Stream Analytics으로 실시간 이벤트 처리
 Microsoft Azure Stream Analytics과 실시간 이벤트 처리의 참조 아키텍처는 Microsoft Azure를 지원하는 실시간 PaaS(Platform as a Service) 스트림 처리 솔루션 배포에 대한 전체적인 청사진을 제공하기 위한 것입니다.
@@ -50,16 +42,15 @@ Microsoft Azure는 여러 솔루션 시나리오 및 요구 사항을 지원할 
 
 **수정 버전:** 1.0
 
-**다운로드:** [Microsoft Azure Stream Analytics과 실시간 이벤트 처리](http://download.microsoft.com/download/6/2/3/623924DE-B083-4561-9624-C1AB62B5F82B/real-time-event-processing-with-microsoft-azure-stream-analytics.pdf)
+**다운로드:**[Microsoft Azure Stream Analytics와 실시간 이벤트 처리](http://download.microsoft.com/download/6/2/3/623924DE-B083-4561-9624-C1AB62B5F82B/real-time-event-processing-with-microsoft-azure-stream-analytics.pdf)
 
 ## <a name="get-help"></a>도움말 보기
-추가 지원이 필요할 경우 [Azure 스트림 분석 포럼](https://social.msdn.microsoft.com/Forums/home?forum=AzureStreamAnalytics)
+추가 지원이 필요한 경우 [Azure Stream Analytics 포럼](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureStreamAnalytics)을 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
 * [Azure Stream Analytics 소개](stream-analytics-introduction.md)
 * [Azure Stream Analytics 사용 시작](stream-analytics-real-time-fraud-detection.md)
-* [Azure 스트림 분석 작업 규모 지정](stream-analytics-scale-jobs.md)
-* [Azure 스트림 분석 쿼리 언어 참조](https://msdn.microsoft.com/library/azure/dn834998.aspx)
+* [Azure  Stream Analytics 작업 규모 지정](stream-analytics-scale-jobs.md)
+* [Azure  Stream Analytics 쿼리 언어 참조](https://msdn.microsoft.com/library/azure/dn834998.aspx)
 * [Azure Stream Analytics 관리 REST API 참조](https://msdn.microsoft.com/library/azure/dn835031.aspx)
-
 

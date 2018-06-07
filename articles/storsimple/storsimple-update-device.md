@@ -12,15 +12,18 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: TBD
-ms.date: 11/18/2016
+ms.date: 01/23/2018
 ms.author: v-sharos
-translationtype: Human Translation
-ms.sourcegitcommit: 9c0a113e50fdb78307b8030f9b0d95b696f3f234
-ms.openlocfilehash: 8490110942741b049b6d44ac93697303cef40e8a
-
-
+ms.openlocfilehash: 412978d2c343394f295e336690ec72153dda4b79
+ms.sourcegitcommit: 79683e67911c3ab14bcae668f7551e57f3095425
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/25/2018
 ---
 # <a name="update-your-storsimple-8000-series-device"></a>StorSimple 8000 시리즈 장치 업데이트
+> [!NOTE]
+> StorSimple의 클래식 포털은 사용되지 않습니다. StorSimple 장치 관리자는 사용 중단 일정에 따라 자동으로 새 Azure Portal로 이동합니다. 이 이동에 대한 메일 및 포털 알림을 받게 됩니다. 이 문서도 곧 사용 중지됩니다. 이동과 관련된 자세한 내용은 [FAQ: Azure Portal로 이동](storsimple-8000-move-azure-portal-faq.md)을 참조하세요.
+
 ## <a name="overview"></a>개요
 StorSimple 업데이트 기능을 사용하면 쉽게 StorSimple 장치를 최신 상태로 유지할 수 있습니다. 업데이트 유형에 따라 Windows PowerShell 인터페이스 또는 Azure 클래식 포털을 통해 장치에 업데이트를 적용할 수 있습니다. 이 자습서에는 업데이트 유형 및 각 항목을 설치하는 방법을 설명합니다.
 
@@ -113,15 +116,9 @@ Microsoft Azure StorSimple에 대한 업데이트와 달리 핫픽스는 공유 
 [!INCLUDE [storsimple-install-maintenance-mode-hotfixes](../../includes/storsimple-install-maintenance-mode-hotfixes.md)]
 
 ## <a name="what-happens-to-updates-if-you-perform-a-factory-reset-of-the-device"></a>장치를 공장 재설정하는 경우 업데이트에 미치는 영향
-장치를 공장 기본 설정으로 다시 설정하는 경우 업데이트가 모두 손실됩니다. 공장 재설정 장치를 등록하고 구성한 후, StorSimple용 Windows PowerShell 및/또는 Azure 클래식 포털을 통해 수동으로 업데이트를 설치해야 합니다. 공장 재설정에 대한 자세한 내용은 [장치를 공장 기본 설정으로 재설정](storsimple-manage-device-controller.md#reset-the-device-to-factory-default-settings)을 참조하세요.
+장치를 공장 기본 설정으로 다시 설정하는 경우 업데이트가 모두 손실됩니다. 공장 재설정 장치를 등록하고 구성한 후, StorSimple용 Windows PowerShell 및/또는 Azure 클래식 포털을 통해 수동으로 업데이트를 설치해야 합니다. 공장 재설정에 대한 자세한 내용은 [장치를 공장 기본 설정으로 재설정](storsimple-8000-manage-device-controller.md#reset-the-device-to-factory-default-settings)을 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
 * [StorSimple용 Windows PowerShell을 사용하여 StorSimple 장치를 관리](storsimple-windows-powershell-administration.md)하는 방법을 자세히 알아봅니다.
 * [StorSimple Manager 서비스를 사용하여 StorSimple 장치를 관리](storsimple-manager-service-administration.md)하는 방법을 자세히 알아봅니다.
-
-
-
-
-<!--HONumber=Jan17_HO4-->
-
 

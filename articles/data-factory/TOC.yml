@@ -1,0 +1,428 @@
+- name: Data Factory V2 설명서
+  href: index.yml
+- name: 버전 1 문서로 전환
+  href: v1/data-factory-introduction.md
+- name: 개요
+  items:
+    - name: Data Factory 소개
+      href: introduction.md
+    - name: 버전 1과 2 비교
+      href: compare-versions.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: 데이터 팩터리 만들기 - 사용자 인터페이스(UI)
+      href: quickstart-create-data-factory-portal.md
+    - name: 데이터 팩터리 만들기 - 데이터 복사 도구
+      href: quickstart-create-data-factory-copy-data-tool.md
+    - name: 데이터 팩터리 만들기 - Azure PowerShell
+      href: quickstart-create-data-factory-powershell.md
+    - name: 데이터 팩터리 만들기 - .NET
+      href: quickstart-create-data-factory-dot-net.md
+    - name: 데이터 팩터리 만들기 - Python
+      href: quickstart-create-data-factory-python.md
+    - name: 데이터 팩터리 만들기 - REST
+      href: quickstart-create-data-factory-rest-api.md
+    - name: 데이터 팩터리 만들기 - Resource Manager 템플릿
+      href: quickstart-create-data-factory-resource-manager-template.md
+- name: 자습서
+  items:
+    - name: 1 - Azure에 SSIS 패키지 배포
+      items:
+        - name: 사용자 인터페이스(UI)
+          href: tutorial-deploy-ssis-packages-azure.md
+        - name: Azure PowerShell
+          href: tutorial-deploy-ssis-packages-azure-powershell.md
+    - name: 2 - 클라우드에서 데이터 복사
+      items:
+        - name: 데이터 복사 도구
+          href: tutorial-copy-data-tool.md
+        - name: 사용자 인터페이스(UI)
+          href: tutorial-copy-data-portal.md
+        - name: .NET
+          href: tutorial-copy-data-dot-net.md
+    - name: 3 - 클라우드에 온-프레미스 데이터 복사
+      items:
+        - name: 데이터 복사 도구
+          href: tutorial-hybrid-copy-data-tool.md
+        - name: 사용자 인터페이스(UI)
+          href: tutorial-hybrid-copy-portal.md
+        - name: Azure PowerShell
+          href: tutorial-hybrid-copy-powershell.md
+    - name: 4 - 대량 데이터 복사
+      items:
+        - name: 사용자 인터페이스(UI)
+          href: tutorial-bulk-copy-portal.md
+        - name: Azure PowerShell
+          href: tutorial-bulk-copy.md
+    - name: 5 - 증분 방식으로 데이터 복사
+      href: tutorial-incremental-copy-overview.md
+      items:
+        - name: 5.1 - 한 테이블에서 복사
+          items:
+            - name: 사용자 인터페이스(UI)
+              href: tutorial-incremental-copy-portal.md
+            - name: Azure PowerShell
+              href: tutorial-incremental-copy-powershell.md
+        - name: 5.2 - 여러 테이블에서 복사
+          items:
+            - name: 사용자 인터페이스(UI)
+              href: tutorial-incremental-copy-multiple-tables-portal.md
+            - name: Azure PowerShell
+              href: tutorial-incremental-copy-multiple-tables-powershell.md
+        - name: 5.3 - 변경 내용 추적 기능 사용
+          items:
+            - name: 사용자 인터페이스(UI)
+              href: tutorial-incremental-copy-change-tracking-feature-portal.md
+            - name: Azure PowerShell
+              href: tutorial-incremental-copy-change-tracking-feature-powershell.md
+    - name: 6 - 클라우드에서 데이터 변환
+      items:
+        - name: HDInsight Spark
+          items:
+            - name: 사용자 인터페이스(UI)
+              href: tutorial-transform-data-spark-portal.md
+            - name: Azure PowerShell
+              href: tutorial-transform-data-spark-powershell.md
+        - name: Databricks Notebook
+          items:
+            - name: 사용자 인터페이스(UI)
+              href: transform-data-using-databricks-notebook.md
+    - name: 7 - 가상 네트워크에서 데이터 변환
+      items:
+        - name: 사용자 인터페이스(UI)
+          href: tutorial-transform-data-hive-virtual-network-portal.md
+        - name: Azure PowerShell
+          href: tutorial-transform-data-hive-virtual-network.md
+    - name: 8 - 흐름 제어
+      items:
+        - name: 사용자 인터페이스(UI)
+          href: tutorial-control-flow-portal.md
+        - name: .NET
+          href: tutorial-control-flow.md
+- name: 샘플
+  items:
+    - name: 코드 샘플
+      href: 'https://azure.microsoft.com/en-us/resources/samples/?service=data-factory'
+    - name: Azure PowerShell
+      href: samples-powershell.md
+- name: 개념
+  items:
+    - name: 파이프라인 및 활동
+      href: concepts-pipelines-activities.md
+    - name: 데이터 집합 및 연결된 서비스
+      href: concepts-datasets-linked-services.md
+    - name: 파이프라인 실행 및 트리거
+      href: concepts-pipeline-execution-triggers.md
+    - name: 통합 런타임
+      href: concepts-integration-runtime.md
+- name: 방법 가이드
+  items:
+    - name: 작성자
+      items:
+        - name: 데이터 팩터리 시각화
+          href: author-visually.md
+        - name: 지속적인 통합 및 배포
+          href: continuous-integration-deployment.md
+        - name: 반복 개발 및 디버깅
+          href: iterative-development-debugging.md
+    - name: 데이터 복사
+      items:
+        - name: 복사 작업을 사용하여 데이터 복사
+          href: copy-activity-overview.md
+        - name: 데이터 복사 도구
+          href: copy-data-tool.md
+          items:
+            - name: Data Lake Store 로드
+              href: load-azure-data-lake-store.md
+            - name: SQL Data Warehouse 로드
+              href: load-azure-sql-data-warehouse.md
+        - name: 분할된 데이터 읽기 또는 쓰기
+          href: how-to-read-write-partitioned-data.md
+        - name: 커넥터
+          items:
+            - name: Amazon Marketplace 웹 서비스
+              href: connector-amazon-marketplace-web-service.md
+            - name: Amazon Redshift
+              href: connector-amazon-redshift.md
+            - name: Amazon S3
+              href: connector-amazon-simple-storage-service.md
+            - name: Azure Blob Storage
+              href: connector-azure-blob-storage.md
+            - name: Azure Cosmos DB
+              href: connector-azure-cosmos-db.md
+            - name: Azure Data Lake Store
+              href: connector-azure-data-lake-store.md
+            - name: Azure Database for MySQL
+              href: connector-azure-database-for-mysql.md
+            - name: Azure Database for PostgreSQL
+              href: connector-azure-database-for-postgresql.md
+            - name: Azure File Storage
+              href: connector-azure-file-storage.md
+            - name: Azure Search
+              href: connector-azure-search.md
+            - name: Azure SQL Database
+              href: connector-azure-sql-database.md
+            - name: Azure SQL Data Warehouse
+              href: connector-azure-sql-data-warehouse.md
+            - name: Azure Table Storage
+              href: connector-azure-table-storage.md
+            - name: Cassandra
+              href: connector-cassandra.md
+            - name: 앱에 대한 Common Data Service
+              href: connector-dynamics-crm-office-365.md
+            - name: Concur
+              href: connector-concur.md
+            - name: Couchbase
+              href: connector-couchbase.md
+            - name: DB2
+              href: connector-db2.md
+            - name: Drill
+              href: connector-drill.md
+            - name: Dynamics 365
+              href: connector-dynamics-crm-office-365.md
+            - name: Dynamics CRM
+              href: connector-dynamics-crm-office-365.md
+            - name: 파일 시스템
+              href: connector-file-system.md
+            - name: FTP
+              href: connector-ftp.md
+            - name: GE Historian
+              href: 'connector-odbc.md#ge-historian-source'
+            - name: Google BigQuery
+              href: connector-google-bigquery.md
+            - name: Greenplum
+              href: connector-greenplum.md
+            - name: HBase
+              href: connector-hbase.md
+            - name: HDFS
+              href: connector-hdfs.md
+            - name: Hive
+              href: connector-hive.md
+            - name: HTTP
+              href: connector-http.md
+            - name: HubSpot
+              href: connector-hubspot.md
+            - name: Impala
+              href: connector-impala.md
+            - name: Informix
+              href: 'connector-odbc.md#ibm-informix-source'
+            - name: Jira
+              href: connector-jira.md
+            - name: Magento
+              href: connector-magento.md
+            - name: MariaDB
+              href: connector-mariadb.md
+            - name: Marketo
+              href: connector-marketo.md
+            - name: Microsoft Access
+              href: 'connector-odbc.md#microsoft-access-source'
+            - name: MongoDB
+              href: connector-mongodb.md
+            - name: MySQL
+              href: connector-mysql.md
+            - name: Netezza
+              href: connector-netezza.md
+            - name: OData
+              href: connector-odata.md
+            - name: ODBC
+              href: connector-odbc.md
+            - name: Oracle
+              href: connector-oracle.md
+            - name: Oracle Eloqua
+              href: connector-oracle-eloqua.md
+            - name: Oracle Responsys
+              href: connector-oracle-responsys.md
+            - name: Paypal
+              href: connector-paypal.md
+            - name: Phoenix
+              href: connector-phoenix.md
+            - name: PostgreSQL
+              href: connector-postgresql.md
+            - name: Presto
+              href: connector-presto.md
+            - name: QuickBooks
+              href: connector-quickbooks.md
+            - name: Salesforce
+              href: connector-salesforce.md
+            - name: Salesforce 서비스 클라우드
+              href: connector-salesforce.md
+            - name: Salesforce 마케팅 클라우드
+              href: connector-salesforce-marketing-cloud.md
+            - name: SAP Business Warehouse
+              href: connector-sap-business-warehouse.md
+            - name: SAP Cloud for Customer
+              href: connector-sap-cloud-for-customer.md
+            - name: SAP ECC
+              href: connector-sap-ecc.md
+            - name: SAP HANA
+              href: connector-sap-hana.md
+            - name: ServiceNow
+              href: connector-servicenow.md
+            - name: SFTP
+              href: connector-sftp.md
+            - name: Shopify
+              href: connector-shopify.md
+            - name: Spark
+              href: connector-spark.md
+            - name: SQL Server
+              href: connector-sql-server.md
+            - name: Square
+              href: connector-square.md
+            - name: Sybase
+              href: connector-sybase.md
+            - name: Teradata
+              href: connector-teradata.md
+            - name: Vertica
+              href: connector-vertica.md
+            - name: 웹 테이블
+              href: connector-web-table.md
+            - name: Xero
+              href: connector-xero.md
+            - name: Zoho
+              href: connector-zoho.md
+        - name: 형식 및 압축 지원
+          href: supported-file-formats-and-compression-codecs.md
+        - name: 스키마 및 형식 매핑
+          href: copy-activity-schema-and-type-mapping.md
+        - name: 내결함성
+          href: copy-activity-fault-tolerance.md
+        - name: 성능 및 튜닝
+          href: copy-activity-performance.md
+    - name: 데이터 변환
+      href: transform-data.md
+      items:
+        - name: HDInsight Hive 작업
+          href: transform-data-using-hadoop-hive.md
+        - name: HDInsight Pig 작업
+          href: transform-data-using-hadoop-pig.md
+        - name: HDInsight MapReduce 작업
+          href: transform-data-using-hadoop-map-reduce.md
+        - name: HDInsight 스트리밍 작업
+          href: transform-data-using-hadoop-streaming.md
+        - name: HDInsight Spark 작업
+          href: transform-data-using-spark.md
+        - name: ML 일괄 처리 실행 작업
+          href: transform-data-using-machine-learning.md
+        - name: Azure ML 업데이트 리소스 작업
+          href: update-machine-learning-models.md
+        - name: 저장 프로시저 작업
+          href: transform-data-using-stored-procedure.md
+        - name: Data Lake U-SQL 작업
+          href: transform-data-using-data-lake-analytics.md
+        - name: Databricks Notebook 활동
+          href: transform-data-databricks-notebook.md
+        - name: 사용자 지정 작업
+          href: transform-data-using-dotnet-custom-activity.md
+        - name: Compute 연결된 서비스
+          href: compute-linked-services.md
+    - name: 흐름 제어
+      items:
+        - name: 파이프라인 작업 실행
+          href: control-flow-execute-pipeline-activity.md
+        - name: 활동 필터링
+          href: control-flow-filter-activity.md
+        - name: ForEach 작업
+          href: control-flow-for-each-activity.md
+        - name: 메타데이터 작업 가져오기
+          href: control-flow-get-metadata-activity.md
+        - name: If 조건 작업
+          href: control-flow-if-condition-activity.md
+        - name: 조회 작업
+          href: control-flow-lookup-activity.md
+        - name: Until 작업
+          href: control-flow-until-activity.md
+        - name: Wait 작업
+          href: control-flow-wait-activity.md
+        - name: 웹 작업
+          href: control-flow-web-activity.md
+        - name: 식 언어
+          href: control-flow-expression-language-functions.md
+        - name: 시스템 변수
+          href: control-flow-system-variables.md
+    - name: 보안
+      items:
+        - name: 데이터 이동 보안 고려 사항
+          href: data-movement-security-considerations.md
+        - name: Azure Key Vault에 자격 증명 저장
+          href: store-credentials-in-key-vault.md
+        - name: 자체 호스팅되는 통합 런타임에 대한 자격 증명 암호화
+          href: encrypt-credentials-self-hosted-integration-runtime.md
+        - name: 데이터 팩터리 서비스 ID
+          href: data-factory-service-identity.md
+    - name: 모니터링 및 관리
+      items:
+        - name: 시각적으로 모니터링
+          href: monitor-visually.md
+        - name: Azure Monitor로 모니터링
+          href: monitor-using-azure-monitor.md
+        - name: SDK로 모니터링
+          href: monitor-programmatically.md
+        - name: 통합 런타임 모니터링
+          href: monitor-integration-runtime.md
+        - name: Azure-SSIS 통합 런타임 모니터링
+          href: 'monitor-integration-runtime.md#azure-ssis-integration-runtime'
+        - name: Azure SSIS 통합 런타임 관리
+          href: manage-azure-ssis-integration-runtime.md
+    - name: 통합 런타임 만들기
+      items:
+        - name: Azure 통합 런타임
+          href: create-azure-integration-runtime.md
+        - name: 자체 호스팅된 통합 런타임
+          href: create-self-hosted-integration-runtime.md
+        - name: Azure SSIS 통합 런타임
+          href: create-azure-ssis-integration-runtime.md
+    - name: Azure에서 SSIS 패키지 실행
+      items:
+        - name: VNET에 Azure SSIS 통합 런타임 조인
+          href: join-azure-ssis-integration-runtime-virtual-network.md
+        - name: Azure SSIS 통합 런타임에 Azure AD 인증 사용
+          href: enable-aad-authentication-azure-ssis-ir.md
+        - name: Azure-SSIS 통합 런타임을 위한 고성능 구성
+          href: configure-azure-ssis-integration-runtime-performance.md
+        - name: Azure-SSIS 통합 런타임을 위한 Enterprise Edition 프로비전
+          href: how-to-configure-azure-ssis-ir-enterprise-edition.md
+        - name: Azure-SSIS 통합 런타임을 위한 설치 사용자 정의
+          href: how-to-configure-azure-ssis-ir-custom-setup.md
+        - name: Azure-SSIS 통합 런타임을 위한 라이선스 구성 요소 배포
+          href: how-to-develop-azure-ssis-ir-licensed-components.md
+        - name: SSIS 패키지 실행 작업으로 SSIS 패키지 실행
+          href: how-to-invoke-ssis-package-ssis-activity.md
+        - name: 저장 프로시저 작업으로 SSIS 패키지 실행
+          href: how-to-invoke-ssis-package-stored-procedure-activity.md
+        - name: Azure-SSIS Integration Runtime 예약
+          href: how-to-schedule-azure-ssis-integration-runtime.md
+    - name: 트리거 만들기
+      items:
+        - name: 일정 트리거 만들기
+          href: how-to-create-schedule-trigger.md
+        - name: 연속 창 트리거 만들기
+          href: how-to-create-tumbling-window-trigger.md
+- name: 참고 자료
+  items:
+    - name: .NET
+      href: /dotnet/api/microsoft.azure.management.datafactory
+    - name: PowerShell
+      href: /powershell/module/azurerm.datafactoryv2/
+    - name: REST API
+      href: /rest/api/datafactory
+    - name: 파이썬
+      href: /python/api/overview/azure/datafactory?view=azure-python
+- name: 리소스
+  items:
+    - name: 질문하기 - MSDN 포럼
+      href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureDataFactory&filter=alltypes&sort=lastpostdesc'
+    - name: 질문하기 - 스택 오버플로
+      href: 'https://stackoverflow.com/questions/tagged/azure-data-factory'
+    - name: 기능 요청
+      href: 'https://feedback.azure.com/forums/270578-azure-data-factory'
+    - name: FAQ
+      href: frequently-asked-questions.md
+    - name: 로드맵
+      href: 'https://azure.microsoft.com/en-us/roadmap/?tag=data-factory'
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/data-factory/'
+    - name: 지역별 가용성
+      href: 'https://azure.microsoft.com/global-infrastructure/services/'
+    - name: 지원 옵션
+      href: 'https://azure.microsoft.com/support/options/'

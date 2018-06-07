@@ -1,8 +1,8 @@
 ---
-title: "OMS Log Analytics에서 Nagios 및 Zabbix 경고 수집 | Microsoft Docs"
-description: "Nagios 및 Zabbix는 오픈 소스 모니터링 도구입니다. 다른 원본의 경고와 함께 분석하기 위해 이러한 도구에서 Log Analytics로 경고를 수집할 수 있습니다.  이 문서에서는 이러한 시스템에서 경고를 수집하도록 Linux용 OMS 에이전트를 구성하는 방법을 설명합니다."
+title: OMS Log Analytics에서 Nagios 및 Zabbix 경고 수집 | Microsoft Docs
+description: Nagios 및 Zabbix는 오픈 소스 모니터링 도구입니다. 다른 원본의 경고와 함께 분석하기 위해 이러한 도구에서 Log Analytics로 경고를 수집할 수 있습니다.  이 문서에서는 이러한 시스템에서 경고를 수집하도록 Linux용 OMS 에이전트를 구성하는 방법을 설명합니다.
 services: log-analytics
-documentationcenter: 
+documentationcenter: ''
 author: mgoedtel
 manager: carmonm
 editor: tysonn
@@ -12,29 +12,30 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 05/04/2017
+ms.date: 04/13/2018
 ms.author: magoedte
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 3bbc9e9a22d962a6ee20ead05f728a2b706aee19
-ms.openlocfilehash: 0b64c32e1031e704d50aab0b38eaea41e27d134b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/10/2017
-
-
+ms.openlocfilehash: 04c56b7b7726d9ca603f2ff38acfabc887ecaf34
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="collect-alerts-from-nagios-and-zabbix-in-log-analytics-from-oms-agent-for-linux"></a>Linux용 OMS 에이전트에서 Log Analytics에 Nagios 및 Zabbix의 경고 수집 
-[Nagios](https://www.nagios.org/) 및 [Zabbix](http://www.zabbix.com/)는 오픈 소스 모니터링 도구입니다.  [다른 원본의 경고](log-analytics-alerts.md)와 함께 분석하기 위해 이러한 도구에서 Log Analytics로 경고를 수집할 수 있습니다.  이 문서에서는 이러한 시스템에서 경고를 수집하도록 Linux용 OMS 에이전트를 구성하는 방법을 설명합니다.
+[Nagios](https://www.nagios.org/) 및 [Zabbix](http://www.zabbix.com/)는 오픈 소스 모니터링 도구입니다. [다른 원본의 경고](log-analytics-alerts.md)와 함께 분석하기 위해 이러한 도구에서 Log Analytics로 경고를 수집할 수 있습니다.  이 문서에서는 이러한 시스템에서 경고를 수집하도록 Linux용 OMS 에이전트를 구성하는 방법을 설명합니다.
  
+## <a name="prerequisites"></a>필수 조건
+Linux용 OMS 에이전트는 최대 버전 4.2.x의 Nagios, 최대 버전 2.x의 Zabbix에서 경고를 수집하도록 지원합니다.
+
 ## <a name="configure-alert-collection"></a>경고 수집 구성
 
 ### <a name="configuring-nagios-alert-collection"></a>Nagios 경고 수집 구성
-Nagios 서버에서 다음 단계를 수행하여 경고를 수집합니다.
+경고를 수집하려면 Nagios 서버에서 다음 단계를 수행합니다.
 
-1. **omsagent** 사용자에게 Nagios 로그 파일(예: `/var/log/nagios/nagios.log`)에 대한 읽기 액세스 권한을 부여합니다. nagios.log 파일이 `nagios` 그룹의 소유라는 가정 하에, **omsagent** 사용자를 **nagios** 그룹에 추가합니다. 
+1. **omsagent** 사용자에게 Nagios 로그 파일 `/var/log/nagios/nagios.log`에 대한 읽기 액세스 권한을 부여합니다. nagios.log 파일이 `nagios` 그룹의 소유라는 가정 하에, **omsagent** 사용자를 **nagios** 그룹에 추가합니다. 
 
     sudo usermod -a -G nagios omsagent
 
-2.  (`/etc/opt/microsoft/omsagent/<workspace id>/conf/omsagent.conf`)에서 구성 파일을 수정합니다. 다음 항목이 포함되고 주석 처리되지 않도록 합니다.  
+2.  `/etc/opt/microsoft/omsagent/<workspace id>/conf/omsagent.conf`에서 구성 파일을 수정합니다. 다음 항목이 포함되고 주석 처리되지 않도록 합니다.  
 
         <source>  
           type tail  
@@ -55,11 +56,11 @@ Nagios 서버에서 다음 단계를 수행하여 경고를 수집합니다.
     ```
 
 ### <a name="configuring-zabbix-alert-collection"></a>Zabbix 경고 수집 구성
-Zabbix 서버에서 경고를 수집하려면 *일반 텍스트*에서 사용자 및 암호를 지정해야 합니다. 이상적인 방법이 아니지만 사용자를 생성하고 모니터링 권한만 부여하는 것이 좋습니다.
+Zabbix 서버에서 경고를 수집하려면 *일반 텍스트*에서 사용자 및 암호를 지정해야 합니다.  이상적인 방법은 아니지만 사용자를 생성하고 모니터링 권한만 부여하는 것이 좋습니다.
 
-Nagios 서버에서 다음 단계를 수행하여 경고를 수집합니다.
+Nagios 서버에서 경고를 수집하려면 다음 단계를 수행합니다.
 
-1. (`/etc/opt/microsoft/omsagent/<workspace id>/conf/omsagent.conf`)에서 구성 파일을 수정합니다. 다음 항목이 포함되고 주석 처리되지 않도록 합니다.  Zabbix 환경에 대한 값으로 사용자 이름 및 암호를 변경합니다.
+1. `/etc/opt/microsoft/omsagent/<workspace id>/conf/omsagent.conf`에서 구성 파일을 수정합니다. 다음 항목이 포함되고 주석 처리되지 않도록 합니다.  Zabbix 환경에 대한 값으로 사용자 이름 및 암호를 변경합니다.
 
         <source>
          type zabbix_alerts
@@ -82,9 +83,9 @@ Log Analytics에서 [로그 검색](log-analytics-log-searches.md)을 사용하�
 
 Nagios에서 수집된 경고는 **경고**의 **형식** 및 **Nagios**의 **SourceSystem**을 가집니다.  이들은 다음 표의 속성을 가집니다.
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 |:--- |:--- |
-| 형식 |*경고* |
+| type |*경고* |
 | SourceSystem |*Nagios* |
 | AlertName |경고의 이름입니다. |
 | AlertDescription | 경고에 대한 설명입니다. |
@@ -98,9 +99,9 @@ Nagios에서 수집된 경고는 **경고**의 **형식** 및 **Nagios**의 **So
 ### <a name="zabbix-alert-records"></a>Zabbix 경고 레코드
 Zabbix에서 수집된 경고는 **경고**의 **형식** 및 **Zabbix**의 **SourceSystem**을 가집니다.  이들은 다음 표의 속성을 가집니다.
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 |:--- |:--- |
-| 형식 |*경고* |
+| type |*경고* |
 | SourceSystem |*Zabbix* |
 | AlertName | 경고의 이름입니다. |
 | AlertPriority | 경고의 심각도입니다.<br><br>분류되지 않음<br>정보<br>Warning<br>average<br>높음<br>심각  |
@@ -115,5 +116,4 @@ Zabbix에서 수집된 경고는 **경고**의 **형식** 및 **Zabbix**의 **So
 
 ## <a name="next-steps"></a>다음 단계
 * Log Analytics에서 [경고](log-analytics-alerts.md)에 대해 알아봅니다.
-* 데이터 원본 및 솔루션에서 수집한 데이터를 분석하기 위해 [로그 검색](log-analytics-log-searches.md) 에 대해 알아봅니다. 
-
+* 데이터 원본 및 솔루션에서 수집한 데이터를 분석하기 위해 [로그 검색](log-analytics-log-searches.md)에 대해 알아봅니다. 

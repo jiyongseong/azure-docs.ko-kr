@@ -1,6 +1,6 @@
 ---
-title: "Azure에서 여러 IP 구성의 부하 분산 | Microsoft Docs"
-description: "기본 및 보조 IP 구성에서 부하 분산."
+title: Azure에서 여러 IP 구성의 부하 분산 | Microsoft Docs
+description: 기본 및 보조 IP 구성에서 부하 분산.
 services: load-balancer
 documentationcenter: na
 author: anavinahar
@@ -12,15 +12,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 03/16/2017
+ms.date: 09/25/2017
 ms.author: annahar
-translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: 70cf84918898a65560ecd40d501b5fdc3775b0f6
-ms.lasthandoff: 04/27/2017
-
+ms.openlocfilehash: 12a978fc85d9502ce484859b436575b67364c9c4
+ms.sourcegitcommit: c3d53d8901622f93efcd13a31863161019325216
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/29/2018
 ---
-
 # <a name="load-balancing-on-multiple-ip-configurations-using-powershell"></a>PowerShell을 사용하여 여러 IP 구성의 부하 분산
 
 > [!div class="op_single_selector"]
@@ -28,7 +27,8 @@ ms.lasthandoff: 04/27/2017
 > * [CLI](load-balancer-multiple-ip-cli.md)
 > * [PowerShell](load-balancer-multiple-ip-powershell.md)
 
-이 문서에서는 보조 NIC(네트워크 인터페이스)에 여러 IP 주소가 있는 Azure Load Balancer를 사용하는 방법을 설명합니다. 이 시나리오에는 Windows를 실행하는 VM이 둘 있고 각각 기본 및 보조 NIC가 있습니다. 보조 NIC에는 각각 두 가지 IP 구성이 있습니다. 각 VM은 contoso.com 및 fabrikam.com 웹 사이트를 둘 다 호스트합니다. 각 웹 사이트는 보조 NIC의 IP 구성 중 하나에 바인딩됩니다. Azure Load Balancer를 사용하여 웹 사이트의 각 IP 구성에 트래픽을 분산하기 위해 각 웹 사이트에 하나씩 두 개의 프런트 엔드 IP 주소를 노출합니다. 이 시나리오는 양 쪽 프런트 엔드는 물론 양쪽 백 엔드 풀 IP 주소에 동일한 포트 번호를 사용합니다.
+
+이 문서에서는 보조 NIC(네트워크 인터페이스)에 여러 IP 주소가 있는 Azure Load Balancer를 사용하는 방법을 설명합니다. 이 시나리오에는 Windows를 실행하는 VM이 둘 있고 각각 기본 및 보조 NIC가 있습니다. 각 보조 NIC에는 두 가지 IP 구성이 있습니다. 각 VM은 contoso.com 및 fabrikam.com 웹 사이트를 둘 다 호스트합니다. 각 웹 사이트는 보조 NIC의 IP 구성 중 하나에 바인딩됩니다. Azure Load Balancer를 사용하여 웹 사이트의 각 IP 구성에 트래픽을 분산하기 위해 각 웹 사이트에 하나씩 두 개의 프런트 엔드 IP 주소를 노출합니다. 이 시나리오는 양 쪽 프런트 엔드는 물론 양쪽 백 엔드 풀 IP 주소에 동일한 포트 번호를 사용합니다.
 
 ![LB 시나리오 이미지](./media/load-balancer-multiple-ip/lb-multi-ip.PNG)
 
@@ -46,7 +46,7 @@ ms.lasthandoff: 04/27/2017
 
     자세한 내용은 [리소스 그룹 만들기](../virtual-machines/virtual-machines-windows-ps-create.md?toc=%2fazure%2fload-balancer%2ftoc.json)의 2단계를 참조하세요.
 
-3. VM을 포함할 [가용성 집합을 만듭니다](../virtual-machines/windows/create-availability-set.md?toc=%2fazure%2fload-balancer%2ftoc.json). 이 시나리오에서는 다음 명령을 사용합니다.
+3. VM을 포함할 [가용성 집합을 만듭니다](../virtual-machines/windows/tutorial-availability-sets.md?toc=%2fazure%2fload-balancer%2ftoc.json). 이 시나리오에서는 다음 명령을 사용합니다.
 
     ```powershell
     New-AzureRmAvailabilitySet -ResourceGroupName "contosofabrikam" -Name "myAvailset" -Location "West Central US"
@@ -61,7 +61,7 @@ ms.lasthandoff: 04/27/2017
 
     그런 다음 [Windows VM 만들기](../virtual-machines/virtual-machines-windows-ps-create.md?toc=%2fazure%2fload-balancer%2ftoc.json)의 6.3 ~ 6.8단계를 완료합니다.
 
-5. 각각의 VM에 두 번째 IP 구성을 추가합니다. [가상 컴퓨터에 여러 IP 주소 할당](../virtual-network/virtual-network-multiple-ip-addresses-powershell.md#add) 문서의 지침을 따릅니다. 다음 구성 설정을 사용합니다.
+5. 각각의 VM에 두 번째 IP 구성을 추가합니다. [가상 머신에 여러 IP 주소 할당](../virtual-network/virtual-network-multiple-ip-addresses-powershell.md#add) 문서의 지침을 따릅니다. 다음 구성 설정을 사용합니다.
 
     ```powershell
     $NicName = "VM1-NIC2"
@@ -142,4 +142,3 @@ ms.lasthandoff: 04/27/2017
 ## <a name="next-steps"></a>다음 단계
 - Azure에서 부하 분산 서비스를 결합하는 방법에 대한 자세한 내용은 [Azure에서 부하 분산 서비스 사용](../traffic-manager/traffic-manager-load-balancing-azure.md)을 참조하세요.
 - [Azure Load Balancer에 대한 로그 분석](../load-balancer/load-balancer-monitor-log.md)을 통해 Azure에서 부하 분산 장치를 관리하고 문제를 해결하는 데 다양한 유형의 로그를 사용하는 방법에 대해 알아보세요.
-

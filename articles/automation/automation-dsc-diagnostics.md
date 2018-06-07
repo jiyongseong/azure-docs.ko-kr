@@ -1,29 +1,23 @@
 ---
-title: "OMS Log Analytics에 Azure Automation DSC 보고 데이터 전달 | Microsoft Docs"
-description: "이 문서에서는 DSC(필요한 상태 구성) 보고 데이터를 Microsoft Operations Management Suite Log Analytics로 보내 통찰력 및 관리를 강화하는 방법을 알아봅니다."
+title: Log Analytics에 Azure Automation DSC 보고 데이터 전달
+description: 이 문서에서는 통찰력 및 관리를 강화할 수 있도록 DSC(필요한 상태 구성) 보고 데이터를 Log Analytics로 보내는 방법을 알아봅니다.
 services: automation
-documentationcenter: 
-author: eslesar
-manager: carmonm
-editor: tysonn
 ms.service: automation
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: infrastructure-services
-ms.date: 05/24/2017
-ms.author: eslesar
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 67ee6932f417194d6d9ee1e18bb716f02cf7605d
-ms.openlocfilehash: 316031c5297a0201c8db4a9e177298c78962c673
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
-
+ms.component: dsc
+author: georgewallace
+ms.author: gwallace
+ms.date: 03/16/2018
+ms.topic: conceptual
+manager: carmonm
+ms.openlocfilehash: d01042a02f2339f039f23d4f6e021de503dc3815
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
-# <a name="forward-azure-automation-dsc-reporting-data-to-oms-log-analytics"></a>OMS Log Analytics에 Azure Automation DSC 보고 데이터 전달
+# <a name="forward-azure-automation-dsc-reporting-data-to-log-analytics"></a>Log Analytics에 Azure Automation DSC 보고 데이터 전달
 
-Automation 기능을 통해 Microsoft OMS(Operations Management Suite) Log Analytics 작업 영역으로 DSC 노드 상태 데이터를 보낼 수 있습니다.  
+Automation에서는 DSC 노드 상태 데이터를 Log Analytics 작업 영역으로 보낼 수 있습니다.  
 Azure Portal에서 또는 PowerShell을 사용하여 노드 및 노드 구성의 개별 DSC 리소스에 대해 준수 상태를 볼 수 있습니다. Log Anaytics를 사용하여 다음을 수행할 수 있습니다.
 
 * 관리되는 노드 및 개별 리소스에 대한 준수 정보 가져오기
@@ -37,15 +31,15 @@ Azure Portal에서 또는 PowerShell을 사용하여 노드 및 노드 구성의
 Automation DSC 보고서를 Log Analytics로 보내려면 다음이 필요합니다.
 
 * [Azure PowerShell](/powershell/azure/overview)의 2016년 11월(v2.3.0) 이후 릴리스
-* Azure 자동화 계정. 자세한 내용은 [Azure Automation 시작](automation-offering-get-started.md)을 참조하세요.
+* Azure Automation 계정. 자세한 내용은 [Azure Automation 시작](automation-offering-get-started.md)을 참조하세요.
 * **Automation & Control** 서비스가 제공되는 Log Analytics 작업 공간 자세한 내용은 [Log Analytics 시작](../log-analytics/log-analytics-get-started.md)을 참조하세요.
-* 하나 이상의 Azure Automation DSC 노드. 자세한 내용은 [Azure Automation DSC를 통한 관리를 위한 컴퓨터 온보드](automation-dsc-onboarding.md)를 참조하세요. 
+* 하나 이상의 Azure Automation DSC 노드. 자세한 내용은 [Azure Automation DSC를 통한 관리를 위한 컴퓨터 온보드](automation-dsc-onboarding.md)를 참조하세요.
 
 ## <a name="set-up-integration-with-log-analytics"></a>Log Analytics와의 통합 설정
 
 Azure Automation DSC의 데이터를 Log Analytics로 가져오려면 다음 단계를 완료합니다.
 
-1. PowerShell에서 Azure 계정에 로그인합니다. [Azure PowerShell을 사용하여 로그인](https://docs.microsoft.com/en-us/powershell/azure/authenticate-azureps?view=azurermps-4.0.0)을 참조하세요.
+1. PowerShell에서 Azure 계정에 로그인합니다. [Azure PowerShell을 사용하여 로그인](https://docs.microsoft.com/powershell/azure/authenticate-azureps?view=azurermps-4.0.0)을 참조하세요.
 1. 다음 PowerShell 명령을 실행하여 Automation 계정의 _ResourceId_를 가져옵니다(Automation 계정이 2개 이상 있으면 구성하려는 계정의 _ResourceID_ 선택).
 
   ```powershell
@@ -97,7 +91,7 @@ Log Analytics에서 검색하여 로그를 볼 수도 있습니다. [로그 검�
 1. 쿼리 필드에 다음 검색을 입력하여 경고에 대한 로그 검색 쿼리를 만듭니다. `Type=AzureDiagnostics Category=DscNodeStatus NodeName_s=DSCTEST1 OperationName=DscNodeStatusData ResultType=Failed`.
 
   둘 이상의 Automation 계정 또는 구독에서 작업 영역으로의 로그를 설정한 경우 구독 또는 Automation 계정별로 경고를 그룹화할 수 있습니다.  
-  자동화 계정 이름은 DscNodeStatusData 검색의 리소스 필드에서 파생될 수 있습니다.  
+  Automation 계정 이름은 DscNodeStatusData 검색의 리소스 필드에서 파생될 수 있습니다.  
 1. **경고 규칙 추가** 화면을 열려면 페이지 위쪽의 **경고**를 클릭합니다. 경고 구성 옵션에 자세한 내용은 [Log Analytics의 경고](../log-analytics/log-analytics-alerts.md#alert-rules)를 참조하세요.
 
 ### <a name="find-failed-dsc-resources-across-all-nodes"></a>모든 노드에서 실패한 DSC 리소스 찾기
@@ -123,7 +117,7 @@ Azure Automation의 진단은 Log Analytics에 두 가지 범주의 레코드를
 
 ### <a name="dscnodestatusdata"></a>DscNodeStatusData
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | TimeGenerated |준수 확인이 실행된 날짜 및 시간입니다. |
 | OperationName |DscNodeStatusData |
@@ -131,7 +125,7 @@ Azure Automation의 진단은 Log Analytics에 두 가지 범주의 레코드를
 | NodeName_s |관리되는 노드의 이름입니다. |
 | NodeComplianceStatus_s |노드가 규정을 준수하는지 여부입니다. |
 | DscReportStatus |준수 검사가 성공적으로 실행되었는지 여부입니다. |
-| ConfigurationMode | 구성이 노드에 적용되는 방식입니다. 사용 가능한 값은 __"ApplyOnly"__,__"ApplyandMonitior"__ 및 __"ApplyandAutoCorrect"__입니다. <ul><li>__ApplyOnly__: DSC는 구성을 적용하며, 새 구성이 대상 노드에 푸시되지 않거나 서버에서 새 구성을 가져올 때 아무 작업도 수행하지 않습니다. 새 구성이 초기에 적용된 후 DSC는 이전에 구성된 상태에서 달라졌는지 여부를 확인하지 않습니다. DSC는 __ApplyOnly__가 적용되기 전에 성공할 때까지 구성을 적용하려고 합니다. </li><li> __ApplyAndMonitor__: 기본값입니다. LCM는 새 구성을 적용합니다. 새 구성이 초기에 적용된 후 대상 노드가 원하는 상태에서 다른 상태로 바뀌면 DSC는 불일치 상황을 로그에 보고합니다. DSC는 __ApplyAndMonitor__가 적용되기 전에 성공할 때까지 구성을 적용하려고 합니다.</li><li>__ApplyAndAutoCorrect__: DSC는 모든 새 구성을 적용합니다. 새 구성이 초기에 적용된 후 대상 노드가 원하는 상태에서 다른 상태로 바뀌면 DSC는 불일치 상황을 로그에 보고하고 현재 구성을 다시 적용합니다.</li></ul> |
+| ConfigurationMode | 구성이 노드에 적용되는 방식입니다. 사용 가능한 값은 __"ApplyOnly"__,__"ApplyandMonitior"__ 및 __"ApplyandAutoCorrect"__ 입니다. <ul><li>__ApplyOnly__: DSC는 구성을 적용하며, 새 구성이 대상 노드에 푸시되지 않거나 서버에서 새 구성을 가져올 때 아무 작업도 수행하지 않습니다. 새 구성이 초기에 적용된 후 DSC는 이전에 구성된 상태에서 달라졌는지 여부를 확인하지 않습니다. DSC는 __ApplyOnly__가 적용되기 전에 성공할 때까지 구성을 적용하려고 합니다. </li><li> __ApplyAndMonitor__: 기본값입니다. LCM는 새 구성을 적용합니다. 새 구성이 초기에 적용된 후 대상 노드가 원하는 상태에서 다른 상태로 바뀌면 DSC는 불일치 상황을 로그에 보고합니다. DSC는 __ApplyAndMonitor__가 적용되기 전에 성공할 때까지 구성을 적용하려고 합니다.</li><li>__ApplyAndAutoCorrect__: DSC는 모든 새 구성을 적용합니다. 새 구성이 초기에 적용된 후 대상 노드가 원하는 상태에서 다른 상태로 바뀌면 DSC는 불일치 상황을 로그에 보고하고 현재 구성을 다시 적용합니다.</li></ul> |
 | HostName_s | 관리되는 노드의 이름입니다. |
 | IPAddress | 관리되는 노드의 IPv4 주소입니다. |
 | Category | DscNodeStatus |
@@ -154,7 +148,7 @@ Azure Automation의 진단은 Log Analytics에 두 가지 범주의 레코드를
 
 ### <a name="dscresourcestatusdata"></a>DscResourceStatusData
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | TimeGenerated |준수 확인이 실행된 날짜 및 시간입니다. |
 | OperationName |DscResourceStatusData|
@@ -196,6 +190,5 @@ Log Analytics는 Automation DSC 데이터의 작동을 보다 정확히 이해�
 
 * Log Analytics를 사용하여 여러 검색 쿼리를 작성하고 Automation DSC 로그를 검토하는 방법에 대한 자세한 내용은 [Log Analytics의 로그 검색](../log-analytics/log-analytics-log-searches.md)을 참조하세요.
 * Azure Automation DSC 사용 방법에 대한 자세한 내용은 [Azure Automation DSC 시작하기](automation-dsc-getting-started.md)를 참조하세요.
-* OMS Log Analytics 및 데이터 수집 소스에 대한 자세한 내용은 [Log Analytics에서 Azure Storage 데이터 수집 개요](../log-analytics/log-analytics-azure-storage.md)
-
+* Log Analytics 및 데이터 수집 소스에 대한 자세한 내용은 [Log Analytics에서 Azure Storage 데이터 수집 개요](../log-analytics/log-analytics-azure-storage.md)를 참조하세요.
 

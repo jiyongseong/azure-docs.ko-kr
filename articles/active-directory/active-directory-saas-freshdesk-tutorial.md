@@ -1,10 +1,10 @@
 ---
-title: "자습서: FreshDesk와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory 및 FreshDesk 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: FreshDesk와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory 및 FreshDesk 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: c2a3e5aa-7b5a-4fe4-9285-45dbe6e8efcc
 ms.service: active-directory
 ms.workload: identity
@@ -14,12 +14,11 @@ ms.topic: article
 ms.date: 07/20/2017
 ms.author: jeedes
 ms.reviewer: jeedes
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c308183ffe6a01f4d4bf6f5817945629cbcedc92
-ms.openlocfilehash: 47609ab453cf3db3cb745f91ed23904ff90e7b41
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/17/2017
-
+ms.openlocfilehash: 76f91f865b2f2135e319d164a0823c57cda837c9
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-freshdesk"></a>자습서: FreshDesk와 Azure Active Directory 통합
 
@@ -31,7 +30,7 @@ FreshDesk를 Azure AD와 통합하면 다음과 같은 이점이 제공됩니다
 - 사용자가 해당 Azure AD 계정으로 FreshDesk에 자동으로 SSO(Single Sign-On)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure 관리 포털에서 계정을 관리할 수 있습니다.
 
-Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](active-directory-appssoaccess-whatis.md)을 참조하세요.
+Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](manage-apps/what-is-single-sign-on.md)을 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +58,7 @@ FreshDesk의 Azure AD 통합을 구성하려면 갤러리의 FreshDesk를 관리
 
 **갤러리에서 FreshDesk를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure 관리 포털](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure 관리 포털](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Active Directory][1]
 
@@ -88,11 +87,11 @@ Single Sign-On이 작동하려면 Azure AD에서 Azure AD 사용자에 해당하
 
 FreshDesk에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구성 요소를 완료해야 합니다.
 
-1. **[Azure AD Single Sign-On 구성](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
-2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
+1. **[Configuring Azure AD Single Sign-On](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
+2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On 테스트하는 데 사용합니다.
 3. **[FreshDesk 테스트 사용자 만들기](#creating-a-freshdesk-test-user)** - Britta Simon의 Azure AD 표현과 연결된 해당 사용자를 FreshDesk에 만듭니다.
 4. **[Azure AD 테스트 사용자 할당](#assigning-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Testing Single Sign-On](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
+5. **[Single Sign-On 테스트](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
 
 ### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -102,30 +101,30 @@ FreshDesk에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
 
 1. Azure 관리 포털의 **FreshDesk** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single sign on** 대화 상자에서 **모드**로 **SAML 기반 로그온**을 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-on 구성](./media/active-directory-saas-freshdesk-tutorial/tutorial_freshdesk_samlbase.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-freshdesk-tutorial/tutorial_freshdesk_samlbase.png)
 
 3. **FreshDesk 도메인 및 URL** 섹션에서 **로그온 URL**을 `https://<tenant-name>.freshdesk.com` 또는 Freshdesk에서 제안한 다른 값으로 입력하세요.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-freshdesk-tutorial/tutorial_freshdesk_url.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-freshdesk-tutorial/tutorial_freshdesk_url.png)
 
     > [!NOTE] 
     > 이러한 값은 실제 값이 아닙니다. 이러한 값은 실제 로그온 URL로 업데이트해야 합니다. 이 값을 얻으려면 [FreshDesk Client 지원 팀](https://freshdesk.com/helpdesk-software?utm_source=Google-AdWords&utm_medium=Search-IND-Brand&utm_campaign=Search-IND-Brand&utm_term=freshdesk&device=c&gclid=COSH2_LH7NICFVUDvAodBPgBZg)에 문의하세요.  
 
 4. **SAML 서명 인증서** 섹션에서 **인증서**를 클릭한 후 컴퓨터에 인증서를 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-freshdesk-tutorial/tutorial_freshdesk_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-freshdesk-tutorial/tutorial_freshdesk_certificate.png) 
 
 5. **저장** 단추를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-freshdesk-tutorial/tutorial_general_400.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-freshdesk-tutorial/tutorial_general_400.png)
 
 6. **FreshDesk 구성** 섹션에서 **FreshDesk 구성**을 클릭하여 로그온 구성 창을 엽니다. **빠른 참조** 섹션에서 SAML Single Sign-On 서비스 URL 및 로그아웃 URL을 복사합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-freshdesk-tutorial/tutorial_freshdesk_configure.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-freshdesk-tutorial/tutorial_freshdesk_configure.png)
 
 7. 다른 웹 브라우저 창에서 Freshdesk 회사 사이트에 관리자로 로그인합니다.
 
@@ -141,11 +140,11 @@ FreshDesk에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
    
     ![Single Sign On](./media/active-directory-saas-freshdesk-tutorial/IC776770.png "Single Sign On")
    
-    a. **SSO(Single Sign On)**의 경우 **On**을 선택합니다.
+    a. **SSO(Single Sign On)** 의 경우 **On**을 선택합니다.
 
-    b. **SAML SSO**를 선택합니다.
+    나. **SAML SSO**를 선택합니다.
 
-    c. Azure Portal에서 복사한 **SAML Single Sign-On 서비스 URL**을 **SAML 로그인 URL** 텍스트 상자에 입력합니다.
+    다. Azure Portal에서 복사한 **SAML Single Sign-On 서비스 URL**을 **SAML 로그인 URL** 텍스트 상자에 입력합니다.
 
     d. Azure Portal에서 복사한 **로그아웃 URL**을 **로그아웃 URL** 텍스트 상자에 입력합니다.
 
@@ -154,7 +153,7 @@ FreshDesk에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
     >[!TIP]
     >자세한 내용은 [인증서의 지문 값을 검색하는 방법](http://youtu.be/YKQF266SAxI)을 참조하세요. 
     
-    f. **Save**를 클릭합니다.
+    f. **저장**을 클릭합니다.
 
 
 ### <a name="creating-an-azure-ad-test-user"></a>Azure AD 테스트 사용자 만들기
@@ -182,9 +181,9 @@ FreshDesk에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -214,13 +213,13 @@ FreshDesk의 경우 프로비전은 수동 작업입니다.
    
    a. **전체 이름** 텍스트 상자에 프로비전하려는 Azure AD 계정의 이름을 입력합니다.
 
-   b. **전자 메일** 텍스트 상자에 프로비전하려는 Azure AD 계정의 Azure AD 전자 메일 주소를 입력합니다.
+   나. **전자 메일** 텍스트 상자에 프로비전하려는 Azure AD 계정의 Azure AD 전자 메일 주소를 입력합니다.
 
-   c. **제목** 텍스트 상자에 프로비전하려는 Azure AD 계정의 제목을 입력합니다.
+   다. **제목** 텍스트 상자에 프로비전하려는 Azure AD 계정의 제목을 입력합니다.
 
    d. **에이전트 역할**을 선택한 다음 **할당**을 클릭합니다.
        
-   e. **Save**를 클릭합니다.     
+   e. **저장**을 클릭합니다.     
    
     >[!NOTE]
     >Azure AD 계정 보유자는 활성화되기 전에 계정을 확인하기 위한 링크를 포함한 전자 메일을 받습니다. 
@@ -243,7 +242,7 @@ FreshDesk의 경우 프로비전은 수동 작업입니다.
 
 2. 응용 프로그램 목록에서 **FreshDesk**를 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-freshdesk-tutorial/tutorial_freshdesk_app.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-freshdesk-tutorial/tutorial_freshdesk_app.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -268,7 +267,7 @@ FreshDesk의 경우 프로비전은 수동 작업입니다.
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -285,5 +284,4 @@ FreshDesk의 경우 프로비전은 수동 작업입니다.
 [201]: ./media/active-directory-saas-freshdesk-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-freshdesk-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-freshdesk-tutorial/tutorial_general_203.png
-
 

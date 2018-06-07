@@ -15,15 +15,13 @@ ms.tgt_pltfrm: na
 ms.workload: integration
 ms.custom: H1Hack27Feb2017
 ms.date: 03/31/2017
-ms.author: LADocs; jehollan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5edc47e03ca9319ba2e3285600703d759963e1f3
-ms.openlocfilehash: c92692db23ac59f67890e26cce6b2d3272e8901d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/01/2017
-
+ms.author: klam; LADocs
+ms.openlocfilehash: de4f4ee086fbf3799fcac1f1b008d9237b5e7a09
+ms.sourcegitcommit: 0b02e180f02ca3acbfb2f91ca3e36989df0f2d9c
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/05/2018
 ---
-
 # <a name="call-trigger-or-nest-workflows-with-http-endpoints-in-logic-apps"></a>Logic Apps의 HTTP 끝점을 통해 워크플로 호출, 트리거 또는 중첩
 
 URL을 통해 Logic Apps를 트리거 또는 호출할 수 있도록 동기식 HTTP 끝점을 기본적으로 논리 앱에 트리거로 표시할 수 있습니다. 또한 호출 가능 끝점의 패턴을 사용하여 Logic Apps에서 워크플로를 중첩할 수도 있습니다.
@@ -32,7 +30,7 @@ HTTP 끝점을 만들려면 Logic Apps가 들어오는 요청을 받을 수 있�
 
 * [요청](../connectors/connectors-native-reqres.md)
 
-* [API 연결 웹후크](logic-apps-workflow-actions-triggers.md#api-connection-trigger)
+* [API 연결 웹후크](../logic-apps/logic-apps-workflow-actions-triggers.md#apiconnection-trigger)
 
 * [HTTP 웹후크](../connectors/connectors-native-webhook.md)
 
@@ -86,7 +84,7 @@ HTTP 끝점을 만들려면 들어오는 요청을 받을 수 있는 트리거�
     다음 스키마를 생성합니다.
 
     ```json
-    }
+    {
        "type": "object",
        "properties": {
           "address": {
@@ -147,8 +145,7 @@ HTTP 끝점 URL이 매개 변수를 허용하도록 하려면 트리거의 상�
 5. 응답의 **본문**에 트리거의 상대 경로에 지정한 매개 변수의 토큰을 포함합니다.
 
     예를 들어 `Hello {customerID}`로 돌아가려면 응답의 **본문**을 `Hello {customerID token}`로 업데이트합니다. 
-    동적 콘텐츠 목록이 나타나고 선택할 `customerID` 
-    토큰이 표시됩니다.
+    동적 콘텐츠 목록이 나타나고 선택할 `customerID` 토큰이 표시됩니다.
 
     ![응답 본문에 매개 변수 추가](./media/logic-apps-http-endpoint/relativeurlresponse.png)
 
@@ -169,6 +166,7 @@ HTTP 끝점 URL이 매개 변수를 허용하도록 하려면 트리거의 상�
     `Hello 123456`
 
 <a name="generated-tokens"></a>
+
 ### <a name="tokens-generated-from-json-schemas-for-your-logic-app"></a>논리 앱에 대한 JSON 스키마에서 생성된 토큰
 
 **요청** 트리거에 JSON 스키마를 제공하면 논리 앱 디자이너가 이 스키마의 속성에 대한 토큰을 생성합니다. 논리 앱 워크플로를 통해 데이터를 전달하는 데 해당 토큰을 사용할 수 있습니다.
@@ -209,6 +207,9 @@ HTTP 끝점 URL이 매개 변수를 허용하도록 하려면 트리거의 상�
 
 HTTP 끝점을 만든 후 `POST` 메서드를 통해 논리 앱을 전체 URL로 트리거할 수 있습니다. Logic Apps는 직접 액세스 끝점에 대한 기본 제공 지원을 포함합니다.
 
+> [!NOTE] 
+> 언제든 논리 앱을 수동으로 실행하려면 Logic App 디자이너 또는 Logic App 코드 보기 도구모음에서 **실행**을 선택합니다.
+
 ## <a name="reference-content-from-an-incoming-request"></a>들어오는 요청의 콘텐츠 참조
 
 콘텐츠의 형식이 `application/json`이면 들어오는 요청의 속성을 참조할 수 있습니다. 그렇지 않으면 콘텐츠는 다른 API에 전달할 수 있는 단일 이진 단위로 처리됩니다. 워크플로 내에서 이 콘텐츠를 참조하려면 해당 콘텐츠를 변환해야 합니다. 예를 들어 `application/xml` 콘텐츠를 전달하는 경우 `@xpath()`를 사용하여 XPath 추출을 수행하거나 `@json()`를 사용하여 XML을 JSON으로 변환할 수 있습니다. [콘텐츠 형식 사용](../logic-apps/logic-apps-content-type.md)에 대해 자세히 알아봅니다.
@@ -237,17 +238,17 @@ HTTP 끝점을 만든 후 `POST` 메서드를 통해 논리 앱을 전체 URL로
 
 ### <a name="construct-the-response"></a>응답 생성
 
-응답 본문에 둘 이상의 헤더 및 임의 형식의 콘텐츠를 포함할 수 있습니다. 이 예제 응답의 경우 헤더는 응답의 콘텐츠 형식이 `application/json`인 것으로 지정합니다. 그리고 본문은 **요청** 트리거에 대해 이전에 업데이트된 JSON 스키마에 따라 `title` 및 `name`를 포함합니다.
+응답 본문에 둘 이상의 헤더 및 임의 형식의 콘텐츠를 포함할 수 있습니다. 예제 응답의 경우 헤더는 응답의 콘텐츠 형식이 `application/json`인 것으로 지정합니다. 그리고 본문은 **요청** 트리거에 대해 이전에 업데이트된 JSON 스키마에 따라 `title` 및 `name`를 포함합니다.
 
 ![HTTP 응답 작업][3]
 
 응답 속성:
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | statusCode |들어오는 요청에 응답하는 HTTP 상태 코드를 지정합니다. 이 코드는 2xx, 4xx 또는 5xx로 시작하는 모든 유효한 상태 코드가 될 수 있습니다. 하지만 3xx 상태 코드는 허용되지 않습니다. |
 | headers |응답에 포함될 헤더의 수를 정의합니다. |
-| body |문자열, JSON 개체 또는 이전 단계에서 참조한 이진 콘텐츠일 수도 있는 본문 개체를 지정합니다. |
+| 본문 |문자열, JSON 개체 또는 이전 단계에서 참조한 이진 콘텐츠일 수도 있는 본문 개체를 지정합니다. |
 
 **응답** 작업에 대한 JSON 스키마는 이제 다음과 유사하게 표시됩니다.
 
@@ -320,4 +321,3 @@ Azure Logic Apps 및 커넥터 개선에 도움을 주려면 [Azure Logic Apps �
 [1]: ./media/logic-apps-http-endpoint/manualtrigger.png
 [2]: ./media/logic-apps-http-endpoint/manualtriggerurl.png
 [3]: ./media/logic-apps-http-endpoint/response.png
-

@@ -1,6 +1,6 @@
 ---
 title: "Azure Service Bus 메시지 큐, 토픽 및 구독 개요 | Microsoft Docs"
-description: "서비스 버스 메시징 엔터티의 개요"
+description: "Service Bus 메시징 엔터티의 개요"
 services: service-bus-messaging
 documentationcenter: na
 author: sethmanheim
@@ -12,19 +12,17 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 06/28/2017
+ms.date: 11/07/2017
 ms.author: sethm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0bec803e4b49f3ae53f2cc3be6b9cb2d256fe5ea
-ms.openlocfilehash: 0c727a47d6b947484f9a5cd678fef14d6fe2b4ab
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/24/2017
-
-
+ms.openlocfilehash: 5bea3b56cea81362b25e696a672bf2a00e26d3ef
+ms.sourcegitcommit: 0930aabc3ede63240f60c2c61baa88ac6576c508
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/07/2017
 ---
 # <a name="service-bus-queues-topics-and-subscriptions"></a>Service Bus 큐, 토픽 및 구독
 
-Microsoft Azure Service Bus는 신뢰할 수 있는 메시지 큐 및 지속형 게시/구독 메시징을 포함하여 클라우드 기반, 메시지 지향 미들웨어 기술 집합을 지원합니다. 이러한 "조정된" 메시지 기능은 Service Bus 메시지 패브릭을 사용하여 분리된 메시지 기능 게시-구독, 임시 분리 및 부하 분산 시나리오로 여겨질 수 있습니다. 분리된 통신에는 많은 장점이 있습니다. 예를 들어 필요하면 클라이언트와 서버가 연결되고 비동기 방식으로 작업을 수행할 수 있습니다.
+Microsoft Azure Service Bus는 신뢰할 수 있는 메시지 큐 및 지속형 게시/구독 메시징을 포함하여 클라우드 기반, 메시지 지향 미들웨어 기술 집합을 지원합니다. 이러한 조정된 메시징 기능은 Service Bus 메시징 워크로드를 사용하여 분리된 메시징 기능 게시-구독, 임시 분리 및 부하 분산 시나리오로 여겨질 수 있습니다. 분리된 통신에는 많은 장점이 있습니다. 예를 들어 필요하면 클라이언트와 서버가 연결되고 비동기 방식으로 작업을 수행할 수 있습니다.
 
 Service Bus에서 메시지 기능의 핵심이 되는 메시지 엔터티는 큐, 토픽 및 구독, 규칙/동작입니다.
 
@@ -45,7 +43,7 @@ TokenProvider credentials = TokenProvider.CreateSharedAccessSignatureTokenProvid
 NamespaceManager namespaceClient = new NamespaceManager(ServiceBusEnvironment.CreateServiceUri("sb", ServiceNamespace, string.Empty), credentials);
 ```
 
-서비스 버스 URI를 사용하여 큐 개체 및 메시징 팩터리를 인수로 만들 수 있습니다. 예:
+Service Bus URI를 사용하여 큐 개체 및 메시징 팩터리를 인수로 만들 수 있습니다. 예:
 
 ```csharp
 QueueDescription myQueue;
@@ -54,7 +52,7 @@ MessagingFactory factory = MessagingFactory.Create(ServiceBusEnvironment.CreateS
 QueueClient myQueueClient = factory.CreateQueueClient("TestQueue");
 ```
 
-그러면 큐로 메시지를 보낼 수 있습니다. 예를 들어 `MessageList`라는 조정된 메시지 목록이 있는 경우 코드는 다음과 유사하게 나타납니다.
+그러면 큐로 메시지를 보낼 수 있습니다. 예를 들어 `MessageList`라는 조정된 메시지 목록이 있는 경우 코드는 다음 예제와 유사하게 나타납니다.
 
 ```csharp
 for (int count = 0; count < 6; count++)
@@ -78,11 +76,11 @@ while ((message = myQueueClient.Receive(new TimeSpan(hours: 0, minutes: 0, secon
     }
 ```
 
-[ReceiveAndDelete](/dotnet/api/microsoft.servicebus.messaging.receivemode) 모드에서 수신은 1단계 작업입니다. 즉, Service Bus가 요청을 받으면 메시지를 이용되는 것으로 표시하고 응용 프로그램에 반환합니다. **ReceiveAndDelete** 모드는 가장 단순한 모델이며, 응용 프로그램이 실패 이벤트 시 메시지를 처리하지 않아도 안전한 시나리오에서 효과적입니다. 이해를 돕기 위해 소비자가 수신 요청을 실행한 후 처리하기 전에 크래시되는 시나리오를 고려해 보세요. 서비스 버스가 메시지를 이용되는 것으로 표시했기 때문에 응용 프로그램이 다시 시작되고 메시지 이용을 다시 시작할 때 크래시 전에 이용된 메시지는 누락됩니다.
+[ReceiveAndDelete](/dotnet/api/microsoft.servicebus.messaging.receivemode) 모드에서 수신은 1단계 작업입니다. 즉, Service Bus가 요청을 받으면 메시지를 이용되는 것으로 표시하고 응용 프로그램에 반환합니다. **ReceiveAndDelete** 모드는 가장 단순한 모델이며, 응용 프로그램이 실패 이벤트 시 메시지를 처리하지 않아도 안전한 시나리오에서 효과적입니다. 이해를 돕기 위해 소비자가 수신 요청을 실행한 후 처리하기 전에 크래시되는 시나리오를 고려해 보세요. Service Bus가 메시지를 이용되는 것으로 표시했기 때문에 응용 프로그램이 다시 시작되고 메시지 이용을 다시 시작할 때 크래시 전에 이용된 메시지는 누락됩니다.
 
-[PeekLock](/dotnet/api/microsoft.servicebus.messaging.receivemode) 모드에서는 수신 작업이 2단계이므로 메시지 누락이 허용되지 않는 응용 프로그램을 지원할 수 있습니다. 서비스 버스는 요청을 받으면 소비할 다음 메시지를 찾아서 다른 소비자가 수신할 수 없도록 잠근 후 응용 프로그램에 반환합니다. 응용 프로그램은 메시지 처리를 완료하거나 추가 처리를 위해 안전하게 저장한 후 수신된 메시지에 대해 [Complete](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Complete)를 호출하여 수신 프로세스의 두 번째 단계를 완료합니다. Service Bus가 **Complete** 호출을 확인하면 메시지를 이용한 것으로 표시하고 큐에서 제거합니다.
+[PeekLock](/dotnet/api/microsoft.servicebus.messaging.receivemode) 모드에서는 수신 작업이 2단계이므로 메시지 누락이 허용되지 않는 응용 프로그램을 지원할 수 있습니다. Service Bus는 요청을 받으면 소비할 다음 메시지를 찾아서 다른 소비자가 수신할 수 없도록 잠근 후 응용 프로그램에 반환합니다. 응용 프로그램은 메시지 처리를 완료하거나 추가 처리를 위해 안전하게 저장한 후 수신된 메시지에 대해 [Complete](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Complete)를 호출하여 수신 프로세스의 두 번째 단계를 완료합니다. Service Bus가 **Complete** 호출을 확인하면 메시지를 이용한 것으로 표시하고 큐에서 제거합니다.
 
-어떤 이유로든 수신 응용 프로그램이 메시지를 처리할 수 없는 경우 받은 메시지에 [Complete](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Complete) 메서드 대신 [Abandon](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Abandon) 메서드를 호출할 수 있습니다. 그러면 서비스 버스에서 메시지의 잠금을 해제하므로 동일한 소비나 다른 경쟁적 소비자에게서 메시지를 다시 받을 수 있습니다. 두 번째로 잠금과 연결된 시간 제한도 있으며, 응용 프로그램에서 잠금 시간 제한이 만료되기 전에 메시지를 처리하지 못하는 경우(예: 응용 프로그램이 크래시되는 경우) Service Bus가 메시지를 잠금 해제하여 다시 받을 수 있게 합니다(기본적으로 [Abandon](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Abandon) 작업 수행).
+어떤 이유로든 수신 응용 프로그램이 메시지를 처리할 수 없는 경우 받은 메시지에 [Complete](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Complete) 메서드 대신 [Abandon](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Abandon) 메서드를 호출할 수 있습니다. 그러면 Service Bus에서 메시지의 잠금을 해제하므로 동일한 소비나 다른 경쟁적 소비자에게서 메시지를 다시 받을 수 있습니다. 두 번째로 잠금과 연결된 시간 제한도 있으며, 응용 프로그램에서 잠금 시간 제한이 만료되기 전에 메시지를 처리하지 못하는 경우(예: 응용 프로그램이 크래시되는 경우) Service Bus가 메시지를 잠금 해제하여 다시 받을 수 있게 합니다(기본적으로 [Abandon](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Abandon) 작업 수행).
 
 응용 프로그램이 메시지를 처리한 후 **Complete** 요청이 실행되기 전에 크래시되는 경우 다시 시작될 때 메시지가 응용 프로그램에 다시 배달됩니다. 이를 *최소 한 번 이상* 처리라고 합니다. 즉, 각 메시지가 최소 한 번 처리됩니다. 그러나 특정 상황에서는 동일한 메시지가 다시 배달될 수 있습니다. 시나리오가 중복 처리를 허용하지 않는 경우 메시지의 **MessageId** 속성에 따라 얻을 수 있는 중복을 검색하려면 응용 프로그램에 추가 논리가 필요하며 이는 전달 시도를 걸쳐 일관성을 유지합니다. *정확히 한번* 처리로 알려집니다.
 
@@ -157,15 +155,13 @@ namespaceManager.CreateSubscription("IssueTrackingTopic", "Dashboard", new SqlFi
 
 구독 필터가 준비된 경우 `StoreName` 속성이 `Store1`로 설정된 메시지만이 `Dashboard` 구독에 대해 가상 큐에 복사됩니다.
 
-가능한 필터 값에 대한 자세한 내용은 [SqlFilter](/dotnet/api/microsoft.servicebus.messaging.sqlfilter) 및 [SqlRuleAction](/dotnet/api/microsoft.servicebus.messaging.sqlruleaction) 클래스에 대한 설명서를 참조하세요. 또한 [조정된 메시징: 고급 필터](http://code.msdn.microsoft.com/Brokered-Messaging-6b0d2749) 및 [토픽 필터](https://github.com/Azure-Samples/azure-servicebus-messaging-samples/tree/master/TopicFilters) 샘플을 참조하세요.
+가능한 필터 값에 대한 자세한 내용은 [SqlFilter](/dotnet/api/microsoft.servicebus.messaging.sqlfilter) 및 [SqlRuleAction](/dotnet/api/microsoft.servicebus.messaging.sqlruleaction) 클래스에 대한 설명서를 참조하세요. 또한 [조정된 메시징: 고급 필터](http://code.msdn.microsoft.com/Brokered-Messaging-6b0d2749) 및 [토픽 필터](https://github.com/Azure/azure-service-bus/tree/master/samples/DotNet/Microsoft.ServiceBus.Messaging/TopicFilters) 샘플을 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
 Service Bus 메시지 사용에 대한 자세한 내용 및 예제는 다음 고급 토픽을 참조하세요.
 
-* [서비스 버스 메시징 개요](service-bus-messaging-overview.md)
+* [Service Bus 메시징 개요](service-bus-messaging-overview.md)
 * [Service Bus 조정된 메시징 .NET 자습서](service-bus-brokered-tutorial-dotnet.md)
 * [Service Bus 조정된 메시징 REST 자습서](service-bus-brokered-tutorial-rest.md)
-* [토픽 필터 샘플](https://github.com/Azure-Samples/azure-servicebus-messaging-samples/tree/master/TopicFilters)
 * [조정된 메시징: 고급 필터 샘플](http://code.msdn.microsoft.com/Brokered-Messaging-6b0d2749)
-
 

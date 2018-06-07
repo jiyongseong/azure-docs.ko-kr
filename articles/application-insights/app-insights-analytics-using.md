@@ -1,9 +1,9 @@
 ---
-title: "Analytics 사용 - Azure Application Insights의 강력한 검색 도구 | Microsoft Docs"
-description: "Application Insights의 강력한 진단 검색 도구인 Analytics를 사용하는 방법에 대해 설명합니다. "
+title: Analytics 사용 - Azure Application Insights의 강력한 검색 도구 | Microsoft Docs
+description: 'Application Insights의 강력한 진단 검색 도구인 Analytics를 사용하는 방법에 대해 설명합니다. '
 services: application-insights
-documentationcenter: 
-author: danhadari
+documentationcenter: ''
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: c3b34430-f592-4c32-b900-e9f50ca096b3
 ms.service: application-insights
@@ -12,24 +12,24 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 03/14/2017
-ms.author: sewhee
+ms.author: danha; mbullwin
+ms.openlocfilehash: 5a49d38ddc9d2181f9b35ac948c44df70bad831b
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
 ms.translationtype: HT
-ms.sourcegitcommit: c30998a77071242d985737e55a7dc2c0bf70b947
-ms.openlocfilehash: 28d32d1e2d82519fc7b2ad4edca8435c3759594f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/02/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
+ms.locfileid: "33869889"
 ---
 # <a name="using-analytics-in-application-insights"></a>Application Insights에서 Analytics 사용
 [분석](app-insights-analytics.md)은 [Application Insights](app-insights-overview.md)의 강력한 검색 기능입니다. 다음 페이지에서는 Log Analytics 쿼리 언어에 대해 설명합니다.
 
 * **[소개 비디오 보기](https://applicationanalytics-media.azureedge.net/home_page_video.mp4)**
-* 앱이 아직 데이터를 Application Insights로 전송하지 않은 경우, **[시뮬레이션된 데이터에 대한 분석을 테스트](https://analytics.applicationinsights.io/demo)**합니다.
+* 앱이 아직 데이터를 Application Insights로 전송하지 않은 경우, **[시뮬레이션된 데이터에 대한 분석을 테스트](https://analytics.applicationinsights.io/demo)** 합니다.
 
 ## <a name="open-analytics"></a>Analytics 열기
 Application Insights의 앱 홈 리소스에서 Analytics를 클릭합니다.
 
-![portal.azure.com을 열고 Application Insights 리소스를 열고 Analytics를 클릭합니다.](./media/app-insights-analytics-using/001.png)
+![portal.azure.com에서 Application Insights 리소스를 열고 분석을 클릭합니다.](./media/app-insights-analytics-using/001.png)
 
 인라인 자습서에서 수행할 수 있는 몇 가지 작업을 확인할 수 있습니다.
 
@@ -39,7 +39,7 @@ Application Insights의 앱 홈 리소스에서 Analytics를 클릭합니다.
 ### <a name="write-a-query"></a>쿼리 작성
 ![스키마 표시](./media/app-insights-analytics-using/150.png)
 
-왼쪽에 나열된 테이블의 이름(또는 [range](https://docs.loganalytics.io/queryLanguage/query_language_rangeoperator.html) 또는 [union](https://docs.loganalytics.io/queryLanguage/query_language_unionoperator.html) 연산자)으로 시작합니다. [연산자](https://docs.loganalytics.io/learn/cheatsheets/useful_operators.html) 파이프라인을 만들려면 `|`을(를) 사용합니다. 
+왼쪽에 나열된 테이블의 이름(또는 [range](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/range-operator) 또는 [union](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/union-operator) 연산자)으로 시작합니다. [연산자](https://docs.loganalytics.io/docs/Learn/References/Useful-operators) 파이프라인을 만들려면 `|`을(를) 사용합니다. 
 
 IntelliSense에 사용할 수 있는 연산자 및 식 요소를 지정하라는 메시지가 표시됩니다. 정보 아이콘을 클릭하거나 Ctrl+스페이스바를 눌러 보다 긴 설명 및 각 요소를 사용하는 방법에 대한 예제를 가져옵니다.
 
@@ -50,7 +50,7 @@ IntelliSense에 사용할 수 있는 연산자 및 식 요소를 지정하라는
 
 1. 쿼리에서는 단일 줄 바꿈을 사용할 수 있습니다.
 2. 실행하려는 쿼리의 내부 또는 끝에 커서를 놓습니다.
-3. 쿼리 시간 범위를 확인합니다. 쿼리에 고유한 [`where...timestamp...`](https://docs.loganalytics.io/concepts/concepts_datatypes_timespan.html) 절을 포함하여 재정의하거나 변경할 수 있습니다.
+3. 쿼리 시간 범위를 확인합니다. 쿼리에 고유한 [`where...timestamp...`](https://docs.loganalytics.io/docs/Learn/Tutorials/Date-and-time-operations) 절을 포함하여 재정의하거나 변경할 수 있습니다.
 3. 이동을 클릭하여 쿼리를 실행합니다.
 4. 쿼리에 빈 줄을 넣으면 안 됩니다. 빈 줄로 구분하여 하나의 쿼리 탭에서 분리된 여러 개의 쿼리를 유지할 수 있습니다. 커서가 있는 쿼리만 실행됩니다.
 
@@ -72,7 +72,7 @@ IntelliSense에 사용할 수 있는 연산자 및 식 요소를 지정하라는
 > [!NOTE]
 > 브라우저에서 정렬, 그룹화 및 필터링을 수행해도 쿼리가 다시 실행되지는 않습니다. 마지막 쿼리에서 반환된 결과만 다시 정렬됩니다. 
 > 
-> 결과가 반환하기 전에 서버에서 이러한 작업을 수행하려면 [sort](https://docs.loganalytics.io/queryLanguage/query_language_sortoperator.html), [summarize](https://docs.loganalytics.io/queryLanguage/query_language_summarizeoperator.html) 및 [where](https://docs.loganalytics.io/queryLanguage/query_language_whereoperator.html) 연산자를 사용하여 쿼리를 작성합니다.
+> 결과가 반환하기 전에 서버에서 이러한 작업을 수행하려면 [sort](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/sort-operator), [summarize](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/summarize-operator) 및 [where](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/where-operator) 연산자를 사용하여 쿼리를 작성합니다.
 > 
 > 
 
@@ -100,7 +100,7 @@ IntelliSense에 사용할 수 있는 연산자 및 식 요소를 지정하라는
 
     그러나 드롭다운 메뉴를 사용하여 시간 범위 필터를 변경할 수 있습니다.
 
-    또는 [`where  ... timestamp ...` 절](https://docs.loganalytics.io/queryLanguage/query_language_whereoperator.html)을 쿼리에 포함하여 자동 범위를 재정의할 수 있습니다. 예:
+    또는 [`where  ... timestamp ...` 절](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/where-operator)을 쿼리에 포함하여 자동 범위를 재정의할 수 있습니다. 예: 
 
     `requests | where timestamp > ago('2d')`
 
@@ -108,10 +108,10 @@ IntelliSense에 사용할 수 있는 연산자 및 식 요소를 지정하라는
 
     이 제한에 도달하지 않도록 하는 것이 좋습니다. 시간 범위 필터를 사용하거나 다음과 같은 연산자를 사용합니다.
 
-  * [top 100 by timestamp](https://docs.loganalytics.io/queryLanguage/query_language_topoperator.html) 
-  * [take 100](https://docs.loganalytics.io/queryLanguage/query_language_takeoperator.html)
-  * [summarize ](https://docs.loganalytics.io/queryLanguage/query_language_summarizeoperator.html) 
-  * [where timestamp > ago(3d)](https://docs.loganalytics.io/queryLanguage/query_language_whereoperator.html)
+  * [top 100 by timestamp](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/top-operator) 
+  * [take 100](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/take-operator)
+  * [summarize ](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/summarize-operator) 
+  * [where timestamp > ago(3d)](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/where-operator)
 
 10,000개가 넘는 행을 원하는 경우 [연속 내보내기](app-insights-export-telemetry.md)를 대신 사용하는 것이 좋습니다. Analytics는 원시 데이터를 검색하기 위한 것이 아니라 분석용으로 설계되었습니다.
 
@@ -122,7 +122,7 @@ IntelliSense에 사용할 수 있는 연산자 및 식 요소를 지정하라는
 
 적합한 유형의 열이 여러 개인 경우 x축과 y축 및 결과 정렬 기준으로 사용할 크기의 열을 선택할 수 있습니다.
 
-기본적으로 결과는 처음에는 테이블로 표시되며 다이어그램은 수동으로 선택합니다. 하지만 쿼리 끝에 [render 지시문](https://docs.loganalytics.io/queryLanguage/query_language_renderoperator.html) 을 사용하여 다이어그램을 선택할 수 있습니다.
+기본적으로 결과는 처음에는 테이블로 표시되며 다이어그램은 수동으로 선택합니다. 하지만 쿼리 끝에 [render 지시문](https://docs.loganalytics.io/docs/Language-Reference/Tabular-operators/render-operator) 을 사용하여 다이어그램을 선택할 수 있습니다.
 
 ### <a name="analytics-diagnostics"></a>분석 진단
 
@@ -135,7 +135,7 @@ IntelliSense에 사용할 수 있는 연산자 및 식 요소를 지정하라는
 ![분석 진단](./media/app-insights-analytics-using/analytics-diagnostics.png)
 
 ## <a name="pin-to-dashboard"></a>대시보드에 고정
-다이어그램 또는 테이블을 [대시보드 공유](app-insights-dashboards.md) 중 하나에 고정할 수 있습니다. 핀을 클릭하면 됩니다. (이 기능을 설정하려면 [앱의 가격 패키지를 업그레이드](app-insights-pricing.md)해야 할 수 있습니다.) 
+다이어그램 또는 테이블을 [대시보드 공유](app-insights-dashboards.md) 중 하나에 고정할 수 있습니다. 핀을 클릭하면 됩니다. 
 
 ![핀 클릭](./media/app-insights-analytics-using/pin-01.png)
 
@@ -238,5 +238,4 @@ CSV 파일에서 데이터를 가져올 수 있습니다. 일반적인 용도는
 > [!VIDEO https://channel9.msdn.com/events/Connect/2016/123/player] 
 
 [!INCLUDE [app-insights-analytics-footer](../../includes/app-insights-analytics-footer.md)]
-
 

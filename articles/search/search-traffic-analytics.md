@@ -1,30 +1,23 @@
 ---
-title: "Azure Search을 위한 검색 트래픽 분석 | Microsoft Docs"
-description: "Microsoft Azure에서 Azure 검색을 위한 검색 트래픽 분석 및 클라우드 호스트된 검색 서비스를 사용하여 사용자와 데이터를 이해할 수 있습니다."
+title: Azure Search을 위한 검색 트래픽 분석 | Microsoft Docs
+description: Microsoft Azure에서 Azure Search를 위한 검색 트래픽 분석 및 클라우드 호스트된 Search 서비스를 사용하여 사용자와 데이터를 이해할 수 있습니다.
+author: HeidiSteen
+manager: cgronlun
 services: search
-documentationcenter: 
-author: bernitorres
-manager: jlembicz
-editor: 
-ms.assetid: b31d79cf-5924-4522-9276-a1bb5d527b13
 ms.service: search
-ms.devlang: multiple
-ms.workload: na
-ms.topic: article
-ms.tgt_pltfrm: na
+ms.topic: conceptual
 ms.date: 04/05/2017
-ms.author: betorres
-translationtype: Human Translation
-ms.sourcegitcommit: 0b53a5ab59779dc16825887b3c970927f1f30821
-ms.openlocfilehash: 303ca5c820f573dc0b58f1910f258403c3baad2a
-ms.lasthandoff: 04/07/2017
-
+ms.author: heidist
+ms.openlocfilehash: 4b40e8c9f681b7489c0ab2ffe7b369cc869c73e2
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
-
 # <a name="what-is-search-traffic-analytics"></a>검색 트래픽 분석이란
-검색 트래픽 분석은 검색 서비스에 대한 피드백 루프를 구현하기 위한 패턴입니다. 이 패턴은 필요한 데이터 및 여러 플랫폼에서 서비스를 모니터링할 수 있는 업계 선두 제품인 Application Insights를 사용하여 필요한 데이터를 수집하는 방법을 설명합니다.
+검색 트래픽 분석은 Search 서비스에 대한 피드백 루프를 구현하기 위한 패턴입니다. 이 패턴은 필요한 데이터 및 여러 플랫폼에서 서비스를 모니터링할 수 있는 업계 선두 제품인 Application Insights를 사용하여 필요한 데이터를 수집하는 방법을 설명합니다.
 
-검색 트래픽 분석은 검색 서비스에 대한 고급 정보를 제공하고 사용자와 사용자 동작을 이해할 수 있게 해줍니다. 사용자가 선택하는 항목에 대한 데이터를 확보하면 검색 환경을 더욱 개선하는 의사 결정을 내릴 수 있으며, 결과가 예상과 다를 때 백오프가 가능합니다.
+검색 트래픽 분석은 Search 서비스에 대한 고급 정보를 제공하고 사용자와 사용자 동작을 이해할 수 있게 해줍니다. 사용자가 선택하는 항목에 대한 데이터를 확보하면 검색 환경을 더욱 개선하는 의사 결정을 내릴 수 있으며, 결과가 예상과 다를 때 백오프가 가능합니다.
 
 Azure Search는 Azure Application Insights와 Power BI를 통합하여 심층 모니터링 및 추적이 가능한 원격 분석 솔루션을 제공합니다. Azure Search와의 상호 작용은 API를 통해서만 가능하므로 개발자가 이 페이지의 지침에 따라 검색을 사용하여 원격 분석을 구현해야 합니다.
 
@@ -158,7 +151,7 @@ Azure Search 서비스의 [포털](https://portal.azure.com) 페이지에 있는
 
 *JavaScript*
 
-    appInsights.TrackEvent("Click", {
+    appInsights.trackEvent("Click", {
         SearchServiceName: <service name>,
         SearchId: <search id>,
         ClickedDocId: <clicked document id>,
@@ -176,11 +169,11 @@ Power BI Desktop 템플릿을 인스턴스화하려면 Application Insights에 �
 
 Power BI Desktop 템플릿에 포함된 메트릭:
 
-*    CTR(클릭률): 특정 문서를 클릭한 사용자와 총 검색 수의 비율.
-*    클릭 없이 검색: 클릭을 등록하지 않는 상위 쿼리를 일컫는 용어
-*    최다 클릭 문서: 최근 24시간, 7일 및 30일 동안 ID별로 클릭 횟수가 가장 많은 문서.
-*    인기 용어-문서 쌍: 같은 문서를 클릭하는 결과로 이어진 용어이며 클릭 수를 기준으로 정렬됩니다.
-*    시간 대비 클릭: 검색 쿼리 이후 시간 별로 버킷 구성된 클릭
+*   CTR(클릭률): 특정 문서를 클릭한 사용자와 총 검색 수의 비율.
+*   클릭 없이 검색: 클릭을 등록하지 않는 상위 쿼리를 일컫는 용어
+*   최다 클릭 문서: 최근 24시간, 7일 및 30일 동안 ID별로 클릭 횟수가 가장 많은 문서.
+*   인기 용어-문서 쌍: 같은 문서를 클릭하는 결과로 이어진 용어이며 클릭 수를 기준으로 정렬됩니다.
+*   시간 대비 클릭: 검색 쿼리 이후 시간 별로 버킷 구성된 클릭
 
 ![Application Insights에서 읽기 위한 Power BI 템플릿][3]
 
@@ -196,4 +189,3 @@ Application Insights에 대한 추가 정보는 [여기](https://go.microsoft.co
 [1]: ./media/search-traffic-analytics/AzureSearch-TrafficAnalytics.png
 [2]: ./media/search-traffic-analytics/AzureSearch-AppInsightsData.png
 [3]: ./media/search-traffic-analytics/AzureSearch-PBITemplate.png
-

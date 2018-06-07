@@ -3,7 +3,7 @@ title: "PowerShell을 사용하여 Application Insights에서 경고 설정 | Mi
 description: "Application Insights의 구성을 자동화하여 메트릭 변경 사항에 대한 전자 메일을 받습니다."
 services: application-insights
 documentationcenter: 
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 05d6a9e0-77a2-4a35-9052-a7768d23a196
 ms.service: application-insights
@@ -12,13 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 10/31/2016
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: 298e0218c51385caa2de6a684ac40503fc07f5fa
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: b90a540afd1c2815db8f5a99ee210ce21ea4d874
+ms.sourcegitcommit: e462e5cca2424ce36423f9eff3a0cf250ac146ad
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/01/2017
 ---
 # <a name="use-powershell-to-set-alerts-in-application-insights"></a>PowerShell을 사용하여 Application Insights에서 경고 설정
 [Application Insights](app-insights-overview.md)에서 [경고](app-insights-alerts.md)의 구성을 자동화할 수 있습니다.
@@ -140,4 +139,3 @@ TrackEvent 또는 trackPageView와 같은 다른 추적 호출의 [측정 매개
 * [서식 파일에서 Application Insights 및 웹 테스트 리소스 만들기](app-insights-powershell.md)
 * [Application Insights에 Microsoft Azure 진단 결합 자동화](app-insights-powershell-azure-diagnostics.md)
 * [경고에 대한 응답 자동화](../monitoring-and-diagnostics/insights-webhooks-alerts.md)
-

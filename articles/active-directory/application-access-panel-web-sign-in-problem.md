@@ -1,11 +1,11 @@
 ---
-title: "액세스 패널 웹 사이트에 로그인할 때 발생하는 문제 | Microsoft Docs"
-description: "액세스 패널을 사용하여 로그인하려고 하는 동안 발생할 수 있는 문제를 해결하기 위한 지침"
+title: 액세스 패널 웹 사이트에 로그인할 때 발생하는 문제 | Microsoft Docs
+description: 액세스 패널을 사용하여 로그인하려고 하는 동안 발생할 수 있는 문제를 해결하기 위한 지침
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: ajamess
-manager: femila
-ms.assetid: 
+manager: mtillman
+ms.assetid: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
@@ -14,14 +14,13 @@ ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
 ms.reviwer: japere
+ms.openlocfilehash: 1820ab1e2295e6e0c7795c9d014d001d294bb337
+ms.sourcegitcommit: c52123364e2ba086722bc860f2972642115316ef
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 28d91237adf745e591b02322de7881c8122827ac
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
+ms.locfileid: "34069615"
 ---
-
 # <a name="problem-signing-in-to-the-access-panel-website"></a>액세스 패널 웹 사이트에 로그인할 때 발생하는 문제
 
 액세스 패널은 웹 기반 포털로 Azure AD(Azure Active Directory)에 회사 또는 학교 계정이 있는 사용자가 Azure AD 관리자를 통해 액세스 권한을 부여받은 클라우드 기반 응용 프로그램을 보고 시작할 수 있도록 합니다. 또한 Azure AD 버전의 사용자는 액세스 패널을 통해 셀프 서비스 그룹 및 앱 관리 기능을 사용할 수도 있습니다. 액세스 패널은 Azure Portal과 별개이며, 사용자에게 Azure 구독을 요구하지 않습니다.
@@ -87,7 +86,7 @@ ms.lasthandoff: 07/21/2017
 
 -   [사용자의 인증 연락처 정보 확인](#check-a-users-authentication-contact-info)
 
--   [사용자의 그룹 구성원 자격 확인](#check-a-users-group-memberships)
+-   [사용자의 그룹 멤버 자격 확인](#check-a-users-group-memberships)
 
 -   [사용자의 할당된 라이선스 확인](#check-a-users-assigned-licenses)
 
@@ -99,7 +98,7 @@ ms.lasthandoff: 07/21/2017
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -117,7 +116,7 @@ ms.lasthandoff: 07/21/2017
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -137,7 +136,7 @@ ms.lasthandoff: 07/21/2017
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -147,9 +146,9 @@ ms.lasthandoff: 07/21/2017
 
 6.  관심이 있는 사용자를 **검색**하고 **행을 클릭**하여 선택합니다.
 
-7.  사용자 블레이드 맨 위에 있는 **암호 재설정** 단추를 클릭합니다.
+7.  사용자 창 맨 위에 있는 **암호 재설정** 단추를 클릭합니다.
 
-8.  표시되는 **암호 재설정** 블레이드에서 **암호 재설정** 단추를 클릭합니다.
+8.  표시되는 **암호 재설정** 창에서 **암호 재설정** 단추를 클릭합니다.
 
 9.  사용자를 위한 **임시 암호** 또는 **새 암호 입력**을 복사합니다.
 
@@ -169,7 +168,7 @@ ms.lasthandoff: 07/21/2017
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -177,7 +176,7 @@ ms.lasthandoff: 07/21/2017
 
 5.  **모든 사용자**를 클릭합니다.
 
-6.  블레이드 맨 위에 있는 **Multi-Factor Authentication** 단추를 클릭합니다.
+6.  창 맨 위에 있는 **Multi-Factor Authentication** 단추를 클릭합니다.
 
 7.  **Multi-factor Authentication 관리 포털**을 일단 로드하면 **사용자** 탭인지 확인합니다.
 
@@ -196,7 +195,7 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -218,7 +217,7 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -236,7 +235,7 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -254,7 +253,7 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -291,5 +290,4 @@ Multi-Factor Authentication, 조건부 액세스, ID 보호 및 암호 재설정
 -   Fiddler 추적
 
 ## <a name="next-steps"></a>다음 단계
-[응용 프로그램 프록시를 사용하여 앱에 Single Sign-On 제공](active-directory-application-proxy-sso-using-kcd.md)
-
+[응용 프로그램 프록시를 사용하여 앱에 Single Sign-On 제공](manage-apps/application-proxy-configure-single-sign-on-with-kcd.md)

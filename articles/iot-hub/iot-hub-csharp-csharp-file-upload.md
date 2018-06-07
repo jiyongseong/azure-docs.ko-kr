@@ -1,11 +1,11 @@
 ---
-title: ".NET을 사용하여 장치에서 Azure IoT Hub로 파일 업로드 | Microsoft Docs"
-description: ".NET용 Azure IoT 장치 SDK를 사용하여 장치에서 클라우드로 파일을 업로드 하는 방법입니다. 업로드된 파일은 Azure Storage blob 컨테이너에 저장됩니다."
+title: .NET을 사용하여 장치에서 Azure IoT Hub로 파일 업로드 | Microsoft Docs
+description: .NET용 Azure IoT 장치 SDK를 사용하여 장치에서 클라우드로 파일을 업로드 하는 방법입니다. 업로드된 파일은 Azure Storage blob 컨테이너에 저장됩니다.
 services: iot-hub
 documentationcenter: .net
 author: fsautomata
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 4759d229-f856-4526-abda-414f8b00a56d
 ms.service: iot-hub
 ms.devlang: dotnet
@@ -14,12 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 07/04/2017
 ms.author: elioda
+ms.openlocfilehash: 901b4b6c631d47a6c37eb232f66d8350faa9be76
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: b45d85d0d77cf47f36cb793bc8c0dbe2d5c12634
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="upload-files-from-your-device-to-the-cloud-with-iot-hub-using-net"></a>.NET을 사용하여 장치에서 IoT Hub가 있는 클라우드로 파일 업로드
 
@@ -30,14 +29,14 @@ ms.lasthandoff: 07/21/2017
 - 파일을 업로드하기 위한 Azure blob URI를 장치에 안전하게 제공합니다.
 - IoT Hub 파일 업로드 알림을 사용하여 앱 백 엔드에서 파일 처리를 트리거합니다.
 
-[IoT Hub 시작](iot-hub-csharp-csharp-getstarted.md) 및 [IoT Hub를 사용하여 클라우드-장치 메시지 보내기](iot-hub-csharp-csharp-c2d.md) 자습서는 IoT Hub의 기본적인 장치-클라우드 및 클라우드-장치 메시징 기능을 보여 줍니다. [장치-클라우드 메시지 프로세스](iot-hub-csharp-csharp-process-d2c.md) 자습서에서는 장치-클라우드 메시지를 Azure Blob 저장소에 안정적으로 저장하는 방법에 대해 설명합니다. 그러나 일부 시나리오에서는 장치에서 전송하는 데이터를 IoT Hub에서 허용하는 비교적 작은 장치-클라우드 메시지에 쉽게 매핑할 수 없습니다. 예:
+[IoT Hub 시작](iot-hub-csharp-csharp-getstarted.md) 및 [IoT Hub를 사용하여 클라우드-장치 메시지 보내기](iot-hub-csharp-csharp-c2d.md) 자습서는 IoT Hub의 기본적인 장치-클라우드 및 클라우드-장치 메시징 기능을 보여 줍니다. [장치-클라우드 메시지 프로세스](iot-hub-csharp-csharp-process-d2c.md) 자습서에서는 장치-클라우드 메시지를 Azure Blob 저장소에 안정적으로 저장하는 방법에 대해 설명합니다. 그러나 일부 시나리오에서는 장치에서 전송하는 데이터를 IoT Hub에서 허용하는 비교적 작은 장치-클라우드 메시지에 쉽게 매핑할 수 없습니다. 예: 
 
 * 이미지가 포함된 대형 파일
-* 비디오
+* 동영상
 * 자주 샘플링되는 진동 데이터
 * 특정 형태의 전처리된 데이터
 
-이러한 파일은 일반적으로 [Azure Data Factory](../data-factory/index.md) 또는 [Hadoop](../hdinsight/index.md) 스택과 같은 도구를 사용하여 클라우드에서 배치 방식으로 처리됩니다. 장치에서 파일을 업로드해야 할 때 IoT Hub의 보안 및 안정성을 여전히 사용할 수 있습니다.
+이러한 파일은 일반적으로 [Azure Data Factory](../data-factory/introduction.md) 또는 [Hadoop](../hdinsight/index.yml) 스택과 같은 도구를 사용하여 클라우드에서 배치 방식으로 처리됩니다. 장치에서 파일을 업로드해야 할 때 IoT Hub의 보안 및 안정성을 여전히 사용할 수 있습니다.
 
 이 자습서의 끝 부분에서 다음의 두 .NET 콘솔 앱을 실행합니다.
 
@@ -108,11 +107,11 @@ ms.lasthandoff: 07/21/2017
 
     ![Visual Studio의 새 프로젝트][2]
 
-1. 솔루션 Explorer에서 **ReadFileUploadNotification** 프로젝트를 마우스 오른쪽 단추로 클릭한 다음 **NuGet 패키지 관리...**를 클릭합니다.
+1. 솔루션 Explorer에서 **ReadFileUploadNotification** 프로젝트를 마우스 오른쪽 단추로 클릭한 다음 **NuGet 패키지 관리...** 를 클릭합니다.
 
 1. **NuGet 패키지 관리자** 창에서 **Microsoft.Azure.Devices**를 검색하고 **설치**를 클릭하고 사용 약관에 동의합니다.
 
-    이 작업은 [ReadFileUploadNotification] 프로젝트에서 **Azure IoT 서비스 SDK NuGet 패키지**에 대한 참조를 다운로드, 설치 및 추가합니다.
+    이 작업은 **ReadFileUploadNotification** 프로젝트에서 [Azure IoT 서비스 SDK NuGet 패키지]에 대한 참조를 다운로드, 설치 및 추가합니다.
 
 1. **Program.cs** 파일 맨 위에 다음 문을 추가합니다.
 
@@ -181,7 +180,7 @@ ms.lasthandoff: 07/21/2017
 
 IoT Hub의 기능을 추가로 탐색하려면 다음을 참조하세요.
 
-* [IoT Edge에서 장치 시뮬레이션][lnk-iotedge]
+* [Azure IoT Edge를 사용하여 에지 장치에 AI 배포][lnk-iotedge]
 
 <!-- Images. -->
 
@@ -193,15 +192,14 @@ IoT Hub의 기능을 추가로 탐색하려면 다음을 참조하세요.
 
 [Azure Portal]: https://portal.azure.com/
 
-[Azure IoT 개발자 센터]: http://www.azure.com/develop/iot
+[Azure IoT 개발자 센터]: http://azure.microsoft.com/develop/iot
 
 [일시적인 오류 처리]: https://msdn.microsoft.com/library/hh680901(v=pandp.50).aspx
-[ReadFileUploadNotification]: https://www.nuget.org/packages/Microsoft.Azure.Devices/
+[Azure IoT 서비스 SDK NuGet 패키지]: https://www.nuget.org/packages/Microsoft.Azure.Devices/
 [lnk-free-trial]: http://azure.microsoft.com/pricing/free-trial/
 
 [lnk-create-hub]: iot-hub-rm-template-powershell.md
 [lnk-c-sdk]: iot-hub-device-sdk-c-intro.md
 [lnk-sdks]: iot-hub-devguide-sdks.md
 
-[lnk-iotedge]: iot-hub-windows-iot-edge-simulated-device.md
-
+[lnk-iotedge]: ../iot-edge/tutorial-simulate-device-linux.md

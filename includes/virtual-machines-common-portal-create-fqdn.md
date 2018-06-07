@@ -6,7 +6,7 @@
 2. 원하는 DNS 이름 레이블을 입력한 다음 **저장**을 선택합니다.
    
    ![공용 IP 리소스에 대한 DNS 이름 레이블을 입력합니다.](./media/virtual-machines-common-portal-create-fqdn/dnsNameLabel.PNG)
- 
+
 
 3. VM 개요 블레이드로 돌아가려면 *공용 IP 주소* 블레이드를 닫습니다. 이제 *DNS 이름*이 표시되는지 확인합니다.
    

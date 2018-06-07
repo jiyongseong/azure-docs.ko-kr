@@ -1,27 +1,27 @@
 ---
-title: "Azure Application Insights란? | Microsoft Docs"
-description: "라이브 웹 응용 프로그램의 응용 프로그램 성능을 관리하고 사용 현황을 추적합니다.  문제를 감지, 심사, 진단하고 사람들이 앱을 사용하는 방식을 이해합니다."
+title: Azure Application Insights란? | Microsoft Docs
+description: 라이브 웹 응용 프로그램의 응용 프로그램 성능을 관리하고 사용 현황을 추적합니다.  문제를 감지, 심사, 진단하고 사람들이 앱을 사용하는 방식을 이해합니다.
 services: application-insights
-documentationcenter: 
-author: CFreemanwa
+documentationcenter: ''
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 379721d1-0f82-445a-b416-45b94cb969ec
 ms.service: application-insights
 ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
-ms.topic: get-started-article
+ms.topic: overview
+ms.custom: mvc
 ms.date: 05/14/2017
-ms.author: cfreeman
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 17c4dc6a72328b613f31407aff8b6c9eacd70d9a
-ms.openlocfilehash: e57912a197394fbb8ea8bc374a1f3934ae0ff464
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/16/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: 6e4cc8b399a3d3b1db1c52aafc8a73edb784d13b
+ms.sourcegitcommit: 6e43006c88d5e1b9461e65a73b8888340077e8a2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/01/2018
 ---
 # <a name="what-is-application-insights"></a>Application Insights란?
-Application Insights는 여러 플랫폼의 웹 개발자를 위한 확장 가능한 APM(응용 프로그램 성능 관리) 서비스입니다. 이를 사용하여 라이브 웹 응용 프로그램을 모니터링합니다. 성능 이상을 자동으로 감지합니다. 사용자가 문제를 진단하고 앱을 사용하여 실제로 수행할 작업을 이해할 수 있도록 돕는 강력한 분석 도구를 포함합니다.  성능 및 가용성을 지속적으로 향상시킬 수 있도록 설계되었습니다. .NET, Node.js 및 J2EE, 호스팅된 온-프레미스 또는 클라우드의 다양한 플랫폼에서 앱과 함께 사용합니다. DevOps 프로세스와 통합되며, 다양한 개발 도구와의 연결 지점을 갖고 있습니다.
+Application Insights는 여러 플랫폼의 웹 개발자를 위한 확장 가능한 APM(응용 프로그램 성능 관리) 서비스입니다. 이를 사용하여 라이브 웹 응용 프로그램을 모니터링합니다. 성능 이상을 자동으로 감지합니다. 사용자가 문제를 진단하고 앱을 사용하여 실제로 수행할 작업을 이해할 수 있도록 돕는 강력한 분석 도구를 포함합니다.  성능 및 가용성을 지속적으로 향상시킬 수 있도록 설계되었습니다. .NET, Node.js 및 J2EE, 호스팅된 온-프레미스 또는 클라우드의 다양한 플랫폼에서 앱과 함께 사용합니다. DevOps 프로세스와 통합되며, 다양한 개발 도구와의 연결 지점을 갖고 있습니다. Visual Studio App Center 및 HockeyApp을 통합하여 모바일 앱에서 원격 분석을 모니터링하고 분석할 수 있습니다.
 
 ![사용자 활동 통계, 차트 또는 특정 이벤트를 드릴합니다.](./media/app-insights-overview/00-sample.png)
 
@@ -102,7 +102,7 @@ Application Insights는 응용 프로그램 팀에서 앱의 작동 방식과 �
 * 코드에 사용자 지정 원격 분석을 작성합니다.
 * 원격 분석에서 얻은 구체적인 증거를 기반으로 다음 개발 주기를 결정합니다.
 
-## <a name="get-started"></a>시작
+## <a name="get-started"></a>시작하기
 Application Insights는 Microsoft Azure에서 호스트되는 다양한 서비스 중 하나이며, 원격 분석이 분석 및 프레젠테이션을 위해 이 서비스로 전송됩니다. 따라서 다른 작업을 수행하기 전에 [Microsoft Azure](http://azure.com)를 구독해야 합니다. 등록은 무료이며 Application Insights에 대해 기본 [가격 책정 계획](https://azure.microsoft.com/pricing/details/application-insights/)을 선택하는 경우 응용 프로그램 사용량이 특정 크기로 커질 때까지 무료입니다. 조직에 이미 구독이 있으면 해당 구독에 Microsoft 계정을 추가할 수 있습니다.
 
 시작하는 데는 몇 가지 방법이 있습니다. 본인에게 적합한 방법으로 시작합니다. 나중에 계정을 더 추가할 수 있습니다.
@@ -114,9 +114,10 @@ Application Insights는 Microsoft Azure에서 호스트되는 다양한 서비�
 * **개발 타임: 코드에 Application Insights를 추가합니다.** 사용자 지정 원격 분석을 작성하고 백 엔드 및 데스크톱 앱을 계측할 수 있습니다.
   * [Visual Studio](app-insights-asp-net.md) 2013 업데이트 2 이상
   * [Eclipse](app-insights-java-eclipse.md)의 Java 또는 [기타 도구](app-insights-java-get-started.md)
-  * [Node.JS](app-insights-nodejs.md)
+  * [Node.js](app-insights-nodejs.md)
   * [기타 플랫폼](app-insights-platforms.md)
-* 페이지 보기, AJAX 및 기타 클라이언트 쪽 원격 분석에 대해 **[웹 페이지를 계측](app-insights-javascript.md)**합니다.
+* 페이지 보기, AJAX 및 기타 클라이언트 쪽 원격 분석에 대해 **[웹 페이지를 계측](app-insights-javascript.md)** 합니다.
+* Visual Studio App Center와 통합하여 **[모바일 앱 사용을 분석](app-insights-mobile-center-quickstart.md)** 합니다.
 * **[가용성 테스트](app-insights-monitor-web-app-availability.md)** -서버에서 정기적으로 웹 사이트를 ping합니다.
 
 
@@ -142,7 +143,7 @@ Application Insights는 Microsoft Azure에서 호스트되는 다양한 서비�
 * 블로그:
   * [Application Insights 블로그](https://azure.microsoft.com/blog/tag/application-insights)
 
-## <a name="videos"></a>비디오
+## <a name="videos"></a>동영상
 
 [![애니메이션 소개](./media/app-insights-overview/video-front-1.png)](https://www.youtube.com/watch?v=fX2NtGrh-Y0)
 
@@ -150,17 +151,16 @@ Application Insights는 Microsoft Azure에서 호스트되는 다양한 서비�
 
 <!--Link references-->
 
-[android]: https://github.com/Microsoft/ApplicationInsights-Android
+[android]: app-insights-mobile-center-quickstart.md
 [azure]: ../insights-perf-analytics.md
 [client]: app-insights-javascript.md
 [desktop]: app-insights-windows-desktop.md
 [detect]: app-insights-detect-triage-diagnose.md
 [greenbrown]: app-insights-asp-net.md
-[ios]: https://github.com/Microsoft/ApplicationInsights-iOS
+[ios]: app-insights-mobile-center-quickstart.md
 [java]: app-insights-java-get-started.md
 [knowUsers]: app-insights-web-track-usage.md
 [platforms]: app-insights-platforms.md
 [portal]: http://portal.azure.com/
 [qna]: app-insights-troubleshoot-faq.md
 [redfield]: app-insights-monitor-performance-live-website-now.md
-

@@ -1,34 +1,31 @@
 ---
-title: "Apache Hive로 Twitter 데이터 분석 - Azure HDInsight | Microsoft Docs"
-description: "HDInsight에서 Hive 및 Hadoop을 사용하여 원시 TWitter 데이터를 검색 가능한 Hive 테이블로 변환하는 방법을 알아 봅니다."
+title: Apache Hive로 Twitter 데이터 분석 - Azure HDInsight | Microsoft Docs
+description: HDInsight에서 Hive 및 Hadoop을 사용하여 원시 TWitter 데이터를 검색 가능한 Hive 테이블로 변환하는 방법을 알아 봅니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: Blackmist
 manager: jhubbard
 editor: cgronlun
 tags: azure-portal
 ms.assetid: e1e249ed-5f57-40d6-b3bc-a1b4d9a871d3
 ms.service: hdinsight
-ms.workload: big-data
-ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 05/16/2017
+ms.topic: conceptual
+ms.date: 04/23/2018
 ms.author: larryfr
 ms.custom: H1Hack27Feb2017,hdinsightactive
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: f1bdfb133b55f5cf18b85fa40908b8df534a15bd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
+ms.openlocfilehash: 89c5ff86b6c59223e0580860e14fdffdaef2472c
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="analyze-twitter-data-using-hive-and-hadoop-on-hdinsight"></a>HDInsight에서 Hive 및 Hadoop을 사용하여 Twitter 데이터 분석
 
 Apache Hive를 사용하여 Twitter 데이터를 처리하는 방법을 알아봅니다. 결과는 특정 단어가 포함된 많은 트윗을 보낸 Twitter 사용자의 목록이 됩니다.
 
 > [!IMPORTANT]
-> 이 문서의 단계는 HDInsight 3.5에서 테스트했습니다.
+> 이 문서의 단계는 HDInsight 3.6에서 테스트했습니다.
 >
 > Linux는 HDInsight 버전 3.4 이상에서 사용되는 유일한 운영 체제입니다. 자세한 내용은 [Windows에서 HDInsight 사용 중지](hdinsight-component-versioning.md#hdinsight-windows-retirement)를 참조하세요.
 
@@ -38,7 +35,7 @@ Twitter를 사용하여 [각 트윗에 대한 데이터](https://dev.twitter.com
 
 ### <a name="create-a-twitter-application"></a>Twitter 응용 프로그램 만들기
 
-1. 웹 브라우저에서[https://apps.twitter.com/](https://apps.twitter.com/)으로 로그인합니다. Twitter 계정이 없는 경우 **지금 로그인** 링크를 클릭합니다.
+1. 웹 브라우저에서 [https://apps.twitter.com/](https://apps.twitter.com/)에 로그인합니다. Twitter 계정이 없는 경우 **지금 로그인** 링크를 클릭합니다.
 
 2. **Create New App**을 클릭합니다.
 
@@ -46,7 +43,7 @@ Twitter를 사용하여 [각 트윗에 대한 데이터](https://dev.twitter.com
 
    | 필드 | 값 |
    |:--- |:--- |
-   | 이름 |MyHDInsightApp |
+   | Name |MyHDInsightApp |
    | 설명 |MyHDInsightApp |
    | Website |http://www.myhdinsightapp.com |
 
@@ -96,7 +93,7 @@ Twitter를 사용하여 [각 트윗에 대한 데이터](https://dev.twitter.com
    nano gettweets.py
    ```
 
-5. 다음 텍스트를 **gettweets.py** 파일의 콘텐츠로 사용합니다. **consumer\_secret**, **consumer\_key**, **access/\_token** 및 **access\_token\_secret**의 자리 표시자 정보를 Twitter 응용 프로그램의 정보로 바꿉니다.
+5. 다음 텍스트를 **gettweets.py** 파일의 콘텐츠로 사용합니다.
 
    ```python
    #!/usr/bin/python
@@ -152,6 +149,17 @@ Twitter를 사용하여 [각 트윗에 대한 데이터](https://dev.twitter.com
    twitterStream.filter(track=["azure","cloud","hdinsight"])
    ```
 
+    > [!IMPORTANT]
+    > 다음 항목에 대한 자리 표시자 텍스트를 Twitter 응용 프로그램의 정보로 대체합니다.
+    >
+    > * `consumer_secret`
+    > * `consumer_key`
+    > * `access_token`
+    > * `access_token_secret`
+
+    > [!TIP]
+    > 마지막 줄에서 토픽 필터를 조정하여 인기 키워드를 추적합니다. 스크립트를 실행할 때 인기 키워드를 사용하면 데이터를 더 빨리 캡처할 수 있습니다.
+
 6. **Ctrl + X**, **Y**를 차례로 사용하여 파일을 저장합니다.
 
 7. 다음 명령을 사용하여 파일을 실행하고 트윗을 다운로드합니다.
@@ -160,7 +168,7 @@ Twitter를 사용하여 [각 트윗에 대한 데이터](https://dev.twitter.com
     python gettweets.py
     ```
 
-    진행률 표시기가 표시되어야 하며 트윗으로 최대 100%의 횟수가 다운로드되며 파일로 저장됩니다.
+    진행률 표시기가 나타납니다. 진행률 표시기는 트윗이 다운로드되면서 100%까지 올라갑니다.
 
    > [!NOTE]
    > 진행률 표시줄이 앞으로 이동하는 데 시간이 오래 걸리는 경우 추세 항목을 추적하는 필터를 변경해야 합니다. 필터에서 항목에 대한 트윗이 많을 경우 필요하면 10,000개의 트윗을 신속하게 가져올 수 있습니다.
@@ -169,9 +177,9 @@ Twitter를 사용하여 [각 트윗에 대한 데이터](https://dev.twitter.com
 
 HDInsight 저장소로 데이터를 복사하려면 다음 명령을 사용합니다.
 
-   ```bash
-   hdfs dfs -mkdir -p /tutorials/twitter/data
-   hdfs dfs -put tweets.txt /tutorials/twitter/data/tweets.txt
+```bash
+hdfs dfs -mkdir -p /tutorials/twitter/data
+hdfs dfs -put tweets.txt /tutorials/twitter/data/tweets.txt
 ```
 
 이러한 명령은 클러스터의 모든 노드에서 액세스할 수 있는 위치에 데이터를 저장합니다.
@@ -296,7 +304,7 @@ HDInsight 저장소로 데이터를 복사하려면 다음 명령을 사용합�
 3. 다음 명령을 사용하여 파일에 포함된 HiveQL을 실행합니다.
 
    ```bash
-   beeline -u 'jdbc:hive2://headnodehost:10001/;transportMode=http' -n admin -i twitter.hql
+   beeline -u 'jdbc:hive2://headnodehost:10001/;transportMode=http' -i twitter.hql
    ```
 
     이 명령은 **twitter.hql** 파일을 실행합니다. 쿼리가 완료되면 `jdbc:hive2//localhost:10001/>` 프롬프트가 표시됩니다.
@@ -305,19 +313,22 @@ HDInsight 저장소로 데이터를 복사하려면 다음 명령을 사용합�
 
    ```hiveql
    SELECT name, screen_name, count(1) as cc
-       FROM tweets
-       WHERE text like "%Azure%"
-       GROUP BY name,screen_name
-       ORDER BY cc DESC LIMIT 10;
+   FROM tweets
+   WHERE text like "%Azure%"
+   GROUP BY name,screen_name
+   ORDER BY cc DESC LIMIT 10;
    ```
 
     이 쿼리는 메시지 텍스트에 단어 **Azure**를 포함하는 최대 10개의 트윗을 반환합니다.
+
+    > [!NOTE]
+    > `gettweets.py` 스크립트에서 필터를 변경한 경우 **Azure**를 사용한 필터 중 하나로 대체합니다.
 
 ## <a name="next-steps"></a>다음 단계
 
 비구조적 JSON 데이터 집합을 구조적 Hive 테이블로 변환하는 방법에 대해 알아보았습니다. HDInsight에서 Hive에 대한 자세한 내용은 다음 문서를 참조하세요.
 
-* [HDInsight 시작](hdinsight-hadoop-linux-tutorial-get-started.md)
+* [HDInsight 시작](hadoop/apache-hadoop-linux-tutorial-get-started.md)
 * [HDInsight를 사용하여 비행 지연 데이터 분석](hdinsight-analyze-flight-delay-data-linux.md)
 
 [curl]: http://curl.haxx.se
@@ -327,4 +338,3 @@ HDInsight 저장소로 데이터를 복사하려면 다음 명령을 사용합�
 
 [twitter-streaming-api]: https://dev.twitter.com/docs/streaming-apis
 [twitter-statuses-filter]: https://dev.twitter.com/docs/api/1.1/post/statuses/filter
-

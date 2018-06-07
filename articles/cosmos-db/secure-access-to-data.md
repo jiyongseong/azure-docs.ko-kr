@@ -1,11 +1,10 @@
 ---
-title: "Azure Cosmos DB에서 데이터에 대한 액세스를 보호하는 방법 | Microsoft Docs"
-description: "마스터 키, 읽기 전용 키, 사용자 및 권한을 포함해서 Azure Cosmos DB의 액세스 제어 개념에 대해 알아봅니다."
+title: Azure Cosmos DB에서 데이터에 대한 액세스를 보호하는 방법 | Microsoft Docs
+description: 마스터 키, 읽기 전용 키, 사용자 및 권한을 포함해서 Azure Cosmos DB의 액세스 제어 개념에 대해 알아봅니다.
 services: cosmos-db
-author: mimig1
-manager: jhubbard
-editor: monicar
-documentationcenter: 
+author: SnehaGunda
+manager: kfile
+documentationcenter: ''
 ms.assetid: 8641225d-e839-4ba6-a6fd-d6314ae3a51c
 ms.service: cosmos-db
 ms.workload: data-services
@@ -13,13 +12,12 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 05/24/2017
-ms.author: mimig
+ms.author: sngun
+ms.openlocfilehash: 7a53dda7d6b49187d77ca44bcb55db5f9c305f64
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
 ms.translationtype: HT
-ms.sourcegitcommit: 141270c353d3fe7341dfad890162ed74495d48ac
-ms.openlocfilehash: 383e04f91eec2f465b381ce30f2d6d24c488b731
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="securing-access-to-azure-cosmos-db-data"></a>Azure Cosmos DB 데이터에 대한 액세스 보호
 이 문서에서는 [Microsoft Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/)에 저장된 데이터에 대한 액세스를 보호하는 방법을 개괄적으로 설명합니다.
@@ -105,7 +103,7 @@ Cosmos DB 리소스 토큰은 사용자가 부여한 권한에 따라 마스터 
 
     ![Azure Cosmos DB 리소스 토큰 워크플로](./media/secure-access-to-data/resourcekeyworkflow.png)
 
-리소스 토큰 생성 및 관리는 네이티브 Cosmos DB 클라이언트 라이브러리에서 처리하지만 REST를 사용하는 경우 요청/인증 헤더를 구성해야 합니다. REST에 대한 인증 헤더를 만드는 방법에 대한 자세한 내용은 [Cosmos DB 리소스에 대한 액세스 제어](https://docs.microsoft.com/rest/api/documentdb/access-control-on-documentdb-resources) 또는 [SDK에 대한 소스 코드](https://github.com/Azure/azure-documentdb-node/blob/master/source/lib/auth.js)를 참조하세요.
+리소스 토큰 생성 및 관리는 네이티브 Cosmos DB 클라이언트 라이브러리에서 처리하지만 REST를 사용하는 경우 요청/인증 헤더를 구성해야 합니다. REST에 대한 인증 헤더를 만드는 방법에 대한 자세한 내용은 [Cosmos DB 리소스에 대한 Access Control](https://docs.microsoft.com/rest/api/cosmos-db/access-control-on-cosmosdb-resources) 또는 [SDK에 대한 소스 코드](https://github.com/Azure/azure-documentdb-node/blob/master/source/lib/auth.js)를 참조하세요.
 
 리소스 토큰을 생성하거나 broker하는 데 사용되는 중간 계층 서비스의 예는 [ResourceTokenBroker 앱](https://github.com/Azure/azure-documentdb-dotnet/tree/master/samples/xamarin/UserItems/ResourceTokenBroker/ResourceTokenBroker/Controllers)을 참조하세요.
 
@@ -152,7 +150,7 @@ Cosmos DB 권한 리소스는 Cosmos DB 사용자와 연결됩니다.  각 사�
 Permission docPermission = new Permission
 {
     PermissionMode = PermissionMode.Read,
-    ResourceLink = documentCollection.SelfLink,
+    ResourceLink = UriFactory.CreateDocumentCollectionUri("db", "collection"),
     Id = "readperm"
 };
   
@@ -183,5 +181,4 @@ DocumentClient userClient = new DocumentClient(new Uri(endpointUrl), permList);
 ## <a name="next-steps"></a>다음 단계
 * Cosmos DB 데이터베이스 보안에 대한 자세한 내용은 [Cosmos DB: 데이터베이스 보안](database-security.md)을 참조하세요.
 * 마스터 키와 읽기 전용 키를 관리하는 방법에 대한 자세한 내용은 [Azure Cosmos DB 계정을 관리하는 방법](manage-account.md#keys)을 참조하세요.
-* Azure Cosmos DB 권한 부여 토큰을 생성하는 방법에 대한 자세한 내용은 [Azure Cosmos DB 리소스에 대한 액세스 제어](https://docs.microsoft.com/rest/api/documentdb/access-control-on-documentdb-resources)를 참조하세요.
-
+* Azure Cosmos DB 권한 부여 토큰을 생성하는 방법에 대한 자세한 내용은 [Azure Cosmos DB 리소스에 대한 Access Control](https://docs.microsoft.com/rest/api/cosmos-db/access-control-on-cosmosdb-resources)을 참조하세요.

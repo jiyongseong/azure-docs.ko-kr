@@ -1,11 +1,11 @@
 ---
-title: "Azure AD Connect: 선언적 프로비전 식 | Microsoft Docs"
-description: "선언적 프로비전 식에 대해 설명합니다."
+title: 'Azure AD Connect: 선언적 프로비전 식 | Microsoft Docs'
+description: 선언적 프로비전 식에 대해 설명합니다.
 services: active-directory
-documentationcenter: 
-author: andkjell
-manager: femila
-editor: 
+documentationcenter: ''
+author: billmath
+manager: mtillman
+editor: ''
 ms.assetid: e3ea53c8-3801-4acf-a297-0fb9bb1bf11d
 ms.service: active-directory
 ms.workload: identity
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/18/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: bb500d4705c3b67de6b9b31fa5311967beffffc2
-ms.openlocfilehash: 58908d65fdebd651e5cfab2b668574bdf7ab6085
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/27/2017
-
+ms.openlocfilehash: 797c0949aceea415652a72df5ee23ef9888ab975
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
 # <a name="azure-ad-connect-sync-understanding-declarative-provisioning-expressions"></a>Azure AD Connect 동기화: 선언적 프로비전 식 이해
 Azure AD Connect 동기화는 Forefront Identity Manager 2010에 처음 도입된 선언적 프로비전을 기반으로 합니다. 컴파일된 코드를 작성할 필요 없이 전체 ID 통합 비즈니스 논리를 구현할 수 있습니다.
@@ -39,7 +38,7 @@ Azure AD Connect 동기화는 Forefront Identity Manager 2010에 처음 도입�
 * 부울 값은 다음과 같은 상수로 표시됩니다. True, False
 * 기본 제공 상수 및 리터럴은 자신의 이름으로만 표현됩니다. NULL, CRLF, IgnoreThisFlow
 
-### <a name="functions"></a>함수
+### <a name="functions"></a>Functions
 선언적 프로비전은 여러 함수를 사용하여 특성 값을 변환할 수 있도록 합니다. 함수의 결과가 다른 함수로 전달되도록 이러한 함수는 중첩될 수 있습니다.
 
 `Function1(Function2(Function3()))`
@@ -82,7 +81,7 @@ Active Directory Connector는 인바운드 동기화 규칙에 대해 다음 매
 
 예를 들어   
 `Trim([proxyAddresses])` proxyAddress 특성의 모든 값에 Trim을 수행합니다.  
-`Word([proxyAddresses],1,"@") & "@contoso.com"` @-sign,이 있는 모든 값의 경우 도메인을 @contoso.com으로 바꿉니다.  
+`Word([proxyAddresses],1,"@") & "@contoso.com"` @-sign이 있는 모든 값의 경우 도메인을 @contoso.com으로 바꿉니다.  
 `IIF(InStr([proxyAddresses],"SIP:")=1,NULL,[proxyAddresses])` SIP 주소를 찾아서 값을 제거합니다.
 
 ## <a name="next-steps"></a>다음 단계
@@ -98,5 +97,4 @@ Active Directory Connector는 인바운드 동기화 규칙에 대해 다음 매
 **참조 항목**
 
 * [Azure AD 동기화 연결: 함수 참조](active-directory-aadconnectsync-functions-reference.md)
-
 

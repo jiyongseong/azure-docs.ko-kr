@@ -1,25 +1,24 @@
 ---
-title: "Azure DNS 위임 개요 | Microsoft Docs"
-description: "도메인 위임을 변경하고 Azure DNS 이름 서버를 사용하여 도메인 호스팅을 제공하는 방법을 이해합니다."
+title: Azure DNS 위임 개요 | Microsoft Docs
+description: 도메인 위임을 변경하고 Azure DNS 이름 서버를 사용하여 도메인 호스팅을 제공하는 방법을 이해합니다.
 services: dns
 documentationcenter: na
-author: georgewallace
-manager: timlt
+author: KumudD
+manager: jeconnoc
 ms.assetid: 257da6ec-d6e2-4b6f-ad76-ee2dde4efbcc
 ms.service: dns
 ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 04/12/2017
-ms.author: gwallace
-translationtype: Human Translation
-ms.sourcegitcommit: abdbb9a43f6f01303844677d900d11d984150df0
-ms.openlocfilehash: ab6dd0e1e5975770bec741ed4a06b6eb4745e174
-ms.lasthandoff: 04/21/2017
-
+ms.date: 12/18/2017
+ms.author: kumud
+ms.openlocfilehash: fc79999d240baf18ccf5923908c98791c4e7e7bb
+ms.sourcegitcommit: d74657d1926467210454f58970c45b2fd3ca088d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/28/2018
 ---
-
 # <a name="delegation-of-dns-zones-with-azure-dns"></a>Azure DNS를 사용하여 DNS 영역 위임
 
 Azure DNS를 사용하면 DNS 영역을 호스트하고 Azure에서 도메인에 대한 DNS 레코드를 관리할 수 있습니다. 도메인에 대한 DNS 쿼리가 Azure DNS에 도달하려면 부모 도메인에서 Azure DNS로 도메인을 위임해야 합니다. Azure DNS는 도메인 등록 기관이 아닙니다. 이 문서에서는 도메인 위임의 작동 방식 및 도메인을 Azure DNS로 위임하는 방법을 설명합니다.
@@ -43,7 +42,7 @@ DNS 서버에는 다음 두 가지 유형이 있습니다.
 * *권한이 있는* DNS 서버는 DNS 영역을 호스트합니다. 해당 영역의 레코드에 대한 DNS 쿼리에만 대답합니다.
 * *재귀적* DNS 서버는 DNS 영역을 호스트하지 않습니다. 권한이 있는 DNS 서버를 호출하고 필요한 데이터를 수집하여 모든 DNS 쿼리에 응답합니다.
 
-Azure DNS는 권한이 있는 DNS 서비스를 제공합니다.  재귀 DNS 서비스를 제공하지 않습니다. Azure의 Cloud Services 및 VM은 자동으로 구성하여 Azure 인프라의 일부로 제공되는 재귀 DNS 서비스를 별도로 사용합니다. 이러한 DNS 설정을 변경하는 방법에 대한 정보는 [Azure에서 이름 확인](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md#name-resolution-using-your-own-dns-server)을 참조하세요.
+Azure DNS는 권한이 있는 DNS 서비스를 제공합니다.  재귀 DNS 서비스를 제공하지 않습니다. Azure의 Cloud Services 및 VM은 자동으로 구성하여 Azure 인프라의 일부로 제공되는 재귀 DNS 서비스를 별도로 사용합니다. 이러한 DNS 설정을 변경하는 방법에 대한 정보는 [Azure에서 이름 확인](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md#name-resolution-that-uses-your-own-dns-server)을 참조하세요.
 
 PC 또는 모바일 장치의 DNS 클라이언트는 일반적으로 재귀적 DNS 서버를 호출하여 클라이언트 응용 프로그램에 필요한 DNS 쿼리를 수행합니다.
 
@@ -71,5 +70,4 @@ PC 또는 모바일 장치의 DNS 클라이언트는 일반적으로 재귀적 D
 ## <a name="next-steps"></a>다음 단계
 
 [Azure DNS에 도메인을 위임](dns-delegate-domain-azure-dns.md)하는 방법을 알아봅니다.
-
 

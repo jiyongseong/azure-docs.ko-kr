@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 02/02/2017
 ms.author: terrylan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f532f1aea9b8c4be6707862be4001099aa3c1d32
 ms.openlocfilehash: 337a7adfd93c76882a749685702bea6d1524c96a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="enable-vm-agent-in-azure-security-center"></a>Azure 보안 센터에서 VM 에이전트 사용
 [데이터 컬렉션을 사용하도록 설정](security-center-enable-data-collection.md)하려면 VM(가상 컴퓨터)에 VM 에이전트를 설치해야 합니다.  Azure 보안 센터에서 VM 에이전트가 필요한 VM을 확인하고 해당 VM에서 VM 에이전트를 사용하는 것이 좋습니다.
@@ -52,4 +50,3 @@ Azure 마켓플레이스에서 배포된 VM에 VM 에이전트가 기본적으�
 <!--Image references-->
 [1]: ./media/security-center-enable-vm-agent/enable-vm-agent.png
 [2]: ./media/security-center-enable-vm-agent/vm-agent-is-missing.png
-

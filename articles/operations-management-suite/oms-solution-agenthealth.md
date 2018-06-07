@@ -1,31 +1,30 @@
 ---
-title: "OMS의 에이전트 상태 솔루션 | Microsoft Docs"
-description: "이 문서는 OMS 또는 System Center Operations Manager에 직접 보고하는 에이전트의 상태를 모니터링하기 위해 이 솔루션을 사용하는 방법을 쉽게 이해할 수 있도록 해줍니다."
+title: OMS의 에이전트 상태 솔루션 | Microsoft Docs
+description: 이 문서는 OMS 또는 System Center Operations Manager에 직접 보고하는 에이전트의 상태를 모니터링하기 위해 이 솔루션을 사용하는 방법을 쉽게 이해할 수 있도록 해줍니다.
 services: operations-management-suite
-documentationcenter: 
+documentationcenter: ''
 author: MGoedtel
 manager: carmonm
-editor: 
-ms.assetid: 
+editor: ''
+ms.assetid: ''
 ms.service: operations-management-suite
 ms.workload: tbd
 ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: get-started-article
-ms.date: 07/17/2017
+ms.topic: article
+ms.date: 03/19/2017
 ms.author: magoedte
+ms.openlocfilehash: d7eb1550a21e66d4ae4cc4932b30a90956c60d1e
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
 ms.translationtype: HT
-ms.sourcegitcommit: 137671152878e6e1ee5ba398dd5267feefc435b7
-ms.openlocfilehash: b810e37e393ddab55500f636b72450789285a4f0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
 #  <a name="agent-health-solution-in-oms"></a>OMS의 에이전트 상태 솔루션
 OMS의 에이전트 상태 솔루션은 응답이 없고 운영 데이터를 제출하는 OMS 작업 영역에 직접 보고하는 모든 에이전트 또는 OMS에 연결된 System Center Operations Manager 관리 그룹을 이해하는 데 도움이 됩니다.  또한 얼마나 많은 에이전트가 배포되었는지, 이들 에이전트가 지리적으로 어디에 분산되어 있는지 추적할 수 있으며, Azure, 기타 클라우드 환경 또는 온-프레미스에 배포된 에이전트의 분산 상태를 파악하기 위해 다른 쿼리를 수행할 수 있습니다.    
 
 ## <a name="prerequisites"></a>필수 조건
-이 솔루션을 배포하기 전에 [Windows 에이전트](../log-analytics/log-analytics-windows-agents.md)가 OMS 작업 영역 또는 OMS 작업 영역에 통합된 [Operations Manager 관리 그룹](../log-analytics/log-analytics-om-agents.md)에 보고를 지원하는지 확인합니다.    
+이 솔루션을 배포하기 전에 [Windows 에이전트](../log-analytics/log-analytics-windows-agent.md)가 OMS 작업 영역 또는 OMS 작업 영역에 통합된 [Operations Manager 관리 그룹](../log-analytics/log-analytics-om-agents.md)에 보고를 지원하는지 확인합니다.    
 
 ## <a name="solution-components"></a>솔루션 구성 요소
 이 솔루션은 작업 영역 및 직접 연결된 에이전트 또는 Operations Manager와 연결된 관리 그룹에 추가되는 다음 리소스로 구성됩니다.
@@ -75,11 +74,11 @@ System Center Operations Manager 관리 그룹이 OMS 작업 영역에 연결된
 ### <a name="heartbeat-records"></a>하트비트 레코드
 **하트비트** 형식이 포함된 레코드가 만들어집니다.  이러한 레코드는 다음 표의 속성을 가집니다.  
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
 | 유형 | *하트비트*|
 | Category | 값은 *직접 에이전트*, *SCOM 에이전트* 또는 *SCOM 관리 서버*합니다.|
-| 컴퓨터 | 컴퓨터 이름입니다.|
+| Computer | 컴퓨터 이름입니다.|
 | OSType | Windows 또는 Linux 운영 체제입니다.|
 | OSMajorVersion | 운영 체제의 주 버전입니다.|
 | OSMinorVersion | 운영 체제의 부 버전입니다.|
@@ -99,25 +98,6 @@ Operations Manager 관리 서버에 보고하는 각 에이전트는 두 개의 
 다음 테이블은 이 솔루션에 의해 수집된 레코드에 대한 샘플 로그 검색을 제공합니다.
 
 | 쿼리 | 설명 |
-| --- | --- |
-| Type=Heartbeat &#124; distinct Computer |에이전트의 총수 |
-| Type=Heartbeat &#124; measure max(TimeGenerated) as LastCall by Computer &#124; where LastCall < NOW-24HOURS |지난 24시간 동안 응답하지 않는 에이전트 개수 |
-| Type=Heartbeat &#124; measure max(TimeGenerated) as LastCall by Computer &#124; where LastCall < NOW-15MINUTES |지난 15분 동안 응답하지 않는 에이전트 개수 |
-| Type=Heartbeat TimeGenerated>NOW-24HOURS Computer IN {Type=Heartbeat TimeGenerated>NOW-24HOURS &#124; distinct Computer} &#124; measure max(TimeGenerated) as LastCall by Computer |컴퓨터 온라인(지난 24시간) |
-| Type=Heartbeat TimeGenerated>NOW-24HOURS Computer NOT IN {Type=Heartbeat TimeGenerated>NOW-30MINUTES &#124; distinct Computer} &#124; measure max(TimeGenerated) as LastCall by Computer |지난 30분 동안 총 에이전트 오프라인(지난 24시간 동안) |
-| Type=Heartbeat &#124; measure countdistinct(Computer) by OSType |시간에 따른 OSType별 에이전트 수의 추세 가져오기|
-| Type=Heartbeat&#124;measure countdistinct(Computer) by OSType |OS 형식별 배포 |
-| Type=Heartbeat&#124;measure countdistinct(Computer) by Version |에이전트 버전별 배포 |
-| Type=Heartbeat&#124;measure count() by Category |에이전트 범주별 배포 |
-| Type=Heartbeat&#124;measure countdistinct(Computer) by ManagementGroupName | 관리 그룹별 배포 |
-| Type=Heartbeat&#124;measure countdistinct(Computer) by RemoteIPCountry |에이전트의 지리적 위치 |
-| Type=Heartbeat IsGatewayInstalled=true&#124;Distinct Computer |설치된 OMS 게이트웨이 수 |
-
-
->[!NOTE]
-> 작업 영역을 [새 Log Analytics 쿼리 언어](../log-analytics/log-analytics-log-search-upgrade.md)로 업그레이드한 경우에는 위의 쿼리가 다음과 같이 변경됩니다.
->
->| 쿼리 | 설명 |
 |:---|:---|
 | Heartbeat &#124; distinct Computer |에이전트의 총수 |
 | Heartbeat &#124; summarize LastCall = max(TimeGenerated) by Computer &#124; where LastCall < ago(24h) |지난 24시간 동안 응답하지 않는 에이전트 개수 |
@@ -132,7 +112,9 @@ Operations Manager 관리 서버에 보고하는 각 에이전트는 두 개의 
 | Heartbeat &#124; summarize AggregatedValue = dcount(Computer) by RemoteIPCountry |에이전트의 지리적 위치 |
 | Heartbeat &#124; where iff(isnotnull(toint(IsGatewayInstalled)), IsGatewayInstalled == true, IsGatewayInstalled == "true") == true &#124; distinct Computer |설치된 OMS 게이트웨이 수 |
 
+
+
+
 ## <a name="next-steps"></a>다음 단계
 
 * Log Analytics에서 경고 생성에 대한 자세한 내용은 [Log Analytics의 경고](../log-analytics/log-analytics-alerts.md) 에 관하여 알아보세요.
-

@@ -1,12 +1,12 @@
 ---
-title: "Azure Data Lake Tools for Visual Studio를 사용하여 데이터 기울이기 문제 해결 | Microsoft Docs"
-description: "Azure Data Lake Tools for Visual Studio를 사용하여 데이터 기울이기 문제에 대한 잠재적인 해결 방법을 마련합니다."
+title: Azure Data Lake Tools for Visual Studio를 사용하여 데이터 기울이기 문제 해결 | Microsoft Docs
+description: Azure Data Lake Tools for Visual Studio를 사용하여 데이터 기울이기 문제에 대한 잠재적인 해결 방법을 마련합니다.
 services: data-lake-analytics
-documentationcenter: 
+documentationcenter: ''
 author: yanancai
-manager: 
-editor: 
-ms.assetid: 
+manager: ''
+editor: ''
+ms.assetid: ''
 ms.service: data-lake-analytics
 ms.devlang: na
 ms.topic: article
@@ -14,14 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: big-data
 ms.date: 12/16/2016
 ms.author: yanacai
+ms.openlocfilehash: 2e1d33b5d2392832899fd30636e9d40231fc74ee
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 9b284ef33be4b935569fc368d81ddf040b2c2b7d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-
 # <a name="resolve-data-skew-problems-by-using-azure-data-lake-tools-for-visual-studio"></a>Azure Data Lake Tools for Visual Studio를 사용하여 데이터 기울이기 문제 해결
 
 ## <a name="what-is-data-skew"></a>데이터 기울이기란?
@@ -51,13 +49,13 @@ _주_만 파티션 키로 사용하는 대신 두 개 이상의 키를 분할에
 
 ### <a name="option-4-use-round-robin-distribution"></a>옵션 4: 라운드 로빈 배포 사용
 
-파티션 및 배포에 적합한 키가 없는 경우 라운드 로빈 배포를 사용할 수 있습니다. 라운드 로빈 배포는 모든 행을 동등하게 처리하고 임의로 해당 버킷에 넣습니다. 데이터는 고르게 배포되지만 지역(구/군/시) 정보를 잃어 버리고 일부 작업에 대한 작업 성능도 저하될 수 있다는 문제가 있습니다. 또한 어떻게 해서라도 기울어진 키에 대한 집계를 수행할 경우 데이터 기울이기 문제가 지속됩니다. 라운드 로빈 배포에 대해 자세히 알아보려면 [REATE TABLE(U-SQL): 스키마로 테이블 만들기](https://msdn.microsoft.com/en-us/library/mt706196.aspx#dis_sch)에서 U-SQL 테이블 배포 섹션을 참조하세요.
+파티션 및 배포에 적합한 키가 없는 경우 라운드 로빈 배포를 사용할 수 있습니다. 라운드 로빈 배포는 모든 행을 동등하게 처리하고 임의로 해당 버킷에 넣습니다. 데이터는 고르게 배포되지만 지역(구/군/시) 정보를 잃어 버리고 일부 작업에 대한 작업 성능도 저하될 수 있다는 문제가 있습니다. 또한 어떻게 해서라도 기울어진 키에 대한 집계를 수행할 경우 데이터 기울이기 문제가 지속됩니다. 라운드 로빈 배포에 대해 자세히 알아보려면 [REATE TABLE(U-SQL): 스키마로 테이블 만들기](https://msdn.microsoft.com/library/mt706196.aspx#dis_sch)에서 U-SQL 테이블 배포 섹션을 참조하세요.
 
 ## <a name="solution-2-improve-the-query-plan"></a>해결 방법 2: 쿼리 계획 향상
 
 ### <a name="option-1-use-the-create-statistics-statement"></a>옵션 1: CREATE STATISTICS 문 사용
 
-U-SQL은 테이블에 CREATE STATISTICS 문을 제공합니다. 이 문은 쿼리 최적화 프로그램에 데이터 특성에 대한 자세한 정보(예: 테이블에 저장된 값 분포)를 제공합니다. 대부분의 쿼리에서 쿼리 최적화 프로그램은 고품질 쿼리 계획을 위해 필요한 통계를 이미 생성합니다. 경우에 따라 CREATE STATISTICS로 추가 통계를 만들거나 쿼리 디자인을 수정하여 쿼리 성능을 개선해야 할 수도 있습니다. 자세한 내용은 [CREATE STATISTICS(U-SQL)](https://msdn.microsoft.com/en-us/library/azure/mt771898.aspx) 페이지를 참조하세요.
+U-SQL은 테이블에 CREATE STATISTICS 문을 제공합니다. 이 문은 쿼리 최적화 프로그램에 데이터 특성에 대한 자세한 정보(예: 테이블에 저장된 값 분포)를 제공합니다. 대부분의 쿼리에서 쿼리 최적화 프로그램은 고품질 쿼리 계획을 위해 필요한 통계를 이미 생성합니다. 경우에 따라 CREATE STATISTICS로 추가 통계를 만들거나 쿼리 디자인을 수정하여 쿼리 성능을 개선해야 할 수도 있습니다. 자세한 내용은 [CREATE STATISTICS(U-SQL)](https://msdn.microsoft.com/library/azure/mt771898.aspx) 페이지를 참조하세요.
 
 코드 예제:
 
@@ -191,4 +189,3 @@ SKEWFACTOR 외에도 특정한 기울어진 키 조인 사례에서 다른 조�
         //Your combiner code goes here.
         }
     }
-

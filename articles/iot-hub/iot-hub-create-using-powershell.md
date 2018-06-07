@@ -1,11 +1,11 @@
 ---
-title: "PowerShell cmdlet을 사용하여 Azure IoT Hub 만들기 | Microsoft Docs"
-description: "PowerShell cmdlet을 사용하여 IoT Hub를 만드는 방법입니다."
+title: PowerShell cmdlet을 사용하여 Azure IoT Hub 만들기 | Microsoft Docs
+description: PowerShell cmdlet을 사용하여 IoT Hub를 만드는 방법입니다.
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 ms.service: iot-hub
 ms.devlang: multiple
 ms.topic: article
@@ -13,12 +13,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 08/08/2017
 ms.author: dobett
+ms.openlocfilehash: e7dbfabadf72b8abece02907cd16644ef95e67a9
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
 ms.translationtype: HT
-ms.sourcegitcommit: f9003c65d1818952c6a019f81080d595791f63bf
-ms.openlocfilehash: 02227adeb8a9a7463506efa44ddc2977f8aae65a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/09/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="create-an-iot-hub-using-the-new-azurermiothub-cmdlet"></a>New-AzureRmIotHub cmdlet을 사용하여 IoT Hub 만들기
 
@@ -40,7 +39,7 @@ Azure PowerShell cmdlet을 사용하여 Azure IoT Hub를 만들고 관리할 수
 PowerShell 명령 프롬프트에서 다음 명령을 입력하여 Azure 구독에 로그인합니다.
 
 ```powershell
-Login-AzureRmAccount
+Connect-AzureRmAccount
 ```
 
 Azure 구독이 여러 개 있는 경우 Azure에 로그인하면 자격 증명과 연결된 모든 Azure 구독에 액세스할 수 있습니다. 다음 명령을 사용하여 사용할 수 있는 Azure 구독을 나열합니다.
@@ -125,7 +124,7 @@ IoT Hub를 개발하는 방법에 대한 자세한 내용은 다음 문서를 �
 
 IoT Hub의 기능을 추가로 탐색하려면 다음을 참조하세요.
 
-* [IoT Edge에서 장치 시뮬레이션][lnk-iotedge]
+* [Azure IoT Edge를 사용하여 에지 장치에 AI 배포][lnk-iotedge]
 
 <!-- Links -->
 [lnk-free-trial]: https://azure.microsoft.com/pricing/free-trial/
@@ -136,5 +135,4 @@ IoT Hub의 기능을 추가로 탐색하려면 다음을 참조하세요.
 [lnk-c-sdk]: iot-hub-device-sdk-c-intro.md
 [lnk-sdks]: iot-hub-devguide-sdks.md
 
-[lnk-iotedge]: iot-hub-linux-iot-edge-simulated-device.md
-
+[lnk-iotedge]: ../iot-edge/tutorial-simulate-device-linux.md

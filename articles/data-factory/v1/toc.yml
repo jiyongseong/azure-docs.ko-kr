@@ -1,0 +1,227 @@
+- name: 데이터 팩터리 V1 설명서
+  href: null
+- name: 개요
+  items:
+    - name: Azure Data Factory 소개
+      href: data-factory-introduction.md
+    - name: 개념
+      items:
+        - name: 파이프라인 및 활동
+          href: data-factory-create-pipelines.md
+        - name: 데이터 집합
+          href: data-factory-create-datasets.md
+        - name: 예약 및 실행
+          href: data-factory-scheduling-and-execution.md
+- name: 시작
+  expanded: true
+  items:
+    - name: 데이터를 복사하기 위해 파이프라인 생성
+      href: data-factory-copy-data-from-azure-blob-storage-to-sql-database.md
+      items:
+        - name: 복사 마법사
+          href: data-factory-copy-data-wizard-tutorial.md
+        - name: Azure Portal
+          href: data-factory-copy-activity-tutorial-using-azure-portal.md
+        - name: Visual Studio
+          href: data-factory-copy-activity-tutorial-using-visual-studio.md
+        - name: Azure PowerShell
+          href: data-factory-copy-activity-tutorial-using-powershell.md
+        - name: REST API
+          href: data-factory-copy-activity-tutorial-using-rest-api.md
+        - name: .NET API
+          href: data-factory-copy-activity-tutorial-using-dotnet-api.md
+    - name: 데이터를 변환하기 위해 파이프라인 생성
+      href: data-factory-build-your-first-pipeline.md
+      items:
+        - name: Azure 포털
+          href: data-factory-build-your-first-pipeline-using-editor.md
+        - name: Visual Studio
+          href: data-factory-build-your-first-pipeline-using-vs.md
+        - name: Azure PowerShell
+          href: data-factory-build-your-first-pipeline-using-powershell.md
+        - name: Azure Resource Manager 템플릿
+          href: data-factory-build-your-first-pipeline-using-arm.md
+        - name: REST API
+          href: data-factory-build-your-first-pipeline-using-rest-api.md
+    - name: 온-프레미스 및 클라우드 간 데이터 이동
+      href: data-factory-move-data-between-onprem-and-cloud.md
+    - name: FAQ
+      href: data-factory-faq.md
+- name: 방법
+  items:
+    - name: 데이터 이동
+      items:
+        - name: 복사 작업 개요
+          href: data-factory-data-movement-activities.md
+        - name: 데이터 팩터리 복사 마법사
+          href: data-factory-azure-copy-wizard.md
+          items:
+            - name: 15분 내에 1TB 로드
+              href: data-factory-load-sql-data-warehouse.md
+        - name: 성능 및 튜닝 가이드
+          href: data-factory-copy-activity-performance.md
+        - name: 내결함성
+          href: data-factory-copy-activity-fault-tolerance.md
+        - name: 보안 고려 사항
+          href: data-factory-data-movement-security-considerations.md
+        - name: 커넥터
+          items:
+            - name: Amazon Redshift
+              href: data-factory-amazon-redshift-connector.md
+            - name: Amazon S3
+              href: data-factory-amazon-simple-storage-service-connector.md
+            - name: Azure Blob Storage
+              href: data-factory-azure-blob-connector.md
+            - name: Azure Cosmos DB
+              href: data-factory-azure-documentdb-connector.md
+            - name: Azure Data Lake Store
+              href: data-factory-azure-datalake-connector.md
+            - name: Azure Search
+              href: data-factory-azure-search-connector.md
+            - name: Azure SQL Database
+              href: data-factory-azure-sql-connector.md
+            - name: Azure SQL Data Warehouse
+              href: data-factory-azure-sql-data-warehouse-connector.md
+            - name: Azure Table Storage
+              href: data-factory-azure-table-connector.md
+            - name: Cassandra
+              href: data-factory-onprem-cassandra-connector.md
+            - name: DB2
+              href: data-factory-onprem-db2-connector.md
+            - name: 파일 시스템
+              href: data-factory-onprem-file-system-connector.md
+            - name: FTP
+              href: data-factory-ftp-connector.md
+            - name: HDFS
+              href: data-factory-hdfs-connector.md
+            - name: HTTP
+              href: data-factory-http-connector.md
+            - name: MongoDB
+              href: data-factory-on-premises-mongodb-connector.md
+            - name: MySQL
+              href: data-factory-onprem-mysql-connector.md
+            - name: OData
+              href: data-factory-odata-connector.md
+            - name: ODBC
+              href: data-factory-odbc-connector.md
+            - name: Oracle
+              href: data-factory-onprem-oracle-connector.md
+            - name: PostgreSQL
+              href: data-factory-onprem-postgresql-connector.md
+            - name: Salesforce
+              href: data-factory-salesforce-connector.md
+            - name: SAP Business Warehouse
+              href: data-factory-sap-business-warehouse-connector.md
+            - name: SAP HANA
+              href: data-factory-sap-hana-connector.md
+            - name: SFTP
+              href: data-factory-sftp-connector.md
+            - name: SQL Server
+              href: data-factory-sqlserver-connector.md
+            - name: Sybase
+              href: data-factory-onprem-sybase-connector.md
+            - name: Teradata
+              href: data-factory-onprem-teradata-connector.md
+            - name: 웹 테이블
+              href: data-factory-web-table-connector.md
+        - name: 데이터 관리 게이트웨이
+          href: data-factory-data-management-gateway.md
+    - name: 데이터 변환
+      href: data-factory-data-transformation-activities.md
+      items:
+        - name: HDInsight Hive 작업
+          href: data-factory-hive-activity.md
+        - name: HDInsight Pig 작업
+          href: data-factory-pig-activity.md
+        - name: HDInsight MapReduce 작업
+          href: data-factory-map-reduce.md
+        - name: HDInsight 스트리밍 작업
+          href: data-factory-hadoop-streaming-activity.md
+        - name: HDInsight Spark 작업
+          href: data-factory-spark.md
+        - name: Machine Learning Batch 실행 작업
+          href: data-factory-azure-ml-batch-execution-activity.md
+        - name: Machine Learning 업데이트 리소스 활동
+          href: data-factory-azure-ml-update-resource-activity.md
+        - name: 저장 프로시저 작업
+          href: data-factory-stored-proc-activity.md
+        - name: Data Lake Analytics U-SQL 작업
+          href: data-factory-usql-activity.md
+        - name: .NET 사용자 지정 작업
+          href: data-factory-use-custom-activities.md
+        - name: R 스크립트 호출
+          href: 'https://github.com/Azure/Azure-DataFactory/tree/master/Samples/RunRScriptUsingADFSample'
+        - name: Azure Analysis Services에서 모델 다시 처리
+          href: 'https://github.com/Azure/Azure-DataFactory/tree/master/Samples/AzureAnalysisServicesProcessSample'
+        - name: Compute 연결된 서비스
+          href: data-factory-compute-linked-services.md
+    - name: 개발
+      items:
+        - name: Azure Resource Manager 템플릿
+          href: data-factory-how-to-use-resource-manager-templates.md
+        - name: 샘플
+          href: data-factory-samples.md
+        - name: 함수 및 시스템 변수
+          href: data-factory-functions-variables.md
+        - name: 이름 지정 규칙
+          href: data-factory-naming-rules.md
+        - name: .NET API 변경 로그
+          href: data-factory-api-change-log.md
+    - name: 모니터링 및 관리
+      items:
+        - name: 모니터링 및 관리 앱
+          href: data-factory-monitor-manage-app.md
+        - name: Azure Data Factory 파이프라인
+          href: data-factory-monitor-manage-pipelines.md
+        - name: .NET SDK 사용
+          href: data-factory-create-data-factories-programmatically.md
+        - name: 데이터 팩터리 문제 해결
+          href: data-factory-troubleshoot.md
+        - name: 데이터 관리 게이트웨이 사용 관련 문제 해결
+          href: data-factory-troubleshoot-gateway-issues.md
+    - name: 저장 프로시저 작업을 사용하여 SSIS 패키지 호출
+      href: how-to-invoke-ssis-package-stored-procedure-activity.md
+- name: 참조
+  items:
+    - name: 코드 샘플
+      href: 'https://azure.microsoft.com/en-us/resources/samples/?service=data-factory'
+    - name: Azure PowerShell
+      href: /powershell/module/azurerm.datafactories
+    - name: .NET
+      href: /dotnet/api/microsoft.azure.management.datafactories.models
+    - name: REST (영문)
+      href: /rest/api/datafactory/
+    - name: JSON
+      href: data-factory-json-scripting-reference.md
+- name: 리소스
+  items:
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: 사례 연구
+      href: data-factory-customer-case-studies.md
+    - name: 학습 경로
+      href: 'https://azure.microsoft.com/documentation/learning-paths/data-factory'
+    - name: MSDN 포럼
+      href: 'https://social.msdn.microsoft.com/Forums/home?forum=AzureDataFactory'
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/data-factory/'
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'
+    - name: 데이터 관리 게이트웨이에 대한 릴리스 정보
+      href: data-factory-gateway-release-notes.md
+    - name: 기능 요청
+      href: 'https://feedback.azure.com/forums/270578-azure-data-factory'
+    - name: 서비스 업데이트
+      href: 'https://azure.microsoft.com/updates/?product=data-factory'
+    - name: 스택 오버플로
+      href: 'http://stackoverflow.com/questions/tagged/azure-data-factory'
+    - name: 비디오
+      href: 'https://azure.microsoft.com/documentation/videos/index/?services=data-factory'
+    - name: 데이터 팩터리 및 Batch를 사용하여 대규모 데이터 집합 처리
+      href: data-factory-data-processing-using-batch.md
+    - name: 사례 연구
+      items:
+        - name: 고객 프로파일링
+          href: data-factory-customer-profiling-usecase.md
+        - name: 제품 권장 사항
+          href: data-factory-product-reco-usecase.md

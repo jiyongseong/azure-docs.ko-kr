@@ -1,10 +1,10 @@
 ---
-title: "자습서: Symantec WSS(Web Security Service)와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory와 Symantec WSS(Web Security Service) 간에 Single Sign-On을 구성하는 방법을 알아봅니다."
+title: '자습서: Symantec WSS(Web Security Service)와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory와 Symantec WSS(Web Security Service) 간에 Single Sign-On을 구성하는 방법을 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.reviewer: joflore
 ms.assetid: d6e4d893-1f14-4522-ac20-0c73b18c72a5
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/27/2017
 ms.author: jeedes
+ms.openlocfilehash: 0dc75a1091c56ddbbffcd54047b2465ece231254
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: fff84ee45818e4699df380e1536f71b2a4003c71
-ms.openlocfilehash: 61576d3a915d209e7355e04432e586dcf66e7c5a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/01/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-symantec-web-security-service-wss"></a>자습서: Symantec WSS(Web Security Service)와 Azure Active Directory 통합
 
@@ -33,7 +32,7 @@ Symantec WSS(Web Security Service)를 Azure AD와 통합하면 다음과 같은 
 
 - WSS 계정에 정의된 사용자 및 그룹 수준 정책 규칙을 적용합니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -62,7 +61,7 @@ Symantec WSS(Web Security Service)가 Azure AD에 통합되도록 구성하려�
 
 **갤러리에서 Symantec WSS(Web Security Service)를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -74,7 +73,7 @@ Symantec WSS(Web Security Service)가 Azure AD에 통합되도록 구성하려�
 
     ![새 응용 프로그램 단추][3]
 
-4. 검색 상자에 **Symantec WSS(Web Security Service)**를 입력하고, 결과 패널에서 **Symantec WSS(Web Security Service)**를 선택한 다음 **추가** 단추를 클릭하여 응용 프로그램을 추가합니다.
+4. 검색 상자에 **Symantec WSS(Web Security Service)** 를 입력하고, 결과 패널에서 **Symantec WSS(Web Security Service)** 를 선택한 다음 **추가** 단추를 클릭하여 응용 프로그램을 추가합니다.
 
     ![결과 목록의 Symantec WSS(Web Security Service)](./media/active-directory-saas-symantec-tutorial/tutorial_symantecwebsecurityservicewss_addfromgallery.png)
 
@@ -114,7 +113,7 @@ Symantec WSS(Web Security Service)에서 Azure AD Single Sign-On을 구성하고
 
     a. **식별자** 텍스트 상자에 URL `https://saml.threatpulse.net:8443/saml/saml_realm`을 입력합니다.
 
-    b. **회신 URL** 텍스트 상자에 URL `https://saml.threatpulse.net:8443/saml/saml_realm/bcsamlpost`를 입력합니다.
+    나. **회신 URL** 텍스트 상자에 URL `https://saml.threatpulse.net:8443/saml/saml_realm/bcsamlpost`를 입력합니다.
 
     > [!NOTE]
     > **식별자** 및 **회신 URL** 값이 어떤 이유로 작동하지 않는 경우 [Symantec WSS(Web Security Service) 클라이언트 지원 팀](https://www.symantec.com/contact-us)에 문의하세요.
@@ -158,9 +157,9 @@ Symantec WSS(Web Security Service)에서 Azure AD Single Sign-On을 구성하고
 
     a. **이름** 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
+    나. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
 
-    c. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
+    다. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -183,7 +182,7 @@ Symantec WSS(Web Security Service)에서 Azure AD Single Sign-On을 구성하고
 
     ![사용자 할당][201] 
 
-2. 응용 프로그램 목록에서 **Symantec WSS(Web Security Service)**를 선택합니다.
+2. 응용 프로그램 목록에서 **Symantec WSS(Web Security Service)** 를 선택합니다.
 
     ![응용 프로그램 목록의 Symantec WSS(Web Security Service) 연결](./media/active-directory-saas-symantec-tutorial/tutorial_symantecwebsecurityservicewss_app.png)  
 
@@ -210,7 +209,7 @@ WSS로 트래픽을 프록시하도록 웹 브라우저를 구성한 후 웹 브
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 <!--Image references-->
 
@@ -225,5 +224,4 @@ WSS로 트래픽을 프록시하도록 웹 브라우저를 구성한 후 웹 브
 [201]: ./media/active-directory-saas-symantec-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-symantec-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-symantec-tutorial/tutorial_general_203.png
-
 

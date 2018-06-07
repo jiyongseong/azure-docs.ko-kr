@@ -13,14 +13,13 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: data-catalog
-ms.date: 05/03/2017
+ms.date: 01/18/2018
 ms.author: spelluru
-translationtype: Human Translation
-ms.sourcegitcommit: 15e72950ef30b8540d0303292fb9882f500c875e
-ms.openlocfilehash: 809b010fbbc0b5c1cbc2d5d5474374a4467defb4
-ms.lasthandoff: 01/24/2017
-
-
+ms.openlocfilehash: 537ed3bccf7d3306628b7a64ba0866f0e51a03e5
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="keyboard-shortcuts-for-azure-data-catalog"></a>Azure 데이터 카탈로그에 대한 키보드 바로 가기
 ## <a name="keyboard-shortcuts-for-the-data-catalog-data-source-registration-tool"></a>데이터 카탈로그 데이터 원본 등록 도구에 대한 바로 가기 키
@@ -86,5 +85,4 @@ ms.lasthandoff: 01/24/2017
 | 검색 일치 메뉴 토글 |ALT+S |
 | **열기** 메뉴 토글 |ALT + O |
 | 자산이 컨테이너인 경우 컨테이너 탐색 |ALT+L |
-
 

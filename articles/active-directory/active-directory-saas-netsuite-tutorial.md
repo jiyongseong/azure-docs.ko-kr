@@ -1,25 +1,24 @@
 ---
-title: "자습서: Netsuite와 Azure Active Directory 통합 | Microsoft 문서"
-description: "Azure Active Directory와 Netsuite 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Netsuite와 Azure Active Directory 통합 | Microsoft 문서'
+description: Azure Active Directory와 Netsuite 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: dafa0864-aef2-4f5e-9eac-770504688ef4
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 05/19/2017
+ms.date: 04/25/2018
 ms.author: jeedes
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 4a19ab310212b93a53495a6fc6c25c77dfb82e79
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 2f2bd227a3d8c0b797f37026032938fbcfe3de9e
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34351340"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-netsuite"></a>자습서: Netsuite와 Azure Active Directory 통합
 
@@ -31,14 +30,14 @@ Netsuite를Azure AD와 통합하면 다음과 같은 이점이 제공됩니다.
 - 사용자가 자신의 Azure AD 계정으로 Netsuite에 자동으로 로그온(Single Sign-on)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](active-directory-appssoaccess-whatis.md)을 참조하세요.
+Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](manage-apps/what-is-single-sign-on.md)을 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
 Netsuite와 Azure AD 통합을 구성하려면 다음 항목이 필요합니다.
 
 - Azure AD 구독
-- Netsuite Single Sign-On이 설정된 구독
+- Form.com Single Sign-On이 사용하도록 설정된 구독
 
 > [!NOTE]
 > 이 자습서의 단계를 테스트하기 위해 프로덕션 환경을 사용하는 것은 바람직하지 않습니다.
@@ -59,7 +58,7 @@ Netsuite가 Azure AD에 통합되도록 구성하려면 갤러리의 Netsuite를
 
 **갤러리에서 Netsuite를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Active Directory][1]
 
@@ -88,11 +87,11 @@ Single Sign-On이 작동하려면 Azure AD에서 Azure AD 사용자에 해당하
 
 Netsuite에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구성 요소를 완료해야 합니다.
 
-1. **[Azure AD Single Sign-On 구성](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
-2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
+1. **[Configuring Azure AD Single Sign-On](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
+2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On 테스트하는 데 사용합니다.
 3. **[Netsuite 테스트 사용자 만들기](#creating-a-netsuite-test-user)** - Britta Simon의 Azure AD 표현과 연결된 해당 사용자를 Netsuite에 만듭니다.
 4. **[Azure AD 테스트 사용자 할당](#assigning-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Testing Single Sign-On](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
+5. **[Single Sign-On 테스트](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
 
 ### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -102,125 +101,121 @@ Netsuite에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음
 
 1. Azure Portal의 **Netsuite** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single Sign-On** 대화 상자에서 **모드**를 **SAML 기반 로그온**으로 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-on 구성](./media/active-directory-saas-netsuite-tutorial/tutorial_netsuite_samlbase.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-netsuite-tutorial/tutorial_netsuite_samlbase.png)
 
 3. **Netsuite 도메인 및 URL** 섹션에서 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-netsuite-tutorial/tutorial_netsuite_url.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-netsuite-tutorial/tutorial_netsuite_url.png)
 
     **회신 URL** 텍스트 상자에 다음 패턴으로 URL을 입력합니다.  `https://<tenant-name>.netsuite.com/saml2/acs` `https://<tenant-name>.na1.netsuite.com/saml2/acs` `https://<tenant-name>.na2.netsuite.com/saml2/acs` `https://<tenant-name>.sandbox.netsuite.com/saml2/acs` `https://<tenant-name>.na1.sandbox.netsuite.com/saml2/acs` `https://<tenant-name>.na2.sandbox.netsuite.com/saml2/acs`
 
     > [!NOTE] 
-    > 이 값은 실제 값이 아닙니다. 실제 회신 URL로 값을 업데이트합니다. 이 값을 얻으려면 [Netsuite 지원 팀](http://www.netsuite.com/portal/services/support.shtml)에 문의하세요.
+    > 이러한 값은 실제 값이 아닙니다. 실제 회신 URL로 값을 업데이트하세요. 이러한 값을 얻으려면 [Netsuite 지원 팀](http://www.netsuite.com/portal/services/support.shtml)에 문의하세요.
  
 4. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 XML 파일을 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-netsuite-tutorial/tutorial_netsuite_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-netsuite-tutorial/tutorial_netsuite_certificate.png) 
 
 5. **저장** 단추를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-netsuite-tutorial/tutorial_general_400.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-netsuite-tutorial/tutorial_general_400.png)
 
 6. **Netsuite 구성** 섹션에서 **Netsuite 구성**을 클릭하여 **로그온 구성** 창을 엽니다. **빠른 참조 섹션**에서 **SAML Single Sign-On 서비스 URL**을 복사합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-netsuite-tutorial/tutorial_netsuite_configure.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-netsuite-tutorial/tutorial_netsuite_configure.png) 
 
 7. 브라우저에서 새 탭을 열고 관리자 권한으로 Netsuite 회사 사이트에 로그인합니다.
 
 8. 페이지의 위쪽에 있는 도구 모음에서 **설치**를 클릭한 다음 **설치 관리자**를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-Netsuite-tutorial/ns-setup.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-Netsuite-tutorial/ns-setup.png)
 
 9. **설치 작업** 목록에서 **통합**을 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-Netsuite-tutorial/ns-integration.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-Netsuite-tutorial/ns-integration.png)
 
 10. **인증 관리** 섹션에서 **SAML Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-Netsuite-tutorial/ns-saml.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-Netsuite-tutorial/ns-saml.png)
 
 11. **SAML 설정** 페이지에서 다음 단계를 수행합니다.
    
     a. **로그온 구성**의 **빠른 참조** 섹션에서 **SAML Single Sign-On 서비스 URL**을 복사하여 Netsuite의 **Identity Provider Login Page**(ID 공급자 로그인 페이지) 필드에 붙여넣습니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-netsuite-tutorial/ns-saml-setup.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-netsuite-tutorial/ns-saml-setup.png)
   
-    b. [Netsuite 설치]에서 **기본 인증 방법**을 선택합니다.
+    나. [Netsuite 설치]에서 **기본 인증 방법**을 선택합니다.
 
-    c. **SAMLV2 ID 공급자 메타데이터** 필드에서 **IDP 메타 데이터 파일 업로드**를 선택합니다. 그런 다음 **찾아보기**를 클릭하여 Azure Portal에서 다운로드한 메타데이터 파일을 업로드합니다.
+    다. **SAMLV2 ID 공급자 메타데이터** 필드에서 **IDP 메타 데이터 파일 업로드**를 선택합니다. 그런 다음 **찾아보기**를 클릭하여 Azure Portal에서 다운로드한 메타데이터 파일을 업로드합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-netsuite-tutorial/ns-sso-setup.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-netsuite-tutorial/ns-sso-setup.png)
 
     d. **제출**을 클릭합니다.
 
 12. Azure AD에서 **기타 모든 사용자 특성 보기 및 편집** 확인란을 클릭하고 특성을 추가합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-Netsuite-tutorial/ns-attributes.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-Netsuite-tutorial/ns-attributes.png)
 
 13. **특성 이름** 필드에 `account`을(를) 입력합니다. **특성 값** 필드에서 Netsuite 계정 ID를 입력합니다. 이 값은 상수이며 계정에 따라 변경됩니다. 사용자의 계정 ID를 찾는 방법에 대한 지침은 아래에 포함되어 있습니다.
 
-      ![Single Sign-on 구성](./media/active-directory-saas-Netsuite-tutorial/ns-add-attribute.png)
+      ![Configure Single Sign-On](./media/active-directory-saas-Netsuite-tutorial/ns-add-attribute.png)
 
     a. Netsuite의 위쪽 탐색 메뉴에서 **설치**를 클릭합니다.
 
-    b. 그런 다음 왼쪽 탐색 메뉴의 **Setup Tasks**(설치 작업) 섹션 아래를 클릭하고 **통합** 섹션을 선택한 다음 **Web Services Preferences**(웹 서비스 기본 설정)를 클릭합니다.
+    나. 그런 다음 왼쪽 탐색 메뉴의 **Setup Tasks**(설치 작업) 섹션 아래를 클릭하고 **통합** 섹션을 선택한 다음 **Web Services Preferences**(웹 서비스 기본 설정)를 클릭합니다.
 
-    c. Netsuite 계정 ID를 복사하여 Azure AD의 **특성 값** 필드에 붙여넣습니다.
+    다. Netsuite 계정 ID를 복사하여 Azure AD의 **특성 값** 필드에 붙여넣습니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-Netsuite-tutorial/ns-account-id.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-Netsuite-tutorial/ns-account-id.png)
 
 14. 사용자가 Netsuite에서 Single Sign-On을 수행하려면 먼저 Netsuite에 적절한 권한을 할당해야 합니다. 이러한 사용 권한을 할당하려면 아래 지침을 따릅니다.
 
     a. 위쪽 탐색 메뉴에서 **설치**를 클릭한 다음 **설치 관리자**를 클릭합니다.
       
-      ![Single Sign-on 구성](./media/active-directory-saas-Netsuite-tutorial/ns-setup.png)
+      ![Configure Single Sign-On](./media/active-directory-saas-Netsuite-tutorial/ns-setup.png)
 
-    b. 왼쪽 탐색 메뉴에서 **사용자/역할**을 선택한 다음 **역할 관리**를 클릭합니다.
+    나. 왼쪽 탐색 메뉴에서 **사용자/역할**을 선택한 다음 **역할 관리**를 클릭합니다.
       
-      ![Single Sign-on 구성](./media/active-directory-saas-Netsuite-tutorial/ns-manage-roles.png)
+      ![Configure Single Sign-On](./media/active-directory-saas-Netsuite-tutorial/ns-manage-roles.png)
 
-    c. **새 역할**을 클릭합니다.
+    다. **새 역할**을 클릭합니다.
 
-    d. 새 역할에 대한 **이름**을 입력하고 **Single Sign-On Only**(Single Sign-On 전용) 확인란을 선택합니다.
+    d. 새 역할에 **이름**을 입력합니다.
       
-      ![Single Sign-on 구성](./media/active-directory-saas-Netsuite-tutorial/ns-new-role.png)
+      ![Configure Single Sign-On](./media/active-directory-saas-Netsuite-tutorial/ns-new-role.png)
 
-    e. **Save**를 클릭합니다.
+    e. **저장**을 클릭합니다.
 
     f. 위쪽에 있는 메뉴에서 **사용 권한**을 클릭합니다. **설치**를 클릭합니다.
       
-       ![Single Sign-on 구성](./media/active-directory-saas-Netsuite-tutorial/ns-sso.png)
+       ![Configure Single Sign-On](./media/active-directory-saas-Netsuite-tutorial/ns-sso.png)
 
-    g. **SAM Single Sign-On 설치**를 선택한 다음 **추가**를 클릭합니다.
+    g. **SAML Single Sign-On 설치**를 선택한 다음, **추가**를 클릭합니다.
 
-    h. **Save**를 클릭합니다.
+    h. **저장**을 클릭합니다.
 
     i. 위쪽 탐색 메뉴에서 **설치**를 클릭한 다음 **설치 관리자**를 클릭합니다.
       
-       ![Single Sign-on 구성](./media/active-directory-saas-Netsuite-tutorial/ns-setup.png)
+       ![Configure Single Sign-On](./media/active-directory-saas-Netsuite-tutorial/ns-setup.png)
 
     j. 왼쪽 탐색 메뉴에서 **사용자/역할**을 선택한 다음 **사용자 관리**를 클릭합니다.
       
-       ![Single Sign-on 구성](./media/active-directory-saas-Netsuite-tutorial/ns-manage-users.png)
+       ![Configure Single Sign-On](./media/active-directory-saas-Netsuite-tutorial/ns-manage-users.png)
 
     k. 테스트 사용자를 선택합니다. **편집**을 클릭합니다.
       
-       ![Single Sign-on 구성](./media/active-directory-saas-Netsuite-tutorial/ns-edit-user.png)
+       ![Configure Single Sign-On](./media/active-directory-saas-Netsuite-tutorial/ns-edit-user.png)
 
     l. 역할 대화 상자에서 만든 역할을 선택하거 **추가**를 클릭합니다.
       
-       ![Single Sign-on 구성](./media/active-directory-saas-Netsuite-tutorial/ns-add-role.png)
+       ![Configure Single Sign-On](./media/active-directory-saas-Netsuite-tutorial/ns-add-role.png)
 
-    m. **Save**를 클릭합니다.
+    m. **저장**을 클릭합니다.
     
-> [!TIP]
-> 이제 앱을 설정하는 동안 [Azure Portal](https://portal.azure.com) 내에서 이러한 지침의 간결한 버전을 읽을 수 있습니다.  **Active Directory > 엔터프라이즈 응용 프로그램** 섹션에서 이 앱을 추가한 후에는 **Single Sign-On** 탭을 클릭하고 맨 아래에 있는 **구성** 섹션을 통해 포함된 설명서에 액세스하면 됩니다. 포함된 설명서 기능에 대한 자세한 내용은 [Azure AD 포함된 설명서]( https://go.microsoft.com/fwlink/?linkid=845985)에서 확인할 수 있습니다.
-> 
-
 ### <a name="creating-an-azure-ad-test-user"></a>Azure AD 테스트 사용자 만들기
 이 섹션의 목적은 Azure Portal에서 Britta Simon이라는 테스트 사용자를 만드는 것입니다.
 
@@ -246,9 +241,9 @@ Netsuite에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다. 
 
@@ -272,7 +267,7 @@ Netsuite에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음
 
 2. 응용 프로그램 목록에서 **Netsuite**를 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-netsuite-tutorial/tutorial_netsuite_app.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-netsuite-tutorial/tutorial_netsuite_app.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -292,12 +287,12 @@ Netsuite에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음
 
 이 섹션에서는 액세스 패널을 사용하여 Azure AD Single Sign-On 구성을 테스트합니다.
 
-Single Sign-On 설정을 테스트하려면 [https://myapps.microsoft.com](https://myapps.microsoft.com/)에서 액세스 패널을 연 다음 테스트 계정에 로그인하고 **Netsuite**를 클릭합니다.
+Single Sign-On 설정을 테스트하려면 [https://myapps.microsoft.com](https://myapps.microsoft.com/)에서 액세스 패널을 연 다음, 테스트 계정에 로그인하고 **Netsuite**를 클릭합니다.
 
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 * [사용자 프로비저닝 구성](active-directory-saas-netsuite-provisioning-tutorial.md)
 
 <!--Image references-->
@@ -313,5 +308,4 @@ Single Sign-On 설정을 테스트하려면 [https://myapps.microsoft.com](https
 [201]: ./media/active-directory-saas-netsuite-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-netsuite-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-netsuite-tutorial/tutorial_general_203.png
-
 

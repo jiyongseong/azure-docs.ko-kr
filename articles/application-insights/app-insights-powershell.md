@@ -1,9 +1,9 @@
 ---
-title: "PowerShell 사용하여 Azure Application Insights 자동화 | Microsoft Docs"
-description: "Azure Resource Manager 템플릿을 사용하여 PowerShell에서 리소스, 경고 및 가용성 테스트 생성을 자동화합니다."
+title: PowerShell 사용하여 Azure Application Insights 자동화 | Microsoft Docs
+description: Azure Resource Manager 템플릿을 사용하여 PowerShell에서 리소스, 경고 및 가용성 테스트 생성을 자동화합니다.
 services: application-insights
-documentationcenter: 
-author: CFreemanwa
+documentationcenter: ''
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 9f73b87f-be63-4847-88c8-368543acad8b
 ms.service: application-insights
@@ -12,13 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 04/02/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: e1ceaf7baef021f97f70a6b1a5203e178db613db
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/03/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: d6bc4f69386cc8a9119aa852693456f6465f59ce
+ms.sourcegitcommit: 6e43006c88d5e1b9461e65a73b8888340077e8a2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/01/2018
 ---
 #  <a name="create-application-insights-resources-using-powershell"></a>PowerShell을 사용하여 Application Insights 리소스 만들기
 이 문서에서는 Azure Resource Management를 사용하여 [Application Insights](app-insights-overview.md) 리소스의 생성 및 업데이트를 자동화하는 방법을 보여줍니다. 예를 들어 빌드 프로세스의 일부로 이 작업을 수행할 수 있습니다. 기본 Application Insights 리소스와 함께 [가용성 웹 테스트](app-insights-monitor-web-app-availability.md)를 만들고, [경고](app-insights-alerts.md)를 설정하고, [가격 책정 계층](app-insights-pricing.md)을 설정하고, 기타 Azure 리소스를 만들 수 있습니다.
@@ -53,7 +52,6 @@ ms.lasthandoff: 04/03/2017
                 "allowedValues": [
                     "web",
                     "java",
-                    "HockeyAppBridge",
                     "other"
                 ],
                 "metadata": {
@@ -156,7 +154,7 @@ ms.lasthandoff: 04/03/2017
 ## <a name="create-application-insights-resources"></a>Application Insights 리소스 만들기
 1. PowerShell에서 Azure에 로그인합니다.
    
-    `Login-AzureRmAccount`
+    `Connect-AzureRmAccount`
 2. 다음과 같은 명령을 실행합니다.
    
     ```PS
@@ -205,7 +203,7 @@ ms.lasthandoff: 04/03/2017
 * 기본적인 Basic 가격 계획만 사용하려는 경우 템플릿에서 CurrentBillingFeatures 리소스를 생략해도 됩니다.
 * 구성 요소 리소스를 만든 후에 가격 계획을 변경하려는 경우 "microsoft.insights/components" 리소스를 생략하는 템플릿을 사용할 수 있습니다. 또한 청구 리소스에서 `dependsOn` 노드를 생략합니다. 
 
-업데이트된 가격 계획을 확인하려면 브라우저에서 "기능+가격 책정" 블레이드를 확인합니다. **브라우저 보기를 새로 고쳐** 최신 상태를 표시합니다.
+업데이트된 요금제를 확인하려면 브라우저에서 **사용량 및 예상 비용 페이지** 블레이드를 살펴보세요. **브라우저 보기를 새로 고쳐** 최신 상태를 표시합니다.
 
 
 
@@ -451,5 +449,4 @@ Azure에서는 엄격한 순서로 리소스를 설정해야 합니다. 다음 �
 * [Application Insights에 Azure 진단 보내기](app-insights-powershell-azure-diagnostics.md)
 * [GitHub에서 Azure로 배포](http://blogs.msdn.com/b/webdev/archive/2015/09/16/deploy-to-azure-from-github-with-application-insights.aspx)
 * [릴리스 주석 만들기](https://github.com/Microsoft/ApplicationInsights-Home/blob/master/API/CreateReleaseAnnotation.ps1)
-
 

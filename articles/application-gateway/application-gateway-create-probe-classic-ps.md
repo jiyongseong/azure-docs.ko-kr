@@ -1,11 +1,11 @@
 ---
-title: "사용자 지정 프로브 만들기 - Azure Application Gateway - PowerShell 클래식 | Microsoft Docs"
-description: "클래식 배포 모델에서 PowerShell을 사용하여 응용 프로그램 게이트웨이에 대한 사용자 지정 프로브를 만드는 방법에 대해 알아봅니다."
+title: 사용자 지정 프로브 만들기 - Azure Application Gateway - PowerShell 클래식 | Microsoft Docs
+description: 클래식 배포 모델에서 PowerShell을 사용하여 Application Gateway에 대한 사용자 지정 프로브를 만드는 방법에 대해 알아봅니다.
 services: application-gateway
 documentationcenter: na
-author: georgewallace
-manager: timlt
-editor: 
+author: vhorne
+manager: jpconnock
+editor: ''
 tags: azure-service-management
 ms.assetid: 338a7be1-835c-48e9-a072-95662dc30f5e
 ms.service: application-gateway
@@ -14,26 +14,25 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 04/26/2017
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: bf190741b10c10e885d927ad21a9f2b25107943f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
-
+ms.author: victorh
+ms.openlocfilehash: 97d1376dc7908b72d8e8ec15145229cf3cf4acae
+ms.sourcegitcommit: c47ef7899572bf6441627f76eb4c4ac15e487aec
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/04/2018
+ms.locfileid: "33201949"
 ---
-# <a name="create-a-custom-probe-for-azure-application-gateway-classic-by-using-powershell"></a>PowerShell을 사용하여 Azure 응용 프로그램 게이트웨이(클래식)에 대한 사용자 지정 프로브 만들기
+# <a name="create-a-custom-probe-for-azure-application-gateway-classic-by-using-powershell"></a>PowerShell을 사용하여 Azure Application Gateway(클래식)에 대한 사용자 지정 프로브 만들기
 
 > [!div class="op_single_selector"]
-> * [Azure 포털](application-gateway-create-probe-portal.md)
+> * [Azure Portal](application-gateway-create-probe-portal.md)
 > * [Azure Resource Manager PowerShell](application-gateway-create-probe-ps.md)
 > * [Azure 클래식 PowerShell](application-gateway-create-probe-classic-ps.md)
 
 이 문서에서는 PowerShell을 사용하여 기존 응용 프로그램 게이트웨이에 사용자 지정 프로브를 추가합니다. 사용자 지정 프로브는 특정 상태 확인 페이지를 사용하는 응용 프로그램이나 기본 웹 응용 프로그램에서 성공적으로 응답을 제공하지 않는 응용 프로그램에 유용합니다.
 
 > [!IMPORTANT]
-> Azure에는 리소스를 만들고 작업하기 위한 [리소스 관리자 및 클래식](../azure-resource-manager/resource-manager-deployment-model.md)라는 두 가지 배포 모델이 있습니다. 이 문서에서는 클래식 배포 모델 사용에 대해 설명합니다. 새로운 배포는 대부분 리소스 관리자 모델을 사용하는 것이 좋습니다. [Resource Manager 모델을 사용하여 이러한 단계를 수행하는](application-gateway-create-probe-ps.md) 방법을 알아봅니다.
+> Azure에는 리소스를 만들고 작업하기 위한 [리소스 관리자 및 클래식](../azure-resource-manager/resource-manager-deployment-model.md)이라는 두 가지 배포 모델이 있습니다. 이 문서에서는 클래식 배포 모델 사용에 대해 설명합니다. 새로운 배포는 대부분 리소스 관리자 모델을 사용하는 것이 좋습니다. [Resource Manager 모델을 사용하여 이러한 단계를 수행하는](application-gateway-create-probe-ps.md) 방법을 알아봅니다.
 
 [!INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
 
@@ -62,7 +61,7 @@ Get-AzureApplicationGateway AppGwTest
 ```
 
 > [!NOTE]
-> *InstanceCount* 의 기본값은 2이고, 최대값은 10입니다. *GatewaySize* 의 기본값은 보통입니다. 작게, 보통 및 크게를 선택할 수 있습니다.
+> *InstanceCount* 의 기본값은 2이고, 최대값은 10입니다. *GatewaySize* 에 대한 기본값은 보통입니다. 작게, 보통 및 크게를 선택할 수 있습니다.
 > 
 > 
 
@@ -149,7 +148,7 @@ Get-AzureApplicationGateway AppGwTest
 
 구성 매개 변수:
 
-|매개 변수를 포함해야 합니다.|설명|
+|매개 변수|설명|
 |---|---|
 |**Name** |사용자 지정 프로브에 대한 참조 이름입니다. |
 * **Protocol** | 사용되는 프로토콜입니다(가능한 값: HTTP 또는 HTTPS).|
@@ -212,5 +211,4 @@ Set-AzureApplicationGatewayConfig -Name "<application gateway name>" -Configfile
 SSL(Secure Sockets Layer) 오프로드를 구성하려는 경우 [SSL 오프로드에 대해 응용 프로그램 게이트웨이 구성](application-gateway-ssl.md)을 참조하세요.
 
 내부 부하 분산 장치에서 사용되도록 응용 프로그램 게이트웨이를 구성하려면 [ILB(내부 부하 분산 장치)를 사용하여 응용 프로그램 게이트웨이 만들기](application-gateway-ilb.md)를 참조하세요.
-
 

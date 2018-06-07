@@ -16,14 +16,12 @@ ms.workload: infrastructure
 ms.date: 03/01/2017
 ms.author: nepeters
 ms.custom: mvc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: bcf8071454cd598d6aa309823f5cd551779747c3
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
+ms.openlocfilehash: e4b2a02d6019d7610fc1dce95d94efa764c6f04c
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="create-an-nginx-vm-with-powershell"></a>PowerShell을 사용하여 NGINX VM 만들기
 
 이 스크립트는 Azure Virtual Machine을 만들고 Azure Virtual Machine 사용자 지정 스크립트 확장을 사용하여 NGINX를 설치합니다. 스크립트를 실행하면 가상 컴퓨터의 공용 IP 주소에서 데모 웹 사이트에 액세스할 수 있습니다.
@@ -34,7 +32,7 @@ ms.lasthandoff: 04/27/2017
 
 ## <a name="sample-script"></a>샘플 스크립트
 
-[!code-powershell[main](../../../powershell_scripts/virtual-machine/create-vm-nginx/create-vm-nginx.ps1 "VM NGINX 만들기")]
+[!code-powershell[main](../../../powershell_scripts/virtual-machine/create-vm-nginx/create-vm-nginx.ps1 "Create VM NGINX")]
 
 ## <a name="clean-up-deployment"></a>배포 정리 
 
@@ -68,4 +66,3 @@ Remove-AzureRmResourceGroup -Name myResourceGroup
 Azure PowerShell 모듈에 대한 자세한 내용은 [Azure PowerShell 설명서](/powershell/azure/overview)를 참조하세요.
 
 추가 가상 컴퓨터 PowerShell 스크립트 샘플은 [Azure Linux VM 설명서](../linux/powershell-samples.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)에서 확인할 수 있습니다.
-

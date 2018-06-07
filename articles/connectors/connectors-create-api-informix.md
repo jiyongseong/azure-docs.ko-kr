@@ -15,13 +15,11 @@ ms.tgt_pltfrm: na
 ms.workload: integration
 ms.date: 09/26/2016
 ms.author: plarsen; ladocs
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c785ad8dbfa427d69501f5f142ef40a2d3530f9e
-ms.openlocfilehash: b2e755b5b1b4939eac90ac55ba8398c5687124c8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
-
+ms.openlocfilehash: b3b352b185b7dfeee12ac9bee1b72cb740add5b8
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="get-started-with-the-informix-connector"></a>Informix 커넥터 시작
 Informix용 Microsoft 커넥터는 Logic Apps를 IBM Informix 데이터베이스에 저장된 리소스에 연결합니다. Informix 커넥터는 TCP/IP 네트워크를 통해 원격 Informix 서버 컴퓨터와 통신하는 Microsoft 클라이언트를 포함합니다. Azure 가상화에서 실행되는 Windows용 IBM Informix와 같은 클라우드 데이터베이스, 온-프레미스 데이터 게이트웨이를 사용하는 온-프레미스 데이터베이스를 포함합니다. IBM Informix 플랫폼 및 버전의 [지원되는](connectors-create-api-informix.md#supported-informix-platforms-and-versions) 목록을 참조하세요(이 항목에서).
@@ -37,7 +35,7 @@ Informix용 Microsoft 커넥터는 Logic Apps를 IBM Informix 데이터베이스
 
 이 항목에서는 논리 앱에서 커넥터를 사용하여 데이터베이스 작업을 처리하는 방법을 보여 줍니다.
 
-Logic Apps에 대해 자세히 알아보려면 [논리 앱 만들기](../logic-apps/logic-apps-create-a-logic-app.md)를 참조하세요.
+Logic Apps에 대해 자세히 알아보려면 [논리 앱 만들기](../logic-apps/quickstart-create-first-logic-app-workflow.md)를 참조하세요.
 
 ## <a name="available-actions"></a>사용 가능한 작업
 이 커넥터에서 지원하는 논리 앱 작업은 다음과 같습니다.
@@ -56,7 +54,7 @@ Logic Apps에 대해 자세히 알아보려면 [논리 앱 만들기](../logic-a
 
 ### <a name="create-a-logic-app"></a>논리 앱 만들기
 1. **Azure 시작 보드**에서 **+**(더하기 기호), **웹 + 모바일**, **논리 앱**을 차례로 선택합니다.
-2. **이름**(예: `InformixgetTables`), **구독**, **리소스 그룹**, **위치** 및 **앱 서비스 계획**을 입력합니다. **대시보드에 고정**을 선택하고 **만들기**를 선택합니다.
+2. **이름**(예: `InformixgetTables`), **구독**, **리소스 그룹**, **위치** 및 **App Service 계획**을 입력합니다. **대시보드에 고정**을 선택하고 **만들기**를 선택합니다.
 
 ### <a name="add-a-trigger-and-action"></a>트리거 및 작업 추가
 1. **Logic Apps 디자이너**에서 **템플릿** 목록의 **빈 LogicApp**을 선택합니다.
@@ -85,14 +83,14 @@ Logic Apps에 대해 자세히 알아보려면 [논리 앱 만들기](../logic-a
 ## <a name="create-the-connections"></a>연결 만들기
 이 커넥터는 다음 연결 속성을 사용하는 온-프레미스와 클라우드에서 데이터베이스에 대한 연결을 지원합니다. 
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 | --- | --- |
-| 서버 |필수입니다. 콜론으로 구분된 TCP/IP 포트 번호가 뒤에 붙는 IPv4 또는 IPv6 형식 중 하나로 구성되어 TCP/IP 주소 또는 별칭을 나타내는 문자열 값이 허용됩니다. |
-| 데이터베이스 |필수입니다. DRDA 관계형 데이터베이스 이름(RDBNAM)을 나타내는 문자열 값이 허용됩니다. IBM Informix 데이터베이스 이름(dbname)으로 인식되는 데이터베이스인 Informix에는 128바이트 문자열이 허용됩니다. |
+| 서버 |필수 사항입니다. 콜론으로 구분된 TCP/IP 포트 번호가 뒤에 붙는 IPv4 또는 IPv6 형식 중 하나로 구성되어 TCP/IP 주소 또는 별칭을 나타내는 문자열 값이 허용됩니다. |
+| 데이터베이스 |필수 사항입니다. DRDA 관계형 데이터베이스 이름(RDBNAM)을 나타내는 문자열 값이 허용됩니다. IBM Informix 데이터베이스 이름(dbname)으로 인식되는 데이터베이스인 Informix에는 128바이트 문자열이 허용됩니다. |
 | 인증 |선택 사항입니다. 목록 항목 값, 즉 기본 또는 Windows (kerberos)가 허용됩니다. |
-| 사용자 이름 |필수입니다. 문자열 값을 허용합니다. |
-| 암호 |필수입니다. 문자열 값을 허용합니다. |
-| 게이트웨이 |필수입니다. 저장소 그룹의 Logic Apps에 정의된 온-프레미스 데이터 게이트웨이를 나타내는 목록 항목 값이 허용됩니다. |
+| 사용자 이름 |필수 사항입니다. 문자열 값을 허용합니다. |
+| 암호 |필수 사항입니다. 문자열 값을 허용합니다. |
+| 게이트웨이 |필수 사항입니다. 저장소 그룹의 Logic Apps에 정의된 온-프레미스 데이터 게이트웨이를 나타내는 목록 항목 값이 허용됩니다. |
 
 ## <a name="create-the-on-premises-gateway-connection"></a>온-프레미스 게이트웨이 연결 만들기
 이 커넥터는 온-프레미스 데이터 게이트웨이를 통해 온-프레미스 Informix 데이터베이스에 액세스할 수 있습니다. 자세한 내용은 게이트웨이 항목을 참조하세요. 
@@ -126,7 +124,7 @@ Informix 테이블의 모든 행을 가져오는 논리 앱 작업을 만들 수
 
 ### <a name="create-a-logic-app"></a>논리 앱 만들기
 1. **Azure 시작 보드**에서 **+**(더하기 기호), **웹 + 모바일**, **논리 앱**을 차례로 선택합니다.
-2. **이름**(예: "**InformixgetRows**"), **구독**, **리소스 그룹**, **위치** 및 **앱 서비스 계획**을 입력합니다. **대시보드에 고정**을 선택하고 **만들기**를 선택합니다.
+2. **이름**(예: "**InformixgetRows**"), **구독**, **리소스 그룹**, **위치** 및 **App Service 계획**을 입력합니다. **대시보드에 고정**을 선택하고 **만들기**를 선택합니다.
 
 ### <a name="add-a-trigger-and-action"></a>트리거 및 작업 추가
 1. **Logic Apps 디자이너**에서 **템플릿** 목록의 **빈 LogicApp**을 선택합니다.
@@ -163,7 +161,7 @@ Informix 테이블에서 한 행을 추가하는 논리 앱 작업을 만들 수
 
 ### <a name="create-a-logic-app"></a>논리 앱 만들기
 1. **Azure 시작 보드**에서 **+**(더하기 기호), **웹 + 모바일**, **논리 앱**을 차례로 선택합니다.
-2. **이름**(예: `InformixinsertRow`), **구독**, **리소스 그룹**, **위치** 및 **앱 서비스 계획**을 입력합니다. **대시보드에 고정**을 선택하고 **만들기**를 선택합니다.
+2. **이름**(예: `InformixinsertRow`), **구독**, **리소스 그룹**, **위치** 및 **App Service 계획**을 입력합니다. **대시보드에 고정**을 선택하고 **만들기**를 선택합니다.
 
 ### <a name="add-a-trigger-and-action"></a>트리거 및 작업 추가
 1. **Logic Apps 디자이너**에서 **템플릿** 목록의 **빈 LogicApp**을 선택합니다.
@@ -190,7 +188,7 @@ Informix 테이블에서 한 행을 가져오는 논리 앱 작업을 만들 수
 
 ### <a name="create-a-logic-app"></a>논리 앱 만들기
 1. **Azure 시작 보드**에서 **+**(더하기 기호), **웹 + 모바일**, **논리 앱**을 차례로 선택합니다.
-2. **이름**(예: `InformixgetRow`), **구독**, **리소스 그룹**, **위치** 및 **앱 서비스 계획**을 입력합니다. **대시보드에 고정**을 선택하고 **만들기**를 선택합니다.
+2. **이름**(예: `InformixgetRow`), **구독**, **리소스 그룹**, **위치** 및 **App Service 계획**을 입력합니다. **대시보드에 고정**을 선택하고 **만들기**를 선택합니다.
 
 ### <a name="add-a-trigger-and-action"></a>트리거 및 작업 추가
 1. **Logic Apps 디자이너**에서 **템플릿** 목록의 **빈 LogicApp**을 선택합니다.
@@ -218,7 +216,7 @@ Informix 테이블에서 한 행을 변경하는 논리 앱 작업을 만들 수
 
 ### <a name="create-a-logic-app"></a>논리 앱 만들기
 1. **Azure 시작 보드**에서 **+**(더하기 기호), **웹 + 모바일**, **논리 앱**을 차례로 선택합니다.
-2. **이름**(예: `InformixupdateRow`), **구독**, **리소스 그룹**, **위치** 및 **앱 서비스 계획**을 입력합니다. **대시보드에 고정**을 선택하고 **만들기**를 선택합니다.
+2. **이름**(예: `InformixupdateRow`), **구독**, **리소스 그룹**, **위치** 및 **App Service 계획**을 입력합니다. **대시보드에 고정**을 선택하고 **만들기**를 선택합니다.
 
 ### <a name="add-a-trigger-and-action"></a>트리거 및 작업 추가
 1. **Logic Apps 디자이너**에서 **템플릿** 목록의 **빈 LogicApp**을 선택합니다.
@@ -245,7 +243,7 @@ Informix 테이블에서 한 행을 제거하는 논리 앱 작업을 만들 수
 
 ### <a name="create-a-logic-app"></a>논리 앱 만들기
 1. **Azure 시작 보드**에서 **+**(더하기 기호), **웹 + 모바일**, **논리 앱**을 차례로 선택합니다.
-2. **이름**(예: `InformixdeleteRow`), **구독**, **리소스 그룹**, **위치** 및 **앱 서비스 계획**을 입력합니다. **대시보드에 고정**을 선택하고 **만들기**를 선택합니다.
+2. **이름**(예: `InformixdeleteRow`), **구독**, **리소스 그룹**, **위치** 및 **App Service 계획**을 입력합니다. **대시보드에 고정**을 선택하고 **만들기**를 선택합니다.
 
 ### <a name="add-a-trigger-and-action"></a>트리거 및 작업 추가
 1. **Logic Apps 디자이너**에서 **템플릿** 목록의 **빈 LogicApp**을 선택합니다.
@@ -278,6 +276,5 @@ DRDA (Distributed Relational Database Architecture) 클라이언트 연결을 �
 [커넥터 세부 정보](/connectors/informix/)에서 swagger에 정의된 모든 트리거 및 작업과 제한 사항도 확인할 수 있습니다. 
 
 ## <a name="next-steps"></a>다음 단계
-[논리 앱 만들기](../logic-apps/logic-apps-create-a-logic-app.md) [API 목록](apis-list.md)에서 Logic Apps의 사용 가능한 다른 커넥터를 확인하세요.
-
+[논리 앱 만들기](../logic-apps/quickstart-create-first-logic-app-workflow.md) [API 목록](apis-list.md)에서 Logic Apps의 사용 가능한 다른 커넥터를 확인하세요.
 

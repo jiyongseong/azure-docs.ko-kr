@@ -1,6 +1,6 @@
 ---
-title: "클라우드 서비스 역할에 대한 통신 | Microsoft Docs"
-description: "클라우드 서비스의 역할 인스턴스에는 다른 역할 인스턴스의 외부 또는 그 사이에서 통신하도록 정의된 끝점(http, https, tcp, udp)이 있을 수 있습니다."
+title: "Cloud Services 역할에 대한 통신 | Microsoft Docs"
+description: "Cloud Services의 역할 인스턴스에는 다른 역할 인스턴스의 외부 또는 그 사이에서 통신하도록 정의된 끝점(http, https, tcp, udp)이 있을 수 있습니다."
 services: cloud-services
 documentationcenter: 
 author: Thraka
@@ -14,11 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 12/14/2016
 ms.author: adegeo
-translationtype: Human Translation
-ms.sourcegitcommit: 7b1b50f71158e62da6b8ceb741a5b8cf9795e3a4
-ms.openlocfilehash: 8e171d56bb67c971337fa383014988074ec828b1
-
-
+ms.openlocfilehash: 96ca9bb2d7a9f30a7d6492be43bfb44edc02fd93
+ms.sourcegitcommit: 9a8b9a24d67ba7b779fa34e67d7f2b45c941785e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/08/2018
 ---
 # <a name="enable-communication-for-role-instances-in-azure"></a>Azure에서 역할 인스턴스에 통신 사용
 클라우드 서비스 역할은 내부 및 외부 연결을 통해 통신합니다. 외부 연결을 **입력 끝점**이라고 하고, 내부 연결을 **내부 끝점**이라고 합니다. 이 항목은 [서비스 정의](cloud-services-model-and-package.md#csdef) 를 수정하는 방법을 설명하여 끝점을 만듭니다.
@@ -71,7 +71,7 @@ ms.openlocfilehash: 8e171d56bb67c971337fa383014988074ec828b1
 ```xml
 <Endpoints>
   <InternalEndpoint name="Endpoint3" protocol="any">
-    <FixedPortRange max="8995" min="8999" />
+    <FixedPortRange max="8999" min="8995" />
   </InternalEndpoint>
 </Endpoints>
 ```
@@ -128,7 +128,7 @@ foreach (RoleInstance roleInst in RoleEnvironment.CurrentRoleInstance.Role.Insta
 서비스 정의를 통해 노출된 끝점을 가져오고 연결을 수신하기 시작하는 작업자 역할의 예는 다음과 같습니다.
 
 > [!WARNING]
-> 이 코드는 배포된 서비스에서만 작동합니다. Azure 계산 에뮬레이터에서 실행되는 경우 직접 포트 끝점(**InstanceInputEndpoint** 요소)을 만드는 구성 요소 서비스를 무시합니다.
+> 이 코드는 배포된 서비스에서만 작동합니다. Azure Compute 에뮬레이터에서 실행되는 경우 직접 포트 끝점(**InstanceInputEndpoint** 요소)을 만드는 구성 요소 서비스를 무시합니다.
 > 
 > 
 
@@ -371,10 +371,4 @@ namespace WorkerRole1
 
 ## <a name="next-steps"></a>다음 단계
 클라우드 서비스 [모델](cloud-services-model-and-package.md)에 대해 더 읽습니다.
-
-
-
-
-<!--HONumber=Dec16_HO3-->
-
 

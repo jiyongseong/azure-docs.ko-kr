@@ -1,0 +1,67 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: "Azure 문서의 Terraform"
+metadata:
+  title: "Azure 문서의 Terraform -자습서 및 참조"
+  meta.description: Learn how to use Terraform to reliably provision virtual machines and other infrastructure on Azure.
+  services: terraform
+  author: rloutlaw
+  manager: justhe
+  ms.service: terraform
+  ms.tgt_pltfrm: na
+  ms.devlang: devops
+  ms.topic: landing-page
+  ms.date: 09/21/2017
+  ms.author: routlaw
+  ms.openlocfilehash: 71ffbc2f8d6728a414a8e001198b8c9f9b36c485
+  ms.sourcegitcommit: 8aab1aab0135fad24987a311b42a1c25a839e9f3
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 03/16/2018
+abstract:
+  description: "Terraform을 사용하여 Azure에서 안정적으로 인프라를 업그레이드하고 만듭니다. 빠른 시작 및 자습서를 사용하여 리소스를 만들고, Azure Terraform 모듈을 사용하고, 코드와 인프라를 유지하는 방법을 알아봅니다."
+sections:
+- title: "빠른 시작"
+  items:
+  - type: paragraph
+    text: "Terraform를 구성하고 Azure에서 Linux VM을 만드는 데 사용합니다."
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: https://docs.microsoft.com/azure/media/index/azure_dev-9.svg
+      text: "Terraform 설치 및 구성"
+      href: https://docs.microsoft.com/azure/virtual-machines/linux/terraform-install-configure
+    - image:
+        src: https://docs.microsoft.com/azure/media/index/VirtualMachine.svg
+      text: "Linux VM 만들기"
+      href: https://docs.microsoft.com/azure/virtual-machines/linux/terraform-create-complete-vm
+- title: "단계별 자습서"
+  items:
+  - type: paragraph
+    text: "Terraform을 사용하여 코드에서 Azure 계산 및 네트워킹 인프라를 만드는 방법을 알아봅니다."
+  - type: list
+    style: unordered
+    items:
+    - html: "<a href=\"/azure/terraform/terraform-vm-msi\">Azure Marketplace 이미지를 사용하여 MSI 인증이 활성화된 Terraform VM을 만듭니다</a>."
+    - html: "<a href=\"/azure/terraform/terraform-create-vm-cluster-module\">Azure Terraform 모듈을 사용하여 부하 분산된 VM 클러스터를 만듭니다</a>."
+    - html: "<a href=\"/azure/terraform/terraform-create-vm-cluster-with-infrastructure\">Azure Cloud Shell에서 부하 분산된 VM 클러스터를 만듭니다</a>."
+    - html: "<a href=\"/azure/terraform/terraform-create-vm-scaleset-network-disks-hcl\">네트워킹 및 저장소를 사용하여 VM 확장 집합을 구성합니다.</a>"
+    - html: "<a href=\"/azure/terraform/terraform-create-vm-scaleset-network-disks-using-packer-hcl\">Packer 사용자 지정 이미지에서 VM 확장 집합 프로비전.</a>"
+- title: "샘플"
+  items:
+  - type: paragraph
+    text: "공통 배포 작업의 샘플 구성 템플릿입니다."
+  - type: list
+    style: unordered
+    className: spaced noBullet
+    items:
+    - html: <a href="https://github.com/terraform-providers/terraform-provider-azurerm/tree/master/examples">GitHub</a>
+- title: "참고 자료"
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: "Azure Terraform 모듈"
+      html: "<p><a href=\"https://registry.terraform.io/modules/Azure/database/azurerm\">데이터베이스의 Azure RM</a></p><p><a href=\"https://registry.terraform.io/modules/Azure/loadbalancer\">Load Balancer의 Azure RM</a></p><p><a href=\"https://registry.terraform.io/modules/Azure/computegroup\">Azure RM 계산 그룹</a></p><p><a href=\"https://registry.terraform.io/modules/Azure/network\">Azure RM 네트워크</a></p><p><a href=\"https://registry.terraform.io/modules/Azure/compute\">Azure RM 계산</a></p>"

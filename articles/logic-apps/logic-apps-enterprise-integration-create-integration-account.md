@@ -1,135 +1,175 @@
 ---
-title: "Azure Logic Apps에서 통합 계정 만들기, 연결, 삭제 또는 이동 | Microsoft Docs"
-description: "통합 계정을 만들고 논리 앱에 연결하는 방법"
+title: B2B 솔루션에 대한 통합 계정 만들기 및 관리 - Azure Logic Apps | Microsoft Docs
+description: Azure Logic Apps를 사용하여 엔터프라이즈 통합 및 B2B 솔루션에 대한 통합 계정을 생성, 연결, 이동 및 삭제합니다.
 services: logic-apps
-documentationcenter: .net,nodejs,java
-author: MandiOhlinger
-manager: anneta
-editor: 
+documentationcenter: ''
+author: ecfan
+manager: cfowler
+editor: ''
 ms.assetid: d3ad9e99-a9ee-477b-81bf-0881e11e632f
 ms.service: logic-apps
-ms.workload: integration
-ms.tgt_pltfrm: na
-ms.devlang: na
+ms.workload: logic-apps
+ms.tgt_pltfrm: ''
+ms.devlang: ''
 ms.topic: article
-ms.date: 02/23/2017
-ms.author: LADocs; mandia
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 8a531f70f0d9e173d6ea9fb72b9c997f73c23244
-ms.openlocfilehash: 2a7ecec310f4e321417364eee854409b2f85e2d3
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/10/2017
-
-
+ms.date: 04/30/2018
+ms.author: estfan
+ms.openlocfilehash: e661920974c2b0d28200d4c3d82bd644a7a55395
+ms.sourcegitcommit: d78bcecd983ca2a7473fff23371c8cfed0d89627
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/14/2018
+ms.locfileid: "34166242"
 ---
+# <a name="create-and-manage-integration-accounts-for-b2b-solutions-with-logic-apps"></a>논리 앱을 사용하여 B2B 솔루션에 대한 통합 계정 만들기 및 관리
 
-# <a name="what-is-an-integration-account"></a>통합 계정이란?
+[Azure Logic Apps](../logic-apps/logic-apps-overview.md)를 사용하여 [엔터프라이즈 통합 및 B2B 솔루션](../logic-apps/logic-apps-enterprise-integration-overview.md)을 구축하려면 거래 업체, 규약, 맵, 스키마, 인증서 등과 같은 B2B 아티팩트를 생성, 저장 및 관리하는 통합 계정이 있어야 합니다. 논리 앱이 통합 계정에서 아티팩트를 사용하고 XML 유효성 검사와 같은 Logic Apps B2B 커넥터를 사용하려면 먼저 논리 앱에 [통합 계정을 연결](#link-account)해야 합니다. 이렇게 연결하려면 통합 계정과 논리 앱 모두가 *동일한* Azure 위치 또는 지역이 있어야 합니다.
 
-통합 계정을 사용하면 엔터프라이즈 통합 앱에서 스키마, 맵, 인증서, 파트너 및 규약을 포함한 아티팩트를 관리할 수 있습니다. 만든 통합 앱은 모두 통합 계정을 사용하여 이러한 스키마, 맵, 인증 등에 액세스합니다.
+이 문서에서는 다음 작업을 수행하는 방법에 대해 설명합니다.
 
-## <a name="create-an-integration-account"></a>통합 계정 만들기
+* 통합 계정을 만듭니다.
+* 통합 계정을 논리 앱에 연결합니다.
+* 통합 계정을 다른 Azure 리소스 그룹 또는 구독으로 이동합니다.
+* 통합 계정을 삭제합니다.
 
-1.    [Azure Portal](http://portal.azure.com "Azure Portal")에 로그인합니다. 왼쪽 메뉴에서 **추가 서비스**를 클릭합니다.
+Azure 구독이 없는 경우 <a href="https://azure.microsoft.com/free/" target="_blank">무료 Azure 계정에 등록</a>합니다.
 
-    !["추가 서비스"를 선택합니다.](./media/logic-apps-enterprise-integration-accounts/account-1.png)
+## <a name="sign-in-to-the-azure-portal"></a>Azure Portal에 로그인
 
-2. 검색 상자에서 필터에 "통합"을 입력합니다. 결과 목록에서 **통합 계정**을 선택합니다.
+Azure 계정 자격 증명을 사용하여 <a href="https://portal.azure.com" target="_blank">Azure Portal</a>에 로그인합니다.
 
-    !["통합"에 대해 필터링하고 "통합 계정"을 선택합니다.](./media/logic-apps-enterprise-integration-accounts/account-2.png)  
+## <a name="create-integration-account"></a>통합 계정 만들기
 
-3. 페이지 맨 위에 있는 **추가**를 선택합니다.
+1. Azure의 주 메뉴에서 **모든 서비스**를 선택합니다. 검색 상자에서 필터로 "통합 계정"을 입력하고 **통합 계정**을 선택합니다.
 
-    ![[추가] 선택](./media/logic-apps-enterprise-integration-accounts/account-3.png)
+   ![통합 계정 찾기](./media/logic-apps-enterprise-integration-create-integration-account/create-integration-account.png)
 
-4. 통합 계정의 이름을 지정하고 사용할 Azure 구독을 선택합니다. 새 **리소스 그룹**을 만들거나 기존 리소스 그룹을 선택할 수 있습니다. 그런 다음 호스팅 통합 계정의 **위치** 및 **가격 책정 계층**을 선택합니다. 
+2. **통합 계정** 아래에서 **추가**를 선택합니다.
 
-    준비되면 **만들기**를 선택합니다.
+   ![통합 계정을 만들기 위한 "추가" 선택](./media/logic-apps-enterprise-integration-create-integration-account/add-integration-account.png)
 
-    ![통합 계정의 세부 정보를 제공합니다.](./media/logic-apps-enterprise-integration-accounts/account-4.png)
+3. 통합 계정에 대한 정보를 제공합니다. 
 
-    Azure에서는 선택한 위치에서 통합 계정을 프로비전하고 1분 내에 완료해야 합니다.
+   ![통합 계정의 세부 정보를 제공합니다.](./media/logic-apps-enterprise-integration-create-integration-account/integration-account-details.png)
 
-5. 페이지를 새로 고칩니다. 새 통합 계정이 나열되어 있습니다.
+   | 자산 | 필수 | 예제 값 | 설명 | 
+   |----------|----------|---------------|-------------|
+   | Name | 예 | test-integration-account | 통합 계정의 이름입니다. 여기서는 지정된 이름을 사용합니다. | 
+   | 구독 | 예 | <*Azure-subscription-name*> | 사용할 Azure 구독의 이름입니다. | 
+   | 리소스 그룹 | 예 | test-integration-account-rg | 관련 리소스를 구성하는 데 사용되는 [Azure 리소스 그룹](../azure-resource-manager/resource-group-overview.md)의 이름입니다. 여기서는 지정된 이름으로 새 리소스 그룹을 만듭니다. | 
+   | 가격 책정 계층 | 예 | 무료 | 사용하려는 가격 책정 계층입니다. 여기서는 **체험**을 선택하지만, 자세한 내용은 [Logic Apps 제한 및 구성](../logic-apps/logic-apps-limits-and-config.md) 및 [Logic Apps 가격](https://azure.microsoft.com/pricing/details/logic-apps/)을 참조하세요. | 
+   | 위치 | 예 | 미국 서부 | 통합 계정 정보를 저장할 지역입니다. 논리 앱과 동일한 위치를 선택하거나 통합 계정과 동일한 위치에 논리 앱을 만듭니다. 예: | 
+   | Log Analytics | 아니오 | 꺼짐 | 진단 로깅에 대한 설정을 **끄기**로 유지합니다. | 
+   ||||| 
 
-    ![새 통합 계정이 표시됩니다.](./media/logic-apps-enterprise-integration-accounts/account-5.png) 
+4. 준비가 되면 **대시보드에 고정**을 선택하고 **만들기**를 선택합니다.
 
-그런 다음 만든 통합 계정을 논리 앱에 연결합니다. 
+   Azure에서 통합 계정을 선택한 위치에 배포하면 일반적으로 1분 내에 완료되며 Azure에서 통합 계정이 열립니다.
 
-## <a name="link-an-integration-account-to-a-logic-app"></a>논리 앱에 통합 계정 연결
+   ![Azure에서 열린 통합 계정](./media/logic-apps-enterprise-integration-create-integration-account/integration-account-created.png)
 
-논리 앱에 통합 계정의 맵, 스키마, 규약 및 다른 아티팩트에 대한 액세스 권한을 부여하려면 통합 계정을 논리 앱에 연결해야 합니다.
+이제 논리 앱에서 통합 계정을 사용하려면 먼저 통합 계정을 논리 앱에 연결해야 합니다.
 
-### <a name="prerequisites"></a>필수 조건
+<a name="link-account"></a>
 
-* 통합 계정
-* 논리 앱
+## <a name="link-to-logic-app"></a>논리 앱에 연결
 
-> [!NOTE] 
-> 시작하기 전에 통합 계정과 논리 앱이 *동일한 Azure 위치*에 있어야 합니다.
+거래 업체, 규약, 맵 및 스키마와 같은 B2B 아티팩트가 포함된 통합 계정에 대한 액세스 권한을 논리 앱에 부여하려면 통합 계정을 논리 앱에 연결해야 합니다. 
 
+> [!NOTE]
+> 통합 계정과 논리 앱은 동일한 지역에 있어야 합니다.
 
-1. Azure Portal에서 논리 앱을 선택하고 논리 앱의 위치를 확인합니다.
+1. Azure Portal에서 논리 앱을 찾아서 엽니다.
 
-    ![논리 앱을 선택하고 위치를 확인합니다.](./media/logic-apps-enterprise-integration-accounts/linkaccount-1.png)
+2. 논리 앱의 메뉴에 있는 **설정** 아래에서 **워크플로 설정**을 선택합니다. **통합 계정 선택** 목록에서 논리 앱에 연결하려는 통합 계정을 선택합니다.
 
-2. **설정**에서 **통합 계정**을 선택합니다.
+   ![통합 계정 선택](./media/logic-apps-enterprise-integration-create-integration-account/linkaccount-2.png)
 
-    !["통합 계정" 선택](./media/logic-apps-enterprise-integration-accounts/linkaccount-2.png)
+3. 연결을 완료하려면 **저장**을 선택합니다.
 
-3. **통합 계정 선택** 목록에서 논리 앱에 연결하려는 통합 계정을 선택합니다. 연결을 완료하려면 **저장**을 선택합니다.
+   ![통합 계정 선택](./media/logic-apps-enterprise-integration-create-integration-account/linkaccount-3.png)
 
-    ![통합 계정 선택](./media/logic-apps-enterprise-integration-accounts/linkaccount-3.png)
+   통합 계정이 성공적으로 연결되면 Azure에서 확인 메시지가 표시됩니다. 
 
-    통합 계정이 논리 앱에 연결되어 있고 이제는 통합 계정의 모든 아티팩트를 논리 앱에서 사용할 수 있음을 보여 주는 알림이 표시됩니다.
+   ![Azure에서 성공적인 연결 확인](./media/logic-apps-enterprise-integration-create-integration-account/linkaccount-5.png)
 
-    ![논리 앱이 통합 계정에 연결됩니다.](./media/logic-apps-enterprise-integration-accounts/linkaccount-5.png)
+이제 논리 앱에서 통합 계정의 모든 아티팩트와 B2B 커넥터(예: XML 유효성 검사 및 플랫 파일 인코딩 또는 디코딩)를 사용할 수 있습니다.  
 
-통합 계정이 논리 앱에 연결되었으므로 논리 앱 내에서 B2B 커넥터를 사용할 수 있습니다. 일반적인 B2B 커넥터 일부에는 XML 유효성 검사 및 플랫 파일 인코딩/디코딩이 포함되어 있습니다.  
+## <a name="unlink-from-logic-app"></a>논리 앱에서 연결 해제
 
-## <a name="delete-your-integration-account"></a>통합 계정 삭제
+논리 앱을 다른 통합 계정에 연결하거나 더 이상 논리 앱에서 통합 계정을 사용하지 않으려면 Azure Resource Explorer를 통해 링크를 삭제할 수 있습니다.
 
-1. **추가 서비스**를 선택합니다.
+1. 브라우저에서 <a href="https://resources.azure.com" target="_blank">Azure Resource Explorer(https://resources.azure.com)</a>로 이동합니다. 동일한 Azure 자격 증명으로 로그인했는지 확인합니다.
 
-    !["추가 서비스"를 선택합니다.](./media/logic-apps-enterprise-integration-accounts/account-1.png)
+   ![Azure 리소스 탐색기](./media/logic-apps-enterprise-integration-create-integration-account/resource-explorer.png)
 
-2. 검색 상자에서 필터에 "통합"을 입력합니다. 결과 목록에서 **통합 계정**을 선택합니다.
+2. 검색 상자에서 논리 앱 이름을 입력한 다음, 논리 앱을 찾아서 선택합니다.
 
-    !["통합"에 대해 필터링하고 "통합 계정"을 선택합니다.](./media/logic-apps-enterprise-integration-accounts/account-2.png)  
+   ![논리 앱 찾기 및 선택](./media/logic-apps-enterprise-integration-create-integration-account/resource-explorer-find-logic-app.png)
 
-3. 삭제하려는 통합 계정을 선택합니다.
+3. 탐색기 제목 표시줄에서 **읽기/쓰기**를 선택합니다.
 
-    ![삭제할 통합 계정 선택](./media/logic-apps-enterprise-integration-accounts/account-5.png)
+   !["읽기/쓰기" 모드 켜기](./media/logic-apps-enterprise-integration-create-integration-account/resource-explorer-choose-read-write-mode.png)
 
-4. 메뉴에서 **삭제**를 선택합니다.
+4. **데이터** 탭에서 **편집**을 선택합니다.
 
-    !["삭제" 선택](./media/logic-apps-enterprise-integration-accounts/delete.png)
+   !["데이터" 탭에서 "편집" 선택](./media/logic-apps-enterprise-integration-create-integration-account/resource-explorer-choose-edit.png)
 
-5. 통합 계정을 삭제하도록 선택합니다.
+5. 편집기에서 통합 계정에 대한 다음 형식의 `integrationAccount` 속성을 찾아서 삭제합니다.
 
-## <a name="move-your-integration-account"></a>통합 계정 이동
+   ```json
+   "integrationAccount": {
+      "name": "<integration-account-name>",
+      "id": "<integration-account-resource-ID>",
+      "type": "Microsoft.Logic/integrationAccounts"  
+   },
+   ```
 
-다른 Azure 구독 또는 리소스 그룹으로 통합 계정을 이동하려면 다음과 같은 단계를 수행합니다.
+   예: 
 
-> [!IMPORTANT]
-> 통합 계정을 이동한 후에 새 리소스 ID를 사용할 수 있도록 모든 스크립트를 업데이트해야 합니다.
+   !["integrationAccount" 속성 정의 찾기](./media/logic-apps-enterprise-integration-create-integration-account/resource-explorer-delete-integration-account.png)
 
-1. **추가 서비스**를 선택합니다.
+6. **데이터** 탭에서 **Put**(저장)을 선택하여 변경 내용을 저장합니다. 
 
-    !["추가 서비스"를 선택합니다.](./media/logic-apps-enterprise-integration-accounts/account-1.png)
+   !["Put"(저장)을 선택하여 변경 내용 저장](./media/logic-apps-enterprise-integration-create-integration-account/resource-explorer-save-changes.png)
 
-2. 검색 상자에서 필터에 "통합"을 입력합니다. 결과 목록에서 **통합 계정**을 선택합니다.
+7. 이제 Azure Portal의 논리 앱 **워크플로 설정** 아래에서 **통합 계정** 속성이 비어 있는지 확인합니다.
 
-    !["통합"에 대해 필터링하고 "통합 계정"을 선택합니다.](./media/logic-apps-enterprise-integration-accounts/account-2.png)
+   ![통합 계정이 연결되어 있지 않은지 확인](./media/logic-apps-enterprise-integration-create-integration-account/unlinked-account.png)
 
-3. 이동하려는 통합 계정을 선택합니다. **설정** 아래에서 **속성**을 선택합니다.
+## <a name="move-integration-account"></a>통합 계정 이동
 
-    ![이동할 통합 계정을 선택합니다. [설정] 아래에서 [속성]을 선택합니다.](./media/logic-apps-enterprise-integration-accounts/move.png)
+통합 계정을 다른 Azure 구독 또는 리소스 그룹으로 이동할 수 있습니다.
 
-5. 사용자 통합 계정과 연결된 리소스 그룹 또는 Azure 구독을 변경합니다.
+1. Azure 주 메뉴에서 **모든 서비스**를 선택합니다. 검색 상자에서 필터로 "통합 계정"을 입력하고 **통합 계정**을 선택합니다.
 
-    ![리소스 그룹 변경 또는 구독 변경 선택](./media/logic-apps-enterprise-integration-accounts/move-2.png)
+   ![통합 계정 찾기](./media/logic-apps-enterprise-integration-create-integration-account/create-integration-account.png)
+
+2. **통합 계정** 아래에서 이동하려는 통합 계정을 선택합니다. 통합 계정 메뉴의 **설정** 아래에서 **속성**을 선택합니다.
+
+   !["설정" 아래에서 "속성" 선택](./media/logic-apps-enterprise-integration-create-integration-account/integration-account-properties.png)
+
+3. 통합 계정에 대한 Azure 리소스 그룹 또는 구독을 변경합니다.
+
+   !["리소스 그룹 변경" 또는 "구독 변경" 선택](./media/logic-apps-enterprise-integration-create-integration-account/change-resource-group-subscription.png)
+
+4. 완료되면 모든 스크립트를 아티팩트에 대한 새 리소스 ID로 업데이트합니다.  
+
+## <a name="delete-integration-account"></a>통합 계정 삭제
+
+1. Azure 주 메뉴에서 **모든 서비스**를 선택합니다. 검색 상자에서 필터로 "통합 계정"을 입력하고 **통합 계정**을 선택합니다.
+
+   ![통합 계정 찾기](./media/logic-apps-enterprise-integration-create-integration-account/create-integration-account.png)
+
+2. **통합 계정** 아래에서 삭제하려는 통합 계정을 선택합니다. 통합 계정 메뉴에서 **개요**, **삭제**를 차례로 선택합니다. 
+
+   ![통합 계정을 선택합니다. "개요" 페이지에서 "삭제" 선택](./media/logic-apps-enterprise-integration-create-integration-account/delete-integration-account.png)
+
+3. 통합 계정을 삭제하도록 승인하려면 **예**를 선택합니다.
+
+   ![삭제를 승인하려면 "예" 선택](./media/logic-apps-enterprise-integration-create-integration-account/confirm-delete.png)
 
 ## <a name="next-steps"></a>다음 단계
-* [규약에 대해 자세히 알아보기](../logic-apps/logic-apps-enterprise-integration-agreements.md "엔터프라이즈 통합 규약에 대해 알아보기")  
 
-
+* [거래 업체 만들기](../logic-apps/logic-apps-enterprise-integration-partners.md)
+* [규약 만들기](../logic-apps/logic-apps-enterprise-integration-agreements.md)

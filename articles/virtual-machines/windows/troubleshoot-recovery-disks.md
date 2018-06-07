@@ -1,30 +1,27 @@
 ---
-
-title: "Azure PowerShell에서 Windows 문제 해결 VM 사용 | Microsoft Docs"
-description: "Azure PowerShell을 사용하여 OS 디스크를 복구 VM에 연결함으로써 Azure에서 Windows VM 문제를 해결하는 방법을 알아봅니다."
+title: Azure PowerShell에서 Windows 문제 해결 VM 사용 | Microsoft Docs
+description: Azure PowerShell을 사용하여 OS 디스크를 복구 VM에 연결함으로써 Azure에서 Windows VM 문제를 해결하는 방법을 알아봅니다.
 services: virtual-machines-windows
-documentationCenter: 
+documentationCenter: ''
 authors: genlin
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 ms.service: virtual-machines-windows
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure
-ms.date: 05/26/2017
+ms.date: 11/03/2017
 ms.author: genli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: 36de0375cef661dddb384f9f7651e3faf8df793c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
-
+ms.openlocfilehash: 408429d0f8697b8b807e386dbcf2eade29938249
+ms.sourcegitcommit: 96089449d17548263691d40e4f1e8f9557561197
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/17/2018
+ms.locfileid: "34271694"
 ---
-
 # <a name="troubleshoot-a-windows-vm-by-attaching-the-os-disk-to-a-recovery-vm-using-azure-powershell"></a>Azure PowerShell을 사용하여 OS 디스크를 복구 VM에 연결함으로써 Windows VM 문제 해결
-Azure에서 Windows VM(가상 컴퓨터)에 부팅 또는 디스크 오류가 발생하는 경우 가상 하드 디스크에서 바로 문제 해결 단계를 수행해야 합니다. 일반적인 예로는 응용 프로그램 업데이트가 실패하여 VM이 성공적으로 부팅되지 않는 경우입니다. 이 문서에는 가상 하드 디스크를 다른 Windows VM에 연결하여 모든 오류를 수정한 후 원래 VM을 다시 만들기 위해 Azure PowerShell을 사용하는 방법을 자세히 설명합니다.
+Azure에서 Windows VM(가상 머신)에 부팅 또는 디스크 오류가 발생하는 경우 가상 하드 디스크에서 바로 문제 해결 단계를 수행해야 합니다. 일반적인 예로는 응용 프로그램 업데이트가 실패하여 VM이 성공적으로 부팅되지 않는 경우입니다. 이 문서에는 가상 하드 디스크를 다른 Windows VM에 연결하여 모든 오류를 수정한 후 원래 VM을 다시 만들기 위해 Azure PowerShell을 사용하는 방법을 자세히 설명합니다.
 
 
 ## <a name="recovery-process-overview"></a>복구 프로세스 개요
@@ -36,10 +33,13 @@ Azure에서 Windows VM(가상 컴퓨터)에 부팅 또는 디스크 오류가 �
 4. 문제 해결 VM에서 가상 하드 디스크를 탑재 해제하고 분리합니다.
 5. 원래 가상 하드 디스크를 사용하여 VM을 만듭니다.
 
+관리 디스크를 사용하는 VM에 대해서는 [새 OS 디스크를 연결하여 Managed Disk VM 문제 해결](#troubleshoot-a-managed-disk-vm-by-attaching-a-new-os-disk)을 참조합니다.
+
+
 먼저 [최신 Azure PowerShell](/powershell/azure/overview)을 설치하고 구독에 로그인했는지 확인합니다.
 
 ```powershell
-Login-AzureRMAccount
+Connect-AzureRmAccount
 ```
 
 다음 예제에서 매개 변수 이름을 고유한 값으로 바꿉니다. 예제 매개 변수 이름에 `myResourceGroup`, `mystorageaccount` 및 `myVM`이 포함됩니다.
@@ -205,8 +205,14 @@ Set-AzureRmVMBootDiagnostics -ResourceGroupName myResourceGroup -VM $myVM -enabl
 Update-AzureRmVM -ResourceGroup "myResourceGroup" -VM $myVM
 ```
 
+## <a name="troubleshoot-a-managed-disk-vm-by-attaching-a-new-os-disk"></a>새 OS 디스크를 연결하여 Managed Disk VM 문제 해결
+1. 영향을 받는 Managed Disk Windows VM을 중지합니다.
+2. Managed Disk VM의 OS 디스크의 [관리 디스크 스냅숏을 만듭니다](snapshot-copy-managed-disk.md).
+3. [스냅숏에서 새 관리 디스크를 만듭니다](../scripts/virtual-machines-windows-powershell-sample-create-managed-disk-from-snapshot.md).
+4. [VM의 데이터 디스크로서 관리 디스크를 연결합니다](attach-disk-ps.md).
+5. [4단계의 데이터 디스크를 OS 디스크로 변경합니다](os-disk-swap.md).
+
 ## <a name="next-steps"></a>다음 단계
 VM에 연결하는 데 문제가 있는 경우 [Azure VM에 RDP 연결 문제 해결](troubleshoot-rdp-connection.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)을 참조하세요. VM에서 실행 중인 응용 프로그램에 액세스하는 데 문제가 있는 경우 [Windows VM에서 응용 프로그램 연결 문제 해결](troubleshoot-app-connection.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)을 참조하세요.
 
 Resource Manager를 사용하는 방법에 대한 자세한 내용은 [Azure Resource Manager 개요](../../azure-resource-manager/resource-group-overview.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 참조하세요.
-

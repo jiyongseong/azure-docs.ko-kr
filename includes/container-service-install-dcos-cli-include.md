@@ -15,11 +15,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 05/10/2016
 ms.author: rogardle
-translationtype: Human Translation
-ms.sourcegitcommit: e664ce9426a2852a35dfdade5d41a9ce8b37a3b7
 ms.openlocfilehash: a8ea47f158c0d666340815d2e039995c7483257f
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 > [!NOTE]
 > DC/OS 기반 ACS 클러스터와 함께 작업하기 위한 것입니다. Swarm 기반 ACS 클러스터에 대해 이 작업을 수행하지 않아도 됩니다.

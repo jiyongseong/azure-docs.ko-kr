@@ -14,14 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 05/15/2017
 ms.author: masaran;markgal
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a1ba750d2be1969bfcd4085a24b0469f72a357ad
 ms.openlocfilehash: 751b9b495fd368dff1f72429707f5f33a0ccb569
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="add-storage-to-azure-backup-server-v2"></a>Azure Backup Server v2에 저장소 추가
 
 Azure Backup Server v2에는 System Center 2016 Data Protection Manager Modern Backup Storage가 함께 제공됩니다. Modern Backup Storage를 사용하면 저장소를 50% 절약할 수 있고, 백업이 3배 더 빨라지고, 저장소를 더 효율적으로 사용할 수 있습니다. 저장소에서 워크로드를 인식할 수도 있습니다. 
@@ -104,5 +102,4 @@ Backup Server를 설치한 후 서버를 준비하는 방법을 알아보거나 
 - [Backup Server 워크로드 준비](backup-azure-microsoft-azure-backup.md)
 - [Backup Server를 사용하여 VMware 서버 백업](backup-azure-backup-server-vmware.md)
 - [Backup Server를 사용하여 SQL Server 백업](backup-azure-sql-mabs.md)
-
 

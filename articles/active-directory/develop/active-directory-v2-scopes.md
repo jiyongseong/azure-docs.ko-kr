@@ -1,27 +1,27 @@
 ---
-title: "Azure Active Directory v2.0 범위, 사용 권한 및 동의 | Microsoft Docs"
-description: "범위, 사용 권한 및 동의를 포함하여 Azure AD v2.0 끝점의 권한 부여에 대한 설명입니다."
+title: Azure Active Directory v2.0 범위, 사용 권한 및 동의 | Microsoft Docs
+description: 범위, 사용 권한 및 동의를 포함하여 Azure AD v2.0 끝점의 권한 부여에 대한 설명입니다.
 services: active-directory
-documentationcenter: 
-author: dstrockis
-manager: mbaldwin
-editor: 
+documentationcenter: ''
+author: CelesteDG
+manager: mtillman
+editor: ''
 ms.assetid: 8f98cbf0-a71d-4e34-babf-e644ad9ff423
 ms.service: active-directory
+ms.component: develop
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 01/07/2017
-ms.author: dastrock
+ms.author: celested
+ms.reviewer: dastrock
 ms.custom: aaddev
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c579135f798ea0c2a5461fdd7c88244d2d6d78c6
-ms.openlocfilehash: e00ceb8dd87e00bbdd05146e107c72e6182eb474
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/18/2017
-
-
+ms.openlocfilehash: f001751c9401b88d9bfaf35444882d3d5ccbfef3
+ms.sourcegitcommit: e14229bb94d61172046335972cfb1a708c8a97a5
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/14/2018
 ---
 # <a name="scopes-permissions-and-consent-in-the-azure-active-directory-v20-endpoint"></a>Azure Active Directory v2.0 끝점의 범위, 사용 권한 및 동의
 Azure AD(Azure Active Directory)와 통합된 앱은 사용자가 앱이 데이터에 액세스하는 방법을 제어할 수 있는 권한 부여 모델을 따릅니다. 이 권한 부여 모델의 v2.0 구현이 업데이트되어 앱이 Azure AD와 상호 작용하는 방법이 변경되었습니다. 이 문서에서는 범위, 사용 권한 및 동의를 포함하여 이 권한 부여 모델의 기본 개념에 대해 설명합니다.
@@ -48,8 +48,8 @@ Azure AD와 통합된 타사 리소스의 경우도 마찬가지입니다. 이�
 
 Azure AD 및 OAuth에서는 이러한 유형의 사용 권한을 *범위*라고 합니다. *oAuth2Permissions*라고 하는 경우도 있습니다. 범위는 Azure AD에서 문자열 값으로 표시됩니다. Microsoft Graph 예제를 계속하는 경우 각 사용 권한에 대한 범위 값은 다음과 같습니다.
 
-* `Calendar.Read`를 사용하여 사용자의 일정 읽기
-* `Mail.ReadWrite`를 사용하여 사용자의 일정 쓰기
+* `Calendars.Read`를 사용하여 사용자의 일정 읽기
+* `Calendars.ReadWrite`를 사용하여 사용자의 일정 쓰기
 * `Mail.Send`을 사용하여 사용자로 메일 보내기
 
 앱은 v2.0 끝점에 대한 요청에 범위를 지정하여 이러한 사용 권한을 요청할 수 있습니다.
@@ -83,7 +83,7 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 &redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
 &response_mode=query
 &scope=
-https%3A%2F%2Fgraph.microsoft.com%2Fcalendar.read%20
+https%3A%2F%2Fgraph.microsoft.com%2Fcalendars.read%20
 https%3A%2F%2Fgraph.microsoft.com%2Fmail.send
 &state=12345
 ```
@@ -149,7 +149,7 @@ https://login.microsoftonline.com/common/adminconsent?client_id=6731de76-14a6-49
 
 | 매개 변수 | 조건 | 설명 |
 | --- | --- | --- |
-| tenant |필수 |사용 권한을 요청하려는 디렉터리 테넌트입니다. GUID 또는 친숙한 이름 형식으로 제공할 수 있습니다. |
+| tenant |필수 |사용 권한을 요청하려는 디렉터리 테넌트입니다. GUID에서 제공한 이름이거나, 친근한 이름 형식이거나, 예제에서처럼 "common"으로 일반 참조될 수 있습니다. |
 | client_id |필수 |[응용 프로그램 등록 포털](https://apps.dev.microsoft.com/?referrer=https://azure.microsoft.com/documentation/articles&deeplink=/appList)에서 앱에 할당한 응용 프로그램 ID입니다. |
 | redirect_uri |필수 |리디렉션 URI는 처리할 앱에 응답을 전송하려는 위치입니다. 앱 등록 포털에 등록한 리디렉션 URI 중 하나와 정확히 일치해야 합니다. |
 | state |권장 |토큰 응답에도 반환되는 요청에 포함된 값입니다. 원하는 모든 콘텐츠의 문자열일 수 있습니다. 상태를 사용하여 인증 요청이 발생하기 전에 앱에서 사용자 상태에 대한 정보(예: 사용한 페이지 또는 보기)를 인코딩할 수 있습니다. |
@@ -201,7 +201,6 @@ Content-Type: application/json
 }
 ```
 
-리소스에 대한 HTTP 요청에 결과 액세스 토큰을 사용할 수 있습니다. 이는 앱에 특정 작업을 수행할 수 있는 적절한 권한이 있음을 리소스에 나타냅니다.  
+리소스에 대한 HTTP 요청에 결과 액세스 토큰을 사용할 수 있습니다. 이는 앱에 특정 작업을 수행할 수 있는 적절한 권한이 있음을 리소스에 나타냅니다. 
 
 OAuth 2.0 프로토콜 및 액세스 토큰을 가져오는 방법에 대한 자세한 내용은 [v2.0 끝점 프로토콜 참조](active-directory-v2-protocols.md)를 참조하세요.
-

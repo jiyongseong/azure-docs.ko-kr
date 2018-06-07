@@ -1,29 +1,20 @@
 ---
-title: "VS Code: Azure SQL Database에서 데이터 연결 및 쿼리 | Microsoft Docs"
-description: "Visual Studio Code를 사용하여 Azure에서 SQL Database에 연결하는 방법을 알아봅니다. 그런 다음 Transact-SQL(T-SQL) 문을 실행하여 데이터를 쿼리하고 편집합니다."
-metacanonical: 
-keywords: "SQL Database에 연결"
+title: 'VS Code: Azure SQL Database에서 데이터 연결 및 쿼리 | Microsoft Docs'
+description: Visual Studio Code를 사용하여 Azure에서 SQL Database에 연결하는 방법을 알아봅니다. 그런 다음 Transact-SQL(T-SQL) 문을 실행하여 데이터를 쿼리하고 편집합니다.
+keywords: SQL Database에 연결
 services: sql-database
-documentationcenter: 
 author: CarlRabeler
-manager: jhubbard
-editor: 
-ms.assetid: 676bd799-a571-4bb8-848b-fb1720007866
+manager: craigg
 ms.service: sql-database
 ms.custom: mvc,DBs & servers
-ms.workload: data-management
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: hero-article
-ms.date: 06/20/2017
+ms.topic: quickstart
+ms.date: 04/01/2018
 ms.author: carlrab
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 4076b1e7ab3a70009217a1deff72da4bff0dc871
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 7250b2578db86fdb4cbd591a605256424cb0be55
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="azure-sql-database-use-visual-studio-code-to-connect-and-query-data"></a>Azure SQL Database: Visual Studio Code를 사용하여 데이터에 연결 및 쿼리
 
@@ -33,9 +24,9 @@ ms.lasthandoff: 07/08/2017
 
 이 빠른 시작은 다음과 같은 빠른 시작 중 하나에서 만들어진 리소스를 시작 지점으로 사용합니다.
 
-- [DB 만들기 - 포털](sql-database-get-started-portal.md)
-- [DB 만들기 - CLI](sql-database-get-started-cli.md)
-- [DB 만들기 - PowerShell](sql-database-get-started-powershell.md)
+[!INCLUDE [prerequisites-create-db](../../includes/sql-database-connect-query-prerequisites-create-db-includes.md)]
+
+#### <a name="install-vs-code"></a>VS Code 설치
 
 시작하기 전에 최신 버전의 [Visual Studio Code](https://code.visualstudio.com/Download)를 설치하고 했는지 [mssql 확장](https://aka.ms/mssql-marketplace)을 로드했는지 확인합니다. mssql 확장에 대한 설치 지침은 [VS Code 설치](https://docs.microsoft.com/sql/linux/sql-server-linux-develop-use-vscode#install-vs-code) 및 [Visual Studio Code용 mssql](https://marketplace.visualstudio.com/items?itemName=ms-mssql.mssql)을 참조하세요. 
 
@@ -65,13 +56,7 @@ ln -s /usr/local/opt/openssl/lib/libssl.1.0.0.dylib /usr/local/lib/
 
 Azure SQL Database에 연결하는 데 필요한 연결 정보를 가져옵니다. 다음 절차에는 정규화된 서버 이름, 데이터베이스 이름 및 로그인 정보가 필요합니다.
 
-1. [Azure Portal](https://portal.azure.com/)에 로그인합니다.
-2. 왼쪽 메뉴에서 **SQL Database**를 선택하고 **SQL Database** 페이지에서 데이터베이스를 클릭합니다. 
-3. 데이터베이스의 **개요** 페이지에서 다음 이미지와 같이 정규화된 서버 이름을 검토합니다. 서버 이름 위로 마우스를 가져가면 **복사하려면 클릭** 옵션이 표시됩니다.
-
-   ![연결 정보](./media/sql-database-connect-query-dotnet/server-name.png) 
-
-4. Azure SQL Database 서버의 로그인 정보를 잊어버린 경우 SQL Database 서버 페이지로 이동하여 서버 관리자 이름을 확인하고 필요한 경우 암호를 다시 설정합니다. 
+[!INCLUDE [prerequisites-server-connection-info](../../includes/sql-database-connect-query-prerequisites-server-connection-info-includes.md)]
 
 ## <a name="set-language-mode-to-sql"></a>언어 모드를 SQL로 설정
 
@@ -177,7 +162,7 @@ Visual Studio Code를 사용하여 Azure SQL Database 서버에 연결합니다.
 
 ## <a name="delete-data"></a>데이터 삭제
 
-이전에 추가한 새 제품을 [DELETE](https://msdn.microsoft.com/library/ms189835.aspx) Transact-SQL 문을 사용하여 삭제하려면 다음 코드를 사용합니다.
+이전에 추가한 새 제품을 [DELETE](https://docs.microsoft.com/sql/t-sql/statements/delete-transact-sql) Transact-SQL 문을 사용하여 삭제하려면 다음 코드를 사용합니다.
 
 1. **편집기** 창에서 이전 쿼리를 삭제하고 다음 쿼리를 입력합니다.
 
@@ -191,5 +176,5 @@ Visual Studio Code를 사용하여 Azure SQL Database 서버에 연결합니다.
 ## <a name="next-steps"></a>다음 단계
 
 - SQL Server Management Studio를 사용하여 연결 및 쿼리하려면 [SSMS를 사용하여 연결 및 쿼리](sql-database-connect-query-ssms.md)를 참조하세요.
+- Azure Portal을 사용하여 연결하고 쿼리하려면 [Azure Portal SQL 쿼리 편집기를 사용하여 연결 및 쿼리](sql-database-connect-query-portal.md)를 참조하세요.
 - Visual Studio Code를 사용하는 MSDN 잡지 문서는 [MSSQL 확장을 사용하여 데이터베이스 IDE 만들기 블로그 게시물](https://msdn.microsoft.com/magazine/mt809115)을 참조하세요.
-

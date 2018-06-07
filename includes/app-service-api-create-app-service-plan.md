@@ -1,4 +1,4 @@
-[az appservice plan create](/cli/azure/appservice/plan#create) 명령으로 App Service 계획을 만듭니다.
+[az appservice plan create](/cli/azure/appservice/plan?view=azure-cli-latest#az_appservice_plan_create) 명령으로 App Service 계획을 만듭니다.
 
 [!INCLUDE [app-service-plan](app-service-plan.md)]
 

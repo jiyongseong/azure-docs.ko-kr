@@ -1,33 +1,26 @@
 ---
-title: "최신 탄력적 데이터베이스 클라이언트 라이브러리로 업그레이드 | Microsoft Docs"
-description: "Nuget을 사용하여 앱 및 라이브러리 업그레이드"
+title: 최신 탄력적 데이터베이스 클라이언트 라이브러리로 업그레이드 | Microsoft Docs
+description: Elastic Database 클라이언트 라이브러리를 업그레이드하려면 Nuget을 사용합니다.
 services: sql-database
-documentationcenter: 
-manager: jhubbard
-author: ddove
-ms.assetid: 0a546510-76e7-465e-9271-f15ff0cfa959
+manager: craigg
+author: stevestein
 ms.service: sql-database
 ms.custom: scale out apps
-ms.workload: sql-database
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 03/06/2017
-ms.author: ddove
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 094729399070a64abc1aa05a9f585a0782142cbf
-ms.openlocfilehash: 0bbbc4f61c37fe4d296221c372bfdf6dd429a32b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/07/2017
-
-
+ms.date: 04/01/2018
+ms.author: sstein
+ms.openlocfilehash: 5e7702c164a414ee2b9c08ccb276d5d74ad90f19
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="upgrade-an-app-to-use-the-latest-elastic-database-client-library"></a>최신 탄력적 데이터베이스 클라이언트 라이브러리를 사용하도록 앱 업그레이드
-[Elastic Database 클라이언트 라이브러리](sql-database-elastic-database-client-library.md)의 새 버전은 Visual Studio의 NuGetand 및 NuGetPackage 관리자 인터페이스를 통해 제공됩니다. 업그레이드에는 클라이언트 라이브러리의 새 기능 지원 및 버그 수정이 포함됩니다.
+[Elastic Database 클라이언트 라이브러리](sql-database-elastic-database-client-library.md) 의 새 버전은 Visual Studio의 NuGetand 및 NuGetPackage 관리자 인터페이스를 통해 제공됩니다. 업그레이드에는 클라이언트 라이브러리의 새 기능 지원 및 버그 수정이 포함됩니다.
 
 **최신 버전은**[Microsoft.Azure.SqlDatabase.ElasticScale.Client](https://www.nuget.org/packages/Microsoft.Azure.SqlDatabase.ElasticScale.Client/)로 이동합니다.
 
-새 라이브러리를 사용하여 응용 프로그램을 다시 빌드하고 새로운 기능을 지원하도록 Azure SQL 데이터베이스에 저장된 기존 분할된 데이터베이스 맵 관리자 메타데이터를 변경합니다.
+새 라이브러리를 사용하여 응용 프로그램을 다시 빌드하고 새로운 기능을 지원하도록 Azure SQL Database에 저장된 기존 분할된 데이터베이스 맵 관리자 메타데이터를 변경합니다.
 
 이러한 단계를 순서대로 수행하면 메타데이터 개체를 업데이트할 때 클라이언트 라이브러리의 이전 버전이 환경에 더 이상 포함되어 있지 않으므로 업그레이드 후에 이전 버전 메타데이터 개체가 생성되지 않습니다.   
 
@@ -44,7 +37,7 @@ ms.lasthandoff: 03/07/2017
 
 **3. 분할/병합 서비스를 업그레이드합니다.** 탄력적 데이터베이스 분할/병합 도구를 사용하여 분할된 데이터를 다시 구성하는 경우 [도구의 최신 버전을 다운로드하여 배포](https://www.nuget.org/packages/Microsoft.Azure.SqlDatabase.ElasticScale.Service.SplitMerge/)합니다. 자세한 서비스 업그레이드 단계는 [여기](sql-database-elastic-scale-overview-split-and-merge.md)서 확인할 수 있습니다. 
 
-**4. 분할된 데이터베이스 맵 관리자 데이터베이스를 업그레이드합니다**. Azure SQL 데이터베이스에서 분할된 데이터베이스 맵을 지원하는 메타데이터를 업그레이드합니다.  이 작업은 두 가지 방법, 즉 PowerShell이나 C#을 사용하여 수행할 수 있습니다. 아래에는 두 옵션이 모두 나와 있습니다.
+**4. 분할된 데이터베이스 맵 관리자 데이터베이스를 업그레이드합니다**. Azure SQL Database에서 분할된 데이터베이스 맵을 지원하는 메타데이터를 업그레이드합니다.  이 작업은 두 가지 방법, 즉 PowerShell이나 C#을 사용하여 수행할 수 있습니다. 아래에는 두 옵션이 모두 나와 있습니다.
 
 ***옵션 1: PowerShell을 사용하여 메타데이터 업그레이드***
 
@@ -80,5 +73,4 @@ ShardMapManager를 열고 모든 분할에서 반복 실행한 다음, 다음 �
 
 <!--Image references-->
 [1]:./media/sql-database-elastic-scale-upgrade-client-library/nuget-upgrade.png
-
 

@@ -2,7 +2,7 @@
 title: "Azure Event Hubs 설명서 - 자습서, API 참조 | Microsoft Docs"
 description: "Event Hubs를 사용하여 광범위한 플랫폼에 있는 연결된 IoT 장치 및 응용 프로그램에서 초당 수백만 개의 이벤트를 수집하는 방법에 대해 알아봅니다."
 services: event-hubs
-author: carolz
+author: czeumault
 manager: carolz
 layout: LandingPage
 ms.assetid: 
@@ -12,14 +12,12 @@ ms.devlang: na
 ms.topic: landing-page
 ms.date: 01/23/2017
 ms.author: carolz
+ms.openlocfilehash: 34fd5bdf1e4a51733b527168b05d079fde1ae246
+ms.sourcegitcommit: f847fcbf7f89405c1e2d327702cbd3f2399c4bc2
 ms.translationtype: HT
-ms.sourcegitcommit: 22aa82e5cbce5b00f733f72209318c901079b665
-ms.openlocfilehash: 56c24eb26faf1729c33b025d5c9fcf5d13abd376
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/24/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/28/2017
 ---
-
 # <a name="event-hubs-documentation"></a>Event Hubs 설명서
 
 Event Hubs를 사용하여 연결된 IoT 장치 및 응용 프로그램에서 초당 수백만 개의 이벤트를 수집하고 관리하는 방법에 대해 알아봅니다. 자습서, API 참조 및 기타 설명서에서는 광범위한 플랫폼에서 이벤트에 대한 확장 가능한 수집을 설정하는 방법을 보여 줍니다.
@@ -32,7 +30,7 @@ Event Hubs를 사용하여 연결된 IoT 장치 및 응용 프로그램에서 �
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="media/index/event-hubs.svg" alt="" />
+                            <img src="media/index/event-hubs.svg" alt="Learn about Azure Event Hubs" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -50,7 +48,7 @@ Event Hubs를 사용하여 연결된 IoT 장치 및 응용 프로그램에서 �
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="media/index/video-library.svg" alt="" />
+                            <img src="media/index/video-library.svg" alt="Azure Event Hubs Video Library" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -68,7 +66,7 @@ Event Hubs를 사용하여 연결된 IoT 장치 및 응용 프로그램에서 �
                <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="media/index/get-started.svg" alt="" />
+                            <img src="media/index/get-started.svg" alt="Get started with Event Hubs programming guide" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -86,7 +84,7 @@ Event Hubs를 사용하여 연결된 IoT 장치 및 응용 프로그램에서 �
                 <div class="card">
                     <div class="cardImageOuter">
                         <div class="cardImage">
-                            <img src="media/index/tutorial.svg" alt="" />
+                            <img src="media/index/tutorial.svg" alt="Get started with Event Hubs using the Azure portal" />
                         </div>
                     </div>
                     <div class="cardText">
@@ -151,4 +149,3 @@ Event Hubs를 사용하여 연결된 IoT 장치 및 응용 프로그램에서 �
         </div>
     </li>
 </ul>
-

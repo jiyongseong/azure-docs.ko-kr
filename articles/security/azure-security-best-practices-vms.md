@@ -1,29 +1,29 @@
 ---
-title: "Azure 가상 컴퓨터 보안 모범 사례 | Microsoft Docs"
-description: "이 문서는 Azure의 가상 컴퓨터에 사용할 다양한 보안 모범 사례를 제공합니다."
+title: Azure Virtual Machine 보안 모범 사례
+description: 이 문서는 Azure의 가상 머신에 사용할 다양한 보안 모범 사례를 제공합니다.
 services: security
 documentationcenter: na
-author: YuriDio
+author: barclayn
 manager: mbaldwin
-editor: 
+editor: ''
 ms.assetid: 5e757abe-16f6-41d5-b1be-e647100036d8
 ms.service: security
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 07/19/2017
-ms.author: yurid
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 197ebd6e37066cb4463d540284ec3f3b074d95e1
-ms.openlocfilehash: c306000e898f5fe0260ef3347988923266ed096e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/31/2017
-
+ms.date: 04/26/2018
+ms.author: barclayn
+ms.openlocfilehash: e0c823982bb799e324dc6fb0fb811fd9ace37878
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34364406"
 ---
 # <a name="best-practices-for-azure-vm-security"></a>Azure VM 보안에 대한 모범 사례
 
-대부분 IaaS(Infrastructure as a Service) 시나리오에서 [Azure VM(가상 컴퓨터)](https://docs.microsoft.com/en-us/azure/virtual-machines/)은 클라우드 컴퓨팅을 사용하는 조직에 주요 워크로드입니다. 이 사실은 조직이 워크로드를 클라우드에 천천히 마이그레이션하고 싶은 [하이브리드 시나리오](https://social.technet.microsoft.com/wiki/contents/articles/18120.hybrid-cloud-infrastructure-design-considerations.aspx)에서 특히 명백합니다. 이러한 시나리오에서 [IaaS에 대한 일반적인 보안 고려 사항](https://social.technet.microsoft.com/wiki/contents/articles/3808.security-considerations-for-infrastructure-as-a-service-iaas.aspx)을 따르고 모든 VM에 보안 모범 사례를 적용합니다.
+대부분 IaaS(Infrastructure as a Service) 시나리오에서 [Azure VM(가상 머신)](https://docs.microsoft.com/azure/virtual-machines/)은 클라우드 컴퓨팅을 사용하는 조직에 주요 워크로드입니다. 이 사실은 조직이 워크로드를 클라우드에 천천히 마이그레이션하고 싶은 [하이브리드 시나리오](https://social.technet.microsoft.com/wiki/contents/articles/18120.hybrid-cloud-infrastructure-design-considerations.aspx)에서 특히 명백합니다. 이러한 시나리오에서 [IaaS에 대한 일반적인 보안 고려 사항](https://social.technet.microsoft.com/wiki/contents/articles/3808.security-considerations-for-infrastructure-as-a-service-iaas.aspx)을 따르고 모든 VM에 보안 모범 사례를 적용합니다.
 
 이 문서에서는 각각 VM을 사용하여 고객과 우리의 고유한 직접 경험으로부터 파생된 다양한 VM 보안 모범 사례를 설명합니다.
 
@@ -48,16 +48,16 @@ ms.lasthandoff: 03/31/2017
 
 ## <a name="vm-authentication-and-access-control"></a>VM 인증 및 액세스 제어
 
-VM을 보호하는 첫 번째 단계는 승인된 사용자만 새 VM을 설정할 수 있게 하는 것입니다. [Azure Resource Manager 정책](../azure-resource-manager/resource-manager-policy.md)을 사용하여 조직의 리소스 표기 규칙을 정하고 사용자 지정된 정책을 생성하며 이러한 규칙을 [리소스 그룹](../azure-resource-manager/resource-group-overview.md) 등의 리소스에 적용할 수 있습니다.
+VM을 보호하는 첫 번째 단계는 승인된 사용자만 새 VM을 설정할 수 있게 하는 것입니다. [Azure 정책](../azure-policy/azure-policy-introduction.md)을 사용하여 조직의 리소스 표기 규칙을 정하고 사용자 지정된 정책을 생성하며 이러한 규칙을 [리소스 그룹](../azure-resource-manager/resource-group-overview.md) 등의 리소스에 적용할 수 있습니다.
 
-리소스 그룹에 속한 VM에서 기본적으로 해당 정책을 상속합니다. VM을 관리하는 데 이 방법을 권장하지만 [RBAC(역할 기반 액세스 제어)](../active-directory/role-based-access-control-configure.md)를 사용하여 개별 VM 정책에 대한 액세스를 제어할 수도 있습니다.
+리소스 그룹에 속한 VM에서 기본적으로 해당 정책을 상속합니다. VM을 관리하는 데 이 방법을 권장하지만 [RBAC(역할 기반 액세스 제어)](../role-based-access-control/role-assignments-portal.md)를 사용하여 개별 VM 정책에 대한 액세스를 제어할 수도 있습니다.
 
-VM 액세스를 제어하는 데 리소스 관리자 정책 및 RBAC를 사용하면 VM의 전반적인 보안을 향상시킬 수 있습니다. VM을 동일한 수명 주기로 동일한 리소스 그룹으로 통합하는 것이 좋습니다. 리소스 그룹을 사용하여 리소스에 대한 비용 청구를 배포, 모니터링 및 롤업할 수 있습니다. 사용자가 VM에 액세스하고 VM을 설정하도록 활성화하려면 [최소 권한 접근 방식](https://technet.microsoft.com/en-us/windows-server-docs/identity/ad-ds/plan/security-best-practices/implementing-least-privilege-administrative-models)을 사용합니다. 또한 권한을 사용자에게 할당할 때 다음 기본 제공 Azure 역할을 사용하도록 계획합니다.
+VM 액세스를 제어하는 데 리소스 관리자 정책 및 RBAC를 사용하면 VM의 전반적인 보안을 향상시킬 수 있습니다. VM을 동일한 수명 주기로 동일한 리소스 그룹으로 통합하는 것이 좋습니다. 리소스 그룹을 사용하여 리소스에 대한 비용 청구를 배포, 모니터링 및 롤업할 수 있습니다. 사용자가 VM에 액세스하고 VM을 설정하도록 활성화하려면 [최소 권한 접근 방식](https://technet.microsoft.com/windows-server-docs/identity/ad-ds/plan/security-best-practices/implementing-least-privilege-administrative-models)을 사용합니다. 또한 권한을 사용자에게 할당할 때 다음 기본 제공 Azure 역할을 사용하도록 계획합니다.
 
-- [가상 컴퓨터 참여자](../active-directory/role-based-access-built-in-roles.md#virtual-machine-contributor): VM을 관리할 수 있으나 해당 컴퓨터가 연결된 가상 네트워크 또는 저장소 계정은 관리할 수 없습니다.
-- [클래식 가상 컴퓨터 참여자](../active-directory/role-based-access-built-in-roles.md#classic-virtual-machine-contributor): 클래식 배포 모델을 사용하여 만든 VM을 관리할 수 있으나 VM이 연결된 가상 네트워크 또는 저장소 계정은 관리할 수 없습니다.
-- [보안 관리자](../active-directory/role-based-access-built-in-roles.md#security-manager): 보안 구성 요소, 보안 정책 및 VM을 관리할 수 있습니다.
-- [DevTest 실습 사용자](../active-directory/role-based-access-built-in-roles.md#devtest-labs-user): 모든 항목을 볼 수 있으며 VM을 연결, 시작, 다시 시작 및 종료할 수 있습니다.
+- [Virtual Machine 참여자](../role-based-access-control/built-in-roles.md#virtual-machine-contributor): VM을 관리할 수 있으나 해당 컴퓨터가 연결된 가상 네트워크 또는 저장소 계정은 관리할 수 없습니다.
+- [클래식 Virtual Machine 참여자](../role-based-access-control/built-in-roles.md#classic-virtual-machine-contributor): 클래식 배포 모델을 사용하여 만든 VM을 관리할 수 있으나 VM이 연결된 가상 네트워크 또는 저장소 계정은 관리할 수 없습니다.
+- [보안 관리자](../role-based-access-control/built-in-roles.md#security-admin): 보안 구성 요소 및 보안 정책을 관리할 수 있습니다.
+- [DevTest 실습 사용자](../role-based-access-control/built-in-roles.md#devtest-labs-user): 모든 항목을 볼 수 있으며 VM을 연결, 시작, 다시 시작 및 종료할 수 있습니다.
 
 관리자 간 계정 및 암호를 공유하거나, 여러 사용자 계정 또는 서비스, 특히 소셜 미디어 또는 기타 비 관리 작업에 암호를 다시 사용하지 마세요. 이상적으로는, VM을 안전하게 설정하기 위해 [Azure Resource Manager](../azure-resource-manager/resource-group-authoring-templates.md) 템플릿을 사용해야 합니다. 이 접근 방식을 사용하면 배포 선택을 강화하고 배포 전체에서 보안 설정을 적용할 수 있습니다.
 
@@ -65,11 +65,11 @@ RBAC와 같은 기능을 활용하여 데이터 액세스 제어를 적용하지
 
 ## <a name="vm-availability-and-network-access"></a>VM 가용성 및 네트워크 액세스
 
-VM에서 고가용성의 중요한 응용 프로그램을 실행할 경우에는 여러 VM을 사용하는 것이 좋습니다. 가용성 향상을 위해 [가용성 집합](../virtual-machines/windows/infrastructure-availability-sets-guidelines.md)에서 최소 2개 이상의 VM을 생성하세요.
+VM에서 고가용성의 중요한 응용 프로그램을 실행할 경우에는 여러 VM을 사용하는 것이 좋습니다. 가용성 향상을 위해 [가용성 집합](../virtual-machines/windows/tutorial-availability-sets.md)에서 최소 2개 이상의 VM을 생성하세요.
 
 또한 [Azure Load Balancer](../load-balancer/load-balancer-overview.md)에서는 부하 분산된 VM이 동일한 가용성 집합에 속해야 합니다. 이러한 VM을 인터넷에서 액세스해야 할 경우 [인터넷 연결 부하 분산 장치](../load-balancer/load-balancer-internet-overview.md)를 구성해야 합니다.
 
-VM이 인터넷에 노출되어 있으면 [NSG(네트워크 보안 그룹)를 사용하여 네트워크 트래픽 흐름을 제어](../virtual-network/virtual-networks-nsg.md)하는 것이 중요합니다. NSG가 서브넷에 적용될 수 있기 때문에, 서브넷에 따라서 리소스를 그룹화한 다음 서브넷에 NSG를 적용하여 NSG의 수를 최소화할 수 있습니다. Azure에서 [네트워크 보안](../best-practices-network-security.md) 기능을 적절하게 구성하여 수행할 수 있는 네트워크 격리 계층을 생성하기 위한 것입니다.
+VM이 인터넷에 노출되어 있으면 [NSG(네트워크 보안 그룹)를 사용하여 네트워크 트래픽 흐름을 제어](../virtual-network/security-overview.md)하는 것이 중요합니다. NSG가 서브넷에 적용될 수 있기 때문에, 서브넷에 따라서 리소스를 그룹화한 다음 서브넷에 NSG를 적용하여 NSG의 수를 최소화할 수 있습니다. Azure에서 [네트워크 보안](../best-practices-network-security.md) 기능을 적절하게 구성하여 수행할 수 있는 네트워크 격리 계층을 생성하기 위한 것입니다.
 
 특정 VM에 대한 원격 액세스 권한을 가진 대상 및 시간을 제어하기 위해 Azure Security Center에서 JIT(Just-In-Time) VM 액세스 기능을 사용할 수도 있습니다.
 
@@ -81,7 +81,7 @@ VM이 인터넷에 노출되어 있으면 [NSG(네트워크 보안 그룹)를 �
 
 디스크 암호화를 적용하여 데이터를 보호하면 조직의 보안 및 규정 준수 요구 사항을 충족하는 데 도움이 됩니다. 조직에서는 암호화를 사용하여 데이터 무단 액세스와 관련된 위험을 완화하는 방법을 고려해야 합니다. 또한 중요한 데이터를 작성하기 전에 드라이브를 암호화하는 것이 좋습니다.
 
-Azure 저장소 계정의 미사용 데이터를 보호할 수 있도록 VM 데이터 볼륨을 암호화해야 합니다. [Azure Key Vault](https://azure.microsoft.com/en-us/documentation/articles/key-vault-whatis/)를 사용하여 암호화 키 및 암호를 보호합니다.
+Azure 저장소 계정의 미사용 데이터를 보호할 수 있도록 VM 데이터 볼륨을 암호화해야 합니다. [Azure Key Vault](https://azure.microsoft.com/documentation/articles/key-vault-whatis/)를 사용하여 암호화 키 및 암호를 보호합니다.
 
 데이터 암호화를 적용하지 않는 조직은 데이터 무결성 문제에 더 많이 노출됩니다. 예를 들어 무단 또는 악의적인 사용자가 손상된 계정의 데이터를 훔치거나 ClearFormat으로 코딩된 데이터에 무단으로 액세스할 수도 있습니다. 이러한 위험을 감수하는 것 외에도 업계 규정을 준수하기 위해 회사는 충실하게 작업하고 올바른 보안 컨트롤을 사용하여 데이터 보안을 강화하고 있다는 사실을 증명해야 합니다.
 
@@ -115,7 +115,7 @@ Security Center는 위협을 적극적으로 모니터링할 수 있으며 잠�
 
 Security Center에서 어떻게 Azure에 있는 사용자의 VM에서 잠재적인 위협을 식별할 수 있게 지원하는지 이해하려면 아래의 동영상을 시청합니다.
 
-<iframe src="https://channel9.msdn.com/Blogs/Azure-Security-Videos/Azure-Security-Center-in-Incident-Response/player" width="960" height="540" allowFullScreen frameBorder="0"></iframe>
+>[!VIDEO https://channel9.msdn.com/Blogs/Azure-Security-Videos/Azure-Security-Center-in-Incident-Response/player]
 
 VM에 대해 강력한 보안 태세를 적용하지 않는 조직은 설정된 보안 제어를 피하는 권한이 없는 사용자의 잠재적인 시도를 알지 못하는 상태로 유지됩니다.
 
@@ -123,9 +123,8 @@ VM에 대해 강력한 보안 태세를 적용하지 않는 조직은 설정된 
 
 리소스 남용은 VM 프로세스가 소비해야 하는 것보다 더 많은 리소스를 소비하는 경우 문제가 될 수 있습니다. VM의 성능 문제로 인해 가용성의 보안 원칙을 위반하는 서비스 중단이 발생할 수 있습니다. 이러한 이유로 문제가 발생하는 동안 VM 액세스를 적극적으로, 또한 정상적인 작업 중 측정된 기준 성능에 대해 사전 대처식으로 모니터링해야 합니다.
 
-[Azure 진단 로그 파일](https://azure.microsoft.com/en-us/blog/windows-azure-virtual-machine-monitoring-with-wad-extension/)을 분석하여 VM 리소스를 모니터링하고 성능 및 가용성을 손상시킬 수 있는 잠재적인 문제를 식별할 수 있습니다. Azure 진단 확장은 Windows 기반 VM에 모니터링 및 진단 기능을 제공합니다. 확장을 [Azure Resource Manager 템플릿](../virtual-machines/windows/extensions-diagnostics-template.md)에 속하도록 포함시켜서 이러한 기능을 사용하도록 설정할 수 있습니다.
+[Azure 진단 로그 파일](https://azure.microsoft.com/blog/windows-azure-virtual-machine-monitoring-with-wad-extension/)을 분석하여 VM 리소스를 모니터링하고 성능 및 가용성을 손상시킬 수 있는 잠재적인 문제를 식별할 수 있습니다. Azure 진단 확장은 Windows 기반 VM에 모니터링 및 진단 기능을 제공합니다. 확장을 [Azure Resource Manager 템플릿](../virtual-machines/windows/extensions-diagnostics-template.md)에 속하도록 포함시켜서 이러한 기능을 사용하도록 설정할 수 있습니다.
 
 또한 [Azure Monitor](../monitoring-and-diagnostics/monitoring-overview-metrics.md)를 사용하여 리소스 상태에 대한 가시성도 얻을 수 있습니다.
 
 VM 성능을 모니터링하지 않는 조직은 성능 패턴의 특정 변경 내용이 정상 또는 비정상인지 확인하지 못합니다. VM이 정상보다 더 많은 리소스를 소비하는 경우 이러한 비정상은 외부 리소스의 잠재적인 공격 또는 VM에서 손상된 프로세스가 실행 중임을 나타낼 수 있습니다.
-

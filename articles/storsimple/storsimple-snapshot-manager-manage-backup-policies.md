@@ -14,13 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/05/2017
 ms.author: v-sharos
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 9cf39b922e51dd60b5b2c51cb7030436c60232a5
-ms.openlocfilehash: 88fc29b81c9502374a25cb34175ad1ee7c25423f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
-
+ms.openlocfilehash: 218c89e403673c16c72da95aa2c1d685bbed5a86
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-storsimple-snapshot-manager-to-create-and-manage-backup-policies"></a>StorSimple 스냅숏 관리자를 사용하여 백업 정책 만들기 및 관리
 ## <a name="overview"></a>개요
@@ -95,4 +93,3 @@ ms.lasthandoff: 11/17/2016
 ## <a name="next-steps"></a>다음 단계
 * [StorSimple 스냅숏 관리자를 사용하여 StorSimple 솔루션을 관리](storsimple-snapshot-manager-admin.md)하는 방법을 알아봅니다.
 * [StorSimple 스냅숏 관리자를 사용하여 백업 작업을 보고 관리](storsimple-snapshot-manager-manage-backup-jobs.md)하는 방법을 알아봅니다.
-

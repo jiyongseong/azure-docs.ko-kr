@@ -1,11 +1,11 @@
 ---
-title: "Windows HPC 클러스터를 배포하기 위한 PowerShell 스크립트 | Microsoft Docs"
-description: "PowerShell 스크립트를 실행하여 Azure 가상 컴퓨터에 Windows HPC Pack 2012 R2 클러스터 배포"
+title: Windows HPC 클러스터를 배포하기 위한 PowerShell 스크립트 | Microsoft Docs
+description: PowerShell 스크립트를 실행하여 Azure 가상 머신에 Windows HPC Pack 2012 R2 클러스터 배포
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: dlepow
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-service-management,hpc-pack
 ms.assetid: 286b2be8-2533-40df-b02a-26156b1f1133
 ms.service: virtual-machines-windows
@@ -15,19 +15,18 @@ ms.tgt_pltfrm: vm-windows
 ms.workload: big-compute
 ms.date: 12/29/2016
 ms.author: danlep
-translationtype: Human Translation
-ms.sourcegitcommit: 356de369ec5409e8e6e51a286a20af70a9420193
-ms.openlocfilehash: 85b125ab19671b61d2541af6378c95feb88bf952
-ms.lasthandoff: 03/27/2017
-
-
+ms.openlocfilehash: e05562aeac0ea89ec1c3d80d2967c8f59c68d332
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="create-a-windows-high-performance-computing-hpc-cluster-with-the-hpc-pack-iaas-deployment-script"></a>HPC Pack IaaS 배포 스크립트를 사용하여 Windows HPC(고성능 컴퓨팅) 클러스터 만들기
-HPC Pack IaaS 배포 PowerShell 스크립트를 실행하여 Azure 가상 컴퓨터에 완전한 Windows 워크로드용 HPC Pack 2012 R2 클러스터를 배포합니다. 클러스터는 Windows Server, Microsoft HPC 팩 및 지정한 추가 Windows 계산 리소스를 실행하는 Active Directory 가입 헤드 노드로 구성됩니다. Azure에서 Linux 워크로드용 HPC Pack 클러스터를 배포하려면 [HPC Pack IaaS 배포 스크립트를 사용하여 Linux HPC 클러스터 만들기](../../linux/classic/hpcpack-cluster-powershell-script.md)를 참조하세요. Azure 리소스 관리자 템플릿을 사용하여 HPC 팩 클러스터를 배포할 수도 있습니다. 예제는 [HPC 클러스터 만들기](https://azure.microsoft.com/documentation/templates/create-hpc-cluster/) 및 [사용자 지정 계산 노드 이미지로 HPC 클러스터 만들기](https://azure.microsoft.com/documentation/templates/create-hpc-cluster-custom-image/)를 참조하세요.
+HPC Pack IaaS 배포 PowerShell 스크립트를 실행하여 Azure 가상 머신에 완전한 Windows 워크로드용 HPC Pack 2012 R2 클러스터를 배포합니다. 클러스터는 Windows Server, Microsoft HPC 팩 및 지정한 추가 Windows 계산 리소스를 실행하는 Active Directory 가입 헤드 노드로 구성됩니다. Azure에서 Linux 워크로드용 HPC Pack 클러스터를 배포하려면 [HPC Pack IaaS 배포 스크립트를 사용하여 Linux HPC 클러스터 만들기](../../linux/classic/hpcpack-cluster-powershell-script.md)를 참조하세요. 
 
 > [!IMPORTANT] 
 > 이 문서에 설명된 PowerShell 스크립트는 클래식 배포 모델을 사용하여 Azure에 Microsoft HPC Pack 2012 R2 클러스터를 만듭니다. 새로운 배포는 대부분 리소스 관리자 모델을 사용하는 것이 좋습니다.
-> 또한 이 문서에 설명된 스크립트는 HPC Pack 2016을 지원하지 않습니다.
+> 또한 이 문서에 설명된 스크립트는 HPC Pack 2016을 지원하지 않습니다. HPC Pack 2012 R2 및 HPC 팩 2016에 대한 Resource Manager 템플릿에 대한 정보는 [Azure에서 HPC Pack 클러스터 배포 옵션](../hpcpack-cluster-options.md)을 참조하세요.
 
 [!INCLUDE [virtual-machines-common-classic-hpcpack-cluster-powershell-script](../../../../includes/virtual-machines-common-classic-hpcpack-cluster-powershell-script.md)]
 
@@ -136,7 +135,7 @@ HPC Pack IaaS 배포 PowerShell 스크립트를 실행하여 Azure 가상 컴퓨
 ```
 
 ### <a name="example-3"></a>예 3
-다음 구성 파일은 기존 도메인 포리스트에 HPC 팩 클러스터를 배포합니다. 클러스터에는 1개 헤드 노드, 500GB의 데이터 디스크가 포함된 1개 데이터베이스 서버, Windows Server 2012 R2 운영 체제를 실행하는 2개 broker 노드, Windows Server 2012 R2 운영 체제를 실행하는 5개 계산 노드가 포함되어 있습니다. 클라우드 서비스인 MyHPCCNService는 선호도 그룹 *MyIBAffinityGroup*에 만들어지며 기타 클라우드 서비스는 선호도 그룹 *MyAffinityGroup*에 만들어집니다. 헤드 노드에서 HPC 작업 스케줄러 REST API 및 HPC 웹 포털을 사용합니다.
+다음 구성 파일은 기존 도메인 포리스트에 HPC 팩 클러스터를 배포합니다. 클러스터에는 1개 헤드 노드, 500GB의 데이터 디스크가 포함된 1개 데이터베이스 서버, Windows Server 2012 R2 운영 체제를 실행하는 2개 broker 노드, Windows Server 2012 R2 운영 체제를 실행하는 5개 계산 노드가 포함되어 있습니다. 클라우드 서비스인 MyHPCCNService는 선호도 그룹 *MyIBAffinityGroup*에 만들어지며 기타 클라우드 서비스는 선호도 그룹 *MyAffinityGroup*에 만들어집니다. 헤드 노드에서 HPC 작업 Scheduler REST API 및 HPC 웹 포털을 사용합니다.
 
 ```Xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -273,5 +272,4 @@ HPC Pack IaaS 배포 PowerShell 스크립트를 실행하여 Azure 가상 컴퓨
 * 클러스터 배포를 스크립트로 작성하고 HPC 워크로드를 실행하는 자습서를 보려면 [Azure에서 Excel 및 SOA 워크로드를 실행할 HPC Pack 클러스터 시작하기](../../virtual-machines-windows-excel-cluster-hpcpack.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 참조하세요.
 * 사용자가 만든 클러스터에서 계산 노드를 시작, 중지, 추가, 제거하는 HPC 팩의 도구. [Azure에서 HPC Pack 클러스터의 계산 노드 관리](hpcpack-cluster-node-manage.md)를 참조하세요.
 * 로컬 컴퓨터에서 클러스터에 작업 제출을 시작하려면 [온-프레미스 컴퓨터에서 Azure의 HPC 팩 클러스터로 HPC 작업 제출](../../virtual-machines-windows-hpcpack-cluster-submit-jobs.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)을 참조합니다.
-
 

@@ -1,6 +1,6 @@
 ---
 title: "Azure Log Analytics의 성능 카운터 수집 및 분석 | Microsoft Docs"
-description: "성능 카운터는 Windows 및 Linux 에이전트에서 성능을 분석하기 위해 Log Analytics에 의해 수집됩니다.  이 문서는 Windows 및 Linux 에이전트에 대한 성능 카운터 컬렉션을 구성하는 방법과, OMS 리포지토리에 저장하는 방식에 대한 자세한 내용과, OMS 포털에서 분석하는 방법을 설명합니다."
+description: "성능 카운터는 Windows 및 Linux 에이전트에서 성능을 분석하기 위해 Log Analytics에 의해 수집됩니다.  이 문서는 Windows 및 Linux 에이전트에 대한 성능 카운터 컬렉션을 구성하는 방법과, 작업 영역에 저장하는 방식에 대한 자세한 내용과, Azure Portal에서 분석하는 방법을 설명합니다."
 services: log-analytics
 documentationcenter: 
 author: mgoedtel
@@ -12,14 +12,13 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 07/12/2017
+ms.date: 12/19/2017
 ms.author: magoedte
+ms.openlocfilehash: 0f7119f280f2eb51222ade2ea7984b560a02f667
+ms.sourcegitcommit: f46cbcff710f590aebe437c6dd459452ddf0af09
 ms.translationtype: HT
-ms.sourcegitcommit: 137671152878e6e1ee5ba398dd5267feefc435b7
-ms.openlocfilehash: 953bb453b0a9635627fbbb6c3913d0cd757101c7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/20/2017
 ---
 # <a name="windows-and-linux-performance-data-sources-in-log-analytics"></a>Log Analytics의 Windows 및 Linux 성능 데이터 원본
 Windows와 Linux의 성능 카운터는 하드웨어 구성 요소, 운영 체제 및 응용 프로그램의 성능에 대한 정보를 자세히 제공합니다.  Log Analytics는 장기적인 분석 및 보고를 위한 성능 데이터 집계는 물론 거의 실시간에 가까운(NRT) 분석을 위해 빈번한 간격으로 성능 카운터를 수집할 수 있습니다.
@@ -27,9 +26,9 @@ Windows와 Linux의 성능 카운터는 하드웨어 구성 요소, 운영 체�
 ![성능 카운터](media/log-analytics-data-sources-performance-counters/overview.png)
 
 ## <a name="configuring-performance-counters"></a>성능 카운터 구성
-OMS 포털에서 성능 카운터는 [Log Analytics 설정의 데이터 메뉴](log-analytics-data-sources.md#configuring-data-sources)에서 구성합니다.
+성능 카운터는 [Log Analytics 설정의 데이터 메뉴](log-analytics-data-sources.md#configuring-data-sources)에서 구성합니다.
 
-새 OMS 작업 영역에 대한 Windows 또는 Linux 성능 카운터를 처음으로 구성하는 경우, 몇 가지 공용 카운터를 신속하게 만드는 옵션이 제공됩니다.  각 항목은 옆에 확인란과 함께 나열됩니다.  초기에 만들 카운터를 모두 선택한 후 **Add the selected performance counters**(선택한 성능 카운터 추가)를 클릭합니다.
+새 Log Analytics 작업 영역에 대한 Windows 또는 Linux 성능 카운터를 처음으로 구성하는 경우, 몇 가지 공용 카운터를 신속하게 만드는 옵션이 제공됩니다.  각 항목은 옆에 확인란과 함께 나열됩니다.  초기에 만들 카운터를 모두 선택한 후 **Add the selected performance counters**(선택한 성능 카운터 추가)를 클릭합니다.
 
 Windows 성능 카운터의 경우, 각 성능 카운터에 대해 특정 인스턴스를 선택할 수 있습니다. Linux 성능 카운터의 경우, 선택하는 각 카운터의 인스턴스는 부모 카운터의 모든 자식 카운터에 적용됩니다. 다음 테이블은 Linux와 Windows 성능 카운터 모두에서 사용할 수 있는 공통 인스턴스를 보여줍니다.
 
@@ -66,7 +65,7 @@ Windows 성능 카운터의 경우, 각 성능 카운터에 대해 특정 인스
 5. 카운터 추가를 완료했으면 화면 맨 위에서 **저장** 단추를 눌러서 구성을 저장합니다.
 
 #### <a name="configure-linux-performance-counters-in-configuration-file"></a>구성 파일에서 Linux 성능 카운터 구성
-OMS 포털을 사용하여 Linux 성능 카운터를 구성하는 대신 Linux 에이전트의 구성 파일을 편집하는 옵션도 있습니다.  수집할 성능 메트릭은 **/etc/opt/microsoft/omsagent/\<workspace id\>/conf/omsagent.conf**의 구성으로 제어됩니다.
+Azure Portal을 사용하여 Linux 성능 카운터를 구성하는 대신 Linux 에이전트의 구성 파일을 편집하는 옵션도 있습니다.  수집할 성능 메트릭은 **/etc/opt/microsoft/omsagent/\<workspace id\>/conf/omsagent.conf**의 구성으로 제어됩니다.
 
 수집할 성능 메트릭의 각 개체나 범주는 구성 파일 내에 단일 `<source>` 요소로 정의되어야 합니다. 구문은 아래와 같은 패턴을 따릅니다.
 
@@ -183,14 +182,14 @@ OMS 포털을 사용하여 Linux 성능 카운터를 구성하는 대신 Linux �
     </source>
 
 ## <a name="data-collection"></a>데이터 수집
-Log Analytics는 카운터가 설치된 모든 에이전트에서 지정된 모든 성능 카운터를 지정된 샘플 간격으로 수집합니다.  데이터는 집계되지 않으며 OMS 구독에서 지정한 기간 동안 모든 로그 검색 보기에서 원시 데이터를 사용할 수 있습니다.
+Log Analytics는 카운터가 설치된 모든 에이전트에서 지정된 모든 성능 카운터를 지정된 샘플 간격으로 수집합니다.  데이터는 집계되지 않으며 구독에서 지정한 기간 동안 모든 로그 검색 보기에서 원시 데이터를 사용할 수 있습니다.
 
 ## <a name="performance-record-properties"></a>성능 레코드 속성
 성능 레코드에는 **Perf**라는 type과 다음 테이블의 속성이 포함됩니다.
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 |:--- |:--- |
-| 컴퓨터 |이벤트가 수집된 컴퓨터입니다. |
+| Computer |이벤트가 수집된 컴퓨터입니다. |
 | CounterName |성능 카운터의 이름입니다. |
 | CounterPath |카운터의 전체 경로이며 형식은 \\\\\<Computer>\\object(instance)\\counter입니다. |
 | CounterValue |카운터의 숫자 값입니다. |
@@ -209,23 +208,6 @@ Log Analytics는 카운터가 설치된 모든 에이전트에서 지정된 모�
 
 | 쿼리 | 설명 |
 |:--- |:--- |
-| Type=Perf |모든 성능 데이터 |
-| Type=Perf Computer="MyComputer" |특정 컴퓨터의 모든 성능 데이터 |
-| Type=Perf CounterName="Current Disk Queue Length" |특정 컴퓨터에 대한 모든 성능 데이터 |
-| Type=Perf (ObjectName=Processor) CounterName="% Processor Time" InstanceName=_Total &#124; measure Avg(Average) as AVGCPU by Computer |모든 컴퓨터의 평균 CPU 사용률 |
-| Type=Perf (CounterName="% Processor Time") &#124;  measure max(Max) by Computer |모든 컴퓨터의 최대 CPU 사용률 |
-| Type=Perf ObjectName=LogicalDisk CounterName="Current Disk Queue Length" Computer="MyComputerName" &#124; measure Avg(Average) by InstanceName |지정된 컴퓨터의 모든 인스턴스의 평균 현재 디스크 큐 길이 |
-| Type=Perf CounterName="DiskTransfers/sec" &#124; measure percentile95(Average) by Computer |모든 컴퓨터에 대한 디스크 전송/초의 95 백분위수 |
-| Type=Perf CounterName="% Processor Time" InstanceName="_Total"  &#124; measure avg(CounterValue) by Computer Interval 1HOUR |모든 컴퓨터에서 시간별 평균 CPU 사용량 |
-| Type=Perf Computer="MyComputer" CounterName=%* InstanceName=_Total &#124; measure percentile70(CounterValue) by CounterName Interval 1HOUR |특정 컴퓨터에 대한 % 백분율 카운터당 시간별 70백분위수 |
-| Type=Perf CounterName="% Processor Time" InstanceName="_Total"  (Computer="MyComputer") &#124; measure min(CounterValue), avg(CounterValue), percentile75(CounterValue), max(CounterValue) by Computer Interval 1HOUR |특정 컴퓨터의 시간별 평균, 최소, 최대, 75백분위수 CPU 사용량 |
-| Type=Perf ObjectName=“MSSQL$INST2:Databases” InstanceName=master | 명명된 SQL Server 인스턴스 INST2에서 마스터 데이터베이스에 대한 데이터베이스 성능 개체의 모든 성능 데이터.  
-
->[!NOTE]
-> 작업 영역을 [새 Log Analytics 쿼리 언어](log-analytics-log-search-upgrade.md)로 업그레이드한 경우에는 위의 쿼리가 다음과 같이 변경됩니다.
-
-> | 쿼리 | 설명 |
-|:--- |:--- |
 | Perf |모든 성능 데이터 |
 | Perf &#124; where Computer == "MyComputer" |특정 컴퓨터의 모든 성능 데이터 |
 | Perf &#124; where CounterName == "Current Disk Queue Length" |특정 컴퓨터에 대한 모든 성능 데이터 |
@@ -238,16 +220,10 @@ Log Analytics는 카운터가 설치된 모든 에이전트에서 지정된 모�
 | Perf &#124; where CounterName == "% Processor Time" and InstanceName == "_Total" and Computer == "MyComputer" &#124; summarize ["min(CounterValue)"] = min(CounterValue), ["avg(CounterValue)"] = avg(CounterValue), ["percentile75(CounterValue)"] = percentile(CounterValue, 75), ["max(CounterValue)"] = max(CounterValue) by bin(TimeGenerated, 1h), Computer |특정 컴퓨터의 시간별 평균, 최소, 최대, 75백분위수 CPU 사용량 |
 | Perf &#124; where ObjectName == "MSSQL$INST2:Databases" and InstanceName == "master" | 명명된 SQL Server 인스턴스 INST2에서 마스터 데이터베이스에 대한 데이터베이스 성능 개체의 모든 성능 데이터.  
 
-## <a name="viewing-performance-data"></a>성능 데이터 보기
-성능 데이터를 위해 로그 검색을 실행하면 **목록** 보기가 기본적으로 표시됩니다.  데이터를 그래픽 양식으로 보려면 **메트릭**을 클릭합니다.  자세한 그래픽 보기를 보려면 카운터 옆의 **+**을 클릭하십시오.  
 
-![축소된 메트릭 보기](media/log-analytics-data-sources-performance-counters/metricscollapsed.png)
-
-로그 검색의 성능 데이터를 집계하려면 [OMS에서 온디맨드 메트릭 집계 및 가상화](http://blogs.technet.microsoft.com/msoms/2016/02/26/on-demand-metric-aggregation-and-visualization-in-oms/)를 참조하십시오.
 
 
 ## <a name="next-steps"></a>다음 단계
 * MySQL 및 Apache HTTP 서버를 포함하여 [Linux 응용 프로그램에서 성능 카운터를 수집](log-analytics-data-sources-linux-applications.md)합니다.
-* 데이터 원본 및 솔루션에서 수집한 데이터를 분석하기 위해 [로그 검색](log-analytics-log-searches.md) 에 대해 알아봅니다.  
+* 데이터 원본 및 솔루션에서 수집한 데이터를 분석하기 위해 [로그 검색](log-analytics-log-searches.md)에 대해 알아봅니다.  
 * 추가적인 시각화 및 분석을 위해, 수집된 데이터를 [Power BI](log-analytics-powerbi.md) 로 내보냅니다.
-

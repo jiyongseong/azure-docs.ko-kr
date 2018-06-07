@@ -1,10 +1,10 @@
 ---
-title: "자습서: Front와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory와 Front 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Front와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory와 Front 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.reviewer: joflore
 ms.assetid: 88270b6d-2571-434a-b139-b6ccc3a2b19f
 ms.service: active-directory
@@ -12,14 +12,13 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/25/2017
+ms.date: 11/15/2017
 ms.author: jeedes
+ms.openlocfilehash: cc4499043ed7fbff964549fe56ecee641f7eadf3
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
-ms.openlocfilehash: d936bc50a66ac2a3c17038ff08351edf9902c99f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-front"></a>자습서: Front와 Azure Active Directory 통합
 
@@ -31,7 +30,7 @@ Front를 Azure AD와 통합하면 다음과 같은 이점이 제공됩니다.
 - 사용자가 해당 Azure AD 계정으로 Front에 자동으로 로그온(Single Sign-on)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +58,7 @@ Front의 Azure AD 통합을 구성하려면 갤러리의 Front를 관리되는 S
 
 **갤러리에서 Front를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -105,66 +104,60 @@ Front에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 �
  
     ![Single Sign-On 대화 상자](./media/active-directory-saas-front-tutorial/tutorial_front_samlbase.png)
 
-3. **Front 도메인 및 URL** 섹션에서 **IDP** 시작 모드로 응용 프로그램을 구성하려는 경우 다음 단계를 수행합니다.
+3. **Front 도메인 및 URL** 섹션에서 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-front-tutorial/tutorial_front_url1.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-front-tutorial/tutorial_front_url1.png)
 
     a. **식별자** 텍스트 상자에서 `https://<companyname>.frontapp.com` 패턴을 사용하여 URL을 입력합니다.
 
-    b. **회신 URL** 텍스트 상자에 다음 패턴으로 URL을 입력합니다.`https://<companyname>.frontapp.com/sso/saml/callback`
-
-4. **SP** 시작 모드에서 응용 프로그램을 구성하려면 **고급 URL 설정 표시**를 선택하세요.
-
-    ![Single Sign-on 구성](./media/active-directory-saas-front-tutorial/tutorial_front_url2.png)
-
-    **로그온 URL** 텍스트 상자에서 다음 패턴으로 URL을 입력합니다. `https://<companyname>.frontapp.com`
+    나. **회신 URL** 텍스트 상자에 다음 패턴으로 URL을 입력합니다.`https://<companyname>.frontapp.com/sso/saml/callback`
      
     > [!NOTE] 
-    > 이러한 값은 실제 값이 아닙니다. 이러한 값을 실제 식별자, 회신 URL 및 로그온 URL로 업데이트합니다. 이러한 값은 자습서의 뒷부분에 나오거나 [Front 클라이언트 지원 팀](mailto:support@frontapp.com)에 문의하여 얻을 수 있습니다. 
+    > 이러한 값은 실제 값이 아닙니다. 이러한 값을 실제 식별자와 회신 URL로 업데이트합니다. 이러한 값은 자습서의 뒷부분을 확인하거나 [Front 클라이언트 지원 팀](mailto:support@frontapp.com)에 문의하여 얻을 수 있습니다. 
 
-5. **SAML 서명 인증서** 섹션에서 **인증서(Base64)**를 클릭한 후 컴퓨터에 인증서 파일을 저장합니다.
+4. **SAML 서명 인증서** 섹션에서 **인증서(Base64)** 를 클릭한 후 컴퓨터에 인증서 파일을 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-front-tutorial/tutorial_front_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-front-tutorial/tutorial_front_certificate.png) 
 
-6. **저장** 단추를 클릭합니다.
+5. **저장** 단추를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-front-tutorial/tutorial_general_400.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-front-tutorial/tutorial_general_400.png)
     
-7. **Front 구성** 섹션에서 **Front 구성**을 클릭하여 **로그온 구성** 창을 엽니다. **빠른 참조 섹션**에서 **로그아웃 URL, SAML 엔터티 ID 및 SAML Single Sign-On 서비스 URL**을 복사합니다.
+6. **Front 구성** 섹션에서 **Front 구성**을 클릭하여 **로그온 구성** 창을 엽니다. **빠른 참조 섹션**에서 **로그아웃 URL, SAML 엔터티 ID 및 SAML Single Sign-On 서비스 URL**을 복사합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-front-tutorial/tutorial_front_configure.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-front-tutorial/tutorial_front_configure.png) 
 
-8. Front 테넌트에 관리자 권한으로 로그온합니다.
+7. Front 테넌트에 관리자 권한으로 로그온합니다.
 
-9. **설정(왼쪽 세로 막대 아래에 있는 톱니바퀴 아이콘) > 기본 설정**으로 이동합니다.
+8. **설정(왼쪽 세로 막대 아래에 있는 톱니바퀴 아이콘) > 기본 설정**으로 이동합니다.
    
     ![앱 쪽에서 Single Sign-On 구성](./media/active-directory-saas-front-tutorial/tutorial_front_000.png)
 
-10. **Single Sign On** 링크를 클릭합니다.
+9. **Single Sign On** 링크를 클릭합니다.
    
     ![앱 쪽에서 Single Sign-On 구성](./media/active-directory-saas-front-tutorial/tutorial_front_001.png)
 
-11. **Single Sign-On** 드롭다운 목록에서 **SAML**을 선택합니다.
+10. **Single Sign-On** 드롭다운 목록에서 **SAML**을 선택합니다.
    
     ![앱 쪽에서 Single Sign-On 구성](./media/active-directory-saas-front-tutorial/tutorial_front_002.png)
 
-12. **진입점** 텍스트 상자에서 Azure AD 응용 프로그램 구성 마법사에서 나온 **Single Sign-On Service URL** 값을 입력합니다.
+11. **진입점** 텍스트 상자에서 Azure AD 응용 프로그램 구성 마법사에서 나온 **Single Sign-On Service URL** 값을 입력합니다.
     
     ![앱 쪽에서 Single Sign-On 구성](./media/active-directory-saas-front-tutorial/tutorial_front_003.png)
 
-13. 다운로드한 **인증서(Base64)** 파일을 메모장에서 열고 내용을 클립보드에 복사한 다음 **서명 인증서** 텍스트 상자에 붙여 넣습니다.
+12. 다운로드한 **인증서(Base64)** 파일을 메모장에서 열고 내용을 클립보드에 복사한 다음 **서명 인증서** 텍스트 상자에 붙여 넣습니다.
     
     ![앱 쪽에서 Single Sign-On 구성](./media/active-directory-saas-front-tutorial/tutorial_front_004.png)
 
-14. **서비스 공급자 설정** 섹션에서 다음 단계를 수행합니다.
+13. **서비스 공급자 설정** 섹션에서 다음 단계를 수행합니다.
 
     ![앱 쪽에서 Single Sign-On 구성](./media/active-directory-saas-front-tutorial/tutorial_front_005.png)
 
     a. **엔터티 ID** 값을 복사하고 Azure Portal의 **Front 도메인 및 URL** 섹션에 있는 **식별자** 텍스트 상자에 붙여 넣습니다.
 
-    b. **ACS URL** 값을 복사하고 Azure Portal의 **Front 도메인 및 URL** 섹션에 있는 **로그온 URL** 텍스트 상자에 붙여 넣습니다.
+    나. **ACS URL** 값을 복사하고 Azure Portal의 **Front 도메인 및 URL** 섹션에 있는 **회신 URL** 텍스트 상자에 붙여넣습니다.
     
-15. **저장** 단추를 클릭합니다.
+14. **저장** 단추를 클릭합니다.
 
 > [!TIP]
 > 이제 앱을 설정하는 동안 [Azure Portal](https://portal.azure.com) 내에서 이러한 지침의 간결한 버전을 읽을 수 있습니다.  **Active Directory > 엔터프라이즈 응용 프로그램** 섹션에서 이 앱을 추가한 후에는 **Single Sign-On** 탭을 클릭하고 맨 아래에 있는 **구성** 섹션을 통해 포함된 설명서에 액세스하면 됩니다. 포함된 설명서 기능에 대한 자세한 내용은 [Azure AD 포함된 설명서]( https://go.microsoft.com/fwlink/?linkid=845985)에서 확인할 수 있습니다.
@@ -196,9 +189,9 @@ Front에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 �
 
     a. **이름** 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
+    나. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
 
-    c. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
+    다. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -245,7 +238,7 @@ Front에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 �
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 <!--Image references-->
 
@@ -260,5 +253,4 @@ Front에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 �
 [201]: ./media/active-directory-saas-front-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-front-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-front-tutorial/tutorial_general_203.png
-
 

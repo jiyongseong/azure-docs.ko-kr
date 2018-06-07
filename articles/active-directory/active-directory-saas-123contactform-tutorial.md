@@ -1,10 +1,10 @@
 ---
-title: "자습서: 123ContactForm과 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory 및 123ContactForm 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: 123ContactForm과 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory 및 123ContactForm 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: 5211910a-ab96-4709-959a-524c4d57c43e
 ms.service: active-directory
 ms.workload: identity
@@ -13,13 +13,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/23/2017
 ms.author: jeedes
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 7c69630688e4bcd68ab3b4ee6d9fdb0e0c46d04b
-ms.openlocfilehash: 3a99f0841c3e0d973168991f5dbee40e54c1d054
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/24/2017
-
-
+ms.openlocfilehash: 5f7ad606fc8ee394125300a55dc0586a055a33be
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34341433"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-123contactform"></a>자습서: 123ContactForm과 Azure Active Directory 통합
 
@@ -31,7 +30,7 @@ ms.lasthandoff: 06/24/2017
 - 사용자가 해당 Azure AD 계정으로 123ContactForm에 자동으로 로그온(Single Sign-on)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +58,7 @@ Azure AD와 123ContactForm 통합을 구성하려면 갤러리의 123ContactForm
 
 **갤러리에서 123ContactForm을 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Active Directory][1]
 
@@ -88,11 +87,11 @@ Single Sign-On이 작동하려면 Azure AD에서 Azure AD 사용자에 해당하
 
 123ContactForm에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구성 요소를 완료해야 합니다.
 
-1. **[Azure AD Single Sign-On 구성](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
-2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
+1. **[Configuring Azure AD Single Sign-On](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
+2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On 테스트하는 데 사용합니다.
 3. **[123ContactForm 테스트 사용자 만들기](#creating-a-123contactform-test-user)** - Britta Simon의 Azure AD 표현과 연결되는 대응 사용자를 123ContactForm에 만듭니다.
 4. **[Azure AD 테스트 사용자 할당](#assigning-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Testing Single Sign-On](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
+5. **[Single Sign-On 테스트](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
 
 ### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -102,58 +101,58 @@ Single Sign-On이 작동하려면 Azure AD에서 Azure AD 사용자에 해당하
 
 1. Azure Portal의 **123ContactForm** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single Sign-On** 대화 상자에서 **모드**를 **SAML 기반 로그온**으로 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-on 구성](./media/active-directory-saas-123contactform-tutorial/tutorial_123contactform_samlbase.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-123contactform-tutorial/tutorial_123contactform_samlbase.png)
 
 3. **123ContactForm 도메인 및 URL** 섹션에서 **IDP 시작 모드**로 응용 프로그램을 구성하려는 경우 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-123contactform-tutorial/url1.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-123contactform-tutorial/url1.png)
 
     a. **식별자** 텍스트 상자에서 `https://www.123contactform.com/saml/azure_ad/<tenant_id>/metadata` 패턴을 사용하여 URL을 입력합니다.
 
-    b. **회신 URL** 텍스트 상자에 다음 패턴으로 URL을 입력합니다.`https://www.123contactform.com/saml/azure_ad/<tenant_id>/acs`
+    나. **회신 URL** 텍스트 상자에 다음 패턴으로 URL을 입력합니다.`https://www.123contactform.com/saml/azure_ad/<tenant_id>/acs`
 
 4. **SP** 시작 모드로 응용 프로그램을 구성하려는 경우 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-123contactform-tutorial/url2.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-123contactform-tutorial/url2.png)
 
     a. **고급 URL 설정 표시** 옵션을 클릭합니다.
 
-    b. **로그온 URL** 텍스트 상자에서 URL `https://www.123contactform.com/saml/azure_ad/<tenant_id>/sso`을 입력합니다.
+    나. **로그온 URL** 텍스트 상자에서 URL `https://www.123contactform.com/saml/azure_ad/<tenant_id>/sso`을 입력합니다.
 
     > [!NOTE] 
     > 이러한 값은 실제 값이 아닙니다. 자습서의 뒷부분에 설명된 실제 URL 및 식별자에서 이러한 값을 업데이트해야 합니다.
     
 5. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 메타데이터 파일을 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-123contactform-tutorial/tutorial_123contactform_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-123contactform-tutorial/tutorial_123contactform_certificate.png) 
 
 6. **저장** 단추를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-123contactform-tutorial/tutorial_general_400.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-123contactform-tutorial/tutorial_general_400.png)
 
 7. **123ContactForm** 쪽에서 Single Sign-On을 구성하려면 [https://www.123contactform.com/form-2709121/](https://www.123contactform.com/form-2709121/)로 이동하여 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-123contactform-tutorial/submit.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-123contactform-tutorial/submit.png) 
 
     a. **전자 메일** 텍스트 상자에 사용자의 메일 주소를 입력합니다. 예: **BrittaSimon@Contoso.com**.
 
-    b. **업로드**를 클릭하고 Azure Portal에서 다운로드한 메타데이터 XML 파일을 선택합니다.
+    나. **업로드**를 클릭하고 Azure Portal에서 다운로드한 메타데이터 XML 파일을 선택합니다.
 
-    c. **양식 제출**을 클릭합니다.
+    다. **양식 제출**을 클릭합니다.
 
 8. **Microsoft Azure AD - Single Sign-On - 앱 설정 구성**에서 다음 단계를 수행합니다.
     
-    ![Single Sign-on 구성](./media/active-directory-saas-123contactform-tutorial/url3.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-123contactform-tutorial/url3.png)
 
     a. **IDP 시작 모드**에서 응용 프로그램을 구성하려는 경우 인스턴스의 **식별자** 값을 복사하고 Azure Portal의 **123ContactForm 도메인 및 URL** 섹션에 있는 **식별자** 텍스트 상자에 붙여 넣습니다.
     
-    b. **IDP 시작 모드**에서 응용 프로그램을 구성하려는 경우 인스턴스의 **회신 URL** 값을 복사하고 Azure Portal의 **123ContactForm 도메인 및 URL** 섹션에 있는 **회신 URL** 텍스트 상자에 붙여 넣습니다.
+    나. **IDP 시작 모드**에서 응용 프로그램을 구성하려는 경우 인스턴스의 **회신 URL** 값을 복사하고 Azure Portal의 **123ContactForm 도메인 및 URL** 섹션에 있는 **회신 URL** 텍스트 상자에 붙여 넣습니다.
 
-    c. **SP 시작 모드**에서 응용 프로그램을 구성하려는 경우 인스턴스의 **로그온 URL** 값을 복사하고 Azure Portal의 **123ContactForm 도메인 및 URL** 섹션에 있는 **로그온 URL** 텍스트 상자에 붙여 넣습니다.
+    다. **SP 시작 모드**에서 응용 프로그램을 구성하려는 경우 인스턴스의 **로그온 URL** 값을 복사하고 Azure Portal의 **123ContactForm 도메인 및 URL** 섹션에 있는 **로그온 URL** 텍스트 상자에 붙여 넣습니다.
 
 > [!TIP]
 > 이제 앱을 설정하는 동안 [Azure Portal](https://portal.azure.com) 내에서 이러한 지침의 간결한 버전을 읽을 수 있습니다.  **Active Directory > 엔터프라이즈 응용 프로그램** 섹션에서 이 앱을 추가한 후에는 **Single Sign-On** 탭을 클릭하고 맨 아래에 있는 **구성** 섹션을 통해 포함된 설명서에 액세스하면 됩니다. 포함된 설명서 기능에 대한 자세한 내용은 [Azure AD 포함된 설명서]( https://go.microsoft.com/fwlink/?linkid=845985)에서 확인할 수 있습니다.
@@ -184,9 +183,9 @@ Single Sign-On이 작동하려면 Azure AD에서 Azure AD 사용자에 해당하
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -208,7 +207,7 @@ Single Sign-On이 작동하려면 Azure AD에서 Azure AD 사용자에 해당하
 
 2. 응용 프로그램 목록에서 **123ContactForm**을 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-123contactform-tutorial/tutorial_123contactform_app.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-123contactform-tutorial/tutorial_123contactform_app.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -234,7 +233,7 @@ Single Sign-On이 작동하려면 Azure AD에서 Azure AD 사용자에 해당하
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -251,5 +250,4 @@ Single Sign-On이 작동하려면 Azure AD에서 Azure AD 사용자에 해당하
 [201]: ./media/active-directory-saas-123contactform-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-123contactform-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-123contactform-tutorial/tutorial_general_203.png
-
 

@@ -3,7 +3,7 @@ title: "Java 웹앱에서 Azure Application Insights 원격 분석 필터링 | M
 description: "모니터링하지 않아도 되는 이벤트를 필터링하여 원격 분석 트래픽을 줄입니다."
 services: application-insights
 documentationcenter: 
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.service: application-insights
 ms.workload: tbd
@@ -11,13 +11,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 11/23/2016
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 9a3df0ad2483471023ebb954d613bc5cad8fb7bf
-ms.openlocfilehash: cd09b7c5d45d07a3fbcc5d6f0c02400dcd36d61b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/02/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: f9e061c010667bc18ac54e6546cc25339e9c0e3e
+ms.sourcegitcommit: e462e5cca2424ce36423f9eff3a0cf250ac146ad
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/01/2017
 ---
 # <a name="filter-telemetry-in-your-java-web-app"></a>Java 웹앱에서 원격 분석 필터링
 
@@ -264,4 +263,3 @@ ApplicationInsights.xml:
 ## <a name="next-steps"></a>다음 단계
 
 * [샘플링](app-insights-sampling.md) - 메트릭을 스큐하지 않는 대안으로 샘플링을 고려합니다.
-

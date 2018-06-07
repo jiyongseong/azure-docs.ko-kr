@@ -1,12 +1,12 @@
 ---
-title: "Azure CLI 1.0에서 Azure Docker VM 확장 사용 | Microsoft Docs"
-description: "Docker VM 확장을 사용하여 Azure에서 Resource Manager 템플릿을 사용하여 Docker 환경을 빠르고 안전하게 배포하는 방법에 대해 알아보세요."
+title: Azure CLI 1.0에서 Azure Docker VM 확장 사용 | Microsoft Docs
+description: Docker VM 확장을 사용하여 Azure에서 Resource Manager 템플릿을 사용하여 Docker 환경을 빠르고 안전하게 배포하는 방법에 대해 알아보세요.
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
-manager: timlt
-editor: 
-ms.assetid: 
+manager: jeconnoc
+editor: ''
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.devlang: na
 ms.topic: article
@@ -14,12 +14,11 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 05/11/2017
 ms.author: iainfou
+ms.openlocfilehash: 2f981a50887138660d26a9d011870a05f1270c94
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
 ms.translationtype: HT
-ms.sourcegitcommit: bfd49ea68c597b109a2c6823b7a8115608fa26c3
-ms.openlocfilehash: a3cbcf63533f4042dcd695e141655c5814bd7068
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="create-a-docker-environment-in-azure-using-the-docker-vm-extension-with-the-azure-cli-10"></a>Azure CLI 1.0에서 Docker VM 확장을 사용하여 Azure에서 Docker 환경 만들기
 Docker는 Linux(및 Windows)에서 컨테이너와 함께 빠르게 사용할 수 있는 인기 있는 컨테이너 관리 및 이미징 플랫폼입니다. Azure에는 필요에 맞게 Docker를 배포할 수 있는 다양한 방법이 있습니다. 이 문서는 Docker VM 확장 및 Azure Resource Manager 템플릿 사용에 중점을 두고 있습니다. 
@@ -37,9 +36,9 @@ Docker Machine 및 Azure Container Service 사용을 비롯한 다른 배포 방
 - [Azure CLI 2.0](dockerextension.md) - 리소스 관리 배포 모델용 차세대 CLI 
 
 ## <a name="azure-docker-vm-extension-overview"></a>Azure Docker VM 확장 개요
-Azure Docker VM 확장은 Linux 가상 컴퓨터(VM)에 Docker 데몬, Docker 클라이언트 및 Docker Compose를 설치하고 구성합니다. Azure Docker VM 확장을 사용하면 직접 Docker 호스트를 만들거나 Docker Machine을 사용하는 것보다 더 많은 제어와 가능을 사용할 수 있습니다. [Docker Compose](https://docs.docker.com/compose/overview/)와 같은 이러한 추가 기능은 Azure Docker VM 확장을 보다 강력한 개발자 또는 프로덕션 환경에 적합하도록 만들어 줍니다.
+Azure Docker VM 확장은 Linux 가상 머신(VM)에 Docker 데몬, Docker 클라이언트 및 Docker Compose를 설치하고 구성합니다. Azure Docker VM 확장을 사용하면 직접 Docker 호스트를 만들거나 Docker Machine을 사용하는 것보다 더 많은 제어와 가능을 사용할 수 있습니다. [Docker Compose](https://docs.docker.com/compose/overview/)와 같은 이러한 추가 기능은 Azure Docker VM 확장을 보다 강력한 개발자 또는 프로덕션 환경에 적합하도록 만들어 줍니다.
 
-Azure Resource Manager 템플릿은 환경의 전체 구조를 정의합니다. 템플릿을 사용하면 Docker 호스트 VM, 저장소, RBAC(역할 기반 액세스 제어) 및 진단과 같은 리소스를 만들고 구성할 수 있습니다. 이러한 템플릿을 다시 사용하여 일관된 방식으로 추가 배포를 만들 수 있습니다. Azure Resource Manager 및 템플릿에 대한 자세한 내용은 [Resource Manager 개요](../../azure-resource-manager/resource-group-overview.md)를 참조하세요. 
+Azure Resource Manager 템플릿은 환경의 전체 구조를 정의합니다. 템플릿을 사용하면 Docker 호스트 VM, 저장소, RBAC(역할 기반 Access Control) 및 진단과 같은 리소스를 만들고 구성할 수 있습니다. 이러한 템플릿을 다시 사용하여 일관된 방식으로 추가 배포를 만들 수 있습니다. Azure Resource Manager 및 템플릿에 대한 자세한 내용은 [Resource Manager 개요](../../azure-resource-manager/resource-group-overview.md)를 참조하세요. 
 
 ## <a name="deploy-a-template-with-the-azure-docker-vm-extension"></a>Azure Docker VM 확장을 사용하여 템플릿 배포
 기존의 빠른 시작 템플릿을 사용하여 Docker 호스트를 설치 및 구성하기 위해 Azure Docker VM 확장을 사용하는 Ubuntu VM을 만들겠습니다. 템플릿은 [Docker를 사용한 간단한 Ubuntu VM 배포](https://github.com/Azure/azure-quickstart-templates/tree/master/docker-simple-on-ubuntu)에서 볼 수 있습니다. 
@@ -199,7 +198,6 @@ Resource Manager 템플릿 사용에 대한 자세한 연습은 [Azure Resource 
 Azure의 추가적인 Docker 배포 옵션에 대한 자세한 내용을 읽어보세요.
 
 * [Azure 드라이버로 Docker Machine 사용](docker-machine.md)  
-* [Azure 가상 컴퓨터에서 다중 컨테이너 응용 프로그램 정의 및 실행을 위해 Docker 및 Compose 시작](docker-compose-quickstart.md)
+* [Azure 가상 머신에서 다중 컨테이너 응용 프로그램 정의 및 실행을 위해 Docker 및 Compose 시작](docker-compose-quickstart.md)
 * [Azure 컨테이너 서비스 클러스터 배포](../../container-service/dcos-swarm/container-service-deployment.md)
-
 

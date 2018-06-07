@@ -4,7 +4,7 @@ description: "셀프 서비스 응용 프로그램 액세스를 활성화하여 
 services: active-directory
 documentationcenter: 
 author: ajamess
-manager: femila
+manager: mtillman
 ms.assetid: 
 ms.service: active-directory
 ms.workload: identity
@@ -14,14 +14,12 @@ ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
 ms.reviewer: japere
+ms.openlocfilehash: 760234d0d36bc140e3b441d7326083407de726b0
+ms.sourcegitcommit: d87b039e13a5f8df1ee9d82a727e6bc04715c341
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 08a05a70d976104d4e0a37b0a0dd15042b0212d8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/21/2018
 ---
-
 # <a name="how-to-use-self-service-application-access"></a>셀프 서비스 응용 프로그램 액세스를 사용하는 방법
 
 사용자가 액세스 패널에서 응용 프로그램을 셀프 검색할 수 있도록 하려면 먼저 사용자가 셀프 검색을 수행하고 액세스 권한을 요청할 수 있게 하려는 모든 응용 프로그램에 대해 **셀프 서비스 응용 프로그램 액세스**를 사용하도록 설정해야 합니다.
@@ -50,7 +48,7 @@ ms.lasthandoff: 07/21/2017
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -86,4 +84,3 @@ ms.lasthandoff: 07/21/2017
 
 ## <a name="next-steps"></a>다음 단계
 [셀프 서비스 그룹 관리를 위한 Azure Active Directory 설정](active-directory-accessmanagement-self-service-group-management.md)
-

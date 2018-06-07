@@ -1,29 +1,27 @@
 ---
-title: "Azure Linux VM 크기 - GPU | Microsoft Docs"
-description: "Azure의 Linux 가상 컴퓨터에 사용할 수 있는 다양한 GPU 최적화 크기를 나열합니다."
+title: Azure Linux VM 크기 - GPU | Microsoft Docs
+description: Azure의 Linux 가상 머신에 사용할 수 있는 다양한 GPU 최적화 크기를 나열합니다. 이 시리즈의 크기에 대한 저장소 처리량 및 네트워크 대역폭뿐만 아니라 vCPU, 데이터 디스크 및 NIC의 수에 대한 정보를 제공합니다.
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: jonbeck7
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager,azure-service-management
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
-ms.date: 07/28/2017
+ms.date: 03/01/2018
 ms.author: jonbeck
+ms.openlocfilehash: c4704dd461ae96600fa812fdfe8d9b0e59e93d72
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: ec289cf53f2cfecd2744b739667ef831dafd59a4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/24/2018
 ---
-
-# <a name="gpu-linux-vm-sizes"></a>GPU Linux VM 크기
+# <a name="gpu-optimized-virtual-machine-sizes"></a>GPU 최적화 가상 머신 크기
 
 [!INCLUDE [virtual-machines-common-sizes-gpu](../../../includes/virtual-machines-common-sizes-gpu.md)]
 
@@ -36,7 +34,7 @@ ms.lasthandoff: 07/21/2017
 
 [!INCLUDE [virtual-machines-n-series-considerations](../../../includes/virtual-machines-n-series-considerations.md)]
 
-* Ubuntu NC VM에 최신 드라이버를 사용하는 X 서버 또는 기타 시스템을 설치하는 것은 권장하지 않습니다. NVIDIA GPU 드라이버를 설치하기 전에 최신 드라이버를 사용하지 않도록 설정 해야 합니다.  
+* Ubuntu NC VM에 `Nouveau` 드라이버를 사용하는 X 서버 또는 기타 시스템을 설치하지 않습니다. NVIDIA GPU 드라이버를 설치하기 전에 `Nouveau` 드라이버를 사용하지 않도록 설정해야 합니다.  
 
 ## <a name="other-sizes"></a>기타 크기
 - [범용](sizes-general.md)

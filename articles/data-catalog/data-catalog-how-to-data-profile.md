@@ -13,14 +13,13 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: data-catalog
-ms.date: 05/03/2017
+ms.date: 01/18/2018
 ms.author: spelluru
-translationtype: Human Translation
-ms.sourcegitcommit: 219dcbfdca145bedb570eb9ef747ee00cc0342eb
-ms.openlocfilehash: 1d825277b63e00d93136161d50d780daa95ea8a7
-ms.lasthandoff: 11/17/2016
-
-
+ms.openlocfilehash: 80181b729ffa6d6cbc2d17fe8a5ae8ee4e3d41ab
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="data-profile-data-sources"></a>데이터 원본 데이터 프로파일링
 ## <a name="introduction"></a>소개
@@ -35,7 +34,7 @@ ms.lasthandoff: 11/17/2016
 
 다음 데이터 원본은 데이터 프로파일링을 지원합니다.
 
-* SQL Server(Azure SQL DB 및 Azure SQL 데이터 웨어하우스 포함) 테이블 및 뷰
+* SQL Server(Azure SQL DB 및 Azure SQL Data Warehouse 포함) 테이블 및 뷰
 * Oracle 테이블 및 뷰
 * Teradata 테이블 및 뷰
 * Hive 테이블
@@ -93,4 +92,3 @@ ms.lasthandoff: 11/17/2016
 ## <a name="see-also"></a>참고 항목
 * [데이터 원본을 등록하는 방법](data-catalog-how-to-register.md)
 * [Azure 데이터 카탈로그 시작](data-catalog-get-started.md)
-

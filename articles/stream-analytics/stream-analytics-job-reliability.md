@@ -1,25 +1,20 @@
 ---
-title: "Azure Stream Analytics 작업과 관련한 서비스 중단 방지 | Microsoft Docs"
-description: "Stream Analytics 작업 업그레이드의 복원력을 높이기 위한 지침."
+title: Azure Stream Analytics 작업에서 서비스 중단 방지
+description: 이 문서는 Stream Analytics 작업 업그레이드의 복원력을 높이기 위한 지침을 설명합니다.
 services: stream-analytics
-documentationCenter: 
-authors: jeffstokes72
-manager: jhubbard
-editor: cgronlun
+author: jseb225
+manager: kfile
+ms.author: jeanb
+ms.reviewer: jasonh
 ms.service: stream-analytics
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: data-services
+ms.topic: conceptual
 ms.date: 03/28/2017
-ms.author: jeffstok
-translationtype: Human Translation
-ms.sourcegitcommit: d9dad6cff80c1f6ac206e7fa3184ce037900fc6b
-ms.openlocfilehash: de803447ec379f35b453890d92359a91f4fd8427
-ms.lasthandoff: 03/06/2017
-
+ms.openlocfilehash: 47ccfe99d2ee6576dbb70324eb383f52d2a1b2e7
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-
 # <a name="guarantee-stream-analytics-job-reliability-during-service-updates"></a>서비스 업데이트 도중 Stream Analytics 작업 안정성 보장
 
 완전히 관리되는 서비스가 되는 방법 중 하나는 새로운 서비스 기능 및 향상 기능을 빠른 속도로 도입하는 것입니다. 따라서 Stream Analytics는 매주(또는 더 자주) 서비스 업데이트 배포가 이루어질 수 있습니다. 얼마나 많은 테스트를 수행하든 관계없이 기존에 실행 중인 작업은 버그의 도입으로 인해 중단될 수 있는 위험이 있습니다. 중요한 스트리밍 처리 작업을 실행하는 고객은 이러한 위험을 방지해야 합니다. 고객이 이러한 위험을 줄이는 데 사용할 수 있는 메커니즘은 Azure의 **[지역 쌍](https://docs.microsoft.com/azure/best-practices-availability-paired-regions)** 모델입니다. 
@@ -33,4 +28,3 @@ Stream Analytics 업데이트 배포는 지역 쌍 집합에서 동시에 발생
 쌍을 이루는 지역에 대한 최신 정보는 **[가용성 및 쌍을 이루는 지역](https://docs.microsoft.com/azure/best-practices-availability-paired-regions)**에 대한 문서에 있습니다.
 
 고객은 두 지역 쌍 모두에 동일한 작업을 배포하는 것이 좋습니다. 또한 고객은 Stream Analytics의 내부 모니터링 기능 외에도 작업이 **둘 다** 프로덕션 작업인 것처럼 모니터링하는 것이 좋습니다. 중단이 발생한 이유가 Stream Analytics 서비스 업데이트 때문이라면 적절히 에스컬레이션하고 다운스트림 소비자를 정상 작업 출력으로 장애 조치(failover)합니다. 지원으로 에스컬레이션하면 지역 쌍이 새 배포의 영향을 받지 않게 되고 지역 쌍의 무결성이 유지됩니다.
-

@@ -1,13 +1,13 @@
 ---
-title: "Microsoft Azure의 Cloud Foundry에 첫 번째 앱 배포 | Microsoft Docs"
-description: "Azure의 Cloud Foundry에 응용 프로그램 배포"
+title: Microsoft Azure의 Cloud Foundry에 첫 번째 앱 배포 | Microsoft Docs
+description: Azure의 Cloud Foundry에 응용 프로그램 배포
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: seanmck
-manager: timlt
-editor: 
-tags: 
-keywords: 
+manager: jeconnoc
+editor: ''
+tags: ''
+keywords: ''
 ms.assetid: 8fa04a58-56ad-4e6c-bef4-d02c80d4b60f
 ms.service: virtual-machines-linux
 ms.devlang: NA
@@ -16,14 +16,12 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 06/14/2017
 ms.author: seanmck
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 4f68f90c3aea337d7b61b43e637bcfda3c98f3ea
-ms.openlocfilehash: a49b76e4fa0e0d5de7c0b7b758e8103a0a79a140
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
+ms.openlocfilehash: 5e7b321c9fc8f8568cd8109cea0ae877048d3663
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
-
 # <a name="deploy-your-first-app-to-cloud-foundry-on-microsoft-azure"></a>Microsoft Azure의 Cloud Foundry에 첫 번째 앱 배포
 
 [Cloud Foundry](http://cloudfoundry.org)는 Microsoft Azure에서 사용할 수 있는 인기 있는 오픈 소스 응용 프로그램 플랫폼입니다. 이 문서에서는 Azure 환경에서 Cloud Foundry의 응용 프로그램을 배포 및 관리하는 방법을 보여 줍니다.
@@ -37,7 +35,7 @@ Azure에 Cloud Foundry 환경을 만들기 위한 여러 가지 옵션이 있습
 - [BOSH](http://bosh.io) 디렉터, Cloud Foundry 환경의 배포를 조정하는 VM을 설정하여 [오픈 소스 Cloud Foundry 패키지를 직접 배포][oss-cf-bosh]합니다.
 
 > [!IMPORTANT] 
-> Azure Marketplace에서 PCF를 배포하는 경우 Pivotal 앱 관리자에 액세스하는 데 필요한 SYSTEMDOMAINURL 및 관리자 자격 증명을 적어 둡니다. 둘은 마켓플레이스 배포 가이드에 설명되어 있습니다. 이 자습서를 완료하는 데 필요합니다. 마켓플레이스 배포의 경우 SYSTEMDOMAINURL은 https://system.*ip-address*.cf.pcfazure.com 양식입니다.
+> Azure Marketplace에서 PCF를 배포하는 경우 Pivotal 앱 관리자에 액세스하는 데 필요한 SYSTEMDOMAINURL 및 관리자 자격 증명을 적어 둡니다. 둘은 마켓플레이스 배포 가이드에 설명되어 있습니다. 이 자습서를 완료하는 데 필요합니다. 마켓플레이스 배포의 경우 SYSTEMDOMAINURL은 https://system.*ip-address*.cf.pcfazure.com 형식입니다.
 
 ## <a name="connect-to-the-cloud-controller"></a>Cloud Controller에 연결
 

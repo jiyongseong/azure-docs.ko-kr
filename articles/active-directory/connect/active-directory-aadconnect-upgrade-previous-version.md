@@ -3,8 +3,8 @@ title: "Azure AD Connect: 이전 버전에서 업그레이드 | Microsoft Docs"
 description: "전체 업그레이드와 스윙 마이그레이션을 포함하여 최신 릴리스의 Azure Active Directory Connect로 업그레이드하는 여러 방법을 설명합니다."
 services: active-directory
 documentationcenter: 
-author: AndKjell
-manager: femila
+author: billmath
+manager: mtillman
 editor: 
 ms.assetid: 31f084d8-2b89-478c-9079-76cf92e6618f
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: Identity
 ms.date: 07/12/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 3716c7699732ad31970778fdfa116f8aee3da70b
-ms.openlocfilehash: 03de42352b92692a0fa5c6ee3f335592cb2b66c1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/30/2017
-
+ms.openlocfilehash: 4d431a9e0fab8d46b244fd40178ede594c095893
+ms.sourcegitcommit: f1c1789f2f2502d683afaf5a2f46cc548c0dea50
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/18/2018
 ---
 # <a name="azure-ad-connect-upgrade-from-a-previous-version-to-the-latest"></a>Azure AD Connect: 이전 버전에서 최신 버전으로 업그레이드
 이 항목에서는 Azure Active Directory(Azure AD) Connect 설치를 최신 릴리스로 업그레이드하는 데 사용할 수 있는 여러 가지 방법을 설명합니다. Azure AD Connect 릴리스를 최신 상태로 유지하는 것이 좋습니다. [스윙 마이그레이션](#swing-migration) 섹션에 설명된 단계는 상당한 구성 변경을 수행하는 경우에도 사용할 수 있습니다.
@@ -28,7 +27,7 @@ DirSync에서 업그레이드하려는 경우 대신 [Azure AD 동기화 도구(
 
 Azure AD Connect를 업그레이드하는 데 사용할 수 있는 몇 가지 전략이 있습니다.
 
-| 메서드 | 설명 |
+| 방법 | 설명 |
 | --- | --- |
 | [자동 업그레이드](active-directory-aadconnect-feature-automatic-upgrade.md) |빠른 설치를 사용하는 고객에게 가장 쉬운 방법입니다. |
 | [전체 업그레이드](#in-place-upgrade) |단일 서버가 있는 경우 동일한 서버에 설치된 항목에 대해 전체 업그레이드를 수행할 수 있습니다. |
@@ -48,6 +47,8 @@ Azure AD Connect를 업그레이드하는 데 사용할 수 있는 몇 가지 �
 기본 동기화 규칙을 변경한 경우 업그레이드 시 해당 규칙이 기본 구성으로 다시 설정됩니다. 업그레이드 간에 구성을 유지하려면 [기본 구성 변경에 대한 모범 사례](active-directory-aadconnectsync-best-practices-changing-default-configuration.md)에 설명된 대로 변경해야 합니다.
 
 현재 위치 업그레이드 중 도입된 변경 내용으로 인해 업그레이드가 완료된 후 특정 동기화 작업(전체 가져오기 단계 및 전체 동기화 단계 포함)이 실행되어야 할 수도 있습니다. 이러한 작업을 연기하려면 [업그레이드 후 전체 동기화를 연기하는 방법](#how-to-defer-full-synchronization-after-upgrade) 섹션을 참조하세요.
+
+Azure AD Connect를 비표준 커넥터(예: 일반 LDAP 커넥터 및 일반 SQL 커넥터)와 함께 사용하는 경우 현재 위치 업그레이드 후 [Synchronization Service Manager](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnectsync-service-manager-ui-connectors)에서 해당 커넥터 구성을 새로 고쳐야 합니다. 커넥터 구성을 새로 고치는 방법에 대한 자세한 내용은 [커넥터 버전 릴리스 내역 - 문제 해결](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnectsync-connector-version-history#troubleshooting) 문서 섹션을 참조하세요. 구성을 새로 고치지 않으면 커넥터에 대해 가져오기 및 내보내기 실행 단계가 올바르게 작동하지 않습니다. 응용 프로그램 이벤트 로그에 *"Assembly version in AAD Connector configuration ("X.X.XXX.X") is earlier than the actual version ("X.X.XXX.X") of "C:\Program Files\Microsoft Azure AD Sync\Extensions\Microsoft.IAM.Connector.GenericLdap.dll"*("AAD 커넥터 구성의 어셈블리 버전("XXXXX.X")이 C:\Program Files\Microsoft Azure AD Sync\Extensions\Microsoft.IAM.Connector.GenericLdap.dll의 실제 버전("X.X.XXX.X")보다 이전 버전입니다")라는 오류 메시지가 표시됩니다.
 
 ## <a name="swing-migration"></a>스윙 마이그레이션
 배포가 복잡하거나 개체가 많은 경우에는 라이브 시스템에서 전체 업그레이드를 수행하는 것이 적절하지 않을 수 있습니다. 일부 고객의 경우 처리하는 데 며칠이 걸리고 이 시간 동안 델타 변경이 처리되지 않습니다. 이 방법은 구성을 크게 변경하고 클라우드로 푸시하기 전에 시도하려는 경우에도 사용할 수 있습니다.
@@ -130,4 +131,3 @@ PowerShell을 사용하여 만든 사용자 지정 동기화 규칙을 이동할
 
 ## <a name="next-steps"></a>다음 단계
 [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)에 대해 자세히 알아봅니다.
-

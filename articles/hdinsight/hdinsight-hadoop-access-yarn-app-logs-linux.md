@@ -1,39 +1,35 @@
 ---
-title: "Linux 기반 HDInsight에서 Hadoop YARN 응용 프로그램 로그에 액세스 - Azure | Microsoft Docs"
-description: "명령줄과 웹 브라우저를 사용하여 Linux 기반 HDInsight(Hadoop) 클러스터에서 YARN 응용 프로그램 로그에 액세스하는 방법을 알아봅니다."
+title: Linux 기반 HDInsight에서 Hadoop YARN 응용 프로그램 로그에 액세스 - Azure | Microsoft Docs
+description: 명령줄과 웹 브라우저를 사용하여 Linux 기반 HDInsight(Hadoop) 클러스터에서 YARN 응용 프로그램 로그에 액세스하는 방법을 알아봅니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 tags: azure-portal
 author: Blackmist
-manager: jhubbard
+manager: cgronlun
 editor: cgronlun
 ms.assetid: 3ec08d20-4f19-4a8e-ac86-639c04d2f12e
 ms.service: hdinsight
 ms.custom: hdinsightactive
-ms.workload: big-data
-ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 05/04/2017
+ms.topic: conceptual
+ms.date: 03/22/2018
 ms.author: larryfr
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: f4d9336d0a7c4673f5cc2fa5ddf72476d3b9ece2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 67732b3a4c63408d8fc6ab5ed75b40a0eb043167
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="access-yarn-application-logs-on-linux-based-hdinsight"></a>Linux 기반 HDInsight에서 YARN 응용 프로그램 로그에 액세스
 
-Azure HDInsight의 Hadoop 클러스터에서 완료된 YARN (Yet Another Resource Negotiator) 응용 프로그램에 대한 로그에 액세스하는 방법에 대해 알아봅니다.
+Azure HDInsight의 Hadoop 클러스터에서 YARN(Yet Another Resource Negotiator) 응용 프로그램의 로그에 액세스하는 방법에 대해 알아봅니다.
 
 > [!IMPORTANT]
 > 이 문서의 단계에는 Linux를 사용하는 HDInsight 클러스터가 필요합니다. Linux는 HDInsight 버전 3.4 이상에서 사용되는 유일한 운영 체제입니다. 자세한 내용은 [HDInsight 구성 요소 버전 관리](hdinsight-component-versioning.md#hdinsight-windows-retirement)를 참조하세요.
 
 ## <a name="YARNTimelineServer"></a>YARN Timeline Server
 
-[YARN Timeline Server](http://hadoop.apache.org/docs/r2.4.0/hadoop-yarn/hadoop-yarn-site/TimelineServer.html) 는 두 가지 다른 인터페이스를 통해 완료된 응용 프로그램에 대한 제네릭 정보 및 프레임워크별 응용 프로그램 정보를 제공합니다. 구체적으로 살펴보면 다음과 같습니다.
+[YARN Timeline Server](http://hadoop.apache.org/docs/r2.7.3/hadoop-yarn/hadoop-yarn-site/TimelineServer.html) 는 두 가지 다른 인터페이스를 통해 완료된 응용 프로그램에 대한 제네릭 정보 및 프레임워크별 응용 프로그램 정보를 제공합니다. 구체적으로 살펴보면 다음과 같습니다.
 
 * 3.1.1.374 이상 버전에서는 HDInsight 클러스터에서 제네릭 응용 프로그램 정보를 저장하고 검색할 수 있습니다.
 * Timeline Server의 프레임워크별 응용 프로그램 정보 구성 요소는 HDInsight 클러스터에서 현재 사용할 수 없습니다.
@@ -89,4 +85,3 @@ YARN ResourceManager UI는 클러스터 헤드 노드에서 실행됩니다. Amb
 [T-file]:https://issues.apache.org/jira/secure/attachment/12396286/TFile%20Specification%2020081217.pdf
 [binary-format]:https://issues.apache.org/jira/browse/HADOOP-3315
 [YARN-concepts]:http://hortonworks.com/blog/apache-hadoop-yarn-concepts-and-applications/
-

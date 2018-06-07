@@ -5,5 +5,5 @@
 > 
 > 
 
-Azure에서 SQL Server를 사용하는 방법에 대한 자세한 내용은 [Azure 가상 컴퓨터의 SQL Server](../articles/virtual-machines/windows/sql/virtual-machines-windows-sql-server-iaas-overview.md)를 참조하세요.
+Azure에서 SQL Server를 사용하는 방법에 대한 자세한 내용은 [Azure 가상 머신의 SQL Server](../articles/virtual-machines/windows/sql/virtual-machines-windows-sql-server-iaas-overview.md)를 참조하세요.
 

@@ -14,13 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 09/08/2016
 ms.author: LADocs; padmavc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5b1b65e3d1066bea6958fa6461a157ee39fbe7dc
-ms.openlocfilehash: 514942b2552564f669d73b997a2d355ddb477b22
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/15/2017
-
-
+ms.openlocfilehash: 9462707db03ecfcc3d5186ce7ded8655ad3bdcc9
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="overview-b2b-scenarios-and-communication-with-the-enterprise-integration-pack"></a>개요: 엔터프라이즈 통합 팩을 사용한 B2B 시나리오 및 통신
 
@@ -76,5 +74,4 @@ Azure Logic Apps의 B2B 기능을 사용하는 [완벽하게 작동하는 샘플
 * [통합 계정 메타데이터](../logic-apps/logic-apps-enterprise-integration-metadata.md "통합 계정 메타데이터에 대해 알아보기")
 * [B2B 메시지 모니터링](logic-apps-monitor-b2b-message.md "B2B 메시지를 모니터링하는 방법에 대해 알아보기")
 * [OMS 포털에서 B2B 메시지 추적](logic-apps-track-b2b-messages-omsportal.md "OMS 포털에서 B2B 메시지를 추적하는 방법에 대해 알아보기")
-
 

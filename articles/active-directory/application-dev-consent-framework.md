@@ -4,7 +4,7 @@ description: "Azure AD 동의 프레임워크 작동 원리를 이해하여 Azur
 services: active-directory
 documentationcenter: 
 author: ajamess
-manager: femila
+manager: mtillman
 ms.assetid: 
 ms.service: active-directory
 ms.workload: identity
@@ -13,14 +13,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: cc9e81de9bf8a3312da834502fa6ca25e2b5834a
-ms.openlocfilehash: d63d4b6e9e230e814762aadbe57bb3971b129d95
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/11/2017
-
+ms.openlocfilehash: 596911ef5add643f622ba062c4a8df43105eac52
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
-
 # <a name="how-application-consent-works"></a>응용 프로그램 동의 작동 원리
 
 이 문서는 Azure AD 동의 프레임워크의 작동 방식을 이해하여 응용 프로그램을 보다 효과적으로 개발할 수 있도록 지원하기 위한 것입니다.
@@ -34,4 +32,3 @@ ms.lasthandoff: 04/11/2017
 
 ## <a name="next-steps"></a>다음 단계
 [AzureAD StackOverflow](http://stackoverflow.com/questions/tagged/azure-active-directory)
-

@@ -14,13 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/05/2017
 ms.author: v-sharos
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
 ms.openlocfilehash: cde355381b0d726a1ab340bc4230b2dc8f6e2c56
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="deploy-the-storsimple-snapshot-manager-mmc-snap-in"></a>StorSimple 스냅숏 관리자 MMC 스냅인 배포
 
@@ -216,5 +214,4 @@ StorSimple 스냅숏 관리자를 다시 설치하려면 [새 StorSimple 스냅�
 * StorSimple 스냅숏 관리자에 대해 자세히 알아보려면 [StorSimple 스냅숏 관리자란?](storsimple-what-is-snapshot-manager.md)으로 이동하세요.
 * StorSimple 스냅숏 관리자 사용자 인터페이스에 대해 자세히 알아보려면 [StorSimple 스냅숏 관리자 사용자 인터페이스](storsimple-use-snapshot-manager.md)로 이동하세요.
 * StorSimple 스냅숏 관리자를 사용하는 방법에 대해 자세히 알아보려면 [StorSimple 스냅숏 관리자를 사용하여 StorSimple 솔루션 관리](storsimple-snapshot-manager-admin.md)로 이동하세요.
-
 

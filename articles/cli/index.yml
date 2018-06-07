@@ -1,0 +1,34 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: CLI
+metadata:
+  title: CLI
+  meta.description: from-team
+  services: from-team
+  author: 
+  manager: from-team
+  layout: LandingPage
+  ms.assetid: 
+  ms.service: from-team
+  ms.tgt_pltfrm: from-team
+  ms.devlang: from-team
+  ms.topic: landing-page
+  ms.date: 09/15/2017
+  ms.author: from-team
+  ms.openlocfilehash: 1a8f1f5cb662c82763c8e33880f7286d237b436e
+  ms.sourcegitcommit: c47ef7899572bf6441627f76eb4c4ac15e487aec
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 05/04/2018
+abstract:
+  description: 
+sections:
+- title: 
+  items:
+  - type: list
+    style: cards
+    className: cardsA
+    items:
+    - html: <a href="/powershell/azure/overview"> <img height="48" width="48" src="https://docs.microsoft.com/media/logos/logo_powershell.svg" alt=""> <br><b>Azure PowerShell</b></a> <p>PowerShell에서 Azure 리소스 쉽게 관리</p>
+    - html: <a href="/cli/azure"> <img height="48" width="48" src="../media/index/azure_dev-7.svg" alt=""> <br><b>Azure CLI(명령줄 인터페이스)</b></a> <p>Azure 리소스를 관리하는 Azure의 명령줄 환경</p>
+    - html: <a href="https://adamdriscoll.gitbooks.io/powershell-tools-documentation/content/"> <img height="48" width="48" src="https://docs.microsoft.com/media/logos/logo_powershell.svg" alt=""> <br><b>PowerShell Tools for Visual Studio 2015</b></a> <p>Visual Studio에서 PowerShell 스크립트 및 모듈을 개발하고 디버그하기 위한 도구 집합</p>

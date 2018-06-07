@@ -15,11 +15,11 @@ ms.workload: na
 ms.date: 02/27/2017
 ms.author: alkohli
 ms.custom: H1Hack27Feb2017
-translationtype: Human Translation
-ms.sourcegitcommit: 94a25f63887aea4eb71420dbd7ddc536e9f8d644
 ms.openlocfilehash: 2ce65aa4efba735305208f7a6d761bc2814d1b8f
-ms.lasthandoff: 03/01/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-storsimple-device-manager-to-manage-access-control-records-for-storsimple-virtual-array"></a>StorSimple 장치 관리자를 사용하여 StorSimple 가상 배열에 대한 액세스 제어 레코드 관리
 
@@ -129,5 +129,4 @@ Azure Portal에서 **구성** 페이지를 사용하여 ACR을 삭제합니다.
 ## <a name="next-steps"></a>다음 단계
 
 * [볼륨 추가 및 ACR 구성](storsimple-virtual-array-deploy3-iscsi-setup.md#step-3-add-a-volume)에 대해 자세히 알아봅니다.
-
 

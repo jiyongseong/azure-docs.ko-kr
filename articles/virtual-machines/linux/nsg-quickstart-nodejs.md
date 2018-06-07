@@ -1,11 +1,11 @@
 ---
-title: "Azure CLI 1.0을 사용하여 Linux VM에 포트 열기 | Microsoft Docs"
-description: "Azure Resource Manager 배포 모드 및 Azure CLI 1.0을 사용하여 Linux VM에 대한 포트를 열고 끝점을 만드는 방법 알아보기"
+title: Azure CLI 1.0을 사용하여 Linux VM에 포트 열기 | Microsoft Docs
+description: Azure Resource Manager 배포 모드 및 Azure CLI 1.0을 사용하여 Linux VM에 대한 포트를 열고 끝점을 만드는 방법 알아보기
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 ms.service: virtual-machines-linux
 ms.devlang: na
 ms.topic: article
@@ -13,14 +13,12 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 05/11/2017
 ms.author: iainfou
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 97fa1d1d4dd81b055d5d3a10b6d812eaa9b86214
-ms.openlocfilehash: 847bc76c37ed929851712ba1c12463a01032e267
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/11/2017
-
+ms.openlocfilehash: 21b408f4347bf59154407ac005a449f797c67e94
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
-
 # <a name="opening-ports-and-endpoints-to-a-linux-vm-in-azure-using-the-azure-cli-10"></a>Azure CLI 1.0을 사용하여 Azure에서 Linux VM에 대한 끝점 및 포트 열기
 서브넷 또는 VM 네트워크 인터페이스에서 네트워크 필터를 만들어, Azure에서 VM(가상 컴퓨터)에 대한 포트를 열거나 끝점을 만듭니다. 인바운드 및 아웃바운드 트래픽을 모두 제어하는 이러한 필터를 트래픽을 수신하는 리소스에 연결된 네트워크 보안 그룹에 배치합니다. 포트 80에서 웹 트래픽의 일반적인 예제를 사용해 보겠습니다. 이 문서는 Azure CLI 1.0을 사용하여 VM에 포트를 여는 방법을 보여줍니다.
 
@@ -83,9 +81,9 @@ azure network vnet subnet set \
 ```
 
 ## <a name="more-information-on-network-security-groups"></a>네트워크 보안 그룹에 대한 자세한 정보
-여기서 빠른 명령을 사용하면 VM으로 트래픽이 이동되도록 할 수 있습니다. 네트워크 보안 그룹은 리소스에 대한 액세스를 제어하는 많은 기능과 세분성을 제공합니다. [여기서 네트워크 보안 그룹 및 ACL 규칙 만들기](../../virtual-network/virtual-networks-create-nsg-arm-cli.md)에 대해 자세히 읽어보세요.
+여기서 빠른 명령을 사용하면 VM으로 트래픽이 이동되도록 할 수 있습니다. 네트워크 보안 그룹은 리소스에 대한 액세스를 제어하는 많은 기능과 세분성을 제공합니다. [여기서 네트워크 보안 그룹 및 ACL 규칙 만들기](../../virtual-network/tutorial-filter-network-traffic-cli.md)에 대해 자세히 읽어보세요.
 
-네트워크 보안 그룹 및 ACL 규칙을 Azure Resource Manager 템플릿의 일부로 정의할 수도 있습니다. [템플릿을 사용하여 네트워크 보안 그룹 만들기](../../virtual-network/virtual-networks-create-nsg-arm-template.md)에 대해 자세히 읽어보세요.
+네트워크 보안 그룹 및 ACL 규칙을 Azure Resource Manager 템플릿의 일부로 정의할 수도 있습니다. [템플릿을 사용하여 네트워크 보안 그룹 만들기](../../virtual-network/template-samples.md)에 대해 자세히 읽어보세요.
 
 포트 전달을 사용하여 고유한 외부 포트를 VM의 내부 포트에 매핑해야 하는 경우 부하 분산 장치 및 NAT(네트워크 주소 변환) 규칙을 사용합니다. 예를 들어 TCP 포트 8080을 외부에 노출하고 트래픽이 VM의 TCP 포트 80으로 전달되도록 할 수 있습니다. [인터넷 연결 부하 분산 장치 만들기](../../load-balancer/load-balancer-get-started-internet-arm-cli.md)에 대해 자세히 알아볼 수 있습니다.
 
@@ -93,7 +91,6 @@ azure network vnet subnet set \
 이 예제에서는 HTTP 트래픽을 허용하는 간단한 규칙을 만들었습니다. 다음 문서에서 보다 자세한 환경을 만들기 위한 정보를 찾을 수 있습니다.
 
 * [Azure Resource Manager 개요](../../azure-resource-manager/resource-group-overview.md)
-* [NSG(네트워크 보안 그룹)란?](../../virtual-network/virtual-networks-nsg.md)
+* [NSG(네트워크 보안 그룹)란?](../../virtual-network/security-overview.md)
 * [부하 분산 장치에 대한 Azure Resource Manager 개요](../../load-balancer/load-balancer-arm.md)
-
 

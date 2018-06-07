@@ -1,11 +1,11 @@
 ---
-title: "Azure Active Directory 하이브리드 ID 디자인 고려 사항 - ID 요구 사항 확인 | Microsoft Docs"
-description: "하이브리드 ID 설계에 대한 요구 사항을 정의하도록 하는 회사의 비즈니스 요구를 식별합니다."
-documentationcenter: 
+title: Azure의 하이브리드 클라우드 ID 디자인에 대한 ID 요구 사항 | Microsoft Docs
+description: 하이브리드 ID 설계에 대한 요구 사항을 정의하도록 하는 회사의 비즈니스 요구를 식별합니다.
+documentationcenter: ''
 services: active-directory
 author: billmath
-manager: femila
-editor: 
+manager: mtillman
+editor: ''
 ms.assetid: de690978-84ef-41ad-9dfe-785722d343a1
 ms.service: active-directory
 ms.devlang: na
@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 07/18/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 1429bf0d06843da4743bd299e65ed2e818be199d
-ms.openlocfilehash: 60f1ec092635910ae8c98cc0197fdfbf358f01be
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/22/2017
-
+ms.custom: seohack1
+ms.openlocfilehash: 5741a5024b5f5105a71d9404191601b951a301e4
+ms.sourcegitcommit: d28bba5fd49049ec7492e88f2519d7f42184e3a8
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
 ---
 # <a name="determine-identity-requirements-for-your-hybrid-identity-solution"></a>하이브리드 ID 솔루션에 대한 ID 요구 사항 확인
 하이브리드 ID 솔루션을 설계하는 첫 번째 단계는 이 솔루션을 활용하는 비즈니스 조직에 대한 요구 사항을 결정하는 것입니다.  하이브리드 ID는 지원 역할(인증을 제공하여 다른 모든 클라우드 솔루션을 지원)로 시작하고 사용자에 대한 새 워크로드의 잠금을 해제하는 새롭고 흥미로운 기능을 계속하여 제공합니다.  사용자에 대해 채택하려는 이러한 워크로드 또는 서비스는 하이브리드 ID 설계에 대한 요구 사항을 결정합니다.  이러한 서비스와 워크로드는 온-프레미스 및 클라우드에서 하이브리드 ID를 활용해야 합니다.  
@@ -56,7 +56,7 @@ ms.lasthandoff: 03/22/2017
 * 이 통합이 현재 운영 중입니까 아니면 파일럿입니까?
 
 > [!NOTE]
-> 모든 앱 및 클라우드 서비스의 정확한 매핑이 되지 않은 경우 클라우드 앱 검색 도구를 사용할 수 있습니다. 이 도구는 조직의 모든 비즈니스 및 소비자 클라우드 앱에 가시성이 있는 IT 부서를 제공할 수 있습니다. 따라서 사용 패턴 및 클라우드 응용 프로그램에 액세스하는 사용자에 대한 세부 정보를 포함하여 조직의 섀도 IT를 더 쉽게 발견할 수 있습니다. 시작하려면 [클라우드 앱 검색](active-directory-cloudappdiscovery-whatis.md)을 참조하세요.
+> 모든 앱 및 클라우드 서비스의 정확한 매핑이 되지 않은 경우 클라우드 앱 검색 도구를 사용할 수 있습니다. 이 도구는 조직의 모든 비즈니스 및 소비자 클라우드 앱에 가시성이 있는 IT 부서를 제공할 수 있습니다. 따라서 사용 패턴 및 클라우드 응용 프로그램에 액세스하는 사용자에 대한 세부 정보를 포함하여 조직의 섀도 IT를 더 쉽게 발견할 수 있습니다. 시작하려면 [클라우드 앱 검색](manage-apps/cloud-app-discovery.md)을 참조하세요.
 > 
 > 
 
@@ -109,5 +109,4 @@ ms.lasthandoff: 03/22/2017
 
 ## <a name="see-also"></a>참고 항목
 [디자인 고려 사항 개요](active-directory-hybrid-identity-design-considerations-overview.md)
-
 

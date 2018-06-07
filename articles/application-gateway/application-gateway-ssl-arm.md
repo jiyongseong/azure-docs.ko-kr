@@ -1,268 +1,275 @@
 ---
-title: "SSL 오프로드 구성 - Azure Application Gateway - PowerShell | Microsoft Docs"
-description: "이 페이지에서는 Azure Resource Manager를 사용하여 SSL 오프로드와 함께 응용 프로그램 게이트웨이를 만드는 지침을 제공합니다."
-documentationcenter: na
+title: SSL 종료로 응용 프로그램 게이트웨이 만들기 - Azure PowerShell | Microsoft Docs
+description: Azure PowerShell을 사용하여 응용 프로그램 게이트웨이를 만들고 SSL 종료를 위한 인증서를 추가하는 방법을 알아봅니다.
 services: application-gateway
-author: georgewallace
-manager: timlt
+author: vhorne
+manager: jpconnock
 editor: tysonn
-ms.assetid: 3c3681e0-f928-4682-9d97-567f8e278e13
+tags: azure-resource-manager
 ms.service: application-gateway
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 01/23/2017
-ms.author: gwallace
+ms.date: 01/25/2018
+ms.author: victorh
+ms.openlocfilehash: 69010f6c057810af0f9bfcdadb6aeba1e498bf7f
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 8b857b4a629618d84f66da28d46f79c2b74171df
-ms.openlocfilehash: 21a45f8ac5b4cb5fd0f5513fb43f7ca263977393
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/04/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
-# <a name="configure-an-application-gateway-for-ssl-offload-by-using-azure-resource-manager"></a>Azure Resource Manager를 사용하여 SSL 오프로드에 대한 응용 프로그램 게이트웨이 구성
+# <a name="create-an-application-gateway-with-ssl-termination-using-azure-powershell"></a>Azure PowerShell을 사용하여 SSL 종료로 응용 프로그램 게이트웨이 만들기
 
-> [!div class="op_single_selector"]
-> * [Azure Portal](application-gateway-ssl-portal.md)
-> * [Azure Resource Manager PowerShell](application-gateway-ssl-arm.md)
-> * [Azure 클래식 PowerShell](application-gateway-ssl.md)
-> * [Azure CLI 2.0](application-gateway-ssl-cli.md)
+Azure PowerShell을 사용하여 백엔드 서버에 [가상 머신 확장 집합](../virtual-machine-scale-sets/virtual-machine-scale-sets-overview.md)을 사용하는 [SSL 종료](application-gateway-backend-ssl.md)용 인증서가 있는 [응용 프로그램 게이트웨이](application-gateway-introduction.md)를 만들 수 있습니다. 이 예제의 확장 집합에는 응용 프로그램 게이트웨이의 기본 백 엔드 풀에 추가된 두 개의 가상 머신 인스턴스가 있습니다. 
 
-Azure 응용 프로그램 게이트웨이 구성을 사용하여 웹 팜에서 발생하는 비용이 많이 드는 SSL(Secure Sockets Layer) 암호 해독 작업을 방지하기 위한 게이트웨이에서 SSL 세션을 종료합니다. SSL 오프로드는 또한 프런트 엔드 서버 설치 및 웹 응용 프로그램의 관리를 간소화합니다.
+이 문서에서는 다음 방법을 설명합니다.
 
-## <a name="before-you-begin"></a>시작하기 전에
+> [!div class="checklist"]
+> * 자체 서명된 인증서 만들기
+> * 네트워크 설정
+> * 인증서가 있는 응용 프로그램 게이트웨이 만들기
+> * 기본 백 엔드 풀을 사용하여 가상 머신 확장 집합 만들기
 
-1. 웹 플랫폼 설치 관리자를 사용하는 Azure PowerShell cmdlet의 최신 버전을 설치합니다. **다운로드 페이지** 의 [Windows PowerShell](https://azure.microsoft.com/downloads/)섹션에서 최신 버전을 다운로드하여 설치할 수 있습니다.
-2. 응용 프로그램 게이트웨이에 대한 가상 네트워크 및 서브넷을 만듭니다. 서브넷을 사용 중인 가상 컴퓨터 또는 클라우드 배포가 없는지 확인합니다. 응용 프로그램 게이트웨이는 가상 네트워크 서브넷에서 단독이어야 합니다.
-3. 응용 프로그램 게이트웨이를 사용하도록 구성된 서버가 존재하거나 가상 네트워크나 공용 IP/VIP가 할당된 해당 끝점이 만들어져야 합니다.
+Azure 구독이 아직 없는 경우 시작하기 전에 [체험 계정](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)을 만듭니다.
 
-## <a name="what-is-required-to-create-an-application-gateway"></a>응용 프로그램 게이트웨이를 만드는 데 필요한 것은 무엇입니까?
+이 자습서에는 Azure PowerShell 모듈 버전 3.6 이상이 필요합니다. `Get-Module -ListAvailable AzureRM`을 실행하여 버전을 찾습니다. 업그레이드해야 하는 경우 [Azure PowerShell 모듈 설치](/powershell/azure/install-azurerm-ps)를 참조하세요. 또한 PowerShell을 로컬로 실행하는 경우 `Connect-AzureRmAccount`를 실행하여 Azure와 연결해야 합니다.
 
-* **백 엔드 서버 풀:** 백 엔드 서버의 IP 주소 목록입니다. 나열된 IP 주소는 가상 네트워크 서브넷에 속하거나 공용 IP/VIP이어야 합니다.
-* **백 엔드 서버 풀 설정:** 모든 풀에는 포트, 프로토콜 및 쿠키 기반의 선호도와 같은 설정이 있습니다. 이러한 설정은 풀에 연결 및 풀 내의 모든 서버에 적용 됩니다.
-* **프런트 엔드 포트:** 이 포트는 응용 프로그램 게이트웨이에 열려 있는 공용 포트입니다. 트래픽이 이 포트에 도달하면, 백 엔드 서버 중의 하나로 리디렉트됩니다.
-* **수신기:** 수신기에는 프런트 엔드 포트, 프로토콜(Http 또는 Https, 대/소문자 구분) 및 SSL 인증서 이름(SSL 오프로드를 구성하는 경우)이 있습니다.
-* **규칙:** 규칙은 수신기와 백 엔드 서버 풀을 바인딩하고 특정 수신기에 도달했을 때 트래픽이 이동되는 백 엔드 서버 풀을 정의합니다. 현재는 *기본* 규칙만 지원 됩니다. *기본* 규칙은 라운드 로빈 부하 분산입니다.
+## <a name="create-a-self-signed-certificate"></a>자체 서명된 인증서 만들기
 
-**추가 구성 정보**
+프로덕션에 사용하려면 신뢰할 수 있는 공급자가 서명한 유효한 인증서를 가져와야 합니다. 이 자습서에서는 [New-SelfSignedCertificate](https://docs.microsoft.com/powershell/module/pkiclient/new-selfsignedcertificate)를 사용하여 자체 서명된 인증서를 만듭니다. [Export-PfxCertificate](https://docs.microsoft.com/powershell/module/pkiclient/export-pfxcertificate)을 인증서에서 pfx 파일을 내보내도록 반환된 지문과 함께 사용할 수 있습니다.
 
-SSL 인증서 구성에서 **HttpListener** 의 프로토콜은 *Https* (대/소문자 구분)로 바꿔야 합니다. **SslCertificate** 요소는 SSL 인증서에 대해 구성된 변수 값과 함께 **HttpListener**에 추가됩니다. 프런트 엔드 포트는 443으로 업데이트되어야 합니다.
+```powershell
+New-SelfSignedCertificate `
+  -certstorelocation cert:\localmachine\my `
+  -dnsname www.contoso.com
+```
 
-**쿠키 기반 선호도를 사용하도록 설정**: 응용 프로그램 게이트웨이는 클라이언트 세션의 요청이 항상 웹 팜에 있는 동일한 VM으로 전송되도록 구성될 수 있습니다. 게이트웨이에서 트래픽을 적절하게 지시할 수 있는 세션 쿠키를 삽입하면 이 시나리오가 완료됩니다. 쿠키 기반 선호도를 사용하려면 **BackendHttpSettings** 요소에서 **CookieBasedAffinity**를 *Enabled*로 설정합니다.
+다음과 같은 결과가 표시됩니다.
+
+```
+PSParentPath: Microsoft.PowerShell.Security\Certificate::LocalMachine\my
+
+Thumbprint                                Subject
+----------                                -------
+E1E81C23B3AD33F9B4D1717B20AB65DBB91AC630  CN=www.contoso.com
+```
+
+지문을 사용하여 pfx 파일을 만듭니다.
+
+```powershell
+$pwd = ConvertTo-SecureString -String "Azure123456!" -Force -AsPlainText
+Export-PfxCertificate `
+  -cert cert:\localMachine\my\E1E81C23B3AD33F9B4D1717B20AB65DBB91AC630 `
+  -FilePath c:\appgwcert.pfx `
+  -Password $pwd
+```
+
+## <a name="create-a-resource-group"></a>리소스 그룹 만들기
+
+리소스 그룹은 Azure 리소스가 배포 및 관리되는 논리적 컨테이너입니다. [New-AzureRmResourceGroup](/powershell/module/azurerm.resources/new-azurermresourcegroup)으로 *myResourceGroupAG*라는 Azure 리소스 그룹을 만듭니다. 
+
+```powershell
+New-AzureRmResourceGroup -Name myResourceGroupAG -Location eastus
+```
+
+## <a name="create-network-resources"></a>네트워크 리소스 만들기
+
+[New-AzureRmVirtualNetworkSubnetConfig](/powershell/module/azurerm.network/new-azurermvirtualnetworksubnetconfig)를 사용하여 *myBackendSubnet* 및 *myAGSubnet*이라는 서브넷을 구성합니다. 서브넷 구성으로 [New-AzureRmVirtualNetwork](/powershell/module/azurerm.network/new-azurermvirtualnetwork)를 사용하여 *myVNet*이라는 가상 네트워크를 만듭니다. 마지막으로 [New-AzureRmPublicIpAddress](/powershell/module/azurerm.network/new-azurermpublicipaddress)를 사용하여 *myAGPublicIPAddress*라는 공용 IP 주소를 만듭니다. 이러한 리소스는 응용 프로그램 게이트웨이 및 연결된 리소스에 대한 네트워크 연결을 제공하는 데 사용됩니다.
+
+```powershell
+$backendSubnetConfig = New-AzureRmVirtualNetworkSubnetConfig `
+  -Name myBackendSubnet `
+  -AddressPrefix 10.0.1.0/24
+$agSubnetConfig = New-AzureRmVirtualNetworkSubnetConfig `
+  -Name myAGSubnet `
+  -AddressPrefix 10.0.2.0/24
+$vnet = New-AzureRmVirtualNetwork `
+  -ResourceGroupName myResourceGroupAG `
+  -Location eastus `
+  -Name myVNet `
+  -AddressPrefix 10.0.0.0/16 `
+  -Subnet $backendSubnetConfig, $agSubnetConfig
+$pip = New-AzureRmPublicIpAddress `
+  -ResourceGroupName myResourceGroupAG `
+  -Location eastus `
+  -Name myAGPublicIPAddress `
+  -AllocationMethod Dynamic
+```
 
 ## <a name="create-an-application-gateway"></a>응용 프로그램 게이트웨이 만들기
 
-Azure 클래식 배포 모델 및 Azure Resource Manager 간의 차이점은 응용 프로그램 게이트웨이를 만드는 순서와 구성할 항목입니다.
+### <a name="create-the-ip-configurations-and-frontend-port"></a>IP 구성 및 프론트 엔드 포트 만들기
 
-Resource Manager를 사용하면 응용 프로그램 게이트웨이의 모든 구성 요소가 개별적으로 구성된 후 응용 프로그램 게이트웨이 리소스를 만드는 데 사용됩니다.
-
-다음은 응용 프로그램 게이트웨이를 만드는 데 필요한 단계입니다.
-
-1. 리소스 관리자에 대한 리소스 그룹 만들기
-2. 응용 프로그램 게이트웨이에 대한 가상 네트워크, 서브넷 및 공용 IP 만들기
-3. 응용 프로그램 게이트웨이 구성 개체 만들기
-4. 응용 프로그램 게이트웨이 리소스 만들기
-
-## <a name="create-a-resource-group-for-resource-manager"></a>리소스 관리자에 대한 리소스 그룹 만들기
-
-Azure 리소스 관리자 cmdlet을 사용하려면 PowerShell 모드로 전환해야 합니다. 자세한 내용은 [Resource Manager에서 Windows PowerShell](../powershell-azure-resource-manager.md)사용을 참조하세요.
-
-### <a name="step-1"></a>1단계
+[New-AzureRmApplicationGatewayIPConfiguration](/powershell/module/azurerm.network/new-azurermapplicationgatewayipconfiguration)을 사용하여 이전에 응용 프로그램 게이트웨이에 만든 *myAGSubnet*을 연결합니다. [New-AzureRmApplicationGatewayFrontendIPConfig](/powershell/module/azurerm.network/new-azurermapplicationgatewayfrontendipconfig)를 사용하여 응용 프로그램 게이트웨이에 *myAGPublicIPAddress*를 할당합니다.
 
 ```powershell
-Login-AzureRmAccount
+$vnet = Get-AzureRmVirtualNetwork `
+  -ResourceGroupName myResourceGroupAG `
+  -Name myVNet
+$subnet=$vnet.Subnets[0]
+$gipconfig = New-AzureRmApplicationGatewayIPConfiguration `
+  -Name myAGIPConfig `
+  -Subnet $subnet
+$fipconfig = New-AzureRmApplicationGatewayFrontendIPConfig `
+  -Name myAGFrontendIPConfig `
+  -PublicIPAddress $pip
+$frontendport = New-AzureRmApplicationGatewayFrontendPort `
+  -Name myFrontendPort `
+  -Port 443
 ```
 
-### <a name="step-2"></a>2단계
+### <a name="create-the-backend-pool-and-settings"></a>백 엔드 풀 및 설정 만들기
 
-계정에 대한 구독을 확인합니다.
+[New-AzureRmApplicationGatewayBackendAddressPool](/powershell/module/azurerm.network/new-azurermapplicationgatewaybackendaddresspool)을 사용하여 응용 프로그램 게이트웨이에 대해 *appGatewayBackendPool*이라는 백 엔드 풀을 만듭니다. [New-AzureRmApplicationGatewayBackendHttpSettings](/powershell/module/azurerm.network/new-azurermapplicationgatewaybackendhttpsettings)를 사용하여 백 엔드 풀에 대한 설정을 구성합니다.
 
 ```powershell
-Get-AzureRmSubscription
+$defaultPool = New-AzureRmApplicationGatewayBackendAddressPool `
+  -Name appGatewayBackendPool 
+$poolSettings = New-AzureRmApplicationGatewayBackendHttpSettings `
+  -Name myPoolSettings `
+  -Port 80 `
+  -Protocol Http `
+  -CookieBasedAffinity Enabled `
+  -RequestTimeout 120
 ```
 
-자격 증명을 사용하여 인증하라는 메시지가 표시됩니다.
+### <a name="create-the-default-listener-and-rule"></a>기본 수신기 및 규칙 만들기
 
-### <a name="step-3"></a>3단계
+응용 프로그램 게이트웨이가 백엔드 풀로 트래픽을 적절히 라우팅하도록 설정하려면 수신기가 필요합니다. 이 예제에서는 루트 URL에서 HTTPS 트래픽을 수신하는 기본 수신기를 만듭니다. 
 
-사용할 Azure 구독을 선택합니다.
+[New-AzureRmApplicationGatewaySslCertificate](/powershell/module/azurerm.network/new-azurermapplicationgatewaysslcertificate)를 사용하여 인증서 개체를 만든 다음, 이전에 만든 프런트 엔드 구성, 프런트 엔드 포트 및 인증서가 있는 [New-AzureRmApplicationGatewayHttpListener](/powershell/module/azurerm.network/new-azurermapplicationgatewayhttplistener)를 사용하여 *mydefaultListener*라는 수신기를 만듭니다. 수신기에 들어오는 트래픽에 사용할 백 엔드 풀을 알려면 규칙이 필요합니다. [New-AzureRmApplicationGatewayRequestRoutingRule](/powershell/module/azurerm.network/new-azurermapplicationgatewayrequestroutingrule)을 사용하여 *rule1*이라는 기본 규칙을 만듭니다.
 
 ```powershell
-Select-AzureRmSubscription -Subscriptionid "GUID of subscription"
+$pwd = ConvertTo-SecureString `
+  -String "Azure123456!" `
+  -Force `
+  -AsPlainText
+$cert = New-AzureRmApplicationGatewaySslCertificate `
+  -Name "appgwcert" `
+  -CertificateFile "c:\appgwcert.pfx" `
+  -Password $pwd
+$defaultlistener = New-AzureRmApplicationGatewayHttpListener `
+  -Name mydefaultListener `
+  -Protocol Https `
+  -FrontendIPConfiguration $fipconfig `
+  -FrontendPort $frontendport `
+  -SslCertificate $cert
+$frontendRule = New-AzureRmApplicationGatewayRequestRoutingRule `
+  -Name rule1 `
+  -RuleType Basic `
+  -HttpListener $defaultlistener `
+  -BackendAddressPool $defaultPool `
+  -BackendHttpSettings $poolSettings
 ```
 
-### <a name="step-4"></a>4단계:
+### <a name="create-the-application-gateway-with-the-certificate"></a>인증서가 있는 응용 프로그램 게이트웨이 만들기
 
-리소스 그룹을 만듭니다. 기존 리소스 그룹을 사용하는 경우에는 이 단계를 건너뛰세요.
+필요한 지원 리소스를 만들었으니 [New-AzureRmApplicationGatewaySku](/powershell/module/azurerm.network/new-azurermapplicationgatewaysku)를 사용하여 *myAppGateway*라는 응용 프로그램 게이트웨이에 대한 매개 변수를 지정한 다음, 인증서와 [New-AzureRmApplicationGateway](/powershell/module/azurerm.network/new-azurermapplicationgateway)를 사용하여 만듭니다.
 
-```powershell
-New-AzureRmResourceGroup -Name appgw-rg -Location "West US"
+### <a name="create-the-application-gateway"></a>Application Gateway 만들기
+
+```azurepowershell-interactive
+$sku = New-AzureRmApplicationGatewaySku `
+  -Name Standard_Medium `
+  -Tier Standard `
+  -Capacity 2
+$appgw = New-AzureRmApplicationGateway `
+  -Name myAppGateway `
+  -ResourceGroupName myResourceGroupAG `
+  -Location eastus `
+  -BackendAddressPools $defaultPool `
+  -BackendHttpSettingsCollection $poolSettings `
+  -FrontendIpConfigurations $fipconfig `
+  -GatewayIpConfigurations $gipconfig `
+  -FrontendPorts $frontendport `
+  -HttpListeners $defaultlistener `
+  -RequestRoutingRules $frontendRule `
+  -Sku $sku `
+  -SslCertificates $cert
 ```
 
-Azure 리소스 관리자를 사용하려면 모든 리소스 그룹이 위치를 지정해야 합니다. 이 설정은 해당 리소스 그룹에서 리소스의 기본 위치로 사용됩니다. 응용 프로그램 게이트웨이를 만들기 위한 모든 명령이 동일한 리소스 그룹을 사용하는지 확인합니다.
+## <a name="create-a-virtual-machine-scale-set"></a>가상 머신 확장 집합 만들기
 
-위 예제에서는 **appgw-RG**라는 리소스 그룹과 **미국 서부**라는 위치를 만들었습니다.
+이 예제에서는 응용 프로그램 게이트웨이에서 백 엔드 풀에 대한 서버를 제공하도록 가상 머신 확장 집합을 만듭니다. IP 설정을 구성할 때 확장 집합을 백 엔드 풀에 할당합니다.
 
-## <a name="create-a-virtual-network-and-a-subnet-for-the-application-gateway"></a>응용 프로그램 게이트웨이에 대한 가상 네트워크 및 서브넷 만들기
-
-다음 예제에서는 Resource Manager를 사용하여 가상 네트워크를 만드는 방법을 보여 줍니다.
-
-### <a name="step-1"></a>1단계
-
-```powershell
-$subnet = New-AzureRmVirtualNetworkSubnetConfig -Name subnet01 -AddressPrefix 10.0.0.0/24
+```azurepowershell-interactive
+$vnet = Get-AzureRmVirtualNetwork `
+  -ResourceGroupName myResourceGroupAG `
+  -Name myVNet
+$appgw = Get-AzureRmApplicationGateway `
+  -ResourceGroupName myResourceGroupAG `
+  -Name myAppGateway
+$backendPool = Get-AzureRmApplicationGatewayBackendAddressPool `
+  -Name appGatewayBackendPool `
+  -ApplicationGateway $appgw
+$ipConfig = New-AzureRmVmssIpConfig `
+  -Name myVmssIPConfig `
+  -SubnetId $vnet.Subnets[1].Id `
+  -ApplicationGatewayBackendAddressPoolsId $backendPool.Id
+$vmssConfig = New-AzureRmVmssConfig `
+  -Location eastus `
+  -SkuCapacity 2 `
+  -SkuName Standard_DS2 `
+  -UpgradePolicyMode Automatic
+Set-AzureRmVmssStorageProfile $vmssConfig `
+  -ImageReferencePublisher MicrosoftWindowsServer `
+  -ImageReferenceOffer WindowsServer `
+  -ImageReferenceSku 2016-Datacenter `
+  -ImageReferenceVersion latest
+Set-AzureRmVmssOsProfile $vmssConfig `
+  -AdminUsername azureuser `
+  -AdminPassword "Azure123456!" `
+  -ComputerNamePrefix myvmss
+Add-AzureRmVmssNetworkInterfaceConfiguration `
+  -VirtualMachineScaleSet $vmssConfig `
+  -Name myVmssNetConfig `
+  -Primary $true `
+  -IPConfiguration $ipConfig
+New-AzureRmVmss `
+  -ResourceGroupName myResourceGroupAG `
+  -Name myvmss `
+  -VirtualMachineScaleSet $vmssConfig
 ```
 
-이 샘플은 주소 범위 10.0.0.0/24를 가상 네트워크를 만드는 데 사용할 서브넷 변수에 할당합니다.
+### <a name="install-iis"></a>IIS 설치
 
-### <a name="step-2"></a>2단계
-
-```powershell
-$vnet = New-AzureRmVirtualNetwork -Name appgwvnet -ResourceGroupName appgw-rg -Location "West US" -AddressPrefix 10.0.0.0/16 -Subnet $subnet
+```azurepowershell-interactive
+$publicSettings = @{ "fileUris" = (,"https://raw.githubusercontent.com/davidmu1/samplescripts/master/appgatewayurl.ps1"); 
+  "commandToExecute" = "powershell -ExecutionPolicy Unrestricted -File appgatewayurl.ps1" }
+$vmss = Get-AzureRmVmss -ResourceGroupName myResourceGroupAG -VMScaleSetName myvmss
+Add-AzureRmVmssExtension -VirtualMachineScaleSet $vmss `
+  -Name "customScript" `
+  -Publisher "Microsoft.Compute" `
+  -Type "CustomScriptExtension" `
+  -TypeHandlerVersion 1.8 `
+  -Setting $publicSettings
+Update-AzureRmVmss `
+  -ResourceGroupName myResourceGroupAG `
+  -Name myvmss `
+  -VirtualMachineScaleSet $vmss
 ```
 
-이 샘플은 접두사 10.0.0.0/16과 서브넷 10.0.0.0/24를 사용하여 미국 서부 지역에 리소스 그룹 **appgw-rg**에서 **appgwvnet**이라는 가상 네트워크를 만듭니다.
+## <a name="test-the-application-gateway"></a>응용 프로그램 게이트웨이 테스트
 
-### <a name="step-3"></a>3단계
+[Get-AzureRmPublicIPAddress](/powershell/module/azurerm.network/get-azurermpublicipaddress)를 사용하여 응용 프로그램 게이트웨이의 공용 IP 주소를 가져올 수 있습니다. 공용 IP 주소를 복사하여 브라우저의 주소 표시줄에 붙여넣습니다.
 
-```powershell
-$subnet = $vnet.Subnets[0]
+```azurepowershell-interactive
+Get-AzureRmPublicIPAddress -ResourceGroupName myResourceGroupAG -Name myAGPublicIPAddress
 ```
 
-이 샘플은 다음 단계를 위해 $subnet 변수에 서브넷 개체를 할당합니다.
+![보안 경고](./media/application-gateway-ssl-arm/application-gateway-secure.png)
 
-## <a name="create-a-public-ip-address-for-the-front-end-configuration"></a>프런트 엔드 구성에 대한 공용 IP 주소 만들기
+자체 서명된 인증서를 사용하는 경우 보안 경고를 받으려면 **세부 정보**, **웹 페이지로 이동**을 차례로 선택합니다. 그러면 보안 IIS 웹 사이트가 다음 예제와 같이 표시됩니다.
 
-```powershell
-$publicip = New-AzureRmPublicIpAddress -ResourceGroupName appgw-rg -name publicIP01 -location "West US" -AllocationMethod Dynamic
-```
-
-이 샘플은 미국 서부 지역에 리소스 그룹 **appgw-rg**에서 공용 IP 리소스 **publicIP01**을 만듭니다.
-
-## <a name="create-an-application-gateway-configuration-object"></a>응용 프로그램 게이트웨이 구성 개체 만들기
-
-### <a name="step-1"></a>1단계
-
-```powershell
-$gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name gatewayIP01 -Subnet $subnet
-```
-
-이 샘플은 **gatewayIP01**이라는 Application Gateway IP 구성을 만듭니다. 응용 프로그램 게이트웨이는 시작되면 구성된 서브넷에서 IP 주소를 선택하고 백 엔드 IP 풀의 IP 주소로 네트워크 트래픽을 라우팅합니다. 인스턴스마다 하나의 IP 주소를 사용합니다.
-
-### <a name="step-2"></a>2단계
-
-```powershell
-$pool = New-AzureRmApplicationGatewayBackendAddressPool -Name pool01 -BackendIPAddresses 134.170.185.46, 134.170.188.221,134.170.185.50
-```
-
-이 샘플은 IP 주소가 **134.170.185.46**, **134.170.188.221**, **134.170.185.50**인 **pool01**이라는 백 엔드 IP 주소 풀을 구성합니다. 이러한 값은 프런트 엔드 IP 끝점에서 들어오는 네트워크 트래픽을 수신하는 IP 주소입니다. 앞의 예제에서 IP 주소를 웹 응용 프로그램 끝점의 IP 주소로 대체합니다.
-
-### <a name="step-3"></a>3단계
-
-```powershell
-$poolSetting = New-AzureRmApplicationGatewayBackendHttpSettings -Name poolsetting01 -Port 80 -Protocol Http -CookieBasedAffinity Enabled
-```
-
-이 샘플은 백 엔드 풀에서 부하가 분산된 네트워크 트래픽에 대해 Application Gateway 설정 **poolsetting01**을 구성합니다.
-
-### <a name="step-4"></a>4단계
-
-```powershell
-$fp = New-AzureRmApplicationGatewayFrontendPort -Name frontendport01  -Port 443
-```
-
-이 샘플은 공용 IP 끝점에 대해 **frontendport01**이라는 프런트 엔드 IP 포트를 구성합니다.
-
-### <a name="step-5"></a>5단계
-
-```powershell
-$cert = New-AzureRmApplicationGatewaySslCertificate -Name cert01 -CertificateFile <full path for certificate file> -Password "<password>"
-```
-
-이 샘플은 SSL 연결에 사용된 인증서를 구성합니다. 인증서는 .pfx 형식으로 4~12자 사이의 암호이어야 합니다.
-
-### <a name="step-6"></a>6단계
-
-```powershell
-$fipconfig = New-AzureRmApplicationGatewayFrontendIPConfig -Name fipconfig01 -PublicIPAddress $publicip
-```
-
-이 샘플은 **fipconfig01**이라는 프런트 엔드 IP 구성을 만들고 프런트 엔드 IP 구성에 공용 IP 주소를 연결합니다.
-
-### <a name="step-7"></a>7단계
-
-```powershell
-$listener = New-AzureRmApplicationGatewayHttpListener -Name listener01  -Protocol Https -FrontendIPConfiguration $fipconfig -FrontendPort $fp -SslCertificate $cert
-```
-
-이 샘플은 **listener01**이라는 수신기를 만들고 프런트 엔드 IP 구성 및 인증서에 프런트 엔드 포트를 연결합니다.
-
-### <a name="step-8"></a>8단계
-
-```powershell
-$rule = New-AzureRmApplicationGatewayRequestRoutingRule -Name rule01 -RuleType Basic -BackendHttpSettings $poolSetting -HttpListener $listener -BackendAddressPool $pool
-```
-
-이 샘플은 **rule01**이라는 부하 분산 장치 라우팅 규칙을 만들고 부하 분산 장치 동작을 구성합니다.
-
-### <a name="step-9"></a>9단계
-
-```powershell
-$sku = New-AzureRmApplicationGatewaySku -Name Standard_Small -Tier Standard -Capacity 2
-```
-
-이 샘플은 응용 프로그램 게이트웨이의 인스턴스 크기를 구성합니다.
-
-> [!NOTE]
-> *InstanceCount* 의 기본값은 2이고, 최대값은 10입니다. *GatewaySize* 에 대한 기본값은 보통입니다. Standard_Small, Standard_Medium 및 Standard_Large 간에 선택할 수 있습니다.
-
-## <a name="create-an-application-gateway-by-using-new-azureapplicationgateway"></a>New-AzureApplicationGateway를 사용하여 응용 프로그램 게이트웨이 만들기
-
-```powershell
-$appgw = New-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg -Location "West US" -BackendAddressPools $pool -BackendHttpSettingsCollection $poolSetting -FrontendIpConfigurations $fipconfig  -GatewayIpConfigurations $gipconfig -FrontendPorts $fp -HttpListeners $listener -RequestRoutingRules $rule -Sku $sku -SslCertificates $cert
-```
-
-이 샘플은 이전 단계의 모든 구성 항목을 가진 응용 프로그램 게이트웨이를 만듭니다. 이 예제에서는 Application Gateway를 **appgwtest**라고 합니다.
-
-## <a name="get-application-gateway-dns-name"></a>응용 프로그램 게이트웨이 DNS 이름 가져오기
-
-게이트웨이가 생성되면 다음 단계는 통신에 대한 프런트 엔드를 구성하는 것입니다. 공용 IP를 사용할 때 Application Gateway는 식별 이름이 아닌 동적으로 할당된 DNS 이름이 필요합니다. 최종 사용자가 Application Gateway를 누를 수 있도록 하려면 CNAME 레코드를 사용하여 Application Gateway의 공용 끝점을 가리키도록 합니다. [Azure에서 사용자 지정 도메인 이름 구성](../cloud-services/cloud-services-custom-domain-name-portal.md). 이 작업을 수행하려면 Application Gateway에 연결된 PublicIPAddress 요소를 사용하여 Application Gateway 및 관련 IP/DNS 이름에 대한 세부 정보를 검색합니다. 응용 프로그램 게이트웨이의 DNS 이름은 두 개의 웹 응용 프로그램을 이 DNS 이름으로 가리키는 CNAME 레코드를 만드는 데 사용됩니다. A 레코드를 사용할 경우 응용 프로그램 게이트웨이 다시 시작 시 VIP가 변경될 수 있으므로 이는 권장되지 않습니다.
-
-
-```powershell
-Get-AzureRmPublicIpAddress -ResourceGroupName appgw-RG -Name publicIP01
-```
-
-```
-Name                     : publicIP01
-ResourceGroupName        : appgw-RG
-Location                 : westus
-Id                       : /subscriptions/<subscription_id>/resourceGroups/appgw-RG/providers/Microsoft.Network/publicIPAddresses/publicIP01
-Etag                     : W/"00000d5b-54ed-4907-bae8-99bd5766d0e5"
-ResourceGuid             : 00000000-0000-0000-0000-000000000000
-ProvisioningState        : Succeeded
-Tags                     : 
-PublicIpAllocationMethod : Dynamic
-IpAddress                : xx.xx.xxx.xx
-PublicIpAddressVersion   : IPv4
-IdleTimeoutInMinutes     : 4
-IpConfiguration          : {
-                                "Id": "/subscriptions/<subscription_id>/resourceGroups/appgw-RG/providers/Microsoft.Network/applicationGateways/appgwtest/frontendIP
-                            Configurations/frontend1"
-                            }
-DnsSettings              : {
-                                "Fqdn": "00000000-0000-xxxx-xxxx-xxxxxxxxxxxx.cloudapp.net"
-                            }
-```
+![응용 프로그램 게이트웨이의 기준 URL 테스트](./media/application-gateway-ssl-arm/application-gateway-iistest.png)
 
 ## <a name="next-steps"></a>다음 단계
 
-ILB(내부 부하 분산 장치)에서 사용되도록 응용 프로그램 게이트웨이를 구성하려면 [ILB(내부 부하 분산 장치)를 사용하여 응용 프로그램 게이트웨이 만들기](application-gateway-ilb.md)를 참조하세요.
+이 자습서에서는 다음 방법에 대해 알아보았습니다.
 
-보다 자세한 내용을 원한다면 일반적 부하 분산 옵션을 참조:
+> [!div class="checklist"]
+> * 자체 서명된 인증서 만들기
+> * 네트워크 설정
+> * 인증서가 있는 응용 프로그램 게이트웨이 만들기
+> * 기본 백 엔드 풀로 가상 머신 확장 집합 만들기
 
-* [Azure 부하 분산 장치](https://azure.microsoft.com/documentation/services/load-balancer/)
-* [Azure 트래픽 관리자](https://azure.microsoft.com/documentation/services/traffic-manager/)
-
-
+응용 프로그램 게이트웨이 및 관련 리소스에 대해 자세히 알아보려면 사용법 문서를 참조하세요.

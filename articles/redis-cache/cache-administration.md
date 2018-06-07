@@ -3,8 +3,8 @@ title: "Azure Redis Cache를 관리하는 방법 | Microsoft Docs"
 description: "Azure Redis Cache 다시 부팅 및 업데이트 예약과 같은 관리 작업을 수행하는 방법을 알아봅니다."
 services: redis-cache
 documentationcenter: na
-author: steved0x
-manager: douge
+author: wesmc7777
+manager: cfowler
 editor: tysonn
 ms.assetid: 8c915ae6-5322-4046-9938-8f7832403000
 ms.service: cache
@@ -13,14 +13,12 @@ ms.topic: article
 ms.tgt_pltfrm: cache-redis
 ms.workload: tbd
 ms.date: 07/05/2017
-ms.author: sdanie
-ms.translationtype: Human Translation
-ms.sourcegitcommit: bb794ba3b78881c967f0bb8687b1f70e5dd69c71
-ms.openlocfilehash: 3352fec59d7dfbfab9b0416992a60f11d0ec2402
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.author: wesmc
+ms.openlocfilehash: 37e7395a26ead737009ad9e285e9f88372b25d26
+ms.sourcegitcommit: 2a70752d0987585d480f374c3e2dba0cd5097880
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="how-to-administer-azure-redis-cache"></a>Azure Redis Cache를 관리하는 방법
 이 토픽에서는 [재부팅](#reboot) 및 Azure Redis Cache 인스턴스의 [업데이트 예약](#schedule-updates)과 같은 관리 작업을 수행하는 방법을 설명합니다.
@@ -89,7 +87,7 @@ ms.lasthandoff: 07/06/2017
 > 
 > 
 
-![업데이트 예약](./media/cache-administration/redis-schedule-updates.png)
+![업데이트를 예약](./media/cache-administration/redis-schedule-updates.png)
 
 유지 관리 기간을 지정하려면 원하는 요일을 선택하고 각 요일의 유지 관리 기간 시작 시간을 지정한 후 **확인**을 클릭합니다. 유지 관리 기간 시간은 UTC로 나타냅니다. 
 
@@ -123,5 +121,4 @@ ms.lasthandoff: 07/06/2017
 
 ## <a name="next-steps"></a>다음 단계
 * [Azure Redis Cache 프리미엄 계층](cache-premium-tier-intro.md) 기능에 대해 더 알아봅니다.
-
 

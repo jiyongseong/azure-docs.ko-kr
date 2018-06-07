@@ -1,10 +1,10 @@
 ---
-title: "자습서: Thoughtworks Mingle과 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory와 Thoughtworks Mingle 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Thoughtworks Mingle과 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory와 Thoughtworks Mingle 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.reviewer: joflore
 ms.assetid: 69d859d9-b7f7-4c42-bc8c-8036138be586
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/19/2017
 ms.author: jeedes
+ms.openlocfilehash: b621abe1fa6dac3b9f618b7bd2e31b2bdf964ac6
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
-ms.openlocfilehash: 268ae5affb88a718f68c08daa94fe7aba4a99c11
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-thoughtworks-mingle"></a>자습서: Thoughtworks Mingle과 Azure Active Directory 통합
 
@@ -31,7 +30,7 @@ Thoughtworks Mingle을 Azure AD와 통합하면 다음과 같은 이점이 제�
 - 사용자가 해당 Azure AD 계정으로 Thoughtworks Mingle에 자동으로 로그온(Single Sign-On)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +58,7 @@ Thoughtworks Mingle의 Azure AD 통합을 구성하려면 갤러리의 Thoughtwo
 
 **갤러리에서 Thoughtworks Mingle을 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -98,7 +97,7 @@ Thoughtworks Mingle에서 Azure AD Single Sign-On을 구성하고 테스트하�
 
 1. Azure Portal의 **Thoughtworks Mingle** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single Sign-On** 대화 상자에서 **모드**를 **SAML 기반 로그온**으로 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
@@ -133,7 +132,7 @@ Thoughtworks Mingle에서 Azure AD Single Sign-On을 구성하고 테스트하�
     
     a. 메타데이터 파일을 업로드하려면 **파일 선택**을 클릭합니다. 
 
-    b. **변경 내용 저장**을 클릭합니다.
+    나. **변경 내용 저장**을 클릭합니다.
 
 > [!TIP]
 > 이제 앱을 설정하는 동안 [Azure Portal](https://portal.azure.com) 내에서 이러한 지침의 간결한 버전을 읽을 수 있습니다.  **Active Directory > 엔터프라이즈 응용 프로그램** 섹션에서 이 앱을 추가한 후에는 **Single Sign-On** 탭을 클릭하고 맨 아래에 있는 **구성** 섹션을 통해 포함된 설명서에 액세스하면 됩니다. 포함된 설명서 기능에 대한 자세한 내용은 [Azure AD 포함된 설명서]( https://go.microsoft.com/fwlink/?linkid=845985)에서 확인할 수 있습니다.
@@ -164,9 +163,9 @@ Thoughtworks Mingle에서 Azure AD Single Sign-On을 구성하고 테스트하�
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -196,9 +195,9 @@ Azure AD 사용자가 로그인 할 수 있도록 Azure Active Directory 사용�
  
     a. 관련된 텍스트 상자에 프로비전할 유효한 Azure AD 계정의 **로그인 이름**, **표시 이름**, **암호 선택**, **암호 확인**을 입력합니다. 
 
-    b. **사용자 유형**으로 **전체 사용자**를 선택합니다.
+    나. **사용자 유형**으로 **전체 사용자**를 선택합니다.
 
-    c. **이 프로필 만들기**를 클릭합니다.
+    다. **이 프로필 만들기**를 클릭합니다.
 
 >[!NOTE]
 >다른 Thoughtworks Mingle 사용자 계정 생성 도구 또는 Thoughtworks Mingle이 제공한 API를 사용하여 AAD 사용자 계정을 프로비전할 수도 있습니다.
@@ -243,7 +242,7 @@ Azure AD 사용자가 로그인 할 수 있도록 Azure Active Directory 사용�
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -260,5 +259,4 @@ Azure AD 사용자가 로그인 할 수 있도록 Azure Active Directory 사용�
 [201]: ./media/active-directory-saas-thoughtworks-mingle-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-thoughtworks-mingle-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-thoughtworks-mingle-tutorial/tutorial_general_203.png
-
 

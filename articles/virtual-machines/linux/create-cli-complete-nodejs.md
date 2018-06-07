@@ -1,12 +1,11 @@
-
 ---
-title: "Azure CLI 1.0을 사용하여 전체 Linux 환경 만들기 | Microsoft Docs"
-description: "Azure CLI 1.0을 사용하여 저장소, Linux VM, 가상 네트워크 및 서브넷, 부하 분산 장치, NIC, 공용 IP, 네트워크 보안 그룹을 모두 처음부터 새로 만듭니다."
+title: Azure CLI 1.0을 사용하여 전체 Linux 환경 만들기 | Microsoft Docs
+description: Azure CLI 1.0을 사용하여 저장소, Linux VM, 가상 네트워크 및 서브넷, 부하 분산 장치, NIC, 공용 IP, 네트워크 보안 그룹을 모두 처음부터 새로 만듭니다.
 services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: iainfoulds
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
 ms.assetid: 4ba4060b-ce95-4747-a735-1d7c68597a1a
 ms.service: virtual-machines-linux
@@ -16,12 +15,11 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 02/09/2017
 ms.author: iainfou
+ms.openlocfilehash: 4a43e138d3497e01fe9e0e5c55a4a66adac767c6
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 201ccd523e49d638ace50fbc0ffdceb705b35473
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="create-a-complete-linux-environment-with-the-azure-cli-10"></a>Azure CLI 1.0을 사용하여 전체 Linux 환경 만들기
 이 문서에서는 개발 및 간단한 계산에 유용한 부하 분산 장치와 한 쌍의 VM을 사용하여 간단한 네트워크를 빌드해 보겠습니다. 인터넷 어디에서나 안전하게 실행되는 두 개의 Linux VM에 연결할 수 있을 때까지 프로세스를 명령별로 진행합니다. 그 후에는 좀 더 복잡한 네트워크 및 환경으로 넘어갈 수 있습니다.
@@ -168,7 +166,7 @@ azure network nic create -g myResourceGroup -l westeurope \
   -e "/subscriptions/########-####-####-####-############/resourceGroups/myResourceGroup/providers/Microsoft.Network/loadBalancers/myLoadBalancer/inboundNatRules/myLoadBalancerRuleSSH1"
 ```
 
-두 번째 NIC를 만듭니다. 다음 예제는 `myNic2`라는 NIC를 만듭니다.
+두 번째 NIC를 만듭니다. 다음 예제는 `myNic2`이라는 NIC를 만듭니다.
 
 ```azurecli
 azure network nic create -g myResourceGroup -l westeurope \
@@ -277,7 +275,7 @@ azure group export myResourceGroup
 azure config mode arm
 ```
 
-다음 예제에서 매개 변수 이름을 고유한 값으로 바꿉니다. 예제 매개 변수 이름에 `myResourceGroup`, `mystorageaccount` 및 `myVM`가 포함됩니다.
+다음 예제에서 매개 변수 이름을 고유한 값으로 바꿉니다. 예제 매개 변수 이름에 `myResourceGroup`, `mystorageaccount` 및 `myVM`이 포함됩니다.
 
 ## <a name="create-resource-groups-and-choose-deployment-locations"></a>리소스 그룹 만들기 및 배포 위치 선택
 Azure 리소스 그룹은 리소스 배포를 논리적으로 관리할 수 있는 구성 정보 및 메타데이터를 포함하는 논리적 배포 엔터티입니다. 다음 예제에서는 `westeurope` 위치에 `myResourceGroup`이라는 리소스 그룹을 만듭니다.
@@ -286,7 +284,7 @@ Azure 리소스 그룹은 리소스 배포를 논리적으로 관리할 수 있�
 azure group create --name myResourceGroup --location westeurope
 ```
 
-출력:
+출력
 
 ```azurecli                        
 info:    Executing command group create
@@ -315,7 +313,7 @@ azure storage account create \
   mystorageaccount
 ```
 
-출력:
+출력
 
 ```azurecli
 info:    Executing command storage account create
@@ -329,7 +327,7 @@ info:    storage account create command OK
 azure group show myResourceGroup --json | jq '.'
 ```
 
-출력:
+출력
 
 ```json
 {
@@ -373,7 +371,7 @@ export AZURE_STORAGE_CONNECTION_STRING="$(azure storage account connectionstring
 azure storage container list
 ```
 
-출력:
+출력
 
 ```azurecli
 info:    Executing command storage container list
@@ -415,7 +413,7 @@ json 옵션 `azure group show` 및 `jq`를 사용하여 리소스를 빌드하�
 azure group show myResourceGroup --json | jq '.'
 ```
 
-출력:
+출력
 
 ```json
 {
@@ -461,7 +459,7 @@ azure network vnet subnet create --resource-group myResourceGroup \
   --vnet-name myVnet --name mySubnet --address-prefix 192.168.1.0/24
 ```
 
-출력:
+출력
 
 ```azurecli
 info:    Executing command network vnet subnet create
@@ -547,7 +545,7 @@ info:    network public-ip create command OK
 azure group show myResourceGroup --json | jq '.'
 ```
 
-출력:
+출력
 
 ```json
 {
@@ -599,7 +597,7 @@ azure group show myResourceGroup --json | jq '.'
 azure network public-ip show myResourceGroup myPublicIP --json | jq '.'
 ```
 
-출력:
+출력
 
 ```json
 {
@@ -626,7 +624,7 @@ azure network lb create --resource-group myResourceGroup --location westeurope \
   --name myLoadBalancer
 ```
 
-출력:
+출력
 
 ```azurecli
 info:    Executing command network lb create
@@ -650,7 +648,7 @@ azure network lb frontend-ip create --resource-group myResourceGroup \
   --name myFrontEndPool
 ```
 
-출력:
+출력
 
 ```azurecli
 info:    Executing command network lb frontend-ip create
@@ -673,7 +671,7 @@ azure network lb address-pool create --resource-group myResourceGroup \
   --lb-name myLoadBalancer --name myBackEndPool
 ```
 
-출력:
+출력
 
 ```azurecli
 info:    Executing command network lb address-pool create
@@ -690,7 +688,7 @@ info:    network lb address-pool create command OK
 azure network lb show myResourceGroup myLoadBalancer --json | jq '.'
 ```
 
-출력:
+출력
 
 ```json
 {
@@ -738,7 +736,7 @@ azure network lb inbound-nat-rule create --resource-group myResourceGroup \
   --protocol tcp --frontend-port 4222 --backend-port 22
 ```
 
-출력:
+출력
 
 ```azurecli
 info:    Executing command network lb inbound-nat-rule create
@@ -775,7 +773,7 @@ azure network lb rule create --resource-group myResourceGroup \
   --backend-address-pool-name myBackEndPool
 ```
 
-출력:
+출력
 
 ```azurecli
 info:    Executing command network lb rule create
@@ -806,7 +804,7 @@ azure network lb probe create --resource-group myResourceGroup \
   --interval 15 --count 4
 ```
 
-출력:
+출력
 
 ```azurecli
 info:    Executing command network lb probe create
@@ -840,7 +838,7 @@ azure network lb show --resource-group myResourceGroup \
   --name myLoadBalancer --json | jq '.'
 ```
 
-출력:
+출력
 
 ```json
 {
@@ -970,7 +968,7 @@ azure network nic create --resource-group myResourceGroup --location westeurope 
   --lb-inbound-nat-rule-ids /subscriptions/########-####-####-####-############/resourceGroups/myResourceGroup/providers/Microsoft.Network/loadBalancers/myLoadBalancer/inboundNatRules/myLoadBalancerRuleSSH1
 ```
 
-출력:
+출력
 
 ```azurecli
 info:    Executing command network nic create
@@ -1003,7 +1001,7 @@ info:    network nic create command OK
 azure network nic show myResourceGroup myNic1 --json | jq '.'
 ```
 
-출력:
+출력
 
 ```json
 {
@@ -1106,9 +1104,9 @@ azure availset create --resource-group myResourceGroup --location westeurope
   --name myAvailabilitySet
 ```
 
-장애 도메인은 공통의 전원 및 네트워크 스위치를 공유하는 가상 컴퓨터 그룹을 정의합니다. 기본적으로 가용성 집합 안에 구성된 가상 컴퓨터는 최대 3개의 장애 도메인에 분산되어 있습니다. 이러한 장애 도메인 중 하나에서 발생한 하드웨어 문제가 앱을 실행 중인 모든 VM에 영향을 미치지 않는 것이 가장 좋습니다. Azure는 가용성 집합에 VM을 배치할 때 VM을 전체 장애 도메인에 자동으로 분산합니다.
+장애 도메인은 공통의 전원 및 네트워크 스위치를 공유하는 가상 머신 그룹을 정의합니다. 기본적으로 가용성 집합 안에 구성된 가상 머신은 최대 3개의 장애 도메인에 분산되어 있습니다. 이러한 장애 도메인 중 하나에서 발생한 하드웨어 문제가 앱을 실행 중인 모든 VM에 영향을 미치지 않는 것이 가장 좋습니다. Azure는 가용성 집합에 VM을 배치할 때 VM을 전체 장애 도메인에 자동으로 분산합니다.
 
-업그레이드 도메인은 동시에 재부팅할 수 있는 가상 컴퓨터 그룹과 기본 물리적 하드웨어를 나타냅니다. 업그레이드 도메인의 재부팅 순서는 계획된 유지 보수 중 순차적으로 진행되지 않을 수 있으며, 한 번에 하나의 업그레이드만 재부팅됩니다. 또한 Azure는 가용성 집합에 VM을 배치할 때 VM을 업그레이드 도메인에 자동으로 분산합니다.
+업그레이드 도메인은 동시에 재부팅할 수 있는 가상 머신 그룹과 기본 물리적 하드웨어를 나타냅니다. 업그레이드 도메인의 재부팅 순서는 계획된 유지 보수 중 순차적으로 진행되지 않을 수 있으며, 한 번에 하나의 업그레이드만 재부팅됩니다. 또한 Azure는 가용성 집합에 VM을 배치할 때 VM을 업그레이드 도메인에 자동으로 분산합니다.
 
 [VM의 가용성 관리](manage-availability.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)에 대한 자세한 내용을 참조하세요.
 
@@ -1142,7 +1140,7 @@ azure vm create \
   --admin-username azureuser
 ```
 
-출력:
+출력
 
 ```azurecli
 info:    Executing command vm create
@@ -1213,7 +1211,7 @@ azure vm create \
 azure vm show --resource-group myResourceGroup --name myVM1
 ```
 
-출력:
+출력
 
 ```azurecli
 info:    Executing command vm show
@@ -1291,4 +1289,3 @@ azure group deployment create --resource-group myNewResourceGroup \
 
 ## <a name="next-steps"></a>다음 단계
 이제 여러 네트워킹 구성 요소 및 VM을 사용할 준비가 되셨습니다. 이 샘플 환경에 사용하여 여기에 소개된 핵심 구성 요소로 응용 프로그램을 빌드할 수 있습니다.
-

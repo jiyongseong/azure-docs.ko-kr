@@ -1,25 +1,25 @@
 ---
-title: "Azure 마이크로 서비스 로컬로 배포 및 업그레이드 | Microsoft Docs"
-description: "로컬 서비스 패브릭 클러스터를 설정하고 기존 응용 프로그램을 거기에 배포한 다음 해당 응용 프로그램을 업그레이드하는방법을 알아봅니다."
+title: Azure 마이크로 서비스 로컬로 배포 및 업그레이드 | Microsoft Docs
+description: 로컬 서비스 패브릭 클러스터를 설정하고 기존 응용 프로그램을 거기에 배포한 다음 해당 응용 프로그램을 업그레이드하는방법을 알아봅니다.
 services: service-fabric
 documentationcenter: .net
 author: rwike77
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 60a1f6a5-5478-46c0-80a8-18fe62da17a8
 ms.service: service-fabric
 ms.devlang: dotNet
 ms.topic: get-started-article
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 07/13/2017
-ms.author: ryanwi;mikhegn
+ms.date: 11/03/2017
+ms.author: ryanwi
+ms.openlocfilehash: ca19b70e3651f72d6fe87fcb3cd2ace2eecf3402
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 359677972c7e1fa3f7435052021ddfae5b1ed85e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
+ms.locfileid: "34205249"
 ---
 # <a name="get-started-with-deploying-and-upgrading-applications-on-your-local-cluster"></a>로컬 클러스터에서 응용 프로그램 배포 및 업그레이드 시작
 Azure 서비스 패브릭 SDK에서는 전체 로컬 개발 환경을 포함하고 로컬 클러스터에서 응용 프로그램을 배포 및 관리하는 작업을 빠르게 시작하는 데 사용할 수 있습니다. 이 문서에서는 Windows PowerShell에서 로컬 클러스터를 만들고 기존 응용 프로그램을 거기에 배포한 다음 새 버전으로 해당 응용 프로그램을 업그레이드합니다.
@@ -125,7 +125,7 @@ SDK는 Windows PowerShell 스크립트 및 로컬 클러스터 관리자 시스�
    
     모든 서비스 패브릭 PowerShell 명령처럼 사용된 명령 집합은 로컬 또는 원격에 연결할 수 있는 모든 클러스터에 사용할 수 있습니다.
    
-    클러스터와의 상호 작용하는 보다 시각적인 방법의 경우 브라우저의 [http://localhost:19080/Explorer](http://localhost:19080/Explorer) 로 이동하여 웹 기반 서비스 패브릭 탐색기 도구를 사용할 수 있습니다.
+    클러스터와의 상호 작용하는 보다 시각적인 방법의 경우 브라우저의 [http://localhost:19080/Explorer](http://localhost:19080/Explorer)로 이동하여 웹 기반 서비스 패브릭 탐색기 도구를 사용할 수 있습니다.
    
     ![서비스 패브릭 탐색기에서 응용 프로그램 세부 정보 보기][sfx-service-overview]
    
@@ -149,7 +149,7 @@ SDK는 Windows PowerShell 스크립트 및 로컬 클러스터 관리자 시스�
     업그레이드가 시작되면 PowerShell에 다음 출력이 표시됩니다.
    
     ![PowerShell에서 업그레이드 진행률][ps-appupgradeprogress]
-3. 업그레이드를 진행하는 동안 서비스 패브릭 탐색기에서 해당 상태를 모니터링하는 작업이 쉬워집니다. 브라우저 창을 시작하고 [http://localhost:19080/Explorer](http://localhost:19080/Explorer)로 이동합니다. 왼쪽의 트리에서 **응용 프로그램**을 선택한 다음 **WordCount**, **패브릭:/WordCount**를 차례로 선택합니다. 필수 탭에서 클러스터의 업그레이드 도메인을 통해 진행될 때 업그레이드의 상태가 표시됩니다.
+3. 업그레이드를 진행하는 동안 서비스 패브릭 탐색기에서 해당 상태를 모니터링하는 작업이 쉬워집니다. 브라우저 창을 시작하고 [http://localhost:19080/Explorer](http://localhost:19080/Explorer)으로 이동합니다. 왼쪽의 트리에서 **응용 프로그램**을 선택한 다음 **WordCount**, **패브릭:/WordCount**를 차례로 선택합니다. 필수 탭에서 클러스터의 업그레이드 도메인을 통해 진행될 때 업그레이드의 상태가 표시됩니다.
    
     ![서비스 패브릭 탐색기에서 업그레이드 진행][sfx-upgradeprogress]
    
@@ -241,4 +241,3 @@ SDK는 Windows PowerShell 스크립트 및 로컬 클러스터 관리자 시스�
 [sfe-delete-application]: ./media/service-fabric-get-started-with-a-local-cluster/sfe-delete-application.png
 [cluster-setup-success-1-node]: ./media/service-fabric-get-started-with-a-local-cluster/cluster-setup-success-1-node.png
 [switch-cluster-mode]: ./media/service-fabric-get-started-with-a-local-cluster/switch-cluster-mode.png
-

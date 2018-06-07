@@ -12,38 +12,31 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: big-data
-ms.date: 06/29/2017
+ms.date: 01/09/2018
 ms.author: nitinme
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 09f24fa2b55d298cfbbf3de71334de579fbf2ecd
-ms.openlocfilehash: c5971a137d9081be8c5978f481ec42a1f91e5a56
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/08/2017
-
-
+ms.openlocfilehash: b93b9a801b3e5e1fd869cda7f3d67554e2d03195
+ms.sourcegitcommit: 8c3267c34fc46c681ea476fee87f5fb0bf858f9e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/09/2018
 ---
 # <a name="get-started-with-azure-data-lake-store-using-azure-cli-20"></a>Azure CLI 2.0을 사용하여 Azure Data Lake Store 시작
 > [!div class="op_single_selector"]
 > * [포털](data-lake-store-get-started-portal.md)
 > * [PowerShell](data-lake-store-get-started-powershell.md)
-> * [.NET SDK](data-lake-store-get-started-net-sdk.md)
-> * [Java SDK](data-lake-store-get-started-java-sdk.md)
-> * [REST API](data-lake-store-get-started-rest-api.md)
 > * [Azure CLI 2.0](data-lake-store-get-started-cli-2.0.md)
-> * [Node.JS](data-lake-store-manage-use-nodejs.md)
-> * [Python](data-lake-store-get-started-python.md)
 >
->
+> 
 
 Azure CLI 2.0을 사용하여 Azure Data Lake Store 계정을 만들고 폴더 만들기, 데이터 파일 업로드 및 다운로드, 계정 삭제 등의 기본 작업을 수행하는 방법에 대해 알아봅니다. Data Lake Store에 대한 자세한 내용은 [Data Lake Store 개요](data-lake-store-overview.md)를 참조하세요.
 
-Azure CLI 2.0은 Azure 리소스를 관리하기 위한 Azure의 새로운 명령줄 환경입니다. macOS, Linux 및 Windows에서 사용할 수 있습니다. 자세한 내용은 [Azure CLI 2.0 개요](https://docs.microsoft.com/cli/azure/overview)를 참조하세요. 또한 명령 및 구문 전체 목록은 [Azure Data Lake Store CLI 2.0 참조](https://docs.microsoft.com/cli/azure/dls)에서도 확인할 수 있습니다.
+Azure CLI 2.0은 Azure 리소스를 관리하기 위한 Azure의 새로운 명령줄 환경입니다. macOS, Linux 및 Windows에서 사용할 수 있습니다. 자세한 내용은 [Azure CLI 2.0 개요](https://docs.microsoft.com/cli/azure)를 참조하세요. 또한 명령 및 구문 전체 목록은 [Azure Data Lake Store CLI 2.0 참조](https://docs.microsoft.com/cli/azure/dls)에서도 확인할 수 있습니다.
 
 
 ## <a name="prerequisites"></a>필수 조건
 이 문서를 시작하기 전에 다음이 있어야 합니다.
 
-* **Azure 구독**. [Azure 무료 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
+* **Azure 구독**. [Azure 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
 
 * **Azure CLI 2.0** - 지침은 [Install Azure CLI 2.0 설치](https://docs.microsoft.com/cli/azure/install-azure-cli)를 참조하세요.
 
@@ -240,11 +233,7 @@ az dls account delete --account mydatalakestore
 메시지가 표시되면 **Y** 를 입력하여 계정을 삭제합니다.
 
 ## <a name="next-steps"></a>다음 단계
-
-* [Azure Data Lake Store CLI 2.0 참조](https://docs.microsoft.com/cli/azure/dls)
+* [빅 데이터 요구 사항에 Azure Data Lake Store 사용](data-lake-store-data-scenarios.md) 
 * [데이터 레이크 저장소의 데이터 보호](data-lake-store-secure-data.md)
-* [Azure 데이터 레이크 분석에 데이터 레이크 저장소 사용](../data-lake-analytics/data-lake-analytics-get-started-portal.md)
+* [Azure 데이터 레이크 분석에 Data Lake Store 사용](../data-lake-analytics/data-lake-analytics-get-started-portal.md)
 * [Azure HDInsight에 데이터 레이크 저장소 사용](data-lake-store-hdinsight-hadoop-use-portal.md)
-
-[azure-command-line-tools]: ../xplat-cli-install.md
-

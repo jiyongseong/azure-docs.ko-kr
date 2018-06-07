@@ -1,0 +1,67 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Azure Container Registry 설명서
+metadata:
+  title: Azure Container Registry 설명서 - 자습서 | Microsoft Docs
+  description: Azure Container Registry를 사용하면 모든 유형의 컨테이너 배포에 대한 이미지를 빌드하고 저장하며 관리할 수 있습니다. 이러한 빠른 시작, 자습서 및 샘플을 통해 Azure Container Registry를 사용하는 방법을 알아봅니다.
+  services: container-registry
+  author: czeumault
+  manager: carolz
+  ms.service: container-registry
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 07/26/2017
+  ms.author: carolz
+  ms.openlocfilehash: be041068388fffc0a5333370c76c4d6f59f318ba
+  ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 05/07/2018
+abstract:
+  description: Azure Container Registry를 사용하면 모든 유형의 컨테이너 배포에 대한 이미지를 빌드하고 저장하며 관리할 수 있습니다. 이러한 빠른 시작, 자습서 및 샘플을 통해 Azure Container Registry를 사용하는 방법을 알아봅니다.
+sections:
+- title: 5분 빠른 시작
+  items:
+  - type: paragraph
+    text: Azure Container Registry를 배포하는 방법을 알아봅니다.
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: https://docs.microsoft.com/media/common/i_cligeneric.svg
+      text: Azure CLI
+      href: /azure/container-registry/container-registry-get-started-azure-cli
+    - image:
+        src: https://docs.microsoft.com/media/common/i_portal.svg
+      text: Azure Portal
+      href: /azure/container-registry/container-registry-get-started-portal
+    - image:
+        src: https://docs.microsoft.com/media/logos/logo_powershell.svg
+      text: Azure PowerShell
+      href: /azure/container-registry/container-registry-get-started-powershell
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: 이러한 자습서를 사용하여 Azure Container Registry를 사용하는 방법을 알아봅니다.
+  - type: list
+    style: unordered
+    className: spaced noBullet
+    items:
+    - html: <a href="/azure/container-registry/container-registry-tutorial-quick-build">ACR 빌드를 사용하여 컨테이너 이미지 빌드(미리 보기)</a>
+    - html: <a href="/azure/container-registry/container-registry-tutorial-prepare-registry">컨테이너 레지스트리 지역에서 복제</a>
+    - html: <a href="/azure/container-instances/container-instances-tutorial-prepare-app">Azure Container Instances에서 Container Registry 사용</a>
+    - html: <a href="/azure/aks/tutorial-kubernetes-prepare-app">AKS(Azure Kubernetes Service)에서 Container Registry 사용</a>
+    - html: <a href="/azure/service-fabric/service-fabric-tutorial-create-container-images">Service Fabric을 사용하는 컨테이너 레지스트리</a>
+- title: 참고 자료
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: 명령줄
+      html: <p><a href="/cli/azure/acr">Azure CLI</a></p><p><a href="/powershell/module/azurerm.containerregistry">PowerShell</a></p>
+    - title: 언어
+      html: <p><a href="/dotnet/api/overview/azure/containerregistry">.NET</a></p><p><a href="/python/api/overview/azure/container-registry">Python</a></p><p><a href="/java/api/overview/azure/containerregistry">Java</a></p><p><a href="/javascript/api/overview/azure/container-registry">Node.js</a></p>
+    - title: REST (영문)
+      html: <p><a href="/rest/api/containerregistry">REST API 참조</a></p><p><a href="/azure/templates/microsoft.containerregistry/registries">Resource Manager 템플릿</a></p><p><a href="/azure/container-registry/container-registry-webhook-reference">웹후크 스키마</a></p>

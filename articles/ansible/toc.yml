@@ -1,0 +1,46 @@
+- name: Azure의 Ansible
+  href: ./index.yml
+- name: 개요
+  items:
+    - name: Azure의 Ansible 정보
+      href: ./ansible-overview.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: Ansible 설치 및 구성
+      href: /azure/virtual-machines/linux/ansible-install-configure
+      maintainContext: true
+    - name: Linux VM 만들기
+      href: /azure/virtual-machines/linux/ansible-create-vm
+      maintainContext: true
+- name: 자습서
+  items:
+    - name: 완전한 Linux VM 만들기
+      href: /azure/virtual-machines/linux/ansible-create-complete-vm
+      maintainContext: true
+    - name: Cloud Shell에서 플레이 북 실행
+      href: ./ansible-run-playbook-in-cloudshell.md
+      maintainContext: true
+    - name: 동적 인벤토리 관리
+      href: ./ansible-manage-azure-dynamic-inventories.md
+      maintainContext: true
+- name: 참고 자료
+  items:
+    - name: 플레이 북 역할
+      items:
+        - name: azure_module
+          href: 'https://galaxy.ansible.com/Azure/azure_modules/'
+        - name: azure_preview_module
+          href: 'https://galaxy.ansible.com/Azure/azure_preview_modules'
+    - name: 릴리스 및 기능
+      href: ./ansible-matrix.md
+    - name: Azure Container Instances
+      href: 'http://docs.ansible.com/ansible/latest/azure_rm_containerinstance_module.html'
+    - name: Azure 기능
+      href: 'http://docs.ansible.com/ansible/latest/azure_rm_functionapp_module.html'
+    - name: 부하 분산 장치
+      href: 'http://docs.ansible.com/ansible/latest/azure_rm_loadbalancer_module.html'
+    - name: 가상 머신
+      href: 'http://docs.ansible.com/ansible/latest/azure_rm_virtualmachine_module.html'
+    - name: Azure의 모든 모듈
+      href: 'http://docs.ansible.com/ansible/latest/list_of_cloud_modules.html#azure'

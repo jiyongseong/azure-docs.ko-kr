@@ -14,13 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 06/26/2017
 ms.author: manuaery
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
 ms.openlocfilehash: 857647e89b7ac5d9bc72bc4b2ace0ea7279353f9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="storsimple-locally-pinned-volumes-frequently-asked-questions-faq"></a>StorSimple 로컬로 고정된 볼륨: 질문과 대답(FAQ)
 ## <a name="overview"></a>개요
@@ -202,5 +200,4 @@ StorSimple 장치 관리자 서비스의 **작업** 블레이드에서 이러한
 **Q.** 클라우드 장비에 로컬로 고정된 볼륨을 사용하여 볼륨 컨테이너를 장애 조치할 수 있나요?
 
 **A.** 예, 할 수 있습니다. 로컬로 고정된 볼륨은 계층화된 볼륨으로 장애 조치됩니다. 자세한 내용은 [버전에 걸쳐 로컬로 고정된 볼륨의 장애 조치 및 DR](storsimple-8000-device-failover-disaster-recovery.md#common-considerations-for-device-failover)
-
 

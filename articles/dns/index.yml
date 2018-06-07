@@ -1,0 +1,96 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Azure DNS 설명서
+metadata:
+  title: Azure DNS 설명서
+  meta.description: Learn how to manage your DNS records using Azure Domain Name System. Documentation shows how to set up and manage DNS zones and records for domain names.
+  services: dns
+  author: KumudD
+  manager: jeconnoc
+  layout: LandingPage
+  ms.assetid: na
+  ms.service: dns
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 04/26/2018
+  ms.author: kumud
+  ms.openlocfilehash: bb18530a0925b88475d2c0979e4e83b46bb777ca
+  ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 05/03/2018
+abstract:
+  description: Azure DNS 사용 방법을 알아봅니다. 빠른 시작, 자습서, 샘플 등을 통해 도메인 이름에 대한 DNS 영역 및 레코드를 설정하고 관리하는 방법을 보여줍니다.
+sections:
+- title: 5분 빠른 시작
+  items:
+  - type: paragraph
+    text: 도메인 이름에 대한 DNS 영역 및 레코드를 만드는 방법을 알아봅니다.
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: https://docs.microsoft.com/en-us/media/common/i_portal.svg
+      text: Azure portal
+      href: /azure/dns/dns-getstarted-portal
+    - image:
+        src: https://docs.microsoft.com/en-us/media/logos/logo_powershell.svg
+      text: Azure PowerShell
+      href: /azure/dns/dns-getstarted-powershell
+    - image:
+        src: https://docs.microsoft.com/en-us/media/common/cli.svg
+      text: Azure CLI
+      href: /azure/dns/dns-getstarted-cli
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: 도메인 이름을 Azure DNS에 위임하고, Azure DNS를 사용하여 웹앱에 대한 사용자 지정 DNS 레코드를 만드는 방법을 알아봅니다.
+  - type: list
+    style: ordered
+    items:
+    - html: <a href="/azure/dns/dns-delegate-domain-azure-dns">Azure DNS에 도메인 위임</a>
+    - html: <a href="/azure/dns/dns-web-sites-custom-domain">웹앱에 대한 사용자 지정 DNS 레코드 만들기</a>
+- title: >
+    무료 Pluralsight 동영상 교육
+  items:
+  - type: list
+    style: cards
+    className: cardsFTitle
+    items:
+    - title: Microsoft Azure Networking 구현
+      href: https://app.pluralsight.com/library/courses/microsoft-azure-networking-implementing/table-of-contents
+      image:
+        src: https://docs.microsoft.com/media/logos/logo_pluralsight.svg
+        href: https://app.pluralsight.com/library/courses/microsoft-azure-networking-implementing/table-of-contents
+    - title: Microsoft Azure Networking Solutions 계획 및 설계
+      href: https://app.pluralsight.com/library/courses/planning-designing-microsoft-azure-network-solutions/table-of-contents
+      image:
+        src: https://docs.microsoft.com/media/logos/logo_pluralsight.svg
+        href: https://app.pluralsight.com/library/courses/planning-designing-microsoft-azure-network-solutions/table-of-contents
+    - title: AWS 관리자용 Microsoft Azure 관리
+      href: https://app.pluralsight.com/library/courses/azure-administration-aws-administrators/table-of-contents
+      image:
+        src: https://docs.microsoft.com/media/logos/logo_pluralsight.svg
+        href: https://app.pluralsight.com/library/courses/azure-administration-aws-administrators/table-of-contents
+- title: 샘플
+  items:
+  - type: paragraph
+    text: 일반 작업에 대한 스크립트 샘플입니다.
+  - type: list
+    style: unordered
+    className: spaced noBullet
+    items:
+    - html: <a href="/azure/dns/cli-samples">Azure CLI</a>
+- title: 참고 자료
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: 명령줄
+      html: <p><a href="/powershell/resourcemanager/azurerm.dns">PowerShell</a></p><p><a href="/cli/azure/network/traffic-manager">Azure CLI</a></p>
+    - title: 언어
+      html: <p><a href="/dotnet/api/microsoft.azure.management.dns.models">.NET</a></p><p><a href="/java/api/com.microsoft.azure.management.dns">Java</a></p><p><a href="http://azure.github.io/azure-sdk-for-node/azure-arm-dns/latest/">Node.js</a></p><p><a href="http://www.rubydoc.info/gems/azure_mgmt_dns/0.8.0">Ruby</a></p><p><a href="http://azure-sdk-for-python.readthedocs.io/en/latest/sample_azure-mgmt-dns.html">Python</a></p>
+    - title: REST (영문)
+      html: <p><a href="/rest/api/dns/">REST API 참조</a></p>

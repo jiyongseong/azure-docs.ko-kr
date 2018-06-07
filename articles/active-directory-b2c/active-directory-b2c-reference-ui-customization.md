@@ -1,86 +1,83 @@
 ---
-title: "Azure Active Directory B2C: 사용자 인터페이스(UI) 사용자 지정 | Microsoft Docs"
-description: "Azure Active Directory B2C에서 UI(사용자 인터페이스) 사용자 지정 기능의 항목"
+title: UI(사용자 인터페이스) 사용자 지정 - Azure AD B2C | Microsoft Docs
+description: Azure Active Directory B2C에서 UI(사용자 인터페이스) 사용자 지정 기능의 항목
 services: active-directory-b2c
-documentationcenter: 
-author: swkrish
-manager: mbaldwin
-editor: bryanla
-ms.assetid: 99f5a391-5328-471d-a15c-a2fafafe233d
+documentationcenter: ''
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 01/26/2017
-ms.author: swkrish
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 9ae7e129b381d3034433e29ac1f74cb843cb5aa6
-ms.openlocfilehash: 8e71a7462a0cbdbd177b088e6757c70eeef31fc7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/08/2017
-
-
+ms.date: 08/16/2017
+ms.author: davidmu
+ms.openlocfilehash: b202f30e5fb47bcd16f25c5961f8345dd0324139
+ms.sourcegitcommit: c47ef7899572bf6441627f76eb4c4ac15e487aec
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/04/2018
 ---
 # <a name="azure-active-directory-b2c-customize-the-azure-ad-b2c-user-interface-ui"></a>Azure Active Directory B2C: Azure AD B2C UI(사용자 인터페이스)를 사용자 지정
-사용자 환경은 소비자 지향 응용 프로그램에서 가장 중요합니다. 좋은 응용 프로그램과 훌륭한 응용 프로그램, 그저 활발한 소비자와 진정으로 참여하는 소비자 간의 차이점입니다. Azure AD(Azure Active Directory) B2C를 사용하면 픽셀을 완벽하게 제어하여 소비자 등록, 로그인(*아래 참고를 참조*), 프로필 편집 및 암호 재설정 페이지를 사용자 지정할 수 있습니다.
+
+사용자 환경은 고객 관련 응용 프로그램에서 가장 중요합니다.  브랜드의 모양과 느낌으로 사용자 환경을 만들어 고객 기반을 늘릴 수 있습니다. Azure AD B2C(Azure Active Directory B2C)를 사용하면 픽셀을 완벽하게 제어하여 등록, 로그인, 프로필 편집 및 암호 재설정 페이지를 사용자 지정할 수 있습니다.
 
 > [!NOTE]
-> 현재 로컬 계정 로그인 페이지, 해당 동반 암호 재설정 페이지 및 확인 메일은 이 문서에서 설명하는 메커니즘이 아닌 [회사 브랜딩 기능](../active-directory/active-directory-add-company-branding.md) 을 사용해야만 사용자 지정할 수 있습니다.
-> 
-> 
+> 이 문서에서 설명하는 페이지 UI 사용자 지정 기능은 로그인 전용 정책, 함께 제공되는 암호 재설정 페이지 및 확인 전자 메일에는 적용되지 않습니다.  이러한 기능은 대신 [회사 브랜딩 기능](../active-directory/customize-branding.md)을 사용합니다.
+>
+> 마찬가지로 사용자가 로그인하기 *전에* 프로필 정책 편집을 시작한 경우 이 사용자는 [회사 브랜드 기능](../active-directory/customize-branding.md)을 사용하여 사용자 지정 가능한 페이지로 리디렉션됩니다.
 
-이 문서에서는 다음에 대해 읽습니다.
+이 문서는 다음 항목을 설명합니다.
 
-* 페이지 UI(사용자 인터페이스) 사용자 지정 기능
-* 샘플 콘텐츠를 사용하여 페이지 UI 사용자 지정 기능을 테스트하는 데 도움이 되는 도구입니다.
-* 페이지의 각 형식에서 코어 UI 요소입니다.
+* 페이지 UI 사용자 지정 기능
+* 페이지 UI 사용자 지정 기능을 사용하기 위해 Azure Blob Storage에 HTML 콘텐츠를 업로드하기 위한 도구
+* CSS 스타일시트를 사용하여 사용자 지정할 수 있는 Azure AD B2C에서 사용되는 UI 요소
 * 이 기능을 실행할 때 모범 사례입니다.
 
 ## <a name="the-page-ui-customization-feature"></a>페이지 UI 사용자 지정 기능
-페이지 UI 사용자 지정 기능을 사용하면 [정책](active-directory-b2c-reference-policies.md)을 구성하여 소비자 등록, 로그인, 암호 재설정 및 프로필 편집 페이지의 모양과 느낌을 사용자 지정할 수 있습니다. 소비자가 Azure AD B2C에 의해 제공된 응용 프로그램과 페이지 간에 이동하는 경우 원활한 환경을 유지합니다.
 
-UI 옵션이 제한되거나 API를 통해서만 사용할 수 있는 다른 서비스와 달리 Azure AD B2C는 페이지 UI 사용자 지정에 최신(및 간단한) 접근 방법을 사용합니다.
+[정책](active-directory-b2c-reference-policies.md)을 구성하여 고객 등록, 로그인(위의 브랜딩 관련 예외 참조), 암호 재설정 및 프로필 편집 페이지의 모양과 느낌을 사용자 지정할 수 있습니다. 고객이 Azure AD B2C에 의해 제공된 응용 프로그램과 페이지 간에 이동하는 경우 원활한 환경을 유지합니다.
 
-작동 방식은 다음과 같습니다. Azure AD B2C는 소비자의 브라우저에서 코드를 실행하고 [크로스-원본 자원 공유 (CORS)](http://www.w3.org/TR/cors/)을 호출하는 최신 방법을 사용하여 정책에서 지정한 URL에서 콘텐츠를 로드합니다. 다른 페이지에 다른 URL을 지정할 수 있습니다. 코드는 Azure AD B2C의 UI 요소를 해당 URL에서 로드된 콘텐츠에 병합하고 소비자에게 페이지를 표시합니다. 꼭 해야 할 일:
+UI 옵션이 있는 다른 서비스와 달리, Azure AD B2C는 간단한 최신 방식의 UI 사용자 지정을 사용합니다.
 
-1. `<body>` 어딘가에 있는 `<div id="api"></div>` 요소(빈 요소이어야 함)를 사용하여 잘 구성된(Well-Formed) HTML5 콘텐츠를 만듭니다. 이 요소는 Azure AD B2C 콘텐츠가 삽입되는 위치를 표시합니다.
-2. (허용된 CORS로)HTTPS 끝점의 콘텐츠를 호스트합니다. CORS를 구성할 때 GET 및 OPTIONS 요청 메서드를 둘 다 사용하도록 설정해야 합니다.
-3. Azure AD B2C가 삽입하는 UI 요소의 스타일을 만듭니다.
+작동 방식은 다음과 같습니다. Azure AD B2C는 소비자의 브라우저에서 코드를 실행하고 [CORS(원본 간 리소스 공유)](http://www.w3.org/TR/cors/)라는 최신의 방법을 사용합니다.  런타임에, 정책에서 지정한 URL에서 콘텐츠가 로드됩니다. 다른 페이지에 다른 URL을 지정할 수 있습니다. URL에서 로드된 콘텐츠가 Azure AD B2C에서 삽입된 HTML 조각에 병합된 후에는 해당 페이지가 고객에게 표시됩니다. 꼭 해야 할 일:
 
-## <a name="test-out-the-ui-customization-feature"></a>UI 사용자 지정 기능 테스트하기
-샘플 HTML 및 CSS 콘텐츠를 사용하여 UI 사용자 지정 기능을 시도해 보고자 할 경우 Azure Blob 저장소에 샘플 콘텐츠를 업로드 및 구성하는 [간단한 도우미 도구](active-directory-b2c-reference-ui-customization-helper-tool.md) 를 제공합니다.
+1. `<body>` 어딘가에 있는 빈 `<div id="api"></div>` 요소를 사용하여 잘 구성된 HTML5 콘텐츠를 만듭니다. 이 요소는 Azure AD B2C 콘텐츠가 삽입되는 위치를 표시합니다.
+1. (허용된 CORS로)HTTPS 끝점의 콘텐츠를 호스트합니다. CORS를 구성할 때 GET 및 OPTIONS 요청 메서드를 둘 다 사용하도록 설정해야 합니다.
+1. CSS를 사용하여 Azure AD B2C가 삽입하는 UI 요소의 스타일을 만듭니다.
 
-> [!NOTE]
-> 웹 서버, CDN, AWS S3, 파일 공유 시스템 등 어느 곳에나 UI 콘텐츠를 호스트할 수 있습니다. 콘텐츠가 공개 사용 가능한 HTTPS 끝점(CORS 허용됨)에 호스트된다면 계속 진행하세요. Azure Blob 저장소를 설명 목적으로만 사용합니다.
-> 
-> 
+### <a name="a-basic-example-of-customized-html"></a>사용자 지정된 HTML의 기본 예제
 
-### <a name="the-most-basic-html-content-for-testing"></a>테스트를 위한 가장 기본적인 HTML 콘텐츠
-이 기능을 테스트하는 데 사용할 수 있는 가장 기본적인 HTML 콘텐츠는 아래와 같습니다. 앞서 제공된 동일한 도우미 도구를 사용 하여 이 콘텐츠를 Azure Blob 저장소에 업로드하고 구성합니다. 그런 다음 각 페이지의 양식화되지 않은 기본 단추 및 양식 필드가 표시되고 작동하는지 확인할 수 있습니다.
+다음 예제는 이 기능을 테스트하는 데 사용할 수 있는 가장 기본적인 HTML 콘텐츠입니다. [도우미 도구](active-directory-b2c-reference-ui-customization-helper-tool.md)를 사용하여 이 콘텐츠를 Azure Blob Storage에 업로드하고 구성합니다. 그런 다음 각 페이지의 양식화되지 않은 기본 단추 및 양식 필드가 표시되고 작동하는지 확인할 수 있습니다.
 
 ```HTML
-
 <!DOCTYPE html>
 <html>
     <head>
         <title>!Add your title here!</title>
     </head>
     <body>
-        <div id="api"></div>    <!-- IMP: This element is intentionally empty; don't enter anything here -->
+        <div id="api"></div>   <!-- Leave this element empty because Azure AD B2C will insert content here. -->
     </body>
 </html>
-
 ```
 
-## <a name="the-core-ui-elements-in-each-type-of-page"></a>페이지의 각 형식에서 코어 UI 요소
-다음 섹션에는 Azure AD B2C가 콘텐츠의 `<div id="api"></div>` 요소에 병합하는 HTML5 조각의 예가 있습니다. **HTML 5 콘텐츠에 이러한 조각을 삽입하지 마십시오.** Azure AD B2C 서비스는 런타임에 삽입합니다. 이러한 예제를 사용하여 사용자 고유의 스타일 시트를 디자인합니다.
+## <a name="test-out-the-ui-customization-feature"></a>UI 사용자 지정 기능 테스트하기
 
-### <a name="azure-ad-b2c-content-inserted-into-the-identity-provider-selection-page"></a>"ID 공급자 선택 페이지"에 삽입되는 Azure AD B2C 콘텐츠
-이 페이지는 등록 또는 로그인하는 동안 사용자가 선택할 수 있는 ID 공급자의 목록을 포함합니다. Facebook, Google+ 또는 로컬 계정(메일 주소 또는 사용자 이름 기반)과 같은 소셜 ID 공급자입니다.
+샘플 HTML 및 CSS 콘텐츠를 사용하여 UI 사용자 지정 기능을 사용하시겠습니까?  Azure Blob Storage에 샘플 콘텐츠를 업로드하고 구성하는 [도우미 도구](active-directory-b2c-reference-ui-customization-helper-tool.md)를 제공하고 있습니다.
+
+> [!NOTE]
+> 웹 서버, CDN, AWS S3, 파일 공유 시스템 등 어느 곳에나 UI 콘텐츠를 호스트할 수 있습니다. CORS가 설정된 공개적으로 사용 가능한 HTTPS 끝점에 콘텐츠가 호스트된다면 계속 진행하세요. Azure Blob 저장소를 설명 목적으로만 사용합니다.
+>
+
+## <a name="the-ui-fragments-embedded-by-azure-ad-b2c"></a>Azure AD B2C에 의해 포함된 UI 조각
+
+다음 섹션에는 Azure AD B2C가 콘텐츠의 `<div id="api"></div>` 요소에 병합하는 HTML5 조각이 나와 있습니다. **HTML 5 콘텐츠에 이러한 조각을 삽입하지 마십시오.** Azure AD B2C 서비스는 런타임에 삽입합니다. 사용자 고유의 CSS 스타일 시트를 디자인할 때 이러한 조각을 참조하세요.
+
+### <a name="fragment-inserted-into-the-identity-provider-selection-page"></a>"ID 공급자 선택 페이지"에 삽입되는 조각
+
+이 페이지는 등록 또는 로그인하는 동안 사용자가 선택할 수 있는 ID 공급자의 목록을 포함합니다. 이러한 단추에는 Facebook, Google+ 또는 로컬 계정(메일 주소 또는 사용자 이름 기반)과 같은 소셜 ID 공급자가 포함됩니다.
 
 ```HTML
-
 <div id="api" data-name="IdpSelections">
     <div class="intro">
          <p>Sign up</p>
@@ -100,14 +97,13 @@ UI 옵션이 제한되거나 API를 통해서만 사용할 수 있는 다른 서
         </ul>
     </div>
 </div>
-
 ```
 
-### <a name="azure-ad-b2c-content-inserted-into-the-local-account-sign-up-page"></a>"로컬 계정 등록 페이지"에 삽입되는 Azure AD B2C 콘텐츠
-이 페이지는 메일 주소 또는 사용자 이름을 기반으로 하는 로컬 계정을 등록하는 경우 사용자가 작성해야 하는 등록 양식을 포함합니다. 양식은 텍스트 입력 상자, 암호 입력란, 라디오 단추, 단일 선택 드롭다운 상자 및 다중 선택 확인란과 같은 다른 입력 제어를 포함할 수 있습니다.
+### <a name="fragment-inserted-into-the-local-account-sign-up-page"></a>"로컬 계정 등록 페이지"에 삽입되는 조각
+
+이 페이지에는 전자 메일 주소 또는 사용자 이름을 기준으로 하는 로컬 계정 등록 양식이 있습니다. 양식은 텍스트 입력 상자, 암호 입력란, 라디오 단추, 단일 선택 드롭다운 상자 및 다중 선택 확인란과 같은 다른 입력 제어를 포함할 수 있습니다.
 
 ```HTML
-
 <div id="api" data-name="SelfAsserted">
     <div class="intro">
         <p>Create your account by providing the following details</p>
@@ -216,17 +212,17 @@ UI 옵션이 제한되거나 API를 통해서만 사용할 수 있는 다른 서
         <div id="verifying_blurb"></div>
     </div>
 </div>
-
 ```
 
-### <a name="azure-ad-b2c-content-inserted-into-the-social-account-sign-up-page"></a>"소셜 계정 등록 페이지"에 삽입되는 Azure AD B2C 콘텐츠
-이 페이지는 Facebook 또는 Google+와 같은 소셜 ID 공급자에서 기존 계정을 사용하여 등록하는 경우 소비자가 작성해야 하는 등록 양식을 포함합니다. 이 페이지는 암호 입력 필드를 제외하고 로컬 계정 등록 페이지와 유사합니다.(이전 섹션에 표시됨)
+### <a name="fragment-inserted-into-the-social-account-sign-up-page"></a>"소셜 계정 등록 페이지"에 삽입되는 조각
 
-### <a name="azure-ad-b2c-content-inserted-into-the-unified-sign-up-or-sign-in-page"></a>"통합 등록 또는 로그인 페이지"에 삽입되는 Azure AD B2C 콘텐츠
+이 페이지는 Facebook 또는 Google+와 같은 소셜 ID 공급자에서 기존 계정을 사용하여 등록하는 경우 나타날 수 있습니다.  등록 양식을 사용하여 최종 사용자로부터 추가 정보를 수집해야 할 때 사용됩니다. 이 페이지는 암호 입력 필드를 제외하고 로컬 계정 등록 페이지와 유사합니다.(이전 섹션에 표시됨)
+
+### <a name="fragment-inserted-into-the-unified-sign-up-or-sign-in-page"></a>"통합 등록 또는 로그인 페이지"에 삽입되는 조각
+
 이 페이지는 Facebook 또는 Google+ 또는 로컬 계정과 같은 소셜 ID 공급자를 사용할 수 있는 고객의 등록 및 로그인을 모두 다룹니다.
 
 ```HTML
-
 <div id="api" data-name="Unified">
         <div class="social" role="form">
                <div class="intro">
@@ -273,14 +269,13 @@ UI 옵션이 제한되거나 API를 통해서만 사용할 수 있는 다른 서
                </div>
         </div>
 </div>
-
 ```
 
-### <a name="azure-ad-b2c-content-inserted-into-the-multi-factor-authentication-page"></a>"Multi-Factor Authentication 페이지"에 삽입되는 Azure AD B2C 콘텐츠
+### <a name="fragment-inserted-into-the-multi-factor-authentication-page"></a>"Multi-Factor Authentication 페이지"에 삽입되는 조각
+
 이 페이지에서 등록 또는 로그인하는 동안 사용자가 텍스트 또는 음성을 사용하여 전화 번호를 확인할 수 있습니다.
 
 ```HTML
-
 <div id="api" data-name="Phonefactor">
     <div id="phonefactor_initial">
         <div class="intro">
@@ -318,12 +313,11 @@ UI 옵션이 제한되거나 API를 통해서만 사용할 수 있는 다른 서
         <div id="dialing_blurb"></div><div id="dialing_number"></div>
     </div>
 </div>
-
 ```
 
-### <a name="azure-ad-b2c-content-inserted-into-the-error-page"></a>"오류 페이지"에 삽입되는 Azure AD B2C 콘텐츠
-```HTML
+### <a name="fragment-inserted-into-the-error-page"></a>"오류 페이지"에 삽입되는 조각
 
+```HTML
 <div id="api" class="error-page-content" data-name="GlobalException">
     <h2>Sorry, but we're having trouble signing you in.</h2>
     <div class="error-page-help">We track these errors automatically, but if the problem persists feel free to contact us. In the meantime, please try again.</div>
@@ -334,21 +328,31 @@ UI 옵션이 제한되거나 API를 통해서만 사용할 수 있는 다른 서
         <div class="error-page-detail">AADB2C90065: A B2C client-side error 'Access is denied.' has occurred requesting the remote resource.</div>
     </div>
 </div>
-
 ```
 
 ## <a name="localizing-your-html-content"></a>HTML 콘텐츠 지역화
-['언어 사용자 지정'](active-directory-b2c-reference-language-customization.md)을 설정하여 HTML 콘텐츠를 지역화할 수 있습니다.  이렇게 하면 Azure AD B2C가 OIDC 매개 변수 `ui-locales`를 끝점으로 전달할 수 있습니다.  이를 통해 언어별 사용자 지정 UI 페이지를 제공할 수 있습니다.  
+
+HTML 콘텐츠를 지역화하는 방법은 두 가지가 있습니다. 하나는 [언어 사용자 지정](active-directory-b2c-reference-language-customization.md)을 켜는 것입니다. 이 기능을 사용하도록 설정하면 Azure AD B2C가 Open ID Connect 매개 변수 `ui-locales`를 끝점으로 전달할 수 있습니다.  콘텐츠 서버는 이 매개 변수를 사용하여 언어 관련 사용자 지정된 HTML 페이지를 제공할 수 있습니다.
+
+또는 사용되는 로캘에 따라 다른 위치에서 콘텐츠를 끌어올 수 있습니다. CORS 사용 엔드포인트에서 특정 언어에 대한 콘텐츠를 호스트하도록 폴더 구조를 설정할 수 있습니다. 와일드 카드 값 `{Culture:RFC5646}`을 사용하는 경우 적합한 구조를 호출합니다.  예를 들어 사용자 지정 페이지 URI가 다음과 같다고 가정해 봅시다.
+
+```
+https://wingtiptoysb2c.blob.core.windows.net/{Culture:RFC5646}/wingtip/unified.html
+```
+`fr`로 페이지를 로드할 수 있습니다. 페이지가 HTML 및 CSS 콘텐츠를 가져올 때 다음 위치에서 가져옵니다.
+```
+https://wingtiptoysb2c.blob.core.windows.net/fr/wingtip/unified.html
+```
 
 ## <a name="things-to-remember-when-building-your-own-content"></a>고유의 콘텐츠를 작성할 때 유의할 점
+
 페이지 UI 사용자 지정 기능을 사용하려는 경우 다음 모범 사례를 검토합니다.
 
 * Azure AD B2C의 기본 콘텐츠를 복사하거나 수정하려고 하지 마세요. 처음부터 HTML5 콘텐츠를 작성하고 기본 콘텐츠를 참조로 사용하는 것이 가장 좋습니다.
-* 로그인, 등록 및 프로필 편집 정책에 의해 처리되는 모든 페이지(오류 페이지 제외)에서 사용자가 제공하는 스타일 시트는 <head> 조각에서 이들 페이지에 추가한 기본 스타일 시트를 재정의해야합니다. 등록 또는 로그인 및 암호 재설정 정책, 모든 정책의 오류 페이지에 의해 처리되는 모든 페이지에서 사용자는 모든 스타일을 직접 제공해야 합니다.
 * 보안상의 이유로 콘텐츠에 JavaScript를 포함할 수 없습니다. 대부분의 필요한 것을 즉시 사용할 수 있어야 합니다. 그렇지 않으면 [사용자 의견](https://feedback.azure.com/forums/169401-azure-active-directory/category/160596-b2c) 을 통해 새로운 기능을 요청합니다.
 * 지원되는 브라우저 버전:
   * Internet Explorer 11, 10, Edge
   * Internet Explorer 9, 8에 대한 지원 제한
   * Google Chrome 42.0 이상
   * Mozilla Firefox 38.0 이상
-
+* Azure AD B2C에서 삽입된 HTML에서 생성되는 POST 작업을 방해하므로 HTML에 `<form>` 태그가 포함되지 않도록 합니다.

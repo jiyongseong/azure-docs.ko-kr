@@ -1,10 +1,10 @@
 ---
-title: "Azure Active Directory Domain Services: Azure Active Directory 응용 프로그램 프록시 배포 | Microsoft Docs"
-description: "Azure Active Directory Domain Services 관리되는 도메인에서 Azure AD 응용 프로그램 프록시 사용"
+title: 'Azure Active Directory Domain Services: Azure Active Directory 응용 프로그램 프록시 배포 | Microsoft Docs'
+description: Azure Active Directory Domain Services 관리되는 도메인에서 Azure AD 응용 프로그램 프록시 사용
 services: active-directory-ds
-documentationcenter: 
+documentationcenter: ''
 author: mahesh-unnikrishnan
-manager: stevenpo
+manager: mtillman
 editor: curtand
 ms.assetid: 938a5fbc-2dd1-4759-bcce-628a6e19ab9d
 ms.service: active-directory-ds
@@ -12,20 +12,18 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 03/06/2017
+ms.date: 11/15/2017
 ms.author: maheshu
-translationtype: Human Translation
-ms.sourcegitcommit: 5121a810badcaa9c66a9f5d85bd83b9f522b9665
-ms.openlocfilehash: 449499ebed1b455af012ec97976d04604a320941
-ms.lasthandoff: 02/07/2017
-
-
+ms.openlocfilehash: eee20271c27f596ee6aefd0b7280c7862c53b289
+ms.sourcegitcommit: c52123364e2ba086722bc860f2972642115316ef
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
 ---
-
 # <a name="deploy-azure-ad-application-proxy-on-an-azure-ad-domain-services-managed-domain"></a>Azure AD Domain Services 관리되는 도메인에서 Azure AD 응용 프로그램 프록시 배포
 Azure AD(Active Directory) 응용 프로그램 프록시를 사용하면 인터넷을 통해 액세스할 수 있는 온-프레미스 응용 프로그램을 게시하여 원격 작업자를 지원할 수 있습니다. 이제 Azure AD Domain Services를 통해 온-프레미스를 운영 중인 레거시 응용 프로그램을 Azure Infrastructure Services로 전환할 수 있습니다. 그러면 Azure AD 응용 프로그램 프록시를 사용하는 이러한 응용 프로그램을 게시하여 조직 내 사용자에게 안전한 원격 액세스를 제공할 수 있습니다.
 
-Azure AD 응용 프로그램 프록시를 처음 사용하는 경우 다음에 나오는 [온-프레미스 응용 프로그램에 보안된 원격 액세스를 제공하는 방법](../active-directory/active-directory-application-proxy-get-started.md) 문서에서 이 기능에 대해 자세히 알아보세요.
+Azure AD 응용 프로그램 프록시를 처음 사용하는 경우 다음에 나오는 [온-프레미스 응용 프로그램에 보안된 원격 액세스를 제공하는 방법](../active-directory/manage-apps/application-proxy.md) 문서에서 이 기능에 대해 자세히 알아보세요.
 
 
 ## <a name="before-you-begin"></a>시작하기 전에
@@ -46,7 +44,7 @@ Azure AD 응용 프로그램 프록시를 처음 사용하는 경우 다음에 �
 2. **Azure Active Directory**를 클릭하여 디렉터리 개요를 표시합니다. **엔터프라이즈 응용 프로그램**을 클릭합니다.
 
     ![Azure AD Directory 선택](./media/app-proxy/app-proxy-enable-start.png)
-3. **응용 프로그램 프록시**를 클릭합니다. Azure AD Basic 또는 Azure AD Premium 구독이 없을 경우 평가판을 사용하도록 설정하는 옵션이 표시됩니다. **응용 프로그램 프록시 사용?**을 **사용**으로 설정/해제하고 **저장**을 클릭합니다.
+3. **응용 프로그램 프록시**를 클릭합니다. Azure AD Basic 또는 Azure AD Premium 구독이 없을 경우 평가판을 사용하도록 설정하는 옵션이 표시됩니다. **응용 프로그램 프록시 사용?** 을 **사용**으로 설정/해제하고 **저장**을 클릭합니다.
 
     ![앱 프록시 사용](./media/app-proxy/app-proxy-enable-proxy-blade.png)
 4. 커넥터를 다운로드하려면 **커넥터** 단추를 클릭합니다.
@@ -58,19 +56,19 @@ Azure AD 응용 프로그램 프록시를 처음 사용하는 경우 다음에 �
 
 
 ## <a name="task-2---provision-domain-joined-windows-servers-to-deploy-the-azure-ad-application-proxy-connector"></a>작업 2 - 도메인에 가입된 Windows 서버를 프로비전하여 Azure AD 응용 프로그램 프록시 커넥터를 배포
-Azure AD 응용 프로그램 프록시 커넥터를 설치할 수 있는 도메인에 가입된 Windows Server 가상 컴퓨터가 필요합니다. 게시되는 응용 프로그램에 따라 커넥터가 설치된 여러 서버를 프로비전하도록 선택할 수도 있습니다. 이 배포 옵션을 선택하면 가용성이 높아지고 더 많은 인증 부하를 처리하는 데 도움이 됩니다.
+Azure AD 응용 프로그램 프록시 커넥터를 설치할 수 있는 도메인에 가입된 Windows Server 가상 머신이 필요합니다. 응용 프로그램에 따라 커넥터가 설치된 여러 서버를 프로비전하도록 선택할 수도 있습니다. 이 배포 옵션을 선택하면 가용성이 높아지고 더 많은 인증 부하를 처리하는 데 도움이 됩니다.
 
 Azure AD Domain Services 관리되는 도메인을 사용할 수 있는 동일한 가상 네트워크(또는 연결/피어링된 가상 네트워크)에서 커넥터 서버를 프로비전합니다. 마찬가지로, 응용 프로그램 프록시를 통해 게시한 응용 프로그램을 호스팅하는 서버는 동일한 Azure 가상 네트워크에 설치해야 합니다.
 
-커넥터 서버를 프로비전하려면 [Windows 가상 컴퓨터를 관리되는 도메인에 가입](active-directory-ds-admin-guide-join-windows-vm.md) 문서에 설명된 작업을 수행하세요.
+커넥터 서버를 프로비전하려면 [Windows 가상 머신을 관리되는 도메인에 가입](active-directory-ds-admin-guide-join-windows-vm.md) 문서에 설명된 작업을 수행하세요.
 
 
 ## <a name="task-3---install-and-register-the-azure-ad-application-proxy-connector"></a>작업 3 - Azure AD 응용 프로그램 프록시 커넥터 설치 및 등록
-사전에 Windows Server 가상 컴퓨터를 프로비전하고 관리되는 도메인에 가입했습니다. 이 작업에서는 이 가상 컴퓨터에 Azure AD 응용 프로그램 프록시 커넥터를 설치할 것입니다.
+사전에 Windows Server 가상 컴퓨터를 프로비전하고 관리되는 도메인에 가입했습니다. 이 작업에서는 이 가상 머신에 Azure AD 응용 프로그램 프록시 커넥터를 설치합니다.
 
 1. Azure AD 웹 응용 프로그램 프록시 커넥터를 설치하는 VM에 커넥터 설치 패키지를 복사합니다.
 
-2. **AADApplicationProxyConnectorInstaller.exe**를 가상 컴퓨터에서 실행합니다. 소프트웨어 사용 조건에 동의합니다.
+2. **AADApplicationProxyConnectorInstaller.exe**를 가상 머신에서 실행합니다. 소프트웨어 사용 조건에 동의합니다.
 
     ![설치 조건에 동의](./media/app-proxy/app-proxy-install-connector-terms.png)
 3. 설치하는 동안 Azure AD Directory의 응용 프로그램 프록시를 사용하여 커넥터를 등록하라는 메시지가 표시됩니다.
@@ -95,9 +93,9 @@ Azure AD Domain Services 관리되는 도메인을 사용할 수 있는 동일�
 ## <a name="next-steps"></a>다음 단계
 지금까지 Azure AD 응용 프로그램 프록시를 설정하고 Azure AD Domain Services 관리되는 도메인에 통합했습니다.
 
-* **응용 프로그램을 Azure 가상 컴퓨터로 마이그레이션:** 응용 프로그램을 온-프레미스 서버에서 관리되는 도메인에 가입된 Azure 가상 컴퓨터로 전환할 수 있습니다. 이를 통해 온-프레미스 운영 서버의 인프라 비용을 절감할 수 있습니다.
+* **응용 프로그램을 Azure 가상 머신으로 마이그레이션:** 응용 프로그램을 온-프레미스 서버에서 관리되는 도메인에 가입된 Azure 가상 머신으로 전환할 수 있습니다. 이를 통해 온-프레미스 운영 서버의 인프라 비용을 절감할 수 있습니다.
 
-* **Azure AD 응용 프로그램 프록시를 사용하여 응용 프로그램 게시:** Azure AD 응용 프로그램 프록시를 사용하여 Azure 가상 컴퓨터에서 실행 중인 응용 프로그램을 게시합니다. 자세한 내용은 [Azure AD 응용 프로그램 프록시를 사용하여 응용 프로그램 게시](../active-directory/application-proxy-publish-azure-portal.md)를 참조하세요.
+* **Azure AD 응용 프로그램 프록시를 사용하여 응용 프로그램 게시:** Azure AD 응용 프로그램 프록시를 사용하여 Azure 가상 머신에서 실행 중인 응용 프로그램을 게시합니다. 자세한 내용은 [Azure AD 응용 프로그램 프록시를 사용하여 응용 프로그램 게시](../active-directory/manage-apps/application-proxy-publish-azure-portal.md)를 참조하세요.
 
 
 ## <a name="deployment-note---publish-iwa-integrated-windows-authentication-applications-using-azure-ad-application-proxy"></a>배포 참고 - Azure AD 응용 프로그램 프록시를 사용하여 IWA(Windows 통합 인증) 응용 프로그램 게시
@@ -115,12 +113,12 @@ Azure AD Domain Services 관리되는 도메인을 사용할 수 있는 동일�
 >
 
 Get-ADComputer PowerShell cmdlet을 사용하여 Azure AD 응용 프로그램 프록시 커넥터가 설치된 컴퓨터에 대한 설정을 검색합니다.
-```
+```powershell
 $ConnectorComputerAccount = Get-ADComputer -Identity contoso100-proxy.contoso100.com
 ```
 
 그 후 Set-ADComputer cmdlet을 사용하여 리소스 서버에 대한 리소스 기반 KCD를 설정합니다.
-```
+```powershell
 Set-ADComputer contoso100-resource.contoso100.com -PrincipalsAllowedToDelegateToAccount $ConnectorComputerAccount
 ```
 
@@ -131,4 +129,3 @@ Set-ADComputer contoso100-resource.contoso100.com -PrincipalsAllowedToDelegateTo
 * [Azure AD Domain Services - 시작 가이드](active-directory-ds-getting-started.md)
 * [관리되는 도메인에서 Kerberos 제한 위임 구성](active-directory-ds-enable-kcd.md)
 * [Kerberos 제한 위임 개요](https://technet.microsoft.com/library/jj553400.aspx)
-

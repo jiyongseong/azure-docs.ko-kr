@@ -1,25 +1,25 @@
 ---
-title: "Azure AD 응용 프로그램 프록시를 구성하는 문제”"
-description: "Azure AD 응용 프로그램 프록시를 구성하는 문제”"
+title: Azure AD 응용 프로그램 프록시를 구성하는 문제”
+description: Azure AD 응용 프로그램 프록시를 구성하는 문제”
 services: active-directory
-documentationcenter: 
-author: ajamess
-manager: kbrint
+documentationcenter: ''
+author: barbkess
+manager: mtillman
 ms.service: active-directory
+ms.component: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/11/2017
-ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0d6f6fb24f1f01d703104f925dcd03ee1ff46062
-ms.openlocfilehash: 9fe3f343ef95106c52c4ea3ff22143a5e855c6c7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/18/2017
-
+ms.date: 01/31/2018
+ms.author: barbkess
+ms.reviewer: harshja
+ms.openlocfilehash: ad19676d18a968eae56302daf8655c74226fb51e
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
-
 # <a name="problems-configuring-the-azure-ad-application-proxy"></a>Azure AD 응용 프로그램 프록시를 구성하는 문제
 
 
@@ -53,4 +53,3 @@ ms.lasthandoff: 04/18/2017
 ## <a name="im-having-a-problem-with-the-application-proxy-agent-connector"></a>응용 프로그램 프록시 에이전트 커넥터에 문제가 있음
   다음 문서는 이 범주에서 가장 일반적인 몇 가지 문제를 해결하는 데 도움이 될 수 있습니다.
   * [응용 프로그램 프록시 에이전트 커넥터를 설치하는 데 문제가 있음](https://docs.microsoft.com/azure/active-directory/application-proxy-connector-installation-problem/?/?WT.mc_id=DMC_AAD_Manage_Apps_Troubleshooting_Nav)
-

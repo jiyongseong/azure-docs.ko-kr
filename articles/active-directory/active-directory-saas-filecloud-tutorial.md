@@ -1,25 +1,24 @@
 ---
-title: "자습서: FileCloud와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory 및 FileCloud 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: FileCloud와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory 및 FileCloud 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.reviewer: joflore
-ms.assetid: f39f0ddd-b504-4562-971f-77b88d1e75fb
+ms.assetid: 2263e583-3eb2-4a06-982d-33f5f54858f4
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/19/2017
+ms.date: 11/27/2017
 ms.author: jeedes
+ms.openlocfilehash: 7a205338415e4288242c9dda73015a231e3c6f96
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: ad03516f684acc59912ffc57f6e0712828bd03f2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-filecloud"></a>자습서: FileCloud와 Azure Active Directory 통합
 
@@ -31,7 +30,7 @@ FileCloud를 Azure AD와 통합하면 다음과 같은 이점이 제공됩니다
 - 사용자가 자신의 Azure AD 계정으로 FileCloud에 자동으로 로그온(Single Sign-On)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +58,7 @@ FileCloud의 Azure AD 통합을 구성하려면 갤러리의 FileCloud를 관리
 
 **갤러리에서 FileCloud를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -109,12 +108,12 @@ FileCloud에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
 
     ![FileCloud 도메인 및 URL Single Sign-On 정보](./media/active-directory-saas-filecloud-tutorial/tutorial_filecloud_url.png)
 
-    a. **로그온 URL** 텍스트 상자에서 다음 패턴으로 URL을 입력합니다. `https://<subdomain>.filecloudhosted.com`
+    a. **로그온 URL** 텍스트 상자에서 다음 패턴으로 URL을 입력합니다. `https://<subdomain>.filecloudonline.com`
 
-    b. **식별자** 텍스트 상자에서 `https://<subdomain>.filecloudhosted.com/simplesaml/module.php/saml/sp/metadata.php/default-sp` 패턴을 사용하여 URL을 입력합니다.
+    나. **식별자** 텍스트 상자에서 `https://<subdomain>.filecloudonline.com/simplesaml/module.php/saml/sp/metadata.php/default-sp` 패턴을 사용하여 URL을 입력합니다.
 
     > [!NOTE] 
-    > 이러한 값은 실제 값이 아닙니다. 실제 로그온 URL 및 식별자로 값을 업데이트합니다. 이러한 값을 얻으려면 [FileCloud 클라이언트 지원 팀](mailto:support@codelathe.com)에 문의하세요.
+    > 이러한 값은 실제 값이 아닙니다. 실제 로그온 URL 및 식별자로 값을 업데이트합니다. 이러한 값을 얻으려면 [FileCloud 클라이언트 지원 팀](mailto:support@codelathe.com)에 문의하세요. 
 
 4. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 메타데이터 파일을 저장합니다.
 
@@ -132,23 +131,23 @@ FileCloud에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
 
 8. 왼쪽 탐색 창에서 **설정**을 클릭합니다. 
    
-    ![앱 쪽의 설정 섹션](./media/active-directory-saas-filecloud-tutorial/tutorial_filecloud_000.png)
+    ![앱 쪽에서 Single Sign-On 구성](./media/active-directory-saas-filecloud-tutorial/tutorial_filecloud_000.png)
 
 9. 설정 섹션에서 **SSO** 탭을 클릭합니다. 
    
-    ![앱 쪽의 Single Sign-On 탭](./media/active-directory-saas-filecloud-tutorial/tutorial_filecloud_001.png)
+    ![앱 쪽에서 Single Sign-On 구성](./media/active-directory-saas-filecloud-tutorial/tutorial_filecloud_001.png)
 
 10. **SSO(Single Sign On) 설정** 패널에서 **기본 SSO 형식**으로 **SAML**을 선택합니다.
    
-    ![앱 쪽의 Single Sign-On 설정 패널](./media/active-directory-saas-filecloud-tutorial/tutorial_filecloud_002.png)
+    ![앱 쪽에서 Single Sign-On 구성](./media/active-directory-saas-filecloud-tutorial/tutorial_filecloud_002.png)
 
-11. Azure Portal에서 복사한 **SAML Entity ID**(SAML 엔터티 ID)를 **IdP End Point URL**(IdP 끝점 URL) 텍스트 상자에 붙여넣습니다.
+11. Azure Portal에서 복사한 **SAML 엔터티 ID** 값을 **IdP 끝점 URL** 텍스트 상자에 붙여넣습니다.
 
-    ![IDP 끝점 URL 텍스트 상자](./media/active-directory-saas-filecloud-tutorial/tutorial_filecloud_003.png)
+    ![앱 쪽에서 Single Sign-On 구성](./media/active-directory-saas-filecloud-tutorial/tutorial_filecloud_003.png)
 
 12. 다운로드된 메타데이터 파일을 메모장에서 열고, 내용을 클립보드에 복사한 다음 **SAML 설정** 패널의 **IdP 메타데이터** 텍스트 상자에 붙여넣습니다.
 
-    ![앱 쪽의 IDP 메타 데이터 섹션](./media/active-directory-saas-filecloud-tutorial/tutorial_filecloud_004.png)
+    ![앱 쪽에서 Single Sign-On 구성](./media/active-directory-saas-filecloud-tutorial/tutorial_filecloud_004.png)
 
 13. **저장** 단추를 클릭합니다.
 
@@ -182,9 +181,9 @@ FileCloud에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
 
     a. **이름** 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
+    나. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
 
-    c. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
+    다. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -193,7 +192,7 @@ FileCloud에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
 이 섹션은 FileCloud에서 Britta Simon이라는 사용자를 만들기 위한 것입니다. FileCloud는 적시에 프로비전을 지원하며 기본적으로 사용하도록 설정합니다. 이 섹션에 작업 항목이 없습니다. 새 사용자가 아직 존재하지 않는 경우 FileCloud에 액세스하는 동안 만들어질 수 있습니다.
 
 >[!NOTE]
->사용자를 수동으로 생성해야 하는 경우 [FileCloud 클라이언트 지원 팀](mailto:support@codelathe.com)에 문의해야 합니다. 
+>사용자를 수동으로 생성해야 하는 경우 [FileCloud 클라이언트 지원 팀](mailto:support@codelathe.com)에 문의해야 합니다.
 
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD 테스트 사용자 할당
 
@@ -227,14 +226,15 @@ FileCloud에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
     
 ### <a name="test-single-sign-on"></a>Single Sign-On 테스트
 
-이 섹션은 액세스 패널을 사용하여 Azure AD SSO 구성을 테스트하기 위한 것입니다.
+이 섹션에서는 액세스 패널을 사용하여 Azure AD Single Sign-On 구성을 테스트합니다.
 
 액세스 패널에서 FileCloud 타일을 클릭하면 FileCloud 응용 프로그램에 자동으로 로그온됩니다.
+액세스 패널에 대한 자세한 내용은 [액세스 패널 소개](active-directory-saas-access-panel-introduction.md)를 참조하세요. 
 
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 <!--Image references-->
 
@@ -249,5 +249,4 @@ FileCloud에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
 [201]: ./media/active-directory-saas-filecloud-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-filecloud-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-filecloud-tutorial/tutorial_general_203.png
-
 

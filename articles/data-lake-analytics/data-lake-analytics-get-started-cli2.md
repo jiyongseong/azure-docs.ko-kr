@@ -1,8 +1,8 @@
 ---
-title: "Azure CLI 2.0을 사용하여 Azure Data Lake Analytics 시작 | Microsoft Docs"
-description: "Azure 명령줄 인터페이스 2.0을 사용하여 Data Lake Analytics 계정을 만들고, U-SQL을 사용하여 Data Lake Analytics 작업을 만들고, 작업을 제출하는 방법에 대해 알아봅니다. "
+title: Azure CLI 2.0을 사용하여 Azure Data Lake Analytics 시작 | Microsoft Docs
+description: 'Azure 명령줄 인터페이스 2.0을 사용하여 Data Lake Analytics 계정을 만들고, U-SQL을 사용하여 Data Lake Analytics 작업을 만들고, 작업을 제출하는 방법에 대해 알아봅니다. '
 services: data-lake-analytics
-documentationcenter: 
+documentationcenter: ''
 author: saveenr
 manager: saveenr
 editor: cgronlun
@@ -13,13 +13,11 @@ ms.tgt_pltfrm: na
 ms.workload: big-data
 ms.date: 06/18/2017
 ms.author: jgao
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a1ba750d2be1969bfcd4085a24b0469f72a357ad
-ms.openlocfilehash: 35d30e90a8a390e21b08b0796f441f0e9154c499
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
-
+ms.openlocfilehash: e7ce65446a6af49f15b3ce1881757b16f8fcaa35
+ms.sourcegitcommit: c47ef7899572bf6441627f76eb4c4ac15e487aec
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/04/2018
 ---
 # <a name="get-started-with-azure-data-lake-analytics-using-azure-cli-20"></a>Azure CLI 2.0를 사용하여 Azure Data Lake Analytics 시작
 [!INCLUDE [get-started-selector](../../includes/data-lake-analytics-selector-get-started.md)]
@@ -29,7 +27,7 @@ ms.lasthandoff: 06/20/2017
 ## <a name="prerequisites"></a>필수 조건
 이 자습서를 시작하기 전에 다음 항목이 있어야 합니다.
 
-* **Azure 구독**. [Azure 무료 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
+* **Azure 구독**. [Azure 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
 * **Azure CLI 2.0**. [Azure CLI 설치 및 구성](https://docs.microsoft.com/cli/azure/install-azure-cli)을 참조하세요.
 
 ## <a name="log-in-to-azure"></a>Azure에 로그인
@@ -109,7 +107,7 @@ az dls fs upload --account "<Data Lake Store Account Name>" --source-path "<Sour
 az dls fs list --account "<Data Lake Store Account Name>" --path "<Path>"
 ```
 
-데이터 레이크 분석은 Azure Blob 저장소에 액세스할 수도 있습니다.  Azure Blob 저장소에 데이터를 업로드하려면 [Azure 저장소와 Azure CLI 사용](../storage/storage-azure-cli.md)을 참조하세요.
+데이터 레이크 분석은 Azure Blob 저장소에 액세스할 수도 있습니다.  Azure Blob Storage에 데이터를 업로드하려면 [Azure Storage와 Azure CLI 사용](../storage/common/storage-azure-cli.md)을 참조하세요.
 
 ## <a name="submit-data-lake-analytics-jobs"></a>데이터 레이크 분석 작업 제출
 데이터 레이크 분석 작업은 U-SQL 언어로 작성됩니다. U-SQL에 대한 자세한 내용은 [U-SQL 언어 시작](data-lake-analytics-u-sql-get-started.md) 및 [U-SQL 언어 참조](http://go.microsoft.com/fwlink/?LinkId=691348)를 참조하세요.
@@ -131,17 +129,17 @@ OUTPUT @a
     USING Outputters.Csv();
 ```
 
-이 U-SQL 스크립트는 **Extractors.Tsv()**를 사용하여 원본 데이터 파일을 읽은 다음 **Outputters.Csv()**를 사용하여 csv 파일을 만듭니다.
+이 U-SQL 스크립트는 **Extractors.Tsv()** 를 사용하여 원본 데이터 파일을 읽은 다음 **Outputters.Csv()** 를 사용하여 csv 파일을 만듭니다.
 
 원본 파일을 다른 위치에 복사하지 않는 한 두 경로를 수정하지 마세요.  출력 폴더가 없는 경우 Data Lake Analytics에서 해당 폴더를 만듭니다.
 
-기본 Data Lake Store 계정에 저장된 파일의 상대 경로를 사용하는 것이 더 쉽습니다. 절대 경로를 사용할 수도 있습니다.  예:
+기본 Data Lake Store 계정에 저장된 파일의 상대 경로를 사용하는 것이 더 쉽습니다. 절대 경로를 사용할 수도 있습니다.  예: 
 
 ```
 adl://<Data LakeStorageAccountName>.azuredatalakestore.net:443/Samples/Data/SearchLog.tsv
 ```
 
-연결된 저장소 계정의 파일에 액세스하려면 절대 경로를 사용해야 합니다.  연결된 Azure 저장소 계정에 저장된 파일에 대한 구문은 다음과 같습니다.
+연결된 Storage 계정의 파일에 액세스하려면 절대 경로를 사용해야 합니다.  연결된 Azure Storage 계정에 저장된 파일에 대한 구문은 다음과 같습니다.
 
 ```
 wasb://<BlobContainerName>@<StorageAccountName>.blob.core.windows.net/Samples/Data/SearchLog.tsv
@@ -160,7 +158,7 @@ wasb://<BlobContainerName>@<StorageAccountName>.blob.core.windows.net/Samples/Da
 az dla job submit --account "<Data Lake Analytics Account Name>" --job-name "<Job Name>" --script "<Script Path and Name>"
 ```
 
-예:
+예: 
 
 ```
 az dla job submit --account "myadlaaccount" --job-name "myadlajob" --script @"C:\DLA\myscript.txt"
@@ -180,26 +178,25 @@ az dla job show --account "<Data Lake Analytics Account Name>" --job-identity "<
 az dla job cancel --account "<Data Lake Analytics Account Name>" --job-identity "<Job Id>"
 ```
 
-##<a name="retrieve-job-results"></a>작업 결과 검색
+## <a name="retrieve-job-results"></a>작업 결과 검색
 
 작업이 완료된 후 다음 명령을 사용하여 출력 파일을 나열하고 파일을 다운로드할 수 있습니다.
 
 ```
-az dls fs list --account "<Data Lake Store Account Name>" --source-path "/Output" --destination-path "<Destintion>"
+az dls fs list --account "<Data Lake Store Account Name>" --source-path "/Output" --destination-path "<Destination>"
 az dls fs preview --account "<Data Lake Store Account Name>" --path "/Output/SearchLog-from-Data-Lake.csv"
 az dls fs preview --account "<Data Lake Store Account Name>" --path "/Output/SearchLog-from-Data-Lake.csv" --length 128 --offset 0
-az dls fs downlod --account "<Data Lake Store Account Name>" --source-path "/Output/SearchLog-from-Data-Lake.csv" --destintion-path "<Destination Path and File Name>"
+az dls fs download --account "<Data Lake Store Account Name>" --source-path "/Output/SearchLog-from-Data-Lake.csv" --destination-path "<Destination Path and File Name>"
 ```
 
-예:
+예: 
 
 ```
-az dls fs downlod --account "myadlsaccount" --source-path "/Output/SearchLog-from-Data-Lake.csv" --destintion-path "C:\DLA\myfile.csv"
+az dls fs download --account "myadlsaccount" --source-path "/Output/SearchLog-from-Data-Lake.csv" --destination-path "C:\DLA\myfile.csv"
 ```
 
 ## <a name="next-steps"></a>다음 단계
 
 * Data Lake Analytics CLI 2.0 참조 문서를 보려면 [Data Lake Analytics](https://docs.microsoft.com/cli/azure/dla)를 참조하세요.
 * Data Lake Store CLI 2.0 참조 문서를 보려면 [Data Lake Store](https://docs.microsoft.com/cli/azure/dls)를 참조하세요.
-* 더 복잡한 쿼리를 보려면 [Azure Data Lake Analytics을 사용하여 웹 사이트 로그 분석](data-lake-analytics-analyze-weblogs.md)을 참조하세요.
-
+* 더 복잡한 쿼리를 보려면 [Azure 데이터 레이크 분석을 사용하여 웹 사이트 로그 분석](data-lake-analytics-analyze-weblogs.md)을 참조하세요.

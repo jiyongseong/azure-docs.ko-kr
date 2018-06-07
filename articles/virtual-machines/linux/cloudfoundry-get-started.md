@@ -1,13 +1,13 @@
 ---
-title: "Microsoft Azure의 Cloud Foundry 시작 | Microsoft Docs"
-description: "Microsoft Azure에서 OSS 또는 Pivotal Cloud Foundry 실행"
+title: Microsoft Azure의 Cloud Foundry 시작 | Microsoft Docs
+description: Microsoft Azure에서 OSS 또는 Pivotal Cloud Foundry 실행
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: seanmck
-manager: timlt
-editor: 
-tags: 
-keywords: 
+manager: jeconnoc
+editor: ''
+tags: ''
+keywords: ''
 ms.assetid: 2a15ffbf-9f86-41e4-b75b-eb44c1a2a7ab
 ms.service: virtual-machines-linux
 ms.devlang: NA
@@ -16,14 +16,12 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 01/19/2017
 ms.author: seanmck
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 4f68f90c3aea337d7b61b43e637bcfda3c98f3ea
-ms.openlocfilehash: fd51bf9e965d2efd5a6bea9de142ab2ec8d27836
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
+ms.openlocfilehash: 42910675bcf512a3d6c76369adc9f41215420a78
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-
 # <a name="cloud-foundry-on-azure"></a>Azure의 Cloud Foundry
 
 Cloud Foundry는 다양한 언어 및 프레임워크로 개발되는 12개 요소(12-factor) 응용 프로그램을 빌드하고, 배포하고, 운영하기 위한 오픈 소스 PaaS(Platform-as-a-Service)입니다. 이 문서는 Azure에서 Cloud Foundry를 실행할 수 있는 옵션과 시작하는 방법을 설명합니다.
@@ -43,7 +41,7 @@ Microsoft는 다음과 같은 커뮤니티 채널을 통해 OSS CF에 대한 최
 - [CPI](https://github.com/cloudfoundry-incubator/bosh-azure-cpi-release/issues) 및 [Service Broker](https://github.com/Azure/meta-azure-service-broker/issues)에 대한 GitHub Issues
 
 >[!NOTE]
-> Cloud Foundry를 실행하는 가상 컴퓨터와 같은 Azure 리소스에 대한 지원 수준은 Azure 지원 계약을 기반으로 합니다. 최선의 커뮤니티 지원은 Cloud Foundry에 해당하는 구성 요소에만 적용됩니다.
+> Cloud Foundry를 실행하는 가상 머신과 같은 Azure 리소스에 대한 지원 수준은 Azure 지원 계약을 기반으로 합니다. 최선의 커뮤니티 지원은 Cloud Foundry에 해당하는 구성 요소에만 적용됩니다.
 
 ### <a name="pivotal-cloud-foundry"></a>Pivotal Cloud Foundry
 
@@ -67,5 +65,5 @@ Cloud Foundry는 연속 통합(CI) 및 지속적인 업데이트(CD) 사용을 �
 
 ## <a name="next-steps"></a>다음 단계
 
-- [Azure Marketplace에서 Pivotal Cloud Foundry 배포](https://azure.microsoft.com/en-us/marketplace/partners/pivotal/pivotal-cloud-foundryazure-pcf/)
+- [Azure Marketplace에서 Pivotal Cloud Foundry 배포](https://azure.microsoft.com/marketplace/partners/pivotal/pivotal-cloud-foundryazure-pcf/)
 - [Azure에서 Cloud Foundry에 앱 배포](./cloudfoundry-deploy-your-first-app.md)

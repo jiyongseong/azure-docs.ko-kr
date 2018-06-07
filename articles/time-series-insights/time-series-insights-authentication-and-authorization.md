@@ -1,30 +1,26 @@
 ---
-title: "Azure Time Series Insights API를 호출하는 사용자 지정 응용 프로그램에 대한 인증 및 권한 부여 구성 | Microsoft Docs"
-description: "이 자습서에서는 Azure Time Series Insights API를 호출하는 사용자 지정 응용 프로그램에 대한 인증 및 권한 부여를 구성하는 방법을 설명합니다."
-keywords: 
+title: "Azure Time Series Insights에서 API로 인증하고 권한을 부여하는 방법"
+description: "이 문서에서는 Azure Time Series Insights API를 호출하는 사용자 지정 응용 프로그램에 대한 인증 및 권한 부여를 구성하는 방법을 설명합니다."
 services: time-series-insights
-documentationcenter: 
-author: dmdenmsft
-manager: almineev
-editor: cgronlun
-ms.assetid: 
 ms.service: time-series-insights
-ms.devlang: na
-ms.topic: how-to-article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 05/24/2017
+author: dmdenmsft
 ms.author: dmden
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 3bbc9e9a22d962a6ee20ead05f728a2b706aee19
-ms.openlocfilehash: 3b7d0811b718d4702786572b953fb27a9521d390
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/10/2017
-
+manager: jhubbard
+editor: MicrosoftDocs/tsidocs
+ms.reviewer: v-mamcge, jasonh, kfile, anshan
+ms.devlang: csharp
+ms.workload: big-data
+ms.topic: article
+ms.date: 11/27/2017
+ms.openlocfilehash: dd78e1e726029aaceef5aff0e0eed84acac646cf
+ms.sourcegitcommit: f847fcbf7f89405c1e2d327702cbd3f2399c4bc2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/28/2017
 ---
 # <a name="authentication-and-authorization-for-azure-time-series-insights-api"></a>Azure Time Series Insights API에 대한 인증 및 권한 부여
 
-이 문서에서는 Azure Time Series Insights API를 호출하는 사용자 지정 응용 프로그램을 구성하는 방법을 설명합니다.
+이 문서에서는 Azure Time Series Insights API를 호출하는 사용자 지정 응용 프로그램에서 사용되는 인증 및 권한 부여를 구성하는 방법을 설명합니다.
 
 ## <a name="service-principal"></a>서비스 주체
 
@@ -32,7 +28,7 @@ ms.lasthandoff: 06/10/2017
 
 Time Series Insights에 액세스해야 하는 응용 프로그램이 있는 경우 Azure Active Directory 응용 프로그램을 설정하고 Time Series Insights 환경에서 데이터 액세스 정책을 할당해야 합니다. 이 방법은 다음의 이유로 사용자 고유의 자격 증명을 사용하여 앱을 실행하는 데 좋습니다.
 
-* 자체 사용 권한과 다른 앱 ID에 대한 사용 권한을 할당할 수 있습니다. 일반적으로 이러한 권한은 정확히 앱 실행에 필요한 것으로 제한됩니다. 예를 들어 앱이 Time Series Insights 환경에서만 데이터를 읽을 수 있도록 허용할 수 있습니다.
+* 자체 사용 권한과 다른 앱 ID에 대한 사용 권한을 할당할 수 있습니다. 일반적으로 이러한 권한은 앱 실행에 필요한 것으로만 제한됩니다. 예를 들어 앱이 Time Series Insights 환경에서만 데이터를 읽을 수 있도록 허용할 수 있습니다.
 * 책임이 변경되면 앱의 자격 증명을 변경할 필요가 없습니다.
 * 무인 스크립트를 실행할 때 인증서 또는 응용 프로그램 키를 사용하여 인증을 자동화할 수 있습니다.
 
@@ -103,12 +99,11 @@ Time Series Insights에 액세스해야 하는 응용 프로그램이 있는 경
     string accessToken = token.AccessToken;
     ```
 
+응용 프로그램에서 응용 프로그램 ID 및 키를 사용하여 Azure Time Series Insight에서 인증을 받습니다. 
+
 ## <a name="next-steps"></a>다음 단계
+- Time Series Insights API를 호출하는 샘플 코드는 [C#을 사용하여 데이터 쿼리](time-series-insights-query-data-csharp.md)를 참조하세요.
+- API 참조 정보에 대해서는 [쿼리 API 참조](/rest/api/time-series-insights/time-series-insights-reference-queryapi)를 참조하세요.
 
-응용 프로그램에서 응용 프로그램 ID 및 키를 사용합니다. Time Series Insights API를 호출하는 샘플 코드는 [C#을 사용하여 데이터 쿼리](time-series-insights-query-data-csharp.md)를 참조하세요.
-
-## <a name="see-also"></a>참고 항목
-
-* 전체 쿼리 API 참조는 [쿼리 API](/rest/api/time-series-insights/time-series-insights-reference-queryapi)를 참조하세요.
-* [Azure Portal에서 서비스 사용자 만들기](../azure-resource-manager/resource-group-create-service-principal-portal.md)
-
+> [!div class="nextstepaction"]
+> [서비스 주체 만들기](../azure-resource-manager/resource-group-create-service-principal-portal.md)

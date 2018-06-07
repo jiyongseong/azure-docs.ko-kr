@@ -4,7 +4,7 @@ description: "응용 프로그램 자체에서 오류를 내보내는 경우 Azu
 services: active-directory
 documentationcenter: 
 author: ajamess
-manager: femila
+manager: mtillman
 ms.assetid: 
 ms.service: active-directory
 ms.workload: identity
@@ -13,14 +13,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0d6f6fb24f1f01d703104f925dcd03ee1ff46062
-ms.openlocfilehash: c04cfea4c6c0a8211db2579eccc0c05a93cc0a35
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/18/2017
-
+ms.openlocfilehash: 02236e7f7ec6be0df5082d2cde3d616e628c3927
+ms.sourcegitcommit: d87b039e13a5f8df1ee9d82a727e6bc04715c341
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/21/2018
 ---
-
 # <a name="error-on-an-applications-page-after-signing-in"></a>로그인한 후 응용 프로그램 페이지의 오류
 
 이 시나리오에서는 Azure AD에 로그인한 사용자가 있지만 응용 프로그램에서 사용자가 로그인 흐름을 성공적으로 완료할 수 없는 오류를 표시합니다. 이 시나리오에서 응용 프로그램은 Azure AD에서 발생한 응답을 수락하지 않습니다.
@@ -39,9 +37,9 @@ Azure AD 응답으로 보낼 Azure AD 구성의 특성을 추가하려면 아래
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 또는 **공동 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
-3.  필터 검색 상자에 **"Azure Active Directory**"를 입력하고 **Azure Active Directory** 항목을 선택합니다.
+3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
 4.  Azure Active Directory 왼쪽 탐색 메뉴에서 **엔터프라이즈 응용 프로그램**을 클릭합니다.
 
@@ -53,7 +51,7 @@ Azure AD 응답으로 보낼 Azure AD 구성의 특성을 추가하려면 아래
 
 7.  응용 프로그램이 로드되면 응용 프로그램의 왼쪽 탐색 메뉴에서 **Single Sign-On**을 클릭합니다.
 
-8.  **사용자 특성** 섹션**에서 다른 모든 사용자 특성 보기 및 편집**을 클릭하여 사용자가 로그인할 때 SAML 토큰을 통해 응용 프로그램으로 보낼 특성을 편집합니다.
+8.  **사용자 특성** 섹션에서 **다른 모든 사용자 특성 보기 및 편집**을 클릭하여 사용자가 로그인할 때 SAML 토큰을 통해 응용 프로그램으로 보낼 특성을 편집합니다.
 
    특성을 추가하려면:
 
@@ -71,13 +69,13 @@ SAML 응답이 역할과 같은 특성을 누락하거나 응용 프로그램에
 
 ## <a name="add-an-attribute-in-the-azure-ad-application-configuration"></a>Azure AD 응용 프로그램 구성에 특성을 추가합니다.
 
-사용자 식별자 값을 변경하려면 아래 단계를 수행합니다.
+사용자 ID 값을 변경하려면 아래 단계를 수행합니다.
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 또는 **공동 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
-3.  필터 검색 상자에 **"Azure Active Directory**"를 입력하고 **Azure Active Directory** 항목을 선택합니다.
+3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
 4.  Azure Active Directory 왼쪽 탐색 메뉴에서 **엔터프라이즈 응용 프로그램**을 클릭합니다.
 
@@ -99,13 +97,13 @@ Azure AD에서는 선택한 값 또는 SAML AuthRequest에서 응용 프로그�
 
 ## <a name="the-application-expects-a-different-signature-method-for-the-saml-response"></a>응용 프로그램은 SAML 응답에 대해 다른 시그니처 메서드를 필요로 합니다.
 
-Azure Active Directory에서 디지털 방식으로 로그인한 SAML 토큰을 변경하려고 합니다. 다음 단계를 따르세요.
+Azure Active Directory에서 디지털 방식으로 로그인한 SAML 토큰을 변경하려고 합니다. 다음 단계를 수행하세요.
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 또는 **공동 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
-3.  필터 검색 상자에 **"Azure Active Directory**"를 입력하고 **Azure Active Directory** 항목을 선택합니다.
+3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
 4.  Azure Active Directory 왼쪽 탐색 메뉴에서 **엔터프라이즈 응용 프로그램**을 클릭합니다.
 
@@ -137,9 +135,9 @@ Azure Active Directory에서 디지털 방식으로 로그인한 SAML 토큰을 
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 또는 **공동 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
-3.  필터 검색 상자에 **"Azure Active Directory**"를 입력하고 **Azure Active Directory** 항목을 선택합니다.
+3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
 4.  Azure Active Directory 왼쪽 탐색 메뉴에서 **엔터프라이즈 응용 프로그램**을 클릭합니다.
 
@@ -159,4 +157,3 @@ Azure Active Directory에서 디지털 방식으로 로그인한 SAML 토큰을 
 
 ## <a name="next-steps"></a>다음 단계
 [Azure Active Directory에서 SAML 기반 Single Sign-On을 응용 프로그램에 디버그하는 방법](https://azure.microsoft.com/documentation/articles/active-directory-saml-debugging)
-

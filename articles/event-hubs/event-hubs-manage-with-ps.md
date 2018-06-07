@@ -12,18 +12,17 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 04/06/2017
+ms.date: 12/19/2017
 ms.author: sethm
-translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: a3ba385e15510139929735adb5e50b6291846356
-ms.lasthandoff: 04/27/2017
-
-
+ms.openlocfilehash: de86b8241166d4e0bd03beb22550464457e3db5e
+ms.sourcegitcommit: f46cbcff710f590aebe437c6dd459452ddf0af09
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/20/2017
 ---
 # <a name="use-powershell-to-manage-event-hubs-resources"></a>PowerShell을 사용하여 Event Hubs 리소스 관리
 
-Microsoft Azure PowerShell은 Azure 서비스의 배포와 관리를 제어하고 자동화하는 데 사용할 수 있는 스크립팅 환경입니다. 이 문서에서는 [Event Hubs Resource Manager PowerShell 모듈](/powershell/module/azurerm.eventhub)을 사용하여 로컬 Azure PowerShell 콘솔 또는 스크립트를 통해 Event Hubs 엔터티(네임스페이스, Event Hubs 및 소비자 그룹)를 프로비전하고 관리하는 방법을 설명합니다.
+Microsoft Azure PowerShell은 Azure 서비스의 배포와 관리를 제어하고 자동화하는 데 사용할 수 있는 스크립팅 환경입니다. 이 문서에서는 [Event Hubs Resource Manager PowerShell 모듈](/powershell/module/azurerm.eventhub)을 사용하여 로컬 Azure PowerShell 콘솔 또는 스크립트를 통해 Event Hubs 엔터티(네임스페이스, 개별 이벤트 허브 및 소비자 그룹)를 프로비전하고 관리하는 방법을 설명합니다.
 
 Azure Resource Manager 템플릿을 사용하여 Event Hubs 리소스를 관리할 수도 있습니다. 자세한 내용은 문서 [Azure Resource Manager 템플릿을 사용하여 이벤트 허브 및 소비자 그룹이 있는 Event Hubs 네임스페이스 만들기](event-hubs-resource-manager-namespace-event-hub.md)를 참조하세요.
 
@@ -35,9 +34,9 @@ Azure Resource Manager 템플릿을 사용하여 Event Hubs 리소스를 관리�
 * Azure PowerShell이 설치된 컴퓨터 관련 지침은 [Azure PowerShell Cmdlet 시작](/powershell/azure/get-started-azureps)을 참조하세요.
 * PowerShell 스크립트, NuGet 패키지 및 .NET Framework 전반에 대한 지식
 
-## <a name="get-started"></a>시작
+## <a name="get-started"></a>시작하기
 
-첫 번째 단계는 PowerShell을 사용하여 Azure 계정 및 Azure 구독에 로그인하는 것입니다. [Azure PowerShell cmdlet 시작](/powershell/azure/get-started-azureps)의 지침에 따라 Azure 계정에 로그인하고, Azure 구독에서 리소스를 검색하고 액세스합니다.
+첫 번째 단계는 PowerShell을 사용하여 Azure 계정 및 Azure 구독에 로그인하는 것입니다. [Azure PowerShell cmdlet 시작](/powershell/azure/get-started-azureps)의 지침에 따라 Azure 계정에 로그인한 다음, Azure 구독에서 리소스를 검색하고 액세스합니다.
 
 ## <a name="provision-an-event-hubs-namespace"></a>Event Hubs 네임스페이스 프로비전
 
@@ -80,31 +79,31 @@ Event Hubs 네임스페이스를 사용할 때 [Get-AzureRmEventHubNamespace](/p
 
 ## <a name="create-an-event-hub"></a>이벤트 허브 만들기
 
-이벤트 허브를 만들려면 이전 섹션의 스크립트를 사용하여 네임스페이스 확인을 수행합니다. 그런 후 New-[AzureRmEventHub](/powershell/module/azurerm.eventhub/new-azurermeventhub) cmdlet을 사용하여 이벤트 허브를 만듭니다.
+이벤트 허브를 만들려면 이전 섹션의 스크립트를 사용하여 네임스페이스 확인을 수행합니다. 그런 다음, [New-AzureRmEventHub](/powershell/module/azurerm.eventhub/new-azurermeventhub) cmdlet을 사용하여 이벤트 허브를 만듭니다.
 
 ```powershell
-# Check if Event Hub already exists
+# Check if event hub already exists
 $CurrentEH = Get-AzureRMEventHub -ResourceGroupName $ResGrpName -NamespaceName $Namespace -EventHubName $EventHubName
 
 if($CurrentEH)
 {
-    Write-Host "The Event Hub $EventHubName already exists in the $Location region:"
+    Write-Host "The event hub $EventHubName already exists in the $Location region:"
     # Report what was found
     Get-AzureRmEventHub -ResourceGroupName $ResGrpName -NamespaceName $Namespace -EventHubName $EventHubName
 }
 else
 {
-    Write-Host "The $EventHubName Event Hub does not exist."
-    Write-Host "Creating the $EventHubName Event Hub in the $Location region..."
+    Write-Host "The $EventHubName event hub does not exist."
+    Write-Host "Creating the $EventHubName event hub in the $Location region..."
     New-AzureRmEventHub -ResourceGroupName $ResGrpName -NamespaceName $Namespace -EventHubName $EventHubName -Location $Location -MessageRetentionInDays 3
     $CurrentEH = Get-AzureRmEventHub -ResourceGroupName $ResGrpName -NamespaceName $Namespace -EventHubName $EventHubName
-    Write-Host "The $EventHubName Event Hub in Resource Group $ResGrpName in the $Location region has been successfully created."
+    Write-Host "The $EventHubName event hub in Resource Group $ResGrpName in the $Location region has been successfully created."
 }
 ```
 
 ### <a name="create-a-consumer-group"></a>소비자 그룹 만들기
 
-이벤트 허브 내에 소비자 그룹을 만들려면 이전 섹션의 스크립트를 사용하여 네임스페이스 및 이벤트 허브 확인을 수행합니다. 그런 후 [New-AzureRmEventHubConsumerGroup](/powershell/module/azurerm.eventhub/new-azurermeventhubconsumergroup) cmdlet을 사용하여 이벤트 허브 내에 소비자 그룹을 만듭니다. 예:
+이벤트 허브 내에 소비자 그룹을 만들려면 이전 섹션의 스크립트를 사용하여 네임스페이스 및 이벤트 허브 확인을 수행합니다. 그런 다음, [New-AzureRmEventHubConsumerGroup](/powershell/module/azurerm.eventhub/new-azurermeventhubconsumergroup) cmdlet을 사용하여 이벤트 허브 내에 소비자 그룹을 만듭니다. 예: 
 
 ```powershell
 # Check if consumer group already exists
@@ -112,7 +111,7 @@ $CurrentCG = Get-AzureRmEventHubConsumerGroup -ResourceGroupName $ResGrpName -Na
 
 if($CurrentCG)
 {
-    Write-Host "The consumer group $ConsumerGroupName in Event Hub $EventHubName already exists in the $Location region:"
+    Write-Host "The consumer group $ConsumerGroupName in event hub $EventHubName already exists in the $Location region:"
     # Report what was found
     Get-AzureRmEventHubConsumerGroup -ResourceGroupName $ResGrpName -NamespaceName $Namespace -EventHubName $EventHubName
 }
@@ -122,7 +121,7 @@ else
     Write-Host "Creating the $ConsumerGroupName consumer group in the $Location region..."
     New-AzureRmEventHubConsumerGroup -ResourceGroupName $ResGrpName -NamespaceName $Namespace -EventHubName $EventHubName -ConsumerGroupName $ConsumerGroupName
     $CurrentCG = Get-AzureRmEventHubConsumerGroup -ResourceGroupName $ResGrpName -NamespaceName $Namespace -EventHubName $EventHubName
-    Write-Host "The $ConsumerGroupName consumer group in Event Hub $EventHubName in Resource Group $ResGrpName in the $Location region has been successfully created."
+    Write-Host "The $ConsumerGroupName consumer group in event hub $EventHubName in Resource Group $ResGrpName in the $Location region has been successfully created."
 }
 ```
 
@@ -140,7 +139,7 @@ Get-AzureRmEventHubConsumerGroup -ResourceGroupName $ResGrpName -NamespaceName $
 
 ## <a name="remove-event-hub"></a>이벤트 허브 제거
 
-만든 Event Hubs 엔터티를 제거하려면 다음 예제와 같이 `Remove-*` cmdlet을 사용할 수 있습니다.
+만든 이벤트 허브를 제거하려면 다음 예제와 같이 `Remove-*` cmdlet을 사용할 수 있습니다.
 
 ```powershell
 # Clean up
@@ -158,4 +157,3 @@ Remove-AzureRmEventHubNamespace -ResourceGroupName $ResGrpName -NamespaceName $N
 [purchase options]: http://azure.microsoft.com/pricing/purchase-options/
 [member offers]: http://azure.microsoft.com/pricing/member-offers/
 [free account]: http://azure.microsoft.com/pricing/free-trial/
-

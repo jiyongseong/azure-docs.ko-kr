@@ -14,13 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/16/2017
 ms.author: kumud
-translationtype: Human Translation
-ms.sourcegitcommit: bb1ca3189e6c39b46eaa5151bf0c74dbf4a35228
 ms.openlocfilehash: aadff1806a7cb22347283143563467366e857569
-ms.lasthandoff: 03/18/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="verify-traffic-manager-settings"></a>Traffic Manager 설정 확인
 
 Traffic Manager 설정을 테스트 하려면 여러 클라이언트가 테스트를 실행할 수 있는 다양한 위치에 있어야 합니다. 그런 다음 Traffic Manager 프로필에 있는 끝점을 한 번에 하나씩 종료합니다.
@@ -75,4 +74,3 @@ DNS 이름이 사용자 프로필에서 끝점의 IP 주소로 확인되는지 �
 * [Traffic Manager 트래픽 라우팅 방법 정보](traffic-manager-routing-methods.md)
 * [Traffic Manager 성능 고려 사항](traffic-manager-performance-considerations.md)
 * [Traffic Manager 성능 저하 상태 문제 해결](traffic-manager-troubleshooting-degraded.md)
-

@@ -12,20 +12,19 @@ ms.devlang: NA
 ms.topic: hero-article
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 07/10/2017
+ms.date: 11/08/2017
 ms.author: alkohli
+ms.openlocfilehash: 4d47b5426da5d857085991767faa5fb227476408
+ms.sourcegitcommit: 8c3267c34fc46c681ea476fee87f5fb0bf858f9e
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 905a70bfd37ccdb9f2944b4a9348c3b60dedda44
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/09/2018
 ---
 # <a name="deploy-and-manage-a-storsimple-cloud-appliance-in-azure-update-3-and-later"></a>Azure에서 StorSimple Cloud Appliance 배포 및 관리(업데이트 3 이상)
 
 ## <a name="overview"></a>개요
 
-StorSimple 8000 Series Cloud Appliance는 Microsoft Azure StorSimple 솔루션과 함께 제공되는 추가 기능입니다. StorSimple Cloud Appliance는 Microsoft Azure Virtual Network의 가상 컴퓨터에서 실행되며, 이 장치를 사용하여 호스트에서 데이터를 백업하고 복제할 수 있습니다.
+StorSimple 8000 Series Cloud Appliance는 Microsoft Azure StorSimple 솔루션과 함께 제공되는 추가 기능입니다. StorSimple Cloud Appliance는 Microsoft Azure Virtual Network의 가상 머신에서 실행되며, 이 장치를 사용하여 호스트에서 데이터를 백업하고 복제할 수 있습니다.
 
 이 문서에서는 Azure에서 StorSimple Cloud Appliance를 배포하고 관리하기 위한 단계별 프로세스에 대해 설명합니다. 이 문서를 읽고 나면:
 
@@ -45,12 +44,12 @@ StorSimple Cloud Appliance는 두 가지 모델 즉, 표준 8010(이전의 1100)
 | **최대 용량** |30TB |64TB |
 | **Azure VM** |Standard_A3(4 코어, 7GB 메모리)| Standard_DS3 (4 코어, 14GB 메모리)|
 | **지역 가용성** |모든 Azure 지역 |Premium Storage 및 DS3 Azure VM을 지원하는 Azure 지역<br></br>[이 목록](https://azure.microsoft.com/regions/services/)을 사용하여 **Virtual Machines > DS 시리즈** 및 **저장소 > 디스크 저장소**를 자신의 지역에서 사용할 수 있습니다. |
-| **저장소 유형** |로컬 디스크에 Azure 표준 저장소 사용<br></br> [표준 저장소 계정을 만드는](../storage/storage-create-storage-account.md) |로컬 디스크<sup>2</sup> <br></br>[프리미엄 저장소 계정을 만드는](../storage/storage-premium-storage.md) 방법 알아보기 |
+| **저장소 유형** |로컬 디스크에 Azure Standard Storage 사용<br></br> [Standard Storage 계정을 만드는](../storage/common/storage-create-storage-account.md) |로컬 디스크용 Azure Premium Storage 사용<sup>2</sup> <br></br>[Premium Storage 계정을 만드는](../virtual-machines/windows/premium-storage.md) |
 | **워크로드 지침** |백업으로부터 항목 수준 파일 읽어오기 |클라우드 개발 및 테스트 시나리오 <br></br>짧은 대기 시간 및 더 높은 성능 워크로드<br></br>재해 복구용 보조 장치 |
 
 <sup>1</sup> *이전에 1100로 알려짐*.
 
-<sup>2</sup> *8010와 8020은 모두 클라우드 계층에 Azure 표준 저장소를 사용합니다. 차이점은 장치* 내의 로컬 계층에만 존재한다는 것입니다.
+<sup>2</sup>*8010와 8020은 모두 클라우드 계층에 Azure Standard Storage를 사용합니다. 차이점은 장치* 내의 로컬 계층에만 존재한다는 것입니다.
 
 ## <a name="how-the-cloud-appliance-differs-from-the-physical-device"></a>클라우드 어플라이언스와 물리적 장치의 차이
 
@@ -79,7 +78,7 @@ StorSimple Cloud Appliance는 Microsoft Azure Virtual Machine의 단일 노드�
 클라우드 어플라이언스를 프로비전하기 전에 Azure 환경에서 다음 준비를 확인해야 합니다.
 
 * 데이터 센터에 StorSimple 8000 시리즈 물리적 장치(8100 또는 8600 모델)가 배포되어 실행되고 있는지 확인합니다. StorSimple Cloud Appliance를 만들려는 동일한 StorSimple 장치 관리자 서비스에 이 장치를 등록합니다.
-* 클라우드 어플라이언스의 경우, [Azure에서 가상 네트워크를 구성](../virtual-network/virtual-networks-create-vnet-arm-pportal.md)합니다. 프리미엄 저장소를 사용하는 경우 프리미엄 저장소를 지원하는 Azure 지역에 가상 네트워크를 만들어야 합니다. Premium Storage 지역은 [지역별 Azure 서비스 목록](https://azure.microsoft.com/regions/services/)에서 디스크 저장소의 행에 해당하는 지역입니다.
+* 클라우드 어플라이언스의 경우, [Azure에서 가상 네트워크를 구성](../virtual-network/manage-virtual-network.md#create-a-virtual-network)합니다. Premium Storage를 사용하는 경우 Premium Storage를 지원하는 Azure 지역에 가상 네트워크를 만들어야 합니다. Premium Storage 지역은 [지역별 Azure 서비스 목록](https://azure.microsoft.com/regions/services/)에서 디스크 저장소의 행에 해당하는 지역입니다.
 * 사용자 고유의 DNS 서버 이름을 지정하는 대신 Azure에서 제공하는 기본 DNS 서버를 사용하는 것이 좋습니다. DNS 서버 이름이 유효하지 않거나 DNS 서버가 IP 주소를 제대로 확인할 수 없으면 클라우드 어플라이언스 만들기에 실패합니다.
 * 지점 대 사이트간 및 사이트 대 사이트는 선택적이지만 필수는 아닙니다. 원하는 경우, 고급 시나리오에 대해 이 옵션을 구성할 수 있습니다.
 * 클라우드 어플라이언스에 표시된 볼륨을 사용할 수 있는 [Azure Virtual Machines](../virtual-machines/virtual-machines-windows-quick-create-portal.md)(호스트 서버)를 가상 네트워크에 만들 수 있습니다. 이 서버는 다음 요구 사항을 충족해야 합니다.
@@ -94,7 +93,7 @@ StorSimple Cloud Appliance는 Microsoft Azure Virtual Machine의 단일 노드�
 클라우드 어플라이언스를 만들기 전에 StorSimple 장치 관리자 서비스에 대한 다음 업데이트를 확인합니다.
 
 * 클라우드 어플라이언스에 대해 호스트 서버가 될 VM에 대해 [액세스 제어 레코드](storsimple-8000-manage-acrs.md)를 추가합니다.
-* 클라우드 어플라이언스와 동일한 지역에 [저장소 계정](storsimple-8000-manage-storage-accounts.md#add-a-storage-account)을 사용합니다. 다른 영역의 저장소 계정으로 성능이 저하될 수 있습니다. 클라우드 어플라이언스에 Standard 또는 Premium Storage 계정을 사용할 수 있습니다. 자세한 내용은 [표준 저장소 계정](../storage/storage-create-storage-account.md) 또는 [프리미엄 저장소 계정](../storage/storage-premium-storage.md)을 만드는 방법을 참조하세요.
+* 클라우드 어플라이언스와 동일한 지역에 [저장소 계정](storsimple-8000-manage-storage-accounts.md#add-a-storage-account)을 사용합니다. 다른 영역의 Storage 계정으로 성능이 저하될 수 있습니다. 클라우드 어플라이언스에 Standard 또는 Premium Storage 계정을 사용할 수 있습니다. 자세한 내용은 [Standard Storage 계정](../storage/common/storage-create-storage-account.md) 또는 [Premium Storage 계정](../virtual-machines/windows/premium-storage.md)을 만드는 방법을 참조하세요.
 * 데이터에 사용된 계정이 아닌 클라우드 어플라이언스 생성을 위해 다른 저장소 계정을 사용합니다. 동일한 저장소 계정을 사용하면 성능이 저하될 수 있습니다.
 
 시작하기 전에 다음 정보가 있는지 확인합니다.
@@ -146,7 +145,7 @@ StorSimple Cloud Appliance를 만들려면 다음 단계를 수행합니다.
 StorSimple 스냅숏 관리자 소프트웨어는 Windows 호스트에 상주하며 관리자가 로컬 및 클라우드 스냅숏의 형태로 StorSimple 장치의 백업을 관리할 수 있습니다.
 
 > [!NOTE]
-> 클라우드 어플라이언스의 경우, Windows 호스트는 Azure 가상 컴퓨터입니다.
+> 클라우드 어플라이언스의 경우, Windows 호스트는 Azure 가상 머신입니다.
 
 StorSimple Snapshot Manager에서 장치를 구성하면, StorSimple 장치 IP 주소 및 암호를 입력하여 저장소 장치를 인증하라는 메시지가 표시됩니다. 자세한 단계를 보려면 [StorSimple 스냅숏 관리자 암호 구성](storsimple-8000-change-passwords.md#set-the-storsimple-snapshot-manager-password)으로 이동합니다.
 
@@ -168,7 +167,7 @@ Windows PowerShell 인터페이스를 통한 클라우드 어플라이언스에 
 
 ### <a name="step-2-remotely-access-the-cloud-appliance"></a>2단계: 클라우드 어플라이언스에 원격으로 액세스
 
-클라우드 어플라이언스에서 원격 관리를 사용하도록 설정한 후 Windows PowerShell 원격을 사용하여 동일한 가상 네트워크 내 다른 가상 컴퓨터에서 어플라이언스에 연결합니다. 예를 들어 iSCSI 연결을 위해 구성 및 사용한 호스트 VM에서 연결할 수 있습니다. 대부분의 배포에서는 클라우드 어플라이언스에 액세스하기 위해 사용할 수 있는 호스트 VM에 액세스하기 위해 공용 끝점이 열려 있습니다.
+클라우드 어플라이언스에서 원격 관리를 사용하도록 설정한 후 Windows PowerShell 원격을 사용하여 동일한 가상 네트워크 내 다른 가상 머신에서 어플라이언스에 연결합니다. 예를 들어 iSCSI 연결을 위해 구성 및 사용한 호스트 VM에서 연결할 수 있습니다. 대부분의 배포에서는 클라우드 어플라이언스에 액세스하기 위해 사용할 수 있는 호스트 VM에 액세스하기 위해 공용 끝점이 열려 있습니다.
 
 > [!WARNING]
 > **보안 강화를 위해 끝점에 연결할 때 HTTPS를 사용하고 PowerShell 원격 세션을 완료한 후 끝점을 삭제하는 것이 좋습니다.**
@@ -183,7 +182,19 @@ Windows PowerShell 인터페이스를 통한 클라우드 어플라이언스에 
 
 [!INCLUDE [Create public endpoints on a cloud appliance](../../includes/storsimple-8000-create-public-endpoints-cloud-appliance.md)]
 
-가상 네트워크의 공용 끝점의 수를 최소화하기 때문에 동일한 가상 네트워크 내 다른 가상 컴퓨터에서 연결하는 것이 좋습니다. 이 경우, 원격 데스크톱 세션을 통해 연결한 다음 로컬 네트워크의 다른 Windows 클라이언트와 같이 가상 컴퓨터를 사용하도록 구성하면 됩니다. 포트를 이미 알 수 있으므로 공용 포트 번호를 추가할 필요가 없습니다.
+가상 네트워크의 공용 끝점의 수를 최소화하기 때문에 동일한 가상 네트워크 내 다른 가상 머신에서 연결하는 것이 좋습니다. 이 경우, 원격 데스크톱 세션을 통해 연결한 다음 로컬 네트워크의 다른 Windows 클라이언트와 같이 가상 머신을 사용하도록 구성하면 됩니다. 포트를 이미 알 수 있으므로 공용 포트 번호를 추가할 필요가 없습니다.
+
+## <a name="get-private-ip-for-the-cloud-appliance"></a>클라우드 어플라이언스에 대한 개인 IP 가져오기
+
+동일한 가상 네트워크에서 호스트 서버에 연결하는 클라우드 어플라이언스의 경우 클라우드 어플라이언스의 내부 또는 개인 IP 주소가 필요합니다. 다음 단계를 수행하여 클라우드 어플라이언스의 개인 IP 주소를 가져오기
+
+1. 클라우드 어플라이언스에 대한 기본 가상 머신으로 이동합니다. 가상 머신에는 클라우드 어플라이언스와 동일한 이름이 있습니다. **모든 리소스**로 이동하고, 클라우드 어플라이언스 및 구독의 이름을 제공하고, 가상 머신으로 유형을 선택합니다. 제공된 가상 머신의 목록에서 클라우드 어플라이언스에 해당하는 가상 머신을 선택하고 클릭합니다.
+
+     ![클라우드 어플라이언스에 대한 가상 머신 선택](./media/storsimple-8000-cloud-appliance-u2/sca-vm.png)
+
+2. **설정 > 네트워킹**으로 이동합니다. 오른쪽 창에 클라우드 어플라이언스의 개인 IP 주소가 표시됩니다. 기록해 둡니다.
+
+    ![클라우드 어플라이언스에 대한 개인 IP 주소 가져오기](./media/storsimple-8000-cloud-appliance-u2/sca-private-ip-vm-networking.png)
 
 ## <a name="work-with-the-storsimple-cloud-appliance"></a>StorSimple Cloud Appliance 작업
 
@@ -198,9 +209,9 @@ StorSimple Cloud Appliance를 만들고 구성했으므로 작업을 시작할 �
 클라우드 어플라이언스를 업데이트할 수 없습니다. 새 클라우드 어플라이언스를 만들려면 소프트웨어의 최신 버전을 사용합니다.
 
 
-### <a name="storage-accounts-for-a-cloud-appliance"></a>클라우드 어플라이언스에 대한 저장소 계정
+### <a name="storage-accounts-for-a-cloud-appliance"></a>클라우드 어플라이언스에 대한 Storage 계정
 
-저장소 계정은 StorSimple 장치 관리자 서비스, 클라우드 어플라이언스 및 물리적 장치에서 사용하기 위해 만듭니다. 저장소 계정을 만들 때는 친숙한 이름의 지역 식별자를 사용하는 것이 좋습니다. 이렇게 하면 지역은 모든 시스템 구성 요소 전체에 걸쳐 일관성이 보장됩니다. 클라우드 어플라이언스의 경우, 성능 문제를 방지하도록 모든 구성 요소가 동일한 지역에 있는 것이 중요합니다.
+Storage 계정은 StorSimple 장치 관리자 서비스, 클라우드 어플라이언스 및 물리적 장치에서 사용하기 위해 만듭니다. 저장소 계정을 만들 때는 친숙한 이름의 지역 식별자를 사용하는 것이 좋습니다. 이렇게 하면 지역은 모든 시스템 구성 요소 전체에 걸쳐 일관성이 보장됩니다. 클라우드 어플라이언스의 경우, 성능 문제를 방지하도록 모든 구성 요소가 동일한 지역에 있는 것이 중요합니다.
 
 단계별 절차를 보려면 [저장소 계정 추가](storsimple-8000-manage-storage-accounts.md#add-a-storage-account)로 이동하세요.
 
@@ -222,7 +233,7 @@ StorSimple 장치 관리자 서비스 블레이드에서 비활성화된 클라�
 ### <a name="start-stop-and-restart-a-cloud-appliance"></a>클라우드 어플라이언스 시작, 중지 및 다시 시작
 StorSimple 물리적 장치와 달리, StorSimple Cloud Appliance에서 누를 전원 켜짐 또는 꺼짐 단추가 없습니다. 그러나 어플라이언스를 중지하고 다시 시작해야 하는 경우가 있을 수 있습니다.
 
-클라우드 어플라이언스를 시작, 중지 및 다시 시작하는 가장 쉬운 방법은 Virtual Machines 서비스 블레이드를 사용하는 것입니다. Virtual Machine 서비스로 이동합니다. VM 목록에서 클라우드 어플라이언스에 해당하는 VM을 식별(같은 이름)하고 VM 이름을 클릭합니다. 가상 컴퓨터 블레이드를 보면 클라우드 어플라이언스 상태가 생성된 후 시작되기 때문에 상태는 **실행 중**입니다. 언제든지 가상 컴퓨터를 시작하고 중지하고 다시 시작할 수 있습니다.
+클라우드 어플라이언스를 시작, 중지 및 다시 시작하는 가장 쉬운 방법은 Virtual Machines 서비스 블레이드를 사용하는 것입니다. Virtual Machine 서비스로 이동합니다. VM 목록에서 클라우드 어플라이언스에 해당하는 VM을 식별(같은 이름)하고 VM 이름을 클릭합니다. 가상 머신 블레이드를 보면 클라우드 어플라이언스 상태가 생성된 후 시작되기 때문에 상태는 **실행 중**입니다. 언제든지 가상 머신을 시작하고 중지하고 다시 시작할 수 있습니다.
 
 [!INCLUDE [Stop and restart cloud appliance](../../includes/storsimple-8000-stop-restart-cloud-appliance.md)]
 
@@ -253,9 +264,9 @@ StorSimple Cloud Appliance를 이전에 구성하고 사용했지만 이제 용�
 ## <a name="troubleshoot-internet-connectivity-errors"></a>인터넷 연결 오류 문제 해결
 클라우드 어플라이언스를 만드는 동안 인터넷에 연결되지 않은 경우 생성 단계가 실패합니다. 인터넷 연결 오류 문제를 해결하려면 Azure Portal에서 다음 단계를 수행합니다.
 
-1. [Azure에서 Windows Server 2012 가상 컴퓨터를 만듭니다](/articles/virtual-machines/windows/quick-create-portal.md). 이 가상 컴퓨터는 클라우드 어플라이언스에서 사용한 동일한 저장소 계정, VNet 및 서브넷을 사용해야 합니다. Azure에서 동일한 저장소 계정, VNet 및 서브넷을 사용하는 기존 Windows Server 호스트가 있는 경우 인터넷 연결 문제를 해결하는 데 사용할 수 있습니다.
-2. 이전 단계에서 만든 가상 컴퓨터에 원격 로그인합니다.
-3. 가상 컴퓨터 내의 명령 창을 엽니다(Win + R 및 `cmd`을 입력).
+1. [Azure에서 Windows Server 2012 가상 머신을 만듭니다](/articles/virtual-machines/windows/quick-create-portal.md). 이 가상 머신은 클라우드 어플라이언스에서 사용한 동일한 저장소 계정, VNet 및 서브넷을 사용해야 합니다. Azure에서 동일한 저장소 계정, VNet 및 서브넷을 사용하는 기존 Windows Server 호스트가 있는 경우 인터넷 연결 문제를 해결하는 데 사용할 수 있습니다.
+2. 이전 단계에서 만든 가상 머신에 원격 로그인합니다.
+3. 가상 머신 내의 명령 창을 엽니다(Win + R 및 `cmd`을 입력).
 4. 프롬프트에서 다음 cmd를 실행합니다.
 
     `nslookup windows.net`
@@ -265,4 +276,3 @@ StorSimple Cloud Appliance를 이전에 구성하고 사용했지만 이제 용�
 ## <a name="next-steps"></a>다음 단계
 * [StorSimple 장치 관리자 서비스를 사용하여 클라우드 어플라이언스를 관리](storsimple-8000-manager-service-administration.md)하는 방법을 알아봅니다.
 * [백업 세트에서 StorSimple 볼륨을 복원](storsimple-8000-restore-from-backup-set-u2.md)하는 방법을 알아봅니다.
-

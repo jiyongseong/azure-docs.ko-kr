@@ -1,6 +1,6 @@
 ---
-title: "Azure Relay를 사용하는 Service Bus REST 자습서 | Microsoft Docs"
-description: "REST 기반 인터페이스를 표시하는 간단한 Azure Service Bus 릴레이 호스트 응용 프로그램을 구축합니다."
+title: "Azure Relay를 사용하는 REST 자습서 | Microsoft Docs"
+description: "REST 기반 인터페이스를 표시하는 간단한 Azure Service Bus Relay 호스트 응용 프로그램을 구축합니다."
 services: service-bus-relay
 documentationcenter: na
 author: sethmanheim
@@ -12,21 +12,19 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 06/17/2017
+ms.date: 11/06/2017
 ms.author: sethm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ff2fb126905d2a68c5888514262212010e108a3d
-ms.openlocfilehash: 0db9dbd2d2743907e3f0b259228201d4f5d0c3c2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/17/2017
-
-
+ms.openlocfilehash: 7a5a2916514a125d0b7443ced42e5ec600c68857
+ms.sourcegitcommit: 295ec94e3332d3e0a8704c1b848913672f7467c8
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/06/2017
 ---
 # <a name="azure-wcf-relay-rest-tutorial"></a>Azure WCF 릴레이 REST 자습서
 
-이 자습서에서는 REST 기반 인터페이스를 표시하는 간단한 Azure Relay 호스트 응용 프로그램을 구축하는 방법을 설명합니다. REST는 웹 브라우저와 같은 웹 클라이언트가 HTTP 요청을 통해 서비스 버스 API에 액세스할 수 있도록 합니다.
+이 자습서에서는 REST 기반 인터페이스를 표시하는 간단한 Azure Relay 호스트 응용 프로그램을 구축하는 방법을 설명합니다. REST는 웹 브라우저와 같은 웹 클라이언트가 HTTP 요청을 통해 Service Bus API에 액세스할 수 있도록 합니다.
 
-자습서에서는 WCF(Windows Communication Foundation) REST 프로그래밍 모델을 사용하여 서비스 버스에 REST 서비스를 구축합니다. 자세한 내용은 WCF 설명서의 [WCF REST 프로그래밍 모델](/dotnet/framework/wcf/feature-details/wcf-web-http-programming-model) 및 [서비스 디자인 및 구현](/dotnet/framework/wcf/designing-and-implementing-services)을 참조하세요.
+자습서에서는 WCF(Windows Communication Foundation) REST 프로그래밍 모델을 사용하여 Azure Relay에 REST 서비스를 구축합니다. 자세한 내용은 WCF 설명서의 [WCF REST 프로그래밍 모델](/dotnet/framework/wcf/feature-details/wcf-web-http-programming-model) 및 [서비스 디자인 및 구현](/dotnet/framework/wcf/designing-and-implementing-services)을 참조하세요.
 
 ## <a name="step-1-create-a-namespace"></a>단계 1: 네임스페이스 만들기
 
@@ -34,9 +32,9 @@ Azure에서 릴레이 기능 사용을 시작하려면 먼저 서비스 네임�
 
 ## <a name="step-2-define-a-rest-based-wcf-service-contract-to-use-with-azure-relay"></a>2단계: Azure Relay와 사용할 REST 기반 WCF 서비스 계약 정의
 
-WCF REST 스타일 서비스를 만들 때 계약을 정의해야 합니다. 계약은 호스트가 지원하는 작업을 지정합니다. 서비스 작업은 웹 서비스 메서드로 생각할 수 있습니다. 계약은 C++, C#, 또는 Visual Basic 인터페이스를 정의하여 만듭니다. 인터페이스의 각 메서드는 특정 서비스 작업에 해당합니다. [ServiceContractAttribute](https://msdn.microsoft.com/library/system.servicemodel.servicecontractattribute.aspx) 특성은 각 인터페이스에 반드시 적용되어야 하고, [OperationContractAttribute](https://msdn.microsoft.com/library/system.servicemodel.operationcontractattribute.aspx) 속성은 각 작업에 반드시 적용되어야 합니다. [OperationContractAttribute](https://msdn.microsoft.com/library/system.servicemodel.operationcontractattribute.aspx)을 포함하는 인터페이스의 메서드에 [ServiceContractAttribute](https://msdn.microsoft.com/library/system.servicemodel.servicecontractattribute.aspx)이 없으면 해당 메서드는 드러나지 않습니다. 이 작업에 사용되는 코드는 과정을 수행하면서 예제에 표시됩니다.
+WCF REST 스타일 서비스를 만들 때 계약을 정의해야 합니다. 계약은 호스트가 지원하는 작업을 지정합니다. 서비스 작업은 웹 서비스 메서드로 생각할 수 있습니다. 계약은 C++, C#, 또는 Visual Basic 인터페이스를 정의하여 만듭니다. 인터페이스의 각 메서드는 특정 서비스 작업에 해당합니다. [ServiceContractAttribute](/dotnet/api/system.servicemodel.servicecontractattribute) 특성은 각 인터페이스에 반드시 적용되어야 하고, [OperationContractAttribute](/dotnet/api/system.servicemodel.operationcontractattribute) 속성은 각 작업에 반드시 적용되어야 합니다. [OperationContractAttribute](/dotnet/api/system.servicemodel.operationcontractattribute)을 포함하는 인터페이스의 메서드에 [ServiceContractAttribute](/dotnet/api/system.servicemodel.servicecontractattribute)이 없으면 해당 메서드는 드러나지 않습니다. 이 작업에 사용되는 코드는 과정을 수행하면서 예제에 표시됩니다.
 
-WCF 계약과 REST 스타일 계약의 주요 차이는 [OperationContractAttribute](https://msdn.microsoft.com/library/system.servicemodel.operationcontractattribute.aspx): [WebGetAttribute](https://msdn.microsoft.com/library/system.servicemodel.web.webgetattribute.aspx)에 대한 속성의 추가합니다. 이 속성을 사용하면 인터페이스의 메서드를 인터페이스 반대편의 메서드로 매핑할 수 있습니다. 이 경우 [WebGetAttribute](https://msdn.microsoft.com/library/system.servicemodel.web.webgetattribute.aspx)을 사용하여 메서드를 HTTP GET으로 연결합니다. 이렇게 하면 서비스 버스가 인터페이스로 보낸 명령을 정확하게 검색하고 해석할 수 있습니다.
+WCF 계약과 REST 스타일 계약의 주요 차이는 [OperationContractAttribute](/dotnet/api/system.servicemodel.operationcontractattribute): [WebGetAttribute](/dotnet/api/system.servicemodel.web.webgetattribute)에 대한 속성의 추가합니다. 이 속성을 사용하면 인터페이스의 메서드를 인터페이스 반대편의 메서드로 매핑할 수 있습니다. 이 예제에서는 [WebGetAttribute](/dotnet/api/system.servicemodel.web.webgetattribute) 특성을 사용하여 메서드를 HTTP GET에 연결합니다. 이렇게 하면 Service Bus가 인터페이스로 보낸 명령을 정확하게 검색하고 해석할 수 있습니다.
 
 ### <a name="to-create-a-contract-with-an-interface"></a>인터페이스와 함께 계약을 만들려면
 
@@ -58,7 +56,7 @@ WCF 계약과 REST 스타일 계약의 주요 차이는 [OperationContractAttrib
     using System.IO;
     ```
    
-    [System.ServiceModel](https://msdn.microsoft.com/library/system.servicemodel.aspx)은 WCF의 기본 기능에 프로그래밍 방식의 액세스를 가능하게 하는 네임스페이스입니다. WCF 릴레이는 WCF의 많은 개체와 특성을 사용하여 서비스 계약을 정의합니다. 이 네임스페이스는 대부분의 릴레이 응용 프로그램에서 사용됩니다. 마찬가지로 [System.ServiceModel.Channels](https://msdn.microsoft.com/library/system.servicemodel.channels.aspx)는 채널을 정의하는데 도움을 주는데, 이 개체를 통해 Azure Relay 및 클라이언트 웹 브라우저와 통신하게 됩니다. 마지막으로 [System.ServiceModel.Web](https://msdn.microsoft.com/library/system.servicemodel.web.aspx)에는 웹 기반 응용 프로그램을 만들 수 있도록 하는 형식이 포함됩니다.
+    [System.ServiceModel](/dotnet/api/system.servicemodel)은 WCF의 기본 기능에 프로그래밍 방식의 액세스를 가능하게 하는 네임스페이스입니다. WCF 릴레이는 WCF의 많은 개체와 특성을 사용하여 서비스 계약을 정의합니다. 이 네임스페이스는 대부분의 릴레이 응용 프로그램에서 사용됩니다. 마찬가지로 [System.ServiceModel.Channels](/dotnet/api/system.servicemodel.channels)는 채널을 정의하는데 도움을 주는데, 이 개체를 통해 Azure Relay 및 클라이언트 웹 브라우저와 통신하게 됩니다. 마지막으로 [System.ServiceModel.Web](/dotnet/api/system.servicemodel.web)에는 웹 기반 응용 프로그램을 만들 수 있도록 하는 형식이 포함됩니다.
 7. `ImageListener` 네임스페이스의 이름을 **Microsoft.ServiceBus.Samples**로 바꿉니다.
    
     ```csharp
@@ -74,7 +72,7 @@ WCF 계약과 REST 스타일 계약의 주요 차이는 [OperationContractAttrib
     {
     }
     ```
-9. `IImageContract` 인터페이스 내에서 `IImageContract` 계약이 인터페이스에 노출하는 단일 작업에 대한 메서드를 선언하고 공개 서비스 버스 계약의 일부로 노출하려는 메서드에 `OperationContractAttribute` 특성을 적용합니다.
+9. `IImageContract` 인터페이스 내에서 `IImageContract` 계약이 인터페이스에 노출하는 단일 작업에 대한 메서드를 선언하고 공개 Service Bus 계약의 일부로 노출하려는 메서드에 `OperationContractAttribute` 특성을 적용합니다.
    
     ```csharp
     public interface IImageContract
@@ -100,7 +98,7 @@ WCF 계약과 REST 스타일 계약의 주요 차이는 [OperationContractAttrib
     public interface IImageChannel : IImageContract, IClientChannel { }
     ```
     
-    채널은 서비스 및 클라이언트가 서로 정보를 전달하는 WCF 개체입니다. 나중에 호스트 응용 프로그램에서 채널을 만들 것입니다. Azure Relay는 이 채널을 사용하여 브라우저의 HTTP GET 요청을 **GetImage** 구현으로 전달합니다. 릴레이는 이 채널을 사용하여 **GetImage** 반환 값을 가져와서 클라이언트 브라우저에 대한 HTTP GETRESPONSE로 해석하기도 합니다.
+    채널은 서비스 및 클라이언트가 서로 정보를 전달하는 WCF 개체입니다. 나중에 호스트 응용 프로그램에서 채널을 만듭니다. Azure Relay는 이 채널을 사용하여 브라우저의 HTTP GET 요청을 **GetImage** 구현으로 전달합니다. 릴레이는 이 채널을 사용하여 **GetImage** 반환 값을 가져와서 클라이언트 브라우저에 대한 HTTP GETRESPONSE로 해석하기도 합니다.
 12. **빌드** 메뉴에서 **솔루션 빌드**를 클릭하여 지금까지 수행한 작업이 정확한지 확인합니다.
 
 ### <a name="example"></a>예제
@@ -137,12 +135,12 @@ namespace Microsoft.ServiceBus.Samples
 }
 ```
 
-## <a name="step-3-implement-a-rest-based-wcf-service-contract-to-use-service-bus"></a>3단계: 서비스 버스를 사용할 REST 기반 WCF 서비스 계약을 구현합니다.
+## <a name="step-3-implement-a-rest-based-wcf-service-contract-to-use-service-bus"></a>3단계: Service Bus를 사용할 REST 기반 WCF 서비스 계약을 구현합니다.
 REST 스타일 WCF 릴레이 서비스를 만들려면 첫째로 계약을 만들어야 하는데, 계약은 인터페이스를 사용하여 정의됩니다. 다음 단계는 인터페이스를 구현합니다. 이 과정 중에 사용자 정의 **IImageContract** 인터페이스를 구현하는 **ImageService**라는 클래스가 생성됩니다. 계약을 구현한 후 App.config 파일을 사용하여 인터페이스를 구현합니다. 구성 파일은 서비스 이름, 계약 이름, 릴레이 서비스와 통신에 사용되는 프로토콜 유형과 같은 응용 프로그램에 필요한 정보를 포함합니다. 이 작업에 사용되는 코드는 과정을 수행하면서 예제에 제공됩니다.
 
 이전 단계에서와 마찬가지로 REST 스타일 계약과 WCF 릴레이 계약의 구현 간에는 거의 차이가 없습니다.
 
-### <a name="to-implement-a-rest-style-service-bus-contract"></a>REST 스타일 서비스 버스 계약을 구현하려면
+### <a name="to-implement-a-rest-style-service-bus-contract"></a>REST 스타일 Service Bus 계약을 구현하려면
 1. **IImageContract** 인터페이스의 정의 바로 다음에 **ImageService**라는 새 클래스를 만듭니다. **ImageService** 클래스는 **IImageContract** 인터페이스를 구현합니다.
    
     ```csharp
@@ -151,7 +149,7 @@ REST 스타일 WCF 릴레이 서비스를 만들려면 첫째로 계약을 만�
     }
     ```
     다른 인터페이스 구현과 유사하게, 다른 파일에 정의를 구현할 수 있습니다. 하지만 이 자습서의 경우 구현은 인터페이스 정의 및 `Main()` 메서드와 동일한 파일에서 나타납니다.
-2. [ServiceBehaviorAttribute](https://msdn.microsoft.com/library/system.servicemodel.servicebehaviorattribute.aspx) 특성을 **IImageService** 클래스에 적용하여 클래스가 WCF 계약의 구현이라는 것을 나타냅니다.
+2. [ServiceBehaviorAttribute](/dotnet/api/system.servicemodel.servicebehaviorattribute) 특성을 **IImageService** 클래스에 적용하여 클래스가 WCF 계약의 구현이라는 것을 나타냅니다.
    
     ```csharp
     [ServiceBehavior(Name = "ImageService", Namespace = "http://samples.microsoft.com/ServiceModel/Relay/")]
@@ -160,7 +158,7 @@ REST 스타일 WCF 릴레이 서비스를 만들려면 첫째로 계약을 만�
     }
     ```
    
-    앞에서 설명한 바와 같이 이 네임스페이스는 기존의 네임스페이스가 아닙니다. 대신, 계약을 식별하는 WCF 아키텍처의 일부입니다. 자세한 내용은 WCF 설명서의 [데이터 계약 이름](https://msdn.microsoft.com/library/ms731045.aspx) 항목을 참조하세요.
+    앞에서 설명한 바와 같이 이 네임스페이스는 기존의 네임스페이스가 아닙니다. 대신, 계약을 식별하는 WCF 아키텍처의 일부입니다. 자세한 내용은 WCF 설명서의 [데이터 계약 이름](https://msdn.microsoft.com/library/ms731045.aspx) 문서를 참조하세요.
 3. .jpg 이미지를 프로젝트에 추가합니다.  
    
     이것은 서비스가 수신 브라우저에 표시하는 그림입니다. 프로젝트를 마우스 오른쪽 단추로 클릭한 후 **추가**를 클릭합니다. 그 다음 **기존 항목**을 클릭합니다. **기존 항목 추가** 대화 상자를 사용하여 적절한 .jpg을 찾은 다음 **추가**를 클릭합니다.
@@ -208,7 +206,7 @@ REST 스타일 WCF 릴레이 서비스를 만들려면 첫째로 계약을 만�
     이 구현은 **MemoryStream**을 사용하여 이미지를 가져오고 브라우저로의 스트리밍을 위해 준비시킵니다. 스트림 위치는 0에서 시작하고 스트림 콘텐츠를 jpeg로 선언하고 정보를 스트리밍합니다.
 8. **빌드** 메뉴에서 **솔루션 빌드**를 클릭합니다.
 
-### <a name="to-define-the-configuration-for-running-the-web-service-on-service-bus"></a>서비스 버스에서 웹 서비스를 실행하기 위한 구성을 정의하려면
+### <a name="to-define-the-configuration-for-running-the-web-service-on-service-bus"></a>Service Bus에서 웹 서비스를 실행하기 위한 구성을 정의하려면
 1. **솔루션 탐색기**에서 **App.config**를 두 번 클릭하여 Visual Studio 편집기에서 엽니다.
    
     **App.config** 파일에는 서비스 이름, 끝점(즉, 클라이언트와 호스트가 서로 통신하도록 Azure Relay가 노출하는 위치) 및 바인딩(통신에 사용되는 프로토콜 유형)이 포함되어 있습니다. 여기서 주요 차이점은 구성된 서비스 끝점이 [WebHttpRelayBinding](/dotnet/api/microsoft.servicebus.webhttprelaybinding) 바인딩을 참조한다는 것입니다.
@@ -440,7 +438,7 @@ namespace Microsoft.ServiceBus.Samples
     ```csharp
     string serviceNamespace = "yourNamespace";
     ```
-    서비스 버스는 네임스페이스 이름을 사용하여 고유 URI를 만듭니다.
+    Service Bus는 네임스페이스 이름을 사용하여 고유 URI를 만듭니다.
 2. 네임스페이스를 기반으로 하는 서비스 기본 주소에 대한 `Uri` 인스턴스를 만듭니다.
    
     ```csharp
@@ -560,11 +558,10 @@ namespace Microsoft.ServiceBus.Samples
 3. 완료되면 명령 프롬프트 창에서 **Enter** 키를 눌러 앱을 닫습니다.
 
 ## <a name="next-steps"></a>다음 단계
-이제 서비스 버스 릴레이를 사용하는 응용 프로그램을 빌드했습니다. Azure Relay에 대한 자세한 정보는 다음 문서를 참고하세요.
+이제 Azure Relay 서비스를 사용하는 응용 프로그램을 빌드했습니다. 자세한 정보는 다음 문서를 참조하세요.
 
 * [Azure Service Bus 아키텍처 개요](../service-bus-messaging/service-bus-fundamentals-hybrid-solutions.md)
 * [Azure Relay 개요](relay-what-is-it.md)
 * [.NET과 함께 WCF 릴레이 서비스를 사용하는 방법](relay-wcf-dotnet-get-started.md)
 
 [Azure portal]: https://portal.azure.com
-

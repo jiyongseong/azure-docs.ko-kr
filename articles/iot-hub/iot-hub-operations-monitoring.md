@@ -1,30 +1,31 @@
 ---
-title: "Azure IoT Hub 작업 모니터링 | Microsoft 문서"
-description: "IoT Hub 작업 모니터링을 사용하여 실시간으로 IoT Hub에 대한 작업의 상태를 모니터링하는 방법입니다."
+title: Azure IoT Hub 작업 모니터링 | Microsoft 문서
+description: IoT Hub 작업 모니터링을 사용하여 실시간으로 IoT Hub에 대한 작업의 상태를 모니터링하는 방법입니다.
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: nberdy
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: a299f3a5-b14d-4586-9c3b-44aea14ed013
 ms.service: iot-hub
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/24/2017
+ms.date: 10/10/2017
 ms.author: nberdy
-ms.translationtype: Human Translation
-ms.sourcegitcommit: e7da3c6d4cfad588e8cc6850143112989ff3e481
-ms.openlocfilehash: 22ca1b635f3c5d4d349e883d9953b0c126fc715a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/16/2017
-
-
+ms.openlocfilehash: 98bc3896e68d8ddd694bbfd2bd0e1d41b3e35fc8
+ms.sourcegitcommit: 688a394c4901590bbcf5351f9afdf9e8f0c89505
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/18/2018
 ---
 # <a name="iot-hub-operations-monitoring"></a>IoT Hub 작업 모니터링
 
 IoT Hub 작업 모니터링을 사용하면 실시간으로 IoT Hub에 대한 작업의 상태를 모니터링할 수 있습니다. IoT Hub는 몇 가지 작업 범주에 걸쳐 이벤트를 추적합니다. 하나 이상의 범주에서 IoT hub의 끝점으로 처리할 이벤트를 보내도록 선택할 수 있습니다. 데이터에 오류가 있는지 모니터링하거나 데이터 패턴을 기반으로 좀 더 복잡한 처리를 설정할 수 있습니다.
+
+>[!NOTE]
+>IoT Hub 작업 모니터링은 더 이상 사용되지 않으며, 2018년 10월 10일에 IoT Hub에서 제거됩니다. IoT Hub의 작동 및 상태 모니터링은 [Azure IoT Hub의 상태를 모니터링하고 문제를 신속하게 진단][lnk-monitor]을 참조하세요. 사용 중단 타임라인에 대한 자세한 내용은 [Azure Monitor 및 Azure Resource Health로 Azure IoT 솔루션 모니터링][lnk-blog-announcement]을 참조하세요.
 
 IoT Hub는 다음 여섯 가지 범주의 이벤트를 모니터링합니다.
 
@@ -34,6 +35,9 @@ IoT Hub는 다음 여섯 가지 범주의 이벤트를 모니터링합니다.
 * 연결
 * 파일 업로드
 * 메시지 라우팅
+
+> [!IMPORTANT]
+> IoT Hub 작업 모니터링은 신뢰할 수 있거나 순차적인 이벤트 전달을 보장하지 않습니다. IoT Hub 기본 인프라에 따라 일부 이벤트가 손실되거나 순서대로 전달되지 않을 수 있습니다. 작업 모니터링을 사용하여 실패한 연결 시도 또는 특정 장치에 대한 높은 빈도 연결 해제와 같은 오류 신호를 기반으로 경고를 생성하십시오. 작업 모니터링 이벤트에 의존하여 장치 상태에 대한 일관된 저장소(예: 장치의 연결 상태 또는 연결 해제 상태를 추적하는 저장소)를 만들지 말아야 합니다. 
 
 ## <a name="how-to-enable-operations-monitoring"></a>작업 모니터링을 사용하는 방법
 
@@ -61,15 +65,15 @@ IoT Hub는 다음 여섯 가지 범주의 이벤트를 모니터링합니다.
 ```json
 {
     "time": "UTC timestamp",
-        "operationName": "create",
-        "category": "DeviceIdentityOperations",
-        "level": "Error",
-        "statusCode": 4XX,
-        "statusDescription": "MessageDescription",
-        "deviceId": "device-ID",
-        "durationMs": 1234,
-        "userAgent": "userAgent",
-        "sharedAccessPolicy": "accessPolicy"
+    "operationName": "create",
+    "category": "DeviceIdentityOperations",
+    "level": "Error",
+    "statusCode": 4XX,
+    "statusDescription": "MessageDescription",
+    "deviceId": "device-ID",
+    "durationMs": 1234,
+    "userAgent": "userAgent",
+    "sharedAccessPolicy": "accessPolicy"
 }
 ```
 
@@ -79,21 +83,21 @@ IoT Hub는 다음 여섯 가지 범주의 이벤트를 모니터링합니다.
 
 ```json
 {
-        "messageSizeInBytes": 1234,
-        "batching": 0,
-        "protocol": "Amqp",
-        "authType": "{\"scope\":\"device\",\"type\":\"sas\",\"issuer\":\"iothub\"}",
-        "time": "UTC timestamp",
-        "operationName": "ingress",
-        "category": "DeviceTelemetry",
-        "level": "Error",
-        "statusCode": 4XX,
-        "statusType": 4XX001,
-        "statusDescription": "MessageDescription",
-        "deviceId": "device-ID",
-        "EventProcessedUtcTime": "UTC timestamp",
-        "PartitionId": 1,
-        "EventEnqueuedUtcTime": "UTC timestamp"
+    "messageSizeInBytes": 1234,
+    "batching": 0,
+    "protocol": "Amqp",
+    "authType": "{\"scope\":\"device\",\"type\":\"sas\",\"issuer\":\"iothub\"}",
+    "time": "UTC timestamp",
+    "operationName": "ingress",
+    "category": "DeviceTelemetry",
+    "level": "Error",
+    "statusCode": 4XX,
+    "statusType": 4XX001,
+    "statusDescription": "MessageDescription",
+    "deviceId": "device-ID",
+    "EventProcessedUtcTime": "UTC timestamp",
+    "PartitionId": 1,
+    "EventEnqueuedUtcTime": "UTC timestamp"
 }
 ```
 
@@ -117,7 +121,7 @@ IoT Hub는 다음 여섯 가지 범주의 이벤트를 모니터링합니다.
     "deviceId": "device-ID",
     "EventProcessedUtcTime": "UTC timestamp",
     "PartitionId": 1,
-    "EventEnqueuedUtcTime": “UTC timestamp"
+    "EventEnqueuedUtcTime": "UTC timestamp"
 }
 ```
 
@@ -287,7 +291,7 @@ class Program
 IoT Hub의 기능을 추가로 탐색하려면 다음을 참조하세요.
 
 * [IoT Hub 개발자 가이드][lnk-devguide]
-* [Azure IoT Edge에서 장치 시뮬레이션][lnk-iotedge]
+* [Azure IoT Edge를 사용하여 에지 장치에 AI 배포][lnk-iotedge]
 
 <!-- Links and images -->
 [1]: media/iot-hub-operations-monitoring/enable-OM-1.png
@@ -295,12 +299,14 @@ IoT Hub의 기능을 추가로 탐색하려면 다음을 참조하세요.
 [img-endpoints]: media/iot-hub-operations-monitoring/monitoring-endpoint.png
 [img-service-key]: media/iot-hub-operations-monitoring/service-key.png
 
+[lnk-blog-announcement]: https://azure.microsoft.com/blog/monitor-your-azure-iot-accelerators-with-azure-monitor-and-azure-resource-health
+[lnk-monitor]: iot-hub-monitor-resource-health.md
 [lnk-get-started]: iot-hub-csharp-csharp-getstarted.md
 [lnk-diagnostic-metrics]: iot-hub-metrics.md
 [lnk-scaling]: iot-hub-scaling.md
 [lnk-dr]: iot-hub-ha-dr.md
 
 [lnk-devguide]: iot-hub-devguide.md
-[lnk-iotedge]: iot-hub-linux-iot-edge-simulated-device.md
+[lnk-iotedge]: ../iot-edge/tutorial-simulate-device-linux.md
 [lnk-iothub-explorer]: https://github.com/azure/iothub-explorer
 [lnk-eventhubs-tutorial]: ../event-hubs/event-hubs-csharp-ephcs-getstarted.md

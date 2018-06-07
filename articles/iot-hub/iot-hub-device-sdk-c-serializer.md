@@ -1,11 +1,11 @@
 ---
-title: "C용 Azure IoT 장치 SDK - 직렬 변환기 | Microsoft Docs"
-description: "C용 Azure IoT 장치 SDK에서 Serializer 라이브러리를 사용하여 IoT Hub와 통신하는 장치 앱을 만드는 방법입니다."
+title: C용 Azure IoT 장치 SDK - 직렬 변환기 | Microsoft Docs
+description: C용 Azure IoT 장치 SDK에서 Serializer 라이브러리를 사용하여 IoT Hub와 통신하는 장치 앱을 만드는 방법입니다.
 services: iot-hub
-documentationcenter: 
-author: olivierbloch
+documentationcenter: ''
+author: yzhong94
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: defbed34-de73-429c-8592-cd863a38e4dd
 ms.service: iot-hub
 ms.devlang: cpp
@@ -13,17 +13,17 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 09/06/2016
-ms.author: obloch
-ms.translationtype: Human Translation
-ms.sourcegitcommit: e7da3c6d4cfad588e8cc6850143112989ff3e481
-ms.openlocfilehash: 0c192a9c5e738d92d02fb1a16a80569c9f80d732
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/16/2017
-
-
+ms.author: yizhon
+ms.openlocfilehash: 04b5ebf6d8c568fbfd9b291bef95af973ec5d6d7
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="azure-iot-device-sdk-for-c--more-about-serializer"></a>C용 Azure IoT 장치 SDK - 직렬 변환기에 대한 자세한 정보
 이 시리즈의 [첫 번째 문서](iot-hub-device-sdk-c-intro.md)에서는 **C용 Azure IoT 장치 SDK**에 대해 소개했습니다. 다음 문서에서 [**IoTHubClient**](iot-hub-device-sdk-c-iothubclient.md)에 대해 보다 자세히 설명했습니다. 이 문서에서는 나머지 구성 요소인 **serializer** 라이브러리에 대한 보다 자세한 설명을 제공하여 SDK의 범위를 보완합니다.
+
+[!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-partial.md)]
 
 소개 자료에서 **serializer** 라이브러리를 사용하여 IoT Hub로 이벤트를 보내고 메시지를 받는 방법을 설명했습니다. 이 문서에서는 **serializer** 매크로 언어로 데이터를 모델링하는 방법에 대한 자세한 설명을 제공하여 논의를 확장합니다. 또한 라이브러리에서 메시지를 직렬화하고 직렬화 동작을 제어하는 방법도 자세히 설명합니다. 사용자가 만드는 모델의 크기를 결정하는 일부 매개 변수를 수정하는 방법에 대해서도 설명합니다.
 
@@ -66,7 +66,7 @@ END_NAMESPACE(WeatherStation);
 ### <a name="supported-data-types"></a>지원되는 데이터 원본
 **serializer** 라이브러리로 만든 모델에 다음 데이터 형식이 지원됩니다.
 
-| 형식 | 설명 |
+| 유형 | 설명 |
 | --- | --- |
 | double |배정밀도 부동 소수점 숫자 |
 | int |32비트 정수 |
@@ -673,9 +673,8 @@ IoT Hub를 개발하는 방법에 대한 자세한 내용은 [Azure IoT SDK][lnk
 
 IoT Hub의 기능을 추가로 탐색하려면 다음을 참조하세요.
 
-* [Azure IoT Edge에서 장치 시뮬레이션][lnk-iotedge]
+* [Azure IoT Edge를 사용하여 에지 장치에 AI 배포][lnk-iotedge]
 
 [lnk-sdks]: iot-hub-devguide-sdks.md
 
-[lnk-iotedge]: iot-hub-linux-iot-edge-simulated-device.md
-
+[lnk-iotedge]: ../iot-edge/tutorial-simulate-device-linux.md

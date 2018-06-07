@@ -1,25 +1,24 @@
 ---
-title: "응용 프로그램을 추가 또는 구성하는 문제”"
-description: "응용 프로그램을 추가 또는 구성하는 문제”"
+title: 응용 프로그램을 추가 또는 구성하는 문제”
+description: 응용 프로그램을 추가 또는 구성하는 문제”
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: ajamess
-manager: kbrint
+manager: mtillman
 ms.service: active-directory
+ms.component: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0d6f6fb24f1f01d703104f925dcd03ee1ff46062
-ms.openlocfilehash: 1feba4f7c33276996213f50e34784c0f8edff226
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/18/2017
-
+ms.openlocfilehash: adea9682db8f8b57771f1688309c1ebb325843f5
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
-
 # <a name="problems-adding-or-configuring-applications"></a>응용 프로그램을 추가 또는 구성하는 문제
 
 
@@ -44,4 +43,3 @@ ms.lasthandoff: 04/18/2017
   * [Azure AD 갤러리 응용 프로그램에 대해 페더레이션된 Single Sign-On을 구성할 때 문제가 발생함](https://docs.microsoft.com/azure/active-directory/application-config-sso-problem-configure-federated-sso-gallery/?/?WT.mc_id=DMC_AAD_Manage_Apps_Troubleshooting_Nav)
   * [비-갤러리 응용 프로그램에 대해 암호 Single Sign-On을 구성할 때 문제가 발생함](https://docs.microsoft.com/azure/active-directory/application-config-sso-problem-configure-password-sso-non-gallery/?/?WT.mc_id=DMC_AAD_Manage_Apps_Troubleshooting_Nav)
   * [Azure AD 갤러리 응용 프로그램에 대해 암호 Single Sign-On을 구성할 때 문제가 발생함](https://docs.microsoft.com/azure/active-directory/application-config-sso-problem-configure-password-sso-gallery/?/?WT.mc_id=DMC_AAD_Manage_Apps_Troubleshooting_Nav)
-

@@ -1,11 +1,11 @@
 ---
-title: "Visual Studio 및 IntelliTrace를 사용하여 게시된 Azure 클라우드 서비스 디버깅 | Microsoft Docs"
-description: "Visual Studio 및 IntelliTrace를 사용하여 클라우드 서비스를 디버그하는 방법을 알아봅니다."
+title: Visual Studio 및 IntelliTrace를 사용하여 게시된 Azure 클라우드 서비스 디버깅 | Microsoft Docs
+description: Visual Studio 및 IntelliTrace를 사용하여 클라우드 서비스를 디버그하는 방법을 알아봅니다.
 services: visual-studio-online
 documentationcenter: n/a
-author: TomArcher
+author: mikejo
 manager: douge
-editor: 
+editor: ''
 ms.assetid: 5e6662fc-b917-43ea-bf2b-4f2fc3d213dc
 ms.service: visual-studio-online
 ms.devlang: multiple
@@ -13,18 +13,17 @@ ms.topic: article
 ms.tgt_pltfrm: multiple
 ms.workload: na
 ms.date: 03/21/2017
-ms.author: tarcher
-translationtype: Human Translation
-ms.sourcegitcommit: 424d8654a047a28ef6e32b73952cf98d28547f4f
-ms.openlocfilehash: 4629800edd6c89384264299aad3a638ba275acfe
-ms.lasthandoff: 03/22/2017
-
-
+ms.author: mikejo
+ms.openlocfilehash: 2ca15bd5ffa88d2e8053decf5b81c265b1d9c6e1
+ms.sourcegitcommit: 34e0b4a7427f9d2a74164a18c3063c8be967b194
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="debugging-a-published-azure-cloud-service-with-visual-studio-and-intellitrace"></a>Visual Studio 및 IntelliTrace를 사용하여 게시된 Azure 클라우드 서비스 디버깅
 IntelliTrace를 사용하여 Azure에서 실행할 때 역할 인스턴스에 대한 광범위한 정보를 기록할 수 있습니다. 문제의 원인을 찾아야 하는 경우 Azure에서 실행 중인 것처럼 Visual Studio에서 코드를 단계별로 거쳐 IntelliTrace 로그를 사용할 수 있습니다. 실제로 Azure에서 Azure 응용 프로그램을 클라우드 서비스로 실행 중일 때 IntelliTrace는 키 코드 실행 및 환경 데이터를 기록하여 Visual Studio에서 기록된 데이터를 재생할 수 있습니다. 
 
-Visual Studio Enterprise가 설치되어 있으며 Azure 응용 프로그램 대상 .NET Framework 4 이상 버전이 있는 경우 IntelliTrace를 사용할 수 있습니다. IntelliTrace는 Azure 역할에 대한 정보를 수집합니다. 이러한 역할에 대한 가상 컴퓨터는 항상 64비트 운영 체제를 실행합니다.
+Visual Studio Enterprise가 설치되어 있으며 Azure 응용 프로그램 대상 .NET Framework 4 이상 버전이 있는 경우 IntelliTrace를 사용할 수 있습니다. IntelliTrace는 Azure 역할에 대한 정보를 수집합니다. 이러한 역할에 대한 가상 머신은 항상 64비트 운영 체제를 실행합니다.
 
 대체 방법으로 [원격 디버깅](http://go.microsoft.com/fwlink/p/?LinkId=623041)을 사용하여 Azure에서 실행 중인 클라우드 서비스로 직접 연결할 수 있습니다.
 
@@ -53,7 +52,7 @@ Azure 응용 프로그램에 IntelliTrace를 사용하려면 Visual Studio Azure
    
     ![IntelliTrace 설정](./media/vs-azure-tools-intellitrace-debug-published-cloud-services/IC519063.png)
 
-IntelliTrace 로그는 IntelliTrace 설정에 지정된 최대 크기(기본 크기는 250MB)의 순환 로그 파일입니다. IntelliTrace 로그는 가상 컴퓨터의 파일 시스템에서 파일에 수집됩니다. 로그를 요청하는 경우 스냅숏이 해당 시점에 수행되며 로컬 컴퓨터에 다운로드됩니다.
+IntelliTrace 로그는 IntelliTrace 설정에 지정된 최대 크기(기본 크기는 250MB)의 순환 로그 파일입니다. IntelliTrace 로그는 가상 머신의 파일 시스템에서 파일에 수집됩니다. 로그를 요청하는 경우 스냅숏이 해당 시점에 수행되며 로컬 컴퓨터에 다운로드됩니다.
 
 Azure 클라우드 서비스를 Azure에 게시한 후 다음 그림에 표시된 것처럼 **서버 탐색기**의 Azure 노드에서 IntelliTrace가 활성화되었는지를 확인할 수 있습니다.
 

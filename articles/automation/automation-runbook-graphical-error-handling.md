@@ -1,25 +1,20 @@
 ---
-title: "Azure Automation 그래픽 runbook의 오류 처리 | Microsoft Docs"
-description: "이 문서에서는 Azure Automation 그래픽 runbook에서 오류 처리 논리를 구현하는 방법에 대해 설명합니다."
+title: Azure Automation 그래픽 runbook의 오류 처리
+description: 이 문서에서는 Azure Automation 그래픽 runbook에서 오류 처리 논리를 구현하는 방법에 대해 설명합니다.
 services: automation
-documentationcenter: 
-author: mgoedtel
-manager: jwhit
-editor: tysonn
-ms.assetid: 
 ms.service: automation
-ms.workload: tbd
-ms.tgt_pltfrm: na
-ms.devlang: na
-ms.topic: get-started-article
-ms.date: 12/26/2016
-ms.author: magoedte
-translationtype: Human Translation
-ms.sourcegitcommit: 08cba012cca61eeb03187d2b4165e2a79b15bc3d
-ms.openlocfilehash: 12313f7f245d32c33882f1036f7d4b48bfb3ddc5
-
+ms.component: process-automation
+author: georgewallace
+ms.author: gwallace
+ms.date: 03/16/2018
+ms.topic: conceptual
+manager: carmonm
+ms.openlocfilehash: 14112a9a9f64f20540a8f7e1d37cd31017238e59
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
-
 # <a name="error-handling-in-azure-automation-graphical-runbooks"></a>Azure Automation 그래픽 runbook의 오류 처리
 
 고려해야 할 주요 runbook 디자인 보안 주체는 runbook이 경험할 수 있는 다른 문제를 식별합니다. 이러한 문제는 성공, 예상된 오류 상태 및 예기치 않은 오류 조건을 포함할 수 있습니다.
@@ -40,7 +35,7 @@ Azure Automation 그래픽 runbook은 오류 처리를 포함하는 기능으로
 
 오류 또는 예외를 throw하는 중요한 활동이 있을 때마다 runbook의 다음 활동을 처리하지 못하도록 하거나 적절하게 오류를 처리하는 것이 중요합니다. 이는 runbook에서 비즈니스 또는 서비스 운영 프로세스를 지원할 때 특히 중요합니다.
 
-runbook 작성자는 오류를 발생시킬 수 있는 각 활동에 대해 다른 활동을 가리키는 오류 링크를 추가할 수 있습니다.  대상 활동은 코드 활동, cmdlet 호출, 다른 runbook 호출 등을 포함하는 다른 어떤 유형이 될 수 있습니다.
+runbook 작성자는 오류를 발생시킬 수 있는 각 활동에 대해 다른 활동을 가리키는 오류 링크를 추가할 수 있습니다. 대상 활동은 코드 활동, cmdlet 호출, 다른 runbook 호출 등을 포함하는 다른 어떤 유형이 될 수 있습니다.
 
 또한 대상 활동에 나가는 링크가 있을 수도 있습니다. 이러한 링크는 일반 링크 또는 오류 링크일 수 있습니다. 즉, runbook 작성자는 코드 활동에 문의하지 않고 복잡한 오류 처리 논리를 구현할 수 있습니다. 권장되는 방식은 일반적인 기능으로 전용 오류 처리 runbook을 만드는 것이지만 필수는 아닙니다. PowerShell 코드 활동에서 오류 처리 논리는 유일한 옵션이 아닙니다.  
 
@@ -49,7 +44,7 @@ runbook 작성자는 오류를 발생시킬 수 있는 각 활동에 대해 다�
 1. 이 문제에 대한 알림을 보냅니다.
 2. 대신 새 VM을 자동으로 프로비전하는 다른 runbook을 시작합니다.
 
-한 가지 해결 방법은&1;단계를 처리하는 활동을 가리키는 오류 링크를 갖는 것입니다. 예를 들어 **Start-AzureRmAutomationRunbook** cmdlet과 같은&2;단계에 대한 활동에 **Write-Warning** cmdlet을 연결할 수 있습니다.
+한 가지 해결 방법은 1단계를 처리하는 활동을 가리키는 오류 링크를 갖는 것입니다. 예를 들어 **Start-AzureRmAutomationRunbook** cmdlet과 같은 2단계에 대한 활동에 **Write-Warning** cmdlet을 연결할 수 있습니다.
 
 또한 이 두 가지 활동을 별도의 오류 처리 runbook에 배치하고 앞에서 제안한 지침에 따라 많은 runbook에서 사용하기 위해 이 동작을 일반화할 수 있습니다. 이 오류 처리 runbook을 호출하기 전에 원래 runbook의 데이터에서 사용자 지정 메시지를 생성한 다음 이 메시지를 오류 처리 runbook에 매개 변수로 전달할 수 있습니다.
 
@@ -61,9 +56,9 @@ runbook 작성자는 오류를 발생시킬 수 있는 각 활동에 대해 다�
 
 이 설정을 구성한 후에는 오류를 처리하는 활동을 만듭니다. 활동이 오류를 생성하면 활동에서 일반 출력을 생성했더라도 일반 링크가 아니라 나가는 오류 링크를 따릅니다.<br><br> ![Automation runbook 오류 링크 예제](media/automation-runbook-graphical-error-handling/error-link-example.png)
 
-다음 예제에서 runbook은 가상 컴퓨터의 컴퓨터 이름을 포함하는 변수를 검색합니다. 다음 작업으로 가상 컴퓨터를 시작하려고 시도합니다.<br><br> ![Automation runbook 오류 처리 예제](media/automation-runbook-graphical-error-handling/runbook-example-error-handling.png)<br><br>      
+다음 예제에서 runbook은 가상 머신의 컴퓨터 이름을 포함하는 변수를 검색합니다. 다음 작업으로 가상 머신을 시작하려고 시도합니다.<br><br> ![Automation runbook 오류 처리 예제](media/automation-runbook-graphical-error-handling/runbook-example-error-handling.png)<br><br>      
 
-**Get-AutomationVariable** 활동과 **Start-AzureRmVm**은 예외를 오류로 변환하도록 구성됩니다.  변수를 가져오거나 VM을 시작하는 데 문제가 있으면 오류가 생성됩니다.<br><br> ![Automation runbook 오류 처리 활동 설정](media/automation-runbook-graphical-error-handling/activity-blade-convertexception-option.png)
+**Get-AutomationVariable** 활동과 **Start-AzureRmVm**은 예외를 오류로 변환하도록 구성됩니다. 변수를 가져오거나 VM을 시작하는 데 문제가 있으면 오류가 생성됩니다.<br><br> ![Automation runbook 오류 처리 활동 설정](media/automation-runbook-graphical-error-handling/activity-blade-convertexception-option.png)
 
 오류 링크는 이러한 활동에서 단일 **오류 관리** 활동(코드 활동)으로 이동합니다. 이 활동은 *Throw* 키워드를 사용하여 간단한 PowerShell 식으로 구성되어 *$Error.Exception.Message*와 함께 처리를 중지하고 현재 예외를 설명하는 메시지를 가져옵니다.<br><br> ![Automation runbook 오류 처리 코드 예제](media/automation-runbook-graphical-error-handling/runbook-example-error-handling-code.png)
 
@@ -73,9 +68,3 @@ runbook 작성자는 오류를 발생시킬 수 있는 각 활동에 대해 다�
 * 그래픽 runbook의 링크 및 링크 유형에 대해 자세히 알아보려면 [Azure Automation에서 그래픽 작성](automation-graphical-authoring-intro.md#links-and-workflow)을 참조하세요.
 
 * runbook 실행, runbook 작업 모니터링 방법 및 기타 기술 세부 정보를 알아보려면 [runbook 작업 추적](automation-runbook-execution.md)을 참조하세요.
-
-
-
-<!--HONumber=Feb17_HO1-->
-
-

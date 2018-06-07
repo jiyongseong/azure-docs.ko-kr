@@ -1,59 +1,44 @@
 ---
-title: ".NET Core를 사용하여 Azure SQL Database 쿼리 | Microsoft Docs"
-description: "이 항목에서는 .NET Core를 사용하여 Azure SQL Database에 연결하고 Transact-SQL 문을 사용하여 쿼리하는 프로그램을 만드는 방법을 보여 줍니다."
+title: .NET Core를 사용하여 Azure SQL Database 쿼리 | Microsoft Docs
+description: 이 항목에서는 .NET Core를 사용하여 Azure SQL Database에 연결하고 Transact-SQL 문을 사용하여 쿼리하는 프로그램을 만드는 방법을 보여 줍니다.
 services: sql-database
-documentationcenter: 
 author: CarlRabeler
-manager: jhubbard
-editor: 
-ms.assetid: 
+manager: craigg
 ms.service: sql-database
 ms.custom: mvc,develop apps
-ms.workload: drivers
-ms.tgt_pltfrm: na
 ms.devlang: dotnet
-ms.topic: hero-article
-ms.date: 07/05/2017
+ms.topic: quickstart
+ms.date: 04/01/2018
 ms.author: carlrab
+ms.openlocfilehash: 9336de3e244f7a7373f7c1ca3ac8eedd06473d3c
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
 ms.translationtype: HT
-ms.sourcegitcommit: 137671152878e6e1ee5ba398dd5267feefc435b7
-ms.openlocfilehash: 046322624d3b89bb983acee863534256fee94b60
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="use-net-core-c-to-query-an-azure-sql-database"></a>.NET Core(C#)를 사용하여 Azure SQL 데이터베이스 쿼리
 
-이 빠른 시작 자습서에서는 Windows/Linux/macOS에서 [.NET Core](https://www.microsoft.com/net/)를 통해 Azure SQL 데이터베이스에 연결하고 Transact-SQL 문을 사용하여 데이터를 쿼리하는 C# 프로그램을 만드는 방법을 보여 줍니다.
+이 빠른 시작에서는 Windows/Linux/macOS에서 [.NET Core](https://www.microsoft.com/net/)를 사용하여 Azure SQL Database에 연결하고, TRANSACT-SQL 문을 사용하여 데이터를 쿼리하는 C# 프로그램을 만드는 방법을 보여 줍니다.
 
 ## <a name="prerequisites"></a>필수 조건
 
-이 빠른 시작 자습서를 완료하려면 다음 항목이 있어야 합니다.
+이 빠른 시작을 완료하려면 다음 항목이 있어야 합니다.
 
-- Azure SQL 데이터베이스입니다. 이 빠른 시작에서는 다음과 같은 빠른 시작 중 하나에서 만든 리소스를 사용합니다. 
+[!INCLUDE [prerequisites-create-db](../../includes/sql-database-connect-query-prerequisites-create-db-includes.md)]
 
-   - [DB 만들기 - 포털](sql-database-get-started-portal.md)
-   - [DB 만들기 - CLI](sql-database-get-started-cli.md)
-   - [DB 만들기 - PowerShell](sql-database-get-started-powershell.md)
+- 이 빠른 시작에서 사용하는 컴퓨터의 공용 IP 주소에 대한 [서버 수준 방화벽 규칙](sql-database-get-started-portal.md#create-a-server-level-firewall-rule)
 
-- 이 빠른 시작 자습서에서 사용하는 컴퓨터의 공용 IP 주소에 대한 [서버 수준 방화벽 규칙](sql-database-get-started-portal.md#create-a-server-level-firewall-rule)
 - 설치된 [해당 운영 체제용 .NET Core](https://www.microsoft.com/net/core) 
 
 ## <a name="sql-server-connection-information"></a>SQL 서버 연결 정보
 
-Azure SQL Database에 연결하는 데 필요한 연결 정보를 가져옵니다. 다음 절차에는 정규화된 서버 이름, 데이터베이스 이름 및 로그인 정보가 필요합니다.
+[!INCLUDE [prerequisites-server-connection-info](../../includes/sql-database-connect-query-prerequisites-server-connection-info-includes.md)]
 
-1. [Azure Portal](https://portal.azure.com/)에 로그인합니다.
-2. 왼쪽 메뉴에서 **SQL Database**를 선택하고 **SQL Database** 페이지에서 데이터베이스를 클릭합니다. 
-3. 데이터베이스의 **개요** 페이지에서 다음 이미지와 같이 정규화된 서버 이름을 검토합니다. 서버 이름 위로 마우스를 가져가면 **복사하려면 클릭** 옵션이 표시됩니다. 
+#### <a name="for-adonet"></a>ADO.NET의 경우
 
-   ![서버 이름](./media/sql-database-connect-query-dotnet/server-name.png) 
+1. **데이터베이스 연결 문자열 표시**를 클릭하여 계속합니다.
 
-4. Azure SQL Database 서버 로그인 정보를 잊어버린 경우 SQL Database 서버 페이지로 이동하여 서버 관리자 이름을 확인합니다. 필요한 경우 암호를 다시 설정할 수 있습니다.
-
-5. **연결 문자열 표시**를 클릭합니다.
-
-6. 전체 **ADO.NET** 연결 문자열을 검토합니다.
+2. 전체 **ADO.NET** 연결 문자열을 검토합니다.
 
     ![ADO.NET 연결 문자열](./media/sql-database-connect-query-dotnet/adonet-connection-string.png)
 
@@ -73,7 +58,7 @@ Azure SQL Database에 연결하는 데 필요한 연결 정보를 가져옵니�
 
     ```xml
     <ItemGroup>
-        <PackageReference Include="System.Data.SqlClient" Version="4.3.0" />
+        <PackageReference Include="System.Data.SqlClient" Version="4.4.0" />
     </ItemGroup>
     ```
 
@@ -155,4 +140,3 @@ namespace sqltest
 - [.NET Framework 및 Visual Studio를 사용하여 Azure SQL Database를 연결 및 쿼리하는 방법](sql-database-connect-query-dotnet-visual-studio.md)을 알아봅니다.  
 - [SSMS를 사용하여 첫 번째 Azure SQL Database를 설계하는 방법](sql-database-design-first-database.md) 또는 [.NET을 사용하여 첫 번째 Azure SQL Database를 설계하는 방법](sql-database-design-first-database-csharp.md)을 알아봅니다.
 - .NET에 대한 자세한 내용은 [.NET 설명서](https://docs.microsoft.com/dotnet/)를 참조하세요.
-

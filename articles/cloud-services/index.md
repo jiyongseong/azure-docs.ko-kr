@@ -2,7 +2,7 @@
 title: "Azure Cloud Services 설명서 - 자습서, API 참조 | Microsoft Docs"
 description: "자습서, API 참조 및 기타 설명서에서는 Cloud Services를 사용하여 가용성 및 확장이 뛰어난 클라우드 응용 프로그램 및 API를 호스트하고 실행하는 방법을 보여 줍니다."
 services: cloud-services
-author: carolz
+author: czeumault
 manager: carolz
 layout: LandingPage
 ms.assetid: 
@@ -12,10 +12,11 @@ ms.devlang: na
 ms.topic: landing-page
 ms.date: 01/23/2017
 ms.author: carolz
-translationtype: Human Translation
-ms.sourcegitcommit: c8e0cec964b7c72e45564ff776c55be1b06bfbc1
-ms.openlocfilehash: 16bbb9953db91bfe031e5e87e14aac84d32799b3
-
+ms.openlocfilehash: 300762cd98f66af80dd6fd7079005ef17ece2ade
+ms.sourcegitcommit: dcf5f175454a5a6a26965482965ae1f2bf6dca0a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/10/2017
 ---
 # <a name="cloud-services-documentation"></a>Cloud Services 설명서
 
@@ -106,8 +107,14 @@ Cloud Services를 사용하여 가용성 및 확장성이 뛰어난 클라우드
                 <div class="card">
                     <div class="cardText">
                         <h3>언어</h3>
-                        <p><a href="https://msdn.microsoft.com/library/azure/ee758711">.csdef XML 스키마</a></p>
-                        <p><a href="https://msdn.microsoft.com/library/azure/ee758710">.cscfg XML 스키마</a></p>
+                        <p><a href="/azure/cloud-services/schema-csdef-file">.csdef XML 스키마</a></p>
+                        <p><a href="/azure/cloud-services/schema-csdef-loadbalancerprobe">LoadBalancerProbe 스키마</a></p>
+                        <p><a href="/azure/cloud-services/schema-csdef-webrole">WebRole 스키마</a></p>
+                        <p><a href="/azure/cloud-services/schema-csdef-workerrole">WorkerRole 스키마</a></p>
+                        <p><a href="/azure/cloud-services/schema-csdef-networktrafficrules">NetworkTrafficRules 스키마</a></p>
+                        <p><a href="/azure/cloud-services/schema-cscfg-file">.cscfg XML 스키마</a></p>
+                        <p><a href="/azure/cloud-services/schema-cscfg-role">역할 스키마</a></p>
+                        <p><a href="/azure/cloud-services/schema-cscfg-networkconfiguration">NetworkConfiguration 스키마</a></p>
                     </div>
                 </div>
             </div>
@@ -119,18 +126,10 @@ Cloud Services를 사용하여 가용성 및 확장성이 뛰어난 클라우드
                 <div class="card">
                     <div class="cardText">
                         <h3>REST (영문)</h3>
-                        <p><a href="https://msdn.microsoft.com/library/azure/ee460812">REST API</a></p>
+                        <p><a href="/rest/api/compute/cloudservices">REST API</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </li>
 </ul>
-
-
-
-
-
-<!--HONumber=Feb17_HO2-->
-
-

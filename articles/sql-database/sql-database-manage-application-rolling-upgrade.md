@@ -1,27 +1,19 @@
 ---
-title: "롤링 응용 프로그램 업그레이드 - Azure SQL Database | Microsoft Docs"
-description: "Azure SQL 데이터베이스 지역에서 복제를 사용하여 클라우드 응용 프로그램의 온라인 업그레이드를 지원하는 방법을 알아봅니다."
+title: 롤링 응용 프로그램 업그레이드 - Azure SQL Database | Microsoft Docs
+description: Azure SQL Database 지역에서 복제를 사용하여 클라우드 응용 프로그램의 온라인 업그레이드를 지원하는 방법을 알아봅니다.
 services: sql-database
-documentationcenter: 
 author: anosov1960
-manager: jhubbard
-editor: monicar
-ms.assetid: 58f42859-1e37-463c-a3d8-a3ca2e867148
+manager: craigg
 ms.service: sql-database
 ms.custom: business continuity
-ms.devlang: NA
 ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: NA
-ms.date: 07/16/2016
+ms.date: 04/01/2018
 ms.author: sashan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 95b8c100246815f72570d898b4a5555e6196a1a0
-ms.openlocfilehash: 4b59c8aa3dea3e8fba692ab66420295a09210d3b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/18/2017
-
-
+ms.openlocfilehash: d1799befb2b5f59f1794bbca2a1daa2a13990882
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="managing-rolling-upgrades-of-cloud-applications-using-sql-database-active-geo-replication"></a>SQL Database 활성 지역 복제를 사용하여 클라우드 응용 프로그램의 롤링 업그레이드 관리
 > [!NOTE]
@@ -38,7 +30,7 @@ SQL Database에서 [지역에서 복제](sql-database-geo-replication-overview.m
 * 총 달러 비용.  여기에는 업그레이드 프로세스에서 사용되는 임시 구성 요소의 추가 중복 및 증분 비용이 포함됩니다. 
 
 ## <a name="upgrading-applications-that-rely-on-database-backups-for-disaster-recovery"></a>재해 복구에 대해 데이터베이스 백업을 사용하는 응용 프로그램 업그레이드
-응용 프로그램이 재해 복구에 대해 자동 데이터베이스 백업을 사용하고 지역 복원을 사용하는 경우 일반적으로 단일 Azure 지역에 배포됩니다. 이 경우 업그레이드 프로세스에는 업그레이드에 포함된 모든 응용 프로그램 구성 요소의 백업 배포를 만드는 것이 포함됩니다. 최종 사용자 중단을 최소화하려면 장애 조치(failover) 프로필에 Azure 트래픽 관리자(WATM)를 활용합니다.  다음 다이어그램에서는 업그레이드 프로세스 전의 운영 환경을 보여 줍니다. <i>contoso-1.azurewebsites.net</i> 끝점은 업그레이드해야 하는 응용 프로그램의 프로덕션 슬롯을 나타냅니다. 업그레이드를 롤백할 수 있는 기능을 사용하려면 응용 프로그램의 완전히 동기화된 복사본으로 스테이지 슬롯을 만들어야 합니다. 다음 단계는 업그레이드에 대해 응용 프로그램을 준비하는 데 필요합니다.
+응용 프로그램이 재해 복구에 대해 자동 데이터베이스 백업을 사용하고 지역 복원을 사용하는 경우 일반적으로 단일 Azure 지역에 배포됩니다. 이 경우 업그레이드 프로세스에는 업그레이드에 포함된 모든 응용 프로그램 구성 요소의 백업 배포를 만드는 것이 포함됩니다. 최종 사용자 중단을 최소화하려면 장애 조치(failover) 프로필에 Azure Traffic Manager(WATM)를 활용합니다.  다음 다이어그램에서는 업그레이드 프로세스 전의 운영 환경을 보여 줍니다. <i>contoso-1.azurewebsites.net</i> 끝점은 업그레이드해야 하는 응용 프로그램의 프로덕션 슬롯을 나타냅니다. 업그레이드를 롤백할 수 있는 기능을 사용하려면 응용 프로그램의 완전히 동기화된 복사본으로 스테이지 슬롯을 만들어야 합니다. 다음 단계는 업그레이드에 대해 응용 프로그램을 준비하는 데 필요합니다.
 
 1. 업그레이드에 대한 스테이지 슬롯을 만듭니다. 이를 수행하려면 보조 데이터베이스(1)를 만들고 동일한 Azure 지역에서 동일한 웹 사이트를 배포합니다. 보조 데이터베이스를 모니터링하여 시딩 프로세스가 완료되었는지 확인합니다.
 2. <i>contoso-1.azurewebsites.net</i>을 온라인 끝점으로 하고 <i>contoso-2.azurewebsites.net</i>을 오프라인으로 하여 WATM에서 장애 조치(failover) 프로필을 만듭니다. 
@@ -47,7 +39,7 @@ SQL Database에서 [지역에서 복제](sql-database-geo-replication-overview.m
 > 준비 단계는 프로덕션 슬롯의 응용 프로그램에 영향을 주지 않으며 모든 권한 모드에서 작동할 수 있습니다.
 >  
 
-![SQL 데이터베이스 지역에서 복제 구성 클라우드 재해 복구](media/sql-database-manage-application-rolling-upgrade/Option1-1.png)
+![SQL Database 지역에서 복제 구성 클라우드 재해 복구](media/sql-database-manage-application-rolling-upgrade/Option1-1.png)
 
 준비 단계가 완료되면 응용 프로그램이 실제 업그레이드할 준비가 된 것입니다. 다음 다이어그램에서는 업그레이드 프로세스에 관련된 단계를 보여 줍니다. 
 
@@ -81,12 +73,12 @@ SQL Database에서 [지역에서 복제](sql-database-geo-replication-overview.m
 이 옵션의 핵심 **이점**은 일련의 간단한 단계를 사용하여 단일 지역의 응용 프로그램을 업그레이드할 수 있다는 것입니다. 업그레이드의 달러 비용은 상대적으로 낮습니다. 주 **단점** 은 업그레이드 중에 치명적인 오류가 발생하는 경우 업그레이드 전 상태로의 복구에 다른 지역에서 응용 프로그램을 다시 배포하고 지역 복원을 사용하여 백업에서 데이터베이스를 복원하는 것이 포함된다는 것입니다. 이 프로세스를 통해 상당한 가동 중지 시간이 발생합니다.   
 
 ## <a name="upgrading-applications-that-rely-on-database-geo-replication-for-disaster-recovery"></a>재해 복구에 대해 데이터베이스 지역에서 복제를 사용하는 응용 프로그램 업그레이드
-응용 프로그램이 무중단 업무 방식을 위해 지역에서 복제를 활용하는 경우 주 지역에서 활성 배포를 사용하고 백업 지역에서 대기 배포를 사용하여 두 개 이상의 다른 지역에 배포됩니다. 앞에서 언급한 요인 외에도 업그레이드 프로세스는 다음을 보장해야 합니다.
+응용 프로그램이 무중단 업무 방식을 위해 지역에서 복제를 활용하는 경우 주 지역에서 활성 배포를 사용하고 Backup 지역에서 대기 배포를 사용하여 두 개 이상의 다른 지역에 배포됩니다. 앞에서 언급한 요인 외에도 업그레이드 프로세스는 다음을 보장해야 합니다.
 
 * 응용 프로그램이 업그레이드 프로세스 중에 치명적인 오류로부터 항상 보호된 상태로 유지됨
 * 응용 프로그램의 지역 중복 구성 요소가 활성화된 구성 요소와 함께 병렬로 업그레이드됨
 
-이러한 목표를 달성하기 위해 하나의 활성 및 세 개의 백업 끝점과 함께 장애 조치(failover) 프로필을 사용하여 Azure 트래픽 관리자(WATM)를 활용하게 됩니다.  다음 다이어그램에서는 업그레이드 프로세스 전의 운영 환경을 보여 줍니다. <i>contoso-1.azurewebsites.net</i> 및 <i>contoso-dr.azurewebsites.net</i> 웹 사이트는 전체 지역 중복이 포함된 응용 프로그램의 프로덕션 슬롯을 나타냅니다. 업그레이드를 롤백할 수 있는 기능을 사용하려면 응용 프로그램의 완전히 동기화된 복사본으로 스테이지 슬롯을 만들어야 합니다. 업그레이드 프로세스 중에 치명적인 오류가 발생할 경우 응용 프로그램이 빠르게 복구될 수 있음을 보장해야 하기 때문에 스테이지 슬롯도 지역 중복이어야 합니다. 다음 단계는 업그레이드에 대해 응용 프로그램을 준비하는 데 필요합니다.
+이러한 목표를 달성하기 위해 하나의 활성 및 세 개의 백업 끝점과 함께 장애 조치(failover) 프로필을 사용하여 Azure Traffic Manager(WATM)를 활용하게 됩니다.  다음 다이어그램에서는 업그레이드 프로세스 전의 운영 환경을 보여 줍니다. <i>contoso-1.azurewebsites.net</i> 및 <i>contoso-dr.azurewebsites.net</i> 웹 사이트는 전체 지역 중복이 포함된 응용 프로그램의 프로덕션 슬롯을 나타냅니다. 업그레이드를 롤백할 수 있는 기능을 사용하려면 응용 프로그램의 완전히 동기화된 복사본으로 스테이지 슬롯을 만들어야 합니다. 업그레이드 프로세스 중에 치명적인 오류가 발생할 경우 응용 프로그램이 빠르게 복구될 수 있음을 보장해야 하기 때문에 스테이지 슬롯도 지역 중복이어야 합니다. 다음 단계는 업그레이드에 대해 응용 프로그램을 준비하는 데 필요합니다.
 
 1. 업그레이드에 대한 스테이지 슬롯을 만듭니다. 이를 수행하려면 보조 데이터베이스(1)를 만들고 동일한 Azure 지역에서 웹 사이트의 동일한 복사본을 배포합니다. 보조 데이터베이스를 모니터링하여 시딩 프로세스가 완료되었는지 확인합니다.
 2. 보조 데이터베이스를 백업 지역에 지역 복제하여 스테이지 슬롯에서 지역 중복 보조 데이터베이스를 만듭니다("연결된 지역에서 복제"라고 함). 백업 보조 데이터베이스를 모니터링하여 시딩 프로세스가 완료되었는지 확인합니다(3).
@@ -136,9 +128,8 @@ SQL Database에서 [지역에서 복제](sql-database-geo-replication-overview.m
 
 ## <a name="next-steps"></a>다음 단계
 * 비즈니스 연속성의 개요 및 시나리오를 보려면 [비즈니스 연속성 개요](sql-database-business-continuity.md)를 참조하세요.
-* Azure SQL 데이터베이스 자동화 백업에 대한 자세한 내용은 [SQL 데이터베이스 자동화 백업](sql-database-automated-backups.md)을 참조하세요.
+* Azure SQL Database 자동화 백업에 대한 자세한 내용은 [SQL Database 자동화 백업](sql-database-automated-backups.md)을 참조하세요.
 * 복구를 위해 자동화된 백업을 사용하는 방법을 알아보려면 [자동화된 백업에서 데이터베이스 복원](sql-database-recovery-using-backups.md)을 참조하세요.
 * 빠른 복구 옵션에 대해 알아보려면 [활성 지역 복제](sql-database-geo-replication-overview.md)를 참조하세요.
-
 
 

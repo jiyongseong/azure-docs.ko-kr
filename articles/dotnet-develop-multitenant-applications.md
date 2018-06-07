@@ -14,12 +14,11 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 06/05/2015
 ms.author: wpickett
-ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
 ms.openlocfilehash: 57ba0e46139bda2d74c9f7db0ffab2f2122b0df2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="multitenant-applications-in-azure"></a>Azure의 다중 테넌트 응용 프로그램
 다중 테넌트 응용 프로그램은 개별 사용자, 즉 "테넌트"가 자신의 고유 항목처럼 응용 프로그램을 볼 수 있게 하는 공유 리소스입니다. 다중 테넌트 응용 프로그램이 적합한 일반적인 시나리오는 모든 응용 프로그램 사용자가 사용자 환경을 사용자 지정하려고 하지만 기본적인 비즈니스 요구 사항을 동일하게 준수해야 하는 상황입니다. 대규모 다중 테넌트 응용 프로그램의 예로는 Office 365, Outlook.com 및 visualstudio.com이 있습니다.
@@ -93,4 +92,3 @@ Azure에는 응용 프로그램의 새 테넌트를 프로비전하는 방법이
 
 [Hosting a Multi-Tenant Application on Azure]: http://msdn.microsoft.com/library/hh534480.aspx
 [Designing Multitenant Applications on Azure]: http://msdn.microsoft.com/library/windowsazure/hh689716
-

@@ -1,11 +1,11 @@
 ---
-title: "스케줄러 개념, 용어 및 엔터티 | Microsoft Docs"
-description: "작업 및 작업 컬렉션을 포함하는 Azure 스케줄러 개념, 용어 및 엔터티 계층 구조입니다.  예약된 작업의 자세한 예를 보여줍니다."
+title: Scheduler 개념, 용어 및 엔터티 | Microsoft Docs
+description: 작업 및 작업 컬렉션을 포함하는 Azure Scheduler 개념, 용어 및 엔터티 계층 구조입니다.  예약된 작업의 자세한 예를 보여줍니다.
 services: scheduler
 documentationcenter: .NET
 author: derek1ee
 manager: kevinlam1
-editor: 
+editor: ''
 ms.assetid: 3ef16fab-d18a-48ba-8e56-3f3e0a1bcb92
 ms.service: scheduler
 ms.workload: infrastructure-services
@@ -14,15 +14,15 @@ ms.devlang: dotnet
 ms.topic: get-started-article
 ms.date: 08/18/2016
 ms.author: deli
-translationtype: Human Translation
-ms.sourcegitcommit: dcda8b30adde930ab373a087d6955b900365c4cc
-ms.openlocfilehash: 0f035b58ccd140a5481703df7e184206da2ed651
-
-
+ms.openlocfilehash: 91302d57c43a6c9d14aeeee95df3d61fa6f73172
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-# <a name="scheduler-concepts-terminology--entity-hierarchy"></a>스케줄러 개념, 용어 + 엔터티 계층 구조
-## <a name="scheduler-entity-hierarchy"></a>스케줄러 엔터티 계층 구조
-다음 표에서 스케줄러 API에서 노출 하거나 사용하는 주 리소스를 설명 합니다.
+# <a name="scheduler-concepts-terminology--entity-hierarchy"></a>Scheduler 개념, 용어 + 엔터티 계층 구조
+## <a name="scheduler-entity-hierarchy"></a>Scheduler 엔터티 계층 구조
+다음 표에서 Scheduler API에서 노출 하거나 사용하는 주 리소스를 설명 합니다.
 
 | 리소스 | 설명 |
 | --- | --- |
@@ -30,7 +30,7 @@ ms.openlocfilehash: 0f035b58ccd140a5481703df7e184206da2ed651
 | **작업** |작업은 간단하거나 복잡한 실행 전략을 통해 단일 반복 작업을 정의합니다. 작업은 HTTP, 저장소 큐, 서비스 버스 큐 또는 서비스 버스 항목 요청을 포함할 수 있습니다. |
 | **작업 기록** |작업 기록의 경우 작업 실행에 대한 세부 정보를 나타냅니다. 응답 세부 정보와 함께 성공 또는 실패를 포함합니다. |
 
-## <a name="scheduler-entity-management"></a>스케줄러 엔터티 관리
+## <a name="scheduler-entity-management"></a>Scheduler 엔터티 관리
 높은 수준에서 스케줄러 및 서비스 관리 API는 리소스에서 다음 작업을 노출합니다.
 
 | 기능 | 설명 및 URI 주소 |
@@ -119,7 +119,7 @@ HTTP 작업(SSL을 지원하는 HTTPS 작업 포함), 저장소 큐 작업, 서�
 "startTime"은 시작 시간이며, 호출자가 통신 중의 시간대 오프셋을 [ISO-8601 형식](http://en.wikipedia.org/wiki/ISO_8601)으로 지정할 수 있습니다.
 
 ## <a name="action-and-erroraction"></a>action 및 errorAction
-"action"은 각각의 발생 시 호출되는 동작이며 서비스 호출 유형을 설명합니다. 동작은 제공된 일정에 따라 실행되는 것입니다. 스케줄러는 HTTP, 저장소 큐, 서비스 버스 항목 또는 서비스 버스 큐 작업을 지원합니다.
+"action"은 각각의 발생 시 호출되는 동작이며 서비스 호출 유형을 설명합니다. 동작은 제공된 일정에 따라 실행되는 것입니다. Scheduler는 HTTP, 저장소 큐, 서비스 버스 항목 또는 서비스 버스 큐 작업을 지원합니다.
 
 위 예의 동작은 HTTP 동작입니다. 다음은 저장소 큐 동작의 예입니다.
 
@@ -167,39 +167,33 @@ JSON 정의에 지정된 되풀이 개체가 있으면 작업이 반복됩니다
 완료 및 오류 작업은 60일 후 삭제됩니다.
 
 ## <a name="status"></a>status
-스케줄러 작업이 시작되면 현재 작업 상태에 대한 정보가 반환됩니다. 이 개체는 사용자가 설정할 수 없고 시스템에서 설정합니다. 그러나 작업 상태를 쉽게 확보할 수 있게 작업 개체(별도의 연결 리소스가 아님)에 포함되어 있습니다.
+Scheduler 작업이 시작되면 현재 작업 상태에 대한 정보가 반환됩니다. 이 개체는 사용자가 설정할 수 없고 시스템에서 설정합니다. 그러나 작업 상태를 쉽게 확보할 수 있게 작업 개체(별도의 연결 리소스가 아님)에 포함되어 있습니다.
 
 작업 상태에는 이전 실행 시간(있는 경우), 다음 예약 실행 시간(진행 중인 작업의 경우), 작업 실행 수가 포함됩니다.
 
 ## <a name="retrypolicy"></a>retryPolicy
-스케줄러 작업이 실패할 경우 작업 재시도 여부 및 방법을 결정하는 재시도 정책을 지정할 수 있습니다. 이 항목은 **retryType** 개체에서 결정합니다. 재시도 정책이 없으면 **none**으로 설정됩니다. 재시도 정책이 있는 경우 **fixed**로 설정합니다.
+Scheduler 작업이 실패할 경우 작업 재시도 여부 및 방법을 결정하는 재시도 정책을 지정할 수 있습니다. 이 항목은 **retryType** 개체에서 결정합니다. 재시도 정책이 없으면 **none**으로 설정됩니다. 재시도 정책이 있는 경우 **fixed**로 설정합니다.
 
 재시도 정책을 설정하기 위해 재시도 간격(**retryInterval**)과 재시도 횟수(**retryCount**) 등, 두 추가 설정을 지정할 수 있습니다.
 
-**retryInterval** 개체로 지정한 재시도 간격은 재시도 간 간격입니다. 기본값은 30초이며 구성 가능한 최소값은 15초, 최대값은 18개월입니다. 무료 작업 컬렉션에 있는 작업의 구성 가능한 최소값은 1시간입니다.  ISO 8601 형식으로 정의됩니다. 마찬가지로, 재시도 횟수 값은 **retryCount** 개체로 정의하며 재시도를 시도하는 횟수입니다. 기본값은 4이고 최대값은 20입니다\. **retryInterval** 및 **retryCount**는 선택 사항입니다. **retryType**이 **fixed**로 설정되고 명시적으로 지정한 값이 없을 때 기본값으로 제공됩니다.
+**retryInterval** 개체로 지정한 재시도 간격은 재시도 간 간격입니다. 기본값은 30초이며 구성 가능한 최소값은 15초, 최대값은 18개월입니다. ISO 8601 형식으로 정의됩니다. 마찬가지로, 재시도 횟수 값은 **retryCount** 개체로 정의하며 재시도를 시도하는 횟수입니다. 기본값은 4이고 최대값은 20입니다. **retryInterval** 및 **retryCount**는 모두 선택 사항입니다. **retryType**이 **fixed**로 설정되고 명시적으로 지정한 값이 없을 때 기본값으로 제공됩니다.
 
 ## <a name="see-also"></a>참고 항목
- [스케줄러란?](scheduler-intro.md)
+ [Scheduler란?](scheduler-intro.md)
 
- [Azure 포털에서 스케줄러 사용 시작](scheduler-get-started-portal.md)
+ [Azure Portal에서 Scheduler 사용 시작](scheduler-get-started-portal.md)
 
- [Azure 스케줄러의 버전 및 요금 청구](scheduler-plans-billing.md)
+ [Azure Scheduler의 버전 및 요금 청구](scheduler-plans-billing.md)
 
- [Azure 스케줄러를 사용하여 복잡한 일정 및 고급 되풀이를 만드는 방법](scheduler-advanced-complexity.md)
+ [Azure Scheduler를 사용하여 복잡한 일정 및 고급 되풀이를 만드는 방법](scheduler-advanced-complexity.md)
 
- [Azure 스케줄러 REST API 참조](https://msdn.microsoft.com/library/mt629143)
+ [Azure Scheduler REST API 참조](https://msdn.microsoft.com/library/mt629143)
 
- [Azure 스케줄러 PowerShell cmdlet 참조](scheduler-powershell-reference.md)
+ [Azure Scheduler PowerShell cmdlet 참조](scheduler-powershell-reference.md)
 
- [Azure 스케줄러 고가용성 및 안정성](scheduler-high-availability-reliability.md)
+ [Azure Scheduler 고가용성 및 안정성](scheduler-high-availability-reliability.md)
 
- [Azure 스케줄러 제한, 기본값 및 오류 코드](scheduler-limits-defaults-errors.md)
+ [Azure Scheduler 제한, 기본값 및 오류 코드](scheduler-limits-defaults-errors.md)
 
- [Azure 스케줄러 아웃바운드 인증](scheduler-outbound-authentication.md)
-
-
-
-
-<!--HONumber=Dec16_HO2-->
-
+ [Azure Scheduler 아웃바운드 인증](scheduler-outbound-authentication.md)
 

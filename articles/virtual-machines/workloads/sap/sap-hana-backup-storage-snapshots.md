@@ -13,19 +13,17 @@ ums.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 3/13/2017
 ms.author: rclaus
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 5d395da0779d84e414341d6d73151fd7e77e3e8e
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: f332b8ac091b75a23489ac27f15ad1fd10d24ec6
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="sap-hana-backup-based-on-storage-snapshots"></a>저장소 스냅숏에 기반한 SAP HANA 백업
 
 ## <a name="introduction"></a>소개
 
-이 문서는 3부로 구성된 SAP HANA 백업 관련 문서 시리즈의 일부입니다. [Azure Virtual Machines의 SAP HANA 백업 가이드](sap-hana-backup-guide.md)에서 시작에 대한 개요와 정보를 제공하고, [파일 수준의 SAP HANA Azure 백업](sap-hana-backup-file-level.md)에서 파일 기반 백업 옵션을 설명합니다.
+이 문서는 3부로 구성된 SAP HANA 백업 관련 문서 시리즈의 일부입니다. [Azure Virtual Machines의 SAP HANA 백업 가이드](sap-hana-backup-guide.md)에서 시작에 대한 개요와 정보를 제공하고, [파일 수준의 SAP HANA Azure Backup](sap-hana-backup-file-level.md)에서 파일 기반 백업 옵션을 설명합니다.
 
 단일 인스턴스 통합(all-in-one) 데모 시스템에 VM 백업 기능을 사용하는 경우 OS 수준에서 HANA 백업을 관리하는 대신 VM 백업을 수행하는 것이 좋습니다. 다른 방법으로는 Azure Blob 스냅숏을 만들어 가상 컴퓨터에 연결된 개별 가상 디스크의 복사본을 만들고 HANA 데이터 파일을 유지하는 것입니다. 그러나 중요한 점은 시스템 가동 중에 VM 백업 또는 디스크 스냅숏을 만들 때 앱 일관성을 유지하는 것입니다. [Azure Virtual Machines의 SAP HANA 백업 가이드](sap-hana-backup-guide.md) 관련 문서의 _저장소 스냅숏을 만들 때의 SAP HANA 데이터 일관성_을 참조하세요. SAP HANA에는 이러한 종류의 저장소 스냅숏을 지원하는 기능이 있습니다.
 
@@ -60,7 +58,7 @@ SAP HANA가 스냅숏 준비 모드에 있는 동안 저장소 스냅숏을 실�
 
 ## <a name="hana-vm-backup-via-azure-backup-service"></a>Azure Backup 서비스를 통한 HANA VM 백업
 
-2016년 12월 현재 Azure Backup 서비스의 백업 에이전트는 Linux VM에서 사용할 수 없습니다. 파일/디렉터리 수준에서 Azure 백업을 사용하려면 SAP HANA 백업 파일을 Windows VM에 복사한 다음 백업 에이전트를 사용합니다. 그렇지 않으면 전체 Linux VM 백업만 Azure Backup 서비스를 통해 수행할 수 있습니다. 자세한 내용은 [Azure Backup의 기능에 대한 개요](../../../backup/backup-introduction-to-azure-backup.md)를 참조하세요.
+2016년 12월 현재 Azure Backup 서비스의 백업 에이전트는 Linux VM에서 사용할 수 없습니다. 파일/디렉터리 수준에서 Azure Backup을 사용하려면 SAP HANA 백업 파일을 Windows VM에 복사한 다음 백업 에이전트를 사용합니다. 그렇지 않으면 전체 Linux VM 백업만 Azure Backup 서비스를 통해 수행할 수 있습니다. 자세한 내용은 [Azure Backup의 기능에 대한 개요](../../../backup/backup-introduction-to-azure-backup.md)를 참조하세요.
 
 Azure Backup 서비스는 VM을 백업하고 복원하는 옵션을 제공합니다. 이 서비스 및 작동 방법에 대한 자세한 내용은 [Azure에서 VM 백업 인프라 계획](../../../backup/backup-azure-vms-introduction.md) 문서에 있습니다.
 
@@ -105,7 +103,7 @@ Azure Backup 서비스를 &quot;hana-backup-vault&quot;라는 이름으로 만�
 
 ![현재 진행 중인 백업 작업 확인](media/sap-hana-backup-storage-snapshots/image017.png)
 
-올바른 컨텍스트를 설정한 후 현재 진행 중인 백업 작업을 확인한 다음 작업 세부 정보를 찾을 수 있습니다. 하위 작업 목록에는 Azure 백업 작업의 스냅숏 단계가 이미 완료되었는지 여부가 표시됩니다.
+올바른 컨텍스트를 설정한 후 현재 진행 중인 백업 작업을 확인한 다음 작업 세부 정보를 찾을 수 있습니다. 하위 작업 목록에는 Azure Backup 작업의 스냅숏 단계가 이미 완료되었는지 여부가 표시됩니다.
 
 ```
 $ars = Get-AzureRmRecoveryServicesVault -Name hana-backup-vault
@@ -168,6 +166,5 @@ Blob 스냅숏 이전에 SAP HANA를 종료할 수 있다면 절차가 덜 복�
 
 ## <a name="next-steps"></a>다음 단계
 * [Azure Virtual Machines의 SAP HANA 백업 가이드](sap-hana-backup-guide.md) - 시작에 대한 개요 및 정보를 제공합니다.
-* [파일 수준에 기반한 SAP HANA 백업](sap-hana-backup-file-level.md) - 저장소 스냅숏을 기반으로 하는 백업 옵션을 설명합니다.
+* [파일 수준 기반 SAP HANA 백업](sap-hana-backup-file-level.md)에서는 파일 기반 백업 옵션에 대해 다룹니다.
 * [Azure의 SAP HANA(큰 인스턴스) 고가용성 및 재해 복구](hana-overview-high-availability-disaster-recovery.md) - Azure의 SAP HANA(큰 인스턴스)에 대한 고가용성 및 재해 복구 계획을 설정하는 방법을 알아봅니다.
-

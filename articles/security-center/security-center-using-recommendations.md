@@ -12,14 +12,13 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 05/08/2017
+ms.date: 09/18/2017
 ms.author: terrylan
+ms.openlocfilehash: 0616f5e501324bfd821c1455ce234602f1fcf1bd
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: cb4a7db5666242576bf83abbf10682cc6f53ba69
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-azure-security-center-recommendations-to-enhance-security"></a>Azure Security Center 권장 사항을 사용하여 보안 강화
 보안 정책을 구성한 다음 Azure Security Center에서 제공한 권장 사항을 구현하여 중요한 보안 이벤트의 가능성을 줄일 수 있습니다. 이 문서에서는 Security Center에서 보안 정책 및 권장 사항을 사용하여 보안 공격을 완화할 수 있는 방법을 보여 줍니다.
@@ -74,15 +73,15 @@ Jeff가 Security Center 권장 사항을 사용하여 보안 취약점을 제거
 ## <a name="how-to-implement-this-solution"></a>이 솔루션을 구현하는 방법
 Jeff는 [Azure Portal](https://azure.microsoft.com/features/azure-portal/)에 로그인하고 Security Center 콘솔을 엽니다. 일상적인 모니터링 작업의 일환으로 다음 단계를 수행하여 보안 권장 사항이 있는지를 확인합니다.
 
-1. Jeff는 **권장 사항** 타일을 선택하여 **권장 사항** 블레이드를 엽니다.
+1. Jeff는 **권장 사항** 타일을 선택하여 **권장 사항**을 엽니다.
    ![권장 사항 타일 선택][3]
-2. Jeff는 권장 사항 목록을 검토합니다. 또한 Security Center에서 우선 순위에 따라 우선 순위가 가장 높은 것부터 낮은 순으로 권장 사항 목록이 표시됩니다. 목록에서 우선 순위가 높은 항목을 해결하기로 결정합니다. **권장 사항** 블레이드에서 **Endpoint Protection 설치**를 선택합니다.
-3. 맬웨어 방지 프로그램을 사용하지 않는 VM의 목록을 표시하는 **Endpoint Protection 설치** 블레이드가 열립니다. Jeff는 VM 목록을 검토하고 모든 VM을 선택한 다음 **3개의 VM에 설치**를 선택합니다.
+2. Jeff는 권장 사항 목록을 검토합니다. 또한 Security Center에서 우선 순위에 따라 우선 순위가 가장 높은 것부터 낮은 순으로 권장 사항 목록이 표시됩니다. 목록에서 우선 순위가 높은 항목을 해결하기로 결정합니다. **권장 사항**에서 **Endpoint Protection 설치**를 선택합니다.
+3. 맬웨어 방지 프로그램을 사용하지 않는 VM의 목록을 표시하는 **Endpoint Protection 설치**가 열립니다. Jeff는 VM 목록을 검토하고 모든 VM을 선택한 다음 **3개의 VM에 설치**를 선택합니다.
    ![Endpoint Protection 설치][4]
-4. **Endpoint Protection 선택** 블레이드가 열리고 Jeff에게 두 가지 맬웨어 방지 솔루션을 제공합니다. Jeff는 **Microsoft 맬웨어 방지** 솔루션을 선택합니다.
+4. **Endpoint Protection 선택**이 열리고 Jeff에게 두 가지 맬웨어 방지 솔루션을 제공합니다. Jeff는 **Microsoft 맬웨어 방지** 솔루션을 선택합니다.
 5. 맬웨어 방지 솔루션에 대한 추가 정보가 표시됩니다. Jeff는 **만들기**를 선택합니다.
    ![Microsoft 맬웨어 방지][5]
-6. Jeff는 **설치** 블레이드에서 필수 구성 설정을 입력하고 **확인**을 선택합니다.
+6. Jeff는 **설치**에서 필수 구성 설정을 입력하고 **확인**을 선택합니다.
 
 선택한 VM에서 [Microsoft 맬웨어 방지 프로그램](../security/azure-security-antimalware.md)이 활성화됩니다.
 
@@ -90,10 +89,10 @@ Jeff는 계속해서 높은 우선 순위 및 보통 우선 순위 권장 사항
 
 Jeff는 [MSRC(Microsoft Security Response Center)](../security/azure-security-response-center.md)가 Azure 네트워크 및 인프라의 선택 보안 모니터링을 수행하고 타사에서 위협 인텔리전스 및 남용 불만 사항을 받는다는 것을 알았습니다. Jeff가 Contoso의 Azure 구독에 대한 보안 연락처 세부 정보를 제공하는 경우 MSRC가 Contoso의 고객 데이터에 불법적이거나 권한이 없는 당사자에 의한 액세스를 검색하게 되면 Microsoft는 Contoso에 이를 알립니다. Jeff가 **보안 연락처 세부 정보 제공** 권장 사항(위의 권장 사항 목록 중 보통 심각도인 권장 사항)을 적용하는 과정을 따라서 살펴보겠습니다.
 
-1. Jeff가 **권장 사항** 블레이드에서 **보안 연락처 세부 정보 제공**을 선택하면 **보안 연락처 세부 정보 제공** 블레이드가 열립니다.
+1. Jeff가 **권장 사항**에서 **보안 연락처 세부 정보 제공**을 선택하면 **보안 연락처 세부 정보 제공**이 열립니다.
 2. Jeff는 연락처 정보를 제공할 Azure 구독을 선택합니다. 두 번째 **보안 연락처 세부 정보 제공** 블레이드가 열립니다.
    ![보안 연락처 세부 정보][6]
-3. Jeff는 두 번째 **보안 연락처 세부 정보 제공** 블레이드에서 다음을 입력합니다.
+3. **보안 연락처 세부 정보 제공**에서 Jeff는 다음을 입력합니다.
 
   - 쉼표로 구분된 보안 연락처 전자 메일 주소(입력할 수 있는 전자 메일 주소 수에 제한이 없음)
   - 보안 연락처 전화 번호
@@ -107,6 +106,18 @@ Jeff는 마지막으로 우선 순위가 낮은 권장 사항 **OS 취약점 재
 ## <a name="conclusion"></a>결론
 Security Center에서 권장 사항을 모니터링하면 공격이 발생하기 전에 보안 취약점을 제거할 수 있습니다. Security Center에서 보안 정책을 사용하여 보호를 구현하고 유지 관리하여 보안 인시던트를 방지할 수 있습니다.
 
+## <a name="next-steps"></a>다음 단계
+이 시나리오에서는 Security Center에서 보안 정책 및 권장 사항을 사용하여 보안 공격을 완화할 수 있는 방법을 보여 줍니다. [사고 대응 시나리오](security-center-incident-response.md)에서 공격이 발생하기 전에 사고 대응 계획을 적절히 수립하는 방법을 참조하세요.
+
+Security Center에 대해 자세히 알아보려면 다음 항목을 참조하세요.
+
+* [보안 상태 모니터링](security-center-monitoring.md) - Azure 리소스의 상태를 모니터링하는 방법을 알아봅니다.
+* [보안 경고 관리 및 대응](security-center-managing-and-responding-alerts.md) - 보안 경고를 관리하고 대응하는 방법을 알아봅니다.
+* [보안 이벤트 모니터링 및 처리](security-center-events-dashboard.md) - 시간별로 수집된 보안 이벤트를 모니터링하고 처리하는 방법을 알아봅니다.
+* [파트너 솔루션 모니터링](security-center-partner-solutions.md) - 파트너 솔루션의 상태를 모니터링하는 방법을 알아봅니다.
+* [Azure Security Center FAQ](security-center-faq.md) - 서비스 사용에 관한 질문과 대답을 찾습니다.
+* [Azure 보안 블로그](http://blogs.msdn.com/b/azuresecurity/) - 최신 Azure 보안 뉴스 및 정보를 가져옵니다.
+
 <!--Image references-->
 [1]: ./media/security-center-using-recommendations/security-center-policy-inheritance.png
 [2]: ./media/security-center-using-recommendations/scenario-roles.png
@@ -115,4 +126,3 @@ Security Center에서 권장 사항을 모니터링하면 공격이 발생하기
 [5]:./media/security-center-using-recommendations/microsoft-antimalware.png
 [6]: ./media/security-center-using-recommendations/provide-security-contact-details.png
 [7]: ./media/security-center-using-recommendations/dismiss-recommendation.png
-

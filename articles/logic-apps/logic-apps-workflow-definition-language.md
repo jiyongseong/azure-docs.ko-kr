@@ -1,341 +1,480 @@
 ---
-title: "워크플로 정의 언어 스키마 - Azure Logic Apps | Microsoft Docs"
-description: "Azure Logic Apps에 대한 워크플로 정의 스키마에 따라 워크플로 정의"
+title: 워크플로 정의 언어 스키마 - Azure Logic Apps | Microsoft Docs
+description: 워크플로 정의 언어로 Azure Logic Apps에 대한 사용자 지정 워크플로 정의 작성
 services: logic-apps
-author: jeffhollan
-manager: anneta
-editor: 
-documentationcenter: 
+author: ecfan
+manager: cfowler
+editor: ''
+documentationcenter: ''
 ms.assetid: 26c94308-aa0d-4730-97b6-de848bffff91
 ms.service: logic-apps
-ms.workload: integration
-ms.tgt_pltfrm: na
-ms.devlang: multiple
-ms.topic: article
-ms.date: 03/21/2017
-ms.author: LADocs; jehollan
+ms.workload: logic-apps
+ms.tgt_pltfrm: ''
+ms.devlang: ''
+ms.topic: reference
+ms.date: 04/30/2018
+ms.author: estfan
+ms.openlocfilehash: efbfffec10b665ebab230375e774e476199c4ad5
+ms.sourcegitcommit: 6116082991b98c8ee7a3ab0927cf588c3972eeaa
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: b9cd83e6891c723f843825b99dce0e0158fc6ef6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2018
+ms.locfileid: "33886811"
 ---
+# <a name="logic-apps-workflow-definitions-with-the-workflow-definition-language-schema"></a>워크플로 정의 언어 스키마로 Logic Apps 워크플로 정의
 
-# <a name="workflow-definition-language-schema-for-azure-logic-apps"></a>Azure Logic Apps에 대한 워크플로 정의 언어 스키마
-
-워크플로 정의는 논리 앱의 일부로 실행할 실제 논리를 포함합니다. 이 정의는 논리 앱을 실행하는 트리거와 논리 앱에 대해 수행할 작업을 각각 하나 이상 포함합니다.  
+[Azure Logic Apps](../logic-apps/logic-apps-overview.md)로 논리 앱 워크플로를 만들 때 워크플로 기본 정의는 논리 앱에 대해 실행되는 실제 논리에 대해 설명합니다. 이 설명은 [JSON(JavaScript Object Notation)](https://www.json.org/) 형식을 사용하는 워크플로 정의 언어 스키마에서 정의하고 유효성을 검사하는 구조를 따릅니다. 
   
-## <a name="basic-workflow-definition-structure"></a>기본 워크플로 정의 구조
+## <a name="workflow-definition-structure"></a>워크플로 정의 구조
 
-워크플로 정의의 기본 구조는 다음과 같습니다.  
+워크플로 정의에는 논리 앱에서 실행하는 하나 이상의 동작에 더해 로직 앱을 인스턴스화하는 최소 하나 이상의 트리거가 있습니다. 
+
+워크플로 정의에 대한 고급 구조는 다음과 같습니다.  
   
 ```json
-{
-    "$schema": "<schema-of the-definition>",
-    "contentVersion": "<version-number-of-definition>",
-    "parameters": { <parameter-definitions-of-definition> },
-    "triggers": [ { <definition-of-flow-triggers> } ],
-    "actions": [ { <definition-of-flow-actions> } ],
-    "outputs": { <output-of-definition> }
+"definition": {
+  "$schema": "<workflow-definition-language-schema-version>",
+  "contentVersion": "<workflow-definition-version-number>",
+  "parameters": { "<workflow-parameter-definitions>" },
+  "triggers": { "<workflow-trigger-definitions>" },
+  "actions": { "<workflow-action-definitions>" },
+  "outputs": { "<workflow-output-definitions>" }
 }
 ```
   
-> [!NOTE]
-> [워크플로 관리 REST API](https://docs.microsoft.com/rest/api/logic/workflows) 설명서에는 논리 앱 워크플로를 만들고 관리하는 방법에 대한 정의가 들어 있습니다.
-  
-|요소 이름|필수|설명|  
-|------------------|--------------|-----------------|  
-|$schema|아니요|정의 언어의 버전을 설명하는 JSON 스키마 파일의 위치를 지정합니다. 정의를 외부에서 참조할 때 이 위치가 필요합니다. 이 문서에서 위치는 다음과 같습니다. <p>`https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2015-08-01-preview/workflowdefinition.json#`|  
-|contentVersion|아니요|정의 버전을 지정합니다. 정의를 사용하여 워크플로를 배포할 때 이 값을 사용하여 올바른 정의가 사용되는지 확인할 수 있습니다.|  
-|매개 변수|아니요|정의에 데이터를 입력하는 데 사용되는 매개 변수를 지정합니다. 최대 50개의 매개 변수를 정의할 수 있습니다.|  
-|트리거|아니요|워크플로를 시작하는 트리거에 대한 정보를 지정합니다. 최대 250개의 트리거를 정의할 수 있습니다.|  
-|actions|아니요|흐름이 실행될 때 수행할 작업을 지정합니다. 최대 250개의 작업을 정의할 수 있습니다.|  
-|outputs|아니요|배포된 리소스에 대한 정보를 지정합니다. 최대 10개의 출력을 정의할 수 있습니다.|  
-  
+| 요소 | 필수 | 설명 | 
+|---------|----------|-------------| 
+| 정의 | 예 | 워크플로 정의에 대한 시작 요소 | 
+| $schema | 외부에서 워크플로 정의를 참조하는 경우만 | 워크플로 정의 언어의 버전을 설명하는 JSON 스키마 파일의 위치를 여기서 찾을 수 있습니다. <p>`https://schema.management.azure.com/schemas/2016-06-01/Microsoft.Logic.json`</p> |   
+| contentVersion | 아니오 | 워크플로 정의의 버전 번호는 기본적으로 “1.0.0.0”입니다. 워크플로 배포하는 경우 올바른 정의를 식별하고 확인하려면 사용할 값을 지정합니다. | 
+| 매개 변수 | 아니오 | 데이터를 워크플로에 전달하는 하나 이상의 매개 변수에 대한 정의 <p><p>최대 매개 변수: 50 | 
+| 트리거 | 아니오 | 워크플로를 인스턴트화하는 하나 이상의 트리거에 대한 정의 Logic Apps Designer를 사용하여 시각적으로가 아닌, 워크플로 정의 언어를 통해서만 하나 초과 트리거를 정의할 수 있습니다. <p><p>최대 트리거: 10 | 
+| actions | 아니오 | 워크플로 런타임 시 실행하는 하나 이상의 작업에 대한 정의 <p><p>최대 작업: 250 | 
+| outputs | 아니오 | 워크플로 실행에서 반환되는 출력에 대한 정의 <p><p>최대 출력: 10 |  
+|||| 
+
 ## <a name="parameters"></a>매개 변수
 
-이 섹션에서는 배포 시 워크플로 정의에 사용되는 모든 매개 변수를 지정합니다. 이 섹션에 모든 매개 변수를 먼저 선언해야 정의의 다른 섹션에 사용할 수 있습니다.  
-  
-다음 예제에서는 매개 변수 정의의 구조를 보여 줍니다.  
+`parameters` 섹션에서 논리 앱이 입력을 허용하기 위한 배포 시 사용하는 모든 워크플로 매개 변수를 정의합니다. 매개 변수 선언 및 매개 변수 값 모두 배포 시 필요합니다. 다른 워크플로 섹션에서 이러한 매개 변수를 사용할 수 있기 전에 이 섹션에서 모든 매개 변수를 선언하는지 확인합니다. 
+
+매개 변수 정의에 대한 일반적인 구조는 다음과 같습니다.  
 
 ```json
 "parameters": {
-    "<parameter-name>" : {
-        "type" : "<type-of-parameter-value>",
-        "defaultValue": <default-value-of-parameter>,
-        "allowedValues": [ <array-of-allowed-values> ],
-        "metadata" : { "key": { "name": "value"} }
+  "<parameter-name>": {
+    "type": "<parameter-type>",
+    "defaultValue": "<default-parameter-value>",
+    "allowedValues": [ <array-with-permitted-parameter-values> ],
+    "metadata": { 
+      "key": { 
+        "name": "<key-value>"
+      } 
     }
-}
+  }
+},
 ```
 
-|요소 이름|필수|설명|  
-|------------------|--------------|-----------------|  
-|type|예|**형식**: string <p> **선언**: `"parameters": {"parameter1": {"type": "string"}` <p> **사양**: `"parameters": {"parameter1": {"value": "myparamvalue1"}}` <p> **형식**: securestring <p> **선언**: `"parameters": {"parameter1": {"type": "securestring"}}` <p> **사양**: `"parameters": {"parameter1": {"value": "myparamvalue1"}}` <p> **형식**: int <p> **선언**: `"parameters": {"parameter1": {"type": "int"}}` <p> **사양**: `"parameters": {"parameter1": {"value" : 5}}` <p> **형식**: bool <p> **선언**: `"parameters": {"parameter1": {"type": "bool"}}` <p> **사양**: `"parameters": {"parameter1": { "value": true }}` <p> **형식**: array <p> **선언**: `"parameters": {"parameter1": {"type": "array"}}` <p> **사양**: `"parameters": {"parameter1": { "value": [ array-of-values ]}}` <p> **형식**: object <p> **선언**: `"parameters": {"parameter1": {"type": "object"}}` <p> **사양**: `"parameters": {"parameter1": { "value": { JSON-object } }}` <p> **형식**: secureobject <p> **선언**: `"parameters": {"parameter1": {"type": "object"}}` <p> **사양**: `"parameters": {"parameter1": { "value": { JSON-object } }}` <p> **참고:** `securestring` 및 `secureobject` 형식은 `GET` 작업에서 반환되지 않습니다. 모든 암호, 키 및 비밀은 이 형식을 사용해야 합니다.|  
-|defaultValue|아니요|리소스를 만들 때 값이 지정되지 않으면 매개 변수에 대한 기본값을 지정합니다.|  
-|allowedValues|아니요|매개 변수에 대해 허용된 값 배열을 지정합니다.|  
-|metadata|아니요|Visual Studio 또는 다른 도구에서 사용하는 읽을 수 있는 설명이나 디자인 시간 데이터와 같은 매개 변수에 대한 추가 정보를 지정합니다.|  
-  
-이 예제에서는 작업의 본문 섹션에 매개 변수를 사용하는 방법을 보여 줍니다.  
-  
-```json
-"body" :
-{
-  "property1": "@parameters('parameter1')"
-}
-```
+| 요소 | 필수 | 형식 | 설명 |  
+|---------|----------|------|-------------|  
+| 형식 | 예 | int, float, 문자열, securestring, bool, 배열, JSON 개체, secureobject <p><p>**참고**: 모든 암호, 키 및 비밀의 경우 `GET` 작업은 이러한 형식을 반환하지 않기 때문에 `securestring` 및 `secureobject` 형식을 사용합니다. | 매개 변수의 형식 |
+| defaultValue | 아니오 | `type`과 동일 | 워크플로 인스턴스화할 때 아무 값도 지정하지 않는 경우의 기본 매개 변수 값 | 
+| allowedValues | 아니오 | `type`과 동일 | 매개 변수를 수용할 수 있는 값으로 배열 |  
+| metadata | 아니오 | JSON 개체 | 예를 들어 모든 다른 매개 변수는 이름 또는 Visual Studio 또는 다른 도구에서 사용하는 디자인 타임 데이터나 논리 앱에 대한 이름 또는 읽을 수 있는 정보를 설명합니다. |  
+||||
 
- 매개 변수는 출력에도 사용할 수 있습니다.  
-  
 ## <a name="triggers-and-actions"></a>트리거 및 작업  
 
-트리거 및 작업은 워크플로 실행에 참여할 수 있는 호출을 지정합니다. 이 섹션에 대한 자세한 내용은 [워크플로 작업 및 트리거](logic-apps-workflow-actions-triggers.md)를 참조하세요.
+워크플로 정의에서 `triggers` 및 `actions` 섹션은 워크플로 실행 중에 발생하는 호출을 정의합니다. 구문 및 이러한 섹션에 대한 자세한 내용은 [워크플로 트리거 및 작업](../logic-apps/logic-apps-workflow-actions-triggers.md)을 참조합니다.
   
-## <a name="outputs"></a>outputs  
+## <a name="outputs"></a>outputs 
 
-출력은 워크플로 실행에서 반환할 수 있는 정보를 지정합니다. 예를 들어 각 실행에 대해 추적할 특정 상태 또는 값이 있는 경우 실행 출력에 데이터를 포함할 수 있습니다. 데이터는 해당 실행에 대한 관리 REST API 및 Azure Portal에서 실행에 대한 관리 UI에 나타납니다. 대시보드를 만들기 위해 이러한 출력을 PowerBI와 같은 다른 외부 시스템으로 전달할 수도 있습니다. 출력은 서비스 REST API에 대해 들어오는 요청에 응답하는 데 사용되지 *않습니다.* `response` 작업 유형을 사용하여 들어오는 요청에 응답하는 예는 다음과 같습니다.
-  
+`outputs` 섹션에서 워크플로가 실행을 종료할 때 반환할 수 있는 데이터를 정의합니다. 예를 들어, 각 실행에서 특정 상태 또는 값을 추적하려면 워크플로 출력이 해당 데이터를 반환하도록 지정합니다. 
+
+> [!NOTE]
+> 서비스의 REST API에서 들어오는 요청에 응답하는 경우 `outputs`을 사용하지 마세요. 대신 `Response` 작업 형식을 사용합니다. 자세한 내용은 [워크플로 트리거 및 작업](../logic-apps/logic-apps-workflow-actions-triggers.md)을 참조하세요.
+
+출력 정의에 대한 일반적인 구조는 다음과 같습니다. 
+
 ```json
-"outputs": {  
-  "key1": {  
-    "value": "value1",  
-    "type" : "<type-of-value>"  
-  }  
+"outputs": {
+  "<key-name>": {  
+    "type": "<key-type>",  
+    "value": "<key-value>"  
+  }
 } 
 ```
 
-|요소 이름|필수|설명|  
-|------------------|--------------|-----------------|  
-|key1|예|출력에 대한 키 식별자를 지정합니다. **key1**을 출력을 식별하는 데 사용할 이름으로 바꿉니다.|  
-|값|예|출력의 값을 지정합니다.|  
-|type|예|지정된 값 형식을 지정합니다. 가능한 값 형식은 다음과 같습니다. <ul><li>`string`</li><li>`securestring`</li><li>`int`</li><li>`bool`</li><li>`array`</li><li>`object`</li></ul>|
-  
-## <a name="expressions"></a>식  
+| 요소 | 필수 | 형식 | 설명 | 
+|---------|----------|------|-------------| 
+| <*key-name*> | 예 | 문자열 | 출력 반환 값에 대한 키 이름 |  
+| 형식 | 예 | int, float, 문자열, securestring, bool, 배열, JSON 개체 | 출력 반환 값의 형식 | 
+| 값 | 예 | `type`과 동일 | 출력 반환 값 |  
+||||| 
 
-정의의 JSON 값은 리터럴일 수도 있고 정의가 사용될 때 평가되는 식일 수도 있습니다. 예:  
-  
+워크플로 실행에서 출력을 가져오려면 논리 앱의 실행 기록과 Azure Portal의 세부 정보를 검토하거나 [워크플로 REST API](https://docs.microsoft.com/rest/api/logic/workflows)를 사용합니다. 또한 대시보드를 만들 수 있도록 외부 시스템, 예를 들어 PowerBI에 출력을 전달할 수 있습니다. 
+
+<a name="expressions"></a>
+
+## <a name="expressions"></a>식
+
+Json을 사용하면 예를 들어 디자인 타임 시 존재하는 리터럴 값이 있을 수 있습니다.
+
 ```json
-"name": "value"
+"customerName": "Sophia Owen", 
+"rainbowColors": ["red", "orange", "yellow", "green", "blue", "indigo", "violet"], 
+"rainbowColorsCount": 7 
 ```
 
- 또는  
-  
+실행 시간까지 존재하지 않는 값이 있을 수 있습니다. 이러한 값을 표시하려면 실행 시간에 평가되는 *식*을 사용할 수 있습니다. 식은 하나 이상의 [함수](#functions), [연산자](#operators), 변수, 명시적인 값 또는 상수를 포함하는 시퀀스입니다. 워크플로 정의에서 식 앞에 at 기호(@)를 붙여 JSON 문자열 값의 어디에서나 식을 사용할 수 있습니다. JSON 값을 나타내는 식을 계산하는 경우 식 본문은 다른 JSON 값에서 결과 및 @ 문자를 제거하여 추출합니다. 
+
+예를 들어 이전에 정의된 `customerName` 속성의 경우 식에서 [매개 변수()](../logic-apps/workflow-definition-language-functions-reference.md#parameters) 함수를 사용하여 속성 값을 얻고 해당 값을 `accountName` 속성에 할당할 수 있습니다.
+
 ```json
-"name": "@parameters('password') "
+"customerName": "Sophia Owen", 
+"accountName": "@parameters('customerName')"
 ```
 
-> [!NOTE]
-> 일부 식은 실행 시작 시 존재하지 않을 수도 있는 런타임 작업에서 해당 값을 가져옵니다. **함수**를 사용하여 이러한 값 일부를 검색할 수 있습니다.  
-  
-식은 JSON 문자열 값에서 어느 위치에나 나타날 수 있으며 그 결과 항상 다른 JSON 값이 발생합니다. JSON 값이 식으로 판별되면 at 기호(@)를 제거하여 식의 본문을 추출합니다. @로 시작하는 리터럴 문자열이 필요한 경우 해당 문자열은 @@를 사용하여 이스케이프해야 합니다. 다음 예제는 식의 작동 방식을 보여 줍니다.  
-  
-|JSON 값|결과|  
-|----------------|------------|  
-|"parameters"|'parameters' 문자가 반환됩니다.|  
-|"parameters[1]"|'parameters[1]' 문자가 반환됩니다.|  
-|"@@"|'@'를 포함하는 1개 문자열이 반환됩니다.|  
-|" @"|' @'를 포함하는 2개 문자열이 반환됩니다.|  
-  
-*문자열 보간*을 사용하면 식이 `@{ ... }`로 묶인 문자열 내부에 나타날 수도 있습니다. 예: <p>`"name" : "First Name: @{parameters('firstName')} Last Name: @{parameters('lastName')}"`
+*문자열 보간*은 @ 문자와 중괄호({})로 래핑된 문자열 내에 여러 개의 식을 사용할 수 있게 합니다. 구문은 다음과 같습니다.
 
-결과는 항상 문자열이며 이 기능은 `concat` 함수와 유사합니다. `myNumber`를 `42`로, `myString`을 `sampleString`으로 정의했다고 가정해 보겠습니다.  
-  
-|JSON 값|결과|  
-|----------------|------------|  
-|"@parameters('myString')"|`sampleString`을 문자열로 반환합니다.|  
-|"@{parameters('myString')}"|`sampleString`을 문자열로 반환합니다.|  
-|"@parameters('myNumber')"|`42`를 *숫자*로 반환합니다.|  
-|"@{parameters('myNumber')}"|`42`를 *문자열*로 반환합니다.|  
-|"Answer is: @{parameters('myNumber')}"|`Answer is: 42` 문자열을 반환합니다.|  
-|"@concat('Answer is: ', string(parameters('myNumber')))"|`Answer is: 42` 문자열을 반환합니다.|  
-|"Answer is: @@{parameters('myNumber')}"|`Answer is: @{parameters('myNumber')}` 문자열을 반환합니다.|  
-  
-## <a name="operators"></a>연산자  
+```json
+@{ "<expression1>", "<expression2>" }
+```
 
-연산자는 식 또는 함수 내에 사용할 수 있는 문자입니다. 
-  
-|연산자|설명|  
-|--------------|-----------------|  
-|을 참조하세요.|점 연산자를 통해 개체의 속성을 참조할 수 있습니다.|  
-|?|물음표 연산자를 통해 런타임 오류 없이 개체의 null 속성을 참조할 수 있습니다. 예를 들어 이 식을 사용하여 null 트리거 출력을 처리할 수 있습니다. <p>`@coalesce(trigger().outputs?.body?.property1, 'my default value')`|  
-|'|작은따옴표는 문자열 리터럴을 감싸는 유일한 방법입니다. 이 문장 부호는 전체 식을 감싸는 JSON 따옴표와 충돌하기 때문에 식 안에 큰따옴표를 사용할 수 없습니다.|  
-|[]|특정 인덱스의 배열에서 값을 가져오는 데 대괄호를 사용할 수 있습니다. 예를 들어 `range(0,10)`을 `forEach` 함수로 전달하는 작업이 있는 경우 이 함수를 사용하여 배열에서 항목을 가져올 수 있습니다.  <p>`myArray[item()]`|  
-  
-## <a name="functions"></a>함수  
+결과는 항상 문자열로서 예를 들어 이 기능을 `concat()` 함수와 유사하게 만듭니다. 
 
-또한 식 내에서 함수를 호출할 수도 있습니다. 다음 표에서는 식에 사용할 수 있는 함수를 보여 줍니다.  
-  
-|식|평가|  
-|----------------|----------------|  
-|"@function('Hello')"|첫 번째 매개 변수로 Hello 리터럴 문자열이 있는 정의를 포함하는 함수 멤버를 호출합니다.|  
-|"@function('It's Cool!')"|첫 번째 매개 변수로 'It's Cool!' 리터럴 문자열이 있는 정의를 포함하는 함수 멤버를 호출합니다.|  
-|"@function().prop1"|정의의 `myfunction` 멤버에서 prop1 속성 값을 반환합니다.|  
-|"@function('Hello').prop1"|첫 번째 매개 변수로 'Hello' 리터럴 문자열이 있는 정의를 포함하는 함수 멤버를 호출하고 개체의 prop1 속성을 반환합니다.|  
-|"@function(parameters('Hello'))"|Hello 매개 변수를 평가하고 값을 함수에 전달합니다.|  
-  
-### <a name="referencing-functions"></a>참조 함수  
+```json
+"customerName": "First name: @{parameters('firstName')} Last name: @{parameters('lastName')}"
+```
 
-논리 앱의 다른 작업에서 출력을 참조하거나 논리 앱이 생성될 때 전달된 값을 참조할 때 이 함수를 사용할 수 있습니다. 예를 들어 한 단계에서 데이터를 참조하여 다른 단계에서 사용할 수 있습니다.  
-  
-|함수 이름|설명|  
-|-------------------|-----------------|  
-|매개 변수|정의에 정의된 매개 변수 값을 반환합니다. <p>`parameters('password')` <p> **매개 변수 번호**: 1 <p> **이름**: Parameter <p> **설명**: 필수. 값이 필요한 매개 변수의 이름입니다.|  
-|action|다른 JSON 이름 및 값 쌍 또는 현재 런타임 작업의 출력을 파생시키는 식을 작성할 수 있습니다. 다음 예에서 propertyPath로 표시되는 속성은 선택 사항입니다. propertyPath를 지정하지 않을 경우, 전체 작업 개체에 대한 참조입니다. 이 함수는 작업의 do-until 조건 내부에만 사용할 수 있습니다. <p>`action().outputs.body.propertyPath`|  
-|actions|다른 JSON 이름 및 값 쌍 또는 런타임 작업의 출력을 파생시키는 식을 작성할 수 있습니다. 이러한 식은 한 작업이 다른 작업에 종속되어 있음을 명시적으로 선언합니다. 다음 예에서 propertyPath로 표시되는 속성은 선택 사항입니다. propertyPath를 지정하지 않을 경우, 전체 작업 개체에 대한 참조입니다. 이 요소 또는 conditions 요소를 사용하여 종속성을 지정할 수 있지만 같은 종속 리소스에 대해 두 가지를 모두 사용할 필요는 없습니다. <p>`actions('myAction').outputs.body.propertyPath` <p> **매개 변수 번호**: 1 <p> **이름**: Action name <p> **설명**: 필수. 값이 필요한 작업의 이름입니다. <p> 동작 개체에서 사용할 수 있는 속성은 다음과 같습니다. <ul><li>`name`</li><li>`startTime`</li><li>`endTime`</li><li>`inputs`</li><li>`outputs`</li><li>`status`</li><li>`code`</li><li>`trackingId`</li><li>`clientTrackingId`</li></ul> <p>이러한 속성에 대한 자세한 내용은 [Rest API](http://go.microsoft.com/fwlink/p/?LinkID=850646)를 참조하세요.|
-|trigger|다른 JSON 이름 및 값 쌍 또는 런타임 트리거의 출력을 파생시키는 식을 작성할 수 있습니다. 다음 예에서 propertyPath로 표시되는 속성은 선택 사항입니다. propertyPath를 지정하지 않을 경우, 전체 트리거 개체에 대한 참조입니다. <p>`trigger().outputs.body.propertyPath` <p>트리거의 입력 내부에 사용하면 함수에서 이전 실행의 출력을 반환합니다. 하지만 트리거의 조건 내부에 사용하면 `trigger` 함수에서 현재 실행의 출력을 반환합니다. <p> 트리거 개체에서 사용할 수 있는 속성은 다음과 같습니다. <ul><li>`name`</li><li>`scheduledTime`</li><li>`startTime`</li><li>`endTime`</li><li>`inputs`</li><li>`outputs`</li><li>`status`</li><li>`code`</li><li>`trackingId`</li><li>`clientTrackingId`</li></ul> <p>이러한 속성에 대한 자세한 내용은 [Rest API](http://go.microsoft.com/fwlink/p/?LinkID=850644)를 참조하세요.|
-|actionOutputs|이 함수는 `actions('actionName').outputs`의 약식입니다. <p> **매개 변수 번호**: 1 <p> **이름**: Action name <p> **설명**: 필수. 값이 필요한 작업의 이름입니다.|  
-|actionBody 및 body|이 함수는 `actions('actionName').outputs.body`의 약식입니다. <p> **매개 변수 번호**: 1 <p> **이름**: Action name <p> **설명**: 필수. 값이 필요한 작업의 이름입니다.|  
-|triggerOutputs|이 함수는 `trigger().outputs`의 약식입니다.|  
-|triggerBody|이 함수는 `trigger().outputs.body`의 약식입니다.|  
-|항목|반복 작업 내부에 사용하면, 이 함수는 작업 반복을 위해 배열 안에 있는 항목을 반환합니다. 예를 들어 메시지 배열의 각 항목에 대해 실행하는 작업이 있는 경우 다음 구문을 사용할 수 있습니다. <p>`"input1" : "@item().subject"`| 
-  
-### <a name="collection-functions"></a>컬렉션 함수  
+@ 문자로 시작하는 리터럴 문자열이 있는 경우 @ 문자 앞에 이스케이프 문자(@ @)로서 다른 @ 문자를 붙입니다.
 
-이 함수는 컬렉션에 대해 작동하고 배열, 문자열 및 경우에 따라 사전에 대해 일반적으로 적용됩니다.  
+이러한 예제는 식의 평가 방식을 보여 줍니다.
+
+| JSON 값 | 결과 |
+|------------|--------| 
+| "Sophia Owen" | 이러한 문자 'Sophia Owen'을 반환 |
+| "배열[1]" | 이러한 문자 '배열[1]'을 반환 |
+| "\@@\" | 이러한 문자를 한 문자열 ' @'로 반환 |   
+| \" \@\" | 이러한 문자를 두 문자열 '@'로 반환 |
+|||
+
+이 예제에서는 "myBirthMonth"를 "1월", "myAge"를 숫자 42와 동일하게 정의하는 것으로 가정합니다.  
   
-|함수 이름|설명|  
-|-------------------|-----------------|  
-|contains|사전에 키가 포함되거나, 목록에 값이 포함되거나, 문자열에 하위 문자열이 포함된 경우 true를 반환합니다. 예를 들어 이 함수는 `true`를 반환합니다. <p>`contains('abacaba','aca')` <p> **매개 변수 번호**: 1 <p> **이름**: Within collection <p> **설명**: 필수. 내부를 검색할 컬렉션입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Find object <p> **설명**: 필수. **Within collection** 내부에서 찾을 개체입니다.|  
-|length|배열 또는 문자열 내의 요소 수를 반환합니다. 예를 들어 이 함수는 `3`를 반환합니다.  <p>`length('abc')` <p> **매개 변수 번호**: 1 <p> **이름**: Collection <p> **설명**: 필수. 길이를 가져올 컬렉션입니다.|  
-|empty|개체, 배열 또는 문자열이 비어 있으면 true를 반환합니다. 예를 들어 이 함수는 `true`를 반환합니다. <p>`empty('')` <p> **매개 변수 번호**: 1 <p> **이름**: Collection <p> **설명**: 필수. 비어 있는지 확인할 컬렉션입니다.|  
-|교집합|전달된 배열 또는 개체 간에 공통의 요소가 있는 단일 배열 또는 개체를 반환합니다. 예를 들어 이 함수는 `[1, 2]`를 반환합니다. <p>`intersection([1, 2, 3], [101, 2, 1, 10],[6, 8, 1, 2])` <p>이 함수의 매개 변수는 개체 또는 배열 집합일 수 있습니다(둘 다의 혼합은 아님). 같은 이름의 개체가 두 개 있는 경우 해당 이름을 가진 마지막 개체가 최종 개체에 나타납니다. <p> **매개 변수 번호**: 1 ... *n* <p> **이름**: Collection *n* <p> **설명**: 필수. 평가할 컬렉션입니다. 개체는 결과에 표시하기 위해 전달된 모든 컬렉션에 있어야 합니다.|  
-|union|이 함수에 전달된 배열 또는 개체에 있는 모든 요소를 포함하는 단일 배열 또는 개체를 반환합니다. 예를 들어 이 함수는 `[1, 2, 3, 10, 101]`을 반환합니다. <p>`union([1, 2, 3], [101, 2, 1, 10])` <p>이 함수의 매개 변수는 개체 또는 배열 집합일 수 있습니다(이들의 혼합은 아님). 최종 출력에 같은 이름의 개체가 두 개 있는 경우 해당 이름을 가진 마지막 개체가 최종 개체에 나타납니다. <p> **매개 변수 번호**: 1 ... *n* <p> **이름**: Collection *n* <p> **설명**: 필수. 평가할 컬렉션입니다. 컬렉션에 나타나는 개체가 결과에도 나타납니다.|  
-|first|전달된 배열 또는 문자열의 첫 번째 요소를 반환합니다. 예를 들어 이 함수는 `0`을 반환합니다. <p>`first([0,2,3])` <p> **매개 변수 번호**: 1 <p> **이름**: Collection <p> **설명**: 필수. 첫 번째 개체를 가져올 컬렉션입니다.|  
-|last|전달된 배열 또는 문자열의 마지막 요소를 반환합니다. 예를 들어 이 함수는 `3`를 반환합니다. <p>`last('0123')` <p> **매개 변수 번호**: 1 <p> **이름**: Collection <p> **설명**: 필수. 마지막 개체를 가져올 컬렉션입니다.|  
-|take|전달된 배열 또는 문자열의 첫 번째 **Count** 요소를 반환합니다. 예를 들어 이 함수는 `[1, 2]`를 반환합니다.  <p>`take([1, 2, 3, 4], 2)` <p> **매개 변수 번호**: 1 <p> **이름**: Collection <p> **설명**: 필수. 첫 번째 **Count** 개체를 가져올 컬렉션입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Count <p> **설명**: 필수. **Collection**에서 가져올 개체 수입니다. 양의 정수여야 합니다.|  
-|skip|인덱스 **Count**에서 시작하는 배열의 요소를 반환합니다. 예를 들어 이 함수는 `[3, 4]`를 반환합니다. <p>`skip([1, 2 ,3 ,4], 2)` <p> **매개 변수 번호**: 1 <p> **이름**: Collection <p> **설명**: 필수. 첫 번째 **Count** 개체를 건너뛸 컬렉션입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Count <p> **설명**: 필수. **Collection**의 앞에서 제거할 개체 수입니다. 양의 정수여야 합니다.|  
-|join|구분 기호로 조인된 배열의 각 항목이 있는 문자열을 반환합니다. 예를 들어 `"1,2,3,4"`를 반환합니다.<br /><br /> `join([1, 2, 3, 4], ',')`<br /><br /> **매개 변수 번호**: 1<br /><br /> **이름**: Collection<br /><br /> **설명**: 필수. 항목을 조인할 컬렉션입니다.<br /><br /> **매개 변수 번호**: 2<br /><br /> **이름**: Delimiter<br /><br /> **설명**: 필수. 항목을 구분할 문자열입니다.|  
-  
+```json
+"myBirthMonth": "January",
+"myAge": 42
+```
+
+이러한 예제는 다음 식의 평가 방식을 보여 줍니다.
+
+| JSON 식 | 결과 |
+|-----------------|--------| 
+| "@parameters('myBirthMonth')" | 이 문자열 "1월"을 반환 |  
+| "@{parameters('myBirthMonth')}" | 이 문자열 "1월"을 반환 |  
+| "@parameters('myAge')" | 이 숫자 42를 반환 |  
+| "@{parameters('myAge')}" | 이 숫자 "42"를 문자열로 반환 |  
+| "내 나이는 @{parameters('myAge')}살" | 이 문자열 "내 나이는 42살"을 반환 |  
+| "@concat('My age is ', string(parameters('myAge')))" | 이 문자열 "내 나이는 42살"을 반환 |  
+| "내 나이는 @{parameters('myAge')}살" | 식이 포함된 이 문자열 "내 나이는 @{parameters('myAge')}살'을 반환 | 
+||| 
+
+Logic Apps Designer에서 시각적으로 작업하는 경우 예를 통해 식 작성기를 통해 식을 만들 수 있습니다. 
+
+![Logic Apps Designer > 식 작성기](./media/logic-apps-workflow-definition-language/expression-builder.png)
+
+완료되면 워크플로 정의에서 해당 속성, 예를 들어 여기서는 `searchQuery` 속성에 대해 식이 표시됩니다.
+
+```json
+"Search_tweets": {
+  "inputs": {
+    "host": {
+      "connection": {
+       "name": "@parameters('$connections')['twitter']['connectionId']"
+      }
+    }
+  },
+  "method": "get",
+  "path": "/searchtweets",
+  "queries": {
+    "maxResults": 20,
+    "searchQuery": "Azure @{concat('firstName','', 'LastName')}"
+  }
+},
+```
+
+<a name="operators"></a>
+
+## <a name="operators"></a>연산자
+
+[식](#expressions) 및 [함수](#functions)에서 연산자는 속성 참조 또는 배열의 값 등의 특정 작업을 수행합니다. 
+
+| 연산자 | Task | 
+|----------|------|
+| ' | 리터럴 문자열을 입력으로 또는 식 및 함수에서 사용하려면 작은따옴표, 예를 들어 `'<myString>'`만 사용하여 문자열을 래핑합니다. 전체 식에서 JSON 서식과 충돌하는 큰따옴표("")를 사용하지 마세요. 예:  <p>**예**: length('Hello') </br>**아니요**: length('Hello') <p>배열이나 숫자를 전달할 때 문장 부호를 래핑하지 않아도 됩니다. 예:  <p>**예**: length([1, 2, 3]) </br>**아니요**: length([1, 2, 3]) | 
+| [] | 배열의 특정 위치(인덱스)에서 값을 참조하려면 대괄호를 사용합니다. 예를 들어 배열에서 두 번째 항목을 가져오려면: <p>`myArray[1]` | 
+| 에서도 확인할 수 있습니다. | 개체의 속성을 참조하려면 점 연산자를 사용합니다. 예를 들어 `customer` JSON 개체에 대한 `name` 속성을 가져오려면: <p>`"@parameters('customer').name"` | 
+| ? | 런타임 오류 없이 개체의 null 속성을 참조하려면 물음표 연산자를 사용합니다. 예를 들어 트리거에서 null 출력을 처리하려면 이 식을 사용할 수 있습니다. <p>`@coalesce(trigger().outputs?.body?.<someProperty>, '<property-default-value>')` | 
+||| 
+
+<a name="functions"></a>
+
+## <a name="functions"></a>Functions
+
+일부 식은 논리 앱이 실행을 시작할 때 존재하지 않을 수도 있는 런타임 작업에서 해당 값을 가져옵니다. 식에서 이러한 값을 사용하거나 참조하려면 [*함수*](../logic-apps/workflow-definition-language-functions-reference.md)를 사용할 수 있습니다. 예를 들어 정수 또는 부동 소수점에서 합계를 반환하는 [add()](../logic-apps/workflow-definition-language-functions-reference.md#add) 함수 같은 계산용 수식 함수를 사용할 수 있습니다. 각 함수에 대한 자세한 내용은 [사전순 참조 문서](../logic-apps/workflow-definition-language-functions-reference.md)를 참조합니다.
+또는 함수 및 함수의 일반 용도에 대해 계속 알아봅니다.
+
+다음은 함수로 수행할 수 있는 한 두 가지 예제 작업입니다. 
+
+| Task | 함수 구문 | 결과 | 
+| ---- | --------------- | -------------- | 
+| 문자열을 소문자 형식으로 반환합니다. | toLower('<*text*>') <p>예를 들어: toLower('Hello') | "hello" | 
+| 전역적으로 고유한 식별자(GUID)를 반환합니다. | guid() |"c2ecc88d-88c8-4096-912c-d6f2e2b138ce" | 
+|||| 
+
+이 예제는 식에서 [parameters()](../logic-apps/workflow-definition-language-functions-reference.md#parameters) 함수를 사용하여 `customerName` 매개 변수에서 값을 가져와 해당 값을 `accountName` 속성에 할당할 수 있는 방법을 보여 줍니다.
+
+```json
+"accountName": "@parameters('customerName')"
+```
+
+식에서 함수를 사용할 수 있는 몇 가지 다른 일반적인 방법은 다음과 같습니다.
+
+| Task | 식에서 함수 구문 | 
+| ---- | -------------------------------- | 
+| 함수에 해당 항목을 전달하여 항목으로 작업을 수행합니다. | "@<*functionName*>(<*item*>)" | 
+| 1. 중첩된 `parameters()` 함수를 사용하여 *parameterName* 값을 가져옵니다. </br>2. 해당 값을 *functionName*에 전달하여 결과로 작업을 수행합니다. | "@<*functionName*>(parameters('<*parameterName*>'))" | 
+| 1. 중첩된 내부 함수 *functionName*에서 결과를 가져옵니다. </br>2. 외부 함수 *functionName2*에 결과를 전달합니다. | "@<*functionName2*>(<*functionName*>(<*item*>))" | 
+| 1. *functionName*에서 결과를 가져옵니다. </br>2. 결과가 속성 *propertyName*이 있는 개체인 경우 해당 속성의 값을 가져옵니다. | "@<*functionName*>(<*item*>).<*propertyName*>" | 
+||| 
+
+예를 들어 `concat()` 함수는 두 개 이상의 문자열 값을 매개 변수로 사용할 수 있습니다. 이 함수는 이러한 문자열을 하나의 문자열로 결합합니다. 문자열 리터럴, 예를 들어 "Sophia" 및 "Owen"을 전달하여 결합된 문자열 "SophiaOwen"을 가져올 수 있습니다.
+
+```json
+"customerName": "@concat('Sophia', 'Owen')"
+```
+
+또는 매개 변수에서 문자열 값을 가져올 수 있습니다. 이 예제는 각 `concat()` 매개 변수 및 `firstName`, `lastName` 매개 변수에서 `parameters()` 함수를 사용합니다. 결과 문자열을 `concat()` 함수에 전달하면 결합된 문자열, 예를 들어 "SophiaOwen"을 가져올 수 있습니다.
+
+```json
+"customerName": "@concat(parameters('firstName'), parameters('lastName'))"
+```
+
+두 예제 중 어느 경우든 결과를 `customerName` 속성에 할당합니다. 
+
+각 함수에 대한 자세한 내용은 [사전순 참조 문서](../logic-apps/workflow-definition-language-functions-reference.md)를 참조합니다.
+또는 일반 용도에 기반한 함수에 대해 계속 알아보십시오.
+
+<a name="string-functions"></a>
+
 ### <a name="string-functions"></a>문자열 함수
 
-다음 함수는 문자열에만 적용됩니다. 문자열에서 몇 가지 컬렉션 함수도 사용할 수 있습니다.  
-  
-|함수 이름|설명|  
-|-------------------|-----------------|  
-|concat|임의 개수 문자열을 함께 결합합니다. 예를 들어 매개 변수 1이 `p1`이면 이 함수는 `somevalue-p1-somevalue`를 반환합니다. <p>`concat('somevalue-',parameters('parameter1'),'-somevalue')` <p> **매개 변수 번호**: 1 ... *n* <p> **이름**: String *n* <p> **설명**: 필수. 단일 문자열로 결합할 문자열입니다.|  
-|substring|문자열의 하위 집합을 반환합니다. 예를 들어 이 함수는 `abc`를 반환합니다. <p>`substring('somevalue-abc-somevalue',10,3)` <p> **매개 변수 번호**: 1 <p> **이름**: String <p> **설명**: 필수. 부분 문자열을 가져올 원래 문자열입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Start index <p> **설명**: 필수. 매개 변수 1에서 하위 문자열이 시작되는 위치의 인덱스입니다. <p> **매개 변수 번호**: 3 <p> **이름**: Length <p> **설명**: 필수. 부분 문자열의 길이입니다.|  
-|replace|문자열을 지정된 문자열로 바꿉니다. 예를 들어 이 함수는 `the new string`을 반환합니다. <p>`replace('the old string', 'old', 'new')` <p> **매개 변수 번호**: 1 <p> **이름**: string <p> **설명**: 필수. 매개 변수 1에서 매개 변수 2를 검색하여 매개 변수 2가 있으면 매개 변수 3으로 업데이트한 문자열입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Old string <p> **설명**: 필수. 매개 변수 1에 일치 항목이 있으면 매개 변수 3으로 바꿀 문자열입니다. <p> **매개 변수 번호**: 3 <p> **이름**: New string <p> **설명**: 필수. 매개 변수 1에 일치 항목이 있으면 매개 변수 2의 문자열을 바꾸는 데 사용할 문자열입니다.|  
-|GUID|이 함수는 전역적으로 고유한 문자열(GUID)을 생성합니다. 예를 들어 이 함수는 다음 GUID를 생성할 수 있습니다. `c2ecc88d-88c8-4096-912c-d6f2e2b138ce` <p>`guid()` <p> **매개 변수 번호**: 1 <p> **이름**: Format <p> **설명**: 선택 사항. [이 Guid 값의 형식을 지정하는 방법](https://msdn.microsoft.com/library/97af8hh4%28v=vs.110%29.aspx)을 나타내는 단일 형식 지정자입니다. 형식 매개 변수는 "N", "D", "B", "P" 또는 "X"일 수 있습니다. 형식이 제공되지 않으면 "D"가 사용됩니다.|  
-|toLower|문자열을 소문자로 변환합니다. 예를 들어 이 함수는 `two by two is four`를 반환합니다. <p>`toLower('Two by Two is Four')` <p> **매개 변수 번호**: 1 <p> **이름**: String <p> **설명**: 필수. 소문자로 변환할 문자열입니다. 문자열에 있는 문자에 소문자로 변환할 항목이 없으면 반환된 문자열에서 해당 문자가 변경되지 않고 포함됩니다.|  
-|toUpper|문자열을 대문자로 변환합니다. 예를 들어 이 함수는 `TWO BY TWO IS FOUR`를 반환합니다. <p>`toUpper('Two by Two is Four')` <p> **매개 변수 번호**: 1 <p> **이름**: String <p> **설명**: 필수. 대문자로 변환할 문자열입니다. 문자열의 문자에 대문자로 변환할 항목이 없으면 반환된 문자열에서 해당 문자가 변경되지 않고 포함됩니다.|  
-|indexof|문자열 내에서 대소문자를 구분하지 않고 값의 인덱스를 찾습니다. 예를 들어 이 함수는 `7`을 반환합니다. <p>`indexof('hello, world.', 'world')` <p> **매개 변수 번호**: 1 <p> **이름**: String <p> **설명**: 필수. 문자열은 이 값을 포함할 수 있습니다. <p> **매개 변수 번호**: 2 <p> **이름**: String <p> **설명**: 필수. 인덱스를 검색할 값입니다.|  
-|lastindexof|문자열 내에서 대소문자를 구분하지 않고 값의 마지막 인덱스를 찾습니다. 예를 들어 이 함수는 `3`를 반환합니다. <p>`lastindexof('foofoo', 'foo')` <p> **매개 변수 번호**: 1 <p> **이름**: String <p> **설명**: 필수. 문자열은 이 값을 포함할 수 있습니다. <p> **매개 변수 번호**: 2 <p> **이름**: String <p> **설명**: 필수. 인덱스를 검색할 값입니다.|  
-|startswith|문자열이 대소문자를 구분하지 않고 값으로 시작하는지 확인합니다. 예를 들어 이 함수는 `true`를 반환합니다. <p>`startswith('hello, world', 'hello')` <p> **매개 변수 번호**: 1 <p> **이름**: String <p> **설명**: 필수. 문자열은 이 값을 포함할 수 있습니다. <p> **매개 변수 번호**: 2 <p> **이름**: String <p> **설명**: 필수. 문자열은 이 값으로 시작할 수 있습니다.|  
-|endswith|문자열이 대소문자를 구분하지 않고 값으로 끝나는지 확인합니다. 예를 들어 이 함수는 `true`를 반환합니다. <p>`endswith('hello, world', 'world')` <p> **매개 변수 번호**: 1 <p> **이름**: String <p> **설명**: 필수. 문자열은 이 값을 포함할 수 있습니다. <p> **매개 변수 번호**: 2 <p> **이름**: String <p> **설명**: 필수. 문자열은 이 값으로 끝날 수 있습니다.|  
-|분할|구분 기호를 사용하여 문자열을 분할합니다. 예를 들어 이 함수는 `["a", "b", "c"]`를 반환합니다. <p>`split('a;b;c',';')` <p> **매개 변수 번호**: 1 <p> **이름**: String <p> **설명**: 필수. 분할된 문자열입니다. <p> **매개 변수 번호**: 2 <p> **이름**: String <p> **설명**: 필수. 구분 기호입니다.|  
-  
-### <a name="logical-functions"></a>논리 함수  
+문자열로 작업하려면 이러한 문자열 함수 및 일부 [컬렉션 함수](#collection-functions)도 사용할 수 있습니다. 문자열 함수는 문자열에서만 작동합니다. 
 
-이 함수는 조건 내에서 유용하며 논리의 형식을 평가하는 데 사용할 수 있습니다.  
-  
-|함수 이름|설명|  
-|-------------------|-----------------|  
-|equals|두 값이 같으면 true를 반환합니다. 예를 들어 매개 변수 1이 어떤 값이면 이 함수는 `true`를 반환합니다. <p>`equals(parameters('parameter1'), 'someValue')` <p> **매개 변수 번호**: 1 <p> **이름**: Object 1 <p> **설명**: 필수. **Object 2**와 비교할 개체입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Object 2 <p> **설명**: 필수. **Object 1**과 비교할 개체입니다.|  
-|less|첫 번째 인수가 두 번째 인수보다 작으면 true를 반환합니다. 값은 integer, float 또는 string 형식만 가능합니다. 예를 들어 이 함수는 `true`를 반환합니다. <p>`less(10,100)` <p> **매개 변수 번호**: 1 <p> **이름**: Object 1 <p> **설명**: 필수. **Object 2**보다 작은지 확인할 개체입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Object 2 <p> **설명**: 필수. **Object 1**보다 큰지 확인할 개체입니다.|  
-|lessOrEquals|첫 번째 인수가 두 번째 인수보다 작거나 같으면 true를 반환합니다. 값은 integer, float 또는 string 형식만 가능합니다. 예를 들어 이 함수는 `true`를 반환합니다. <p>`lessOrEquals(10,10)` <p> **매개 변수 번호**: 1 <p> **이름**: Object 1 <p> **설명**: 필수. **Object 2**보다 작거나 같은지 확인할 개체입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Object 2 <p> **설명**: 필수. **Object 1**보다 크거나 같은지 확인할 개체입니다.|  
-|greater|첫 번째 인수가 두 번째 인수보다 크면 true를 반환합니다. 값은 integer, float 또는 string 형식만 가능합니다. 예를 들어 이 함수는 `false`를 반환합니다.  <p>`greater(10,10)` <p> **매개 변수 번호**: 1 <p> **이름**: Object 1 <p> **설명**: 필수. **Object 2**보다 큰지 확인할 개체입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Object 2 <p> **설명**: 필수. **Object 1**보다 작은지 확인할 개체입니다.|  
-|greaterOrEquals|첫 번째 인수가 두 번째 인수보다 크거나 같으면 true를 반환합니다. 값은 integer, float 또는 string 형식만 가능합니다. 예를 들어 이 함수는 `false`를 반환합니다. <p>`greaterOrEquals(10,100)` <p> **매개 변수 번호**: 1 <p> **이름**: Object 1 <p> **설명**: 필수. **Object 2**보다 크거나 같은지 확인할 개체입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Object 2 <p> **설명**: 필수. **Object 1**보다 작거나 같은지 확인할 개체입니다.|  
-|and|두 매개 변수가 true이면 true를 반환합니다. 두 인수 모두 부울이어야 합니다. 예를 들어 이 함수는 `false`를 반환합니다. <p>`and(greater(1,10),equals(0,0))` <p> **매개 변수 번호**: 1 <p> **이름**: Boolean 1 <p> **설명**: 필수. 첫 번째 인수는 `true`여야 합니다. <p> **매개 변수 번호**: 2 <p> **이름**: Boolean 2 <p> **설명**: 필수. 두 번째 인수는 `true`여야 합니다.|  
-|또는|매개 변수 중 하나라도 true이면 true를 반환합니다. 두 인수 모두 부울이어야 합니다. 예를 들어 이 함수는 `true`를 반환합니다. <p>`or(greater(1,10),equals(0,0))` <p> **매개 변수 번호**: 1 <p> **이름**: Boolean 1 <p> **설명**: 필수. 첫 번째 인수는 `true`일 수 있습니다. <p> **매개 변수 번호**: 2 <p> **이름**: Boolean 2 <p> **설명**: 필수. 두 번째 인수는 `true`일 수 있습니다.|  
-|not|매개 변수가 `false`이면 true를 반환합니다. 두 인수 모두 부울이어야 합니다. 예를 들어 이 함수는 `true`를 반환합니다. <p>`not(contains('200 Success','Fail'))` <p> **매개 변수 번호**: 1 <p> **이름**: Boolean <p> **설명**: 매개 변수가 `false`이면 true를 반환합니다. 두 인수 모두 부울이어야 합니다. 다음 함수는 `true`를 반환합니다. `not(contains('200 Success','Fail'))`|  
-|if|식 결과가 `true` 또는 `false`인지에 따라 지정된 값을 반환합니다.  예를 들어 이 함수는 `"yes"`를 반환합니다. <p>`if(equals(1, 1), 'yes', 'no')` <p> **매개 변수 번호**: 1 <p> **이름**: Expression <p> **설명**: 필수. 식에서 어떤 값을 반환할지 결정하는 부울 값입니다. <p> **매개 변수 번호**: 2 <p> **이름**: True <p> **설명**: 필수. 식이 `true`인 경우 반환할 값입니다. <p> **매개 변수 번호**: 3 <p> **이름**: False <p> **설명**: 필수. 식이 `false`인 경우 반환할 값입니다.|  
-  
-### <a name="conversion-functions"></a>변환 함수  
+| 문자열 함수 | Task | 
+| --------------- | ---- | 
+| [concat](../logic-apps/workflow-definition-language-functions-reference.md#concat) | 둘 이상의 문자열을 결합하고 결합된 문자열을 반환합니다. | 
+| [endsWith](../logic-apps/workflow-definition-language-functions-reference.md#endswith) | 문자열이 지정된 하위 문자열로 끝나는지 여부를 확인합니다. | 
+| [guid](../logic-apps/workflow-definition-language-functions-reference.md#guid) | 전역적으로 고유한 식별자(GUID)를 문자열로 생성합니다. | 
+| [indexOf](../logic-apps/workflow-definition-language-functions-reference.md#indexof) | 하위 문자열에 대한 시작 위치를 반환합니다. | 
+| [lastIndexOf](../logic-apps/workflow-definition-language-functions-reference.md#lastindexof) | 하위 문자열에 대한 종료 위치를 반환합니다. | 
+| [replace](../logic-apps/workflow-definition-language-functions-reference.md#replace) | 하위 문자열을 지정된 문자열로 바꾸고 업데이트된 문자열을 반환합니다. | 
+| [분할](../logic-apps/workflow-definition-language-functions-reference.md#split) | 문자열에서 모든 문자를 지닌 배열을 반환하고 특정 구분 문자로 각 문자를 구분합니다. | 
+| [startsWith](../logic-apps/workflow-definition-language-functions-reference.md#startswith) | 문자열이 특정 하위 문자열로 시작하는지 검사합니다. | 
+| [substring](../logic-apps/workflow-definition-language-functions-reference.md#substring) | 지정된 위치에서 시작하여 문자열에서 문자를 반환합니다. | 
+| [toLower](../logic-apps/workflow-definition-language-functions-reference.md#toLower) | 문자열을 소문자 형식으로 반환합니다. | 
+| [toUpper](../logic-apps/workflow-definition-language-functions-reference.md#toUpper) | 문자열을 대문자 형식으로 반환합니다. | 
+| [trim](../logic-apps/workflow-definition-language-functions-reference.md#trim) | 문자열에서 선행 및 후행 공백을 제거하고 업데이트된 문자열을 반환합니다. | 
+||| 
 
-이 함수는 언어의 각 기본 형식 간에 변환하는 데 사용됩니다.  
-  
-- string  
-  
-- 정수  
-  
-- float  
-  
-- 부울  
-  
-- arrays  
-  
-- dictionaries  
+<a name="collection-functions"></a>
 
--   forms  
-  
-|함수 이름|설명|  
-|-------------------|-----------------|  
-|int|매개 변수를 정수로 변환합니다. 예를 들어 이 함수는 문자열이 아닌 숫자로 100을 반환합니다. <p>`int('100')` <p> **매개 변수 번호**: 1 <p> **이름**: Value <p> **설명**: 필수. 정수로 변환할 값입니다.|  
-|string|매개 변수를 문자열로 변환합니다. 예를 들어 이 함수는 `'10'`을 반환합니다. <p>`string(10)` <p>개체를 문자열로 변환할 수도 있습니다. 예를 들어 `myPar` 매개 변수가 한 개의 `abc : xyz` 속성을 포함하는 개체인 경우 이 함수는 `{"abc" : "xyz"}`를 반환합니다. <p>`string(parameters('myPar'))` <p> **매개 변수 번호**: 1 <p> **이름**: Value <p> **설명**: 필수. 문자열로 변환할 값입니다.|  
-|json :|매개 변수를 JSON 형식 값으로 변환하고 `string()`의 반대입니다. 예를 들어 이 함수는 문자열이 아닌 배열로 `[1,2,3]`을 반환합니다. <p>`json('[1,2,3]')` <p>마찬가지로, 문자열을 개체로 변환할 수 있습니다. 예를 들어 이 함수는 `{ "abc" : "xyz" }`를 반환합니다. <p>`json('{"abc" : "xyz"}')` <p> **매개 변수 번호**: 1 <p> **이름**: String <p> **설명**: 필수. 기본 형식 값으로 변환할 문자열입니다. <p>`json()` 함수는 XML 입력도 지원합니다. 예를 들어 다음 매개 변수 값은 <p>`<?xml version="1.0"?> <root>   <person id='1'>     <name>Alan</name>     <occupation>Engineer</occupation>   </person> </root>` <p>다음 JSON으로 변환됩니다. <p>`{ "?xml": { "@version": "1.0" },   "root": {     "person": [     {       "@id": "1",       "name": "Alan",       "occupation": "Engineer"     }   ]   } }`|  
-|float|매개 변수 인수를 부동 소수점 숫자로 변환합니다. 예를 들어 이 함수는 `10.333`을 반환합니다. <p>`float('10.333')` <p> **매개 변수 번호**: 1 <p> **이름**: Value <p> **설명**: 필수. 부동 소수점 숫자로 변환할 값입니다.|  
-|bool|매개 변수를 부울로 변환합니다. 예를 들어 이 함수는 `false`를 반환합니다. <p>`bool(0)` <p> **매개 변수 번호**: 1 <p> **이름**: Value <p> **설명**: 필수. 부울로 변환할 값입니다.|  
-|coalesce|전달된 인수에서 첫 번째 null이 아닌 개체를 반환합니다. **참고**: 빈 문자열은 null이 아닙니다. 예를 들어 매개 변수 1 및 2가 정의되지 않은 경우 이 함수는 `fallback`을 반환합니다.  <p>`coalesce(parameters('parameter1'), parameters('parameter2') ,'fallback')` <p> **매개 변수 번호**: 1 ... *n* <p> **이름**: Object*n* <p> **설명**: 필수. null을 검사할 개체입니다.|  
-|base64|입력 문자열의 base64 표현을 반환합니다. 예를 들어 이 함수는 `c29tZSBzdHJpbmc=`를 반환합니다. <p>`base64('some string')` <p> **매개 변수 번호**: 1 <p> **이름**: String 1 <p> **설명**: 필수. base64 표현으로 인코딩할 문자열입니다.|  
-|base64ToBinary|base64 인코딩 문자열의 이진 표현을 반환합니다. 예를 들어 이 함수는 `some string`의 이진 표현을 반환합니다. <p>`base64ToBinary('c29tZSBzdHJpbmc=')` <p> **매개 변수 번호**: 1 <p> **이름**: String <p> **설명**: 필수. Base64 인코딩된 문자열입니다.|  
-|base64ToString|based64 인코딩 문자열의 문자열 표현을 반환합니다. 예를 들어 이 함수는 `some string`을 반환합니다. <p>`base64ToString('c29tZSBzdHJpbmc=')` <p> **매개 변수 번호**: 1 <p> **이름**: String <p> **설명**: 필수. Base64 인코딩된 문자열입니다.|  
-|이진|값의 이진 표현을 반환합니다.  예를 들어 이 함수는 `some string`의 이진 표현을 반환합니다. <p>`binary('some string')` <p> **매개 변수 번호**: 1 <p> **이름**: Value <p> **설명**: 필수. 이진으로 변환할 값입니다.|  
-|dataUriToBinary|데이터 URI의 이진 표현을 반환합니다. 예를 들어 이 함수는 `some string`의 이진 표현을 반환합니다. <p>`dataUriToBinary('data:;base64,c29tZSBzdHJpbmc=')` <p> **매개 변수 번호**: 1 <p> **이름**: String <p> **설명**: 필수. 이진 표현으로 변환할 데이터 URI입니다.|  
-|dataUriToString|데이터 URI의 문자열 표현을 반환합니다. 예를 들어 이 함수는 `some string`을 반환합니다. <p>`dataUriToString('data:;base64,c29tZSBzdHJpbmc=')` <p> **매개 변수 번호**: 1 <p> **이름**: String<p> **설명**: 필수. 문자열 표현으로 변환할 데이터 URI입니다.|  
-|dataUri|값의 데이터 URI를 반환합니다. 예를 들어 이 함수는 데이터 URI `text/plain;charset=utf8;base64,c29tZSBzdHJpbmc=`를 반환합니다. <p>`dataUri('some string')` <p> **매개 변수 번호**: 1<p> **이름**: Value<p> **설명**: 필수. 데이터 URI로 변환할 값입니다.|  
-|decodeBase64|입력 based64 문자열의 문자열 표현을 반환합니다. 예를 들어 이 함수는 `some string`을 반환합니다. <p>`decodeBase64('c29tZSBzdHJpbmc=')` <p> **매개 변수 번호**: 1 <p> **이름**: String <p> **설명**: 입력 based64 문자열의 문자열 표현을 반환합니다.|  
-|encodeUriComponent|전달된 문자열을 URL-이스케이프합니다. 예를 들어 이 함수는 `You+Are%3ACool%2FAwesome`을 반환합니다. <p>`encodeUriComponent('You Are:Cool/Awesome')` <p> **매개 변수 번호**: 1 <p> **이름**: String <p> **설명**: 필수. URL 안전하지 않은 문자 양식을 이스케이프할 문자열입니다.|  
-|decodeUriComponent|전달된 문자열을 URL-이스케이프하지 않습니다. 예를 들어 이 함수는 `You Are:Cool/Awesome`을 반환합니다. <p>`encodeUriComponent('You+Are%3ACool%2FAwesome')` <p> **매개 변수 번호**: 1 <p> **이름**: String <p> **설명**: 필수. URL 안전하지 않은 문자를 디코딩할 문자열입니다.|  
-|decodeDataUri|입력 데이터 URI 문자열의 이진 표현을 반환합니다. 예를 들어 이 함수는 `some string`의 이진 표현을 반환합니다. <p>`decodeDataUri('data:;base64,c29tZSBzdHJpbmc=')` <p> **매개 변수 번호**: 1 <p> **이름**: String <p> **설명**: 필수. 이진 표현으로 디코딩할 데이터 URI입니다.|  
-|uriComponent|값의 URI 인코딩 표현을 반환합니다. 예를 들어 이 함수는 `You+Are%3ACool%2FAwesome`을 반환합니다. <p>`uriComponent('You Are:Cool/Awesome')` <p> **매개 변수 번호**: 1<p> **이름**: String <p> **설명**: 필수. URI 인코딩할 문자열입니다.|  
-|uriComponentToBinary|URI 인코딩 문자열의 이진 표현을 반환합니다. 예를 들어 이 함수는 `You Are:Cool/Awesome`의 이진 표현을 반환합니다. <p>`uriComponentToBinary('You+Are%3ACool%2FAwesome')` <p> **매개 변수 번호**: 1 <p> **이름**: String<p> **설명**: 필수. URI 인코딩된 문자열입니다.|  
-|uriComponentToString|URI 인코딩 문자열의 문자열 표현을 반환합니다. 예를 들어 이 함수는 `You Are:Cool/Awesome`을 반환합니다. <p>`uriComponentToBinary('You+Are%3ACool%2FAwesome')` <p> **매개 변수 번호**: 1<p> **이름**: String<p> **설명**: 필수. URI 인코딩된 문자열입니다.|  
-|xml|값의 XML 표현을 반환합니다. 예를 들어 이 함수는 `'\<name>Alan\</name>'`으로 표시된 XML 콘텐츠를 반환합니다. <p>`xml('\<name>Alan\</name>')` <p>`xml()` 함수는 JSON 개체 입력도 지원합니다. 예를 들어 `{ "abc": "xyz" }` 매개 변수는 XML 콘텐츠로 변환됩니다. `\<abc>xyz\</abc>` <p> **매개 변수 번호**: 1<p> **이름**: Value<p> **설명**: 필수. XML로 변환할 값입니다.|  
-|xpath|xpath 식을 평가할 값의 xpath 식과 일치하는 XML 노드 배열을 반환합니다. <p> **예 1** <p>매개 변수 `p1` 값이 이 XML의 문자열 표현이라고 가정합니다. <p>`<?xml version="1.0"?> <lab>   <robot>     <parts>5</parts>     <name>R1</name>   </robot>   <robot>     <parts>8</parts>     <name>R2</name>   </robot> </lab>` <p>다음 코드는 `xpath(xml(parameters('p1'), '/lab/robot/name')` <p>다음을 반환합니다. <p>`[ <name>R1</name>, <name>R2</name> ]` <p>반면에 다음 코드는 <p>`xpath(xml(parameters('p1'), ' sum(/lab/robot/parts)')` <p>다음을 반환합니다. <p>`13` <p> <p> **예 2** <p>다음 XML 콘텐츠를 가정한다면: <p>`<?xml version="1.0"?> <File xmlns="http://foo.com">   <Location>bar</Location> </File>` <p>다음 코드는 `@xpath(xml(body('Http')), '/*[name()=\"File\"]/*[name()=\"Location\"]')` <p>또는 다음 코드는 <p>`@xpath(xml(body('Http')), '/*[local-name()=\"File\" and namespace-uri()=\"http://foo.com\"]/*[local-name()=\"Location\" and namespace-uri()=\"\"]')` <p>다음을 반환합니다. <p>`<Location xmlns="http://abc.com">xyz</Location>` <p>그리고 다음 코드는 `@xpath(xml(body('Http')), 'string(/*[name()=\"File\"]/*[name()=\"Location\"])')` <p>다음을 반환합니다. <p>``xyz`` <p> **매개 변수 번호**: 1 <p> **이름**: Xml <p> **설명**: 필수. XPath 식을 평가할 XML입니다. <p> **매개 변수 번호**: 2 <p> **이름**: XPath <p> **설명**: 필수. 평가할 XPath 식입니다.|  
-|array|매개 변수를 배열로 변환합니다. 예를 들어 이 함수는 `["abc"]`를 반환합니다. <p>`array('abc')` <p> **매개 변수 번호**: 1 <p> **이름**: Value <p> **설명**: 필수. 배열로 변환할 값입니다.|
-|createArray|매개 변수에서 배열을 만듭니다. 예를 들어 이 함수는 `["a", "c"]`을 반환합니다. <p>`createArray('a', 'c')` <p> **매개 변수 번호**: 1 ... *n* <p> **이름**: Any *n* <p> **설명**: 필수. 배열로 결합할 값입니다.|
-|triggerFormDataValue|form-data 또는 form-encoded 트리거 출력에서 키 이름과 일치하는 단일 값을 반환합니다.  일치 항목이 여러 개이면 오류입니다.  예를 들어 다음 코드는 `bar`를 반환합니다. `triggerFormDataValue('foo')`<br /><br />**매개 변수 번호**: 1<br /><br />**이름**: Key Name<br /><br />**설명**: 필수. 반환할 양식 데이터 값의 키 이름입니다.|
-|triggerFormDataMultiValues|form-data 또는 form-encoded 트리거 출력에서 키 이름과 일치하는 값 배열을 반환합니다.  예를 들어 다음 코드는 `["bar"]`를 반환합니다. `triggerFormDataValue('foo')`<br /><br />**매개 변수 번호**: 1<br /><br />**이름**: Key Name<br /><br />**설명**: 필수. 반환할 양식 데이터 값의 키 이름입니다.|
-|triggerMultipartBody|트리거의 다중 부분 출력에서 일부 본문을 반환합니다.<br /><br />**매개 변수 번호**: 1<br /><br />**이름**: Index<br /><br />**설명**: 필수. 검색할 부분의 인덱스입니다.|
-|formDataValue|form-data 또는 form-encoded 작업 출력에서 키 이름과 일치하는 단일 값을 반환합니다.  일치 항목이 여러 개이면 오류입니다.  예를 들어 다음 코드는 `bar`를 반환합니다. `formDataValue('someAction', 'foo')`<br /><br />**매개 변수 번호**: 1<br /><br />**이름**: Action Name<br /><br />**설명**: 필수. form-data 또는 form-encoded 응답이 포함된 작업 이름입니다.<br /><br />**매개 변수 번호**: 2<br /><br />**이름**: Key Name<br /><br />**설명**: 필수. 반환할 양식 데이터 값의 키 이름입니다.|
-|formDataMultiValues|form-data 또는 form-encoded 작업 출력에서 키 이름과 일치하는 값 배열을 반환합니다.  예를 들어 다음 코드는 `["bar"]`를 반환합니다. `formDataMultiValues('someAction', 'foo')`<br /><br />**매개 변수 번호**: 1<br /><br />**이름**: Action Name<br /><br />**설명**: 필수. form-data 또는 form-encoded 응답이 포함된 작업 이름입니다.<br /><br />**매개 변수 번호**: 2<br /><br />**이름**: Key Name<br /><br />**설명**: 필수. 반환할 양식 데이터 값의 키 이름입니다.|
-|multipartBody|작업의 다중 부분 출력에서 일부 본문을 반환합니다.<br /><br />**매개 변수 번호**: 1<br /><br />**이름**: Action Name<br /><br />**설명**: 필수. multipart 응답이 포함된 작업 이름입니다.<br /><br />**매개 변수 번호**: 2<br /><br />**이름**: Index<br /><br />**설명**: 필수. 검색할 부분의 인덱스입니다.|
+### <a name="collection-functions"></a>컬렉션 함수
 
-### <a name="math-functions"></a>수학 함수  
+컬렉션, 일반적으로 배열, 문자열 및 경우에 따라 사전으로 작업하려면 이러한 컬렉션 함수를 사용할 수 있습니다. 
 
-이 함수는 **integers** 및 **floats**의 숫자 형식에 사용할 수 있습니다.  
-  
-|함수 이름|설명|  
-|-------------------|-----------------|  
-|추가|두 숫자를 더한 결과를 반환합니다. 예를 들어 이 함수는 `20.333`을 반환합니다. <p>`add(10,10.333)` <p> **매개 변수 번호**: 1 <p> **이름**: Summand 1 <p> **설명**: 필수. **Summand 2**에 더할 숫자입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Summand 2 <p> **설명**: 필수. **Summand 1**에 더할 숫자입니다.|  
-|sub|두 숫자를 뺀 결과를 반환합니다. 예를 들어 이 함수는 `-0.333`을 반환합니다. <p>`sub(10,10.333)` <p> **매개 변수 번호**: 1 <p> **이름**: Minuend <p> **설명**: 필수. **Subtrahend**를 뺄 숫자입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Subtrahend <p> **설명**: 필수. **Minuend**에서 뺄 숫자입니다.|  
-|mul|두 숫자를 곱한 결과를 반환합니다. 예를 들어 이 함수는 `103.33`을 반환합니다. <p>`mul(10,10.333)` <p> **매개 변수 번호**: 1 <p> **이름**: Multiplicand 1 <p> **설명**: 필수. **Multiplicand 2**를 곱할 숫자입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Multiplicand 2 <p> **설명**: 필수. **Multiplicand 1**을 곱할 숫자입니다.|  
-|div|두 숫자를 나눈 결과를 반환합니다. 예를 들어 이 함수는 `1.0333`을 반환합니다. <p>`div(10.333,10)` <p> **매개 변수 번호**: 1 <p> **이름**: Dividend <p> **설명**: 필수. **Divisor**로 나눌 숫자입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Divisor <p> **설명**: 필수. **Dividend**로 나누어지는 숫자입니다.|  
-|mod|두 숫자를 나눈 후 나머지를 반환합니다(모듈로). 예를 들어 이 함수는 `2`를 반환합니다. <p>`mod(10,4)` <p> **매개 변수 번호**: 1 <p> **이름**: Dividend <p> **설명**: 필수. **Divisor**로 나눌 숫자입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Divisor <p> **설명**: 필수. **Dividend**로 나누어지는 숫자입니다. 나눈 후 나머지를 가져옵니다.|  
-|Min|이 함수를 호출하는 데는 두 가지 다른 패턴이 있습니다. <p>여기서 `min`은 배열을 사용하고 함수는 `0`를 반환합니다. <p>`min([0,1,2])` <p>또는 이 함수는 쉼표로 구분된 값 목록을 사용하고 `0`를 반환할 수도 있습니다. <p>`min(0,1,2)` <p> **참고**: 모든 값은 숫자여야 하므로 매개 변수가 배열이면 배열에 숫자만 포함되어야 합니다. <p> **매개 변수 번호**: 1 <p> **이름**: Collection 또는 Value <p> **설명**: 필수. 최소값을 찾을 값 배열이거나 집합의 첫 번째 값입니다. <p> **매개 변수 번호**: 2 ... *n* <p> **이름**: Value *n* <p> **설명**: 선택 사항. 첫 번째 매개 변수가 Value인 경우 추가 값을 전달할 수 있으며 전달된 모든 값의 최소값이 반환됩니다.|  
-|max|이 함수를 호출하는 데는 두 가지 다른 패턴이 있습니다. <p>여기서 `max`은 배열을 사용하고 함수는 `2`를 반환합니다. <p>`max([0,1,2])` <p>또는 이 함수는 쉼표로 구분된 값 목록을 사용하고 `2`를 반환할 수도 있습니다. <p>`max(0,1,2)` <p> **참고**: 모든 값은 숫자여야 하므로 매개 변수가 배열이면 배열에 숫자만 포함되어야 합니다. <p> **매개 변수 번호**: 1 <p> **이름**: Collection 또는 Value <p> **설명**: 필수. 최대값을 찾을 값 배열이거나 집합의 첫 번째 값입니다. <p> **매개 변수 번호**: 2 ... *n* <p> **이름**: Value *n* <p> **설명**: 선택 사항. 첫 번째 매개 변수가 Value인 경우 추가 값을 전달할 수 있으며 전달된 모든 값의 최대값이 반환됩니다.|  
-|range|특정 숫자부터 시작되는 정수 배열을 생성합니다. 반환된 배열의 길이를 정의합니다. <p>예를 들어 이 함수는 `[3,4,5,6]`을 반환합니다. <p>`range(3,4)` <p> **매개 변수 번호**: 1 <p> **이름**: Start index <p> **설명**: 필수. 배열에서 첫 번째 정수입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Count <p> **설명**: 필수. 이 값은 배열에 있는 정수 개수입니다.|  
-|rand|지정된 범위 내에서 임의의 정수를 생성합니다(첫 번째 끝만 포함). 예를 들어 다음 함수에서는 `0` 또는 '1'을 반환할 수 있습니다. <p>`rand(0,2)` <p> **매개 변수 번호**: 1 <p> **이름**: Minimum <p> **설명**: 필수. 반환 가능한 가장 작은 정수입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Maximum <p> **설명**: 필수. 이 값은 반환될 수 있는 가장 높은 정수 다음의 다음 정수입니다.|  
-  
-### <a name="date-functions"></a>날짜 함수  
-  
-|함수 이름|설명|  
-|-------------------|-----------------|  
-|utcnow|현재 타임스탬프를 문자열로 반환합니다. 예: `2017-03-15T13:27:36Z`: <p>`utcnow()` <p> **매개 변수 번호**: 1 <p> **이름**: Format <p> **설명**: 선택 사항. 이 타임스탬프 값의 형식을 지정하는 방법을 나타내는 [단일 형식 지정자 문자](https://msdn.microsoft.com/library/az4se3k1%28v=vs.110%29.aspx) 또는 [사용자 지정 형식 패턴](https://msdn.microsoft.com/library/8kb3ddd4%28v=vs.110%29.aspx)입니다. 형식이 제공되지 않으면 ISO 8601 형식("o")이 사용됩니다.|  
-|addseconds|전달된 문자열 타임스탬프에 시간(초)에 대한 정수를 더합니다. 시간(초) 수는 양수 또는 음수일 수 있습니다. 기본적으로 결과는 형식 지정자를 제공하지 않은 경우 ISO 8601 형식("o")의 문자열입니다. 예: `2015-03-15T13:27:00Z`: <p>`addseconds('2015-03-15T13:27:36Z', -36)` <p> **매개 변수 번호**: 1 <p> **이름**: Timestamp <p> **설명**: 필수. 시간을 포함하는 문자열입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Seconds <p> **설명**: 필수. 추가할 시간(초) 수입니다. 시간(초)을 빼기 위한 음수일 수 있습니다. <p> **매개 변수 번호**: 3 <p> **이름**: Format <p> **설명**: 선택 사항. 이 타임스탬프 값의 형식을 지정하는 방법을 나타내는 [단일 형식 지정자 문자](https://msdn.microsoft.com/library/az4se3k1%28v=vs.110%29.aspx) 또는 [사용자 지정 형식 패턴](https://msdn.microsoft.com/library/8kb3ddd4%28v=vs.110%29.aspx)입니다. 형식이 제공되지 않으면 ISO 8601 형식("o")이 사용됩니다.|  
-|addminutes|전달된 문자열 타임스탬프에 시간(분)에 대한 정수를 더합니다. 시간(분) 수는 양수 또는 음수일 수 있습니다. 기본적으로 결과는 형식 지정자를 제공하지 않은 경우 ISO 8601 형식("o")의 문자열입니다. 예: `2015-03-15T14:00:36Z`: <p>`addminutes('2015-03-15T13:27:36Z', 33)` <p> **매개 변수 번호**: 1 <p> **이름**: Timestamp <p> **설명**: 필수. 시간을 포함하는 문자열입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Minutes <p> **설명**: 필수. 더할 시간(분) 수입니다. 시간(분)을 빼기 위한 음수일 수 있습니다. <p> **매개 변수 번호**: 3 <p> **이름**: Format <p> **설명**: 선택 사항. 이 타임스탬프 값의 형식을 지정하는 방법을 나타내는 [단일 형식 지정자 문자](https://msdn.microsoft.com/library/az4se3k1%28v=vs.110%29.aspx) 또는 [사용자 지정 형식 패턴](https://msdn.microsoft.com/library/8kb3ddd4%28v=vs.110%29.aspx)입니다. 형식이 제공되지 않으면 ISO 8601 형식("o")이 사용됩니다.|  
-|addhours|전달된 문자열 타임스탬프에 시간(시)에 대한 정수를 더합니다. 시간(시) 수는 양수 또는 음수일 수 있습니다. 기본적으로 결과는 형식 지정자를 제공하지 않은 경우 ISO 8601 형식("o")의 문자열입니다. 예: `2015-03-16T01:27:36Z`: <p>`addhours('2015-03-15T13:27:36Z', 12)` <p> **매개 변수 번호**: 1 <p> **이름**: Timestamp <p> **설명**: 필수. 시간을 포함하는 문자열입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Hours <p> **설명**: 필수. 더할 시간 수입니다. 시간(시)을 빼기 위한 음수일 수 있습니다. <p> **매개 변수 번호**: 3 <p> **이름**: Format <p> **설명**: 선택 사항. 이 타임스탬프 값의 형식을 지정하는 방법을 나타내는 [단일 형식 지정자 문자](https://msdn.microsoft.com/library/az4se3k1%28v=vs.110%29.aspx) 또는 [사용자 지정 형식 패턴](https://msdn.microsoft.com/library/8kb3ddd4%28v=vs.110%29.aspx)입니다. 형식이 제공되지 않으면 ISO 8601 형식("o")이 사용됩니다.|  
-|adddays|전달된 문자열 타임스탬프에 날 수에 대한 정수를 더합니다. 날 수는 양수 또는 음수일 수 있습니다. 기본적으로 결과는 형식 지정자를 제공하지 않은 경우 ISO 8601 형식("o")의 문자열입니다. 예: `2015-02-23T13:27:36Z`: <p>`addseconds('2015-03-15T13:27:36Z', -20)` <p> **매개 변수 번호**: 1 <p> **이름**: Timestamp <p> **설명**: 필수. 시간을 포함하는 문자열입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Days <p> **설명**: 필수. 더할 날 수입니다. 날 수를 빼기 위한 음수일 수 있습니다. <p> **매개 변수 번호**: 3 <p> **이름**: Format <p> **설명**: 선택 사항. 이 타임스탬프 값의 형식을 지정하는 방법을 나타내는 [단일 형식 지정자 문자](https://msdn.microsoft.com/library/az4se3k1%28v=vs.110%29.aspx) 또는 [사용자 지정 형식 패턴](https://msdn.microsoft.com/library/8kb3ddd4%28v=vs.110%29.aspx)입니다. 형식이 제공되지 않으면 ISO 8601 형식("o")이 사용됩니다.|  
-|formatDateTime|날짜 형식으로 문자열을 반환합니다. 기본적으로 결과는 형식 지정자를 제공하지 않은 경우 ISO 8601 형식("o")의 문자열입니다. 예: `2015-02-23T13:27:36Z`: <p>`formatDateTime('2015-03-15T13:27:36Z', 'o')` <p> **매개 변수 번호**: 1 <p> **이름**: Date <p> **설명**: 필수. 날짜를 포함하는 문자열입니다. <p> **매개 변수 번호**: 2 <p> **이름**: Format <p> **설명**: 선택 사항. 이 타임스탬프 값의 형식을 지정하는 방법을 나타내는 [단일 형식 지정자 문자](https://msdn.microsoft.com/library/az4se3k1%28v=vs.110%29.aspx) 또는 [사용자 지정 형식 패턴](https://msdn.microsoft.com/library/8kb3ddd4%28v=vs.110%29.aspx)입니다. 형식이 제공되지 않으면 ISO 8601 형식("o")이 사용됩니다.|  
-|startOfHour|전달된 문자열 타임스탬프에 그 시간의 시작 시간을 반환합니다. 예 `2017-03-15T13:00:00Z`:<br /><br /> `startOfHour('2017-03-15T13:27:36Z')`<br /><br /> **매개 변수 번호**: 1<br /><br /> **이름**: Timestamp<br /><br /> **설명**: 필수. 시간을 포함하는 문자열입니다.<br /><br />**매개 변수 번호**: 2<br /><br /> **이름**: Format<br /><br /> **설명**: 선택 사항. 이 타임스탬프 값의 형식을 지정하는 방법을 나타내는 [단일 형식 지정자 문자](https://msdn.microsoft.com/library/az4se3k1%28v=vs.110%29.aspx) 또는 [사용자 지정 형식 패턴](https://msdn.microsoft.com/library/8kb3ddd4%28v=vs.110%29.aspx)입니다. 형식이 제공되지 않으면 ISO 8601 형식("o")이 사용됩니다.|  
-|startOfDay|전달된 문자열 타임스탬프에 그 날의 시작 시간을 반환합니다. 예 `2017-03-15T00:00:00Z`:<br /><br /> `startOfDay('2017-03-15T13:27:36Z')`<br /><br /> **매개 변수 번호**: 1<br /><br /> **이름**: Timestamp<br /><br /> **설명**: 필수. 시간을 포함하는 문자열입니다.<br /><br />**매개 변수 번호**: 2<br /><br /> **이름**: Format<br /><br /> **설명**: 선택 사항. 이 타임스탬프 값의 형식을 지정하는 방법을 나타내는 [단일 형식 지정자 문자](https://msdn.microsoft.com/library/az4se3k1%28v=vs.110%29.aspx) 또는 [사용자 지정 형식 패턴](https://msdn.microsoft.com/library/8kb3ddd4%28v=vs.110%29.aspx)입니다. 형식이 제공되지 않으면 ISO 8601 형식("o")이 사용됩니다.| 
-|startOfMonth|전달된 문자열 타임스탬프에 그 달의 시작 시간을 반환합니다. 예 `2017-03-01T00:00:00Z`:<br /><br /> `startOfMonth('2017-03-15T13:27:36Z')`<br /><br /> **매개 변수 번호**: 1<br /><br /> **이름**: Timestamp<br /><br /> **설명**: 필수. 시간을 포함하는 문자열입니다.<br /><br />**매개 변수 번호**: 2<br /><br /> **이름**: Format<br /><br /> **설명**: 선택 사항. 이 타임스탬프 값의 형식을 지정하는 방법을 나타내는 [단일 형식 지정자 문자](https://msdn.microsoft.com/library/az4se3k1%28v=vs.110%29.aspx) 또는 [사용자 지정 형식 패턴](https://msdn.microsoft.com/library/8kb3ddd4%28v=vs.110%29.aspx)입니다. 형식이 제공되지 않으면 ISO 8601 형식("o")이 사용됩니다.| 
-|dayOfWeek|문자열 타임스탬프의 요일 구성 요소를 반환합니다.  일요일은 0, 월요일은 1 등입니다. 예 `3`:<br /><br /> `dayOfWeek('2017-03-15T13:27:36Z')`<br /><br /> **매개 변수 번호**: 1<br /><br /> **이름**: Timestamp<br /><br /> **설명**: 필수. 시간을 포함하는 문자열입니다.| 
-|dayOfMonth|문자열 타임스탬프에서 그 달의 날짜 구성 요소를 반환합니다. 예 `15`:<br /><br /> `dayOfMonth('2017-03-15T13:27:36Z')`<br /><br /> **매개 변수 번호**: 1<br /><br /> **이름**: Timestamp<br /><br /> **설명**: 필수. 시간을 포함하는 문자열입니다.| 
-|dayOfYear|문자열 타임스탬프에서 해당 연도의 날짜 구성 요소를 반환합니다. 예 `74`:<br /><br /> `dayOfYear('2017-03-15T13:27:36Z')`<br /><br /> **매개 변수 번호**: 1<br /><br /> **이름**: Timestamp<br /><br /> **설명**: 필수. 시간을 포함하는 문자열입니다.| 
-|ticks|문자열 타임스탬프에서 틱 속성을 반환합니다. 예 `1489603019`:<br /><br /> `ticks('2017-03-15T18:36:59Z')`<br /><br /> **매개 변수 번호**: 1<br /><br /> **이름**: Timestamp<br /><br /> **설명**: 필수. 시간을 포함하는 문자열입니다.| 
-  
-### <a name="workflow-functions"></a>워크플로 함수  
+| 컬렉션 함수 | Task | 
+| ------------------- | ---- | 
+| [contains](../logic-apps/workflow-definition-language-functions-reference.md#contains) | 컬렉션에 특정 항목이 있는지 검사합니다. |
+| [empty](../logic-apps/workflow-definition-language-functions-reference.md#empty) | 컬렉션이 비어 있는지 검사합니다. | 
+| [first](../logic-apps/workflow-definition-language-functions-reference.md#first) | 컬렉션에서 첫 번째 항목을 반환합니다. | 
+| [intersection](../logic-apps/workflow-definition-language-functions-reference.md#intersection) | 지정한 컬렉션에서 공통 항목*만* 있는 컬렉션을 반환합니다. | 
+| [join](../logic-apps/workflow-definition-language-functions-reference.md#join) | 지정된 문자로 구분되는 배열에서 *모든* 항목이 들어 있는 문자열을 반환합니다. | 
+| [last](../logic-apps/workflow-definition-language-functions-reference.md#last) | 컬렉션에서 마지막 항목을 반환합니다. | 
+| [length](../logic-apps/workflow-definition-language-functions-reference.md#length) | 문자열 또는 배열에서 항목 수를 반환합니다. | 
+| [skip](../logic-apps/workflow-definition-language-functions-reference.md#skip) | 컬렉션 앞의 항목을 제거하고 *다른 모든* 항목을 반환합니다. | 
+| [take](../logic-apps/workflow-definition-language-functions-reference.md#take) | 컬렉션 앞에서 항목을 반환합니다. | 
+| [union](../logic-apps/workflow-definition-language-functions-reference.md#union) | 지정한 컬렉션에서 *모든* 항목이 있는 컬렉션을 반환합니다. | 
+||| 
 
-이 함수를 통해 런타임에 워크플로 자체에 대한 정보를 얻을 수 있습니다.  
-  
-|함수 이름|설명|  
-|-------------------|-----------------|  
-|listCallbackUrl|트리거 또는 작업을 호출하기 위한 문자열을 반환합니다. <p> **참고**: 이 함수는 **httpWebhook** 및 **apiConnectionWebhook**에서만 사용할 수 있으며 **manual**, **recurrence**, **http** 또는 **apiConnection**에서는 사용할 수 없습니다. <p>예를 들어 `listCallbackUrl()` 함수는 다음을 반환합니다. <p>`https://prod-01.westus.logic.azure.com:443/workflows/1235...ABCD/triggers/manual/run?api-version=2015-08-01-preview&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=xxx...xxx` |  
-|워크플로|이 함수는 런타임에 워크플로 자체에 대한 모든 정보를 제공합니다. <p> 워크플로 개체에서 사용할 수 있는 속성은 다음과 같습니다. <ul><li>`name`</li><li>`type`</li><li>`id`</li><li>`location`</li><li>`run`</li></ul> <p> `run` 속성의 값은 다음 속성을 포함한 개체입니다. <ul><li>`name`</li><li>`type`</li><li>`id`</li></ul> <p>이러한 속성에 대한 자세한 내용은 [Rest API](http://go.microsoft.com/fwlink/p/?LinkID=525617)를 참조하세요.<p> 예를 들어 현재 실행의 이름을 얻으려면 `"@workflow().run.name"` 식을 사용합니다. |
+<a name="comparison-functions"></a>
+
+### <a name="comparison-functions"></a>비교 함수
+
+조건을 사용하고 값 및 식 결과를 비교하거나 다양한 종류의 논리를 평가하려면 이러한 비교 함수를 사용할 수 있습니다. 각 함수에 대한 전체 참조는 [사전순 참조 문서](../logic-apps/workflow-definition-language-functions-reference.md)를 참조합니다.
+
+| 비교 함수 | Task | 
+| ------------------- | ---- | 
+| [and](../logic-apps/workflow-definition-language-functions-reference.md#and) | 모든 식이 true인지 확인합니다. | 
+| [equals](../logic-apps/workflow-definition-language-functions-reference.md#equals) | 두 값이 동일한지 확인합니다. | 
+| [greater](../logic-apps/workflow-definition-language-functions-reference.md#greater) | 첫 번째 값이 두 번째 값보다 큰지 검사합니다. | 
+| [greaterOrEquals](../logic-apps/workflow-definition-language-functions-reference.md#greaterOrEquals) | 첫 번째 값이 두 번째 값보다 크거나 같은지 검사합니다. | 
+| [if](../logic-apps/workflow-definition-language-functions-reference.md#if) | 식이 true인지 또는 false인지 검사합니다. 결과에 기반해 지정한 값을 반환합니다. | 
+| [less](../logic-apps/workflow-definition-language-functions-reference.md#less) | 첫 번째 값이 두 번째 값보다 작은지 검사합니다. | 
+| [lessOrEquals](../logic-apps/workflow-definition-language-functions-reference.md#lessOrEquals) | 첫 번째 값이 두 번째 값보다 작거나 같은지 검사합니다. | 
+| [not](../logic-apps/workflow-definition-language-functions-reference.md#not) | 식이 false인지 검사합니다. | 
+| [or](../logic-apps/workflow-definition-language-functions-reference.md#or) | 최소 하나의 식이 true인지 검사합니다. |
+||| 
+
+<a name="conversion-functions"></a>
+
+### <a name="conversion-functions"></a>변환 함수
+
+값의 유형 또는 형식을 변경하려면 이러한 변환 함수를 사용할 수 있습니다. 예를 들어 부울에서 정수로 값을 변경할 수 있습니다. 변환 동안 Logic Apps이 콘텐츠 형식을 처리하는 방법을 알아보려면 [콘텐츠 형식 처리](../logic-apps/logic-apps-content-type.md)를 참조합니다. 각 함수에 대한 전체 참조는 [사전순 참조 문서](../logic-apps/workflow-definition-language-functions-reference.md)를 참조합니다.
+
+| 변환 함수 | Task | 
+| ------------------- | ---- | 
+| [array](../logic-apps/workflow-definition-language-functions-reference.md#array) | 단일 지정 입력에서 배열을 반환합니다. 여러 입력의 경우 [createArray](../logic-apps/workflow-definition-language-functions-reference.md#createArray)를 참조합니다. | 
+| [base64](../logic-apps/workflow-definition-language-functions-reference.md#base64) | 문자열에 대한 base64로 인코딩된 버전을 반환합니다. | 
+| [base64ToBinary](../logic-apps/workflow-definition-language-functions-reference.md#base64ToBinary) | Base64로 인코딩된 문자열에 대한 이진 버전을 반환합니다. | 
+| [base64ToString](../logic-apps/workflow-definition-language-functions-reference.md#base64ToString) | Base64로 인코딩된 문자열에 대한 문자열 버전을 반환합니다. | 
+| [binary](../logic-apps/workflow-definition-language-functions-reference.md#binary) | 입력 값에 대한 이진 버전을 반환합니다. | 
+| [bool](../logic-apps/workflow-definition-language-functions-reference.md#bool) | 입력 값에 대한 부울 버전을 반환합니다. | 
+| [createArray](../logic-apps/workflow-definition-language-functions-reference.md#createArray) | 여러 입력에서 배열을 반환합니다. | 
+| [dataUri](../logic-apps/workflow-definition-language-functions-reference.md#dataUri) | 입력 값에 대한 데이터 URI를 반환합니다. | 
+| [dataUriToBinary](../logic-apps/workflow-definition-language-functions-reference.md#dataUriToBinary) | 데이터 URI에 대한 이진 버전을 반환합니다. | 
+| [dataUriToString](../logic-apps/workflow-definition-language-functions-reference.md#dataUriToString) | 데이터 URI에 대한 문자열 버전을 반환합니다. | 
+| [decodeBase64](../logic-apps/workflow-definition-language-functions-reference.md#decodeBase64) | Base64로 인코딩된 문자열에 대한 문자열 버전을 반환합니다. | 
+| [decodeDataUri](../logic-apps/workflow-definition-language-functions-reference.md#decodeDataUri) | 데이터 URI에 대한 이진 버전을 반환합니다. | 
+| [decodeUriComponent](../logic-apps/workflow-definition-language-functions-reference.md#decodeUriComponent) | 디코딩된 버전으로 이스케이프 문자를 대체하는 문자열을 반환합니다. | 
+| [encodeUriComponent](../logic-apps/workflow-definition-language-functions-reference.md#encodeUriComponent) | URL 안전하지 않은 문자를 이스케이프 문자로 대체하는 문자열을 반환합니다. | 
+| [float](../logic-apps/workflow-definition-language-functions-reference.md#float) | 입력 값에 대해 부동 소수점 숫자를 반환합니다. | 
+| [int](../logic-apps/workflow-definition-language-functions-reference.md#int) | 문자열에 대한 정수 버전을 반환합니다. | 
+| [json](../logic-apps/workflow-definition-language-functions-reference.md#json) | JSON(JavaScript Object Notation) 형식 값 또는 문자열이나 XML에 대한 개체를 반환합니다. | 
+| [string](../logic-apps/workflow-definition-language-functions-reference.md#string) | 입력 값에 대한 문자열 버전을 반환합니다. | 
+| [uriComponent](../logic-apps/workflow-definition-language-functions-reference.md#uriComponent) | 이스케이프 문자로 URL 안전하지 않은 문자를 대체하여 입력 값에 대한 URI로 인코딩된 버전을 반환합니다. | 
+| [uriComponentToBinary](../logic-apps/workflow-definition-language-functions-reference.md#uriComponentToBinary) | URI로 인코딩된 문자열에 대한 이진 버전을 반환합니다. | 
+| [uriComponentToString](../logic-apps/workflow-definition-language-functions-reference.md#uriComponentToString) | URI로 인코딩된 문자열에 대한 문자열 버전을 반환합니다. | 
+| [xml](../logic-apps/workflow-definition-language-functions-reference.md#xml) | 문자열에 대한 XML 버전을 반환합니다. | 
+||| 
+
+<a name="math-functions"></a>
+
+### <a name="math-functions"></a>수학 함수
+
+정수 및 부동 소수점을 사용하려면 이러한 수식 함수를 사용할 수 있습니다. 각 함수에 대한 전체 참조는 [사전순 참조 문서](../logic-apps/workflow-definition-language-functions-reference.md)를 참조합니다.
+
+| 수식 함수 | Task | 
+| ------------- | ---- | 
+| [추가](../logic-apps/workflow-definition-language-functions-reference.md#add) | 두 숫자를 더한 결과를 반환합니다. | 
+| [div](../logic-apps/workflow-definition-language-functions-reference.md#div) | 두 숫자를 나눈 결과를 반환합니다. | 
+| [max](../logic-apps/workflow-definition-language-functions-reference.md#max) | 숫자 또는 배열 집합에서 가장 높은 값을 반환합니다. | 
+| [min](../logic-apps/workflow-definition-language-functions-reference.md#min) | 숫자 또는 배열 집합에서 가장 낮은 값을 반환합니다. | 
+| [mod](../logic-apps/workflow-definition-language-functions-reference.md#mod) | 두 숫자를 나눈 나머지를 반환합니다. | 
+| [mul](../logic-apps/workflow-definition-language-functions-reference.md#mul) | 두 숫자를 곱한 결과를 반환합니다. | 
+| [rand](../logic-apps/workflow-definition-language-functions-reference.md#rand) | 지정된 범위에서 임의의 정수를 반환합니다. | 
+| [range](../logic-apps/workflow-definition-language-functions-reference.md#range) | 지정한 정수에서 시작하는 정수 배열을 반환합니다. | 
+| [sub](../logic-apps/workflow-definition-language-functions-reference.md#sub) | 첫 번째 숫자에서 두 번째 숫자를 뺀 결과를 반환합니다. | 
+||| 
+
+<a name="date-time-functions"></a>
+
+### <a name="date-and-time-functions"></a>날짜 및 시간 함수
+
+날짜 및 시간을 사용하려면 이러한 날짜 및 시간 함수를 사용할 수 있습니다.
+각 함수에 대한 전체 참조는 [사전순 참조 문서](../logic-apps/workflow-definition-language-functions-reference.md)를 참조합니다.
+
+| 날짜 또는 시간 함수 | Task | 
+| --------------------- | ---- | 
+| [addDays](../logic-apps/workflow-definition-language-functions-reference.md#addDays) | 타임스탬프에 일 수를 추가합니다. | 
+| [addHours](../logic-apps/workflow-definition-language-functions-reference.md#addHours) | 타임스탬프에 시간 수를 추가합니다. | 
+| [addMinutes](../logic-apps/workflow-definition-language-functions-reference.md#addMinutes) | 타임스탬프에 분 수를 추가합니다. | 
+| [addSeconds](../logic-apps/workflow-definition-language-functions-reference.md#addSeconds) | 타임스탬프에 초 수를 추가합니다. |  
+| [addToTime](../logic-apps/workflow-definition-language-functions-reference.md#addToTime) | 타임스탬프에 시간 단위 수를 추가합니다. [getFutureTime](../logic-apps/workflow-definition-language-functions-reference.md#getFutureTime)도 참조합니다. | 
+| [convertFromUtc](../logic-apps/workflow-definition-language-functions-reference.md#convertFromUtc) | UTC(Universal Time Coordinated)의 타임 스탬프를 대상 표준 시간대로 변환합니다. | 
+| [convertTimeZone](../logic-apps/workflow-definition-language-functions-reference.md#convertTimeZone) | 원본 표준 시간대의 타임 스탬프를 대상 표준 시간대로 변환합니다. | 
+| [convertToUtc](../logic-apps/workflow-definition-language-functions-reference.md#convertToUtc) | 원본 표준 시간대의 타임 스탬프를 UTC(Universal Time Coordinated)로 변환합니다. | 
+| [dayOfMonth](../logic-apps/workflow-definition-language-functions-reference.md#dayOfMonth) | 타임 스탬프에서 월 구성 요소인 날짜를 반환합니다. | 
+| [dayOfWeek](../logic-apps/workflow-definition-language-functions-reference.md#dayOfWeek) | 타임 스탬프에서 주 구성 요소인 날짜를 반환합니다. | 
+| [dayOfYear](../logic-apps/workflow-definition-language-functions-reference.md#dayOfYear) | 타임 스탬프에서 연 구성 요소인 날짜를 반환합니다. | 
+| [formatDateTime](../logic-apps/workflow-definition-language-functions-reference.md#formatDateTime) | 타임 스탬프에서 날짜를 반환합니다. | 
+| [getFutureTime](../logic-apps/workflow-definition-language-functions-reference.md#getFutureTime) | 지정된 시간 단위를 더한 현재 타임 스탬프를 반환합니다. [addToTime](../logic-apps/workflow-definition-language-functions-reference.md#addToTime)도 참조합니다. | 
+| [getPastTime](../logic-apps/workflow-definition-language-functions-reference.md#getPastTime) | 지정된 시간 단위을 뺀 현재 타임 스탬프를 반환합니다. [subtractFromTime](../logic-apps/workflow-definition-language-functions-reference.md#subtractFromTime)도 참조합니다. | 
+| [startOfDay](../logic-apps/workflow-definition-language-functions-reference.md#startOfDay) | 타임 스탬프에 대한 날의 시작을 반환합니다. | 
+| [startOfHour](../logic-apps/workflow-definition-language-functions-reference.md#startOfHour) | 타임 스탬프에 대한 시간의 시작을 반환합니다. | 
+| [startOfMonth](../logic-apps/workflow-definition-language-functions-reference.md#startOfMonth) | 타임 스탬프에 대한 분의 시작을 반환합니다. | 
+| [subtractFromTime](../logic-apps/workflow-definition-language-functions-reference.md#subtractFromTime) | 타임스탬프에서 시간 단위 수를 뺍니다. [getPastTime](../logic-apps/workflow-definition-language-functions-reference.md#getPastTime)도 참조합니다. | 
+| [ticks](../logic-apps/workflow-definition-language-functions-reference.md#ticks) | 지정된 타임 스탬프에 대한 `ticks` 속성 값을 반환합니다. | 
+| [utcNow](../logic-apps/workflow-definition-language-functions-reference.md#utcNow) | 현재 타임스탬프를 문자열로 반환합니다. | 
+||| 
+
+<a name="workflow-functions"></a>
+
+### <a name="workflow-functions"></a>워크플로 함수
+
+이러한 워크플로 함수는 다음을 도울 수 있습니다.
+
+* 실행 시간에 워크플로 인스턴스에 대한 세부 정보를 가져옵니다. 
+* 논리 앱을 인스턴스화하는 데 사용된 입력을 사용합니다.
+* 트리거 및 작업에서 출력을 참조합니다.
+
+예를 들어 한 동작에서 출력을 참조하고 이후 작업에서 해당 데이터를 사용할 수 있습니다. 각 함수에 대한 전체 참조는 [사전순 참조 문서](../logic-apps/workflow-definition-language-functions-reference.md)를 참조합니다.
+
+| 워크플로 함수 | Task | 
+| ----------------- | ---- | 
+| [action](../logic-apps/workflow-definition-language-functions-reference.md#action) | 런타임 시 현재 작업의 출력 또는 다른 JSON 이름-값 쌍에서 값을 반환합니다. [actions](../logic-apps/workflow-definition-language-functions-reference.md#actions)도 참조합니다. | 
+| [actionBody](../logic-apps/workflow-definition-language-functions-reference.md#actionBody) | 런타임 시 작업의 `body` 출력을 반환합니다. [body](../logic-apps/workflow-definition-language-functions-reference.md#body)도 참조합니다. | 
+| [actionOutputs](../logic-apps/workflow-definition-language-functions-reference.md#actionOutputs) | 런타임 시 작업의 출력을 반환합니다. [actions](../logic-apps/workflow-definition-language-functions-reference.md#actions)을 참조합니다. | 
+| [actions](../logic-apps/workflow-definition-language-functions-reference.md#actions) | 런타임 시 작업의 출력 또는 다른 JSON 이름-값 쌍에서 값을 반환합니다. [action](../logic-apps/workflow-definition-language-functions-reference.md#action)도 참조합니다.  | 
+| [body](#body) | 런타임 시 작업의 `body` 출력을 반환합니다. [actionBody](../logic-apps/workflow-definition-language-functions-reference.md#actionBody)도 참조합니다. | 
+| [formDataMultiValues](../logic-apps/workflow-definition-language-functions-reference.md#formDataMultiValues) | *form-data* 또는 *form-encoded* 작업 출력에서 키 이름이 일치하는 값으로 배열을 만듭니다. | 
+| [formDataValue](../logic-apps/workflow-definition-language-functions-reference.md#formDataValue) | 작업의 *form-data* 또는 *form-encoded*에서 키 이름이 일치하는 단일 값을 반환합니다. | 
+| [item](../logic-apps/workflow-definition-language-functions-reference.md#item) | 배열에 대해 반복 작업 내에 있을 경우 현재 작업 반복하는 동안 배열에서 현재 항목을 반환합니다. | 
+| [items](../logic-apps/workflow-definition-language-functions-reference.md#items) | for-each 또는 do-until-loop 내에 있을 경우 지정된 루프에서 현재 항목을 반환합니다.| 
+| [listCallbackUrl](../logic-apps/workflow-definition-language-functions-reference.md#listCallbackUrl) | 트리거 또는 동작을 호출하는 "콜백 URL"을 반환합니다. | 
+| [multipartBody](../logic-apps/workflow-definition-language-functions-reference.md#multipartBody) | 여러 부분으로 구성된 작업의 출력에서 특정 부분에 대한 본문을 반환합니다. | 
+| [매개 변수](../logic-apps/workflow-definition-language-functions-reference.md#parameters) | 논리 앱 정의에 설명된 매개 변수에 대한 값을 반환합니다. | 
+| [trigger](../logic-apps/workflow-definition-language-functions-reference.md#trigger) | 런타임 시 또는 다른 JSON 이름-값 쌍에서 트리거 출력을 반환합니다. [triggerOutputs](#triggerOutputs) 및 [triggerBody](../logic-apps/workflow-definition-language-functions-reference.md#triggerBody)도 참조합니다. | 
+| [triggerBody](../logic-apps/workflow-definition-language-functions-reference.md#triggerBody) | 런타임 시 트리거의 `body` 출력을 반환합니다. [트리거](../logic-apps/workflow-definition-language-functions-reference.md#trigger)를 참조합니다. | 
+| [triggerFormDataValue](../logic-apps/workflow-definition-language-functions-reference.md#triggerFormDataValue) | *form-data* 또는 *form-encoded* 트리거 출력에서 키 이름과 일치하는 단일 값을 반환합니다. | 
+| [triggerMultipartBody](../logic-apps/workflow-definition-language-functions-reference.md#triggerMultipartBody) | Trigger의 다중 부분 출력에서 특정 부분에 대한 본문을 반환합니다. | 
+| [triggerFormDataMultiValues](../logic-apps/workflow-definition-language-functions-reference.md#triggerFormDataMultiValues) | *form-data* 또는 *form-encoded* 트리거 출력에서 키 이름이 일치하는 값의 배열을 만듭니다. | 
+| [triggerOutputs](../logic-apps/workflow-definition-language-functions-reference.md#triggerOutputs) | 런타임 시 트리거 출력 또는 다른 JSON 이름-값 쌍에서 값을 반환합니다. [트리거](../logic-apps/workflow-definition-language-functions-reference.md#trigger)를 참조합니다. | 
+| [variables](../logic-apps/workflow-definition-language-functions-reference.md#variables) | 지정한 변수에 대한 값을 반환합니다. | 
+| [워크플로](../logic-apps/workflow-definition-language-functions-reference.md#workflow) | 런타임 동안 워크플로 자체에 대한 모든 세부 정보를 반환합니다. | 
+||| 
+
+<a name="uri-parsing-functions"></a>
+
+### <a name="uri-parsing-functions"></a>URI 구문 분석 기능
+
+URI(uniform resource identifier)를 사용하고 이러한 URI에 대한 다양한 속성 값을 가져오려면 URI 구문 분석 기능을 사용할 수 있습니다. 각 함수에 대한 전체 참조는 [사전순 참조 문서](../logic-apps/workflow-definition-language-functions-reference.md)를 참조합니다.
+
+| URI 구문 분석 기능 | Task | 
+| -------------------- | ---- | 
+| [uriHost](../logic-apps/workflow-definition-language-functions-reference.md#uriHost) | URI(Uniform Resource Identifier)에 대한 `host` 값을 반환합니다. | 
+| [uriPath](../logic-apps/workflow-definition-language-functions-reference.md#uriPath) | URI(Uniform Resource Identifier)에 대한 `path` 값을 반환합니다. | 
+| [uriPathAndQuery](../logic-apps/workflow-definition-language-functions-reference.md#uriPathAndQuery) | URI(Uniform Resource Identifier)에 대한 `path` 및 `query` 값을 반환합니다. | 
+| [uriPort](../logic-apps/workflow-definition-language-functions-reference.md#uriPort) | URI(Uniform Resource Identifier)에 대한 `port` 값을 반환합니다. | 
+| [uriQuery](../logic-apps/workflow-definition-language-functions-reference.md#uriQuery) | URI(Uniform Resource Identifier)에 대한 `query` 값을 반환합니다. | 
+| [uriScheme](../logic-apps/workflow-definition-language-functions-reference.md#uriScheme) | URI(Uniform Resource Identifier)에 대한 `scheme` 값을 반환합니다. | 
+||| 
+
+<a name="manipulation-functions"></a>
+
+### <a name="json-and-xml-functions"></a>JSON과 XML 함수
+
+JSON 개체와 XML 노드를 사용하려면 이러한 조작 함수를 사용할 수 있습니다. 각 함수에 대한 전체 참조는 [사전순 참조 문서](../logic-apps/workflow-definition-language-functions-reference.md)를 참조합니다.
+
+| 조작 함수 | Task | 
+| --------------------- | ---- | 
+| [addProperty](../logic-apps/workflow-definition-language-functions-reference.md#addProperty) | JSON 개체에 속성 및 해당 값 또는 이름-값 쌍을 추가하고 업데이트된 개체를 반환합니다. | 
+| [coalesce](../logic-apps/workflow-definition-language-functions-reference.md#coalesce) | 하나 이상의 매개 변수에서 Null이 아닌 첫 번째 값을 반환합니다. | 
+| [removeProperty](../logic-apps/workflow-definition-language-functions-reference.md#removeProperty) | JSON 개체에서 속성을 제거하고 업데이트된 개체를 반환합니다. | 
+| [setProperty](../logic-apps/workflow-definition-language-functions-reference.md#setProperty) | JSON 개체의 속성에 대한 값을 설정하고 업데이트된 개체를 반환합니다. | 
+| [xpath](../logic-apps/workflow-definition-language-functions-reference.md#xpath) | XPath(XML 경로 언어) 식과 일치하는 노드 또는 값에 대한 XML을 확인하고 일치하는 노드 또는 값을 반환합니다. | 
+||| 
 
 ## <a name="next-steps"></a>다음 단계
 
-[워크플로 작업 및 트리거](logic-apps-workflow-actions-triggers.md)
-
+* [워크플로 정의 언어 작업 및 트리거](../logic-apps/logic-apps-workflow-actions-triggers.md)에 대해 알아봅니다
+* [워크플로 REST API](https://docs.microsoft.com/rest/api/logic/workflows)를 사용하여 프로그래밍 방식으로 논리 앱을 만들고 관리하는 방법에 대해 알아봅니다

@@ -1,10 +1,10 @@
 ---
-title: "자습서: HR2day by Merces와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory와 HR2day by Merces 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: HR2day by Merces와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory와 HR2day by Merces 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: 853d08c9-27b1-48d4-b8e7-3705140eb67f
 ms.service: active-directory
 ms.workload: identity
@@ -13,12 +13,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/24/2017
 ms.author: jeedes
+ms.openlocfilehash: 6b6f839ace5d80d41b242992feba8dea546b51c2
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 22aa82e5cbce5b00f733f72209318c901079b665
-ms.openlocfilehash: 77e2fcf9c306259286b15767f3a992510d6d79d8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/24/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34340875"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-hr2day-by-merces"></a>자습서: HR2day by Merces와 Azure Active Directory 통합
 
@@ -30,7 +30,7 @@ HR2day by Merces를 Azure AD와 통합하면 다음과 같은 이점이 제공�
 - 사용자가 해당 Azure AD 계정으로 HR2day by Merces에 자동으로 로그인되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -113,14 +113,14 @@ HR2day by Merces에서 Azure AD Single Sign-On을 구성하고 테스트하려�
 
     a. **로그온 URL** 텍스트 상자에서 다음과 같은 패턴을 사용하여 URL을 입력합니다. `https://<tenantname>.force.com/<instancename>`
 
-    b. **식별자** 텍스트 상자에서 다음과 같은 패턴을 사용하여 URL을 입력합니다. `https://hr2day.force.com/<companyname>`
+    나. **식별자** 텍스트 상자에서 다음과 같은 패턴을 사용하여 URL을 입력합니다. `https://hr2day.force.com/<companyname>`
 
     > [!NOTE] 
     > 이러한 값은 실제 값이 아닙니다. 실제 로그온 URL 및 식별자로 값을 업데이트합니다. 이러한 값을 얻으려면 [HR2day by Merces 클라이언트 지원 팀](mailto:servicedesk@merces.nl)에 문의하세요. 
  
 
 
-4. **SAML 서명 인증서** 섹션에서 **인증서(Base64)**를 선택한 후 컴퓨터에 인증서 파일을 저장합니다.
+4. **SAML 서명 인증서** 섹션에서 **인증서(Base64)** 를 선택한 후 컴퓨터에 인증서 파일을 저장합니다.
 
     ![Single Sign-On 구성](./media/active-directory-saas-hr2day-tutorial/tutorial_hr2daybymerces_certificate.png) 
 
@@ -145,15 +145,15 @@ HR2day by Merces에서 Azure AD Single Sign-On을 구성하고 테스트하려�
 
     ![Single Sign-on 구성](./media/active-directory-saas-hr2day-tutorial/tutorial_attribute_05.png)
 
-    b. **이름** 상자에 **ATTR_LOGINCLAIM**을 입력합니다.
+    나. **이름** 상자에 **ATTR_LOGINCLAIM**을 입력합니다.
 
-    c. **값** 목록에서 **Join()**을 선택합니다.
+    다. **값** 목록에서 **Join()** 을 선택합니다.
 
     d. **String1** 목록에서 **user.mail**을 선택합니다.
 
     e. **String2**의 경우 HR2day 팀에서 제공하는 고유 식별자를 입력합니다.
 
-    f. **구분 기호** 상자에 **@**을 입력합니다.
+    f. **구분 기호** 상자에 **@** 을 입력합니다.
     
     g. **확인**을 선택합니다.
 
@@ -168,7 +168,7 @@ HR2day by Merces에서 Azure AD Single Sign-On을 구성하고 테스트하려�
 9. 응용 프로그램에 대한 SSO를 구성하려면 [HR2day by Merces 클라이언트 지원 팀](mailTo:servicedesk@merces.nl)에 문의합니다. 다운로드한 **인증서(Base64)** 파일을 사용자의 이메일에 연결합니다. 또한 SSO 통합을 위해 구성할 수 있도록 **로그아웃 URL**, **SAML 엔터티 ID** 및 **SAML Single Sign-On 서비스 URL**을 제공합니다.
 
     > [!NOTE]
-    >이 통합에는 이 패턴 **https://hr2day.force.com/INSTANCENAME**을 사용하여 설정되는 엔터티 ID가 필요하다고 Merces 팀에 알립니다.
+    >이 통합에는 **https://hr2day.force.com/INSTANCENAME** 패턴을 사용하여 설정되는 엔터티 ID가 필요하다고 Merces 팀에 알립니다.
 
     > [!TIP]
     >이제 앱을 설정하는 동안 [Azure Portal](https://portal.azure.com) 내에서 이러한 지침의 간결한 버전을 읽을 수 있습니다.  **Active Directory** > **엔터프라이즈 응용 프로그램** 섹션에서 이 앱을 추가한 후 **Single Sign-On** 탭을 선택합니다. 그런 다음 맨 아래에 있는 **구성** 섹션을 통해 포함된 설명서에 액세스합니다. 포함된 설명서 기능에 대한 자세한 내용은 [Azure AD 포함된 설명서]( https://go.microsoft.com/fwlink/?linkid=845985)에서 확인할 수 있습니다.
@@ -199,9 +199,9 @@ HR2day by Merces에서 Azure AD Single Sign-On을 구성하고 테스트하려�
 
     a. **이름** 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 상자에 BrittaSimon의 **이메일 주소**를 입력합니다.
+    나. **사용자 이름** 상자에 BrittaSimon의 **이메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택한 다음 암호를 적어둡니다.
+    다. **암호 표시**를 선택한 다음 암호를 적어둡니다.
 
     d. **만들기**를 선택합니다.
  
@@ -251,7 +251,7 @@ HR2day by Merces에서 Azure AD Single Sign-On을 구성하고 테스트하려�
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS 앱을 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -268,5 +268,4 @@ HR2day by Merces에서 Azure AD Single Sign-On을 구성하고 테스트하려�
 [201]: ./media/active-directory-saas-hr2day-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-hr2day-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-hr2day-tutorial/tutorial_general_203.png
-
 

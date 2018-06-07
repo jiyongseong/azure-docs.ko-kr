@@ -3,7 +3,7 @@ title: "Power BI를 사용하여 Azure 네트워크 보안 그룹 흐름 로그 
 description: "이 페이지에서는 Power BI를 사용하여 NSG 흐름 로그를 시각화하는 방법을 설명합니다."
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
 editor: 
 ms.assetid: 1e4f95fa-f5f0-4e03-bc25-008fbfc4934c
@@ -13,14 +13,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-translationtype: Human Translation
-ms.sourcegitcommit: 424d8654a047a28ef6e32b73952cf98d28547f4f
-ms.openlocfilehash: 7cac733717b4af048e58cf3d574c5743889100c1
-ms.lasthandoff: 03/22/2017
-
+ms.author: jdial
+ms.openlocfilehash: 19bd7ed4bab915d7918a192a046653666cfaa498
+ms.sourcegitcommit: c7215d71e1cdeab731dd923a9b6b6643cee6eb04
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/17/2017
 ---
-
 # <a name="visualizing-network-security-group-flow-logs-with-power-bi"></a>Power BI를 사용하여 네트워크 보안 그룹 흐름 로그 시각화
 
 네트워크 보안 그룹 흐름 로그를 통해 네트워크 보안 그룹의 송/수신 IP 트래픽에 대한 정보를 볼 수 있습니다. 이러한 흐름 로그는 트래픽이 허용되거나 거부된 경우 각 규칙을 기준으로 아웃바운드 및 인바운드 흐름, 흐름이 적용되는 NIC, 흐름에 대한 5개의 튜플 정보(원본/대상 IP, 원본/대상 포트, 프로토콜)를 보여 줍니다.
@@ -64,7 +63,7 @@ ms.lasthandoff: 03/22/2017
 
     ![액세스 키 2][4]
 
-4.    로그가 다운로드되고 구문 분석되며 사용자는 미리 작성된 시각 효과를 사용할 수 있습니다.
+4.  로그가 다운로드되고 구문 분석되며 사용자는 미리 작성된 시각 효과를 사용할 수 있습니다.
 
 ## <a name="understanding-the-visuals"></a>시각 효과의 이해
 
@@ -120,7 +119,7 @@ ms.lasthandoff: 03/22/2017
 
 ## <a name="next-steps"></a>다음 단계
 
-[오픈 소스 도구를 사용하여 VM과 주고 받는 네트워크 트래픽 패턴 시각화](network-watcher-using-open-source-tools.md)를 방문하여 탄력적 스택으로 NSG 흐름 로그를 시각화하는 방법 알아보기
+[오픈 소스 도구를 사용하여 Azure Network Watcher NSG 흐름 로그 시각화](network-watcher-visualize-nsg-flow-logs-open-source-tools.md)를 방문하여 탄력적 스택으로 NSG 흐름 로그를 시각화하는 방법 알아보기
 
 [1]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure1.png
 [2]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure2.png
@@ -135,4 +134,3 @@ ms.lasthandoff: 03/22/2017
 [11]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure11.png
 [12]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure12.png
 [13]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure13.png
-

@@ -1,33 +1,33 @@
 ---
-title: "Azure Active Directory에서 구성 가능한 토큰 수명 | Microsoft Docs"
-description: "Azure AD에서 발급한 토큰의 수명을 설정하는 방법을 알아봅니다."
+title: Azure Active Directory에서 구성 가능한 토큰 수명 | Microsoft Docs
+description: Azure AD에서 발급한 토큰의 수명을 설정하는 방법을 알아봅니다.
 services: active-directory
-documentationcenter: 
-author: billmath
-manager: femila
-editor: 
+documentationcenter: ''
+author: hpsin
+manager: mtillman
+editor: ''
 ms.assetid: 06f5b317-053e-44c3-aaaa-cf07d8692735
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/20/2017
-ms.author: billmath
+ms.date: 04/19/2018
+ms.author: hirsin
 ms.custom: aaddev
 ms.reviewer: anchitn
-ms.translationtype: Human Translation
-ms.sourcegitcommit: b1d56fcfb472e5eae9d2f01a820f72f8eab9ef08
-ms.openlocfilehash: d1d72932d8156fdada44ad6f375fe81c0428846c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
+ms.openlocfilehash: a62d7a36eeb84b06baa4f2968d48f4a7afcaa05d
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32140085"
 ---
 # <a name="configurable-token-lifetimes-in-azure-active-directory-public-preview"></a>Azure Active Directory에서 구성 가능한 토큰 수명(공개 미리 보기)
 Azure AD(Azure Active Directory)에서 발급한 토큰의 수명을 지정할 수 있습니다. 조직의 모든 앱, 다중 테넌트(다중 조직) 응용 프로그램 또는 조직의 특정 서비스 주체에 대해 토큰 수명을 구성할 수 있습니다.
 
-> [!NOTE]
-> 이 기능은 현재 공개 미리 보기로 제공되고 있습니다. 변경 내용을 되돌리거나 제거할 준비를 해야 합니다. 이 기능은 공개 미리 보기 동안 모든 Azure Active Directory 구독에서 사용할 수 있습니다. 그러나 기능이 일반 공급되면 일부 기능에는 [Azure Active Directory Premium](active-directory-get-started-premium.md) 구독이 필요할 수도 있습니다.
+> [!IMPORTANT]
+> 미리 보기 동안 고객으로부터 들은 후 이 기능을 Azure Active Directory 조건부 액세스의 새 기능으로 대체하려고 계획 중입니다.  새로운 기능이 완료되면 이 기능은 알림 기간 후 결국 중단될 예정입니다.  구성 가능한 토큰 수명 정책을 사용하는 경우 사용할 수 있게 되면 새 조건부 액세스 기능으로 전환할 준비를 합니다. 
 >
 >
 
@@ -35,33 +35,38 @@ Azure AD에서 정책 개체는 개별 응용 프로그램 또는 조직의 모�
 
 조직의 기본 정책이 될 정책을 지정할 수 있습니다. 해당 정책은 더 높은 우선 순위의 정책으로 재정의되지 않는 한 조직 내의 모든 응용 프로그램에 적용됩니다. 특정 응용 프로그램에 정책을 할당할 수도 있습니다. 우선 순위는 정책 유형에 따라 다릅니다.
 
+> [!NOTE]
+> 구성 가능한 토큰 수명 정책은 SharePoint Online에서 지원되지 않습니다.  PowerShell을 통해 이 정책을 만들 수 있지만, SharePoint Online에서는 이 정책을 승인하지 않습니다. 유휴 세션 제한 시간을 구성하는 방법에 대한 자세한 내용은 [SharePoint Online 블로그](https://techcommunity.microsoft.com/t5/SharePoint-Blog/Introducing-Idle-Session-Timeout-in-SharePoint-and-OneDrive/ba-p/119208)를 참조하세요.
+>* SharePoint Online 액세스 토큰의 기본 수명은 1시간입니다. 
+>* SharePoint Online 새로 고침 토큰의 기본 최대 비활성 시간은 90일입니다.
+>
 
 ## <a name="token-types"></a>토큰 형식
 
 새로 고침 토큰, 액세스 토큰, 세션 토큰 및 ID 토큰에 대한 토큰 수명 정책을 구성할 수 있습니다.
 
 ### <a name="access-tokens"></a>액세스 토큰
-클라이언트는 액세스 토큰을 사용하여 보호된 리소스에 액세스합니다. 액세스 토큰은 사용자, 클라이언트 및 리소스의 특정 조합에만 사용할 수 있습니다. 액세스 토큰은 해지될 수 없으며 만료될 때까지 유효합니다. 액세스 토큰을 획득한 악의적인 행위자는 수명 범위 동안 이를 사용할 수 있습니다. 액세스 토큰의 수명을 조정하는 것은 시스템 성능을 개선하는 것과 사용자 계정이 비활성화된 후 클라이언트에서 액세스를 유지하는 기간을 늘리는 것 간의 절충 작업입니다. 시스템 성능을 개선하려면 클라이언트에서 새 액세스 토큰을 획득해야 하는 횟수를 줄이면 됩니다.
+클라이언트는 액세스 토큰을 사용하여 보호된 리소스에 액세스합니다. 액세스 토큰은 사용자, 클라이언트 및 리소스의 특정 조합에만 사용할 수 있습니다. 액세스 토큰은 해지될 수 없으며 만료될 때까지 유효합니다. 액세스 토큰을 획득한 악의적인 행위자는 수명 범위 동안 이를 사용할 수 있습니다. 액세스 토큰의 수명을 조정하는 것은 시스템 성능을 개선하는 것과 사용자 계정이 비활성화된 후 클라이언트에서 액세스를 유지하는 기간을 늘리는 것 간의 절충 작업입니다. 시스템 성능을 개선하려면 클라이언트에서 새 액세스 토큰을 획득해야 하는 횟수를 줄이면 됩니다.  기본값은 1시간입니다. 1시간 후 클라이언트는 새로 고침 토큰을 사용하여 새로운 새로 고침 토큰을 획득(보통 자동으로)하고 토큰에 액세스해야 합니다. 
 
 ### <a name="refresh-tokens"></a>새로 고침 토큰
-클라이언트가 보호된 리소스에 액세스하기 위해 액세스 토큰을 획득할 때 새로 고침 토큰과 액세스 토큰을 모두 받습니다. 새로 고침 토큰은 현재 액세스 토큰이 만료된 경우 새 액세스/새로 고침 토큰 쌍을 얻는 데 사용됩니다. 새로 고침 토큰은 사용자와 클라이언트 조합에 바인딩됩니다. 새로 고침 토큰은 해지 가능하며 사용될 때마다 토큰의 유효성이 검사됩니다.
+클라이언트가 보호된 리소스에 액세스하기 위해 액세스 토큰을 획득할 때 새로 고침 토큰도 받습니다. 새로 고침 토큰은 현재 액세스 토큰이 만료된 경우 새 액세스/새로 고침 토큰 쌍을 얻는 데 사용됩니다. 새로 고침 토큰은 사용자와 클라이언트 조합에 바인딩됩니다. 새로 고침 토큰은 [언제든지 해지 가능](develop/active-directory-token-and-claims.md#token-revocation)하며 사용될 때마다 토큰의 유효성이 검사됩니다.  
 
-비밀 클라이언트와 공용 클라이언트를 구분하는 것이 중요합니다. 다양한 유형의 클라이언트에 대한 자세한 내용은 [RFC 6749](https://tools.ietf.org/html/rfc6749#section-2.1)를 참조하세요.
+새로 고침 토큰을 사용할 수 있는 기간에 영향을 미치기 때문에 비밀 클라이언트와 공용 클라이언트를 구분하는 것이 중요합니다. 다양한 유형의 클라이언트에 대한 자세한 내용은 [RFC 6749](https://tools.ietf.org/html/rfc6749#section-2.1)를 참조하세요.
 
 #### <a name="token-lifetimes-with-confidential-client-refresh-tokens"></a>비밀 클라이언트 새로 고침 토큰의 토큰 수명
-비밀 클라이언트는 클라이언트 암호(비밀)를 안전하게 저장할 수 있는 응용 프로그램입니다. 비밀 클라이언트는 요청이 악의적인 행위자가 아닌 응용 프로그램에서 오는 것을 증명할 수 있습니다. 예를 들어 웹앱은 웹 서버에 클라이언트 비밀을 저장할 수 있으므로 비밀 클라이언트입니다. 따라서 노출되지 않습니다. 이러한 흐름은 보다 안전하기 때문에 이러한 흐름에 발급된 새로 고침 토큰의 기본 수명은 `until-revoked`이며 정책을 사용하여 변경할 수 없고 자발적인 암호 재설정에서 취소되지 않습니다.
+비밀 클라이언트는 클라이언트 암호(비밀)를 안전하게 저장할 수 있는 응용 프로그램입니다. 비밀 클라이언트는 요청이 악의적인 작업자가 아닌 안전한 클라이언트 응용 프로그램에서 오는 것을 증명할 수 있습니다. 예를 들어 웹앱은 웹 서버에 클라이언트 비밀을 저장할 수 있으므로 비밀 클라이언트입니다. 따라서 노출되지 않습니다. 이러한 흐름은 보다 안전하기 때문에 이러한 흐름에 발급된 새로 고침 토큰의 기본 수명은 `until-revoked`이며 정책을 사용하여 변경할 수 없고 자발적인 암호 재설정에서 취소되지 않습니다.
 
 #### <a name="token-lifetimes-with-public-client-refresh-tokens"></a>공용 클라이언트 새로 고침 토큰의 토큰 수명
 
-공용 클라이언트는 클라이언트 암호(비밀)를 안전하게 저장할 수 없습니다. 예를 들어 iOS/Android 앱은 리소스 소유자의 비밀을 난독 처리할 수 없으므로 공용 클라이언트로 간주됩니다. 리소스에 정책을 설정하여 지정된 기간보다 오래된 공용 클라이언트의 새로 고침 토큰이 새 액세스/새로 고침 토큰 쌍을 얻지 못하게 할 수 있습니다. 이렇게 하려면 새로 고침 토큰 최대 비활성 시간 속성을 사용하세요. 특정 기간이 지나면 더 이상 새로 고침 토큰이 허용되지 않도록 정책을 사용하여 기간을 설정할 수도 있습니다. 이렇게 하려면 새로 고침 토큰 최대 기간 속성을 사용하세요. 새로 고침 토큰의 수명을 조정하여 공용 클라이언트 응용 프로그램을 사용할 때 자동으로 재인증되는 대신 사용자가 자격 증명을 다시 입력해야 하는 시기 및 빈도를 제어할 수 있습니다.
+공용 클라이언트는 클라이언트 암호(비밀)를 안전하게 저장할 수 없습니다. 예를 들어 iOS/Android 앱은 리소스 소유자의 비밀을 난독 처리할 수 없으므로 공용 클라이언트로 간주됩니다. 리소스에 정책을 설정하여 지정된 기간보다 오래된 공용 클라이언트의 새로 고침 토큰이 새 액세스/새로 고침 토큰 쌍을 얻지 못하게 할 수 있습니다. (이렇게 하려면 새로 고침 토큰 최대 비활성 시간 속성(`MaxInactiveTime`)을 사용하세요.) 특정 기간이 지나면 더 이상 새로 고침 토큰이 허용되지 않도록 정책을 사용하여 기간을 설정할 수도 있습니다. 이렇게 하려면 새로 고침 토큰 최대 기간 속성을 사용하세요. 새로 고침 토큰의 수명을 조정하여 공용 클라이언트 응용 프로그램을 사용할 때 자동으로 재인증되는 대신 사용자가 자격 증명을 다시 입력해야 하는 시기 및 빈도를 제어할 수 있습니다.
 
 ### <a name="id-tokens"></a>ID 토큰
 ID 토큰은 웹 사이트 및 기본 클라이언트에 전달됩니다. ID 토큰은 사용자에 대한 프로필 정보를 포함합니다. ID 토큰은 사용자와 클라이언트의 특정 조합에 바인딩되며, ID 토큰은 만료될 때까지 유효한 것으로 간주됩니다. 일반적으로 웹 응용 프로그램은 응용 프로그램의 사용자 세션 수명을 해당 사용자에 대해 발급된 ID 토큰의 수명과 일치시킵니다. ID 토큰의 수명을 조정하여 웹 응용 프로그램이 응용 프로그램 세션을 만료하는 빈도 및 사용자에게 Azure AD에 다시 인증하도록(자동으로 또는 대화형으로) 요구하는 빈도를 제어할 수 있습니다.
 
 ### <a name="single-sign-on-session-tokens"></a>Single Sign-On 세션 토큰
-사용자가 Azure AD에 인증하고 **로그인 유지** 확인란을 선택하면 사용자의 브라우저와 Azure AD에 SSO(Single Sign-On) 세션이 설정됩니다. 쿠키 형식의 SSO 토큰은 이 세션을 나타냅니다. SSO 세션 토큰은 특정 리소스/클라이언트 응용 프로그램에 바인딩되지 않습니다. SSO 세션 토큰은 해지 가능하며 사용될 때마다 토큰의 유효성이 검사됩니다.
+사용자가 Azure AD로 인증하면 사용자 브라우저와 Azure AD를 사용하여 SSO(Single Sign-On) 세션이 설정됩니다. 쿠키 형식의 SSO 토큰은 이 세션을 나타냅니다. SSO 세션 토큰은 특정 리소스/클라이언트 응용 프로그램에 바인딩되지 않습니다. SSO 세션 토큰은 해지 가능하며 사용될 때마다 토큰의 유효성이 검사됩니다.
 
-Azure AD는 두 종류의 SSO 세션 토큰을 사용합니다. 하나는 영구 세션 토큰이고 다른 하나는 비영구 세션 토큰입니다. 영구 세션 토큰은 브라우저에 영구 쿠키로 저장됩니다. 비영구 세션 토큰은 세션 쿠키로 저장됩니다. 브라우저가 닫히면 세션 쿠키는 소멸됩니다.
+Azure AD는 두 종류의 SSO 세션 토큰을 사용합니다. 하나는 영구 세션 토큰이고 다른 하나는 비영구 세션 토큰입니다. 영구 세션 토큰은 브라우저에 영구 쿠키로 저장됩니다. 비영구 세션 토큰은 세션 쿠키로 저장됩니다. 브라우저가 닫히면 세션 쿠키는 소멸됩니다. 일반적으로 비영구 세션 토큰이 저장됩니다. 그러나 사용자가 인증 중에 **로그인 유지** 확인란을 선택하면 영구 세션 토큰이 저장됩니다.
 
 비영구 세션 토큰의 수명은 24시간입니다. 영구 토큰의 수명은 180일입니다. SSO 세션 토큰은 유효 기간 내에 언제든지 사용할 수 있으며, 토큰 종류에 따라 유효 기간이 24시간 또는 180일 더 연장됩니다. 유효 기간 내에 SSO 세션 토큰을 사용하지 않으면 만료된 것으로 간주하여 더 이상 허용되지 않습니다.
 
@@ -71,10 +76,10 @@ Azure AD는 두 종류의 SSO 세션 토큰을 사용합니다. 하나는 영구
 토큰 수명 정책은 토큰 수명 규칙을 포함하는 정책 개체의 형식입니다. 정책의 속성을 사용하여 지정된 토큰 수명을 제어할 수 있습니다. 설정된 정책이 없는 경우 시스템에서 기본 수명값을 적용합니다.
 
 ### <a name="configurable-token-lifetime-properties"></a>구성 가능한 토큰 수명 속성
-| 속성 | 정책 속성 문자열 | 영향 | 기본값 | 최소 | 최대 |
+| 자산 | 정책 속성 문자열 | 영향 | 기본값 | 최소 | 최대 |
 | --- | --- | --- | --- | --- | --- |
 | 액세스 토큰 수명 |AccessTokenLifetime |액세스 토큰, ID 토큰, SAML2 토큰 |1시간 |10분 |1일 |
-| 새로 고침 토큰 최대 비활성 시간 |MaxInactiveTime |새로 고침 토큰 |14일 |10분 |90일 |
+| 새로 고침 토큰 최대 비활성 시간 |MaxInactiveTime |새로 고침 토큰 |90일 |10분 |90일 |
 | 단일 단계 새로 고침 토큰 최대 기간 |MaxAgeSingleFactor |새로 고침 토큰(모든 사용자) |Until-revoked |10분 |Until-revoked<sup>1</sup> |
 | 다단계 새로 고침 토큰 최대 기간 |MaxAgeMultiFactor |새로 고침 토큰(모든 사용자) |Until-revoked |10분 |Until-revoked<sup>1</sup> |
 | 단일 단계 세션 토큰 최대 기간 |MaxAgeSessionSingleFactor<sup>2</sup> |세션 토큰(영구 및 비영구) |Until-revoked |10분 |Until-revoked<sup>1</sup> |
@@ -85,7 +90,7 @@ Azure AD는 두 종류의 SSO 세션 토큰을 사용합니다. 하나는 영구
 * <sup>3</sup>**MaxAgeSessionMultiFactor**가 설정되지 않은 경우 이 값은 **MaxAgeMultiFactor** 값을 사용합니다. 두 매개 변수 모두 설정되지 않은 경우에는 이 속성에 기본값(until-revoked)이 사용됩니다.
 
 ### <a name="exceptions"></a>예외
-| 속성 | 영향 | 기본값 |
+| 자산 | 영향 | 기본값 |
 | --- | --- | --- |
 | 새로 고침 토큰 최대 기간(해지 정보가 부족한 페더레이션된 사용자에 대해 발급됨<sup>1</sup>) |새로 고침 토큰(해지 정보가 부족한 페더레이션된 사용자에 대해 발급됨<sup>1</sup>) |12시간 |
 | 새로 고침 토큰 최대 비활성 시간(비밀 클라이언트에 대해 발급됨) |새로 고침 토큰(비밀 클라이언트에 대해 발급됨) |90일 |
@@ -104,6 +109,8 @@ Azure AD는 두 종류의 SSO 세션 토큰을 사용합니다. 하나는 영구
 응용 프로그램 개체와 서비스 주체 간의 관계에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 및 서비스 주체 개체](active-directory-application-objects.md)를 참조하세요.
 
 토큰의 유효성은 토큰이 사용되는 시점에 평가됩니다. 액세스하는 응용 프로그램에 대한 우선 순위가 가장 높은 정책이 적용됩니다.
+
+여기에 사용되는 시간 범위는 C# [TimeSpan](https://msdn.microsoft.com/library/system.timespan) 개체 - D.HH:MM:SS에 따라 서식이 지정됩니다.  따라서 80일 및 30분은 `80.00:30:00`입니다.  앞에 오는 D는 0인 경우 삭제할 수 있으므로 90분은 `00:90:00`입니다.  
 
 > [!NOTE]
 > 다음은 예제 시나리오입니다.
@@ -272,7 +279,7 @@ Azure AD는 두 종류의 SSO 세션 토큰을 사용합니다. 하나는 영구
 
 2.  서비스 주체에게 정책을 할당합니다. 서비스 주체의 **ObjectId**도 가져와야 합니다. 
 
-    1.  조직의 모든 서비스 주체를 보려면 [Microsoft Graph](https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#serviceprincipal-entity)를 쿼리하면 됩니다. 또는 [Azure AD Graph Explorer](https://graphexplorer.cloudapp.net/)에서 Azure AD 계정으로 로그인합니다.
+    1.  조직의 모든 서비스 주체를 보려면 [Microsoft Graph](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/serviceprincipal#properties) 또는 [Azure AD Graph](https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#serviceprincipal-entity)를 쿼리하면 됩니다. 또한 Azure AD 계정을 사용하여 [Azure AD Graph Explorer](https://graphexplorer.cloudapp.net/) 및 [Microsoft Graph Explorer](https://developer.microsoft.com/graph/graph-explorer)에서 테스트할 수 있습니다.
 
     2.  서비스 주체의 **ObjectId**가 있으면 다음 명령을 실행합니다.
 
@@ -328,7 +335,7 @@ Azure AD는 두 종류의 SSO 세션 토큰을 사용합니다. 하나는 영구
 
     이제 조직 전체에 적용되는 정책이 생겼습니다. 특정 서비스 주체에 대해 이 30일 정책을 유지하지만 조직 기본 정책을 "until-revoked"의 상한으로 변경하고 싶은 경우가 있습니다.
 
-    1.  조직의 모든 서비스 주체를 보려면 [Microsoft Graph](https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#serviceprincipal-entity)를 쿼리하면 됩니다. 또는 [Azure AD Graph Explorer](https://graphexplorer.cloudapp.net/)에서 Azure AD 계정을 사용하여 로그인합니다.
+    1.  조직의 모든 서비스 주체를 보려면 [Microsoft Graph](https://developer.microsoft.com/graph/docs/api-reference/beta/resources/serviceprincipal#properties) 또는 [Azure AD Graph](https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#serviceprincipal-entity)를 쿼리하면 됩니다. 또한 Azure AD 계정을 사용하여 [Azure AD Graph Explorer](https://graphexplorer.cloudapp.net/) 및 [Microsoft Graph Explorer](https://developer.microsoft.com/graph/graph-explorer)에서 테스트할 수 있습니다.
 
     2.  서비스 주체의 **ObjectId**가 있으면 다음 명령을 실행합니다.
 
@@ -383,7 +390,7 @@ Get-AzureADPolicy
 
 | 매개 변수 | 설명 | 예 |
 | --- | --- | --- |
-| <code>&#8209;Id</code>[선택 사항] |원하는 정책의 **ObjectId(ID)**입니다. |`-Id <ObjectId of Policy>` |
+| <code>&#8209;Id</code>[선택 사항] |원하는 정책의 **ObjectId(ID)** 입니다. |`-Id <ObjectId of Policy>` |
 
 </br></br>
 
@@ -396,7 +403,7 @@ Get-AzureADPolicyAppliedObject -Id <ObjectId of Policy>
 
 | 매개 변수 | 설명 | 예 |
 | --- | --- | --- |
-| <code>&#8209;Id</code> |원하는 정책의 **ObjectId(ID)**입니다. |`-Id <ObjectId of Policy>` |
+| <code>&#8209;Id</code> |원하는 정책의 **ObjectId(ID)** 입니다. |`-Id <ObjectId of Policy>` |
 
 </br></br>
 
@@ -409,7 +416,7 @@ Set-AzureADPolicy -Id <ObjectId of Policy> -DisplayName <string>
 
 | 매개 변수 | 설명 | 예 |
 | --- | --- | --- |
-| <code>&#8209;Id</code> |원하는 정책의 **ObjectId(ID)**입니다. |`-Id <ObjectId of Policy>` |
+| <code>&#8209;Id</code> |원하는 정책의 **ObjectId(ID)** 입니다. |`-Id <ObjectId of Policy>` |
 | <code>&#8209;DisplayName</code> |정책 이름의 문자열입니다. |`-DisplayName "MyTokenPolicy"` |
 | <code>&#8209;Definition</code>[선택 사항] |정책의 모든 규칙을 포함하는 문자열로 변환된 JSON 배열입니다. |`-Definition @('{"TokenLifetimePolicy":{"Version":1,"MaxInactiveTime":"20:00:00"}}')` |
 | <code>&#8209;IsOrganizationDefault</code>[선택 사항] |true이면 정책을 조직의 기본 정책으로 설정하고 false이면 아무 작업도 수행하지 않습니다. |`-IsOrganizationDefault $true` |
@@ -427,7 +434,7 @@ Set-AzureADPolicy -Id <ObjectId of Policy> -DisplayName <string>
 
 | 매개 변수 | 설명 | 예 |
 | --- | --- | --- |
-| <code>&#8209;Id</code> |원하는 정책의 **ObjectId(ID)**입니다. | `-Id <ObjectId of Policy>` |
+| <code>&#8209;Id</code> |원하는 정책의 **ObjectId(ID)** 입니다. | `-Id <ObjectId of Policy>` |
 
 </br></br>
 
@@ -443,7 +450,7 @@ Add-AzureADApplicationPolicy -Id <ObjectId of Application> -RefObjectId <ObjectI
 
 | 매개 변수 | 설명 | 예 |
 | --- | --- | --- |
-| <code>&#8209;Id</code> |응용 프로그램의 **ObjectId(ID)**입니다. | `-Id <ObjectId of Application>` |
+| <code>&#8209;Id</code> |응용 프로그램의 **ObjectId(ID)** 입니다. | `-Id <ObjectId of Application>` |
 | <code>&#8209;RefObjectId</code> |정책의 **ObjectId**입니다. | `-RefObjectId <ObjectId of Policy>` |
 
 </br></br>
@@ -457,7 +464,7 @@ Get-AzureADApplicationPolicy -Id <ObjectId of Application>
 
 | 매개 변수 | 설명 | 예 |
 | --- | --- | --- |
-| <code>&#8209;Id</code> |응용 프로그램의 **ObjectId(ID)**입니다. | `-Id <ObjectId of Application>` |
+| <code>&#8209;Id</code> |응용 프로그램의 **ObjectId(ID)** 입니다. | `-Id <ObjectId of Application>` |
 
 </br></br>
 
@@ -470,7 +477,7 @@ Remove-AzureADApplicationPolicy -Id <ObjectId of Application> -PolicyId <ObjectI
 
 | 매개 변수 | 설명 | 예 |
 | --- | --- | --- |
-| <code>&#8209;Id</code> |응용 프로그램의 **ObjectId(ID)**입니다. | `-Id <ObjectId of Application>` |
+| <code>&#8209;Id</code> |응용 프로그램의 **ObjectId(ID)** 입니다. | `-Id <ObjectId of Application>` |
 | <code>&#8209;PolicyId</code> |정책의 **ObjectId**입니다. | `-PolicyId <ObjectId of Policy>` |
 
 </br></br>
@@ -487,7 +494,7 @@ Add-AzureADServicePrincipalPolicy -Id <ObjectId of ServicePrincipal> -RefObjectI
 
 | 매개 변수 | 설명 | 예 |
 | --- | --- | --- |
-| <code>&#8209;Id</code> |응용 프로그램의 **ObjectId(ID)**입니다. | `-Id <ObjectId of Application>` |
+| <code>&#8209;Id</code> |응용 프로그램의 **ObjectId(ID)** 입니다. | `-Id <ObjectId of Application>` |
 | <code>&#8209;RefObjectId</code> |정책의 **ObjectId**입니다. | `-RefObjectId <ObjectId of Policy>` |
 
 </br></br>
@@ -501,7 +508,7 @@ Get-AzureADServicePrincipalPolicy -Id <ObjectId of ServicePrincipal>
 
 | 매개 변수 | 설명 | 예 |
 | --- | --- | --- |
-| <code>&#8209;Id</code> |응용 프로그램의 **ObjectId(ID)**입니다. | `-Id <ObjectId of Application>` |
+| <code>&#8209;Id</code> |응용 프로그램의 **ObjectId(ID)** 입니다. | `-Id <ObjectId of Application>` |
 
 </br></br>
 
@@ -514,6 +521,5 @@ Remove-AzureADServicePrincipalPolicy -Id <ObjectId of ServicePrincipal>  -Policy
 
 | 매개 변수 | 설명 | 예 |
 | --- | --- | --- |
-| <code>&#8209;Id</code> |응용 프로그램의 **ObjectId(ID)**입니다. | `-Id <ObjectId of Application>` |
+| <code>&#8209;Id</code> |응용 프로그램의 **ObjectId(ID)** 입니다. | `-Id <ObjectId of Application>` |
 | <code>&#8209;PolicyId</code> |정책의 **ObjectId**입니다. | `-PolicyId <ObjectId of Policy>` |
-

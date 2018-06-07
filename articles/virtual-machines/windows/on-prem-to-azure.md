@@ -1,33 +1,30 @@
 ---
-title: "AWS 및 기타 플랫폼에서 Azure의 Managed Disks로 마이그레이션 | Microsoft Docs"
-description: "AWS 또는 기타 가상화 플랫폼과 같은 다른 클라우드에서 업로드한 VHD를 사용하여 Azure에서 VM을 만들고 Azure Managed Disks를 활용합니다."
+title: AWS 및 기타 플랫폼에서 Azure의 Managed Disks로 마이그레이션 | Microsoft Docs
+description: AWS 또는 기타 가상화 플랫폼과 같은 다른 클라우드에서 업로드한 VHD를 사용하여 Azure에서 VM을 만들고 Azure Managed Disks를 활용합니다.
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
 ms.devlang: na
 ms.topic: article
-ms.date: 02/07/2017
+ms.date: 10/07/2017
 ms.author: cynthn
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 07584294e4ae592a026c0d5890686eaf0b99431f
-ms.openlocfilehash: 24ee84bdd1c795d6354bb5cb8fe397b078e7c51f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/02/2017
-
-
+ms.openlocfilehash: 0440eccbdf76fc58fadf46de2508d362c0de6cc3
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-
 # <a name="migrate-from-amazon-web-services-aws-and-other-platforms-to-managed-disks-in-azure"></a>AWS(Amazon Web Services) 및 기타 플랫폼에서 Azure의 Managed Disks로 마이그레이션
 
-AWS 또는 온-프레미스 가상화 솔루션에서 Azure로 VHD 파일을 업로드하여 Managed Disks를 활용하는 VM을 만들 수 있습니다. Azure Managed Disks를 사용하면 Azure IaaS VM의 저장소 계정을 관리할 필요가 없습니다. 필요한 디스크의 유형(프리미엄 또는 표준)과 크기만 지정하면 Azure가 알아서 디스크를 만들고 관리합니다. 
+AWS 또는 온-프레미스 가상화 솔루션에서 Azure로 VHD 파일을 업로드하여 Managed Disks를 활용하는 VM을 만들 수 있습니다. Azure Managed Disks를 사용하면 Azure IaaS VM의 저장소 계정을 관리할 필요가 없습니다. 필요한 디스크의 유형(프리미엄 또는 표준)과 크기를 지정해야 합니다. 그러면 Azure가 알아서 디스크를 만들고 관리해줍니다. 
 
 일반화된 VHD 및 특수한 VHD를 모두 업로드할 수 있습니다. 
 - **일반화된 VHD** - Sysprep을 사용하여 제거된 모든 개인 계정 정보가 포함되어 있습니다. 
@@ -41,7 +38,7 @@ AWS 또는 온-프레미스 가상화 솔루션에서 Azure로 VHD 파일을 업
 
 | 시나리오                                                                                                                         | 문서화                                                                                                                       |
 |----------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
-| 기존 AWS EC2 인스턴스를 Azure Managed Disks에 마이그레이션하려고 합니다.                                     | [AWS(Amazon Web Services)에서 Azure로 VM 이동](aws-to-azure.md)                           |
+| 기존 AWS EC2 인스턴스를 관리되는 디스크를 사용하여 Azure VM에 마이그레이션하려고 합니다.                              | [AWS(Amazon Web Services)에서 Azure로 VM 이동](aws-to-azure.md)                           |
 | 사용하려는 다른 가상화 플랫폼의 VM이 있어서 여러 Azure VM을 만들기 위해 이미지로 사용합니다. | [일반화된 VHD를 업로드하고 사용하여 Azure에서 새 VM 만들기](upload-generalized-managed.md) |
 | 고유하게 사용자 지정된 VM을 Azure에서 다시 만들려고 합니다.                                                      | [Azure에 전문화된 VHD 업로드 및 새 VM 만들기](create-vm-specialized.md)         |
 
@@ -50,14 +47,15 @@ AWS 또는 온-프레미스 가상화 솔루션에서 Azure로 VHD 파일을 업
 
 Azure Managed Disks는 저장소 계정을 관리하지 않아도 되기 때문에 VM 관리를 간소화합니다. Managed Disks는 가용성 집합에서 VM의 안정성을 향상시킨다는 장점도 있습니다. 가용성 집합에서 여러 VM의 디스크는 단일 실패 지점을 방지하기 위해 충분히 서로 격리되어야 합니다. 서로 다른 저장소 배율 단위(스탬프)인 자동 가용성 집합에서 다른 VM의 디스크를 자동으로 배치합니다. 그러면 하드웨어 및 소프트웨어 오류로 인해 발생한 단일 저장소 배율 단위 오류의 영향을 제한합니다. 필요에 따라 두 가지 유형의 저장소 옵션 중에 하나를 선택할 수 있습니다. 
  
-- [프리미엄 Managed Disks](../../storage/storage-premium-storage.md)는 I/O 집약적인 워크로드를 실행하는 가상 컴퓨터에 대한 고성능의 짧은 대기 시간 디스크 지원을 제공하는 반도체 드라이브(SSD) 기반 저장소 미디어입니다. 프리미엄 Managed Disks로 마이그레이션하여 이러한 디스크의 속도와 성능 혜택을 활용할 수 있습니다.  
+- [프리미엄 Managed Disks](premium-storage.md)는 I/O 집약적인 워크로드를 실행하는 가상 머신에 대한 고성능의 짧은 대기 시간 디스크 지원을 제공하는 반도체 드라이브(SSD) 기반 저장소 미디어입니다. 프리미엄 Managed Disks로 마이그레이션하여 이러한 디스크의 속도와 성능 혜택을 활용할 수 있습니다.  
 
-- [표준 Managed Disks](../../storage/storage-standard-storage.md)는 하드 디스크 드라이브(HDD) 기반 저장소 미디어이며 개발/테스트를 비롯하여 성능 변화에 덜 민감하고 자주 발생되지 않는 액세스 워크로드에 가장 적합합니다.  
+- [표준 Managed Disks](standard-storage.md)는 하드 디스크 드라이브(HDD) 기반 저장소 미디어이며 개발/테스트를 비롯하여 성능 변화에 덜 민감하고 자주 발생되지 않는 액세스 워크로드에 가장 적합합니다.  
 
 ## <a name="plan-for-the-migration-to-managed-disks"></a>Managed Disks로 마이그레이션 계획 수립
 
 이 섹션을 통해 VM 및 디스크 유형에 대한 최선의 결정을 내릴 수 있습니다.
 
+관리되지 않는 디스크에서 관리 디스크로 마이그레이션하려는 경우 [Virtual Machine Contributor](../../role-based-access-control/built-in-roles.md#virtual-machine-contributor) 역할의 사용자는 VM 크기를 변경할 수 없습니다(사전 변환이 가능하기 때문). 이는 관리 디스크가 있는 VM의 경우 사용자에게 OS 디스크에 대한 Microsoft.Compute/disks/write 권한이 있어야 하기 때문입니다.
 
 ### <a name="location"></a>위치
 
@@ -65,8 +63,8 @@ Azure Managed Disks를 사용할 수 있는 위치를 선택합니다. 프리미
 
 ### <a name="vm-sizes"></a>VM 크기
 
-프리미엄 Managed Disks를 마이그레이션하는 경우 VM 크기를 VM이 위치한 지역에서 제공하는 Premium Storage 지원 가능 크기로 업데이트해야 합니다. Premium Storage를 사용할 수 있는 VM 크기를 검토합니다. Azure VM 크기 사양은 [가상 컴퓨터의 크기](sizes.md)에 나열되어 있습니다.
-프리미엄 저장소와 작동하는 가상 컴퓨터의 성능 특징을 검토하고 워크로드에 가장 적합한 VM 크기를 선택합니다. VM에서 디스크 트래픽을 제어하기에 충분한 대역폭을 사용할 수 있는지 확인합니다.
+프리미엄 Managed Disks를 마이그레이션하는 경우 VM 크기를 VM이 위치한 지역에서 제공하는 Premium Storage 지원 가능 크기로 업데이트해야 합니다. Premium Storage를 사용할 수 있는 VM 크기를 검토합니다. Azure VM 크기 사양은 [가상 머신의 크기](sizes.md)에 나열되어 있습니다.
+Premium Storage와 작동하는 가상 머신의 성능 특징을 검토하고 워크로드에 가장 적합한 VM 크기를 선택합니다. VM에서 디스크 트래픽을 제어하기에 충분한 대역폭을 사용할 수 있는지 확인합니다.
 
 ### <a name="disk-sizes"></a>디스크 크기
 
@@ -76,8 +74,8 @@ VM에서 사용할 수 있는 프리미엄 Managed Disks에는 세 종류가 있
 
 | 프리미엄 디스크 유형  | P10               | P20               | P30               |
 |---------------------|-------------------|-------------------|-------------------|
-| 디스크 크기           | 128GB            | 512GB            | 1024GB(1TB)    |
-| 디스크당 IOPS       | 500               | 2,300              | 5000              |
+| 디스크 크기           | 128GB            | 512 GB            | 1024GB(1TB)    |
+| 디스크당 IOPS       | 500               | 2,300              | 5,000              |
 | 디스크당 처리량 | 초당 100MB | 초당 150MB | 초당 200MB |
 
 **표준 Managed Disks**
@@ -86,7 +84,7 @@ VM에서 사용할 수 있는 표준 Managed Disks에는 다섯 가지 종류가
 
 | 표준 디스크 유형  | S4               | S6               | S10              | S20              | S30              |
 |---------------------|------------------|------------------|------------------|------------------|------------------|
-| 디스크 크기           | 30GB            | 64GB            | 128GB           | 512GB           | 1024GB(1TB)   |
+| 디스크 크기           | 30GB            | 64GB            | 128GB           | 512 GB           | 1024GB(1TB)   |
 | 디스크당 IOPS       | 500              | 500              | 500              | 500              | 500              |
 | 디스크당 처리량 | 60 MB per second | 60 MB per second | 60 MB per second | 60 MB per second | 60 MB per second |
 
@@ -98,10 +96,9 @@ VM에서 사용할 수 있는 표준 Managed Disks에는 다섯 가지 종류가
 
 ### <a name="pricing"></a>가격
 
-[Managed Disks에 대한 가격 책정](https://azure.microsoft.com/en-us/pricing/details/managed-disks/)을 검토합니다. 프리미엄 Managed Disks의 가격 책정은 관리되지 않는 프리미엄 디스크와 같습니다. 하지만 표준 Managed Disks의 가격 책정은 관리되지 않는 표준 디스크와 다릅니다.
+[Managed Disks에 대한 가격 책정](https://azure.microsoft.com/pricing/details/managed-disks/)을 검토합니다. 프리미엄 Managed Disks의 가격 책정은 관리되지 않는 프리미엄 디스크와 같습니다. 하지만 표준 Managed Disks의 가격 책정은 관리되지 않는 표준 디스크와 다릅니다.
 
 
 ## <a name="next-steps"></a>다음 단계
 
 - Azure에 VHD를 업로드하기 전에 [Azure에 업로드할 Windows VHD 또는 VHDX 준비](prepare-for-upload-vhd-image.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 수행해야 합니다.
-

@@ -1,30 +1,23 @@
 ---
-title: "Datadog을 사용하여 Azure Kubernetes 클러스터 모니터링 | Microsoft Docs"
-description: "Datadog을 사용하여 Azure Container Service에서 Kubernetes 클러스터 모니터링"
+title: Datadog을 사용하여 Azure Kubernetes 클러스터 모니터링
+description: Datadog을 사용하여 Azure Container Service에서 Kubernetes 클러스터 모니터링
 services: container-service
-documentationcenter: 
 author: bburns
-manager: timlt
-editor: 
-tags: acs, azure-container-service, kubernetes
-keywords: 
-ms.assetid: what-goes-here?
+manager: jeconnoc
 ms.service: container-service
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
 ms.date: 12/09/2016
 ms.author: bburns
-translationtype: Human Translation
-ms.sourcegitcommit: f7377b3d0c0b89d7e196a31890173575688687cf
-ms.openlocfilehash: 901cbf5093c6a547f5dffa7ed6d71fe67caaadb9
-ms.lasthandoff: 03/02/2017
-
-
+ms.custom: mvc
+ms.openlocfilehash: 0a3f0baa4998dbc594023935575d659f7d45bbb9
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-
 # <a name="monitor-an-azure-container-service-cluster-with-datadog"></a>Datadog을 사용하여 Azure Container Service 클러스터 모니터링
+
+[!INCLUDE [aks-preview-redirect.md](../../../includes/aks-preview-redirect.md)]
 
 ## <a name="prerequisites"></a>필수 조건
 이 연습에서는 [Azure Container Service를 사용하여 Kubernetes 클러스터를 만들었다고](container-service-kubernetes-walkthrough.md) 가정합니다.
@@ -64,4 +57,3 @@ Datadog에 로그인한 후 [Datadog 지침](https://app.datadoghq.com/account/s
 
 ## <a name="conclusion"></a>결론
 이것으로 끝입니다. 에이전트가 작동 및 실행되면 몇 분 내에 콘솔에 데이터가 표시됩니다. 통합 [kubernetes 대시보드](https://app.datadoghq.com/screen/integration/kubernetes)를 방문하여 클러스터에 대한 요약을 볼 수 있습니다.
-

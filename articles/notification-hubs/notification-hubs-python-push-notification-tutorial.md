@@ -1,29 +1,29 @@
 ---
-title: "Python과 함께 알림 허브를 사용하는 방법"
-description: "Python 백 엔드에서 Azure 알림 허브를 사용하는 방법에 대해 알아봅니다."
+title: Python과 함께 Notification Hubs를 사용하는 방법
+description: Python 백 엔드에서 Azure Notification Hubs를 사용하는 방법에 대해 알아봅니다.
 services: notification-hubs
-documentationcenter: 
-author: ysxu
-manager: erikre
-editor: 
+documentationcenter: ''
+author: dimazaid
+manager: kpiteira
+editor: spelluru
 ms.assetid: 5640dd4a-a91e-4aa0-a833-93615bde49b4
 ms.service: notification-hubs
 ms.workload: mobile
 ms.tgt_pltfrm: python
 ms.devlang: php
 ms.topic: article
-ms.date: 06/29/2016
-ms.author: yuaxu
-translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: 9ceedb9940759427fc8cec74a1307e42472563a6
-
-
+ms.date: 04/14/2018
+ms.author: dimazaid
+ms.openlocfilehash: 32953bacb8fdb135d5f3e0e9324218d2a71b0818
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
-# <a name="how-to-use-notification-hubs-from-python"></a>Python에서 알림 허브를 사용하는 방법
+# <a name="how-to-use-notification-hubs-from-python"></a>Python에서 Notification Hubs를 사용하는 방법
 [!INCLUDE [notification-hubs-backend-how-to-selector](../../includes/notification-hubs-backend-how-to-selector.md)]
 
-MSDN [항목 알림 허브 REST API](http://msdn.microsoft.com/library/dn223264.aspx)에 설명된 대로 알림 허브 REST 인터페이스를 사용하여 Java/PHP/Python/Ruby 백 엔드에서 모든 알림 허브 기능에 액세스할 수 있습니다.
+MSDN [항목 Notification Hubs REST API](http://msdn.microsoft.com/library/dn223264.aspx)에 설명된 대로 Notification Hubs REST 인터페이스를 사용하여 Java/PHP/Python/Ruby 백 엔드에서 모든 Notification Hubs 기능에 액세스할 수 있습니다.
 
 > [!NOTE]
 > 이는 Python에서 알림 보내기를 구현하기 위한 샘플 참조 구현이며 공식적으로 지원되는 알림 허브 Python SDK가 아닙니다.
@@ -32,9 +32,9 @@ MSDN [항목 알림 허브 REST API](http://msdn.microsoft.com/library/dn223264.
 > 
 > 
 
-이 항목에서는 다음 방법을 보여 줍니다.
+이 자습서는 다음 방법을 보여줍니다.
 
-* Python에서 알림 허브 기능에 대한 REST 클라이언트를 빌드하는 방법
+* Python에서 Notification Hubs 기능에 대한 REST 클라이언트를 빌드하는 방법
 * Python 인터페이스를 사용하여 알림 허브 REST API에 알림을 보냅니다. 
 * 디버그/교육 용도로 HTTP REST 요청/응답의 덤프를 가져옵니다. 
 
@@ -46,7 +46,7 @@ MSDN [항목 알림 허브 REST API](http://msdn.microsoft.com/library/dn223264.
 > 
 
 ## <a name="client-interface"></a>클라이언트 인터페이스
-기본 클라이언트 인터페이스에서는 [.NET 알림 허브 SDK](http://msdn.microsoft.com/library/jj933431.aspx)에서 제공되는 것과 같은 메서드를 제공할 수 있습니다. 따라서 현재 이 사이트에서 사용 가능하며 인터넷 커뮤니티에서 제공한 모든 자습서 및 샘플을 직접 변환할 수 있습니다.
+기본 클라이언트 인터페이스에서는 [.NET Notification Hubs SDK](http://msdn.microsoft.com/library/jj933431.aspx)에서 제공되는 것과 같은 메서드를 제공할 수 있습니다. 따라서 이 인터페이스를 통해 현재 이 사이트에서 사용 가능하며 인터넷 커뮤니티에서 제공한 모든 자습서 및 샘플을 직접 변환할 수 있습니다.
 
 [Python REST 래퍼 샘플]에서 사용 가능한 모든 코드를 찾을 수 있습니다.
 
@@ -61,9 +61,9 @@ Windows 알림 메시지를 보내려면
     hub.send_windows_notification(wns_payload)
 
 ## <a name="implementation"></a>구현
-아직 하지 않았으면 백 엔드를 구현해야 하는 [시작 자습서] 의 마지막 섹션까지 수행하세요.
+아직 수행하지 않았으면 백 엔드를 구현해야 하는 [시작 자습서]의 마지막 섹션까지 수행합니다.
 
-전체 REST 래퍼를 구현하는 방법에 대한 자세한 내용은 [MSDN](http://msdn.microsoft.com/library/dn530746.aspx)을 참조하세요. 이 섹션에서는 알림 허브 REST 끝점에 액세스하고 알림을 보내는 데 필요한 기본 단계의 Python 구현에 대해 설명합니다.
+전체 REST 래퍼를 구현하는 방법에 대한 자세한 내용은 [MSDN](http://msdn.microsoft.com/library/dn530746.aspx)을 참조하세요. 이 섹션에서는 Notification Hubs REST 엔드포인트에 액세스하고 알림을 보내는 데 필요한 기본 단계의 Python 구현에 대해 설명합니다.
 
 1. 연결 문자열 구문 분석
 2. 인증 토큰 생성
@@ -96,7 +96,7 @@ Windows 알림 메시지를 보내려면
 
 ### <a name="create-security-token"></a>보안 토큰 만들기
 보안 토큰 만들기에 대한 자세한 내용은 [여기](http://msdn.microsoft.com/library/dn495627.aspx)를 참조하세요.
-현재 요청의 URI 및 연결 문자열에서 추출된 자격 증명에 따라 토큰을 만들려면 **NotificationHub** 클래스에 다음 메서드를 추가해야 합니다.
+현재 요청의 URI 및 연결 문자열에서 추출된 자격 증명에 따라 토큰을 만들려면 **NotificationHub** 클래스에 다음 메서드를 추가합니다.
 
     @staticmethod
     def get_expiry():
@@ -145,11 +145,11 @@ Windows 알림 메시지를 보내려면
             # in W3C DTF, YYYY-MM-DDThh:mmTZD (for example, 1997-07-16T19:20+01:00).
             self.headers = None
 
-이 클래스는 기본 알림 본문(또는 템플릿 알림의 경우 속성 집합), 형식(기본 플랫폼 또는 템플릿)이 포함된 헤더 집합 및 플랫폼 특정 속성(예: Apple 만료 속성 및 WNS 헤더)에 대한 컨테이너입니다.
+이 클래스는 기본 알림 본문(또는 템플릿 알림의 속성 집합), 형식(기본 플랫폼 또는 템플릿)이 포함된 헤더 집합 및 플랫폼 특정 속성(예: Apple 만료 속성 및 WNS 헤더)에 대한 컨테이너입니다.
 
-모든 사용할 수 있는 옵션은 [알림 허브 REST API 설명서](http://msdn.microsoft.com/library/dn495827.aspx) 및 특정 알림 플랫폼의 형식을 참조하세요.
+모든 사용할 수 있는 옵션은 [Notification Hubs REST API 설명서](http://msdn.microsoft.com/library/dn495827.aspx) 및 특정 알림 플랫폼의 형식을 참조하세요.
 
-이제 이 클래스를 사용하여 **NotificationHub** 클래스 내부에서 알림 보내기 메서드를 쓸 수 있습니다.
+이제 이 클래스를 사용하여 **NotificationHub** 클래스 내부에서 알림 보내기 메서드를 작성합니다.
 
     def make_http_request(self, url, payload, headers):
         parsed_url = urllib.parse.urlparse(url)
@@ -257,19 +257,19 @@ Windows 알림 메시지를 보내려면
         nh = Notification("template", properties)
         self.send_notification(nh, tags)
 
-위의 메서드는 알림을 보내기 위한 올바른 본문과 헤더가 있는 알림 허브의 /messages 끝점으로 HTTP POST 요청을 보냅니다.
+이러한 메서드는 알림을 보내기 위한 올바른 본문과 헤더가 있는 알림 허브의 /messages 엔드포인트로 HTTP POST 요청을 보냅니다.
 
 ### <a name="using-debug-property-to-enable-detailed-logging"></a>디버그 속성을 통해 자세한 로깅 사용
-알림 허브를 초기화하는 동안 디버그 속성을 사용하면 HTTP 요청 및 응답 덤프에 대한 자세한 로깅 정보 및 자세한 알림 메시지 전송 결과가 기록됩니다. 최근에 알림 보내기 결과에 대한 자세한 정보를 반환하는 [Notification Hubs TestSend](http://msdn.microsoft.com/library/microsoft.servicebus.notifications.notificationhubclient.enabletestsend.aspx) 라는 속성을 추가했습니다. 이 속성을 사용하려면 다음을 사용하여 초기화합니다.
+알림 허브를 초기화하는 동안 디버그 속성을 사용하면 HTTP 요청 및 응답 덤프에 대한 자세한 로깅 정보 및 자세한 알림 메시지 전송 결과가 기록됩니다. [Notification Hubs TestSend 속성](http://msdn.microsoft.com/library/microsoft.servicebus.notifications.notificationhubclient.enabletestsend.aspx)은 알림 보내기 결과에 대한 자세한 정보를 반환합니다. 이 속성을 사용하려면 다음 코드를 사용하여 초기화합니다.
 
     hub = NotificationHub("myConnectionString", "myNotificationHubName", isDebug)
 
 그 결과, 알림 허브 전송 요청 HTTP URL에 "test" 쿼리 문자열이 추가됩니다. 
 
-## <a name="a-namecomplete-tutorialacomplete-the-tutorial"></a><a name="complete-tutorial"></a>자습서 완료
+## <a name="complete-tutorial"></a>자습서 완료
 이제 Python 백 엔드에서 알림을 보내 시작 자습서를 완료할 수 있습니다.
 
-알림 허브 클라이언트를 초기화합니다( [시작 자습서]에 설명된 대로 연결 문자열 및 허브 이름 대체).
+Notification Hubs 클라이언트를 초기화합니다( [시작 자습서]에 설명된 대로 연결 문자열 및 허브 이름 대체).
 
     hub = NotificationHub("myConnectionString", "myNotificationHubName")
 
@@ -322,14 +322,14 @@ Python 코드를 실행하면 대상 장치에 나타나는 알림이 생성됩�
 
 ## <a name="examples"></a>예제:
 ### <a name="enabling-debug-property"></a>디버그 속성 사용
-NotificationHub를 초기화하는 동안 디버그 플래그를 사용하도록 설정하면 자세한 HTTP 요청 및 응답 덤프뿐 아니라 요청 시 전달된 HTTP 헤더 및 알림 허브에서 수신된 HTTP 응답을 확인할 수 있는 다음과 같은 NotificationOutcome이 표시됩니다.        ![][1]
+NotificationHub를 초기화하는 동안 디버그 플래그를 사용하도록 설정하면 자세한 HTTP 요청 및 응답 덤프뿐 아니라 요청 시 전달된 HTTP 헤더 및 알림 허브에서 수신된 HTTP 응답을 확인할 수 있는 다음과 같은 NotificationOutcome이 표시됩니다. ![][1]
 
 예를 들어 메시지가 푸시 알림 서비스로 전송되면 
 
 * 자세한 알림 허브 결과가 표시됩니다. 
   
         <Outcome>The Notification was successfully sent to the Push Notification System</Outcome>
-* 푸시 알림의 대상을 찾을 수 없는 경우 등록에 불일치 태그가 있어서 알림을 전달할 등록을 찾을 수 없음을 나타내는 다음 메시지가 응답에 포함되기를 원할 것입니다.
+* 푸시 알림의 대상을 찾을 수 없는 경우 등록에 불일치 태그가 있어서 알림을 전달할 등록을 찾을 수 없음을 나타내는 다음 출력이 응답으로 표시되기를 원할 것입니다.
   
         '<NotificationOutcome xmlns="http://schemas.microsoft.com/netservices/2010/10/servicebus/connect" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><Success>0</Success><Failure>0</Failure><Results i:nil="true"/></NotificationOutcome>'
 
@@ -371,11 +371,11 @@ HTTP 요청에 추가되는 태그 HTTP 헤더를 확인합니다. 아래 예제
 ![][5]
 
 ## <a name="next-steps"></a>다음 단계
-이 항목에서는 알림 허브에 대한 단순한 Python REST 클라이언트를 만드는 방법을 알아보았습니다. 여기에서 다음을 할 수 있습니다.
+이 문서에서는 Notification Hubs에 대한 Python REST 클라이언트를 만드는 방법을 알아보았습니다. 여기에서 다음을 할 수 있습니다.
 
-* 위의 모든 코드가 포함된 전체 [Python REST 래퍼 샘플]을 다운로드합니다.
-*  [속보 자습서]
-*  [지역화 뉴스 자습서]
+* 이 문서의 모든 코드가 포함된 전체 [Python REST 래퍼 샘플]을 다운로드합니다.
+* [속보 자습서]
+* [지역화 뉴스 자습서]
 
 <!-- URLs -->
 [Python REST 래퍼 샘플]: https://github.com/Azure/azure-notificationhubs-samples/tree/master/notificationhubs-rest-python
@@ -389,10 +389,4 @@ HTTP 요청에 추가되는 태그 HTTP 헤더를 확인합니다. 아래 예제
 [3]: ./media/notification-hubs-python-backend-how-to/SendWithOneTag.png
 [4]: ./media/notification-hubs-python-backend-how-to/SendWithMultipleTags.png
 [5]: ./media/notification-hubs-python-backend-how-to/TemplatedNotification.png
-
-
-
-
-<!--HONumber=Nov16_HO3-->
-
 

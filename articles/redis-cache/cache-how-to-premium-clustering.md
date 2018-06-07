@@ -1,26 +1,24 @@
 ---
-title: "프리미엄 Azure Redis Cache에 Redis 클러스터링을 구성하는 방법 | Microsoft Docs"
-description: "프리미엄 계층 Azure Redis Cache 인스턴스에 대해 Redis 클러스터링을 만들고 관리하는 방법에 대해 알아봅니다."
+title: 프리미엄 Azure Redis Cache에 Redis 클러스터링을 구성하는 방법 | Microsoft Docs
+description: 프리미엄 계층 Azure Redis Cache 인스턴스에 대해 Redis 클러스터링을 만들고 관리하는 방법에 대해 알아봅니다.
 services: redis-cache
-documentationcenter: 
-author: steved0x
-manager: douge
-editor: 
+documentationcenter: ''
+author: wesmc7777
+manager: cfowler
+editor: ''
 ms.assetid: 62208eec-52ae-4713-b077-62659fd844ab
 ms.service: cache
 ms.workload: tbd
 ms.tgt_pltfrm: cache-redis
 ms.devlang: na
 ms.topic: article
-ms.date: 07/05/2017
-ms.author: sdanie
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f6006d5e83ad74f386ca23fe52879bfbc9394c0f
-ms.openlocfilehash: 2fdf42c99395dd7a32ab68b0cf8d9504df3800ef
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/03/2017
-
-
+ms.date: 03/26/2018
+ms.author: wesmc
+ms.openlocfilehash: 4af6545058ab0031d7cd1b38618b6d80204f83b9
+ms.sourcegitcommit: d74657d1926467210454f58970c45b2fd3ca088d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/28/2018
 ---
 # <a name="how-to-configure-redis-clustering-for-a-premium-azure-redis-cache"></a>프리미엄 Azure Redis Cache에 Redis 클러스터링을 구성하는 방법
 Azure Redis Cache에는 클러스터링, 지속성, 가상 네트워크 지원 등의 프리미엄 계층 기능을 포함하여 캐시 크기 및 기능을 유연하게 선택할 수 있는 다양한 캐시 제품이 있습니다. 이 문서에서는 프리미엄 Azure Redis Cache에서 클러스터링을 구성하는 방법을 설명합니다.
@@ -35,7 +33,7 @@ Azure Redis Cache는 [Redis에서 구현된 형태의](http://redis.io/topics/cl
 * 처리량 증대: 분할된 데이터베이스(노드) 수를 늘림에 따라 처리량이 선형으로 늘어납니다. 
 * 메모리 크기 증대: 분할된 데이터베이스(노드) 수를 늘림에 따라 선형으로 늘어납니다.  
 
-프리미엄 캐시에서의 크기, 처리량 및 대역폭에 대한 자세한 내용은 [어떤 Redis Cache 제품 및 크기를 사용해야 하나요?](cache-faq.md#what-redis-cache-offering-and-size-should-i-use)를 참조하세요.
+클러스터링은 클러스터형 캐시에 사용할 수 있는 연결 수를 늘리지 않습니다. 프리미엄 캐시에서의 크기, 처리량 및 대역폭에 대한 자세한 내용은 [어떤 Redis Cache 제품 및 크기를 사용해야 하나요?](cache-faq.md#what-redis-cache-offering-and-size-should-i-use)를 참조하세요.
 
 Azure에서 Redis 클러스터는 각각의 분할된 데이터베이스가 복제본이 있는 주/복제본 쌍을 갖는 주/복제본 모델 형태로 제공됩니다. 여기서는 Azure Redis Cache 서비스가 복제본을 관리합니다. 
 
@@ -77,6 +75,8 @@ StackExchange.Redis 클라이언트를 통해 클러스터링으로 작업하는
 ![Redis 클러스터 크기][redis-cache-redis-cluster-size]
 
 클러스터 크기를 변경하려면 슬라이더를 사용하거나 **분할된 데이터베이스 수** 텍스트 상자에 1에서 10 사이의 수를 입력하고 **확인**을 클릭하여 저장합니다.
+
+클러스터 크기를 늘리면 최대 처리량 및 캐시 크기가 증가합니다. 클러스터 크기를 늘리더라도 클라이언트가 사용할 수 있는 최대 연결 수는 증가하지는 않습니다.
 
 > [!NOTE]
 > 클러스터를 확장하면 비용이 많이 드는 [MIGRATE](https://redis.io/commands/migrate) 명령이 실행되므로 영향을 최소화하도록 사용량이 많지 않은 시간 동안에 이 작업을 실행하는 것이 좋습니다. 마이그레이션 프로세스 중에 서버 부하에 스파이크가 나타납니다. 클러스터 확장은 장기 실행 프로세스이며, 소요 시간은 키 수 및 해당 키와 관련된 값의 크기에 따라 달라집니다.
@@ -173,7 +173,6 @@ StackExchange.Redis를 사용하고 있으며 클러스터링을 사용할 때 `
 [redis-cache-clustering-selected]: ./media/cache-how-to-premium-clustering/redis-cache-clustering-selected.png
 
 [redis-cache-redis-cluster-size]: ./media/cache-how-to-premium-clustering/redis-cache-redis-cluster-size.png
-
 
 
 

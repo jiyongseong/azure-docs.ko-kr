@@ -1,11 +1,11 @@
 ---
-title: "사용할 Single Sign-On 방법을 결정하는 방법 | Microsoft Docs"
-description: "Azure AD에서 지원되는 Single Sign-On 모드 및 관심 있는 응용 프로그램에 대해 사용할 모드를 선택하는 방법을 이해합니다."
+title: 사용할 Single Sign-On 방법을 결정하는 방법 | Microsoft Docs
+description: Azure AD에서 지원되는 Single Sign-On 모드 및 관심 있는 응용 프로그램에 대해 사용할 모드를 선택하는 방법을 이해합니다.
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: ajamess
-manager: femila
-ms.assetid: 
+manager: mtillman
+ms.assetid: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
@@ -13,27 +13,26 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: cc9e81de9bf8a3312da834502fa6ca25e2b5834a
-ms.openlocfilehash: 6aba9206ab0634e9379d63520ad9e2d0256b7e94
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/11/2017
-
+ms.openlocfilehash: 52f4045ebb30bf32989e9f7b946fd03d468a9de2
+ms.sourcegitcommit: 6116082991b98c8ee7a3ab0927cf588c3972eeaa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2018
+ms.locfileid: "34070671"
 ---
-
 # <a name="how-to-determine-what-single-sign-on-method-to-use"></a>사용할 Single Sign-On 방법을 결정하는 방법
 
 이 문서에서는 Azure AD에서 지원되는 Single Sign-On 모드 및 관심 있는 응용 프로그램에 대해 사용할 모드를 선택하는 방법을 이해하는 데 도움을 줍니다.
 
 ## <a name="single-sign-on-and-provisioning-modes-supported-by-specific-application-types"></a>특정 응용 프로그램 형식에서 지원되는 Single Sign-On 및 프로비전 모드
 
-다음 표는 위의 각 응용 프로그램 형식에서 지원하는 서로 다른 Single Sign-On 및 프로비전 모드를 설명합니다. 이 표를 사용하여 특정 목표를 지원하기 위해 추가해야 하는 응용 프로그램을 이해할 수 있습니다.
+다음 표는 이전 각 응용 프로그램 형식에서 지원하는 서로 다른 Single Sign-On 및 프로비전 모드를 설명합니다. 이 표를 사용하여 특정 목표를 지원하기 위해 추가해야 하는 응용 프로그램을 이해할 수 있습니다.
 
   ![앱 형식 표](./media/application-tables/table1.png)
 
 ## <a name="how-to-choose-a-single-sign-on-mode"></a>Single Sign-On 모드를 선택하는 방법
 
-Azure AD 응용 프로그램에 대해 지원되는 **Single Sign-On** 모드는 아래에 나열되어 있습니다.
+다음은 Azure AD 응용 프로그램에 대해 지원되는 **Single Sign-On** 모드입니다.
 
 -   **Azure AD Single Sign-On 사용 안 함** – 이 응용 프로그램을 Single Sign-On을 사용하여 Azure AD와 통합할 준비가 되지 않았거나 단순히 테스트하는 경우 Azure AD Single Sign-On 사용 안 함 **Single Sign-On 모드** 선택
 
@@ -49,7 +48,7 @@ Azure AD 응용 프로그램에 대해 지원되는 **Single Sign-On** 모드는
 
 ## <a name="single-sign-on-modes-for-custom-developed-applications"></a>사용자 지정 개발된 응용 프로그램에 대한 Single Sign-On 모드
 
-[사용자 지정 개발된 응용 프로그램](#_Custom-Developed_Applications) 환경을 통해 사용자 지정 개발한 응용 프로그램은 위에 나열되지 않은 추가 Single Sign-On 모드도 지원합니다. 내용은 다음과 같습니다.
+[사용자 지정 개발된 응용 프로그램](#_Custom-Developed_Applications) 환경을 통해 사용자 지정 개발한 응용 프로그램은 이전에 나열되지 않은 추가 Single Sign-On 모드도 지원하며, 다음을 포함합니다.
 
 -   [OAuth 2.0](https://docs.microsoft.com/azure/active-directory/develop/active-directory-protocols-oauth-code) 기반 로그온
 
@@ -67,7 +66,7 @@ Azure AD 응용 프로그램에 대해 지원되는 **Single Sign-On** 모드는
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 또는 **공동 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -82,6 +81,5 @@ Azure AD 응용 프로그램에 대해 지원되는 **Single Sign-On** 모드는
 7.  응용 프로그램이 로드되면 응용 프로그램의 왼쪽 탐색 메뉴에서 **Single Sign-On**을 클릭합니다.
 
 ## <a name="next-steps"></a>다음 단계
-[응용 프로그램 프록시를 사용하여 앱에 Single Sign-On 제공](active-directory-application-proxy-sso-using-kcd.md)
-
+[응용 프로그램 프록시를 사용하여 앱에 Single Sign-On 제공](manage-apps/application-proxy-configure-single-sign-on-with-kcd.md)
 

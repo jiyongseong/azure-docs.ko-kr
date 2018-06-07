@@ -1,8 +1,8 @@
 ---
-title: "Azure Log Analytics 쿼리 언어 참고 자료 | Microsoft Docs"
-description: "이 문서는 이미 레거시 언어에 잘 알고 있는 경우에 Log Analytics에 대한 새로운 쿼리 언어로의 전환에 관한 지원을 제공합니다."
+title: Azure Log Analytics 쿼리 언어 참고 자료 | Microsoft Docs
+description: 이 문서는 이미 레거시 언어에 잘 알고 있는 경우에 Log Analytics에 대한 새로운 쿼리 언어로의 전환에 관한 지원을 제공합니다.
 services: operations-management-suite
-documentationcenter: 
+documentationcenter: ''
 author: bwren
 manager: carmonm
 editor: tysonn
@@ -11,22 +11,19 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 07/25/2017
+ms.date: 11/28/2017
 ms.author: bwren
+ms.openlocfilehash: 9c487ab33859ae453a0074ef0344f61de19c7b4d
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
 ms.translationtype: HT
-ms.sourcegitcommit: 137671152878e6e1ee5ba398dd5267feefc435b7
-ms.openlocfilehash: 281b6afc6aeaf65e87e1bd2820c35a14f7714aa1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
-
 # <a name="transitioning-to-azure-log-analytics-new-query-language"></a>Azure Log Analytics 새로운 쿼리 언어로 전환
+Log Analytics는 최근에 새로운 쿼리 언어를 구현했습니다.  이 문서는 이미 레거시 언어에 잘 알고 있고 약간의 도움이 필요한 사용자에게 Log Analytics에 대한 이 언어로 전환하기 위한 지원을 제공합니다.
 
-> [!NOTE]
-> [Azure Log Analytics 작업 영역을 새 로그 검색으로](log-analytics-log-search-upgrade.md) 업그레이드에서 새 Log Analytics 쿼리 언어에 대해 자세히 알아보고 작업 영역을 업그레이드하는 절차를 확인할 수 있습니다.
+## <a name="resources"></a>리소스
 
-이 문서는 이미 레거시 언어에 잘 알고 있는 경우에 Log Analytics에 대한 새로운 쿼리 언어로의 전환에 관한 지원을 제공합니다.
 
 ## <a name="language-converter"></a>언어 변환기
 
@@ -35,21 +32,26 @@ ms.lasthandoff: 07/28/2017
 ![언어 변환기](media/log-analytics-log-search-upgrade/language-converter.png)
 
 
+## <a name="resources"></a>리소스
+[Log Analytics 쿼리 언어에 대한 설명서 사이트](https://docs.loganalytics.io)에는 새 언어를 신속히 습득하는 데 필요한 모든 리소스가 있습니다.  여기에는 자습서, 예제 및 전체 언어 참조가 포함됩니다.
+
+
 ## <a name="cheat-sheet"></a>참고 자료
 
-다음 테이블에서는 Azure Log Analytics의 신규 및 레거시 쿼리 언어 간 동등한 명령에 관해 다양한 일반 쿼리 간 비교를 제공합니다. 
+다음 테이블에서는 Azure Log Analytics의 신규 및 레거시 쿼리 언어 간 동등한 명령에 관해 다양한 일반 쿼리 간 비교를 제공합니다.
 
 | 설명 | 레거시 | 신규 |
 |:--|:--|:--|
-| 테이블에서 데이터 선택 | Type=Event |  이벤트 |
+| 모든 테이블 검색      | error | “오류” 검색(대소문자 구분 안 함) |
+| 테이블에서 데이터 선택 | Type=Event |  행사 |
 |                        | Type=Event &#124; select Source, EventLog, EventID | Event &#124; project Source, EventLog, EventID |
 |                        | Type=Event &#124; top 100 | Event &#124; take 100 |
 | 문자열 비교      | Type=Event Computer=srv01.contoso.com   | Event &#124; where Computer == "srv01.contoso.com" |
-|                        | Type=Event Computer=contains("contoso") | Event &#124; where Computer contains "contoso" |
+|                        | Type=Event Computer=contains("contoso") | Event &#124; where Computer contains "contoso" (not case sensitive)<br>Event &#124; where Computer contains_cs "Contoso" (case sensitive) |
 |                        | Type=Event Computer=RegEx("@contoso@")  | Event &#124; where Computer matches regex ".*contoso*" |
 | 날짜 비교        | Type=Event TimeGenerated > NOW-1DAYS | Event &#124; where TimeGenerated > ago(1d) |
-|                        | Type=Event TimeGenerated>2017-05-01 TimeGenerated<2017-05-31 | Event &#124; where TimeGenerated between (datetime(2017-05-01) .. datetime(2017-05-31)) |
-| 부울 비교     | Type=Heartbeat IsGatewayInstalled=false  | Heartbeat | where IsGatewayInstalled == false |
+|                        | Type=Event TimeGenerated>2017-05-01 TimeGenerated<2017-05-31 | Event &amp;#124; where TimeGenerated between (datetime(2017-05-01) . datetime(2017-05-31)) |
+| 부울 비교     | Type=Heartbeat IsGatewayInstalled=false  | Heartbeat \| where IsGatewayInstalled == false |
 | 정렬                   | Type=Event &#124; sort Computer asc, EventLog desc, EventLevelName asc | Event \| sort by Computer asc, EventLog desc, EventLevelName asc |
 | Distinct               | Type=Event &#124; dedup Computer \| select Computer | Event &#124; summarize by Computer, EventLog |
 | 열 확장         | Type=Perf CounterName="% Processor Time" &#124; EXTEND if(map(CounterValue,0,50,0,1),"HIGH","LOW") as UTILIZATION | Perf &#124; where CounterName == "% Processor Time" \| extend Utilization = iff(CounterValue > 50, "HIGH", "LOW") |
@@ -62,6 +64,5 @@ ms.lasthandoff: 07/28/2017
 
 
 ## <a name="next-steps"></a>다음 단계
-- 새로운 쿼리 언어를 사용한 [쿼리 작성 자습서](https://docs.loganalytics.io/learn/tutorial_getting_started_with_queries.html)를 확인해 보세요.
-- [쿼리 언어 참조](https://docs.loganalytics.io/queryLanguage/query_language.html)에서 새 쿼리 언어에 대한 모든 명령, 연산자 및 함수를 자세히 알아보세요.  
-
+- 새로운 쿼리 언어를 사용한 [쿼리 작성 자습서](https://go.microsoft.com/fwlink/?linkid=856078)를 확인해 보세요.
+- [쿼리 언어 참조](https://go.microsoft.com/fwlink/?linkid=856079)에서 새 쿼리 언어에 대한 모든 명령, 연산자 및 함수를 자세히 알아보세요.  

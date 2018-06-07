@@ -1,8 +1,8 @@
 ---
-title: "Python을 사용하여 Azure Data Lake Analytics 관리 | Microsoft Docs"
-description: "Python을 사용하여 Data Lake Store 계정을 만들고 작업을 제출하는 방법을 알아봅니다. "
+title: Python을 사용하여 Azure Data Lake Analytics 관리 | Microsoft Docs
+description: 'Python을 사용하여 Data Lake Store 계정을 만들고 작업을 제출하는 방법을 알아봅니다. '
 services: data-lake-analytics
-documentationcenter: 
+documentationcenter: ''
 author: matt1883
 manager: jhubbard
 editor: cgronlun
@@ -14,15 +14,13 @@ ms.tgt_pltfrm: na
 ms.workload: big-data
 ms.date: 06/18/2017
 ms.author: saveenr
+ms.custom: devcenter
+ms.openlocfilehash: 0182a14979550c880904ec829f6b59dee016cad2
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 0d69207c0b8bcbba6dee42a1dc856e9085629734
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
-
-
 # <a name="manage-azure-data-lake-analytics-using-python"></a>Python을 사용하여 Azure Data Lake Analytics 관리
 
 ## <a name="python-versions"></a>Python 버전
@@ -152,13 +150,11 @@ armGroupResult = resourceClient.resource_groups.create_or_update( rg, ResourceGr
 먼저 저장소 계정을 만듭니다.
 
 ```python
-adlaAcctResult = adlaAcctClient.account.create(
+adlsAcctResult = adlsAcctClient.account.create(
     rg,
-    adla,
-    DataLakeAnalyticsAccount(
-        location=location,
-        default_data_lake_store_account=adls,
-        data_lake_store_accounts=[DataLakeStoreAccountInfo(name=adls)]
+    adls,
+    DataLakeStoreAccount(
+        location=location)
     )
 ).wait()
 ```
@@ -258,5 +254,4 @@ adlaAccountClient.computePolicies.createOrUpdate(rg, adla, "GaryMcDaniel", newPo
 - 다른 도구를 사용하여 같은 자습서를 보려면 페이지 맨 위의 탭 선택기를 클릭합니다.
 - U-SQL을 알아보려면 [Azure Data Lake Analytics U-SQL 언어 시작](data-lake-analytics-u-sql-get-started.md)을 참조하세요.
 - 관리 작업을 보려면 [Azure Portal을 사용하여 Azure Data Lake Analytics 관리](data-lake-analytics-manage-use-portal.md)를 참조하세요.
-
 

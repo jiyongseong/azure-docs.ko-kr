@@ -3,7 +3,7 @@ title: "Azure API Management 정책에서 오류 처리 | Microsoft Docs"
 description: "Azure API Management에서 요청을 처리하는 동안 발생할 수 있는 오류 조건에 대응하는 방법을 알아봅니다."
 services: api-management
 documentationcenter: 
-author: miaojiang
+author: vladvino
 manager: erikre
 editor: 
 ms.assetid: 3c777964-02b2-4f55-8731-8c3bd3c0ae27
@@ -12,12 +12,13 @@ ms.workload: mobile
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 01/09/2017
+ms.date: 11/28/2017
 ms.author: apimpm
-translationtype: Human Translation
-ms.sourcegitcommit: 77fd7b5b339a8ede8a297bec96f91f0a243cc18d
-ms.openlocfilehash: 672b36fc80d8826247b3104ca8c5ffb13e45fa59
-
+ms.openlocfilehash: 6bc71c0745493d52128553a78a31c45a3bca30f8
+ms.sourcegitcommit: b854df4fc66c73ba1dd141740a2b348de3e1e028
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/04/2017
 ---
 # <a name="error-handling-in-api-management-policies"></a>API Management 정책에서 오류 처리
 Azure API Management를 통해 게시자는 `ProxyError` 개체를 제공하여 프록시에 대한 요청을 처리하는 동안 발생할 수 있는 오류 조건에 대응할 수 있습니다. `ProxyError` 개체는 [context.LastError](api-management-policy-expressions.md#ContextVariables) 속성을 통해 액세스하며 `on-error` 정책 섹션에서 정책에 의해 사용될 수 있습니다. 이 항목은 Azure API Management에서 오류 처리 기능에 대한 참조를 제공합니다.  
@@ -55,27 +56,16 @@ Azure API Management를 통해 게시자는 `ProxyError` 개체를 제공하여 
  다음 정책을 `on-error` 정책 섹션에서 사용할 수 있습니다.  
   
 -   [choose](api-management-advanced-policies.md#choose)  
-  
 -   [set-variable](api-management-advanced-policies.md#set-variable)  
-  
 -   [find-and-replace](api-management-transformation-policies.md#Findandreplacestringinbody)  
-  
 -   [return-response](api-management-advanced-policies.md#ReturnResponse)  
-  
 -   [set-header](api-management-transformation-policies.md#SetHTTPheader)  
-  
 -   [set-method](api-management-advanced-policies.md#SetRequestMethod)  
-  
 -   [set-status](api-management-advanced-policies.md#SetStatus)  
-  
 -   [send-request](api-management-advanced-policies.md#SendRequest)  
-  
 -   [send-one-way-request](api-management-advanced-policies.md#SendOneWayRequest)  
-  
 -   [log-to-eventhub](api-management-advanced-policies.md#log-to-eventhub)  
-  
 -   [json-to-xml](api-management-transformation-policies.md#ConvertJSONtoXML)  
-  
 -   [xml-to-json](api-management-transformation-policies.md#ConvertXMLtoJSON)  
   
 ## <a name="lasterror"></a>LastError  
@@ -127,9 +117,10 @@ Azure API Management를 통해 게시자는 `ProxyError` 개체를 제공하여 
 |validate-jwt|기타 유효성 검사 실패|JwtInvalid|<jwt 라이브러리의 메시지\>|
 
 ## <a name="next-steps"></a>다음 단계
-정책으로 작업하는 방법에 대한 자세한 내용은 [API Management의 정책](api-management-howto-policies.md)을 참조하세요.  
 
+정책으로 작업하는 방법에 대한 자세한 내용은 다음을 참조하세요.
 
-<!--HONumber=Jan17_HO2-->
-
-
++ [API Management의 정책](api-management-howto-policies.md)
++ [API 변환](transform-api.md)
++ 정책 명령문 및 설정의 전체 목록에 대한 [정책 참조](api-management-policy-reference.md)
++ [정책 샘플](policy-samples.md)   

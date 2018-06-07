@@ -1,31 +1,32 @@
 ---
-title: "Service Fabric의 응용 프로그램 수명 주기 | Microsoft Docs"
-description: "서비스 패브릭 응용 프로그램 개발, 배포, 테스트, 업그레이드, 유지 관리 및 제거를 설명합니다."
+title: Service Fabric의 응용 프로그램 수명 주기 | Microsoft Docs
+description: 서비스 패브릭 응용 프로그램 개발, 배포, 테스트, 업그레이드, 유지 관리 및 제거를 설명합니다.
 services: service-fabric
 documentationcenter: .net
 author: rwike77
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 08837cca-5aa7-40da-b087-2b657224a097
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 06/14/2017
+ms.date: 1/19/2018
 ms.author: ryanwi
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: a33d25f3806090307f6fb14dbb821264f2e4f28b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
-
+ms.openlocfilehash: e7dddfca3640615cb851fb6dce9eaa80260ccbf6
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
+ms.locfileid: "34212564"
 ---
 # <a name="service-fabric-application-lifecycle"></a>서비스 패브릭 응용 프로그램 수명 주기
 다른 플랫폼과 마찬가지로, Azure 서비스 패브릭 기반의 응용 프로그램은 일반적으로 디자인, 개발, 테스트, 배포, 업그레이드, 유지 관리 및 제거 단계를 거칩니다. 서비스 패브릭은 개발부터 배포, 일상적인 관리, 유지 관리 및 최종적인 서비스 해제에 이르기까지 클라우드 응용 프로그램의 전체 응용 프로그램 수명 주기 관리에 대해 최고 수준의 지원을 제공합니다. 여러 역할이 응용 프로그램 수명 주기에 독립적으로 참가할 수 있는 서비스 모델이 제공됩니다. 이 문서에서는 서비스 패브릭 응용 프로그램 수명 주기의 모든 단계에서 여러 역할이 사용하는 방법 및 API에 대한 개요를 제공합니다.
 
-다음 Microsoft Virtual Academy 비디오에서는 응용 프로그램 수명 주기를 관리하는 방법을 설명합니다.<center><a target="_blank" href="https://mva.microsoft.com/en-US/training-courses/building-microservices-applications-on-azure-service-fabric-16747?l=My3Ka56yC_6106218965">
+[!INCLUDE [links to azure cli and service fabric cli](../../includes/service-fabric-sfctl.md)]
+
+다음 Microsoft Virtual Academy 비디오에서는 응용 프로그램 수명 주기를 관리하는 방법을 설명합니다. <center><a target="_blank" href="https://mva.microsoft.com/en-US/training-courses/building-microservices-applications-on-azure-service-fabric-16747?l=My3Ka56yC_6106218965">
 <img src="./media/service-fabric-application-lifecycle/AppLifecycleVid.png" WIDTH="360" HEIGHT="244">
 </a></center>
 
@@ -99,4 +100,3 @@ ms.lasthandoff: 04/27/2017
 * [응용 프로그램 배포](service-fabric-deploy-remove-applications.md)
 * [응용 프로그램 업그레이드](service-fabric-application-upgrade.md)
 * [테스트 용이성 개요](service-fabric-testability-overview.md)
-

@@ -1,0 +1,66 @@
+- name: Power BI Embedded 설명서
+  href: index.md
+- name: 개요
+  items:
+    - name: Power BI Embedded란?
+      href: what-is-power-bi-embedded.md
+- name: 시작하기
+  items:
+    - name: Power BI Embedded 시작
+      href: get-started.md
+    - name: 샘플 시작
+      href: 'https://powerbi.microsoft.com/documentation/powerbi-developer-embed-sample-app-owns-data/'
+- name: 방법
+  items:
+    - name: 용량 관리
+      items:
+        - name: 용량 만들기
+          href: create-capacity.md
+        - name: 용량 크기 조정
+          href: scale-capacity.md
+        - name: 용량 일시 중지 및 시작
+          href: pause-start.md
+    - name: Azure AD 앱 등록
+      href: 'https://powerbi.microsoft.com/documentation/powerbi-developer-register-app/'
+    - name: Power BI 콘텐츠 포함
+      href: 'https://powerbi.microsoft.com/documentation/powerbi-developer-embedding-content/'
+    - name: 마이그레이션
+      items:
+        - name: Power BI 작업 영역 컬렉션에서 마이그레이션하는 방법
+          href: migrate-from-power-bi-workspace-collections.md
+        - name: 마이그레이션 도구
+          href: migrate-tool.md
+        - name: 마이그레이션 코드 조각
+          href: migrate-code-snippets.md
+- name: 샘플
+  items:
+    - name: 코드 샘플
+      href: 'https://github.com/Microsoft/PowerBI-Developer-Samples'
+    - name: 샘플 연습
+      href: 'https://powerbi.microsoft.com/documentation/powerbi-developer-embed-sample-app-owns-data/'
+    - name: JavaScript embed 샘플
+      href: 'https://microsoft.github.io/PowerBI-JavaScript/demo/'
+- name: 참고 자료
+  items:
+    - name: API
+      items:
+        - name: Azure Resource Management REST API
+          href: 'https://docs.microsoft.com/rest/api/power-bi-embedded/'
+        - name: Power BI REST API
+          href: 'https://msdn.microsoft.com/library/mt147898.aspx'
+- name: 리소스
+  items:
+    - name: Power BI 커뮤니티
+      href: 'http://community.powerbi.com/t5/Developer/bd-p/Developer'
+    - name: .NET SDK 다운로드
+      href: 'https://www.nuget.org/packages/Microsoft.PowerBI.Api/'
+    - name: JavaScript SDK 다운로드
+      href: 'https://www.nuget.org/packages/Microsoft.PowerBI.JavaScript/'
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'
+    - name: GitHub 리포지토리
+      items:
+        - name: Power BI용 .NET
+          href: 'https://github.com/Microsoft/PowerBI-CSharp'
+        - name: Power BI용 JavaScript
+          href: 'https://github.com/Microsoft/PowerBI-JavaScript'

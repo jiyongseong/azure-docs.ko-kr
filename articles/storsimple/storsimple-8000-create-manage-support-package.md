@@ -4,7 +4,7 @@ description: "StorSimple 8000 시리즈 장치용 지원 패키지를 만들고,
 services: storsimple
 documentationcenter: 
 author: alkohli
-manager: timlt
+manager: jeconnoc
 editor: 
 ms.assetid: 
 ms.service: storsimple
@@ -12,15 +12,13 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 07/05/2017
+ms.date: 01/09/2018
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 92abbb96b2117e10800de61b5c405a784453265b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: c83caae58e73d6f2d0fe086938e0bbc5cfdf80c4
+ms.sourcegitcommit: 9292e15fc80cc9df3e62731bafdcb0bb98c256e1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/10/2018
 ---
 # <a name="create-and-manage-a-support-package-for-storsimple-8000-series"></a>StorSimple 8000 시리즈용 지원 패키지 만들기 및 관리
 
@@ -32,7 +30,7 @@ StorSimple 지원 패키지는 StorSimple 장치 문제를 해결하는 데 있�
 
 ## <a name="create-a-support-package"></a>지원 패키지 만들기
 
-경우에 따라 StorSimple 용 Windows PowerShell을 통해 지원 패키지를 수동으로 만들어야 합니다. 예:
+경우에 따라 StorSimple 용 Windows PowerShell을 통해 지원 패키지를 수동으로 만들어야 합니다. 예: 
 
 * Microsoft 지원과 공유하기 전에 로그 파일에서 중요한 정보를 제거해야 하는 경우
 * 연결 문제로 인해 패키지를 업로드하는 데 문제가 발생하는 경우
@@ -60,14 +58,14 @@ StorSimple 지원 패키지는 StorSimple 장치 문제를 해결하는 데 있�
    
    * 암호로 보호된 네트워크 공유에 다음을 입력합니다.
      
-       `Export-HcsSupportPackage –PackageTag "MySupportPackage" –Credential "Username" -Force`
+       `Export-HcsSupportPackage -Path <\\IP address\location of the shared folder> -Include Default -Credential domainname\username`
      
-       암호, 네트워크 공유 폴더의 경로 및 암호화 암호에 대해 묻는 메시지가 나타납니다.(지원 패키지가 암호화 되었기 때문) 그런 다음 지원 패키지는 지정된 폴더에 생성됩니다.
+       암호 및 암호화 암호에 대해 묻는 메시지가 나타납니다(지원 패키지가 암호화 되었기 때문에). 그러면 기본 폴더에 지원 패키지가 생성됩니다(장치 이름에 현재 날짜 및 시간이 추가됨).
    * 암호로 보호되지 않은 공유의 경우 `-Credential` 매개 변수가 필요하지 않습니다. 다음을 입력합니다.
      
-       `Export-HcsSupportPackage –PackageTag "MySupportPackage" -Force`
+       `Export-HcsSupportPackage`
      
-       지정된 네트워크 공유 폴더에 두 컨트롤러를 위한 지원 패키지를 만들 수 있습니다. 문제해결을 위한 Microsoft 기술 지원 서비스에 보낼 수 있는 암호화되고 압축된 파일입니다. 자세한 내용은 [Microsoft 지원에 문의](storsimple-8000-contact-microsoft-support.md)를 참조하세요.
+       기본 폴더에 두 컨트롤러의 지원 패키지가 생성됩니다. 패키지는 문제 해결을 위해 Microsoft 지원으로 보낼 수 있는 암호화되고 압축된 파일입니다. 자세한 내용은 [Microsoft 지원에 문의](storsimple-8000-contact-microsoft-support.md)를 참조하세요.
 
 ### <a name="the-export-hcssupportpackage-cmdlet-parameters"></a>Export-HcsSupportPackage cmdlet 매개 변수
 
@@ -149,7 +147,6 @@ Microsoft 지원 사이트에 업로드하기 전에 지원 패키지를 편집�
 ## <a name="next-steps"></a>다음 단계
 
 * [지원 패키지에서 수집된 정보](https://support.microsoft.com/help/3193606/storsimple-support-packages-and-device-logs)에 대해 자세히 알아보기
-* [지원 패키지 및 장치 로그를 사용하여 장치 배포 문제를 해결](storsimple-troubleshoot-deployment.md#support-packages-and-device-logs-available-for-troubleshooting)하는 방법을 알아봅니다.
-* [StorSimple 장치 관리자 서비스를 사용하여 StorSimple 장치를 관리](storsimple-8000-manager-service-administration.md)하는 방법에 대해 자세히 알아보기
-
+* [지원 패키지 및 장치 로그를 사용하여 장치 배포 문제를 해결](storsimple-8000-troubleshoot-deployment.md#support-packages-and-device-logs-available-for-troubleshooting)하는 방법을 알아봅니다.
+* [StorSimple 장치 관리자 서비스를 사용하여 StorSimple 장치를 관리](storsimple-8000-manager-service-administration.md)하는 방법을 알아봅니다.
 

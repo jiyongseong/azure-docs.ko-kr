@@ -1,10 +1,10 @@
 ---
-title: "자습서: FM:Systems와 Azure Active Directory 통합 | Microsoft 문서"
-description: "Azure Active Directory 및 FM:Systems 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: FM:Systems와 Azure Active Directory 통합 | Microsoft 문서'
+description: Azure Active Directory 및 FM:Systems 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: f78c58c5-6e98-458b-8991-78624a245665
 ms.service: active-directory
 ms.workload: identity
@@ -13,13 +13,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/17/2017
 ms.author: jeedes
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a1ba750d2be1969bfcd4085a24b0469f72a357ad
-ms.openlocfilehash: 3a597d228f6c9234ec2fd2644ec3ac50b98f3b6b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
-
+ms.openlocfilehash: 726b9c8001cb7b87c577bea6813ebe95e903a04d
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-fmsystems"></a>자습서: FM:Systems와 Azure Active Directory 통합
 
@@ -31,7 +29,7 @@ FM:Systems를 Azure AD와 통합하면 다음과 같은 이점이 제공됩니�
 - 사용자가 해당 Azure AD 계정으로 FM:Systems에 자동으로 로그온(Single Sign-On)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +57,7 @@ FM:Systems의 Azure AD 통합을 구성하려면 갤러리의 FM:Systems를 관�
 
 **갤러리에서 FM:Systems를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Active Directory][1]
 
@@ -88,11 +86,11 @@ FM:Systems에서 Azure AD의 **사용자 이름** 값을 **Username** 값으로 
 
 FM:Systems에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구성 요소를 완료해야 합니다.
 
-1. **[Azure AD Single Sign-On 구성](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
-2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
+1. **[Configuring Azure AD Single Sign-On](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
+2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On 테스트하는 데 사용합니다.
 3. **[FM:Systems 테스트 사용자 만들기](#creating-an-fmsystems-test-user)** - Britta Simon의 Azure AD 표현과 연결된 해당 사용자를 FM:Systems에 만듭니다.
 4. **[Azure AD 테스트 사용자 할당](#assigning-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Testing Single Sign-On](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
+5. **[Single Sign-On 테스트](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
 
 ### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -102,15 +100,15 @@ FM:Systems에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
 
 1. Azure Portal의 **FM:Systems** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single Sign-On** 대화 상자에서 **모드**를 **SAML 기반 로그온**으로 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-on 구성](./media/active-directory-saas-fm-systems-tutorial/tutorial_fmsystems_samlbase.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-fm-systems-tutorial/tutorial_fmsystems_samlbase.png)
 
 3. **FM:Systems 도메인 및 URL** 섹션에서 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-fm-systems-tutorial/tutorial_fmsystems_url.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-fm-systems-tutorial/tutorial_fmsystems_url.png)
 
     **회신 URL** 텍스트 상자에서 FM:Systems **회신 URL**을 입력하고, `https://<companyname>.fmshosted.com/fminteract/ConsumerService2.aspx` 패턴을 사용하여 URL을 입력합니다.
 
@@ -119,11 +117,11 @@ FM:Systems에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
  
 4. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 메타데이터 파일을 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-fm-systems-tutorial/tutorial_fmsystems_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-fm-systems-tutorial/tutorial_fmsystems_certificate.png) 
 
 5. **저장** 단추를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-fm-systems-tutorial/tutorial_general_400.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-fm-systems-tutorial/tutorial_general_400.png)
 
 6. **FM:Systems** 쪽에서 Single Sign-On을 구성하려면 다운로드한 **메타데이터 XML**을 [FM:Systems 지원 팀](https://fmsystems.com/ask-us/)에 보내야 합니다. 그러면 SAML SSO 연결이 양쪽에 제대로 설정되도록 지정합니다. 구독에 SSO를 사용하도록 설정하면 알림을 받을 수 있습니다.
 
@@ -155,9 +153,9 @@ FM:Systems에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -179,7 +177,7 @@ FM:Systems에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
    
     a. 관련된 텍스트 상자에 프로비전할 유효한 Azure Active Directory 계정의 **사용자 이름**, **암호**, **암호 확인**, **전자 메일** 및 **직원 ID**를 입력합니다.
    
-    b. **다음**을 누릅니다.
+    나. **다음**을 클릭합니다.
 
 ### <a name="assigning-the-azure-ad-test-user"></a>Azure AD 테스트 사용자 할당
 
@@ -195,7 +193,7 @@ FM:Systems에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
 
 2. 응용 프로그램 목록에서 **FM:Systems**를 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-fm-systems-tutorial/tutorial_fmsystems_app.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-fm-systems-tutorial/tutorial_fmsystems_app.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -221,7 +219,7 @@ FM:Systems에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -238,5 +236,4 @@ FM:Systems에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
 [201]: ./media/active-directory-saas-fm-systems-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-fm-systems-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-fm-systems-tutorial/tutorial_general_203.png
-
 

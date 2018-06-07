@@ -1,31 +1,29 @@
 ---
-title: "Azure VM에 대한 특정 RDP 오류 메시지 | Microsoft Docs"
-description: "Azure에서 Windows 가상 컴퓨터에 원격 데스크톱 연결을 시도할 때 나타날 수 있는 특정 오류 메시지를 이해합니다."
-keywords: "원격 데스크톱 오류,원격 데스크톱 연결 오류,VM에 연결할 수 없습니다,원격 데스크톱 문제 해결"
+title: Azure VM에 대한 특정 RDP 오류 메시지 | Microsoft Docs
+description: Azure에서 Windows 가상 머신에 원격 데스크톱 연결을 시도할 때 나타날 수 있는 특정 오류 메시지를 이해합니다.
+keywords: 원격 데스크톱 오류,원격 데스크톱 연결 오류,VM에 연결할 수 없습니다,원격 데스크톱 문제 해결
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: genlin
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: top-support-issue,azure-service-management,azure-resource-manager
 ms.assetid: 5feb1d64-ee6f-4907-949a-a7cffcbc6153
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
 ms.devlang: na
-ms.topic: support-article
-ms.date: 05/26/2017
+ms.topic: article
+ms.date: 05/11/2018
 ms.author: genli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 4f2b70b79e52df902e0f659fc97158d446efdf50
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: 8c027db917216d273b5fb36f8920d6fa2fb4c9a9
+ms.sourcegitcommit: c52123364e2ba086722bc860f2972642115316ef
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
 ---
 # <a name="troubleshooting-specific-rdp-error-messages-to-a-windows-vm-in-azure"></a>Azure에서 Windows VM에 대한 특정 RDP 오류 메시지 문제 해결
-Azure에서 Windows 가상 컴퓨터(VM)에 원격 데스크톱 연결을 사용할 때 특정 오류 메시지가 나타날 수 있습니다. 이 문서에서는 발생할 수 있는 일반적인 일부 오류 메시지와 이 문제를 해결하기 위한 문제 해결 단계에 대해 자세히 설명합니다. RDP를 사용하여 VM에 연결하는 데 문제가 있지만 특정 오류 메시지가 발생하지 않는다면 [원격 데스크톱에 대한 자세한 문제 해결 가이드](troubleshoot-rdp-connection.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 참조하세요.
+Azure에서 Windows 가상 머신(VM)에 원격 데스크톱 연결을 사용할 때 특정 오류 메시지가 나타날 수 있습니다. 이 문서에서는 발생할 수 있는 일반적인 일부 오류 메시지와 이 문제를 해결하기 위한 문제 해결 단계에 대해 자세히 설명합니다. RDP를 사용하여 VM에 연결하는 데 문제가 있지만 특정 오류 메시지가 발생하지 않는다면 [원격 데스크톱에 대한 자세한 문제 해결 가이드](troubleshoot-rdp-connection.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 참조하세요.
 
 특정 오류 메시지에 대한 자세한 내용은 다음을 참조하세요.
 
@@ -56,7 +54,7 @@ VM에 실제로 두 개 이상의 동시 원격 데스크톱 연결이 필요하
 가능한 해결 방법:
 
 * 조직 인트라넷을 사용하는 경우 컴퓨터가 프록시 서버에 액세스할 수 있고 HTTPS 트래픽을 보낼 수 있는지 확인합니다.
-* 로컬 컴퓨터에 저장된 RDP 파일을 사용하는 경우 포털에서 생성한 파일을 사용해 보세요. 이 단계에서는 가상 컴퓨터 또는 클라우드 서비스 및 VM의 끝점 포트에 대한 올바른 DNS 이름을 사용해야 합니다. 포털에서 생성된 RDP 파일의 샘플은 다음과 같습니다.
+* 로컬 컴퓨터에 저장된 RDP 파일을 사용하는 경우 포털에서 생성한 파일을 사용해 보세요. 이 단계에서는 가상 머신 또는 클라우드 서비스 및 VM의 끝점 포트에 대한 올바른 DNS 이름을 사용해야 합니다. 포털에서 생성된 RDP 파일의 샘플은 다음과 같습니다.
   
         full address:s:tailspin-azdatatier.cloudapp.net:55919
         prompt for credentials:i:1
@@ -91,11 +89,11 @@ Windows 기반 컴퓨터는 로컬 계정 또는 도메인 계정 자격 증명�
 
 VM을 새 Active Directory 포리스트의 도메인 컨트롤러로 승격한 경우 사용자가 로그인할 때 사용한 로컬 관리자 계정이 새 포리스트 및 도메인과 같은 암호를 가진 동일한 계정으로 변환됩니다. 그러면 로컬 계정이 삭제됩니다.
 
-예를 들어 DC1\DCAdmin 로컬 계정으로 로그인하고 가상 컴퓨터를 corp.contoso.com 도메인에 대한 새 포리스트의 도메인 컨트롤러로 승격하는 경우 DC1\DCAdmin 로컬 계정이 삭제되고 같은 암호를 가진 새 도메인 계정 CORP\DCAdmin이 생성됩니다.
+예를 들어 DC1\DCAdmin 로컬 계정으로 로그인하고 가상 머신을 corp.contoso.com 도메인에 대한 새 포리스트의 도메인 컨트롤러로 승격하는 경우 DC1\DCAdmin 로컬 계정이 삭제되고 같은 암호를 가진 새 도메인 계정 CORP\DCAdmin이 생성됩니다.
 
-계정 이름이 가상 컴퓨터가 유효한 계정으로 확인할 수 있는 이름이고 암호가 올바른지 확인하십시오.
+계정 이름이 가상 머신이 유효한 계정으로 확인할 수 있는 이름이고 암호가 올바른지 확인하십시오.
 
-로컬 관리자 계정의 암호를 변경해야 하는 경우 [Windows 가상 컴퓨터에 대한 원격 데스크톱 서비스 또는 암호를 다시 설정하는 방법](reset-rdp.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)을 참조하세요.
+로컬 관리자 계정의 암호를 변경해야 하는 경우 [Windows 가상 머신에 대한 원격 데스크톱 서비스 또는 암호를 다시 설정하는 방법](reset-rdp.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)을 참조하세요.
 
 <a id="rdpconnect"></a>
 
@@ -111,5 +109,4 @@ VM을 새 Active Directory 포리스트의 도메인 컨트롤러로 승격한 �
 
 * VM에서 실행 중인 응용 프로그램에 액세스하는 문제 해결 단계는 [Azure VM에서 실행 중인 응용 프로그램에 대한 액세스 문제 해결](../linux/troubleshoot-app-connection.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)을 참조하세요.
 * SSH(Secure Shell)를 사용하여 Azur에서 Linux VM에 연결하는 데 문제가 있는 경우 [Azure에서 Linux VM에 SSH 연결 문제 해결](../linux/troubleshoot-ssh-connection.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)을 참조하세요.
-
 

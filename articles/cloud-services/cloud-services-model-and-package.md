@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/05/2017
 ms.author: adegeo
-ms.translationtype: Human Translation
-ms.sourcegitcommit: cca4d126a5c5f012af6afb9a31d0aedc0f7eb155
-ms.openlocfilehash: 7aebd5bd168799e1a88bad0e78ba3a164bfcfccd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
+ms.openlocfilehash: 0589f2efeaaafc35bcb9d869c391a0533fe6e502
+ms.sourcegitcommit: a0be2dc237d30b7f79914e8adfb85299571374ec
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/12/2018
 ---
 # <a name="what-is-the-cloud-service-model-and-how-do-i-package-it"></a>클라우드 서비스 모델 정의 및 패키지 방법
 클라우드 서비스는 서비스 정의*(.csdef)*, 서비스 구성*(.cscfg)*, 서비스 패키지*(.cspkg)*의 세 구성 요소에서 생성됩니다. **ServiceDefinition.csdef** 및 **ServiceConfig.cscfg** 파일은 둘 다 XML 기반으로, 클라우드 서비스의 구조 및 구성 방법(합쳐서 모델이라고 함)을 설명합니다. **ServicePackage.cspkg**는 **ServiceDefinition.csdef** 및 다른 구성 요소에서 생성되는 zip 파일로, 필수 이진 기반 종속성을 모두 포함합니다. Azure는 **ServicePackage.cspkg**와 **ServiceConfig.cscfg**에서 모두 클라우드 서비스를 만듭니다.
@@ -108,7 +107,7 @@ IIS7에서 호스트되는 웹 사이트 또는 웹 응용 프로그램에 대�
 역할에 필요한 인증서에 대한 정의를 포함합니다. 앞의 코드 예제에서는 Azure Connect 구성에 사용되는 인증서를 보여 줍니다.
 
 **LocalResources**  
-로컬 저장소 리소스에 대한 정의를 포함합니다. 로컬 저장소 리소스는 역할의 인스턴스가 실행 중인 가상 컴퓨터의 파일 시스템에 예약된 디렉터리입니다.
+로컬 저장소 리소스에 대한 정의를 포함합니다. 로컬 저장소 리소스는 역할의 인스턴스가 실행 중인 가상 머신의 파일 시스템에 예약된 디렉터리입니다.
 
 **Imports**  
 가져온 모듈에 대한 정의를 포함합니다. 앞의 코드 예제에서는 원격 데스크톱 연결 및 Azure Connect에 대한 모듈을 보여 줍니다.
@@ -144,7 +143,7 @@ IIS7에서 호스트되는 웹 사이트 또는 웹 응용 프로그램에 대�
 여기에 사용되는 XML 스키마를 더 잘 이해하려면 [서비스 구성 스키마](https://msdn.microsoft.com/library/azure/ee758710.aspx)를 참조하면 됩니다. 그러나 여기서 간략하게 요소를 설명합니다.
 
 **인스턴스**  
-역할에 대해 실행 중인 인스턴스 수를 구성합니다. 업그레이드하는 동안 잠재적으로 클라우드 서비스를 사용할 수 없게 되는 것을 방지하려면 웹과 관련된 역할의 인스턴스를 두 개 이상 배포하는 것이 좋습니다. 둘 이상의 인스턴스를 배포하면 [Azure 계산 SLA(서비스 수준 계약)](http://azure.microsoft.com/support/legal/sla/)의 지침을 준수하게 되므로 서비스를 위해 둘 이상의 역할 인스턴스가 배포될 때 인터넷 연결 역할에 대한 99.95%의 외부 연결을 보증합니다.
+역할에 대해 실행 중인 인스턴스 수를 구성합니다. 업그레이드하는 동안 잠재적으로 클라우드 서비스를 사용할 수 없게 되는 것을 방지하려면 웹과 관련된 역할의 인스턴스를 두 개 이상 배포하는 것이 좋습니다. 둘 이상의 인스턴스를 배포하면 [Azure Compute SLA(서비스 수준 계약)](http://azure.microsoft.com/support/legal/sla/)의 지침을 준수하게 되므로 서비스를 위해 둘 이상의 역할 인스턴스가 배포될 때 인터넷 연결 역할에 대한 99.95%의 외부 연결을 보증합니다.
 
 **ConfigurationSettings**  
 역할에 대해 실행 중인 인스턴스의 설정을 구성합니다. `<Setting>` 요소의 이름은 서비스 정의 파일에 있는 설정 정의와 일치해야 합니다.
@@ -240,7 +239,7 @@ Azure는 웹 역할에 하나의 진입점만 허용합니다. 하나의 IP 주�
 <p />
 
 > [!TIP]
-> **Microsoft Azure 계산 에뮬레이터**에서 로컬로 클라우드 서비스를 실행하고 **/copyonly** 옵션을 사용합니다. 이 옵션을 사용하면 계산 에뮬레이터에서 실행할 수 있는 디렉터리 레이아웃에 응용 프로그램의 이진 파일을 복사합니다.
+> **Microsoft Azure Compute 에뮬레이터**에서 로컬로 클라우드 서비스를 실행하고 **/copyonly** 옵션을 사용합니다. 이 옵션을 사용하면 계산 에뮬레이터에서 실행할 수 있는 디렉터리 레이아웃에 응용 프로그램의 이진 파일을 복사합니다.
 > 
 > 
 
@@ -291,9 +290,8 @@ Visual Studio를 사용하여 다음 작업을 수행하려고 합니다.
 * [클라우드 서비스 인스턴스에 대해 원격 데스크톱 설정][vs_remote]
 
 [deploy]: cloud-services-how-to-create-deploy-portal.md
-[remotedesktop]: cloud-services-role-enable-remote-desktop.md
-[vs_remote]: ../vs-azure-tools-remote-desktop-roles.md
+[remotedesktop]: cloud-services-role-enable-remote-desktop-new-portal.md
+[vs_remote]: cloud-services-role-enable-remote-desktop-visual-studio.md
 [vs_deploy]: ../vs-azure-tools-cloud-service-publish-set-up-required-services-in-visual-studio.md
 [vs_reconfigure]: ../vs-azure-tools-configure-roles-for-cloud-service.md
 [vs_create]: ../vs-azure-tools-azure-project-create.md
-

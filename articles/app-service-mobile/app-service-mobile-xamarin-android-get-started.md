@@ -1,10 +1,10 @@
 ---
-title: "Xamarin Android 앱용 Azure 모바일 앱 시작"
-description: "이 자습서에 따라 Azure 모바일 앱을 사용하여 Xamarin Android 개발을 시작할 수 있습니다."
+title: "Xamarin Android 앱용 Azure Mobile Apps 시작"
+description: "이 자습서에 따라 Azure Mobile Apps를 사용하여 Xamarin Android 개발을 시작할 수 있습니다."
 services: app-service\mobile
 documentationcenter: xamarin
-author: ggailey777
-manager: syntaxc4
+author: conceptdev
+manager: crdun
 editor: 
 ms.assetid: 81649dd3-544f-40ff-b9b7-60c66d683e60
 ms.service: app-service-mobile
@@ -13,27 +13,26 @@ ms.tgt_pltfrm: mobile-xamarin-android
 ms.devlang: dotnet
 ms.topic: hero-article
 ms.date: 10/01/2016
-ms.author: glenga
+ms.author: crdun
+ms.openlocfilehash: abc4fa4129a596c3f3304dc37af3a9b659f45473
+ms.sourcegitcommit: df4ddc55b42b593f165d56531f591fdb1e689686
 ms.translationtype: HT
-ms.sourcegitcommit: 99523f27fe43f07081bd43f5d563e554bda4426f
-ms.openlocfilehash: 6b41fd8090dd771fc40769c134bad258b3d4bd36
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/05/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/04/2018
 ---
 # <a name="create-a-xamarinandroid-app"></a>Xamarin.Android 앱 만들기
 [!INCLUDE [app-service-mobile-selector-get-started](../../includes/app-service-mobile-selector-get-started.md)]
 
 ## <a name="overview"></a>개요
-이 자습서에서는 Xamarin Android 앱에 클라우드 기반 백 엔드 서비스를 추가하는 방법을 보여 줍니다. 자세한 내용은 [모바일 앱 정의](app-service-mobile-value-prop.md)를 참조하세요.
+이 자습서에서는 Xamarin Android 앱에 클라우드 기반 백 엔드 서비스를 추가하는 방법을 보여 줍니다. 자세한 내용은 [Mobile Apps 정의](app-service-mobile-value-prop.md)를 참조하세요.
 
 완성된 앱의 스크린샷은 다음과 같습니다.
 
 ![][0]
 
-이 자습서를 완료해야 다른 모든 Xamarin Android 앱용 모바일 앱 자습서를 진행할 수 있습니다.
+이 자습서를 완료해야 다른 모든 Xamarin Android 앱용 Mobile Apps 자습서를 진행할 수 있습니다.
 
-## <a name="prerequisites"></a>필수 조건
+## <a name="prerequisites"></a>필수 구성 요소
 이 자습서를 완료하려면 다음 필수 구성 요소가 필요합니다.
 
 * 활성 Azure 계정. 계정이 아직 없으면 Azure 평가판에 등록하고 최대 10개의 무료 Mobile Apps을 가져옵니다. 자세한 내용은 [Azure 무료 체험](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
@@ -69,7 +68,7 @@ ms.lasthandoff: 08/05/2017
 * [앱에 오프라인 동기화 추가](app-service-mobile-xamarin-android-get-started-offline-data.md)
 * [앱에 인증 추가 ](app-service-mobile-xamarin-android-get-started-users.md)
 * [Xamarin.Android 앱에 푸시 알림 추가](app-service-mobile-xamarin-android-get-started-push.md)
-* [Azure 모바일 앱에 관리되는 클라이언트를 사용하는 방법](app-service-mobile-dotnet-how-to-use-client-library.md)
+* [Azure Mobile Apps에 관리되는 클라이언트를 사용하는 방법](app-service-mobile-dotnet-how-to-use-client-library.md)
 
 <!-- Images. -->
 [0]: ./media/app-service-mobile-xamarin-android-get-started/mobile-quickstart-completed-android.png
@@ -81,4 +80,3 @@ ms.lasthandoff: 08/05/2017
 <!-- URLs. -->
 [Azure Portal]: https://azure.portal.com/
 [Visual Studio]: https://go.microsoft.com/fwLink/p/?LinkID=534203
-

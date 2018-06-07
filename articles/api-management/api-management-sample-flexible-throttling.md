@@ -1,33 +1,33 @@
 ---
-title: "Azure API 관리로 고급 요청 제한"
-description: "Azure API 관리로 유연한 할당량 및 속도 제한 정책을 만들고 적용하는 방법에 대해 알아봅니다."
+title: Azure API Management로 고급 요청 제한
+description: Azure API Management로 유연한 할당량 및 속도 제한 정책을 만들고 적용하는 방법에 대해 알아봅니다.
 services: api-management
-documentationcenter: 
-author: darrelmiller
+documentationcenter: ''
+author: vladvino
 manager: erikre
-editor: 
+editor: ''
 ms.assetid: fc813a65-7793-4c17-8bb9-e387838193ae
 ms.service: api-management
 ms.devlang: dotnet
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 12/15/2016
+ms.date: 02/03/2018
 ms.author: apimpm
-translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: 2a5078b34f74efd5d394587d8ace7f339ecedb5e
-
-
+ms.openlocfilehash: c7fcbd57021134631e9f10dcbb2d40e4c130af02
+ms.sourcegitcommit: 168426c3545eae6287febecc8804b1035171c048
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/08/2018
 ---
-# <a name="advanced-request-throttling-with-azure-api-management"></a>Azure API 관리로 고급 요청 제한
-들어오는 요청을 제한하는 것은 Azure API 관리의 중요한 역할입니다. Azure API 관리는 요청 속도 또는 전송된 총 요청/데이터를 제어하여 API 공급자가 자신의 API가 남용되지 않도록 보호하고 다양한 API 제품 계층에 대해 가치를 창출할 수 있도록 합니다.
+# <a name="advanced-request-throttling-with-azure-api-management"></a>Azure API Management로 고급 요청 제한
+들어오는 요청을 제한하는 것은 Azure API Management의 중요한 역할입니다. Azure API Management는 요청 속도 또는 전송된 총 요청/데이터를 제어하여 API 공급자가 자신의 API가 남용되지 않도록 보호하고 다양한 API 제품 계층에 대해 가치를 창출할 수 있도록 합니다.
 
 ## <a name="product-based-throttling"></a>제품 기반 제한
-현재까지, 속도 제한 기능은 API 관리 게시자 포털에 정의된 특정 제품 구독(기본적으로 키)으로 범위를 제한했습니다. 이렇게 하면 API 공급자가 해당 API를 사용하기 위해 등록한 개발자에게 제한을 적용하는 데는 유용하지만 예를 들어 API의 개별 최종 사용자를 제한하는 데는 도움이 되지 않습니다. 개발자 응용 프로그램의 단일 사용자가 전체 할당량을 사용한 후 개발자의 다른 고객이 해당 응용 프로그램을 사용하지 못하도록 할 수 있습니다. 또한, 대용량의 요청을 생성할 수 있는 여러 고객이 간헐적 사용자에 대한 액세스를 제한할 수 있습니다.
+현재까지, 속도 제한 기능은 Azure Portal에 정의된 특정 제품 구독으로 범위를 제한했습니다. 이렇게 하면 API 공급자가 해당 API를 사용하기 위해 등록한 개발자에게 제한을 적용하는 데는 유용하지만 예를 들어 API의 개별 최종 사용자를 제한하는 데는 도움이 되지 않습니다. 개발자 응용 프로그램의 단일 사용자가 전체 할당량을 사용한 후 개발자의 다른 고객이 해당 응용 프로그램을 사용하지 못하도록 할 수 있습니다. 또한, 대용량의 요청을 생성할 수 있는 여러 고객이 간헐적 사용자에 대한 액세스를 제한할 수 있습니다.
 
 ## <a name="custom-key-based-throttling"></a>사용자 지정 키 기반 제한
-새로운 [rate-limit-by-key](https://msdn.microsoft.com/library/azure/dn894078.aspx#LimitCallRateByKey) 및 [quota-by-key](https://msdn.microsoft.com/library/azure/dn894078.aspx#SetUsageQuotaByKey) 정책은 트래픽 제어에 훨씬 유연한 솔루션을 제공합니다. 이 새로운 정책을 통해 트래픽 사용량을 추적하는 데 사용할 키를 식별하는 식을 정의할 수 있습니다. 이러한 작동 방식은 예제를 통해 가장 쉽게 이해할 수 있습니다. 
+새로운 [rate-limit-by-key](https://msdn.microsoft.com/library/azure/dn894078.aspx#LimitCallRateByKey) 및 [quota-by-key](https://msdn.microsoft.com/library/azure/dn894078.aspx#SetUsageQuotaByKey) 정책은 트래픽 제어에 유연한 솔루션을 제공합니다. 이 새로운 정책을 통해 트래픽 사용량을 추적하는 데 사용할 키를 식별하는 식을 정의할 수 있습니다. 이러한 작동 방식은 예제를 통해 가장 쉽게 이해할 수 있습니다. 
 
 ## <a name="ip-address-throttling"></a>IP 주소 제한
 다음 정책은 단일 클라이언트 IP 주소를 1분에 10개 호출만으로 제한하고 1개월에 총 1,000,000개 호출과 10,000킬로바이트의 대역폭으로 제한합니다. 
@@ -54,7 +54,7 @@ ms.openlocfilehash: 2a5078b34f74efd5d394587d8ace7f339ecedb5e
     counter-key="@(context.Request.Headers.GetValueOrDefault("Authorization","").AsJwt()?.Subject)" />
 ```
 
-이 예제에서는 인증 헤더를 추출하여 `JWT` 개체로 변환하고 토큰의 주체를 사용하여 사용자를 식별하고 속도 제한 키로 사용합니다. 사용자 ID가 `JWT` 에 다른 클레임 중 하나로 저장된 경우 해당 값을 대신 사용할 수 있습니다.
+이 예제에서는 인증 헤더를 추출하여 `JWT` 개체로 변환하고 토큰의 주체를 사용하여 사용자를 식별하고 속도 제한 키로 사용하는 방법을 보여 줍니다. 사용자 ID가 `JWT`에 다른 클레임 중 하나로 저장된 경우 해당 값을 대신 사용할 수 있습니다.
 
 ## <a name="combined-policies"></a>결합된 정책
 새 제한 정책이 기존 제한 정책보다 더 많은 제어를 제공하더라도 여전히 두 기능을 결합하는 값이 있습니다. 제품 구독 키로 제한([구독으로 호출 속도 제한](https://msdn.microsoft.com/library/azure/dn894078.aspx#LimitCallRate) 및 [구독으로 사용 할당량 설정](https://msdn.microsoft.com/library/azure/dn894078.aspx#SetUsageQuota))은 사용 수준에 따라 요금을 청구하여 API 수익화를 실현하는 뛰어난 방법입니다. 사용자별로 제한할 수 있도록 세분화된 제어로 보완되며 한 사용자의 동작이 다른 사용자의 환경에 부정적인 영향을 주지 않도록 합니다. 
@@ -68,24 +68,11 @@ ms.openlocfilehash: 2a5078b34f74efd5d394587d8ace7f339ecedb5e
           counter-key="@(request.Headers.GetValueOrDefault("Rate-Key",""))"/>
 ```
 
-따라서 개발자의 클라이언트 응용 프로그램이 속도 제한 키를 만드는 방법을 선택할 수 있습니다. 약간의 창의성만 발휘한다면 클라이언트 개발자는 키 집합을 사용자에 할당하고 키 사용을 회전하여 자신의 고유한 속도 계층을 만들 수 있습니다.
+따라서 개발자의 클라이언트 응용 프로그램이 속도 제한 키를 만드는 방법을 선택할 수 있습니다. 클라이언트 개발자는 키 집합을 사용자에 할당하고 키 사용을 회전하여 자신의 고유한 속도 계층을 만들 수 있습니다.
 
 ## <a name="summary"></a>요약
-Azure API 관리에서는 속도 및 할당량 제한을 제공하여 API 서비스를 보호하고 가치를 더합니다. 사용자 지정 범위 규칙이 포함된 새로운 제한 정책을 통해 정책을 세밀하게 제어할 수 있으므로 고객이 훨씬 향상된 응용 프로그램을 구축할 수 있도록 합니다. 이 문서의 예제에서는 클라이언트 IP 주소, 사용자 ID 및 클라이언트에서 생성한 값으로 속도 제한 키를 제조하여 이러한 새 정책을 사용하는 방법을 보여줍니다. 그러나 사용자 에이전트, URL 경로 조각, 메시지 크기와 같이 사용할 수 있는 메시지의 많은 다른 부분이 있습니다.
+Azure API Management에서는 속도 및 할당량 제한을 제공하여 API 서비스를 보호하고 가치를 더합니다. 사용자 지정 범위 규칙이 포함된 새로운 제한 정책을 통해 정책을 세밀하게 제어할 수 있으므로 고객이 훨씬 향상된 응용 프로그램을 구축할 수 있도록 합니다. 이 문서의 예제에서는 클라이언트 IP 주소, 사용자 ID 및 클라이언트에서 생성한 값으로 속도 제한 키를 제조하여 이러한 새 정책을 사용하는 방법을 보여줍니다. 그러나 사용자 에이전트, URL 경로 조각, 메시지 크기와 같이 사용할 수 있는 메시지의 많은 다른 부분이 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
 이 항목에 대한 Disqus 스레드에 의견을 보내주세요. 귀하의 시나리오에서 논리적으로 선택된 잠재적인 다른 키 값에 대한 의견을 환영합니다.
-
-## <a name="watch-a-video-overview-of-these-policies"></a>이러한 정책에 대한 동영상 개요 시청
-이 문서에서 다루는 [rate-limit-by-key](https://msdn.microsoft.com/library/azure/dn894078.aspx#LimitCallRateByKey) 및 [quota-by-key](https://msdn.microsoft.com/library/azure/dn894078.aspx#SetUsageQuotaByKey) 정책에 대한 자세한 내용은 다음 동영상을 참조하세요.
-
-> [!VIDEO https://channel9.msdn.com/Blogs/AzureApiMgmt/Advanced-Request-Throttling-with-Azure-API-Management/player]
-> 
-> 
-
-
-
-
-<!--HONumber=Nov16_HO3-->
-
 

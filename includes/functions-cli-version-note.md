@@ -1,0 +1,1 @@
+이 스크립트로 만든 함수 앱은 [Azure Functions 런타임](..\articles\azure-functions\functions-versions.md) 버전 1.x를 사용합니다. 미리 보기에 있는 2.x 버전으로 업그레이드하는 방법은 [Azure CLI를 사용하여 대상 버전 지정](..\articles\azure-functions\set-runtime-version.md#target-a-version-using-azure-cli)을 참조하세요. 

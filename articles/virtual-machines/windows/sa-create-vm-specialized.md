@@ -1,11 +1,11 @@
 ---
-title: "Azure에서 특수한 디스크로 VM 만들기 | Microsoft Docs"
-description: "Resource Manager 배포 모델에서 특수한 비관리 디스크를 연결하여 새 VM을 만듭니다."
+title: Azure에서 특수한 디스크로 VM 만들기 | Microsoft Docs
+description: Resource Manager 배포 모델에서 특수한 비관리 디스크를 연결하여 새 VM을 만듭니다.
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
 ms.assetid: 3b7d3cd5-e3d7-4041-a2a7-0290447458ea
 ms.service: virtual-machines-windows
@@ -15,21 +15,21 @@ ms.devlang: na
 ms.topic: article
 ms.date: 05/23/2017
 ms.author: cynthn
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: c5fa164c1095a343402d28142efb92a832441d23
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
-
+ROBOTS: NOINDEX
+ms.openlocfilehash: da1fa2b182888e623f8df734c9119e208433e2bd
+ms.sourcegitcommit: 909469bf17211be40ea24a981c3e0331ea182996
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
+ms.locfileid: "34012712"
 ---
 # <a name="create-a-vm-from-a-specialized-vhd-in-a-storage-account"></a>저장소 계정의 특수한 VHD에서 VM 만들기
 
 Powershell을 사용하여 특수한 비관리 디스크를 OS 디스크로 연결하여 새 VM을 만듭니다. 특수한 디스크는 기존 VM의 VHD 복사본으로 사용자 계정, 응용 프로그램 및 원본 VM의 기타 상태 데이터를 유지합니다. 
 
 다음 두 가지 옵션을 사용할 수 있습니다.
-* [VHD 업로드](create-vm-specialized.md#option-1-upload-a-specialized-vhd)
-* [기존 Azure VM의 VHD 복사](create-vm-specialized.md#option-2-copy-an-existing-azure-vm)
+* [VHD 업로드](sa-create-vm-specialized.md#option-1-upload-a-specialized-vhd)
+* [기존 Azure VM의 VHD 복사](sa-create-vm-specialized.md#option-2-copy-an-existing-azure-vm)
 
 ## <a name="before-you-begin"></a>시작하기 전에
 PowerShell을 사용하는 경우 AzureRM.Compute PowerShell 모듈이 최신 버전인지 확인합니다. 다음 명령을 실행하여 PowerShell을 설치합니다.
@@ -119,37 +119,37 @@ C:\Users\Public\Doc...  https://mystorageaccount.blob.core.windows.net/mycontain
 ### <a name="before-you-begin"></a>시작하기 전에
 다음 사항을 확인합니다.
 
-* **원본 및 대상 저장소 계정**에 대한 정보가 있습니다. 원본 VM의 경우 저장소 계정 및 컨테이너 이름이 필요합니다. 일반적으로 컨테이너 이름은 **vhds**가 됩니다. 또한 대상 저장소 계정도 있어야 합니다. 아직 없는 경우 포털(**더 많은 서비스** > 저장소 계정 > 추가) 또는 [New-AzureRmStorageAccount](/powershell/module/azurerm.storage/new-azurermstorageaccount) cmdlet을 사용하여 만들 수 있습니다. 
-* [AzCopy 도구](../../storage/storage-use-azcopy.md)를 다운로드 및 설치했습니다. 
+* **원본 및 대상 저장소 계정**에 대한 정보가 있습니다. 원본 VM의 경우 저장소 계정 및 컨테이너 이름이 필요합니다. 일반적으로 컨테이너 이름은 **vhds**가 됩니다. 또한 대상 저장소 계정도 있어야 합니다. 아직 없는 경우 포털(**모든 서비스** > 저장소 계정 > 추가) 또는 [New-AzureRmStorageAccount](/powershell/module/azurerm.storage/new-azurermstorageaccount) cmdlet을 사용하여 만들 수 있습니다. 
+* [AzCopy 도구](../../storage/common/storage-use-azcopy.md)를 다운로드 및 설치했습니다. 
 
 ### <a name="deallocate-the-vm"></a>VM 할당을 취소합니다.
 VM 할당을 취소하여 복사할 VHD를 해제합니다. 
 
-* **포털**: **가상 컴퓨터** > **myVM** > 중지를 클릭합니다.
+* **포털**: **가상 머신** > **myVM** > 중지를 클릭합니다.
 * **Powershell**: [Stop-AzureRmVM](/powershell/module/azurerm.compute/stop-azurermvm)을 사용하여 **myResourceGroup** 리소스 그룹에서 **myVM**으로 명명된 VM을 중지(할당 취소)합니다.
 
 ```powershell
 Stop-AzureRmVM -ResourceGroupName myResourceGroup -Name myVM
 ```
 
-Azure Portal의 VM에 대한 **상태**가 **중지됨**에서 **중지됨(할당 취소됨)**으로 변경됩니다.
+Azure Portal의 VM에 대한 **상태**가 **중지됨**에서 **중지됨(할당 취소됨)** 으로 변경됩니다.
 
 ### <a name="get-the-storage-account-urls"></a>저장소 계정 URL 가져오기
 원본 및 대상 저장소 계정의 URL이 필요합니다. URL은 `https://<storageaccount>.blob.core.windows.net/<containerName>/` 형태입니다. 저장소 계정 및 컨테이너 이름을 이미 알고 있는 경우 괄호 사이의 정보를 바꿔서 URL을 만듭니다. 
 
 Azure 포털 또는 Azure PowerShell을 사용하여 URL을 가져옵니다.
 
-* **포털**: **>** **추가 서비스** > **저장소 계정** > *저장소 계정* > **Blob**을 클릭하면 원본 VHD 파일이 **vhds** 컨테이너에 있을 것입니다. 컨테이너의 **속성**을 클릭하고 레이블이 **URL**인 텍스트를 복사합니다. 원본 및 대상 컨테이너의 URL이 모두 필요합니다. 
-* **Powershell**: [Get-AzureRmVM](/powershell/module/azurerm.compute/get-azurermvm)을 사용하여 **myResourceGroup** 리소스 그룹에서 **myVM**으로 명명된 VM에 대한 정보를 가져옵니다. 결과에서 **Vhd Uri**에 대한 **저장소 프로필** 섹션을 살펴봅니다. Uri의 첫 번째 부분은 컨테이너에 대한 URL이고 마지막 부분은 VM에 대한 OS VHD 이름입니다.
+* **포털**: **>** **모든 서비스** > **저장소 계정** > *저장소 계정* > **Blob**을 클릭하면 원본 VHD 파일이 **vhds** 컨테이너에 있을 것입니다. 컨테이너의 **속성**을 클릭하고 레이블이 **URL**인 텍스트를 복사합니다. 원본 및 대상 컨테이너의 URL이 모두 필요합니다. 
+* **Powershell**: [Get-AzureRmVM](/powershell/module/azurerm.compute/get-azurermvm)을 사용하여 **myResourceGroup** 리소스 그룹에서 **myVM**으로 명명된 VM에 대한 정보를 가져옵니다. 결과에서 **Vhd Uri**에 대한 **Storage 프로필** 섹션을 살펴봅니다. Uri의 첫 번째 부분은 컨테이너에 대한 URL이고 마지막 부분은 VM에 대한 OS VHD 이름입니다.
 
 ```powershell
 Get-AzureRmVM -ResourceGroupName "myResourceGroup" -Name "myVM"
 ``` 
 
 ## <a name="get-the-storage-access-keys"></a>저장소 액세스 키 가져오기
-원본 및 대상 저장소 계정에 대한 액세스 키를 찾습니다. 액세스 키에 대한 자세한 내용은 [Azure 저장소 계정 방법](../../storage/storage-create-storage-account.md)을 참조하세요.
+원본 및 대상 저장소 계정에 대한 액세스 키를 찾습니다. 액세스 키에 대한 자세한 내용은 [Azure 저장소 계정 방법](../../storage/common/storage-create-storage-account.md)을 참조하세요.
 
-* **포털**: **추가 서비스** > **저장소 계정** > *저장소 계정* > **액세스 키**를 클릭합니다. **key1**로 레이블이 지정된 키를 복사합니다.
+* **포털**: **모든 서비스** > **저장소 계정** > *저장소 계정* > **액세스 키**를 클릭합니다. **key1**로 레이블이 지정된 키를 복사합니다.
 * **Powershell**: [Get-AzureRmStorageAccountKey](/powershell/module/azurerm.storage/get-azurermstorageaccountkey)를 사용하여 **myResourceGroup** 리소스 그룹에서 **mystorageaccount** 저장소 계정에 대한 저장소 키를 가져옵니다. **key1**로 레이블이 지정된 키를 복사합니다.
 
 ```powershell
@@ -218,27 +218,9 @@ Elapsed time:            00.00:13:07
     $vnet = New-AzureRmVirtualNetwork -Name $vnetName -ResourceGroupName $rgName -Location $location `
         -AddressPrefix 10.0.0.0/16 -Subnet $singleSubnet
     ```    
-
-### <a name="create-a-public-ip-address-and-nic"></a>공용 IP 주소 및 NIC 만들기
-가상 네트워크에서 가상 컴퓨터와 통신하려면 [공용 IP 주소](../../virtual-network/virtual-network-ip-addresses-overview-arm.md) 및 네트워크 인터페이스가 필요합니다.
-
-1. 공용 IP를 만듭니다. 이 예제에서는 공용 IP 주소 이름을 **myIP**로 설정합니다.
-   
-    ```powershell
-    $ipName = "myIP"
-    $pip = New-AzureRmPublicIpAddress -Name $ipName -ResourceGroupName $rgName -Location $location `
-        -AllocationMethod Dynamic
-    ```       
-2. NIC 만들기. 이 예제에서는 NIC 이름을 **myNicName**으로 설정합니다.
-   
-    ```powershell
-    $nicName = "myNicName"
-    $nic = New-AzureRmNetworkInterface -Name $nicName -ResourceGroupName $rgName `
-    -Location $location -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $pip.Id
-    ```
-
 ### <a name="create-the-network-security-group-and-an-rdp-rule"></a>네트워크 보안 그룹 및 RDP 규칙 만들기
-RDP를 사용하여 VM에 로그인할 수 있으려면 포트 3389에 대한 RDP 액세스를 허용하는 보안 규칙이 필요합니다. 새 VM의 VHD가 기존의 특수한 VM에서 생성되었기 때문에 VM이 만들어진 후에 RDP를 사용하여 로그온할 사용 권한을 갖고 있던 원본 가상 컴퓨터에서 기존 계정을 사용할 수 있습니다.
+RDP를 사용하여 VM에 로그인할 수 있으려면 포트 3389에 대한 RDP 액세스를 허용하는 보안 규칙이 필요합니다. 새 VM의 VHD가 기존의 특수한 VM에서 생성되었기 때문에 VM이 만들어진 후에 RDP를 사용하여 로그온할 사용 권한을 갖고 있던 원본 가상 머신에서 기존 계정을 사용할 수 있습니다.
+연결될 네트워크 인터페이스를 만들기 전에 완료해야 합니다.  
 이 예제에서는 NSG 이름을 **myNsg**로 설정하고 RDP 규칙 이름을 **myRdpRule**로 설정합니다.
 
 ```powershell
@@ -254,6 +236,24 @@ $nsg = New-AzureRmNetworkSecurityGroup -ResourceGroupName $rgName -Location $loc
 ```
 
 끝점 및 NSG 규칙에 대한 자세한 내용은 [PowerShell을 사용하여 Azure에서 VM으로 포트 열기](nsg-quickstart-powershell.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 참조하세요.
+
+### <a name="create-a-public-ip-address-and-nic"></a>공용 IP 주소 및 NIC 만들기
+가상 네트워크에서 가상 머신과 통신하려면 [공용 IP 주소](../../virtual-network/virtual-network-ip-addresses-overview-arm.md) 및 네트워크 인터페이스가 필요합니다.
+
+1. 공용 IP를 만듭니다. 이 예제에서는 공용 IP 주소 이름을 **myIP**로 설정합니다.
+   
+    ```powershell
+    $ipName = "myIP"
+    $pip = New-AzureRmPublicIpAddress -Name $ipName -ResourceGroupName $rgName -Location $location `
+        -AllocationMethod Dynamic
+    ```       
+2. NIC 만들기. 이 예제에서는 NIC 이름을 **myNicName**으로 설정합니다. 또한 이번 단계에서는 앞에서 만든 네트워크 보안 그룹을 이 NIC와 연결합니다.
+   
+    ```powershell
+    $nicName = "myNicName"
+    $nic = New-AzureRmNetworkInterface -Name $nicName -ResourceGroupName $rgName `
+    -Location $location -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $pip.Id -NetworkSecurityGroupId $nsg.Id
+    ```
 
 ### <a name="set-the-vm-name-and-size"></a>VM 이름 및 크기 설정
 
@@ -313,7 +313,7 @@ RequestId IsSuccessStatusCode StatusCode ReasonPhrase
 ```
 
 ### <a name="verify-that-the-vm-was-created"></a>VM이 만들어졌는지 확인
-새로 만든 VM은 [Azure Portal](https://portal.azure.com)에서 **찾아보기** > **가상 컴퓨터**에 표시되며 다음 PowerShell 명령을 사용해도 표시할 수 있습니다.
+새로 만든 VM은 [Azure Portal](https://portal.azure.com)에서 **모든 서비스** > **가상 머신**에 표시되며 다음 PowerShell 명령을 사용해도 표시할 수 있습니다.
 
 ```powershell
 $vmList = Get-AzureRmVM -ResourceGroupName $rgName
@@ -321,6 +321,5 @@ $vmList.Name
 ```
 
 ## <a name="next-steps"></a>다음 단계
-새 가상 컴퓨터에 로그인하려면 [포털](https://portal.azure.com)에서 VM으로 이동한 다음 **연결**을 클릭하고 원격 데스크톱 RDP 파일을 엽니다. 원본 가상 컴퓨터의 계정 자격 증명을 사용하여 새 가상 컴퓨터에 로그인합니다. 자세한 내용은 [Windows를 실행하는 Azure 가상 컴퓨터에 연결하고 로그온하는 방법](connect-logon.md)을 참조하세요.
-
+새 가상 머신에 로그인합니다. 자세한 내용은 [Windows를 실행하는 Azure 가상 머신에 연결하고 로그온하는 방법](connect-logon.md)을 참조하세요.
 

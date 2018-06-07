@@ -1,6 +1,6 @@
 ---
-title: "자습서: Clever와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory와 Clever 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Clever와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory와 Clever 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -12,14 +12,14 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/20/2017
+ms.date: 04/27/2018
 ms.author: jeedes
+ms.openlocfilehash: d151aba43a6795c5a691077fe6729fc9853012bf
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
-ms.openlocfilehash: 84082ff567e37d7fff80be9e089c67cfab911861
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34341487"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-clever"></a>자습서: Clever와 Azure Active Directory 통합
 
@@ -31,7 +31,7 @@ Clever를 Azure AD와 통합하면 다음과 같은 이점이 제공됩니다.
 - 사용자가 해당 Azure AD 계정으로 Clever에 자동으로 로그온(Single Sign-on)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +59,7 @@ Clever의 Azure AD 통합을 구성하려면 갤러리의 Clever를 관리되는
 
 **갤러리에서 Clever를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -102,7 +102,7 @@ Clever에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 �
     ![Single Sign-On 구성 링크][4]
 
 2. **Single Sign-On** 대화 상자에서 **모드**를 **SAML 기반 로그온**으로 선택하여 Single Sign-On을 사용하도록 설정합니다.
- 
+
     ![Single Sign-On 대화 상자](./media/active-directory-saas-clever-tutorial/tutorial_clever_samlbase.png)
 
 3. **Clever 도메인 및 URL** 섹션에서 다음 단계를 수행합니다.
@@ -111,91 +111,71 @@ Clever에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 �
 
     a. **로그온 URL** 텍스트 상자에서 다음 패턴으로 URL을 입력합니다. `https://clever.com/in/<companyname>`
 
-    b. **식별자** 텍스트 상자에서 `https://clever.com/<companyname>` 패턴을 사용하여 URL을 입력합니다.
+    나. **식별자** 텍스트 상자에 URL `https://clever.com/oauth/saml/metadata.xml`을 입력합니다.
 
-    > [!NOTE] 
-    > 이러한 값은 실제 값이 아닙니다. 실제 로그온 URL 및 식별자로 값을 업데이트합니다. 이러한 값을 얻으려면 [Clever 클라이언트 지원팀](https://clever.com/about/contact/)에 문의하세요.
+    > [!NOTE]
+    > 로그온 URL 값은 실제 값이 아닙니다. 이 값을 실제 로그온 URL로 업데이트합니다. 이 값을 얻으려면 [Clever 클라이언트 지원 팀](https://clever.com/about/contact/)에 문의하세요.
 
-4. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 메타데이터 파일을 저장합니다.
-
-    ![인증서 다운로드 링크](./media/active-directory-saas-clever-tutorial/tutorial_clever_certificate.png)
+4. **SAML 서명 인증서** 섹션에서 복사 단추를 클릭하여 **앱 페더레이션 메타데이터 URL**을 복사하고 메모장에 붙여넣습니다.
+    
+    ![Configure Single Sign-On](./media/active-directory-saas-clever-tutorial/tutorial_metadataurl.png)
 
 5. Clever 응용 프로그램은 특정 서식에서 SAML 어설션을 예상하며 이는 **SAML 토큰 특성** 구성에 사용자 지정 특성 매핑을 추가합니다.
 
     다음 스크린샷은 이에 대한 예제를 보여 줍니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-clever-tutorial/tutorial_clever_07.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-clever-tutorial/tutorial_clever_07.png)
 
 6. **Single sign-on** 대화 상자의 **사용자 특성** 섹션에서 위의 이미지에 표시된 것과 같이 SAML 토큰 특성을 구성하고 다음 단계를 수행합니다.
     
     | 특성 이름  | 특성 값 |
-    | --------------- | -------------------- |    
-    | clever.student.credentials.district\_username  | user.userprincipalname |
+    | --------------- | -------------------- |
+    | clever.teacher.credentials.district_username|user.userprincipalname|
+    | clever.student.credentials.district_username| user.userprincipalname |
     | firstname  | user.givenname |
-    | Lastname  | user.surname |    
+    | Lastname  | user.surname |
 
     a. **특성 추가**를 클릭하여 **특성 추가** 대화 상자를 엽니다.
 
-    ![Single Sign-On 구성](./media/active-directory-saas-clever-tutorial/tutorial_attribute_04.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-clever-tutorial/tutorial_attribute_04.png)
     
-    ![Single Sign-on 구성](./media/active-directory-saas-clever-tutorial/tutorial_attribute_05.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-clever-tutorial/tutorial_attribute_05.png)
     
-    b. **이름** 텍스트 상자에서 해당 행에 표시된 특성 이름을 입력합니다.
+    나. **이름** 텍스트 상자에서 해당 행에 표시된 특성 이름을 입력합니다.
 
-    c. **값** 목록에서 해당 행에 대해 표시된 특성을 입력합니다.
+    다. **값** 목록에서 해당 행에 대해 표시된 특성을 입력합니다.
 
     d. **네임스페이스** 텍스트 상자를 비어 있는 상태로 둡니다.
     
-    d. **Ok**를 클릭합니다.     
-
-5. **저장** 단추를 클릭합니다.
+    d. **Ok**를 클릭합니다.
+    
+7. **저장** 단추를 클릭합니다.
 
     ![Single Sign-On 구성 저장 단추](./media/active-directory-saas-clever-tutorial/tutorial_general_400.png)
 
-8. **메타데이터** URL을 생성하려면 다음 단계를 수행합니다.
+8. 다른 웹 브라우저 창에서 Clever 회사 사이트에 관리자로 로그인합니다.
 
-    a. **앱 등록**을 클릭합니다.
-    
-    ![Single Sign-on 구성](./media/active-directory-saas-clever-tutorial/tutorial_clever_appregistrations.png)
-   
-    b. **끝점**을 클릭하여 **끝점** 대화 상자를 엽니다.  
-    
-    ![Single Sign-on 구성](./media/active-directory-saas-clever-tutorial/tutorial_clever_endpointicon.png)
-
-    c. 복사 단추를 클릭하여 **페더레이션 메타데이터 문서** URL을 복사하여 메모장에 붙여 넣습니다.
-    
-    ![Single Sign-on 구성](./media/active-directory-saas-clever-tutorial/tutorial_clever_endpoint.png)
-     
-    d. 이제 **Clever**의 속성 페이지로 이동하고 **복사** 단추를 사용하여 **응용 프로그램 ID**를 복사하여 메모장에 붙여 넣습니다.
- 
-    ![Single Sign-on 구성](./media/active-directory-saas-clever-tutorial/tutorial_clever_appid.png)
-
-    e. `<FEDERATION METADATA DOCUMENT url>?appid=<application id>` 패턴을 사용하여 **메타데이터 URL**을 생성합니다.   
-
-9. 다른 웹 브라우저 창에서 Clever 회사 사이트에 관리자로 로그인합니다.
-
-10. 도구 모음에서 **인스턴트 로그인**을 클릭합니다.
+9. 도구 모음에서 **인스턴트 로그인**을 클릭합니다.
 
     ![인스턴트 로그인](./media/active-directory-saas-clever-tutorial/ic798984.png "인스턴트 로그인")
 
-11. **인스턴트 로그인** 페이지에서 다음 단계를 수행합니다.
-      
+    > [!NOTE]
+    > Single Sign-On을 테스트하려면 [Clever 클라이언트 지원 팀](https://clever.com/about/contact/)에 연락하여 백 엔드에서 Office 365 SSO를 활성화해야 합니다.
+
+10. **인스턴트 로그인** 페이지에서 다음 단계를 수행합니다.
+    
       ![인스턴트 로그인](./media/active-directory-saas-clever-tutorial/ic798985.png "인스턴트 로그인")
-      
+    
       a. **로그인 URL**을 입력합니다.
-      
+    
       >[!NOTE]
       >**로그인 URL** 은 사용자 지정 값입니다. 이 값을 얻으려면 [Clever 클라이언트 지원 팀](https://clever.com/about/contact/)에 문의하세요.
-      
-      b. **ID 시스템**으로 **ADFS**를 선택합니다.
+    
+      나. **ID 시스템**으로 **ADFS**를 선택합니다.
 
-      c. **메타데이터 URL** 텍스트 상자에 **메타데이터 URL**을 입력합니다.
-      
-      d. **Save**를 클릭합니다.
-
-> [!TIP]
-> 이제 앱을 설정하는 동안 [Azure Portal](https://portal.azure.com) 내에서 이러한 지침의 간결한 버전을 읽을 수 있습니다.  **Active Directory > 엔터프라이즈 응용 프로그램** 섹션에서 이 앱을 추가한 후에는 **Single Sign-On** 탭을 클릭하고 맨 아래에 있는 **구성** 섹션을 통해 포함된 설명서에 액세스하면 됩니다. 포함된 설명서 기능에 대한 자세한 내용은 [Azure AD 포함된 설명서]( https://go.microsoft.com/fwlink/?linkid=845985)에서 확인할 수 있습니다.
-> 
+      다. Azure Portal에서 복사한 **앱 페더레이션 메타데이터 URL** 값을 **메타데이터 URL** 텍스트 상자에 붙여넣습니다.
+    
+      d. **저장**을 클릭합니다.
 
 ### <a name="create-an-azure-ad-test-user"></a>Azure AD 테스트 사용자 만들기
 
@@ -223,17 +203,17 @@ Clever에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 �
 
     a. **이름** 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
+    나. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
 
-    c. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
+    다. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
- 
+
 ### <a name="create-a-clever-test-user"></a>Clever 테스트 사용자 만들기
 
 Azure AD 사용자가 Clever에 로그인할 수 있도록 하려면 Clever로 프로비전되어야 합니다.
 
-Clever의 경우 Clever 플랫폼에 사용자를 추가하려면 [Clever 클라이언트 지원 팀](https://clever.com/about/contact/)에 문의합니다. Single Sign-On을 사용하려면 먼저 사용자를 만들고 활성화해야 합니다. 
+Clever의 경우 Clever 플랫폼에 사용자를 추가하려면 [Clever 클라이언트 지원 팀](https://clever.com/about/contact/)에 문의합니다. Single Sign-On을 사용하려면 먼저 사용자를 만들고 활성화해야 합니다.
 
 >[!NOTE]
 >다른 Clever 사용자 계정 생성 도구 또는 Clever가 제공한 API를 사용하여 Azure AD 사용자 계정을 프로비전할 수 있습니다.
@@ -242,17 +222,17 @@ Clever의 경우 Clever 플랫폼에 사용자를 추가하려면 [Clever 클라
 
 이 섹션에서는 Azure Single Sign-On을 사용할 수 있도록 Britta Simon에게 Clever에 대한 액세스 권한을 부여합니다.
 
-![사용자 역할 할당][200] 
+![사용자 역할 할당][200]
 
 **Britta Simon을 Clever에 할당하려면 다음 단계를 수행합니다.**
 
 1. Azure Portal에서 응용 프로그램 보기를 연 다음 디렉터리 보기로 이동하고 **엔터프라이즈 응용 프로그램**으로 이동한 후 **모든 응용 프로그램**을 클릭합니다.
 
-    ![사용자 할당][201] 
+    ![사용자 할당][201]
 
 2. 응용 프로그램 목록에서 **Clever**를 선택합니다.
 
-    ![응용 프로그램 목록의 Clever 링크](./media/active-directory-saas-clever-tutorial/tutorial_clever_app.png)  
+    ![응용 프로그램 목록의 Clever 링크](./media/active-directory-saas-clever-tutorial/tutorial_clever_app.png)
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -267,18 +247,18 @@ Clever의 경우 Clever 플랫폼에 사용자를 추가하려면 [Clever 클라
 6. **사용자 및 그룹** 대화 상자에서 **선택** 단추를 클릭합니다.
 
 7. **할당 추가** 대화 상자에서 **할당** 단추를 클릭합니다.
-    
+
 ### <a name="test-single-sign-on"></a>Single Sign-On 테스트
 
 이 섹션에서는 액세스 패널을 사용하여 Azure AD Single Sign-On 구성을 테스트합니다.
 
 액세스 패널에서 Clever 타일을 클릭하면 Clever 응용 프로그램에 자동으로 로그온됩니다.
-액세스 패널에 대한 자세한 내용은 [액세스 패널 소개](active-directory-saas-access-panel-introduction.md)를 참조하세요. 
+액세스 패널에 대한 자세한 내용은 [액세스 패널 소개](active-directory-saas-access-panel-introduction.md)를 참조하세요.
 
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 <!--Image references-->
 
@@ -293,5 +273,4 @@ Clever의 경우 Clever 플랫폼에 사용자를 추가하려면 [Clever 클라
 [201]: ./media/active-directory-saas-clever-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-clever-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-clever-tutorial/tutorial_general_203.png
-
 

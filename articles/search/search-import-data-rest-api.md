@@ -1,48 +1,40 @@
 ---
-title: "데이터 업로드(REST API - Azure Search) | Microsoft Docs"
-description: "REST API를 사용하여 Azure 검색에서 인덱스에 데이터를 업로드하는 방법에 대해 알아봅니다."
+title: 데이터 업로드(REST API - Azure Search) | Microsoft Docs
+description: REST API를 사용하여 Azure Search에서 인덱스에 데이터를 업로드하는 방법에 대해 알아봅니다.
+author: brjohnstmsft
+manager: jlembicz
+ms.author: brjohnst
 services: search
-documentationcenter: 
-author: ashmaka
-manager: jhubbard
-editor: 
-tags: 
-ms.assetid: 8d0749fb-6e08-4a17-8cd3-1a215138abc6
 ms.service: search
 ms.devlang: rest-api
-ms.workload: search
-ms.topic: get-started-article
-ms.tgt_pltfrm: na
-ms.date: 12/08/2016
-ms.author: ashmaka
+ms.topic: quickstart
+ms.date: 04/20/2018
+ms.openlocfilehash: 53b20c9db7efe1f8876eec7c0167dc151aa38786
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: f22a33ed86fbfc46dfa732239263a49f34c4afee
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-
-# <a name="upload-data-to-azure-search-using-the-rest-api"></a>REST API를 사용하여 Azure 검색에 데이터 업로드
+# <a name="upload-data-to-azure-search-using-the-rest-api"></a>REST API를 사용하여 Azure Search에 데이터 업로드
 > [!div class="op_single_selector"]
 >
 > * [개요](search-what-is-data-import.md)
 > * [.NET](search-import-data-dotnet.md)
-> * [REST](search-import-data-rest-api.md)
+> * [REST (영문)](search-import-data-rest-api.md)
 >
 >
 
-이 문서에서는 [Azure 검색 REST API](https://docs.microsoft.com/rest/api/searchservice/) 를 사용하여 Azure 검색 인덱스에 데이터를 가져오는 방법을 보여줍니다.
+이 문서에서는 [Azure Search REST API](https://docs.microsoft.com/rest/api/searchservice/) 를 사용하여 Azure Search 인덱스에 데이터를 가져오는 방법을 보여줍니다.
 
-이 연습을 시작하기 전에 [Azure 검색 인덱스를 만들어야](search-what-is-an-index.md)합니다.
+이 연습을 시작하기 전에 [Azure Search 인덱스를 만들어야](search-what-is-an-index.md)합니다.
 
 REST API를 사용하여 인덱스에 문서를 푸시하기 위해 인덱스의 URL 끝점에 HTTP 게시 요청을 발급합니다. HTTP 요청 본문의 본문은 문서의 추가, 수정 또는 삭제를 포함하는 JSON 개체입니다.
 
-## <a name="identify-your-azure-search-services-admin-api-key"></a>Azure 검색 서비스의 관리 API 키 식별
-REST API를 사용하여 서비스에 대한 HTTP 요청을 발급하는 경우 *각* API 요청은 프로비전한 검색 서비스에 생성된 API 키를 포함해야 합니다. 유효한 키가 있다면 요청을 기반으로 요청을 보내는 응용 프로그램과 이를 처리하는 서비스 사이에 신뢰가 쌓입니다.
+## <a name="identify-your-azure-search-services-admin-api-key"></a>Azure Search 서비스의 관리 API 키 식별
+REST API를 사용하여 서비스에 대한 HTTP 요청을 발급하는 경우 *각* API 요청은 프로비전한 Search 서비스에 생성된 API 키를 포함해야 합니다. 유효한 키가 있다면 요청을 기반으로 요청을 보내는 응용 프로그램과 이를 처리하는 서비스 사이에 신뢰가 쌓입니다.
 
 1. [Azure Portal](https://portal.azure.com/)에 로그인하면 서비스의 API 키를 찾을 수 있습니다.
-2. Azure 검색 서비스의 블레이드로 이동합니다.
+2. Azure Search 서비스의 블레이드로 이동합니다.
 3. "키" 아이콘을 클릭합니다.
 
 서비스에는 *관리 키* 및 *쿼리 키*가 있습니다.
@@ -53,7 +45,7 @@ REST API를 사용하여 서비스에 대한 HTTP 요청을 발급하는 경우 
 인덱스에 데이터를 가져오기 위해 기본 또는 보조 관리 키를 사용할 수 있습니다.
 
 ## <a name="decide-which-indexing-action-to-use"></a>사용할 인덱싱 동작 결정
-REST API를 사용하는 경우 Azure 검색 인덱스의 끝점 URL에 대한 JSON 요청 본문을 사용하여 HTTP POST 요청을 발급합니다. HTTP 요청 본문의 JSON 개체는 인덱스, 업데이트 또는 삭제에 추가하려는 문서를 나타내는 JSON 개체를 포함하는 "값"이라는 단일 JSON 배열을 포함합니다.
+REST API를 사용하는 경우 Azure Search 인덱스의 끝점 URL에 대한 JSON 요청 본문을 사용하여 HTTP POST 요청을 발급합니다. HTTP 요청 본문의 JSON 개체는 인덱스, 업데이트 또는 삭제에 추가하려는 문서를 나타내는 JSON 개체를 포함하는 "값"이라는 단일 JSON 배열을 포함합니다.
 
 "값" 배열의 각 JSON 개체는 인덱싱할 문서를 나타냅니다. 이러한 각 개체는 문서의 키를 포함하고 원하는 인덱싱 작업(업로드, 병합, 삭제 등)을 지정합니다. 아래에서 어떤 작업을 선택하는지에 따라 특정 필드는 각 문서에 포함되어야 합니다.
 
@@ -68,9 +60,9 @@ REST API를 사용하는 경우 Azure 검색 인덱스의 끝점 URL에 대한 J
 인덱스 작업에 필요한 필드 값을 수집했다면 실제 HTTP 요청 및 JSON 요청 본문을 생성하여 데이터를 가져올 준비가 되었습니다.
 
 #### <a name="request-and-request-headers"></a>요청 및 요청 헤더
-URL에서 서비스 이름, 인덱스 이름(이 경우 "호텔") 뿐만 아니라 적절한 API 버전을 제공해야 합니다(이 문서를 게시할 때 현재 API 버전은 `2016-09-01` 임). `Content-Type` 및 `api-key` 요청 헤더를 정의해야 합니다. 후자의 경우 서비스의 관리 키 중 하나를 사용합니다.
+URL에서 서비스 이름, 인덱스 이름(이 경우 "호텔") 뿐만 아니라 적절한 API 버전을 제공해야 합니다(이 문서를 게시할 때 현재 API 버전은 `2017-11-11` 임). `Content-Type` 및 `api-key` 요청 헤더를 정의해야 합니다. 후자의 경우 서비스의 관리 키 중 하나를 사용합니다.
 
-    POST https://[search service].search.windows.net/indexes/hotels/docs/index?api-version=2016-09-01
+    POST https://[search service].search.windows.net/indexes/hotels/docs/index?api-version=2017-11-11
     Content-Type: application/json
     api-key: [admin key]
 
@@ -177,8 +169,7 @@ URL에서 서비스 이름, 인덱스 이름(이 경우 "호텔") 뿐만 아니�
 >
 >
 
-문서 동작 및 성공/오류 응답에 대한 자세한 내용은 [문서 추가, 업데이트 또는 삭제](https://docs.microsoft.com/rest/api/searchservice/AddUpdate-or-Delete-Documents)를 참조하세요. 오류가 발생한 경우 반환될 수 있는 기타 HTTP 상태 코드에 대한 자세한 내용은 [HTTP 상태 코드(Azure 검색)](https://docs.microsoft.com/rest/api/searchservice/HTTP-status-codes)를 참조하세요.
+문서 동작 및 성공/오류 응답에 대한 자세한 내용은 [문서 추가, 업데이트 또는 삭제](https://docs.microsoft.com/rest/api/searchservice/AddUpdate-or-Delete-Documents)를 참조하세요. 오류가 발생한 경우 반환될 수 있는 기타 HTTP 상태 코드에 대한 자세한 내용은 [HTTP 상태 코드(Azure Search)](https://docs.microsoft.com/rest/api/searchservice/HTTP-status-codes)를 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
-Azure 검색 인덱스를 채운 후에 문서를 검색하기 위해 쿼리를 발급하기 시작할 준비가 되었습니다. 세부 정보는 [Azure 검색 인덱스 쿼리](search-query-overview.md) 를 참조하세요.
-
+Azure Search 인덱스를 채운 후에 문서를 검색하기 위해 쿼리를 발급하기 시작할 준비가 되었습니다. 세부 정보는 [Azure Search 인덱스 쿼리](search-query-overview.md) 를 참조하세요.

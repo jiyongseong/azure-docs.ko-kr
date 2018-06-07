@@ -1,27 +1,25 @@
 ---
-title: "Azure Log Analytics의 DNS 분석 솔루션 | Microsoft Docs"
-description: "Log Analytics의 DNS 분석 솔루션을 설정 및 사용하여 보안, 성능 및 작업 관련 정보를 DNS 인프라에 수집합니다."
+title: Azure Log Analytics의 DNS 분석 솔루션 | Microsoft Docs
+description: Log Analytics의 DNS 분석 솔루션을 설정 및 사용하여 보안, 성능 및 작업 관련 정보를 DNS 인프라에 수집합니다.
 services: log-analytics
-documentationcenter: 
-author: bandersmsft
+documentationcenter: ''
+author: MGoedtel
 manager: carmonm
-editor: 
+editor: ''
 ms.assetid: f44a40c4-820a-406e-8c40-70bd8dc67ae7
 ms.service: log-analytics
 ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 06/07/2017
-ms.author: banders
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 74f34bdbf5707510c682814716aa0b95c19a5503
-ms.openlocfilehash: 1b2f9c3fc59a83b384a63db00d2d039cab8679e8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/09/2017
-
+ms.date: 03/20/2018
+ms.author: magoedte
+ms.openlocfilehash: 6a59cf8b9444fe7cb197501c51d10dae81acb027
+ms.sourcegitcommit: d74657d1926467210454f58970c45b2fd3ca088d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/28/2018
 ---
-
 # <a name="gather-insights-about-your-dns-infrastructure-with-the-dns-analytics-preview-solution"></a>DNS 분석 미리 보기 솔루션으로 DNS 인프라에 대한 정보 수집
 
 ![DNS 분석 기호](./media/log-analytics-dns/dns-analytics-symbol.png)
@@ -44,10 +42,10 @@ DNS 분석은 다음을 수행하는 데 도움을 줍니다.
 
 | **연결된 원본** | **지원** | **설명** |
 | --- | --- | --- |
-| [Windows 에이전트](log-analytics-windows-agents.md) | 예 | 솔루션이 Windows 에이전트에서 DNS 정보를 수집합니다. |
-| [Linux 에이전트](log-analytics-linux-agents.md) | 아니요 | 솔루션이 직접 Linux 에이전트에서 DNS 정보를 수집하지 않습니다. |
+| [Windows 에이전트](log-analytics-windows-agent.md) | 예 | 솔루션이 Windows 에이전트에서 DNS 정보를 수집합니다. |
+| [Linux 에이전트](log-analytics-linux-agents.md) | 아니오 | 솔루션이 직접 Linux 에이전트에서 DNS 정보를 수집하지 않습니다. |
 | [System Center Operations Manager 관리 그룹](log-analytics-om-agents.md) | 예 | 솔루션이 연결된 Operations Manager 관리 그룹의 에이전트에서 DNS 정보를 수집합니다. Operations Manager 에이전트에서 Operations Management Suite로 직접 연결은 필요하지 않습니다. 데이터는 관리 그룹에서 Operations Management Suite 리포지토리로 전달됩니다. |
-| [Azure 저장소 계정](log-analytics-azure-storage.md) | 아니요 | Azure Storage가 솔루션에서 사용되지 않습니다. |
+| [Azure 저장소 계정](log-analytics-azure-storage.md) | 아니오 | Azure Storage가 솔루션에서 사용되지 않습니다. |
 
 ### <a name="data-collection-details"></a>데이터 수집 세부 정보
 
@@ -57,7 +55,7 @@ DNS 분석은 다음을 수행하는 데 도움을 줍니다.
 
 다음 정보를 사용하여 솔루션을 구성합니다.
 
-- 모니터링할 각 DNS 서버에 [Windows](log-analytics-windows-agents.md) 또는 [Operations Manager](log-analytics-om-agents.md) 에이전트가 있어야 합니다.
+- 모니터링할 각 DNS 서버에 [Windows](log-analytics-windows-agent.md) 또는 [Operations Manager](log-analytics-om-agents.md) 에이전트가 있어야 합니다.
 - [Azure Marketplace](https://aka.ms/dnsanalyticsazuremarketplace)에서 Operations Management Suite 작업 영역으로 DNS 분석 솔루션을 추가할 수 있습니다. [솔루션 갤러리에서 Log Analytics 솔루션 추가](log-analytics-add-solutions.md)에서 설명한 프로세스를 사용할 수도 있습니다.
 
 솔루션은 추가 구성이 필요 없이 데이터 수집을 시작합니다. 그러나 다음 구성을 사용하여 데이터 수집을 사용자 지정할 수 있습니다.
@@ -147,7 +145,6 @@ Operations Manager 관리 그룹이 Operations Management Suite 작업 영역에
 
 **샘플 DDI 분석 쿼리** 원시 분석 데이터를 직접 가져오는 가장 일반적인 검색 쿼리 목록이 포함되어 있습니다.
 
-[!include[log-analytics-log-search-nextgeneration](../../includes/log-analytics-log-search-nextgeneration.md)]
 
 ![샘플 쿼리](./media/log-analytics-dns/queries.png)
 
@@ -168,17 +165,17 @@ Operations Manager 관리 그룹이 Operations Management Suite 작업 영역에
 
 로그 검색 페이지에서 쿼리를 만들 수 있습니다. 패싯 컨트롤을 사용하여 검색 결과를 필터링할 수 있습니다. 변환, 필터링 및 결과를 보고하는 고급 쿼리를 만들 수도 있습니다. 먼저 다음 쿼리를 사용합니다.
 
-1. **검색 쿼리 상자**에 `Type=DnsEvents`를 입력하여 솔루션에서 관리되는 DNS 서버에 의해 생성된 모든 DNS 이벤트를 표시합니다. 결과에는 조회 쿼리, 동적 등록 및 구성 변경과 관련된 모든 이벤트에 대한 로그 데이터가 표시됩니다.
+1. **검색 쿼리 상자**에 `DnsEvents`를 입력하여 솔루션에서 관리되는 DNS 서버에 의해 생성된 모든 DNS 이벤트를 표시합니다. 결과에는 조회 쿼리, 동적 등록 및 구성 변경과 관련된 모든 이벤트에 대한 로그 데이터가 표시됩니다.
 
     ![DnsEvents 로그 검색](./media/log-analytics-dns/log-search-dnsevents.png)  
 
     a. 조회 쿼리에 대한 로그 데이터를 보려면 왼쪽의 패싯 컨트롤에서 **하위 유형** 필터로 **LookUpQuery**를 선택합니다. 선택한 기간에 대한 모든 조회 쿼리 이벤트를 나열하는 테이블이 표시됩니다.
 
-    b. 동적 등록에 대한 로그 데이터를 보려면 왼쪽의 패싯 컨트롤에서 **하위 유형** 필터로 **DynamicRegistration**을 선택합니다. 선택한 기간에 대한 모든 동적 등록 이벤트를 나열하는 테이블이 표시됩니다.
+    나. 동적 등록에 대한 로그 데이터를 보려면 왼쪽의 패싯 컨트롤에서 **하위 유형** 필터로 **DynamicRegistration**을 선택합니다. 선택한 기간에 대한 모든 동적 등록 이벤트를 나열하는 테이블이 표시됩니다.
 
-    c. 구성 변경에 대한 로그 데이터를 보려면 왼쪽의 패싯 컨트롤에서 **하위 유형** 필터로 **ConfigurationChange**를 선택합니다. 선택한 기간에 대한 모든 구성 변경 이벤트를 나열하는 테이블이 표시됩니다.
+    다. 구성 변경에 대한 로그 데이터를 보려면 왼쪽의 패싯 컨트롤에서 **하위 유형** 필터로 **ConfigurationChange**를 선택합니다. 선택한 기간에 대한 모든 구성 변경 이벤트를 나열하는 테이블이 표시됩니다.
 
-2. **검색 쿼리 상자**에 `Type=DnsInventory`를 입력하여 솔루션에서 관리되는 DNS 서버에 대한 모든 DNS 인벤토리 관련 데이터를 표시합니다. 결과에는 DNS 서버, DNS 영역 및 리소스 레코드에 대한 로그 데이터가 표시됩니다.
+2. **검색 쿼리 상자**에 `DnsInventory`를 입력하여 솔루션에서 관리되는 DNS 서버에 대한 모든 DNS 인벤토리 관련 데이터를 표시합니다. 결과에는 DNS 서버, DNS 영역 및 리소스 레코드에 대한 로그 데이터가 표시됩니다.
 
     ![DnsInventory 로그 검색](./media/log-analytics-dns/log-search-dnsinventory.png)
 
@@ -192,4 +189,3 @@ Operations Manager 관리 그룹이 Operations Management Suite 작업 영역에
 ## <a name="next-steps"></a>다음 단계
 
 [로그를 검색](log-analytics-log-searches.md)하여 자세한 DNS 로그 레코드를 볼 수 있습니다.
-

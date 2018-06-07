@@ -1,25 +1,23 @@
 ---
-title: "하이브리드 ID: 디렉터리 통합 도구 비교 | Microsoft Docs"
-description: "이 페이지는 디렉터리 통합을 위해 사용할 수 있는 다양한 디렉터리 통합 도구를 비교하는 포괄적인 테이블을 제공합니다."
+title: '하이브리드 ID: 디렉터리 통합 도구 비교 | Microsoft Docs'
+description: 이 페이지는 디렉터리 통합을 위해 사용할 수 있는 다양한 디렉터리 통합 도구를 비교하는 포괄적인 테이블을 제공합니다.
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: billmath
-manager: femila
-editor: curtand
+manager: mtillman
 ms.assetid: 1e62a4bd-4d55-4609-895e-70131dedbf52
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: get-started-article
-ms.date: 07/18/2017
+ms.date: 04/27/2018
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: facdbff229eaf5ee20d98214c62c8b2b46acc0fd
-ms.openlocfilehash: 80617b203bf5efa4cd6bed590ea937b2e68db9e1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/18/2017
-
+ms.openlocfilehash: 5d189af9b08f2b6e9ea194c15bfba683afc75a54
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="hybrid-identity-directory-integration-tools-comparison"></a>하이브리드 ID 디렉터리 통합 도구 비교
 디렉터리 통합 도구는 수년에 걸쳐 성장하고 발전했습니다.  이 문서는 이러한 도구에 대한 통합 뷰와 각각에서 사용할 수 있는 기능에 대한 비교를 제공하는데 도움이 됩니다.
@@ -45,13 +43,14 @@ PP = 공개 미리 보기 상태
 | 단일 온-프레미스 AD 포리스트에 연결 |● |● |● |● |● |
 | 여러 온-프레미스 AD 포리스트에 연결 |● |● | |● |● |
 | 여러 온-프레미스 Exchange 조직에 연결 |● | | | | |
-| 단일 온-프레미스 LDAP 디렉터리에 연결 |FR | | |● |● |
-| 여러 온-프레미스 LDAP 디렉터리에 연결 |FR | | |● |● |
-| 온-프레미스 AD 및 온-프레미스 LDAP 디렉터리에 연결 |FR | | |● |● |
+| 단일 온-프레미스 LDAP 디렉터리에 연결 | | | |● |● |
+| 여러 온-프레미스 LDAP 디렉터리에 연결 |  | | |● |● |
+| 온-프레미스 AD 및 온-프레미스 LDAP 디렉터리에 연결 | | | |● |● |
 | 사용자 지정 시스템(예: SQL, Oracle, MySQL 등)에 연결 |FR | | |● |● |
 | 고객 정의 특성(디렉터리 확장) 동기화 |● | | | | |
 | 온-프레미스 HR(즉, SAP, Oracle eBusiness, PeopleSoft)에 연결 |FR | | |● |● |
 | 온-프레미스 시스템에 프로비전하기 위해 FIM 동기화 규칙과 커넥터를 지원합니다. | | | |● |● |
+
 
 ## <a name="cloud-to-on-premises-synchronization"></a>클라우드와 온-프레미스 간 동기화
 | 기능 | Azure Active Directory 연결 | Azure Active Directory 동기화 서비스 | Azure Active Directory 동기화 도구(디렉터리 동기화) | Forefront Identity Manager(FIM) 2010 R2 | Microsoft Identity Manager 2016 (MIM) |
@@ -92,5 +91,4 @@ PP = 공개 미리 보기 상태
 
 ## <a name="next-steps"></a>다음 단계
 [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)에 대해 자세히 알아봅니다.
-
 

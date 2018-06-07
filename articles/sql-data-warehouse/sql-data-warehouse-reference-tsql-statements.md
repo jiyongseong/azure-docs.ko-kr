@@ -1,29 +1,24 @@
 ---
-title: "SQL Data Warehouse Transact-SQL 참조 | Microsoft Docs"
-description: "SQL 데이터 웨어하우스에 의해 사용되는 TRANSACT-SQL 항목에 대한 참조 내용에 대한 링크"
+title: T-SQL 문 - Azure SQL Data Warehouse | Microsoft Docs
+description: Azure SQL Data Warehouse에서 지원되는 T-SQL 문에 대한 설명서 링크입니다.
 services: sql-data-warehouse
-documentationcenter: NA
-author: kevinvngo
-manager: jhubbard
-editor: 
-ms.assetid: 0abc5934-1e67-491a-b7d7-8b520d1ae98e
+author: ckarst
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: reference
-ms.date: 10/31/2016
-ms.author: kevin;barbkess
-ms.translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 5aca3011fc67e009bc3d543235049a4d5dd3a69b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/03/2017
-
-
+ms.topic: conceptual
+ms.component: implement
+ms.date: 04/17/2018
+ms.author: cakarst
+ms.reviewer: igorstan
+ms.openlocfilehash: ec708f30b59bbd6af878720c65f9a464224c57a5
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
-# <a name="transact-sql-topics"></a>Transact-SQL 항목
+# <a name="t-sql-statements-supported-in-azure-sql-data-warehouse"></a>Azure SQL Data Warehouse에서 지원되는 T-SQL 문
+Azure SQL Data Warehouse에서 지원되는 T-SQL 문에 대한 설명서 링크입니다.
+
 ## <a name="data-definition-language-ddl-statements"></a>데이터 정의 언어(DDL) 문
 * [ALTER DATABASE](https://msdn.microsoft.com/library/mt204042.aspx)
 * [ALTER INDEX](https://msdn.microsoft.com/library/ms188388.aspx)
@@ -115,15 +110,4 @@ ms.lasthandoff: 04/03/2017
 * [OPEN MASTER KEY](https://msdn.microsoft.com/library/ms174433.aspx)
 
 ## <a name="next-steps"></a>다음 단계
-더 많은 TSQL 예제는 [SQL 데이터 웨어하우스 참조 개요][SQL Data Warehouse reference overview]를 참조하세요.
-
-<!--Image references-->
-
-<!--Article references-->
-[SQL Data Warehouse reference overview]: sql-data-warehouse-overview-reference.md
-
-<!--MSDN references-->
-
-
-<!--Other Web references-->
-
+자세한 참조 정보는 [Microsoft Azure SQL Data Warehouse의 T-SQL 언어 요소](sql-data-warehouse-reference-tsql-language-elements.md) 및 [Azure SQL Data Warehouse의 시스템 뷰](sql-data-warehouse-reference-tsql-system-views.md)를 참조하세요.

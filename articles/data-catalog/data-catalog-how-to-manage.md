@@ -13,15 +13,13 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: data-catalog
-ms.date: 05/15/2017
+ms.date: 01/18/2018
 ms.author: maroche
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 532ff423ff53567b6ce40c0ea7ec09a689cee1e7
-ms.openlocfilehash: 391ea72390c589bf86ed9be58e44ce8b20eab837
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/06/2017
-
-
+ms.openlocfilehash: 5a4b2b5734bf8bfbbc45a65b02362d1fa37b1a87
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="manage-data-assets-in-azure-data-catalog"></a>Azure Data Catalog에서 데이터 자산 관리
 ## <a name="introduction"></a>소개
@@ -75,4 +73,3 @@ Azure Data Catalog는 사용자가 분석을 수행하고 결정을 내리는 �
 
 ## <a name="summary"></a>요약
 메타데이터 및 데이터 자산 검색에 대한 데이터 카탈로그의 크라우드소싱 모델을 사용하면 모든 카탈로그 사용자가 기여하고 검색할 수 있습니다. 데이터 카탈로그의 표준 버전은 특정 데이터 자산의 표시 및 사용을 제한하는 소유권 및 관리를 위해 설계되었습니다.
-

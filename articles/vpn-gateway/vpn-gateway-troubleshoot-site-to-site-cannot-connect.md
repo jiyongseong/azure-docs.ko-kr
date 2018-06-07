@@ -1,27 +1,25 @@
 ---
-title: "Azure 사이트 간 VPN 연결에서 연결할 수 없는 문제 해결 | Microsoft Docs"
-description: "갑자기 작동 중단되어 다시 연결할 수 없는 사이트 간 VPN 연결 문제를 해결하는 방법을 알아봅니다."
+title: Azure 사이트 간 VPN 연결에서 연결할 수 없는 문제 해결 | Microsoft Docs
+description: 갑자기 작동 중단되어 다시 연결할 수 없는 사이트 간 VPN 연결 문제를 해결하는 방법을 알아봅니다.
 services: vpn-gateway
 documentationcenter: na
 author: chadmath
 manager: cshepard
-editor: 
-tags: 
+editor: ''
+tags: ''
 ms.service: vpn-gateway
 ms.devlang: na
-ms.topic: article
+ms.topic: troubleshooting
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 06/21/2017
+ms.date: 05/11/2018
 ms.author: genli
+ms.openlocfilehash: dfd29e0956793cf776b9c0ea5ddbd4689ebcb015
+ms.sourcegitcommit: c52123364e2ba086722bc860f2972642115316ef
 ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
-ms.openlocfilehash: e7a3da64895f0307e5d6c3563672205a2f93a7d2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
 ---
-
 # <a name="troubleshooting-an-azure-site-to-site-vpn-connection-cannot-connect-and-stops-working"></a>문제 해결: Azure 사이트 간 VPN 연결에서 연결할 수 없고 작동이 중지됨
 
 온-프레미스 네트워크와 Azure Virtual Network 사이에 사이트 간 VPN 연결을 구성한 후 VPN 연결이 갑자기 작동을 중지하며, 이를 다시 연결할 수 없는 경우가 있습니다. 이 문서에서는 이 문제를 해결하는 데 도움이 되는 문제 해결 단계를 제공합니다. 
@@ -46,7 +44,7 @@ Azure VPN 게이트웨이 유형을 확인합니다.
 
 1. [확인된 VPN 장치 및 운영 체제 버전](vpn-gateway-about-vpn-devices.md#devicetable)을 사용 중인지 확인합니다. 확인된 VPN 장치가 아닌 경우 장치 제조업체에 호환성 문제가 있는지 문의해야 할 수 있습니다.
 
-2. VPN 장치가 올바르게 구성되었는지 확인합니다. 자세한 내용은 [장치 구성 예제 편집](/vpn-gateway-about-vpn-devices.md#editing)을 참조하세요.
+2. VPN 장치가 올바르게 구성되었는지 확인합니다. 자세한 내용은 [장치 구성 예제 편집](vpn-gateway-about-vpn-devices.md#editing)을 참조하세요.
 
 ### <a name="step-2-verify-the-shared-key"></a>2단계. 공유 키 확인
 
@@ -54,7 +52,7 @@ Azure VPN 게이트웨이 유형을 확인합니다.
 
 Azure VPN 연결에 대한 공유 키를 보려면 다음 방법 중 하나를 사용합니다.
 
-**Azure 포털**
+**Azure Portal**
 
 1. 만든 VPN 게이트웨이 사이트 간 연결로 이동합니다.
 
@@ -89,12 +87,14 @@ Azure Resource Manager 배포 모델:
 
 ### <a name="step-6-verify-that-the-subnets-match-exactly-azure-policy-based-gateways"></a>6단계. 서브넷이 정확하게 일치하는지 확인(Azure 정책 기반 게이트웨이)
 
--   Azure Virtual Network와 Azure Virtual Network에 대한 온-프레미스 정의 간에 서브넷이 정확하게 일치하는지 확인합니다.
+-   Azure Virtual Network와 온-프레미스 정의 간에 가상 네트워크 주소 공간이 정확하게 일치하는지 확인합니다.
 -   **로컬 네트워크 게이트웨이**와 온-프레미스 네트워크에 대한 온-프레미스 정의 간에 서브넷이 정확하게 일치하는지 확인합니다.
 
 ### <a name="step-7-verify-the-azure-gateway-health-probe"></a>7단계. Azure 게이트웨이 상태 프로브 확인
 
-1. [상태 프로브](https://&lt;YourVirtualNetworkGatewayIP&gt;:8081/healthprobe)로 이동합니다.
+1. 다음 URL로 이동하여 상태 프로브를 엽니다.
+
+    `https://<YourVirtualNetworkGatewayIP>:8081/healthprobe`
 
 2. 인증서 경고를 클릭합니다.
 3. 응답이 수신되면 VPN 게이트웨이가 정상으로 간주됩니다. 응답을 수신하지 못하면 게이트웨이가 정상이 아니거나 게이트웨이 서브넷에 문제를 일으키는 NSG가 있는 것입니다. 다음 텍스트는 샘플 응답입니다.
@@ -109,4 +109,3 @@ PFS(Perfect Forward Secrecy) 기능은 연결 끊김 문제를 일으킬 수 있
 
 -   [가상 네트워크에 대한 사이트 간 연결 구성](vpn-gateway-howto-site-to-site-resource-manager-portal.md)
 -   [사이트 간 VPN 연결에 대한 IPsec/IKE 정책 구성](vpn-gateway-ipsecikepolicy-rm-powershell.md)
-

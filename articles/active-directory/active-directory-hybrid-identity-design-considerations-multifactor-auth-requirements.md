@@ -1,11 +1,11 @@
 ---
-title: "Azure Active Directory 하이브리드 ID 디자인 고려 사항 - Multi-Factor Authentication 요구 사항 확인"
-description: "조건부 액세스 제어를 통해 Azure Active Directory는 사용자를 인증할 때 및 응용 프로그램에 대한 액세스를 허용하기 전에 선택한 특정 조건을 확인합니다. 이러한 조건이 충족되면 사용자가 인증되고 응용 프로그램에 대한 액세스가 허용됩니다."
-documentationcenter: 
+title: Azure의 하이브리드 ID 디자인 - 다단계 인증 요구 사항 | Microsoft Docs
+description: 조건부 액세스 제어를 통해 Azure Active Directory는 사용자를 인증할 때 및 응용 프로그램에 대한 액세스를 허용하기 전에 선택한 특정 조건을 확인합니다. 이러한 조건이 충족되면 사용자가 인증되고 응용 프로그램에 대한 액세스가 허용됩니다.
+documentationcenter: ''
 services: active-directory
 author: femila
 manager: billmath
-editor: 
+editor: ''
 ms.assetid: 9c59fda9-47d0-4c7e-b3e7-3575c29beabe
 ms.service: active-directory
 ms.devlang: na
@@ -14,19 +14,19 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 07/18/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: cfb4104dd58f2af8b3ffed7491c91ae6c6557ddc
-ms.openlocfilehash: f5006b6ce1b409fae5e540d8414e8e56651f9349
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/05/2017
-
+ms.custom: seohack1
+ms.openlocfilehash: 998aebfc38c4a0971a5071faebdeae4dbca86690
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="determine-multi-factor-authentication-requirements-for-your-hybrid-identity-solution"></a>하이브리드 ID 솔루션에 대한 다단계 인증 요구 사항 확인
 모바일 시대에서는 사용자가 모든 장치에서 클라우드에 있는 데이터 및 응용 프로그램에 액세스하므로 정보 보호가 가장 중요한 일이 되었습니다.  보안 위반에 관한 뉴스 헤드라인이 매일 바뀌고 있습니다.  보안 위반을 완벽하게 방지하는 대책은 없지만, 다단계 인증을 통해 보안 위반을 방지하는 보안을 강화할 수 있습니다.
 다단계 인증에 대한 조직 요구 사항을 평가하고 시작하세요. 즉 조직에서 보호하려고 하는 대상이 무엇인지 확인하세요.  이 평가는 조직의 사용자가 다단계 인증을 설정하고 사용할 수 있도록 하는 기술 요구 사항을 정의하기 위해 중요합니다.
 
 > [!NOTE]
-> MFA 및 그 기능에 대해 잘 모르는 경우 이 섹션을 계속하기 전에 [Azure Multi-Factor Authentication이란?](../multi-factor-authentication/multi-factor-authentication.md) 문서를 읽어보는 것이 좋습니다.
+> MFA 및 그 기능에 대해 잘 모르는 경우 이 섹션을 계속하기 전에 [Azure Multi-Factor Authentication이란?](authentication/multi-factor-authentication.md) 문서를 읽어보는 것이 좋습니다.
 > 
 > 
 
@@ -62,5 +62,4 @@ ms.lasthandoff: 05/05/2017
 
 ## <a name="see-also"></a>참고 항목
 [디자인 고려 사항 개요](active-directory-hybrid-identity-design-considerations-overview.md)
-
 

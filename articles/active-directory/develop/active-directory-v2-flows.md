@@ -1,27 +1,28 @@
 ---
-title: "Azure Active Directory v2.0 끝점에 대한 앱 형식 | Microsoft Docs"
-description: "Azure Active Directory v2.0 끝점에서 지원되는 앱 형식 및 시나리오입니다."
+title: Azure Active Directory v2.0 끝점에 대한 앱 형식 | Microsoft Docs
+description: Azure Active Directory v2.0 끝점에서 지원되는 앱 형식 및 시나리오입니다.
 services: active-directory
-documentationcenter: 
-author: dstrockis
-manager: mbaldwin
-editor: 
+documentationcenter: ''
+author: CelesteDG
+manager: mtillman
+editor: ''
 ms.assetid: 494a06b8-0f9b-44e1-a7a2-d728cf2077ae
 ms.service: active-directory
+ms.component: develop
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 05/01/2017
-ms.author: dastrock
+ms.date: 04/17/2018
+ms.author: celested
+ms.reviewer: hirsin
 ms.custom: aaddev
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ef74361c7a15b0eb7dad1f6ee03f8df707a7c05e
-ms.openlocfilehash: 9d59e7f0e8f326c40be86e199d7712f6c565cc13
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.openlocfilehash: 134199c879f6793cb4ed0a88cf0593786341f6d8
+ms.sourcegitcommit: e14229bb94d61172046335972cfb1a708c8a97a5
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/14/2018
+ms.locfileid: "34157689"
 ---
 # <a name="app-types-for-the-azure-active-directory-v20-endpoint"></a>Azure Active Directory v2.0 끝점에 대한 앱 형식
 Azure AD(Azure Active Directory) v2.0 끝점은 모두 업계 표준 프로토콜 [OAuth 2.0 또는 OpenID Connect](active-directory-v2-protocols.md)를 기반으로 하는 다양한 최신 앱 아키텍처에 대한 인증을 지원합니다. 이 문서에서는 기본 설정 언어 또는 플랫폼에 관계없이 Azure AD v2.0을 사용하여 빌드할 수 있는 앱 형식을 설명합니다. 이 문서의 정보는 [코드 작업을 시작](active-directory-appmodel-v2-overview.md#getting-started)하기 전에 개략적인 시나리오를 이해하는 데 도움이 됩니다.
@@ -97,7 +98,7 @@ Web API는 웹 서버 앱, 데스크톱 및 모바일 앱, 단일 페이지 앱,
 
 OAuth 2.0 액세스 토큰을 사용하여 Web API 보안을 유지하는 방법을 알아보려면 [시작 섹션](active-directory-appmodel-v2-overview.md#getting-started)에서 Web API 코드 샘플을 확인하세요.
 
-대부분의 경우 웹 API는 Azure Active Directory로 보호되는 다른 다운스트림 API에 대해 아웃바운드 요청도 해야 합니다.  이렇게 하기 위해 웹 API는 Azure AD의 **On Behalf Of** 흐름을 활용하여 웹 API가 아웃바운드 요청에서 사용할 다른 액세스 토큰에 대해 들어오는 액세스 토큰을 교환하도록 할 수 있습니다.  v2.0 끝점의 On Behalf Of 흐름은 [여기서 자세히 설명](active-directory-v2-protocols-oauth-on-behalf-of.md)합니다.
+대부분의 경우 웹 API는 Azure Active Directory로 보호되는 다른 다운스트림 API에 대해 아웃바운드 요청도 해야 합니다. 이렇게 하기 위해 웹 API는 Azure AD의 **On Behalf Of** 흐름을 활용하여 웹 API가 아웃바운드 요청에서 사용할 다른 액세스 토큰에 대해 들어오는 액세스 토큰을 교환하도록 할 수 있습니다. v2.0 끝점의 On Behalf Of 흐름은 [여기서 자세히 설명](active-directory-v2-protocols-oauth-on-behalf-of.md)합니다.
 
 ## <a name="mobile-and-native-apps"></a>모바일 및 네이티브 앱
 모바일 및 데스크톱 앱과 같은 장치 설치 앱은 데이터를 저장하고 사용자 대신 기능을 수행하는 백 엔드 서비스 또는 Web API에 액세스해야 하는 경우가 많습니다. 이러한 앱은 [OAuth 2.0 권한 부여 코드 흐름](active-directory-v2-protocols-oauth-code.md)을 사용하여 백 엔드 서비스에 로그인 및 권한 부여를 추가할 수 있습니다.
@@ -122,5 +123,4 @@ OAuth 2.0 액세스 토큰을 사용하여 Web API 보안을 유지하는 방법
 
 ![디먼 앱 인증 흐름](../../media/active-directory-v2-flows/convergence_scenarios_daemon.png)
 
-디먼 앱을 작성하려면 [시작](active-directory-appmodel-v2-overview.md#getting-started) 섹션에서 클라이언트 자격 증명 설명서를 참조하거나 [.NET 샘플 앱](https://github.com/Azure-Samples/active-directory-dotnet-daemon-v2)을 사용해 보세요.
-
+디먼 앱을 빌드하려면 [클라이언트 자격 증명 설명서](active-directory-v2-protocols-oauth-client-creds.md)를 참조하거나 [.NET 샘플 앱](https://github.com/Azure-Samples/active-directory-dotnet-daemon-v2)을 사용해 보세요.

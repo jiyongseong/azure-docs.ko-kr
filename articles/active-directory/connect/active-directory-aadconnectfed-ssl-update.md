@@ -1,10 +1,10 @@
 ---
-title: "Azure AD Connect: AD FS(Active Directory Federation Services) 팜에 대한 SSL 인증서 업데이트 | Microsoft 문서"
+title: "Azure AD Connect - AD FS 팜에 대한 SSL 인증서 업데이트 | Microsoft Docs"
 description: "이 문서에서는 Azure AD Connect를 사용하여 AD FS 팜의 SSL 인증서를 업데이트하는 단계를 자세히 설명합니다."
 services: active-directory
 keywords: "azure ad connect, adfs ssl 업데이트, adfs 인증서 업데이트, adfs 인증서 변경, 새 adfs 인증서, adfs 인증서, adfs ssl 인증서 업데이트, ssl 인증서 adfs 업데이트, adfs ssl 인증서 구성, adfs, ssl, 인증서, adfs 서비스 통신 인증서, 페더레이션 업데이트, 페더레이션 구성, aad connect"
 authors: anandyadavmsft
-manager: femila
+manager: mtillman
 editor: billmath
 ms.assetid: 7c781f61-848a-48ad-9863-eb29da78f53c
 ms.service: active-directory
@@ -12,16 +12,15 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 08/02/2017
+ms.date: 11/15/2017
 ms.author: anandy
+ms.custom: seohack1
+ms.openlocfilehash: b31a4d178d287eba275a0072936b4222a2c84346
+ms.sourcegitcommit: 7edfa9fbed0f9e274209cec6456bf4a689a4c1a6
 ms.translationtype: HT
-ms.sourcegitcommit: 79bebd10784ec74b4800e19576cbec253acf1be7
-ms.openlocfilehash: 87807a203d71b3abfe3e93132eb7d0b82b14b4ee
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/03/2017
-
----    
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/17/2018
+---
 # <a name="update-the-ssl-certificate-for-an-active-directory-federation-services-ad-fs-farm"></a>AD FS(Active Directory Federation Services) 팜에 대한 SSL 인증서 업데이트
 
 ## <a name="overview"></a>개요
@@ -38,7 +37,7 @@ ms.lasthandoff: 08/03/2017
 ## <a name="prerequisites"></a>필수 조건
 
 * **AD FS 팜**: AD FS 팜이 Windows Server 2012 R2 이상을 기반으로 하는지 확인합니다.
-* **Azure AD Connect**: Azure AD Connect 버전이 1.1.443.0 이상인지 확인합니다. **AD FS SSL 인증서 업데이트** 작업을 사용할 것입니다.
+* **Azure AD Connect**: Azure AD Connect 버전이 1.1.553.0 이상인지 확인합니다. **AD FS SSL 인증서 업데이트** 작업을 사용할 것입니다.
 
 ![SSL 업데이트 작업](./media/active-directory-aadconnectfed-ssl-update/updatessltask.png)
 
@@ -108,4 +107,3 @@ AD FS 팜 서버에 대한 정보가 확인된 후 Azure AD Connect는 새 SSL �
 
 - [Azure AD Connect 및 페더레이션](active-directory-aadconnectfed-whatis.md)
 - [Azure AD Connect를 사용하여 Active Directory Federation Services 관리 및 사용자 지정](active-directory-aadconnect-federation-management.md)
-

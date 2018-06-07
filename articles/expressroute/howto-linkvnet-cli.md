@@ -1,33 +1,32 @@
 ---
-title: "ExpressRoute 회로에 가상 네트워크 연결: CLI: Azure | Microsoft Docs"
-description: "이 문서는 Resource Manager 배포 모델 및 CLI를 사용하여 VNet(가상 네트워크)을 ExpressRoute 회로에 연결하는 방법에 대한 개요를 제공합니다."
+title: 'ExpressRoute 회로에 가상 네트워크 연결: CLI: Azure | Microsoft Docs'
+description: 이 문서는 Resource Manager 배포 모델 및 CLI를 사용하여 VNet(가상 네트워크)을 ExpressRoute 회로에 연결하는 방법에 대한 개요를 제공합니다.
 services: expressroute
 documentationcenter: na
 author: cherylmc
 manager: timlit
-editor: 
+editor: ''
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: expressroute
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 07/25/2017
+ms.date: 03/08/2018
 ms.author: anzaman,cherylmc
+ms.openlocfilehash: 5e8d1739aa3d7f5be6c6450edcad43bc83db71fb
+ms.sourcegitcommit: a0be2dc237d30b7f79914e8adfb85299571374ec
 ms.translationtype: HT
-ms.sourcegitcommit: 349fe8129b0f98b3ed43da5114b9d8882989c3b2
-ms.openlocfilehash: 0ea696e796ec3a943bc028f56da417978b728b82
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/12/2018
 ---
 # <a name="connect-a-virtual-network-to-an-expressroute-circuit-using-cli"></a>CLI를 사용하여 가상 네트워크를 ExpressRoute 회로에 연결
 
 이 문서는 CLI를 사용하여 VNet(가상 네트워크)을 Azure ExpressRoute 회로에 연결하는 데 도움이 됩니다. Azure CLI를 사용하여 연결하려면 Resource Manager 배포 모델을 사용하여 가상 네트워크를 만들어야 합니다. 해당 항목은 같은 구독에 있을 수도 있고 다른 구독의 일부일 수도 있습니다. VNet을 ExpressRoute 회로에 연결하는 다른 방법을 사용하려는 경우 다음 목록에서 문서를 선택할 수 있습니다.
 
 > [!div class="op_single_selector"]
-> * [Azure 포털](expressroute-howto-linkvnet-portal-resource-manager.md)
+> * [Azure Portal](expressroute-howto-linkvnet-portal-resource-manager.md)
 > * [PowerShell](expressroute-howto-linkvnet-arm.md)
 > * [Azure CLI](howto-linkvnet-cli.md)
 > * [비디오 - Azure Portal](http://azure.microsoft.com/documentation/videos/azure-expressroute-how-to-create-a-connection-between-your-vpn-gateway-and-expressroute-circuit)
@@ -36,15 +35,19 @@ ms.lasthandoff: 07/26/2017
 
 ## <a name="configuration-prerequisites"></a>필수 구성 요소
 
-* 최신 버전의 CLI(명령줄 인터페이스)가 필요합니다. 자세한 내용은 [Azure CLI 2.0 설치](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)를 참조하세요.
+* 최신 버전의 CLI(명령줄 인터페이스)가 필요합니다. 자세한 내용은 [Azure CLI 2.0 설치](https://docs.microsoft.com/cli/azure/install-azure-cli)를 참조하세요.
+
 * 구성을 시작하기 전에 [필수 조건](expressroute-prerequisites.md), [라우팅 요구 사항](expressroute-routing.md) 및 [워크플로](expressroute-workflows.md)를 검토해야 합니다.
-* 활성화된 Express 경로 회로가 있어야 합니다. 
-  * 지침을 수행하여 [Express 경로 회로를 만들고](howto-circuit-cli.md) 연결 공급자를 통해 회로를 사용하도록 설정합니다. 
+
+* 활성화된 ExpressRoute 회로가 있어야 합니다. 
+  * 지침을 수행하여 [ExpressRoute 회로를 만들고](howto-circuit-cli.md) 연결 공급자를 통해 회로를 사용하도록 설정합니다. 
   * 회로에 구성된 Azure 개인 피어링이 있는지 확인합니다. 라우팅 지침에 대한 문서는 [라우팅 구성](howto-routing-cli.md) 을 참조하세요. 
   * Azure 개인 피어이링 구성되어 있는지 확인합니다. 네트워크와 Microsoft 간의 BGP 피어링이 종단 간 연결을 사용하도록 작동 중이어야 합니다.
-  * 가상 네트워크 및 가상 네트워크 게이트웨이를 만들어서 완전히 프로비전해야 합니다. 지침에 따라 [ExpressRoute에 대한 가상 네트워크 게이트웨이를 구성합니다](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-cli). `--gateway-type ExpressRoute`를 사용해야 합니다.
+  * 가상 네트워크 및 가상 네트워크 게이트웨이를 만들어서 완전히 프로비전해야 합니다. 지침에 따라 [ExpressRoute에 대한 가상 네트워크 게이트웨이를 구성합니다](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-cli). `--gateway-type ExpressRoute`를 사용해야 합니다.
 
-* 최대 10개의 가상 네트워크를 표준 Express 경로 회로에 연결할 수 있습니다. 표준 Express 경로 회로를 사용하는 경우 모든 가상 네트워크는 동일한 지역에 있어야 합니다. 
+* 최대 10개의 가상 네트워크를 표준 ExpressRoute 회로에 연결할 수 있습니다. 표준 ExpressRoute 회로를 사용하는 경우 모든 가상 네트워크는 동일한 지역에 있어야 합니다. 
+
+* 단일 VNet을 최대 4개의 ExpressRoute 회로에 연결할 수 있습니다. 아래 프로세스를 사용하여 각 ExpressRoute 회로에 대한 새 연결 개체를 만듭니다. ExpressRoute 회로는 동일한 구독, 서로 다른 구독 또는 두 가지가 혼합된 상태로 존재할 수 있습니다.
 
 * ExpressRoute 프리미엄 추가 기능을 사용하도록 설정하면 ExpressRoute 회로의 지역 외부에서 가상 네트워크를 연결하거나 ExpressRoute 회로에 많은 수의 가상 네트워크를 연결할 수 있습니다. Premium 추가 기능에 대한 자세한 내용은 [FAQ](expressroute-faqs.md)를 참조하세요.
 
@@ -58,9 +61,9 @@ az network vpn-connection create --name ERConnection --resource-group ExpressRou
 
 ## <a name="connect-a-virtual-network-in-a-different-subscription-to-a-circuit"></a>다른 구독에 있는 가상 네트워크를 회로에 연결
 
-여러 구독에서 Express 경로 회로를 공유할 수 있습니다. 아래 그림에는 여러 구독에서 ExpressRoute 회로에 대한 작업을 공유하는 방법의 간단한 계통도가 나와 있습니다.
+여러 구독에서 ExpressRoute 회로를 공유할 수 있습니다. 아래 그림에는 여러 구독에서 ExpressRoute 회로에 대한 작업을 공유하는 방법의 간단한 계통도가 나와 있습니다.
 
-큰 구름 안에 있는 각각의 작은 구름은 한 조직 내의 여러 부서에 속하는 구독을 나타내는 데 사용됩니다. 조직 내의 각 부서는 자체 구독을 사용하여 서비스를 배포하되, 단일 Express 경로 회로를 공유하여 온-프레미스 네트워크로 다시 연결할 수 있습니다. 단일 부서(이 예제에서는 IT)가 Express 경로 회로를 소유할 수 있습니다. 조직 내의 기타 구독도 Express 경로 회로를 사용할 수 있습니다.
+큰 구름 안에 있는 각각의 작은 구름은 한 조직 내의 여러 부서에 속하는 구독을 나타내는 데 사용됩니다. 조직 내의 각 부서는 자체 구독을 사용하여 서비스를 배포하되, 단일 ExpressRoute 회로를 공유하여 온-프레미스 네트워크로 다시 연결할 수 있습니다. 단일 부서(이 예제에서는 IT)가 ExpressRoute 회로를 소유할 수 있습니다. 조직 내의 기타 구독도 ExpressRoute 회로를 사용할 수 있습니다.
 
 > [!NOTE]
 > 전용 회로에 대한 연결 및 대역폭 요금은 ExpressRoute 회로 소유자에게 적용됩니다. 모든 가상 네트워크는 동일한 대역폭을 공유합니다.
@@ -141,7 +144,7 @@ az network vpn-connection create --name ERConnection --resource-group ExpressRou
 
 **연결 권한 부여를 해제하려면**
 
-Express 경로 회로와 가상 네트워크의 연결을 삭제하여 권한 부여를 해제할 수 있습니다.
+ExpressRoute 회로와 가상 네트워크의 연결을 삭제하여 권한 부여를 해제할 수 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
 

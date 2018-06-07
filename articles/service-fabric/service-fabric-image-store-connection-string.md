@@ -1,25 +1,24 @@
 ---
-title: "Azure Service Fabric 이미지 저장소 연결 문자열 | Microsoft Docs"
-description: "이미지 저장소 연결 문자열 이해"
+title: Azure Service Fabric 이미지 저장소 연결 문자열 | Microsoft Docs
+description: 이미지 저장소 연결 문자열 이해
 services: service-fabric
 documentationcenter: .net
 author: alexwun
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 00f8059d-9d53-4cb8-b44a-b25149de3030
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 06/07/2017
+ms.date: 02/27/2018
 ms.author: alexwun
+ms.openlocfilehash: 7d164fea62afac83c4fe2216c56a9980d9279f3a
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: f497006a8ba48da0032b82113702d8014952ca20
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="understand-the-imagestoreconnectionstring-setting"></a>ImageStoreConnectionString 설정 이해
 
@@ -43,9 +42,11 @@ Service Fabric은 다양한 팀에서 내부 Microsoft 사용을 위한 플랫�
 
 클러스터 자체 내의 시스템 서비스에서 이미지 저장소를 호스팅하면 패키지 리포지토리에 대한 외부 종속성을 제거하고 저장소의 위치를 제어할 수 있게 됩니다. 단독으로 그렇지 않으면 이미지 저장소에 대한 향후 개선은 먼저 이미지 저장소 공급자를 대상으로 할 가능성이 큽니다. 클라이언트가 대상 클러스터에 이미 연결되어 있으므로 이미지 저장소 서비스 공급자에 대한 연결 문자열에는 고유한 정보가 없습니다. 클라이언트는 시스템 서비스를 대상으로 하는 프로토콜을 사용해야 함을 알고 있어야 합니다.
 
-개발 중에 one-box 로컬 클러스터에 이미지 저장소 서비스가 아닌 파일 시스템 공급자를 사용하여 클러스터를 약간 더 빠르게 부트스트랩합니다. 차이점은 일반적으로 작지만 개발 중인 사용자 대부분에게 유용한 최적화입니다. 다른 저장소 공급자 유형도 one-box 로컬 클러스터를 배포할 수 있지만 개발/테스트 워크플로가 공급자에 관계 없이 동일하게 유지되기 때문에 일반적으로 작업을 수행할 필요가 없습니다. 이 사용법 이외에 파일 시스템 및 Azure Storage 공급자는 레거시 지원을 위해 존재합니다.
+개발 중에 one-box 로컬 클러스터에 이미지 저장소 서비스가 아닌 파일 시스템 공급자를 사용하여 클러스터를 약간 더 빠르게 부트스트랩합니다. 차이점은 일반적으로 작지만 개발 중인 사용자 대부분에게 유용한 최적화입니다. 다른 저장소 공급자 유형도 one-box 로컬 클러스터를 배포할 수 있지만 개발/테스트 워크플로가 공급자에 관계 없이 동일하게 유지되기 때문에 일반적으로 작업을 수행할 필요가 없습니다. Azure Storage 공급자는 오직 Image Store Service 공급자가 도입되기 전에 배포된 기존 클러스터의 레거시 지원을 위해 존재합니다.
 
-따라서 ImageStoreConnectionString을 구성 가능하지만 일반적으로 기본 설정만을 사용합니다. [Visual Studio][12]를 통해 Azure에 게시할 경우 매개 변수가 적절하게 자동으로 설정됩니다. Azure에서 호스트된 클러스터에 프로그래밍 방식으로 배포하는 경우 연결 문자열은 항상 "fabric:ImageStore"입니다. 확실하지 않은 경우에도 [PowerShell](https://docs.microsoft.com/powershell/servicefabric/vlatest/get-servicefabricclustermanifest), [.NET](https://msdn.microsoft.com/library/azure/mt161375.aspx) 또는 [REST](https://docs.microsoft.com/rest/api/servicefabric/get-a-cluster-manifest)에서 클러스터 매니페스트를 검색하여 해당 값을 언제든지 확인할 수 있습니다. 온-프레미스 테스트 및 프로덕션 클러스터는 모두 항상 이미지 저장소 서비스 공급자를 사용하도록 구성되어야 합니다.
+뿐만 아니라 여러 클러스터 간에 Image Store를 공유하는 방법으로 파일 시스템 공급자 및 Azure Storage 공급자를 사용할 수 없으며, 따라서 각 클러스터가 Image Store와 충돌하는 데이터를 쓸 가능성이 있기 때문에 클러스터 구성이 손상됩니다. 프로비전된 응용 프로그램 패키지를 여러 클러스터 간에 공유하려면 [sfpkg][12] 파일을 사용해야 하며, 이 파일은 다운로드 URI와 함께 아무 외부 저장소에 업로드할 수 있습니다.
+
+따라서 ImageStoreConnectionString을 구성 가능하지만 일반적으로 기본 설정만을 사용합니다. Visual Studio를 통해 Azure에 게시할 경우 매개 변수가 적절하게 자동으로 설정됩니다. Azure에서 호스트된 클러스터에 프로그래밍 방식으로 배포하는 경우 연결 문자열은 항상 "fabric:ImageStore"입니다. 확실하지 않은 경우에도 [PowerShell](https://docs.microsoft.com/powershell/servicefabric/vlatest/get-servicefabricclustermanifest), [.NET](https://msdn.microsoft.com/library/azure/mt161375.aspx) 또는 [REST](https://docs.microsoft.com/rest/api/servicefabric/get-a-cluster-manifest)에서 클러스터 매니페스트를 검색하여 해당 값을 언제든지 확인할 수 있습니다. 온-프레미스 테스트 및 프로덕션 클러스터는 모두 항상 이미지 저장소 서비스 공급자를 사용하도록 구성되어야 합니다.
 
 ### <a name="next-steps"></a>다음 단계
 [PowerShell을 사용하여 응용 프로그램 배포 및 제거][10]
@@ -56,5 +57,4 @@ Service Fabric은 다양한 팀에서 내부 Microsoft 사용을 위한 플랫�
 
 [10]: service-fabric-deploy-remove-applications.md
 [11]: service-fabric-cluster-creation-via-portal.md
-[12]: service-fabric-publish-app-remote-cluster.md
-
+[12]: service-fabric-package-apps.md#create-an-sfpkg

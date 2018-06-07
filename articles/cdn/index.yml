@@ -1,0 +1,86 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Azure CDN 설명서
+metadata:
+  title: Azure CDN 설명서 - 자습서, API 참조 | Microsoft Docs
+  description: Azure CDN(Content Delivery Network)는 고대역폭 컨텐츠를 제공하는 글로벌 CDN 솔루션입니다. Azure 또는 다른 위치에서 호스팅할 수 있습니다. Azure CDN을 사용하면 가장 가까운 POP(Point of Presence) 서버를 사용하여 Azure Blob Storage, 웹 응용 프로그램 또는 공개적으로 액세스 가능한 웹 서버에서 로드된 정적 개체를 캐시할 수 있습니다. Azure CDN은 CDN POP를 사용하는 다양한 네트워크 최적화를 활용하여 캐싱할 수 없는 동적 콘텐츠를 가속화할 수 있습니다. 예를 들어 Azure CDN은 BGP(Border Gateway Protocol)를 우회하는 경로 최적화를 사용할 수 있습니다.
+  services: cdn
+  author: czeumault
+  manager: carolz
+  ms.service: cdn
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 04/03/2018
+  ms.author: carolz
+  ms.openlocfilehash: 42d08e9a5893bf58ecf405cc5caf750ee3e1daf7
+  ms.sourcegitcommit: d28bba5fd49049ec7492e88f2519d7f42184e3a8
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 05/11/2018
+abstract:
+  description: Azure CDN(Content Delivery Network)는 고대역폭 컨텐츠를 제공하는 글로벌 CDN 솔루션입니다. Azure 또는 다른 위치에서 호스팅할 수 있습니다. Azure CDN을 사용하면 가장 가까운 POP(Point of Presence) 서버를 사용하여 Azure Blob Storage, 웹 응용 프로그램 또는 공개적으로 액세스 가능한 웹 서버에서 로드된 정적 개체를 캐시할 수 있습니다. Azure CDN은 CDN POP를 사용하는 다양한 네트워크 최적화를 활용하여 캐싱할 수 없는 동적 콘텐츠를 가속화할 수 있습니다. 예를 들어 Azure CDN은 BGP(Border Gateway Protocol)를 우회하는 경로 최적화를 사용할 수 있습니다.
+sections:
+- title: 
+  items:
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: media/index/cdn.svg
+      text: Azure CDN에 대해 알아보기
+      href: /azure/cdn/cdn-overview
+- title: 5분 빠른 시작
+  items:
+  - type: paragraph
+    text: CDN 프로파일과 CDN 엔드포인트를 만들어 Azure CDN을 활성화하는 방법에 대해 알아보세요.
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: media/index/get-started.svg
+      text: Azure CDN 시작
+      href: /azure/cdn/cdn-create-new-endpoint
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: 필요에 따라 Azure CDN을 구성하는 방법에 대해 알아보세요.
+  - type: list
+    style: ordered
+    items:
+    - html: <a href="/azure/cdn/cdn-map-content-to-custom-domain">CDN 끝점에 사용자 지정 도메인 추가</a>
+    - html: <a href="/azure/cdn/cdn-custom-ssl">사용자 지정 도메인에 HTTPS 구성</a>
+    - html: <a href="/azure/cdn/cdn-caching-rules-tutorial">캐싱 규칙 설정</a>
+- title: 동영상
+  items:
+  - type: paragraph
+    text: Azure CDN 작동 방식을 보여주는 비디오를 확인하세요.
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: media/index/video-library.svg
+      text: Azure CDN 비디오 라이브러리
+      href: https://azure.microsoft.com/documentation/videos/index/?services=cdn
+- title: 샘플
+  items:
+  - type: paragraph
+    text: >
+      일반적인 작업을 관리하기 위한 스크립트를 찾습니다.
+  - type: list
+    style: unordered
+    className: spaced noBullet
+    items:
+    - html: <a href="https://azure.microsoft.com/resources/samples/?service=cdn">코드 샘플</a>
+- title: 참고 자료
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: 명령줄
+      html: <p><a href="/powershell/resourcemanager/azurerm.cdn/v2.3.0/azurerm.cdn">PowerShell</a></p>
+    - title: 언어
+      html: <p><a href="/dotnet/api/microsoft.azure.management.cdn">.NET</a></p><p><a href="/java/api/com.microsoft.azure.management.cdn">Java</a></p>
+    - title: REST (영문)
+      html: <p><a href="/rest/api/cdn/">REST API 참조</a></p>

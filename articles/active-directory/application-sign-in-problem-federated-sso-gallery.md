@@ -1,11 +1,11 @@
 ---
-title: "페더레이션된 Single Sign-On에 대해 구성된 갤러리 응용 프로그램에 로그인하는 문제 | Microsoft Docs"
-description: "Azure AD에서 SAML 기반 페더레이션된 Single Sign-On에 대해 구성된 응용 프로그램에 로그인하는 경우 특정 문제에 대한 지침"
+title: 페더레이션된 Single Sign-On에 대해 구성된 갤러리 응용 프로그램에 로그인하는 문제 | Microsoft Docs
+description: Azure AD에서 SAML 기반 페더레이션된 Single Sign-On에 대해 구성된 응용 프로그램에 로그인하는 경우 특정 문제에 대한 지침
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: ajamess
-manager: femila
-ms.assetid: 
+manager: mtillman
+ms.assetid: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
@@ -13,14 +13,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
+ms.openlocfilehash: fa1387c3eb11899bb74418b2ff1af4a5d22a73d9
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 0fc5a8eb3d033d60bf6082d61bf1698924ab91c6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/20/2018
 ---
-
 # <a name="problems-signing-in-to-a-gallery-application-configured-for-federated-single-sign-on"></a>페더레이션된 Single Sign-On에 대해 구성된 갤러리 응용 프로그램에 로그인하는 문제
 
 문제를 해결하려면 다음과 같이 Azure AD에서 응용 프로그램 구성을 확인해야 합니다.
@@ -45,7 +43,7 @@ SAML 요청의 발급자 특성이 Azure AD에서 구성된 식별자 값과 일
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 또는 **공동 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -65,7 +63,7 @@ Azure AD에서 식별자 값을 업데이트하고 SAML 요청에서 응용 프�
 
 ## <a name="the-reply-address-does-not-match-the-reply-addresses-configured-for-the-application"></a>회신 주소가 응용 프로그램에 대해 구성된 회신 주소와 일치하지 않습니다.
 
-*오류 AADSTS50011: 회신 주소 'https://contoso.com'은 응용 프로그램에 대해 구성된 회신 주소와 일치하지 않습니다.*
+*오류 AADSTS50011: 회신 주소 ‘https://contoso.com’이 응용 프로그램에 대해 구성된 회신 주소와 일치하지 않습니다.*
 
 **가능한 원인**
 
@@ -77,7 +75,7 @@ SAML 요청에서 AssertionConsumerServiceURL 값이 Azure AD에 구성된 회�
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 또는 **공동 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -110,7 +108,7 @@ Azure AD에서 회신 URL 값을 업데이트하고 SAML 요청에서 응용 프
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -124,9 +122,9 @@ Azure AD에서 회신 URL 값을 업데이트하고 SAML 요청에서 응용 프
 
 7.  응용 프로그램이 로드되면 응용 프로그램의 왼쪽 탐색 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
-8.  **사용자 및 그룹** 목록의 맨 위에서 **추가** 단추를 클릭하여 **할당 추가** 블레이드를 엽니다.
+8.  **사용자 및 그룹** 목록의 맨 위에서 **추가** 단추를 클릭하여 **할당 추가** 창을 엽니다.
 
-9.  **할당 추가** 블레이드에서 **사용자 및 그룹** 선택기를 클릭합니다.
+9.  **할당 추가** 창에서 **사용자 및 그룹** 선택기를 클릭합니다.
 
 10. **이름 또는 전자 메일 주소로 검색** 검색 상자에 할당하려는 사용자의 **전체 이름** 또는 **전자 메일 주소**를 입력합니다.
 
@@ -136,7 +134,7 @@ Azure AD에서 회신 URL 값을 업데이트하고 SAML 요청에서 응용 프
 
 13. 사용자 선택이 완료되면 **선택** 단추를 클릭하여 응용 프로그램에 할당되도록 사용자 및 그룹의 목록에 추가합니다.
 
-14. **선택 사항:** **할당 추가** 블레이드에서 **역할 선택** 선택기를 클릭하여 선택한 사용자에게 할당할 역할을 선택합니다.
+14. **선택 사항:** **할당 추가** 창에서 **역할 선택** 선택기를 클릭하여 선택한 사용자에게 할당할 역할을 선택합니다.
 
 15. **할당** 단추를 클릭하여 선택한 사용자에게 응용 프로그램을 할당합니다.
 
@@ -180,7 +178,7 @@ Single Sign-On에 Azure AD SAML 구현을 지원하는지 유효성을 검사해
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 또는 **공동 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -207,7 +205,7 @@ Single Sign-On에 Azure AD SAML 구현을 지원하는지 유효성을 검사해
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 또는 **공동 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -219,7 +217,7 @@ Single Sign-On에 Azure AD SAML 구현을 지원하는지 유효성을 검사해
 
 6.  Single Sign-On을 구성하려는 응용 프로그램을 선택합니다.
 
-7.  응용 프로그램 **개요** 블레이드의 맨 왼쪽에서 **삭제**를 클릭합니다.
+7.  응용 프로그램 **개요** 창의 왼쪽 위에서 **삭제**를 클릭합니다.
 
 8.  Azure AD를 새로 고치고 Azure AD 갤러리에서 응용 프로그램을 추가합니다. 그런 다음 응용 프로그램을 구성합니다.
 
@@ -239,7 +237,7 @@ Single Sign-On에 Azure AD SAML 구현을 지원하는지 유효성을 검사해
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 또는 **공동 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -257,7 +255,7 @@ Single Sign-On에 Azure AD SAML 구현을 지원하는지 유효성을 검사해
 
 9.  [만료 날짜]를 선택합니다. 그런 다음 **저장**을 클릭합니다.
 
-10. **새 인증서 활성화**를 선택하여 활성 인증서를 재정의합니다. 그런 다음 블레이드 맨 위에 있는 **저장**을 클릭하고 롤오버 인증서를 활성화하도록 수락합니다.
+10. **새 인증서 활성화**를 선택하여 활성 인증서를 재정의합니다. 그런 다음, 창 맨 위에 있는 **저장**을 클릭하고 롤오버 인증서를 활성화하도록 수락합니다.
 
 11. **SAML 서명 인증서** 섹션에서 **제거**를 클릭하여 **사용하지 않는** 인증서를 제거합니다.
 
@@ -267,4 +265,3 @@ Single Sign-On에 Azure AD SAML 구현을 지원하는지 유효성을 검사해
 
 ## <a name="next-steps"></a>다음 단계
 [Azure AD에서 SAML 기반 Single Sign-On을 응용 프로그램에 디버그하는 방법](https://docs.microsoft.com/azure/active-directory/develop/active-directory-saml-debugging)
-

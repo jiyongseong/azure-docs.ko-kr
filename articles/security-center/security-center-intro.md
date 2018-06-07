@@ -1,6 +1,6 @@
 ---
-title: "Azure Security Center 소개 | Microsoft Docs"
-description: "Azure 보안 센터, 주요 기능 및 작동 방법에 대해 알아봅니다."
+title: "Azure Security Center란? | Microsoft Docs"
+description: "Azure Security Center, 주요 기능 및 작동 방법에 대해 알아봅니다."
 services: security-center
 documentationcenter: na
 author: TerryLanfear
@@ -9,155 +9,109 @@ editor:
 ms.assetid: 45b9756b-6449-49ec-950b-5ed1e7c56daa
 ms.service: security-center
 ms.devlang: na
-ms.topic: article
+ms.topic: overview
+ms.custom: mvc
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 06/16/2017
+ms.date: 02/15/2018
 ms.author: terrylan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ff2fb126905d2a68c5888514262212010e108a3d
-ms.openlocfilehash: 8951167213da6ab5341c1ca420353ec625ef5424
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/17/2017
-
-
+ms.openlocfilehash: 08102ce4caead003925aa600f4f7f005b1c336e0
+ms.sourcegitcommit: d87b039e13a5f8df1ee9d82a727e6bc04715c341
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/21/2018
 ---
-# <a name="introduction-to-azure-security-center"></a>Azure 보안 센터 소개
-Azure 보안 센터, 주요 기능 및 작동 방법에 대해 알아봅니다.
+# <a name="what-is-azure-security-center"></a>Azure Security Center란?
+Azure Security Center는 하이브리드 클라우드 워크로드에 통합 보안 관리 및 고급 위협 방지를 제공합니다. Security Center를 사용하여 워크로드에 보안 정책을 적용하고, 위협에 대한 노출을 제한하고, 공격을 검색 및 대응할 수 있습니다.
 
-> [!NOTE]
-> 2017년 6월 초를 시작으로 Security Center는 Microsoft Monitoring Agent를 사용하여 데이터를 수집 및 저장합니다. 자세한 내용은 [Azure Security Center 플랫폼 마이그레이션](security-center-platform-migration.md)을 참조하세요. 이 문서의 정보는 Microsoft Monitoring Agent로 전환된 후의 Security Center 기능을 나타냅니다.
->
->
+보안 센터를 사용해야 하는 이유
 
-## <a name="what-is-azure-security-center"></a>Azure 보안 센터란?
- 보안 센터는 Azure 리소스의 보안에 대한 향상된 가시성과 제어권을 통해 위협을 예방하고 감지하며 위협에 대응하는 데 도움이 됩니다. 이는 Azure 구독에 대해 통합된 보안 모니터링 및 정책 관리를 제공하고 다른 방법으로 발견되지 않을 수 있는 위협을 감지하는 데 도움이 되며 보안 솔루션의 광범위한 환경에서 작동합니다.
+- **중앙 집중식 정책 관리** – 모든 하이브리드 클라우드 작업에 걸쳐 보안 정책을 중앙에서 관리하여 회사 또는 규정 보안 요구 사항을 준수할 수 있습니다.
+- **연속적인 보안 평가** – 컴퓨터, 네트워크, 저장소 및 데이터 서비스, 응용 프로그램의 보안을 모니터링하여 잠재적인 보안 문제를 찾아낼 수 있습니다.
+- **실행 가능한 권장 지침** – 우선 순위가 지정된 실행 가능한 보안 권장 지침을 사용하여 공격자들이 악용하기 전에 보안 취약성을 수정할 수 있습니다.
+- **고급 클라우드 방어** – 관리 포트 및 허용 목록에 대한 Just-In-Time 액세스를 통해 VM에서 실행되는 응용 프로그램을 제어함으로써 위협을 줄일 수 있습니다.
+- **경고 및 인시던트 우선 순위 지정** - 우선 순위가 지정된 보안 경고와 인시던트를 통해 가장 중요한 위협부터 중점적으로 확인할 수 있습니다.
+- **통합 보안 솔루션** - 연결된 파트너 솔루션을 비롯한 여러 소스에서 보안 데이터를 수집, 검색 및 분석할 수 있습니다.
 
-## <a name="key-capabilities"></a>주요 기능
- 보안 센터는 Azure에 기본 제공되는 사용하기 쉽고 효과적인 위협 예방, 감지 및 대응 기능을 제공합니다. 주요 기능:
+**Security Center - 개요**에서는 Azure 및 비 Azure 작업의 보안 태세를 빠르게 확인하여 작업의 보안을 검색 및 평가하고 위험을 파악 및 완화할 수 있습니다. 기본 제공 대시보드는 주의가 필요한 보안 경고 및 취약성에 대한 즉각적인 정보를 제공합니다.
 
-| 단계 | 기능 |
-| --- | --- |
-| 예방 |Azure 리소스의 보안 상태 모니터링 |
-| 예방 | 회사의 보안 요구 사항, 사용할 응용 프로그램 형식 및 데이터의 민감도에 따라 Azure 구독에 대한 정책 정의 |
-| 예방 | 정책 기반 보안 권장 사항을 사용하여 서비스 소유자에게 필요한 제어를 구현하는 과정 안내 |
-| 예방 | Microsoft 및 파트너의 보안 서비스 및 어플라이언스를 빠르게 배포 |
-| 감지 |Azure 리소스, 네트워크 및 맬웨어 방지 프로그램과 방화벽 같은 파트너 솔루션에서 자동으로 보안 데이터 수집 및 분석 |
-| 감지 | Microsoft 제품과 서비스, Microsoft DCU(Digital Crimes Unit), MSRC(Microsoft 보안 대응 센터) 및 외부 피드에서 글로벌 위협 인텔리전스 사용 |
-| 감지 | 기계 학습 및 행동 분석을 비롯한 고급 분석 적용 |
-| 대응 |우선 순위가 지정된 보안 문제/경고 제공 |
-| 대응 | 공격 출처 및 영향을 받는 리소스에 대한 정보 제공 |
-| 대응 | 현재 공격을 중지하고 미래 공격을 예방하는 데 도움이 되는 방법 제안 |
+![개요][1]
 
-## <a name="introductory-walkthrough"></a>기능 소개 연습
+## <a name="centralized-policy-management"></a>중앙 집중식 정책 관리
+보안 정책은 워크로드에서 원하는 구성을 정의하고 회사 또는 규정 보안 요구 사항을 준수하는 데 도움이 됩니다. Security Center에서 정책을 정의하고 워크로드의 유형 또는 데이터의 민감도에 맞게 조정합니다.
 
-> [!NOTE]
-> 이 문서에서는 배포 예제를 사용하여 서비스를 소개합니다. 이 문서는 단계별 가이드가 아닙니다.
->
->
+Security Center 정책에는 다음 구성 요소가 포함되어 있습니다.
 
- [Azure 포털](https://azure.microsoft.com/features/azure-portal/)에서 보안 센터에 액세스합니다. [포털](https://portal.azure.com)에 로그인합니다. 주 포털 메뉴에서 **Security Center** 옵션으로 스크롤하거나 이전에 포털 대시보드에 고정한 **Security Center** 타일을 선택합니다.
+- **데이터 컬렉션**: 에이전트 프로비전 및 보안 [데이터 컬렉션](security-center-enable-data-collection.md) 설정을 결정합니다.
+- **보안 정책**: [보안 정책](security-center-policies.md)을 편집하여 Security Center에서 모니터링 및 권장하는 컨트롤을 결정합니다.
+- **전자 메일 알림**: 보안 연락처 및 [전자 메일 알림](security-center-provide-security-contact-details.md) 설정을 결정합니다.
+- **가격 책정 계층**: 무료 또는 표준 [가격 선택](security-center-pricing.md)을 정의합니다. 선택한 계층에 따라 범위의 리소스에 대해 사용할 수 있는 Security Center 기능이 결정됩니다.
 
-![Azure 포털의 보안 타일][1]
+![보안 정책][2]
 
-보안 센터에서 보안 정책을 설정하고 보안 구성을 모니터링하며 보안 경고를 볼 수 있습니다.
+자세한 내용은 [보안 정책 개요](security-center-policies-overview.md)를 참조하세요.
 
-### <a name="security-policies"></a>보안 정책
-회사의 보안 요구 사항에 따라 Azure 구독에 대한 정책을 정의할 수 있습니다. 또한 사용하는 응용 프로그램의 형식 또는 각 구독에서 데이터의 민감도에 대해 정책을 조정할 수 있습니다. 예를 들어 개발 또는 테스트에 사용되는 리소스의 요구사항은 프로덕션 응용 프로그램에 사용되는 보안 요구 사항과 다릅니다. 마찬가지로 PII 같은 규제된 데이터를 가진 응용 프로그램에 대해서는 더 높은 수준의 보안이 필요할 수 있습니다.
+## <a name="continuous-security-assessment"></a>지속적인 보안 평가
+Security Center는 계산 리소스, 가상 네트워크, 저장소 및 데이터 서비스, 응용 프로그램의 보안 상태를 분석합니다. 지속적인 평가를 통해 보안 업데이트가 누락된 시스템이나 노출된 네트워크 포트와 같은 잠재적인 보안 문제를 찾아낼 수 있습니다. 방지 섹션에서 타일을 선택하여 리소스 및 식별된 취약성 목록을 비롯한 자세한 정보를 봅니다.
 
-> [!NOTE]
-> 보안 정책을 수정하려면 보안 관리자이거나 구독의 소유자 또는 참가자여야 합니다. Security Center의 역할 및 허용된 작업에 대해 알아보려면 [Azure Security Center의 권한](security-center-permissions.md)을 참조하세요.
->
->
+![보안 상태 모니터링][3]
 
-**Security Center** 블레이드에서 구독 및 리소스 그룹 목록에 대한 **정책** 타일을 선택합니다.   
+자세한 내용은 [보안 상태 모니터링](security-center-monitoring.md)을 참조하세요.
 
-![보안 센터 블레이드][2]
+## <a name="actionable-recommendations"></a>실행 가능한 권장 사항
+Security Center는 Azure 및 비 Azure 리소스의 보안 상태를 분석하여 잠재적인 보안 취약성을 식별합니다. 우선 순위가 지정된 보안 권장 사항 목록은 보안 문제 해결 과정을 안내합니다.
 
-**보안 정책** 블레이드에서 정책 세부 정보를 볼 구독을 선택합니다.
+![권장 사항][4]
 
-**데이터 수집**은 보안 정책에 대한 데이터 수집을 사용합니다. 사용하도록 설정하면 다음 작업이 수행됩니다.
+자세한 내용은 [보안 권장 사항 관리](security-center-recommendations.md)를 참조하세요.
 
-* 보안 모니터링 및 권장 사항을 위해 지원되는 가상 컴퓨터(VM)를 매일 검색합니다.
-* 분석 및 위협 감지를 위해 보안 이벤트를 수집합니다.
+## <a name="just-in-time-vm-access"></a>Just-In-Time VM 액세스
+Azure VM의 관리 포트에 대한 제어되는 Just-In-Time 액세스를 사용하여 네트워크 공격에 대한 취약성을 낮춤으로써 무차별 암호 대입 공격(brute force attack) 및 기타 네트워크 공격에 대한 노출을 크게 줄일 수 있습니다.
 
-> [!NOTE]
-> 데이터 수집은 구독 수준에서 구성됩니다.
->
->
+![Just-In-Time VM 액세스][5]
 
-**방지 정책**을 선택하여 **방지 정책** 블레이드를 엽니다. **권장 사항 표시**를 사용하면 구독 내에서 리소스의 보안 요구를 기반으로 모니터링하려는 보안 컨트롤과 보려는 권장 지침을 선택할 수 있습니다.
+사용자가 가상 머신에 연결할 수 있는 방법에 대한 규칙을 지정합니다. 필요한 경우 Security Center에서 또는 PowerShell을 통해 액세스를 요청할 수 있습니다. 요청이 규칙에 부합되기만 하면, 요청된 시간 동안 액세스 권한이 자동으로 부여됩니다.
 
-### <a name="security-recommendations"></a>보안 권장 사항
- 보안 센터는 Azure 리소스의 보안 상태를 분석하여 잠재적인 보안 취약성을 식별합니다. 권장 사항 목록은 필요한 컨트롤 구성 과정을 안내합니다. 예를 들면 다음과 같습니다.
+자세한 내용은 [Just-In-Time를 사용하여 가상 머신 액세스 관리](security-center-just-in-time.md)를 참조하세요.
 
-* 맬웨어 방지 프로그램을 프로비전하여 악성 소프트웨어 식별 및 제거 지원
-* 네트워크 보안 그룹 및 VM에 대한 트래픽 제어 규칙 구성
-* 웹 응용 프로그램 방화벽을 프로비전하여 웹 응용 프로그램의 대상이 되는 공격에 대한 방어 지원
-* 누락된 시스템 업데이트 배포
-* 권장 기준과 일치하지 않는 OS 구성 해결
+## <a name="adaptive-application-controls"></a>적응 응용 프로그램 컨트롤
+Machine Learning을 통해 제공되며 특정 Azure 작업에 맞게 조정되는 허용 목록 권장 사항을 적용하여 맬웨어 및 기타 원치 않는 응용 프로그램을 차단할 수 있습니다.
 
-권장 사항 목록에 대한 **권장 사항** 타일을 클릭합니다. 각 권장 사항을 클릭하여 추가 정보를 보거나 문제를 해결하기 위한 조치를 취합니다.
+![적응 응용 프로그램 컨트롤][6]
 
-![Azure 보안 센터의 보안 권장 사항][5]
+Security Center에서 생성된 권장되는 응용 프로그램 허용 목록 규칙을 검토한 후 클릭하여 적용하거나 이미 구성된 규칙을 편집합니다.
 
-### <a name="security-state-of-azure-resources"></a>Azure 리소스의 보안 상태
-대시보드의 **방지**섹션은 환경의 전체 보안 상태를 VM, 웹 응용 프로그램 및 다른 리소스를 비롯한 리소스 형식별로 표시합니다.   
+자세한 내용은 [적응형 응용 프로그램 제어](security-center-adaptive-application.md)를 참조하세요.
 
-**방지**에서 리소스 형식을 선택하여 식별된 잠재적 보안 취약성 목록을 비롯한 자세한 정보를 봅니다. (아래 예제에서**계산**을 선택합니다.)
+## <a name="prioritized-alerts-and-incidents"></a>우선 순위가 지정된 경고 및 인시던트
+Security Center에서는 고급 분석 및 전역 위협 인텔리전스를 사용하여 들어오는 공격 및 위반 후 활동을 감지합니다. 경고는 우선 순위가 지정된 후 인시던트로 그룹화되므로, 가장 중요한 위협에 우선적으로 집중할 수 있습니다. 사용자 지정 보안 경고를 만들 수도 있습니다.
 
-![리소스 상태 타일][6]
+![우선 순위가 지정된 경고 및 인시던트][7]
 
-### <a name="security-alerts"></a>보안 경고
- 보안 센터는 Azure 리소스, 네트워크 및 맬웨어 방지 프로그램과 방화벽 같은 파트너 솔루션에서 자동으로 로그 데이터를 수집, 분석 및 통합합니다. 위협이 감지되었을 때 보안 경고가 생성됩니다. 감지되는 사항의 예:
+시각적, 대화형 조사 경험을 통해 공격의 범위 및 영향을 빠르게 평가하고, 미리 정의된 쿼리나 임시 쿼리를 통해 보안 데이터를 보다 상세하게 탐색할 수 있습니다.
 
-* 알려진 악성 IP 주소와 통신하는 손상된 VM
-* Windows 오류 보고를 사용하여 감지된 고급 맬웨어 프로그램
-* VM에 대한 무작위 공격
-* 통합 맬웨어 방지 프로그램 및 방화벽에서의 보안 경고
+자세한 내용은 [보안 경고 관리 및 대응](security-center-managing-and-responding-alerts.md)을 참조하세요.
 
-**보안 경고** 타일을 클릭하면 우선 순위가 지정된 경고의 목록이 표시됩니다.
+## <a name="integrate-your-security-solutions"></a>보안 솔루션 통합
+Security Center에서 네트워크 방화벽과 같은 연결된 파트너 솔루션 및 기타 Microsoft 서비스를 비롯한 여러 소스에서 보안 데이터를 수집, 검색 및 분석할 수 있습니다.
 
-![보안 경고][7]
+![보안 솔루션 통합][8]
 
-경고를 선택하면 공격 및 공격을 해결하는 방법 제안에 대한 더 자세한 정보가 표시됩니다.
-
-![보안 경고 세부 정보][8]
-
-### <a name="partner-solutions"></a>파트너 솔루션
-**파트너 솔루션** 타일을 통해 Azure 구독과 통합된 파트너 솔루션의 보안 상태를 한 눈에 모니터링할 수 있습니다. 보안 센터에는 솔루션에서 가져온 경고가 표시됩니다.
-
-**파트너 솔루션** 타일을 선택합니다. 블레이드가 열리고 연결된 모든 파트너 솔루션의 목록을 표시합니다.
-
-![파트너 솔루션][9]
-
-## <a name="get-started"></a>시작
-보안 센터를 시작하려면 Microsoft Azure에 대한 구독이 필요합니다. 보안 센터는 Azure 구독을 사용하여 사용하도록 설정됩니다. 구독이 없는 경우 [무료 평가판](https://azure.microsoft.com/pricing/free-trial/)을 등록할 수 있습니다.
-
- [Azure 포털](https://azure.microsoft.com/features/azure-portal/)에서 보안 센터에 액세스합니다. 자세한 내용은 [포털 설명서](https://azure.microsoft.com/documentation/services/azure-portal/)를 참조하세요.
-
-[Azure 보안 센터 시작](security-center-get-started.md)은 보안 센터의 보안 모니터링 및 정책 관리 구성 요소를 빠르게 안내합니다.
+자세한 내용은 [보안 솔루션 통합](security-center-partner-integration.md)을 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
-이 문서에서는 보안 센터, 주요 기능 및 시작하는 방법을 소개하였습니다. 자세한 내용은 다음 리소스를 참조하세요.
 
-* [Azure 보안 센터에서 보안 정책 설정](security-center-policies.md) - Azure 구독 및 리소스 그룹에 대해 보안 정책을 구성하는 방법을 알아봅니다.
-* [Azure 보안 센터에서 보안 권장 사항 관리](security-center-recommendations.md) - 권장 사항이 Azure 리소스 보호에 어떤 도움이 되는지를 알아봅니다.
-* [Azure 보안 센터에서 보안 상태 모니터링](security-center-monitoring.md) - Azure 리소스의 상태를 모니터링하는 방법을 알아봅니다.
-* [Azure 보안 센터에서 보안 경고 관리 및 대응](security-center-managing-and-responding-alerts.md) - 보안 경고를 관리하고 대응하는 방법을 알아봅니다.
-* [Azure 보안 센터를 사용하여 파트너 솔루션 모니터링](security-center-partner-solutions.md) — 파트너 솔루션의 상태를 모니터링하는 방법을 알아봅니다.
-- [Azure Security Center 데이터 보안](security-center-data-security.md) - Security Center에서 데이터를 관리하고 보호하는 방법을 알아봅니다.
-* [Azure 보안 센터 FAQ](security-center-faq.md) - 서비스 사용에 관한 질문과 대답을 찾습니다.
-* [Azure 보안 블로그](http://blogs.msdn.com/b/azuresecurity/) - 최신 Azure 보안 뉴스 및 정보를 가져옵니다.
+- 보안 센터를 시작하려면 Microsoft Azure에 대한 구독이 필요합니다. 구독이 없는 경우 [무료 평가판](https://azure.microsoft.com/free/)을 등록할 수 있습니다.
+- Security Center의 무료 가격 책정 계층은 Azure 구독을 사용하여 사용하도록 설정됩니다. 고급 보안 관리 및 위협 검색 기능을 활용하려면 표준 가격 책정 계층으로 업그레이드해야 합니다. 표준 계층은 처음 60일 동안 무료입니다. 자세한 내용은 [Security Center 가격 책정 페이지](https://azure.microsoft.com/pricing/details/security-center/)를 참조하세요.
+- 지금 Security Center 표준을 설정할 준비가 된 경우 [빠른 시작: Security Center 표준에 Azure 구독 온보딩](security-center-get-started.md)의 지침을 따릅니다.
+
 
 <!--Image references-->
-[1]: ./media/security-center-intro/security-tile.png
-[2]: ./media/security-center-intro/security-center.png
-[3]: ./media/security-center-intro/security-policy.png
-[4]: ./media/security-center-intro/security-policy-blade.png
-[5]: ./media/security-center-intro/recommendations.png
-[6]: ./media/security-center-intro/resources-health.png
-[7]: ./media/security-center-intro/security-alert.png
-[8]: ./media/security-center-intro/security-alert-detail.png
-[9]: ./media/security-center-intro/partner-solutions.png
-
+[1]: ./media/security-center-intro/overview.png
+[2]: ./media/security-center-intro/security-policy.png
+[3]: ./media/security-center-intro/compute.png
+[4]: ./media/security-center-intro/recommendations.png
+[5]: ./media/security-center-intro/just-in-time-vm-access.png
+[6]: ./media/security-center-intro/adaptive-app-controls.png
+[7]: ./media/security-center-intro/security-alerts.png
+[8]: ./media/security-center-intro/security-solutions.png

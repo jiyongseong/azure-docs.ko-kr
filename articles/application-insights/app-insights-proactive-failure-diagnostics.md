@@ -1,9 +1,9 @@
 ---
-title: "Application Insights의 스마트 감지 - 실패 | Microsoft Docs"
-description: "웹앱에 요청 실패율의 비정상적인 변경 내용에 대해 경고하고 진단 분석을 제공합니다. 구성이 필요하지 않습니다."
+title: Application Insights의 스마트 감지 - 실패 | Microsoft Docs
+description: 웹앱에 요청 실패율의 비정상적인 변경 내용에 대해 경고하고 진단 분석을 제공합니다. 구성이 필요하지 않습니다.
 services: application-insights
-documentationcenter: 
-author: yorac
+documentationcenter: ''
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: ea2a28ed-4cd9-4006-bd5a-d4c76f4ec20b
 ms.service: application-insights
@@ -12,13 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 01/09/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 9a3df0ad2483471023ebb954d613bc5cad8fb7bf
-ms.openlocfilehash: 24ca63e69d181f0d2c236b1fb6761984ce89520b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/02/2017
-
+ms.author: mbullwin; yossiy
+ms.openlocfilehash: 29ae81551d4bd4be4123c8e7780b8b5ecc259f09
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
 # <a name="smart-detection---failure-anomalies"></a>스마트 감지 - 실패
 [Application Insights](app-insights-overview.md)는 웹앱에서 실패한 요청이 비정상적으로 증가하는 경우 거의 실시간으로 자동으로 알립니다. 실패했다고 보고된 HTTP 요청 또는 종속성 호출의 비율이 비정상적으로 증가하는 것을 감지합니다. 요청의 경우 실패한 요청은 일반적으로 응답 코드 400 이상입니다. 문제를 심사하고 진단할 수 있도록 실패 및 관련된 원격 분석의 특성에 대한 분석이 알림 영역에서 제공됩니다. 또한 추가 진단을 위해 Application Insights 포털에 링크가 제공됩니다. 기능이 Machine Learning 알고리즘을 사용하여 일반 실패율을 예측하려면 설정 또는 구성이 필요하지 않습니다.
@@ -123,11 +122,11 @@ ms.lasthandoff: 02/02/2017
 
 *그렇다면, 내 데이터를 확인하고 있습니까?*
 
-* 아니요. 서비스는 완전 자동입니다. 사용자는 알림만 받게 됩니다. 사용자의 데이터는 [비공개](app-insights-data-retention-privacy.md)입니다.
+* 번호 서비스는 완전 자동입니다. 사용자는 알림만 받게 됩니다. 사용자의 데이터는 [비공개](app-insights-data-retention-privacy.md)입니다.
 
 *이 경고를 구독해야 하나요?*
 
-* 아니요. 요청 원격 분석을 보내는 모든 응용 프로그램에 스마트 감지 경고 규칙이 있습니다.
+* 번호 요청 원격 분석을 보내는 모든 응용 프로그램에 스마트 감지 경고 규칙이 있습니다.
 
 *구독을 취소하거나 동료에게 대신 보낸 알림을 가져올 수 있습니까?*
 
@@ -152,4 +151,3 @@ ms.lasthandoff: 02/02/2017
 
 * [수동으로 구성된 메트릭 경고](app-insights-alerts.md)
 * [가용성 웹 테스트](app-insights-monitor-web-app-availability.md)
-

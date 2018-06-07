@@ -1,28 +1,28 @@
 ---
-title: "라우팅 및 태그 식"
-description: "이 문서는 Azure 알림 허브에 대한 알림 및 태그 식을 설명합니다."
+title: 라우팅 및 태그 식
+description: 이 문서는 Azure 알림 허브에 대한 알림 및 태그 식을 설명합니다.
 services: notification-hubs
 documentationcenter: .net
-author: ysxu
-manager: erikre
-editor: 
+author: dimazaid
+manager: kpiteira
+editor: spelluru
 ms.assetid: 0fffb3bb-8ed8-4e0f-89e8-0de24a47f644
 ms.service: notification-hubs
 ms.workload: mobile
 ms.tgt_pltfrm: mobile-multiple
 ms.devlang: dotnet
 ms.topic: article
-ms.date: 06/29/2016
-ms.author: yuaxu
-translationtype: Human Translation
-ms.sourcegitcommit: 219dcbfdca145bedb570eb9ef747ee00cc0342eb
-ms.openlocfilehash: 3a5f06b7e9600c34ef690e025a0a2079f71f843e
-
-
+ms.date: 04/14/2018
+ms.author: dimazaid
+ms.openlocfilehash: e08fca0b6b57d654f2b2ff7b935f38d8c517487b
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="routing-and-tag-expressions"></a>라우팅 및 태그 식
 ## <a name="overview"></a>개요
-태그 식을 사용하면 알림 허브를 통해 푸시 알림을 보내는 경우에 특정한 장치 집합, 보다 구체적으로는 등록을 대상으로 지정할 수 있습니다.
+태그 식을 사용하면 Notification Hubs를 통해 푸시 알림을 보내는 경우에 특정한 장치 집합, 보다 구체적으로는 등록을 대상으로 지정할 수 있습니다.
 
 ## <a name="targeting-specific-registrations"></a>특정 등록을 대상으로 지정
 특정한 알림 등록을 대상으로 지정하는 유일한 방법은 등록에 태그를 연결한 후에 해당 태그를 대상으로 지정하는 것입니다. [등록 관리](notification-hubs-push-notification-registration-management.md)의 설명처럼, 푸시 알림을 받으려면 앱은 장치 핸들을 알림 허브에 등록해야 합니다. 알림 허브에 등록이 생성되면, 응용 프로그램 백 엔드는 등록에 푸시 알림을 보낼 수 있습니다.
@@ -32,8 +32,8 @@ ms.openlocfilehash: 3a5f06b7e9600c34ef690e025a0a2079f71f843e
 2. **태그**: 지정된 태그를 포함하는 모든 등록이 알림을 수신합니다.
 3. **태그 식**: 등록의 태그 집합이 지정된 식과 일치하는 모든 등록이 알림을 수신합니다.
 
-## <a name="tags"></a>태그
-태그에는 영숫자 및 영숫자가 아닌 문자(‘_’, ‘@’,, ‘#’, ‘.’, ‘:’, ‘-’)를 포함하는 모든 문자열을 최대 120자까지 사용할 수 있습니다. 다음 예제는 특정 음악 그룹에 대한 토스트 알림을 받을 수 있는 응용 프로그램을 보여줍니다. 이 시나리오에서 알림을 라우팅하는 간단한 방법은 등록에 대해 아래 그림처럼 다양한 밴드를 나타내는 태그로 레이블을 붙이는 것입니다.
+## <a name="tags"></a>태그들
+태그에는 영숫자 및 영숫자가 아닌 문자(‘_’, ‘@’, ‘#’, ‘.’, ‘:’, ‘-’)를 포함하는 모든 문자열을 최대 120자까지 사용할 수 있습니다. 다음 예제는 특정 음악 그룹에 대한 토스트 알림을 받을 수 있는 응용 프로그램을 보여줍니다. 이 시나리오에서 알림을 라우팅하는 간단한 방법은 등록에 대해 아래 그림처럼 다양한 밴드를 나타내는 태그로 레이블을 붙이는 것입니다.
 
 ![](./media/notification-hubs-routing-tag-expressions/notification-hubs-tags.png)
 
@@ -95,16 +95,10 @@ ms.openlocfilehash: 3a5f06b7e9600c34ef690e025a0a2079f71f843e
 
     // Windows 8.1 / Windows Phone 8.1
     var toast = @"<toast><visual><binding template=""ToastText01""><text id=""1"">" +
-    "You want info on the Red Socks</text></binding></visual></toast>";
+    "You want info on the Red Sox</text></binding></visual></toast>";
     outcome = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toast, userTag);
 
     // Windows 10
     toast = @"<toast><visual><binding template=""ToastGeneric""><text id=""1"">" +
-    "You want info on the Red Socks</text></binding></visual></toast>";
+    "You want info on the Red Sox</text></binding></visual></toast>";
     outcome = await Notifications.Instance.Hub.SendWindowsNativeNotificationAsync(toast, userTag);
-
-
-
-<!--HONumber=Nov16_HO3-->
-
-

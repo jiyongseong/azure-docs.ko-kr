@@ -2,9 +2,9 @@
 documentType: LandingData
 title: Kubernetes를 사용한 Azure Container Service 설명서
 metadata:
-  document_id: null
-  title: 'Kubernetes를 사용한 Azure Container Service 설명서 - 자습서, API 참조 | Microsoft Docs'
-  meta.description: 'Azure Container Service allows you to quickly deploy a production ready Kubernetes cluster. Learn how to use Azure Container Service in concert with Kubernetes with these quickstarts, tutorials, and samples.'
+  document_id: 
+  title: Kubernetes를 사용한 Azure Container Service 설명서 - 자습서, API 참조 | Microsoft Docs
+  meta.description: Azure Container Service allows you to quickly deploy a production ready Kubernetes cluster. Learn how to use Azure Container Service in concert with Kubernetes with these quickstarts, tutorials, and samples.
   services: container-service
   author: carolz
   manager: carolz
@@ -14,48 +14,53 @@ metadata:
   ms.topic: landing-page
   ms.date: 07-21-2017
   ms.author: carolz
+  ms.openlocfilehash: 93abd74e649577abff9ce27f68c6b8456258d9b9
+  ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 04/16/2018
 abstract:
-  description: 'Azure Container Service를 사용하면 프로덕션 준비 Kubernetes 클러스터를 빠르게 배포할 수 있습니다. 이러한 빠른 시작, 자습서 및 샘플을 통해 Kubernetes와 함께 Azure Container Service를 사용하는 방법을 알아보세요.'
+  description: Azure Container Service를 사용하면 프로덕션 준비 Kubernetes 클러스터를 빠르게 배포할 수 있습니다. 이러한 빠른 시작, 자습서 및 샘플을 통해 Kubernetes와 함께 Azure Container Service를 사용하는 방법을 알아보세요.
 sections:
-  - title: 5분 빠른 시작
+- title: 5분 빠른 시작
+  items:
+  - type: paragraph
+    text: 'Azure Container Service를 사용하여 Kubernetes 클러스터를 배포하는 방법 알아보기:'
+  - type: list
+    style: icon48
     items:
-      - type: paragraph
-        text: 'Azure Container Service를 사용하여 Kubernetes 클러스터를 배포하는 방법 알아보기:'
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: 'https://docs.microsoft.com/media/logos/logo_linux.svg'
-            text: Linux
-            href: /azure/container-service/kubernetes/container-service-kubernetes-walkthrough
-  - title: 단계별 자습서
+    - image:
+        src: https://docs.microsoft.com/media/logos/logo_linux.svg
+      text: Kubernetes 클러스터 만들기
+      href: /azure/container-service/kubernetes/container-service-kubernetes-walkthrough
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: Azure Container Service Kubernetes 클러스터에서 응용 프로그램을 배포, 관리 및 업데이트하는 방법을 알아봅니다.
+  - type: list
+    style: ordered
     items:
-      - type: paragraph
-        text: 'Azure Container Service Kubernetes 클러스터에서 응용 프로그램을 배포, 관리 및 업데이트하는 방법을 알아봅니다.'
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/container-service/kubernetes/container-service-tutorial-kubernetes-prepare-app">응용 프로그램에서 컨테이너 이미지 만들기</a>
-          - html: <a href="/azure/container-service/kubernetes/container-service-tutorial-kubernetes-prepare-acr">Azure Container Registry에 컨테이너 이미지 업로드</a>
-          - html: <a href="/azure/container-service/kubernetes/container-service-tutorial-kubernetes-deploy-cluster">Azure Container Service에서 Kubernetes 클러스터 배포</a>
-          - html: <a href="/azure/container-service/kubernetes/container-service-tutorial-kubernetes-deploy-application">Kubernetes에서 컨테이너 이미지 실행</a>
-          - html: <a href="/azure/container-service/kubernetes/container-service-tutorial-kubernetes-scale">응용 프로그램 및 Kubernetes 인프라 크기 조정</a>
-          - html: <a href="/azure/container-service/kubernetes/container-service-tutorial-kubernetes-app-update">Kubernetes에서 실행 중인 응용 프로그램 업데이트</a>
-          - html: <a href="/azure/container-service/kubernetes/container-service-tutorial-kubernetes-monitor">OMS로 Kubernetes 모니터링</a>
-  - title: 샘플
+    - html: <a href="/azure/container-service/kubernetes/container-service-tutorial-kubernetes-prepare-app">응용 프로그램에서 컨테이너 이미지 만들기</a>
+    - html: <a href="/azure/container-service/kubernetes/container-service-tutorial-kubernetes-prepare-acr">Azure Container Registry에 컨테이너 이미지 업로드</a>
+    - html: <a href="/azure/container-service/kubernetes/container-service-tutorial-kubernetes-deploy-cluster">Azure Container Service에서 Kubernetes 클러스터 배포</a>
+    - html: <a href="/azure/container-service/kubernetes/container-service-tutorial-kubernetes-deploy-application">Kubernetes에서 컨테이너 이미지 실행</a>
+    - html: <a href="/azure/container-service/kubernetes/container-service-tutorial-kubernetes-scale">응용 프로그램 및 Kubernetes 인프라 크기 조정</a>
+    - html: <a href="/azure/container-service/kubernetes/container-service-tutorial-kubernetes-app-update">Kubernetes에서 실행 중인 응용 프로그램 업데이트</a>
+    - html: <a href="/azure/container-service/kubernetes/container-service-tutorial-kubernetes-monitor">Log Analytics를 사용하여 Kubernetes 모니터링</a>
+- title: 샘플
+  items:
+  - type: list
+    style: unordered
+    className: spaced noBullet
     items:
-      - type: list
-        style: unordered
-        className: spaced noBullet
-        items:
-          - html: <a href="/azure/container-service/cli-samples">Azure CLI</a>
-  - title: 참조
+    - html: <a href="/azure/container-service/cli-samples">Azure CLI</a>
+- title: 참고 자료
+  items:
+  - type: list
+    style: cards
+    className: cardsD
     items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: 명령줄
-            html: <p><a href="/cli/azure/acs">Azure CLI</a></p>
-          - title: REST (영문)
-            html: <p><a href="/rest/api/compute/containerservices">REST API</a></p>
+    - title: 명령줄
+      html: <p><a href="/cli/azure/acs">Azure CLI</a></p>
+    - title: REST (영문)
+      html: <p><a href="/rest/api/container-service">REST API</a></p>

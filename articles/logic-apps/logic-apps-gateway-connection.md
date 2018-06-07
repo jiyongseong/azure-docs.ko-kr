@@ -13,16 +13,15 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: integration
-ms.date: 07/13/2017
-ms.author: LADocs; dimazaid; estfan
+ms.date: 09/14/2017
+ms.author: LADocs; millopis; estfan
+ms.openlocfilehash: 5160913b2f08a04f0a985d8ddadd6641a664b258
+ms.sourcegitcommit: 088a8788d69a63a8e1333ad272d4a299cb19316e
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 24793b83ca284fe9510fe21bc2d13b0589209d36
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/27/2018
 ---
-# <a name="access-data-sources-on-premises-from-logic-apps-with-the-on-premises-data-gateway"></a>온-프레미스 데이터 게이트웨이를 사용하여 논리 앱에서 온-프레미스 데이터 원본에 액세스
+# <a name="connect-to-data-sources-on-premises-from-logic-apps-with-on-premises-data-gateway"></a>온-프레미스 데이터 게이트웨이를 사용하여 논리 앱에서 온-프레미스 데이터 원본에 연결
 
 논리 앱에서 온-프레미스 데이터 원본에 액세스하려면 지원되는 커넥터와 함께 논리 앱을 사용할 수 있는 온-프레미스 데이터 게이트웨이를 설정합니다. 게이트웨이는 온-프레미스 데이터 원본과 논리 앱 간에 빠른 데이터 전송 및 암호화를 제공하는 브리지 역할을 합니다. 게이트웨이는 Azure Service Bus를 통해 암호화된 채널의 온-프레미스 원본에서 데이터를 릴레이합니다. 보안으로 시작하는 모든 트래픽은 게이트웨이 에이전트에서 트래픽을 아웃바운드합니다. [데이터 게이트웨이 작동 원리](logic-apps-gateway-install.md#gateway-cloud-service)에 대해 자세히 알아봅니다. 
 
@@ -59,24 +58,28 @@ ms.lasthandoff: 07/21/2017
 
 * 게이트웨이 설치는 Azure 게이트웨이 리소스에서 이미 요구할 수 없습니다. 하나의 게이트웨이 리소스에만 게이트웨이 설치를 연결할 수 있습니다. 클레임은 게이트웨이 리소스를 만들 때 발생하므로 다른 리소스에서 설치할 수 없습니다.
 
-## <a name="set-up-the-data-gateway-connection"></a>데이터 게이트웨이 연결 설정
+* 온-프레미스 데이터 게이트웨이는 Windows 서비스로 실행되고 Windows 서비스 로그인 자격 증명에 `NT SERVICE\PBIEgwService`를 사용하도록 설정됩니다. Azure Portal에서 게이트웨이 리소스를 만들고 유지 관리하려면 [Windows 서비스 계정](../logic-apps/logic-apps-gateway-install.md)에 적어도 **참가자** 권한이 있어야 합니다. 
 
-### <a name="1-install-the-on-premises-data-gateway"></a>1. 온-프레미스 데이터 게이트웨이 설치
+  > [!NOTE]
+  > Windows 서비스 계정은 온-프레미스 데이터 원본에 연결하는 데 사용되는 동일한 계정 및 클라우드 서비스에 로그인하는 데 사용되는 Azure 회사 또는 학교 계정과 다릅니다.
+
+## <a name="install-the-on-premises-data-gateway"></a>온-프레미스 데이터 게이트웨이 설치
 
 아직 수행하지 않은 경우 [온-프레미스 데이터 게이트웨이를 설치하는 단계](logic-apps-gateway-install.md)에 따르세요. 다른 단계를 계속하기 전에 로컬 컴퓨터에 데이터 게이트웨이를 설치했는지 확인합니다.
 
 <a name="create-gateway-resource"></a>
-### <a name="2-create-an-azure-resource-for-the-on-premises-data-gateway"></a>2. 온-프레미스 데이터 게이트웨이에 Azure 리소스 만들기
+
+## <a name="create-an-azure-resource-for-the-on-premises-data-gateway"></a>온-프레미스 데이터 게이트웨이에 Azure 리소스 만들기
 
 로컬 컴퓨터에 게이트웨이를 설치한 후에 Azure에서 리소스인 데이터 게이트웨이를 만들어야 합니다. 또한 이 단계는 Azure 구독과 게이트웨이 리소스를 연결합니다.
 
 1. [Azure Portal](https://portal.azure.com "Azure Portal")에 로그인합니다. 게이트웨이를 설치하는 데 동일한 Azure 회사 또는 학교 이메일 주소를 사용해야 합니다.
 
-2. Azure의 왼쪽 메뉴에서 다음과 같이 **새로 만들기** > **엔터프라이즈 통합** > **온-프레미스 데이터 게이트웨이**를 선택합니다.
+2. 기본 Azure 메뉴에서 **리소스 만들기** > **엔터프라이즈 통합** > **온-프레미스 데이터 게이트웨이**를 선택합니다.
 
    !["온-프레미스 데이터 게이트웨이" 찾기](./media/logic-apps-gateway-connection/find-on-premises-data-gateway.png)
 
-3. **연결 게이트웨이 만들기** 블레이드에서 데이터 게이트웨이 리소스를 만들기 위해 이러한 세부 정보를 제공합니다.
+3. **연결 게이트웨이 만들기** 페이지에서 데이터 게이트웨이 리소스를 만들기 위해 이러한 세부 정보를 제공합니다.
 
     * **이름**: 게이트웨이 리소스의 이름을 입력합니다. 
 
@@ -100,16 +103,18 @@ ms.lasthandoff: 07/21/2017
     게이트웨이 리소스를 Azure 대시보드에 추가하려면 **대시보드에 고정**을 선택합니다. 
     작업을 완료하면 **만들기**를 선택합니다.
 
-    예:
+    예: 
 
     ![온-프레미스 데이터 게이트웨이를 만들기 위해 세부 정보 제공](./media/logic-apps-gateway-connection/createblade.png)
 
-    기본 Azure 왼쪽 메뉴에서 언제든지 데이터 게이트웨이를 찾아 보려면 **추가 서비스** > **엔터프라이즈 통합** > **온-프레미스 데이터 게이트웨이**로 이동합니다.
+    언제든지 데이터 게이트웨이를 찾거나 확인하려면 기본 Azure 메뉴에서 **모든 서비스**를 선택합니다. 
+    검색 상자에 “온-프레미스 데이터 게이트웨이”를 입력한 다음, **온-프레미스 데이터 게이트웨이**를 선택합니다.
 
-    !["추가 서비스", "엔터프라이즈 통합", "온-프레미스 데이터 게이트웨이"로 이동](./media/logic-apps-gateway-connection/find-on-premises-data-gateway-enterprise-integration.png)
+    ![“온-프레미스 데이터 게이트웨이” 찾기](./media/logic-apps-gateway-connection/find-on-premises-data-gateway-enterprise-integration.png)
 
 <a name="connect-logic-app-gateway"></a>
-### <a name="3-connect-your-logic-app-to-the-on-premises-data-gateway"></a>3. 온-프레미스 데이터 게이트웨이에 논리 앱 연결
+
+## <a name="connect-your-logic-app-to-the-on-premises-data-gateway"></a>온-프레미스 데이터 게이트웨이에 논리 앱 연결
 
 이제 데이터 게이트웨이 리소스를 만들고 해당 리소스와 Azure 구독을 연결했으므로 논리 앱과 데이터 게이트웨이 간을 연결합니다.
 
@@ -135,15 +140,15 @@ ms.lasthandoff: 07/21/2017
 
 1. 게이트웨이 연결을 찾으려면:
 
-   * 논리 앱 블레이드의 **개발 도구** 아래에서 **API 연결**을 선택합니다. 
+   * 논리 앱 메뉴의 **개발 도구** 아래에서 **API 연결**을 선택합니다. 
    
      **API 연결** 창에서는 게이트웨이 연결을 포함하여 논리 앱과 관련된 모든 API 연결을 보여줍니다.
 
      ![논리 앱으로 이동, "API 연결" 선택](./media/logic-apps-gateway-connection/logic-app-find-api-connections.png)
 
-   * 또는 기본 Azure 왼쪽 메뉴에서 Azure 구독과 연결된 게이트웨이 연결을 비롯한 모든 API 연결에 대해 **추가 서비스** > **웹 및 Mobile Services** > **API 연결**로 이동합니다. 
+   * 또는 기본 Azure 메뉴에서 Azure 구독과 연결된 게이트웨이 연결을 비롯한 모든 API 연결에 대해 **추가 서비스** > **웹 + 모바일** > **API 연결**로 이동합니다. 
 
-   * 또는 기본 Azure 왼쪽 메뉴에서 Azure 구독과 연관된 게이트웨이 연결을 비롯한 모든 API 연결에 대해 **모든 리소스**로 이동합니다.
+   * 또는 기본 Azure 메뉴에서 Azure 구독과 연관된 게이트웨이 연결을 비롯한 모든 API 연결에 대해 **모든 리소스**로 이동합니다.
 
 2. **API 연결 편집**을 보거나 편집 및 선택하려는 게이트웨이 연결을 선택합니다.
 
@@ -151,15 +156,17 @@ ms.lasthandoff: 07/21/2017
    > 업데이트가 적용되지 않더라도 [게이트웨이 Windows 서비스를 중지 및 다시 시작](./logic-apps-gateway-install.md#restart-gateway)합니다.
 
 <a name="change-delete-gateway-resource"></a>
+
 ## <a name="switch-or-delete-your-on-premises-data-gateway-resource"></a>온-프레미스 데이터 게이트웨이 리소스 전환 또는 삭제
 
 다른 게이트웨이 리소스를 만들거나 다른 리소스와 게이트웨이를 연결하거나 게이트웨이 리소스를 제거하려면 게이트웨이 설치에 영향을 주지 않고 게이트웨이 리소스를 삭제할 수 있습니다. 
 
-1. 기본 Azure 왼쪽 메뉴에서 **모든 리소스**로 이동합니다. 
+1. 기본 Azure 메뉴에서 **모든 리소스**로 이동합니다. 
 2. 데이터 게이트웨이 리소스를 찾아 선택합니다.
 3. **온-프레미스 데이터 게이트웨이**를 선택하여 리소스 도구 모음에서 **삭제**를 선택합니다.
 
 <a name="faq"></a>
+
 ## <a name="frequently-asked-questions"></a>질문과 대답
 
 [!INCLUDE [existing-gateway-location-changed](../../includes/logic-apps-existing-gateway-location-changed.md)]
@@ -168,4 +175,3 @@ ms.lasthandoff: 07/21/2017
 
 * [논리 앱 보안](./logic-apps-securing-a-logic-app.md)
 * [논리 앱에 대한 일반적인 예제 및 시나리오](./logic-apps-examples-and-scenarios.md)
-

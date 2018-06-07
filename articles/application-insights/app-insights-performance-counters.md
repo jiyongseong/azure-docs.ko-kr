@@ -3,7 +3,7 @@ title: "Application Insights의 성능 카운터 | Microsoft Docs"
 description: "Application Insights에서 시스템 및 사용자 지정 .NET 성능 카운터를 모니터링합니다."
 services: application-insights
 documentationcenter: 
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 5b816f4c-a77a-4674-ae36-802ee3a2f56d
 ms.service: application-insights
@@ -12,13 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 10/11/2016
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5bbeb9d4516c2b1be4f5e076a7f63c35e4176b36
-ms.openlocfilehash: 2bcdff44f6c3169779c3dd018706eea8275825ca
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/13/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: 40821d32c5bdfe51bb3cb205660d6f25b2c3fadc
+ms.sourcegitcommit: e38120a5575ed35ebe7dccd4daf8d5673534626c
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/13/2017
 ---
 # <a name="system-performance-counters-in-application-insights"></a>Application Insights의 시스템 성능 카운터
 Windows는 광범위한 [성능 카운터](http://www.codeproject.com/Articles/8590/An-Introduction-To-Performance-Counters)(예: CPU 점유율, 메모리, 디스크, 네트워크 사용량 등)를 제공합니다. 또한 직접 정의할 수도 있습니다. [Application Insights](app-insights-overview.md)는 관리 액세스 권한이 있는 온-프레미스 호스트 또는 가상 컴퓨터의 IIS에서 응용 프로그램이 실행되는 경우 이러한 성능 카운터를 표시할 수 있습니다. 차트에서는 라이브 응용 프로그램에 사용할 수 있는 리소스를 나타내고 서버 인스턴스 간의 불균형 부하를 확인할 수 있습니다.
@@ -84,7 +83,6 @@ Windows는 광범위한 [성능 카운터](http://www.codeproject.com/Articles/8
       @"\.NET CLR Memory([replace-with-application-process-name])\# GC Handles", "GC Handles")));
     perfCollectorModule.Initialize(TelemetryConfiguration.Active);
 ```
-
 또는 만든 사용자 지정 메트릭과 동일한 작업을 수행할 수 있습니다.
 
 ``` C#
@@ -117,11 +115,13 @@ Windows는 광범위한 [성능 카운터](http://www.codeproject.com/Articles/8
 * *예외 속도* 는 시스템 성능 카운터입니다. CLR은 발생하는 처리된 예외 및 처리되지 않은 예외를 모두 계산하고 샘플링 간격의 합계를 간격 길이로 나눕니다. Application Insights SDK는 이 결과를 수집하여 포털에 보냅니다.
 * *예외* 는 차트의 샘플링 간격에 포털이 받은 TrackException 보고서 개수입니다. 코드에서 TrackException 호출을 작성한 처리된 예외만 포함하며, [처리되지 않은 예외](app-insights-asp-net-exceptions.md)는 모두 포함되지 않습니다. 
 
+## <a name="performance-counters-in-aspnet-core-applications"></a>Asp.Net Core 응용 프로그램의 성능 카운터
+성능 카운터는 응용 프로그램이 전체 .NET Framework를 대상으로 하는 경우에만 지원됩니다. .NET Core 응용 프로그램에 대한 성능 카운터를 수집하는 기능은 없습니다.
+
 ## <a name="alerts"></a>경고
 다른 메트릭과 마찬가지로 성능 카운터에서 지정한 제한을 벗어나는 경우 경고 메시지를 표시하도록 [경고를 설정](app-insights-alerts.md)할 수 있습니다. 경고 블레이드를 열고 경고 추가를 클릭합니다.
 
 ## <a name="next"></a>다음 단계
 * [종속성 추적](app-insights-asp-net-dependencies.md)
 * [예외 추적](app-insights-asp-net-exceptions.md)
-
 

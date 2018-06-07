@@ -14,18 +14,16 @@ ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 06/08/2016
 ms.author: mlearned
-ms.translationtype: Human Translation
-ms.sourcegitcommit: be747170a0d8a7a6defd790a3f8a122c4d397671
-ms.openlocfilehash: 4a87ee69f23779bf4f6f5db40bc05edbcfc7668d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/23/2017
-
-
+ms.openlocfilehash: 60efffd9313f6972ae46fd1925d999597d3c6ba2
+ms.sourcegitcommit: b07d06ea51a20e32fdc61980667e801cb5db7333
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="deploy-an-aspnet-container-to-a-remote-docker-host"></a>원격 Docker 호스트에 ASP.NET 컨테이너 배포
 ## <a name="overview"></a>개요
 Docker는 가상 컴퓨터와 몇 가지 측면에서 비슷하며 응용 프로그램과 서비스를 호스트하는 데 사용할 수 있는 간단한 컨테이너 엔진입니다.
-이 자습서에서는 [Visual Studio Tools for Docker](https://docs.microsoft.com/en-us/dotnet/articles/core/docker/visual-studio-tools-for-docker) 확장을 사용하여 Azure에서 PowerShell을 사용하여 Docker 호스트에 ASP.NET Core 앱을 배포하는 단계에 대해 설명합니다.
+이 자습서에서는 [Visual Studio Tools for Docker](https://docs.microsoft.com/dotnet/articles/core/docker/visual-studio-tools-for-docker) 확장을 사용하여 Azure에서 PowerShell을 사용하여 Docker 호스트에 ASP.NET Core 앱을 배포하는 단계에 대해 설명합니다.
 
 ## <a name="prerequisites"></a>필수 조건
 이 자습서를 완료하는 데 필요한 조건은 다음과 같습니다.
@@ -88,4 +86,3 @@ Docker는 가상 컴퓨터와 몇 가지 측면에서 비슷하며 응용 프로
 [1]:./media/vs-azure-tools-docker-hosting-web-apps-in-docker/change-docker-machine-name.png
 [2]:./media/vs-azure-tools-docker-hosting-web-apps-in-docker/launch-application.png
 [3]:./media/vs-azure-tools-docker-hosting-web-apps-in-docker/view-application.png
-

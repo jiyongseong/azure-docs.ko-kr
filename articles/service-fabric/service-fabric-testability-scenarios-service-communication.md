@@ -1,29 +1,26 @@
 ---
-title: "테스트 용이성: 서비스 통신 | Microsoft Docs"
-description: "서비스 간 통신은 서비스 패브릭 응용 프로그램의 중요 한 통합점입니다. 이 문서에서는 설계 고려 사항 및 테스트 기술에 대해 설명합니다."
+title: '테스트 용이성: 서비스 통신 | Microsoft Docs'
+description: 서비스 간 통신은 서비스 패브릭 응용 프로그램의 중요 한 통합점입니다. 이 문서에서는 설계 고려 사항 및 테스트 기술에 대해 설명합니다.
 services: service-fabric
 documentationcenter: .net
 author: vturecek
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 017557df-fb59-4e4a-a65d-2732f29255b8
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 06/29/2017
+ms.date: 11/02/2017
 ms.author: vturecek
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: 6356b4e69892b90ff74aa9db0157930dc00f4a08
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
-
+ms.openlocfilehash: e3ea537d310d49c934cf6789184f090791cf16a4
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
-# 서비스 패브릭 테스트 용이성 시나리오: 서비스 통신
-<a id="service-fabric-testability-scenarios-service-communication" class="xliff"></a>
+# <a name="service-fabric-testability-scenarios-service-communication"></a>서비스 패브릭 테스트 용이성 시나리오: 서비스 통신
 Azure 서비스 패브릭에서 마이크로 서비스 및 서비스 지향 아키텍처 스타일이 자연스럽게 드러납니다. 이러한 유형의 분산 아키텍처에서 구성 요소화된 마이크로 서비스 응용 프로그램은 서로 통신이 필요한 여러 서비스로 구성됩니다. 가장 간단한 경우에도 일반적으로 상태 비저장 웹 서비스 그리고 통신이 필요한 상태 저장 데이터 저장소 서비스가 있습니다.
 
 각 서비스에서 다른 서비스에 원격 API를 노출하기 때문에 서비스 간 통신은 응용 프로그램의 중요한 통합점입니다. I/O와 관련된 API 경계 집합을 사용하여 작업하려면 일반적으로 적절한 테스트 및 유효성 검사가 필요합니다.
@@ -36,8 +33,7 @@ Azure 서비스 패브릭에서 마이크로 서비스 및 서비스 지향 아�
 
 서비스 패브릭에서 제공하는 기본 제공 서비스 통신 구성 요소 중 하나를 사용하든지 사용자가 고유의 구성 요소를 만들든지 서비스 간의 상호 작용을 테스트하는 것이 응용 프로그램의 복구 기능을 보장하는 데 중요합니다.
 
-## 서비스 이동에 대한 준비
-<a id="prepare-for-services-to-move" class="xliff"></a>
+## <a name="prepare-for-services-to-move"></a>서비스 이동에 대한 준비
 서비스 인스턴스는 시간이 지남에 따라 이동할 수 있습니다. 사용자 지정된 최적의 리소스 균형에 대한 부하 메트릭을 사용하여 구성된 경우에 특히 그렇습니다. 분산 시스템의 전체 수명 주기에서 발생하는 업그레이드, 장애 조치(failover), 수평 확장 및 기타 상황 동안 가용성을 극대화하기 위해 서비스 패브릭이 서비스 인스턴스를 이동시킵니다.
 
 클러스터에서 서비스가 이동하는 경우에 서비스와 통신할 때 클라이언트 및 다른 서비스가 두 가지 시나리오를 처리할 수 있도록 준비해야 합니다.
@@ -51,8 +47,7 @@ Azure 서비스 패브릭에서 마이크로 서비스 및 서비스 지향 아�
 * 서비스 인스턴스에서 수신기를 다시 시작하기 때문에 서비스 대기 시간이 일시적으로 늘어날 수 있습니다. 서비스 인스턴스를 이동한 후에 서비스가 수신기를 여는 속도에 따라 다릅니다.
 * 새 노드에서 서비스가 열린 후에 기존 연결을 닫았다가 다시 열어야 합니다. 정상적인 노드 종료 또는 재시작의 경우 기존 연결이 정상적으로 종료될 때까지 시간이 허용됩니다.
 
-### 테스트: 서비스 인스턴스 이동
-<a id="test-it-move-service-instances" class="xliff"></a>
+### <a name="test-it-move-service-instances"></a>테스트: 서비스 인스턴스 이동
 서비스 패브릭의 테스트 용이성 도구를 사용하여 이러한 상황을 다양한 방법으로 테스트하는 테스트 시나리오를 작성할 수 있습니다.
 
 1. 상태 저장 서비스의 주 복제본을 이동합니다.
@@ -72,18 +67,16 @@ Azure 서비스 패브릭에서 마이크로 서비스 및 서비스 지향 아�
    
     ```powershell
    
-    PS > Restart-ServiceFabricNode -NodeName Node_1
+    PS > Stop-ServiceFabricNode -NodeName Node_1
    
     ```
 
-## 서비스 가용성 유지 관리
-<a id="maintain-service-availability" class="xliff"></a>
+## <a name="maintain-service-availability"></a>서비스 가용성 유지 관리
 플랫폼인 서비스 패브릭은 서비스 고가용성을 제공하도록 설계됩니다. 그러나 극단적인 상황에서 기본 인프라 문제로 인해 서비스 제공이 중단될 수 있습니다. 이러한 시나리오를 테스트하는 것도 중요합니다.
 
 상태 저장 서비스에서는 쿼럼 기반 시스템을 사용하여 고가용성에 대한 상태를 복제합니다. 즉, 쓰기 작업을 수행하려면 복제본의 쿼럼을 사용할 수 있어야 합니다. 매우 드물기는 해도 광범위한 하드웨어 오류와 같이 복제본의 쿼럼을 사용할 수 없는 경우가 아주 가끔 있습니다. 이러한 경우에 쓰기 작업을 수행할 수 없지만 읽기 작업은 계속 수행할 수 있습니다.
 
-### 테스트: 쓰기 작업 사용 불가
-<a id="test-it-write-operation-unavailability" class="xliff"></a>
+### <a name="test-it-write-operation-unavailability"></a>테스트: 쓰기 작업 사용 불가
 서비스 패브릭의 테스트 용이성 도구를 사용하여 쿼럼 손실을 테스트로 유도하는 오류를 삽입할 수 있습니다. 이러한 시나리오가 드물지만 상태 저장 서비스를 사용하는 클라이언트 및 서비스에서 이에 대한 쓰기 요청을 만들 수 없는 상황을 처리할 수 있도록 준비하는 것이 중요합니다. 또한 상태 저장 서비스 자체에서 이 가능성을 인식하고 호출자에게 정상적으로 전달하는 것도 중요합니다.
 
 PowerShell **Invoke-ServiceFabricPartitionQuorumLoss** cmdlet을 사용하여 쿼럼 손실을 유도할 수 있습니다.
@@ -96,10 +89,8 @@ PS > Invoke-ServiceFabricPartitionQuorumLoss -ServiceName fabric:/Myapplication/
 
 이 예제에서는 모든 복제본을 중지하지 않고 쿼럼 손실을 포함하도록 `QuorumLossMode`를 `QuorumReplicas`로 설정합니다. 이러한 방식으로 읽기 작업은 여전히 가능합니다. 전체 파티션을 사용할 수 없는 시나리오를 테스트하려면 이 스위치를 `AllReplicas`로 설정합니다.
 
-## 다음 단계
-<a id="next-steps" class="xliff"></a>
+## <a name="next-steps"></a>다음 단계
 [테스트 용이성 작업에 대한 자세한 정보](service-fabric-testability-actions.md)
 
 [테스트 용이성 시나리오에 대한 자세한 정보](service-fabric-testability-scenarios.md)
-
 

@@ -1,13 +1,13 @@
 ---
-title: "Azure에서 일반화된 VM의 관리되지 않는 이미지 만들기 | Microsoft Docs"
-description: "Azure에서 VM의 여러 복사본을 만드는 데 사용할 일반화된 Windows VM의 관리되지 않는 이미지를 만듭니다."
+title: Azure에서 일반화된 VM의 관리되지 않는 이미지 만들기 | Microsoft Docs
+description: Azure에서 VM의 여러 복사본을 만드는 데 사용할 일반화된 Windows VM의 관리되지 않는 이미지를 만듭니다.
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
-manager: timlt
+manager: jeconnoc
 editor: tysonn
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
@@ -15,26 +15,25 @@ ms.devlang: na
 ms.topic: article
 ms.date: 05/23/2017
 ms.author: cynthn
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 67ee6932f417194d6d9ee1e18bb716f02cf7605d
-ms.openlocfilehash: 28fbe7d802a1258dd025b570a264b9306ba11dd6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
-
+ROBOTS: NOINDEX
+ms.openlocfilehash: b416acd9a2a3b03502b7eca11eade9dbd56f3afe
+ms.sourcegitcommit: c52123364e2ba086722bc860f2972642115316ef
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
+ms.locfileid: "34072052"
 ---
-
 # <a name="how-to-create-an-unmanaged-vm-image-from-an-azure-vm"></a>Azure VM에서 관리되지 않는 VM 이미지를 만드는 방법
 
 이 문서에서는 저장소 계정을 사용하여 설명합니다. 저장소 계정 대신 관리 디스크 및 관리되는 이미지를 사용하는 것이 좋습니다. 자세한 내용은 [Azure에서 일반화된 VM의 관리되는 이미지 캡처](capture-image-resource.md)를 참조하세요.
 
-이 문서에서는 저장소 계정을 사용하여 일반화된 Azure VM 이미지를 만드는 데 Azure PowerShell을 사용하는 방법을 보여 줍니다. 그런 다음 이미지를 사용하여 다른 VM을 만들 수 있습니다. 이 이미지에는 OS 디스크를 비롯해 가상 컴퓨터에 연결된 데이터 디스크가 포함됩니다. 새 VM을 만들 때 해당 리소스를 설정해야 하므로 이미지는 가상 네트워크 리소스를 포함하지 않습니다. 
+이 문서에서는 저장소 계정을 사용하여 일반화된 Azure VM 이미지를 만드는 데 Azure PowerShell을 사용하는 방법을 보여 줍니다. 그런 다음 이미지를 사용하여 다른 VM을 만들 수 있습니다. 이 이미지에는 OS 디스크를 비롯해 가상 머신에 연결된 데이터 디스크가 포함됩니다. 새 VM을 만들 때 해당 리소스를 설정해야 하므로 이미지는 가상 네트워크 리소스를 포함하지 않습니다. 
 
 ## <a name="prerequisites"></a>필수 조건
 Azure PowerShell 버전 1.0.x 이상을 설치해야 합니다. PowerShell을 아직 설치하지 않은 경우 설치 단계에 대해서는 [Azure PowerShell 설치 및 구성 방법](/powershell/azure/overview) 을 참조하세요.
 
 ## <a name="generalize-the-vm"></a>VM 일반화 
-이 섹션에서는 이미지로 사용하기 위해 Windows 가상 컴퓨터를 일반화하는 방법을 보여 줍니다. VM을 일반화하면 여러 정보 중에서 모든 개인 계정 정보가 제거되고 이미지로 사용할 컴퓨터가 준비됩니다. Sysprep에 대한 자세한 내용은 [Sysprep 사용 방법: 소개](http://technet.microsoft.com/library/bb457073.aspx)를 참조하세요.
+이 섹션에서는 이미지로 사용하기 위해 Windows 가상 머신을 일반화하는 방법을 보여 줍니다. VM을 일반화하면 여러 정보 중에서 모든 개인 계정 정보가 제거되고 이미지로 사용할 컴퓨터가 준비됩니다. Sysprep에 대한 자세한 내용은 [Sysprep 사용 방법: 소개](http://technet.microsoft.com/library/bb457073.aspx)를 참조하세요.
 
 가상 컴퓨터에서 실행되는 서버 역할이 Sysprep에서 지원되는지 확인합니다. 자세한 내용은 [서버 역할에 대한 Sysprep 지원](https://msdn.microsoft.com/windows/hardware/commercialize/manufacture/desktop/sysprep-support-for-server-roles)
 
@@ -64,7 +63,7 @@ Azure PowerShell 버전 1.0.x 이상을 설치해야 합니다. PowerShell을 �
 1. Azure PowerShell을 열고 Azure 계정에 로그인합니다.
    
     ```powershell
-    Login-AzureRmAccount
+    Connect-AzureRmAccount
     ```
    
     Azure 계정 자격 증명을 입력하기 위한 팝업 창이 열립니다.
@@ -80,14 +79,19 @@ Azure PowerShell 버전 1.0.x 이상을 설치해야 합니다. PowerShell을 �
     ```
 
 ## <a name="deallocate-the-vm-and-set-the-state-to-generalized"></a>VM의 할당을 취소하고 상태를 일반화됨으로 설정합니다.
+
+> [!IMPORTANT] 
+> 일반화됨으로 표시되면 VM에서 태그를 추가하거나, 편집하거나, 제거할 수 없습니다. VM에 태그를 추가하려는 경우 일반화됨으로 표시하기 전에 태그를 추가해야 합니다.
+> 
+
 1. VM 리소스 할당을 취소합니다.
    
     ```powershell
     Stop-AzureRmVM -ResourceGroupName <resourceGroup> -Name <vmName>
     ```
    
-    Azure Portal의 VM에 대한 *상태*가 **중지됨**에서 **중지됨(할당 취소됨)**으로 변경됩니다.
-2. 가상 컴퓨터의 상태를 **일반화됨**으로 설정합니다. 
+    Azure Portal의 VM에 대한 *상태*가 **중지됨**에서 **중지됨(할당 취소됨)** 으로 변경됩니다.
+2. 가상 머신의 상태를 **일반화됨**으로 설정합니다. 
    
     ```powershell
     Set-AzureRmVm -ResourceGroupName <resourceGroup> -Name <vmName> -Generalized
@@ -101,7 +105,7 @@ Azure PowerShell 버전 1.0.x 이상을 설치해야 합니다. PowerShell을 �
 
 ## <a name="create-the-image"></a>이미지 만들기
 
-이 명령을 사용하여 대상 저장소 컨테이너에서 관리되지 않는 가상 컴퓨터 이미지를 만듭니다. 이미지는 원래 가상 컴퓨터와 동일한 저장소 계정에 만들어집니다. `-Path` 매개 변수는 원본 VM에 대한 JSON 템플릿의 복사본을 로컬 컴퓨터에 저장합니다. `-DestinationContainerName` 매개 변수는 이미지를 유지할 컨테이너의 이름입니다. 컨테이너가 없으면 컨테이너가 만들어집니다.
+이 명령을 사용하여 대상 저장소 컨테이너에서 관리되지 않는 가상 머신 이미지를 만듭니다. 이미지는 원래 가상 컴퓨터와 동일한 저장소 계정에 만들어집니다. `-Path` 매개 변수는 원본 VM에 대한 JSON 템플릿의 복사본을 로컬 컴퓨터에 저장합니다. `-DestinationContainerName` 매개 변수는 이미지를 유지할 컨테이너의 이름입니다. 컨테이너가 없으면 컨테이너가 만들어집니다.
    
 ```powershell
 Save-AzureRmVMImage -ResourceGroupName <resourceGroupName> -Name <vmName> `
@@ -146,7 +150,7 @@ $imageURI = "https://mystorageaccount.blob.core.windows.net/mycontainer/myVhd.vh
     ```    
 
 ### <a name="create-a-public-ip-address-and-network-interface"></a>공용 IP 주소 및 네트워크 인터페이스 만들기
-가상 네트워크에서 가상 컴퓨터와 통신하려면 [공용 IP 주소](../../virtual-network/virtual-network-ip-addresses-overview-arm.md) 및 네트워크 인터페이스가 필요합니다.
+가상 네트워크에서 가상 머신과 통신하려면 [공용 IP 주소](../../virtual-network/virtual-network-ip-addresses-overview-arm.md) 및 네트워크 인터페이스가 필요합니다.
 
 1. 공용 IP 주소 만들기. 이 예에서는 **myPip**라는 공용 IP 주소를 만듭니다. 
    
@@ -189,7 +193,7 @@ $vnet = Get-AzureRmVirtualNetwork -ResourceGroupName $rgName -Name $vnetName
 ```
 
 ### <a name="create-the-vm"></a>VM 만들기
-다음 PowerShell에서는 가상 컴퓨터 구성을 완료하고 관리되지 않는 이미지를 새 설치에 대한 소스로 사용합니다.
+다음 PowerShell에서는 가상 머신 구성을 완료하고 관리되지 않는 이미지를 새 설치에 대한 소스로 사용합니다.
 
 </br>
 
@@ -247,7 +251,7 @@ $vnet = Get-AzureRmVirtualNetwork -ResourceGroupName $rgName -Name $vnetName
 ```
 
 ### <a name="verify-that-the-vm-was-created"></a>VM이 만들어졌는지 확인
-완료되면 새로 만든 VM은 [Azure 포털](https://portal.azure.com)에서 **찾아보기** > **가상 컴퓨터**에 표시되며 다음 PowerShell 명령을 사용해도 표시할 수 있습니다.
+완료되면 새로 만든 VM은 [Azure 포털](https://portal.azure.com)에서 **찾아보기** > **가상 머신**에 표시되며 다음 PowerShell 명령을 사용해도 표시할 수 있습니다.
 
 ```powershell
     $vmList = Get-AzureRmVM -ResourceGroupName $rgName
@@ -255,7 +259,6 @@ $vnet = Get-AzureRmVirtualNetwork -ResourceGroupName $rgName -Name $vnetName
 ```
 
 ## <a name="next-steps"></a>다음 단계
-Azure PowerShell을 사용하여 새 가상 컴퓨터를 관리하려면 [Azure Resource Manager 및 PowerShell을 사용하여 가상 컴퓨터 관리](ps-manage.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 참조하세요.
-
+Azure PowerShell을 사용하여 새 가상 머신을 관리하려면 [Azure Resource Manager 및 PowerShell을 사용하여 가상 머신 관리](tutorial-manage-vm.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 참조하세요.
 
 

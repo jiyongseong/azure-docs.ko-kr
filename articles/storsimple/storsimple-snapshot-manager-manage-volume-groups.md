@@ -1,11 +1,11 @@
 ---
-title: "StorSimple Snapshot Manager 볼륨 그룹 | Microsoft Docs"
-description: "StorSimple 스냅숏 관리자 MMC 스냅인을 사용하여 볼륨 그룹을 만들고 관리하는 방법을 설명합니다."
+title: StorSimple Snapshot Manager 볼륨 그룹 | Microsoft Docs
+description: StorSimple 스냅숏 관리자 MMC 스냅인을 사용하여 볼륨 그룹을 만들고 관리하는 방법을 설명합니다.
 services: storsimple
 documentationcenter: NA
 author: SharS
 manager: carmonm
-editor: 
+editor: ''
 ms.assetid: 7a232414-6a28-4b81-bd7b-cf61e28b33d7
 ms.service: storsimple
 ms.devlang: NA
@@ -14,13 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/05/2017
 ms.author: v-sharos
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
 ms.openlocfilehash: 6067a88cd42d29c3d2f4b74580095424de77561e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
 # <a name="use-storsimple-snapshot-manager-to-create-and-manage-volume-groups"></a>StorSimple 스냅숏 관리자를 사용하여 볼륨 그룹 만들기 및 관리
 ## <a name="overview"></a>개요
@@ -51,13 +49,13 @@ ms.lasthandoff: 07/08/2017
 
 | 결과 열 | 설명 |
 |:--- |:--- |
-| 이름 |**이름** 열에는 볼륨 그룹의 이름이 포함됩니다. |
+| Name |**이름** 열에는 볼륨 그룹의 이름이 포함됩니다. |
 | 응용 프로그램 |**응용 프로그램** 열은 Windows 호스트에 현재 설치되어 실행 중인 VSS 기록기의 수를 표시합니다. |
 | 선택 |**선택** 열은 볼륨 그룹에 포함된 볼륨의 수를 표시합니다. 0이면 볼륨 그룹의 볼륨에 연결된 응용 프로그램이 없음을 나타냅니다. |
 | 가져옴 |**가져옴** 열은 가져온 볼륨의 수를 표시합니다. 이 열이 **True**로 설정되면 볼륨 그룹을 Azure Portal에서 가져왔으며 StorSimple 스냅숏 관리자에서 만들지 않았음을 나타냅니다. |
 
 > [!NOTE]
-> StorSimple 스냅숏 관리자 볼륨 그룹은 Azure Portal의 **백업 정책** 탭에도 표시됩니다.
+> StorSimple 스냅숏 관리자 볼륨 그룹은 Azure Portal의 **Backup 정책** 탭에도 표시됩니다.
 > 
 > 
 
@@ -65,7 +63,7 @@ ms.lasthandoff: 07/08/2017
 다음 절차에 따라 볼륨 그룹을 만들 수 있습니다.
 
 #### <a name="to-create-a-volume-group"></a>볼륨 그룹을 만들려면
-1. 바탕 화면 아이콘을 클릭하여 StorSimple 스냅숏 관리자를 시작합니다.
+1. 바탕 화면 아이콘을 클릭하여 StorSimple Snapshot Manager를 시작합니다.
 2. **범위** 창에서 **볼륨 그룹**을 마우스 오른쪽 단추로 클릭한 다음 **볼륨 그룹 만들기**를 클릭합니다.
    
     ![볼륨 그룹 만들기](./media/storsimple-snapshot-manager-manage-volume-groups/HCS_SSM_Create_volume_group.png)
@@ -93,23 +91,23 @@ ms.lasthandoff: 07/08/2017
 
 #### <a name="to-back-up-a-volume-group"></a>볼륨 그룹을 백업하려면
 1. 바탕 화면 아이콘을 클릭하여 StorSimple 스냅숏 관리자를 시작합니다.
-2. **범위** 창에서 **볼륨 그룹** 노드를 확장하고 볼륨 그룹 이름을 마우스 오른쪽 단추로 클릭한 다음 **백업 수행**을 클릭합니다.
+2. **범위** 창에서 **볼륨 그룹** 노드를 확장하고 볼륨 그룹 이름을 마우스 오른쪽 단추로 클릭한 다음 **Backup 수행**을 클릭합니다.
    
     ![볼륨 그룹 즉시 백업](./media/storsimple-snapshot-manager-manage-volume-groups/HCS_SSM_Take_backup.png)
-3. **백업 수행** 대화 상자에서 **로컬 스냅숏** 또는 **클라우드 스냅숏**를 선택한 다음 **만들기**를 클릭합니다.
+3. **Backup 수행** 대화 상자에서 **로컬 스냅숏** 또는 **클라우드 스냅숏**를 선택한 다음 **만들기**를 클릭합니다.
    
     ![백업 수행 대화 상자](./media/storsimple-snapshot-manager-manage-volume-groups/HCS_SSM_TakeBackup_dialog.png)
 4. 백업이 실행되고 있는지 확인하려면 **작업** 노드를 확장한 다음 **실행 중**을 클릭합니다. 백업이 나열됩니다.
-5. 완료된 스냅숏을 보려면 **백업 카탈로그** 노드를 확장하고 볼륨 그룹 이름을 확장한 다음 **로컬 스냅숏** 또는 **클라우드 스냅숏**을 클릭합니다. 성공적으로 완료되면 백업이 나열됩니다.
+5. 완료된 스냅숏을 보려면 **Backup 카탈로그** 노드를 확장하고 볼륨 그룹 이름을 확장한 다음 **로컬 스냅숏** 또는 **클라우드 스냅숏**을 클릭합니다. 성공적으로 완료되면 백업이 나열됩니다.
 
 ## <a name="edit-a-volume-group"></a>볼륨 그룹 편집
 다음 절차에 따라 볼륨 그룹을 편집할 수 있습니다.
 
 #### <a name="to-edit-a-volume-group"></a>볼륨 그룹을 편집하려면
-1. 바탕 화면 아이콘을 클릭하여 StorSimple 스냅숏 관리자를 시작합니다.
+1. 바탕 화면 아이콘을 클릭하여 StorSimple Snapshot Manager를 시작합니다.
 2. **범위** 창에서 **볼륨 그룹** 노드를 확장하고 볼륨 그룹 이름을 마우스 오른쪽 단추로 클릭한 다음 **편집**을 클릭합니다.
 3. **볼륨 그룹 만들기** 대화 상자가 나타납니다. **이름**, **응용 프로그램** 및 **볼륨** 항목을 변경할 수 있습니다.
-4. **확인** 을 클릭하여 변경 내용을 저장합니다.
+4. **확인**을 클릭하여 변경 내용을 저장합니다.
 
 ## <a name="delete-a-volume-group"></a>볼륨 그룹 삭제
 다음 절차에 따라 볼륨 그룹을 삭제할 수 있습니다. 
@@ -120,7 +118,7 @@ ms.lasthandoff: 07/08/2017
 > 
 
 #### <a name="to-delete-a-volume-group"></a>볼륨 그룹을 삭제하려면
-1. 바탕 화면 아이콘을 클릭하여 StorSimple 스냅숏 관리자를 시작합니다.
+1. 바탕 화면 아이콘을 클릭하여 StorSimple Snapshot Manager를 시작합니다.
 2. **범위** 창에서 **볼륨 그룹** 노드를 확장하고 볼륨 그룹 이름을 마우스 오른쪽 단추로 클릭한 다음 **삭제**를 클릭합니다.
 3. **볼륨 그룹 삭제** 대화 상자가 나타납니다. 텍스트 상자에 **Confirm**을 입력한 다음 **확인**을 클릭합니다.
    
@@ -129,5 +127,4 @@ ms.lasthandoff: 07/08/2017
 ## <a name="next-steps"></a>다음 단계
 * [StorSimple 스냅숏 관리자를 사용하여 StorSimple 솔루션을 관리](storsimple-snapshot-manager-admin.md)하는 방법을 알아봅니다.
 * [StorSimple 스냅숏 관리자를 사용하여 백업 정책을 만들고 관리](storsimple-snapshot-manager-manage-backup-policies.md)하는 방법을 알아봅니다.
-
 

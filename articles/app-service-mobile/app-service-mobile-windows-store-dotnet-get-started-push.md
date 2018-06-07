@@ -1,10 +1,10 @@
 ---
 title: "UWP(유니버설 Windows 플랫폼) 앱에 푸시 알림 추가 | Microsoft Docs"
-description: "Azure 앱 서비스 모바일 앱 및 Azure 알림 허브를 사용하여 UWP(유니버설 Windows 플랫폼) 앱에 푸시 알림을 보내는 방법에 대해 알아봅니다."
+description: "Azure App Service Mobile Apps 및 Azure Notification Hubs를 사용하여 UWP(유니버설 Windows 플랫폼) 앱에 푸시 알림을 보내는 방법에 대해 알아봅니다."
 services: app-service\mobile,notification-hubs
 documentationcenter: windows
-author: ysxu
-manager: syntaxc4
+author: conceptdev
+manager: crdun
 editor: 
 ms.assetid: 6de1b9d4-bd28-43e4-8db4-94cd3b187aa3
 ms.service: app-service-mobile
@@ -13,13 +13,12 @@ ms.tgt_pltfrm: mobile-windows
 ms.devlang: dotnet
 ms.topic: article
 ms.date: 10/12/2016
-ms.author: yuaxu
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 06e16033435ed0a37d5688055743875827d3aec2
-ms.openlocfilehash: 5e71ecc6539179efdcfa6bfc4567bddaa96a59d9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/01/2017
-
+ms.author: crdun
+ms.openlocfilehash: d51fa215ace8b33acb5d36b98e9a1a86e3296a65
+ms.sourcegitcommit: df4ddc55b42b593f165d56531f591fdb1e689686
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/04/2018
 ---
 # <a name="add-push-notifications-to-your-windows-app"></a>Windows 앱에 푸시 알림 추가
 [!INCLUDE [app-service-mobile-selector-get-started-push](../../includes/app-service-mobile-selector-get-started-push.md)]
@@ -58,7 +57,7 @@ Windows 스토어에 앱을 제출한 다음 푸시를 전송하는 WNS(Windows 
 백 엔드 프로젝트 형식&mdash;([.NET 백 엔드](#dotnet) 또는 [Node.js 백 엔드](#nodejs))과 일치하는 아래의 절차를 사용합니다.
 
 ### <a name="dotnet"></a>.NET 백 엔드 프로젝트
-1. Visual Studio에서 서버 프로젝트를 마우스 오른쪽 단추로 클릭하고 **NuGet 패키지 관리**를 클릭합니다. Microsoft.Azure.NotificationHubs를 검색한 다음 **설치**를 클릭합니다. 알림 허브 클라이언트 라이브러리를 설치합니다.
+1. Visual Studio에서 서버 프로젝트를 마우스 오른쪽 단추로 클릭하고 **NuGet 패키지 관리**를 클릭합니다. Microsoft.Azure.NotificationHubs를 검색한 다음 **설치**를 클릭합니다. Notification Hubs 클라이언트 라이브러리를 설치합니다.
 2. **컨트롤러**를 확장하고 TodoItemController.cs를 열고 다음 using 문을 추가합니다.
 
         using System.Collections.Generic;
@@ -167,7 +166,7 @@ Windows 스토어에 앱을 제출한 다음 푸시를 전송하는 WNS(Windows 
             await App.MobileService.GetPush().RegisterAsync(channel.Uri);
         }
 
-    이 코드는 WNS에서 앱의 ChannelURI를 검색한 후 해당 ChannelURI를 앱 서비스 모바일 앱에 등록합니다.
+    이 코드는 WNS에서 앱의 ChannelURI를 검색한 후 해당 ChannelURI를 App Service 모바일 앱에 등록합니다.
 3. **App.xaml.cs**의 **OnLaunched** 이벤트 처리기 맨 위에서 다음 예제와 같이 메서드 정의에 **비동기** 한정자를 추가하고 새 **InitNotificationsAsync**메서드에 다음 호출을 추가합니다.
 
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
@@ -186,7 +185,7 @@ Windows 스토어에 앱을 제출한 다음 푸시를 전송하는 WNS(Windows 
 ## <a id="more"></a>다음 단계
 푸시 알림에 대해 자세히 알아봅니다.
 
-* [Azure 모바일 앱에 관리되는 클라이언트를 사용하는 방법](app-service-mobile-dotnet-how-to-use-client-library.md#pushnotifications)  
+* [Azure Mobile Apps에 관리되는 클라이언트를 사용하는 방법](app-service-mobile-dotnet-how-to-use-client-library.md#pushnotifications)  
   템플릿은 유연성을 제공하여 플랫폼간 푸시 및 지역화된 푸시를 보냅니다. 템플릿을 등록하는 방법에 대해 자세히 알아봅니다.
 * [푸시 알림 문제 진단](../notification-hubs/notification-hubs-push-notification-fixer.md)  
   장치에서 알림이 삭제되거나 끝나지 않는 다양한 이유가 있습니다. 이 항목에서는 푸시 알림 실패의 근본 원인을 분석 및 파악하는 방법을 보여 줍니다.
@@ -204,4 +203,3 @@ Windows 스토어에 앱을 제출한 다음 푸시를 전송하는 WNS(Windows 
 [Azure Portal]: https://portal.azure.com/
 
 <!-- Images. -->
-

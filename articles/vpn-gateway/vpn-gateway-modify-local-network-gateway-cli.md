@@ -13,15 +13,13 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 06/19/2017
+ms.date: 11/29/2017
 ms.author: cherylmc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 7948c99b7b60d77a927743c7869d74147634ddbf
-ms.openlocfilehash: cbcb0b626aceccf9c5a29e60e5b0c66e7812dee1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
-
+ms.openlocfilehash: d62fa14ea24a9b62e793ef7022a761897984df32
+ms.sourcegitcommit: b5c6197f997aa6858f420302d375896360dd7ceb
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/21/2017
 ---
 # <a name="modify-local-network-gateway-settings-using-the-azure-cli"></a>Azure CLI를 사용하여 로컬 네트워크 게이트웨이 설정 수정
 
@@ -34,22 +32,21 @@ ms.lasthandoff: 06/20/2017
 >
 >
 
-## <a name="before-you-begin"></a>시작하기 전에
+## <a name="before"></a>시작하기 전에
 
 최신 버전의 CLI 명령(2.0 이상)을 설치합니다. CLI 명령을 설치하는 방법에 대한 자세한 내용은 [Azure CLI 2.0 설치](https://docs.microsoft.com/cli/azure/install-azure-cli)를 참조하세요.
 
 [!INCLUDE [CLI-login](../../includes/vpn-gateway-cli-login-include.md)]
 
-## <a name="modify-ip-address-prefixes"></a>IP 주소 접두사 수정
+## <a name="ipaddprefix"></a>IP 주소 접두사 수정
 
 [!INCLUDE [modify-prefix](../../includes/vpn-gateway-modify-ip-prefix-cli-include.md)]
 
-## <a name="modify-the-gateway-ip-address"></a>게이트웨이 IP 주소 수정
+## <a name="gwip"></a>게이트웨이 IP 주소 수정
 
 [!INCLUDE [modify-gateway-IP](../../includes/vpn-gateway-modify-lng-gateway-ip-cli-include.md)]
 
 ## <a name="next-steps"></a>다음 단계
 
 게이트웨이 연결을 확인할 수 있습니다. [게이트웨이 연결 확인](vpn-gateway-verify-connection-resource-manager.md)을 참조하세요.
-
 

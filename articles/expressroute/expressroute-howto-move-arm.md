@@ -1,11 +1,11 @@
 ---
-title: "클래식에서 Resource Manager로 ExpressRoute 회로 이동: PowerShell: Azure | Microsoft Docs"
-description: "이 페이지는 PowerShell을 사용하여 클래식 회로를 Resource Manager 배포 모델로 이동하는 방법을 설명합니다."
+title: '클래식에서 Resource Manager로 ExpressRoute 회로 이동: PowerShell: Azure | Microsoft Docs'
+description: 이 페이지는 PowerShell을 사용하여 클래식 회로를 Resource Manager 배포 모델로 이동하는 방법을 설명합니다.
 documentationcenter: na
 services: expressroute
 author: ganesr
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
 ms.assetid: 08152836-23e7-42d1-9a56-8306b341cd91
 ms.service: expressroute
@@ -15,13 +15,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/03/2017
 ms.author: ganesr;cherylmc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2db2ba16c06f49fd851581a1088df21f5a87a911
-ms.openlocfilehash: d8403b88a425ba75a7948fdb865838d66e27823a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/09/2017
-
-
+ms.openlocfilehash: 37db218010288912bf75d00fd5868aab171aef71
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="move-expressroute-circuits-from-the-classic-to-the-resource-manager-deployment-model-using-powershell"></a>PowerShell을 사용하여 클래식에서 Resource Manager 배포 모델로 ExpressRoute 회로 이동
 
@@ -29,7 +27,7 @@ ms.lasthandoff: 05/09/2017
 
 ## <a name="before-you-begin"></a>시작하기 전에
 
-* Azure PowerShell 모듈의 최신 버전(버전 1.0 이상)이 있는지 확인합니다. 자세한 내용은 [Azure PowerShell 설치 및 구성하는 방법](/powershell/azure/overview)을 참조하세요.
+* Azure PowerShell 모듈의 최신 버전(버전 1.0 이상)이 있는지 확인합니다. 자세한 내용은 [Azure PowerShell을 설치 및 구성하는 방법](/powershell/azure/overview)을 참조하세요.
 * 구성을 시작하기 전에 [필수 조건](expressroute-prerequisites.md), [라우팅 요구 사항](expressroute-routing.md) 및 [워크플로](expressroute-workflows.md)를 검토했는지 확인합니다.
 * [클래식에서 Resource Manager로 ExpressRoute 회로 이동](expressroute-move.md)에서 제공되는 정보를 검토합니다. 제한 및 제한 사항을 완전히 이해해야 합니다.
 * 클래식 배포 모델에서 회로가 완벽하게 작동되는지 확인합니다.
@@ -73,7 +71,7 @@ Resource Manager 환경에 로그인하고 새 리소스 그룹을 만듭니다.
 1. Azure Resource Manager 환경으로 로그인합니다.
 
   ```powershell
-  Login-AzureRmAccount
+  Connect-AzureRmAccount
   ```
 
 2. 적절한 Azure 구독을 선택합니다.
@@ -88,7 +86,7 @@ Resource Manager 환경에 로그인하고 새 리소스 그룹을 만듭니다.
   New-AzureRmResourceGroup -Name "DemoRG" -Location "West US"
   ```
 
-### <a name="step-3-move-the-expressroute-circuit-to-the-resource-manager-deployment-model"></a>3단계: 리소스 관리자 배포 모델로 Express 경로 회로 이동
+### <a name="step-3-move-the-expressroute-circuit-to-the-resource-manager-deployment-model"></a>3단계: Resource Manager 배포 모델로 ExpressRoute 회로 이동
 
 이제 클래식 배포 모델에서 Resource Manager 배포 모델로 ExpressRoute 회로를 이동할 준비가 되었습니다. 계속 진행하기 전에 [클래식에서 Resource Manager 배포 모델로 ExpressRoute 회로 이동](expressroute-move.md)에서 제공되는 정보를 검토합니다.
 
@@ -134,8 +132,8 @@ Move-AzureRmExpressRouteCircuit -Name "MyCircuit" -ResourceGroupName "DemoRG" -L
 
 5. 이제 클래식 VNet에 대한 클래식 배포 모델 명령 및 Resource Manager VNet에 대한 Resource Manager 명령을 사용하여 ExpressRoute 회로에 대한 링크를 관리할 수 있습니다. 다음 문서에서는 ExpressRoute 회로에 대한 링크를 관리하는 방법을 안내합니다.
 
-    * [리소스 관리자 배포 모델에서 가상 네트워크를 Express 경로 회로에 연결](expressroute-howto-linkvnet-arm.md)
-    * [클래식 배포 모델에서 가상 네트워크를 Express 경로 회로에 연결](expressroute-howto-linkvnet-classic.md)
+    * [Resource Manager 배포 모델에서 가상 네트워크를 ExpressRoute 회로에 연결](expressroute-howto-linkvnet-arm.md)
+    * [클래식 배포 모델에서 가상 네트워크를 ExpressRoute 회로에 연결](expressroute-howto-linkvnet-classic.md)
 
 ### <a name="to-disable-expressroute-circuit-access-to-the-classic-deployment-model"></a>클래식 배포 모델에 대한 ExpressRoute 회로 액세스를 사용하지 않도록 설정하려면
 
@@ -161,5 +159,5 @@ Set-AzureRmExpressRouteCircuit -ExpressRouteCircuit $ckt
 
 ## <a name="next-steps"></a>다음 단계
 
-* [Express 경로 회로의 라우팅 만들기 및 수정](expressroute-howto-routing-arm.md)
-* [가상 네트워크를 Express 경로 회로에 연결](expressroute-howto-linkvnet-arm.md)
+* [ExpressRoute 회로의 라우팅 만들기 및 수정](expressroute-howto-routing-arm.md)
+* [가상 네트워크를 ExpressRoute 회로에 연결](expressroute-howto-linkvnet-arm.md)

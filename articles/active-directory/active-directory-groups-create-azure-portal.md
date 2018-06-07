@@ -1,31 +1,27 @@
 ---
-title: "Azure Active Directory에서 사용자에 대한 그룹 만들기 | Microsoft Docs"
-description: "Azure Active Directory에서 그룹을 만들고 그룹에 멤버를 추가하는 방법"
+title: Azure Active Directory에서 사용자에 대한 그룹 만들기 | Microsoft Docs
+description: Azure Active Directory에서 그룹을 만들고 그룹에 멤버를 추가하는 방법
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: curtand
-manager: femila
-editor: 
-ms.assetid: cc5f232a-1e77-45c2-b28b-1fcb4621725c
+manager: mtillman
+editor: ''
 ms.service: active-directory
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
+ms.component: users-groups-roles
 ms.topic: article
 ms.date: 08/04/2017
 ms.author: curtand
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 9ae7e129b381d3034433e29ac1f74cb843cb5aa6
-ms.openlocfilehash: 9636d26ec62bb83b30fdc4ae8b1701da8ab532e8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/08/2017
-
+ms.openlocfilehash: 8f1722ab753287068e65e3d386e1d1a1bf40d742
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="create-a-group-and-add-members-in-azure-active-directory"></a>Azure Active Directory에서 그룹 만들기 및 멤버 추가
 > [!div class="op_single_selector"]
 > * [Azure Portal](active-directory-groups-create-azure-portal.md)
-> * [Azure 클래식 포털](active-directory-accessmanagement-manage-groups.md)
 > * [PowerShell](active-directory-accessmanagement-groups-settings-v2-cmdlets.md)
 >
 >
@@ -33,8 +29,8 @@ ms.lasthandoff: 05/08/2017
 이 문서는 Azure Active Directory에서 새 그룹을 만들고 채우는 방법을 설명합니다. 그룹을 사용하여 한 번에 많은 사용자 또는 장치에 라이선스 또는 사용 권한을 할당하는 등 관리 작업을 수행합니다.
 
 ## <a name="how-do-i-create-a-group"></a>그룹을 만드는 방법
-1. 디렉터리에 대한 전역 관리자인 계정으로 [Azure 포털](https://portal.azure.com) 에 로그인합니다.
-2. **더 많은 서비스**를 선택하고 텍스트 상자에 **사용자 및 그룹**을 입력한 다음 **Enter**를 선택합니다.
+1. 디렉터리에 대한 전역 관리자인 계정으로 [Azure Portal](https://portal.azure.com)에 로그인합니다.
+2. **모든 서비스**를 선택하고 텍스트 상자에 **사용자 및 그룹**을 입력한 다음, **입력**을 선택합니다.
 
    ![사용자 관리 열기](./media/active-directory-groups-create-azure-portal/search-user-management.png)
 3. **사용자 및 그룹** 블레이드에서 **모든 그룹**을 선택합니다.
@@ -61,4 +57,3 @@ ms.lasthandoff: 05/08/2017
 * [그룹의 멤버 관리](active-directory-groups-members-azure-portal.md)
 * [그룹의 멤버 자격 관리](active-directory-groups-membership-azure-portal.md)
 * [그룹의 사용자에 대한 동적 규칙 관리](active-directory-groups-dynamic-membership-azure-portal.md)
-

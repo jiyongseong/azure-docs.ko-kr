@@ -1,26 +1,24 @@
 ---
-title: "Visual Studio에서 응용 프로그램 관리 | Microsoft Docs"
-description: "Visual Studio를 사용하여 서비스 패브릭 응용 프로그램과 서비스를 만들고, 개발하고, 배포하며 디버그합니다."
+title: Visual Studio에서 Azure Servic Fabric 응용 프로그램 관리 | Microsoft Docs
+description: Visual Studio를 사용하여 Azure Service Fabric 응용 프로그램과 서비스를 만들고, 개발하고, 배포하고, 디버그합니다.
 services: service-fabric
 documentationcenter: .net
 author: mikkelhegn
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: c317cb7e-7eae-466e-ba41-6aa2518be5cf
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 06/07/2017
-ms.author: mikkelhegn
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 74f34bdbf5707510c682814716aa0b95c19a5503
-ms.openlocfilehash: 3f6a47a15b74a7ceb6504b2834be62e76ab70bcc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/09/2017
-
-
+ms.date: 03/26/2018
+ms.author: mikhegn
+ms.openlocfilehash: 25c7f0e8d6ebc31121e29870026a735495ef7900
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="use-visual-studio-to-simplify-writing-and-managing-your-service-fabric-applications"></a>Visual Studio를 사용하여 서비스 패브릭 응용 프로그램 쓰기 및 관리 단순화하기
 Visual Studio를 통해 Azure 서비스 패브릭 응용 프로그램 및 서비스를 관리할 수 있습니다. [개발 환경을 설정](service-fabric-get-started.md)한 후, Visual Studio를 사용하여 로컬 개발 클러스터에서 서비스 패브릭 응용 프로그램을 만들거나 서비스를 추가하거나 응용 프로그램의 패키징, 등록 및 배포를 수행할 수 있습니다.
@@ -34,7 +32,7 @@ Visual Studio를 통해 Azure 서비스 패브릭 응용 프로그램 및 서비
 4. 실행 중인 모든 응용 프로그램 인스턴스 제거
 5. 응용 프로그램 인스턴스 만들기
 
-Visual Studio에서 **F5** 키를 누르면 응용 프로그램이 배포되고 모든 응용 프로그램 인스턴스에 디버거가 첨부됩니다. **Ctrl+F5** 를 사용하여 디버그하지 않고 응용 프로그램을 배포하거나, 게시 프로필을 사용하여 로컬 또는 원격 클러스터에 게시할 수 있습니다. 자세한 내용은 [Visual Studio를 사용하여 원격 클러스터에 응용 프로그램 게시](service-fabric-publish-app-remote-cluster.md)를 참조하세요.
+Visual Studio에서 **F5** 키를 누르면 응용 프로그램이 배포되고 모든 응용 프로그램 인스턴스에 디버거가 첨부됩니다. **Ctrl+F5** 를 사용하여 디버그하지 않고 응용 프로그램을 배포하거나, 게시 프로필을 사용하여 로컬 또는 원격 클러스터에 게시할 수 있습니다.
 
 ### <a name="application-debug-mode"></a>응용 프로그램 디버그 모드
 Visual Studio는 Visual Studio에서 디버깅의 일부로 응용 프로그램 배포를 처리하는 방법을 제어하는 **응용 프로그램 디버그 모드** 라는 속성을 제공합니다.
@@ -47,7 +45,7 @@ Visual Studio는 Visual Studio에서 디버깅의 일부로 응용 프로그램 
 
 #### <a name="application-debug-modes"></a>응용 프로그램 디버그 모드
 
-1. **응용 프로그램 새로 고침** 이 모드를 사용하면 코드를 신속하게 변경하고 디버그할 수 있으며 디버깅하는 동안 정적 웹 파일 편집을 지원합니다. 이 모드는 로컬 개발 클러스터가 [1-노드 모드](/service-fabric-get-started-with-a-local-cluster.md#one-node-and-five-node-cluster-mode)에 있는 경우에만 작동합니다.
+1. **응용 프로그램 새로 고침** 이 모드를 사용하면 코드를 신속하게 변경하고 디버그할 수 있으며 디버깅하는 동안 정적 웹 파일 편집을 지원합니다. 이 모드는 로컬 개발 클러스터가 [1-노드 모드]인 경우에만 작동합니다. 기본 응용 프로그램 디버그 모드입니다.(/service-fabric-get-started-with-a-local-cluster.md#one-node-and-five-node-cluster-mode)
 2. **응용 프로그램 제거** 를 선택하면 디버그 세션이 종료될 때 응용 프로그램이 제거됩니다.
 3. **자동 업그레이드** 디버그 세션이 종료될 때 응용 프로그램이 계속 실행됩니다. 다음 디버그 세션은 업그레이드로 배포를 처리합니다. 업그레이드 프로세스는 이전 디버그 세션에서 입력한 모든 데이터를 유지합니다.
 4. **응용 프로그램 유지** 디버그 세션이 종료될 때 클러스터에서 응용 프로그램이 계속 실행됩니다. 다음 디버그 세션의 시작 부분에서 응용 프로그램이 제거됩니다.
@@ -55,7 +53,7 @@ Visual Studio는 Visual Studio에서 디버깅의 일부로 응용 프로그램 
 **자동 업그레이드**의 경우 데이터는 Service Fabric의 응용 프로그램 업그레이드 기능을 적용하여 보존됩니다. 응용 프로그램 업그레이드 및 실제 환경에서 업그레이드를 수행하는 방법에 대한 자세한 내용은 [서비스 패브릭 응용 프로그램 업그레이드](service-fabric-application-upgrade.md)를 참조하세요.
 
 ## <a name="add-a-service-to-your-service-fabric-application"></a>서비스 패브릭 응용 프로그램에 서비스 추가
-응용 프로그램에 새 서비스를 추가하여 기능을 확장할 수 있습니다.  응용 프로그램 패키지에 서비스가 포함되도록 하려면 **새 패브릭 서비스...** 메뉴 항목을 통해 서비스를 추가합니다.
+응용 프로그램에 새 서비스를 추가하여 기능을 확장할 수 있습니다. 응용 프로그램 패키지에 서비스가 포함되도록 하려면 **새 패브릭 서비스...** 메뉴 항목을 통해 서비스를 추가합니다.
 
 ![새 Service Fabric 서비스 추가][newservice]
 

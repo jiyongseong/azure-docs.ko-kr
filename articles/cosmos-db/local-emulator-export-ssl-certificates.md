@@ -1,12 +1,12 @@
 ---
-title: "Azure Cosmos DB 에뮬레이터 인증서 내보내기 | Microsoft Docs"
-description: "Windows 인증서 저장소를 사용하지 않는 언어와 런타임으로 개발할 때는 SSL 인증서를 내보내고 관리해야 합니다. 이 게시물에서는 단계별 지침을 제공합니다."
+title: Azure Cosmos DB 에뮬레이터 인증서 내보내기 | Microsoft Docs
+description: Windows 인증서 저장소를 사용하지 않는 언어와 런타임으로 개발할 때는 SSL 인증서를 내보내고 관리해야 합니다. 이 게시물에서는 단계별 지침을 제공합니다.
 services: cosmos-db
-documentationcenter: 
-keywords: "Azure Cosmos DB 에뮬레이터"
+documentationcenter: ''
+keywords: Azure Cosmos DB 에뮬레이터
 author: voellm
-manager: jhubbard
-editor: 
+manager: kfile
+editor: ''
 ms.assetid: ef43deda-c2e9-4193-99e2-7f6a88a0319f
 ms.service: cosmos-db
 ms.devlang: multiple
@@ -16,15 +16,12 @@ ms.workload: na
 ms.date: 06/06/2017
 ms.author: tvoellm
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 245ce9261332a3d36a36968f7c9dbc4611a019b2
-ms.openlocfilehash: 4add5028d50972316902cecd8c399781c012cb77
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/09/2017
-
-
+ms.openlocfilehash: 87d453cd544b3e913209f50e4e08b77282efab39
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-
 # <a name="export-the-azure-cosmos-db-emulator-certificates-for-use-with-java-python-and-nodejs"></a>Java, Python 및 Node.js에서 사용할 Azure Cosmos DB 에뮬레이터 인증서 내보내기
 
 [**에뮬레이터 다운로드**](https://aka.ms/cosmosdb-emulator)
@@ -60,7 +57,7 @@ Windows 트레이에서 실행 중인 Azure Cosmos DB 에뮬레이터에서 아�
 
     ![Azure Cosmos DB 로컬 에뮬레이터 내보내기 3단계](./media/local-emulator-export-ssl-certificates/database-local-emulator-export-step-3.png)
 
-4. **다음**을 누릅니다.
+4. **다음**을 클릭합니다.
 
     ![Azure Cosmos DB 로컬 에뮬레이터 내보내기 4단계](./media/local-emulator-export-ssl-certificates/database-local-emulator-export-step-4.png)
 
@@ -90,11 +87,11 @@ X.509 인증서를 Java 기본 인증서 저장소로 가져 오려면 [Java CA 
 
 ## <a name="how-to-use-the-certificate-in-python"></a>Python에서 인증서를 사용하는 방법
 
-기본적으로 DocumentDB API용 [Python SDK(버전 2.0.0 이상)](documentdb-sdk-python.md)는 로컬 에뮬레이터에 연결할 때 SSL 인증서를 사용하지 않습니다. 그러나 SSL 유효성 검사를 사용하려면 [Python 소켓 래퍼 ](https://docs.python.org/2/library/ssl.html) 설명서의 예제를 따르면 됩니다.
+기본적으로 SQL API용 [Python SDK(버전 2.0.0 이상)](sql-api-sdk-python.md)는 로컬 에뮬레이터에 연결할 때 SSL 인증서를 사용하지 않습니다. 그러나 SSL 유효성 검사를 사용하려면 [Python 소켓 래퍼 ](https://docs.python.org/2/library/ssl.html) 설명서의 예제를 따르면 됩니다.
 
 ## <a name="how-to-use-the-certificate-in-nodejs"></a>Node.js에서 인증서를 사용하는 방법
 
-기본적으로 DocumentDB API용 [Node.js SDK(버전 1.10.1 이상)](documentdb-sdk-node.md)는 로컬 에뮬레이터에 연결할 때 SSL 인증서를 사용하지 않습니다. 그러나 SSL 유효성 검사를 사용하려면 [Node.js 설명서](https://nodejs.org/api/tls.html#tls_tls_connect_options_callback)의 예제를 따르면 됩니다.
+기본적으로 SQL API용 [Node.js SDK(버전 1.10.1 이상)](sql-api-sdk-node.md)는 로컬 에뮬레이터에 연결할 때 SSL 인증서를 사용하지 않습니다. 그러나 SSL 유효성 검사를 사용하려면 [Node.js 설명서](https://nodejs.org/api/tls.html#tls_tls_connect_options_callback)의 예제를 따르면 됩니다.
 
 ## <a name="next-steps"></a>다음 단계
 
@@ -105,8 +102,7 @@ X.509 인증서를 Java 기본 인증서 저장소로 가져 오려면 [Java CA 
 > * SSL 인증서를 내보냈습니다.
 > * Java, Python 및 Node.js에서 인증서를 사용하는 방법을 알아보았습니다.
 
-이제 개념 섹션으로 진행하여 Cosmos DB에 대한 자세한 정보를 확인할 수 있습니다.
+이제 Azure Cosmos DB 입력 바인딩 자습서를 통해 Azure Functions HTTP 트리거를 진행할 수 있습니다.
 
 > [!div class="nextstepaction"]
-> [글로벌 분포](distribute-data-globally.md) 
-
+> [Azure Cosmos DB 입력으로 Azure Function 만들기](tutorial-functions-http-trigger.md) 

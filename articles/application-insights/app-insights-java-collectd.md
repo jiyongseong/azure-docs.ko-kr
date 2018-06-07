@@ -1,9 +1,9 @@
 ---
-title: "Linux에서 Java 웹앱 성능 모니터링 - Azure | Microsoft Docs"
-description: "Application Insights용 CollectD 플러그 인을 사용한 Java 웹 사이트의 포괄적인 응용 프로그램 성능 모니터링"
+title: Linux에서 Java 웹앱 성능 모니터링 - Azure | Microsoft Docs
+description: Application Insights용 CollectD 플러그 인을 사용한 Java 웹 사이트의 포괄적인 응용 프로그램 성능 모니터링
 services: application-insights
 documentationcenter: java
-author: harelbr
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 40c68f45-197a-4624-bf89-541eb7323002
 ms.service: application-insights
@@ -12,13 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 08/24/2016
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0c4554d6289fb0050998765485d965d1fbc6ab3e
-ms.openlocfilehash: 5a39d4ec9bbf1c7672267c7e89c957ebc49f1f3a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/13/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: 56e30ff4ee7765cd0950293999d93a9cf1fe5d36
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="collectd-linux-performance-metrics-in-application-insights"></a>collectd: Application Insights에서 Linux 성능 메트릭
 
@@ -143,6 +142,5 @@ Application Insights 쓰기 플러그 인이 특정 읽기 플러그 인과 호�
 [java]: app-insights-java-get-started.md
 [javalogs]: app-insights-java-trace-logs.md
 [metrics]: app-insights-metrics-explorer.md
-
 
 

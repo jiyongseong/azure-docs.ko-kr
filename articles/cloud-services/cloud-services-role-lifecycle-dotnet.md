@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/18/2017
 ms.author: adegeo
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: 9924c7352300c70e949fb86a19dfaf68b9fe8b50
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
+ms.openlocfilehash: eb78c05df3b3cdf3887334c11bdabd5cebb74747
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="customize-the-lifecycle-of-a-web-or-worker-role-in-net"></a>.NET에서 웹 또는 작업자 역할의 수명 주기 사용자 지정
 작업자 역할을 만들 때 수명 주기 이벤트에 응답할 수 있게 재정의하도록 메서드를 제공하는 [RoleEntryPoint](https://msdn.microsoft.com/library/azure/microsoft.windowsazure.serviceruntime.roleentrypoint.aspx) 클래스를 확장합니다. 웹 역할의 경우, 이 클래스는 선택적이므로 수명 주기 이벤트에 응답하는 데 사용합니다.
@@ -82,5 +81,4 @@ public override bool OnStart()
 
 ## <a name="next-steps"></a>다음 단계
 [클라우드 서비스 패키지를 만드는](cloud-services-model-and-package.md)방법에 대해 알아봅니다.
-
 

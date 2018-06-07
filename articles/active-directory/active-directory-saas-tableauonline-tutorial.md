@@ -1,25 +1,23 @@
 ---
-title: "Tableau Online와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory 및 Tableau Online 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: Tableau Online와 Azure Active Directory 통합 | Microsoft Docs
+description: Azure Active Directory 및 Tableau Online 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: 1d4b1149-ba3b-4f4e-8bce-9791316b730d
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 06/13/2017
+ms.date: 05/09/2017
 ms.author: jeedes
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a1ba750d2be1969bfcd4085a24b0469f72a357ad
-ms.openlocfilehash: 443fab1198a91a4d5749e6421f7b8603fc75a81e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
-
+ms.openlocfilehash: 4747c2146c6590e30da2ba8985ecdfbd6a75ae96
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-tableau-online"></a>Tableau Online와 Azure Active Directory 통합
 
@@ -31,7 +29,7 @@ Tableau Server를 Azure AD와 통합하면 다음과 같은 이점이 제공됩�
 - 사용자가 해당 Azure AD 계정으로 Tableau Online에 자동으로 로그온(Single Sign-On)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +57,7 @@ Tableau Online의 Azure AD 통합을 구성하려면 갤러리의 Tableau Online
 
 **갤러리에서 Tableau Online을 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Active Directory][1]
 
@@ -89,10 +87,10 @@ Tableau Online에서 Azure AD의 **사용자 이름** 값을 **Username** 값으
 Tableau Online에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구성 요소를 완료해야 합니다.
 
 1. **[Configuring Azure AD Single Sign-On](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
-2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
+2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On 테스트하는 데 사용합니다.
 3. **[Tableau Online 테스트 사용자 만들기](#creating-a-tableau-online-test-user)** - Britta Simon의 Azure AD 표현과 연결된 해당 사용자를 Tableau Online에 만듭니다.
 4. **[Azure AD 테스트 사용자 할당](#assigning-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Testing Single Sign-On](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
+5. **[Single Sign-On 테스트](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
 
 ### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -102,49 +100,49 @@ Tableau Online에서 Azure AD Single Sign-On을 구성하고 테스트하려면 
 
 1. Azure Portal의 **Tableau Online** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single Sign-On** 대화 상자에서 **모드**를 **SAML 기반 로그온**으로 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-on 구성](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_samlbase.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_samlbase.png)
 
 3. **Tableau Online 도메인 및 URL** 섹션에서 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_url.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_url.png)
     
-    a. **로그인 URL** 텍스트 상자에서 URL `https://sso.online.tableau.com`을 입력합니다.
+    a. **로그온 URL** 텍스트 상자에서 URL `https://sso.online.tableau.com`을 입력합니다.
 
-    b. **식별자** 텍스트 상자에 URL `https://sso.online.tableau.com/public/sp/<instancename>`을 입력합니다.
+    나. **식별자** 텍스트 상자에 URL `https://sso.online.tableau.com/public/sp/metadata?alias=<entityid> `을 입력합니다.
 
 4. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 메타데이터 파일을 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_certificate.png) 
 
 5. **저장** 단추를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-tableauonline-tutorial/tutorial_general_400.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-tableauonline-tutorial/tutorial_general_400.png)
 
 6. 다른 브라우저 창에서 Tableau Online 응용 프로그램에 로그온합니다. **설정** 및 **인증**에 차례로 이동합니다.
    
-    ![Single Sign-on 구성](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_09.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_09.png)
     
 7. SAML을 사용하도록 설정하려면 **인증 유형** 섹션 아래에서 **SAML로 Single Sign-On** 확인란을 선택합니다.
    
-    ![Single Sign-on 구성](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_12.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_12.png)
 
 8. **Tableau Online으로 메타데이터 파일 가져오기** 섹션까지 아래로 스크롤합니다.  찾아보기를 클릭하여 Azure AD에서 다운로드한 메타데이터 파일을 가져오기합니다. 그런 후 **Apply**를 클릭합니다.
    
-   ![Single Sign-on 구성](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_13.png)
+   ![Configure Single Sign-On](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_13.png)
 
 9. **어설션 일치** 섹션에서 **이메일 주소**, **이름** 및 **성**에 대한 해당 ID 공급자 어설션 이름을 삽입합니다. Azure Ad에서 이 정보 얻으려면 
   
     a. Azure Portal에서 **Tableau Online** 응용 프로그램 통합 페이지로 이동합니다.
     
-    b. 특성 섹션에서 **"기타 모든 사용자 특성 보기 및 편집"** 확인란을 선택합니다. 
+    나. 특성 섹션에서 **"기타 모든 사용자 특성 보기 및 편집"** 확인란을 선택합니다. 
     
-   ![Single Sign-on 구성](./media/active-directory-saas-tableauonline-tutorial/attributesection.png)
+   ![Configure Single Sign-On](./media/active-directory-saas-tableauonline-tutorial/attributesection.png)
       
-    c. 다음 단계에 따라 givenname, email, surname 특성의 네임스페이스 값을 복사합니다.
+    다. 다음 단계에 따라 givenname, email, surname 특성의 네임스페이스 값을 복사합니다.
 
    ![Azure AD Single Sign-On](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_10.png)
     
@@ -152,7 +150,7 @@ Tableau Online에서 Azure AD Single Sign-On을 구성하고 테스트하려면 
     
     e. **네임스페이스** 텍스트 상자의 값을 복사합니다.
 
-   ![Single Sign-on 구성](./media/active-directory-saas-tableauonline-tutorial/attributesection2.png)
+   ![Configure Single Sign-On](./media/active-directory-saas-tableauonline-tutorial/attributesection2.png)
 
     f. email 및 surname에 대한 네임스페이스 값을 복사하려면 이전 단계를 따릅니다.
 
@@ -161,11 +159,7 @@ Tableau Online에서 Azure AD Single Sign-On을 구성하고 테스트하려면 
      * 이름: **givenname**
      * 성: **surname**
    
-   ![Single Sign-on 구성](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_14.png)
-
-> [!TIP]
-> 이제 앱을 설정하는 동안 [Azure Portal](https://portal.azure.com) 내에서 이러한 지침의 간결한 버전을 읽을 수 있습니다.  **Active Directory > 엔터프라이즈 응용 프로그램** 섹션에서 이 앱을 추가한 후에는 **Single Sign-On** 탭을 클릭하고 맨 아래에 있는 **구성** 섹션을 통해 포함된 설명서에 액세스하면 됩니다. 포함된 설명서 기능에 대한 자세한 내용은 [Azure AD 포함된 설명서]( https://go.microsoft.com/fwlink/?linkid=845985)에서 확인할 수 있습니다.
-> 
+   ![Configure Single Sign-On](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_14.png)
 
 ### <a name="creating-an-azure-ad-test-user"></a>Azure AD 테스트 사용자 만들기
 이 섹션의 목적은 Azure Portal에서 Britta Simon이라는 테스트 사용자를 만드는 것입니다.
@@ -192,9 +186,9 @@ Tableau Online에서 Azure AD Single Sign-On을 구성하고 테스트하려면 
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -224,7 +218,7 @@ Tableau Online에서 Azure AD Single Sign-On을 구성하고 테스트하려면 
 
 2. 응용 프로그램 목록에서 **Tableau Online**을 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_app.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-tableauonline-tutorial/tutorial_tableauonline_app.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -249,7 +243,7 @@ Tableau Online에서 Azure AD Single Sign-On을 구성하고 테스트하려면 
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 <!--Image references-->
 
@@ -264,5 +258,3 @@ Tableau Online에서 Azure AD Single Sign-On을 구성하고 테스트하려면 
 [201]: ./media/active-directory-saas-tableauonline-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-tableauonline-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-tableauonline-tutorial/tutorial_general_203.png
-
-

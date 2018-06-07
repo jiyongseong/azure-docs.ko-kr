@@ -1,25 +1,24 @@
 ---
-title: "Azure ExpressRoute에 대한 라우팅 요구 사항 | Microsoft Docs"
-description: "이 페이지는 ExpressRoute 회로에 라우팅을 구성하고 관리하는 자세한 요구 사항을 제공합니다."
+title: Azure ExpressRoute에 대한 라우팅 요구 사항 | Microsoft Docs
+description: 이 페이지는 ExpressRoute 회로에 라우팅을 구성하고 관리하는 자세한 요구 사항을 제공합니다.
 documentationcenter: na
 services: expressroute
-author: osamazia
+author: ganesr
 manager: ganesr
-editor: 
+editor: ''
 ms.assetid: 5b382e79-fa3f-495a-a764-c5ff86af66a2
 ms.service: expressroute
 ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 07/31/2017
-ms.author: osamam
+ms.date: 03/28/2018
+ms.author: ganesr
+ms.openlocfilehash: b0c8be546b40b36746224ca43c7766ac310fd7ee
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: 7bf5d568e59ead343ff2c976b310de79a998673b
-ms.openlocfilehash: e6e2009717430a692528cd3ec3a2c6e46a12fe03
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/01/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="expressroute-routing-requirements"></a>ExpressRoute 라우팅 요구 사항
 ExpressRoute를 사용하여 Microsoft 클라우드 서비스에 연결하려면 라우팅을 설치하고 관리해야 합니다. 일부 연결 공급자는 라우팅을 관리 서비스로 설치하고 관리해 줍니다. 연결 공급자를 확인하여 이 서비스를 제공하는지를 확인합니다. 제공하지 않는 경우 다음 요구 사항을 준수해야 합니다.
@@ -48,14 +47,14 @@ ExpressRoute를 사용하여 Microsoft 클라우드 서비스에 연결하려면
 #### <a name="example-for-private-peering"></a>개인 피어링에 대한 예제
 a.b.c.d/29를 사용하여 피어링을 설치하기로 선택한 경우 두 개의 /30 서브넷으로 분할됩니다. 아래 예제에서는 a.b.c.d/29 서브넷이 어떻게 사용되는지 살펴봅니다. 
 
-a.b.c.d/29는 a.b.c.d/30 및 a.b.c.d+4/30으로 분할되고 프로비전 API를 통해 Microsoft에 전달됩니다. 사용자는 기본 PE에 a.b.c.d+1을 VRF IP로 사용하고 Microsoft는 기본 MSEE에 a.b.c.d+2를 VRF IP로 사용합니다. 사용자는 보조 PE에 a.b.c.d+5를 VRF IP로 사용하고 Microsoft는 보조 MSEE에 a.b.c.d+6를 VRF IP로 사용합니다.
+a.b.c.d/29는 a.b.c.d/30 및 a.b.c.d+4/30으로 분할되고 프로비전 API를 통해 Microsoft에 전달됩니다. 사용자는 기본 PE에 a.b.c.d+1을 VRF IP로 사용하고 Microsoft는 기본 MSEE에 a.b.c.d+2를 VRF IP로 사용합니다. 사용자는 보조 PE에 a.b.c.d+5를 VRF IP로 사용하고 Microsoft는 보조 MSEE에 a.b.c.d+6을 VRF IP로 사용합니다.
 
 192.168.100.128/29을 선택하여 개인 피어링을 설치한 경우를 고려해 보세요. 192.168.100.128/29는 다음 중 192.168.100.128에서 192.168.100.135까지의 주소를 포함합니다.
 
 * 192.168.100.128/30은 192.168.100.129를 사용하는 공급자 및 192.168.100.130를 사용하는 Microsoft와 함께 링크1에 할당됩니다.
 * 192.168.100.132/30은 192.168.100.133를 사용하는 공급자 및 192.168.100.134를 사용하는 Microsoft와 함께 링크2에 할당됩니다.
 
-### <a name="ip-addresses-used-for-azure-public-and-microsoft-peering"></a>Azure 공용 네트워크 및 Microsoft 피어링에 사용된 IP 주소
+### <a name="ip-addresses-used-for-azure-public-peering"></a>Azure 공용 피어링에 사용된 IP 주소
 BGP 세션을 설치하기 위해 소유한 공용 IP 주소를 사용해야 합니다. Microsoft은 라우팅 인터넷 레지스트리 및 인터넷 라우팅 레지스트리를 통해 IP 주소의 소유권을 확인할 수 있어야 합니다. 
 
 * 고유한 /29 서브넷 또는 두 개의 /30 서브넷을 사용하여 ExpressRoute 회로 당(하나 이상이 있는 경우) 각 피어링에 BGP를 설정해야 합니다. 
@@ -63,6 +62,18 @@ BGP 세션을 설치하기 위해 소유한 공용 IP 주소를 사용해야 합
   * 첫 번째 /30 서브넷은 기본 링크에 사용되고 두 번째 /30 서브넷은 보조 링크에 사용됩니다.
   * 각 /30 서브넷의 경우 라우터에서 /30의 첫 번째 IP 주소를 사용해야 합니다. Microsoft는 /30 서브넷의 두 번째 IP 주소를 사용하여 BGP 세션을 설치합니다.
   * [가용성 SLA](https://azure.microsoft.com/support/legal/sla/) 이 유효하기 위해 BGP 세션을 모두 설치해야 합니다.
+
+### <a name="ip-addresses-used-for-microsoft-peering"></a>Microsoft 피어링에 사용된 IP 주소
+BGP 세션을 설치하기 위해 소유한 공용 IP 주소를 사용해야 합니다. Microsoft은 라우팅 인터넷 레지스트리 및 인터넷 라우팅 레지스트리를 통해 IP 주소의 소유권을 확인할 수 있어야 합니다.
+
+* 고유한 /29 (IPv4) 또는 /125 (IPv6) 서브넷 또는 두 개의 /30 (IPv4) 또는 /126 (IPv6) 서브넷을 사용하여 ExpressRoute 회로당(하나 이상이 있는 경우) 각 피어링에 BGP를 설정해야 합니다.
+* /29 서브넷을 사용한 경우 두 개의 /30 서브넷으로 분할됩니다.
+* 첫 번째 /30 서브넷은 기본 링크에 사용되고 두 번째 /30 서브넷은 보조 링크에 사용됩니다.
+* 각 /30 서브넷의 경우 라우터에서 /30의 첫 번째 IP 주소를 사용해야 합니다. Microsoft는 /30 서브넷의 두 번째 IP 주소를 사용하여 BGP 세션을 설치합니다.
+* /125 서브넷을 사용한 경우 두 개의 /126 서브넷으로 분할됩니다.
+* 첫 번째 /126 서브넷은 기본 링크에 사용되고 두 번째 /126 서브넷은 보조 링크에 사용됩니다.
+* 각 /126 서브넷의 경우 라우터에서 /126 서브넷의 첫 번째 IP 주소를 사용해야 합니다. Microsoft는 /126 서브넷의 두 번째 IP 주소를 사용하여 BGP 세션을 설치합니다.
+* [가용성 SLA](https://azure.microsoft.com/support/legal/sla/) 이 유효하기 위해 BGP 세션을 모두 설치해야 합니다.
 
 ## <a name="public-ip-address-requirement"></a>공용 IP 주소 요구 사항
 
@@ -73,10 +84,18 @@ BGP 세션을 설치하기 위해 소유한 공용 IP 주소를 사용해야 합
 ### <a name="public-peering"></a>공용 피어링
 Azure 공용 피어링 경로를 사용하면 해당 공용 IP 주소에 걸쳐 Azure에서 호스팅되는 모든 서비스에 연결할 수 있습니다. [Expess 경로 FAQ](expressroute-faqs.md) 에 나열된 서비스와 Microsoft Azure에서 ISV가 호스팅하는 서비스를 포함합니다. 공용 피어링의 Microsoft Azure 서비스에 대한 연결은 항상 네트워크에서 Microsoft 네트워크로 시작됩니다. Microsoft 네트워크를 대상으로 하는 트래픽에 대한 공용 IP 주소를 사용해야 합니다.
 
+> [!IMPORTANT]
+> 모든 Azure PaaS 서비스는 Microsoft 피어링을 통해 액세스할 수도 있습니다. Microsoft 피어링을 만들고, Microsoft 피어링을 통해 Azure PaaS 서비스에 연결하는 것이 좋습니다.  
+>   
+
+
+개인 AS 번호는 공용 피어링을 사용할 수 있습니다.
+
 ### <a name="microsoft-peering"></a>Microsoft 피어링
 Microsoft 피어링 경로를 사용하면 Azure 공용 피어링 경로를 통해 지원하지 않는 Microsoft 클라우드 서비스에 연결할 수 있습니다. 서비스 목록에는 Exchange Online, SharePoint Online, 비즈니스용 Skype 및 Dynamics 365와 같은 Office 365 서비스가 포함됩니다. Microsoft는 Microsoft 피어링에 양방향 연결을 지원합니다. Microsoft 클라우드 서비스에 보내는 트래픽은 Microsoft 네트워크를 입력하기 전에 유효한 공용 IPv4 주소를 사용해야 합니다.
 
 IP 주소 및 AS 번호가 다음 레지스트리 중 하나에 등록되었는지 확인합니다.
+
 
 * [ARIN](https://www.arin.net/)
 * [APNIC](https://www.apnic.net/)
@@ -85,6 +104,10 @@ IP 주소 및 AS 번호가 다음 레지스트리 중 하나에 등록되었는�
 * [RIPENCC](https://www.ripe.net/)
 * [RADB](http://www.radb.net/)
 * [ALTDB](http://altdb.net/)
+
+접두사 및 AS 번호가 위 레지스트리에서 사용자에게 할당되지 않은 경우 사용자의 접두사 및 ASN의 수동 유효성 검사에 관한 지원 사례를 살펴봐야 합니다. 지원을 이용하려면 리소스를 사용할 수 있음을 증명하는 승인 문서와 같은 문서가 필요합니다.
+
+개인 AS 번호는 Microsoft 피어링에서 허용되었지만 수동 유효성 검사에도 필요합니다. 또한 받은 접두사에 대한 AS PATH에서 개인 AS 번호를 제거합니다. 따라서 [Microsoft 피어링에 대한 라우팅에 영향을 주기](expressroute-optimize-routing.md) 위해 AS PATH에 개인 AS 번호를 추가할 수는 없습니다. 
 
 > [!IMPORTANT]
 > ExpressRoute를 통해 Microsoft에 보급된 공용 IP 주소는 인터넷에 보급하지 않아야 합니다. 다른 Microsoft 서비스에 대한 연결을 중단할 수 있습니다. 그러나 ExpressRoute를 통해 Microsoft 내에서 O365 끝점과 통신하는 네트워크의 서버에서 사용하는 공용 IP 주소를 보급할 수 있습니다. 
@@ -95,7 +118,7 @@ IP 주소 및 AS 번호가 다음 레지스트리 중 하나에 등록되었는�
 라우팅 Exchange는 eBGP 프로토콜을 통합니다. EBGP 세션은 MSEE와 라우터 간에 설정됩니다. BGP 세션의 인증은 요구되지 않습니다. 필요한 경우 MD5 해시를 구성할 수 있습니다. BGP 세션을 구성하는 방법에 대한 정보는 [구성 라우팅](expressroute-howto-routing-classic.md) 및 [회로 프로비전 워크플로 및 회로 상태](expressroute-workflows.md)를 참조하세요.
 
 ## <a name="autonomous-system-numbers"></a>자치 시스템 번호
-Microsoft는 Azure 공용, Azure 개인 및 Microsoft 피어링에 AS 12076를 사용합니다. 내부 사용을 위해 65515에서 65520으로 ASN을 예약했습니다. 16 및 32비트 AS 번호를 모두 지원합니다.
+Microsoft는 Azure 공용, Azure 개인 및 Microsoft 피어링에 AS 12076을 사용합니다. 내부 사용을 위해 65515에서 65520으로 ASN을 예약했습니다. 16 및 32비트 AS 번호를 모두 지원합니다.
 
 데이터 전송 대칭에 요구 사항이 없습니다. 전달 및 반환 경로는 다른 라우터 쌍을 트래버스할 수 있습니다. 동일한 경로는 사용자에게 속한 여러 회로 쌍에 걸쳐 한 쪽에서 보급해야 합니다. 경로 메트릭이 동일할 필요는 없습니다.
 
@@ -134,44 +157,50 @@ ExpressRoute는 전송 라우터로 구성할 수 없습니다. 전송 라우팅
 | **Microsoft Azure 지역** | **BGP 커뮤니티 값** |
 | --- | --- |
 | **북아메리카** | |
-| 미국 동부 |12076분 51004초 |
-| 미국 동부 2 |12076분 51005초 |
-| 미국 서부 |12076분 51006초 |
-| 미국 서부 2 |12076분 51026초 |
-| 미국 중서부 |12076분 51027초 |
-| 미국 중북부 |12076분 51007초 |
-| 미국 중남부 |12076분 51008초 |
-| 미국 중부 |12076분 51009초 |
-| 캐나다 중부 |12076분 51020초 |
-| 캐나다 동부 |12076분 51021초 |
+| 미국 동부 | 12076분 51004초 |
+| 미국 동부 2 | 12076분 51005초 |
+| 미국 서부 | 12076분 51006초 |
+| 미국 서부 2 | 12076분 51026초 |
+| 미국 중서부 | 12076분 51027초 |
+| 미국 중북부 | 12076분 51007초 |
+| 미국 중남부 | 12076분 51008초 |
+| 미국 중부 | 12076분 51009초 |
+| 캐나다 중부 | 12076분 51020초 |
+| 캐나다 동부 | 12076분 51021초 |
 | **남미** | |
-| 브라질 남부 |12076분 51014초 |
+| 브라질 남부 | 12076분 51014초 |
 | **유럽** | |
-| 북유럽 |12076분 51003초 |
-| 서유럽 |12076분 51002초 |
+| 북유럽 | 12076분 51003초 |
+| 서유럽 | 12076분 51002초 |
 | 영국 남부 | 12076분 51024초 |
 | 영국 서부 | 12076분 51025초 |
+| 프랑스 중부 | 12076:51030 |
+| 프랑스 남부 | 12076:51031 |
 | **아시아 태평양** | |
-| 동아시아 |12076분 51010초 |
-| 동남아시아 |12076분 51011초 |
+| 동아시아 | 12076분 51010초 |
+| 동남아시아 | 12076분 51011초 |
 | **일본** | |
-| 일본 동부 |12076분 51012초 |
-| 일본 서부 |12076분 51013초 |
+| 일본 동부 | 12076분 51012초 |
+| 일본 서부 | 12076분 51013초 |
 | **오스트레일리아** | |
-| 오스트레일리아 동부 |12076분 51015초 |
-| 오스트레일리아 남동부 |12076분 51016초 |
+| 오스트레일리아 동부 | 12076분 51015초 |
+| 오스트레일리아 남동부 | 12076분 51016초 |
+| **오스트레일리아 정부** | |
+| 오스트레일리아 중부 | 12076:51032 |
+| 오스트레일리아 중부 2 | 12076:51033 |
 | **인도** | |
-| 인도 남부 |12076분 51019초 |
-| 인도 서부 |12076분 51018초 |
-| 인도 중부 |12076분 51017초 |
+| 인도 남부 | 12076분 51019초 |
+| 인도 서부 | 12076분 51018초 |
+| 인도 중부 | 12076분 51017초 |
 | **한국** | |
-| 한국 남부 |12076:51028 |
-| 한국 중부 |12076:51029 |
+| 한국 남부 | 12076:51028 |
+| 한국 중부 | 12076:51029 |
+
 
 Microsoft에서 보급하는 모든 경로는 적절한 커뮤니티 값으로 태그되어야 합니다. 
 
 > [!IMPORTANT]
-> 전역 접두사는 적절한 커뮤니티 값으로 태그가 지정되며 ExpressRoute Premium 추가 기능을 사용하는 경우에만 보급됩니다.
+> 전역 접두사에는 적절한 커뮤니티 값을 가진 태그가 지정됩니다.
 > 
 > 
 
@@ -179,11 +208,11 @@ Microsoft에서 보급하는 모든 경로는 적절한 커뮤니티 값으로 �
 
 | **서비스** | **BGP 커뮤니티 값** |
 | --- | --- |
-| Exchange Online |12076분 5010초 |
-| SharePoint Online |12076분 5020초 |
-| 비즈니스 온라인용 Skype |12076:5030 |
-| Dynamics 365 |12076:5040 |
-| 기타 Office 365 온라인 서비스 |12076분 5100초 |
+| Exchange Online | 12076분 5010초 |
+| SharePoint Online | 12076분 5020초 |
+| 비즈니스 온라인용 Skype | 12076:5030 |
+| Dynamics 365 | 12076:5040 |
+| 기타 Office 365 온라인 서비스 | 12076분 5100초 |
 
 > [!NOTE]
 > Microsoft는 Microsoft에 보급하는 경로에 설정한 BGP 커뮤니티 값을 인식하지 않습니다.
@@ -215,8 +244,6 @@ Microsoft에서 보급하는 모든 경로는 적절한 커뮤니티 값으로 �
 ## <a name="next-steps"></a>다음 단계
 * ExpressRoute 연결을 구성합니다.
   
-  * [클래식 배포 모델용 ExpressRoute 회로 만들기](expressroute-howto-circuit-classic.md) 또는 [Azure Resource Manager를 사용하여 ExpressRoute 회로 만들기 및 수정](expressroute-howto-circuit-arm.md)
-  * [클래식 배포 모델용 라우팅 구성](expressroute-howto-routing-classic.md) 또는 [Resource Manager 배포 모델용 라우팅 구성](expressroute-howto-routing-arm.md)
-  * [ExpressRoute 회로에 클래식 VNet 연결](expressroute-howto-linkvnet-classic.md) 또는 [ExpressRoute 회로에 Resource Manager VNet 연결](expressroute-howto-linkvnet-arm.md)
-
-
+  * [회로 만들기 및 수정](expressroute-howto-circuit-arm.md)
+  * [피어링 구성 만들기 및 수정](expressroute-howto-routing-arm.md)
+  * [VNet을 ExpressRoute 회로에 연결](expressroute-howto-linkvnet-arm.md)

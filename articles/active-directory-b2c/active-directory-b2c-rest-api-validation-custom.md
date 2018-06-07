@@ -1,28 +1,25 @@
 ---
-title: "Azure Active Directory B2C: REST API 클레임 교환을 유효성 검사로 통합 | Microsoft Docs"
-description: "Azure Active Directory B2C 사용자 지정 정책에 대한 항목"
+title: 'Azure Active Directory B2C: REST API 클레임 교환을 유효성 검사로 통합 | Microsoft Docs'
+description: Azure Active Directory B2C 사용자 지정 정책에 대한 항목
 services: active-directory-b2c
-documentationcenter: 
-author: rojasja
-manager: krassk
-editor: rojasja
-ms.assetid: 
+documentationcenter: ''
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: article
-ms.devlang: na
 ms.date: 04/24/2017
-ms.author: joroja
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 7c69630688e4bcd68ab3b4ee6d9fdb0e0c46d04b
-ms.openlocfilehash: eb44a0d2234c9ee3801d8b3a1655d877aa2f4fef
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/24/2017
-
+ms.author: davidmu
+ms.openlocfilehash: 31ed69b669a92ad38c4ab7b2f54886e4ed6acf42
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
-
 # <a name="walkthrough-integrate-rest-api-claims-exchanges-in-your-azure-ad-b2c-user-journey-as-validation-on-user-input"></a>연습: Azure AD B2C 사용자 경험에서 REST API 클레임 교환을 사용자 입력에 대한 유효성 검사로 통합
+
+[!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
 
 Azure AD B2C(Azure Active Directory B2C)의 기반이 되는 IEF(ID 경험 프레임워크)를 사용하면 ID 개발자가 사용자 경험에서 RESTful API와의 상호 작용을 통합할 수 있습니다.  
 
@@ -121,7 +118,7 @@ IEF는 Azure 함수에서 반환하는 `userMessage` 클레임을 예상합니�
 
 1. TrustFrameworkBase 파일을 열고 `<TechnicalProfile Id="SelfAsserted-ProfileUpdate">`를 검색합니다.
 2. 이 기술 프로필의 구성을 검토합니다. 사용자와의 교환이 사용자에게 요청할 클레임(입력 클레임) 및 자체 어설션된 공급자에서 반환될 클레임(출력 클레임)으로 정의되는 방식을 검토합니다.
-3. `TechnicalProfileReferenceId="SelfAsserted-ProfileUpdate`를 검색하고 이 프로필이 `<UserJourney Id="ProfileEdit">`의 6 오케스트레이션 단계로 호출되었는지 확인합니다.
+3. `TechnicalProfileReferenceId="SelfAsserted-ProfileUpdate`를 검색합니다. 이 프로필이 `<UserJourney Id="ProfileEdit">`의 오케스트레이션 4단계로 호출된다는 것을 확인합니다.
 
 ## <a name="step-4-upload-and-test-the-profile-edit-rp-policy-file"></a>4단계 - 프로필 편집 RP 정책 파일 업로드 및 테스트
 
@@ -134,4 +131,3 @@ IEF는 Azure 함수에서 반환하는 `userMessage` 클레임을 예상합니�
 [프로필 편집 및 사용자 등록을 수정하여 사용자로부터 추가 정보 수집](active-directory-b2c-create-custom-attributes-profile-edit-custom.md)
 
 [연습: Azure AD B2C 사용자 경험에서 REST API 클레임 교환을 오케스트레이션 단계로 통합](active-directory-b2c-rest-api-step-custom.md)
-

@@ -1,326 +1,137 @@
 ---
-title: "Azure Cosmos DB를 사용하는 다중 마스터 데이터베이스 아키텍처 | Microsoft Docs"
-description: "Azure Cosmos DB로 여러 지리적 지역에서 로컬 읽기 및 쓰기가 가능한 응용 프로그램 아키텍처를 디자인하는 방법을 알아봅니다."
+title: Azure Cosmos DB를 사용하는 전역 규모의 다중 마스터 | Microsoft Docs
+description: ''
 services: cosmos-db
-documentationcenter: 
-author: arramac
-manager: jhubbard
-editor: 
-ms.assetid: 706ced74-ea67-45dd-a7de-666c3c893687
+author: rimman
+manager: kfile
 ms.service: cosmos-db
-ms.devlang: multiple
+ms.workload: data-services
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
-ms.date: 05/23/2017
-ms.author: arramac
-ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a643f139be40b9b11f865d528622bafbe7dec939
-ms.openlocfilehash: cf1482ae7b1070023703f5dbe861d151f5d64fd8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/31/2017
-
-
+ms.date: 05/07/2018
+ms.author: rimman
+ms.openlocfilehash: 12306b7868fa7fb2321f26657aab81beabb9db35
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
-# <a name="multi-master-globally-replicated-database-architectures-with-azure-cosmos-db"></a>Azure Cosmos DB를 사용하는 다중 마스터 전역 복제 데이터베이스 아키텍처
-Azure Cosmos DB는 턴키 [전역 복제](distribute-data-globally.md)를 지원하므로 워크로드 어디서나 여러 지역에 데이터를 분산할 수 있으며 액세스 대기 시간이 짧습니다. 이 모델은 한 지역에 기록기가 있고 다른 (읽기) 지역에 지리적으로 분산된 판독기가 있는 게시자/소비자 워크로드에 주로 사용됩니다. 
+# <a name="multi-master-at-global-scale-with-azure-cosmos-db"></a>Azure Cosmos DB를 사용하는 전역 규모의 다중 마스터 
+ 
+전 세계 데이터의 일관된 보기를 유지 관리하는 동안 로컬 대기 시간으로 응답하는 전역으로 배포된 응용 프로그램 개발은 어려운 문제입니다. 고객은 (4) 비즈니스 요구 사항을 충족하기 위해 데이터 액세스 대기 시간을 개선하고, 높은 데이터 가용성을 달성하고, 보장된 재해 복구를 확보해야 하므로 전역으로 분산된 데이터베이스를 사용합니다. Azure Cosmos DB의 다중 마스터는 기본 제공된 포괄적이고 유연한 충돌 해결 지원을 사용하여 높은 수준의 가용성(99.999%), 쓰기 데이터에 대한 단일 자리 숫자 밀리초 대기 시간 및 확장성을 제공합니다. 이러한 기능은 전역으로 분산된 응용 프로그램의 개발을 크게 간소화합니다. 전역으로 분산된 응용 프로그램의 경우 다중 마스터 지원은 매우 중요합니다. 
 
-Azure Cosmos DB의 글로벌 복제 지원을 사용하여 기록기 및 판독기가 전역에 분산되는 응용 프로그램을 빌드할 수도 있습니다. 이 문서에서는 Azure Cosmos DB를 사용하여 분산된 작성기에 대한 로컬 쓰기 및 로컬 읽기 액세스를 가능하게 하는 패턴을 개략적으로 설명합니다.
+![다중 마스터 아키텍처](./media/multi-region-writers/multi-master-architecture.png)
 
-## <a id="ExampleScenario"></a>콘텐츠 게시 - 예제 시나리오
-Azure Cosmos DB로 전역에 분산된 다중 지역/다중 마스터 읽기 쓰기 패턴을 사용하는 방법을 설명하는 실제 시나리오를 살펴보겠습니다. Azure Cosmos DB를 기반으로 하는 콘텐츠 게시 플랫폼이 있다고 가정합시다. 이 플랫폼이 게시자와 소비자 모두에게 훌륭한 사용자 환경을 제공하기 위해 충족해야 하는 몇 가지 요구 사항이 있습니다.
+Azure Cosmos DB 다중 마스터 지원을 통해 전 세계의 어디든지 배포된 데이터(예: 컬렉션, 그래프, 테이블)의 컨테이너에 쓰기를 수행할 수 있습니다. 데이터베이스 계정과 연결된 모든 지역에서 데이터를 업데이트할 수 있습니다. 이러한 데이터 업데이트는 비동기적으로 전파할 수 있습니다. 데이터에 대한 빠른 액세스 및 쓰기 대기 시간을 제공할 뿐만 아니라 다중 마스터는 장애 조치(failover) 및 부하 분산 문제에 대한 실용적인 솔루션을 제공합니다. 요약하면, Azure Cosmos DB를 사용하여 전 세계 어디서나 99번째 백분위수의 <10ms 쓰기 대기 시간, 99.999%의 쓰기와 읽기 가용성 및 쓰기와 읽기 처리량의 크기를 조정하는 기능을 얻습니다.   
 
-* 작성자와 구독자 모두 전 세계에 분산되어 있습니다. 
-* 작성자는 로컬(가장 가까운) 지역에 문서를 게시(쓰기)해야 합니다.
-* 작성자의 문서 독자/구독자가 전 세계에 분산되어 있습니다. 
-* 새 문서가 게시되면 구독자가 알림을 받아야 합니다.
-* 구독자는 로컬 지역에서 문서를 읽을 수 있어야 합니다. 또한 이러한 문서에 리뷰를 추가할 수 있어야 합니다. 
-* 문서 작성자를 포함한 모든 사람은 문서에 연결된 모든 리뷰를 로컬 지역에서 볼 수 있어야 합니다. 
+> [!IMPORTANT]
+> 다중 마스터 지원은 비공개 미리 보기 상태입니다. 미리 보기 버전을 사용하려면 지금 [등록](#sign-up-for-multi-master-support)하세요.
 
-수백만 명의 소비자 및 게시자와 수십억 개의 문서가 있다고 가정한다면, 조만간 지역 액세스 보장과 함께 확장 문제에 직면하게 됩니다. 대부분의 확장 문제와 마찬가지로, 해결책은 좋은 분할 전략에 있습니다. 다음으로 문서, 리뷰 및 알림을 문서로 모델링하고, Azure Cosmos DB 계정을 구성하고, 데이터 액세스 계층을 구현하는 방법을 살펴보겠습니다. 
+## <a name="sign-up-for-multi-master-support"></a>다중 마스터 지원에 등록
 
-분할 및 파티션 키에 대한 자세한 내용은 [Azure Cosmos DB의 분할 및 크기 조정](partition-data.md)을 참조하세요.
+Azure 구독이 이미 있는 경우 Azure Portal에서 다중 마스터 미리 보기 프로그램에 등록할 수 있습니다. Azure를 처음 사용하는 경우 12개월 동안 Azure Cosmos DB에 무료로 액세스할 수 있는 [평가판](https://azure.microsoft.com/free)에 등록하세요. 다음 단계를 완료하여 다중 마스터 미리 보기 프로그램에 대한 액세스를 요청하세요.
 
-## <a id="ModelingNotifications"></a>알림 모델링
-알림은 사용자에게 한정된 데이터 피드입니다. 따라서 알림 문서의 액세스 패턴은 항상 단일 사용자의 컨텍스트와 관련이 있습니다. 예를 들어 "사용자에게 알림을 게시"하거나 "지정된 사용자에 대한 모든 알림을 가져올" 수 있습니다. 따라서 이 유형에 선택할 수 있는 최적의 분할 키는 `UserId`입니다.
+1. [Azure Portal](https://portal.azure.com)에서 **리소스 만들기** > **데이터베이스** > **Azure Cosmos DB**를 클릭합니다.  
 
-    class Notification 
-    { 
-        // Unique ID for Notification. 
-        public string Id { get; set; }
+2. 새 계정 페이지에서 Azure Cosmos DB 계정의 이름을 제공하고 API, 구독, 리소스 그룹 및 위치를 선택합니다.  
 
-        // The user Id for which notification is addressed to. 
-        public string UserId { get; set; }
+3. 그런 다음, 다중 마스터 미리 보기 필드 아래에서 **지금 미리 보기 등록**을 선택합니다.  
 
-        // The partition Key for the resource. 
-        public string PartitionKey 
-        { 
-            get 
-            { 
-                return this.UserId; 
-            }
-        }
+   ![다중 마스터 미리 보기에 등록](./media/multi-region-writers/sign-up-for-multi-master-preview.png)
 
-        // Subscription for which this notification is raised. 
-        public string SubscriptionFilter { get; set; }
+4. **지금 미리 보기 등록** 창에서 **확인**을 클릭합니다. 요청을 제출하고 나면 계정 만들기 블레이드에서 상태가 **승인 보류 중**으로 변경됩니다.  
 
-        // Subject of the notification. 
-        public string ArticleId { get; set; } 
-    }
+요청을 제출한 후에는 요청이 승인된 것을 알리는 이메일 알림이 전송됩니다. 요청이 많기 때문에 알림은 1주일 내로 받을 수 있습니다. 요청을 완료하기 위해 지원 티켓을 만들 필요는 없습니다. 요청은 받은 순서대로 검토됩니다.
 
-## <a id="ModelingSubscriptions"></a>구독 모델링
-관심 있는 문서의 특정 범주나 특정 게시자처럼 다양한 조건에 대한 구독을 만들 수 있습니다. 따라서 파티션 키에 좋은 선택은 `SubscriptionFilter`입니다.
+## <a name="a-simple-multi-master-example--content-publishing"></a>간단한 다중 마스터 예 - 콘텐츠 게시  
 
-    class Subscriptions 
-    { 
-        // Unique ID for Subscription 
-        public string Id { get; set; }
+Azure Cosmos DB와 함께 다중 마스터 지원을 사용하는 방법을 설명하는 실제 시나리오를 살펴보겠습니다. Azure Cosmos DB를 기반으로 하는 콘텐츠 게시 플랫폼이 있다고 가정합시다. 이 플랫폼이 게시자와 소비자 모두에게 훌륭한 사용자 환경을 제공하기 위해 충족해야 하는 몇 가지 요구 사항이 있습니다. 
 
-        // Subscription source. Could be Author | Category etc. 
-        public string SubscriptionFilter { get; set; }
+* 작성자와 구독자 모두 전 세계에 분산되어 있습니다.  
 
-        // subscribing User. 
-        public string UserId { get; set; }
+* 작성자는 로컬(가장 가까운) 지역에 문서를 게시(쓰기)해야 합니다.  
 
-        public string PartitionKey 
-        { 
-            get 
-            { 
-                return this.SubscriptionFilter; 
-            } 
-        } 
-    }
+* 작성자의 문서 독자/구독자가 전 세계에 분산되어 있습니다.  
 
-## <a id="ModelingArticles"></a>문서 모델링
-알림을 통해 문서가 식별되면 후속 쿼리는 일반적으로 `Article.Id`를 기반으로 합니다. 따라서 파티션 키로 `Article.Id`를 선택하면 Azure Cosmos DB 컬렉션 내에 문서를 저장하기에 가장 적합하게 분산됩니다. 
+* 새 문서가 게시되면 구독자가 알림을 받아야 합니다.  
 
-    class Article 
-    { 
-        // Unique ID for Article 
-        public string Id { get; set; }
-        
-        public string PartitionKey 
-        { 
-            get 
-            { 
-                return this.Id; 
-            } 
-        }
-        
-        // Author of the article
-        public string Author { get; set; }
+* 구독자는 로컬 지역에서 문서를 읽을 수 있어야 합니다. 또한 이러한 문서에 리뷰를 추가할 수 있어야 합니다.  
 
-        // Category/genre of the article
-        public string Category { get; set; }
+* 문서 작성자를 포함한 모든 사람은 문서에 연결된 모든 리뷰를 로컬 지역에서 볼 수 있어야 합니다.  
 
-        // Tags associated with the article
-        public string[] Tags { get; set; }
+수백만 명의 소비자 및 게시자와 수십억 개의 문서가 있다고 가정한다면, 조만간 지역 액세스 보장과 함께 확장 문제에 직면하게 됩니다. 이러한 사용 사례는 Azure Cosmos DB 다중 마스터에 대한 완벽한 후보입니다. 
 
-        // Title of the article
-        public string Title { get; set; }
-        
-        //... 
-    }
+## <a name="benefits-of-having-multi-master-support"></a>다중 마스터 지원의 이점 
 
-## <a id="ModelingReviews"></a>리뷰 모델링
-리뷰 역시 문서와 마찬가지로 주로 문서의 컨텍스트에서 쓰고 읽힙니다. 파티션 키로 `ArticleId`를 선택하면 가장 적절하게 분산될 뿐 아니라 문서와 연결된 리뷰를 효율적으로 액세스할 수 있습니다. 
+다중 마스터 지원은 전역으로 분산된 응용 프로그램에 필수적입니다. 다중 마스터는 원하는 위치에 쓰기 모델(활성-활성 패턴)에서 동일하게 참여하는 [다중 마스터 영역](distribute-data-globally.md)으로 이루어져 있으며 데이터를 필요한 곳에서 언제든지 사용할 수 있도록 보장하는 데 사용됩니다. 개별 영역에 대한 업데이트는 다른 모든 영역에 비동기적으로 전파됩니다(차례로 해당 소유의 마스터 영역임). 다중 마스터 구성에서 마스터 영역으로 작동하는 Azure Cosmos DB 영역은 자동으로 모든 복제본의 데이터를 수렴하고 [전역 일관성 및 데이터 무결성](consistency-levels.md)을 보장하도록 작동합니다. 다음 그림에서는 단일 마스터 및 다중 마스터에 대한 읽기/쓰기 복제를 보여줍니다.
 
-    class Review 
-    { 
-        // Unique ID for Review 
-        public string Id { get; set; }
+![단일 마스터 및 다중 마스터](./media/multi-region-writers/single-vs-multi-master.png)
 
-        // Article Id of the review 
-        public string ArticleId { get; set; }
+직접 다중 마스터를 구현하는 것은 개발자에게 부담이 됩니다. 자체적으로 다중 마스터를 구현하려고 하는 대규모 고객은 전 세계 다중 마스터 구성을 구성하고 테스트하는 데 많은 시간을 보낼 수도 있으며, 대부분 유일한 작업이 다중 마스터 복제를 모니터링 및 유지 관리하는 전용 엔지니어 집합을 갖습니다. 스스로 다중 마스터 설정을 만들고 관리하는 것은 시간이 걸리고, 응용 프로그램 자체의 혁신에서 벗어난 리소스를 사용하며, 훨씬 더 높은 비용을 발생시킵니다. Azure Cosmos DB는 “즉시 사용 가능한” 다중 마스터 지원을 제공하고 개발자로부터 이 오버헤드를 제거합니다.  
 
-        public string PartitionKey 
-        { 
-            get 
-            { 
-                return this.ArticleId; 
-            } 
-        }
-        
-        //Reviewer Id 
-        public string UserId { get; set; }
-        public string ReviewText { get; set; }
-        
-        public int Rating { get; set; } }
-    }
+요약하자면, 다중 마스터는 다음과 같은 이점을 제공합니다.
 
-## <a id="DataAccessMethods"></a>데이터 액세스 계층 메서드
-이번에는 우리가 구현해야 하는 기본 데이터 액세스 메서드를 살펴보겠습니다. 다음은 `ContentPublishDatabase`에 필요한 메서드 목록입니다.
+* **향상된 재해 복구, 쓰기 가용성 및 장애 조치(failover)** - 더 큰 범위로 중요한 데이터베이스의 고가용성을 유지하기 위해 다중 마스터를 사용할 수 있습니다. 예를 들어 다중 마스터 데이터베이스는 기본 지역이 가동 중단 또는 지역적 재해로 인해 사용할 수 없게 되는 경우 한 지역에서 장애 조치(failover) 지역으로 데이터를 복제할 수 있습니다. 이러한 장애 조치(failover) 지역은 응용 프로그램을 지원하는 모든 기능을 갖춘 마스터 영역의 역할을 수행합니다. 다중 마스터는 나머지 영역이 보장된 쓰기 가용성 > 99.999%로 지리적으로 서로 다른 다중 마스터에 있을 수 있으므로 자연 재해, 정전 또는 파괴 또는 둘 다와 관련하여 더 큰 "존속성" 보호를 제공합니다. 
 
-    class ContentPublishDatabase 
-    { 
-        public async Task CreateSubscriptionAsync(string userId, string category);
-    
-        public async Task<IEnumerable<Notification>> ReadNotificationFeedAsync(string userId);
-    
-        public async Task<Article> ReadArticleAsync(string articleId);
-    
-        public async Task WriteReviewAsync(string articleId, string userId, string reviewText, int rating);
-    
-        public async Task<IEnumerable<Review>> ReadReviewsAsync(string articleId); 
-    }
+* **최종 사용자에 대한 향상된 쓰기 대기 시간** - 데이터(제공하는)에 가까울수록 최종 사용자에게 더 나은 환경이 됩니다. 예를 들어 사용자는 유럽에 있지만 데이터베이스가 미국 또는 오스트레일리아에 있는 경우 추가된 대기 시간은 각 지역에 대해 약 140ms 및 300ms입니다. 지연은 여러 인기 있는 게임, 은행 업무 요구 사항 또는 대화형 응용 프로그램(웹 또는 모바일)을 시작하는 데 허용되지 않습니다. 대기 시간은 고품질 환경에 대한 고객의 인식에서 중요한 역할을 하며 일부 눈에 띄는 범위까지 사용자의 동작에 영향을 주는 것이 입증되었습니다. 기술이 향상되고 특히 더 많은 몰입도 및 실제와 같은 경험을 요구하는 AR, VR 및 MR의 도입과 함께 개발자는 이제 엄격한 대기 시간 요구 사항으로 소프트웨어 시스템을 생성해야 합니다. 따라서 로컬에서 사용 가능한 응용 프로그램 및 데이터(앱용 콘텐츠)를 갖는 것은 더욱 중요합니다. Azure Cosmos DB에서 다중 마스터를 사용하면 성능은 일반 로컬 읽기 및 쓰기만큼 빠르며 지역 배포로 전역으로 향상됩니다.  
 
-## <a id="Architecture"></a>Azure Cosmos DB 계정 구성
-로컬 읽기 및 쓰기를 보장하려면 파티션 키뿐 아니라 지리적 액세스 패턴을 기반으로 데이터를 여러 지역으로 분할해야 합니다. 이 모델은 각 지역에 지리적으로 복제된 Azure Cosmos DB 데이터베이스 계정을 사용합니다. 예를 들어 지역이 두 개라면 다중 지역 쓰기에 대한 설정은 다음과 같습니다.
+* **향상된 읽기 확장성 및 쓰기 처리량** - 다중 마스터는 정확성 보장과 SLA의 백업으로 여러 일관성 모델을 제공하면서 더 높은 처리량 및 더 큰 사용률을 제공합니다. 
 
-| 계정 이름 | 쓰기 지역 | 읽기 지역 |
-| --- | --- | --- |
-| `contentpubdatabase-usa.documents.azure.com` | `West US` |`North Europe` |
-| `contentpubdatabase-europe.documents.azure.com` | `North Europe` |`West US` |
+  ![다중 마스터를 사용하여 쓰기 처리량 크기 조정](./media/multi-region-writers/scale-write-throughput.png)
 
-다음 다이어그램은 이 설정을 사용하는 일반 응용 프로그램에서 읽기 및 쓰기가 수행되는 방법을 보여줍니다.
+* **연결이 끊어진 환경(예: 에지 장치)에 대한 지원 향상** - 다중 마스터를 통해 사용자는 연결이 끊어진 환경의 에지 장치에서 가장 가까운 지역으로 모든 데이터 또는 데이터의 하위 집합을 복제할 수 있습니다. 이 시나리오는 개인의 랩톱(연결이 끊어진 장치)이 개별 판매 직원과 관련된 데이터의 하위 집합을 저장하는 일반적인 판매 부서의 자동화 시스템입니다. 전 세계 어디든지 배치되는 클라우드의 마스터 영역은 원격 에지 장치에서 복사의 대상으로 작동할 수 있습니다.  
 
-![Azure Cosmos DB 다중 마스터 아키텍처](./media/multi-region-writers/multi-master.png)
+* **부하 분산** - 다중 마스터를 사용하여 응용 프로그램의 부하는 과도한 부하 지역에서 부하가 균등하게 분포된 지역으로 사용자/워크로드를 이동하여 다시 분산될 수 있습니다. 새 지역을 추가한 다음, 일부 쓰기를 새 지역으로 전환하여 쓰기 용량을 손쉽게 확장할 수 있습니다. 
 
-다음은 `West US` 지역에서 실행되는 DAL에서 클라이언트를 초기화하는 방법을 보여주는 코드 조각입니다.
-    
-    ConnectionPolicy writeClientPolicy = new ConnectionPolicy { ConnectionMode = ConnectionMode.Direct, ConnectionProtocol = Protocol.Tcp };
-    writeClientPolicy.PreferredLocations.Add(LocationNames.WestUS);
-    writeClientPolicy.PreferredLocations.Add(LocationNames.NorthEurope);
+* **프로비전된 용량의 사용 개선** - 다중 마스터를 사용하여 쓰기 집약적이고 혼합된 워크로드에 대해 여러 지역에 걸쳐 프로비전된 용량을 사용할 수 있습니다.  경우에 따라 읽기 및 쓰기를 더욱 동등하게 재배포할 수 있으므로 프로비전되는 데 더 적은 처리량이 필요하며 고객을 위한 더 큰 비용 절감을 가져옵니다.  
 
-    DocumentClient writeClient = new DocumentClient(
-        new Uri("https://contentpubdatabase-usa.documents.azure.com"), 
-        writeRegionAuthKey,
-        writeClientPolicy);
+* **간단하고 복원성이 뛰어난 앱 아키텍처** - 다중 마스터 구성으로 이동하는 응용 프로그램은 데이터 복원력을 보장받습니다.  모든 복잡성을 숨기는 Azure Cosmos DB를 사용하여 응용 프로그램 디자인 및 아키텍처를 크게 간소화할 수 있습니다. 
 
-    ConnectionPolicy readClientPolicy = new ConnectionPolicy { ConnectionMode = ConnectionMode.Direct, ConnectionProtocol = Protocol.Tcp };
-    readClientPolicy.PreferredLocations.Add(LocationNames.NorthEurope);
-    readClientPolicy.PreferredLocations.Add(LocationNames.WestUS);
+* **위험 없는 장애 조치(failover) 테스트** - 장애 조치(failover) 테스트는 쓰기 처리량에 저하를 가져오지 않습니다. 다중 마스터를 사용하면 다른 모든 지역은 완전한 마스터이므로 장애 조치(failover)는 쓰기 처리량에 큰 영향을 주지 않습니다.  
 
-    DocumentClient readClient = new DocumentClient(
-        new Uri("https://contentpubdatabase-europe.documents.azure.com"),
-        readRegionAuthKey,
-        readClientPolicy);
+* **낮은 TCO(총 소유 비용) 및 DevOps** - 확장성, 성능, 전역 분산, 복구 시간 목표를 충족시키는 것은 비싼 추가 기능 또는 재해가 중단될 때까지 미사용인 백업 인프라 유지 관리로 인해 종종 비용이 많이 듭니다. 업계 선두 SLA에서 지원하는 Azure Cosmos DB 다중 마스터를 사용하면 개발자는 더 이상 "백 엔드 글루 논리"를 자체적으로 빌드 및 유지 관리할 필요가 없으며 중요한 작업 실행에 만족하게 됩니다. 
 
-이전 설정을 사용하면 데이터 액세스 계층은 배포된 위치에 따라 모든 쓰기를 로컬 계정에 전달할 수 있습니다. 두 계정 모두에서 데이터를 읽어 읽기를 수행하여 데이터의 전역 보기를 가져옵니다. 이 방법은 필요한 만큼 여러 지역으로 확장할 수 있습니다. 예를 들어 다음은 세 개 지역에 대한 설정입니다.
+## <a name="use-cases-where-multi-master-support-is-needed"></a>다중 마스터 지원이 필요한 사용 사례
 
-| 계정 이름 | 쓰기 지역 | 읽기 지역 1 | 읽기 지역 2 |
-| --- | --- | --- | --- |
-| `contentpubdatabase-usa.documents.azure.com` | `West US` |`North Europe` |`Southeast Asia` |
-| `contentpubdatabase-europe.documents.azure.com` | `North Europe` |`West US` |`Southeast Asia` |
-| `contentpubdatabase-asia.documents.azure.com` | `Southeast Asia` |`North Europe` |`West US` |
+Azure Cosmos DB의 다중 마스터에 대한 다양한 사용 사례가 있습니다. 
 
-## <a id="DataAccessImplementation"></a>데이터 액세스 계층 구현
-이번에는 쓰기 가능한 지역이 두 개인 응용 프로그램의 DAL(데이터 액세스 계층) 구현을 살펴보겠습니다. DAL은 다음 단계를 구현해야 합니다.
+* **IoT** - Azure Cosmos DB 다중 마스터는 IoT 데이터 처리의 간단한 분산 구현을 허용합니다. CRDT 충돌 없는 분산 데이터 형식을 사용하는 지리적으로 분산된 에지 배포는 종종 여러 위치에서 시계열 데이터를 추적해야 합니다. 각 장치를 가장 가까운 지역 중 하나로 이동할 수 있고, 장치(예: 자동차)는 이동할 수 있으며, 다른 지역으로 쓰도록 동적으로 다시 이동할 수 있습니다.  
 
-* 각 계정에 대해 여러 `DocumentClient` 인스턴스를 만듭니다. 지역이 두 개이므로 각 DAL 인스턴스는 `writeClient` 하나와 `readClient` 하나를 갖습니다. 
-* 배포된 응용 프로그램 지역에 따라 `writeclient` 및 `readClient`의 끝점을 구성합니다. 예를 들어 `West US`에 배포된 DAL은 쓰기 수행에 `contentpubdatabase-usa.documents.azure.com`을 사용합니다. `NorthEurope`에 배포된 DAL은 쓰기에 `contentpubdatabase-europ.documents.azure.com`을 사용합니다.
+* **전자 상거래** - 전자 상거래 시나리오에서 뛰어난 사용자 환경을 보장하기 위해 오류 시나리오에 고가용성 및 복원력이 필요합니다. 영역이 실패하는 경우 상태의 손실 없이 사용자 세션, 쇼핑 카트, 활성 위시리스트를 다른 영역에서 원활하게 선택해야 합니다. 그 동안에 사용자가 수행한 업데이트를 적절하게 처리해야 합니다(예: 쇼핑 카트에서 추가 및 제거를 전송해야 함). 다중 마스터를 사용하여 Azure Cosmos DB는 사용자의 관점에서 일관된 뷰를 유지하면서 활성 지역 간 매끄러운 전환으로 이러한 시나리오를 정상적으로 처리할 수 있습니다. 
 
-이전 설정을 사용하면 데이터 액세스 메서드를 구현할 수 있습니다. 쓰기 작업은 쓰기를 해당 `writeClient`에 전달합니다.
+* **사기 행위/이상 탐지** - 사용자 작업 및 계정 작업을 모니터링하는 응용 프로그램은 종종 전역으로 배포되며 여러 이벤트의 추적을 동시에 유지해야 합니다. 사용자에 대한 점수를 만들고 유지 관리하는 동안 다른 지리적 영역의 작업은 위험 메트릭 인라인을 유지하도록 점수를 동시에 업데이트해야 합니다. Azure Cosmos DB는 개발자가 응용 프로그램 수준에서 충돌 시나리오를 처리할 필요가 없도록 보장할 수 있습니다. 
 
-    public async Task CreateSubscriptionAsync(string userId, string category)
-    {
-        await this.writeClient.CreateDocumentAsync(this.contentCollection, new Subscriptions
-        {
-            UserId = userId,
-            SubscriptionFilter = category
-        });
-    }
+* **공동 작업** - 판매 상품 또는 사용되는 미디어 등과 같은 문서의 인기도에 따라 순위를 지정하는 응용 프로그램의 경우 지리적 영역의 인기도 추적은 특히 저작권 사용료를 지불해야 하거나 실시간 광고 결정을 만드는 경우에 복잡해질 수 있습니다. Azure Cosmos DB를 사용하여 실시간으로 전 세계 여러 지역에서 순위 지정, 정렬 및 보고를 통해 개발자는 쉽게 대기 시간을 손상시키지 않고 기능을 제공할 수 있습니다. 
 
-    public async Task WriteReviewAsync(string articleId, string userId, string reviewText, int rating)
-    {
-        await this.writeClient.CreateDocumentAsync(this.contentCollection, new Review
-        {
-            UserId = userId,
-            ArticleId = articleId,
-            ReviewText = reviewText,
-            Rating = rating
-        });
-    }
+* **측광** - Azure Cosmos DB 다중 마스터를 사용하여 사용량(예: API 호출, 사용되는 트랜잭션/초, 분) 계산 및 규제를 간단하게 전역적으로 구현할 수 있습니다. 기본 제공 충돌 해결은 실시간으로 계산 및 규제의 정확도를 보장합니다. 
 
-알림 및 리뷰 읽기의 경우 다음 코드 조각에 나와 있는 것처럼 두 지역 모두에서 읽고 결과를 조합해야 합니다.
+* **개인 설정** - 고객 포인트 수여와 같은 작업을 트리거하는 지리적으로 분산된 카운터를 유지 관리하거나 개인 설정된 사용자 세션 보기를 구현하든지 Azure Cosmos DB에서 제공하는 고가용성의 간소화된 지리적으로 분산된 계산을 통해 응용 프로그램은 간단하게 고성능을 제공할 수 있습니다. 
 
-    public async Task<IEnumerable<Notification>> ReadNotificationFeedAsync(string userId)
-    {
-        IDocumentQuery<Notification> writeAccountNotification = (
-            from notification in this.writeClient.CreateDocumentQuery<Notification>(this.contentCollection) 
-            where notification.UserId == userId 
-            select notification).AsDocumentQuery();
-        
-        IDocumentQuery<Notification> readAccountNotification = (
-            from notification in this.readClient.CreateDocumentQuery<Notification>(this.contentCollection) 
-            where notification.UserId == userId 
-            select notification).AsDocumentQuery();
+## <a name="conflict-resolution-with-multi-master"></a>다중 마스터를 사용하여 충돌 해결 
 
-        List<Notification> notifications = new List<Notification>();
+다중 마스터를 사용하면 동일한 레코드의 두 개(또는 그 이상)의 복제본이 두 개 이상의 서로 다른 지역에서 다른 작성자에 의해 동시에 업데이트될 수 있는 문제가 종종 있습니다. 동시 쓰기로 인해 동일한 레코드의 기본 제공 충돌 해결이 없는 두 가지 서로 다른 버전이 발생할 수 있으며, 응용 프로그램 자체는 이 불일치를 해결하기 위해 충돌 해결을 수행해야 합니다.  
 
-        while (writeAccountNotification.HasMoreResults || readAccountNotification.HasMoreResults)
-        {
-            IList<Task<FeedResponse<Notification>>> results = new List<Task<FeedResponse<Notification>>>();
+**예제** - 쇼핑 카트 응용 프로그램에 대한 지속성 저장소로 Azure Cosmos DB를 사용하고 이 응용 프로그램이 미국 동부 및 미국 서부의 두 지역으로 배포된다고 가정해봅시다.  거의 동시에 미국 동부의 재고 관리 프로세스가 릴리스 날짜가 연기된 공급자 알림에 대한 응답으로 동일한 사용자에 대해 다른 쇼핑 카트 항목(예: 새 전화기)의 유효성을 검사하는 동안 샌프란시스코의 사용자가 해당 쇼핑 카트에 항목(예: 책)을 추가합니다. T1 시점에서 두 지역의 쇼핑 카트 레코드는 다릅니다. 데이터베이스는 해당 복제 및 충돌 해결 메커니즘을 사용하여 이 일관성 문제를 해결하고 결국 두 버전의 쇼핑 카트 중 하나가 선택됩니다. 다중 마스터 데이터베이스에 가장 자주 적용되는 충돌 해결 추론을 사용하여(예: 마지막 쓰기가 적용됨) 사용자 또는 응용 프로그램은 어떤 버전이 선택될지 예측할 수 없습니다. 어떠한 경우에도 데이터가 손실되거나 예기치 않은 동작이 발생할 수 있습니다. 동부 지역 버전이 선택되는 경우 새 구매 항목(예: 책)에 대한 사용자의 선택은 손실되고, 서부 지역이 선택되는 경우 이전 선택 항목(예: 전화기)이 여전히 카트에 유지됩니다. 어느 쪽이든 정보가 손실됩니다. 마지막으로 T1과 T2 시간 간의 쇼핑 카트를 조사하는 다른 프로세스는 비결정적 동작을 표시합니다. 예를 들어 처리 웨어하우스를 선택하고 카트 배송 비용을 업데이트하는 백그라운드 프로세스는 카트의 최종 내용과 충돌하는 결과를 생성합니다. 프로세스가 서부 지역에서 실행되고 대안 1이 실현되는 경우 카트가 곧 하나의 항목, 책만을 갖게 될 수 있더라도 두 개의 항목에 대한 배송 비용을 계산합니다. 
 
-            if (writeAccountNotification.HasMoreResults)
-            {
-                results.Add(writeAccountNotification.ExecuteNextAsync<Notification>());
-            }
+Azure Cosmos DB는 데이터베이스 엔진 자체 내의 쓰기 충돌을 처리하기 위한 논리를 구현합니다. Azure Cosmos DB는 자동 충돌 해결에 대한 자동(CRDT - 충돌 없는 분산 데이터 형식), LWW(Last Write Wins) 및 사용자 지정(저장 프로시저)을 포함하는 여러 충돌 해결 모델을 제공하여 **포괄적이고 유연한 충돌 해결 지원**을 제공합니다. 충돌 해결 모델은 정확성과 일관성 보장을 제공하고 지역 장애 조치(failover) 및 지역간 쓰기 충돌에 대한 일관성, 가용성, 성능, 복제 대기 시간 및 이벤트의 복잡한 조합에 대해 신경 써야 하는 개발자의 부담을 제거합니다.  
 
-            if (readAccountNotification.HasMoreResults)
-            {
-                results.Add(readAccountNotification.ExecuteNextAsync<Notification>());
-            }
+  ![다중 마스터 충돌 해결](./media/multi-region-writers/multi-master-conflict-resolution-blade.png)
 
-            IList<FeedResponse<Notification>> notificationFeedResult = await Task.WhenAll(results);
+Azure Cosmos DB에서 제공하는 3가지 유형의 충돌 해결 모델이 있습니다. 충돌 해결 모델의 의미 체계는 다음과 같습니다. 
 
-            foreach (FeedResponse<Notification> feed in notificationFeedResult)
-            {
-                notifications.AddRange(feed);
-            }
-        }
-        return notifications;
-    }
+**자동** - 기본 충돌 해결 정책입니다. 이 정책을 선택하면 Azure Cosmos DB에서 자동으로 서버 쪽에서 충돌하는 업데이트를 해결하고 강력한 결과적 일관성을 보장하도록 합니다. 내부적으로 Azure Cosmos DB는 데이터베이스 엔진 내의 CRDT(충돌 없는 분산 데이터 형식)를 활용하여 자동 충돌 해결을 구현합니다.  
 
-    public async Task<IEnumerable<Review>> ReadReviewsAsync(string articleId)
-    {
-        IDocumentQuery<Review> writeAccountReviews = (
-            from review in this.writeClient.CreateDocumentQuery<Review>(this.contentCollection) 
-            where review.ArticleId == articleId 
-            select review).AsDocumentQuery();
-        
-        IDocumentQuery<Review> readAccountReviews = (
-            from review in this.readClient.CreateDocumentQuery<Review>(this.contentCollection) 
-            where review.ArticleId == articleId 
-            select review).AsDocumentQuery();
+**LWW(Last-Write-Wins)** - 이 정책을 선택하면 시스템 정의된 동기화된 타임스탬프 속성 또는 레코드의 충돌 버전에서 정의된 사용자 지정 속성에 따라 충돌을 해결할 수 있습니다. 충돌 해결은 서버 쪽에서 발생하며 최신 타임스탬프가 있는 버전이 승자로 선택됩니다.  
 
-        List<Review> reviews = new List<Review>();
-        
-        while (writeAccountReviews.HasMoreResults || readAccountReviews.HasMoreResults)
-        {
-            IList<Task<FeedResponse<Review>>> results = new List<Task<FeedResponse<Review>>>();
+**사용자 지정** - 저장 프로시저를 등록하여 응용 프로그램 정의된 충돌 해결 논리를 등록할 수 있습니다. 저장 프로시저는 서버 쪽의 데이터베이스 트랜잭션에서 업데이트 충돌이 검색될 때 호출됩니다. 옵션을 선택하지만 저장 프로시저를 등록하는 데 실패하는 경우(또는 저장 프로시저가 런타임 시 예외를 throw하는 경우) 충돌 피드를 통해 모든 충돌하는 버전에 액세스하고 개별적으로 문제를 해결할 수 있습니다.  
 
-            if (writeAccountReviews.HasMoreResults)
-            {
-                results.Add(writeAccountReviews.ExecuteNextAsync<Review>());
-            }
+## <a name="next-steps"></a>다음 단계  
 
-            if (readAccountReviews.HasMoreResults)
-            {
-                results.Add(readAccountReviews.ExecuteNextAsync<Review>());
-            }
+이 문서에서는 Azure Cosmos DB와 함께 전역으로 분산된 다중 마스터를 사용하는 방법을 배웠습니다. 다음으로 다음 리소스를 살펴봅니다. 
 
-            IList<FeedResponse<Review>> notificationFeedResult = await Task.WhenAll(results);
+* [Azure Cosmos DB에서 전역 배포를 지원하는 방법에 대해 알아보기](distribute-data-globally.md)  
 
-            foreach (FeedResponse<Review> feed in notificationFeedResult)
-            {
-                reviews.AddRange(feed);
-            }
-        }
+* [Azure Cosmos DB의 자동 장애 조치(failover)에 대해 알아보기](regional-failover.md)  
 
-        return reviews;
-    }
+* [Azure Cosmos DB를 통한 전역 일관성에 대해 알아보기](consistency-levels.md)  
 
-따라서 적절한 분할 키와 정적 계정 기반 분할을 선택하면 Azure Cosmos DB를 사용하여 다중 지역 로컬 쓰기 및 읽기를 구현할 수 있습니다.
-
-## <a id="NextSteps"></a>다음 단계
-이 문서에서는 콘텐츠 게시를 샘플 시나리오로 사용하여 전 세계에 분산된 다중 지역 읽기 쓰기 패턴을 Azure Cosmos DB와 함께 사용하는 방법을 설명했습니다.
-
-* Azure Cosmos DB에서 [전역 배포](distribute-data-globally.md)를 지원하는 방법 알아보기
-* [Azure Cosmos DB의 자동 및 수동 장애 조치(failover)](regional-failover.md) 알아보기
-* [Azure Cosmos DB를 통한 전역 일관성](consistency-levels.md) 알아보기
-* [Azure Cosmos DB - DocumentDB API](tutorial-global-distribution-documentdb.md)를 사용하여 여러 지역으로 개발
-* [Azure Cosmos DB - MongoDB API](tutorial-global-distribution-MongoDB.md)를 사용하여 여러 지역으로 개발
-* [Azure Cosmos DB - Table API](tutorial-global-distribution-table.md)를 사용하여 여러 지역으로 개발
-
+* Azure Cosmos DB - [SQL API](tutorial-global-distribution-sql-api.md), [MongoDB API](tutorial-global-distribution-mongodb.md) 또는 [Table API](tutorial-global-distribution-table.md)를 사용하여 여러 지역으로 개발  

@@ -1,30 +1,20 @@
 ---
-title: "Azure Analysis Services 자습서 단원 6: 측정값 만들기 | Microsoft Docs"
-description: "Azure Analysis Services 자습서 프로젝트에서 측정값을 만드는 방법을 설명합니다."
-services: analysis-services
-documentationcenter: 
+title: 'Azure Analysis Services 자습서 단원 6: 측정값 만들기 | Microsoft Docs'
+description: Azure Analysis Services 자습서 프로젝트에서 측정값을 만드는 방법을 설명합니다.
 author: minewiskan
-manager: erikre
-editor: 
-tags: 
-ms.assetid: 
+manager: kfile
 ms.service: analysis-services
-ms.devlang: NA
-ms.topic: get-started-article
-ms.tgt_pltfrm: NA
-ms.workload: na
-ms.date: 06/01/2017
+ms.topic: conceptual
+ms.date: 04/12/2018
 ms.author: owend
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 43aab8d52e854636f7ea2ff3aae50d7827735cc7
-ms.openlocfilehash: 90833fa9744eac298b0da82cd3d12f27cc237510
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/03/2017
-
+ms.reviewer: minewiskan
+ms.openlocfilehash: 31531abb5c2d2309317f1b88a1a794392b914f90
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-# <a name="lesson-6-create-measures"></a>단원 6: 측정값 만들기
-
-[!INCLUDE[analysis-services-appliesto-aas-sql2017-later](../../../includes/analysis-services-appliesto-aas-sql2017-later.md)]
+# <a name="create-measures"></a>측정값 만들기
 
 이 단원에서는 모델에 포함할 측정값을 만듭니다. 생성한 계산된 열과 마찬가지로, 측정값은 DAX 수식을 사용하여 만든 계산입니다. 그러나 계산된 열과 달리 측정값은 사용자가 선택한 *필터*를 기반으로 평가됩니다. 예를 들어 특정 열 또는 슬라이서가 피벗 테이블의 행 레이블 필드에 추가되었습니다. 그러면 필터의 각 셀에 대한 값이 적용된 측정값으로 계산됩니다. 측정값은 수치 데이터에 동적인 계산을 수행하기 위해 거의 모든 테이블 형식 모델에 포함하려는 강력하고 유연한 계산입니다. 자세한 내용은 [측정값](https://docs.microsoft.com/sql/analysis-services/tabular-models/measures-ssas-tabular)을 참조하세요.
   
@@ -53,7 +43,7 @@ ms.lasthandoff: 06/03/2017
     DaysCurrentQuarterToDate:=COUNTROWS( DATESQTD( 'DimDate'[Date])) 
     ```
   
-    왼쪽 위 셀에는 이제 측정값 이름인 **DaysCurrentQuarterToDate**와 결과인 **92**가 차례로 포함됩니다.
+    왼쪽 위 셀에는 이제 측정값 이름인 **DaysCurrentQuarterToDate**와 결과인 **92**가 차례로 포함됩니다. 사용자 필터가 적용되지 않았으므로 이 지점에서 결과는 관련이 없습니다.
     
       ![aas-lesson6-newmeasure](../tutorials/media/aas-lesson6-newmeasure.png) 
     
@@ -102,7 +92,7 @@ ms.lasthandoff: 06/03/2017
     |TaxAmt|InternetTotalTaxAmt|합계|=SUM([TaxAmt])|  
     |Freight|InternetTotalFreight|합계|=SUM([Freight])|  
   
-2.  측정값 표에서 빈 셀을 클릭하고 수식 입력줄을 사용하여 다음 측정값을 순서대로 만들고 이름을 지정합니다.  
+2.  측정값 표에서 빈 셀을 클릭하고 수식 입력줄을 사용하여 다음 사용자 지정 측정값을 순서대로 만듭니다.  
   
       ```
       InternetPreviousQuarterMargin:=CALCULATE([InternetTotalMargin],PREVIOUSQUARTER('DimDate'[Date]))
@@ -134,4 +124,3 @@ FactInternetSales 테이블에 대해 만든 측정값을 사용하여 사용자
 [단원 7: 핵심 성과 지표 만들기](../tutorials/aas-lesson-7-create-key-performance-indicators.md)  
 
   
-

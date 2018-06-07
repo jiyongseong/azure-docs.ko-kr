@@ -1,11 +1,11 @@
 ---
-title: "Azure Cloud Services 및 ASP.NET 시작 | Microsoft 문서"
-description: "ASP.NET MVC 및 Azure를 사용하여 다중 계층 앱을 만드는 방법을 알아보세요. 이 앱은 웹 역할 및 작업자 역할을 사용하여 클라우드 서비스에서 실행되며 Entity Framework, SQL 데이터베이스 및 Azure 저장소 큐와 Blob를 사용합니다."
+title: Azure Cloud Services 및 ASP.NET 시작 | Microsoft 문서
+description: ASP.NET MVC 및 Azure를 사용하여 다중 계층 앱을 만드는 방법을 알아보세요. 이 앱은 웹 역할 및 작업자 역할을 사용하여 클라우드 서비스에서 실행되며 Entity Framework, SQL Database 및 Azure Storage 큐와 Blob를 사용합니다.
 services: cloud-services, storage
 documentationcenter: .net
 author: Thraka
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: d7aa440d-af4a-4f80-b804-cc46178df4f9
 ms.service: cloud-services
 ms.workload: tbd
@@ -14,15 +14,13 @@ ms.devlang: dotnet
 ms.topic: hero-article
 ms.date: 05/15/2017
 ms.author: adegeo
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 8f987d079b8658d591994ce678f4a09239270181
-ms.openlocfilehash: 3c7f97b72f3813abe2357ae3202eaba285583bb8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/18/2017
-
-
+ms.openlocfilehash: 16d35a6b36f4dd85db430e05abdff898affbfd67
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-# <a name="get-started-with-azure-cloud-services-and-aspnet"></a>Azure 클라우드 서비스 및 ASP.NET 시작
+# <a name="get-started-with-azure-cloud-services-and-aspnet"></a>Azure Cloud Services 및 ASP.NET 시작
 
 ## <a name="overview"></a>개요
 이 자습서에서는 ASP.NET MVC 프런트 엔드를 사용하여 다중 계층 .NET 응용 프로그램을 만들어 [Azure 클라우드 서비스](cloud-services-choose-me.md)에 배포하는 방법을 보여 줍니다. 이 응용 프로그램은 [Azure SQL Database](http://msdn.microsoft.com/library/azure/ee336279), [Azure Blob service](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/unstructured-blob-storage)(영문) 및 [Azure 큐 서비스](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/queue-centric-work-pattern)를 사용합니다. MSDN 코드 갤러리에서 [Visual Studio 프로젝트를 다운로드](http://code.msdn.microsoft.com/Simple-Azure-Cloud-Service-e01df2e4) 할 수 있습니다.
@@ -36,15 +34,15 @@ ms.lasthandoff: 05/18/2017
 
 이 응용 프로그램에서는 [큐 중심 작업 패턴](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/queue-centric-work-pattern) 을 사용하여 미리 보기를 만드는 CPU 사용량이 많은 작업을 백 엔드 프로세스에 오프로드합니다.
 
-## <a name="alternative-architecture-websites-and-webjobs"></a>대체 아키텍처: 웹 사이트 및 WebJobs
-이 자습서에서는 Azure 클라우드 서비스에서 프런트 엔드 및 백 엔드를 실행하는 방법을 보여 줍니다. 대안은 [Azure 웹 사이트](/services/web-sites/)(영문)에서 프런트 엔드를 실행하고 백 엔드에 [WebJobs](http://go.microsoft.com/fwlink/?LinkId=390226)(영문) 기능(현재 미리 보기에서 제공)을 사용하는 것입니다. WebJobs를 사용하는 자습서는 [Azure WebJobs SDK 시작](../app-service-web/websites-dotnet-webjobs-sdk-get-started.md)(영문)을 참조하세요. 시나리오에 가장 적합한 서비스를 선택하는 방법에 대한 자세한 내용은 [Azure 웹 사이트, 클라우드 서비스 및 가상 컴퓨터 비교](../app-service-web/choose-web-site-cloud-service-vm.md)(영문)를 참조하세요.
+## <a name="alternative-architecture-web-apps-and-webjobs"></a>대체 아키텍처: Web Apps 및 WebJobs
+이 자습서에서는 Azure 클라우드 서비스에서 프런트 엔드 및 백 엔드를 실행하는 방법을 보여 줍니다. 대안은 [Azure Web Apps](/azure/app-service/)에서 프런트 엔드를 실행하고 백 엔드에 [WebJobs](http://go.microsoft.com/fwlink/?LinkId=390226) 기능을 사용하는 것입니다. WebJobs를 사용하는 자습서는 [Azure WebJobs SDK 시작](https://github.com/Azure/azure-webjobs-sdk/wiki)(영문)을 참조하세요. 시나리오에 가장 적합한 서비스를 선택하는 방법에 대한 자세한 내용은 [Azure Websites, Cloud Services 및 가상 머신 비교](../app-service/choose-web-site-cloud-service-vm.md)(영문)를 참조하세요.
 
 ## <a name="what-youll-learn"></a>학습할 내용
 * Azure SDK를 설치하여 사용자 컴퓨터에서 Azure를 개발할 수 있도록 하는 방법
 * ASP.NET MVC 웹 역할 및 두 개의 작업자 역할을 사용하여 Visual Studio 클라우드 서비스 프로젝트를 만드는 방법
 * Azure 저장소 에뮬레이터를 사용하여 클라우드 서비스 프로젝트를 로컬에서 테스트하는 방법
 * Azure 클라우드 서비스에 클라우드 프로젝트를 게시하고 Azure 저장소 계정을 사용하여 테스트하는 방법
-* 파일을 업로드하고 Azure Blob 서비스에 저장하는 방법
+* 파일을 업로드하고 Azure Blob service에 저장하는 방법
 * 계층 간 통신에 Azure 큐 서비스를 사용하는 방법
 
 ## <a name="prerequisites"></a>필수 조건
@@ -109,7 +107,7 @@ Azure 구독 없이도 로컬에서 앱을 실행할 수 있지만 응용 프로
 
 * Azure 클라우드 서비스를 만듭니다.
 * Azure SQL 데이터베이스를 만듭니다.
-* Azure 저장소 계정을 만듭니다.
+* Azure 저장소 계정 만들기
 * Azure에서 실행될 때 Azure SQL 데이터베이스를 사용하도록 솔루션을 구성합니다.
 * Azure에서 실행될 때 Azure 저장소 계정을 사용하도록 솔루션을 구성합니다.
 * Azure 클라우드 서비스에 프로젝트를 배포합니다.
@@ -118,7 +116,7 @@ Azure 구독 없이도 로컬에서 앱을 실행할 수 있지만 응용 프로
 Azure 클라우드 서비스는 응용 프로그램이 실행되는 환경입니다.
 
 1. 브라우저에서 [Azure Portal](https://portal.azure.com)을 엽니다.
-2. **새로 만들기 > Compute > Cloud Service**를 클릭합니다.
+2. **리소스 만들기 > Compute > 클라우드 서비스**를 클릭합니다.
 
 3. DNS 이름 입력 상자에 클라우드 서비스의 URL 접두사를 입력합니다.
 
@@ -137,7 +135,7 @@ Azure 클라우드 서비스는 응용 프로그램이 실행되는 환경입니
 ### <a name="create-an-azure-sql-database"></a>Azure SQL 데이터베이스 만들기
 앱이 클라우드에서 실행될 때는 클라우드 기반 데이터베이스를 사용합니다.
 
-1. [Azure Portal](https://portal.azure.com)에서 **새로 만들기 > 데이터베이스 > SQL Database**를 클릭합니다.
+1. [Azure Portal](https://portal.azure.com)에서 **리소스 만들기 > 데이터베이스 > SQL Database**를 클릭합니다.
 2. **데이터베이스 이름** 상자에 *contosoads*를 입력합니다.
 3. **리소스 그룹**에서 **기존 그룹 사용**을 클릭하고 클라우드 서비스에 사용된 리소스 그룹을 선택합니다.
 4. 다음 이미지에서 **서버 - 필수 설정 구성** 및 **새 서버 만들기**를 클릭합니다.
@@ -164,7 +162,7 @@ Azure 저장소 계정은 큐 및 Blob 데이터를 클라우드에 저장하기
 
 실제 응용 프로그램에서는 일반적으로 응용 프로그램 데이터와 로깅 데이터를 위한 별도의 계정 및 테스트 데이터와 프로덕션 데이터를 위한 별도의 계정을 만듭니다. 이 자습서에서는 하나의 계정만 사용합니다.
 
-1. [Azure Portal](https://portal.azure.com)에서 **새로 만들기 > Storage > 저장소 계정 -Blob, 파일, 테이블, 큐**를 클릭합니다.
+1. [Azure Portal](https://portal.azure.com)에서 **리소스 만들기 > Storage > Storage 계정 - BLOB, 파일, 테이블, 큐**를 클릭합니다.
 2. **이름** 상자에 URL 접두사를 입력합니다.
 
     이 접두사와 상자 아래에 표시되는 텍스트가 저장소 계정의 고유 URL이 됩니다. 입력한 접두사를 이미 다른 사람이 사용하는 경우 다른 접두사를 선택해야 합니다.
@@ -172,7 +170,7 @@ Azure 저장소 계정은 큐 및 Blob 데이터를 클라우드에 저장하기
 
 4. **복제** 드롭다운 목록을 **로컬 중복 저장소**로 설정합니다.
 
-    저장소 계정에 대해 지역에서 복제를 사용하는 경우 저장된 콘텐츠가 보조 데이터 센터에 복제되어 기본 위치에서 대규모 재해가 발생하면 장애 조치(Failover)가 가능해집니다. 지역에서 복제는 추가 비용을 발생시킬 수 있습니다. 테스트 및 개발 계정의 경우 일반적으로 지역에서 복제 비용을 지불하지 않는 것이 좋습니다. 자세한 내용은 [저장소 계정 만들기, 관리 또는 삭제](../storage/storage-create-storage-account.md)를 참조하세요
+    저장소 계정에 대해 지역에서 복제를 사용하는 경우 저장된 콘텐츠가 보조 데이터 센터에 복제되어 기본 위치에서 대규모 재해가 발생하면 장애 조치(Failover)가 가능해집니다. 지역에서 복제는 추가 비용을 발생시킬 수 있습니다. 테스트 및 개발 계정의 경우 일반적으로 지역에서 복제 비용을 지불하지 않는 것이 좋습니다. 자세한 내용은 [저장소 계정 만들기, 관리 또는 삭제](../storage/common/storage-create-storage-account.md)를 참조하세요
 
 5. **리소스 그룹**에서 **기존 그룹 사용**을 클릭하고 클라우드 서비스에 사용된 리소스 그룹을 선택합니다.
 6. **위치** 드롭다운 목록을 클라우드 서비스에 선택한 것과 동일한 지역으로 설정합니다.
@@ -236,10 +234,10 @@ Azure 저장소 계정은 큐 및 Blob 데이터를 클라우드에 저장하기
 2. **설정** 탭을 클릭합니다. **서비스 구성** 드롭다운 상자에서 **클라우드**를 선택합니다.
 
     ![클라우드 구성](./media/cloud-services-dotnet-get-started/sccloud.png)
-3. **StorageConnectionString** 항목을 선택하면 줄 오른쪽 끝에 줄임표(**...**) 단추가 표시됩니다. 줄임표 단추를 클릭하여 **저장소 계정 연결 문자열 만들기** 대화 상자를 엽니다.
+3. **StorageConnectionString** 항목을 선택하면 줄 오른쪽 끝에 줄임표(**...**) 단추가 표시됩니다. 줄임표 단추를 클릭하여 **Storage 계정 연결 문자열 만들기** 대화 상자를 엽니다.
 
     ![열린 연결 문자열 만들기 상자](./media/cloud-services-dotnet-get-started/opencscreate.png)
-4. **저장소 연결 문자열 만들기** 대화 상자에서 **내 구독**을 클릭하고, 앞에서 만든 저장소 계정을 선택한 다음 **확인**을 클릭합니다. 아직 로그인하지 않은 경우 Azure 계정 자격 증명을 요구하는 메시지가 나타납니다.
+4. **저장소 연결 문자열 만들기** 대화 상자에서 **내 구독**을 클릭하고, 앞에서 만든 Storage 계정을 선택한 다음 **확인**을 클릭합니다. 아직 로그인하지 않은 경우 Azure 계정 자격 증명을 요구하는 메시지가 나타납니다.
 
     ![저장소 연결 문자열 만들기](./media/cloud-services-dotnet-get-started/createstoragecs.png)
 5. 변경 내용을 저장합니다.
@@ -279,7 +277,7 @@ Visual Studio UI를 사용하여 구성한 역할 환경 설정은 ContosoAdsClo
 </Role>
 ```
 
-`<Instances>` 설정은 Azure가 작업자 역할 코드를 실행할 가상 컴퓨터의 수를 지정합니다. [다음 단계](#next-steps) 섹션에는 클라우드 서비스 규모 확장에 대한 자세한 정보로 연결되는 링크가 있습니다.
+ph x="1" /> 설정은 Azure가 작업자 역할 코드를 실행할 가상 컴퓨터의 수를 지정합니다. [다음 단계](#next-steps) 섹션에는 클라우드 서비스 규모 확장에 대한 자세한 정보로 연결되는 링크가 있습니다.
 
 ### <a name="deploy-the-project-to-azure"></a>Azure에 프로젝트 배포
 1. **솔루션 탐색기**에서 **ContosoAdsCloudService** 클라우드 프로젝트를 마우스 오른쪽 단추로 클릭한 후 **게시**를 선택합니다.
@@ -307,7 +305,7 @@ Visual Studio UI를 사용하여 구성한 역할 환경 설정은 ContosoAdsClo
 7. 이제 응용 프로그램을 로컬에서 실행할 때처럼 일부 광고를 만들고, 보고, 편집하는 방법으로 앱을 테스트할 수 있습니다.
 
 > [!NOTE]
-> 테스트를 완료하면 클라우드 서비스를 삭제하거나 중지하세요. 클라우드 서비스를 사용하지 않더라도 가상 컴퓨터 리소스가 예약되어 있기 때문에 요금이 발생합니다. 또한 실행 중인 채로 두는 경우에는 누군가가 URL을 발견하면 광고를 만들고 볼 수 있습니다. [Azure Portal](https://portal.azure.com)에서 클라우드 서비스의 **개요** 탭으로 이동한 다음 페이지 맨 위에 있는 **삭제** 단추를 클릭합니다. 임시로 다른 사람이 사이트에 액세스하지 못하도록 만들려면 대신 **중지** 를 클릭합니다. 이 경우에는 요금이 계속해서 발생합니다. 더 이상 필요 없는 경우 비슷한 절차에 따라 SQL 데이터베이스 및 저장소 계정을 삭제할 수 있습니다.
+> 테스트를 완료하면 클라우드 서비스를 삭제하거나 중지하세요. 클라우드 서비스를 사용하지 않더라도 가상 머신 리소스가 예약되어 있기 때문에 요금이 발생합니다. 또한 실행 중인 채로 두는 경우에는 누군가가 URL을 발견하면 광고를 만들고 볼 수 있습니다. [Azure Portal](https://portal.azure.com)에서 클라우드 서비스의 **개요** 탭으로 이동한 다음 페이지 맨 위에 있는 **삭제** 단추를 클릭합니다. 임시로 다른 사람이 사이트에 액세스하지 못하도록 만들려면 대신 **중지** 를 클릭합니다. 이 경우에는 요금이 계속해서 발생합니다. 더 이상 필요 없는 경우 비슷한 절차에 따라 SQL 데이터베이스 및 저장소 계정을 삭제할 수 있습니다.
 >
 >
 
@@ -326,7 +324,7 @@ Contoso Ads 응용 프로그램을 만드는 데는 다음 단계가 필요합�
 
 ### <a name="create-a-cloud-service-visual-studio-solution"></a>클라우드 서비스 Visual Studio 솔루션 만들기
 1. Visual Studio의 **새 프로젝트** from the **새 프로젝트** 를 선택합니다.
-2. **새 프로젝트** 대화 상자의 왼쪽 창에서 **Visual C#**을 확장하고 **클라우드** 템플릿을 선택한 후 **Azure 클라우드 서비스** 템플릿을 선택합니다.
+2. **새 프로젝트** 대화 상자의 왼쪽 창에서 **Visual C#** 을 확장하고 **클라우드** 템플릿을 선택한 후 **Azure 클라우드 서비스** 템플릿을 선택합니다.
 3. 프로젝트 및 솔루션의 이름을 ContosoAdsCloudService로 지정한 다음 **확인**을 클릭합니다.
 
     ![새 프로젝트](./media/cloud-services-dotnet-get-started/newproject.png)
@@ -341,7 +339,7 @@ Contoso Ads 응용 프로그램을 만드는 데는 다음 단계가 필요합�
     ![인증 없음](./media/cloud-services-dotnet-get-started/noauth.png)
 7. **새 ASP.NET 프로젝트** 대화 상자에서 **확인**을 클릭합니다.
 8. **솔루션 탐색기**에서 솔루션(프로젝트 중 하나가 아님)을 마우스 오른쪽 단추로 클릭하고 **추가 - 새 프로젝트**를 선택합니다.
-9. **새 프로젝트 추가** 대화 상자의 왼쪽 창에서 **Visual C#**에 있는 **Windows**을 선택한 다음 **클래스 라이브러리** 템플릿을 클릭합니다.  
+9. **새 프로젝트 추가** 대화 상자의 왼쪽 창에서 **Visual C#** 에 있는 **Windows**을 선택한 다음 **클래스 라이브러리** 템플릿을 클릭합니다.  
 10. 프로젝트의 이름을 *ContosoAdsCommon*으로 지정한 다음 **확인**을 클릭합니다.
 
     Entity Framework 컨텍스트 및 웹 역할 프로젝트와 작업자 역할 프로젝트의 데이터 모델을 참조해야 합니다. 또는 웹 역할 프로젝트에서 EF 관련 클래스를 정의하고 작업자 역할 프로젝트에서 이 프로젝트를 참조할 수 있습니다. 하지만 대안에서는 작업자 역할 프로젝트에는 필요 없는 웹 어셈블리 참조가 포함됩니다.
@@ -768,17 +766,15 @@ Contoso Ads 응용 프로그램은 시작 자습서용으로 의도적으로 단
 다음은 더 실질적인 코딩 방식을 보여 주는 몇 가지 클라우드 서비스 샘플 응용 프로그램입니다. 복잡성이 낮은 것부터 높은 것 순서로 나열되었습니다.
 
 * [PhluffyFotos](http://code.msdn.microsoft.com/PhluffyFotos-Sample-7ecffd31)(영문). 개념이 Contoso Ads와 비슷하지만, 더 많은 기능과 더 실질적인 코딩 방식을 구현합니다.
-* [테이블, 큐 및 Blob이 포함된 Azure 클라우드 서비스 다중 계층 응용 프로그램](http://code.msdn.microsoft.com/windowsazure/Windows-Azure-Multi-Tier-eadceb36)(영문). Azure 저장소 테이블 뿐만 아니라 Blob 및 큐를 소개합니다. .NET용 Azure SDK의 이전 버전에 기반하여 현재 버전으로 작업하려면 약간 수정해야 합니다.
-* [Microsoft Azure의 클라우드 서비스 기본 사항(영문)](http://code.msdn.microsoft.com/Cloud-Service-Fundamentals-4ca72649). 다양한 모범 사례를 보여 주는 포괄적인 샘플이며 Microsoft 패턴 및 작업 방식 그룹에서 제작했습니다.
+* [테이블, 큐 및 Blob이 포함된 Azure 클라우드 서비스 다중 계층 응용 프로그램](http://code.msdn.microsoft.com/windowsazure/Windows-Azure-Multi-Tier-eadceb36)(영문). Azure Storage 테이블 뿐만 아니라 Blob 및 큐를 소개합니다. .NET용 Azure SDK의 이전 버전에 기반하여 현재 버전으로 작업하려면 약간 수정해야 합니다.
 
 클라우드용 개발 관련 일반 정보는 [Azure에서 실제 클라우드 앱 빌드(영문)](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/introduction)를 참조하세요.
 
-Azure 저장소 모범 사례 및 패턴에 대한 비디오 소개는 [Microsoft Azure 저장소 – 새로운 기능, 모범 사례 및 패턴](http://channel9.msdn.com/Events/Build/2014/3-628)(영문)을 참조하세요.
+Azure Storage 모범 사례 및 패턴에 대한 비디오 소개는 [Microsoft Azure Storage – 새로운 기능, 모범 사례 및 패턴](http://channel9.msdn.com/Events/Build/2014/3-628)(영문)을 참조하세요.
 
 자세한 내용은 다음 리소스를 참조하세요.
 
-* [Azure 클라우드 서비스 1 부:](http://justazure.com/microsoft-azure-cloud-services-part-1-introduction/)
-* [클라우드 서비스를 관리하는 방법](cloud-services-how-to-manage.md)
-* [Azure 저장소](/documentation/services/storage/)
+* [Azure Cloud Services 1부: 소개](http://justazure.com/microsoft-azure-cloud-services-part-1-introduction/)
+* [Cloud Services를 관리하는 방법](cloud-services-how-to-manage-portal.md)
+* [Azure Storage](https://docs.microsoft.com/azure/storage/)
 * [클라우드 서비스 공급자 선택 방법](https://azure.microsoft.com/overview/choosing-a-cloud-service-provider/)
-

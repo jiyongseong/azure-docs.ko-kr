@@ -1,6 +1,6 @@
 ---
-title: "Service Fabric의 신뢰할 수 있는 서비스 프로그래밍 모델 개요 | Microsoft Docs"
-description: "서비스 패브릭의 신뢰할 수 있는 서비스 프로그래밍 모델에 대해 알아보고 사용자 고유의 서비스 작성을 시작합니다."
+title: Service Fabric의 신뢰할 수 있는 서비스 프로그래밍 모델 개요 | Microsoft Docs
+description: 서비스 패브릭의 신뢰할 수 있는 서비스 프로그래밍 모델에 대해 알아보고 사용자 고유의 서비스 작성을 시작합니다.
 services: Service-Fabric
 documentationcenter: .net
 author: masnider
@@ -9,17 +9,16 @@ editor: vturecek; mani-ramaswamy
 ms.assetid: 0c88a533-73f8-4ae1-a939-67d17456ac06
 ms.service: Service-Fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 7/27/2017
-ms.author: masnider;
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 538f282b28e5f43f43bf6ef28af20a4d8daea369
-ms.openlocfilehash: 6b1627ee9c55ecb58bdb1263eb49458caab99322
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/07/2017
-
+ms.date: 3/9/2018
+ms.author: masnider
+ms.openlocfilehash: 474cc78a4ceb872742ca7eb10837eeb89dcc1bdb
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="reliable-services-overview"></a>신뢰할 수 있는 서비스 개요
 Azure 서비스 패브릭은 상태 비저장 및 상태 저장 신뢰할 수 있는 서비스의 작성과 관리를 단순화합니다. 이 항목은 다음에 대해 설명합니다.
@@ -35,7 +34,7 @@ Azure 서비스 패브릭은 상태 비저장 및 상태 저장 신뢰할 수 �
 ## <a name="what-are-reliable-services"></a>신뢰할 수 있는 서비스는 무엇입니까?
 Reliable Services는 단순하고 강력한 최고 수준의 프로그래밍 모델을 제공하여 응용 프로그램에 중요한 내용을 나타낼 수 있도록 합니다. 신뢰할 수 있는 서비스 프로그래밍 모델은 다음을 제공합니다.
 
-* Service Fabric 프로그래밍 API의 나머지 부분에 액세스합니다. [게스트 실행 파일](service-fabric-deploy-existing-app.md)로 모델링된 Service Fabric 서비스와는 달리 Reliable Services는 Service Fabric API의 나머지 부분을 직접 사용하게 됩니다. 그러면 서비스에서 다음을 수행할 수 있습니다.
+* Service Fabric 프로그래밍 API의 나머지 부분에 액세스합니다. [게스트 실행 파일](service-fabric-guest-executables-introduction.md)로 모델링된 Service Fabric 서비스와는 달리 Reliable Services는 Service Fabric API의 나머지 부분을 직접 사용하게 됩니다. 그러면 서비스에서 다음을 수행할 수 있습니다.
   * 시스템 쿼리
   * 클러스터의 엔터티에 대한 상태 보고
   * 구성 및 코드 변경 내용에 대한 알림 수신
@@ -46,7 +45,7 @@ Reliable Services는 단순하고 강력한 최고 수준의 프로그래밍 모
 * 플러그형 통신 모델. [Web API](service-fabric-reliable-services-communication-webapi.md), WebSockets, 사용자 지정 TCP 프로토콜 또는 다른 프로그램과 함께 HTTP와 같은 원하는 전송 프로토콜을 사용합니다. 신뢰할 수 있는 서비스는 훌륭한 기본 옵션을 제공하거나 직접 만들 수 있게 지원합니다.
 * 상태 저장 서비스의 경우 Reliable Services 프로그래밍 모델을 통해 [신뢰할 수 있는 컬렉션](service-fabric-reliable-services-reliable-collections.md)을 사용하여 일관되고 안정적으로 서비스 내에 상태를 바로 저장할 수 있습니다. 신뢰할 수 있는 컬렉션은 C# 컬렉션을 사용해본 적이 있는 사람에게 친숙한 고가용성인 신뢰할 수 있는 컬렉션 클래스의 간단한 집합입니다. 일반적으로 서비스는 신뢰할 수 있는 상태 관리를 위한 외부 시스템이 필요합니다. 신뢰할 수 있는 컬렉션을 사용하면 고가용성 외부 저장소에 기대하게 되는 것과 동일한 고가용성 및 안정성으로 컴퓨터 옆에 상태를 저장할 수 있습니다. 작동하는 데 필요한 계산 및 상태를 공동 배치하기 때문에 이 모델도 대기 시간을 개선합니다.
 
-Reliable Services의 개요는 다음 Microsoft Virtual Academy 비디오를 시청하세요. <center>
+Reliable Services 개요는 다음 Microsoft Virtual Academy 비디오를 시청하세요. <center>
 <a target="_blank" href="https://mva.microsoft.com/en-US/training-courses/building-microservices-applications-on-azure-service-fabric-16747?l=HhD9566yC_4106218965">
 <img src="./media/service-fabric-reliable-services-introduction/ReliableServicesVid.png" WIDTH="360" HEIGHT="244" />
 </a>
@@ -89,10 +88,6 @@ Reliable Services의 개요는 다음 Microsoft Virtual Academy 비디오를 시
 
 오늘날 대부분의 서비스는 외부에 상태를 저장합니다. 외부 저장소는 해당 상태에 대한 안정성, 가용성, 확장성 및 일관성을 제공하기 때문입니다. Service Fabric에서 서비스는 해당 상태를 외부적으로 저장할 필요가 없습니다. Service Fabric은 서비스 코드와 서비스 상태 모두에 대한 이러한 요구 사항을 처리합니다.
 
-> [!NOTE]
-> 아직 Linux에서는 상태 저장 Reliable Services가 지원되지 않습니다(C# 또는 Java의 경우).
->
-
 이미지를 처리하는 서비스를 작성하려는 경우를 가정하겠습니다. 이를 위해 서비스는 이미지 및 일련의 변환을 사용하여 해당 이미지에서 수행합니다. 이 서비스는 `ConvertImage(Image i, IList<Conversion> conversions)`와 같은 API를 노출하는 통신 수신기(WebAPI라고 가정함)를 반환합니다. 요청을 받으면 서비스는 `IReliableQueue`에 저장하고 요청을 추적할 수 있도록 클라이언트에 일부 ID를 반환합니다.
 
 이 서비스에서는 `RunAsync()`가 더 복잡해질 수 있습니다. 서비스에는 `IReliableQueue`에서 요청을 가져오는 해당 `RunAsync()` 내에 루프가 있어서 요청된 변환을 수행합니다. 결과는 `IReliableDictionary`에 저장되므로 클라이언트가 다시 돌아오면 변환된 이미지를 가져올 수 있습니다. 어떤 오류가 발생해도 이미지가 손실되지 않도록 하기 위해 이 신뢰할 수 있는 서비스는 큐에서 요청을 가져오고, 변환을 수행하고, 단일 트랜잭션에 모든 결과를 저장합니다. 이 경우 변환이 완료되면 메시지는 큐 및 결과 사전에 저장된 결과에서만 제거됩니다. 또는 서비스가 큐에서 이미지를 제거하고 즉시 원격 저장소에 저장할 수 있습니다. 그러면 서비스에서 관리해야 하는 상태의 양을 감소시키지만 서비스가 필요한 메타데이터를 유지하여 원격 저장소를 관리해야 하기 때문에 복잡성을 증가시킵니다. 두 가지 방법 모두 중간에 실패했다면 처리되기를 대기하는 큐에 요청이 남게 됩니다.
@@ -116,6 +111,5 @@ Reliable Services의 개요는 다음 Microsoft Virtual Academy 비디오를 시
 
 ## <a name="next-steps"></a>다음 단계
 * [Reliable Services 빠른 시작](service-fabric-reliable-services-quick-start.md)
-* [신뢰할 수 있는 서비스 고급 사용법](service-fabric-reliable-services-advanced-usage.md)
+* [신뢰할 수 있는 컬렉션](service-fabric-reliable-services-reliable-collections.md)
 * [신뢰할 수 있는 행위자 프로그래밍 모델](service-fabric-reliable-actors-introduction.md)
-

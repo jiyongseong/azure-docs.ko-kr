@@ -12,16 +12,14 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: dotnet
 ms.topic: article
-ms.date: 07/05/2017
+ms.date: 02/05/2018
 ms.author: sethm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: b1d56fcfb472e5eae9d2f01a820f72f8eab9ef08
-ms.openlocfilehash: 384066affe46bfd2917a3a14e4cfa7d2fc8a25f1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
+ms.openlocfilehash: 7946958bec8b2f444155b5a9701f1f7401fe4f3c
+ms.sourcegitcommit: 059dae3d8a0e716adc95ad2296843a45745a415d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/09/2018
 ---
-
 # <a name="service-bus-management-libraries"></a>Service Bus 관리 라이브러리
 
 Azure Service Bus 관리 라이브러리는 Service Bus 네임스페이스 및 엔터티를 동적으로 프로비전할 수 있습니다. 이를 통해 복잡한 배포 및 메시지 시나리오가 가능하며, 어떤 엔터티를 프로비전할 것인지 프로그래밍 방식으로 결정할 수 있습니다. 이러한 라이브러리는 현재 .NET에서 사용할 수 있습니다.
@@ -35,7 +33,7 @@ Azure Service Bus 관리 라이브러리는 Service Bus 네임스페이스 및 �
 
 ## <a name="prerequisites"></a>필수 조건
 
-Service Bus 관리 라이브러리 사용을 시작하려면 AAD(Azure Active Directory) 서비스로 인증해야 합니다. AAD를 사용하려면 Azure 리소스에 대한 액세스를 제공하는 서비스 주체로 인증해야 합니다. 서비스 주체 만들기에 대한 자세한 내용은 다음 문서 중 하나를 참조하세요.  
+Service Bus 관리 라이브러리 사용을 시작하려면 Azure AD(Azure Active Directory) 서비스로 인증해야 합니다. Azure AD를 사용하려면 Azure 리소스에 대한 액세스를 제공하는 서비스 주체로 인증해야 합니다. 서비스 주체 만들기에 대한 자세한 내용은 다음 문서 중 하나를 참조하세요.  
 
 * [Azure Portal을 사용하여 리소스에 액세스할 수 있는 Active Directory 응용 프로그램 및 서비스 주체 만들기](/azure/azure-resource-manager/resource-group-create-service-principal-portal)
 * [Azure PowerShell을 사용하여 리소스에 액세스하는 서비스 주체 만들기](/azure/azure-resource-manager/resource-group-authenticate-service-principal)
@@ -47,14 +45,13 @@ Service Bus 관리 라이브러리 사용을 시작하려면 AAD(Azure Active Di
 
 Service Bus 리소스를 조작하는 패턴은 일반 프로토콜을 따릅니다.
 
-1. **Microsoft.IdentityModel.Clients.ActiveDirectory** 라이브러리를 사용하여 Azure Active Directory에서 토큰을 가져옵니다.
+1. **Microsoft.IdentityModel.Clients.ActiveDirectory** 라이브러리를 사용하여 Azure AD에서 토큰을 가져옵니다.
    ```csharp
    var context = new AuthenticationContext($"https://login.microsoftonline.com/{tenantId}");
 
    var result = await context.AcquireTokenAsync("https://management.core.windows.net/", new ClientCredential(clientId, clientSecret));
    ```
-
-1. `ServiceBusManagementClient` 개체를 만듭니다.
+2. `ServiceBusManagementClient` 개체를 만듭니다.
 
    ```csharp
    var creds = new TokenCredentials(token);
@@ -63,8 +60,7 @@ Service Bus 리소스를 조작하는 패턴은 일반 프로토콜을 따릅니
        SubscriptionId = SettingsCache["SubscriptionId"]
    };
    ```
-
-1. `CreateOrUpdate` 매개 변수를 지정된 값으로 설정합니다.
+3. `CreateOrUpdate` 매개 변수를 지정된 값으로 설정합니다.
 
    ```csharp
    var queueParams = new QueueCreateOrUpdateParameters()
@@ -73,14 +69,13 @@ Service Bus 리소스를 조작하는 패턴은 일반 프로토콜을 따릅니
        EnablePartitioning = true
    };
    ```
-
-1. 호출을 실행합니다.
+4. 호출을 실행합니다.
 
    ```csharp
    await sbClient.Queues.CreateOrUpdateAsync(resourceGroupName, namespaceName, QueueName, queueParams);
    ```
 
 ## <a name="next-steps"></a>다음 단계
+
 * [.NET 관리 샘플](https://github.com/Azure-Samples/service-bus-dotnet-management/)
 * [Microsoft.Azure.Management.ServiceBus API 참조](/dotnet/api/Microsoft.Azure.Management.ServiceBus)
-

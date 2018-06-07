@@ -1,8 +1,8 @@
 ---
-title: "PowerShell을 사용한 Azure 솔루션 관리 | Microsoft Docs"
-description: "Azure PowerShell 및 Resource Manager를 사용하여 리소스를 관리합니다."
+title: PowerShell을 사용한 Azure 솔루션 관리 | Microsoft Docs
+description: Azure PowerShell 및 Resource Manager를 사용하여 리소스를 관리합니다.
 services: azure-resource-manager
-documentationcenter: 
+documentationcenter: ''
 author: tfitzmac
 manager: timlt
 editor: tysonn
@@ -11,250 +11,215 @@ ms.service: azure-resource-manager
 ms.workload: multiple
 ms.tgt_pltfrm: powershell
 ms.devlang: na
-ms.topic: article
-ms.date: 04/19/2017
+ms.topic: conceptual
+ms.date: 02/16/2018
 ms.author: tomfitz
+ms.openlocfilehash: 13e5836aea0e307cdce5bcdcd5cf3c50969dfbf8
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 8021f8641ff3f009104082093143ec8eb087279e
-ms.openlocfilehash: c201ac12d06ffc8097615517ae09422b037eba6b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
-# <a name="manage-resources-with-azure-powershell-and-resource-manager"></a>Azure PowerShell 및 Resource Manager를 사용하여 리소스 관리
-> [!div class="op_single_selector"]
-> * [포털](resource-group-portal.md)
-> * [Azure CLI](xplat-cli-azure-resource-manager.md)
-> * [Azure PowerShell](powershell-azure-resource-manager.md)
-> * [REST API](resource-manager-rest-api.md)
->
->
+# <a name="manage-resources-with-azure-powershell"></a>Azure PowerShell을 사용하여 리소스 관리
 
-이 문서에서는 Azure PowerShell 및 Azure Resource Manager를 사용하여 솔루션을 관리하는 방법을 알아봅니다. Resource Manager에 익숙하지 않은 경우에는 [Resource Manager 개요](resource-group-overview.md) 참조하세요. 이 항목에서는 관리 작업에 중점을 둡니다. 다음을 수행합니다.
+[!INCLUDE [Resource Manager governance introduction](../../includes/resource-manager-governance-intro.md)]
 
-1. 리소스 그룹 만들기
-2. 리소스 그룹에 리소스 추가
-3. 리소스에 태그 추가
-4. 이름 또는 태그 값을 기반으로 리소스 쿼리
-5. 리소스에 대하 잠금 적용 및 제거
-6. 리소스 그룹 삭제
+[!INCLUDE [cloud-shell-powershell.md](../../includes/cloud-shell-powershell.md)]
 
-이 문서에서는 Resource Manager 템플릿을 구독에 배포하는 방법을 보여 주지 않습니다. 해당 정보는 [Resource Manager 템플릿과 Azure PowerShell로 리소스 배포](resource-group-template-deploy.md)를 참조하세요.
+PowerShell을 로컬로 설치하고 사용하도록 선택하는 경우 [Azure PowerShell 모듈 설치](/powershell/azure/install-azurerm-ps)를 참조하세요. 또한 PowerShell을 로컬로 실행하는 경우 `Connect-AzureRmAccount`를 실행하여 Azure와 연결해야 합니다.
 
-## <a name="get-started-with-azure-powershell"></a>Azure PowerShell 시작
+## <a name="understand-scope"></a>범위 이해
 
-Azure PowerShell을 설치하지 않은 경우 [Azure PowerShell을 설치 및 구성하는 방법](/powershell/azure/overview)을 참조하세요.
+[!INCLUDE [Resource Manager governance scope](../../includes/resource-manager-governance-scope.md)]
 
-Azure PowerShell을 전에 설치했지만 최근에 업데이트하지 않은 경우에는 최신 버전을 설치하는 것이 좋습니다. 설치하는 방법과 동일한 방법을 통해 버전을 업데이트할 수 있습니다. 예를 들어 웹 플랫폼 설치 관리자를 사용한 경우에는 관리자를 다시 시작하고 업데이트를 찾아봅니다.
+이 문서에서는 이러한 설정이 완료된 후 쉽게 제거할 수 있도록 모든 관리 설정을 리소스 그룹에 적용 합니다.
 
-Azure 리소스 모듈의 버전을 확인하려면 다음 cmdlet을 사용합니다.
+리소스 그룹을 만들어 보겠습니다.
 
-```powershell
-Get-Module -ListAvailable -Name AzureRm.Resources | Select Version
+```azurepowershell-interactive
+Set-AzureRmContext -Subscription <subscription-name>
+New-AzureRmResourceGroup -Name myResourceGroup -Location EastUS
 ```
 
-이 항목은 버전 3.3.0에 대해 업데이트되었습니다. 이보다 오래된 버전이 설치되어 있는 경우에는 사용자의 환경이 이 항목에 표시되는 단계와 일치하지 않을 수 있습니다. 이 버전의 cmdlet에 대한 설명서는 [AzureRM.Resources Module](/powershell/module/azurerm.resources)을 참조하세요.
+현재 리소스 그룹이 비어 있습니다.
 
-## <a name="log-in-to-your-azure-account"></a>Azure 계정에 로그인합니다.
-솔루션에서 작업하기 전에 자신의 계정으로 로그인해야 합니다.
+## <a name="role-based-access-control"></a>역할 기반 액세스 제어
 
-Azure 계정에 로그인하려면 **Login-AzureRmAccount** Cmdlet을 사용합니다.
+[!INCLUDE [Resource Manager governance policy](../../includes/resource-manager-governance-rbac.md)]
 
-```powershell
-Login-AzureRmAccount
+### <a name="assign-a-role"></a>역할 할당
+
+이 문서에서는 가상 머신 및 관련 가상 네트워크를 배포합니다. 가상 머신 솔루션을 관리하기 위해서는 일반적으로 필요한 액세스 권한을 제공하는 세 가지 리소스 특정 역할이 있습니다.
+
+* [Virtual Machine 기여자](../role-based-access-control/built-in-roles.md#virtual-machine-contributor)
+* [네트워크 기여자](../role-based-access-control/built-in-roles.md#network-contributor)
+* [Storage 계정 기여자](../role-based-access-control/built-in-roles.md#storage-account-contributor)
+
+개별 사용자에게 역할을 할당하는 대신 비슷한 동작을 수행해야 하는 사용자에게 [Azure Active Directory 그룹을 만들기](../active-directory/active-directory-groups-create-azure-portal.md)가 더 쉽습니다. 그런 다음, 해당 그룹에 적절한 역할을 할당합니다. 이 문서를 단순화하려면 구성원이 없는 Azure Active Directory 그룹을 만들 수 있습니다. 여전히 해당 그룹에 역할 범위를 할당할 수 있습니다. 
+
+다음 예제에서는 그룹을 만들고 해당 그룹에 리소스 그룹에 대한 가상 머신 참가자 역할을 할당합니다. `New-AzureAdGroup`명령을 실행하려면 [Azure Cloud Shell](/azure/cloud-shell/overview)을 사용하거나 [Azure AD PowerShell 모듈을 다운로드](https://www.powershellgallery.com/packages/AzureAD/)해야 합니다.
+
+```azurepowershell-interactive
+$adgroup = New-AzureADGroup -DisplayName VMDemoContributors `
+  -MailNickName vmDemoGroup `
+  -MailEnabled $false `
+  -SecurityEnabled $true
+New-AzureRmRoleAssignment -ObjectId $adgroup.ObjectId `
+  -ResourceGroupName myResourceGroup `
+  -RoleDefinitionName "Virtual Machine Contributor"
 ```
 
-Cmdlet가 Azure 계정에 대한 로그인 자격 증명을 유도합니다. 로그인한 다음 Azure PowerShell에 사용할 수 있도록 계정 설정을 다운로드합니다.
+일반적으로 **네트워크 참가자**와 **Storage 계정 참가자**를 위한 프로세스를 반복해 배포된 리소스를 관리하도록 사용자가 할당됐는지 확인합니다. 이 문서에서는 이러한 단계를 건너뛸 수 있습니다.
 
-이 cmdlet은 작업에 사용할 구독과 계정에 대한 정보를 반환합니다.
+## <a name="azure-policies"></a>Azure 정책
 
-```powershell
-Environment           : AzureCloud
-Account               : example@contoso.com
-TenantId              : {guid}
-SubscriptionId        : {guid}
-SubscriptionName      : Example Subscription One
-CurrentStorageAccount :
+[!INCLUDE [Resource Manager governance policy](../../includes/resource-manager-governance-policy.md)]
 
+### <a name="apply-policies"></a>정책 적용
+
+사용 중인 구독에 이미 여러 개의 정책 정의가 있습니다. 사용 가능한 정책 정의를 참조하려면 다음을 사용합니다.
+
+```azurepowershell-interactive
+(Get-AzureRmPolicyDefinition).Properties | Format-Table displayName, policyType
 ```
 
-구독이 둘 이상인 경우에는 다른 구독으로 전환할 수 있습니다. 우선 계정에 대한 모든 구독을 살펴보겠습니다.
+기존 정책 정의를 참조할 수 있습니다. 해당 정책 유형은 **BuiltIn** 또는 **사용자 지정** 중 하나입니다. 할당하고자 하는 조건을 설명하는 정책에 대한 정의를 검토해 보세요. 이 문서에서는 다음과 같은 정책을 할당할 수 있습니다.
 
-```powershell
-Get-AzureRmSubscription
+* 모든 리소스의 위치 제한
+* 가상 머신에 대한 SKU 제한
+* 관리 디스크를 사용하지 않는 가상 머신 감사
+
+```azurepowershell-interactive
+$locations ="eastus", "eastus2"
+$skus = "Standard_DS1_v2", "Standard_E2s_v2"
+
+$rg = Get-AzureRmResourceGroup -Name myResourceGroup
+
+$locationDefinition = Get-AzureRmPolicyDefinition | where-object {$_.properties.displayname -eq "Allowed locations"}
+$skuDefinition = Get-AzureRmPolicyDefinition | where-object {$_.properties.displayname -eq "Allowed virtual machine SKUs"}
+$auditDefinition = Get-AzureRmPolicyDefinition | where-object {$_.properties.displayname -eq "Audit VMs that do not use managed disks"}
+
+New-AzureRMPolicyAssignment -Name "Set permitted locations" `
+  -Scope $rg.ResourceId `
+  -PolicyDefinition $locationDefinition `
+  -listOfAllowedLocations $locations
+New-AzureRMPolicyAssignment -Name "Set permitted VM SKUs" `
+  -Scope $rg.ResourceId `
+  -PolicyDefinition $skuDefinition `
+  -listOfAllowedSKUs $skus
+New-AzureRMPolicyAssignment -Name "Audit unmanaged disks" `
+  -Scope $rg.ResourceId `
+  -PolicyDefinition $auditDefinition
 ```
 
-사용되는 구독 및 사용이 해제된 구독을 반환합니다.
+## <a name="deploy-the-virtual-machine"></a>가상 머신 배포
 
-```powershell
-SubscriptionName : Example Subscription One
-SubscriptionId   : {guid}
-TenantId         : {guid}
-State            : Enabled
+솔루션을 배포할 수 있도록 역할 및 정책을 할당했습니다. 기본 크기는 허용된 SKU 중 하나인 Standard_DS1_v2입니다. 이 단계를 실행할 때 자격 증명을 묻는 메시지가 나타납니다. 입력하는 값은 가상 머신에 대한 사용자 이름 및 암호로 구성됩니다.
 
-SubscriptionName : Example Subscription Two
-SubscriptionId   : {guid}
-TenantId         : {guid}
-State            : Enabled
-
-SubscriptionName : Example Subscription Three
-SubscriptionId   : {guid}
-TenantId         : {guid}
-State            : Disabled
+```azurepowershell-interactive
+New-AzureRmVm -ResourceGroupName "myResourceGroup" `
+     -Name "myVM" `
+     -Location "East US" `
+     -VirtualNetworkName "myVnet" `
+     -SubnetName "mySubnet" `
+     -SecurityGroupName "myNetworkSecurityGroup" `
+     -PublicIpAddressName "myPublicIpAddress" `
+     -OpenPorts 80,3389
 ```
 
-다른 구독으로 전환하려면 **Set-AzureRmContext** cmdlet에 구독 이름을 제공합니다.
+배포를 완료한 후 솔루션에 추가 관리 설정을 적용할 수 있습니다.
 
-```powershell
-Set-AzureRmContext -SubscriptionName "Example Subscription Two"
+## <a name="lock-resources"></a>리소스 잠금
+
+[!INCLUDE [Resource Manager governance locks](../../includes/resource-manager-governance-locks.md)]
+
+### <a name="lock-a-resource"></a>리소스 잠금
+
+가상 머신과 네트워크 보안 그룹을 잠그려면 다음을 사용합니다.
+
+```azurepowershell-interactive
+New-AzureRmResourceLock -LockLevel CanNotDelete `
+  -LockName LockVM `
+  -ResourceName myVM `
+  -ResourceType Microsoft.Compute/virtualMachines `
+  -ResourceGroupName myResourceGroup
+New-AzureRmResourceLock -LockLevel CanNotDelete `
+  -LockName LockNSG `
+  -ResourceName myNetworkSecurityGroup `
+  -ResourceType Microsoft.Network/networkSecurityGroups `
+  -ResourceGroupName myResourceGroup
 ```
 
-## <a name="create-a-resource-group"></a>리소스 그룹 만들기
-구독에 리소스를 배포하려면 리소스를 포함하는 리소스 그룹을 만들어야 합니다.
+특별히 잠금을 해제하는 경우 가상 머신을 삭제할 수 있습니다. 해당 단계는 [리소스 정리](#clean-up-resources)에 표시됩니다.
 
-리소스 그룹을 만들려면 **New-AzureRmResourceGroup** Cmdlet을 사용합니다. 이 명령은 **Name** 매개 변수를 사용하여 리소스 그룹에 대한 이름을 지정하고 **Location** 매개 변수를 사용하여 위치를 지정합니다.
+## <a name="tag-resources"></a>리소스 태그 지정
 
-```powershell
-New-AzureRmResourceGroup -Name TestRG1 -Location "South Central US"
+[!INCLUDE [Resource Manager governance tags](../../includes/resource-manager-governance-tags.md)]
+
+### <a name="tag-resources"></a>리소스 태그 지정
+
+[!INCLUDE [Resource Manager governance tags Powershell](../../includes/resource-manager-governance-tags-powershell.md)]
+
+가상 머신에 태그를 적용하려면 다음을 사용합니다.
+
+```azurepowershell-interactive
+$r = Get-AzureRmResource -ResourceName myVM `
+  -ResourceGroupName myResourceGroup `
+  -ResourceType Microsoft.Compute/virtualMachines
+Set-AzureRmResource -Tag @{ Dept="IT"; Environment="Test"; Project="Documentation" } -ResourceId $r.ResourceId -Force
 ```
 
-다음 형식으로 출력됩니다.
+### <a name="find-resources-by-tag"></a>태그로 리소스 찾기
 
-```powershell
-ResourceGroupName : TestRG1
-Location          : southcentralus
-ProvisioningState : Succeeded
-Tags              :
-ResourceId        : /subscriptions/{guid}/resourceGroups/TestRG1
+태그 이름 및 값을 사용하여 리소스를 찾으려면 다음을 사용합니다.
+
+```azurepowershell-interactive
+(Find-AzureRmResource -TagName Environment -TagValue Test).Name
 ```
 
-나중에 리소스 그룹을 검색해야 하는 경우 다음 cmdlet을 사용합니다.
+태그 값으로 모든 가상 머신 중지와 같은 관리 작업에 대한 반환 값을 사용할 수 있습니다.
 
-```powershell
-Get-AzureRmResourceGroup -ResourceGroupName TestRG1
+```azurepowershell-interactive
+Find-AzureRmResource -TagName Environment -TagValue Test | Where-Object {$_.ResourceType -eq "Microsoft.Compute/virtualMachines"} | Stop-AzureRmVM
 ```
 
-구독에서 리소스 그룹을 모두 가져오려면 이름을 지정하지 않습니다.
+### <a name="view-costs-by-tag-values"></a>태그 값으로 비용 보기
 
-```powershell
-Get-AzureRmResourceGroup
+태그를 리소스에 적용한 후 해당 태그를 사용하여 리소스에 대한 비용을 볼 수 있습니다. 최신 사용법을 표시하기 위한 비용 분석에 시간이 걸리므로 아직 비용을 참조할 수 없습니다. 해당 비용을 사용할 수 있는 경우 사용 중인 구독에서 여러 리소스 그룹에 걸친 리소스에 대한 비용을 볼 수 있습니다. 사용자는 비용을 확인하려면 [청구 정보에 대한 구독 수준의 액세스 권한](../billing/billing-manage-access.md)을 가져야 합니다.
+
+해당 포털에서 태그로 비용을 보려면 구독을 선택하고 **비용 분석**을 선택합니다.
+
+![비용 분석](./media/powershell-azure-resource-manager/select-cost-analysis.png)
+
+태그 값으로 필터링하고 **적용**을 선택합니다.
+
+![태그로 비용 보기](./media/powershell-azure-resource-manager/view-costs-by-tag.png)
+
+[Azure 청구 API](../billing/billing-usage-rate-card-overview.md)를 사용하여 프로그래밍 방식으로 비용을 볼 수 있습니다.
+
+## <a name="clean-up-resources"></a>리소스 정리
+
+잠금이 해제될 때까지는 잠긴 네트워크 보안 그룹을 삭제할 수 없습니다. 잠금을 해제하려면 다음을 사용합니다.
+
+```azurepowershell-interactive
+Remove-AzureRmResourceLock -LockName LockVM `
+  -ResourceName myVM `
+  -ResourceType Microsoft.Compute/virtualMachines `
+  -ResourceGroupName myResourceGroup
+Remove-AzureRmResourceLock -LockName LockNSG `
+  -ResourceName myNetworkSecurityGroup `
+  -ResourceType Microsoft.Network/networkSecurityGroups `
+  -ResourceGroupName myResourceGroup
 ```
 
-## <a name="add-resources-to-a-resource-group"></a>리소스 그룹에 리소스 추가
-리소스를 리소스 그룹에 추가하려면 **New-AzureRmResource** cmdlet을 사용하거나 만드는 리소스의 종류에 해당하는 cmdlet(예: **New-AzureRmStorageAccount**)을 사용합니다. 리소스의 종류에 해당하는 cmdlet에는 새 리소스에 필요한 속성의 매개 변수가 포함되기 때문에 이 cmdlet을 사용하는 것이 간편합니다. **New-AzureRmResource**를 사용하는 경우 속성을 설정하라는 메시지를 표시하지 않으려면 설정할 속성을 모두 알아야 합니다.
-
-하지만 cmdlet을 통해 리소스를 추가하면 새 리소스가 Resource Manager 템플릿에 존재하지 않기 때문에 나중에 혼동을 일으킬 수 있습니다. Azure 솔루션에 대한 인프라는 Resource Manager 템플릿에서 구성하는 것이 좋습니다. 템플릿을 사용하면 솔루션을 안정적이고 반복적으로 배포할 수 있습니다. 이 항목에서는 PowerShell cmdlet을 사용하여 저장소 계정을 만들지만 나중에 리소스 그룹에서 템플릿을 생성합니다.
-
-다음 cmdlet은 저장소 계정을 만듭니다. 예제에 표시된 이름을 사용하는 대신 저장소 계정에 대한 고유 이름을 제공합니다. 이름은 길이가 3자에서 24자 사이여야 하고 숫자 및 소문자만 사용해야 합니다. 예제에 표시된 이름을 사용하면 해당 이름을 이미 사용 중이기 때문에 오류가 표시됩니다.
+더 이상 필요하지 않은 경우 [Remove-AzureRmResourceGroup](/powershell/module/azurerm.resources/remove-azurermresourcegroup) 명령을 사용하여 리소스 그룹, VM 및 모든 관련된 리소스를 제거할 수 있습니다.
 
 ```powershell
-New-AzureRmStorageAccount -ResourceGroupName TestRG1 -AccountName mystoragename -Type "Standard_LRS" -Location "South Central US"
+Remove-AzureRmResourceGroup -Name myResourceGroup
 ```
-
-나중에 이 리소스를 검색해야 하는 경우 다음 cmdlet을 사용합니다.
-
-```powershell
-Get-AzureRmResource -ResourceName mystoragename -ResourceGroupName TestRG1
-```
-
-## <a name="add-a-tag"></a>태그 추가
-
-태그를 사용하면 다양한 속성에 따라 리소스를 구성할 수 있습니다. 예를 들어 동일한 부서에 속하는 여러 리소스 그룹에 몇 가지 리소스를 둘 수 있습니다. 리소스에 부서 태그 및 값을 적용하여 동일한 범주에 속하는 것으로 표시할 수 있습니다. 또는 리소스가 프로덕션 환경에서 사용되는지 또는 테스트 환경에서 사용되는지를 표시할 수 있습니다. 이 항목에서는 하나의 리소스에만 태그를 적용하지만 사용자 환경에서는 모든 리소스에 태그를 적용하는 것이 대부분 타당합니다.
-
-다음 cmdlet은 저장소 계정에 두 개의 태그를 적용합니다.
-
-```powershell
-Set-AzureRmResource -Tag @{ Dept="IT"; Environment="Test" } -ResourceName mystoragename -ResourceGroupName TestRG1 -ResourceType Microsoft.Storage/storageAccounts
- ```
-
-태그는 단일 개체로 업데이트됩니다. 이미 태그가 포함된 리소스에 태그를 추가하려면 우선 기존 태그를 검색합니다. 기존 태그가 포함된 개체에 새 태그를 추가하고 리소스에 모든 태그를 다시 적용합니다.
-
-```powershell
-$tags = (Get-AzureRmResource -ResourceName mystoragename -ResourceGroupName TestRG1).Tags
-$tags += @{Status="Approved"}
-Set-AzureRmResource -Tag $tags -ResourceName mystoragename -ResourceGroupName TestRG1 -ResourceType Microsoft.Storage/storageAccounts
-```
-
-## <a name="search-for-resources"></a>리소스 검색
-
-다른 검색 조건에 대해 리소스를 검색하려면 **Find-AzureRmResource** cmdlet을 사용합니다.
-
-* 이름으로 리소스를 가져오려면 **ResourceNameContains** 매개 변수를 제공합니다.
-
-  ```powershell
-  Find-AzureRmResource -ResourceNameContains mystoragename
-  ```
-
-* 리소스 그룹의 리소스를 모두 가져오려면 **ResourceGroupNameContains** 매개 변수를 제공합니다.
-
-  ```powershell
-  Find-AzureRmResource -ResourceGroupNameContains TestRG1
-  ```
-
-* 태그 이름 및 값을 사용하여 리소스를 모두 가져오려면 **TagName** 및 **TagValue** 매개 변수를 제공합니다.
-
-  ```powershell
-  Find-AzureRmResource -TagName Dept -TagValue IT
-  ```
-
-* 특정 리소스 종류에 해당하는 리소스를 모두 가져오려면 **ResourceType** 매개 변수를 제공합니다.
-
-  ```powershell
-  Find-AzureRmResource -ResourceType Microsoft.Storage/storageAccounts
-  ```
-
-## <a name="lock-a-resource"></a>리소스 잠금
-
-중요한 리소스가 실수로 삭제되거나 수정되지 않도록 해야 하는 경우에는 리소스에 잠금을 적용합니다. **CanNotDelete** 또는 **ReadOnly**를 지정할 수 있습니다.
-
-관리 잠금을 만들거나 삭제하려면 `Microsoft.Authorization/*` 또는 `Microsoft.Authorization/locks/*` 작업에 대한 액세스 권한이 있어야 합니다. 기본 제공 역할의 경우 소유자 및 사용자 액세스 관리자에게만 이러한 작업의 권한이 부여됩니다.
-
-잠금을 적용하려면 다음 cmdlet을 사용합니다.
-
-```powershell
-New-AzureRmResourceLock -LockLevel CanNotDelete -LockName LockStorage -ResourceName mystoragename -ResourceType Microsoft.Storage/storageAccounts -ResourceGroupName TestRG1
-```
-
-앞의 예제에서 잠긴 리소스는 잠금이 제거될 때까지 삭제될 수 없습니다. 잠금을 제거하려면 다음을 사용합니다.
-
-```powershell
-Remove-AzureRmResourceLock -LockName LockStorage -ResourceName mystoragename -ResourceType Microsoft.Storage/storageAccounts -ResourceGroupName TestRG1
-```
-
-잠금 설정에 대한 자세한 내용은 [Azure Resource Manager를 사용하여 리소스 잠그기](resource-group-lock-resources.md)를 참조하세요.
-
-## <a name="remove-resources-or-resource-group"></a>리소스 또는 리소스 그룹 제거
-리소스 또는 리소스 그룹을 제거할 수 있습니다. 리소스 그룹을 제거하면 리소스 그룹에 포함된 리소스도 모두 제거됩니다.
-
-* 리소스 그룹에서 리소스를 삭제하려면 **Remove-AzureRmResource** cmdlet를 사용합니다. 이 cmdlet은 리소스를 삭제하지만 리소스 그룹은 삭제하지 않습니다.
-
-  ```powershell
-  Remove-AzureRmResource -ResourceName mystoragename -ResourceType Microsoft.Storage/storageAccounts -ResourceGroupName TestRG1
-  ```
-
-* 리소스 그룹과 거기에 포함된 리소스를 모두 삭제하려면 **Remove-AzureRmResourceGroup** cmdlet을 사용합니다.
-
-  ```powershell
-  Remove-AzureRmResourceGroup -Name TestRG1
-  ```
-
-두 cmdlet 모두, 리소스 또는 리소스 그룹을 제거할지를 묻는 메시지가 표시됩니다. 작업에서 리소스 또는 리소스 그룹이 성공적으로 삭제되면 **True**가 반환됩니다.
-
-## <a name="run-resource-manager-scripts-with-azure-automation"></a>Azure Automation을 사용하여 Resource Manager 스크립트 실행
-
-이 항목은 Azure PowerShell을 사용하여 리소스에 기본적인 작업을 수행하는 방법을 보여줍니다. 고급 관리 시나리오의 경우 일반적으로 스크립트를 만들고 필요에 따라 또는 일정에 따라 스크립트를 다시 사용합니다. [Azure Automation](../automation/automation-intro.md)은 Azure 솔루션을 관리하는 자주 사용되는 스크립트를 자동화하는 방법을 제공합니다.
-
-다음 항목은 Azure Automation, Resource Manager 및 PowerShell을 사용하여 관리 작업을 효과적으로 수행하는 방법을 보여줍니다.
-
-- Runbook 만들기에 대한 내용은 [내 첫 번째 PowerShell Runbook](../automation/automation-first-runbook-textual-powershell.md)을 참조하세요.
-- 스크립트 갤러리 작업에 대한 내용은 [Azure Automation용 Runbook 및 모듈 갤러리](../automation/automation-runbook-gallery.md)를 참조하세요.
-- 가상 컴퓨터를 시작하고 중지하는 Runbook에 대한 내용은 [Azure Automation 시나리오: JSON 형식 태그를 사용하여 Azure VM 시작 및 종료 일정 만들기](../automation/automation-scenario-start-stop-vm-wjson-tags.md)를 참조하세요.
-- 가상 컴퓨터 업무 외 시간을 시작하고 중지하는 Runbook에 대한 내용은 [Automation의 업무 시간 외 VM 시작/중지 솔루션](../automation/automation-solution-vm-management.md)을 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
-* Resource Manager 템플릿을 만드는 방법에 대한 자세한 내용은 [Azure Resource Manager 템플릿 작성](resource-group-authoring-templates.md)을 참조하세요.
-* 템플릿 배포에 대한 자세한 내용은 [Azure Resource Manager 템플릿을 사용하여 응용 프로그램 배포](resource-group-template-deploy.md)를 참조하세요.
+* 가상 머신 모니터링에 대한 자세한 내용은 [Azure PowerShell을 사용하여 Windows 가상 머신 모니터링 및 업데이트](../virtual-machines/windows/tutorial-monitoring.md)를 참조하세요.
+* 권장 보안 사례를 구현하기 위해 Azure Security Center 사용하는 것에 대한 자세한 내용은 [Azure Security Center를 사용하여 가상 머신 보안을 모니터링](../virtual-machines/windows/tutorial-azure-security.md)합니다.
 * 기존 리소스를 새 리소스 그룹으로 이동할 수 있습니다. 예제를 보려면 [새 리소스 그룹 또는 구독으로 리소스 이동](resource-group-move-resources.md)을 참조하세요.
 * 엔터프라이즈에서 리소스 관리자를 사용하여 구독을 효과적으로 관리할 수 있는 방법에 대한 지침은 [Azure 엔터프라이즈 스캐폴드 - 규범적 구독 거버넌스](resource-manager-subscription-governance.md)를 참조하세요.
-
-

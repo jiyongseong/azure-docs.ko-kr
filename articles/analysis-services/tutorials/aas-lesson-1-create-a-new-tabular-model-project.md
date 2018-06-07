@@ -1,32 +1,22 @@
 ---
-title: "Azure Analysis Services 자습서 단원 1: 새 테이블 형식 모델 프로젝트 만들기 | Microsoft Docs"
-description: "새 Azure Analysis Services 자습서 프로젝트를 만드는 방법을 설명합니다."
-services: analysis-services
-documentationcenter: 
+title: 'Azure Analysis Services 자습서 단원 1: 새 테이블 형식 모델 프로젝트 만들기 | Microsoft Docs'
+description: 새 Azure Analysis Services 자습서 프로젝트를 만드는 방법을 설명합니다.
 author: minewiskan
-manager: erikre
-editor: 
-tags: 
-ms.assetid: 
+manager: kfile
 ms.service: analysis-services
-ms.devlang: NA
-ms.topic: get-started-article
-ms.tgt_pltfrm: NA
-ms.workload: na
-ms.date: 06/01/2017
+ms.topic: conceptual
+ms.date: 04/12/2018
 ms.author: owend
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 43aab8d52e854636f7ea2ff3aae50d7827735cc7
-ms.openlocfilehash: 40aac182af22d03c4cff535fd8c87b29ecae376a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/03/2017
-
+ms.reviewer: minewiskan
+ms.openlocfilehash: 73764e7595d5b0bbc55ee9242e86ba19d5f80254
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-# <a name="lesson-1-create-a-new-tabular-model-project"></a>단원 1: 새 테이블 형식 모델 프로젝트 만들기
+# <a name="create-a-tabular-model-project"></a>테이블 형식 모델 프로젝트 만들기
 
-[!INCLUDE[analysis-services-appliesto-aas-sql2017-later](../../../includes/analysis-services-appliesto-aas-sql2017-later.md)]
-
-이 단원에서는 SSDT(SQL Server Data Tools)를 사용하여 1400 호환성 수준에서 새 테이블 형식 모델 프로젝트를 만듭니다. 새 프로젝트가 만들어지면 데이터를 추가하고 모델을 작성할 수 있습니다. 이 단원에서는 SSDT에서 테이블 형식 모델 작성 환경에 대해 간략히 소개합니다.  
+이 단원에서는 SSDT(SQL Server Data Tools)가 있는 Visual Studio를 사용하여 1400 호환성 수준에서 새 테이블 형식 모델 프로젝트를 만듭니다. 새 프로젝트가 만들어지면 데이터를 추가하고 모델을 작성할 수 있습니다. 이 단원에서는 Visual Studio의 테이블 형식 모델 작성 환경에 대해 간략히 소개합니다.  
   
 이 단원을 완료하기 위한 예상 시간: **10분**  
   
@@ -37,7 +27,7 @@ ms.lasthandoff: 06/03/2017
   
 #### <a name="to-create-a-new-tabular-model-project"></a>새 테이블 형식 모델 프로젝트를 만들려면  
   
-1.  SSDT의 **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 클릭합니다.  
+1.  Visual Studio의 **파일** 메뉴에서 **새로 만들기** > **프로젝트**를 차례로 클릭합니다.  
   
 2.  **새 프로젝트** 대화 상자에서 **설치됨** > **Business Intelligence** > **Analysis Services**를 확장한 후 **Analysis Services 테이블 형식 프로젝트**를 클릭합니다.  
   
@@ -49,7 +39,7 @@ ms.lasthandoff: 06/03/2017
   
 5.  **테이블 형식 모델 디자이너** 대화 상자에서 **통합된 작업 영역**을 선택합니다.  
   
-    작업 영역은 모델을 작성하는 동안 프로젝트와 동일한 이름을 가진 테이블 형식 모델 데이터베이스를 호스팅합니다. 통합된 작업 공간에서는 SSDT가 기본 제공 인스턴스를 사용하므로 모델 작성을 위해 별도의 Analysis Services 서버 인스턴스를 설치할 필요가 없음을 의미합니다.
+    작업 영역은 모델을 작성하는 동안 프로젝트와 동일한 이름을 가진 테이블 형식 모델 데이터베이스를 호스팅합니다. 통합된 작업 영역은 Visual Studio에서 기본 제공 인스턴스를 사용하므로 모델 작성만을 위해 별도의 Analysis Services 서버 인스턴스를 설치할 필요가 없음을 의미합니다.
       
 6.  **호환성 수준**에서 **SQL Server 2017 / Azure Analysis Services(1400)**를 선택합니다.   
  
@@ -59,9 +49,9 @@ ms.lasthandoff: 06/03/2017
       
   
 ## <a name="understanding-the-ssdt-tabular-model-authoring-environment"></a>SSDT 테이블 형식 작성 환경 이해  
-새 테이블 형식 모델 프로젝트를 만들었으므로 이제 SSDT에서 테이블 형식 모델 작성 환경에 대해 살펴보겠습니다.  
+이제 새 테이블 형식 모델 프로젝트를 만들었으므로 Visual Studio에서 테이블 형식 모델 작성 환경에 대해 살펴보겠습니다.  
   
-프로젝트를 만들면 SSDT에서 프로젝트가 열립니다. 오른쪽의 **테이블 형식 모델 탐색기**에 모델에 있는 개체의 트리 보기가 표시됩니다. 데이터를 아직 가져오지 않았으므로 폴더는 비어 있습니다. 메뉴 모음처럼 작업을 수행하기 위해 개체 폴더를 마우스 오른쪽 단추로 클릭할 수 있습니다. 이 자습서를 단계별로 실행하는 동안 테이블 형식 모델 탐색기를 사용하여 모델 프로젝트의 다양한 개체로 이동합니다.
+프로젝트가 만들어지면 Visual Studio에서 해당 프로젝트가 열립니다. 오른쪽의 **테이블 형식 모델 탐색기**에 모델에 있는 개체의 트리 보기가 표시됩니다. 데이터를 아직 가져오지 않았으므로 폴더는 비어 있습니다. 메뉴 모음처럼 작업을 수행하기 위해 개체 폴더를 마우스 오른쪽 단추로 클릭할 수 있습니다. 이 자습서를 단계별로 실행하는 동안 테이블 형식 모델 탐색기를 사용하여 모델 프로젝트의 다양한 개체로 이동합니다.
 
 ![aas-lesson1-tme](../tutorials/media/aas-lesson1-tme.png)
 
@@ -73,7 +63,7 @@ ms.lasthandoff: 06/03/2017
 
 ![aas-lesson1-properties](../tutorials/media/aas-lesson1-properties.png)
   
-모델 프로젝트를 만들 때 **도구** 메뉴 > **옵션** 대화 상자에 지정할 수 있는 데이터 모델링 설정에 따라 특정 모델 속성이 자동으로 설정됩니다. 데이터 백업, 작업 영역 보존 및 작업 영역 서버 속성은 작업 영역 데이터베이스가 백업되고 메모리 내 보존되며 빌드되는 방식과 위치를 지정합니다. 필요한 경우 나중에 이러한 설정을 변경할 수 있지만 지금은 이러한 속성을 그대로 둡니다.  
+모델 프로젝트를 만들 때 **도구** 메뉴 > **옵션** 대화 상자에 지정할 수 있는 데이터 모델링 설정에 따라 특정 모델 속성이 자동으로 설정됩니다. 데이터 Backup, 작업 영역 보존 및 작업 영역 서버 속성은 작업 영역 데이터베이스가 백업되고 메모리 내 보존되며 빌드되는 방식과 위치를 지정합니다. 필요한 경우 나중에 이러한 설정을 변경할 수 있지만 지금은 이러한 속성을 그대로 둡니다.  
 
 **솔루션 탐색기**에서 **AW Internet Sales**(프로젝트)를 마우스 오른쪽 단추로 클릭하고 **속성**을 클릭합니다. **AW Internet Sales 속성 페이지** 대화 상자가 나타납니다. 이러한 속성 중 일부는 모델을 배포할 때 나중에 설정합니다.  
   
@@ -88,4 +78,3 @@ SSDT를 설치한 경우 여러 가지 새로운 메뉴 항목이 Visual Studio 
   
   
   
-

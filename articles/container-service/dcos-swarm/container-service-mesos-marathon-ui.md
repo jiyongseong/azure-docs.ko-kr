@@ -1,29 +1,23 @@
 ---
-title: "Marathon UI를 사용하여 Azure DC/OS 클러스터 관리 | Microsoft Docs"
-description: "Marathon 웹 UI를 사용하여 컨테이너를 Azure 컨테이너 서비스 클러스터 서비스에 배포합니다."
+title: Marathon UI를 사용하여 Azure DC/OS 클러스터 관리
+description: Marathon 웹 UI를 사용하여 컨테이너를 Azure 컨테이너 서비스 클러스터 서비스에 배포합니다.
 services: container-service
-documentationcenter: 
 author: dlepow
-manager: timlt
-editor: 
-tags: acs, azure-container-service
-keywords: "Docker, 컨테이너, 마이크로 서비스, Mesos, Azure"
-ms.assetid: d148ed1e-b582-4d51-944f-1ac7ae3c4fd6
+manager: jeconnoc
 ms.service: container-service
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
 ms.date: 04/04/2017
 ms.author: danlep
+ms.custom: mvc
+ms.openlocfilehash: 43407d40db0aab2772cb1baeab3471be68aee2ab
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: bfd49ea68c597b109a2c6823b7a8115608fa26c3
-ms.openlocfilehash: 4b23d46ef3c56baf91d09018552969eaf20cc8d7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32166986"
 ---
 # <a name="manage-an-azure-container-service-dcos-cluster-through-the-marathon-web-ui"></a>Marathon 웹 UI를 통해 Azure Container Service DC/OS 클러스터 관리
+
 DC/OS는 기본 하드웨어를 추상화하는 동안 클러스터형 워크로드를 배포 및 확장하기 위한 환경을 제공합니다. DC/OS의 상단에 계산 워크로드의 예약 및 실행을 관리하는 프레임워크가 있습니다.
 
 프레임워크를 널리 사용되고 있는 많은 워크로드에 사용할 수 있지만 이 문서에서는 Marathon으로 컨테이너를 배포하는 방법을 설명합니다. 
@@ -89,7 +83,7 @@ DC/OS 클러스터는 사설 및 공용 에이전트와 함께 배포됩니다. 
 
 ![Marathon 기본 페이지 UI--컨테이너 배포 상태](./media/container-service-mesos-marathon-ui/dcos7.png)
 
-DC/OS 웹 UI(http://localhost/)로 다시 전환하면 이 경우 Docker로 포맷된 컨테이너인 태스크가 DC/OS 클러스터에서 실행 중임이 표시됩니다.
+DC/OS 웹 UI(http://localhost/))로 다시 전환하면 이 경우 Docker로 포맷된 컨테이너인 태스크가 DC/OS 클러스터에서 실행 중임이 표시됩니다.
 
 ![DC/OS 웹 UI--클러스터에서 실행 중인 작업](./media/container-service-mesos-marathon-ui/dcos8.png)
 
@@ -114,4 +108,3 @@ DC/OS 웹 UI(http://localhost/)로 다시 전환하면 이 경우 Docker로 포�
 
     > [!VIDEO https://channel9.msdn.com/Events/Microsoft-Azure/AzureCon-2015/ACON203/player]
     > 
-

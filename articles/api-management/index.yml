@@ -1,0 +1,62 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: "API Management 설명서"
+metadata:
+  title: "Azure API Management 설명서 - 자습서, API 참조 | Microsoft Docs"
+  description: "API Management를 사용하여 API를 대규모로 안전하게 외부, 파트너 및 직원 개발자에게 게시하는 방법에 대해 알아봅니다. 자습서, API 참조 및 기타 설명서에서는 어디서든지 호스팅되는 기존 백 엔드 서비스에 대한 최신 API 게이트웨이를 만들고 관리하는 방법을 보여 줍니다."
+  services: api-management
+  author: czeumault
+  manager: carolz
+  ms.service: api-management
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 11/15/2017
+  ms.author: carolz
+  ms.openlocfilehash: 627498481ff5e64573478dd736cdd28962036caf
+  ms.sourcegitcommit: 48fce90a4ec357d2fb89183141610789003993d2
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 01/12/2018
+abstract:
+  description: "API Management를 사용하여 API를 대규모로 안전하게 외부, 파트너 및 직원 개발자에게 게시하는 방법에 대해 알아봅니다. 자습서, API 참조 및 기타 설명서에서는 어디서든지 호스팅되는 기존 백 엔드 서비스에 대한 최신 API 게이트웨이를 만들고 관리하는 방법을 보여 줍니다."
+sections:
+- title: "5분 빠른 시작"
+  items:
+  - type: paragraph
+    text: "API Management 인스턴스를 만듭니다."
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: https://docs.microsoft.com/azure/sql-database/media/index/portal.svg
+      text: "인스턴스 만들기 - 포털"
+      href: /azure/api-management/get-started-create-service-instance
+    - image:
+        src: https://docs.microsoft.com/azure/sql-database/media/index/logo_powershell.svg
+      text: "인스턴스 만들기 - PowerShell"
+      href: /azure/api-management/powershell-create-service-instance
+- title: "단계별 자습서"
+  items:
+  - type: paragraph
+    text: "API Management를 관리하는 방법을 알아봅니다."
+  - type: list
+    style: ordered
+    items:
+    - html: "<a href=\"/azure/api-management/import-and-publish\">첫 번째 API 가져오기 및 게시</a>"
+    - html: "<a href=\"/azure/api-management/api-management-howto-add-products\">제품 생성 및 게시</a>"
+    - html: "<a href=\"/azure/api-management/mock-api-responses\">모의 API 응답 만들기</a>"
+    - html: "<a href=\"/azure/api-management/transform-api\">API 변환 및 보호</a>"
+    - html: "<a href=\"/azure/api-management/api-management-howto-use-azure-monitor\">게시된 API 모니터링</a>"
+    - html: "<a href=\"/azure/api-management/api-management-howto-api-inspector\">요청 추적을 사용하여 API 디버그</a>"
+    - html: "<a href=\"/azure/api-management/api-management-get-started-revise-api\">수정 버전을 사용하여 작업을 중단하지 않는 변경을 안전하게 수행</a>"
+    - html: "<a href=\"/azure/api-management/api-management-get-started-publish-versions\">여러 버전의 API 게시</a>"
+    - html: "<a href=\"/azure/api-management/api-management-customize-styles\">개발자 포털 페이지의 스타일 사용자 지정</a>"
+- title: "샘플"
+  items:
+  - type: list
+    style: unordered
+    className: spaced noBullet
+    items:
+    - html: "<a href=\"/azure/api-management/policy-samples\">정책</a>"
+    - html: <a href="/azure/api-management/powershell-samples">Azure PowerShell</a>

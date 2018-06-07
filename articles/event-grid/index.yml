@@ -1,0 +1,77 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: "Azure Event Grid 설명서"
+metadata:
+  title: "Azure Event Grid 설명서 - 자습서, API 참조"
+  description: "Azure Event Grid를 사용하여 거의 실시간으로 Azure와 비 Azure 서비스에서 관련된 이벤트에 대응할 수 있습니다."
+  services: event-grid
+  author: czeumault
+  manager: carolz
+  ms.service: event-grid
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 08/10/2017
+  ms.author: carolz
+  ms.openlocfilehash: 494cd1b862169998a15786b70a6c7d88f830613e
+  ms.sourcegitcommit: 9d317dabf4a5cca13308c50a10349af0e72e1b7e
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 02/01/2018
+abstract:
+  description: "Azure Event Grid는 게시-구독 모델을 사용하여 균일한 이벤트 소비를 허용하는 완전히 관리되는 지능형 이벤트 라우팅 서비스입니다. Azure Event Grid를 사용하여 거의 실시간으로 Azure와 비 Azure 서비스에서 관련된 이벤트에 대응할 수 있습니다. 빠른 시작, 자습서 및 샘플을 통해 Azure Event Grid를 사용하는 방법을 알아봅니다."
+sections:
+- title: "5분 빠른 시작"
+  items:
+  - type: paragraph
+    text: "사용자 지정 이벤트를 만들고 구독하는 방법을 알아봅니다."
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: /azure/event-grid/media/index/cli.svg
+      text: Azure CLI
+      href: /azure/event-grid/custom-event-quickstart
+    - image:
+        src: /azure/event-grid/media/index/logo_powershell.svg
+      text: Azure PowerShell
+      href: /azure/event-grid/custom-event-quickstart-powershell
+    - image:
+        src: /azure/event-grid/media/index/portal.svg
+      text: Azure Portal
+      href: /azure/event-grid/custom-event-quickstart-portal
+  - type: paragraph
+    text: "Blob Storage 이벤트를 라우팅하는 방법을 알아봅니다."
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: /azure/event-grid/media/index/cli.svg
+      text: Azure CLI
+      href: /azure/storage/blobs/storage-blob-event-quickstart?toc=%2fazure%2fevent-grid%2ftoc.json
+    - image:
+        src: /azure/event-grid/media/index/logo_powershell.svg
+      text: Azure PowerShell
+      href: /azure/storage/blobs/storage-blob-event-quickstart-powershell?toc=%2fazure%2fevent-grid%2ftoc.json
+- title: "단계별 자습서"
+  items:
+  - type: paragraph
+    text: "이벤트에 대응하는 응용 프로그램을 개발하는 방법을 알아봅니다."
+  - type: list
+    style: ordered
+    items:
+    - html: "<a href=\"/azure/event-grid/monitor-virtual-machine-changes-event-grid-logic-app\">논리 앱을 사용하여 VM에 대한 변경 내용 모니터링</a>"
+    - html: "<a href=\"/azure/event-grid/resize-images-on-storage-blob-upload-event\">업로드된 이미지의 크기 조정</a>"
+    - html: "<a href=\"/azure/event-grid/ensure-tags-exists-on-new-virtual-machines\">Azure Automation과 Event Grid 통합</a>"
+- title: "참고 자료"
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: "명령줄"
+      html: <p><a href="/cli/azure/eventgrid">Azure CLI</a></p><p><a href="/powershell/module/azurerm.eventgrid">PowerShell</a></p>
+    - title: REST API
+      html: <p><a href="/rest/api/eventgrid">REST</a></p>
+    - title: "스키마"
+      html: "<p><a href=\"/azure/event-grid/subscription-creation-schema \">구독 스키마</a></p><p><a href=\"/azure/event-grid/event-schema\">이벤트 스키마</a></p>"

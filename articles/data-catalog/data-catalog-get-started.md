@@ -13,14 +13,13 @@ ms.devlang: NA
 ms.topic: get-started-article
 ms.tgt_pltfrm: NA
 ms.workload: data-catalog
-ms.date: 05/03/2017
+ms.date: 01/18/2018
 ms.author: spelluru
-translationtype: Human Translation
-ms.sourcegitcommit: 2b128e2771ea89d1c0d6b8d52357d1bcc993115a
-ms.openlocfilehash: a9629d0a4bfc44f5d035a29f8e97d76922cc0060
-ms.lasthandoff: 02/16/2017
-
-
+ms.openlocfilehash: d67f8871bbdd87e8a67057e6e8c5d4d770e5cad6
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="get-started-with-azure-data-catalog"></a>Azure 데이터 카탈로그 시작
 Azure Data Catalog는 기업 데이터 자산의 등록 시스템 및 검색 시스템 역할을 하는 완전히 관리되는 클라우드 서비스입니다. 자세한 개요는 [Azure Data Catalog란](data-catalog-what-is-data-catalog.md)을 참조하세요.
@@ -103,12 +102,12 @@ Adventure Works 데이터베이스는 제품, 판매 및 구매를 포함하는 
 Adventure Works 샘플 데이터베이스를 설치하려면 다음을 수행합니다.
 
 1. CodePlex에서 [Adventure Works 2014 Full Database Backup.zip](https://msftdbprodsamples.codeplex.com/downloads/get/880661) 을 다운로드합니다.
-2. 컴퓨터에서 데이터베이스를 복원하려면 [SQL Server Management Studio를 사용하여 데이터베이스 백업 복원](http://msdn.microsoft.com/library/ms177429.aspx)의 지침을 따르거나 다음 단계를 따릅니다.
+2. 컴퓨터에서 데이터베이스를 복원하려면 [SQL Server Management Studio를 사용하여 데이터베이스 Backup 복원](http://msdn.microsoft.com/library/ms177429.aspx)의 지침을 따르거나 다음 단계를 따릅니다.
    1. SQL Server Management Studio를 열고 SQL Server 데이터베이스 엔진에 연결합니다.
    2. **데이터베이스**를 마우스 오른쪽 단추로 클릭하고 **데이터베이스 복원**을 클릭합니다.
    3. **데이터베이스 복원** 아래에서 **원본**에 대해 **장치** 옵션을 선택하고 **찾아보기**를 클릭합니다.
    4. **백업 장치 선택** 아래에서 **추가**를 클릭합니다.
-   5. **AdventureWorks2014.bak** 파일이 있는 폴더로 이동하여 파일을 선택하고 **확인**을 클릭하여 **백업 파일 찾기** 대화 상자를 닫습니다.
+   5. **AdventureWorks2014.bak** 파일이 있는 폴더로 이동하여 파일을 선택하고 **확인**을 클릭하여 **Backup 파일 찾기** 대화 상자를 닫습니다.
    6. **확인**을 클릭하여 **백업 장치 선택** 대화 상자를 닫습니다.    
    7. **확인**을 클릭하여 **데이터베이스 복원** 대화 상자를 닫습니다.
 
@@ -363,5 +362,4 @@ Azure Data Catalog에서 개별 자산을 삭제하거나 여러 자산을 삭�
 * [데이터 자산을 문서화하는 방법](data-catalog-how-to-documentation.md)
 * [데이터 자산에 연결하는 방법](data-catalog-how-to-connect.md)
 * [데이터 자산을 관리하는 방법](data-catalog-how-to-manage.md)
-
 

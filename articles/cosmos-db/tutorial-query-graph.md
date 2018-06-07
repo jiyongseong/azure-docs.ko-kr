@@ -1,31 +1,30 @@
 ---
-title: "Azure Cosmos DB에서 그래프 데이터를 쿼리하는 방법 | Microsoft Docs"
-description: "Azure Cosmos DB에서 그래프 데이터를 쿼리하는 방법을 알아봅니다."
+title: Azure Cosmos DB에서 그래프 데이터를 쿼리하는 방법 | Microsoft Docs
+description: Azure Cosmos DB에서 그래프 데이터를 쿼리하는 방법을 알아봅니다.
 services: cosmos-db
-documentationcenter: 
-author: dennyglee
-manager: jhubbard
-editor: 
-tags: 
+documentationcenter: ''
+author: luisbosquez
+manager: kfile
+editor: ''
+tags: ''
 ms.assetid: 8bde5c80-581c-4f70-acb4-9578873c92fa
 ms.service: cosmos-db
 ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.tgt_pltfrm: na
-ms.workload: 
-ms.date: 05/10/2017
-ms.author: denlee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 71fea4a41b2e3a60f2f610609a14372e678b7ec4
-ms.openlocfilehash: 630aeba6a881c814a6afb030ad2c064055fc452f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/10/2017
-
+ms.workload: ''
+ms.date: 01/02/2018
+ms.author: lbosq
+ms.custom: mvc
+ms.openlocfilehash: 449821d6121f8fec40b151ae06f687586133c3d1
+ms.sourcegitcommit: fc64acba9d9b9784e3662327414e5fe7bd3e972e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/12/2018
 ---
+# <a name="tutorial-query-azure-cosmos-db-graph-api-by-using-gremlin"></a>자습서: Gremlin을 사용하여 Azure Cosmos DB Graph API 쿼리
 
-# <a name="azure-cosmos-db-how-to-query-with-the-graph-api-preview"></a>Azure Cosmos DB: Graph API(미리 보기)를 사용하여 쿼리하는 방법
-
-Azure Cosmos DB [Graph API](graph-introduction.md)(미리 보기)는 [Gremlin](https://docs.mongodb.com/manual/tutorial/query-documents/) 쿼리를 지원합니다. 이 문서에서는 샘플 문서와 쿼리를 제공하여 시작합니다. Gremlin에 대해서는 [Gremlin 지원](gremlin-support.md) 문서에서 자세히 참조할 수 있습니다.
+Azure Cosmos DB [Graph API](graph-introduction.md)는 [Gremlin](https://github.com/tinkerpop/gremlin/wiki) 쿼리를 지원합니다. 이 문서에서는 샘플 문서와 쿼리를 제공하여 시작합니다. Gremlin에 대해서는 [Gremlin 지원](gremlin-support.md) 문서에서 자세히 참조할 수 있습니다.
 
 이 문서에서 다루는 작업은 다음과 같습니다. 
 
@@ -86,4 +85,4 @@ Gremlin을 사용하여 필터 식을 혼합하고, `loop` 단계를 사용하�
 이제 전 세계로 데이터를 배포하는 방법을 알아보려면 다음 자습서로 진행할 수 있습니다.
 
 > [!div class="nextstepaction"]
-> [전 세계로 데이터 배포](tutorial-global-distribution-documentdb.md)
+> [전 세계로 데이터 배포](tutorial-global-distribution-graph.md)

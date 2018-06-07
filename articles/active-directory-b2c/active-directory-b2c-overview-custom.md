@@ -1,25 +1,22 @@
 ---
-title: "Azure Active Directory B2C: 사용자 지정 정책 | Microsoft Docs"
-description: "Azure Active Directory B2C 사용자 지정 정책에 대한 항목"
+title: 'Azure Active Directory B2C: 사용자 지정 정책 | Microsoft Docs'
+description: Azure Active Directory B2C 사용자 지정 정책에 대한 항목
 services: active-directory-b2c
-documentationcenter: 
-author: parakhj
-manager: krassk
-editor: parakhj
-ms.assetid: 1ff398a4-2079-4615-94f1-57de22c0aad6
+documentationcenter: ''
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: article
-ms.devlang: na
 ms.date: 04/04/2017
-ms.author: parakhj
+ms.author: davidmu
+ms.openlocfilehash: 22d34ac4128da1d1a9f20619aec2aaccc2425a21
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: 137671152878e6e1ee5ba398dd5267feefc435b7
-ms.openlocfilehash: 33f62a33ea7a3fadb6e7b045de10df25f5edbe83
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32138920"
 ---
 # <a name="azure-active-directory-b2c-custom-policies"></a>Azure Active Directory B2C: 사용자 지정 정책
 
@@ -29,15 +26,13 @@ ms.lasthandoff: 07/28/2017
 
 사용자 지정 정책은 Azure AD B2C 테넌트의 동작을 정의하는 구성 파일입니다. Azure AD B2C 포털에서 가장 일반적인 ID 작업에 대해 **기본 제공 정책**이 미리 정의되는 반면 거의 무제한의 많은 작업을 완료하기 위해 ID 개발자는 사용자 지정 정책을 완벽하게 편집할 수 있습니다. 사용자 지정 정책이 사용자 및 ID 시나리오에 알맞은지 확인하려면 계속 읽습니다.
 
-**사용자 지정 정책 편집은 일부 사용자에게만 해당됩니다.** 학습 곡선이 길고 시작 시간이 길면 비슷한 전문 지식을 유지하기 위해 향후 사용자 지정 정책을 변경해야 합니다. 사용자 지정 정책을 사용하기 전에 먼저 시나리오에 대한 기본 제공 정책을 신중하게 고려해야 합니다.
-
 ## <a name="comparing-built-in-policies-and-custom-policies"></a>기본 제공 정책과 사용자 지정 정책 비교
 
 | | 기본 제공 정책 | 사용자 지정 정책 |
 |-|-------------------|-----------------|
 |대상 사용자 | ID 전문 지식이 있거나 없는 모든 앱 개발자 | ID 전문가: 시스템 통합 서비스, 컨설턴트 및 사내 ID 팀입니다. OpenIDConnect 흐름에 만족하고 ID 공급자와 클레임 기반 인증을 이해합니다. |
 |구성 방법 | 사용자에게 친숙한 UI를 사용하는 Azure Portal | XML 파일 직접 편집 및 Azure Portal에 업로드 |
-|UI 사용자 지정 | HTML, CSS 및 JScript 지원을 비롯한 전체 UI 사용자 지정(사용자 지정 도메인 필요)<br><br>사용자 지정 문자열을 사용하여 다국어 지원 | 동일 |
+|UI 사용자 지정 | HTML, CSS 및 JavaScript 지원을 비롯한 전체 UI 사용자 지정(사용자 지정 도메인 필요)<br><br>사용자 지정 문자열을 사용하여 다국어 지원 | 동일 |
 | 특성 사용자 지정 | 표준 및 사용자 지정 특성 | 동일 |
 |토큰 및 세션 관리 | 사용자 지정 토큰 및 다중 세션 옵션 | 동일 |
 |ID 공급자| **현재**: 미리 정의된 로컬, 소셜 공급자<br><br>**이후**: 표준 기반 OIDC, SAML, OAuth | **현재**: 표준 기반 OIDC, OAUTH, SAML<br><br>**이후**: WsFed |
@@ -70,11 +65,11 @@ Azure AD B2C는 시퀀스에서 ID 공급자, 사용자, 다른 시스템 및 �
 
 ### <a name="identity-experience-framework"></a>ID 경험 프레임워크
 
-OpenIDConnect, OAuth, SAML, WSFed 및 일부 비표준 형식(예: REST API 기반 시스템 간 클레임 교환)과 같은 표준 프로토콜 형식인 엔터티(광범위하게 클레임 공급자) 간의 신뢰를 조정하는 완전히 구성 가능한 정책 기반이며 클라우드 기반인 Azure 플랫폼입니다. I2E는 HTML, CSS 및 jscript를 지원하는 사용자에게 친숙한 white labelled 환경을 만듭니다.  현재 ID 경험 프레임워크는 Azure AD B2C 서비스의 컨텍스트에서만 사용할 수 있으며 CIAM과 관련된 작업에 우선적으로 적용됩니다.
+OpenIDConnect, OAuth, SAML, WSFed 및 일부 비표준 형식(예: REST API 기반 시스템 간 클레임 교환)과 같은 표준 프로토콜 형식인 엔터티(광범위하게 클레임 공급자) 간의 신뢰를 조정하는 완전히 구성 가능한 정책 기반이며 클라우드 기반인 Azure 플랫폼입니다. I2E는 HTML, CSS 및 JavaScript를 지원하는 사용자에게 친숙한 white labeled 환경을 만듭니다.  현재 ID 경험 프레임워크는 Azure AD B2C 서비스의 컨텍스트에서만 사용할 수 있으며 CIAM과 관련된 작업에 우선적으로 적용됩니다.
 
 ### <a name="built-in-policies"></a>기본 제공 정책
 
-가장 일반적으로 사용되는 ID 작업(예: 사용자 등록, 로그인, 암호 재설정)을 수행하고 Azure AD B2C에서 관계가 미리 정의된 신뢰할 수 있는 대상(예: Facebook ID 공급자, LinkedIn, Microsoft 계정, Google 계정)과 상호 작용하도록 Azure AD B2C의 동작을 지시하는 미리 정의된 구성 파일입니다. user registration, signin, password reset) and interact with trusted parties whose relationship is also predefined in Azure AD B2C (e.g. Facebook identity provider, LinkedIn, Microsoft Account, Google accounts).  나중에 일반적으로 Azure Active Directory Premium, Active Directory/ADFS, Salesforce ID Provider와 같은 엔터프라이즈 영역에 있는 ID 공급자의 사용자 지정을 위해 기본 제공 정책을 제공할 수도 있습니다.
+가장 일반적으로 사용되는 ID 작업(예: 사용자 등록, 로그인, 암호 재설정)을 수행하고 Azure AD B2C에서 관계가 미리 정의된 신뢰할 수 있는 대상(예: Facebook ID 공급자, LinkedIn, Microsoft 계정, Google 계정)과 상호 작용하도록 Azure AD B2C의 동작을 지시하는 미리 정의된 구성 파일입니다.  나중에 일반적으로 Azure Active Directory Premium, Active Directory/ADFS, Salesforce ID Provider와 같은 엔터프라이즈 영역에 있는 ID 공급자의 사용자 지정을 위해 기본 제공 정책을 제공할 수도 있습니다.
 
 
 ### <a name="custom-policies"></a>사용자 지정 정책
@@ -85,7 +80,7 @@ Azure AD B2C 테넌트에서 ID 경험 프레임워크의 동작을 정의하는
 
 ### <a name="policy-files"></a>정책 파일
 
-사용자 지정 정책은 계층 구조 체인에서 서로를 참조하는 하나 또는 여러 XML 형식 파일로 표시됩니다. XML 요소는 다른 요소 간에 클레임 스키마, 클레임 변환, 콘텐츠 정의, 클레임 공급자/기술 프로필 및 Userjourney 오케스트레이션 단계를 정의합니다.  세 가지 종류의 정책 파일을 사용하는 것이 좋습니다.
+사용자 지정 정책은 계층 구조 체인에서 서로를 참조하는 하나 또는 여러 XML 형식 파일로 표시됩니다. XML 요소는 다른 요소 간에 클레임 스키마, 클레임 변환, 콘텐츠 정의, 클레임 공급자/기술 프로필 및 사용자 경험 오케스트레이션 단계를 정의합니다.  세 가지 종류의 정책 파일을 사용하는 것이 좋습니다.
 
 - **기본 파일**은 Azure에서 전체 샘플을 제공하므로 대부분의 정의를 포함합니다.  문제 해결 및 정책을 장기적인 유지 관리에 도움이 되도록 이 파일을 최소한으로 변경하는 것이 좋습니다.
 - **확장 파일**은 테넌트에 대한 고유한 구성 변경 내용을 보유합니다.
@@ -105,3 +100,7 @@ Azure AD B2C 테넌트에서 ID 경험 프레임워크의 동작을 정의하는
 
 Azure AD B2C의 **기본 제공 정책**은 위에 표시된 3개의 파일 패턴을 따르지만 개발자는 포털이 확장 파일에 대한 변경 내용을 백그라운드에서 수행하는 동안 개발자는 RP(신뢰 당사자) 파일만을 확인할 수 있습니다.  모든 Azure AD B2C는 Azure B2C 팀의 제어 아래에서 자주 업데이트되는 기본 정책 파일을 공유합니다.
 
+## <a name="next-steps"></a>다음 단계
+
+> [!div class="nextstepaction"]
+> [사용자 지정 정책 시작](active-directory-b2c-get-started-custom.md)

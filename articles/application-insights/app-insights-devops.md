@@ -3,7 +3,7 @@ title: "웹 응용 프로그램 성능 모니터링 - Azure Application Insights
 description: "devOps 주기에 Application Insights를 적용하는 방법"
 services: application-insights
 documentationcenter: 
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 479522a9-ff5c-471e-a405-b8fa221aedb3
 ms.service: application-insights
@@ -12,14 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: multiple
 ms.topic: article
 ms.date: 03/14/2017
-ms.author: cfreeman
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 785d3a8920d48e11e80048665e9866f16c514cf7
-ms.openlocfilehash: 6bc820657da4a72455d76f38dbdb06fe50b0c895
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/12/2017
-
-
+ms.author: mbullwin
+ms.openlocfilehash: 24e249bb515c509f2fba1f943ac5e23a1ea9965e
+ms.sourcegitcommit: e462e5cca2424ce36423f9eff3a0cf250ac146ad
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/01/2017
 ---
 # <a name="deep-diagnostics-for-web-apps-and-services-with-application-insights"></a>Application Insights로 웹앱 및 서비스 심층 진단
 ## <a name="why-do-i-need-application-insights"></a>Application Insights가 필요한 이유는 무엇일까요?
@@ -176,5 +174,4 @@ Application Insights로 시작하기가 쉽습니다. 기본 옵션:
 * 이미 실행 중인 웹앱을 계측합니다. 모든 내장 성능 원격 분석을 제공합니다. [Java](app-insights-java-live.md), [IIS 서버](app-insights-monitor-performance-live-website-now.md) 및 [Azure Web Apps](app-insights-azure.md)에서 사용할 수 있습니다.
 * 개발 중에 프로젝트를 계측합니다. [ASP.NET](app-insights-asp-net.md) 또는 [Java](app-insights-java-get-started.md) 앱, [Node.js](app-insights-nodejs.md), 여러 가지 [기타 유형](app-insights-platforms.md) 호스트에 적용할 수 있습니다. 
 * 짧은 코드 조각을 추가하여 [아무 웹 페이지](app-insights-javascript.md) 나 계측합니다.
-
 

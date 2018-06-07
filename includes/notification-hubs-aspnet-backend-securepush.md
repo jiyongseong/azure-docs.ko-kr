@@ -1,6 +1,6 @@
 ## <a name="webapi-project"></a>WebAPI 프로젝트
 1. Visual Studio에서 **사용자에게 알림** 자습서에서 만든 **AppBackend** 프로젝트를 엽니다.
-2. Notifications.cs에서 전체 **Notifications** 클래스를 다음 코드로 바꿉니다. 자리 표시자를 알림 허브에 대한 연결 문자열(모든 권한 사용) 및 허브 이름으로 바꿉니다. [Azure 클래식 포털](http://manage.windowsazure.com)에서 이러한 값을 가져올 수 있습니다. 이 모듈은 이제 전송할 다른 보안 알림을 나타냅니다. 완전한 구현에서 알림은 데이터베이스에 저장됩니다. 여기서는 단순화를 위해 메모리에 알림을 저장합니다.
+2. Notifications.cs에서 전체 **Notifications** 클래스를 다음 코드로 바꿉니다. 자리 표시자를 알림 허브에 대한 연결 문자열(모든 권한 사용) 및 허브 이름으로 바꿉니다. [Azure Portal](http://portal.azure.com)에서 이러한 값을 가져올 수 있습니다. 이 모듈은 이제 전송할 다른 보안 알림을 나타냅니다. 완전한 구현에서 알림은 데이터베이스에 저장됩니다. 여기서는 단순화를 위해 메모리에 알림을 저장합니다.
    
         public class Notification
         {

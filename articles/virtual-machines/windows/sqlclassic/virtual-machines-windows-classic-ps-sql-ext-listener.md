@@ -4,7 +4,7 @@ description: "이 자습서에서는 연결된 클라우드 서비스의 공용 
 services: virtual-machines-windows
 documentationcenter: na
 author: MikeRayMSFT
-manager: jhubbard
+manager: craigg
 editor: 
 tags: azure-service-management
 ms.assetid: a2453032-94ab-4775-b976-c74d24716728
@@ -15,13 +15,11 @@ ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 ms.date: 05/31/2017
 ms.author: mikeray
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 07584294e4ae592a026c0d5890686eaf0b99431f
-ms.openlocfilehash: 8e506be42aea4fb3c48c29b771a78dcf694f4518
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/02/2017
-
-
+ms.openlocfilehash: 38bb77c6b1d083bd6b52b785a991f24965d00e12
+ms.sourcegitcommit: d87b039e13a5f8df1ee9d82a727e6bc04715c341
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/21/2018
 ---
 # <a name="configure-an-external-listener-for-always-on-availability-groups-in-azure"></a>Azure에서 Always On 가용성 그룹에 대한 외부 수신기 구성
 > [!div class="op_single_selector"]
@@ -33,7 +31,7 @@ ms.lasthandoff: 06/02/2017
 이 항목에서는 외부에서 인터넷에 액세스할 수 있는 Always On 가용성 그룹에 대해 수신기를 구성하는 방법을 보여줍니다. 수신기를 구성하려면 클라우드 서비스의 **공용 VIP(가상 IP)** 주소를 수신기와 연결해야 합니다.
 
 > [!IMPORTANT] 
-> Azure에는 리소스를 만들고 작업하기 위한 [리소스 관리자 및 클래식](../../../azure-resource-manager/resource-manager-deployment-model.md)라는 두 가지 배포 모델이 있습니다. 이 문서에서는 클래식 배포 모델 사용에 대해 설명합니다. 새로운 배포는 대부분 리소스 관리자 모델을 사용하는 것이 좋습니다.
+> Azure에는 리소스를 만들고 작업하기 위한 [리소스 관리자 및 클래식](../../../azure-resource-manager/resource-manager-deployment-model.md)이라는 두 가지 배포 모델이 있습니다. 이 문서에서는 클래식 배포 모델 사용에 대해 설명합니다. 새로운 배포는 대부분 리소스 관리자 모델을 사용하는 것이 좋습니다.
 
 가용성 그룹은 온-프레미스 전용, Azure 전용 또는 하이브리드 구성에 대한 온-프레미스와 Azure 모두에 걸쳐 있는 복제본을 포함할 수 있습니다. Azure 복제본은 동일한 지역 내 또는 여러 Vnet(가상 네트워크)을 사용하 여 여러 지역에 걸쳐 있을 수 있습니다. 다음 단계에서는 [가용성 그룹을 구성](../classic/portal-sql-alwayson-availability-groups.md)했지만 수신기는 구성하지 않았다고 가정합니다.
 
@@ -134,5 +132,4 @@ Always On 복제본이 다른 서브넷에 있는 경우 클라이언트는 연�
 
 ## <a name="next-steps"></a>다음 단계
 [!INCLUDE [Listener-Next-Steps](../../../../includes/virtual-machines-ag-listener-next-steps.md)]
-
 

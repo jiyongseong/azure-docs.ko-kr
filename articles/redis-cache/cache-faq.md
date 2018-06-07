@@ -1,26 +1,24 @@
 ---
 title: Azure Redis Cache FAQ | Microsoft Docs
-description: "Azure Redis Cache에 대한 일반적인 질문과 대답, 패턴 및 모범 사례를 알아봅니다."
+description: Azure Redis Cache에 대한 일반적인 질문과 대답, 패턴 및 모범 사례를 알아봅니다.
 services: redis-cache
-documentationcenter: 
-author: steved0x
-manager: douge
-editor: 
+documentationcenter: ''
+author: wesmc7777
+manager: cfowler
+editor: ''
 ms.assetid: c2c52b7d-b2d1-433a-b635-c20180e5cab2
 ms.service: cache
 ms.workload: tbd
 ms.tgt_pltfrm: cache-redis
 ms.devlang: na
 ms.topic: article
-ms.date: 06/12/2017
-ms.author: sdanie
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5bbeb9d4516c2b1be4f5e076a7f63c35e4176b36
-ms.openlocfilehash: 88ed466053efd62370afd31f68c9617e79936267
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/13/2017
-
-
+ms.date: 07/27/2017
+ms.author: wesmc
+ms.openlocfilehash: 66340e690e5a6ac3e440b8b4d26e1a8b2abab266
+ms.sourcegitcommit: d74657d1926467210454f58970c45b2fd3ca088d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/28/2018
 ---
 # <a name="azure-redis-cache-faq"></a>Azure Redis Cache FAQ
 Azure Redis Cache에 대한 일반적인 질문과 대답, 패턴 및 모범 사례를 알아봅니다.
@@ -91,7 +89,7 @@ Azure Redis Cache는 인기 있는 오픈 소스 [Redis Cache](http://redis.io)�
 
 * [.NET](cache-dotnet-how-to-use-azure-redis-cache.md), [ASP.NET](cache-web-app-howto.md), [Java](cache-java-get-started.md), [Node.js](cache-nodejs-get-started.md) 및 [Python](cache-python-get-started.md)에 대해 사용할 수 있는 자습서 중 하나를 확인해볼 수 있습니다.
 * [Microsoft Azure Redis Cache를 사용하여 고성능 앱을 빌드하는 방법](https://azure.microsoft.com/documentation/videos/how-to-build-high-performance-apps-using-microsoft-azure-cache/)을 참조할 수도 있습니다.
-* Redis 사용 방법을 확인하려면 사용 중인 프로젝트의 개발 언어와 일치하는 클라이언트용 클라이언트 설명서를 확인해 보세요. Azure Redis Cache를 사용할 수 있는 많은 Redis 클라이언트가 있습니다. Redis 클라이언트 목록에 대해서는 [http://redis.io/clients](http://redis.io/clients)를 참조하세요.
+* Redis 사용 방법을 확인하려면 사용 중인 프로젝트의 개발 언어와 일치하는 클라이언트용 클라이언트 설명서를 확인해 보세요. Azure Redis Cache를 사용할 수 있는 많은 Redis 클라이언트가 있습니다. Redis 클라이언트 목록은 [http://redis.io/clients](http://redis.io/clients)에서 참조할 수 있습니다.
 
 Azure 계정이 없는 경우 다음을 수행할 수 있습니다.
 
@@ -109,11 +107,11 @@ Azure 계정이 없는 경우 다음을 수행할 수 있습니다.
 * **네트워크 성능**: 높은 처리량이 필요한 워크로드가 있는 경우 프리미엄 계층이 표준이나 기본에 비해 더 높은 대역폭을 제공합니다. 또한 각 계층 안에서는 캐시를 호스팅하는 기본 VM으로 인해 캐시 크기가 클수록 대역폭이 큽니다. 자세한 내용은 [다음 테이블](#cache-performance)을 참조하세요.
 * **처리량**: 프리미엄 계층은 사용 가능한 최대 처리량을 제공합니다. 캐시 서버 또는 클라이언트가 대역폭 제한에 도달하면 클라이언트 측에서 시간 초과를 수신할 수 있습니다. 자세한 내용은 다음 표를 참조하세요.
 * **고가용성/SLA**: Azure Redis Cache는 표준/프리미엄 캐시가 최소 99.9% 시간 동안 사용할 수 있도록 보장합니다. SLA에 대한 자세한 내용은 [Azure Redis Cache 가격 책정](https://azure.microsoft.com/support/legal/sla/cache/v1_0/)을 참조하세요. SLA에서는 캐시 끝점에 대한 연결만 다룹니다. SLA는 데이터 손실로부터의 보호는 다루지 않습니다. 데이터 손실에 대한 복원력을 늘리기 위해 프리미엄 계층에서 Redis 데이터 지속성 기능을 사용하는 것이 좋습니다.
-* **Redis 데이터 지속성**: 프리미엄 계층을 사용하면 Azure 저장소 계정에서 캐시 데이터를 유지할 수 있습니다. 기본/표준 캐시에서 모든 데이터는 메모리에만 저장됩니다. 기본 인프라 문제가 있는 경우 잠재적인 데이터 손실이 있을 수 있습니다. 데이터 손실에 대한 복원력을 늘리기 위해 프리미엄 계층에서 Redis 데이터 지속성 기능을 사용하는 것이 좋습니다. Azure Redis Cache는 Redis 지속성에서 RDB 및 AOF(출시 예정) 옵션을 제공합니다. 자세한 내용은 [프리미엄 Azure Redis Cache에 지속성을 구성하는 방법](cache-how-to-premium-persistence.md)을 참조하세요.
+* **Redis 데이터 지속성**: 프리미엄 계층을 사용하면 Azure Storage 계정에서 캐시 데이터를 유지할 수 있습니다. 기본/표준 캐시에서 모든 데이터는 메모리에만 저장됩니다. 기본 인프라 문제가 있는 경우 잠재적인 데이터 손실이 있을 수 있습니다. 데이터 손실에 대한 복원력을 늘리기 위해 프리미엄 계층에서 Redis 데이터 지속성 기능을 사용하는 것이 좋습니다. Azure Redis Cache는 Redis 지속성에서 RDB 및 AOF(출시 예정) 옵션을 제공합니다. 자세한 내용은 [프리미엄 Azure Redis Cache에 지속성을 구성하는 방법](cache-how-to-premium-persistence.md)을 참조하세요.
 * **Redis Cluster**: 53GB보다 큰 캐시를 만들거나 여러 Redis 노드에서 데이터를 분할하려면 프리미엄 계층에서 사용 가능한 Redis 클러스터링을 사용할 수 있습니다. 각 노드는 고가용성을 위해 주/복제본 캐시 쌍으로 구성됩니다. 자세한 내용은 [프리미엄 Azure Redis Cache에 클러스터링을 구성하는 방법](cache-how-to-premium-clustering.md)을 참조하세요.
-* **보안 및 네트워크 격리 향상**: Azure VNET(가상 네트워크) 배포는 Azure Redis Cache의 보안과 격리를 강화하며 액세스를 추가적으로 제한하기 위한 서브넷, 액세스 제어 정책 및 기타 기능을 제공합니다. 자세한 내용은 [프리미엄 Azure Redis Cache에 가상 네트워크 지원을 구성하는 방법](cache-how-to-premium-vnet.md)을 참조하세요.
+* **보안 및 네트워크 격리 향상**: Azure VNET(Virtual Network) 배포는 Azure Redis Cache의 보안과 격리를 강화하며 액세스를 추가적으로 제한하기 위한 서브넷, 액세스 제어 정책 및 기타 기능을 제공합니다. 자세한 내용은 [프리미엄 Azure Redis Cache에 Virtual Network 지원을 구성하는 방법](cache-how-to-premium-vnet.md)을 참조하세요.
 * **Redis 구성**: 표준과 프리미엄 계층에서 Redis Keyspace 알림을 구성할 수 있습니다.
-* **최대 클라이언트 연결 수**: 프리미엄 계층은 더 큰 캐시에 대해 더 많은 수의 연결과, Redis에 연결 가능한 최대 클라이언트 수를 제공합니다. 자세한 내용은 [Azure Redis Cache 가격 책정](https://azure.microsoft.com/pricing/details/cache/)을 참조하세요.
+* **최대 클라이언트 연결 수**: 프리미엄 계층은 더 큰 캐시에 대해 더 많은 수의 연결과, Redis에 연결 가능한 최대 클라이언트 수를 제공합니다. 클러스터링은 클러스터형 캐시에 사용할 수 있는 연결 수를 늘리지 않습니다. 자세한 내용은 [Azure Redis Cache 가격 책정](https://azure.microsoft.com/pricing/details/cache/)을 참조하세요.
 * **Redis 서버에 대한 전용 코어**: 프리미엄 계층에서는 모든 캐시 크기에 Redis 전용 코어가 있습니다. 기본/표준 계층에서는 C1 크기 이상에 Redis 서버 전용 코어가 있습니다.
 * **Redis는 단일 스레드** 이므로 3개 이상의 코어를 사용해도 2개 코어만 사용하는 경우에 비해 추가적인 이점이 없지만 VM 크기가 더 크면 일반적으로 작은 크기보다 대역폭이 더 큽니다. 캐시 서버 또는 클라이언트가 대역폭 제한에 도달하면 클라이언트 쪽에 시간 초과가 수신됩니다.
 * **성능 향상**: 프리미엄 계층의 캐시는 더 빠른 프로세서가 포함되고 기본 또는 표준 계층에 비해 더 나은 성능을 제공하는 하드웨어에 배포됩니다. 프리미엄 계층 캐시는 처리량은 더 높고 대기 시간은 더 짧습니다.
@@ -121,36 +119,36 @@ Azure 계정이 없는 경우 다음을 수행할 수 있습니다.
 <a name="cache-performance"></a>
 
 ### <a name="azure-redis-cache-performance"></a>Azure Redis Cache 성능
-다음 표에서는 Azure Redis Cache 끝점에 대해 Iaas VM에서 `redis-benchmark.exe`를 사용하는 다양한 크기의 표준 및 프리미엄 캐시를 테스트하는 동안 관찰되는 최대 대역폭 크기를 보여 줍니다. 
+다음 표에서는 Azure Redis Cache 끝점에 대해 Iaas VM에서 `redis-benchmark.exe`를 사용하는 다양한 크기의 표준 및 프리미엄 캐시를 테스트하는 동안 관찰되는 최대 대역폭 크기를 보여 줍니다. SSL 처리량의 경우 redis-benchmark를 stunnel과 함께 사용하여 Azure Redis Cache 끝점에 연결합니다.
 
 >[!NOTE] 
 >이러한 값은 보장되지 않으며 해당 수치에 대한 SLA는 없지만 일반적인 수치입니다. 응용 프로그램에 적합한 캐시 크기를 확인하려면 사용자 고유의 응용 프로그램을 부하 테스트해야 합니다.
->
+>이러한 수치는 새 결과가 주기적으로 게시됨에 따라 변경될 수 있습니다.
 >
 
 이 테이블에서 다음과 같은 결론을 내릴 수 있습니다.
 
-* 동일한 크기의 캐시 처리량은 표준 계층과 비교할 때 프리미엄 계층에서 더 높습니다. 예를 들어 6GB 캐시를 사용할 경우 C3의 처리량 49K에 비해 P1의 처리량은 140K RPS입니다.
-* Redis 클러스터를 사용하여 클러스터에서 분할된 데이터베이스(노드) 수를 늘림에 따라 처리량이 선형으로 늘어납니다. 예를 들어 10개의 분할된 데이터베이스에 P4 클러스터를 만드는 경우 가능한 처리량은 250K * 10 = 초당 250만 요청 수입니다.
+* 동일한 크기의 캐시 처리량은 표준 계층과 비교할 때 프리미엄 계층에서 더 높습니다. 예를 들어 6GB 캐시를 사용할 경우 C3의 처리량은 100,000인 데 비해 P1의 처리량은 180,000 RPS입니다.
+* Redis 클러스터를 사용하여 클러스터에서 분할된 데이터베이스(노드) 수를 늘림에 따라 처리량이 선형으로 늘어납니다. 예를 들어 10개의 분할된 데이터베이스에 P4 클러스터를 만드는 경우 가능한 처리량은 400,000 * 10 = 4백만 RPS입니다.
 * 큰 크기의 키에 대한 처리량이 표준 계층에 비해 프리미엄 계층에서 더 높습니다.
 
-| 가격 책정 계층 | 크기 | CPU 코어 | 사용 가능한 대역폭 | 1KB 값 크기 |
-| --- | --- | --- | --- | --- |
-| **표준 캐시 크기** | | |**Mb/s(초당 메가비트) / MB/s(초당 메가바이트)** |**초당 요청 수(RPS)** |
-| C0 |250MB |공유됨 |5/0.625 |600 |
-| C1 |1 GB |1 |100/12.5 |12200 |
-| C2 |2.5GB |2 |200/25 |24000 |
-| C3 |6GB |4 |400/50 |49000 |
-| C4 |13GB |2 |500/62.5 |61000 |
-| C5 |26GB |4 |1000/125 |115000 |
-| C6 |53GB |8 |2000/250 |150000 |
-| **프리미엄 캐시 크기** | |**분할 영역당 CPU 코어** | |**초당 요청 수(RPS), 분할된 데이터베이스당** |
-| P1 |6GB |2 |1000/125 |140000 |
-| P2 |13GB |4 |2000/250 |220000 |
-| P3 |26GB |4 |2000/250 |220000 |
-| P4 |53GB |8 |4000/500 |250000 |
+| 가격 책정 계층  | 크기 | CPU 코어 | 사용 가능한 대역폭 | 1KB 값 크기 | 1KB 값 크기 |
+| --- | --- | --- | --- | --- | --- |
+| **표준 캐시 크기** | | |**Mb/s(초당 메가비트) / MB/s(초당 메가바이트)** |**RPS(초당 요청 수) 비 SSL** |**RPS(초당 요청 수) SSL** |
+| C0 |250MB |공유됨 |100/12.5 |15,000 |7,500 |
+| C1 |1 GB |1 |500/62.5 |38,000 |20,720 |
+| C2 |2.5GB |2 |500/62.5 |41,000 |37,000 |
+| C3 |6GB |4 |1000/125 |100,000 |90,000 |
+| C4 |13GB |2 |500/62.5 |60,000 |55,000 |
+| C5 |26GB |4 |1,000 / 125 |102,000 |93,000 |
+| C6 |53GB |8 |2,000 / 250 |126,000 |120,000 |
+| **프리미엄 캐시 크기** | |**분할 영역당 CPU 코어** | **Mb/s(초당 메가비트) / MB/s(초당 메가바이트)** |**RPS(초당 요청 수) 비 SSL, 분할당** |**RPS(초당 요청 수) SSL, 분할당** |
+| P1 |6GB |2 |1,500 / 187.5 |180,000 |172,000 |
+| P2 |13GB |4 |3,000 / 375 |350,000 |341,000 |
+| P3 |26GB |4 |3,000 / 375 |350,000 |341,000 |
+| P4 |53GB |8 |6,000 / 750 |400,000 |373,000 |
 
-`redis-benchmark.exe`와 같은 Redis 도구 다운로드에 대한 지침은 [어떻게 Redis 명령을 실행할 수 있나요?](#cache-commands) 섹션을 참조하세요.
+stunnel 설정 또는 `redis-benchmark.exe`와 같은 Redis 도구 다운로드에 대한 지침은 [어떻게 Redis 명령을 실행할 수 있나요?](#cache-commands) 섹션을 참조하세요.
 
 <a name="cache-region"></a>
 
@@ -194,7 +192,7 @@ StackExchange.Redis에는 많은 옵션이 있습니다. 이 섹션에서는 몇
 보통은 클라이언트의 기본값으로 충분합니다. 워크로드에 따라 옵션을 미세 조정할 수 있습니다.
 
 * **재시도**
-  * ConnectRetry 및 ConnectTimeout에 대한 일반적인 지침은 빠른 오류 및 다시 시도입니다. 이 지침은 클라이언트가 Redis 명령을 실행하고 응답을 수신하는 데 걸리는 평균 시간 및 워크로드에 따라 달라집니다.
+  * ConnectRetry 및 ConnectTimeout에 대한 일반적인 지침은 페일 패스트 및 다시 시도입니다. 이 지침은 클라이언트가 Redis 명령을 실행하고 응답을 수신하는 데 걸리는 평균 시간 및 워크로드에 따라 달라집니다.
   * 연결 상태를 확인하고 직접 다시 연결하는 대신 StackExchange.Redis가 자동으로 다시 연결하도록 합니다. **ConnectionMultiplexer.IsConnected 속성을 사용하지 마세요**.
   * 때로는 사용자가 다시 시도하면 사태가 더욱 심각해지고 결코 복구되지 않는 문제가 발생할 수도 있습니다. 이 경우 Microsoft Patterns & Practices 그룹이 게시한 [다시 시도 일반 지침](../best-practices-retry-general.md)의 설명에 따라 지수 백오프 다시 시도 알고리즘 사용을 고려해야 합니다.
 * **시간 제한 값**
@@ -203,7 +201,7 @@ StackExchange.Redis에는 많은 옵션이 있습니다. 이 섹션에서는 몇
   * 응용 프로그램에 단일 ConnectionMultiplexer 인스턴스를 사용합니다. [ConnectionMultiplexer 클래스를 사용하여 캐시에 연결](cache-dotnet-how-to-use-azure-redis-cache.md#connect-to-the-cache)에 표시된 대로, LazyConnection을 사용하여 Connection 속성에 의해 반환되는 단일 인스턴스를 만들 수 있습니다.
   * 진단 목적으로 `ConnectionMultiplexer.ClientName` 속성을 앱 인스턴스 고유 이름으로 설정합니다.
   * 사용자 지정 작업에 여러 개의 `ConnectionMultiplexer` 인스턴스를 사용합니다.
-      * 응용 프로그램에 다양한 부하가 있는 경우 이 모델을 따를 수 있습니다. 예:
+      * 응용 프로그램에 다양한 부하가 있는 경우 이 모델을 따를 수 있습니다. 예: 
       * 큰 키를 처리하기 위한 멀티플렉서 1개가 있습니다.
       * 작은 키를 처리하기 위한 멀티플렉서 1개가 있습니다.
       * 사용하는 각 ConnectionMultiplexer의 연결 시간 제한 및 다시 시도 논리에 대해 다른 값을 설정할 수 있습니다.
@@ -248,9 +246,7 @@ Azure Redis Cache에 대한 로컬 에뮬레이터는 없지만 다음 예제와
 * Redis 명령줄 도구를 사용할 수도 있습니다. 이 도구를 사용하려면 다음 단계를 수행합니다.
 * [Redis 명령줄 도구](https://github.com/MSOpenTech/redis/releases/)를 다운로드합니다.
 * `redis-cli.exe`를 사용하여 캐시에 연결합니다. 다음 예제와 같이 -h 스위치를 사용하여 캐시 끝점을 전달하고 -a를 사용하여 키를 전달합니다.
-* `redis-cli -h <your cache="" name="">
-  .redis.cache.windows.net -a <key>
-  `
+* `redis-cli -h <redis cache name>.redis.cache.windows.net -a <key>`
 
 > [!NOTE]
 > Redis 명령줄 도구는 SSL 포트에서 작동하지 않지만, [Redis용 ASP.NET 세션 상태 제공자 미리 보기 릴리스 발표](http://blogs.msdn.com/b/webdev/archive/2014/05/12/announcing-asp-net-session-state-provider-for-redis-preview-release.aspx) 블로그 게시물의 지침에 따라 `stunnel`과 같은 유틸리티를 사용하여 도구를 SSL 포트에 안전하게 연결할 수 있습니다.
@@ -439,23 +435,23 @@ Redis 캐시 **리소스 메뉴**에도 캐시 문제를 모니터링하고 해�
 * 클라이언트 쪽 원인
   * 클라이언트 응용 프로그램이 다시 배포되었습니다.
   * 클라이언트 응용 프로그램이 크기 조정 작업을 수행했습니다.
-    * 클라우드 서비스나 웹앱의 경우 자동 크기 조정 때문일 수 있습니다.
+    * Cloud Services나 Web Apps의 경우 자동 크기 조정 때문일 수 있습니다.
   * 클라이언트 쪽의 네트워킹 계층이 변경되었습니다.
   * 클라이언트 또는 클라이언트와 서버 간의 네트워크 노드에서 일시적인 오류가 발생했습니다.
   * 대역폭 임계값 제한에 도달했습니다.
   * CPU 바인딩된 작업을 완료하는 데 시간이 너무 오래 걸렸습니다.
 * 서버 쪽 원인
-  * 표준 캐시 제품에서 Azure Redis Cache 서비스가 주 노드에서 보조 노드로 장애 조치(Failover)를 시작했습니다.
+  * 표준 캐시 제품에서 Azure Redis Cache 서비스가 주 노드에서 보조 노드로 장애 조치(failover)를 시작했습니다.
   * Azure에서 캐시가 배포된 인스턴스에 패치를 적용하고 있었습니다.
     * 이 작업은 Redis 서버 업데이트 또는 일반적인 VM 유지 관리를 위한 것일 수 있습니다.
 
 ### <a name="which-azure-cache-offering-is-right-for-me"></a>내게 적합한 Azure 캐시 기능
 > [!IMPORTANT]
-> 작년 [공지](https://azure.microsoft.com/blog/azure-managed-cache-and-in-role-cache-services-to-be-retired-on-11-30-2016/)에 따라 Azure Managed Cache Service 및 Azure In-Role Cache Service가 2016년 11월 30일에 **중지되었습니다**. [Azure Redis Cache](https://azure.microsoft.com/services/cache/)를 사용할 것을 권장합니다. 마이그레이션에 대한 자세한 내용은 [관리된 캐시 서비스에서 Azure Redis Cache로 마이그레이션](cache-migrate-to-redis.md)을 참조하세요.
+> 작년 [공지](https://azure.microsoft.com/blog/azure-managed-cache-and-in-role-cache-services-to-be-retired-on-11-30-2016/)에 따라 Azure Managed Cache Service 및 Azure In-Role Cache Service가 2016년 11월 30일에 **중지되었습니다**. [Azure Redis Cache](https://azure.microsoft.com/services/cache/)를 사용할 것을 권장합니다. 마이그레이션에 대한 자세한 내용은 [Managed Cache Service에서 Azure Redis Cache로 마이그레이션](cache-migrate-to-redis.md)을 참조하세요.
 >
 >
 
-### <a name="azure-redis-cache"></a>Azure Redis Cache
+### <a name="azure-redis-cache"></a>Azure Redis 캐시(영문)
 Azure Redis Cache가 이제 최대 53GB 크기로 출시되었으며 99.9%의 가용성 SLA를 제공합니다. 새 [프리미엄 계층](cache-premium-tier-intro.md) 은 99.9%의 SLA와 함께 최대 530GB 크기를 제공하며 클러스터링, VNET, 지속성 등을 지원합니다.
 
 Azure Redis Cache에서 고객은 Microsoft에서 관리하는 안전한 전용 Redis Cache를 사용할 수 있습니다. Redis에서 제공하는 다양한 기능 집합 및 에코시스템을 활용하면서 Microsoft의 안정적인 호스팅 및 모니터링 기능을 이용할 수 있습니다.
@@ -477,4 +473,3 @@ Azure Redis Cache를 시작하는 방법에 대한 자세한 내용은 [Azure Re
 보관된 설명서를 보려면 [보관된 In-Role Cache 설명서](https://msdn.microsoft.com/library/azure/dn386103.aspx)를 참조하세요.
 
 ["minIoThreads" configuration setting]: https://msdn.microsoft.com/library/vstudio/7w2sway1(v=vs.100).aspx
-

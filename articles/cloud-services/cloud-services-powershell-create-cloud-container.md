@@ -14,19 +14,18 @@ ms.tgt_pltfrm: powershell
 ms.workload: na
 ms.date: 11/18/2016
 ms.author: cawa
-translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: c024d8d47ab9b78399d8eb8b4df1f764f2877339
-ms.lasthandoff: 04/27/2017
-
-
+ms.openlocfilehash: b55a0dd7800448c50897af784092b4a60fa7a25e
+ms.sourcegitcommit: d87b039e13a5f8df1ee9d82a727e6bc04715c341
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/21/2018
 ---
 # <a name="use-an-azure-powershell-command-to-create-an-empty-cloud-service-container"></a>Azure PowerShell 명령을 사용하여 빈 클라우드 서비스 컨테이너 만들기
-이 문서에서는 Azure PowerShell cmdlet을 사용하여 신속하게 클라우드 서비스 컨테이너를 만드는 방법을 설명합니다. 다음 단계를 따르세요.
+이 문서에서는 Azure PowerShell cmdlet을 사용하여 신속하게 Cloud Services 컨테이너를 만드는 방법을 설명합니다. 다음 단계를 따르세요.
 
 1. [Azure PowerShell 다운로드](http://aka.ms/webpi-azps) 페이지에서 Microsoft Azure PowerShell cmdlet을 설치합니다.
 2. PowerShell 명령 프롬프트를 엽니다.
-3. [Add-AzureAccount](https://msdn.microsoft.com/library/dn495128.aspx) 를 사용하여 로그인합니다.
+3. [Add-AzureAccount](/powershell/module/Azure/Add-AzureAccount?view=azuresmps-4.0.0) 를 사용하여 로그인합니다.
 
    > [!NOTE]
    > Azure PowerShell cmdlet을 설치하고 Azure 구독에 연결하는 방법에 대한 자세한 지침은 [Azure PowerShell을 설치 및 구성하는 방법](/powershell/azure/overview)을 참조하세요.
@@ -34,13 +33,13 @@ ms.lasthandoff: 04/27/2017
    >
 4. **New-AzureService** cmdlet을 사용하여 빈 Azure 클라우드 서비스 컨테이너를 만듭니다.
 
-    ```
-    New-AzureService [-ServiceName] <String> [-AffinityGroup] <String> [[-Label] <String>] [[-Description] <String>] [[-ReverseDnsFqdn] <String>] [<CommonParameters>]
-    New-AzureService [-ServiceName] <String> [-Location] <String> [[-Label] <String>] [[-Description] <String>] [[-ReverseDnsFqdn] <String>] [<CommonParameters>]
+   ```powershell
+   New-AzureService [-ServiceName] <String> [-AffinityGroup] <String> [[-Label] <String>] [[-Description] <String>] [[-ReverseDnsFqdn] <String>] [<CommonParameters>]
+   New-AzureService [-ServiceName] <String> [-Location] <String> [[-Label] <String>] [[-Description] <String>] [[-ReverseDnsFqdn] <String>] [<CommonParameters>]
    ```
 5. 이 예제를 따라 cmdlet을 호출합니다.
 
-   ```
+   ```powershell
    New-AzureService -ServiceName "mytestcloudservice" -Location "Central US" -Label "mytestcloudservice"
    ```
 
@@ -51,6 +50,5 @@ Get-help New-AzureService
 ```
 
 ### <a name="next-steps"></a>다음 단계
-* 클라우드 서비스 배포를 관리하려면 [Get-AzureService](https://msdn.microsoft.com/library/azure/dn495131.aspx), [Remove-AzureService](https://msdn.microsoft.com/library/azure/dn495120.aspx) 및 [Set-AzureService](https://msdn.microsoft.com/library/azure/dn495242.aspx) 명령을 참조하세요. 더욱 자세한 내용을 보려면 [클라우드 서비스를 구성하는 방법](cloud-services-how-to-configure.md) 을 참조하세요.
-* 클라우드 서비스 프로젝트를 Azure에 게시하려면, **PublishCloudService.ps1** 코드 예제를 [Azure에서 클라우드 서비스에 대한 지속적인 전송](cloud-services-dotnet-continuous-delivery.md)에서 참조하세요.
-
+* 클라우드 서비스 배포를 관리하려면 [Get-AzureService](/powershell/module/Azure/Get-AzureService?view=azuresmps-4.0.0), [Remove-AzureService](/powershell/module/Azure/Remove-AzureService?view=azuresmps-4.0.0) 및 [Set-AzureService](/powershell/module/azure/set-azureservice?view=azuresmps-4.0.0) 명령을 참조하세요. 더욱 자세한 내용을 보려면 [클라우드 서비스를 구성하는 방법](cloud-services-how-to-configure-portal.md) 을 참조하세요.
+* 클라우드 서비스 프로젝트를 Azure에 게시하려면, **PublishCloudService.ps1** 코드 샘플을 [보관된 클라우드 서비스 리포지토리](https://github.com/MicrosoftDocs/azure-cloud-services-files/tree/master/Scripts/cloud-services-continuous-delivery)에서 참조하세요.

@@ -1,26 +1,20 @@
 ---
-title: "Azure Search를 사용하여 Azure Table Storage 인덱싱"
-description: "Azure Search를 사용하여 Azure Table Storage에 저장된 데이터를 인덱싱하는 방법을 알아봅니다."
-services: search
-documentationcenter: 
+title: Azure Search를 사용하여 Azure Table Storage 인덱싱
+description: Azure Search를 사용하여 Azure Table Storage에 저장된 데이터를 인덱싱하는 방법을 알아봅니다.
 author: chaosrealm
-manager: pablocas
-editor: 
-ms.assetid: 1cc27411-d0cc-40ed-8aed-c7cb9ab402b9
+manager: jlembicz
+services: search
 ms.service: search
 ms.devlang: rest-api
-ms.workload: search
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.date: 04/10/2017
+ms.topic: conceptual
+ms.date: 04/20/2018
 ms.author: eugenesh
-translationtype: Human Translation
-ms.sourcegitcommit: 8c4e33a63f39d22c336efd9d77def098bd4fa0df
-ms.openlocfilehash: 7679aa86aa24396d9cd7cf84a8cafe7950ad6d62
-ms.lasthandoff: 04/20/2017
-
+ms.openlocfilehash: a171bdd11cd2de030937927eef34d5ad9e0507af
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-
 # <a name="index-azure-table-storage-with-azure-search"></a>Azure Search를 사용하여 Azure Table Storage 인덱싱
 이 문서에서는 Azure Search를 사용하여 Azure Table Storage에 저장된 데이터를 인덱싱하는 방법을 보여 줍니다.
 
@@ -28,7 +22,7 @@ ms.lasthandoff: 04/20/2017
 
 다음 리소스를 사용하여 Azure Table Storage 인덱서를 설정할 수 있습니다.
 
-* [Azure 포털](https://ms.portal.azure.com)
+* [Azure Portal](https://ms.portal.azure.com)
 * Azure Search [REST API](https://docs.microsoft.com/rest/api/searchservice/Indexer-operations)
 * Azure Search [.NET SDK](https://aka.ms/search-sdk)
 
@@ -53,7 +47,7 @@ ms.lasthandoff: 04/20/2017
 
 데이터 원본을 만들려면
 
-    POST https://[service name].search.windows.net/datasources?api-version=2016-09-01
+    POST https://[service name].search.windows.net/datasources?api-version=2017-11-11
     Content-Type: application/json
     api-key: [admin key]
 
@@ -71,11 +65,11 @@ ms.lasthandoff: 04/20/2017
 
 테이블에 대한 자격 증명을 제공하는 방법은 다음 중 하나입니다. 
 
-- **전체 액세스 저장소 계정 연결 문자열**: `DefaultEndpointsProtocol=https;AccountName=<your storage account>;AccountKey=<your account key>` Azure Portal에서 **저장소 계정 블레이드** > **설정** > **키**(클래식 저장소 계정) 또는 **설정** > **액세스 키**(Azure Resource Manager 저장소 계정)로 이동하여 연결 문자열을 가져올 수 있습니다.
-- **저장소 계정 공유 액세스 서명 연결 문자열**: `TableEndpoint=https://<your account>.table.core.windows.net/;SharedAccessSignature=?sv=2016-05-31&sig=<the signature>&spr=https&se=<the validity end time>&srt=co&ss=t&sp=rl` 공유 액세스 서명에 컨테이너(이 경우 테이블) 및 개체(테이블 행)에 대한 읽기 권한 및 목록이 있어야 합니다.
+- **전체 액세스 Storage 계정 연결 문자열**: `DefaultEndpointsProtocol=https;AccountName=<your storage account>;AccountKey=<your account key>` Azure Portal에서 **Storage 계정 블레이드** > **설정** > **키**(클래식 Storage 계정) 또는 **설정** > **액세스 키**(Azure Resource Manager Storage 계정)로 이동하여 연결 문자열을 가져올 수 있습니다.
+- **Storage 계정 공유 액세스 서명 연결 문자열**: `TableEndpoint=https://<your account>.table.core.windows.net/;SharedAccessSignature=?sv=2016-05-31&sig=<the signature>&spr=https&se=<the validity end time>&srt=co&ss=t&sp=rl` 공유 액세스 서명에 컨테이너(이 경우 테이블) 및 개체(테이블 행)에 대한 읽기 권한 및 목록이 있어야 합니다.
 -  **테이블 공유 액세스 서명**: `ContainerSharedAccessUri=https://<your storage account>.table.core.windows.net/<table name>?tn=<table name>&sv=2016-05-31&sig=<the signature>&se=<the validity end time>&sp=r` 공유 액세스 서명에는 테이블에 대한 쿼리(읽기) 권한이 있어야 합니다.
 
-저장소 공유 액세스 서명에 대한 자세한 내용은 [공유 액세스 서명 사용](../storage/storage-dotnet-shared-access-signature-part-1.md)을 참조하세요.
+저장소 공유 액세스 서명에 대한 자세한 내용은 [공유 액세스 서명 사용](../storage/common/storage-dotnet-shared-access-signature-part-1.md)을 참조하세요.
 
 > [!NOTE]
 > 공유 액세스 서명 자격 증명을 사용하는 경우 자격 증명이 만료되는 것을 방지하기 위해 갱신된 서명을 사용하여 데이터 원본 자격 증명을 주기적으로 업데이트해야 합니다. 공유 액세스 서명 자격 증명이 만료되면 "연결 문자열에 제공된 사용자 자격 증명이 잘못되었거나 만료되었습니다."와 유사한 오류 메시지와 함께 인덱서가 실패합니다.  
@@ -85,7 +79,7 @@ ms.lasthandoff: 04/20/2017
 
 인덱스를 만들려면
 
-    POST https://[service name].search.windows.net/indexes?api-version=2016-09-01
+    POST https://[service name].search.windows.net/indexes?api-version=2017-11-11
     Content-Type: application/json
     api-key: [admin key]
 
@@ -104,7 +98,7 @@ ms.lasthandoff: 04/20/2017
 
 인덱스와 데이터 원본이 만들어지면 인덱서를 만들 준비가 된 것입니다.
 
-    POST https://[service name].search.windows.net/indexers?api-version=2016-09-01
+    POST https://[service name].search.windows.net/indexers?api-version=2017-11-11
     Content-Type: application/json
     api-key: [admin key]
 
@@ -123,7 +117,7 @@ ms.lasthandoff: 04/20/2017
 기존 인덱스의 필드 이름이 테이블의 속성 이름과 달라지는 경우가 종종 있습니다. 필드 매핑을 사용하여 테이블의 속성 이름을 검색 인덱스의 필드 이름에 매핑할 수 있습니다. 필드 매핑에 대해 자세히 알아보려면 [데이터 원본 및 검색 인덱스의 차이를 극복하는 Azure Search 인덱서 필드 매핑](search-indexer-field-mappings.md)을 참조하세요.
 
 ## <a name="handle-document-keys"></a>문서 키 처리
-Azure 검색에서는 문서 키가 문서를 고유하게 식별합니다. 모든 검색 인덱스는 `Edm.String`형식의 키 필드를 정확히 하나만 포함해야 합니다. 인덱스에 추가할 각 문서에는 키 필드가 필요합니다. (실제로 유일한 필수 필드임)
+Azure Search에서는 문서 키가 문서를 고유하게 식별합니다. 모든 검색 인덱스는 `Edm.String`형식의 키 필드를 정확히 하나만 포함해야 합니다. 인덱스에 추가할 각 문서에는 키 필드가 필요합니다. (실제로 유일한 필수 필드임)
 
 테이블 행에 복합 키가 있으므로 Azure Search에서 파티션 키와 행 키 값을 연결한 `Key`라는 합성 필드를 생성합니다. 예를 들어 행의 PartitionKey가 `PK1`이고 RowKey가 `RK1`인 경우 `Key` 필드의 값은 `PK1RK1`이 됩니다.
 
@@ -137,7 +131,7 @@ Azure 검색에서는 문서 키가 문서를 고유하게 식별합니다. 모�
 
 특정 문서를 인덱스에서 제거해야 함을 나타내려면 일시 삭제 전략을 사용할 수 있습니다. 행을 삭제하는 대신, 행이 삭제됨을 나타내는 속성을 추가하고 데이터 원본에 대해 일시 삭제 감지 정책을 설정합니다. 예를 들어 다음 정책은 행이 값이 `"true"`인 속성 `IsDeleted`를 갖는 경우 삭제되는 행을 고려합니다.
 
-    PUT https://[service name].search.windows.net/datasources?api-version=2016-09-01
+    PUT https://[service name].search.windows.net/datasources?api-version=2017-11-11
     Content-Type: application/json
     api-key: [admin key]
 
@@ -168,6 +162,5 @@ Azure 검색에서는 문서 키가 문서를 고유하게 식별합니다. 모�
     - 이 방법을 사용할 경우 전체 다시 인덱싱을 트리거해야 할 때 인덱서를 다시 설정하는 것 외에도 데이터 원본 쿼리를 다시 설정해야 합니다. 
 
 
-## <a name="help-us-make-azure-search-better"></a>Azure 검색 개선 지원
+## <a name="help-us-make-azure-search-better"></a>Azure Search 개선 지원
 기능 요청 또는 개선에 대한 아이디어가 있는 경우 [UserVoice 사이트](https://feedback.azure.com/forums/263029-azure-search/)를 통해 제출합니다.
-

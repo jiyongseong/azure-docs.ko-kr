@@ -12,17 +12,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 05/11/2017
+ms.date: 11/28/2017
 ms.author: sethm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 17c4dc6a72328b613f31407aff8b6c9eacd70d9a
-ms.openlocfilehash: bbc81a89f3be7b04c7a9e347ac1dae007515b042
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/16/2017
-
-
+ms.openlocfilehash: be1398e9b0a10efcd694e46d6322d5d7b9e7a843
+ms.sourcegitcommit: 651a6fa44431814a42407ef0df49ca0159db5b02
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/28/2017
 ---
-
 # <a name="availability-and-consistency-in-event-hubs"></a>Event Hubs의 가용성 및 일관성
 
 ## <a name="overview"></a>개요
@@ -39,7 +36,7 @@ Brewer의 정리는 일관성 및 가용성을 다음과 같이 정의합니다.
 Event Hubs는 분할된 데이터 모델을 기반으로 빌드됩니다. 설치하는 동안 이벤트 허브의 파티션 수를 구성할 수 있지만 나중에 이 값을 변경할 수 없습니다. Event Hubs에서 파티션을 사용해야 하므로 응용 프로그램의 가용성 및 일관성에 대한 결정을 내려야 합니다.
 
 ## <a name="availability"></a>Availability
-Event Hubs를 시작하는 가장 간단한 방법은 기본 동작을 사용하는 것입니다. 새 `EventHubClient` 개체를 만들고 `Send` 메서드를 사용하는 경우 사용자의 이벤트는 이벤트 허브의 파티션 사이에 자동으로 분산됩니다. 이 동작을 사용하면 가동 시간을 최대화할 수 있습니다.
+Event Hubs를 시작하는 가장 간단한 방법은 기본 동작을 사용하는 것입니다. 새 **[EventHubClient](/dotnet/api/microsoft.azure.eventhubs.eventhubclient)** 개체를 만들고 **[보내기](/dotnet/api/microsoft.azure.eventhubs.eventhubclient.sendasync?view=azure-dotnet#Microsoft_Azure_EventHubs_EventHubClient_SendAsync_Microsoft_Azure_EventHubs_EventData_)** 메서드를 사용하는 경우 사용자의 이벤트는 이벤트 허브의 파티션 사이에 자동으로 분산됩니다. 이 동작을 사용하면 가동 시간을 최대화할 수 있습니다.
 
 최대 가동 시간을 필요로 하는 사용 사례의 경우 이 모델을 사용하는 것이 좋습니다.
 
@@ -68,4 +65,3 @@ Event Hubs에 대한 자세한 내용은 다음 링크를 참조하세요.
 
 * [Event Hubs 서비스 개요](event-hubs-what-is-event-hubs.md)
 * [이벤트 허브 만들기](event-hubs-create.md)
-

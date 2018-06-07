@@ -12,16 +12,16 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: PHP
 ms.topic: article
-ms.date: 04/27/2017
+ms.date: 10/06/2017
 ms.author: sethm
-translationtype: Human Translation
-ms.sourcegitcommit: 8f291186c6a68dea8aa00b846a2e6f3ad0d7996c
-ms.openlocfilehash: 7dc72dbdf944432fff7635665c8a1d27def3aa94
-ms.lasthandoff: 04/28/2017
-
-
+ms.openlocfilehash: 4763b172375668213372e6f4f8fc87431c430e53
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-# <a name="how-to-use-service-bus-topics-and-subscriptions"></a>서비스 버스 토픽 및 구독을 사용하는 방법
+# <a name="how-to-use-service-bus-topics-and-subscriptions-with-php"></a>PHP에서 Service Bus 토픽 및 구독을 사용하는 방법
+
 [!INCLUDE [service-bus-selector-topics](../../includes/service-bus-selector-topics.md)]
 
 이 문서에서는 Service Bus 토픽과 구독을 사용하는 방법을 보여 줍니다. 샘플은 PHP로 작성되었으며 [PHP용 Azure SDK](../php-download-sdk.md)를 사용합니다. 여기서 다루는 시나리오에는 **토픽 및 구독 만들기**, **구독 필터 만들기**, **토픽에 메시지 보내기**, **구독에서 메시지 받기**, **토픽 및 구독 삭제** 등이 포함됩니다.
@@ -65,7 +65,7 @@ use WindowsAzure\Common\ServicesBuilder;
 Service Bus 클라이언트를 인스턴스화하려면 먼저 다음 형식의 유효한 연결 문자열이 있어야 합니다.
 
 ```
-Endpoint=[yourEndpoint];SharedSecretIssuer=[Default Issuer];SharedSecretValue=[Default Key]
+Endpoint=[yourEndpoint];SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[Primary Key]
 ```
 
 여기서 `Endpoint`는 일반적으로 `https://[yourNamespace].servicebus.windows.net` 형식입니다.
@@ -84,7 +84,7 @@ require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
 
-$connectionString = "Endpoint=[yourEndpoint];SharedSecretIssuer=[Default Issuer];SharedSecretValue=[Default Key]";
+$connectionString = "Endpoint=[yourEndpoint];SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[Primary Key]";
 
 $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
 ```
@@ -112,7 +112,7 @@ try    {
 catch(ServiceException $e){
     // Handle exception based on error codes and messages.
     // Error codes and messages are here: 
-    // http://msdn.microsoft.com/library/windowsazure/dd179357
+    // https://docs.microsoft.com/rest/api/storageservices/Common-REST-API-Error-Codes
     $code = $e->getCode();
     $error_message = $e->getMessage();
     echo $code.": ".$error_message."<br />";
@@ -148,7 +148,7 @@ try    {
 catch(ServiceException $e){
     // Handle exception based on error codes and messages.
     // Error codes and messages are here: 
-    // http://msdn.microsoft.com/library/azure/dd179357
+    // https://docs.microsoft.com/rest/api/storageservices/Common-REST-API-Error-Codes
     $code = $e->getCode();
     $error_message = $e->getMessage();
     echo $code.": ".$error_message."<br />";
@@ -217,7 +217,7 @@ try    {
 catch(ServiceException $e){
     // Handle exception based on error codes and messages.
     // Error codes and messages are here: 
-    // http://msdn.microsoft.com/library/azure/hh780775
+    // https://docs.microsoft.com/rest/api/storageservices/Common-REST-API-Error-Codes
     $code = $e->getCode();
     $error_message = $e->getMessage();
     echo $code.": ".$error_message."<br />";
@@ -283,7 +283,7 @@ try    {
 catch(ServiceException $e){
     // Handle exception based on error codes and messages.
     // Error codes and messages are here:
-    // http://msdn.microsoft.com/library/azure/hh780735
+    // https://docs.microsoft.com/rest/api/storageservices/Common-REST-API-Error-Codes
     $code = $e->getCode();
     $error_message = $e->getMessage();
     echo $code.": ".$error_message."<br />";
@@ -293,7 +293,7 @@ catch(ServiceException $e){
 ## <a name="how-to-handle-application-crashes-and-unreadable-messages"></a>응용 프로그램 작동이 중단되어 메시지를 읽을 수 없는 문제를 처리하는 방법
 서비스 버스는 응용 프로그램 오류나 메시지 처리 문제를 정상적으로 복구하는 데 유용한 기능을 제공합니다. 어떤 이유로든 수신자 응용 프로그램이 메시지를 처리할 수 없는 경우 받은 메시지에 대해 `deleteMessage` 메서드 대신 `unlockMessage` 메서드를 호출할 수 있습니다. 그러면 서비스 버스에서 큐 메시지의 잠금을 해제하므로 동일한 소비 응용 프로그램이나 다른 소비 응용 프로그램에서 메시지를 다시 받을 수 있습니다.
 
-큐 내에서 잠긴 메시지와 연결된 제한 시간도 있으며, 응용 프로그램에서 잠금 제한 시간이 만료되기 전에 메시지를 처리하지 못하는 경우(예: 응용 프로그램이 크래시되는 경우) 서비스 버스가 메시지를 자동으로 잠금 해제하여 다시 받을 수 있게 합니다.
+큐 내에서 잠긴 메시지와 연결된 시간 제한도 있으며, 응용 프로그램에서 잠금 시간 제한이 만료되기 전에 메시지를 처리하지 못하는 경우(예: 응용 프로그램이 크래시되는 경우) 서비스 버스가 메시지를 자동으로 잠금 해제하여 다시 받을 수 있게 합니다.
 
 응용 프로그램이 메시지를 처리한 후 `deleteMessage` 요청이 실행되기 전에 크래시되는 경우 다시 시작될 때 메시지가 응용 프로그램에 다시 배달됩니다. 이를 *최소 한 번 이상 처리*라고 합니다. 즉, 각 메시지가 최소 한 번 이상 처리되지만 특정 상황에서는 동일한 메시지가 다시 배달될 수 있습니다. 중복 처리가 허용되지 않는 시나리오에서는 응용 프로그램 개발자가 중복 메시지 배달을 처리하는 논리를 응용 프로그램에 추가해야 합니다. 이 경우 대체로 배달 시도 간에 일정하게 유지되는 메시지의 `getMessageId` 메서드를 사용합니다.
 
@@ -319,7 +319,7 @@ try    {
 catch(ServiceException $e){
     // Handle exception based on error codes and messages.
     // Error codes and messages are here: 
-    // http://msdn.microsoft.com/library/azure/dd179357
+    // https://docs.microsoft.com/rest/api/storageservices/Common-REST-API-Error-Codes
     $code = $e->getCode();
     $error_message = $e->getMessage();
     echo $code.": ".$error_message."<br />";
@@ -335,9 +335,8 @@ $serviceBusRestProxy->deleteSubscription("mytopic", "mysubscription");
 ## <a name="next-steps"></a>다음 단계
 지금까지 Service Bus 큐의 기본 사항에 대해 알아보았습니다. 자세한 내용은 [큐, 토픽 및 구독][Queues, topics, and subscriptions]을 참조하세요.
 
-[BrokeredMessage]: https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage
+[BrokeredMessage]: /dotnet/api/microsoft.servicebus.messaging.brokeredmessage
 [Queues, topics, and subscriptions]: service-bus-queues-topics-subscriptions.md
 [sqlfilter]: /dotnet/api/microsoft.servicebus.messaging.sqlfilter#microsoft_servicebus_messaging_sqlfilter
 [require-once]: http://php.net/require_once
 [Service Bus quotas]: service-bus-quotas.md
-

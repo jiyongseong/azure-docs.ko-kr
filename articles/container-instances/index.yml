@@ -3,9 +3,9 @@ documentType: LandingData
 title: Azure Container Instances 설명서
 metadata:
   title: Azure Container Instances 설명서 - 자습서 | Microsoft Docs
-  description: Azure Container Instances는 어떠한 가상 컴퓨터를 프로비전하지 않고 또 더 높은 수준의 서비스를 채택하지 않고도 Azure에서 컨테이너를 실행하는 가장 빠르고 간단한 방법을 제공합니다.
+  description: Azure Container Instances는 어떠한 가상 머신을 프로비전하지 않고 또 더 높은 수준의 서비스를 채택하지 않고도 Azure에서 컨테이너를 실행하는 가장 빠르고 간단한 방법을 제공합니다.
   services: container-instances
-  author: carolz
+  author: czeumault
   manager: carolz
   ms.service: container-instances
   ms.tgt_pltfrm: na
@@ -13,35 +13,52 @@ metadata:
   ms.topic: landing-page
   ms.date: 07/26/2017
   ms.author: carolz
+  ms.openlocfilehash: 29d6c0c23202dc0b980d5889a324a0c10944e314
+  ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 05/07/2018
 abstract:
-  description: 'Azure Container Instances는 어떠한 가상 컴퓨터를 프로비전하지 않고 또 더 높은 수준의 서비스를 채택하지 않고도 Azure에서 컨테이너를 실행하는 가장 빠르고 간단한 방법을 제공합니다. 전체 컨테이너 오케스트레이션 솔루션을 필요한 경우 <a href="/azure/container-service/kubernetes/">Azure Container Service의 Kubernetes 설명서</a>를 참조하세요. 빠른 시작, 자습서 및 샘플로 컨테이너 인스턴스를 만들고 관리하는 방법을 알아봅니다.'
+  description: Azure Container Instances는 어떠한 가상 머신을 프로비전하지 않고 또 더 높은 수준의 서비스를 채택하지 않고도 Azure에서 컨테이너를 실행하는 가장 빠르고 간단한 방법을 제공합니다. 빠른 시작, 자습서 및 샘플로 컨테이너 인스턴스를 만들고 관리하는 방법을 알아봅니다.<p>전체 컨테이너 오케스트레이션 솔루션이 필요한 경우 <a href="/azure/aks/">AKS(Azure Kubernetes Service) 설명서</a>를 참조하세요.</p>
 sections:
-  - title: 5분 빠른 시작
+- title: 5분 빠른 시작
+  items:
+  - type: paragraph
+    text: Azure Container Instances를 사용하여 컨테이너 이미지를 배포하는 방법을 알아봅니다.
+  - type: list
+    style: icon48
     items:
-      - type: paragraph
-        text: Azure Container Instances를 사용하여 컨테이너 이미지를 배포하는 방법을 알아봅니다.
-      - type: list
-        style: icon48
-        items:
-          - image:
-              src: /azure/container-instances/media/container-instances.png
-            text: 컨테이너 인스턴스 만들기
-            href: /azure/container-instances/container-instances-quickstart
-  - title: 단계별 자습서
+    - image:
+        src: https://docs.microsoft.com/media/common/i_cligeneric.svg
+      text: Azure CLI
+      href: /azure/container-instances/container-instances-quickstart
+    - image:
+        src: https://docs.microsoft.com/media/common/i_portal.svg
+      text: Azure Portal
+      href: /azure/container-instances/container-instances-quickstart-portal
+    - image:
+        src: https://docs.microsoft.com/media/logos/logo_powershell.svg
+      text: Azure PowerShell
+      href: /azure/container-instances/container-instances-quickstart-powershell
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: 컨테이너 이미지에 코드를 패키징하여 이를 Azure Container Instances에서 실행하는 방법을 알아봅니다.
+  - type: list
+    style: ordered
     items:
-      - type: paragraph
-        text: 컨테이너 이미지에 코드를 패키징하여 이를 Azure Container Instances에서 실행하는 방법을 알아봅니다.
-      - type: list
-        style: ordered
-        items:
-          - html: <a href="/azure/container-instances/container-instances-tutorial-prepare-app">컨테이너 이미지에 응용 프로그램 패키지</a>
-          - html: <a href="/azure/container-instances/container-instances-tutorial-prepare-acr">Azure Container Registry 만들기 및 컨테이너 이미지 업로드</a>
-          - html: <a href="/azure/container-instances/container-instances-tutorial-deploy-app">Azure Container Instances에 컨테이너 이미지 배포</a>
-  - title: 참조
+    - html: <a href="/azure/container-instances/container-instances-tutorial-prepare-app">컨테이너 이미지에 응용 프로그램 패키지</a>
+    - html: <a href="/azure/container-instances/container-instances-tutorial-prepare-acr">Azure Container Registry 만들기 및 컨테이너 이미지 업로드</a>
+    - html: <a href="/azure/container-instances/container-instances-tutorial-deploy-app">Azure Container Instances에 컨테이너 이미지 배포</a>
+- title: 참고 자료
+  items:
+  - type: list
+    style: cards
+    className: cardsD
     items:
-      - type: list
-        style: cards
-        className: cardsD
-        items:
-          - title: Azure CLI
-            html: <p><a href="/cli/azure/container">Azure CLI 2.0</a></p>
+    - title: 명령줄
+      html: <p><a href="/cli/azure/container">Azure CLI</a></p><p><a href="/powershell/module/azurerm.containerinstance#container_instances">PowerShell</a></p>
+    - title: 언어
+      html: <p><a href="/dotnet/api/overview/azure/containerinstances">.NET</a></p><p><a href="/python/api/overview/azure/containerinstance">Python</a></p><p><a href="/java/api/overview/azure/containerinstance">Java</a></p><p><a href="/javascript/api/overview/azure/containerinstances">Node.js</a></p>
+    - title: REST (영문)
+      html: <p><a href="/rest/api/container-instances">REST API 참조</a></p><p><a href="/azure/templates/microsoft.containerinstance/containergroups">Resource Manager 템플릿</a></p>

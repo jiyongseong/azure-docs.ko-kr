@@ -1,0 +1,84 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: "Site Recovery 설명서"
+metadata:
+  title: "Azure Site Recovery 설명서 - 자습서, API 참조 | Microsoft Docs"
+  meta.description: Learn how to set up cloud disaster recovery and business continuity for physical servers and virtual machines by deploying and managing replication.
+  services: site-recovery
+  author: czeumault
+  manager: carolz
+  ms.service: site-recovery
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 09/23/2017
+  ms.author: carolz
+  ms.openlocfilehash: 0d66952b5f159ce92b8586f7beb71c25fe7c7b39
+  ms.sourcegitcommit: 6fb44d6fbce161b26328f863479ef09c5303090f
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 01/10/2018
+abstract:
+  description: "Azure Site Recovery는 Azure VM, 온-프레미스 VM 및 물리적 서버에 대한 재해 복구를 오케스트레이션하고 관리합니다. 빠른 시작 및 자습서를 사용하여 복제, 장애 조치 및 장애 복구하는 방법을 알아봅니다."
+sections:
+- title: "5분 빠른 시작"
+  items:
+  - type: paragraph
+    text: "Azure VM에 대한 재해 복구를 신속하게 설정합니다."
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: /azure/site-recovery/media/index/portal.svg
+      text: Azure portal
+      href: /azure/site-recovery/azure-to-azure-quickstart
+- title: "단계별 자습서"
+  items:
+  - type: paragraph
+    text: "VM 및 물리적 서버에 대한 재해 복구를 설정하는 방법을 알아봅니다."
+  - type: text
+    html: "<h3>Azure 간</h3>"
+  - type: list
+    style: ordered
+    items:
+    - html: "<a href=\"azure-to-azure-tutorial-enable-replication\">재해 복구 설정</a>"
+    - html: "<a href=\"azure-to-azure-tutorial-dr-drill\">재해 복구 훈련 실행</a>"
+    - html: "<a href=\"azure-to-azure-tutorial-failover-failback\">장애 조치 및 장애 복구 실행</a>"
+  - type: text
+    html: <h3>VMware</h3>
+  - type: list
+    style: ordered
+    items:
+    - html: "<a href=\"tutorial-prepare-azure\">Azure 준비</a>"
+    - html: "<a href=\"tutorial-prepare-on-premises-vmware\">온-프레미스 VMware 준비</a>"
+    - html: "<a href=\"tutorial-vmware-to-azure\">재해 복구 설정</a>"
+    - html: "<a href=\"tutorial-dr-drill-azure\">재해 복구 드릴 실행</a>"
+    - html: "<a href=\"tutorial-vmware-to-azure-failover-failback\">장애 조치 및 장애 복구 실행</a>"
+  - type: text
+    html: <h3>Hyper-V</h3>
+  - type: list
+    style: ordered
+    items:
+    - html: "<a href=\"tutorial-prepare-azure\">Azure 준비</a>"
+    - html: "<a href=\"tutorial-prepare-on-premises-hyper-v\">온-프레미스 Hyper-V 준비</a>"
+    - html: "<a href=\"tutorial-hyper-v-to-azure\">Hyper-V VM에 재해 복구 설정</a>"
+    - html: "<a href=\"tutorial-hyper-v-vmm-to-azure\">System Center VMM에서 관리하는 Hyper-V VM에 재해 복구 설정</a>"
+    - html: "<a href=\"tutorial-dr-drill-azure\">재해 복구 드릴 실행</a>"
+    - html: "<a href=\"tutorial-hyper-v-to-azure-failover-failback\">장애 조치 및 장애 복구 실행</a>"
+  - type: text
+    html: "<h3>Azure로 마이그레이션</h3>"
+  - type: list
+    style: ordered
+    items:
+    - html: "<a href=\"tutorial-prepare-azure\">Azure 준비</a>"
+    - html: "<a href=\"tutorial-migrate-on-premises-to-azure\">온-프레미스 컴퓨터 마이그레이션</a> 또는 <a href=\"tutorial-migrate-aws-to-azure\">Azure로 AWS 인스턴스 마이그레이션</a>"
+- title: "참조"
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: "명령줄"
+      html: <p><a href="/powershell/module/azurerm.siterecovery/?view=azurermps-4.3.1">Azure PowerShell</a></p>
+    - title: "REST (영문)"
+      html: "<p><a href=\"/rest/api/site-recovery/\">REST API 참조</a></p>"

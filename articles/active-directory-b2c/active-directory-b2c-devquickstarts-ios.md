@@ -1,26 +1,21 @@
 ---
-title: "Azure Active Directory B2C: iOS 응용 프로그램을 사용하여 토큰 가져오기 | Microsoft Docs"
-description: "이 문서에서는 Azure Active Directory B2C와 함께 AppAuth를 사용하여 iOS 앱을 만들고 사용자 ID를 관리하고 사용자를 인증하는 방법을 보여 줍니다."
+title: iOS 응용 프로그램에서 AppAuth 사용 - Azure Active Directory B2C
+description: 이 문서에서는 Azure Active Directory B2C와 함께 AppAuth를 사용하여 iOS 앱을 만들고 사용자 ID를 관리하고 사용자를 인증하는 방법을 보여 줍니다.
 services: active-directory-b2c
 documentationcenter: ios
-author: saeeda
-manager: krassk
-editor: 
-ms.assetid: d818a634-42c2-4cbd-bf73-32fa0c8c69d3
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
-ms.tgt_pltfrm: mobile-ios
-ms.devlang: objectivec
 ms.topic: article
 ms.date: 03/07/2017
-ms.author: saeeda
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a30a90682948b657fb31dd14101172282988cbf0
-ms.openlocfilehash: 9756e9019d1f79c1fb17cf142daaaaca442722c7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/25/2017
-
-
+ms.author: davidmu
+ms.openlocfilehash: 18c3801b18fb9adb444918cc45ee70c2611b213d
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="azure-ad-b2c-sign-in-using-an-ios-application"></a>Azure AD B2C: iOS 응용 프로그램을 사용하여 로그인
 
@@ -40,10 +35,8 @@ Azure AD B2C를 사용하기 전에 디렉터리 또는 테넌트를 만들어�
 다음으로 B2C 디렉터리에서 앱을 만들어야 합니다. 앱 등록은 앱과 안전하게 통신하는 데 필요한 Azure AD 정보를 제공합니다. 모바일 앱을 만들려면 [이러한 지침](active-directory-b2c-app-registration.md)에 따릅니다. 다음을 수행해야 합니다.
 
 * 응용 프로그램에 **네이티브 클라이언트**를 포함합니다.
-* 앱에 할당된 **응용 프로그램 ID** 를 복사합니다. 이 가이드는 나중에 필요합니다.
+* 앱에 할당된 **응용 프로그램 ID**를 복사합니다. 이 가이드는 나중에 필요합니다.
 * 사용자 지정 스키마를 사용하는 **리디렉션 URI**(예: com.onmicrosoft.fabrikamb2c.exampleapp://oauth/redirect)를 설정합니다. 이 URI는 나중에 필요합니다.
-
-[!INCLUDE [active-directory-b2c-devquickstarts-v2-apps](../../includes/active-directory-b2c-devquickstarts-v2-apps.md)]
 
 ## <a name="create-your-policies"></a>정책 만들기
 Azure AD B2C에서 모든 사용자 환경은 [정책](active-directory-b2c-reference-policies.md)에 의해 정의됩니다. 이 앱은 결합된 로그인 및 등록의 하나의 ID 환경을 포함합니다. [정책 참조 문서](active-directory-b2c-reference-policies.md#create-a-sign-up-policy)에서 설명한 대로 이 정책을 만들어야 합니다. 정책을 만들 때 다음을 확인합니다.
@@ -133,9 +126,8 @@ appDelegate.currentAuthorizationFlow =
 * '항목 0'의 왼쪽에 있는 화살표를 클릭하여 트리를 엽니다.
 * 항목 0 아래의 첫 번째 항목 이름을 'URL Schemes'로 바꿉니다.
 * 'URL Schemes'의 왼쪽에 있는 화살표를 클릭하여 트리를 엽니다.
-* '값' 열에서 'URL Schemes' 아래의 '항목 0' 왼쪽 필드가 비어 있습니다.  이 값을 응용 프로그램의 고유한 스키마로 설정합니다.  OIDAuthorizationRequest 개체를 만들 때 redirectURL에 사용된 스키마와 일치해야 합니다.  이 샘플에서는 스키마 'com.onmicrosoft.fabrikamb2c.exampleapp'을 사용했습니다.
+* '값' 열에서 'URL Schemes' 아래의 '항목 0' 왼쪽 필드가 비어 있습니다.  이 값을 응용 프로그램의 고유한 스키마로 설정합니다.  OIDAuthorizationRequest 개체를 만들 때 redirectURL에 사용된 스키마와 일치해야 합니다.  이 샘플에서는 스키마 'com.onmicrosoft.fabrikamb2c.exampleapp'이 사용됩니다.
 
 프로세스의 나머지 단계를 완료하는 방법은 [AppAuth 가이드](https://openid.github.io/AppAuth-iOS/)를 참조하세요. 작업 중인 앱으로 빠르게 시작해야 하는 경우에는 [샘플](https://github.com/Azure-Samples/active-directory-ios-native-appauth-b2c)을 확인하세요. [README.md](https://github.com/Azure-Samples/active-directory-ios-native-appauth-b2c/blob/master/README.md)에 나온 단계에 따라 사용자 고유의 Azure AD B2C 구성을 입력합니다.
 
-Microsoft는 사용자 의견 및 제안을 항상 환영합니다! 이 토픽을 완료하기가 어렵거나 이 콘텐츠를 개선할 사항이 있는 경우 페이지의 맨 아래에 의견을 보내주시면 감사하겠습니다. 기능 요청이 있는 경우 [UserVoice](https://feedback.azure.com/forums/169401-azure-active-directory/category/160596-b2c)에 추가해 주세요.
-
+Microsoft는 사용자 의견 및 제안을 항상 환영합니다! 이 문서를 완료하기가 어렵거나 이 콘텐츠를 개선할 사항이 있는 경우 페이지의 맨 아래에 의견을 보내주시면 감사하겠습니다. 기능 요청이 있는 경우 [UserVoice](https://feedback.azure.com/forums/169401-azure-active-directory/category/160596-b2c)에 추가해 주세요.

@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/27/2016
 ms.author: bwren
-ms.translationtype: Human Translation
-ms.sourcegitcommit: dcda8b30adde930ab373a087d6955b900365c4cc
 ms.openlocfilehash: b4201f105a87b0a41059c061eb37fb35d4514e02
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="microsoft-monitoring-product-comparison"></a>Microsoft 모니터링 제품 비교
 이 문서는 OMS(Operations Management Suite)의 Log Analytics과 SCOM(System Center Operations Manager)의 차이를 아키텍처, 리소스 모니터링 방식의 논리, 수집한 데이터 분석 방식 측면에서 비교, 설명하며  각각의 차이와 상대적 강점에 대한 기본적 내용을 이해하기 위한 정보를 제공합니다.  
@@ -173,5 +171,4 @@ Log Analytics의 쿼리로 임시 분석을 제공하는 기능 이외에, 나�
 ## <a name="next-steps"></a>다음 단계
 * [SCOM(System Center Operations Manager)](https://technet.microsoft.com/library/hh205987.aspx)을 배포합니다.
 * [Log Analytics](https://azure.microsoft.com/documentation/services/log-analytics)에 등록합니다.  
-
 

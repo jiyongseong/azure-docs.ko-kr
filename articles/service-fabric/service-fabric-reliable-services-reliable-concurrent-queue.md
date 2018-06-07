@@ -1,6 +1,6 @@
 ---
-title: "Azure Service Fabric의 ReliableConcurrentQueue"
-description: "ReliableConcurrentQueue는 병렬 큐에 추가하고 큐에서 제거할 수 있는 처리량이 높은 큐입니다."
+title: Azure Service Fabric의 ReliableConcurrentQueue
+description: ReliableConcurrentQueue는 병렬 큐에 추가하고 큐에서 제거할 수 있는 처리량이 높은 큐입니다.
 services: service-fabric
 documentationcenter: .net
 author: sangarg
@@ -9,18 +9,16 @@ editor: raja,tyadam,masnider,vturecek
 ms.assetid: 62857523-604b-434e-bd1c-2141ea4b00d1
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: required
 ms.date: 5/1/2017
 ms.author: sangarg
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c308183ffe6a01f4d4bf6f5817945629cbcedc92
-ms.openlocfilehash: 122cb48149477f295a65b8ee623c647b6db10a86
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/17/2017
-
-
+ms.openlocfilehash: e04123f7870921a2979564d0f6c68424d4d7711c
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="introduction-to-reliableconcurrentqueue-in-azure-service-fabric"></a>Azure Service Fabric의 ReliableConcurrentQueue 소개
 신뢰할 수 있는 동시 큐는 비동기, 트랜잭션 및 복제된 큐로서 큐에 넣기 및 큐에서 제거 작업에 대한 높은 동시성을 제공합니다. [신뢰할 수 있는 큐](https://msdn.microsoft.com/library/azure/dn971527.aspx)에서 제공한 엄격한 FIFO 순서를 완화하여 처리량이 높고 대기 시간이 짧게 설계되었으며 대신 최상의 순서를 제공합니다.
@@ -97,7 +95,7 @@ using (var txn = this.StateManager.CreateTransaction())
 }
 ```
 
-작업이 성공적으로 완료되고, 작업이 병렬로 실행되고, 큐를 수정하는 다른 동시 트랜잭션이 없다고 가정합니다. 큐에 있는 항목의 순서를 방해할 수 없습니다. 이 코드 조각에서 항목은 4! 가능한 순서 중 하나로 정렬될 수 있습니다.  큐는 원래 (큐에 넣은) 순서로 항목을 유지하려고 하지만 오류 또는 동시 작업으로 인해 순서를 변경해야 할 수도 있습니다.
+작업이 성공적으로 완료되고, 작업이 병렬로 실행되고, 큐를 수정하는 다른 동시 트랜잭션이 없다고 가정합니다. 큐에 있는 항목의 순서를 방해할 수 없습니다. 이 코드 조각에서 항목은 4가지 가능한 순서 중 하나로 나타날 수 있습니다.  큐는 원래 (큐에 넣은) 순서로 항목을 유지하려고 하지만 오류 또는 동시 작업으로 인해 순서를 변경해야 할 수도 있습니다.
 
 
 ### <a name="dequeueasync"></a>DequeueAsync
@@ -341,9 +339,8 @@ using (var txn = this.StateManager.CreateTransaction())
 * [Reliable Services 빠른 시작](service-fabric-reliable-services-quick-start.md)
 * [신뢰할 수 있는 컬렉션 작업](service-fabric-work-with-reliable-collections.md)
 * [Reliable Services 알림](service-fabric-reliable-services-notifications.md)
-* [Reliable Services 백업 및 복원(재해 복구)](service-fabric-reliable-services-backup-restore.md)
+* [Reliable Services Backup 및 복원(재해 복구)](service-fabric-reliable-services-backup-restore.md)
 * [신뢰할 수 있는 상태 관리자 구성](service-fabric-reliable-services-configuration.md)
 * [Service Fabric Web API 서비스 시작](service-fabric-reliable-services-communication-webapi.md)
 * [Reliable Services 프로그래밍 모델 고급 사용법](service-fabric-reliable-services-advanced-usage.md)
 * [신뢰할 수 있는 컬렉션에 대한 개발자 참조](https://msdn.microsoft.com/library/azure/microsoft.servicefabric.data.collections.aspx)
-

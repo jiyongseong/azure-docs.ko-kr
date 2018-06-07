@@ -1,11 +1,11 @@
 ---
-title: "Azure Logic Apps에 대한 액세스 보호 | Microsoft Docs"
-description: "Azure Logic Apps에서 워크플로와 함께 사용되는 트리거, 입력 및 출력, 작업 매개 변수 및 서비스에 대한 액세스를 보호하기 위한 보안을 추가합니다."
+title: Azure Logic Apps에 대한 액세스 보호 | Microsoft Docs
+description: Azure Logic Apps에서 워크플로와 함께 사용되는 트리거, 입력 및 출력, 작업 매개 변수 및 서비스에 대한 액세스를 보호하기 위한 보안을 추가합니다.
 services: logic-apps
 documentationcenter: .net,nodejs,java
 author: jeffhollan
 manager: anneta
-editor: 
+editor: ''
 ms.assetid: 9fab1050-cfbc-4a8b-b1b3-5531bee92856
 ms.service: logic-apps
 ms.devlang: multiple
@@ -14,15 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: integration
 ms.date: 11/22/2016
 ms.author: LADocs; jehollan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: de674af369080ad7eb608608685e293f2326c8e6
-ms.openlocfilehash: ac52924d928b293f4b1b58f0c25375f890c51837
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/04/2017
-
-
+ms.openlocfilehash: 3831c44a52fe4bb428021acac46188966087fdfe
+ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/03/2018
 ---
-
 # <a name="secure-access-to-your-logic-apps"></a>논리 앱에 대한 액세스 보호
 
 논리 앱을 보호하는 데 사용할 수 있는 많은 도구가 있습니다.
@@ -39,7 +36,7 @@ HTTP 요청([요청](../connectors/connectors-native-reqres.md) 또는 [WebHook]
 
 ### <a name="shared-access-signature"></a>공유 액세스 서명
 
-논리 앱에 대한 모든 요청 끝점은 URL의 일부로서 [SAS(공유 액세스 서명](../storage/storage-dotnet-shared-access-signature-part-1.md))를 포함합니다. 각 URL은 `sp`, `sv` 및 `sig` 쿼리 매개 변수를 포함합니다. 권한은 `sp`에 의해 지정되고 허용된 HTTP 메서드에 해당하며, `sv`는 생성하는 데 사용된 버전이며, `sig`는 트리거하는 액세스를 인증하는 데 사용됩니다. 서명은 모든 URL 경로 및 속성에 관한 암호 키를 포함한 SHA256 알고리즘을 사용하여 생성됩니다. 비밀 키 암호는 절대 노출되거나 공개되지 않으며 논리 앱의 일부로서 암호화되고 저장됩니다. 논리 앱은 암호 키로 만들어진 유효한 서명을 포함하는 트리거에 권한을 부여합니다.
+논리 앱에 대한 모든 요청 끝점은 URL의 일부로서 [SAS(공유 액세스 서명](../storage/common/storage-dotnet-shared-access-signature-part-1.md))를 포함합니다. 각 URL은 `sp`, `sv` 및 `sig` 쿼리 매개 변수를 포함합니다. 권한은 `sp`에 의해 지정되고 허용된 HTTP 메서드에 해당하며, `sv`는 생성하는 데 사용된 버전이며, `sig`는 트리거하는 액세스를 인증하는 데 사용됩니다. 서명은 모든 URL 경로 및 속성에 관한 암호 키를 포함한 SHA256 알고리즘을 사용하여 생성됩니다. 비밀 키 암호는 절대 노출되거나 공개되지 않으며 논리 앱의 일부로서 암호화되고 저장됩니다. 논리 앱은 암호 키로 만들어진 유효한 서명을 포함하는 트리거에 권한을 부여합니다.
 
 #### <a name="regenerate-access-keys"></a>액세스 키 다시 생성
 
@@ -80,7 +77,7 @@ POST
 이 설정은 논리 앱 설정 내에서 구성할 수 있습니다.
 
 1. Azure Portal에서 IP 주소 제한을 추가하려는 논리 앱을 엽니다.
-1. **설정** 아래에 있는 **액세스 제어 구성** 메뉴 항목을 클릭합니다.
+1. **설정**에서 **워크플로 설정** 메뉴 항목을 클릭합니다.
 1. 트리거에 의해 허용되는 IP 주소 범위 목록을 지정합니다.
 
 유효한 IP 범위 형식은 `192.168.1.1/255`입니다. 논리 앱을 중첩된 논리 앱으로서 실행하려는 경우 **다른 논리 앱만** 옵션을 선택합니다. 이 옵션은 빈 배열을 리소스에 작성할 수 있으며, 이는 서비스 자체(부모 논리 앱)의 호출만 성공적으로 실행된다는 의미입니다.
@@ -122,7 +119,7 @@ POST
 
 ## <a name="secure-access-to-manage-or-edit-logic-apps"></a>논리 앱을 관리하거나 편집하기 위한 액세스 보호
 
-특정 사용자 또는 그룹만 리소스에서 작업을 수행할 수 있도록 논리 앱에서 관리 작업을 위한 액세스를 제한할 수 있습니다. 논리 앱은 Azure [RBAC(역할 기반 액세스 제어)](../active-directory/role-based-access-control-configure.md) 기능을 사용하고 동일한 도구로 사용자 지정할 수 있습니다.  또한 구독 구성원들에게 할당할 수 있는 몇 가지 기본 제공 역할이 있습니다.
+특정 사용자 또는 그룹만 리소스에서 작업을 수행할 수 있도록 논리 앱에서 관리 작업을 위한 액세스를 제한할 수 있습니다. 논리 앱은 Azure [RBAC(역할 기반 Access Control)](../role-based-access-control/role-assignments-portal.md) 기능을 사용하고 동일한 도구로 사용자 지정할 수 있습니다.  또한 구독 구성원들에게 할당할 수 있는 몇 가지 기본 제공 역할이 있습니다.
 
 * **논리 앱 참가자** - 논리 앱을 보고, 편집하고 업데이트하기 위한 액세스를 제공합니다.  리소스를 제거하거나 관리 작업을 수행할 수 없습니다.
 * **논리 앱 연산자** - 논리 앱과 실행 기록을 보고 활성화/비활성화할 수 있습니다.  정의를 편집하거나 업데이트할 수 없습니다.
@@ -138,8 +135,8 @@ POST
 Azure Portal의 리소스 설정 내에서 이 설정을 구성할 수 있습니다.
 
 1. Azure Portal에서 IP 주소 제한을 추가하려는 논리 앱을 엽니다.
-1. **설정** 아래에 있는 **액세스 제어 구성** 메뉴 항목을 클릭합니다.
-1. 콘텐츠에 액세스하기 위해 IP 주소 범위 목록을 지정합니다.
+2. **설정** 아래에 있는 **액세스 제어 구성** 메뉴 항목을 클릭합니다.
+3. 콘텐츠에 액세스하기 위해 IP 주소 범위 목록을 지정합니다.
 
 #### <a name="setting-ip-ranges-on-the-resource-definition"></a>리소스 정의에서 IP 범위 설정
 
@@ -186,64 +183,62 @@ Azure Portal의 리소스 설정 내에서 이 설정을 구성할 수 있습니
 
 ``` json
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "secretDeploymentParam": {
-      "type": "securestring"
-    }
-  },
-  "variables": {},
-  "resources": [
-    {
+   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+   "contentVersion": "1.0.0.0",
+   "parameters": {
+      "secretDeploymentParam": {
+         "type": "securestring"
+      }
+   },
+   "variables": {},
+   "resources": [ {
       "name": "secret-deploy",
       "type": "Microsoft.Logic/workflows",
       "location": "westus",
       "tags": {
-        "displayName": "LogicApp"
+         "displayName": "LogicApp"
       },
       "apiVersion": "2016-06-01",
       "properties": {
-        "definition": {
-          "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
-          "actions": {
-            "Call_External_API": {
-              "type": "http",
-              "inputs": {
-                "headers": {
-                  "Authorization": "@parameters('secret')"
-                },
-                "body": "This is the request"
-              },
-              "runAfter": {}
-            }
-          },
-          "parameters": {
+         "definition": {
+            "$schema": "https://schema.management.azure.com/schemas/2016-06-01/Microsoft.Logic.json",
+            "actions": {
+               "Call_External_API": {
+                  "type": "Http",
+                  "inputs": {
+                     "headers": {
+                        "Authorization": "@parameters('secret')"
+                     },
+                     "body": "This is the request"
+                  },
+                  "runAfter": {}
+               }
+            },
+            "parameters": {
+               "secret": {
+                  "type": "SecureString"
+               }
+            },
+            "triggers": {
+               "manual": {
+                  "type": "Request",
+                  "kind": "Http",
+                  "inputs": {
+                     "schema": {}
+                  }
+               }
+            },
+            "contentVersion": "1.0.0.0",
+            "outputs": {}
+         },
+         "parameters": {
             "secret": {
-              "type": "SecureString"
+               "value": "[parameters('secretDeploymentParam')]"
             }
-          },
-          "triggers": {
-            "manual": {
-              "type": "Request",
-              "kind": "Http",
-              "inputs": {
-                "schema": {}
-              }
-            }
-          },
-          "contentVersion": "1.0.0.0",
-          "outputs": {}
-        },
-        "parameters": {
-          "secret": {
-            "value": "[parameters('secretDeploymentParam')]"
-          }
-        }
+         }
       }
-    }
-  ],
-  "outputs": {}
+   } ],
+   "outputs": {}
 }
 ```
 
@@ -267,17 +262,12 @@ HTTP, HTTP + Swagger(개방형 API) 또는 웹후크 동작으로 작업할 경�
 
 논리 앱의 많은 관리형 커넥터는 파일 시스템, SQL, SharePoint, DB2 등의 온-프레미스 시스템에 보안 연결을 제공합니다. 게이트웨이는 Azure Service Bus를 통해 암호화된 채널의 온-프레미스 원본에서 데이터를 릴레이합니다. 보안으로 시작하는 모든 트래픽은 게이트웨이 에이전트에서 트래픽을 아웃바운드합니다. [데이터 게이트웨이 작동 원리](logic-apps-gateway-install.md#gateway-cloud-service)에 대해 자세히 알아봅니다.
 
-#### <a name="azure-api-management"></a>Azure API 관리
+#### <a name="azure-api-management"></a>Azure API Management
 
 [Azure API Management](https://azure.microsoft.com/services/api-management/)에는 보안 프록시를 위한 사이트 간 VPN 및 ExpressRoute 통합과 온-프레미스 시스템에 대한 통신 등 온-프레미스 연결 옵션이 있습니다. Logic App Designer에서 워크플로 내의 Azure API Management에서 노출되는 API를 빠르게 선택하여 온-프레미스 시스템에 빠르게 액세스할 수 있습니다.
-
-#### <a name="hybrid-connections-from-azure-app-service"></a>Azure App Services의 하이브리드 연결
-
-온-프레미스 통신을 위해 Azure API와 Web Apps용 온-프레미스 하이브리드 연결 기능을 사용할 수 있습니다.  하이브리드 연결 및 구성 방법에 대한 자세한 내용은 [이 문서에서](../app-service-web/web-sites-hybrid-connection-get-started.md) 찾아볼 수 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
 [배포 템플릿 만들기](logic-apps-create-deploy-template.md)  
 [예외 처리](logic-apps-exception-handling.md)  
 [논리 앱 모니터링](logic-apps-monitor-your-logic-apps.md)  
 [논리 앱 오류 진단 및 문제](logic-apps-diagnosing-failures.md)  
-

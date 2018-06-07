@@ -1,30 +1,20 @@
 ---
-title: "Azure Analysis Services 자습서 추가 단원: 동적 보안 | Microsoft Docs"
-description: "Azure Analysis Services 자습서의 행 필터를 사용하여 동적 보안을 사용하는 방법에 대해 설명합니다."
-services: analysis-services
-documentationcenter: 
+title: 'Azure Analysis Services 자습서 추가 단원: 동적 보안 | Microsoft Docs'
+description: Azure Analysis Services 자습서의 행 필터를 사용하여 동적 보안을 사용하는 방법에 대해 설명합니다.
 author: minewiskan
-manager: erikre
-editor: 
-tags: 
-ms.assetid: 
+manager: kfile
 ms.service: analysis-services
-ms.devlang: NA
-ms.topic: get-started-article
-ms.tgt_pltfrm: NA
-ms.workload: na
-ms.date: 05/26/2017
+ms.topic: conceptual
+ms.date: 04/12/2018
 ms.author: owend
+ms.reviewer: minewiskan
+ms.openlocfilehash: 5084bb0785e22a4b38f7f80f4c3b29a0ad92dadb
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
 ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
-ms.openlocfilehash: 4e97a558ae1a2601b5275a73164b483351f03857
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="supplemental-lesson---dynamic-security"></a>추가 단원 - 동적 보안
-
-[!INCLUDE[analysis-services-appliesto-aas-sql2017-later](../../../includes/analysis-services-appliesto-aas-sql2017-later.md)]
 
 이 추가 단원에서는 동적 보안을 구현하는 추가 역할을 만듭니다. 동적 보안은 현재 로그온한 사용자의 사용자 이름 또는 로그인 ID를 기반으로 행 수준 보안을 제공합니다. 
   

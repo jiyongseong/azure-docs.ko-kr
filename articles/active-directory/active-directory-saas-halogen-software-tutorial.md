@@ -1,10 +1,10 @@
 ---
-title: "자습서: Halogen Software와 Azure Active Directory 통합| Microsoft Azure"
-description: "Azure Active Directory 및 Halogen Software 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Halogen Software와 Azure Active Directory 통합| Microsoft Azure'
+description: Azure Active Directory 및 Halogen Software 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: 2ca2298d-9a0c-4f14-925c-fa23f2659d28
 ms.service: active-directory
 ms.workload: identity
@@ -13,13 +13,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/23/2017
 ms.author: jeedes
-ms.translationtype: Human Translation
-ms.sourcegitcommit: cb4d075d283059d613e3e9d8f0a6f9448310d96b
-ms.openlocfilehash: e09fa93038965e4880a23002bac6917ad2a077f7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/26/2017
-
-
+ms.openlocfilehash: fd2a45d34d93f1233302c89c502fb171da2873e9
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-halogen-software"></a>자습서: Halogen Software와 Azure Active Directory 통합
 
@@ -31,7 +29,7 @@ Halogen Software를 Azure AD와 통합하면 다음과 같은 이점이 제공�
 - 사용자가 해당 Azure AD 계정으로 Halogen Software에 자동으로 로그온(Single Sign-on)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -61,7 +59,7 @@ Halogen Software의 Azure AD 통합을 구성하려면 갤러리의 Halogen Soft
 
 **갤러리에서 Halogen Software를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Active Directory][1]
 
@@ -90,11 +88,11 @@ Halogen Software에서 Azure AD의 **사용자 이름** 값을 **Username** 값�
 
 Halogen Software에서 Azure AD Single Sign-on을 구성하고 테스트하려면 다음 구성 요소를 완료해야 합니다.
 
-1. **[Azure AD Single Sign-On 구성](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
-2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
+1. **[Configuring Azure AD Single Sign-On](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
+2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On 테스트하는 데 사용합니다.
 3. **[Halogen Software 테스트 사용자 만들기](#creating-a-halogen-software-test-user)** - Britta Simon의 Azure AD 사용자 표현과 연결되는 대응 사용자를 Halogen Software에 만듭니다.
 4. **[Azure AD 테스트 사용자 할당](#assigning-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Testing Single Sign-On](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
+5. **[Single Sign-On 테스트](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
 
 ### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -104,19 +102,19 @@ Halogen Software에서 Azure AD Single Sign-on을 구성하고 테스트하려�
 
 1. Azure Portal의 **Halogen Software** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single Sign-On** 대화 상자에서 **모드**를 **SAML 기반 로그온**으로 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-on 구성](./media/active-directory-saas-halogen-software-tutorial/tutorial_halogensoftware_samlbase.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-halogen-software-tutorial/tutorial_halogensoftware_samlbase.png)
 
 3. **Halogen Software 도메인 및 URL** 섹션에서 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-halogen-software-tutorial/tutorial_halogensoftware_url.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-halogen-software-tutorial/tutorial_halogensoftware_url.png)
 
     a. **로그온 URL** 텍스트 상자에서 다음 패턴으로 URL을 입력합니다. `https://global.hgncloud.com/<companyname>`
 
-    b. **식별자** 텍스트 상자에서 `https://global.halogensoftware.com/<companyname>`, `https://global.hgncloud.com/<companyname>` 패턴을 사용하여 URL을 입력합니다.
+    나. **식별자** 텍스트 상자에서 `https://global.halogensoftware.com/<companyname>`, `https://global.hgncloud.com/<companyname>` 패턴을 사용하여 URL을 입력합니다.
 
     > [!NOTE] 
     > 이러한 값은 실제 값이 아닙니다. 실제 로그온 URL 및 식별자로 값을 업데이트합니다. 이러한 값을 얻으려면 [Halogen Software 클라이언트 지원 팀](https://support.halogensoftware.com/)에 문의하세요. 
@@ -125,11 +123,11 @@ Halogen Software에서 Azure AD Single Sign-on을 구성하고 테스트하려�
 
 4. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 메타데이터 파일을 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-halogen-software-tutorial/tutorial_halogensoftware_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-halogen-software-tutorial/tutorial_halogensoftware_certificate.png) 
 
 5. **저장** 단추를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-halogen-software-tutorial/tutorial_general_400.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-halogen-software-tutorial/tutorial_general_400.png)
 
 6. 다른 브라우저 창에서 **Halogen Software** 응용 프로그램에 관리자 권한으로 로그온합니다.
 
@@ -147,9 +145,9 @@ Halogen Software에서 Azure AD Single Sign-on을 구성하고 테스트하려�
 
      a. **고유 식별자**로 **NameID**를 선택합니다.
 
-     b. **고유 식별자 매핑 대상**으로 **Username**을 선택합니다.
+     나. **고유 식별자 매핑 대상**으로 **Username**을 선택합니다.
   
-     c. 다운로드한 메타데이터 파일을 업로드하려면 **찾아보기**를 클릭하여 파일을 선택하고 **파일 업로드**를 클릭합니다.
+     다. 다운로드한 메타데이터 파일을 업로드하려면 **찾아보기**를 클릭하여 파일을 선택하고 **파일 업로드**를 클릭합니다.
  
      d. 구성을 테스트하려면 **테스트 실행**을 클릭합니다. 
     
@@ -190,9 +188,9 @@ Halogen Software에서 Azure AD Single Sign-on을 구성하고 테스트하려�
 
     a. **이름** 텍스트 상자에 이름을 **BrittaSimon**으로 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -214,13 +212,13 @@ Halogen Software에서 Azure AD Single Sign-on을 구성하고 테스트하려�
 
     a. **이름** 텍스트 상자에 사용자의 이름(예: **Britta**)을 입력합니다.
     
-    b. **성** 텍스트 상자에 사용자의 성(예: **Simon**)을 입력합니다. 
+    나. **성** 텍스트 상자에 사용자의 성(예: **Simon**)을 입력합니다. 
 
-    c. **사용자 이름** 텍스트 상자에 Azure Portal 사용자 이름으로 **Brita Simon**을 입력합니다.
+    다. **사용자 이름** 텍스트 상자에 Azure Portal 사용자 이름으로 **Brita Simon**을 입력합니다.
 
     d. **암호** 텍스트 상자에 Britta에 대한 암호를 입력합니다.
     
-    e. **Save**를 클릭합니다.
+    e. **저장**을 클릭합니다.
 
 ### <a name="assigning-the-azure-ad-test-user"></a>Azure AD 테스트 사용자 할당
 
@@ -236,7 +234,7 @@ Halogen Software에서 Azure AD Single Sign-on을 구성하고 테스트하려�
 
 2. 응용 프로그램 목록에서 **Halogen Software**를 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-halogen-software-tutorial/tutorial_halogensoftware_app.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-halogen-software-tutorial/tutorial_halogensoftware_app.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -261,7 +259,7 @@ Halogen Software에서 Azure AD Single Sign-on을 구성하고 테스트하려�
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -288,4 +286,3 @@ Halogen Software에서 Azure AD Single Sign-on을 구성하고 테스트하려�
 [300]: ./media/active-directory-saas-halogen-software-tutorial/tutorial_halogen_300.png
 
 [301]: ./media/active-directory-saas-halogen-software-tutorial/tutorial_halogen_301.png
-

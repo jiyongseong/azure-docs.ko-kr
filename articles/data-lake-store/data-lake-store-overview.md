@@ -1,8 +1,8 @@
 ---
-title: "Azure Data Lake Store 개요 | Microsoft Docs"
-description: "Azure 데이터 레이크 저장소 및 기타 데이터 저장소를 통해 제공하는 값 이해"
+title: Azure Data Lake Store 개요 | Microsoft Docs
+description: Azure 데이터 레이크 저장소 및 기타 데이터 저장소를 통해 제공하는 값 이해
 services: data-lake-store
-documentationcenter: 
+documentationcenter: ''
 author: nitinme
 manager: jhubbard
 editor: cgronlun
@@ -12,15 +12,13 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: big-data
-ms.date: 06/29/2017
+ms.date: 03/26/2018
 ms.author: nitinme
-ms.translationtype: Human Translation
-ms.sourcegitcommit: dcda8b30adde930ab373a087d6955b900365c4cc
-ms.openlocfilehash: a1d30c77dd29a134017be7deec6bb50991e6a698
-ms.contentlocale: ko-kr
-ms.lasthandoff: 12/08/2016
-
-
+ms.openlocfilehash: 111906bc9e7e85e30a879d7bacff37edb4b204ac
+ms.sourcegitcommit: d74657d1926467210454f58970c45b2fd3ca088d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/28/2018
 ---
 # <a name="overview-of-azure-data-lake-store"></a>Azure 데이터 레이크 저장소 개요
 Azure 데이터 레이크 저장소는 빅 데이터 분석 작업을 위한 엔터프라이즈 수준 하이퍼 스케일 리포지토리입니다. Azure 데이터 레이크를 사용하면 작동 및 예비 분석에 대해 한 곳에서 모든 크기, 형식 및 수집 속도의 데이터를 캡처할 수 있습니다.
@@ -32,7 +30,7 @@ Azure 데이터 레이크 저장소는 빅 데이터 분석 작업을 위한 엔
 
 Azure 데이터 레이크 저장소는 WebHDFS 호환 REST API를 사용하여 Hadoop(HDInsight 클러스터에서 사용 가능)에서 액세스할 수 있습니다. 저장된 데이터에 대한 분석을 사용하도록 특별히 설계되었으며 데이터 분석 시나리오에 대한 성능을 위해 조정됩니다. 기본적으로 실제 엔터프라이즈 사용 사례에 필수적인 모든 엔터프라이즈급 기능-보안, 관리 효율성, 확장성, 안정성 및 가용성-을 포함합니다.
 
-![Azure 데이터 레이크](./media/data-lake-store-overview/data-lake-store-concept.png)
+![Azure Data Lake](./media/data-lake-store-overview/data-lake-store-concept.png)
 
 Azure 데이터 레이크의 주요 기능 중 일부는 다음과 같습니다.
 
@@ -55,16 +53,16 @@ Azure 데이터 레이크 저장소는 업계 표준 가용성과 안정성을 �
 ### <a name="all-data"></a>모든 데이터
 Azure 데이터 레이크 저장소는 사전 변환 없이 모든 데이터를 고유 형식으로 그대로 저장할 수 있습니다. 데이터 레이크 저장소는 데이터가 로드되기 전에 정의되어야 하는 스키마를 필요로 하지 않으므로 개별 분석 프레임워크가 데이터를 해석하고 분석 시 스키마를 정의할 때까지 그대로 둡니다. 임의 크기 및 형식의 파일을 저장 가능한 것은 데이터 레이크 저장소가 구조화, 반구조화 및 비구조화된 데이터를 처리할 수 있도록 합니다.
 
-데이터에 대한 Azure 데이터 레이크 저장소 컨테이너는 기본적으로 폴더 및 파일입니다. SDK, Azure 포털 및 Azure Powershell을 사용하여 저장된 데이터에서 작동합니다. 이러한 인터페이스 및 적절한 컨테이너를 사용하여 저장소에 데이터를 저장하는 한 모든 종류의 데이터를 저장할 수 있습니다. 데이터 레이크 저장소는 저장하는 데이터의 형식에 따라 데이터의 특수한 처리를 수행하지 않습니다.
+데이터에 대한 Azure 데이터 레이크 저장소 컨테이너는 기본적으로 폴더 및 파일입니다. SDK, Azure Portal 및 Azure Powershell을 사용하여 저장된 데이터에서 작동합니다. 이러한 인터페이스 및 적절한 컨테이너를 사용하여 저장소에 데이터를 저장하는 한 모든 종류의 데이터를 저장할 수 있습니다. 데이터 레이크 저장소는 저장하는 데이터의 형식에 따라 데이터의 특수한 처리를 수행하지 않습니다.
 
 ## <a name="DataLakeStoreSecurity"></a>Azure 데이터 레이크 저장소의 데이터 보호
 Azure 데이터 레이크 저장소는 인증 및 액세스 제어 목록(ACL)을 위해 Azure Active Directory를 사용하여 데이터에 대한 액세스를 관리합니다.
 
 | 기능 | 설명 |
 | --- | --- |
-| 인증 |Azure 데이터 레이크 저장소는 Azure 데이터 레이크 저장소에 저장된 모든 데이터에 대한 ID 및 액세스 관리를 위해 Azure Active Directory(AAD)와 통합합니다. 통합의 결과로 Azure 데이터 레이크는 다단계 인증, 조건부 액세스, 역할 기반 액세스 제어, 응용 프로그램 사용 모니터링, 보안 모니터링 및 경고 등을 포함한 모든 AAD 기능의 이점을 얻습니다. Azure 데이터 레이크 저장소는 REST 인터페이스에서 인증을 위한 OAuth 2.0 프로토콜을 지원합니다. |
-| 액세스 제어 |Azure 데이터 레이크 저장소는 WebHDFS 프로토콜에 의해 노출되는 POSIX 스타일 권한을 지원하여 액세스 제어를 제공합니다. Data Lake Store 공개 미리 보기(현재 릴리스)에서 ACL은 루트 폴더, 하위 폴더 및 개별 파일에서도 사용할 수 있습니다. Data Lake Store의 컨텍스트에서 ACL 작동 방법에 대한 자세한 내용은 [Data Lake Store의 액세스 제어](data-lake-store-access-control.md)를 참조하세요. |
-| 암호화 |또한 Data Lake Store는 계정에 저장된 데이터에 대한 암호화를 제공합니다. Data Lake Store 계정을 만드는 동안 암호화 설정을 지정합니다. 암호화된 데이터 또는 암호화 없음을 선택할 수 있습니다. 암호화 관련 구성을 제공하는 방법에 대한 자세한 내용은 [Azure Portal을 사용하여 Azure Data Lake Store 시작](data-lake-store-get-started-portal.md)을 참조하세요. |
+| 인증 |Azure 데이터 레이크 저장소는 Azure 데이터 레이크 저장소에 저장된 모든 데이터에 대한 ID 및 액세스 관리를 위해 Azure Active Directory(AAD)와 통합합니다. 통합의 결과로 Azure 데이터 레이크는 다단계 인증, 조건부 액세스, 역할 기반 액세스 제어, 응용 프로그램 사용 모니터링, 보안 모니터링 및 경고 등을 포함한 모든 AAD 기능의 이점을 얻습니다. Azure 데이터 레이크 저장소는 REST 인터페이스에서 인증을 위한 OAuth 2.0 프로토콜을 지원합니다. [Data Lake Store 인증](data-lakes-store-authentication-using-azure-active-directory.md) 참조|
+| Access Control |Azure 데이터 레이크 저장소는 WebHDFS 프로토콜에 의해 노출되는 POSIX 스타일 권한을 지원하여 액세스 제어를 제공합니다. ACL은 루트 폴더, 하위 폴더 및 개별 파일에서도 사용할 수 있습니다. Data Lake Store의 컨텍스트에서 ACL 작동 방법에 대한 자세한 내용은 [Data Lake Store의 액세스 제어](data-lake-store-access-control.md)를 참조하세요. |
+| 암호화 |또한 Data Lake Store는 계정에 저장된 데이터에 대한 암호화를 제공합니다. Data Lake Store 계정을 만드는 동안 암호화 설정을 지정합니다. 암호화된 데이터 또는 암호화 없음을 선택할 수 있습니다. 자세한 내용은 [Data Lake Store의 암호화](data-lake-store-encryption.md)를 참조하세요. 암호화 관련 구성을 제공하는 방법에 대한 자세한 내용은 [Azure Portal을 사용하여 Azure Data Lake Store 시작](data-lake-store-get-started-portal.md)을 참조하세요. |
 
 Data Lake 저장소의 데이터를 보호하는 방법에 대한 자세히 알아보려 합니다. 아래 링크를 따라갑니다.
 
@@ -84,7 +82,7 @@ Hadoop 환경에서 새로운 파일 시스템인 AzureDataLakeFilesystem(adl://
 `adl://<data_lake_store_name>.azuredatalakestore.net`을(를) 사용하여 데이터 레이크 저장소의 데이터에 액세스할 수 있습니다. 데이터 레이크 저장소의 데이터에 액세스하는 방법에 대한 자세한 내용은 [저장된 데이터의 속성 보기](data-lake-store-get-started-portal.md#properties)
 
 ## <a name="how-do-i-start-using-azure-data-lake-store"></a>Azure 데이터 레이크 저장소를 사용하여 어떻게 시작합니까?
-Azure 포털을 사용하여 데이터 레이크 저장소를 프로비전하는 방법은 [Azure 포털을 사용하여 데이터 레이크 저장소 시작](data-lake-store-get-started-portal.md)을 참조하세요. Azure 데이터 레이크를 프로비전하면 데이터 레이크 저장소를 통해 Azure 데이터 레이크 분석 또는 Azure HDInsight와 같은 빅 데이터 제공을 사용하는 방법을 배울 수 있습니다. 또한 .NET 응용 프로그램을 만들어 Azure 데이터 레이크 저장소 계정을 만들고 데이터 업로드, 데이터 다운로드 등과 같은 작업을 수행할 수 있습니다.
+Azure Portal을 사용하여 데이터 레이크 저장소를 프로비전하는 방법은 [Azure Portal을 사용하여 데이터 레이크 저장소 시작](data-lake-store-get-started-portal.md)을 참조하세요. Azure 데이터 레이크를 프로비전하면 데이터 레이크 저장소를 통해 Azure 데이터 레이크 분석 또는 Azure HDInsight와 같은 빅 데이터 제공을 사용하는 방법을 배울 수 있습니다. 또한 .NET 응용 프로그램을 만들어 Azure 데이터 레이크 저장소 계정을 만들고 데이터 업로드, 데이터 다운로드 등과 같은 작업을 수행할 수 있습니다.
 
 * [Azure 데이터 레이크 분석 시작](../data-lake-analytics/data-lake-analytics-get-started-portal.md)
 * [데이터 레이크 저장소와 함께 Azure HDInsight 사용](data-lake-store-hdinsight-hadoop-use-portal.md)
@@ -103,5 +101,4 @@ Azure 포털을 사용하여 데이터 레이크 저장소를 프로비전하는
 * [Apache Sqoop을 사용하여 관계형 원본 및 Azure Data Lake 저장소 간에 데이터 이동](https://mix.office.com/watch/1butcdjxmu114)
 * [Azure 데이터 팩터리를 사용하여 Azure Data Lake 저장소에 대한 데이터 오케스트레이션](https://mix.office.com/watch/1oa7le7t2u4ka)
 * [Azure Data Lake 저장소에서 데이터 보호](https://mix.office.com/watch/1q2mgzh9nn5lx)
-
 

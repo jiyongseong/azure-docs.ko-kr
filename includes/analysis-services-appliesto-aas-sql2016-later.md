@@ -1,1 +1,0 @@
-**적용 대상:**![예](media/analysis-services-appliesto/yes.png)Azure Analysis Services![예](media/analysis-services-appliesto/yes.png)SQL Server Analysis Services(2016년부터 시작)

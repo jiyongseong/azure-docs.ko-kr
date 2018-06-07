@@ -1,0 +1,75 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: "Azure Security Center 설명서"
+metadata:
+  title: "Azure Security Center 설명서 - 자습서, API 참조 | Microsoft Doc"
+  meta.description: Azure Security Center provides unified security management and advanced threat protection across hybrid cloud workloads. Learn how to get started with Security Center, apply security policies across your workloads, limit your exposure to threats, and detect and respond to attacks with our quickstarts and tutorials..
+  services: security-center
+  author: cmcclister
+  manager: carolz
+  ms.service: security-center
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 01/05/18
+  ms.author: cmcclister
+  ms.openlocfilehash: 2d0c22cc59e0185caa9c298e1c26026e00faf2a5
+  ms.sourcegitcommit: 6fb44d6fbce161b26328f863479ef09c5303090f
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 01/10/2018
+abstract:
+  description: "Azure Security Center는 하이브리드 클라우드 워크로드에 통합 보안 관리 및 고급 위협 방지를 제공합니다. 빠른 시작 및 자습서를 사용하여 Security Center를 시작하고, 워크로드에 보안 정책을 적용하고, 위협에 대한 노출을 제한하고, 공격에 대응하는 방법을 알아봅니다."
+sections:
+- title: "5분 빠른 시작"
+  items:
+  - type: paragraph
+    text: "VM 및 컴퓨터를 Security Center에 등록하고 보안 솔루션을 연결하는 방법을 알아봅니다."
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: /media/common/i_subscription.svg
+      text: "Azure 구독 등록"
+      href: /azure/security-center/security-center-get-started
+    - image:
+        src: /media/logos/logo_Windows.svg
+      text: "Windows 컴퓨터 등록"
+      href: /azure/security-center/quick-onboard-windows-computer
+    - image:
+        src: /media/logos/logo_linux.svg
+      text: "Linux 컴퓨터 등록"
+      href: /azure/security-center/quick-onboard-linux-computer
+    - image:
+        src: /media/common/i_multi-connect.svg
+      text: "보안 솔루션 연결"
+      href: /azure/security-center/quick-security-solutions
+- title: "단계별 자습서"
+  items:
+  - type: paragraph
+    text: "보안 정책을 정의하고,악의적인 작업으로부터 리소스를 보호하고,보안 알림 및 인시던트에 대응하는 방법을 알아봅니다."
+  - type: list
+    style: ordered
+    items:
+    - html: "<a href=\"/azure/security-center/tutorial-security-policy\">보안 정책 정의 및 평가</a>"
+    - html: "<a href=\"/azure/security-center/tutorial-protect-resources\">리소스 보호</a>"
+    - html: "<a href=\"/azure/security-center/tutorial-security-incident\">보안 인시던트에 대응</a>"
+- title: "동영상 교육"
+  items:
+  - type: list
+    style: cards
+    className: cardsFTitle
+    items:
+    - title: "Azure Security Center 기본 사항"
+      href: https://mva.microsoft.com/en-US/training-courses/hybrid-cloud-workload-protection-with-azure-security-center-18173?l=Ld0LK42jE_006218965
+      image:
+        src: https://docs.microsoft.com/media/logos/logo_azure.svg
+        href: https://mva.microsoft.com/en-US/training-courses/hybrid-cloud-workload-protection-with-azure-security-center-18173?l=Ld0LK42jE_006218965
+- title: "참조"
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: "REST (영문)"
+      html: "<p><a href=\"https://msdn.microsoft.com/library/mt704034(Azure.100).aspx\">REST API 참조</a></p>"

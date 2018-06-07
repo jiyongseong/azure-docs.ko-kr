@@ -1,10 +1,10 @@
 ---
-title: "Azure Application Gateway 만들기 - 템플릿 | Microsoft Docs"
-description: "이 페이지에서는 Azure 리소스 관리자 템플릿을 사용하여 Azure 응용 프로그램 게이트웨이를 만드는 지침을 제공합니다."
+title: Azure Application Gateway 만들기 - 템플릿 | Microsoft Docs
+description: 이 페이지에서는 Azure 리소스 관리자 템플릿을 사용하여 Azure 응용 프로그램 게이트웨이를 만드는 지침을 제공합니다.
 documentationcenter: na
 services: application-gateway
-author: georgewallace
-manager: timlt
+author: vhorne
+manager: jpconnock
 editor: tysonn
 ms.service: application-gateway
 ms.devlang: na
@@ -12,28 +12,27 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 07/31/2017
-ms.author: gwallace
+ms.author: victorh
+ms.openlocfilehash: c749cdf133caebb2d1f061d53a1db38e9ec433bd
+ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
 ms.translationtype: HT
-ms.sourcegitcommit: fff84ee45818e4699df380e1536f71b2a4003c71
-ms.openlocfilehash: f44e33ef722cd30787a9d2942ec55ceb73174978
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/01/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/03/2018
 ---
 # <a name="create-an-application-gateway-by-using-the-azure-resource-manager-template"></a>Azure 리소스 관리자 템플릿을 사용하여 응용 프로그램 게이트웨이 만들기
 
 > [!div class="op_single_selector"]
-> * [쉬운 테이블](application-gateway-create-gateway-portal.md)
+> * [Azure Portal](application-gateway-create-gateway-portal.md)
 > * [Azure Resource Manager PowerShell](application-gateway-create-gateway-arm.md)
 > * [Azure 클래식 PowerShell](application-gateway-create-gateway.md)
 > * [Azure Resource Manager 템플릿](application-gateway-create-gateway-arm-template.md)
 > * [Azure CLI](application-gateway-create-gateway-cli.md)
 
-Azure 응용 프로그램 게이트웨이는 계층 7 부하 분산 장치입니다. 클라우드 또는 온-프레미스에 상관없이 서로 다른 서버 간에 장애 조치 및 성능 라우팅 HTTP 요청을 제공합니다. Application Gateway는 HTTP 부하 분산, 쿠키 기반 세션 선호도, SSL(Secure Sockets Layer) 오프로드, 사용자 지정 상태 프로브, 다중 사이트 지원 및 기타를 포함하여 다양한 ADC(Application Delivery Controller) 기능을 제공합니다. 지원되는 기능의 전체 목록을 찾으려면 [Application Gateway 개요](application-gateway-introduction.md)를 참조하세요.
+Azure Application Gateway는 계층 7 부하 분산 장치입니다. 클라우드 또는 온-프레미스에 상관없이 서로 다른 서버 간에 장애 조치(failover) 및 성능 라우팅 HTTP 요청을 제공합니다. Application Gateway는 HTTP 부하 분산, 쿠키 기반 세션 선호도, SSL(Secure Sockets Layer) 오프로드, 사용자 지정 상태 프로브, 다중 사이트 지원 및 기타를 포함하여 다양한 ADC(Application Delivery Controller) 기능을 제공합니다. 지원되는 기능의 전체 목록을 찾으려면 [Application Gateway 개요](application-gateway-introduction.md)를 참조하세요.
 
-이 문서에서는 GitHub에서 기존 Azure Resource Manager 템플릿을 다운로드 및 수정하고 GitHub, PowerShell 및 Azure CLI에서 템플릿을 배포하는 과정을 안내합니다.
+이 문서에서는 GitHub에서 기존 [Azure Resource Manager 템플릿](../azure-resource-manager/resource-group-authoring-templates.md)을 다운로드 및 수정하고 GitHub, PowerShell 및 Azure CLI에서 템플릿을 배포하는 과정을 안내합니다.
 
-변경하지 않고 GitHub에서 직접 Azure 리소스 관리자 템플릿을 배포하는 경우 GitHub에서 템플릿 배포로 건너뜁니다.
+변경하지 않고 GitHub에서 직접 템플릿을 배포하는 경우 GitHub에서 템플릿 배포로 건너뜁니다.
 
 ## <a name="scenario"></a>시나리오
 
@@ -74,13 +73,10 @@ GitHub에서 가상 네트워크 및 두 개의 서브넷을 만들기 위한 �
 1. **resources** 아래의 내용을 확인하고 다음 속성을 검토합니다.
 
    * **type**. 템플릿에 의해 생성되는 리소스의 유형입니다. 이 경우 형식은 응용 프로그램 게이트웨이를 나타내는 `Microsoft.Network/applicationGateways`입니다.
-   * **이름**. 리소스의 이름입니다. `[parameters('applicationGatewayName')]`이 사용됩니다. 이것은 해당 이름이 배포 중에 사용자 또는 매개 변수 파일에 의한 입력으로 제공됨을 의미합니다.
+   * **이름**: 리소스의 이름입니다. `[parameters('applicationGatewayName')]`이 사용됩니다. 이것은 해당 이름이 배포 중에 사용자 또는 매개 변수 파일에 의한 입력으로 제공됨을 의미합니다.
    * **properties**. 리소스의 속성 목록입니다. 이 템플릿은 응용 프로그램 게이트웨이를 만드는 동안 가상 네트워크 및 공용 IP 주소를 사용합니다.
 
-   > [!NOTE]
-   > 템플릿에 대한 자세한 내용은 [Resource Manager 템플릿 참조](/templates/)를 참조하세요.
-
-1. [https://github.com/Azure/azure-quickstart-templates/blob/master/101-application-gateway-waf/](https://github.com/Azure/azure-quickstart-templates/blob/master/101-application-gateway-waf)로 이동합니다.
+1. [https://github.com/Azure/azure-quickstart-templates/blob/master/101-application-gateway-waf/](https://github.com/Azure/azure-quickstart-templates/blob/master/101-application-gateway-waf)로 돌아갑니다.
 1. **azuredeploy-parameters.json**을 클릭하고 **RAW**를 클릭합니다.
 1. 파일을 컴퓨터의 로컬 폴더에 저장합니다.
 1. 저장한 파일을 열고 매개 변수 값을 편집합니다. 다음 값을 사용하여 이 시나리오에 설명된 응용 프로그램 게이트웨이를 배포합니다.
@@ -133,7 +129,7 @@ Azure PowerShell을 처음 사용하는 경우 [Azure PowerShell을 설치 및 �
 1. PowerShell에 로그인
 
     ```powershell
-    Login-AzureRmAccount
+    Connect-AzureRmAccount
     ```
 
 1. 계정에 대한 구독을 확인합니다.
@@ -243,6 +239,5 @@ SSL 오프로드를 구성하려는 경우 [SSL 오프로드에 대한 응용 �
 부하 분산 옵션에 대한 자세한 정보는 다음을 방문하세요.
 
 * [Azure 부하 분산 장치](https://azure.microsoft.com/documentation/services/load-balancer/)
-* [Azure 트래픽 관리자](https://azure.microsoft.com/documentation/services/traffic-manager/)
-
+* [Azure Traffic Manager](https://azure.microsoft.com/documentation/services/traffic-manager/)
 

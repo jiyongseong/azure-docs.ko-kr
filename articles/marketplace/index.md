@@ -1,22 +1,22 @@
 ---
-title: "Azure Marketplace 설명서 | Microsoft Docs"
-description: "Azure Marketplace에 대해 알아봅니다."
+title: Azure Marketplace 설명서 | Microsoft Docs
+description: Azure Marketplace에 대해 알아봅니다.
 services: marketplace
-author: carolz
-manager: carolz
+author: ellacroi
+manager: mbaldwin
 layout: LandingPage
-ms.assetid: 
+ms.assetid: ''
 ms.service: marketplace
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: landing-page
-ms.date: 04/14/2017
-ms.author: carolz
-translationtype: Human Translation
-ms.sourcegitcommit: 8c4e33a63f39d22c336efd9d77def098bd4fa0df
-ms.openlocfilehash: 6dca59ddd5fe524b7778abe770b6387f8bb24f01
-ms.lasthandoff: 04/20/2017
-
+ms.date: 05/10/2018
+ms.author: ellacroi
+ms.openlocfilehash: 65ad29de9eff47f14a22102729b662dad8581a7b
+ms.sourcegitcommit: c52123364e2ba086722bc860f2972642115316ef
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
 ---
 # <a name="azure-marketplace-documentation"></a>Azure Marketplace 설명서
 
@@ -60,6 +60,5 @@ ms.lasthandoff: 04/20/2017
         </a>
     </li>    
 </ul>
-
 
 

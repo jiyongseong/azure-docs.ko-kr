@@ -1,11 +1,11 @@
 ---
-title: "Azure AD 갤러리 응용 프로그램에 대해 페더레이션된 Single Sign-On을 구성할 때 발생하는 문제 | Microsoft Docs"
-description: "Azure AD 응용 프로그램 갤러리에 나열된 응용 프로그램의 SAML을 사용하여 페더레이션된 Single Sign-On을 구성할 때 발생하는 일반적인 문제 몇 가지를 해결"
+title: Azure AD 갤러리 응용 프로그램에 대해 페더레이션된 Single Sign-On을 구성할 때 발생하는 문제 | Microsoft Docs
+description: Azure AD 응용 프로그램 갤러리에 나열된 응용 프로그램의 SAML을 사용하여 페더레이션된 Single Sign-On을 구성할 때 발생하는 일반적인 문제 몇 가지를 해결
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: ajamess
-manager: femila
-ms.assetid: 
+manager: mtillman
+ms.assetid: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
@@ -13,14 +13,13 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a1ba750d2be1969bfcd4085a24b0469f72a357ad
-ms.openlocfilehash: b8c189865c27566e3265f14eb54cb5ea4a005dc5
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
+ms.openlocfilehash: 581b3c4ff7cc7b25f238602560f30280efa34edd
+ms.sourcegitcommit: d28bba5fd49049ec7492e88f2519d7f42184e3a8
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
+ms.locfileid: "34053312"
 ---
-
 # <a name="problem-configuring-federated-single-sign-on-for-an-azure-ad-gallery-application"></a>Azure AD 갤러리 응용 프로그램에 대해 페더레이션된 Single Sign-On을 구성할 때 발생하는 문제
 
 응용 프로그램을 구성할 때 문제가 발생 할 경우. 응용 프로그램의 자습서에 있는 단계를 모두 수행했는지 확인합니다. 응용 프로그램의 구성에는 응용 프로그램 구성 방법에 관한 인라인 설명서가 있습니다. 또한 [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](https://azure.microsoft.com/documentation/articles/active-directory-saas-tutorial-list/)에 액세스하면 자세한 단계별 지침을 볼 수 있습니다.
@@ -43,7 +42,7 @@ ms.lasthandoff: 06/20/2017
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 또는 **공동 관리자** 권한으로 로그인합니다. 7단계로 이동합니다. 이미 Azure AD의 응용 프로그램 구성 블레이드에 있는 경우.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **더 많은 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -87,7 +86,7 @@ Azure AD에서 응용 프로그램 메타데이터 또는 인증서를 다운로
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 또는 **공동 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -110,5 +109,4 @@ Azure AD에서는 메타데이터를 가져오는 URL을 제공하지 않습니�
 응용 프로그램에 전송된 SAML 특성 클레임을 사용자 지정하는 방법을 알아보려면 [Azure Active Directory의 클레임 매핑](https://docs.microsoft.com/azure/active-directory/active-directory-claims-mapping)을 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
-[Azure Active Directory로 응용 프로그램 관리](active-directory-enable-sso-scenario.md)
-
+[Azure Active Directory로 응용 프로그램 관리](manage-apps/what-is-application-management.md)

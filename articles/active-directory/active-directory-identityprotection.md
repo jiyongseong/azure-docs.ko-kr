@@ -1,26 +1,25 @@
 ---
-title: "Azure Active Directory ID 보호 | Microsoft Docs"
-description: "Azure AD ID 보호를 사용하여 손상된 ID 및 장치를 악용하는 공격자의 능력을 제한하고 이전에 손상이 우려되거나 손상된 ID 또는 장치를 보호할 수 있는 방법을 알아봅니다."
+title: Azure Active Directory ID 보호 | Microsoft Docs
+description: Azure AD ID 보호를 사용하여 손상된 ID 및 장치를 악용하는 공격자의 능력을 제한하고 이전에 손상이 우려되거나 손상된 ID 또는 장치를 보호할 수 있는 방법을 알아봅니다.
 services: active-directory
-keywords: "Azure Active Directory ID 보호, 클라우드 앱 검색, 응용 프로그램 관리, 보안, 위험, 위험 수준, 취약점, 보안 정책"
-documentationcenter: 
+keywords: Azure Active Directory ID 보호, 클라우드 앱 검색, 응용 프로그램 관리, 보안, 위험, 위험 수준, 취약점, 보안 정책
+documentationcenter: ''
 author: MarkusVi
-manager: femila
+manager: mtillman
 ms.assetid: e7434eeb-4e98-4b6b-a895-b5598a6cccf1
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 06/24/2017
+ms.date: 11/08/2017
 ms.author: markvi
 ms.reviewer: nigu
-ms.translationtype: Human Translation
-ms.sourcegitcommit: cb4d075d283059d613e3e9d8f0a6f9448310d96b
-ms.openlocfilehash: 8132b4844260a997e62effd167f2f1206f3edbcd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/26/2017
-
+ms.openlocfilehash: b8ae865e06e085ebe1bb71b35d812024190e2b21
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="azure-active-directory-identity-protection"></a>Azure Active Directory ID 보호
 
@@ -68,7 +67,7 @@ Azure Active Directory ID 보호는 모니터링 및 보고 도구 이상입니�
 
 **위험 기준 조건부 액세스 정책:**
 
-* 로그인을 차단하거나 Multi-Factor Authentication 과제를 요구하여 위험한 로그인을 완화하는 정책입니다.
+* 로그인을 차단하거나 다단계 인증 질문을 요구하여 위험한 로그인을 완화하는 정책입니다.
 * 위험한 사용자 계정 차단 및 보호 정책
 * Multi-Factor Authentication에 사용자 등록 요구 정책
 
@@ -122,7 +121,8 @@ Azure Active Directory 보호에서 전자 메일을 통해 보내는 [알림](a
 
 ## <a name="risky-sign-ins"></a>위험한 로그인
 
-Aure Active Directory는 일부 [위험 이벤트 유형](active-directory-reporting-risk-events.md#risk-event-types)을 실시간으로 검색합니다. 사용자의 로그인 주에 검색된 모든 실시간 위험 이벤트는 *위험한 로그인*이라는 논리적 개념을 파생시킵니다. 위험한 로그인은 사용자 계정의 정당한 소유자가 수행하지 않았을 수 있는 로그인 시도에 대한 지표입니다. 위험한 로그인의 수명 주기는 사용자가 로그아웃하면 끝납니다.
+Azure Active Directory는 [위험 이벤트 유형](active-directory-reporting-risk-events.md#risk-event-types)을 실시간 및 오프라인으로 검색합니다. 사용자 로그인 중에 검색된 각 위험 이벤트는 위험한 로그인이라는 논리적 개념을 파생시킵니다. 위험한 로그인은 사용자 계정의 정당한 소유자가 수행하지 않았을 수 있는 로그인 시도에 대한 지표입니다.
+
 
 ### <a name="sign-in-risk-level"></a>로그인 위험 수준
 
@@ -212,7 +212,7 @@ ID 보호 콘솔의 **위험 이벤트** 페이지에서는 모든 이벤트를 
 
 ## <a name="users-flagged-for-risk"></a>위험에 대한 플래그가 지정된 사용자
 
-사용자에 대해 Azure Active Directory에서 검색된 모든 [위험 이벤트](active-directory-identity-protection-risk-events.md)는 *위험에 대한 플래그가 지정된 사용자*라는 논리적 개념을 파생시킵니다. *위험에 대한 사용자 플래그* 또는 *위험한 사용자*는 손상되었을 수 있는 사용자 계정에 대한 지표입니다.   
+사용자에 대해 Azure Active Directory에서 검색된 모든 활성 [위험 이벤트](active-directory-identity-protection-risk-events.md)는 사용자 위험이라는 논리적 개념을 파생시킵니다. 위험 플래그가 지정된 사용자는 손상되었을 수 있는 사용자 계정에 대한 표시기입니다.
 
 ![위험에 대한 플래그가 지정된 사용자](./media/active-directory-identityprotection/1200.png)
 
@@ -368,7 +368,7 @@ Azure Multi-Factor Authentication은 사용자 이름 및 암호 이외의 다�
 
 ![사용자 위험 정책](./media/active-directory-identityprotection/1019.png "사용자 위험 정책")
 
-자세한 내용은 [Azure Multi-Factor Authentication 정의](../multi-factor-authentication/multi-factor-authentication.md)
+자세한 내용은 [Azure Multi-Factor Authentication 정의](authentication/multi-factor-authentication.md)
 
 Azure AD ID 보호를 사용하면 다음을 지원하는 정책을 구성하여 Multi-Factor Authentication 등록의 롤아웃을 관리할 수 있습니다.
 
@@ -416,4 +416,3 @@ Azure AD ID 보호를 사용하면 다음을 지원하는 정책을 구성하여
 * [Azure Active Directory ID 보호 - 사용자를 차단 해제하는 방법](active-directory-identityprotection-unblock-howto.md)
 
 * [Azure Active Directory ID 보호 및 Microsoft Graph 시작](active-directory-identityprotection-graph-getting-started.md)
-

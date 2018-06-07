@@ -1,10 +1,10 @@
 ---
-title: "Azure에서 SUSE Linux VHD 만들기 및 업로드"
-description: "SUSE Linux 운영 체제가 포함된 Azure VHD(가상 하드 디스크)를 만들고 업로드하는 방법에 대해 알아봅니다."
+title: Azure에서 SUSE Linux VHD 만들기 및 업로드
+description: SUSE Linux 운영 체제가 포함된 Azure VHD(가상 하드 디스크)를 만들고 업로드하는 방법에 대해 알아봅니다.
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: szarkos
-manager: timlt
+manager: jeconnoc
 editor: tysonn
 tags: azure-resource-manager,azure-service-management
 ms.assetid: 066d01a6-2a54-4718-bcd0-90fe7a5303a1
@@ -13,27 +13,26 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: na
 ms.topic: article
-ms.date: 08/24/2016
+ms.date: 03/12/2018
 ms.author: szark
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: c829f5d9a90b4260c6f41b2d9e511a0c6cb48f18
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: 2372550548f40ad07b4f76c19bc3bc1cb8380830
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-# <a name="prepare-a-sles-or-opensuse-virtual-machine-for-azure"></a>Azure용 SLES 또는 openSUSE 가상 컴퓨터 준비
+# <a name="prepare-a-sles-or-opensuse-virtual-machine-for-azure"></a>Azure용 SLES 또는 openSUSE 가상 머신 준비
 [!INCLUDE [learn-about-deployment-models](../../../includes/learn-about-deployment-models-both-include.md)]
 
 ## <a name="prerequisites"></a>필수 조건
-이 문서에서는 가상 하드 디스크에 SUSE 또는 openSUSE Linux 운영 체제를 이미 설치했다고 가정합니다. .vhd 파일을 만드는 여러 도구가 있습니다(예: Hyper-V와 같은 가상화 솔루션). 자세한 내용은 [Hyper-V 역할 설치 및 가상 시스템 구성](http://technet.microsoft.com/library/hh846766.aspx)을 참조하십시오.
+이 문서에서는 가상 하드 디스크에 SUSE 또는 openSUSE Linux 운영 체제를 이미 설치했다고 가정합니다. .vhd 파일을 만드는 여러 도구가 있습니다(예: Hyper-V와 같은 가상화 솔루션). 자세한 내용은 [Hyper-V 역할 설치 및 Virtual Machine 구성](http://technet.microsoft.com/library/hh846766.aspx)을 참조하십시오.
 
 ### <a name="sles--opensuse-installation-notes"></a>SLES/openSUSE 설치 참고 사항
 * Azure용 Linux를 준비하는 방법에 대한 추가 팁은 [일반 Linux 설치 참고 사항](create-upload-generic.md#general-linux-installation-notes) 을 참조하세요.
 * VHDX 형식은 Azure에서 지원되지 않습니다. **고정된 VHD**만 지원됩니다.  Hyper-V 관리자 또는 convert-vhd cmdlet을 사용하여 디스크를 VHD 형식으로 변환할 수 있습니다.
 * Linux 시스템 설치 시에는 LVM(설치 기본값인 경우가 많음)이 아닌 표준 파티션을 사용하는 것이 좋습니다. 이렇게 하면 특히 문제 해결을 위해 OS 디스크를 다른 VM에 연결해야 하는 경우 복제된 VM과 LVM 이름이 충돌하지 않도록 방지합니다. 원하는 경우에는 데이터 디스크에서 [LVM](configure-lvm.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) 또는 [RAID](configure-raid.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)를 사용할 수 있습니다.
 * OS 디스크에 스왑 파티션을 구성하지 마세요. 임시 리소스 디스크에서 스왑 파일을 만들도록 Linux 에이전트를 구성할 수 있습니다.  여기에 대한 자세한 내용은 아래 단계에서 확인할 수 있습니다.
-* 모든 VHD 크기는 1MB의 배수여야 합니다.
+* Azure의 모든 VHD는 가상 크기가 1MB 단위로 조정되어야 합니다. 원시 디스크에서 VHD로 변환할 때 변환하기 전에 원시 디스크 크기가 1MB의 배수인지 확인해야 합니다. 자세한 내용은 [Linux 설치 참고 사항](create-upload-generic.md#general-linux-installation-notes)을 참조하세요.
 
 ## <a name="use-suse-studio"></a>SUSE Studio 사용
 [SUSE Studio](http://www.susestudio.com) 에서는 Azure와 Hyper-V용 SLES 및 openSUSE 이미지를 쉽게 만들고 관리할 수 있습니다. 고유한 SLES 및 openSUSE 이미지를 사용자 지정할 때는 이 방식을 사용하는 것이 좋습니다.
@@ -41,8 +40,8 @@ ms.lasthandoff: 04/03/2017
 또한 SUSE는 [VMDepot](https://vmdepot.msopentech.com/User/Show?user=1007)에 SLES용 BYOS(Bring Your Own Subscription) 이미지도 게시하므로 VHD를 직접 작성하는 대신 이 이미지를 사용할 수 있습니다.
 
 ## <a name="prepare-suse-linux-enterprise-server-11-sp4"></a>SUSE Linux Enterprise Server 11 SP4 준비
-1. Hyper-V 관리자의 가운데 창에서 가상 컴퓨터를 선택합니다.
-2. **연결** 을 클릭하여 가상 컴퓨터 창을 엽니다.
+1. Hyper-V 관리자의 가운데 창에서 가상 머신을 선택합니다.
+2. **연결** 을 클릭하여 가상 머신 창을 엽니다.
 3. 업데이트를 다운로드하고 패키지를 설치할 수 있도록 SUSE Linux Enterprise 시스템을 등록합니다.
 4. 모든 최신 패치로 시스템을 업데이트합니다.
    
@@ -92,7 +91,7 @@ ms.lasthandoff: 04/03/2017
     Azure Linux 에이전트는 Azure에서 프로비전한 후 VM에 연결된 로컬 리소스 디스크를 사용하여 자동으로 스왑 공간을 구성할 수 있습니다. 로컬 리소스 디스크는 *임시* 디스크이며 VM의 프로비전을 해제할 때 비워질 수 있습니다. Azure Linux 에이전트를 설치한 후(이전 단계 참조) /etc/waagent.conf에서 다음 매개 변수를 적절하게 수정합니다.
     
      ResourceDisk.Format=y  ResourceDisk.Filesystem=ext4  ResourceDisk.MountPoint=/mnt/resource  ResourceDisk.EnableSwap=y  ResourceDisk.SwapSizeMB=2048    ## 참고: 이것을 필요한 대로 설정합니다.
-15. 다음 명령을 실행하여 가상 컴퓨터의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
+15. 다음 명령을 실행하여 가상 머신의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
     
     # <a name="sudo-waagent--force--deprovision"></a>sudo waagent -force -deprovision
     # <a name="export-histsize0"></a>export HISTSIZE=0
@@ -101,8 +100,8 @@ ms.lasthandoff: 04/03/2017
 
 - - -
 ## <a name="prepare-opensuse-131"></a>openSUSE 13.1+ 준비
-1. Hyper-V 관리자의 가운데 창에서 가상 컴퓨터를 선택합니다.
-2. **연결** 을 클릭하여 가상 컴퓨터 창을 엽니다.
+1. Hyper-V 관리자의 가운데 창에서 가상 머신을 선택합니다.
+2. **연결** 을 클릭하여 가상 머신 창을 엽니다.
 3. 셸에서 '`zypper lr`' 명령을 실행합니다. 이 명령에서 다음과 유사한 출력이 반환되는 경우 리포지토리가 예상대로 구성된 것입니다. 이 경우 아무 것도 조정할 필요가 없습니다(버전 번호는 다를 수 있음).
    
         # | Alias                 | Name                  | Enabled | Refresh
@@ -149,7 +148,7 @@ ms.lasthandoff: 04/03/2017
     Azure Linux 에이전트는 Azure에서 프로비전한 후 VM에 연결된 로컬 리소스 디스크를 사용하여 자동으로 스왑 공간을 구성할 수 있습니다. 로컬 리소스 디스크는 *임시* 디스크이며 VM의 프로비전을 해제할 때 비워질 수 있습니다. Azure Linux 에이전트를 설치한 후(이전 단계 참조) /etc/waagent.conf에서 다음 매개 변수를 적절하게 수정합니다.
     
      ResourceDisk.Format=y  ResourceDisk.Filesystem=ext4  ResourceDisk.MountPoint=/mnt/resource  ResourceDisk.EnableSwap=y  ResourceDisk.SwapSizeMB=2048    ## 참고: 이것을 필요한 대로 설정합니다.
-11. 다음 명령을 실행하여 가상 컴퓨터의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
+11. 다음 명령을 실행하여 가상 머신의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
     
     # <a name="sudo-waagent--force--deprovision"></a>sudo waagent -force -deprovision
     # <a name="export-histsize0"></a>export HISTSIZE=0
@@ -160,6 +159,4 @@ ms.lasthandoff: 04/03/2017
 13. Hyper-V 관리자에서 **작업 -> 종료**를 클릭합니다. 이제 Linux VHD를 Azure에 업로드할 수 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
-이제 SUSE Linux 가상 하드 디스크를 사용하여 Azure에서 새 가상 컴퓨터를 만들 준비가 되었습니다. .vhd 파일을 Azure에 처음으로 업로드하는 경우 [Linux 운영 체제를 포함하는 가상 하드 디스크 만들기 및 업로드](classic/create-upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2fclassic%2ftoc.json)에서 2단계 및 3단계를 참조하세요.
-
-
+이제 SUSE Linux 가상 하드 디스크를 사용하여 Azure에서 새 가상 머신을 만들 준비가 되었습니다. .vhd 파일을 Azure에 처음 업로드하는 경우 [사용자 지정 디스크에서 Linux VM 만들기](upload-vhd.md#option-1-upload-a-vhd)를 참조하세요.

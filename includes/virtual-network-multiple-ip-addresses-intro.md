@@ -1,12 +1,26 @@
+---
+title: 포함 파일
+description: 포함 파일
+services: virtual-network
+author: jimdial
+ms.service: virtual-network
+ms.topic: include
+ms.date: 04/09/2018
+ms.author: jdial
+ms.custom: include file
+ms.openlocfilehash: f1dc43b6fea4ebfb47439ec64b573cc471614d98
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
+---
 > [!div class="op_single_selector"]
-> * [포털](../articles/virtual-network/virtual-network-multiple-ip-addresses-portal.md)
+> * [Azure Portal](../articles/virtual-network/virtual-network-multiple-ip-addresses-portal.md)
 > * [PowerShell](../articles/virtual-network/virtual-network-multiple-ip-addresses-powershell.md)
-> * [CLI 2.0](../articles/virtual-network/virtual-network-multiple-ip-addresses-cli.md)
-> * [CLI 1.0](../articles/virtual-network/virtual-network-multiple-ip-addresses-cli-nodejs.md)
-> * [템플릿](../articles/virtual-network/virtual-network-multiple-ip-addresses-template.md)
+> * [Azure CLI](../articles/virtual-network/virtual-network-multiple-ip-addresses-cli.md)
 >
 
-Azure VM(가상 컴퓨터)에는 하나 이상의 네트워크 인터페이스(NIC)가 연결되어 있습니다. 모든 NIC에는 하나 이상의 정적 또는 동적 공용 및 개인 IP 주소가 할당되어 있을 수 있습니다. VM에 여러 IP 주소를 할당하면 다음을 수행할 수 있습니다.
+Azure VM(Virtual Machine)에는 하나 이상의 네트워크 인터페이스(NIC)가 연결되어 있습니다. 모든 NIC에는 하나 이상의 정적 또는 동적 공용 및 개인 IP 주소가 할당되어 있을 수 있습니다. VM에 여러 IP 주소를 할당하면 다음을 수행할 수 있습니다.
 
 * 단일 서버에서 IP 주소와 SSL 인증서를 사용하여 여러 웹 사이트 또는 서비스를 호스트할 수 있습니다.
 * 방화벽 또는 부하 분산 장치와 같은 네트워크 가상 어플라이언스로 사용됩니다.

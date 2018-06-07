@@ -1,10 +1,10 @@
 ---
-title: "Azure에서 CentOS 기반 Linux VHD 만들기 및 업로드"
-description: "CentOS 기반 Linux 운영 체제가 포함된 Azure VHD(가상 하드 디스크)를 만들고 업로드하는 방법에 대해 알아봅니다."
+title: Azure에서 CentOS 기반 Linux VHD 만들기 및 업로드
+description: CentOS 기반 Linux 운영 체제가 포함된 Azure VHD(가상 하드 디스크)를 만들고 업로드하는 방법에 대해 알아봅니다.
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: szarkos
-manager: timlt
+manager: jeconnoc
 editor: tysonn
 tags: azure-resource-manager,azure-service-management
 ms.assetid: 0e518e92-e981-43f4-b12c-9cba1064c4bb
@@ -13,23 +13,22 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: na
 ms.topic: article
-ms.date: 02/02/2017
+ms.date: 05/04/2018
 ms.author: szark
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 010f4b05b35fa1f31c14f34a5fae9298fcd831e4
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: d7c35b79dcdf75dbb3f891dc4c66cbf893b61c03
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
-# <a name="prepare-a-centos-based-virtual-machine-for-azure"></a>Azure용 CentOS 기반 가상 컴퓨터 준비
-* [Azure용 CentOS 6.x 가상 컴퓨터 준비](#centos-6x)
+# <a name="prepare-a-centos-based-virtual-machine-for-azure"></a>Azure용 CentOS 기반 가상 머신 준비
+* [Azure용 CentOS 6.x 가상 머신 준비](#centos-6x)
 * [Azure용 CentOS 7.0 이상 가상 컴퓨터 준비](#centos-70)
 
 [!INCLUDE [learn-about-deployment-models](../../../includes/learn-about-deployment-models-both-include.md)]
 
 ## <a name="prerequisites"></a>필수 조건
-이 문서에서는 가상 하드 디스크에 CentOS 또는 그와 비슷한 파생 Linux 운영 체제를 이미 설치했다고 가정합니다. .vhd 파일을 만드는 여러 도구가 있습니다(예: Hyper-V와 같은 가상화 솔루션). 자세한 내용은 [Hyper-V 역할 설치 및 가상 시스템 구성](http://technet.microsoft.com/library/hh846766.aspx)을 참조하십시오.
+이 문서에서는 가상 하드 디스크에 CentOS 또는 그와 비슷한 파생 Linux 운영 체제를 이미 설치했다고 가정합니다. .vhd 파일을 만드는 여러 도구가 있습니다(예: Hyper-V와 같은 가상화 솔루션). 자세한 내용은 [Hyper-V 역할 설치 및 Virtual Machine 구성](http://technet.microsoft.com/library/hh846766.aspx)을 참조하십시오.
 
 **CentOS 설치 참고 사항**
 
@@ -39,13 +38,13 @@ ms.lasthandoff: 04/03/2017
 * UDF 파일 시스템 탑재에 대한 커널 지원이 필요합니다. Azure에서 처음 부팅 시 프로비저닝 구성이 게스트에 연결된 UDF 형식의 미디어를 통해 Linux VM에 전달됩니다. Azure Linux 에이전트는 해당 구성을 읽고 VM을 프로비전하기 위해 UDF 파일 시스템을 탑재할 수 있어야 합니다.
 * 2.6.37 버전 미만의 Linux 커널은 VM 크기가 더 클 때 Hyper-V에서 NUMA를 지원하지 않습니다. 이 문제는 주로 업스트림 Red Hat 2.6.32 커널을 사용하는 이전 배포에 영향을 주며 RHEL 6.6(kernel-2.6.32-504)에서는 해결되었습니다. 2.6.37보다 오래된 사용자 지정 커널 또는 2.6.32-504보다 오래된 RHEL 기반 커널을 실행하는 시스템의 경우 grub.conf의 커널 명령줄에 부트 매개 변수 `numa=off` 자세한 내용은 Red Hat [KB 436883](https://access.redhat.com/solutions/436883)을 참조하세요.
 * OS 디스크에 스왑 파티션을 구성하지 마세요. 임시 리소스 디스크에서 스왑 파일을 만들도록 Linux 에이전트를 구성할 수 있습니다.  여기에 대한 자세한 내용은 아래 단계에서 확인할 수 있습니다.
-* 모든 VHD 크기는 1MB의 배수여야 합니다.
+* Azure의 모든 VHD는 가상 크기가 1MB 단위로 조정되어야 합니다. 원시 디스크에서 VHD로 변환할 때 변환하기 전에 원시 디스크 크기가 1MB의 배수인지 확인해야 합니다. 자세한 내용은 [Linux 설치 참고 사항](create-upload-generic.md#general-linux-installation-notes)을 참조하세요.
 
 ## <a name="centos-6x"></a>CentOS 6.x
 
-1. Hyper-V 관리자에서 가상 컴퓨터를 선택합니다.
+1. Hyper-V 관리자에서 가상 머신을 선택합니다.
 
-2. **연결** 을 클릭하여 가상 컴퓨터의 콘솔 창을 엽니다.
+2. **연결** 을 클릭하여 가상 머신의 콘솔 창을 엽니다.
 
 3. CentOS 6에서 NetworkManager는 Azure Linux 에이전트 작동을 방해할 수 있습니다. 다음 명령을 실행하여 이 패키지를 제거합니다.
    
@@ -66,7 +65,7 @@ ms.lasthandoff: 04/03/2017
         PEERDNS=yes
         IPV6INIT=no
 
-6. 이더넷 인터페이스에 대한 정적 규칙을 생성하지 않도록 방지하는 udev 규칙을 수정합니다. 이러한 규칙은 Microsoft Azure 또는 Hyper-V에서 가상 컴퓨터를 복제하는 경우 문제를 발생시킬 수 있습니다.
+6. 이더넷 인터페이스에 대한 정적 규칙을 생성하지 않도록 방지하는 udev 규칙을 수정합니다. 이러한 규칙은 Microsoft Azure 또는 Hyper-V에서 가상 머신을 복제하는 경우 문제를 발생시킬 수 있습니다.
    
         # sudo ln -s /dev/null /etc/udev/rules.d/75-persistent-net-generator.rules
         # sudo rm -f /etc/udev/rules.d/70-persistent-net.rules
@@ -186,7 +185,7 @@ ms.lasthandoff: 04/03/2017
         ResourceDisk.EnableSwap=y
         ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
 
-16. 다음 명령을 실행하여 가상 컴퓨터의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
+16. 다음 명령을 실행하여 가상 머신의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
     
         # sudo waagent -force -deprovision
         # export HISTSIZE=0
@@ -207,9 +206,9 @@ Azure용으로 CentOS 7 가상 컴퓨터를 준비하는 작업은 CentOS 6과 �
 
 **구성 단계**
 
-1. Hyper-V 관리자에서 가상 컴퓨터를 선택합니다.
+1. Hyper-V 관리자에서 가상 머신을 선택합니다.
 
-2. **연결** 을 클릭하여 가상 컴퓨터의 콘솔 창을 엽니다.
+2. **연결** 을 클릭하여 가상 머신의 콘솔 창을 엽니다.
 
 3. 파일 `/etc/sysconfig/network`를 만들거나 편집하고 다음 텍스트를 추가합니다.
    
@@ -227,7 +226,7 @@ Azure용으로 CentOS 7 가상 컴퓨터를 준비하는 작업은 CentOS 6과 �
         IPV6INIT=no
         NM_CONTROLLED=no
 
-5. 이더넷 인터페이스에 대한 정적 규칙을 생성하지 않도록 방지하는 udev 규칙을 수정합니다. 이러한 규칙은 Microsoft Azure 또는 Hyper-V에서 가상 컴퓨터를 복제하는 경우 문제를 발생시킬 수 있습니다.
+5. 이더넷 인터페이스에 대한 정적 규칙을 생성하지 않도록 방지하는 udev 규칙을 수정합니다. 이러한 규칙은 Microsoft Azure 또는 Hyper-V에서 가상 머신을 복제하는 경우 문제를 발생시킬 수 있습니다.
    
         # sudo ln -s /dev/null /etc/udev/rules.d/75-persistent-net-generator.rules
 
@@ -306,7 +305,7 @@ Azure용으로 CentOS 7 가상 컴퓨터를 준비하는 작업은 CentOS 6과 �
    
    initramfs를 다시 빌드합니다.
    
-        # sudo dracut –f -v
+        # sudo dracut -f -v
 
 11. Azure Linux 에이전트 및 종속성을 설치합니다.
 
@@ -323,7 +322,7 @@ Azure용으로 CentOS 7 가상 컴퓨터를 준비하는 작업은 CentOS 6과 �
         ResourceDisk.EnableSwap=y
         ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
 
-13. 다음 명령을 실행하여 가상 컴퓨터의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
+13. 다음 명령을 실행하여 가상 머신의 프로비전을 해제하고 Azure에서 프로비전할 준비를 합니다.
    
         # sudo waagent -force -deprovision
         # export HISTSIZE=0
@@ -332,6 +331,5 @@ Azure용으로 CentOS 7 가상 컴퓨터를 준비하는 작업은 CentOS 6과 �
 14. Hyper-V 관리자에서 **작업 -> 종료**를 클릭합니다. 이제 Linux VHD를 Azure에 업로드할 수 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
-이제 CentOS Linux 가상 하드 디스크를 사용하여 Azure에서 새 가상 컴퓨터를 만들 준비가 되었습니다. .vhd 파일을 Azure에 처음으로 업로드하는 경우 [Linux 운영 체제를 포함하는 가상 하드 디스크 만들기 및 업로드](classic/create-upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2fclassic%2ftoc.json)에서 2단계 및 3단계를 참조하세요.
-
+이제 CentOS Linux 가상 하드 디스크를 사용하여 Azure에서 새 가상 머신을 만들 준비가 되었습니다. .vhd 파일을 Azure에 처음 업로드하는 경우 [사용자 지정 디스크에서 Linux VM 만들기](upload-vhd.md#option-1-upload-a-vhd)를 참조하세요.
 

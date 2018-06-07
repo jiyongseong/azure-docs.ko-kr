@@ -1,25 +1,25 @@
 ---
-title: "Azure AD Connect: 지원되는 토폴로지 | Microsoft Docs"
-description: "이 항목은 Azure AD Connect에 대해 지원되고 지원되지 않는 토폴로지에 대해 자세히 설명합니다."
+title: 'Azure AD Connect: 지원되는 토폴로지 | Microsoft Docs'
+description: 이 항목은 Azure AD Connect에 대해 지원되고 지원되지 않는 토폴로지에 대해 자세히 설명합니다.
 services: active-directory
-documentationcenter: 
-author: AndKjell
-manager: femila
-editor: 
+documentationcenter: ''
+author: billmath
+manager: mtillman
+editor: ''
 ms.assetid: 1034c000-59f2-4fc8-8137-2416fa5e4bfe
 ms.service: active-directory
 ms.devlang: na
 ms.tgt_pltfrm: na
 ms.workload: identity
 ms.topic: article
-ms.date: 07/12/2017
+ms.date: 02/27/2018
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 1da3bc5454111bac5e958bf26d33cf61a5d4213c
-ms.openlocfilehash: ecff6e2e5be05499896ad23675682db184c634af
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/17/2017
-
+ms.openlocfilehash: 2f72f2dd3dbaaf17494d09a36159afc464cc64d4
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32154293"
 ---
 # <a name="topologies-for-azure-ad-connect"></a>Azure AD Connect에 대한 토폴로지
 이 문서에서는 주요 통합 솔루션으로 Azure AD Connect Sync를 사용하는 다양한 온-프레미스 및 Azure AD(Azure Active Directory) 토폴로지에 대해 설명합니다. 이 문서에는 지원되는 구성과 지원되지 않는 구성이 포함되어 있습니다.
@@ -37,10 +37,15 @@ ms.lasthandoff: 02/17/2017
 | Azure AD |![Azure Active Directory](./media/active-directory-aadconnect-topologies/LegendAAD.png) |
 | 지원되지 않는 시나리오 |![지원되지 않는 시나리오](./media/active-directory-aadconnect-topologies/LegendUnsupported.png) |
 
+
+> [!IMPORTANT]
+> Microsoft는 공식적으로 문서화된 구성 또는 작업 외의 Azure AD Connect 동기화에 대한 수정 또는 작업을 지원하지 않습니다. 이러한 구성 또는 작업 중 하나는 Azure AD Connect 동기화의 불일치하거나 지원되지 않는 상태가 될 수 있습니다. 결과적으로, Microsoft는 해당 배포에 대해 기술 지원을 제공할 수 없습니다.
+
+
 ## <a name="single-forest-single-azure-ad-tenant"></a>단일 포리스트, 단일 Azure AD 테넌트
 ![단일 포리스트 및 단일 테넌트에 대한 토폴로지](./media/active-directory-aadconnect-topologies/SingleForestSingleDirectory.png)
 
-가장 일반적인 토폴로지는 도메인 하나 또는 여러 개와 Azure AD 테넌트 하나를 사용하는 단일 온-프레미스 포리스트입니다. Azure AD 인증을 위해 암호 동기화가 사용됩니다. Azure AD Connect의 빠른 설치는 이 토폴로지만 지원합니다.
+가장 일반적인 토폴로지는 도메인 하나 또는 여러 개와 Azure AD 테넌트 하나를 사용하는 단일 온-프레미스 포리스트입니다. Azure AD 인증의 경우 암호 해시 동기화가 사용됩니다. Azure AD Connect의 빠른 설치는 이 토폴로지만 지원합니다.
 
 ### <a name="single-forest-multiple-sync-servers-to-one-azure-ad-tenant"></a>단일 포리스트, 여러 동기화 서버를 하나의 Azure AD 테넌트로
 ![단일 포리스트에 지원되지 않는 필터링된 토폴로지](./media/active-directory-aadconnect-topologies/SingleForestFilteredUnsupported.png)
@@ -60,7 +65,7 @@ Azure AD Connect 설치 마법사는 여러 포리스트에 표시되는 사용�
 
 Azure AD Connect 동기화의 기본 구성에서 다음 사항을 가정합니다.
 
-* 각 사용자는 하나의 계정만 사용할 수 있으며 이 계정이 위치한 포리스트는 사용자를 인증하는 데 사용됩니다. 이 가정은 암호 동기화 및 페더레이션에 모두 적용됩니다. UserPrincipalName 및 sourceAnchor/immutableID는 이 포리스트에서 제공됩니다.
+* 각 사용자는 하나의 계정만 사용할 수 있으며 이 계정이 위치한 포리스트는 사용자를 인증하는 데 사용됩니다. 이 가정은 암호 해시 동기화, 통과 인증 및 페더레이션에 대한 것입니다. UserPrincipalName 및 sourceAnchor/immutableID는 이 포리스트에서 제공됩니다.
 * 사용자마다 사서함이 하나씩만 제공됩니다.
 * 사용자의 사서함을 호스트하는 포리스트는 Exchange GAL(전체 주소 목록)에 표시되는 특성에 대해 최상의 데이터 품질을 가집니다. 사용자의 사서함이 없는 경우 아무 포리스트를 사용하여 이러한 특성 값을 부여할 수 있습니다.
 * 연결된 사서함이 있으면 로그인에 사용되는 다른 포리스트에도 계정이 있습니다.
@@ -111,10 +116,11 @@ Azure AD Connect 동기화의 기본 구성에서 다음 사항을 가정합니�
 일부 Office 365 워크로드의 경우 지원되는 토폴로지에 약간의 제한이 있습니다.
 
 | 워크로드 | 제한 |
---------- | ---------
-| Exchange Online | 온-프레미스 Exchange 조직이 둘 이상인 경우(즉, Exchange가 둘 이상 포리스트에 배포된 경우) Exchange 2013 SP1 이상을 사용해야 합니다. 자세한 내용은 [여러 Active Directory 포리스트가 있는 하이브리드 배포](https://technet.microsoft.com/library/jj873754.aspx)를 참조하세요. |
+| --------- | --------- |
+| Exchange Online | Exchange Online에서 지원하는 하이브리드 토폴로지에 대한 자세한 내용은 [여러 Active Directory 포리스트를 사용한 하이브리드 배포](https://technet.microsoft.com/library/jj873754.aspx)를 참조하세요. |
 | 비즈니스용 Skype | 다중 포리스트 온-프레미스를 사용하는 경우 계정 리소스 포리스트 토폴로지만 지원됩니다. 자세한 내용은 [Business Server 2015용 Skype에 대한 환경 요구 사항](https://technet.microsoft.com/library/dn933910.aspx)을 참조하세요. |
 
+조직의 규모가 큰 경우에는 [Office 365 PreferredDataLocation](active-directory-aadconnectsync-feature-preferreddatalocation.md) 기능을 사용하는 것이 좋습니다. 사용자의 리소스가 배치되는 데이터 센터 지역을 정의할 수 있습니다.
 
 ## <a name="staging-server"></a>스테이징 서버
 ![토폴로지의 준비 서버](./media/active-directory-aadconnect-topologies/MultiForestStaging.png)
@@ -144,13 +150,15 @@ Azure AD Connect Sync 서버와 Azure AD 테넌트가 1:1 관계입니다. 각 A
 
 DNS 도메인은 단일 Azure AD 테넌트에만 등록할 수 있습니다. 온-프레미스 Active Directory 인스턴스의 사용자 UPN도 별도의 네임스페이스를 사용해야 합니다. 예를 들어 위 그림에서 별도의 UPN 접미사 세 개가 contoso.com, fabrikam.com 및 wingtiptoys.com의 온-프레미스 Active Directory 인스턴스에 등록됩니다. 각 온-프레미스 Active Directory 도메인의 사용자는 서로 다른 네임스페이스를 사용합니다.
 
-Azure AD 테넌트 인스턴스 사이에는 GALSync가 없습니다. Exchange Online 및 비즈니스용 Skype의 주소록은 동일한 테넌트에 있는 사용자만 보여 줍니다.
+>[!NOTE]
+>GalSync(전체 주소 목록 동기화 차단)는 이 토폴로지에서 자동으로 수행되지 않으며, 각 테넌트가 Exchange Online 및 비즈니스용 Skype Online에서 완전한 GAL(전체 주소 목록)을 갖도록 보장하는 추가 사용자 지정 MIM을 구현해야 합니다.
+
 
 이 토폴로지는 그 외의 지원되는 시나리오에 대해 다음과 같은 제한 사항이 있습니다.
 
 * 하나의 Azure AD 테넌트만 온-프레미스 Active Directory 인스턴스를 사용하여 Exchange 하이브리드를 활성화할 수 있습니다.
 * Windows 10 장치는 하나의 Azure AD 테넌트에만 연결할 수 있습니다.
-* 암호 동기화 및 통과 인증에 대한 SSO(Single Sign-On) 옵션은 하나의 Azure AD 테넌트에만 사용할 수 있습니다.
+* 암호 해시 동기화 및 통과 인증에 대한 SSO(Single Sign-On) 옵션은 하나의 Azure AD 테넌트에만 사용할 수 있습니다.
 
 상호 배타적인 집합 개체에 대한 요구 사항은 쓰기 저장에도 적용됩니다. 이 토폴로지는 단일 온-프레미스 구성을 전제로 하기 때문에 일부 쓰기 저장 기능이 지원되지 않습니다. 이러한 기능으로는 다음이 포함됩니다.
 
@@ -185,4 +193,3 @@ FIM 2010 또는 MIM 2016 온-프레미스를 사용하여 두 Exchange 조직 �
 [Azure AD Connect 동기화](active-directory-aadconnectsync-whatis.md) 구성에 대해 자세히 알아봅니다.
 
 [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)에 대해 자세히 알아봅니다.
-

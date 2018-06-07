@@ -1,9 +1,9 @@
 ---
-title: "Application Insights 리소스를 만들기 위한 PowerShell 스크립트 | Microsoft Docs"
-description: "Application Insights 리소스의 생성을 자동화합니다."
+title: Application Insights 리소스를 만들기 위한 PowerShell 스크립트 | Microsoft Docs
+description: Application Insights 리소스의 생성을 자동화합니다.
 services: application-insights
 documentationcenter: windows
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: f0082c9b-43ad-4576-a417-4ea8e0daf3d9
 ms.service: application-insights
@@ -12,13 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 11/19/2016
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: d84ab993b1d9489ca9d2edaa1cb9672d9bced899
-ms.openlocfilehash: 4a7a4b719176a1d10bee2fc4f6b65204cc77bee8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
+ms.author: mbullwin
+ms.openlocfilehash: d06b44246b694c0d2a83503ecd1ae0cedfadd9ec
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="powershell-script-to-create-an-application-insights-resource"></a>Application Insights 리소스를 만들기 위한 PowerShell 스크립트
 
@@ -52,7 +51,7 @@ PowerShell을 사용하여 새 리소스의 생성을 자동화할 수 있습니
 # If running manually, uncomment before the first 
 # execution to login to the Azure Portal:
 
-# Add-AzureRmAccount / Login-AzureRmAccount
+# Connect-AzureRmAccount / Connect-AzureRmAccount
 
 # Set the name of the Application Insights Resource
 
@@ -114,5 +113,4 @@ SDK에 사용할 수 있는 iKey에는 두 가지가 있습니다:
 * [서식 파일에서 Application Insights 및 웹 테스트 리소스 만들기](app-insights-powershell.md)
 * [PowerShell 사용한 Azure 진단의 모니터링 설정](app-insights-powershell-azure-diagnostics.md) 
 * [PowerShell을 사용하여 경고 설정](app-insights-powershell-alerts.md)
-
 

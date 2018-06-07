@@ -3,8 +3,8 @@ title: "Azure Redis Cache를 모니터링하는 방법 | Microsoft Docs"
 description: "Azure Redis Cache 인스턴스의 상태와 성능을 모니터링하는 방법을 알아봅니다."
 services: redis-cache
 documentationcenter: 
-author: steved0x
-manager: douge
+author: wesmc7777
+manager: cfowler
 editor: 
 ms.assetid: 7e70b153-9c87-4290-85af-2228f31df118
 ms.service: cache
@@ -13,13 +13,12 @@ ms.tgt_pltfrm: cache-redis
 ms.devlang: na
 ms.topic: article
 ms.date: 07/13/2017
-ms.author: sdanie
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 67ee6932f417194d6d9ee1e18bb716f02cf7605d
-ms.openlocfilehash: a1c7afab747b917ae979a41e63739a4f726265fc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
+ms.author: wesmc
+ms.openlocfilehash: 3a68435866e6fb5bf0210144e53918c35b416449
+ms.sourcegitcommit: 2a70752d0987585d480f374c3e2dba0cd5097880
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="how-to-monitor-azure-redis-cache"></a>Azure Redis Cache를 모니터링하는 방법
 Azure Redis Cache에서는 [Azure Monitor](https://docs.microsoft.com/azure/monitoring-and-diagnostics/)를 사용하여 캐시 인스턴스를 모니터링하기 위한 몇 가지 옵션을 제공합니다. 메트릭을 보고, 메트릭 차트를 시작 보드에 고정하고, 모니터링 차트의 날짜 및 시간 범위를 사용자 지정하고, 차트에서 메트릭을 추가 및 제거하고, 특정 조건이 충족될 경우의 경고를 설정할 수 있습니다. 이러한 도구는 Azure Redis Cache 인스턴스의 상태를 모니터링할 수 있게 해주며 캐싱 응용 프로그램 관리에 도움이 됩니다.
@@ -70,7 +69,7 @@ Azure Monitor에서 메트릭을 사용하는 방법에 대한 자세한 내용�
 3. **저장소 계정에 보관**을 선택합니다.
 4. 캐시 메트릭을 저장할 저장소 계정을 선택합니다.
 5. **1분** 확인란을 선택하고 **보존(일)** 정책을 지정합니다. 보존 정책 적용 및 데이터 무기한 보존을 원하지 않는 경우 **보존(일)**을 **0**으로 설정합니다.
-6. **Save**를 클릭합니다.
+6. **저장**을 클릭합니다.
 
 ![Redis 진단](./media/cache-how-to-monitor/redis-cache-diagnostics.png)
 
@@ -112,10 +111,10 @@ Azure Monitor에서 메트릭을 사용하는 방법에 대한 자세한 내용�
 | 사용된 메모리 RSS |조각화 및 메타데이터를 포함하여 지정한 보고 간격 동안 사용된 캐시 메모리의 양(MB)입니다. 이 값은 Redis INFO 명령에서 `used_memory_rss` 에 매핑됩니다. |
 | CPU |지정한 보고 간격 동안의 Azure Redis Cache 서버 CPU 사용률(%)입니다. 이 값은 운영 체제 `\Processor(_Total)\% Processor Time` 성능 카운터에 매핑됩니다. |
 | 캐시 읽기 |지정한 보고 간격 동안 캐시에서 읽은 초당 메가바이트(MB/s) 단위의 데이터 양입니다. 이 값은 캐시를 호스트하는 가상 컴퓨터를 지원하는 네트워크 인터페이스 카드에서 가져오며 Redis에 특정한 값이 아닙니다. **이 값은 캐시에서 사용되는 네트워크 대역폭에 해당합니다. 서버 쪽 네트워크 대역폭 제한에 대한 경고를 설정하려면 `Cache Read` 카운터를 사용하여 경고를 생성합니다. 다양한 캐시 가격 책정 계층 및 크기에 대해 관찰된 대역폭 제한은 [이 테이블](cache-faq.md#cache-performance)을 참조하세요.** |
-| 캐시 쓰기 |지정한 보고 간격 동안 캐시에 쓰는 초당 메가바이트(MB/s) 단위의 데이터 양입니다. 이 값은 캐시를 호스트하는 가상 컴퓨터를 지원하는 네트워크 인터페이스 카드에서 가져오며 Redis에 특정한 값이 아닙니다. 이 값은 클라이언트에서 캐시로 전송되는 데이터의 네트워크 대역폭에 해당됩니다. |
+| 캐시 쓰기 |지정한 보고 간격 동안 캐시에 쓰는 초당 메가바이트(MB/s) 단위의 데이터 양입니다. 이 값은 캐시를 호스트하는 가상 머신을 지원하는 네트워크 인터페이스 카드에서 가져오며 Redis에 특정한 값이 아닙니다. 이 값은 클라이언트에서 캐시로 전송되는 데이터의 네트워크 대역폭에 해당됩니다. |
 
 <a name="operations-and-alerts"></a>
-## <a name="alerts"></a>경고
+## <a name="alerts"></a>Alerts
 메트릭 및 활동 로그를 기반으로 경고를 수신하도록 구성할 수 있습니다. Azure Monitor를 사용하여 트리거되면 다음을 수행하도록 경고를 구성할 수 있습니다.
 
 * 전자 메일 알림 보내기
@@ -139,7 +138,6 @@ Azure Monitor에서 메트릭을 사용하는 방법에 대한 자세한 내용�
 캐시에 대한 활동 로그를 보려면 **리소스 메뉴**에서 **활동 로그**를 클릭합니다.
 
 활동 로그에 대한 자세한 내용은 [Azure 활동 로그 개요](../monitoring-and-diagnostics/monitoring-overview-activity-logs.md)를 참조하세요.
-
 
 
 

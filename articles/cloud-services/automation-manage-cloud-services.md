@@ -14,11 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/20/2016
 ms.author: timlt
-translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: 47307ed521201b462730a2ea4cb8d0ca665b6d72
-
-
+ms.openlocfilehash: 6b5acac1b8647c324988c316cd5602b3dba98a1d
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="managing-azure-cloud-services-using-azure-automation"></a>Azure 자동화를 사용하여 Azure 클라우드 서비스 관리
 이 가이드에서는 Azure 자동화 서비스 및 이 서비스를 사용하여 Azure 클라우드 서비스 관리를 간소화하는 방법을 소개합니다.
@@ -44,9 +44,3 @@ Azure 자동화의 기본 사항과 Azure 자동화를 사용하여 클라우드
 * [Azure 자동화 개요](../automation/automation-intro.md)
 * [내 첫 번째 runbook](../automation/automation-first-runbook-graphical.md)
 * [Azure 자동화 학습 맵](https://azure.microsoft.com/documentation/learning-paths/automation/)
-
-
-
-<!--HONumber=Nov16_HO3-->
-
-

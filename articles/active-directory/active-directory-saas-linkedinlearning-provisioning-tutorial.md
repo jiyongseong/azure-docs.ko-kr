@@ -1,28 +1,27 @@
 ---
-title: "자습서: Azure Active Directory를 사용한 자동 사용자 프로비전을 위한 LinkedIn Learning 구성 | Microsoft Docs"
-description: "사용자 계정을 LinkedIn Learning로 자동으로 프로비전 및 프로비전 해제하도록 Azure Active Directory를 구성하는 방법을 알아봅니다."
+title: '자습서: Azure Active Directory로 자동 사용자 프로비전을 위한 LinkedIn Learning 구성 | Microsoft Docs'
+description: 사용자 계정을 LinkedIn Learning로 자동으로 프로비전 및 프로비전 해제하도록 Azure Active Directory를 구성하는 방법을 알아봅니다.
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: asmalser-msft
 writer: asmalser-msft
-manager: stevenpo
+manager: mtillman
 ms.assetid: d4ca2365-6729-48f7-bb7f-c0f5ffe740a3
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 04/15/2017
+ms.date: 01/26/2018
 ms.author: asmalser-msft
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a643f139be40b9b11f865d528622bafbe7dec939
-ms.openlocfilehash: 5eb2b1594eedb2a135d7b8cd501a33d8264e136b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/31/2017
-
+ms.openlocfilehash: da39a31777323535c90b4d57e316741295aa873a
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34344935"
 ---
-
-# <a name="tutorial-configuring-linkedin-learning-for-automatic-user-provisioning"></a>자습서: 자동 사용자 프로비전에 대한 LinkedIn Learning 구성
+# <a name="tutorial-configure-linkedin-learning-for-automatic-user-provisioning"></a>자습서: 자동 사용자 프로비전을 위한 LinkedIn Learning 구성
 
 
 이 자습서의 목적은 사용자 계정을 Azure AD에서 LinkedIn Learning로 자동으로 프로비전 및 프로비전 해제하도록 LinkedIn Learning 및 Azure AD에서 수행해야 하는 단계를 설명하는 것입니다. 
@@ -48,9 +47,9 @@ Azure Active Directory는 "할당"이라는 개념을 사용하여 어떤 사용
 
 ### <a name="important-tips-for-assigning-users-to-linkedin-learning"></a>LinkedIn Learning에 사용자 할당을 위한 주요 팁
 
-*    프로비전 구성을 테스트하기 위해 단일 Azure AD 사용자를 LinkedIn Learning에 할당하는 것이 좋습니다. 추가 사용자 및/또는 그룹은 나중에 할당할 수도 있습니다.
+*   프로비전 구성을 테스트하기 위해 단일 Azure AD 사용자를 LinkedIn Learning에 할당하는 것이 좋습니다. 추가 사용자 및/또는 그룹은 나중에 할당할 수도 있습니다.
 
-*    사용자를 LinkedIn Learning에 할당할 때 할당 대화 상자에서 **사용자** 역할을 선택해야 합니다. "기본 액세스" 역할은 프로비전에 작동하지 않습니다.
+*   사용자를 LinkedIn Learning에 할당할 때 할당 대화 상자에서 **사용자** 역할을 선택해야 합니다. "기본 액세스" 역할은 프로비전에 작동하지 않습니다.
 
 
 ## <a name="configuring-user-provisioning-to-linkedin-learning"></a>LinkedIn Learning에 사용자 프로비전 구성
@@ -93,9 +92,9 @@ Azure Active Directory는 "할당"이라는 개념을 사용하여 어떤 사용
 
 8) Single Sign-On에 대한 LinkedIn Learning을 이미 구성한 경우 검색 필드를 사용하여 LinkedIn Learning의 인스턴스를 검색합니다. 그렇지 않은 경우 **추가**를 선택하고 응용 프로그램 갤러리에서 **LinkedIn Learning**을 검색합니다. 검색 결과에서 LinkedIn Learning을 선택하고 응용 프로그램의 목록에 추가합니다.
 
-9)    LinkedIn Learning의 인스턴스를 선택한 다음, **프로비전** 탭을 선택합니다.
+9)  LinkedIn Learning의 인스턴스를 선택한 다음, **프로비전** 탭을 선택합니다.
 
-10)    **프로비전 모드**를 **자동**으로 설정합니다.
+10) **프로비전 모드**를 **자동**으로 설정합니다.
 
 ![LinkedIn Learning 프로비저닝](./media/active-directory-saas-linkedinlearning-provisioning-tutorial/linkedin_3.PNG)
 
@@ -109,7 +108,7 @@ Azure Active Directory는 "할당"이라는 개념을 사용하여 어떤 사용
 
 12) 프로비전 오류 알림을 받을 개인 또는 그룹의 전자 메일 주소를 **알림 전자 메일** 필드에 입력하고 아래 확인란을 선택합니다.
 
-13) **Save**를 클릭합니다. 
+13) **저장**을 클릭합니다. 
 
 14) **특성 매핑** 섹션에서 Azure AD에서 LinkedIn Learning으로 동기화할 사용자 및 그룹 특성을 검토합니다. **일치** 속성으로 선택한 특성은 업데이트 작업 시 LinkedIn Learning에서 사용자 계정 또는 그룹을 일치시키는 데 사용됩니다. 저장 단추를 선택하여 변경 내용을 커밋합니다.
 
@@ -117,13 +116,13 @@ Azure Active Directory는 "할당"이라는 개념을 사용하여 어떤 사용
 
 15) LinkedIn Learning에 대한 Azure AD 프로비전 서비스를 사용하도록 설정하려면 **설정** 섹션에서 **프로비전 상태**를 **켜기**로 변경합니다.
 
-16) **Save**를 클릭합니다. 
+16) **저장**을 클릭합니다. 
 
-사용자 및 그룹 섹션에서 LinkedIn Learning에 할당된 모든 사용자 및/또는 그룹의 초기 동기화가 시작됩니다. 초기 동기화는 서비스가 실행되는 동안 약 20분마다 발생하는 차후 동기화보다 수행하는 데 더 오래 걸립니다. **동기화 세부 정보** 섹션을 사용하여 진행 상태를 모니터링하고 LinkedIn Learning 앱에서 프로비전 서비스에서 수행하는 모든 작업을 설명하는 프로비전 작업 보고서에 연결된 링크를 이용할 수 있습니다.
+사용자 및 그룹 섹션에서 LinkedIn Learning에 할당된 모든 사용자 및/또는 그룹의 초기 동기화가 시작됩니다. 초기 동기화는 서비스가 실행되는 동안 약 40분마다 발생하는 후속 동기화보다 수행하는 데 더 많은 시간이 걸립니다. **동기화 세부 정보** 섹션을 사용하여 진행 상태를 모니터링하고 LinkedIn Learning 앱의 프로비전 서비스에서 수행하는 모든 작업을 설명하는 프로비전 활동 로그에 연결된 링크를 따를 수 있습니다.
 
+Azure AD 프로비저닝 로그를 읽는 방법에 대한 자세한 내용은 [자동 사용자 계정 프로비저닝에 대한 보고](active-directory-saas-provisioning-reporting.md)를 참조하세요.
 
 ## <a name="additional-resources"></a>추가 리소스
 
 * [엔터프라이즈 앱에 대한 사용자 계정 프로비전 관리](active-directory-enterprise-apps-manage-provisioning.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
-
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)

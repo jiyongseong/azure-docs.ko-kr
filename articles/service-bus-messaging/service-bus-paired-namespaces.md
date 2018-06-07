@@ -12,17 +12,16 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 05/25/2017
+ms.date: 12/21/2017
 ms.author: sethm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: d987aa22379ede44da1b791f034d713a49ad486a
-ms.openlocfilehash: 84e125dffcac3f3a54250587c5238b50d3a6cb95
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/16/2017
-
-
+ms.openlocfilehash: f16c65286b0aa079889c9d53e98bf54e3d57c95f
+ms.sourcegitcommit: 6f33adc568931edf91bfa96abbccf3719aa32041
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/22/2017
 ---
 # <a name="paired-namespace-implementation-details-and-cost-implications"></a>쌍을 이루는 네임스페이스 구현의 세부 사항 및 비용의 영향
+
 [PairNamespaceAsync][PairNamespaceAsync] 메서드는 [SendAvailabilityPairedNamespaceOptions][SendAvailabilityPairedNamespaceOptions] 인스턴스를 사용하여 사용자 대신 눈에 보이는 작업을 수행합니다. 이 기능을 사용할 때는 비용을 고려해야 하기 때문에, 이러한 작업을 이해하고 사용할 때 어떤 점을 예측해야 하는지 알아두면 유용합니다. API는 사용자를 대신해 다음과 같은 자동 동작을 수행합니다.
 
 * 백로그 큐를 만듭니다.
@@ -55,7 +54,7 @@ ms.lasthandoff: 02/16/2017
 ## <a name="creation-of-backlog-queues"></a>백로그 큐 만들기
 [SendAvailabilityPairedNamespaceOptions][SendAvailabilityPairedNamespaceOptions] 개체가 [PairNamespaceAsync][PairNamespaceAsync] 메서드에 전달됩니다. 이 개체는 사용자가 사용하려는 백로그 큐의 수를 나타냅니다. 이제 다음 속성이 명시적으로 설정(다른 모든 값은 [QueueDescription][QueueDescription] 기본값으로 설정)된 상태로 각 백로그 큐가 생성됩니다.
 
-| Path | [기본 네임스페이스]/x-servicebus-transfer/[index] 여기서 [index]는 [0, BacklogQueueCount] 사이의 값입니다. |
+| path | [기본 네임스페이스]/x-servicebus-transfer/[index] 여기서 [index]는 [0, BacklogQueueCount] 사이의 값입니다. |
 | --- | --- |
 | MaxSizeInMegabytes |5120 |
 | MaxDeliveryCount |int.MaxValue |
@@ -67,13 +66,13 @@ ms.lasthandoff: 02/16/2017
 
 예를 들어 네임스페이스 **contoso**에 대한 첫 백로그 큐 `contoso/x-servicebus-transfer/0`가 생성됩니다.
 
-큐를 만들 때 코드는 먼저 해당 큐가 이미 있는지 확인합니다. 해당 큐가 없다면 큐가 생성 됩니다. 코드는 "추가" 백로그 큐를 정리하지 않습니다. 구체적으로 설명하면, 기본 네임스페이스 **contoso**를 사용하는 응용 프로그램이 5개의 백로그 큐를 요청했지만 `contoso/x-servicebus-transfer/7` 경로에 백로그 큐가 있다면, 추가 백로그 큐는 그대로 유지되고 사용되지만 사용되지는 않습니다. 시스템은 사용되지 않는 추가 백로그 큐가 존재하는 것을 명시적으로 허용하고 있습니다. 사용되지 않는/불필요한 백로그 큐는 네임스페이스 소유자가 정리해야 합니다. 그 이유는 서비스 버스가 네임스페이스 내의 모든 큐가 어떤 용도로 존재하는지 알 수 없기 때문입니다. 또한 지정된 이름의 큐가 있지만 [QueueDescription][QueueDescription]이 적절히 맞지 않는 경우라면 기본 동작을 사용자가 직접 변경해야 할 것입니다. 코드로 백로크 큐를 수정하는 것에 대해서는 어떤 보장도 기대할 수 없습니다. 변경 내용을 철저히 테스트해 보십시오.
+큐를 만들 때 코드는 먼저 해당 큐가 이미 있는지 확인합니다. 해당 큐가 없다면 큐가 생성 됩니다. 코드는 "추가" 백로그 큐를 정리하지 않습니다. 구체적으로 설명하면, 기본 네임스페이스 **contoso**를 사용하는 응용 프로그램이 5개의 백로그 큐를 요청했지만 `contoso/x-servicebus-transfer/7` 경로에 백로그 큐가 있다면, 추가 백로그 큐는 그대로 유지되고 사용되지만 사용되지는 않습니다. 시스템은 사용되지 않는 추가 백로그 큐가 존재하는 것을 명시적으로 허용하고 있습니다. 사용되지 않는/불필요한 백로그 큐는 네임스페이스 소유자가 정리해야 합니다. 그 이유는 Service Bus가 네임스페이스 내의 모든 큐가 어떤 용도로 존재하는지 알 수 없기 때문입니다. 또한 지정된 이름의 큐가 있지만 [QueueDescription][QueueDescription]이 적절히 맞지 않는 경우라면 기본 동작을 사용자가 직접 변경해야 할 것입니다. 코드로 백로크 큐를 수정하는 것에 대해서는 어떤 보장도 기대할 수 없습니다. 변경 내용을 철저히 테스트해 보십시오.
 
 ## <a name="custom-messagesender"></a>사용자 지정 MessageSender
 모든 메시지는 내부 [MessageSender][MessageSender] 개체를 통해 전송됩니다. 이 개체는 모든 것이 정상일 경우 일반적인 방식으로 작동하지만 오류가 있으면 백로그 큐로 리디렉션합니다. 일시적이지 않은 오류가 발생할 경우 타이머가 시작됩니다. [FailoverInterval][FailoverInterval] 속성 값을 구성하는 [TimeSpan][TimeSpan] 기간 동안 메시지가 성공적으로 전송되지 않을 경우, 장애 조치(failover)가 시작됩니다. 이 시점에서 각 엔터티에 대해 다음 작업이 수행됩니다.
 
 * 엔터티를 사용할 수 있는지 확인하기 위해 [PingPrimaryInterval][PingPrimaryInterval]마다 Ping 작업이 실행됩니다. 이 작업이 성공하면 해당 엔터티를 사용하는 모든 클라이언트 코드가 즉시 기본 네임스페이스로 새 메시지를 보내는 작업을 시작합니다.
-* 이후에 다른 발신자에서 동일한 엔터티로 메시지 발송을 요청하면 백로그 큐에 보관되도록 [BrokeredMessage][BrokeredMessage]가 전송되어 수정됩니다. 이 수정을 통해 [BrokeredMessage][BrokeredMessage] 개체의 일부 속성이 제거되고 다른 곳에 저장됩니다. 서비스 버스와 SDK가 메시지를 동일한 방식으로 처리할 수 있도록 다음 속성이 지워지고 새 별칭으로 추가됩니다.
+* 이후에 다른 발신자에서 동일한 엔터티로 메시지 발송을 요청하면 백로그 큐에 보관되도록 [BrokeredMessage][BrokeredMessage]가 전송되어 수정됩니다. 이 수정을 통해 [BrokeredMessage][BrokeredMessage] 개체의 일부 속성이 제거되고 다른 곳에 저장됩니다. Service Bus와 SDK가 메시지를 동일한 방식으로 처리할 수 있도록 다음 속성이 지워지고 새 별칭으로 추가됩니다.
 
 | 이전 속성 이름 | 새 속성 이름 |
 | --- | --- |
@@ -86,7 +85,7 @@ ms.lasthandoff: 02/16/2017
 사용자 지정 [MessageSender][MessageSender] 개체는 메시지가 256KB 제한에 도달하면 문제가 발생할 수 있으며 장애 조치(failover)가 시작됩니다. 사용자 지정 [MessageSender][MessageSender] 개체는 백로그 큐에 모든 큐와 토픽에 대한 메시지를 저장합니다. 이 개체는 백로그 큐 내에서 여러 기본 큐의 메시지를 혼합합니다. 서로를 알 수 없는 많은 클라이언트 사이에서 부하 분산을 처리하기 위해 SDK는 사용자가 코드에서 만든 각 [QueueClient][QueueClient] 또는 [TopicClient][TopicClient]에 대해 하나씩의 백로그 큐를 임의로 선택합니다.
 
 ## <a name="pings"></a>Ping
-Ping 메시지는 [ContentType][ContentType] 속성이 application/vnd.ms-servicebus-ping으로, [TimeToLive][TimeToLive] 값이 1로 설정된 빈 [BrokeredMessage][BrokeredMessage]입니다. 이 Ping은 Service Bus에서 한 가지 특별한 특징이 있습니다. 어떤 호출자라도 [BrokeredMessage][BrokeredMessage]를 요청하면 서버는 절대 Ping을 전달하지 않습니다. 따라서 이러한 메시지를 받고 무시하는 방법을 알 필요가 없습니다. 각 클라이언트당 [MessagingFactory][MessagingFactory] 인스턴스의 엔터티(고유한 큐 또는 토픽)를 대상으로, 엔터티를 사용할 수 없다고 간주되면 Ping이 발송됩니다. 기본적으로 이 작업은 1분에 한 번씩 수행됩니다. Ping 메시지는 일반 서비스 버스 메시지로 간주되며, 대역폭과 메시지에 대한 비용이 소비됩니다. 클라이언트가 시스템이 사용 가능해진 것으로 감지하면 곧바로 메시지는 중단됩니다.
+Ping 메시지는 [ContentType][ContentType] 속성이 application/vnd.ms-servicebus-ping으로, [TimeToLive][TimeToLive] 값이 1로 설정된 빈 [BrokeredMessage][BrokeredMessage]입니다. 이 Ping은 Service Bus에서 한 가지 특별한 특징이 있습니다. 어떤 호출자라도 [BrokeredMessage][BrokeredMessage]를 요청하면 서버는 절대 Ping을 전달하지 않습니다. 따라서 이러한 메시지를 받고 무시하는 방법을 알 필요가 없습니다. 각 클라이언트당 [MessagingFactory][MessagingFactory] 인스턴스의 엔터티(고유한 큐 또는 토픽)를 대상으로, 엔터티를 사용할 수 없다고 간주되면 Ping이 발송됩니다. 기본적으로 이 작업은 1분에 한 번씩 수행됩니다. Ping 메시지는 일반 Service Bus 메시지로 간주되며, 대역폭과 메시지에 대한 비용이 소비됩니다. 클라이언트가 시스템이 사용 가능해진 것으로 감지하면 곧바로 메시지는 중단됩니다.
 
 ## <a name="the-syphon"></a>사이펀
 응용 프로그램에서 하나 이상의 실행 프로그램이 적극적으로 사이펀을 실행해야 합니다. 사이펀은 15분 동안 지속되는 긴 폴링을 수행합니다. 모든 엔터티가 사용 가능 상태이고 10개의 백로그 큐가 있는 경우, 사이펀을 호스팅하는 응용 프로그램은 시간당 40번, 하루에 960번, 30일에 28,000번의 수신 작업을 호출합니다. 사이펀이 적극적으로 메시지를 백로그에서 기본 큐로 보낼 경우 각 메시지에 대한 비용(모든 단계에서 메시지 크기 및 대역폭에 대한 표준 비용을 적용)은 다음과 같습니다.
@@ -121,4 +120,3 @@ Service Bus 비동기 메시징에 대한 자세한 내용은 [비동기 메시�
 [0]: ./media/service-bus-paired-namespaces/IC673405.png
 [1]: ./media/service-bus-paired-namespaces/IC673406.png
 [2]: ./media/service-bus-paired-namespaces/IC673407.png
-

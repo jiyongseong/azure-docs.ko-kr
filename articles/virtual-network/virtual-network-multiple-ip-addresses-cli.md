@@ -1,38 +1,37 @@
 ---
-title: "Azure CLI 2.0을 사용하여 여러 IP 주소가 있는 VM | Microsoft Docs"
-description: "Azure CLI 2.0 | Resource Manager를 사용하여 가상 컴퓨터에 여러 IP 주소를 할당하는 방법을 알아봅니다."
+title: Azure CLI를 사용하여 여러 IP 주소가 있는 VM | Microsoft Docs
+description: Azure CLI(명령줄 인터페이스)를 사용하여 가상 머신에 여러 IP 주소를 할당하는 방법을 알아봅니다.
 services: virtual-network
 documentationcenter: na
-author: anavinahar
-manager: narayan
-editor: 
+author: jimdial
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-network
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 11/17/2016
-ms.author: annahar
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 0e9b2ef89ca39a7988a7b2573496a605dfc604b4
-ms.lasthandoff: 04/03/2017
-
-
+ms.author: jimdial
+ms.openlocfilehash: c11883156f53ab53ebe6f84d66232f81f8cf31ff
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
-# <a name="assign-multiple-ip-addresses-to-virtual-machines-using-the-azure-cli-20"></a>Azure CLI 2.0을 사용하여 가상 컴퓨터에 여러 IP 주소 할당
+# <a name="assign-multiple-ip-addresses-to-virtual-machines-using-the-azure-cli"></a>Azure CLI를 사용하여 가상 머신에 여러 IP 주소 할당
 
 [!INCLUDE [virtual-network-multiple-ip-addresses-intro.md](../../includes/virtual-network-multiple-ip-addresses-intro.md)]
 
-이 문서는 Azure CLI 2.0을 사용하여 Azure Resource Manager 배포 모델을 통해 VM(가상 컴퓨터)을 만드는 방법을 설명합니다. 클래식 배포 모델을 통해 생성된 리소스에 여러 IP 주소를 할당할 수 없습니다. Azure 배포 모델에 대해 자세히 알아보려면 [배포 모델 이해](../resource-manager-deployment-model.md) 문서를 참조하세요.
+이 문서는 Azure CLI를 사용하여 Azure Resource Manager 배포 모델을 통해 VM(가상 컴퓨터)을 만드는 방법을 설명합니다. 클래식 배포 모델을 통해 생성된 리소스에 여러 IP 주소를 할당할 수 없습니다. Azure 배포 모델에 대해 자세히 알아보려면 [배포 모델 이해](../resource-manager-deployment-model.md) 문서를 참조하세요.
 
-[!INCLUDE [virtual-network-multiple-ip-addresses-template-scenario.md](../../includes/virtual-network-multiple-ip-addresses-scenario.md)]
+[!INCLUDE [virtual-network-multiple-ip-addresses-scenario.md](../../includes/virtual-network-multiple-ip-addresses-scenario.md)]
 
 ## <a name = "create"></a>여러 IP 주소를 사용하여 VM 만들기
 
-Azure CLI 2.0(이 문서) 또는 [Azure CLI 1.0](virtual-network-multiple-ip-addresses-cli-nodejs.md)을 사용하여 이 태스크를 완료할 수 있습니다. 사용자 환경에 적절한 값으로 변경합니다. 다음 단계는 시나리오에 설명된 대로 여러 IP 주소를 가진 예시 VM을 만드는 방법을 설명합니다. ""의 변수 값과 IP 주소 유형을 구현에 필요한 대로 변경합니다. 
+다음 단계는 시나리오에 설명된 대로 여러 IP 주소를 가진 예시 가상 머신을 만드는 방법을 설명합니다. ""의 변수 값과 IP 주소 유형을 구현에 필요한 대로 변경합니다. 
 
 1. [Azure CLI 2.0](/cli/azure/install-az-cli2)을 아직 설치하지 않은 경우 설치합니다.
 2. [Linux VM에 SSH 공용 및 개인 키 쌍 만들기](../virtual-machines/linux/mac-create-ssh-keys.md?toc=%2fazure%2fvirtual-network%2ftoc.json)의 단계를 완료하여 Linux VM에 SSH 공용 및 개인 키 쌍을 만듭니다.
@@ -109,7 +108,7 @@ az network nic ip-config create \
 --private-ip-address 10.0.0.5 \
 --public-ip-name myPublicIP2
 
-# Create a third IP configuration, and associate it to the NIC. This configuration has  static private IP address and    # no public IP address.
+# Create a third IP configuration, and associate it to the NIC. This configuration has  static private IP address and   # no public IP address.
 
 azure network nic ip-config create \
 --resource-group $RgName \
@@ -168,7 +167,7 @@ VM을 만든 후에 `az network nic show --name MyNic1 --resource-group myResour
 
 ## <a name="add"></a>VM에 IP 주소 추가
 
-다음 단계를 완료하여 개인 및 공용 IP 주소를 기존 NIC에 추가할 수 있습니다. 예제는 이 문서에서 설명된 [시나리오](#Scenario)를 기반으로 합니다.
+다음 단계를 완료하여 개인 및 공용 IP 주소를 기존 Azure 네트워크 인터페이스에 더 추가할 수 있습니다. 예제는 이 문서에서 설명된 [시나리오](#Scenario)를 기반으로 합니다.
 
 1. 명령 셸을 열고 단일 세션 내에서 이 섹션의 나머지 단계를 완료합니다. 아직 Azure CLI를 설치 및 구성하지 않은 경우 [Azure CLI 2.0 설치](/cli/azure/install-az-cli2?toc=%2fazure%2fvirtual-network%2ftoc.json) 문서에 나오는 단계를 완료하고 `az-login` 명령을 사용하여 Azure 계정에 로그인합니다.
 
@@ -206,7 +205,7 @@ VM을 만든 후에 `az network nic show --name MyNic1 --resource-group myResour
         --dns-name mypublicdns3
         ```
 
-         고정 개인 IP 주소 및 여기에 연결된 *myPublicP3* 공용 IP 주소 리소스가 있는 새 IP 구성을 만들려면 다음 명령을 입력합니다.
+        고정 개인 IP 주소 및 여기에 연결된 *myPublicP3* 공용 IP 주소 리소스가 있는 새 IP 구성을 만들려면 다음 명령을 입력합니다.
 
         ```bash
         az network nic ip-config create \
@@ -217,8 +216,7 @@ VM을 만든 후에 `az network nic show --name MyNic1 --resource-group myResour
         --public-ip-address myPublicIP3
         ```
 
-    - **기존 IP 구성에 리소스 연결**
-       공용 IP 주소 리소스는 아직 연결한 리소스가 없는 IP 구성에만 연결될 수 있습니다. 다음 명령을 입력하면 IP 구성에 연결된 공용 IP 주소가 있는지 여부를 확인할 수 있습니다.
+    - **기존 IP 구성에 리소스 연결** 공용 IP 주소 리소스는 아직 연결한 리소스가 없는 IP 구성에만 연결될 수 있습니다. 다음 명령을 입력하면 IP 구성에 연결된 공용 IP 주소가 있는지 여부를 확인할 수 있습니다.
 
         ```bash
         az network nic ip-config list \
@@ -277,4 +275,3 @@ VM을 만든 후에 `az network nic show --name MyNic1 --resource-group myResour
 4. 이 문서의 [VM 운영 체제에 IP 주소 추가](#os-config) 섹션에 나오는 지침에 따라 NIC에 추가한 개인 IP 주소를 VM 운영 체제에 추가합니다. 운영 체제에 공용 IP 주소를 추가하지 마십시오.
 
 [!INCLUDE [virtual-network-multiple-ip-addresses-os-config.md](../../includes/virtual-network-multiple-ip-addresses-os-config.md)]
-

@@ -1,28 +1,27 @@
 ---
-title: "Azure 에이전트 없이 로컬 Windows 암호 재설정 | Microsoft Docs"
-description: "Azure 게스트 에이전트가 설치되어 있지 않거나 VM에서 작동하지 않는 경우 로컬 Windows 사용자 계정의 암호를 재설정하는 방법"
+title: Azure 에이전트 없이 로컬 Windows 암호 재설정 | Microsoft Docs
+description: Azure 게스트 에이전트가 설치되어 있지 않거나 VM에서 작동하지 않는 경우 로컬 Windows 사용자 계정의 암호를 재설정하는 방법
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 ms.assetid: cf353dd3-89c9-47f6-a449-f874f0957013
 ms.service: virtual-machines-windows
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 04/07/2017
+ms.date: 01/25/2018
 ms.author: iainfou
-translationtype: Human Translation
-ms.sourcegitcommit: 757d6f778774e4439f2c290ef78cbffd2c5cf35e
-ms.openlocfilehash: 880f5e5967298401fc2522124af3746d9906ffa8
-ms.lasthandoff: 04/10/2017
-
-
+ms.openlocfilehash: ad892aee646b1a5f8c96d5bdeca24b7a0d88f38e
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-# <a name="how-to-reset-local-windows-password-for-azure-vm"></a>Azure VM의 로컬 Windows 암호를 재설정하는 방법
-Azure 게스트 에이전트 설치가 제공되는 [Azure Portal 또는 Azure PowerShell](reset-rdp.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)을 사용하여 Azure에서 VM의 로컬 Windows 암호를 재설정할 수 있습니다. 이 방법은 Azure VM의 암호를 재설정하는 기본 방법입니다. Azure 게스트 에이전트가 응답하지 않거나 사용자 지정 이미지를 업로드한 후 설치에 실패하는 문제가 발생하는 경우 Windows 암호를 수동으로 재설정할 수 있습니다. 이 문서에는 다른 VM에 원본 OS 가상 디스크를 연결하여 로컬 계정 암호를 재설정하는 방법을 자세히 설명합니다. 
+# <a name="reset-local-windows-password-for-azure-vm-offline"></a>Azure VM 오프라인의 로컬 Windows 암호 재설정
+Azure 게스트 에이전트 설치가 제공되는 [Azure Portal 또는 Azure PowerShell](reset-rdp.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)을 사용하여 Azure에서 VM의 로컬 Windows 암호를 재설정할 수 있습니다. 이 방법은 Azure VM의 암호를 재설정하는 기본 방법입니다. Azure 게스트 에이전트가 응답하지 않거나 사용자 지정 이미지를 업로드한 후 설치에 실패하는 문제가 발생하는 경우 Windows 암호를 수동으로 재설정할 수 있습니다. 이 문서에는 다른 VM에 원본 OS 가상 디스크를 연결하여 로컬 계정 암호를 재설정하는 방법을 자세히 설명합니다. 이 문서에 설명된 단계는 Windows 도메인 컨트롤러에는 적용되지 않습니다. 
 
 > [!WARNING]
 > 이 프로세스는 마지막 수단으로만 사용합니다. 항상 [Azure Portal 또는 Azure PowerShell](reset-rdp.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)을 먼저 사용하여 암호를 재설정하도록 시도합니다.
@@ -40,6 +39,12 @@ Azure 게스트 에이전트에 대한 액세스가 없는 경우 Azure에서 Wi
 * 새 VM이 부팅하면 만든 구성 파일은 필요한 사용자의 암호를 업데이트합니다.
 
 ## <a name="detailed-steps"></a>자세한 단계
+
+> [!NOTE]
+> 이 단계는 Windows 도메인 컨트롤러에는 적용되지 않습니다. 독립 실행형 서버 또는 도메인의 멤버인 서버에만 작동합니다.
+> 
+> 
+
 다음 단계를 시도하기 전에 항상 [Azure Portal 또는 Azure PowerShell](reset-rdp.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)을 사용하여 암호를 재설정하도록 시도합니다. 시작하기 전에 VM을 백업했는지 확인합니다. 
 
 1. Azure Portal에서 영향을 받는 VM을 삭제합니다. VM을 삭제하면 Azure 내에서 메타데이터, VM의 참조만 삭제됩니다. 가상 디스크는 VM이 삭제될 때 유지됩니다.
@@ -105,7 +110,6 @@ Azure 게스트 에이전트에 대한 액세스가 없는 경우 Azure에서 Wi
     net user <username> <newpassword> /add
     net localgroup administrators <username> /add
     net localgroup "remote desktop users" <username> /add
-
     ```
 
     ![FixAzureVM.cmd 만들기](./media/reset-local-password-without-agent/create_fixazure_cmd.png)
@@ -146,5 +150,4 @@ Azure 게스트 에이전트에 대한 액세스가 없는 경우 Azure에서 Wi
 
 ## <a name="next-steps"></a>다음 단계
 원격 데스크톱을 사용하여 계속 연결할 수 없는 경우 [RDP 문제 해결 가이드](troubleshoot-rdp-connection.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 참조하세요. [자세한 RDP 문제 해결 가이드](detailed-troubleshoot-rdp.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)는 특정 단계보다 문제 해결 방법을 살펴봅니다. 직접적인 도움을 위해 [Azure 지원 요청](https://azure.microsoft.com/support/options/)을 개설할 수도 있습니다.
-
 

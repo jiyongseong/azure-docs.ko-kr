@@ -1,0 +1,103 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Azure Data Factory V2 미리 보기 설명서
+metadata:
+  title: Azure Data Factory 설명서 - 자습서, API 참조 | Microsoft Docs
+  description: 분석을 위해 데이터를 이동하고 처리하기 위해 Data Factory를 사용하여 온-프레미스 및 클라우드 원본 간에 자동화된 데이터 파이프라인을 설정하는 방법에 대해 알아봅니다.
+  services: data-factory
+  author: douglaslMS
+  manager: craigg
+  ms.service: data-factory
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 09/08/2017
+  ms.author: douglasl
+  ms.openlocfilehash: e31500a02bc3470e338f727771eebe887dcc493f
+  ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 03/23/2018
+abstract:
+  description: 클라우드 데이터 통합 서비스인 Data Factory를 사용하여 자동화된 데이터 파이프라인에 데이터 저장소, 이동 및 처리 서비스를 구성하는 방법에 대해 알아봅니다. 자습서 및 기타 설명서에서는 데이터 파이프라인을 설정하고 관리할 뿐만 아니라 분석을 위해 데이터를 이동하고 변환하는 방법을 보여 줍니다. <p>Data Factory V2 버전은 현재 미리 보기로 있습니다. V1 버전은 일반적으로 사용할 수 있습니다. Data Factory V1 서비스를 사용하는 경우 <a href=/azure/data-factory/v1/data-factory-introduction>V1 설명서</a>를 참조하세요.</p>
+  aside:
+    image:
+      alt: 
+      height: 110
+      src: media/index/video.png
+      width: 250
+    title: Azure Data Factory V2용 시각적 빌드 파이프라인(19:31)
+    href: https://azure.microsoft.com/en-us/resources/videos/azure-friday-visually-build-pipelines-for-azure-data-factory-v2
+    width: 250
+sections:
+- title: 5분 빠른 시작
+  items:
+  - type: paragraph
+    text: 다음을 사용하여 데이터 팩터리를 만드는 방법을 알아봅니다.
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: /azure/data-factory/media/index/portal.svg
+      text: Data Factory UI
+      href: /azure/data-factory/quickstart-create-data-factory-portal
+    - image:
+        src: /azure/data-factory/media/index/copy-data-tool.png
+      text: 데이터 복사 도구
+      href: /azure/data-factory/quickstart-create-data-factory-copy-data-tool
+    - image:
+        src: /azure/data-factory/media/index/logo_powershell.svg
+      text: Azure PowerShell
+      href: /azure/data-factory/quickstart-create-data-factory-powershell
+    - image:
+        src: /azure/data-factory/media/index/logo_net.svg
+      text: .NET
+      href: /azure/data-factory/quickstart-create-data-factory-dot-net
+    - image:
+        src: /azure/data-factory/media/index/logo_python.svg
+      text: 파이썬
+      href: /azure/data-factory/quickstart-create-data-factory-python
+    - image:
+        src: /azure/data-factory/media/index/logo_rest.svg
+      text: REST (영문)
+      href: /azure/data-factory/quickstart-create-data-factory-rest-api
+    - image:
+        src: /azure/data-factory/media/index/logo_azure_resource_manager.svg
+      text: Resource Manager 템플릿
+      href: /azure/data-factory/quickstart-create-data-factory-resource-manager-template
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: 데이터 팩터리를 만들고 모니터링하는 방법을 알아봅니다.
+  - type: list
+    style: ordered
+    items:
+    - html: SSIS 패키지를 Azure에 배포 - <a href="/azure/data-factory/tutorial-create-azure-ssis-runtime-portal">Data Factory UI</a> | <a href="/azure/data-factory/tutorial-deploy-ssis-packages-azure">Azure PowerShell</a>
+    - html: 클라우드에 데이터 복사 - <a href="/azure/data-factory/tutorial-copy-data-tool">데이터 복사 도구</a> | <a href="/azure/data-factory/tutorial-copy-data-portal">Data Factory UI</a> | <a href="/azure/data-factory/tutorial-copy-data-dot-net">.NET</a>
+    - html: 클라우드에 온-프레미스 데이터 복사 - <a href="/azure/data-factory/tutorial-hybrid-copy-data-tool">데이터 복사 도구 | <a href="/azure/data-factory/tutorial-hybrid-copy-portal">Data Factory UI</a> | <a href="/azure/data-factory/tutorial-hybrid-copy-powershell">Azure PowerShell</a>
+    - html: 데이터를 대량으로 복사 - <a href="/azure/data-factory/tutorial-bulk-copy-portal">Data Factory UI</a> | <a href="/azure/data-factory/tutorial-bulk-copy">Azure PowerShell</a>
+    - html: 데이터를 증분식으로 복사 - <a href="/azure/data-factory/tutorial-incremental-copy-portal">Data Factory UI</a> | <a href="/azure/data-factory/tutorial-incremental-copy-powershell">Azure PowerShell</a>
+    - html: Spark를 사용하여 클라우드의 데이터 변환 - <a href="/azure/data-factory/tutorial-transform-data-spark-portal">Data Factory UI</a> | <a href="/azure/data-factory/tutorial-transform-data-spark-powershell">Azure PowerShell</a>
+    - html: 가상 네트워크의 데이터 변환 - <a href="/azure/data-factory/tutorial-transform-data-hive-virtual-network-portal">Data Factory UI</a> | <a href="/azure/data-factory/tutorial-transform-data-hive-virtual-network">Azure PowerShell</a>
+    - html: 제어 흐름 - <a href="/azure/data-factory/tutorial-control-flow-portal">Data Factory UI</a> | <a href="/azure/data-factory/tutorial-control-flow">.NET</a>
+- title: 샘플
+  items:
+  - type: paragraph
+    text: 다음 예제를 사용하여 Data Factory 작업을 수행합니다.
+  - type: list
+    style: unordered
+    className: spaced noBullet
+    items:
+    - html: <a href="/azure/data-factory/samples-powershell">PowerShell</a>
+- title: 참고 자료
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: 명령줄
+      html: <p><a href="/powershell/module/azurerm.datafactoryv2/">Azure PowerShell</a></p>
+    - title: 언어
+      html: <p><a href="/dotnet/api/microsoft.azure.management.datafactory">.NET</a></p><p><a href="/python/api/overview/azure/datafactory?view=azure-python">Python</a></p>
+    - title: REST (영문)
+      html: <p><a href="/rest/api/datafactory">REST API</a></p>

@@ -1,9 +1,9 @@
 ---
-title: "Application Insights로 앱 상태 및 사용 현황 모니터링"
-description: "Application Insights를 시작합니다. 온-프레미스 또는 Microsoft Azure 웹 응용 프로그램의 사용량, 가용성 및 성능을 분석합니다."
+title: Application Insights로 앱 상태 및 사용 현황 모니터링
+description: Application Insights를 시작합니다. 온-프레미스 또는 Microsoft Azure 웹 응용 프로그램의 사용량, 가용성 및 성능을 분석합니다.
 services: application-insights
-documentationcenter: 
-author: CFreemanwa
+documentationcenter: ''
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 40650472-e860-4c1b-a589-9956245df307
 ms.service: application-insights
@@ -11,26 +11,23 @@ ms.workload: tbd
 ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
-ms.date: 11/25/2015
-ms.author: sewhee
+ms.date: 05/10/2018
+ms.author: sdash
+ms.openlocfilehash: 02421492528e44ed6a913443a7793235170d4881
+ms.sourcegitcommit: e14229bb94d61172046335972cfb1a708c8a97a5
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 69ead621c179bf49f17ed3274be4b625fc587556
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/14/2018
+ms.locfileid: "34159410"
 ---
 # <a name="monitor-performance-in-web-applications"></a>웹 응용 프로그램의 성능 모니터링
 
 
 응용 프로그램이 정상적으로 작동하는지 확인하고 오류가 발생하는지 신속하게 파악합니다. [Application Insights][start]는 성능 문제 및 예외에 대한 정보와, 이러한 현상에 대한 근본 원인을 확인하고 진단하는 기능을 제공합니다.
 
-Application Insights에서 Java 및 ASP.NET 웹 응용 프로그램과 서비스, WCF 서비스를 모니터링할 수 있습니다. 온-프레미스, 가상 컴퓨터에서 또는 Microsoft Azure 웹 사이트로 호스트할 수 있습니다. 
+Application Insights에서 Java 및 ASP.NET 웹 응용 프로그램과 서비스, WCF 서비스를 모니터링할 수 있습니다. 온-프레미스, 가상 머신에서 또는 Microsoft Azure 웹 사이트로 호스트할 수 있습니다. 
 
-Application Insights는 클라이언트쪽에서 iOS, Android 및 Windows 스토어 앱을 포함하여 다양한 장치 및 웹 페이지에서 원격 분석을 수행할 수 있습니다.
-
->[!Note]
-> 웹 응용 프로그램에서 느리게 작동하는 페이지 찾기에 사용할 수 있는 새 환경을 만들었습니다. 액세스 권한이 없는 경우 [미리 보기 블레이드](app-insights-previews.md)로 미리 보기 옵션을 구성하여 활성화합니다. [대화형 성능 조사를 사용하여 성능 병목 현상 찾기 및 해결](#Find-and-fix-performance-bottlenecks-with-an-interactive-Performance-investigation)에서 이 새로운 환경에 대해 읽어 보세요.
+Application Insights는 클라이언트 쪽에서 iOS, Android 및 Windows 스토어 앱을 포함한 다양한 장치 및 웹 페이지에서 원격 분석을 수행할 수 있습니다.
 
 ## <a name="setup"></a>성능 모니터링 설정
 Application Insights를 아직 프로젝트에 추가하지 않은 경우(프로젝트에 ApplicationInsights.config가 없음) 다음 방법 중 하나를 선택하여 작업을 시작합니다.
@@ -68,7 +65,7 @@ HTTP 요청에는 페이지, 데이터 및 이미지에 대한 모든 GET 또는
 ### <a name="average-response-time"></a>평균 응답 시간
 웹 요청이 응용 프로그램에 도착하는 시점과 응답이 반환되는 시점 사이의 시간을 측정합니다.
 
-점은 이동 평균을 보여 줍니다. 요청 수가 많으면 그래프에서는 요청 수가 크게 늘어나거나 줄어들지 않아도 일부 점이 평균에서 벗어날 수 있습니다.
+점은 이동 평균을 보여 줍니다. 많은 요청이 있을 경우 그래프에서 크게 상승하거나 하락하지는 않지만 평균에서 벗어나는 일부 요청이 있을 수 있습니다.
 
 요청 수의 비정상적인 증가를 확인합니다. 일반적으로는 요청 수가 증가하면 응답 시간은 길어집니다. 그러나 이처럼 요청 수와 응답 시간이 비례하지 않는 경우에는 앱이 사용하는 서비스의 용량 또는 CPU와 같은 리소스 제한에 도달해서 일 수 있습니다.
 
@@ -117,33 +114,29 @@ catch되지 않은 예외를 throw한 요청의 수입니다.
 * [라이브 메트릭 스트림][livestream]을 사용하여 작업에서 웹앱을 모니터링합니다.
 * [스냅숏 디버거][snapshot]를 사용하여 .Net 응용 프로그램의 상태를 캡처합니다.
 
-## <a name="find-and-fix-performance-bottlenecks-with-an-interactive-performance-investigation"></a>대화형 성능 조사를 사용하여 성능 병목 현상 찾기 및 해결
+## <a name="find-and-fix-performance-bottlenecks-with-performance-investigation-experience"></a>성능 조사 환경을 사용하여 성능 병목 현상 찾기 및 수정
 
-새 Application Insights 대화형 성능 조사를 사용하여 전반적인 성능이 저하되는 웹앱의 영역을 찾을 수 있습니다. 저하되는 특정 페이지를 신속하게 찾을 수 있으며 이러한 페이지 간의 상관 관계를 확인하기 위해 [프로파일링 도구](app-insights-profiler.md)를 사용할 수 있습니다.
+성능 조사 환경을 사용하여 웹앱에서 성능이 느린 작업을 검토합니다. 느린 특정 작업을 신속하게 선택하고 [프로파일러](app-insights-profiler.md)를 사용하여 코드에 대한 작업 속도를 저하시키는 근본 원인을 파악할 수 있습니다. 선택한 작업이 표시된 새 기간 분포를 사용하면 해당 환경이 얼마나 고객에게 나쁜지를 빠르게 즉시 가늠할 수 있습니다. 느린 작업마다 영향을 받은 사용자 상호 작용의 상태를 확인할 수 있습니다. 다음 예제에서는 고객/세부 정보 가져오기 작업에 대한 환경을 자세히 살펴보겠습니다. 기간 분포에서 세 가지 스파이크가 있음을 알 수 있습니다. 맨 왼쪽 스파이크는 약 400ms이며 뛰어난 응답 환경을 나타냅니다. 중간 스파이크는 약 1.2s이며 보통의 환경을 나타냅니다. 3.6s에서 99번째 백분위수 환경을 나타내는 마지막 작은 스파이크는 고객 불만족으로 이어질 가능성이 높습니다. 그러한 환경은 동일한 작업에 대해 탁월한 환경보다 10배 더 느립니다. 
 
-### <a name="create-a-list-of-slow-performing-pages"></a>느리게 작동하는 페이지 목록 만들기 
+![고객/세부 정보 가져오기 세 가지 기간 스파이크](./media/app-insights-web-monitor-performance/PerformanceTriageViewZoomedDistribution.png)
 
-성능 문제를 찾기 위한 첫 번째 단계는 느린 응답 페이지의 목록을 가져오는 것입니다. 아래 스크린샷은 성능 블레이드를 사용하여 추가 조사를 위해 잠재적인 페이지의 목록을 가져오는 방법을 보여 줍니다. 이 페이지에서 약 오후 6시와 약 오후 10시에 다시 앱의 응답 시간에 저하가 있었음을 신속하게 확인할 수 있습니다. 또한 고객/세부 정보 가져오기 작업에 507.05밀리초의 중앙 응답 시간으로 일부 장기 실행 작업이 있었음을 확인할 수 있습니다. 
+이 작업에 대한 사용자 환경을 더 잘 이해하기 위해 더 긴 시간 범위를 선택할 수 있습니다. 그러면 작업이 느린 특정 시간 범위에서 시간을 좁힐 수 있습니다. 다음 예에서는 기본 24시간 시간 범위에서 7일 시간 범위로 전환한 다음, 12일 화요일과 13일 수요일 사이의 9:47~12:47 시간 범위로 확대했습니다. 기간 분포와 샘플 및 프로파일러 추적의 수는 모두 오른쪽에서 업데이트되었습니다.
 
-![Application Insights 대화형 성능](./media/app-insights-web-monitor-performance/performance1.png)
+![고객/세부 정보 가져오기 세 가지 기간 스파이크(기간: 7일 범위)](./media/app-insights-web-monitor-performance/PerformanceTriageView7DaysZoomedTrend.png)
 
-### <a name="drill-down-on-specific-pages"></a>특정 페이지에 대해 드릴다운
+느린 환경에서 범위를 좁히기 위해 95와 99 백분위수 사이로 떨어지는 기간으로 확대합니다. 이는 느린 사용자 상호 작용의 4%를 나타냅니다.
 
-앱의 성능에 대한 스냅숏을 만든 후 느리게 작동하는 특정 작업에 대한 자세한 세부 정보를 얻을 수 있습니다. 아래와 같이 세부 정보를 보려면 목록에서 모든 작업을 클릭합니다. 차트에서 성능이 종속성을 기반으로 했는지 확인할 수 있습니다. 또한 다양한 응답 시간을 경험한 사용자 수를 확인할 수도 있습니다. 
+![고객/세부 정보 가져오기 세 가지 기간 스파이크(기간: 7일 범위)](./media/app-insights-web-monitor-performance/PerformanceTriageView7DaysZoomedTrendZoomed95th99th.png)
 
-![Application insights 작업 블레이드](./media/app-insights-web-monitor-performance/performance5.png)
+이제 샘플 단추를 클릭하거나 대표 프로파일러 추적에서 프로파일러 추적 단추를 클릭하여 대표 샘플 중 하나를 살펴볼 수 있습니다. 다음 예에는 시간 범위 및 관심 있는 범위 기간에서 고객/세부 정보를 가져오기 위해 수집된 4개의 추적이 있습니다.
 
-### <a name="drill-down-on-a-specific-time-period"></a>특정 기간에 대해 드릴다운
+경우에 따라 문제가 코드에 있지 않고 오히려 코드에서 호출하는 종속성에 있을 수 있습니다. 성능 심사 보기에서 종속성 탭을 전환하여 그러한 느린 종속성을 조사할 수 있습니다. 기본적으로 성능 보기는 추세 평균이지만, 실제로 조사하려는 것은 95번째 백분위수(또는 완성도가 높은 서비스를 모니터링하는 경우 99번째 백분위수)입니다. 다음 예제에서는 PUT fabrikamaccount를 호출하는 느린 Azure BLOB 종속성에 초점을 맞춥니다. 좋은 환경은 약 40ms로 클러스터하지만, 동일한 종속성에 대한 느린 호출은 약 120ms로 클러스터하여 세 배 느립니다. 해당 작업 속도가 현저하게 느려지는 원인이 되므로 이러한 호출은 많이 만들지 않습니다. 작업 탭을 사용할 수 있는 것처럼 대표 샘플 및 프로파일러 추적을 자세히 살펴볼 수 있습니다.
 
-조사할 특정 시점을 식별한 후 성능 저하를 발생시켰을 수도 있는 특정 작업을 살펴보도록 더 자세히 드릴다운합니다. 특정 시점을 클릭할 때 다음과 같은 페이지의 세부 정보를 가져옵니다. 아래 예제에서 서버 응답 코드 및 작업 기간과 함께 지정된 기간에 대해 나열된 작업을 볼 수 있습니다. 또한 이 정보를 개발 팀에 전송해야 하는 경우 TFS 작업 항목을 열기 위한 url이 있습니다.
+![고객/세부 정보 가져오기 세 가지 기간 스파이크(기간: 7일 범위)](./media/app-insights-web-monitor-performance/SlowDependencies95thTrend.png)
 
-![Application Insights 시간 조각](./media/app-insights-web-monitor-performance/performance2.png)
+성능 조사 환경은 집중하기로 결정한 샘플 집합 측면과 관련된 통찰력을 보여 줍니다. 사용 가능한 모든 정보를 살펴보기에 가장 좋은 방법은 30일 시간 범위로 전환한 다음, 전체를 선택하여 지난 달 동안의 모든 작업에 걸쳐 정보를 확인하는 것입니다.
 
-### <a name="drill-down-on-a-specific-operation"></a>특정 작업에 대해 드릴다운
-
-조사할 특정 시점을 식별한 후 성능 저하를 발생시켰을 수도 있는 특정 작업을 살펴보도록 더 자세히 드릴다운합니다. 아래와 같이 작업의 세부 정보를 보려면 목록에서 작업을 클릭합니다. 이 예제에서 작업이 실패하고 Application Insights에서 응용 프로그램에서 throw했던 예외의 세부 정보를 제공한 것을 볼 수 있습니다. 다시, 이 블레이드에서 TFS 작업 항목을 쉽게 만들 수 있습니다.
-
-![Application insights 작업 블레이드](./media/app-insights-web-monitor-performance/performance3.png)
+![고객/세부 정보 가져오기 세 가지 기간 스파이크(기간: 7일 범위)](./media/app-insights-web-monitor-performance/Performance30DayOveralllnsights.png)
 
 
 ## <a name="next"></a>다음 단계
@@ -168,7 +161,6 @@ catch되지 않은 예외를 throw한 요청의 수입니다.
 [usage]: app-insights-web-track-usage.md
 [livestream]: app-insights-live-stream.md
 [snapshot]: app-insights-snapshot-debugger.md
-
 
 
 

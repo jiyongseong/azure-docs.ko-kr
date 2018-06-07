@@ -1,24 +1,18 @@
 ---
-title: "인덱스 쿼리(포털 - Azure Search) | Microsoft Docs"
-description: "Azure 포털의 검색 탐색기에서 검색 쿼리를 실행합니다."
+title: 인덱스 쿼리(포털 - Azure Search) | Microsoft Docs
+description: Azure Portal의 검색 탐색기에서 검색 쿼리를 실행합니다.
+manager: cgronlun
+author: HeidiSteen
 services: search
-manager: jhubbard
-documentationcenter: 
-author: ashmaka
-ms.assetid: 8e524188-73a7-44db-9e64-ae8bf66b05d3
 ms.service: search
-ms.devlang: NA
-ms.workload: search
-ms.topic: get-started-article
-ms.tgt_pltfrm: na
+ms.topic: quickstart
 ms.date: 07/10/2017
-ms.author: ashmaka
+ms.author: heidist
+ms.openlocfilehash: a3592bd0c304dfb78374eeba432c0d28203980c9
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: dd68d8ed073bf7b8666ddef35a2f1f84df690b4b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="query-an-azure-search-index-using-search-explorer-in-the-azure-portal"></a>Azure Portal에서 Search Explorer를 사용하여 Azure Search 인덱스 쿼리
 > [!div class="op_single_selector"]

@@ -85,7 +85,7 @@ Azure의 VM은 Azure Storage 인프라에서 호스팅되는 운영 체제 및 �
 
 초당 I/O 작업(IOPS)의 볼륨이 디스크의 I/O 제한을 초과하기 때문에 I/O 요청이 지속적으로 제한되는 경우 VM은 일시적으로 종료될 수 있습니다. (표준 디스크 저장소는 500IOPS로 제한됩니다.) 이 문제를 완화하려면 워크로드에 따라 디스크 스트라이프를 사용하거나 게스트 VM 내에서 저장소 공간을 구성합니다. 자세한 내용은 [Storage 성능이 최적화되도록 Azure VM 구성](http://blogs.msdn.com/b/mast/archive/2014/10/14/configuring-azure-virtual-machines-for-optimal-storage-performance.aspx)을 참조하세요.
 
-최대 80,000IOPS의 Azure Premium Storage를 통해 더 높은 IOPS 제한을 사용할 수 있습니다. 자세한 내용은 [고성능 Premium Storage](../articles/storage/storage-premium-storage.md)를 참조하세요.
+최대 80,000IOPS의 Azure Premium Storage를 통해 더 높은 IOPS 제한을 사용할 수 있습니다. 자세한 내용은 [고성능 Premium Storage](../articles/virtual-machines/windows/premium-storage.md)를 참조하세요.
 
 ### <a name="other-incidents"></a>다른 인시던트
 드문 경우이지만, 확산된 문제가 Azure 데이터 센터의 여러 서버에 영향을 줄 수 있습니다. 이 문제가 발생한 경우 Azure 팀은 영향을 받는 구독에 전자 메일 알림을 보냅니다. 현재 지속적인 중단 및 과거 인시던트 상태가 있는지 [Azure 서비스 상태 대시보드](https://azure.microsoft.com/status/) 및 Azure Portal을 통해 확인할 수 있습니다.

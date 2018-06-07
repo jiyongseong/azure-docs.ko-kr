@@ -4,7 +4,7 @@ description: "기존 Azure Virtual Machine Scale Set 템플릿에 가상 네트�
 services: virtual-machine-scale-sets
 documentationcenter: 
 author: gatneil
-manager: timlt
+manager: jeconnoc
 editor: 
 tags: azure-resource-manager
 ms.assetid: 76ac7fd7-2e05-4762-88ca-3b499e87906e
@@ -15,23 +15,21 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/27/2017
 ms.author: negat
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 857267f46f6a2d545fc402ebf3a12f21c62ecd21
-ms.openlocfilehash: 28117d467b491704aed8d45e5eba42530579dfa2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/28/2017
-
+ms.openlocfilehash: eb35975de5864e129f97b614a61487456dd972ef
+ms.sourcegitcommit: f46cbcff710f590aebe437c6dd459452ddf0af09
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/20/2017
 ---
-
 # <a name="add-reference-to-an-existing-virtual-network-in-an-azure-scale-set-template"></a>Azure 확장 집합 템플릿에 기존 가상 네트워크에 대한 참조 추가
 
-이 문서에서는 [실행 가능한 최소 크기 집합 템플릿](./virtual-machine-scale-sets-mvss-start.md)을 수정하여 새 가상 네트워크를 만드는 대신 기존 가상 네트워크에 배포하는 방법을 보여 줍니다.
+이 문서에서는 [실행 가능한 최소 확장 집합 템플릿](./virtual-machine-scale-sets-mvss-start.md)을 수정하여 새 가상 네트워크를 만드는 대신 기존 가상 네트워크에 배포하는 방법을 보여 줍니다.
 
 ## <a name="change-the-template-definition"></a>템플릿 정의 변경
 
-실행 가능한 최소 크기 집합 템플릿은 [여기](https://raw.githubusercontent.com/gatneil/mvss/minimum-viable-scale-set/azuredeploy.json)에 있으며, 기존 가상 네트워크에 크기 집합을 배포하기 위한 템플릿은 [여기](https://raw.githubusercontent.com/gatneil/mvss/existing-vnet/azuredeploy.json)에 있습니다. 이 템플릿(`git diff minimum-viable-scale-set existing-vnet`)을 하나씩 만드는 데 사용되는 diff에 대해 살펴보겠습니다.
+실행 가능한 최소 확장 집합 템플릿은 [여기](https://raw.githubusercontent.com/gatneil/mvss/minimum-viable-scale-set/azuredeploy.json)에 있으며, 기존 가상 네트워크에 확장 집합을 배포하기 위한 템플릿은 [여기](https://raw.githubusercontent.com/gatneil/mvss/existing-vnet/azuredeploy.json)에 있습니다. 이 템플릿(`git diff minimum-viable-scale-set existing-vnet`)을 하나씩 만드는 데 사용되는 diff에 대해 살펴보겠습니다.
 
-먼저 `subnetId` 매개 변수를 추가합니다. 이 문자열은 크기 집합 구성에 전달되어 크기 집합에서 미리 만든 서브넷을 식별하여 가상 컴퓨터를 배포할 수 있게 합니다. 이 문자열의 형식은 `/subscriptions/<subscription-id>resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<virtual-network-name>/subnets/<subnet-name>`이어야 합니다. 예를 들어 `myvnet` 이름, `mysubnet` 서브넷, `myrg` 리소스 그룹 및 `00000000-0000-0000-0000-000000000000` 구독을 사용하여 기존 가상 네트워크에 크기 집합을 배포하려면 subnetId가 `/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myrg/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/mysubnet`이 됩니다.
+먼저 `subnetId` 매개 변수를 추가합니다. 이 문자열은 확장 집합 구성에 전달되어 확장 집합에서 미리 만든 서브넷을 식별하여 가상 머신을 배포할 수 있게 합니다. 이 문자열의 형식은 `/subscriptions/<subscription-id>resourceGroups/<resource-group-name>/providers/Microsoft.Network/virtualNetworks/<virtual-network-name>/subnets/<subnet-name>`이어야 합니다. 예를 들어 `myvnet` 이름, `mysubnet` 서브넷, `myrg` 리소스 그룹 및 `00000000-0000-0000-0000-000000000000` 구독을 사용하여 기존 가상 네트워크에 확장 집합을 배포하려면 subnetId가 `/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myrg/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/mysubnet`이 됩니다.
 
 ```diff
      },
@@ -44,7 +42,7 @@ ms.lasthandoff: 06/28/2017
    },
 ```
 
-다음으로 기존 가상 네트워크를 사용하고 있고 새 가상 네트워크를 배포할 필요가 없기 때문에 `resources` 배열에서 가상 네트워크 리소스를 삭제할 수 있습니다.
+다음으로 기존 가상 네트워크를 사용하고 있고 새 가상 네트워크를 배포할 필요가 없기 때문에 `resources` 배열에서 가상 네트워크 리소스를 삭제합니다.
 
 ```diff
    "variables": {},
@@ -72,7 +70,7 @@ ms.lasthandoff: 06/28/2017
 -    },
 ```
 
-템플릿을 배포하기 전에 가상 네트워크가 이미 있으므로 크기 집합에서 가상 네트워크로 dependsOn 절을 지정할 필요가 없습니다. 따라서 다음 줄들을 삭제합니다.
+템플릿을 배포하기 전에 가상 네트워크가 이미 있으므로 확장 집합에서 가상 네트워크로 dependsOn 절을 지정할 필요가 없습니다. 다음 줄을 삭제합니다.
 
 ```diff
      {
@@ -88,7 +86,7 @@ ms.lasthandoff: 06/28/2017
          "capacity": 2
 ```
 
-마지막으로 동일한 배포에서 Vnet의 ID를 얻기 위해 실행 가능한 최소 크기 집합 템플릿에서 수행하는 `resourceId`를 사용하는 대신 사용자가 설정한 `subnetId` 매개 변수를 전달합니다.
+마지막으로 동일한 배포에서 Vnet의 ID를 얻기 위해 실행 가능한 최소 확장 집합 템플릿에서 수행하는 `resourceId`를 사용하는 대신 사용자가 설정한 `subnetId` 매개 변수를 전달합니다.
 
 ```diff
                        "name": "myIpConfig",
@@ -107,4 +105,3 @@ ms.lasthandoff: 06/28/2017
 ## <a name="next-steps"></a>다음 단계
 
 [!INCLUDE [mvss-next-steps-include](../../includes/mvss-next-steps.md)]
-

@@ -5,5 +5,5 @@
 | 활성 장치 |500 |200,000 | 1천만 |
 | 설치/등록당 태그 할당량 |60 |60 |60 |
 
-이러한 제한 사항 및 가격에 관한 정보는 [알림 허브 가격](https://azure.microsoft.com/pricing/details/notification-hubs/)을 참조하세요. 
+이러한 제한 사항 및 가격에 관한 정보는 [Notification Hubs 가격](https://azure.microsoft.com/pricing/details/notification-hubs/)을 참조하세요. 
 

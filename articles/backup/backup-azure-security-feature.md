@@ -1,11 +1,11 @@
 ---
-title: "Azure Backup을 사용하여 하이브리드 백업을 보호하기 위한 보안 기능 | Microsoft Docs"
-description: "Azure Backup의 보안 기능을 사용하여 백업을 좀 더 안전하게 만드는 방법 알아보기"
+title: Azure Backup을 사용하여 하이브리드 백업을 보호하기 위한 보안 기능 | Microsoft Docs
+description: Azure Backup의 보안 기능을 사용하여 백업을 좀 더 안전하게 만드는 방법 알아보기
 services: backup
-documentationcenter: 
+documentationcenter: ''
 author: JPallavi
 manager: vijayts
-editor: 
+editor: ''
 ms.assetid: 47bc8423-0a08-4191-826d-3f52de0b4cb8
 ms.service: backup
 ms.workload: storage-backup-recovery
@@ -14,13 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/08/2017
 ms.author: pajosh
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 9edcaee4d051c3dc05bfe23eecc9c22818cf967c
-ms.openlocfilehash: 1400fe83bec85a7ab1b4c96fb38abdaf6c944845
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/08/2017
-
-
+ms.openlocfilehash: 2529d19dbf0ca0fb59f5abe48be3e8b14e862e29
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="security-features-to-help-protect-hybrid-backups-that-use-azure-backup"></a>Azure Backup을 사용하여 하이브리드 백업을 보호하기 위한 보안 기능
 맬웨어, 랜섬웨어 및 침입과 같은 보안 문제에 대한 우려는 증가하고 있습니다. 이러한 보안 문제는 돈과 데이터 측면 모두에서 비용이 많이 들 수 있습니다. 이러한 공격을 방지하기 위해 Azure Backup은 이제 하이브리드 백업을 보호하는 데 도움이 되는 보안 기능을 제공합니다. 이 문서는 Azure Recovery Services 에이전트와 Azure Backup Server를 사용하여 이러한 기능을 활성화하고 사용하는 방법을 다룹니다. 이러한 기능으로는 다음이 포함됩니다.
@@ -57,7 +55,7 @@ Recovery Services 자격 증명 모음을 만드는 경우 모든 보안 기능�
     ![Recovery Services 자격 증명 모음 속성의 스크린샷](./media/backup-azure-security-feature/security-settings-update.png)
 
     업데이트 링크를 클릭하면 해당 기능을 사용하도록 설정하고 요약을 볼 수 있는 **보안 설정** 블레이드가 열립니다.
-5. **Azure Multi-Factor Authentication을 구성했습니까?** 드롭다운 목록에서 값을 선택하여 [Azure Multi-Factor Authentication](../multi-factor-authentication/multi-factor-authentication.md)을 사용하도록 설정했는지 확인합니다. 이 기능을 사용하도록 설정했으면 Azure Portal에 로그인하는 동안 다른 장치(예: 휴대폰)에서 인증을 받을지 묻는 메시지가 표시됩니다.
+5. **Azure Multi-Factor Authentication을 구성했습니까?** 드롭다운 목록에서 값을 선택하여 [Azure Multi-Factor Authentication](../active-directory/authentication/multi-factor-authentication.md)을 사용하도록 설정했는지 확인합니다. 이 기능을 사용하도록 설정했으면 Azure Portal에 로그인하는 동안 다른 장치(예: 휴대폰)에서 인증을 받을지 묻는 메시지가 표시됩니다.
 
    Backup에서 중요한 작업을 수행할 때 Azure Portal에서 사용할 수 있는 보안 PIN을 입력해야 합니다. Azure Multi-Factor Authentication을 사용하도록 설정하면 보안 계층이 추가됩니다. 유효한 Azure 자격 증명을 가지며 두 번째 장치에서 인증을 받은 인증된 사용자만 Azure Portal에 액세스할 수 있습니다.
 6. 보안 설정을 저장하려면 **사용**을 선택하고 **저장**을 클릭합니다. 이전 단계에서 **Azure Multi-Factor Authentication을 구성했습니까?** 목록에서 값을 선택한 후에만 **사용**을 선택할 수 있습니다.
@@ -75,12 +73,12 @@ Backup은 추가로 14일 동안 삭제된 백업 데이터를 유지하고, **�
 **Azure Backup Server** 사용자:
 
 1. 백업이 발생하는 서버를 계속 사용할 수 있는 경우 삭제된 데이터 원본을 다시 보호하고 **데이터 복구** 기능을 사용하여 모든 이전 복구 지점에서 복구합니다.
-2. 이 서버를 사용할 수 없는 경우 [다른 Azure Backup Server에서 데이터 복구](backup-azure-alternate-dpm-server.md#recover-data-from-another-azure-backup-server)를 사용하여 다른 Azure Backup Server 인스턴스를 통해 이 데이터를 가져옵니다.
+2. 이 서버를 사용할 수 없는 경우 [다른 Azure Backup Server에서 데이터 복구](backup-azure-alternate-dpm-server.md)를 사용하여 다른 Azure Backup Server 인스턴스를 통해 이 데이터를 가져옵니다.
 
 **Data Protection Manager** 사용자의 경우:
 
 1. 백업이 발생하는 서버를 계속 사용할 수 있는 경우 삭제된 데이터 원본을 다시 보호하고 **데이터 복구** 기능을 사용하여 모든 이전 복구 지점에서 복구합니다.
-2. 이 서버를 사용할 수 없는 경우 [외부 DPM 추가](backup-azure-alternate-dpm-server.md#recover-data-from-another-azure-backup-server)를 사용하여 다른 Data Protection Manager 서버를 통해 이 데이터를 가져옵니다.
+2. 이 서버를 사용할 수 없는 경우 [외부 DPM 추가](backup-azure-alternate-dpm-server.md)를 사용하여 다른 Data Protection Manager 서버를 통해 이 데이터를 가져옵니다.
 
 ## <a name="prevent-attacks"></a>공격을 방지
 유효한 사용자만 다양한 작업을 수행할 수 있는지 확인하기 위한 검사가 추가되었습니다. 여기에는 추가적인 인증 계층 제공 및 복구를 위한 최소 보존 범위 유지 관리가 포함됩니다.
@@ -112,7 +110,7 @@ Backup은 추가로 14일 동안 삭제된 백업 데이터를 유지하고, **�
 | 작업 | 오류 세부 정보 | 해결 방법 |
 | --- | --- | --- |
 | 정책 변경 |백업 정책을 수정할 수 없습니다. 오류: 내부 서비스 오류 [0x29834]로 인해 현재 작업이 실패했습니다. 잠시 후 작업을 다시 시도하세요. 문제가 지속되면 Microsoft 지원에 문의하세요. |**원인:**<br/>이 오류는 보안 설정이 활성화되고 위에서 지정된 최소값 미만으로 보존 범위를 줄이려고 하고 지원되지 않는 버전에 있는 경우 발생합니다(지원되는 버전은 이 문서의 첫 번째 참고에 지정됨). <br/>**권장 작업:**<br/> 이 경우 정책 관련 업데이트를 계속 진행할 수 있도록 지정된 최소 보존 기간(매일 7일, 매주 4주, 매달 3주 또는 매년 1년) 이상으로 보존 기간을 설정해야 합니다. 필요에 따라 선호되는 방법은 백업 에이전트, Azure Backup Server 및/또는 DPM UR을 업데이트하여 모든 보안 업데이트를 활용하는 것입니다. |
-| 암호 변경 |입력한 보안 PIN이 잘못되었습니다. (ID: 100130) 이 작업을 완료하려면 올바른 보안 PIN을 입력하세요. |**원인:**<br/> 이 오류는 중요한 작업(예: 암호 변경)을 수행하는 동안 잘못되거나 만료된 보안 PIN을 입력하는 경우 발생합니다. <br/>**권장 작업:**<br/> 작업을 완료하려면 유효한 보안 PIN을 입력해야 합니다. PIN을 가져오려면 Azure Portal에 로그인하고 Recovery Services 자격 증명 모음 > 설정 > 속성 > 보안 PIN 생성으로 이동합니다. 이 PIN을 사용하여 암호를 변경합니다. |
+| 암호 변경 |입력한 보안 PIN이 잘못되었습니다. (ID: 100130) 이 작업을 완료하려면 올바른 보안 PIN을 입력하세요. |**원인:**<br/> 이 오류는 중요한 작업(예: 암호 변경)을 수행하는 동안 잘못되거나 만료된 보안 PIN을 입력하는 경우 발생합니다. <br/>**권장 작업:**<br/> 작업을 완료하려면 유효한 보안 PIN을 입력해야 합니다. PIN을 가져오려면 Azure Portal에 로그인하고 [Recovery Services 자격 증명 모음] > [설정] > [속성] > [보안 PIN 생성]으로 이동합니다. 이 PIN을 사용하여 암호를 변경합니다. |
 | 암호 변경 |작업이 실패했습니다. ID: 120002 |**원인:**<br/>이 오류는 보안 설정이 활성화되고 암호를 변경하려고 하고 지원되지 않는 버전에 있는 경우 발생합니다(유효한 버전은 이 문서의 첫 번째 참고에 지정됨).<br/>**권장 작업:**<br/> 암호를 변경하려면 먼저 백업 에이전트를 최소 버전 최소 2.0.9052로, Azure Backup 서버를 최소 업데이트 1로, DPM을 최소 DPM 2012 R2 UR12 또는 DPM 2016 UR2로 업데이트한 다음(아래 다운로드 링크) 유효한 보안 PIN을 입력해야 합니다. PIN을 가져오려면 Azure Portal에 로그인하고 Recovery Services 자격 증명 모음 > 설정 > 속성 > 보안 PIN 생성으로 이동합니다. 이 PIN을 사용하여 암호를 변경합니다. |
 
 ## <a name="next-steps"></a>다음 단계
@@ -120,4 +118,3 @@ Backup은 추가로 14일 동안 삭제된 백업 데이터를 유지하고, **�
 * [최신 Azure Recovery Services 에이전트를 다운로드](http://aka.ms/azurebackup_agent)하여 공격으로부터 Windows 컴퓨터 및 백업 데이터를 보호합니다.
 * [최신 Azure Backup Server를 다운로드](https://aka.ms/latest_azurebackupserver)하여 공격으로부터 워크로드 및 백업 데이터를 보호합니다.
 * [System Center 2012 R2 Data Protection Manager용 UR12를 다운로드](https://support.microsoft.com/help/3209592/update-rollup-12-for-system-center-2012-r2-data-protection-manager)하거나 [System Center 2016 Data Protection Manager용 UR2를 다운로드](https://support.microsoft.com/help/3209593/update-rollup-2-for-system-center-2016-data-protection-manager)하여 공격으로부터 워크로드 및 백업 데이터를 보호합니다.
-

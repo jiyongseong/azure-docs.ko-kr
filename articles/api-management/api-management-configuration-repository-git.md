@@ -1,42 +1,39 @@
 ---
 title: "Git를 사용하여 API Management 서비스 구성 - Azure | Microsoft Docs"
-description: "Git를 사용하여 API 관리 서비스 구성을 저장 및 구성하는 방법에 대해 알아봅니다."
+description: "Git을 사용하여 API Management 서비스 구성을 저장 및 구성하는 방법에 대해 알아봅니다."
 services: api-management
 documentationcenter: 
-author: steved0x
+author: vladvino
 manager: erikre
 editor: mattfarm
-ms.assetid: 364cd53e-88fb-4301-a093-f132fa1f88f5
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 01/23/2017
+ms.date: 02/02/2018
 ms.author: apimpm
-translationtype: Human Translation
-ms.sourcegitcommit: 785d3a8920d48e11e80048665e9866f16c514cf7
-ms.openlocfilehash: f5d6bb7ccbf15424e9940ccda2fac668a2af5a57
-ms.lasthandoff: 04/12/2017
-
+ms.openlocfilehash: 57d14b6aa6caca0cc9b075723d4c350b0a50c9f8
+ms.sourcegitcommit: 059dae3d8a0e716adc95ad2296843a45745a415d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/09/2018
 ---
-# <a name="how-to-save-and-configure-your-api-management-service-configuration-using-git"></a>Git를 사용하여 API 관리 서비스 구성을 저장 및 구성하는 방법
-> 
-> 
+# <a name="how-to-save-and-configure-your-api-management-service-configuration-using-git"></a>Git을 사용하여 API Management 서비스 구성을 저장 및 구성하는 방법
 
-각 API 관리 서비스 인스턴스는 구성에 관한 정보 및 서비스 인스턴스에 대한 메타데이터를 포함하고 있는 구성 데이터베이스를 유지관리합니다. PowerShell cmdlet을 사용하거나 REST API를 호출하여 게시자 포털의 설정을 변경하면 서비스 인스턴스를 변경할 수 있습니다. 이러한 방법 이외에 다음과 같은 서비스 관리 시나리오를 통해 Git를 사용하여 서비스 인스턴스 구성을 관리할 수도 있습니다.
+각 API Management 서비스 인스턴스는 구성에 관한 정보 및 서비스 인스턴스에 대한 메타데이터를 포함하고 있는 구성 데이터베이스를 유지관리합니다. PowerShell cmdlet을 사용하거나 REST API를 호출하여 Azure Portal의 설정을 변경하면 서비스 인스턴스를 변경할 수 있습니다. 이러한 방법 이외에 다음과 같은 서비스 관리 시나리오를 통해 Git를 사용하여 서비스 인스턴스 구성을 관리할 수도 있습니다.
 
 * 구성 버전 관리 - 서비스 구성의 서로 다른 버전 다운로드 및 저장
 * 대량 구성 변경 - 로컬 저장소에 있는 서비스 구성의 여러 부분을 변경하고 단일 작업으로 변경 내용을 서버에 다시 통합
 * 친숙한 Git 도구 체인 및 워크플로 - 이미 익숙해진 Git 도구 및 워크플로 사용
 
-다음 다이어그램에서는 API 관리 서비스 인스턴스를 구성하는 다양한 방법을 간략하게 보여 줍니다.
+다음 다이어그램에서는 API Management 서비스 인스턴스를 구성하는 다양한 방법을 간략하게 보여 줍니다.
 
 ![Git 구성][api-management-git-configure]
 
-게시자 포털, PowerShell cmdlet 또는 REST API를 사용하여 서비스를 변경할 때 다이어그램의 오른쪽과 같이 `https://{name}.management.azure-api.net` 끝점을 사용하여 서비스 구성 데이터베이스를 관리합니다. 다이어그램의 왼쪽은 `https://{name}.scm.azure-api.net`에 있는 서비스에 Git 및 Git 리포지토리를 사용하여 서비스 구성을 관리할 수 있는 방법을 보여 줍니다.
+Azure Portal, PowerShell cmdlet 또는 REST API를 사용하여 서비스를 변경할 때 다이어그램의 오른쪽과 같이 `https://{name}.management.azure-api.net` 끝점을 사용하여 서비스 구성 데이터베이스를 관리합니다. 다이어그램의 왼쪽은 `https://{name}.scm.azure-api.net`에 있는 서비스에 Git 및 Git 리포지토리를 사용하여 서비스 구성을 관리할 수 있는 방법을 보여 줍니다.
 
-다음 단계는 Git를 이용한 API 관리 서비스 인스턴스 관리를 간략하게 보여 줍니다.
+다음 단계는 Git을 이용한 API Management 서비스 인스턴스 관리를 간략하게 보여 줍니다.
 
 1. 서비스의 Git 구성에 액세스
 2. Git 리포지토리에 서비스 구성 데이터베이스 저장
@@ -47,59 +44,43 @@ ms.lasthandoff: 04/12/2017
 이 문서에서는 Git를 사용하도록 설정하고 이를 사용하여 서비스 구성을 관리하는 방법을 설명하며 Git 리포지토리의 파일 및 폴더에 대한 참조를 제공합니다.
 
 ## <a name="access-git-configuration-in-your-service"></a>서비스의 Git 구성에 액세스
-게시자 포털의 오른쪽 위 모서리의 Git 아이콘을 확인하여 Git 구성의 상태를 신속하게 볼 수 있습니다. 이 예제에서 상태 메시지는 리포지토리에 대해 저장되지 않은 변경 내용이 있음을 나타냅니다. 이는 API 관리 서비스 구성 데이터베이스가 리포지토리에 아직 저장되지 않았기 때문입니다.
 
-![Git 상태][api-management-git-icon-enable]
-
-Git 구성 설정을 확인 및 구성하려면 Git 아이콘을 클릭하거나 **보안** 메뉴를 클릭하고 **구성 리포지토리** 탭으로 이동합니다.
+Git 구성 설정을 확인하고 구성하려면 **보안** 메뉴를 클릭하고 **구성 리포지토리** 탭으로 이동하면 됩니다.
 
 ![GIT 사용][api-management-enable-git]
 
 > [!IMPORTANT]
-> 속성으로 정의되지 않은 비밀은 리포지토리에 저장되며 Git 액세스를 사용하지 않도록 설정했다가 다시 사용하도록 설정할 때까지 기록에 남아 있습니다. 속성은 모든 API 구성 및 정책에 대해 비밀을 포함한 상수 문자열 값을 관리하는 안전한 장소를 제공하므로 정책을 정책 설명에 직접 저장할 필요가 없습니다. 자세한 내용은 [Azure API 관리 정책에 속성을 사용하는 방법](api-management-howto-properties.md)을 참조하세요.
+> 속성으로 정의되지 않은 비밀은 리포지토리에 저장되며 Git 액세스를 사용하지 않도록 설정했다가 다시 사용하도록 설정할 때까지 기록에 남아 있습니다. 속성은 모든 API 구성 및 정책에 대해 비밀을 포함한 상수 문자열 값을 관리하는 안전한 장소를 제공하므로 정책을 정책 설명에 직접 저장할 필요가 없습니다. 자세한 내용은 [Azure API Management 정책에 속성을 사용하는 방법](api-management-howto-properties.md)을 참조하세요.
 > 
 > 
 
 REST API를 사용하여 Git 액세스를 사용 또는 사용하지 않도록 설정하는 방법은 [REST API를 사용하여 Git 액세스를 사용 또는 사용하지 않도록 설정](https://msdn.microsoft.com/library/dn781420.aspx#EnableGit)을 참조하세요.
 
 ## <a name="to-save-the-service-configuration-to-the-git-repository"></a>Git 리포지토리에 서비스 구성 저장
-리포지토리를 복제하기 전에 수행할 첫 번째 단계는 서비스 구성의 현재 상태를 리포지토리에 저장하는 것입니다. **리포지토리에 구성 저장**을 클릭합니다.
 
-![구성 저장][api-management-save-configuration]
+리포지토리를 복제하기 전에 수행할 첫 번째 단계는 서비스 구성의 현재 상태를 리포지토리에 저장하는 것입니다. **리포지토리에 저장**을 클릭합니다.
 
 확인 화면에서 원하는 대로 변경하고 **확인** 을 클릭하여 저장합니다.
 
-![구성 저장][api-management-save-configuration-confirm]
-
 몇 분 후에 구성이 저장되며, 마지막 구성 변경 및 서비스 구성과 리포지토리 간 마지막 동기화의 날짜 및 시간을 비롯하여 리포지토리의 구성 상태가 표시됩니다.
-
-![구성 상태][api-management-configuration-status]
 
 구성이 리포지토리에 저장된 후 해당 구성을 복제할 수 있습니다.
 
 REST API를 사용하여 이 작업을 수행하는 방법은 [REST API를 사용하여 구성 스냅숏 커밋](https://msdn.microsoft.com/library/dn781420.aspx#CommitSnapshot)을 참조하세요.
 
 ## <a name="to-clone-the-repository-to-your-local-machine"></a>로컬 컴퓨터에 리포지토리 복제
-리포지토리를 복제하려면 리포지토리에 대한 URL, 사용자 이름 및 암호가 필요합니다. 사용자 이름 및 URL이 **구성 리포지토리** 의 맨 위 부근에 표시됩니다.
 
-![Git 복제][api-management-configuration-git-clone]
-
-**구성 리포지토리** 의 맨 아래에 암호가 생성됩니다.
-
-![암호 생성][api-management-generate-password]
-
-암호를 생성하려면 먼저 **만료**가 원하는 만료 날짜 및 시간으로 설정되었는지 확인한 다음 **토큰 생성**을 클릭합니다.
-
-![암호][api-management-password]
+리포지토리를 복제하려면 리포지토리에 대한 URL, 사용자 이름 및 암호가 필요합니다. 사용자 이름 및 기타 자격 증명을 가져오려면 페이지의 맨 위 가까이에 있는 **액세스 자격 증명**을 클릭합니다.  
+ 
+암호를 생성하려면 먼저 **만료**가 원하는 만료 날짜 및 시간으로 설정되었는지 확인한 다음, **생성**을 클릭합니다.
 
 > [!IMPORTANT]
 > 이 암호를 기록해 둡니다. 이 페이지를 떠나면 암호가 다시 표시되지 않습니다.
 > 
-> 
 
 다음 예제에서는 [Windows용 Git](http://www.git-scm.com/downloads) 에서 Git Bash 도구를 사용하지만 현재 친숙한 아무 Git나 사용할 수 있습니다.
 
-원하는 폴더에서 Git 도구를 열고 게시자 포털에서 제공한 다음 명령을 실행하여 Git 리포지토리를 로컬 컴퓨터에 복제합니다.
+원하는 폴더에서 Git 도구를 열고 Azure Portal에서 제공한 다음 명령을 실행하여 Git 리포지토리를 로컬 컴퓨터에 복제합니다.
 
 ```
 git clone https://bugbashdev4.scm.azure-api.net/
@@ -116,7 +97,7 @@ git clone https://username:password@bugbashdev4.scm.azure-api.net/
 그래도 오류가 발생하면 명령의 암호 부분에 대해 URL 인코딩을 시도해 보십시오. 이렇게 하는 한 가지 빠른 방법은 Visual Studio를 열고 **직접 실행 창**에서 다음 명령을 실행하는 것입니다. **직접 실행 창**을 열려면 Visual Studio에서 솔루션 또는 프로젝트를 열고(또는 비어 있는 새 콘솔 응용 프로그램을 만들고) **디버그** 메뉴에서 **창**, **직접 실행**을 선택합니다.
 
 ```
-?System.NetWebUtility.UrlEncode("password from publisher portal")
+?System.NetWebUtility.UrlEncode("password from the Azure portal")
 ```
 
 사용자 이름 및 리포지토리 위치와 함께 인코딩된 암호를 사용하여 Git 명령을 생성합니다.
@@ -128,7 +109,8 @@ git clone https://username:url encoded password@bugbashdev4.scm.azure-api.net/
 리포지토리가 복제된 후 로컬 파일 시스템에서 이를 보고 작업할 수 있습니다. 자세한 내용은 [로컬 Git 리포지토리의 파일 및 폴더 구조 참조](#file-and-folder-structure-reference-of-local-git-repository)를 참조하세요.
 
 ## <a name="to-update-your-local-repository-with-the-most-current-service-instance-configuration"></a>최근 서비스 인스턴스 구성으로 로컬 리포지토리를 업데이트하려면
-게시자 포털에서 또는 REST API를 사용하여 API 관리 서비스 인스턴스를 변경하는 경우 변경 내용을 리포지토리에 저장해야 로컬 리포지토리를 최신 변경 내용으로 업데이트할 수 있습니다. 이 작업을 수행하려면 게시자 포털의 **구성 리포지토리** 탭에서 **리포지토리에 구성 저장**을 클릭한 후 로컬 리포지토리에서 다음 명령을 실행합니다.
+
+Azure Portal에서 또는 REST API를 사용하여 API Management 서비스 인스턴스를 변경하는 경우 변경 내용을 리포지토리에 저장해야 로컬 리포지토리를 최신 변경 내용으로 업데이트할 수 있습니다. 이 작업을 수행하려면 Azure Portal의 **구성 리포지토리** 탭에서 **리포지토리에 구성 저장**을 클릭한 다음, 로컬 리포지토리에서 다음 명령을 실행합니다.
 
 ```
 git pull
@@ -154,14 +136,14 @@ git commit -m "Description of your changes"
 git push
 ```
 
-## <a name="to-deploy-any-service-configuration-changes-to-the-api-management-service-instance"></a>서비스 구성 변경 내용을 API 관리 서비스 인스턴스에 배포하려면
-로컬 변경 내용이 커밋되고 서버 리포지토리에 푸시된 후 이를 API 관리 서비스 인스턴스에 배포할 수 있습니다.
+## <a name="to-deploy-any-service-configuration-changes-to-the-api-management-service-instance"></a>서비스 구성 변경 내용을 API Management 서비스 인스턴스에 배포하려면
 
-![배포][api-management-configuration-deploy]
+로컬 변경 내용이 커밋되고 서버 리포지토리에 푸시된 후 이를 API Management 서비스 인스턴스에 배포할 수 있습니다.
 
-REST API를 사용하여 이 작업을 수행하는 방법은 [REST API를 사용하여 구성 데이터베이스에 Git 변경 내용 배포](https://docs.microsoft.com/en-us/rest/api/apimanagement/tenantconfiguration)를 참조하세요.
+REST API를 사용하여 이 작업을 수행하는 방법은 [REST API를 사용하여 구성 데이터베이스에 Git 변경 내용 배포](https://docs.microsoft.com/rest/api/apimanagement/tenantconfiguration)를 참조하세요.
 
 ## <a name="file-and-folder-structure-reference-of-local-git-repository"></a>로컬 Git 리포지토리의 파일 및 폴더 구조 참조
+
 로컬 Git 리포지토리의 파일 및 폴더에는 서비스 인스턴스에 관한 구성 정보가 포함되어 있습니다.
 
 | 항목 | 설명 |
@@ -183,16 +165,15 @@ REST API를 사용하여 이 작업을 수행하는 방법은 [REST API를 사�
 | xml |정책 설명 |
 | css |개발자 포털 사용자 지정에 대한 스타일 시트 |
 
-이 파일을 로컬 파일 시스템에서 생성, 삭제, 편집 및 관리할 수 있으며 변경 내용을 API 관리 서비스 인스턴스에 다시 배포할 수 있습니다.
+이 파일을 로컬 파일 시스템에서 생성, 삭제, 편집 및 관리할 수 있으며 변경 내용을 API Management 서비스 인스턴스에 다시 배포할 수 있습니다.
 
 > [!NOTE]
 > 다음 엔터티는 Git 리포지토리에 포함되지 않으며 Git를 사용하여 구성할 수 없습니다.
 > 
 > * 사용자
 > * 구독
-> * 속성
+> * properties
 > * 스타일 이외의 개발자 포털 엔터티
-> 
 > 
 
 ### <a name="root-api-management-folder"></a>루트 api 관리 폴더
@@ -223,8 +204,6 @@ REST API를 사용하여 이 작업을 수행하는 방법은 [REST API를 사�
 | UserRegistrationTermsEnabled |**등록 페이지에 사용 약관 표시** 확인란 |
 | UserRegistrationTermsConsentRequired |**동의 필요** 확인란 |
 
-![Id 설정][api-management-identity-settings]
-
 처음 네 설정(`DelegationEnabled`, `DelegationUrl`, `DelegatedSubscriptionEnabled` 및 `DelegationValidationKey`)은 **보안** 섹션의 **위임** 탭에 있는 다음과 같은 설정에 매핑됩니다.
 
 | 위임 설정 | 매핑 대상 |
@@ -233,8 +212,6 @@ REST API를 사용하여 이 작업을 수행하는 방법은 [REST API를 사�
 | DelegationUrl |**위임 끝점 URL** 텍스트 상자 |
 | DelegatedSubscriptionEnabled |**제품 구독 위임** 확인란 |
 | DelegationValidationKey |**유효성 검사 키 위임** 텍스트 상자 |
-
-![위임 설정][api-management-delegation-settings]
 
 마지막 설정 `$ref-policy`은 서비스 인스턴스에 대한 전역 정책 설명 파일에 매핑됩니다.
 
@@ -283,15 +260,9 @@ REST API를 사용하여 이 작업을 수행하는 방법은 [REST API를 사�
 * 다음 PowerShell cmdlet을 사용하여 서비스 인스턴스 관리
   * [서비스 배포 PowerShell cmdlet 참조](https://msdn.microsoft.com/library/azure/mt619282.aspx)
   * [서비스 관리 PowerShell cmdlet 참조](https://msdn.microsoft.com/library/azure/mt613507.aspx)
-* 게시자 포털에서 서비스 인스턴스 관리
-  * [첫 번째 API 관리](api-management-get-started.md)
 * REST API를 사용하여 서비스 인스턴스 관리
-  * [API 관리 REST API 참조](https://msdn.microsoft.com/library/azure/dn776326.aspx)
+  * [API Management REST API 참조](https://msdn.microsoft.com/library/azure/dn776326.aspx)
 
-## <a name="watch-a-video-overview"></a>비디오 개요 보기
-> [!VIDEO https://channel9.msdn.com/Blogs/AzureApiMgmt/Configuration-over-Git/player]
-> 
-> 
 
 [api-management-enable-git]: ./media/api-management-configuration-repository-git/api-management-enable-git.png
 [api-management-git-enabled]: ./media/api-management-configuration-repository-git/api-management-git-enabled.png
@@ -306,7 +277,6 @@ REST API를 사용하여 이 작업을 수행하는 방법은 [REST API를 사�
 [api-management-identity-settings]: ./media/api-management-configuration-repository-git/api-management-identity-settings.png
 [api-management-delegation-settings]: ./media/api-management-configuration-repository-git/api-management-delegation-settings.png
 [api-management-git-icon-enable]: ./media/api-management-configuration-repository-git/api-management-git-icon-enable.png
-
 
 
 

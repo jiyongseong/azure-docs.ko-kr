@@ -1,31 +1,29 @@
 ---
-title: "가상 네트워크 게이트웨이 삭제: PowerShell: Azure Resource Manager | Microsoft Docs"
-description: "Resource Manager 배포 모델에서 PowerShell을 사용하여 가상 네트워크 게이트웨이를 삭제합니다."
+title: '가상 네트워크 게이트웨이 삭제: PowerShell: Azure Resource Manager | Microsoft Docs'
+description: Resource Manager 배포 모델에서 PowerShell을 사용하여 가상 네트워크 게이트웨이를 삭제합니다.
 services: vpn-gateway
 documentationcenter: na
 author: cherylmc
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: vpn-gateway
 ms.devlang: na
-ms.topic: 
+ms.topic: ''
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 06/20/2017
+ms.date: 03/26/2018
 ms.author: cherylmc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f7479260c7c2e10f242b6d8e77170d4abe8634ac
-ms.openlocfilehash: 4d0f085423d5bd60b24d88649ee1d77bcd1d009f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/21/2017
-
-
+ms.openlocfilehash: a23a969f1381e3a10c81a903793bad2870b436f6
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="delete-a-virtual-network-gateway-using-powershell"></a>PowerShell을 사용하여 가상 네트워크 삭제
 > [!div class="op_single_selector"]
-> * [Azure 포털](vpn-gateway-delete-vnet-gateway-portal.md)
+> * [Azure Portal](vpn-gateway-delete-vnet-gateway-portal.md)
 > * [PowerShell](vpn-gateway-delete-vnet-gateway-powershell.md)
 > * [PowerShell(클래식)](vpn-gateway-delete-vnet-gateway-classic-powershell.md)
 >
@@ -48,7 +46,7 @@ VPN 게이트웨이 구성에 대한 가상 네트워크 게이트웨이 삭제�
 PowerShell 콘솔을 열고 계정에 연결합니다. 연결에 도움이 되도록 다음 예제를 사용합니다.
 
 ```powershell
-Login-AzureRmAccount
+Connect-AzureRmAccount
 ```
 
 계정에 대한 구독을 확인합니다.
@@ -76,7 +74,7 @@ VNet 이름: VNet1<br>
 ### <a name="1-get-the-virtual-network-gateway-that-you-want-to-delete"></a>1. 삭제하려는 가상 네트워크 게이트웨이를 가져옵니다.
 
 ```powershell
-$Gateway=get-azurermvirtualnetworkgateway -Name "GW1" -ResourceGroupName "RG1"
+$GW=get-azurermvirtualnetworkgateway -Name "GW1" -ResourceGroupName "RG1"
 ```
 
 ### <a name="2-check-to-see-if-the-virtual-network-gateway-has-any-connections"></a>2. 가상 네트워크 게이트웨이에 연결이 있는지 확인합니다.
@@ -159,7 +157,7 @@ VNet 이름: VNet1<br>
 ### <a name="1-get-the-virtual-network-gateway-that-you-want-to-delete"></a>1. 삭제하려는 가상 네트워크 게이트웨이를 가져옵니다.
 
 ```powershell
-$Gateway=get-azurermvirtualnetworkgateway -Name "GW1" -ResourceGroupName "RG1"
+$GW=get-azurermvirtualnetworkgateway -Name "GW1" -ResourceGroupName "RG1"
 ```
 
 ### <a name="2-check-to-see-if-the-virtual-network-gateway-has-any-connections"></a>2. 가상 네트워크 게이트웨이에 연결이 있는지 확인합니다.
@@ -253,7 +251,7 @@ VNet 이름: VNet1<br>
 ### <a name="1-get-the-virtual-network-gateway-that-you-want-to-delete"></a>1. 삭제하려는 가상 네트워크 게이트웨이를 가져옵니다.
 
 ```powershell
-$Gateway=get-azurermvirtualnetworkgateway -Name "GW1" -ResourceGroupName "RG1"
+$GW=get-azurermvirtualnetworkgateway -Name "GW1" -ResourceGroupName "RG1"
 ```
 
 ### <a name="2-delete-the-virtual-network-gateway"></a>2. 가상 네트워크 게이트웨이를 삭제합니다.

@@ -13,15 +13,13 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: data-catalog
-ms.date: 05/05/2017
+ms.date: 01/18/2018
 ms.author: spelluru
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2db2ba16c06f49fd851581a1088df21f5a87a911
-ms.openlocfilehash: 0c76287232e578df695f73e5d9792ee457266db9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/09/2017
-
-
+ms.openlocfilehash: 9688cb7bf15aec4a3506939b165ac579377d3e9a
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="data-catalog-developer-samples"></a>데이터 카탈로그 개발자 샘플
 데이터 카탈로그 REST API를 사용하여 데이터 카탈로그 앱 개발을 시작합니다. 데이터 카탈로그 REST API는 데이터 카탈로그 리소스에 대한 등록, 주석 달기 및 데이터 자산을 프로그래밍 방식으로 검색하기 위해 프로그래밍 방식으로 액세스를 제공하는 REST 기반 API입니다.
@@ -34,12 +32,11 @@ ms.lasthandoff: 05/09/2017
 * [대량 등록 및 주석 추가](https://azure.microsoft.com/resources/samples/data-catalog-dotnet-excel-register-data-assets/)
   
   데이터 카탈로그 REST API 및 Open XML을 사용하여 Excel 통합 문서에서 데이터 자산을 대량 등록하는 방법을 보여 주는 샘플입니다.
-* [가져오기/내보내기 도구](https://azure.microsoft.com/resources/samples/data-catalog-dotnet-import-export/)
+* [Import/Export 도구](https://azure.microsoft.com/resources/samples/data-catalog-dotnet-import-export/)
   
   Azure 데이터 카탈로그에서 자산을 가져오고 파일로 직렬화하는 데이터 카탈로그 REST API를 사용하는 방법을 보여 주는 샘플입니다. 또한 JSON으로 직렬화된 자산 집합을 가져오고 카탈로그에 게시하는 방법을 보여 줍니다. 검색 쿼리를 사용하여 카탈로그의 하위 집합 내보내기를 지원합니다.
 
 * [대량 가져오기 용어](https://azure.microsoft.com/resources/samples/data-catalog-bulk-import-glossary/)
 
     이 샘플에서는 CSV 파일에서 ADC 용어집으로 용어를 가져오는 방법을 보여 줍니다.
-
 

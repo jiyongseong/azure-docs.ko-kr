@@ -1,31 +1,29 @@
 ---
-title: "Azure에서 RDP를 사용하여 Windows VM에 연결할 수 없음 | Microsoft Docs"
-description: "원격 데스크톱을 사용하여 Azure의 Windows 가상 컴퓨터에 연결할 수 없을 때의 문제 해결"
-keywords: "원격 데스크톱 오류,원격 데스크톱 연결 오류,VM에 연결할 수 없습니다,원격 데스크톱 문제 해결"
+title: Azure에서 RDP를 사용하여 Windows VM에 연결할 수 없음 | Microsoft Docs
+description: 원격 데스크톱을 사용하여 Azure의 Windows 가상 머신에 연결할 수 없을 때의 문제 해결
+keywords: 원격 데스크톱 오류,원격 데스크톱 연결 오류,VM에 연결할 수 없습니다,원격 데스크톱 문제 해결
 services: virtual-machines-windows
-documentationcenter: 
-author: genlin
-manager: timlt
-editor: 
+documentationcenter: ''
+author: danielsollondon
+manager: jeconnoc
+editor: ''
 tags: top-support-issue,azure-service-management,azure-resource-manager
 ms.assetid: 0d740f8e-98b8-4e55-bb02-520f604f5b18
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-windows
 ms.devlang: na
-ms.topic: support-article
-ms.date: 06/14/2017
-ms.author: genli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 857267f46f6a2d545fc402ebf3a12f21c62ecd21
-ms.openlocfilehash: ed9945ae007d22c18d259984ee68f9c669927f9a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/28/2017
-
-
+ms.topic: article
+ms.date: 03/23/2018
+ms.author: danis
+ms.openlocfilehash: 60c54850c1ca5de0e9bda4b48688ba297874e48e
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-# <a name="troubleshoot-remote-desktop-connections-to-an-azure-virtual-machine"></a>Azure 가상 컴퓨터에 대한 원격 데스크톱 연결 문제 해결
-Windows 기반 Azure VM(가상 컴퓨터)에 RDP(원격 데스크톱 프로토콜) 연결은 여러 이유로 실패하여 VM에 액세스하지 못할 수 있습니다. 이러한 문제는 VM의 원격 데스크톱 서비스, 네트워크 연결 또는 호스트 컴퓨터의 원격 데스크톱 클라이언트에서 발생할 수 있습니다. 이 문서는 RDP 연결 문제를 해결하기 위한 가장 일반적인 방법 중 일부를 안내합니다. 
+# <a name="troubleshoot-remote-desktop-connections-to-an-azure-virtual-machine"></a>Azure 가상 머신에 대한 원격 데스크톱 연결 문제 해결
+Windows 기반 Azure VM(가상 머신)에 RDP(원격 데스크톱 프로토콜) 연결은 여러 이유로 실패하여 VM에 액세스하지 못할 수 있습니다. 이러한 문제는 VM의 원격 데스크톱 서비스, 네트워크 연결 또는 호스트 컴퓨터의 원격 데스크톱 클라이언트에서 발생할 수 있습니다. 이 문서는 RDP 연결 문제를 해결하기 위한 가장 일반적인 방법 중 일부를 안내합니다. 
 
 이 문서의 어디에서든 도움이 필요한 경우 [MSDN Azure 및 Stack Overflow 포럼](https://azure.microsoft.com/support/forums/)에서 Azure 전문가에게 문의할 수 있습니다. 또는 Azure 기술 지원 인시던트를 제출할 수 있습니다. [Azure 지원 사이트](https://azure.microsoft.com/support/options/) 로 가서 **지원 받기**를 선택합니다.
 
@@ -67,25 +65,8 @@ Resource Manager 배포 모델을 사용하여 만든 VM 문제를 다음 방법
     Azure Portal에서 VM을 선택합니다. 목록 맨 아래 근처에 있는 **지원 + 문제 해결** 섹션이 나올 때까지 설정 창을 아래로 스크롤합니다. **암호 다시 설정** 단추를 클릭합니다. **모드**를 **구성만 재설정**으로 설정한 다음 **업데이트** 단추를 클릭합니다.
    
     ![Azure Portal에서 RDP 구성 다시 설정](./media/troubleshoot-rdp-connection/reset-rdp.png)
-2. **네트워크 보안 그룹 규칙 확인**. 이 문제 해결 단계에서는 네트워크 보안 그룹에 RDP 트래픽을 허용하는 규칙이 있는지 확인합니다. RDP의 기본 포트는 TCP 포트 3389입니다. VM을 만들 때 RDP 트래픽을 허용하는 규칙이 자동으로 생성되지 않을 수도 있습니다.
-   
-    Azure Portal에서 VM을 선택합니다. 설정 창에서 **네트워크 인터페이스**를 클릭합니다.
-   
-    ![Azure Portal에서 VM에 대한 네트워크 인터페이스 보기](./media/troubleshoot-rdp-connection/select-network-interfaces.png)
-   
-    목록에서 네트워크 인터페이스를 선택합니다(일반적으로 하나밖에 없음).
-   
-    ![Azure Portal에서 네트워크 인터페이스 선택](./media/troubleshoot-rdp-connection/select-interface.png)
-   
-    네트워크 인터페이스와 연결된 네트워크 보안 그룹을 보려면 **네트워크 보안 그룹**을 선택합니다.
-   
-    ![Azure Portal에서 네트워크 보안 그룹 선택](./media/troubleshoot-rdp-connection/select-nsg.png)
-   
-    TCP 포트 3389에서 RDP 트래픽을 허용하는 인바운드 규칙이 있는지 확인합니다. 다음 예제에서는 RDP 트래픽을 허용하는 유효한 보안 규칙을 보여 줍니다. `Service` 및 `Action`가 올바르게 구성된 것을 볼 수 있습니다.
-   
-    ![Azure Portal에서 RDP NSG 규칙 확인](./media/troubleshoot-rdp-connection/verify-nsg-rules.png)
-   
-    RDP 트래픽을 허용하는 규칙이 없는 경우 [네트워크 보안 그룹 규칙을 만듭니다](nsg-quickstart-portal.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). TCP 포트 3389를 허용합니다.
+2. **네트워크 보안 그룹 규칙 확인**. [IP 흐름 확인](../../network-watcher/network-watcher-check-ip-flow-verify-portal.md)을 사용하여 네트워크 보안 그룹의 규칙이 가상 머신 간에 트래픽을 차단하는지를 확인합니다. 효과적인 보안 그룹 규칙을 검토하여 인바운드 "허용" NSG 규칙이 있는지와 해당 규칙이 RDP 포트(기본값: 3389)에 우선적으로 사용되도록 설정되어 있는지 확인합니다. 자세한 내용은 [효과적인 보안 규칙을 사용하여 VM 트래픽 흐름 문제 해결](../../virtual-network/virtual-network-nsg-troubleshoot-portal.md#using-effective-security-rules-to-troubleshoot-vm-traffic-flow)을 참조하세요.
+
 3. **VM 부트 진단 검토**. 이 문제 해결 단계에서는 VM 콘솔 로그를 검토하여 VM이 문제를 보고하는지 확인합니다. 모든 VM에서 부팅 진단이 지원되는 것은 아니므로 이 문제 해결 단계는 선택 사항입니다.
    
     구체적인 문제 해결 단계는 이 문서의 범위를 벗어나지만, RDP 연결에 영향을 주는 더 넓은 문제를 나타낼 수 있습니다. 콘솔 로그 및 VM 스크린샷 검토에 대한 자세한 내용은 [VM 부팅 진단](boot-diagnostics.md)을 참조하세요.
@@ -96,7 +77,7 @@ Resource Manager 배포 모델을 사용하여 만든 VM 문제를 다음 방법
     Azure Portal에서 VM을 선택합니다. 목록 맨 아래 근처에 있는 **지원 + 문제 해결** 섹션이 나올 때까지 설정 창을 아래로 스크롤합니다. **리소스 상태** 단추를 클릭합니다. 정상 VM은 **사용 가능**으로 보고합니다.
    
     ![Azure Portal에서 VM 리소스 상태 확인](./media/troubleshoot-rdp-connection/check-resource-health.png)
-6. **사용자 자격 증명 다시 설정**. 이 문제 해결 단계에서는 자격 증명이 확실하지 않거나 잊어버린 경우 로컬 관리자 계정에서 암호를 다시 설정합니다.
+6. **사용자 자격 증명 다시 설정**. 이 문제 해결 단계에서는 자격 증명이 확실하지 않거나 잊어버린 경우 로컬 관리자 계정에서 암호를 다시 설정합니다.  VM에 로그인하면 해당 사용자의 암호를 다시 설정해야 합니다.
    
     Azure Portal에서 VM을 선택합니다. 목록 맨 아래 근처에 있는 **지원 + 문제 해결** 섹션이 나올 때까지 설정 창을 아래로 스크롤합니다. **암호 다시 설정** 단추를 클릭합니다. **모드**를 **암호 다시 설정**으로 지정한 다음 사용자 이름 및 새 암호를 입력합니다. 마지막으로 **업데이트** 단추를 클릭합니다.
    
@@ -113,6 +94,10 @@ Resource Manager 배포 모델을 사용하여 만든 VM 문제를 다음 방법
     ![Azure Portal에서 VM 다시 배포](./media/troubleshoot-rdp-connection/redeploy-vm.png)
    
     이 작업이 완료되면 임시 디스크 데이터가 손실되고 VM과 연결된 동적 IP 주소가 업데이트됩니다.
+
+9. **라우팅을 확인**합니다. Network Watcher의 [다음 홉](../../network-watcher/network-watcher-check-next-hop-portal.md) 기능을 사용하여 트래픽이 가상 머신으로 들어가거나 나가도록 라우팅하는 데 경로가 방해가 되지 않는지 확인합니다. 네트워크 인터페이스의 유효 경로를 모두 볼 수 있도록 유효 경로를 검토할 수도 있습니다. 자세한 내용은 [유효 경로를 사용하여 VM 트래픽 흐름 문제 해결](../../virtual-network/virtual-network-routes-troubleshoot-portal.md#using-effective-routes-to-troubleshoot-vm-traffic-flow)을 참조하세요.
+
+10. 온-프레미스 방화벽 또는 컴퓨터의 방화벽이 Azure로 아웃바운드 TCP 3389 트래픽을 허용하는지 확인합니다.
 
 RDP 문제가 계속 발생하는 경우 [지원 요청을 열거나](https://azure.microsoft.com/support/options/) [좀 더 자세한 RDP 문제 해결 개념 및 단계](detailed-troubleshoot-rdp.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 읽어볼 수 있습니다.
 
@@ -199,6 +184,10 @@ RDP 문제가 계속 발생하는 경우 [지원 요청을 열거나](https://az
     Set-AzureRmVM -Redeploy -ResourceGroupName "myResourceGroup" -Name "myVM"
     ```
 
+6. **라우팅을 확인**합니다. Network Watcher의 [다음 홉](../../network-watcher/network-watcher-check-next-hop-portal.md) 기능을 사용하여 트래픽이 가상 머신으로 들어가거나 나가도록 라우팅하는 데 경로가 방해가 되지 않는지 확인합니다. 네트워크 인터페이스의 유효 경로를 모두 볼 수 있도록 유효 경로를 검토할 수도 있습니다. 자세한 내용은 [유효 경로를 사용하여 VM 트래픽 흐름 문제 해결](../../virtual-network/virtual-network-routes-troubleshoot-powershell.md#using-effective-routes-to-troubleshoot-vm-traffic-flow)을 참조하세요.
+
+7. 온-프레미스 방화벽 또는 컴퓨터의 방화벽이 Azure로 아웃바운드 TCP 3389 트래픽을 허용하는지 확인합니다.
+
 RDP 문제가 계속 발생하는 경우 [지원 요청을 열거나](https://azure.microsoft.com/support/options/) [좀 더 자세한 RDP 문제 해결 개념 및 단계](detailed-troubleshoot-rdp.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 읽어볼 수 있습니다.
 
 ## <a name="troubleshoot-vms-created-using-the-classic-deployment-model"></a>클래식 배포 모델을 사용하여 만든 VM 문제 해결
@@ -226,7 +215,7 @@ RDP 문제가 계속 발생하는 경우 [지원 요청을 열거나](https://az
     Azure Portal에서 VM을 선택합니다. 목록 맨 아래 근처에 있는 **지원 + 문제 해결** 섹션이 나올 때까지 설정 창을 아래로 스크롤합니다. **리소스 상태** 단추를 클릭합니다. 정상 VM은 **사용 가능**으로 보고합니다.
    
     ![Azure Portal에서 VM 리소스 상태 확인](./media/troubleshoot-rdp-connection/classic-check-resource-health.png)
-5. **사용자 자격 증명 다시 설정**. 이 문제 해결 단계에서는 자격 증명이 확실하지 않거나 잊어버린 경우 사용자가 지정하는 로컬 관리자 계정에서 암호를 다시 설정합니다.
+5. **사용자 자격 증명 다시 설정**. 이 문제 해결 단계에서는 자격 증명이 확실하지 않거나 잊어버린 경우 사용자가 지정하는 로컬 관리자 계정에서 암호를 다시 설정합니다.  VM에 로그인하면 해당 사용자의 암호를 다시 설정해야 합니다.
    
     Azure Portal에서 VM을 선택합니다. 목록 맨 아래 근처에 있는 **지원 + 문제 해결** 섹션이 나올 때까지 설정 창을 아래로 스크롤합니다. **암호 다시 설정** 단추를 클릭합니다. 사용자 이름 및 새 암호를 입력합니다. 마지막으로 **저장** 단추를 클릭합니다.
    
@@ -236,6 +225,8 @@ RDP 문제가 계속 발생하는 경우 [지원 요청을 열거나](https://az
     Azure Portal에서 VM을 선택하고 **개요** 탭을 클릭합니다. **다시 시작** 단추를 클릭합니다.
    
     ![Azure Portal에서 VM을 다시 시작합니다.](./media/troubleshoot-rdp-connection/classic-restart-vm.png)
+
+7. 온-프레미스 방화벽 또는 컴퓨터의 방화벽이 Azure로 아웃바운드 TCP 3389 트래픽을 허용하는지 확인합니다.
 
 RDP 문제가 계속 발생하는 경우 [지원 요청을 열거나](https://azure.microsoft.com/support/options/) [좀 더 자세한 RDP 문제 해결 개념 및 단계](detailed-troubleshoot-rdp.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 읽어볼 수 있습니다.
 
@@ -252,5 +243,4 @@ RDP를 통해 VM에 연결하려고 할 때 특정 오류 메시지가 나타날
 이러한 오류가 발생하지 않았는데도 여전히 원격 데스크톱을 통해 VM에 연결할 수 없는 경우 [원격 데스크톱에 대한 자세한 문제 해결 가이드](detailed-troubleshoot-rdp.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 읽어보세요.
 * VM에서 실행 중인 응용 프로그램에 액세스하는 문제 해결 단계는 [Azure VM에서 실행 중인 응용 프로그램에 대한 액세스 문제 해결](../linux/troubleshoot-app-connection.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)을 참조하세요.
 * SSH(Secure Shell)를 사용하여 Azur에서 Linux VM에 연결하는 데 문제가 있는 경우 [Azure에서 Linux VM에 SSH 연결 문제 해결](../linux/troubleshoot-ssh-connection.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)을 참조하세요.
-
 

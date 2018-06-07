@@ -1,30 +1,26 @@
 ---
-title: "Azure Cosmos DB: DocumentDB API를 사용하여 쿼리하는 방법 | Microsoft Docs"
-description: "Azure Cosmos DB의 DocumentDB API를 사용하여 쿼리하는 방법을 알아봅니다."
+title: 'Azure Cosmos DB: MongoDB API를 사용하여 쿼리하는 방법 | Microsoft Docs'
+description: Azure Cosmos DB의 MongoDB API를 사용하여 쿼리하는 방법을 알아봅니다.
 services: cosmos-db
-documentationcenter: 
-author: mimig1
-manager: jhubbard
-editor: 
-tags: 
-ms.assetid: 
+documentationcenter: ''
+author: SnehaGunda
+manager: kfile
+ms.assetid: ''
 ms.service: cosmos-db
 ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.tgt_pltfrm: na
-ms.workload: 
-ms.date: 05/10/2017
-ms.author: mimig
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a643f139be40b9b11f865d528622bafbe7dec939
-ms.openlocfilehash: feffc553a9aa931d96cec71c101674fce08a466b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/31/2017
-
-
+ms.workload: ''
+ms.date: 03/29/2018
+ms.author: sngun
+ms.custom: mvc
+ms.openlocfilehash: d8d524038d6483ff5da195648ee763f8faa1dad4
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-
-# <a name="azure-cosmos-db-how-to-query-with-api-for-mongodb"></a>Azure Cosmos DB: MongoDB API를 사용하여 쿼리하는 방법
+# <a name="tutorial-query-azure-cosmos-db-by-using-the-mongodb-api"></a>자습서: MongoDB API를 사용하여 Azure Cosmos DB 쿼리
 
 Azure Cosmos DB [MongoDB API](mongodb-introduction.md)는 [MongoDB 셸 쿼리](https://docs.mongodb.com/manual/tutorial/query-documents/)를 지원합니다. 
 
@@ -32,6 +28,10 @@ Azure Cosmos DB [MongoDB API](mongodb-introduction.md)는 [MongoDB 셸 쿼리](h
 
 > [!div class="checklist"]
 > * MongoDB를 사용한 데이터 쿼리
+
+MongoDB를 쿼리하는 방법에 대한 Azure Cosmos DB 프로그램 관리자 Andy Hoh의 비디오를 시청하여 쿼리를 시작할 수 있습니다.
+
+>[!VIDEO https://www.youtube.com/tVk8S7lFWMA]
 
 ## <a name="sample-document"></a>샘플 문서
 
@@ -121,7 +121,7 @@ Azure Cosmos DB [MongoDB API](mongodb-introduction.md)는 [MongoDB 셸 쿼리](h
 
 **쿼리**
     
-    db.familes.find( { id: “WakefieldFamily” }, { children: true } )
+    db.families.find( { id: “WakefieldFamily” }, { children: true } )
 
 **결과**
 
@@ -150,17 +150,16 @@ Azure Cosmos DB [MongoDB API](mongodb-introduction.md)는 [MongoDB 셸 쿼리](h
 
 ## <a id="examplequery3"></a>예제 쿼리 3 
 
-다음 쿼리에서는 등록된 모든 가족을 반환합니다. 
+다음 쿼리는 등록된 모든 가족을 반환합니다. 
 
 **쿼리**
     
     db.families.find( { "isRegistered" : true })
-**결과**
- 문서가 반환되지 않습니다. 
+**결과** 문서가 반환되지 않습니다. 
 
 ## <a id="examplequery4"></a>예제 쿼리 4
 
-다음 쿼리에서는 등록되지 않은 모든 가족을 반환합니다. 
+다음 쿼리는 등록되지 않은 모든 가족을 반환합니다. 
 
 **쿼리**
     
@@ -204,7 +203,7 @@ Azure Cosmos DB [MongoDB API](mongodb-introduction.md)는 [MongoDB 셸 쿼리](h
 
 ## <a id="examplequery5"></a>예제 쿼리 5
 
-다음 쿼리에서는 등록되지 않은 모든 가족을 반환하고 거주 지역(state)은 NY입니다. 
+다음 쿼리는 등록되지 않았고 거주 지역(주)이 NY인 가족을 모두 반환합니다. 
 
 **쿼리**
     
@@ -303,7 +302,7 @@ Azure Cosmos DB [MongoDB API](mongodb-introduction.md)는 [MongoDB 셸 쿼리](h
 
 **결과**
 
-2명 이상의 자식이 있는 가족이 없기 때문에 결과가 반환되지 않습니다. 매개 변수가 2일 때만 이 쿼리가 성공하여 전체 문서를 반환합니다.
+자식이 셋 이상인 가족이 없으므로 결과가 반환되지 않습니다. 매개 변수가 2일 때만 이 쿼리가 성공하여 전체 문서를 반환합니다.
 
 ## <a name="next-steps"></a>다음 단계
 
@@ -315,6 +314,5 @@ Azure Cosmos DB [MongoDB API](mongodb-introduction.md)는 [MongoDB 셸 쿼리](h
 이제 전 세계로 데이터를 배포하는 방법을 알아보려면 다음 자습서로 진행할 수 있습니다.
 
 > [!div class="nextstepaction"]
-> [전 세계로 데이터 배포](tutorial-global-distribution-documentdb.md)
-
+> [전 세계로 데이터 배포](tutorial-global-distribution-sql-api.md)
 

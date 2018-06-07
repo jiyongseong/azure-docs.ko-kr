@@ -4,7 +4,7 @@ description: "응용 프로그램에 대한 프로비저닝이 예상보다 오�
 services: active-directory
 documentationcenter: 
 author: ajamess
-manager: femila
+manager: mtillman
 ms.assetid: 
 ms.service: active-directory
 ms.workload: identity
@@ -13,14 +13,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: cc9e81de9bf8a3312da834502fa6ca25e2b5834a
-ms.openlocfilehash: a0d2909ca69f06b6d08deaa25f35d55d9f9828fe
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/11/2017
-
+ms.openlocfilehash: c9ed12569c0adc5ed8625a8d9fc81c9bee874cd4
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
-
 # <a name="user-provisioning-to-an-azure-ad-gallery-application-is-taking-hours-or-more"></a>Azure AD 갤러리 응용 프로그램에 대한 사용자 프로비저닝이 오래 걸림
 
 응용 프로그램에 대한 자동 프로비저닝을 처음 사용하도록 설정할 경우 초기 동기화는 Azure AD 디렉터리의 크기와 프로비전 범위에 있는 사용자 수에 따라 20분에서 수 시간이 걸릴 수 있습니다. 
@@ -35,5 +33,4 @@ ms.lasthandoff: 04/11/2017
 
 ## <a name="next-steps"></a>다음 단계
 [Azure Active Directory를 사용하여 SaaS 응용 프로그램의 사용자를 자동으로 프로비저닝 및 프로비저닝 해제](active-directory-saas-app-provisioning.md)
-
 

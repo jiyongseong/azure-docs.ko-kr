@@ -1,11 +1,11 @@
 ---
-title: "CLI 2.0을 사용하여 Azure에서 Linux VM의 이미지 캡처 | Microsoft Docs"
-description: "Azure CLI 2.0을 사용하여 대량 배포에 사용할 Azure VM의 이미지를 캡처합니다."
+title: CLI 2.0을 사용하여 Azure에서 Linux VM의 이미지 캡처 | Microsoft Docs
+description: Azure CLI 2.0을 사용하여 대량 배포에 사용할 Azure VM의 이미지를 캡처합니다.
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: cynthn
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
 ms.assetid: e608116f-f478-41be-b787-c2ad91b5a802
 ms.service: virtual-machines-linux
@@ -13,20 +13,19 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: azurecli
 ms.topic: article
-ms.date: 07/10/2017
+ms.date: 03/22/2018
 ms.author: cynthn
+ms.openlocfilehash: bb70b3ff84392797ce0d93b8cf5d4018ff8ebdd8
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: f6fbefc212197ca8802e7857c67a5b9c297770a8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
-# <a name="how-to-create-an-image-of-a-virtual-machine-or-vhd"></a>가상 컴퓨터 또는 VHD의 이미지를 만드는 방법
+# <a name="how-to-create-an-image-of-a-virtual-machine-or-vhd"></a>가상 머신 또는 VHD의 이미지를 만드는 방법
 
 <!-- generalize, image - extended version of the tutorial-->
 
-Azure에서 사용할 가상 컴퓨터(VM)의 복사본을 여러 개 만들려면 VM 또는 OS VHD의 이미지를 캡처합니다. 이미지를 만들려면 개인 계정 정보를 제거해야 합니다. 이렇게 해야 여러 번 배포하는 데 더 안전합니다. 다음 단계에서는 기존 VM의 프로비전을 해제하고, 할당을 취소하고, 이미지를 만듭니다. 이 이미지를 사용하여 구독 내의 모든 리소스 그룹에서 VM을 만들 수 있습니다.
+Azure에서 사용할 가상 머신(VM)의 복사본을 여러 개 만들려면 VM 또는 OS VHD의 이미지를 캡처합니다. 이미지를 만들려면 개인 계정 정보를 제거해야 합니다. 이렇게 해야 여러 번 배포하는 데 더 안전합니다. 다음 단계에서는 기존 VM의 프로비전을 해제하고, 할당을 취소하고, 이미지를 만듭니다. 이 이미지를 사용하여 구독 내의 모든 리소스 그룹에서 VM을 만들 수 있습니다.
 
 백업 또는 디버깅을 위해 기존 Linux VM의 복사본을 만들거나 온-프레미스 VM에서 특수한 Linux VHD를 업로드하려면 [사용자 지정 디스크 이미지에서 Linux VM 업로드 및 만들기](upload-vhd.md)를 참조하세요.  
 
@@ -36,9 +35,9 @@ Azure에서 사용할 가상 컴퓨터(VM)의 복사본을 여러 개 만들려�
 ## <a name="before-you-begin"></a>시작하기 전에
 다음 필수 조건을 충족하는지 확인합니다.
 
-* 관리 디스크를 사용하여 Resource Manager 배포 모델에서 만든 Azure VM이 있어야 합니다. Linux VM을 만들지 않은 경우 [포털](quick-create-portal.md), [Azure CLI](quick-create-cli.md) 또는 [Resource Manager 템플릿](cli-deploy-templates.md)을 사용할 수 있습니다. 필요에 따라 VM을 구성합니다. 예를 들어 [데이터 디스크를 추가하고](add-disk.md), 업데이트를 적용하고, 응용 프로그램을 설치합니다. 
+* 관리 디스크를 사용하여 Resource Manager 배포 모델에서 만든 Azure VM이 있어야 합니다. Linux VM을 만들지 않은 경우 [포털](quick-create-portal.md), [Azure CLI](quick-create-cli.md) 또는 [Resource Manager 템플릿](create-ssh-secured-vm-from-template.md)을 사용할 수 있습니다. 필요에 따라 VM을 구성합니다. 예를 들어 [데이터 디스크를 추가하고](add-disk.md), 업데이트를 적용하고, 응용 프로그램을 설치합니다. 
 
-* 또한 최신 [Azure CLI 2.0](/cli/azure/install-az-cli2)이 설치되어 있어 [az login](/cli/azure/#login)으로 Azure 계정에 로그인해야 합니다.
+* 또한 최신 [Azure CLI 2.0](/cli/azure/install-az-cli2)이 설치되어 있어 [az login](/cli/azure/reference-index#az_login)으로 Azure 계정에 로그인해야 합니다.
 
 ## <a name="quick-commands"></a>빠른 명령
 
@@ -46,7 +45,7 @@ Azure에서 사용할 가상 컴퓨터(VM)의 복사본을 여러 개 만들려�
 
 
 ## <a name="step-1-deprovision-the-vm"></a>1단계: VM 프로비전 해제
-Azure VM 에이전트로 VM 프로비전을 해제하여 컴퓨터 특정 파일 및 데이터를 삭제합니다. 원본 Linux VM에서 *-deprovision+user* 매개 변수와 함께 `waagent` 명령을 사용합니다. 자세한 내용은 [Azure Linux 에이전트 사용자 가이드](../windows/agent-user-guide.md)를 참조하세요.
+Azure VM 에이전트로 VM 프로비전을 해제하여 컴퓨터 특정 파일 및 데이터를 삭제합니다. 원본 Linux VM에서 *-deprovision+user* 매개 변수와 함께 `waagent` 명령을 사용합니다. 자세한 내용은 [Azure Linux 에이전트 사용자 가이드](../extensions/agent-linux.md)를 참조하세요.
 
 1. SSH 클라이언트를 사용하여 Linux VM에 연결합니다.
 2. SSH 창에서 다음 명령을 입력합니다.
@@ -80,7 +79,7 @@ Azure CLI 2.0을 사용하여 VM을 일반화된 항목으로 표시하고 이�
       --name myVM
     ```
 
-3. 이제 [az image create](/cli//azure/image#create)로 VM 리소스의 이미지를 만듭니다. 다음 예제에서는 *myVM*이라는 VM 리소스를 사용하여 *myResourceGroup*이라는 리소스 그룹에서 *myImage*라는 이미지를 만듭니다.
+3. 이제 [az image create](/cli/azure/image#az_image_create)로 VM 리소스의 이미지를 만듭니다. 다음 예제에서는 *myVM*이라는 VM 리소스를 사용하여 *myResourceGroup*이라는 리소스 그룹에서 *myImage*라는 이미지를 만듭니다.
    
     ```azurecli
     az image create \
@@ -90,9 +89,11 @@ Azure CLI 2.0을 사용하여 VM을 일반화된 항목으로 표시하고 이�
    
    > [!NOTE]
    > 이미지는 원본 VM과 동일한 리소스 그룹에 만들어집니다. 이 이미지에서 구독 내의 모든 리소스 그룹에 VM을 만들 수 있습니다. 관리 측면에서 VM 리소스 및 이미지에 대한 특정 리소스 그룹을 만들 수도 있습니다.
+   >
+   > 이미지를 영역 중복 저장소에 저장하려는 경우 [가용성 영역](../../availability-zones/az-overview.md)을 지원하고 `--zone-resilient true` 매개 변수를 포함하는 지역에 만들어야 합니다.
 
 ## <a name="step-3-create-a-vm-from-the-captured-image"></a>3단계: 캡처한 이미지로부터 새 VM 만들기
-[az vm create](/cli/azure/vm#create)로 만든 이미지를 사용하여 VM을 만듭니다. 다음 예제에서는 *myImage*라는 이미지에서 *myVMDeployed*라는 VM을 만듭니다.
+[az vm create](/cli/azure/vm#az_vm_create)로 만든 이미지를 사용하여 VM을 만듭니다. 다음 예제에서는 *myImage*라는 이미지에서 *myVMDeployed*라는 VM을 만듭니다.
 
 ```azurecli
 az vm create \
@@ -105,7 +106,7 @@ az vm create \
 
 ### <a name="creating-the-vm-in-another-resource-group"></a>다른 리소스 그룹에서 VM 만들기 
 
-구독 내 모든 리소스 그룹의 이미지에서 VM을 만들 수 있습니다. 이미지와 다른 리소스 그룹에 VM을 만들려면 이미지에 완전한 리소스 ID를 지정합니다. [az image list](/cli/azure/image#list)를 사용하여 이미지 목록을 봅니다. 다음 예제와 유사하게 출력됩니다.
+구독 내 모든 리소스 그룹의 이미지에서 VM을 만들 수 있습니다. 이미지와 다른 리소스 그룹에 VM을 만들려면 이미지에 완전한 리소스 ID를 지정합니다. [az image list](/cli/azure/image#az_image_list)를 사용하여 이미지 목록을 봅니다. 다음 예제와 유사하게 출력됩니다.
 
 ```json
 "id": "/subscriptions/guid/resourceGroups/MYRESOURCEGROUP/providers/Microsoft.Compute/images/myImage",
@@ -113,7 +114,7 @@ az vm create \
    "name": "myImage",
 ```
 
-다음 예제에서는 이미지 리소스 ID를 지정하여 원본 이미지와 다른 리소스 그룹에 VM을 만드는 [az vm create](/cli/azure/vm#create)를 사용합니다.
+다음 예제에서는 이미지 리소스 ID를 지정하여 원본 이미지와 다른 리소스 그룹에 VM을 만드는 [az vm create](/cli/azure/vm#az_vm_create)를 사용합니다.
 
 ```azurecli
 az vm create \
@@ -127,7 +128,7 @@ az vm create \
 
 ## <a name="step-4-verify-the-deployment"></a>4단계: 배포 확인
 
-생성한 가상 컴퓨터에 SSH를 실행하여 배포를 확인하고 새 VM 사용을 시작합니다. SSH를 통해 연결하려면 [az vm show](/cli/azure/vm#show)로 VM의 IP 주소 또는 FQDN을 찾습니다.
+생성한 가상 머신에 SSH를 실행하여 배포를 확인하고 새 VM 사용을 시작합니다. SSH를 통해 연결하려면 [az vm show](/cli/azure/vm#az_vm_show)로 VM의 IP 주소 또는 FQDN을 찾습니다.
 
 ```azurecli
 az vm show \
@@ -144,5 +145,4 @@ az vm show \
 - 단계에 따라 이미지를 다시 프로비전 해제, 할당 취소, 일반화하고 만듭니다.
 - 향후 배포에서 이 새로운 이미지를 사용합니다. 원하는 경우에 원본 이미지를 삭제합니다.
 
-CLI를 사용하여 VM을 관리하는 방법에 대한 자세한 내용은 [Azure CLI 2.0](/cli/azure/overview)을 참조하세요.
-
+CLI를 사용하여 VM을 관리하는 방법에 대한 자세한 내용은 [Azure CLI 2.0](/cli/azure)을 참조하세요.

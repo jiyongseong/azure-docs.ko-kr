@@ -1,11 +1,11 @@
 ---
-title: "Azure에서 PowerShell을 사용하여 Windows VM 크기 조정 | Microsoft Docs"
-description: "Azure Powershell을 사용하여 Resource Manager 배포 모델에서 만든 Windows 가상 컴퓨터의 크기를 조정합니다."
+title: Azure에서 PowerShell을 사용하여 Windows VM 크기 조정 | Microsoft Docs
+description: Azure Powershell을 사용하여 Resource Manager 배포 모델에서 만든 Windows 가상 머신의 크기를 조정합니다.
 services: virtual-machines-windows
-documentationcenter: 
-author: Drewm3
-manager: timlt
-editor: 
+documentationcenter: ''
+author: cynthn
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
 ms.assetid: 057ff274-6dad-415e-891c-58f8eea9ed78
 ms.service: virtual-machines-windows
@@ -14,18 +14,17 @@ ms.tgt_pltfrm: vm-windows
 ms.devlang: na
 ms.topic: article
 ms.date: 10/19/2016
-ms.author: drewm
-translationtype: Human Translation
-ms.sourcegitcommit: 197ebd6e37066cb4463d540284ec3f3b074d95e1
-ms.openlocfilehash: 742efd1496de9ce76b1e5636297ef30f546bd108
-ms.lasthandoff: 03/31/2017
-
-
+ms.author: cynthn
+ms.openlocfilehash: d2010ee9017416360069c74118b8ae25e71e1da7
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
 # <a name="resize-a-windows-vm"></a>Windows VM 크기 조정
 이 문서에서는 Azure Powershell을 사용하여 Resource Manager 배포 모델에서 만든 Windows VM의 크기를 조정하는 방법을 보여 줍니다.
 
-VM(가상 컴퓨터)을 만든 후 VM 크기를 변경하여 VM의 크기를 확장 또는 축소할 수 있습니다. 경우에 따라 먼저 VM의 할당을 취소해야 합니다. 이는 현재 VM을 호스트하는 하드웨어 클러스터에서 새 크기를 사용할 수 없는 경우에 발생할 수 있습니다.
+VM(가상 머신)을 만든 후 VM 크기를 변경하여 VM의 크기를 확장 또는 축소할 수 있습니다. 경우에 따라 먼저 VM의 할당을 취소해야 합니다. 이는 현재 VM을 호스트하는 하드웨어 클러스터에서 새 크기를 사용할 수 없는 경우에 발생할 수 있습니다.
 
 ## <a name="resize-a-windows-vm-not-in-an-availability-set"></a>가용성 집합에 없는 Windows VM의 크기 조정
 1. VM이 호스트되는 하드웨어 클러스터에서 사용할 수 있는 VM 크기를 나열합니다. 
@@ -36,7 +35,7 @@ VM(가상 컴퓨터)을 만든 후 VM 크기를 변경하여 VM의 크기를 확
 2. 원하는 크기가 목록에 나열된 경우 다음 명령을 실행하여 VM 크기를 조정합니다. 원하는 크기가 목록에 나열되지 않으면 3단계로 이동합니다.
    
     ```powershell
-    $vm = Get-AzureRmVM -ResourceGroupName <resourceGroupName> -VMName <vmName>
+    $vm = Get-AzureRmVM -ResourceGroupName <resourceGroupName> -Name <vmName>
     $vm.HardwareProfile.VmSize = "<newVMsize>"
     Update-AzureRmVM -VM $vm -ResourceGroupName <resourceGroupName>
     ```
@@ -45,8 +44,8 @@ VM(가상 컴퓨터)을 만든 후 VM 크기를 변경하여 VM의 크기를 확
     ```powershell
     $rgname = "<resourceGroupName>"
     $vmname = "<vmName>"
-    Stop-AzureRmVM -ResourceGroupName $rgname -VMName $vmname -Force
-    $vm = Get-AzureRmVM -ResourceGroupName $rgname -VMName $vmname
+    Stop-AzureRmVM -ResourceGroupName $rgname -Name $vmname -Force
+    $vm = Get-AzureRmVM -ResourceGroupName $rgname -Name $vmname
     $vm.HardwareProfile.VmSize = "<newVMSize>"
     Update-AzureRmVM -VM $vm -ResourceGroupName $rgname
     Start-AzureRmVM -ResourceGroupName $rgname -Name $vmname
@@ -68,7 +67,7 @@ VM(가상 컴퓨터)을 만든 후 VM 크기를 변경하여 VM의 크기를 확
 2. 원하는 크기가 목록에 나열된 경우 다음 명령을 실행하여 VM 크기를 조정합니다. 나열되지 않으면 3단계로 이동합니다.
    
     ```powershell
-    $vm = Get-AzureRmVM -ResourceGroupName <resourceGroupName> -VMName <vmName>
+    $vm = Get-AzureRmVM -ResourceGroupName <resourceGroupName> -Name <vmName>
     $vm.HardwareProfile.VmSize = "<newVmSize>"
     Update-AzureRmVM -VM $vm -ResourceGroupName <resourceGroupName>
     ```
@@ -103,6 +102,5 @@ VM(가상 컴퓨터)을 만든 후 VM 크기를 변경하여 VM의 크기를 확
    ```
 
 ## <a name="next-steps"></a>다음 단계
-* 확장성을 높이기 위해서는 여러 VM 인스턴스를 실행하고 규모를 확장합니다. 자세한 내용은 [가상 컴퓨터 크기 집합에서 Windows 컴퓨터 자동 확장](../../virtual-machine-scale-sets/virtual-machine-scale-sets-windows-autoscale.md)을 참조하세요.
-
+* 확장성을 높이기 위해서는 여러 VM 인스턴스를 실행하고 규모를 확장합니다. 자세한 내용은 [Virtual Machine Scale Set에서 Windows 컴퓨터 자동 확장](../../virtual-machine-scale-sets/virtual-machine-scale-sets-windows-autoscale.md)을 참조하세요.
 

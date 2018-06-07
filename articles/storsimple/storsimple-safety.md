@@ -14,11 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/16/2016
 ms.author: alkohli
-translationtype: Human Translation
-ms.sourcegitcommit: aaef3322fc98b0874222e4a3728d54a38a34b602
-ms.openlocfilehash: 4dca50c6a0e6809876357edee8c6475796984c70
-
-
+ms.openlocfilehash: a178e8880bcbcada9d66eaacf5ccbdb7c55957cb
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="safely-install-and-operate-your-storsimple-device"></a>StorSimple 장치의 안전한 설치 및 작동
 ![경고 아이콘](./media/storsimple-safety/IC740879.png)
@@ -106,7 +106,7 @@ ms.openlocfilehash: 4dca50c6a0e6809876357edee8c6475796984c70
 * 시스템은 저압의 후면 배기 설치에서 작동합니다(랙 도어에서 발생하는 배압 및 장애물이 5파스칼[0.5mm 수면계]을 초과하지 않음).
 
 ## <a name="power-cooling-module-pcm-precautions"></a>PCM(전원 냉각 모듈) 주의 사항
-장치는 두 개의 PCM과 함께 작동하도록 설계되었습니다. 각 PCM에는 전원 공급 장치와 이중 축 팬이 있습니다. 임계 조건에서 시스템은 한 대의 전원 공급 장치에 오류가 발생해도 정상적인 작동을 계속할 수 있습니다. 항상 두 PCM(및 전원 공급 장치)을 설치해야 합니다. PCM 하나로는 예비 전력을 제공하지 않습니다. 따라서 하나의 PCM만 고장나도 가동 중지 시간 또는 데이터 손실이 발생할 수 있습니다..
+장치는 두 개의 PCM과 함께 작동하도록 설계되었습니다. 각 PCM에는 전원 공급 장치와 이중 축 팬이 있습니다. 임계 조건에서 시스템은 한 대의 전원 공급 장치에 오류가 발생해도 정상적인 작동을 계속할 수 있습니다. 항상 두 PCM(및 전원 공급 장치)을 설치해야 합니다. PCM 하나로는 예비 전력을 제공하지 않습니다. 따라서 하나의 PCM만 고장나도 가동 중지 시간 또는 데이터 손실이 발생할 수 있습니다.
 
 ![경고 아이콘](./media/storsimple-safety/IC740879.png) ![감전 아이콘](./media/storsimple-safety/IC740882.png) **경고!**
 
@@ -151,10 +151,4 @@ ms.openlocfilehash: 4dca50c6a0e6809876357edee8c6475796984c70
 ## <a name="next-steps"></a>다음 단계
 * 8100 장치의 경우 [StorSimple 8100 장치 설치](storsimple-8100-hardware-installation.md)로 이동합니다.
 * 8600 장치의 경우 [StorSimple 8600 장치 설치](storsimple-8600-hardware-installation.md)로 이동합니다.
-
-
-
-
-<!--HONumber=Nov16_HO3-->
-
 

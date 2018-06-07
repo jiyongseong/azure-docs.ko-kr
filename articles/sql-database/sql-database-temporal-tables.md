@@ -1,33 +1,25 @@
 ---
-title: "Azure SQL Database의 임시 테이블 시작| Microsoft Docs"
-description: "Azure SQL 데이터베이스에서 임시 테이블을 사용하여 시작하는 방법을 알아봅니다."
+title: Azure SQL Database의 임시 테이블 시작| Microsoft Docs
+description: Azure SQL Database에서 임시 테이블을 사용하여 시작하는 방법을 알아봅니다.
 services: sql-database
-documentationcenter: 
 author: bonova
-manager: jhubbard
-editor: 
-ms.assetid: c8c0f232-0751-4a7f-a36e-67a0b29fa1b8
+ms.date: 03/21/2018
+manager: craigg
 ms.service: sql-database
 ms.custom: develop databases
-ms.devlang: NA
 ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: sql-database
-ms.date: 01/10/2017
 ms.author: bonova
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 10b40214ad4c7d7bb7999a5abce1c22100b617d8
-ms.openlocfilehash: e00345ddd9e52e2613789ba78c48e8f993d2415c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/13/2017
-
-
+ms.openlocfilehash: 0299d52396549baf8ea7e5eb7145585c7b5900a6
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="getting-started-with-temporal-tables-in-azure-sql-database"></a>Azure SQL Database의 임시 테이블 시작
-임시 테이블은 사용자 지정 코딩을 필요로 하지 않고 데이터의 전체 변경 기록을 추적하고 분석할 수 있는 Azure SQL 데이터베이스의 새로운 프로그래밍 기능입니다. 임시 테이블은 특정 기간 내에서만 유효하기 때문에 저장된 팩트를 해석할 수 있도록 데이터를 시간 컨텍스트와 밀접하게 연결해둡니다. 임시 테이블의 이 속성을 사용하면 효율적인 시간 기반 분석 및 데이터의 진화에서 정보를 얻을 수 있습니다.
+임시 테이블은 사용자 지정 코딩을 필요로 하지 않고 데이터의 전체 변경 기록을 추적하고 분석할 수 있는 Azure SQL Database의 새로운 프로그래밍 기능입니다. 임시 테이블은 특정 기간 내에서만 유효하기 때문에 저장된 팩트를 해석할 수 있도록 데이터를 시간 컨텍스트와 밀접하게 연결해둡니다. 임시 테이블의 이 속성을 사용하면 효율적인 시간 기반 분석 및 데이터의 진화에서 정보를 얻을 수 있습니다.
 
 ## <a name="temporal-scenario"></a>임시 시나리오
-이 문서에서는 응용 프로그램 시나리오에서 임시 테이블을 활용하는 단계를 보여줍니다. 처음부터 새로 개발되는 새 웹 사이트 또는 사용자 작업 분석으로 확장하려는 기존 웹 사이트에서 사용자 작업을 추적한다고 가정합니다. 이 간단한 예제에서는 일정 기간 동안 방문한 웹 페이지의 수가 Azure SQL 데이터베이스에서 호스팅되는 웹 사이트 데이터베이스에서 캡처되고 모니터링되어야 할 표식이라고 가정합니다. 사용자 작업 내역 분석의 목적은 웹 사이트를 다시 디자인하고 방문자에게 더 나은 환경을 제공하기 위한 입력을 가져오는 것입니다.
+이 문서에서는 응용 프로그램 시나리오에서 임시 테이블을 활용하는 단계를 보여줍니다. 처음부터 새로 개발되는 새 웹 사이트 또는 사용자 작업 분석으로 확장하려는 기존 웹 사이트에서 사용자 작업을 추적한다고 가정합니다. 이 간단한 예제에서는 일정 기간 동안 방문한 웹 페이지의 수가 Azure SQL Database에서 호스팅되는 웹 사이트 데이터베이스에서 캡처되고 모니터링되어야 할 표식이라고 가정합니다. 사용자 작업 내역 분석의 목적은 웹 사이트를 다시 디자인하고 방문자에게 더 나은 환경을 제공하기 위한 입력을 가져오는 것입니다.
 
 이 시나리오에 대한 데이터베이스 모델은 매우 간단합니다. 사용자 작업 메트릭은 단일 정수 필드인 **PageVisited**로 표시되고 사용자 프로필에 대한 기본 정보와 함께 캡처됩니다. 또한 시간 기반 분석의 경우 각 사용자에 대한 일련의 행을 유지하며 여기서 모든 행은 특정 기간 내에서 특정 사용자가 방문한 페이지 수를 나타냅니다.
 
@@ -39,7 +31,7 @@ ms.lasthandoff: 01/13/2017
 새로운 개발을 시작하거나 기존 응용 프로그램을 업그레이드하는 여부에 따라 임시 테이블을 만들거나 임시 특성을 추가하여 기존 템플릿을 수정합니다. 일반적인 경우 시나리오는 이러한 두 옵션을 혼합하여 만들 수 있습니다. [SQL Server Management Studio](https://msdn.microsoft.com/library/mt238290.aspx)(SSMS) [SQL Server Data Tools](https://msdn.microsoft.com/library/mt204009.aspx)(SSDT) 또는 기타 Transact-SQL 개발 도구를 사용하여 이러한 작업을 수행합니다
 
 > [!IMPORTANT]
-> Microsoft Azure 및 SQL 데이터베이스에 대한 업데이트와 동기화 상태를 유지하려면 항상 최신 버전의 Management Studio를 사용하는 것이 좋습니다. [SQL Server Management Studio를 업데이트합니다](https://msdn.microsoft.com/library/mt238290.aspx).
+> Microsoft Azure 및 SQL Database에 대한 업데이트와 동기화 상태를 유지하려면 항상 최신 버전의 Management Studio를 사용하는 것이 좋습니다. [SQL Server Management Studio를 업데이트합니다](https://msdn.microsoft.com/library/mt238290.aspx).
 > 
 > 
 
@@ -72,7 +64,7 @@ CREATE TABLE WebsiteUserInfo
 이 경우에는 더 큰 데이터 집합으로 더 긴 데이터 기록에 걸친 시간 기반 추세 분석을 수행하려고 합니다. 그러므로 기록 테이블에 대한 저장소로 클러스터된 columnstore 인덱스를 선택합니다. 클러스터된 columnstore는 분석 쿼리를 훌륭하게 압축하고 좋은 성능을 제공합니다. 임시 테이블은 현재 및 임시 테이블에서 완전히 독립적으로 인덱스를 구성하는 유연성을 제공합니다. 
 
 > [!NOTE]
-> Columnstore 인덱스는 프리미엄 서비스 계층에서만 사용할 수 있습니다.
+> Columnstore 인덱스는 Premium 계층 및 S3 이상 표준 계층에서 사용할 수 있습니다.
 >
 
 다음 스크립트는 기록 테이블에서 기본 인덱스를 클러스터된 columnstore로 변경하는 방법을 보여줍니다.
@@ -118,7 +110,7 @@ UPDATE WebsiteUserInfo  SET [PagesVisited] = 5
 WHERE [UserID] = 1;
 ````
 
-실제 작업이 발생 했을 때 정확한 시간 및 기록 데이터가 이후 분석을 위해 유지되는 방법을 업데이트 쿼리에서 알 필요는 없습니다. 모든 측면이 Azure SQL 데이터베이스에서 자동으로 처리됩니다. 다음 다이어그램에서는 모든 업데이트에서 기록 데이터를 생성하는 방법을 보여줍니다.
+실제 작업이 발생 했을 때 정확한 시간 및 기록 데이터가 이후 분석을 위해 유지되는 방법을 업데이트 쿼리에서 알 필요는 없습니다. 모든 측면이 Azure SQL Database에서 자동으로 처리됩니다. 다음 다이어그램에서는 모든 업데이트에서 기록 데이터를 생성하는 방법을 보여줍니다.
 
 ![TemporalArchitecture](./media/sql-database-temporal-tables/AzureTemporal5.png)
 
@@ -164,7 +156,7 @@ WHERE [UserID] = 1;
 ![TemporalGraph](./media/sql-database-temporal-tables/AzureTemporal6.png)
 
 ## <a name="evolving-table-schema"></a>테이블 스키마 진화
-일반적으로 앱 개발을 수행하는 동안 임시 테이블 스키마를 변경해야 합니다. 이를 위해 일반적인 ALTER TABLE 문을 실행하면 Azure SQL 데이터베이스가 변경 내용을 기록 테이블에 적절하게 전달합니다. 다음 스크립트는 추적에 대한 추가 특성을 추가하는 방법을 보여줍니다.
+일반적으로 앱 개발을 수행하는 동안 임시 테이블 스키마를 변경해야 합니다. 이를 위해 일반적인 ALTER TABLE 문을 실행하면 Azure SQL Database가 변경 내용을 기록 테이블에 적절하게 전달합니다. 다음 스크립트는 추적에 대한 추가 특성을 추가하는 방법을 보여줍니다.
 
 ````
 /*Add new column for tracking source IP address*/
@@ -191,7 +183,7 @@ ALTER TABLE dbo.WebsiteUserInfo
 또는 최신 [SSDT](https://msdn.microsoft.com/library/mt204009.aspx) 를 사용하여 데이터베이스(온라인 모드) 또는 데이터베이스 프로젝트(오프라인 모드)의 일부에 연결되어 있는 동안 임시 테이블 스키마를 변경합니다.
 
 ## <a name="controlling-retention-of-historical-data"></a>과거 데이터의 보존 제어
-기록 테이블에서는 시스템 버전 임시 테이블로 일반 테이블보다 데이터베이스 크기를 늘릴 수 있습니다. 점점 커지는 기록 테이블은 임시 쿼리에 대한 성능세를 부과할 뿐만 아니라 순수 저장소 비용으로 인해 문제가 될 수 있습니다. 따라서 기록 테이블에 데이터를 관리하기 위한 데이터 보존 정책을 개발하는 것은 모든 임시 테이블의 수명 주기를 계획하고 관리하는 중요한 부분입니다. Azure SQL 데이터베이스로 임시 테이블에서 과거 데이터를 관리하는 데 다음 방법 중 하나를 사용할 수 있습니다.
+기록 테이블에서는 시스템 버전 임시 테이블로 일반 테이블보다 데이터베이스 크기를 늘릴 수 있습니다. 점점 커지는 기록 테이블은 임시 쿼리에 대한 성능세를 부과할 뿐만 아니라 순수 저장소 비용으로 인해 문제가 될 수 있습니다. 따라서 기록 테이블에 데이터를 관리하기 위한 데이터 보존 정책을 개발하는 것은 모든 임시 테이블의 수명 주기를 계획하고 관리하는 중요한 부분입니다. Azure SQL Database로 임시 테이블에서 과거 데이터를 관리하는 데 다음 방법 중 하나를 사용할 수 있습니다.
 
 * [테이블 분할](https://msdn.microsoft.com/library/mt637341.aspx#Anchor_2)
 * [사용자 지정 정리 스크립트](https://msdn.microsoft.com/library/mt637341.aspx#Anchor_3)
@@ -199,5 +191,4 @@ ALTER TABLE dbo.WebsiteUserInfo
 ## <a name="next-steps"></a>다음 단계
 임시 테이블에서 자세한 내용은 [MSDN 설명서](https://msdn.microsoft.com/library/dn935015.aspx)를 확인합니다.
 Channel 9을 방문하여 [실제 고객 임시 구현 성공 사례](https://channel9.msdn.com/Blogs/jsturtevant/Azure-SQL-Temporal-Tables-with-RockStep-Solutions)를 듣고 [라이브 임시 데모](https://channel9.msdn.com/Shows/Data-Exposed/Temporal-in-SQL-Server-2016)를 시청합니다.
-
 

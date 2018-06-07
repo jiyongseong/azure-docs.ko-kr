@@ -15,12 +15,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 04/17/2017
 ms.author: cherylmc
-translationtype: Human Translation
-ms.sourcegitcommit: db7cb109a0131beee9beae4958232e1ec5a1d730
 ms.openlocfilehash: 2bd0cf8be87937044ad515a2c6f253b1711bb2bf
-ms.lasthandoff: 04/18/2017
-
-
+ms.sourcegitcommit: b5c6197f997aa6858f420302d375896360dd7ceb
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/21/2017
 ---
 # <a name="configure-a-virtual-network-gateway-for-expressroute-using-the-azure-portal"></a>Azure Portal을 사용하여 ExpressRoute에 대한 가상 네트워크 게이트웨이 구성
 > [!div class="op_single_selector"]
@@ -40,8 +39,8 @@ ms.lasthandoff: 04/18/2017
 
 **구성 참조 목록**
 
-* 가상 네트워크 이름 = "TestVNet"
-* 가상 네트워크 주소 공간: 192.168.0.0/16
+* Virtual Network 이름 = "TestVNet"
+* Virtual Network 주소 공간: 192.168.0.0/16
 * 서브넷 이름= “FrontEnd” 
     * 서브넷 주소 공간 = “192.168.1.0/24”
 * 리소스 그룹: "TestRG"
@@ -70,7 +69,7 @@ ms.lasthandoff: 04/18/2017
 
 ## <a name="create-the-virtual-network-gateway"></a>가상 네트워크 게이트웨이 만들기
 
-1. 포털의 왼쪽에서 **+**를 클릭하고 검색에서 '가상 네트워크 게이트웨이'를 입력합니다. 검색 결과에서 **가상 네트워크 게이트웨이**를 찾아서 항목을 클릭합니다. **가상 네트워크 게이트웨이** 블레이드의 아래쪽에서 **만들기**를 클릭합니다. 그러면 **가상 네트워크 게이트웨이 만들기** 블레이드가 열립니다.
+1. 포털의 왼쪽에서 **+**를 클릭하고 검색에서 'Virtual Network 게이트웨이'를 입력합니다. 검색 결과에서 **가상 네트워크 게이트웨이**를 찾아서 항목을 클릭합니다. **가상 네트워크 게이트웨이** 블레이드의 아래쪽에서 **만들기**를 클릭합니다. 그러면 **가상 네트워크 게이트웨이 만들기** 블레이드가 열립니다.
 2. **가상 네트워크 게이트웨이 만들기** 블레이드에서 가상 네트워크 게이트웨이의 값을 채웁니다.
 
     ![가상 네트워크 게이트웨이 만들기 블레이드의 필드](./media/expressroute-howto-add-gateway-portal-resource-manager/gw.png "가상 네트워크 게이트웨이 만들기 블레이드의 필드")
@@ -87,4 +86,4 @@ ms.lasthandoff: 04/18/2017
 14. **만들기** 를 클릭하여 게이트웨이 만들기를 시작합니다. 설정이 검증되었으며 게이트웨이가 배포됩니다. 가상 네트워크 게이트웨이 만들기는 완료되는 데 최대 45분까지 소요됩니다.
 
 ## <a name="next-steps"></a>다음 단계
-VNet 게이트웨이를 만든 후 VNet을 Express 경로 회로에 연결할 수 있습니다. [가상 네트워크를 Express 경로 회로에 연결](expressroute-howto-linkvnet-portal-resource-manager.md)을 참조하세요.
+VNet 게이트웨이를 만든 후 VNet을 ExpressRoute 회로에 연결할 수 있습니다. [Virtual Network를 ExpressRoute 회로에 연결](expressroute-howto-linkvnet-portal-resource-manager.md)을 참조하세요.

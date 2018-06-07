@@ -1,0 +1,48 @@
+- name: Azure의 Chef Software 설명서
+  href: ./index.yml
+- name: 개요
+  items:
+    - name: Azure의 Chef 정보
+      href: ./chef-overview.md
+    - name: Azure의 Habitat 정보
+      href: ./chef-habitat-overview.md
+    - name: Azure의 InSpec 정보
+      href: ./chef-inspec-overview.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: Chef
+      expanded: true
+      items:
+        - name: Azure Portal을 사용하여 Chef 설치
+          href: ./chef-extension-portal.md
+- name: 자습서
+  items:
+    - name: Chef
+      items:
+        - name: Windows VM 만들기
+          href: /azure/virtual-machines/windows/chef-automation
+- name: 참고 자료
+  items:
+    - name: Azure Chef 확장
+      href: 'https://docs.chef.io/azure_portal.html#azure-chef-extension'
+- name: 리소스
+  items:
+    - name: Chef 자동화
+      items:
+        - name: Chef 자동화 개요
+          href: 'https://docs.chef.io/chef_automate.html'
+        - name: Chef 자동화 설치 가이드
+          href: 'https://docs.chef.io/install_chef_automate.html'
+        - name: Azure Marketplace에서 Chef 자동화
+          href: 'https://azuremarketplace.microsoft.com/en-us/marketplace/apps/chef-software.chef-automate'
+    - name: Chef Software 뉴스
+      items:
+        - name: Chef Software 블로그
+          href: 'https://blog.chef.io/'
+- name: 도구
+  items:
+    - name: Chef Visual Studio Team Services 확장
+      href: 'https://marketplace.visualstudio.com/items?itemName=chef-software.vsts-chef-tasks'
+    - name: Habitat Visual Studio Team Services 확장
+      href: 'https://marketplace.visualstudio.com/items?itemName=chef-software.vsts-habitat-tasks'

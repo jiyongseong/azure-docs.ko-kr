@@ -10,19 +10,17 @@ tags: azure-vpn-gateway
 ms.assetid: 
 ms.service: vpn-gateway
 ms.devlang: na
-ms.topic: article
+ms.topic: troubleshooting
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 07/04/2017
+ms.date: 11/03/2017
 ms.author: delhan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: cb4d075d283059d613e3e9d8f0a6f9448310d96b
-ms.openlocfilehash: c3182f14623fc53482ab13fbf4abf58e4e2c50d8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/26/2017
-
+ms.openlocfilehash: cc45d84ea9a5eb4c2eaefb5a3ac321feb2d896d2
+ms.sourcegitcommit: b07d06ea51a20e32fdc61980667e801cb5db7333
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/08/2017
 ---
-
 # <a name="community-suggested-third-party-vpn-or-firewall-device-settings-for-azure-vpn-gateway"></a>Azure VPN Gateway에 대해 커뮤니티에서 제안한 타사 VPN 또는 방화벽 장치 설정
 
 이 문서에서는 Azure VPN Gateway와 함께 사용되는 타사 VPN 또는 방화벽 장치에 대해 제안된 몇 가지 솔루션을 제공합니다.
@@ -49,8 +47,7 @@ ms.lasthandoff: 06/26/2017
 
 ## <a name="next-step"></a>다음 단계
 
-[Azure 게이트웨이 설정](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-devices#a-nameipsecaipsecike-parameters)
+[Azure 게이트웨이 설정](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpn-devices#a-nameipsecaipsecike-parameters)
 
-[알려진 호환 장치](https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpn-devices#validated-vpn-devices)
-
+[알려진 호환 장치](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpn-devices#validated-vpn-devices)
 

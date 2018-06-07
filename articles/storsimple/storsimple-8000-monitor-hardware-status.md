@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 04/04/2017
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
 ms.openlocfilehash: 90724099842eac513c39dccf113ad1c0a63983f2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-the-storsimple-device-manager-service-to-monitor-hardware-components-and-status"></a>StorSimple 장치 관리자 서비스를 사용하여 하드웨어 구성 요소 및 상태 모니터링
 ## <a name="overview"></a>개요
@@ -148,5 +146,4 @@ ms.lasthandoff: 07/08/2017
 * 성능 저하 또는 실패 상태의 장치 구성 요소 문제를 해결해야 하는 경우 [StorSimple 모니터링 표시기](storsimple-monitoring-indicators.md)를 참조하세요.
 * 오류가 발생한 하드웨어 구성 요소를 교체하려면 [StorSimple 하드웨어 구성 요소 교체](storsimple-hardware-component-replacement.md)를 참조하세요.
 * 장치 문제가 계속되면 [Microsoft 지원에 문의](storsimple-8000-contact-microsoft-support.md)하세요.
-
 

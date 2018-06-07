@@ -1,33 +1,27 @@
 ---
-title: "인덱스 만들기(.NET API - Azure Search) | Microsoft Docs"
-description: "Azure Search .NET SDK를 사용하여 코드에 인덱스를 만듭니다."
-services: search
-documentationcenter: 
+title: 인덱스 만들기(.NET API - Azure Search) | Microsoft Docs
+description: Azure Search .NET SDK를 사용하여 코드에 인덱스를 만듭니다.
 author: brjohnstmsft
-manager: jhubbard
-editor: 
+manager: jlembicz
 tags: azure-portal
-ms.assetid: 3a851647-fc7b-4fb6-8506-6aaa519e77cd
+services: search
 ms.service: search
 ms.devlang: dotnet
-ms.workload: search
-ms.topic: get-started-article
-ms.tgt_pltfrm: na
+ms.topic: quickstart
 ms.date: 05/22/2017
 ms.author: brjohnst
+ms.openlocfilehash: 7e7d1f8110d8470fe7596633563529f397c5551e
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 2f2160f9b4383f9220c81a7233612a767e296109
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="create-an-azure-search-index-using-the-net-sdk"></a>.NET SDK를 사용하여 Azure Search 인덱스 만들기
 > [!div class="op_single_selector"]
 > * [개요](search-what-is-an-index.md)
 > * [포털](search-create-index-portal.md)
 > * [.NET](search-create-index-dotnet.md)
-> * [REST](search-create-index-rest-api.md)
+> * [REST (영문)](search-create-index-rest-api.md)
 > 
 > 
 
@@ -192,5 +186,4 @@ serviceClient.Indexes.Delete("hotels");
 
 ## <a name="next-steps"></a>다음 단계
 Azure Search 인덱스를 만든 후에 데이터를 검색하기 시작할 수 있도록 [콘텐츠를 인덱스에 업로드](search-what-is-data-import.md) 할 준비가 되었습니다.
-
 

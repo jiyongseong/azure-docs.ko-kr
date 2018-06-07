@@ -1,13 +1,13 @@
 ---
-title: "Azure Linux Virtual Machine에서 Oracle Database 12c 데이터베이스 백업 및 복구 | Microsoft Docs"
-description: "Azure 환경에서 Oracle Database 12c 데이터베이스를 백업하고 복구하는 방법을 알아봅니다."
+title: Azure Linux Virtual Machine에서 Oracle Database 12c 데이터베이스 백업 및 복구 | Microsoft Docs
+description: Azure 환경에서 Oracle Database 12c 데이터베이스를 백업하고 복구하는 방법을 알아봅니다.
 services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: v-shiuma
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.devlang: na
 ms.topic: article
@@ -15,14 +15,13 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 5/17/2017
 ms.author: rclaus
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 9a2293f13b90e9a4cb11b4169fad969dd622a9a6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
+ms.openlocfilehash: e804fd17c3dbe9df9e9dc258e67b8f9192c1f8ad
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32193108"
 ---
-
 # <a name="back-up-and-recover-an-oracle-database-12c-database-on-an-azure-linux-virtual-machine"></a>Azure Linux Virtual Machine에서 Oracle Database 12c 데이터베이스 백업 및 복구
 
 Azure CLI를 사용하여 명령줄 프롬프트 또는 스크립트를 사용하여 Azure 리소스를 만들고 관리할 수 있습니다. 이 문서에서는 Azure Marketplace 갤러리 이미지에서 Oracle Database 12c 데이터베이스를 배포하는 데 Azure CLI의 스크립트를 사용합니다.
@@ -171,7 +170,7 @@ Azure CLI를 사용하여 명령줄 프롬프트 또는 스크립트를 사용�
 
 4. JSON 파일을 편집합니다.
 
-    `PreScriptLocation` 및 `PostScriptlocation` 매개 변수를 포함하도록 VMSnapshotScriptPluginConfig.json 파일을 편집합니다. 예:
+    `PreScriptLocation` 및 `PostScriptlocation` 매개 변수를 포함하도록 VMSnapshotScriptPluginConfig.json 파일을 편집합니다. 예: 
 
     ```azurecli
     {
@@ -264,7 +263,7 @@ Azure CLI를 사용하여 명령줄 프롬프트 또는 스크립트를 사용�
     # /etc/azure/post_script.sh
     ```
 
-자세한 내용은 [Linux VM에 대한 응용 프로그램 일치 백업](https://azure.microsoft.com/en-us/blog/announcing-application-consistent-backup-for-linux-vms-using-azure-backup/)을 참조하세요.
+자세한 내용은 [Linux VM에 대한 응용 프로그램 일치 백업](https://azure.microsoft.com/blog/announcing-application-consistent-backup-for-linux-vms-using-azure-backup/)을 참조하세요.
 
 
 ### <a name="step-5-use-azure-recovery-services-vaults-to-back-up-the-vm"></a>5 단계: Azure Recovery Services 자격 증명 모음을 사용하여 VM 백업
@@ -281,34 +280,34 @@ Azure CLI를 사용하여 명령줄 프롬프트 또는 스크립트를 사용�
 
     ![Recovery Services 자격 증명 모음 세부 정보 페이지](./media/oracle-backup-recovery/recovery_service_03.png)
 
-4.  **myVault** 블레이드에서 **백업**을 클릭합니다.
+4.  **myVault** 블레이드에서 **Backup**을 클릭합니다.
 
     ![Recovery Services 자격 증명 모음 백업 페이지](./media/oracle-backup-recovery/recovery_service_04.png)
 
-5.  **백업 목표** 블레이드에서 **Azure** 및 **가상 컴퓨터**의 기본 값을 사용합니다. **확인**을 클릭합니다.
+5.  **Backup 목표** 블레이드에서 **Azure** 및 **가상 머신**의 기본 값을 사용합니다. **확인**을 클릭합니다.
 
     ![Recovery Services 자격 증명 모음 세부 정보 페이지](./media/oracle-backup-recovery/recovery_service_05.png)
 
-6.  **백업 정책**의 경우 **DefaultPolicy**를 사용하거나 **정책 새로 만들기**를 선택합니다. **확인**을 클릭합니다.
+6.  **Backup 정책**의 경우 **DefaultPolicy**를 사용하거나 **정책 새로 만들기**를 선택합니다. **확인**을 클릭합니다.
 
     ![Recovery Services 자격 증명 모음 백업 정책 세부 정보 페이지](./media/oracle-backup-recovery/recovery_service_06.png)
 
-7.  **가상 컴퓨터 선택** 블레이드에서 **myVM1** 확인란을 선택한 다음 **확인**을 클릭합니다. **백업 사용** 단추를 클릭합니다.
+7.  **가상 머신 선택** 블레이드에서 **myVM1** 확인란을 선택한 다음 **확인**을 클릭합니다. **백업 사용** 단추를 클릭합니다.
 
     ![백업할 Recovery Services 자격 증명 모음 항목 세부 정보 페이지](./media/oracle-backup-recovery/recovery_service_07.png)
 
     > [!IMPORTANT]
     > **백업 사용**을 클릭한 후, 백업 프로세스는 예정된 시간이 만료될 때까지 시작되지 않습니다. 즉시 백업을 시작하려면 다음 단계를 완료합니다.
 
-8.  **myVault-백업 항목** 블레이드의 **백업 항목 수**에서 백업 항목 수를 선택합니다.
+8.  **myVault-Backup 항목** 블레이드의 **Backup 항목 수**에서 백업 항목 수를 선택합니다.
 
     ![Recovery Services 자격 증명 모음 myVault 세부 정보 페이지](./media/oracle-backup-recovery/recovery_service_08.png)
 
-9.  **백업 항목(Azure Virtual Machine)** 블레이드에서 페이지의 오른쪽에 있는 줄임표(**...**) 단추를 클릭한 다음 **지금 백업**을 클릭합니다.
+9.  **Backup 항목(Azure Virtual Machine)** 블레이드에서 페이지의 오른쪽에 있는 줄임표(**...**) 단추를 클릭한 다음 **지금 Backup**을 클릭합니다.
 
-    ![Recovery Services 자격 증명 모음 지금 백업 명령](./media/oracle-backup-recovery/recovery_service_09.png)
+    ![Recovery Services 자격 증명 모음 지금 Backup 명령](./media/oracle-backup-recovery/recovery_service_09.png)
 
-10. **백업** 단추를 클릭합니다. 백업 프로세스가 완료될 때까지 기다립니다. 그런 다음, [6단계: 데이터베이스 파일 제거](#step-6-remove-the-database-files)로 이동합니다.
+10. **Backup** 단추를 클릭합니다. 백업 프로세스가 완료될 때까지 기다립니다. 그런 다음, [6단계: 데이터베이스 파일 제거](#step-6-remove-the-database-files)로 이동합니다.
 
     백업 작업의 상태를 보려면 **작업**을 클릭합니다.
 
@@ -344,7 +343,7 @@ Azure CLI를 사용하여 명령줄 프롬프트 또는 스크립트를 사용�
 ## <a name="restore-the-deleted-files-from-the-recovery-services-vaults"></a>Recovery Services 자격 증명 모음에서 삭제된 파일 복원
 삭제된 파일을 복원하려면 다음 단계를 완료합니다.
 
-1. Azure Portal에서 *myVault* Recovery Services 자격 증명 모음 항목을 검색합니다. **개요** 블레이드의 **백업 항목**에서 항목의 수를 선택합니다.
+1. Azure Portal에서 *myVault* Recovery Services 자격 증명 모음 항목을 검색합니다. **개요** 블레이드의 **Backup 항목**에서 항목의 수를 선택합니다.
 
     ![Recovery Services 자격 증명 모음 myVault 백업 항목](./media/oracle-backup-recovery/recovery_service_12.png)
 
@@ -352,7 +351,7 @@ Azure CLI를 사용하여 명령줄 프롬프트 또는 스크립트를 사용�
 
     ![Recovery Services 자격 증명 모음 Azure Virtual Machine 백업 항목 수](./media/oracle-backup-recovery/recovery_service_13.png)
 
-3. **myvm1** 블레이드에서 **파일 복구(미리 보기)**를 클릭합니다.
+3. **myvm1** 블레이드에서 **파일 복구(미리 보기)** 를 클릭합니다.
 
     ![Recovery Services 자격 증명 모음 파일 복구 페이지의 스크린샷](./media/oracle-backup-recovery/recovery_service_14.png)
 
@@ -465,11 +464,11 @@ Recovery Services 자격 증명 모음에서 삭제된 파일을 복원하는 �
 
     ![myVault 항목](./media/oracle-backup-recovery/recover_vm_02.png)
 
-2.  **개요** 블레이드의 **백업 항목**에서 항목의 수를 선택합니다.
+2.  **개요** 블레이드의 **Backup 항목**에서 항목의 수를 선택합니다.
 
     ![myVault 백업 항목](./media/oracle-backup-recovery/recover_vm_03.png)
 
-3.  **백업 항목(Azure Virtual Machine)** 블레이드에서 **myvm1**을 선택합니다.
+3.  **Backup 항목(Azure Virtual Machine)** 블레이드에서 **myvm1**을 선택합니다.
 
     ![VM 복구 페이지](./media/oracle-backup-recovery/recover_vm_04.png)
 
@@ -483,7 +482,7 @@ Recovery Services 자격 증명 모음에서 삭제된 파일을 복원하는 �
 
     응용 프로그램 일치 백업을 사용하는 경우 파란색 세로 막대가 나타납니다.
 
-6.  **복원 구성** 블레이드에서 가상 컴퓨터 이름을 선택하고 리소스 그룹을 선택한 다음, **확인**을 클릭합니다.
+6.  **복원 구성** 블레이드에서 가상 머신 이름을 선택하고 리소스 그룹을 선택한 다음, **확인**을 클릭합니다.
 
     ![복원 구성 값](./media/oracle-backup-recovery/recover_vm_07.png)
 
@@ -491,7 +490,7 @@ Recovery Services 자격 증명 모음에서 삭제된 파일을 복원하는 �
 
 8.  복원 프로세스의 상태를 보려면 **작업**을 클릭한 다음, **백업 작업**을 클릭합니다.
 
-    ![백업 작업 상태 명령](./media/oracle-backup-recovery/recover_vm_08.png)
+    ![Backup 작업 상태 명령](./media/oracle-backup-recovery/recover_vm_08.png)
 
     다음 그림에서는 복원 프로세스의 상태를 보여 줍니다.
 
@@ -568,7 +567,6 @@ az group delete --name myResourceGroup
 [자습서: 고가용성 VM 만들기](../../linux/create-cli-complete.md)
 
 [VM 배포 Azure CLI 샘플 탐색](../../linux/cli-samples.md)
-
 
 
 

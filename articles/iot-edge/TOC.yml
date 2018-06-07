@@ -1,0 +1,138 @@
+- name: Azure IoT 기본 사항
+  href: ../iot-fundamentals/index.yml
+- name: Azure IoT Edge 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: About Azure IoT Edge
+      href: how-iot-edge-works.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: 에지에 배포 - Linux/Mac
+      href: quickstart-linux.md
+    - name: 에지에 배포 - Windows
+      href: quickstart.md
+- name: 자습서
+  items:
+    - name: Edge 장치 시뮬레이션 - Linux/Mac
+      href: tutorial-simulate-device-linux.md
+    - name: Edge 장치 시뮬레이션 - Windows
+      href: tutorial-simulate-device-windows.md
+    - name: 모듈로 코드 배포
+      items:
+        - name: 'C#'
+          href: tutorial-csharp-module.md
+        - name: 파이썬
+          href: tutorial-python-module.md
+    - name: Azure Stream Analytics 배포
+      href: tutorial-deploy-stream-analytics.md
+    - name: Azure Machine Learning 배포
+      href: tutorial-deploy-machine-learning.md
+    - name: Azure Functions 배포
+      href: tutorial-deploy-function.md
+- name: 방법 가이드
+  items:
+    - name: 게이트웨이 만들기
+      items:
+        - name: 투명 게이트웨이 만들기
+          href: how-to-create-transparent-gateway.md
+        - name: Modbus 게이트웨이
+          href: deploy-modbus-gateway.md
+    - name: Azure CLI 2.0용 IoT 확장 사용
+      href: tutorial-create-deployment-with-cli-iot-extension.md
+    - name: 대규모 배포 및 모니터링
+      href: how-to-deploy-monitor.md
+    - name: IoT Core 장치 프로비전
+      href: how-to-install-iot-core.md
+    - name: VS Code를 사용하여 IoT Edge 솔루션 개발
+      items:
+        - name: 여러 모듈로 작업
+          href: tutorial-multiple-modules-in-vscode.md
+        - name: 'C# 모듈 디버그'
+          href: how-to-vscode-debug-csharp-module.md
+        - name: Azure Functions 디버그
+          href: how-to-vscode-debug-azure-function.md
+    - name: VSTS의 CI/CD
+      href: how-to-ci-cd.md
+    - name: 에지에 데이터 저장
+      href: sql-storage.md
+    - name: 문제 해결
+      href: troubleshoot.md
+- name: 개념
+  items:
+    - name: IoT Edge 모듈
+      href: iot-edge-modules.md
+      items:
+        - name: 개발
+          href: module-development.md
+        - name: 컴퍼지션
+          href: module-composition.md
+        - name: 에지 에이전트 및 허브 속성
+          href: module-edgeagent-edgehub.md
+    - name: IoT Edge 런타임
+      href: iot-edge-runtime.md
+    - name: 배포
+      href: module-deployment-monitoring.md
+    - name: IoT Edge 장치를 게이트웨이로
+      href: iot-edge-as-gateway.md
+    - name: 보안
+      href: security.md
+    - name: IoT Edge 용어집
+      href: iot-edge-glossary.md
+- name: 관련 항목
+  items:
+    - name: 솔루션
+      items:
+        - name: IoT Suite 미리 구성된 솔루션
+          href: /azure/iot-suite
+        - name: IoT Central
+          href: 'https://docs.microsoft.com/microsoft-iot-central/'
+    - name: 플랫폼 서비스
+      items:
+        - name: IoT Hub
+          href: /azure/iot-hub
+        - name: IoT Hub Device Provisioning 서비스
+          href: /azure/iot-dps
+        - name: 지도
+          href: /azure/azure-maps
+        - name: 서비스 SDK
+          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-service-sdks'
+        - name: Time Series Insights
+          href: /azure/time-series-insights
+    - name: Edge
+      items:
+        - name: IoT Edge
+          href: /azure/iot-edge
+        - name: IoT 장치 SDK
+          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-device-sdks'
+- name: 리소스
+  items:
+    - name: IoT용 Azure Certified 장치 카탈로그
+      href: 'https://catalog.azureiotsuite.com/'
+    - name: Azure IoT 개발자 센터
+      href: 'https://azure.microsoft.com/develop/iot/'
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/?category=internet-of-things'
+    - name: DeviceExplorer 도구
+      href: 'https://github.com/Azure/azure-iot-sdk-csharp/tree/master/tools/DeviceExplorer'
+    - name: iothub-diagnostics 도구
+      href: 'https://github.com/Azure/iothub-diagnostics'
+    - name: iothub-explorer tool
+      href: 'https://github.com/Azure/iothub-explorer'
+    - name: 학습 경로
+      href: 'https://azure.microsoft.com/documentation/learning-paths/iot-hub/'
+    - name: MSDN 포럼
+      href: 'https://social.msdn.microsoft.com/Forums/azure/home?forum=iotedge'
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/iot-hub/'
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'
+    - name: 서비스 업데이트
+      href: 'https://azure.microsoft.com/updates/?product=iot-hub'
+    - name: 스택 오버플로
+      href: 'http://stackoverflow.com/questions/tagged/azure-iot-hub'
+    - name: 기술 사례 연구
+      href: 'https://microsoft.github.io/techcasestudies/#technology=IoT&sortBy=featured'
+    - name: 동영상
+      href: 'https://azure.microsoft.com/documentation/videos/index/?services=iot-hub'

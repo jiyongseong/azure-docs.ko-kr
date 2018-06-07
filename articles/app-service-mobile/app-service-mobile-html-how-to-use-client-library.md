@@ -1,11 +1,11 @@
 ---
-title: "Azure Mobile Apps용 JavaScript SDK를 사용하는 방법"
-description: "Azure Mobile Apps에 v를 사용하는 방법"
+title: Azure Mobile Apps용 JavaScript SDK를 사용하는 방법
+description: Azure Mobile Apps에 v를 사용하는 방법
 services: app-service\mobile
 documentationcenter: javascript
-author: ggailey777
-manager: syntaxc4
-editor: 
+author: conceptdev
+manager: crdun
+editor: ''
 ms.assetid: 53b78965-caa3-4b22-bb67-5bd5c19d03c4
 ms.service: app-service-mobile
 ms.workload: mobile
@@ -13,18 +13,17 @@ ms.tgt_pltfrm: html
 ms.devlang: javascript
 ms.topic: article
 ms.date: 10/30/2016
-ms.author: glenga
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 013956232d1fdfdc1f35741c25294a37b7e9bd92
-ms.openlocfilehash: 3914d5bdc8feff7d7de5c6f7255396acade341b9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/07/2017
-
+ms.author: crdun
+ms.openlocfilehash: ba2eb5a7f888e4cffcd798259afa8194b4021025
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="how-to-use-the-javascript-client-library-for-azure-mobile-apps"></a>Azure Mobile Apps용 JavaScript 클라이언트 라이브러리를 사용하는 방법
 [!INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
 
-이 가이드에서는 최신 [Azure Mobile Apps용 JavaScript SDK]를 사용하여 일반적인 시나리오를 수행하는 방법을 알려줍니다. Azure Mobile Apps를 처음 접하는 경우 먼저 [Azure Mobile Apps 빠른 시작]을 완료하여 백 엔드를 만들고 테이블을 만듭니다. 이 가이드에서는 HTML/JavaScript 웹 응용 프로그램에서 모바일 백 엔드를 사용하는 데 초점을 둡니다.
+이 가이드에서는 최신 [Azure Mobile Apps용 JavaScript SDK]를 사용하여 일반적인 시나리오를 수행하는 방법을 알려줍니다. Azure Mobile Apps를 처음 접하는 경우 먼저 [Azure Mobile Apps 빠른 시작] 을 완료하여 백 엔드를 만들고 테이블을 만듭니다. 이 가이드에서는 HTML/JavaScript 웹 응용 프로그램에서 모바일 백 엔드를 사용하는 데 초점을 둡니다.
 
 ## <a name="supported-platforms"></a>지원되는 플랫폼
 브라우저 지원은 주요 브라우저인 Google Chrome, Microsoft Edge, Microsoft Internet Explorer 및 Mozilla Firefox의 최신 버전으로 제한됩니다.  SDK가 비교적 최신 브라우저와는 호환될 것으로 예상됩니다.
@@ -40,7 +39,7 @@ ms.lasthandoff: 02/07/2017
 npm install azure-mobile-apps-client --save
 ```
 
-또한 라이브러리는 Browserify 및 Webpack과 같은 CommonJS 환경 내에서 ES2015 모듈로 사용할 수 있으며 AMD 라이브러리로 사용할 수도 있습니다.  예:
+또한 라이브러리는 Browserify 및 Webpack과 같은 CommonJS 환경 내에서 ES2015 모듈로 사용할 수 있으며 AMD 라이브러리로 사용할 수도 있습니다.  예: 
 
 ```
 # For ECMAScript 5.1 CommonJS
@@ -58,7 +57,7 @@ import * as WindowsAzure from 'azure-mobile-apps-client';
 [!INCLUDE [app-service-mobile-html-js-library](../../includes/app-service-mobile-html-js-library.md)]
 
 ## <a name="auth"></a>방법: 사용자 인증
-Azure App Service는 Facebook, Google, Microsoft 계정 및 Twitter와 같이 다양한 외부 ID 공급자를 사용하여 앱 사용자의 인증 및 권한 부여를 지원합니다. 테이블에 대해 사용 권한을 설정하여 특정 작업을 위한 액세스를 인증된 사용자로만 제한할 수 있습니다. 인증된 사용자의 ID를 사용하여 서버 스크립트에 인증 규칙을 구현할 수도 있습니다. 자세한 내용은 [인증 시작] 자습서를 참조하세요.
+Azure App Service는 Facebook, Google, Microsoft 계정 및 Twitter와 같이 다양한 외부 ID 공급자를 사용하여 앱 사용자의 인증 및 권한 부여를 지원합니다. 테이블에 대해 사용 권한을 설정하여 특정 작업을 위한 액세스를 인증된 사용자로만 제한할 수 있습니다. 인증된 사용자의 ID를 사용하여 서버 스크립트에 인증 규칙을 구현할 수도 있습니다. 자세한 내용은 [인증 시작] 자습서를 참조하십시오.
 
 두 가지의 인증 흐름, 즉 서버 흐름과 클라이언트 흐름이 지원됩니다.  서버 흐름의 경우 공급자의 웹 인증 인터페이스를 사용하므로 인증 경험이 가장 단순합니다. 클라이언트 흐름의 경우 공급자별 SDK를 사용하므로 Single Sign-On과 같은 장치 특정 기능을 통해 심도 깊은 통합이 가능합니다.
 
@@ -106,5 +105,4 @@ Azure App Service는 Facebook, Google, Microsoft 계정 및 Twitter와 같이 �
 
 [Azure Portal]: https://portal.azure.com/
 [Azure Mobile Apps용 JavaScript SDK]: https://www.npmjs.com/package/azure-mobile-apps-client
-[Query object documentation]: https://msdn.microsoft.com/en-us/library/azure/jj613353.aspx
-
+[Query object documentation]: https://msdn.microsoft.com/library/azure/jj613353.aspx

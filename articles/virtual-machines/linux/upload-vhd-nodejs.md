@@ -1,10 +1,10 @@
 ---
-title: "Azure CLI 1.0으로 사용자 지정 Linux 이미지 업로드 | Microsoft Docs"
-description: "Resource Manager 배포 모델 및 Azure CLI 1.0을 사용하여 사용자 지정 Linux 이미지로 Azure에 VHD(가상 하드 디스크)를 만들고 업로드합니다."
+title: Azure CLI 1.0으로 사용자 지정 Linux 이미지 업로드 | Microsoft Docs
+description: Resource Manager 배포 모델 및 Azure CLI 1.0을 사용하여 사용자 지정 Linux 이미지로 Azure에 VHD(가상 하드 디스크)를 만들고 업로드합니다.
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
-manager: timlt
+manager: jeconnoc
 editor: tysonn
 tags: azure-resource-manager
 ms.assetid: a8c7818f-eb65-409e-aa91-ce5ae975c564
@@ -15,15 +15,14 @@ ms.devlang: na
 ms.topic: article
 ms.date: 10/10/2016
 ms.author: iainfou
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 99d18aa55ea7bd7abcb50ba32c8f6a5f130ec031
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: 6eb0cae2b70e0cbb9a4fb5fcab3a58d566d0f4d9
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="upload-and-create-a-linux-vm-from-custom-disk-image-by-using-the-azure-cli-10"></a>Azure CLI 1.0을 사용하여 사용자 지정 디스크 이미지에서 Linux VM 업로드 및 만들기
-이 문서에서는 Resource Manager 배포 모델을 사용하여 VHD(가상 하드 디스크)를 Azure에 업로드하고 이 사용자 지정 이미지에서 Linux VM을 만드는 방법을 설명합니다. 이 기능을 사용하면 Linux 배포판을 요구에 맞게 설치 및 구성하고 해당 VHD를 사용하여 Azure 가상 컴퓨터 (Vm)를 신속하게 만들 수 있습니다.
+이 문서에서는 Resource Manager 배포 모델을 사용하여 VHD(가상 하드 디스크)를 Azure에 업로드하고 이 사용자 지정 이미지에서 Linux VM을 만드는 방법을 설명합니다. 이 기능을 사용하면 Linux 배포판을 요구에 맞게 설치 및 구성하고 해당 VHD를 사용하여 Azure 가상 머신 (Vm)를 신속하게 만들 수 있습니다.
 
 
 ## <a name="cli-versions-to-complete-the-task"></a>태스크를 완료하기 위한 CLI 버전
@@ -130,7 +129,7 @@ Azure에서는 다양한 Linux 배포를 지원합니다( [보증 배포판](end
 
 
 ## <a name="create-a-resource-group"></a>리소스 그룹 만들기
-리소스 그룹은 가상 네트워킹 및 저장소와 같은 가상 컴퓨터를 지원하기 위해 논리적으로 모든 Azure 리소스를 모읍니다. [여기서 Azure 리소스 그룹](../../azure-resource-manager/resource-group-overview.md)에 대해 자세히 알아 봅니다. 사용자 지정 디스크 이미지를 업로드하고 VM을 만들기 전에 먼저 리소스 그룹을 만들어야 합니다. 
+리소스 그룹은 가상 네트워킹 및 저장소와 같은 가상 머신을 지원하기 위해 논리적으로 모든 Azure 리소스를 모읍니다. [여기서 Azure 리소스 그룹](../../azure-resource-manager/resource-group-overview.md)에 대해 자세히 알아 봅니다. 사용자 지정 디스크 이미지를 업로드하고 VM을 만들기 전에 먼저 리소스 그룹을 만들어야 합니다. 
 
 다음 예제에서는 `WestUS` 위치에 `myResourceGroup`이라는 리소스 그룹을 만듭니다.
 
@@ -139,7 +138,7 @@ azure group create myResourceGroup --location "WestUS"
 ```
 
 ## <a name="create-a-storage-account"></a>저장소 계정 만들기
-VM은 저장소 계정 내에서 페이지 blob으로 저장됩니다. [여기서 Azure Blob 저장소](../../storage/storage-introduction.md#blob-storage)에 대해 자세히 알아 봅니다. 사용자 지정 디스크 이미지 및 VM에 대한 저장소 계정을 만듭니다. 사용자 지정 디스크 이미지에서 만든 모든 VM는 그 이미지와 동일한 저장소 계정에 있어야 합니다.
+VM은 저장소 계정 내에서 페이지 blob으로 저장됩니다. [여기서 Azure Blob 저장소](../../storage/common/storage-introduction.md#blob-storage)에 대해 자세히 알아 봅니다. 사용자 지정 디스크 이미지 및 VM에 대한 저장소 계정을 만듭니다. 사용자 지정 디스크 이미지에서 만든 모든 VM는 그 이미지와 동일한 저장소 계정에 있어야 합니다.
 
 다음 예제에서는 이전에 만든 리소스 그룹에 `mystorageaccount`라는 저장소 계정을 만듭니다.
 
@@ -149,7 +148,7 @@ azure storage account create mystorageaccount --resource-group myResourceGroup \
 ```
 
 ## <a name="list-storage-account-keys"></a>저장소 계정 키 나열
-Azure는 각 저장소 계정에 대해 두 개의 512 비트 선택키를 생성합니다. 이러한 선택키는 쓰기 작업을 수행할 때와 같이 저장소 계정에 인증할 때에 사용됩니다. [여기서 저장소에 대한 액세스 관리](../../storage/storage-create-storage-account.md#manage-your-storage-account)에 대해 자세히 알아 봅니다. `azure storage account keys list` 명령을 사용하여 선택키를 볼 수 있습니다.
+Azure는 각 저장소 계정에 대해 두 개의 512 비트 선택키를 생성합니다. 이러한 선택키는 쓰기 작업을 수행할 때와 같이 저장소 계정에 인증할 때에 사용됩니다. [여기서 저장소에 대한 액세스 관리](../../storage/common/storage-create-storage-account.md#manage-your-storage-account)에 대해 자세히 알아 봅니다. `azure storage account keys list` 명령을 사용하여 선택키를 볼 수 있습니다.
 
 만든 저장소 계정에 대한 선택키를 봅니다.
 
@@ -247,5 +246,4 @@ azure group deployment create --resource-group myResourceGroup
 
 ## <a name="next-steps"></a>다음 단계
 사용자 지정 가상 디스크를 준비하고 업로드한 후 [Resource Manager 및 템플릿 사용하기](../../azure-resource-manager/resource-group-overview.md)에 관해 자세히 알아볼 수 있습니다. 또한 새 Vm에 [데이터 디스크 추가](add-disk.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) 를 고려할 수도 있습니다. 응용 프로그램이 액세스해야 할 Vm에서 실행되고 있다면 반드시 [포트 및 끝점 열기](nsg-quickstart.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)를 해야 합니다.
-
 

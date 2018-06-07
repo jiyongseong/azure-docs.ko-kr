@@ -1,0 +1,74 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Azure Search 설명서
+metadata:
+  document_id: 
+  title: Azure Search 설명서 - 자습서, 빠른 시작, API 참조
+  meta.description: Learn how to create an enterprise search solution over private, heterogenous content using Azure Search. Tutorials, API references, and other docs show you how to consolidate searchable content into a single fast index, queryable using simple-to-advanced syntax for a broad range of scenarios.
+  services: search
+  author: HeidiSteen
+  manager: cgronlun
+  ms.service: search
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 05/01/2018
+  ms.author: heidist
+  ms.openlocfilehash: ac99a23ede3a8adbf60d210b74f642ce4b0131a4
+  ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 05/10/2018
+abstract:
+  description: Azure Search를 사용하여 비공개, 이기종 콘텐츠에 대한 엔터프라이즈 검색 솔루션을 만드는 방법을 알아봅니다. 자습서, API 참조 및 기타 문서에서는 검색 가능한 콘텐츠를 광범위한 시나리오에서 단순 및 고급 구문을 통해 쿼리 가능한 단일 고속 인덱스로 통합하는 방법을 보여 줍니다. <p/><b>새 인지 검색 미리 보기입니다.</b> 시험판 REST API를 사용하여 AI 지원 알고리즘을 인덱싱 파이프라인에 바인딩합니다. 데이터를 추출하고 자연어 및 이미지 처리를 호출하여 Azure Search 인덱스에서 원시 비구조적 콘텐츠를 검색 가능한 콘텐츠로 변환합니다. <p/><a href="/azure/search/cognitive-search-quickstart-blob">리소스 및 샘플 데이터</a>를 시작하거나 <a href="/azure/search/cognitive-search-concept-intro">개념</a>에서 자세히 알아보세요.
+  aside:
+    image:
+      alt: 
+      height: 110
+      src: https://docs.microsoft.com/azure/search/media/index/search-page-callouts3.png
+      width: 250
+    title: Azure Search에 대해 알아보기(9:32)
+    href: https://channel9.msdn.com/Events/Connect/2016/138/player
+    width: 250
+sections:
+- title: 5분 빠른 시작
+  items:
+  - type: paragraph
+    text: 포털에서 Search 서비스를 시작한 후 C# 또는 REST로 인덱스를 정의, 로드 및 쿼리합니다.
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: /azure/search/media/index/portal.svg
+      text: Azure portal
+      href: https://docs.microsoft.com/azure/search/search-create-service-portal
+    - image:
+        src: /azure/search/media/index/logo_Csharp.svg
+      text: .NET
+      href: https://docs.microsoft.com/azure/search/search-create-index-dotnet
+    - image:
+        src: /azure/search/media/index/rest.svg
+      text: REST (영문)
+      href: https://docs.microsoft.com/azure/search/search-fiddler
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: .NET 또는 REST에서 코딩하거나 포털에서 빠른 개념 테스트를 시도해 보세요.
+  - type: list
+    style: ordered
+    items:
+    - html: <a href="/azure/search/cognitive-search-tutorial-blob">인식 기술 REST API 학습</a>
+    - html: <a href="/azure/search/search-howto-dotnet-sdk">.NET에서 Azure Search를 사용하는 방법</a>
+    - html: <a href="/azure/search/search-indexer-tutorial">.NET으로 Azure SQL Database 콘텐츠 인덱싱</a>
+    - html: <a href="/azure/search/search-semi-structured-data">REST를 사용하여 Azure Blob Storage에서 반구조적 데이터 인덱싱</a>
+    - html: <a href="/azure/search/search-synonyms-tutorial-sdk">동일한 용어에 대한 결과를 반환하도록 동의어 추가</a>
+    - html: <a href="/azure/search/search-get-started-portal">포털을 사용한 인덱싱 및 쿼리 테스트</a>
+- title: 참고 자료
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: 언어
+      html: <p><a href="/dotnet/api/?term=microsoft.azure.search">.NET</a></p><p><a href="/dotnet/api/?term=microsoft.azure.management.search">.NET(관리)</a></p><p><a href="http://azure-sdk-for-python.readthedocs.io/en/latest/ref/azure.mgmt.search.html">Python(관리)</a></p>
+    - title: REST (영문)
+      html: <p><a href="/rest/api/searchservice">서비스 API 참조</a></p><p><a href="/rest/api/searchmanagement">관리 API 참조</a></p>

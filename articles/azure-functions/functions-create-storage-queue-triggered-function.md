@@ -1,27 +1,26 @@
 ---
-title: "Azure에서 큐 메시지에 의해 트리거되는 함수 만들기 | Microsoft Docs"
-description: "Azure Functions를 사용하여 Azure Storage 큐에 제출된 메시지에 의해 호출되는 서버를 사용하지 않는 함수를 만듭니다."
+title: Azure에서 큐 메시지에 의해 트리거되는 함수 만들기 | Microsoft Docs
+description: Azure Functions를 사용하여 Azure Storage 큐에 제출된 메시지에 의해 호출되는 서버를 사용하지 않는 함수를 만듭니다.
 services: azure-functions
 documentationcenter: na
 author: ggailey777
-manager: erikre
-editor: 
-tags: 
+manager: cfowler
+editor: ''
+tags: ''
 ms.assetid: 361da2a4-15d1-4903-bdc4-cc4b27fc3ff4
 ms.service: functions
 ms.devlang: multiple
-ms.topic: get-started-article
+ms.topic: quickstart
 ms.tgt_pltfrm: multiple
 ms.workload: na
-ms.date: 05/31/2017
+ms.date: 03/28/2018
 ms.author: glenga
-ms.custom: mvc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 07584294e4ae592a026c0d5890686eaf0b99431f
-ms.openlocfilehash: ba8db575c8731e4f9067a6635e745da12c8667dd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/02/2017
-
+ms.custom: mvc, cc996988-fb4f-47
+ms.openlocfilehash: d9ab8115ad273101a0a25a094436bc0a24a45e68
+ms.sourcegitcommit: 34e0b4a7427f9d2a74164a18c3063c8be967b194
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="create-a-function-triggered-by-azure-queue-storage"></a>Azure Queue Storage에 의해 트리거되는 함수 만들기
 
@@ -34,8 +33,6 @@ Azure Storage 큐에 메시지가 제출될 때 트리거되는 함수를 만드
 - [Microsoft Azure Storage 탐색기](http://storageexplorer.com/)를 다운로드하고 설치합니다.
 
 - Azure 구독. 구독이 없으면 시작하기 전에 [계정](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)을 만드세요.
-
-[!INCLUDE [functions-portal-favorite-function-apps](../../includes/functions-portal-favorite-function-apps.md)]
 
 ## <a name="create-an-azure-function-app"></a>Azure Function 앱 만들기
 
@@ -53,15 +50,18 @@ Azure Storage 큐에 메시지가 제출될 때 트리거되는 함수를 만드
 
     ![Azure Portal에서 함수 빨리 시작하기 페이지](./media/functions-create-storage-queue-triggered-function/add-first-function.png)
 
-2. 원하는 언어에 해당하는 **QueueTrigger** 템플릿을 선택하고 테이블에 지정된 대로 설정을 사용합니다.
+2. 검색 필드에 `queue`를 입력한 다음 Queue Storage 트리거 템플릿에서 원하는 언어를 선택합니다.
 
-    ![저장소 큐 트리거 함수 만들기.](./media/functions-create-storage-queue-triggered-function/functions-create-queue-storage-trigger-portal.png)
+    ![저장소 큐 트리거 템플릿을 선택합니다.](./media/functions-create-storage-queue-triggered-function/functions-create-queue-storage-trigger-portal.png)
+
+3. 이미지 아래의 표에 지정된 설정을 사용합니다.
+    ![저장소 큐 트리거 기능을 구성합니다.](./media/functions-create-storage-queue-triggered-function/functions-create-queue-storage-trigger-portal-2.png)
     
     | 설정 | 제안 값 | 설명 |
     |---|---|---|
-    | **큐 이름**   | myqueue-items    | 저장소 계정에서 연결할 큐의 이름입니다. |
-    | **저장소 계정 연결** | AzureWebJobStorage | 함수 앱에 이미 사용된 저장소 계정 연결을 사용하거나 새로 만들 수 있습니다.  |
-    | **함수 이름 지정** | 함수 앱에서 고유 | 큐 트리거 함수의 이름입니다. |
+    | **Name** | 함수 앱에서 고유 | 큐 트리거 함수의 이름입니다. |
+    | **큐 이름**   | myqueue-items    | Storage 계정에서 연결할 큐의 이름입니다. |
+    | **Storage 계정 연결** | AzureWebJobStorage | 함수 앱에 이미 사용된 저장소 계정 연결을 사용하거나 새로 만들 수 있습니다.  |    
 
 3. **만들기**를 클릭하여 사용자의 함수를 만듭니다.
 
@@ -69,13 +69,13 @@ Azure Storage 큐에 메시지가 제출될 때 트리거되는 함수를 만드
 
 ## <a name="create-the-queue"></a>큐 만들기
 
-1. 함수에서 **통합**을 클릭하고 **설명서**를 확장하여 **계정 이름** 및 **계정 키**를 모두 복사합니다. 이러한 자격 증명을 사용하여 저장소 계정에 연결합니다. 저장소 계정에 이미 연결된 경우 4단계로 건너뜁니다.
+1. 함수에서 **통합**을 클릭하고 **설명서**를 확장하여 **계정 이름** 및 **계정 키**를 모두 복사합니다. 이러한 자격 증명을 사용하여 Azure Storage 탐색기에서 저장소 계정에 연결합니다. 저장소 계정에 이미 연결된 경우 4단계로 건너뜁니다.
 
-    ![저장소 계정 연결 자격 증명 가져오기.](./media/functions-create-storage-queue-triggered-function/functions-storage-account-connection.png)v
+    ![Storage 계정 연결 자격 증명 가져오기.](./media/functions-create-storage-queue-triggered-function/functions-storage-account-connection.png)
 
 1. [Microsoft Azure Storage 탐색기](http://storageexplorer.com/) 도구를 실행하고 왼쪽의 연결 아이콘을 클릭하고 **저장소 계정 이름 및 키 사용**을 선택하고 **다음**을 클릭합니다.
 
-    ![저장소 계정 탐색기 도구 실행.](./media/functions-create-storage-queue-triggered-function/functions-storage-manager-connect-1.png)
+    ![Storage 계정 탐색기 도구 실행.](./media/functions-create-storage-queue-triggered-function/functions-storage-manager-connect-1.png)
 
 1. 1단계에서 **계정 이름** 및 **계정 키**를 입력하고 **다음**을 클릭한 후 **연결**을 클릭합니다.
 

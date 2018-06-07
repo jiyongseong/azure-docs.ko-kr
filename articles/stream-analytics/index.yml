@@ -1,0 +1,83 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Stream Analytics 설명서
+metadata:
+  title: Azure Stream Analytics 설명서 - 자습서, API 참조
+  meta.description: Learn how to run IoT analytics in the cloud with fully-managed event processing. Analyze data in real time from applications, sensors, devices, and more.
+  services: stream-analytics
+  author: jasonwhowell
+  ms.author: jasonh
+  manager: kfile
+  ms.service: stream-analytics
+  ms.topic: landing-page
+  ms.date: 04/25/2018
+  ms.openlocfilehash: aad76cc87130e66908779c07b03d5db326f726ea
+  ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 04/28/2018
+abstract:
+  description: 완전히 관리되는 이벤트 처리 엔진인 Stream Analytics를 사용하여 클라우드에서 사물 인터넷(IoT) 분석을 실행하는 방법에 대해 알아봅니다. 자습서 및 기타 설명서에서는 응용 프로그램, 센서, 장치, 소셜 미디어 등에서 실시간으로 데이터를 분석하는 방법을 보여 줍니다.
+  aside:
+    image:
+      alt: 
+      height: 110
+      src: https://sec.ch9.ms/sessions/connect/T157.png
+      width: 250
+    title: Azure Stream Analytics를 사용하여 IoT Edge에 대해 실시간으로 분석합니다. (8:51)
+    href: https://azure.microsoft.com/en-us/resources/videos/connect-2017-real-time-analytics-on-iot-edge-with-azure-stream-analytics/
+    width: 250
+sections:
+- title: 5분 빠른 시작
+  items:
+  - type: paragraph
+    text: 첫 번째 Azure Stream Analytics 작업을 배포하는 방법에 대해 알아보세요.
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: media/index/stream-analytics.svg
+      text: Azure portal
+      href: https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-quick-create-portal
+    - image:
+        src: https://docs.microsoft.com/media/logos/logo_powershell.svg
+      text: PowerShell
+      href: https://docs.microsoft.com/en-us/azure/stream-analytics/stream-analytics-quick-create-powershell
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: Azure Stream Analytics 작업을 배포하고 관리고 모니터링하는 방법에 대해 알아보세요.
+  - type: list
+    style: ordered
+    items:
+    - html: <a href="stream-analytics-manage-job">Power BI 대시보드에서 전화 통화 데이터를 분석하고 결과를 시각화하는 Stream Analytics 작업 만들기</a>
+    - html: <a href="stream-analytics-with-azure-functions">Azure Stream Analytics 작업에서 Azure Functions 실행</a>
+    - html: <a href="stream-analytics-javascript-user-defined-functions">Azure Stream Analytics 작업에서 JavaScript 사용자 정의 함수 실행</a>
+- title: 무료 Pluralsight 동영상 교육
+  items:
+  - type: list
+    style: cards
+    className: cardsFTitle
+    items:
+    - title: Azure Stream Analytics 이해
+      href: https://www.pluralsight.com/courses/azure-stream-analytics-understanding
+      image:
+        src: https://docs.microsoft.com/media/logos/logo_pluralsight.svg
+        href: https://www.pluralsight.com/courses/azure-stream-analytics-understanding
+    - title: Azure 및 Power BI 스트리밍을 사용하여 실시간 데이터 제공
+      href: https://www.pluralsight.com/courses/azure-power-bi-streaming
+      image:
+        src: https://docs.microsoft.com/media/logos/logo_pluralsight.svg
+        href: https://www.pluralsight.com/courses/developing-dotnet-microsoft-azure-getting-started
+- title: 참고 자료
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: 명령줄
+      html: <p><a href="/powershell/resourcemanager/azurerm.streamanalytics/v2.3.0/azurerm.streamanalytic">Azure PowerShell</a></p>
+    - title: 언어
+      html: <p><a href="/dotnet/api/microsoft.azure.management.streamanalytics?view=azuremgmtstreamanalytics-1.8.3">.NET</a></p><p><a href="https://msdn.microsoft.com/azure/stream-analytics/reference/stream-analytics-query-language-reference">Stream Analytics 쿼리 언어</a></p>
+    - title: REST (영문)
+      html: <p><a href="/rest/api/streamanalytics">REST API 참조</a></p>

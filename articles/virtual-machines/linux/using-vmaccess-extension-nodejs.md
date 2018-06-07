@@ -1,11 +1,11 @@
 ---
-title: "VMAccess 확장을 사용하여 Azure Linux VM에 대한 액세스 권한 재설정 | Microsoft Docs"
-description: "VMAccess 확장을 사용하여 Azure Linux VM에 대한 액세스 권한 재설정"
+title: VMAccess 확장을 사용하여 Azure Linux VM에 대한 액세스 권한 재설정 | Microsoft Docs
+description: VMAccess 확장을 사용하여 Azure Linux VM에 대한 액세스 권한 재설정
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: vlivech
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
 ms.assetid: 261a9646-1f93-407e-951e-0be7226b3064
 ms.service: virtual-machines-linux
@@ -15,12 +15,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 10/25/2016
 ms.author: v-livech
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: d58bf287284673c0767a25289660db06aa8e5863
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: 5fb130fc2e448f3cbc648991ea6bebd5795bc78b
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="manage-users-ssh-and-check-or-repair-disks-on-azure-linux-vms-using-the-vmaccess-extension-with-the-azure-cli-10"></a>Azure CLI 1.0에서 VMAccess 확장을 사용하여 사용자, SSH 관리 및 Azure Linux VM의 디스크 검사 또는 복구
 이 문서는 VMAccess VM 확장을 사용하여 디스크를 검사 또는 복구하거나, 사용자 액세스를 다시 설정하거나, 사용자 계정을 관리하거나, Linux의 SSHD 구성을 다시 설정하는 방법을 설명합니다. 이 문서의 내용을 실행하기 위해 필요한 사항:
@@ -266,10 +265,9 @@ azure vm extension set \
 ## <a name="next-steps"></a>다음 단계
 실행 중인 Linux VM에서 변경을 수행하는 한 가지 방법은 Azure VMAccess 확장을 사용하여 Linux를 업데이트하는 것입니다.  cloud-init 및 Azure 템플릿 등의 도구를 사용하여 부팅 시 Linux VM을 수정할 수도 있습니다.
 
-[가상 컴퓨터 확장 및 기능 정보](../windows/extensions-features.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+[가상 머신 확장 및 기능 정보](../windows/extensions-features.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 
-[Linux VM 확장을 사용하여 Azure Resource Manager 템플릿 작성](../windows/extensions-authoring-templates.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+[Linux VM 확장을 사용하여 Azure Resource Manager 템플릿 작성](../windows/template-description.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 
 [cloud-init를 사용하여 생성 중인 Linux VM 사용자 지정](using-cloud-init.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-
 

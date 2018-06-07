@@ -1,26 +1,25 @@
 ---
-title: "Azure Logic Apps를 사용하여 IoT 원격 모니터링 및 알림 | Microsoft Docs"
-description: "Azure Logic Apps을 사용하여 IoT Hub에서 IoT 온도를 모니터링하고 감지된 이상에 대한 전자 메일 알림을 자동으로 사서함에 보낼 수 있습니다."
+title: Azure Logic Apps를 사용하여 IoT 원격 모니터링 및 알림 | Microsoft Docs
+description: Azure Logic Apps을 사용하여 IoT Hub에서 IoT 온도를 모니터링하고 감지된 이상에 대한 전자 메일 알림을 자동으로 사서함에 보낼 수 있습니다.
 services: iot-hub
-documentationcenter: 
-author: shizn
+documentationcenter: ''
+author: rangv
 manager: timlt
-tags: 
-keywords: "iot 모니터링, iot 알림, iot 온도 모니터링"
+tags: ''
+keywords: iot 모니터링, iot 알림, iot 온도 모니터링
 ms.assetid: 43043067-2e1f-42c9-953d-e2dce8fd86df
 ms.service: iot-hub
 ms.devlang: arduino
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 04/12/2017
-ms.author: xshi
+ms.date: 4/11/2018
+ms.author: rangv
+ms.openlocfilehash: e54c36d0cfbaedb93db86ad6ce5f99b288b63c9c
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: ca27c55f97d1b1d9694bf79282b7714283927ee7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="iot-remote-monitoring-and-notifications-with-azure-logic-apps-connecting-your-iot-hub-and-mailbox"></a>Azure Logic Apps으로 IoT Hub와 사서함을 연결하여 IoT 원격 모니터링 및 알림
 
@@ -51,7 +50,7 @@ IoT Hub와 사서함을 연결하여 온도를 모니터링하고 알림을 보�
 
 ### <a name="create-a-service-bus-namespace"></a>Service Bus 네임스페이스 만들기
 
-1. [Azure Portal](https://portal.azure.com/)에서 **새로 만들기** > **엔터프라이즈 통합** > **Service Bus**를 클릭합니다.
+1. [Azure Portal](https://portal.azure.com/)에서 **리소스 만들기** > **엔터프라이즈 통합** > **Service Bus**를 클릭합니다.
 1. 다음 정보를 지정합니다.
 
    **이름**: Service Bus 이름입니다.
@@ -104,7 +103,7 @@ IoT Hub와 사서함을 연결하여 온도를 모니터링하고 알림을 보�
    **끝점**: 앞에서 만든 끝점을 선택합니다.
 
    **쿼리 문자열**: `temperatureAlert = "true"`를 입력합니다.
-1. **Save**를 클릭합니다.
+1. **저장**을 클릭합니다.
 
    ![Azure Portal에서 라우팅 규칙 추가](media/iot-hub-monitoring-notifications-with-azure-logic-apps/4_add-routing-rule-azure-portal.png)
 
@@ -112,7 +111,7 @@ IoT Hub와 사서함을 연결하여 온도를 모니터링하고 알림을 보�
 
 ### <a name="create-a-logic-app"></a>논리 앱 만들기
 
-1. [Azure Portal](https://portal.azure.com/)에서 **새로 만들기** > **엔터프라이즈 통합** > **논리 앱**을 클릭합니다.
+1. [Azure Portal](https://portal.azure.com/)에서 **리소스 만들기** > **엔터프라이즈 통합** > **Logic App**을 클릭합니다.
 1. 다음 정보를 입력합니다.
 
    **이름**: 논리 앱의 이름입니다.
@@ -124,8 +123,8 @@ IoT Hub와 사서함을 연결하여 온도를 모니터링하고 알림을 보�
 
 ### <a name="configure-the-logic-app"></a>논리 앱 구성
 
-1. 논리 앱을 열면 논리 앱 디자이너가 열립니다.
-1. 논리 앱 디자이너에서 **빈 논리 앱**을 클릭합니다.
+1. 논리 앱을 열면 Logic Apps 디자이너가 열립니다.
+1. Logic Apps 디자이너에서 **빈 논리 앱**을 클릭합니다.
 
    ![Azure Portal에서 빈 논리 앱 시작](media/iot-hub-monitoring-notifications-with-azure-logic-apps/5_start-with-blank-logic-app-azure-portal.png)
 
@@ -158,7 +157,7 @@ IoT Hub와 사서함을 연결하여 온도를 모니터링하고 알림을 보�
 
       [Hotmail/Outlook.com](https://support.office.com/en-us/article/Add-your-Outlook-com-account-to-another-mail-app-73f3b178-0009-41ae-aab1-87b80fa94970), [Gmail](https://support.google.com/a/answer/176600?hl=en) 및 [Yahoo Mail](https://help.yahoo.com/kb/SLN4075.html)에 대한 SMTP 정보를 가져옵니다.
    1. **보내는 사람** 및 **받는 사람**의 전자 메일 주소를 입력하고, **제목** 및 **본문**에 `High temperature detected`를 입력합니다.
-   1. **Save**를 클릭합니다.
+   1. **저장**을 클릭합니다.
 
 논리 앱을 저장할 때 논리 앱이 정상적으로 작동합니다.
 
@@ -176,4 +175,3 @@ IoT Hub와 사서함을 연결하여 온도를 모니터링하고 알림을 보�
 IoT Hub와 사서함을 연결하여 온도를 모니터링하고 알림을 보내는 논리 앱을 성공적으로 만들었습니다.
 
 [!INCLUDE [iot-hub-get-started-next-steps](../../includes/iot-hub-get-started-next-steps.md)]
-

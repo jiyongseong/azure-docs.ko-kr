@@ -14,10 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 12/1/2016
 ms.author: alkohli
-translationtype: Human Translation
-ms.sourcegitcommit: 638e3e59f91202d55347c830542801ccead1b90f
 ms.openlocfilehash: a74a160eae88a2d03460a1346479c333d8f9d524
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-the-storsimple-device-manager-service-to-administer-your-storsimple-virtual-array"></a>StorSimple 장치 관리자 서비스를 사용하여 StorSimple 가상 배열 관리
 ![설정 프로세스 흐름](./media/storsimple-virtual-array-manager-service-administration/manage4.png)
@@ -76,10 +77,4 @@ StorSimple 장치 관리자 서비스는 Microsoft Azure에서 실행되며 여�
 
 ## <a name="next-steps"></a>다음 단계
 웹 UI 및 사용 방법에 대한 자세한 내용은 [StorSimple 웹 UI를 사용하여 StorSimple 가상 배열 관리](storsimple-ova-web-ui-admin.md)를 참조하세요.
-
-
-
-
-<!--HONumber=Feb17_HO3-->
-
 

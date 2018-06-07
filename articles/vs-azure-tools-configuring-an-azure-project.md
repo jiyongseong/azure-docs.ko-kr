@@ -1,25 +1,21 @@
 ---
-title: "Visual Studio에서 Azure 클라우드 서비스 프로젝트 구성 | Microsoft Docs"
-description: "프로젝트의 요구 사항에 따라 Visual Studio에서 Azure 클라우드 서비스 프로젝트를 구성하는 방법을 알아보세요."
+title: Visual Studio에서 Azure 클라우드 서비스 프로젝트 구성 | Microsoft Docs
+description: 프로젝트의 요구 사항에 따라 Visual Studio에서 Azure 클라우드 서비스 프로젝트를 구성하는 방법을 알아보세요.
 services: visual-studio-online
-documentationcenter: na
-author: TomArcher
+author: ghogen
 manager: douge
-editor: 
-ms.assetid: 609d6965-05cc-47b1-82dc-c76a92d4f295
-ms.service: multiple
-ms.devlang: dotnet
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: multiple
+assetId: 609d6965-05cc-47b1-82dc-c76a92d4f295
+ms.prod: visual-studio-dev15
+ms.technology: vs-azure
+ms.workload: azure
+ms.topic: conceptual
 ms.date: 03/06/2017
-ms.author: tarcher
-translationtype: Human Translation
-ms.sourcegitcommit: 356de369ec5409e8e6e51a286a20af70a9420193
-ms.openlocfilehash: 11a56418156a46e1fcef7b8d1c6003990000046f
-ms.lasthandoff: 03/27/2017
-
-
+ms.author: ghogen
+ms.openlocfilehash: 0b2b39897407875d2722c7fbaebebc1698f931a9
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="configure-an-azure-cloud-service-project-with-visual-studio"></a>Visual Studio에서 Azure 클라우드 서비스 프로젝트 구성
 프로젝트 요구 사항에 따라 Azure 클라우드 서비스 프로젝트를 구성할 수 있습니다. 다음 범주에 대해 프로젝트 속성을 설정할 수 있습니다.
@@ -51,5 +47,4 @@ ms.lasthandoff: 03/27/2017
 
 ## <a name="next-steps"></a>다음 단계
 - [여러 서비스 구성을 사용하여 Azure 프로젝트 구성](vs-azure-tools-multiple-services-project-configurations.md)
-
 

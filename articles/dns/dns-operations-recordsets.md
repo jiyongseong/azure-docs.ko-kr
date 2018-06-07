@@ -1,9 +1,9 @@
 ---
-title: "Azure PowerShell을 사용하여 Azure DNS의 DNS 레코드 관리 | Microsoft Docs"
-description: "Azure DNS에서 도메인을 호스트하는 경우 Azure DNS에서 DNS 레코드 집합 및 레코드를 관리합니다. 레코드 집합 및 레코드 작업에 대한 모든 PowerShell 명령입니다."
+title: Azure PowerShell을 사용하여 Azure DNS의 DNS 레코드 관리 | Microsoft Docs
+description: Azure DNS에서 도메인을 호스트하는 경우 Azure DNS에서 DNS 레코드 집합 및 레코드를 관리합니다. 레코드 집합 및 레코드 작업에 대한 모든 PowerShell 명령입니다.
 services: dns
 documentationcenter: na
-author: georgewallace
+author: KumudD
 manager: timlt
 ms.assetid: 7136a373-0682-471c-9c28-9e00d2add9c2
 ms.service: dns
@@ -13,19 +13,18 @@ ms.tgt_pltfrm: na
 ms.custom: H1Hack27Feb2017
 ms.workload: infrastructure-services
 ms.date: 12/21/2016
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5edc47e03ca9319ba2e3285600703d759963e1f3
-ms.openlocfilehash: 2962e30e5d9c60b8e786e2ba79647cabfc5925cd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/01/2017
-
+ms.author: kumud
+ms.openlocfilehash: 511af342727dc46369ae70d60a7e9a3171bf986d
+ms.sourcegitcommit: 6116082991b98c8ee7a3ab0927cf588c3972eeaa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 06/05/2018
+ms.locfileid: "32778838"
 ---
-
 # <a name="manage-dns-records-and-recordsets-in-azure-dns-using-azure-powershell"></a>Azure PowerShell을 사용하여 Azure DNS에서 DNS 레코드 및 레코드 집합 관리
 
 > [!div class="op_single_selector"]
-> * [Azure 포털](dns-operations-recordsets-portal.md)
+> * [Azure Portal](dns-operations-recordsets-portal.md)
 > * [Azure CLI 1.0](dns-operations-recordsets-cli-nodejs.md)
 > * [Azure CLI 2.0](dns-operations-recordsets-cli.md)
 > * [PowerShell](dns-operations-recordsets.md)
@@ -98,6 +97,12 @@ SOA가 각 DNS 영역과 함께 만들어지고 삭제되며 별도로 만들어
 
 ```powershell
 New-AzureRmDnsRecordSet -Name "test-aaaa" -RecordType AAAA -ZoneName "contoso.com" -ResourceGroupName "MyResourceGroup" -Ttl 3600 -DnsRecords (New-AzureRmDnsRecordConfig -Ipv6Address "2607:f8b0:4009:1803::1005") 
+```
+
+### <a name="create-a-caa-record-set-with-a-single-record"></a>단일 레코드가 포함된 CAA 레코드 집합 만들기
+
+```powershell
+New-AzureRmDnsRecordSet -Name "test-caa" -RecordType CAA -ZoneName "contoso.com" -ResourceGroupName "MyResourceGroup" -Ttl 3600 -DnsRecords (New-AzureRmDnsRecordConfig -Caaflags 0 -CaaTag "issue" -CaaValue "ca1.contoso.com") 
 ```
 
 ### <a name="create-a-cname-record-set-with-a-single-record"></a>단일 레코드가 포함된 CNAME 레코드 집합 만들기
@@ -392,4 +397,3 @@ Get-AzureRmDnsRecordSet -Name www -RecordType A -ZoneName "contoso.com" -Resourc
 Azure DNS를 사용하는 경우 [영역 및 레코드를 보호](dns-protect-zones-recordsets.md)하는 방법에 대해 알아봅니다.
 <br>
 [Azure DNS PowerShell 참조 설명서](/powershell/module/azurerm.dns)를 검토합니다.
-

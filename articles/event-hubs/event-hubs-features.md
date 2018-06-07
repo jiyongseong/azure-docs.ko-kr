@@ -12,21 +12,19 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 05/15/2017
+ms.date: 03/02/2018
 ms.author: sethm
+ms.openlocfilehash: aaedb8ed2be85017b17a2015ff2fcaaf76c20058
+ms.sourcegitcommit: 0b02e180f02ca3acbfb2f91ca3e36989df0f2d9c
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 67cb42394a596f9e5c0a5d6a5042363e26ed0ac0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/05/2018
 ---
-
 # <a name="event-hubs-features-overview"></a>Event Hubs 기능 개요
 
 Azure Event Hubs는 확장 가능한 처리 서비스로 대량의 이벤트 및 데이터를 수집하여 처리하며, 대기 시간이 낮고 안정성이 우수합니다. 서비스에 대한 개요는 [Event Hubs란?](event-hubs-what-is-event-hubs.md)을 참조하세요.
 
-이 문서는 [개요](event-hubs-what-is-event-hubs.md)의 정보를 기반으로 하며, Event Hubs 구성 요소 및 기능에 대한 기술 정보와 구현 정보를 제공합니다.
+이 문서는 [개요](event-hubs-what-is-event-hubs.md) 문서의 정보를 기반으로 하며, Event Hubs 구성 요소 및 기능에 대한 기술 정보와 구현 정보를 제공합니다.
 
 ## <a name="event-publishers"></a>이벤트 게시자
 
@@ -38,13 +36,14 @@ AMQP 1.0 또는 HTTPS를 통해 이벤트를 게시할 수 있습니다. Event H
 
 AMQP 또는 HTTPS 사용 선택은 사용량 시나리오에 해당됩니다. 전송 수준 보안(TLS) 또는 SSL/TLS 외에 AMQP는 영구 양방향 소켓을 설정해야 합니다. AMQP에서는 세션을 초기화할 때 네트워크 비용이 높지만, HTTPS에는 모든 요청에 대해 추가 SSL 오버헤드가 필요합니다. AMQP는 빈번한 게시자에게 더 높은 성능을 제공합니다.
 
-![이벤트 허브(영문)](./media/event-hubs-features/partition_keys.png)
+![Event Hubs
+](./media/event-hubs-features/partition_keys.png)
 
 Event Hubs는 파티션 키 값을 공유하는 모든 이벤트가 동일한 파티션으로 순서대로 배달되도록 합니다. 파티션 키가 게시자 정책과 함께 사용되는 경우 게시자 ID와 파티션 키 값이 일치해야 합니다. 그렇지 않은 경우 오류가 발생합니다.
 
 ### <a name="publisher-policy"></a>게시자 정책
 
-이벤트 허브는 *게시자 정책*을 통한 이벤트 게시자에 대한 세부적 제어를 사용합니다. 게시자 정책은 많은 수의 독립 이벤트 게시자를 지원하도록 설계된 런타임 기능입니다. 게시자 정책을 사용하여 다음 메커니즘을 사용하여 Event Hub로 이벤트를 게시하는 경우 각 게시자는 자체 고유 식별자를 사용합니다.
+Event Hubs는 *게시자 정책*을 통한 이벤트 게시자에 대한 세부적 제어를 사용합니다. 게시자 정책은 많은 수의 독립 이벤트 게시자를 지원하도록 설계된 런타임 기능입니다. 게시자 정책을 사용하여 다음 메커니즘을 사용하여 Event Hub로 이벤트를 게시하는 경우 각 게시자는 자체 고유 식별자를 사용합니다.
 
 ```
 //[my namespace].servicebus.windows.net/[event hub name]/publishers/[my publisher name]
@@ -54,7 +53,7 @@ Event Hubs는 파티션 키 값을 공유하는 모든 이벤트가 동일한 �
 
 ## <a name="capture"></a>캡처
 
-[Event Hubs 캡처](event-hubs-capture-overview.md)를 사용하면 Event Hubs의 스트리밍 데이터를 자동으로 캡처하고 선택한 Blob 저장소 계정에 보관할 수 있습니다. Azure Portal에서 캡처를 사용하도록 설정하고 캡처를 수행할 최소 크기와 기간을 지정할 수 있습니다. Event Hubs 캡처를 사용할 경우 캡처된 데이터를 저장하는 데 사용되는 고유한 Azure Blob Storage 계정 및 컨테이너를 지정합니다. 캡처된 데이터는 Apache Avro 형식으로 기록됩니다.
+[Event Hubs 캡처](event-hubs-capture-overview.md)를 사용하면 Event Hubs의 스트리밍 데이터를 자동으로 캡처하고 선택한 Blob Storage 계정 또는 Azure Data Lake 서비스 계정에 저장할 수 있습니다. Azure Portal에서 캡처를 사용하도록 설정하고 캡처를 수행할 최소 크기와 기간을 지정할 수 있습니다. Event Hubs 캡처를 사용하여 자신의 Azure Blob Storage 계정 및 컨테이너 또는 Azure Data Lake 서비스 계정을 지정합니다. 이 중 하나는 캡처된 데이터를 저장하는 데 사용됩니다. 캡처된 데이터는 Apache Avro 형식으로 기록됩니다.
 
 ## <a name="partitions"></a>파티션
 
@@ -62,11 +61,13 @@ Event Hubs는 각 소비자만이 특정 하위 집합, 파티션 또는 메시�
 
 파티션은 Event Hub에서 보유하는 순서가 지정된 이벤트 시퀀스입니다. 최신 이벤트가 도착하면 이 시퀀스의 끝에 추가됩니다. 파티션을 "커밋 로그"로 생각할 수 있습니다.
 
-![Event Hubs](./media/event-hubs-features/partition.png)
+![Event Hubs
+](./media/event-hubs-features/partition.png)
 
 Event Hubs는 Event Hub의 모든 파티션에 적용되도록 구성된 보존 시간에 대한 데이터를 유지합니다. 시간 단위로 이벤트가 만료됩니다. 명시적으로 삭제할 수 없습니다. 파티션은 독립적이며 자체 데이터 시퀀스를 포함하기 때문에 종종 다른 속도로 증가합니다.
 
-![이벤트 허브(영문)](./media/event-hubs-features/multiple_partitions.png)
+![Event Hubs
+](./media/event-hubs-features/multiple_partitions.png)
 
 파티션 수는 만들 때 지정되며 2와 32 사이여야 합니다. 파티션 수는 변경할 수 없으므로 파티션 수를 설정할 때 장기적인 규모를 고려해야 합니다. 파티션은 응용 프로그램을 사용하는 데 필요한 다운스트림 병렬 처리와 관련된 데이터 구성 메커니즘입니다. Event Hub의 파티션 수는 예상되는 동시 판독기의 수와 직접적으로 관련이 있습니다. Event Hubs 팀에 문의하여 32개를 초과하는 파티션 수를 늘릴 수 있습니다.
 
@@ -105,13 +106,15 @@ Event Hubs의 게시/구독 메커니즘은 *소비자 그룹*을 통해 사용�
 
 다음 그림에서는 아키텍처를 처리하는 Event Hubs 스트림을 보여 줍니다.
 
-![이벤트 허브(영문)](./media/event-hubs-features/event_hubs_architecture.png)
+![Event Hubs
+](./media/event-hubs-features/event_hubs_architecture.png)
 
 ### <a name="stream-offsets"></a>스트림 오프셋
 
-*오프셋*은 파티션 내의 이벤트 위치입니다. 오프셋을 클라이언트 쪽 커서로 생각할 수 있습니다. 오프셋은 이벤트의 바이트 번호입니다. 오프셋을 사용하여 이벤트 소비자(판독기)가 이벤트를 읽기 시작할 이벤트 스트림의 위치를 지정할 수 있습니다. 타임스탬프 또는 오프셋 값으로 오프셋을 지정할 수 있습니다. 소비자는 이벤트 허브 서비스 외부에 자신의 오프셋 값을 저장하는 일을 담당합니다. 파티션 내에서 각 이벤트는 오프셋을 포함합니다.
+*오프셋*은 파티션 내의 이벤트 위치입니다. 오프셋을 클라이언트 쪽 커서로 생각할 수 있습니다. 오프셋은 이벤트의 바이트 번호입니다. 오프셋을 사용하여 이벤트 소비자(판독기)가 이벤트를 읽기 시작할 이벤트 스트림의 위치를 지정할 수 있습니다. 타임스탬프 또는 오프셋 값으로 오프셋을 지정할 수 있습니다. 소비자는 Event Hubs 서비스 외부에 자신의 오프셋 값을 저장하는 일을 담당합니다. 파티션 내에서 각 이벤트는 오프셋을 포함합니다.
 
-![이벤트 허브(영문)](./media/event-hubs-features/partition_offset.png)
+![Event Hubs
+](./media/event-hubs-features/partition_offset.png)
 
 ### <a name="checkpointing"></a>검사점 설정
 
@@ -121,7 +124,7 @@ Event Hubs의 게시/구독 메커니즘은 *소비자 그룹*을 통해 사용�
 
 ### <a name="common-consumer-tasks"></a>일반 소비자 작업
 
-모든 Event Hubs 소비자는 AMQP 1.0 세션 및 상태 인식 양방향 통신 채널을 통해 연결됩니다. 각 파티션에는 AMQP 1.0 세션이 있어 파티션별로 분리된 이벤트를 쉽게 전송할 수 있습니다.
+모든 Event Hubs 소비자는 상태 인식 양방향 통신 채널인 AMQP 1.0 세션을 통해 연결됩니다. 각 파티션에는 AMQP 1.0 세션이 있어 파티션별로 분리된 이벤트를 쉽게 전송할 수 있습니다.
 
 #### <a name="connect-to-a-partition"></a>파티션에 연결
 
@@ -134,7 +137,7 @@ AMQP 1.0 세션 및 링크는 특정 파티션에 대해 열린 후, 이벤트�
 이벤트 데이터:
 * Offset
 * 시퀀스 번호
-* body
+* 본문
 * 사용자 속성
 * 시스템 속성
 
@@ -151,7 +154,7 @@ Event Hubs의 처리량 용량은 *처리량 단위*로 제어됩니다. 처리�
 * 수신: 초당 최대 1MB 또는 초당 1,000회 이벤트(둘 중 빠른 쪽 적용)
 * 송신: 초당 최대 2MB
 
-구입한 처리량 단위의 용량을 초과하면 수신이 제한되며 [ServerBusyException](/dotnet/api/microsoft.azure.eventhubs.serverbusyexception)이 반환됩니다. 송신은 제한 예외를 생성하지 않지만 구입한 처리량 단위의 용량으로 제한됩니다. 게시 속도 예외를 수신하거나 더 높은 송신을 예상하는 경우 네임스페이스에 대해 구입한 처리량 단위의 수를 확인해야 합니다. [Azure Portal](https://portal.azure.com)에서 네임스페이스의 **크기 조정** 블레이드에서 처리량 단위를 관리할 수 있습니다. [Event Hubs API](event-hubs-api-overview.md)를 사용하여 프로그래밍 방식으로 처리량 단위를 관리할 수도 있습니다.
+구입한 처리량 단위의 용량을 초과하면 수신이 제한되며 [ServerBusyException](/dotnet/api/microsoft.servicebus.messaging.serverbusyexception)이 반환됩니다. 송신은 제한 예외를 생성하지 않지만 구입한 처리량 단위의 용량으로 제한됩니다. 게시 속도 예외를 수신하거나 더 높은 송신을 예상하는 경우 네임스페이스에 대해 구입한 처리량 단위의 수를 확인해야 합니다. [Azure Portal](https://portal.azure.com)에서 네임스페이스의 **크기 조정** 블레이드에서 처리량 단위를 관리할 수 있습니다. [Event Hubs API](event-hubs-api-overview.md)를 사용하여 프로그래밍 방식으로 처리량 단위를 관리할 수도 있습니다.
 
 처리량 단위는 시간당 요금이 청구되며 미리 구입됩니다. 구입하면, 처리량 단위는 최소 한시간으로 청구됩니다. Event Hubs 네임스페이스에 대해 최대 20개의 처리량 단위를 구입할 수 있으며, 네임스페이스의 모든 Event Hubs에서 공유할 수 있습니다.
 
@@ -166,11 +169,10 @@ Event Hubs 가격에 대한 자세한 내용은 [Event Hubs 가격](https://azur
 Event Hubs에 대한 자세한 내용은 다음 링크를 방문하세요.
 
 * [Event Hubs 자습서][Event Hubs tutorial] 시작
-* [이벤트 허브 프로그래밍 가이드](event-hubs-programming-guide.md)
+* [Event Hubs 프로그래밍 가이드](event-hubs-programming-guide.md)
 * [Event Hubs의 가용성 및 일관성](event-hubs-availability-and-consistency.md)
 * [Event Hubs FAQ](event-hubs-faq.md)
-* [Event Hubs를 사용하는 샘플 응용 프로그램][]
+* [Event Hubs 샘플][]
 
 [Event Hubs tutorial]: event-hubs-dotnet-standard-getstarted-send.md
-[Event Hubs를 사용하는 샘플 응용 프로그램]: https://github.com/Azure/azure-event-hubs/tree/master/samples
-
+[Event Hubs 샘플]: https://github.com/Azure/azure-event-hubs/tree/master/samples

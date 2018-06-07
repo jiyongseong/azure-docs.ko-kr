@@ -11,15 +11,17 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 10/24/2016
+ms.date: 09/25/2017
 ms.author: kumud
-translationtype: Human Translation
-ms.sourcegitcommit: cf1eafc7bca5bddeb32f1e1e05e660d6877ed805
-ms.openlocfilehash: 7b8a292bd27792844eb6f620f7564e5091e3d8bc
-
+ms.openlocfilehash: f19ac77f7c7f7d4ab8909d628f9dcce08c07c928
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="configure-tcp-idle-timeout-settings-for-azure-load-balancer"></a>Azure Load Balancer에 대한 TCP 유휴 시간 제한 설정 구성
+
+[!INCLUDE [load-balancer-basic-sku-include.md](../../includes/load-balancer-basic-sku-include.md)]
 
 기본 구성에서 Azure 부하 분산 장치의 '유휴 시간 제한' 설정은 4분입니다. 비활성 기간이 시간 제한 값보다 긴 경우 클라이언트와 클라우드 서비스 간의 TCP 또는 HTTP 세션이 유지되지 않을 수 있습니다.
 
@@ -156,9 +158,3 @@ Service Management API를 사용하여 TCP 유휴 시간 제한을 구성할 수
 [인터넷 연결 부하 분산 장치 구성 시작](load-balancer-get-started-internet-arm-ps.md)
 
 [부하 분산 장치 배포 모드 구성](load-balancer-distribution-mode.md)
-
-
-
-<!--HONumber=Nov16_HO3-->
-
-

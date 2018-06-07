@@ -1,25 +1,23 @@
 ---
-title: "Azure Batch 계산 노드 환경 변수 | Microsoft Docs"
-description: "Azure Batch 분석에 대한 계산 노드 환경 변수 참조입니다."
+title: Azure Batch 계산 노드 환경 변수 | Microsoft Docs
+description: Azure Batch 분석에 대한 Compute 노드 환경 변수 참조입니다.
 services: batch
-author: tamram
-manager: timlt
-ms.assetid: 
+author: dlepow
+manager: jeconnoc
+ms.assetid: ''
 ms.service: batch
 ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: big-compute
 ms.date: 05/05/2017
-ms.author: tamram
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 71fea4a41b2e3a60f2f610609a14372e678b7ec4
-ms.openlocfilehash: 29f642754430957e77ef68946f721f8e15dba065
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
+ms.author: danlep
+ms.openlocfilehash: ca8d6a6484cd1f145e7d807681bf2d012f2399e0
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
-
 # <a name="azure-batch-compute-node-environment-variables"></a>Azure Batch 계산 노드 환경 변수
 [Azure Batch 서비스](https://azure.microsoft.com/services/batch/)는 계산 노드에 다음과 같은 환경 변수를 설정합니다. 태스크 명령줄과 명령줄로 실행되는 프로그램 및 스크립트에서 이러한 환경 변수를 참조할 수 있습니다.
 
@@ -39,7 +37,7 @@ Batch에 환경 변수를 사용하는 방법에 대한 자세한 내용은 [태
 
 ## <a name="environment-variables"></a>환경 변수
 
-| 변수 이름                     | 설명                                                              | Availability | 예제 |
+| 변수 이름                     | 설명                                                              | 가용성 | 예 |
 |-----------------------------------|--------------------------------------------------------------------------|--------------|---------|
 | AZ_BATCH_ACCOUNT_NAME           | 태스크가 속한 Batch 계정의 이름입니다.                  | 모든 태스크입니다.   | mybatchaccount |
 | AZ_BATCH_CERTIFICATES_DIR       | Linux 계산 노드에 대한 인증서가 저장된 [태스크 작업 디렉터리][files_dirs] 내 디렉터리입니다. 이 환경 변수는 Windows 계산 노드에 적용되지 않습니다.                                                  | 모든 태스크입니다.   |  /mnt/batch/tasks/workitems/batchjob001/job-1/task001/certs |
@@ -66,4 +64,3 @@ Batch에 환경 변수를 사용하는 방법에 대한 자세한 내용은 [태
 [multi_instance]: https://azure.microsoft.com/documentation/articles/batch-mpi/
 [coord_cmd]: https://azure.microsoft.com/documentation/articles/batch-mpi/#coordination-command
 [app_cmd]: https://azure.microsoft.com/documentation/articles/batch-mpi/#application-command
-

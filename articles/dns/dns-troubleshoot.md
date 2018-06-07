@@ -1,11 +1,11 @@
 ---
-title: "Azure DNS 문제 해결 가이드 | Microsoft Docs"
-description: "Azure DNS와 관련된 일반적인 문제를 해결하는 방법"
+title: Azure DNS 문제 해결 가이드 | Microsoft Docs
+description: Azure DNS와 관련된 일반적인 문제를 해결하는 방법
 services: dns
 documentationcenter: na
-author: jtuliani
-manager: carmonm
-editor: 
+author: genlin
+manager: cshepard
+editor: ''
 ms.assetid: 95b01dc3-ee69-4575-a259-4227131e4f9c
 ms.service: dns
 ms.devlang: na
@@ -13,13 +13,14 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/20/2017
-ms.author: jonatul
-translationtype: Human Translation
-ms.sourcegitcommit: bae6cf7f5025936deba301dc4fd05f6fd5fd8fa6
-ms.openlocfilehash: 1d9bb681a864bdc3e5a2f9c9a531d9566b16ada4
-
+ms.author: genli
+ms.openlocfilehash: 816ad6c0079e9272286cdc072ff71bf15313eb8e
+ms.sourcegitcommit: c52123364e2ba086722bc860f2972642115316ef
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
+ms.locfileid: "34069102"
 ---
-
 # <a name="azure-dns-troubleshooting-guide"></a>Azure DNS 문제 해결 가이드
 
 이 페이지에서는 일반적인 Azure DNS 질문에 대한 문제 해결 정보를 제공합니다.
@@ -96,7 +97,7 @@ SRV 레코드 이름(서비스 이름 'sip', 프로토콜 'tcp') 예제:
 <br>
 [Azure Portal을 사용하여 DNS 레코드 집합 및 레코드 만들기](dns-getstarted-create-recordset-portal.md)
 <br>
-[SRV 레코드 유형(Wikipedia)](https://en.wikipedia.org/wiki/SRV_record)
+[SRV 레코드 형식(Wikipedia)](https://en.wikipedia.org/wiki/SRV_record)
 
 
 ## <a name="next-steps"></a>다음 단계
@@ -104,10 +105,4 @@ SRV 레코드 이름(서비스 이름 'sip', 프로토콜 'tcp') 예제:
 * [Azure DNS 영역 및 레코드](dns-zones-records.md) 알아보기
 * Azure DNS 사용을 시작하려면 [DNS 영역 만들기](dns-getstarted-create-dnszone-portal.md) 및 [DNS 레코드 만들기](dns-getstarted-create-recordset-portal.md) 방법에 대해 알아보세요.
 * 기존 DNS 영역을 마이그레이션하려면 [DNS 영역 파일 가져오기 및 내보내기](dns-import-export.md) 방법에 대해 알아보세요.
-
-
-
-
-<!--HONumber=Jan17_HO3-->
-
 

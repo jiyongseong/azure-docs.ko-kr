@@ -3,7 +3,7 @@ title: "Application Insights로 SCOM 통합 | Microsoft Docs"
 description: "SCOM 사용자인 경우 Application Insights로 성능을 모니터링하고 문제를 진단합니다. 포괄적 대시보드, 스마트 경고, 강력한 진단 도구 및 분석 쿼리."
 services: application-insights
 documentationcenter: 
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 606e9d03-c0e6-4a77-80e8-61b75efacde0
 ms.service: application-insights
@@ -12,13 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 08/12/2016
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: dea21a59b189d1d3d474cbc5e67f64df485a1981
-ms.openlocfilehash: 68ec072b972e38d8cd020adda4dcc85cdaccfb76
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
+ms.author: mbullwin
+ms.openlocfilehash: 35ea37b751909e14e616a965462b832e4e51bae0
+ms.sourcegitcommit: e462e5cca2424ce36423f9eff3a0cf250ac146ad
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/01/2017
 ---
 # <a name="application-performance-monitoring-using-application-insights-for-scom"></a>SCOM에 대해 Application Insights를 사용하여 응용 프로그램 성능 모니터링
 서버를 관리하는 데 SCOM(System Center Operations Manager)을 사용하는 경우 [Azure Application Insights](app-insights-asp-net.md)를 활용해 성능을 모니터링하고 성능 문제를 진단할 수 있습니다. Application Insights는 사용자 웹 응용 프로그램에 들어오는 요청과 나가는 REST 및 SQL 호출, 예외 및 로그 추적을 모니터링합니다. 메트릭 차트 및 스마트 경고뿐만 아니라 이 원격 분석을 통한 강력한 진단 검색 및 분석 쿼리가 포함된 대시보드를 제공합니다. 
@@ -99,5 +98,4 @@ Operations Manager를 실행하는 컴퓨터에서 다음을 수행합니다.
 * [성능 문제 진단](app-insights-detect-triage-diagnose.md)
 * [강력한 분석 쿼리](app-insights-analytics.md)
 * [가용성 웹 테스트](app-insights-monitor-web-app-availability.md)
-
 

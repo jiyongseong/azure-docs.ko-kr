@@ -1,12 +1,12 @@
 ---
-title: "Azure DMZ 예제 – NSG를 사용하여 간단한 DMZ 빌드| Microsoft Docs"
-description: "NSG(네트워크 보안 그룹)를 사용하여 DMZ 빌드"
+title: Azure DMZ 예제 – NSG를 사용하여 간단한 DMZ 빌드| Microsoft Docs
+description: NSG(네트워크 보안 그룹)를 사용하여 DMZ 빌드
 services: virtual-network
 documentationcenter: na
 author: tracsman
 manager: rossort
-editor: 
-ms.assetid: 
+editor: ''
+ms.assetid: ''
 ms.service: virtual-network
 ms.devlang: na
 ms.topic: article
@@ -14,11 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 01/03/2017
 ms.author: jonor
-translationtype: Human Translation
-ms.sourcegitcommit: cb2e480a45871ad0c956dc976de955ca48ecdfd0
 ms.openlocfilehash: ec29e6b250f927a3a4a94ffdf83d6c7c0e325722
-
-
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
 # <a name="example-1--build-a-simple-dmz-using-nsgs-with-an-azure-resource-manager-template"></a>예 1 – Azure Resource Manager 템플릿으로 NSG를 사용하여 간단한 DMZ 빌드
 [보안 경계 모범 사례 페이지로 돌아가기][HOME]
@@ -29,7 +29,7 @@ ms.openlocfilehash: ec29e6b250f927a3a4a94ffdf83d6c7c0e325722
 > 
 >
 
-이 예에서는&4;개의 Windows Server 및 네트워크 보안 그룹이 포함된 기본 DMZ를 만듭니다. 이 예제는 각 단계를 자세히 이해할 수 있도록 각각의 관련 템플릿 섹션을 설명합니다. 트래픽 시나리오 섹션에서는 DMZ에서 방어 계층을 진행하는 방법에 대한 심층적인 단계별 설명도 제공합니다. 마지막으로, 참조 섹션에서는 다양한 시나리오를 사용하여 테스트 및 실험하기 위한 환경을 구축하는 전체 템플릿 코드와 지침을 제공합니다. 
+이 예에서는 4개의 Windows Server 및 네트워크 보안 그룹이 포함된 기본 DMZ를 만듭니다. 이 예제는 각 단계를 자세히 이해할 수 있도록 각각의 관련 템플릿 섹션을 설명합니다. 트래픽 시나리오 섹션에서는 DMZ에서 방어 계층을 진행하는 방법에 대한 심층적인 단계별 설명도 제공합니다. 마지막으로, 참조 섹션에서는 다양한 시나리오를 사용하여 테스트 및 실험하기 위한 환경을 구축하는 전체 템플릿 코드와 지침을 제공합니다. 
 
 [!INCLUDE [azure-arm-classic-important-include](../../includes/azure-arm-classic-important-include.md)] 
 
@@ -39,14 +39,14 @@ ms.openlocfilehash: ec29e6b250f927a3a4a94ffdf83d6c7c0e325722
 이 예에서 구독은 다음 리소스를 포함합니다.
 
 * 단일 리소스 그룹
-* 두 서브넷 “프런트 엔드” 및 “백 엔드”를 사용하는 가상 네트워크
+* 두 서브넷 “프런트 엔드” 및 “백 엔드”를 사용하는 Virtual Network
 * 서브넷 모두에 적용되는 네트워크 보안 그룹
 * 응용 프로그램 웹 서버("IIS01")를 나타내는 Windows 서버
 * 응용 프로그램 백 엔드 서버("AppVM01", "AppVM02")를 나타내는 두 Windows 서버
-* DNS 서버("DNS01")를 나타내는 Windows Server
+* DNS 서버("DNS01")를 나타내는 Windows 서버
 * 응용 프로그램 웹 서버에 연결된 공용 IP 주소
 
-참조 섹션에서 이 예제에서 설명된 환경을 구축하는 Azure Resource Manager 템플릿에 대한 링크가 있습니다. VM 및 가상 네트워크 구축은 예제 템플릿으로 수행하지만 이 문서에서는 자세히 설명하지 않습니다. 
+참조 섹션에서 이 예제에서 설명된 환경을 구축하는 Azure Resource Manager 템플릿에 대한 링크가 있습니다. VM 및 Virtual Network 구축은 예제 템플릿으로 수행하지만 이 문서에서는 자세히 설명하지 않습니다. 
 
 **이 환경을 구축하려면**(자세한 지침은 이 문서의 참조 섹션에 있습니다.)
 
@@ -61,7 +61,7 @@ ms.openlocfilehash: ec29e6b250f927a3a4a94ffdf83d6c7c0e325722
 다음 섹션에서는 네트워크 보안 그룹을 설명하고 Azure Resource Manager 템플릿의 핵심 줄을 살펴보는 방법으로 이 예제의 작동 방식을 자세히 설명합니다.
 
 ## <a name="network-security-groups-nsg"></a>네트워크 보안 그룹(NSG)
-이 예제에서는 NSG 그룹을 빌드한 후&6;개의 규칙을 로드합니다. 
+이 예제에서는 NSG 그룹을 빌드한 후 6개의 규칙을 로드합니다. 
 
 >[!TIP]
 >일반적으로 특정 "허용" 규칙을 먼저 만든 후 보다 일반적인 "거부" 규칙을 만들어야 합니다. 할당된 우선순위에 따라 먼저 평가할 규칙이 결정됩니다. 특정 규칙에 적용할 트래픽이 발견되면 규칙을 더 이상 평가하지 않습니다. NSG 규칙은 인바운드 또는 아웃바운드 방향으로 적용할 수 있습니다(서브넷 관점에서).
@@ -99,7 +99,7 @@ ms.openlocfilehash: ec29e6b250f927a3a4a94ffdf83d6c7c0e325722
 
 2. 이 예의 첫 번째 규칙에서는 백 엔드 서브넷에서 DNS 서버에 대해 모든 내부 네트워크 간 DNS 트래픽을 허용합니다. 규칙은 몇 가지 중요한 매개 변수를 포함합니다.
   * "destinationAddressPrefix" - 규칙은 "기본 태그"라는 특수한 주소 유형의 접두사를 사용할 수 있습니다. 이러한 태그는 더 큰 범주의 주소 접두사를 해결하는 쉬운 방법을 허용하는 시스템 제공 식별자입니다. 이 규칙은 기본 태그 “Internet"을 사용하여 VNet 외의 모든 주소를 나타냅니다. 다른 접두사 레이블은 VirtualNetwork 및 AzureLoadBalancer입니다.
-  * "Direction"은 이 규칙이 적용되는 트래픽 흐름의 방향을 나타냅니다. 방향은 서브넷 또는 가상 컴퓨터의 관점에서 옵니다(이 NSG가 바인딩되는 위치에 따라). 따라서 Direction이 "Inbound"이고 트래픽이 서브넷에 들어가는 경우 규칙이 적용되고 서브넷에서 나가는 트래픽에는 이 규칙이 적용되지 않습니다.
+  * "Direction"은 이 규칙이 적용되는 트래픽 흐름의 방향을 나타냅니다. 방향은 서브넷 또는 Virtual Machine의 관점에서 옵니다(이 NSG가 바인딩되는 위치에 따라). 따라서 Direction이 "Inbound"이고 트래픽이 서브넷에 들어가는 경우 규칙이 적용되고 서브넷에서 나가는 트래픽에는 이 규칙이 적용되지 않습니다.
   * "Priority"는 트래픽 흐름이 평가되는 순서를 설정합니다. 번호가 낮을수록 우선순위가 높습니다. 특정 트래픽 흐름에 규칙이 적용되는 경우 더 이상 규칙이 처리되지 않습니다. 따라서 우선순위 1인 규칙에서는 트래픽을 허용하고 우선순위 2인 규칙에서는 트래픽을 거부하고 두 규칙 모두 트래픽에 적용된다면 트래픽 흐름이 허용됩니다(규칙 1의 우선순위가 높으므로 해당 규칙이 적용되고 다른 규칙은 적용되지 않음).
   * "Access"는 이 규칙의 영향을 받는 트래픽을 차단("Deny")하거나 허용("Allow")할지를 나타냅니다.
 
@@ -259,7 +259,7 @@ ms.openlocfilehash: ec29e6b250f927a3a4a94ffdf83d6c7c0e325722
 
 #### <a name="allowed-web-server-dns-look-up-on-dns-server"></a>(*허용*) DNS 서버에서 웹 서버 DNS 조회
 1. 웹 서버인 IIS01은 www.data.gov에서 데이터 피드를 요구하지만 주소를 확인해야 합니다.
-2. VNet에 대한 네트워크 구성에서 DNS01(백 엔드 서브넷에서&10;.0.2.4)을 주 DNS 서버로 나열하며 IIS01은 DNS01로 DNS 요청을 보냅니다.
+2. VNet에 대한 네트워크 구성에서 DNS01(백 엔드 서브넷에서 10.0.2.4)을 주 DNS 서버로 나열하며 IIS01은 DNS01로 DNS 요청을 보냅니다.
 3. 프런트 엔드 서브넷에 아웃바운드 규칙이 없고 트래픽이 허용됩니다.
 4. 백 엔드 서브넷이 인바운드 규칙 처리를 시작합니다.
   * NSG 규칙 1(DNS)이 적용되고 트래픽이 허용되며 규칙 처리를 중지합니다.
@@ -334,7 +334,7 @@ GitHub 및 Azure Portal에서 이 예제를 작성하는 템플릿을 배포하�
 
 1. 브라우저에서 [템플릿][Template]으로 이동합니다.
 2. "Azure에 배포" 단추(또는 이 템플릿의 그래픽 표시를 보려면 "시각화" 단추)를 클릭합니다.
-3. 매개 변수 블레이드에서 저장소 계정, 사용자 이름 및 암호를 입력한 다음 **확인**을 클릭합니다.
+3. 매개 변수 블레이드에서 Storage 계정, 사용자 이름 및 암호를 입력한 다음 **확인**을 클릭합니다.
 5. 이 배포에 대한 리소스 그룹을 만듭니다.(기존 것을 사용할 수 있지만 최상의 결과를 위해 새 것을 권장합니다.)
 6. 필요한 경우 VNet에 맞게 구독 및 위치 설정을 변경합니다.
 7. **약관 검토**를 클릭하고 약관을 읽은 후 **구입**을 클릭하여 동의합니다.
@@ -364,8 +364,3 @@ GitHub 및 Azure Portal에서 이 예제를 작성하는 템플릿을 배포하�
 [HOME]: ../best-practices-network-security.md
 [Template]: https://github.com/Azure/azure-quickstart-templates/tree/master/301-dmz-nsg
 [SampleApp]: ./virtual-networks-sample-app.md
-
-
-<!--HONumber=Jan17_HO1-->
-
-

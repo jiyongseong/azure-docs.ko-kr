@@ -1,24 +1,21 @@
 ---
-title: "프로젝트를 현재 버전의 Azure 도구로 업그레이드하는 방법 | Microsoft Docs"
-description: "Azure 프로젝트를 Visual Studio에서 현재 버전의 Azure 도구로 업그레이드하는 방법을 알아봅니다."
+title: 프로젝트를 현재 버전의 Azure 도구로 업그레이드하는 방법 | Microsoft Docs
+description: Azure 프로젝트를 Visual Studio에서 현재 버전의 Azure 도구로 업그레이드하는 방법을 알아봅니다.
 services: visual-studio-online
-documentationcenter: na
-author: TomArcher
+author: ghogen
 manager: douge
-editor: 
-ms.assetid: 1d64070a-078d-468a-87f4-e6715de6475f
-ms.service: multiple
-ms.devlang: dotnet
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: multiple
+assetId: 1d64070a-078d-468a-87f4-e6715de6475f
+ms.prod: visual-studio-dev15
+ms.technology: vs-azure
+ms.workload: azure
+ms.topic: conceptual
 ms.date: 11/18/2016
-ms.author: tarcher
-translationtype: Human Translation
-ms.sourcegitcommit: 219dcbfdca145bedb570eb9ef747ee00cc0342eb
-ms.openlocfilehash: e346640f6cbf7969bf373b84d8a20a24a74f654e
-
-
+ms.author: ghogen
+ms.openlocfilehash: 738c9d12beed6ba73872d520cb16bd3a6c813a35
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="how-to-upgrade-projects-to-the-current-version-of-the-azure-tools-for-visual-studio"></a>프로젝트를 현재 버전의 Visual Studio 용 Azure 도구로 업그레이드하는 방법
 ## <a name="overview"></a>개요
@@ -46,10 +43,4 @@ Azure 도구의 현재 릴리스 (또는 1.6 이후 버전인 이전 릴리스)�
     **응용 프로그램** 탭은 프로젝트와 연결된 도구 버전을 표시합니다. Azure 도구의 현재 버전이 표시된 경우 프로젝트가 이미 업그레이드된 것입니다. 탭에 표시된 것보다 보다 최신 버전의 도구를 설치한 경우 **업그레이드** 단추가 나타납니다.
 3. **업그레이드** 단추를 선택하여 도구의 현재 버전에 프로젝트를 업그레이드합니다.
 4. 프로젝트를 빌드한 후 API 변경으로 인해 발생하는 오류를 해결합니다. 새 버전에 대한 코드를 수정하는 방법에 대한 자세한 내용은 특정 API에 대한 설명서를 참조하세요.
-
-
-
-
-<!--HONumber=Nov16_HO3-->
-
 

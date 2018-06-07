@@ -1,0 +1,128 @@
+- name: Redis Cache 설명서
+  href: index.md
+- name: 개요
+  items:
+    - name: Azure Redis 캐시 정보
+      href: cache-overview.md
+- name: 빠른 시작
+  items:
+    - name: ASP.NET 앱 만들기
+      href: cache-web-app-howto.md
+    - name: .NET 앱 만들기
+      href: cache-dotnet-how-to-use-azure-redis-cache.md
+    - name: Node.js 앱 만들기
+      href: cache-nodejs-get-started.md
+    - name: Java 앱 만들기
+      href: cache-java-get-started.md
+    - name: Python 앱 만들기
+      href: cache-python-get-started.md
+- name: 자습서
+  items:
+    - name: 순위표와 함께 캐싱 사용
+      href: cache-web-app-cache-aside-leaderboard.md
+- name: 샘플
+  items:
+    - name: Redis Cache 샘플
+      href: cache-redis-samples.md
+    - name: Azure PowerShell
+      href: cache-howto-manage-redis-cache-powershell.md
+    - name: Azure CLI
+      href: cli-samples.md
+- name: 개념
+  items:
+    - name: 모범 사례
+      items:
+        - name: Azure Redis Cache의 모범 사례
+          href: 'https://gist.github.com/JonCole/925630df72be1351b21440625ff2671f'
+        - name: 캐싱에 대한 Azure Architecture 모범 사례
+          href: 'https://docs.microsoft.com/azure/architecture/best-practices/caching?toc=%2Fazure%2Fredis-cache%2Ftoc.json'
+- name: 방법 가이드
+  items:
+    - name: 계획
+      items:
+        - name: 캐시 계층 선택
+          href: 'cache-faq.md#what-redis-cache-offering-and-size-should-i-use'
+        - name: Redis 데이터 지속성을 통해 캐시 지속
+          href: cache-how-to-premium-persistence.md
+        - name: 가상 네트워크로 캐시 보호
+          href: cache-how-to-premium-vnet.md
+        - name: 클러스터링을 통해 캐시 배포
+          href: cache-how-to-premium-clustering.md
+    - name: 자동화
+      items:
+        - name: Azure Powershell을 사용하여 배포 및 관리
+          href: cache-howto-manage-redis-cache-powershell.md
+        - name: Azure CLI를 사용하여 배포 및 관리
+          href: cli-samples.md
+        - name: Redis Cache 프로비전
+          href: cache-redis-cache-arm-provision.md
+        - name: Redis Cache가 포함된 웹앱 프로비전
+          href: cache-web-app-arm-with-redis-cache-provision.md
+    - name: ASP.NET과 통합
+      items:
+        - name: 세션 상태 공급자
+          href: cache-aspnet-session-state-provider.md
+        - name: 출력 캐시 공급자
+          href: cache-aspnet-output-cache-provider.md
+    - name: 관리
+      items:
+        - name: Azure Portal에서 구성
+          href: cache-configure.md
+        - name: 지역에서 복제 구성
+          href: cache-how-to-geo-replication.md
+        - name: 데이터 Import/Export
+          href: cache-how-to-import-export-data.md
+        - name: Reboot
+          href: 'cache-administration.md#reboot'
+        - name: 업데이트를 예약
+          href: 'cache-administration.md#schedule-updates'
+        - name: redis-cli.exe 액세스 구성
+          href: cache-how-to-redis-cli-tool.md
+    - name: 모니터링 및 문제 해결
+      items:
+        - name: Azure Portal에서 모니터링
+          href: cache-how-to-monitor.md
+        - name: 캐시 문제 해결
+          href: cache-how-to-troubleshoot.md
+        - name: 예외에 대한 경고 설정
+          href: 'cache-how-to-monitor.md#operations-and-alerts'
+    - name: 확장
+      items:
+        - name: 다른 크기 및 계층으로 업데이트
+          href: cache-how-to-scale.md
+        - name: Redis 클러스터를 이용한 확장/감축
+          href: cache-how-to-premium-clustering.md
+    - name: Spring Boot와 통합
+      items:
+        - name: Redis Cache에서 Spring Boot Initializer 앱 사용
+          href: cache-java-spring-boot-initializer-with-redis-cache.md
+- name: 참고 자료
+  items:
+    - name: 코드 샘플
+      href: 'https://azure.microsoft.com/resources/samples/?service=redis-cache'
+    - name: Azure PowerShell
+      href: /powershell/module/azurerm.rediscache
+    - name: Azure CLI 미리 보기
+      href: /cli/azure/redis
+    - name: .NET
+      href: /dotnet/api/microsoft.azure.management.redis
+    - name: 자바
+      href: /java/api/com.microsoft.azure.management.redis._redis_cache
+    - name: Redis 클라이언트
+      href: 'http://redis.io/clients'
+    - name: Redis 명령
+      href: 'http://redis.io/commands#'
+    - name: REST (영문)
+      href: 'https://docs.microsoft.com/rest/api/redis/'
+- name: 리소스
+  items:
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/?category=databases'
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/cache/'
+    - name: Redis Cache FAQ
+      href: cache-faq.md
+    - name: 동영상
+      href: 'https://www.youtube.com/results?search_query=azure+redis+cache'
+    - name: MSDN 포럼
+      href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=azurecache&filter=alltypes&sort=lastpostdesc'

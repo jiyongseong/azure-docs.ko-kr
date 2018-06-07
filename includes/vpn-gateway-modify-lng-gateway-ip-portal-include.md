@@ -1,3 +1,19 @@
+---
+title: 포함 파일
+description: 포함 파일
+services: vpn-gateway
+author: cherylmc
+ms.service: vpn-gateway
+ms.topic: include
+ms.date: 03/21/2018
+ms.author: cherylmc
+ms.custom: include file
+ms.openlocfilehash: a929149f115d716bf7f9d850abe5ba97bd5a8189
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
+---
 ### <a name="gwipnoconnection"></a> 로컬 네트워크 게이트웨이 IP 주소를 수정하려면 - 게이트웨이 연결 없음
 
 예제를 사용하여 게이트웨이 연결이 없는 로컬 네트워크 게이트웨이를 수정합니다. 이 값을 수정할 때 주소 접두사를 함께 수정할 수도 있습니다.
@@ -25,8 +41,8 @@
 
 #### <a name="3-recreate-the-connection"></a>3. 연결을 다시 만듭니다.
 
-1. VNet에 대한 가상 네트워크 게이트웨이로 이동합니다. (로컬 네트워크 게이트웨이가 아님)
-2. 가상 네트워크 게이트웨이의 **설정** 섹션에서 **연결**을 클릭합니다.
+1. VNet에 대한 Virtual Network 게이트웨이로 이동합니다. (로컬 네트워크 게이트웨이가 아님)
+2. Virtual Network 게이트웨이의 **설정** 섹션에서 **연결**을 클릭합니다.
 3. **+ 추가**를 클릭하여 **연결 추가** 블레이드를 엽니다.
 4. 연결을 다시 만듭니다.
 5. **확인**을 클릭하여 연결을 만듭니다.

@@ -1,11 +1,11 @@
 ---
-title: "Azure에서 MariaDB(MySQL) 클러스터 실행 | Microsoft Docs"
-description: "Azure 가상 컴퓨터에 MariaDB + Galera MySQL 클러스터를 만듭니다."
+title: Azure에서 MariaDB(MySQL) 클러스터 실행 | Microsoft Docs
+description: Azure 가상 머신에 MariaDB + Galera MySQL 클러스터를 만듭니다.
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: sabbour
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-service-management
 ms.assetid: d0d21937-7aac-4222-8255-2fdc4f2ea65b
 ms.service: virtual-machines-linux
@@ -15,23 +15,22 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
 ms.date: 04/15/2015
 ms.author: asabbour
-translationtype: Human Translation
-ms.sourcegitcommit: 356de369ec5409e8e6e51a286a20af70a9420193
-ms.openlocfilehash: 53e9bf18b26338212411ea7c4f260eb308486738
-ms.lasthandoff: 03/27/2017
-
-
+ms.openlocfilehash: 4a3eede532345f8628af1722a06531571f01afbf
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="mariadb-mysql-cluster-azure-tutorial"></a>MariaDB(MySQL) 클러스터: Azure 자습서
 > [!IMPORTANT]
 > Azure에는 리소스를 만들고 사용하기 위한 별도의 두 가지 배포 모델, 즉 [Azure Resource Manager](../../../resource-manager-deployment-model.md)와 클래식 모델이 있습니다. 이 문서에서는 클래식 배포 모델에 대해 설명합니다. 대부분의 새로운 배포에서는 Azure Resource Manager 모델을 사용하는 것이 좋습니다.
 
 > [!NOTE]
-> Azure 마켓플레이스에 MariaDB 엔터프라이즈 클러스터가 출시되었습니다. 새로운 이 서비스는 Azure Resource Manager에 MariaDB Galera 클러스터를 자동으로 배포합니다. [Azure Marketplace](https://azure.microsoft.com/en-us/marketplace/partners/mariadb/cluster-maxscale/)에서 이 서비스를 사용해야 합니다.
+> Azure Marketplace에 MariaDB 엔터프라이즈 클러스터가 출시되었습니다. 새로운 이 서비스는 Azure Resource Manager에 MariaDB Galera 클러스터를 자동으로 배포합니다. [Azure Marketplace](https://azure.microsoft.com/marketplace/partners/mariadb/cluster-maxscale/)에서 이 서비스를 사용해야 합니다.
 >
 >
 
-이 문서에서는 Azure 가상 컴퓨터의 고가용성 환경에서 작업할 수 있도록 강력하고, 확장성과 안정성이 뛰어나며, 예약할 필요가 없는 MySQL 대체 도구인 [MariaDB](https://mariadb.org/en/about/)의 다중 마스터 [Galera](http://galeracluster.com/products/) 클러스터를 만드는 방법에 대해 설명합니다.
+이 문서에서는 Azure 가상 머신의 고가용성 환경에서 작업할 수 있도록 강력하고, 확장성과 안정성이 뛰어나며, 예약할 필요가 없는 MySQL 대체 도구인 [MariaDB](https://mariadb.org/en/about/)의 다중 마스터 [Galera](http://galeracluster.com/products/) 클러스터를 만드는 방법에 대해 설명합니다.
 
 ## <a name="architecture-overview"></a>아키텍처 개요
 이 항목에서는 다음 단계를 수행하는 방법에 대해 설명합니다.
@@ -60,7 +59,7 @@ ms.lasthandoff: 03/27/2017
 3. 모든 디스크를 호스팅할 저장소 계정을 만듭니다. 20,000 IOPS 저장소 계정 한도를 초과하지 않도록 동일한 저장소 계정에 자주 사용되는 디스크를 40개 이상 배치하지 않도록 합니다. 여기서는 한도보다 훨씬 작으므로 간단하게 동일한 계정에 모든 것을 저장하겠습니다.
 
         azure storage account create mariadbstorage --label mariadbstorage --affinity-group mariadbcluster
-4. CentOS 7 가상 컴퓨터 이미지의 이름을 찾습니다.
+4. CentOS 7 가상 머신 이미지의 이름을 찾습니다.
 
         azure vm image list | findstr CentOS
    출력은 `5112500ae3b842c8b9c604889f8753c3__OpenLogic-CentOS-70-20140926`과 같습니다.
@@ -85,12 +84,12 @@ ms.lasthandoff: 03/27/2017
 
               yum install mdadm
 
-    b. EXT4 파일 시스템으로 RAID0/스트라이프 구성을 만듭니다.
+    나. EXT4 파일 시스템으로 RAID0/스트라이프 구성을 만듭니다.
 
               mdadm --create --verbose /dev/md0 --level=stripe --raid-devices=4 /dev/sdc /dev/sdd /dev/sde /dev/sdf
               mdadm --detail --scan >> /etc/mdadm.conf
               mkfs -t ext4 /dev/md0
-    c. 탑재 지점 디렉터리를 만듭니다.
+    다. 탑재 지점 디렉터리를 만듭니다.
 
               mkdir /mnt/data
     d. 새로 만든 RAID 장치의 UUID를 검색합니다.
@@ -112,14 +111,14 @@ ms.lasthandoff: 03/27/2017
 
                 vi /etc/yum.repos.d/MariaDB.repo
 
-    b. repo 파일을 다음 내용으로 채웁니다.
+    나. repo 파일을 다음 내용으로 채웁니다.
 
               [mariadb]
               name = MariaDB
               baseurl = http://yum.mariadb.org/10.0/centos7-amd64
               gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
               gpgcheck=1
-    c. 충돌을 방지하기 위해 기존 접미사와 mariadb-lib를 제거합니다.
+    다. 충돌을 방지하기 위해 기존 접미사와 mariadb-lib를 제거합니다.
 
            yum remove postfix mariadb-libs-*
     d. Galera와 함께 MariaDB를 설치합니다.
@@ -132,11 +131,11 @@ ms.lasthandoff: 03/27/2017
 
            cp -avr /var/lib/mysql /mnt/data  
            rm -rf /var/lib/mysql
-    b. 이에 따라 새 디렉터리에 대한 권한을 설정합니다.
+    나. 이에 따라 새 디렉터리에 대한 권한을 설정합니다.
 
            chown -R mysql:mysql /mnt/data && chmod -R 755 /mnt/data/
 
-    c. 이전 디렉터리를 RAID 파티션의 새 위치로 가리키는 symlink를 만듭니다.
+    다. 이전 디렉터리를 RAID 파티션의 새 위치로 가리키는 symlink를 만듭니다.
 
            ln -s /mnt/data/mysql /var/lib/mysql
 
@@ -150,10 +149,10 @@ ms.lasthandoff: 03/27/2017
    a. MySQL을 시작합니다.
 
            service mysql start
-   b. MySQL 설치 보안을 유지하고, 루트 암호를 설정하며, 익명 사용자를 제거하여 원격 루트 로그인을 사용하지 않도록 설정하고, 테스트 데이터베이스를 제거합니다.
+   나. MySQL 설치 보안을 유지하고, 루트 암호를 설정하며, 익명 사용자를 제거하여 원격 루트 로그인을 사용하지 않도록 설정하고, 테스트 데이터베이스를 제거합니다.
 
            mysql_secure_installation
-   c. 클러스터 작업 및 선택적으로 응용 프로그램을 위해 데이터베이스에 사용자를 만듭니다.
+   다. 클러스터 작업 및 선택적으로 응용 프로그램을 위해 데이터베이스에 사용자를 만듭니다.
 
            mysql -u root -p
            GRANT ALL PRIVILEGES ON *.* TO 'cluster'@'%' IDENTIFIED BY 'p@ssw0rd' WITH GRANT OPTION; FLUSH PRIVILEGES;
@@ -167,9 +166,9 @@ ms.lasthandoff: 03/27/2017
    a. MySQL 구성을 편집하여 클러스터 설정에 대한 자리 표시자를 만듭니다. 지금은 **`<Variables>`** 를 바꾸거나 주석을 제거하지 마세요. 이 템플릿에서 VM을 만든 후에 그렇게 됩니다.
 
             vi /etc/my.cnf.d/server.cnf
-   b. **[galera]** 섹션을 편집하여 지웁니다.
+   나. **[galera]** 섹션을 편집하여 지웁니다.
 
-   c. **[mariadb]** 섹션을 편집합니다.
+   다. **[mariadb]** 섹션을 편집합니다.
 
            wsrep_provider=/usr/lib64/galera/libgalera_smm.so
            binlog_format=ROW
@@ -196,7 +195,7 @@ ms.lasthandoff: 03/27/2017
    a. MySQL 구성 파일을 다시 편집합니다.
 
             vi /etc/my.cnf.d/server.cnf
-   b. **[mariadb]** 섹션을 편집하고 다음 내용을 추가합니다.
+   나. **[mariadb]** 섹션을 편집하고 다음 내용을 추가합니다.
 
    > [!NOTE]
    > innodb\_buffer\_pool_size를 VM 메모리의 70%로 설정하는 것이 좋습니다. 이 예제에서는 3.5GB RAM을 갖춘 중간 Azure VM에 대해 2.45GB로 설정되었습니다.
@@ -219,9 +218,9 @@ ms.lasthandoff: 03/27/2017
 
     a. 포털을 통해 컴퓨터를 종료합니다.
 
-    b. **캡처**를 클릭하고 이미지 이름을 **mariadb-galera-image**로 지정합니다. 설명을 입력하고 "waagent를 실행했습니다." 확인란을 선택합니다.
+    나. **캡처**를 클릭하고 이미지 이름을 **mariadb-galera-image**로 지정합니다. 설명을 입력하고 "waagent를 실행했습니다." 확인란을 선택합니다.
       
-      ![가상 컴퓨터 캡처](./media/mariadb-mysql-cluster/Capture2.PNG)
+      ![가상 머신 캡처](./media/mariadb-mysql-cluster/Capture2.PNG)
 
 ## <a name="create-the-cluster"></a>클러스터 만들기
 만든 템플릿으로 세 개의 VM을 만든 다음 클러스터를 구성하고 시작합니다.
@@ -251,7 +250,7 @@ ms.lasthandoff: 03/27/2017
         --ssh 22
         --vm-name mariadb1
         mariadbha mariadb-galera-image azureuser
-2. mariadbha 클라우드 서비스에 연결하여 두 개의 가상 컴퓨터를 추가로 만듭니다. VM 이름과 SSH 포트를 동일한 클라우드 서비스의 다른 VM과 충돌하지 않는 고유한 포트로 변경합니다.
+2. mariadbha 클라우드 서비스에 연결하여 두 개의 가상 머신을 추가로 만듭니다. VM 이름과 SSH 포트를 동일한 클라우드 서비스의 다른 VM과 충돌하지 않는 고유한 포트로 변경합니다.
 
         azure vm create
         --virtual-network-name mariadbvnet
@@ -282,8 +281,8 @@ ms.lasthandoff: 03/27/2017
 
         sudo vi /etc/my.cnf.d/server.cnf
 
-    줄의 시작 부분에서 **#**을 제거하여 **`wsrep_cluster_name`** 및 **`wsrep_cluster_address`**의 주석을 제거합니다.
-    또한 **`wsrep_node_address`**의 **`<ServerIP>`** 및 **`wsrep_node_name`**의 **`<NodeName>`**을 각각 VM의 IP 주소와 이름으로 바꾸고 해당 줄의 주석도 제거합니다.
+    줄의 시작 부분에서 **#** 을 제거하여 **`wsrep_cluster_name`** 및 **`wsrep_cluster_address`** 의 주석을 제거합니다.
+    또한 **`wsrep_node_address`** 의 **`<ServerIP>`** 및 **`wsrep_node_name`** 의 **`<NodeName>`** 을 각각 VM의 IP 주소와 이름으로 바꾸고 해당 줄의 주석도 제거합니다.
 5. MariaDB1에서 클러스터를 시작하고 시작 시 실행되도록 합니다.
 
         sudo service mysql bootstrap
@@ -346,7 +345,7 @@ CLI에서 부하 분산 장치 프로브 간격을 15초로 설정합니다. 이
 
 <!--Every topic should have next steps and links to the next logical set of content to keep the customer engaged-->
 ## <a name="next-steps"></a>다음 단계
-이 문서에서는 CentOS 7을 실행하는 Azure 가상 컴퓨터에 3개 노드 MariaDB + Galera 고가용성 클러스터를 만들었습니다. VM에서 Azure Load Balancer를 사용하여 부하를 분산했습니다.
+이 문서에서는 CentOS 7을 실행하는 Azure 가상 머신에 3개 노드 MariaDB + Galera 고가용성 클러스터를 만들었습니다. VM에서 Azure Load Balancer를 사용하여 부하를 분산했습니다.
 
 [Linux에서 MySQL을 클러스터링하는 다른 방법](mysql-cluster.md) 및 [Azure Linux VM에서 MySQL 성능 최적화 및 테스트](optimize-mysql.md)하는 방법을 살펴보는 것이 좋습니다.
 
@@ -365,4 +364,3 @@ CLI에서 부하 분산 장치 프로브 간격을 15초로 설정합니다. 이
 [MariaDBs]:https://mariadb.org/en/about/
 [인증에 사용할 SSH 키를 만들고]:http://www.jeff.wilcox.name/2013/06/secure-linux-vms-with-ssh-certificates/
 [issue #1268 in the Azure CLI]:https://github.com/Azure/azure-xplat-cli/issues/1268
-

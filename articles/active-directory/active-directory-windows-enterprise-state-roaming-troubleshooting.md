@@ -1,70 +1,72 @@
 ---
-title: "Azure Active Directory에서 엔터프라이즈 상태 로밍 설정 문제 해결 | Microsoft Docs"
-description: "설정 및 앱 데이터 동기화에 대한 IT 관리자의 질문에 답변합니다."
+title: Azure Active Directory에서 엔터프라이즈 상태 로밍 설정 문제 해결 | Microsoft Docs
+description: 설정 및 앱 데이터 동기화에 대한 IT 관리자의 질문에 답변합니다.
 services: active-directory
-keywords: "엔터프라이즈 상태 로밍 설정, windows 클라우드, 엔터프라이즈 상태 로밍에 대한 질문과 대답"
-documentationcenter: 
-author: tanning
-manager: swadhwa
-editor: 
+keywords: 엔터프라이즈 상태 로밍 설정, windows 클라우드, 엔터프라이즈 상태 로밍에 대한 질문과 대답
+documentationcenter: ''
+author: MarkusVi
+manager: mtillman
+editor: ''
 ms.assetid: f45d0515-99f7-42ad-94d8-307bc0d07be5
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 03/08/2017
+ms.date: 01/15/2018
 ms.author: markvi
-translationtype: Human Translation
-ms.sourcegitcommit: bb1ca3189e6c39b46eaa5151bf0c74dbf4a35228
-ms.openlocfilehash: 5d6b0869d2cf0e90b7b81b2304d95e01d1937925
-ms.lasthandoff: 03/18/2017
-
-
+ms.reviewer: tanning
+ms.custom: it-pro
+ms.openlocfilehash: d9936da3ee1b0cfb4ee6e834a838798a35140620
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
-#<a name="troubleshooting-enterprise-state-roaming-settings-in-azure-active-directory"></a>Azure Active Directory에서 엔터프라이즈 상태 로밍 설정 문제 해결
+# <a name="troubleshooting-enterprise-state-roaming-settings-in-azure-active-directory"></a>Azure Active Directory에서 엔터프라이즈 상태 로밍 설정 문제 해결
 
 이 항목은 엔터프라이즈 상태 로밍과 관련된 문제를 진단하고 해결하는 방법에 관한 정보와 알려진 문제 목록을 제공합니다.
 
 ## <a name="preliminary-steps-for-troubleshooting"></a>문제 해결을 위한 준비 단계 
-문제 해결을 시작하기 전에 사용자 및 장치가 적절하게 구성되었고 엔터프라이즈 상태 로밍의 모든 요구 사항을 충족하는지 확인합니다. 
+문제 해결을 시작하기 전에 사용자 및 장치가 적절하게 구성되었고 Enterprise State Roaming의 모든 요구 사항을 충족하는지 확인합니다. 
 
 1. 최신 업데이트된 Windows 10와 최소 버전 1511(OS 빌드 10586 이상)이 장치에 설치되어 있습니다. 
-2. 장치는 Azure AD에 조인되거나 도메인에 가입되고 Azure AD에 등록됩니다.
-3. Azure Active Directory 포털에서 **엔터프라이즈 상태 로밍**은 **구성** > **장치** > **설정 및 엔터프라이즈 앱 데이터 동기화가 허용되는 사용자** 아래에 있는 디렉터리에 대해 활성화됩니다. 모든 사용자를 선택하거나 선택한 옵션으로 동기화하기 위해 사용자를 사용되고 보안 그룹에 포함시킵니다.
-4. 사용자는 할당된 Azure Active Directory Premium 구독을 가집니다.  
-5. 엔터프라이즈 상태 로밍이 활성화된 후에는 장치가 다시 시작되고 사용자가 로그인됩니다.
+2. 장치는 Azure AD나 하이브리드 Azure AD에 조인되어 있습니다. 자세한 내용은 [Azure AD에서 장치를 제어하는 방법](device-management-introduction.md)을 참조하세요.
+3. [Enterprise State Roaming을 사용하려면](active-directory-windows-enterprise-state-roaming-enable.md)에 설명된 대로 Azure AD에서 테넌트에 대해 **Enterprise State Roaming**을 활성화합니다. 모든 사용자 또는 선택한 사용자 그룹만을 로밍할 수 있습니다.
+4. 이미 사용자에게는 Azure Active Directory Premium 라이선스가 할당되어야 합니다.  
+25. Enterprise State Roaming 기능에 액세스하려면 장치를 다시 시작해야 하고 사용자가 다시 로그인해야 합니다.
 
 ## <a name="information-to-include-when-you-need-help"></a>도움이 필요한 경우 포함할 정보
-아래 지침 관련 문제를 해결할 수 없는 경우 지원 엔지니어에 문의할 수 있습니다. 이렇게 문의할 때 다음 정보를 포함 하는 것이 좋습니다.
+아래 지침 관련 문제를 해결할 수 없는 경우 지원 엔지니어에 문의할 수 있습니다. 문의할 때 다음 정보를 포함합니다.
 
-- **오류에 대한 일반적인 설명** – 사용자가 본 오류 메시지가 있습니까? 오류 메시지가 있는 경우 알아낸 예기치 않은 동작을 자세히 설명합니다. 동기화를 위해 어떤 기능을 사용할 수 있고 사용자가 동기화해야 하는 이유는 무엇입니까? 다수의 기능이 동기화되지 않거나 동기화되지 않는 기능은 분리됩니까?
-- **영향을 받는 사용자** – 동기화가 한 사용자 또는 여러 사용자에 대 해 성공/실패합니까? 사용자당 몇 개의 장치가 관련됩니까? 모두 동기화되지 않거나 일부만 동기화되고 일부는 동기화되지 않습니까?
-- **사용자에 대한 정보** – 장치에 로그인을 사용하는 데 사용자가 사용하는 ID는 무엇입니까? 사용자는 장치에 어떻게 로그인합니까? 동기화가 허용된 보안 그룹의 일원입니까? 
-- **장치에 대한 정보** – 이 장치가 Azure AD에 조인되었거나 도메인에 가입되었습니까? 장치의 빌드는 무엇입니까? 최신 업데이트는 무엇입니까?
+* **오류에 대한 일반적인 설명**: 사용자가 본 오류 메시지가 있습니까? 오류 메시지가 있는 경우 알아낸 예기치 않은 동작을 자세히 설명합니다. 동기화를 위해 어떤 기능을 사용할 수 있고 사용자가 동기화해야 하는 이유는 무엇입니까? 다수의 기능이 동기화되지 않거나 동기화되지 않는 기능은 분리됩니까?
+* **영향을 받는 사용자** – 동기화가 한 사용자 또는 여러 사용자에 대 해 성공/실패합니까? 사용자당 몇 개의 장치가 관련됩니까? 모두 동기화되지 않거나 일부만 동기화되고 일부는 동기화되지 않습니까?
+* **사용자에 대한 정보**: 장치에 로그인을 사용하는 데 사용자가 사용하는 ID는 무엇입니까? 사용자는 장치에 어떻게 로그인합니까? 동기화가 허용된 보안 그룹의 일원입니까? 
+* **장치에 대한 정보** – 이 장치가 Azure AD에 조인되었거나 도메인에 조인되었습니까? 장치의 빌드는 무엇입니까? 최신 업데이트는 무엇입니까?
 - **날짜/시간/표준 시간대** – 오류(표준 시간대 포함)가 나타나는 경우 정확한 날짜 및 시간은 무엇입니까?
-- 이 정보를 포함하면 최대한 빨리 문제를 해결하는데 도움이 됩니다.
+
+이 정보를 포함하면 최대한 빨리 문제를 해결하는데 도움이 됩니다.
 
 ## <a name="troubleshooting-and-diagnosing-issues"></a>문제 해결 및 문제 진단
 이 섹션에서는 엔터프라이즈 상태 로밍에 관련된 문제를 해결하고 진단하는 방법을 제시합니다.
 
 ## <a name="verify-sync-and-the-sync-your-settings-settings-page"></a>동기화 및 "설정 동기화" 설정 페이지 확인 
 
-1. 엔터프라이즈 상태 로밍을 허용하도록 구성되어 있는 도메인에 Windows 10 PC를 연결한 후, 작업 계정으로 로그온합니다. **설정** > **계정** > **설정 동기화**로 이동하여 동기화 및 개별 설정이 켜져 있는지 그리고 설정 페이지의 맨 위에서 사용자가 자신의 작업 계정과 동기화 중임을 나타내는지 확인합니다. **설정** > **계정** > **사용자 정보**에서 동일한 계정이 로그인 계정으로 사용되고 있는지 확인합니다. 
+1. Enterprise State Roaming을 허용하도록 구성되어 있는 도메인에 Windows 10 PC를 연결한 후에 회사 계정으로 로그인합니다. **설정** > **계정** > **설정 동기화**로 이동하여 동기화 및 개별 설정이 켜져 있는지 그리고 설정 페이지의 맨 위에서 사용자가 자신의 작업 계정과 동기화 중임을 나타내는지 확인합니다. **설정** > **계정** > **사용자 정보**에서 동일한 계정이 로그인 계정으로 사용되고 있는지 확인합니다. 
 2. 작업 표시줄을 화면 오른쪽이나 위쪽으로 이동하는 등 원본 컴퓨터에서 일부 내용을 변경하여 여러 대의 컴퓨터에서 동기화가 작동하는지 확인합니다. 변경 사항이 5분 이내에 두 번째 컴퓨터에 적용되는지 확인합니다. 
- - 화면을 잠갔다가 해제하면(Win + L) 동기화 트리거에 도움이 될 수 있습니다.
- - Enterprise State Roaming이 시스템 계정이 아닌 사용자 계정에 연결되어 있으므로 동기화가 작동하려면 두 PC에서 동일한 로그온 계정을 사용해야 합니다.
+  * 화면을 잠갔다가 해제하면(Win + L) 동기화 트리거에 도움이 될 수 있습니다.
+  * Enterprise State Roaming은 컴퓨터 계정이 아닌 사용자 계정에 연결되어 있으므로 동기화가 작동하려면 두 PC에서 동일한 계정을 사용하여 로그인해야 합니다.
 
-**잠재적인 문제**: 설정 페이지에는 토글이 회색으로 나타나고, 계정 대신 "일부 Windows 기능은 Microsoft 계정 또는 회사 계정을 사용하는 경우에만 사용할 수 있습니다."라는 텍스트가 표시됩니다. 이러한 문제는 장치가 도메인에 가입되어 Azure AD에 등록되도록 설정되었지만 장치가 Azure AD에 성공적으로 인증되지 않은 경우 발생합니다. 이는 장치 정책을 적용해야 하지만 이 응용 프로그램이 비동기적으로 작동하여 몇 시간 지연되는 것이 원인일 수 있습니다. 이 문제를 확인하려면 장치 등록 상태 확인의 단계를 따라 이 경우에 해당하는지 확인합니다.
+**잠재적인 문제**: **설정** 페이지에서 제어를 사용할 수 없는 경우 "일부 Windows 기능은 Microsoft 계정 또는 회사 계정을 사용하는 경우에만 사용할 수 있습니다."라는 메시지가 표시됩니다. 장치가 도메인에 조인되어 Azure AD에 등록되도록 설정되었지만 Azure AD에 성공적으로 인증되지 않은 경우 이러한 문제가 발생할 수 있습니다. 이는 장치 정책을 적용해야 하지만 이 응용 프로그램이 비동기적으로 작동하여 몇 시간 지연되는 것이 원인일 수 있습니다. 
 
 ### <a name="verify-the-device-registration-status"></a>장치 등록 상태 확인
 엔터프라이즈 상태 로밍은 Azure AD에 등록된 장치가 필요합니다. 엔터프라이즈 상태 로밍에는 해당하지 않지만 아래 지침을 따르면 Windows 10 클라이언트 등록 여부뿐만 아니라, 지문, Azure AD 설정 URL, NGC 상태 및 기타 정보를 확인하는 데 도움이 됩니다.
 
-1.    비관리자 권한 명령 프롬프트를 엽니다. Windows에서 이 작업을 수행하려면 실행 시작 관리자(Win + R)를 열고 "cmd"를 입력하여 엽니다.
-2.    명령 프롬프트가 열리면 "*dsregcmd.exe /status*"을 입력합니다.
-3.    예상된 출력에서 **AzureAdJoined** 필드 값은 "YES", **WamDefaultSet** 필드 값도 "YES"여야 하고 **WamDefaultGUID** 필드 값은 끝에 "(AzureAd)"가 있는 GUID여야 합니다.
+1.  비관리자 권한 명령 프롬프트를 엽니다. Windows에서 이 작업을 수행하려면 실행 시작 관리자(Win + R)를 열고 "cmd"를 입력하여 엽니다.
+2.  명령 프롬프트가 열리면 "*dsregcmd.exe /status*"을 입력합니다.
+3.  예상된 출력에서 **AzureAdJoined** 필드 값은 "YES", **WamDefaultSet** 필드 값도 "YES"여야 하고 **WamDefaultGUID** 필드 값은 끝에 "(AzureAd)"가 있는 GUID여야 합니다.
 
-**잠재적인 문제**: **WamDefaultSet** 및 **AzureAdJoined** 필드 값이 모두 "NO"이고 장치가 도메인에 가입되고 Azure AD에 등록되었으며 장치가 동기화되지 않습니다. 이것이 표시되는 경우 장치를 Azure AD에 연결할 때 장치는 정책을 적용하거나 장치에 대한 인증이 실패할 때까지 대기해야 합니다. 사용자는 정책이 적용될 때까지 몇 시간을 대기해야 할 수 있습니다. 기타 문제 해결 단계에는 로그아웃하고 다시 로그인함으로써 자동 등록 다시 시도 또는 작업 스케줄러에서 작업 시작이 포함될 수 있습니다. 경우에 따라 관리자 권한 명령 프롬프트 창에서 "*dsregcmd.exe /leave*"를 실행하고 다시 부팅하여 등록을 다시 시도하면 이 문제 해결에 도움이 될 수 있습니다.
+**잠재적인 문제**: **WamDefaultSet** 및 **AzureAdJoined** 필드 값이 모두 "NO"이고 장치가 도메인에 가입되고 Azure AD에 등록되었으며 장치가 동기화되지 않습니다. 이것이 표시되는 경우 장치를 Azure AD에 연결할 때 장치는 정책을 적용하거나 장치에 대한 인증이 실패할 때까지 대기해야 합니다. 사용자는 정책이 적용될 때까지 몇 시간을 대기해야 할 수 있습니다. 기타 문제 해결 단계에는 로그아웃하고 다시 로그인함으로써 자동 등록 다시 시도 또는 작업 Scheduler에서 작업 시작이 포함될 수 있습니다. 경우에 따라 관리자 권한 명령 프롬프트 창에서 "*dsregcmd.exe /leave*"를 실행하고 다시 부팅하여 등록을 다시 시도하면 이 문제 해결에 도움이 될 수 있습니다.
 
 
 **잠재적인 문제**: **AzureAdSettingsUrl** 필드가 비어있고 장치가 동기화되지 않습니다. 사용자가 Azure Active Directory 포털에서 엔터프라이즈 상태 로밍을 사용하기 전에 장치에 마지막으로 로그인했을 수 있습니다. 장치를 다시 시작하고 사용자에게 로그인하게 합니다. 필요한 경우 포털에서 IT 관리자에게 설정 및 엔터프라이즈 앱 데이터 동기화가 허용되는 사용자를 비활성화했다가 다시 활성화하도록 합니다. 다시 활성화되면 장치를 다시 시작하고 사용자에게 로그인하게 합니다. 그래도 문제가 해결되지 않으면 장치 인증서의 경우 **AzureAdSettingsUrl**이 비어 있을 수 있습니다. 이 경우 관리자 권한 명령 프롬프트 창에서 "*dsregcmd.exe /leave*"를 실행하고 다시 부팅하여 등록을 다시 시도하면 이 문제 해결에 도움이 될 수 있습니다.
@@ -76,7 +78,7 @@ ms.lasthandoff: 03/18/2017
 
 **잠재적인 문제**: 관리자가 Active Directory Federation Services Multi-Factor Authentication 조건부 액세스 정책을 구성하고 장치에 대한 액세스 토큰이 만료된 경우 동기화는 실패할 수 있습니다. Office 365와 같은 다른 Azure 서비스에 액세스하는 동안 Microsoft Passport for Work PIN을 사용하거나 Multi-Factor Authentication을 완료하여 로그인 및 로그아웃해야 합니다.
 
-###<a name="event-viewer"></a>이벤트 뷰어
+### <a name="event-viewer"></a>이벤트 뷰어
 고급 문제 해결의 경우 이벤트 뷰어를 사용하여 특정 오류를 찾을 수 있습니다. 이는 아래 표에 설명되어 있습니다. 이벤트는 이벤트 뷰어 > 응용 프로그램 및 서비스 로그 > **Microsoft** > **Windows** > **SettingSync** 그리고 동기화와 ID 관련 문제는 **Microsoft** > **Windows** > **Azure AD**에서 찾을 수 있습니다.
 
 
@@ -157,7 +159,7 @@ Azure AD에 등록된 도메인 가입 장치는 오랜 시간 장치가 현장�
 
 ---
 
-### <a name="event-id-6065-80070533-this-user-cant-sign-in-because-this-account-is-currently-disabled"></a>이벤트 ID 6065: 80070533 이 사용자는 현재 이 계정을 사용할 수 없기 때문에 로그인 할 수 없음    
+### <a name="event-id-6065-80070533-this-user-cant-sign-in-because-this-account-is-currently-disabled"></a>이벤트 ID 6065: 80070533 이 사용자는 현재 이 계정을 사용할 수 없기 때문에 로그인 할 수 없음  
 사용자의 자격 증명이 만료된 경우 이벤트 뷰어의 SettingSync/Debug 로그 아래에 이 오류가 표시될 수 있습니다. 또한 테넌트가 AzureRMS를 자동으로 프로비전하지 않은 경우에도 이 오류가 발생할 수 있습니다. 
 
 **권장 작업**  
@@ -165,8 +167,8 @@ Azure AD에 등록된 도메인 가입 장치는 오랜 시간 장치가 현장�
 
 ---
 
-### <a name="event-id-1098-error-0xcaa5001c-token-broker-operation-failed"></a>이벤트 ID 1098: 오류: 0xCAA5001C 토큰 브로커 작업 실패    
-AAD/Operational 로그에 있는 이벤트 뷰어에서 이벤트 1104: AAD 클라우드 AP 플러그 인 호출이 반환된 토큰 가져오기 오류: 0xC000005F와 함께 이 오류가 나타날 수 있습니다. 이 문제는 권한 또는 소유권 특성이 없는 경우 발생합니다.     
+### <a name="event-id-1098-error-0xcaa5001c-token-broker-operation-failed"></a>이벤트 ID 1098: 오류: 0xCAA5001C 토큰 브로커 작업 실패  
+AAD/Operational 로그에 있는 이벤트 뷰어에서 이벤트 1104: AAD 클라우드 AP 플러그 인 호출이 반환된 토큰 가져오기 오류: 0xC000005F와 함께 이 오류가 나타날 수 있습니다. 이 문제는 권한 또는 소유권 특성이 없는 경우 발생합니다.  
 
 **권장 작업**  
 [KB3196528](https://support.microsoft.com/kb/3196528)에 나열된 단계를 수행합니다.  
@@ -185,4 +187,3 @@ AAD/Operational 로그에 있는 이벤트 뷰어에서 이벤트 1104: AAD 클�
 * [설정 및 데이터 로밍 FAQ](active-directory-windows-enterprise-state-roaming-faqs.md)
 * [설정 동기화에 대한 그룹 정책 및 MDM 설정](active-directory-windows-enterprise-state-roaming-group-policy-settings.md)
 * [Windows 10 로밍 설정 참조](active-directory-windows-enterprise-state-roaming-windows-settings-reference.md)
-

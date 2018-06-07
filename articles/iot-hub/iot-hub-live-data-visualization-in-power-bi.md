@@ -1,26 +1,25 @@
 ---
-title: "Azure IoT Hub에서 센서 데이터의 실시간 데이터 시각화 – Power BI | Microsoft Docs"
-description: "Power BI를 사용하여 센서에서 수집하여 Azure IoT Hub로 보낸 온도 및 습도 데이터를 시각화합니다."
+title: Azure IoT Hub에서 센서 데이터의 실시간 데이터 시각화 – Power BI | Microsoft Docs
+description: Power BI를 사용하여 센서에서 수집하여 Azure IoT Hub로 보낸 온도 및 습도 데이터를 시각화합니다.
 services: iot-hub
-documentationcenter: 
-author: shizn
+documentationcenter: ''
+author: rangv
 manager: timlt
-tags: 
-keywords: "실시간 데이터 시각화, 라이브 데이터 시각화, 센서 데이터 시각화"
+tags: ''
+keywords: 실시간 데이터 시각화, 라이브 데이터 시각화, 센서 데이터 시각화
 ms.assetid: e67c9c09-6219-4f0f-ad42-58edaaa74f61
 ms.service: iot-hub
 ms.devlang: arduino
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/29/2017
-ms.author: xshi
-ms.translationtype: Human Translation
-ms.sourcegitcommit: db18dd24a1d10a836d07c3ab1925a8e59371051f
-ms.openlocfilehash: 404ab1682d9b77f22e60888340ffb70a101ed5d4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/15/2017
-
+ms.date: 4/11/2018
+ms.author: rangv
+ms.openlocfilehash: 12ac0596d70ae068ba17713d1251fbf117824f67
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="visualize-real-time-sensor-data-from-azure-iot-hub-using-power-bi"></a>Power BI를 사용하여 Azure IoT Hub에서 실시간 센서 데이터 시각화
 
@@ -53,7 +52,7 @@ Azure IoT Hub에서 Power BI를 통해 받는 실시간 센서 데이터를 시�
 
 ### <a name="create-a-stream-analytics-job"></a>Stream Analytics 작업 만들기
 
-1. Azure Portal에서 새로 만들기 > 사물 인터넷 > Stream Analytics 작업을 차례로 클릭합니다.
+1. [Azure Portal](https://portal.azure.com)에서 **리소스 만들기** > **사물 인터넷** > **Stream Analytics 작업**을 차례로 클릭합니다.
 1. 작업에 대한 다음 정보를 입력합니다.
 
    **작업 이름**: 작업의 이름입니다. 이름은 전역적으로 고유해야 합니다.
@@ -108,11 +107,11 @@ Azure IoT Hub에서 Power BI를 통해 받는 실시간 센서 데이터를 시�
 1. **작업 토폴로지**에서 **쿼리**를 클릭합니다.
 1. `[YourInputAlias]`를 작업의 입력 별칭으로 바꿉니다.
 1. `[YourOutputAlias]`를 작업의 출력 별칭으로 바꿉니다.
-1. **Save**를 클릭합니다.
+1. **저장**을 클릭합니다.
 
    ![Azure에서 Stream Analytics 작업에 쿼리 추가](media/iot-hub-live-data-visualization-in-power-bi/5_add-query-stream-analytics-job-azure.png)
 
-### <a name="run-the-stream-analytics-job"></a>스트림 분석 작업 실행
+### <a name="run-the-stream-analytics-job"></a>Stream Analytics 작업 실행
 
 Stream Analytics 작업에서 **시작** > **지금 시작** > **시작**을 차례로 클릭합니다. 작업이 성공적으로 시작되면 작업 상태가 **중지됨**에서 **실행 중**으로 변경됩니다.
 
@@ -136,7 +135,7 @@ Stream Analytics 작업에서 **시작** > **지금 시작** > **시작**을 차
    1. **시각화** 창에서 **EventEnqueuedUtcTime**을 **축**으로 끌어갑니다.
    1. **온도**를 **값**으로 끌어갑니다.
 
-      이제 꺾은선형 차트가 만들어집니다. 차트의 x축은 UTC 표준 시간대의 날짜와 시간을 표시하고, y축은 센서의 온도를 표시합니다.
+      이제 꺾은선형 차트가 만들어집니다. x축은 UTC 표준 시간대의 날짜와 시간을 표시하고, y축은 센서의 온도를 표시합니다.
 
       ![온도에 대한 꺾은선형 차트를 Microsoft Power BI 보고서에 추가](media/iot-hub-live-data-visualization-in-power-bi/8_add-line-chart-for-temperature-to-power-bi-report-microsoft.png)
 
@@ -160,4 +159,3 @@ Power BI를 사용하여 Azure IoT Hub에서 실시간 센서 데이터를 시�
 Azure IoT Hub에서 데이터를 시각화하는 또 다른 방법이 있습니다. [Azure Web Apps를 사용하여 Azure IoT Hub의 실시간 센서 데이터 시각화](iot-hub-live-data-visualization-in-web-apps.md)를 참조하세요.
 
 [!INCLUDE [iot-hub-get-started-next-steps](../../includes/iot-hub-get-started-next-steps.md)]
-

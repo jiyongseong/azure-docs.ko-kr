@@ -1,13 +1,13 @@
 ---
-title: "Azure CLI 1.0을 사용하여 Linux VM의 크기를 조정하는 방법 | Microsoft Docs"
-description: "VM 크기를 변경하여 Linux 가상 컴퓨터의 규모를 확장하거나 축소하는 방법"
+title: Azure CLI 1.0을 사용하여 Linux VM의 크기를 조정하는 방법 | Microsoft Docs
+description: VM 크기를 변경하여 Linux 가상 머신의 규모를 확장하거나 축소하는 방법
 services: virtual-machines-linux
 documentationcenter: na
 author: mikewasson
-manager: timlt
-editor: 
-tags: 
-ms.assetid: 
+manager: jeconnoc
+editor: ''
+tags: ''
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.devlang: na
 ms.topic: article
@@ -16,14 +16,12 @@ ms.workload: infrastructure-services
 ms.date: 05/16/2016
 ms.author: mwasson
 ms.custom: H1Hack27Feb2017
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 72f5a3cd6463befd5108040ed166984281bfc5f0
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: 4407a3662e6a50d650ab4ecc6dd1c2dad0c53bdb
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-
 # <a name="resize-a-linux-vm-with-azure-cli-10"></a>Azure CLI 1.0을 사용하여 Linux VM의 크기 조정
 
 ## <a name="overview"></a>개요
@@ -76,12 +74,11 @@ VM의 크기를 조정하려면 다음 단계를 수행합니다.
    > 
 
 ## <a name="next-steps"></a>다음 단계
-확장성을 높이기 위해서는 여러 VM 인스턴스를 실행하고 규모를 확장합니다. 자세한 내용은 [가상 컴퓨터 크기 집합에서 Linux 컴퓨터 자동 확장][scale-set]을 참조하세요. 
+확장성을 높이기 위해서는 여러 VM 인스턴스를 실행하고 규모를 확장합니다. 자세한 내용은 [Virtual Machine Scale Set에서 Linux 컴퓨터 자동 확장][scale-set]을 참조하세요. 
 
 <!-- links -->
 
 [azure-cli]:../../cli-install-nodejs.md
-[boot-diagnostics]: https://azure.microsoft.com/en-us/blog/boot-diagnostics-for-virtual-machines-v2/
+[boot-diagnostics]: https://azure.microsoft.com/blog/boot-diagnostics-for-virtual-machines-v2/
 [scale-set]: ../../virtual-machine-scale-sets/virtual-machine-scale-sets-linux-autoscale.md 
 [vm-sizes]:sizes.md
-

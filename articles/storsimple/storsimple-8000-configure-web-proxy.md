@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 04/19/2017
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
 ms.openlocfilehash: 1109e44ed9c6aa8a0f7305b8a50410316711589c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="configure-web-proxy-for-your-storsimple-device"></a>StorSimple 장치에 대한 웹 프록시 구성
 
@@ -157,5 +155,4 @@ ms.lasthandoff: 07/08/2017
 ## <a name="next-steps"></a>다음 단계
 * 장치를 배포하거나 웹 프록시 설정을 구성하는 동안 문제가 발생하면 [StorSimple 장치 배포 문제 해결](storsimple-troubleshoot-deployment.md)을 참조하세요.
 * StorSimple 장치 관리자 서비스를 사용하는 방법을 알아보려면 [StorSimple 장치 관리자 서비스를 사용하여 StorSimple 장치 관리](storsimple-8000-manager-service-administration.md)로 이동하세요.
-
 

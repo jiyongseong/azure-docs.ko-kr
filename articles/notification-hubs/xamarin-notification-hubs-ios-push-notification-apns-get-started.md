@@ -1,98 +1,113 @@
 ---
-title: "Xamarin 앱용 알림 허브를 사용한 iOS 푸시 알림 | Microsoft Docs"
-description: "이 자습서에서 Azure 알림 허브를 사용하여 Xamarin iOS 응용 프로그램에 푸시 알림을 보내는 방법을 알아봅니다."
+title: Azure Notification Hubs를 사용하여 Xamarin.iOS 앱에 알림 푸시 | Microsoft Docs
+description: 이 자습서에서 Azure Notification Hubs를 사용하여 Xamarin iOS 응용 프로그램에 푸시 알림을 보내는 방법을 알아봅니다.
 services: notification-hubs
-keywords: "ios 푸시 알림, 푸시 메시지, 푸시 알림, 푸시 메시지"
+keywords: ios 푸시 알림, 푸시 메시지, 푸시 알림, 푸시 메시지
 documentationcenter: xamarin
-author: ysxu
-manager: erikre
-editor: 
+author: dimazaid
+manager: kpiteira
+editor: spelluru
 ms.assetid: 4d4dfd42-c5a5-4360-9d70-7812f96924d2
 ms.service: notification-hubs
 ms.workload: mobile
 ms.tgt_pltfrm: mobile-xamarin-ios
 ms.devlang: dotnet
-ms.topic: hero-article
-ms.date: 06/29/2016
-ms.author: yuaxu
-ms.translationtype: Human Translation
-ms.sourcegitcommit: b1d56fcfb472e5eae9d2f01a820f72f8eab9ef08
-ms.openlocfilehash: 72a81fa0deb34ace77b8fb9b1a4e6b24ee164b35
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.topic: tutorial
+ms.custom: mvc
+ms.date: 04/14/2018
+ms.author: dimazaid
+ms.openlocfilehash: babd6bff3cec38318cacc0d55394a7563f8e69a4
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
-# <a name="ios-push-notifications-with-notification-hubs-for-xamarin-apps"></a>Xamarin 앱용 알림 허브를 사용한 iOS 푸시 알림
+# <a name="tutorial-push-notifications-to-xamarinios-apps-using-azure-notification-hubs"></a>자습서: Azure Notification Hubs를 사용하여 Xamarin.iOS 앱에 알림 푸시
 [!INCLUDE [notification-hubs-selector-get-started](../../includes/notification-hubs-selector-get-started.md)]
 
 ## <a name="overview"></a>개요
-> [!IMPORTANT]
-> 이 자습서를 완료하려면 활성 Azure 계정이 있어야 합니다. 계정이 없는 경우 몇 분 만에 무료 평가판 계정을 만들 수 있습니다. 자세한 내용은 [Azure 무료 체험](https://azure.microsoft.com/pricing/free-trial/?WT.mc_id=A643EE910&amp;returnurl=http%3A%2F%2Fazure.microsoft.com%2Fen-us%2Fdocumentation%2Farticles%2Fpartner-xamarin-notification-hubs-ios-get-started)을 참조하세요.
-> 
-> 
+이 자습서에서는 Azure Notification Hubs를 사용하여 iOS 응용 프로그램에 푸시 알림을 보내는 방법을 보여 줍니다. [APNS(Apple Push Notification Service)](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/APNSOverview.html)를 사용하여 푸시 알림을 받는 빈 Xamarin.iOS 앱을 만듭니다. 
 
-이 자습서에서는 Azure 알림 허브를 사용하여 iOS 응용 프로그램에 푸시 알림을 보내는 방법을 보여 줍니다.
-[APNS(Apple Push Notification Service)](https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/APNSOverview.html)를 사용하여 푸시 알림을 받는 빈 Xamarin.iOS 앱을 만듭니다. 완료하면 알림 허브를 사용하여 앱을 실행하는 모든 장치로 푸시 알림을 브로드캐스트할 수 있습니다. 완성된 코드는 [NotificationHubs 앱][GitHub] 샘플에서 사용할 수 있습니다.
+완료하면 알림 허브를 사용하여 앱을 실행하는 모든 장치로 푸시 알림을 브로드캐스트할 수 있습니다. 완성된 코드는 [NotificationHubs 앱][GitHub] 샘플에서 사용할 수 있습니다.
 
-이 자습서에서는 알림 허브를 사용하는 간단한 푸시 메시지 브로드캐스트 시나리오를 보여 줍니다.
+이 자습서에서는 다음 작업을 수행하는 코드를 생성/업데이트합니다. 
+
+> [!div class="checklist"]
+> * 인증서 서명 요청 파일 생성
+> * 푸시 알림에 대해 앱 등록
+> * 앱용 프로비저닝 프로필 만들기
+> * iOS 푸시 알림에 대해 알림 허브 구성
+> * 테스트 푸시 알림 보내기
 
 ## <a name="prerequisites"></a>필수 조건
-이 자습서를 사용하려면 다음이 필요합니다.
 
-* [Xcode 6.0][Install Xcode]
-* iOS 7.0(이상) 호환 장치
-* iOS 개발자 프로그램 멤버 자격
-* [Xamarin Studio]
+- **Azure 구독**. Azure 구독이 아직 없는 경우 시작하기 전에 [체험 계정](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)을 만듭니다.
+- 최신 버전의 [XCode][Install Xcode]
+- iOS 10 이상 호환 장치
+- [Apple 개발자 프로그램](https://developer.apple.com/programs/) 멤버 자격
+- [Mac용 Visual Studio]
   
   > [!NOTE]
   > iOS 푸시 알림에 대한 구성 요구 사항 때문에 시뮬레이터 대신 실제 iOS 장치(iPhone 또는 iPad)에서 응용 프로그램 예제를 배포 및 테스트해야 합니다.
-  > 
-  > 
 
-이 자습서를 완료해야 다른 모든 Xamarin.iOS 앱용 알림 허브 자습서를 진행할 수 있습니다.
+먼저 이 자습서를 완료해야 Xamarin.iOS 앱에 대한 다른 모든 Notification Hubs 자습서를 진행할 수 있습니다.
 
 [!INCLUDE [Notification Hubs Enable Apple Push Notifications](../../includes/notification-hubs-enable-apple-push-notifications.md)]
 
-## <a name="configure-your-notification-hub"></a>알림 허브 구성
-이 섹션에서는 새 알림 허브를 만들고 사용자가 만든 **.p12** 푸시 알림을 사용하여 APNS로 인증을 구성하는 방법을 단계별로 안내합니다. 이미 만든 알림 허브를 사용하려는 경우 5단계로 건너뛸 수 있습니다.
+## <a name="configure-your-notification-hub-for-ios-push-notifications"></a>iOS 푸시 알림에 대해 알림 허브 구성
+이 섹션에서는 새 알림 허브를 만들고, APNS와 함께 이전에 만든 **.p12** 푸시 인증서를 사용하여 인증을 구성하는 단계를 안내합니다. 이미 만든 알림 허브를 사용하려는 경우 5단계로 건너뛸 수 있습니다.
 
 [!INCLUDE [notification-hubs-portal-create-new-hub](../../includes/notification-hubs-portal-create-new-hub.md)]
 
-<ol start="7">
+### <a name="configure-ios-settings-for-the-notification-hub"></a>알림 허브에 대한 iOS 설정 구성
+1. **알림 설정** 그룹에서 **Apple(APNS)** 을 선택합니다. 
+2. **인증서**를 선택하고, **파일** 아이콘을 클릭한 다음, 이전에 내보낸 **.p12** 파일을 선택합니다. 
+3. 인증서에 대한 **암호**를 지정합니다. 
+4. **샌드박스** 모드를 선택합니다. 스토어에서 앱을 구매한 사용자에게 푸시 알림을 보내려는 경우에만 **프로덕션** 모드를 사용합니다.
 
-<li>
+    ![Azure Portal에서 APNS 구성][6]
 
-<p>APNS 연결을 구성하려면 Azure Portal에서 알림 허브 설정을 열고 <b>알림 서비스</b>를 클릭한 다음 목록에서 <b>Apple(APNS)</b> 항목을 클릭합니다. 완료되면 <b>인증서 업로드</b>를 클릭하고 앞서 내보낸 <b>.p12</b> 인증서 및 인증서의 암호를 선택합니다.</p>
-
-<p>개발 환경에서 푸시 메시지를 전송 중이므로 <b>샌드박스</b> 모드가 선택되어 있어야 합니다. 스토어에서 앱을 이미 구매한 사용자에게 푸시 알림을 보내려는 경우에만 <b>프로덕션</b> 설정을 사용합니다.</p>
-</li>
-</ol>
-&emsp;&emsp;![](./media/notification-hubs-ios-get-started/notification-hubs-apns.png)
-
-&emsp;&emsp;![](./media/notification-hubs-ios-get-started/notification-hubs-sandbox.png)
+    ![Azure Portal에서 APNS 인증 구성][7]
 
 이제 알림 허브가 APNS와 작동하도록 구성되었으며 앱을 등록하고 푸시 알림을 보내기 위한 연결 문자열이 있습니다.
 
 ## <a name="connect-your-app-to-the-notification-hub"></a>알림 허브에 앱 연결
 #### <a name="create-a-new-project"></a>새 프로젝트 만들기
-1. Xamarin Studio에서 새 iOS 프로젝트를 만들고 통합 **API** > **단일 보기 응용 프로그램** 템플릿을 선택합니다.
+1. Visual Studio에서 새 iOS 프로젝트를 만들고, **단일 뷰 앱** 템플릿을 선택하고, **다음**을 클릭합니다.
    
-     ![Xamarin Studio - 응용 프로그램 유형 선택][31]
-2. Azure 메시징 구성 요소에 대한 참조를 추가합니다. 솔루션 보기에서 프로젝트에 대한 **구성** 요소 폴더를 마우스 오른쪽 단추로 클릭하고 **구성 요소 더 가져오기**를 선택합니다. **Azure 메시징** 구성 요소를 검색하여 프로젝트에 추가합니다.
-3. **AppDelegate.cs**에서 다음 using 문을 추가합니다.
+     ![Visual Studio - 응용 프로그램 유형 선택][31]
+
+2. 앱 이름 및 조직 식별자를 입력하고 **다음**, **만들기**를 차례로 누릅니다.
+
+3. 솔루션 보기에서 *Into.plist*를 두 번 클릭하고, **ID** 아래에서 번들 식별자가 프로비전 프로필을 만들 때 사용한 식별자와 일치하는지 확인합니다. **서명** 아래에서 **팀**에 대해 개발자 계정이 선택되고, "자동으로 서명 관리"가 선택되고, 서명 인증서 및 프로비전 프로필이 자동으로 선택되어 있는지 확인합니다.
+
+    ![Visual Studio - iOS 앱 구성][32]
+
+4. Azure Messaging 패키지를 추가합니다. [솔루션] 보기에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **추가** > **NuGet 패키지 추가**를 차례로 선택합니다. **Xamarin.Azure.NotificationHubs.iOS**를 검색하고 프로젝트에 이 패키지를 추가합니다.
+
+5. 클래스에 새 파일을 추가하고, 이름을 **Constants.cs**로 지정하고, 다음 변수를 추가하고, 문자열 리터럴 자리 표시자를 *허브 이름* 및 앞에서 언급한 *DefaultListenSharedAccessSignature*로 바꿉니다.
    
-        using WindowsAzure.Messaging;
-4. **SBNotificationHub**인스턴스를 선언합니다.
-   
-        private SBNotificationHub Hub { get; set; }
-5. 다음 변수를 사용하여 **Constants.cs** 클래스를 만듭니다.
-   
+    ```csharp
         // Azure app-specific connection string and hub path
         public const string ConnectionString = "<Azure connection string>";
         public const string NotificationHubPath = "<Azure hub path>";
-6. **AppDelegate.cs**에서 **FinishedLaunching()**을 다음과 일치하도록 업데이트합니다.
+    ```
+
+6. **AppDelegate.cs**에서 다음 using 문을 추가합니다.
    
+    ```csharp
+        using WindowsAzure.Messaging;
+    ```
+
+7. **SBNotificationHub**인스턴스를 선언합니다.
+   
+    ```csharp
+        private SBNotificationHub Hub { get; set; }
+    ```
+
+8. **AppDelegate.cs**에서 **FinishedLaunching()** 을 다음 코드와 일치하도록 업데이트합니다.
+   
+    ```csharp
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             if (UIDevice.CurrentDevice.CheckSystemVersion (8, 0)) {
@@ -109,8 +124,11 @@ ms.lasthandoff: 07/06/2017
    
             return true;
         }
-7. **AppDelegate.cs**의 **RegisteredForRemoteNotifications()** 메서드를 재정의합니다.
+    ```
+
+9. **AppDelegate.cs**의 **RegisteredForRemoteNotifications()** 메서드를 재정의합니다.
    
+    ```csharp
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
         {
             Hub = new SBNotificationHub(Constants.ConnectionString, Constants.NotificationHubPath);
@@ -129,14 +147,20 @@ ms.lasthandoff: 07/06/2017
                 });
             });
         }
-8. **AppDelegate.cs**의 **ReceivedRemoteNotification()** 메서드를 재정의합니다.
+    ```
+
+10. **AppDelegate.cs**의 **ReceivedRemoteNotification()** 메서드를 재정의합니다.
    
+    ```csharp
         public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo)
         {
             ProcessNotification(userInfo, false);
         }
-9. **AppDelegate.cs**에 다음 **ProcessNotification()** 메서드를 만듭니다.
+    ```
+
+11. **AppDelegate.cs**에 다음 **ProcessNotification()** 메서드를 만듭니다.
    
+    ```csharp
         void ProcessNotification(NSDictionary options, bool fromFinishedLaunching)
         {
             // Check to see if the dictionary has the aps key.  This is the notification payload you would have sent
@@ -170,136 +194,57 @@ ms.lasthandoff: 07/06/2017
                 }
             }
         }
-   
+    ```
    > [!NOTE]
-   > 네트워크 연결이 없는 경우를 처리하도록 **FailedToRegisterForRemoteNotifications()** 를 재정의할 수 있습니다. 사용자가 응용 프로그램을 오프라인 모드(예: 비행기)에서 시작할 수 있고 사용자의 앱에 특정한 푸시 메시징 시나리오를 처리하려는 경우 특히 중요합니다.
-   > 
-   > 
-10. 장치에서 앱을 실행합니다.
+   > 네트워크 연결이 없는 경우를 처리하도록 **FailedToRegisterForRemoteNotifications()** 를 재정의할 수 있습니다. 이는 사용자가 응용 프로그램을 오프라인 모드(예: 비행기)에서 시작할 수 있고 앱에 특정한 푸시 메시지 시나리오를 처리하려는 경우에 특히 중요합니다.
+  
 
-## <a name="sending-push-notifications"></a>푸시 알림 보내기
-아래 화면과 같이 바로 알림 허브 페이지에서 **문제 해결** 도구 집합의 **테스트 보내기** 기능을 통해 [Azure Portal]에서 알림을 보내서 앱의 푸시 알림 수신을 테스트할 수 있습니다.
+12. 장치에서 앱을 실행합니다.
 
-![](./media/notification-hubs-ios-get-started/notification-hubs-test-send.png)
+## <a name="send-test-push-notifications"></a>테스트 푸시 알림 보내기
+[Azure Portal]에서 *테스트 보내기* 옵션을 사용하여 앱에서 알림 수신을 테스트할 수 있습니다. 이렇게 하면 테스트 푸시 알림이 장치로 전송됩니다.
 
-푸시 알림은 일반적으로 호환 라이브러리를 사용하는 모바일 서비스 또는 ASP.NET과 같은 백 엔드 서비스를 통해 전송됩니다. 시나리오에 라이브러리를 사용할 수 없는 경우 직접 REST API를 사용하여 푸시 메시지를 보낼 수도 있습니다. 
+![Azure Portal - 보내기 테스트][30]
 
-이 자습서에서는 과정을 단순하게 유지하고 백엔드 서비스 대신 콘솔 응용 프로그램에서 알림 허브에 .NET SDK를 사용하여 알림을 보내서 클라이언트 앱의 테스트만 보여 줍니다. ASP.NET 백엔드에서 알림을 보내기 위한 다음 단계로 [알림 허브를 사용하여 사용자에게 알림을 푸시](notification-hubs-aspnet-backend-ios-apple-apns-notification.md) 하는 것이 좋습니다. 그러나 다음 접근 방식을 사용하여 알림을 보낼 수 있습니다.
-
-* **REST 인터페이스**: [REST 인터페이스](http://msdn.microsoft.com/library/windowsazure/dn223264.aspx)를 사용하여 백 엔드 플랫폼에서 푸시 알림을 지원할 수 있습니다.
-* **Microsoft Azure 알림 허브 .NET SDK**: Visual Studio용 Nuget 패키지 관리자에서 [Install-Package Microsoft.Azure.NotificationHubs](https://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/)를 실행합니다.
-* **Node.js** : [Node.js에서 알림 허브 사용 방법](notification-hubs-nodejs-push-notification-tutorial.md).
-
-**Mobile Apps**: 알림 허브와 통합된 Azure App Service Mobile Apps 백 엔드에서 알림을 보내는 방법에 대한 예제는 [모바일 앱에 푸시 알림 추가](../app-service-mobile/app-service-mobile-ios-get-started-push.md)를 참조하세요.
-
-* **Java / PHP**: REST API를 사용하여 푸시 알림을 보내는 방법에 대한 예는 "Java/PHP에서 알림 허브를 사용하는 방법"([Java](notification-hubs-java-push-notification-tutorial.md) | [PHP](notification-hubs-php-push-notification-tutorial.md))을 참조하세요.
-
-#### <a name="optional-send-push-notifications-from-a-net-console-app"></a>(선택 사항) .NET 콘솔 앱에서 푸시 알림 보내기
-이 섹션에서는 간단한 .NET 콘솔 앱을 사용하여 푸시 알림을 보냅니다. 이 예제에서는 Visual Studio가 이미 설치된 Windows 개발 환경으로 전환합니다.
-
-1. Visual Studio에서 다음과 같이 새로운 Visual C# 콘솔 응용 프로그램을 만듭니다.
-   
-       ![Visual Studio - Create a new console application][213]
-2. Visual Studio에서 **도구**를 클릭하고 **NuGet 패키지 관리자**를 클릭한 다음 **패키지 관리자 콘솔**을 클릭합니다.
-   
-    패키지 관리자 콘솔이 Visual Studio 작업 영역 맨 아래에 도킹된 상태로 표시됩니다.
-3. 패키지 관리자 콘솔 창에서 **기본 프로젝트** 를 새 콘솔 응용 프로그램 프로젝트로 설정한 후 콘솔 창에서 다음 명령을 실행합니다.
-   
-        Install-Package Microsoft.Azure.NotificationHubs
-   
-    그러면 <a href="http://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/">Microsoft.Azure.Notification Hubs NuGet 패키지</a>를 사용하는 Azure 알림 허브 SDK에 대한 참조가 추가됩니다.
-   
-    ![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hub-package-manager.png)
-4. `Program.cs` 파일을 열고 다음 `using` 문을 추가하여 기본 클래스 내에서 Azure 클래스 및 함수를 사용할 수 있도록 합니다.
-   
-        using Microsoft.Azure.NotificationHubs;
-5. 사용자의 `Program` 클래스에서 다음 메서드를 추가합니다(**연결 문자열** 및 **허브 이름**을 바꾸는 것을 잊지 마세요).
-   
-        private static async void SendNotificationAsync()
-        {
-            NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString("<connection string with full access>", "<hub name>");
-            var alert = "{\"aps\":{\"alert\":\"Hello from .NET!\"}}";
-            await hub.SendAppleNativeNotificationAsync(alert);
-        }
-6. `Main` 메서드에 다음 줄을 추가합니다.
-   
-         SendNotificationAsync();
-         Console.ReadLine();
-7. F5 키를 눌러 앱을 실행합니다. 몇 초 이내에 장치에 푸시 알림이 표시됩니다. Wi-Fi 또는 셀룰러 데이터 네트워크 중 어떤 것을 사용하든지 장치에서 활성화된 인터넷 연결이 있어야 합니다.
-
-Apple [Local and Push Notification Programming Guide]에서 가능한 모든 페이로드를 찾아볼 수 있습니다.
-
-#### <a name="optional-send-notifications-from-a-mobile-service"></a>(선택 사항) 모바일 서비스에서 알림 보내기
-이 섹션에서는 노드 스크립트를 통해 모바일 서비스를 사용하여 푸시 알림을 보냅니다.
-
-모바일 서비스를 사용하여 알림을 보내려면 [모바일 서비스 시작]을 따른 후 다음을 수행하세요.
-
-1. [Azure 클래식 포털]에 로그인하고 모바일 서비스를 선택합니다.
-2. 맨 위에 있는 **스케줄러** 탭을 선택합니다.
-   
-       ![Azure Classic Portal - Scheduler][215]
-3. 새 예약된 작업을 만들고 이름을 삽입한 후 **요청 시**를 선택합니다.
-   
-       ![Azure Classic Portal - Create new job][216]
-4. 작업이 만들어졌으면 작업 이름을 클릭합니다. 그런 다음 위쪽 막대에서 **스크립트** 탭을 클릭합니다.
-5. 스케줄러 함수 내에 다음 스크립트를 삽입합니다. 자리 표시자를 알림 허브 이름과 앞에서 얻은 *DefaultFullSharedAccessSignature* 의 연결 문자열로 바꿔야 합니다. **저장**을 클릭합니다.
-   
-        var azure = require('azure');
-        var notificationHubService = azure.createNotificationHubService('<Hubname>', '<SAS Full access >');
-        notificationHubService.apns.send(
-            null,
-            {"aps":
-                {
-                  "alert": "Hello from Mobile Services!"
-                }
-            },
-            function (error)
-            {
-                if (!error) {
-                    console.warn("Notification successful");
-                }
-            }
-        );
-6. 아래쪽 막대에서 **한 번 실행** 을 클릭합니다. 장치에 대한 경고를 받게 됩니다.
+푸시 알림은 일반적으로 호환 라이브러리를 사용하는 Mobile Apps 또는 ASP.NET과 같은 백 엔드 서비스에서 전송됩니다. 백 엔드에서 라이브러리를 사용할 수 없는 경우 REST API를 직접 사용하여 알림 메시지를 보낼 수도 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
-이 간단한 예제에서는 모든 iOS 장치로 포시 알림을 브로드캐스트합니다. 특정 사용자를 대상으로 하려면 [알림 허브를 사용하여 사용자에게 알림 푸시](영문) 자습서를 참조하세요. 사용자를 관심 그룹별로 분할하려면 [알림 허브를 사용하여 뉴스 속보 보내기](영문)를 참조하세요. 알림 허브 사용 방법에 대해 자세히 알아보려면 [알림 허브 지침] 및 [iOS용 알림 허브 방법]을 참조하세요.
+이 자습서에서는 백 엔드에 등록된 모든 iOS 장치로 브로드캐스트 알림을 보냈습니다. 특정 iOS 장치로 알림을 푸시하는 방법을 알아보려면 다음 자습서를 계속 진행합니다. 
+
+> [!div class="nextstepaction"]
+>[특정 장치에 알림 푸시](notification-hubs-ios-xplat-segmented-apns-push-notification.md)
 
 <!-- Images. -->
-
+[6]: ./media/notification-hubs-ios-get-started/notification-hubs-apple-config.png
+[7]: ./media/notification-hubs-ios-get-started/notification-hubs-apple-config-cert.png
 [213]: ./media/partner-xamarin-notification-hubs-ios-get-started/notification-hub-create-console-app.png
 
 [215]: ./media/partner-xamarin-notification-hubs-ios-get-started/notification-hub-scheduler1.png
 [216]: ./media/partner-xamarin-notification-hubs-ios-get-started/notification-hub-scheduler2.png
 
-
+[30]: ./media/notification-hubs-ios-get-started/notification-hubs-test-send.png
 [31]: ./media/partner-xamarin-notification-hubs-ios-get-started/notification-hub-create-ios-app.png
-
+[32]: ./media/partner-xamarin-notification-hubs-ios-get-started/notification-hub-app-settings.png
 
 
 
 <!-- URLs. -->
-[Mobile Services iOS SDK]: http://go.microsoft.com/fwLink/?LinkID=266533
 [Submit an app page]: http://go.microsoft.com/fwlink/p/?LinkID=266582
 [My Applications]: http://go.microsoft.com/fwlink/p/?LinkId=262039
 [Live SDK for Windows]: http://go.microsoft.com/fwlink/p/?LinkId=262253
-
-[모바일 서비스 시작]: /develop/mobile/tutorials/get-started-xamarin-ios
-[Azure 클래식 포털]: https://manage.windowsazure.com/
-[알림 허브 지침]: http://msdn.microsoft.com/library/jj927170.aspx
-[iOS용 알림 허브 방법]: http://msdn.microsoft.com/library/jj927168.aspx
+[Windows Azure Messaging Framework]: http://go.microsoft.com/fwlink/?LinkID=799698&clcid=0x409
+[Get started with Mobile Services]: /develop/mobile/tutorials/get-started-xamarin-ios
+[Notification Hubs Guidance]: http://msdn.microsoft.com/library/jj927170.aspx
+[Notification Hubs How-To for iOS]: http://msdn.microsoft.com/library/jj927168.aspx
 [Install Xcode]: https://go.microsoft.com/fwLink/p/?LinkID=266532
 [iOS Provisioning Portal]: http://go.microsoft.com/fwlink/p/?LinkId=272456
-
-[알림 허브를 사용하여 사용자에게 알림 푸시]: /manage/services/notification-hubs/notify-users-aspnet
-[알림 허브를 사용하여 뉴스 속보 보내기]: /manage/services/notification-hubs/breaking-news-dotnet
+[Mac용 Visual Studio]: https://www.visualstudio.com/vs/visual-studio-mac/
+[Use Notification Hubs to push notifications to users]: /manage/services/notification-hubs/notify-users-aspnet
+[Use Notification Hubs to send breaking news]: /manage/services/notification-hubs/breaking-news-dotnet
 
 [Local and Push Notification Programming Guide]:https://developer.apple.com/library/content/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/HandlingRemoteNotifications.html#//apple_ref/doc/uid/TP40008194-CH6-SW1
 [Apple Push Notification Service]: http://go.microsoft.com/fwlink/p/?LinkId=272584
 
 [Azure Mobile Services Component]: http://components.xamarin.com/view/azure-mobile-services/
-[GitHub]: http://go.microsoft.com/fwlink/p/?LinkId=331329
-[Xamarin Studio]: http://xamarin.com/download
-[WindowsAzure.Messaging]: https://github.com/infosupport/WindowsAzure.Messaging.iOS
+[GitHub]: https://github.com/xamarin/mobile-samples/tree/master/Azure/NotificationHubs
 [Azure Portal]: https://portal.azure.com
-

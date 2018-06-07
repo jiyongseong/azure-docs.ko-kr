@@ -1,10 +1,10 @@
 ---
 title: "Azure Active Directory Domain Services: 시작 | Microsoft Docs"
-description: "Azure Portal을 사용하여 Azure Active Directory Domain Services 활성화(미리 보기)"
+description: "Azure Portal을 사용하여 Azure Active Directory Domain Services 활성화"
 services: active-directory-ds
 documentationcenter: 
 author: mahesh-unnikrishnan
-manager: stevenpo
+manager: mtillman
 editor: curtand
 ms.assetid: ace1ed4a-bf7f-43c1-a64a-6b51a2202473
 ms.service: active-directory-ds
@@ -12,16 +12,15 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/15/2017
+ms.date: 09/26/2017
 ms.author: maheshu
+ms.openlocfilehash: 2a171490faf9804196c93d33c5ee74d22533c044
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: f87bcf33d3b1eb21c7d84814e4c4086f664e293d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
-# <a name="enable-azure-active-directory-domain-services-using-the-azure-portal-preview"></a>Azure Portal을 사용하여 Azure Active Directory Domain Services 활성화(미리 보기)
+# <a name="enable-azure-active-directory-domain-services-using-the-azure-portal"></a>Azure Portal을 사용하여 Azure Active Directory Domain Services 활성화
 
 
 ## <a name="task-3-configure-administrative-group"></a>작업 3: 관리 그룹 구성
@@ -57,11 +56,11 @@ ms.lasthandoff: 07/21/2017
 
     ![프로비전되는 관리되는 도메인 찾기](./media/getting-started/domain-services-provisioning-state-find-resource.png)
 
-2. 도메인에 대한 자세한 내용을 보려면 관리되는 도메인의 이름(예: 'contoso100.com')을 클릭합니다.
+2. 관리되는 도메인에 대한 자세한 내용을 보려면 관리되는 도메인의 이름(예: 'contoso100.com')을 클릭합니다.
 
     ![Domain Services - 프로비저닝 상태](./media/getting-started/domain-services-provisioning-state.png)
 
-3. **개요** 탭은 도메인이 현재 프로비전되고 있음을 보여 줍니다. 완전히 프로비전될 때까지 관리되는 도메인을 구성할 수 없습니다. 관리되는 도메인이 완전히 프로비전되려면 최대 한 시간 정도 걸릴 수 있습니다.
+3. **개요** 탭은 관리되는 도메인이 현재 프로비전되고 있음을 보여 줍니다. 완전히 프로비전될 때까지 관리되는 도메인을 구성할 수 없습니다. 관리되는 도메인이 완전히 프로비전되려면 최대 한 시간 정도 걸릴 수 있습니다.
 
     ![Domain Services - 프로비전 상태 중 개요 탭 ](./media/getting-started/domain-services-provisioning-state-details.png)
 
@@ -74,6 +73,9 @@ ms.lasthandoff: 07/21/2017
     ![Domain Services - 완전히 프로비전한 후 속성 탭](./media/getting-started/domain-services-provisioned-properties.png)
 
 
+## <a name="need-help"></a>도움이 필요하세요?
+관리되는 도메인의 도메인 컨트롤러 모두를 프로비전하는 데 한두 시간 정도가 걸릴 수 있습니다. 배포에 실패하거나 2시간 넘게 '보류 중' 상태인 경우 [제품팀에 문의](active-directory-ds-contact-us.md)하는 것이 좋습니다.
+
+
 ## <a name="next-step"></a>다음 단계
 [작업 4: Azure 가상 네트워크에 대한 DNS 설정 업데이트](active-directory-ds-getting-started-dns.md)
-

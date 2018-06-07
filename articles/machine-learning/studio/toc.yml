@@ -1,0 +1,235 @@
+- name: Machine Learning Studio 설명서
+  href: index.yml
+- name: 개요
+  expanded: true
+  items:
+    - name: Machine Learning Studio
+      href: what-is-ml-studio.md
+    - name: ML Studio 기능
+      href: studio-overview-diagram.md
+    - name: ML Studio 기본 사항(인포그래픽)
+      href: basics-infographic-with-algorithm-examples.md
+    - name: 질문과 대답
+      href: faq.md
+    - name: 새로운 기능
+      href: whats-new.md
+- name: 시작
+  items:
+    - name: 첫 번째 실험 만들기
+      href: create-experiment.md
+    - name: 연습 예
+      items:
+        - name: 예측 솔루션 만들기
+          href: walkthrough-develop-predictive-solution.md
+        - name: 1 - 작업 영역 만들기
+          href: walkthrough-1-create-ml-workspace.md
+        - name: 2 - 데이터 업로드
+          href: walkthrough-2-upload-data.md
+        - name: 3 - 실험 만들기
+          href: walkthrough-3-create-new-experiment.md
+        - name: 4 - 학습 및 평가
+          href: walkthrough-4-train-and-evaluate-models.md
+        - name: 5 - 웹 서비스 배포
+          href: walkthrough-5-publish-web-service.md
+        - name: 6 -웹 서비스 액세스
+          href: walkthrough-6-access-web-service.md
+    - name: 초급자를 위한 데이터 과학
+      items:
+        - name: 1 - 다섯 질문
+          href: data-science-for-beginners-the-5-questions-data-science-answers.md
+        - name: 2 - 데이터가 준비되었습니까?
+          href: data-science-for-beginners-is-your-data-ready-for-data-science.md
+        - name: 3 - 적절한 질문을 합니다
+          href: data-science-for-beginners-ask-a-question-you-can-answer-with-data.md
+        - name: 4 - 답변을 예측합니다
+          href: data-science-for-beginners-predict-an-answer-with-a-simple-model.md
+        - name: 5 - 다른 사람의 작업을 복사합니다
+          href: data-science-for-beginners-copy-other-peoples-work-to-do-data-science.md
+    - name: R 빠른 시작
+      href: r-quickstart.md
+- name: 방법
+  items:
+    - name: 도구 및 유틸리티 설정
+      items:
+        - name: 작업 영역 관리
+          items:
+            - name: 생성
+              href: create-workspace.md
+            - name: 관리
+              href: manage-workspace.md
+            - name: 문제 해결
+              href: troubleshooting-creating-ml-workspace.md
+            - name: ARM을 사용하여 배포
+              href: deploy-with-resource-manager-template.md
+            - name: 다른 지역에서 만들기
+              href: multi-geo.md
+    - name: 데이터 획득 및 이해
+      items:
+        - name: 학습 데이터 가져오기
+          items:
+            - name: 개요
+              href: import-data.md
+            - name: 로컬 파일에서
+              href: import-data-from-local-file.md
+            - name: 온라인 소스에서
+              href: import-data-from-online-sources.md
+            - name: 실험에서
+              href: import-data-from-an-experiment.md
+            - name: 온-프레미스 SQL 사용
+              href: use-data-from-an-on-premises-sql-server.md
+    - name: 모델 개발
+      items:
+        - name: 모델을 만들고 학습 수행
+          items:
+            - name: 실험 수명 주기 관리
+              href: version-control.md
+            - name: 실험 반복 관리
+              href: manage-experiment-iterations.md
+            - name: PowerShell을 사용하여 모델 만들기
+              href: create-models-and-endpoints-with-powershell.md
+            - name: 알고리즘 선택
+              items:
+                - name: 알고리즘 선택
+                  href: algorithm-choice.md
+                - name: 알고리즘 치트 시트
+                  href: algorithm-cheat-sheet.md
+                - name: 선형 회귀 사용
+                  href: linear-regression-in-azure.md
+                - name: 텍스트 분석 사용
+                  href: text-analytics-module-tutorial.md
+            - name: 결과 평가 및 해석
+              items:
+                - name: 성능 평가
+                  href: evaluate-model-performance.md
+                - name: 매개 변수 최적화
+                  href: algorithm-parameters-optimize.md
+                - name: 결과 해석
+                  href: interpret-model-results.md
+                - name: 디버그
+                  href: debug-models.md
+            - name: R 및 Python 사용
+              items:
+                - name: R 스크립트 실행
+                  href: extend-your-experiment-with-r.md
+                - name: 사용자 지정 R 모듈
+                  href: custom-r-modules.md
+                - name: Python 스크립트 실행
+                  href: execute-python-scripts.md
+    - name: 모델 운영
+      items:
+        - name: 개요
+          href: deploy-consume-web-service-guide.md
+        - name: 모델 배포
+          items:
+            - name: 웹 서비스 배포
+              href: publish-a-machine-learning-web-service.md
+            - name: 작동 방법
+              href: model-progression-experiment-to-web-service.md
+            - name: 배포 준비
+              href: convert-training-experiment-to-scoring-experiment.md
+            - name: 외부 데이터 사용
+              href: web-services-that-use-import-export-modules.md
+            - name: 다중 지역 배포
+              href: how-to-deploy-to-multiple-regions.md
+            - name: 웹 서비스 매개 변수 사용
+              href: web-service-parameters.md
+            - name: 로깅 사용
+              href: web-services-logging.md
+        - name: 웹 서비스 관리
+          items:
+            - name: 웹 서비스 포털 사용
+              href: manage-new-webservice.md
+            - name: API를 사용하여 관리
+              href: manage-web-service-endpoints-using-api-management.md
+            - name: 끝점 만들기
+              href: create-endpoint.md
+            - name: 확장
+              href: scaling-webservice.md
+        - name: 모델 다시 학습
+          items:
+            - name: 개요
+              href: retrain-machine-learning-model.md
+            - name: 프로그래밍 방식으로 다시 학습
+              href: retrain-models-programmatically.md
+            - name: 기존 웹 서비스 재학습
+              href: retrain-a-classic-web-service.md
+            - name: PowerShell을 사용하여 다시 학습
+              href: retrain-new-web-service-using-powershell.md
+            - name: 기존 웹 서비스 재학습
+              href: retrain-existing-resource-manager-based-web-service.md
+            - name: 문제 해결
+              href: troubleshooting-retraining-models.md
+        - name: 모델 사용
+          items:
+            - name: 개요
+              href: consume-web-services.md
+            - name: Excel 사용
+              href: consuming-from-excel.md
+            - name: Excel 추가 기능 사용
+              href: excel-add-in-for-web-services.md
+            - name: 웹앱 템플릿 사용
+              href: consume-web-service-with-web-app-template.md
+            - name: Batch 풀 사용
+              href: dedicated-capacity-for-bes-jobs.md
+    - name: 예
+      items:
+        - name: 샘플 실험
+          href: sample-experiments.md
+        - name: 샘플 데이터 집합
+          href: use-sample-datasets.md
+        - name: 고객 이탈 예
+          href: azure-ml-customer-churn-scenario.md
+- name: 참고 자료
+  items:
+    - name: Azure PowerShell 모듈(신규)
+      href: /powershell/resourcemanager/azurerm.machinelearning/v0.11.1/azurerm.machinelearning
+    - name: Azure PowerShell 모듈(클래식)
+      href: powershell-module.md
+    - name: 알고리즘 및 모듈 참조
+      href: 'https://msdn.microsoft.com/library/azure/dn905974.aspx'
+    - name: REST 관리 API
+      href: /rest/api/machinelearning
+    - name: 웹 서비스 오류 코드
+      href: web-service-error-codes.md
+- name: 관련 항목
+  items:
+    - name: Azure AI 갤러리
+      items:
+        - name: 개요
+          href: gallery-how-to-use-contribute-publish.md
+        - name: 산업
+          href: gallery-industries.md
+        - name: 솔루션
+          href: gallery-solutions.md
+        - name: 실험
+          href: gallery-experiments.md
+        - name: Jupyter 노트북
+          href: gallery-jupyter-notebooks.md
+        - name: 경쟁
+          href: gallery-competitions.md
+        - name: 경쟁 FAQ
+          href: competition-faq.md
+        - name: 자습서
+          href: gallery-tutorials.md
+        - name: 컬렉션
+          href: gallery-collections.md
+        - name: 사용자 지정 모듈
+          href: gallery-custom-modules.md
+- name: 리소스
+  items:
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: 'Net# 신경망 언어'
+      href: azure-ml-netsharp-reference-guide.md
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/machine-learning/'
+    - name: 서비스 업데이트
+      href: 'https://azure.microsoft.com/updates/?product=machine-learning'
+    - name: 블로그
+      href: 'http://blogs.technet.com/b/machinelearning/'
+    - name: MSDN 포럼
+      href: 'https://social.msdn.microsoft.com/forums/azure/home?forum=MachineLearning'
+    - name: 스택 오버플로
+      href: 'http://stackoverflow.com/questions/tagged/azure-machine-learning'
+    - name: 동영상
+      href: 'https://azure.microsoft.com/resources/videos/index/?services=machine-learning'

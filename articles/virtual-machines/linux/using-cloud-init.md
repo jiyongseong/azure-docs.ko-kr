@@ -1,10 +1,10 @@
 ---
-title: "cloud-init를 사용하여 Linux VM 사용자 지정 | Microsoft Docs"
-description: "Azure CLI 2.0에서 cloud-init를 사용하여 생성 중인 Linux VM을 사용자 지정하는 방법"
+title: "Azure의 Linux 가상 머신에 대한 cloud-init 지원 개요 | Microsoft Docs"
+description: "Microsoft Azure의 cloud-init 기능 개요"
 services: virtual-machines-linux
 documentationcenter: 
-author: iainfoulds
-manager: timlt
+author: rickstercdn
+manager: jeconnoc
 editor: 
 tags: azure-resource-manager
 ms.assetid: 195c22cd-4629-4582-9ee3-9749493f1d72
@@ -13,216 +13,88 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: azurecli
 ms.topic: article
-ms.date: 05/11/2017
-ms.author: iainfou
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 97fa1d1d4dd81b055d5d3a10b6d812eaa9b86214
-ms.openlocfilehash: a7a6daad34525683579e25b9591ed28f2bf29c04
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/11/2017
-
-
+ms.date: 11/29/2017
+ms.author: rclaus
+ms.openlocfilehash: fbb6fc15663570d9b9470fc7d4de3c8eb30de9d9
+ms.sourcegitcommit: 0b02e180f02ca3acbfb2f91ca3e36989df0f2d9c
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/05/2018
 ---
-# <a name="use-cloud-init-to-customize-a-linux-vm-during-creation"></a>cloud-init를 사용하여 생성 중인 Linux VM 사용자 지정
-이 문서에서는 cloud-init 스크립트를 사용하여 Azure CLI 2.0에서 호스트 이름 설정, 설치된 패키지 업데이트, 사용자 계정 관리를 수행하는 방법을 설명합니다. Azure CLI에서 VM(가상 컴퓨터)을 만드는 중에 cloud-init 스크립트가 호출됩니다. 응용 프로그램 설치, 구성 파일 작성 및 Key Vault의 키 삽입에 대한 보다 깊이 있는 개요를 보려면 [이 자습서](tutorial-automate-vm-deployment.md)를 참조하세요. [Azure CLI 1.0](using-cloud-init-nodejs.md)에서 이러한 단계를 수행할 수도 있습니다.
+# <a name="cloud-init-support-for-virtual-machines-in-azure"></a>Azure의 가상 머신에 대한 Cloud-init 지원
+이 문서에서는 Azure에서 프로비전할 때 VM(가상 머신) 또는 VMSS(가상 머신 확장 집합)을 구성할 수 있도록 [cloud-init](https://cloudinit.readthedocs.io)를 위해 존재하는 지원에 대해 설명합니다. Azure에서 리소스가 프로비전되면 처음 부팅 시 이러한 cloud-init 스크립트가 실행됩니다.  
 
-## <a name="quick-commands"></a>빠른 명령
-호스트 이름을 설정하고, 모든 패키지를 업데이트하고, Linux에 sudo 사용자를 추가하는 cloud-init.txt 스크립트를 만듭니다.
+## <a name="cloud-init-overview"></a>Cloud-init 개요
+[Cloud-init](https://cloudinit.readthedocs.io)는 처음 부팅 시 Linux VM을 사용자 지정하는 데 널리 사용되는 방법입니다. Cloud-init를 사용하여 패키지를 설치하고 파일을 쓰거나, 사용자 및 보안을 구성할 수 있습니다. 초기 부팅 프로세스 중에 cloud-init가 호출되므로 구성을 적용하기 위한 추가 단계나 필요한 에이전트가 없습니다.  `#cloud-config` 파일의 형식을 제대로 지정하는 방법에 대한 자세한 내용은 [cloud-init 설명서 사이트](http://cloudinit.readthedocs.io/en/latest/topics/format.html#cloud-config-data)를 참조하세요.  `#cloud-config` 파일은 base64로 인코딩된 텍스트 파일입니다.
+
+Cloud-init는 배포에서도 작동합니다. 예를 들어, 패키지를 설치하는 데 **apt-get install** 또는 **yum install**은 사용하지 않습니다. 대신 설치할 패키지 목록을 정의할 수 있습니다. cloud-init에서 선택한 배포판의 기본 패키지 관리 도구를 자동으로 사용합니다.
+
+ Azure Marketplace에서 cloud-init 활성화 이미지를 사용할 수 있도록 하기 위해 승인된 Linux 배포판 파트너와 적극적으로 공조하고 있습니다. 이러한 이미지를 사용하면 VM 및 VMSS(VM Scale Sets)에서 cloud-init 배포 및 구성 작업을 원활하게 진행할 수 있습니다. 다음 표에서는 Azure 플랫폼에서 현재 사용 가능한 cloud-init 지원 이미지를 보여 줍니다.
+
+| 게시자 | 제안 | SKU | 버전 | cloud-init 준비 여부
+|:--- |:--- |:--- |:--- |:--- |:--- |
+|Canonical |UbuntuServer |16.04-LTS |최신 |예 | 
+|Canonical |UbuntuServer |14.04.5-LTS |최신 |예 |
+|CoreOS |CoreOS |Stable |최신 |예 |
+|OpenLogic |CentOS |7-CI |최신 |미리 보기 |
+|RedHat |RHEL |7-RAW-CI |최신 |미리 보기 |
+
+현재 Azure Stack은 cloud-init을 사용하는 RHEL 7.4 및 CentOS 7.4 프로비전을 지원하지 않습니다.
+
+## <a name="what-is-the-difference-between-cloud-init-and-the-linux-agent-wala"></a>cloud-init와 Linux 에이전트(WALA)의 차이는 무엇입니까?
+WALA는 VM을 프로비전 및 구성하고 Azure 확장을 처리하는 데 사용되는 Azure 플랫폼 관련 에이전트입니다. 기존 cloud-init 고객이 현재 cloud-init 스크립트를 사용할 수 있도록, Linux 에이전트 대신 cloud-init를 사용하도록 VM을 구성하는 작업을 개선하고 있습니다.  Linux 시스템을 구성하기 위해 cloud-init 스크립트에 이미 투자한 경우 **추가 설정이 필요 없습니다**. 
+
+프로비전할 때 AzureCLI `--custom-data` 스위치를 포함하지 않으면 WALA는 VM을 프로비전하는 데 필요한 최소한의 VM 프로비전 매개 변수를 사용하여 기본 설정으로 배포를 완료합니다.  cloud-init `--custom-data` 스위치를 참조하면 사용자 지정 데이터에 포함된 것이 무엇이든(개인 설정 또는 전체 스크립트) 관계없이 WALA 기본값을 재정의합니다. 
+
+VM의 WALA 구성은 최대 VM 프로비전 시간 내에서 작업하도록 시간이 제한됩니다.  VM에 적용되는 Cloud-init 구성은 시간 제약 조건이 없으므로 제한 시간 초과로 인한 배포 실패가 없습니다. 
+
+## <a name="deploying-a-cloud-init-enabled-virtual-machine"></a>cloud-init를 사용하는 가상 머신 배포
+cloud-init를 사용하는 가상 머신 배포 방법은 배포하는 동안 cloud-init 지원 배포를 참조하는 것만큼 간단합니다.  Linux 배포 유지 관리자는 cloud-init를 사용하도록 설정하고 기본 Azure 게시 이미지와 통합하도록 선택해야 합니다. 배포하려는 이미지에서 cloud-init가 설정되었는지 확인한 후 AzureCLI를 사용하여 이미지를 배포할 수 있습니다. 
+
+이미지 배포의 첫 번째 단계로 [az group create](/cli/azure/group#az_group_create) 명령을 사용하여 리소스 그룹을 만들어야 합니다. Azure 리소스 그룹은 Azure 리소스가 배포 및 관리되는 논리적 컨테이너입니다. 
+
+다음 예제에서는 *eastus* 위치에 *myResourceGroup*이라는 리소스 그룹을 만듭니다.
+
+```azurecli-interactive 
+az group create --name myResourceGroup --location eastus
+```
+그 다음 단계로 현재 셸에서 *cloud-init.txt*라는 파일을 만들고 다음 구성을 붙여넣습니다. 이 예제에서는 로컬 컴퓨터에 없는 Cloud Shell에서 파일을 만듭니다. 원하는 모든 편집기를 사용할 수 있습니다. `sensible-editor cloud-init.txt`를 입력하여 파일을 만들고 사용할 수 있는 편집기의 목록을 봅니다. #1을 선택하여 **nano** 편집기를 사용합니다. 전체 cloud-init 파일, 특히 첫 줄이 올바르게 복사되었는지 확인합니다.
 
 ```yaml
 #cloud-config
-hostname: myVMhostname
-apt_upgrade: true
-users:
-  - name: myNewAdminUser
-    groups: sudo
-    shell: /bin/bash
-    sudo: ['ALL=(ALL) NOPASSWD:ALL']
-    ssh-authorized-keys:
-      - ssh-rsa AAAAB3<snip>==myAdminUser@myVM
+package_upgrade: true
+packages:
+  - httpd
 ```
+`ctrl-X` 키를 눌러 파일을 종료하고, `y`를 입력하여 파일을 저장하고 `enter` 키를 눌러 종료 시 파일 이름을 확인합니다.
 
-[az group create](/cli/azure/group#create)를 사용하여 VM을 시작하려면 리소스 그룹을 만듭니다. 다음 예제에서는 *myResourceGroup*이라는 리소스 그룹을 만듭니다.
+마지막 단계로 [az vm create](/cli/azure/vm#az_vm_create) 명령을 사용하여 VM을 만듭니다. 
 
-```azurecli
-az group create --name myResourceGroup --location eastus
-```
+다음 예제에서는 *centos74*라는 VM을 만들고 기본 키 위치에 SSH 키가 없는 경우 이 키를 만듭니다. 특정 키 집합을 사용하려면 `--ssh-key-value` 옵션을 사용합니다.  `--custom-data` 매개 변수를 사용하여 cloud-init 구성 파일을 전달합니다. 현재 작업 디렉터리 외부에 파일을 저장한 경우 *cloud-init.txt* 구성의 전체 경로를 제공합니다. 다음 예제에서는 *centos74*라는 VM을 만듭니다.
 
-cloud-init을 사용하여 [az vm create](/cli/azure/vm#create)로 Linux VM을 만든 후 `--custom-data` 매개 변수를 사용하여 부팅 중에 구성합니다.
-
-```azurecli
+```azurecli-interactive 
 az vm create \
-    --resource-group myResourceGroup \
-    --name myVM \
-    --image UbuntuLTS \
-    --admin-username azureuser \
-    --generate-ssh-keys \
-    --custom-data cloud-init.txt
+  --resource-group myResourceGroup \
+  --name centos74 \
+  --image OpenLogic:CentOS:7-CI:latest \
+  --custom-data cloud-init.txt \
+  --generate-ssh-keys 
 ```
 
-## <a name="detailed-walkthrough"></a>자세한 연습
-새 Linux VM을 시작하면 사용자 지정된 사항이나 사용자의 요구에 맞게 준비된 기능이 없는 표준 Linux VM이 시작됩니다. [cloud-init](https://cloudinit.readthedocs.org) 은 Linux VM을 처음으로 부팅할 때 해당 VM에 스크립트 또는 구성 설정을 삽입하는 표준 방법입니다.
+VM이 생성되면 Azure CLI가 배포에 대한 정보를 표시합니다. `publicIpAddress`을 기록해 둡니다. 이 주소는 VM에 액세스하는 데 사용됩니다.  VM을 만들고 패키지를 설치하고 앱을 시작하는 데 시간이 약간 걸립니다. Azure CLI에서 프롬프트로 반환한 후 실행을 계속하는 백그라운드 작업이 있습니다. VM에 SSH한 후 문제 해결 섹션에 설명된 단계를 사용하여 cloud-init 로그를 볼 수 있습니다. 
 
-Azure에서는 다음의 몇 가지 방법으로 배포 또는 부팅 중인 Linux VM을 변경할 수 있습니다.
-
-* cloud-init을 사용하여 스크립트를 삽입합니다.
-* Azure [VMAccess 확장](using-vmaccess-extension.md)을 사용하여 스크립트를 삽입합니다.
-* Azure 템플릿을 사용합니다(cloud-init 사용).
-* Azure 템플릿을 사용합니다( [CustomScriptExtention](extensions-customscript.md)사용).
-
-부팅 후에 언제든지 스크립트를 삽입하려면 다음 방법을 사용합니다.
-
-* SSH를 통해 명령을 직접 실행합니다.
-* Azure [VMAccess 확장](using-vmaccess-extension.md)을 사용하여 명령적으로 또는 Azure 템플릿에서 스크립트를 삽입합니다.
-* Ansible, Salt, Chef, Puppet 등의 구성 관리 도구를 사용합니다.
+## <a name="troubleshooting-cloud-init"></a>cloud-init 문제 해결
+VM이 프로비전되면 cloud-init는 `--custom-data`에 정의된 모든 모듈과 스크립트를 실행하여 VM을 구성합니다.  구성 오류 또는 누락을 해결해야 하는 경우 **/var/log/cloud-init.log**에 있는 cloud-init 로그에서 모듈 이름(예: `disk_setup` 또는 `runcmd`)을 검색해야 합니다.
 
 > [!NOTE]
-> VMAccess 확장은 SSH를 사용할 때와 같은 방식으로 스크립트를 루트로 실행합니다. 그러나 VM 확장 사용 시에는 시나리오에 따라 유용할 수 있는 다양한 Azure 제공 기능을 사용할 수 있습니다.
+> 모든 모듈 실패가 심각한 cloud-init 전체 구성 실패로 이어지는 것은 아닙니다. 예를 들어 `runcmd` 모듈을 사용하는 경우 스크립트가 실패해도 runcmd 모듈이 실행되었기 때문에 cloud-init는 성공한 프로비전을 계속 보고합니다.
 
-## <a name="cloud-init-availability-on-azure-vm-quick-create-image-aliases"></a>Azure VM 빨리 만들기 이미지 별칭에 대한 cloud-init 사용 가능 여부
-| Alias | 게시자 | 제안 | SKU | 버전 | cloud-init |
-|:--- |:--- |:--- |:--- |:--- |:--- |
-| CentOS |OpenLogic |Centos |7.2 |최신 |no |
-| CoreOS |CoreOS |CoreOS |Stable |최신 |yes |
-| Debian |credativ |Debian |8 |최신 |no |
-| openSUSE |SUSE |openSUSE |13.2 |최신 |no |
-| RHEL |Redhat |RHEL |7.2 |최신 |no |
-| UbuntuLTS |Canonical |UbuntuServer |14.04.4-LTS |최신 |yes |
-
-당사는 파트너와 협력하여 파트너가 Azure에 제공하는 이미지에 cloud-init를 포함하고 이러한 이미지에서 cloud-init가 작동하도록 설정하고 있습니다.
-
-## <a name="add-a-cloud-init-script-to-the-vm-creation-with-the-azure-cli"></a>Azure CLI를 사용하여 VM 생성에 cloud-init 스크립트 추가
-Azure에서 VM을 만들 때 cloud-init 스크립트를 시작하려면 Azure CLI `--custom-data` 스위치를 사용하여 cloud-init 파일을 지정합니다.
-
-[az group create](/cli/azure/group#create)를 사용하여 VM을 시작하려면 리소스 그룹을 만듭니다. 다음 예제에서는 *myResourceGroup*이라는 리소스 그룹을 만듭니다.
-
-```azurecli
-az group create --name myResourceGroup --location eastus
-```
-
-cloud-init을 사용하여 [az vm create](/cli/azure/vm#create)로 Linux VM을 만들어서 부팅 중에 구성합니다.
-
-```azurecli
-az vm create \
-    --resource-group myResourceGroup \
-    --name myVM \
-    --image UbuntuLTS \
-    --admin-username azureuser \
-    --generate-ssh-keys \
-    --custom-data cloud-init.txt
-```
-
-## <a name="create-a-cloud-init-script-to-set-the-hostname-of-a-linux-vm"></a>cloud-init 스크립트를 만들어 Linux VM의 호스트 이름 설정
-Linux VM의 가장 간단하고 중요한 설정 중 하나는 호스트 이름입니다. 이 스크립트와 함께 cloud-init을 사용하여 손쉽게 설정할 수 있습니다.  
-
-### <a name="example-cloud-init-script-named-cloudconfighostnametxt"></a>예제 cloud-init 스크립트 `cloud_config_hostname.txt`
-```yaml
-#cloud-config
-hostname: myservername
-```
-
-VM을 처음 시작하는 동안 이 cloud-init 스크립트는 호스트 이름을 *myservername*으로 설정합니다. cloud-init을 사용하여 [az vm create](/cli/azure/vm#create)로 Linux VM을 만들어서 부팅 중에 구성합니다.
-
-```azurecli
-az vm create \
-    --resource-group myResourceGroup \
-    --name myVM \
-    --image UbuntuLTS \
-    --admin-username azureuser \
-    --generate-ssh-keys \
-    --custom-data cloud-init.txt
-```
-
-로그인한 다음 새 VM의 호스트 이름을 확인합니다.
-
-```bash
-ssh myVM
-hostname
-myservername
-```
-
-## <a name="create-a-cloud-init-script"></a>cloud-init 스크립트 만들기
-보안상의 이유로 최초 부팅 시 Ubuntu VM을 업데이트하려고 합니다. 사용 중인 Linux 배포에 따라 다음 스크립트와 cloud-init을 사용하여 업데이트할 수 있습니다.
-
-### <a name="example-cloud-init-script-cloudconfigaptupgradetxt-for-the-debian-family"></a>Debian 제품군용 예제 cloud-init 스크립트 `cloud_config_apt_upgrade.txt`
-```yaml
-#cloud-config
-apt_upgrade: true
-```
-
-Linux가 부팅되고 나면 설치된 모든 패키지가 **apt-get**을 통해 업데이트됩니다. cloud-init을 사용하여 [az vm create](/cli/azure/vm#create)로 Linux VM을 만들어서 부팅 중에 구성합니다.
-
-```azurecli
-az vm create \
-    --resource-group myResourceGroup \
-    --name myVM \
-    --image UbuntuLTS \
-    --admin-username azureuser \
-    --generate-ssh-keys \
-    --custom-data cloud_config_apt_upgrade.txt
-```
-
-로그인한 다음 모든 패키지가 업데이트되었는지 확인합니다.
-
-```bash
-ssh myUbuntuVM
-sudo apt-get upgrade
-Reading package lists... Done
-Building dependency tree
-Reading state information... Done
-Calculating upgrade... Done
-The following packages have been kept back:
-  linux-generic linux-headers-generic linux-image-generic
-0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
-```
-
-## <a name="create-a-cloud-init-script-to-add-a-user-to-linux"></a>Linux에 사용자를 추가하기 위한 cloud-init 만들기
-새 Linux VM에서 가장 먼저 해야 할 작업 중 하나는 사용자 자신을 추가하는 것이며, 그렇지 않을 경우 *root*를 사용하지 않아야 합니다. 보안 및 유용성 측면의 모범 사례인 SSH 키를 사용하는 것이 좋습니다. SSH 키는 이 cloud-init 스크립트와 함께 *~/.ssh/authorized_keys* 파일에 추가됩니다.
-
-### <a name="example-cloud-init-script-cloudconfigadduserstxt-for-debian-family"></a>Debian 제품군용 예제 cloud-init 스크립트 `cloud_config_add_users.txt`
-```yaml
-#cloud-config
-users:
-  - name: myCloudInitAddedAdminUser
-    groups: sudo
-    shell: /bin/bash
-    sudo: ['ALL=(ALL) NOPASSWD:ALL']
-    ssh-authorized-keys:
-      - ssh-rsa AAAAB3<snip>==myAdminUser@myUbuntuVM
-```
-
-Linux가 부팅되고 나면 나열된 모든 사용자가 작성되어 sudo 그룹에 추가됩니다. cloud-init을 사용하여 [az vm create](/cli/azure/vm#create)로 Linux VM을 만들어서 부팅 중에 구성합니다.
-
-```azurecli
-az vm create \
-    --resource-group myResourceGroup \
-    --name myVM \
-    --image UbuntuLTS \
-    --admin-username azureuser \
-    --generate-ssh-keys \
-    --custom-data cloud_config_add_users.txt
-```
-
-로그인한 다음 새로 생성된 사용자를 확인합니다.
-
-```bash
-ssh myVM
-cat /etc/group
-```
-
-출력
-
-```bash
-root:x:0:
-<snip />
-sudo:x:27:myCloudInitAddedAdminUser
-<snip />
-myCloudInitAddedAdminUser:x:1000:
-```
+cloud-init 로깅에 대한 자세한 내용은 [cloud-init 설명서](http://cloudinit.readthedocs.io/en/latest/topics/logging.html)를 참조하세요. 
 
 ## <a name="next-steps"></a>다음 단계
-cloud-init은 부팅 시 Linux VM을 수정하는 표준 방식의 하나로 자리잡고 있습니다. Azure에는 부팅 시에 또는 실행 중에 Linux VM을 수정할 수 있는 VM 확장도 있습니다. 예를 들어 VM을 실행하는 동안 Azure VMAccessExtension을 사용하여 SSH 또는 사용자 정보를 다시 설정할 수 있습니다. cloud-init을 사용하는 경우 암호를 다시 설정하려면 VM을 다시 부팅해야 합니다.
-
-[가상 컴퓨터 확장 및 기능 정보](extensions-features.md)
-
-[VMAccess 확장을 사용하여 사용자, SSH 관리 및 Azure Linux VM의 디스크 검사 또는 복구](using-vmaccess-extension.md)
+구성 변경에 대한 cloud-init 예제를 보려면 다음 문서를 참조하세요.
+ 
+- [VM에 추가 Linux 사용자 추가](cloudinit-add-user.md)
+- [패키지 관리자를 실행하여 첫 번째 부팅 시 기존 패키지 업데이트](cloudinit-update-vm.md)
+- [VM 로컬 호스트 이름 변경](cloudinit-update-vm-hostname.md) 
+- [응용 프로그램 패키지 설치, 구성 파일 업데이트 및 키 삽입](tutorial-automate-vm-deployment.md)

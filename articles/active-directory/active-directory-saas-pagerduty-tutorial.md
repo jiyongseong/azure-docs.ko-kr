@@ -1,10 +1,10 @@
 ---
-title: "자습서: PagerDuty와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory 및 PagerDuty 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: PagerDuty와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory 및 PagerDuty 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.reviewer: joflore
 ms.assetid: 0410456a-76f7-42a7-9bb5-f767de75a0e0
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/19/2017
 ms.author: jeedes
+ms.openlocfilehash: 6ba7e1fc2f58fd8fb7a05935ce2c4b99709d642c
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
-ms.openlocfilehash: bf5263ce4d8fbc231029c101f167f4b55a921e60
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-pagerduty"></a>자습서: PagerDuty와 Azure Active Directory 통합
 
@@ -31,7 +30,7 @@ PagerDuty를 Azure AD와 통합하면 다음과 같은 이점이 제공됩니다
 - 사용자가 해당 Azure AD 계정으로 PagerDuty에 자동으로 로그온(Single Sign-On)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +58,7 @@ PagerDuty가 Azure AD에 통합되도록 구성하려면 갤러리의 PagerDuty�
 
 **갤러리에서 PagerDuty를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -111,12 +110,12 @@ PagerDuty에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
 
     a. **로그온 URL** 텍스트 상자에서 다음 패턴으로 URL을 입력합니다. `https://<tenant-name>.pagerduty.com`
 
-    b. **식별자** 텍스트 상자에서 `https://<tenant-name>.pagerduty.com` 패턴을 사용하여 URL을 입력합니다.
+    나. **식별자** 텍스트 상자에서 `https://<tenant-name>.pagerduty.com` 패턴을 사용하여 URL을 입력합니다.
 
     > [!NOTE] 
     > 이러한 값은 실제 값이 아닙니다. 실제 로그온 URL 및 식별자로 값을 업데이트합니다. 이러한 값을 얻으려면 [PagerDuty 클라이언트 지원 팀](https://www.pagerduty.com/support/)에 문의하세요. 
 
-4. **SAML 서명 인증서** 섹션에서 **인증서(Base64)**를 클릭한 후 컴퓨터에 인증서 파일을 저장합니다.
+4. **SAML 서명 인증서** 섹션에서 **인증서(Base64)** 를 클릭한 후 컴퓨터에 인증서 파일을 저장합니다.
 
     ![인증서 다운로드 링크](./media/active-directory-saas-pagerduty-tutorial/tutorial_pagerduty_certificate.png) 
 
@@ -144,9 +143,9 @@ PagerDuty에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
    
     a. Azure Portal에서 다운로드한 Base 64로 인코딩된 인증서를 메모장에서 열고, 콘텐츠를 클립보드에 복사한 다음, **X.509 인증서** 텍스트 상자에 붙여넣습니다.
   
-    b. **로그인 URL** 텍스트 상자에서 Azure Portal에서 복사한 **SAML Single Sign-On 서비스 URL**을 붙여넣습니다.
+    나. **로그인 URL** 텍스트 상자에서 Azure Portal에서 복사한 **SAML Single Sign-On 서비스 URL**을 붙여넣습니다.
   
-    c. **로그아웃 URL** 텍스트 상자에서 Azure Portal에서 복사한 **로그아웃 URL**을 붙여넣습니다.
+    다. **로그아웃 URL** 텍스트 상자에서 Azure Portal에서 복사한 **로그아웃 URL**을 붙여넣습니다.
  
     d. **Single Sign-On 켜기**를 선택합니다.
  
@@ -181,9 +180,9 @@ PagerDuty에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -211,9 +210,9 @@ PagerDuty의 경우 프로비전은 수동 작업입니다.
 
     a. 사용자의 **성과 이름**을 입력합니다(예: **Britta Simon**). 
    
-    b. 사용자의 **이메일** 주소를 입력합니다(예: **brittasimon@contoso.com**).
+    나. 사용자의 **이메일** 주소를 입력합니다(예: **brittasimon@contoso.com**).
    
-    c. **추가**를 클릭한 다음 **초대장 보내기**를 클릭합니다.
+    다. **추가**를 클릭한 다음 **초대장 보내기**를 클릭합니다.
    
     >[!NOTE]
     >추가된 모든 사용자는 PagerDuty 계정을 만들도록 초대를 받게 됩니다.
@@ -259,7 +258,7 @@ PagerDuty의 경우 프로비전은 수동 작업입니다.
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -276,5 +275,4 @@ PagerDuty의 경우 프로비전은 수동 작업입니다.
 [201]: ./media/active-directory-saas-pagerduty-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-pagerduty-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-pagerduty-tutorial/tutorial_general_203.png
-
 

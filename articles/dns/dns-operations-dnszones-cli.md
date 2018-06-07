@@ -1,9 +1,9 @@
 ---
-title: "Azure DNS에서 DNS 영역 관리 - Azure CLI 2.0 | Microsoft Docs"
-description: "Azure CLI 2.0을 사용하여 DNS 영역을 관리할 수 있습니다. 이 문서에서는 Azure DNS에서 DNS 영역을 업데이트, 삭제 및 만드는 방법을 설명합니다."
+title: Azure DNS에서 DNS 영역 관리 - Azure CLI 2.0 | Microsoft Docs
+description: Azure CLI 2.0을 사용하여 DNS 영역을 관리할 수 있습니다. 이 문서에서는 Azure DNS에서 DNS 영역을 업데이트, 삭제 및 만드는 방법을 설명합니다.
 services: dns
 documentationcenter: na
-author: georgewallace
+author: KumudD
 manager: timlt
 ms.assetid: 8ab63bc4-5135-4ed8-8c0b-5f0712b9afed
 ms.service: dns
@@ -12,32 +12,24 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/27/2017
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5edc47e03ca9319ba2e3285600703d759963e1f3
-ms.openlocfilehash: 1414baf9e51d648cc3a46c4f8635040b4d276910
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/01/2017
-
+ms.author: kumud
+ms.openlocfilehash: 3fee44e282424caa0a9e57dae1228d8af075e4a6
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-
 # <a name="how-to-manage-dns-zones-in-azure-dns-using-the-azure-cli-20"></a>Azure CLI 2.0을 사용하여 Azure DNS에서 DNS 영역을 관리하는 방법
 
 > [!div class="op_single_selector"]
 > * [포털](dns-operations-dnszones-portal.md)
 > * [PowerShell](dns-operations-dnszones.md)
-> * [Azure CLI 1.0](dns-operations-dnszones-cli-nodejs.md)
 > * [Azure CLI 2.0](dns-operations-dnszones-cli.md)
 
 
 이 가이드는 Windows, Mac 및 Linux에서 사용할 수 있는 플랫폼 간 Azure CLI를 사용하여 DNS 영역을 관리하는 방법을 보여 줍니다. [Azure PowerShell](dns-operations-dnszones.md) 또는 Azure Portal을 사용하여 DNS 영역을 관리할 수도 있습니다.
 
-## <a name="cli-versions-to-complete-the-task"></a>태스크를 완료하기 위한 CLI 버전
-
-다음 CLI 버전 중 하나를 사용하여 태스크를 완료할 수 있습니다.
-
-* [Azure CLI 1.0](dns-operations-dnszones-cli-nodejs.md) - 클래식 및 리소스 관리 배포 모델용 CLI.
-* [Azure CLI 2.0](dns-operations-dnszones-cli.md) - 리소스 관리 배포 모델용 차세대 CLI.
+이 가이드에서는 특히 공용 DNS 영역을 다룹니다. Azure CLI를 사용한 Azure DNS에서 Private Zones 관리에 대한 자세한 내용은 [Azure CLI 2.0을 사용하여 Azure DNS Private Zones 시작](private-dns-getstarted-cli.md)을 참조하세요.
 
 ## <a name="introduction"></a>소개
 
@@ -51,11 +43,11 @@ ms.lasthandoff: 06/01/2017
 
 * Azure 구독. Azure 구독이 아직 없는 경우 [MSDN 구독자 혜택](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/)을 활성화하거나 [무료 계정](https://azure.microsoft.com/pricing/free-trial/)에 등록할 수 있습니다.
 
-* Windows, Linux 또는 MAC용 최신 버전의 Azure CLI 2.0을 설정합니다. 자세한 내용은 [Azure CLI 2.0 설정](https://docs.microsoft.com/en-us/cli/azure/install-az-cli2)을 참조하세요.
+* Windows, Linux 또는 MAC용 최신 버전의 Azure CLI 2.0을 설정합니다. 자세한 내용은 [Azure CLI 2.0 설정](https://docs.microsoft.com/cli/azure/install-az-cli2)을 참조하세요.
 
 ### <a name="sign-in-to-your-azure-account"></a>Azure 계정에 로그인
 
-콘솔 창을 열고 자격 증명을 사용하여 인증합니다. 자세한 내용은 Azure CLI에서 Azure에 로그인을 참조하세요.
+콘솔 창을 열고 자격 증명을 사용하여 인증합니다. 자세한 내용은 [Azure CLI에서 Azure에 연결](https://docs.microsoft.com/cli/azure/authenticate-azure-cli?view=azure-cli-latest)을 참조하세요.
 
 ```
 az login
@@ -75,6 +67,12 @@ az account list
 az account set --subscription "subscription name"
 ```
 
+### <a name="optional-to-installuse-azure-dns-private-zones-feature-public-preview"></a>선택 사항: Azure DNS Private Zones 기능을 설치/사용하려면(공개 미리 보기)
+Azure DNS Private Zones 기능은 Azure CLI 확장을 통해 공개 미리 보기로 출시되었습니다. “dns” Azure CLI 확장 설치 
+```
+az extension add --name dns
+``` 
+
 ### <a name="create-a-resource-group"></a>리소스 그룹 만들기
 
 Azure 리소스 관리자를 사용하려면 모든 리소스 그룹이 위치를 지정해야 합니다. 이 위치는 해당 리소스 그룹에서 리소스의 기본 위치로 사용됩니다. 그러나 모든 DNS 리소스는 국가별이 아니라 전역이므로 리소스 그룹의 위치 선택이 Azure DNS에 영향을 주지 않습니다.
@@ -87,7 +85,7 @@ az group create --name myresourcegroup --location "West US"
 
 ## <a name="getting-help"></a>도움말 보기
 
-Azure DNS에 관련된 모든 CLI 2.0 명령은 `az network dns`로 시작합니다. `--help` 옵션(약식 `-h`)을 사용하여 각 명령에 대한 도움말을 볼 수 있습니다.  예:
+Azure DNS에 관련된 모든 CLI 2.0 명령은 `az network dns`로 시작합니다. `--help` 옵션(약식 `-h`)을 사용하여 각 명령에 대한 도움말을 볼 수 있습니다.  예: 
 
 ```azurecli
 az network dns --help
@@ -198,5 +196,4 @@ az network dns zone delete --resource-group myresourcegroup --name contoso.com
 DNS 영역에서 [레코드 집합 및 레코드 관리](dns-getstarted-create-recordset-cli.md) 방법을 알아봅니다.
 
 [Azure DNS에 도메인을 위임](dns-domain-delegation.md)하는 방법을 알아봅니다.
-
 

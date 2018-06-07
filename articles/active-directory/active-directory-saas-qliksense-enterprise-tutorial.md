@@ -1,10 +1,10 @@
 ---
-title: "자습서: Qlik Sense Enterprise와 Azure Active Directory 통합 | Microsoft 문서"
-description: "Azure Active Directory 및 Qlik Sense Enterprise 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Qlik Sense Enterprise와 Azure Active Directory 통합 | Microsoft 문서'
+description: Azure Active Directory 및 Qlik Sense Enterprise 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.reviewer: joflore
 ms.assetid: 8c27e340-2b25-47b6-bf1f-438be4c14f93
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/26/2017
 ms.author: jeedes
+ms.openlocfilehash: 8cca4fb3ee10d56481cefccb7ea869b6bf13109c
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 54774252780bd4c7627681d805f498909f171857
-ms.openlocfilehash: 3fd6bcce24ca4a1170bd8a9301dff1a02d638773
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-qlik-sense-enterprise"></a>자습서: Qlik Sense Enterprise와 Azure Active Directory 통합
 
@@ -31,7 +30,7 @@ Qlik Sense Enterprise를 Azure AD와 통합하면 다음과 같은 이점이 제
 - 사용자가 해당 Azure AD 계정으로 Qlik Sense Enterprise에 자동으로 로그온(Single Sign-on)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +58,7 @@ Qlik Sense Enterprise의 Azure AD 통합을 구성하려면 갤러리의 Qlik Se
 
 **갤러리에서 Qlik Sense Enterprise를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -114,7 +113,7 @@ Qlik Sense Enterprise에서 Azure AD Single Sign-On을 구성하고 테스트하
     > [!NOTE]
     > 이 URI 끝의 후행 슬래시를 유의하세요. 필수입니다.
     
-    b. **식별자** 텍스트 상자에서 다음 패턴을 사용하여 URL을 입력합니다.
+    나. **식별자** 텍스트 상자에서 다음 패턴을 사용하여 URL을 입력합니다.
     | |
     |--|
     | `https://<Qlik Sense Fully Qualifed Hostname>.qlikpoc.com`|
@@ -140,9 +139,9 @@ Qlik Sense Enterprise에서 Azure AD Single Sign-On을 구성하고 테스트하
    
     a. 텍스트 편집기의 Azure Portal에서 다운로드한 FederationMetaData.xml 파일을 엽니다.
    
-    b. **RoleDescriptor**값을 검색합니다.  네 개의 항목(열고 닫는 요소 태그의 두 쌍)이 있습니다.
+    나. **RoleDescriptor**값을 검색합니다.  네 개의 항목(열고 닫는 요소 태그의 두 쌍)이 있습니다.
    
-    c. 파일에서 사이의 RoleDescriptor 태그와 모든 정보를 삭제합니다.
+    다. 파일에서 사이의 RoleDescriptor 태그와 모든 정보를 삭제합니다.
    
     d. 파일을 저장하고 이 문서의 뒷부분에서 사용하기 위해 가까이 둡니다.
 
@@ -166,9 +165,9 @@ Qlik Sense Enterprise에서 Azure AD Single Sign-On을 구성하고 테스트하
     
     a. **설명** 필드는 가상 프록시 구성에 대한 친숙한 이름입니다.  설명에 대한 값을 입력합니다.
     
-    b. **접두사** 필드는 Azure AD Single Sign-on으로 Qlik Sense 연결하기 위한 가상 프록시 끝점을 식별합니다.  이 가상 프록시에 대한 고유한 접두사 이름을 입력합니다.
+    나. **접두사** 필드는 Azure AD Single Sign-on으로 Qlik Sense 연결하기 위한 가상 프록시 끝점을 식별합니다.  이 가상 프록시에 대한 고유한 접두사 이름을 입력합니다.
     
-    c. **세션 비활성 시간(분)**은 이 가상 프록시를 통한 연결에 대한 제한 시간입니다.
+    다. **세션 비활성 시간(분)** 은 이 가상 프록시를 통한 연결에 대한 제한 시간입니다.
     
     d. **세션 쿠키 헤더 이름**은 인증에 성공한 후 사용자가 받는 Qlik Sense 세션에 대한 세션 식별자를 저장하는 쿠키 이름입니다.  이 이름은 고유해야 합니다.
 
@@ -178,17 +177,17 @@ Qlik Sense Enterprise에서 Azure AD Single Sign-On을 구성하고 테스트하
     
     a. **익명 액세스 모드** 드롭다운은 익명 사용자가 가상 프록시를 통해 Qlik Sense에 액세스할 수 있는지를 결정합니다.  기본 옵션은 익명 사용자 없음입니다.
     
-    b. **인증 방법** 드롭다운은 가상 프록시가 사용할 인증 체계를 결정합니다.  드롭다운 목록에서 SAML을 선택합니다.  그 결과 더 많은 옵션이 표시됩니다.
+    나. **인증 방법** 드롭다운은 가상 프록시가 사용할 인증 체계를 결정합니다.  드롭다운 목록에서 SAML을 선택합니다.  그 결과 더 많은 옵션이 표시됩니다.
     
-    c. **SAML 호스트 URI 필드**에서 사용자가 이 SAML 가상 프록시를 통해 Qlik Sense에 액세스하기 위해 입력할 호스트 이름을 입력합니다.  호스트 이름은 Qlik Sense 서버의 URI입니다.
+    다. **SAML 호스트 URI 필드**에서 사용자가 이 SAML 가상 프록시를 통해 Qlik Sense에 액세스하기 위해 입력할 호스트 이름을 입력합니다.  호스트 이름은 Qlik Sense 서버의 URI입니다.
     
     d. **SAML 엔터티 ID**에서 SAML 호스트 URI 필드에 입력한 동일한 값을 입력합니다.
     
     e. **SAML IdP 메타데이터**는 **Azure AD 구성에서 페더레이션 메타데이터 편집** 섹션이 앞부분에서 편집한 파일입니다.  **IdP 메타데이터를 업로드하기 전에 파일을 편집해야 합니다** .  **파일을 아직 편집하지 않은 경우 위의 지침을 참조하세요.**  파일을 편집한 경우 찾아보기 단추를 클릭하고 편집한 메타데이터 파일을 선택하여 가상 프록시 구성에 업로드합니다.
     
-    f. Azure AD가 Qlik Sense 서버에 전송하는 **UserID**를 나타내는 SAML 특성에 대한 특성 이름 또는 스키마 참조를 입력합니다.  스키마 참조 정보는 Azure 앱 화면 게시 구성에서 사용할 수 있습니다.  이름 특성을 사용하려면 `enter http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name`합니다.
+    f. Azure AD가 Qlik Sense 서버에 전송하는 **UserID**를 나타내는 SAML 특성에 대한 특성 이름 또는 스키마 참조를 입력합니다.  스키마 참조 정보는 Azure 앱 화면 게시 구성에서 사용할 수 있습니다.  이름 특성을 사용하려면 `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name`을 선택합니다.
     
-    g. Azure AD 통해 Qlik Sense 서버에 인증하는 경우 사용자에 연결될 **사용자 디렉터리** 에 대한 값을 입력합니다.  하드 코드된 값은 **[](대괄호)**로 묶어야 합니다.  Azure AD SAML 어설션에서 전송된 특성을 사용하려면 대괄호 **없이** 이 텍스트 상자에 특성의 이름을 입력합니다.
+    g. Azure AD 통해 Qlik Sense 서버에 인증하는 경우 사용자에 연결될 **사용자 디렉터리** 에 대한 값을 입력합니다.  하드 코드된 값은 **[](대괄호)** 로 묶어야 합니다.  Azure AD SAML 어설션에서 전송된 특성을 사용하려면 대괄호 **없이** 이 텍스트 상자에 특성의 이름을 입력합니다.
     
     h. **SAML 서명 알고리즘** 은 가상 프록시 구성에 대한 서비스 공급자(이 경우 Qlik Sense 서버) 인증서 서명을 설정합니다.  Qlik Sense 서버가 Microsoft Enhanced RSA and AES Cryptographic Provider를 사용하여 생성된 신뢰할 수 있는 인증서를 사용하는 경우 SAML 서명 알고리즘을 **SHA-256**으로 변경합니다.
     
@@ -275,9 +274,9 @@ Qlik Sense Enterprise에서 Azure AD Single Sign-On을 구성하고 테스트하
 
    a. **이름** 상자에 **BrittaSimon**을 입력합니다.
 
-   b. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
+   나. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
 
-   c. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
+   다. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
 
    d. **만들기**를 클릭합니다.
  
@@ -324,7 +323,7 @@ Qlik Sense Enterprise에서 Azure AD Single Sign-On을 구성하고 테스트하
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 <!--Image references-->
 
@@ -359,5 +358,4 @@ Qlik Sense Enterprise에서 Azure AD Single Sign-On을 구성하고 테스트하
 [qs51]: ./media/active-directory-saas-qliksense-enterprise-tutorial/tutorial_qliksenseenterprise_51.png
 [qs52]: ./media/active-directory-saas-qliksense-enterprise-tutorial/tutorial_qliksenseenterprise_52.png
 [qs53]: ./media/active-directory-saas-qliksense-enterprise-tutorial/tutorial_qliksenseenterprise_53.png
-
 

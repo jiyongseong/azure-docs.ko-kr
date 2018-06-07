@@ -1,29 +1,23 @@
 ---
-title: "Azure DC/OS 클러스터 모니터링 - Dynatrace | Microsoft Docs"
-description: "Dynatrace를 사용하여 Azure Container Service DC/OS 클러스터를 모니터링합니다. DC/OS 대시보드를 사용하여 Dynatrace OneAgent를 배포합니다."
+title: Azure DC/OS 클러스터 모니터링 - Dynatrace
+description: Dynatrace를 사용하여 Azure Container Service DC/OS 클러스터를 모니터링합니다. DC/OS 대시보드를 사용하여 Dynatrace OneAgent를 배포합니다.
 services: container-service
-documentationcenter: 
 author: MartinGoodwell
-manager: 
-editor: 
-tags: acs, azure-container-service
-keywords: "컨테이너, DC/OS, Azure"
-ms.assetid: 
+manager: jeconnoc
 ms.service: container-service
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
 ms.date: 12/13/2016
 ms.author: rogardle
+ms.custom: mvc
+ms.openlocfilehash: 3d1bfc3bb61781d487c40831edd5da6fcb5a7df9
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: bfd49ea68c597b109a2c6823b7a8115608fa26c3
-ms.openlocfilehash: a4c44b356ac97f4ee4c1122885d4d13f85c80cbc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32162044"
 ---
 # <a name="monitor-an-azure-container-service-dcos-cluster-with-dynatrace-saasmanaged"></a>Dynatrace SaaS/Managed를 사용하여 Azure Container Service DC/OS 클러스터 모니터링
+
 이 문서에서는 [Dynatrace](https://www.dynatrace.com/) OneAgent를 배포하여 Azure Container Service 클러스터의 모든 에이전트 노드를 모니터링하는 방법을 보여 줍니다. 이러한 구성을 위해서는 Dynatrace SaaS/Managed 계정이 필요합니다. 
 
 ## <a name="dynatrace-saasmanaged"></a>Dynatrace SaaS/Managed
@@ -34,7 +28,7 @@ Dynatrace는 매우 동적인 컨테이너 및 클러스터 환경을 위한 클
 ![Dynatrace UI](./media/container-service-monitoring-dynatrace/dynatrace.png)
 
 ## <a name="prerequisites"></a>필수 조건 
-Azure Container Service를 통해 구성된 클러스터를 [배포](container-service-deployment.md) 및 [연결](./../container-service-connect.md)합니다. [Marathon UI](container-service-mesos-marathon-ui.md)를 탐색합니다. Dynatrace SaaS 계정을 설정하려면 [https://www.dynatrace.com/trial/](https://www.dynatrace.com/trial/)로 이동합니다.  
+Azure Container Service를 통해 구성된 클러스터를 [배포](container-service-deployment.md) 및 [연결](./../container-service-connect.md)합니다. [Marathon UI](container-service-mesos-marathon-ui.md)를 탐색합니다. [https://www.dynatrace.com/trial/](https://www.dynatrace.com/trial/)로 이동하여 Dynatrace SaaS 계정을 설정합니다.  
 
 ## <a name="configure-a-dynatrace-deployment-with-marathon"></a>Marathon으로 Dynatrace 배포 구성
 이러한 단계는 Marathon으로 클러스터에 Dynatrace 응용 프로그램을 배포 및 구성하는 방법을 보여 줍니다.

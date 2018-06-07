@@ -61,7 +61,7 @@ ID    Product        Quantity    ModifiedDate
 
 ### <a name="mechanism-2"></a>메커니즘 2
 > [!IMPORTANT]
-> sliceIdentifierColumnName은 이번에 Azure SQL 데이터 웨어하우스에 지원되지 않습니다. 
+> sliceIdentifierColumnName은 이번에 Azure SQL Data Warehouse에 지원되지 않습니다. 
 
 반복성을 유지하는 또 다른 메커니즘은 대상 테이블에 전용 열(**sliceIdentifierColumnName**)을 만드는 것입니다. 이 열은 Azure 데이터 팩터리에서 원본 및 대상을 동기화 상태로 유지하도록 할 때 사용됩니다. 이 방법은 대상 SQL 테이블 스키마를 유연하게 변경하거나 정의할 수 있을 때 작동됩니다. 
 

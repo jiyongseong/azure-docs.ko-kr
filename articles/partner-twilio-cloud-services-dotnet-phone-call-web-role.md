@@ -14,13 +14,11 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 05/04/2016
 ms.author: microsofthelp@twilio.com
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 95b8c100246815f72570d898b4a5555e6196a1a0
-ms.openlocfilehash: 0899a49cbfda775017dab7fc6d8963bbeb86d74c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/18/2017
-
-
+ms.openlocfilehash: cd9792881182fbe90d9c210130ae8a34b12da363
+ms.sourcegitcommit: b07d06ea51a20e32fdc61980667e801cb5db7333
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="how-to-make-a-phone-call-using-twilio-in-a-web-role-on-azure"></a>Azure의 웹 역할에서 Twilio를 사용하여 전화를 거는 방법
 이 가이드에서는 Azure에 호스트된 웹 페이지에서 Twilio를 사용하여 전화를 거는 방법을 설명합니다. 결과적으로 응용 프로그램은 다음 스크린샷에 표시된 대로 지정된 번호와 메시지를 사용하여 호출하라는 메시지를 사용자에게 표시합니다.
@@ -154,7 +152,7 @@ TwiML에 대한 자세한 내용은 [http://www.twilio.com/docs/api/twiml][twiml
 ## <a id="nextsteps"></a>다음 단계
 이 코드는 Azure에서 ASP.NET 웹 역할의 Twilio를 사용하는 기본 기능을 보여 줍니다. Azure를 프로덕션에 배포하기 전에 더 많은 오류 처리 또는 기타 기능을 추가할 수 있습니다. 예를 들면 다음과 같습니다.
 
-* 웹 양식을 사용하는 대신, Azure Blob 저장소 또는 Azure SQL 데이터베이스 인스턴스를 사용하여 전화 번호 및 통화 텍스트를 저장할 수 있습니다. Azure에서 Blob 사용에 대한 자세한 내용은 [.NET에서 Azure Blob Storage 서비스를 사용하는 방법][howto_blob_storage_dotnet]을 참조하세요. SQL Database 사용에 대한 자세한 내용은 [.NET 응용 프로그램에서 Azure SQL Database를 사용하는 방법][howto_sql_azure_dotnet]을 참조하세요.
+* 웹 양식을 사용하는 대신, Azure Blob 저장소 또는 Azure SQL Database 인스턴스를 사용하여 전화 번호 및 통화 텍스트를 저장할 수 있습니다. Azure에서 Blob 사용에 대한 자세한 내용은 [.NET에서 Azure Blob Storage 서비스를 사용하는 방법][howto_blob_storage_dotnet]을 참조하세요. SQL Database 사용에 대한 자세한 내용은 [.NET 응용 프로그램에서 Azure SQL Database를 사용하는 방법][howto_sql_azure_dotnet]을 참조하세요.
 * 양식에서 값을 하드 코딩하는 대신, `RoleEnvironment.getConfigurationSettings`를 사용하여 배포 구성 설정에서 Twilio 계정 ID 및 인증 토큰을 검색할 수 있습니다. `RoleEnvironment` 클래스에 대한 자세한 내용은 [Microsoft.WindowsAzure.ServiceRuntime Namespace][azure_runtime_ref_dotnet]를 참조하세요.
 * [https://www.twilio.com/docs/security][twilio_docs_security]에서 Twilio 보안 지침을 읽으세요.
 * [https://www.twilio.com/docs][twilio_docs]에서 Twilio에 대해 자세히 알아보세요.
@@ -188,5 +186,4 @@ TwiML에 대한 자세한 내용은 [http://www.twilio.com/docs/api/twiml][twiml
 
 
 [azure_runtime_ref_dotnet]: http://msdn.microsoft.com/library/windowsazure/microsoft.windowsazure.serviceruntime.aspx
-[azure_webroles_get_started]: https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-dotnet-get-started
-
+[azure_webroles_get_started]: https://docs.microsoft.com/azure/cloud-services/cloud-services-dotnet-get-started

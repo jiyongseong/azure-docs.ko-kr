@@ -1,6 +1,6 @@
 ---
-title: "Reliable Services 통신 개요 | Microsoft Docs"
-description: "서비스에서 수신기 열기, 끝점 확인 및 서비스 간 통신을 비롯한 Reliable Services 통신 모델의 개요입니다."
+title: Reliable Services 통신 개요 | Microsoft Docs
+description: 서비스에서 수신기 열기, 끝점 확인 및 서비스 간 통신을 비롯한 Reliable Services 통신 모델의 개요입니다.
 services: service-fabric
 documentationcenter: .net
 author: vturecek
@@ -9,17 +9,16 @@ editor: BharatNarasimman
 ms.assetid: 36217988-420e-409d-b0a4-e0e875b6eac8
 ms.service: service-fabric
 ms.devlang: multiple
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: required
-ms.date: 04/07/2017
+ms.date: 11/01/2017
 ms.author: vturecek
-translationtype: Human Translation
-ms.sourcegitcommit: 538f282b28e5f43f43bf6ef28af20a4d8daea369
-ms.openlocfilehash: b418904f50b772c12bfcdbb95beb9312c8b9fb00
-ms.lasthandoff: 04/07/2017
-
-
+ms.openlocfilehash: 62c81368b8a3129b42262cb99cf23a5021744c1b
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="how-to-use-the-reliable-services-communication-apis"></a>Reliable Services 통신 API를 사용하는 방법
 플랫폼인 Azure 서비스 패브릭은 서비스 간에 이루어지는 통신을 전혀 알 수 없습니다. UDP에서 HTTP까지 모든 프로토콜 및 스택이 허용됩니다. 서비스 개발자가 서비스가 통신하는 방법을 선택합니다. Reliable Services 응용 프로그램 프레임워크는 사용자 지정 통신 구성 요소를 빌드하는 데 사용할 수 있는 API 뿐만 아니라 기본 제공 통신 스택을 제공합니다.
@@ -55,7 +54,7 @@ public interface CommunicationListener {
 상태 비저장 서비스의 경우:
 
 ```csharp
-class MyStatelessService : StatelessService
+public class MyStatelessService : StatelessService
 {
     protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
     {
@@ -77,13 +76,16 @@ public class MyStatelessService extends StatelessService {
 
 상태 저장 서비스의 경우:
 
-> [!NOTE]
-> 상태 저장 Reliable Services는 Java에서 아직 지원되지 않습니다.
->
->
+```java
+    @Override
+    protected List<ServiceReplicaListener> createServiceReplicaListeners() {
+        ...
+    }
+    ...
+```
 
 ```csharp
-class MyStatefulService : StatefulService
+public class MyStatefulService : StatefulService
 {
     protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
     {
@@ -122,7 +124,7 @@ protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListe
 >
 >
 
-마지막으로 끝점의 섹션에 있는 [서비스 매니페스트](service-fabric-application-model.md) 에서 서비스에 필요한 끝점을 설명합니다.
+마지막으로 끝점의 섹션에 있는 [서비스 매니페스트](service-fabric-application-and-service-manifests.md) 에서 서비스에 필요한 끝점을 설명합니다.
 
 ```xml
 <Resources>
@@ -213,7 +215,7 @@ ServicePartitionResolver resolver = ServicePartitionResolver.GetDefault();
 FabricServicePartitionResolver resolver = FabricServicePartitionResolver.getDefault();
 ```
 
-다른 클러스터의 서비스에 연결하면 일련의 클러스터 게이트웨이 끝점으로 ServicePartitionResolver를 만들 수 있습니다. 게이트웨이 끝점은 동일한 클러스터에 연결하기 위한 다른 끝점입니다. 예:
+다른 클러스터의 서비스에 연결하면 일련의 클러스터 게이트웨이 끝점으로 ServicePartitionResolver를 만들 수 있습니다. 게이트웨이 끝점은 동일한 클러스터에 연결하기 위한 다른 끝점입니다. 예: 
 
 ```csharp
 ServicePartitionResolver resolver = new  ServicePartitionResolver("mycluster.cloudapp.azure.com:19000", "mycluster.cloudapp.azure.com:19001");
@@ -273,7 +275,7 @@ CompletableFuture<ResolvedServicePartition> partition =
 통신 클라이언트는 주소를 수신하고 서비스에 연결하는 데 사용합니다. 클라이언트는 원하는 모든 프로토콜을 사용할 수 있습니다.
 
 ```csharp
-class MyCommunicationClient : ICommunicationClient
+public class MyCommunicationClient : ICommunicationClient
 {
     public ResolvedServiceEndpoint Endpoint { get; set; }
 
@@ -428,8 +430,6 @@ CompletableFuture<?> result = myServicePartitionClient.invokeWithRetryAsync(clie
 ```
 
 ## <a name="next-steps"></a>다음 단계
-* [GitHub의 C# 샘플 프로젝트](https://github.com/Azure-Samples/service-fabric-dotnet-getting-started/tree/classic/Services/WordCount) 또는 [GitHUb의 Java 샘플 프로젝트](https://github.com/Azure-Samples/service-fabric-java-getting-started/tree/master/Services/WatchDog)에서 서비스 간 HTTP 통신의 예제를 참조하세요.
+* [ASP.NET Core와 Reliable Services](service-fabric-reliable-services-communication-aspnetcore.md)
 * [Reliable Services 원격을 사용하여 원격 프로시저 호출](service-fabric-reliable-services-communication-remoting.md)
-* [Reliable Services에서 OWIN을 사용하는 Web API](service-fabric-reliable-services-communication-webapi.md)
 * [Reliable Services를 사용한 WCF 통신](service-fabric-reliable-services-communication-wcf.md)
-

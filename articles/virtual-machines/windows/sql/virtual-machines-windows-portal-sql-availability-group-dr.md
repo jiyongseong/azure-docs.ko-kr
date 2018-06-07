@@ -4,7 +4,7 @@ description: "이 문서에서는 다른 지역의 복제본으로 Azure Virtual
 services: virtual-machines
 documentationCenter: na
 authors: MikeRayMSFT
-manager: jhubbard
+manager: craigg
 editor: monicar
 tags: azure-service-management
 ms.assetid: 388c464e-a16e-4c9d-a0d5-bb7cf5974689
@@ -16,14 +16,12 @@ ms.tgt_pltfrm: vm-windows-sql-server
 ms.workload: iaas-sql-server
 ms.date: 05/02/2017
 ms.author: mikeray
+ms.openlocfilehash: 84fa2e051c46e178e3e72709886babc8c3db7b9d
+ms.sourcegitcommit: 8c3267c34fc46c681ea476fee87f5fb0bf858f9e
 ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
-ms.openlocfilehash: ddc391127d43a954f555943d27258593eba02df2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/09/2018
 ---
-
 # <a name="configure-an-always-on-availability-group-on-azure-virtual-machines-in-different-regions"></a>다른 하위 지역의 Azure Virtual Machines에서 Always On 가용성 그룹 구성
 
 이 문서에서는 원격 Azure 위치의 Azure Virtual Machines에서 SQL Server Always On 가용성 그룹 복제본을 구성하는 방법을 설명합니다. 이 구성을 사용하여 재해 복구를 지원합니다.
@@ -34,16 +32,16 @@ ms.lasthandoff: 07/26/2017
 
    ![가용성 그룹](./media/virtual-machines-windows-portal-sql-availability-group-dr/00-availability-group-basic.png)
 
-이 배포에서 모든 가상 컴퓨터는 하나의 Azure 지역에 있습니다. 가용성 그룹 복제본은 SQL-1 및 SQL-2에 대해 자동 장애 조치로 동기 커밋할 수 있습니다. 이 아키텍처를 작성하려면 [가용성 그룹 템플릿 또는 자습서](virtual-machines-windows-portal-sql-availability-group-overview.md)를 참조하세요.
+이 배포에서 모든 가상 머신은 하나의 Azure 지역에 있습니다. 가용성 그룹 복제본은 SQL-1 및 SQL-2에 대해 자동 장애 조치로 동기 커밋할 수 있습니다. 이 아키텍처를 작성하려면 [가용성 그룹 템플릿 또는 자습서](virtual-machines-windows-portal-sql-availability-group-overview.md)를 참조하세요.
 
 이 아키텍처는 Azure 지역에 액세스할 수 없게 될 경우 가동 중지 시간에 취약합니다. 이 취약점을 해결하려면 다른 Azure 지역에 복제본을 추가합니다. 다음 다이어그램은 새로운 아키텍처 모양을 보여 줍니다.
 
    ![가용성 그룹 DR](./media/virtual-machines-windows-portal-sql-availability-group-dr/00-availability-group-basic-dr.png)
 
-위 다이어그램에서는 SQL-3라는 새 가상 컴퓨터를 보여 줍니다. SQL-3는 다른 Azure 지역에 있습니다. SQL-3가 Windows Server 장애 조치 클러스터에 추가됩니다. SQL-3는 가용성 그룹 복제본을 호스트할 수 있습니다. 마지막으로 SQL-3에 대한 Azure 지역에는 새 Azure Load Balancer가 있습니다.
+위 다이어그램에서는 SQL-3라는 새 가상 머신을 보여 줍니다. SQL-3는 다른 Azure 지역에 있습니다. SQL-3가 Windows Server 장애 조치 클러스터에 추가됩니다. SQL-3는 가용성 그룹 복제본을 호스트할 수 있습니다. 마지막으로 SQL-3에 대한 Azure 지역에는 새 Azure Load Balancer가 있습니다.
 
 >[!NOTE]
-> 둘 이상의 가상 컴퓨터가 동일한 지역에 있을 때 Azure 가용성 집합이 필요합니다. 해당 지역에 가상 컴퓨터가 하나만 있으면 가용성 집합이 필요하지 않습니다. 생성 시 가용성 집합에 하나의 가상 컴퓨터만 배치할 수 있습니다. 해당 가상 컴퓨터가 가용성 집합에 이미 있으면 나중에 추가 복제본에 대해 가상 컴퓨터를 추가할 수 있습니다.
+> 둘 이상의 가상 머신이 동일한 지역에 있을 때 Azure 가용성 집합이 필요합니다. 해당 지역에 가상 컴퓨터가 하나만 있으면 가용성 집합이 필요하지 않습니다. 생성 시 가용성 집합에 하나의 가상 머신만 배치할 수 있습니다. 해당 가상 컴퓨터가 가용성 집합에 이미 있으면 나중에 추가 복제본에 대해 가상 컴퓨터를 추가할 수 있습니다.
 
 이 아키텍처에서 원격 지역의 복제본은 일반적으로 비동기 커밋 가용성 모드와 수동 장애 조치 모드로 구성됩니다.
 
@@ -63,7 +61,7 @@ ms.lasthandoff: 07/26/2017
 
 원격 데이터 센터에서 복제본을 만들려면 다음 단계를 수행합니다.
 
-1. [새 지역에서 가상 네트워크를 만듭니다](../../../virtual-network/virtual-networks-create-vnet-arm-pportal.md).
+1. [새 지역에서 가상 네트워크를 만듭니다](../../../virtual-network/manage-virtual-network.md#create-a-virtual-network).
 
 1. [Azure Portal에서 VNet-VNet 연결을 구성합니다](../../../vpn-gateway/vpn-gateway-howto-vnet-vnet-resource-manager-portal.md).
 
@@ -74,15 +72,15 @@ ms.lasthandoff: 07/26/2017
 
    이 도메인 컨트롤러는 주 사이트의 도메인 컨트롤러를 사용할 수 없는 경우 인증을 제공합니다.
 
-1. [새 지역에서 SQL Server 가상 컴퓨터를 만듭니다](virtual-machines-windows-portal-sql-server-provision.md).
+1. [새 지역에서 SQL Server 가상 머신을 만듭니다](virtual-machines-windows-portal-sql-server-provision.md).
 
 1. [새 영역의 네트워크에는 Azure Load Balancer를 만듭니다](virtual-machines-windows-portal-sql-availability-group-tutorial.md#configure-internal-load-balancer).
 
    이 부하 분산 장치는 다음 조건을 충족해야 합니다.
 
-   - 새 가상 컴퓨터와 동일한 네트워크 및 서브넷에 있어야 합니다.
+   - 새 가상 머신과 동일한 네트워크 및 서브넷에 있어야 합니다.
    - 가용성 그룹 수신기의 고정 IP 주소를 갖습니다.
-   - 부하 분산 장치가 있는 동일한 지역의 가상 컴퓨터로만 구성된 백 엔드 풀을 포함합니다.
+   - 부하 분산 장치가 있는 동일한 지역의 가상 머신으로만 구성된 백 엔드 풀을 포함합니다.
    - IP 주소 고유의 TCP 포트 프로브를 사용합니다.
    - 동일한 지역의 SQL Server와 관련된 부하 분산 규칙이 있습니다.  
 
@@ -182,7 +180,6 @@ ms.lasthandoff: 07/26/2017
 ## <a name="additional-links"></a>추가 링크
 
 * [Always On 가용성 그룹](http://msdn.microsoft.com/library/hh510230.aspx)
-* [Azure 가상 컴퓨터](http://docs.microsoft.com/azure/virtual-machines/windows/)
+* [Azure Virtual Machines](http://docs.microsoft.com/azure/virtual-machines/windows/)
 * [Azure Load Balancer](virtual-machines-windows-portal-sql-availability-group-tutorial.md#configure-internal-load-balancer)
 * [Azure 가용성 집합](../manage-availability.md)
-

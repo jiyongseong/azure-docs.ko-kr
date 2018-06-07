@@ -4,7 +4,7 @@ description: "Azure AD 포털 또는 URL 매개 변수를 사용하여 사용자
 services: active-directory
 documentationcenter: 
 author: ajamess
-manager: femila
+manager: mtillman
 ms.assetid: 
 ms.service: active-directory
 ms.workload: identity
@@ -13,14 +13,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c300ba45cd530e5a606786aa7b2b254c2ed32fcd
-ms.openlocfilehash: 922774c2482737537b64787ae473231ec1fbb68e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/14/2017
-
+ms.openlocfilehash: 0f13efd5e629bde592a3ab3a3e2db4a22180b5bb
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
-
 # <a name="how-to-grant-permissions-to-a-custom-developed-application"></a>사용자 지정 개발 응용 프로그램에 권한을 부여하는 방법
 
 앱에 대해 사전에 동의하려 하거나 앱에 대해 동의하지 않은 오류가 발생한 경우 아래 단계를 수행해 보세요.
@@ -41,9 +39,8 @@ ms.lasthandoff: 04/14/2017
 
 ## <a name="next-steps"></a>다음 단계
 
-[동의 및 AzureAD와 앱 통합](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-integrating-applications)
+[동의 및 AzureAD와 앱 통합](https://docs.microsoft.com/azure/active-directory/develop/active-directory-integrating-applications)
 
-[AzureAD v2.0 수렴형 앱에 대한 동의 및 권한 부여](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-scopes)<br>
+[AzureAD v2.0 수렴형 앱에 대한 동의 및 권한 부여](https://docs.microsoft.com/azure/active-directory/develop/active-directory-v2-scopes)<br>
 
 [AzureAD StackOverflow](http://stackoverflow.com/questions/tagged/azure-active-directory)
-

@@ -1,12 +1,12 @@
 ---
-title: "Azure 진단 확장 1.3 이상 구성 스키마 | Microsoft Docs"
-description: "Azure 진단용 스키마 버전 1.3 이상은 Microsoft Azure SDK 2.4 이상의 일부로 제공됩니다."
+title: Azure 진단 확장 1.3 이상 구성 스키마 | Microsoft Docs
+description: Azure 진단용 스키마 버전 1.3 이상은 Microsoft Azure SDK 2.4 이상의 일부로 제공됩니다.
 services: monitoring-and-diagnostics
 documentationcenter: .net
 author: rboucher
 manager: carmonm
-editor: 
-ms.assetid: 
+editor: ''
+ms.assetid: ''
 ms.service: monitoring-and-diagnostics
 ms.workload: na
 ms.tgt_pltfrm: na
@@ -14,21 +14,19 @@ ms.devlang: dotnet
 ms.topic: article
 ms.date: 05/15/2017
 ms.author: robb
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 8f987d079b8658d591994ce678f4a09239270181
-ms.openlocfilehash: 90d39f75f547eff9c87997eb83460875c12dcfe4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/18/2017
-
-
+ms.openlocfilehash: 02656c5bb4d2acd944f565d1397984ce94ced0bd
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
 # <a name="azure-diagnostics-13-and-later-configuration-schema"></a>Azure 진단 1.3 이상 구성 스키마
 > [!NOTE]
 > Azure 진단 확장은 성능 카운터 및 기타 통계를 수집하는 데 사용하는 구성 요소입니다.
-> - Azure 가상 컴퓨터 
-> - 가상 컴퓨터 크기 집합
-> - 서비스 패브릭 
-> - 클라우드 서비스 
+> - Azure Virtual Machines 
+> - Virtual Machine Scale Sets
+> - Service Fabric 
+> - Cloud Services 
 > - 네트워크 보안 그룹
 > 
 > 이 페이지는 이러한 서비스 중 하나를 사용하는 경우에만 해당됩니다.
@@ -162,7 +160,7 @@ Azure 진단 사용에 대한 자세한 내용은 [Azure 진단 확장](azure-di
 
 이전 XML 구성 파일에 해당하는 JSON입니다. 
 
-PublicConfig와 PrivateConfig는 구분되는데, 대부분의 json 사용 사례에서 다른 변수로 전달되기 때문입니다. 이러한 경우에는 Resource Manager 템플릿, 가상 컴퓨터 확장 집합 PowerShell 및 Visual Studio가 있습니다. 
+PublicConfig와 PrivateConfig는 구분되는데, 대부분의 json 사용 사례에서 다른 변수로 전달되기 때문입니다. 이러한 경우에는 Resource Manager 템플릿, Virtual Machine 확장 집합 PowerShell 및 Visual Studio가 있습니다. 
 
 ```json
 "PublicConfig" {
@@ -384,7 +382,7 @@ http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration
 
 |자식 요소|설명|  
 |--------------------|-----------------|  
-|**PublicConfig**|필수입니다. 이 페이지의 다른 곳에 있는 설명을 참조하세요.|  
+|**PublicConfig**|필수 사항입니다. 이 페이지의 다른 곳에 있는 설명을 참조하세요.|  
 |**PrivateConfig**|선택 사항입니다. 이 페이지의 다른 곳에 있는 설명을 참조하세요.|  
 |**IsEnabled**|부울 값입니다. 이 페이지의 다른 곳에 있는 설명을 참조하세요.|  
 
@@ -395,10 +393,10 @@ http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration
 
 |자식 요소|설명|  
 |--------------------|-----------------|  
-|**WadCfg**|필수입니다. 이 페이지의 다른 곳에 있는 설명을 참조하세요.|  
+|**WadCfg**|필수 사항입니다. 이 페이지의 다른 곳에 있는 설명을 참조하세요.|  
 |**StorageAccount**|데이터를 저장할 Azure Storage 계정의 이름입니다. Set-AzureServiceDiagnosticsExtension cmdlet을 실행할 때 매개 변수로 지정할 수도 있습니다.|  
 |**StorageType**|*Table*, *Blob* 또는 *TableAndBlob*일 수 있습니다. Table이 기본값입니다. TableAndBlob을 선택하면 진단 데이터는 각 형식당 한 번씩, 두 번 기록됩니다.|  
-|**LocalResourceDirectory**|모니터링 에이전트가 이벤트 데이터를 저장하는 가상 컴퓨터의 디렉터리입니다. 설정되어 있지 않은 경우 기본 디렉터리가 사용됩니다.<br /><br /> 작업자/웹 역할의 경우: `C:\Resources\<guid>\directory\<guid>.<RoleName.DiagnosticStore\`<br /><br /> 가상 컴퓨터의 경우: `C:\WindowsAzure\Logs\Plugins\Microsoft.Azure.Diagnostics.IaaSDiagnostics\<WADVersion>\WAD<WADVersion>`<br /><br /> 필수 특성은 다음과 같습니다.<br /><br /> - **경로** - Azure 진단에서 사용되는 시스템의 디렉터리입니다.<br /><br /> - **expandEnvironment** - 환경 변수가 경로 이름에서 확장되는지 여부를 제어합니다.|  
+|**LocalResourceDirectory**|모니터링 에이전트가 이벤트 데이터를 저장하는 가상 컴퓨터의 디렉터리입니다. 설정되어 있지 않은 경우 기본 디렉터리가 사용됩니다.<br /><br /> 작업자/웹 역할의 경우: `C:\Resources\<guid>\directory\<guid>.<RoleName.DiagnosticStore\`<br /><br /> Virtual Machine의 경우: `C:\WindowsAzure\Logs\Plugins\Microsoft.Azure.Diagnostics.IaaSDiagnostics\<WADVersion>\WAD<WADVersion>`<br /><br /> 필수 특성은 다음과 같습니다.<br /><br /> - **경로** - Azure 진단에서 사용되는 시스템의 디렉터리입니다.<br /><br /> - **expandEnvironment** - 환경 변수가 경로 이름에서 확장되는지 여부를 제어합니다.|  
 
 ## <a name="wadcfg-element"></a>WadCFG 요소  
  *Tree: Root - DiagnosticsConfiguration - PublicConfig - WadCFG*
@@ -413,7 +411,7 @@ http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration
 
 |특성|설명|  
 |----------------|-----------------|  
-| **overallQuotaInMB** | Azure 진단으로 수집된 진단 데이터의 다양한 형식에서 사용될 수 있는 로컬 디스크 공간의 최대 크기입니다. 기본 설정은 5120MB입니다.<br />
+| **overallQuotaInMB** | Azure 진단으로 수집된 진단 데이터의 다양한 형식에서 사용될 수 있는 로컬 디스크 공간의 최대 크기입니다. 기본 설정은 4096MB입니다.<br />
 |**useProxyServer** | IE 설정에서 설정한 대로 프록시 서버 설정을 사용하도록 Azure 진단을 구성합니다.|  
 
 <br /> <br />
@@ -444,7 +442,7 @@ http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration
 
 |자식 요소|설명|  
 |--------------------|-----------------|  
-|**CrashDumpConfiguration**|필수입니다. 각 프로세스에 대한 구성 값을 정의합니다.<br /><br /> 다음과 같은 특성도 필요합니다.<br /><br /> **processName** - Azure 진단에서 크래시 덤프를 수집하도록 할 프로세스의 이름입니다.|  
+|**CrashDumpConfiguration**|필수 사항입니다. 각 프로세스에 대한 구성 값을 정의합니다.<br /><br /> 다음과 같은 특성도 필요합니다.<br /><br /> **processName** - Azure 진단에서 크래시 덤프를 수집하도록 할 프로세스의 이름입니다.|  
 
 ## <a name="directories-element"></a>Directories 요소 
  *Tree: Root - DiagnosticsConfiguration - PublicConfig - WadCFG - DiagnosticMonitorConfiguration -  Directories*
@@ -469,7 +467,7 @@ http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration
 
 |자식 요소|설명|  
 |--------------------|-----------------|  
-|**DirectoryConfiguration**|필수입니다. 필수 특성:<br /><br /> **containerName** - 로그 파일을 저장하는 데 사용할 Azure Storage 계정의 blob 컨테이너의 이름입니다.|  
+|**DirectoryConfiguration**|필수 사항입니다. 필수 특성:<br /><br /> **containerName** - 로그 파일을 저장하는 데 사용할 Azure Storage 계정의 blob 컨테이너의 이름입니다.|  
 
 
 
@@ -526,7 +524,7 @@ http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration
 
  빠른 쿼리를 위해 최적화된 성능 카운터 테이블을 생성할 수 있습니다. **PerformanceCounters** 요소에 정의되어 있는 각 성능 카운터는 성능 카운터 테이블에 추가된 메트릭 테이블에 저장되어 있습니다.  
 
- **resourceId** 특성이 필요합니다.  Azure 진단을 배포하는 가상 컴퓨터의 리소스 ID입니다. [Azure Portal](https://portal.azure.com)에서 **resourceID**를 가져옵니다. **찾아보기** -> **리소스 그룹** -> **<이름\>**을 선택합니다. **속성** 타일을 클릭하고 **ID** 필드에서 값을 복사합니다.  
+ **resourceId** 특성이 필요합니다.  Azure 진단을 배포하는 가상 머신 또는 Virtual Machine Scale Set의 리소스 ID입니다. [Azure Portal](https://portal.azure.com)에서 **resourceID**를 가져옵니다. **찾아보기** -> **리소스 그룹** -> **<이름\>**을 선택합니다. **속성** 타일을 클릭하고 **ID** 필드에서 값을 복사합니다.  
 
 |자식 요소|설명|  
 |--------------------|-----------------|  
@@ -545,7 +543,7 @@ http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration
 
 |자식 요소|설명|  
 |-------------------|-----------------|  
-|**PerformanceCounterConfiguration**|다음과 같은 특성이 필요합니다.<br /><br /> - **counterSpecifier** - 성능 카운터의 이름입니다. 예: `\Processor(_Total)\% Processor Time`. 호스트에서 성능 카운터의 목록을 가져오려면 명령 `typeperf`를 실행합니다.<br /><br /> - **sampleRate** - 카운터가 샘플링되는 주기입니다.<br /><br /> 선택적 특성:<br /><br /> **unit** - 카운터의 측정 단위입니다.|  
+|**PerformanceCounterConfiguration**|다음과 같은 특성이 필요합니다.<br /><br /> - **counterSpecifier** - 성능 카운터의 이름입니다. 예: `\Processor(_Total)\% Processor Time` 호스트에서 성능 카운터의 목록을 가져오려면 명령 `typeperf`를 실행합니다.<br /><br /> - **sampleRate** - 카운터가 샘플링되는 주기입니다.<br /><br /> 선택적 특성:<br /><br /> **unit** - 카운터의 측정 단위입니다.|  
 
 
 
@@ -559,7 +557,7 @@ http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration
 
 |자식 요소|설명|  
 |-------------------|-----------------|  
-|**DataSource**|수집할 Windows 이벤트 로그입니다. 필수 특성:<br /><br /> **name** - 수집할 Windows 이벤트를 설명하는 XPath 쿼리입니다. 예:<br /><br /> `Application!*[System[(Level <=3)]], System!*[System[(Level <=3)]], System!*[System[Provider[@Name='Microsoft Antimalware']]], Security!*[System[(Level <= 3)]`<br /><br /> 모든 이벤트를 수집하려면 “*”를 지정합니다.|  
+|**DataSource**|수집할 Windows 이벤트 로그입니다. 필수 특성:<br /><br /> **name** - 수집할 Windows 이벤트를 설명하는 XPath 쿼리입니다. 예: <br /><br /> `Application!*[System[(Level <=3)]], System!*[System[(Level <=3)]], System!*[System[Provider[@Name='Microsoft Antimalware']]], Security!*[System[(Level <= 3)]`<br /><br /> 모든 이벤트를 수집하려면 “*”를 지정합니다.|  
 
 
 
@@ -571,7 +569,7 @@ http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration
 
  기본 Azure 로그의 버퍼 구성을 정의합니다.  
 
-|특성|형식|설명|  
+|특성|유형|설명|  
 |---------------|----------|-----------------|  
 |**bufferQuotaInMB**|**unsignedInt**|선택 사항입니다. 지정된 데이터에 사용할 수 있는 파일 시스템 저장소의 최대 크기를 지정합니다.<br /><br /> 기본값은 0입니다.|  
 |**scheduledTransferLogLevelFilterr**|**string**|선택 사항입니다. 전송되는 로그 항목에 대한 최소 심각도 수준을 지정합니다. 기본값은 **Undefined**로, 모든 로그를 전송합니다. 정보가 적은 순서대로 사용 가능한 다른 값을 나열하면 다음과 같습니다. **자세한 정보**, **정보**, **경고**, **오류**, **중요**|  
@@ -603,7 +601,7 @@ http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration
 
  진단 데이터를 보낼 위치를 정의합니다. 예를 들어 Application Insights 서비스입니다.  
 
-|특성|형식|설명|  
+|특성|유형|설명|  
 |---------------|----------|-----------------|  
 |**name**|string|sinkname을 식별하는 문자열입니다.|  
 
@@ -654,4 +652,3 @@ http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration
  *Tree: Root - DiagnosticsConfiguration - IsEnabled*
 
  부울 값입니다. `true`를 사용하여 진단을 사용하도록 설정하거나 `false`를 사용하여 진단을 사용하지 않도록 설정합니다.
-

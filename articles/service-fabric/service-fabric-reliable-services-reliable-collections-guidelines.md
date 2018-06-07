@@ -1,26 +1,24 @@
 ---
-title: "Azure Service Fabric에서 신뢰할 수 있는 컬렉션에 대한 지침 및 권장 사항 | Microsoft Docs"
-description: "Service Fabric의 신뢰할 수 있는 컬렉션을 사용하기 위한 지침 및 권장 사항"
+title: Azure Service Fabric에서 신뢰할 수 있는 컬렉션에 대한 지침 및 권장 사항 | Microsoft Docs
+description: Service Fabric의 신뢰할 수 있는 컬렉션을 사용하기 위한 지침 및 권장 사항
 services: service-fabric
 documentationcenter: .net
 author: mcoskun
 manager: timlt
-editor: masnider,rajak
+editor: masnider,rajak,zhol
 ms.assetid: 62857523-604b-434e-bd1c-2141ea4b00d1
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: required
-ms.date: 5/3/2017
+ms.date: 12/10/2017
 ms.author: mcoskun
-ms.translationtype: Human Translation
-ms.sourcegitcommit: fc4172b27b93a49c613eb915252895e845b96892
-ms.openlocfilehash: 053a7bca76362035e428fc11806b3e4f83d00946
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/12/2017
-
-
+ms.openlocfilehash: 7a61fa9df5b5232c11f4a546ec5f050461c88e88
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="guidelines-and-recommendations-for-reliable-collections-in-azure-service-fabric"></a>Azure Service Fabric에서 신뢰할 수 있는 컬렉션에 대한 지침 및 권장 사항
 이 섹션에서는 신뢰할 수 있는 상태 관리자 및 신뢰할 수 있는 컬렉션을 사용하기 위한 지침을 제공합니다. 목표는 사용자에게 일반적인 문제가 발생하지 않도록 방지하는 것입니다.
@@ -28,13 +26,14 @@ ms.lasthandoff: 05/12/2017
 지침은 *~하세요*, *~을(를) 고려하세요*, *~을(를) 피하세요* 및 *~하지 마세요.* 용어가 맨 끝에 추가된 간단한 권장 사항으로 구성됩니다.
 
 * 읽기 작업에 의해 반환되는 사용자 지정 형식의 개체(예: `TryPeekAsync` 또는 `TryGetValueAsync`)는 수정하지 마세요. 신뢰할 수 있는 컬렉션은 동시 컬렉션처럼 개체에 대한 복사본이 아닌 참조를 반환합니다.
-* 수정하기 전에 사용자 지정 형식의 반환된 개체에 대한 전체 복사를 수행합니다. 구조체 및 기본 제공 형식은 pass-by-value이므로 전체 복사를 수행할 필요가 없습니다.
+* 수정하기 전에 사용자 지정 형식의 반환된 개체에 대한 전체 복사를 수행합니다. 구조 및 기본 제공 형식이 값에 의한 전달이므로 수정하려는 참조 형식의 필드 또는 속성이 포함되지 않으면 전체 복사를 수행할 필요가 없습니다.
 * 시간제한에 `TimeSpan.MaxValue` 를 사용하지 마세요. 시간 제한은 교착 상태를 감지하는 데 사용되어야 합니다.
 * 트랜잭션을 커밋, 중단 또는 삭제한 후에는 사용하지 마십시오.
 * 열거형이 만들어진 트랜잭션 범위 외부에서는 해당 열거형을 사용하지 마세요.
 * 다른 트랜잭션의 `using` 문 내에 트랜잭션을 만들지 마세요. 교착 상태가 발생할 수 있습니다.
 * `IComparable<TKey>` 구현이 올바른지 확인하세요. 시스템은 검사점 및 행 병합을 위해 `IComparable<TKey>`에 대한 종속성을 보유합니다.
 * 특정 유형의 교착 상태를 방지하기 위해 항목을 업데이트하려는 경우에는 항목을 읽을 때 업데이트 잠금을 사용하지 마세요.
+* 파티션당 신뢰할 수 있는 컬렉션 수를 1,000개 미만으로 유지하세요. 항목 수가 더 적은 신뢰할 수 있는 컬렉션보다 항목 수가 더 많은 신뢰할 수 있는 컬렉션이 우선됩니다.
 * 항목(예: 신뢰할 수 있는 사전에 대한 TKey + TValue)을 80KB 미만으로 유지하는 것이 좋으며, 작을수록 더 좋습니다. 이렇게 하면 디스크 및 네트워크 IO 요구 사항뿐만 아니라 큰 개체 힙 사용량도 줄어듭니다. 주로 값의 작은 부분만 업데이트할 때 중복 데이터 복제도 줄어듭니다. 신뢰할 수 있는 사전에서 이를 달성하는 일반적인 방법은 행을 여러 행으로 나누는 것입니다.
 * 재해 복구를 위해 백업 및 복원 기능을 사용하는 것이 좋습니다.
 * 격리 수준이 다르기 때문에 동일한 트랜잭션 내에서 단일 엔터티 작업 및 다중 엔터티 작업을 혼합하지 마세요(예: `GetCountAsync`, `CreateEnumerableAsync`).
@@ -53,13 +52,11 @@ ms.lasthandoff: 05/12/2017
 ### <a name="next-steps"></a>다음 단계
 * [신뢰할 수 있는 컬렉션 작업](service-fabric-work-with-reliable-collections.md)
 * [트랜잭션 및 잠금](service-fabric-reliable-services-reliable-collections-transactions-locks.md)
-* [신뢰할 수 있는 상태 관리자 및 컬렉션 내부](service-fabric-reliable-services-reliable-collections-internals.md)
 * 데이터 관리
-  * [백업 및 복원](service-fabric-reliable-services-backup-restore.md)
+  * [Backup 및 복원](service-fabric-reliable-services-backup-restore.md)
   * [Notifications](service-fabric-reliable-services-notifications.md)
   * [Serialization 및 업그레이드](service-fabric-application-upgrade-data-serialization.md)
   * [신뢰할 수 있는 상태 관리자 구성](service-fabric-reliable-services-configuration.md)
 * 기타
   * [Reliable Services 빠른 시작](service-fabric-reliable-services-quick-start.md)
   * [신뢰할 수 있는 컬렉션에 대한 개발자 참조](https://msdn.microsoft.com/library/azure/microsoft.servicefabric.data.collections.aspx)
-

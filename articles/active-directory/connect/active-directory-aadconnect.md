@@ -1,34 +1,39 @@
 ---
-title: "Active Directory와 Azure Active Directory 연결 | Microsoft Docs"
-description: "Azure AD Connect는 온-프레미스 디렉터리와 Azure Active Directory를 통합니다. 이렇게 하면 Azure AD와 통합된 Office 365, Azure 및 SaaS 응용 프로그램에 대한 공통 ID를 제공할 수 있습니다."
-keywords: "Azure AD Connect 소개, Azure AD Connect 개요, Azure AD Connect 정의, active directory 설치"
+title: Active Directory와 Azure Active Directory 연결 | Microsoft Docs
+description: Azure AD Connect는 온-프레미스 디렉터리와 Azure Active Directory를 통합니다. 이렇게 하면 Azure AD와 통합된 Office 365, Azure 및 SaaS 응용 프로그램에 대한 공통 ID를 제공할 수 있습니다.
+keywords: Azure AD Connect 소개, Azure AD Connect 개요, Azure AD Connect 정의, active directory 설치
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: billmath
-manager: femila
-editor: 
+manager: mtillman
+editor: ''
 ms.assetid: 59bd209e-30d7-4a89-ae7a-e415969825ea
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: get-started-article
-ms.date: 07/13/2017
+ms.date: 03/19/2018
 ms.author: billmath
+ms.openlocfilehash: 128a6bffe4e604eb4e02a10f13d561a336fc8c61
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 97f89cd6cf37d92ac50f149336e1d1143de991ec
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34354421"
 ---
 # <a name="integrate-your-on-premises-directories-with-azure-active-directory"></a>Azure Active Directory와 온-프레미스 디렉터리 통합
 Azure AD Connect는 온-프레미스 디렉터리와 Azure Active Directory를 통합니다. 이렇게 하면 Azure AD와 통합된 Office 365, Azure 및 SaaS 응용 프로그램 사용자를 위한 공통 ID를 제공할 수 있습니다. 이 항목은 계획, 배포 및 운영 단계를 안내합니다. 이 영역과 관련된 항목으로 연결되는 링크 컬렉션입니다.
 
 > [!IMPORTANT]
-> [Azure AD Connect는 온-프레미스 디렉터리를 Azure AD와 Office 365에 연결하는 가장 좋은 방법입니다. 이제 이러한 도구가 사용되지 않으며 2017년 4월 13일에 지원이 종료될 예정이므로 Microsoft Azure Active Directory 동기화(DirSync) 또는 Azure AD Sync에서 Azure AD Connect로 지금 업그레이드하는 것이 좋습니다.](active-directory-aadconnect-dirsync-deprecated.md)
+> [Azure AD Connect는 온-프레미스 디렉터리를 Azure AD와 Office 365에 연결하는 가장 좋은 방법입니다. 이제 이러한 도구가 사용되지 않으며 2017년 4월 13일부터 더 이상 지원되지 않으므로 Microsoft Azure Active Directory 동기화(DirSync) 또는 Azure AD Sync에서 Azure AD Connect로 지금 업그레이드하는 것이 좋습니다.](active-directory-aadconnect-dirsync-deprecated.md)  추가 정보:
+
+
+
 > 
-> 
+> - 사용자를 Azure AD와 동기화하는 기능은 **무료**이며 고객에게 유료 구독이 없어도 됩니다.
+>- 동기화된 사용자에게는 *어떠한* 라이선스도 **자동으로 부여되지 않습니다**. 관리자는 계속해서 모든 라이선스 할당을 제어합니다. 
+> - Microsoft에서는 IT 관리자가 모든 사용자를 동기화할 것을 권장합니다. 이렇게 하면 Azure AD 통합 리소스에 대한 사용자 액세스의 차단이 해제될 뿐 아니라 IT 관리자는 사용자가 어떤 응용 프로그램에 액세스 중인지 훨씬 자세히 볼 수 있습니다. 
 
 ![Azure AD Connect의 정의](media/active-directory-aadconnect/arch.png)
 
@@ -50,13 +55,17 @@ Azure Active Directory Connect는 동기화 서비스, 선택적인 Active Direc
 * 상태 모니터링 - Azure AD Connect Health는 강력한 모니터링을 제공하고 Azure 포털에서 중앙 위치를 제공하여 이 활동을 볼 수 있습니다. 자세한 내용은 [Azure Active Directory Connect Health](../connect-health/active-directory-aadconnect-health.md)를 참조하세요.
 
 ## <a name="install-azure-ad-connect"></a>Azure AD Connect 설치
+
+> [!IMPORTANT]
+> Microsoft는 공식적으로 문서화된 작업 외의 Azure AD Connect 동기화에 대한 수정 또는 작업을 지원하지 않습니다. 이러한 동작 중 하나는 Azure AD Connect 동기화의 불일치하거나 지원되지 않는 상태가 될 수 있습니다. 결과적으로, Microsoft는 해당 배포에 대해 기술 지원을 제공할 수 없습니다.
+
 [Microsoft 다운로드 센터](http://go.microsoft.com/fwlink/?LinkId=615771)에서 Azure AD Connect를 다운로드할 수 있습니다 .
 
 | 해결 방법 | 시나리오 |
 | --- | --- |
 | 시작하기 전에 - [하드웨어 및 필수 구성 요소](active-directory-aadconnect-prerequisites.md) |<li>Azure AD Connect 설치를 시작하기 전에 완료할 단계입니다.</li> |
 | [Express 설정](active-directory-aadconnect-get-started-express.md) |<li>단일 포리스트 AD가 있는 경우 사용하도록 권장되는 옵션입니다.</li> <li>사용자가 암호 동기화를 사용하여 동일한 암호로 로그인합니다.</li> |
-| [사용자 지정된 설정](active-directory-aadconnect-get-started-custom.md) |<li>여러 포리스트가 있는 경우 사용됩니다. 다양한 온-프레미스 [토폴로지](active-directory-aadconnect-topologies.md)를 지원합니다.</li> <li>페더레이션의 ADFS와 같은 로그인 옵션을 사용자 지정하거나 타사 ID 공급자를 사용합니다.</li> <li>필터링 및 쓰기 저장과 같은 동기화 기능을 사용자 지정합니다.</li> |
+| [사용자 지정된 설정](active-directory-aadconnect-get-started-custom.md) |<li>여러 포리스트가 있는 경우 사용됩니다. 다양한 온-프레미스 [토폴로지](active-directory-aadconnect-topologies.md)를 지원합니다.</li> <li>통과 인증, 페더레이션의 ADFS 같은 로그인 옵션을 사용자 지정하거나 타사 ID 공급자를 사용합니다.</li> <li>필터링 및 쓰기 저장과 같은 동기화 기능을 사용자 지정합니다.</li> |
 | [DirSync에서 업그레이드](active-directory-aadconnect-dirsync-upgrade-get-started.md) |<li>기존 DirSync 서버를 이미 실행 중인 경우 사용됩니다.</li> |
 | [Azure AD Sync 또는 Azure AD Connect에서 업그레이드](active-directory-aadconnect-upgrade-previous-version.md) |<li>기본 설정에 따라 여러 가지 방법이 있습니다.</li> |
 
@@ -87,9 +96,9 @@ Azure AD Connect는 필요에 따라 기본적으로 키거나 사용할 수 있
 
 [필터링](active-directory-aadconnectsync-configure-filtering.md) 은 어떤 개체가 Azure AD에 동기화되는지 제한하려는 경우 사용됩니다. 기본적으로 모든 사용자, 연락처, 그룹 및 Windows 10 컴퓨터는 동기화됩니다. 도메인, OU 또는 특성을 기반으로 필터링을 변경할 수 있습니다.
 
-[암호 동기화](active-directory-aadconnectsync-implement-password-synchronization.md) 는 Active Directory의 암호 해시를 Azure AD에 동기화합니다. 최종 사용자는 동일한 암호를 온-프레미스와 클라우드에서 사용할 수 있지만 관리는 한 곳에서만 합니다. 온-프레미스 Active Directory를 기관으로 사용하기 때문에 사용자의 암호 정책을 사용할 수도 있습니다.
+[암호 해시 동기화](active-directory-aadconnectsync-implement-password-hash-synchronization.md)는 Active Directory의 암호 해시를 Azure AD에 동기화합니다. 최종 사용자는 동일한 암호를 온-프레미스와 클라우드에서 사용할 수 있지만 관리는 한 곳에서만 합니다. 온-프레미스 Active Directory를 기관으로 사용하기 때문에 사용자의 암호 정책을 사용할 수도 있습니다.
 
-[비밀번호 쓰기 저장](../active-directory-passwords-getting-started.md) 을 사용하면 사용자가 클라우드에서 암호를 변경하고 다시 설정할 수 있으며 온-프레미스 암호 정책을 적용합니다.
+[비밀번호 쓰기 저장](../authentication/quickstart-sspr.md) 을 사용하면 사용자가 클라우드에서 암호를 변경하고 다시 설정할 수 있으며 온-프레미스 암호 정책을 적용합니다.
 
 [장치 쓰기 저장](active-directory-aadconnect-feature-device-writeback.md) 을 사용하면 Azure AD에 등록된 장치가 온-프레미스 Active Directory에 다시 기록되므로 조건부 액세스를 위해 사용할 수 있습니다.
 
@@ -101,8 +110,8 @@ Azure AD Connect는 필요에 따라 기본적으로 키거나 사용할 수 있
 |항목 |링크|  
 | --- | --- |
 |필터링 구성 | [Azure AD Connect 동기화 구성 필터링](active-directory-aadconnectsync-configure-filtering.md)|
-|암호 동기화 | [Azure AD Connect 동기화: 암호 동기화 구현](active-directory-aadconnectsync-implement-password-synchronization.md)|
-|비밀번호 쓰기 저장 | [암호 관리 시작](../active-directory-passwords-getting-started.md)|
+|암호 해시 동기화 | [Azure AD Connect 동기화: 암호 해시 동기화 구현](active-directory-aadconnectsync-implement-password-hash-synchronization.md)|
+|비밀번호 쓰기 저장 | [암호 관리 시작](../authentication/quickstart-sspr.md)|
 |장치 쓰기 저장 | [Azure AD Connect에서 장치 쓰기 저장 사용](active-directory-aadconnect-feature-device-writeback.md)|
 |실수로 인한 삭제 방지 | [Azure AD Connect 동기화: 실수로 인한 삭제 방지](active-directory-aadconnectsync-feature-prevent-accidental-deletes.md)|
 |자동 업그레이드 | [Azure AD Connect: 자동 업그레이드](active-directory-aadconnect-feature-automatic-upgrade.md)|
@@ -127,9 +136,18 @@ Azure AD Connect 동기화는 대부분의 고객 및 토폴로지에 대해 작
 |기본 구성 변경 | [기본 구성 변경에 대한 모범 사례](active-directory-aadconnectsync-best-practices-changing-default-configuration.md)|
 
 ## <a name="configure-federation-features"></a>페더레이션 기능 구성
+
+Azure AD Connect는 페더레이션 트러스트를 관리하고 AD FS를 사용하여 Azure AD와의 페더레이션을 간소화하는 몇 가지 기능을 제공합니다. Azure AD Connect는 Windows Server 2012R2 이상에서 AD FS를 지원합니다.
+
+페더레이션 트러스트를 관리하는 데 Azure AD Connect를 사용하지 않는 경우에도 [AD FS 팜의 SSL 인증서를 업데이트](active-directory-aadconnectfed-ssl-update.md)합니다.
+
+팜에 [AD FS 서버를 추가](active-directory-aadconnect-federation-management.md#addadfsserver)하여 필요에 따라 팜을 확장합니다.
+
+몇 번의 클릭으로 Azure AD를 통해 [트러스트를 복구](active-directory-aadconnect-federation-management.md#repairthetrust)합니다.
+
 ADFS는 [복수 도메인](active-directory-aadconnect-multiple-domains.md)을 지원하도록 구성될 수 있습니다. 예를 들어 페더레이션 사용에 필요한 복수의 최상위 도메인을 가질 수 있습니다.
 
-ADFS 서버가 Azure AD 인증서를 자동으로 업데이트하도록 구성되지 않았거나 비 ADFS 솔루션을 사용하는 경우에는 [인증서를 업데이트](active-directory-aadconnect-o365-certs.md)해야 하는 경우 알림이 표시됩니다.
+ADFS 서버가 Azure AD에서 인증서를 자동으로 업데이트하도록 구성되지 않았거나 비 ADFS 솔루션을 사용하는 경우에는 [인증서를 업데이트](active-directory-aadconnect-o365-certs.md)해야 하는 경우 알림이 표시됩니다.
 
 ### <a name="next-steps-to-configure-federation-features"></a>페더레이션 기능을 구성하는 다음 단계
 |항목 |링크|  
@@ -157,5 +175,4 @@ ADFS 서버가 Azure AD 인증서를 자동으로 업데이트하도록 구성�
 > [!VIDEO https://channel9.msdn.com/Events/Ignite/2015/BRK3862/player]
 > 
 > 
-
 

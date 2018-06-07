@@ -1,11 +1,11 @@
 ---
-title: "Azure AD Connect: 연결 문제 해결 | Microsoft Docs"
-description: "Azure AD Connect의 연결 문제를 해결하는 방법을 설명합니다."
+title: 'Azure AD Connect: 연결 문제 해결 | Microsoft Docs'
+description: Azure AD Connect의 연결 문제를 해결하는 방법을 설명합니다.
 services: active-directory
-documentationcenter: 
-author: andkjell
-manager: femila
-editor: 
+documentationcenter: ''
+author: billmath
+manager: mtillman
+editor: ''
 ms.assetid: 3aa41bb5-6fcb-49da-9747-e7a3bd780e64
 ms.service: active-directory
 ms.workload: identity
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/12/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 538f282b28e5f43f43bf6ef28af20a4d8daea369
-ms.openlocfilehash: 9684a04b9ce12e6ca09e60909167f7557212c8be
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/07/2017
-
+ms.openlocfilehash: 1c8bbbde653ed8e927ab1550c32ae86a4dc2ffac
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
 # <a name="troubleshoot-connectivity-issues-with-azure-ad-connect"></a>Azure AD Connect 연결 문제 해결
 이 문서는 Azure AD Connect와 Azure AD 간 연결의 작동 방식 및 연결 문제 해결 방법을 설명합니다. 이러한 문제는 프록시 서버 환경에서 발생할 가능성이 가장 높습니다.
@@ -67,7 +66,7 @@ Azure AD Connect는 인증에 최신 인증을 사용합니다(ADAL 라이브러
 ![Microsoft 계정이 사용됨](./media/active-directory-aadconnect-troubleshoot-connectivity/unknownerror.png)
 
 ### <a name="the-mfa-endpoint-cannot-be-reached"></a>MFA 끝점에 연결할 수 없음
-끝점 **https://secure.aadcdn.microsoftonline-p.com**에 연결할 수 없고 전역 관리자가 MFA를 사용하도록 설정한 경우 이 오류가 표시됩니다.  
+엔드포인트 **https://secure.aadcdn.microsoftonline-p.com**에 연결할 수 없고 전역 관리자가 MFA를 사용하도록 설정한 경우 이 오류가 표시됩니다.  
 ![nomachineconfig](./media/active-directory-aadconnect-troubleshoot-connectivity/nomicrosoftonlinep.png)
 
 * 이 오류가 표시되는 경우 끝점 **secure.aadcdn.microsoftonline-p.com**이 프록시에 추가되어 있는지 확인합니다.
@@ -96,10 +95,13 @@ PowerShell은 프록시에 연결하기 위해 machine.config의 구성을 사�
 | 403 |사용할 수 없음 |요청된 URL에 대해 프록시가 열려 있지 않습니다. 프록시 구성을 다시 확인하고 [URL](https://support.office.com/article/Office-365-URLs-and-IP-address-ranges-8548a211-3fe7-47cb-abb1-355ea5aa88a2) 이 열려 있는지 확인합니다. |
 | 407 |프록시 인증 필요 |프록시 서버에 로그인이 필요한데 아무 것도 제공되지 않았습니다. 프록시 서버에 인증이 필요한 경우 machine.config에서 이 설정이 구성되었는지 확인합니다. 또한 마법사를 실행하는 사용자 및 서비스 계정에 대해 도메인 계정을 사용하고 있는지 확인합니다. |
 
+### <a name="proxy-idle-timeout-setting"></a>프록시 유휴 시간 제한 설정
+Azure AD Connect가 Azure AD로 내보내기 요청을 전송하면 Azure AD는 응답을 생성하기 전에 요청을 처리하는 데 최대 5분이 소요될 수 있습니다. 대규모 그룹 구성원이 동일한 내보내기 요청에 포함되어 있는 그룹 개체가 많이 있을 때 특히 이러한 처리 시간이 오래 걸릴 수 있습니다. 프록시 유휴 시간 제한을 5분보다 크게 구성해야 합니다. 그렇지 않은 경우 Azure AD Connect 서버에서 Azure AD와의 간헐적 연결 문제가 확인될 수 있습니다.
+
 ## <a name="the-communication-pattern-between-azure-ad-connect-and-azure-ad"></a>Azure AD Connect와 Azure AD 간의 통신 패턴
 위의 모든 단계를 수행했는데도 여전히 연결할 수 없다면 이제 네트워크 로그를 살펴봅니다. 이 섹션에는 일반적이고 성공적인 연결 패턴이 나와 있습니다. 네트워크 로그를 읽고 있는 중이라면 무시해도 되는 지엽적인 내용도 나옵니다.
 
-* https://dc.services.visualstudio.com이 호출됩니다. 설치가 성공하는 데 프록시에 이 URL이 열려 있을 필요는 없으므로 이러한 호출은 무시해도 됩니다.
+* https://dc.services.visualstudio.com에 대한 호출이 있습니다. 설치가 성공하는 데 프록시에 이 URL이 열려 있을 필요는 없으므로 이러한 호출은 무시해도 됩니다.
 * DNS 확인에서 microsoftonline.com이 아닌 DNS 이름 공간 nsatc.net 및 기타 네임스페이스에 있어야 하는 실제 호스트가 나열됩니다. 그러나 실제 서버 이름에 대한 웹 서비스를 요청하지 않으므로 이러한 URL을 프록시에 추가할 필요가 없습니다.
 * 끝점 adminwebservice 및 provisioningapi는 검색 끝점이며 사용할 실제 끝점을 찾는 데 사용됩니다. 이러한 끝점은 사용자의 하위 지역에 따라 다릅니다.
 
@@ -197,4 +199,3 @@ MFA(Multi-Factor Authentication) 시도를 취소했습니다.
 
 ## <a name="next-steps"></a>다음 단계
 [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)에 대해 자세히 알아봅니다.
-

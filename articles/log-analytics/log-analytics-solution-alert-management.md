@@ -1,8 +1,8 @@
 ---
-title: "OMS(Operations Management Suite)의 경고 관리 솔루션 | Microsoft Docs"
-description: "Log Analytics의 경고 관리 솔루션을 사용하여 환경의 모든 경고를 분석할 수 있습니다.  OMS 내에서 생성된 경고를 통합하는 것 외에도 연결된 SCOM(System Center Operations Manager) 관리 그룹에서 Log Analytics로 경고를 가져옵니다."
+title: Azure Log Analytics의 경고 관리 솔루션 | Microsoft Docs
+description: Log Analytics의 경고 관리 솔루션을 사용하여 환경의 모든 경고를 분석할 수 있습니다.  Log Analytics 내에서 생성된 경고를 통합하는 것 외에도, 연결된 System Center Operations Manager 관리 그룹에서 Log Analytics로 경고를 가져옵니다.
 services: log-analytics
-documentationcenter: 
+documentationcenter: ''
 author: bwren
 manager: jwhit
 editor: tysonn
@@ -12,33 +12,32 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 03/07/2017
+ms.date: 01/19/2018
 ms.author: bwren
+ms.openlocfilehash: 0d9028b821e4c488186143311c81bfa6d17908ff
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 3714730dce9c856f602cf46e013b1ff6a89cfb07
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
-# <a name="alert-management-solution-in-operations-management-suite-oms"></a>OMS(Operations Management Suite)의 경고 관리 솔루션
+# <a name="alert-management-solution-in-azure-log-analytics"></a>Azure Log Analytics의 경고 관리 솔루션
 
 ![경고 관리 아이콘](media/log-analytics-solution-alert-management/icon.png)
 
-경고 관리 솔루션을 통해 Log Analytics 리포지토리에서 모든 경고를 분석할 수 있습니다.  [Log Analytics에서 만든](log-analytics-alerts.md) 또는 [Nagios 또는 Zabbix에서 가져온](log-analytics-linux-agents.md) 원본을 포함하여 다양한 원본에서 이러한 경고가 발생합니다.  또한 솔루션은 [연결된 System Center Operations Manager(SCOM) 관리 그룹](log-analytics-om-agents.md)에서 경고를 발생시킵니다.
+경고 관리 솔루션을 통해 Log Analytics 리포지토리에서 모든 경고를 분석할 수 있습니다.  [Log Analytics에서 만든](log-analytics-alerts.md) 또는 [Nagios 또는 Zabbix에서 가져온](log-analytics-linux-agents.md) 원본을 포함하여 다양한 원본에서 이러한 경고가 발생할 수 있습니다.  또한 솔루션은 [연결된 System Center Operations Manager 관리 그룹](log-analytics-om-agents.md)에서도 경고를 가져옵니다.
 
 ## <a name="prerequisites"></a>필수 조건
-솔루션은 **경고**의 유형을 사용하여 Log Analytics 리포지토리에서 모든 레코드를 사용하므로 이러한 레코드를 수집하는 데 필요한 구성을 모두 수행해야 합니다.
+솔루션은 Log Analytics 리포지토리에서 **경고** 유형의 모든 레코드를 사용하므로 이러한 레코드를 수집하는 데 필요한 구성을 모두 수행해야 합니다.
 
 - Log Analytics 경고의 경우 [경고 규칙을 만들어서](log-analytics-alerts.md) 리포지토리에서 직접 경고 레코드를 만듭니다.
 - Nagios 및 Zabbix 경고의 경우 [해당 서버를 구성하여](log-analytics-linux-agents.md) Log Analytics에 경고를 보냅니다.
-- SCOM 경고의 경우 [Log Analytics 작업 영역에 Operations Manager 관리 그룹을 연결](log-analytics-om-agents.md)합니다.  SCOM에서 만든 모든 경고를 Log Analytics으로 가져옵니다.  
+- System Center Operations Manager 경고의 경우 [Log Analytics 작업 영역에 Operations Manager 관리 그룹을 연결](log-analytics-om-agents.md)합니다.  그러면 System Center Operations Manager에서 생성된 모든 경고를 Log Analytics로 가져옵니다.  
 
 ## <a name="configuration"></a>구성
-[솔루션 추가](log-analytics-add-solutions.md)에 설명된 프로세스를 사용하여 경고 관리 솔루션을 OMS 작업 영역에 추가합니다.  추가 구성은 필요 없습니다.
+[솔루션 추가](log-analytics-add-solutions.md)에서 설명하는 프로세스를 사용하여 경고 관리 솔루션을 Log Analytics 작업 영역에 추가합니다.  추가 구성은 필요 없습니다.
 
 ## <a name="management-packs"></a>관리 팩
-SCOM 관리 그룹이 OMS 작업 영역에 연결된 경우 이 솔루션을 추가할 때 다음 관리 팩이 SCOM에 설치됩니다.  이 관리 팩에 대한 구성 또는 유지 관리는 필요 없습니다.  
+System Center Operations Manager 관리 그룹이 Log Analytics 작업 영역에 연결된 경우, 이 솔루션을 추가하면 System Center Operations Manager에 다음 관리 팩이 설치됩니다.  관리 팩 구성 또는 유지 관리는 필요 없습니다.  
 
 * Microsoft System Center Advisor 경고 관리(Microsoft.IntelligencePacks.AlertManagement)
 
@@ -50,29 +49,28 @@ SCOM 관리 그룹이 OMS 작업 영역에 연결된 경우 이 솔루션을 추
 
 | 연결된 소스 | 지원 | 설명 |
 |:--- |:--- |:--- |
-| [Windows 에이전트](log-analytics-windows-agents.md) | 아니요 |직접 Windows 에이전트는 경고를 생성하지 않습니다.  이벤트에서 Log Analytics 경고를 만들고 Windows 에이전트에서 성능 데이터를 수집할 수 있습니다. |
-| [Linux 에이전트](log-analytics-linux-agents.md) | 아니요 |직접 Linux 에이전트는 경고를 생성하지 않습니다.  이벤트에서 Log Analytics 경고를 만들고 Linux 에이전트에서 성능 데이터를 수집할 수 있습니다.  Linux 에이전트가 필요한 해당 서버에서 Nagios 및 Zabbix 경고를 수집합니다. |
-| [SCOM 관리 그룹](log-analytics-om-agents.md) |예 |SCOM 에이전트에 대해 생성된 경고는 관리 그룹에 전달된 다음 Log Analytics에 전달됩니다.<br><br>SCOM 에이전트에서 Log Analytics로 직접 연결은 필요하지 않습니다. 경고 데이터는 관리 그룹에서 Log Analytics 리포지토리로 전달됩니다. |
+| [Windows 에이전트](log-analytics-windows-agent.md) | 아니오 |직접 Windows 에이전트는 경고를 생성하지 않습니다.  이벤트에서 Log Analytics 경고를 만들고 Windows 에이전트에서 성능 데이터를 수집할 수 있습니다. |
+| [Linux 에이전트](log-analytics-linux-agents.md) | 아니오 |직접 Linux 에이전트는 경고를 생성하지 않습니다.  이벤트에서 Log Analytics 경고를 만들고 Linux 에이전트에서 성능 데이터를 수집할 수 있습니다.  Linux 에이전트가 필요한 해당 서버에서 Nagios 및 Zabbix 경고를 수집합니다. |
+| [System Center Operations Manager 관리 그룹](log-analytics-om-agents.md) |예 |Operations Manager 에이전트에 대해 생성된 경고는 관리 그룹에 전달된 다음 Log Analytics에 전달됩니다.<br><br>Operations Manager 에이전트에서 Log Analytics로 직접 연결은 필요하지 않습니다. 경고 데이터는 관리 그룹에서 Log Analytics 리포지토리로 전달됩니다. |
 
 
 ### <a name="collection-frequency"></a>수집 빈도
 - 리포지토리에 저장되는 즉시 경고 레코드가 솔루션에 제공됩니다.
-- 경고 데이터는 매 3 분마다 SCOM 관리 그룹에서 
-Log Analytics로 전송됩니다.  
+- 경고 데이터는 3분마다 Operations Manager 관리 그룹에서 Log Analytics로 전송됩니다.  
 
 ## <a name="using-the-solution"></a>솔루션 사용
-경고 관리 솔루션을 OMS 작업 영역에 추가할 때 OMS 대시보드에 **경고 관리** 타일이 추가됩니다.  이 타일은 마지막 24 시간 이내에 생성된 현재 활성 경고 수에 대한 카운트와 그래픽 표현을 표시합니다.  이 시간 범위를 변경할 수 없습니다.
+경고 관리 솔루션을 Log Analytics 작업 영역에 추가하면 대시보드에 **경고 관리** 타일이 추가됩니다.  이 타일은 마지막 24 시간 이내에 생성된 현재 활성 경고 수에 대한 카운트와 그래픽 표현을 표시합니다.  이 시간 범위를 변경할 수 없습니다.
 
 ![경고 관리 타일](media/log-analytics-solution-alert-management/tile.png)
 
-**경고 관리** 타일을 클릭하여 **경고 관리** 대시보드를 엽니다.  대시보드는 다음 표의 열을 포함하고 있습니다.  각 열은 지정된 범위 및 시간 범위에 대한 열의 기준과 일치하는 카운트별로 상위 열 개의 경고를 나열합니다.  열 아래쪽의 **모두 보기** 를 클릭하거나 열 제목을 클릭하여 전체 목록을 제공하는 로그 검색을 실행할 수 있습니다.
+**경고 관리** 타일을 클릭하여 **경고 관리** 대시보드를 엽니다.  대시보드는 다음 표의 열을 포함하고 있습니다.  각 열은 지정된 범위 및 시간 범위에 대한 열의 기준과 일치하는 카운트별로 상위 10개의 경고를 나열합니다.  열 아래쪽의 **모두 보기** 를 클릭하거나 열 제목을 클릭하여 전체 목록을 제공하는 로그 검색을 실행할 수 있습니다.
 
 | 열 | 설명 |
 |:--- |:--- |
 | 중요한 알림 |경고 이름별로 그룹화된 중요 심각도를 가진 모든 경고.  경고 이름을 클릭하여 해당 경고에 대한 모든 레코드를 반환하는 로그 검색을 실행합니다. |
 | 경고 알림 |경고 이름별로 그룹화된 경고의 심각도를 가진 모든 경고입니다.  경고 이름을 클릭하여 해당 경고에 대한 모든 레코드를 반환하는 로그 검색을 실행합니다. |
-| 활성 SCOM 경고 |경고를 생성한 원본별로 그룹화된 *닫힘* 이외의 상태인 SCOM에서 수집된 모든 경고입니다. |
-| 모든 활성 경고 |경고 이름별로 그룹화된 심각도를 가진 모든 경고입니다. *닫힘*이외의 상태를 가진 SCOM 경고만 포함합니다. |
+| 활성 SCOM 경고 |경고를 생성한 원본별로 그룹화된 *닫힘* 이외의 상태인 Operations Manager에서 수집된 모든 경고입니다. |
+| 모든 활성 경고 |경고 이름별로 그룹화된 심각도를 가진 모든 경고입니다. *닫힘*이외의 상태를 가진 Operations Manager 경고만 포함합니다. |
 
 오른쪽으로 스크롤하면 대시보드는 일반 쿼리 여러 개를 나열하며, 이 쿼리를 클릭하면 경고 데이터에 대한 [로그 검색](log-analytics-log-searches.md) 을 수행할 수 있습니다.
 
@@ -82,11 +80,11 @@ Log Analytics로 전송됩니다.
 ## <a name="log-analytics-records"></a>Log Analytics 레코드
 경고 관리 솔루션은 **경고**유형을 가진 모든 레코드를 분석합니다.  Log Analytics에서 생성되거나 Nagios 또는 Zabbix에서 수집되는 경고를 솔루션에서 직접 수집하지 않습니다.
 
-솔루션은 SCOM에서 경고를 가져오며 유형이 **경고**이고 SourceSystem이 **OpsManager**인 각각에 대해 해당 레코드를 만듭니다.  이러한 레코드는 다음 표의 속성을 가집니다.  
+솔루션은 System Center Operations Manager에서 경고를 가져오며 유형이 **경고**이고 SourceSystem이 **OpsManager**인 각 경고에 대해 해당 레코드를 만듭니다.  이러한 레코드는 다음 표의 속성을 가집니다.  
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 |:--- |:--- |
-| 형식 |*경고* |
+| 유형 |*경고* |
 | SourceSystem |*OpsManager* |
 | AlertContext |경고가 XML 형식으로 생성되게 하는 데이터 항목에 대한 세부 정보입니다. |
 | AlertDescription |경고에 대한 자세한 설명입니다. |
@@ -101,26 +99,26 @@ Log Analytics로 전송됩니다.
 | ResolvedBy |경고를 확인한 사용자의 이름입니다. 경고가 아직 확인되지 않은 경우 비어 있습니다. |
 | SourceDisplayName |경고를 생성한 모니터링 개체의 표시 이름입니다. |
 | SourceFullName |경고를 생성한 모니터링 개체의 전체 이름입니다. |
-| TicketId |경고에 대해 티켓을 할당하기 위해 SCOM 환경이 프로세스와 통합되는 경우 경고에 대한 티켓 ID입니다.  비어 있으면 티켓 ID가 할당되지 않습니다. |
+| TicketId |경고에 대해 티켓을 할당하기 위해 System Center Operations Manager 환경이 프로세스와 통합되는 경우 경고에 대한 티켓 ID입니다.  비어 있으면 티켓 ID가 할당되지 않습니다. |
 | TimeGenerated |경고가 만들어진 날짜 및 시간입니다. |
 | TimeLastModified |경고가 마지막 변경된 날짜 및 시간입니다. |
 | TimeRaised |경고가 생성된 날짜 및 시간입니다. |
 | TimeResolved |경고가 확인된 날짜 및 시간입니다. 경고가 아직 확인되지 않은 경우 비어 있습니다. |
 
 ## <a name="sample-log-searches"></a>샘플 로그 검색
-다음 표는 이 솔루션에 의해 수집된 경고 레코드에 대한 샘플 로그 검색을 제공합니다.  
+다음 표는 이 솔루션에 의해 수집된 경고 레코드에 대한 샘플 로그 검색을 제공합니다. 
 
 | 쿼리 | 설명 |
-|:--- |:--- |
-| Type=Alert SourceSystem=OpsManager AlertSeverity=error TimeRaised>NOW-24HOUR |지난 24 시간 동안 발생한 중요한 알림 |
-| Type=Alert AlertSeverity=warning TimeRaised>NOW-24HOUR |지난 24 시간 동안 발생한 중요한 경고 |
-| Type=Alert SourceSystem=OpsManager AlertState!=Closed TimeRaised>NOW-24HOUR &#124; measure count() as Count by SourceDisplayName |지난 24 시간 동안 발생한 활성 경고를 가진 소스 |
-| Type=Alert SourceSystem=OpsManager AlertSeverity=error TimeRaised>NOW-24HOUR AlertState!=Closed |지난 24 시간 동안 발생했고 여전히 활성화되어 있는 중요 경고 |
-| Type=Alert SourceSystem=OpsManager TimeRaised>NOW-24HOUR AlertState=Closed |지난 24 시간 발생했고 지금은 해결된 경고 |
-| Type=Alert SourceSystem=OpsManager TimeRaised>NOW-1DAY &#124; measure count() as Count by AlertSeverity |지난 1 일 동안 발생했고 심각도별로 그룹화된 경고 |
-| Type=Alert SourceSystem=OpsManager TimeRaised>NOW-1DAY &#124; sort RepeatCount desc |지난 1 일 동안 발생했고 반복 횟수 값별로 정렬된 경고 |
+|:---|:---|
+| Alert &#124; where SourceSystem == "OpsManager" and AlertSeverity == "error" and TimeRaised > ago(24h) |지난 24 시간 동안 발생한 중요한 알림 |
+| Alert &#124; where AlertSeverity == "warning" and TimeRaised > ago(24h) |지난 24 시간 동안 발생한 중요한 경고 |
+| Alert &#124; where SourceSystem == "OpsManager" and AlertState != "Closed" and TimeRaised > ago(24h) &#124; summarize Count = count() by SourceDisplayName |지난 24 시간 동안 발생한 활성 경고를 가진 소스 |
+| Alert &#124; where SourceSystem == "OpsManager" and AlertSeverity == "error" and TimeRaised > ago(24h) and AlertState != "Closed" |지난 24시간 동안 발생했고 여전히 활성화되어 있는 중요 경고 |
+| Alert &#124; where SourceSystem == "OpsManager" and TimeRaised > ago(24h) and AlertState == "Closed" |지난 24시간 동안 발생했고 지금은 해결된 경고 |
+| Alert &#124; where SourceSystem == "OpsManager" and TimeRaised > ago(1d) &#124; summarize Count = count() by AlertSeverity |지난 1 일 동안 발생했고 심각도별로 그룹화된 경고 |
+| Alert &#124; where SourceSystem == "OpsManager" and TimeRaised > ago(1d) &#124; sort by RepeatCount desc |지난 1 일 동안 발생했고 반복 횟수 값별로 정렬된 경고 |
+
+
 
 ## <a name="next-steps"></a>다음 단계
 * Log Analytics에서 경고 생성에 대한 자세한 내용은 [Log Analytics의 경고](log-analytics-alerts.md) 에 관하여 알아보세요.
-
-

@@ -14,11 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: mazha
-translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: d2d7b2f5feefc4d25c36a5fd30ca1d666b904f58
-
-
+ms.openlocfilehash: 5379586355ece98af6295236d6cbd09cb31c742b
+ms.sourcegitcommit: b5c6197f997aa6858f420302d375896360dd7ceb
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/21/2017
 ---
 # <a name="get-started-with-azure-cdn-development"></a>Azure CDN 개발 시작
 > [!div class="op_single_selector"]
@@ -340,10 +340,4 @@ private static void PromptDeleteCdnProfile(CdnManagementClient cdn)
 .NET용 Azure CDN 관리 라이브러리에 관한 추가 설명서는 [MSDN 참조](https://msdn.microsoft.com/library/mt657769.aspx)를 확인하세요.
 
 [PowerShell](cdn-manage-powershell.md)을 사용하여 CDN 리소스를 관리합니다.
-
-
-
-
-<!--HONumber=Nov16_HO3-->
-
 

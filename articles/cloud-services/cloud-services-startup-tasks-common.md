@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/18/2017
 ms.author: adegeo
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 3219df0e45d516ea332725b3e1955026cc1db231
-ms.openlocfilehash: 88fb93b8f3e196121b635d5ce7a21bf8f8c46be5
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/05/2017
-
+ms.openlocfilehash: cee23da5b089b02bfc0ef10afd60f0f2272585b1
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="common-cloud-service-startup-tasks"></a>일반적인 클라우드 서비스 시작 작업
 이 문서에서는 클라우드 서비스에서 수행하려는 경우 일반적인 시작 작업의 몇 가지 예를 제공합니다. 시작 작업을 사용하여 역할이 시작되기 전에 작업을 수행할 수 있습니다. 수행하려는 작업은 구성 요소 설치, COM 구성 요소 등록, 레지스트리 키 설정 또는 장기 실행 프로세스를 시작을 포함합니다. 
@@ -518,4 +517,3 @@ EXIT %ERRORLEVEL%
 [LocalStorage]: https://msdn.microsoft.com/library/azure/gg557552.aspx#LocalStorage
 [LocalResources]: https://msdn.microsoft.com/library/azure/gg557552.aspx#LocalResources
 [RoleInstanceValue]: https://msdn.microsoft.com/library/azure/gg557552.aspx#RoleInstanceValue
-

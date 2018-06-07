@@ -15,11 +15,11 @@ ms.workload: TBD
 ms.date: 02/27/2017
 ms.author: alkohli
 ms.custom: H1Hack27Feb2017
-translationtype: Human Translation
-ms.sourcegitcommit: f37fd4de0d6895f55508d1a51d981a047be15031
 ms.openlocfilehash: 260a23003d705e6598da8c51bb5a96f2539a0014
-ms.lasthandoff: 03/01/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="change-the-storsimple-virtual-array-device-administrator-password-via-storsimple-device-manager"></a>StorSimple 장치 관리자를 통해 StorSimple 가상 배열 장치 관리자 암호 변경
 
@@ -78,5 +78,4 @@ Azure Portal을 통해 장치 관리자 암호를 변경하려면 다음 단계�
 
 ## <a name="next-steps"></a>다음 단계
 [StorSimple 가상 배열을 관리](storsimple-ova-web-ui-admin.md)하는 방법을 알아봅니다.
-
 

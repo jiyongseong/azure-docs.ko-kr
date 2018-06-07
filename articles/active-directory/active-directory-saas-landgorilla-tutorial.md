@@ -1,10 +1,10 @@
 ---
-title: "자습서: Land Gorilla Client와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory와 Land Gorilla Client 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Land Gorilla Client와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory와 Land Gorilla Client 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: 28acce3e-22a0-4a37-8b66-6e518d777350
 ms.service: active-directory
 ms.workload: identity
@@ -13,12 +13,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/13/2017
 ms.author: jeedes
-translationtype: Human Translation
-ms.sourcegitcommit: 197ebd6e37066cb4463d540284ec3f3b074d95e1
-ms.openlocfilehash: 744c420aa0298c59c44e645b95a716ad876752de
-ms.lasthandoff: 03/31/2017
-
-
+ms.openlocfilehash: f69bfdf2be89a5c4ae882491bfde8678a11bddbe
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-land-gorilla-client"></a>자습서: Land Gorilla Client와 Azure Active Directory 통합
 
@@ -30,7 +29,7 @@ Land Gorilla Client를 Azure AD와 통합하면 다음과 같은 이점이 제�
 - 사용의 Azure AD 계정으로 Land Gorilla Client에 자동으로 로그온(Single Sign-On)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure 관리 포털에서 계정을 관리할 수 있습니다.
 
-Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](active-directory-appssoaccess-whatis.md)을 참조하세요.
+Azure AD와의 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory를 사용한 응용 프로그램 액세스 및 Single Sign-On](manage-apps/what-is-single-sign-on.md)을 참조하세요.
 
 
 ## <a name="prerequisites"></a>필수 조건
@@ -63,7 +62,7 @@ Land Gorilla Client가 Azure AD에 통합되도록 구성하려면 갤러리에�
 
 **갤러리에서 Land Gorilla Client를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure 관리 포털](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure 관리 포털](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Active Directory][1]
 
@@ -93,11 +92,11 @@ Single Sign-On이 작동하려면 Azure AD에서 Azure AD 사용자에 해당하
 
 Land Gorilla Client에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구성 요소를 완료해야 합니다.
 
-1. **[Azure AD Single Sign-On 구성](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
+1. **[Configuring Azure AD Single Sign-On](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
 2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - 제한된 그룹으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
 3. **[Land Gorilla 테스트 사용자 만들기](#creating-a-land-gorilla-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
 4. **[Azure AD 테스트 사용자 할당](#assigning-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Testing Single Sign-On](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
+5. **[Single Sign-On 테스트](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
 
 ### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -107,15 +106,15 @@ Land Gorilla Client에서 Azure AD Single Sign-On을 구성하고 테스트하�
 
 1. Azure 관리 포털의 **Land Gorilla Client** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-On 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single sign on** 대화 상자에서 **모드**로 **SAML 기반 로그온**을 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-on 구성](./media/active-directory-saas-landgorilla-tutorial/tutorial_landgorilla_samlbase.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-landgorilla-tutorial/tutorial_landgorilla_samlbase.png)
 
 3. **Land Gorilla Client 도메인 및 URL** 섹션에서 다음 단계를 수행합니다.
 
-    ![Single Sign-On 구성](./media/active-directory-saas-landgorilla-tutorial/tutorial_landgorilla_url_02.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-landgorilla-tutorial/tutorial_landgorilla_url_02.png)
 
     a. **식별자** 텍스트 상자에 다음 패턴 중 하나를 사용하여 값을 입력합니다. 
     
@@ -123,7 +122,7 @@ Land Gorilla Client에서 Azure AD Single Sign-On을 구성하고 테스트하�
     
     `https://www.<customer domain>.landgorilla.com`
 
-    b. **회신 URL** 텍스트 상자에 다음 패턴 중 하나를 사용하여 URL을 입력합니다.
+    나. **회신 URL** 텍스트 상자에 다음 패턴 중 하나를 사용하여 URL을 입력합니다.
 
     `https://<customer domain>.landgorilla.com/simplesaml/module.php/core/authenticate.php`
 
@@ -138,11 +137,11 @@ Land Gorilla Client에서 Azure AD Single Sign-On을 구성하고 테스트하�
 
 4. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 XML 파일을 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-landgorilla-tutorial/tutorial_landgorilla_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-landgorilla-tutorial/tutorial_landgorilla_certificate.png) 
 
 5. **저장** 단추를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-landgorilla-tutorial/tutorial_general_400.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-landgorilla-tutorial/tutorial_general_400.png) 
 
 6. Land Gorilla 쪽에서 응용 프로그램에 대한 SSO 구성이 완료되도록 하려면 [Land Gorilla Client 지원 팀](https://www.landgorilla.com/support/)에 문의하고 다운로드한 **“메타데이터 XML** 파일을 제공하십시오.
 
@@ -172,9 +171,9 @@ Land Gorilla Client에서 Azure AD Single Sign-On을 구성하고 테스트하�
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다. 
 
@@ -196,7 +195,7 @@ Land Gorilla Client에서 Azure AD Single Sign-On을 구성하고 테스트하�
 
 2. 응용 프로그램 목록에서 **Land Gorilla Client**를 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-landgorilla-tutorial/tutorial_landgorilla_app.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-landgorilla-tutorial/tutorial_landgorilla_app.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -224,7 +223,7 @@ Land Gorilla Client에서 Azure AD Single Sign-On을 구성하고 테스트하�
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -240,4 +239,3 @@ Land Gorilla Client에서 Azure AD Single Sign-On을 구성하고 테스트하�
 [201]: ./media/active-directory-saas-landgorilla-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-landgorilla-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-landgorilla-tutorial/tutorial_general_203.png
-

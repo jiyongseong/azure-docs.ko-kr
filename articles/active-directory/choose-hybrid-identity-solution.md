@@ -3,24 +3,22 @@ title: "Azure 하이브리드 ID 솔루션 선택 | Microsoft Docs"
 description: "조직에 가장 효율적인 ID 거버넌스 결정을 내리기 위해 사용 가능한 하이브리드 ID 솔루션 및 권장 사항을 기본적으로 이해합니다."
 keywords: 
 author: jeffgilb
-manager: femila
+manager: mtillman
 ms.reviewer: jsnow
-ms.author: jeffgilb
-ms.date: 7/5/2017
+ms.author: billmath
+ms.date: 03/02/2018
 ms.topic: article
 ms.prod: 
 ms.service: azure
 ms.technology: 
 ms.assetid: 
 ms.custom: it-pro
-ms.translationtype: Human Translation
-ms.sourcegitcommit: b1d56fcfb472e5eae9d2f01a820f72f8eab9ef08
-ms.openlocfilehash: 5838e3276765f4f074bca2e3cae81b17edfa7c69
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
+ms.openlocfilehash: 9f9099c0ebd65ba84e171314e6f04d858648a805
+ms.sourcegitcommit: 168426c3545eae6287febecc8804b1035171c048
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/08/2018
 ---
-
 # <a name="microsoft-hybrid-identity-solutions"></a>Microsoft 하이브리드 ID 솔루션
 [Microsoft Azure AD(Active Directory)](https://docs.microsoft.com/azure/active-directory/active-directory-whatis) 하이브리드 ID 솔루션을 사용하면 온-프레미스의 사용자를 계속 관리하면서 온-프레미스 디렉터리 개체를 Azure AD와 동기화할 수 있습니다. 온-프레미스 Windows Server Active Directory와 Azure AD와의 동기화를 계획할 때는 맨 먼저 동기화된 ID를 사용할지 또는 페더레이션 ID를 사용할지를 결정해야 합니다. 동기화된 ID 및 선택적으로 암호 해시를 사용하여 사용자는 같은 암호로 온-프레미스 및 클라우드 기반 조직 리소스에 모두 액세스할 수 있습니다. SSO(Single Sign-On) 또는 온-프레미스 MFA와 같은 고급 시나리오 요구 사항의 경우 AD FS(Active Directory Federation Services)를 배포하여 ID를 페더레이션해야 합니다. 
 
@@ -52,12 +50,6 @@ Office 365, SaaS 응용 프로그램 및 기타 Azure AD 기반 리소스에 사
 
 - Windows Server 2012 R2 이상
 - 사용자의 유효성이 검사되는 포리스트의 도메인에 연결
-
-> [!NOTE]
-> Azure AD 통과 인증은 현재 미리 보기 상태이며 최신 인증을 지원하는 웹 브라우저 기반 클라이언트 및 Office 클라이언트에 대해 지원됩니다. 레거시 Office 클라이언트 및 Exchange ActiveSync와 같이 지원되는 않는 클라이언트(모바일 장치의 기본 메일 클라이언트 포함)의 경우 최신 인증과 동등한 인증을 사용하는 것이 좋습니다. 최신 인증은 통과 인증을 허용할 뿐만 아니라 다단계 인증과 같은 조건부 액세스 정책을 적용할 수 있게 해줍니다. 
-
-통과 인증은 현재 Azure AD에 가입된 Windows 10 장치를 사용하는 경우에는 지원되지 않습니다. 그러나 자동 대체와 같은 암호 해시 동기화를 사용하여 앞에서 언급한 Windows 10 및 레거시 클라이언트를 지원할 수 있습니다. 미리 보기 기간 중에 통과 인증이 Azure AD Connect의 로그인 옵션으로 선택되면 암호 해시 동기화가 기본적으로 사용하도록 설정됩니다.
-
 
 ## <a name="federated-identity-ad-fs"></a>페더레이션 ID(AD FS)
 사용자가 Office 365 및 다른 클라우드 서비스에 액세스하는 방식을 더 세밀하게 제어하려면 [AD FS(Active Directory Federation Services)](https://docs.microsoft.com/windows-server/identity/ad-fs/overview/whats-new-active-directory-federation-services-windows-server-2016)를 사용하여 SSO(Single Sign-On)와의 디렉터리 동기화를 설정하면 됩니다. 사용자의 로그인을 AD FS와 페더레이션하면 사용자 자격 증명의 유효성을 검사하는 인증이 온-프레미스 서버에 위임됩니다. 이 모델에서는 온-프레미스 Active Directory 자격 증명이 Azure AD에 전달되지 않습니다.
@@ -99,5 +91,4 @@ ID 페더레이션이라고도 하는 이 로그인 방법은 모든 사용자 �
 [Azure AD Connect 설치](http://go.microsoft.com/fwlink/?LinkId=615771)
 
 [하이브리드 ID 동기화 모니터링](https://docs.microsoft.com/azure/active-directory/connect-health/active-directory-aadconnect-health)
-
 

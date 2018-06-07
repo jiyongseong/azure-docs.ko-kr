@@ -1,26 +1,24 @@
 ---
-title: "Visual Studio에서 응용 프로그램 디버그 | Microsoft Docs"
-description: "로컬 개발 클러스터의 Visual Studio에서 개발하고 디버그하여 서비스의 안정성과 성능을 향상시킵니다."
+title: Visual Studio에서 응용 프로그램 디버그 | Microsoft Docs
+description: 로컬 개발 클러스터의 Visual Studio에서 개발하고 디버그하여 서비스의 안정성과 성능을 향상시킵니다.
 services: service-fabric
 documentationcenter: .net
 author: vturecek
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: cb888532-bcdb-4e47-95e4-bfbb1f644da4
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 06/29/2017
-ms.author: vturecek;mikhegn
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6efa2cca46c2d8e4c00150ff964f8af02397ef99
-ms.openlocfilehash: 2459025899a7f5ffebf44fa104ed112c0eb99dfa
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/01/2017
-
-
+ms.date: 11/02/2017
+ms.author: vturecek
+ms.openlocfilehash: 4582fd16d08ae8d51460dc8cabfd282e1f2cd43e
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="debug-your-service-fabric-application-by-using-visual-studio"></a>Visual Studio를 사용하여 서비스 패브릭 응용 프로그램 디버그
 > [!div class="op_single_selector"]
@@ -161,4 +159,3 @@ Azure의 서비스 패브릭 클러스터에서 서비스 패브릭 응용 프�
 [viewingstreamingtraces]: ./media/service-fabric-debugging-your-application/viewingstreamingtraces.png
 [viewremotestreamingtraces]: ./media/service-fabric-debugging-your-application/viewremotestreamingtraces.png
 [disablestreamingtraces]: ./media/service-fabric-debugging-your-application/disablestreamingtraces.png
-

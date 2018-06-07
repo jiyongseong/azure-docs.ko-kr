@@ -1,0 +1,95 @@
+- name: VM 확장 설명서
+  href: ../index.md
+- name: 개요
+  items:
+    - name: Azure 확장 정보
+      href: overview.md
+    - name: Linux VM 에이전트
+      href: agent-linux.md
+    - name: Windows VM 에이전트
+      href: agent-windows.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: 사용자 지정 스크립트 확장 사용
+      href: /azure/virtual-machines/windows/tutorial-automate-vm-deployment
+      maintainContext: true
+- name: 개념
+  items:
+    - name: Linux
+      href: features-linux.md
+    - name: Windows
+      href: features-windows.md
+- name: 방법 가이드
+  items:
+    - name: Custom Script
+      items:
+        - name: Linux - 버전 2
+          href: custom-script-linux.md
+        - name: Linux - 버전 1(OSTC)
+          href: custom-script-linuxOstc.md
+        - name: Windows
+          href: custom-script-windows.md
+    - name: 가상 머신 액세스
+      href: vmaccess.md
+    - name: Operations Management Suite
+      items:
+        - name: Linux
+          href: oms-linux.md
+        - name: Windows
+          href: oms-windows.md
+    - name: 진단
+      items:
+        - name: Linux
+          href: diagnostics-linux.md
+        - name: Windows
+          href: diagnostics-windows.md
+        - name: 템플릿 사용
+          href: diagnostics-template.md
+    - name: Network Watcher 에이전트
+      items:
+        - name: Linux
+          href: network-watcher-linux.md
+        - name: Windows
+          href: network-watcher-windows.md
+    - name: PowerShell DSC
+      href: dsc-overview.md
+      items:
+        - name: DSC 및 Windows
+          href: dsc-windows.md
+        - name: 자격 증명 처리
+          href: dsc-credentials.md
+        - name: 템플릿 사용
+          href: dsc-template.md
+    - name: Windows용 IaaS 맬웨어 방지
+      href: iaas-antimalware-windows.md
+    - name: VM Snapshot
+      items:
+        - name: Linux
+          href: vmsnapshot-linux.md
+        - name: Windows
+          href: vmsnapshot-windows.md
+    - name: 타사 확장
+      items:
+        - name: Stackify Retrace
+          href: stackify-retrace-linux.md
+        - name: Symantec
+          href: symantec.md
+    - name: 사용되지 않는 확장
+      items:
+        - name: 로그 수집기
+          href: log-collector.md
+        - name: Trend Micro Deep Security
+          href: trend.md
+    - name: 확장 설치 제한
+      items:
+        - name: Linux
+          href: extensions-rmpolicy-howto-cli.md
+        - name: Windows
+          href: extensions-rmpolicy-howto-ps.md
+    - name: Linux 에이전트 업데이트
+      href: update-linux-agent.md
+    - name: 내보내기 확장
+      href: export-templates.md
+    - name: 문제 해결
+      href: troubleshoot.md

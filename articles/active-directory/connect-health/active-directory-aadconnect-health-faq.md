@@ -1,10 +1,10 @@
 ---
 title: Azure Active Directory Connect Health FAQ - Azure | Microsoft Docs
-description: "이 FAQ는 Azure AD Connect Health에 대한 질문에 답변합니다. 이 FAQ는 요금 청구 모델, 기능, 제한 및 지원을 포함한 서비스 사용에 대한 질문을 다룹니다."
+description: 이 FAQ는 Azure AD Connect Health에 대한 질문에 답변합니다. 이 FAQ는 요금 청구 모델, 기능, 제한 및 지원을 포함한 서비스 사용에 대한 질문을 다룹니다.
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: billmath
-manager: samueld
+manager: mtillman
 editor: curtand
 ms.assetid: f1b851aa-54d7-4cb4-8f5c-60680e2ce866
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/18/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5bbeb9d4516c2b1be4f5e076a7f63c35e4176b36
-ms.openlocfilehash: 1f1c453267ea17d749a251539f4232131dae53d3
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/13/2017
-
+ms.openlocfilehash: 05720e6c290b0b54e5b6d5170a6eb22306e9cb04
+ms.sourcegitcommit: 34e0b4a7427f9d2a74164a18c3063c8be967b194
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="azure-ad-connect-health-frequently-asked-questions"></a>Azure AD Connect Health에 대한 질문과 대답
 이 문서에는 Azure AD(Azure Active Directory) Connect Health에 대한 FAQ(질문과 대답)가 포함되어 있습니다. 이 FAQ에서는 청구 모델, 기능, 제한 및 지원을 포함한 서비스 사용 방법에 대해 다룹니다.
@@ -46,10 +45,11 @@ ms.lasthandoff: 06/13/2017
 * 첫 번째 Connect Health 에이전트에는 하나 이상의 Azure AD Premium 라이선스가 필요합니다.
 * 등록된 추가 에이전트에는 각각 25개의 추가 Azure AD Premium 라이선스가 필요합니다.
 * 에이전트 수는 모든 모니터링된 역할(AD FS, Azure AD Connect 및/또는 AD DS)에 등록된 에이전트의 총 수와 같습니다.
+* AAD Connect 상태 라이선스의 경우 특정 사용자에게 라이선스를 할당할 필요가 없습니다. 필요한 수의 유효한 라이선스만 있으면 됩니다.
 
 라이선스 정보는 [Azure AD 가격 책정 페이지](https://aka.ms/aadpricing)에서 찾을 수 있습니다.
 
-예제:
+예:
 
 | 등록된 에이전트 | 필요한 라이선스 | 모니터링 구성 예제 |
 | ------ | --------------- | --- |
@@ -58,6 +58,10 @@ ms.lasthandoff: 06/13/2017
 | 3 | 51 | AD FS(Active Directory Federation Services) 서버 1개, AD FS 프록시 1개, 도메인 컨트롤러 1개 |
 | 4 | 76 | AD FS 서버 1개, AD FS 프록시 1개, 도메인 컨트롤러 2개 |
 | 5 | 101 | Azure AD Connect 서버 1개, AD FS 서버 1개, AD FS 프록시 1개, 도메인 컨트롤러 2개 |
+
+**Q: Azure AD Connect Health가 Azure Germany 클라우드를 지원하나요?**
+
+Azure AD Connect Health에는 Azure Germany에 [설치](active-directory-aadconnect-health-agent-install.md)가 있습니다. 독일어를 사용하는 클라우드 고객의 모든 데이터는 Azure Germany 클라우드 내에서 보관됩니다.
 
 
 ## <a name="installation-questions"></a>설치 관련 질문
@@ -81,7 +85,7 @@ Microsoft Azure AD Connect Health 에이전트, AD FS, 웹 응용 프로그램 �
 
 **Q: Azure AD Connect Health Agent를 설치하는 동안 내 서버를 재부팅해야 하나요?**
 
-아니요. 에이전트를 설치하는 데 서버를 재부팅할 필요는 없습니다. 그러나 일부 필수 구성 요소 설치 단계에서 서버를 재부팅해야 할 수 있습니다.
+번호 에이전트를 설치하는 데 서버를 재부팅할 필요는 없습니다. 그러나 일부 필수 구성 요소 설치 단계에서 서버를 재부팅해야 할 수 있습니다.
 
 예를 들어 Windows Server 2008 R2에 .NET 4.5 Framework를 설치하는 경우 서버를 재부팅해야 합니다.
 
@@ -98,7 +102,7 @@ Microsoft Azure AD Connect Health 에이전트, AD FS, 웹 응용 프로그램 �
 
 **Q: Azure AD Connect Health는 HTTP 프록시에 연결할 때 기본 인증을 지원하나요?**
 
-아니요. 기본 인증에 필요한 임의 사용자 이름/암호를 지정하는 메커니즘은 현재 지원되지 않습니다.
+번호 기본 인증에 필요한 임의 사용자 이름/암호를 지정하는 메커니즘은 현재 지원되지 않습니다.
 
 **Q: Azure AD Connect Health Agent가 작동하도록 하기 위해 열어야 하는 방화벽 포트는 무엇인가요?**
 
@@ -120,16 +124,11 @@ Health Agent는 다음과 같은 원인으로 등록에 실패할 수 있습니�
 
 * 방화벽이 트래픽을 차단하고 있어서 에이전트가 필수 끝점과 통신할 수 없습니다. 특히 웹 응용 프로그램 프록시 서버에서 자주 발생하는 문제입니다. 필수 끝점 및 포트에 아웃바운드 통신을 허용해야 합니다. 자세한 내용은 [요구 사항 섹션](active-directory-aadconnect-health-agent-install.md#requirements)을 참조하세요.
 * 아웃바운드 통신은 네트워크 계층에서 SSL 검사를 받습니다. 이로 인해 에이전트에서 사용하는 인증서가 검사 서버/엔터티로 교체되고, 에이전트 등록을 완료하는 단계가 실패합니다.
-* 사용자는 에이전트의 등록을 수행하기 위한 액세스 권한이 없습니다. 전역 관리자는 기본적으로 액세스 권한이 있습니다. [역할 기반 액세스 제어](active-directory-aadconnect-health-operations.md#manage-access-with-role-based-access-control)를 사용하여 다른 사용자에 대한 액세스를 위임할 수 있습니다.
+* 사용자는 에이전트의 등록을 수행하기 위한 액세스 권한이 없습니다. 전역 관리자는 기본적으로 액세스 권한이 있습니다. [역할 기반 Access Control](active-directory-aadconnect-health-operations.md#manage-access-with-role-based-access-control)을 사용하여 다른 사용자에 대한 액세스를 위임할 수 있습니다.
 
 **Q: "Health Service 데이터가 최신 상태가 아닙니다."라는 경고가 표시됩니다. 이 문제를 어떻게 해결하나요?**
 
-Azure AD Connect Health는 2시간 동안 서버에서 데이터 지점을 수신하지 않으면 이 경고를 생성합니다. 이 경고가 발생하는 여러 이유가 있을 수 있습니다.
-
-* 방화벽이 트래픽을 차단하고 있어서 에이전트가 필수 끝점과 통신할 수 없습니다. 특히 웹 응용 프로그램 프록시 서버에서 자주 발생하는 문제입니다. 필수 끝점 및 포트에 아웃바운드 통신을 허용해야 합니다. 자세한 내용은 [요구 사항 섹션](active-directory-aadconnect-health-agent-install.md#requirements)을 참조하세요.
-* 아웃바운드 통신은 네트워크 계층에서 SSL 검사를 받습니다. 이로 인해 에이전트에서 사용하는 인증서가 검사 서버/엔터티로 교체되고, Azure AD Connect Health 서비스로 데이터를 업로드하는 프로세스가 실패합니다.
-* 에이전트에 기본 제공된 연결 명령을 사용할 수 있습니다. [자세히 알아보기](active-directory-aadconnect-health-agent-install.md#test-connectivity-to-azure-ad-connect-health-service).
-* 또한 에이전트는 인증되지 않은 HTTP 프록시를 통해 아웃바운드 연결을 지원합니다. [자세히 알아보기](active-directory-aadconnect-health-agent-install.md##configure-azure-ad-connect-health-agents-to-use-http-proxy).
+Azure AD Connect Health는 2시간 동안 서버에서 데이터 지점을 수신하지 않으면 이 경고를 생성합니다. [자세히 알아보기](active-directory-aadconnect-health-data-freshness.md).
 
 ## <a name="operations-questions"></a>작업 관련 질문
 **Q: 웹 응용 프로그램 프록시 서버에 대한 감사를 사용하도록 설정해야 하나요?**
@@ -176,6 +175,13 @@ CheckForMS17-010
 
 ```
 
+**Q: PowerShell cmdlet <i>Get-MsolDirSyncProvisioningError</i>가 결과에서 동기화 오류를 적게 표시하는 이유는 무엇인가요?**
+
+<i>Get-MsolDirSyncProvisioningError</i>는 DirSync 프로비전 오류를 반환합니다. 뿐만 아니라 Connect Health 포털에는 내보내기 오류와 같은 다른 동기화 오류 형식이 표시됩니다. Azure AD Connect 델타 결과와 일치합니다. [Azure AD Connect 동기화 오류](https://docs.microsoft.com/azure/active-directory/connect/active-directory-aadconnect-troubleshoot-sync-errors)에 대해 자세히 알아봅니다.
+
+**Q: ADFS 감사가 생성되지 않는 이유는 무엇인가요?**
+
+PowerShell cmdlet <i>Get-AdfsProperties -AuditLevel</i>을 사용하여 감사 로그가 사용하지 않음 상태가 되도록 합니다. [ADFS 감사 로그](https://docs.microsoft.com/windows-server/identity/ad-fs/technical-reference/auditing-enhancements-to-ad-fs-in-windows-server#auditing-levels-in-ad-fs-for-windows-server-2016)에 대해 자세히 알아보세요. ADFS 서버에 푸시된 고급 감사 설정이 있을 경우 auditpol.exe 관련 변경 내용이 덮어써진다는 점을 참고하세요(응용 프로그램 생성됨이 구성되지 않은 경우의 이벤트). 이 경우 응용 프로그램 생성됨 실패 및 성공을 기록하도록 로컬 보안 정책을 설정하세요. 
 
 
 ## <a name="related-links"></a>관련 링크
@@ -186,4 +192,3 @@ CheckForMS17-010
 * [동기화에 대한 Azure AD Connect Health 사용](active-directory-aadconnect-health-sync.md)
 * [AD DS와 함께 Azure AD Connect Health 사용](active-directory-aadconnect-health-adds.md)
 * [Azure AD Connect Health 버전 내역](active-directory-aadconnect-health-version-history.md)
-

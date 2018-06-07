@@ -3,7 +3,7 @@ title: "Azure Network Watcher를 사용하여 패킷 캡처 관리 - REST API | 
 description: "이 페이지에서는 Azure REST API를 사용하여 Network Watcher의 패킷 캡처 기능을 관리하는 방법에 대해 설명합니다."
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
 editor: 
 ms.assetid: 53fe0324-835f-4005-afc8-145eeb314aeb
@@ -13,16 +13,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c785ad8dbfa427d69501f5f142ef40a2d3530f9e
-ms.openlocfilehash: 09523a97e21496082e48dff1fe5ef06851500f8c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
-
+ms.author: jdial
+ms.openlocfilehash: ba0cd9c8aaa797e850827484c76103d1b829d6b4
+ms.sourcegitcommit: b5c6197f997aa6858f420302d375896360dd7ceb
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/21/2017
 ---
-
 # <a name="manage-packet-captures-with-azure-network-watcher-using-azure-rest-api"></a>Azure REST API를 사용하여 Azure Network Watcher로 패킷 캡처 관리
 
 > [!div class="op_single_selector"]
@@ -49,7 +46,7 @@ Network Watcher 패킷 캡처를 사용하면 가상 컴퓨터 간에 트래픽�
 
 이 시나리오에서는 사용자가 Network Watcher를 만드는 [Network Watcher 만들기](network-watcher-create.md)의 단계를 이미 수행했다고 가정합니다.
 
-> 패킷 캡처에는 가상 컴퓨터 확장 `AzureNetworkWatcherExtension`이 필요합니다. Windows VM에서 확장을 설치하려면 [Windows용 Azure Network Watcher 에이전트 가상 컴퓨터 확장](../virtual-machines/windows/extensions-nwa.md)을 방문하고 Linux VM인 경우 [Linux용 Azure Network Watcher 에이전트 가상 컴퓨터 확장](../virtual-machines/linux/extensions-nwa.md)을 방문하세요.
+> 패킷 캡처에는 가상 머신 확장 `AzureNetworkWatcherExtension`이 필요합니다. Windows VM에서 확장을 설치하려면 [Windows용 Azure Network Watcher 에이전트 가상 머신 확장](../virtual-machines/windows/extensions-nwa.md)을 방문하고 Linux VM인 경우 [Linux용 Azure Network Watcher 에이전트 가상 머신 확장](../virtual-machines/linux/extensions-nwa.md)을 방문하세요.
 
 ## <a name="log-in-with-armclient"></a>ARMClient에 로그인
 
@@ -57,14 +54,14 @@ Network Watcher 패킷 캡처를 사용하면 가상 컴퓨터 간에 트래픽�
 armclient login
 ```
 
-## <a name="retrieve-a-virtual-machine"></a>가상 컴퓨터 검색
+## <a name="retrieve-a-virtual-machine"></a>가상 머신 검색
 
-다음 스크립트를 실행하여 가상 컴퓨터를 반환합니다. 패킷 캡처를 시작하기 위해 이 정보가 필요합니다.
+다음 스크립트를 실행하여 가상 머신을 반환합니다. 패킷 캡처를 시작하기 위해 이 정보가 필요합니다.
 
 다음 코드에는 다음 변수가 필요합니다.
 
 - **subscriptionId** - **Get-AzureRMSubscription** cmdlet으로 구독 ID도 검색할 수 있습니다.
-- **resourceGroupName** - 가상 컴퓨터를 포함하는 리소스 그룹의 이름입니다.
+- **resourceGroupName** - 가상 머신을 포함하는 리소스 그룹의 이름입니다.
 
 ```powershell
 $subscriptionId = "<subscription id>"
@@ -223,7 +220,7 @@ armclient get "https://management.azure.com/subscriptions/${subscriptionId}/Reso
 
 ## <a name="start-packet-capture"></a>패킷 캡처 시작
 
-다음 예제에서는 가상 컴퓨터에서 패킷 캡처를 만듭니다.  이 예제는 예제를 만드는 데 유연성을 허용하도록 매개 변수화됩니다.
+다음 예제에서는 가상 머신에서 패킷 캡처를 만듭니다.  이 예제는 예제를 만드는 데 유연성을 허용하도록 매개 변수화됩니다.
 
 ```powershell
 $subscriptionId = '<subscription id>'
@@ -275,7 +272,7 @@ armclient PUT "https://management.azure.com/subscriptions/${subscriptionId}/Reso
 
 ## <a name="stop-packet-capture"></a>패킷 캡처 중지
 
-다음 예제에서는 가상 컴퓨터에서 패킷 캡처를 중지합니다.  이 예제는 예제를 만드는 데 유연성을 허용하도록 매개 변수화됩니다.
+다음 예제에서는 가상 머신에서 패킷 캡처를 중지합니다.  이 예제는 예제를 만드는 데 유연성을 허용하도록 매개 변수화됩니다.
 
 ```powershell
 $subscriptionId = '<subscription id>'
@@ -287,7 +284,7 @@ armclient post "https://management.azure.com/subscriptions/${subscriptionId}/Res
 
 ## <a name="delete-packet-capture"></a>패킷 캡처 삭제
 
-다음 예제에서는 가상 컴퓨터에서 패킷 캡처를 삭제합니다.  이 예제는 예제를 만드는 데 유연성을 허용하도록 매개 변수화됩니다.
+다음 예제에서는 가상 머신에서 패킷 캡처를 삭제합니다.  이 예제는 예제를 만드는 데 유연성을 허용하도록 매개 변수화됩니다.
 
 ```powershell
 $subscriptionId = '<subscription id>'
@@ -303,10 +300,9 @@ armclient delete "https://management.azure.com/subscriptions/${subscriptionId}/R
 
 ## <a name="next-steps"></a>다음 단계
 
-Azure Storage 계정에서 파일을 다운로드하는 방법에 대한 지침은 [.NET을 사용하여 Azure Blob Storage 시작](../storage/storage-dotnet-how-to-use-blobs.md)을 참조하세요. 사용할 수 있는 다른 도구는 저장소 탐색기입니다. 저장소 탐색기에 대한 자세한 내용은 여기에 있는 [저장소 탐색기](http://storageexplorer.com/) 링크에서 찾을 수 있습니다.
+Azure Storage 계정에서 파일을 다운로드하는 방법에 대한 지침은 [.NET을 사용하여 Azure Blob Storage 시작](../storage/blobs/storage-dotnet-how-to-use-blobs.md)을 참조하세요. 사용할 수 있는 다른 도구는 저장소 탐색기입니다. 저장소 탐색기에 대한 자세한 내용은 여기에 있는 [저장소 탐색기](http://storageexplorer.com/) 링크에서 찾을 수 있습니다.
 
-[경고로 트리거된 패킷 캡처 만들기](network-watcher-alert-triggered-packet-capture.md)를 확인하여 가상 컴퓨터 경고로 패킷 캡처를 자동화하는 방법을 알아봅니다.
-
+[경고로 트리거된 패킷 캡처 만들기](network-watcher-alert-triggered-packet-capture.md)를 확인하여 가상 머신 경고로 패킷 캡처를 자동화하는 방법을 알아봅니다.
 
 
 

@@ -1,26 +1,22 @@
 ---
-title: "Azure Data Catalog에 Data Lake Store의 데이터 등록 | Microsoft 문서"
-description: "Azure Data Catalog에 Data Lake 저장소의 데이터 등록"
+title: Azure Data Catalog에 Data Lake Store의 데이터 등록 | Microsoft 문서
+description: Azure Data Catalog에 Data Lake 저장소의 데이터 등록
 services: data-lake-store,data-catalog
-documentationcenter: 
+documentationcenter: ''
 author: nitinme
 manager: jhubbard
 editor: cgronlun
 ms.assetid: 3294d91e-a723-41b5-9eca-ace0ee408a4b
 ms.service: data-lake-store
 ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 05/10/2017
+ms.topic: conceptual
+ms.date: 02/21/2018
 ms.author: nitinme
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 59f072c7a8272fc04e1d662c0ab17e7ee4500fa6
-ms.openlocfilehash: b589742e23ba9cca919a845e4d262ccfea4c9aca
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/07/2017
-
-
+ms.openlocfilehash: ea5d658b8f465b3a527033ef5e9d2126732c7029
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="register-data-from-data-lake-store-in-azure-data-catalog"></a>Azure Data Catalog에 Data Lake 저장소의 데이터 등록
 이 문서에서는 데이터 카탈로그와 데이터를 통합하여 조직 내에서 데이터를 검색할 수 있도록 만들기 위해 Azure Data Lake 저장소와 Azure Data Catalog를 통합하는 방법을 알아봅니다. 데이터 카탈로그를 만드는 방법에 대한 자세한 내용은 [Azure Data Catalog](../data-catalog/data-catalog-what-is-data-catalog.md)를 참조하세요. 데이터 카탈로그를 사용할 수 있는 시나리오를 이해하려면 [Azure Data Catalog 일반적인 시나리오](../data-catalog/data-catalog-common-scenarios.md)를 참조하세요.
@@ -28,11 +24,11 @@ ms.lasthandoff: 02/07/2017
 ## <a name="prerequisites"></a>필수 조건
 이 자습서를 시작하기 전에 다음이 있어야 합니다.
 
-* **Azure 구독**. [Azure 무료 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
+* **Azure 구독**. [Azure 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
 * **Azure 구독을 사용하도록 설정합니다** . [지침](data-lake-store-get-started-portal.md)을 참조하세요.
 * **Azure Data Lake Store 계정**. [Azure Portal을 사용하여 Azure Data Lake Store 시작](data-lake-store-get-started-portal.md)에 있는 지침을 따릅니다. 이 자습서에서는 **datacatalogstore**라는 Data Lake Store 계정을 만들겠습니다.
 
-    계정을 만든 후에 그 계정에 샘플 데이터 집합을 업로드합니다. 이 자습서에서는, **Azure Data Lake Git 리포지토리** 의 [AmbulanceData](https://github.com/Azure/usql/tree/master/Examples/Samples/Data/AmbulanceData/)폴더에 있는 모든 .csv 파일을 업로드하겠습니다. [Azure 저장소 탐색기](http://storageexplorer.com/)와 같은 다양한 클라이언트를 사용하여 Blob 컨테이너에 데이터를 업로드할 수 있습니다.
+    계정을 만든 후에 그 계정에 샘플 데이터 집합을 업로드합니다. 이 자습서에서는, **Azure Data Lake Git 리포지토리** 의 [AmbulanceData](https://github.com/Azure/usql/tree/master/Examples/Samples/Data/AmbulanceData/)폴더에 있는 모든 .csv 파일을 업로드하겠습니다. [Azure Storage 탐색기](http://storageexplorer.com/)와 같은 다양한 클라이언트를 사용하여 Blob 컨테이너에 데이터를 업로드할 수 있습니다.
 * **Azure Data Catalog**. 조직용 Azure Data Catalog가 이미 생성되어 있어야 합니다. 각 조직에는 카탈로그가 하나만 허용됩니다.
 
 ## <a name="register-data-lake-store-as-a-source-for-data-catalog"></a>Data Lake 저장소를 데이터 카탈로그에 대한 원본으로 등록
@@ -57,9 +53,9 @@ ms.lasthandoff: 02/07/2017
 
     a. **서버 계층 구조** 상자는 Data Lake 저장소 계정 폴더 구조를 나타냅니다. **$Root**는 Data Lake Store 계정 루트를, **AmbulanceData**는 Data Lake Store 계정의 루트에 생성된 폴더를 나타냅니다.
 
-    b. **사용 가능한 개체** 상자에 **AmbulanceData** 폴더의 하위 파일과 폴더가 나열됩니다.
+    나. **사용 가능한 개체** 상자에 **AmbulanceData** 폴더의 하위 파일과 폴더가 나열됩니다.
 
-    c. **등록할 개체** 상자에는 Azure Data Catalog에 등록할 파일과 폴더가 나열됩니다.
+    다. **등록할 개체** 상자에는 Azure Data Catalog에 등록할 파일과 폴더가 나열됩니다.
 
     ![데이터 구조 보기](./media/data-lake-store-with-data-catalog/view-data-structure.png "데이터 구조 보기")
 8. 이 자습서에서는, 디렉터리의 모든 파일을 등록합니다. 이를 위해, (![개체 이동](./media/data-lake-store-with-data-catalog/move-objects.png "개체 이동")) 단추를 클릭하여 모든 파일을 **등록할 개체** 상자로 이동합니다.
@@ -68,7 +64,7 @@ ms.lasthandoff: 02/07/2017
 
     ![데이터 구조 보기](./media/data-lake-store-with-data-catalog/view-selected-data-structure.png "데이터 구조 보기")
 
-    **Register**를 클릭합니다.
+    **등록**을 클릭합니다.
 9. 다음 화면 캡처는 데이터가 데이터 카탈로그에 성공적으로 등록된 것을 나타냅니다.
 
     ![등록 완료](./media/data-lake-store-with-data-catalog/registration-complete.png "데이터 구조 보기")
@@ -84,4 +80,3 @@ ms.lasthandoff: 02/07/2017
 * [데이터 카탈로그에서 데이터 원본에 주석 추가](../data-catalog/data-catalog-how-to-annotate.md)
 * [데이터 카탈로그에서 데이터 원본 문서화](../data-catalog/data-catalog-how-to-documentation.md)
 * [Data Lake 저장소를 다른 Azure 서비스와 통합](data-lake-store-integrate-with-other-services.md)
-

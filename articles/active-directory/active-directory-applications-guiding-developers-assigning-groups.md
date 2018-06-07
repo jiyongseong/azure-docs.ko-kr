@@ -1,10 +1,10 @@
 ---
-title: "Azure AD 앱에 그룹 할당 | Microsoft Docs&quot;"
+title: "Azure AD 앱에 그룹 할당 | Microsoft Docs'"
 description: "Azure 응용 프로그램에 대해 그룹 할당을 구현하는 방법."
 services: active-directory
 documentationcenter: 
 author: kgremban
-manager: femila
+manager: mtillman
 editor: 
 ms.assetid: 29b5ba89-a1c7-4f1f-a294-248a40106617
 ms.service: active-directory
@@ -16,12 +16,11 @@ ms.date: 05/07/2017
 ms.author: kgremban
 ms.custom: H1Hack27Feb2017
 robots: noindex
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 015cc28903bfd366c653a51b0f73512bf8b578ea
-ms.openlocfilehash: f58c051bc25544d2811738b8ade483c82f3901b2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/28/2017
-
+ms.openlocfilehash: 471099c58a7fc1dfd520e693873a76f64c0fbf0a
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="assign-azure-active-directory-groups-to-an-application"></a>응용 프로그램에 Azure Active Directory 그룹 할당
 응용 프로그램에 사용자 및 그룹을 할당하기 전에 사용자 할당을 요구해야 합니다. 사용자 할당을 요구하는 방법에 대한 내용은 [사용자 할당 요구](active-directory-applications-guiding-developers-requiring-user-assignment.md) 문서를 참조하세요.
@@ -42,4 +41,3 @@ ms.lasthandoff: 02/28/2017
 
 ## <a name="next-steps"></a>다음 단계
 [!INCLUDE [active-directory-applications-guiding-developers-for-lob-applications-toc.md](../../includes/active-directory-applications-guiding-developers-for-lob-applications-toc.md)]
-

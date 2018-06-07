@@ -1,10 +1,10 @@
 ---
-title: "자습서: UserVoice와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory 및 UserVoice 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: UserVoice와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory 및 UserVoice 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.reviewer: joflore
 ms.assetid: 684a405b-8932-46f6-b43a-4d97a42b6b87
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/21/2017
 ms.author: jeedes
+ms.openlocfilehash: 41466c73dbd8dec88a1e1e06a907d9686c49efbe
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
-ms.openlocfilehash: fcfda1c2ecb162fb93b70574a18bd745b72ee4db
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-uservoice"></a>자습서: UserVoice와 Azure Active Directory 통합
 
@@ -31,7 +30,7 @@ UserVoice를 Azure AD와 통합하면 다음과 같은 이점이 제공됩니다
 - 사용자가 해당 Azure AD 계정으로 UserVoice에 자동으로 로그온(Single Sign-on)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +58,7 @@ UserVoice의 Azure AD 통합을 구성하려면 갤러리의 UserVoice를 관리
 
 **갤러리에서 UserVoice를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -111,7 +110,7 @@ UserVoice에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
 
     a. **로그온 URL** 텍스트 상자에서 다음 패턴으로 URL을 입력합니다. `https://<tenantname>.UserVoice.com`
 
-    b. **식별자** 텍스트 상자에서 `https://<tenantname>.UserVoice.com` 패턴을 사용하여 URL을 입력합니다.
+    나. **식별자** 텍스트 상자에서 `https://<tenantname>.UserVoice.com` 패턴을 사용하여 URL을 입력합니다.
 
     > [!NOTE] 
     > 이러한 값은 실제 값이 아닙니다. 실제 로그온 URL 및 식별자로 값을 업데이트합니다. 이러한 값을 얻으려면 [UserVoice 클라이언트 지원 팀](https://www.uservoice.com/)에 문의하세요.
@@ -142,11 +141,11 @@ UserVoice에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
    
     ![사용자 인증 편집](./media/active-directory-saas-uservoice-tutorial/ic777521.png "편집 사용자 인증")
    
-    a. **SSO(Single Sign-On)**를 클릭합니다.
+    a. **SSO(Single Sign-On)** 를 클릭합니다.
  
-    b. Azure Portal에서 복사한 **SAML Single Sign-On 서비스 URL** 값을 **SSO 원격 로그인** 텍스트 상자에 붙여넣습니다.
+    나. Azure Portal에서 복사한 **SAML Single Sign-On 서비스 URL** 값을 **SSO 원격 로그인** 텍스트 상자에 붙여넣습니다.
 
-    c. Azure Portal에서 복사한 **로그아웃 URL** 값을 **SSO 원격 로그아웃** 텍스트 상자에 붙여넣습니다.
+    다. Azure Portal에서 복사한 **로그아웃 URL** 값을 **SSO 원격 로그아웃** 텍스트 상자에 붙여넣습니다.
  
     d. Azure Portal에서 복사한 **지문** 값을 **현재 인증서 SHA1 지문** 텍스트 상자에 붙여넣습니다.
     
@@ -182,9 +181,9 @@ UserVoice에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다�
 
     a. **이름** 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
+    나. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
 
-    c. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
+    다. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -215,7 +214,7 @@ Azure AD 사용자가 UserVoice에 로그인할 수 있도록 하려면 UserVoic
    
     a. 이메일 텍스트 상자에 프로비전하려는 계정의 이메일 주소를 입력하고 **추가**를 클릭합니다.
    
-    b. **초대**를 클릭합니다.
+    나. **초대**를 클릭합니다.
 
 > [!NOTE]
 > 다른 UserVoice 사용자 계정 생성 도구 또는 UserVoice가 제공한 API를 사용하여 AAD 사용자 계정을 프로비전할 수 있습니다.
@@ -260,7 +259,7 @@ Azure AD 사용자가 UserVoice에 로그인할 수 있도록 하려면 UserVoic
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -277,5 +276,4 @@ Azure AD 사용자가 UserVoice에 로그인할 수 있도록 하려면 UserVoic
 [201]: ./media/active-directory-saas-uservoice-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-uservoice-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-uservoice-tutorial/tutorial_general_203.png
-
 

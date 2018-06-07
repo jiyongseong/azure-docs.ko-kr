@@ -1,10 +1,10 @@
 ---
-title: "Azure Active Directory 하이브리드 ID 디자인 고려 사항 - 데이터 보호 전략 정의 | Microsoft Docs"
+title: "Azure의 하이브리드 ID 디자인 - 데이터 보호 전략 | Microsoft Docs"
 description: "하이브리드 ID 솔루션에 대한 데이터 보호 전략을 정의하여 정의한 비즈니스 요구 사항을 충족합니다."
 documentationcenter: 
 services: active-directory
 author: billmath
-manager: femila
+manager: mtillman
 editor: 
 ms.assetid: e76fd1f4-340a-492a-84d9-e05f3b7cc396
 ms.service: active-directory
@@ -12,14 +12,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 07/18/2017
+ms.date: 11/13/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2db2ba16c06f49fd851581a1088df21f5a87a911
-ms.openlocfilehash: 3d0508c5cc31ab9fda728596895aaab8e4cb7814
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/09/2017
-
+ms.custom: seohack1
+ms.openlocfilehash: d43be976f9b3fae7f3cbec1a0033f1a401ede896
+ms.sourcegitcommit: f1c1789f2f2502d683afaf5a2f46cc548c0dea50
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/18/2018
 ---
 # <a name="define-data-protection-strategy-for-your-hybrid-identity-solution"></a>하이브리드 ID 솔루션에 대한 데이터 보호 전략 정의
 이 작업에서 하이브리드 ID 솔루션에 대한 데이터 보호 전략을 정의하여 다음에서 정의된 비즈니스 요구 사항을 충족합니다.
@@ -30,15 +30,15 @@ ms.lasthandoff: 05/09/2017
 * [사고 대응 요구 사항 결정](active-directory-hybrid-identity-design-considerations-incident-response-requirements.md)
 
 ## <a name="define-data-protection-options"></a>데이터 보호 옵션 정의
-[디렉터리 동기화 요구 사항 확인](active-directory-hybrid-identity-design-considerations-directory-sync-requirements.md)에서 설명한 것처럼 Microsoft Azure AD는 온-프레미스에 있는 Active Directory 도메인 서비스(AD DS)와 동기화할 수 있습니다. 이 통합을 통해 조직이 회사 리소스에 액세스하려고 할 때 사용자의 자격 증명을 확인하기 위해 Azure AD를 활용할 수 있습니다. 온-프레미스 및 클라우드의 미사용 데이터, 두 시나리오 모두에 대해 이 작업을 수행할 수 있습니다.  Azure AD의 데이터에 대한 액세스는 보안 토큰 서비스(STS)를 통해 사용자 인증이 필요합니다.
+[디렉터리 동기화 요구 사항 확인](active-directory-hybrid-identity-design-considerations-directory-sync-requirements.md)에서 설명한 것처럼 Microsoft Azure AD는 Active Directory Domain Services(AD DS)와 동기화할 수 있습니다. 이 통합을 통해 조직이 회사 리소스에 액세스하려고 할 때 사용자의 자격 증명을 확인하기 위해 Azure AD를 활용할 수 있습니다. 온-프레미스 및 클라우드의 미사용 데이터, 두 시나리오 모두에 대해 이 작업을 수행할 수 있습니다. Azure AD의 데이터에 대한 액세스는 보안 토큰 서비스(STS)를 통해 사용자 인증이 필요합니다.
 
-인증되면 사용자 계정 이름(UPN)은 인증 토큰 및 복제된 파티션에서 읽히고 사용자의 도메인에 해당하는 컨테이너를 확인합니다. 사용자의 존재, 활성화된 상태 및 역할에 대한 정보는 권한 부여 시스템에서 사용되어 대상 테넌트에 대해 요청된 액세스가 이 세션에서 사용자에 대한 권한이 있는지 확인합니다. 권한이 부여된 특정 작업(특히 사용자, 암호 재설정 만들기)은 규정 준수 또는 조사를 관리하는 테넌트 관리자가 사용할 수 있는 감사 내역을 만듭니다.
+인증되면 사용자 계정 이름(UPN)을 인증 토큰에서 읽습니다. 그런 다음 권한 부여 시스템이 사용자 도메인에 해당하는 복제된 파티션과 컨테이너를 결정합니다. 사용자의 존재, 활성화된 상태 및 역할에 대한 정보는 권한 부여 시스템에서 사용되어 대상 테넌트에 대한 액세스가 이 세션에서 사용자에 대한 권한이 있는지 확인합니다. 권한이 부여된 특정 작업(특히 사용자, 암호 재설정 만들기)은 규정 준수 또는 조사를 관리하는 테넌트 관리자가 사용할 수 있는 감사 내역을 만듭니다.
 
-인터넷 연결을 통해 온-프레미스 데이터 센터에서 Azure 저장소로 데이터를 이동하는 작업은 데이터 볼륨, 대역폭 가용성 또는 기타 고려 사항으로 인해 항상 가능하지는 않습니다. [Azure 저장소 가져오기/내보내기 서비스](../storage/storage-import-export-service.md) 는 Blob 저장소에 있는 데이터의 큰 볼륨을 배치/검색하는 하드웨어 기반 옵션을 제공합니다. 이렇게 하면 클라우드 연산자가 저장소 계정에 콘텐츠를 업로드하는 Azure 데이터 센터에 [BitLocker로 암호화된](https://technet.microsoft.com/library/dn306081#BKMK_BL2012R2) 하드 디스크 드라이브를 직접 보낼 수 있거나 반환되도록 Azure 데이터를 드라이브를 다운로드할 수 있습니다. 암호화된 디스크는(작업을 설치하는 동안 서비스 자체에서 생성된 BitLocker 키를 사용하여) 이 프로세스에 허용됩니다. BitLocker 키는 별도로 Azure에 제공되므로 공유할 밴드 키를 벗어나 제공됩니다.
+인터넷 연결을 통해 온-프레미스 데이터 센터에서 Azure Storage로 데이터를 이동하는 작업은 데이터 볼륨, 대역폭 가용성 또는 기타 고려 사항으로 인해 항상 가능하지는 않습니다. [Azure Storage Import/Export 서비스](../storage/common/storage-import-export-service.md) 는 Blob 저장소에 있는 데이터의 큰 볼륨을 배치/검색하는 하드웨어 기반 옵션을 제공합니다. 이렇게 하면 클라우드 연산자가 저장소 계정에 콘텐츠를 업로드하는 Azure 데이터 센터에 [BitLocker로 암호화된](https://technet.microsoft.com/library/dn306081#BKMK_BL2012R2) 하드 디스크 드라이브를 직접 보낼 수 있거나 반환되도록 Azure 데이터를 드라이브에 다운로드할 수 있습니다. 암호화된 디스크는(작업을 설치하는 동안 서비스 자체에서 생성된 BitLocker 키를 사용하여) 이 프로세스에 허용됩니다. BitLocker 키는 별도로 Azure에 제공되므로 공유할 밴드 키를 벗어나 제공됩니다.
 
-전송 중인 데이터가 다양한 시나리오에 위치할 수 있으므로 또한 Microsoft Azure가 [가상 네트워킹](https://azure.microsoft.com/documentation/services/virtual-network/)을 사용하여 서로에서 테넌트 트래픽을 격리한다는 점을 인식하며 호스트 및 게스트 수준 방화벽, IP 패킷 필터링, 포트 차단 및 HTTPS 끝점과 같은 측정값을 사용합니다. 그러나 인프라간 및 인프라 및 고객(온-프레미스)을 포함하여 Azure의 내부 통신 대부분은 암호화됩니다. 다른 중요한 시나리오는 Azure 데이터 센터 내의 통신입니다. Microsoft는 VM이 다른 IP 주소를 가장하거나 가로챌 수 없도록 네트워크를 관리합니다. TLS/SSL는 Azure 저장소 또는 SQL 데이터베이스에 액세스할 때 또는 클라우드 서비스에 연결할 때 사용됩니다. 이 경우에 고객 관리자는 TLS/SSL 인증서를 취득하고 테넌트 인프라에 배포하는 일을 담당합니다. Microsoft Azure 가상 네트워크를 통해 동일한 배포 내의 가상 컴퓨터 또한 단일 배포의 테넌트 간에 이동하는 데이터 트래픽은 HTTPS, SSL/TLS 또는 다른 사용자와 같은 암호화된 통신 프로토콜을 통해 보호될 수 있습니다.
+전송 중인 데이터가 다양한 시나리오에 위치할 수 있으므로 또한 Microsoft Azure가 [가상 네트워킹](https://azure.microsoft.com/documentation/services/virtual-network/)을 사용하여 서로에서 테넌트 트래픽을 격리한다는 점을 인식하며 호스트 및 게스트 수준 방화벽, IP 패킷 필터링, 포트 차단 및 HTTPS 끝점과 같은 측정값을 사용합니다. 그러나 인프라간 및 인프라 및 고객(온-프레미스)을 포함하여 Azure의 내부 통신 대부분은 암호화됩니다. 다른 중요한 시나리오는 Azure 데이터 센터 내의 통신입니다. Microsoft는 VM이 다른 IP 주소를 가장하거나 가로챌 수 없도록 네트워크를 관리합니다. TLS/SSL는 Azure Storage 또는 SQL Database에 액세스할 때 또는 Cloud Services에 연결할 때 사용됩니다. 이 경우에 고객 관리자는 TLS/SSL 인증서를 취득하고 테넌트 인프라에 배포하는 일을 담당합니다. Microsoft Azure Virtual Network를 통해 동일한 배포 내의 Virtual Machines 또한 단일 배포의 테넌트 간에 이동하는 데이터 트래픽은 HTTPS, SSL/TLS 또는 다른 사용자와 같은 암호화된 통신 프로토콜을 통해 보호될 수 있습니다.
 
-[데이터 보호 요구 사항 확인](active-directory-hybrid-identity-design-considerations-dataprotection-requirements.md)에서 질문에 답변하는 방법에 따라 데이터를 보호하는 방법 및 하이브리드 ID 솔루션으로 보조할 방법을 확인할 수 있어야 합니다. 테이블에서는 각 데이터 보호 시나리오에 사용할 수 있는 Azure에서 지원되는 옵션을 보여줍니다.
+[데이터 보호 요구 사항 확인](active-directory-hybrid-identity-design-considerations-dataprotection-requirements.md)에서 질문에 답변하는 방법에 따라 데이터를 보호하는 방법 및 하이브리드 ID 솔루션으로 보조할 방법을 확인할 수 있어야 합니다. 다음 표에서는 각 데이터 보호 시나리오에 사용할 수 있는 Azure에서 지원되는 옵션을 보여줍니다.
 
 | 데이터 보호 옵션 | 클라우드에서 휴지 상태 | 온-프레미스에서 휴지 상태 | 전송 중 |
 | --- | --- | --- | --- |
@@ -57,7 +57,7 @@ ms.lasthandoff: 05/09/2017
 ## <a name="define-content-management-options"></a>콘텐츠 관리 옵션 정의
 하이브리드 ID 인프라를 관리하기 위해 Azure AD를 사용하는 이점은 프로세스가 최종 사용자의 관점에서 완전히 투명하다는 점입니다. 토큰을 얻고 리소스에 액세스 하기 위해 사용자는 공유 리소스에 액세스하려고 하고 리소스에는 인증이 필요하며 사용자는 Azure AD로 인증 요청을 보내야 합니다. 이 전체 프로세스는 사용자 개입 없이 백그라운드에서 발생합니다. 또한 특정 일반 동작을 수행할 수 있도록 하기 위해 사용자의 [그룹](active-directory-manage-groups.md#getting-started-with-access-management) 에 권한을 부여할 수 있습니다.
 
-데이터 정보 보호를 우려하는 조직은 일반적으로 해당 솔루션에 대한 데이터 분류가 필요합니다. 현재 온-프레미스 인프라가 이미 데이터 분류를 사용하고 있는 경우 사용자의 ID에 대한 주 레포지토리로 Azure AD를 활용하는 것이 가능합니다. 데이터 분류 호출에 사용되는 온-프레미스인 일반적인 도구는 Windows Server 2012 R2에 대한 [데이터 분류 도구 키트](https://msdn.microsoft.com/library/Hh204743.aspx) 라고 합니다. 이 도구는 사설 클라우드에서 파일 서버에 데이터를 식별, 분류 및 보호할 수 있습니다. 또한 이를 수행하기 위해 Windows Server 2012에서 [자동 파일 분류](https://technet.microsoft.com/library/hh831672.aspx) 를 활용할 수 있습니다.
+데이터 정보 보호를 우려하는 조직은 일반적으로 해당 솔루션에 대한 데이터 분류가 필요합니다. 현재 온-프레미스 인프라가 이미 데이터 분류를 사용하고 있는 경우 사용자의 ID에 대한 주 리포지토리로 Azure AD를 활용하는 것이 가능합니다. 데이터 분류 호출에 사용되는 온-프레미스인 일반적인 도구는 Windows Server 2012 R2에 대한 [데이터 분류 도구 키트](https://msdn.microsoft.com/library/Hh204743.aspx) 라고 합니다. 이 도구는 사설 클라우드에서 파일 서버에 데이터를 식별, 분류 및 보호할 수 있습니다. 또한 이 작업을 수행하기 위해 Windows Server 2012에서 [자동 파일 분류](https://technet.microsoft.com/library/hh831672.aspx) 를 활용할 수 있습니다.
 
 조직이 준비된 데이터 분류가 없지만 새 서버 온-프레미스를 추가하지 않고 중요한 파일을 보호해야 하는 경우 Microsoft [Azure Rights Management 서비스](https://technet.microsoft.com/library/JJ585026.aspx)를 사용할 수 있습니다.  Azure RMS는 암호화, ID 및 권한 부여 정책을 사용하여 파일 및 전자 메일을 보호하고 이는  휴대폰, 태블릿 및 PC와 같은 여러 장치에서 작동합니다. Azure RMS는 클라우드 서비스이기 때문에 서로 보호된 콘텐츠를 공유할 수 있기 전에 다른 조직과 트러스트를 명시적으로 구성할 필요가 없습니다. Office 365 또는 Azure AD 디렉터리가 이미 있는 경우 조직 간에 공동 작업은 자동으로 지원됩니다. 또한 Azure Active Directory 동기화 서비스(AAD 동기화) 또는 Azure AD Connect을 사용하여 Azure RMS가 온-프레미스 Active Directory 계정에 대한 공용 ID를 지원하기 위해 필요로 하는 디렉터리 특성을 동기화할 수 있습니다.
 
@@ -78,18 +78,18 @@ ms.lasthandoff: 05/09/2017
 
 | 콘텐츠 관리 옵션 | 장점 | 단점 |
 | --- | --- | --- |
-| 중앙 집중화된 온-프레미스(Active Directory Rights Management Server) |데이터의 분류를 담당하는 서버 인프라에 대한 모든 권한  <br> Windows Server의 기본 제공 기능은 추가 라이선스 또는 구독에 필요하지 않습니다. <br> 하이브리드 시나리오에서 Azure AD와 통합될 수 있습니다. <br> Exchange Online, SharePoint Online, Office 365와 같은 Microsoft 온라인 서비스에서 정보 권한 관리(IRM) 기능을 지원합니다. <br> Exchange Server, SharePoint Server 및 Windows Server 및 파일 분류 인프라 (FCI)를 실행하는 파일 서버와 같은 온-프레미스 Microsoft 서버 제품을 지원합니다. |IT가 서버를 소유하기에 높은 유지 관리(업데이트, 구성 및 잠재적인 업그레이드를 수행)  <br> 서버 인프라 온-프레미스가 필요합니다.<br> Azure 기능을 고유하게 활용하지 않습니다 |
-| 클라우드에서 중앙 집중화됨(Azure RMS) |온-프레미스 솔루션에 비해 관리가 쉽습니다  <br> 하이브리드 시나리오에서 AD DS와 통합될 수 있습니다. <br>  Azure AD와 완벽하게 통합 <br> 서비스를 배포하는 데 서버 온-프레미스가 필요하지 않습니다. <br> Exchange Server, SharePoint Server 및 Windows Server 및 파일 분류 인프라(FCI)를 실행하는 파일 서버와 같은 온-프레미스 Microsoft 서버 제품을 지원합니다. <br> IT는 BYOK 기능을 가진 테넌트의 키를 완전히 제어할 수 있습니다. |조직에는 RMS를 지원하는 클라우드 구독이 있어야 합니다  <br> 조직에는 RMS에 대한 사용자 인증을 지원하는 Azure AD 디렉터리가 있어야 합니다 |
+| 중앙 집중화된 온-프레미스(Active Directory Rights Management Server) |데이터의 분류를 담당하는 서버 인프라에 대한 모든 권한  <br> Windows Server의 기본 제공 기능은 추가 라이선스 또는 구독에 필요하지 않습니다. <br> 하이브리드 시나리오에서 Azure AD와 통합될 수 있습니다. <br> Exchange Online, SharePoint Online, Office 365와 같은 Microsoft 온라인 서비스에서 정보 권한 관리(IRM) 기능을 지원합니다. <br> Exchange Server, SharePoint Server 및 Windows Server 및 파일 분류 인프라 (FCI)를 실행하는 파일 서버와 같은 온-프레미스 Microsoft 서버 제품을 지원합니다. |IT가 서버를 소유하기에 높은 유지 관리(업데이트, 구성 및 잠재적인 업그레이드를 수행)  <br> 서버 인프라 온-프레미스가 필요합니다.<br> Azure 기능을 기본적으로 활용하지 않습니다 |
+| 클라우드에서 중앙 집중화됨(Azure RMS) |온-프레미스 솔루션에 비해 관리가 쉽습니다  <br> 하이브리드 시나리오에서 AD DS와 통합될 수 있습니다. <br>  Azure AD와 완벽하게 통합 <br> 서비스를 배포하는 데 서버 온-프레미스가 필요하지 않습니다. <br> Exchange Server, SharePoint Server 및 Windows Server 및 파일 분류 인프라 (FCI)를 실행하는 파일 서버와 같은 온-프레미스 Microsoft 서버 제품을 지원합니다. <br> IT는 BYOK 기능을 가진 테넌트의 키를 완전히 제어할 수 있습니다. |조직에는 RMS를 지원하는 클라우드 구독이 있어야 합니다  <br> 조직에는 RMS에 대한 사용자 인증을 지원하는 Azure AD 디렉터리가 있어야 합니다 |
 | 하이브리드(온-프레미스 Active Directory Rights Management Server와 통합된 Azure RMS) |이 시나리오는 중앙 집중화된 온-프레미스 및 클라우드 모두에서 장점을 누적합니다. |조직에는 RMS를 지원하는 클라우드 구독이 있어야 합니다  <br> 조직에는 RMS에 대한 사용자 인증을 지원하는 Azure AD 디렉터리가 있어야 합니다 <br> Azure 클라우드 서비스와 온-프레미스 인프라 간의 연결이 필요합니다 |
 
 ## <a name="define-access-control-options"></a>액세스 제어 옵션 정의
-아래 그림에 표시된 것처럼 사용자와 파트너가 Single Sign-On(SSO)를 사용하는 동안 Azure AD에서 사용할 수 있는 인증, 권한 부여 및 액세스 제어 기능을 활용하여 회사는 중앙 ID 리포지토리를 사용할 수 있게 됩니다.
+다음 그림에 표시된 것처럼 사용자와 파트너가 Single Sign-On(SSO)를 사용하는 동안 Azure AD에서 사용할 수 있는 인증, 권한 부여 및 액세스 제어 기능을 활용하여 회사는 중앙 ID 리포지토리를 사용할 수 있게 됩니다.
 
 ![](./media/hybrid-id-design-considerations/centralized-management.png)
 
 다른 디렉터리르 사용하는 중앙 집중화된 관리 및 완전한 통합
 
-Azure Active Directory는 수천 개의 SaaS 응용 프로그램 및 온-프레미스 웹 응용 프로그램에 Single-Sign On을 제공합니다. Microsoft에서 테스트된 SSO 타사에 대한 자세한 내용은 [Azure Active Directory 페더레이션 호환성 목록: Single Sign-On을 구현하는 데 사용할 수 있는 타사 ID 공급자](https://msdn.microsoft.com/library/azure/jj679342.aspx) 문서를 읽습니다. 이 기능을 사용하면 조직은 ID 및 액세스 관리의 제어를 유지하면서 다양한 B2B 시나리오를 구현할 수 있습니다. 그러나 B2B 중에 프로세스를 설계하는 작업은 파트너에서 사용되는 인증 방법을 이해하고 이 메서드를 Azure에서 지원하는지에 대한 유효성을 검사하는 것이 중요합니다. 현재 다음은 Azure AD에서 지원하는 방법입니다.
+Azure Active Directory는 수천 개의 SaaS 응용 프로그램 및 온-프레미스 웹 응용 프로그램에 Single-Sign On을 제공합니다. Microsoft에서 테스트된 SSO 타사에 대한 자세한 내용은 [Azure Active Directory 페더레이션 호환성 목록: Single Sign-On을 구현하는 데 사용할 수 있는 타사 ID 공급자](https://msdn.microsoft.com/library/azure/jj679342.aspx) 문서를 참조하세요. 이 기능을 사용하면 조직은 ID 및 액세스 관리의 제어를 유지하면서 다양한 B2B 시나리오를 구현할 수 있습니다. 그러나 B2B 중에 프로세스를 설계하는 작업은 파트너에서 사용되는 인증 방법을 이해하고 이 메서드를 Azure에서 지원하는지에 대한 유효성을 검사하는 것이 중요합니다. 현재 다음 메서드가 Azure AD에서 지원됩니다.
 
 * SAML(Security Assertion Markup Language )
 * OAuth
@@ -102,26 +102,26 @@ Azure Active Directory는 수천 개의 SaaS 응용 프로그램 및 온-프레�
 >
 >
 
-Azure AD 지원을 사용하여 직원이 해당 회사 Active Directory 자격 증명으로 모바일 응용 프로그램에 로그인할 수 있도록 모바일 비즈니스 응용 프로그램은 동일하게 쉬운 모바일 서비스 인증 환경을 사용할 수 있습니다. 이 기능을 사용하여 Azure AD는 이미 지원한 다른 ID 공급자와 함께 모바일 서비스에서 ID 공급자로 지원됩니다.(Microsoft 계정, Facebook ID, Google ID 및 Twitter ID 포함) 온-프레미스 앱이 회사의 AD DS에 있는 사용자의 자격 증명을 사용하는 경우 클라우드에서 들어오는 파트너 및 사용자로부터의 액세스는 투명해야 합니다. (클라우드 기반) 웹 응용 프로그램, Web API, Microsoft 클라우드 서비스, 타사 SaaS 응용 프로그램 및 네이티브 (모바일) 클라이언트 응용 프로그램에 사용자의 조건부 액세스 제어를 관리할 수 있으며 한 곳에서 보안, 감사, 보고의 이점을 가질 수 있습니다. 그러나 비-프로덕션 환경에서 또는 제한된 양의 사용자로 유효성을 검사하는 것이 좋습니다.
+Azure AD 지원을 사용하여 직원이 해당 회사 Active Directory 자격 증명으로 모바일 응용 프로그램에 로그인할 수 있도록 모바일 비즈니스 응용 프로그램은 동일하게 쉬운 Mobile Services 인증 환경을 사용할 수 있습니다. 이 기능을 사용하여 Azure AD는 이미 지원한 다른 ID 공급자와 함께 Mobile Services에서 ID 공급자로 지원됩니다(Microsoft 계정, Facebook ID, Google ID 및 Twitter ID 포함). 온-프레미스 앱이 회사의 AD DS에 있는 사용자의 자격 증명을 사용하는 경우 클라우드에서 들어오는 파트너 및 사용자로부터의 액세스는 투명해야 합니다. (클라우드 기반) 웹 응용 프로그램, Web API, Microsoft 클라우드 서비스, 타사 SaaS 응용 프로그램 및 네이티브(모바일) 클라이언트 응용 프로그램에 사용자의 조건부 액세스 제어를 관리할 수 있으며 한 곳에서 보안, 감사, 보고의 이점을 가질 수 있습니다. 그러나 비-프로덕션 환경에서 또는 제한된 양의 사용자로 이 구현의 유효성을 검사하는 것이 좋습니다.
 
 > [!TIP]
 > Azure AD에는 AD DS만큼 그룹 정책이 없다는 사실에 주목합니다. 장치에 정책을 적용하기 위해 [Microsoft Intune](https://technet.microsoft.com/library/jj676587.aspx)과 같은 모바일 장치 관리 솔루션이 필요합니다.
 >
 >
 
-Azure AD를 사용하여 사용자가 인증되면 사용자를 갖게 된 액세스 수준을 평가하는 것이 중요합니다. 리소스에 대해 사용자가 가직 액세스 수준은 다를 수 있습니다. 또한 Azure AD가 일부 리소스에 대한 액세스를 제어하여 추가 보안 계층을 추가할 수 있는 반면 리소스 자체는 파일 서버에 있는 파일에 대 한 액세스 제어와 같이 고유한 액세스 제어 목록을 별도로 가질 수 있다는 점을 염두해야 합니다. 아래 그림에서는 하이브리드 시나리오에서 가질 수 있는 액세스 제어의 수준을 요약합니다.
+Azure AD를 사용하여 사용자가 인증되면 사용자를 갖게 된 액세스 수준을 평가하는 것이 중요합니다. 사용자가 리소스에 대해 갖는 액세스 수준은 다를 수 있습니다. 또한 Azure AD가 일부 리소스에 대한 액세스를 제어하여 추가 보안 계층을 추가할 수 있는 반면 리소스 자체는 파일 서버에 있는 파일에 대 한 액세스 제어와 같이 고유한 액세스 제어 목록을 별도로 가질 수 있다는 점에 유의해야 합니다. 다음 그림에서는 하이브리드 시나리오에서 가질 수 있는 액세스 제어의 수준을 요약합니다.
 
 ![](./media/hybrid-id-design-considerations/accesscontrol.png)
 
 그림x에서 보여준 다이어그램에서 각 상호 작용은 Azure AD에서 다룰 수 있는 하나의 액세스 제어 시나리오를 나타냅니다. 아래에서 각 시나리오에 대해 설명합니다.
 
-1. 온-프레미스에서 호스트되는 응용 프로그램에 대한 조건부 액세스: Windows Server 2012 R2에서 AD FS를 사용하도록 구성된 응용 프로그램에 대한 액세스 정책이 있는 등록된 장치를 사용할 수 있습니다. 온-프레미스에 대해 조건부 액세스를 설정하는 방법에 대한 자세한 내용은 [Azure Active Directory 장치 등록을 사용하여 온-프레미스 조건부 액세스 설정](active-directory-conditional-access.md)을 참조하세요.
+1. 온-프레미스에서 호스트되는 응용 프로그램에 대한 조건부 액세스: Windows Server 2012 R2에서 AD FS를 사용하도록 구성된 응용 프로그램에 대한 액세스 정책이 있는 등록된 장치를 사용할 수 있습니다. 온-프레미스에 대해 조건부 액세스를 설정하는 방법에 대한 자세한 내용은 [Azure Active Directory 장치 등록을 사용하여 온-프레미스 조건부 액세스 설정](active-directory-conditional-access-azure-portal.md)을 참조하세요.
 
-2. Azure Portal에 대한 액세스 제어: Azure에서는 RBAC(역할 기반 액세스 제어)를 사용하여 포털에 대한 액세스도 제어할 수 있습니다. 이 방법을 사용하면 회사에서 개인이 Azure Portal에서 수행할 수 있는 작업의 양을 제한할 수 있습니다. RBAC를 사용하여 포털에 대한 액세스를 제어하려면 IT 관리자는 다음 액세스 관리 방법을 사용하여 액세스를 위임할 수 있습니다.
+2. Azure Portal에 대한 Access Control: Azure에서는 RBAC(역할 기반 Access Control)를 사용하여 포털에 대한 액세스도 제어할 수 있습니다. 이 방법을 사용하면 회사에서 개인이 Azure Portal에서 수행할 수 있는 작업의 수를 제한할 수 있습니다. RBAC를 사용하여 포털에 대한 액세스를 제어하려면 IT 관리자는 다음 액세스 관리 방법을 사용하여 액세스를 위임할 수 있습니다.
 
-* 그룹 기반 역할 할당: 로컬 Active Directory에서 동기화될 수 있는 Azure AD 그룹에 대한 액세스를 할당할 수 있습니다. 이렇게 하면 그룹 관리에 대한 도구 및 프로세스에서 조직이 만든 기존 투자를 활용할 수 있습니다. 또한 Azure AD Premium의 위임된 그룹 관리 기능을 사용할 수 있습니다.
-* Azure에서 기본 제공 역할 활용: 세 가지 역할(소유자, 참가자 및 읽기 권한자)을 사용하여 사용자 및 그룹에 작업 수행에 필요한 작업만 수행할 수 있는 권한을 제공할 수 있습니다.
-* 리소스에 대한 세부적인 액세스: 웹사이트 또는 데이터베이스와 같은 특정 구독, 리소스 그룹 또는 개별 Azure 리소스에 대한 사용자 및 그룹에 역할을 할당할 수 있습니다. 이러한 방식으로 사용자는 필요한 모든 리소스에 대해 액세스하고 관리할 필요가 없는 리소스에 액세스하지 않을 수 있습니다.
+    * 그룹 기반 역할 할당: 로컬 Active Directory에서 동기화될 수 있는 Azure AD 그룹에 대한 액세스를 할당할 수 있습니다. 이렇게 하면 그룹 관리에 대한 도구 및 프로세스에서 조직이 만든 기존 투자를 활용할 수 있습니다. 또한 Azure AD Premium의 위임된 그룹 관리 기능을 사용할 수 있습니다.
+    * Azure에서 내장된 역할 활용: 소유자, 참가자 및 판독기 등 세 가지 역할을 사용하여 사용자 및 그룹이 작업 수행에 필요한 작업만 수행할 수 있는 권한이 있도록 할 수 있습니다.
+    * 리소스에 대한 세부적인 액세스: 웹사이트 또는 데이터베이스와 같은 특정 구독, 리소스 그룹 또는 개별 Azure 리소스에 대한 사용자 및 그룹에 역할을 할당할 수 있습니다. 이러한 방식으로 사용자는 필요한 모든 리소스에 대해 액세스하고 관리할 필요가 없는 리소스에 액세스하지 않을 수 있습니다.
 
 > [!NOTE]
 > 응용 프로그램을 빌드하고 이에 대한 액세스 제어를 사용자 지정하려는 경우 권한 부여를 위해 Azure AD 응용 프로그램 역할을 사용할 수 있습니다. 이 기능을 사용하여 앱을 개발하는 방법에 대해 [WebApp-RoleClaims-DotNet 예제](https://github.com/AzureADSamples/WebApp-RoleClaims-DotNet) 를 검토합니다.
@@ -135,7 +135,7 @@ Azure AD를 사용하여 사용자가 인증되면 사용자를 갖게 된 액�
 액세스 제어에 대한 옵션은 다중 계층 접근 방법을 사용하기 때문에 이러한 옵션 간의 비교는 이 작업에 적용될 수 없습니다. 리소스에 대한 액세스를 제어하기 위해 필요한 각 시나리오에 사용 가능한 모든 옵션을 활용하도록 합니다.
 
 ## <a name="define-incident-response-options"></a>인시던트 대응 옵션 정의
-Azure AD는 사용자의 활동을 모니터링하여 환경에서 잠재적인 보안 위험을 식별하도록 IT를 지원합니다. IT는 Azure AD 액세스 및 사용 보고서 기능을 활용하여 조직 디렉터리의 무결성 및 보안에 가시성을 얻을 수 있습니다. 이 정보를 사용하면 IT 관리자는 가능한 보안 위험이 발생할 수 있는 위치를 보다 잘 결정하여 이러한 위험을 적절하게 완화할 수 있습니다.  [Azure AD Premium 구독](active-directory-get-started-premium.md)에는 IT가 이 정보를 가져올 수 있는 보안 보고서 집합이 있습니다. [Azure AD 보고서](active-directory-view-access-usage-reports.md)는 아래와 같이 분류됩니다.
+Azure AD는 사용자 활동을 모니터링하여 환경의 잠재적인 보안 위험을 파악하는 데 도움이 될 수 있습니다. Azure AD 액세스 및 사용 보고서를 사용하여 조직 디렉터리의 무결성 및 보안을 볼 수 있습니다 이 정보를 사용하면 IT 관리자는 가능한 보안 위험이 발생할 수 있는 위치를 보다 잘 결정하여 이러한 위험을 적절하게 완화할 수 있습니다.  [Azure AD Premium 구독](active-directory-get-started-premium.md)에는 IT가 이 정보를 가져올 수 있는 보안 보고서 집합이 있습니다. [Azure AD 보고서](active-directory-view-access-usage-reports.md)는 다음과 같이 분류됩니다.
 
 * **비정상 보고서**: 비정상으로 확인된 로그인 이벤트가 포함됩니다. 이러한 활동을 인식하고 이벤트가 의심스러운지 확인할 수 있게 해 줍니다.
 * **통합 응용 프로그램 보고서**: 클라우드 응용 프로그램이 조직에서 사용되는 방식을 파악할 수 있게 해줍니다. Azure Active Directory는 수천 개의 클라우드 응용 프로그램과 통합을 제공합니다.
@@ -144,7 +144,7 @@ Azure AD는 사용자의 활동을 모니터링하여 환경에서 잠재적인 
 * **활동 로그**: 최근 24시간, 최근 7일 또는 최근 30일 이내에 감사된 모든 이벤트의 레코드와 그룹 활동 변경 사항, 암호 재설정 및 등록 활동이 포함됩니다.
 
 > [!TIP]
-> 또한 사건을 다루는 인시던트 대응 팀에게 도움이 되는 다른 보고서는 [누수된 자격 증명을 사용하는 사용자](http://blogs.technet.com/b/ad/archive/2015/06/15/azure-active-directory-premium-reporting-now-detects-leaked-credentials.aspx) 보고서입니다.  이 보고서는 이러한 누수된 자격 증명 목록과 테넌트 간의 일치 항목을 표시합니다.
+> 또한 사건을 다루는 인시던트 대응 팀에게 도움이 되는 다른 보고서는 [누수된 자격 증명을 사용하는 사용자](http://blogs.technet.com/b/ad/archive/2015/06/15/azure-active-directory-premium-reporting-now-detects-leaked-credentials.aspx) 보고서입니다. 이 보고서는 이러한 누수된 자격 증명 목록과 테넌트 간의 일치 항목을 표시합니다.
 >
 >
 
@@ -170,4 +170,3 @@ Azure AD는 사용자의 활동을 모니터링하여 환경에서 잠재적인 
 
 ## <a name="see-also"></a>참고 항목
 [설계 고려 사항 개요](active-directory-hybrid-identity-design-considerations-overview.md)
-

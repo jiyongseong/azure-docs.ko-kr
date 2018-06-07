@@ -1,10 +1,10 @@
 ---
-title: "Azure 예약 IP 주소(클래식) 관리 - PowerShell | Microsoft Docs"
-description: "예약된 IP 주소(클래식)과 PowerShell을 사용하여 관리하는 방법을 이해합니다."
+title: Azure 예약 IP 주소(클래식) 관리 - PowerShell | Microsoft Docs
+description: 예약된 IP 주소(클래식)과 PowerShell을 사용하여 관리하는 방법을 이해합니다.
 services: virtual-network
 documentationcenter: na
-author: jimdial
-manager: carmonm
+author: genlin
+manager: cshepard
 editor: tysonn
 ms.assetid: 34652a55-3ab8-4c2d-8fb2-43684033b191
 ms.service: virtual-network
@@ -13,21 +13,19 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/10/2016
-ms.author: jdial
-translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: 120ae95fe12daa8fc213d0062ca446d5c1b10134
-ms.lasthandoff: 04/27/2017
-
-
+ms.author: genli
+ms.openlocfilehash: 25fe3c5361ff58f8d62d5d083b7a69f517d2a267
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="reserved-ip-addresses-classic"></a>예약된 IP 주소(클래식)
 
 > [!div class="op_single_selector"]
-> * [Azure 포털](virtual-network-deploy-static-pip-arm-portal.md)
+> * [Azure Portal](virtual-network-deploy-static-pip-arm-portal.md)
 > * [PowerShell](virtual-network-deploy-static-pip-arm-ps.md)
 > * [Azure CLI](virtual-network-deploy-static-pip-arm-cli.md)
-> * [템플릿](virtual-network-deploy-static-pip-arm-template.md)
 > * [PowerShell(클래식)](virtual-networks-reserved-public-ip.md)
 
 Azure의 IP 주소는 두 범주 즉, 동적 IP 및 예약된 IP로 나뉩니다. Azure에서 관리하는 공용 IP 주소는 기본적으로 동적입니다. 즉, 지정된 클라우드 서비스에 사용되는 IP 주소(VIP) 또는 VM이나 역할 인스턴스에 직접 액세스하는 데 사용되는 IP 주소(ILPIP)는 리소스가 종료 또는 중지(할당 취소)된 경우 때때로 변경될 수 있습니다.
@@ -46,7 +44,7 @@ Azure의 IP 주소에 대한 자세한 내용을 알아보려면 [IP 주소](vir
 
 ## <a name="faq"></a>FAQ
 1. 모든 Azure 서비스에 예약된 IP를 사용할 수 있나요? <br>
-    아니요. 예약된 IP는 VM 및 VIP를 통해 노출되는 클라우드 서비스 인스턴스 역할에만 사용할 수 있습니다.
+    번호 예약된 IP는 VM 및 VIP를 통해 노출되는 클라우드 서비스 인스턴스 역할에만 사용할 수 있습니다.
 2. 예약된 IP를 몇 개까지 사용할 수 있나요? <br>
     자세한 내용은 [Azure 제한](../azure-subscription-service-limits.md#networking-limits) 문서를 참조하세요.
 3. 예약된 IP는 사용 요금이 있나요? <br>
@@ -54,7 +52,7 @@ Azure의 IP 주소에 대한 자세한 내용을 알아보려면 [IP 주소](vir
 4. IP 주소를 어떻게 예약하나요? <br>
     PowerShell, [Azure 관리 REST API](https://msdn.microsoft.com/library/azure/dn722420.aspx) 또는 [Azure Portal](https://portal.azure.com)을 사용하여 Azure 지역에서 IP 주소를 예약할 수 있습니다. 예약된 IP 주소는 구독에 연결됩니다.
 5. 선호도 그룹 기반 VNet에서 예약된 IP를 사용할 수 있나요? <br>
-    아니요. 예약된 IP는 지역 VNet에서만 지원됩니다. 예약된 IP는 선호도 그룹과 연결된 VNet에 대해 지원되지 않습니다. VNet을 지역 또는 선호도 그룹과 연결하는 방법에 대한 자세한 내용은 [지역 VNet 및 선호도 그룹 정보](virtual-networks-migrate-to-regional-vnet.md) 문서를 참조하세요.
+    번호 예약된 IP는 지역 VNet에서만 지원됩니다. 예약된 IP는 선호도 그룹과 연결된 VNet에 대해 지원되지 않습니다. VNet을 지역 또는 선호도 그룹과 연결하는 방법에 대한 자세한 내용은 [지역 VNet 및 선호도 그룹 정보](virtual-networks-migrate-to-regional-vnet.md) 문서를 참조하세요.
 
 ## <a name="manage-reserved-vips"></a>예약된 VIP 관리
 
@@ -117,7 +115,7 @@ New-AzureVMConfig -Name TestVM -InstanceSize Small -ImageName $image.ImageName `
 ```
 
 > [!NOTE]
-> 클라우드 서비스에서 사용할 예약된 IP를 만들 때 여전히 인바운드 통신에 *VIP:&lt;포트 번호>*를 사용하여 VM을 참조해야 합니다. IP를 예약했다고 VM에 직접 연결할 수 있다는 의미는 아닙니다. 예약된 IP는 VM이 배포된 클라우드 서비스에 할당됩니다. IP 통해 VM에 직접 연결하려는 경우 인스턴스 수준 공용 IP를 구성해야 합니다. 인스턴스 수준 공용 IP(ILPIP라고 함)는 VM에 직접 할당된 공용 IP의 한 유형입니다. ILPIP는 예약할 수 없습니다. 자세한 내용은 [인스턴스 수준 공용 IP(ILPIP)](virtual-networks-instance-level-public-ip.md) 문서를 참조하세요.
+> 클라우드 서비스에서 사용할 예약된 IP를 만들 때 여전히 인바운드 통신에 *VIP:&lt;포트 번호>* 를 사용하여 VM을 참조해야 합니다. IP를 예약했다고 VM에 직접 연결할 수 있다는 의미는 아닙니다. 예약된 IP는 VM이 배포된 클라우드 서비스에 할당됩니다. IP 통해 VM에 직접 연결하려는 경우 인스턴스 수준 공용 IP를 구성해야 합니다. 인스턴스 수준 공용 IP(ILPIP라고 함)는 VM에 직접 할당된 공용 IP의 한 유형입니다. ILPIP는 예약할 수 없습니다. 자세한 내용은 [인스턴스 수준 공용 IP(ILPIP)](virtual-networks-instance-level-public-ip.md) 문서를 참조하세요.
 > 
 
 ## <a name="remove-a-reserved-ip-from-a-running-deployment"></a>실행 중인 배포에서 예약된 IP 제거
@@ -168,5 +166,4 @@ Set-AzureReservedIPAssociation -ReservedIPName MyReservedIP -ServiceName TestSer
 * 클래식 배포 모델에서 [IP 주소 지정](virtual-network-ip-addresses-overview-classic.md) 이 어떻게 작동하는지 이해합니다.
 * [예약된 개인 IP 주소](virtual-networks-reserved-private-ip.md)에 대해 알아봅니다.
 * [ILPIP(인스턴스 수준 공용 IP) 주소](virtual-networks-instance-level-public-ip.md)에 대해 알아봅니다.
-
 

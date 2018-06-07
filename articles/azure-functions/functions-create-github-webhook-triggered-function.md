@@ -1,27 +1,26 @@
 ---
-title: "Azure에서 GitHub webhook를 통해 트리거되는 함수 만들기 | Microsoft 문서"
-description: "Azure Functions를 사용하여 GitHub webhook를 통해 호출되는 서버 없는 함수를 만듭니다."
-services: azure-functions
+title: Azure에서 GitHub webhook를 통해 트리거되는 함수 만들기 | Microsoft 문서
+description: Azure Functions를 사용하여 GitHub webhook를 통해 호출되는 서버 없는 함수를 만듭니다.
+services: functions
 documentationcenter: na
 author: ggailey777
-manager: erikre
-editor: 
-tags: 
+manager: cfowler
+editor: ''
+tags: ''
 ms.assetid: 36ef34b8-3729-4940-86d2-cb8e176fcc06
 ms.service: functions
 ms.devlang: multiple
-ms.topic: get-started-article
+ms.topic: quickstart
 ms.tgt_pltfrm: multiple
 ms.workload: na
-ms.date: 05/31/2017
+ms.date: 03/28/2018
 ms.author: glenga
-ms.custom: mvc
+ms.custom: mvc, cc996988-fb4f-47
+ms.openlocfilehash: 05ad567e407a6506222acdb66ab38c4cfab76e4b
+ms.sourcegitcommit: 34e0b4a7427f9d2a74164a18c3063c8be967b194
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 6e91d095c8a89ead513a8ea63f74fd4b9384cfd5
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="create-a-function-triggered-by-a-github-webhook"></a>GitHub webhook를 통해 트리거되는 함수 만들기
 
@@ -33,8 +32,6 @@ GitHub별 페이로드와 함께 HTTP 웹후크 요청에 의해 트리거되는
 
 + 하나 이상의 프로젝트와 함께 GitHub 계정.
 + Azure 구독. 구독이 없으면 시작하기 전에 [계정](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)을 만드세요.
-
-[!INCLUDE [functions-portal-favorite-function-apps](../../includes/functions-portal-favorite-function-apps.md)]
 
 ## <a name="create-an-azure-function-app"></a>Azure Function 앱 만들기
 
@@ -52,9 +49,13 @@ GitHub별 페이로드와 함께 HTTP 웹후크 요청에 의해 트리거되는
 
     ![Azure Portal에서 함수 빨리 시작하기 페이지](./media/functions-create-github-webhook-triggered-function/add-first-function.png)
 
-2. 원하는 언어에 해당하는 **GitHubWebHook** 템플릿을 선택합니다. **함수 이름을 지정한** 후 **만들기**를 선택합니다.
+2. 검색 필드에 `github`를 입력한 다음 GitHub 웹후크 트리거 템플릿에 사용할 언어를 선택합니다. 
 
-     ![Azure Portal에서 GitHub 웹후크를 통해 트리거되는 함수를 만듭니다.](./media/functions-create-github-webhook-triggered-function/functions-create-github-webhook-trigger.png) 
+     ![GitHub 웹후크 트리거 템플릿 선택](./media/functions-create-github-webhook-triggered-function/functions-create-github-webhook-trigger.png) 
+
+2. 함수의 **이름**을 입력한 다음 **만들기**를 선택합니다. 
+
+     ![Azure Portal에서 GitHub 웹후크 트리거 함수 만들기](./media/functions-create-github-webhook-triggered-function/functions-create-github-webhook-trigger-2.png) 
 
 3. 새 함수에서 **</> 함수 URL 가져오기**를 클릭한 다음 값을 복사하여 저장합니다. **</> GitHub 비밀 가져오기**에 대해 같은 작업을 수행합니다. 이러한 값은 GitHub에서 webhook를 구성할 때 사용됩니다.
 
@@ -66,19 +67,23 @@ GitHub별 페이로드와 함께 HTTP 웹후크 요청에 의해 트리거되는
 
 1. GitHub에서 소유한 리포지토리로 이동합니다. 분기된 모든 리포지토리를 사용할 수도 있습니다. 리포지토리를 분기해야 하는 경우 <https://github.com/Azure-Samples/functions-quickstart>를 사용합니다.
 
-1. **설정**, **Webhooks**, **webhook 추가**를 차례로 클릭합니다.
+2. **설정** > **옵션**을 선택하고 **기능** 아래에서 **문제**를 사용하도록 설정합니다.
+
+   ![문제 사용](./media/functions-create-github-webhook-triggered-function/functions-create-new-github-webhook.png)
+
+1. **설정**에서 **웹후크** > **웹후크 추가**를 선택합니다.
 
     ![GitHub 웹후크를 추가합니다.](./media/functions-create-github-webhook-triggered-function/functions-create-new-github-webhook-2.png)
 
-1. 표에 지정된 것처럼 설정을 사용한 후 **웹후크 추가**를 클릭합니다.
+1. 다음 표에 지정된 것처럼 설정을 사용한 다음, **웹후크 추가**를 클릭합니다.
 
     ![웹후크 URL 및 암호를 설정합니다.](./media/functions-create-github-webhook-triggered-function/functions-create-new-github-webhook-3.png)
 
 | 설정 | 제안 값 | 설명 |
 |---|---|---|
 | **페이로드 URL** | 복사된 값 | **</> 함수 URL 가져오기**에서 반환된 값을 사용합니다. |
-| **비밀**   | 복사된 값 | **</> GitHub 비밀 가져오기**에서 반환된 값을 사용합니다. |
 | **콘텐츠 형식** | application/json | 함수에는 JSON 페이로드가 필요합니다. |
+| **비밀**   | 복사된 값 | **</> GitHub 비밀 가져오기**에서 반환된 값을 사용합니다. |
 | 이벤트 트리거 | 개별 이벤트를 선택하겠습니다. | 문제 주석 이벤트만 트리거하려고 합니다.  |
 | | 문제 주석 |  |
 
@@ -104,9 +109,8 @@ GitHub별 페이로드와 함께 HTTP 웹후크 요청에 의해 트리거되는
 
 ## <a name="next-steps"></a>다음 단계
 
-GitHub 웹후크에서 요청을 수신할 때 실행되는 함수를 만들었습니다.
+GitHub 웹후크에서 요청을 수신할 때 트리거되는 함수를 만들었습니다.
 
 [!INCLUDE [Next steps note](../../includes/functions-quickstart-next-steps.md)]
 
 웹후크 트리거에 대한 자세한 내용은 [Azure Functions HTTP 및 웹후크 바인딩](functions-bindings-http-webhook.md)을 참조하세요.
-

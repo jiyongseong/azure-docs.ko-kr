@@ -1,11 +1,11 @@
 ---
-title: "Azure Active Directory 하이브리드 ID 디자인 고려 사항 - 하이브리드 ID 채택 전략 정의 | Microsoft Docs"
-description: "조건부 액세스 제어를 통해 Azure Active Directory는 사용자를 인증할 때 및 응용 프로그램에 대한 액세스를 허용하기 전에 선택한 특정 조건을 확인합니다. 이러한 조건이 충족되면 사용자가 인증되고 응용 프로그램에 대한 액세스가 허용됩니다."
-documentationcenter: 
+title: Azure의 하이브리드 ID 디자인 - 채택 전략 | Microsoft Docs
+description: 조건부 액세스 제어를 통해 Azure Active Directory는 사용자를 인증할 때 및 응용 프로그램에 대한 액세스를 허용하기 전에 선택한 특정 조건을 확인합니다. 이러한 조건이 충족되면 사용자가 인증되고 응용 프로그램에 대한 액세스가 허용됩니다.
+documentationcenter: ''
 services: active-directory
 author: billmath
-manager: femila
-editor: 
+manager: mtillman
+editor: ''
 ms.assetid: b92fa5a9-c04c-4692-b495-ff64d023792c
 ms.service: active-directory
 ms.devlang: na
@@ -14,12 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: identity
 ms.date: 07/18/2017
 ms.author: billmath
+ms.custom: seohack1
+ms.openlocfilehash: 290c41e62080edcd9a2fad1b5045bac4328cc4cd
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 2c57b394beb6382807a4c8c83de975a0ae68d726
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="define-a-hybrid-identity-adoption-strategy"></a>하이브리드 ID 채택 전략 정의
 이 작업에서 하이브리드 ID 솔루션에 대한 하이브리드 ID 채택 전략을 정의하여 다음에서 설명한 비즈니스 요구 사항을 충족합니다.
@@ -53,26 +53,26 @@ Microsoft에는 클라우드 ID, 동기화된 ID 및 페더레이션된 ID는 3�
 | --- | --- | --- |
 | **클라우드 ID** |소규모 조직을 관리하기가 쉬워집니다. <br> 온-프레미스 설치 안 함 - 추가 하드웨어가 필요하지 않습니다.<br>사용자가 퇴사하는 경우 쉽게 사용 불가능해 집니다. |사용자는 클라우드의 워크로드에 액세스할 때 로그인해야 합니다 <br> 암호는 클라우드 및 온-프레미스 ID에 대해 동일할 수도 있고 않을 수도 있습니다 |
 | **동기화됨** |온-프레미스 암호는 온-프레미스 및 클라우드 디렉터리를 인증합니다  <br>소규모, 중규모 또는 대규모 조직을 관리하기가 쉬워집니다. <br>사용자는 일부 리소스에 대한 SSO(Single Sign-On)를 가질 수 있습니다  <br> 동기화에 대한 Microsoft의 기본 메서드 <br> 관리가 쉬워집니다 |일부 고객은 특정 회사의 경찰 때문에 클라우드를 사용하여 해당 디렉터리를 동기화하는 것을 꺼릴 수 있습니다. |
-| **페더레이션** |사용자는 Single Sign-On(SSO)을 가질 수 있습니다  <br>사용자를 종료하거나 사용자가 나가는 경우, 계정을 즉시 사용할 수 없게 하고 액세스를 해지할 수 있습니다.<br> 동기화되어 수행할 수 없는 고급 시나리오를 지원합니다 |설정 및 구성의 추가 단계 <br> 더 높은 유지 관리 <br> STS 인프라에 대한 추가 하드웨어가 필요할 수 있습니다. <br> 페더레이션 서버를 설치하기 위해 추가 하드웨어가 필요할 수 있습니다. AD FS를 사용하는 경우 추가 소프트웨어가 필요합니다. <br> SSO에 대한 광범위한 설정이 필요 <br> 중요 장애점, 페더레이션 서버가 다운된 경우 사용자는 인증할 수 없습니다. |
+| **페더레이션** |사용자는 Single Sign-On(SSO)을 가질 수 있습니다  <br>사용자를 종료하거나 사용자가 나가는 경우, 계정을 즉시 사용할 수 없게 하고 액세스를 해지할 수 있습니다.<br> 동기화되어 수행할 수 없는 고급 시나리오를 지원합니다 |설정 및 구성의 추가 단계 <br> 더 높은 유지 관리 <br> STS 인프라에 대한 추가 하드웨어가 필요할 수 있습니다. <br> 페더레이션 서버를 설치하는 데 추가적인 하드웨어가 필요할 수 있습니다. AD FS를 사용할 경우 추가적인 소프트웨어가 필요합니다. <br> SSO에 대한 광범위한 설정이 필요 <br> 중요 장애점, 페더레이션 서버가 다운된 경우 사용자는 인증할 수 없습니다. |
 
 ### <a name="client-experience"></a>클라이언트 환경
-사용자 로그인 환경을 결정하는 데 사용하는 전략입니다.  다음 테이블에서는 어떤 사용자가 해당 로그인 환경을 예상해야 하는지에 대한 정보를 제공합니다.  페더레이션된 ID 공급자가 모두 시나리오에서 SSO를 지원하지는 않습니다.
+사용자 로그인 환경을 결정하는 데 사용하는 전략입니다.  다음 테이블에서는 어떤 사용자가 해당 로그인 환경을 예상해야 하는지에 대한 정보를 제공합니다.  페더레이션된 모든 ID 공급자가 모든 시나리오에서 SSO를 지원하는 것은 아닙니다.
 
 **도메인 가입된 개인 네트워크 응용 프로그램**:
 
 |  | 동기화된 ID | 페더레이션된 ID |
 | --- | --- | --- |
-| 웹 브라우저 |폼 기반 인증 |때로는 조직 ID를 제공하는 데 필요한 Single Sign On |
+| 웹 브라우저 |양식 기반 인증  |때때로 조직 ID를 제공하는 데 필요한 Single Sign On |
 | Outlook |자격 증명 확인 |자격 증명 확인 |
 | 비즈니스용 Skype(Lync) |자격 증명 확인 |Exchange에 대한 자격 증명을 확인하는 Lync용 Single Sign-On |
-| Skydrive Pro |자격 증명 확인 |Single Sign On |
-| Office Pro Plus 구독 |자격 증명 확인 |Single Sign On |
+| Skydrive Pro |자격 증명 확인 |Single Sign-On |
+| Office Pro Plus 구독 |자격 증명 확인 |Single Sign-On |
 
 **외부 또는 신뢰할 수 없는 원본**:
 
 |  | 동기화된 ID | 페더레이션된 ID |
 | --- | --- | --- |
-| 웹 브라우저 |폼 기반 인증 |폼 기반 인증 |
+| 웹 브라우저 |양식 기반 인증  |양식 기반 인증  |
 | Outlook, 비즈니스용 Skype(Lync), Skydrive Pro, Office 구독 |자격 증명 확인 |자격 증명 확인 |
 | Exchange ActiveSync |자격 증명 확인 |Exchange에 대한 자격 증명을 확인하는 Lync용 Single Sign-On |
 | 모바일 앱 |자격 증명 확인 |자격 증명 확인 |
@@ -90,7 +90,7 @@ Microsoft에는 클라우드 ID, 동기화된 ID 및 페더레이션된 ID는 3�
 * 수동 인증에 Office를 전환하면 순수하게 SAML 2.0 IdP를 지원할 수 있지만 지원은 클라이언트 별 기준입니다.
 
 > [!NOTE]
-> 최근 업데이트된 목록은 문서 http://aka.ms/ssoproviders를 읽어보세요.
+> 최근 업데이트된 목록은 https://aka.ms/ssoproviders 문서를 읽어보세요.
 > 
 > 
 
@@ -108,7 +108,7 @@ Microsoft에는 클라우드 ID, 동기화된 ID 및 페더레이션된 ID는 3�
 ### <a name="supported-topologies"></a>지원되는 토폴로지
 동기화 전략을 정의할 때 사용되는 토폴로지를 결정해야 합니다. 2단계에서 확인된 정보에 따라 어떤 토폴로지를 사용하는 것이 적절한지를 결정할 수 있습니다. 단일 포리스트, 단일 Azure AD 토폴로지는 가장 일반적이고 단일 Active Directory 포리스트 및 Azure AD의 단일 인스턴스를 구성합니다.  이 시나리오 대부분에서 사용되며 아래 그림에 표시된 대로 Azure AD Connect Express 설치를 사용하는 경우 예상되는 토폴로지입니다.
 
-![](./media/hybrid-id-design-considerations/single-forest.png) 단일 포리스트 시나리오는 그림 5와 같이 다중 포리스트가 있는 크고 작은 조직에서 매우 일반적입니다.
+![](./media/hybrid-id-design-considerations/single-forest.png) 단일 포리스트 시나리오는 그림 5와 같이 다중 포리스트가 있는 크고 작은 조직에서 일반적입니다.
 
 > [!NOTE]
 > Azure AD connect 동기화를 사용하여 다른 온-프레미스 및 Azure AD 토폴로지에 대한 자세한 정보는 [Azure AD Connect에 대한 토폴로지](connect/active-directory-aadconnect-topologies.md)문서를 읽습니다.
@@ -159,7 +159,7 @@ Microsoft에는 클라우드 ID, 동기화된 ID 및 페더레이션된 ID는 3�
   * 기본 구성으로 쓰기 저장 그룹화
   * 장치 쓰기 저장
 
-다음은 지원되지 않으며 구현으로 선택되지 않는다는 사실에 유의해야 합니다.
+다음은 지원되지 않으며, 구현으로 선택하지 말아야 합니다.
 
 * 여러 Azure AD Connect Sync 서버가 상호 배타적인 개체 집합을 동기화하도록 구성되었다고 해도 동일한 Azure AD 디렉터리에 대한 연결은 지원되지 않습니다
 * 동일한 사용자를 여러 Azure AD 디렉터리에 동기화하는 것은 지원되지 않습니다. 
@@ -179,11 +179,11 @@ Multi-Factor 설계 옵션:
 
 | 보호할 자산 | 클라우드의 MFA | 온-프레미스에서 MFA |
 | --- | --- | --- |
-| Microsoft 앱 |yes |yes |
-| 앱 갤러리의 SaaS 앱 |yes |yes |
-| Azure AD 응용프로그램 프록시를 통해 IIS 응용프로그램 게시됨 |yes |yes |
-| Azure AD 응용 프로그램 프록시를 통해 IIS 응용 프로그램이 게시되지 않음 |no |yes |
-| VPN 및 RDG와 같은 원격 액세스 |no |yes |
+| Microsoft 앱 |예 |예 |
+| 앱 갤러리의 SaaS 앱 |예 |예 |
+| Azure AD 응용프로그램 프록시를 통해 IIS 응용프로그램 게시됨 |예 |예 |
+| Azure AD 응용 프로그램 프록시를 통해 IIS 응용 프로그램이 게시되지 않음 |no |예 |
+| VPN 및 RDG와 같은 원격 액세스 |no |예 |
 
 전략에 대한 솔루션에 적응했더라도 여전히 사용자가 있는 위치의 위쪽에서 평가를 사용해야 합니다.  솔루션을 변경할 수 있습니다.  아래 테이블을 사용하여 다음을 결정하는 데 도움이 됩니다.
 
@@ -196,7 +196,7 @@ Multi-Factor 설계 옵션:
 | 온-프레미스 AD |Multi-Factor Authentication 서버 |
 
 > [!NOTE]
-> 또한 선택한 Multi-Factor Authentication 설계 옵션이 설계에 필요한 기능을 지원하도록 해야 합니다.  자세한 내용은 [다단계 보안 솔루션 선택](../multi-factor-authentication/multi-factor-authentication-get-started.md#what-am-i-trying-to-secure)을 참조하세요.
+> 또한 선택한 Multi-Factor Authentication 설계 옵션이 설계에 필요한 기능을 지원하도록 해야 합니다.  자세한 내용은 [다단계 보안 솔루션 선택](authentication/concept-mfa-whichversion.md#what-am-i-trying-to-secure)을 참조하세요.
 > 
 > 
 
@@ -213,5 +213,4 @@ Multi-Factor 설계 옵션:
 
 ## <a name="see-also"></a>참고 항목
 [디자인 고려 사항 개요](active-directory-hybrid-identity-design-considerations-overview.md)
-
 

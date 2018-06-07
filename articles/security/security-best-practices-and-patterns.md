@@ -1,6 +1,6 @@
 ---
 title: "Azure 보안 모범 사례 및 패턴 | Microsoft Docs"
-description: "이 문서는 Azure 보안 모범 사례 및 패턴에 관한 소개와 다른 Azure 리소스에 대한 보안 모범 사례의 엄선된 목록을 제공합니다."
+description: "이 문서에서는 다양한 Azure 리소스의의 Azure 보안 모범 사례와 패턴을 확인할 수 있습니다."
 services: azure-security
 documentationcenter: na
 author: TomShinder
@@ -12,40 +12,31 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/06/2017
-ms.author: terrylan
-translationtype: Human Translation
-ms.sourcegitcommit: 094729399070a64abc1aa05a9f585a0782142cbf
-ms.openlocfilehash: 1cc0d2d1e9a62ff8531f963413ff573713d508ad
-ms.lasthandoff: 03/07/2017
-
-
+ms.date: 2/16/2018
+ms.author: 
+ms.openlocfilehash: 6713580325450d7548e63c78af4d44c65653f884
+ms.sourcegitcommit: 168426c3545eae6287febecc8804b1035171c048
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/08/2018
 ---
 # <a name="azure-security-best-practices-and-patterns"></a>Azure 보안 모범 사례 및 패턴
-현재 다음과 같은 Azure 보안 모범 사례 및 패턴 문서가 있습니다. Azure 보안 모범 사례 및 패턴과 관련하여 늘어가는 목록이 업데이트되는 것을 보려면 이 사이트를 정기적으로 방문하도록 합니다.  
 
-* [Azure 네트워크 보안 모범 사례](azure-security-network-security-best-practices.md)
-* [Azure 데이터 보안 및 암호화 모범 사례](azure-security-data-encryption-best-practices.md)
-* [ID 관리 및 액세스 제어 보안 모범 사례](azure-security-identity-management-best-practices.md)
-* [사물 인터넷 보안 모범 사례](azure-security-iot-best-practices.md)
-* [Azure IaaS 보안 모범 사례] (azure-security-iaas.md)
 * [Azure 경계 보안 모범 사례](../best-practices-network-security.md)
+* [Azure 데이터베이스 보안 모범 사례](azure-database-security-best-practices.md)
+* [Azure 데이터 보안 및 암호화 모범 사례](azure-security-data-encryption-best-practices.md)
+* [Azure ID 관리 및 액세스 제어 보안 모범 사례](azure-security-identity-management-best-practices.md)
+* [Azure 네트워크 보안 모범 사례](azure-security-network-security-best-practices.md)
+* [Azure 운영 보안 모범 사례](azure-operational-security-best-practices.md)
+* [Azure PaaS 모범 사례](security-paas-deployments.md) 
+* [Azure Service Fabric 보안 모범 사례](azure-service-fabric-security-best-practices.md)
+* [Azure VM 보안 모범 사례](azure-security-best-practices-vms.md)
 * [Azure에서 보안 하이브리드 네트워크 아키텍처 구현](../guidance/guidance-iaas-ra-secure-vnet-hybrid.md)
-* [Azure PaaS 모범 사례] (https://docs.microsoft.com/en-us/azure/security/security-paas-deployments)
+* [사물 인터넷 보안 모범 사례](azure-security-iot-best-practices.md)
+* [Azure에서 PaaS 데이터베이스 보안 유지](security-paas-applications-using-sql.md)
+* [Azure App Service를 사용하여 PaaS 웹 및 모바일 응용 프로그램 보안](security-paas-applications-using-app-services.md)
+* [Azure Storage를 사용하여 PaaS 웹 및 모바일 응용 프로그램 보안](security-paas-applications-using-storage.md)
+* [Azure의 IaaS 워크로드의 보안 모범 사례](azure-security-iaas.md)
 
-Azure는 솔루션을 빌드할 수 있도록 안전한 플랫폼을 제공합니다. Azure의 솔루션을 보다 안전하게 만들기 위한 서비스와 기술도 제공합니다. 사용할 수 있는 옵션이 많기 때문에 많은 분들이 Microsoft가 보안 개선의 모범 사례 및 패턴으로 추천하는 내용에 관해 관심을 표명했습니다.
 
-여러분의 관심을 이해하여, 이를 위해 적절한 상황에서 Azure 배포의 보안을 개선하기 위해 여러분이 할 수 있는 일을 설명하는 문서 컬렉션을 만들었습니다.
-
-이러한 모범 사례 및 패턴 문서에, 특정 항목에 대한 모범 사례 및 유용한 패턴 컬렉션이 설명되어 있습니다. 이러한 모범 사례 및 패턴은 이런 기술에 대한 우리 경험과 여러분 같은 고객의 경험에서 얻은 것입니다.
-
-각 모범 사례에 대해 다음 사항을 설명하겠습니다.
-
-* 각 모범 사례
-* 해당 모범 사례를 사용해야 하는 이유
-* 해당 모범 사례를 사용하지 않을 경우에 발생할 수 있는 결과
-* 해당 모범 사례를 대체할 수 있는 대안
-* 해당 모범 사례를 사용하는 방법을 알아보는 방법
-
-Azure 보안 아키텍처 및 모범 사례에 대한 많은 문서를 갖추려고 합니다. 추가할 항목이 있으시면 이 페이지의 아래쪽에 있는 토론 영역에서 알려주세요.
 

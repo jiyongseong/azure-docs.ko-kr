@@ -1,20 +1,19 @@
 ---
-title: "PostgreSQL용 Azure Database에서 덤프 및 복원 방법 | Microsoft Docs"
-description: "PostgreSQL 데이터베이스를 덤프 파일로 추출하고 PostgreSQL용 Azure Database에서 pg_dump에 의해 생성된 보관 파일에서 PostgreSQL 데이터베이스를 복원하는 방법을 설명합니다."
+title: Azure Database for PostgreSQL에서 덤프 및 복원 방법
+description: Azure Database for PostgreSQL에서 PostgreSQL 데이터베이스를 덤프 파일로 추출하고 pg_dump에 의해 생성된 파일에서 복원하는 방법을 설명합니다.
 services: postgresql
-author: SaloniSonpal
-ms.author: salonis
-manager: jhubbard
+author: rachel-msft
+ms.author: raagyema
+manager: kfile
 editor: jasonwhowell
-ms.service: postgresql-database
+ms.service: postgresql
 ms.topic: article
-ms.date: 06/14/2017
+ms.date: 02/28/2018
+ms.openlocfilehash: f74c60cb99ee5bae1af8e000ebbd21b41600638d
+ms.sourcegitcommit: a36a1ae91968de3fd68ff2f0c1697effbb210ba8
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 8a399ca2f529568dbe5ffd4b58c3f0f69248b71d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="migrate-your-postgresql-database-using-dump-and-restore"></a>덤프 및 복원을 사용하여 PostgreSQL 데이터베이스 마이그레이션
 [pg_dump](https://www.postgresql.org/docs/9.3/static/app-pgdump.html)를 사용하여 PostgreSQL 데이터베이스를 덤프 파일로 추출하고 [pg_restore](https://www.postgresql.org/docs/9.3/static/app-pgrestore.html)를 사용하여 pg_dump에 의해 생성된 보관 파일에서 PostgreSQL 데이터베이스를 복원할 수 있습니다.
@@ -39,11 +38,13 @@ pg_dump -Fc -v --host=localhost --username=masterlogin --dbname=testdb > testdb.
 ## <a name="restore-the-data-into-the-target-azure-database-for-postrgesql-using-pgrestore"></a>pg_restore를 사용하여 데이터를 대상 PostrgeSQL용 Azure Database로 복원
 대상 데이터베이스를 만든 후에는 pg_restore 명령과 -d, --dbname 매개 변수를 사용하여 데이터를 덤프 파일에서 대상 데이터베이스로 복원할 수 있습니다.
 ```bash
-pg_restore -v –-host=<server name> --port=<port> --username=<user@servername> --dbname=<target database name> <database>.dump
+pg_restore -v --no-owner –-host=<server name> --port=<port> --username=<user@servername> --dbname=<target database name> <database>.dump
 ```
-이 예제에서는 데이터를 덤프 파일 **testdb.dump**에서 대상 서버 **mypgserver-20170401.postgres.database.azure.com**의 데이터베이스 **mypgsqldb**로 복원합니다.
+--no-owner 매개 변수를 포함하면 복원 중에 만들어진 모든 개체가 --username으로 지정된 사용자의 소유가 됩니다. 자세한 내용은 [pg_restore](https://www.postgresql.org/docs/9.6/static/app-pgrestore.html)에서 공식 PostgreSQL 설명서를 참조하세요.
+
+이 예제에서는 덤프 파일 **testdb.dump**에서 대상 서버 **mydemoserver.postgres.database.azure.com**의 **mypgsqldb** 데이터베이스로 데이터를 복원합니다. 
 ```bash
-pg_restore -v --host=mypgserver-20170401.postgres.database.azure.com --port=5432 --username=mylogin@mypgserver-20170401 --dbname=mypgsqldb testdb.dump
+pg_restore -v --no-owner --host=mydemoserver.postgres.database.azure.com --port=5432 --username=mylogin@mydemoserver --dbname=mypgsqldb testdb.dump
 ```
 
 ## <a name="next-steps"></a>다음 단계

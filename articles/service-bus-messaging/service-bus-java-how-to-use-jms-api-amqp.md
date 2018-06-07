@@ -12,15 +12,13 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: Java
 ms.topic: article
-ms.date: 04/27/2017
+ms.date: 08/10/2017
 ms.author: sethm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 8f291186c6a68dea8aa00b846a2e6f3ad0d7996c
-ms.openlocfilehash: cfd4822820270dbaf44a25f3e0fe749492765df8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/28/2017
-
-
+ms.openlocfilehash: 0848facd764c4fb0d7f95c1ae89ecb02a32257e1
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="how-to-use-the-java-message-service-jms-api-with-service-bus-and-amqp-10"></a>서비스 버스 및 AMQP 1.0과 함께 JMS(Java Message Service) API를 사용하는 방법
 AMQP(Advanced Message Queuing Protocol) 1.0은 강력한 크로스 플랫폼 메시징 응용 프로그램을 빌드하는 데 사용할 수 있는 효율성과 안정성이 뛰어난 유선 수준 메시징 프로토콜입니다.
@@ -313,7 +311,7 @@ exit
 * **세션**당 하나의 **MessageProducer** 또는 **MessageConsumer**만 허용됩니다. 응용 프로그램에서 **MessageProducers** 또는 **MessageConsumers**를 여러 개 만들어야 하는 경우 각 항목에 대한 전용 **세션**을 만듭니다.
 * 휘발성 토픽 구독은 현재 지원되지 않습니다.
 * **MessageSelectors**는 현재 지원되지 않습니다.
-* 임시 대상인 **TemporaryQueue**, **TemporaryTopic**과 이러한 대상을 사용하는 **QueueRequestor** 및 **TopicRequestor** API는 현재 지원되지 않습니다.
+* 예를 들어, 임시 대상인 **TemporaryQueue**, **TemporaryTopic**과 이러한 대상을 사용하는 **QueueRequestor** 및 **TopicRequestor** API는 현재 지원되지 않습니다.
 * 트랜잭션 처리된 세션과 분산 트랜잭션은 지원되지 않습니다.
 
 ## <a name="summary"></a>요약
@@ -327,5 +325,4 @@ exit
 * [Service Bus AMQP 1.0 개발자 가이드](service-bus-amqp-dotnet.md)
 * [Service Bus 큐 시작](service-bus-dotnet-get-started-with-queues.md)
 * [Java 개발자 센터](https://azure.microsoft.com/develop/java/)
-
 

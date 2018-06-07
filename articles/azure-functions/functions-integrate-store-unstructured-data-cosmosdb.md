@@ -1,32 +1,34 @@
 ---
-title: "Azure Functions 및 Cosmos DB를 사용하여 구조화되지 않은 데이터 저장"
+title: "Azure Cosmos DB 및 Functions를 사용하여 구조화되지 않은 데이터 저장 | Microsoft Docs"
 description: "Azure Functions 및 Cosmos DB를 사용하여 구조화되지 않은 데이터 저장"
 services: functions
 documentationcenter: functions
-author: rachelappel
-manager: erikre
+author: ggailey777
+manager: cfowler
 editor: 
 tags: 
 keywords: "Azure Functions, Functions, 이벤트 처리, Cosmos DB, 동적 계산, 서버가 없는 아키텍처"
 ms.assetid: 
 ms.service: functions
 ms.devlang: csharp
-ms.topic: get-started-article
+ms.topic: quickstart
 ms.tgt_pltfrm: multiple
 ms.workload: na
-ms.date: 08/03/2017
-ms.author: rachelap, glenga
+ms.date: 09/19/2017
+ms.author: glenga
 ms.custom: mvc
+ms.openlocfilehash: b9bb71adf85490fe68bf6b73133017c5e9c377e1
+ms.sourcegitcommit: 71fa59e97b01b65f25bcae318d834358fea5224a
 ms.translationtype: HT
-ms.sourcegitcommit: c30998a77071242d985737e55a7dc2c0bf70b947
-ms.openlocfilehash: 00e9a76fed5743d7d74bafd333b87edf59a4f8bb
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/02/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/11/2018
 ---
-# <a name="store-unstructured-data-using-azure-functions-and-cosmos-db"></a>Azure Functions 및 Cosmos DB를 사용하여 구조화되지 않은 데이터 저장
+# <a name="store-unstructured-data-using-azure-functions-and-azure-cosmos-db"></a>Azure Functions 및 Azure Cosmos DB를 사용하여 구조화되지 않은 데이터 저장
 
 [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/)는 구조화되지 않은 데이터 및 JSON 데이터를 저장하기 좋습니다. Cosmos DB를 Azure Functions와 함께 사용하면 관계형 데이터베이스에 데이터를 저장하는 데 필요한 것보다 훨씬 적은 코드를 사용하여 쉽고 빠르게 데이터를 저장할 수 있습니다.
+
+> [!NOTE]
+> 이때 Azure Cosmos DB 트리거, 입력 바인딩 및 출력 바인딩은 SQL API 및 Graph API 계정에서만 작동합니다.
 
 Azure Functions에서 입력 및 출력 바인딩은 함수에서 외부 서비스 데이터로 연결하기 위한 선언적 방식을 제공합니다. 이 토픽에서는 기존 C# 함수를 업데이트하여 구조화되지 않은 데이터를 Cosmos DB 문서에 저장하는 출력 바인딩을 추가하는 방법을 알아봅니다. 
 
@@ -54,10 +56,10 @@ Azure Functions에서 입력 및 출력 바인딩은 함수에서 외부 서비�
     | ------------ | ---------------- | ------------------------------------------ |
     | **문서 매개 변수 이름** | taskDocument | 코드에서 Cosmos DB 개체를 참조하는 이름. |
     | **데이터베이스 이름** | taskDatabase | 문서를 저장할 데이터베이스의 이름. |
-    | **컬렉션 이름** | TaskCollection | Cosmos DB 데이터베이스의 컬렉션 이름. |
+    | **컬렉션 이름** | TaskCollection | 데이터베이스 컬렉션 이름. |
     | **true이면 Cosmos DB 데이터베이스 및 컬렉션을 만듭니다.** | 선택 | 아직 컬렉션이 없으므로 지금 만듭니다. |
 
-4. **Cosmos DB 문서 연결** 레이블 옆에 있는 **새로 만들기**를 선택하고 **+ 새로 만들기**를 선택합니다. 
+4. **Azure Cosmos DB 문서 연결** 레이블 옆에 있는 **새로 만들기**를 선택하고 **+ 새로 만들기**를 선택합니다. 
 
 5. 다음 표에 지정된 대로 **새 계정** 설정을 사용합니다. 
 
@@ -65,13 +67,13 @@ Azure Functions에서 입력 및 출력 바인딩은 함수에서 외부 서비�
 
     | 설정      | 제안 값  | 설명                                |
     | ------------ | ---------------- | ------------------------------------------ |
-    | **ID** | 데이터베이스의 이름 | Cosmos DB 데이터베이스의 고유한 ID  |
-    | **API** | SQL(DocumentDB) | 문서 데이터베이스 API를 선택합니다.  |
+    | **ID** | 데이터베이스의 이름 | Azure Cosmos DB 데이터베이스의 고유한 ID  |
+    | **API** | SQL | SQL API를 선택합니다. 이때 Azure Cosmos DB 트리거, 입력 바인딩 및 출력 바인딩은 SQL API 및 Graph API 계정에서만 작동합니다. |
     | **구독** | Azure 구독 | Azure 구독  |
     | **리소스 그룹** | myResourceGroup |  함수 앱이 포함된 기존 리소스 그룹을 사용합니다. |
-    | **위치**  | WestEurope | 함수 앱 또는 저장된 문서를 사용하는 다른 앱과 가까운 위치를 선택합니다.  |
+    | **위치**:  | WestEurope | 함수 앱 또는 저장된 문서를 사용하는 다른 앱과 가까운 위치를 선택합니다.  |
 
-6. **확인**을 클릭하여 데이터베이스를 만듭니다. 데이터베이스를 만드는 데 몇 분 정도 걸릴 수 있습니다. 데이터베이스가 생성되면 데이터베이스 연결 문자열이 함수 앱 설정으로 저장됩니다. 이 앱 설정의 이름이 **Cosmos DB 계정 연결**에 삽입됩니다. 
+6. **확인**을 클릭하여 데이터베이스를 만듭니다. 데이터베이스를 만드는 데 몇 분 정도 걸릴 수 있습니다. 데이터베이스가 생성되면 데이터베이스 연결 문자열이 함수 앱 설정으로 저장됩니다. 이 앱 설정의 이름이 **Azure Cosmos DB 계정 연결**에 삽입됩니다. 
  
 8. 연결 문자열이 설정된 후에는 **저장**을 선택하여 바인딩을 만듭니다.
 
@@ -129,11 +131,13 @@ public static HttpResponseMessage Run(HttpRequestMessage req, out object taskDoc
 
     ![Cosmos DB 서비스 검색](./media/functions-integrate-store-unstructured-data-cosmosdb/functions-search-cosmos-db.png)
 
-2. 만든 데이터베이스를 선택한 다음 **데이터 탐색기**를 선택합니다. **컬렉션** 노드를 확장하고, 새 문서를 선택하고, 문서에 일부 추가 메타데이터와 함께 쿼리 문자열 값이 포함되어 있는지 확인합니다. 
+2. Azure Cosmos DB 계정을 선택한 다음 **데이터 탐색기**를 선택합니다. 
+
+3. **컬렉션** 노드를 확장하고, 새 문서를 선택하고, 문서에 일부 추가 메타데이터와 함께 쿼리 문자열 값이 포함되어 있는지 확인합니다. 
 
     ![Cosmos DB 항목 확인](./media/functions-integrate-store-unstructured-data-cosmosdb/functions-verify-cosmosdb-output.png)
 
-구조화되지 않은 데이터를 Cosmos DB 데이터베이스에 저장하는 HTTP 트리거에 성공적으로 바인딩을 추가했습니다.
+구조화되지 않은 데이터를 Azure Cosmos DB에 저장하는 HTTP 트리거에 성공적으로 바인딩을 추가했습니다.
 
 [!INCLUDE [Clean-up section](../../includes/clean-up-section-portal.md)]
 
@@ -141,5 +145,4 @@ public static HttpResponseMessage Run(HttpRequestMessage req, out object taskDoc
 
 [!INCLUDE [functions-quickstart-next-steps](../../includes/functions-quickstart-next-steps.md)]
 
-Cosmos DB 데이터베이스에 바인딩하는 자세한 내용은 [Azure Functions Cosmos DB 바인딩](functions-bindings-documentdb.md)을 참조하세요.
-
+Cosmos DB 데이터베이스에 바인딩하는 자세한 내용은 [Azure Functions Cosmos DB 바인딩](functions-bindings-cosmosdb.md)을 참조하세요.

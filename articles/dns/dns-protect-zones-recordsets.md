@@ -1,10 +1,10 @@
 ---
-title: "DNS 영역 및 레코드 보호 | Microsoft 문서"
-description: "Microsoft Azure DNS에서 DNS 영역 및 레코드 집합을 보호하는 방법"
+title: DNS 영역 및 레코드 보호 | Microsoft 문서
+description: Microsoft Azure DNS에서 DNS 영역 및 레코드 집합을 보호하는 방법
 services: dns
 documentationcenter: na
-author: jtuliani
-manager: carmonm
+author: KumudD
+manager: jeconnoc
 ms.assetid: 190e69eb-e820-4fc8-8e9a-baaf0b3fb74a
 ms.service: dns
 ms.devlang: na
@@ -12,24 +12,22 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/20/2016
-ms.author: jonatul
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c785ad8dbfa427d69501f5f142ef40a2d3530f9e
-ms.openlocfilehash: 0b7040d6273b3a6b85cd55850d596807226b87fc
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
+ms.author: kumud
+ms.openlocfilehash: d13556eb274990eadf58070c119a3e9960b90699
+ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/03/2018
 ---
-
 # <a name="how-to-protect-dns-zones-and-records"></a>DNS 영역 및 레코드를 보호하는 방법
 
 DNS 영역 및 레코드는 중요한 리소스입니다. DNS 영역 또는 단일 DNS 레코드만 삭제해도 전체 서비스 중단이 발생할 수 있습니다.  따라서 중요 DNS 영역 및 레코드가 무단 또는 실수로 변경되지 않도록 보호하는 것이 중요합니다.
 
-이 문서는 Azure DNS를 통해 DNS 영역 및 레코드를 이러한 변경으로부터 보호하는 방식에 대해 설명합니다.  Azure Resource Manager에서 제공하는 두 가지 강력한 보안 기능, 즉, [역할 기반 액세스 제어](../active-directory/role-based-access-control-what-is.md)와 [리소스 잠금](../azure-resource-manager/resource-group-lock-resources.md)을 적용합니다.
+이 문서는 Azure DNS를 통해 DNS 영역 및 레코드를 이러한 변경으로부터 보호하는 방식에 대해 설명합니다.  Azure Resource Manager에서 제공하는 두 가지 강력한 보안 기능, 즉, [역할 기반 액세스 제어](../role-based-access-control/overview.md)와 [리소스 잠금](../azure-resource-manager/resource-group-lock-resources.md)을 적용합니다.
 
 ## <a name="role-based-access-control"></a>역할 기반 액세스 제어
 
-Azure RBAC(Role-Based Access Control)는 Azure 사용자, 그룹, 리소스에 대해 정확한 액세스 관리를 지원합니다. RBAC를 사용하여 사용자가 해당 작업을 수행하는 데 필요한 만큼의 액세스 권한을 정확하게 부여할 수 있습니다. RBAC를 사용하여 액세스를 관리하는 방법에 대한 자세한 내용은 [역할 기반 액세스 제어란](../active-directory/role-based-access-control-what-is.md)을 참조하세요.
+Azure RBAC(Role-Based Access Control)는 Azure 사용자, 그룹, 리소스에 대해 정확한 액세스 관리를 지원합니다. RBAC를 사용하여 사용자가 해당 작업을 수행하는 데 필요한 만큼의 액세스 권한을 정확하게 부여할 수 있습니다. RBAC를 사용하여 액세스를 관리하는 방법에 대한 자세한 내용은 [역할 기반 Access Control이란](../role-based-access-control/overview.md)을 참조하세요.
 
 ### <a name="the-dns-zone-contributor-role"></a>'DNS 영역 참가자' 역할
 
@@ -37,18 +35,18 @@ Azure RBAC(Role-Based Access Control)는 Azure 사용자, 그룹, 리소스에 �
 
 예를 들어 'myzones' 리소스 그룹에 Contoso Corporation의 영역 5개가 있다고 가정하겠습니다. 해당 리소스 그룹에'DNS 영역 참가자' DNS 관리자 권한을 부여할 경우 해당 DNS 영역을 완전히 관리할 수 있습니다. 또한 불필요한 권한을 부여하지 않습니다. 예를 들어 DNS 관리자는 Virtual Machines를 만들거나 중지할 수 없습니다.
 
-RBAC 권한을 할당하는 가장 간단한 방법은 [Azure Portal을 사용](../active-directory/role-based-access-control-configure.md)하는 것입니다.  리소스 그룹의 [Access Control(IAM)] 블레이드를 열고 [추가]를 클릭한 다음 [DNS 영역 참가자] 역할을 선택하고 권한을 부여할 사용자 또는 그룹을 선택합니다.
+RBAC 권한을 할당하는 가장 간단한 방법은 [Azure Portal을 사용](../role-based-access-control/role-assignments-portal.md)하는 것입니다.  리소스 그룹의 [Access Control(IAM)] 블레이드를 열고 [추가]를 클릭한 다음 [DNS 영역 참가자] 역할을 선택하고 권한을 부여할 사용자 또는 그룹을 선택합니다.
 
 ![Azure Portal을 통한 리소스 그룹 수준 RBAC](./media/dns-protect-zones-recordsets/rbac1.png)
 
-권한은 [Azure PowerShell을 사용하여 부여](../active-directory/role-based-access-control-manage-access-powershell.md)할 수도 있습니다.
+권한은 [Azure PowerShell을 사용하여 부여](../role-based-access-control/role-assignments-powershell.md)할 수도 있습니다.
 
 ```powershell
 # Grant 'DNS Zone Contributor' permissions to all zones in a resource group
 New-AzureRmRoleAssignment -SignInName "<user email address>" -RoleDefinitionName "DNS Zone Contributor" -ResourceGroupName "<resource group name>"
 ```
 
-동일한 명령을 [Azure CLI를 통해 사용](../active-directory/role-based-access-control-manage-access-azure-cli.md)할 수도 있습니다.
+동일한 명령을 [Azure CLI를 통해 사용](../role-based-access-control/role-assignments-cli.md)할 수도 있습니다.
 
 ```azurecli
 # Grant 'DNS Zone Contributor' permissions to all zones in a resource group
@@ -65,14 +63,14 @@ azure role assignment create --signInName "<user email address>" --roleName "DNS
 
 ![Azure Portal을 통한 DNS 영역 수준 RBAC](./media/dns-protect-zones-recordsets/rbac2.png)
 
-권한은 [Azure PowerShell을 사용하여 부여](../active-directory/role-based-access-control-manage-access-powershell.md)할 수도 있습니다.
+권한은 [Azure PowerShell을 사용하여 부여](../role-based-access-control/role-assignments-powershell.md)할 수도 있습니다.
 
 ```powershell
 # Grant 'DNS Zone Contributor' permissions to a specific zone
 New-AzureRmRoleAssignment -SignInName "<user email address>" -RoleDefinitionName "DNS Zone Contributor" -ResourceGroupName "<resource group name>" -ResourceName "<zone name>" -ResourceType Microsoft.Network/DNSZones
 ```
 
-동일한 명령을 [Azure CLI를 통해 사용](../active-directory/role-based-access-control-manage-access-azure-cli.md)할 수도 있습니다.
+동일한 명령을 [Azure CLI를 통해 사용](../role-based-access-control/role-assignments-cli.md)할 수도 있습니다.
 
 ```azurecli
 # Grant 'DNS Zone Contributor' permissions to a specific zone
@@ -87,14 +85,14 @@ Azure Portal에서 레코드 집합 블레이드의 [사용자] 단추를 사용
 
 ![Azure Portal을 통한 레코드 집합 수준 RBAC](./media/dns-protect-zones-recordsets/rbac3.png)
 
-레코드 집합 수준 RBAC 권한은 [Azure PowerShell을 사용하여 부여](../active-directory/role-based-access-control-manage-access-powershell.md)할 수도 있습니다.
+레코드 집합 수준 RBAC 권한은 [Azure PowerShell을 사용하여 부여](../role-based-access-control/role-assignments-powershell.md)할 수도 있습니다.
 
 ```powershell
 # Grant permissions to a specific record set
 New-AzureRmRoleAssignment -SignInName "<user email address>" -RoleDefinitionName "DNS Zone Contributor" -Scope "/subscriptions/<subscription id>/resourceGroups/<resource group name>/providers/Microsoft.Network/dnszones/<zone name>/<record type>/<record name>"
 ```
 
-동일한 명령을 [Azure CLI를 통해 사용](../active-directory/role-based-access-control-manage-access-azure-cli.md)할 수도 있습니다.
+동일한 명령을 [Azure CLI를 통해 사용](../role-based-access-control/role-assignments-cli.md)할 수도 있습니다.
 
 ```azurecli
 # Grant permissions to a specific record set
@@ -138,7 +136,7 @@ azure role assignment create --signInName "<user email address>" --roleName "DNS
 * `Microsoft.Network/dnsZones/CNAME/*`은 CNAME 레코드에 대한 모든 권한을 부여합니다.
 * `Microsoft.Network/dnsZones/read`는 DNS 영역을 읽을 권한을 부여하지만 수정 권한은 부여하지 않아 CNAME이 생성되는 영역을 확인할 수 있습니다.
 
-나머지 작업은 [DNS 영역 참가자의 기본 역할](../active-directory/role-based-access-built-in-roles.md#dns-zone-contributor)에서 복사됩니다.
+나머지 작업은 [DNS 영역 참가자의 기본 역할](../role-based-access-control/built-in-roles.md#dns-zone-contributor)에서 복사됩니다.
 
 > [!NOTE]
 > 레코드 집합 삭제를 방지하기 위해 사용자 지정 RBAC 역할을 사용하면서 업데이트를 허용하는 것은 효과적인 관리가 아닙니다. 이 방식에서는 레코드 집합을 삭제할 수 없지만 수정은 방지할 수 없습니다.  허용되는 수정 작업에는 레코드 집합을 '비우기' 위해 레코드를 모두 제거하는 작업을 포함하여 레코드 집합에서 레코드를 추가 및 제거하는 작업이 포함됩니다. 이 경우 DNS 확인 관점에서 레코드 집합을 삭제하는 것과 같은 효과를 가집니다.
@@ -159,7 +157,7 @@ azure role create -inputfile <file path>
 
 그런 다음 이 문서의 앞부분에서 설명한 대로 역할을 기본 역할과 동일한 방식으로 할당할 수 있습니다.
 
-사용자 지정 역할을 만들고 관리하고 할당하는 방법은 [Azure RBAC에서 사용자 지정 역할](../active-directory/role-based-access-control-custom-roles.md)을 참조하세요.
+사용자 지정 역할을 만들고 관리하고 할당하는 방법은 [Azure RBAC에서 사용자 지정 역할](../role-based-access-control/custom-roles.md)을 참조하세요.
 
 ## <a name="resource-locks"></a>리소스 잠금
 
@@ -221,7 +219,6 @@ DNS 영역 보호에 대한 심층적 방어 접근 방식으로서 리소스 �
 
 ## <a name="next-steps"></a>다음 단계
 
-* RBAC를 사용하는 방법은 [Azure Portal에서 액세스 관리 시작](../active-directory/role-based-access-control-what-is.md)을 참조하세요.
+* RBAC를 사용하는 방법은 [Azure Portal에서 액세스 관리 시작](../role-based-access-control/overview.md)을 참조하세요.
 * 리소스 잠금에 대한 자세한 내용은[ Azure Resource Manager를 사용하여 리소스 잠그기](../azure-resource-manager/resource-group-lock-resources.md)를 참조하세요.
-
 

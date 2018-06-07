@@ -1,25 +1,21 @@
 ---
-title: "Azure Active Directory B2C: 소비자 등록 중에 전자 메일 확인 사용 안 함 | Microsoft Docs"
-description: "Azure Active Directory B2C의 소비자 등록 중에 전자 메일 확인을 사용하지 않도록 설정하는 방법을 보여 주는 토픽입니다."
+title: 소비자 등록 중에 전자 메일 확인 사용 안 함 - Azure Active Directory B2C
+description: Azure Active Directory B2C의 소비자 등록 중에 전자 메일 확인을 사용하지 않도록 설정하는 방법을 보여 주는 토픽입니다.
 services: active-directory-b2c
-documentationcenter: 
-author: parakhj
-manager: krassk
-editor: parakhj
-ms.assetid: 433f32b8-96d2-4113-aa82-efcf42fa9827
+documentationcenter: ''
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
 ms.date: 2/06/2017
-ms.author: parakhj
+ms.author: davidmu
+ms.openlocfilehash: 4f48df553d35386fb2b0448972dc01f9c6427ebd
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
 ms.translationtype: HT
-ms.sourcegitcommit: f5c887487ab74934cb65f9f3fa512baeb5dcaf2f
-ms.openlocfilehash: d8e44a8aade60d21734477d60bccc2bd5194436e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/08/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="azure-active-directory-b2c-disable-email-verification-during-consumer-sign-up"></a>Azure Active Directory B2C: 소비자 등록 중에 전자 메일 확인 사용 안 함
 Azure AD(Azure Active Directory) B2C를 사용하도록 설정하면 소비자는 전자 메일 주소를 제공하고 로컬 계정을 만들어 응용 프로그램에 등록할 수 있게 됩니다. Azure AD B2C는 등록 프로세스 중에 소비자에게 전자 메일 주소를 확인하도록 요구하여 전자 메일 주소의 유효성을 보장합니다. 또한 악의적인 자동화 프로세스를 통해 응용 프로그램에 대한 가짜 계정이 생성되지 못하게 합니다.

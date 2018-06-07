@@ -1,25 +1,21 @@
 ---
-title: Azure Active Directory B2C | Microsoft Docs
-description: "Azure Active Directory B2C 및 OAuth 2.0 액세스 토큰을 사용하여 .NET 웹앱을 빌드하고 웹 API를 호출하는 방법입니다."
+title: 보호된 웹 API 호출 ASP.NET Azure Active Directory B2C | Microsoft Docs
+description: Azure Active Directory B2C 및 OAuth 2.0 액세스 토큰을 사용하여 .NET 웹앱을 빌드하고 웹 API를 호출하는 방법입니다.
 services: active-directory-b2c
 documentationcenter: .net
-author: parakhj
-manager: krassk
-editor: 
-ms.assetid: d3888556-2647-4a42-b068-027f9374aa61
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
-ms.tgt_pltfrm: na
-ms.devlang: dotnet
 ms.topic: article
 ms.date: 03/17/2017
-ms.author: parakhj
-translationtype: Human Translation
-ms.sourcegitcommit: f6006d5e83ad74f386ca23fe52879bfbc9394c0f
-ms.openlocfilehash: 7610ae44d8c9b828fb46333b143d7b1f6dc915eb
-ms.lasthandoff: 05/03/2017
-
-
+ms.author: davidmu
+ms.openlocfilehash: 75ae88898d3d6b275ec462e865347056305fd666
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="azure-ad-b2c-call-a-net-web-api-from-a-net-web-app"></a>Azure AD B2C: .NET 웹앱에서 .NET 웹 API 호출
 
@@ -36,9 +32,9 @@ Azure AD B2C를 사용하여 강력한 ID 관리 기능을 웹앱 및 웹 API에
 
 1. [Azure AD B2C 테넌트를 만듭니다](active-directory-b2c-get-started.md).
 2. [웹 API를 등록합니다](active-directory-b2c-app-registration.md#register-a-web-api).
-3. [웹앱을 등록합니다](active-directory-b2c-app-registration.md#register-a-web-application).
+3. [웹앱을 등록합니다](active-directory-b2c-app-registration.md#register-a-web-app).
 4. [정책을 설정합니다](active-directory-b2c-reference-policies.md).
-5. [웹 API를 사용하도록 웹앱 권한을 부여합니다](active-directory-b2c-access-tokens.md#granting-permissions-to-a-web-api).
+5. [웹 API를 사용하도록 웹앱 권한을 부여합니다](active-directory-b2c-access-tokens.md#publishing-permissions).
 
 > [!IMPORTANT]
 > 클라이언트 응용 프로그램 및 웹 API는 동일한 Azure AD B2C 디렉터리를 사용해야 합니다.
@@ -58,7 +54,7 @@ git clone https://github.com/Azure-Samples/active-directory-b2c-dotnet-webapp-an
 
 샘플은 데모 테넌트의 정책 및 클라이언트 ID를 사용하도록 구성되어 있습니다. 자신의 테넌트를 사용하려는 경우:
 
-1. `TaskService` 프로젝트에서 `web.config`을 열고 다음 값을 바꿉니다.
+1. `TaskService` 프로젝트에서 `web.config`를 열고 다음 값을 바꿉니다.
 
     * `ida:Tenant`를 테넌트 이름으로 바꿉니다.
     * `ida:ClientId`를 웹 API 응용 프로그램 ID로 바꿉니다.
@@ -187,5 +183,4 @@ public async Task<ActionResult> Index()
 ## <a name="run-the-sample-app"></a>샘플 앱 실행
 
 마지막으로 두 앱을 빌드 및 실행합니다. 등록하고 로그인하여, 로그인된 사용자에 대한 작업을 만듭니다. 로그아웃했다가 다른 사용자로 로그인합니다. 해당 사용자에 대한 작업을 만듭니다. API 가 받는 토큰에서 사용자의 ID를 추출하므로 API에 사용자별 작업이 저장됩니다. 또한 범위 다루기를 시도해 볼 수도 있습니다. "쓰기"에 대한 권한을 제거한 다음 작업을 추가합니다. 범위를 변경할 때마다 로그아웃해야 합니다.
-
 

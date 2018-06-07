@@ -1,8 +1,8 @@
 ---
-title: "U-SQL 카탈로그 시작 | Microsoft Docs"
-description: "U-SQL 카탈로그를 사용하여 코드와 데이터를 공유하는 방법을 알아봅니다."
+title: U-SQL 카탈로그 시작 | Microsoft Docs
+description: U-SQL 카탈로그를 사용하여 코드와 데이터를 공유하는 방법을 알아봅니다.
 services: data-lake-analytics
-documentationcenter: 
+documentationcenter: ''
 author: saveenr
 manager: saveenr
 editor: cgronlun
@@ -13,14 +13,12 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: big-data
 ms.date: 05/09/2017
-ms.author: edmaca
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 71fea4a41b2e3a60f2f610609a14372e678b7ec4
-ms.openlocfilehash: 08364c6c7bea53807844e3b1cc327dc3742e0487
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.author: saveenr
+ms.openlocfilehash: b39b5250cc042c393216784128ffc4e2f1288f04
+ms.sourcegitcommit: 8aab1aab0135fad24987a311b42a1c25a839e9f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/16/2018
 ---
 # <a name="get-started-with-the-u-sql-catalog"></a>U-SQL 카탈로그 시작
 
@@ -179,5 +177,4 @@ OUTPUT @res
 ## <a name="next-steps"></a>다음 단계
 * [Microsoft Azure 데이터 레이크 분석 개요](data-lake-analytics-overview.md)
 * [Visual Studio용 데이터 레이크 도구를 사용하여 U-SQL 스크립트 개발](data-lake-analytics-data-lake-tools-get-started.md)
-* [Azure 포털을 사용하여 Azure Data Lake Analytics 작업 모니터링 및 문제 해결](data-lake-analytics-monitor-and-troubleshoot-jobs-tutorial.md)
-
+* [Azure Portal을 사용하여 Azure Data Lake Analytics 작업 모니터링 및 문제 해결](data-lake-analytics-monitor-and-troubleshoot-jobs-tutorial.md)

@@ -12,14 +12,13 @@ ms.devlang: node
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/29/2017
+ms.date: 09/07/2017
 ms.author: elioda
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 07797b9159c9b926e9eb47d8864c63048951931a
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: 4cf607e8e0ccd3aab06be54d715c2bf3777caeb0
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="get-started-with-device-twins-netnode"></a>장치 쌍(.NET/노드) 시작
 [!INCLUDE [iot-hub-selector-twin-get-started](../../includes/iot-hub-selector-twin-get-started.md)]
@@ -37,7 +36,7 @@ ms.lasthandoff: 04/03/2017
 이 자습서를 완료하려면 다음이 필요합니다.
 
 * Visual Studio 2015 또는 Visual Studio 2017.
-* Node.js 버전 0.10.x 이상
+* Node.js 버전 4.0.x 이상
 * 활성 Azure 계정. 계정이 없는 경우 몇 분 안에 [무료 계정][lnk-free-trial]을 만들 수 있습니다.
 
 [!INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
@@ -198,5 +197,4 @@ ms.lasthandoff: 04/03/2017
 [lnk-twin-how-to-configure]: iot-hub-csharp-node-twin-how-to-configure.md
 
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdk-node/blob/master/doc/node-devbox-setup.md
-
 

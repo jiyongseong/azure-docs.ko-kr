@@ -1,6 +1,6 @@
 ---
-title: "자습서: Springer Link와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory와 Springer Link 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Springer Link와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory와 Springer Link 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
@@ -12,14 +12,13 @@ ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/19/2017
+ms.date: 04/16/2017
 ms.author: jeedes
+ms.openlocfilehash: 04a0335a819c835248e7a18afe36acf13e100fb3
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 3c59f777b8b42d67f85fb078c883f0b36a972ddb
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-springer-link"></a>자습서: Springer Link와 Azure Active Directory 통합
 
@@ -31,7 +30,7 @@ Springer Link를 Azure AD와 통합하면 다음과 같은 이점이 제공됩�
 - 사용자가 Azure AD 계정으로 Springer Link에 자동으로 로그인(Single Sign-On)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +58,7 @@ Springer Link가 Azure AD에 통합되도록 구성하려면 갤러리의 Spring
 
 **갤러리에서 Springer Link를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -87,9 +86,8 @@ Springer Link에서 Azure AD Single Sign-On을 구성하고 테스트하려면 �
 
 1. **[Azure AD Single Sign-On 구성](#configure-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
 2. **[Azure AD 테스트 사용자 만들기](#create-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
-3. **[Springer Link 테스트 사용자 만들기](#create-a-springer-link-test-user)** - Britta Simon의 Azure AD 표현과 연결된 해당 사용자를 Springer Link에 만듭니다.
-4. **[Azure AD 테스트 사용자 할당](#assign-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Single Sign-On 테스트](#test-single-sign-on)** - 구성이 작동하는지 여부를 확인합니다.
+3. **[Azure AD 테스트 사용자 할당](#assign-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
+4. **[Single Sign-On 테스트](#test-single-sign-on)** - 구성이 작동하는지 여부를 확인합니다.
 
 ### <a name="configure-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -105,46 +103,29 @@ Springer Link에서 Azure AD Single Sign-On을 구성하고 테스트하려면 �
  
     ![Single Sign-On 대화 상자](./media/active-directory-saas-springerlink-tutorial/tutorial_springerlink_samlbase.png)
 
-3. **Springer Link 도메인 및 URL** 섹션에서 다음 단계를 수행합니다.
+3. **Springer Link 도메인 및 URL** 섹션에서 **IDP** 시작 모드로 응용 프로그램을 구성하려는 경우 다음 단계를 수행합니다.
+
+    ![Springer Link 도메인 및 URL Single Sign-On 정보](./media/active-directory-saas-springerlink-tutorial/tutorial_springerlink_url1.png)
+
+    a. **식별자** 텍스트 상자에 URL `https://fsso.springer.com`을 입력합니다.
+
+    나. **회신 URL** 텍스트 상자에 URL `https://fsso-qa1.springer.com/federation/Consumer/metaAlias/SpringerServiceProvider`를 입력합니다.    
+
+4. **고급 URL 설정 표시**를 선택합니다. **SP** 시작 모드에서 응용 프로그램을 구성하려면:
 
     ![Springer Link 도메인 및 URL Single Sign-On 정보](./media/active-directory-saas-springerlink-tutorial/tutorial_springerlink_url.png)
 
-    a. **로그온 URL** 텍스트 상자에서 다음 패턴으로 URL을 입력합니다. `https://<companyname>.live.cf.public.springer.com/athens-shibboleth-login?previousUrl=https%3A%2F%2Fcore-qa.live.cf.public.springer.com%2F`
+    **로그온 URL** 텍스트 상자에 URL `https://fsso.springer.com/federation/Consumer/metaAlias/SpringerServiceProvider`을 입력합니다.
 
-    b. **식별자** 텍스트 상자에서 `https://<companyname>.springer.com` 패턴을 사용하여 URL을 입력합니다.
+5. **SAML 서명 인증서** 섹션에서 복사 단추를 클릭하여 **앱 페더레이션 메타데이터 URL**을 복사하고 메모장에 붙여넣습니다. 
 
-    > [!NOTE] 
-    > 이러한 값은 실제 값이 아닙니다. 실제 로그온 URL 및 식별자로 값을 업데이트합니다. 이러한 값을 얻으려면 [Springer Link 클라이언트 지원 팀](https://www.springer.com/gp/help/contact)에 문의하세요. 
+    ![인증서 다운로드 링크](./media/active-directory-saas-springerlink-tutorial/tutorial_springerlink_certificate.png)    
 
-4. **저장** 단추를 클릭합니다.
+6. **저장** 단추를 클릭합니다.
 
     ![Single Sign-On 구성 저장 단추](./media/active-directory-saas-springerlink-tutorial/tutorial_general_400.png)
 
-5. **메타데이터** URL을 생성하려면 다음 단계를 수행합니다.
-
-    a. **앱 등록**을 클릭합니다.
-    
-    ![Single Sign-on 구성](./media/active-directory-saas-springerlink-tutorial/tutorial_springerlink_appregistrations.png)
-   
-    b. **끝점**을 클릭하여 **끝점** 대화 상자를 엽니다.  
-    
-    ![Single Sign-on 구성](./media/active-directory-saas-springerlink-tutorial/tutorial_springerlink_endpointicon.png)
-
-    c. 복사 단추를 클릭하여 **페더레이션 메타데이터 문서** URL을 복사하여 메모장에 붙여넣습니다.
-    
-    ![Single Sign-on 구성](./media/active-directory-saas-springerlink-tutorial/tutorial_springerlink_endpoint.png)
-     
-    d. 이제 **Springer Link**의 속성 페이지로 이동하고 **복사** 단추를 사용하여 **응용 프로그램 ID**를 복사하여 메모장에 붙여넣습니다.
- 
-    ![Single Sign-on 구성](./media/active-directory-saas-springerlink-tutorial/tutorial_springerlink_appid.png)
-
-    e. `<FEDERATION METADATA DOCUMENT url>?appid=<application id>` 패턴을 사용하여 **메타데이터 URL**을 생성합니다.
-
-6. **Application Id** 쪽에서 Single Sign-On을 구성하려면 생성된 **메타데이터 URL**을 [Springer Link 지원 팀](http://www.springer.com/gp/help/contact)에 보내야 합니다.
-
-> [!TIP]
-> 이제 앱을 설정하는 동안 [Azure Portal](https://portal.azure.com) 내에서 이러한 지침의 간결한 버전을 읽을 수 있습니다.  **Active Directory > 엔터프라이즈 응용 프로그램** 섹션에서 이 앱을 추가한 후에는 **Single Sign-On** 탭을 클릭하고 맨 아래에 있는 **구성** 섹션을 통해 포함된 설명서에 액세스하면 됩니다. 포함된 설명서 기능에 대한 자세한 내용은 [Azure AD 포함된 설명서]( https://go.microsoft.com/fwlink/?linkid=845985)에서 확인할 수 있습니다.
-> 
+7. **Springer Link** 쪽에서 Single Sign-On을 구성하려면 **앱 페더레이션 메타데이터 URL**을 [Springer Link 지원 팀](mailto:identity@springernature.com)에 보내야 합니다.
 
 ### <a name="create-an-azure-ad-test-user"></a>Azure AD 테스트 사용자 만들기
 
@@ -172,16 +153,12 @@ Springer Link에서 Azure AD Single Sign-On을 구성하고 테스트하려면 �
 
     a. **이름** 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
+    나. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
 
-    c. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
+    다. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
-### <a name="create-a-springer-link-test-user"></a>Springer Link 테스트 사용자 만들기
-
-이 섹션에서는 Springer Link에서 Britta Simon이라는 사용자를 만듭니다. Springer Link 플랫폼에서 사용자를 추가하려면 [Springer Link 지원 팀](http://www.springer.com/gp/help/contact)에 문의하세요. Single Sign-On을 사용하려면 먼저 사용자를 만들고 활성화해야 합니다. 
-
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD 테스트 사용자 할당
 
 이 섹션에서는 Azure Single Sign-On을 사용할 수 있도록 Britta Simon에게 Springer Link에 대한 액세스 권한을 부여합니다.
@@ -222,7 +199,7 @@ Springer Link에서 Azure AD Single Sign-On을 구성하고 테스트하려면 �
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 <!--Image references-->
 
@@ -237,5 +214,4 @@ Springer Link에서 Azure AD Single Sign-On을 구성하고 테스트하려면 �
 [201]: ./media/active-directory-saas-springerlink-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-springerlink-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-springerlink-tutorial/tutorial_general_203.png
-
 

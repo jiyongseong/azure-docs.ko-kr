@@ -1,167 +1,70 @@
 ---
-title: "Azure에 OpenShift Origin 배포 | Microsoft Docs"
-description: "Azure 가상 컴퓨터에 OpenShift Origin을 배포하는 방법에 대해 알아봅니다."
+title: Azure의 OpenShift 개요 | Microsoft Docs
+description: Azure의 OpenShift 개요입니다.
 services: virtual-machines-linux
 documentationcenter: virtual-machines
-author: jbinder
-manager: timlt
-editor: 
+author: haroldw
+manager: najoshi
+editor: ''
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 
-ms.author: jbinder
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 1e6f2b9de47d1ce84c4043f5f6e73d462e0c1271
-ms.openlocfilehash: e03da05625e440eab29ccc28a2343d3433fc7607
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/21/2017
-
+ms.date: ''
+ms.author: haroldw
+ms.openlocfilehash: c8e740a66271c88b3abb036867d1760cc9e77607
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
+ms.locfileid: "33944504"
 ---
+# <a name="openshift-in-azure"></a>Azure의 OpenShift
 
-# <a name="deploy-openshift-origin-to-azure-virtual-machines"></a>Azure 가상 컴퓨터에 OpenShift Origin 배포 
+OpenShift는 엔터프라이즈에 Docker 및 Kubernetes를 제공하는 확장 가능한 개방형 컨테이너 응용 프로그램 플랫폼입니다.  
 
-[OpenShift Origin](https://www.openshift.org/)은 [Kubernetes](https://kubernetes.io/)를 기반으로 하는 오픈 소스 컨테이너 플랫폼입니다. 다중 테넌트 응용 프로그램의 배포, 크기 조정 및 운영 프로세스를 간소화합니다. 
+OpenShift는 컨테이너 오케스트레이션 및 관리를 위한 Kubernetes를 포함합니다. 추가로 다음을 지원하는 개발자 및 작업 중심 도구를 제공합니다.
 
-이 가이드에서는 Azure CLI 및 Azure Resource Manager 템플릿을 사용하여 OpenShift Origin을 Azure Virtual Machines에 배포하는 방법을 설명합니다. 이 자습서에서는 다음 방법에 대해 알아봅니다.
+- RAD(신속한 응용 프로그램 개발)
+- 간편한 배포 및 확장
+- 팀 및 응용 프로그램에 대한 장기 수명 유지 관리
 
-> [!div class="checklist"]
-> * OpenShift 클러스터에 대한 SSH 키를 관리하는 KeyVault를 만듭니다.
-> * Azure VM에 OpenShift 클러스터를 배포합니다. 
-> * [OpenShift CLI](https://docs.openshift.org/latest/cli_reference/index.html#cli-reference-index)를 설치 및 구성하여 클러스터를 관리합니다.
-> * OpenShift 배포를 사용자 지정합니다.
+OpenShift의 여러 버전을 사용할 수 있습니다.
 
-Azure 구독이 아직 없는 경우 시작하기 전에 [무료 계정](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)을 만듭니다.
+- OpenShift Origin
+- OpenShift Container Platform
+- OpenShift Online
+- OpenShift Dedicated
 
-이 빠른 시작을 위해서는 Azure CLI 버전 2.0.8 이상이 필요합니다. 버전을 찾으려면 `az --version`을 실행합니다. 설치 또는 업그레이드해야 하는 경우 [Azure CLI 2.0 설치]( /cli/azure/install-azure-cli)를 참조하세요. 
+이 아티클에 설명된 4가지 버전 중 2가지 즉, OpenShift Origin 및 OpenShift Container Platform은 고객이 Azure에서 배포할 수 있습니다.
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+## <a name="openshift-origin"></a>OpenShift Origin
 
-## <a name="log-in-to-azure"></a>Azure에 로그인 
-[az login](/cli/azure/#login) 명령으로 Azure 구독에 로그인하고 화면의 지시를 따르거나 **시도**를 클릭하여 Cloud Shell을 사용하세요.
+Origin은 커뮤니티가 지원하는 OpenShift의 [오픈 소스](https://www.openshift.org/) 업스트림 프로젝트입니다. Origin은 CentOS 또는 RHEL(Red Hat Enterprise Linux)에 설치할 수 있습니다.
 
-```azurecli 
-az login
-```
-## <a name="create-a-resource-group"></a>리소스 그룹 만들기
+## <a name="openshift-container-platform"></a>OpenShift Container Platform
 
-[az group create](/cli/azure/group#create) 명령을 사용하여 리소스 그룹을 만듭니다. Azure 리소스 그룹은 Azure 리소스가 배포 및 관리되는 논리적 컨테이너입니다. 
+Container Platform은 Red Hat이 제공하고 지원하는 엔터프라이즈급 [상용](https://www.openshift.com) 버전입니다. 이 버전을 통해 고객은 OpenShift Container Platform에 필요한 자격을 구매하고 전체 인프라의 설치 및 관리를 담당합니다.
 
-다음 예제에서는 *eastus* 위치에 *myResourceGroup*이라는 리소스 그룹을 만듭니다.
+고객이 전체 플랫폼을 “소유”하기 때문에 온-프레미스 데이터 센터나 공용 클라우드(Azure, AWS, Google 등)에 설치할 수 있습니다.
 
-```azurecli 
-az group create --name myResourceGroup --location eastus
-```
+## <a name="openshift-online"></a>OpenShift Online
 
-## <a name="create-a-key-vault"></a>주요 자격 증명 모음 만들기
-[az keyvault create](/cli/azure/keyvault#create) 명령을 사용하여 클러스터에 대한 SSH 키를 저장할 KeyVault를 만듭니다.  
+Online은 Container Platform을 사용하는 Red Hat이 관리하는 *다중 테넌트* OpenShift입니다. Red Hat이 모든 기본 인프라(예: VM, OpenShift 클러스터, 네트워킹, 저장소 등)를 관리합니다. 
 
-```azurecli 
-az keyvault create --resource-group myResourceGroup --name myKeyVault \
-       --enabled-for-template-deployment true \
-       --location eastus
-```
+이 버전을 통해 고객은 컨테이너를 배포하지만 컨테이너가 실행되는 호스트를 제어할 수 없습니다. Online은 다중 테넌트이므로 컨테이너가 다른 고객의 컨테이너와 동일한 VM 호스트에 함께 배치될 수 있습니다. 비용은 컨테이너당 청구됩니다.
 
-## <a name="create-an-ssh-key"></a>SSH 키 만들기 
-SSH 키는 OpenShift Origin 클러스터에 대한 액세스를 보호하기 위해 필요합니다. `ssh-keygen` 명령을 사용하여 SSH 키 쌍을 만듭니다. 
- 
- ```bash
-ssh-keygen -f ~/.ssh/openshift_rsa -t rsa -N ''
-```
+## <a name="openshift-dedicated"></a>OpenShift Dedicated
 
-> [!NOTE]
-> 만드는 SSH 키 쌍에는 암호를 사용할 수 없습니다.
-
-Windows에서의 SSH 키에 대한 자세한 내용은 [Windows에서 SSH 키를 만드는 방법](/azure/virtual-machines/linux/ssh-from-windows)을 참조하세요.
-
-## <a name="store-ssh-private-key-in-key-vault"></a>Key Vault에 SSH 개인 키 저장
-OpenShift 배포는 사용자가 만든 SSH 키를 사용하여 OpenShift 마스터에 대한 액세스를 보호합니다. SSH 키를 안전하게 검색하기 위해 배포를 사용하도록 설정하려면 다음 명령을 사용하여 Key Vault에 키를 저장합니다.
-
-# <a name="enabled-for-template-deployment"></a>템플릿 배포를 위한 사용
-```azurecli
-az keyvault secret set --vault-name KeyVaultName --name OpenShiftKey --file ~/.ssh/openshift.rsa
-```
-
-## <a name="create-a-service-principal"></a>서비스 주체 만들기 
-OpenShift는 사용자 이름 및 암호 또는 서비스 주체를 사용하여 Azure와 통신합니다. Azure 서비스 주체는 앱, 서비스 및 OpenShift와 같은 자동화 도구를 사용할 수 있는 보안 ID입니다. 서비스 주체가 Azure에서 수행할 수 있는 작업에 대한 사용 권한은 사용자가 제어하고 정의합니다. 사용자 이름 및 암호를 입력하는 것 이상으로 보안을 강화하기 위해 이 예제에서는 기본 서비스 주체를 만듭니다.
-
-[az ad sp create-for-rbac](/cli/azure/ad/sp#create-for-rbac)를 사용하여 서비스 주체를 만들고 OpenShift가 필요로 하는 자격 증명을 출력합니다.
-
-```azurecli
-az ad sp create-for-rbac --name openshiftsp \
-          --role Contributor --password {strong password} \
-          --scopes $(az group show --name myResourceGroup --query id)
-```
-명령에서 반환되는 appId 속성을 기록해 둡니다.
-```json
-{
-  "appId": "a487e0c1-82af-47d9-9a0b-af184eb87646d",
-  "displayName": "openshiftsp",
-  "name": "http://openshiftsp",
-  "password": {strong password},
-  "tenant": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-}
-```
- > [!WARNING] 
- > 안전하지 않은 암호를 만들지 마세요.  [Azure AD 암호 규칙 및 제한 사항](/azure/active-directory/active-directory-passwords-policy) 지침을 따르세요.
-
-서비스 주체에 대한 자세한 내용은 [Azure CLI 2.0을 사용하여 Azure 서비스 주체 만들기](/cli/azure/create-an-azure-service-principal-azure-cli)를 참조하세요.
-
-## <a name="deploy-the-openshift-origin-template"></a>OpenShift Origin 템플릿 배포
-다음으로 Azure Resource Manager 템플릿을 사용하여 OpenShift Origin을 배포합니다. 
-
-> [!NOTE] 
-> 다음 명령은 az CLI 2.0.8 이상이 필요합니다. `az --version` 명령으로 az CLI 버전을 확인할 수 있습니다. CLI 버전을 업데이트하려면 [Azure CLI 2.0 설치]( /cli/azure/install-azure-cli)를 참조하세요.
-
-`aadClientId` 매개 변수에 대해 이전에 만든 서비스 주체에서 `appId` 값을 사용합니다.
-
-```azurecli 
-az group deployment create --name myOpenShiftCluster \
-      --template-uri https://raw.githubusercontent.com/Microsoft/openshift-origin/master/azuredeploy.json \
-      --params \ 
-        openshiftMasterPublicIpDnsLabel=myopenshiftmaster \
-        infraLbPublicIpDnsLabel=myopenshiftlb \
-        openshiftPassword=Pass@word!
-        sshPublicKey=~/.ssh/openshift_rsa.pub \
-        keyVaultResourceGroup=myResourceGroup \
-        keyVaultName=myKeyVault \
-        keyVaultSecret=OpenShiftKey \
-        aadClientId={appId} \
-        aadClientSecret={strong password} 
-```
-배포가 완료되는 데 최대 20분이 걸릴 수 있습니다. 배포가 완료되면 OpenShift 콘솔의 URL과 OpenShift 마스터의 DNS 이름이 터미널에 출력됩니다.
-
-```json
-{
-  "OpenShift Console Uri": "http://openshiftlb.cloudapp.azure.com:8443/console",
-  "OpenShift Master SSH": "ocpadmin@myopenshiftmaster.cloudapp.azure.com"
-}
-```
-## <a name="connect-to-the-openshift-cluster"></a>OpenShift 클러스터에 연결
-배포가 완료되면 브라우저에서 `OpenShift Console Uri`를 사용하여 OpenShift 콘솔에 연결합니다. 또는 다음 명령을 사용하여 OpenShift 마스터에 연결할 수 있습니다.
-
-```bash
-$ ssh ocpadmin@myopenshiftmaster.cloudapp.azure.com
-```
-
-## <a name="clean-up-resources"></a>리소스 정리
-더 이상 필요하지 않은 경우 [az group delete](/cli/azure/group#delete) 명령을 사용하여 리소스 그룹, OpenShift 클러스터 및 모든 관련된 리소스를 제거할 수 있습니다.
-
-```azurecli 
-az group delete --name myResourceGroup
-```
+Dedicated는 Container Platform을 사용하는 Red Hat이 관리하는 *단일 테넌트* OpenShift입니다. Red Hat이 모든 기본 인프라(VM, OpenShift 클러스터, 네트워킹, 저장소 등)를 관리합니다. 클러스터는 한 고객 전용이며 공용 클라우드(예: AWS, Google, Azure는 2018년 초 출시 예정)에서 실행됩니다. 시작 클러스터에는 연간 $48,000에(선불) 4개의 응용 프로그램 노드가 포함됩니다.
 
 ## <a name="next-steps"></a>다음 단계
 
-이 자습서에서 학습한 방법은 다음과 같습니다.
-> [!div class="checklist"]
-> * OpenShift 클러스터에 대한 SSH 키를 관리하는 KeyVault를 만듭니다.
-> * Azure VM에 OpenShift 클러스터를 배포합니다. 
-> * [OpenShift CLI](https://docs.openshift.org/latest/cli_reference/index.html#cli-reference-index)를 설치 및 구성하여 클러스터를 관리합니다.
-
-이제 해당 OpenShift Origin 클러스터가 배포되었습니다. OpenShift 자습서를 수행하여 첫 번째 응용 프로그램을 배포하고 OpenShift 도구를 사용하는 방법에 대해 알아볼 수 있습니다. 시작하려면 [OpenShift Origin 시작](https://docs.openshift.org/latest/getting_started/index.html)을 참조하세요. 
-
+- [Azure에서 OpenShift에 대한 일반적인 필수 조건 구성](./openshift-prerequisites.md)
+- [Azure에서 OpenShift Origin 배포](./openshift-origin.md)
+- [Azure에서 OpenShift Container Platform 배포](./openshift-container-platform.md)
+- [배포 후 작업](./openshift-post-deployment.md)
+- [OpenShift 배포 문제 해결](./openshift-troubleshooting.md)

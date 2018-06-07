@@ -4,7 +4,7 @@ description: "원격 관리를 위해 장치를 구성하는 방법 및 HTTP 또
 services: storsimple
 documentationcenter: 
 author: alkohli
-manager: timlt
+manager: jeconnoc
 editor: 
 ms.assetid: 
 ms.service: storsimple
@@ -12,16 +12,14 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 04/07/2017
+ms.date: 01/02/2018
 ms.author: alkohli
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: ff76884f020a0fb8a1b48bd371c419bd65e85fd3
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 9414d9c93fe463910ffa6fce72aada6a0d720464
+ms.sourcegitcommit: 79683e67911c3ab14bcae668f7551e57f3095425
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/25/2018
 ---
 # <a name="connect-remotely-to-your-storsimple-8000-series-device"></a>StorSimple 8000 시리즈 장치에 원격으로 연결
 
@@ -86,7 +84,10 @@ Azure Portal에서 다음 단계를 수행하여 HTTP를 통한 원격 관리를
 원격 관리를 사용하도록 설정하려면 클라이언트에서 다음 단계를 따르세요.
 
 #### <a name="to-prepare-the-client-for-remote-connection"></a>원격 연결을 위해 클라이언트를 준비하려면
-1. 관리자 권한으로 Windows PowerShell 세션을 시작합니다.
+1. 관리자 권한으로 Windows PowerShell 세션을 시작합니다. Windows 10 클라이언트를 사용하는 경우, 기본적으로 Windows 원격 관리 서비스가 수동으로 설정되어 있습니다. 다음을 입력하여 서비스를 시작해야 할 수 있습니다.
+
+    `Start-Service WinRM`
+    
 2. 다음 명령을 입력하여 클라이언트의 신뢰할 수 있는 호스트 목록에 StorSimple 장치의 IP 주소를 추가합니다.
    
      `Set-Item wsman:\localhost\Client\TrustedHosts <device_ip> -Concatenate -Force`
@@ -195,7 +196,7 @@ HTTPS 세션을 사용하는 원격 연결을 위해 호스트 컴퓨터를 준�
 3. **모든 인증서를 다음 저장소에 저장**을 선택하고 **찾아보기**를 클릭합니다. 원격 호스트의 루트 저장소로 이동한 후 **다음**을 클릭합니다.
    
     ![인증서 가져오기 마법사 2](./media/storsimple-remote-connect/HCS_CertificateImportWizard2.png)
-4. **마침**을 클릭합니다. 가져오기에 성공했음을 알리는 메시지가 나타납니다.
+4. **Finish**를 클릭합니다. 가져오기에 성공했음을 알리는 메시지가 나타납니다.
    
     ![인증서 가져오기 마법사 3](./media/storsimple-remote-connect/HCS_CertificateImportWizard3.png)
 
@@ -214,7 +215,10 @@ Windows PowerShell 및 SSL을 사용하여 원격 호스트 또는 클라이언�
 원격 Windows PowerShell 연결을 설정하려는 컴퓨터에서 다음 절차를 따르세요.
 
 #### <a name="to-enter-an-ssadmin-session-on-the-device-by-using-windows-powershell-and-ssl"></a>Windows PowerShell 및 SSL을 사용하여 장치의 SSAdmin 세션에 들어가려면
-1. 관리자 권한으로 Windows PowerShell 세션을 시작합니다.
+1. 관리자 권한으로 Windows PowerShell 세션을 시작합니다. Windows 10 클라이언트를 사용하는 경우, 기본적으로 Windows 원격 관리 서비스가 수동으로 설정되어 있습니다. 다음을 입력하여 서비스를 시작해야 할 수 있습니다.
+
+    `Start-Service WinRM`
+
 2. 다음을 입력하여 클라이언트의 신뢰할 수 있는 호스트에 장치 IP 주소를 추가합니다.
    
      `Set-Item wsman:\localhost\Client\TrustedHosts <device_ip> -Concatenate -Force`
@@ -243,5 +247,4 @@ Windows PowerShell 및 SSL을 사용하여 원격 호스트 또는 클라이언�
 
 * [Windows PowerShell을 사용하여 StorSimple 장치를 관리하는 방법](storsimple-8000-windows-powershell-administration.md)을 자세히 알아봅니다.
 * [StorSimple 장치 관리자 서비스를 사용하여 StorSimple 장치를 관리하는 방법](storsimple-8000-manager-service-administration.md)에 대해 자세히 알아봅니다.
-
 

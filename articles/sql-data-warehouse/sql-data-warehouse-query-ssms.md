@@ -1,32 +1,25 @@
 ---
-title: "Azure SQL Data Warehouse에 연결 - SSMS | Microsoft Docs"
-description: "SSMS(SQL Server Management Studio)를 사용하여 Azure SQL Data Warehouse에 연결하고 쿼리합니다."
+title: Azure SQL Data Warehouse에 연결 - SSMS | Microsoft Docs
+description: SSMS(SQL Server Management Studio)를 사용하여 Azure SQL Data Warehouse에 연결하고 쿼리합니다.
 services: sql-data-warehouse
-documentationcenter: 
-author: antvgski
-manager: jhubbard
-editor: 
-ms.assetid: 299e50b3-e68a-471c-8aee-b0b9874781bd
+author: kavithaj
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: data-services
-ms.custom: connect
-ms.date: 10/31/2016
-ms.author: anvang;barbkess
-ms.translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 3cf78b59dc2dd010fdf4f480b09b3f80def1e62d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/03/2017
-
-
+ms.topic: conceptual
+ms.component: consume
+ms.date: 04/17/2018
+ms.author: kavithaj
+ms.reviewer: igorstan
+ms.openlocfilehash: f4b960115da3d30d355768498ae95270acaef49b
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="connect-to-sql-data-warehouse-with-sql-server-management-studio-ssms"></a>SSM(SQL Server Management Studio)를 사용하여 SQL Data Warehouse에 연결
 > [!div class="op_single_selector"]
 > * [Power BI](sql-data-warehouse-get-started-visualize-with-power-bi.md)
-> * [Azure 기계 학습](sql-data-warehouse-get-started-analyze-with-azure-machine-learning.md)
+> * [Azure Machine Learning](sql-data-warehouse-get-started-analyze-with-azure-machine-learning.md)
 > * [Visual Studio](sql-data-warehouse-query-visual-studio.md)
 > * [sqlcmd](sql-data-warehouse-get-started-connect-sqlcmd.md) 
 > * [SSMS](sql-data-warehouse-query-ssms.md)
@@ -42,7 +35,7 @@ SSMS(SQL Server Management Studio)를 사용하여 Azure SQL Data Warehouse에 �
 * SSMS(SQL Server Management Studio) 설치됨. 아직 없는 경우 무료로 [SSMS를 설치][Install SSMS]합니다.
 * 정규화된 SQL 서버 이름. 이를 찾으려면 [SQL Data Warehouse에 연결][Connect to SQL Data Warehouse]을 참조하세요.
 
-## <a name="1-connect-to-your-sql-data-warehouse"></a>1. SQL 데이터 웨어하우스에 연결
+## <a name="1-connect-to-your-sql-data-warehouse"></a>1. SQL Data Warehouse에 연결
 1. SSMS를 엽니다.
 2. 개체 탐색기를 엽니다. 이를 수행하려면 **파일** > **개체 탐색기 연결**을 선택합니다.
    
@@ -91,7 +84,7 @@ Azure Active Directory 인증을 위한 환경을 구성하려면 [SQL Data Ware
 
 <!--Other-->
 [Azure portal]: https://portal.azure.com
-[Install SSMS]: https://msdn.microsoft.com/en-US/library/hh213248.aspx
+[Install SSMS]: https://msdn.microsoft.com/library/hh213248.aspx
 
 
 <!--Image references-->
@@ -102,4 +95,3 @@ Azure Active Directory 인증을 위한 환경을 구성하려면 [SQL Data Ware
 [4]: media/sql-data-warehouse-query-ssms/new-query.png
 [5]: media/sql-data-warehouse-query-ssms/execute-query.png
 [6]: media/sql-data-warehouse-query-ssms/results.png
-

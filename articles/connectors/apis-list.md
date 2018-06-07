@@ -1,11 +1,11 @@
 ---
-title: "Azure Logic Apps용 커넥터 | Microsoft Docs"
-description: "사용 가능한 모든 Microsoft 관리 커넥터 중에 선택하여 논리 앱을 빌드하고 만들기"
+title: Azure Logic Apps용 커넥터 | Microsoft Docs
+description: 사용 가능한 모든 Microsoft 커넥터 중에 선택하여 논리 앱을 빌드하고 만들기
 services: logic-apps
-documentationcenter: 
-author: MandiOhlinger
+documentationcenter: ''
+author: ecfan
 manager: anneta
-editor: 
+editor: ''
 tags: connectors
 ms.assetid: f1f1fd50-b7f9-4d13-824a-39678619aa7a
 ms.service: logic-apps
@@ -14,21 +14,25 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: get-started-article
 ms.date: 06/21/2017
-ms.author: mandia; ladocs
+ms.author: estfan; ladocs
+ms.openlocfilehash: a17d887e829252231e0f2e0bac137bd63a24e0d9
+ms.sourcegitcommit: d74657d1926467210454f58970c45b2fd3ca088d
 ms.translationtype: HT
-ms.sourcegitcommit: 54774252780bd4c7627681d805f498909f171857
-ms.openlocfilehash: c14ac7592efabfec8668d7437463e2d8771ee072
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/28/2018
 ---
 # <a name="connectors-list"></a>커넥터 목록
-> [!TIP]
-> 이 토픽의 [A-Z 전체 목록](#az)은 Logic Apps에서 사용할 수 있는 모든 커넥터를 나열합니다. [커넥터 세부 정보](/connectors/)에는 swagger에 정의된 모든 트리거 및 작업이 나열되며 각 커넥터에 대한 제한도 나열됩니다.
+각 커넥터의 Swagger 설명과 모든 커넥터 제한에서 정의된 트리거 및 작업을 찾으려면 [커넥터 세부 정보](/connectors/)를 참조하세요.
 
-커넥터는 논리 앱을 만들 때 필수적인 부분입니다. 이러한 커넥터를 사용하면 온-프레미스 및 클라우드 응용 프로그램을 확장하여 새로 만든 데이터와 기존에 갖고 있던 데이터로 여러 가지 일을 할 수 있습니다. 커넥터는 다음 범주에 제공됩니다. 
+커넥터는 논리 앱을 만들 때 필수적인 부분입니다. 이러한 커넥터를 사용하면 온-프레미스 및 클라우드 응용 프로그램을 확장하여 새로 만든 데이터와 기존에 갖고 있던 데이터로 다양한 일을 할 수 있습니다. 커넥터는 기본 제공 작업 또는 관리 커넥터로 사용할 수 있습니다.
 
-* **표준 커넥터**: 논리 앱을 만들 때 자동으로 제공되고 포함됩니다. Service Bus, Power BI, Oracle Database, OneDrive 등을 예로 들 수 있습니다.
+**기본 제공 작업**: Logic Apps 엔진 자체는 끝점에 대한 통신 및 태스크 수행을 위한 기본 제공 작업을 제공합니다. 예를 들어, HTTP 끝점, Azure Functions, Azure API Management 작업 호출 뿐만 아니라 데이터 작업 및 변수를 사용하여 메시지를 조작하기 위해 이러한 작업을 사용할 수 있습니다.
+
+**관리 커넥터**: Logic Apps 서비스에서 호스트하고 관리하는 API 연결을 만들어 다양한 서비스를 위한 API에 대한 액세스를 제공합니다. 관리 커넥터는 다음 범주로 분류됩니다.
+
+* **표준 커넥터**: 논리 앱을 만들 때 자동으로 제공되고 포함됩니다. Service Bus, Power BI, OneDrive 등을 예로 들 수 있습니다.
+
+* **온-프레미스 커넥터**: [온-프레미스 데이터 게이트웨이][gatewaydoc]를 사용하여 온-프레미스 서버 응용 프로그램에 연결합니다. 온-프레미스 커넥터는 SharePoint Server, SQL Server, Oracle DB, 파일 공유 등과 같은 서버 응용 프로그램에 대한 연결을 포함합니다.
 
 * **통합 계정 커넥터**: 통합 계정을 구입할 때 제공됩니다. 이러한 커넥터를 사용하면 XML을 변환하여 유효성을 검사하고, AS2/X12/EDIFACT를 사용하여 기업 간 메시지를 처리하고, 플랫 파일을 인코딩 및 디코딩할 수 있습니다. BizTalk Server를 작업할 때 이러한 커넥터는 BizTalk 워크플로를 Azure로 확장하는 데 적합합니다.  
 
@@ -36,52 +40,57 @@ ms.lasthandoff: 07/28/2017
 
 * **엔터프라이즈 커넥터**: MQ 및 SAP가 포함됩니다. 추가 비용 지불 시 사용할 수 있습니다. 
 
-비용에 대한 자세한 내용은 [Logic Apps 가격 책정](https://azure.microsoft.com/pricing/details/logic-apps/) 및 [가격 책정 모델](../logic-apps/logic-apps-pricing.md)을 참조하세요. 
+비용에 대한 자세한 내용은 Logic Apps에 대한 [가격 책정 세부 정보](https://azure.microsoft.com/pricing/details/logic-apps/) 및 [가격 책정 모델](../logic-apps/logic-apps-pricing.md)을 참조하세요. 
 
 ## <a name="popular-connectors"></a>인기 있는 커넥터
-이러한 커넥터를 사용하여 데이터와 정보를 성공적으로 처리하는 수천 개의 응용 프로그램과 수백만 개의 실행이 있습니다. 다음 테이블에는 사용자들에게 가장 인기 있고 많이 사용되는 일부 커넥터가 나열되어 있습니다.
+이러한 커넥터를 사용하여 데이터와 정보를 성공적으로 처리하는 수천 개의 응용 프로그램과 수백만 개의 실행이 있습니다. 
+
+### <a name="built-in-actions"></a>기본 제공 작업
+Logic Apps 엔진은 데이터를 조작하고, HTTP를 통해 통신하고, 논리 앱 정의의 흐름을 제어할 수 있는 작업을 제공합니다. 이러한 작업 중 일부는 다음을 포함합니다.
 
 | |  |  |  |
 | --- | --- | --- | --- |
-| [![API 아이콘][AzureBlobStorageicon]<br/>**Azure Blob<br/>Storage**][AzureBlobStoragedoc] | 저장소 계정을 사용하여 작업을 자동화하려는 경우 이 커넥터를 자세히 살펴보아야 합니다. CRUD(만들기, 읽기, 업데이트, 삭제) 작업을 지원합니다. | [![API 아이콘][Azure-Functionsicon]<br/>**Azure Functions**][azure-functionsdoc] | C# 또는 node.js의 사용자 지정 코드 조각을 실행하는 함수를 만들고 논리 앱에서 이러한 함수를 사용합니다.  |
-| [![API 아이콘][Dynamics-365icon]<br/>**Dynamics 365<br/>CRM Online**][Dynamics-365doc] | 가장 많이 요청되는 커넥터 중 하나입니다. 리드가 포함된 워크플로를 자동화하는 데 도움이 되는 트리거와 작업 등을 갖고 있습니다. | [![API 아이콘][Event-Hubs-icon]<br/>**Event Hubs**][event-hubs-doc] | Event Hub의 이벤트를 사용하고 게시합니다. 예를 들어 Event Hubs를 사용하여 논리 앱에서 출력을 가져온 다음 실시간 분석 공급자에게 보낼 수 있습니다. |
-| [![API 아이콘][FTPicon]<br/>**FTP**][FTPdoc] | 인터넷에서 FTP 서버에 액세스할 수 있는 경우 파일 및 폴더를 작업하도록 워크플로를 자동화할 수 있습니다. <br/><br/>SFTP는 SFTP 커넥터에도 제공됩니다. | [![API 아이콘][HTTPicon]<br/>**HTTP**][httpdoc] | 논리 앱을 사용하여 HTTP를 통해 끝점과 통신합니다. |
-| [![API 아이콘][Office-365-Outlookicon]<br/>**Office 365<br/>Outlook**][office365-outlookdoc] | 워크플로 내에서 Office 365 전자 메일 및 이벤트를 사용하는 많은 트리거와 많은 작업이 있습니다. <br/><br/>이 커넥터는 휴가 요청, 경비 보고서 등을 승인하는 *승인 전자 메일* 작업을 포함하고 있습니다. <br/><br/>Office 365 사용자에게는 Office 365 사용자 커넥터도 제공됩니다.| [![API 아이콘][HTTP-Requesticon]<br/>**요청/응답**][HTTP-Requestdoc] | 이 커넥터는 HTTPS URL을 제공합니다. 논리 앱이 이 URL에 대한 요청을 받으면 논리 앱이 시작됩니다. |
-| [![API 아이콘][Salesforceicon]<br/>**Salesforce**][salesforcedoc] | Salesforce 계정으로 간편하게 로그인하여 리드 등의 개체에 액세스할 수 있습니다. |  [![API 아이콘][Service-Busicon]<br/>**Service Bus**][Service-Busdoc] | 논리 앱 내에서 가장 인기 있는 커넥터이며 비동기 메시지를 수행하고 큐, 구독 및 토픽을 게시/구독하는 트리거와 작업을 포함하고 있습니다. |
-|  [![API 아이콘][SharePointicon]<br/>**SharePoint<br/>온라인**][SharePointdoc] | SharePoint로 작업을 수행하며 자동화가 도움이 되는 경우 이 커넥터를 자세히 살펴보시기 바랍니다. 온-프레미스 SharePoint 및 SharePoint Online과 함께 사용할 수 있습니다. | [![API 아이콘][SQL-Servericon]<br/>**SQL Server**][SQL-Serverdoc] | 가장 많이 사용되는 커넥터 중 하나이며, 온-프레미스 SQL Server 및 Azure SQL Database에 연결할 수 있습니다. | 
-| [![API 아이콘][Twittericon]<br/>**Twitter**][Twitterdoc] | Twitter 계정으로 간단하게 로그인한 후 새 트윗이 게시될 때 워크플로를 시작합니다. 그런 다음 SQL 데이터베이스 또는 SharePoint 목록에 이러한 트윗을 저장합니다. | | | 
+| [![API 아이콘][HTTPicon]<br/>**HTTP**][httpdoc] | 논리 앱을 사용하여 HTTP를 통해 끝점과 통신합니다.| [![API 아이콘][Azure-Functionsicon]<br/>**Azure Functions**][azure-functionsdoc] | C# 또는 node.js의 사용자 지정 코드 조각을 실행하는 함수를 만들고 논리 앱에서 이러한 함수를 사용합니다.  |
+| [![API 아이콘][HTTP-Requesticon]<br/>**요청**][HTTP-Requestdoc] | 일반적으로 다른 응용 프로그램의 webhook로 사용되는 호출 가능한 HTTPS URL을 제공합니다. 논리 앱이 이 URL에 대한 요청을 받으면 논리 앱이 시작됩니다. | [![API 아이콘][Recurrenceicon]<br/>**일정**][recurrencedoc] | 간단하거나 복잡한 되풀이 일정에 따라 논리 앱을 시작합니다. 예를 들어, 오전 9시와 오후 5시 사이의 매월 마지막 주 금요일에서 매일 되풀이에서 매시간 되풀이까지 간단한 일정을 만듭니다. |
+| [![API 아이콘][CallLogicApp-icon]<br/>**호출<br/>논리 앱**][nested-logic-appdoc] | 중첩된 논리 앱을 호출합니다. 요청 트리거를 사용하여 중첩된 논리 앱으로 논리 앱을 호출할 수 있습니다.| [![API 아이콘][API/Web-Appicon]<br/>**API 앱**][api/web-appdoc] | App Service API 앱을 호출합니다. Swagger를 사용하는 API Apps는 다른 첫 번째 클래스 작업과 같이 렌더링합니다.|
 
-## <a name="integration-account-connectors"></a>통합 계정 커넥터 
+### <a name="standard-connectors"></a>표준 커넥터
+다음 테이블에는 사용자들에게 가장 인기 있고 많이 사용되는 일부 커넥터가 나열되어 있습니다.
+
+| |  |  |  |
+| --- | --- | --- | --- |
+| [![API 아이콘][AzureBlobStorageicon]<br/>**Azure Blob<br/>Storage**][AzureBlobStoragedoc] | 저장소 계정을 사용하여 작업을 자동화하려는 경우 이 커넥터를 자세히 살펴보아야 합니다. CRUD(만들기, 읽기, 업데이트, 삭제) 작업을 지원합니다. | [![API 아이콘][Dynamics-365icon]<br/>**Dynamics 365<br/>CRM Online**][Dynamics-365doc] | 가장 많이 요청되는 커넥터 중 하나입니다. 리드가 포함된 워크플로를 자동화하는 데 도움이 되는 트리거와 작업 등을 갖고 있습니다. |
+| [![API 아이콘][Event-Hubs-icon]<br/>**Event Hubs**][event-hubs-doc] | Event Hub의 이벤트를 사용하고 게시합니다. 예를 들어 Event Hubs를 사용하여 논리 앱에서 출력을 가져온 다음 실시간 분석 공급자에게 보낼 수 있습니다. | [![API 아이콘][FTPicon]<br/>**FTP**][FTPdoc] | 인터넷에서 FTP 서버에 액세스할 수 있는 경우 파일 및 폴더를 작업하도록 워크플로를 자동화할 수 있습니다. <br/><br/>SFTP는 SFTP 커넥터에도 제공됩니다. |
+| [![API 아이콘][Office-365-Outlookicon]<br/>**Office 365<br/>Outlook**][office365-outlookdoc] | 워크플로 내에서 Office 365 전자 메일 및 이벤트를 사용하는 많은 트리거와 많은 작업이 있습니다. <br/><br/>이 커넥터는 휴가 요청, 경비 보고서 등을 승인하는 *승인 전자 메일* 작업을 포함하고 있습니다. <br/><br/>Office 365 사용자에게는 Office 365 사용자 커넥터도 제공됩니다.| [![API 아이콘][Salesforceicon]<br/>**Salesforce**][salesforcedoc] | Salesforce 계정으로 간편하게 로그인하여 리드 등의 개체에 액세스할 수 있습니다. | 
+| [![API 아이콘][Service-Busicon]<br/>**Service Bus**][Service-Busdoc] | 논리 앱 내에서 가장 인기 있는 커넥터이며 비동기 메시지를 수행하고 큐, 구독 및 토픽을 게시/구독하는 트리거와 작업을 포함하고 있습니다. |  [![API 아이콘][SharePointicon]<br/>**SharePoint<br/>Online**][SharePointdoc] | SharePoint로 작업을 수행하며 자동화가 도움이 되는 경우 이 커넥터를 자세히 살펴보시기 바랍니다. 온-프레미스 SharePoint 및 SharePoint Online과 함께 사용할 수 있습니다. |
+| [![API 아이콘][SQL-Servericon]<br/>**SQL Server**][SQL-Serverdoc] | 가장 많이 사용되는 커넥터 중 하나이며, 온-프레미스 SQL Server 및 Azure SQL Database에 연결할 수 있습니다. | [![API 아이콘][Twittericon]<br/>**Twitter**][Twitterdoc] | Twitter 계정으로 간단하게 로그인한 후 새 트윗이 게시될 때 워크플로를 시작합니다. 그런 다음 SQL 데이터베이스 또는 SharePoint 목록에 이러한 트윗을 저장합니다. | 
+
+### <a name="on-premises-connectors"></a>온-프레미스 커넥터 
+
+온-프레미스 커넥터는 온-프레미스 서버의 데이터에 대한 액세스를 제공합니다.  온-프레미스 서버에 대한 연결에는 네트워크 인프라를 구성할 필요가 없는 보안 통신 채널을 제공하는 [온-프레미스 데이터 게이트웨이][gatewaydoc]가 필요합니다.  커넥터의 일부는 다음을 포함합니다.
+
+|  |  |  |  |
+| --- | --- | --- | --- |
+| [![API 아이콘][db2icon]<br/>**DB2**][db2doc] | [![API 아이콘][oracle-DB-icon]<br/>**Oracle DB**][oracle-db-doc] | [![API 아이콘][sharepointicon]<br/>**SharePoint</br> 서버**][sharepointserver] | [![API 아이콘][filesystem-icon]<br/>**파일</br> 시스템**][filesystemdoc] |
+[![API 아이콘][sql-servericon]<br/>**SQL</br> Server**][sql-serverdoc] | ![API 아이콘][Biztalk-Servericon]<br/>**BizTalk</br> Server**| |
+
+### <a name="integration-account-connectors"></a>통합 계정 커넥터 
 
 EIP(엔터프라이즈 통합 팩)는 BizTalk Server 커뮤니티에 잘 알려진 커넥터를 포함하고 있습니다. [통합 계정](../logic-apps/logic-apps-enterprise-integration-create-integration-account.md)을 구입할 때 다음 커넥터도 함께 제공됩니다. 
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| [![API 아이콘][as2icon]<br/>**AS2</br>디코딩**][as2decode] | [![API 아이콘][as2icon]<br/>**AS2</br>인코딩**][as2encode] | [![API 아이콘][x12icon]<br/>**EDIFACT</br>디코딩**][EDIFACTdecode] | [![API 아이콘][x12icon]<br/>**EDIFACT</br>인코딩**][EDIFACTencode] |
-[![API 아이콘][flatfileicon]<br/>**플랫 파일</br>인코딩**][flatfiledoc] | [![API 아이콘][flatfiledecodeicon]<br/>**플랫 파일</br>디코딩**][flatfiledecodedoc] | [![API 아이콘][integrationaccounticon]<br/>**통합<br/>계정**][integrationaccountdoc] | [![API 아이콘][xmltransformicon]<br/>**변환<br/>XML**][xmltransformdoc] |
-| [![API 아이콘][x12icon]<br/>**X12</br>디코딩**][x12decode] | [![API 아이콘][x12icon]<br/>**X12</br>인코딩**][x12encode] | [![API 아이콘][xmlvalidateicon]<br/>**XML <br/>유효성 검사**][xmlvalidatedoc] | |
+| [![API 아이콘][as2icon]<br/>**AS2</br> 디코딩**][as2decode] | [![API 아이콘][as2icon]<br/>**AS2</br> 인코딩**][as2encode] | [![API 아이콘][x12icon]<br/>**EDIFACT</br> 디코딩**][EDIFACTdecode] | [![API 아이콘][x12icon]<br/>**EDIFACT</br> 인코딩**][EDIFACTencode] |
+[![API 아이콘][flatfileicon]<br/>**플랫 파일</br> 인코딩**][flatfiledoc] | [![API 아이콘][flatfiledecodeicon]<br/>**플랫 파일</br> 디코딩**][flatfiledecodedoc] | [![API 아이콘][integrationaccounticon]<br/>**통합<br/>계정**][integrationaccountdoc] | [![API 아이콘][xmltransformicon]<br/>**변형<br/>XML**][xmltransformdoc] |
+| [![API 아이콘][x12icon]<br/>**X12</br> 디코딩**][x12decode] | [![API 아이콘][x12icon]<br/>**X12</br> 인코딩**][x12encode] | [![API 아이콘][xmlvalidateicon]<br/>**XML <br/>유효성 검사**][xmlvalidatedoc] | [![API 아이콘][liquidicon]<br/>**JSON<br/> 변환**][JSONliquidtransformdoc] |
 
-## <a name="enterprise-connectors"></a>엔터프라이즈 커넥터
+### <a name="enterprise-connectors"></a>엔터프라이즈 커넥터
 
 논리 앱 내의 엔터프라이즈 응용 프로그램에 연결합니다.
 
 |  |  |
 | --- | --- |
 |[![API 아이콘][MQicon]<br/>**MQ**][mqdoc]|[![API 아이콘][SAPicon]<br/>**SAP**][sapconnector]|
-
-
-## <a name="az"></a>A-Z 전체 목록
-
-[커넥터 세부 정보](/connectors/)에는 swagger에 정의된 모든 트리거 및 작업이 나열되며 각 커넥터에 대한 제한도 나열됩니다.
-
-| | | | | | | | | | | | | |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| [**1**](#1) | [**A**](#a) | [**B**](#b) | [**C**](#c) | [**D**](#d) | [**E**](#e) | [**F**](#f) | [**G**](#g) | [**H**](#h) | [**I**](#i) | [**J**](#j) | [**L**](#l) | [**M**](#m) |
-| [**N**](#n) | [**O**](#o) | [**P**](#p) | [**R**](#r) | [**S**](#s) | [**T**](#t) | [**U**](#u) | [**V**](#v) | [**W**](#w) | [**X**](#x) | [**Y**](#y) | [**Z**](#z) | | 
-
-| | |
-|---|---|
-|<a name="1"></a>10to8 약속 일정<br/><br/><a name="a"></a>Act!<br/>Adobe Creative Cloud<br/>appFigures<br/>[AS2][as2doc]<br/>Asana<br/>Azure AD(Active Directory)<br/>Azure API Management<br/>Azure App Services<br/>Azure 응용 프로그램<br/>Azure Automation<br/>[Azure Blob Storage][azureblobstoragedoc]<br/>Azure 데이터 레이크<br/>Azure DocumentDB(Cosmos DB)<br/>[Azure Functions][azure-functionsdoc]<br/>[Azure Logic Apps][nested-logic-appdoc]<br/>AzureML<br/>Azure 큐<br/>Azure 리소스 관리자<br/>[Azure SQL Database][sql-serverdoc]<br/><br/><a name="b"></a>Basecamp 2<br/>Basecamp 3<br/>Batch<br/>벤치마크 전자 메일<br/>Bing Search<br/>Bitbucket<br/>Bitly<br/>BizTalk Server<br/>Blogger<br/>Box<br/>Buffer<br/><br/><a name="c"></a>Calendly<br/>Campfire<br/>Capsule CRM<br/>Chatter<br/>Cognito 양식<br/>Cognitive Services Computer Vision API<br/>Cognitive Services Face API<br/>Cognitive Services LUIS<br/>Cognitive Services 텍스트 분석<br/>Common Data Service<br/>콘텐츠 변환<br/>제어-종료<br/>[사용자 지정 API/웹앱][api/web-appdoc]<br/><br/><a name="d"></a>데이터 작업<br/>[DB2][db2doc]<br/>Disqus<br/>DocuSign<br/>Do Until<br/>Dropbox<br/>[Dynamics 365 CRM Online][Dynamics-365doc]<br/>Dynamics 365 for Financials<br/>Dynamics 365 for Operations<br/>동적 NAV<br/><br/><a name="e"></a>Easy Redmine<br/>EDIFACT<br/>[Event Hubs][event-hubs-doc]<br/>Eventbrite<br/><br/><a name="f"></a>Facebook<br/>[파일 시스템][filesystemdoc]<br/>[플랫 파일][flatfiledoc]<br/>FreshBooks<br/>Freshdesk<br/>Freshservice<br/>[FTP][ftpdoc]<br/><br/><a name="g"></a>GitHub<br/>Gmail<br/>Google 캘린더<br/>Google 연락처<br/>Google 드라이브<br/>Google Sheets<br/>Google 태스크<br/>GoToMeeting<br/>GoToTraining<br/>GoToWebinar<br/><br/><a name="h"></a>Harvest<br/>HelloSign<br/>HipChat<br/>[HTTP][httpdoc]<br/>[HTTP + Swagger][http-swaggerdoc]<br/>[HTTP Webhook][webhookdoc]<br/><br/><a name="i"></a>[Informix][informixdoc]<br/>Infusionsoft<br/>Inoreader<br/>Insightly<br/>Instagram<br/>Instapaper<br/>통합 계정<br/>Intercom | <a name="j"></a>JotForm<br/>JIRA<br/><br/><a name="l"></a>LeanKit<br/>LiveChat<br/><br/><a name="m"></a>MailChimp<br/>Mandrill<br/>중간<br/>Microsoft Forms<br/>Microsoft 팀<br/>Microsoft Translator<br/>[MQ][mqdoc]<br/>MSN 날씨<br/>Muhimbi PDF<br/>MySQL<br/><br/><a name="n"></a>Nexmo<br/><br/><a name="o"></a>[Office 365 Outlook][office365-outlookdoc]<br/>Office 365 사용자<br/>Office 365 비디오<br/>OneDrive<br/>OneDrive for Business<br/>OneNote(Business)<br/>[Oracle Database][oracle-db-doc]<br/>Outlook 고객 관리자<br/>Outlook 작업<br/>Outlook.com<br/><br/><a name="p"></a>PagerDuty<br/>Parserr<br/>Paylocity<br/>Pinterest<br/>Pipedrive<br/>Pivotal Tracker<br/>Planner<br/>PostgreSQL<br/>Power BI<br/>Project Online<br/><br/><a name="r"></a>Redmine<br/>[요청/응답][http-requestdoc]<br/>RSS<br/><br/><a name="s"></a>[Salesforce][salesforcedoc]<br/>[SAP 응용 프로그램 서버][sapconnector]<br/>[SAP 메시지 서버][sapconnector]<br/>[일정][recurrencedoc]<br/>범위<br/>SendGrid<br/>일괄 처리할 메시지 보내기<br/>[Service Bus][service-busdoc]<br/>SFTP<br/>[SharePoint Online][sharepointdoc]<br/>[SharePoint Server][sharepointserver]<br/>Slack<br/>Smartsheet<br/>SMTP<br/>SparkPost<br/>[SQL Server][sql-serverdoc]<br/>스트라이프<br/>SurveyMonkey<br/>Switch Case<br/><br/><a name="t"></a>Teamwork 프로젝트<br/>Teradata<br/>Todoist<br/>Toodledo<br/>[XML 변환][xmltransformdoc]<br/>Trello<br/>Twilio<br/>[Twitter][twitterdoc]<br/>Typeform<br/><br/><a name="u"></a>UserVoice<br/><br/><a name="v"></a>변수<br/>Vimeo<br/>Visual Studio Team Services<br/><br/><a name="w"></a>WebMerge<br/>WordPress<br/>Wunderlist<br/><br/><a name="x"></a>[X12][x12doc]<br/>[XML 유효성 검사][xmlvalidatedoc]<br/><br/><a name="y"></a>Yammer<br/>YouTube<br/><br/><a name="z"></a>Zendesk |
 
 > [!TIP]
 > Azure 계정에 등록하기 전에 Azure Logic Apps를 시작하려면 [Logic Apps 사용해 보기](https://tryappservice.azure.com/?appservice=logic)로 이동하세요. 단기 시작 논리 앱을 즉시 만들 수 있습니다. 신용 카드는 필요하지 않으며 약정도 필요하지 않습니다.
@@ -117,13 +126,13 @@ Logic Apps에는 다음과 같은 종류의 트리거가 포함되어 있습니�
 | **배열 필터링**(쿼리) | 결과 집합을 관심 있는 항목으로 필터링합니다. 예를 들어 `#Azure`로 모든 트윗을 검색한 후 반환된 트윗을 "필터링"하여 `Tweeted_by_followers > 50`인 결과만 반환합니다. |
 | **Join** | 구분 기호를 사용하여 배열을 조인합니다. 예를 들어 핵심 문구 검색 작업은 핵심 문구 배열을 반환합니다. `,` 또는 비슷한 것을 사용하여 핵심 문구를 "조인"할 수 있습니다. 따라서 `["Some", "Phrase"]` 대신 `"Some, Phrase"`가 있습니다. |
 | **JSON 구문 분석** | 디자이너에서 JSON 개체의 값을 구문 분석하고 액세스합니다. 예를 들어 Azure Function이 JSON 페이로드를 반환하는 경우 해당 페이로드를 구문 분석하여 나중에 다른 단계에서 JSON 속성에 액세스할 수 있습니다. 또한 이 작업은 JSON이 런타임에 지정된 스키마와 일치하는지 확인합니다. | 
-| **선택** | 추가 처리를 위해 배열의 특정 속성을 선택합니다. SQL에서 "레코드 나열" 작업을 수행했더니 15개 열이 반환되는 경우 그 중에서 추가로 처리할 열 몇 개만 선택합니다. 출력은 사용자가 선택하는 속성만 포함하는 배열입니다. |
+| **Select** | 추가 처리를 위해 배열의 특정 속성을 선택합니다. SQL에서 "레코드 나열" 작업을 수행했더니 15개 열이 반환되는 경우 그 중에서 추가로 처리할 열 몇 개만 선택합니다. 출력은 사용자가 선택하는 속성만 포함하는 배열입니다. |
 
 ## <a name="custom-connectors-and-azure-certification"></a>사용자 지정 커넥터 및 Azure 인증 
 
-사용자 지정 코드를 실행하거나 커넥터로 사용할 수 없는 API를 호출하려면 [REST 기반 API Apps를 사용자 지정 커넥터로 만들어](../logic-apps/logic-apps-create-api-app.md) Logic Apps 플랫폼을 확장할 수 있습니다. 
+사용자 지정 코드를 실행하거나 커넥터로 사용할 수 없는 API를 호출하려면 [REST 기반 API Apps를 만들어](../logic-apps/logic-apps-create-api-app.md) Logic Apps 플랫폼을 확장할 수 있습니다. 구독에서 모든 논리 앱을 사용할 수 있도록 하는 고유한 [사용자 지정 커넥터](../logic-apps/custom-connector-overview.md)를 만들 수도 있습니다.
 
-사용자 지정 API Apps를 Azure에서 공개하고 사용할 수 있게 하려면 [Microsoft Azure 인증 프로그램](https://azure.microsoft.com/marketplace/programs/certified/logic-apps/)에 추천을 제출합니다.
+사용자 지정 API Apps를 Azure에서 공개하고 사용할 수 있게 하려면 [Microsoft 인증을 위해 커넥터를 제출](../logic-apps/custom-connector-submit-certification.md)합니다.
 
 ## <a name="get-help"></a>도움말 보기
 
@@ -134,12 +143,13 @@ Azure Logic Apps 및 커넥터 개선에 도움을 주려면 [Logic Apps 사용�
 커넥터 항목이나 중요하다고 생각 한 세부 정보를 빠뜨린 것이 있습니까? 그렇다면 이 기존 항목에 추가하거나 직접 작성해주세요. 설명서는 오픈 소스이며 GitHub에서 호스트됩니다. [GitHub 리포지토리](https://github.com/Microsoft/azure-docs)에서 시작하세요. 
 
 ## <a name="next-steps"></a>다음 단계
-* [첫 번째 논리 앱 만들기](../logic-apps/logic-apps-create-a-logic-app.md)
+* [첫 번째 논리 앱 만들기](../logic-apps/quickstart-create-first-logic-app-workflow.md)
 * [논리 앱에 대한 사용자 지정 API 만들기](../logic-apps/logic-apps-create-api-app.md)
 * [논리 앱 모니터링](../logic-apps/logic-apps-monitor-your-logic-apps.md)
 
 <!--Connectors Documentation-->
 
+[gatewaydoc]: ../logic-apps/logic-apps-gateway-connection.md "온-프레미스 데이터 게이트웨이를 사용하여 논리 앱에서 온-프레미스 데이터 원본에 연결"
 [api/web-appdoc]: ../logic-apps/logic-apps-custom-hosted-api.md "App Service API Apps과 논리 앱 통합"
 [azureblobstoragedoc]: ./connectors-create-api-azureblobstorage.md "Azure Blob Storage 커넥터와 Blob 컨테이너의 파일 관리"
 [azure-functionsdoc]: ../logic-apps/logic-apps-azure-functions.md "논리 앱을 Azure Functions와 통합"
@@ -179,6 +189,7 @@ Azure Logic Apps 및 커넥터 개선에 도움을 주려면 [Logic Apps 사용�
 [EDIFACTdecode]: ../logic-apps/logic-apps-enterprise-integration-EDIFACT-decode.md "엔터프라이즈 통합 EDIFACT 디코딩에 대해 알아봅니다."
 [EDIFACTencode]: ../logic-apps/logic-apps-enterprise-integration-EDIFACT-encode.md "엔터프라이즈 통합 EDIFACT 인코딩에 대해 알아봅니다."
 [integrationaccountdoc]: ../logic-apps/logic-apps-enterprise-integration-metadata.md "통합 계정에서 스키마, 맵, 파트너 등을 조회"
+[JSONliquidtransformdoc]: ../logic-apps/logic-apps-enterprise-integration-liquid-transform.md "Liquid를 사용한 JSON 변환에 대해 알아보기"
 
 
 [boxDoc]: ./connectors-create-api-box.md "상자에 연결합니다. 파일 업로드, 가져오기, 삭제, 나열 등"
@@ -217,11 +228,11 @@ Azure Logic Apps 및 커넥터 개선에 도움을 주려면 [Logic Apps 사용�
 
 <!--Icon references-->
 [appFiguresicon]: ./media/apis-list/appfigures.png
+[AppServices-icon]: ./media/apis-list/AppServices.png
 [Asanaicon]: ./media/apis-list/asana.png
 [Azure-Automation-icon]: ./media/apis-list/azure-automation.png
 [AzureBlobStorageicon]: ./media/apis-list/azureblob.png
 [Azure-Data-Lake-icon]: ./media/apis-list/azure-data-lake.png
-[Azure-DocumentDBicon]: ./media/apis-list/azure-documentdb.png
 [Azure-MLicon]: ./media/apis-list/azureml.png
 [Azure-Resource-Manager-icon]: ./media/apis-list/azure-resource-manager.png
 [Azure-Queues-icon]: ./media/apis-list/azure-queues.png
@@ -241,6 +252,8 @@ Azure Logic Apps 및 커넥터 개선에 도움을 주려면 [Logic Apps 사용�
 [Easy-Redmineicon]: ./media/apis-list/easyredmine.png
 [Event-Hubs-icon]: ./media/apis-list/eventhubs.png
 [Facebookicon]: ./media/apis-list/facebook.png
+[FileSystem-icon]: ./media/apis-list/filesystem.png
+[FileSystemIcon]: ./media/apis-list/filesystem.png
 [FTPicon]: ./media/apis-list/ftp.png
 [GitHubicon]: ./media/apis-list/github.png
 [Google-Calendaricon]: ./media/apis-list/googlecalendar.png
@@ -294,10 +307,10 @@ Azure Logic Apps 및 커넥터 개선에 도움을 주려면 [Logic Apps 사용�
 [YouTubeicon]: ./media/apis-list/youtube.png
 
 <!-- Primitive Icons -->
-[API/Web-Appicon]: ./media/apis-list/api.png
+[API/Web-Appicon]: ./media/apis-list/appservices.png
 [Azure-Functionsicon]: ./media/apis-list/function.png
+[CallLogicApp-icon]: ./media/apis-list/calllogicapp.png
 [Delayicon]: ./media/apis-list/delay.png
-[FileSystemIcon]: ./media/apis-list/filesystem.png
 [HTTPicon]: ./media/apis-list/http.png
 [HTTP-Requesticon]: ./media/apis-list/request.png
 [HTTP-Responseicon]: ./media/apis-list/response.png
@@ -315,4 +328,4 @@ Azure Logic Apps 및 커넥터 개선에 도움을 주려면 [Logic Apps 사용�
 [xmlvalidateicon]: ./media/apis-list/xmlvalidation.png
 [xmltransformicon]: ./media/apis-list/xsltransform.png
 [integrationaccounticon]: ./media/apis-list/integrationaccount.png
-
+[liquidicon]: ./media/apis-list/liquidtransform.png

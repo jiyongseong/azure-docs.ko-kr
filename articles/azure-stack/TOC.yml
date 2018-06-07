@@ -1,0 +1,339 @@
+- name: Azure Stack 연산자 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: Azure Stack이란?
+      href: azure-stack-poc.md
+    - name: 릴리스 정보
+      items:
+        - name: 1804 업데이트
+          href: azure-stack-update-1804.md
+        - name: 1803 업데이트
+          href: azure-stack-update-1803.md
+        - name: 1802 업데이트
+          href: azure-stack-update-1802.md
+        - name: 1712 업데이트
+          href: azure-stack-update-1712.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: Azure 스택 평가
+      href: azure-stack-deploy-overview.md
+- name: 자습서
+  items:
+    - name: Virtual Machines 제공
+      href: azure-stack-tutorial-tenant-vm.md
+    - name: SQL 데이터베이스 제공
+      href: azure-stack-tutorial-sql-server.md
+    - name: Web Apps 제공
+      href: azure-stack-tutorial-app-service.md
+- name: 개념
+  items:
+    - name: 데이터 센터 통합
+      items:
+        - name: 일반 Azure 스택 통합 고려 사항
+          href: azure-stack-datacenter-integration.md
+        - name: Azure 스택 배포 연결 모델
+          href: azure-stack-connection-models.md
+        - name: 연결 된 배포 고려 사항
+          href: azure-stack-connected-deployment.md
+        - name: 연결이 끊긴된 배포 고려 사항
+          href: azure-stack-disconnected-deployment.md
+        - name: 데이터 센터 네트워크 통합
+          items:
+            - name: 네트워크 통합
+              href: azure-stack-network.md
+            - name: 테두리 연결
+              href: azure-stack-border-connectivity.md
+            - name: DNS 통합
+              href: azure-stack-integrate-dns.md
+            - name: 방화벽 통합
+              href: azure-stack-firewall.md
+              items:
+                - name: 끝점 게시
+                  href: azure-stack-integrate-endpoints.md
+        - name: Azure 스택 배포 PKI 요구 사항
+          href: azure-stack-pki-certs.md
+          items:
+            - name: PKI 인증서를 생성 합니다.
+              href: azure-stack-get-pki-certs.md
+            - name: Azure 스택 PKI 인증서를 준비 합니다.
+              href: azure-stack-prepare-pki-certs.md
+            - name: PKI 인증서의 유효성을 검사합니다
+              href: azure-stack-validate-pki-certs.md
+            - name: PKI 인증서를 수정 합니다.
+              href: azure-stack-remediate-certs.md
+            - name: 배포 리소스
+              items:
+                - name: 시작 AzsReadiness cmdlet 참조
+                  href: azure-stack-azsreadiness-cmdlet.md
+                - name: 준비 보고서 보기
+                  href: azure-stack-validation-report.md
+            - name: Id 통합
+              items:
+                - name: Id 공급자를 선택 합니다.
+                  href: azure-stack-integrate-identity.md
+                - name: Azure id 유효성 검사
+                  href: azure-stack-validate-identity.md
+        - name: Azure 등록 유효성 검사
+          href: azure-stack-validate-registration.md
+        - name: 외부 모니터링
+          href: azure-stack-integrate-monitor.md
+        - name: 보안 통합
+          href: azure-stack-integrate-security.md
+    - name: 서비스 정책
+      href: azure-stack-servicing-policy.md
+    - name: 주요 기능 및 개념
+      href: azure-stack-key-features.md
+    - name: 관리 기본 사항
+      href: azure-stack-manage-basics.md
+- name: 방법 가이드
+  items:
+    - name: 원격 분석 수집 구성
+      href: azure-stack-telemetry.md
+    - name: Azure 스택 등록
+      href: azure-stack-registration.md
+    - name: 관리
+      items:
+        - name: 지역 관리
+          href: azure-stack-region-management.md
+        - name: 관리자 포털 사용
+          href: azure-stack-manage-portals.md
+        - name: Azure Stack에 연결
+          href: azure-stack-connect-azure-stack.md
+        - name: 사용자용 CLI 사용
+          href: azure-stack-cli-admin.md
+        - name: 관리 환경 설정
+          items:
+            - name: Azure Stack PowerShell 설치
+              href: azure-stack-powershell-install.md
+            - name: 도구 다운로드
+              href: azure-stack-powershell-download.md
+            - name: PowerShell 구성 - 클라우드 운영자
+              href: azure-stack-powershell-configure-admin.md
+        - name: 권한 있는 액세스 끝점
+          href: azure-stack-privileged-endpoint.md
+        - name: 업데이트 관리
+          items:
+            - name: 업데이트 관리 개요
+              href: azure-stack-updates.md
+            - name: 업데이트 적용
+              href: azure-stack-apply-updates.md
+            - name: 업데이트 상태 모니터링
+              href: azure-stack-monitor-update.md
+        - name: 상태 및 경고 모니터링
+          href: azure-stack-monitor-health.md
+        - name: 네트워크 리소스 관리
+          href: azure-stack-viewing-public-ip-address-consumption.md
+        - name: Windows Azure 팩 VM 관리
+          href: azure-stack-manage-windows-azure-pack.md
+        - name: 시작 및 중지 Azure 스택
+          href: azure-stack-start-and-stop.md
+        - name: 용량 관리
+          items:
+            - name: 저장소 리소스 관리
+              href: azure-stack-manage-storage-accounts.md
+            - name: 저장소 용량 관리
+              href: azure-stack-manage-storage-shares.md
+            - name: 실제 메모리 용량 관리
+              href: azure-stack-manage-storage-physical-memory-capacity.md
+        - name: 하드웨어 교체
+          items:
+            - name: 노드 작업
+              href: azure-stack-node-actions.md
+            - name: 노드를 대체 합니다.
+              href: azure-stack-replace-node.md
+            - name: 디스크 교체
+              href: azure-stack-replace-disk.md
+            - name: 구성 요소 교체
+              href: azure-stack-replace-component.md
+        - name: Azure 스택 백업
+          href: azure-stack-backup-infrastructure-backup.md
+          items:
+            - name: 관리 콘솔에서 Azure 스택에 대 한 백업을 사용 하도록 설정
+              href: azure-stack-backup-enable-backup-console.md
+            - name: Azure 스택 powershell에 대 한 백업을 사용 하도록 설정
+              href: azure-stack-backup-enable-backup-powershell.md
+            - name: Azure 스택 백업
+              href: azure-stack-backup-back-up-azure-stack.md
+            - name: Azure 스택 파일 및 응용 프로그램을 백업 합니다.
+              href: ..\backup\backup-mabs-files-applications-azure-stack.md?toc=%2fazure%2fazure-stack%2ftoc.json
+            - name: 치명적인 데이터 손실 로부터 복구
+              href: azure-stack-backup-recover-data.md
+            - name: 백업 모범 사례
+              href: azure-stack-backup-best-practices.md
+            - name: 백업 참조
+              href: azure-stack-backup-reference.md
+    - name: '보안, 규정 준수 및 ID'
+      items:
+        - name: 보안 개요
+          href: azure-stack-security-foundations.md
+        - name: ID
+          items:
+            - name: Identity 개요
+              href: azure-stack-identity-overview.md
+            - name: Id 아키텍처
+              href: azure-stack-identity-architecture.md
+            - name: RBAC 관리
+              href: azure-stack-manage-permissions.md
+            - name: Azure AD 사용자 추가
+              href: azure-stack-add-new-user-aad.md
+            - name: AD FS 사용자 추가
+              href: azure-stack-add-users-adfs.md
+            - name: 서비스 주체 만들기
+              href: Azure-stack-create-service-principals.md
+            - name: 다중 테넌트 사용
+              href: azure-stack-enable-multitenancy.md
+        - name: 암호를 회전
+          href: azure-stack-rotate-secrets.md
+    - name: 서비스 제공
+      items:
+        - name: 서비스 제공 개요
+          href: azure-stack-offer-services-overview.md
+        - name: '계획, 제품 및 할당량 만들기'
+          items:
+            - name: '계획, 제안, 할당량 및 구독 개요'
+              href: azure-stack-plan-offer-quota-overview.md
+            - name: 계획 만들기
+              href: azure-stack-create-plan.md
+            - name: 제품 만들기
+              href: azure-stack-create-offer.md
+            - name: 제품 구독
+              href: azure-stack-subscribe-plan-provision-vm.md
+            - name: Azure Stack에서 제품 위임
+              href: azure-stack-delegated-provider.md
+            - name: 할당량 유형
+              href: azure-stack-quota-types.md
+        - name: PaaS 서비스 개요
+          href: azure-stack-tools-paas-services.md
+        - name: SQL PaaS로 제공
+          href: azure-stack-sql-resource-provider.md
+          items:
+            - name: SQL Server 리소스 공급자를 배포 합니다.
+              href: azure-stack-sql-resource-provider-deploy.md
+            - name: 호스팅 서버 추가
+              href: azure-stack-sql-resource-provider-hosting-servers.md
+            - name: SQL 데이터베이스 만들기
+              href: azure-stack-sql-resource-provider-databases.md
+            - name: SQL Server 리소스 공급자 업데이트
+              href: azure-stack-sql-resource-provider-update.md
+            - name: SQL Server 리소스 공급자를 유지 관리
+              href: azure-stack-sql-resource-provider-maintain.md
+            - name: SQL Server 리소스 공급자를 제거 합니다.
+              href: azure-stack-sql-resource-provider-remove.md
+        - name: PaaS로 MySQL을 제공 합니다.
+          href: azure-stack-mysql-resource-provider-deploy.md
+        - name: App Service를 PaaS로 제공
+          items:
+            - name: Azure Stack 개요에 대한 App Service
+              href: azure-stack-app-service-overview.md
+            - name: 용량 계획
+              href: azure-stack-app-service-capacity-planning.md
+            - name: 시작하기 전에
+              href: azure-stack-app-service-before-you-get-started.md
+            - name: 오류 도메인 간에 Azure 스택에 Azure 앱 서비스를 재배포 하는 방법
+              href: azure-stack-app-service-fault-domain-update.md
+            - name: App Service 리소스 공급자 배포
+              href: azure-stack-app-service-deploy.md
+            - name: App Service 오프라인 배포
+              href: azure-stack-app-service-deploy-offline.md
+            - name: 앱 서비스를 업데이트 합니다.
+              href: azure-stack-app-service-update.md
+            - name: 앱 서비스를 오프 라인으로 업데이트
+              href: azure-stack-app-service-update-offline.md
+            - name: 웹 작업자 역할 추가
+              href: azure-stack-app-service-add-worker-roles.md
+            - name: 배포 원본 구성
+              href: azure-stack-app-service-configure-deployment-sources.md
+            - name: Azure 스택 업데이트 1 릴리스 정보에 대 한 앱 서비스
+              href: azure-stack-app-service-release-notes-update-one.md
+            - name: Azure 스택 업데이트 2 릴리스 정보에 대 한 앱 서비스
+              href: azure-stack-app-service-release-notes-update-two.md
+        - name: 마켓플레이스 채우기
+          items:
+            - name: Marketplace 개요
+              href: azure-stack-marketplace.md
+            - name: 마켓플레이스 항목 다운로드
+              href: azure-stack-download-azure-marketplace-item.md
+            - name: Azure 스택에 대 한 azure 마켓플레이스 항목
+              href: azure-stack-marketplace-azure-items.md
+            - name: 마켓플레이스 항목 만들기 및 게시
+              href: azure-stack-create-and-publish-marketplace-item.md
+            - name: 마켓플레이스에 게시 도구를 사용 하 여
+              href: azure-stack-marketplace-publisher.md
+            - name: Azure 스택에 대해 지원 되는 게스트 운영 체제
+              href: azure-stack-supported-os.md
+            - name: 사용자 지정 가상 머신 이미지 추가
+              href: azure-stack-add-vm-image.md
+            - name: 가상 컴퓨터 크기 집합을 제공 합니다.
+              href: azure-stack-compute-add-scalesets.md
+            - name: Linux 가상 컴퓨터를 제공 합니다.
+              href: azure-stack-linux.md
+            - name: Red Hat 가상 컴퓨터 추가
+              href: azure-stack-redhat-create-upload-vhd.md
+            - name: Kubernetes 클러스터를 제공 합니다.
+              href: azure-stack-solution-template-kubernetes-cluster-add.md
+        - name: 사용량 및 결제
+          items:
+            - name: 개요
+              href: azure-stack-billing-and-chargeback.md
+            - name: 사용을 관리 및 csp 청구
+              href: azure-stack-add-manage-billing-as-a-csp.md
+            - name: 사용 및 청구에 대 한 테 넌 트를 추가 합니다.
+              href: azure-stack-csp-howto-register-tenants.md
+            - name: 테 넌 트 등록 관리
+              href: azure-stack-csp-ref-operations.md
+            - name: 사용 및 청구 참조
+              items:
+                - name: 사용량 데이터 보고
+                  href: azure-stack-usage-reporting.md
+                - name: 클라우드 서비스 공급자에 대 한 보고 인프라 사용
+                  href: azure-stack-csp-ref-infrastructure.md
+                - name: 공급자 사용량 API
+                  href: azure-stack-provider-resource-api.md
+                - name: 테넌트 사용량 API
+                  href: azure-stack-tenant-resource-usage-api.md
+                - name: 사용 FAQ
+                  href: azure-stack-usage-related-faq.md
+        - name: Azure에 연결
+          items:
+            - name: VPN을 사용하여 연결
+              href: azure-stack-connect-vpn.md
+            - name: VPN 게이트웨이에 대 한
+              href: azure-stack-vpn-gateway-about-vpn-gateways.md
+            - name: VPN 게이트웨이 설정
+              href: azure-stack-vpn-gateway-settings.md
+            - name: ExpressRoute를 사용하여 연결
+              href: azure-stack-connect-expressroute.md
+    - name: 문제 해결
+      items:
+        - name: 알려진 문제
+          href: azure-stack-troubleshooting.md
+        - name: Azure Stack의 진단
+          href: azure-stack-diagnostics.md
+        - name: Azure 스택에 대 한 유효성 검사
+          href: azure-stack-diagnostic-test.md
+- name: 참조
+  items:
+    - name: Azure Stack PowerShell
+      href: /powershell/azure/azure-stack/overview?view=azurestackps-1.2.9
+- name: 관련 항목
+  items:
+    - name: Azure Stack 사용자 설명서
+      href: /azure/azure-stack/user/
+    - name: ASDK 설명서
+      href: /azure/azure-stack/asdk/
+- name: 리소스
+  items:
+    - name: Azure 스택 로드맵
+      href: 'https://azure.microsoft.com/roadmap/?tag=azure-stack'
+    - name: Azure 스택 MSDN 포럼
+      href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureStack'
+    - name: Azure 스택 설명서 사용자 의견
+      href: 'https://feedback.azure.com/forums/344565-azure-stack?category_id=160275'
+    - name: 가격 정보
+      href: 'https://azure.microsoft.com/overview/azure-stack/how-to-buy/'
+    - name: 스택 오버플로
+      href: 'http://stackoverflow.com/questions/tagged/azure-stack'
+    - name: 교육 및 인증
+      href: 'https://docs.microsoft.com/azure/azure-stack/azure-stack-train-and-cert'

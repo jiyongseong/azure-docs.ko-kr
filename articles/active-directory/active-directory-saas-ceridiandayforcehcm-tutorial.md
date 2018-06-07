@@ -1,10 +1,10 @@
 ---
-title: "자습서: Ceridian Dayforce HCM과 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory와 Ceridian Dayforce HCM 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Ceridian Dayforce HCM과 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory와 Ceridian Dayforce HCM 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.reviewer: joflore
 ms.assetid: 7adf1eb3-d063-45d6-96a8-fd53b329b3f3
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/19/2017
 ms.author: jeedes
+ms.openlocfilehash: 09f9d6d096944453d28a588de4d73dc3c95fc695
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: b2ea3d92f233dab5bd6814e4875f881117eac8e3
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-ceridian-dayforce-hcm"></a>자습서: Ceridian Dayforce HCM과 Azure Active Directory 통합
 
@@ -31,7 +30,7 @@ Ceridian Dayforce HCM을 Azure AD와 통합하면 다음과 같은 이점이 제
 - 사용자가 해당 Azure AD 계정으로 Ceridian Dayforce HCM에 자동으로 로그온(Single Sign-on)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +58,7 @@ Ceridian Dayforce HCM의 Azure AD 통합을 구성하려면 갤러리의 Ceridia
 
 **갤러리에서 Ceridian Dayforce HCM을 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -107,7 +106,7 @@ Ceridian Dayforce HCM에서 Azure AD Single Sign-On을 구성하고 테스트하
 
 3. **Ceridian Dayforce HCM 도메인 및 URL** 섹션에서 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-ceridiandayforcehcm-tutorial/tutorial_ceridiandayforcehcm_url.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-ceridiandayforcehcm-tutorial/tutorial_ceridiandayforcehcm_url.png)
     
     a. **로그온 URL** 텍스트 상자에 사용자가 Ceridian Dayforce HCM 응용 프로그램에 로그온하는 데 사용할 URL을 입력합니다.
     
@@ -116,14 +115,14 @@ Ceridian Dayforce HCM에서 Azure AD Single Sign-On을 구성하고 테스트하
     | 프로덕션 | `https://sso.dayforcehcm.com/<DayforcehcmNamespace>` |
     | 테스트 | `https://ssotest.dayforcehcm.com/<DayforcehcmNamespace>` |
     
-    b. **식별자** 텍스트 상자에서 다음 패턴을 사용하여 URL을 입력합니다.
+    나. **식별자** 텍스트 상자에서 다음 패턴을 사용하여 URL을 입력합니다.
     
     | Environment | URL |
     | :-- | :-- |
     | 프로덕션 | `https://ncpingfederate.dayforcehcm.com/sp` |
     | 테스트 | `https://fs-test.dayforcehcm.com/sp` |
     
-    c. **회신 URL** 텍스트 상자에 Azure AD가 응답을 게시해야 하는 URL을 입력합니다.
+    다. **회신 URL** 텍스트 상자에 Azure AD가 응답을 게시해야 하는 URL을 입력합니다.
     
     | Environment | URL |
     | :-- | :-- |
@@ -139,23 +138,23 @@ Ceridian Dayforce HCM에서 Azure AD Single Sign-On을 구성하고 테스트하
 
 5. Ceridian Dayforce HCM 응용 프로그램은 특정 형식의 SAML 어설션이 필요합니다. 올바른 사용자 ID를 식별하려면 [Ceridian Dayforce HCM 팀](https://www.ceridian.com/contact-us/index.html)과 먼저 작업해 보세요. Microsoft는 사용자 식별자로 **"name"** 특성을 사용하도록 권장합니다. 응용 프로그램 통합 페이지의 **사용자 특성** 섹션에서 이러한 특성의 값을 관리할 수 있습니다. 다음 스크린샷은 이에 대한 예제를 보여 줍니다.  
 
-    ![Single Sign-on 구성](./media/active-directory-saas-ceridiandayforcehcm-tutorial/tutorial_ceridiandayforcehcm_07.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-ceridiandayforcehcm-tutorial/tutorial_ceridiandayforcehcm_07.png)
 
 6. **Single sign-on** 대화 상자의 **사용자 특성** 섹션에서 위의 이미지에 표시된 것과 같이 SAML 토큰 특성을 구성하고 다음 단계를 수행합니다.
     
     | 특성 이름  | 특성 값 |
     | --------------- | -------------------- |    
-    | name  | user.extensionattribute2 |    
+    | 이름  | user.extensionattribute2 |    
 
     a. **특성 추가**를 클릭하여 **특성 추가** 대화 상자를 엽니다.
 
-    ![Single Sign-On 구성](./media/active-directory-saas-ceridiandayforcehcm-tutorial/tutorial_attribute_04.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-ceridiandayforcehcm-tutorial/tutorial_attribute_04.png)
 
-    ![Single Sign-on 구성](./media/active-directory-saas-ceridiandayforcehcm-tutorial/tutorial_attribute_05.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-ceridiandayforcehcm-tutorial/tutorial_attribute_05.png)
     
-    b. **이름** 텍스트 상자에서 해당 행에 표시된 특성 이름을 입력합니다.
+    나. **이름** 텍스트 상자에서 해당 행에 표시된 특성 이름을 입력합니다.
 
-    c. **값** 목록에서 구현에 사용할 사용자 특성을 선택합니다.
+    다. **값** 목록에서 구현에 사용할 사용자 특성을 선택합니다.
     예를 들어, EmployeeID를 고유한 사용자 식별자로 사용하고자 하고 ExtensionAttribute2에 특성 값을 저장했다면 **user.extensionattribute2**를 선택합니다.
     
     d. **Ok**를 클릭합니다.
@@ -199,11 +198,11 @@ Ceridian Dayforce HCM에서 Azure AD Single Sign-On을 구성하고 테스트하
 
     a. **이름** 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
+    나. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
 
-    c. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
+    다. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
 
-    ㄹ. **만들기**를 클릭합니다.
+    d. **만들기**를 클릭합니다.
  
 ### <a name="create-a-ceridian-dayforce-hcm-test-user"></a>Ceridian Dayforce HCM 테스트 사용자 만들기
 
@@ -223,7 +222,7 @@ Ceridian Dayforce HCM에서 Azure AD Single Sign-On을 구성하고 테스트하
 
 2. 응용 프로그램 목록에서 **Ceridian Dayforce HCM**을 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-ceridiandayforcehcm-tutorial/tutorial_ceridiandayforcehcm_app.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-ceridiandayforcehcm-tutorial/tutorial_ceridiandayforcehcm_app.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -257,7 +256,7 @@ Ceridian Dayforce HCM에서 Azure AD Single Sign-On을 구성하고 테스트하
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
-    ![“사용자 및 그룹” 링크][202]
+    !["사용자 및 그룹" 링크][202]
 
 4. **추가** 단추를 클릭합니다. 그런 후 **할당 추가** 대화 상자에서 **사용자 및 그룹**을 선택합니다.
 
@@ -277,7 +276,7 @@ Ceridian Dayforce HCM에서 Azure AD Single Sign-On을 구성하고 테스트하
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 <!--Image references-->
 
@@ -292,5 +291,4 @@ Ceridian Dayforce HCM에서 Azure AD Single Sign-On을 구성하고 테스트하
 [201]: ./media/active-directory-saas-ceridiandayforcehcm-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-ceridiandayforcehcm-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-ceridiandayforcehcm-tutorial/tutorial_general_203.png
-
 

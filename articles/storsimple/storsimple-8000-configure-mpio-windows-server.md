@@ -1,32 +1,30 @@
 ---
-title: "StorSimple 장치에 대한 MPIO 구성 | Microsoft Docs"
-description: "Windows Server 2012 R2를 실행하는 호스트에 연결된 StorSimple 장치에 대해 MPIO(다중 경로 I/O)를 구성하는 방법을 설명합니다."
+title: StorSimple 장치에 대한 MPIO 구성 | Microsoft Docs
+description: Windows Server 2012 R2를 실행하는 호스트에 연결된 StorSimple 장치에 대해 MPIO(다중 경로 I/O)를 구성하는 방법을 설명합니다.
 services: storsimple
-documentationcenter: 
+documentationcenter: ''
 author: alkohli
 manager: timlt
-editor: 
-ms.assetid: 
+editor: ''
+ms.assetid: ''
 ms.service: storsimple
 ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 07/05/2017
+ms.date: 03/26/2018
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 9fe3fa3a2df63d111de742ecb48b1469aad543cd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 4f2b094604f486d283574f4669fcad6f72bd4431
+ms.sourcegitcommit: d74657d1926467210454f58970c45b2fd3ca088d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/28/2018
 ---
 # <a name="configure-multipath-io-for-your-storsimple-device"></a>StorSimple 장치에 대한 다중 경로 I/O 구성
 
 이 자습서에서는 Windows Server 2012 R2를 실행하는 호스트에서 MPIO(다중 경로 I/O) 기능을 설치 및 사용하고 StorSimple 실제 장치에 연결하기 위해 수행해야 할 단계에 대해 설명합니다. 이 문서의 지침은 StorSimple 8000 시리즈 물리적 장치에만 적용됩니다. MPIO는 현재 StorSimple Cloud Appliance에서 지원되지 않습니다.
 
-Microsoft는 Windows Server에서 MPIO(다중 경로 I/O) 기능에 대한 지원을 기본으로 제공하여 항상 사용 가능한 내결함성 SAN 구성 빌드를 돕습니다. MPIO는 중복 실제 경로 구성 요소(어댑터, 케이블 및 스위치)를 사용하여 서버 및 저장소 장치 간의 논리 경로를 만듭니다. 논리 경로에 오류를 일으키는 구성 요소 오류가 발생할 경우 응용 프로그램이 데이터에 계속 액세스할 수 있도록 다중 경로 논리가 I/O에 대한 대체 경로를 사용합니다. 또한 구성에 따라 MPIO가 이러한 모든 경로에서 부하를 다시 분산하여 성능을 향상할 수도 있습니다. 자세한 내용은 [MPIO 개요](https://technet.microsoft.com/library/cc725907.aspx "MPIO 개요 and features")을 참조하세요.
+Microsoft는 고가용성, 내결함성 iSCSI 네트워크 구성을 구축하는 데 도움을 주기 위해 Windows Server에서 MPIO(다중 경로 I/O) 기능에 대한 지원을 구축했습니다. MPIO는 중복 실제 경로 구성 요소(어댑터, 케이블 및 스위치)를 사용하여 서버 및 저장소 장치 간의 논리 경로를 만듭니다. 논리 경로에 오류를 일으키는 구성 요소 오류가 발생할 경우 응용 프로그램이 데이터에 계속 액세스할 수 있도록 다중 경로 논리가 I/O에 대한 대체 경로를 사용합니다. 또한 구성에 따라 MPIO가 이러한 모든 경로에서 부하를 다시 분산하여 성능을 향상할 수도 있습니다. 자세한 내용은 [MPIO 개요](https://technet.microsoft.com/library/cc725907.aspx "MPIO 개요 and features")을 참조하세요.
 
 StorSimple 솔루션의 고가용성을 위해 MPIO는 StorSimple 장치에서 구성되어야 합니다. MPIO가 Windows Server 2012 R2를 실행하는 호스트 서버에 설치되면 서버가 링크, 네트워크 또는 인터페이스를 허용할 수 있습니다.
 
@@ -59,10 +57,10 @@ Windows Server 호스트에 이 기능을 설치하려면 다음 절차를 완�
 3. **역할 및 기능 추가** 마법사에서 다음 단계를 수행합니다.
    
    1. **시작하기 전에** 페이지에서 **다음**을 클릭합니다.
-   2. **설치 유형 선택** 페이지에서 **역할 기반 또는 기능 기반** 설치의 기본 설정을 수락합니다. **다음**을 누릅니다.
+   2. **설치 유형 선택** 페이지에서 **역할 기반 또는 기능 기반** 설치의 기본 설정을 수락합니다. **다음**을 클릭합니다.
    
        ![역할 및 기능 추가 마법사 2](./media/storsimple-configure-mpio-windows-server/IC740999.png)
-   3. **선택 대상 서버** 페이지에서 **서버 풀에서 서버 선택**을 선택합니다. 호스트 서버가 자동으로 검색됩니다. **다음**을 누릅니다.
+   3. **선택 대상 서버** 페이지에서 **서버 풀에서 서버 선택**을 선택합니다. 호스트 서버가 자동으로 검색됩니다. **다음**을 클릭합니다.
    4. **서버 역할 선택** 페이지에서 **다음**을 클릭합니다.
    5. **기능 선택** 페이지에서 **다중 경로 I/O**를 선택하고 **다음**을 클릭합니다.
    
@@ -151,7 +149,7 @@ MPIO가 Windows Server에 구성된 후 StorSimple 장치에 생성된 볼륨이
 
 ## <a name="step-4-configure-mpio-for-high-availability-and-load-balancing"></a>4단계: 고가용성 및 부하 분산을 위해 MPIO 구성
 
-다중 경로 기반 고가용성 및 부하 분산의 경우 사용할 수 있는 다른 경로 선언을 위해 다중 세션이 수동으로 추가되어야 합니다. 예를들어 SAN에 연결된 두 인터페이스가 호스트에 있고 SAN에 연결된 두 인터페이스가 장비에 있는 경우, 적합한 경로 순열로 구성된 네 개의 세션만 필요합니다(각각의 데이터 인터페이스 및 호스트 인터페이스가 다른 IP 주소에 있고 라우팅할 수 없는 경우 두 세션만 필요).
+다중 경로 기반 고가용성 및 부하 분산의 경우 사용할 수 있는 다른 경로 선언을 위해 다중 세션이 수동으로 추가되어야 합니다. 예를 들어 iSCSI 네트워크에 연결된 두 인터페이스가 호스트에 있고 iSCSI 네트워크에 연결된 두 인터페이스가 장치에 있는 경우, 적합한 경로 순열로 구성된 네 개의 세션만 필요합니다(각각의 데이터 인터페이스 및 호스트 인터페이스가 다른 IP 주소에 있고 라우팅할 수 없는 경우 두 세션만 필요).
 
 **장치 및 응용 프로그램 호스트 간에 최소 8개의 활성 병렬 세션을 유지하는 것이 좋습니다.** 이를 위해 Windows Server 시스템에서 4개의 네트워크 인터페이스를 사용하도록 설정하면 됩니다. Windows Server 호스트의 하드웨어 또는 운영 체제 수준에서 실제 네트워크 인터페이스 또는 네트워크 가상화 기술을 통한 가상 인터페이스를 사용합니다. 장치에 두 개의 네트워크 인터페이스가 있을 경우 이 구성은 8개의 활성 세션을 제공합니다. 이 구성은 장치 및 클라우드 처리량을 최적화하는 데 도움이 됩니다.
 
@@ -174,15 +172,15 @@ MPIO가 Windows Server에 구성된 후 StorSimple 장치에 생성된 볼륨이
 6. **고급 설정** 대화 상자에서:
    
    1. **로컬 어댑터** 드롭다운 목록에서 **Microsoft iSCSI 초기자**를 선택합니다.
-   2. **초기자 IP** 드롭다운 목록에서 호스트의 IP 주소를 선택합니다.
-   3. **대상 포털 IP** 드롭다운 목록에서 해당 장치에서 사용할 수 있는 데이터 인터페이스의 IP 주소를 선택합니다.
+   2. **초기자 IP** 드롭다운 목록에서 호스트의 첫 번째 인터페이스(iSCSI 인터페이스)에 해당하는 IP 주소를 선택합니다.
+   3. **대상 포털 IP** 드롭다운 목록에서 해당 장치에서 사용할 수 있는 첫 번째 데이터 인터페이스의 IP 주소를 선택합니다.
    4. **확인** 을 클릭하여 iSCSI 초기자 속성 대화 상자로 돌아갑니다.
 7. **속성**을 클릭하고 **속성** 대화 상자에서 **세션 추가**를 클릭합니다.
 8. **대상에 연결** 대화 상자에서 **다중 경로 사용** 확인란을 선택한 다음 **고급**을 클릭합니다.
 9. **고급 설정** 대화 상자에서:
    
    1. **로컬 어댑터** 드롭다운 목록에서 **Microsoft iSCSI 초기자**를 선택합니다.
-   2. **초기자 IP** 드롭다운 목록에서 호스트에서 두 번째 인터페이스에 해당하는 IP 주소를 선택합니다.
+   2. **초기자 IP** 드롭다운 목록에서 호스트의 두 번째 iSCSI 인터페이스에 해당하는 IP 주소를 선택합니다.
    3. **대상 포털 IP** 드롭다운 목록에서 해당 장치에서 사용할 수 있는 두 번째 데이터 인터페이스의 IP 주소를 선택합니다.
    4. **확인**을 클릭하여 **iSCSI 초기자 속성** 대화 상자로 돌아갑니다. 이제 두 번째 세션을 대상에 추가했습니다.
 10. 대상에 추가 세션(경로)을 추가하려면 8~10단계를 반복합니다. 호스트의 두 인터페이스 및 장치의 두 인터페이스와 함께 총 네 개의 세션을 추가할 수 있습니다.
@@ -192,5 +190,4 @@ MPIO가 Windows Server에 구성된 후 StorSimple 장치에 생성된 볼륨이
 ## <a name="next-steps"></a>다음 단계
 
 [StorSimple 장치 관리자 서비스를 사용하여 StorSimple 장치 구성 수정](storsimple-8000-modify-device-config.md)에 대해 자세히 알아봅니다.
-
 

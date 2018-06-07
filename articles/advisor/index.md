@@ -1,22 +1,22 @@
 ---
-title: "Azure Advisor 설명서 - 자습서 | Microsoft Docs"
-description: 
+title: Azure Advisor 설명서 - 자습서 | Microsoft Docs
+description: ''
 services: advisor
-author: carolz
+author: czeumault
 manager: carolz
 layout: LandingPage
-ms.assetid: 
+ms.assetid: ''
 ms.service: advisor
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: landing-page
 ms.date: 01/23/2017
 ms.author: carolz
-translationtype: Human Translation
-ms.sourcegitcommit: 197ebd6e37066cb4463d540284ec3f3b074d95e1
-ms.openlocfilehash: ce00af5e7382a3d6e80903711bac86ca88191cff
-ms.lasthandoff: 03/31/2017
-
+ms.openlocfilehash: b7bf7931bcf25e03430218c973ba8e283738d64c
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="azure-advisor-documentation"></a>Azure 관리자 설명서
 
@@ -42,7 +42,7 @@ Azure 관리자는 Azure 배포를 최적화하기 위한 모범 사례를 따�
         </a>
     </li>
     <li>
-        <a href="https://azure.microsoft.com/en-us/resources/videos/index/?services=advisor">
+        <a href="https://azure.microsoft.com/resources/videos/index/?services=advisor">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
@@ -81,18 +81,19 @@ Azure 관리자는 Azure 배포를 최적화하기 위한 모범 사례를 따�
 
 ---
 
-<h2>참조</h2>
+<h2>참고 자료</h2>
 <ul class="panelContent cardsW">
     <li>
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
                     <div class="cardText">
-                        <h3>REST (영문)</h3>
+                        <h3>REST API</h3>
                         <p><a href="/rest/api/advisor">REST API 참조</a></p>
+                        <h3>CLI</h3>
+                        <p><a href="/cli/azure/advisor">CLI 참조</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </li>
-

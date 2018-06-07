@@ -3,8 +3,8 @@ title: "Azure App Service Mobile Apps에서 Cordova 앱 만들기 | Microsoft Do
 description: "이 자습서에 따라 Azure 모바일 앱 백 엔드를 사용하여 Apache Cordova 개발을 시작할 수 있습니다."
 services: app-service\mobile
 documentationcenter: javascript
-author: ggailey777
-manager: syntaxc4
+author: conceptdev
+manager: crdun
 editor: 
 tags: 
 keywords: "cordova,javascript,모바일,클라이언트"
@@ -15,13 +15,12 @@ ms.tgt_pltfrm: mobile-html
 ms.devlang: javascript
 ms.topic: hero-article
 ms.date: 07/07/2017
-ms.author: glenga
+ms.author: crdun
+ms.openlocfilehash: 223e9e35fcab347f9b5b8db01a9fd667b9f5d55d
+ms.sourcegitcommit: df4ddc55b42b593f165d56531f591fdb1e689686
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: b620465cdc3cfa04933dc6e70163fc32aa9a839b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/04/2018
 ---
 # <a name="create-an-apache-cordova-app"></a>Apache Cordova 앱 만들기
 [!INCLUDE [app-service-mobile-selector-get-started](../../includes/app-service-mobile-selector-get-started.md)]
@@ -29,9 +28,9 @@ ms.lasthandoff: 07/21/2017
 ## <a name="overview"></a>개요
 이 자습서에서는 Azure 모바일 앱 백 엔드를 사용하여 클라우드 기반 백 엔드 서비스를 Apache Cordova 모바일 앱에 추가하는 방법을 보여 줍니다.  새 모바일 앱 백 엔드와 앱 데이터를 Azure에 저장하는 간단한 *할 일 목록* Apache Cordova 앱을 만듭니다.
 
-이 자습서를 완료해야 Azure 앱 서비스에서 모바일 앱 기능을 사용하는 방법에 대한 다른 모든 Apache Cordova 자습서를 진행할 수 있습니다.
+이 자습서를 완료해야 Azure App Service에서 Mobile Apps 기능을 사용하는 방법에 대한 다른 모든 Apache Cordova 자습서를 진행할 수 있습니다.
 
-## <a name="prerequisites"></a>필수 조건
+## <a name="prerequisites"></a>필수 구성 요소
 이 자습서를 완료하려면 다음 필수 구성 요소가 필요합니다.
 
 * [Visual Studio Community 2017] 이상이 설치된 PC
@@ -58,7 +57,7 @@ Visual Studio를 바이패스하고 직접 Apache Cordova 명령줄을 사용할
 * [인증을 추가](app-service-mobile-cordova-get-started-users.md) 합니다.
 * [푸시 알림을 추가](app-service-mobile-cordova-get-started-push.md) 합니다.
 
-Azure 앱 서비스의 주요 개념에 대해 자세히 알아봅니다.
+Azure App Service의 주요 개념에 대해 자세히 알아봅니다.
 
 * [오프라인 데이터]
 * [인증]
@@ -82,4 +81,3 @@ SDK 사용 방법을 알아봅니다.
 [Apache Cordova SDK]: app-service-mobile-cordova-how-to-use-client-library.md
 [ASP.NET 서버 SDK]: app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
 [Node.js 서버 SDK]: app-service-mobile-node-backend-how-to-use-server-sdk.md
-

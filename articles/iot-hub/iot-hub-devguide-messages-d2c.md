@@ -1,31 +1,29 @@
 ---
-title: "Azure IoT Hub 장치-클라우드 메시징 이해 | Microsoft Docs"
-description: "개발자 가이드 - IoT Hub를 사용하여 장치-클라우드 메시징을 사용하는 방법입니다. 원격 분석 및 비원격 분석 데이터를 전송하고 라우팅을 사용하여 메시지를 전송하는 방법에 대한 정보가 포함됩니다."
+title: Azure IoT Hub 장치-클라우드 메시징 이해 | Microsoft Docs
+description: 개발자 가이드 - IoT Hub를 사용하여 장치-클라우드 메시징을 사용하는 방법입니다. 원격 분석 및 비원격 분석 데이터를 전송하고 라우팅을 사용하여 메시지를 전송하는 방법에 대한 정보가 포함됩니다.
 services: iot-hub
 documentationcenter: .net
 author: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 ms.service: iot-hub
 ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 05/25/2017
+ms.date: 01/29/2018
 ms.author: dobett
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5edc47e03ca9319ba2e3285600703d759963e1f3
-ms.openlocfilehash: d856e26084ee79386a2e8e0e527804bda86b477b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/01/2017
-
-
+ms.openlocfilehash: 54b2961713f529438f5508bb0615824ec6bec214
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="send-device-to-cloud-messages-to-iot-hub"></a>IoT Hub에 장치-클라우드 메시지 보내기
 
 시계열 원격 분석 및 경고를 장치에서 솔루션 백 엔드로 보내려면 장치-클라우드 메시지를 장치에서 IoT Hub로 보냅니다. IoT Hub에서 지원하는 기타 장치-클라우드 옵션에 대한 설명은 [장치-클라우드 통신 지침][lnk-d2c-guidance]을 참조하세요.
 
-장치 지향 끝점(**/devices/{deviceId}/messages/events**)을 통해 장치-클라우드 메시지를 보냅니다. 그런 다음 라우팅 규칙은 메시지를 IoT Hub의 서비스 지향 끝점 중 하나로 라우팅합니다. 라우팅 규칙은 허브를 통과하는 장치-클라우드 메시지의 헤더 및 본문을 사용하여 허브를 라우팅할 위치를 결정합니다. 기본적으로 메시지는 [Event Hubs][lnk-event-hubs]와 호환되는 기본 제공 서비스 연결 끝점(**messages/events**)으로 라우팅됩니다. 따라서 표준 [Event Hubs 통합 및 SDK][lnk-compatible-endpoint]를 사용하여 솔루션 백 엔드에서 장치-클라우드 메시지를 받을 수 있습니다.
+장치 지향 끝점(**/devices/{deviceId}/messages/events**)을 통해 장치-클라우드 메시지를 보냅니다. 그런 다음 라우팅 규칙은 메시지를 IoT Hub의 서비스 지향 끝점 중 하나로 라우팅합니다. 라우팅 규칙은 장치-클라우드 메시지의 헤더 및 본문을 사용하여 허브를 라우팅할 위치를 결정합니다. 기본적으로 메시지는 [Event Hubs][lnk-event-hubs]와 호환되는 기본 제공 서비스 연결 끝점(**messages/events**)으로 라우팅됩니다. 따라서 표준 [Event Hubs 통합 및 SDK][lnk-compatible-endpoint]를 사용하여 솔루션 백 엔드에서 장치-클라우드 메시지를 받을 수 있습니다.
 
 IoT Hub는 스트리밍 메시징 패턴을 사용하여 장치-클라우드 메시징을 구현합니다. IoT Hub의 장치 - 클라우드 메시지는 여러 독자가 읽을 수 있는 서비스를 통과하는 많은 양의 이벤트가 있다는 점에서 [Service Bus][lnk-servicebus] *메시지*보다는 [Event Hubs][lnk-event-hubs] *이벤트*에 가깝습니다.
 
@@ -34,15 +32,15 @@ IoT Hub를 사용한 장치-클라우드 메시징의 특징은 다음과 같습
 * 장치-클라우드 메시지는 영구적이며 IoT Hub의 기본 **messages/events** 끝점에 최대 7일 동안 보관됩니다.
 * 장치-클라우드 메시지는 최대 256KB까지 가능하며 보내기를 최적화하기 위해 일괄 처리로 그룹화할 수 있습니다. 배치는 최대 256KB가 될 수 있습니다.
 * [IoT Hub에 대한 액세스 제어][lnk-devguide-security] 섹션에서 설명한 것처럼 IoT Hub는 장치 단위 인증 및 액세스 제어를 허용합니다.
-* IoT Hub를 사용하면 최대 10개의 사용자 지정 끝점을 만들 수 있습니다. 메시지는 IoT Hub에 구성된 경로에 따라 끝점으로 전달됩니다. 자세한 내용은 [라우팅 규칙](#routing-rules)을 참조하세요.
+* IoT Hub를 사용하면 최대 10개의 사용자 지정 끝점을 만들 수 있습니다. 메시지는 IoT Hub에 구성된 경로에 따라 끝점으로 전달됩니다. 자세한 내용은 [라우팅 규칙](iot-hub-devguide-query-language.md#device-to-cloud-message-routes-query-expressions)을 참조하세요.
 * IoT Hub를 사용하면 수백만 대의 장치를 동시에 연결할 수 있습니다([할당량 및 제한][lnk-quotas] 참조).
 * IoT Hub는 임의 분할을 허용하지 않습니다. 장치-클라우드 메시지는 원래 **deviceId**와 관련하여 분할됩니다.
 
-IoT Hub와 Event Hubs 서비스의 차이점에 대한 자세한 내용은 [Azure IoT Hub 및 Azure Event Hubs의 비교][lnk-comparison]를 참조하세요.
+IoT Hub와 Event Hubs의 차이점에 대한 자세한 내용은 [Azure IoT Hub 및 Azure Event Hubs의 비교][lnk-comparison]를 참조하세요.
 
 ## <a name="send-non-telemetry-traffic"></a>비-원격 분석 트래픽 보내기
 
-때때로 원격 분석 데이터 요소 외에도 장치는 솔루션 백 엔드에서 별도로 실행하고 처리해야 하는 메시지와 요청을 보냅니다. 예를 들어 백 엔드에서 특정 작업을 트리거해야 하는 중요한 경고가 있습니다. 이러한 형식의 메시지를 메시지 헤더 또는 메시지 본문의 값을 기반으로 처리 전용 끝점에 보내는 [라우팅 규칙][lnk-devguide-custom]을 쉽게 작성할 수 있습니다.
+때때로 원격 분석 외에도 장치는 솔루션 백 엔드에서 별도로 실행하고 처리해야 하는 메시지와 요청을 보냅니다. 예를 들어 백 엔드에서 특정 작업을 트리거해야 하는 중요한 경고가 있습니다. 이러한 형식의 메시지를 메시지 헤더 또는 메시지 본문의 값을 기반으로 처리 전용 끝점에 보내는 [라우팅 규칙][lnk-devguide-custom]을 작성할 수 있습니다.
 
 이런 종류의 메시지를 처리하는 최선의 방법에 대한 정보는 [자습서: IoT Hub 장치-클라우드 메시지를 처리하는 방법][lnk-d2c-tutorial] 자습서를 참조하세요.
 
@@ -93,4 +91,3 @@ IoT Hub와 Event Hubs 서비스의 차이점에 대한 자세한 내용은 [Azur
 [lnk-device-properties]: iot-hub-devguide-identity-registry.md#device-identity-properties
 [lnk-devguide-security]: iot-hub-devguide-security.md
 [lnk-d2c-tutorial]: iot-hub-csharp-csharp-process-d2c.md
-

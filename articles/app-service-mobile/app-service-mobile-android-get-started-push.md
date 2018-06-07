@@ -3,23 +3,22 @@ title: "Mobile Apps를 사용하여 Android 앱에 푸시 알림 추가 | Micros
 description: "Mobile Apps를 사용하여 Android 앱에 푸시 알림을 보내는 방법에 대해 알아봅니다."
 services: app-service\mobile
 documentationcenter: android
-manager: syntaxc4
+manager: crdun
 editor: 
-author: ggailey777
+author: conceptdev
 ms.assetid: 9058ed6d-e871-4179-86af-0092d0ca09d3
 ms.service: app-service-mobile
 ms.workload: mobile
 ms.tgt_pltfrm: mobile-android
 ms.devlang: java
 ms.topic: article
-ms.date: 10/12/2016
-ms.author: glenga
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ef43d1df2a64d85f256b28cd7db5a4f4356a7ec0
-ms.openlocfilehash: 055f55966de1e5c1bb41a6e0bf1c0da1758a3ed0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 12/13/2016
-
+ms.date: 11/17/2017
+ms.author: crdun
+ms.openlocfilehash: 9e9f7aba49c53a1a6fcc611ed771f266eb49c883
+ms.sourcegitcommit: df4ddc55b42b593f165d56531f591fdb1e689686
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/04/2018
 ---
 # <a name="add-push-notifications-to-your-android-app"></a>Android 앱에 푸시 알림 추가
 [!INCLUDE [app-service-mobile-selector-get-started-push](../../includes/app-service-mobile-selector-get-started-push.md)]
@@ -29,7 +28,7 @@ ms.lasthandoff: 12/13/2016
 
 다운로드한 빠른 시작 서버 프로젝트를 사용하지 않는 경우 푸시 알림 확장 패키지가 필요합니다. 자세한 내용은 [Azure Mobile Apps용 .NET 백 엔드 서버 SDK 사용](app-service-mobile-dotnet-backend-how-to-use-server-sdk.md)을 참조하세요.
 
-## <a name="prerequisites"></a>필수 조건
+## <a name="prerequisites"></a>필수 구성 요소
 다음이 필요합니다.
 
 * 프로젝트의 백 엔드에 따른 IDE
@@ -57,12 +56,12 @@ ms.lasthandoff: 12/13/2016
 ### <a name="verify-android-sdk-version"></a>Android SDK 버전 확인
 [!INCLUDE [app-service-mobile-verify-android-sdk-version](../../includes/app-service-mobile-verify-android-sdk-version.md)]
 
-다음 단계에서는 Google Play Services를 설치합니다. Google Cloud Messaging에는 매니페스트의 **minSdkVersion** 속성이 준수해야 하는 개발 및 테스트에 대한 최소 API 수준 요구 사항이 있습니다.
+다음 단계에서는 Google Play Services를 설치합니다. Firebase Cloud Messaging에는 매니페스트의 **minSdkVersion** 속성이 준수해야 하는 개발 및 테스트의 최소 API 수준 요구 사항이 있습니다.
 
-이전 장치로 테스트할 경우 이 값을 적절하게 설정할 수 있는 최소값을 확인하려면 [Google Play Services SDK 설정]을 참조하세요.
+오래된 장치로 테스트하는 경우 [Android 프로젝트에 Firebase 추가]에서 이 값의 허용되는 최소값과 제대로 설정하는 방법을 참조하세요.
 
-### <a name="add-google-play-services-to-the-project"></a>프로젝트에 Google Play Services 추가
-[!INCLUDE [Add Play Services](../../includes/app-service-mobile-add-google-play-services.md)]
+### <a name="add-firebase-cloud-messaging-to-the-project"></a>프로젝트에 Firebase Cloud Messaging 추가
+[!INCLUDE [Add Firebase Cloud Messaging](../../includes/app-service-mobile-add-firebase-cloud-messaging.md)]
 
 ### <a name="add-code"></a>코드 추가
 [!INCLUDE [app-service-mobile-android-getting-started-with-push](../../includes/app-service-mobile-android-getting-started-with-push.md)]
@@ -80,6 +79,4 @@ USB 케이블로 Android 휴대폰을 직접 연결하거나 에뮬레이터에�
 
 <!-- URLs -->
 [Android 빠른 시작]: app-service-mobile-android-get-started.md
-
-[Google Play Services SDK 설정]:https://developers.google.com/android/guides/setup
-
+[Android 프로젝트에 Firebase 추가]:https://firebase.google.com/docs/android/setup

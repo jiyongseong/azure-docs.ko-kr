@@ -1,27 +1,19 @@
 ---
-title: "PowerShell을 사용하여 Stream Analytics 작업 모니터링 및 관리 | Microsoft Docs"
-description: "Azure PowerShell 및 cmdlet을 사용하여 Stream Analytics 작업을 모니터링하고 관리하는 방법에 대해 알아봅니다."
-keywords: "azure powershell, azure powershell cmdlet, powershell 명령, powershell 스크립팅"
+title: PowerShell을 사용하여 Azure Stream Analytics 작업 모니터링 및 관리
+description: 이 아티클에서는 Azure PowerShell 및 cmdlet을 사용하여 Azure Stream Analytics 작업을 모니터링하고 관리하는 방법에 대해 설명합니다.
 services: stream-analytics
-documentationcenter: 
-author: jeffstokes72
-manager: jhubbard
-editor: cgronlun
-ms.assetid: 514f454e-d18c-4081-8304-ab48577e15e8
+author: jseb225
+ms.author: jeanb
+manager: kfile
+ms.reviewer: jasonh
 ms.service: stream-analytics
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: data-services
+ms.topic: conceptual
 ms.date: 03/28/2017
-ms.author: jeffstok
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: d968a22c61c8e9c3375927c01dd10aaf413fce00
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
-
+ms.openlocfilehash: 61c26c55725c19f526680d70f3621d41e9590965
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="monitor-and-manage-stream-analytics-jobs-with-azure-powershell-cmdlets"></a>Azure PowerShell cmdlet을 사용하여 Stream Analytics 작업 모니터링 및 관리
 기본 Stream Analytics 작업을 실행하는 Azure PowerShell cmdlet 및 PowerShell 스크립팅을 사용하여 Stream Analytics 리소스를 모니터링 및 관리하는 방법을 알아봅니다.
@@ -46,7 +38,7 @@ Azure PowerShell 0.9.8:
 Azure PowerShell 1.0.  
 
          # Log in to your Azure account
-        Login-AzureRmAccount
+        Connect-AzureRmAccount
 
         # Select the Azure subscription you want to use to create the resource group.
         Get-AzureRmSubscription –SubscriptionName “your sub” | Select-AzureRmSubscription
@@ -60,7 +52,7 @@ Azure PowerShell 1.0.
 
 
 > [!NOTE]
-> 프로그래밍 방식으로 만든 Stream Analytics 작업은 기본적으로 모니터링이 설정되어 있지 않습니다.  작업의 모니터 페이지로 이동하고 사용 버튼을 클릭하여 Azure 포털에서 수동으로 모니터링을 설정하거나 [Azure Stream Analytics - 프로그래밍 방식으로 Stream Analytics 작업 모니터링](stream-analytics-monitor-jobs.md)의 단계를 수행하여 이를 프로그래밍 방식으로 수행할 수 있습니다.
+> 프로그래밍 방식으로 만든 Stream Analytics 작업은 기본적으로 모니터링이 설정되어 있지 않습니다.  작업의 모니터 페이지로 이동하고 사용 버튼을 클릭하여 Azure Portal에서 수동으로 모니터링을 설정하거나 [Azure Stream Analytics - 프로그래밍 방식으로 Stream Analytics 작업 모니터링](stream-analytics-monitor-jobs.md)의 단계를 수행하여 이를 프로그래밍 방식으로 수행할 수 있습니다.
 > 
 > 
 
@@ -452,13 +444,13 @@ Azure PowerShell 1.0.
 이 PowerShell 명령은 StreamingJob에서 Output 출력의 연결 상태를 테스트합니다.  
 
 ## <a name="get-support"></a>지원 받기
-추가 지원이 필요한 경우 [Azure Stream Analytics 포럼](https://social.msdn.microsoft.com/Forums/home?forum=AzureStreamAnalytics)을 참조하세요. 
+추가 지원이 필요한 경우 [Azure Stream Analytics 포럼](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureStreamAnalytics)을 참조하세요. 
 
 ## <a name="next-steps"></a>다음 단계
 * [Azure Stream Analytics 소개](stream-analytics-introduction.md)
 * [Azure Stream Analytics 사용 시작](stream-analytics-real-time-fraud-detection.md)
-* [Azure 스트림 분석 작업 규모 지정](stream-analytics-scale-jobs.md)
-* [Azure 스트림 분석 쿼리 언어 참조](https://msdn.microsoft.com/library/azure/dn834998.aspx)
+* [Azure  Stream Analytics 작업 규모 지정](stream-analytics-scale-jobs.md)
+* [Azure  Stream Analytics 쿼리 언어 참조](https://msdn.microsoft.com/library/azure/dn834998.aspx)
 * [Azure Stream Analytics 관리 REST API 참조](https://msdn.microsoft.com/library/azure/dn835031.aspx)
 
 [msdn-switch-azuremode]: http://msdn.microsoft.com/library/dn722470.aspx
@@ -474,5 +466,4 @@ Azure PowerShell 1.0.
 [stream.analytics.scale.jobs]: stream-analytics-scale-jobs.md
 [stream.analytics.query.language.reference]: http://go.microsoft.com/fwlink/?LinkID=513299
 [stream.analytics.rest.api.reference]: http://go.microsoft.com/fwlink/?LinkId=517301
-
 

@@ -1,26 +1,24 @@
 ---
-title: "Azure PowerShell을 사용하여 파일 업로드 구성 | Microsoft Docs"
-description: "Azure PowerShell cmdlet을 사용하여 연결된 장치에서 파일 업로드를 사용하도록 IoT Hub를 구성하는 방법입니다. 대상 Azure Storage 계정 구성에 대한 정보가 포함됩니다."
+title: Azure PowerShell을 사용하여 파일 업로드 구성 | Microsoft Docs
+description: Azure PowerShell cmdlet을 사용하여 연결된 장치에서 파일 업로드를 사용하도록 IoT Hub를 구성하는 방법입니다. 대상 Azure Storage 계정 구성에 대한 정보가 포함됩니다.
 services: iot-hub
-documentationcenter: 
+documentationcenter: ''
 author: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 915f1597-272d-4fd4-8c5b-a0ccb1df0d91
 ms.service: iot-hub
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 05/04/2017
+ms.date: 08/08/2017
 ms.author: dobett
-ms.translationtype: Human Translation
-ms.sourcegitcommit: e7da3c6d4cfad588e8cc6850143112989ff3e481
-ms.openlocfilehash: deac38afc200a0c68751a061d3fb284f8244225b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/16/2017
-
-
+ms.openlocfilehash: 22d331342504aa7cc3d4fe86777ef9c2595a27ac
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="configure-iot-hub-file-uploads-using-powershell"></a>Azure PowerShell을 사용하여 IoT Hub 파일 업로드 구성
 
@@ -39,10 +37,10 @@ ms.lasthandoff: 05/16/2017
 
 Azure 계정에 로그인하고 구독을 선택합니다.
 
-1. PowerShell 프롬프트에서 **Login-AzureRmAccount** cmdlet을 실행합니다.
+1. PowerShell 프롬프트에서 **Connect-AzureRmAccount** cmdlet을 실행합니다.
 
     ```powershell
-    Login-AzureRmAccount
+    Connect-AzureRmAccount
     ```
 
 1. Azure 구독이 여러 개 있는 경우 Azure에 로그인하면 자격 증명과 연결된 모든 Azure 구독에 액세스할 수 있습니다. 다음 명령을 사용하여 사용할 수 있는 Azure 구독을 나열합니다.
@@ -62,7 +60,7 @@ Azure 계정에 로그인하고 구독을 선택합니다.
 
 다음 단계에서는 **클래식** 배포 모델이 아니라 **Resource Manager** 배포 모델을 사용하여 저장소 계정을 만들었다고 가정합니다.
 
-장치에서 파일 업로드를 구성하려면 IoT Hub와 동일한 구독에 Azure 저장소 계정의 연결 문자열이 필요합니다. 또한 저장소 계정에 Blob 컨테이너의 이름도 필요합니다. 다음 명령을 사용하여 저장소 계정 키를 검색합니다.
+장치에서 파일 업로드를 구성하려면 Azure 저장소 계정에 대한 연결 문자열이 필요합니다. 저장소 계정은 IoT Hub와 동일한 구독 내에 있어야 합니다. 또한 저장소 계정에 Blob 컨테이너의 이름도 필요합니다. 다음 명령을 사용하여 저장소 계정 키를 검색합니다.
 
 ```powershell
 Get-AzureRmStorageAccountKey `
@@ -101,7 +99,7 @@ Get-AzureRmStorageAccountKey `
 
 구성에는 다음 값이 필요합니다.
 
-**저장소 컨테이너**: 현재 Azure 구독에 있는 Azure 저장소 계정의 Blob 컨테이너로 IoT Hub와 연결됩니다. 이전 섹션에서 필요한 저장소 계정 정보를 검색했습니다. IoT Hub는 파일을 업로드하는 경우에 사용할 장치에 대한 이 Blob 컨테이너에 쓰기 권한이 있는 SAS URI를 자동으로 생성합니다.
+**저장소 컨테이너**: 현재 Azure 구독에 있는 Azure Storage 계정의 Blob 컨테이너로 IoT Hub와 연결됩니다. 이전 섹션에서 필요한 저장소 계정 정보를 검색했습니다. IoT Hub는 파일을 업로드하는 경우에 사용할 장치에 대한 이 Blob 컨테이너에 쓰기 권한이 있는 SAS URI를 자동으로 생성합니다.
 
 **업로드된 파일에 대한 알림 받기**: 파일 업로드 알림을 사용하거나 사용하지 않도록 설정합니다.
 
@@ -126,7 +124,8 @@ Set-AzureRmIotHub `
 ```
 
 ## <a name="next-steps"></a>다음 단계
-IoT Hub의 파일 업로드 기능에 대한 자세한 내용은 IoT Hub 개발자 가이드의 [장치에서 파일 업로드][lnk-upload]를 참조하세요.
+
+IoT Hub의 파일 업로드 기능에 대한 자세한 내용은 [장치에서 파일 업로드][lnk-upload]를 참조하세요.
 
 Azure IoT Hub를 관리하는 방법에 대한 자세한 내용을 알아보려면 다음 링크를 따라가세요.
 
@@ -137,7 +136,7 @@ Azure IoT Hub를 관리하는 방법에 대한 자세한 내용을 알아보려�
 IoT Hub의 기능을 추가로 탐색하려면 다음을 참조하세요.
 
 * [IoT Hub 개발자 가이드][lnk-devguide]
-* [IoT Edge에서 장치 시뮬레이션][lnk-iotedge]
+* [Azure IoT Edge를 사용하여 에지 장치에 AI 배포][lnk-iotedge]
 * [처음부터 IoT 솔루션 보안 유지][lnk-securing]
 
 [lnk-upload]: iot-hub-devguide-file-upload.md
@@ -147,11 +146,11 @@ IoT Hub의 기능을 추가로 탐색하려면 다음을 참조하세요.
 [lnk-monitor]: iot-hub-operations-monitoring.md
 
 [lnk-devguide]: iot-hub-devguide.md
-[lnk-iotedge]: iot-hub-linux-iot-edge-simulated-device.md
+[lnk-iotedge]: ../iot-edge/tutorial-simulate-device-linux.md
 [lnk-securing]: iot-hub-security-ground-up.md
 [lnk-powershell-install]: https://docs.microsoft.com/powershell/azure/install-azurerm-ps
 [lnk-powershell-storage]: https://docs.microsoft.com/powershell/module/azurerm.storage/
 [lnk-powershell-iothub]: https://docs.microsoft.com/powershell/module/azurerm.iothub/new-azurermiothub
 [lnk-portal-hub]: iot-hub-create-through-portal.md
 [lnk-free-trial]: http://azure.microsoft.com/pricing/free-trial/
-[lnk-portal-storage]: ../storage/storage-create-storage-account.md
+[lnk-portal-storage]:../storage/common/storage-create-storage-account.md

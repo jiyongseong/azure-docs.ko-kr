@@ -1,0 +1,96 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Azure Machine Learning 설명서
+metadata:
+  title: Azure Machine Learning 설명서 - 자습서, API 참조
+  description: 응용 프로그램에서 예측 분석을 사용하는 데이터 과학자 및 개발자를 위한 클라우드 서비스인 Machine Learning에 대한 설명서, 비디오 및 예제 모델입니다.
+  services: machine-learning
+  author: garyericson
+  manager: jhubbard
+  ms.service: machine-learning
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 02/01/2018
+  ms.author: garye
+  ms.openlocfilehash: 6bfeb53dccd9d281cd467b8261eff5cd47cb4dfb
+  ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 04/19/2018
+abstract:
+  description: 클라우드에서 기계 학습 및 AI 모델을 빌드하고, 배포하고, 관리하기 위해 완전히 관리되는 해당 서비스에서 Azure Machine Learning을 사용하는 방법에 대해 알아봅니다. 자습서, 빠른 시작, 참조 및 예제에서는 응용 프로그램에 대한 모델을 빌드하고 배포하는 방법을 보여줍니다.
+sections:
+- title: 
+  items:
+  - type: list
+    style: cards
+    className: cardsA
+    items:
+    - html: <a href="/azure/machine-learning/service/"> <img height="48" width="48" src="/azure/machine-learning/media/index/i_machine-learning.svg" alt="Azure Machine Learning services"> (미리 보기) <br><b>Azure Machine Learning 서비스</b></a> <p>이러한 서비스를 통해 다양한 Azure 데이터 및 계산 서비스에서 Python 도구 및 라이브러리를 사용하여 AI 솔루션을 개발하도록 데이터 과학자에게 권한을 부여하는 방법에 대해 알아봅니다.</p>
+    - html: <a href="/azure/machine-learning/studio/"> <img height="48" width="48" src="/azure/machine-learning/media/index/machine-learning-studio.svg" alt="Azure Machine Learning Studio"> <br><b>Azure Machine Learning Studio</b></a> <p>공동 끌어서 놓기 도구를 사용하여 데이터에 대한 예측 분석 솔루션을 빌드, 테스트 및 배포하는 방법에 대해 알아봅니다.</p>
+    - html: <a href="/azure/machine-learning/data-science-virtual-machine/index"> <img height="48" width="48" src="/azure/machine-learning/media/index/virtualmachine.svg" alt="Data Science Virtual Machine"> <br><b>데이터 과학 Virtual Machine</b></a> <p>Azure에서 사용자 지정된 VM 이미지인 데이터 과학 및 심층 학습 VM을 사용하여 고급 분석을 위한 지능형 응용 프로그램을 빌드하는 데 사용한 데이터 과학 도구로 로드되는 방법에 대해 알아봅니다.</p>
+- title: 5분 빠른 시작
+  items:
+  - type: paragraph
+    text: Azure Machine Learning 서비스(미리 보기), Studio 및 데이터 과학 Virtual Machine을 신속하게 설정하고 사용하는 방법에 대해 알아봅니다.
+  - type: table
+    style: dataMatrix
+    columns:
+    - image:
+        src: media/index/i_machine-learning.svg
+    - image:
+        src: media/index/machine-learning-studio.svg
+    - image:
+        src: media/index/virtualmachine.svg
+    rows:
+    - title: 설정
+      values:
+      - href: /azure/machine-learning/service/quickstart-installation
+      - href: /azure/machine-learning/studio/create-workspace
+      - href: /azure/machine-learning/data-science-virtual-machine/provision-vm
+    - title: 모델 빌드
+      values:
+      - href: /azure/machine-learning/service/quickstart-installation
+      - href: /azure/machine-learning/studio/create-experiment
+      - href: 
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: Azure Machine Learning 서비스(미리 보기) 및 Studio를 사용하여 모델을 빌드하고, 배포하고, 사용하는 방법에 대해 알아봅니다.
+  - type: table
+    style: dataMatrix
+    columns:
+    - image:
+        src: media/index/i_machine-learning.svg
+    - image:
+        src: media/index/machine-learning-studio.svg
+    rows:
+    - title: 데이터 준비
+      values:
+      - href: /azure/machine-learning/desktop-workbench/tutorial-classifying-iris-part-1
+      - href: /azure/machine-learning/studio/walkthrough-2-upload-data
+    - title: 모델 빌드
+      values:
+      - href: /azure/machine-learning/desktop-workbench/tutorial-classifying-iris-part-2
+      - href: /azure/machine-learning/studio/walkthrough-3-create-new-experiment
+    - title: 모델 운영
+      values:
+      - href: /azure/machine-learning/desktop-workbench/tutorial-classifying-iris-part-3
+      - href: /azure/machine-learning/studio/walkthrough-5-publish-web-service
+    - title: 모델 사용
+      values:
+      - href: /azure/machine-learning/desktop-workbench/model-management-consumption
+      - href: /azure/machine-learning/studio/walkthrough-6-access-web-service
+- title: Microsoft Machine Learning 기술 추가 정보
+  items:
+  - type: list
+    style: cards
+    className: cardsA
+    items:
+    - html: <a href="/azure/machine-learning/team-data-science-process"> <img src="media/index/tdsp.png" alt="Team Data Science Process" height="32" width="32"> <p><b>Team Data Science Process</b></p> </a>팀에 도움이 되는 공동 데이터 과학 방법론은 예측 분석 솔루션 및 지능형 응용 프로그램을 효율적으로 제공합니다.
+    - html: <a href="/sql/advanced-analytics/r/r-services"> <img src="media/index/logo_sql.png" alt="SQL Server Machine Learning Services" height="32" width="32"> <p><b>SQL Server Machine Learning 서비스</b></p> </a>R 및 Python 모두에 대한 지원을 포함하는 데이터베이스 내 분석입니다.
+    - html: <a href="/machine-learning-server/"> <img src="media/index/ml-server.png" alt="Microsoft Machine Learning Server" height="32" width="32"> <p><b>Microsoft Machine Learning Server</b></p> </a>유연한 엔터프라이즈 컴퓨터 학습 플랫폼은 Windows, Linux 및 HDInsight Spark와 Hadoop 클러스터에서 R 및 Python 배포를 지원합니다.
+    - html: <a href="/azure/batch-ai/"> <img src="media/index/batch.png" alt="Batch AI Training" height="32" width="32"> <p><b>Batch AI 교육</b></p> </a>관리 서비스는 사용자가 프레임워크를 사용하여 AI 모델과 동시에 실험하도록 도움을 주며, 클러스터링된 GPU에 걸친 규모로 해당 모델을 교육합니다.
+    - html: <a href="/azure/#pivot=products&panel=cognitive"> <img src="media/index/cognitive-services.png" alt="Cognitive Services" height="32" width="32"> <p><b>Cognitive Services</b></p> </a>앱, 웹 사이트 및 봇에 지능형 알고리즘을 제공하는 API입니다.
+    - html: <a href="/cognitive-toolkit/"> <img src="media/index/cntk.png" alt="Microsoft Cognitive Toolkit" height="32" width="32"> <p><b>Microsoft Cognitive 도구 키트</b></p> </a>심층 학습 알고리즘을 학습하는 무료 오픈 소스 도구 키트입니다.

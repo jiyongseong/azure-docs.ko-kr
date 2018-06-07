@@ -1,11 +1,11 @@
 ---
-title: "Linux VM에서 HPC 팩으로 OpenFOAM 실행 | Microsoft Docs"
-description: "Azure에서 Microsoft HPC Pack 클러스터를 배포하고 RDMA 네트워크 간의 여러 Linux 계산 노드에서 OpenFOAM 작업을 실행합니다."
+title: Linux VM에서 HPC 팩으로 OpenFOAM 실행 | Microsoft Docs
+description: Azure에서 Microsoft HPC Pack 클러스터를 배포하고 RDMA 네트워크 간의 여러 Linux 계산 노드에서 OpenFOAM 작업을 실행합니다.
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: dlepow
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-service-management,azure-resource-manager,hpc-pack
 ms.assetid: c0bb1637-bb19-48f1-adaa-491808d3441f
 ms.service: virtual-machines-linux
@@ -15,21 +15,20 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: big-compute
 ms.date: 07/22/2016
 ms.author: danlep
+ms.openlocfilehash: f43790d3495e1c09730e90b5077ec840731a7d83
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: ef124a8983fa112d499252460bff9ed2fcccc02b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
 # <a name="run-openfoam-with-microsoft-hpc-pack-on-a-linux-rdma-cluster-in-azure"></a>Azure의 Linux RDMA 클러스터에서 Microsoft HPC 팩을 사용하여 OpenFoam 실행
-이 문서에서는 Azure 가상 컴퓨터에서 OpenFoam을 실행하는 한 가지 방법을 설명합니다. 여기서는 Azure에서 Linux 계산 노드를 사용하여 Microsoft HPC Pack 클러스터를 배포하고 Intel MPI를 사용하여 [OpenFoam](http://openfoam.com/) 작업을 실행합니다. 계산 노드에 RDMA 지원 Azure VM을 사용할 수 있으므로 계산 노드는 Azure RDMA 네트워크를 통해 통신합니다. Azure에서 OpenFoam을 실행하는 다른 옵션으로는 마켓플레이스에서 제공되는 완전히 구성된 상용 이미지(예: UberCloud에서 제공하는 [CentOS 6의 OpenFoam 2.3](https://azure.microsoft.com/marketplace/partners/ubercloud/openfoam-v2dot3-centos-v6/)) 및 [Azure Batch](https://blogs.technet.microsoft.com/windowshpc/2016/07/20/introducing-mpi-support-for-linux-on-azure-batch/)에서 실행되는 이미지가 있습니다. 
+이 문서에서는 Azure 가상 머신에서 OpenFoam을 실행하는 한 가지 방법을 설명합니다. 여기서는 Azure에서 Linux 계산 노드를 사용하여 Microsoft HPC Pack 클러스터를 배포하고 Intel MPI를 사용하여 [OpenFoam](http://openfoam.com/) 작업을 실행합니다. 계산 노드에 RDMA 지원 Azure VM을 사용할 수 있으므로 계산 노드는 Azure RDMA 네트워크를 통해 통신합니다. Azure에서 OpenFoam을 실행하는 다른 옵션으로는 Marketplace에서 제공되는 완전히 구성된 상용 이미지(예: UberCloud에서 제공하는 [CentOS 6의 OpenFoam 2.3](https://azure.microsoft.com/marketplace/partners/ubercloud/openfoam-v2dot3-centos-v6/)) 및 [Azure Batch](https://blogs.technet.microsoft.com/windowshpc/2016/07/20/introducing-mpi-support-for-linux-on-azure-batch/)에서 실행되는 이미지가 있습니다. 
 
 [!INCLUDE [learn-about-deployment-models](../../../../includes/learn-about-deployment-models-both-include.md)]
 
 OpenFOAM(오픈 필드 작업 및 조작에 대한)은 상업용 및 연구용 조직의 공학 및 과학에서 널리 사용되는 오픈 소스 CFD(컴퓨팅 유체 역학) 소프트웨어 패키지입니다. Meshing, 특히 snappyHexMesh, 복잡한 CAD 기하학 및 전처리 및 후처리에 대한 병렬화된 메셔에 대한 도구를 포함합니다. 거의 모든 프로세스는 마음껏 컴퓨터 하드웨어를 모두 활용하도록 병렬로 실행합니다.  
 
-Microsoft HPC 팩에서는 MPI 응용 프로그램을 포함하는 대규모 HPC 및 병렬 응용 프로그램을 Microsoft Azure 가상 컴퓨터의 클러스터에서 실행하는 기능을 제공합니다. HPC 팩은 HPC 팩 클러스터에 배포된 Linux 계산 노드 VM에서 Linux HPC 응용 프로그램의 실행도 지원합니다. HPC 팩으로 Linux 계산 노드 사용에 대한 소개는 [Azure에서 HPC 팩 클러스터의 Linux 계산 노드 시작](hpcpack-cluster.md)을 참조하세요.
+Microsoft HPC 팩에서는 MPI 응용 프로그램을 포함하는 대규모 HPC 및 병렬 응용 프로그램을 Microsoft Azure 가상 머신의 클러스터에서 실행하는 기능을 제공합니다. HPC 팩은 HPC 팩 클러스터에 배포된 Linux 계산 노드 VM에서 Linux HPC 응용 프로그램의 실행도 지원합니다. HPC 팩으로 Linux 계산 노드 사용에 대한 소개는 [Azure에서 HPC 팩 클러스터의 Linux 계산 노드 시작](hpcpack-cluster.md)을 참조하세요.
 
 > [!NOTE]
 > 이 문서에서는 HPC Pack을 사용하여 Linux MPI 워크로드를 실행하는 방법을 보여 줍니다. 또한 여기서는 Linux 시스템 관리 및 Linux 클러스터에서 실행 중인 MPI 작업에 대해 잘 알고 있다고 가정합니다. 이 문서에 표시된 것과 다른 MPI 및 OpenFOAM 버전을 사용하는 경우 일부 설치 및 구성 단계를 수정해야 할 수도 있습니다. 
@@ -55,7 +54,7 @@ Microsoft HPC 팩에서는 MPI 응용 프로그램을 포함하는 대규모 HPC
 Linux **ssh-keygen** 명령을 실행하여 공개 키 및 개인 키를 포함하는 RSA 키 쌍을 간편하게 생성할 수 있습니다.
 
 1. Linux 컴퓨터에 로그온합니다.
-2. 다음 명령을 실행합니다.
+2. 다음 명령 실행:
    
    ```
    ssh-keygen -t rsa
@@ -603,4 +602,3 @@ exit ${RTNSTS}
 [isosurface]:media/hpcpack-cluster-openfoam/isosurface.png
 [isosurface_color]:media/hpcpack-cluster-openfoam/isosurface_color.png
 [linux_processes]:media/hpcpack-cluster-openfoam/linux_processes.png
-

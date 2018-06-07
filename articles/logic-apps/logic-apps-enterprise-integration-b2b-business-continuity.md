@@ -14,14 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 04/10/2017
 ms.author: LADocs; padmavc
+ms.openlocfilehash: 0ef3965adac03f21c386765a43290c93d58d1c18
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
 ms.translationtype: HT
-ms.sourcegitcommit: 349fe8129b0f98b3ed43da5114b9d8882989c3b2
-ms.openlocfilehash: 4896d9da456bcc17b1a4d92259ef3d57f8575d8b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
-
 # <a name="logic-apps-b2b-cross-region-disaster-recovery"></a>Logic Apps B2B 지역 간 재해 복구
 
 B2B 워크로드에는 주문 및 청구서와 같은 금전 거래가 포함됩니다. 재해 이벤트 동안 기업은 파트너와 계약한 비즈니스 수준 SLA를 충족할 수 있도록 신속하게 복구하는 것이 매우 중요합니다. 이 문서에서는 B2B 워크로드에 대한 비즈니스 연속성 계획을 작성하는 방법을 보여 줍니다. 
@@ -94,7 +92,7 @@ EDI X12 문서의 비즈니스 연속성은 컨트롤 번호를 기준으로 합
 
 ![중복된 검사 설정 선택](./media/logic-apps-enterprise-integration-b2b-business-continuity/dupcheck.png)  
 
-1. 보조 지역에 [논리 앱](../logic-apps/logic-apps-create-a-logic-app.md)을 만듭니다.    
+1. 보조 지역에 [논리 앱](../logic-apps/quickstart-create-first-logic-app-workflow.md)을 만듭니다.    
 
 2. **X12**를 검색하고 **X12 - 컨트롤 번호가 수정되었을 때**를 선택합니다.   
 
@@ -149,7 +147,7 @@ EDI EDIFACT 문서의 비즈니스 연속성은 컨트롤 번호를 기준으로
 
 ![중복된 검사 설정 선택](./media/logic-apps-enterprise-integration-b2b-business-continuity/edifactdupcheck.png)  
 
-1. 보조 지역에 [논리 앱](../logic-apps/logic-apps-create-a-logic-app.md)을 만듭니다.    
+1. 보조 지역에 [논리 앱](../logic-apps/quickstart-create-first-logic-app-workflow.md)을 만듭니다.    
 
 2. **EDIFACT**를 검색하고 **EDIFACT - 컨트롤 번호가 수정되는 경우**를 선택합니다.
 
@@ -201,7 +199,7 @@ AS2 프로토콜을 사용하는 문서에 대한 비즈니스 연속성은 메�
 > [!TIP]
 > [AS2 빠른 시작 템플릿](https://github.com/Azure/azure-quickstart-templates/pull/3302)을 사용하여 Logic Apps를 만들 수도 있습니다. 템플릿을 사용하려면 주 통합 계정 및 보조 통합 계정을 만들어야 합니다. 이 템플릿은 트리거와 작업이 있는 논리 앱을 만드는 데 도움이 됩니다. 논리 앱은 트리거에서 주 통합 계정으로, 그리고 작업에서 보조 통합 계정으로 연결을 만듭니다.
 
-1. 보조 지역에 [논리 앱](../logic-apps/logic-apps-create-a-logic-app.md)을 만듭니다.  
+1. 보조 지역에 [논리 앱](../logic-apps/quickstart-create-first-logic-app-workflow.md)을 만듭니다.  
 
 2. **AS2**를 검색하고 **AS2 - MIC 값이 만들어질 때**를 선택합니다.   
 
@@ -248,5 +246,4 @@ AS2 프로토콜을 사용하는 문서에 대한 비즈니스 연속성은 메�
 ## <a name="next-steps"></a>다음 단계
 
 [B2B 메시지 모니터링](logic-apps-monitor-b2b-message.md)
-
 

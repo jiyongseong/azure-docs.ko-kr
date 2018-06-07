@@ -15,12 +15,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 07/21/2016
 ms.author: jehollan; LADocs
-translationtype: Human Translation
-ms.sourcegitcommit: 757d6f778774e4439f2c290ef78cbffd2c5cf35e
-ms.openlocfilehash: fbfef291334109c6dcfcde80741874549fb7929f
-ms.lasthandoff: 04/10/2017
-
-
+ms.openlocfilehash: ec407d72f90cf3616214d27c378dee0ff42f4c6f
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="get-started-with-the-webhook-connector"></a>웹후크 커넥터 시작
 
@@ -80,7 +79,7 @@ ms.lasthandoff: 04/10/2017
 
 ## <a name="webhook-triggers"></a>웹후크 트리거
 
-| 작업 | 설명 |
+| 조치 | 설명 |
 | --- | --- |
 | HTTP 웹후크 |필요에 따라 URL을 호출할 수 있는 서비스에 대한 콜백 URL을 구독하여 논리 앱을 실행합니다. |
 
@@ -99,8 +98,8 @@ ms.lasthandoff: 04/10/2017
 | 구독 취소 URI* |uri |구독 취소 요청에 사용할 HTTP URI |
 | 구독 본문 |body |구독의 HTTP 요청 본문 |
 | 구독 헤더 |headers |구독의 HTTP 요청 헤더 |
-| 구독 인증 |authentication |구독에 사용할 HTTP 인증 자세한 내용은 [HTTP 커넥터를 참조](connectors-native-http.md#authentication)하세요. |
-| 구독 취소 본문 |body |구독 취소의 HTTP 요청 본문 |
+| 구독 인증 |인증 |구독에 사용할 HTTP 인증 자세한 내용은 [HTTP 커넥터를 참조](connectors-native-http.md#authentication)하세요. |
+| 구독 취소 본문 |본문 |구독 취소의 HTTP 요청 본문 |
 | 구독 취소 헤더 |headers |구독 취소의 HTTP 요청 헤더 |
 | 구독 취소 인증 |authentication |구독 취소에 사용할 HTTP 인증 자세한 내용은 [HTTP 커넥터를 참조](connectors-native-http.md#authentication)하세요. |
 
@@ -111,12 +110,12 @@ ms.lasthandoff: 04/10/2017
 | 속성 이름 | 데이터 형식 | 설명 |
 | --- | --- | --- |
 | headers |object |웹후크 요청 헤더 |
-| body |object |웹후크 요청 개체 |
+| 본문 |object |웹후크 요청 개체 |
 | 상태 코드 |int |웹후크 요청 상태 코드 |
 
 ## <a name="webhook-actions"></a>웹후크 작업
 
-| 작업 | 설명 |
+| 조치 | 설명 |
 | --- | --- |
 | HTTP 웹후크 |필요에 따라 URL을 호출할 수 있는 서비스에 대한 콜백 URL을 구독하여 워크플로 단계를 다시 시작합니다. |
 
@@ -135,8 +134,8 @@ ms.lasthandoff: 04/10/2017
 | 구독 취소 URI* |uri |구독 취소 요청에 사용할 HTTP URI |
 | 구독 본문 |body |구독의 HTTP 요청 본문 |
 | 구독 헤더 |headers |구독의 HTTP 요청 헤더 |
-| 구독 인증 |authentication |구독에 사용할 HTTP 인증 자세한 내용은 [HTTP 커넥터를 참조](connectors-native-http.md#authentication)하세요. |
-| 구독 취소 본문 |body |구독 취소의 HTTP 요청 본문 |
+| 구독 인증 |인증 |구독에 사용할 HTTP 인증 자세한 내용은 [HTTP 커넥터를 참조](connectors-native-http.md#authentication)하세요. |
+| 구독 취소 본문 |본문 |구독 취소의 HTTP 요청 본문 |
 | 구독 취소 헤더 |headers |구독 취소의 HTTP 요청 헤더 |
 | 구독 취소 인증 |authentication |구독 취소에 사용할 HTTP 인증 자세한 내용은 [HTTP 커넥터를 참조](connectors-native-http.md#authentication)하세요. |
 
@@ -147,10 +146,10 @@ ms.lasthandoff: 04/10/2017
 | 속성 이름 | 데이터 형식 | 설명 |
 | --- | --- | --- |
 | headers |object |웹후크 요청 헤더 |
-| body |object |웹후크 요청 개체 |
+| 본문 |object |웹후크 요청 개체 |
 | 상태 코드 |int |웹후크 요청 상태 코드 |
 
 ## <a name="next-steps"></a>다음 단계
 
-* [논리 앱 만들기](../logic-apps/logic-apps-create-a-logic-app.md)
+* [논리 앱 만들기](../logic-apps/quickstart-create-first-logic-app-workflow.md)
 * [다른 커넥터 찾기](apis-list.md)

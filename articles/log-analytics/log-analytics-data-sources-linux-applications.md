@@ -1,8 +1,8 @@
 ---
-title: "OMS Log Analytics에서 Linux 응용 프로그램 성능 수집 | Microsoft Docs"
-description: "이 문서에서는 MySQL 및 Apache HTTP 서버에 대한 성능 카운터를 수집하도록 Linux용 OMS 에이전트를 구성하는 세부 정보를 제공합니다."
+title: OMS Log Analytics에서 Linux 응용 프로그램 성능 수집 | Microsoft Docs
+description: 이 문서에서는 MySQL 및 Apache HTTP 서버에 대한 성능 카운터를 수집하도록 Linux용 OMS 에이전트를 구성하는 세부 정보를 제공합니다.
 services: log-analytics
-documentationcenter: 
+documentationcenter: ''
 author: mgoedtel
 manager: carmonm
 editor: tysonn
@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/04/2017
 ms.author: magoedte
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2db2ba16c06f49fd851581a1088df21f5a87a911
-ms.openlocfilehash: 04ea6f728e59ec8b47e54fe45e1adc6cbbfb85ff
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/09/2017
-
-
+ms.openlocfilehash: bfb9b62a8965fa1f7daf62d814665ca23491cc04
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="collect-performance-counters-for-linux-applications-in-log-analytics"></a>Log Analytics에서 Linux 응용 프로그램에 대한 성능 카운터 수집 
 이 문서에서는 특정 응용 프로그램에 대한 성능 카운터를 수집하도록 [Linux용 OMS 에이전트](https://github.com/Microsoft/OMS-Agent-for-Linux)를 구성하는 세부 정보를 제공합니다.  이 문서에 포함된 응용 프로그램은 다음과 같습니다.  
@@ -49,11 +47,11 @@ MySQL 인증 파일은 `/var/opt/microsoft/mysql-cimprov/auth/omsagent/mysql-aut
 
 인증 파일의 항목은 다음 테이블에 설명되어 있습니다.
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 |:--|:--|
 | 포트 | MySQL 인스턴스가 수신 대기 중인 현재 포트를 나타냅니다. 포트 0은 뒤에 나오는 속성이 기본 인스턴스에 사용된다는 것을 지정합니다. |
 | 바인딩 주소| 현재 MySQL 바인딩-주소입니다. |
-| username| MySQL 서버 인스턴스를 모니터링하는 데 사용되는 MySQL 사용자입니다. |
+| 사용자 이름| MySQL 서버 인스턴스를 모니터링하는 데 사용되는 MySQL 사용자입니다. |
 | Base64로 인코딩된 암호| Base64로 인코딩된 MySQL 모니터링 사용자의 암호입니다. |
 | AutoUpdate| MySQL OMI 공급자가 업그레이드되면 my.cnf 파일에서 변경 내용을 검색하고 MySQL OMI 인증 파일을 덮어쓸지 여부를 지정합니다. |
 
@@ -78,11 +76,11 @@ MySQL OMI 공급자의 설치에 포함된 것은 MySQL OMI 인증 파일 편집
 
 다음 테이블에서 mycimprovauth 사용에 대한 구문의 세부 정보를 제공합니다.
 
-| 작업 | 예제 | 설명
+| 작업 | 예 | 설명
 |:--|:--|:--|
-| autoupdate *false\|true* | mycimprovauth autoupdate false | 다시 시작 또는 업데이트 시 인증 파일이 자동으로 업데이트될지 여부를 설정합니다. |
+| autoupdate *false or true* | mycimprovauth autoupdate false | 다시 시작 또는 업데이트 시 인증 파일이 자동으로 업데이트될지 여부를 설정합니다. |
 | default *bind-address username password* | mycimprovauth default 127.0.0.1 root pwd | MySQL OMI 인증 파일에서 기본 인스턴스를 설정합니다.<br>암호 필드는 일반 텍스트로 입력되어야 하며 MySQL OMI 인증 파일의 암호는 Base 64로 인코딩됩니다. |
-| delete *default\|port_num* | mycimprovauth 3308 | 기본값 또는 포트 번호로 지정된 인스턴스를 삭제합니다. |
+| delete *default or port_num* | mycimprovauth 3308 | 기본값 또는 포트 번호로 지정된 인스턴스를 삭제합니다. |
 | help | mycimprov help | 사용할 명령 목록을 인쇄합니다. |
 | print | mycimprov print | 읽기 쉬운 MySQL OMI 인증 파일을 인쇄합니다. |
 | update port_num *bind-address username password* | mycimprov update 3307 127.0.0.1 root pwd | 지정된 인스턴스를 업데이트하거나 존재하지 않는 경우 인스턴스를 추가합니다. |
@@ -169,4 +167,4 @@ Log Analytics에 데이터를 보내도록 Linux용 OMS 에이전트를 구성�
 
 ## <a name="next-steps"></a>다음 단계
 * Linux 에이전트에서 [성능 카운터를 수집합니다](log-analytics-data-sources-performance-counters.md).
-* 데이터 원본 및 솔루션에서 수집한 데이터를 분석하기 위해 [로그 검색](log-analytics-log-searches.md) 에 대해 알아봅니다. 
+* 데이터 원본 및 솔루션에서 수집한 데이터를 분석하기 위해 [로그 검색](log-analytics-log-searches.md)에 대해 알아봅니다. 

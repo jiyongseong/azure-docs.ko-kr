@@ -14,13 +14,12 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 02/08/2017
 ms.author: alkohli
-translationtype: Human Translation
-ms.sourcegitcommit: 0d8472cb3b0d891d2b184621d62830d1ccd5e2e7
 ms.openlocfilehash: 4dc5ae7d3feae769a8366f68f412f3b79fa8eb00
-ms.lasthandoff: 03/21/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="storsimple-for-cloud-solutions-provider-program-frequently-asked-questions"></a>클라우드 솔루션 공급자 프로그램용 StorSimple: 질문과 대답
 
 
@@ -99,4 +98,3 @@ CSP용 StorSimple에 대한 자세한 내용은 다음으로 이동합니다.
 
 ## <a name="next-steps"></a>다음 단계
 StorSimple을 배포할 준비가 되면 [CSP에서 StorSimple 배포](storsimple-partner-csp-deploy.md)로 이동합니다.
-

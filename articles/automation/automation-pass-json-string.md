@@ -1,26 +1,21 @@
 ---
-title: "Azure Automation Runbook에 JSON 개체 전달 | Microsoft Docs"
-description: "Runbook에 매개 변수를 JSON 개체로 전달하는 방법"
+title: Azure Automation Runbook에 JSON 개체 전달
+description: Runbook에 매개 변수를 JSON 개체로 전달하는 방법
 services: automation
-documentationcenter: dev-center-name
-author: eslesar
+ms.service: automation
+ms.component: process-automation
+author: georgewallace
+ms.author: gwallace
+ms.date: 03/16/2018
+ms.topic: conceptual
 manager: carmonm
 keywords: powershell,  runbook, json, azure automation
-ms.service: automation
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: powershell
-ms.workload: TBD
-ms.date: 06/15/2017
-ms.author: eslesar
+ms.openlocfilehash: b0eaa13baa3e787db14e7a6f915018c3a4f280a1
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
 ms.translationtype: HT
-ms.sourcegitcommit: 141270c353d3fe7341dfad890162ed74495d48ac
-ms.openlocfilehash: eac0e95a46731b9d396ea0590e629d61ca6a7d70
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
-
 # <a name="pass-a-json-object-to-an-azure-automation-runbook"></a>Azure Automation Runbook에 JSON 개체 전달
 
 JSON 파일에서 Runbook에 전달하려는 데이터를 저장하는 것이 유용할 수 있습니다.
@@ -34,8 +29,8 @@ PowerShell Runbook은 Azure VM을 시작하고 전달된 JSON에서 VM에 대한
 이 자습서를 완료하려면 다음이 필요합니다.
 
 * 동작합니다. 계정이 아직 없는 경우 [MSDN 구독자 혜택을 활성화](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/)하거나 <a href="/pricing/free-account/" target="_blank">[무료 계정을 등록](https://azure.microsoft.com/free/)할 수 있습니다.
-* [자동화 계정](automation-sec-configure-azure-runas-account.md) .  이 계정은 가상 컴퓨터를 시작하고 중지할 수 있는 권한이 있어야 합니다.
-* Azure 가상 컴퓨터. 프로덕션 VM이 되지 않도록 이 가상 컴퓨터를 중지하고 시작합니다.
+* [Automation 계정](automation-sec-configure-azure-runas-account.md) .  이 계정은 가상 머신을 시작하고 중지할 수 있는 권한이 있어야 합니다.
+* Azure 가상 머신. 프로덕션 VM이 되지 않도록 이 가상 컴퓨터를 중지하고 시작합니다.
 * 로컬 컴퓨터에 설치된 Azure Powershell. Azure PowerShell을 얻는 방법에 대한 자세한 내용은 [Install and configure Azure Powershell](https://docs.microsoft.com/powershell/azure/install-azurerm-ps?view=azurermps-4.1.0)(Azure Powershell 설치 및 구성)을 참조하세요.
 
 ## <a name="create-the-json-file"></a>JSON 파일 만들기
@@ -66,7 +61,7 @@ Param(
 
 # Connect to Azure account   
 $Conn = Get-AutomationConnection -Name AzureRunAsConnection
-Add-AzureRMAccount -ServicePrincipal -Tenant $Conn.TenantID `
+Connect-AzureRmAccount -ServicePrincipal -Tenant $Conn.TenantID `
     -ApplicationID $Conn.ApplicationID -CertificateThumbprint $Conn.CertificateThumbprint
 
 # Convert object to actual JSON
@@ -85,7 +80,7 @@ Start-AzureRmVM -Name $json.VMName -ResourceGroupName $json.ResourceGroup
 
 1. Azure에 로그인합니다.
    ```powershell
-   Login-AzureRmAccount
+   Connect-AzureRmAccount
    ```
     Azure 자격 증명을 입력하라는 메시지가 표시됩니다.
 1. JSON 파일의 내용을 가져와 문자열로 변환합니다.
@@ -97,7 +92,7 @@ Start-AzureRmVM -Name $json.VMName -ResourceGroupName $json.ResourceGroup
    ```powershell
    $JsonParams = @{"json"=$json}
    ```
-1. `Start-AzureRmAutomstionRunbook`의 매개 변수에 대한 해시 테이블을 만듭니다.
+1. `Start-AzureRmAutomationRunbook`의 매개 변수에 대한 해시 테이블을 만듭니다.
    ```powershell
    $RBParams = @{
         AutomationAccountName = 'AATest'
@@ -116,8 +111,7 @@ Runbook에서 JSON 파일의 값을 사용하여 VM을 시작합니다.
 
 ## <a name="next-steps"></a>다음 단계
 
-* 텍스트 편집기를 사용하여 PowerShell 및 PowerShell 워크플로 Runbook을 편집하는 방법을 알아보려면 [Azure 자동화에서 텍스트 Runbook 편집](automation-edit-textual-runbook.md) 
+* 텍스트 편집기를 사용하여 PowerShell 및 PowerShell 워크플로 Runbook을 편집하는 방법을 알아보려면 [Azure Automation에서 텍스트 Runbook 편집](automation-edit-textual-runbook.md) 
 * Runbook을 만들고 가져오는 방법을 알아보려면 [Azure Automation에서 Runbook 만들기 또는 가져오기](automation-creating-importing-runbook.md)를 참조하세요.
-
 
 

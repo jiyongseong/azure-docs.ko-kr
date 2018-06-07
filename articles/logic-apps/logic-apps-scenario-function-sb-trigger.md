@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: integration
 ms.date: 05/23/2016
 ms.author: LADocs; jehollan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 98c78d84f3a615fae7d6785994f0db20f7a53254
-ms.openlocfilehash: 013e3d29694a8daf1481e513c9c4dfc6b5da3384
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/10/2017
-
-
+ms.openlocfilehash: 088f10bc32dd492f82f0a10a7e5829e76f588758
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="scenario-trigger-a-logic-app-with-azure-functions-and-azure-service-bus"></a>시나리오: Azure Functions 및 Azure Service Bus를 사용하여 논리 앱 트리거
 
@@ -70,4 +68,3 @@ Azure Functions로 장기 실행 수신기 또는 작업을 배포하는 데 필
 <!-- Image References -->
 [1]: ./media/logic-apps-scenario-function-sb-trigger/manualtrigger.png
 [2]: ./media/logic-apps-scenario-function-sb-trigger/newqueuetriggerfunction.png
-

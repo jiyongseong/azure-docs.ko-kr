@@ -1,4 +1,3 @@
- 
 ---
 title: "Azure Logic Apps에서 MQ 커넥터를 사용하는 방법 알아보기 | Microsoft Docs"
 description: "논리 앱 워크플로에서 온-프레미스 또는 Azure MQ 서버에 연결하여 메시지 찾아보기, 수신 및 WebSphere MQ에 전송"
@@ -16,14 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: integration
 ms.date: 06/01/2017
 ms.author: valthom; ladocs
+ms.openlocfilehash: 24ea1ef4d3c6229707458ef2f2005f90d8273304
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 17c651585b56dae186286f5d8c68c363ae9c524d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
-
 # <a name="connect-to-an-ibm-mq-server-from-logic-apps-using-the-mq-connector"></a>MQ 커넥터를 사용하여 논리 앱에서 IBM MQ 서버에 연결 
 
 MQ용 Microsoft 커넥터는 MQ 서버 온-프레미스 또는 Azure에 저장된 메시지를 전송하고 검색합니다. 이 커넥터는 TCP/IP 네트워크를 통해 원격 IBM MQ 서버와 통신하는 Microsoft MQ 클라이언트를 포함합니다. 이 문서는 MQ 커넥터를 사용하는 시작 가이드입니다. 큐에서 단일 메시지를 검색하고 다른 작업을 시도하여 시작하는 것이 좋습니다.    
@@ -126,5 +123,4 @@ MQ 커넥터에는 다음 작업이 포함됩니다. 트리거는 없습니다.
 [커넥터 세부 정보](/connectors/mq/)에서 swagger에 정의된 모든 트리거 및 작업과 제한 사항도 확인할 수 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
-[논리 앱 만들기](../logic-apps/logic-apps-create-a-logic-app.md) [API 목록](apis-list.md)에서 Logic Apps의 사용 가능한 다른 커넥터를 확인하세요.
-
+[논리 앱 만들기](../logic-apps/quickstart-create-first-logic-app-workflow.md) [API 목록](apis-list.md)에서 Logic Apps의 사용 가능한 다른 커넥터를 확인하세요.

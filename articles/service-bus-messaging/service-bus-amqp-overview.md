@@ -12,17 +12,16 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: multiple
 ms.topic: article
-ms.date: 04/27/2017
+ms.date: 01/30/2018
 ms.author: sethm
+ms.openlocfilehash: 6d2dffd22ecfc0aaf6e338567d5cf107a2c07383
+ms.sourcegitcommit: 9d317dabf4a5cca13308c50a10349af0e72e1b7e
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 0aeb02c8a07728cd17aa937614c5c20dd0bf102b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/01/2018
 ---
-# <a name="amqp-10-support-in-service-bus"></a>서비스 버스의 AMQP 1.0 지원
-Azure Service Bus 클라우드 서비스와 온-프레미스 [Windows Server용 Service Bus(Service Bus 1.1)](https://msdn.microsoft.com/library/dn282144.aspx) 둘 다 AMQP(Advanced Message Queueing Protocol) 1.0을 지원합니다. AMQP를 사용하여 여러 플랫폼 간에 개방형 표준 프로토콜을 사용하는 하이브리드 응용 프로그램을 빌드할 수 있습니다. 다른 언어 및 프레임워크로 빌드된 구성 요소를 사용하며 다른 운영 체제에서 실행되는 응용 프로그램을 생성할 수 있습니다. 이러한 구성 요소는 모두 서비스 버스에 연결할 수 있으며 구조화된 비즈니스 메시지를 효율적이고 완벽하며 원활하게 교환할 수 있습니다.
+# <a name="amqp-10-support-in-service-bus"></a>Service Bus의 AMQP 1.0 지원
+Azure Service Bus 클라우드 서비스와 온-프레미스 [Windows Server용 Service Bus(Service Bus 1.1)](https://msdn.microsoft.com/library/dn282144.aspx) 둘 다 AMQP(Advanced Message Queueing Protocol) 1.0을 지원합니다. AMQP를 사용하여 여러 플랫폼 간에 개방형 표준 프로토콜을 사용하는 하이브리드 응용 프로그램을 빌드할 수 있습니다. 다른 언어 및 프레임워크로 빌드된 구성 요소를 사용하며 다른 운영 체제에서 실행되는 응용 프로그램을 생성할 수 있습니다. 이러한 구성 요소는 모두 Service Bus에 연결할 수 있으며 구조화된 비즈니스 메시지를 효율적이고 완벽하며 원활하게 교환할 수 있습니다.
 
 ## <a name="introduction-what-is-amqp-10-and-why-is-it-important"></a>소개: AMQP 1.0이란 무엇이며 왜 중요한가요?
 일반적으로 메시지 지향 미들웨어 제품은 클라이언트 응용 프로그램과 브로커 간에 통신하는 데 소유 프로토콜을 사용했습니다. 일단 특정 공급업체의 메시징 브로커를 선택했으면 그 공급업체의 라이브러리를 사용하여 클라이언트 응용 프로그램을 해당 브로커에 연결해야 합니다. 이런 경우 응용 프로그램을 다른 제품에 이식하려면 연결되어 있는 모든 응용 프로그램에서 코드를 변경해야 하므로 해당 공급업체에 많이 의존하게 됩니다. 
@@ -60,30 +59,30 @@ AMQP 1.0은 2008년 이래로 기술 공급업체와 최종 사용자 업체를 
 * 숙련된 직원에 대한 가용성
 * 위험성 저하 및 관리 가능한 위험
 
-## <a name="amqp-10-and-service-bus"></a>AMQP 1.0 및 서비스 버스
-이제 서비스 버스에 AMQP 1.0이 지원되므로 효율적인 이진 프로토콜을 사용하여 다양한 플랫폼에서 큐 및 게시/구독 조정된 메시징 기능을 활용할 수 있습니다. 뿐만 아니라 여러 언어, 프레임워크 및 운영 체제가 혼합되어 사용된 구성 요소로 이루어진 응용 프로그램을 만들 수 있습니다.
+## <a name="amqp-10-and-service-bus"></a>AMQP 1.0 및 Service Bus
+이제 Service Bus에 AMQP 1.0이 지원되므로 효율적인 이진 프로토콜을 사용하여 다양한 플랫폼에서 큐 및 게시/구독 조정된 메시징 기능을 활용할 수 있습니다. 뿐만 아니라 여러 언어, 프레임워크 및 운영 체제가 혼합되어 사용된 구성 요소로 이루어진 응용 프로그램을 만들 수 있습니다.
 
-다음 그림에서는 표준 JMS(Java Message Service) API를 사용하여 작성되었으며 Linux에서 실행되는 Java 클라이언트와 Windows에서 실행되는 .NET 클라이언트가 AMQP 1.0이 사용된 서비스 버스를 통해 메시지를 교환하는 배포 예를 보여 줍니다.
+다음 그림에서는 표준 JMS(Java Message Service) API를 사용하여 작성되었으며 Linux에서 실행되는 Java 클라이언트와 Windows에서 실행되는 .NET 클라이언트가 AMQP 1.0이 사용된 Service Bus를 통해 메시지를 교환하는 배포 예를 보여 줍니다.
 
 ![][0]
 
 **그림 1: Service Bus와 AMQP 1.0을 사용하는 플랫폼 간 메시징을 보여 주는 예제 배포 시나리오**
 
-현재 서비스 버스에서 사용할 수 있는 클라이언트 라이브러리는 다음과 같습니다.
+현재 Service Bus에서 사용할 수 있는 클라이언트 라이브러리는 다음과 같습니다.
 
 | 언어 | 라이브러리 |
 | --- | --- |
-| Java |Apache Qpid JMS(Java Message Service) 클라이언트<br/>IIT Software SwiftMQ Java 클라이언트 |
+| 자바 |Apache Qpid JMS(Java Message Service) 클라이언트<br/>IIT Software SwiftMQ Java 클라이언트 |
 | C |Apache Qpid Proton-C |
 | PHP |Apache Qpid Proton-PHP |
-| Python |Apache Qpid Proton-Python |
+| 파이썬 |Apache Qpid Proton-Python |
 | C# |AMQP .Net Lite |
 
 **그림 2: AMQP 1.0 클라이언트 라이브러리 테이블**
 
 ## <a name="summary"></a>요약
 * AMQP 1.0은 여러 플랫폼 간에 상호 운용되는 하이브리드 응용 프로그램을 만들 수 있는 안정적인 개방형 메시징 프로토콜입니다. AMQP 1.0은 OASIS 표준입니다.
-* 이제 Azure 서비스 버스와 Windows Server용 서비스 버스(서비스 버스 1.1)에서 모두 AMQP 1.0이 지원됩니다. 가격은 기존 프로토콜과 같습니다.
+* 이제 Azure Service Bus와 Windows Server용 Service Bus(Service Bus 1.1)에서 모두 AMQP 1.0이 지원됩니다. 가격은 기존 프로토콜과 같습니다.
 
 ## <a name="next-steps"></a>다음 단계
 자세히 알아볼 준비가 되셨습니까? 다음 링크를 방문하세요.
@@ -98,4 +97,3 @@ AMQP 1.0은 2008년 이래로 기술 공급업체와 최종 사용자 업체를 
 [AMQP를 사용하여 Java에서 Service Bus 사용]: service-bus-amqp-java.md
 [Azure Linux VM에 Apache Qpid Proton-C 설치]: service-bus-amqp-apache.md
 [Windows Server용 Service Bus의 AMQP]: https://msdn.microsoft.com/library/dn574799.aspx
-

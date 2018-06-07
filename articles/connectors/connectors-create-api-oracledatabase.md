@@ -1,26 +1,25 @@
 ---
-title: "Azure Logic Apps에 Oracle 데이터베이스 커넥터 추가 | Microsoft Docs"
-description: "논리 앱에서 Oracle 데이터베이스 커넥터 사용"
-services: 
-documentationcenter: 
-author: MandiOhlinger
+title: Azure Logic Apps에 Oracle 데이터베이스 커넥터 추가 | Microsoft Docs
+description: 논리 앱에서 Oracle 데이터베이스 커넥터 사용
+services: ''
+documentationcenter: ''
+author: ecfan
 manager: anneta
-editor: 
+editor: ''
 tags: connectors
-ms.assetid: 
+ms.assetid: ''
 ms.service: logic-apps
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 03/29/2017
-ms.author: mandia; ladocs
+ms.author: estfan; ladocs
+ms.openlocfilehash: 57931b6c2f96debeb9ab7f1a3b6700f23e7d2a7e
+ms.sourcegitcommit: 8aab1aab0135fad24987a311b42a1c25a839e9f3
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: cc64441617eb5e7d5e70c1cf5c491a672428bc51
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/16/2018
 ---
 # <a name="get-started-with-the-oracle-database-connector"></a>Oracle 데이터베이스 커넥터 시작
 
@@ -29,7 +28,7 @@ Oracle 데이터베이스 커넥터를 사용하여 기존 데이터베이스의
 * 고객 데이터베이스에 새 고객을 추가하거나 주문 데이터베이스에서 주문을 업데이트하여 워크플로를 작성합니다.
 * 데이터의 행을 가져오고, 새 행을 삽입하고, 삭제하는 작업을 사용합니다. 예를 들어 Dynamics CRM Online에서 레코드가 만들어지면(트리거) Oracle 데이터베이스에 행을 삽입합니다(작업). 
 
-이 항목에서는 논리 앱에서 Oracle 데이터베이스 커넥터를 사용하는 방법을 보여 줍니다.
+이 아티클에서는 논리 앱에서 Oracle 데이터베이스 커넥터를 사용하는 방법을 보여줍니다.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -47,7 +46,7 @@ Oracle 데이터베이스 커넥터를 사용하여 기존 데이터베이스의
   [Windows x64용 64비트 ODAC 12c 릴리스 4(12.1.0.2.4)](http://www.oracle.com/technetwork/database/windows/downloads/index-090165.html)
 
     > [!TIP]
-    > Oracle 클라이언트가 설치되지 않으면 연결을 생성하거나 사용할 때 오류가 발생합니다. 이 항목의 일반적인 오류를 참조하세요.
+    > Oracle 클라이언트가 설치되지 않으면 연결을 생성하거나 사용할 때 오류가 발생합니다. 이 아티클의 일반적인 오류를 참조하세요.
 
 
 ## <a name="add-the-connector"></a>커넥터 추가
@@ -105,7 +104,7 @@ Oracle 데이터베이스 커넥터를 사용하여 기존 데이터베이스의
 
 **완화**: 게이트웨이가 설치되어 있는 온-프레미스 컴퓨터에서 실행 중이며 인터넷에 연결할 수 있는지 확인합니다.  꺼져 있거나 절전 모드 상태일 수 있는 컴퓨터에는 게이트웨이를 설치하지 않는 것이 좋습니다. 온-프레미스 데이터 게이트웨이 서비스(PBIEgwService)를 다시 시작할 수도 있습니다.
 
-#### <a name="error-the-provider-being-used-is-deprecated-systemdataoracleclient-requires-oracle-client-software-version-817-or-greater-please-visit-httpsgomicrosoftcomfwlinkplinkid272376httpsgomicrosoftcomfwlinkplinkid272376-to-install-the-official-provider"></a>**오류**: 사용 중인 공급자가 사용 중단됨: 'System.Data.OracleClient에 Oracle 클라이언트 소프트웨어 버전 8.1.7 이상이 필요합니다.' 공식 공급자를 설치하려면 [https://go.microsoft.com/fwlink/p/?LinkID=272376](https://go.microsoft.com/fwlink/p/?LinkID=272376)을 방문하세요.
+#### <a name="error-the-provider-being-used-is-deprecated-systemdataoracleclient-requires-oracle-client-software-version-817-or-greater-see-httpsgomicrosoftcomfwlinkplinkid272376httpsgomicrosoftcomfwlinkplinkid272376-to-install-the-official-provider"></a>**오류**: 사용 중인 공급자가 사용 중단됨: 'System.Data.OracleClient에 Oracle 클라이언트 소프트웨어 버전 8.1.7 이상이 필요합니다.' [https://go.microsoft.com/fwlink/p/?LinkID=272376](https://go.microsoft.com/fwlink/p/?LinkID=272376)을 참조하여 공식 공급자를 설치합니다.
 
 **원인**: 온-프레미스 데이터 게이트웨이가 실행 중인 컴퓨터에 Oracle 클라이언트 SDK가 설치되지 않았습니다.  
 
@@ -135,5 +134,4 @@ Oracle 데이터베이스 커넥터를 사용하여 기존 데이터베이스의
 
 
 ## <a name="next-steps"></a>다음 단계
-[논리 앱을 만들고](../logic-apps/logic-apps-create-a-logic-app.md) [API 목록](apis-list.md)에서 Logic Apps의 사용 가능한 커넥터를 확인하세요.
-
+[논리 앱을 만들고](../logic-apps/quickstart-create-first-logic-app-workflow.md) [API 목록](apis-list.md)에서 Logic Apps의 사용 가능한 커넥터를 탐색합니다.

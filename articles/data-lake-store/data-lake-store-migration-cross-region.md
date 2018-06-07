@@ -1,8 +1,8 @@
 ---
-title: "Azure Data Lake Store 지역 간 마이그레이션 | Microsoft Docs"
-description: "Azure Data Lake Store의 지역 간 마이그레이션에 대해 알아봅니다."
+title: Azure Data Lake Store 지역 간 마이그레이션 | Microsoft Docs
+description: Azure Data Lake Store의 지역 간 마이그레이션에 대해 알아봅니다.
 services: data-lake-store
-documentationcenter: 
+documentationcenter: ''
 author: swums
 manager: amitkul
 editor: swums
@@ -10,16 +10,14 @@ ms.assetid: ebde7b9f-2e51-4d43-b7ab-566417221335
 ms.service: data-lake-store
 ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
 ms.date: 01/27/2017
 ms.author: stewu
-translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: a0eecbb50b001325c91d1d721bf8de7244f04674
-ms.lasthandoff: 04/27/2017
-
-
+ms.openlocfilehash: 1199eca457c3f06fdd6a4b68a05da3210ea9a2c9
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
+ms.locfileid: "34197242"
 ---
 # <a name="migrate-data-lake-store-across-regions"></a>지역 간 Data Lake Store 마이그레이션
 
@@ -29,7 +27,7 @@ Azure Data Lake Store를 새 지역에서 사용할 수 있기에 지역을 활�
 
 * **Azure 구독**. 자세한 내용은 [지금 무료 Azure 계정 만들기](https://azure.microsoft.com/pricing/free-trial/)를 참조하세요.
 * **두 개의 다른 지역의 Data Lake Store 계정** 자세한 내용은 [Azure Data Lake Store 시작](data-lake-store-get-started-portal.md)을 참조하세요.
-* **Azure Data Factory**. 자세한 내용은 [Azure Data Factory 소개](../data-factory/data-factory-introduction.md)를 참조하세요.
+* **Azure Data Factory**. 자세한 내용은 [Azure Data Factory 소개](../data-factory/introduction.md)를 참조하세요.
 
 
 ## <a name="migration-considerations"></a>마이그레이션 고려 사항
@@ -44,9 +42,9 @@ Azure Data Lake Store를 새 지역에서 사용할 수 있기에 지역을 활�
 
 * **Data Lake Store 계정 이름** 새 지역에 있는 새 계정 이름은 전역적으로 고유해야 합니다. 예를 들어, 미국 동부 2에 있는 이전 Data Lake Store 계정 이름은 contosoeastus2.azuredatalakestore.net일 수 있습니다. 북유럽에 있는 Data Lake Store 계정의 이름을 contosonortheu.azuredatalakestore.net으로 지정할 수 있습니다.
 
-* **도구** Azure Data Lake Store 파일을 복사하는 데 [Azure Data Factory 복사 작업](../data-factory/data-factory-azure-datalake-connector.md)을 사용하는 것이 좋습니다. Data Factory는 데이터를 이동할 때 고성능 및 안정성을 지원합니다. Data Factory가 폴더 계층 구조와 파일의 내용만을 복사한다는 점을 기억합니다. 이전 계정에서 사용하는 모든 ACL(액세스 제어 목록)을 새 계정에 수동으로 적용해야 합니다. 최상의 시나리오에 대한 성능 목표를 비롯한 자세한 내용은 [복사 작업 성능 및 튜닝 가이드](../data-factory/data-factory-copy-activity-performance.md)를 참조하세요. 더 신속하게 데이터를 복사하려면 추가 클라우드 데이터 이동 단위를 사용해야 합니다. AdlCopy와 같은 기타 도구는 지역 간에 데이터를 복사하도록 지원하지 않습니다.  
+* **도구** Azure Data Lake Store 파일을 복사하는 데 [Azure Data Factory 복사 작업](../data-factory/connector-azure-data-lake-store.md)을 사용하는 것이 좋습니다. Data Factory는 데이터를 이동할 때 고성능 및 안정성을 지원합니다. Data Factory가 폴더 계층 구조와 파일의 내용만을 복사한다는 점을 기억합니다. 이전 계정에서 사용하는 모든 ACL(액세스 제어 목록)을 새 계정에 수동으로 적용해야 합니다. 최상의 시나리오에 대한 성능 목표를 비롯한 자세한 내용은 [복사 작업 성능 및 튜닝 가이드](../data-factory/copy-activity-performance.md)를 참조하세요. 더 신속하게 데이터를 복사하려면 추가 클라우드 데이터 이동 단위를 사용해야 합니다. AdlCopy와 같은 기타 도구는 지역 간에 데이터를 복사하도록 지원하지 않습니다.  
 
-* **대역폭 요금** Azure 지역 외부에서 데이터를 전송하기 때문에 [대역폭 요금](https://azure.microsoft.com/en-us/pricing/details/bandwidth/)이 적용됩니다.
+* **대역폭 요금** Azure 지역 외부에서 데이터를 전송하기 때문에 [대역폭 요금](https://azure.microsoft.com/pricing/details/bandwidth/)이 적용됩니다.
 
 * **데이터에 대한 ACL** 파일 및 폴더에 ACL을 적용하여 새 지역에서 데이터를 보호합니다. 자세한 내용은 [Azure Data Lake Store에 저장된 데이터 보안](data-lake-store-secure-data.md)을 참조하세요. 마이그레이션을 사용하여 ACL을 업데이트하고 조정하는 것이 좋습니다. 현재 설정과 유사한 설정을 사용할 수도 있습니다. Azure Portal, [PowerShell cmdlet](/powershell/module/azurerm.datalakestore/get-azurermdatalakestoreitempermission) 또는 SDK를 사용하여 모든 파일에 적용되는 ACL을 볼 수 있습니다.  
 
@@ -54,4 +52,3 @@ Azure Data Lake Store를 새 지역에서 사용할 수 있기에 지역을 활�
 
 ## <a name="next-steps"></a>다음 단계
 * [Azure 데이터 레이크 저장소 개요](data-lake-store-overview.md)
-

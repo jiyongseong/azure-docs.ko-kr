@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: tbd
 ms.date: 5/21/2017
 ms.author: raiye
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a30a90682948b657fb31dd14101172282988cbf0
 ms.openlocfilehash: 3178a09dab1cb972a3460d54dc9908fb95cce68b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/25/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="guest-os-family-1-retirement-notice"></a>게스트 OS 제품군 1 사용 중지 확인
 OS 제품군 1의 사용 중지가 2013 년 6월 1일에 처음 발표되었습니다.
@@ -75,4 +73,3 @@ foreach($subscription in Get-AzureSubscription) {
 
 ## <a name="next-steps"></a>다음 단계
 최신 [게스트 OS 릴리스](cloud-services-guestos-update-matrix.md)를 검토합니다.
-

@@ -4,7 +4,7 @@ description: "응용 프로그램을 다중 테넌트로 구성하는 방법과 
 services: active-directory
 documentationcenter: 
 author: ajamess
-manager: femila
+manager: mtillman
 ms.assetid: 
 ms.service: active-directory
 ms.workload: identity
@@ -13,14 +13,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: cc9e81de9bf8a3312da834502fa6ca25e2b5834a
-ms.openlocfilehash: 68db9635e274d76127021ff95d38570b980048f3
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/11/2017
-
+ms.openlocfilehash: 72cc4f0e5937787ec235d33e1f563bce8eebdf0d
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
-
 # <a name="how-to-configure-a-new-multi-tenant-application"></a>새 다중 테넌트 응용 프로그램을 구성하는 방법
 
 다음은 다중 테넌트 응용 프로그램에 대해 알아보면 도움이 되는 권장된 토픽 목록입니다.
@@ -32,4 +30,3 @@ ms.lasthandoff: 04/11/2017
 
 ## <a name="next-steps"></a>다음 단계
 [AzureAD StackOverflow](http://stackoverflow.com/questions/tagged/azure-active-directory)
-

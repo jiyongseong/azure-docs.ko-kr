@@ -1,20 +1,29 @@
-| 형식 | 부여 | 트리거* | 입력 | 출력 |  
-| --- | --- | --- | --- | --- |  
-| [일정](../articles/azure-functions/functions-bindings-timer.md)  |Azure 기능 |✔ | | |  
-| [HTTP(REST 또는 webhook)](../articles/azure-functions/functions-bindings-http-webhook.md) |Azure 기능 |✔ |  |✔\** |  
-| [Blob Storage](../articles/azure-functions/functions-bindings-storage-blob.md) |Azure 저장소 |✔ |✔ |✔ |  
-| [이벤트](../articles/azure-functions/functions-bindings-event-hubs.md) |Azure 이벤트 허브 |✔ | |✔ |  
-| [큐](../articles/azure-functions/functions-bindings-storage-queue.md) |Azure 저장소 |✔ | |✔ |  
-| [큐 및 토픽](../articles/azure-functions/functions-bindings-service-bus.md) |Azure 서비스 버스 |✔ | |✔ |  
-| [저장소 테이블](../articles/azure-functions/functions-bindings-storage-table.md) |Azure 저장소 | |✔ |✔ |  
-| [SQL 테이블](../articles/azure-functions/functions-bindings-mobile-apps.md) |Azure 모바일 앱 | |✔ |✔ |  
-| [No-SQL DB](../articles/azure-functions/functions-bindings-documentdb.md) | Azure DocumentDB | |✔ |✔ |  
-| [푸시 알림](../articles/azure-functions/functions-bindings-notification-hubs.md) |Azure 알림 허브 | | |✔ |  
-| [Twilio SMS 문자](../articles/azure-functions/functions-bindings-twilio.md) |Twilio | | |✔ |
-| [SendGrid 전자 메일](../articles/azure-functions/functions-bindings-sendgrid.md) | SendGrid | | |✔ |
+다음 표는 Azure Functions 런타임의 두 주요 버전에서 지원되는 바인딩을 보여 줍니다.
 
-(\* - 모든 트리거는 입력된 데이터를 연결함)
+| type | 1.x | 2.x | 트리거 | 입력 | 출력 |  
+| ---- | :-: | :-: | :------: | :---: | :----: |
+| [Blob Storage](../articles/azure-functions/functions-bindings-storage-blob.md)          |✔|✔<sup>1</sup>|✔|✔|✔|  
+| [Cosmos DB](../articles/azure-functions/functions-bindings-documentdb.md)               |✔|✔|✔|✔|✔|  
+| [Event Grid](../articles/azure-functions/functions-bindings-event-grid.md)              |✔|✔|✔| | |  
+| [Event Hubs](../articles/azure-functions/functions-bindings-event-hubs.md)              |✔|✔|✔| |✔|  
+| [외부 파일](../articles/azure-functions/functions-bindings-external-file.md)<sup>2</sup>    |✔|| |✔|✔|  
+| [외부 테이블](../articles/azure-functions/functions-bindings-external-table.md)<sup>2</sup>  |✔|| |✔|✔|  
+| [HTTP](../articles/azure-functions/functions-bindings-http-webhook.md)             |✔|✔<sup>1</sup>|✔| |✔|
+| [Microsoft Graph<br/>Excel 테이블](../articles/azure-functions/functions-bindings-microsoft-graph.md)   ||✔| |✔|✔|
+| [Microsoft Graph<br/>OneDrive 파일](../articles/azure-functions/functions-bindings-microsoft-graph.md) ||✔| |✔|✔|
+| [Microsoft Graph<br/>Outlook 이메일](../articles/azure-functions/functions-bindings-microsoft-graph.md)  ||✔| | |✔|
+| [Microsoft Graph<br/>이벤트](../articles/azure-functions/functions-bindings-microsoft-graph.md)         ||✔|✔|✔|✔|
+| [Microsoft Graph<br/>인증 토큰](../articles/azure-functions/functions-bindings-microsoft-graph.md)    ||✔| |✔| |
+| [Mobile Apps](../articles/azure-functions/functions-bindings-mobile-apps.md)             |✔|✔| |✔|✔|  
+| [Notification Hubs](../articles/azure-functions/functions-bindings-notification-hubs.md) |✔|| | |✔|
+| [Queue storage](../articles/azure-functions/functions-bindings-storage-queue.md)         |✔|✔<sup>1</sup>|✔| |✔|  
+| [SendGrid](../articles/azure-functions/functions-bindings-sendgrid.md)                   |✔|✔| | |✔|
+| [Service Bus](../articles/azure-functions/functions-bindings-service-bus.md)             |✔|✔|✔| |✔|  
+| [Table Storage](../articles/azure-functions/functions-bindings-storage-table.md)         |✔|✔<sup>1</sup>| |✔|✔|  
+| [타이머](../articles/azure-functions/functions-bindings-timer.md)                         |✔|✔|✔| | |
+| [Twilio](../articles/azure-functions/functions-bindings-twilio.md)                       |✔|✔| | |✔|
+| [Webhook](../articles/azure-functions/functions-bindings-http-webhook.md)             |✔||✔| |✔|
+  
+<sup>1</sup> 2.x에서 HTTP, Timer 및 Azure Storage를 제외한 모든 바인딩이 등록되어 있어야 합니다. [바인딩 확장 등록](../articles/azure-functions/functions-triggers-bindings.md#register-binding-extensions)을 참조하세요.
 
-(\** - HTTP 출력 바인딩은 HTTP 트리거가 필요함)
-
-
+<sup>2</sup> Experimental &mdash;는 지원되지 않으며 향후 중단될 수 있습니다. 

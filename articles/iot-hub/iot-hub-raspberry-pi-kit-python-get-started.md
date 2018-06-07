@@ -1,27 +1,25 @@
 ---
-title: "Raspberry Pi-클라우드(Python) - Raspberry Pi를 Azure IoT Hub에 연결 | Microsoft Docs"
-description: "이 자습서에서는 Azure 클라우드 플랫폼으로 데이터를 보내기 위해 Raspberry Pi을 설정하고 Raspberry Pi용 Azure IoT Hub에 연결하는 방법을 알아봅니다."
+title: Raspberry Pi-클라우드(Python) - Raspberry Pi를 Azure IoT Hub에 연결 | Microsoft Docs
+description: 이 자습서에서는 Azure 클라우드 플랫폼으로 데이터를 보내기 위해 Raspberry Pi을 설정하고 Raspberry Pi용 Azure IoT Hub에 연결하는 방법을 알아봅니다.
 services: iot-hub
-documentationcenter: 
-author: shizn
+documentationcenter: ''
+author: rangv
 manager: timlt
-tags: 
-keywords: "azure iot raspberry pi, raspberry pi iot hub, raspberry pi에서 클라우드로 데이터 전송, raspberry pi-클라우드"
+tags: ''
+keywords: azure iot raspberry pi, raspberry pi iot hub, raspberry pi에서 클라우드로 데이터 전송, raspberry pi-클라우드
 ms.service: iot-hub
 ms.devlang: python
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 7/31/2017
-ms.author: xshi
+ms.date: 4/11/2018
+ms.author: rangv
+ms.openlocfilehash: 7069748c10f7c98f80fadc008f43a3aa02f7ac0e
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
 ms.translationtype: HT
-ms.sourcegitcommit: 79bebd10784ec74b4800e19576cbec253acf1be7
-ms.openlocfilehash: 08c4df6a4d7fd3d80f047192125afc9f5831999a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/03/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/20/2018
 ---
-
 # <a name="connect-raspberry-pi-to-azure-iot-hub-python"></a>Raspberry Pi를 Azure IoT Hub에 연결(Python)
 
 [!INCLUDE [iot-hub-get-started-device-selector](../../includes/iot-hub-get-started-device-selector.md)]
@@ -54,7 +52,7 @@ ms.lasthandoff: 08/03/2017
 * 활성 Azure 구독. Azure 계정이 없는 경우 몇 분 만에 [Azure 평가판 계정](https://azure.microsoft.com/free/)을 만들 수 있습니다.
 * Pi에 연결할 모니터, USB 키보드 및 마우스.
 * Windows 또는 Linux를 실행하는 Mac 또는 PC.
-* 인터넷 연결.
+* 인터넷 연결
 * 16GB 이상의 microSD 카드.
 * 운영 체제 이미지를 microSD 카드에 굽기 위한 USB-SD 어댑터 또는 microSD 카드.
 * 6피트 마이크로 USB 케이블과 5볼트 2암페어 전원 공급 장치.
@@ -108,7 +106,7 @@ SSH 및 I2C를 사용하려는 경우 [raspberrypi.org](https://www.raspberrypi.
 
 실험용 회로판과 점퍼 와이어를 사용하여 LED 및 BME280 Pi를 다음과 같이 연결합니다. 센서가 없는 경우 [이 섹션을 건너뛰세요](#connect-pi-to-the-network).
 
-![Raspberry Pi와 센서 연결](media/iot-hub-raspberry-pi-kit-c-get-started/3_raspberry-pi-sensor-connection.png)
+![Raspberry Pi와 센서 연결](media/iot-hub-raspberry-pi-kit-node-get-started/3_raspberry-pi-sensor-connection.png)
 
 BME280 센서는 온도 및 습도 데이터를 수집할 수 있습니다. 그리고 장치와 클라우드 간에 통신이 있으면 LED가 깜박입니다. 
 
@@ -116,27 +114,27 @@ BME280 센서는 온도 및 습도 데이터를 수집할 수 있습니다. 그�
 
 | 시작(센서 및 LED)     | 끝(보드)            | 케이블 색   |
 | -----------------------  | ---------------------- | ------------: |
-| LED VDD(5G 핀)         | GPIO 4(7 핀)         | 흰색 케이블   |
-| LED GND(6G 핀)         | GND(6 핀)            | 검은색 케이블   |
-| VDD(18F 핀)            | 3.3V PWR(17 핀)      | 흰색 케이블   |
-| GND(20F 핀)            | GND(20 핀)           | 검은색 케이블   |
-| SCK(21F 핀)            | SPI0 SCLK(23 핀)     | 주황색 케이블  |
-| SDO(22F 핀)            | SPI0 MISO(21 핀)     | 노란색 케이블  |
-| SDI(23F 핀)            | SPI0 MOSI(19 핀)     | 녹색 케이블   |
-| CS(24F 핀)             | SPI0 CS(24 핀)       | 파란색 케이블    |
+| VDD(5G 핀)             | 3.3V PWR(1 핀)       | 흰색 케이블   |
+| GND(7G 핀)             | GND(6 핀)            | 갈색 케이블   |
+| SDI(10G 핀)            | I2C1 SDA(3 핀)       | 빨간색 케이블     |
+| SCK(8G 핀)             | I2C1 SCL(5 핀)       | 주황색 케이블  |
+| LED VDD(18F 핀)        | GPIO 24(18 핀)       | 흰색 케이블   |
+| LED GND(17F 핀)        | GND(20 핀)           | 검은색 케이블   |
 
 참조용으로 [Raspberry Pi 2 및 3 핀 매핑](https://developer.microsoft.com/windows/iot/docs/pinmappingsrpi)을 보려면 클릭하세요.
 
 BME280이 Raspberry Pi에 성공적으로 연결되면 아래 이미지처럼 보여야 합니다.
 
-![Pi와 BME280 연결](media/iot-hub-raspberry-pi-kit-c-get-started/4_connected-pi.jpg)
+![Pi와 BME280 연결](media/iot-hub-raspberry-pi-kit-node-get-started/4_connected-pi.jpg)
 
 ### <a name="connect-pi-to-the-network"></a>네트워크에 Pi 연결
 
 마이크로 USB 케이블 및 전원 공급 장치를 사용하여 Pi를 켭니다. 이더넷 케이블을 사용하여 Pi를 유선 네트워크에 연결하거나 [Raspberry Pi Foundation의 지침](https://www.raspberrypi.org/learning/software-guide/wifi/)에 따라 Pi를 무선 네트워크에 연결합니다. Pi가 네트워크에 성공적으로 연결된 후 [Pi의 IP 주소](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-3-network-setup/finding-your-pis-ip-address)를 적어 두어야 합니다.
 
-![유선 네트워크에 연결](media/iot-hub-raspberry-pi-kit-c-get-started/5_power-on-pi.jpg)
+![유선 네트워크에 연결](media/iot-hub-raspberry-pi-kit-node-get-started/5_power-on-pi.jpg)
 
+> [!NOTE]
+> Pi가 컴퓨터와 같은 네트워크에 연결되어 있어야 합니다. 예를 들어 컴퓨터는 무선 네트워크, Pi는 유선 네트워크에 연결되었다면 devdisco 출력에 IP 주소가 표시되지 않을 수 있습니다.
 
 ## <a name="run-a-sample-application-on-pi"></a>Pi에서 샘플 응용 프로그램 실행
 
@@ -211,4 +209,3 @@ BME280이 Raspberry Pi에 성공적으로 연결되면 아래 이미지처럼 �
 샘플 응용 프로그램을 실행하여 센서 데이터를 수집하고 IoT Hub로 전송했습니다. Raspberry Pi가 사용자 IoT Hub로 보낸 메시지 또는 명령줄 인터페이스에서 Raspberry Pi로 보낸 송신 메시지를 보려면 [iothub-explorer를 사용한 클라우드 장치 메시징 관리 자습서](https://docs.microsoft.com/en-gb/azure/iot-hub/iot-hub-explorer-cloud-device-messaging)를 참조하세요.
 
 [!INCLUDE [iot-hub-get-started-next-steps](../../includes/iot-hub-get-started-next-steps.md)]
-

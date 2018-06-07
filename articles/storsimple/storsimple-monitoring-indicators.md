@@ -12,17 +12,17 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: TBD
-ms.date: 06/05/2017
+ms.date: 11/03/2017
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 0d44f94719bff0cb58b3727050598e55f4774e66
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 9ae0caec211dc1199f0abd2ce9bc0c7ad11c02ec
+ms.sourcegitcommit: 0930aabc3ede63240f60c2c61baa88ac6576c508
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/07/2017
 ---
 # <a name="use-storsimple-monitoring-indicators-to-manage-your-device"></a>StorSimple 모니터링 표시기를 사용하여 장치 관리
+
+
 ## <a name="overview"></a>개요
 StorSimple 장치에는 모듈 및 StorSimple 장치의 모듈 및 전반적인 상태를 모니터링하는 데 사용할 수 있는 경보 및 LED(발광 다이오드)가 포함됩니다. 모니터링 표시기는 장치의 기본 인클로저 및 EBOD 인클로저의 하드웨어 구성 요소에서 찾을 수 있습니다. 모니터링 표시기는 LED 또는 청각적 경보가 될 수 있습니다.
 
@@ -249,6 +249,5 @@ ops 패널에 있는 음소거 단추를 눌러 청각적 경보를 음소거할
 [4]: ./media/storsimple-monitoring-indicators/storsimple-monitoring-indicators-IMAGE04.png
 [5]: ./media/storsimple-monitoring-indicators/storsimple-monitoring-indicators-IMAGE05.png
 [6]: ./media/storsimple-monitoring-indicators/storsimple-monitoring-indicators-IMAGE06.png
-
 
 

@@ -13,12 +13,11 @@ ms.tgt_pltfrm: na
 ms.workload: storage-backup-recovery
 ms.date: 07/24/2017
 ms.author: markgal;
-ms.translationtype: HT
-ms.sourcegitcommit: 141270c353d3fe7341dfad890162ed74495d48ac
 ms.openlocfilehash: ad331dffb7c31d12290f4223967c568e4535fe3c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="back-up-a-vmware-server-to-azure"></a>Azure에 VMware 서버 백업
 
@@ -385,4 +384,3 @@ System Center Data Protection Manager 또는 Azure Backup Server를 사용해 �
 Azure Backup Server를 사용하여 VMware 워크로드를 보호하고 있다면 Azure Backup Server를 사용하여 [Microsoft Exchange Server](./backup-azure-exchange-mabs.md), [Microsoft SharePoint 팜](./backup-azure-backup-sharepoint-mabs.md) 또는 [SQL Server 데이터베이스](./backup-azure-sql-mabs.md)를 보호하는 것에 관심이 있을 수도 있습니다.
 
 에이전트 등록, 보호 그룹 구성 또는 작업 백업 관련 문제에 관한 정보는 [Azure Backup Server 문제 해결](./backup-azure-mabs-troubleshoot.md)을 참조하세요.
-

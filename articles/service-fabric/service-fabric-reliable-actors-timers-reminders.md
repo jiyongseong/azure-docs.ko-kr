@@ -1,6 +1,6 @@
 ---
-title: "Reliable Actors 타이머 및 미리 알림 | Microsoft Docs"
-description: "서비스 패브릭 Reliable Actors의 타이머 및 미리 알림에 대해 소개합니다."
+title: Reliable Actors 타이머 및 미리 알림 | Microsoft Docs
+description: 서비스 패브릭 Reliable Actors의 타이머 및 미리 알림에 대해 소개합니다.
 services: service-fabric
 documentationcenter: .net
 author: vturecek
@@ -9,18 +9,16 @@ editor: amanbha
 ms.assetid: 00c48716-569e-4a64-bd6c-25234c85ff4f
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 06/29/2017
+ms.date: 11/02/2017
 ms.author: vturecek
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6efa2cca46c2d8e4c00150ff964f8af02397ef99
-ms.openlocfilehash: 06b026ce06e0f16a77ac238de0af2263f272933c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/01/2017
-
-
+ms.openlocfilehash: e43aec6630a4a688ffd6c52a5e5bd711243fa662
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="actor-timers-and-reminders"></a>행위자 타이머 및 미리 알림
 행위자는 타이머 또는 미리 알림을 등록하여 정기적인 작업을 예약할 수 있습니다. 이 문서에서는 타이머와 미리 알림을 사용하는 방법을 보여 주고 둘 간의 차이점을 설명합니다.
@@ -135,7 +133,7 @@ public class VisualObjectActorImpl extends FabricActor implements VisualObjectAc
 행위자가 가비지 수집의 일환으로 비활성화되면 모든 타이머가 중지됩니다. 그다음 타이머 콜백이 호출되지 않습니다. 또한 행위자 런타임은 비활성화 전에 실행 중이었던 타이머에 대한 정보를 유지하지 않습니다. 나중에 다시 활성화될 때 필요한 모든 타이머를 등록하는 것은 행위자의 일입니다. 자세한 내용은 [행위자 가비지 수집](service-fabric-reliable-actors-lifecycle.md)섹션을 참조하세요.
 
 ## <a name="actor-reminders"></a>행위자 미리 알림
-미리 알림은 행위자에서 지정된 시간에 영구 콜백을 트리거하는 메커니즘입니다. 기능은 타이머와 비슷합니다. 하지만 타이머와 달리 미리 알림은 행위자가 명시적으로 등록을 취소하거나 행위자가 명시적으로 삭제할 때까지 모든 상황에서 트리거됩니다. 구체적으로, 미리 알림은 행위자 런타임이 행위자의 미리 알림에 대한 정보를 유지하므로 행위자 비활성화 및 장애 조치를 통해 트리거됩니다.
+미리 알림은 행위자에서 지정된 시간에 영구 콜백을 트리거하는 메커니즘입니다. 기능은 타이머와 비슷합니다. 하지만 타이머와 달리 미리 알림은 행위자가 명시적으로 등록을 취소하거나 행위자가 명시적으로 삭제할 때까지 모든 상황에서 트리거됩니다. 구체적으로, 미리 알림은 행위자 런타임이 행위자 상태 제공자를 사용하여 행위자의 미리 알림에 대한 정보를 유지하므로 행위자 비활성화 및 장애 조치를 통해 트리거됩니다. 미리 알림의 안정성은 행위자 상태 제공자가 제공한 상태 안정성 보장과 연결되어 있습니다. 즉 상태 지속성이 없음으로 설정된 행위자의 경우 장애 조치(failover) 후 미리 알림이 발생하지 않습니다. 
 
 미리 알림을 등록하기 위해서는 행위자가 기본 클래스에서 제공된 `RegisterReminderAsync` 메서드를 아래 예제와 같이 호출합니다.
 
@@ -148,8 +146,8 @@ protected override async Task OnActivateAsync()
     IActorReminder reminderRegistration = await this.RegisterReminderAsync(
         reminderName,
         BitConverter.GetBytes(amountInDollars),
-        TimeSpan.FromDays(3),
-        TimeSpan.FromDays(1));
+        TimeSpan.FromDays(3),    //The amount of time to delay before firing the reminder
+        TimeSpan.FromDays(1));    //The time interval between firing of reminders
 }
 ```
 
@@ -232,4 +230,3 @@ CompletableFuture reminderUnregistration = unregisterReminderAsync(reminder);
 Reliable Actor 이벤트 및 재진입에 대해 알아봅니다.
 * [행위자 이벤트](service-fabric-reliable-actors-events.md)
 * [행위자 다시 표시](service-fabric-reliable-actors-reentrancy.md)
-

@@ -1,26 +1,25 @@
 ---
-title: "Azure CLI를 사용하여 여러 IP 구성의 부하 분산 | Microsoft Docs"
-description: "Azure CLI | Resource Manager를 사용하여 가상 컴퓨터에 여러 IP 주소를 할당하는 방법을 알아봅니다."
+title: Azure CLI를 사용하여 여러 IP 구성의 부하 분산 | Microsoft Docs
+description: Azure CLI | Resource Manager를 사용하여 가상 머신에 여러 IP 주소를 할당하는 방법을 알아봅니다.
 services: virtual-network
 documentationcenter: na
 author: anavinahar
 manager: narayan
-editor: 
+editor: ''
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: load-balancer
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 03/10/2017
+ms.date: 09/25/2017
 ms.author: annahar
+ms.openlocfilehash: f40747fe56e2e9f5b41391d78fecc7991b93f108
+ms.sourcegitcommit: c3d53d8901622f93efcd13a31863161019325216
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: bd15713752ea01ad403d8e3dcfed0c9a7adcc7fa
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/29/2018
 ---
 # <a name="load-balancing-on-multiple-ip-configurations"></a>여러 IP 구성의 부하 분산
 
@@ -29,16 +28,17 @@ ms.lasthandoff: 07/21/2017
 > * [CLI](load-balancer-multiple-ip-cli.md)
 > * [PowerShell](load-balancer-multiple-ip-powershell.md)
 
-이 문서에서는 보조 NIC(네트워크 인터페이스)에 여러 IP 주소가 있는 Azure Load Balancer를 사용하는 방법을 설명합니다. 이 시나리오에는 Windows를 실행하는 VM이 둘 있고 각각 기본 및 보조 NIC가 있습니다. 보조 NIC에는 각각 두 가지 IP 구성이 있습니다. 각 VM은 contoso.com 및 fabrikam.com 웹 사이트를 둘 다 호스트합니다. 각 웹 사이트는 보조 NIC의 IP 구성 중 하나에 바인딩됩니다. Azure Load Balancer를 사용하여 웹 사이트의 각 IP 구성에 트래픽을 분산하기 위해 각 웹 사이트에 하나씩 두 개의 프런트 엔드 IP 주소를 노출합니다. 이 시나리오는 양 쪽 프런트 엔드는 물론 양쪽 백 엔드 풀 IP 주소에 동일한 포트 번호를 사용합니다.
+
+이 문서에서는 보조 NIC(네트워크 인터페이스)에 여러 IP 주소가 있는 Azure Load Balancer를 사용하는 방법을 설명합니다. 이 시나리오에는 Windows를 실행하는 VM이 둘 있고 각각 기본 및 보조 NIC가 있습니다. 각 보조 NIC에는 두 가지 IP 구성이 있습니다. 각 VM은 contoso.com 및 fabrikam.com 웹 사이트를 둘 다 호스트합니다. 각 웹 사이트는 보조 NIC의 IP 구성 중 하나에 바인딩됩니다. Azure Load Balancer를 사용하여 웹 사이트의 각 IP 구성에 트래픽을 분산하기 위해 각 웹 사이트에 하나씩 두 개의 프런트 엔드 IP 주소를 노출합니다. 이 시나리오는 양 쪽 프런트 엔드는 물론 양쪽 백 엔드 풀 IP 주소에 동일한 포트 번호를 사용합니다.
 
 ![LB 시나리오 이미지](./media/load-balancer-multiple-ip/lb-multi-ip.PNG)
 
 ## <a name="steps-to-load-balance-on-multiple-ip-configurations"></a>여러 IP 구성의 부하를 분산하는 단계
 
-아래 단계에 따라 이 문서에 설명된 시나리오를 수행합니다.
+이 문서에 설명된 시나리오를 수행하려면 다음 단계에 완료하세요.
 
-1. 연결된 문서를 참조하여 [Azure CLI를 설치 및 구성](../cli-install-nodejs.md)하고 Azure 계정에 로그인합니다.
-2. 위의 설명에 따라 *contosofabrikam*이라는 [리소스 그룹을 만듭니다](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-resource-group).
+1. 연결된 문서의 단계에 따라 [Azure CLI를 설치 및 구성](../cli-install-nodejs.md)하고 Azure 계정에 로그인합니다.
+2. 다음과 같이 *contosofabrikam*이라는 [리소스 그룹을 만듭니다](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-resource-group).
 
     ```azurecli
     azure group create contosofabrikam westcentralus
@@ -91,13 +91,13 @@ ms.lasthandoff: 07/21/2017
     azure network lb rule create --resource-group contosofabrikam --lb-name mylb --name HTTPf --protocol tcp --probe-name http --frontend-port 5000 --backend-port 5000 --frontend-ip-name fabrkamfe --backend-address-pool-name fabrikampool
     ```
 
-9. 아래 명령을 실행한 후 출력을 확인하여 [부하 분산 장치가 제대로 만들어졌는지 확인](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json)합니다.
+9. 다음 명령을 실행하고 출력을 확인하여 [Load Balancer가 제대로 만들어졌는지 확인](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json)합니다.
 
     ```azurecli
     azure network lb show --resource-group contosofabrikam --name mylb
     ```
 
-10. 아래와 같이 VM1이라는 첫 번째 가상 컴퓨터에 대해 *myPublicIp*라는 [공용 IP를 만들고](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-a-public-ip-address), *mystorageaccont1*이라는 [저장소 계정을 만듭니다](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
+10. 다음과 같이 VM1이라는 첫 번째 가상 머신에 대해 *myPublicIp*라는 [공용 IP를 만들고](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-a-public-ip-address), *mystorageaccont1*이라는 [저장소 계정을 만듭니다](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
 
     ```azurecli
     azure network public-ip create --resource-group contosofabrikam --location westcentralus --name myPublicIP --domain-name-label mypublicdns345 --allocation-method Dynamic
@@ -105,7 +105,7 @@ ms.lasthandoff: 07/21/2017
     azure storage account create --location westcentralus --resource-group contosofabrikam --kind Storage --sku-name GRS mystorageaccount1
     ```
 
-11. 아래와 같이 VM1에 대해 [네트워크 인터페이스를 만들고](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-a-virtual-nic) *VM1-ipconfig2*라는 두 번째 IP 구성을 추가하고 [VM을 만듭니다](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-the-linux-vms).
+11. 다음과 같이 VM1에 대해 [네트워크 인터페이스를 만들고](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-a-virtual-nic) *VM1-ipconfig2*라는 두 번째 IP 구성을 추가하고 [VM을 만듭니다](../virtual-machines/linux/create-cli-complete.md?toc=%2fazure%2fvirtual-network%2ftoc.json#create-a-vm).
 
     ```azurecli
     azure network nic create --resource-group contosofabrikam --location westcentralus --subnet-vnet-name myVnet --subnet-name mySubnet --name VM1Nic1 --ip-config-name NIC1-ipconfig1
@@ -130,4 +130,3 @@ ms.lasthandoff: 07/21/2017
 ## <a name="next-steps"></a>다음 단계
 - Azure에서 부하 분산 서비스를 결합하는 방법에 대한 자세한 내용은 [Azure에서 부하 분산 서비스 사용](../traffic-manager/traffic-manager-load-balancing-azure.md)을 참조하세요.
 - [Azure Load Balancer에 대한 로그 분석](../load-balancer/load-balancer-monitor-log.md)을 통해 Azure에서 부하 분산 장치를 관리하고 문제를 해결하는 데 다양한 유형의 로그를 사용하는 방법에 대해 알아보세요.
-

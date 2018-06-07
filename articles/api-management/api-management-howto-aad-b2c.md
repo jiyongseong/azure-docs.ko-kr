@@ -1,25 +1,27 @@
 ---
-title: "Azure Active Directory B2C를 사용하여 개발자 계정에 권한 부여 - Azure API Management | Microsoft Docs"
-description: "API Management에서 Azure Active Directory B2C를 사용하여 사용자에게 권한을 부여하는 방법에 대해 알아보세요."
+title: Azure Active Directory B2C를 사용하여 개발자 계정에 권한 부여 - Azure API Management | Microsoft Docs
+description: API Management에서 Azure Active Directory B2C를 사용하여 사용자에게 권한을 부여하는 방법에 대해 알아보세요.
 services: api-management
 documentationcenter: API Management
 author: miaojiang
-manager: erikre
-editor: 
-ms.assetid: 33a69a83-94f2-4e4e-9cef-f2a5af3c9732
+manager: cfowler
+editor: ''
 ms.service: api-management
 ms.workload: mobile
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 01/23/2017
+ms.date: 10/30/2017
 ms.author: apimpm
-translationtype: Human Translation
-ms.sourcegitcommit: cfe4957191ad5716f1086a1a332faf6a52406770
-ms.openlocfilehash: eb7deb1a79d9db9ac5cfbea69b8d3c564eb55577
-ms.lasthandoff: 03/09/2017
-
+ms.openlocfilehash: a6e7aad6c3d20a67ecba66c49be4efcdebdf718a
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
+> [!WARNING]
+> Azure Active Directory B2C 통합은 [개발자, 표준 및 프리미엄](https://azure.microsoft.com/pricing/details/api-management/) 계층에서만 사용 가능합니다.
+
 # <a name="how-to-authorize-developer-accounts-by-using-azure-active-directory-b2c-in-azure-api-management"></a>Azure API Management에서 Azure Active Directory B2C를 사용하여 개발자 계정에 권한을 부여하는 방법
 ## <a name="overview"></a>개요
 Azure Active Directory B2C는 소비자 지향 웹 및 모바일 응용 프로그램을 위한 클라우드 ID 관리 솔루션입니다. 개발자 포털에 대한 액세스 권한을 관리하는 데 사용할 수 있습니다. 이 가이드에서는 Azure Active Directory B2C와 통합하려는 API Management 서비스에 필요한 구성을 보여 줍니다. 클래식 Azure Active Directory를 사용하여 개발자 포털에 대한 액세스를 사용하는 방법에 대한 정보는 [Azure Active Directory를 사용하여 개발자 계정에 권한을 부여하는 방법]을 참조하세요.
@@ -29,7 +31,7 @@ Azure Active Directory B2C는 소비자 지향 웹 및 모바일 응용 프로�
 
 ## <a name="authorize-developer-accounts-by-using-azure-active-directory-b2c"></a>Azure Active Directory B2C를 사용하여 개발자 계정에 권한 부여
 
-1. 시작하려면 Azure Portal에서 API Management 서비스에 대한 **게시자 포털**을 클릭합니다. API 관리 게시자 포털로 이동됩니다.
+1. 시작하려면 Azure Portal에서 API Management 서비스에 대한 **게시자 포털**을 클릭합니다. API Management 게시자 포털로 이동됩니다.
 
    ![게시자 포털][api-management-management-console]
 
@@ -177,10 +179,10 @@ Azure Active Directory B2C는 소비자 지향 웹 및 모바일 응용 프로�
 [Monitoring and analytics]: api-management-monitoring.md
 [Add APIs to a product]: api-management-howto-add-products.md#add-apis
 [Publish a product]: api-management-howto-add-products.md#publish-product
-[Get started with Azure API Management]: api-management-get-started.md
+[Get started with Azure API Management]: get-started-create-service-instance.md
 [API Management policy reference]: api-management-policy-reference.md
 [Caching policies]: api-management-policy-reference.md#caching-policies
-[Create an API Management service instance]: api-management-get-started.md#create-service-instance
+[Create an API Management service instance]: get-started-create-service-instance.md
 
 [http://oauth.net/2/]: http://oauth.net/2/
 [WebApp-GraphAPI-DotNet]: https://github.com/AzureADSamples/WebApp-GraphAPI-DotNet
@@ -200,4 +202,3 @@ Azure Active Directory B2C는 소비자 지향 웹 및 모바일 응용 프로�
 [Next steps]: #next-steps
 
 [Log in to the Developer portal using an Azure Active Directory account]: #Log-in-to-the-Developer-portal-using-an-Azure-Active-Directory-account
-

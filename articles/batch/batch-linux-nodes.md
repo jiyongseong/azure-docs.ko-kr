@@ -1,47 +1,46 @@
 ---
-title: "가상 컴퓨터 계산 노드에서 Linux 실행 - Azure Batch | Microsoft Docs"
-description: "Azure Batch의 Linux 가상 컴퓨터 풀에서 병렬 계산 워크로드를 처리하는 방법에 대해 알아봅니다."
+title: 가상 머신 계산 노드에서 Linux 실행 - Azure Batch | Microsoft Docs
+description: Azure Batch의 Linux 가상 머신 풀에서 병렬 계산 워크로드를 처리하는 방법에 대해 알아봅니다.
 services: batch
 documentationcenter: python
-author: tamram
-manager: timlt
-editor: 
+author: dlepow
+manager: jeconnoc
+editor: ''
 ms.assetid: dc6ba151-1718-468a-b455-2da549225ab2
 ms.service: batch
 ms.devlang: multiple
 ms.topic: article
-ms.tgt_pltfrm: vm-linux
+ms.tgt_pltfrm: ''
 ms.workload: na
 ms.date: 05/22/2017
-ms.author: tamram
+ms.author: danlep
 ms.custom: H1Hack27Feb2017
+ms.openlocfilehash: a9aa896bfc4c860c87757f9379fc44cc5ee8d18a
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
 ms.translationtype: HT
-ms.sourcegitcommit: 22aa82e5cbce5b00f733f72209318c901079b665
-ms.openlocfilehash: 9b2257917e2368478beb75957677de23d4157865
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/24/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="provision-linux-compute-nodes-in-batch-pools"></a>Batch 풀에서 Linux 계산 노드 프로비전
 
-Azure Batch를 사용하여 Linux 및 Windows 가상 컴퓨터에서 병렬 계산 워크로드를 실행할 수 있습니다. 이 문서에서는 [Batch Python][py_batch_package] 및 [Batch .NET][api_net] 클라이언트 라이브러리를 모두 사용하여 Batch 서비스에서 Linux 계산 노드 풀을 만드는 방법에 대해 자세히 설명합니다.
+Azure Batch를 사용하여 Linux 및 Windows 가상 머신에서 병렬 계산 워크로드를 실행할 수 있습니다. 이 문서에서는 [Batch Python][py_batch_package] 및 [Batch .NET][api_net] 클라이언트 라이브러리를 모두 사용하여 Batch 서비스에서 Linux 계산 노드 풀을 만드는 방법에 대해 자세히 설명합니다.
 
 > [!NOTE]
 > 응용 프로그램 패키지는 2017년 7월 5일 이후에 만들어진 모든 Batch 풀에서 지원됩니다. 2016년 3월 10일에서 2017년 7월 5일 사이에 만들어진 Batch 풀에서는 Cloud Service 구성을 사용하여 풀을 만든 경우에만 이러한 패키지가 지원됩니다. 2016년 3월 10일 이전에 만들어진 Batch 풀은 응용 프로그램 패키지를 지원하지 않습니다. 응용 프로그램 패키지를 사용하여 Batch 노드에 응용 프로그램을 배포하는 방법에 대한 자세한 내용은 [Batch 응용 프로그램 패키지를 사용하여 계산 노드에 응용 프로그램 배포](batch-application-packages.md)를 참조하세요.
 >
 >
 
-## <a name="virtual-machine-configuration"></a>가상 컴퓨터 구성
-Batch에서 계산 노드 풀을 만드는 경우 노드 크기와 운영 체제를 선택할 수 있는 두 가지 옵션인 Cloud Service 구성 및 가상 컴퓨터 구성이 있습니다.
+## <a name="virtual-machine-configuration"></a>가상 머신 구성
+Batch에서 계산 노드 풀을 만드는 경우 노드 크기와 운영 체제를 선택할 수 있는 두 가지 옵션인 Cloud Service 구성 및 Virtual Machine 구성이 있습니다.
 
-**Cloud Services 구성**은 Windows 계산 노드 *만*제공합니다. 사용 가능한 계산 노드 크기는 [클라우드 서비스 크기](../cloud-services/cloud-services-sizes-specs.md)에 나열되고 사용 가능한 운영 체제는 [Azure 게스트 OS 릴리스 및 SDK 호환성 매트릭스](../cloud-services/cloud-services-guestos-update-matrix.md)에 나열됩니다. Azure Cloud Services 노드를 포함하는 풀을 만드는 경우 노드 크기 및 OS 제품군을 지정하며, 앞에서 언급한 문서에 설명되어 있습니다. Windows 계산 노드의 풀에는 Cloud Services가 가장 일반적으로 사용됩니다.
+**Cloud Services 구성**은 Windows 계산 노드 *만*제공합니다. 사용 가능한 계산 노드 크기는 [Cloud Services 크기](../cloud-services/cloud-services-sizes-specs.md)에 나열되고 사용 가능한 운영 체제는 [Azure 게스트 OS 릴리스 및 SDK 호환성 매트릭스](../cloud-services/cloud-services-guestos-update-matrix.md)에 나열됩니다. Azure Cloud Services 노드를 포함하는 풀을 만드는 경우 노드 크기 및 OS 제품군을 지정하며, 앞에서 언급한 문서에 설명되어 있습니다. Windows 계산 노드의 풀에는 Cloud Services가 가장 일반적으로 사용됩니다.
 
-**가상 컴퓨터 구성** 은 계산 노드에 대한 Linux와 Windows 이미지를 제공합니다. 사용 가능한 계산 노드 크기는 [Azure에서 가상 컴퓨터에 대한 크기](../virtual-machines/linux/sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)(Linux) 및 [Azure에서 가상 컴퓨터에 대한 크기](../virtual-machines/windows/sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)(Windows)에 나열되어 있습니다. 가상 컴퓨터 구성 노드를 포함하는 풀을 만들 때 노드 크기, 가상 컴퓨터 이미지 참조 및 노드에 설치할 Batch 노드 에이전트 SKU도 지정해야 합니다.
+**Virtual Machine 구성**은 계산 노드에 대한 Linux와 Windows 이미지를 제공합니다. 사용 가능한 계산 노드 크기는 [Azure에서 가상 머신에 대한 크기](../virtual-machines/linux/sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)(Linux) 및 [Azure에서 가상 머신에 대한 크기](../virtual-machines/windows/sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)(Windows)에 나열되어 있습니다. Virtual Machine 구성 노드를 포함하는 풀을 만들 때 노드 크기, 가상 머신 이미지 참조 및 노드에 설치할 Batch 노드 에이전트 SKU도 지정해야 합니다.
 
-### <a name="virtual-machine-image-reference"></a>가상 컴퓨터 이미지 참조
-Batch 서비스는 [가상 컴퓨터 크기 집합](../virtual-machine-scale-sets/virtual-machine-scale-sets-overview.md)을 사용하여 Linux 계산 노드를 제공합니다. [Azure Marketplace][vm_marketplace]의 이미지를 지정하거나 준비한 사용자 지정 이미지를 제공할 수 있습니다. 사용자 지정 이미지에 대한 자세한 내용은 [Batch를 사용하여 대규모 병렬 계산 솔루션 개발](batch-api-basics.md#pool)을 참조하세요.
+### <a name="virtual-machine-image-reference"></a>가상 머신 이미지 참조
+Batch 서비스는 [가상 머신 크기 집합](../virtual-machine-scale-sets/virtual-machine-scale-sets-overview.md)을 사용하여 Linux 계산 노드를 제공합니다. [Azure Marketplace][vm_marketplace]의 이미지를 지정하거나 준비한 사용자 지정 이미지를 제공할 수 있습니다. 사용자 지정 이미지에 대한 자세한 내용은 [Batch를 사용하여 대규모 병렬 계산 솔루션 개발](batch-api-basics.md#pool)을 참조하세요.
 
-가상 컴퓨터 이미지 참조를 구성할 때 가상 컴퓨터 이미지의 속성을 지정합니다. 가상 컴퓨터 이미지 참조를 만들 때 다음 속성이 필요합니다.
+가상 머신 이미지 참조를 구성할 때 가상 머신 이미지의 속성을 지정합니다. 가상 머신 이미지 참조를 만들 때 다음 속성이 필요합니다.
 
 | **이미지 참조 속성** | **예제** |
 | --- | --- |
@@ -51,19 +50,19 @@ Batch 서비스는 [가상 컴퓨터 크기 집합](../virtual-machine-scale-set
 | 버전 |최신 |
 
 > [!TIP]
-> 이러한 속성 및 Marketplace 이미지를 나열하는 방법에 대한 자세한 내용은 [CLI 또는 PowerShell로 Azure의 Linux 가상 컴퓨터 이미지 이동 및 선택](../virtual-machines/linux/cli-ps-findimage.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)에서 알아볼 수 있습니다. 일부 Marketplace 이미지가 현재 Batch와 호환되지 않습니다. 자세한 내용은 [노드 에이전트 SKU](#node-agent-sku)를 참조하세요.
+> 이러한 속성 및 Marketplace 이미지를 나열하는 방법에 대한 자세한 내용은 [CLI 또는 PowerShell로 Azure의 Linux 가상 머신 이미지 이동 및 선택](../virtual-machines/linux/cli-ps-findimage.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)에서 알아볼 수 있습니다. 일부 Marketplace 이미지가 현재 Batch와 호환되지 않습니다. 자세한 내용은 [노드 에이전트 SKU](#node-agent-sku)를 참조하세요.
 >
 >
 
 ### <a name="node-agent-sku"></a>노드 에이전트 SKU
-Batch 노드 에이전트는 풀의 각 노드에서 실행되고 노드와 Batch 서비스 간의 명령 및 컨트롤 인터페이스를 제공하는 프로그램입니다. SKU라고 하는 노드 에이전트의 구현은 서로 다른 운영 체제에 대해 여러 가지가 있습니다. 기본적으로 가상 컴퓨터 구성을 만들 때 먼저 가상 컴퓨터 이미지 참조를 지정한 다음 이미지에 설치할 노드 에이전트를 지정합니다. 일반적으로 각 노드 에이전트 SKU는 여러 가상 컴퓨터 이미지와 호환됩니다. 다음은 노드 에이전트 SKU의 몇 가지 예입니다.
+Batch 노드 에이전트는 풀의 각 노드에서 실행되고 노드와 Batch 서비스 간의 명령 및 컨트롤 인터페이스를 제공하는 프로그램입니다. SKU라고 하는 노드 에이전트의 구현은 서로 다른 운영 체제에 대해 여러 가지가 있습니다. 기본적으로 Virtual Machine 구성을 만들 때 먼저 가상 머신 이미지 참조를 지정한 다음 이미지에 설치할 노드 에이전트를 지정합니다. 일반적으로 각 노드 에이전트 SKU는 여러 가상 머신 이미지와 호환됩니다. 다음은 노드 에이전트 SKU의 몇 가지 예입니다.
 
 * batch.node.ubuntu 14.04
 * batch.node.centos 7
 * batch.node.windows amd64
 
 > [!IMPORTANT]
-> Marketplace에서 사용 가능한 일부 가상 컴퓨터 이미지가 현재 사용 가능한 Batch 노드 에이전트와 호환되지 않습니다. Batch SDK를 사용하여 사용 가능한 노드 에이전트 SKU 및 호환되는 가상 컴퓨터 이미지를 나열합니다. 런타임에 유효한 이미지 목록을 검색하는 방법에 대한 자세한 내용 및 예제는 이 문서의 뒷부분에 있는 [가상 컴퓨터 이미지 목록](#list-of-virtual-machine-images)을 참조하세요.
+> Marketplace에서 사용 가능한 일부 가상 머신 이미지가 현재 사용 가능한 Batch 노드 에이전트와 호환되지 않습니다. Batch SDK를 사용하여 사용 가능한 노드 에이전트 SKU 및 호환되는 가상 머신 이미지를 나열합니다. 런타임에 유효한 이미지 목록을 검색하는 방법에 대한 자세한 내용 및 예제는 이 문서의 뒷부분에 있는 [ 이미지 목록](#list-of-virtual-machine-images)을 참조하세요.
 >
 >
 
@@ -206,11 +205,11 @@ ImageReference imageReference = new ImageReference(
     version: "latest");
 ```
 
-## <a name="list-of-virtual-machine-images"></a>가상 컴퓨터 이미지 목록
-다음 표에는 이 문서가 마지막으로 업데이트되었을 때 사용 가능한 Batch 노드 에이전트와 호환되는 Marketplace 가상 컴퓨터 이미지가 나열되어 있습니다. 이미지와 노드 에이전트는 언제든지 추가 또는 제거될 수 있기 때문에 이 목록은 확정적이지 않습니다. Batch 응용 프로그램 및 서비스에서는 현재 사용 가능한 SKU를 확인하고 선택하는[list_node_agent_skus][py_list_skus] (Python) and [ListNodeAgentSkus][net_list_skus] (Batch .NET)를 항상 사용하는 것이 좋습니다.
+## <a name="list-of-virtual-machine-images"></a>가상 머신 이미지 목록
+다음 표에는 이 문서가 마지막으로 업데이트되었을 때 사용 가능한 Batch 노드 에이전트와 호환되는 Marketplace 가상 머신 이미지가 나열되어 있습니다. 이미지와 노드 에이전트는 언제든지 추가 또는 제거될 수 있기 때문에 이 목록은 확정적이지 않습니다. Batch 응용 프로그램 및 서비스에서는 현재 사용 가능한 SKU를 확인하고 선택하는[list_node_agent_skus][py_list_skus] (Python) and [ListNodeAgentSkus][net_list_skus] (Batch .NET)를 항상 사용하는 것이 좋습니다.
 
 > [!WARNING]
-> 다음 목록은 언제든지 변경될 수 있습니다. 항상 Batch API에서 사용 가능한 **list node agent SKU** 메서드를 사용하여 Batch 작업 실행 시 호환되는 가상 컴퓨터 및 노드 에이전트 SKU를 나열합니다.
+> 다음 목록은 언제든지 변경될 수 있습니다. 항상 Batch API에서 사용 가능한 **list node agent SKU** 메서드를 사용하여 Batch 작업 실행 시 호환되는 가상 머신 및 노드 에이전트 SKU를 나열합니다.
 >
 >
 
@@ -312,7 +311,7 @@ tvm-1219235766_4-20160414t192511z | ComputeNodeState.idle | 13.91.7.57 | 50001
 노드에 사용자를 만들 때 암호 대신 SSH 공개 키를 지정할 수 있습니다. Python SDK에서는 [ComputeNodeUser][py_computenodeuser]에 **ssh_public_key** 매개 변수를 사용합니다. .NET에서는 [ComputeNodeUser][net_computenodeuser].[SshPublicKey][net_ssh_key] 속성을 사용합니다.
 
 ## <a name="pricing"></a>가격
-Azure Batch는 Azure 클라우드 서비스 및 Azure 가상 컴퓨터 기술을 기반으로 빌드됩니다. Batch 서비스 자체는 무료로 제공됩니다. 즉, Batch 솔루션에서 사용하는 계산 리소스에 대해서만 요금이 청구됩니다. **Cloud Services 구성**을 선택하는 경우 [Cloud Services 가격][cloud_services_pricing] 구조에 따라 요금이 청구됩니다. **가상 컴퓨터 구성**을 선택하는 경우 [Virtual Machines 가격][vm_pricing] 구조에 따라 요금이 청구됩니다. 
+Azure Batch는 Azure Cloud Services 및 Azure Virtual Machines 기술을 기반으로 빌드됩니다. Batch 서비스 자체는 무료로 제공됩니다. 즉, Batch 솔루션에서 사용하는 계산 리소스에 대해서만 요금이 청구됩니다. **Cloud Services 구성**을 선택하는 경우 [Cloud Services 가격][cloud_services_pricing] 구조에 따라 요금이 청구됩니다. **Virtual Machine 구성**을 선택하는 경우 [Virtual Machines 가격][vm_pricing] 구조에 따라 요금이 청구됩니다. 
 
 [응용 프로그램 패키지](batch-application-packages.md)를 사용하여 Batch 노드에 응용 프로그램을 배포하는 경우에도 응용 프로그램 패키지에서 사용하는 Azure Storage 리소스에 대한 요금이 청구됩니다. 일반적으로 Azure Storage 비용은 최소입니다. 
 
@@ -353,4 +352,3 @@ MSDN의 [Azure Batch 포럼][forum]은 Batch를 설명하고 서비스에 대한
 [py_list_skus]: http://azure-sdk-for-python.readthedocs.org/en/dev/ref/azure.batch.operations.html#azure.batch.operations.AccountOperations.list_node_agent_skus
 [vm_marketplace]: https://azure.microsoft.com/marketplace/virtual-machines/
 [vm_pricing]: https://azure.microsoft.com/pricing/details/virtual-machines/
-

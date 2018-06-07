@@ -1,6 +1,6 @@
 ---
-title: "Service Fabric 응용 프로그램의 업그레이드 구성 | Microsoft Docs"
-description: "Microsoft Visual Studio를 사용하여 서비스 패브릭 응용 프로그램을 업그레이드하기 위한 설정을 구성하는 방법에 대해 알아봅니다."
+title: Service Fabric 응용 프로그램의 업그레이드 구성 | Microsoft Docs
+description: Microsoft Visual Studio를 사용하여 서비스 패브릭 응용 프로그램을 업그레이드하기 위한 설정을 구성하는 방법에 대해 알아봅니다.
 services: service-fabric
 documentationcenter: na
 author: mikkelhegn
@@ -9,18 +9,16 @@ editor: tglee
 ms.assetid: 1757ba85-0b7b-4f16-8a23-2ddaa61c86c6
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: multiple
 ms.date: 06/29/2017
 ms.author: mikkelhegn
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6efa2cca46c2d8e4c00150ff964f8af02397ef99
-ms.openlocfilehash: 314b29a56e4651222822f40a116af97a7372ff2c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/01/2017
-
-
+ms.openlocfilehash: faf7fd137d5c1efcd425cf28fd4860c62a719a67
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="configure-the-upgrade-of-a-service-fabric-application-in-visual-studio"></a>Visual Studio에서 서비스 패브릭 응용 프로그램의 업그레이드 구성
 Azure 서비스 패브릭에 대한 Visual Studio Tools는 로컬 또는 원격 클러스터에 게시하기 위한 업그레이드를 지원합니다. 테스트 및 디버그 중에 응용 프로그램을 바꾸지 않고 새 버전으로 업그레이드하려는 세 가지 시나리오가 있습니다.
@@ -88,4 +86,4 @@ PowerShell cmdlet을 사용하여 서비스 패브릭 응용 프로그램을 업
 </Policies>
 ```
 ## <a name="next-steps"></a>다음 단계
-응용 프로그램을 배포하는 방법에 대한 자세한 내용은 [Azure 서비스 패브릭에서 기존 응용 프로그램 배포](service-fabric-deploy-existing-app.md)를 참조하세요.
+응용 프로그램을 업그레이드하는 방법에 대한 자세한 내용은 [Visual Studio를 사용하여 응용 프로그램 업그레이드](service-fabric-application-upgrade-tutorial.md)를 참조하세요.

@@ -1,25 +1,25 @@
 ---
-title: "Azure AD Connect에서 동기화된 특성 | Microsoft Docs"
-description: "Azure Active Directory에 동기화된 특성을 나열합니다."
+title: Azure AD Connect에서 동기화된 특성 | Microsoft Docs
+description: Azure Active Directory에 동기화된 특성을 나열합니다.
 services: active-directory
-documentationcenter: 
-author: andkjell
-manager: femila
-editor: 
+documentationcenter: ''
+author: billmath
+manager: mtillman
+editor: ''
 ms.assetid: c2bb36e0-5205-454c-b9b6-f4990bcedf51
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/17/2017
+ms.date: 03/05/2018
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ff2fb126905d2a68c5888514262212010e108a3d
-ms.openlocfilehash: 32b5e5a8025be3381e20aad0b22289b2c641f74e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/17/2017
-
+ms.openlocfilehash: 506206d3e0a28f2ffc0e9e029ec27546bc332754
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32160058"
 ---
 # <a name="azure-ad-connect-sync-attributes-synchronized-to-azure-active-directory"></a>Azure AD Connect 동기화: Azure Active Directory에 동기화된 특성
 이 항목에서는 Azure AD Connect 동기화에 의해 동기화되는 특성을 보여 줍니다.  
@@ -43,7 +43,7 @@ ms.lasthandoff: 06/17/2017
 | cn |X | |
 | displayName |X | |
 | objectSID |X |기계적 속성입니다. Azure AD와 AD 사이의 동기화를 유지하기 위해 사용되는 AD 사용자 식별자입니다. |
-| pwdLastSet |X |기계적 속성입니다. 이미 발급된 토큰을 무효화하는 경우를 파악하는 데 사용합니다. 암호 동기화 및 페더레이션 모두 사용됩니다. |
+| pwdLastSet |X |기계적 속성입니다. 이미 발급된 토큰을 무효화하는 경우를 파악하는 데 사용합니다. 암호 해시 동기화, 통과 인증 및 페더레이션에서 사용됩니다. |
 | sourceAnchor |X |기계적 속성입니다. ADDS와 Azure AD 간의 관계를 유지하기 위한 변경할 수 없는 식별자입니다. |
 | usageLocation |X |기계적 속성입니다. 사용자의 국가입니다. 라이선스 할당에 사용됩니다. |
 | userPrincipalName |X |UPN은 사용자의 로그인 ID입니다. 대부분 [mail] 값과 같습니다. |
@@ -88,7 +88,7 @@ ms.lasthandoff: 06/17/2017
 | l |X |X | | |
 | legacyExchangeDN |X |X |X | |
 | mailNickname |X |X |X | |
-| mangedBy | | |X | |
+| managedBy | | |X | |
 | manager |X |X | | |
 | member | | |X | |
 | mobile |X |X | | |
@@ -232,10 +232,10 @@ ms.lasthandoff: 06/17/2017
 | pager |X |X | | |
 | physicalDeliveryOfficeName |X |X | | |
 | postalCode |X |X | | |
-| postOfficeBox |X |X | | |
+| postOfficeBox |X |X | |이 특성은 현재 SharePoint Online에 사용되지 않습니다. |
 | preferredLanguage |X | | | |
 | proxyAddresses |X |X |X | |
-| pwdLastSet |X | | |기계적 속성입니다. 이미 발급된 토큰을 무효화하는 경우를 파악하는 데 사용합니다. 암호 동기화 및 페더레이션 모두 사용됩니다. |
+| pwdLastSet |X | | |기계적 속성입니다. 이미 발급된 토큰을 무효화하는 경우를 파악하는 데 사용합니다. 암호 해시 동기화, 통과 인증 및 페더레이션에서 사용됩니다. |
 | reportToOriginator | | |X | |
 | reportToOwner | | |X | |
 | securityEnabled | | |X |groupType에서 파생됩니다 |
@@ -249,12 +249,12 @@ ms.lasthandoff: 06/17/2017
 | thumbnailphoto |X |X | | |
 | title |X |X | | |
 | unauthOrig |X |X |X | |
-| url |X |X | | |
+| URL |X |X | | |
 | usageLocation |X | | |기계적 속성입니다. 사용자의 국가입니다. 라이선스 할당에 사용됩니다. |
 | userPrincipalName |X | | |UPN은 사용자의 로그인 ID입니다. 대부분 [mail] 값과 같습니다. |
 | wWWHomePage |X |X | | |
 
-## <a name="lync-online"></a>Lync Online
+## <a name="lync-online-subsequently-known-as-skype-for-business"></a>Lync Online(이후에 비즈니스용 Skype라고 함)
 | 특성 이름 | 사용자 | 연락처 | 그룹 | 주석 |
 | --- |:---:|:---:|:---:| --- |
 | accountEnabled |X | | |활성화된 계정을 정의합니다. |
@@ -290,7 +290,7 @@ ms.lasthandoff: 06/17/2017
 | postalCode |X |X | | |
 | preferredLanguage |X | | | |
 | proxyAddresses |X |X |X | |
-| pwdLastSet |X | | |기계적 속성입니다. 이미 발급된 토큰을 무효화하는 경우를 파악하는 데 사용합니다. 암호 동기화 및 페더레이션 모두 사용됩니다. |
+| pwdLastSet |X | | |기계적 속성입니다. 이미 발급된 토큰을 무효화하는 경우를 파악하는 데 사용합니다. 암호 해시 동기화, 통과 인증 및 페더레이션에서 사용됩니다. |
 | securityEnabled | | |X |groupType에서 파생됩니다 |
 | sn |X |X | | |
 | sourceAnchor |X |X |X |기계적 속성입니다. ADDS와 Azure AD 간의 관계를 유지하기 위한 변경할 수 없는 식별자입니다. |
@@ -332,7 +332,7 @@ ms.lasthandoff: 06/17/2017
 | member | | |X | |
 | objectSID |X | |X |기계적 속성입니다. Azure AD와 AD 사이의 동기화를 유지하기 위해 사용되는 AD 사용자 식별자입니다. |
 | proxyAddresses |X |X |X | |
-| pwdLastSet |X | | |기계적 속성입니다. 이미 발급된 토큰을 무효화하는 경우를 파악하는 데 사용합니다. 암호 동기화 및 페더레이션 모두 사용됩니다. |
+| pwdLastSet |X | | |기계적 속성입니다. 이미 발급된 토큰을 무효화하는 경우를 파악하는 데 사용합니다. 암호 해시 동기화, 통과 인증 및 페더레이션에서 사용됩니다. |
 | securityEnabled | | |X |groupType에서 파생됩니다 |
 | sourceAnchor |X |X |X |기계적 속성입니다. ADDS와 Azure AD 간의 관계를 유지하기 위한 변경할 수 없는 식별자입니다. |
 | usageLocation |X | | |기계적 속성입니다. 사용자의 국가입니다. 라이선스 할당에 사용됩니다. |
@@ -360,7 +360,7 @@ ms.lasthandoff: 06/17/2017
 | physicalDeliveryOfficeName |X |X | | |
 | postalCode |X |X | | |
 | preferredLanguage |X | | | |
-| pwdLastSet |X | | |기계적 속성입니다. 이미 발급된 토큰을 무효화하는 경우를 파악하는 데 사용합니다. 암호 동기화 및 페더레이션 모두 사용됩니다. |
+| pwdLastSet |X | | |기계적 속성입니다. 이미 발급된 토큰을 무효화하는 경우를 파악하는 데 사용합니다. 암호 해시 동기화, 통과 인증 및 페더레이션에서 사용됩니다. |
 | securityEnabled | | |X |groupType에서 파생됩니다 |
 | sn |X |X | | |
 | sourceAnchor |X |X |X |기계적 속성입니다. ADDS와 Azure AD 간의 관계를 유지하기 위한 변경할 수 없는 식별자입니다. |
@@ -391,13 +391,13 @@ ms.lasthandoff: 06/17/2017
 | member | | |X | |
 | objectSID |X | | |기계적 속성입니다. Azure AD와 AD 사이의 동기화를 유지하기 위해 사용되는 AD 사용자 식별자입니다. |
 | proxyAddresses |X |X |X | |
-| pwdLastSet |X | | |기계적 속성입니다. 이미 발급된 토큰을 무효화하는 경우를 파악하는 데 사용합니다. 암호 동기화 및 페더레이션 모두 사용됩니다. |
+| pwdLastSet |X | | |기계적 속성입니다. 이미 발급된 토큰을 무효화하는 경우를 파악하는 데 사용합니다. 암호 해시 동기화, 통과 인증 및 페더레이션에서 사용됩니다. |
 | sn |X |X | | |
 | sourceAnchor |X |X |X |기계적 속성입니다. ADDS와 Azure AD 간의 관계를 유지하기 위한 변경할 수 없는 식별자입니다. |
 | usageLocation |X | | |기계적 속성입니다. 사용자의 국가입니다. 라이선스 할당에 사용됩니다. |
 | userPrincipalName |X | | |UPN은 사용자의 로그인 ID입니다. 대부분 [mail] 값과 같습니다. |
 
-## <a name="windows-10"></a>Windows 10
+## <a name="windows-10"></a>윈도우 10
 Windows 10 도메인에 가입된 컴퓨터(장치)는 일부 특성을 Azure AD에 동기화합니다. 이 시나리오에 대한 자세한 내용은 [Windows 10 환경용 Azure AD에 도메인 가입된 장치 연결](../active-directory-azureadjoin-devices-group-policy.md)을 참조하세요. 이 특성은 항상 동기화되며 Windows 10은 선택 취소할 수 있는 앱으로 표시되지 않습니다. Windows 10 도메인에 가입된 컴퓨터는 특성 userCertificate를 채우는 것으로 식별됩니다.
 
 | 특성 이름 | 장치 | 주석 |
@@ -422,17 +422,17 @@ Windows 10 도메인에 가입된 컴퓨터(장치)는 일부 특성을 Azure AD
 ## <a name="exchange-hybrid-writeback"></a>Exchange 하이브리드 쓰기 저장
 이 특성들은 **Exchange 하이브리드**를 사용하도록 설정할 때 Azure AD에서 온-프레미스 Active Directory로 다시 기록됩니다. Exchange 버전에 따라 더 적은 특성을 동기화 할 수 있습니다.
 
-| 특성 이름 | 사용자 | 연락처 | 그룹 | 주석 |
-| --- |:---:|:---:|:---:| --- |
-| msDS-ExternalDirectoryObjectID |X | | |Azure AD의 cloudAnchor에서 파생됩니다. 이 특성은 Exchange 2016 및 Windows Server 2016 AD의 새로운 기능입니다. |
-| msExchArchiveStatus |X | | |온라인 보관: 고객의 메일을 보관합니다. |
-| msExchBlockedSendersHash |X | | |필터링: 온-프레미스 필터링을 다시 쓰고 온라인 보관 및 보낸 사람의 데이터를 클라이어트로부터 차단합니다. |
-| msExchSafeRecipientsHash |X | | |필터링: 온-프레미스 필터링을 다시 쓰고 온라인 보관 및 보낸 사람의 데이터를 클라이어트로부터 차단합니다. |
-| msExchSafeSendersHash |X | | |필터링: 온-프레미스 필터링을 다시 쓰고 온라인 보관 및 보낸 사람의 데이터를 클라이어트로부터 차단합니다. |
-| msExchUCVoiceMailSettings |X | | |UM(통합 메시징)-온라인 음성 메일 사용: Microsoft Lync Server Intergration 사용자가 온라인 서비스에 음성 메일이 있는지 Lync Server 온-프레미스에 나타내기 위해서 사용합니다. |
-| msExchUserHoldPolicies |X | | |소송 보류: 어떤 사용자가 소송을 보류 중인지 확인하기 위해 클라우드 서비스를 사용합니다. |
-| proxyAddresses |X |X |X |Exchange Online의 x500 주소만 삽입됩니다. |
-| publicDelegates |X | | |Exchange Online 사서함에 온-프레미스 Exchange 사서함이 있는 사용자에게 SendOnBehalfTo 권한을 부여할 수 있습니다. Azure AD Connect 빌드 1.1.552.0 이상이 필요합니다. |
+| 특성 이름(Connect UI) |특성 이름(온-프레미스 AD) | 사용자 | 연락처 | 그룹 | 주석 |
+| --- |:---:|:---:|:---:| --- |---|
+| msDS-ExternalDirectoryObjectID| ms-DS-External-Directory-Object-Id |X | | |Azure AD의 cloudAnchor에서 파생됩니다. 이 특성은 Exchange 2016 및 Windows Server 2016 AD의 새로운 기능입니다. |
+| msExchArchiveStatus| ms-Exch-ArchiveStatus |X | | |온라인 보관: 고객의 메일을 보관합니다. |
+| msExchBlockedSendersHash| ms-Exch-BlockedSendersHash |X | | |필터링: 온-프레미스 필터링을 다시 쓰고 온라인 보관 및 보낸 사람의 데이터를 클라이어트로부터 차단합니다. |
+| msExchSafeRecipientsHash| ms-Exch-SafeRecipientsHash  |X | | |필터링: 온-프레미스 필터링을 다시 쓰고 온라인 보관 및 보낸 사람의 데이터를 클라이어트로부터 차단합니다. |
+| msExchSafeSendersHash| ms-Exch-SafeSendersHash  |X | | |필터링: 온-프레미스 필터링을 다시 쓰고 온라인 보관 및 보낸 사람의 데이터를 클라이어트로부터 차단합니다. |
+| msExchUCVoiceMailSettings| ms-Exch-UCVoiceMailSettings |X | | |UM(통합 메시징)-온라인 음성 메일 사용: Microsoft Lync Server Intergration 사용자가 온라인 서비스에 음성 메일이 있는지 Lync Server 온-프레미스에 나타내기 위해서 사용합니다. |
+| msExchUserHoldPolicies| ms-Exc-hUserHoldPolicies |X | | |소송 보류: 어떤 사용자가 소송을 보류 중인지 확인하기 위해 클라우드 서비스를 사용합니다. |
+| proxyAddresses| proxyAddresses |X |X |X |Exchange Online의 x500 주소만 삽입됩니다. |
+| publicDelegates| ms-Exch-Public-Delegates  |X | | |Exchange Online 사서함에 온-프레미스 Exchange 사서함이 있는 사용자에게 SendOnBehalfTo 권한을 부여할 수 있습니다. Azure AD Connect 빌드 1.1.552.0 이상이 필요합니다. |
 
 ## <a name="exchange-mail-public-folder"></a>Exchange 메일 공용 폴더
 이러한 특성은 **Exchange 메일 공용 폴더**를 사용하도록 설정할 때 온-프레미스 Active Directory에서 Azure AD에서 동기화됩니다.
@@ -466,7 +466,7 @@ Active Directory에 장치 개체를 만듭니다. 이러한 개체는 Azure AD�
 | msDS-IsManaged |X | |
 | msDS-RegisteredOwner |X | |
 
-## <a name="notes"></a>참고 사항
+## <a name="notes"></a>메모
 * 대체 ID를 사용하면, 온-프레미스 특성 userPrincipalName은 Azure AD 특성 onPremisesUserPrinciparlName과 동기화됩니다. 대체 ID 특성(예: 메일)은 Azure AD 특성 userPrincipalName과 동기화됩니다.
 * 위의 목록에서 개체 형식 **User**는 개체 형식 **iNetOrgPerson**에도 적용됩니다.
 
@@ -474,4 +474,3 @@ Active Directory에 장치 개체를 만듭니다. 이러한 개체는 Azure AD�
 [Azure AD Connect 동기화](active-directory-aadconnectsync-whatis.md) 구성에 대해 자세히 알아봅니다.
 
 [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)에 대해 자세히 알아봅니다.
-

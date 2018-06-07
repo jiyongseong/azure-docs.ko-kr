@@ -14,11 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 11/01/2016
 ms.author: terrylan
-translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
 ms.openlocfilehash: ce0d178914907750e5da59f223a4b1e04b9bb6fb
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="update-os-version-in-azure-security-center"></a>Azure 보안 센터에서 OS 버전 업데이트
 클라우드 서비스의 가상 컴퓨터(VM)의 경우 Azure 보안 센터는 사용 가능한 최신 버전이 있는 경우 운영 체제(OS) 업데이트를 권장합니다.  프로덕션 슬롯에서 실행되는 클라우드 서비스 웹 및 작업자 역할만 모니터링됩니다.
@@ -52,9 +52,3 @@ ms.openlocfilehash: ce0d178914907750e5da59f223a4b1e04b9bb6fb
 
 <!--Image references-->
 [1]: ./media/security-center-update-os-version/update-os-version.png
-
-
-
-<!--HONumber=Nov16_HO3-->
-
-

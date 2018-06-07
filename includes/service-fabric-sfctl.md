@@ -1,0 +1,2 @@
+> [!IMPORTANT]
+> Service Fabric과 함께 사용되는 두 개의 CLI 유틸리티가 있습니다. [Azure CLI](/cli/azure/get-started-with-azure-cli?view=azure-cli-latest)를 사용하여 Azure 호스팅 Service Fabric 클러스터와 같은 Azure 리소스를 관리합니다. [Service Fabric CLI](/azure/service-fabric/service-fabric-cli)를 사용하여 (호스팅되는 위치에 관계 없이) Service Fabric 클러스터에 직접 연결하고 클러스터, 응용 프로그램 및 서비스를 관리합니다. 

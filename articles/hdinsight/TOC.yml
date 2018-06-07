@@ -1,0 +1,18 @@
+- name: HDInsight 설명서
+  href: index.yml
+- name: Hadoop은
+  href: ./hadoop/apache-hadoop-introduction.md
+- name: Spark
+  href: ./spark/apache-spark-overview.md
+- name: HBase
+  href: ./hbase/apache-hbase-overview.md
+- name: 대화형 쿼리
+  href: ./interactive-query/apache-interactive-query-get-started.md
+- name: Kafka
+  href: ./kafka/apache-kafka-introduction.md
+- name: Storm
+  href: ./storm/apache-storm-overview.md
+- name: R 서버
+  href: ./r-server/r-server-overview.md
+- name: 엔터프라이즈 준비
+  href: ./domain-joined/apache-domain-joined-introduction.md

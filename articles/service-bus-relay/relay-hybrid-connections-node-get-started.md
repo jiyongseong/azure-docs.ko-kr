@@ -1,35 +1,34 @@
 ---
-title: "Node에서 Azure 릴레이 하이브리드 연결 시작 | Microsoft Docs"
-description: "Azure Relay Hybrid Connections에 대한 Node.js 콘솔 응용 프로그램 작성"
+title: Node에서 Azure Relay 하이브리드 연결 Websocket 시작 | Microsoft Docs
+description: Azure Relay 하이브리드 연결 Websocket에 대한 Node.js 콘솔 응용 프로그램 작성
 services: service-bus-relay
 documentationcenter: node
 author: sethmanheim
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: e44e4867-3cf3-46be-8f8a-7671e2013bc4
 ms.service: service-bus-relay
 ms.devlang: tbd
 ms.topic: get-started-article
 ms.tgt_pltfrm: node
 ms.workload: na
-ms.date: 07/07/2017
+ms.date: 05/02/2018
 ms.author: sethm
+ms.openlocfilehash: 1e0b76b96029e1a7ed84f1c8cd895090e8acbc6f
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: c3bfc45969f250059988129f532edd12dfe3dcfe
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
-# <a name="get-started-with-relay-hybrid-connections"></a>릴레이 하이브리드 연결 시작
+# <a name="get-started-with-relay-hybrid-connections-websockets-in-node"></a>Node에서 Relay 하이브리드 연결 Websocket 시작
 
 [!INCLUDE [relay-selector-hybrid-connections](../../includes/relay-selector-hybrid-connections.md)]
 
-이 자습서에서는 [Azure Relay Hybrid Connections](relay-what-is-it.md#hybrid-connections)를 소개하고 Node.js를 사용하여 메시지를 해당 수신기 응용 프로그램으로 보내는 클라이언트 응용 프로그램을 만드는 방법을 보여 줍니다. 
+이 자습서에서는 [Azure Relay 하이브리드 연결](relay-what-is-it.md#hybrid-connections) Websocket 기능을 소개하고, Node.js를 사용하여 Websocket 메시지를 해당 수신기 응용 프로그램으로 보내는 클라이언트 응용 프로그램을 만드는 방법을 보여줍니다.
 
 ## <a name="what-will-be-accomplished"></a>수행될 작업
 
-하이브리드 연결에는 클라이언트와 서버 구성 요소가 모두 필요하기 대문에 이 자습서에서는 두 개의 콘솔 응용 프로그램을 만듭니다. 단계는 다음과 같습니다.
+하이브리드 연결에는 클라이언트와 서버 구성 요소가 모두 필요하므로 이 자습서에서는 두 개의 콘솔 응용 프로그램을 만듭니다. 단계는 다음과 같습니다.
 
 1. Azure 포털을 사용하여 릴레이 네임스페이스를 만듭니다.
 2. Azure Portal을 사용하여 하이브리드 연결을 만듭니다.
@@ -57,7 +56,7 @@ ms.lasthandoff: 07/21/2017
 
 ## <a name="3-create-a-server-application-listener"></a>3. 서버 응용 프로그램(수신기) 만들기
 
-릴레이에서 메시지를 수신하고 받으려면 Node.js 콘솔 응용 프로그램을 작성합니다.
+릴레이에서 메시지를 수신 대기하고 받으려면 Node.js 콘솔 응용 프로그램을 작성합니다.
 
 [!INCLUDE [relay-hybrid-connections-node-get-started-server](../../includes/relay-hybrid-connections-node-get-started-server.md)]
 
@@ -77,11 +76,10 @@ ms.lasthandoff: 07/21/2017
 
 축하합니다. Node.js를 사용하여 종단 간 하이브리드 연결 응용 프로그램을 만들었습니다.
 
-## <a name="next-steps"></a>다음 단계:
+## <a name="next-steps"></a>다음 단계
 
 * [릴레이 FAQ](relay-faq.md)
 * [네임스페이스 만들기](relay-create-namespace-portal.md)
 * [.NET 시작](relay-hybrid-connections-dotnet-get-started.md)
 * [노드 시작](relay-hybrid-connections-node-get-started.md)
-
 

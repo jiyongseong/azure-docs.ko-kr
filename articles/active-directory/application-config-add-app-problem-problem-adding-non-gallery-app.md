@@ -1,11 +1,11 @@
 ---
-title: "비갤러리 응용 프로그램을 추가할 때 발생하는 문제 | Microsoft Docs"
-description: "사용자 지정 비갤러리 응용 프로그램을 추가할 때 일반적으로 발생하는 문제 이해"
+title: 비갤러리 응용 프로그램을 추가할 때 발생하는 문제 | Microsoft Docs
+description: 사용자 지정 비갤러리 응용 프로그램을 추가할 때 일반적으로 발생하는 문제 이해
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: ajamess
-manager: femila
-ms.assetid: 
+manager: mtillman
+ms.assetid: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
@@ -13,17 +13,16 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: cc9e81de9bf8a3312da834502fa6ca25e2b5834a
-ms.openlocfilehash: 2dd8ed2cc0cd9575dcc56f489afa19a41cc9c10a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/11/2017
-
+ms.openlocfilehash: 3d54a9bccdf3f940959c2cbe3f85bd5fddff68e1
+ms.sourcegitcommit: d28bba5fd49049ec7492e88f2519d7f42184e3a8
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
+ms.locfileid: "34053558"
 ---
-
 # <a name="problem-adding-a-non-gallery-application"></a>비갤러리 응용 프로그램을 추가할 때 발생하는 문제
 
-이 문서는 **사용자 지정 비갤러리 응용 프로그램**을 추가하는 경우 직면하는 일반적인 문제 및 문제를 해결하기 위해 수행할 수 있는 작업을 이해하는 데 도움이 됩니다. 
+이 아티클은 **사용자 지정 비갤러리 응용 프로그램**을 추가하는 경우 직면하는 일반적인 문제 및 문제를 해결하기 위해 수행할 수 있는 작업을 이해하는 데 도움이 됩니다. 
 
 ## <a name="i-clicked-the-add-button-and-my-application-took-a-long-time-to-appear"></a>"추가" 단추를 클릭했고 응용 프로그램이 나타나는 데 시간이 오래 걸렸음
 
@@ -54,9 +53,7 @@ ms.lasthandoff: 04/11/2017
    >
    >
 
-3.  **알림 세부 정보** 블레이드가 열립니다.
-
-4.  이 정보를 사용하여 문제에 대한 자세한 내용을 이해합니다.
+4.  **알림 세부 정보**에서 정보를 사용하여 문제에 대한 자세한 내용을 이해합니다.
 
 5.  여전히 도움이 필요한 경우 문제에 대한 도움을 얻도록 이 정보를 지원 엔지니어 또는 제품 그룹과 공유할 수도 있습니다.
 
@@ -68,7 +65,7 @@ ms.lasthandoff: 04/11/2017
 
 ## <a name="notification-details-explained"></a>알림 세부 정보 설명
 
-다음은 각 알림 항목이 의미하는 내용을 자세히 설명하고 각 항목의 예를 제공합니다.
+알림에 대한 자세한 내용은 다음 설명을 참조하세요.
 
 ### <a name="essential-notification-items"></a>중요 알림 항목
 
@@ -125,13 +122,13 @@ ms.lasthandoff: 04/11/2017
 
    *  예제 – **내부 url 'http://bing.com/'은 이미 사용 중이므로 유효하지 않습니다.**
 
--   **오류 복사** - **오류 복사** 텍스트 상자 오른쪽의 **복사 아이콘**을 클릭하여 지원 또는 제품 그룹 엔지니어와 공유하도록 모든 알림 세부 정보 복사
+-   **오류 복사** - **오류 복사** 텍스트 상자 오른쪽의 **복사 아이콘**을 클릭하여 지원 또는 제품 그룹 
+-   엔지니어와 공유하도록 모든 알림 세부 정보 복사
 
    *  예제 ```{"errorCode":"InternalUrl\_Duplicate","localizedErrorDetails":{"errorDetail":"Internal url 'http://google.com/' is invalid since it is already in use"},"operationResults":\[{"objectId":null,"displayName":null,"status":0,"details":"Internal url 'http://bing.com/' is invalid since it is already in use"}\],"timeStampUtc":"2017-03-23T19:50:26.465743Z","clientRequestId":"302fd775-3329-4670-a9f3-bea37004f0bb","internalTransactionId":"ea5b5475-03b9-4f08-8e95-bbb11289ab65","upn":"tperkins@f128.info","tenantId":"7918d4b5-0442-4a97-be2d-36f9f9962ece","userObjectId":"17f84be4-51f8-483a-b533-383791227a99"}```
 
 ## <a name="next-steps"></a>다음 단계
-[Azure Active Directory로 응용 프로그램 관리](active-directory-enable-sso-scenario.md)
-
+[Azure Active Directory로 응용 프로그램 관리](manage-apps/what-is-application-management.md)
 
 
 

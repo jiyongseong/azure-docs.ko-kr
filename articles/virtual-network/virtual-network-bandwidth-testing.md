@@ -1,12 +1,12 @@
 ---
-title: "Azure VM 네트워크 처리량 테스트 | Microsoft Docs"
-description: "Azure Virtual Machine 네트워크 처리량을 테스트하는 방법을 알아봅니다."
+title: Azure VM 네트워크 처리량 테스트 | Microsoft Docs
+description: Azure Virtual Machine 네트워크 처리량을 테스트하는 방법을 알아봅니다.
 services: virtual-network
 documentationcenter: na
 author: steveesp
 manager: Gerald DeGrace
-editor: 
-ms.assetid: 
+editor: ''
+ms.assetid: ''
 ms.service: virtual-network
 ms.devlang: na
 ms.topic: article
@@ -14,14 +14,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 07/21/2017
 ms.author: steveesp
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a643f139be40b9b11f865d528622bafbe7dec939
-ms.openlocfilehash: a2cbb6ca9197c7af0d1d30e87d58b0314507a531
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/31/2017
-
+ms.openlocfilehash: d65b86cc63a4fd39824a6421afd5ce9abb7fd270
+ms.sourcegitcommit: ded74961ef7d1df2ef8ffbcd13eeea0f4aaa3219
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/29/2018
 ---
-
 # <a name="bandwidththroughput-testing-ntttcp"></a>대역폭/처리량 테스트(NTTTCP)
 
 Azure에서 네트워크 처리량 성능을 테스트하는 경우 테스트할 네트워크를 대상으로 지정하고 성능에 영향을 줄 수 있는 기타 리소스의 사용을 최소화하는 도구를 사용하는 것이 가장 좋습니다. NTTTCP가 권장됩니다.
@@ -108,7 +106,7 @@ Ubuntu - Git 설치:
 ```
 둘 다에서 만들고 설치합니다.
 ``` bash
- git clone <https://github.com/Microsoft/ntttcp-for-linux>
+ git clone https://github.com/Microsoft/ntttcp-for-linux
  cd ntttcp-for-linux/src
  make && make install
 ```
@@ -160,8 +158,15 @@ ntttcp -r -m <2 x nr cores>,*,<Linux server IP>
 ``` bash
 ntttcp -s -m <2 x nr cores>,*,<Linux  server IP> -ns -t 300
 ```
+## <a name="testing-cloud-service-instances"></a>클라우드 서비스 인스턴스 테스트:
+다음 섹션을 ServiceDefinition.csdef에 추가해야 합니다.
+```xml
+<Endpoints>
+  <InternalEndpoint name="Endpoint3" protocol="any" />
+</Endpoints> 
+```
 
 ## <a name="next-steps"></a>다음 단계
 * 결과에 따라 시나리오에 대해 [네트워크 처리량 컴퓨터를 최적화](virtual-network-optimize-network-bandwidth.md)할 수 있는 시간적 여유가 있을 수 있습니다.
+* [가상 머신에 대역폭이 할당되는 방법](virtual-machine-network-throughput.md)을 알아봅니다.
 * [Azure Virtual Network FAQ(질문과 대답)](virtual-networks-faq.md)에 대해 자세히 알아보기
-

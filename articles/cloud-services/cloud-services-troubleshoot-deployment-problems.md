@@ -10,17 +10,16 @@ tags: top-support-issue
 ms.assetid: a18ae415-0d1c-4bc4-ab6c-c1ddea02c870
 ms.service: cloud-services
 ms.devlang: na
-ms.topic: article
+ms.topic: troubleshooting
 ms.tgt_pltfrm: na
 ms.workload: tbd
-ms.date: 7/26/2017
+ms.date: 11/03/2017
 ms.author: v-six
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: fae727ec3496737fca37236b4f36b4accf0afc63
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
+ms.openlocfilehash: 3c56a5750c9f8a6c59ea07c01c101f358331174b
+ms.sourcegitcommit: b07d06ea51a20e32fdc61980667e801cb5db7333
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/08/2017
 ---
 # <a name="troubleshoot-cloud-service-deployment-problems"></a>클라우드 서비스 배포 문제 해결
 Azure에 클라우드 서비스 응용 프로그램 패키지를 배포할 때 Azure 포털의 **속성** 창에서 배포에 대한 정보를 얻을 수 있습니다. 클라우드 서비스에 발생한 문제를 해결하기 위해 이 창에서 세부 정보를 사용할 수 있고 새로운 지원 요청을 할 때 Azure 지원 센터에 이 정보를 제공할 수 있습니다.
@@ -28,7 +27,6 @@ Azure에 클라우드 서비스 응용 프로그램 패키지를 배포할 때 A
 다음과 같이 **속성** 창을 찾을 수 있습니다.
 
 * Azure 포털에서 클라우드 서비스의 배포, **모든 설정**, **속성**을 차례로 클릭합니다.
-* Azure 클래식 포털에서: 클라우드 서비스의 배포, **대시보드**를 차례로 클릭하고 페이지의 오른쪽 아래로 이동합니다(**간략 상태** 아래). 이 창에 대한 "속성" 레이블이 없습니다.
 
 > [!NOTE]
 > 창의 오른쪽 위 모서리에 있는 아이콘을 클릭하여 **속성** 창의 내용을 클립보드에 복사할 수 있습니다.
@@ -69,14 +67,14 @@ Azure에서 문제가 있는 노드를 검색하고 따라서 역할 인스턴�
 ## <a name="problem-a-role-instance-is-looping-between-started-initializing-busy-and-stopped"></a>문제: 역할 인스턴스가 시작됨, 초기화 중, 사용 중 및 중지됨 사이를 반복해요
 이 상태는 응용 프로그램 코드, 패키지 또는 구성 파일에 문제가 있음을 나타낼 수 있습니다. 이 경우 몇 분마다 상태가 변경되는 것을 확인할 수 있어야 하고 Azure 포털은 **재활용 중**, **사용 중** 또는 **초기화 중**과 같이 표시됩니다. 역할 인스턴스의 실행을 방해하는 응용 프로그램에 문제가 있다는 것을 의미합니다.
 
-이 문제를 해결하는 방법에 대한 자세한 내용은 [Azure PaaS 계산 진단 데이터](http://blogs.msdn.com/b/kwill/archive/2013/08/09/windows-azure-paas-compute-diagnostics-data.aspx) 및 [역할을 재활용하는 일반적인 문제](cloud-services-troubleshoot-common-issues-which-cause-roles-recycle.md) 블로그 게시물을 참조하세요.
+이 문제를 해결하는 방법에 대한 자세한 내용은 [Azure PaaS Compute 진단 데이터](http://blogs.msdn.com/b/kwill/archive/2013/08/09/windows-azure-paas-compute-diagnostics-data.aspx) 및 [역할을 재활용하는 일반적인 문제](cloud-services-troubleshoot-common-issues-which-cause-roles-recycle.md) 블로그 게시물을 참조하세요.
 
 ## <a name="problem-my-application-stopped-working"></a>문제: 내 응용 프로그램의 작동이 중지되었어요
 1. Azure 포털에서 역할 인스턴스를 클릭합니다.
 2. Azure 포털의 **속성** 창에서 다음 조건을 고려하여 문제를 해결합니다.
    * 역할 인스턴스가 최근에 중지된 경우 ( **중단 횟수**의 값을 확인할 수 있음) 배포를 업데이트할 수 있습니다. 역할 인스턴스가 다시 스스로 작동하는지 확인하기 위해 기다립니다.
    * 역할 인스턴스가 **사용 중**인 경우 응용 프로그램 코드가 [StatusCheck](https://msdn.microsoft.com/library/microsoft.windowsazure.serviceruntime.roleenvironment.statuscheck) 이벤트를 처리하는지 확인합니다. 이 이벤트를 처리하는 일부 코드를 추가하거나 수정해야 합니다.
-   * [Azure PaaS 계산 진단 데이터](http://blogs.msdn.com/b/kwill/archive/2013/08/09/windows-azure-paas-compute-diagnostics-data.aspx)블로그 게시물에서 진단 데이터 및 문제 해결 시나리오를 수행합니다.
+   * [Azure PaaS Compute 진단 데이터](http://blogs.msdn.com/b/kwill/archive/2013/08/09/windows-azure-paas-compute-diagnostics-data.aspx)블로그 게시물에서 진단 데이터 및 문제 해결 시나리오를 수행합니다.
 
 > [!WARNING]
 > 클라우드 서비스를 재활용하면 배포에 대한 속성을 다시 설정하며 이렇게 하면 원래 문제에 대한 정보가 효과적으로 지워집니다.
@@ -84,7 +82,6 @@ Azure에서 문제가 있는 노드를 검색하고 따라서 역할 인스턴�
 >
 
 ## <a name="next-steps"></a>다음 단계
-클라우드 서비스에 대한 [문제해결 문서](https://azure.microsoft.com/documentation/articles/?tag=top-support-issue&product=cloud-services) 를 더 봅니다.
+클라우드 서비스에 대한 [문제해결 문서](https://docs.microsoft.com/azure/cloud-services/cloud-services-allocation-failures) 를 더 봅니다.
 
 Azure PaaS 컴퓨터 진단 데이터를 사용하여 클라우드 서비스 역할 문제를 해결하는 방법을 알아보려면 [Kevin Williamson의 블로그 시리즈](http://blogs.msdn.com/b/kwill/archive/2013/08/09/windows-azure-paas-compute-diagnostics-data.aspx)를 참조하세요.
-

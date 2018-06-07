@@ -1,11 +1,11 @@
 ---
-title: "Xamarin.Forms 앱에 푸시 알림 추가 | Microsoft Docs"
-description: "Azure 서비스를 사용하여 Xamarin.Forms 앱에 다중 플랫폼 푸시 알림을 전송하는 방법을 알아봅니다."
+title: Xamarin.Forms 앱에 푸시 알림 추가 | Microsoft Docs
+description: Azure 서비스를 사용하여 Xamarin.Forms 앱에 다중 플랫폼 푸시 알림을 전송하는 방법을 알아봅니다.
 services: app-service\mobile
 documentationcenter: xamarin
-author: ysxu
-manager: syntaxc4
-editor: 
+author: conceptdev
+manager: crdun
+editor: ''
 ms.assetid: d9b1ba9a-b3f2-4d12-affc-2ee34311538b
 ms.service: app-service-mobile
 ms.workload: mobile
@@ -13,13 +13,12 @@ ms.tgt_pltfrm: mobile-xamarin
 ms.devlang: dotnet
 ms.topic: article
 ms.date: 10/12/2016
-ms.author: yuaxu
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0d8472cb3b0d891d2b184621d62830d1ccd5e2e7
-ms.openlocfilehash: f1fe97c6b3e2d28b7e17d035bc7e3ecced8a0d0f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/21/2017
-
+ms.author: crdun
+ms.openlocfilehash: 0bea00d411205541684e807182abd3236c09bd9d
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/20/2018
 ---
 # <a name="add-push-notifications-to-your-xamarinforms-app"></a>Xamarin.Forms 앱에 푸시 알림 추가
 [!INCLUDE [app-service-mobile-selector-get-started-push](../../includes/app-service-mobile-selector-get-started-push.md)]
@@ -50,228 +49,161 @@ iOS의 경우 [Apple 개발자 프로그램 멤버 자격](https://developer.app
 ### <a name="add-push-notifications-to-the-android-project"></a>Android 프로젝트에 푸시 알림 추가
 FCM를 사용하여 백 엔드를 구성한 경우 FCM에 등록할 클라이언트에 구성 요소 및 코드를 추가할 수 있습니다. 또한 Mobile Apps 백 엔드를 통해 Azure Notification Hubs에 푸시 알림을 등록하고 알림을 수신할 수도 있습니다.
 
-1. **Droid** 프로젝트에서 **구성 요소** 폴더를 마우스 오른쪽 단추로 클릭하고 **추가 구성 요소 가져오기...**를 클릭합니다. 그런 후 **Google Cloud Messaging 클라이언트** 구성 요소를 검색하고 프로젝트에 구성 요소를 추가합니다. 이 구성 요소는 Xamarin Android 프로젝트에 대한 푸시 알림을 지원합니다.
-2. MainActivity.cs 프로젝트 파일을 열고 파일의 맨 위에 다음 문을 추가합니다.
+1. **Droid** 프로젝트에서 **참조 > NuGet 패키지 관리...**를 마우스 오른쪽 단추로 클릭합니다.
+1. NuGet 패키지 관리자 창에서 **Xamarin.Firebase.Messaging** 패키지를 검색하고 프로젝트에 추가합니다.
+1. **Droid** 프로젝트에 대한 프로젝트 속성에서 앱을 Android 버전 7.0 이상을 사용하여 컴파일하도록 설정합니다.
+1. Firebase 콘솔에서 다운로드한 **google-services.json** 파일을 **Droid** 프로젝트의 루트에 추가하고 해당 빌드 작업을 **GoogleServicesJson**으로 설정합니다. 자세한 내용은 [Google 서비스 JSON 파일 추가](https://developer.xamarin.com/guides/android/data-and-cloud-services/google-messaging/remote-notifications-with-fcm/#Add_the_Google_Services_JSON_File)를 참조하세요.
 
-        using Gcm.Client;
-3. 다음 코드를 **LoadApplication**에 호출한 후에 **OnCreate** 메서드에 추가합니다.
+#### <a name="registering-with-firebase-cloud-messaging"></a>Firebase Cloud Messaging 등록
 
-        try
+1. **AndroidManifest.xml** 파일을 열고 다음 `<receiver>` 요소를 `<application>` 요소로 삽입합니다.
+
+        <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdInternalReceiver" android:exported="false" />
+        <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
+          <intent-filter>
+            <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+            <category android:name="${applicationId}" />
+          </intent-filter>
+        </receiver>
+
+#### <a name="implementing-the-firebase-instance-id-service"></a>Firebase 인스턴스 ID 서비스 구현
+
+1. 새 클래스를 `FirebaseRegistrationService`로 명명된 **Droid** 프로젝트에 추가하고 다음 `using` 문이 파일 맨 위에 있는지 확인합니다.
+
+        using System.Threading.Tasks;
+        using Android.App;
+        using Android.Util;
+        using Firebase.Iid;
+        using Microsoft.WindowsAzure.MobileServices;
+
+1. 빈 `FirebaseRegistrationService` 클래스를 다음 코드로 바꿉니다.
+
+        [Service]
+        [IntentFilter(new[] { "com.google.firebase.INSTANCE_ID_EVENT" })]
+        public class FirebaseRegistrationService : FirebaseInstanceIdService
         {
-            // Check to ensure everything's set up right
-            GcmClient.CheckDevice(this);
-            GcmClient.CheckManifest(this);
+            const string TAG = "FirebaseRegistrationService";
 
-            // Register for push notifications
-            System.Diagnostics.Debug.WriteLine("Registering...");
-            GcmClient.Register(this, PushHandlerBroadcastReceiver.SENDER_IDS);
-        }
-        catch (Java.Net.MalformedURLException)
-        {
-            CreateAndShowDialog("There was an error creating the client. Verify the URL.", "Error");
-        }
-        catch (Exception e)
-        {
-            CreateAndShowDialog(e.Message, "Error");
-        }
-4. 새 **CreateAndShowDialog** 도우미 메서드를 다음과 같이 추가합니다.
-
-        private void CreateAndShowDialog(String message, String title)
-        {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-            builder.SetMessage (message);
-            builder.SetTitle (title);
-            builder.Create().Show ();
-        }
-5. 다음 코드를 **MainActivity** 클래스에 추가합니다.
-
-        // Create a new instance field for this activity.
-        static MainActivity instance = null;
-
-        // Return the current activity instance.
-        public static MainActivity CurrentActivity
-        {
-            get
+            public override void OnTokenRefresh()
             {
-                return instance;
+                var refreshedToken = FirebaseInstanceId.Instance.Token;
+                Log.Debug(TAG, "Refreshed token: " + refreshedToken);
+                SendRegistrationTokenToAzureNotificationHub(refreshedToken);
+            }
+
+            void SendRegistrationTokenToAzureNotificationHub(string token)
+            {
+                // Update notification hub registration
+                Task.Run(async () =>
+                {
+                    await AzureNotificationHubService.RegisterAsync(TodoItemManager.DefaultManager.CurrentClient.GetPush(), token);
+                });
             }
         }
 
-    현재 **MainActivity** 인스턴스를 노출하므로 주 UI 스레드에서 실행할 수 있습니다.
-6. 다음과 같이 **OnCreate** 메서드 시작 부분에서 변수 `instance`를 초기화합니다.
+    `FirebaseRegistrationService` 클래스는 FCM에 액세스하는 응용 프로그램을 인증하는 보안 토큰 생성을 담당합니다. 응용 프로그램이 FCM에서 등록 토큰을 수신하는 경우 `OnTokenRefresh` 메서드가 호출됩니다. 메서드는 FCM에서 비동기적으로 업데이트되는 `FirebaseInstanceId.Instance.Token` 속성에서 토큰을 검색합니다. 토큰은 응용 프로그램을 설치하거나 제거할 때, 사용자가 응용 프로그램 데이터를 삭제할 때, 응용 프로그램이 인스턴스 ID를 지울 때 또는 토큰의 보안이 손상되었을 때만 업데이트되므로 `OnTokenRefresh` 메서드는 드물게 호출됩니다. 또한 FCM 인스턴스 ID 서비스는 응용 프로그램에서 해당 토큰을 정기적으로, 일반적으로 6개월마다 새로 고치도록 요청합니다.
 
-        // Set the current instance of MainActivity.
-        instance = this;
-7. 새 클래스 파일을 `GcmService.cs`로 명명된 **Droid** 프로젝트에 추가하고 다음 **using** 문이 파일 맨 위에 있는지 확인합니다.
+    `OnTokenRefresh` 메서드는 또한 사용자의 등록 토큰을 Azure 알림 허브에 연결하는 데 사용되는 `SendRegistrationTokenToAzureNotificationHub` 메서드를 호출합니다.
+
+#### <a name="registering-with-the-azure-notification-hub"></a>Azure 알림 허브 등록
+
+1. 새 클래스를 `AzureNotificationHubService`로 명명된 **Droid** 프로젝트에 추가하고 다음 `using` 문이 파일 맨 위에 있는지 확인합니다.
+
+        using System;
+        using System.Threading.Tasks;
+        using Android.Util;
+        using Microsoft.WindowsAzure.MobileServices;
+        using Newtonsoft.Json.Linq;
+
+1. 빈 `AzureNotificationHubService` 클래스를 다음 코드로 바꿉니다.
+
+        public class AzureNotificationHubService
+        {
+            const string TAG = "AzureNotificationHubService";
+
+            public static async Task RegisterAsync(Push push, string token)
+            {
+                try
+                {
+                    const string templateBody = "{\"data\":{\"message\":\"$(messageParam)\"}}";
+                    JObject templates = new JObject();
+                    templates["genericMessage"] = new JObject
+                    {
+                        {"body", templateBody}
+                    };
+
+                    await push.RegisterAsync(token, templates);
+                    Log.Info("Push Installation Id: ", push.InstallationId.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(TAG, "Could not register with Notification Hub: " + ex.Message);
+                }
+            }
+        }
+
+    `RegisterAsync` 메서드는 JSON으로 간단한 알림 메시지 템플릿을 만들고, Firebase 등록 토큰을 사용하여 알림 허브에서 템플릿 알림을 수신하도록 등록합니다. 이렇게 하면 Azure 알림 허브에서 보낸 알림은 등록 토큰이 나타내는 장치를 대상으로 합니다.
+
+#### <a name="displaying-the-contents-of-a-push-notification"></a>푸시 알림의 콘텐츠 표시
+
+1. 새 클래스를 `FirebaseNotificationService`로 명명된 **Droid** 프로젝트에 추가하고 다음 `using` 문이 파일 맨 위에 있는지 확인합니다.
 
         using Android.App;
         using Android.Content;
         using Android.Media;
-        using Android.Support.V4.App;
+        using Android.Support.V7.App;
         using Android.Util;
-        using Gcm.Client;
-        using Microsoft.WindowsAzure.MobileServices;
-        using Newtonsoft.Json.Linq;
-        using System;
-        using System.Collections.Generic;
-        using System.Diagnostics;
-        using System.Text;
-8. 파일의 맨 위에서 **using** 문 뒤의 **네임스페이스** 선언 앞에 다음과 같은 사용 권한 요청을 추가합니다.
+        using Firebase.Messaging;
 
-        [assembly: Permission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
-        [assembly: UsesPermission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
-        [assembly: UsesPermission(Name = "com.google.android.c2dm.permission.RECEIVE")]
-        [assembly: UsesPermission(Name = "android.permission.INTERNET")]
-        [assembly: UsesPermission(Name = "android.permission.WAKE_LOCK")]
-        //GET_ACCOUNTS is only needed for android versions 4.0.3 and below
-        [assembly: UsesPermission(Name = "android.permission.GET_ACCOUNTS")]
-9. 네임스페이스에 다음과 같은 클래스 정의를 추가합니다.
+1. 빈 `FirebaseNotificationService` 클래스를 다음 코드로 바꿉니다.
 
-       [BroadcastReceiver(Permission = Gcm.Client.Constants.PERMISSION_GCM_INTENTS)]
-       [IntentFilter(new string[] { Gcm.Client.Constants.INTENT_FROM_GCM_MESSAGE }, Categories = new string[] { "@PACKAGE_NAME@" })]
-       [IntentFilter(new string[] { Gcm.Client.Constants.INTENT_FROM_GCM_REGISTRATION_CALLBACK }, Categories = new string[] { "@PACKAGE_NAME@" })]
-       [IntentFilter(new string[] { Gcm.Client.Constants.INTENT_FROM_GCM_LIBRARY_RETRY }, Categories = new string[] { "@PACKAGE_NAME@" })]
-       public class PushHandlerBroadcastReceiver : GcmBroadcastReceiverBase<GcmService>
-       {
-           public static string[] SENDER_IDS = new string[] { "<PROJECT_NUMBER>" };
-       }
-
-   > [!NOTE]
-   > **<PROJECT_NUMBER>**를 앞에서 설명한 프로젝트 번호로 바꿉니다.    
-   >
-   >
-10. 빈 **GcmService** 클래스를 새 브로드캐스트 수신기를 사용하는 다음 코드로 바꿉니다.
-
-         [Service]
-         public class GcmService : GcmServiceBase
-         {
-             public static string RegistrationID { get; private set; }
-
-             public GcmService()
-                 : base(PushHandlerBroadcastReceiver.SENDER_IDS){}
-         }
-11. **GcmService** 클래스에 다음 코드를 추가합니다. 이렇게 하면 **OnRegistered** 이벤트 처리기가 재정의되고 **Register** 메서드가 구현됩니다.
-
-        protected override void OnRegistered(Context context, string registrationId)
+        [Service]
+        [IntentFilter(new[] { "com.google.firebase.MESSAGING_EVENT" })]
+        public class FirebaseNotificationService : FirebaseMessagingService
         {
-            Log.Verbose("PushHandlerBroadcastReceiver", "GCM Registered: " + registrationId);
-            RegistrationID = registrationId;
+            const string TAG = "FirebaseNotificationService";
 
-            var push = TodoItemManager.DefaultManager.CurrentClient.GetPush();
-
-            MainActivity.CurrentActivity.RunOnUiThread(() => Register(push, null));
-        }
-
-        public async void Register(Microsoft.WindowsAzure.MobileServices.Push push, IEnumerable<string> tags)
-        {
-            try
+            public override void OnMessageReceived(RemoteMessage message)
             {
-                const string templateBodyGCM = "{\"data\":{\"message\":\"$(messageParam)\"}}";
+                Log.Debug(TAG, "From: " + message.From);
 
-                JObject templates = new JObject();
-                templates["genericMessage"] = new JObject
-                {
-                    {"body", templateBodyGCM}
-                };
+                // Pull message body out of the template
+                var messageBody = message.Data["message"];
+                if (string.IsNullOrWhiteSpace(messageBody))
+                    return;
 
-                await push.RegisterAsync(RegistrationID, templates);
-                Log.Info("Push Installation Id", push.InstallationId.ToString());
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
-                Debugger.Break();
-            }
-        }
-
-    이 코드는 템플릿 등록에서 `messageParam` 매개 변수를 사용한다는 점에 유의하세요.
-12. **OnMessage**를 구현하는 다음 코드를 추가합니다.
-
-        protected override void OnMessage(Context context, Intent intent)
-        {
-            Log.Info("PushHandlerBroadcastReceiver", "GCM Message Received!");
-
-            var msg = new StringBuilder();
-
-            if (intent != null && intent.Extras != null)
-            {
-                foreach (var key in intent.Extras.KeySet())
-                    msg.AppendLine(key + "=" + intent.Extras.Get(key).ToString());
+                Log.Debug(TAG, "Notification message body: " + messageBody);
+                SendNotification(messageBody);
             }
 
-            //Store the message
-            var prefs = GetSharedPreferences(context.PackageName, FileCreationMode.Private);
-            var edit = prefs.Edit();
-            edit.PutString("last_msg", msg.ToString());
-            edit.Commit();
-
-            string message = intent.Extras.GetString("message");
-            if (!string.IsNullOrEmpty(message))
+            void SendNotification(string messageBody)
             {
-                createNotification("New todo item!", "Todo item: " + message);
-                return;
-            }
+                var intent = new Intent(this, typeof(MainActivity));
+                intent.AddFlags(ActivityFlags.ClearTop);
+                var pendingIntent = PendingIntent.GetActivity(this, 0, intent, PendingIntentFlags.OneShot);
 
-            string msg2 = intent.Extras.GetString("msg");
-            if (!string.IsNullOrEmpty(msg2))
-            {
-                createNotification("New hub message!", msg2);
-                return;
-            }
-
-            createNotification("Unknown message details", msg.ToString());
-        }
-
-        void createNotification(string title, string desc)
-        {
-            //Create notification
-            var notificationManager = GetSystemService(Context.NotificationService) as NotificationManager;
-
-            //Create an intent to show ui
-            var uiIntent = new Intent(this, typeof(MainActivity));
-
-            //Use Notification Builder
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-
-            //Create the notification
-            //we use the pending intent, passing our ui intent over which will get called
-            //when the notification is tapped.
-            var notification = builder.SetContentIntent(PendingIntent.GetActivity(this, 0, uiIntent, 0))
-                    .SetSmallIcon(Android.Resource.Drawable.SymActionEmail)
-                    .SetTicker(title)
-                    .SetContentTitle(title)
-                    .SetContentText(desc)
-
-                    //Set the notification sound
+                var notificationBuilder = new NotificationCompat.Builder(this)
+                    .SetSmallIcon(Resource.Drawable.ic_stat_ic_notification)
+                    .SetContentTitle("New Todo Item")
+                    .SetContentText(messageBody)
+                    .SetContentIntent(pendingIntent)
                     .SetSound(RingtoneManager.GetDefaultUri(RingtoneType.Notification))
+                    .SetAutoCancel(true);
 
-                    //Auto cancel will remove the notification once the user touches it
-                    .SetAutoCancel(true).Build();
-
-            //Show the notification
-            notificationManager.Notify(1, notification);
+                var notificationManager = NotificationManager.FromContext(this);
+                notificationManager.Notify(0, notificationBuilder.Build());
+            }
         }
 
-    이 코드는 들어오는 알림을 처리하고 표시될 알림 관리자로 보냅니다.
-13. **GcmServiceBase**를 사용하려면 **OnUnRegistered** 및 **OnError** 처리기 메서드를 구현해야 하며 다음과 같이 수행할 수 있습니다.
-
-        protected override void OnUnRegistered(Context context, string registrationId)
-        {
-            Log.Error("PushHandlerBroadcastReceiver", "Unregistered RegisterationId : " + registrationId);
-        }
-
-        protected override void OnError(Context context, string errorId)
-        {
-            Log.Error("PushHandlerBroadcastReceiver", "GCM Error: " + errorId);
-        }
+    응용 프로그램이 FCM에서 알림을 받을 때 호출되는 `OnMessageReceived` 메서드는 메시지 콘텐츠를 추출하고 `SendNotification` 메서드를 호출합니다. 이 메서드는 메시지 콘텐츠를 알림 영역에 표시되는 알림과 함께 응용 프로그램이 실행되는 동안 시작되는 로컬 알림으로 변환합니다.
 
 이제 Android 장치 또는 에뮬레이터에서 실행 중인 앱에서 푸시 알림을 테스트할 준비가 되었습니다.
 
 ### <a name="test-push-notifications-in-your-android-app"></a>Android 앱에서 푸시 알림 테스트
 처음 두 단계는 에뮬레이터에서 테스트할 때만 필요합니다.
 
-1. 아래와 같이 Android 가상 장치 관리자에서 대상으로 설정된 Google API가 있는 가상 장치에 배포하거나 해당 가상 장치에서 디버그해야 합니다.
+1. Google Play 서비스를 사용하여 구성된 장치 또는 에뮬레이터에서 배포하거나 디버깅하는지를 확인합니다. **재생** 앱이 장치 또는 에뮬레이터에 설치되었는지 보고 확인할 수 있습니다.
 2. **앱** > **설정** > **계정 추가**를 클릭하여 Android 장치에 Google 계정을 추가합니다. 그런 후 화면 지시에 따라 장치에 기존 Google 계정을 추가하거나 새 계정을 만듭니다.
 3. Visual Studio 또는 Xamarin Studio에서 **Droid** 프로젝트를 마우스 오른쪽 단추로 클릭하고 **시작 프로젝트로 설정**을 클릭합니다.
 4. **실행**을 클릭하여 프로젝트를 빌드하고 Android 장치 또는 에뮬레이터에서 앱을 시작합니다.
@@ -281,7 +213,7 @@ FCM를 사용하여 백 엔드를 구성한 경우 FCM에 등록할 클라이언
 ## <a name="configure-and-run-the-ios-project-optional"></a>iOS 프로젝트 구성 및 실행(선택 사항)
 이 섹션에서는 iOS 장치용 Xamarin iOS 프로젝트를 실행합니다. iOS 장치를 작업하지 않는 경우 이 섹션을 건너뛸 수 있습니다.
 
-[!INCLUDE [Enable Apple Push Notifications](../../includes/enable-apple-push-notifications.md)]
+[!INCLUDE [Enable Apple Push Notifications](../../includes/notification-hubs-enable-apple-push-notifications.md)]
 
 #### <a name="configure-the-notification-hub-for-apns"></a>APNS에 대한 알림 허브 구성
 [!INCLUDE [app-service-mobile-apns-configure-push](../../includes/app-service-mobile-apns-configure-push.md)]
@@ -345,7 +277,7 @@ FCM를 사용하여 백 엔드를 구성한 경우 FCM에 등록할 클라이언
 
     이를 통해 원격 알림을 지원하고 푸시 등록을 요청합니다.
 
-이제 앱이 푸시 알림을 지원하도록 업데이트됩니다.
+이제 푸시 알림을 지원하도록 앱이 업데이트됩니다.
 
 #### <a name="test-push-notifications-in-your-ios-app"></a>iOS 앱에서 푸시 알림 테스트
 1. iOS 프로젝트를 마우스 오른쪽 단추로 클릭한 다음 **시작 프로젝트로 설정**을 클릭합니다.
@@ -419,6 +351,9 @@ FCM를 사용하여 백 엔드를 구성한 경우 FCM에 등록할 클라이언
 ## <a name="next-steps"></a>다음 단계
 푸시 알림에 대해 자세히 알아봅니다.
 
+* [Azure Mobile Apps에서 푸시 알림 보내기](https://developer.xamarin.com/guides/xamarin-forms/cloud-services/push-notifications/azure/)
+* [Firebase Cloud Messaging](https://developer.xamarin.com/guides/android/data-and-cloud-services/google-messaging/firebase-cloud-messaging/)
+* [Firebase Cloud Messaging을 사용하여 원격 알림](https://developer.xamarin.com/guides/android/data-and-cloud-services/google-messaging/remote-notifications-with-fcm/)
 * [푸시 알림 문제 진단](../notification-hubs/notification-hubs-push-notification-fixer.md)  
   장치에서 알림이 삭제되거나 끝나지 않는 다양한 이유가 있습니다. 이 항목에서는 푸시 알림 실패의 근본 원인을 분석 및 파악하는 방법을 보여 줍니다.
 
@@ -435,4 +370,3 @@ FCM를 사용하여 백 엔드를 구성한 경우 FCM에 등록할 클라이언
 [Install Xcode]: https://go.microsoft.com/fwLink/p/?LinkID=266532
 [Xcode]: https://go.microsoft.com/fwLink/?LinkID=266532
 [apns object]: http://go.microsoft.com/fwlink/p/?LinkId=272333
-

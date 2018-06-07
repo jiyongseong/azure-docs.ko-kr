@@ -3,7 +3,7 @@ title: "Azure API Management 템플릿 리소스 | Microsoft Docs"
 description: "Azure API Management에서 개발자 포털 템플릿에 사용할 수 있는 리소스 종류에 대해 알아봅니다."
 services: api-management
 documentationcenter: 
-author: miaojiang
+author: vladvino
 manager: erikre
 editor: 
 ms.assetid: 51a1b4c6-a9fd-4524-9e0e-03a9800c3e94
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/09/2017
 ms.author: apimpm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 538f282b28e5f43f43bf6ef28af20a4d8daea369
-ms.openlocfilehash: 3c633d54e6b81576a2fbd1adfc69775ca1bdd09d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/07/2017
-
+ms.openlocfilehash: 212e7ea7bb2ffea63c7ba210195df0da38aa8f0a
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="azure-api-management-template-resources"></a>Azure API Management 템플릿 리소스
 Azure API Management는 개발자 포털 템플릿에 사용할 수 있는 다음 종류의 리소스를 제공합니다.  
@@ -579,4 +578,3 @@ Azure API Management는 개발자 포털 템플릿에 사용할 수 있는 다�
 
 ## <a name="next-steps"></a>다음 단계
 템플릿 작업에 대한 자세한 내용은 [템플릿을 사용하여 API Management 개발자 포털을 사용자 지정하는 방법](api-management-developer-portal-templates.md)을 참조하세요.
-

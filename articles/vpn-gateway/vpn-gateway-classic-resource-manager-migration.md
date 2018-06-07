@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 05/02/2017
 ms.author: amsriva
-ms.translationtype: Human Translation
-ms.sourcegitcommit: be3ac7755934bca00190db6e21b6527c91a77ec2
 ms.openlocfilehash: 1164fc24355657af22b6befaad74685ebbc2b5cb
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/03/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="vpn-gateway-classic-to-resource-manager-migration"></a>Resource Manager 마이그레이션에 대한 VPN Gateway 클래식
 이제 VPN Gateway을 클래식에서 Resource Manager 배포 모델로 마이그레이션할 수 있습니다. [Azure Resource Manager 기능 및 이점](../azure-resource-manager/resource-group-overview.md)에 대해 자세히 알아볼 수 있습니다. 이 문서에서는 클래식 배포에서 새로운 Resource Manager 기반 모델로 마이그레이션하는 방법을 자세히 설명합니다. 
@@ -68,5 +66,4 @@ VNet에 대한 온-프레미스 연결이 온-프레미스에 직접 연결된 �
 
 ## <a name="next-steps"></a>다음 단계
 VPN 게이트웨이 마이그레이션 지원에 대해 학습한 후에 시작하려면 [클래식에서 Resource Manager로 IaaS 리소스의 플랫폼 지원 마이그레이션](../virtual-machines/windows/migration-classic-resource-manager-ps.md)으로 이동합니다.
-
 

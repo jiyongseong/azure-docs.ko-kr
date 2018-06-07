@@ -1,26 +1,24 @@
 ---
-title: "Azure Application Gateway로 웹앱 보호 - PowerShell | Microsoft Docs"
-description: "이 문서에서는 기존 또는 새 응용 프로그램 게이트웨이에 웹앱을 백 엔드 호스트로 구성하는 방법을 안내합니다."
+title: Azure Application Gateway로 웹앱 보호 - PowerShell | Microsoft Docs
+description: 이 문서에서는 기존 또는 새 응용 프로그램 게이트웨이에 웹앱을 백 엔드 호스트로 구성하는 방법을 안내합니다.
 documentationcenter: na
 services: application-gateway
-author: georgewallace
-manager: timlt
-editor: 
+author: vhorne
+manager: jpconnock
+editor: ''
 ms.service: application-gateway
 ms.devlang: na
 ms.topic: hero-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 07/25/2017
-ms.author: gwallace
+ms.author: victorh
+ms.openlocfilehash: abe48c484a232eff6f7ec1cd68e7010353d488d5
+ms.sourcegitcommit: c47ef7899572bf6441627f76eb4c4ac15e487aec
 ms.translationtype: HT
-ms.sourcegitcommit: 137671152878e6e1ee5ba398dd5267feefc435b7
-ms.openlocfilehash: 04b6efbfeccc6df006978d06dd8020495708550e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/04/2018
 ---
-
 # <a name="configure-app-service-web-apps-with-application-gateway"></a>Application Gateway를 사용하여 App Service Web Apps 구성 
 
 응용 프로그램 게이트웨이를 사용하면 Azure 웹앱 또는 다른 다중 테넌트 서비스를 백 엔드 풀 멤버로 사용할 수 있습니다. 이 문서에서는 Application Gateway를 사용하여 Azure 웹앱을 구성하는 방법을 배웁니다. 첫 번째 예에서는 웹앱을 백 엔드 풀 멤버로 사용하도록 기존 응용 프로그램 게이트웨이를 구성하는 방법을 보여 줍니다. 두 번째 예에서는 웹앱을 백 엔드 풀 멤버로 사용하여 새 응용 프로그램 게이트웨이를 만드는 방법을 보여 줍니다.
@@ -30,6 +28,9 @@ ms.lasthandoff: 07/28/2017
 다음 예에서는 웹앱을 기존 응용 프로그램 게이트웨이에 백 엔드 풀 멤버로 추가합니다. 웹앱이 작동하려면 프로브 구성의 `-PickHostNamefromBackendHttpSettings` 스위치와 백 엔드 http 설정의 `-PickHostNameFromBackendAddress` 스위치를 모두 제공해야 합니다.
 
 ```powershell
+# FQDN of the web app
+$webappFQDN = "<enter your webapp FQDN i.e mywebsite.azurewebsites.net>"
+
 # Retrieve an existing application gateway
 $gw = Get-AzureRmApplicationGateway -Name ContosoAppGateway -ResourceGroupName $rg.ResourceGroupName
 
@@ -46,7 +47,7 @@ $probe = Get-AzureRmApplicationGatewayProbeConfig -name webappprobe2 -Applicatio
 Set-AzureRmApplicationGatewayBackendHttpSettings -Name appGatewayBackendHttpSettings -ApplicationGateway $gw -PickHostNameFromBackendAddress -Port 80 -Protocol http -CookieBasedAffinity Disabled -RequestTimeout 30 -Probe $probe
 
 # Add the web app to the backend pool
-Set-AzureRmApplicationGatewayBackendAddressPool -Name appGatewayBackendPool -ApplicationGateway $gw -BackendIPAddresses mywebapp.azurewebsites.net
+Set-AzureRmApplicationGatewayBackendAddressPool -Name appGatewayBackendPool -ApplicationGateway $gw -BackendFqdns $webappFQDN
 
 # Update the application gateway
 Set-AzureRmApplicationGateway -ApplicationGateway $gw
@@ -66,20 +67,18 @@ $webappname="mywebapp$(Get-Random)"
 # Creates a resource group
 $rg = New-AzureRmResourceGroup -Name ContosoRG -Location Eastus
 
-# Creates a new app service plan
+# Create an App Service plan in Free tier.
 New-AzureRmAppServicePlan -Name $webappname -Location EastUs -ResourceGroupName $rg.ResourceGroupName -Tier Free
 
 # Creates a web app
-$webapp = New-AzureRmWebApp -ResourceGroupName $rg.ResourceGroupName -Name $webappname -Location EastUs
+$webapp = New-AzureRmWebApp -ResourceGroupName $rg.ResourceGroupName -Name $webappname -Location EastUs -AppServicePlan $webappname
 
-# Defines the property object to configure the source control for the web app
+# Configure GitHub deployment from your GitHub repo and deploy once to web app.
 $PropertiesObject = @{
     repoUrl = "$gitrepo";
     branch = "master";
     isManualIntegration = "true";
 }
-
-# Configure the source control for the web app
 Set-AzureRmResource -PropertyObject $PropertiesObject -ResourceGroupName $rg.ResourceGroupName -ResourceType Microsoft.Web/sites/sourcecontrols -ResourceName $webappname/web -ApiVersion 2015-08-01 -Force
 
 # Creates a subnet for the application gateway
@@ -98,7 +97,7 @@ $publicip = New-AzureRmPublicIpAddress -ResourceGroupName $rg.ResourceGroupName 
 $gipconfig = New-AzureRmApplicationGatewayIPConfiguration -Name gatewayIP01 -Subnet $subnet
 
 # Create a backend pool with the hostname of the web app
-$pool = New-AzureRmApplicationGatewayBackendAddressPool -Name appGatewayBackendPool -BackendIPAddresses $webapp.HostNames
+$pool = New-AzureRmApplicationGatewayBackendAddressPool -Name appGatewayBackendPool -BackendFqdns $webapp.HostNames
 
 # Define the status codes to match for the probe
 $match = New-AzureRmApplicationGatewayProbeHealthResponseMatch -StatusCode 200-399
@@ -119,7 +118,7 @@ $fipconfig = New-AzureRmApplicationGatewayFrontendIPConfig -Name fipconfig01 -Pu
 $listener = New-AzureRmApplicationGatewayHttpListener -Name listener01 -Protocol Http -FrontendIPConfiguration $fipconfig -FrontendPort $fp
 
 # Create a new rule
-$rule = New-AzureRmApplicationGatewayRequestRoutingRule -Name rule01 -RuleType Basic -BackendHttpSettings $poolSetting01 -HttpListener $listener -BackendAddressPool $pool 
+$rule = New-AzureRmApplicationGatewayRequestRoutingRule -Name rule01 -RuleType Basic -BackendHttpSettings $poolSetting -HttpListener $listener -BackendAddressPool $pool 
 
 # Define the application gateway SKU to use
 $sku = New-AzureRmApplicationGatewaySku -Name Standard_Small -Tier Standard -Capacity 2

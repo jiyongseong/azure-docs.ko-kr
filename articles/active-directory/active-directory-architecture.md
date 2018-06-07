@@ -5,26 +5,25 @@ services: active-directory
 documentationcenter: 
 author: MarkusVi
 writer: v-lorisc
-manager: femila
+manager: mtillman
 ms.assetid: 
 ms.service: active-directory
 ms.workload: infrastructure-services
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: get-started-article
-ms.date: 08/02/2017
+ms.date: 11/08/2017
 ms.author: markvi
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 07635b0eb4650f0c30898ea1600697dacb33477c
-ms.openlocfilehash: 5c60fa737c0133482af8b653f795bf9086c39969
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/28/2017
-
+ms.openlocfilehash: bf56ff167a988acd5f1163ff78beec281a654eb8
+ms.sourcegitcommit: f46cbcff710f590aebe437c6dd459452ddf0af09
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/20/2017
 ---
 # <a name="understand-azure-active-directory-architecture"></a>Azure Active Directory 아키텍처 이해
-Azure AD(Azure Active Directory)를 사용하면 사용자를 위한 Azure 서비스 및 리소스에 대한 액세스를 안전하게 관리할 수 있습니다. Azure AD에는 전체 ID 관리 기능이 포함됩니다. Azure AD 기능에 대한 정보는 [Azure Active Directory란?](https://docs.microsoft.com/en-us/azure/active-directory/active-directory-whatis)을 참조하세요.
+Azure AD(Azure Active Directory)를 사용하면 사용자를 위한 Azure 서비스 및 리소스에 대한 액세스를 안전하게 관리할 수 있습니다. Azure AD에는 전체 ID 관리 기능이 포함됩니다. Azure AD 기능에 대한 정보는 [Azure Active Directory란?](https://docs.microsoft.com/azure/active-directory/active-directory-whatis)을 참조하세요.
 
-Azure AD에서는 사용자 및 그룹을 만들고 관리하며 사용 권한을 사용하여 엔터프라이즈 리소스에 대한 액세스를 허용 및 거부합니다. ID 관리에 대한 정보는 [Azure ID 관리의 기본 항목](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals-identity)을 참조하세요.
+Azure AD에서는 사용자 및 그룹을 만들고 관리하며 사용 권한을 사용하여 엔터프라이즈 리소스에 대한 액세스를 허용 및 거부합니다. ID 관리에 대한 정보는 [Azure ID 관리의 기본 항목](https://docs.microsoft.com/azure/active-directory/fundamentals-identity)을 참조하세요.
 
 ## <a name="azure-ad-architecture"></a>Azure AD 아키텍처
 Azure AD의 지리적으로 분산된 아키텍처는 광범위한 모니터링, 자동화된 재라우팅, 장애 조치 및 복구 기능을 결합하여 고객에게 엔터프라이즈 수준의 가용성과 성능을 제공할 수 있습니다.
@@ -38,7 +37,7 @@ Azure AD의 지리적으로 분산된 아키텍처는 광범위한 모니터링,
 ### <a name="service-architecture-design"></a>서비스 아키텍처 디자인
 확장성 있는 고가용성의 다양한 데이터 시스템을 빌드하는 가장 일반적인 방법은 독립적인 구성 요소 또는 Azure AD 데이터 계층의 배율 단위를 사용하는 것입니다. 배율 단위는 *파티션*이라고 합니다. 
 
-데이터 계층에는 읽기 쓰기 기능을 제공하는 몇 가지 프런트 엔드 서비스가 있습니다. 아래 다이어그램에서는 지리적으로 분산된 데이터 센터에 단일 디렉터리 파티션의 구성 요소를 배포한 방법을 보여 줍니다. 
+데이터 계층에는 읽기 쓰기 기능을 제공하는 몇 가지 프런트 엔드 서비스가 있습니다. 아래 다이어그램에서는 지리적으로 분산된 데이터 센터에 단일 디렉터리 파티션의 구성 요소가 배포되는 방식을 보여 줍니다. 
 
   ![단일 디렉터리 파티션](./media/active-directory-architecture/active-directory-architecture.png)
 
@@ -80,7 +79,7 @@ Azure AD는 토큰 발급 및 디렉터리 읽기에 대한 [복구 시간 목�
 
 ### <a name="data-centers"></a>데이터 센터
 
-Azure AD의 복제본은 전 세계에 걸쳐 위치한 데이터 센터에 저장됩니다. 자세한 내용은 [Azure 데이터 센터](https://azure.microsoft.com/en-us/overview/datacenters)를 참조하세요.
+Azure AD의 복제본은 전 세계에 걸쳐 위치한 데이터 센터에 저장됩니다. 자세한 내용은 [Azure 데이터 센터](https://azure.microsoft.com/overview/datacenters)를 참조하세요.
 
 Azure AD는 다음 특성을 가진 데이터 센터에서 작동합니다.
 
@@ -100,7 +99,7 @@ Azure AD의 Graph API를 사용하는 응용 프로그램은 읽기 쓰기 일�
  >쓰기는 논리 세션의 읽기가 실행된 보조 복제본으로 즉시 복제됩니다.
  >
 
-**백업 보호**
+**Backup 보호**
 
 디렉터리는 고객에 의해 실수로 삭제된 경우 사용자 및 테넌트를 쉽게 복구하기 위해 하드 삭제 대신 소프트 삭제를 구현합니다. 테넌트 관리자가 실수로 사용자를 삭제하면 실행을 취소하고 삭제된 사용자를 복원할 수 있습니다. 
 
@@ -114,9 +113,8 @@ Azure AD 서비스가 예상대로 작동하지 않는 경우 최대한 빨리 �
 
 **보안 작업**
 
-모든 작업에 대해 감사뿐만 아니라 MFA(Multi-Factor Authentication)와 같은 운영 제어를 사용합니다. 또한 Just-In-Time 권한 상승 시스템을 사용하여 지속적으로 운영 주문형 태스크에 필요한 임시 액세스 권한을 부여할 수 있습니다. 자세한 내용은 [신뢰할 수 있는 클라우드](https://azure.microsoft.com/en-us/support/trust-center)를 참조하세요.
+모든 작업에 대해 감사뿐만 아니라 MFA(Multi-Factor Authentication)와 같은 운영 제어를 사용합니다. 또한 Just-In-Time 권한 상승 시스템을 사용하여 지속적으로 운영 주문형 태스크에 필요한 임시 액세스 권한을 부여할 수 있습니다. 자세한 내용은 [신뢰할 수 있는 클라우드](https://azure.microsoft.com/support/trust-center)를 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
-[Azure Active Directory 개발자 가이드](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-developers-guide)
-
+[Azure Active Directory 개발자 가이드](https://docs.microsoft.com/azure/active-directory/develop/active-directory-developers-guide)
 

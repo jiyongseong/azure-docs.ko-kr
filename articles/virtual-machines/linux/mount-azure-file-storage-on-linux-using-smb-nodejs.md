@@ -1,12 +1,12 @@
 ---
-title: "Azure CLI 1.0에서 SMB를 사용하여 Linux VM에 Azure File Storage 탑재 | Microsoft Docs"
-description: "SMB를 사용하여 Linux VM에 Azure File Storage를 탑재하는 방법"
+title: Azure CLI 1.0에서 SMB를 사용하여 Linux VM에 Azure File Storage 탑재 | Microsoft Docs
+description: SMB를 사용하여 Linux VM에 Azure File Storage를 탑재하는 방법
 services: virtual-machines-linux
 documentationcenter: virtual-machines-linux
 author: vlivech
-manager: timlt
-editor: 
-ms.assetid: 
+manager: jeconnoc
+editor: ''
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.devlang: NA
 ms.topic: article
@@ -14,14 +14,12 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 12/07/2016
 ms.author: v-livech
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: 4951860630f0aad107d0846d52ebe4423ee0b91c
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: 442c08a03ff3eb8e4c86f8190e16b74744aa9dd3
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-
 # <a name="mount-azure-file-storage-on-linux-vms-by-using-smb-with-azure-cli-10"></a>Azure CLI 1.0에서 SMB를 사용하여 Linux VM에 Azure File Storage 탑재
 
 이 문서에서는 SMB(서버 메시지 블록) 프로토콜을 사용하여 Linux VM에서 Azure File Storage를 탑재하는 방법을 보여 줍니다. File Storage는 표준 SMB 프로토콜을 통해 클라우드에서 파일 공유를 제공합니다. 요구 사항은 다음과 같습니다.
@@ -134,4 +132,3 @@ VM에서 File Storage에서 호스팅되는 SMB 탑재로 파일을 이동하는
 - [cloud-init를 사용하여 생성 중인 Linux VM 사용자 지정](using-cloud-init.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 - [Linux VM에 디스크 추가](add-disk.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 - [Azure CLI를 사용하여 Linux VM에서 디스크 암호화](encrypt-disks.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-

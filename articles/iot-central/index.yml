@@ -1,0 +1,39 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Azure IoT Central(미리 보기) 설명서
+metadata:
+  title: Azure IoT Central(미리 보기) 설명서 - 자습서, API 참조 | Microsoft Docs
+  description: Azure IoT Central은 대규모 IoT 자산의 연결, 모니터링 및 관리를 도와주는, 완전히 관리되는 SaaS(Software-as-a-Service) 솔루션입니다. Azure IoT Central은 IoT 솔루션의 초기 설정을 단순화하고 일반적인 IoT 프로젝트의 관리 부담, 운영 비용 및 오버헤드를 줄입니다. 빠른 시작 및 자습서를 사용하여 Azure IoT Central 응용 프로그램을 생성, 사용자 정의, 관리 및 사용하는 방법에 대해 알아보세요.
+  services: iot-central
+  author: czeumault
+  manager: carolz
+  ms.prod: microsoft-iot-central
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 11/08/2017
+  ms.author: carolz
+  ms.openlocfilehash: 3e443a4ba2de76971ef856b67fdeb1f8836f68e1
+  ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 05/16/2018
+abstract:
+  description: Azure IoT Central은 대규모 IoT 자산의 연결, 모니터링 및 관리를 도와주는, 완전히 관리되는 SaaS(Software-as-a-Service) 솔루션입니다. Azure IoT Central은 IoT 솔루션의 초기 설정을 단순화하고 일반적인 IoT 프로젝트의 관리 부담, 운영 비용 및 오버헤드를 줄입니다. 빠른 시작 및 자습서를 사용하여 Azure IoT Central 응용 프로그램을 생성, 사용자 정의, 관리 및 사용하는 방법에 대해 알아보세요.
+sections:
+- title: 5분 빠른 시작
+  items:
+  - type: paragraph
+    text: <a href="quick-deploy-iot-central">새로운 Azure IoT Central 응용 프로그램을 만드는 방법</a>에 대해 알아보세요.
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: Azure IoT Central 응용 프로그램을 사용자 지정하여 사용하는 방법에 대해 알아보세요.
+  - type: list
+    style: ordered
+    items:
+    - html: <a href="tutorial-define-device-type">새 장치 유형 정의</a>
+    - html: <a href="tutorial-configure-rules">규칙 구성</a>
+    - html: <a href="tutorial-customize-operator">연산자의 뷰 사용자 지정</a>
+    - html: <a href="tutorial-monitor-devices">장치 모니터링</a>
+    - html: <a href="tutorial-add-device">실제 장치 추가</a>

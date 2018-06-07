@@ -1,3 +1,19 @@
+---
+title: 포함 파일
+description: 포함 파일
+services: biztalk-services
+author: MandiOhlinger
+ms.service: biztalk-services
+ms.topic: include
+ms.date: 11/09/2017
+ms.author: mandia
+ms.custom: include file
+ms.openlocfilehash: 7fa6930acf4d19b3939bb8a5b0306d216346c2b3
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
+---
 | RESOURCE | FREE(PREVIEW) | DEVELOPER | BASIC | 표준 | PREMIUM |
 | --- | --- | --- | --- | --- | --- |
 | 확장 |해당 없음 |해당 없음 |예, Basic 단위 1개씩 확장 |예, Standard 단위 1개씩 확장 |예, Premium 단위 1개씩 확장 |

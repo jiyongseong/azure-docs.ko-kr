@@ -7,43 +7,101 @@
 - name: 빠른 시작
   expanded: true
   items:
-    - name: 컨테이너 인스턴스 만들기
+    - name: 컨테이너 만들기 - CLI
       href: container-instances-quickstart.md
+    - name: 컨테이너 만들기 - 포털
+      href: container-instances-quickstart-portal.md
+    - name: 컨테이너 만들기 - PowerShell
+      href: container-instances-quickstart-powershell.md
 - name: 자습서
   items:
-    - name: 컨테이너 빌드 및 배포
-      items:
-        - name: 1 - 컨테이너 이미지 만들기
-          href: container-instances-tutorial-prepare-app.md
-        - name: 2 - 컨테이너 레지스트리 만들기
-          href: container-instances-tutorial-prepare-acr.md
-        - name: 3 - 앱 배포
-          href: container-instances-tutorial-deploy-app.md
+    - name: 1 - 컨테이너 이미지 만들기
+      href: container-instances-tutorial-prepare-app.md
+    - name: 2 - 컨테이너 레지스트리 만들기
+      href: container-instances-tutorial-prepare-acr.md
+    - name: 3 - 응용 프로그램 배포
+      href: container-instances-tutorial-deploy-app.md
+- name: 샘플
+  items:
+    - name: 코드 샘플
+      href: 'https://azure.microsoft.com/resources/samples/?sort=0&term=aci'
+    - name: 리소스 관리자 템플릿
+      href: container-instances-samples-rm.md
 - name: 개념
   items:
+    - name: 할당량 및 국가별 제한
+      href: container-instances-quotas.md
     - name: 오케스트레이터와의 관계
       href: container-instances-orchestrator-relationship.md
     - name: 컨테이너 그룹
       href: container-instances-container-groups.md
 - name: 방법 가이드
   items:
-    - name: 다중 컨테이너 그룹 배포
-      href: container-instances-multi-container-group.md
-    - name: Azure 파일 공유의 상태 관리
-      href: container-instances-mounting-azure-files-volume.md
-    - name: Azure Container Registry에서 배포
-      href: container-instances-using-azure-container-registry.md
-    - name: Azure Container Instances로의 배포 문제 해결
-      href: container-instances-troubleshooting.md
-- name: 참조
+    - name: 배포
+      items:
+        - name: 다중 컨테이너 그룹 배포
+          href: container-instances-multi-container-group.md
+        - name: Azure Container Registry에서 배포
+          href: container-instances-using-azure-container-registry.md
+        - name: 환경 변수 설정(env)
+          href: container-instances-environment-variables.md
+    - name: 관리
+      items:
+        - name: 명령 실행(exec)
+          href: container-instances-exec.md
+        - name: CPU 및 메모리 사용량 모니터링
+          href: container-instances-monitor.md
+    - name: 워크로드 실행
+      items:
+        - name: 컨테이너화된 작업 실행
+          href: container-instances-restart-policy.md
+        - name: ACI에서 Jenkins 빌드 에이전트
+          href: container-instances-jenkins.md
+    - name: 데이터 볼륨 구성
+      items:
+        - name: Azure 파일
+          href: container-instances-volume-azure-files.md
+        - name: emptyDir
+          href: container-instances-volume-emptydir.md
+        - name: gitRepo
+          href: container-instances-volume-gitrepo.md
+        - name: secret
+          href: container-instances-volume-secret.md
+    - name: 문제 해결
+      items:
+        - name: 컨테이너 로그 및 이벤트 가져오기
+          href: container-instances-get-logs.md
+        - name: 일반적인 문제 해결
+          href: container-instances-troubleshooting.md
+- name: 참고 자료
   items:
-    - name: Azure CLI 2.0
+    - name: Azure CLI
       href: /cli/azure/container
+    - name: REST (영문)
+      href: /rest/api/container-instances
+    - name: PowerShell
+      href: '/powershell/module/azurerm.containerinstance#container_instances'
+    - name: .NET
+      href: /dotnet/api/overview/azure/containerinstance
+    - name: 파이썬
+      href: /python/api/overview/azure/containerinstance
+    - name: 자바
+      href: /java/api/overview/azure/containerinstance
+    - name: Node.js
+      href: /javascript/api/overview/azure/containerinstances
+    - name: Resource Manager 템플릿
+      href: /azure/templates/microsoft.containerinstance/containergroups
 - name: 리소스
   items:
-    - name: Azure 로드맵
-      href: 'https://azure.microsoft.com/roadmap/'
-    - name: 요금 계산기
-      href: 'https://azure.microsoft.com/pricing/calculator/'
     - name: 지역 가용성
       href: 'https://azure.microsoft.com/regions/services/'
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/container-instances/'
+    - name: 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: 제품 사용자 의견 제공
+      href: 'https://feedback.azure.com/forums/602224-azure-container-instances'
+    - name: 스택 오버플로
+      href: 'http://stackoverflow.com/questions/tagged/azure-container-instances'
+    - name: 동영상
+      href: 'https://azure.microsoft.com/resources/videos/index/?services=container-instances&sort=newest'

@@ -14,11 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 02/27/2017
 ms.author: alkohli
-translationtype: Human Translation
-ms.sourcegitcommit: d72ff7449a87dfa9223b7c5e77446de23502eb84
 ms.openlocfilehash: 076df176d7cd40c009aea27004fe0f4415999c80
-ms.lasthandoff: 03/01/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="deploy-storsimple-virtual-array--set-up-as-an-iscsi-server-via-azure-portal"></a>StorSimple 가상 배열 배포 – Azure Portal을 통해 iSCSI 서버로 설정
 
@@ -214,7 +214,7 @@ StorSimple 가상 배열을 구성하고 설정하기 전에 다음 사항을 �
 12. 볼륨에 드라이브 문자를 할당한 후 **다음**을 클릭합니다.
     
     ![새 볼륨 마법사 2](./media/storsimple-virtual-array-deploy3-iscsi-setup/image30.png)
-13. 볼륨을 포맷하는 매개 변수를 입력합니다. **Windows Server에는 NTFS만 지원됩니다.** 할당 단위 크기를 64K로 설정합니다. 볼륨의 레이블을 지정합니다. 이 이름은 StorSimple 가상 배열에 지정한 볼륨 이름과 동일하게 지정하는 것이 좋습니다. **Next**를 클릭합니다.
+13. 볼륨을 포맷하는 매개 변수를 입력합니다. **Windows Server에는 NTFS만 지원됩니다.** 할당 단위 크기를 64K로 설정합니다. 볼륨의 레이블을 지정합니다. 이 이름은 StorSimple 가상 배열에 지정한 볼륨 이름과 동일하게 지정하는 것이 좋습니다. **다음**을 누릅니다.
     
     ![새 볼륨 마법사 3](./media/storsimple-virtual-array-deploy3-iscsi-setup/image31.png)
 14. 볼륨에 대한 값을 확인한 후 **마침**을 클릭합니다.
@@ -243,7 +243,6 @@ Windows Server 2012를 실행하는 Windows 호스트의 iSCSI 정규화된 이�
 
 <!--Reference link-->
 [1]: https://technet.microsoft.com/library/ee338480(WS.10).aspx
-
 
 
 

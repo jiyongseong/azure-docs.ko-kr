@@ -1,29 +1,21 @@
 ---
-title: "Azure SQL Database에 대한 쿼리 성능 Insight | Microsoft Docs"
-description: "쿼리 성능 모니터링은 Azure SQL 데이터베이스에 대한 대부분의 CPU 사용 쿼리를 식별합니다."
+title: Azure SQL Database에 대한 쿼리 성능 Insight | Microsoft Docs
+description: 쿼리 성능 모니터링은 Azure SQL Database에 대한 대부분의 CPU 사용 쿼리를 식별합니다.
 services: sql-database
-documentationcenter: 
 author: stevestein
-manager: jhubbard
-editor: monicar
-ms.assetid: c2f580b2-3835-453f-89f5-140e02dd2ea7
+manager: craigg
 ms.service: sql-database
 ms.custom: monitor & tune
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: data-management
-ms.date: 07/05/2017
+ms.date: 04/01/2018
 ms.author: sstein
-ms.translationtype: Human Translation
-ms.sourcegitcommit: bb794ba3b78881c967f0bb8687b1f70e5dd69c71
-ms.openlocfilehash: 1925d4ff8f5b16a0df56de987f8653cfd8441c52
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.openlocfilehash: c0cff73e8164bd493554b663d4ffbbf20f5155cb
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-# <a name="azure-sql-database-query-performance-insight"></a>Azure SQL 데이터베이스 Query Performance Insight
+# <a name="azure-sql-database-query-performance-insight"></a>Azure SQL Database Query Performance Insight
 관련 데이터베이스의 성능을 관리하고 튜닝하는 것은 많은 전문 지식과 시간 투자를 필요로 하는 어려운 일입니다. Query Performance Insight를 통해 다음을 제공하여 데이터베이스 성능 문제 해결 시간을 줄일 수 있습니다.
 
 * 데이터베이스 리소스(DTU) 사용에 대한 보다 자세한 정보를 확인합니다. 
@@ -37,7 +29,7 @@ ms.lasthandoff: 07/06/2017
 * Query Performance Insight를 위해서는 데이터베이스에서 [쿼리 저장소](https://msdn.microsoft.com/library/dn817826.aspx) 가 활성 상태여야 합니다. 쿼리 저장소가 실행되지 않는 경우 저장소를 켜라는 포털 메시지가 표시됩니다.
 
 ## <a name="permissions"></a>권한
-Query Performance Insight를 사용하려면 다음 [역할 기반 액세스 제어](../active-directory/role-based-access-control-what-is.md) 권한이 필요합니다. 
+Query Performance Insight를 사용하려면 다음 [역할 기반 액세스 제어](../role-based-access-control/overview.md) 권한이 필요합니다. 
 
 * 최상위 리소스 사용 쿼리 및 차트를 보려면 **판독기**, **소유자**, **참여자**, **SQL DB 참여자** 또는 **SQL Server 참여자** 권한이 필요합니다. 
 * 쿼리 텍스트를 보려면 **소유자**, **참여자**, **SQL DB 참여자** 또는 **SQL Server 참여자** 권한이 필요합니다.
@@ -55,7 +47,7 @@ Query Performance Insight는 쉽게 사용할 수 있습니다.
     ![성능 대시보드](./media/sql-database-query-performance/performance.png)
 
 > [!NOTE]
-> Query Performance Insight를 제공하는 SQL 데이터베이스용 쿼리 저장소로 데이터를 캡처하는 데 몇 시간이 필요합니다. 데이터베이스에 아무런 작업이 없거나 쿼리 저장소가 특정 기간 동안 비활성 상태였던 경우 해당 기간을 표시할 때 차트가 비어 있게 됩니다. 실행하지 않는 경우 언제든지 쿼리 저장소를 활성화할 수 있습니다.   
+> Query Performance Insight를 제공하는 SQL Database용 쿼리 저장소로 데이터를 캡처하는 데 몇 시간이 필요합니다. 데이터베이스에 아무런 작업이 없거나 쿼리 저장소가 특정 기간 동안 비활성 상태였던 경우 해당 기간을 표시할 때 차트가 비어 있게 됩니다. 실행하지 않는 경우 언제든지 쿼리 저장소를 활성화할 수 있습니다.   
 > 
 > 
 
@@ -64,7 +56,7 @@ Query Performance Insight는 쉽게 사용할 수 있습니다.
 
 1. SQL 데이터베이스로 이동한 후 **모든 설정** > **지원 + 문제 해결** > **Query Performance Insight**를 클릭합니다. 
    
-    ![Query Performance Insight][1]
+    ![쿼리][1]
    
     최상위 쿼리 뷰가 열리고 최상위 CPU 사용 쿼리가 나열됩니다.
 2. 자세한 내용은 차트 주위를 클릭합니다.<br>위쪽 줄에는 데이터베이스에 대한 전체 DTU%가 표시되고 막대에는 선택한 기간 중에 선택한 쿼리에서 사용된 CPU%가 표시됩니다. 예를 들어 **지난주**를 선택하면 각 막대는 1일을 나타냅니다.
@@ -226,5 +218,4 @@ SQL 데이터베이스의 성능 향상에 관한 추가 권장 사항은 [Query
 [7]: ./media/sql-database-query-performance/annotation-details.png
 [8]: ./media/sql-database-query-performance/qds-off.png
 [9]: ./media/sql-database-query-performance/qds-button.png
-
 

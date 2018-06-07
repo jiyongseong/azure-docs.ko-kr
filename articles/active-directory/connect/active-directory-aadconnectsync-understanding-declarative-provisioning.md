@@ -3,8 +3,8 @@ title: "Azure AD Connect: 선언적 프로비전 이해 | Microsoft Docs"
 description: "Azure AD connect에서 선언적 프로비전 구성 모델을 설명합니다."
 services: active-directory
 documentationcenter: 
-author: andkjell
-manager: femila
+author: billmath
+manager: mtillman
 editor: 
 ms.assetid: cfbb870d-be7d-47b3-ba01-9e78121f0067
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/13/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: bb500d4705c3b67de6b9b31fa5311967beffffc2
-ms.openlocfilehash: 5b715ec247183fc1b8cb3fa485612bb0f992b5cf
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/27/2017
-
+ms.openlocfilehash: 50fce526d667fa829551425edff4bd3863429ef2
+ms.sourcegitcommit: f1c1789f2f2502d683afaf5a2f46cc548c0dea50
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/18/2018
 ---
 # <a name="azure-ad-connect-sync-understanding-declarative-provisioning"></a>Azure AD Connect 동기화: 선언적 프로비전 이해
 이 항목에서는 Azure AD Connect에서 구성 모델을 설명합니다. 이 모델은 선언적 프로비전이라고 하고 구성을 쉽게 변경할 수 있습니다. 이 항목에서 설명하는 여러 가지 항목은 고급이며 대부분의 고객 시나리오에 필요하지 않습니다.
@@ -103,7 +102,7 @@ ms.lasthandoff: 01/27/2017
 
 또한 **병합** 및 **MergeCaseInsensitive**가 있습니다. 이 옵션을 사용하면 다양한 원본에서 값을 병합할 수 있습니다. 예를 들어, 여러 다른 포리스트에서 구성원 또는 proxyAddresses 특성을 병합하는 데 사용할 수 있습니다. 이 옵션을 사용하는 경우 하나의 개체의 범위에 있는 모든 동기화 규칙은 동일한 병합 유형을 사용해야 합니다. 한 커넥터의 **업데이트** 및 다른 커넥터의 **병합**을 정의할 수는 없습니다. 시도하면 오류가 발생합니다.
 
-**병합** 및 **MergeCaseInsensitive** 간에는 중복 특성 값을 처리하는 방법에 차이가 있습니다. 동기화 엔진은 중복 값이 대상 특성에 삽입되지 않도록 합니다. **MergeCaseInsensitive**와 차이가 있는 경우 중복 값이 표시되지 않습니다. 예를 들어, 대상 특성에 "SMTP:bob@contoso.com" 및 "smtp:bob@contoso.com"이(가) 모두 표시되지 않습니다. **병합** 은 정확한 값을 확인하고 차이가 있는 경우 다중값이 표시되지 않을 수 있습니다.
+**병합** 및 **MergeCaseInsensitive** 간에는 중복 특성 값을 처리하는 방법에 차이가 있습니다. 동기화 엔진은 중복 값이 대상 특성에 삽입되지 않도록 합니다. **MergeCaseInsensitive**와 차이가 있는 경우 중복 값이 표시되지 않습니다. 예를 들어, 대상 특성에 SMTP:bob@contoso.com 및 smtp:bob@contoso.com이 모두 표시되지 않습니다. **병합** 은 정확한 값을 확인하고 차이가 있는 경우 다중값이 표시되지 않을 수 있습니다.
 
 **대체** 옵션은 **업데이트**와 동일하지만 사용되지 않습니다.
 
@@ -163,4 +162,3 @@ ImportedValue 함수는 특성 이름을 대괄호 대신 따옴표로 묶어야
 **참조 항목**
 
 * [Azure AD 동기화 연결: 함수 참조](active-directory-aadconnectsync-functions-reference.md)
-

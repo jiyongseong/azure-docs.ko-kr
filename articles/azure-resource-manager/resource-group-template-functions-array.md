@@ -1,26 +1,24 @@
 ---
-title: "Azure Resource Manager 템플릿 함수 - 배열 및 개체 | Microsoft Docs"
-description: "배열 및 개체 작업을 위해 Azure Resource Manager 템플릿에서 사용할 수 있는 함수에 대해 설명합니다."
+title: Azure Resource Manager 템플릿 함수 - 배열 및 개체 | Microsoft Docs
+description: 배열 및 개체 작업을 위해 Azure Resource Manager 템플릿에서 사용할 수 있는 함수에 대해 설명합니다.
 services: azure-resource-manager
 documentationcenter: na
 author: tfitzmac
 manager: timlt
 editor: tysonn
-ms.assetid: 
+ms.assetid: ''
 ms.service: azure-resource-manager
 ms.devlang: na
-ms.topic: article
+ms.topic: reference
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 06/12/2017
+ms.date: 09/05/2017
 ms.author: tomfitz
-ms.translationtype: Human Translation
-ms.sourcegitcommit: db18dd24a1d10a836d07c3ab1925a8e59371051f
-ms.openlocfilehash: 74982663b0501d3a5c7973a5f383e14e0f964696
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/15/2017
-
-
+ms.openlocfilehash: eb24535956140632da73807364b6f3ff7b91a416
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="array-and-object-functions-for-azure-resource-manager-templates"></a>Azure Resource Manager 템플릿에 대한 배열 및 개체 함수 
 
@@ -34,10 +32,11 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 * [empty](#empty)
 * [first](#first)
 * [intersection](#intersection)
+* [json](#json)
 * [last](#last)
 * [length](#length)
-* [min](#min)
 * [max](#max)
+* [min](#min)
 * [range](#range)
 * [skip](#skip)
 * [take](#take)
@@ -62,9 +61,9 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 
 배열입니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 
-다음 예제에서는 여러 다른 형식의 배열 함수를 사용하는 방법을 보여 줍니다.
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/array.json)에서는 여러 다른 형식의 배열 함수를 사용하는 방법을 보여줍니다.
 
 ```json
 {
@@ -103,13 +102,25 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 }
 ```
 
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
 
-| 이름 | 형식 | 값 |
+| 이름 | type | 값 |
 | ---- | ---- | ----- |
 | intOutput | 배열 | [1] |
 | stringOutput | 배열 | ["a"] |
 | objectOutput | 배열 | [{"a": "b", "c": "d"}] |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/array.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/array.json
+```
 
 <a id="coalesce" />
 
@@ -123,15 +134,15 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 | 매개 변수를 포함해야 합니다. | 필수 | 형식 | 설명 |
 |:--- |:--- |:--- |:--- |
 | arg1 |예 |int, 문자열, 배열 또는 개체 |null인지 테스트할 첫 번째 값입니다. |
-| 추가 인수 |아니요 |int, 문자열, 배열 또는 개체 |null인지 테스트할 추가 값입니다. |
+| 추가 인수 |아니오 |int, 문자열, 배열 또는 개체 |null인지 테스트할 추가 값입니다. |
 
 ### <a name="return-value"></a>반환 값
 
 문자열, int, 배열 또는 개체일 수 있는 첫 번째 null이 아닌 매개 변수의 값입니다. 모든 매개 변수가 null이면 null입니다. 
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 
-다음 예제에서는 coalesce의 다른 사용에서 출력된 결과를 보여 줍니다.
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/coalesce.json)에서는 병합을 다르게 사용하여 출력된 결과를 보여줍니다.
 
 ```json
 {
@@ -177,15 +188,27 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 }
 ```
 
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
 
-| 이름 | 형식 | 값 |
+| 이름 | type | 값 |
 | ---- | ---- | ----- |
 | stringOutput | 문자열 | 기본값 |
 | intOutput | int | 1 |
 | objectOutput | Object | {"first": "default"} |
 | arrayOutput | 배열 | [1] |
 | emptyOutput | Bool | True |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/coalesce.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/coalesce.json
+```
 
 <a id="concat" />
 
@@ -199,16 +222,16 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 | 매개 변수를 포함해야 합니다. | 필수 | 형식 | 설명 |
 |:--- |:--- |:--- |:--- |
 | arg1 |예 |배열 또는 문자열 |연결을 위한 첫 번째 배열 또는 문자열입니다. |
-| 추가 인수 |아니요 |배열 또는 문자열 |연결 순서로 나타낸 추가 배열 또는 문자열입니다. |
+| 추가 인수 |아니오 |배열 또는 문자열 |연결 순서로 나타낸 추가 배열 또는 문자열입니다. |
 
 이 함수는 인수를 개수에 관계없이 사용할 수 있으며 매개 변수에 대한 문자열이나 배열 중 하나를 사용할 수 있습니다.
 
 ### <a name="return-value"></a>반환 값
 연결된 값의 문자열 또는 배열입니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 
-다음 예제에서는 두 개의 배열을 결합하는 방법을 보여 줍니다.
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/concat-array.json)에서는 두 개의 배열을 결합하는 방법을 보여줍니다.
 
 ```json
 {
@@ -243,13 +266,25 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 }
 ```
 
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
 
-| 이름 | 형식 | 값 |
+| 이름 | type | 값 |
 | ---- | ---- | ----- |
 | return | 배열 | ["1-1", "1-2", "1-3", "2-1", "2-2", "2-3"] |
 
-다음 예제에서는 2개의 문자열 값을 결합하고 연결된 문자열을 반환하는 방법을 보여 줍니다.
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/concat-array.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/concat-array.json
+```
+
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/concat-string.json)에서는 2개의 문자열 값을 결합하고 연결된 문자열을 반환하는 방법을 보여줍니다.
 
 ```json
 {
@@ -271,11 +306,23 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 }
 ```
 
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
 
-| 이름 | 형식 | 값 |
+| 이름 | type | 값 |
 | ---- | ---- | ----- |
 | concatOutput | 문자열 | prefix-5yj4yjf5mbg72 |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/concat-string.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/concat-string.json
+```
 
 <a id="contains" />
 
@@ -295,9 +342,9 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 
 항목이 있으면 **True**이고, 항목이 없으면 **False**입니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 
-다음 예제에서는 여러 다른 형식의 contains를 사용하는 방법을 보여 줍니다.
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/contains.json)에서는 여러 다른 형식의 contains를 사용하는 방법을 보여줍니다.
 
 ```json
 {
@@ -348,9 +395,9 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 }
 ```
 
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
 
-| 이름 | 형식 | 값 |
+| 이름 | type | 값 |
 | ---- | ---- | ----- |
 | stringTrue | Bool | True |
 | stringFalse | Bool | False |
@@ -358,6 +405,18 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 | objectFalse | Bool | False |
 | arrayTrue | Bool | True |
 | arrayFalse | Bool | False |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/contains.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/contains.json
+```
 
 <a id="createarray" />
 
@@ -371,15 +430,15 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 | 매개 변수를 포함해야 합니다. | 필수 | 형식 | 설명 |
 |:--- |:--- |:--- |:--- |
 | arg1 |예 |문자열, 정수, 배열 또는 개체 |배열의 첫 번째 값입니다. |
-| 추가 인수 |아니요 |문자열, 정수, 배열 또는 개체 |배열의 추가 값입니다. |
+| 추가 인수 |아니오 |문자열, 정수, 배열 또는 개체 |배열의 추가 값입니다. |
 
 ### <a name="return-value"></a>반환 값
 
 배열입니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 
-다음 예제에서는 여러 다른 형식의 createArray를 사용하는 방법을 보여 줍니다.
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/createarray.json)에서는 여러 다른 형식의 createArray를 사용하는 방법을 보여줍니다.
 
 ```json
 {
@@ -418,14 +477,26 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 }
 ```
 
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
 
-| 이름 | 형식 | 값 |
+| 이름 | type | 값 |
 | ---- | ---- | ----- |
 | stringArray | 배열 | ["a", "b", "c"] |
 | intArray | 배열 | [1, 2, 3] |
 | objectArray | 배열 | [{"one": "a", "two": "b", "three": "c"}] |
 | arrayArray | 배열 | [["one", "two", "three"]] |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/createarray.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/createarray.json
+```
 
 <a id="empty" />
 
@@ -445,9 +516,9 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 
 값이 비어 있으면 **True**를 반환하고 비어 있지 않으면 **False**를 반환합니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 
-다음 예제에서는 배열, 개체 및 문자열이 비어 있는지 여부를 확인합니다.
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/empty.json)에서는 배열, 개체 및 문자열이 비어 있는지 여부를 확인합니다.
 
 ```json
 {
@@ -486,13 +557,25 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 }
 ```
 
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
 
-| 이름 | 형식 | 값 |
+| 이름 | type | 값 |
 | ---- | ---- | ----- |
 | arrayEmpty | Bool | True |
 | objectEmpty | Bool | True |
 | stringEmpty | Bool | True |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/empty.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/empty.json
+```
 
 <a id="first" />
 
@@ -511,9 +594,9 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 
 배열의 첫 번째 요소 또는 문자열의 첫 번째 문자에 대한 형식(문자열, int, 배열 또는 개체)입니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 
-다음 예제에서는 배열 및 문자열에 첫 번째 함수를 사용하는 방법을 보여 줍니다.
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/first.json)에서는 배열 및 문자열에 첫 번째 함수를 사용하는 방법을 보여줍니다.
 
 ```json
 {
@@ -540,12 +623,24 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 }
 ```
 
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
 
-| 이름 | 형식 | 값 |
+| 이름 | type | 값 |
 | ---- | ---- | ----- |
 | arrayOutput | 문자열 | one |
 | stringOutput | 문자열 | O |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/first.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/first.json
+```
 
 <a id="intersection" />
 
@@ -560,15 +655,15 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 |:--- |:--- |:--- |:--- |
 | arg1 |예 |배열 또는 개체 |공통 요소를 찾는 데 사용할 첫 번째 값입니다. |
 | arg2 |예 |배열 또는 개체 |공통 요소를 찾는 데 사용할 두 번째 값입니다. |
-| 추가 인수 |아니요 |배열 또는 개체 |공통 요소를 찾는 데 사용할 추가 값입니다. |
+| 추가 인수 |아니오 |배열 또는 개체 |공통 요소를 찾는 데 사용할 추가 값입니다. |
 
 ### <a name="return-value"></a>반환 값
 
 공통 요소가 있는 배열 또는 개체입니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 
-다음 예제에서는 배열 및 개체에 intersection을 사용하는 방법을 보여 줍니다.
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/intersection.json)에서는 배열 및 개체에 교집합을 사용하는 방법을 보여줍니다.
 
 ```json
 {
@@ -607,12 +702,82 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 }
 ```
 
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
 
-| 이름 | 형식 | 값 |
+| 이름 | type | 값 |
 | ---- | ---- | ----- |
 | objectOutput | Object | {"one": "a", "three": "c"} |
 | arrayOutput | 배열 | ["two", "three"] |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/intersection.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/intersection.json
+```
+
+## <a name="json"></a>json :
+`json(arg1)`
+
+JSON 개체를 반환합니다.
+
+### <a name="parameters"></a>매개 변수
+
+| 매개 변수를 포함해야 합니다. | 필수 | 형식 | 설명 |
+|:--- |:--- |:--- |:--- |
+| arg1 |예 |string |JSON으로 변환할 값입니다. |
+
+
+### <a name="return-value"></a>반환 값
+
+지정된 문자열의 JSON 개체이거나, **null**을 지정한 경우 빈 개체입니다.
+
+### <a name="example"></a>예
+
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/json.json)에서는 배열 및 개체에 json 함수를 사용하는 방법을 보여줍니다.
+
+```json
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+    ],
+    "outputs": {
+        "jsonOutput": {
+            "type": "object",
+            "value": "[json('{\"a\": \"b\"}')]"
+        },
+        "nullOutput": {
+            "type": "bool",
+            "value": "[empty(json('null'))]"
+        }
+    }
+}
+```
+
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
+
+| 이름 | type | 값 |
+| ---- | ---- | ----- |
+| jsonOutput | Object | {"a": "b"} |
+| nullOutput | BOOLEAN | True |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/json.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/json.json
+```
 
 <a id="last" />
 
@@ -631,9 +796,9 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 
 배열의 마지막 요소 또는 문자열의 마지막 문자에 대한 형식(문자열, int, 배열 또는 개체)입니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 
-다음 예제에서는 배열 및 문자열에 마지막 함수를 사용하는 방법을 보여 줍니다.
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/last.json)에서는 배열 및 문자열에 최근 함수를 사용하는 방법을 보여줍니다.
 
 ```json
 {
@@ -660,12 +825,24 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 }
 ```
 
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
 
-| 이름 | 형식 | 값 |
+| 이름 | type | 값 |
 | ---- | ---- | ----- |
 | arrayOutput | 문자열 | three |
 | stringOutput | 문자열 | e |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/last.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/last.json
+```
 
 <a id="length" />
 
@@ -684,9 +861,9 @@ Resource Manager는 배열 및 개체 작업을 위한 여러 함수를 제공�
 
 int입니다. 
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 
-다음 예제에서는 배열 및 문자열에 length를 사용하는 방법을 보여 줍니다.
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/length.json)에서는 배열 및 문자열에 length를 사용하는 방법을 보여줍니다.
 
 ```json
 {
@@ -720,12 +897,24 @@ int입니다.
 }
 ```
 
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
 
-| 이름 | 형식 | 값 |
+| 이름 | type | 값 |
 | ---- | ---- | ----- |
 | arrayLength | int | 3 |
 | stringLength | int | 13 |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/length.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/length.json
+```
 
 배열과 함께 이 함수를 사용하면 리소스를 만들 때 반복 횟수를 지정할 수 있습니다. 다음 예제에서 매개 변수 **siteNames** 는 웹 사이트를 만들 때 사용할 이름 배열을 나타냅니다.
 
@@ -737,58 +926,6 @@ int입니다.
 ```
 
 배열과 함께 이 함수를 사용하는 방법의 예제는 [Azure Resource Manager에서 리소스의 여러 인스턴스 만들기](resource-group-create-multiple.md)를 참조하세요.
-
-<a id="min" />
-
-## <a name="min"></a>min
-`min(arg1)`
-
-정수 배열 또는 쉼표로 구분된 정수 목록 중에서 최소값을 반환합니다.
-
-### <a name="parameters"></a>매개 변수
-
-| 매개 변수를 포함해야 합니다. | 필수 | 형식 | 설명 |
-|:--- |:--- |:--- |:--- |
-| arg1 |예 |정수 배열 또는 쉼표로 구분된 정수 목록 |최소값을 가져올 컬렉션입니다. |
-
-### <a name="return-value"></a>반환 값
-
-최소값을 나타내는 int입니다.
-
-### <a name="example"></a>예제
-
-다음 예제에서는 배열 및 정소 목록에 min을 사용하는 방법을 보여 줍니다.
-
-```json
-{
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "arrayToTest": {
-            "type": "array",
-            "defaultValue": [0,3,2,5,4]
-        }
-    },
-    "resources": [],
-    "outputs": {
-        "arrayOutput": {
-            "type": "int",
-            "value": "[min(parameters('arrayToTest'))]"
-        },
-        "intOutput": {
-            "type": "int",
-            "value": "[min(0,3,2,5,4)]"
-        }
-    }
-}
-```
-
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
-
-| 이름 | 형식 | 값 |
-| ---- | ---- | ----- |
-| arrayOutput | int | 0 |
-| intOutput | int | 0 |
 
 <a id="max" />
 
@@ -807,9 +944,9 @@ int입니다.
 
 최대값을 나타내는 int입니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 
-다음 예제에서는 배열 및 정소 목록에 max를 사용하는 방법을 보여 줍니다.
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/max.json)에서는 배열 및 정소 목록에 최대값을 사용하는 방법을 보여줍니다.
 
 ```json
 {
@@ -835,12 +972,88 @@ int입니다.
 }
 ```
 
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
 
-| 이름 | 형식 | 값 |
+| 이름 | type | 값 |
 | ---- | ---- | ----- |
 | arrayOutput | int | 5 |
 | intOutput | int | 5 |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/max.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/max.json
+```
+
+<a id="min" />
+
+## <a name="min"></a>min
+`min(arg1)`
+
+정수 배열 또는 쉼표로 구분된 정수 목록 중에서 최소값을 반환합니다.
+
+### <a name="parameters"></a>매개 변수
+
+| 매개 변수를 포함해야 합니다. | 필수 | 형식 | 설명 |
+|:--- |:--- |:--- |:--- |
+| arg1 |예 |정수 배열 또는 쉼표로 구분된 정수 목록 |최소값을 가져올 컬렉션입니다. |
+
+### <a name="return-value"></a>반환 값
+
+최소값을 나타내는 int입니다.
+
+### <a name="example"></a>예
+
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/min.json)에서는 배열 및 정소 목록에 최소값을 사용하는 방법을 보여줍니다.
+
+```json
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "arrayToTest": {
+            "type": "array",
+            "defaultValue": [0,3,2,5,4]
+        }
+    },
+    "resources": [],
+    "outputs": {
+        "arrayOutput": {
+            "type": "int",
+            "value": "[min(parameters('arrayToTest'))]"
+        },
+        "intOutput": {
+            "type": "int",
+            "value": "[min(0,3,2,5,4)]"
+        }
+    }
+}
+```
+
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
+
+| 이름 | type | 값 |
+| ---- | ---- | ----- |
+| arrayOutput | int | 0 |
+| intOutput | int | 0 |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/min.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/min.json
+```
 
 <a id="range" />
 
@@ -860,9 +1073,9 @@ int입니다.
 
 정수 배열입니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 
-다음 예제에서는 range 함수를 사용하는 방법을 보여 줍니다.
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/range.json)에서는 범위 함수를 사용하는 방법을 보여줍니다.
 
 ```json
 {
@@ -888,11 +1101,23 @@ int입니다.
 }
 ```
 
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
 
-| 이름 | 형식 | 값 |
+| 이름 | type | 값 |
 | ---- | ---- | ----- |
 | rangeOutput | 배열 | [5, 6, 7] |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/range.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/range.json
+```
 
 <a id="skip" />
 
@@ -912,9 +1137,9 @@ int입니다.
 
 배열 또는 문자열입니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 
-다음 예제에서는 배열에서 지정된 요소 수 및 문자열에서 지정된 수의 문자를 건너뜁니다.
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/skip.json)에서는 배열에서 지정된 요소 수 및 문자열에서 지정된 수의 문자를 건너뜁니다.
 
 ```json
 {
@@ -956,12 +1181,24 @@ int입니다.
 }
 ```
 
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
 
-| 이름 | 형식 | 값 |
+| 이름 | type | 값 |
 | ---- | ---- | ----- |
 | arrayOutput | 배열 | ["three"] |
 | stringOutput | 문자열 | two three |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/skip.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/skip.json
+```
 
 <a id="take" />
 
@@ -981,9 +1218,9 @@ int입니다.
 
 배열 또는 문자열입니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 
-다음 예제에서는 배열에서 지정된 수의 요소 및 문자열의 문자를 가져옵니다.
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/take.json)에서는 배열에서 지정된 수의 요소 및 문자열의 문자를 가져옵니다.
 
 ```json
 {
@@ -1025,12 +1262,24 @@ int입니다.
 }
 ```
 
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
 
-| 이름 | 형식 | 값 |
+| 이름 | type | 값 |
 | ---- | ---- | ----- |
 | arrayOutput | 배열 | ["one", "two"] |
 | stringOutput | 문자열 | on |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/take.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/take.json
+```
 
 <a id="union" />
 
@@ -1045,15 +1294,15 @@ int입니다.
 |:--- |:--- |:--- |:--- |
 | arg1 |예 |배열 또는 개체 |요소를 조인하는 데 사용할 첫 번째 값입니다. |
 | arg2 |예 |배열 또는 개체 |요소를 조인하는 데 사용할 두 번째 값입니다. |
-| 추가 인수 |아니요 |배열 또는 개체 |요소를 조인하는 데 사용할 추가 값입니다. |
+| 추가 인수 |아니오 |배열 또는 개체 |요소를 조인하는 데 사용할 추가 값입니다. |
 
 ### <a name="return-value"></a>반환 값
 
 배열 또는 개체입니다.
 
-### <a name="example"></a>예제
+### <a name="example"></a>예
 
-다음 예제에서는 배열 및 개체에 union을 사용하는 방법을 보여 줍니다.
+다음 [예제 템플릿](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/functions/union.json)에서는 배열 및 개체에 union을 사용하는 방법을 보여줍니다.
 
 ```json
 {
@@ -1062,11 +1311,11 @@ int입니다.
     "parameters": {
         "firstObject": {
             "type": "object",
-            "defaultValue": {"one": "a", "two": "b", "three": "c"}
+            "defaultValue": {"one": "a", "two": "b", "three": "c1"}
         },
         "secondObject": {
             "type": "object",
-            "defaultValue": {"three": "c", "four": "d", "five": "e"}
+            "defaultValue": {"three": "c2", "four": "d", "five": "e"}
         },
         "firstArray": {
             "type": "array",
@@ -1092,17 +1341,28 @@ int입니다.
 }
 ```
 
-기본값을 사용한 이전 예제의 출력은 다음과 같습니다.
+기본 값을 사용한 이전 예제의 출력은 다음과 같습니다.
 
-| 이름 | 형식 | 값 |
+| 이름 | type | 값 |
 | ---- | ---- | ----- |
-| objectOutput | Object | {"one": "a", "two": "b", "three": "c", "four": "d", "five": "e"} |
+| objectOutput | Object | {"one": "a", "two": "b", "three": "c2", "four": "d", "five": "e"} |
 | arrayOutput | 배열 | ["one", "two", "three", "four"] |
+
+Azure CLI에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```azurecli-interactive
+az group deployment create -g functionexamplegroup --template-uri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/union.json
+```
+
+PowerShell에서 이 예제 템플릿을 배포하려면 다음 기능을 사용합니다.
+
+```powershell
+New-AzureRmResourceGroupDeployment -ResourceGroupName functionexamplegroup -TemplateUri https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/azure-resource-manager/functions/union.json
+```
 
 ## <a name="next-steps"></a>다음 단계
 * Azure Resource Manager 템플릿의 섹션에 대한 설명은 [Azure Resource Manager 템플릿 작성](resource-group-authoring-templates.md)을 참조하세요.
 * 여러 템플릿을 병합하려면 [Azure Resource Manager에서 연결된 템플릿 사용](resource-group-linked-templates.md)을 참조하세요.
 * 리소스 유형을 만들 때 지정된 횟수만큼 반복하려면 [Azure 리소스 관리자에서 리소스의 여러 인스턴스 만들기](resource-group-create-multiple.md)를 참조하세요.
 * 만든 템플릿을 배포하는 방법을 보려면 [Azure Resource Manager 템플릿을 사용하여 응용 프로그램 배포](resource-group-template-deploy.md)를 참조하세요.
-
 

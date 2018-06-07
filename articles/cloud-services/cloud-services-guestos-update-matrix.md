@@ -1,74 +1,83 @@
 ---
-title: "최신 Azure 게스트 OS 릴리스에 대해 알아보기 | Microsoft Docs"
-description: "Azure 클라우드 서비스 게스트 OS에 대한 최신 릴리스 뉴스 및 SDK 호환성."
+title: 최신 Azure 게스트 OS 릴리스에 대해 알아보기 | Microsoft Docs
+description: Azure  Cloud Services 게스트 OS에 대한 최신 릴리스 뉴스 및 SDK 호환성.
 services: cloud-services
 documentationcenter: na
 author: raiye
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 6306cafe-1153-44c7-8554-623b03d59a34
 ms.service: cloud-services
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: tbd
-ms.date: 7/26/2017
+ms.date: 5/4/2018
 ms.author: raiye
+ms.openlocfilehash: e97b5535ac635fb5982b4dc6fb384414e3a2cfc7
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
 ms.translationtype: HT
-ms.sourcegitcommit: 349fe8129b0f98b3ed43da5114b9d8882989c3b2
-ms.openlocfilehash: cd61a785c415e945a33b0727004338e01c67f3ec
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
+ms.locfileid: "33765776"
 ---
 # <a name="azure-guest-os-releases-and-sdk-compatibility-matrix"></a>Azure 게스트 OS 릴리스 및 SDK 호환성 매트릭스
-클라우드 서비스용 최신 Azure 게스트 OS릴리스에 대한 최신 정보를 제공합니다. 이 정보는 게스트 OS를 사용하지 않도록 설정하기 전에 업그레이드 경로를 계획하는 데 도움이 됩니다. [Azure 게스트 OS 업데이트 설정][Azure Guest OS Update Settings]의 설명에 따라 *자동* 게스트 OS 업데이트를 사용하도록 역할을 구성하는 경우, 이 페이지를 읽지 않아도 됩니다.
+Cloud Services용 최신 Azure 게스트 OS릴리스에 대한 최신 정보를 제공합니다. 이 정보는 게스트 OS를 사용하지 않도록 설정하기 전에 업그레이드 경로를 계획하는 데 도움이 됩니다. [Azure 게스트 OS 업데이트 설정][Azure Guest OS Update Settings]의 설명에 따라 *자동* 게스트 OS 업데이트를 사용하도록 역할을 구성하는 경우, 이 페이지를 읽지 않아도 됩니다.
 
 > [!IMPORTANT]
-> 이 페이지는 게스트 OS를 기반으로 실행하는 클라우드 서비스 웹 및 작업자 역할에 적용됩니다. IaaS 가상 컴퓨터에 **적용되지 않습니다** .
+> 이 페이지는 게스트 OS를 기반으로 실행하는 Cloud Services 웹 및 작업자 역할에 적용됩니다. IaaS Virtual Machines에 **적용되지 않습니다** .
 >
 >
 
 
-> [!NOTE]
-> RSS 피드는 최근에 사용되지 않습니다. 곧 제공될 새 피드에 대한 업데이트에 대해 알아봅니다.
+> [!TIP]
+>  [게스트 OS 업데이트 RSS 피드]를 구독하여 모든 게스트 OS 변경 사항에 가장 시기 적절한 알림을 받을 수 있습니다.
+>
+>
+
+> [!IMPORTANT]
+> 11월 롤아웃부터 지원되며 게스트 OS의 최신 2 버전만 Azure Portal에서 지원되며 사용할 수 있습니다.
 >
 >
 
 게스트 OS가 무엇인지 또는 게스트 OS 릴리스가 어떻게 작동하는지 잘 모르시나요? [이](#how-it-works) 섹션을 읽어보세요.
 
 ## <a name="news-updates"></a>새 업데이트
-###### <a name="july-19-2017"></a>**2017년 7월 19일**
-게스트 OS 7월 롤아웃은 7월 19일에 시작되며 8월 8일에 출시될 예정입니다.
+###### <a name="may-4-2018"></a>**2018년 5월 4일**
+4월 게스트 OS가 릴리스되었습니다.
 
-###### <a name="july-7-2017"></a>**2017년 7월 7일**
-6월 게스트 OS가 릴리스되었습니다.
+###### <a name="april-6-2018"></a>**2018년 4월 6일**
+3월 게스트 OS가 릴리스되었습니다.
 
-###### <a name="june-16-2017"></a>**2017년 6월 16일**
-게스트 OS 6월 롤아웃은 6월 16일에 시작되며 7월 11일에 출시될 예정입니다.
+###### <a name="march-19-2018"></a>**2018년 3월 19일**
+2월 게스트 OS가 릴리스되었습니다.
 
-###### <a name="june-5-2017"></a>**2017년 6월 5일**
-게스트 OS 5월이 릴리스되었습니다.
+###### <a name="january-29-2018"></a>**2018년 1월 29일**
+1월 게스트 OS가 OS 제품군 2(WA-GUEST-OS-2.70_201801-01) 및 3(WA-GUEST-OS-3.57_201801-01)에 릴리스되었습니다.
 
-###### <a name="may-17-2017"></a>**2017년 5월 17일**
-보안 버그로 인해 포털에서 [수정 사항]이 없는 2016년 12월 및 2017년 1월 OS 릴리스를 사용하지 않습니다. WA-GUEST-OS-5.4_201612-01, WA-GUEST-OS-4.39_201612-01, WA-GUEST-OS-3.46_201612-01, WA-GUEST-OS-2.59_201701-01
+###### <a name="january-4-2018"></a>**2018년 1월 4일**
+중요한 보안 패치를 포함하는 1월 게스트 OS가 OS 제품군 4(WA-GUEST-OS-4.50_201801-01) 및 5(WA-GUEST-OS-5.15_201801-01)에 릴리스되었습니다.  
 
-###### <a name="may-12-2017"></a>**2017년 5월 12일**
-게스트 OS 5월 롤아웃은 5월 12일에 시작되며 6월 13일에 출시될 예정입니다.
+###### <a name="january-4-2018"></a>**2018년 1월 4일**
+12월 게스트 OS가 릴리스되었습니다.
 
-###### <a name="april-18-2017"></a>**2017년 4월 18일**
-게스트 OS 4월 롤아웃은 4월 18일에 시작되며 5월 9일에 출시될 예정입니다.
+###### <a name="december-14-2017"></a>**2017년 12월 14일**
+11월 게스트 OS가 릴리스되었습니다.
 
-###### <a name="april-10-2017"></a>**2017년 4월 10일**
-게스트 OS 3월 롤아웃은 2017년 3월 14일에 시작되었으며 2017년 4월 10일에 출시되었습니다.
+###### <a name="november-8-2017"></a>**2017년 11월 8일**
+10월 게스트 OS가 릴리스되었습니다.
 
-###### <a name="january-10-2017"></a>**2017년 1월 10일**
-1월 게스트 OS에는 OS 제품군 2(Windows 2008 Server R2)에만 영향을 미치는 패치가 포함되어 있습니다. 따라서 이번 달에는 OS 제품군 2 이미지(WA-GUEST-OS-2.59_201701-01)만 릴리스했습니다. 모든 다른 OS 제품군의 경우 12월 OS(201612-01)는 최신 상태를 유지합니다.
+###### <a name="october-6-2017"></a>**2017년 10월 6일**
+9월 게스트 OS가 릴리스되었습니다. Windows Server 2016 9월 릴리스의 경우 netfx3이 기본적으로 사용됩니다. 고객은 워크플로에서 4.x 런타임과 함께 .NET 2.x 앱을 실행해야 하는 경우 또는 .NET 2.x 앱 실행 시 오류가 발생하여 .NET 4.x 앱을 실행한 경우 ‘dism /online /disable-feature /featurename:netfx3’을 OnStart에 추가해야 합니다.
+
+###### <a name="september-14-2017"></a>**2017년 9월 14일**
+9월 게스트 OS 롤아웃은 9월 14일에 시작되고 10월 9일에 출시될 예정입니다.
+
 
 
 ## <a name="releases"></a>릴리스
 ## <a name="family-5-releases"></a>제품군 5 릴리스
-**Windows Server, 2016**
+**Windows Server 2016**
 
 설치된 .NET Framework: 4.0, 4.5, 4.5.1, 4.5.2, 4.6, 4.6.1, 4.6.2
 
@@ -80,18 +89,25 @@ ms.lasthandoff: 07/26/2017
 
 | 구성 문자열 | 릴리스 날짜 | 비활성화 날짜 | 만료 날짜 |
 | --- | --- | --- | --- |
-| WA-GUEST-OS-5.8_201706-01 |2017년 7월 7일 |Post 5.10 |TBD |
-| WA-GUEST-OS-5.7_201705-01 |2017년 6월 5일 |Post 5.9 |TBD |
-| WA-GUEST-OS-5.6_201704-01 |2017년 5월 9일 |Post 5.8 |TBD |
-|~~WA-GUEST-OS-5.5_201703-01~~ |2017년 4월 10일 |2017년 7월 7일 |TBD |
-|~~WA-GUEST-OS-5.4_201612-01~~ |2017년 1월 10일 |2017년 6월 5일|TBD |
-|~~WA-GUEST-OS-5.3_201611-01~~ |2016년 12월 14일 |2017년 5월 9일 |TBD |
-|~~WA-GUEST-OS-5.2_201610-02~~ |2016년 11월 1일 |2017년 4월 10일 |TBD |
+| WA-GUEST-OS-5.18_201804-01 |2018년 5월 4일 |Post 5.20 |TBD |
+| WA-GUEST-OS-5.17_201803-01 |2018년 4월 6일 |게시물 5.19 |TBD |
+|~~WA-GUEST-OS-5.16_201802-01~~ |2018년 3월 12일 |2018년 5월 4일 |TBD |
+|~~WA-GUEST-OS-5.15_201801-01~~ |2018년 1월 4일 |2018년 4월 6일 |TBD |
+|~~WA-GUEST-OS-5.14_201712-01~~ |2018년 1월 4일 |2018년 3월 12일 |TBD |
+|~~WA-GUEST-OS-5.13_201711-01~~ |2017년 12월 14일 |2018년 1월 4일|TBD |
+|~~WA-GUEST-OS-5.12_201710-02~~ |2017년 11월 8일 |2018년 1월 4일 |TBD |
+|~~WA-GUEST-OS-5.11_201709-01~~ |2017년 10월 6일 |2017년 12월 14일 |TBD |
+|~~WA-GUEST-OS-5.10_201708-01~~ |2017년 8월 24일 |2017년 12월 14일 |TBD |
+|~~WA-GUEST-OS-5.9_201707-01~~ |2017년 8월 3일 |2017년 11월 8일 |TBD |
+|~~WA-GUEST-OS-5.8_201706-01~~ |2017년 7월 7일 |2017년 10월 6일 |TBD |
+|~~WA-GUEST-OS-5.7_201705-01~~ |2017년 6월 5일 |2017년 8월 24일 |TBD |
+|~~WA-GUEST-OS-5.6_201704-01~~ |2017년 5월 9일 |2017년 8월 3일 |TBD |
+
 
 ## <a name="family-4-releases"></a>제품군 4 릴리스
 **Windows Server 2012 R2**
 
-.NET 4.0, 4.5, 4.5.1, 4.5.2 지원
+설치된 .NET Framework: 4.0, 4.5, 4.5.1, 4.5.2
 
 > [!NOTE]
 > *가 표시된 날짜는 변경될 수 있음
@@ -100,22 +116,25 @@ ms.lasthandoff: 07/26/2017
 
 | 구성 문자열 | 릴리스 날짜 | 비활성화 날짜 | 만료 날짜 |
 | --- | --- | --- | --- |
-| WA-GUEST-OS-4.43_201706-01 |2017년 7월 7일 |Post 4.45 |TBD |
-| WA-GUEST-OS-4.42_201705-01 |2017년 6월 5일 |Post 4.44 |TBD |
-| WA-GUEST-OS-4.41_201704-01 |2017년 5월 9일 |Post 4.43 |TBD |
-|~~WA-GUEST-OS-4.40_201703-01~~ |2017년 4월 10일 |2017년 7월 7일 |TBD |
-|~~WA-GUEST-OS-4.39_201612-01~~ |2017년 1월 10일 |2017년 6월 5일 |TBD |
-|~~WA-GUEST-OS-4.38_201611-01~~ |2016년 12월 14일 |2017년 5월 9일 |TBD |
-|~~WA-GUEST-OS-4.37_201610-02~~ |2016년 11월 16일 |2017년 4월 10일 |TBD |
-|~~WA-GUEST-OS-4.36_201609-01~~ |2016년 10월 13일 |2017년 1월 14일 |TBD |
-|~~WA-GUEST-OS-4.35_201608-01~~ |2016년 9월 13일 |2016년 12월 16일 |TBD |
-|~~WA-GUEST-OS-4.34_201607-01~~ |2016년 8월 8일 |2016년 11월 13일 |TBD |
+| WA-GUEST-OS-4.53_201804-01 |2018년 5월 4일 |Post 4.55 |TBD |
+| WA-GUEST-OS-4.52_201803-01 |2018년 4월 6일 |게시물 4.54 |TBD |
+|~~WA-GUEST-OS-4.51_201802-01~~ |2018년 3월 12일 |2018년 5월 4일 |TBD |
+|~~WA-GUEST-OS-4.50_201801-01~~ |2018년 1월 4일 |2018년 4월 6일 |TBD |
+|~~WA-GUEST-OS-4.49_201712-01~~ |2018년 1월 4일 |2018년 3월 12일 |TBD |
+|~~WA-GUEST-OS-4.48_201711-01~~ |2017년 12월 14일 |2018년 1월 4일 |TBD |
+|~~WA-GUEST-OS-4.47_201710-02~~ |2017년 11월 8일 |2018년 1월 4일 |TBD |
+|~~WA-GUEST-OS-4.46_201709-01~~ |2017년 10월 6일 |2017년 12월 14일 |TBD |
+|~~WA-GUEST-OS-4.45_201708-01~~ |2017년 8월 24일 |2017년 12월 14일 |TBD |
+|~~WA-GUEST-OS-4.44_201707-01~~ |2017년 8월 3일 |2017년 11월 8일 |TBD |
+|~~WA-GUEST-OS-4.43_201706-01~~ |2017년 7월 7일 |2017년 10월 6일 |TBD |
+|~~WA-GUEST-OS-4.42_201705-01~~ |2017년 6월 5일 |2017년 8월 24일 |TBD |
+|~~WA-GUEST-OS-4.41_201704-01~~ |2017년 5월 9일 |2017년 8월 3일 |TBD |
 
 
 ## <a name="family-3-releases"></a>제품군 3 릴리스
 **Windows Server 2012**
 
-.NET 4.0, 4.5, 4.5.1, 4.5.2 지원
+설치된 .NET Framework: 4.0, 4.5, 4.5.1, 4.5.2
 
 > [!NOTE]
 > *가 표시된 날짜는 변경될 수 있음
@@ -124,22 +143,25 @@ ms.lasthandoff: 07/26/2017
 
 | 구성 문자열 | 릴리스 날짜 | 비활성화 날짜 | 만료 날짜 |
 | --- | --- | --- | --- |
-| WA-GUEST-OS-3.50_201706-01 |2017년 7월 7일 |Post 3.52 |TBD |
-| WA-GUEST-OS-3.49_201705-01 |2017년 6월 5일 |Post 3.51 |TBD |
-| WA-GUEST-OS-3.48_201704-01 |2017년 5월 9일 |Post 3.50 |TBD |
-|~~WA-GUEST-OS-3.47_201703-01~~ |2017년 4월 10일 |2017년 7월 7일 |TBD |
-|~~WA-GUEST-OS-3.46_201612-01~~ |2017년 1월 10일 |2017년 6월 5일 |TBD |
-|~~WA-GUEST-OS-3.45_201611-01~~ |2016년 12월 14일 |2017년 5월 9일 |TBD |
-|~~WA-GUEST-OS-3.44_201610-02~~ |2016년 11월 16일 |2017년 5월 1일 |TBD |
-|~~WA-GUEST-OS-3.43_201609-01~~ |2016년 10월 13일 |2017년 1월 14일 |TBD |
-|~~WA-GUEST-OS-3.42_201608-01~~ |2016년 9월 13일 |2016년 12월 16일 |TBD |
-|~~WA-GUEST-OS-3.41_201607-01~~ |2016년 8월 8일 |2016년 11월 13일 |TBD |
+| WA-GUEST-OS-3.60_201804-01 |2018년 5월 4일 |Post 3.62 |TBD |
+| WA-GUEST-OS-3.59_201803-01 |2018년 4월 6일 |게시물 3.61 |TBD |
+|~~WA-GUEST-OS-3.58_201802-01~~ |2018년 3월 19일 |2018년 5월 4일 |TBD |
+|~~WA-GUEST-OS-3.57_201801-01~~ |2018년 1월 29일 |2018년 4월 6일 |TBD |
+|~~WA-GUEST-OS-3.56_201712-01~~ |2018년 1월 4일 |2018년 3월 19일 |TBD |
+|~~WA-GUEST-OS-3.55_201711-01~~ |2017년 12월 14일 |2018년 1월 29일 |TBD |
+|~~WA-GUEST-OS-3.54_201710-02~~ |2017년 11월 8일 |2018년 1월 4일 |TBD |
+|~~WA-GUEST-OS-3.53_201709-01~~ |2017년 10월 6일 |2017년 12월 14일 |TBD |
+|~~WA-GUEST-OS-3.52_201708-01~~ |2017년 8월 24일 |2017년 12월 14일 |TBD |
+|~~WA-GUEST-OS-3.51_201707-01~~ |2017년 8월 3일 |2017년 11월 8일 |TBD |
+|~~WA-GUEST-OS-3.50_201706-01~~ |2017년 7월 7일 |2017년 10월 6일 |TBD |
+|~~WA-GUEST-OS-3.49_201705-01~~ |2017년 6월 5일 |2017년 8월 24일 |TBD |
+|~~WA-GUEST-OS-3.48_201704-01~~ |2017년 5월 9일 |2017년 8월 3일 |TBD |
 
 
 ## <a name="family-2-releases"></a>제품군 2 릴리스
 **Windows Server 2008 R2 SP1**
 
-.NET 3.5, 4.0, 4.5, 4.5.1, 4.5.2 지원
+설치된 .NET Framework: 3.5, 4.0, 4.5, 4.5.1, 4.5.2
 
 > [!NOTE]
 > *가 표시된 날짜는 변경될 수 있음
@@ -148,18 +170,20 @@ ms.lasthandoff: 07/26/2017
 
 | 구성 문자열 | 릴리스 날짜 | 비활성화 날짜 | 만료 날짜 |
 | --- | --- | --- | --- |
-| WA-GUEST-OS-2.63_201706-01 |2017년 7월 7일 |Post 2.65 |TBD |
-| WA-GUEST-OS-2.62_201705-01 |2017년 6월 5일 |Post 2.64 |TBD |
-| WA-GUEST-OS-2.61_201704-01 |2017년 5월 9일 |Post 2.63 |TBD |
+| WA-GUEST-OS-2.73_201804-01 |2018년 5월 4일 |Post 2.75 |TBD |
+| WA-GUEST-OS-2.72_201803-01 |2018년 4월 6일 |게시물 2.74 |TBD |
+|~~WA-GUEST-OS-2.71_201802-01~~ |2018년 3월 12일 |2018년 5월 4일 |TBD |
+|~~WA-GUEST-OS-2.70_201801-01~~ |2018년 1월 29일 |2018년 4월 6일 |TBD |
+|~~WA-GUEST-OS-2.69_201712-01~~ |2018년 1월 4일 |2018년 3월 12일 |TBD |
+|~~WA-GUEST-OS-2.68_201711-01~~ |2017년 12월 14일 |2018년 1월 29일 |TBD |
+|~~WA-GUEST-OS-2.67_201710-02~~ |2017년 11월 8일 |2018년 1월 4일 |TBD |
+|~~WA-GUEST-OS-2.66_201709-01~~ |2017년 10월 6일 |2017년 12월 14일 |TBD |
+|~~WA-GUEST-OS-2.65_201708-01~~ |2017년 8월 24일 |2017년 12월 14일 |TBD |
+|~~WA-GUEST-OS-2.64_201707-01~~ |2017년 8월 3일 |2017년 11월 8일 |TBD |
+|~~WA-GUEST-OS-2.63_201706-01~~ |2017년 7월 7일 |2017년 10월 6일 |TBD |
+|~~WA-GUEST-OS-2.62_201705-01~~ |2017년 6월 5일 |2017년 8월 24일 |TBD |
+|~~WA-GUEST-OS-2.61_201704-01~~ |2017년 5월 9일 |2017년 8월 3일 |TBD |
 |~~WA-GUEST-OS-2.60_201703-01~~ |2017년 4월 10일 |2017년 7월 7일 |TBD |
-|~~WA-GUEST-OS-2.59_201701-01~~ |2017년 1월 10일 |2017년 6월 5일 |TBD |
-|~~WA-GUEST-OS-2.58_201612-01~~ |2017년 1월 10일 |2017년 5월 9일|TBD |
-|~~WA-GUEST-OS-2.57_201611-01~~ |2016년 12월 14일 |2017년 4월 10일 |TBD |
-|~~WA-GUEST-OS-2.56_201610-02~~ |2016년 11월 16일 |2017년 2월 10일 |TBD |
-|~~WA-GUEST-OS-2.55_201609-01~~ |2016년 10월 13일 |2017년 1월 14일 |TBD |
-|~~WA-GUEST-OS-2.54_201608-01~~ |2016년 9월 13일 |2016년 12월 16일 |TBD |
-|~~WA-GUEST-OS-2.53_201607-01~~ |2016년 8월 8일 |2016년 11월 13일 |TBD |
-
 
 
 ## <a name="msrc-patch-updates"></a>MSRC 패치 업데이트
@@ -204,7 +228,7 @@ ms.lasthandoff: 07/26/2017
 게스트 OS에 대한 구성에는 문자열에서 보여주는 MSRC 패치가 해당 릴리스에 대한 것으로 간주된 날짜와 함께 여기에 포함된 동일한 정보가 있습니다. 이 예에서는 Windows Server 2008 R2에 대한 MSRC 패치가 생성되며 2012년 8월포함이 고려되었습니다. 특히 해당 버전의 Windows Server에 적용되는 패치만 포함됩니다. 예를 들어 MSRC 패치가 Microsoft office에 적용되는 경우, 해당 제품이 Windows Server 기본 이미지의 일부가 아니므로 포함되지 않습니다.
 
 ## <a name="guest-os-system-update-process"></a>게스트 OS 시스템 업데이트 프로세스
-이 페이지에 예정된 게스트 OS 릴리스에 대한 정보가 포함됩니다. "자동" 업데이트로 설정된 경우 해당 클라우드 서비스 역할이 다시 부팅되기때문에 릴리스가 발생하는 시기를 알고 싶어하는지 표시합니다. 게스트 OS 릴리스는 매달 두째 주 화요일에 발생하는 MSRC 업데이트 릴리스 5일 후에 발생합니다. 새 릴리스는 각 게스트 OS 제품군에 대 한 모든 관련 MSRC 패치를 포함합니다.
+이 페이지에 예정된 게스트 OS 릴리스에 대한 정보가 포함됩니다. "자동" 업데이트로 설정된 경우 해당 클라우드 서비스 역할이 다시 부팅되기때문에 릴리스가 발생하는 시기를 알고 싶어하는지 표시합니다. 게스트 OS 릴리스는 매달 두째 주 화요일에 발생하는 MSRC 업데이트 릴리스 5일 후에 발생합니다. 새 릴리스는 각 게스트 OS 제품군에 대한 모든 관련 MSRC 패치를 포함합니다.
 
 Microsoft Azure는 지속적으로 업데이트를 릴리스하고 있습니다. 이러한 업데이트로 게스트 OS가 파이프라인에서 유일합니다. 릴리스는 다양한 요인에 의해 영향을 받을 수 있어 나열할 수 없습니다. 또한 Azure는 수백 대의 컴퓨터에서 실행 됩니다. 역할이 다시 부팅 되는 정확한 날짜와 시간을 제공할 수 있다는 것을 의미합니다. 제한 또는 시간 재부팅에 대한 계획을 설정하고 있습니다.
 
@@ -217,8 +241,9 @@ Microsoft Azure는 지속적으로 업데이트를 릴리스하고 있습니다.
 ## <a name="guest-os-supportability-and-retirement-policy"></a>게스트 OS 지원 가능성 및 사용 중지 정책
 게스트 OS 지원 가능성 및 사용 중지 정책은 [여기][retirepolicy]에 설명됩니다.
 
-[Install .NET on a Cloud Service Role]: https://azure.microsoft.com/en-us/documentation/articles/cloud-services-dotnet-install-dotnet/?WT.mc_id=azurebg_email_Trans_963_RevisedNET_Update
-[Azure Guest OS Update Settings]: cloud-services-how-to-configure.md
+[게스트 OS 업데이트 RSS 피드]: https://raw.githubusercontent.com/MicrosoftDocs/azure-cloud-services-files/master/GuestOS/GuestOSFeed.xml
+[Install .NET on a Cloud Service Role]: https://azure.microsoft.com/documentation/articles/cloud-services-dotnet-install-dotnet/?WT.mc_id=azurebg_email_Trans_963_RevisedNET_Update
+[Azure Guest OS Update Settings]: cloud-services-how-to-configure-portal.md
 [ssl3 announcement]: http://azure.microsoft.com/blog/2014/12/09/azure-security-ssl-3-0-update/
 [Microsoft Security Advisory 3009008]: https://technet.microsoft.com/library/security/3009008.aspx
 [ssl3-fixit]: http://go.microsoft.com/?linkid=9863266
@@ -235,5 +260,4 @@ Microsoft Azure는 지속적으로 업데이트를 릴리스하고 있습니다.
 [patches]: cloud-services-guestos-msrc-releases.md
 [retirepolicy]: cloud-services-guestos-retirement-policy.md
 [fam1retire]: cloud-services-guestos-family1-retirement.md
-[수정 사항]: https://technet.microsoft.com/en-us/library/security/ms17-010.aspx
-
+[fix]: https://technet.microsoft.com/library/security/ms17-010.aspx

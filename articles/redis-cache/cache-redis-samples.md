@@ -3,8 +3,8 @@ title: "Azure Redis Cache 샘플 | Microsoft Docs"
 description: "Azure Redis Cache를 사용하는 방법을 알아봅니다."
 services: redis-cache
 documentationcenter: 
-author: steved0x
-manager: douge
+author: wesmc7777
+manager: cfowler
 editor: 
 ms.assetid: 1f8d210c-ee09-4fe2-b63f-1e69246a27d8
 ms.service: cache
@@ -13,14 +13,12 @@ ms.tgt_pltfrm: cache-redis
 ms.devlang: multiple
 ms.topic: article
 ms.date: 01/23/2017
-ms.author: sdanie
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c885edd7064f7ee3c9907e6b938d826e181dcae5
-ms.openlocfilehash: 7841fcf0b5f4dcb409abf8bfb804c2e03dad6d3a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.author: wesmc
+ms.openlocfilehash: 0b6f89807d3252b750bd5208a7f758a06c9903d6
+ms.sourcegitcommit: 2a70752d0987585d480f374c3e2dba0cd5097880
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="azure-redis-cache-samples"></a>Azure Redis Cache 샘플
 이 항목에서는 캐시에 연결, 캐시에서 데이터 읽기 및 쓰기, ASP.NET Redis Cache 공급자 사용과 같은 시나리오를 다루는 Azure Redis Cache 샘플 목록을 제공합니다. 일부 샘플은 다운로드 가능한 프로젝트이고, 일부 샘플은 단계별 지침을 제공하며 코드 조각을 포함하지만 다운로드 가능한 프로젝트에 연결되지 않습니다.
@@ -63,12 +61,11 @@ ms.lasthandoff: 07/06/2017
 [Azure Management Libraries를 사용하여 Azure Redis Cache 관리](https://github.com/rustd/RedisSamples/tree/master/ManageCacheUsingMAML) 샘플은 Azure Management Libraries를 사용하여 캐시를 관리(만들기/업데이트/삭제)하는 방법을 보여 줍니다. 
 
 ## <a name="custom-monitoring-sample"></a>사용자 지정 모니터링 샘플
-[Redis Cache 모니터링 데이터 액세스](https://github.com/rustd/RedisSamples/tree/master/CustomMonitoring) 샘플은 Azure 포털 외부에서 Azure Redis Cache에 대한 모니터링 데이터에 액세스하는 방법을 보여 줍니다.
+[Redis Cache 모니터링 데이터 액세스](https://github.com/rustd/RedisSamples/tree/master/CustomMonitoring) 샘플은 Azure Portal 외부에서 Azure Redis Cache에 대한 모니터링 데이터에 액세스하는 방법을 보여 줍니다.
 
 ## <a name="a-twitter-style-clone-written-using-php-and-redis"></a>PHP 및 Redis를 사용하여 작성된 Twitter 스타일 클론
 [Retwis](https://github.com/SyntaxC4-MSFT/retwis) 샘플은 Redis Hello World입니다. Redis 및 PHP를 사용하여 작성된 최소 Twitter 스타일 소셜 네트워크 클론으로, [Predis](https://github.com/nrk/predis) 클라이언트를 사용합니다. 소스 코드는 매우 간단하며 동시에 서로 다른 Redis 데이터 구조를 보여주도록 설계되었습니다.
 
 ## <a name="bandwidth-monitor"></a>대역폭 모니터
 [대역폭 모니터](https://github.com/JonCole/SampleCode/tree/master/BandWidthMonitor) 샘플을 사용하면 클라이언트에서 사용 되는 대역폭을 모니터링할 수 있습니다. 대역폭을 측정하려면 캐시 클라이언트 컴퓨터에서 샘플을 실행하고, 캐시를 호출하고, 대역폭 모니터 샘플에서 보고하는 대역폭을 관찰합니다.
-
 

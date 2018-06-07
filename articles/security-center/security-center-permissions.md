@@ -1,12 +1,12 @@
 ---
-title: "Azure Security Center의 권한 | Microsoft Docs"
-description: "이 문서는 Azure Security Center가 역할 기반 액세스 제어를 사용하여 사용자에게 권한을 할당하는 방법과 각 역할에 대해 허용된 작업을 식별하는 방법에 대해 설명합니다."
+title: Azure Security Center의 권한 | Microsoft Docs
+description: 이 문서는 Azure Security Center가 역할 기반 액세스 제어를 사용하여 사용자에게 권한을 할당하는 방법과 각 역할에 대해 허용된 작업을 식별하는 방법에 대해 설명합니다.
 services: security-center
 cloud: na
 documentationcenter: na
 author: TerryLanfear
 manager: MBaldwin
-ms.assetid: 
+ms.assetid: ''
 ms.service: security-center
 ms.workload: na
 ms.tgt_pltfrm: na
@@ -14,18 +14,15 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/13/2017
 ms.author: terrylan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: db18dd24a1d10a836d07c3ab1925a8e59371051f
-ms.openlocfilehash: 0aaa99dda44d2020afd3e841e84020eb4ff87a85
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/15/2017
-
-
+ms.openlocfilehash: f85f49bd54eacbca67143b35eaf555cfb744a41d
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-
 # <a name="permissions-in-azure-security-center"></a>Azure Security Center의 권한
 
-Azure Security Center는 Azure에서 사용자, 그룹 및 서비스에 [기본 제공 역할](../active-directory/role-based-access-built-in-roles.md)을 제공하는 [RBAC(역할 기반 액세스 제어)](../active-directory/role-based-access-control-configure.md)를 사용합니다.
+Azure Security Center는 Azure에서 사용자, 그룹 및 서비스에 [기본 제공 역할](../role-based-access-control/built-in-roles.md)을 제공하는 [RBAC(역할 기반 Access Control)](../role-based-access-control/role-assignments-portal.md)를 사용합니다.
 
 Security Center는 리소스 구성을 평가하여 보안 문제 및 취약성을 식별합니다. Security Center에서는 리소스가 속한 구독이나 리소스 그룹에 대한 소유자, 참가자 또는 독자 역할을 할당 받을 때 리소스와 관련된 항목만 볼 수 있습니다.
 
@@ -66,4 +63,3 @@ Security Center는 리소스 구성을 평가하여 보안 문제 및 취약성�
 - [Azure 리소스의 보안 상태 모니터링](security-center-monitoring.md)
 - [Security Center에서 보안 경고 관리 및 응답](security-center-managing-and-responding-alerts.md)
 - [파트너 보안 솔루션 모니터링](security-center-partner-solutions.md)
-

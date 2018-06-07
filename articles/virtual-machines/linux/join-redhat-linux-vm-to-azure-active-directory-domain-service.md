@@ -1,12 +1,12 @@
 ---
-title: "Azure Active Directory DS에 RedHat Linux VM 조인 | Microsoft Docs"
-description: "Azure Active Directory Domain Service에 기존 RedHat Enterprise Linux 7 VM을 조인하는 방법입니다."
+title: Azure Active Directory DS에 RedHat Linux VM 조인 | Microsoft Docs
+description: Azure Active Directory Domain Service에 기존 RedHat Enterprise Linux 7 VM을 조인하는 방법입니다.
 services: virtual-machines-linux
 documentationcenter: virtual-machines-linux
 author: vlivech
-manager: timlt
-editor: 
-ms.assetid: 
+manager: jeconnoc
+editor: ''
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.devlang: NA
 ms.topic: article
@@ -14,14 +14,12 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 12/14/2016
 ms.author: v-livech
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: c5a4ef1cf76dc843edf1ac7801f2e655b1847c0b
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: 68971372a3c9d9671ccad43db8d7b543d286fc7a
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-
 # <a name="join-a-redhat-linux-vm-to-an-azure-active-directory-domain-service"></a>Azure Active Directory Domain Service에 RedHat Linux VM 조인
 
 이 문서에서는 Red Hat Enterprise Linux(RHEL) 7 가상 컴퓨터를 AADDS(Azure Active Directory Domain Services) 관리되는 도메인에 조인하는 방법을 보여 줍니다.  요구 사항은 다음과 같습니다.
@@ -79,7 +77,7 @@ sudo yum update
 sudo yum -y install realmd sssd krb5-workstation krb5-libs
 ```
 
-이제 필요한 패키지를 Linux 가상 컴퓨터에 설치했고 다음 작업은 가상 컴퓨터를 관리되는 도메인에 가입하는 것입니다.
+이제 필요한 패키지를 Linux 가상 머신에 설치했고 다음 작업은 가상 머신을 관리되는 도메인에 가입하는 것입니다.
 
 ### <a name="discover-the-aad-domain-services-managed-domain"></a>AAD Domain Services 관리되는 도메인 검색
 
@@ -110,6 +108,5 @@ ssh -l ahmet@mydomain.com mydomain.cloudapp.net
 ## <a name="next-steps"></a>다음 단계
 
 * [Azure에서 주문형 Red Hat Enterprise Linux VM에 대한 RHUI(Red Hat Update Infrastructure)](update-infrastructure-redhat.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-* [Azure Resource Manager에서 가상 컴퓨터에 대한 Key Vault 설정](key-vault-setup.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-* [Azure Resource Manager 템플릿 및 Azure CLI를 사용하여 가상 컴퓨터 배포 및 관리](../windows/cli-deploy-templates.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-
+* [Azure Resource Manager에서 가상 머신에 대한 Key Vault 설정](key-vault-setup.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+* [Azure Resource Manager 템플릿 및 Azure CLI를 사용하여 가상 머신 배포 및 관리](../linux/create-ssh-secured-vm-from-template.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)

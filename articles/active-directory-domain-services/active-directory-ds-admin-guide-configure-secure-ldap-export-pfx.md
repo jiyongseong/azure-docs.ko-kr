@@ -4,7 +4,7 @@ description: "Azure AD 도메인 서비스 관리되는 도메인에 대해 보�
 services: active-directory-ds
 documentationcenter: 
 author: mahesh-unnikrishnan
-manager: stevenpo
+manager: mtillman
 editor: curtand
 ms.assetid: c6da94b6-4328-4230-801a-4b646055d4d7
 ms.service: active-directory-ds
@@ -14,13 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/30/2017
 ms.author: maheshu
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 5d46f376d46b8bbf3f93de57a7d4e31abdbcdb2f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 4d495fcef89a68ca544100dcea8e6c55d4709ae0
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="configure-secure-ldap-ldaps-for-an-azure-ad-domain-services-managed-domain"></a>Azure AD Domain Services 관리되는 도메인에 대해 보안 LDAP(LDAPS) 구성
 
@@ -52,7 +50,7 @@ LDAPS 인증서를 .PFX 파일로 내보내려면 다음 단계를 수행합니�
 7. **스냅인 추가/제거** 대화 상자에서 **확인**을 클릭하고 인증서 스냅인을 MMC에 추가합니다.
 
     ![MMC에 인증서 스냅인 추가 - 완료](./media/active-directory-domain-services-admin-guide/secure-ldap-add-certificates-snapin-done.png)
-8. MMC 창에서 **콘솔 루트**를 클릭하여 확장합니다. 인증서 스냅인이 로드되는 것으로 표시됩니다. 확장할 **인증서(로컬 컴퓨터)** 를 클릭합니다. **개인** 노드, **인증서** 노드를 차례로 클릭하여 확장합니다.
+8. MMC 창에서 **콘솔 루트**를 클릭하여 확장합니다. 인증서 스냅인이 로드되는 것으로 표시됩니다. 확장할 **인증서(로컬 컴퓨터)**를 클릭합니다. **개인** 노드, **인증서** 노드를 차례로 클릭하여 확장합니다.
 
     ![개인 인증서 저장소 열기](./media/active-directory-domain-services-admin-guide/secure-ldap-open-personal-store.png)
 9. 앞서 만든 자체 서명된 인증서가 표시됩니다. 인증서의 속성을 검사하여 지문이 인증서를 만들 때 PowerShell 창에 보고된 것과 일치하는지 확인할 수 있습니다.
@@ -96,4 +94,3 @@ LDAPS 인증서를 .PFX 파일로 내보내려면 다음 단계를 수행합니�
 
 ## <a name="next-step"></a>다음 단계
 [작업 3 - 관리되는 도메인에 대해 보안 LDAP를 사용하도록 설정](active-directory-ds-admin-guide-configure-secure-ldap-enable-ldaps.md)
-

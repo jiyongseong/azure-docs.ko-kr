@@ -14,19 +14,17 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 07/03/2017
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
 ms.openlocfilehash: ec8bebf2854e84a37e84b45564e80fc20b63d8d8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="fail-over-to-your-storsimple-cloud-appliance"></a>StorSimple Cloud Appliance로 장애 조치(failover)
 
 ## <a name="overview"></a>개요
 
-이 자습서에서는 재해가 발생하는 경우 StorSimple 8000 시리즈 물리적 장치를 StorSimple Cloud Appliance로 장애 조치(failover)하는 데 필요한 단계를 설명합니다. StorSimple에서는 장치 장애 조치(failover) 기능을 사용하여 데이터 센터의 원본 물리적 장치로부터 Azure에서 실행 중인 클라우드 어플라이언스로 데이터를 마이그레이션합니다. 이 자습서의 지침은 소프트웨어 버전 업데이트 3 이상을 실행하는 StorSimple 8000 시리즈 물리적 장치 및 클라우드 어플라이언스에 적용됩니다.
+이 자습서에서는 재해가 발생하는 경우 StorSimple 8000 시리즈 물리적 장치를 StorSimple Cloud Appliance로 장애 조치(failover)하는 데 필요한 단계를 설명합니다. StorSimple에서는 장치 장애 조치(failover) 기능을 사용하여 데이터 센터의 원본 물리적 장치로부터 Azure에서 실행 중인 클라우드 어플라이언스로 데이터를 마이그레이션합니다. 이 자습서의 지침은 StorSimple 8000 시리즈 물리적 장치 및 소프트웨어 버전 업데이트 3 이상을 실행하는 클라우드 어플라이언스에 적용됩니다.
 
 장치 장애 조치(failover) 및 재해 복구에 사용되는 방법에 대해 자세히 알아보려면 [StorSimple 8000 시리즈 장치에 대한 장애 조치(failover) 및 재해 복구](storsimple-8000-device-failover-disaster-recovery.md)로 이동하세요.
 
@@ -36,7 +34,7 @@ StorSimple 물리적 장치를 다른 물리적 장치로 장애 조치(failover
 
 - 장치 장애 조치(failover)에 대한 고려 사항을 검토했는지 확인하세요. 자세한 내용을 보려면 [장치 장애 조치(failover)에 대한 일반적인 고려 사항](storsimple-8000-device-failover-disaster-recovery.md)으로 이동하세요.
 
-- 만들어진 StorSimple Cloud Appliance가 있어야 하며 이 절차를 실행하기 전에 구성해야 합니다. 업데이트 3 이상의 소프트웨어 버전을 실행하고 있는 경우 DR에 8020 클라우드 어플라이언스 사용을 고려해 보세요. 8020 모델은 64TB이며 Premium Storage를 사용합니다. 자세한 내용을 보려면 [StorSimple Cloud Appliance 배포 및 관리](storsimple-8000-cloud-appliance-u2.md)로 이동하세요.
+- 이 절차를 수행하기에 앞서 StorSimple Cloud Appliance를 먼저 만들고 구성해야 합니다. 업데이트 3 이상의 소프트웨어 버전을 실행하고 있는 경우 DR에 8020 클라우드 어플라이언스 사용을 고려해 보세요. 8020 모델은 64TB이며 Premium Storage를 사용합니다. 자세한 내용을 보려면 [StorSimple Cloud Appliance 배포 및 관리](storsimple-8000-cloud-appliance-u2.md)로 이동하세요.
 
 ## <a name="steps-to-fail-over-to-a-cloud-appliance"></a>클라우드 어플라이언스로 장애 조치(failover)하는 단계
 
@@ -59,7 +57,7 @@ StorSimple 물리적 장치를 다른 물리적 장치로 장애 조치(failover
 
 6. 다른 장치에 장애 조치하려는 모든 볼륨 컨테이너에 이전 단계를 반복합니다.
 
-7. **장치** 블레이드로 이동합니다. 명령 모음에서 **장애 조치(failover)**를 클릭합니다.
+7. **장치** 블레이드로 다시 이동합니다. 명령 모음에서 **장애 조치(failover)**를 클릭합니다.
 
     ![장애 조치(failover) 클릭](./media/storsimple-8000-device-failover-disaster-recovery/failover-cloud-dev8.png)
 8. **장애 조치(failover)** 블레이드에서 다음 단계를 수행합니다.
@@ -96,5 +94,4 @@ StorSimple 물리적 장치를 다른 물리적 장치로 장애 조치(failover
 * 장애 조치(failover)를 수행한 후에 [StorSimple 장치 비활성화 또는 삭제](storsimple-8000-deactivate-and-delete-device.md)를 해야 할 수도 있습니다.
 
 * StorSimple 장치 관리자 서비스를 사용하는 방법에 대한 자세한 내용을 보려면 [Use the StorSimple Device Manager service to administer your StorSimple device](storsimple-8000-manager-service-administration.md)(StorSimple 장치 관리자 서비스를 사용하여 StorSimple 장치 관리)로 이동하세요.
-
 

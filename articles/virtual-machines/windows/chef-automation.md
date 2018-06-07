@@ -1,12 +1,12 @@
 ---
-title: "Chef를 사용하여 Azure 가상 컴퓨터 배포 | Microsoft Docs"
-description: "Chef를 사용하여 자동화된 가상 컴퓨터 배포 및 Microsoft Azure에서 구성하는 방법을 알아봅니다."
+title: Chef를 사용하여 Azure 가상 머신 배포 | Microsoft Docs
+description: Chef를 사용하여 자동화된 가상 머신 배포 및 Microsoft Azure에서 구성하는 방법에 알아봅니다.
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: diegoviso
-manager: timlt
+manager: jeconnoc
 tags: azure-service-management,azure-resource-manager
-editor: 
+editor: ''
 ms.assetid: 0b82ca70-89ed-496d-bb49-c04ae59b4523
 ms.service: virtual-machines-windows
 ms.workload: infrastructure-services
@@ -15,27 +15,25 @@ ms.devlang: na
 ms.topic: article
 ms.date: 05/30/2017
 ms.author: diviso
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 07584294e4ae592a026c0d5890686eaf0b99431f
-ms.openlocfilehash: b6db0fbb4e0de896994954974ddcc39daad9c125
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/02/2017
-
-
+ms.openlocfilehash: 36293c41219a1b42d75850fa66d3c631637bb855
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-# <a name="automating-azure-virtual-machine-deployment-with-chef"></a>Chef를 사용하여 Azure 가상 컴퓨터 배포 자동화
+# <a name="automating-azure-virtual-machine-deployment-with-chef"></a>Chef를 사용하여 Azure 가상 머신 배포 자동화
 [!INCLUDE [learn-about-deployment-models](../../../includes/learn-about-deployment-models-both-include.md)]
 
 Chef는 자동화 및 필요한 상태 구성을 제공하는 유용한 도구입니다.
 
-최신 cloud-api 릴리스에서 Chef는 Azure와의 원활한 통합을 통해 단일 명령으로 구성 상태를 프로비전 및 배포할 수 있는 기능을 제공합니다.
+최신 클라우드 api 릴리스에서 Chef는 Azure와의 원활한 통합을 통해 단일 명령으로 구성 상태를 프로비전 및 배포할 수 있는 기능을 제공합니다.
 
-이 문서에서는 Chef 환경을 설정하여 Azure 가상 컴퓨터를 프로비전하는 방법을 보여 주고, 정책 또는 “CookBook”을 만든 다음 이 cookbook을 Azure 가상 컴퓨터에 배포하는 과정을 안내합니다.
+이 문서에서는 Chef 환경을 설정하여 Azure 가상 머신을 프로비전하고, 정책 또는 “CookBook”을 만든 다음 이 cookbook을 Azure 가상 머신에 배포하는 과정을 안내합니다.
 
 시작해 보겠습니다.
 
 ## <a name="chef-basics"></a>Chef 기본 사항
-시작하기 전에 Chef의 기본 개념을 검토해야 합니다. 훌륭한 자료가 <a href="http://www.chef.io/chef" target="_blank">여기</a> 에 있으니 연습에 앞서 빠르게 읽어 보시기 바랍니다. 하지만 시작하기 전에 기본 사항을 요약해 드릴 것입니다.
+시작하기 전에 [Chef의 기본 개념을 검토](http://www.chef.io/chef)하세요. 
 
 다음 다이어그램에 대략적인 Chef 아키텍처가 나와 있습니다.
 
@@ -47,7 +45,7 @@ Chef Server는 관리 지점이며, 호스트 솔루션과 온-프레미스 솔�
 
 Chef Client(노드)는 관리 중인 서버에 있는 에이전트입니다.
 
-Chef Workstation은 정책을 만들고 관리 명령을 실행하는 관리 워크스테이션입니다. Chef 워크스테이션에서 **knife** 명령을 실행하여 인프라를 관리합니다.
+Chef Workstation은 정책을 만들고 관리 명령을 실행하는 관리 워크스테이션입니다. Chef Workstation에서 **knife** 명령을 실행하여 인프라를 관리합니다.
 
 “Cookbook” 및 “Recipe” 개념도 있습니다. 이는 우리가 정의하고 서버에 적용하는 효과적인 정책입니다.
 
@@ -60,8 +58,7 @@ Chef Workstation은 정책을 만들고 관리 명령을 실행하는 관리 워
 
 이제 Chef가 Azure 구독과 통신할 수 있도록 Azure 설정 파일을 다운로드해야 합니다.
 
-<!--Download your publish settings from [here](https://manage.windowsazure.com/publishsettings/).-->
-PowerShell Azure [Get-AzurePublishSettingsFile](https://docs.microsoft.com/en-us/powershell/module/azure/get-azurepublishsettingsfile?view=azuresmps-4.0.0) 명령을 사용하여 게시 설정을 다운로드합니다. 
+PowerShell Azure [Get-AzurePublishSettingsFile](https://docs.microsoft.com/powershell/module/azure/get-azurepublishsettingsfile?view=azuresmps-4.0.0) 명령을 사용하여 게시 설정을 다운로드합니다. 
 
 게시 설정 파일을 C:\chef에 저장합니다.
 
@@ -155,7 +152,7 @@ C:\Chef 디렉터리에서 다음 명령을 실행합니다.
 
     chef generate cookbook webserver
 
-C:\Chef\cookbooks\webserver 디렉터리 아래에 파일 집합이 생성됩니다. 이제 관리되는 가상 컴퓨터에서 Chef 클라이언트를 실행할 명령 집합을 정의해야 합니다.
+C:\Chef\cookbooks\webserver 디렉터리 아래에 파일 집합이 생성됩니다. 이제 관리되는 가상 머신에서 Chef 클라이언트를 실행할 명령 집합을 정의해야 합니다.
 
 명령은 default.rb 파일에 저장되어 있습니다. 이 파일에서 IIS를 설치하고, IIS를 시작하며, 템플릿 파일을 wwwroot 폴더에 복사하는 명령 집합을 정의합니다.
 
@@ -193,8 +190,8 @@ C:\chef\cookbooks\webserver\recipes\default.rb를 수정하고 다음 줄을 추
 
 ![][9]
 
-## <a name="deploy-a-virtual-machine-with-knife-azure"></a>Knife Azure를 사용하여 가상 컴퓨터 배포
-이제 Azure 가상 컴퓨터를 배포하고 IIS 웹 서비스 및 기본 웹 페이지를 설치할 “Webserver” Cookbook을 적용합니다.
+## <a name="deploy-a-virtual-machine-with-knife-azure"></a>Knife Azure를 사용하여 가상 머신 배포
+이제 Azure 가상 머신을 배포하고 IIS 웹 서비스 및 기본 웹 페이지를 설치할 “Webserver” Cookbook을 적용합니다.
 
 이 작업을 수행하려면 **knife azure server create** 명령을 사용합니다.
 
@@ -242,4 +239,3 @@ C:\chef\cookbooks\webserver\recipes\default.rb를 수정하고 다음 줄을 추
 
 
 <!--Link references-->
-

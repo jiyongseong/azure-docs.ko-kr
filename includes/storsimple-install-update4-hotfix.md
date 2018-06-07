@@ -1,4 +1,4 @@
-<!--author=alkohli last changed: 02/10/17-->
+<!--author=alkohli last changed: 01/23/18-->
 
 #### <a name="to-download-hotfixes"></a>핫픽스를 다운로드하려면
 
@@ -27,7 +27,7 @@ Microsoft 업데이트 카탈로그에서 소프트웨어 업데이트를 다운
 
 일반 모드 핫픽스를 설치 및 확인하려면 다음 단계를 수행합니다. 이미 Azure 클래식 포털을 사용하여 설치한 경우 [유지 관리 모드 핫픽스 설치 및 확인](#to-install-and-verify-maintenance-mode-hotfixes)으로 건너뜁니다.
 
-1. 핫픽스를 설치하려면 StorSimple 장치 직렬 콘솔에서 Windows PowerShell 인터페이스에 액세스합니다. [PuTTy를 사용하여 직렬 콘솔에 연결](../articles/storsimple/storsimple-deployment-walkthrough.md#use-putty-to-connect-to-the-device-serial-console)에서 자세한 지침을 따르세요. 명령 프롬프트에서 **Enter**키를 누릅니다.
+1. 핫픽스를 설치하려면 StorSimple 장치 직렬 콘솔에서 Windows PowerShell 인터페이스에 액세스합니다. [PuTTy를 사용하여 직렬 콘솔에 연결](../articles/storsimple/storsimple-8000-deployment-walkthrough-u2.md#use-putty-to-connect-to-the-device-serial-console)에서 자세한 지침을 따르세요. 명령 프롬프트에서 **Enter**키를 누릅니다.
 2. **옵션 1** 을 선택하여 모든 권한으로 장치에 로그온합니다. 먼저 수동 컨트롤러에 핫픽스를 설치하는 것이 좋습니다.
 3. 핫픽스를 설치하려면 명령 프롬프트에 다음을 입력합니다.
    

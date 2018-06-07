@@ -3,7 +3,7 @@ title: "Azure API Management 개발자 포털 템플릿 | Microsoft Docs"
 description: "Azure API Management에서 템플릿 집합을 사용하여 개발자 포털 페이지의 콘텐츠를 사용자 지정하는 방법에 대해 알아봅니다."
 services: api-management
 documentationcenter: 
-author: miaojiang
+author: vladvino
 manager: erikre
 editor: 
 ms.assetid: 5189f3d8-2a4c-4dc8-ab19-11c7df0114d4
@@ -12,22 +12,21 @@ ms.workload: mobile
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 01/09/2017
+ms.date: 11/19/2017
 ms.author: apimpm
-translationtype: Human Translation
-ms.sourcegitcommit: 77fd7b5b339a8ede8a297bec96f91f0a243cc18d
-ms.openlocfilehash: 090f724c3ea569d226622c7d57fec74549260f4e
-
+ms.openlocfilehash: 540e9804d2ee84c050531f5287d4c4b8922ae999
+ms.sourcegitcommit: b854df4fc66c73ba1dd141740a2b348de3e1e028
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/04/2017
 ---
-# <a name="azure-api-management-developer-portal-templates"></a>Azure API Management 개발자 포털 템플릿
+# <a name="developer-portal-templates"></a>개발자 포털 템플릿
+
 Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사용하여 개발자 포털 페이지의 콘텐츠를 사용자 지정하는 기능을 제공합니다. 이러한 템플릿에서 [DotLiquid](http://dotliquidmarkup.org/) 구문 및 [DotLiquid for Designers](https://github.com/dotliquid/dotliquid/wiki/DotLiquid-for-Designers) 및 제공된 지역화 [String 리소스](api-management-template-resources.md#strings), [Glyph 리소스](api-management-template-resources.md#glyphs) 및 [Page 컨트롤](api-management-page-controls.md)의 집합과 같은 선택한 편집기를 사용하여 필요에 따라 페이지 콘텐츠를 유연하게 구성할 수 있습니다.  
   
- 템플릿 작업에 대한 자세한 내용은 [템플릿을 사용하여 API Management 개발자 포털을 사용자 지정하는 방법](api-management-developer-portal-templates.md)을 참조하세요.  
+템플릿 작업에 대한 자세한 내용은 [템플릿을 사용하여 API Management 개발자 포털을 사용자 지정하는 방법](api-management-developer-portal-templates.md)을 참조하세요.  
 
-
-
-  
-##  <a name="a-namedeveloperportaltemplatesa-developer-portal-templates"></a><a name="DeveloperPortalTemplates"></a> 개발자 포털 템플릿  
+##  <a name="DeveloperPortalTemplates"></a> 개발자 포털 템플릿  
   
 -   [API](api-management-api-templates.md)  
     -   [API 목록](api-management-api-templates.md#APIList)  
@@ -59,14 +58,9 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
     -   [등록](api-management-page-templates.md#SignUp)  
     -   [페이지를 찾을 수 없음](api-management-page-templates.md#PageNotFound)
 
-
 ## <a name="next-steps"></a>다음 단계  
--   [템플릿 참조](api-management-developer-portal-templates-reference.md)  
--   [데이터 모델 참조](api-management-template-data-model-reference.md)  
--   [페이지 컨트롤](api-management-page-controls.md)  
--   [템플릿 리소스](api-management-template-resources.md)
 
-
-<!--HONumber=Jan17_HO2-->
-
-
++ [템플릿 참조](api-management-developer-portal-templates-reference.md)  
++ [데이터 모델 참조](api-management-template-data-model-reference.md)  
++ [페이지 컨트롤](api-management-page-controls.md)  
++ [템플릿 리소스](api-management-template-resources.md)

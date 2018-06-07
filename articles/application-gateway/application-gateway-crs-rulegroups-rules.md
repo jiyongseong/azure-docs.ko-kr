@@ -1,56 +1,31 @@
 ---
-title: "Azure Application Gateway 웹 응용 프로그램 방화벽 CRS 규칙 그룹 및 규칙 | Microsoft Docs"
-description: "이 페이지는 웹 응용 프로그램 방화벽 CRS 규칙 그룹 및 규칙에 대한 정보를 제공합니다."
+title: Azure Application Gateway의 웹 응용 프로그램 방화벽 CRS 규칙 그룹 및 규칙
+description: 이 페이지는 웹 응용 프로그램 방화벽 CRS 규칙 그룹 및 규칙에 대한 정보를 제공합니다.
 documentationcenter: na
 services: application-gateway
-author: georgewallace
-manager: timlt
-editor: tysonn
-ms.assetid: e5ea5cf9-3b41-4b85-a12c-e758bff7f3ec
+author: vhorne
 ms.service: application-gateway
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
-ms.custom: 
+ms.custom: ''
 ms.workload: infrastructure-services
-ms.date: 03/28/2017
-ms.author: gwallace
-translationtype: Human Translation
-ms.sourcegitcommit: 432752c895fca3721e78fb6eb17b5a3e5c4ca495
-ms.openlocfilehash: 9f4445b7ceb5b39c7907b1ca4c7bf0ad52ba8212
-ms.lasthandoff: 03/30/2017
-
-
+ms.date: 4/16/2018
+ms.author: victorh
+ms.openlocfilehash: 5ba291eaa93a48e3aadc11b1f0f7b48b01683b07
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
-
 # <a name="list-of-web-application-firewall-crs-rule-groups-and-rules-offered"></a>제공되는 웹 응용 프로그램 방화벽 CRS 규칙 그룹 및 규칙 목록
 
 Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취약점 및 악용 사례로부터 웹 응용 프로그램을 보호합니다. 이러한 보호는 OWASP 핵심 규칙 집합 2.2.9 또는 3.0을 기반으로 정의된 규칙을 통해 수행됩니다. 이러한 규칙은 규칙별로 해제할 수 있습니다. 이 문서에는 현재 제공되는 규칙 및 규칙 집합이 포함되어 있습니다.
 
-다음 테이블은 웹 응용 프로그램 방화벽에 Application Gateway를 사용할 때 제공되는 규칙 그룹 및 규칙입니다.  각 테이블은 특정 CRS 버전의 규칙 그룹에서 찾을 수 있는 규칙을 나타냅니다.
+다음 테이블은 Application Gateway를 웹 응용 프로그램 방화벽과 사용할 때 제공되는 규칙 그룹 및 규칙입니다.  각 테이블은 특정 CRS 버전의 규칙 그룹에서 찾을 수 있는 규칙을 나타냅니다.
 
-##<a name="owasp30"></a> OWASP_3.0
+## <a name="owasp30"></a> OWASP_3.0
 
-### <a name="crs910"></a>  <p x-ms-format-detection="none">REQUEST-910-IP-REPUTATION</p>
-
-|RuleId|설명|
-|---|---|
-|910011|규칙 910011|
-|910012|규칙 910012|
-|910000|알려진 악의적인 클라이언트의 요청(이전 트래픽 위반 기준).|
-|910100|클라이언트 IP의 위치가 고위험 국가입니다.|
-|910120|규칙 910120|
-|910130|규칙 910130|
-|910150|검색 엔진 IP에 대한 HTTP 블랙리스트 일치|
-|910160|스팸 메일을 보내는 IP에 대한 HTTP 블랙리스트 일치|
-|910170|의심스러운 IP에 대한 HTTP 블랙리스트 일치|
-|910180|하베스터 IP에 대한 HTTP 블랙리스트 일치|
-|910013|규칙 910013|
-|910014|규칙 910014|
-|910015|규칙 910015|
-|910016|규칙 910016|
-|910017|규칙 910017|
-|910018|규칙 910018|
 
 ### <a name="crs911"></a> <p x-ms-format-detection="none">REQUEST-911-METHOD-ENFORCEMENT</p>
 
@@ -66,26 +41,6 @@ Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취�
 |911017|규칙 911017|
 |911018|규칙 911018|
 
-### <a name="crs912"></a> <p x-ms-format-detection="none">REQUEST-912-DOS-PROTECTION</p>
-
-|RuleId|설명|
-|---|---|
-|912100|규칙 912100|
-|912012|규칙 912012|
-|912120|%@{tx.real_ip}에서 DoS(서비스 거부) 공격이 식별됨(마지막 경고 이후 %@{tx.dos_block_counter} 적중)|
-|912130|규칙 912130|
-|912140|규칙 912140|
-|912150|규칙 912150|
-|912160|규칙 912160|
-|912170|%@{tx.real_ip}에서 DoS(서비스 거부) 공격 가능성 - 요청 급증 수 = %@{ip.dos_burst_counter}|
-|912013|규칙 912013|
-|912014|규칙 912014|
-|912019|규칙 912019|
-|912171|%@{tx.real_ip}에서 DoS(서비스 거부) 공격 가능성 - 요청 급증 수 = %@{ip.dos_burst_counter}|
-|912015|규칙 912015|
-|912016|규칙 912016|
-|912017|규칙 912017|
-|912018|규칙 912018|
 
 ### <a name="crs913"></a> <p x-ms-format-detection="none">REQUEST-913-SCANNER-DETECTION</p>
 
@@ -113,23 +68,23 @@ Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취�
 |920012|규칙 920012|
 |920100|잘못된 HTTP 요청 줄|
 |920130|요청 본문을 구문 분석하지 못했습니다.|
-|920140|다중 파트 본문의 엄격한 유효성 검사 실패 =     PE %@{REQBODY_PROCESSOR_ERROR}     BQ %@{MULTIPART_BOUNDARY_QUOTED}     BW %@{MULTIPART_BOUNDARY_WHITESPACE}     DB %@{MULTIPART_DATA_BEFORE}     DA %@{MULTIPART_DATA_AFTER}     HF %@{MULTIPART_HEADER_FOLDING}     LF %@{MULTIPART_LF_LINE}     SM %@{MULTIPART_SEMICOLON_MISSING}     IQ %@{MULTIPART_INVALID_QUOTING}     IH %@{MULTIPART_INVALID_HEADER_FOLDING}     FLE %@{MULTIPART_FILE_LIMIT_EXCEEDED}|
+|920140|다중 파트 요청 본문의 엄격한 유효성 검사 실패 =     PE %@{REQBODY_PROCESSOR_ERROR}     BQ %@{MULTIPART_BOUNDARY_QUOTED}     BW %@{MULTIPART_BOUNDARY_WHITESPACE}     DB %@{MULTIPART_DATA_BEFORE}     DA %@{MULTIPART_DATA_AFTER}     HF %@{MULTIPART_HEADER_FOLDING}     LF %@{MULTIPART_LF_LINE}     SM %@{MULTIPART_SEMICOLON_MISSING}     IQ %@{MULTIPART_INVALID_QUOTING}     IH %@{MULTIPART_INVALID_HEADER_FOLDING}     FLE %@{MULTIPART_FILE_LIMIT_EXCEEDED}|
 |920160|콘텐츠-길이 HTTP 헤더가 숫자가 아닙니다.|
-|920170|Body 콘텐츠를 통한 GET 또는 HEAD 요청.|
+|920170|본문 콘텐츠를 통한 GET 또는 HEAD 요청.|
 |920180|POST 요청에 콘텐츠-길이 헤더가 없습니다.|
 |920190|범위 = 마지막 바이트 값이 잘못되었습니다.|
-|920210|여러 개의 연결 헤더 데이터가 충돌합니다.|
-|920220|URL 인코딩 남용 공격 시도|
-|920240|URL 인코딩 남용 공격 시도|
-|920250|UTF8 인코딩 남용 공격 시도|
+|920210|여러 개의 충돌하는 연결 헤더 데이터가 발견되었습니다.|
+|920220|URL Encoding 남용 공격 시도|
+|920240|URL Encoding 남용 공격 시도|
+|920250|UTF8 Encoding 남용 공격 시도|
 |920260|유니코드 전자/반자 남용 공격 시도|
 |920270|요청에 잘못된 문자(null 문자)|
-|920280|호스트 헤더 없는 요청|
+|920280|호스트 헤더가 누락된 요청|
 |920290|빈 호스트 헤더|
 |920310|요청에 빈 Accept 헤더가 있음|
 |920311|요청에 빈 Accept 헤더가 있음|
 |920330|빈 사용자 에이전트 헤더|
-|920340|요청에 콘텐츠가 있기는 하지만 Content-Type 헤더 누락|
+|920340|요청에 콘텐츠는 있지만 Content-Type 헤더 누락|
 |920350|호스트 헤더가 숫자 IP 주소|
 |920380|요청에 인수가 너무 많음|
 |920360|인수 이름이 너무 김|
@@ -137,15 +92,15 @@ Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취�
 |920390|총 인수 크기 초과|
 |920400|업로드된 파일 크기가 너무 큼|
 |920410|업로드된 총 파일 크기가 너무 큼|
-|920420|정책에서 허용하지 않는 요청 콘텐츠 유형|
-|920430|정책에서 허용하지 않는 HTTP 프로토콜 버전|
-|920440|정책에서 제한하는 URL 파일 확장명|
-|920450|정책에서 제한하는 HTTP 헤더(%@{MATCHED_VAR})|
+|920420|요청 콘텐츠 유형이 정책에서 허용되지 않음|
+|920430|HTTP 프로토콜 버전이 정책에서 허용되지 않음|
+|920440|URL 파일 확장명이 정책에서 허용되지 않음|
+|920450|HTTP 헤더가 정책에서 제한됨(%@{MATCHED_VAR})|
 |920013|규칙 920013|
 |920014|규칙 920014|
 |920200|범위 = 필드가 너무 많음(6개 이상)|
-|920201|범위 너무 = pdf 요청에 대한 필드가 너무 많음(35개 이상)|
-|920230|여러 URL 인코딩 발견|
+|920201|범위 = pdf 요청에 대한 필드가 너무 많음(35개 이상)|
+|920230|여러 URL Encoding 감지됨|
 |920300|Accept 헤더가 누락된 요청|
 |920271|요청에 잘못된 문자(인쇄할 수 없는 문자)|
 |920320|사용자 에이전트 헤더 누락|
@@ -165,7 +120,7 @@ Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취�
 |---|---|
 |921011|규칙 921011|
 |921012|규칙 921012|
-|921100|HTTP 요청 밀반입 공격.|
+|921100|HTTP 요청 스머글링 공격.|
 |921110|HTTP 요청 밀반입 공격|
 |921120|HTTP 응답 분할 공격|
 |921130|HTTP 응답 분할 공격|
@@ -188,8 +143,8 @@ Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취�
 |---|---|
 |930011|규칙 930011|
 |930012|규칙 930012|
-|930100|경로 조작 공격(/../)|
-|930110|경로 조작 공격(/../)|
+|930100|경로 탐색 공격(/../)|
+|930110|경로 탐색 공격(/../)|
 |930120|OS 파일 액세스 시도|
 |930130|제한된 파일 액세스 시도|
 |930013|규칙 930013|
@@ -265,28 +220,28 @@ Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취�
 |---|---|
 |941011|규칙 941011|
 |941012|규칙 941012|
-|941100|libinjection을 통한 XSS 공격 감지|
+|941100|libinjection을 통한 XSS 공격 감지됨|
 |941110|XSS 필터 - 범주 1 = 스크립트 태그 벡터|
 |941130|XSS 필터 - 범주 3 = 특성 벡터|
 |941140|XSS 필터 - 범주 4 = Javascript URI 벡터|
 |941150|XSS 필터 - 범주 5 = 허용되지 않는 HTML 특성|
 |941180|노드 검사기 블랙리스트 키워드|
-|941190|IE XSS 필터 - 공격 감지.|
-|941200|IE XSS 필터 - 공격 감지.|
-|941210|IE XSS 필터 - 공격 감지.|
-|941220|IE XSS 필터 - 공격 감지.|
-|941230|IE XSS 필터 - 공격 감지.|
-|941240|IE XSS 필터 - 공격 감지.|
-|941260|IE XSS 필터 - 공격 감지.|
-|941270|IE XSS 필터 - 공격 감지.|
-|941280|IE XSS 필터 - 공격 감지.|
-|941290|IE XSS 필터 - 공격 감지.|
-|941300|IE XSS 필터 - 공격 감지.|
-|941310|US-ASCII 잘못된 형식의 인코딩 XSS 필터 - 공격 감지됨.|
-|941350|UTF-7 인코딩 IE XSS - 공격 감지됨.|
+|941190|IE XSS 필터 - 공격 감지됨.|
+|941200|IE XSS 필터 - 공격 감지됨.|
+|941210|IE XSS 필터 - 공격 감지됨.|
+|941220|IE XSS 필터 - 공격 감지됨.|
+|941230|IE XSS 필터 - 공격 감지됨.|
+|941240|IE XSS 필터 - 공격 감지됨.|
+|941260|IE XSS 필터 - 공격 감지됨.|
+|941270|IE XSS 필터 - 공격 감지됨.|
+|941280|IE XSS 필터 - 공격 감지됨.|
+|941290|IE XSS 필터 - 공격 감지됨.|
+|941300|IE XSS 필터 - 공격 감지됨.|
+|941310|US-ASCII 잘못된 형식의 Encoding XSS 필터 - 공격 감지됨.|
+|941350|UTF-7 Encoding IE XSS - 공격 감지됨.|
 |941013|규칙 941013|
 |941014|규칙 941014|
-|941320|가능한 XSS 공격 감지 - HTML 태그 처리기|
+|941320|가능한 XSS 공격 감지됨 - HTML 태그 처리기|
 |941015|규칙 941015|
 |941016|규칙 941016|
 |941017|규칙 941017|
@@ -298,13 +253,13 @@ Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취�
 |---|---|
 |942011|규칙 942011|
 |942012|규칙 942012|
-|942100|libinjection을 통한 SQL 삽입 공격 감지|
-|942140|SQL 삽입 공격 = 일반 DB 이름 감지|
-|942160|sleep() 또는 benchmark()를 사용하는 blind sqli 테스트 감지.|
+|942100|libinjection을 통한 SQL 삽입 공격 감지됨|
+|942140|SQL 삽입 공격 = 일반 DB 이름 감지됨|
+|942160|sleep() 또는 benchmark()를 사용하는 블라인드 sqli 테스트 감지.|
 |942170|조건부 쿼리를 포함하여 SQL benchmark 및 sleep 삽입 공격 감지|
 |942230|조건부 SQL 삽입 시도 감지|
 |942270|기본적인 sql 삽입 검색. mysql oracle 및 기타에 대한 일반적인 공격 문자열.|
-|942290|기본적인 MongoDB SQL 삽입 시도 감지|
+|942290|기본적인 MongoDB SQL 삽입 시도 찾기|
 |942320|MySQL 및 PostgreSQL에 저장된 저장 프로시저/함수 삽입 감지|
 |942350|MySQL UDF 삽입 및 기타 데이터/구조 조작 시도 감지|
 |942013|규칙 942013|
@@ -312,7 +267,7 @@ Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취�
 |942150|SQL 삽입 공격|
 |942410|SQL 삽입 공격|
 |942440|SQL 주석 시퀀스가 감지됨.|
-|942450|SQL 16진수 인코딩이 식별됨|
+|942450|SQL 16진수 Encoding이 식별됨|
 |942015|규칙 942015|
 |942016|규칙 942016|
 |942251|HAVING 삽입 감지|
@@ -343,23 +298,23 @@ Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취�
 |RuleId|설명|
 |---|---|
 |960911|잘못된 HTTP 요청 줄|
-|981227|Apache Error = 요청에 잘못된 URI가 있습니다.|
+|981227|Apache 오류 = 요청에 잘못된 URI가 있습니다.|
 |960912|요청 본문을 구문 분석하지 못했습니다.|
-|960914|다중 파트 본문의 엄격한 유효성 검사 실패 =     PE %@{REQBODY_PROCESSOR_ERROR}     BQ %@{MULTIPART_BOUNDARY_QUOTED}     BW %@{MULTIPART_BOUNDARY_WHITESPACE}     DB %@{MULTIPART_DATA_BEFORE}     DA %@{MULTIPART_DATA_AFTER}     HF %@{MULTIPART_HEADER_FOLDING}     LF %@{MULTIPART_LF_LINE}     SM %@{MULTIPART_SEMICOLON_MISSING}     IQ %@{MULTIPART_INVALID_QUOTING}     IH %@{MULTIPART_INVALID_HEADER_FOLDING}     FLE %@{MULTIPART_FILE_LIMIT_EXCEEDED}|
-|960915|다중 파트 파서가 일치하지 않을 수도 있는 경계를 발견했습니다.|
+|960914|다중 파트 요청 본문의 엄격한 유효성 검사 실패 =     PE %@{REQBODY_PROCESSOR_ERROR}     BQ %@{MULTIPART_BOUNDARY_QUOTED}     BW %@{MULTIPART_BOUNDARY_WHITESPACE}     DB %@{MULTIPART_DATA_BEFORE}     DA %@{MULTIPART_DATA_AFTER}     HF %@{MULTIPART_HEADER_FOLDING}     LF %@{MULTIPART_LF_LINE}     SM %@{MULTIPART_SEMICOLON_MISSING}     IQ %@{MULTIPART_INVALID_QUOTING}     IH %@{MULTIPART_INVALID_HEADER_FOLDING}     FLE %@{MULTIPART_FILE_LIMIT_EXCEEDED}|
+|960915|다중 파트 파서가 일치하지 않을 수도 있는 경계를 감지했습니다.|
 |960016|콘텐츠-길이 HTTP 헤더가 숫자가 아닙니다.|
-|960011|Body 콘텐츠를 통한 GET 또는 HEAD 요청.|
+|960011|본문 콘텐츠를 통한 GET 또는 HEAD 요청.|
 |960012|POST 요청에 콘텐츠-길이 헤더가 없습니다.|
-|960902|ID 인코딩 사용이 잘못되었습니다.|
+|960902|ID Encoding 사용이 잘못되었습니다.|
 |960022|HTTP 1.0에는 예상 헤더가 허용되지 않습니다.|
 |960020|Pragma 헤더에는 HTTP/1.1 요청에 대한 캐시-제어 헤더가 필요합니다.|
 |958291|범위 = 필드가 존재하며 0부터 시작합니다.|
 |958230|범위 = 마지막 바이트 값이 잘못되었습니다.|
-|958295|여러 개의 연결 헤더 데이터가 충돌합니다.|
-|950107|URL 인코딩 남용 공격 시도|
-|950109|여러 URL 인코딩 발견|
-|950108|URL 인코딩 남용 공격 시도|
-|950801|UTF8 인코딩 남용 공격 시도|
+|958295|여러 개의 충돌하는 연결 헤더 데이터가 발견되었습니다.|
+|950107|URL Encoding 남용 공격 시도|
+|950109|여러 URL Encoding 감지됨|
+|950108|URL Encoding 남용 공격 시도|
+|950801|UTF8 Encoding 남용 공격 시도|
 |950116|유니코드 전자/반자 남용 공격 시도|
 |960901|요청에 잘못된 문자|
 |960018|요청에 잘못된 문자|
@@ -368,13 +323,13 @@ Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취�
 
 |RuleId|설명|
 |---|---|
-|960008|호스트 헤더 없는 요청|
+|960008|호스트 헤더가 누락된 요청|
 |960007|빈 호스트 헤더|
 |960015|Accept 헤더가 누락된 요청|
 |960021|요청에 빈 Accept 헤더가 있음|
 |960009|요청에 사용자 에이전트 헤더 누락|
 |960006|빈 사용자 에이전트 헤더|
-|960904|요청에 콘텐츠가 있기는 하지만 Content-Type 헤더 누락|
+|960904|요청에 콘텐츠는 있지만 Content-Type 헤더 누락|
 |960017|호스트 헤더가 숫자 IP 주소|
 
 ### <a name="crs23"></a> crs_23_request_limits
@@ -393,10 +348,10 @@ Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취�
 |RuleId|설명|
 |---|---|
 |960032|정책에서 허용하지 않는 메서드|
-|960010|정책에서 허용하지 않는 요청 콘텐츠 유형|
-|960034|정책에서 허용하지 않는 HTTP 프로토콜 버전|
-|960035|정책에서 제한하는 URL 파일 확장명|
-|960038|정책에서 제한하는 HTTP 헤더|
+|960010|요청 콘텐츠 유형이 정책에서 허용되지 않음|
+|960034|HTTP 프로토콜 버전이 정책에서 허용되지 않음|
+|960035|URL 파일 확장명이 정책에서 허용되지 않음|
+|960038|HTTP 헤더가 정책에서 제한됨|
 
 ### <a name="crs35"></a> crs_35_bad_robots
 
@@ -415,9 +370,9 @@ Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취�
 |950008|문서화되지 않은 ColdFusion 태그의 삽입|
 |950010|LDAP 삽입 공격|
 |950011|SSI 삽입 공격|
-|950018|범용 PDF XSS URL을 발견했습니다.|
+|950018|범용 PDF XSS URL을 감지했습니다.|
 |950019|전자 메일 삽입 공격|
-|950012|HTTP 요청 밀반입 공격.|
+|950012|HTTP 요청 스머글링 공격.|
 |950910|HTTP 응답 분할 공격|
 |950911|HTTP 응답 분할 공격|
 |950117|원격 파일 포함 공격|
@@ -441,8 +396,8 @@ Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취�
 |RuleId|설명|
 |---|---|
 |981231|SQL 주석 시퀀스가 감지됨.|
-|981260|SQL 16진수 인코딩이 식별됨|
-|981320|SQL 삽입 공격 = 일반 DB 이름 감지|
+|981260|SQL 16진수 Encoding이 식별됨|
+|981320|SQL 삽입 공격 = 일반 DB 이름 감지됨|
 |981300|규칙 981300|
 |981301|규칙 981301|
 |981302|규칙 981302|
@@ -465,11 +420,11 @@ Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취�
 |950001|SQL 삽입 공격|
 |950908|SQL 삽입 공격.|
 |959073|SQL 삽입 공격|
-|981272|sleep() 또는 benchmark()를 사용하는 blind sqli 테스트 감지.|
+|981272|sleep() 또는 benchmark()를 사용하는 블라인드 sqli 테스트 감지.|
 |981250|조건부 쿼리를 포함하여 SQL benchmark 및 sleep 삽입 공격 감지|
 |981241|조건부 SQL 삽입 시도 감지|
 |981276|기본적인 sql 삽입 검색. mysql oracle 및 기타에 대한 일반적인 공격 문자열.|
-|981270|기본적인 MongoDB SQL 삽입 시도 감지|
+|981270|기본적인 MongoDB SQL 삽입 시도 찾기|
 |981253|MySQL 및 PostgreSQL에 저장된 저장 프로시저/함수 삽입 감지|
 |981251|MySQL UDF 삽입 및 기타 데이터/구조 조작 시도 감지|
 
@@ -548,7 +503,7 @@ Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취�
 |958046|사이트 간 스크립팅(XSS) 공격|
 |958039|사이트 간 스크립팅(XSS) 공격|
 |958003|사이트 간 스크립팅(XSS) 공격|
-|973300|가능한 XSS 공격 감지 - HTML 태그 처리기|
+|973300|가능한 XSS 공격 감지됨 - HTML 태그 처리기|
 |973301|XSS 공격 감지|
 |973302|XSS 공격 감지|
 |973303|XSS 공격 감지|
@@ -561,22 +516,22 @@ Application Gateway WAF(웹 응용 프로그램 방화벽)는 일반적인 취�
 |973311|XSS 공격 감지|
 |973313|XSS 공격 감지|
 |973314|XSS 공격 감지|
-|973331|IE XSS 필터 - 공격 감지.|
-|973315|IE XSS 필터 - 공격 감지.|
-|973330|IE XSS 필터 - 공격 감지.|
-|973327|IE XSS 필터 - 공격 감지.|
-|973326|IE XSS 필터 - 공격 감지.|
-|973346|IE XSS 필터 - 공격 감지.|
-|973345|IE XSS 필터 - 공격 감지.|
-|973324|IE XSS 필터 - 공격 감지.|
-|973323|IE XSS 필터 - 공격 감지.|
-|973348|IE XSS 필터 - 공격 감지.|
-|973321|IE XSS 필터 - 공격 감지.|
-|973320|IE XSS 필터 - 공격 감지.|
-|973318|IE XSS 필터 - 공격 감지.|
-|973317|IE XSS 필터 - 공격 감지.|
-|973329|IE XSS 필터 - 공격 감지.|
-|973328|IE XSS 필터 - 공격 감지.|
+|973331|IE XSS 필터 - 공격 감지됨.|
+|973315|IE XSS 필터 - 공격 감지됨.|
+|973330|IE XSS 필터 - 공격 감지됨.|
+|973327|IE XSS 필터 - 공격 감지됨.|
+|973326|IE XSS 필터 - 공격 감지됨.|
+|973346|IE XSS 필터 - 공격 감지됨.|
+|973345|IE XSS 필터 - 공격 감지됨.|
+|973324|IE XSS 필터 - 공격 감지됨.|
+|973323|IE XSS 필터 - 공격 감지됨.|
+|973348|IE XSS 필터 - 공격 감지됨.|
+|973321|IE XSS 필터 - 공격 감지됨.|
+|973320|IE XSS 필터 - 공격 감지됨.|
+|973318|IE XSS 필터 - 공격 감지됨.|
+|973317|IE XSS 필터 - 공격 감지됨.|
+|973329|IE XSS 필터 - 공격 감지됨.|
+|973328|IE XSS 필터 - 공격 감지됨.|
 
 ### <a name="crs42"></a> crs_42_tight_security
 

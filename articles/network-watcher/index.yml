@@ -1,0 +1,88 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Network Watcher
+metadata:
+  document_id: 
+  title: Network Watcher
+  meta.description: Learn how to use Azure Network Watcher. Quickstarts, tutorials, and more, show you how to gain insight into your Azure Virtual Network with tools like packet capture and NSG flows logs, to diagnose problems with traffic filtering and routing, and to monitor connections.
+  services: network-watcher
+  author: jdial
+  manager: jeconnoc
+  ms.service: virtual-network
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 04/24/2018
+  ms.author: jdial
+  ms.openlocfilehash: 65f301d231a3a5c4da9edfe30f3871bf95a9c02c
+  ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 05/03/2018
+abstract:
+  description: Azure Network Watcher를 사용하는 방법에 대해 알아봅니다. 빠른 시작, 자습서 등은 패킷 캡처 및 NSG 흐름 로그와 같은 도구를 사용하여 Azure Virtual Network에 대한 정보를 얻는 방법, 트래픽 필터링 및 라우팅 관련 문제를 진단하고 연결을 모니터링하는 방법을 보여줍니다.
+sections:
+- title: 5분 빠른 시작
+  items:
+  - type: paragraph
+    text: 가상 머신과의 트래픽 필터링 문제를 진단하는 방법에 대해 알아보세요.
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: ./media/index/portal.svg
+      text: Azure portal
+      href: /azure/network-watcher/diagnose-vm-network-traffic-filtering-problem
+    - image:
+        src: ./media/index/powershell.svg
+      text: Azure PowerShell
+      href: /azure/network-watcher/diagnose-vm-network-traffic-filtering-problem-powershell
+    - image:
+        src: ./media/index/cli.svg
+      text: Azure CLI
+      href: /azure/network-watcher/diagnose-vm-network-traffic-filtering-problem-cli
+- title: 단계별 자습서
+  items:
+  - type: paragraph
+    text: 가상 네트워크의 문제를 진단하는 방법에 알아보세요.
+  - type: list
+    style: ordered
+    items:
+    - html: <a href="/azure/network-watcher/diagnose-vm-network-routing-problem">가상 머신 네트워크 라우팅 문제 진단</a>
+    - html: <a href="/azure/network-watcher/connection-monitor">VM 간 네트워크 통신 모니터</a>
+    - html: <a href="/azure/network-watcher/diagnose-communication-problem-between-networks">네트워크 간 통신 문제 진단</a>
+    - html: <a href="/azure/network-watcher/network-watcher-nsg-flow-logging-portal">VM과 주고 받는 네트워크 트래픽 로깅</a>
+- title: >
+    무료 Pluralsight 동영상 교육
+  items:
+  - type: list
+    style: cards
+    className: cardsFTitle
+    items:
+    - title: Microsoft Azure Networking 구현
+      href: https://app.pluralsight.com/library/courses/microsoft-azure-networking-implementing/table-of-contents
+      image:
+        src: https://docs.microsoft.com/media/logos/logo_pluralsight.svg
+        href: https://app.pluralsight.com/library/courses/microsoft-azure-networking-implementing/table-of-contents
+    - title: Microsoft Azure Networking Solutions 계획 및 설계
+      href: https://app.pluralsight.com/library/courses/planning-designing-microsoft-azure-network-solutions/table-of-contents
+      image:
+        src: https://docs.microsoft.com/media/logos/logo_pluralsight.svg
+        href: https://app.pluralsight.com/library/courses/planning-designing-microsoft-azure-network-solutions/table-of-contents
+    - title: AWS 관리자용 Microsoft Azure 관리
+      href: https://app.pluralsight.com/library/courses/azure-administration-aws-administrators/table-of-contents
+      image:
+        src: https://docs.microsoft.com/media/logos/logo_pluralsight.svg
+        href: https://app.pluralsight.com/library/courses/azure-administration-aws-administrators/table-of-contents
+- title: 참고 자료
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: 명령줄
+      html: <p><a href="/powershell/module/azurerm.network/#network_watcher">PowerShell</a></p><p><a href="/cli/azure/network/watcher">Azure CLI</a></p>
+    - title: 언어
+      html: <p><a href="/dotnet/api/overview/azure/virtual-network">.NET</a></p><p><a href="/java/api/com.microsoft.azure.management.network">Java</a></p><p><a href="/javascript/api/azure-arm-network">Node.js</a></p><p><a href="/python/api/overview/azure/network">Python</a></p>
+    - title: REST (영문)
+      html: <p><a href="/rest/api/network-watcher/">REST API 참조</a></p>

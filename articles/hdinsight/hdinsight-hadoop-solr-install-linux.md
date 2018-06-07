@@ -1,27 +1,25 @@
 ---
-title: "스크립트 작업을 사용하여 Linux 기반 HDInsight에 Solr 설치 - Azure | Microsoft Docs"
-description: "스크립트 작업을 사용하여 Linux 기반 HDInsight Hadoop 클러스터에 Solr를 설치하는 방법에 대해 알아봅니다."
+title: 스크립트 작업을 사용하여 Linux 기반 HDInsight에 Solr 설치 - Azure | Microsoft Docs
+description: 스크립트 작업을 사용하여 Linux 기반 HDInsight Hadoop 클러스터에 Solr를 설치하는 방법에 대해 알아봅니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: Blackmist
-manager: jhubbard
+manager: cgronlun
 editor: cgronlun
 tags: azure-portal
 ms.assetid: cc93ed5c-a358-456a-91a4-f179185c0e98
 ms.service: hdinsight
 ms.custom: hdinsightactive
-ms.workload: big-data
-ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 07/07/2017
+ms.topic: conceptual
+ms.date: 05/16/2018
 ms.author: larryfr
+ms.openlocfilehash: 77d3964dd54d63db58c63b567ebbe7e529473999
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: ad930ca023a36fa5874483873c82fdba11d117c7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
+ms.locfileid: "34201563"
 ---
 # <a name="install-and-use-solr-on-hdinsight-hadoop-clusters"></a>HDInsight Hadoop 클러스터에서 Solr 설치 및 사용
 
@@ -59,7 +57,7 @@ HDInsight 클러스터에서 Solr을 설치하는 샘플 스크립트는 다음 
 
 Solr이 설치된 클러스터를 만들려면 [HDInsight 클러스터 만들기](hdinsight-hadoop-create-linux-clusters-portal.md) 문서의 단계를 사용합니다. 생성 프로세스 중 다음 단계를 사용하여 Solr을 설치합니다.
 
-1. __클러스터 요약__ 블레이드에서 __고급 설정__을 선택한 다음 __스크립트 작업__을 선택합니다. 양식에 다음 정보를 입력합니다.
+1. __클러스터 요약__ 섹션에서 __고급 설정__을 선택한 다음 __스크립트 동작__을 선택합니다. 양식에 다음 정보를 입력합니다.
 
    * **이름**: 스크립트 동작의 이름을 입력합니다.
    * **SCRIPT URI**: https://hdiconfigactions.blob.core.windows.net/linuxsolrconfigactionv01/solr-installer-v01.sh
@@ -68,7 +66,7 @@ Solr이 설치된 클러스터를 만들려면 [HDInsight 클러스터 만들기
    * **ZOOKEEPER**: Zookeeper 노드에 설치하려면 이 옵션을 선택합니다.
    * **PARAMETERS**: 이 필드는 공백으로 둡니다.
 
-2. **스크립트 동작** 블레이드의 아래쪽에서 **선택** 단추를 사용하여 구성을 저장합니다. 마지막으로 **다음** 단추를 사용하여 __클러스터 요약__으로 돌아갑니다.
+2. **스크립트 동작** 섹션의 맨 아래에서 **선택** 단추를 사용하여 구성을 저장합니다. 마지막으로 **다음** 단추를 사용하여 __클러스터 요약__으로 돌아갑니다.
 
 3. __클러스터 요약__ 페이지에서 __생성__을 선택하여 클러스터를 만듭니다.
 
@@ -83,14 +81,17 @@ Solr이 설치된 클러스터를 만들려면 [HDInsight 클러스터 만들기
 
 1. SSH를 사용하여 HDInsight 클러스터에 연결합니다.
 
+    > [!NOTE]
+    > `sshuser`를 클러스터의 SSH 사용자로 바꿉니다. `clustername`을 클러스터의 이름으로 바꿉니다.
+
     ```bash
-    ssh USERNAME@CLUSTERNAME-ssh.azurehdinsight.net
+    ssh sshuser@clustername-ssh.azurehdinsight.net
     ```
 
     자세한 내용은 [HDInsight와 함께 SSH 사용](hdinsight-hadoop-linux-use-ssh-unix.md)을 참조하세요.
 
      > [!IMPORTANT]
-     > 이 문서의 뒷부분에 나오는 단계에서 SSL 터널을 사용하여 Solr 웹 UI에 연결합니다. 이러한 단계를 사용하려면 SSL 터널을 설정하고 브라우저를 구성하여 사용해야 합니다.
+     > 이 문서의 뒷부분에 나오는 단계에서 SSH 터널을 사용하여 Solr 웹 UI에 연결합니다. 이러한 단계를 사용하려면 SSH 터널을 설정하고 브라우저를 구성하여 사용해야 합니다.
      >
      > 자세한 내용은 [HDInsight와 SSH 터널 사용](hdinsight-linux-ambari-ssh-tunnel.md) 문서를 참조하세요.
 
@@ -179,7 +180,7 @@ SSH 터널을 설정하면 다음 단계를 수행하여 Solr 대시보드를 �
 
 1. 기본 헤드 노드의 호스트 이름을 결정합니다.
 
-   1. SSH를 사용하여 클러스터 헤드 노드에 연결합니다. 예: `ssh USERNAME@CLUSTERNAME-ssh.azurehdinsight.net`.
+   1. SSH를 사용하여 클러스터 헤드 노드에 연결합니다. 예: `ssh USERNAME@CLUSTERNAME-ssh.azurehdinsight.net`
 
        SSH를 사용하는 방법에 대한 자세한 내용은 [HDInsight와 함께 SSH 사용](hdinsight-hadoop-linux-use-ssh-unix.md)을 참조하세요.
 
@@ -195,7 +196,7 @@ SSH 터널을 설정하면 다음 단계를 수행하여 Solr 대시보드를 �
 
         반환된 값은 나중에 사용하므로 저장해 둡니다.
 
-2. 브라우저에서 **http://HOSTNAME:8983/solr/#/**에 연결하며, 여기서 **HOSTNAME**은 이전 단계에서 결정한 이름입니다.
+2. 브라우저에서 **http://HOSTNAME:8983/solr/#/** 에 연결하며, 여기서 **HOSTNAME**은 이전 단계에서 결정한 이름입니다.
 
     요청은 SSH 터널을 통해 클러스터의 Solr 웹 UI로 라우팅됩니다. 다음 이미지와 유사한 페이지가 나타납니다.
 
@@ -275,7 +276,7 @@ sudo stop solr
 sudo start solr
 ```
 
-## <a name="backup-indexed-data"></a>인덱싱된 데이터 백업
+## <a name="backup-indexed-data"></a>인덱싱된 데이터 Backup
 
 Solr 데이터를 클러스터의 기본 저장소로 백업하려면 다음 단계를 사용합니다.
 
@@ -320,7 +321,7 @@ Solr 데이터를 클러스터의 기본 저장소로 백업하려면 다음 단
     hdfs dfs -put snapshot.20150806185338855.tgz /example/data
     ```
 
-Solr 백업 및 복원 작업에 대한 자세한 내용은 [https://cwiki.apache.org/confluence/display/solr/Making+and+Restoring+Backups](https://cwiki.apache.org/confluence/display/solr/Making+and+Restoring+Backups)를 참조하세요.
+Solr 백업 및 복원 작업에 대한 자세한 내용은 [https://cwiki.apache.org/confluence/display/solr/Making+and+Restoring+Backups](https://cwiki.apache.org/confluence/display/solr/Making+and+Restoring+Backups)을 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
 
@@ -329,4 +330,3 @@ Solr 백업 및 복원 작업에 대한 자세한 내용은 [https://cwiki.apach
 * [HDInsight 클러스터에서 Hue를 설치](hdinsight-hadoop-hue-linux.md)합니다. 클러스터 사용자 지정을 사용하여 HDInsight Hadoop 클러스터에서 Hue를 설치합니다. Hue는 Hadoop 클러스터와 상호 작용하는 데 사용되는 웹 응용 프로그램 집합입니다.
 
 [hdinsight-cluster-customize]: hdinsight-hadoop-customize-cluster-linux.md
-

@@ -1,5 +1,5 @@
 
-1. [Azure CLI 1.0에서 Azure에 연결](../articles/xplat-cli-connect.md)에 나열된 단계를 사용하여 Azure 구독에 로그인합니다.
+1. [Azure CLI 1.0에서 Azure에 연결](/cli/azure/authenticate-azure-cli)에 나열된 단계를 사용하여 Azure 구독에 로그인합니다.
 
 2. 다음과 같이 클래식 배포 모드에 있는지 확인합니다.
 

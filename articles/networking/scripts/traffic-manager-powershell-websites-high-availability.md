@@ -1,13 +1,13 @@
 ---
-title: "Azure PowerShell 스크립트 샘플 - 응용 프로그램 고가용성을 위한 트래픽 라우팅 | Microsoft Docs"
-description: "Azure PowerShell 스크립트 샘플 - 응용 프로그램 고가용성을 위한 트래픽 라우팅"
+title: Azure PowerShell 스크립트 샘플 - 응용 프로그램 고가용성을 위한 트래픽 라우팅 | Microsoft Docs
+description: Azure PowerShell 스크립트 샘플 - 응용 프로그램 고가용성을 위한 트래픽 라우팅
 services: traffic-manager
 documentationcenter: traffic-manager
 author: KumudD
 manager: timlt
 editor: georgewallace
 tags: azure-infrastructure
-ms.assetid: 
+ms.assetid: ''
 ms.service: traffic-manager
 ms.devlang: powershell
 ms.topic: article
@@ -15,25 +15,23 @@ ms.tgt_pltfrm: na
 ms.workload: traffic-manager
 ms.date: 05/16/2017
 ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 67ee6932f417194d6d9ee1e18bb716f02cf7605d
-ms.openlocfilehash: 2f0ac4fd1779661aab04bafb217e64af5d619a2f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
+ms.openlocfilehash: 24054625870cb073eec9769f50f370deb2828535
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
-
 # <a name="route-traffic-for-high-availability-of-applications"></a>응용 프로그램 고가용성을 위한 트래픽 라우팅
 
 이 스크립트는 리소스 그룹, 2개 App Service 계획, 2개 웹앱, Traffic Manager 프로필 및 2개 Traffic Manager 끝점을 만듭니다. Traffic Manager는 주 지역인 한 지역의 응용 프로그램 및 주 지역의 응용 프로그램을 사용할 수 없을 때 보조 지역으로 트래픽을 전달합니다. 스크립트를 실행하기 전에 MyWebApp, MyWebAppL1 및 MyWebAppL2 값을 Azure에서 고유한 값으로 변경해야 합니다. 스크립트를 실행한 후에는 mywebapp.trafficmanager.net URL을 사용하여 주 지역의 응용 프로그램에 액세스할 수 있습니다.
 
-필요한 경우 [Azure PowerShell 가이드](https://docs.microsoft.com/powershell/azureps-cmdlets-docs/)에 있는 지침을 사용하여 Azure PowerShell을 설치한 다음, `Login-AzureRmAccount`를 실행하여 Azure에 연결합니다.
+필요한 경우 [Azure PowerShell 가이드](https://docs.microsoft.com/powershell/azureps-cmdlets-docs/)에 있는 지침을 사용하여 Azure PowerShell을 설치한 다음, `Connect-AzureRmAccount`를 실행하여 Azure에 연결합니다.
 
 [!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
 
 ## <a name="sample-script"></a>샘플 스크립트
 
-[!code-powershell[주](../../../powershell_scripts/traffic-manager/direct-traffic-for-increased-application-availability/direct-traffic-for-increased-application-availability.ps1 "고가용성을 위한 트래픽 라우팅")]
+[!code-powershell[main](../../../powershell_scripts/traffic-manager/direct-traffic-for-increased-application-availability/direct-traffic-for-increased-application-availability.ps1 "Route traffic for high availability")]
 
 
 다음 명령을 실행하여 리소스 그룹, VM 및 모든 관련된 리소스를 제거할 수 있습니다.
@@ -48,7 +46,7 @@ Remove-AzureRmResourceGroup -Name myResourceGroup2
 
 이 스크립트는 다음 명령을 사용하여 리소스 그룹, 웹앱, Traffic Manager 프로필 및 모든 관련된 리소스를 만듭니다. 테이블에 있는 각 명령은 명령에 해당하는 문서에 연결됩니다.
 
-| 명령 | 참고 사항 |
+| 명령 | 메모 |
 |---|---|
 | [New-AzureRmResourceGroup](/powershell/module/azurerm.resources/new-azurermresourcegroup)  | 모든 리소스가 저장되는 리소스 그룹을 만듭니다. |
 | [New-AzureRmAppServicePlan](/powershell/module/azurerm.websites/new-azurermappserviceplan) | App Service 계획을 만듭니다. Azure 웹앱에 대한 서버 팜과 비슷합니다. |

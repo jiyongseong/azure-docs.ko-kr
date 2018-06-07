@@ -1,28 +1,24 @@
 ---
-title: ".NET SDK를 사용하여 HDInsight의 Hadoop 클러스터 관리 - Azure | Microsoft Docs"
-description: "HDInsight .NET SDK를 사용하여 HDInsight에서 Hadoop 클러스터에 대해 관리 작업을 수행하는 방법에 대해 알아봅니다."
+title: .NET SDK를 사용하여 HDInsight의 Hadoop 클러스터 관리 - Azure | Microsoft Docs
+description: HDInsight .NET SDK를 사용하여 HDInsight에서 Hadoop 클러스터에 대해 관리 작업을 수행하는 방법에 대해 알아봅니다.
 services: hdinsight
 editor: cgronlun
 manager: jhubbard
 tags: azure-portal
 author: mumian
-documentationcenter: 
+documentationcenter: ''
 ms.assetid: fd134765-c2a0-488a-bca6-184d814d78e9
 ms.service: hdinsight
 ms.custom: hdinsightactive
-ms.workload: big-data
-ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 05/25/2017
+ms.topic: conceptual
+ms.date: 05/14/2018
 ms.author: jgao
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 67ee6932f417194d6d9ee1e18bb716f02cf7605d
-ms.openlocfilehash: c10471425fa1202ddb7fe35d0adf4ef33509f268
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
-
+ms.openlocfilehash: 0feb1e344d70207d48e4ef07f5b45790425727ad
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="manage-hadoop-clusters-in-hdinsight-by-using-net-sdk"></a>.NET SDK를 사용하여 HDInsight의 Hadoop 클러스터 관리
 [!INCLUDE [selector](../../includes/hdinsight-portal-management-selector.md)]
@@ -33,82 +29,86 @@ ms.lasthandoff: 05/26/2017
 
 이 문서를 시작하기 전에 다음이 있어야 합니다.
 
-* **Azure 구독**. [Azure 무료 평가판](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/)을 참조하세요.
+* **Azure 구독**. [Azure 평가판](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/)을 참조하세요.
 
 ## <a name="connect-to-azure-hdinsight"></a>Azure HDInsight에 연결
 
-다음 NuGet 패키지를 설치해야 합니다.
+다음 NuGet 패키지가 필요합니다.
 
-    Install-Package Microsoft.Rest.ClientRuntime.Azure.Authentication -Pre
-    Install-Package Microsoft.Azure.Management.ResourceManager -Pre
-    Install-Package Microsoft.Azure.Management.HDInsight
+```
+Install-Package Microsoft.Rest.ClientRuntime.Azure.Authentication -Pre
+Install-Package Microsoft.Azure.Management.ResourceManager -Pre
+Install-Package Microsoft.Azure.Management.HDInsight
+```
 
 다음 코드 샘플은 Azure 구독에서 HDInsight 클러스터를 관리할 수 있기 전에 Azure에 연결하는 방법을 보여 줍니다.
 
-    using System;
-    using Microsoft.Azure;
-    using Microsoft.Azure.Management.HDInsight;
-    using Microsoft.Azure.Management.HDInsight.Models;
-    using Microsoft.Azure.Management.ResourceManager;
-    using Microsoft.IdentityModel.Clients.ActiveDirectory;
-    using Microsoft.Rest;
-    using Microsoft.Rest.Azure.Authentication;
+```csharp
+using System;
+using Microsoft.Azure;
+using Microsoft.Azure.Management.HDInsight;
+using Microsoft.Azure.Management.HDInsight.Models;
+using Microsoft.Azure.Management.ResourceManager;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Microsoft.Rest;
+using Microsoft.Rest.Azure.Authentication;
 
-    namespace HDInsightManagement
+namespace HDInsightManagement
+{
+    class Program
     {
-        class Program
+        private static HDInsightManagementClient _hdiManagementClient;
+        // Replace with your AAD tenant ID if necessary
+        private const string TenantId = UserTokenProvider.CommonTenantId; 
+        private const string SubscriptionId = "<Your Azure Subscription ID>";
+        // This is the GUID for the PowerShell client. Used for interactive logins in this example.
+        private const string ClientId = "1950a258-227b-4e31-a9cf-717495945fc2";
+
+        static void Main(string[] args)
         {
-            private static HDInsightManagementClient _hdiManagementClient;
-            // Replace with your AAD tenant ID if necessary
-            private const string TenantId = UserTokenProvider.CommonTenantId; 
-            private const string SubscriptionId = "<Your Azure Subscription ID>";
-            // This is the GUID for the PowerShell client. Used for interactive logins in this example.
-            private const string ClientId = "1950a258-227b-4e31-a9cf-717495945fc2";
+            // Authenticate and get a token
+            var authToken = Authenticate(TenantId, ClientId, SubscriptionId);
+            // Flag subscription for HDInsight, if it isn't already.
+            EnableHDInsight(authToken);
+            // Get an HDInsight management client
+            _hdiManagementClient = new HDInsightManagementClient(authToken);
 
-            static void Main(string[] args)
-            {
-                // Authenticate and get a token
-                var authToken = Authenticate(TenantId, ClientId, SubscriptionId);
-                // Flag subscription for HDInsight, if it isn't already.
-                EnableHDInsight(authToken);
-                // Get an HDInsight management client
-                _hdiManagementClient = new HDInsightManagementClient(authToken);
+            // insert code here
 
-                // insert code here
+            System.Console.WriteLine("Press ENTER to continue");
+            System.Console.ReadLine();
+        }
 
-                System.Console.WriteLine("Press ENTER to continue");
-                System.Console.ReadLine();
-            }
-
-            /// <summary>
-            /// Authenticate to an Azure subscription and retrieve an authentication token
-            /// </summary>
-            static TokenCloudCredentials Authenticate(string TenantId, string ClientId, string SubscriptionId)
-            {
-                var authContext = new AuthenticationContext("https://login.microsoftonline.com/" + TenantId);
-                var tokenAuthResult = authContext.AcquireToken("https://management.core.windows.net/", 
-                    ClientId, 
-                    new Uri("urn:ietf:wg:oauth:2.0:oob"), 
-                    PromptBehavior.Always, 
-                    UserIdentifier.AnyUser);
-                return new TokenCloudCredentials(SubscriptionId, tokenAuthResult.AccessToken);
-            }
-            /// <summary>
-            /// Marks your subscription as one that can use HDInsight, if it has not already been marked as such.
-            /// </summary>
-            /// <remarks>This is essentially a one-time action; if you have already done something with HDInsight
-            /// on your subscription, then this isn't needed at all and will do nothing.</remarks>
-            /// <param name="authToken">An authentication token for your Azure subscription</param>
-            static void EnableHDInsight(TokenCloudCredentials authToken)
-            {
-                // Create a client for the Resource manager and set the subscription ID
-                var resourceManagementClient = new ResourceManagementClient(new TokenCredentials(authToken.Token));
-                resourceManagementClient.SubscriptionId = SubscriptionId;
-                // Register the HDInsight provider
-                var rpResult = resourceManagementClient.Providers.Register("Microsoft.HDInsight");
-            }
+        /// <summary>
+        /// Authenticate to an Azure subscription and retrieve an authentication token
+        /// </summary>
+        static TokenCloudCredentials Authenticate(string TenantId, string ClientId, string SubscriptionId)
+        {
+            var authContext = new AuthenticationContext("https://login.microsoftonline.com/" + TenantId);
+            var tokenAuthResult = authContext.AcquireToken("https://management.core.windows.net/", 
+                ClientId, 
+                new Uri("urn:ietf:wg:oauth:2.0:oob"), 
+                PromptBehavior.Always, 
+                UserIdentifier.AnyUser);
+            return new TokenCloudCredentials(SubscriptionId, tokenAuthResult.AccessToken);
+        }
+        /// <summary>
+        /// Marks your subscription as one that can use HDInsight, if it has not already been marked as such.
+        /// </summary>
+        /// <remarks>This is essentially a one-time action; if you have already done something with HDInsight
+        /// on your subscription, then this isn't needed at all and will do nothing.</remarks>
+        /// <param name="authToken">An authentication token for your Azure subscription</param>
+        static void EnableHDInsight(TokenCloudCredentials authToken)
+        {
+            // Create a client for the Resource manager and set the subscription ID
+            var resourceManagementClient = new ResourceManagementClient(new TokenCredentials(authToken.Token));
+            resourceManagementClient.SubscriptionId = SubscriptionId;
+            // Register the HDInsight provider
+            var rpResult = resourceManagementClient.Providers.Register("Microsoft.HDInsight");
         }
     }
+}
+```
 
 이 프로그램을 실행하면 프롬프트가 나타납니다.  프롬프트를 표시하지 않으려면 [비대화형 인증 .NET HDInsight 응용 프로그램 만들기](hdinsight-create-non-interactive-authentication-dotnet-applications.md)를 참조하세요.
 
@@ -118,19 +118,23 @@ ms.lasthandoff: 05/26/2017
 ## <a name="list-clusters"></a>클러스터 나열
 다음 코드 조각은 클러스터 및 일부 속성을 나열합니다.
 
-    var results = _hdiManagementClient.Clusters.List();
-    foreach (var name in results.Clusters) {
-        Console.WriteLine("Cluster Name: " + name.Name);
-        Console.WriteLine("\t Cluster type: " + name.Properties.ClusterDefinition.ClusterType);
-        Console.WriteLine("\t Cluster location: " + name.Location);
-        Console.WriteLine("\t Cluster version: " + name.Properties.ClusterVersion);
-    }
+```csharp
+var results = _hdiManagementClient.Clusters.List();
+foreach (var name in results.Clusters) {
+    Console.WriteLine("Cluster Name: " + name.Name);
+    Console.WriteLine("\t Cluster type: " + name.Properties.ClusterDefinition.ClusterType);
+    Console.WriteLine("\t Cluster location: " + name.Location);
+    Console.WriteLine("\t Cluster version: " + name.Properties.ClusterVersion);
+}
+```
 
 ## <a name="delete-clusters"></a>클러스터 삭제
 다음 코드 조각을 사용하여 동기적 또는 비동기적으로 클러스터를 삭제합니다. 
 
-    _hdiManagementClient.Clusters.Delete("<Resource Group Name>", "<Cluster Name>");
-    _hdiManagementClient.Clusters.DeleteAsync("<Resource Group Name>", "<Cluster Name>");
+```csharp
+_hdiManagementClient.Clusters.Delete("<Resource Group Name>", "<Cluster Name>");
+_hdiManagementClient.Clusters.DeleteAsync("<Resource Group Name>", "<Cluster Name>");
+```
 
 ## <a name="scale-clusters"></a>클러스터 크기 조정
 클러스터 크기 조정 기능을 사용하여 클러스터를 다시 생성하지 않고 Azure HDInsight에서 실행되는 클러스터에서 사용되는 작업자 노드 수를 변경합니다.
@@ -151,9 +155,11 @@ HDInsight에서 지원되는 클러스터의 각 형식에 대한 데이터 노�
   
     HBase 클러스터가 실행 중인 동안 데이터 노드를 원활하게 추가하거나 제거할 수 있습니다. 지역 서버는 크기 조정 작업을 완료하는 몇 분 안에 자동으로 균형을 맞춥니다. 그러나 클러스터의 헤드 노드에 로그인한 다음 명령 프롬프트 창에서 다음 명령을 실행하여 자동으로 지역 서버의 균형을 맞출 수도 있습니다.
   
-        >pushd %HBASE_HOME%\bin
-        >hbase shell
-        >balancer
+    ```bash
+    >pushd %HBASE_HOME%\bin
+    >hbase shell
+    >balancer
+    ```
 * Storm
   
     실행 중인 동안 Storm 클러스터에 데이터 노드를 원활하게 추가하거나 제거할 수 있습니다. 하지만 크기 조정 작업이 성공적으로 완료되면 다시 토폴로지 균형을 조정해야 합니다.
@@ -171,16 +177,19 @@ HDInsight에서 지원되는 클러스터의 각 형식에 대한 데이터 노�
     
     다음은 CLI 명령을 사용하여 Storm 토폴로지 균형을 다시 조정하는 방법의 예입니다.
     
-        ## Reconfigure the topology "mytopology" to use 5 worker processes,
-        ## the spout "blue-spout" to use 3 executors, and
-        ## the bolt "yellow-bolt" to use 10 executors
-        $ storm rebalance mytopology -n 5 -e blue-spout=3 -e yellow-bolt=10
+    ```cli
+    ## Reconfigure the topology "mytopology" to use 5 worker processes,
+    ## the spout "blue-spout" to use 3 executors, and
+    ## the bolt "yellow-bolt" to use 10 executors
+    $ storm rebalance mytopology -n 5 -e blue-spout=3 -e yellow-bolt=10
+    ```
 
 다음 코드 조각은 동기적 또는 비동기적으로 클러스터의 크기를 조정하는 방법을 보여 줍니다.
 
-    _hdiManagementClient.Clusters.Resize("<Resource Group Name>", "<Cluster Name>", <New Size>);   
-    _hdiManagementClient.Clusters.ResizeAsync("<Resource Group Name>", "<Cluster Name>", <New Size>);   
-
+```csharp
+_hdiManagementClient.Clusters.Resize("<Resource Group Name>", "<Cluster Name>", <New Size>);   
+_hdiManagementClient.Clusters.ResizeAsync("<Resource Group Name>", "<Cluster Name>", <New Size>);   
+```
 
 ## <a name="grantrevoke-access"></a>액세스 권한 부여/해지
 HDInsight 클러스터에는 다음과 같은 HTTP 웹 서비스가 있습니다(이러한 모든 서비스에 RESTful 끝점이 있음).
@@ -193,24 +202,27 @@ HDInsight 클러스터에는 다음과 같은 HTTP 웹 서비스가 있습니다
 
 이러한 서비스에는 기본적으로 액세스 권한이 부여됩니다. 액세스 권한을 해지/부여할 수 있습니다. 해지하려면:
 
-    var httpParams = new HttpSettingsParameters
-    {
-        HttpUserEnabled = false,
-        HttpUsername = "admin",
-        HttpPassword = "*******",
-    };
-    _hdiManagementClient.Clusters.ConfigureHttpSettings("<Resource Group Name>, <Cluster Name>, httpParams);
+```csharp
+var httpParams = new HttpSettingsParameters
+{
+    HttpUserEnabled = false,
+    HttpUsername = "admin",
+    HttpPassword = "*******",
+};
+_hdiManagementClient.Clusters.ConfigureHttpSettings("<Resource Group Name>, <Cluster Name>, httpParams);
+```
 
 권한하려면:
 
-    var httpParams = new HttpSettingsParameters
-    {
-        HttpUserEnabled = enable,
-        HttpUsername = "admin",
-        HttpPassword = "*******",
-    };
-    _hdiManagementClient.Clusters.ConfigureHttpSettings("<Resource Group Name>, <Cluster Name>, httpParams);
-
+```csharp
+var httpParams = new HttpSettingsParameters
+{
+    HttpUserEnabled = enable,
+    HttpUsername = "admin",
+    HttpPassword = "*******",
+};
+_hdiManagementClient.Clusters.ConfigureHttpSettings("<Resource Group Name>, <Cluster Name>, httpParams);
+```
 
 > [!NOTE]
 > 액세스 권한을 부여/해지하여 클러스터 사용자 이름 및 암호를 다시 설정합니다.
@@ -225,29 +237,30 @@ HDInsight 클러스터에는 다음과 같은 HTTP 웹 서비스가 있습니다
 ## <a name="find-the-default-storage-account"></a>기본 저장소 계정 찾기
 다음 코드 조각에서는 클러스터에 대한 기본 저장소 계정 이름 및 기본 저장소 계정 키를 가져오는 방법을 보여 줍니다.
 
-    var results = _hdiManagementClient.Clusters.GetClusterConfigurations(<Resource Group Name>, <Cluster Name>, "core-site");
-    foreach (var key in results.Configuration.Keys)
-    {
-        Console.WriteLine(String.Format("{0} => {1}", key, results.Configuration[key]));
-    }
-
+```csharp
+var results = _hdiManagementClient.Clusters.GetClusterConfigurations(<Resource Group Name>, <Cluster Name>, "core-site");
+foreach (var key in results.Configuration.Keys)
+{
+    Console.WriteLine(String.Format("{0} => {1}", key, results.Configuration[key]));
+}
+```
 
 ## <a name="submit-jobs"></a>작업 제출
 **MapReduce 작업을 제출하려면**
 
-[HDInsight에서 Hadoop MapReduce 샘플 실행](hdinsight-hadoop-run-samples-linux.md)을 참조하세요.
+[HDInsight에서 Hadoop MapReduce 샘플 실행](hadoop/apache-hadoop-run-samples-linux.md)을 참조하세요.
 
 **Hive 작업을 제출하려면** 
 
-[.NET SDK를 사용하여 Hive 쿼리 실행](hdinsight-hadoop-use-hive-dotnet-sdk.md)을 참조하세요.
+[.NET SDK를 사용하여 Hive 쿼리 실행](hadoop/apache-hadoop-use-hive-dotnet-sdk.md)을 참조하세요.
 
 **Pig 작업을 제출하려면**
 
-[.NET SDK를 사용하여 Pig 작업 실행](hdinsight-hadoop-use-pig-dotnet-sdk.md)을 참조하세요.
+[.NET SDK를 사용하여 Pig 작업 실행](hadoop/apache-hadoop-use-pig-dotnet-sdk.md)을 참조하세요.
 
 **Sqoop 작업을 제출하려면**
 
-[HDInsight와 함께 Sqoop 사용](hdinsight-hadoop-use-sqoop-dotnet-sdk.md)을 참조하세요.
+[HDInsight와 함께 Sqoop 사용](hadoop/apache-hadoop-use-sqoop-dotnet-sdk.md)을 참조하세요.
 
 **Oozie 작업을 제출하려면**
 
@@ -268,18 +281,17 @@ HDInsight 클러스터에는 다음과 같은 HTTP 웹 서비스가 있습니다
 [azure-member-offers]: http://azure.microsoft.com/pricing/member-offers/
 [azure-free-trial]: http://azure.microsoft.com/pricing/free-trial/
 
-[hdinsight-get-started]: hdinsight-hadoop-linux-tutorial-get-started.md
+[hdinsight-get-started]:hadoop/apache-hadoop-linux-tutorial-get-started.md
 [hdinsight-provision]: hdinsight-hadoop-provision-linux-clusters.md
 [hdinsight-provision-custom-options]: hdinsight-hadoop-provision-linux-clusters.md#configuration
-[hdinsight-submit-jobs]: hdinsight-submit-hadoop-jobs-programmatically.md
+[hdinsight-submit-jobs]:hadoop/submit-apache-hadoop-jobs-programmatically.md
 
 [hdinsight-admin-cli]: hdinsight-administer-use-command-line.md
 [hdinsight-admin-portal]: hdinsight-administer-use-portal-linux.md
 [hdinsight-storage]: hdinsight-hadoop-use-blob-storage.md
-[hdinsight-use-hive]: hdinsight-use-hive.md
-[hdinsight-use-mapreduce]: hdinsight-use-mapreduce.md
+[hdinsight-use-hive]:hadoop/hdinsight-use-hive.md
+[hdinsight-use-mapreduce]:hadoop/hdinsight-use-mapreduce.md
 [hdinsight-upload-data]: hdinsight-upload-data.md
 [hdinsight-flight]: hdinsight-analyze-flight-delay-data.md
-
 
 

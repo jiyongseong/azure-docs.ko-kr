@@ -1,10 +1,10 @@
 ---
-title: "자습서: ICIMS와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory와 ICIMS 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: ICIMS와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory와 ICIMS 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.reviewer: joflore
 ms.assetid: 72dbd649-e4b1-4d72-ad76-636d84922596
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/19/2017
 ms.author: jeedes
+ms.openlocfilehash: e982d8f2622eb9dd25d8425cc5bf2fa1007871ab
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
-ms.openlocfilehash: 26a6b41a0e59924d007855ca548f22ed00bd7e23
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-icims"></a>자습서: ICIMS와 Azure Active Directory 통합
 
@@ -31,7 +30,7 @@ ICIMS를 Azure AD와 통합하면 다음과 같은 이점이 제공됩니다.
 - 사용자가 해당 Azure AD 계정으로 ICIMS에 자동으로 로그온(Single Sign-On)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +58,7 @@ ICIMS의 Azure AD 통합을 구성하려면 갤러리의 ICIMS를 관리되는 S
 
 **갤러리에서 ICIMS를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -98,7 +97,7 @@ ICIMS에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 �
 
 1. Azure Portal의 **ICIMS** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single Sign-On** 대화 상자에서 **모드**를 **SAML 기반 로그온**으로 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
@@ -110,7 +109,7 @@ ICIMS에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 �
 
     a. **로그온 URL** 텍스트 상자에서 다음 패턴으로 URL을 입력합니다. `https://<tenant name>.icims.com`
 
-    b. **식별자** 텍스트 상자에서 `https://<tenant name>.icims.com` 패턴을 사용하여 URL을 입력합니다.
+    나. **식별자** 텍스트 상자에서 `https://<tenant name>.icims.com` 패턴을 사용하여 URL을 입력합니다.
 
     > [!NOTE] 
     > 이러한 값은 실제 값이 아닙니다. 실제 로그온 URL 및 식별자로 값을 업데이트합니다. 이러한 값을 얻으려면 [ICIMS 클라이언트 지원팀](https://www.icims.com/contact-us)에 문의하세요. 
@@ -158,9 +157,9 @@ ICIMS에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 �
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -207,7 +206,7 @@ ICIMS에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 �
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -224,5 +223,4 @@ ICIMS에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 �
 [201]: ./media/active-directory-saas-icims-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-icims-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-icims-tutorial/tutorial_general_203.png
-
 

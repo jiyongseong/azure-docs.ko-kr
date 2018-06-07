@@ -1,9 +1,9 @@
 ---
 title: "Azure Mobile Apps에서 오프라인 데이터 동기화 | Microsoft Docs"
-description: "Azure 모바일 앱에 대한 오프라인 데이터 동기화 기능의 개념 참조 및 개요"
+description: "Azure Mobile Apps에 대한 오프라인 데이터 동기화 기능의 개념 참조 및 개요"
 documentationcenter: windows
-author: ggailey777
-manager: syntaxc4
+author: conceptdev
+manager: crdun
 editor: 
 services: app-service\mobile
 ms.assetid: 982fb683-8884-40da-96e6-77eeca2500e3
@@ -13,15 +13,14 @@ ms.tgt_pltfrm: na
 ms.devlang: multiple
 ms.topic: article
 ms.date: 10/30/2016
-ms.author: glenga
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 15a3f9f40bdb84b939b30e33e5f2033411adc3cc
-ms.openlocfilehash: dc179f6186d501bc7c8e4ca72b2bf23e89a9443e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 12/01/2016
-
+ms.author: crdun
+ms.openlocfilehash: 5ea1d655f50da49be88f7b6ae91231c4d2258fa7
+ms.sourcegitcommit: df4ddc55b42b593f165d56531f591fdb1e689686
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/04/2018
 ---
-# <a name="offline-data-sync-in-azure-mobile-apps"></a>Azure 모바일 앱에서 오프라인 데이터 동기화
+# <a name="offline-data-sync-in-azure-mobile-apps"></a>Azure Mobile Apps에서 오프라인 데이터 동기화
 ## <a name="what-is-offline-data-sync"></a>오프라인 데이터 동기화 정의
 오프라인 데이터 동기화는 개발자가 네트워크 연결 없이 작동하는 앱을 쉽게 만들 수 있는 Azure Mobile Apps의 클라이언트 및 서버 SDK 기능입니다.
 
@@ -35,7 +34,7 @@ ms.lasthandoff: 12/01/2016
 * 여러 장치 간에 데이터를 동기화하고 동일한 레코드를 두 개의 장치에서 수정할 때 충돌 감지
 * 지연 시간이 길거나 요금제인 네트워크에 대한 네트워크 사용 제한
 
-다음 자습서는 Azure 모바일 앱을 사용하여 모바일 클라이언트에 오프라인 동기화를 추가하는 방법을 보여줍니다.
+다음 자습서는 Azure Mobile Apps를 사용하여 모바일 클라이언트에 오프라인 동기화를 추가하는 방법을 보여줍니다.
 
 * [Android: 오프라인 동기화 사용]
 * [Apache Cordova: 오프라인 동기화 사용](app-service-mobile-cordova-get-started-offline-data.md)
@@ -68,8 +67,7 @@ Windows Phone 또는 Windows 스토어 8.1에서 SQLite 기반 구현을 사용�
 * **푸시**: 푸시는 동기화 컨텍스트에 관한 작업이며 마지막 푸시 이후로 모든 CUD 변경을 보냅니다. 그렇지 않으면 작업이 잘못된 순서로 전송되기 때문에 개별 테이블의 변경 내용만을 보낼 수 없습니다. 푸시는 Azure 모바일 앱 백 엔드에 일련의 REST 호출을 실행하여 차례로 서버 데이터베이스를 수정합니다.
 * **끌어오기**: 끌어오기는 테이블 당 단위로 수행되고 서버 데이터의 하위 집합을 검색하는 쿼리로 사용자 지정할 수 있습니다. 그런 다음 Azure 모바일 클라이언트 SDK는 로컬 저장소에 발생한 데이터를 삽입합니다.
 * **암시적 푸시**: 끌어오기가 로컬 업데이트를 보류 중인 테이블에 대해 실행되는 경우 동기화 컨텍스트에서 `push()`를 먼저 실행합니다. 이미 큐에 대기 중인 변경 내용과 서버의 새 데이터 간에 충돌을 최소화하는 데 이 푸시가 도움이 됩니다.
-* **증분 동기화**: 가져오기 작업의 첫 번째 매개 변수는 클라이언트에만 사용되는 *쿼리 이름* 입니다. Null이 아닌 쿼리 이름을 사용할 경우 Azure 모바일 SDK는 *증분 동기화*를 수행합니다.
-  가져오기 작업이 결과 집합을 반환할 때마다 해당 결과 집합에서 최신 `updatedAt` timestamp는 SDK 로컬 시스템 테이블에 저장됩니다. 후속 끌어오기 작업은 해당 timestamp 이후의 레코드만 검색합니다.
+* **증분 동기화**: 가져오기 작업의 첫 번째 매개 변수는 클라이언트에만 사용되는 *쿼리 이름* 입니다. Null이 아닌 쿼리 이름을 사용할 경우 Azure 모바일 SDK는 *증분 동기화*를 수행합니다. 가져오기 작업이 결과 집합을 반환할 때마다 해당 결과 집합에서 최신 `updatedAt` timestamp는 SDK 로컬 시스템 테이블에 저장됩니다. 후속 끌어오기 작업은 해당 timestamp 이후의 레코드만 검색합니다.
 
   증분 동기화를 사용하려면 서버가 의미 있는 `updatedAt` 값을 반환하고 이 필드의 정렬을 지원해야 합니다. 그러나 SDK가 updatedAt 필드에서 자체 정렬를 추가하므로 고유의 `orderBy` 절을 가진 끌어오기 쿼리를 사용할 수 없습니다.
 
@@ -101,6 +99,5 @@ Windows Phone 또는 Windows 스토어 8.1에서 SQLite 기반 구현을 사용�
 [Android: 오프라인 동기화 사용]: app-service-mobile-android-get-started-offline-data.md
 [iOS: 오프라인 동기화 사용]: app-service-mobile-ios-get-started-offline-data.md
 [Xamarin iOS: 오프라인 동기화 사용]: app-service-mobile-xamarin-ios-get-started-offline-data.md
-[Xamarin Android: 오프라인 동기화 사용]: app-service-mobile-xamarin-ios-get-started-offline-data.md
+[Xamarin Android: 오프라인 동기화 사용]: app-service-mobile-xamarin-android-get-started-offline-data.md
 [유니버설 Windows 플랫폼: 오프라인 동기화 사용]: app-service-mobile-windows-store-dotnet-get-started-offline-data.md
-

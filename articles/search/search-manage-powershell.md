@@ -1,36 +1,30 @@
 ---
-title: "Powershell 스크립트를 사용하여 Azure Search 관리 | Microsoft Docs"
-description: "PowerShell 스크립트를 사용하여 Azure 검색 서비스를 관리합니다. Azure 검색 서비스 만들기 또는 업데이트 및 Azure 검색 관리자 키 관리"
-services: search
-documentationcenter: 
-author: seansaleh
-manager: mblythe
-editor: 
+title: Powershell 스크립트를 사용하여 Azure Search 관리 | Microsoft Docs
+description: PowerShell 스크립트를 사용하여 Azure Search 서비스를 관리합니다. Azure Search 서비스 만들기 또는 업데이트 및 Azure Search 관리자 키 관리
+author: HeidiSteen
+manager: cgronlun
 tags: azure-resource-manager
-ms.assetid: 9b3dc1f2-3619-4235-ba1f-d2d6f5c45dd5
+services: search
 ms.service: search
-ms.devlang: na
-ms.workload: search
-ms.topic: article
-ms.tgt_pltfrm: powershell
+ms.devlang: powershell
+ms.topic: conceptual
 ms.date: 08/15/2016
-ms.author: seasa
-translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: a635b214fcc9b37ac426df227420b643e2a02cc7
-ms.lasthandoff: 04/27/2017
-
-
+ms.author: heidist
+ms.openlocfilehash: 8f83f2652f7bd34f53dde1674c022f8792ae7658
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-# <a name="manage-your-azure-search-service-with-powershell"></a>PowerShell을 사용한 Azure 검색 서비스 관리
+# <a name="manage-your-azure-search-service-with-powershell"></a>PowerShell을 사용한 Azure Search 서비스 관리
 > [!div class="op_single_selector"]
 > * [포털](search-manage.md)
 > * [PowerShell](search-manage-powershell.md)
 > 
 > 
 
-이 항목에서는 Azure 검색 서비스에 대한 다양한 관리 작업을 수행하는 PowerShell 명령을 설명합니다. 검색 서비스 만들기, 확장 및 해당 API 키 관리 과정을 설명합니다.
-이러한 명령은 [Azure 검색 관리 REST API](http://msdn.microsoft.com/library/dn832684.aspx)에서 사용할 수 있는 관리 옵션과 유사합니다.
+이 항목에서는 Azure Search 서비스에 대한 다양한 관리 작업을 수행하는 PowerShell 명령을 설명합니다. 검색 서비스 만들기, 확장 및 해당 API 키 관리 과정을 설명합니다.
+이러한 명령은 [Azure Search 관리 REST API](https://docs.microsoft.com/rest/api/searchmanagement)에서 사용할 수 있는 관리 옵션과 유사합니다.
 
 ## <a name="prerequisites"></a>필수 조건
 * Azure PowerShell 1.0 이상이 필요합니다. 자세한 내용은 [Azure PowerShell 설치 및 구성](/powershell/azure/overview)을 참조하세요.
@@ -38,7 +32,7 @@ ms.lasthandoff: 04/27/2017
 
 먼저 다음 명령을 사용하여 Azure에 로그인해야 합니다.
 
-    Login-AzureRmAccount
+    Connect-AzureRmAccount
 
 Microsoft Azure 로그인 대화 상자에서 Azure 계정의 메일 주소 및 해당 암호를 지정합니다.
 
@@ -63,7 +57,7 @@ Microsoft Azure 로그인 대화 상자에서 Azure 계정의 메일 주소 및 
     # New-AzureRmResourceGroup -Name $resourceGroupName -Location $location
 
     # Register the ARM provider idempotently. This must be done once per subscription
-    Register-AzureRmResourceProvider -ProviderNamespace "Microsoft.Search" -Force
+    Register-AzureRmResourceProvider -ProviderNamespace "Microsoft.Search"
 
     # Create a new search service
     # This command will return once the service is fully created
@@ -133,10 +127,9 @@ Microsoft Azure 로그인 대화 상자에서 Azure 계정의 메일 주소 및 
 ## <a name="next-steps"></a>다음 단계
 이제 서비스를 만들었으므로 다음 단계를 수행할 수 있습니다. [인덱스](search-what-is-an-index.md)를 빌드하고 [인덱스를 쿼리](search-query-overview.md)하며 마지막으로 Azure Search를 사용하는 고유의 검색 응용 프로그램을 만들고 관리합니다.
 
-* [Azure 포털에서 Azure 검색 인덱스 만들기](search-create-index-portal.md)
-* [Azure 포털에서 검색 탐색기를 사용하여 Azure 검색 인덱스 쿼리](search-explorer.md)
+* [Azure Portal에서 Azure Search 인덱스 만들기](search-create-index-portal.md)
+* [Azure Portal에서 검색 탐색기를 사용하여 Azure Search 인덱스 쿼리](search-explorer.md)
 * [기타 서비스에서 데이터를 로드하기 위한 인덱서 설정](search-indexer-overview.md)
-* [.NET에서 Azure 검색을 사용하는 방법](search-howto-dotnet-sdk.md)
-* [Azure 검색 트래픽 분석](search-traffic-analytics.md)
-
+* [.NET에서 Azure Search를 사용하는 방법](search-howto-dotnet-sdk.md)
+* [Azure Search 트래픽 분석](search-traffic-analytics.md)
 

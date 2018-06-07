@@ -1,27 +1,23 @@
 ---
-title: "Azure AD Privileged Identity Management에서 감사 로그를 사용하는 방법 | Microsoft Docs"
-description: "Azure 권한 있는 ID 관리 확장에서 감사 로그를 사용하는 방법을 알아봅니다."
+title: Azure AD Privileged Identity Management에서 감사 로그를 사용하는 방법 | Microsoft Docs
+description: Azure 권한 있는 ID 관리 확장에서 감사 로그를 사용하는 방법을 알아봅니다.
 services: active-directory
-documentationcenter: 
-author: billmath
-manager: femila
-editor: 
-ms.assetid: 5d13a6dd-1fcb-4e76-82fb-cb2f4f0e4357
+documentationcenter: ''
+author: curtand
+manager: mtillman
+editor: ''
 ms.service: active-directory
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
 ms.workload: identity
+ms.component: users-groups-roles
 ms.date: 02/14/2017
-ms.author: billmath
+ms.author: curtand
 ms.custom: pim
-ms.translationtype: Human Translation
-ms.sourcegitcommit: bb500d4705c3b67de6b9b31fa5311967beffffc2
-ms.openlocfilehash: a36231d9326158068e9460ed4594a79c744d3087
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/27/2017
-
-
+ms.openlocfilehash: 20fd9c5ee90947cc2d3816a0590d4780408baa2f
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="using-the-audit-log-in-pim"></a>PIM에서 감사 로그 사용
 Azure Privileged Identity Management(PIM) 감사 로그를 사용하여 지정된 기간 내의 모든 사용자 할당 및 활성화를 볼 수 있습니다. 테넌트에서 관리자, 최종 사용자 및 동기화 작업을 비롯한 활동의 전체 감사 기록을 보려는 경우 [Azure Active Directory 액세스 및 사용 보고서](active-directory-view-access-usage-reports.md)
@@ -61,5 +57,4 @@ Azure Privileged Identity Management(PIM) 감사 로그를 사용하여 지정�
 <!--Every topic should have next steps and links to the next logical set of content to keep the customer engaged-->
 ## <a name="next-steps"></a>다음 단계
 [!INCLUDE [active-directory-privileged-identity-management-toc](../../includes/active-directory-privileged-identity-management-toc.md)]
-
 

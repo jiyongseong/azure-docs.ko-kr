@@ -12,24 +12,22 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 08/01/2017
+ms.date: 11/07/2017
 ms.author: sethm
+ms.openlocfilehash: e444c4505d4744c95e08c4ef0d33566356785c81
+ms.sourcegitcommit: 0930aabc3ede63240f60c2c61baa88ac6576c508
 ms.translationtype: HT
-ms.sourcegitcommit: c30998a77071242d985737e55a7dc2c0bf70b947
-ms.openlocfilehash: 816bf1426704d3391550e80c0700f1b011683a94
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/02/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/07/2017
 ---
-
 # <a name="create-an-event-hubs-namespace-and-an-event-hub-using-the-azure-portal"></a>Azure Portal을 사용하여 Event Hubs 네임스페이스 및 이벤트 허브 만들기
 
 ## <a name="create-an-event-hubs-namespace"></a>Event Hubs 네임스페이스 만들기
-1. [Azure Portal][Azure portal]에 로그온하고 화면 왼쪽 위에서 **새로 만들기**를 클릭합니다.
+1. [Azure Portal][Azure portal]에 로그온하고 화면 왼쪽 위에서 **리소스 만들기**를 클릭합니다.
 1. **사물 인터넷**을 클릭한 다음 **Event Hubs**를 클릭합니다.
    
     ![](./media/event-hubs-create/create-event-hub9.png)
-1. **네임스페이스 만들기** 블레이드에서 네임스페이스 이름을 입력합니다. 시스템에서 사용 가능한 이름인지 즉시 확인합니다.
+1. **네임스페이스 만들기**에서 네임스페이스 이름을 입력합니다. 시스템에서 사용 가능한 이름인지 즉시 확인합니다.
    
     ![](./media/event-hubs-create/create-event-hub1.png)
 1. 네임스페이스 이름을 사용할 수 있게 설정한 후 가격 책정 계층(기본 또는 표준)을 선택합니다. 또한 리소스를 만들 Azure 구독, 리소스 그룹 및 위치를 선택합니다. 
@@ -65,7 +63,7 @@ ms.lasthandoff: 08/02/2017
 ## <a name="next-steps"></a>다음 단계
 Event Hubs에 대한 자세한 내용은 다음 링크를 방문하세요.
 
-* [이벤트 허브 개요](event-hubs-what-is-event-hubs.md)
-* [이벤트 허브 API 개요](event-hubs-api-overview.md)
+* [Event Hubs 개요](event-hubs-what-is-event-hubs.md)
+* [Event Hubs API 개요](event-hubs-api-overview.md)
 
 [Azure portal]: https://portal.azure.com/

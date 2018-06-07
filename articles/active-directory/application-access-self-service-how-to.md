@@ -1,26 +1,24 @@
 ---
-title: "셀프 서비스 응용 프로그램 할당을 구성하는 방법 | Microsoft Docs"
-description: "셀프 서비스 응용 프로그램 액세스를 활성화하여 사용자가 자신의 응용 프로그램을 찾을 수 있도록 함"
+title: 셀프 서비스 응용 프로그램 할당을 구성하는 방법 | Microsoft Docs
+description: 셀프 서비스 응용 프로그램 액세스를 활성화하여 사용자가 자신의 응용 프로그램을 찾을 수 있도록 함
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: ajamess
-manager: femila
-ms.assetid: 
+manager: mtillman
+ms.assetid: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/11/2017
+ms.date: 04/02/2018
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: cc9e81de9bf8a3312da834502fa6ca25e2b5834a
-ms.openlocfilehash: af0ec17d319f0a2911e1b50a5ed45dd59dafa752
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/11/2017
-
+ms.openlocfilehash: cf70da4933f5513b75f84aef01dec1ef902eab85
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
-
 # <a name="how-to-configure-self-service-application-assignment"></a>셀프 서비스 응용 프로그램 할당을 구성하는 방법
 
 사용자가 액세스 패널에서 응용 프로그램을 셀프 검색할 수 있도록 하려면 먼저 사용자가 셀프 검색을 수행하고 액세스 권한을 요청할 수 있게 하려는 모든 응용 프로그램에 대해 **셀프 서비스 응용 프로그램 액세스**를 사용하도록 설정해야 합니다.
@@ -49,7 +47,7 @@ ms.lasthandoff: 04/11/2017
 
 1.  [**Azure Portal**](https://portal.azure.com/)을 열고 **전역 관리자** 권한으로 로그인합니다.
 
-2.  왼쪽 주 탐색 메뉴의 맨 아래에서 **추가 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
+2.  왼쪽 주 탐색 메뉴의 맨 위에서 **모든 서비스**를 클릭하여 **Azure Active Directory 확장**을 엽니다.
 
 3.  필터 검색 상자에 **“Azure Active Directory**”를 입력하고 **Azure Active Directory** 항목을 선택합니다.
 
@@ -66,7 +64,10 @@ ms.lasthandoff: 04/11/2017
 8.  이 응용 프로그램에 대한 셀프 서비스 응용 프로그램 액세스를 활성화하려면 **사용자가 이 응용 프로그램에 대한 액세스를 요청하도록 허용하시겠습니까?** 토글을 **예**로 전환합니다.
 
 9.  다음으로 이 응용 프로그램에 대한 액세스를 요청하는 사용자에 추가되어야 하는 그룹을 선택하려면 레이블 **할당된 사용자는 어느 그룹에 추가되어야 합니까?** 옆의 선택기를 클릭하고 그룹을 선택합니다.
-
+  
+  > [!NOTE]
+  > 온-프레미스에서 동기화된 그룹은 이 응용 프로그램에 대한 액세스를 요청하는 사용자를 추가해야 하는 그룹에서 사용하도록 지원되지 않습니다.
+  
 10. **선택 사항:** 사용자의 액세스를 허용하기 전에 비즈니스 승인을 필요로 하려는 경우 **이 응용 프로그램에 대한 액세스를 부여하기 전에 승인이 필요합니까?** 토글을 **예**로 설정합니다.
 
 11. **선택 사항: 암호 Single Sign-On만을 사용하는 응용 프로그램의 경우** 해당 비즈니스 승인자가 승인된 사용자에 대한 이 응용 프로그램에 전송되는 암호를 지정하도록 허용하려는 경우 **승인자가 이 응용 프로그램에 대한 사용자의 암호를 설정하도록 허용하시겠습니까?** 토글을 **예**로 설정합니다.
@@ -88,4 +89,3 @@ ms.lasthandoff: 04/11/2017
 
 ## <a name="next-steps"></a>다음 단계
 [셀프 서비스 그룹 관리를 위한 Azure Active Directory 설정](active-directory-accessmanagement-self-service-group-management.md)
-

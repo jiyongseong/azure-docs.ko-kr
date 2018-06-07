@@ -1,0 +1,87 @@
+- name: Azure HDInsight 설명서
+  href: /azure/hdinsight
+- name: 엔터프라이즈 보안
+  items:
+    - name: 개요
+      href: apache-domain-joined-introduction.md
+    - name: 도메인 가입 클러스터에 대한 계획
+      href: apache-domain-joined-architecture.md
+    - name: Azure AD DS를 사용하여 도메인 가입 클러스터 구성
+      href: apache-domain-joined-configure-using-azure-adds.md
+    - name: Azure AD 사용자를 HDInsight 클러스터에 동기화
+      href: ../hdinsight-sync-aad-users-to-cluster.md
+      maintainContext: true
+    - name: Hive 정책 구성
+      href: apache-domain-joined-run-hive.md
+      maintainContext: true
+    - name: VSCode를 사용하여 도메인 가입된 클러스터에 연결
+      href: ../hdinsight-for-vscode.md
+    - name: IntelliJ를 사용하여 도메인 가입된 클러스터에 연결
+      href: ../spark/apache-spark-intellij-tool-plugin.md
+    - name: Eclipse를 사용하여 도메인 가입된 클러스터에 연결
+      href: ../spark/apache-spark-eclipse-tool-plugin.md
+- name: 데이터 보안
+  href: ../hdinsight-hadoop-create-linux-clusters-with-secure-transfer-storage.md
+  maintainContext: true
+- name: 네트워크 액세스
+  items:
+    - name: Azure VNet의 HDInsight
+      href: ../hdinsight-extend-hadoop-virtual-network.md
+      maintainContext: true
+    - name: 온-프레미스 네트워크와 HDInsight 연결
+      href: ../connect-on-premises-network.md
+      maintainContext: true
+    - name: Azure VNet에서 HBase 클러스터 만들기
+      href: ../hbase/apache-hbase-provision-vnet.md
+      maintainContext: true
+    - name: Azure VNet의 HBase 클러스터 복제
+      href: ../hbase/apache-hbase-replication.md
+      maintainContext: true
+- name: OMS를 사용한 모니터링
+  items:
+    - name: Azure Log Analytics 사용
+      href: ../hdinsight-hadoop-oms-log-analytics-tutorial.md
+      maintainContext: true
+    - name: 클러스터 지정 대시보드
+      href: ../hdinsight-hadoop-oms-log-analytics-management-solutions.md
+      maintainContext: true
+    - name: Log Analytics로 쿼리 사용
+      href: ../hdinsight-hadoop-oms-log-analytics-use-queries.md
+      maintainContext: true
+    - name: 클러스터 성능 모니터링
+      href: ../hdinsight-key-scenarios-to-monitor.md
+      maintainContext: true
+- name: 참고 자료
+  items:
+    - name: 코드 샘플
+      href: 'https://azure.microsoft.com/en-us/resources/samples/?service=hdinsight'
+    - name: Azure PowerShell
+      href: /powershell/module/azurerm.hdinsight
+    - name: .NET(Hadoop)
+      href: 'https://docs.microsoft.com/dotnet/api/overview/azure/hd-insight?view=azure-dotnet'
+    - name: .NET(HBase)
+      href: 'https://www.nuget.org/packages/Microsoft.HBase.Client/'
+    - name: .NET(Avro)
+      href: 'https://hadoopsdk.codeplex.com/wikipage?title=Avro%20Library'
+    - name: REST (영문)
+      href: /rest/api/hdinsight/
+    - name: REST(Spark)
+      href: /rest/api/hdinsightspark/
+- name: 리소스
+  items:
+    - name: 릴리스 정보
+      href: ../hdinsight-release-notes.md
+      maintainContext: true
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/?category=intelligence-analytics'
+    - name: 포럼에서 도움말 보기
+      href: 'https://social.msdn.microsoft.com/forums/azure/en-US/home?forum=hdinsight'
+    - name: 학습 경로
+      href: 'https://azure.microsoft.com/documentation/learning-paths/hdinsight-self-guided-hadoop-training/'
+    - name: 빅 데이터에 대한 Microsoft 전문가 프로그램
+      href: 'https://academy.microsoft.com/en-us/professional-program/big-data/'
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'
+    - name: HDInsight에 대한 Windows 도구
+      href: ../hdinsight-hadoop-windows-tools.md
+      maintainContext: true

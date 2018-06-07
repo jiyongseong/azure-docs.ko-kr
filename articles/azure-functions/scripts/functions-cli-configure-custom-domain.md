@@ -4,7 +4,7 @@ description: "Azure CLI 스크립트 샘플 - Azure의 함수 앱에 사용자 �
 services: functions
 documentationcenter: 
 author: ggailey777
-manager: erikre
+manager: cfowler
 editor: 
 tags: azure-service-management
 ms.assetid: d127e347-7581-47d7-b289-e0f51f2fbfbc
@@ -16,12 +16,11 @@ ms.topic: sample
 ms.date: 06/01/2017
 ms.author: glenga
 ms.custom: mvc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 4f68f90c3aea337d7b61b43e637bcfda3c98f3ea
-ms.openlocfilehash: 6fcea6d32f9dd25b0fafb4f895f60d8320ac9df8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
+ms.openlocfilehash: d2efd0891cb0010aac6135ce190ad77667f78efd
+ms.sourcegitcommit: 8c3267c34fc46c681ea476fee87f5fb0bf858f9e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/09/2018
 ---
 # <a name="map-a-custom-domain-to-a-function-app"></a>함수 앱에 사용자 지정 도메인 매핑
 
@@ -31,30 +30,29 @@ ms.lasthandoff: 06/20/2017
 
 [!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
 
-CLI를 로컬로 설치하여 사용하도록 선택한 경우 이 항목에서 Azure CLI 버전 2.0 이상을 실행해야 합니다. `az --version`을 실행하여 버전을 찾습니다. 설치 또는 업그레이드해야 하는 경우 [Azure CLI 2.0 설치]( /cli/azure/install-azure-cli)를 참조하세요. 
+CLI를 로컬로 설치하고 사용하려는 경우 Azure CLI 버전 2.0 이상을 사용해야 합니다. 버전을 확인하려면 `az --version`을 실행합니다. 설치 또는 업그레이드해야 하는 경우 [Azure CLI 2.0 설치]( /cli/azure/install-azure-cli)를 참조하세요. 
 
 
 ## <a name="sample-script"></a>샘플 스크립트
 
-[!code-azurecli-interactive[main](../../../cli_scripts/azure-functions/configure-custom-domain/configure-custom-domain.sh?highlight=3 "함수 앱에 사용자 지정 도메인 매핑")]
+[!code-azurecli-interactive[main](../../../cli_scripts/azure-functions/configure-custom-domain/configure-custom-domain.sh?highlight=3 "Map a custom domain to a function app")]
 
 [!INCLUDE [cli-script-clean-up](../../../includes/cli-script-clean-up.md)]
 
 ## <a name="script-explanation"></a>스크립트 설명
 
-이 스크립트는 다음 명령을 사용합니다. 테이블에 있는 각 명령은 명령에 해당하는 문서에 연결됩니다.
+이 스크립트는 다음 명령을 사용합니다. 표의 각 명령은 명령 관련 문서에 연결됩니다.
 
-| 명령 | 참고 사항 |
+| 명령 | 메모 |
 |---|---|
-| [az group create](https://docs.microsoft.com/cli/azure/group#create) | 모든 리소스가 저장되는 리소스 그룹을 만듭니다. |
-| [az storage account create](https://docs.microsoft.com/cli/azure/storage/account#create) | 함수 앱에 필요한 저장소 계정을 만듭니다. |
-| [az appservice plan create](https://docs.microsoft.com/cli/azure/appservice/plan#create) | 사용자 지정 도메인을 매핑하는 데 필요한 App Service 계획을 만듭니다. |
+| [az group create](https://docs.microsoft.com/cli/azure/group#az_group_create) | 모든 리소스가 저장되는 리소스 그룹을 만듭니다. |
+| [az storage account create](https://docs.microsoft.com/cli/azure/storage/account#az_storage_account_create) | 함수 앱에 필요한 저장소 계정을 만듭니다. |
+| [az appservice plan create](https://docs.microsoft.com/cli/azure/appservice/plan#az_appservice_plan_create) | 사용자 지정 도메인을 매핑하는 데 필요한 App Service 계획을 만듭니다. |
 | [az functionapp create]() | 함수 앱을 만듭니다. |
-| [az appservice web config hostname add](https://docs.microsoft.com/cli/azure/appservice/web/config/hostname#add) | 함수 앱에 사용자 지정 도메인을 매핑합니다. |
+| [az appservice web config hostname add](https://docs.microsoft.com/cli/azure/appservice/web/config/hostname#az_appservice_web_config_hostname_add) | 함수 앱에 사용자 지정 도메인을 매핑합니다. |
 
 ## <a name="next-steps"></a>다음 단계
 
-Azure CLI에 대한 자세한 내용은 [Azure CLI 설명서](https://docs.microsoft.com/cli/azure/overview)를 참조하세요.
+Azure CLI에 대한 자세한 내용은 [Azure CLI 설명서](https://docs.microsoft.com/cli/azure)를 참조하세요.
 
 추가 Functions CLI 스크립트 샘플은 [Azure Functions 설명서]()에서 확인할 수 있습니다.
-

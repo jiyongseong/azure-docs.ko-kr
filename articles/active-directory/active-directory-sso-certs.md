@@ -1,25 +1,24 @@
 ---
-title: "Azure AD에서 페더레이션 인증서 관리 | Microsoft Docs"
-description: "페더레이션 인증서에 대한 만료 날짜를 사용자 지정하는 방법 및 곧 만료되는 인증서를 갱신하는 방법에 대해 알아봅니다."
+title: Azure AD에서 페더레이션 인증서 관리 | Microsoft Docs
+description: 페더레이션 인증서에 대한 만료 날짜를 사용자 지정하는 방법 및 곧 만료되는 인증서를 갱신하는 방법에 대해 알아봅니다.
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: jeevansd
-manager: femila
-editor: 
-ms.assetid: f516f7f0-b25a-4901-8247-f5964666ce23
+manager: mtillman
+editor: ''
 ms.service: active-directory
+ms.component: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 07/09/2017
 ms.author: jeedes
+ms.openlocfilehash: 9924d06f149b0d234cd8f5546cab8abbab740aac
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 54774252780bd4c7627681d805f498909f171857
-ms.openlocfilehash: 1283b570200f05003658824760ecbb6722f241d9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="manage-certificates-for-federated-single-sign-on-in-azure-active-directory"></a>Azure Active Directory에서 페더레이션된 Single Sign-On에 대한 인증서 관리
 이 문서에서는 Azure AD(Azure Active Directory)에서 SaaS 응용 프로그램에 페더레이션된 SSO(Single Sign-On)를 설정하기 위해 만드는 인증서와 관련된 일반적인 질문과 정보를 다룹니다. Azure AD 앱 갤러리에서 또는 비갤러리 응용 프로그램 템플릿을 사용하여 응용 프로그램을 추가하고, 페더레이션된 SSO 옵션을 사용하여 응용 프로그램을 구성합니다.
@@ -51,7 +50,7 @@ ms.lasthandoff: 07/28/2017
 
     ![새 인증서 생성](./media/active-directory-sso-certs/create_new_certficate.png)
 
-5. **새 인증서 만들기** 링크는 달력 컨트롤을 엽니다. 날짜와 시간은 현재 날짜로부터 최대 3년까지 설정할 수 있습니다. 선택한 날짜와 시간은 새 인증서의 새로운 만료 날짜와 시간입니다. **Save**를 클릭합니다.
+5. **새 인증서 만들기** 링크는 달력 컨트롤을 엽니다. 날짜와 시간은 현재 날짜로부터 최대 3년까지 설정할 수 있습니다. 선택한 날짜와 시간은 새 인증서의 새로운 만료 날짜와 시간입니다. **저장**을 클릭합니다.
 
     ![다운로드한 다음 인증서 업로드](./media/active-directory-sso-certs/certifcate_date_selection.PNG)
 
@@ -77,6 +76,5 @@ ms.lasthandoff: 07/28/2017
 ## <a name="related-articles"></a>관련 문서
 * [Azure Active Directory를 사용하여 SaaS 앱을 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
 * [Azure Active Directory의 응용 프로그램 관리를 위한 문서 인덱스](active-directory-apps-index.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On](manage-apps/what-is-single-sign-on.md)
 * [SAML 기반 Single Sign-On 문제 해결](active-directory-saml-debugging.md)
-

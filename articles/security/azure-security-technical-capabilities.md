@@ -1,25 +1,24 @@
 ---
-title: "Azure 보안 기술 기능 | Microsoft Docs"
-description: "응용 프로그램 또는 엔터프라이즈의 요구 사항을 충족하기 위해 자동으로 확장하거나 축소할 수 있는 다양한 계산 인스턴스와 서비스를 포함하는 클라우드 기반 컴퓨팅 서비스에 대해 알아봅니다."
+title: Azure 보안 기술 기능 | Microsoft Docs
+description: 응용 프로그램 또는 엔터프라이즈의 요구 사항을 충족하기 위해 자동으로 확장하거나 축소할 수 있는 다양한 계산 인스턴스와 서비스를 포함하는 클라우드 기반 컴퓨팅 서비스에 대해 알아봅니다.
 services: security
 documentationcenter: na
 author: UnifyCloud
-manager: swadhwa
+manager: mbaldwin
 editor: TomSh
-ms.assetid: 
+ms.assetid: ''
 ms.service: security
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 05/26/2017
+ms.date: 11/01/2017
 ms.author: TomSh
+ms.openlocfilehash: 6643db7b732cc5b01ce7602eb3d679c130c46720
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 2983ce5c068e5188fb70ffc9443ce58d6c188c50
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
 # <a name="azure-security-technical-capabilities"></a>Azure 보안 기술 기능
 
@@ -43,14 +42,13 @@ Microsoft Azure를 사용하면 다음과 같은 작업을 수행할 수 있습�
 
 ## <a name="scope"></a>범위
 
-이 백서에서는 Microsoft Azure의 핵심 구성 요소, 즉 [Microsoft Azure Storage](https://docs.microsoft.com/azure/storage/storage-introduction), [Microsoft Azure SQL Database](https://docs.microsoft.com/azure/sql-database/), [Microsoft Azure의 가상 컴퓨터 모델](https://docs.microsoft.com/azure/virtual-machines/    )과 이를 관리하는 도구 및 인프라를 지원하는 보안 특징 및 기능을 중점적으로 소개합니다. 또한 이 백서는 고객이 데이터의 보안 및 개인 정보 보호를 이행하는 데 사용할 수 있는 Microsoft Azure 기술 기능에 주안점을 둡니다.
+이 백서에서는 Microsoft Azure의 핵심 구성 요소, 즉 [Microsoft Azure Storage](https://docs.microsoft.com/azure/storage/storage-introduction), [Microsoft Azure SQL Database](https://docs.microsoft.com/azure/sql-database/), [Microsoft Azure의 가상 컴퓨터 모델](https://docs.microsoft.com/azure/virtual-machines/)과 이를 관리하는 도구 및 인프라를 지원하는 보안 특징 및 기능을 중점적으로 소개합니다. 또한 이 백서는 고객이 데이터의 보안 및 개인 정보 보호를 이행하는 데 사용할 수 있는 Microsoft Azure 기술 기능에 주안점을 둡니다.
 
 이러한 공유 책임 모델을 이해하는 것은 클라우드로 전환하려는 고객에게 필수적입니다. 클라우드 공급자는 보안 및 규정 준수 활동에 대해 상당한 이점을 제공하지만 이러한 장점만으로 고객이 데이터, 응용 프로그램 및 서비스 제품을 보호하지 않아도 되는 것은 아닙니다.
 
 IaaS 솔루션의 경우 고객은 운영 체제, 네트워크 구성, 응용 프로그램, ID, 클라이언트 및 데이터의 보호와 관리에 대해 책임 또는 공동 책임을 갖습니다.  IaaS 배포를 토대로 구축되는 PaaS 솔루션의 경우 고객은 응용 프로그램, ID, 클라이언트 및 데이터의 보호와 관리에 대해 책임 또는 공동 책임을 갖습니다. 그렇지만 SaaS 솔루션의 경우 고객이 계속해서 책임을 져야 합니다. 데이터가 올바르게 분류되는지 확인하고, 해당 사용자 및 끝점 장치를 관리하는 책임을 공유해야 합니다.
 
 이 문서에서 Azure 웹 사이트, Azure Active Directory, HDInsight, Media Services 등의 관련된 Microsoft Azure 플랫폼 구성 요소와 핵심 구성 요소 위에 계층화되는 기타 서비스를 자세히 다루지는 않습니다. 최소 수준의 일반 정보가 제공되지만, 사용자가 Microsoft에서 제공하고 이 백서에 제공된 링크에 포함되어 있는 기타 참조에 설명된 Azure 기본 개념에 익숙하다고 가정합니다.
-
 
 ## <a name="available-security-technical-capabilities-to-fulfil-user-customer-responsibility---big-picture"></a>사용자(고객) 책임을 이행하기 위한 보안 기술 기능 - 전반적 이해
 
@@ -66,7 +64,7 @@ Azure에서는 사용자 ID 및 자격 증명을 관리하고 액세스를 제�
 
 Microsoft ID 및 액세스 관리 솔루션은 IT가 다중 요소 인증 및 조건부 액세스 정책과 같은 추가 수준의 유효성 검사를 활성화하여 회사 데이터 센터에 걸친 응용 프로그램 및 리소스에 대한 액세스 및 클라우드로 액세스를 보호하도록 도움을 줍니다. 고급 보안 보고, 감사 및 경고를 통해 의심스러운 작업을 모니터링하여 잠재적인 보안 문제를 완화시킵니다. [Azure Active Directory Premium](https://docs.microsoft.com/azure/active-directory/active-directory-editions) 은 수천 개의 클라우드 앱에 Single Sign-On(SaaS)을 제공하고 온-프레미스를 실행하는 웹앱에 액세스를 제공합니다.
 
-Azure AD(Active Directory)의 보안 이점은 다음과 같은 기능을 포함합니다.
+Azure Active Directory (Azure AD)의 보안 이점은 다음과 같은 기능을 포함합니다.
 
 - 하이브리드 엔터프라이즈에서 사용자, 그룹 및 장치의 동기화를 유지하도록 각 사용자에 대한 단일 ID 만들기 및 관리
 
@@ -114,7 +112,7 @@ Azure AD(Active Directory)의 보안 이점은 다음과 같은 기능을 포함
 
 일치하지 않는 액세스 패턴을 식별하는 보안 모니터링 및 경고 및 기계 학습 기반 보고서로 비즈니스를 보호할 수 있습니다. Azure Active Directory의 액세스 및 사용 보고서를 사용하여 조직 디렉터리의 무결성 및 보안을 볼 수 있습니다 이 정보를 사용하면 디렉터리 관리자는 가능한 보안 위험이 발생할 수 있는 위치를 보다 잘 결정하여 이러한 위험을 적절하게 완화할 수 있습니다.
 
-Azure 클래식 포털 또는 [Azure Active Directory 포털](http://aad.portal.azure.com/)에서 [보고서](https://docs.microsoft.com/azure/active-directory/active-directory-reporting-guide)는 다음과 같은 방식으로 분류되어 있습니다.
+Azure Portal 또는 [Azure Active Directory 포털](http://aad.portal.azure.com/)에서 [보고서](https://docs.microsoft.com/azure/active-directory/active-directory-reporting-guide)는 다음과 같은 방식으로 분류되어 있습니다.
 
 - 비정상 보고서 – 비정상으로 확인된 로그인 이벤트가 포함됩니다. 이러한 활동을 인식하고 이벤트가 의심스러운지 확인할 수 있게 해 줍니다.
 
@@ -134,9 +132,9 @@ Azure 클래식 포털 또는 [Azure Active Directory 포털](http://aad.portal.
 
 Azure Active Directory B2C를 사용하면 소비자는 기존 소셜 계정(Facebook, Google, Amazon, LinkedIn)을 사용하거나 새 자격 증명(전자 메일 주소 및 암호 또는 사용자 이름 및 암호)을 만들어서 응용 프로그램을 등록할 수 있습니다.
 
-장치 등록
+#### <a name="device-registration"></a>장치 등록
 
-[Azure AD Device Registration](https://docs.microsoft.com/azure/active-directory/active-directory-conditional-access-device-registration-overview)은 장치 기반 [조건부 액세스](https://docs.microsoft.com/azure/active-directory/active-directory-conditional-access-device-registration-overview) 시나리오의 기초입니다. 장치가 등록될 경우 Azure Active Directory 장치 등록은 사용자가 로그인할 때 장치를 인증하는 데 사용되는 ID로 장치를 제공합니다. 그런 다음 인증된 장치 및 그 장치의 특성을 사용하여 클라우드 및 온-프레미스에 호스트되는 응용 프로그램에 조건부 액세스 정책을 적용할 수 있습니다.
+[Azure AD Device Registration](https://docs.microsoft.com/azure/active-directory/device-management-introduction)은 장치 기반 [조건부 액세스](https://docs.microsoft.com/azure/active-directory/active-directory-device-registration-on-premises-setup) 시나리오의 기초입니다. 장치가 등록되면 Azure AD 장치 등록은 사용자가 로그인할 때 장치를 인증하는 데 사용되는 ID와 함께 장치를 제공합니다. 그런 다음 인증된 장치 및 그 장치의 특성을 사용하여 클라우드 및 온-프레미스에 호스트되는 응용 프로그램에 조건부 액세스 정책을 적용할 수 있습니다.
 
 Intune과 같은 [MDM(모바일 장치 관리)](https://www.microsoft.com/itshowcase/Article/Content/588/Mobile-device-management-at-Microsoft) 솔루션과 함께 사용할 경우 Azure Active Directory의 장치 특성이 장치에 대한 추가 정보로 업데이트됩니다. 이렇게 하면 장치의 액세스를 적용하여 보안 및 규정 준수에 대한 표준을 충족하는 조건부 액세스 규칙을 만들 수 있습니다.
 
@@ -162,19 +160,19 @@ Azure AD Privileged Identity Management를 통해 다음을 할 수 있습니다
 
 ## <a name="secured-resource-access-in-azure"></a>Azure의 보안 리소스 액세스
 
-Azure의 액세스 제어는 결제 관점에서 시작합니다. [Azure 계정 센터](https://account.windowsazure.com/subscriptions)를 방문하여 액세스하는 Azure 계정의 소유자는 계정 관리자(AA)입니다. 구독은 결제를 위한 컨테이너이지만 보안 경계로서의 역할도 합니다. 각 구독에는 [Azure 클래식 포털](https://manage.windowsazure.com/)을 사용하여 해당 구독에서 Azure 리소스를 추가, 제거 및 수정할 수 있는 서비스 관리자(SA)가 있습니다. 새 구독의 기본 SA는 AA이지만 AA가 Azure 계정 센터에서 SA를 변경할 수 있습니다.
+Azure의 액세스 제어는 결제 관점에서 시작합니다. [Azure 계정 센터](https://account.windowsazure.com/subscriptions)를 방문하여 액세스하는 Azure 계정의 소유자는 계정 관리자(AA)입니다. 구독은 결제를 위한 컨테이너이지만 보안 경계로서의 역할도 합니다. 각 구독에는 Azure Portal을 사용하여 해당 구독에서 Azure 리소스를 추가, 제거 및 수정할 수 있는 SA(서비스 관리자)가 있습니다. 새 구독의 기본 SA는 AA이지만 AA가 Azure 계정 센터에서 SA를 변경할 수 있습니다.
 
 ![Azure의 보안 리소스 액세스](media/azure-security-technical-capabilities/azure-security-technical-capabilities-fig3.png)
 
 또한 구독은 디렉터리와 연결되어 있습니다. 디렉터리는 사용자 집합을 정의합니다. 사용자 집합은 디렉터리를 만든 회사 또는 학교 사용자이거나 외부 사용자(즉, Microsoft 계정)일 수 있습니다. 구독은 서비스 관리자(SA) 또는 CA(공동 관리자)로 할당된 해당 디렉터리 사용자의 하위 집합에서 액세스할 수 있습니다. 유일한 예외는 레거시의 이유로 Microsoft 계정(이전의 Windows Live ID)이 디렉터리에 없는 SA 또는 CA로 할당될 수 있다는 점입니다.
 
-보안 지향적 회사는 직원에게 정확히 필요한 권한을 제공하는 데 중점을 두어야 합니다. 권한이 너무 많으면 공격자에게 계정이 노출될 수 있고, 권한이 너무 적으면 직원이 업무를 효율적으로 수행할 수 없습니다. [Azure RBAC(역할 기반 액세스 제어)](https://docs.microsoft.com/azure/active-directory/role-based-access-control-what-is)는 Azure에 대한 세밀한 액세스 관리를 제공하여 이 문제를 해결하도록 도와줍니다.
+보안 지향적 회사는 직원에게 정확히 필요한 권한을 제공하는 데 중점을 두어야 합니다. 권한이 너무 많으면 공격자에게 계정이 노출될 수 있고, 권한이 너무 적으면 직원이 업무를 효율적으로 수행할 수 없습니다. [Azure 역할 기반 Access Control(RBAC)](https://docs.microsoft.com/azure/role-based-access-control/overview)은 Azure에 대한 세밀한 액세스 관리를 제공하여 이 문제를 해결하도록 도와줍니다.
 
 ![보안 리소스 액세스 ](media/azure-security-technical-capabilities/azure-security-technical-capabilities-fig4.png)
 
-RBAC를 사용하면 팀 내에서 업무를 분리하고 사용자에게 해당 작업을 수행하는 데 필요한 만큼의 권한만 부여할 수 있습니다. Azure 구독 또는 리소스에서 모든 사람에게 무제한 권한을 제공하는 대신 특정 작업만 허용할 수 있습니다. 예를 들어 RBAC를 사용하여 한 명의 직원은 구독의 가상 컴퓨터를 관리하도록 하고, 다른 직원은 동일한 구독 내에서 SQL 데이터베이스를 관리하도록 할 수 있습니다.
+RBAC를 사용하면 팀 내에서 업무를 분리하고 사용자에게 해당 작업을 수행하는 데 필요한 만큼의 권한만 부여할 수 있습니다. Azure 구독 또는 리소스에서 모든 사람에게 무제한 권한을 제공하는 대신 특정 작업만 허용할 수 있습니다. 예를 들어 RBAC를 사용하여 한 명의 직원은 구독의 가상 머신을 관리하도록 하고, 다른 직원은 동일한 구독 내에서 SQL 데이터베이스를 관리하도록 할 수 있습니다.
 
-![Azure의 보안 리소스 액세스(RBAC)](media/azure-security-technical-capabilities/azure-security-technical-capabilities-fig5.png)
+![Azure의 보안 리소스 액세스 (RBAC)](media/azure-security-technical-capabilities/azure-security-technical-capabilities-fig5.png)
 
 ## <a name="azure-data-security-and-encryption-protect"></a>Azure 데이터 보안 및 암호화(보호)
 
@@ -182,9 +180,9 @@ RBAC를 사용하면 팀 내에서 업무를 분리하고 사용자에게 해당
 
 - 저장: 모든 정보 저장 개체, 컨테이너 및 물리적 미디어(자기 또는 광 디스크)에 정적으로 존재하는 유형이 여기에 포함됩니다.
 
-- 전송 중: 데이터가 Express 경로 같은 하이브리드 연결을 포함하여 서비스 버스에서(온-프레미스에서 클라우드로 또는 그 반대로) 네트워크를 통해 구성 요소, 위치 또는 프로그램 간에 전송 중이거나 입력/출력 프로세스 중인 경우 데이터가 동작 중인 것으로 간주됩니다.
+- 전송 중: 데이터가 ExpressRoute 같은 하이브리드 연결을 포함하여 서비스 버스에서(온-프레미스에서 클라우드로 또는 그 반대로) 네트워크를 통해 구성 요소, 위치 또는 프로그램 간에 전송 중이거나 입력/출력 프로세스 중인 경우 데이터가 동작 중인 것으로 간주됩니다.
 
-### <a name="encryption--rest"></a>휴지 상태의 암호화
+### <a name="encryption-at-rest"></a>휴지 상태의 암호화
 
 휴지 상태의 암호화를 달성하기 위해 다음의 각 작업이 필요합니다.
 
@@ -205,7 +203,7 @@ RBAC를 사용하면 팀 내에서 업무를 분리하고 사용자에게 해당
 > [!Note] 
 > "응용 프로그램 데이터" 또는 "PII' 뿐만 아니라 계정 메타데이터(구독 매핑, 계약 정보, PII)를 포함하여 응용 프로그램과 관련된 모든 데이터가 열거됩니다.
 
-데이터를 저장하는 데 어떤 저장소를 사용할지 고려하세요. 예:
+데이터를 저장하는 데 어떤 저장소를 사용할지 고려하세요. 예: 
 
 - 외부 저장소(예: SQL Azure, 문서 DB, HDInsight, Data Lake 등)
 
@@ -225,15 +223,15 @@ RBAC를 사용하면 팀 내에서 업무를 분리하고 사용자에게 해당
 
 지원되는 경우 VM 및 로컬 디스크 저장소에 대해 Azure Disk Encryption 사용:
 
-IaaS
+#### <a name="iaas"></a>IaaS
 
 IaaS VM(Windows 또는 Linux)이 있는 서비스는 [Azure Disk Encryption](https://microsoft.sharepoint.com/teams/AzureSecurityCompliance/Security/SitePages/Azure%20Disk%20Encryption.aspx)을 사용하여 고객 데이터가 포함된 볼륨을 암호화해야 합니다.
 
-PaaS v2
+#### <a name="paas-v2"></a>PaaS v2
 
-Service Fabric을 사용하여 PaaS v2에서 실행되는 서비스는 VMSS[가상 컴퓨터 크기 집합]에 대해 Azure Disk Encryption을 사용하여 PaaS v2 VM을 암호화할 수 있습니다.
+Service Fabric을 사용하여 PaaS v2에서 실행되는 서비스는 VMSS[Virtual Machine Scale Set]에 대해 Azure Disk Encryption을 사용하여 PaaS v2 VM을 암호화할 수 있습니다.
 
-PaaS v1
+#### <a name="paas-v1"></a>PaaS v1
 
 Azure Disk Encryption은 현재 PaaS v1에서 지원되지 않습니다. 따라서 휴지 상태에서 지속형 데이터를 암호화하는 데는 응용 프로그램 수준 암호화를 사용해야 합니다.  여기에는 응용 프로그램 데이터, 임시 파일, 로그 및 크래시 덤프가 포함되지만 이에 국한되지 않습니다.
 
@@ -263,13 +261,13 @@ Azure Key Vault에 통합하려는 경우 암호 해독에 필요할 때 AKV에�
 
 온-프레미스에 있는 한 워크스테이션에서 Azure로의 액세스를 보호해야 하는 조직의 경우 [지점 및 사이트 간 VPN](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-point-to-site-create)을 사용합니다.
 
-대용량 데이터 집합은 [Express 경로](https://azure.microsoft.com/services/expressroute/) 같은 전용 고속 WAN 링크를 통해 이동할 수 있습니다. Express 경로를 사용하기로 선택하는 경우 [SSL/TLS](https://support.microsoft.com/kb/257591) 또는 기타 프로토콜을 사용하여 응용 프로그램 수준에서 데이터를 암호화하면 보안 수준을 더욱 높일 수 있습니다.
+대용량 데이터 집합은 [ExpressRoute](https://azure.microsoft.com/services/expressroute/) 같은 전용 고속 WAN 링크를 통해 이동할 수 있습니다. ExpressRoute를 사용하기로 선택하는 경우 [SSL/TLS](https://support.microsoft.com/kb/257591) 또는 기타 프로토콜을 사용하여 응용 프로그램 수준에서 데이터를 암호화하면 보안 수준을 더욱 높일 수 있습니다.
 
-Azure 포털을 통해 Azure 저장소와 상호 작용하는 경우 모든 트랜잭션이 HTTPS를 통해 발생합니다. 또한 HTTPS를 통해 [저장소 REST API](https://msdn.microsoft.com/library/azure/dd179355.aspx)를 사용하여 [Azure Storage](https://azure.microsoft.com/services/storage/) 및 [Azure SQL Database](https://azure.microsoft.com/services/sql-database/)와 상호 작용할 수 있습니다.
+Azure Portal을 통해 Azure Storage와 상호 작용하는 경우 모든 트랜잭션이 HTTPS를 통해 발생합니다. 또한 HTTPS를 통해 [저장소 REST API](https://msdn.microsoft.com/library/azure/dd179355.aspx)를 사용하여 [Azure Storage](https://azure.microsoft.com/services/storage/) 및 [Azure SQL Database](https://azure.microsoft.com/services/sql-database/)와 상호 작용할 수 있습니다.
 
 전송 중인 데이터 보호에 실패하는 조직은 [가로채기(man-in-the-middle) 공격](https://technet.microsoft.com/library/gg195821.aspx), [도청](https://technet.microsoft.com/library/gg195641.aspx) 및 세션 하이재킹에 좀 더 취약합니다. 이러한 공격은 기밀 데이터에 대한 액세스 권한을 획득하기 위한 첫 번째 단계일 수 있습니다.
 
-Azure VPN 옵션에 대한 자세한 내용은 [VPN 게이트웨이 계획 및 설계](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-plan-design) 문서를 참조하세요.
+Azure VPN 옵션에 대한 자세한 내용은 [VPN Gateway 계획 및 설계](https://docs.microsoft.com/azure/vpn-gateway/vpn-gateway-plan-design) 문서를 참조하세요.
 
 ### <a name="enforce-file-level-data-encryption"></a>파일 수준 데이터 암호화 적용
 
@@ -318,17 +316,13 @@ Azure가 응용 프로그램이 실행되는 인프라 및 플랫폼의 보안�
 
 또한 Azure에서는 앱에 대한 안전한 인바운드 및 아웃바운드 트래픽에 도움이 되는 사용하기 쉬운 몇 가지 기능도 제공합니다. 그뿐 아니라 Azure에서는 웹 응용 프로그램에서 취약점을 검색하는 기능을 외부적으로 제공함으로써 응용프로그램 코드의 보안에 도움을 줍니다.
 
-- [다양한 인증 및 권한 부여 방법을 사용하여 웹앱 보안](https://docs.microsoft.com/azure/app-service-web/web-sites-authentication-authorization)
+- [앱에 대한 Azure Active Directory 인증 설정](https://azure.microsoft.com/blog/azure-websites-authentication-authorization/)
 
-    - [앱에 대한 Azure Active Directory 인증 설정](https://azure.microsoft.com/blog/azure-websites-authentication-authorization/)
+- [전송 계층 보안(TLS/SSL) - HTTPS를 사용하여 앱에 대한 트래픽 보호](https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-custom-ssl)
 
-
-- [전송 계층 보안(TLS/SSL) - HTTPS를 사용하여 앱에 대한 트래픽 보호](https://docs.microsoft.com/azure/app-service-web/web-sites-configure-ssl-certificate)
-
-    - [HTTPS 연결을 통해 들어오는 모든 트래픽 강제 지정](http://microsoftazurewebsitescheatsheet.info/)
+  - [HTTPS 연결을 통해 들어오는 모든 트래픽 강제 지정](http://microsoftazurewebsitescheatsheet.info/)
 
   - [엄격한 전송 보안(HSTS)을 사용하도록 설정](http://microsoftazurewebsitescheatsheet.info/#enable-http-strict-transport-security-hsts)
-
 
 - [클라이언트의 IP 주소로 앱에 대한 액세스 제한](http://microsoftazurewebsitescheatsheet.info/#filtering-traffic-by-ip)
 
@@ -336,28 +330,28 @@ Azure가 응용 프로그램이 실행되는 인프라 및 플랫폼의 보안�
 
 - [Tinfoil Security 검사를 사용하여 취약성에 대한 웹앱 코드 검사](https://azure.microsoft.com/blog/web-vulnerability-scanning-for-azure-app-service-powered-by-tinfoil-security/)
 
-- [웹앱에 연결하는 클라이언트 인증서를 요구하도록 TLS 상호 인증 구성](https://docs.microsoft.com/azure/app-service-web/app-service-web-configure-tls-mutual-auth)
+- [웹앱에 연결하는 클라이언트 인증서를 요구하도록 TLS 상호 인증 구성](https://docs.microsoft.com/azure/app-service/app-service-web-configure-tls-mutual-auth)
 
 - [외부 리소스에 안전하게 연결하도록 앱의 사용에 대한 클라이언트 인증서 구성](https://azure.microsoft.com/blog/using-certificates-in-azure-websites-applications/)
 
 - [도구의 앱 지문을 방지하도록 표준 서버 헤더 제거](https://azure.microsoft.com/blog/removing-standard-server-headers-on-windows-azure-web-sites/)
 
-- [지점 및 사이트 간 VPN을 사용하여 개인 네트워크의 리소스로 안전하게 앱 연결](https://docs.microsoft.com/azure/app-service-web/web-sites-integrate-with-vnet)
+- [지점 및 사이트 간 VPN을 사용하여 개인 네트워크의 리소스로 안전하게 앱 연결](https://docs.microsoft.com/azure/app-service/web-sites-integrate-with-vnet)
 
-- [하이브리드 연결을 사용하여 개인 네트워크의 리소스로 안전하게 앱 연결](https://docs.microsoft.com/azure/app-service-web/web-sites-hybrid-connection-get-started)
+- [하이브리드 연결을 사용하여 개인 네트워크의 리소스로 안전하게 앱 연결](https://docs.microsoft.com/azure/app-service/app-service-hybrid-connections)
 
-Azure 앱 서비스는 Azure 클라우드 서비스 및 가상 컴퓨터에서 사용하는 것과 동일한 맬웨어 방지 솔루션을 사용합니다. 자세한 내용은 [맬웨어 방지 설명서](https://docs.microsoft.com/azure/security/azure-security-antimalware)
+Azure App Service는 Azure Cloud Services 및 Virtual Machines에서 사용하는 것과 동일한 맬웨어 방지 솔루션을 사용합니다. 자세한 내용은 [맬웨어 방지 설명서](https://docs.microsoft.com/azure/security/azure-security-antimalware)
 
 ## <a name="secure-your-network-protect"></a>네트워크 보안(보호)
 Microsoft Azure에는 사용자의 응용 프로그램과 서비스 연결 요구 사항을 지원하기 위한 강력한 네트워킹 인프라가 포함되어 있습니다. 네트워크 연결은 Azure에 위치한 리소스 간, 온-프레미스와 Azure 호스팅 리소스 간, 그리고 인터넷과 Azure 간에 가능합니다.
 
-[Azure 네트워크 인프라](https://docs.microsoft.com/azure/virtual-machines/windows/infrastructure-networking-guidelines)를 사용하면 Azure 리소스와 [VNet(가상 네트워크)](https://docs.microsoft.com/azure/virtual-network/virtual-networks-overview)을 서로 안전하게 연결할 수 있습니다. VNet은 클라우드의 사용자 네트워크를 나타내는 표현입니다. 구독 전용 Azure 클라우드 네트워크를 논리적으로 격리한 것이 VNet입니다. 또한 온-프레미스 네트워크에 VNet을 연결할 수 있습니다.
+[Azure 네트워크 인프라](https://docs.microsoft.com/azure/virtual-machines/windows/infrastructure-networking-guidelines)를 사용하면 Azure 리소스와 [VNet(가상 네트워크)](https://docs.microsoft.com/azure/virtual-network/virtual-networks-overview)을 서로 안전하게 연결할 수 있습니다. VNet은 클라우드에 있는 사용자의 네트워크를 나타내며, 구독 전용 Azure 클라우드 네트워크를 논리적으로 격리한 것이 VNet입니다. 또한 온-프레미스 네트워크에 VNet을 연결할 수 있습니다.
 
 ![네트워크 보안(보호)](media/azure-security-technical-capabilities/azure-security-technical-capabilities-fig6.png)
 
 기본적인 네트워크 수준 액세스 제어(IP 주소 및 TCP 또는 UDP 프로토콜 기반)가 필요하다면 [네트워크 보안 그룹](https://docs.microsoft.com/azure/virtual-network/virtual-networks-nsg)을 사용할 수 있습니다. NSG(네트워크 보안 그룹)은 기본적인 상태 저장 패킷 필터링 방화벽으로서, [5개 튜플](https://www.techopedia.com/definition/28190/5-tuple)에 기반하여 액세스를 제어할 수 있습니다.
 
-Azure 네트워킹은 Azure 가상 네트워크의 네트워크 트래픽에 대한 라우팅 동작을 사용자 지정할 수 있는 기능을 지원하여 Azure에서 [사용자 정의 경로](https://docs.microsoft.com/azure/virtual-network/virtual-networks-udr-overview)를 구성하면 이 작업을 수행할 수 있습니다.
+Azure 네트워킹은 Azure Virtual Network의 네트워크 트래픽에 대한 라우팅 동작을 사용자 지정할 수 있는 기능을 지원하여 Azure에서 [사용자 정의 경로](https://docs.microsoft.com/azure/virtual-network/virtual-networks-udr-overview)를 구성하면 이 작업을 수행할 수 있습니다.
 
 [터널링 적용](https://www.petri.com/azure-forced-tunneling) 은 사용자의 서비스가 인터넷에서 장치에 대한 연결을 개시하지 못하게 하도록 사용할 수 있는 메커니즘입니다.
 
@@ -365,13 +359,13 @@ Azure는 온-프레미스 네트워크에 대한 전용 WAN 링크 연결과 [Ex
 
 ## <a name="virtual-machine-security-protect"></a>가상 컴퓨터 보안(보호)
 
-[Azure Virtual Machines](https://docs.microsoft.com/azure/virtual-machines/)를 사용하면 다양한 컴퓨팅 솔루션을 민첩하게 배포할 수 있습니다. Microsoft Windows, Linux, Microsoft SQL Server, Oracle, IBM, SAP 및 Azure BizTalk 서비스 지원을 통해 거의 모든 운영 체제에 모든 작업과 언어를 배포할 수 있습니다.
+[Azure Virtual Machines](https://docs.microsoft.com/azure/virtual-machines/)를 사용하면 다양한 컴퓨팅 솔루션을 민첩하게 배포할 수 있습니다. Microsoft Windows, Linux, Microsoft SQL Server, Oracle, IBM, SAP 및 Azure BizTalk Services 지원을 통해 거의 모든 운영 체제에 모든 작업과 언어를 배포할 수 있습니다.
 
-Azure를 통해 가상 컴퓨터를 악성 파일, 애드웨어 및 기타 위협으로부터 보호할 수 있도록 Microsoft, Symantec, Trend Micro 및 Kaspersky 등의 보안 공급업체의 [맬웨어 방지 소프트웨어](https://docs.microsoft.com/azure/security/azure-security-antimalware)를 사용할 수 있습니다.
+Azure를 통해 가상 머신을 악성 파일, 애드웨어 및 기타 위협으로부터 보호할 수 있도록 Microsoft, Symantec, Trend Micro 및 Kaspersky 등의 보안 공급업체의 [맬웨어 방지 소프트웨어](https://docs.microsoft.com/azure/security/azure-security-antimalware)를 사용할 수 있습니다.
 
-Azure 클라우드 서비스 및 가상 컴퓨터를 위한 Microsoft 맬웨어 방지 프로그램은 바이러스, 스파이웨어 및 기타 악성 소프트웨어를 식별 및 제거하는 데 도움이 되는 실시간 보호 기능입니다. Microsoft 맬웨어 방지 프로그램은 알려진 악성 또는 원치 않는 소프트웨어가 Azure 시스템에서 스스로의 설치나 실행을 시도할 때 구성 가능한 경고를 제공합니다.
+Azure Cloud Services 및 Virtual Machines를 위한 Microsoft 맬웨어 방지 프로그램은 바이러스, 스파이웨어 및 기타 악성 소프트웨어를 식별 및 제거하는 데 도움이 되는 실시간 보호 기능입니다. Microsoft 맬웨어 방지 프로그램은 알려진 악성 또는 원치 않는 소프트웨어가 Azure 시스템에서 스스로의 설치나 실행을 시도할 때 구성 가능한 경고를 제공합니다.
 
-[Azure Backup](https://docs.microsoft.com/azure/backup/backup-introduction-to-azure-backup)은 자본 투자 없이 최소의 비용으로 응용 프로그램 데이터를 보호하는 확장성이 뛰어난 솔루션입니다. 응용 프로그램 오류로 인해 데이터가 손상되고 사용자 오류로 인해 응용 프로그램에 버그가 발생할 수 있습니다. Azure 백업은 Windows 및 Linux를 실행하는 가상 컴퓨터의 보호에 도움이 됩니다.
+[Azure Backup](https://docs.microsoft.com/azure/backup/backup-introduction-to-azure-backup)은 자본 투자 없이 최소의 비용으로 응용 프로그램 데이터를 보호하는 확장성이 뛰어난 솔루션입니다. 응용 프로그램 오류로 인해 데이터가 손상되고 사용자 오류로 인해 응용 프로그램에 버그가 발생할 수 있습니다. Azure Backup은 Windows 및 Linux를 실행하는 가상 머신의 보호에 도움이 됩니다.
 
 [Azure Site Recovery](https://docs.microsoft.com/azure/site-recovery/site-recovery-overview)를 사용하면 기본 위치가 중단되는 경우 보조 위치에서 사용할 수 있도록 워크로드 및 앱의 복제, 장애 조치 및 복구를 오케스트레이션할 수 있습니다.
 
@@ -425,7 +419,7 @@ OMS를 사용하면 경쟁력 있는 솔루션보다 저렴한 비용으로 온-
 
 보안 센터는 Azure 리소스의 보안 상태를 분석하여 잠재적인 보안 취약성을 식별합니다. 권장 사항 목록은 필요한 컨트롤 구성 과정을 안내합니다.
 
-예를 들면 다음과 같습니다.
+이러한 예로 다음이 포함됩니다.
 
 - 맬웨어 방지 프로그램을 프로비전하여 악성 소프트웨어 식별 및 제거 지원
 
@@ -463,9 +457,9 @@ OMS를 사용하면 경쟁력 있는 솔루션보다 저렴한 비용으로 온-
 
 ### <a name="storage-analytics"></a>저장소 분석
 
-[저장소 분석](https://docs.microsoft.com/rest/api/storageservices/fileservices/storage-analytics)은 저장소 서비스 요청과 관련하여 집계된 트랜잭션 통계 및 용량 데이터를 포함하는 메트릭을 저장할 수 있습니다. 트랜잭션은 API 작업 수준과 저장소 서비스 수준에서 모두 보고되며 용량은 저장소 서비스 수준에서 보고됩니다. 메트릭 데이터를 사용하면 저장소 서비스 사용량을 분석하고 저장소 서비스에 대한 요청의 문제를 진단하며 서비스를 사용하는 응용 프로그램의 성능을 개선할 수 있습니다.
+[저장소 분석](https://docs.microsoft.com/rest/api/storageservices/fileservices/storage-analytics)은 Storage 서비스 요청과 관련하여 집계된 트랜잭션 통계 및 용량 데이터를 포함하는 메트릭을 저장할 수 있습니다. 트랜잭션은 API 작업 수준과 저장소 서비스 수준에서 모두 보고되며 용량은 저장소 서비스 수준에서 보고됩니다. 메트릭 데이터를 사용하면 저장소 서비스 사용량을 분석하고 저장소 서비스에 대한 요청의 문제를 진단하며 서비스를 사용하는 응용 프로그램의 성능을 개선할 수 있습니다.
 
-### <a name="application-insights"></a>Application insights
+### <a name="application-insights"></a>Application Insights
 
 [Application Insights](https://docs.microsoft.com/azure/application-insights/app-insights-overview)는 여러 플랫폼의 웹 개발자를 위한 확장성 있는 APM(Application Performance Management) 서비스입니다. 이를 사용하여 라이브 웹 응용 프로그램을 모니터링합니다. 성능 이상을 자동으로 감지합니다. 사용자가 문제를 진단하고 앱을 사용하여 수행할 작업을 이해할 수 있도록 돕는 강력한 분석 도구를 포함합니다. 성능 및 가용성을 지속적으로 향상시킬 수 있도록 설계되었습니다. .NET, Node.js 및 J2EE, 호스팅된 온-프레미스 또는 클라우드의 다양한 플랫폼에서 앱과 함께 사용합니다. devOps 프로세스와 통합되며, 다양한 개발 도구에 대한 연결 지점이 있습니다.
 
@@ -490,6 +484,7 @@ OMS를 사용하면 경쟁력 있는 솔루션보다 저렴한 비용으로 온-
 - 앱의 **진단 추적 로그** - 추적 이벤트를 요청과 상호 연결하는 데 사용됩니다.
 
 - 판매된 품목, 승리한 게임 등의 비즈니스 이벤트를 추적하기 위해 개발자가 직접 클라이언트 또는 서버 코드로 작성하는 **사용자 지정 이벤트 및 메트릭**.
+
 응용 프로그램에 대한 인프라는 일반적으로 가상 컴퓨터, 저장소 계정 및 가상 네트워크 또는 웹앱, 데이터베이스, 데이터베이스 서버 및 타사 서비스 등의 많은 구성 요소를 만듭니다. 이러한 구성 요소를 별도 엔터티로 표시하지 않으면, 대신 관련된 단일 엔터티의 상호 종속적으로 부분으로 표시됩니다. 그룹으로 배포, 관리 및 모니터링하려고 합니다. [Azure Resource Manager](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview)를 사용하면 솔루션에서 리소스를 그룹으로 사용할 수 있습니다.
 
 조정된 단일 작업에서 솔루션에 대한 모든 리소스를 배포, 업데이트 또는 삭제할 수 있습니다. 배포용 템플릿을 사용하고 이 템플릿을 테스트, 스테이징 및 프로덕션과 같은 여러 환경에서 사용할 수 있습니다. 리소스 관리자는 보안, 감사 및 태그 기능을 제공하여 배포 후에 리소스를 관리할 수 있습니다.
@@ -532,4 +527,3 @@ OMS를 사용하면 경쟁력 있는 솔루션보다 저렴한 비용으로 온-
 - [네트워크 보안](https://www.microsoft.com/en-us/trustcenter/security/networksecurity)
 
 - [위협 관리](https://www.microsoft.com/en-us/trustcenter/security/threatmanagement)
-

@@ -1,35 +1,28 @@
 ---
-title: "Azure Functions에 대한 JavaScript 개발자 참조 | Microsoft Docs"
-description: "JavaScript를 사용하여 함수를 개발하는 방법을 알아봅니다."
+title: Azure Functions에 대한 JavaScript 개발자 참조 | Microsoft Docs
+description: JavaScript를 사용하여 함수를 개발하는 방법을 알아봅니다.
 services: functions
 documentationcenter: na
-author: christopheranderson
-manager: erikre
-editor: 
-tags: 
-keywords: "Azure Functions, 함수, 이벤트 처리, webhook, 동적 계산, 서버가 없는 아키텍처"
+author: tdykstra
+manager: cfowler
+editor: ''
+tags: ''
+keywords: Azure Functions, 함수, 이벤트 처리, webhook, 동적 계산, 서버가 없는 아키텍처
 ms.assetid: 45dedd78-3ff9-411f-bb4b-16d29a11384c
 ms.service: functions
 ms.devlang: nodejs
 ms.topic: reference
 ms.tgt_pltfrm: multiple
 ms.workload: na
-ms.date: 05/25/2017
-ms.author: chrande, glenga
+ms.date: 03/04/2018
+ms.author: tdykstra
+ms.openlocfilehash: 78f29cd4a20861e40bb7f7f398979b8d93387a7b
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
 ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
-ms.openlocfilehash: 641afd78aae145c5e1b16a08567a22c1aafe59a8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
 # <a name="azure-functions-javascript-developer-guide"></a>Azure Functions JavaScript 개발자 가이드
-> [!div class="op_single_selector"]
-> * [C# 스크립트](functions-reference-csharp.md)
-> * [F# 스크립트](functions-reference-fsharp.md)
-> * [JavaScript](functions-reference-node.md)
-> 
-> 
 
 Azure Functions의 JavaScript 환경은 런타임과 통신하고 바인딩을 통해 데이터를 보내고 받는 `context` 개체를 전달하는 함수를 쉽게 내보낼 수 있도록 합니다.
 
@@ -54,14 +47,14 @@ module.exports = function(context, myTrigger, myInput, myOtherInput) {
 
 `direction === "in"`의 바인딩은 함수 인수로 전달됩니다. 즉, [`arguments`](https://msdn.microsoft.com/library/87dw3w1k.aspx)를 사용하여 동적으로 새 입력을 처리할 수 있습니다(예: 모든 입력에 대해 반복되는 `arguments.length` 사용). 이 기능은 `context` 개체를 참조하지 않고 트리거 데이터에 예측 가능한 방식으로 액세스할 수 있으므로 트리거만 있고 추가 입력이 없는 경우에 편리합니다.
 
-내보내기 문에 인수를 지정하지 않은 경우에도 *function.json*에서 발생하는 순서에 따라 인수가 항상 함수에 전달됩니다. 예를 들어 `function(context, a, b)`을 `function(context, a)`으로 변경하는 경우 `arguments[3]`를 참조하여 여전히 함수 코드의 `b` 값을 가져올 수 있습니다.
+내보내기 문에 인수를 지정하지 않은 경우에도 *function.json*에서 발생하는 순서에 따라 인수가 항상 함수에 전달됩니다. 예를 들어 `function(context, a, b)`을 `function(context, a)`으로 변경하는 경우 `arguments[2]`를 참조하여 여전히 함수 코드의 `b` 값을 가져올 수 있습니다.
 
 또한 방향에 관계없이 모든 바인딩은 `context` 개체로 전달됩니다(다음 스크립트 참조). 
 
 ## <a name="context-object"></a>context 개체
 런타임은 함수로 데이터를 전달하거나 전달받으며 사용자가 런타임과 통신할 수 있도록 하는 `context` 개체를 사용합니다.
 
-context 개체는 항상 함수의 첫 번째 매개 변수이며 런타임을 올바르게 사용하는 데 필요한 `context.done` 및 `context.log`와 같은 메서드를 가지고 있으므로 포함되어야 합니다. 원하는 개체 이름(예: `ctx` 또는 `c`)을 지정할 수 있습니다.
+`context` 개체는 항상 함수에 대한 첫 번째 매개 변수이며, 런타임을 올바르게 사용하는 데 필요한 `context.done` 및 `context.log`와 같은 메서드를 가지고 있으므로 포함되어야 합니다. 원하는 개체 이름(예: `ctx` 또는 `c`)을 지정할 수 있습니다.
 
 ```javascript
 // You must include a context, but other arguments are optional
@@ -122,7 +115,7 @@ context.log(message)
 기본 추적 수준에서 스트리밍 콘솔 로그에 기록할 수 있습니다. `context.log`에서 다른 추적 수준에서 콘솔 로그에 쓸 수 있는 추가 로깅 메서드가 제공됩니다.
 
 
-| 메서드                 | 설명                                |
+| 방법                 | 설명                                |
 | ---------------------- | ------------------------------------------ |
 | **error(_message_)**   | 오류 수준 로깅 또는 더 낮은 수준의 로깅에 씁니다.   |
 | **warn(_message_)**    | 경고 수준 로깅 또는 더 낮은 수준의 로깅에 씁니다. |
@@ -202,7 +195,7 @@ Functions를 통해 콘솔에 쓸 임계값 추적 수준을 정의할 수 있�
 }  
 ```
 
-**consoleLevel**의 값은 `context.log` 메서드의 이름에 해당합니다. 콘솔에 대한 모든 추적 로깅을 사용하지 않으려면 **consoleLevel**을 _off_로 설정합니다. host.json 파일에 대한 자세한 내용은 [host.json 참조 항목](https://github.com/Azure/azure-webjobs-sdk-script/wiki/host.json)(영문)을 참조하세요.
+**consoleLevel**의 값은 `context.log` 메서드의 이름에 해당합니다. 콘솔에 대한 모든 추적 로깅을 사용하지 않으려면 **consoleLevel**을 _off_로 설정합니다. 자세한 내용은 [host.json 참조](functions-host-json.md)를 참조하세요.
 
 ## <a name="http-triggers-and-bindings"></a>HTTP 트리거 및 바인딩
 
@@ -212,7 +205,7 @@ HTTP, 웹후크 트리거 및 HTTP 출력 바인딩은 요청 및 응답 개체�
 
 `request` 개체의 속성은 다음과 같습니다.
 
-| 속성      | 설명                                                    |
+| 자산      | 설명                                                    |
 | ------------- | -------------------------------------------------------------- |
 | _body_        | 요청의 본문을 포함하는 개체입니다.               |
 | _headers_     | 요청 헤더를 포함하는 개체입니다.                   |
@@ -227,7 +220,7 @@ HTTP, 웹후크 트리거 및 HTTP 출력 바인딩은 요청 및 응답 개체�
 
 `response` 개체의 속성은 다음과 같습니다.
 
-| 속성  | 설명                                               |
+| 자산  | 설명                                               |
 | --------- | --------------------------------------------------------- |
 | _body_    | 응답의 본문을 포함하는 개체입니다.         |
 | _headers_ | 응답 헤더를 포함하는 개체입니다.             |
@@ -271,7 +264,15 @@ HTTP 트리거로 작업할 때 세 가지 방법으로 HTTP 요청 및 응답 �
     ```  
 
 ## <a name="node-version-and-package-management"></a>노드 버전 및 패키지 관리
-노드 버전이 현재 `6.5.0`에서 잠겨 있습니다. 더 많은 버전에 대한 지원을 추가하고 구성할 수 있도록 연구 중입니다.
+
+다음 표에서는 주 버전의 Functions 런타임 각각에서 사용되는 Node.js 버전을 보여 줍니다.
+
+| Functions 버전 | Node.js 버전 | 
+|---|---|
+| 1.x | 6.11.2(런타임에 의해 잠김) |
+| 2.x  |8.4.0 이상(현재 LTS 8.9.4가 권장됨). WEBSITE_NODE_DEFAULT_VERSION [앱 설정](functions-how-to-use-azure-function-app-settings.md#settings)을 사용하여 버전을 설정합니다.|
+
+함수에서 `process.version`을 인쇄하여 해당 런타임이 사용하는 현재 버전을 볼 수 있습니다.
 
 다음 단계를 사용하면 함수 앱에 패키지를 포함할 수 있습니다. 
 
@@ -301,7 +302,7 @@ module.exports = function(context) {
 함수 앱의 루트에 `package.json` 파일을 정의해야 합니다. 파일을 정의하면 앱의 모든 함수에서 동일한 캐시된 패키지를 공유할 수 있으므로 최상의 성능을 제공합니다. 버전 충돌이 발생하는 경우 특정 함수의 폴더에 `package.json` 파일을 추가하여 이 충돌을 해결할 수 있습니다.  
 
 ## <a name="environment-variables"></a>환경 변수
-환경 변수 또는 앱 설정 값을 가져오려면 다음 코드 예제와 같이 `process.env`를 사용합니다.
+환경 변수 또는 앱 설정 값을 가져오려면 여기에 표시된 `GetEnvironmentVariable` 함수와 같이 `process.env`를 사용합니다.
 
 ```javascript
 module.exports = function (context, myTimer) {
@@ -323,9 +324,9 @@ function GetEnvironmentVariable(name)
 
 JavaScript 함수로 작업하는 경우 다음 두 섹션에서 고려 사항을 알아야 합니다.
 
-### <a name="choose-single-core-app-service-plans"></a>단일 코어 App Service 계획 선택
+### <a name="choose-single-vcpu-app-service-plans"></a>단일 vCPU App Service 계획 선택
 
-App Service 계획을 사용하는 함수 앱을 만들 때 여러 코어가 있는 계획보다는 단일 코어 계획을 선택하는 것이 좋습니다. 현재 Functions는 단일 코어 VM에서 JavaScript 함수를 더 효율적으로 실행합니다. 더 큰 VM을 사용하면 예상된 성능 향상을 보여 주지 않습니다. 필요한 경우 더 많은 단일 코어 VM 인스턴스를 추가하여 수동으로 확장하거나 자동 크기 조정을 사용하도록 설정할 수 있습니다. 자세한 내용은 [수동 또는 자동으로 인스턴스 개수 조정](../monitoring-and-diagnostics/insights-how-to-scale.md?toc=%2fazure%2fapp-service-web%2ftoc.json)을 참조하세요.    
+App Service 계획을 사용하는 함수 앱을 만들 때 여러 vCPU가 있는 계획보다는 단일 vCPU 계획을 선택하는 것이 좋습니다. 현재 Functions는 단일 vCPU VM에서 JavaScript 함수를 더 효율적으로 실행합니다. 더 큰 VM을 사용해도 예상된 성능 향상을 보여 주지 않습니다. 필요한 경우 더 많은 단일 vCPU VM 인스턴스를 추가하여 수동으로 확장하거나 자동 크기 조정을 사용하도록 설정할 수 있습니다. 자세한 내용은 [수동 또는 자동으로 인스턴스 개수 조정](../monitoring-and-diagnostics/insights-how-to-scale.md?toc=%2fazure%2fapp-service-web%2ftoc.json)을 참조하세요.    
 
 ### <a name="typescript-and-coffeescript-support"></a>TypeScript 및 CoffeeScript 지원
 아직 런타임을 통해 TypeScript 또는 CoffeeScript 자동 컴파일에 대한 직접 지원이 없으므로 배포 시 런타임 외부에서 이러한 지원이 처리되어야 합니다. 
@@ -335,8 +336,5 @@ App Service 계획을 사용하는 함수 앱을 만들 때 여러 코어가 있
 
 * [Azure Functions에 대한 모범 사례](functions-best-practices.md)
 * [Azure Functions 개발자 참조](functions-reference.md)
-* [Azure Functions C# 개발자 참조](functions-reference-csharp.md)
-* [Azure Functions F# 개발자 참조](functions-reference-fsharp.md)
 * [Azure Functions 트리거 및 바인딩](functions-triggers-bindings.md)
-
 

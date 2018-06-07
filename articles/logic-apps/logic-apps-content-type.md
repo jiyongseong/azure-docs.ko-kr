@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: integration
 ms.date: 10/18/2016
 ms.author: LADocs; jehollan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a30a90682948b657fb31dd14101172282988cbf0
 ms.openlocfilehash: ac67838344bbd10384299c086ff096fbe5dec6a9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="handle-content-types-in-logic-apps"></a>논리 앱에서 콘텐츠 유형 처리
 
@@ -112,5 +110,4 @@ CustomerName=Frank&Address=123+Avenue
 ```
 
 현재 데이터 형식에 대한 네이티브 함수가 없으므로 `@string(body('formdataAction'))`과 같은 함수를 통해 데이터에 수동으로 액세스하여 워크플로에서 이 데이터를 계속 사용할 수 있습니다. 나가는 요청에도 `application/x-www-url-formencoded` 콘텐츠 유형 헤더를 포함하려는 경우 `@body('formdataAction')`과 같이 캐스팅 없이 작업 본문에 요청을 추가할 수 있습니다. 그러나 이 방법은 본문이 `body` 입력의 유일한 매개 변수인 경우에만 작동합니다. `application/json` 요청에서 `@body('formdataAction')`을 사용하려는 경우 인코딩된 본문이 전송되기 때문에 런타임 오류가 발생합니다.
-
 

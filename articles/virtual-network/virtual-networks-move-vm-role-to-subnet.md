@@ -1,10 +1,10 @@
 ---
-title: "VM(클래식) 또는 Cloud Services 역할 인스턴스를 다른 서브넷으로 이동 - Azure PowerShell | Microsoft Docs"
-description: "PowerShell을 사용하여 VM(클래식) 및 Cloud Services 역할 인스턴스를 다른 서브넷으로 이동하는 방법을 알아봅니다."
+title: VM(클래식) 또는 Cloud Services 역할 인스턴스를 다른 서브넷으로 이동 - Azure PowerShell | Microsoft Docs
+description: PowerShell을 사용하여 VM(클래식) 및 Cloud Services 역할 인스턴스를 다른 서브넷으로 이동하는 방법을 알아봅니다.
 services: virtual-network
 documentationcenter: na
-author: jimdial
-manager: timlt
+author: genlin
+manager: cshepard
 editor: tysonn
 ms.assetid: de4135c7-dc5b-4ffa-84cc-1b8364b7b427
 ms.service: virtual-network
@@ -13,14 +13,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 03/22/2016
-ms.author: jdial
+ms.author: genli
 ms.custom: H1Hack27Feb2017
-translationtype: Human Translation
-ms.sourcegitcommit: 63f2f6dde56c1b5c4b3ad2591700f43f6542874d
-ms.openlocfilehash: b094f8338394ef2e84cad3070936d715411326a4
-ms.lasthandoff: 02/28/2017
-
-
+ms.openlocfilehash: eb1576b7b842537dbdc49e6b9d402ef47ad9fae9
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="move-a-vm-classic-or-cloud-services-role-instance-to-a-different-subnet-using-powershell"></a>PowerShell을 사용하여 VM(클래식) 또는 Cloud Services 역할 인스턴스를 다른 서브넷으로 이동
 PowerShell을 사용하여 동일한 가상 네트워크(VNet)에 있는 한 서브넷에서 다른 서브넷으로 VM(클래식)을 이동할 수 있습니다. PowerShell을 사용하지 않고 CSCFG 파일을 편집하여 역할 인스턴스를 이동할 수 있습니다.
@@ -59,4 +58,3 @@ VM에 대한 고정 내부 개인 IP를 지정한 경우 먼저 해당 설정을
            </InstanceAddress>
         </AddressAssignments>
     </NetworkConfiguration> 
-

@@ -4,7 +4,7 @@ description: "Postman, cURL 및 Node.js를 사용하여 Azure 함수를 테스�
 services: functions
 documentationcenter: na
 author: wesmc7777
-manager: erikre
+manager: cfowler
 editor: 
 tags: 
 keywords: "Azure Functions, 함수, 이벤트 처리, webhook, 동적 계산, 서버가 없는 아키텍처, 테스트"
@@ -17,12 +17,11 @@ ms.workload: na
 ms.date: 02/02/2017
 ms.author: wesmc
 ms.custom: H1Hack27Feb2017
-translationtype: Human Translation
-ms.sourcegitcommit: 2fd12dd32ed3c8479c7460cbc0a1cac3330ff4f4
-ms.openlocfilehash: a58bf41ec11b5826b60c1fc999240ea655be6d9d
-ms.lasthandoff: 03/01/2017
-
-
+ms.openlocfilehash: 41796a8cdde0756e5157ba276463a56b07679d04
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="strategies-for-testing-your-code-in-azure-functions"></a>Azure Functions에서 코드를 테스트하기 위한 전략
 
@@ -234,7 +233,7 @@ Azure Functions 포털은 HTTP 및 타이머 트리거 함수를 테스트할 �
 
 
 ### <a name="test-with-a-timer-trigger"></a>타이머 트리거를 사용하여 테스트
-일부 함수는 앞에서 언급한 도구를 사용하여 제대로 테스트할 수 없습니다. 예를 들어 [Azure 큐 저장소](../storage/storage-dotnet-how-to-use-queues.md)에 메시지를 놓을 때 실행되는 큐 트리거 함수를 생각해 보세요. 언제든지 큐에 메시지를 놓는 코드를 작성할 수 있으며, 콘솔 프로젝트의 이러한 예는 이 문서의 후반부에 제공됩니다. 그러나 함수를 직접 테스트하는 데 사용할 수 있는 또 다른 방법이 있습니다.  
+일부 함수는 앞에서 언급한 도구를 사용하여 제대로 테스트할 수 없습니다. 예를 들어 [Azure 큐 저장소](../storage/queues/storage-dotnet-how-to-use-queues.md)에 메시지를 놓을 때 실행되는 큐 트리거 함수를 생각해 보세요. 언제든지 큐에 메시지를 놓는 코드를 작성할 수 있으며, 콘솔 프로젝트의 이러한 예는 이 문서의 후반부에 제공됩니다. 그러나 함수를 직접 테스트하는 데 사용할 수 있는 또 다른 방법이 있습니다.  
 
 큐 출력 바인딩으로 구성된 타이머 트리거를 사용할 수 있습니다. 이 타이머 트리거 코드는 큐에 테스트 메시지를 작성할 수 있습니다. 이 섹션에서는 그에 대한 예를 살펴보겠습니다.
 
@@ -378,11 +377,11 @@ req.end(bodyString);
 
 
 ### <a name="test-a-queue-trigger-function-with-code-c"></a>코드를 사용하여 큐 트리거 함수 테스트: C# #
-앞에서 큐에 메시지를 놓는 코드를 사용하여 큐 트리거를 테스트하는 방법에 대해 설명했습니다. 다음 예제 코드는 [Azure 큐 저장소 시작](../storage/storage-dotnet-how-to-use-queues.md) 자습서에 제공된 C# 코드를 기반으로 합니다. 해당 링크에서 다른 언어에 대한 코드를 사용할 수도 있습니다.
+앞에서 큐에 메시지를 놓는 코드를 사용하여 큐 트리거를 테스트하는 방법에 대해 설명했습니다. 다음 예제 코드는 [Azure 큐 저장소 시작](../storage/queues/storage-dotnet-how-to-use-queues.md) 자습서에 제공된 C# 코드를 기반으로 합니다. 해당 링크에서 다른 언어에 대한 코드를 사용할 수도 있습니다.
 
 콘솔 앱에서 이 코드를 테스트하려면 다음을 수행해야 합니다.
 
-* [app.config 파일에서 저장소 연결 문자열을 구성합니다](../storage/storage-dotnet-how-to-use-queues.md).
+* [app.config 파일에서 저장소 연결 문자열을 구성합니다](../storage/queues/storage-dotnet-how-to-use-queues.md).
 * 앱에 대한 매개 변수로 `name` 및 `address`를 전달합니다. 예: `C:\myQueueConsoleApp\test.exe "Wes testing queues" "in a console app"`. 이 코드는 런타임 동안 새 사용자에 대한 이름 및 주소를 명령줄 인수로 허용합니다.
 
 C# 코드 예제:
@@ -444,4 +443,3 @@ static void Main(string[] args)
 <!-- URLs. -->
 
 [Azure Portal]: https://portal.azure.com
-

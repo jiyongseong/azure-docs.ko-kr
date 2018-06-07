@@ -1,27 +1,19 @@
 ---
-title: "Azure SQL Database에 액세스 권한 부여 | Microsoft Docs"
-description: "Microsoft Azure SQL Database에 대한 액세스 권한을 부여하는 방법에 대해 알아봅니다."
+title: Azure SQL Database에 액세스 권한 부여 | Microsoft Docs
+description: Microsoft Azure SQL Database에 대한 액세스 권한을 부여하는 방법에 대해 알아봅니다.
 services: sql-database
-documentationcenter: 
-author: BYHAM
-manager: jhubbard
-editor: 
-tags: 
-ms.assetid: 8e71b04c-bc38-4153-8f83-f2b14faa31d9
+author: CarlRabeler
+manager: craigg
 ms.service: sql-database
 ms.custom: security
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: data-management
-ms.date: 02/06/2017
-ms.author: rickbyh
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6adaf7026d455210db4d7ce6e7111d13c2b75374
-ms.openlocfilehash: 0ca1ccd273317d67537d31724d566625a4eb2c85
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/22/2017
-
+ms.date: 04/01/2018
+ms.author: carlrab
+ms.openlocfilehash: 1844abbff660b175ea78d09bd2256aa5ba83ed83
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="azure-sql-database-access-control"></a>Azure SQL Database 액세스 제어
 SQL Database는 보안을 제공하기 위해 IP 주소로 연결을 제한하는 방화벽 규칙, 사용자가 해당 ID를 증명하도록 하는 인증 메커니즘 및 특정 작업 및 데이터에 대한 사용자를 제한하는 권한 부여 메커니즘을 사용하여 액세스를 제어합니다. 
@@ -30,22 +22,22 @@ SQL Database는 보안을 제공하기 위해 IP 주소로 연결을 제한하�
 > SQL Database 보안 기능에 대한 개요는 [SQL 보안 개요](sql-database-security-overview.md)를 참조하세요. 자습서는 [Azure SQL Database 보안](sql-database-security-tutorial.md)을 참조하세요.
 
 ## <a name="firewall-and-firewall-rules"></a>방화벽 및 방화벽 규칙
-Microsoft Azure SQL 데이터베이스는 Azure 및 기타 인터넷 기반 응용 프로그램의 관계형 데이터베이스 서비스를 제공합니다. 데이터를 보호하기 위해 방화벽은 권한이 있는 컴퓨터를 지정할 때까지 데이터베이스 서버에 대한 모든 액세스를 금지합니다. 방화벽은 각 요청이 시작된 IP 주소의 데이터베이스에 대한 액세스를 허용합니다. 자세한 내용은 [Azure SQL Database 방화벽 규칙 개요](sql-database-firewall-configure.md)를 참조하세요.
+Microsoft Azure SQL Database는 Azure 및 기타 인터넷 기반 응용 프로그램의 관계형 데이터베이스 서비스를 제공합니다. 데이터를 보호하기 위해 방화벽은 권한이 있는 컴퓨터를 지정할 때까지 데이터베이스 서버에 대한 모든 액세스를 금지합니다. 방화벽은 각 요청이 시작된 IP 주소의 데이터베이스에 대한 액세스를 허용합니다. 자세한 내용은 [Azure SQL Database 방화벽 규칙 개요](sql-database-firewall-configure.md)를 참조하세요.
 
-Azure SQL 데이터베이스 서비스는 TCP 포트 1433을 통해서만 사용할 수 있습니다. 사용자의 컴퓨터에서 SQL 데이터베이스에 액세스하려면 클라이언트 컴퓨터 방화벽이 TCP 포트 1433을 통해 나가는 TCP 통신을 허용해야 합니다. 다른 응용 프로그램에 필요하지 않은 경우 TCP 포트 1433의 인바운드 연결을 차단합니다. 
+Azure SQL Database 서비스는 TCP 포트 1433을 통해서만 사용할 수 있습니다. 사용자의 컴퓨터에서 SQL Database에 액세스하려면 클라이언트 컴퓨터 방화벽이 TCP 포트 1433을 통해 나가는 TCP 통신을 허용해야 합니다. 다른 응용 프로그램에 필요하지 않은 경우 TCP 포트 1433의 인바운드 연결을 차단합니다. 
 
-연결 프로세스의 일부로 Azure 가상 컴퓨터에서 연결은 각 작업자 역할에 대한 고유한 다른 IP 주소 및 포트에 리디렉션됩니다. 포트 번호의 범위는 11000~11999입니다. TCP 포트에 대한 자세한 내용은 [ADO.NET 4.5 및 SQL Database2에 대한 1433 이외의 포트](sql-database-develop-direct-route-ports-adonet-v12.md)를 참조하세요.
+연결 프로세스의 일부로 Azure 가상 머신에서 연결은 각 작업자 역할에 대한 고유한 다른 IP 주소 및 포트에 리디렉션됩니다. 포트 번호의 범위는 11000~11999입니다. TCP 포트에 대한 자세한 내용은 [ADO.NET 4.5 및 SQL Database2에 대한 1433 이외의 포트](sql-database-develop-direct-route-ports-adonet-v12.md)를 참조하세요.
 
 ## <a name="authentication"></a>인증
 
-SQL 데이터베이스는 두 가지 인증 유형을 지원합니다.
+SQL Database는 두 가지 인증 유형을 지원합니다.
 
 * **SQL 인증**은 사용자 이름과 암호를 사용합니다. 데이터베이스의 논리 서버를 만들 때 사용자 이름 및 암호를 사용하여 "서버 관리자" 로그인을 지정했습니다. 이러한 자격 증명을 사용하면 해당 서버의 모든 데이터베이스에 데이터베이스 소유자 또는 "dbo"로 인증할 수 있습니다. 
-* **Azure Active Directory 인증**은 Azure Active Directory에서 관리하는 ID를 사용하고 관리되고 통합된 도메인을 지원합니다. [가능한 경우](https://docs.microsoft.com/sql/relational-databases/security/choose-an-authentication-mode) Active Directory 인증(통합 보안)을 사용합니다. Azure Active Directory 인증을 사용하려는 경우 Azure AD 사용자 및 그룹을 허용하는 "Azure AD 관리자"라는 다른 서버 관리자를 만들어야 합니다. 이 관리자는 일반 서버 관리자가 할 수 있는 모든 작업을 수행할 수도 있습니다. Azure AD 관리자를 만들어 Azure Active Directory 인증을 활성화하는 방법에 대한 연습은 [Azure Active Directory 인증을 사용하여 SQL 데이터베이스에 연결](sql-database-aad-authentication.md) 을 참조하세요.
+* **Azure Active Directory 인증**은 Azure Active Directory에서 관리하는 ID를 사용하고 관리되고 통합된 도메인을 지원합니다. [가능한 경우](https://docs.microsoft.com/sql/relational-databases/security/choose-an-authentication-mode) Active Directory 인증(통합 보안)을 사용합니다. Azure Active Directory 인증을 사용하려는 경우 Azure AD 사용자 및 그룹을 허용하는 "Azure AD 관리자"라는 다른 서버 관리자를 만들어야 합니다. 이 관리자는 일반 서버 관리자가 할 수 있는 모든 작업을 수행할 수도 있습니다. Azure AD 관리자를 만들어 Azure Active Directory 인증을 활성화하는 방법에 대한 연습은 [Azure Active Directory 인증을 사용하여 SQL Database에 연결](sql-database-aad-authentication.md) 을 참조하세요.
 
 데이터베이스 엔진은 30분 이상 유휴 상태로 있는 연결을 닫습니다. 연결을 사용하기 전에 다시 로그인해야 합니다. SQL Database에 대한 연결을 지속적으로 활성화하려면 적어도 10시간 마다 권한을 다시 부여받아야 합니다(데이터베이스 엔진에서 수행함). 데이터베이스 엔진은 전송된 원래 암호를 사용하여 권한을 다시 부여하려고 하며 사용자 입력이 필요하지 않습니다. 성능상의 이유로 SQL Database에 암호를 다시 설정할 경우 연결 풀링으로 인해 연결을 재설정하더라도 연결은 다시 인증되지 않습니다. 온-프레미스 SQL Server의 동작과 다릅니다. 연결이 처음에 권한을 부여받은 이후에 암호가 변경되었다면 연결을 종료해야 하고 새 암호를 사용하여 새로 연결합니다. `KILL DATABASE CONNECTION` 권한이 있는 사용자는 [KILL](https://docs.microsoft.com/sql/t-sql/language-elements/kill-transact-sql) 명령을 사용하여 SQL Database에 연결을 명시적으로 종료할 수 있습니다.
 
-사용자 계정을 마스터 데이터베이스에서 만들고 서버의 모든 데이터베이스에 대한 사용 권한을 부여할 수 있습니다. 또는 데이터베이스 자체(포함된 사용자라고 함)에서 만들 수 있습니다. 로그인 만들기 및 관리에 대한 자세한 내용은 [로그인 관리](sql-database-manage-logins.md)를 참조하세요. 이동성 및 확장성을 강화하려면 포함된 데이터베이스 사용자를 사용합니다. 포함된 사용자에 대한 자세한 내용은 [포함된 데이터베이스 사용자 - 데이터베이스를 이식 가능하게 만들기](https://docs.microsoft.com/sql/relational-databases/security/contained-database-users-making-your-database-portable), [사용자 만들기(Transact-SQL)](https://docs.microsoft.com/sql/t-sql/statements/create-user-transact-sql) 및 [포함된 데이터베이스](https://docs.microsoft.com/sql/relational-databases/databases/contained-databases)를 참조하세요.
+사용자 계정을 마스터 데이터베이스에서 만들고 서버의 모든 데이터베이스에 대한 사용 권한을 부여할 수 있습니다. 또는 데이터베이스 자체(포함된 사용자라고 함)에서 만들 수 있습니다. 로그인 만들기 및 관리에 대한 자세한 내용은 [로그인 관리](sql-database-manage-logins.md)를 참조하세요. 이동성 및 확장성을 강화하려면 포함된 데이터베이스를 사용하세요. 포함된 사용자에 대한 자세한 내용은 [포함된 데이터베이스 사용자 - 데이터베이스를 이식 가능하게 만들기](https://docs.microsoft.com/sql/relational-databases/security/contained-database-users-making-your-database-portable), [사용자 만들기(Transact-SQL)](https://docs.microsoft.com/sql/t-sql/statements/create-user-transact-sql) 및 [포함된 데이터베이스](https://docs.microsoft.com/sql/relational-databases/databases/contained-databases)를 참조하세요.
 
 가장 좋은 방법은 응용 프로그램이 전용 계정을 사용하여 인증하는 것입니다. 이 방법을 사용하면 응용 프로그램에 부여되는 사용 권한을 제한하여 응용 프로그램 코드가 SQL 삽입 공격에 취약한 경우 악의적인 활동의 위험을 줄일 수 있습니다. 응용 프로그램을 통해 데이터베이스에 직접 인증할 수 있는 [포함된 데이터베이스 사용자](https://docs.microsoft.com/sql/relational-databases/security/contained-database-users-making-your-database-portable)를 만드는 것이 좋습니다. 
 
@@ -68,4 +60,3 @@ SQL 데이터베이스는 두 가지 인증 유형을 지원합니다.
 - 사용자와 로그인에 대해 알아보려면 [로그인 관리](sql-database-manage-logins.md)를 참조하세요. 
 - 사전 모니터링에 대한 설명은 [데이터베이스 감사](sql-database-auditing.md) 및 [SQL Database 위협 검색](sql-database-threat-detection.md)을 참조하세요.
 - 자습서는 [Azure SQL Database 보안](sql-database-security-tutorial.md)을 참조하세요.
-

@@ -1,8 +1,8 @@
 ---
-title: "Azure Data Lake Store Storm 성능 조정 지침 | Microsoft Docs"
-description: "Azure Data Lake Store Storm 성능 조정 지침"
+title: Azure Data Lake Store Storm 성능 조정 지침 | Microsoft Docs
+description: Azure Data Lake Store Storm 성능 조정 지침
 services: data-lake-store
-documentationcenter: 
+documentationcenter: ''
 author: stewu
 manager: amitkul
 editor: stewu
@@ -10,16 +10,13 @@ ms.assetid: ebde7b9f-2e51-4d43-b7ab-566417221335
 ms.service: data-lake-store
 ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
 ms.date: 12/19/2016
 ms.author: stewu
-translationtype: Human Translation
-ms.sourcegitcommit: 0d8472cb3b0d891d2b184621d62830d1ccd5e2e7
-ms.openlocfilehash: 1dfa93643f45a96ded3fd022aa8b1c71d487acb4
-ms.lasthandoff: 03/21/2017
-
-
+ms.openlocfilehash: 5ebca90ffd679de1c30d1bc324bf4f1c3b9f6f70
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="performance-tuning-guidance-for-storm-on-hdinsight-and-azure-data-lake-store"></a>HDInsight의 Storm 및 Azure Data Lake Store에 대한 성능 조정 지침
 
@@ -27,11 +24,11 @@ Azure Storm 토폴로지의 성능을 조정할 때 고려해야 하는 요소�
 
 ## <a name="prerequisites"></a>필수 조건
 
-* **Azure 구독**. [Azure 무료 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
+* **Azure 구독**. [Azure 평가판](https://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
 * **Azure 데이터 레이크 저장소 계정**. 만드는 방법에 대한 지침은 [Azure Data Lake Store 시작](data-lake-store-get-started-portal.md)을 참조하세요.
 * Data Lake Store 계정에 액세스하는 **Azure HDInsight 클러스터**입니다. [Data Lake Store가 있는 HDInsight 클러스터 만들기](data-lake-store-hdinsight-hadoop-use-portal.md)를 참조하세요. 클러스터에 대한 원격 데스크톱을 사용하도록 설정해야 합니다.
-* **Data Lake Store에서 실행 중인 Storm 클러스터** 자세한 내용은 [HDInsight의 Storm](https://docs.microsoft.com/en-us/azure/hdinsight/hdinsight-storm-overview)을 참조하세요.
-* **Data Lake Store 성능 조정 지침**  일반적인 성능 개념은 [Data Lake Store 성능 조정 지침](https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-performance-tuning-guidance)을 참조하세요.  
+* **Data Lake Store에서 실행 중인 Storm 클러스터** 자세한 내용은 [HDInsight의 Storm](https://docs.microsoft.com/azure/hdinsight/hdinsight-storm-overview)을 참조하세요.
+* **Data Lake Store 성능 조정 지침**  일반적인 성능 개념은 [Data Lake Store 성능 조정 지침](https://docs.microsoft.com/azure/data-lake-store/data-lake-store-performance-tuning-guidance)을 참조하세요.  
 
 ## <a name="tune-the-parallelism-of-the-topology"></a>토폴로지의 병렬 처리 조정
 
@@ -134,11 +131,10 @@ Data Lake Store에서 제공하는 대역폭 한계에 도달한 경우 태스�
 
 제한 여부를 확인하려면 클라이언트 쪽에서 디버그 로깅을 사용하도록 설정합니다.
 
-1. **Ambari** > **Storm** > **Config** > **고급 storm-worker-log4j**에서 **&lt;root level="info"&gt;**를 **&lt;root level=”debug”&gt;**로 변경합니다. 구성을 적용하려면 모든 노드/서비스를 다시 시작합니다.
+1. **Ambari** > **Storm** > **Config** > **고급 storm-worker-log4j**에서 **&lt;root level="info"&gt;** 를 **&lt;root level=”debug”&gt;** 로 변경합니다. 구성을 적용하려면 모든 노드/서비스를 다시 시작합니다.
 2. 작업자 노드의 storm 토폴로지 로그에서 Data Lake Store 제한 예외를 모니터링합니다(/var/log/storm/worker-artifacts/&lt;TopologyName&gt;/&lt;port&gt;/worker.log 아래).
 
 ## <a name="next-steps"></a>다음 단계
 Storm의 추가 성능 조정은 이 [블로그](https://blogs.msdn.microsoft.com/shanyu/2015/05/14/performance-tuning-for-hdinsight-storm-and-microsoft-azure-eventhubs/)를 참조하세요.
 
 추가 예제를 실행하려면 [GitHub에서 이 항목](https://github.com/hdinsight/storm-performance-automation)을 참조하세요.
-

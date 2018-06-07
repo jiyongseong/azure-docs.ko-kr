@@ -1,10 +1,10 @@
 ---
-title: "Azure 모바일 앱을 사용하여 iOS에서 인증 추가"
-description: "Azure 모바일 앱을 사용하여 AAD, Google, Facebook, Twitter 및 Microsoft를 포함한 다양한 ID 공급자를 통해 iOS 앱 사용자를 인증하는 방법을 알아봅니다."
+title: "Azure Mobile Apps를 사용하여 iOS에서 인증 추가"
+description: "Azure Mobile Apps를 사용하여 AAD, Google, Facebook, Twitter 및 Microsoft를 포함한 다양한 ID 공급자를 통해 iOS 앱 사용자를 인증하는 방법을 알아봅니다."
 services: app-service\mobile
 documentationcenter: ios
-author: ggailey777
-manager: syntaxc4
+author: conceptdev
+manager: crdun
 editor: 
 ms.assetid: ef3d3cbe-e7ca-45f9-987f-80c44209dc06
 ms.service: app-service-mobile
@@ -13,20 +13,19 @@ ms.tgt_pltfrm: mobile-ios
 ms.devlang: dotnet
 ms.topic: article
 ms.date: 01/23/2017
-ms.author: glenga
+ms.author: crdun
+ms.openlocfilehash: e0eeee05ebad2e8148752f988bbbc2f6a0d7c296
+ms.sourcegitcommit: df4ddc55b42b593f165d56531f591fdb1e689686
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 21a2cc6c1eaf4b34cbe8c2d7c4dbb69c8730cf32
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/04/2018
 ---
 # <a name="add-authentication-to-your-ios-app"></a>iOS 앱에 인증 추가
 [!INCLUDE [app-service-mobile-selector-get-started-users](../../includes/app-service-mobile-selector-get-started-users.md)]
 
 이 자습서에서는 지원되는 ID 공급자를 사용하여 [iOS 빠른 시작 안내서] 에 인증을 추가합니다. 이 자습서는 먼저 완료해야 하는 [iOS 빠른 시작 안내서] 를 기반으로 합니다.
 
-## <a name="register"></a>인증을 위해 앱 등록 및 앱 서비스 구성
+## <a name="register"></a>인증을 위해 앱 등록 및 App Service 구성
 [!INCLUDE [app-service-mobile-register-authentication](../../includes/app-service-mobile-register-authentication.md)]
 
 ## <a name="redirecturl"></a>허용되는 외부 리디렉션 URL에 앱 추가
@@ -220,5 +219,4 @@ App Service 인증은 Apples Inter-App Communication을 사용합니다.  이 �
 [Azure Portal]: https://portal.azure.com
 
 [iOS 빠른 시작 안내서]: app-service-mobile-ios-get-started.md
-
 

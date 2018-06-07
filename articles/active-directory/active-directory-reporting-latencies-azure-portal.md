@@ -4,7 +4,7 @@ description: "Azure Portal에 보고 이벤트를 표시하는 데 걸리는 시
 services: active-directory
 documentationcenter: 
 author: MarkusVi
-manager: femila
+manager: mtillman
 editor: 
 ms.assetid: 9b88958d-94a2-4f4b-a18c-616f0617a24e
 ms.service: active-directory
@@ -12,15 +12,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 07/15/2017
+ms.date: 12/15/2017
 ms.author: markvi;dhanyahk
 ms.reviewer: dhanyahk
-ms.translationtype: Human Translation
-ms.sourcegitcommit: bb794ba3b78881c967f0bb8687b1f70e5dd69c71
-ms.openlocfilehash: a1e385c235c3530744a83527574880c5f37caadd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
+ms.openlocfilehash: 5ec41817fede495b8262e28d2d614a480d98ff3b
+ms.sourcegitcommit: 68aec76e471d677fd9a6333dc60ed098d1072cfc
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/18/2017
 ---
 # <a name="azure-active-directory-reporting-latencies"></a>Azure Active Directory 보고 대기 시간
 
@@ -38,13 +37,15 @@ Azure Active Directory에서 [보고](active-directory-preview-explainer.md)를 
 
 다음 표에는 활동 보고서에 대한 대기 시간 정보가 나와 있습니다.
 
-| 보고서 | 최소 | 평균 | 최대 |
-| :-- | --- | --- | --- |
-| 감사 로그             | 30분  | 45분 | 1시간     |
-| 로그인               | 15분  | 15분 | 2시간*   |
+| 보고서 | 최소 | 평균 | 설명 |
+| :-- | --- | --- | :-- |
+| 감사 로그 | 30분  | 1시간  |일부 인스턴스에서 감사 활동 데이터가 표시되는 데 최대 2시간이 걸릴 수 있습니다.|
+| 로그인 | 15분  | 2시간 |일부 인스턴스에서 로그인 활동 데이터가 표시되는 데 최대 24시간이 걸릴 수 있습니다. 여기에는 레거시 Office 응용 프로그램에서 들어오는 로그인 활동 데이터가 포함됩니다. |
 
->[!NOTE]
-> 레거시 Office 응용 프로그램에서 들어오는 일부 로그인 활동 데이터의 경우 보고 데이터가 표시되는 데 8시간이 걸릴 수 있습니다. 
+
+
+
+
 
 
 ## <a name="security-reports"></a>보안 보고서
@@ -72,7 +73,7 @@ Azure Active Directory는 적응 기계 학습 알고리즘 및 추론을 사용
 | 익명 IP 주소에서 로그인 |5분 |15분 |2시간 |
 | 알 수 없는 위치에서 로그인 |5분 |15분 |2시간 |
 | 자격 증명이 손실된 사용자 |2시간 |4시간 |8시간 |
-| 비정상적 위치로 불가능한 이동 |2시간 |4시간 |8시간  |
+| 비정상적 위치로 불가능한 이동 |5분 |1시간 |8시간  |
 | 감염된 장치에서 로그인 |2시간 |4시간 |8시간  |
 | 의심스러운 작업이 있는 IP 주소에서 로그인 |2시간 |4시간 |8시간  |
 
@@ -91,4 +92,3 @@ Azure Portal의 보안 보고서에 자세히 알아보려면 다음을 참조�
 - [Azure Active Directory 포털에서 제공하는 위험한 로그인 보고서](active-directory-reporting-security-risky-sign-ins.md)
 
 위험 이벤트에 대한 자세한 내용은 [Azure Active Directory 위험 이벤트](active-directory-reporting-risk-events.md)를 참조하세요.
-

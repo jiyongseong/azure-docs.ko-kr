@@ -1,0 +1,124 @@
+- name: Azure IoT 기본 사항
+  href: ../iot-fundamentals/index.yml
+- name: Azure Maps 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: Azure Maps 정보
+      href: about-azure-maps.md
+- name: 빠른 시작
+  items:
+    - name: 지도 앱 만들기
+      href: quick-demo-map-app.md
+- name: 자습서
+  items:
+    - name: 1 - 관심 지점 검색
+      href: tutorial-search-location.md
+    - name: 2 - 대상으로 라우팅
+      href: tutorial-route-location.md
+    - name: 3 - 여행 모드별 여러 경로
+      href: tutorial-prioritized-routes.md
+- name: 개념
+  items:
+    - name: 확대/축소 수준 및 타일 그리드
+      href: zoom-levels-and-tile-grid.md
+    - name: 지오코딩 검사
+      href: geocoding-coverage.md
+    - name: 트래픽 검사
+      href: traffic-coverage.md
+    - name: 렌더링 검사
+      href: render-coverage.md
+    - name: 라우팅 검사
+      href: routing-coverage.md
+    - name: 검색 범주
+      href: search-categories.md
+    - name: 지원되는 언어
+      href: supported-languages.md
+    - name: 소비 모델
+      href: consumption-model.md
+- name: 방법 가이드
+  items:
+    - name: Maps 계정 관리
+      items:
+        - name: 계정 및 키 관리
+          href: how-to-manage-account-keys.md
+    - name: REST API에서 지도 데이터 가져오기
+      items:
+        - name: 주소 검색
+          href: how-to-search-for-address.md
+    - name: JavaScript 지도 만들기
+      items:
+        - name: 지도 컨트롤 사용
+          href: how-to-use-map-control.md
+        - name: 지도 만들기
+          href: map-create.md
+        - name: 핀 추가
+          href: map-add-pin.md
+        - name: 팝업 추가
+          href: map-add-popup.md
+        - name: 도형 추가
+          href: map-add-shape.md
+        - name: 사용자 지정 HTML 추가
+          href: map-add-custom-html.md
+        - name: 검색 결과 표시
+          href: map-search-location.md
+        - name: 좌표에서 정보 가져오기
+          href: map-get-information-from-coordinate.md
+        - name: A에서 B까지 방향 표시
+          href: map-route.md
+        - name: 트래픽 표시
+          href: map-show-traffic.md
+        - name: 마우스 이벤트와 상호 작용
+          href: map-events.md
+- name: 참고 자료
+  items:
+    - name: 서비스 API - REST
+      href: 'https://docs.microsoft.com/rest/api/maps/'
+    - name: 맵 컨트롤 API - Javascript
+      href: 'https://docs.microsoft.com/javascript/api/azure-maps-javascript/'
+- name: 관련 항목
+  items:
+    - name: 솔루션
+      items:
+        - name: IoT Suite 미리 구성된 솔루션
+          href: /azure/iot-suite
+        - name: IoT Central
+          href: 'https://docs.microsoft.com/microsoft-iot-central/'
+    - name: 플랫폼 서비스
+      items:
+        - name: IoT Hub
+          href: /azure/iot-hub
+        - name: IoT Hub Device Provisioning 서비스
+          href: /azure/iot-dps
+        - name: 지도
+          href: /azure/azure-maps
+        - name: 서비스 SDK
+          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-service-sdks'
+        - name: Time Series Insights
+          href: /azure/time-series-insights
+    - name: Edge
+      items:
+        - name: IoT Edge
+          href: /azure/iot-edge
+        - name: IoT 장치 SDK
+          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-device-sdks'
+- name: 리소스
+  items:
+    - name: Azure IoT 개발자 센터
+      href: 'https://azure.microsoft.com/develop/iot/'
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/?category=internet-of-things'
+    - name: MSDN 포럼
+      href: 'https://social.msdn.microsoft.com/Forums/azure/home?forum=azurelbs'
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/azure-maps'
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'
+    - name: 서비스 업데이트
+      href: 'https://azure.microsoft.com/updates'
+    - name: 스택 오버플로
+      href: 'http://stackoverflow.com/questions/tagged/azure-maps'
+    - name: 기술 사례 연구
+      href: 'https://microsoft.github.io/techcasestudies/#technology=IoT&sortBy=featured'
+    - name: 동영상
+      href: 'https://azure.microsoft.com/documentation/videos'

@@ -4,7 +4,7 @@ description: "Docker Machine을 사용하여 Azure에서 Docker 호스트를 만
 services: virtual-machines-linux
 documentationcenter: 
 author: iainfoulds
-manager: timlt
+manager: jeconnoc
 editor: tysonn
 ms.assetid: 164b47de-6b17-4e29-8b7d-4996fa65bea4
 ms.service: virtual-machines-linux
@@ -12,21 +12,19 @@ ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure-services
-ms.date: 06/19/2017
+ms.date: 12/15/2017
 ms.author: iainfou
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 7948c99b7b60d77a927743c7869d74147634ddbf
-ms.openlocfilehash: a69951ed60edab8ae20374ab3869b468979c4907
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
-
+ms.openlocfilehash: 26e54efc32aa316e1da93598cc861003aefff182
+ms.sourcegitcommit: 059dae3d8a0e716adc95ad2296843a45745a415d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/09/2018
 ---
 # <a name="how-to-use-docker-machine-to-create-hosts-in-azure"></a>Docker Machine을 사용하여 Azure에서 호스트를 만드는 방법
-이 문서는 [Docker Machine](https://docs.docker.com/machine/)을 사용하여 Azure에서 호스트를 만드는 방법을 자세히 설명합니다. `docker-machine` 명령은 Azure에서 Linux VM(가상 컴퓨터)을 만든 다음 Docker를 설치합니다. 동일한 로컬 도구 및 워크플로를 사용하여 Azure에서 Docker 호스트를 관리할 수 있습니다.
+이 문서는 [Docker Machine](https://docs.docker.com/machine/)을 사용하여 Azure에서 호스트를 만드는 방법을 자세히 설명합니다. `docker-machine` 명령은 Azure에서 Linux VM(가상 머신)을 만든 다음 Docker를 설치합니다. 동일한 로컬 도구 및 워크플로를 사용하여 Azure에서 Docker 호스트를 관리할 수 있습니다. Windows 10에서 Docker-컴퓨터를 사용하려면 Linux bash를 사용해야 합니다.
 
 ## <a name="create-vms-with-docker-machine"></a>Docker Machine으로 VM 만들기
-먼저, 다음과 같이 [az 계정 표시](/cli/azure/account#show)로 Azure 구독 ID를 가져옵니다.
+먼저, 다음과 같이 [az 계정 표시](/cli/azure/account#az_account_show)로 Azure 구독 ID를 가져옵니다.
 
 ```azurecli
 sub=$(az account show --query "id" -o tsv)
@@ -34,13 +32,14 @@ sub=$(az account show --query "id" -o tsv)
 
 드라이버로 *azure*를 지정하여 `docker-machine create`로 Azure에서 Docker 호스트 VM을 만듭니다. 자세한 내용은 [Docker Azure 드라이버 설명서](https://docs.docker.com/machine/drivers/azure/)를 참조하세요.
 
-다음 예제에서는 *myVM*이라는 VM을 만들고 *azureuser*라는 사용자 계정을 만들고 호스트 VM에서 포트 *80*을 엽니다. 프롬프트를 따라 Azure 계정에 로그인하고 리소스를 만들고 관리하도록 Docker Machine에 사용 권한을 부여합니다.
+다음 예제에서는 *myVM*이라는 VM을 만들고 "표준 D2 v2" 계획에 따라 *azureuser*라는 사용자 계정을 만들고 호스트 VM에서 포트 *80*을 엽니다. 프롬프트를 따라 Azure 계정에 로그인하고 리소스를 만들고 관리하도록 Docker Machine에 사용 권한을 부여합니다.
 
 ```bash
 docker-machine create -d azure \
     --azure-subscription-id $sub \
     --azure-ssh-user azureuser \
     --azure-open-port 80 \
+    --azure-size "Standard_D2_v2" \
     myvm
 ```
 
@@ -50,19 +49,19 @@ docker-machine create -d azure \
 Creating CA: /Users/user/.docker/machine/certs/ca.pem
 Creating client certificate: /Users/user/.docker/machine/certs/cert.pem
 Running pre-create checks...
-(myvmdocker) Completed machine pre-create checks.
+(myvm) Completed machine pre-create checks.
 Creating machine...
-(myvmdocker) Querying existing resource group.  name="docker-machine"
-(myvmdocker) Creating resource group.  name="docker-machine" location="westus"
-(myvmdocker) Configuring availability set.  name="docker-machine"
-(myvmdocker) Configuring network security group.  name="myvmdocker-firewall" location="westus"
-(myvmdocker) Querying if virtual network already exists.  rg="docker-machine" location="westus" name="docker-machine-vnet"
-(myvmdocker) Creating virtual network.  name="docker-machine-vnet" rg="docker-machine" location="westus"
-(myvmdocker) Configuring subnet.  name="docker-machine" vnet="docker-machine-vnet" cidr="192.168.0.0/16"
-(myvmdocker) Creating public IP address.  name="myvmdocker-ip" static=false
-(myvmdocker) Creating network interface.  name="myvmdocker-nic"
-(myvmdocker) Creating storage account.  sku=Standard_LRS name="vhdski0hvfazyd8mn991cg50" location="westus"
-(myvmdocker) Creating virtual machine.  location="westus" size="Standard_A2" username="azureuser" osImage="canonical:UbuntuServer:16.04.0-LTS:latest" name="myvmdocker"
+(myvm) Querying existing resource group.  name="docker-machine"
+(myvm) Creating resource group.  name="docker-machine" location="westus"
+(myvm) Configuring availability set.  name="docker-machine"
+(myvm) Configuring network security group.  name="myvm-firewall" location="westus"
+(myvm) Querying if virtual network already exists.  rg="docker-machine" location="westus" name="docker-machine-vnet"
+(myvm) Creating virtual network.  name="docker-machine-vnet" rg="docker-machine" location="westus"
+(myvm) Configuring subnet.  name="docker-machine" vnet="docker-machine-vnet" cidr="192.168.0.0/16"
+(myvm) Creating public IP address.  name="myvm-ip" static=false
+(myvm) Creating network interface.  name="myvm-nic"
+(myvm) Creating storage account.  sku=Standard_LRS name="vhdski0hvfazyd8mn991cg50" location="westus"
+(myvm) Creating virtual machine.  location="westus" size="Standard_A2" username="azureuser" osImage="canonical:UbuntuServer:16.04.0-LTS:latest" name="myvm
 Waiting for machine to be running, this may take a few minutes...
 Detecting operating system of created instance...
 Waiting for SSH to be available...
@@ -74,14 +73,14 @@ Copying certs to the remote machine...
 Setting Docker configuration on the remote daemon...
 Checking connection to Docker...
 Docker is up and running!
-To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env myvmdocker
+To see how to connect your Docker Client to the Docker Engine running on this virtual machine, run: docker-machine env myvm
 ```
 
 ## <a name="configure-your-docker-shell"></a>Docker 셸 구성
 Azure에서 Docker 호스트에 연결하려면 적절한 연결 설정을 정의합니다. 출력의 끝에서 설명했듯이 다음과 같이 Docker 호스트에 대한 연결 정보를 확인합니다. 
 
 ```bash
-docker-machine env myvmdocker
+docker-machine env myvm
 ```
 
 다음 예제와 유사하게 출력됩니다.
@@ -92,10 +91,10 @@ export DOCKER_HOST="tcp://40.68.254.142:2376"
 export DOCKER_CERT_PATH="/Users/user/.docker/machine/machines/machine"
 export DOCKER_MACHINE_NAME="machine"
 # Run this command to configure your shell:
-# eval $(docker-machine env myvmdocker)
+# eval $(docker-machine env myvm)
 ```
 
-연결 설정을 정의하기 위해 제안된 구성 명령(`eval $(docker-machine env myvmdocker)`)을 실행하거나 환경 변수를 직접 설정할 수 있습니다. 
+연결 설정을 정의하기 위해 제안된 구성 명령(`eval $(docker-machine env myvm)`)을 실행하거나 환경 변수를 직접 설정할 수 있습니다. 
 
 ## <a name="run-a-container"></a>컨테이너 실행
 작업에서 컨테이너를 확인하려면 기본 NGINX 웹 서버를 실행합니다. `docker run`으로 컨테이너를 만들고 다음과 같이 웹 트래픽에 대해 포트 80을 노출합니다.
@@ -129,7 +128,7 @@ d5b78f27b335    nginx    "nginx -g 'daemon off"    5 minutes ago    Up 5 minutes
 
 
 ```bash
-docker-machine ip myvmdocker
+docker-machine ip myvm
 ```
 
 작업에서 컨테이너를 보려면 웹 브라우저를 열고 이전 명령의 출력에 나와 있는 공용 IP 주소를 입력합니다.
@@ -138,4 +137,3 @@ docker-machine ip myvmdocker
 
 ## <a name="next-steps"></a>다음 단계
 [Docker VM 확장](dockerextension.md)을 사용하여 호스트를 만들 수도 있습니다. Docker Compose 사용에 대한 예제는 [Azure에서 Docker 및 Compose 시작](docker-compose-quickstart.md)을 참조하세요.
-

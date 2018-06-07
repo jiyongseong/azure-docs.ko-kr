@@ -1,8 +1,8 @@
 ---
-title: "Data Lake Tools for Visual Studio를 사용하여 U-SQL 스크립트 개발 | Microsoft Docs"
-description: "Data Lake Tools for Visual Studio를 설치하고 U-SQL 스크립트를 개발 및 테스트하는 방법을 알아봅니다."
+title: Visual Studio를 사용하여 Azure Data Lake Analytics 시작 | Microsoft Docs
+description: Data Lake Tools for Visual Studio를 설치하고 U-SQL 스크립트를 개발 및 테스트하는 방법을 알아봅니다.
 services: data-lake-analytics
-documentationcenter: 
+documentationcenter: ''
 author: saveenr
 manager: jhubbard
 editor: cgronlun
@@ -12,20 +12,33 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: big-data
-ms.date: 06/28/2017
+ms.date: 05/02/2018
 ms.author: saveenr, yanacai
+ms.openlocfilehash: d0974e3258e0def09fe12d348180dcedf216401c
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 7bbbb08ff635477a88403a3ae6bd3486d31838ef
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
 # <a name="develop-u-sql-scripts-by-using-data-lake-tools-for-visual-studio"></a>Data Lake Tools for Visual Studio를 사용하여 U-SQL 스크립트 개발
 [!INCLUDE [get-started-selector](../../includes/data-lake-analytics-selector-get-started.md)]
 
 
 Visual Studio를 사용하여 Azure Data Lake Analytics 계정을 만들고, [U-SQL](data-lake-analytics-u-sql-get-started.md)로 작업을 정의하고, 작업을 Data Lake Analytics 서비스에 제출하는 방법에 대해 알아봅니다. 데이터 레이크 분석에 대한 자세한 내용은 [Azure 데이터 레이크 분석 개요](data-lake-analytics-overview.md)를 참조하세요.
+
+>[!IMPORTANT]
+>
+>2018년 5월 25일에 발효될 새 GDPR(일반 데이터 보호 규정)에 대비하여 Azure Data Lake Tools for Visual Studio 사용자는 버전 2.3.3000.4 이상으로 업그레이드하는 것이 좋습니다. 이 버전에는 최신 데이터 보호 요구 사항에 따른 변경 내용이 포함되어 있습니다. 이전 버전은 다운로드할 수 없으며 더 이상 사용되지 않습니다. 
+>
+>**무엇을 해야 하나요?**
+>
+>1. 사용 중인 Azure Data Lake Tools for Visual Studio 버전이 2.3.3000.4 미만인지 확인합니다. 
+>   
+>   ![도구 버전 확인](./media/data-lake-analytics-data-lake-tools-get-started/data-lake-analytics-data-lake-tools-about-data-lake.png)
+> 
+>2. 버전이 2.3.3000.4 미만이면 다운로드 센터를 방문하여 Azure Data Lake Tools for Visual Studio를 업데이트합니다. 
+>    - [Visual Studio 2017의 경우](https://marketplace.visualstudio.com/items?itemName=ADLTools.AzureDataLakeandStreamAnalyticsTools)
+>    - [Visual Studio 2013 및 2015의 경우](https://www.microsoft.com/en-us/download/details.aspx?id=49504)
 
 
 ## <a name="prerequisites"></a>필수 조건
@@ -37,7 +50,17 @@ Visual Studio를 사용하여 Azure Data Lake Analytics 계정을 만들고, [U-
 * **.NET용 Microsoft Azure SDK** 버전 2.7.1 이상.  [웹 플랫폼 설치 관리자](http://www.microsoft.com/web/downloads/platform.aspx)를 사용하여 설치합니다.
 * **Data Lake Analytics** 계정. 계정을 만들려면 [Azure Portal을 사용하여 Azure Data Lake Analytics 시작](data-lake-analytics-get-started-portal.md)을 참조하세요.
 
-## <a name="install-azure-data-lake-tools-for-visual-studio"></a>Azure Data Lake Tools for Visual Studio 설치 
+## <a name="install-azure-data-lake-tools-for-visual-studio"></a>Azure Data Lake Tools for Visual Studio 설치
+
+### <a name="install-azure-data-lake-tools-for-visual-studio-2017"></a>Azure Data Lake Tools for Visual Studio 2017 설치
+
+Azure Data Lake Tools for Visual Studio는 Visual Studio 2017 15.3 이상에서 지원됩니다. 도구는 Visual Studio 설치 관리자에서 **데이터 저장소 및 처리** 및 **Azure 개발** 워크로드의 일부입니다. Visual Studio 설치의 일부로 이러한 두 워크로드 중 하나를 사용하도록 설정합니다.  
+
+**데이터 저장소 및 처리** 워크로드를 표시된 것처럼 사용하도록 설정합니다. ![데이터 저장소 및 처리 워크로드 사용](./media/data-lake-analytics-data-lake-tools-get-started/data-lake-tools-for-vs-2017-install-01.png)
+
+**Azure 개발** 워크로드를 표시된 것처럼 사용하도록 설정합니다. ![Azure 개발 워크로드 사용](./media/data-lake-analytics-data-lake-tools-get-started/data-lake-tools-for-vs-2017-install-02.png)
+
+### <a name="install-azure-data-lake-tools-for-visual-studio-2013-and-2015"></a>Azure Data Lake Tools for Visual Studio 2013 및 2015 설치
 
 [다운로드 센터](http://aka.ms/adltoolsvs)에서 Azure Data Lake Tools for Visual Studio를 다운로드하여 설치합니다. 설치가 끝나면 다음을 확인할 수 있습니다.
 * **서버 탐색기** > **Azure** 노드에 **Data Lake Analytics** 노드가 포함됩니다. 
@@ -111,6 +134,5 @@ OUTPUT @a
 ## <a name="next-steps"></a>다음 단계
 
 * [테스트 및 디버깅을 위해 고유한 워크스테이션에서 U-SQL 스크립트 실행](data-lake-analytics-data-lake-tools-local-run.md)
-* [U-SQL 작업에서 C# 코드 디버그](data-lake-analytics-debug-u-sql-jobs.md)
+* [Azure Data Lake Tools for Visual Studio Code를 사용한 U-SQL 작업의 C# 코드 디버깅](data-lake-tools-for-vscode-local-run-and-debug.md)
 * [Azure Data Lake Tools for Visual Studio Code 사용](data-lake-analytics-data-lake-tools-for-vscode.md)
-

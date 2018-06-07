@@ -1,10 +1,10 @@
 ---
-title: "자습서: AirWatch와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory 및 AirWatch 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: AirWatch와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory 및 AirWatch 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: 96a3bb1c-96c6-40dc-8ea0-060b0c2a62e5
 ms.service: active-directory
 ms.workload: identity
@@ -14,12 +14,12 @@ ms.topic: article
 ms.date: 07/20/2017
 ms.author: jeedes
 ms.reviewer: jeedes
+ms.openlocfilehash: 89d9bc6a40a6ee814f92cdb4c5a26e660007e64e
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 8021f8641ff3f009104082093143ec8eb087279e
-ms.openlocfilehash: 1996ec97e7c0d94c5606ca43bb5956548f1f3712
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34344547"
 ---
 # <a name="tutorial-azure-active-directory-integration-with-airwatch"></a>자습서: AirWatch와 Azure Active Directory 통합
 
@@ -31,7 +31,7 @@ AirWatch와 Azure AD를 통합하면 다음과 같은 이점이 제공됩니다.
 - 사용자가 해당 Azure AD 계정으로 AirWatch에 자동으로 로그온(Single Sign-on)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +59,7 @@ AirWatch의 Azure AD 통합을 구성하려면 갤러리의 AirWatch를 관리�
 
 **갤러리에서 AirWatch를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Active Directory][1]
 
@@ -88,11 +88,11 @@ Single Sign-On이 작동하려면 Azure AD에서 Azure AD 사용자에 해당하
 
 AirWatch에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구성 요소를 완료해야 합니다.
 
-1. **[Azure AD Single Sign-On 구성](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
-2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
+1. **[Configuring Azure AD Single Sign-On](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
+2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On 테스트하는 데 사용합니다.
 3. **[AirWatch 테스트 사용자 만들기](#creating-a-airwatch-test-user)** - Britta Simon의 Azure AD 표현과 연결되는 대응 사용자를 AirWatch에 만듭니다.
 4. **[Azure AD 테스트 사용자 할당](#assigning-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Testing Single Sign-On](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
+5. **[Single Sign-On 테스트](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
 
 ### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -102,30 +102,30 @@ AirWatch에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음
 
 1. Azure Portal의 **AirWatch** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single Sign-On** 대화 상자에서 **모드**를 **SAML 기반 로그온**으로 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-on 구성](./media/active-directory-saas-airwatch-tutorial/tutorial_airwatch_samlbase.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-airwatch-tutorial/tutorial_airwatch_samlbase.png)
 
 3. **AirWatch 도메인 및 URL** 섹션에서 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-airwatch-tutorial/tutorial_airwatch_url.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-airwatch-tutorial/tutorial_airwatch_url.png)
 
     a. **로그온 URL** 텍스트 상자에서 다음 패턴으로 URL을 입력합니다. `https://<subdomain>.awmdm.com/AirWatch/Login?gid=companycode`
 
-    b. **식별자** 텍스트 상자에 해당 값으로 `AirWatch`을 입력합니다.
+    나. **식별자** 텍스트 상자에 해당 값으로 `AirWatch`을 입력합니다.
 
     > [!NOTE] 
     > 이 값은 실제 값이 아닙니다. 이 값을 실제 로그온 URL로 업데이트합니다. 이 값을 얻으려면 [AirWatch Client 지원 팀](http://www.air-watch.com/company/contact-us/)에 문의하세요. 
  
 4. **SAML 서명 인증서** 섹션에서 **메타데이터 XML**을 클릭한 후 컴퓨터에 XML 파일을 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-airwatch-tutorial/tutorial_airwatch_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-airwatch-tutorial/tutorial_airwatch_certificate.png) 
 
 5. **AirWatch 구성** 섹션에서 **AirWatch 구성**을 클릭하여 **로그인 구성** 창을 엽니다. **빠른 참조 섹션**에서 **SAML Single Sign-On 서비스 URL**을 복사합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-airwatch-tutorial/tutorial_airwatch_configure.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-airwatch-tutorial/tutorial_airwatch_configure.png) 
 
 6. **저장** 단추를 클릭합니다.
 
@@ -155,9 +155,9 @@ AirWatch에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음
     
     a. **디렉터리 유형**으로 **없음**을 선택합니다.
 
-    b. **인증에 SAML 사용**을 선택합니다.
+    나. **인증에 SAML 사용**을 선택합니다.
 
-    c. 다운로드한 인증서를 업로드하려면 **업로드**를 클릭합니다.
+    다. 다운로드한 인증서를 업로드하려면 **업로드**를 클릭합니다.
 
 13. **요청** 섹션에서 다음 단계를 수행합니다.
     
@@ -165,11 +165,11 @@ AirWatch에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음
 
     a. **요청 바인딩 형식**으로 **POST**를 선택합니다.
 
-    b. Azure Portal의 **Airwatch에서 Single Sign-on 구성** 대화 상자 페이지에서 **SAML Single Sign-On 서비스 URL** 값을 복사한 다음 **ID 공급자 Single Sign-On URL** 텍스트 상자에 붙여 넣습니다.
+    나. Azure Portal의 **Airwatch에서 Single Sign-on 구성** 대화 상자 페이지에서 **SAML Single Sign-On 서비스 URL** 값을 복사한 다음 **ID 공급자 Single Sign-On URL** 텍스트 상자에 붙여 넣습니다.
 
-    c. **NameID 형식**으로 **전자 메일 주소**를 선택합니다.
+    다. **NameID 형식**으로 **전자 메일 주소**를 선택합니다.
 
-    d. **Save**를 클릭합니다.
+    d. **저장**을 클릭합니다.
 
 14. **사용자** 탭을 다시 클릭합니다.
     
@@ -181,17 +181,17 @@ AirWatch에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음
 
     a. **개체 식별자** 텍스트 상자에 **http://schemas.microsoft.com/identity/claims/objectidentifier**를 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 **http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 **http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress**를 입력합니다.
 
-    c. **표시 이름** 텍스트 상자에 **http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname**을 입력합니다.
+    다. **표시 이름** 텍스트 상자에 **http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname**을 입력합니다.
 
     d. **이름** 텍스트 상자에 **http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname**을 입력합니다.
 
     e. **성** 텍스트 상자에 **http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname**을 입력합니다.
 
-    f. **전자 메일** 텍스트 상자에 **http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress**를 입력합니다.
+    f. **이메일** 텍스트 상자에 **http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress**를 입력합니다.
 
-    g. **Save**를 클릭합니다.
+    g. **저장**을 클릭합니다.
 
 <CE>
 
@@ -220,9 +220,9 @@ AirWatch에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 Britta Simon의 **메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 Britta Simon의 **메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -245,7 +245,7 @@ Azure AD 사용자가 AirWatch에 로그인할 수 있도록 하려면 AirWatch�
 
    ![사용자 추가](./media/active-directory-saas-airwatch-tutorial/ic791931.png "사용자 추가")   
    1. 관련된 텍스트 상자에 프로비전할 유효한 Azure Active Directory 계정의 **사용자 이름**, **암호**, **암호 확인**, **이름**, **성**, **전자 메일 주소**를 입력합니다.
-   2. **Save**를 클릭합니다.
+   2. **저장**을 클릭합니다.
 
 >[!NOTE]
 >다른 AirWatch 사용자 계정 생성 도구 또는 AirWatch가 제공한 API를 사용하여 AAD 사용자 계정을 프로비전할 수 있습니다.
@@ -265,7 +265,7 @@ Azure AD 사용자가 AirWatch에 로그인할 수 있도록 하려면 AirWatch�
 
 2. 응용 프로그램 목록에서 **AirWatch**를 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-airwatch-tutorial/tutorial_airwatch_app.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-airwatch-tutorial/tutorial_airwatch_app.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -291,7 +291,7 @@ Single Sign-On 설정을 테스트하려면 액세스 패널을 엽니다. 액�
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 
 
@@ -308,5 +308,4 @@ Single Sign-On 설정을 테스트하려면 액세스 패널을 엽니다. 액�
 [201]: ./media/active-directory-saas-airwatch-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-airwatch-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-airwatch-tutorial/tutorial_general_203.png
-
 

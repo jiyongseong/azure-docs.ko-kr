@@ -1,26 +1,23 @@
 ---
-title: "액세스 검토를 시작하는 방법 | Microsoft Docs"
-description: "Azure Privileged Identity Management 응용 프로그램을 사용하여 권한 있는 ID에 대해 액세스 검토를 만드는 방법을 알아봅니다."
+title: 액세스 검토를 시작하는 방법 | Microsoft Docs
+description: Azure Privileged Identity Management 응용 프로그램을 사용하여 권한 있는 ID에 대해 액세스 검토를 만드는 방법을 알아봅니다.
 services: active-directory
-documentationcenter: 
-author: billmath
-manager: femila
-editor: 
-ms.assetid: 3e52b731-55f4-4c8a-ba87-9fd34033f52f
+documentationcenter: ''
+author: curtand
+manager: mtillman
+editor: ''
 ms.service: active-directory
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
 ms.workload: identity
+ms.component: users-groups-roles
 ms.date: 05/04/2017
-ms.author: billmath
+ms.author: curtand
 ms.custom: pim
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: 8c9bac62a92947ea888f1ccdbd300f5b40cb3e07
-ms.contentlocale: ko-kr
-ms.lasthandoff: 12/29/2016
-
+ms.openlocfilehash: 1923890e01b351f884837e14b5e2ca736ec687ce
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="how-to-start-an-access-review-in-azure-ad-privileged-identity-management"></a>Azure AD Privileged Identity Management의 액세스 검토를 시작하는 방법
 사용자가 더 이상 필요 없는 권한 있는 액세스를 가진 경우 "오래된" 역할 할당이 됩니다. 오래된 역할 할당과 관련된 위험을 줄이기 위해 권한 있는 역할 관리자는 사용자에게 부여된 역할을 정기적으로 검토해야 합니다. 이 문서에서 Azure AD PIM(Privileged Identity Management)에서 액세스 검토를 시작하는 단계를 설명합니다.
@@ -51,7 +48,7 @@ PIM 응용 프로그램 기본 페이지에서 액세스 검토를 시작하는 
 ### <a name="choose-a-role-to-review"></a>검토할 역할 선택
 각 검토는 오직 하나의 역할에 집중합니다. 특정 역할 블레이드에서 액세스 검토를 시작하지 않는 경우 지금 역할을 선택해야 합니다.
 
-1.  **역할 멤버 자격 검토**
+1. **역할 멤버 자격 검토**
    
     ![역할 멤버 자격 검토 - 스크린샷][3]
 2. 목록에서 역할 하나를 선택 합니다.
@@ -59,7 +56,7 @@ PIM 응용 프로그램 기본 페이지에서 액세스 검토를 시작하는 
 ### <a name="decide-who-will-perform-the-review"></a>검토를 수행할 사용자를 결정합니다.
 검토를 수행하는 데 세 가지 옵션이 있습니다. 검토를 다른 사람에게 완료하도록 할당할 수 있습니다, 사용자가 직접 수행하거나 각 사용자가 자신의 액세스를 검토하도록 할 수 있습니다.
 
-1.  **검토자 선택**
+1. **검토자 선택**
    
     ![검토자 선택 - 스크린 샷][4]
 2. 옵션 중 하나를 선택하십시오.
@@ -88,4 +85,3 @@ PIM 응용 프로그램 기본 페이지에서 액세스 검토를 시작하는 
 [2]: ./media/active-directory-privileged-identity-management-how-to-start-security-review/PIM_review_configure.png
 [3]: ./media/active-directory-privileged-identity-management-how-to-start-security-review/PIM_review_role.png
 [4]: ./media/active-directory-privileged-identity-management-how-to-start-security-review/PIM_review_reviewers.png
-

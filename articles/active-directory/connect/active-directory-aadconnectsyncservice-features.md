@@ -1,11 +1,11 @@
 ---
-title: "Azure AD Connect 동기화 서비스 기능 및 구성 | Microsoft Docs"
-description: "Azure AD Connect 동기화 서비스의 서비스 쪽 기능을 설명합니다."
+title: Azure AD Connect 동기화 서비스 기능 및 구성 | Microsoft Docs
+description: Azure AD Connect 동기화 서비스의 서비스 쪽 기능을 설명합니다.
 services: active-directory
-documentationcenter: 
-author: andkjell
-manager: femila
-editor: 
+documentationcenter: ''
+author: billmath
+manager: mtillman
+editor: ''
 ms.assetid: 213aab20-0a61-434a-9545-c4637628da81
 ms.service: active-directory
 ms.workload: identity
@@ -14,12 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/13/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 97acd09d223e59fbf4109bc8a20a25a2ed8ea366
-ms.openlocfilehash: a439f421d726f58b2d21fb4a0e883e16db719364
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/10/2017
-
+ms.openlocfilehash: eb2a670735db8a72163967d89d0359b4b89a3e2f
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
+ms.locfileid: "32150348"
 ---
 # <a name="azure-ad-connect-sync-service-features"></a>Azure AD Connect 동기화 서비스 기능
 Azure AD Connect의 동기화 기능에는 두 가지 구성 요소가 있습니다.
@@ -29,7 +29,7 @@ Azure AD Connect의 동기화 기능에는 두 가지 구성 요소가 있습니
 
 이 항목에서는 다음 **Azure AD Connect 동기화 서비스** 기능 작동 방법 및 Windows PowerShell을 사용하여 구성할 수 있는 방법에 대해 설명합니다.
 
-이러한 설정은 [Windows PowerShell용 Azure Active Directory 모듈](http://aka.ms/aadposh)에서 구성됩니다. Azure AD Connect에서 다운로드하여 별도로 설치합니다. 이 항목에서 설명한 cmdlet은 [2016년 3월 릴리스(빌드 9031.1)](http://social.technet.microsoft.com/wiki/contents/articles/28552.microsoft-azure-active-directory-powershell-module-version-release-history.aspx#Version_9031_1)에 도입되었습니다. 이 항목에서 설명하는 cmdlet이 없거나 동일한 결과가 생성되지 않는 경우 최신 버전을 실행하고 있는지 확인합니다.
+이러한 설정은 [Windows PowerShell용 Azure Active Directory 모듈](https://aka.ms/aadposh)에서 구성됩니다. Azure AD Connect에서 다운로드하여 별도로 설치합니다. 이 항목에서 설명한 cmdlet은 [2016년 3월 릴리스(빌드 9031.1)](http://social.technet.microsoft.com/wiki/contents/articles/28552.microsoft-azure-active-directory-powershell-module-version-release-history.aspx#Version_9031_1)에 도입되었습니다. 이 항목에서 설명하는 cmdlet이 없거나 동일한 결과가 생성되지 않는 경우 최신 버전을 실행하고 있는지 확인합니다.
 
 Azure AD 디렉터리의 구성을 보려면 `Get-MsolDirSyncFeatures`를 실행합니다.  
 ![Get-MsolDirSyncFeatures 결과](./media/active-directory-aadconnectsyncservice-features/getmsoldirsyncfeatures.png)
@@ -57,7 +57,7 @@ Azure AD 디렉터리의 구성을 보려면 `Get-MsolDirSyncFeatures`를 실행
 | DeviceWriteback |[Azure AD Connect: 장치 쓰기 저장 사용](active-directory-aadconnect-feature-device-writeback.md) |
 | DirectoryExtensions |[Azure AD Connect 동기화: 디렉터리 확장](active-directory-aadconnectsync-feature-directory-extensions.md) |
 | [DuplicateProxyAddressResiliency<br/>DuplicateUPNResiliency](#duplicate-attribute-resiliency) |내보내는 동안 전체 개체가 실패한 것이 아니라 또 다른 개체의 복제본인 경우 특성을 격리시킬 수 있습니다. |
-| PasswordSync |[Azure AD Connect 동기화로 암호 동기화 구현](active-directory-aadconnectsync-implement-password-synchronization.md) |
+| PasswordSync |[Azure AD Connect 동기화로 암호 해시 동기화 구현](active-directory-aadconnectsync-implement-password-hash-synchronization.md) |
 | UnifiedGroupWriteback |[미리 보기: 그룹 쓰기 저장](active-directory-aadconnect-feature-preview.md#group-writeback) |
 | UserWriteback |현재 지원되지 않습니다. |
 
@@ -89,7 +89,7 @@ Set-MsolDirSyncFeature -Feature EnableSoftMatchOnUpn -Enable $true
 
 자세한 내용은 [Office 365, Azure 또는 Intune의 사용자 이름이 온-프레미스 UPN 또는 대체 로그인 ID와 일치하지 않음](https://support.microsoft.com/kb/2523192)을 참조하세요.
 
-이 기능을 사용하도록 설정하면 userPrincipalName이 변경된 온-프레미스이고 암호 동기화를 사용하는 경우 동기화 엔진이 이를 업데이트할 수 있습니다. 페더레이션을 사용하는 경우 이 기능은 지원되지 않습니다.
+이 기능을 사용하도록 설정하면 userPrincipalName이 변경된 온-프레미스이고 암호 해시 동기화를 사용하는 경우 동기화 엔진이 이를 업데이트할 수 있습니다. 페더레이션을 사용하는 경우 이 기능은 지원되지 않습니다.
 
 이 기능은 새로 만든 Azure AD 디렉터리에 기본적으로 설정되어 있습니다. 다음을 실행하여 이 기능을 사용하도록 설정했는지 확인할 수 있습니다.  
 
@@ -108,5 +108,4 @@ Set-MsolDirSyncFeature -Feature SynchronizeUpnForManagedUsers -Enable $true
 ## <a name="see-also"></a>참고 항목
 * [Azure AD Connect 동기화](active-directory-aadconnectsync-whatis.md)
 * [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)
-
 

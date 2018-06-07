@@ -1,9 +1,9 @@
 ---
-title: "인터넷 연결 부하 분산 장치 만들기 - Azure 템플릿 | Microsoft Docs"
-description: "템플릿을 사용하여 Resource Manager에서 인터넷 연결 부하 분산 장치를 만드는 방법에 대해 알아봅니다."
+title: 공용 부하 분산 장치 만들기 - Azure 템플릿 | Microsoft Docs
+description: 템플릿을 사용하여 Resource Manager에서 공용 부하 분산 장치를 만드는 방법에 대해 알아봅니다.
 services: load-balancer
 documentationcenter: na
-author: kumudd
+author: KumudD
 manager: timlt
 tags: azure-resource-manager
 ms.assetid: b24f4729-4559-4458-8527-71009d242647
@@ -12,16 +12,15 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 01/23/2017
+ms.date: 09/25/2017
 ms.author: kumud
-translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: f30a450c7d3aa73bb2fb196ca7de94436916bed0
-ms.lasthandoff: 04/27/2017
-
+ms.openlocfilehash: 8452d3a6e165bbcd6007d9dc2261e458746b475a
+ms.sourcegitcommit: c3d53d8901622f93efcd13a31863161019325216
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/29/2018
 ---
-
-# <a name="creating-an-internet-facing-load-balancer-using-a-template"></a>템플릿을 사용하여 인터넷 연결 부하 분산 장치 만들기
+# <a name="creating-a-public-load-balancer-using-a-template"></a>템플릿을 사용하여 공용 부하 분산 장치 만들기
 
 > [!div class="op_single_selector"]
 > * [포털](../load-balancer/load-balancer-get-started-internet-portal.md)
@@ -29,11 +28,9 @@ ms.lasthandoff: 04/27/2017
 > * [Azure CLI](../load-balancer/load-balancer-get-started-internet-arm-cli.md)
 > * [템플릿](../load-balancer/load-balancer-get-started-internet-arm-template.md)
 
+
+
 [!INCLUDE [load-balancer-get-started-internet-intro-include.md](../../includes/load-balancer-get-started-internet-intro-include.md)]
-
-[!INCLUDE [azure-arm-classic-important-include](../../includes/azure-arm-classic-important-include.md)]
-
-이 문서에서는 리소스 관리자 배포 모델에 대해 설명합니다. 또한 [클래식 배포 모델을 사용하여 인터넷 연결 부하 분산 장치를 만드는 방법을 배울 수 있습니다](load-balancer-get-started-internet-classic-portal.md)
 
 [!INCLUDE [load-balancer-get-started-internet-scenario-include.md](../../includes/load-balancer-get-started-internet-scenario-include.md)]
 
@@ -83,4 +80,3 @@ Azure CLI를 사용하여 템플릿을 배포하려면 아래 단계를 따르�
 [부하 분산 장치 배포 모드 구성](load-balancer-distribution-mode.md)
 
 [부하 분산 장치에 대한 유휴 TCP 시간 제한 설정 구성](load-balancer-tcp-idle-timeout.md)
-

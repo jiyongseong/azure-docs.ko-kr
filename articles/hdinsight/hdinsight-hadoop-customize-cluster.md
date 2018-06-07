@@ -1,27 +1,25 @@
 ---
-title: "스크립트 작업을 사용하여 HDInsight 클러스터 사용자 지정 - Azure | Microsoft Docs"
-description: "스크립트 작업을 사용하여 HDInsight 클러스터를 사용자 지정하는 방법을 알아봅니다."
+title: 스크립트 작업을 사용하여 HDInsight 클러스터 사용자 지정 - Azure | Microsoft Docs
+description: 스크립트 작업을 사용하여 HDInsight 클러스터를 사용자 지정하는 방법을 알아봅니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: nitinme
 manager: jhubbard
 editor: cgronlun
 tags: azure-portal
 ms.assetid: 3a63e216-4163-40c1-aa04-6b42fd0162ad
 ms.service: hdinsight
-ms.workload: big-data
-ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.date: 10/05/2016
 ms.author: nitinme
 ROBOTS: NOINDEX
+ms.openlocfilehash: 15fa3e7738810ada48f471a685f79a82445ad70c
+ms.sourcegitcommit: 96089449d17548263691d40e4f1e8f9557561197
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: ec95b6d66c71b4278dd1e16807fcc75f5e8b1c36
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/17/2018
+ms.locfileid: "34271309"
 ---
 # <a name="customize-windows-based-hdinsight-clusters-using-script-action"></a>스크립트 작업을 사용하여 Windows 기반 HDInsight 클러스터 사용자 지정
 **스크립트 동작** 은 클러스터 생성 과정 중 클러스터에 추가 소프트웨어를 설치하기 위해 [사용자 지정 스크립트](hdinsight-hadoop-script-actions.md) 를 호출하는 데 사용될 수 있습니다.
@@ -31,7 +29,7 @@ ms.lasthandoff: 07/21/2017
 > [!IMPORTANT]
 > Linux는 HDInsight 버전 3.4 이상에서 사용되는 유일한 운영 체제입니다. 자세한 내용은 [Windows에서 HDInsight 사용 중지](hdinsight-component-versioning.md#hdinsight-windows-retirement)를 참조하세요.
 
-HDInsight 클러스터를 사용자 지정하는 방법은 추가 Azure 저장소 계정 포함, hadoop 구성 파일(core-site.xml, hive-site.xml 등) 변경, 클러스터의 공통 위치에 공유 라이브러리(예: Hive, Oozie) 추가 등을 비롯해 다양합니다. 이러한 사용자 지정은 Azure PowerShell, Azure HDInsight .NET SDK 또는 Azure Portal을 통해 수행할 수 있습니다. 자세한 내용은 [HDInsight에서 Hadoop 클러스터 만들기][hdinsight-provision-cluster]를 참조하세요.
+HDInsight 클러스터를 사용자 지정하는 방법은 추가 Azure Storage 계정 포함, hadoop 구성 파일(core-site.xml, hive-site.xml 등) 변경, 클러스터의 공통 위치에 공유 라이브러리(예: Hive, Oozie) 추가 등을 비롯해 다양합니다. 이러한 사용자 지정은 Azure PowerShell, Azure HDInsight .NET SDK 또는 Azure Portal을 통해 수행할 수 있습니다. 자세한 내용은 [HDInsight에서 Hadoop 클러스터 만들기][hdinsight-provision-cluster]를 참조하세요.
 
 [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell-cli-and-dotnet-sdk.md)]
 
@@ -47,19 +45,19 @@ HDInsight 클러스터를 사용자 지정하는 방법은 추가 Azure 저장�
 >
 >
 
-스크립트의 출력 및 오류 로그는 클러스터에 대해 지정한 기본 저장소 계정에 저장됩니다. 오류는 **u<\cluster-name-fragment><\time-stamp>setuplog**라는 이름으로 테이블에 저장됩니다. 클러스터의 모든 노드(헤드 노드 및 작업자 노드)에서 실행된 스크립트의 집계 로그입니다.
+스크립트의 출력 및 오류 로그는 클러스터에 대해 지정한 기본 Storage 계정에 저장됩니다. 오류는 **u<\cluster-name-fragment><\time-stamp>setuplog**라는 이름으로 테이블에 저장됩니다. 클러스터의 모든 노드(헤드 노드 및 작업자 노드)에서 실행된 스크립트의 집계 로그입니다.
 
 각 클러스터에서는 지정된 순서대로 호출되는 여러 스크립트 작업을 사용할 수 있습니다. 스크립트를 헤드 노드, 작업자 노드 또는 두 노드 모두에서 실행할 수 있습니다.
 
 HDInsight는 HDInsight 클러스터에서 다음 구성 요소를 설치하는 여러 스크립트를 제공합니다.
 
-| 이름 | 스크립트 |
+| Name | 스크립트 |
 | --- | --- |
-| **Spark 설치** |https://hdiconfigactions.blob.core.windows.net/sparkconfigactionv03/spark-installer-v03.ps1. [HDInsight 클러스터에서 Spark 설치 및 사용][hdinsight-install-spark]을 참조하세요. |
-| **R 설치** |https://hdiconfigactions.blob.core.windows.net/rconfigactionv02/r-installer-v02.ps1. [HDInsight 클러스터에서 R 설치 및 사용][hdinsight-install-r]을 참조하세요. |
-| **Solr 설치** |https://hdiconfigactions.blob.core.windows.net/solrconfigactionv01/solr-installer-v01.ps1. [HDInsight 클러스터에서 Solr 설치 및 사용](hdinsight-hadoop-solr-install.md)을 참조하세요. |
-| - **Giraph 설치** |https://hdiconfigactions.blob.core.windows.net/giraphconfigactionv01/giraph-installer-v01.ps1. [HDInsight 클러스터에서 Giraph 설치 및 사용](hdinsight-hadoop-giraph-install.md)을 참조하세요. |
-| **Hive 라이브러리 사전 로드** |https://hdiconfigactions.blob.core.windows.net/setupcustomhivelibsv01/setup-customhivelibs-v01.ps1. [HDInsight 클러스터에서 Hive 라이브러리 추가](hdinsight-hadoop-add-hive-libraries.md) |
+| **Spark 설치** |https://hdiconfigactions.blob.core.windows.net/sparkconfigactionv03/spark-installer-v03.ps1 [HDInsight 클러스터에서 Spark 설치 및 사용][hdinsight-install-spark]을 참조하세요. |
+| **R 설치** |https://hdiconfigactions.blob.core.windows.net/rconfigactionv02/r-installer-v02.ps1 [HDInsight 클러스터에서 R 설치 및 사용][hdinsight-install-r]을 참조하세요. |
+| **Solr 설치** |https://hdiconfigactions.blob.core.windows.net/solrconfigactionv01/solr-installer-v01.ps1 [HDInsight 클러스터에서 Solr 설치 및 사용](hdinsight-hadoop-solr-install.md)을 참조하세요. |
+| - **Giraph 설치** |https://hdiconfigactions.blob.core.windows.net/giraphconfigactionv01/giraph-installer-v01.ps1 [HDInsight 클러스터에서 Giraph 설치 및 사용](hdinsight-hadoop-giraph-install.md)을 참조하세요. |
+| **Hive 라이브러리 사전 로드** |https://hdiconfigactions.blob.core.windows.net/setupcustomhivelibsv01/setup-customhivelibs-v01.ps1 [HDInsight 클러스터에서 Hive 라이브러리 추가](hdinsight-hadoop-add-hive-libraries.md) |
 
 ## <a name="call-scripts-using-the-azure-portal"></a>Azure Portal을 사용하여 스크립트 호출
 **Azure Portal에서**
@@ -70,8 +68,8 @@ HDInsight는 HDInsight 클러스터에서 다음 구성 요소를 설치하는 �
     ![스크립트 작업을 사용하여 클러스터 사용자 지정](./media/hdinsight-hadoop-customize-cluster/HDI.CreateCluster.8.png "스크립트 작업을 사용하여 클러스터 사용자 지정")
 
     <table border='1'>
-        <tr><th>속성</th><th>값</th></tr>
-        <tr><td>이름</td>
+        <tr><th>자산</th><th>값</th></tr>
+        <tr><td>Name</td>
             <td>스크립트 작업의 이름을 지정합니다.</td></tr>
         <tr><td>스크립트 URI</td>
             <td>클러스터를 사용자 지정하기 위해 호출되는 스크립트에 URI를 지정합니다. s</td></tr>
@@ -88,7 +86,7 @@ HDInsight는 HDInsight 클러스터에서 다음 구성 요소를 설치하는 �
 이 다음 PowerShell 스크립트는 Windows 기반 HDInsight 클러스터에 Spark를 설치하는 방법을 보여줍니다.  
 
     # Provide values for these variables
-    $subscriptionID = "<Azure Suscription ID>" # After "Login-AzureRmAccount", use "Get-AzureRmSubscription" to list IDs.
+    $subscriptionID = "<Azure Suscription ID>" # After "Connect-AzureRmAccount", use "Get-AzureRmSubscription" to list IDs.
 
     $nameToken = "<Enter A Name Token>"  # The token is use to create Azure service names.
     $namePrefix = $nameToken.ToLower() + (Get-Date -Format "MMdd")
@@ -111,7 +109,7 @@ HDInsight는 HDInsight 클러스터에서 다음 구성 요소를 설치하는 �
         Get-AzureRmSubscription
     }
     Catch{
-        Login-AzureRmAccount
+        Connect-AzureRmAccount
     }
     Select-AzureRmSubscription -SubscriptionId $subscriptionID
 
@@ -298,7 +296,7 @@ HDInsight 서비스에서 사용할 수 있는 오픈 소스 구성 요소에는
 > [!WARNING]
 > HDInsight 클러스터와 함께 제공된 구성 요소는 완전히 지원되며 Microsoft 지원에서 이러한 구성 요소와 관련된 문제를 해결하는 데 도움을 드릴 것입니다.
 >
-> 사용자 지정 구성 요소는 문제 해결에 도움이 되는 합리적인 지원을 받습니다. 지원을 통해 문제를 해결하거나 해당 기술에 대한 전문 지식이 있는, 오픈 소스 기술에 대해 사용 가능한 채널에 참여하도록 요구할 수 있습니다. 예를 들어 [HDInsight에 대한 MSDN 포럼](https://social.msdn.microsoft.com/Forums/azure/en-US/home?forum=hdinsight), [http://stackoverflow.com](http://stackoverflow.com)과 같은 여러 커뮤니티 사이트를 사용할 수 있습니다. 또한 Apache 프로젝트에는 [http://apache.org](http://apache.org)에 프로젝트 사이트가 있습니다(예: [Hadoop](http://hadoop.apache.org/), [Spark](http://spark.apache.org/)).
+> 사용자 지정 구성 요소는 문제 해결에 도움이 되는 합리적인 지원을 받습니다. 지원을 통해 문제를 해결하거나 해당 기술에 대한 전문 지식이 있는, 오픈 소스 기술에 대해 사용 가능한 채널에 참여하도록 요구할 수 있습니다. 예를 들어 [HDInsight에 대한 MSDN 포럼](https://social.msdn.microsoft.com/Forums/azure/en-US/home?forum=hdinsight), [http://stackoverflow.com](http://stackoverflow.com)과 같은 여러 커뮤니티 사이트를 사용할 수 있습니다. Apache 프로젝트는 [http://apache.org](http://apache.org)에 프로젝트 사이트가 있습니다(예: [Hadoop](http://hadoop.apache.org/), [Spark](http://spark.apache.org/)).
 >
 >
 
@@ -315,16 +313,13 @@ HDInsight 서비스는 사용자 지정 구성 요소를 사용하는 여러 방
 * [HDInsight의 Hadoop 클러스터 만들기][hdinsight-provision-cluster]에서는 다른 사용자 지정 옵션을 사용하여 HDInsight 클러스터를 만드는 방법에 대한 지침을 제공합니다.
 * [HDInsight용 스크립트 작업 스크립트 개발][hdinsight-write-script]
 * [HDInsight 클러스터에서 Spark 설치 및 사용][hdinsight-install-spark]
-* [HDInsight 클러스터에서 R 설치 및 사용][hdinsight-install-r]
 * [HDInsight 클러스터에 Solr 설치 및 사용](hdinsight-hadoop-solr-install.md)
 * [HDInsight 클러스터에서 Giraph 설치 및 사용](hdinsight-hadoop-giraph-install.md)
 
 [hdinsight-install-spark]: hdinsight-hadoop-spark-install.md
-[hdinsight-install-r]: hdinsight-hadoop-r-scripts.md
 [hdinsight-write-script]: hdinsight-hadoop-script-actions.md
 [hdinsight-provision-cluster]: hdinsight-hadoop-provision-linux-clusters.md
 [powershell-install-configure]: /powershell/azureps-cmdlets-docs
 
 
 [img-hdi-cluster-states]: ./media/hdinsight-hadoop-customize-cluster/HDI-Cluster-state.png "클러스터를 만드는 동안의 단계"
-

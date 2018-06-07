@@ -1,9 +1,9 @@
 ---
-title: "Azure Application Insights 원격 분석 데이터 모델 - 추적 원격 분석 | Microsoft Docs"
-description: "추적 원격 분석을 위한 Azure Application Insights 데이터 모델"
+title: Azure Application Insights 원격 분석 데이터 모델 - 추적 원격 분석 | Microsoft Docs
+description: 추적 원격 분석을 위한 Azure Application Insights 데이터 모델
 services: application-insights
 documentationcenter: .net
-author: SergeyKanzhelev
+author: mrbullwinkle
 manager: carmonm
 ms.service: application-insights
 ms.workload: TBD
@@ -11,13 +11,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: multiple
 ms.topic: article
 ms.date: 04/25/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: 178b1ec0edce5a3fb20dc5c591e12cfe6e721cf2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
+ms.author: mbullwin; sergkanz
+ms.openlocfilehash: d93ed9f292b6c05d0a3fb3202567f4024f62e35e
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
 # <a name="trace-telemetry-application-insights-data-model"></a>추적 원격 분석: Application Insights 데이터 모델
 
@@ -44,4 +43,3 @@ ms.lasthandoff: 04/27/2017
 - Application Insights 형식 및 데이터 모델에 대한 자세한 내용은 [데이터 모델](application-insights-data-model.md)을 참조하세요.
 - [사용자 지정 추적 원격 분석을 작성합니다](app-insights-api-custom-events-metrics.md#tracktrace).
 - Application Insights에서 지원되는 [플랫폼](app-insights-platforms.md)을 확인합니다.
-

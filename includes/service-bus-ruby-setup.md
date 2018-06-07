@@ -1,7 +1,7 @@
 ## <a name="create-a-ruby-application"></a>Ruby 응용 프로그램 만들기
-자세한 내용은 [Azure에서 Ruby 응용 프로그램 만들기](../articles/virtual-machines/linux/classic/virtual-machines-linux-classic-ruby-rails-web-app.md)를 참조하세요.
+자세한 내용은 [Azure에서 Ruby 응용 프로그램 만들기](../articles/virtual-machines/linux/classic/ruby-rails-web-app.md)를 참조하세요.
 
-## <a name="configure-your-application-to-use-service-bus"></a>서비스 버스를 사용하도록 응용 프로그램 구성
+## <a name="configure-your-application-to-use-service-bus"></a>Service Bus를 사용하도록 응용 프로그램 구성
 Service Bus를 사용하려면 저장소 REST 서비스와 통신하는 편리한 라이브러리 집합이 포함된 Azure Ruby 패키지를 다운로드하여 사용합니다.
 
 ### <a name="use-rubygems-to-obtain-the-package"></a>RubyGems를 사용하여 패키지 가져오기
@@ -15,7 +15,7 @@ Service Bus를 사용하려면 저장소 REST 서비스와 통신하는 편리�
 require "azure"
 ```
 
-## <a name="set-up-a-service-bus-connection"></a>서비스 버스 연결 설정
+## <a name="set-up-a-service-bus-connection"></a>Service Bus 연결 설정
 다음 코드를 사용하여 네임스페이스, 키 이름, 키, 서명자 및 호스트에 대한 값을 설정합니다.
 
 ```ruby

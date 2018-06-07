@@ -1,10 +1,10 @@
 ---
-title: Connect to Azure Stack | Microsoft Docs
-description: Learn how to connect Azure Stack
+title: "Azure 스택에 연결 | Microsoft Docs"
+description: "Azure 스택에 연결 하는 방법을 알아봅니다."
 services: azure-stack
 documentationcenter: 
-author: SnehaGunda
-manager: byronr
+author: mattbriggs
+manager: femila
 editor: 
 ms.assetid: 3cebbfa6-819a-41e3-9f1b-14ca0a2aaba3
 ms.service: azure-stack
@@ -12,116 +12,103 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: get-started-article
-ms.date: 07/10/2017
-ms.author: sngun
-ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 2f7b39fcc7353186f0cdd8caadca75c4641c0da2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.date: 09/25/2017
+ms.author: mabrigg
+ms.openlocfilehash: d9d7beae9ea81f2568377ee3593362871aae98fe
+ms.sourcegitcommit: a5f16c1e2e0573204581c072cf7d237745ff98dc
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
-# <a name="connect-to-azure-stack"></a>Connect to Azure Stack
+# <a name="connect-to-azure-stack"></a>Azure Stack에 연결
 
-To manage resources, you must connect to the Azure Stack Development Kit. This topic details the steps required to connect to the development kit. You can use either of the following connection options:
+*적용 대상: Azure 스택 개발 키트*
 
-* [Remote Desktop](#connect-with-remote-desktop): lets a single concurrent user quickly connect from the development kit.
-* [Virtual Private Network (VPN)](#connect-with-vpn): lets multiple concurrent users connect from clients outside of the Azure Stack infrastructure (requires configuration).
+리소스를 관리 하려면 먼저 Azure 스택 개발 키트에 연결 해야 합니다. 이 문서에서는 개발 키트에 연결할 수행 하는 단계에 설명 합니다. 다음 연결 옵션 중 하나를 사용할 수 있습니다.
 
-## <a name="connect-with-remote-desktop"></a>Connect with Remote Desktop
-With a Remote Desktop connection, a single concurrent user can work with the portal to manage resources.
+* [원격 데스크톱 연결](#connect-with-remote-desktop)합니다. 원격 데스크톱 연결을 사용 하 여 연결 하면 사용자 한 명이 개발 키트에서 신속 하 게 연결할 수 있습니다.
+* [가상 사설망 (VPN)](#connect-with-vpn)합니다. VPN을 사용 하 여 연결 하면 여러 사용자가 클라이언트 (설치 해야 함)는 Azure 스택 인프라 외부에서 동시에 연결할 수 있습니다.
 
-1. Open a Remote Desktop Connection and connect to the development kit. Enter **AzureStack\AzureStackAdmin** as the username, and the administrative password that you provided during Azure Stack setup.  
+<a name="connect-to-azure-stack-with-remote-desktop"></a>
+##  <a name="connect-to-azure-stack-by-using-remote-desktop-connection"></a>Azure 스택 원격 데스크톱 연결을 사용 하 여 연결
+사용자 한 명이 동시 연산자 포털 또는 원격 데스크톱 연결을 통해 사용자 포털에서 리소스를 관리할 수 있습니다.
 
-2. From the development kit computer, open Server Manager, click **Local Server**, turn off Internet Explorer Enhanced Security, and then close Server Manager.
+1. 원격 데스크톱 연결을 열고 개발 키트에 연결 합니다. 사용자 이름에 대 한 입력 **AzureStack\AzureStackAdmin**합니다. Azure 스택을 설정할 때 지정한 연산자 암호를 사용 합니다.  
 
-3. To open the user [portal](azure-stack-key-features.md#portal), navigate to (https://portal.local.azurestack.external/) and sign in using user credentials. To open the administrator [portal](azure-stack-key-features.md#portal), navigate to (https://adminportal.local.azurestack.external/) and sign in using the Azure Active Directory credentials specified during installation.
+2. 개발 키트 컴퓨터에서 서버 관리자를 엽니다. 선택 **로컬 서버**선택을 취소는 **Internet Explorer 보안 강화** 확인란을 선택한 후 서버 관리자를 닫습니다.
 
-## <a name="connect-with-vpn"></a>Connect with VPN
+3. 열려는 [사용자 포털](azure-stack-key-features.md#portal)https://portal.local.azurestack.external/로 이동 하세요. 사용자 자격 증명을 사용 하 여 로그인 합니다. Azure 스택 열려는 [연산자 포털](azure-stack-key-features.md#portal)https://adminportal.local.azurestack.external/로 이동 하세요. 설치 중에 지정 된 Azure Active Directory (Azure AD) 자격 증명을 사용 하 여 로그인 합니다.
 
-You can establish a split tunnel Virtual Private Network (VPN) connection to an Azure Stack Development Kit. The VPN connection allows your local Windows-based computer to connect to the development kit environment. VPN connectivity is supported in both Azure Active Directory(AAD) and Active Directory Federation Services(AD FS) based deployments. VPN connections enable multiple clients to connect to Azure Stack at the same time.
- 
-Through the VPN connection, you can access the administrator portal, user portal, and locally installed tools such as Visual Studio and PowerShell to manage Azure Stack resources.
+<a name="connect-to-azure-stack-with-vpn"></a>
+## <a name="connect-to-azure-stack-by-using-vpn"></a>Azure 스택 VPN을 사용 하 여 연결
+
+분할 터널 Azure 스택 개발 키트를 VPN 연결을 설정할 수 있습니다. Azure 스택 연산자 포털, 사용자 포털 및 Visual Studio와 PowerShell 스택에서 Azure 리소스 관리와 같은 로컬에 설치 된 도구에 액세스 하는 VPN 연결을 사용할 수 있습니다. Azure AD와 Active Directory Federation Services (AD FS) 배포에서 VPN 연결을 사용할 수 있습니다. VPN 연결을 사용 하면 여러 클라이언트가 동시에 Azure 스택에 연결할 수 있도록 합니다. 
 
 > [!NOTE] 
-> This VPN connection does not provide connectivity to Azure Stack infrastructure VMs. 
+> VPN 연결 Azure 스택 인프라 Vm에 대 한 연결을 제공 하지 않습니다. 
 
-The following sections describe the steps that are required to establish VPN connectivity to Azure Stack.
+### <a name="prerequisites"></a>필수 조건
 
-### <a name="prerequisites"></a>Prerequisites
+1. 설치 [Azure 스택 호환 Azure PowerShell](azure-stack-powershell-install.md) 로컬 컴퓨터에 있습니다.  
+2. 다운로드는 [Azure 스택을 사용 하는 데 필요한 도구](azure-stack-powershell-download.md)합니다. 
 
-* Install [Azure Stack compatible Azure PowerShell](azure-stack-powershell-install.md) on your local computer.  
-* Download the [tools required to work with Azure Stack](azure-stack-powershell-download.md) to your local computer.  
+### <a name="set-up-vpn-connectivity"></a>VPN 연결을 설정 합니다.
 
-### <a name="import-the-connect-powershell-module"></a>Import the Connect PowerShell module
+개발 키트를 VPN 연결을 만들려면 로컬 Windows 기반 컴퓨터의 관리자 권한으로 Windows PowerShell을 엽니다. 다음 스크립트 (사용자 환경에 대 한 값이 IP 주소 및 암호 업데이트)를 실행 합니다.
 
-After you download the tools, navigate to the downloaded folder and import the **Connect** PowerShell module onto your local Windows-based computer by using the following command:
+```PowerShell 
+# Configure Windows Remote Management (WinRM), if it's not already configured.
+winrm quickconfig  
 
-```PowerShell
 Set-ExecutionPolicy RemoteSigned
+
+# Import the Connect module.
 Import-Module .\Connect\AzureStack.Connect.psm1 
+
+# Add the development kit computer’s host IP address and certificate authority (CA) to the list of trusted hosts. Make sure you update the IP address and password values for your environment. 
+
+$hostIP = "<Azure Stack host IP address>"
+
+$Password = ConvertTo-SecureString `
+  "<operator's password provided when deploying Azure Stack>" `
+  -AsPlainText `
+  -Force
+
+Set-Item wsman:\localhost\Client\TrustedHosts `
+  -Value $hostIP `
+  -Concatenate
+
+# Create a VPN connection entry for the local user.
+Add-AzsVpnConnection `
+  -ServerAddress $hostIP `
+  -Password $Password
+
 ```
 
-### <a name="configure-vpn-to-azure-stack-development-kit"></a>Configure VPN to Azure Stack Development Kit
+설치에 성공 하면 **azurestack** VPN 연결 목록에 나타납니다.
 
-To create a VPN connection to the development kit, run the following steps on your local Windows-based computer:
+![네트워크 연결](media/azure-stack-connect-azure-stack/image3.png)  
 
-1. Add the development kit computer’s host IP address & certificate authority (CA) to the list of trusted hosts on your client computer by running the following script in an elevated PowerShell session:
+### <a name="connect-to-azure-stack"></a>Azure Stack에 연결
 
-    ```PowerShell
-    #Change the IP address in the following command to match your Azure Stack host IP address
-    $hostIP = "<Azure Stack host IP address>"
+다음 방법 중 하나를 사용 하 여 Azure 스택 인스턴스에 연결 합니다.  
+
+* 사용 하 여 `Connect-AzsVpn ` 명령: 
     
-    # Change the password in the following command to the administrative password that is provided when deploying Azure Stack. 
-    $Password = ConvertTo-SecureString `
-      "<Administrator password provided when deploying Azure Stack>" `
-      -AsPlainText `
-      -Force
-    
-    #Add host IP and certificate authority to the to trusted hosts
-    Set-Item wsman:\localhost\Client\TrustedHosts `
-      -Value $hostIP `
-      -Concatenate
-    ```
+  ```PowerShell
+  Connect-AzsVpn `
+    -Password $Password
+  ```
 
-2. Create a VPN connection entry for your local user by using the `Add-AzsVpnConnection` command:
+  Azure 스택 호스트 신뢰 및에서 인증서를 설치 대화 상자가 나타나면 **AzureStackCertificateAuthority** 로컬 컴퓨터의 인증서 저장소에 있습니다. (프롬프트 PowerShell 창에 의해 숨겨져 될 수도 있습니다.) 
 
-    ```PowerShell
-    Add-AzsVpnConnection `
-      -ServerAddress $hostIP `
-      -Password $Password
-    ```
-    ![get VPN connection](media/azure-stack-connect-azure-stack/image2.png)  
+* 로컬 컴퓨터의 선택 **네트워크 설정** > **VPN** > **azurestack** > **연결**. 로그인 프롬프트에서 사용자 이름을 입력 합니다 (**AzureStack\AzureStackAdmin**) 및 암호.
 
-    If the connection succeeds, you should see **azurestack** in your list of VPN connections.
+### <a name="test-vpn-connectivity"></a>VPN 연결 테스트
 
-    ![Network connections](media/azure-stack-connect-azure-stack/image3.png)  
+포털 연결을 테스트 하려면 웹 브라우저를 열고 하 고 사용자 포털 (https://portal.local.azurestack.external/) 또는 연산자 포털 (https://adminportal.local.azurestack.external/)로 이동 하십시오. 에 로그인 하 고 리소스를 만듭니다.  
 
-3.  Connect to the Azure Stack instance by using either of the following methods:  
+## <a name="next-steps"></a>다음 단계
 
-    a.  `Connect-AzsVpn ` command: 
-    
-    ```PowerShell
-    Connect-AzsVpn `
-      -Password $Password
-    ```
-    
-    ![connect with cmd](media/azure-stack-connect-azure-stack/image4.png)  
-
-    When prompted, trust the Azure Stack host and install the certificate from **AzureStackCertificateAuthority** into your local computer’s certificate store. (the prompt might appear behind the PowerShell session window). 
-
-    b.  Open your local computer’s **Network Settings** > **VPN** >click **azurestack** > **connect**
-
-    ![connect with UI](media/azure-stack-connect-azure-stack/image5.png)  
-
-    At the sign-in prompt, enter the username (AzureStack\AzureStackAdmin) and the password. If the connection succeeds, the azurestack VPN should be in a connected state.
-
-### <a name="test-the-vpn-connectivity"></a>Test the VPN connectivity
-
-To test the portal connection, open an Internet browser and navigate to either the user portal (https://portal.local.azurestack.external/) or the administrator portal (https://adminportal.local.azurestack.external/), sign in and create resources.  
-
-## <a name="next-steps"></a>Next steps
-
-[Make virtual machines available to your Azure Stack users](azure-stack-tutorial-tenant-vm.md)
-
+[Azure 스택 사용자에 게 가상 컴퓨터를 사용할 수 있도록](azure-stack-tutorial-tenant-vm.md)
 

@@ -1,0 +1,198 @@
+- name: Batch 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: Azure Batch란?
+      href: batch-technical-overview.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: Batch 작업 실행 - CLI
+      href: quick-create-cli.md
+    - name: Batch 작업 실행 - 포털
+      href: quick-create-portal.md
+    - name: Batch 작업 실행 - .NET
+      href: quick-run-dotnet.md
+    - name: Batch 작업 실행 - Python
+      href: quick-run-python.md
+- name: 자습서
+  items:
+    - name: 병렬 파일 처리 - .NET
+      href: tutorial-parallel-dotnet.md
+    - name: 병렬 파일 처리 - Python
+      href: tutorial-parallel-python.md
+    - name: Arnold를 사용하여 렌더링하는 장면
+      href: tutorial-rendering-cli.md
+    - name: 병렬 R 시뮬레이션
+      href: tutorial-r-doazureparallel.md
+- name: 샘플
+  items:
+    - name: 코드 샘플
+      items:
+        - name: Azure 코드 샘플
+          href: 'https://azure.microsoft.com/resources/samples/?service=batch'
+        - name: Batch 샘플 리포지토리
+          href: 'https://github.com/Azure/azure-batch-samples'
+    - name: Azure CLI
+      href: cli-samples.md
+- name: 개념
+  items:
+    - name: 개발자 기능
+      href: batch-api-basics.md
+    - name: API 및 도구
+      href: batch-apis-tools.md
+    - name: 할당량 및 제한
+      href: batch-quota-limit.md
+    - name: 지원되는 VM 크기
+      href: batch-pool-vm-sizes.md
+- name: 방법 가이드
+  items:
+    - name: Batch 계정 관리
+      items:
+        - name: 포털을 사용하여 Batch 계정 관리
+          href: batch-account-create-portal.md
+        - name: Batch Management .NET을 사용하여 배치 계정 관리
+          href: batch-management-dotnet.md
+    - name: Azure AD를 사용하여 인증
+      items:
+        - name: Batch 서비스 포함 Azure AD
+          href: batch-aad-auth.md
+        - name: Batch 관리 포함 Azure AD
+          href: batch-aad-auth-management.md
+    - name: 응용 프로그램 패키지 만들기
+      href: batch-application-packages.md
+    - name: 풀 만들기 및 관리
+      items:
+        - name: 자동 크기 조정 컴퓨터 노드
+          href: batch-automatic-scaling.md
+        - name: 계산 노드에 대한 VM 크기 선택
+          href: batch-pool-vm-sizes.md
+        - name: 계산 노드에 대한 액세스 구성
+          href: pool-endpoint-configuration.md
+        - name: 사용자 지정 이미지로 풀 만들기
+          href: batch-custom-images.md
+        - name: 가상 네트워크에서 풀 만들기
+          href: batch-virtual-network.md
+        - name: 계산 집약적 VM 사용
+          href: batch-pool-compute-intensive-sizes.md
+        - name: Linux 계산 노드 사용
+          href: batch-linux-nodes.md
+        - name: 우선 순위가 낮은 VM 사용
+          href: batch-low-pri-vms.md
+    - name: 작업 및 태스크 관리
+      items:
+        - name: 작업 준비 및 완료 작업
+          href: batch-job-prep-release.md
+        - name: 동시 노드 작업
+          href: batch-parallel-node-tasks.md
+        - name: 상태별 작업 카운트
+          href: batch-get-task-counts.md
+        - name: 작업 종속성
+          href: batch-task-dependencies.md
+        - name: 작업 실행을 위한 사용자 계정
+          href: batch-user-accounts.md
+        - name: 코드 없이 Batch 작업 실행
+          href: batch-cli-templates.md
+    - name: 작업 및 태스크 출력 유지
+      href: batch-task-output.md
+      items:
+        - name: Batch API를 사용하여 출력 유지
+          href: batch-task-output-files.md
+        - name: 파일 규칙 라이브러리를 사용하여 출력 유지
+          href: batch-task-output-file-conventions.md
+    - name: 워크로드 실행
+      items:
+        - name: MPI 작업
+          href: batch-mpi.md
+        - name: 컨테이너 워크로드
+          href: batch-docker-container-workloads.md
+        - name: 렌더링
+          href: batch-rendering-service.md
+        - name: Batch 및 데이터 팩터리를 사용하여 데이터 처리
+          href: ../data-factory/v1/data-factory-data-processing-using-batch.md?toc=%2fazure%2fbatch%2ftoc.json
+    - name: Batch 솔루션 모니터링
+      href: monitoring-overview.md
+      items:
+        - name: 메트릭 및 진단 로그 사용
+          href: batch-diagnostics.md
+        - name: Application Insights로 모니터링
+          href: monitor-application-insights.md
+        - name: 효율적인 목록 쿼리
+          href: batch-efficient-list-queries.md
+    - name: 개발자 도구 사용
+      items:
+        - name: Batch .NET 사용
+          href: batch-dotnet-get-started.md
+        - name: Batch Python 사용
+          href: batch-python-tutorial.md
+        - name: Batch Node.js 사용
+          href: batch-nodejs-get-started.md
+        - name: PowerShell cmdlet 사용
+          href: batch-powershell-cmdlets-get-started.md
+        - name: Azure CLI 사용
+          href: batch-cli-get-started.md
+- name: 참고 자료
+  items:
+    - name: Azure CLI
+      href: /cli/azure/batch
+    - name: Azure PowerShell
+      href: /powershell/module/azurerm.batch
+    - name: .NET
+      href: /dotnet/api/overview/azure/batch
+    - name: 자바
+      href: /java/api/overview/azure/batch
+    - name: Node.js
+      href: /javascript/api/overview/azure/batch
+    - name: 파이썬
+      href: /python/api/overview/azure/batch
+    - name: REST (영문)
+      items:
+        - name: Batch 서비스
+          href: /rest/api/batchservice
+        - name: Batch 관리
+          href: /rest/api/batchmanagement/
+    - name: Batch 분석
+      href: batch-analytics.md
+      items:
+        - name: 풀 만들기 이벤트
+          href: batch-pool-create-event.md
+        - name: 풀 삭제 시작 이벤트
+          href: batch-pool-delete-start-event.md
+        - name: 풀 삭제 완료 이벤트
+          href: batch-pool-delete-complete-event.md
+        - name: 풀 크기 조정 시작 이벤트
+          href: batch-pool-resize-start-event.md
+        - name: 풀 크기 조정 완료 이벤트
+          href: batch-pool-resize-complete-event.md
+        - name: 태스크 시작 이벤트
+          href: batch-task-start-event.md
+        - name: 태스크 완료 이벤트
+          href: batch-task-complete-event.md
+        - name: 태스크 실패 이벤트
+          href: batch-task-fail-event.md
+    - name: Batch 계산 노드 환경 변수
+      href: batch-compute-node-environment-variables.md
+- name: 리소스
+  items:
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: Batch 포럼
+      href: 'https://social.msdn.microsoft.com/Forums/en-us/home?forum=azurebatch'
+    - name: Batch Shipyard
+      href: 'https://github.com/Azure/batch-shipyard'
+    - name: 블로그
+      href: 'https://blogs.technet.microsoft.com/windowshpc/'
+    - name: Azure의 HPC 솔루션
+      href: ../virtual-machines/linux/high-performance-computing.md?toc=%2fazure%2fbatch%2ftoc.json
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/batch/'
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'
+    - name: Resource Manager 템플릿
+      href: /azure/templates/microsoft.batch/batchaccounts
+    - name: 서비스 업데이트
+      href: 'https://azure.microsoft.com/updates/?product=batch&updatetype=&platform='
+    - name: 스택 오버플로
+      href: 'http://stackoverflow.com/questions/tagged/azure-batch'
+    - name: 동영상
+      href: 'https://azure.microsoft.com/documentation/videos/index/?services=batch'

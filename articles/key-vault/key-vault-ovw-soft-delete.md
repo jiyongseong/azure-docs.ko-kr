@@ -1,17 +1,16 @@
 ---
-ms.assetid: 
-title: "Azure Key Vault 일시 삭제 | Microsoft Docs"
+ms.assetid: ''
+title: Azure Key Vault 일시 삭제 | Microsoft Docs
 ms.service: key-vault
-author: BrucePerlerMS
-ms.author: bruceper
+author: lleonard-msft
+ms.author: alleonar
 manager: mbaldwin
-ms.date: 07/10/2017
+ms.date: 09/25/2017
+ms.openlocfilehash: 6a3573cf31418309a31126b2a0c6a43ea2e0c745
+ms.sourcegitcommit: c3d53d8901622f93efcd13a31863161019325216
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: c873b153ef9c7d5f55672a5918c9dc4fb7256701
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/29/2018
 ---
 # <a name="azure-key-vault-soft-delete-overview"></a>Azure Key Vault 일시 삭제 개요
 
@@ -22,7 +21,9 @@ Key Vault의 일시 삭제 기능을 사용하면 삭제된 자격 증명 모음
 
 ## <a name="supporting-interfaces"></a>인터페이스 지원
 
-일시 삭제 기능은 처음에 REST, .NET/C# 및 PowerShell 인터페이스를 통해 제공됩니다. 자세한 내용은 [Key Vault 참조](https://docs.microsoft.com/azure/key-vault/)에서 해당 참조를 참조하세요.
+일시 삭제 기능은 처음에 REST, .NET/C#, PowerShell 및 CLI 인터페이스를 통해 제공됩니다.
+
+일반적인 정보는 다음을 참조하고 자세한 내용은 [Key Vault 참조](https://docs.microsoft.com/azure/key-vault/)를 참조하세요.
 
 ## <a name="scenarios"></a>시나리오
 
@@ -36,7 +37,7 @@ Azure Key Vault는 Azure Resource Manager에서 관리하는 추적된 리소스
 
 이 기능을 사용할 경우 Key Vault 또는 Key Vault 개체에 대한 삭제 작업이 일시 삭제되므로, 개체가 삭제된 것처럼 표시되지만 지정된 보존 기간 동안 리소스가 유지됩니다. 또한 서비스는 삭제된 개체를 복구하고 기본적으로 삭제를 취소하는 메커니즘을 제공합니다. 
 
-일시 삭제는 선택적 Key Vault 동작이며, 이 릴리스에서 **기본적으로 사용되지 않습니다**. 주요 자격 증명 모음에 일시 삭제를 사용하도록 설정하는 방법에 대한 자세한 내용은 [주요 자격 증명 모음 참조](https://docs.microsoft.com/azure/key-vault/)에서 선택한 인터페이스에 대한 특정 지침을 참조하세요.
+일시 삭제는 선택적 Key Vault 동작이며, 이 릴리스에서 **기본적으로 사용되지 않습니다**. 
 
 ### <a name="key-vault-recovery"></a>주요 자격 증명 모음 복구
 
@@ -67,6 +68,17 @@ Key Vault 또는 Key Vault 개체를 복구하지 않으면 보존 간격이 끝
 
 단, Azure 구독이 *삭제할 수 없음*으로 표시된 경우는 예외입니다. 이 경우 서비스는 실제 삭제만 수행할 수 있으며, 예약된 프로세스로 삭제합니다. 
 
+### <a name="billing-implications"></a>요금 청구 영향
 
+일반적으로 개체(키 자격 증명 모음 또는 암호)가 삭제된 상태인 경우 '제거' 및 '복구'라는 두 개의 작업만 가능합니다. 다른 모든 작업이 실패합니다. 따라서 개체가 있는 경우라도 어떤 작업도 수행할 수 없게 되고 사용량이 발생하지 않아 청구도 없습니다. 그러나 다음과 같은 예외가 있습니다.
 
+- '제거' 및 '복구' 작업은 일반 키 자격 증명 모음 작업에 포함됨에 따라 요금이 청구됩니다.
+- 개체가 HSM 키인 경우 키 버전이 지난 30일 안에 사용됐다면 월 요금별 키 버전당 'HSM 보호 키' 요금이 적용됩니다. 그 후 개체가 삭제된 상태이기 때문에 아무 작업도 수행할 수 없게 되고 요금도 적용되지 않습니다.
+
+## <a name="next-steps"></a>다음 단계
+
+다음 두 가이드는 일시 삭제 사용에 대한 기본 사용 시나리오를 제공합니다.
+
+- [PowerShell로 Key Vault 일시 삭제를 사용하는 방법](key-vault-soft-delete-powershell.md) 
+- [CLI로 Key Vault 일시 삭제를 사용하는 방법](key-vault-soft-delete-cli.md)
 

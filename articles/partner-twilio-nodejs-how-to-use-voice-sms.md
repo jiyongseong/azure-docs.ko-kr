@@ -14,12 +14,11 @@ ms.devlang: nodejs
 ms.topic: article
 ms.date: 11/25/2014
 ms.author: wpickett
-translationtype: Human Translation
-ms.sourcegitcommit: 094729399070a64abc1aa05a9f585a0782142cbf
-ms.openlocfilehash: 74d2d3ca914b649b41e03fb3c2351ce6263ff9db
-ms.lasthandoff: 03/07/2017
-
-
+ms.openlocfilehash: f347540c78be712fc46d1d36b47ca4e23a62e28a
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="using-twilio-for-voice-voip-and-sms-messaging-in-azure"></a>Azure에서 음성, VoIP 및 SMS 메시징을 위해 Twilio 사용
 이 가이드에서는 Azure에서 Twilio 및 node.js와 통신하는 앱을 빌드하는 방법을 보여 줍니다.
@@ -247,7 +246,7 @@ Azure에서 node.js와 Twilio 해킹을 즐기시기를 바랍니다.
 [purchase_phone]: https://www.twilio.com/console/phone-numbers/search
 [twiml]: https://www.twilio.com/docs/api/twiml
 [signup]: http://ahoy.twilio.com/azure
-[azure_new_site]: app-service-web/app-service-web-get-started-nodejs.md
+[azure_new_site]: app-service/app-service-web-get-started-nodejs.md
 [twilio_console]: https://www.twilio.com/console
 [npm]: http://npmjs.org
 [express]: http://expressjs.com
@@ -256,4 +255,3 @@ Azure에서 node.js와 Twilio 해킹을 즐기시기를 바랍니다.
 [votr]: http://www.twilio.com/blog/2012/09/building-a-real-time-sms-voting-app-part-1-node-js-couchdb.html
 [pair]: http://www.twilio.com/blog/2013/06/pair-programming-in-the-browser-with-twilio.html
 [azure-admin-console]: ./media/partner-twilio-nodejs-how-to-use-voice-sms/twilio_1.png
-

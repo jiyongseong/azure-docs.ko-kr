@@ -1,28 +1,24 @@
 ---
-title: "Azure Application Gateway용 WAF(웹 응용 프로그램 방화벽) 소개 | Microsoft Docs"
-description: "이 페이지에서는 Application Gateway용 WAF(웹 응용 프로그램 방화벽)의 개요를 제공합니다."
+title: Azure Application Gateway용 WAF(웹 응용 프로그램 방화벽) 소개 | Microsoft Docs
+description: 이 페이지에서는 Application Gateway용 WAF(웹 응용 프로그램 방화벽)의 개요를 제공합니다.
 documentationcenter: na
 services: application-gateway
 author: amsriva
 manager: rossort
 editor: amsriva
-ms.assetid: 04b362bc-6653-4765-86f6-55ee8ec2a0ff
 ms.service: application-gateway
 ms.devlang: na
 ms.topic: hero-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 05/03/2017
+ms.date: 4/16/2018
 ms.author: amsriva
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 09f24fa2b55d298cfbbf3de71334de579fbf2ecd
-ms.openlocfilehash: 50863b60f2843f033bdb07f4564d937cd6f0b7be
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/08/2017
-
-
+ms.openlocfilehash: 35a7e60dc65b54cbddfcd85fa0e704823152889e
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
-
 # <a name="web-application-firewall-waf"></a>WAF(웹 응용 프로그램 방화벽)
 
 WAF(웹 응용 프로그램 방화벽)는 일반적인 악용 및 취약점으로부터 웹 응용 프로그램에 대해 중앙 집중화된 보호를 제공하는 Application Gateway의 기능입니다. 
@@ -47,7 +43,7 @@ Application Gateway는 응용 프로그램 배달 컨트롤러로 작동하여 S
 
 * 실시간 WAF 로그를 사용하여 공격으로부터 웹 응용 프로그램을 모니터링합니다. 이 로그는 [Azure Monitor](../monitoring-and-diagnostics/monitoring-overview.md)와 통합되어 WAF 경고 및 로그를 추적하고 추세를 쉽게 모니터링합니다.
 
-* WAF는 곧 Azure Security Center와 통합됩니다. Azure Security Center를 통해 모든 Azure 리소스의 보안 상태를 중앙에서 살펴볼 수 있습니다.
+* WAF는 Azure Security Center에 통합됩니다. Azure Security Center를 통해 모든 Azure 리소스의 보안 상태를 중앙에서 살펴볼 수 있습니다.
 
 ### <a name="customization"></a>사용자 지정
 
@@ -77,9 +73,7 @@ Application Gateway는 CRS 3.0 및 CRS 2.2.9라는 두 개의 규칙 집합을 �
 
 |RuleGroup|설명|
 |---|---|
-|**[REQUEST-910-IP-REPUTATION](application-gateway-crs-rulegroups-rules.md#crs910)**|알려진 스팸 또는 악의적인 활동으로부터 보호하는 규칙을 포함합니다.|
 |**[REQUEST-911-METHOD-ENFORCEMENT](application-gateway-crs-rulegroups-rules.md#crs911)**|메서드(PUT, PATCH< ..)를 잠그는 규칙을 포함합니다.|
-|**[REQUEST-912-DOS-PROTECTION](application-gateway-crs-rulegroups-rules.md#crs912)**| DoS(서비스 거부) 공격으로부터 보호하는 규칙을 포함합니다.|
 |**[REQUEST-913-SCANNER-DETECTION](application-gateway-crs-rulegroups-rules.md#crs913)**| 포트 및 환경 스캐너로부터 보호하는 규칙을 포함합니다.|
 |**[REQUEST-920-PROTOCOL-ENFORCEMENT](application-gateway-crs-rulegroups-rules.md#crs920)**|프로토콜 및 인코딩 문제로부터 보호하는 규칙을 포함합니다.|
 |**[REQUEST-921-PROTOCOL-ATTACK](application-gateway-crs-rulegroups-rules.md#crs921)**|헤더 주입, 밀수 요청 및 응답 분할로부터 보호하는 규칙을 포함합니다.|
@@ -117,7 +111,7 @@ Application Gateway WAF는 다음 두 가지 모드에서 실행되도록 구성
 
 ### <a name="application-gateway-waf-reports"></a>WAF 모니터링
 
-Application Gateway의 상태를 모니터링하는 것이 중요합니다. 웹 응용 프로그램 방화벽 및 보호되는 응용 프로그램의 상태를 모니터링하는 기능은 로깅과 Azure Monitor, Azure Security Center(출시 예정) 및 Log Analytics의 통합을 통해 제공됩니다.
+Application Gateway의 상태를 모니터링하는 것이 중요합니다. 웹 응용 프로그램 방화벽 및 보호되는 응용 프로그램의 상태를 모니터링하는 기능은 로깅과 Azure Monitor, Azure Security Center 및 Log Analytics의 통합을 통해 제공됩니다.
 
 ![진단](./media/application-gateway-web-application-firewall-overview/diagnostics.png)
 
@@ -125,9 +119,9 @@ Application Gateway의 상태를 모니터링하는 것이 중요합니다. 웹 
 
 각 Application Gateway 로그는 [Azure Monitor](../monitoring-and-diagnostics/monitoring-overview.md)와 통합됩니다.  이를 통해 WAF 경고 및 로그를 포함하여 진단 정보를 추적할 수 있습니다.  **진단** 탭 아래의 포털에 있는 Application Gateway 리소스 내에서 이러한 기능을 제공하거나 Azure Monitor를 통해 직접 이러한 기능을 제공합니다. Application Gateway에 진단 로그를 사용하는 방법에 대해 알아보려면 [Application Gateway 진단](application-gateway-diagnostics.md)을 방문하세요.
 
-#### <a name="azure-security-center"></a>Azure 보안 센터
+#### <a name="azure-security-center"></a>Azure Security Center
 
-[Azure Security Center](../security-center/security-center-intro.md)를 사용하면 Azure 리소스의 보안에 대한 향상된 가시성과 제어를 통해 위협을 예방, 검색 및 대응할 수 있습니다. 이제 Application Gateway는 [Azure Security Center로 통합](application-gateway-integration-security-center.md)합니다. Azure Security Center는 사용자 환경을 검사하여 보호되지 않는 웹 응용 프로그램을 검색합니다. 이제 이러한 취약한 리소스를 보호하도록 응용 프로그램 게이트웨이 WAF를 권장할 수 있습니다. Azure Security Center에서 응용 프로그램 게이트웨이 WAF를 직접 만들 수 있습니다.  이러한 WAF 인스턴스는 Azure Security Center와 통합되며 보고를 위해 Azure Security Center에 다시 경고 및 상태 정보를 보냅니다.
+[Azure Security Center](../security-center/security-center-intro.md)를 사용하면 Azure 리소스의 보안에 대한 향상된 가시성과 제어를 통해 위협을 예방, 검색 및 대응할 수 있습니다. Application Gateway는 [Azure Security Center에 통합](application-gateway-integration-security-center.md)됩니다. Azure Security Center는 사용자 환경을 검사하여 보호되지 않는 웹 응용 프로그램을 검색합니다. 이제 이러한 취약한 리소스를 보호하도록 응용 프로그램 게이트웨이 WAF를 권장할 수 있습니다. Azure Security Center에서 응용 프로그램 게이트웨이 WAF를 직접 만들 수 있습니다.  이러한 WAF 인스턴스는 Azure Security Center와 통합되며 보고를 위해 Azure Security Center에 다시 경고 및 상태 정보를 보냅니다.
 
 ![그림 1](./media/application-gateway-web-application-firewall-overview/figure1.png)
 
@@ -169,10 +163,8 @@ Application Gateway WAF는 감지된 각 위협에 대한 상세 보고를 제�
 
 새 WAF SKU 아래에서 웹 응용 프로그램 방화벽을 사용할 수 있습니다. 이 SKU는 클래식 배포 모델이 아닌 Azure Resource Manager 프로비전 모델에서만 사용할 수 있습니다. 또한 WAF SKU는 중간 규모 및 대규모 Application Gateway 인스턴스 크기로만 제공됩니다. Application Gateway의 모든 제한 사항이 WAF SKU에도 적용됩니다. 가격 책정은 시간 당 게이트웨이 인스턴스 요금 및 데이터 처리 충전을 기반으로 합니다. WAF SKU 시간 당 게이트웨이 가격 책정은 표준 SKU 요금과 다르며 [Application Gateway 가격 책정 세부 정보](https://azure.microsoft.com/pricing/details/application-gateway/)에서 찾을 수 있습니다. 데이터 처리 요금은 동일하게 유지됩니다. 규칙 또는 규칙 그룹 당 요금은 없습니다. 동일한 웹 응용 프로그램 방화벽 뒤에서 여러 웹 응용 프로그램을 보호할 수 있으며 여러 응용 프로그램을 지원하는 추가 비용이 없습니다. 
 
-WAF에 대한 요금 청구는 2017/5/5에 시작됩니다. 그 때까지 WAF SKU 게이트웨이는 표준 요금으로 계속 청구됩니다.
 
 ## <a name="next-steps"></a>다음 단계
 
 WAF 기능을 살펴본 후에는 [Application Gateway에서 웹 응용 프로그램 방화벽을 구성하는 방법](application-gateway-web-application-firewall-portal.md)을 참조하세요.
-
 

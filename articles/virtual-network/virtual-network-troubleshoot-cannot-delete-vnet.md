@@ -1,27 +1,25 @@
 ---
-title: "Azure에서 가상 네트워크를 삭제할 수 없음 | Microsoft Docs"
-description: "Azure에서 가상 네트워크를 삭제할 수 없는 문제를 해결하는 방법을 알아봅니다."
+title: Azure에서 가상 네트워크를 삭제할 수 없음 | Microsoft Docs
+description: Azure에서 가상 네트워크를 삭제할 수 없는 문제를 해결하는 방법을 알아봅니다.
 services: virtual-network
 documentationcenter: na
 author: chadmath
 manager: cshepard
-editor: 
+editor: ''
 tags: azure-resource-manager
 ms.service: virtual-network
 ms.devlang: na
-ms.topic: article
+ms.topic: troubleshooting
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 07/17/2017
+ms.date: 05/11/2018
 ms.author: genli
+ms.openlocfilehash: d3ffcd9981ff0c57f6d625efcede3e930acd17b5
+ms.sourcegitcommit: c52123364e2ba086722bc860f2972642115316ef
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 55c42a91bb1c5fad289b975ffae8ce4d6e7343dd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
 ---
-
 # <a name="troubleshooting-failed-to-delete-a-virtual-network-in-azure"></a>문제 해결: Azure에서 가상 네트워크를 삭제하지 못함
 
 Microsoft Azure에서 가상 네트워크를 삭제하려고 할 때 오류가 발생할 수 있습니다. 이 문서에서는 이 문제를 해결하는 데 도움이 되는 문제 해결 단계를 제공합니다. 
@@ -67,13 +65,7 @@ Active Directory Domain Service가 사용하도록 설정되어 있고 가상 �
 
 ![연결된 장치 확인](media/virtual-network-troubleshoot-cannot-delete-vnet/enable-domain-services.png)
 
-서비스를 사용하지 않도록 설정하려면 다음 단계를 수행합니다.
-
-1. [Azure 클래식 포털](https://manage.windowsazure.com)로 이동합니다.
-2. 왼쪽 창에서 **Active Directory**를 선택합니다.
-3. Active Directory Domain Service가 사용 설정되어 있는 Azure AD(Azure Active Directory) 디렉터리를 선택합니다.
-4. **구성** 탭을 선택합니다.
-5. **도메인 서비스**에서 **이 디렉터리에 대해 도메인 서비스 사용** 옵션을 **아니요**로 변경합니다.  
+서비스를 사용하지 않도록 설정하려면 [Azure Portal을 사용하여 Azure Active Directory Domain Services 비활성화](../active-directory-domain-services/active-directory-ds-disable-aadds.md)를 참조하세요.
 
 ### <a name="check-whether-the-virtual-network-is-connected-to-other-resource"></a>가상 네트워크가 다른 리소스에 연결되어 있는지 확인
 
@@ -87,7 +79,7 @@ Active Directory Domain Service가 사용하도록 설정되어 있고 가상 �
 4. 가상 네트워크 피어링
 5. ASE(App Service Environment)
 
-### <a name="check-whether-a-virtual-machine-is-still-running-in-the-virtual-network"></a>가상 네트워크에서 가상 컴퓨터가 여전히 실행 중인지 확인
+### <a name="check-whether-a-virtual-machine-is-still-running-in-the-virtual-network"></a>가상 네트워크에서 가상 머신이 여전히 실행 중인지 확인
 
 가상 네트워크에서 실행 중인 가상 컴퓨터가 없는지 확인합니다.
 

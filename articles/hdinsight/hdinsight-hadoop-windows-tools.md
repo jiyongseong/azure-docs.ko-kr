@@ -1,23 +1,21 @@
 ---
-title: "HDInsight에서 Hadoop을 통해 Windows PC 사용 - Azure | Microsoft Docs"
-description: "HDInsight에서 Hadoop의 Windows PC에서 작업. PowerShell, Visual Studio 및 Linux 도구를 사용하는 클러스터를 관리 및 쿼리합니다. .NET을 사용하는 빅 데이터 솔루션을 개발합니다."
+title: HDInsight에서 Hadoop을 통해 Windows PC 사용 - Azure | Microsoft Docs
+description: HDInsight에서 Hadoop의 Windows PC에서 작업. PowerShell, Visual Studio 및 Linux 도구를 사용하는 클러스터를 관리 및 쿼리합니다. .NET을 사용하는 빅 데이터 솔루션을 개발합니다.
 services: hdinsight
 keywords: hadoop on windows,hadoop for windows
 author: cjgronlund
 manager: jhubbard
 ms.author: cgronlun
 ms.date: 05/17/2017
-ms.topic: article
+ms.topic: conceptual
 ms.service: hdinsight
 ms.custom: hdinsightactive,hdiseo17may2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 44eac1ae8676912bc0eb461e7e38569432ad3393
-ms.openlocfilehash: e4f231c1f9b903d6cc7f2b062b30d2a072be8493
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/17/2017
-
+ms.openlocfilehash: 2067e36c931e62e25d0c8dca69a6a81b2afe3f87
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-
 # <a name="work-in-the-hadoop-ecosystem-on-hdinsight-from-a-windows-pc"></a>Windows PC에서 HDInsight의 Hadoop 에코시스템 작업
 
 HDInsight의 Hadoop 에코시스템 작업을 위한 Windows PC의 개발 및 관리 옵션에 대해 알아봅니다. 
@@ -30,7 +28,7 @@ Azure PowerShell은 Windows에서 HDInsight의 배포 및 관리 작업을 제�
 PowerShell로 수행할 수 있는 작업의 예:
 
 * [PowerShell을 사용하여 클러스터 만들기](hdinsight-hadoop-create-linux-clusters-azure-powershell.md)
-* [PowerShell을 사용하여 Hive 쿼리 실행](hdinsight-hadoop-use-hive-powershell.md)
+* [PowerShell을 사용하여 Hive 쿼리 실행](hadoop/apache-hadoop-use-hive-powershell.md)
 * [PowerShell을 통한 클러스터 관리](hdinsight-administer-use-powershell.md)
 
 [Azure Powershell 설치 및 구성](https://docs.microsoft.com/powershell/azure/install-azurerm-ps) 단계에 따라 최신 버전을 가져옵니다. Azure Resource Manager용 새로운 cmdlet을 사용하도록 수정해야 하는 스크립트가 있는 경우 [HDInsight 클러스터에 대한 Azure Resource Manager 기반 개발 도구에 마이그레이션](hdinsight-hadoop-development-using-azure-resource-manager.md)을 참조하세요.
@@ -40,17 +38,17 @@ PowerShell로 수행할 수 있는 작업의 예:
 * **[Azure Cloud Shell(미리 보기)](https://docs.microsoft.com/azure/cloud-shell/quickstart)**은 브라우저 및 Azure Portal 내에서 실행되는 대화형 명령줄 셸입니다.
 * **[Ambari 웹 UI](hdinsight-hadoop-manage-ambari.md)**는 다음과 같은 다양한 종류의 작업을 관리하는 데 사용할 수 있으며 Azure Portal에서 사용 가능한 관리 및 모니터링 유틸리티입니다.
     * [REST API로 Ambari 사용](hdinsight-hadoop-manage-ambari-rest-api.md)
-    * [Ambari에서 Hive 보기](hdinsight-hadoop-use-hive-ambari-view.md)
+    * [Ambari에서 Hive 보기](hadoop/apache-hadoop-use-hive-ambari-view.md)
     * [Ambari에서 Tez 보기](hdinsight-debug-ambari-tez-view.md)
 
 ## <a name="data-lake-hadoop-tools-for-visual-studio"></a>Visual Studio용 Data Lake(Hadoop) 도구
 Visual Studio용 Data Lake 도구를 사용하여 Storm 토폴로지를 배포 및 관리합니다. Data Lake 도구는 또한 Visual Studio와 함께 C# Storm 토폴로지를 개발할 수 있는 SCP.NET SDK를 설치합니다.
 
-다음 예제를 진행하기 전에 [Visual Studio용 Data Lake 도구를 설치 및 시도](hdinsight-hadoop-visual-studio-tools-get-started.md)합니다. 
+다음 예제를 진행하기 전에 [Visual Studio용 Data Lake 도구를 설치 및 시도](hadoop/apache-hadoop-visual-studio-tools-get-started.md)합니다. 
 
 다음은 Visual Studio용 Data Lake 도구와 Visual Studio를 사용할 수 있는 작업 예제입니다.
-* [Visual Studio에서 Storm 토폴로지 배포 및 관리](hdinsight-storm-deploy-monitor-topology-linux.md)
-* [Visual Studio를 사용하여 Storm용 C# 토폴로지를 개발합니다](hdinsight-storm-develop-csharp-visual-studio-topology.md). 비트에는 Azure Cosmos DB 및 SQL Database와 같은 데이터베이스에 연결할 수 있는 Storm 토폴로지를 위한 예제 템플릿이 포함됩니다.
+* [Visual Studio에서 Storm 토폴로지 배포 및 관리](storm/apache-storm-deploy-monitor-topology-linux.md)
+* [Visual Studio를 사용하여 Storm용 C# 토폴로지를 개발합니다](storm/apache-storm-develop-csharp-visual-studio-topology.md). 비트에는 Azure Cosmos DB 및 SQL Database와 같은 데이터베이스에 연결할 수 있는 Storm 토폴로지를 위한 예제 템플릿이 포함됩니다.
 
 ## <a name="visual-studio-and-the-net-sdk"></a>Visual Studio 및 .NET SDK 
 
@@ -58,8 +56,8 @@ Visual Studio용 Data Lake 도구를 사용하여 Storm 토폴로지를 배포 �
 
 Visual Studio에서 .NET SDK와 함께 수행할 수 있는 작업의 예:
 * [.NET Framework 응용 프로그램에서 클러스터 만들기 및 HDInsight 작업](hdinsight-hadoop-create-linux-clusters-dotnet-sdk.md)
-* [.NET SDK를 사용한 Hive 쿼리 실행](hdinsight-hadoop-use-hive-dotnet-sdk.md)
-* [Hadoop에서 Hive 및 Pig 스트리밍과 함께 C# 사용자 정의 함수 사용](hdinsight-hadoop-hive-pig-udf-dotnet-csharp.md)
+* [.NET SDK를 사용한 Hive 쿼리 실행](hadoop/apache-hadoop-use-hive-dotnet-sdk.md)
+* [Hadoop에서 Hive 및 Pig 스트리밍과 함께 C# 사용자 정의 함수 사용](hadoop/apache-hadoop-hive-pig-udf-dotnet-csharp.md)
 
 > 팁 .NET 솔루션을 Windows 기반 HDInsight 클러스터와 함께 실행하는 경우 Linux 기반 클러스터로의 마이그레이션을 계획하는 것이 좋습니다. 자세한 내용은 [Windows 기반 HDInsight용 .NET 솔루션을 Linux 기반 HDInsight로 마이그레이션](hdinsight-hadoop-migrate-dotnet-to-linux.md)을 참조하세요.
 
@@ -70,15 +68,15 @@ Visual Studio에서 .NET SDK와 함께 수행할 수 있는 작업의 예:
 * Scala Spark 응용 프로그램을 로컬로 개발 및 실행합니다.
 
 다음 문서에 방법이 나와 있습니다. 
-* Intellij IDEA: [Intellij용 Azure 도구 키트 플러그 인 및 Scala SDK를 사용하여 Spark 응용 프로그램 만들기.](hdinsight-apache-spark-intellij-tool-plugin.md)
-* Eclipse IDE 또는 Eclipse용 Scala IDE: [Spark 응용 프로그램 및 Eclipse용 Azure 도구 키트 만들기](hdinsight-apache-spark-eclipse-tool-plugin.md) 
+* Intellij IDEA: [Intellij용 Azure 도구 키트 플러그 인 및 Scala SDK를 사용하여 Spark 응용 프로그램 만들기.](spark/apache-spark-intellij-tool-plugin.md)
+* Eclipse IDE 또는 Eclipse용 Scala IDE: [Spark 응용 프로그램 및 Eclipse용 Azure 도구 키트 만들기](spark/apache-spark-eclipse-tool-plugin.md) 
 
 
 ## <a name="notebooks-on-spark-for-data-scientists"></a>데이터 과학자들을 위한 Spark의 Notebook 
 HDInsight의 Apache Spark 클러스터는 Jupyter Notebook과 함께 사용할 수 있는 Zeppelin Notebook 및 커널을 포함합니다. 
 
-* [Spark 클러스터에서 Jupyter Notebook과 함께 커널을 사용하여 Spark 응용 프로그램을 테스트하는 방법 알아보기](hdinsight-apache-spark-zeppelin-notebook.md)
-* [Spark 클러스터에서 Zeppelin Notebook을 사용하여 Spark 작업을 실행하는 방법 알아보기](hdinsight-apache-spark-jupyter-notebook-kernels.md) 
+* [Spark 클러스터에서 Jupyter Notebook과 함께 커널을 사용하여 Spark 응용 프로그램을 테스트하는 방법 알아보기](spark/apache-spark-zeppelin-notebook.md)
+* [Spark 클러스터에서 Zeppelin Notebook을 사용하여 Spark 작업을 실행하는 방법 알아보기](spark/apache-spark-jupyter-notebook-kernels.md) 
 
 
 ## <a name="run-linux-based-tools-and-technologies-on-windows"></a>Windows에서 Linux 기반 도구 및 기술 실행

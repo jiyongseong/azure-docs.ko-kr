@@ -1,9 +1,9 @@
 ---
-title: "Azure Monitor PowerShell 빠른 시작 샘플. | Microsoft Docs"
-description: "PowerShell을 사용하여 자동 크기 조정, 경고, webhook 및 활동 로그 검색 등의 Azure Monitor 기능에 액세스합니다."
-author: kamathashwin
-manager: orenr
-editor: 
+title: Azure Monitor PowerShell 빠른 시작 샘플. | Microsoft Docs
+description: PowerShell을 사용하여 자동 크기 조정, 경고, webhook 및 활동 로그 검색 등의 Azure Monitor 기능에 액세스합니다.
+author: rboucher
+manager: carmonm
+editor: ''
 services: monitoring-and-diagnostics
 documentationcenter: monitoring-and-diagnostics
 ms.assetid: c0761814-7148-4ab5-8c27-a2c9fa4cfef5
@@ -12,25 +12,24 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 03/06/2017
-ms.author: ashwink
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: 8165147d9ff811b26f7fe2626c892f2aba5bb4f8
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
+ms.date: 2/14/2018
+ms.author: robb
+ms.openlocfilehash: a67edd4372cff70a3948e85033e806749d585eb5
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="azure-monitor-powershell-quick-start-samples"></a>Azure Monitor PowerShell 빠른 시작 샘플
-이 문서에서는 Azure Monitor 기능에 액세스할 수 있는 샘플 PowerShell 명령을 보여 줍니다. Azure Monitor를 통해 Cloud Services, Virtual Machines 및 Web Apps의 크기를 자동으로 조정하고, 구성된 원격 분석 데이터의 값을 기반으로 경고 알림을 보내거나 웹 URL을 호출할 수 있습니다.
+이 문서에서는 Azure Monitor 기능에 액세스할 수 있는 샘플 PowerShell 명령을 보여 줍니다.
 
 > [!NOTE]
-> Azure Monitor는 2016년 9월 25일까지는 "Azure Insights"로 지칭했던 제품의 새로운 이름입니다. 하지만 네임스페이스와 아래 명령에서는 "insights"를 계속 포함합니다.
+> Azure Monitor는 2016년 9월 25일까지는 "Azure Insights"로 지칭했던 제품의 새로운 이름입니다. 하지만 네임스페이스와 다음 명령에서는 단어 "insights"를 계속 포함합니다.
 > 
 > 
 
 ## <a name="set-up-powershell"></a>PowerShell 설정
-아직 PowerShell이 컴퓨터에서 실행되도록 설정하지 않았으면 지금 설정합니다. 자세한 내용은 [PowerShell을 설치 및 구성하는 방법](/powershell/azure/overview) 을 참조하세요.
+아직 PowerShell이 컴퓨터에서 실행되도록 설정하지 않았으면 지금 설정합니다. 자세한 내용은 [Azure PowerShell을 설치 및 구성하는 방법](/powershell/azure/overview)을 참조하세요.
 
 ## <a name="examples-in-this-article"></a>이 문서의 예
 문서의 예에서는 Azure Monitor cmdlet을 사용하는 방법을 보여 줍니다. [Azure Monitor(Insights) Cmdlet](https://msdn.microsoft.com/library/azure/mt282452#40v=azure.200#41.aspx)에서 Azure Monitor PowerShell cmdlet의 전체 목록을 살펴볼 수도 있습니다.
@@ -39,10 +38,10 @@ ms.lasthandoff: 04/27/2017
 먼저 Azure 구독에 로그인합니다.
 
 ```PowerShell
-Login-AzureRmAccount
+Connect-AzureRmAccount
 ```
 
-그러려면 로그인이 필요합니다. 로그인하면 계정, TenantId 및 기본 구독 ID가 표시됩니다. 모든 Azure cmdlet은 기본 구독의 컨텍스트에서 작동합니다. 액세스할 수 있는 구독 목록을 보려면 다음 명령을 사용합니다.
+로그인 화면이 표시됩니다. 로그인하면 계정, 테넌트 ID 및 기본 구독 ID가 표시됩니다. 모든 Azure cmdlet은 기본 구독의 컨텍스트에서 작동합니다. 액세스할 수 있는 구독 목록을 보려면 다음 명령을 사용합니다.
 
 ```PowerShell
 Get-AzureRmSubscription
@@ -139,23 +138,20 @@ Get-AzureRmAlertRule -ResourceGroup montest -TargetResourceId /subscriptions/s1/
 
 `Get-AzureRmAlertRule` 명령은 다른 매개 변수를 지원합니다. 자세한 내용은 [Get-AlertRule](https://msdn.microsoft.com/library/mt282459.aspx) 을 참조하세요.
 
-## <a name="create-alert-rules"></a>경고 규칙 만들기
+## <a name="create-metric-alerts"></a>메트릭 경고 만들기
 `Add-AlertRule` cmdlet을 사용하여 경고 규칙을 만들고, 업데이트하고, 비활성화할 수 있습니다.
 
-각각 `New-AzureRmAlertRuleEmail` 및 `New-AzureRmAlertRuleWebhook`를 사용하여 전자 메일 및 webhook 속성을 만들 수 있습니다. 경고 규칙 cmdlet에서, 이러한 것들을 경고 규칙의 **동작** 속성에 동작으로 할당합니다.
+각각 `New-AzureRmAlertRuleEmail` 및 `New-AzureRmAlertRuleWebhook`를 사용하여 전자 메일 및 webhook 속성을 만들 수 있습니다. 경고 규칙 cmdlet에서, 이러한 속성을 경고 규칙의 **동작** 속성에 동작으로 할당합니다.
 
-다음 섹션에는 다양한 매개 변수를 사용하여 경고 규칙을 만드는 방법을 보여주는 샘플이 포함되어 있습니다.
-
-### <a name="alert-rule-on-a-metric"></a>메트릭에 대한 경고 규칙
 다음은 메트릭을 사용하여 경고를 만드는 데 사용되는 매개 변수 및 값을 설명하는 테이블입니다.
 
-| 매개 변수 | value |
+| 매개 변수 | 값 |
 | --- | --- |
-| 이름 |simpletestdiskwrite |
+| Name |simpletestdiskwrite |
 | 이 경고 규칙의 위치 |미국 동부 |
 | ResourceGroup |montest |
 | TargetResourceId |/subscriptions/s1/resourceGroups/montest/providers/Microsoft.Compute/virtualMachines/testconfig |
-| 생성된 경고의 MetricName |\PhysicalDisk(_Total)\Disk Writes/sec. 정확한 메트릭 이름을 검색하는 방법은 아래의 `Get-MetricDefinitions` cmdlet를 참조하세요. |
+| 생성된 경고의 MetricName |\PhysicalDisk(_Total)\Disk Writes/sec. 정확한 메트릭 이름을 검색하는 방법은 `Get-MetricDefinitions` cmdlet를 참조하세요. |
 | operator |GreaterThan |
 | 임계값(이 메트릭의 경우 수/초) |1 |
 | WindowSize(h:mm:ss 형식) |00:05:00 |
@@ -189,40 +185,6 @@ Get-AzureRmAlertRule -Name vmcpu_gt_1 -ResourceGroup myrg1 -DetailedOutput
 
 지정된 속성에 대한 경고 규칙이 이미 있으면 경고 추가 cmdlet도 규칙을 업데이트합니다. 경고 규칙을 비활성화하려면 **-DisableRule**매개 변수를 포함하세요.
 
-### <a name="alert-on-activity-log-event"></a>활동 로그 이벤트에 대한 경고
-> [!NOTE]
-> 이 기능은 미리 보기이며 나중에 제거될 예정입니다(대체됩니다).
-> 
-> 
-
-이 시나리오의 경우 제 구독의 리소스 그룹 *abhingrgtest123*에서 웹 사이트가 성공적으로 시작되면 전자 메일을 보내게 됩니다.
-
-전자 메일 규칙 설정
-
-```PowerShell
-$actionEmail = New-AzureRmAlertRuleEmail -CustomEmail myname@company.com
-```
-
-webhook 규칙 설정
-
-```PowerShell
-$actionWebhook = New-AzureRmAlertRuleWebhook -ServiceUri https://example.com?token=mytoken
-```
-
-이벤트에 대한 규칙 만들기
-
-```PowerShell
-Add-AzureRmLogAlertRule -Name superalert1 -Location "East US" -ResourceGroup myrg1 -OperationName microsoft.web/sites/start/action -Status Succeeded -TargetResourceGroup abhingrgtest123 -Actions $actionEmail, $actionWebhook
-```
-
-경고 규칙 검색
-
-```PowerShell
-Get-AzureRmAlertRule -Name superalert1 -ResourceGroup myrg1 -DetailedOutput
-```
-
-`Add-AlertRule` cmdlet은 여러 다른 매개 변수를 허용합니다. 자세한 내용은 [Add-AlertRule](https://msdn.microsoft.com/library/mt282468.aspx)을 참조하세요.
-
 ## <a name="get-a-list-of-available-metrics-for-alerts"></a>경고에 사용 가능한 메트릭 목록 가져오기
 `Get-AzureRmMetricDefinition` cmdlet을 사용하여 특정 리소스에 대한 모든 메트릭 목록을 볼 수 있습니다.
 
@@ -238,18 +200,34 @@ Get-AzureRmMetricDefinition -ResourceId <resource_id> | Format-Table -Property N
 
 `Get-AzureRmMetricDefinition` 에 사용 가능한 옵션 전체 목록은 [Get-MetricDefinitions](https://msdn.microsoft.com/library/mt282458.aspx)에 있습니다.
 
-## <a name="create-and-manage-autoscale-settings"></a>자동 크기 조정 설정 및 관리
-웹 앱, VM, 클라우드 서비스 또는 VM 규모 집합 같은 리소스는 자동 크기 조정 설정을 하나만 구성할 수 있습니다.
-그러나 각 자동 크기 조정 설정이 여러 개의 프로필을 가질 수 있습니다. 예를 들어 하나는 성능 기반 규모 프로필이고, 다른 하나는 일정 기반 프로필일 수 있습니다. 각 프로필에 여러 규칙을 구성할 수 있습니다. 자동 크기 조정에 대한 자세한 내용은 [응용 프로그램의 크기 자동 조정 방법](../cloud-services/cloud-services-how-to-scale.md)을 참조하세요.
+## <a name="create-and-manage-activity-log-alerts"></a>활동 로그 경고 만들기 및 관리
+`Set-AzureRmActivityLogAlert` cmdlet을 사용하여 활동 로그 경로를 설정할 수 있습니다. 활동 로그 경고는 먼저 조건 사전으로 조건을 정의한 다음, 이러한 조건을 사용하는 경로를 만들어야 합니다.
 
-수행할 단계는 다음과 같습니다.
+```PowerShell
+
+$condition1 = New-AzureRmActivityLogAlertCondition -Field 'category' -Equals 'Administrative'
+$condition2 = New-AzureRmActivityLogAlertCondition -Field 'operationName' -Equals 'Microsoft.Compute/virtualMachines/write'
+$additionalWebhookProperties = New-Object "System.Collections.Generic.Dictionary``2[System.String,System.String]"
+$additionalWebhookProperties.Add('customProperty', 'someValue')
+$actionGrp1 = New-AzureRmActionGroup -ActionGroupId 'actiongr1' -WebhookProperties $dict
+Set-AzureRmActivityLogAlert -Location 'Global' -Name 'alert on VM create' -ResourceGroupName 'myResourceGroup' -Scope '/' -Action $actionGrp1 -Condition $condition1, $condition2
+
+```
+
+추가적인 웹후크 속성은 선택 사항입니다. `Get-AzureRmActivityLogAlert`를 사용하여 활동 로그 경고의 콘텐츠를 다시 가져올 수 있습니다.
+
+## <a name="create-and-manage-autoscale-settings"></a>자동 크기 조정 설정 및 관리
+웹앱, VM, 클라우드 서비스 또는 Virtual Machine Scale Set 같은 리소스는 자동 크기 조정 설정을 하나만 구성할 수 있습니다.
+그러나 각 자동 크기 조정 설정이 여러 개의 프로필을 가질 수 있습니다. 예를 들어 하나는 성능 기반 규모 프로필이고, 다른 하나는 일정 기반 프로필일 수 있습니다. 각 프로필에 여러 규칙을 구성할 수 있습니다. 자동 크기 조정에 대한 자세한 내용은 [응용 프로그램의 크기 자동 조정 방법](../cloud-services/cloud-services-how-to-scale-portal.md)을 참조하세요.
+
+사용할 단계는 다음과 같습니다.
 
 1. 규칙을 만듭니다.
 2. 이전에 만든 규칙을 프로필에 매핑하는 프로필을 만듭니다.
 3. 선택 사항: webhook 및 전자 메일 속성을 구성하여 자동 크기 조정에 대한 알림을 만듭니다.
 4. 이전 단계에서 만든 프로필과 알림을 매핑하여 대상 리소스에 대한 자동 크기 조정 설정과 이름을 만듭니다.
 
-다음은 CPU 사용률 메트릭을 사용하여 Windows 운영 체제 기반 VM 규모 집합에 대한 자동 크기 조정 설정을 만드는 방법을 보여주는 예입니다.
+다음은 CPU 사용률 메트릭을 사용하여 Windows 운영 체제 기반 Virtual Machine Scale Set에 대한 자동 크기 조정 설정을 만드는 방법을 보여 주는 예입니다.
 
 먼저, 인스턴스 수가 증가하는 규모 확장 규칙을 만듭니다.
 
@@ -281,7 +259,7 @@ $webhook_scale = New-AzureRmAutoscaleWebhook -ServiceUri "https://example.com?my
 $notification1= New-AzureRmAutoscaleNotification -CustomEmails ashwink@microsoft.com -SendEmailToSubscriptionAdministrators SendEmailToSubscriptionCoAdministrators -Webhooks $webhook_scale
 ```
 
-마지막으로, 위에서 만든 프로필을 추가하는 자동 크기 조정 설정을 만듭니다.
+마지막으로, 이전에 만든 프로필을 추가하는 자동 크기 조정 설정을 만듭니다. 
 
 ```PowerShell
 Add-AzureRmAutoscaleSetting -Location "East US" -Name "MyScaleVMSSSetting" -ResourceGroup big2 -TargetResourceId /subscriptions/s1/resourceGroups/big2/providers/Microsoft.Compute/virtualMachineScaleSets/big2 -AutoscaleProfiles $profile1 -Notifications $notification1
@@ -357,7 +335,12 @@ Add-AzureRmLogProfile -Name my_log_profile_s1 -StorageAccountId /subscriptions/s
 ```
 
 ## <a name="configure-diagnostics-logs"></a>진단 로그 구성
-여러 Azure 서비스는 Azure Storage 계정에 데이터를 저장하고, 이벤트 허브에 보내거나 OMS 로그 분석 작업 영역에 보낼 수 있도록 구성된 추가 로그와 원격 분석을 제공합니다. 이 작업은 리소스 수준에서만 수행할 수 있으며 저장소 계정 또는 이벤트 허브가 진단 설정이 구성되는 대상 리소스와 같은 지역에 있어야 합니다.
+여러 Azure 서비스가 다음 중 하나 이상을 수행할 수 있는 추가 로그 및 원격 분석을 제공합니다. 
+ - Azure Storage 계정에 데이터를 저장하도록 구성
+ - Event Hubs로 전송
+ - Log Analytics 작업 영역으로 전송 
+
+이 작업은 리소스 수준에서만 수행할 수 있습니다. 저장소 계정 또는 이벤트 허브가 진단 설정이 구성되는 대상 리소스와 같은 지역에 있어야 합니다.
 
 ### <a name="get-diagnostic-setting"></a>진단 설정 가져오기
 ```PowerShell
@@ -388,16 +371,24 @@ Set-AzureRmDiagnosticSetting -ResourceId /subscriptions/s1/resourceGroups/myrg1/
 Set-AzureRmDiagnosticSetting -ResourceId /subscriptions/s1/resourceGroups/insights-integration/providers/Microsoft.Network/networkSecurityGroups/viruela1 -StorageAccountId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Storage/storageAccounts/sakteststorage -Categories NetworkSecurityGroupEvent -Enable $true -RetentionEnabled $true -RetentionInDays 90
 ```
 
-이벤트 허브에 대한 진단 설정 활성화
+Event Hubs에 대한 진단 설정 활성화
 
 ```PowerShell
 Set-AzureRmDiagnosticSetting -ResourceId /subscriptions/s1/resourceGroups/insights-integration/providers/Microsoft.Network/networkSecurityGroups/viruela1 -serviceBusRuleId /subscriptions/s1/resourceGroups/Default-ServiceBus-EastUS/providers/Microsoft.ServiceBus/namespaces/mytestSB/authorizationrules/RootManageSharedAccessKey -Enable $true
 ```
 
-OMS에 대한 진단 설정 활성화
+Log Analytics에 대한 진단 설정 활성화
 
 ```PowerShell
-Set-AzureRmDiagnosticSetting -ResourceId /subscriptions/s1/resourceGroups/insights-integration/providers/Microsoft.Network/networkSecurityGroups/viruela1 -WorkspaceId 76d785fd-d1ce-4f50-8ca3-858fc819ca0f -Enabled $true
+Set-AzureRmDiagnosticSetting -ResourceId /subscriptions/s1/resourceGroups/insights-integration/providers/Microsoft.Network/networkSecurityGroups/viruela1 -WorkspaceId /subscriptions/s1/resourceGroups/insights-integration/providers/providers/microsoft.operationalinsights/workspaces/myWorkspace -Enabled $true
 
 ```
 
+WorkspaceId 속성은 작업 영역의 *리소스 ID*를 사용합니다. 다음 명령을 사용하여 Log Analytics 작업 공간의 리소스 ID를 가져올 수 있습니다.
+
+```PowerShell
+(Get-AzureRmOperationalInsightsWorkspace).ResourceId
+
+```
+
+이 명령은 데이터를 여러 대상으로 보내도록 결합될 수 있습니다.

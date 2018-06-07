@@ -1,35 +1,28 @@
 ---
-title: "SQL Data Warehouse로 데이터 마이그레이션| Microsoft Docs"
-description: "솔루션 개발을 위한 Azure SQL 데이터 웨어하우스로 데이터를 마이그레이션하기 위한 팁"
+title: SQL Data Warehouse로 데이터 마이그레이션| Microsoft Docs
+description: 솔루션 개발을 위한 Azure SQL Data Warehouse로 데이터를 마이그레이션하기 위한 팁
 services: sql-data-warehouse
-documentationcenter: NA
-author: sqlmojo
-manager: jhubbard
-editor: 
-ms.assetid: d78f954a-f54c-4aa4-9040-919bc6414887
+author: jrowlandjones
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: migrate
-ms.date: 06/29/2017
-ms.author: joeyong;barbkess
-ms.translationtype: Human Translation
-ms.sourcegitcommit: afe143848fae473d08dd33a3df4ab4ed92b731fa
-ms.openlocfilehash: 7835797bc353a64c934b362c31fdcd9b448aca34
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/17/2017
-
-
+ms.topic: conceptual
+ms.component: implement
+ms.date: 04/17/2018
+ms.author: jrj
+ms.reviewer: igorstan
+ms.openlocfilehash: ca467ae5fbe784399e4e046c47c920ff7dec638e
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="migrate-your-data"></a>데이터 마이그레이션
-다양한 도구를 사용하여 다양한 원본의 데이터를 SQL 데이터 웨어하우스로 이동할 수 있습니다.  이 작업을 위해 ADF Copy, SSIS 및 bcp를 모두 사용할 수 있습니다. 그러나 데이터 크기가 증가하면 단계별로 데이터 마이그레이션 프로세스 세분화를 고려해야 합니다. 부드러운 데이터 마이그레이션이 되도록 성능 및 복원 모두를 위한 각 단계를 최적화하는 기회를 제공합니다.
+다양한 도구를 사용하여 다양한 원본의 데이터를 SQL Data Warehouse로 이동할 수 있습니다.  이 작업을 위해 ADF Copy, SSIS 및 bcp를 모두 사용할 수 있습니다. 그러나 데이터 크기가 증가하면 단계별로 데이터 마이그레이션 프로세스 세분화를 고려해야 합니다. 부드러운 데이터 마이그레이션이 되도록 성능 및 복원 모두를 위한 각 단계를 최적화하는 기회를 제공합니다.
 
 이 문서에서는 먼저 ADF Copy, SSIS 및 bcp의 간단한 마이그레이션 시나리오를 설명합니다. 그런 다음 마이그레이션이 최적화되는 방법을 좀 더 깊게 살펴봅니다.
 
 ## <a name="azure-data-factory-adf-copy"></a>Azure 데이터 팩터리(ADF) 복사본
-[ADF 복사본][ADF Copy]은 [Azure Data Factory][Azure Data Factory]의 일부입니다. SQL 데이터 웨어하우스로 직접 또는 Azure blob 저장소에 있는 원격 플랫 파일, 로컬 저장소에 상주하는 플랫 파일로 데이터를 내보내는 데 ADF 복사본을 사용할 수 있습니다.
+[ADF 복사본][ADF Copy]은 [Azure Data Factory][Azure Data Factory]의 일부입니다. SQL Data Warehouse로 직접 또는 Azure blob 저장소에 있는 원격 플랫 파일, 로컬 저장소에 상주하는 플랫 파일로 데이터를 내보내는 데 ADF 복사본을 사용할 수 있습니다.
 
 데이터가 플랫 파일에서 생성되는 경우 SQL Data Warehouse로 데이터 로드를 시작하기 전에 먼저 Azure Storage Blob에 데이터를 전송해야 합니다. 데이터가 Azure Blob Storage로 전송되면 [ADF 복사본][ADF Copy]을 다시 사용하도록 선택하여 SQL Data Warehouse로 데이터를 푸시합니다.
 
@@ -49,10 +42,10 @@ Integration Services(SSIS)는 강력하고 유연한 변환 및 로드(ETL) 도�
 > 
 > 
 
-SSIS는 SQL Server 배포에 연결한 것처럼 SQL 데이터 웨어하우스에 연결합니다. 그러나 ADO.NET 연결 관리자를 사용하여 수를 연결해야 합니다. 또한 주의해서 "사용 가능한 경우 대량 삽입 사용" 설정을 구성하여 처리량을 최대화합니다. 이 속성에 대해 자세히 알아보려면 [ADO.NET 대상 어댑터][ADO.NET destination adapter] 문서를 참조하세요.
+SSIS는 SQL Server 배포에 연결한 것처럼 SQL Data Warehouse에 연결합니다. 그러나 ADO.NET 연결 관리자를 사용하여 수를 연결해야 합니다. 또한 주의해서 "사용 가능한 경우 대량 삽입 사용" 설정을 구성하여 처리량을 최대화합니다. 이 속성에 대해 자세히 알아보려면 [ADO.NET 대상 어댑터][ADO.NET destination adapter] 문서를 참조하세요.
 
 > [!NOTE]
-> OLEDB를 사용한 Azure SQL 데이터 웨어하우스 연결은 지원되지 않습니다.
+> OLEDB를 사용한 Azure SQL Data Warehouse 연결은 지원되지 않습니다.
 > 
 > 
 
@@ -61,7 +54,7 @@ SSIS는 SQL Server 배포에 연결한 것처럼 SQL 데이터 웨어하우스�
 자세한 내용은 [SSIS 설명서][SSIS documentation]를 참조하세요.
 
 ## <a name="bcp"></a>bcp
-bcp는 플랫 파일 데이터 가져오기 및 내보내기를 위해 설계된 명령줄 유틸리티입니다. 일부 변환은 데이터를 내보내는 중에 수행될 수 있습니다. 수행하려면 간단한 변환은 쿼리를 사용하여 데이터를 선택하고 변환합니다. 내보낸 후 플랫 파일이 직접 대상 SQL 데이터 웨어하우스 데이터베이스로 로드될 수 있습니다.
+bcp는 플랫 파일 데이터 가져오기 및 내보내기를 위해 설계된 명령줄 유틸리티입니다. 일부 변환은 데이터를 내보내는 중에 수행될 수 있습니다. 수행하려면 간단한 변환은 쿼리를 사용하여 데이터를 선택하고 변환합니다. 내보낸 후 플랫 파일이 직접 대상 SQL Data Warehouse 데이터베이스로 로드될 수 있습니다.
 
 > [!NOTE]
 > 대개 원본 시스템의 보기에서 데이터 내보내기 중에 사용되는 변환을 캡슐화하는 것이 좋습니다. 이렇게 하면 논리가 유지되며 과정이 반복됩니다.
@@ -94,11 +87,11 @@ bcp의 제한 사항은 다음과 같습니다.
 ## <a name="optimizing-data-load"></a>데이터 로드 최적화
 잠시 반대 순서로 살펴보면 데이터를 로드하는 가장 빠른 방법은 PolyBase를 통해서입니다. PolyBase 로드 프로세스를 최적화하는 경우 이전 단계에서 필수 구성 요소를 충족해야 하므로, 이 작업은 미리 숙지해 두는 것이 좋습니다. 아래에 이 계정과 키의 예제가 나와 있습니다.
 
-1. 데이터 파일의 인코딩
+1. 데이터 파일의 Encoding
 2. 데이터 파일의 형식
 3. 데이터 파일의 위치
 
-### <a name="encoding"></a>인코딩
+### <a name="encoding"></a>Encoding
 PolyBase를 사용하려면 데이터 파일이 UTF-8 또는 UTF-16FE여야 합니다. 
 
 
@@ -108,10 +101,10 @@ PolyBase는 \n 또는 새 줄의 고정된 행 종결자를 규정합니다. 데
 
 PolyBase에서 외부 테이블의 일부로 파일에서 모든 열을 정의해야 합니다. 내보낸 모든 열이 필요하고 해당 형식은 필요한 표준을 준수해야 합니다.
 
-지원되는 데이터 형식은 [스키마 마이그레이션] 문서를 다시 참조하세요.
+지원되는 데이터 형식에 대한 세부 정보는 [스키마 마이그레이션] 문서를 다시 참조하세요.
 
 ### <a name="location-of-data-files"></a>데이터 파일의 위치
-SQL 데이터 웨어하우스는 PolyBase를 사용하여 Azure blob 저장소에 데이터를 독점적으로 로드합니다. 따라서 데이터가 먼저 blob 저장소로 전송되어야 합니다.
+SQL Data Warehouse는 PolyBase를 사용하여 Azure Blob Storage에 데이터를 독점적으로 로드합니다. 따라서 데이터가 먼저 blob 저장소로 전송되어야 합니다.
 
 ## <a name="optimizing-data-transfer"></a>데이터 전송 최적화
 데이터 마이그레이션의 느린 부분 중 하나는 Azure에 데이터를 전송하는 것입니다. 네트워크 대역폭 문제가 발생할 수 뿐만 아니라 네트워크 안정성 진행률 심각하게 방해가 될 수도 있습니다. 기본적으로 데이터를 Azure로 마이그레이션하는 전송 오류 발생 가능성 합리적으로 가능성이 있으므로 인터넷을 통해 됩니다. 그러나 이러한 오류는 데이터를 전부 또는 일부를 다시 보내어야 할 수 있습니다.
@@ -137,16 +130,16 @@ Azure 가져오기 및 내보내기 서비스는 큰(GB++) 데이터에서 대�
 
 아래에는 가져오기/내보내기 프로세스가 대략적으로 표시되어 있습니다.
 
-1. 데이터를 수신하도록 Azure Blob 저장소 컨테이너를 구성합니다.
+1. 데이터를 수신하도록 Azure Blob Storage 컨테이너를 구성합니다.
 2. 로컬 저장소로 데이터 내보내기
-3. [Azure 가져오기/내보내기 도구]를 사용하여 3.5 인치 SATA II/III 하드 디스크 드라이브에 데이터 복사
-4. [Azure 가져오기/내보내기 도구]에서 생성된 저널 파일을 제공하는 Azure 가져오기 및 내보내기 서비스를 사용하여 가져오기 작업 만들기
+3. [Azure Import/Export 도구]를 사용하여 3.5 인치 SATA II/III 하드 디스크 드라이브에 데이터 복사
+4. [Azure Import/Export 도구]에서 생성된 저널 파일을 제공하는 Azure 가져오기 및 내보내기 서비스를 사용하여 가져오기 작업 만들기
 5. 지정된 Azure 데이터 센터로 디스크 배송
-6. Azure Blob 저장소 컨테이너로 데이터 전송
+6. Azure Blob Storage 컨테이너로 데이터 전송
 7. PolyBase를 사용하여 SQLDW로 데이터 로드
 
 ### <a name="azcopyazcopy-utility"></a>[AZCopy][AZCopy] 유틸리티
-[AZCopy][AZCopy] 유틸리티는 Azure 저장소 Blob으로 데이터를 전송하기 위한 훌륭한 도구입니다. 작은 데이터 전송(MB++)에서부터 매우 큰 데이터 전송(GB++)까지 설계되어 있습니다. [AZCopy] 도 좋은 복원력 있는 처리량 등 Azure에 데이터를 전송 하는 경우에 데이터 전송 단계에 대한 훌륭한 선택이 제공하도록 설계되었습니다. 한 번 전송되면, PolyBase를 사용하여 SQL 데이터 웨어하우스로 데이터를 로드할 수 있습니다. 또한 "프로세스 실행" 작업을 사용하여 SSIS 패키지로 AZCopy를 통합할 수 있습니다.
+[AZCopy][AZCopy] 유틸리티는 Azure Storage Blob으로 데이터를 전송하기 위한 훌륭한 도구입니다. 작은 데이터 전송(MB++)에서부터 매우 큰 데이터 전송(GB++)까지 설계되어 있습니다. [AZCopy] 도 좋은 복원력 있는 처리량 등 Azure에 데이터를 전송 하는 경우에 데이터 전송 단계에 대한 훌륭한 선택이 제공하도록 설계되었습니다. 한 번 전송되면, PolyBase를 사용하여 SQL Data Warehouse로 데이터를 로드할 수 있습니다. 또한 "프로세스 실행" 작업을 사용하여 SSIS 패키지로 AZCopy를 통합할 수 있습니다.
 
 AZCopy를 사용하려면 먼저 다운로드하고 설치해야 합니다. [프로덕션 버전][production version] 및 [미리 보기 버전][preview version]을 사용할 수 있습니다.
 
@@ -160,8 +153,8 @@ AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.windows.net/myconta
 
 1. 데이터를 수신하도록 Azure 저장소 Blob 컨테이너 구성
 2. 로컬 저장소로 데이터 내보내기
-3. Azure Blob 저장소 컨테이너의 데이터 AZCopy
-4. PolyBase를 사용하여 SQL 데이터 웨어하우스로 데이터 로드
+3. Azure Blob Storage 컨테이너의 데이터 AZCopy
+4. PolyBase를 사용하여 SQL Data Warehouse로 데이터 로드
 
 사용 가능한 전체 설명서는 [AZCopy][AZCopy]입니다.
 
@@ -187,15 +180,16 @@ PolyBase 사용한 데이터 로드에 대해 자세히 알려면 [PolyBase를 �
 <!--Image references-->
 
 <!--Article references-->
-[AZCopy]: ../storage/storage-use-azcopy.md
-[ADF Copy]: ../data-factory/data-factory-data-movement-activities.md 
-[ADF samples]: ../data-factory/data-factory-samples.md
-[ADF Copy examples]: ../data-factory/data-factory-copy-activity-tutorial-using-visual-studio.md
+[AZCopy]: ../storage/common/storage-use-azcopy.md
+[ADF Copy]: ../data-factory/v1/data-factory-data-movement-activities.md 
+[ADF samples]: ../data-factory/v1/data-factory-samples.md
+[ADF Copy examples]: ../data-factory/v1/data-factory-copy-activity-tutorial-using-visual-studio.md
 [development overview]: sql-data-warehouse-overview-develop.md
+[스키마 마이그레이션]: sql-data-warehouse-migrate-schema.md
 [Migrate your solution to SQL Data Warehouse]: sql-data-warehouse-overview-migrate.md
 [SQL Data Warehouse development overview]: sql-data-warehouse-overview-develop.md
-[Use bcp to load data into SQL Data Warehouse]: sql-data-warehouse-load-with-bcp.md
-[Use PolyBase to load data into SQL Data Warehouse]: sql-data-warehouse-get-started-load-with-polybase.md
+[Use bcp to load data into SQL Data Warehouse]: /sql/tools/bcp-utility
+[Use PolyBase to load data into SQL Data Warehouse]: load-data-wideworldimportersdw.md
 
 
 <!--MSDN references-->
@@ -209,4 +203,3 @@ PolyBase 사용한 데이터 로드에 대해 자세히 알려면 [PolyBase를 �
 [preview version]: http://aka.ms/downloadazcopypr/
 [ADO.NET destination adapter]: https://msdn.microsoft.com/library/bb934041.aspx
 [SSIS documentation]: https://msdn.microsoft.com/library/ms141026.aspx
-

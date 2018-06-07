@@ -1,27 +1,25 @@
 ---
-title: "자습서: Jive와 Azure Active Directory 통합 | Microsoft 문서"
-description: "Azure Active Directory와 Jive 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Azure Active Directory로 자동 사용자 프로비전을 위한 Jive 구성 | Microsoft Docs'
+description: Azure Active Directory와 Jive 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: 6fbfdbe7-d66c-4305-9fea-76d6a6a92830
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 05/19/2017
+ms.date: 01/26/2018
 ms.author: jeedes
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 957b152fdd40d08a867e788b0cb9f7d57ed481e4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 09eceb3cfed4bc96a38c28582a1205958766a4ac
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
-# <a name="tutorial-configuring-jive-for-user-provisioning"></a>자습서: 사용자 프로비전에 대한 Jive 구성
+# <a name="tutorial-configure-jive-for-automatic-user-provisioning"></a>자습서: 자동 사용자 프로비전을 위한 Jive 구성
 
 이 자습서의 목적은 사용자 계정을 Azure AD에서 Jive로 자동으로 프로비전 및 프로비전 해제하도록 Jive 및 Azure AD에서 수행해야 하는 단계를 설명하는 것입니다.
 
@@ -73,9 +71,9 @@ Azure Active Directory는 "할당"이라는 개념을 사용하여 어떤 사용
    
     a. **Jive 관리자 사용자 이름** 텍스트 상자에서 Jive.com에서 할당된 **시스템 관리자** 프로필을 가진 Jive 계정 이름을 입력합니다.
    
-    b. **Jive 관리자 암호** 텍스트 상자에 이 계정의 암호를 입력합니다.
+    나. **Jive 관리자 암호** 텍스트 상자에 이 계정의 암호를 입력합니다.
    
-    c. **Jive 테넌트 URL** 텍스트 상자에 Jive 테넌트 URL을 입력합니다.
+    다. **Jive 테넌트 URL** 텍스트 상자에 Jive 테넌트 URL을 입력합니다.
       
       > [!NOTE]
       > Jive 테넌트 URL은 조직에서 Jive에 로그인할 때 사용하는 URL입니다.  
@@ -95,12 +93,12 @@ Azure Active Directory는 "할당"이라는 개념을 사용하여 어떤 사용
 
 12. **저장**을 클릭합니다.
 
-[사용자 및 그룹] 섹션에서 Jive에 할당된 모든 사용자 및/또는 그룹의 초기 동기화가 시작됩니다. 초기 동기화는 서비스가 실행되는 동안 약 20분마다 발생하는 차후 동기화보다 더 많은 시간이 걸립니다. **동기화 세부 정보** 섹션을 사용하여 진행 상태를 모니터링하고 링크를 클릭하여 Jive 앱의 프로비전 서비스에서 수행한 모든 작업을 설명하는 프로비전 작업 보고서를 확인할 수 있습니다.
+[사용자 및 그룹] 섹션에서 Jive에 할당된 모든 사용자 및/또는 그룹의 초기 동기화가 시작됩니다. 초기 동기화는 서비스가 실행되는 동안 약 40분마다 발생하는 후속 동기화보다 더 많은 시간이 걸립니다. **동기화 세부 정보** 섹션을 사용하여 진행 상태를 모니터링하고 링크를 클릭하여 Jive 앱의 프로비전 서비스에서 수행한 모든 작업을 설명하는 프로비전 작업 로그를 확인할 수 있습니다.
 
-이제 테스트 계정을 만들 수 있습니다. 이제 최대 20분 동안 기다린 후 계정이 Jive에 동기화되었는지 확인합니다.
+Azure AD 프로비저닝 로그를 읽는 방법에 대한 자세한 내용은 [자동 사용자 계정 프로비저닝에 대한 보고](active-directory-saas-provisioning-reporting.md)를 참조하세요.
 
 ## <a name="additional-resources"></a>추가 리소스
 
 * [엔터프라이즈 앱에 대한 사용자 계정 프로비전 관리](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 * [Single Sign-On 구성](active-directory-saas-jive-tutorial.md)

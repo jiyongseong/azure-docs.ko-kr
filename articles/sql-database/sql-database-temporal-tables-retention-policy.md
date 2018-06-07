@@ -1,27 +1,19 @@
 ---
-title: "재방문 주기 정책 사용하여 Temporal Tables에서 과거 데이터 관리 | Microsoft Docs"
-description: "임시 재방문 주기 정책을 사용하여 과거 데이터를 제어하는 방법을 알아봅니다."
+title: 재방문 주기 정책 사용하여 Temporal Tables에서 과거 데이터 관리 | Microsoft Docs
+description: 임시 재방문 주기 정책을 사용하여 과거 데이터를 제어하는 방법을 알아봅니다.
 services: sql-database
-documentationcenter: 
 author: bonova
-manager: drasumic
-editor: 
-ms.assetid: 76cfa06a-e758-453e-942c-9f1ed6a38c2a
+manager: craigg
 ms.service: sql-database
 ms.custom: develop databases
-ms.devlang: NA
 ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: sql-database
-ms.date: 10/12/2016
+ms.date: 04/01/2018
 ms.author: bonova
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 8c4e33a63f39d22c336efd9d77def098bd4fa0df
-ms.openlocfilehash: 3870a6ddb8c40a619e3aa6ed1a040f2070e2598c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/20/2017
-
-
+ms.openlocfilehash: 3175236306f05831a78ae8ca01911d0c5d19f893
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="manage-historical-data-in-temporal-tables-with-retention-policy"></a>재방문 주기 정책 사용하여 Temporal Tables에서 과거 데이터 관리
 임시 테이블은 특히 과거 데이터를 장기간 보관할 경우 일반 테이블 보다 데이터베이스 크기를 늘릴 수 있습니다. 따라서 과거 데이터에 대한 재방문 주기 정책은 모든 임시 테이블의 수명 주기를 계획하고 관리하는 데 있어서 중요한 측면입니다. Azure SQL Database의 임시 테이블은 이 작업을 수행하는 데 유용한 사용하기 쉬운 재방문 주기 메커니즘과 함께 제공됩니다.
@@ -110,7 +102,7 @@ ON T1.history_table_id = T2.object_id WHERE T1.temporal_type = 2
 
 ## <a name="how-sql-database-deletes-aged-rows"></a>SQL Database가 오래된 행을 삭제하는 방법은?
 정리 프로세스는 기록 테이블의 인덱스 레이아웃에 따라 달라집니다. *클러스터형 인덱스(B-트리 또는 columnstore)가 있는 기록 테이블만이 유한한 재방문 주기 정책을 구성할 수 있다*는 점에 유의해야 합니다 한정된 재방문 주기 기간을 가진 모든 임시 테이블에 대해 오래된 데이터 정리를 수행하는 백그라운드 작업이 만들어집니다.
-rowstore(B-트리) 클러스터형 인덱스에 대한 정리 논리를 사용해 오래된 행을 더 작은 청크(최대 10K)로 삭제하여 데이터베이스 로그 및 I/O 하위 시스템에 대한 압력을 최소화합니다. 정리 논리는 필수인 B-트리 인덱스를 활용하지만, 재방문 주기 기간보다 오래된 행의 삭제 순서는 확고히 보장되지 않습니다. 따라서 *응용 프로그램의 정리 순서에 의존하지 않도록 합니다*.
+rowstore(B-트리) 클러스터형 인덱스에 대한 정리 논리를 사용해 오래된 행을 더 작은 청크(최대 10K)로 삭제하여 데이터베이스 로그 및 IO 하위 시스템에 대한 압력을 최소화합니다. 정리 논리는 필수인 B-트리 인덱스를 활용하지만, 재방문 주기 기간보다 오래된 행의 삭제 순서는 확고히 보장되지 않습니다. 따라서 *응용 프로그램의 정리 순서에 의존하지 않도록 합니다*.
 
 클러스터형 columnstore에 대한 정리 작업은 전체 [행 그룹](https://msdn.microsoft.com/library/gg492088.aspx)(일반적으로 한 그룹에 백만 행 포함)을 한 번에 제거하여 매우 효율적이며 특히 과거 데이터가 고속으로 생성된 경우에 더욱 그렇습니다.
 
@@ -188,5 +180,4 @@ SET TEMPORAL_HISTORY_RETENTION  ON
 Channel 9을 방문하여 [실제 고객 임시 구현 성공 사례](https://channel9.msdn.com/Blogs/jsturtevant/Azure-SQL-Temporal-Tables-with-RockStep-Solutions)를 듣고 [라이브 임시 데모](https://channel9.msdn.com/Shows/Data-Exposed/Temporal-in-SQL-Server-2016)를 시청합니다.
 
 Temporal Tables에 관한 자세한 내용은 [MSDN 설명서](https://msdn.microsoft.com/library/dn935015.aspx)를 참조하세요.
-
 

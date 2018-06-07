@@ -1,8 +1,8 @@
 ---
 title: "Azure 모바일 앱(Xamarin iOS)에 대해 오프라인 동기화 사용"
-description: "앱 서비스 모바일 앱을 사용하여 Xamarin iOS 응용 프로그램에서 오프라인 데이터를 캐시 및 동기화하는 방법을 알아봅니다."
+description: "App Service 모바일 앱을 사용하여 Xamarin iOS 응용 프로그램에서 오프라인 데이터를 캐시 및 동기화하는 방법을 알아봅니다."
 documentationcenter: xamarin
-author: ggailey777
+author: conceptdev
 manager: cfowler
 editor: 
 services: app-service\mobile
@@ -13,21 +13,20 @@ ms.tgt_pltfrm: mobile-xamarin-ios
 ms.devlang: dotnet
 ms.topic: article
 ms.date: 10/01/2016
-ms.author: glenga
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 06e16033435ed0a37d5688055743875827d3aec2
-ms.openlocfilehash: d609231d6d9913b0f40b6e311aeedeb9a2391c7c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/01/2017
-
+ms.author: crdun
+ms.openlocfilehash: 287977d55656a4b2bc42d90730d16f522fae9b9e
+ms.sourcegitcommit: df4ddc55b42b593f165d56531f591fdb1e689686
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/04/2018
 ---
 # <a name="enable-offline-sync-for-your-xamarinios-mobile-app"></a>Xamarin iOS 모바일 앱에 대해 오프라인 동기화 사용
 [!INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
 
 ## <a name="overview"></a>개요
-이 자습서에서는 Xamarin.iOS용 Azure 모바일 앱의 오프라인 동기화 기능을 소개합니다. 오프라인 동기화를 사용하면 최종 사용자는 네트워크에 연결되어 있지 않을 때도 모바일 앱과 데이터 보기, 추가 또는 수정과 같은 상호 작용을 수행할 수 있습니다. 변경 내용은 로컬 데이터베이스에 저장됩니다. 장치가 다시 온라인 상태가 되면 이러한 변경 내용이 원격 서비스와 동기화됩니다.
+이 자습서에서는 Xamarin.iOS용 Azure Mobile Apps의 오프라인 동기화 기능을 소개합니다. 오프라인 동기화를 사용하면 최종 사용자는 네트워크에 연결되어 있지 않을 때도 모바일 앱과 데이터 보기, 추가 또는 수정과 같은 상호 작용을 수행할 수 있습니다. 변경 내용은 로컬 데이터베이스에 저장됩니다. 장치가 다시 온라인 상태가 되면 이러한 변경 내용이 원격 서비스와 동기화됩니다.
 
-이 자습서에서는 [Xamarin iOS 앱 만들기] 에서 Xamarin.iOS 앱 프로젝트를 업데이트하여 Azure Mobile App의 오프라인 기능을 지원합니다. 다운로드한 빠른 시작 서버 프로젝트를 사용하지 않는 경우 프로젝트에 데이터 액세스 확장 패키지를 추가해야 합니다. 서버 확장 패키지에 대한 자세한 내용은 [Azure 모바일 앱용 .NET 백 엔드 서버 SDK 사용](app-service-mobile-dotnet-backend-how-to-use-server-sdk.md)을 참조하세요.
+이 자습서에서는 [Xamarin iOS 앱 만들기] 에서 Xamarin.iOS 앱 프로젝트를 업데이트하여 Azure Mobile Apps의 오프라인 기능을 지원합니다. 다운로드한 빠른 시작 서버 프로젝트를 사용하지 않는 경우 프로젝트에 데이터 액세스 확장 패키지를 추가해야 합니다. 서버 확장 패키지에 대한 자세한 내용은 [Azure Mobile Apps용 .NET 백 엔드 서버 SDK 사용](app-service-mobile-dotnet-backend-how-to-use-server-sdk.md)을 참조하세요.
 
 오프라인 동기화 기능에 대한 자세한 내용은 [증분 동기화]항목을 참조하세요.
 
@@ -87,7 +86,7 @@ Azure 모바일 앱 오프라인 기능을 사용하면 오프라인 시나리�
 
     제공되는 코드는 `QSTodoService.SyncAsync()` 를 호출하여 todoitem목록이 새로 고쳐지거나 todoitem이 더해지거나 완료될 때마다 동기화합니다. 로컬 변경이 수행될 때마다 앱이 동기화됩니다. 끌어오기가 컨텍스트에 의해 추적되는 로컬 업데이트를 보류 중인 테이블에 대해 실행되는 경우 끌어오기 작업은 먼저 자동으로 컨텍스트 푸시를 트리거합니다.
 
-    제공된 코드에서 원격 `TodoItem` 테이블에 있는 모든 레코드를 쿼리하지만 쿼리 ID 및 쿼리를 `PushAsync`로 전달하여 레코드를 필터링할 수도 있습니다. 자세한 내용은 *Azure 모바일 앱에서 오프라인 데이터 동기화* 에서 [증분 동기화]섹션을 참조하세요.
+    제공된 코드에서 원격 `TodoItem` 테이블에 있는 모든 레코드를 쿼리하지만 쿼리 ID 및 쿼리를 `PushAsync`로 전달하여 레코드를 필터링할 수도 있습니다. 자세한 내용은 *Azure Mobile Apps에서 오프라인 데이터 동기화* 에서 [증분 동기화]섹션을 참조하세요.
 
         // QSTodoService.cs
         public async Task SyncAsync()
@@ -115,4 +114,3 @@ Azure 모바일 앱 오프라인 기능을 사용하면 오프라인 시나리�
 [증분 동기화]: app-service-mobile-offline-data-sync.md
 [SyncContext]: https://msdn.microsoft.com/library/azure/microsoft.windowsazure.mobileservices.mobileserviceclient.synccontext(v=azure.10).aspx
 [8]: app-service-mobile-dotnet-how-to-use-client-library.md
-

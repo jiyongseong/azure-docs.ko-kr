@@ -1,10 +1,10 @@
 ---
-title: "자습서: ADP Globalview와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory와 ADP Globalview 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: ADP Globalview와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory와 ADP Globalview 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.assetid: ffb6464f-714d-41a9-869a-2b7e5ae9f125
 ms.service: active-directory
 ms.workload: identity
@@ -13,13 +13,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/18/2017
 ms.author: jeedes
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6adaf7026d455210db4d7ce6e7111d13c2b75374
-ms.openlocfilehash: e9a5e65c484dfb98d1a7bc63d55f6ef92039554b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/22/2017
-
-
+ms.openlocfilehash: 5471a4edfc6830367d120580c1c36f30f87a8f90
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-adp-globalview"></a>자습서: ADP Globalview와 Azure Active Directory 통합
 
@@ -31,7 +29,7 @@ ADP Globalview를 Azure AD와 통합하면 다음과 같은 이점이 제공됩�
 - 사용자가 해당 Azure AD 계정으로 ADP Globalview에 자동으로 로그온(Single Sign-on)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +57,7 @@ ADP Globalview의 Azure AD 통합을 구성하려면 갤러리의 ADP Globalview
 
 **갤러리에서 ADP Globalview를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Active Directory][1]
 
@@ -88,11 +86,11 @@ Single Sign-On이 작동하려면 Azure AD에서 Azure AD 사용자에 해당하
 
 ADP Globalview에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음 구성 요소를 완료해야 합니다.
 
-1. **[Azure AD Single Sign-On 구성](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
-2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On을 테스트하는 데 사용합니다.
+1. **[Configuring Azure AD Single Sign-On](#configuring-azure-ad-single-sign-on)** - 사용자가 이 기능을 사용할 수 있도록 합니다.
+2. **[Azure AD 테스트 사용자 만들기](#creating-an-azure-ad-test-user)** - Britta Simon으로 Azure AD Single Sign-On 테스트하는 데 사용합니다.
 3. **[ADP Globalview 테스트 사용자 만들기](#creating-an-adp-globalview-test-user)** - Britta Simon의 Azure AD 표현과 연결된 해당 사용자를 ADP Globalview에 만듭니다.
 4. **[Azure AD 테스트 사용자 할당](#assigning-the-azure-ad-test-user)** - Britta Simon이 Azure AD Single Sign-on을 사용할 수 있도록 합니다.
-5. **[Testing Single Sign-On](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
+5. **[Single Sign-On 테스트](#testing-single-sign-on)** - 구성이 작동하는지 확인합니다.
 
 ### <a name="configuring-azure-ad-single-sign-on"></a>Azure AD Single Sign-On 구성
 
@@ -102,30 +100,30 @@ ADP Globalview에서 Azure AD Single Sign-On을 구성하고 테스트하려면 
 
 1. Azure Portal의 **ADP Globalview** 응용 프로그램 통합 페이지에서 **Single Sign-On**을 클릭합니다.
 
-    ![Single Sign-on 구성][4]
+    ![Configure Single Sign-On][4]
 
 2. **Single Sign-On** 대화 상자에서 **모드**를 **SAML 기반 로그온**으로 선택하여 Single Sign-On을 사용하도록 설정합니다.
  
-    ![Single Sign-on 구성](./media/active-directory-saas-adglobalview-tutorial/tutorial_adpglobalview_samlbase.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-adglobalview-tutorial/tutorial_adpglobalview_samlbase.png)
 
 3. **ADP Globalview 도메인 및 URL** 섹션에서 다음 단계를 수행합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-adglobalview-tutorial/tutorial_adpglobalview_url.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-adglobalview-tutorial/tutorial_adpglobalview_url.png)
 
      **식별자** 텍스트 상자에서 `https://<subdomain>.globalview.adp.com/federate` 또는 `https://<subdomain>.globalview.adp.com/federate2` 패턴을 사용하여 URL을 입력합니다.
 
     > [!NOTE] 
     > 이 값은 실제 값이 아닙니다. 실제 식별자로 값을 업데이트하세요. 값을 가져오려면 [ADP Globalview 지원](https://www.adp.com/contact-us/overview.aspx)에 문의하세요.
  
-4. **SAML 서명 인증서** 섹션에서 **인증서(Base64)**를 클릭한 후 컴퓨터에 인증서 파일을 저장합니다.
+4. **SAML 서명 인증서** 섹션에서 **인증서(Base64)** 를 클릭한 후 컴퓨터에 인증서 파일을 저장합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-adglobalview-tutorial/tutorial_adpglobalview_certificate.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-adglobalview-tutorial/tutorial_adpglobalview_certificate.png) 
 
 5. ADP GlobalView 응용 프로그램은 특정 서식에서 SAML 어설션을 예상하며 이는 SAML 토큰 특성 구성에 사용자 지정 특성 매핑을 추가합니다. 
 
 6. 다음 스크린샷은 이에 대한 예제를 보여 줍니다. 클레임 이름은 항상 **"PersonImmutableID"** 및 사용자의 EmployeeID를 포함하는 ExtensionAttribute2에 매핑한 값입니다. 여기에서 Azure AD에서 ADP GlobalView에 매핑하는 사용자는 EmployeeID에서 수행되지만 응용 프로그램 설정에 따라 다른 값에 이를 매핑할 수 있습니다. 사용자의 올바른 식별자를 사용하고 해당 값을 **"PersonImmutableID"** 클레임과 매핑하기 위해 ADP GlobalView 팀과 먼저 작업할 수 있습니다. 그림에 나와 있는 것처럼 전자 메일과 UserID 클레임을 매핑할 수도 있습니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-adglobalview-tutorial/tutorial_adpglobalview_attribute.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-adglobalview-tutorial/tutorial_adpglobalview_attribute.png)
 
 7. **Single Sign-On** 대화 상자의 **사용자 특성** 섹션에서 이미지에 표시된 것과 같이 SAML 토큰 특성을 구성하고 다음 단계를 수행합니다.
     
@@ -133,17 +131,17 @@ ADP Globalview에서 Azure AD Single Sign-On을 구성하고 테스트하려면 
     | ------------------- | -------------------- |    
     | personalimmutableid | user.extensionattribute2 |
     | email               | user.mail |
-    | userid              | user.userprincipalname|
+    | userId              | user.userprincipalname|
     
     a. **특성 추가**를 클릭하여 **특성 추가** 대화 상자를 엽니다.
 
-    ![Single Sign-On 구성](./media/active-directory-saas-adglobalview-tutorial/tutorial_attribute_04.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-adglobalview-tutorial/tutorial_attribute_04.png)
 
-    ![Single Sign-on 구성](./media/active-directory-saas-adglobalview-tutorial/tutorial_attribute_05.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-adglobalview-tutorial/tutorial_attribute_05.png)
 
-    b. **이름** 텍스트 상자에서 해당 행에 표시된 특성 이름을 입력합니다.
+    나. **이름** 텍스트 상자에서 해당 행에 표시된 특성 이름을 입력합니다.
 
-    c. **값** 목록에서 해당 행에 대해 표시된 특성을 입력합니다.
+    다. **값** 목록에서 해당 행에 대해 표시된 특성을 입력합니다.
     
     d. **Ok**를 클릭합니다.
 
@@ -152,11 +150,11 @@ ADP Globalview에서 Azure AD Single Sign-On을 구성하고 테스트하려면 
 
 8. **ADP Globalview 구성** 섹션에서 **ADP Globalview 구성**을 클릭하여 **로그온 구성** 창을 엽니다. **빠른 참조 섹션**에서 **로그아웃 URL, SAML 엔터티 ID 및 SAML Single Sign-On 서비스 URL**을 복사합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-adglobalview-tutorial/tutorial_adpglobalview_configure.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-adglobalview-tutorial/tutorial_adpglobalview_configure.png) 
 
 9. **저장** 단추를 클릭합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-adglobalview-tutorial/tutorial_general_400.png)
+    ![Configure Single Sign-On](./media/active-directory-saas-adglobalview-tutorial/tutorial_general_400.png)
 
 10. **ADP Globalview** 쪽에서 Single Sign-On을 구성하려면 다운로드한 **인증서(Base64)**, **로그아웃 URL, SAML 엔터티 ID 및 SAML Single Sign-On 서비스 URL**을 [ADP Globalview 지원](https://www.adp.com/contact-us/overview.aspx)으로 보내야 합니다.
 
@@ -188,9 +186,9 @@ ADP Globalview에서 Azure AD Single Sign-On을 구성하고 테스트하려면 
 
     a. **이름** 텍스트 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
+    나. **사용자 이름** 텍스트 상자에 BrittaSimon의 **전자 메일 주소**를 입력합니다.
 
-    c. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
+    다. **암호 표시**를 선택하고 **암호** 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -212,7 +210,7 @@ ADP Globalview에서 Azure AD Single Sign-On을 구성하고 테스트하려면 
 
 2. 응용 프로그램 목록에서 **ADP Globalview**를 선택합니다.
 
-    ![Single Sign-on 구성](./media/active-directory-saas-adglobalview-tutorial/tutorial_adpglobalview_app.png) 
+    ![Configure Single Sign-On](./media/active-directory-saas-adglobalview-tutorial/tutorial_adpglobalview_app.png) 
 
 3. 왼쪽 메뉴에서 **사용자 및 그룹**을 클릭합니다.
 
@@ -237,7 +235,7 @@ ADP Globalview에서 Azure AD Single Sign-On을 구성하고 테스트하려면 
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 <!--Image references-->
 
@@ -252,5 +250,4 @@ ADP Globalview에서 Azure AD Single Sign-On을 구성하고 테스트하려면 
 [201]: ./media/active-directory-saas-adglobalview-tutorial/tutorial_general_201.png
 [202]: ./media/active-directory-saas-adglobalview-tutorial/tutorial_general_202.png
 [203]: ./media/active-directory-saas-adglobalview-tutorial/tutorial_general_203.png
-
 

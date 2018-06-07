@@ -1,0 +1,59 @@
+- name: Azure Cost Management 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: 비용 관리는 무엇입니까?
+      href: overview.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: 비용 데이터 보기
+      href: quick-register-azure-sub.md
+    - name: 비용 데이터 보기 - EA
+      href: quick-register-ea.md
+    - name: 비용 데이터 보기 - CSP
+      href: quick-register-csp.md
+- name: 자습서
+  items:
+    - name: 1 - 사용량 및 비용 검토
+      href: tutorial-review-usage.md
+    - name: 2 - 소비 예측
+      href: tutorial-forecast-spending.md
+    - name: 3 - 비용 관리
+      href: tutorial-manage-costs.md
+    - name: 4 - 예약된 인스턴스 최적화
+      href: tutorial-optimize-reserved-instances.md
+    - name: 5 - 데이터에 대한 액세스 제어
+      href: tutorial-user-access.md
+- name: 개념
+  items:
+    - name: 비용 보고서 이해
+      href: understanding-cost-reports.md
+- name: 방법 가이드
+  items:
+    - name: Azure 구독 및 계정 활성화
+      href: activate-subs-accounts.md
+    - name: VM의 확장된 메트릭 추가
+      href: azure-vm-extended-metrics.md
+    - name: Google 계정 연결
+      href: connect-google-account.md
+    - name: AWS 계정 연결
+      href: connect-aws-account.md
+    - name: 저장소 계정 구성
+      href: storage-accounts.md
+    - name: 비용 관리 보고서 사용
+      href: use-reports.md
+- name: 리소스
+  items:
+    - name: 비용 관리 비디오
+      href: ref-videos.md
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/'
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/cost-management'
+    - name: 국가별 가용성
+      href: 'https://azure.microsoft.com/en-us/regions/services/'
+    - name: FAQ
+      href: cost-mgt-faq.md
+    - name: 지원에 문의
+      href: support-request-cost-management.md

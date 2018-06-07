@@ -13,15 +13,13 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: data-catalog
-ms.date: 05/15/2017
+ms.date: 01/18/2018
 ms.author: maroche
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f7479260c7c2e10f242b6d8e77170d4abe8634ac
-ms.openlocfilehash: e31bcfce2c66d9428535fb51c4bbe11bc103a1ad
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/21/2017
-
-
+ms.openlocfilehash: 826676600094b956ff84cc88c61e667841043837
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="how-to-work-with-big-data-sources-in-azure-data-catalog"></a>Azure 데이터 카탈로그의 빅 데이터 소스로 작업하는 방법
 ## <a name="introduction"></a>소개
@@ -69,4 +67,3 @@ ms.lasthandoff: 06/21/2017
 
 ## <a name="summary"></a>요약
 데이터 소스를 **Azure 데이터 카탈로그**에 등록하면 보다 쉽게 검색하고 이해할 수 있습니다. 논리 데이터 집합을 나타내는 빅 데이터 파일 및 디렉터리를 등록하고 주석을 추가하면, 사용자는 필요한 빅 데이터 소스를 찾아 사용할 수 있습니다.
-

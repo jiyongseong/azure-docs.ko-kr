@@ -1,6 +1,6 @@
 ---
-title: "Reliable Services WCF 통신 스택 | Microsoft Docs"
-description: "서비스 패브릭의 기본 제공 WCF 통신 스택은 Reliable Services를 위한 클라이언트-서비스 WCF 통신을 제공합니다."
+title: Reliable Services WCF 통신 스택 | Microsoft Docs
+description: 서비스 패브릭의 기본 제공 WCF 통신 스택은 Reliable Services를 위한 클라이언트-서비스 WCF 통신을 제공합니다.
 services: service-fabric
 documentationcenter: .net
 author: BharatNarasimman
@@ -9,18 +9,16 @@ editor: vturecek
 ms.assetid: 75516e1e-ee57-4bc7-95fe-71ec42d452b2
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: required
 ms.date: 06/07/2017
 ms.author: bharatn
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: a3b0362f0c3b42e4a61348abe306c3beaa6f0c86
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
-
+ms.openlocfilehash: f5ca579b446e5d3608d53cea73fa9392cd00db06
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="wcf-based-communication-stack-for-reliable-services"></a>Reliable Services에 대한 WCF 기반 통신 스택
 Reliable Services 프레임워크를 사용하면 서비스 작성자가 서비스에 사용하려는 통신 스택을 결정할 수 있습니다. 선택한 통신 스택을 **CreateServiceReplicaListeners 또는 CreateServiceInstanceListeners** 메서드에서 반환되는 [ICommunicationListener](service-fabric-reliable-services-communication.md) 를 통해 플러그인할 수 있습니다. 이 프레임워크는 WCF 기반 통신을 사용하려는 서비스 작성자를 위한 WCF(Windows Communication Foundation) 기반 통신 스택 구현을 제공합니다.
@@ -128,5 +126,4 @@ var result = calculatorServiceCommunicationClient.InvokeWithRetryAsync(
 * [Reliable Services 원격을 사용하여 원격 프로시저 호출](service-fabric-reliable-services-communication-remoting.md)
 * [Reliable Services에서 OWIN을 사용하는 Web API](service-fabric-reliable-services-communication-webapi.md)
 * [Reliable Services에 대한 통신 보안 유지](service-fabric-reliable-services-secure-communication.md)
-
 

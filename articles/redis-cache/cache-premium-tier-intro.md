@@ -3,8 +3,8 @@ title: "Azure Redis Cache 프리미엄 계층 소개 | Microsoft Docs"
 description: "프리미엄 계층 Azure Redis Cache 인스턴스에 대해 Redis 지속성, Redis 클러스터링 및 VNET 지원을 만들고 관리하는 방법에 대해 알아봅니다."
 services: redis-cache
 documentationcenter: 
-author: steved0x
-manager: douge
+author: wesmc7777
+manager: cfowler
 editor: 
 ms.assetid: 30f46f9f-e6ec-4c38-a8cc-f9d4444856e5
 ms.service: cache
@@ -13,14 +13,12 @@ ms.tgt_pltfrm: cache-redis
 ms.devlang: na
 ms.topic: article
 ms.date: 07/05/2017
-ms.author: sdanie
-ms.translationtype: Human Translation
-ms.sourcegitcommit: bb794ba3b78881c967f0bb8687b1f70e5dd69c71
-ms.openlocfilehash: c7a70e74f8b275ed9e10118b0ae9e81309f97ba3
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.author: wesmc
+ms.openlocfilehash: 38a43756678a3628040b1b995966eff6dd9fb363
+ms.sourcegitcommit: 2a70752d0987585d480f374c3e2dba0cd5097880
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="introduction-to-the-azure-redis-cache-premium-tier"></a>Azure Redis Cache 프리미엄 계층 소개
 Azure Redis Cache는 분산되고 관리된 캐시로, 데이터에 매우 빠르게 액세스하여 확장성과 응답성이 뛰어난 응용 프로그램을 빌드하는 데 사용할 수 있습니다. 
@@ -35,7 +33,7 @@ Azure Redis Cache는 분산되고 관리된 캐시로, 데이터에 매우 빠�
 프리미엄 캐시에서의 크기, 처리량 및 대역폭에 대한 자세한 내용은 [Azure Redis Cache FAQ](cache-faq.md#what-redis-cache-offering-and-size-should-i-use)
 
 ## <a name="redis-data-persistence"></a>Redis 데이터 지속성
-프리미엄 계층을 사용하면 Azure 저장소 계정에서 캐시 데이터를 유지할 수 있습니다. 기본/표준 캐시에서 모든 데이터는 메모리에만 저장됩니다. 기본 인프라의 경우 문제는 잠재적인 데이터 손실이 있을 수 있다는 점입니다. 데이터 손실에 대한 복원력을 늘리기 위해 프리미엄 계층에서 Redis 데이터 지속성 기능을 사용하는 것이 좋습니다. Azure Redis Cache는 [Redis 지속성](http://redis.io/topics/persistence)에서 RDB 및 AOF(출시 예정) 옵션을 제공합니다. 
+프리미엄 계층을 사용하면 Azure Storage 계정에서 캐시 데이터를 유지할 수 있습니다. 기본/표준 캐시에서 모든 데이터는 메모리에만 저장됩니다. 기본 인프라의 경우 문제는 잠재적인 데이터 손실이 있을 수 있다는 점입니다. 데이터 손실에 대한 복원력을 늘리기 위해 프리미엄 계층에서 Redis 데이터 지속성 기능을 사용하는 것이 좋습니다. Azure Redis Cache는 [Redis 지속성](http://redis.io/topics/persistence)에서 RDB 및 AOF(출시 예정) 옵션을 제공합니다. 
 
 지속성 구성에 대한 지침은 [프리미엄 Azure Redis Cache에 지속성을 구성하는 방법](cache-how-to-premium-persistence.md)을 참조하세요.
 
@@ -47,12 +45,12 @@ Azure Redis Cache는 분산되고 관리된 캐시로, 데이터에 매우 빠�
 클러스터링을 시작하려면 [프리미엄 Azure Redis Cache에 클러스터링을 구성하는 방법](cache-how-to-premium-clustering.md)을 참조하세요.
 
 ## <a name="enhanced-security-and-isolation"></a>강화된 보안 및 격리
-기본 또는 표준 계층에서 만든 캐시는 공용 인터넷에서 액세스할 수 있습니다. 캐시에 대한 액세스는 선택키에 따라 제한됩니다. 프리미엄 계층을 사용하면 지정된 네트워크 내의 클라이언트만 캐시에 액세스할 수 있는지 추가로 확인할 수 있습니다. [Azure VNet(가상 네트워크)](https://azure.microsoft.com/services/virtual-network/)에서 Redis Cache를 배포할 수 있습니다. 서브넷, 액세스 제어 정책과 같은 VNet의 모든 기능 및 다른 기능을 사용하여 추가로 Redis에 대한 액세스를 제한할 수 있습니다.
+기본 또는 표준 계층에서 만든 캐시는 공용 인터넷에서 액세스할 수 있습니다. 캐시에 대한 액세스는 선택키에 따라 제한됩니다. 프리미엄 계층을 사용하면 지정된 네트워크 내의 클라이언트만 캐시에 액세스할 수 있는지 추가로 확인할 수 있습니다. [Azure VNet(Virtual Network)](https://azure.microsoft.com/services/virtual-network/)에서 Redis Cache를 배포할 수 있습니다. 서브넷, 액세스 제어 정책과 같은 VNet의 모든 기능 및 다른 기능을 사용하여 추가로 Redis에 대한 액세스를 제한할 수 있습니다.
 
-자세한 내용은 [프리미엄 Azure Redis Cache에 가상 네트워크 지원을 구성하는 방법](cache-how-to-premium-vnet.md)을 참조하세요.
+자세한 내용은 [프리미엄 Azure Redis Cache에 Virtual Network 지원을 구성하는 방법](cache-how-to-premium-vnet.md)을 참조하세요.
 
-## <a name="importexport"></a>가져오기/내보내기
-가져오기/내보내기는 프리미엄 캐시에서 Azure 저장소 계정의 페이지 Blob으로 Redis Cache 데이터베이스(RDB) 스냅숏을 가져오고 내보내는 방식으로, Azure Redis Cache로 데이터를 가져오고 Azure Redis Cache의 데이터를 내보낼 수 있는 Azure Redis Cache 데이터 관리 작업입니다. 이를 통해, 다양한 Azure Redis Cache 인스턴스 간에 마이그레이션이 가능하고, 데이터를 사용하기 전에 캐시에 채울 수 있습니다.
+## <a name="importexport"></a>Import/Export
+Import/Export는 프리미엄 캐시에서 Azure Storage 계정의 페이지 Blob으로 Redis Cache 데이터베이스(RDB) 스냅숏을 가져오고 내보내는 방식으로, Azure Redis Cache로 데이터를 가져오고 Azure Redis Cache의 데이터를 내보낼 수 있는 Azure Redis Cache 데이터 관리 작업입니다. 이를 통해, 다양한 Azure Redis Cache 인스턴스 간에 마이그레이션이 가능하고, 데이터를 사용하기 전에 캐시에 채울 수 있습니다.
 
 가져오기는 Linux, Windows 또는 Amazon Web Services 및 기타 클라우드 공급자에서 실행되는 Redis를 비롯한 환경이나 클라우드에서 실행되는 Redis 서버로부터 Redis 호환 RDB 파일을 가져오는 데 사용됩니다. 데이터 가져오기는 미리 채워진 데이터로 캐시를 만드는 손쉬운 방법입니다. 가져오기 프로세스를 진행하는 동안, Azure Redis Cache는 Azure 저장소에서 메모리로 RDB 파일을 로드한 다음 키를 캐시에 삽입합니다.
 
@@ -99,9 +97,8 @@ Azure Redis Cache는 분산되고 관리된 캐시로, 데이터에 매우 빠�
 캐시를 만들고 새로운 프리미엄 계층 기능을 탐색합니다.
 
 * [프리미엄 Azure Redis Cache에 지속성을 구성하는 방법](cache-how-to-premium-persistence.md)
-* [프리미엄 Azure Redis Cache에 가상 네트워크 지원을 구성하는 방법](cache-how-to-premium-vnet.md)
+* [프리미엄 Azure Redis Cache에 Virtual Network 지원을 구성하는 방법](cache-how-to-premium-vnet.md)
 * [프리미엄 Azure Redis Cache에 클러스터링을 구성하는 방법](cache-how-to-premium-clustering.md)
 * [Azure Redis Cache로 데이터를 가져오고 Azure Redis Cache에서 데이터를 내보내는 방법](cache-how-to-import-export-data.md)
 * [Azure Redis Cache를 관리하는 방법](cache-administration.md)
-
 

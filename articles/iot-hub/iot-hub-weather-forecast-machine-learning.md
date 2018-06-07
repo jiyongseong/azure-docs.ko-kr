@@ -1,26 +1,25 @@
 ---
-title: "Azure Machine Learning을 사용하여 IoT Hub 데이터로 일기 예보 | Microsoft Docs"
-description: "Azure Machine Learning을 사용하여 IoT Hub가 센서에서 수집한 온도 및 습도 데이터를 기반으로 하여 강우 확률을 예측합니다."
+title: Azure Machine Learning을 사용하여 IoT Hub 데이터로 일기 예보 | Microsoft Docs
+description: Azure Machine Learning을 사용하여 IoT Hub가 센서에서 수집한 온도 및 습도 데이터를 기반으로 하여 강우 확률을 예측합니다.
 services: iot-hub
-documentationcenter: 
-author: shizn
+documentationcenter: ''
+author: rangv
 manager: timlt
-tags: 
-keywords: "일기 예보 기계 학습"
+tags: ''
+keywords: 일기 예보 기계 학습
 ms.assetid: 8ba7d9e7-699c-4448-b353-0f3e1429d198
 ms.service: iot-hub
 ms.devlang: arduino
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 03/29/2017
-ms.author: xshi
-ms.translationtype: Human Translation
-ms.sourcegitcommit: b0c27ca561567ff002bbb864846b7a3ea95d7fa3
-ms.openlocfilehash: 872930fd127729e0f444942ad1ee6fa11465ceb9
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/25/2017
-
+ms.date: 4/11/2018
+ms.author: rangv
+ms.openlocfilehash: 453b4de8a93e897b4455403855438d7705945514
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="weather-forecast-using-the-sensor-data-from-your-iot-hub-in-azure-machine-learning"></a>Azure Machine Learning에서 IoT Hub의 센서 데이터를 사용한 일기 예보
 
@@ -81,7 +80,7 @@ Azure Machine Learning을 사용하여 Azure IoT Hub의 온도 및 습도 데이
 
 ### <a name="create-a-stream-analytics-job"></a>Stream Analytics 작업 만들기
 
-1. [Azure Portal](https://ms.portal.azure.com/)에서 **새로 만들기** > **사물 인터넷** > **Stream Analytics 작업**을 차례로 클릭합니다.
+1. [Azure Portal](https://portal.azure.com/)에서 **리소스 만들기** > **사물 인터넷** > **Stream Analytics 작업**을 차례로 클릭합니다.
 1. 작업에 대한 다음 정보를 입력합니다.
 
    **작업 이름**: 작업의 이름입니다. 이름은 전역적으로 고유해야 합니다.
@@ -121,7 +120,7 @@ Azure Machine Learning을 사용하여 Azure IoT Hub의 온도 및 습도 데이
 
    **싱크**: **Blob Storage**를 선택합니다.
 
-   **저장소 계정**: Blob 저장소의 저장소 계정입니다. 저장소 계정을 만들거나 기존 계정을 사용할 수 있습니다.
+   **Storage 계정**: Blob 저장소의 Storage 계정입니다. 저장소 계정을 만들거나 기존 계정을 사용할 수 있습니다.
 
    **컨테이너**: Blob이 저장되는 컨테이너입니다. 컨테이너를 만들거나 기존 컨테이너를 사용할 수 있습니다.
 
@@ -168,13 +167,13 @@ Azure Machine Learning을 사용하여 Azure IoT Hub의 온도 및 습도 데이
 
    `[YourOutputAlias]`를 작업의 출력 별칭으로 바꿉니다.
 
-1. **Save**를 클릭합니다.
+1. **저장**을 클릭합니다.
 
-### <a name="run-the-stream-analytics-job"></a>스트림 분석 작업 실행
+### <a name="run-the-stream-analytics-job"></a>Stream Analytics 작업 실행
 
 Stream Analytics 작업에서 **시작** > **지금 시작** > **시작**을 차례로 클릭합니다. 작업이 성공적으로 시작되면 작업 상태가 **중지됨**에서 **실행 중**으로 변경됩니다.
 
-![스트림 분석 작업 실행](media/iot-hub-weather-forecast-machine-learning/11_run-stream-analytics-job-azure.png)
+![Stream Analytics 작업 실행](media/iot-hub-weather-forecast-machine-learning/11_run-stream-analytics-job-azure.png)
 
 ## <a name="use-microsoft-azure-storage-explorer-to-view-the-weather-forecast"></a>Microsoft Azure Storage 탐색기를 사용하여 일기 예보 보기
 
@@ -184,7 +183,7 @@ Stream Analytics 작업에서 **시작** > **지금 시작** > **시작**을 차
 1. Azure Storage 탐색기를 엽니다.
 1. Azure 계정에 로그인합니다.
 1. 사용 중인 구독을 선택합니다.
-1. 구독> **저장소 계정** > 저장소 계정> **Blob 컨테이너**> 컨테이너를 차례로 클릭합니다.
+1. 구독> **Storage 계정** > Storage 계정> **Blob 컨테이너**> 컨테이너를 차례로 클릭합니다.
 1. .csv 파일을 열어 결과를 확인합니다. 마지막 열은 강우 확률을 기록하고 있습니다.
 
    ![Azure Machine Learning을 사용하여 일기 예보 결과 가져오기](media/iot-hub-weather-forecast-machine-learning/12_get-weather-forecast-result-azure-machine-learning.png)

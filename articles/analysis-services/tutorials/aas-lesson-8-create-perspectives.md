@@ -1,30 +1,20 @@
 ---
-title: "Azure Analysis Services 자습서 단원 8: 큐브 뷰 만들기 | Microsoft Docs"
-description: "Azure Analysis Services 자습서 프로젝트에서 큐브 뷰를 만드는 방법을 설명합니다."
-services: analysis-services
-documentationcenter: 
+title: 'Azure Analysis Services 자습서 단원 8: 큐브 뷰 만들기 | Microsoft Docs'
+description: Azure Analysis Services 자습서 프로젝트에서 큐브 뷰를 만드는 방법을 설명합니다.
 author: minewiskan
-manager: erikre
-editor: 
-tags: 
-ms.assetid: 
+manager: kfile
 ms.service: analysis-services
-ms.devlang: NA
-ms.topic: get-started-article
-ms.tgt_pltfrm: NA
-ms.workload: na
-ms.date: 05/26/2017
+ms.topic: conceptual
+ms.date: 04/12/2018
 ms.author: owend
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 43aab8d52e854636f7ea2ff3aae50d7827735cc7
-ms.openlocfilehash: 491500909b0de0360afae45e172e85999d764fe0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/03/2017
-
+ms.reviewer: minewiskan
+ms.openlocfilehash: bb6599fefaa03e2ca0fec2788dca27240dbad8c6
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
-# <a name="lesson-8-create-perspectives"></a>단원 8: 큐브 뷰 만들기
-
-[!INCLUDE[analysis-services-appliesto-aas-sql2017-later](../../../includes/analysis-services-appliesto-aas-sql2017-later.md)]
+# <a name="create-perspectives"></a>큐브 뷰 만들기
 
 이 단원에서는 인터넷 판매 큐브 뷰를 만듭니다. 큐브 뷰는 포커스가 있는, 비즈니스 또는 응용 프로그램별 관점을 제공하는 모델의 볼 수 있는 하위 집합을 정의합니다. 사용자가 큐브 뷰를 사용하여 모델에 연결하면 해당 큐브 뷰에 정의된 필드로 해당 모델 개체(테이블, 열, 측정값, 계층 구조 및 KPI)만 표시됩니다. 자세한 내용은 [큐브 뷰](https://docs.microsoft.com/sql/analysis-services/tabular-models/perspectives-ssas-tabular)를 참조하세요.
   
@@ -59,4 +49,3 @@ ms.lasthandoff: 06/03/2017
   
   
   
-

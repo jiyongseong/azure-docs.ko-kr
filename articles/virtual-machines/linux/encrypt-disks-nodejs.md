@@ -1,13 +1,13 @@
 ---
-title: "Azure CLI 1.0을 사용하여 Linux VM에서 디스크 암호화 | Microsoft Docs"
-description: "Azure CLI 1.0 및 Resource Manager 배포 모델을 사용하여 Linux VM에서 디스크를 암호화하는 방법"
+title: Azure CLI 1.0을 사용하여 Linux VM에서 디스크 암호화 | Microsoft Docs
+description: Azure CLI 1.0 및 Resource Manager 배포 모델을 사용하여 Linux VM에서 디스크를 암호화하는 방법
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: iainfoulds
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.devlang: na
 ms.topic: article
@@ -15,15 +15,14 @@ ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
 ms.date: 03/06/2017
 ms.author: iainfou
-translationtype: Human Translation
-ms.sourcegitcommit: be3ac7755934bca00190db6e21b6527c91a77ec2
-ms.openlocfilehash: b436f2d43c41000f4385889edb3fa3983d4a8c66
-ms.lasthandoff: 05/03/2017
-
-
+ms.openlocfilehash: d1704ba37b1d2acc595cb0c354b22bfcf1c57036
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="encrypt-disks-on-a-linux-vm-using-the-azure-cli-10"></a>Azure CLI 1.0을 사용하여 Linux VM에서 디스크 암호화
-가상 컴퓨터(VM)의 보안과 규정 준수 상태를 향상시키기 위해 Azure에서 가상 디스크를 미사용 시 암호화할 수 있습니다. 디스크는 Azure Key Vault에 안전하게 보관되는 암호화 키를 사용하여 암호화됩니다. 이러한 암호화 키를 제어하고 용도를 감사할 수 있습니다. 이 문서는 Azure CLI 1.0 및 Resource Manager 배포 모델을 사용하여 Linux VM에서 가상 디스크를 암호화하는 방법을 자세히 설명합니다.
+가상 머신(VM)의 보안과 규정 준수 상태를 향상시키기 위해 Azure에서 가상 디스크를 미사용 시 암호화할 수 있습니다. 디스크는 Azure Key Vault에 안전하게 보관되는 암호화 키를 사용하여 암호화됩니다. 이러한 암호화 키를 제어하고 용도를 감사할 수 있습니다. 이 문서는 Azure CLI 1.0 및 Resource Manager 배포 모델을 사용하여 Linux VM에서 가상 디스크를 암호화하는 방법을 자세히 설명합니다.
 
 ## <a name="cli-versions-to-complete-the-task"></a>태스크를 완료하기 위한 CLI 버전
 다음 CLI 버전 중 하나를 사용하여 태스크를 완료할 수 있습니다.
@@ -153,7 +152,7 @@ VM을 암호화하는 프로세스는 다음과 같습니다.
 디스크 암호화에 대해 지원되는 시나리오 및 요구 사항은 다음과 같습니다.
 
 * 다음 Linux Server SKU - Ubuntu, CentOS, SUSE 및 SLES(SUSE Linux Enterprise Server)와 Red Hat Enterprise Linux.
-* 모든 리소스(예: Key Vault, 저장소 계정, VM)는 동일한 Azure 지역 및 구독 내에 있어야 합니다.
+* 모든 리소스(예: Key Vault, Storage 계정, VM)는 동일한 Azure 지역 및 구독 내에 있어야 합니다.
 * 표준 A, D, DS, G 및 GS 시리즈 VM.
 
 다음 시나리오의 경우 디스크 암호화가 현재 지원되지 않습니다.
@@ -316,4 +315,3 @@ azure vm enable-disk-encryption --resource-group myResourceGroup --name myVM \
 ## <a name="next-steps"></a>다음 단계
 * 암호화 키 및 Key Vault 삭제를 비롯한 Azure Key Vault 관리에 대한 자세한 내용은 [CLI를 사용하여 Key Vault 관리](../../key-vault/key-vault-manage-with-cli2.md)를 참조하세요.
 * Azure에 업로드할 암호화된 사용자 지정 VM 준비와 같은 디스크 암호화에 대한 자세한 내용은 [Azure Disk Encryption](../../security/azure-security-disk-encryption.md)을 참조하세요.
-

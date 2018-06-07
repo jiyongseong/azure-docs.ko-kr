@@ -1,0 +1,61 @@
+- name: Azure Databricks 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: Azure Databricks란?
+      href: what-is-azure-databricks.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: Databricks 작업 영역 만들기 - 포털
+      href: quickstart-create-databricks-workspace-portal.md
+    - name: Databricks 작업 영역 만들기 - Resource Manager 템플릿
+      href: quickstart-create-databricks-workspace-resource-manager-template.md
+- name: 자습서
+  items:
+    - name: ETL 작업 수행
+      href: databricks-extract-load-sql-data-warehouse.md
+    - name: Event Hubs를 사용한 데이터 스트리밍
+      href: databricks-stream-from-eventhubs.md
+    - name: Cognitive Services를 사용한 감정 분석
+      href: databricks-sentiment-analysis-cognitive-services.md
+    - name: HDInsight Kafka에서 데이터 스트리밍
+      href: 'https://docs.azuredatabricks.net/spark/latest/structured-streaming/kafka.html'
+- name: 방법 가이드
+  items:
+    - name: Spark 클러스터 만들기
+      href: 'https://docs.azuredatabricks.net/user-guide/clusters/index.html'
+    - name: Notebooks 작업
+      href: 'https://docs.azuredatabricks.net/user-guide/notebooks/index.html'
+    - name: Spark 작업 실행
+      href: 'https://docs.azuredatabricks.net/user-guide/jobs.html'
+    - name: 데이터 원본에 연결
+      href: databricks-connect-to-data-sources.md
+    - name: 'Excel, R 및 Python을 사용하여 연결'
+      href: connect-databricks-excel-python-r.md
+    - name: Azure Cloud Shell에서 Databricks CLI 사용
+      href: databricks-cli-from-azure-cloud-shell.md
+    - name: BI 도구 사용
+      href: 'https://docs.azuredatabricks.net/user-guide/bi/index.html'
+- name: 참고 자료
+  items:
+    - name: REST API
+      href: /rest/api/databricks
+- name: 리소스
+  items:
+    - name: 일반적인 질문
+      href: frequently-asked-questions-databricks.md
+    - name: 릴리스 정보
+      href: 'https://docs.azuredatabricks.net/release-notes/index.html'
+    - name: Databricks 설명서
+      href: 'https://docs.azuredatabricks.net/user-guide/index.html'
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/?category=analytics'
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/databricks/'
+    - name: 스택 오버플로
+      href: 'https://stackoverflow.com/questions/tagged/azure-databricks'
+    - name: 지역 가용성
+      href: 'https://azure.microsoft.com/regions/services/'
+    - name: 지원 옵션
+      href: 'https://azure.microsoft.com/support/options/'

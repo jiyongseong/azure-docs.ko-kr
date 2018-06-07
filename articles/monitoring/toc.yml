@@ -1,0 +1,110 @@
+- name: Azure 모니터링 설명서
+  href: index.md
+- name: 개요
+  items:
+    - name: Azure에서 모니터링
+      href: monitoring-overview.md
+- name: 공유 서비스
+  items:
+    - name: 경고
+      items:
+        - name: Azure Alerts
+          href: ../monitoring-and-diagnostics/monitoring-overview-unified-alerts.md?toc=%2fazure%2fmonitoring%2ftoc.json
+        - name: 작업 그룹
+          href: ../monitoring-and-diagnostics/monitoring-action-groups.md?toc=%2fazure%2fmonitoring%2ftoc.json
+        - name: Operations Manager 경고 가져오기
+          href: ../log-analytics/log-analytics-solution-alert-management.md?toc=%2fazure%2fmonitoring%2ftoc.json
+    - name: Autoscale
+      items:
+        - name: Autoscale
+          href: ../monitoring-and-diagnostics/monitoring-overview-autoscale.md?toc=%2fazure%2fmonitoring%2ftoc.json
+    - name: 메트릭
+      items:
+        - name: 메트릭
+          href: ../monitoring-and-diagnostics/monitoring-overview-metrics.md?toc=%2fazure%2fmonitoring%2ftoc.json
+    - name: 로그
+      items:
+        - name: 활동 로그
+          href: ../monitoring-and-diagnostics/monitoring-overview-activity-logs.md?toc=%2fazure%2fmonitoring%2ftoc.json
+        - name: 진단 로그
+          href: ../monitoring-and-diagnostics/monitoring-overview-of-diagnostic-logs.md?toc=%2fazure%2fmonitoring%2ftoc.json
+        - name: Azure 구독에서 로그 수집
+          href: ../log-analytics/log-analytics-activity-logs-subscriptions.md?toc=%2fazure%2fmonitoring%2ftoc.json
+- name: 리소스 모니터링
+  items:
+    - name: 응용 프로그램
+      items:
+        - name: Application Insights
+          href: ../application-insights/app-insights-overview.md?toc=%2fazure%2fmonitoring%2ftoc.json
+        - name: Application Insights 커넥터
+          href: ../log-analytics/log-analytics-app-insights-connector.md?toc=%2fazure%2fmonitoring%2ftoc.json
+        - name: Key Vault 분석
+          href: ../log-analytics/log-analytics-azure-key-vault.md?toc=%2fazure%2fmonitoring%2ftoc.json
+        - name: Service Fabric 분석
+          href: ../log-analytics/log-analytics-service-fabric.md?toc=%2fazure%2fmonitoring%2ftoc.json
+        - name: Azure Web Apps 분석
+          href: ../log-analytics/log-analytics-azure-web-apps-analytics.md?toc=%2fazure%2fmonitoring%2ftoc.json
+    - name: 컨테이너
+      items:
+        - name: 컨테이너 모니터링 개요
+          href: monitoring-container-overview.md
+        - name: AKS 컨테이너 성능
+          href: monitoring-container-health.md
+        - name: Docker 및 Windows 컨테이너 모니터링
+          href: ../log-analytics/log-analytics-containers.md?toc=%2fazure%2fmonitoring%2ftoc.json
+        - name: Docker 응용 프로그램 모니터링
+          href: ../application-insights/app-insights-docker.md?toc=%2fazure%2fmonitoring%2ftoc.json
+    - name: 데이터베이스
+      items:
+        - name: Azure SQL
+          href: ../log-analytics/log-analytics-azure-sql.md?toc=%2fazure%2fmonitoring%2ftoc.json
+    - name: 가상 머신
+      items:
+        - name: 에이전트 상태
+          href: ../operations-management-suite/oms-solution-agenthealth.md?toc=%2fazure%2fmonitoring%2ftoc.json
+        - name: VMWare Analytics
+          href: ../log-analytics/log-analytics-vmware.md?toc=%2fazure%2fmonitoring%2ftoc.json
+        - name: 서비스 맵
+          items:
+            - name: 연습
+              href: ../operations-management-suite/operations-management-suite-walkthrough-servicemap.md?toc=%2fazure%2fmonitoring%2ftoc.json
+            - name: 사용
+              href: ../operations-management-suite/operations-management-suite-service-map.md?toc=%2fazure%2fmonitoring%2ftoc.json
+            - name: 구성
+              href: ../operations-management-suite/operations-management-suite-service-map-configure.md?toc=%2fazure%2fmonitoring%2ftoc.json
+            - name: Operations Manager와 통합
+              href: ../operations-management-suite/operations-management-suite-service-map-scom.md?toc=%2fazure%2fmonitoring%2ftoc.json
+    - name: 기타 리소스
+      items:
+        - name: AD 상태 평가
+          href: ../log-analytics/log-analytics-ad-assessment.md?toc=%2fazure%2fmonitoring%2ftoc.json
+        - name: AD 복제 상태
+          href: ../log-analytics/log-analytics-ad-replication-status.md?toc=%2fazure%2fmonitoring%2ftoc.json
+        - name: Office 365
+          href: ../operations-management-suite/oms-solution-office-365.md?toc=%2fazure%2fmonitoring%2ftoc.json
+        - name: Surface Hub
+          href: ../log-analytics/log-analytics-surface-hubs.md?toc=%2fazure%2fmonitoring%2ftoc.json
+    - name: 관리 솔루션
+      items:
+        - name: 사용
+          items:
+            - name: 솔루션 설치 및 사용
+              href: monitoring-solutions.md
+            - name: 솔루션의 인벤토리
+              href: monitoring-solutions-inventory.md
+            - name: 대상 솔루션
+              href: monitoring-solution-targeting.md
+        - name: 생성
+          items:
+            - name: 디자인 및 빌드
+              href: monitoring-solutions-creating.md
+            - name: 솔루션 파일
+              href: monitoring-solutions-solution-file.md
+            - name: 자동화 리소스
+              href: monitoring-solutions-resources-automation.md
+            - name: 로그 검색 및 경고
+              href: monitoring-solutions-resources-searches-alerts.md
+            - name: 뷰
+              href: monitoring-solutions-resources-views.md
+            - name: 모범 사례
+              href: monitoring-solutions-best-practices.md

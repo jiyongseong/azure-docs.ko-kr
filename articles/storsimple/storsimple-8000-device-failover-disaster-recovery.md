@@ -14,13 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 05/03/2017
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
 ms.openlocfilehash: 5dc4a98bf889d38c62c76364289c2d58c14d771e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="failover-and-disaster-recovery-for-your-storsimple-8000-series-device"></a>StorSimple 8000 시리즈 장치에 대한 장애 조치 및 재해 복구
 
@@ -141,5 +139,4 @@ A.  삭제 작업에 실패하면 볼륨 컨테이너를 수동으로 삭제할 
 
 * [StorSimple 장치 비활성화 및 삭제](storsimple-8000-deactivate-and-delete-device.md)
 * [StorSimple 장치 관리자 서비스를 사용하여 StorSimple 장치 관리](storsimple-8000-manager-service-administration.md)
-
 

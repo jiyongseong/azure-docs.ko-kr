@@ -1,25 +1,21 @@
 ---
-title: "Azure Active Directory B2C: 사용자 지정 정책을 사용하여 Salesforce SAML 공급자 추가 | Microsoft Docs"
-description: "Azure Active Directory B2C 사용자 지정 정책을 만들고 관리하는 방법에 대해 알아봅니다."
+title: 'Azure Active Directory B2C: 사용자 지정 정책을 사용하여 Salesforce SAML 공급자 추가 | Microsoft Docs'
+description: Azure Active Directory B2C 사용자 지정 정책을 만들고 관리하는 방법에 대해 알아봅니다.
 services: active-directory-b2c
-documentationcenter: 
-author: parakhj
-manager: krassk
-editor: parakhj
-ms.assetid: d7f4143f-cd7c-4939-91a8-231a4104dc2c
+documentationcenter: ''
+author: davidmu1
+manager: mtillman
+editor: ''
 ms.service: active-directory-b2c
 ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: article
-ms.devlang: na
 ms.date: 06/11/2017
-ms.author: parakhj
+ms.author: davidmu
+ms.openlocfilehash: 1ccf5c58eab9df9016224a91ddda952a05457e2a
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 269cbd80fb6e861fa8588025eec70b6c6e2890d7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="azure-active-directory-b2c-sign-in-by-using-salesforce-accounts-via-saml"></a>Azure Active Directory B2C: SAML을 통해 Salesforce 계정을 사용하여 로그인
 
@@ -60,7 +56,7 @@ Azure AD B2C가 Salesforce와 통신하도록 지원하려면 Salesforce 메타�
 1. [Salesforce에 로그인](https://login.salesforce.com/)합니다. 
 2. 왼쪽 메뉴의 **설정** 아래에서 **ID**를 확장하고 **ID 공급자**를 클릭합니다.
 3. **ID 공급자 사용**을 클릭합니다.
-4. **인증서 선택** 아래에서 Salesforce가 Azure AD B2C와 통신할 때 사용할 인증서를 선택합니다. (기본 인증서를 사용할 수 있습니다.) **Save**를 클릭합니다. 
+4. **인증서 선택** 아래에서 Salesforce가 Azure AD B2C와 통신할 때 사용할 인증서를 선택합니다. (기본 인증서를 사용할 수 있습니다.) **저장**을 클릭합니다. 
 
 ### <a name="create-a-connected-app-in-salesforce"></a>Salesforce에서 연결된 앱 만들기
 
@@ -256,4 +252,3 @@ Azure Portal에서 방금 업로드한 사용자 지정 정책을 테스트하�
 ## <a name="next-steps"></a>다음 단계
 
 [AADB2CPreview@microsoft.com](mailto:AADB2CPreview@microsoft.com)에 대한 피드백을 제공합니다.
-

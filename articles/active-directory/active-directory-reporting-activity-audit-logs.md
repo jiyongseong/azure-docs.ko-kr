@@ -1,26 +1,25 @@
 ---
-title: "Azure Active Directory 포털의 감사 작업 보고서 | Microsoft Docs"
-description: "Azure Active Directory 포털의 감사 작업 보고서 소개"
+title: Azure Active Directory 포털의 감사 작업 보고서 | Microsoft Docs
+description: Azure Active Directory 포털의 감사 작업 보고서 소개
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: MarkusVi
-manager: femila
-editor: 
+manager: mtillman
+editor: ''
 ms.assetid: a1f93126-77d1-4345-ab7d-561066041161
 ms.service: active-directory
 ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 07/19/2017
+ms.date: 04/19/2018
 ms.author: markvi
 ms.reviewer: dhanyahk
+ms.openlocfilehash: 5950b8bac89a8a6c0ed7979228b8296f34e43364
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: f2d0332d815c82d7d47625e020de2e9c5099deeb
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="audit-activity-reports-in-the-azure-active-directory-portal"></a>Azure Active Directory 포털의 감사 작업 보고서 
 
@@ -30,7 +29,7 @@ Azure AD의 보고 아키텍처는 다음 구성 요소로 구성됩니다.
 
 - **활동** 
     - **로그인 활동** – 관리되는 응용 프로그램 및 사용자 로그인 활동의 사용량에 대한 정보
-    - **감사 로그** - 사용자 및 그룹 관리, 관리되는 응용 프로그램 및 디렉터리 활동에 대한 시스템 작업 정보
+    - **감사 로그** - Azure AD 내의 다양한 기능에 의해 수행된 모든 변경 내용에 대한 로그를 통한 추적 기능을 제공합니다. 감사 로그의 예로는 사용자, 앱, 그룹, 역할, 정책, 인증 등 Azure AD 내의 모든 리소스에 대한 변경 내용이 있습니다.
 - **보안** 
     - **위험한 로그인** - 위험한 로그인은 사용자 계정의 정당한 소유자가 아닌 사용자에 의해 수행된 로그인 시도에 대한 지표입니다. 자세한 내용은 위험한 로그인을 참조하세요.
     - **위험 플래그가 지정된 사용자** - 위험한 사용자는 손상되었을 수 있는 사용자 계정에 대한 표시기입니다. 자세한 내용은 위험 플래그가 지정된 사용자를 참조하세요.
@@ -130,7 +129,7 @@ Azure Active Directory의 감사 로그는 규정 준수를 위한 시스템 활
 
 **활동** 필터는 사용자가 선택한 범주와 활동 리소스 종류를 기반으로 합니다. 보려는 특정 활동을 선택하거나 모두 선택할 수 있습니다. 
 
-Graph API https://graph.windows.net/$tenantdomain/activities/auditActivityTypes?api-version=beta(여기서 $tenantdomain = 도메인 이름)를 사용하여 모든 감사 활동 목록을 가져오거나 [감사 보고서 이벤트](active-directory-reporting-audit-events.md) 문서를 참조할 수 있습니다.
+Graph API https://graph.windows.net/$tenantdomain/activities/auditActivityTypes?api-version=beta(여기서 $tenantdomain = 도메인 이름)를 사용하여 모든 감사 작업 목록을 가져오거나 [감사 보고서 이벤트](active-directory-reporting-audit-events.md) 문서를 참조할 수 있습니다.
 
 
 ## <a name="audit-logs-shortcuts"></a>감사 로그 바로 가기
@@ -183,8 +182,10 @@ Graph API https://graph.windows.net/$tenantdomain/activities/auditActivityTypes?
 ![감사 로그](./media/active-directory-reporting-activity-audit-logs/25.png "감사 로그")
 
 
+
 ## <a name="next-steps"></a>다음 단계
 
-보고 개요는 [Azure Active Directory 보고](active-directory-reporting-azure-portal.md)를 참조하세요.
+- 보고 개요는 [Azure Active Directory 보고](active-directory-reporting-azure-portal.md)를 참조하세요.
 
+- 모든 감사 활동의 전체 목록은 [Azure AD 감사 활동 참조](active-directory-reporting-activity-audit-reference.md)를 참조하세요.
 

@@ -1,11 +1,11 @@
 ---
-title: "StorSimple 8000 시리즈 솔루션 개요 | Microsoft Docs"
-description: "StorSimple 계층화, 장치, 가상 장치, 서비스, 저장소 관리에 대해 설명하고 StorSimple에서 사용하는 주요 용어를 소개합니다."
+title: StorSimple 8000 시리즈 솔루션 개요 | Microsoft Docs
+description: StorSimple 계층화, 장치, 가상 장치, 서비스, 저장소 관리에 대해 설명하고 StorSimple에서 사용하는 주요 용어를 소개합니다.
 services: storsimple
 documentationcenter: NA
 author: SharS
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 7144d218-db21-4495-88fb-e3b24bbe45d1
 ms.service: storsimple
 ms.devlang: NA
@@ -14,12 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 07/10/2017
 ms.author: v-sharos@microsoft.com
+ms.openlocfilehash: 10f4b6ec29c2d9539fa7fe61c96581755e630822
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: aa1b28301eec88ac1be160722ce3b734f4fea43f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
 # <a name="storsimple-8000-series-a-hybrid-cloud-storage-solution"></a>StorSimple 8000 시리즈: 하이브리드 클라우드 저장소 솔루션
 ## <a name="overview"></a>개요
@@ -27,7 +26,7 @@ ms.lasthandoff: 07/21/2017
 
 StorSimple은 [저장소 계층화](#automatic-storage-tiering) 를 사용하여 다양한 저장소 미디어에 저장된 데이터를 관리합니다. 현재 작업 집합은 SSD(반도체 드라이브)에 온-프레미스로 저장되고, 자주 사용하지 않는 데이터는 HDD(하드 디스크 드라이브)에 저장되고, 보관 데이터는 클라우드에 푸시됩니다. 또한 StorSimple은 중복 제거 및 압축을 사용하여 데이터가 사용하는 저장소 크기를 줄입니다. 자세한 내용은 [중복 제거 및 압축](#deduplication-and-compression)으로 이동합니다. StorSimple 8000 시리즈 설명서에서 사용되는 다른 주요 용어의 정의 및 개념은 이 문서 끝에 있는 [StorSimple 용어](#storsimple-terminology) 로 이동합니다.
 
-저장소 관리 외에도 StorSimple 데이터 보호 기능을 통해 주문형 백업 및 예약된 백업을 만든 다음 로컬로 또는 클라우드에 저장할 수 있습니다. 백업은 증분 스냅숏 형태로 생성되므로 빠르게 만들고 복원할 수 있습니다. 클라우드 스냅숏은 보조 저장소 시스템(예: 테이프 백업)을 대체하기 때문에 재해 복구 시나리오에서 매우 중요할 수 있으며, 필요한 경우 데이터 센터 또는 대체 사이트에 데이터를 복원할 수 있게 해줍니다.
+저장소 관리 외에도 StorSimple 데이터 보호 기능을 통해 주문형 백업 및 예약된 백업을 만든 다음 로컬로 또는 클라우드에 저장할 수 있습니다. Backup은 증분 스냅숏 형태로 생성되므로 빠르게 만들고 복원할 수 있습니다. 클라우드 스냅숏은 보조 저장소 시스템(예: 테이프 백업)을 대체하기 때문에 재해 복구 시나리오에서 매우 중요할 수 있으며, 필요한 경우 데이터 센터 또는 대체 사이트에 데이터를 복원할 수 있게 해줍니다.
 
 ![동영상 아이콘](./media/storsimple-overview/video_icon.png) Microsoft Azure StorSimple의 간단한 소개에 대한 동영상을 봅니다.
 
@@ -42,10 +41,10 @@ StorSimple은 [저장소 계층화](#automatic-storage-tiering) 를 사용하여
 | 저장소 비용 감소 |현재 요구에 맞게 충분한 로컬 또는 클라우드 저장소를 할당하고 필요한 경우 클라우드 저장소를 확장합니다. 동일한 데이터의 중복 버전을 제거하고(중복 제거) 압축을 사용하여 추가로 저장소 요구 사항 및 비용을 줄입니다. |
 | 단순화된 저장소 관리 |온-프레미스, 원격 서버와 클라우드에 저장된 데이터를 구성 및 관리하는 시스템 관리 도구를 제공합니다. 또한 Microsoft Management Console(MMC) 스냅인에서 백업 및 복원 기능을 관리할 수 있습니다.|
 | 향상된 재해 복구 및 규정 준수 |복구 시간을 확장할 필요가 없습니다. 대신, 필요할 때마다 데이터를 복원합니다. 즉, 정상 작업 중단을 최소화하면서 계속할 수 있습니다. 또한 백업 일정 및 데이터 보존 기간을 지정하는 정책을 구성할 수 있습니다. |
-| 데이터 이동성 |복구 및 마이그레이션을 위해 다른 사이트에서 Microsoft Azure 클라우드 서비스에 업로드된 데이터에 액세스할 수 있습니다. 또한 Microsoft Azure에서 실행 중인 가상 컴퓨터(VM)에서 StorSimple Cloud Appliance를 구성하도록 StorSimple을 사용할 수 있습니다. VM을 가상 장치 사용하여 테스트 또는 복구 목적으로 저장된 데이터에 액세스할 수 있습니다. |
+| 데이터 이동성 |복구 및 마이그레이션을 위해 다른 사이트에서 Microsoft Azure 클라우드 서비스에 업로드된 데이터에 액세스할 수 있습니다. 또한 Microsoft Azure에서 실행 중인 가상 머신(VM)에서 StorSimple Cloud Appliance를 구성하도록 StorSimple을 사용할 수 있습니다. VM을 가상 장치 사용하여 테스트 또는 복구 목적으로 저장된 데이터에 액세스할 수 있습니다. |
 | 비즈니스 연속성 |StorSimple 5000~7000 시리즈 사용자가 StorSimple 8000 시리즈 장치에 해당 데이터를 마이그레이션할 수 있습니다. |
 | Azure Government 포털의 가용성 |StorSimple은 Azure Government 포털에서 사용 가능합니다. 자세한 내용은 [정부 포털에서 온-프레미스 StorSimple 장치 배포](storsimple-8000-deployment-walkthrough-gov-u2.md)를 참조하세요. |
-| 데이터 보호 및 가용성 |StorSimple 8000 시리즈는 LRS(로컬 중복 저장소) 및 GRS(지역 중복 저장소) 외에도 ZRS(영역 중복 저장소)를 지원합니다. ZRS 세부 정보는 [Azure 저장소 중복 옵션에 대한 기사](https://azure.microsoft.com/documentation/articles/storage-redundancy/) 를 참조하세요. |
+| 데이터 보호 및 가용성 |StorSimple 8000 시리즈는 LRS(로컬 중복 저장소) 및 GRS(지역 중복 저장소) 외에도 ZRS(영역 중복 저장소)를 지원합니다. ZRS 세부 정보는 [Azure Storage 중복 옵션에 대한 기사](https://azure.microsoft.com/documentation/articles/storage-redundancy/) 를 참조하세요. |
 | 중요한 응용 프로그램에 대한 지원 |StorSimple을 사용하면 적절한 로컬 고정 볼륨을 식별할 수 있습니다. 따라서 중요한 응용 프로그램에 필요한 데이터를 클라우드에 계층화하지 않아도 됩니다. 로컬로 고정된 볼륨은 클라우드 대기 시간 또는 연결 문제가 적용되지 않습니다. 로컬 고정 볼륨에 대한 자세한 내용은 [StorSimple 장치 관리자 서비스를 사용하여 볼륨 관리](storsimple-8000-manage-volumes-u2.md)를 참조하세요. |
 | 짧은 대기 시간 및 고성능 |Azure Premium Storage의 고성능 및 낮은 대기 시간 기능을 활용하는 클라우드 어플라이언스를 만들 수 있습니다. StorSimple Premium Cloud Appliance에 대한 자세한 내용은 [Azure에서 StorSimple Cloud Appliance 배포 및 관리](storsimple-8000-cloud-appliance-u2.md)로 이동합니다. |
 
@@ -84,15 +83,15 @@ StorSimple 장치에 클러스터링 및 자동 장애 조치에 대한 지원 �
 자세한 내용은 [StorSimple 하드웨어 구성 요소 및 상태](storsimple-8000-monitor-hardware-status.md)로 이동합니다.
 
 ## <a name="storsimple-cloud-appliance"></a>StorSimple Cloud Appliance
-StorSimple을 사용하여 물리적 하이브리드 저장소 장치의 아키텍처 및 기능을 복제하는 클라우드 어플라이언스를 만들 수 있습니다. StorSimple Cloud Appliance(StorSimple 가상 어플라이언스라고도 함)는 Azure 가상 컴퓨터의 단일 노드에서 실행됩니다. (클라우드 어플라이언스는 Azure 가상 컴퓨터에만 만들 수 있습니다. StorSimple 장치 또는 온-프레미스 서버에 만들 수 없습니다.)
+StorSimple을 사용하여 물리적 하이브리드 저장소 장치의 아키텍처 및 기능을 복제하는 클라우드 어플라이언스를 만들 수 있습니다. StorSimple Cloud Appliance(StorSimple 가상 어플라이언스라고도 함)는 Azure 가상 머신의 단일 노드에서 실행됩니다. (클라우드 어플라이언스는 Azure 가상 머신에만 만들 수 있습니다. StorSimple 장치 또는 온-프레미스 서버에 만들 수 없습니다.)
 
 클라우드 어플라이언스에는 다음과 같은 기능이 있습니다.
 
-* 실제 기기처럼 동작하고 클라우드에서 가상 컴퓨터에 대한 iSCSI 인터페이스를 제공할 수 있습니다.
+* 실제 기기처럼 동작하고 클라우드에서 가상 머신에 대한 iSCSI 인터페이스를 제공할 수 있습니다.
 * 클라우드에서 개수에 제한 없이 클라우드 어플라이언스를 만들고 필요에 따라 설정 및 해제할 수 있습니다.
 * 재해 복구, 개발 및 테스트 시나리오에서 온-프레미스 환경을 시뮬레이션할 수 있고 백업에서 항목 수준의 검색에 도움이 될 수 있습니다.
 
-StorSimple Cloud Appliance는 8010 장치(이전의 1100 모델)와 8020 장치라는 두 가지 모델에서 사용할 수 있습니다. 8010 장치의 최대 용량은 30TB입니다. Azure 프리미엄 저장소를 활용하는 8020 장치의 최대 용량은 64TB입니다. (로컬 계층에서 Azure 프리미엄 저장소는 SSD에 데이터를 저장하는 반면 표준 저장소는 HDD에 데이터를 저장합니다.) 프리미엄 저장소를 사용하려면 Azure 프리미엄 저장소 계정이 있어야 합니다. Premium Storage에 대한 자세한 내용은 [Premium Storage: Azure 가상 컴퓨터 워크로드를 위한 고성능 저장소](../storage/storage-premium-storage.md)로 이동합니다.
+StorSimple Cloud Appliance는 8010 장치(이전의 1100 모델)와 8020 장치라는 두 가지 모델에서 사용할 수 있습니다. 8010 장치의 최대 용량은 30TB입니다. Azure 프리미엄 저장소를 활용하는 8020 장치의 최대 용량은 64TB입니다. (로컬 계층에서 Azure 프리미엄 저장소는 SSD에 데이터를 저장하는 반면 표준 저장소는 HDD에 데이터를 저장합니다.) 프리미엄 저장소를 사용하려면 Azure 프리미엄 저장소 계정이 있어야 합니다. Premium Storage에 대한 자세한 내용은 [Premium Storage: Azure Virtual Machine 워크로드를 위한 고성능 저장소](../virtual-machines/windows/premium-storage.md)로 이동합니다.
 
 StorSimple Cloud Appliance에 대한 자세한 내용은 [Azure에서 StorSimple Cloud Appliance 배포 및 관리](storsimple-8000-cloud-appliance-u2.md)로 이동합니다.
 
@@ -136,14 +135,14 @@ StorSimple 스냅숏 관리자는 로컬 및 클라우드 데이터의 일관된
 * 데이터를 미리 결정된 일정에 따라 백업하고 지정된 위치(로컬 또는 클라우드에)에 저장되도록 백업 정책을 관리합니다.
 * 볼륨 및 개별 파일을 복원합니다.
 
-백업은 스냅숏으로 캡처되며, 마지막 스냅숏 백업 이후 변경 내용만 기록하고 전체 백업보다 훨씬 적은 저장소 공간을 필요로 합니다. 백업 일정을 만들 수도 있고 필요에 따라 즉시 백업할 수 있습니다. 또한 저장될 스냅숏의 크기를 제어하는 보존 정책을 설정하려면 StorSimple 스냅숏 관리자를 사용할 수 있습니다. 이후에 백업에서 데이터를 복원해야 하는 경우, StorSimple 스냅숏 관리자는 로컬 또는 클라우드 스냅숏의 카탈로그에서 선택하게 할 수 있습니다. 
+Backup은 스냅숏으로 캡처되며, 마지막 스냅숏 백업 이후 변경 내용만 기록하고 전체 백업보다 훨씬 적은 저장소 공간을 필요로 합니다. 백업 일정을 만들 수도 있고 필요에 따라 즉시 백업할 수 있습니다. 또한 저장될 스냅숏의 크기를 제어하는 보존 정책을 설정하려면 StorSimple 스냅숏 관리자를 사용할 수 있습니다. 이후에 백업에서 데이터를 복원해야 하는 경우, StorSimple 스냅숏 관리자는 로컬 또는 클라우드 스냅숏의 카탈로그에서 선택하게 할 수 있습니다. 
 
 재해가 발생한 경우 또는 다른 이유로 데이터를 복원해야 하는 경우, StorSimple 스냅숏 관리자는 필요할 때 증분 방식으로 복원합니다. 파일을 복원하거나, 장비를 교체 하거나 다른 사이트로 이동하는 동안 시스템 전체를 종료하지 않아도 됩니다.
 
 자세한 내용은 [StorSimple 스냅숏 관리자란?](storsimple-what-is-snapshot-manager.md)
 
 ## <a name="storsimple-adapter-for-sharepoint"></a>SharePoint용 StorSimple 어댑터
-Microsoft Azure StorSimple은 StorSimple 저장소 및 데이터 보호 기능을 SharePoint 서버 팜으로 투명하게 확장하는 선택적 구성 요소인, SharePoint용 StorSimple 어댑터를 포함합니다. 어댑터는 Blob를 Microsoft Azure StorSimple 시스템에서 백업한 서버로 이동할 수 있도록 원격 Blob 저장소(RBS) 공급자 및 SQL Server RBS 기능과 함께 작동합니다. Microsoft Azure StorSimple은 사용량에 따라 BLOB 데이터를 로컬 또는 클라우드에 저장합니다.
+Microsoft Azure StorSimple은 StorSimple 저장소 및 데이터 보호 기능을 SharePoint 서버 팜으로 투명하게 확장하는 선택적 구성 요소인, SharePoint용 StorSimple 어댑터를 포함합니다. 어댑터는 Blob를 Microsoft Azure StorSimple 시스템에서 백업한 서버로 이동할 수 있도록 원격 Blob Storage(RBS) 공급자 및 SQL Server RBS 기능과 함께 작동합니다. Microsoft Azure StorSimple은 사용량에 따라 BLOB 데이터를 로컬 또는 클라우드에 저장합니다.
 
 SharePoint용 StorSimple 어댑터는 SharePoint 중앙 관리 포털 내에서 관리됩니다. 따라서 SharePoint 관리가 중앙 집중화된 상태로 유지되며 모든 저장소는 SharePoint 팜에 있는 것으로 나타납니다.
 
@@ -211,7 +210,7 @@ Microsoft Azure StorSimple은 중복 제거 및 데이터 압축을 사용하여
 | 공동 작업 |분산 파일 공유 |예 | |모든 버전 |
 | 공동 작업 |SharePoint |예* |로컬 고정 볼륨에 대해서만 지원됩니다. |업데이트 2 이상 |
 | 보관 |단순 파일 보관 |예 | |모든 버전 |
-| 가상화 |가상 컴퓨터 |예* |로컬 고정 볼륨에 대해서만 지원됩니다. |업데이트 2 이상 |
+| 가상화 |가상 머신 |예* |로컬 고정 볼륨에 대해서만 지원됩니다. |업데이트 2 이상 |
 | 데이터베이스 |SQL |예* |로컬 고정 볼륨에 대해서만 지원됩니다. |업데이트 2 이상 |
 | 비디오 감시 |비디오 감시 |예* |StorSimple 장치가 이 작업에만 전용으로 사용될 때 지원됩니다. |업데이트 2 이상 |
 | Backup |기본 대상 백업 |예* |StorSimple 장치가 이 작업에만 전용으로 사용될 때 지원됩니다. |업데이트 3 이상 |
@@ -246,9 +245,9 @@ Microsoft Azure StorSimple은 중복 제거 및 데이터 압축을 사용하여
 
 | 워크로드 유형 | StorSimple에서 사용되는 소프트웨어 | 지원되는 버전|솔루션 가이드에 연결| 
 | --- | --- | --- | --- |
-| 백업 대상 |Veeam |Veeam v 9 이상 |[Veaam에서 백업 대상인 StorSimple](storsimple-configure-backup-target-veeam.md)|
-| 백업 대상 |Veritas Backup Exec |Backup Exec 16 이상 |[Backup Exec에서 백업 대상으로 StorSimple 구성](storsimple-configure-backup-target-using-backup-exec.md)|
-| 백업 대상 |Veritas NetBackup |NetBackup 7.7.x 이상  |[NetBackup에서 백업 대상인 StorSimple](storsimple-configure-backuptarget-netbackup.md)|
+| Backup 대상 |Veeam |Veeam v 9 이상 |[Veaam에서 백업 대상인 StorSimple](storsimple-configure-backup-target-veeam.md)|
+| Backup 대상 |Veritas Backup Exec |Backup Exec 16 이상 |[Backup Exec에서 백업 대상으로 StorSimple 구성](storsimple-configure-backup-target-using-backup-exec.md)|
+| Backup 대상 |Veritas NetBackup |NetBackup 7.7.x 이상  |[NetBackup에서 백업 대상인 StorSimple](storsimple-configure-backuptarget-netbackup.md)|
 | 전역 파일 공유 <br></br> 공동 작업 |Talon  |[Talon을 사용하는 StorSimple](https://www.talonstorage.com/products/fast-deployment-azure-storsimple) | |
 
 ## <a name="storsimple-terminology"></a>StorSimple 용어
@@ -261,7 +260,7 @@ Microsoft Azure StorSimple 솔루션을 배포하기 전에 다음 용어와 정
 | AES-256 |클라우드에 출입할 때 데이터를 암호화하기 위한 256비트 AES(Advanced Encryption Standard) 알고리즘입니다. |
 | 할당 단위 크기(AUS) |Windows 파일 시스템에 파일을 저장하기 위해 할당될 수 있는 가장 작은 크기의 디스크 공간입니다. 파일 크기가 클러스터 크기의 짝수 배수가 아닌 경우 파일을 저장하기 위해 클러스터 크기의 다음 배수까지 추가 공간을 사용해야 하므로 공간 손실 및 하드 디스크 조각화가 발생합니다. <br>Azure StorSimple 볼륨에 대한 권장 AUS는 64KB로, 중복 제거 알고리즘에서 효과적으로 작동하기 때문입니다. |
 | 자동화된 저장소 계층화 |사용 빈도가 낮은 데이터를 SSD에서 HDD로 이동한 후 다시 클라우드의 한 계층으로 자동으로 이동하고 중앙 사용자 인터페이스에서 모든 저장소를 관리할 수 있도록 합니다. |
-| 백업 카탈로그 |일반적으로 사용된 응용 프로그램 유형과 관련된 백업 컬렉션입니다. 이 컬렉션은 StorSimple 장치 관리자 서비스 UI의 백업 카탈로그 블레이드에 표시됩니다. |
+| 백업 카탈로그 |일반적으로 사용된 응용 프로그램 유형과 관련된 백업 컬렉션입니다. 이 컬렉션은 StorSimple 장치 관리자 서비스 UI의 Backup 카탈로그 블레이드에 표시됩니다. |
 | 백업 카탈로그 파일 |StorSimple 스냅숏 관리자의 백업 데이터베이스에 현재 저장되어 있는 사용 가능한 스냅숏 목록을 포함하는 파일입니다. |
 | 백업 정책 |미리 정의된 일정에 따라 백업을 만들 수 있는 선택한 볼륨, 백업 유형 및 시간표입니다. |
 | Binary Large Object(BLOB) |데이터베이스 관리 시스템에서 단일 엔터티로 저장되는 이진 데이터 컬렉션입니다. 이진 실행 코드가 BLOB으로 저장되는 경우도 있지만 BLOB은 일반적으로 이미지, 오디오 또는 기타 멀티미디어 개체입니다. |
@@ -312,5 +311,4 @@ Microsoft Azure StorSimple 솔루션을 배포하기 전에 다음 용어와 정
 
 ## <a name="next-steps"></a>다음 단계
 [StorSimple 보안](storsimple-8000-security.md)에 대해 알아봅니다.
-
 

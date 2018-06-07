@@ -12,26 +12,26 @@ ms.devlang: dotnet
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 05/03/2017
+ms.date: 12/19/2017
 ms.author: sethm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 7c4d5e161c9f7af33609be53e7b82f156bb0e33f
-ms.openlocfilehash: 41435316adaee5c66de503571184fce8937d38ee
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/04/2017
-
-
+ms.openlocfilehash: a51d4552df2643a25ce492b8525b9aa7fa36e21c
+ms.sourcegitcommit: f46cbcff710f590aebe437c6dd459452ddf0af09
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/20/2017
 ---
-
 # <a name="event-hubs-net-framework-api-overview"></a>Event Hubs .NET Framework API 개요
-이 문서에서는 핵심 Event Hubs .NET Framework 클라이언트 API 일부를 요약해서 설명합니다. 관리와 런타임 API 등 두 가지 범주가 있습니다. 런타임 API는 메시지를 주고받는 데 필요한 모든 작업으로 구성됩니다. 관리 작업을 사용하면 엔터티를 만들고 업데이트 및 삭제하여 이벤트 허브 엔터티 상태를 관리할 수 있습니다.
 
-모니터링 시나리오는 관리 및 런타임 모두에 사용됩니다. .NET API에 대한 자세한 참조 설명서는 [Service Bus .NET](/dotnet/api) 및 [EventProcessorHost API](/dotnet/api) 참조를 참조하세요.
+이 문서에서는 핵심 Event Hubs .NET Framework 클라이언트 API 일부를 요약해서 설명합니다. 관리와 런타임 API 등 두 가지 범주가 있습니다. 런타임 API는 메시지를 주고받는 데 필요한 모든 작업으로 구성됩니다. 관리 작업을 사용하면 엔터티를 만들고 업데이트 및 삭제하여 Event Hubs 엔터티 상태를 관리할 수 있습니다.
+
+[모니터링 시나리오](event-hubs-metrics-azure-monitor.md)는 관리 및 런타임 모두에 사용됩니다. .NET API에 대한 자세한 참조 설명서는 [Service Bus .NET](/dotnet/api/microsoft.servicebus.messaging) 및 [EventProcessorHost API](/dotnet/api/microsoft.azure.eventhubs.processor) 참조를 참조하세요.
 
 ## <a name="management-apis"></a>관리 API
-다음 관리 작업을 수행하려면 이벤트 허브 네임스페이스에 대한 **관리** 권한이 있어야 합니다.
+
+다음 관리 작업을 수행하려면 Event Hubs 네임스페이스에 대한 **관리** 권한이 있어야 합니다.
 
 ### <a name="create"></a>생성
+
 ```csharp
 // Create the event hub
 var ehd = new EventHubDescription(eventHubName);
@@ -39,7 +39,8 @@ ehd.PartitionCount = SampleManager.numPartitions;
 await namespaceManager.CreateEventHubAsync(ehd);
 ```
 
-### <a name="update"></a>업데이트
+### <a name="update"></a>주 지역에서
+
 ```csharp
 var ehd = await namespaceManager.GetEventHubAsync(eventHubName);
 
@@ -52,18 +53,21 @@ await namespaceManager.UpdateEventHubAsync(ehd);
 ```
 
 ### <a name="delete"></a>삭제
+
 ```csharp
-await namespaceManager.DeleteEventHubAsync("Event Hub name");
+await namespaceManager.DeleteEventHubAsync("event hub name");
 ```
 
 ## <a name="run-time-apis"></a>런타임 API
 ### <a name="create-publisher"></a>게시자 만들기
+
 ```csharp
 // EventHubClient model (uses implicit factory instance, so all links on same connection)
-var eventHubClient = EventHubClient.Create("Event Hub name");
+var eventHubClient = EventHubClient.Create("event hub name");
 ```
 
 ### <a name="publish-message"></a>메시지 게시
+
 ```csharp
 // Create the device/temperature metric
 var info = new MetricEvent() { DeviceId = random.Next(SampleManager.NumDevices), Temperature = random.Next(100) };
@@ -82,6 +86,7 @@ await client.SendAsync(data);
 ```
 
 ### <a name="create-consumer"></a>소비자 만들기
+
 ```csharp
 // Create the Event Hubs client
 var eventHubClient = EventHubClient.Create(EventHubName);
@@ -100,6 +105,7 @@ var consumer = await defaultConsumerGroup.CreateReceiverAsync(partitionId: index
 ```
 
 ### <a name="consume-message"></a>메시지 사용
+
 ```csharp
 var message = await consumer.ReceiveAsync();
 
@@ -112,6 +118,7 @@ msg = UnicodeEncoding.UTF8.GetString(info);
 ```
 
 ## <a name="event-processor-host-apis"></a>이벤트 프로세서 호스트 API
+
 이러한 API는 사용 가능한 작업자에 걸쳐 파티션을 분산하여 사용할 수 없게 되는 작업자 프로세스에 복구 성능을 제공합니다.
 
 ```csharp
@@ -172,13 +179,12 @@ public class SimpleEventProcessor : IEventProcessor
 ```
 
 ## <a name="next-steps"></a>다음 단계
-이벤트 허브 시나리오에 대한 자세한 내용은 다음 링크를 방문하십시오.
+Event Hubs 시나리오에 대한 자세한 내용은 다음 링크를 방문하십시오.
 
-* [Azure 이벤트 허브 정의](event-hubs-what-is-event-hubs.md)
-* [이벤트 허브 프로그래밍 가이드](event-hubs-programming-guide.md)
+* [Azure Event Hubs 정의](event-hubs-what-is-event-hubs.md)
+* [Event Hubs 프로그래밍 가이드](event-hubs-programming-guide.md)
 
 .NET API 참조는 다음과 같습니다.
 
 * [Microsoft.ServiceBus.Messaging](/dotnet/api/microsoft.servicebus.messaging)
 * [Microsoft.Azure.EventHubs.EventProcessorHost](/dotnet/api/microsoft.azure.eventhubs.processor.eventprocessorhost)
-

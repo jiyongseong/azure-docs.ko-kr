@@ -1,34 +1,33 @@
 ---
-title: "Azure Resource Manager 템플릿을 사용하여 Azure Service Bus 리소스 만들기 | Microsoft Docs"
-description: "Azure Resource Manager 템플릿을 사용하여 자동으로 서비스 버스 리소스 만들기"
+title: Resource Manager 템플릿을 사용하여 Azure Service Bus 리소스 만들기 | Microsoft Docs
+description: Azure Resource Manager 템플릿을 사용하여 자동으로 Service Bus 리소스 만들기
 services: service-bus-messaging
 documentationcenter: .net
 author: sethmanheim
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 24f6a207-0fa4-49cf-8a58-963f9e2fd655
 ms.service: service-bus-messaging
 ms.devlang: tbd
 ms.topic: article
 ms.tgt_pltfrm: dotnet
 ms.workload: na
-ms.date: 08/07/2017
+ms.date: 04/11/2018
 ms.author: sethm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2c33e75a7d2cb28f8dc6b314e663a530b7b7fdb4
-ms.openlocfilehash: 297c01ec31b584b354fbd751a9c3c86a379ac63e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/21/2017
-
+ms.openlocfilehash: c8d84de608ccf3d9a9293c20c07c10a00b73da68
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
-# <a name="create-service-bus-resources-using-azure-resource-manager-templates"></a>Azure Resource Manager 템플릿을 사용하여 서비스 버스 리소스 만들기
+# <a name="create-service-bus-resources-using-azure-resource-manager-templates"></a>Azure Resource Manager 템플릿을 사용하여 Service Bus 리소스 만들기
 
 이 문서에서는 Azure Resource Manager 템플릿, PowerShell 및 Service Bus 리소스 공급자를 사용하여 Service Bus 리소스를 만들어 배포하는 방법을 설명합니다.
 
-Azure Resource Manager 템플릿을 통해 솔루션에 사용할 리소스를 정의하고, 여러 환경의 값을 입력하는 데 사용할 수 있는 변수 및 매개 변수를 지정합니다. 템플릿은 배포에 대한 값을 생성하는 데 사용할 수 있는 식과 JSON으로 구성됩니다. Azure Resource Manager 템플릿 작성에 대한 자세한 내용과 템플릿 형식에 대한 논의는 [Azure Resource Manager 템플릿의 구조 및 구문](../azure-resource-manager/resource-group-authoring-templates.md)을 참조하세요.
+Azure Resource Manager 템플릿을 통해 솔루션에 사용할 리소스를 정의하고, 여러 환경의 값을 입력하는 데 사용할 수 있는 변수 및 매개 변수를 지정합니다. 템플릿은 JSON에 작성되고 배포에 대한 값을 생성하는 데 사용할 수 있는 식으로 구성됩니다. Azure Resource Manager 템플릿 작성에 대한 자세한 내용과 템플릿 형식에 대한 논의는 [Azure Resource Manager 템플릿의 구조 및 구문](../azure-resource-manager/resource-group-authoring-templates.md)을 참조하세요.
 
 > [!NOTE]
-> 이 문서의 예제에서는 Azure Resource Manager를 사용하여 서비스 버스 네임스페이스와 메시징 엔터티(큐)를 만드는 방법을 보여 줍니다. 다른 템플릿 예제는 [Azure 빠른 시작 템플릿 갤러리][Azure Quickstart Templates gallery]를 방문하고 "Service Bus"를 검색하세요.
+> 이 문서의 예제에서는 Azure Resource Manager를 사용하여 Service Bus 네임스페이스와 메시징 엔터티(큐)를 만드는 방법을 보여 줍니다. 다른 템플릿 예제는 [Azure 퀵 스타트 템플릿 갤러리][Azure Quickstart Templates gallery]를 방문하여 **Service Bus**를 검색하세요.
 >
 >
 
@@ -36,15 +35,15 @@ Azure Resource Manager 템플릿을 통해 솔루션에 사용할 리소스를 �
 
 이러한 Service Bus Azure Resource Manager 템플릿은 다운로드하여 배포할 수 있습니다. 각각에 대한 자세한 내용은 GitHub의 템플릿에 대한 링크가 포함된 다음 링크를 클릭하세요.
 
-* [서비스 버스 네임스페이스 만들기](service-bus-resource-manager-namespace.md)
-* [큐가 있는 서비스 버스 네임스페이스 만들기](service-bus-resource-manager-namespace-queue.md)
-* [토픽 및 구독이 있는 서비스 버스 네임스페이스 만들기](service-bus-resource-manager-namespace-topic.md)
-* [큐 및 권한 부여 규칙이 있는 서비스 버스 네임스페이스 만들기](service-bus-resource-manager-namespace-auth-rule.md)
+* [Service Bus 네임스페이스 만들기](service-bus-resource-manager-namespace.md)
+* [큐가 있는 Service Bus 네임스페이스 만들기](service-bus-resource-manager-namespace-queue.md)
+* [토픽 및 구독이 있는 Service Bus 네임스페이스 만들기](service-bus-resource-manager-namespace-topic.md)
+* [큐 및 권한 부여 규칙이 있는 Service Bus 네임스페이스 만들기](service-bus-resource-manager-namespace-auth-rule.md)
 * [토픽, 구독 및 규칙이 있는 Service Bus 네임스페이스 만들기](service-bus-resource-manager-namespace-topic-with-rule.md)
 
 ## <a name="deploy-with-powershell"></a>PowerShell을 사용하여 배포 
 
-다음 절차에서는 **표준** 계층 Service Bus 네임스페이스와, 네임스페이스 안의 큐를 만드는 Azure Resource Manager 템플릿을 PowerShell을 사용하여 배포하는 방법을 설명합니다. 이 예제는 [큐가 있는 Service Bus 네임스페이스 만들기](https://github.com/Azure/azure-quickstart-templates/tree/master/201-servicebus-create-queue) 템플릿을 기초로 합니다. 대략적인 워크플로 다음과 같습니다.
+다음 절차에서는 표준 계층 Service Bus 네임스페이스와, 네임스페이스 안의 큐를 만드는 Azure Resource Manager 템플릿을 PowerShell을 사용하여 배포하는 방법을 설명합니다. 이 예제는 [큐가 있는 Service Bus 네임스페이스 만들기](https://github.com/Azure/azure-quickstart-templates/tree/master/201-servicebus-create-queue) 템플릿을 기초로 합니다. 대략적인 워크플로 다음과 같습니다.
 
 1. PowerShell을 설치합니다.
 2. 템플릿 및 매개 변수 파일(옵션)을 만듭니다. 
@@ -62,71 +61,76 @@ Azure Resource Manager 배포 템플릿에 대한 모든 내용은 [Azure Resour
 
 ### <a name="create-a-template"></a>템플릿 만들기
 
-GitHub에서 [201-servicebus-create-queue](https://github.com/Azure/azure-quickstart-templates/blob/master/201-servicebus-create-queue/azuredeploy.json) 템플릿을 복제 또는 복사합니다.
+리포지토리를 복제하거나 GitHub에서 [201-servicebus-create-queue](https://github.com/Azure/azure-quickstart-templates/blob/master/201-servicebus-create-queue/azuredeploy.json) 템플릿을 복사합니다.
 
 ```json
 {
-    "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "serviceBusNamespaceName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the Service Bus namespace"
-            }
-        },
-        "serviceBusQueueName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the Queue"
-            }
-        },
-        "serviceBusApiVersion": {
-            "type": "string",
-            "defaultValue": "2015-08-01",
-            "metadata": {
-                "description": "Service Bus ApiVersion used by the template"
-            }
-        }
+  "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "serviceBusNamespaceName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the Service Bus namespace"
+      }
     },
-    "variables": {
-        "location": "[resourceGroup().location]",
-        "sbVersion": "[parameters('serviceBusApiVersion')]",
-        "defaultSASKeyName": "RootManageSharedAccessKey",
-        "authRuleResourceId": "[resourceId('Microsoft.ServiceBus/namespaces/authorizationRules', parameters('serviceBusNamespaceName'), variables('defaultSASKeyName'))]"
-    },
-    "resources": [{
-        "apiVersion": "[variables('sbVersion')]",
-        "name": "[parameters('serviceBusNamespaceName')]",
-        "type": "Microsoft.ServiceBus/Namespaces",
-        "location": "[variables('location')]",
-        "kind": "Messaging",
-        "sku": {
-            "name": "StandardSku",
-            "tier": "Standard"
-        },
-        "resources": [{
-            "apiVersion": "[variables('sbVersion')]",
-            "name": "[parameters('serviceBusQueueName')]",
-            "type": "Queues",
-            "dependsOn": [
-                "[concat('Microsoft.ServiceBus/namespaces/', parameters('serviceBusNamespaceName'))]"
-            ],
-            "properties": {
-                "path": "[parameters('serviceBusQueueName')]"
-            }
-        }]
-    }],
-    "outputs": {
-        "NamespaceConnectionString": {
-            "type": "string",
-            "value": "[listkeys(variables('authRuleResourceId'), variables('sbVersion')).primaryConnectionString]"
-        },
-        "SharedAccessPolicyPrimaryKey": {
-            "type": "string",
-            "value": "[listkeys(variables('authRuleResourceId'), variables('sbVersion')).primaryKey]"
-        }
+    "serviceBusQueueName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the Queue"
+      }
     }
+  },
+  "variables": {
+    "defaultSASKeyName": "RootManageSharedAccessKey",
+    "authRuleResourceId": "[resourceId('Microsoft.ServiceBus/namespaces/authorizationRules', parameters('serviceBusNamespaceName'), variables('defaultSASKeyName'))]",
+    "sbVersion": "2017-04-01"
+  },
+  "resources": [
+    {
+      "apiVersion": "2017-04-01",
+      "name": "[parameters('serviceBusNamespaceName')]",
+      "type": "Microsoft.ServiceBus/Namespaces",
+      "location": "[resourceGroup().location]",
+      "sku": {
+        "name": "Standard"
+      },
+      "properties": {},
+      "resources": [
+        {
+          "apiVersion": "2017-04-01",
+          "name": "[parameters('serviceBusQueueName')]",
+          "type": "Queues",
+          "dependsOn": [
+            "[concat('Microsoft.ServiceBus/namespaces/', parameters('serviceBusNamespaceName'))]"
+          ],
+          "properties": {
+            "lockDuration": "PT5M",
+            "maxSizeInMegabytes": "1024",
+            "requiresDuplicateDetection": "false",
+            "requiresSession": "false",
+            "defaultMessageTimeToLive": "P10675199DT2H48M5.4775807S",
+            "deadLetteringOnMessageExpiration": "false",
+            "duplicateDetectionHistoryTimeWindow": "PT10M",
+            "maxDeliveryCount": "10",
+            "autoDeleteOnIdle": "P10675199DT2H48M5.4775807S",
+            "enablePartitioning": "false",
+            "enableExpress": "false"
+          }
+        }
+      ]
+    }
+  ],
+  "outputs": {
+    "NamespaceConnectionString": {
+      "type": "string",
+      "value": "[listkeys(variables('authRuleResourceId'), variables('sbVersion')).primaryConnectionString]"
+    },
+    "SharedAccessPolicyPrimaryKey": {
+      "type": "string",
+      "value": "[listkeys(variables('authRuleResourceId'), variables('sbVersion')).primaryKey]"
+    }
+  }
 }
 ```
 
@@ -146,20 +150,20 @@ GitHub에서 [201-servicebus-create-queue](https://github.com/Azure/azure-quicks
             "value": "<myQueueName>"
         },
         "serviceBusApiVersion": {
-            "value": "2015-08-01"
+            "value": "2017-04-01"
         }
     }
 }
 ```
 
-자세한 내용은 [매개 변수](../azure-resource-manager/resource-group-template-deploy.md#parameter-files) 항목을 참조하세요.
+자세한 내용은 [매개 변수](../azure-resource-manager/resource-group-template-deploy.md#parameter-files) 문서를 참조하세요.
 
 ### <a name="log-in-to-azure-and-set-the-azure-subscription"></a>Azure에 로그인하고 Azure 구독 설정
 
 PowerShell 프롬프트에서 다음 명령을 실행합니다.
 
 ```powershell
-Login-AzureRmAccount
+Connect-AzureRmAccount
 ```
 
 Azure 계정에 로그온하라는 메시지가 표시됩니다. 로그온한 후 다음 명령을 실행하여 사용 가능한 구독을 확인합니다.
@@ -176,7 +180,7 @@ Set-AzureRmContext -SubscriptionID <YourSubscriptionId>
 
 ### <a name="set-the-resource-group"></a>리소스 그룹 설정
 
-기존 리소스 그룹이 없는 경우 **New-AzureRmResourceGroup ** 명령을 사용하여 새 리소스 그룹을 만듭니다. 사용할 리소스 그룹의 이름과 위치를 입력합니다. 예:
+기존 리소스 그룹이 없는 경우 **New-AzureRmResourceGroup ** 명령을 사용하여 새 리소스 그룹을 만듭니다. 사용할 리소스 그룹의 이름과 위치를 입력합니다. 예: 
 
 ```powershell
 New-AzureRmResourceGroup -Name MyDemoRG -Location "West US"
@@ -235,7 +239,7 @@ New-AzureRmResourceGroupDeployment -Name MyDemoDeployment -Mode Complete -Resour
 DeploymentName    : MyDemoDeployment
 ResourceGroupName : MyDemoRG
 ProvisioningState : Succeeded
-Timestamp         : 4/19/2016 10:38:30 PM
+Timestamp         : 4/19/2017 10:38:30 PM
 Mode              : Incremental
 TemplateLink      :
 Parameters        :
@@ -243,7 +247,7 @@ Parameters        :
                     ===============  =========================  ==========
                     serviceBusNamespaceName  String             <namespaceName>
                     serviceBusQueueName  String                 <queueName>
-                    serviceBusApiVersion  String                2015-08-01
+                    serviceBusApiVersion  String                2017-04-01
 
 ```
 
@@ -257,4 +261,3 @@ Parameters        :
 [Azure Resource Manager overview]: ../azure-resource-manager/resource-group-overview.md
 [Deploy resources with Azure Resource Manager templates]: ../azure-resource-manager/resource-group-template-deploy.md
 [Azure Quickstart Templates gallery]: https://azure.microsoft.com/documentation/templates/?term=service+bus
-

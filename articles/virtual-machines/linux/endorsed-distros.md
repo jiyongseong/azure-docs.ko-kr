@@ -1,10 +1,10 @@
 ---
-title: "Linux의 보증 배포판 | Microsoft Docs"
-description: "Ubuntu, CentOS, Oracle 및 SUSE 관련 지침을 포함하여 Azure에서 Linux의 인증 배포를 수행하는 방법에 대해 알아봅니다."
+title: Linux의 보증 배포판 | Microsoft Docs
+description: Ubuntu, CentOS, Oracle 및 SUSE 관련 지침을 포함하여 Azure에서 Linux의 인증 배포를 수행하는 방법에 대해 알아봅니다.
 services: virtual-machines-linux
-documentationcenter: 
+documentationcenter: ''
 author: szarkos
-manager: timlt
+manager: jeconnoc
 editor: tysonn
 tags: azure-service-management,azure-resource-manager
 ms.assetid: 2777a526-c260-4cb9-a31a-bdfe1a55fffc
@@ -13,36 +13,38 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: vm-linux
 ms.devlang: na
 ms.topic: article
-ms.date: 02/02/2017
+ms.date: 11/21/2017
 ms.author: szark
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 09f24fa2b55d298cfbbf3de71334de579fbf2ecd
-ms.openlocfilehash: 39cb2464eb593a29c4436afb5c14419b704ebff4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/08/2017
-
-
+ms.openlocfilehash: c2233ab32314655c510c8c884641293ae3325ef5
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="linux-on-distributions-endorsed-by-azure"></a>Azure 보증 배포판의 Linux
-파트너는 Azure Marketplace에서 Linux 이미지를 제공합니다. 다양한 Linux 커뮤니티와 작업하여 보증 배포 목록에 다양한 옵션을 추가합니다. Marketplace에서 사용할 수 없는 배포판의 경우 [Linux 운영 체제가 포함된 가상 하드 디스크 만들기 및 업로드](classic/create-upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2fclassic%2ftoc.json)의 지침에 따라 항상 고유한 Linux를 가져올 수 있습니다.
+파트너는 Azure Marketplace에서 Linux 이미지를 제공합니다. 다양한 Linux 커뮤니티와 작업하여 보증 배포 목록에 다양한 옵션을 추가합니다. Marketplace에서 사용할 수 없는 배포판의 경우 [Linux 운영 체제가 포함된 가상 하드 디스크 만들기 및 업로드](https://docs.microsoft.com/azure/virtual-machines/linux/create-upload-generic)의 지침에 따라 항상 고유한 Linux를 가져올 수 있습니다.
 
 ## <a name="supported-distributions-and-versions"></a>지원되는 배포판 및 버전
-다음 표에서 Linux 배포판 및 Azure에서 지원 되는 버전을 나열합니다. 자세한 내용은 [Microsoft Azure의 Linux 이미지 지원](https://support.microsoft.com/en-us/kb/2941892)을 참조하세요.
+다음 표에서 Linux 배포판 및 Azure에서 지원 되는 버전을 나열합니다. Azure에서의 Linux 지원 및 오픈 소스 기술에 대한 더 자세한 내용은 [Microsoft Azure에서 Linux 이미지에 대한 지원](https://support.microsoft.com/help/2941892/support-for-linux-and-open-source-technology-in-azure)을 참조하세요.
 
-Hyper-V 및 Azure용 LIS(Linux 통합 서비스) 드라이버는 Microsoft가 업스트림 Linux 커널로 직접 제공되는 커널 모듈입니다.  일부 LIS 드라이버는 기본적으로 배포 커널에 빌드됩니다. RHEL(Red Hat Enterprise)/CentOS를 기반으로 둔 이전 배포는 [Linux Integration Services Version 4.1 for Hyper-V](http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409)(Hyper-V용 Linux Integration Services 버전 4.1)에서 별도의 다운로드로 제공됩니다. LIS 드라이버에 대한 자세한 내용은 [Linux 커널 요구 사항](create-upload-generic.md#linux-kernel-requirements)을 참조하세요.
+Hyper-V 및 Azure용 LIS(Linux 통합 서비스) 드라이버는 Microsoft가 업스트림 Linux 커널로 직접 제공되는 커널 모듈입니다.  일부 LIS 드라이버는 기본적으로 배포 커널에 빌드됩니다. RHEL(Red Hat Enterprise)/CentOS를 기반으로 둔 이전 배포는 [Hyper-V 및 Azure용 Linux Integration Services 버전 4.2](https://www.microsoft.com/en-us/download/details.aspx?id=55106)에서 별도의 다운로드로 제공됩니다. LIS 드라이버에 대한 자세한 내용은 [Linux 커널 요구 사항](create-upload-generic.md#linux-kernel-requirements)을 참조하세요.
 
 Azure Linux 에이전트는 Azure Marketplace 이미지에 이미 사전 설치되어 있으며 일반적으로 배포판의 패키지 리포지토리에서 사용할 수 있습니다. 소스 코드는 [GitHub](https://github.com/azure/walinuxagent)에서 찾을 수 있습니다.
 
+  
 | 배포 | 버전 | 드라이버 | 에이전트 |
 | --- | --- | --- | --- |
-| CentOS |CentOS 6.3 이상, 7.0 이상 |CentOS 6.3: [LIS 다운로드](http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409)<p>CentOS 6.4+: 커널에 있음 |패키지: "WALinuxAgent"의 [리포지토리](http://olcentgbl.trafficmanager.net/openlogic/6/openlogic/x86_64/RPMS/)에 있음 <br/>소스 코드: [GitHub](https://github.com/Azure/WALinuxAgent) |
+| CentOS |CentOS 6.3 이상, 7.0 이상 |CentOS 6.3: [LIS 다운로드](https://www.microsoft.com/en-us/download/details.aspx?id=55106)<p>CentOS 6.4+: 커널에 있음 |패키지: "WALinuxAgent"의 [리포지토리](http://olcentgbl.trafficmanager.net/openlogic/6/openlogic/x86_64/RPMS/)에 있음 <br/>소스 코드: [GitHub](https://github.com/Azure/WALinuxAgent) |
 | [CoreOS](https://coreos.com/docs/running-coreos/cloud-providers/azure/) |494.4.0 이상 |커널에 있음 |소스 코드: [GitHub](https://github.com/coreos/coreos-overlay/tree/master/app-emulation/wa-linux-agent) |
 | Debian |Debian 7.9 이상, 8.2 이상 |커널에 있음 |패키지: "waagent"에서 리포지토리의  <br/>소스 코드: [GitHub](https://github.com/Azure/WALinuxAgent) |
 | Oracle Linux |6.4 이상, 7.0 이상 |커널에 있음 |패키지: "WALinuxAgent"의 리포지토리에 있음  <br/>소스 코드: [GitHub](http://go.microsoft.com/fwlink/p/?LinkID=250998) |
 | Red Hat Enterprise Linux |RHEL 6.7+, 7.1+ |커널에 있음 |패키지: "WALinuxAgent"의 리포지토리에 있음  <br/>소스 코드: [GitHub](https://github.com/Azure/WALinuxAgent) |
 | SUSE Linux Enterprise |SLES/SAP용 SLES<br>11 SP4<br>12 SP1+|커널에 있음 |패키지:<p> 11의 경우 [Cloud:Tools](https://build.opensuse.org/project/show/Cloud:Tools) 리포지토리에 있음<br>12의 경우 "python-azure-agent" 아래의 "공용 클라우드" 모듈에 포함됨<br/>소스 코드: [GitHub](http://go.microsoft.com/fwlink/p/?LinkID=250998) |
-| openSUSE |openSUSE Leap 42.1+ |커널에 있음 |패키지: "python-azure-agent"의 [Cloud:Tools](https://build.opensuse.org/project/show/Cloud:Tools) 리포지토리에 있음 <br/>소스 코드: [GitHub](https://github.com/Azure/WALinuxAgent) |
-| Ubuntu |Ubuntu 12.04, 14.04, 16.04, 16.10 |커널에 있음 |패키지: "WALinuxAgent"의 리포지토리에 있음  <br/>소스 코드: [GitHub](https://github.com/Azure/WALinuxAgent) |
+| openSUSE |openSUSE Leap 42.2+ |커널에 있음 |패키지: "python-azure-agent"의 [Cloud:Tools](https://build.opensuse.org/project/show/Cloud:Tools) 리포지토리에 있음 <br/>소스 코드: [GitHub](https://github.com/Azure/WALinuxAgent) |
+| Ubuntu |Ubuntu 12.04 이상 **<sup>1</sup>** |커널에 있음 |패키지: "WALinuxAgent"의 리포지토리에 있음  <br/>소스 코드: [GitHub](https://github.com/Azure/WALinuxAgent) |
+
+  - **<sup>1</sup>** Azure의 Ubuntu 12.04 지원의 경우 [EOL 공지](https://azure.microsoft.com/blog/ubuntu-12-04-precise-pangolin-nearing-end-of-life/)를 참조하세요.
+
 
 ## <a name="partners"></a>파트너
 
@@ -79,4 +81,3 @@ SUSE Linux Enterprise Server on Azure는 클라우드 컴퓨팅에 대해 우수
 Canonical 엔지니어링과 개방형 커뮤니티 거버넌스로 인해 소비자용 개인 클라우드 서비스를 비롯한 클라이언트, 서버 및 클라우드 컴퓨팅에서 Ubuntu가 성공할 수 있었습니다. Canonical은 전화에서 클라우드까지 적용되는 Ubuntu의 무료 통합 플랫폼에 대한 비전이 실현되도록 전화, 태블릿, TV 및 데스크톱에 대해 일관된 인터페이스 제품군을 제공합니다. 이러한 비전으로 인해 공용 클라우드 공급자에서 가전제품 제조업체에 이르는 다양한 기관에서 Ubuntu를 우선적으로 선택하고 있으며 개별 기술자 사이에서도 Ubuntu를 선호하게 되었습니다.
 
 Canonical은 전 세계의 개발자 및 엔지니어링 센터와 함께 PC, 서버 및 핸드헬드 장치 업계에 Ubuntu 솔루션을 제공하기 위해 하드웨어 제조업체, 콘텐츠 공급자 및 소프트웨어 개발자와 유일하게 파트너 입장에 있습니다.
-

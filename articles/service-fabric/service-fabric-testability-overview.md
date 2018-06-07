@@ -1,6 +1,6 @@
 ---
-title: "오류 분석 서비스 개요 | Microsoft Docs"
-description: "이 문서는 결함을 유도하고 서비스에 대한 테스트 시나리오를 실행하기 위한 서비스 패브릭의 오류 분석 서비스를 설명합니다."
+title: 오류 분석 서비스 개요 | Microsoft Docs
+description: 이 문서는 결함을 유도하고 서비스에 대한 테스트 시나리오를 실행하기 위한 서비스 패브릭의 오류 분석 서비스를 설명합니다.
 services: service-fabric
 documentationcenter: .net
 author: anmolah
@@ -9,23 +9,21 @@ editor: vturecek
 ms.assetid: 1f064276-293a-4989-a513-e0d0b9fdf703
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 06/15/2017
 ms.author: anmola
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: c05081685532aecbe29e9bf380f0278e775ad6b7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
-
+ms.openlocfilehash: 807e4588e23ea01c5ce435282d7af59bb108e6c6
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="introduction-to-the-fault-analysis-service"></a>오류 분석 서비스 소개
 오류 분석 서비스는 Microsoft Azure Service Fabric에서 작성된 서비스 테스트를 위해 설계되었습니다. 오류 분석 서비스를 통해 의미 있는 결함을 유도하고 응용 프로그램에 대해 전체 테스트 시나리오를 실행할 수 있습니다. 이러한 오류와 시나리오는 다양한 상태를 실행하고 유효성을 검사하며 서비스가 수명 전반에서 일관되게 제어되고 안전한 방식으로 경험할 수 있도록 전환합니다.
 
-작업은 오류를 테스트할 서비스를 대상으로 하는 개별 오류입니다. 서비스 개발자는 이러한 기본 구성 요소를 사용하여 복잡한 시나리오를 작성할 수 있습니다. 예:
+작업은 오류를 테스트할 서비스를 대상으로 하는 개별 오류입니다. 서비스 개발자는 이러한 기본 구성 요소를 사용하여 복잡한 시나리오를 작성할 수 있습니다. 예: 
 
 * 노드를 다시 시작하여 컴퓨터 또는 VM이 재부팅되는 다양한 상황을 시뮬레이션합니다.
 * 상태 저장 서비스의 복제본을 이동하여 부하 분산, 장애 조치(failover) 또는 응용 프로그램 업그레이드를 시뮬레이션합니다.
@@ -61,7 +59,7 @@ ms.lasthandoff: 04/27/2017
    
     a. 노드를 찾을 수 없으면 요청이 실패합니다.
    
-    b. 노드가 발견되면 노드가 종료된 경우에만 요청이 반환됩니다.
+    나. 노드가 발견되면 노드가 종료된 경우에만 요청이 반환됩니다.
 
 테스트 관점에서 오류를 확인하려면 테스트는 이 오류가 유도될 때 오류가 실제로 발생하는지를 알아야 합니다. 서비스 패브릭은 명령이 노드에 도달했을 때 노드가 다운되거나 이미 다운된 상태임을 보증합니다. 어떤 경우든 테스트에서 유효성 검사의 상태와 성공 또는 실패 여부를 올바르게 추론할 수 있습니다. 같은 오류 집합을 수행하도록 서비스 패브릭 외부에서 구현된 시스템은 네트워크, 하드웨어 및 소프트웨어 문제를 과다하게 생성할 수 있고, 이로 인해 이전의 보장을 제공하지 못합니다. 앞에서 언급한 문제가 있으면 서비스 패브릭에서는 클러스터 상태를 다시 구성하여 문제를 해결합니다. 따라서 오류 분석 서비스에서 올바른 보증을 제공할 수 있습니다.
 
@@ -104,4 +102,3 @@ PowerShell을 사용하려면 서비스 패브릭 SDK를 설치해야 합니다.
 
 <!--Image references-->
 [0]: ./media/service-fabric-testability-overview/faultanalysisservice.png
-

@@ -1,15 +1,16 @@
 ### <a name="create-a-console-application"></a>콘솔 응용 프로그램 만들기
 
-먼저 Visual Studio를 시작하고 **콘솔 앱(.NET Framework)** 프로젝트를 만듭니다.
+Visual Studio에서 새 **콘솔 앱(.NET Framework)** 프로젝트를 만듭니다.
 
 ### <a name="add-the-relay-nuget-package"></a>릴레이 NuGet 패키지 추가
 
-1. 마우스 오른쪽 단추로 새롭게 만든 프로젝트를 클릭하고 **NuGet 패키지 관리**를 클릭합니다.
-2. **찾아보기** 탭을 클릭한 다음 "Microsoft Azure 릴레이"를 검색하고 **Microsoft Azure 릴레이** 항목을 선택합니다. **설치** 를 클릭하여 설치를 완료한 후 이 대화 상자를 닫습니다.
+1. 마우스 오른쪽 단추로 새로 만든 프로젝트를 클릭한 다음 **NuGet 패키지 관리**를 선택합니다.
+2. **찾아보기**를 선택한 다음 **Microsoft.Azure.Relay**를 검색합니다. 검색 결과에서 **Microsoft Azure Relay**를 선택합니다. 
+3. **설치**을 선택하여 설치를 완료합니다. 대화 상자를 닫습니다.
 
-### <a name="write-some-code-to-send-messages"></a>메시지를 보내는 코드 작성
+### <a name="write-code-to-send-messages"></a>메시지를 보내는 코드 작성
 
-1. Program.cs 파일의 위쪽에 있는 기존 `using` 문을 다음 `using` 문으로 바꿉니다.
+1. Program.cs 파일의 맨 위에 있는 기존 `using` 문을 다음 `using` 문으로 바꿉니다.
    
     ```csharp
     using System;
@@ -18,7 +19,7 @@
     using System.Threading.Tasks;
     using Microsoft.Azure.Relay;
     ```
-2. 상수를 하이브리드 연결 정보의 `Program` 클래스에 추가합니다. 대괄호 안의 자리 표시자를 하이브리드 연결을 만들 때 얻은 값으로 바꿉니다. 정규화된 네임스페이스 이름을 사용해야 합니다.
+2. 상수를 하이브리드 연결 정보의 `Program` 클래스에 추가합니다. 대괄호에 포함된 자리 표시자를 하이브리드 연결을 만들 때 가져온 값으로 바꿉니다. 정규화된 네임스페이스 이름을 사용해야 합니다.
    
     ```csharp
     private const string RelayNamespace = "{RelayNamespace}.servicebus.windows.net";
@@ -33,56 +34,56 @@
     {
         Console.WriteLine("Enter lines of text to send to the server with ENTER");
    
-        // Create a new hybrid connection client
+        // Create a new hybrid connection client.
         var tokenProvider = TokenProvider.CreateSharedAccessSignatureTokenProvider(KeyName, Key);
         var client = new HybridConnectionClient(new Uri(String.Format("sb://{0}/{1}", RelayNamespace, ConnectionName)), tokenProvider);
    
-        // Initiate the connection
+        // Initiate the connection.
         var relayConnection = await client.CreateConnectionAsync();
    
-        // We run two concurrent loops on the connection. One 
+        // Run two concurrent loops on the connection. One 
         // reads input from the console and writes it to the connection 
         // with a stream writer. The other reads lines of input from the 
         // connection with a stream reader and writes them to the console. 
-        // Entering a blank line will shut down the write task after 
-        // sending it to the server. The server will then cleanly shut down
-        // the connection which will terminate the read task.
+        // Entering a blank line shuts down the write task after 
+        // sending it to the server. The server then cleanly shuts down
+        // the connection, which terminates the read task.
    
         var reads = Task.Run(async () => {
-            // Initialize the stream reader over the connection
+            // Initialize the stream reader over the connection.
             var reader = new StreamReader(relayConnection);
             var writer = Console.Out;
             do
             {
-                // Read a full line of UTF-8 text up to newline
+                // Read a full line of UTF-8 text up to newline.
                 string line = await reader.ReadLineAsync();
-                // if the string is empty or null, we are done.
+                // If the string is empty or null, you are done.
                 if (String.IsNullOrEmpty(line))
                     break;
-                // Write to the console
+                // Write to the console.
                 await writer.WriteLineAsync(line);
             }
             while (true);
         });
    
-        // Read from the console and write to the hybrid connection
+        // Read from the console and write to the hybrid connection.
         var writes = Task.Run(async () => {
             var reader = Console.In;
             var writer = new StreamWriter(relayConnection) { AutoFlush = true };
             do
             {
-                // Read a line form the console
+                // Read a line from the console.
                 string line = await reader.ReadLineAsync();
-                // Write the line out, also when it's empty
+                // Write the line out, also when it's empty.
                 await writer.WriteLineAsync(line);
-                // Quit when the line was empty
+                // Quit when the line is empty,
                 if (String.IsNullOrEmpty(line))
                     break;
             }
             while (true);
         });
    
-        // Wait for both tasks to complete
+        // Wait for both tasks to finish.
         await Task.WhenAll(reads, writes);
         await relayConnection.CloseAsync(CancellationToken.None);
     }
@@ -93,7 +94,7 @@
     RunAsync().GetAwaiter().GetResult();
     ```
    
-    Program.cs는 다음과 같아야 합니다.
+    Program.cs는 다음과 같이 표시됩니다.
    
     ```csharp
     using System;
@@ -120,56 +121,56 @@
             {
                 Console.WriteLine("Enter lines of text to send to the server with ENTER");
    
-                // Create a new hybrid connection client
+                // Create a new hybrid connection client.
                 var tokenProvider = TokenProvider.CreateSharedAccessSignatureTokenProvider(KeyName, Key);
                 var client = new HybridConnectionClient(new Uri(String.Format("sb://{0}/{1}", RelayNamespace, ConnectionName)), tokenProvider);
    
-                // Initiate the connection
+                // Initiate the connection.
                 var relayConnection = await client.CreateConnectionAsync();
    
-                // We run two conucrrent loops on the connection. One 
-                // reads input from the console and writes it to the connection 
+                // Run two conucrrent loops on the connection. One 
+                // reads input from the console and then writes it to the connection 
                 // with a stream writer. The other reads lines of input from the 
-                // connection with a stream reader and writes them to the console. 
-                // Entering a blank line will shut down the write task after 
-                // sending it to the server. The server will then cleanly shut down
-                // the connection which will terminate the read task.
+                // connection with a stream reader and then writes them to the console. 
+                // Entering a blank line shuts down the write task after 
+                // sending it to the server. The server then cleanly shuts down
+                // the connection, which terminates the read task.
    
                 var reads = Task.Run(async () => {
-                    // Initialize the stream reader over the connection
+                    // Initialize the stream reader over the connection.
                     var reader = new StreamReader(relayConnection);
                     var writer = Console.Out;
                     do
                     {
-                        // Read a full line of UTF-8 text up to newline
+                        // Read a full line of UTF-8 text up to newline.
                         string line = await reader.ReadLineAsync();
-                        // If the string is empty or null, we are done.
+                        // If the string is empty or null, you are done.
                         if (String.IsNullOrEmpty(line))
                             break;
-                        // Write to the console
+                        // Write to the console.
                         await writer.WriteLineAsync(line);
                     }
                     while (true);
                 });
    
-                // Read from the console and write to the hybrid connection
+                // Read from the console and write to the hybrid connection.
                 var writes = Task.Run(async () => {
                     var reader = Console.In;
                     var writer = new StreamWriter(relayConnection) { AutoFlush = true };
                     do
                     {
-                        // Read a line form the console
+                        // Read a line from the console.
                         string line = await reader.ReadLineAsync();
-                        // Write the line out, also when it's empty
+                        // Write the line out, also when it's empty.
                         await writer.WriteLineAsync(line);
-                        // Quit when the line was empty
+                        // Quit when the line is empty.
                         if (String.IsNullOrEmpty(line))
                             break;
                     }
                     while (true);
                 });
    
-                // Wait for both tasks to complete
+                // Wait for both tasks to finish.
                 await Task.WhenAll(reads, writes);
                 await relayConnection.CloseAsync(CancellationToken.None);
             }

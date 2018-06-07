@@ -1,8 +1,8 @@
 ---
-title: "Ambari 웹 UI를 사용하여 Azure HDInsight 모니터링 및 관리 | Microsoft Docs"
-description: "Ambari를 사용하여 Linux 기반 HDInsight 클러스터를 모니터링하고 관리하는 방법에 대해 알아봅니다. 이 문서에서는 HDInsight 클러스터에 포함된 Ambari 웹 UI를 사용하는 방법을 배웁니다."
+title: Ambari 웹 UI를 사용하여 Azure HDInsight 모니터링 및 관리 | Microsoft Docs
+description: Ambari를 사용하여 Linux 기반 HDInsight 클러스터를 모니터링하고 관리하는 방법에 대해 알아봅니다. 이 문서에서는 HDInsight 클러스터에 포함된 Ambari 웹 UI를 사용하는 방법을 배웁니다.
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: Blackmist
 manager: jhubbard
 editor: cgronlun
@@ -11,17 +11,14 @@ ms.assetid: 4787f3cc-a650-4dc3-9d96-a19a67aad046
 ms.service: hdinsight
 ms.custom: hdinsightactive
 ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 07/31/2017
+ms.topic: conceptual
+ms.date: 03/23/2018
 ms.author: larryfr
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 0bcf8f0d1c5fc44a31de9be9adbdad3893ff111f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
+ms.openlocfilehash: 8c58607e191d58d1cb6706569b909a4d709b14b3
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="manage-hdinsight-clusters-by-using-the-ambari-web-ui"></a>Ambari 웹 UI를 사용하여 HDInsight 클러스터 관리
 
@@ -33,7 +30,7 @@ Apache Ambari는 손쉬운 웹 UI 및 REST API 사용을 제공하여 Hadoop 클
 
 ## <a id="whatis"></a>Ambari 정의
 
-[Apache Ambari](http://ambari.apache.org)는 사용하기 쉬운 웹 UI를 제공하여 Hadoop 관리를 단순화합니다. Ambari를 사용하여 Hadoop 클러스터를 생성, 관리 및 모니터링할 수 있습니다. 개발자는 [Ambari REST API](https://github.com/apache/ambari/blob/trunk/ambari-server/docs/api/v1/index.md)를 사용하여 자신의 응용 프로그램에 이러한 기능을 통합할 수 있습니다.
+[Apache Ambari](http://ambari.apache.org)는 사용하기 쉬운 웹 UI를 제공하여 Hadoop 관리를 단순화합니다. Ambari를 사용하여 Hadoop 클러스터를 관리 및 모니터링할 수 있습니다. 개발자는 [Ambari REST API](https://github.com/apache/ambari/blob/trunk/ambari-server/docs/api/v1/index.md)를 사용하여 자신의 응용 프로그램에 이러한 기능을 통합할 수 있습니다.
 
 Ambari 웹 UI는 기본적으로 Linux 운영 체제를 사용하는 HDInsight 클러스터와 함께 제공됩니다.
 
@@ -42,7 +39,7 @@ Ambari 웹 UI는 기본적으로 Linux 운영 체제를 사용하는 HDInsight �
 
 ## <a name="connectivity"></a>연결
 
-Ambari 웹 UI는 HTTPS://CLUSTERNAME.azurehdidnsnsight.net의 HDInsight 클러스터에서 사용할 수 있습니다. 여기서 **CLUSTERNAME**은 클러스터 이름입니다.
+Ambari 웹 UI는 HTTPS://CLUSTERNAME.azurehdinsight.net의 HDInsight 클러스터에서 사용할 수 있습니다. 여기서 **CLUSTERNAME**은 클러스터 이름입니다.
 
 > [!IMPORTANT]
 > HTTPS를 요구하는 HDInsight에서 Ambari로 연결 인증에 대한 대화 상자가 나타나면 클러스터를 만들 때 제공한 관리자 계정 이름 및 암호를 사용합니다.
@@ -52,6 +49,9 @@ Ambari 웹 UI는 HTTPS://CLUSTERNAME.azurehdidnsnsight.net의 HDInsight 클러�
 클러스터의 Ambari는 인터넷을 통해 직접 액세스할 수 있지만 Ambari 웹 UI의 일부 링크(예: JobTracker)는 인터넷에 노출되지 않습니다. 이러한 서비스에 액세스하려면 SSH 터널을 만들어야 합니다. 자세한 내용은 [HDInsight와 SSH 터널링 사용](hdinsight-linux-ambari-ssh-tunnel.md)을 참조하세요.
 
 ## <a name="ambari-web-ui"></a>Ambari 웹 UI
+
+> [!WARNING]
+> Ambari 웹 UI의 일부 기능만 HDInsight에서 지원됩니다. 자세한 내용은 이 문서의 [지원되지 않는 작업](#unsupported-operations) 섹션을 참조하세요.
 
 Ambari 웹 UI를 연결할 때 페이지에 인증하라는 메시지가 나옵니다. 클러스터를 만들 때 사용했던 클러스터 관리자 사용자(기본값 관리자)와 암호를 사용합니다.
 
@@ -79,7 +79,7 @@ Ambari 웹 UI를 연결할 때 페이지에 인증하라는 메시지가 나옵�
 
 ## <a name="monitoring"></a>모니터링
 
-### <a name="alerts"></a>경고
+### <a name="alerts"></a>Alerts
 
 다음 목록은 Ambari에서 사용하는 일반적인 경고 상태를 포함합니다.
 
@@ -149,7 +149,7 @@ Ambari 웹 UI를 연결할 때 페이지에 인증하라는 메시지가 나옵�
 
 ### <a name="ambari-users-groups-and-permissions"></a>Ambari 사용자, 그룹 및 사용 권한
 
-[도메인 가입](hdinsight-domain-joined-introduction.md) HDInsight 클러스터를 사용할 때 사용자, 그룹 및 권한을 사용하는 작업이 지원됩니다. 도메인 가입 클러스터에서 Ambari 관리 UI를 사용하는 방법에 대한 자세한 내용은 [도메인 가입 HDInsight 클러스터 관리](hdinsight-domain-joined-introduction.md)를 참조하세요.
+[도메인 가입](./domain-joined/apache-domain-joined-introduction.md) HDInsight 클러스터를 사용할 때 사용자, 그룹 및 권한을 사용하는 작업이 지원됩니다. 도메인 가입 클러스터에서 Ambari 관리 UI를 사용하는 방법에 대한 자세한 내용은 [도메인 가입 HDInsight 클러스터 관리](./domain-joined/apache-domain-joined-introduction.md)를 참조하세요.
 
 > [!WARNING]
 > Linux 기반 HDInsight 클러스터에서 Ambari watchdog(hdinsightwatchdog)의 암호는 변경하지 마세요. 암호를 변경하면 스크립트 동작을 사용하거나 클러스터에서 크기 조정 작업을 수행하는 기능이 중단됩니다.
@@ -234,7 +234,16 @@ Ambari 뷰를 사용하면 개발자가 [Ambari 보기 프레임워크](https://
 
 * Yarn 큐 관리자: 큐 관리자는 YARN 큐를 보고 수정하기 위한 간단한 UI를 제공합니다.
 
-* Hive 뷰: Hive 뷰를 사용하면 웹 브라우저에서 직접 Hive 쿼리를 실행할 수 있습니다. 쿼리를 저장하고 결과 확인하며 클러스터 저장소에 결과를 저장하거나 로컬 시스템에 다운로드할 수 있습니다. Hive 뷰 사용에 대한 자세한 내용은 [HDInsight와 함께 Hive 뷰 사용](hdinsight-hadoop-use-hive-ambari-view.md)을 참조하세요.
+* Hive 뷰: Hive 뷰를 사용하면 웹 브라우저에서 직접 Hive 쿼리를 실행할 수 있습니다. 쿼리를 저장하고 결과 확인하며 클러스터 저장소에 결과를 저장하거나 로컬 시스템에 다운로드할 수 있습니다. Hive 뷰 사용에 대한 자세한 내용은 [HDInsight와 함께 Hive 뷰 사용](hadoop/apache-hadoop-use-hive-ambari-view.md)을 참조하세요.
 
 * Tez 보기: Tez 뷰를 사용하면 작업을 더 잘 이해하고 최적화할 수 있습니다. Tez 작업 실행 방법 및 사용되는 리소스에 대한 정보를 볼 수 있습니다.
 
+## <a name="unsupported-operations"></a>지원되지 않는 작업
+
+다음 Ambari 작업은 HDInsight에서 지원되지 않습니다.
+
+* __메트릭 수집기 서비스 이동__. 메트릭 수집기 서비스에 대한 정보를 볼 경우 서비스 작업 메뉴에서 사용할 수 있는 작업 중 하나는 __메트릭 수집기 이동__입니다. 이 기능은 HDInsight에서 지원되지 않습니다.
+
+## <a name="next-steps"></a>다음 단계
+
+HDInsight에서 [Ambari REST API](hdinsight-hadoop-manage-ambari-rest-api.md)를 사용하는 방법을 알아봅니다.

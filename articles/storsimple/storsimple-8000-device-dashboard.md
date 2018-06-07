@@ -14,13 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 07/03/2017
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
 ms.openlocfilehash: 784d3ce9d8f926b00ac1c6fbf48a05c0b04f900a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-the-device-summary-in-storsimple-device-manager-service"></a>StorSimple 장치 관리자 서비스에서 장치 요약 사용
 
@@ -97,5 +95,4 @@ Essentials 영역은 상태, 모델, 대상 IQN 및 소프트웨어 버전과 �
 ## <a name="next-steps"></a>다음 단계
 * [StorSimple 서비스 요약 블레이드](storsimple-8000-service-dashboard.md)에 대해 자세히 알아봅니다.
 * [StorSimple 장치 관리자 서비스를 사용하여 StorSimple 장치를 관리하는 방법](storsimple-8000-manager-service-administration.md)에 대해 자세히 알아봅니다.
-
 

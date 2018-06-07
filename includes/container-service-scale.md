@@ -1,4 +1,3 @@
-# <a name="scale-agent-nodes-in-a-container-service-cluster"></a>Container Service 클러스터의 에이전트 노드 수 변경
 [Azure Container Service 클러스터를 배포](../articles/container-service/dcos-swarm/container-service-deployment.md)한 후 에이전트 노드의 수를 변경해야 할 수 있습니다. 예를 들어 더 많은 컨테이너 응용 프로그램 또는 인스턴스를 실행하기 위해 더 많은 에이전트가 필요할 수 있습니다. 
 
 Azure Portal 또는 Azure CLI 2.0을 사용하여 DC/OS, Docker Swarm 또는 Kubernetes 클러스터의 에이전트 노드 수를 변경할 수 있습니다. 
@@ -45,7 +44,7 @@ Azure CLI 2.0에서는 새 에이전트 수를 포함한 컨테이너 서비스�
 
 * 코어 할당량에 따라 클러스터의 에이전트 노드 수가 제한될 수 있습니다.
 
-* 에이전트 노드 규모 조정 작업은 에이전트 풀을 포함하는 Azure 가상 컴퓨터 크기 집합에 적용됩니다. DC/OS 클러스터의 경우 이 문서에 나와 있는 작업으로 개인 풀의 에이전트 노드의 크기만 조정됩니다.
+* 에이전트 노드 규모 조정 작업은 에이전트 풀을 포함하는 Azure 가상 컴퓨터 확장 집합에 적용됩니다. DC/OS 클러스터의 경우 이 문서에 나와 있는 작업으로 개인 풀의 에이전트 노드의 크기만 조정됩니다.
 
 * 클러스터에서 배포하는 조정자에 따라 클러스터에서 실행되는 컨테이너의 인스턴스 수를 개별적으로 조정할 수 있습니다. 예를 들어, DC/OS 클러스터의 경우 [Marathon UI](../articles/container-service/dcos-swarm/container-service-mesos-marathon-ui.md)를 사용하여 컨테이너 응용 프로그램의 인스턴스 수를 변경합니다.
 

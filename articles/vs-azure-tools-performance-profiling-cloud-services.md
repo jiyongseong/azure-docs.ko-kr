@@ -1,11 +1,11 @@
 ---
-title: "클라우드 서비스의 성능 테스트 | Microsoft Docs"
-description: "Visual Studio 프로파일러를 사용하여 클라우드 서비스의 성능을 테스트합니다."
+title: 클라우드 서비스의 성능 테스트 | Microsoft Docs
+description: Visual Studio 프로파일러를 사용하여 클라우드 서비스의 성능을 테스트합니다.
 services: visual-studio-online
 documentationcenter: n/a
-author: TomArcher
+author: mikejo
 manager: douge
-editor: 
+editor: ''
 ms.assetid: 7a5501aa-f92c-457c-af9b-92ea50914e24
 ms.service: visual-studio-online
 ms.devlang: multiple
@@ -13,19 +13,19 @@ ms.topic: article
 ms.tgt_pltfrm: multiple
 ms.workload: na
 ms.date: 11/11/2016
-ms.author: tarcher
-translationtype: Human Translation
-ms.sourcegitcommit: 219dcbfdca145bedb570eb9ef747ee00cc0342eb
-ms.openlocfilehash: 7bd8de649ba2975c47f7e84feb0438c51756a697
-
-
+ms.author: mikejo
+ms.openlocfilehash: 74ffd70bdb204cee75b86a1e922ac67873a88758
+ms.sourcegitcommit: 34e0b4a7427f9d2a74164a18c3063c8be967b194
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/30/2018
 ---
 # <a name="testing-the-performance-of-a-cloud-service"></a>클라우드 서비스의 성능 테스트
 ## <a name="overview"></a>개요
 다음과 같은 방법으로 클라우드 서비스의 성능을 테스트할 수 있습니다.
 
-* 요청과 연결에 대한 정보를 수집하고 서비스를 고객 관점에서 수행하는 방법을 보여주는 사이트 통계를 검토하려면 Azure 진단을 사용합니다. 시작하려면 [Azure 클라우드 서비스 및 가상 컴퓨터에서 진단 구성](http://go.microsoft.com/fwlink/p/?LinkId=623009)을 참조하십시오.
-* Visual Studio 프로파일러를 사용하여 서비스 실행 방식의 계산 측면에 대한 심층 분석을 가져옵니다. 이 항목에서 알 수 있듯이 Azure에서 서비스가 실행될 때 성능을 측정하기 위해 프로파일러를 사용할 수 있습니다. 계산 에뮬레이터에서 서비스가 로컬로 실행될 때 성능을 측정하는 프로파일러를 사용하는 방법에 대한 정보는 [Visual Studio 프로파일러를 사용하여 계산 에뮬레이터에서 로컬로 Azure 클라우드 서비스의 성능 테스트](http://go.microsoft.com/fwlink/p/?LinkId=262845)를 참조하십시오.
+* 요청과 연결에 대한 정보를 수집하고 서비스를 고객 관점에서 수행하는 방법을 보여주는 사이트 통계를 검토하려면 Azure 진단을 사용합니다. 시작하려면 [Azure Cloud Services 및 Virtual Machines에서 진단 구성](http://go.microsoft.com/fwlink/p/?LinkId=623009)을 참조하십시오.
+* Visual Studio 프로파일러를 사용하여 서비스 실행 방식의 계산 측면에 대한 심층 분석을 가져옵니다. 이 항목에서 알 수 있듯이 Azure에서 서비스가 실행될 때 성능을 측정하기 위해 프로파일러를 사용할 수 있습니다. 계산 에뮬레이터에서 서비스가 로컬로 실행될 때 성능을 측정하는 프로파일러를 사용하는 방법에 대한 정보는 [Visual Studio 프로파일러를 사용하여 Compute 에뮬레이터에서 로컬로 Azure Cloud Services의 성능 테스트](http://go.microsoft.com/fwlink/p/?LinkId=262845)를 참조하십시오.
 
 ## <a name="choosing-a-performance-testing-method"></a>성능 테스트 방법 선택
 ### <a name="use-azure-diagnostics-to-collect"></a>수집할 Azure 진단 사용:
@@ -97,26 +97,20 @@ Visual Studio에서 성능을 프로파일링하는 방법을 알아보려면 [�
     이 응용 프로그램을 게시할 때 각 역할에 대한 프로파일링 세션을 만들기 위해 이러한 설정이 사용됩니다.
 
 ## <a name="viewing-profiling-reports"></a>프로파일링 보고서 보기
-프로파일링 세션은 클라우드 서비스에서 역할의 각 인스턴스에 대해 생성됩니다. Visual Studio에서 각 세션의 프로파일링 보고서를 보려면 서버 탐색기 창에서 볼 수 있으며 Azure 계산 노드를 선택하여 역할의 인스턴스를 선택할 수 있습니다. 그런 다음 그림에서와 같이 프로파일링 보고서를 볼 수 있습니다.
+프로파일링 세션은 클라우드 서비스에서 역할의 각 인스턴스에 대해 생성됩니다. Visual Studio에서 각 세션의 프로파일링 보고서를 보려면 서버 탐색기 창에서 볼 수 있으며 Azure Compute 노드를 선택하여 역할의 인스턴스를 선택할 수 있습니다. 그런 다음 그림에서와 같이 프로파일링 보고서를 볼 수 있습니다.
 
 ![Azure에서 프로파일링 보고서 보기](./media/vs-azure-tools-performance-profiling-cloud-services/IC748914.png)
 
 ### <a name="to-view-profiling-reports"></a>프로파일링 보고서 보기
 1. Visual Studio에서 서버 탐색기 창을 보려면 메뉴 모음에서 보기, 서버 탐색기를 선택합니다.
-2. Azure 계산 노드를 선택한 다음 Visual Studio에서 게시할 때 프로파일링 하도록 선택한 클라우드 서비스에 대한 Azure 배포 노드를 선택합니다.
+2. Azure Compute 노드를 선택한 다음 Visual Studio에서 게시할 때 프로파일링 하도록 선택한 클라우드 서비스에 대한 Azure 배포 노드를 선택합니다.
 3. 인스턴스에 대한 프로파일링 보고서를 보려면 서비스에서 역할을 선택하고 특정 인스턴스에 대한 바로 가기 메뉴를 연 다음 **프로파일링 보고서 보기**를 선택합니다.
    
     .vsp 파일인 보고서가 이제 Azure에서 다운로드되며 Azure 활동 로그에 다운로드 상태가 표시됩니다. 다운로드가 완료되면 프로파일링 보고서가 <Role name>*<Instance Number>*<identifier>.vsp라는 Visual Studio에 대한 편집기의 탭에 나타납니다. 보고서에 대한 요약 데이터가 표시됩니다.
 4. 현재 보기 목록에서 보고서의 다른 보기를 표시하려면 원하는 보기의 유형을 선택합니다. 자세한 내용은 [프로파일링 도구 보고서 보기](https://msdn.microsoft.com/library/azure/bb385755.aspx)를 참조하세요.
 
 ## <a name="next-steps"></a>다음 단계
-[클라우드 서비스 디버깅](https://msdn.microsoft.com/library/azure/ee405479.aspx)
+[Cloud Services 디버깅](https://msdn.microsoft.com/library/azure/ee405479.aspx)
 
 [Visual Studio에서 Azure 클라우드 서비스에 게시](https://msdn.microsoft.com/library/azure/ee460772.aspx)
-
-
-
-
-<!--HONumber=Nov16_HO3-->
-
 

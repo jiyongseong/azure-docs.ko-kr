@@ -14,11 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 10/10/2016
 ms.author: cherylmc
-translationtype: Human Translation
-ms.sourcegitcommit: b77a20274e22827aaa8aa4d354b62d086a19b206
 ms.openlocfilehash: 83a7da2db537a3c900e90432455d59e8ac56d917
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="router-configuration-samples-to-set-up-and-manage-nat"></a>NAT 설정 및 관리를 위한 라우터 구성 샘플
 이 페이지는 Cisco ASA 및 Juniper SRX 시리즈 라우터에 NAT 구성 샘플을 제공합니다. 이러한 샘플은 참조용이므로 그대로 사용해서는 안 됩니다. 사용 중인 네트워크에 적절하게 구성하려면 공급업체와 작업하면 됩니다. 
@@ -317,10 +317,4 @@ NAT 명령:
 
 ## <a name="next-steps"></a>다음 단계
 자세한 내용은 [Express 경로 FAQ](expressroute-faqs.md) 를 참조하세요.
-
-
-
-
-<!--HONumber=Nov16_HO3-->
-
 

@@ -13,15 +13,13 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: data-services
-ms.date: 06/27/2017
-ms.author: babanisa;sethm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: 72e18444c83b84c5191a0aab3dc6983517167dd1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.date: 02/05/2018
+ms.author: sethm
+ms.openlocfilehash: 4ce724adc9ca167634be9a0b7137b6a3d54211bf
+ms.sourcegitcommit: 059dae3d8a0e716adc95ad2296843a45745a415d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/09/2018
 ---
 # <a name="service-bus-diagnostic-logs"></a>Service Bus 진단 로그
 
@@ -65,15 +63,15 @@ Azure Service Bus에 대해 다음 두 가지 유형의 로그를 볼 수 있습
 
 작업 로그 JSON 문자열에는 다음 표에 나열된 요소가 포함되어 있습니다.
 
-이름 | 설명
+Name | 설명
 ------- | -------
 ActivityId | 추적에 사용되는 내부 ID
 EventName | 작업 이름           
-resourceId | Azure Resource Manager 리소스 ID
+ResourceId | Azure Resource Manager 리소스 ID
 SubscriptionId | 구독 ID
 EventTimeString | 작업 시간
 EventProperties | 작업 속성
-가동 상태 | 작업 상태
+상태 | 작업 상태
 Caller | 작업 호출자(Azure Portal 또는 관리 클라이언트)
 카테고리 | OperationalLogs
 
@@ -95,8 +93,7 @@ Caller | 작업 호출자(Azure Portal 또는 관리 클라이언트)
 
 ## <a name="next-steps"></a>다음 단계
 
-Service Bus에 대한 자세한 내용을 보려면 다음 링크를 방문하세요.
+Service Bus에 대한 자세한 내용을 보려면 다음 링크를 참조하세요.
 
 * [Service Bus 소개](service-bus-messaging-overview.md)
 * [Service Bus 시작](service-bus-dotnet-get-started-with-queues.md)
-

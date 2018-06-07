@@ -12,17 +12,15 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: PHP
 ms.topic: article
-ms.date: 04/27/2017
+ms.date: 08/10/2017
 ms.author: sethm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 8f291186c6a68dea8aa00b846a2e6f3ad0d7996c
-ms.openlocfilehash: a8866119b631ec9776d6587a078c8e54c311071a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/28/2017
-
-
+ms.openlocfilehash: 3514812f7f087582035dad5d9a4d620652aa4da9
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-# <a name="how-to-use-service-bus-queues"></a>서비스 버스 큐를 사용하는 방법
+# <a name="how-to-use-service-bus-queues-with-php"></a>PHP에서 Service Bus 큐를 사용하는 방법
 [!INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
 
 이 가이드에서는 서비스 버스 큐를 사용하는 방법을 보여 줍니다. 샘플은 PHP로 작성되었으며 [PHP용 Azure SDK](../php-download-sdk.md)를 사용합니다. 여기서 다루는 시나리오에는 **큐 만들기**, **메시지 보내기 및 받기**, **큐 삭제** 등이 포함됩니다.
@@ -66,7 +64,7 @@ use WindowsAzure\Common\ServicesBuilder;
 서비스 버스 클라이언트를 인스턴스화하려면 먼저 다음 형식의 유효한 연결 문자열이 있어야 합니다.
 
 ```
-Endpoint=[yourEndpoint];SharedSecretIssuer=[Default Issuer];SharedSecretValue=[Default Key]
+Endpoint=[yourEndpoint];SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[Primary Key]
 ```
 
 여기서 `Endpoint`는 일반적으로 `[yourNamespace].servicebus.windows.net` 형식입니다.
@@ -85,12 +83,12 @@ require_once 'vendor/autoload.php';
 
 use WindowsAzure\Common\ServicesBuilder;
 
-$connectionString = "Endpoint=[yourEndpoint];SharedSecretIssuer=[Default Issuer];SharedSecretValue=[Default Key]";
+$connectionString = "Endpoint=[yourEndpoint];SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=[Primary Key]";
 
 $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
 ```
 
-## <a name="how-to-create-a-queue"></a>방법: 큐 만들기
+## <a name="create-a-queue"></a>큐 만들기
 `ServiceBusRestProxy` 클래스를 사용하여 Service Bus 큐에 대한 관리 작업을 수행할 수 있습니다. `ServiceBusRestProxy` 개체는 관리에 필요한 토큰 사용 권한을 캡슐화하는 적절한 연결 문자열을 사용한 `ServicesBuilder::createServiceBusService` 팩터리 메서드를 통해 구성됩니다. 
 
 다음 예제에서는 `ServiceBusRestProxy`를 인스턴스화하고 `ServiceBusRestProxy->createQueue`을 호출하여 `MySBNamespace` 네임스페이스 내에 이름이 `myqueue`인 큐를 만드는 방법을 보여줍니다.
@@ -114,7 +112,7 @@ try    {
 catch(ServiceException $e){
     // Handle exception based on error codes and messages.
     // Error codes and messages are here: 
-    // http://msdn.microsoft.com/library/windowsazure/dd179357
+    // https://docs.microsoft.com/rest/api/storageservices/Common-REST-API-Error-Codes
     $code = $e->getCode();
     $error_message = $e->getMessage();
     echo $code.": ".$error_message."<br />";
@@ -126,7 +124,7 @@ catch(ServiceException $e){
 > 
 > 
 
-## <a name="how-to-send-messages-to-a-queue"></a>방법: 큐에 메시지 보내기
+## <a name="send-messages-to-a-queue"></a>큐에 메시지 보내기
 Service Bus 큐에 메시지를 보내기 위해 응용 프로그램은 `ServiceBusRestProxy->sendQueueMessage` 메서드를 호출합니다. 다음 코드는 위에서 `MySBNamespace` 서비스 네임스페이스 내에서 이전에 만든 `myqueue` 큐에 메시지를 보내는 방법을 보여 줍니다.
 
 ```php
@@ -150,7 +148,7 @@ try    {
 catch(ServiceException $e){
     // Handle exception based on error codes and messages.
     // Error codes and messages are here: 
-    // http://msdn.microsoft.com/library/windowsazure/hh780775
+    // https://docs.microsoft.com/rest/api/storageservices/Common-REST-API-Error-Codes
     $code = $e->getCode();
     $error_message = $e->getMessage();
     echo $code.": ".$error_message."<br />";
@@ -161,7 +159,8 @@ Service Bus 큐로 보내고 받은 메시지는 [BrokeredMessage][BrokeredMessa
 
 Service Bus 큐는 [표준 계층](service-bus-premium-messaging.md)에서 256KB의 최대 메시지 크기를 [프리미엄 계층](service-bus-premium-messaging.md)에서 1MB를 지원합니다. 표준 및 사용자 지정 응용 프로그램 속성이 포함된 헤더의 최대 크기는 64KB입니다. 한 큐에 저장되는 메시지 수에는 제한이 없지만 한 큐에 저장되는 총 메시지 크기는 제한됩니다. 큐 크기의 상한은 5GB입니다.
 
-## <a name="how-to-receive-messages-from-a-queue"></a>큐에서 메시지를 받는 방법
+## <a name="receive-messages-from-a-queue"></a>큐에서 메시지 받기
+
 큐에서 메시지를 받는 가장 쉬운 방법은 `ServiceBusRestProxy->receiveQueueMessage` 메서드를 사용하는 것입니다. 메시지는 [*ReceiveAndDelete*](/dotnet/api/microsoft.servicebus.messaging.receivemode.receiveanddelete) 및 [*PeekLock*](/dotnet/api/microsoft.servicebus.messaging.receivemode.peeklock)의 두 가지 모드로 받을 수 있습니다. **PeekLock**이 기본값입니다.
 
 [ReceiveAndDelete](/dotnet/api/microsoft.servicebus.messaging.receivemode.receiveanddelete) 모드를 사용하는 경우 수신은 1단계 작업입니다. 즉, Service Bus가 큐의 메시지에 대한 읽기 요청을 받으면 메시지를 이용되는 것으로 표시하고 응용 프로그램에 반환합니다. [ReceiveAndDelete](/dotnet/api/microsoft.servicebus.messaging.receivemode.receiveanddelete) 모드는 가장 단순한 모델이며, 응용 프로그램이 실패 이벤트 시 메시지를 처리하지 않아도 안전한 시나리오에서 효과적입니다. 이해를 돕기 위해 소비자가 수신 요청을 실행한 후 처리하기 전에 크래시되는 시나리오를 고려해 보세요. 서비스 버스는 메시지를 이용되는 것으로 표시하기 때문에 응용 프로그램이 다시 시작되고 메시지 소비를 다시 시작할 경우 크래시 전에 소비된 메시지가 누락됩니다.
@@ -201,14 +200,15 @@ try    {
 catch(ServiceException $e){
     // Handle exception based on error codes and messages.
     // Error codes and messages are here:
-    // http://msdn.microsoft.com/library/windowsazure/hh780735
+    // https://docs.microsoft.com/rest/api/storageservices/Common-REST-API-Error-Codes
     $code = $e->getCode();
     $error_message = $e->getMessage();
     echo $code.": ".$error_message."<br />";
 }
 ```
 
-## <a name="how-to-handle-application-crashes-and-unreadable-messages"></a>응용 프로그램 작동이 중단되어 메시지를 읽을 수 없는 문제를 처리하는 방법
+## <a name="how-to-handle-application-crashes-and-unreadable-messages"></a>응용 프로그램 작동 중단 및 읽을 수 없는 메시지를 처리하는 방법
+
 서비스 버스는 응용 프로그램 오류나 메시지 처리 문제를 정상적으로 복구하는 데 유용한 기능을 제공합니다. 어떤 이유로든 수신자 응용 프로그램이 메시지를 처리할 수 없는 경우 받은 메시지에 대해 `deleteMessage` 메서드 대신 `unlockMessage` 메서드를 호출할 수 있습니다. 그러면 서비스 버스에서 큐 메시지의 잠금을 해제하므로 동일한 소비 응용 프로그램이나 다른 소비 응용 프로그램에서 메시지를 다시 받을 수 있습니다.
 
 큐 내에서 잠긴 메시지와 연결된 제한 시간도 있으며, 응용 프로그램에서 잠금 제한 시간이 만료되기 전에 메시지를 처리하지 못하는 경우(예: 응용 프로그램이 크래시되는 경우) 서비스 버스가 메시지를 자동으로 잠금 해제하여 다시 받을 수 있게 합니다.
@@ -223,6 +223,5 @@ catch(ServiceException $e){
 [BrokeredMessage]: /dotnet/api/microsoft.servicebus.messaging.brokeredmessage
 [Queues, topics, and subscriptions]: service-bus-queues-topics-subscriptions.md
 [require_once]: http://php.net/require_once
-
 
 

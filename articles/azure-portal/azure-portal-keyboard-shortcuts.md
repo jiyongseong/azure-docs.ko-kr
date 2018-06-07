@@ -1,54 +1,49 @@
 ---
-title: "Azure Portal 바로 가기 키 | Microsoft Docs"
-description: "이 문서는 Azure 포털에서 작동하는 바로 가기 키의 최신 목록입니다. 개별 서비스에는 특수화된 자신의 바로 가기 키가 있을 수 있습니다."
+title: Azure Portal 바로 가기 키 | Microsoft Docs
+description: Azure Portal에서 사용할 수 있는 바로 가기 키에 대해 알아봅니다.
 services: azure-portal
-documentationcenter: 
+documentationcenter: ''
 author: flanakin
 manager: lwelicki
-editor: 
+editor: ''
 ms.assetid: d9f58c69-9163-458d-a339-ab0855e342c6
-ms.service: multiple
+ms.service: azure-portal
 ms.devlang: NA
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: na
-ms.date: 02/07/2016
+ms.date: 08/24/2017
 ms.author: micflan
-translationtype: Human Translation
-ms.sourcegitcommit: 219dcbfdca145bedb570eb9ef747ee00cc0342eb
-ms.openlocfilehash: 764bcf22809a2d613b405f6fb75c7a148a1b3fb9
-
-
+ms.custom: accessibility
+ms.openlocfilehash: 17d6c5ecfa3964c03f62e981a4619e02f3d59543
+ms.sourcegitcommit: d78bcecd983ca2a7473fff23371c8cfed0d89627
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/14/2018
 ---
-# <a name="azure-portal-keyboard-shortcuts"></a>Azure 포털 바로 가기 키
-## <a name="open-hubs"></a>허브 열기
-| 바로 가기 | 작업 |
+# <a name="keyboard-shortcuts-in-the-azure-portal"></a>Azure Portal에서 바로 가기 키
+이 문서에서는 Azure Portal를 통해 작동하는 바로 가기 키를 보여 줍니다. 개별 서비스에는 자신의 고유한 바로 가기 키가 있을 수 있습니다.
+
+## <a name="actions"></a>작업
+|원하는 작업 |누르기 |
 | --- | --- |
-| N |알림 |
-| / |서비스 찾아보기 |
-| 문자열(UTF-8 형식) 또는 |활성 세션 |
-| B |결제 |
-| C |생성 |
+|새 리소스 만들기|G+N|
+|'모든 서비스' 창 열기|G+B|
+|리소스 검색|G+/| 
+|검색 리소스 메뉴 항목|CTRL+/ |
+|선택한 왼쪽 창의 항목을 위로 이동 |ALT+Shift+위쪽 화살표|
+|선택한 왼쪽 창의 항목을 아래로 이동 |ALT+Shift+아래쪽 화살표|
 
 ## <a name="navigation"></a>탐색
-| 바로 가기 | 작업 |
+|원하는 작업 |누르기 |
 | --- | --- |
-| H |Azure 시작 대시보드 |
-| F |첫 번째 열린 블레이드 |
-| J |이전에 열린 블레이드 |
-| K |다음 열린 블레이드 |
-| L |마지막 열린 블레이드 |
-| - |블레이드 최소화 또는 최대화에서 복원 |
-| + |블레이드 최대화 또는 최소화에서 복원 |
-| # |현재 블레이드 닫기 |
-| ¦ |모든 블레이드 닫기 |
-| . |포커스를 명령 모음으로 이동 |
-| 에서도 확인할 수 있습니다. |탐색 모음으로 포커스 이동 |
-| ? |바로 가기 키 보기 |
+|포커스를 명령 모음으로 이동 |G+, |
+|맨 위 막대와 사이드바 간 포커스 전환 | G+. |
 
-
-
-
-<!--HONumber=Nov16_HO3-->
-
-
+## <a name="go-to"></a>다음으로 이동
+|원하는 작업 |누르기 |
+| --- | --- |
+|대시보드로 이동 |G+D |
+|모든 리소스로 이동|G+A |
+|리소스 그룹으로 이동|G+R |
+|이 위치에서 왼쪽 창의 항목 열기 |G+번호|

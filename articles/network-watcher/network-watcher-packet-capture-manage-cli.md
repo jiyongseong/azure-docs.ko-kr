@@ -1,11 +1,11 @@
 ---
-title: "Azure Network Watcher를 사용하여 패킷 캡처 관리 - Azure CLI 2.0 | Microsoft Docs"
-description: "이 페이지에서는 Azure CLI 2.0을 사용하여 Network Watcher의 패킷 캡처 기능을 관리하는 방법에 대해 설명합니다."
+title: Azure Network Watcher를 사용하여 패킷 캡처 관리 - Azure CLI 2.0 | Microsoft Docs
+description: 이 페이지에서는 Azure CLI 2.0을 사용하여 Network Watcher의 패킷 캡처 기능을 관리하는 방법에 대해 설명합니다.
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: cb0c1d10-f7f2-4c34-b08c-f73452430be8
 ms.service: network-watcher
 ms.devlang: na
@@ -13,19 +13,18 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c785ad8dbfa427d69501f5f142ef40a2d3530f9e
-ms.openlocfilehash: c94eb46f31f2f19b843ccd7bf77b8a39943a07d4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
+ms.author: jdial
+ms.openlocfilehash: 4c0b65411e9846077036e16204b7a407c6c7ee9e
+ms.sourcegitcommit: 96089449d17548263691d40e4f1e8f9557561197
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/17/2018
+ms.locfileid: "34261772"
 ---
-
 # <a name="manage-packet-captures-with-azure-network-watcher-using-azure-cli-20"></a>Azure CLI 2.0에서 Azure Network Watcher를 사용하여 패킷 캡처 관리
 
 > [!div class="op_single_selector"]
-> - [Azure 포털](network-watcher-packet-capture-manage-portal.md)
+> - [Azure Portal](network-watcher-packet-capture-manage-portal.md)
 > - [PowerShell](network-watcher-packet-capture-manage-powershell.md)
 > - [CLI 1.0](network-watcher-packet-capture-manage-cli-nodejs.md)
 > - [CLI 2.0](network-watcher-packet-capture-manage-cli.md)
@@ -35,7 +34,7 @@ Network Watcher 패킷 캡처를 사용하면 가상 컴퓨터 간에 트래픽�
 
 이 문서에서는 Windows, Mac 및 Linux에서 사용할 수 있는 리소스 관리 배포 모델용 차세대 CLI인 Azure CLI 2.0을 사용합니다.
 
-이 문서의 단계를 수행하려면 [Mac, Linux 및 Windows용 Azure 명령줄 인터페이스(Azure CLI)를 설치](https://docs.microsoft.com/en-us/cli/azure/install-az-cli2)해야 합니다.
+이 문서의 단계를 수행하려면 [Mac, Linux 및 Windows용 Azure 명령줄 인터페이스(Azure CLI)를 설치](https://docs.microsoft.com/cli/azure/install-az-cli2)해야 합니다.
 
 이 문서에서는 패킷 캡처를 위해 현재 사용할 수 있는 여러 관리 태스크를 설명합니다.
 
@@ -49,16 +48,16 @@ Network Watcher 패킷 캡처를 사용하면 가상 컴퓨터 간에 트래픽�
 이 문서에서는 사용자에게 다음 리소스가 있는 것으로 가정합니다.
 
 - 패킷 캡처를 만들려는 영역의 Network Watcher 인스턴스
-- 패킷 캡처 확장을 사용하는 가상 컴퓨터
+- 패킷 캡처 확장을 사용하는 Virtual Machine
 
 > [!IMPORTANT]
-> 패킷 캡처에는 가상 컴퓨터에서 실행되는 에이전트가 필요합니다. 에이전트는 확장으로 설치됩니다. VM 확장에 대한 지침은 [Virtual Machine 확장 및 기능](../virtual-machines/windows/extensions-features.md)을 참조하세요.
+> 패킷 캡처에는 가상 머신에서 실행되는 에이전트가 필요합니다. 에이전트는 확장으로 설치됩니다. VM 확장에 대한 지침은 [Virtual Machine 확장 및 기능](../virtual-machines/windows/extensions-features.md)을 참조하세요.
 
 ## <a name="install-vm-extension"></a>VM 확장 설치
 
 ### <a name="step-1"></a>1단계
 
-`az vm extension set` cmdlet을 실행하여 게스트 가상 컴퓨터에 패킷 캡처 에이전트를 설치합니다.
+`az vm extension set` cmdlet을 실행하여 게스트 가상 머신에 패킷 캡처 에이전트를 설치합니다.
 
 Windows Virtual Machines의 경우:
 
@@ -66,18 +65,18 @@ Windows Virtual Machines의 경우:
 az vm extension set --resource-group resourceGroupName --vm-name virtualMachineName --publisher Microsoft.Azure.NetworkWatcher --name NetworkWatcherAgentWindows --version 1.4
 ```
 
-Linux 가상 컴퓨터의 경우:
+Linux 가상 머신의 경우:
 
 ```azurecli
 az vm extension set --resource-group resourceGroupName --vm-name virtualMachineName --publisher Microsoft.Azure.NetworkWatcher --name NetworkWatcherAgentLinux--version 1.4
 ````
 
-### <a name="step-2"></a>2단계:
+### <a name="step-2"></a>2단계
 
-에이전트가 설치되어 있는지 확인하려면 `vm extension get` cmdlet을 실행하고 리소스 그룹과 가상 컴퓨터 이름을 전달합니다. 결과 목록을 확인하여 에이전트가 설치되어 있는지 확인합니다.
+에이전트가 설치되어 있는지 확인하려면 `vm extension show` cmdlet을 실행하고 리소스 그룹과 가상 머신 이름을 전달합니다. 결과 목록을 확인하여 에이전트가 설치되어 있는지 확인합니다.
 
 ```azurecli
-az vm extension show -resource-group resourceGroupName --vm-name virtualMachineName --name NetworkWatcherAgentWindows
+az vm extension show --resource-group resourceGroupName --vm-name virtualMachineName --name NetworkWatcherAgentWindows
 ```
 
 다음 샘플은 실행 중인 `az vm extension show`에서 응답의 예제입니다.
@@ -104,14 +103,14 @@ az vm extension show -resource-group resourceGroupName --vm-name virtualMachineN
 
 ## <a name="start-a-packet-capture"></a>패킷 캡처 시작
 
-이전 단계가 완료되면 패킷 캡처 에이전트는 가상 컴퓨터에 설치됩니다.
+이전 단계가 완료되면 패킷 캡처 에이전트는 가상 머신에 설치됩니다.
 
 ### <a name="step-1"></a>1단계
 
 다음 단계는 Network Watcher 인스턴스를 검색하는 것입니다. Network Watcher의 이름이 4단계의 `az network watcher show` cmdlet으로 전달됩니다.
 
 ```azurecli
-az network watcher show -resource-group resourceGroup -name networkWatcherName
+az network watcher show --resource-group resourceGroup --name networkWatcherName
 ```
 
 ### <a name="step-2"></a>2단계
@@ -127,10 +126,10 @@ azure storage account list
 패킷 캡처에 의해 저장되는 데이터를 제한하는 데 필터를 사용할 수 있습니다. 다음 예제에서는 몇 가지 필터를 사용하여 패킷 캡처를 설정합니다.  처음 세 개의 필터는 로컬 IP 10.0.0.3에서 대상 포트 20, 80 및 443으로 나가는 TCP 트래픽을 수집합니다.  마지막 필터는 UDP 트래픽만을 수집합니다.
 
 ```azurecli
-az network watcher packet-capture create --resource-group {resoureceurceGroupName} --vm {vmName} --name packetCaptureName --storage-account gwteststorage123abc --filters "[{\"protocol\":\"TCP\", \"remoteIPAddress\":\"1.1.1.1-255.255.255\",\"localIPAddress\":\"10.0.0.3\", \"remotePort\":\"20\"},{\"protocol\":\"TCP\", \"remoteIPAddress\":\"1.1.1.1-255.255.255\",\"localIPAddress\":\"10.0.0.3\", \"remotePort\":\"80\"},{\"protocol\":\"TCP\", \"remoteIPAddress\":\"1.1.1.1-255.255.255\",\"localIPAddress\":\"10.0.0.3\", \"remotePort\":\"443\"},{\"protocol\":\"UDP\"}]"
+az network watcher packet-capture create --resource-group {resourceGroupName} --vm {vmName} --name packetCaptureName --storage-account {storageAccountName} --filters "[{\"protocol\":\"TCP\", \"remoteIPAddress\":\"1.1.1.1-255.255.255\",\"localIPAddress\":\"10.0.0.3\", \"remotePort\":\"20\"},{\"protocol\":\"TCP\", \"remoteIPAddress\":\"1.1.1.1-255.255.255\",\"localIPAddress\":\"10.0.0.3\", \"remotePort\":\"80\"},{\"protocol\":\"TCP\", \"remoteIPAddress\":\"1.1.1.1-255.255.255\",\"localIPAddress\":\"10.0.0.3\", \"remotePort\":\"443\"},{\"protocol\":\"UDP\"}]"
 ```
 
-다음 예제는 `az network watcher packet-capture create` cmdlet 실행 시 예상된 출력입니다.
+다음 예제는 `az network watcher packet-capture create` cmdlet을 실행하는 예상된 출력입니다.
 
 ```json
 {
@@ -185,61 +184,26 @@ roviders/microsoft.compute/virtualmachines/{vmName}/2017/05/25/packetcapture_16_
 
 ## <a name="get-a-packet-capture"></a>패킷 캡처 가져오기
 
-`az network watcher packet-capture show` cmdlet을 실행하고 현재 실행 중이거나 완료된 패킷 캡처의 상태를 검색합니다.
+`az network watcher packet-capture show-status` cmdlet을 실행하고 현재 실행 중이거나 완료된 패킷 캡처의 상태를 검색합니다.
 
 ```azurecli
-az network watcher packet-capture show --name packetCaptureName --location westcentralus
+az network watcher packet-capture show-status --name packetCaptureName --location {networkWatcherLocation}
 ```
 
-다음 예제는 `az network watcher packet-capture show` cmdlet의 출력입니다. 다음 예제는 캡처를 완료한 이후입니다. PacketCaptureStatus 값은 TimeExceeded의 StopReason과 함께 중지됨입니다. 이 값은 패킷 캡처가 성공했으며 해당 시간을 실행했음을 보여 줍니다.
+다음 예제는 `az network watcher packet-capture show-status` cmdlet의 출력입니다. 다음 예제는 TimeExceeded StopReason으로 인해 캡처가 중지된 경우입니다. 
 
 ```
 {
-  "bytesToCapturePerPacket": 0,
-  "etag": "W/\"b8cf3528-2e14-45cb-a7f3-5712ffb687ac\"",
-  "filters": [
-    {
-      "localIpAddress": "10.0.0.3",
-      "localPort": "",
-      "protocol": "TCP",
-      "remoteIpAddress": "1.1.1.1-255.255.255",
-      "remotePort": "20"
-    },
-    {
-      "localIpAddress": "10.0.0.3",
-      "localPort": "",
-      "protocol": "TCP",
-      "remoteIpAddress": "1.1.1.1-255.255.255",
-      "remotePort": "80"
-    },
-    {
-      "localIpAddress": "10.0.0.3",
-      "localPort": "",
-      "protocol": "TCP",
-      "remoteIpAddress": "1.1.1.1-255.255.255",
-      "remotePort": "443"
-    },
-    {
-      "localIpAddress": "",
-      "localPort": "",
-      "protocol": "UDP",
-      "remoteIpAddress": "",
-      "remotePort": ""
-    }
-  ],
-  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/NetworkWatcherRG/providers/Microsoft.Network/networkWatchers/NetworkWatcher_westcentralus/packetCaptures/packetCaptureName",
-  "name": "packetCaptureName",
-  "provisioningState": "Succeeded",
-  "resourceGroup": "NetworkWatcherRG",
-  "storageLocation": {
-    "filePath": null,
-    "storageId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/gwteststorage123abc",
-    "storagePath": "https://gwteststorage123abc.blob.core.windows.net/network-watcher-logs/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/{resourceGroupName}/providers/microsoft.compute/virtualmachines/{vmName}/2017/05/25/packetcapt
-ure_16_22_34_630.cap"
+  "additionalProperties": {
+    "status": "Succeeded"
   },
-  "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}",
-  "timeLimitInSeconds": 18000,
-  "totalBytesPerSession": 1073741824
+  "captureStartTime": "2016-12-06T17:20:01.5671279Z",
+  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/NetworkWatcherRG/providers/Microsoft.Network/networkWatchers/NetworkWatcher_westcentralus/pa
+cketCaptures/packetCaptureName",
+  "name": "packetCaptureName",
+  "packetCaptureError": [],
+  "packetCaptureStatus": "Stopped",
+  "stopReason": "TimeExceeded"
 }
 ```
 
@@ -275,9 +239,8 @@ https://{storageAccountName}.blob.core.windows.net/network-watcher-logs/subscrip
 
 ## <a name="next-steps"></a>다음 단계
 
-[경고로 트리거된 패킷 캡처 만들기](network-watcher-alert-triggered-packet-capture.md)를 확인하여 가상 컴퓨터 경고로 패킷 캡처를 자동화하는 방법을 알아봅니다.
+[경고로 트리거된 패킷 캡처 만들기](network-watcher-alert-triggered-packet-capture.md)를 확인하여 가상 머신 경고로 패킷 캡처를 자동화하는 방법을 알아봅니다.
 
-[IP 흐름 확인 확인](network-watcher-check-ip-flow-verify-portal.md)을 방문하여 특정 트래픽이 VM에서 허용되는지 알아봅니다.
+[IP 흐름 확인 확인](diagnose-vm-network-traffic-filtering-problem.md)을 방문하여 특정 트래픽이 VM에서 허용되는지 알아봅니다.
 
 <!-- Image references -->
-

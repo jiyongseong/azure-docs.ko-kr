@@ -15,25 +15,17 @@ ms.devlang: python
 ms.topic: article
 ms.date: 05/31/2017
 ms.author: huvalo
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6adaf7026d455210db4d7ce6e7111d13c2b75374
-ms.openlocfilehash: a9ccbb3da29670da9a377be2212905c67b3ec7d0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/22/2017
-
-
+ms.openlocfilehash: 01fa162d41e03e29f3b6f0ca128e7cc49aa91abb
+ms.sourcegitcommit: adf6a4c89364394931c1d29e4057a50799c90fc0
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/09/2017
 ---
 # <a name="django-hello-world-web-app-on-a-windows-server-vm"></a>Windows Server VM의 Django Hello World 웹앱
-> [!div class="op_single_selector"]
-> * [Windows](python-django-web-app.md)
-> * [Mac/Linux](../../linux/python-django-web-app.md)
-> 
-> 
-
-<br>
 
 > [!IMPORTANT] 
-> Azure에는 리소스를 만들고 작업하는 [Azure Resource Manager와 클래식 배포 모델](../../../resource-manager-deployment-model.md)이라는 두 가지 배포 모델이 있습니다. 이 문서에서는 클래식 배포 모델에 대해 설명합니다. 대부분의 새로운 배포에서는 Azure Resource Manager 모델을 사용하는 것이 좋습니다. Django를 배포하는 데 사용할 수 있는 Resource Manager 템플릿은 [Django 앱 배포](https://azure.microsoft.com/documentation/templates/django-app/)를 참조하세요.
+> Azure에는 리소스를 만들고 작업하는 [Azure Resource Manager와 클래식 배포 모델](../../../resource-manager-deployment-model.md)이라는 두 가지 배포 모델이 있습니다. 이 문서에서는 클래식 배포 모델에 대해 설명합니다. 대부분의 새로운 배포에서는 Azure Resource Manager 모델을 사용하는 것이 좋습니다.
+> [!INCLUDE [virtual-machines-common-classic-createportal](../../../../includes/virtual-machines-classic-portal.md)]
 
 이 자습서는 Azure Virtual Machines의 Windows Server에서 Django 기반 웹 사이트를 호스트하는 방법을 보여 줍니다. 이 자습서에서는 사전에 Azure 경험이 없다고 가정합니다. 이 자습서를 완료하면 클라우드에서 Django 기반 응용 프로그램을 실행할 수 있게 됩니다.
 
@@ -184,4 +176,3 @@ ms.lasthandoff: 06/22/2017
 [Web Platform Installer]: http://www.microsoft.com/web/downloads/platform.aspx
 [python.org]: https://www.python.org/downloads/
 [wfastcgi]: https://pypi.python.org/pypi/wfastcgi
-

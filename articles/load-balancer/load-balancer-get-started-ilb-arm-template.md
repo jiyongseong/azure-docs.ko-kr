@@ -1,9 +1,9 @@
 ---
-title: "내부 부하 분산 장치 만들기 - Azure 템플릿 | Microsoft Docs"
-description: "리소스 관리자에서 템플릿을 사용하여 내부 부하 분산 장치를 만드는 방법에 대해 알아봅니다."
+title: 내부 부하 분산 장치 만들기 - Azure 템플릿 | Microsoft Docs
+description: 리소스 관리자에서 템플릿을 사용하여 내부 부하 분산 장치를 만드는 방법에 대해 알아봅니다.
 services: load-balancer
 documentationcenter: na
-author: kumudd
+author: KumudD
 manager: timlt
 tags: azure-resource-manager
 ms.assetid: 64150862-6ced-42de-85dc-89d323257d7c
@@ -12,15 +12,14 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 01/23/2017
+ms.date: 09/25/2017
 ms.author: kumud
-translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: 5559f610a2556aaecff61eabd19759250904c379
-ms.lasthandoff: 04/27/2017
-
+ms.openlocfilehash: f92430cad52edc60a0ab69caec61cc6f20515f61
+ms.sourcegitcommit: c3d53d8901622f93efcd13a31863161019325216
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/29/2018
 ---
-
 # <a name="create-an-internal-load-balancer-using-a-template"></a>템플릿을 사용하여 내부 부하 분산 장치 만들기
 
 > [!div class="op_single_selector"]
@@ -29,10 +28,8 @@ ms.lasthandoff: 04/27/2017
 > * [Azure CLI](../load-balancer/load-balancer-get-started-ilb-arm-cli.md)
 > * [템플릿](../load-balancer/load-balancer-get-started-ilb-arm-template.md)
 
-[!INCLUDE [load-balancer-get-started-ilb-intro-include.md](../../includes/load-balancer-get-started-ilb-intro-include.md)]
 
-> [!NOTE]
-> Azure에는 리소스를 만들고 작업하는 [Resource Manager와 클래식](../azure-resource-manager/resource-manager-deployment-model.md)이라는 두 가지 배포 모델이 있습니다.  이 문서에서는 Resource Manager 배포 모델 사용을 설명하며 Microsoft에서는 대부분의 새로운 배포에 대해 [클래식 배포 모델](load-balancer-get-started-ilb-classic-ps.md) 대신 이 모델을 사용하도록 권장합니다.
+[!INCLUDE [load-balancer-get-started-ilb-intro-include.md](../../includes/load-balancer-get-started-ilb-intro-include.md)]
 
 [!INCLUDE [load-balancer-get-started-ilb-scenario-include.md](../../includes/load-balancer-get-started-ilb-scenario-include.md)]
 
@@ -82,5 +79,4 @@ Azure CLI를 사용하여 템플릿을 배포하려면 아래 단계를 따르�
 [원본 IP 선호도를 사용하여 부하 분산 장치 배포 모드 구성](load-balancer-distribution-mode.md)
 
 [부하 분산 장치에 대한 유휴 TCP 시간 제한 설정 구성](load-balancer-tcp-idle-timeout.md)
-
 

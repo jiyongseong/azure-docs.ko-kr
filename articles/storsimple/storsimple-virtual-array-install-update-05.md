@@ -14,12 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 05/10/2017
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 97fa1d1d4dd81b055d5d3a10b6d812eaa9b86214
 ms.openlocfilehash: c47da5b90c16e2d5b5709e2a6affc026238b9468
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/11/2017
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="install-update-05-on-your-storsimple-virtual-array"></a>StorSimple 가상 배열에 업데이트 0.5 설치
 
@@ -120,5 +119,4 @@ GA 또는 업데이트 0.1 소프트웨어 버전을 실행하는 장치에 업�
 ## <a name="next-steps"></a>다음 단계
 
 [StorSimple 가상 배열 관리](storsimple-ova-web-ui-admin.md)에 대해 자세히 알아봅니다.
-
 

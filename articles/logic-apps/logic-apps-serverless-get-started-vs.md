@@ -1,12 +1,12 @@
 ---
-title: "Visual Studio에서 서버를 사용하지 않는 앱 빌드 | Microsoft Docs"
-description: "Visual Studio에서 앱 만들기, 배포 및 관리에 대한 이 가이드를 사용하여 첫 번째 서버를 사용하지 않는 앱을 시작합니다."
-keywords: 
+title: Visual Studio에서 서버를 사용하지 않는 앱 빌드 | Microsoft Docs
+description: Visual Studio에서 앱 만들기, 배포 및 관리에 대한 이 가이드를 사용하여 첫 번째 서버를 사용하지 않는 앱을 시작합니다.
+keywords: ''
 services: logic-apps
 author: jeffhollan
 manager: anneta
-editor: 
-documentationcenter: 
+editor: ''
+documentationcenter: ''
 ms.assetid: d565873c-6b1b-4057-9250-cf81a96180ae
 ms.service: logic-apps
 ms.workload: integration
@@ -15,12 +15,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/30/2017
 ms.author: LADocs; jehollan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 07584294e4ae592a026c0d5890686eaf0b99431f
-ms.openlocfilehash: 3672beda8a502e5fe2c8182076a8edef7ee9ebf6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/02/2017
-
+ms.openlocfilehash: d3cd509a0073e45bf910e9a74a279d678ff03b63
+ms.sourcegitcommit: 8aab1aab0135fad24987a311b42a1c25a839e9f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/16/2018
 ---
 # <a name="build-a-serverless-app-in-visual-studio-with-logic-apps-and-functions"></a>Logic Apps 및 함수를 사용하여 Visual Studio에서 서버를 사용하지 않는 앱 빌드
 
@@ -47,8 +46,7 @@ Azure의 리소스 관리는 리소스 그룹 내에서 수행됩니다.  리소
 1. **클라우드** 범주에서 Azure **리소스 그룹** 프로젝트를 만들도록 선택합니다.  
  * 나열된 범주 또는 프로젝트가 표시되지 않는 경우 Visual Studio용 Azure SDK가 설치되었는지 확인합니다.
 1. 프로젝트에 이름 및 위치를 지정하고 **확인**을 선택하여 템플릿을 선택하라는 메시지를 표시하는 Visual Studio를 만듭니다.  빈 값, 논리 앱 또는 다른 리소스로 시작하도록 선택할 수 있습니다.  그러나 이 경우 Azure 빠른 시작 템플릿을 사용하여 서버를 사용하지 않는 앱을 시작합니다.
-1. **Azure 빠른 시작**의 템플릿을 표시하도록 선택합니다.
-    ![Azure 빠른 시작 템플릿 선택][1]
+1. **Azure 빠른 시작**의 템플릿을 표시하도록 선택합니다. ![Azure 빠른 시작 템플릿 선택][1]
 1. 서버를 사용하지 않는 빠른 시작 템플릿(**101-logic-app-and-function-app**)을 선택하고 **확인**을 클릭합니다.
 
 빠른 시작 템플릿은 리소스 그룹 프로젝트에서 배포 템플릿을 만듭니다.  템플릿은 Azure Functions를 호출하는 간단한 논리 앱을 포함하고 결과를 반환합니다.  솔루션 탐색기에서 `azuredeploy.json` 파일을 여는 경우 서버를 사용하지 않는 앱에 대한 리소스를 볼 수 있습니다.
@@ -57,7 +55,7 @@ Azure의 리소스 관리는 리소스 그룹 내에서 수행됩니다.  리소
 
 Visual Studio에서 논리 앱 비주얼 디자이너를 열려면 미리 배포된 Azure 리소스 그룹이 있어야 합니다.  이렇게 하면 디자이너는 논리 앱에 리소스에 대한 연결 및 서비스를 만들고 사용할 수 있습니다.  시작하려면 단순히 만든 솔루션을 배포해야 합니다.
 
-1. Visual Studio에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **배포**를 선택하고 **새** 배포를 만듭니다.  ![새 리소스 배포 선택][2]
+1. Visual Studio에서 프로젝트를 마우스 오른쪽 단추로 클릭하고 **배포**를 선택하고 **새** 배포를 만듭니다. ![새 리소스 배포 선택][2]
 1. 유효한 Azure 구독 및 리소스 그룹을 선택합니다.
 1. 솔루션을 **배포**하도록 선택합니다.
 1. 논리 앱과 Azure 함수 앱의 이름을 입력합니다.  Azure 함수 이름은 전역적으로 고유해야 합니다.
@@ -68,7 +66,7 @@ Visual Studio에서 논리 앱 비주얼 디자이너를 열려면 미리 배포
 
 솔루션을 모든 리소스 그룹에 배포한 후 비주얼 디자이너를 사용하여 논리 앱을 편집하고 변경할 수 있습니다.
 
-1. 솔루션 탐색기에서 `azuredeploy.json` 파일을 마우스 오른쪽 단추로 클릭하고 **논리 앱 디자이너로 열기**를 선택합니다.
+1. 솔루션 탐색기에서 `azuredeploy.json` 파일을 마우스 오른쪽 단추로 클릭하고 **Logic Apps 디자이너로 열기**를 선택합니다.
 1. 솔루션이 배포된 **리소스 그룹** 및 **위치**를 선택하고 **확인**을 선택합니다.
 
 이제 논리 앱 비주얼 디자이너가 Visual Studio와 함께 표시됩니다.  단계 추가, 워크플로 수정 및 변경 내용 저장을 계속할 수 있습니다.  또한 Visual Studio에서 논리 앱을 만들 수도 있습니다.  템플릿 탐색기에서 **리소스**를 마우스 오른쪽 단추로 클릭하면 **논리 앱**을 프로젝트에 추가하도록 선택할 수 있습니다.  빈 논리 앱이 리소스 그룹으로 미리 배포 없이 비주얼 디자이너에 로드됩니다.
@@ -88,10 +86,9 @@ JavaScript, Python, F #, Bash, Batch 또는 PowerShell을 사용하는 경우 [�
 ## <a name="next-steps"></a>다음 단계
 
 * [서버를 사용하지 않는 소셜 대시보드를 빌드하는 방법 알아보기](logic-apps-scenario-social-serverless.md)
-* [Visual Studio 클라우드 탐색기에서 논리 앱 관리](logic-apps-manage-from-vs.md)
+* [Visual Studio 클라우드 탐색기에서 논리 앱 관리](manage-logic-apps-with-visual-studio.md)
 * [논리 앱 워크플로 정의 언어](logic-apps-workflow-definition-language.md)
 
 <!-- Image references -->
 [1]: ./media/logic-apps-serverless-get-started-vs/select-template.png
 [2]: ./media/logic-apps-serverless-get-started-vs/deploy.png
-

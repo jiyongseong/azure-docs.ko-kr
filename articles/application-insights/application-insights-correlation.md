@@ -1,23 +1,22 @@
 ---
-title: "Azure Application Insights 원격 분석 상관 관계 | Microsoft 문서"
-description: "Application Insights 원격 분석 상관 관계"
+title: Azure Application Insights 원격 분석 상관 관계 | Microsoft 문서
+description: Application Insights 원격 분석 상관 관계
 services: application-insights
 documentationcenter: .net
-author: SergeyKanzhelev
+author: mrbullwinkle
 manager: carmonm
 ms.service: application-insights
 ms.workload: TBD
 ms.tgt_pltfrm: ibiza
 ms.devlang: multiple
 ms.topic: article
-ms.date: 04/25/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: c48dc5cb5dd6dfa09ff9718e78f8d560886851be
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
+ms.date: 04/09/2018
+ms.author: mbullwin; sergkanz
+ms.openlocfilehash: 12b46b4abaa17fe9dd0e9055bca5463312bbd15d
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
 # <a name="telemetry-correlation-in-application-insights"></a>Application Insights의 원격 분석 상관 관계
 
@@ -40,7 +39,7 @@ Application Insights는 분산 원격 분석 상관 관계에 대한 [데이터 
 Application Insights 데이터 모델에서는 이 문제를 해결하기 위해 두 가지 필드, 즉 `request.source` 및 `dependency.target` 필드를 정의합니다. 첫 번째 필드는 종속성 요청을 시작한 구성 요소를 식별하고, 두 번째 필드는 종속성 호출의 응답을 반환한 구성 요소를 식별합니다.
 
 
-## <a name="example"></a>예제
+## <a name="example"></a>예
 
 STOCKS API라는 외부 API를 사용하여 주식의 현재 시가를 보여 주는 응용 프로그램 STOCK PRICES의 예제를 살펴보겠습니다. STOCK PRICES 응용 프로그램에는 `GET /Home/Stock`를 사용하여 클라이언트 웹 브라우저에서 연 `Stock page` 페이지가 있습니다. 응용 프로그램에서 `GET /api/stock/value` HTTP 호출을 사용하여 STOCK API를 조회합니다.
 
@@ -54,7 +53,7 @@ STOCKS API라는 외부 API를 사용하여 주식의 현재 시가를 보여 �
 
 결과 보기에서 모든 원격 분석 항목은 루트 `operation_Id`를 공유합니다. Ajax 호출이 페이지에서 실행된 경우 새로운 고유 ID `qJSXU`가 종속성 원격 분석에 할당되고 pageView의 ID가 `operation_ParentId`로 사용됩니다. 따라서 서버 요청은 Ajax의 ID를 `operation_ParentId`로 사용합니다.
 
-| itemType   | name                      | id           | operation_ParentId | operation_Id |
+| itemType   | 이름                      | id           | operation_ParentId | operation_Id |
 |------------|---------------------------|--------------|--------------------|--------------|
 | pageView   | Stock page                |              | STYz               | STYz         |
 | dependency | GET /Home/Stock           | qJSXU        | STYz               | STYz         |
@@ -82,7 +81,7 @@ Application Insights에서는 상관 관계 HTTP 프로토콜에 대한 [extensi
 - `dependency`가 **Span**을 매핑되고 `span.kind = client`입니다.
 - `request` 및 `dependency`의 `id`가 **Span.Id**로 매핑됩니다.
 - `operation_Id`가 **TraceId**로 매핑됩니다.
-- `operation_ParentId`가 `ChileOf` 형식의 **Reference**로 매핑됩니다.
+- `operation_ParentId`가 `ChildOf` 형식의 **Reference**로 매핑됩니다.
 
 Application Insights 형식 및 데이터 모델에 대한 자세한 내용은 [데이터 모델](application-insights-data-model.md)을 참조하세요.
 
@@ -99,11 +98,36 @@ Diagnostics Source의 [guide to Activities](https://github.com/dotnet/corefx/blo
 
 ASP.NET Core 2.0에서는 HTTP 헤더 추출 및 새 활동 시작을 지원합니다. 
 
-`System.Net.HttpClient` 시작 버전 `<fill in>`에서는 상관 관계 Http 헤더의 자동 삽입 및 http 호출을 활동으로 추적하는 기능을 지원합니다.
+`System.Net.HttpClient` 시작 버전 `4.1.0`에서는 상관 관계 Http 헤더의 자동 삽입 및 http 호출을 활동으로 추적하는 기능을 지원합니다.
 
 ASP.NET 클래식에 대한 새로운 HTTP 모듈 [Microsoft.AspNet.TelemetryCorrelation](https://www.nuget.org/packages/Microsoft.AspNet.TelemetryCorrelation/)이 있습니다. 이 모듈은 DiagnosticsSource를 사용하여 원격 분석 상관 관계를 구현합니다. 들어오는 요청 헤더를 기반으로 활동을 시작합니다. 또한 서로 다른 요청 처리 단계의 원격 분석을 상호 연결합니다. IIS 처리의 모든 단계가 서로 다른 관리 스레드에서 실행되는 경우에도 마찬가지입니다.
 
 Application Insights SDK 시작 버전 `2.4.0-beta1`에서는 DiagnosticsSource 및 활동을 사용하여 원격 분석을 수집하고 이를 현재 활동과 연결합니다. 
+
+<a name="java-correlation"></a>
+## <a name="telemetry-correlation-in-the-java-sdk"></a>Java SDK의 원격 분석 상관 관계
+[Application Insights Java SDK](app-insights-java-get-started.md)는 버전 `2.0.0`부터 원격 분석의 자동 상관 관계를 지원합니다. 요청 범위 내에서 실행된 모든 원격 분석(추적, 예외, 사용자 지정 이벤트 등)에 대한 `operation_id`를 자동으로 채웁니다. 또한 [Java SDK 에이전트](app-insights-java-agent.md)가 구성된 경우, HTTP를 통한 서비스 간 호출에 대한 상관 관계 헤더(위에 설명됨) 전파도 관리합니다. 참고: Apache HTTP 클라이언트를 통해 수행되는 호출에 대해서만 상관 관계 기능이 지원됩니다. Spring Rest Template 또는 Feign을 사용하는 경우, 내부적으로 둘 다 Apache HTTP 클라이언트에서 사용할 수 있습니다.
+
+현재, 메시징 기술(예:: Kafka, RabbitMQ, Azure Service Bus)에서는 자동 컨텍스트 전파가 지원되지 않습니다. 그러나 `trackDependency` 및 `trackRequest` API를 사용하여 이러한 시나리오를 수동으로 코딩할 수 있습니다. 여기서 종속성 원격 분석은 생산자에 의해 큐에 추가되는 메시지를 나타내고 요청은 소비자에 의해 처리되는 메시지를 나타냅니다. 이 경우 `operation_id` 및 `operation_parentId` 둘 다 메시지의 속성에 전파되어야 합니다.
+
+<a name="java-role-name"></a>
+### <a name="role-name"></a>역할 이름
+경우에 따라, [응용 프로그램 맵](app-insights-app-map.md)에 구성 요소 이름에 표시되는 방식을 사용자 지정하려고 할 수 있습니다. 이렇게 하려면 다음 중 하나를 수행하여 `cloud_roleName`을 수동으로 설정할 수 있습니다.
+
+원격 분석 이니셜라이저를 통해(모든 원격 분석 항목에 태그 지정)
+```Java
+public class CloudRoleNameInitializer extends WebTelemetryInitializerBase {
+
+    @Override
+    protected void onInitializeTelemetry(Telemetry telemetry) {
+        telemetry.getContext().getTags().put(ContextTagKeys.getKeys().getDeviceRoleName(), "My Component Name");
+    }
+  }
+```
+[장치 컨텍스트 클래스](https://docs.microsoft.com/et-ee/java/api/com.microsoft.applicationinsights.extensibility.context._device_context)를 통해(이 원격 분석 항목에만 태그 지정)
+```Java
+telemetry.getContext().getDevice().setRoleName("My Component Name");
+```
 
 ## <a name="next-steps"></a>다음 단계
 
@@ -111,4 +135,3 @@ Application Insights SDK 시작 버전 `2.4.0-beta1`에서는 DiagnosticsSource 
 - Application Insights에서 마이크로 서비스의 모든 구성 요소를 등록합니다. [지원되는 플랫폼](app-insights-platforms.md)을 확인합니다.
 - Application Insights 형식 및 데이터 모델에 대한 자세한 내용은 [데이터 모델](application-insights-data-model.md)을 참조하세요.
 - [원격 분석을 확장 및 필터링](app-insights-api-filtering-sampling.md)하는 방법을 알아봅니다.
-

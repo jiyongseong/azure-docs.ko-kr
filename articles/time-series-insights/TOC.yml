@@ -1,0 +1,112 @@
+- name: Azure IoT 기본 사항
+  href: ../iot-fundamentals/index.yml
+- name: Azure Time Series Insights 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: Time Series Insights 정보
+      href: time-series-insights-overview.md
+- name: 빠른 시작
+  items:
+    - name: Time Series Insights 탐색
+      href: time-series-quickstart.md
+- name: 자습서
+  items:
+    - name: TSI JavaScript 클라이언트 라이브러리 탐색
+      href: tutorial-explore-js-client-lib.md
+- name: 개념
+  items:
+    - name: 환경 계획
+      href: time-series-insights-environment-planning.md
+    - name: 탐색기에서 데이터 시각화
+      href: time-series-insights-explorer.md
+    - name: 제한 완화
+      href: time-series-insights-environment-mitigate-latency.md
+    - name: 데이터 보존의 이해
+      href: time-series-insights-concepts-retention.md
+    - name: 진단 및 문제 해결
+      href: time-series-insights-diagnose-and-solve-problems.md
+    - name: 개발
+      items:
+        - name: 인증 및 권한 부여
+          href: time-series-insights-authentication-and-authorization.md
+        - name: 'C#을 사용하여 데이터 쿼리'
+          href: time-series-insights-query-data-csharp.md
+        - name: 'C#으로 작성된 참조 데이터 관리'
+          href: time-series-insights-manage-reference-data-csharp.md
+        - name: 사용자 지정 보기 공유
+          href: time-series-insights-parameterized-urls.md
+- name: 방법 가이드
+  items:
+    - name: 환경 만들기
+      href: time-series-insights-get-started.md
+    - name: 데이터 액세스 권한 부여
+      href: time-series-insights-data-access.md
+    - name: Event Hub에 연결
+      href: time-series-insights-how-to-add-an-event-source-eventhub.md
+    - name: IoT Hub에 연결
+      href: time-series-insights-how-to-add-an-event-source-iothub.md
+    - name: 데이터 보존 구성하기
+      href: time-series-insights-how-to-configure-retention.md
+    - name: 참조 데이터 집합 만들기
+      href: time-series-insights-add-reference-data-set.md
+    - name: 이벤트 보내기
+      href: time-series-insights-send-events.md
+    - name: 환경 규모 조정
+      href: time-series-insights-how-to-scale-your-environment.md
+    - name: 템플릿을 사용하여 리소스 관리
+      href: time-series-insights-manage-resources-using-azure-resource-manager-template.md
+- name: 참고 자료
+  items:
+    - name: 쿼리 API
+      href: /rest/api/time-series-insights/time-series-insights-reference-queryapi
+    - name: 쿼리 구문
+      href: /rest/api/time-series-insights/time-series-insights-reference-query-syntax
+- name: 관련 항목
+  items:
+    - name: 솔루션
+      items:
+        - name: IoT Suite 미리 구성된 솔루션
+          href: /azure/iot-suite
+        - name: IoT Central
+          href: 'https://docs.microsoft.com/microsoft-iot-central/'
+    - name: 플랫폼 서비스
+      items:
+        - name: IoT Hub
+          href: /azure/iot-hub
+        - name: IoT Hub Device Provisioning 서비스
+          href: /azure/iot-dps
+        - name: 지도
+          href: /azure/azure-maps
+        - name: 서비스 SDK
+          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-service-sdks'
+        - name: Time Series Insights
+          href: /azure/time-series-insights
+    - name: Edge
+      items:
+        - name: IoT Edge
+          href: /azure/iot-edge
+        - name: IoT 장치 SDK
+          href: '/azure/iot-hub/iot-hub-devguide-sdks#azure-iot-device-sdks'
+    - name: Azure Stream Analytics
+      href: /azure/stream-analytics/
+- name: 리소스
+  items:
+    - name: 고객 데이터 요청
+      href: time-series-insights-customer-data-requests.md
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/?category=internet-of-things'
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/time-series-insights/'
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'
+    - name: 지역 가용성
+      href: 'https://azure.microsoft.com/regions/services/'
+    - name: MSDN 포럼
+      href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureTimeSeriesInsights'
+    - name: 스택 오버플로
+      href: 'https://stackoverflow.com/questions/tagged/azure-timeseries-insights'
+    - name: 지원 옵션
+      href: 'https://azure.microsoft.com/support/options/'
+    - name: 동영상
+      href: 'https://azure.microsoft.com/resources/videos/index/?services=time-series-insights'

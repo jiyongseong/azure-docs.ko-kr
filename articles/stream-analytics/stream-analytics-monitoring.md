@@ -1,27 +1,19 @@
 ---
-title: "Stream Analytics 작업 모니터링 이해 | Microsoft Docs"
-description: "Stream Analytics 작업 모니터링 이해"
-keywords: "쿼리 모니터"
+title: Azure Stream Analytics에서 작업 모니터링 이해
+description: 이 문서에서는 Azure Stream Analytics에서 작업을 모니터링하는 방법을 설명합니다.
 services: stream-analytics
-documentationcenter: 
-author: jeffstokes72
-manager: jhubbard
-editor: cgronlun
-ms.assetid: 5f5cc00f-4a7b-491e-89e1-dbafea46d399
+author: jseb225
+ms.author: jeanb
+manager: kfile
+ms.reviewer: jasonh
 ms.service: stream-analytics
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: data-services
+ms.topic: conceptual
 ms.date: 03/28/2017
-ms.author: jeffstok
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: cb736d60f4a22eb3fd1e4659e913886dfcc5b9aa
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
-
+ms.openlocfilehash: 4b048705c80b7776ab0ab6823e27659a01eedeb5
+ms.sourcegitcommit: 5b2ac9e6d8539c11ab0891b686b8afa12441a8f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="understand-stream-analytics-job-monitoring-and-how-to-monitor-queries"></a>Stream Analytics 작업 모니터링 및 쿼리를 모니터링하는 방법 이해
 
@@ -42,7 +34,7 @@ Azure Portal은 쿼리 및 작업 성능을 모니터링하고 문제를 해결�
 | 출력 이벤트          | Stream Analytics 작업이 출력 대상에 보낸 데이터의 양입니다(이벤트 수). |
 | 순서 비지정 이벤트    | 이벤트 순서 지정 정책에 기반하여 조정된 타임스탬프를 받거나 삭제된 순서가 정해지지 않은 수신 이벤트의 수입니다. 잘못된 순서 허용 시간 설정의 구성에 의해 영향을 받을 수 있습니다. |
 | 데이터 변환 오류 | Stream Analytics 작업에 의해 발생하는 데이터 변환 오류 수입니다. |
-| 런타임 오류         | Stream Analytics 작업을 실행하는 동안 발생한 총 오류 수입니다. |
+| 런타임 오류         | 쿼리 처리와 관련된 총 오류 수(이벤트 수집 또는 결과 출력 중에 발견된 오류 제외) |
 | 늦은 입력 이벤트      | 지연 도착 허용 시간 설정의 이벤트 순서 지정 정책 구성에 기반하여 타임스탬프가 조정되었거나 삭제된 소스에서 늦게 도착한 이벤트의 수입니다. |
 | 기능 요청      | Azure Machine Learning 함수(있는 경우)에 대한 호출 수입니다. |
 | 실패한 기능 요청 | 실패한 Azure Machine Learning 함수 호출(있는 경우) 수입니다. |
@@ -56,14 +48,17 @@ Azure Portal은 쿼리 및 작업 성능을 모니터링하고 문제를 해결�
   ![쿼리 모니터 시간 그래프](./media/stream-analytics-monitoring/08-stream-analytics-monitoring.png)  
 
 
+## <a name="latest-output"></a>최신 출력
+사용자 작업을 모니터링하기 위한 또 다른 흥미로운 데이터 요소는 개요 페이지에 표시되는 마지막 출력 시간입니다.
+이 시간은 작업의 최신 출력에 대한 응용 프로그램 시간(즉, 이벤트 데이터의 타임스탬프를 사용한 시간)입니다.
+
 ## <a name="get-help"></a>도움말 보기
-추가 지원이 필요할 경우 [Azure 스트림 분석 포럼](https://social.msdn.microsoft.com/Forums/home?forum=AzureStreamAnalytics)
+추가 지원이 필요할 경우 [Azure Stream Analytics 포럼](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureStreamAnalytics)
 
 ## <a name="next-steps"></a>다음 단계
 * [Azure Stream Analytics 소개](stream-analytics-introduction.md)
 * [Azure Stream Analytics 사용 시작](stream-analytics-real-time-fraud-detection.md)
-* [Azure 스트림 분석 작업 규모 지정](stream-analytics-scale-jobs.md)
-* [Azure 스트림 분석 쿼리 언어 참조](https://msdn.microsoft.com/library/azure/dn834998.aspx)
+* [Azure  Stream Analytics 작업 규모 지정](stream-analytics-scale-jobs.md)
+* [Azure  Stream Analytics 쿼리 언어 참조](https://msdn.microsoft.com/library/azure/dn834998.aspx)
 * [Azure Stream Analytics 관리 REST API 참조](https://msdn.microsoft.com/library/azure/dn835031.aspx)
-
 

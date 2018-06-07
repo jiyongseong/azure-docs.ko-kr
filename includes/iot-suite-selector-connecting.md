@@ -1,73 +1,79 @@
+---
+title: 포함 파일
+description: 포함 파일
+services: iot-suite
+author: dominicbetts
+ms.service: iot-suite
+ms.topic: include
+ms.date: 04/24/2018
+ms.author: dobett
+ms.custom: include file
+ms.openlocfilehash: 500e335d0b2eddc56cdfb9828236bc4676d9b6aa
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+---
 > [!div class="op_single_selector"]
-> * [Windows에서 C](../articles/iot-suite/iot-suite-connecting-devices.md)
-> * [Linux에서 C](../articles/iot-suite/iot-suite-connecting-devices-linux.md)
-> * [Node.JS](../articles/iot-suite/iot-suite-connecting-devices-node.md)
-> 
-> 
+> * [Windows에서 C](../articles/iot-accelerators/iot-accelerators-connecting-devices.md)
+> * [Linux에서 C](../articles/iot-accelerators/iot-accelerators-connecting-devices-linux.md)
+> * [Node.js(일반)](../articles/iot-accelerators/iot-accelerators-connecting-devices-node.md)
+> * [Raspberry Pi의 Node.js](../articles/iot-accelerators/iot-accelerators-connecting-pi-node.md)
+> * [Raspberry Pi의 C](../articles/iot-accelerators/iot-accelerators-connecting-pi-c.md)
 
-## <a name="scenario-overview"></a>시나리오 개요
-이 시나리오에서는 원격 모니터링 [미리 구성된 솔루션][lnk-what-are-preconfig-solutions]에 다음과 같은 원격 분석 데이터를 보낼 장치를 만듭니다.
+이 자습서에서는 원격 모니터링 [솔루션 가속기](../articles/iot-accelerators/iot-accelerators-what-are-solution-accelerators.md)에 다음과 같은 원격 분석을 보내는 **냉각기** 장치를 구현합니다.
 
-* 외부 온도
-* 내부 온도
+* 온도
+* 압력
 * 습도
 
-간소함을 위하여 장치의 코드가 샘플 값을 생성하지만, 사용자는 자신의 장치에 실제 센서를 연결하고 실제 원격 분석 데이터를 보내어 샘플을 확장할 것을 권장합니다.
+간단히 하기 위해 코드는 **냉각기**에 대한 샘플 원격 분석 값을 생성합니다. 실제 센서를 장치에 연결하고 실제 원격 분석을 보내 샘플을 확장할 수 있습니다.
 
-장치는 솔루션 대시보드에서 호출된 메서드 및 솔루션 대시보드에 설정된 desired 속성 값에 응답할 수도 있습니다.
+샘플 장치는 또한:
 
-이 자습서를 완료하려면 활성 Azure 계정이 필요합니다. 계정이 없는 경우 몇 분 만에 무료 평가판 계정을 만들 수 있습니다. 자세한 내용은 [Azure 무료 평가판][lnk-free-trial]을 참조하세요.
+* 솔루션에 메타데이터를 보내 해당 기능을 설명합니다.
+* 솔루션의 **장치** 페이지에서 트리거된 작업에 응답합니다.
+* 솔루션의 **장치** 페이지에서 보내는 구성 변경 내용에 응답합니다.
+
+이 자습서를 완료하려면 활성 Azure 계정이 필요합니다. 계정이 없는 경우 몇 분 만에 평가판 계정을 만들 수 있습니다. 자세한 내용은 [Azure 무료 체험](http://azure.microsoft.com/pricing/free-trial/)을 참조하세요.
 
 ## <a name="before-you-start"></a>시작하기 전에
-장치에 대한 코드를 작성하기 전에, 미리 구성된 원격 모니터링 솔루션을 프로비전하고 이 솔루션에 새로운 사용자 지정 장치를 프로비전해야 합니다.
 
-### <a name="provision-your-remote-monitoring-preconfigured-solution"></a>미리 구성된 사용자의 원격 모니터링 솔루션 프로비전
-이 자습서에서 만드는 장치는 미리 구성된 [원격 모니터링][lnk-remote-monitoring] 솔루션의 인스턴스에 데이터를 전송합니다. Azure 계정에서 미리 구성된 원격 모니터링 솔루션을 미리 프로비전하지 않은 경우 다음 단계를 사용합니다.
+장치에 대한 코드를 작성하기 전에, 원격 모니터링 솔루션 가속기를 배포하고 이 솔루션에 새로운 물리적 장치를 추가합니다.
 
-1. <https://www.azureiotsuite.com/> 페이지에서 솔루션을 만들려면 **+**를 클릭합니다.
-2. **원격 모니터링** 패널에서 **선택**을 클릭하여 솔루션을 만듭니다.
-3. **원격 모니터링 솔루션 만들기** 페이지에서 선택한 **솔루션 이름**을 입력하고, 배포하려는 **지역**을 선택한 후, 사용하려는 Azure 구독을 선택합니다. 그런 다음 **솔루션 만들기**를 클릭합니다.
-4. 프로비전 프로세스가 완료될 때까지 기다립니다.
+### <a name="deploy-your-remote-monitoring-solution-accelerator"></a>원격 모니터링 솔루션 가속기 배포
 
-> [!WARNING]
-> 미리 구성된 솔루션에서는 청구 가능한 Azure 서비스를 사용합니다. 불필요한 비용을 방지하기 위해 완료된 후에는 미리 구성된 솔루션을 구독에서 제거해야 합니다. <https://www.azureiotsuite.com/> 페이지를 방문하여 미리 구성된 솔루션을 구독에서 완전히 제거할 수 있습니다.
-> 
-> 
+이 자습서에서 만드는 **냉각기** 장치는 [원격 모니터링](../articles/iot-suite/iot-suite-remote-monitoring-explore.md) 솔루션 가속기의 인스턴스에 데이터를 전송합니다. Azure 계정에서 원격 모니터링 솔루션 가속기를 미리 프로비전하지 않은 경우 [원격 모니터링 솔루션 가속기 배포](../articles/iot-accelerators/iot-accelerators-remote-monitoring-deploy.md)를 참조하세요.
 
-원격 모니터링 솔루션의 프로비전 프로세스가 완료되면 **시작** 을 클릭하여 브라우저에서 솔루션 대시보드를 엽니다.
+원격 모니터링 솔루션의 배포 프로세스가 완료되면 **시작** 을 클릭하여 브라우저에서 솔루션 대시보드를 엽니다.
 
-![솔루션 대시보드][img-dashboard]
+![솔루션 대시보드](media/iot-suite-selector-connecting/dashboard.png)
 
-### <a name="provision-your-device-in-the-remote-monitoring-solution"></a>원격 모니터링 솔루션에서 장치 프로비전
+### <a name="add-your-device-to-the-remote-monitoring-solution"></a>장치를 원격 모니터링 솔루션에 추가
+
 > [!NOTE]
-> 솔루션에 장치가 이미 프로비전되어 있으면 이 단계를 건너뜁니다. 클라이언트 응용 프로그램을 만들 때 장치 자격 증명을 알아야 합니다.
-> 
-> 
+> 솔루션에 장치가 이미 추가되어 있으면 이 단계를 건너뜁니다. 그러나 다음 단계에서는 장치 연결 문자열이 필요합니다. [Azure Portal](https://portal.azure.com)에서 검색하거나 [az iot](https://docs.microsoft.com/cli/azure/iot?view=azure-cli-latest) CLI 도구를 사용하여 장치 연결 문자열을 검색할 수 있습니다.
 
-미리 구성된 솔루션에 연결하는 장치는 유효한 자격 증명을 사용하여 IoT Hub에 자신을 식별할 수 있어야 합니다. 솔루션 대시보드에서 장치 자격 증명을 검색할 수 있습니다. 이 자습서의 뒷부분에서는 클라이언트 응용 프로그램에 있는 장치 자격 증명을 포함합니다.
+솔루션 가속기에 연결하는 장치는 유효한 자격 증명을 사용하여 IoT Hub에 자신을 식별할 수 있어야 합니다. 솔루션에 장치를 추가할 때 자격 증명이 포함된 장치 연결 문자열을 저장할 기회가 있습니다. 이 자습서의 뒷부분에서는 클라이언트 응용 프로그램에 장치 연결 문자열을 포함시킵니다.
 
-원격 모니터링 솔루션에 장치를 추가하려면 솔루션 대시보드에서 다음 단계를 완료합니다.
+원격 모니터링 솔루션에 장치를 추가하려면 솔루션의 **장치** 페이지에서 다음 단계를 완료합니다.
 
-1. 대시보드의 왼쪽 아래 모서리에서 **장치 추가**를 클릭합니다.
-   
-   ![장치 추가][1]
-2. **사용자 지정 장치** 패널에서 **새로 추가**를 클릭합니다.
-   
-   ![사용자 지정 장치 추가][2]
-3. **직접 나만의 장치 ID 정의**를 선택합니다. 장치 ID(예: **mydevice**)를 입력하고 **ID 확인**을 클릭하여 해당 이름이 이미 사용되고 있는지 확인한 후 **만들기**를 클릭하여 장치를 프로비전합니다.
-   
-   ![장치 ID 추가][3]
-4. 장치 자격 증명(장치 ID, IoT Hub 호스트 이름 및 장치 키)을 적어 둡니다. 원격 모니터링 솔루션에 연결하려면 클라이언트 응용 프로그램에 이러한 값이 필요합니다. **완료**를 클릭합니다.
-   
-    ![장치 자격 증명 보기][4]
-5. 솔루션 대시보드의 장치 목록에서 장치를 선택합니다. 그런 다음 **장치 세부 정보** 패널에서 **장치 사용**을 클릭합니다. 현재 장치 상태는 **실행 중**입니다. 이제 원격 모니터링 솔루션은 장치에서 원격 분석을 수신하고 장치에서 메서드를 호출할 수 있습니다.
+1. **+ 새 장치**를 선택한 다음, **장치 유형**으로 **물리적**을 선택합니다.
 
-[img-dashboard]: ./media/iot-suite-selector-connecting/dashboard.png
-[1]: ./media/iot-suite-selector-connecting/suite0.png
-[2]: ./media/iot-suite-selector-connecting/suite1.png
-[3]: ./media/iot-suite-selector-connecting/suite2.png
-[4]: ./media/iot-suite-selector-connecting/suite3.png
+    ![물리적 장치 추가](media/iot-suite-selector-connecting/devicesprovision.png)
 
-[lnk-what-are-preconfig-solutions]: ../articles/iot-suite/iot-suite-what-are-preconfigured-solutions.md
-[lnk-remote-monitoring]: ../articles/iot-suite/iot-suite-remote-monitoring-sample-walkthrough.md
-[lnk-free-trial]: http://azure.microsoft.com/pricing/free-trial/
+1. 장치 ID로 **물리적 냉각기**를 입력합니다. **대칭 키** 및 **자동 생성 키** 옵션을 선택합니다.
+
+    ![장치 옵션 선택](media/iot-suite-selector-connecting/devicesoptions.png)
+
+1. **적용**을 선택합니다. 그런 다음, **장치 ID**, **기본 키**, **연결 문자열 기본 키** 값을 메모합니다.
+
+    ![자격 증명 검색](media/iot-suite-selector-connecting/credentials.png)
+
+이제 물리적 장치를 원격 모니터링 솔루션 가속기에 추가했고 장치 연결 문자열을 확인했습니다. 다음 섹션에서는 장치 연결 문자열을 사용하여 솔루션에 연결하는 클라이언트 응용 프로그램을 구현합니다.
+
+클라이언트 응용 프로그램은 기본 제공 **냉각기** 장치 모델을 구현합니다. 솔루션 가속기 장치 모델은 장치에 대해 다음을 지정합니다.
+
+* 장치가 솔루션에 보고하는 속성 예를 들어, **냉각기** 장치는 해당 펌웨어 및 위치에 대한 정보를 보고합니다.
+* 장치가 솔루션에 보내는 원격 분석의 유형 예를 들어, **냉각기** 장치는 온도, 습도 및 압력 값을 보냅니다.
+* 장치에서 실행되도록 솔루션에서 예약할 수 있는 메서드 예를 들어, **냉각기** 장치는 **Reboot**, **FirmwareUpdate**, **EmergencyValveRelease** 및 **IncreasePressure** 메서드를 구현해야 합니다.

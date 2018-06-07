@@ -1,26 +1,24 @@
 ---
-title: "Service Fabric Reliable Actors 개요 | Microsoft Docs"
-description: "서비스 패브릭 Reliable Actors 프로그래밍 모델에 대한 소개입니다."
+title: Service Fabric Reliable Actors 개요 | Microsoft Docs
+description: 서비스 패브릭 Reliable Actors 프로그래밍 모델에 대한 소개입니다.
 services: service-fabric
 documentationcenter: .net
 author: vturecek
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 7fdad07f-f2d6-4c74-804d-e0d56131f060
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 06/29/2017
+ms.date: 11/01/2017
 ms.author: vturecek
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6efa2cca46c2d8e4c00150ff964f8af02397ef99
-ms.openlocfilehash: e89be04a0d6fe90a89e293e67d42f0204eb7000a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/01/2017
-
-
+ms.openlocfilehash: d0de7e7596fb7fabbc4061709816111a7a4ad827
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="introduction-to-service-fabric-reliable-actors"></a>서비스 패브릭 신뢰할 수 있는 행위자 소개
 Reliable Actors는 [가상 행위자](http://research.microsoft.com/en-us/projects/orleans/) 패턴을 기반으로 한 Service Fabric 응용 프로그램 프레임워크입니다. Reliable Actors API는 서비스 패브릭에서 제공한 확장성 및 안정성 보증에 기반한 단일 스레드 프로그래밍 모델을 제공합니다.
@@ -42,7 +40,7 @@ Reliable Actors는 [가상 행위자](http://research.microsoft.com/en-us/projec
 
 .NET 개체가 .NET 형식의 인스턴스인 것과 동일하게 모든 행위자는 행위자 형식의 인스턴스로 정의됩니다. 예를 들어, 계산기의 기능을 구현하는 행위자 형식이 있을 수 있으며 클러스터 전체에 걸쳐 다양한 노드에 배포되는 해당 형식의 여러 행위자가 있을 수 있습니다. 이러한 각 행위자는 행위자 ID에 의해 고유하게 식별됩니다.
 
-### <a name="actor-lifetime"></a>행위자 수명
+## <a name="actor-lifetime"></a>행위자 수명
 서비스 패브릭 행위자는 가상으로, 수명이 해당 메모리 내 표현에 연결되지 않음을 의미합니다. 결과적으로, 명시적으로 생성되거나 제거하지 않아도 됩니다. Reliable Actors 런타임은 해당 행위자 ID에 대한 요청을 처음으로 받은 행위자를 자동으로 활성화합니다. 행위자를 특정 기간 동안 사용하지 않으면 Reliable Actors 런타임은 메모리 내 개체를 가비지 수집합니다. 또한 행위자의 존재에 대한 정보를 나중에 다시 활성화해야 합니다. 자세한 내용은 [행위자 수명 주기 및 가비지 수집](service-fabric-reliable-actors-lifecycle.md)을 참조하세요.
 
 이 가상 행위자 수명 추상화는 가상 행위자 모델의 결과로서 몇 가지 주의 사항을 발생시키고 실제로 Reliable Actors 구현은 때때로 이 모델과 달라집니다.
@@ -51,7 +49,7 @@ Reliable Actors는 [가상 행위자](http://research.microsoft.com/en-us/projec
 * 행위자 ID에 대한 행위자 메서드를 호출하면 해당 행위자를 활성화합니다. 이러한 이유로 행위자 형식에는 런타임에 의해 암시적으로 호출된 해당 생성자가 있습니다. 따라서 매개 변수가 서비스 자체에서 행위자의 생성자로 전달될 수 있지만 클라이언트 코드는 행위자 형식의 생성자에 매개 변수를 전달할 수 없습니다. 결과적으로 행위자는 클라이언트에서 초기화 매개 변수를 필요로 하는 경우 다른 메서드를 호출하는 시점에 부분적으로 초기화된 상태로 생성될 수 있습니다. 클라이언트에서 행위자의 활성화에 대한 단일 진입점이 없습니다.
 * Reliable Actors는 행위자 개체를 암시적으로 만들지만 행위자와 해당 상태를 명시적으로 삭제하는 기능이 있습니다.
 
-### <a name="distribution-and-failover"></a>배포 및 장애 조치
+## <a name="distribution-and-failover"></a>배포 및 장애 조치
 확장성과 안정성을 제공하려면 서비스 패브릭은 클러스터 전체에 행위자를 배포하고 필요에 따라 실패한 노드에서 정상적인 노드로 자동으로 마이그레이션합니다. [분할된 상태 저장 Reliable Service](service-fabric-concepts-partitioning.md)에 대한 추상화합니다. 행위자가 *행위자 서비스*라는 상태 저장 Reliable Service 내에서 실행되기 때문에 배포, 확장성, 안정성 및 자동 장애 조치가 모두 제공됩니다.
 
 행위자는 행위자 서비스의 파티션에 분산되고 이러한 파티션은 서비스 패브릭 클러스터의 노드에 분산됩니다. 각 서비스 파티션은 일련의 행위자를 포함합니다. 서비스 패브릭은 서비스 파티션의 배포 및 장애 조치를 관리합니다.
@@ -69,12 +67,12 @@ Reliable Actors는 [가상 행위자](http://research.microsoft.com/en-us/projec
 
 행위자 서비스를 분할하는 방법에 대한 자세한 내용은 [행위자에 대한 분할 개념](service-fabric-reliable-actors-platform.md#service-fabric-partition-concepts-for-actors)을 참조하세요.
 
-### <a name="actor-communication"></a>행위자 통신
+## <a name="actor-communication"></a>행위자 통신
 행위자의 상호 작용은 인터페이스를 구현하는 행위자와 공유하는 인터페이스 및 동일한 인터페이스를 통해 행위자에 대한 프록시를 가져오는 클라이언트에 정의됩니다. 이 인터페이스가 행위자 메서드를 비동기적으로 호출하는 데 사용되므로 인터페이스의 모든 메서드는 태스크를 반환해야 합니다.
 
 메서드 호출 및 해당 응답의 결과는 궁극적으로 클러스터에 대한 네트워크 요청이므로 반환한 작업의 결과 형식 및 인수는 플랫폼에서 직렬화가 가능해야 합니다. 특히, [데이터 계약 직렬화가 가능](service-fabric-reliable-actors-notes-on-actor-type-serialization.md)해야 합니다.
 
-#### <a name="the-actor-proxy"></a>행위자 프록시
+### <a name="the-actor-proxy"></a>행위자 프록시
 Reliable Actors 클라이언트 API는 행위자 인스턴스 및 행위자 클라이언트 간의 통신을 제공합니다. 행위자와 통신하기 위해 클라이언트는 행위자 인터페이스를 구현하는 행위자 프록시 개체를 만듭니다. 클라이언트는 프록시 개체에서 메서드를 호출하여 행위자와 상호 작용합니다. 행위자 프록시는 클라이언트-행위자 통신 및 행위자 간 통신에 사용할 수 있습니다.
 
 ```csharp
@@ -107,7 +105,7 @@ myActor.DoWorkAsync().get();
 * 메시지 전달은 최선을 다합니다.
 * 행위자는 동일한 클라이언트에서 중복 메시지를 받을 수 있습니다.
 
-### <a name="concurrency"></a>동시성
+## <a name="concurrency"></a>동시성
 Reliable Actors 런타임은 행위자 메서드에 액세스하기 위한 간단한 턴 기반 액세스 모델을 제공합니다. 따라서 행위자 개체의 코드 내에는 항상 둘 이상의 스레드가 활성화될 수 없습니다. 데이터 액세스에 대한 동기화 메커니즘이 필요하지 않기에 턴 기반 액세스는 동시 시스템을 매우 간소화합니다. 또한 각 행위자 인스턴스의 단일 스레드 액세스 특성에 대해 특별히 고려하여 시스템을 디자인해야 합니다.
 
 * 단일 행위자 인스턴스는 한 번에 둘 이상의 요청을 처리할 수 없습니다. 행위자 인스턴스가 동시 요청을 처리해야 하는 경우 처리량 병목 지점이 발생할 수 있습니다.
@@ -115,7 +113,7 @@ Reliable Actors 런타임은 행위자 메서드에 액세스하기 위한 간�
 
 ![Reliable Actors 통신][3]
 
-#### <a name="turn-based-access"></a>턴 기반 액세스
+### <a name="turn-based-access"></a>턴 기반 액세스
 하나의 턴은 다른 행위자 또는 클라이언트의 요청에 대한 응답 시 행위자 메서드의 완전한 실행 또는 [타이머/미리 알림](service-fabric-reliable-actors-timers-reminders.md) 콜백의 완전한 실행으로 이루어집니다. 메서드와 콜백이 비동기인 경우에도 행위자 런타임은 이러한 메서드와 콜백을 인터리빙하지 않습니다. 하나의 턴을 완전히 완료해야 새로운 턴이 허용됩니다. 즉, 메서드 또는 콜백에 대한 새로운 호출을 허용하기 전에 현재 실행 중인 행위자 메서드 또는 타이머/미리 알림 콜백을 완전히 완료해야 합니다. 메서드 또는 콜백에서 실행이 반환된 경우 및 메서드 또는 콜백에서 반환된 작업이 완료된 경우, 메서드 또는 콜백이 완료된 것으로 간주됩니다. 서로 다른 메서드, 타이머 및 콜백 전체에 걸쳐 턴 기반 동시성이 준수된다는 것을 강조할 가치가 있습니다.
 
 행위자 런타임은 턴 시작 시 행위자별 잠금을 획득하고 턴 종료 시 해당 잠금을 해제하여 턴 기반 동시성을 적용합니다. 따라서 행위자들 전체가 아닌 각각의 행위자 단위로 턴 기반 동시성이 적용됩니다. 행위자 메서드와 타이머/미리 알림 콜백은 여러 행위자를 대신하여 동시에 실행할 수 있습니다.
@@ -138,14 +136,14 @@ Reliable Actors 런타임은 행위자 메서드에 액세스하기 위한 간�
 * *ActorId1*을 대신한 *Method1*의 실행은 *ActorId2*를 대신한 실행과 겹칩니다. 이는 턴 기반 동시성이 전체 행위자들이 아닌 하나의 행위자 내에만 적용되기 때문입니다.
 * 일부 메서드/콜백 실행에서 메서드/콜백에 의해 반환된 `Task`(C#)/`CompletableFuture`(Java)의 경우, 해당 메서드가 반환된 후에 완료됩니다. 다른 경우에 비동기 작업은 메서드/콜백이 반환되는 시점에 이미 완료되었습니다. 두 경우 모두 메서드/콜백이 반환되고 비동기 작업이 이 완료된 후에 행위자별 잠금이 해제됩니다.
 
-#### <a name="reentrancy"></a>다시 표시
+### <a name="reentrancy"></a>다시 표시
 기본적으로 행위자 런타임은 다시 표시를 허용합니다. 따라서 *행위자 A*의 행위자 메서드가 *행위자 A*의 다른 메서드를 차례로 호출하는 *행위자 B*의 메서드를 호출하는 경우 해당 메서드를 실행할 수 있습니다. 즉, 동일한 논리 호출 체인 컨텍스트의 일부이기 때문입니다. 모든 타이머 및 미리 알림 호출은 새로운 논리 호출 컨텍스트에서 시작됩니다. 자세한 내용은 [Reliable Actors 다시 표시](service-fabric-reliable-actors-reentrancy.md) 를 참조하세요.
 
-#### <a name="scope-of-concurrency-guarantees"></a>동시성 보증의 범위
+### <a name="scope-of-concurrency-guarantees"></a>동시성 보증의 범위
 행위자 런타임은 이러한 메서드의 호출을 제어하는 상황에서 이러한 동시성을 보증합니다. 예를 들어 타이머와 미리 알림 콜백 뿐만 아니라 클라이언트 요청에 대한 응답으로 수행되는 메서드 호출에 대해 이러한 보증을 제공합니다. 하지만 행위자 코드가 행위자 런타임에서 제공하는 메커니즘 외부에서 이러한 메서드를 호출하는 경우 런타임은 어떠한 동시성도 보장할 수 없습니다. 예를 들어, 행위자 메서드에서 반환된 작업과 연결되지 않은 일부 작업의 컨텍스트에서 메서드를 호출하는 경우 런타임은 동시성을 보장할 수 없습니다. 행위자가 자체적으로 만드는 스레드에서 메서드가 호출되는 경우 런타임은 동시성을 보장할 수 없습니다. 따라서 백그라운드 작업을 수행하려면 행위자가 턴 기반 동시성을 따르는 [행위자 타이머 및 행위자 미리 알림](service-fabric-reliable-actors-timers-reminders.md) 을 사용해야 합니다.
 
 ## <a name="next-steps"></a>다음 단계
-* 첫 번째 Reliable Actors 서비스를 빌드하여 시작합니다.
+첫 번째 Reliable Actors 서비스를 빌드하여 시작합니다.
    * [.NET에서 Reliable Actors 시작](service-fabric-reliable-actors-get-started.md)
    * [Java에서 Reliable Actors 시작](service-fabric-reliable-actors-get-started-java.md)
 
@@ -153,4 +151,3 @@ Reliable Actors 런타임은 행위자 메서드에 액세스하기 위한 간�
 [1]: ./media/service-fabric-reliable-actors-introduction/concurrency.png
 [2]: ./media/service-fabric-reliable-actors-introduction/distribution.png
 [3]: ./media/service-fabric-reliable-actors-introduction/actor-communication.png
-

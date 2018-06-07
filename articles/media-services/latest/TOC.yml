@@ -1,0 +1,79 @@
+- name: Media Services 설명서
+  href: ./index.yml
+- name: 개요
+  items:
+    - name: Media Services 정보
+      href: media-services-overview.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: .NET을 사용하여 비디오 파일 스트리밍
+      href: stream-files-dotnet-quickstart.md
+- name: 자습서
+  items:
+    - name: '업로드, 인코딩 및 스트리밍'
+      href: stream-files-tutorial-with-api.md
+    - name: 비디오 분석
+      href: analyze-videos-tutorial-with-api.md
+- name: 샘플
+  items:
+    - name: Azure 코드 샘플
+      href: 'https://azure.microsoft.com/resources/samples/?service=media-services'
+    - name: Azure CLI
+      href: cli-samples.md
+- name: 개념
+  items:
+    - name: 자산
+      href: assets-concept.md
+    - name: Autogen 적응 비트 전송률 사다리
+      href: autogen-bitrate-ladder.md
+    - name: 미디어 인텔리전스
+      href: intelligence-concept.md
+    - name: Storage 계정
+      href: storage-account-concept.md
+    - name: 변환 및 작업
+      href: transform-concept.md
+    - name: 이벤트에 반응
+      href: reacting-to-media-services-events.md
+- name: 방법 가이드
+  items:
+    - name: 계정 만들기 - CLI
+      href: create-account-cli-how-to.md
+    - name: API 액세스 - CLI
+      href: access-api-cli-how-to.md
+    - name: 작업 상태 이벤트 - CLI
+      href: job-state-events-cli-how-to.md
+    - name: 콘텐츠 업로드 - .NET
+      items:
+        - name: HTTP(s)에서
+          href: job-input-from-http-how-to.md
+        - name: 로컬 파일에서
+          href: job-input-from-local-file-how-to.md
+- name: 참고 자료
+  items:
+    - name: Azure CLI 2.0
+      href: 'https://docs.microsoft.com/cli/azure/ams?view=azure-cli-latest'
+    - name: REST (영문)
+      href: 'https://go.microsoft.com/fwlink/p/?linkid=873030'
+    - name: .NET
+      href: 'https://docs.microsoft.com/dotnet/api/overview/azure/mediaservices/management?view=azure-dotnet'
+    - name: 자바
+      href: 'https://docs.microsoft.com/java/api/overview/azure/mediaservices'
+    - name: 파이썬
+      href: 'https://docs.microsoft.com/python/api/overview/azure/media-services?view=azure-python'
+    - name: 이벤트 스키마
+      href: media-services-event-schemas.md
+- name: 리소스
+  items:
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/?category=web-mobile'
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/media-services/'
+    - name: 국가별 가용성
+      href: 'https://azure.microsoft.com/regions/services/'
+    - name: 동영상
+      href: 'https://azure.microsoft.com/resources/videos/index/?services=media-services'
+    - name: 릴리스 정보
+      href: release-notes.md
+    - name: 할당량 및 제한 사항
+      href: limits-quotas-constraints.md

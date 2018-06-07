@@ -14,15 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 06/02/2017
 ms.author: LADocs; padmavc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 80be19618bd02895d953f80e5236d1a69d0811af
 ms.openlocfilehash: 1865d75f1b4c2aa18d5a3130f639572d19563b3e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/07/2017
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
-
 # <a name="logic-apps-b2b-list-of-errors-and-solutions"></a>Logic Apps B2B 오류 및 해결 방법 목록  
 이 문서에서는 Logic Apps B2B 시나리오에서 발생할 수 있는 오류를 해결하고 이러한 오류를 수정하기 위한 적절한 조치를 제안합니다.
 
@@ -147,7 +144,7 @@ ms.lasthandoff: 06/07/2017
 
 |   |   | 
 |---|---|
-| 오류 설명 | 잘못된 템플릿(InvalidTemplate)입니다. 행 '1', 열 '1902'에 있는 'Flat_File_Decoding' 작업 입력의 템플릿 언어 식을 처리할 수 없습니다. ''content' 필수 속성은 값을 필요로 하지만 null을 받았습니다.  Path ''.'. |
+| 오류 설명 | 잘못된 템플릿(InvalidTemplate)입니다. 행 '1', 열 '1902'에 있는 'Flat_File_Decoding' 작업 입력의 템플릿 언어 식을 처리할 수 없습니다. ''content' 필수 속성은 값을 필요로 하지만 null을 받았습니다. 경로 ''.'. |
 | 사용자 조치 | 이 오류는 입력 메시지에 본문이 포함되어 있지 않음을 나타냅니다. |
 |   |   | 
 

@@ -1,11 +1,11 @@
 ---
-title: "응용 프로그램 프록시 응용 프로그램을 로드하는 데 시간이 너무 오래 걸림 | Microsoft Docs"
-description: "Azure AD 응용 프로그램 프록시의 로드 성능 문제 해결 페이지"
+title: 응용 프로그램 프록시 응용 프로그램을 로드하는 데 시간이 너무 오래 걸림 | Microsoft Docs
+description: Azure AD 응용 프로그램 프록시의 로드 성능 문제 해결 페이지
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: ajamess
-manager: femila
-ms.assetid: 
+manager: mtillman
+ms.assetid: ''
 ms.service: active-directory
 ms.workload: identity
 ms.tgt_pltfrm: na
@@ -13,30 +13,28 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0d6f6fb24f1f01d703104f925dcd03ee1ff46062
-ms.openlocfilehash: e172f55d45bccfd126928225eb9f78da61a670d3
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/18/2017
-
+ms.openlocfilehash: 34422cb42768ddbc2997da3eec3d35c11e272855
+ms.sourcegitcommit: e14229bb94d61172046335972cfb1a708c8a97a5
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/14/2018
+ms.locfileid: "34158509"
 ---
-
 # <a name="an-application-proxy-application-takes-too-long-to-load"></a>응용 프로그램 프록시 응용 프로그램을 로드하는 데 시간이 너무 오래 걸림
 
-이 문서를 통해 Azure AD 응용 프로그램 프록시 응용 프로그램을 로드하는 데 시간이 오래 걸리고 이 문제를 해결하기 위해 수행할 수 있는 작업을 이해할 수 있습니다.
+이 문서는 Azure AD 응용 프로그램 프록시 응용 프로그램을 로드하는 데 시간이 오래 걸리는 이유를 이해하는 데 도움이 됩니다.니다. 또한 이 문제를 해결하기 위해 수행할 수 있는 작업에 대해 설명합니다.
 
 ## <a name="overview"></a>개요
-응용 프로그램이 작동 중이지만 대기 시간이 길게 표시되는 경우 네트워크 토폴로지에서 속도를 개선하기 위해 고려할 수 있는 몇 가지 사소한 변경 사항이 있을 수 있습니다. 여러 토폴로지에 대한 평가는 [네트워크 고려 사항 문서](https://docs.microsoft.com/azure/active-directory/application-proxy-network-topology-considerations)를 참조하세요.
+응용 프로그램이 작동하지만 긴 대기 시간이 발생할 수 있습니다. 속도를 향상시키기 위해 네트워크 토폴로지를 약간 조정할 수 있습니다. 여러 토폴로지에 대한 평가는 [네트워크 고려 사항 문서](manage-apps/application-proxy-network-topology.md)를 참조하세요.
 
-해당 고려 사항이 도움이 되지 않는 경우 안타깝게도 현재 성능을 조정하기 위한 추가 권장 사항이 없습니다. 응용 프로그램 프록시 서비스가 사용자에게 인접한 추가 데이터 센터로 확장되어 향상된 대기 시간을 직접 확인할 수 있습니다. Azure 데이터 센터의 전체 목록을 보려면 [대기 시간 테스트 페이지](http://www.azurespeed.com/Azure/Latency)를 참조하세요. 
+현재 네트워크 토폴로지 외에도 성능 튜닝을 위한 추가적인 권장 사항이 없습니다. 응용 프로그램 프록시 서비스가 확장됨에 따라 물리적으로 더 가까운 데이터 센터가 제공될 수 있습니다. 더 가까워지면 대기 시간에 도움이 될 수 있습니다. Azure 데이터 센터 목록은 [대기 시간 테스트 페이지](http://www.azurespeed.com/Azure/Latency)를 참조하세요. 
 
 응용 프로그램 프록시 서비스를 포함하는 데이터 센터는 [커넥터 포트 테스트 도구](https://aadap-portcheck.connectorporttest.msappproxy.net/)에서 찾을 수 있습니다. 
 
 ## <a name="feedback-on-application-proxy-data-center-locations"></a>응용 프로그램 프록시 데이터 센터 위치에 대한 피드백 
-응용 프로그램 프록시를 아직 포함하지 않지만 사용자의 대기 시간을 개선할 수 있는 Azure 데이터 센터가 있을 수 있습니다. 데이터 센터가 <aadapfeedback@microsoft.com>에 위치하므로 확장한 대로 계획하는 데 피드백을 사용할 수 있습니다.
+아직 응용 프로그램 프록시가 포함되지 않은 Azure 데이터 센터가 있을 수 있지만 이로 인해 사용자의 대기 시간이 크게 향상됩니다. 데이터 센터 위치를 aadapfeedback@microsoft.com으로 보냅니다. Microsoft는 확장 계획에 대한 사용자의 의견을 활용합니다.
 
-현재 긴 대기 시간을 표시하는 테넌트의 대기 시간을 개선할 수 있는 몇 가지 추가 기능으로 작업하고 있으므로 사용할 수 있는 문서를 공유해야 합니다.
+Microsoft는 대기 시간을 향상시키는 추가 기능을 개발하기 위해 노력하고 있습니다. 향상된 이러한 기능이 사용할 수 있는 즉시 설명서가 업데이트됩니다.
 
 ## <a name="next-steps"></a>다음 단계
-[기존 온-프레미스 프록시 서버 작업](application-proxy-working-with-proxy-servers.md)
-
+[기존 온-프레미스 프록시 서버 작업](manage-apps/application-proxy-configure-connectors-with-proxy-servers.md)

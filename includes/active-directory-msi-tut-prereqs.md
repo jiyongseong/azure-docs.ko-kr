@@ -1,0 +1,1 @@
+필요한 리소스 생성 및 역할 관리를 수행하려면 적절한 범위(사용자 구독 또는 리소스 그룹)에서 계정에 "소유자" 권한이 필요합니다. 역할 할당에 관한 도움이 필요한 경우 [역할 기반 액세스 제어를 사용하여 Azure 구독 리소스에 대한 액세스 관리](../articles/role-based-access-control/role-assignments-portal.md)를 참조하세요.

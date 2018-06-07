@@ -1,26 +1,22 @@
 ---
-title: "Azure Portal을 사용하여 Data Lake Store로 Azure HDInsight 클러스터 만들기 | Microsoft Docs"
-description: "Azure Portal을 사용하여 Azure Data Lake Store로 HDInsight Hadoop 클러스터 만들기 및 사용"
+title: Azure Portal을 사용하여 Data Lake Store로 Azure HDInsight 클러스터 만들기 | Microsoft Docs
+description: Azure Portal을 사용하여 Azure Data Lake Store로 HDInsight Hadoop 클러스터 만들기 및 사용
 services: data-lake-store,hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: nitinme
 manager: jhubbard
 editor: cgronlun
 ms.assetid: a8c45a83-a8e3-4227-8b02-1bc1e1de6767
 ms.service: data-lake-store
 ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: big-data
-ms.date: 05/26/2017
+ms.topic: conceptual
+ms.date: 02/21/2018
 ms.author: nitinme
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 245ce9261332a3d36a36968f7c9dbc4611a019b2
-ms.openlocfilehash: b9a659e88d7cd73077bfa5f5f3264eb33b4e2661
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/09/2017
-
-
+ms.openlocfilehash: ff62ef24a2076605d759e22fcee86947fc0b9274
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="create-hdinsight-clusters-with-data-lake-store-by-using-the-azure-portal"></a>Azure Portal을 사용하여 Data Lake Store로 HDInsight 클러스터 만들기 | Azure
 > [!div class="op_single_selector"]
@@ -41,7 +37,7 @@ Azure Portal을 사용하여 기본 저장소 또는 추가 저장소로 Azure D
 * **Azure Active Directory 서비스 주체** 이 자습서에서는 Azure AD(Azure Active Directory)에서 서비스 주체를 만드는 방법에 대한 지침을 제공합니다. 그러나 서비스 주체를 만들려면 Azure AD 관리자여야 합니다. 관리자인 경우 이 필수 요소를 건너뛰고 자습서를 진행할 수 있습니다.
 
     >[!NOTE]
-    >Azure AD 관리자인 경우에만 서비스 주체를 만들 수 있습니다. Azure AD 관리자가 서비스 주체를 만들어야 Data Lake Store와 HDInsight 클러스터를 만들 수 있습니다. 또한 [인증서를 사용하여 서비스 주체 만들기](../azure-resource-manager/resource-group-authenticate-service-principal.md#create-service-principal-with-certificate-from-certificate-authority)에 설명된 대로 인증서를 사용하여 서비스 주체를 만들어야 합니다.
+    >Azure AD 관리자인 경우에만 서비스 주체를 만들 수 있습니다. Azure AD 관리자가 서비스 주체를 만들어야 Data Lake Store와 HDInsight 클러스터를 만들 수 있습니다. 또한 [인증서를 사용하여 서비스 주체 만들기](../azure-resource-manager/resource-group-authenticate-service-principal.md#create-service-principal-with-self-signed-certificate)에 설명된 대로 인증서를 사용하여 서비스 주체를 만들어야 합니다.
     >
 
 ## <a name="create-an-hdinsight-cluster"></a>HDInsight 클러스터 만들기
@@ -52,14 +48,14 @@ Azure Portal을 사용하여 기본 저장소 또는 추가 저장소로 Azure D
 
 **Data Lake Store를 기본 저장소 계정으로 사용하여 HDInsight 클러스터를 만들려면**
 
-1. [Azure 포털](https://portal.azure.com)에 로그인합니다.
+1. [Azure Portal](https://portal.azure.com)에 로그인합니다.
 2. HDInsight 클러스터를 만드는 방법에 대한 일반 정보는 [클러스터 만들기](../hdinsight/hdinsight-hadoop-create-linux-clusters-portal.md#create-clusters)를 따릅니다.
 3. **저장소** 블레이드의 **기본 저장소 형식** 아래에서 **Data Lake Store**를 선택한 후 다음 정보를 입력합니다.
 
     ![HDInsight 클러스터에 서비스 주체 추가](./media/data-lake-store-hdinsight-hadoop-use-portal/hdi.adl.1.adls.storage.png "HDInsight 클러스터에 서비스 주체 추가")
 
-    - **Data Lake Store 계정 선택**: 기존 Data Lake Store 계정을 선택합니다. 기존 Data Lake Store 계정은 필수입니다.  [필수 조건](#prereuisites)을 참조하세요.
-    - **루트 경로**: 클러스터 관련 파일이 저장되는 경로를 입력합니다. 스크린샷에서 __/clusters__ 폴더가 존재해야 하는 __/clusters/myhdiadlcluster/__이며 포털은 *myhdicluster* 폴더를 만듭니다.  *myhdicluster*는 클러스터 이름입니다.
+    - **Data Lake Store 계정 선택**: 기존 Data Lake Store 계정을 선택합니다. 기존 Data Lake Store 계정은 필수입니다.  [필수 조건](#prerequisites)을 참조하세요.
+    - **루트 경로**: 클러스터 관련 파일이 저장되는 경로를 입력합니다. 스크린샷에서 __/clusters__ 폴더가 존재해야 하는 __/clusters/myhdiadlcluster/__ 이며 포털은 *myhdicluster* 폴더를 만듭니다.  *myhdicluster*는 클러스터 이름입니다.
     - **Data Lake Store 액세스**: Data Lake Store 계정과 HDInsight 클러스터 간의 액세스를 구성합니다. 지침은 [Data Lake Store 액세스 구성](#configure-data-lake-store-access)을 참조하세요.
     - **추가 저장소 계정**: 클러스터에 대한 추가 저장소 계정으로 Azure Storage 계정을 추가합니다. 추가 Data Lake Store 추가는 Data Lake Store 계정을 기본 저장소 형식으로 구성하는 동안 Data Lake Store 계정에 더 많은 데이터의 클러스터 권한을 제공하여 수행됩니다. [Data Lake Store 액세스 구성](#configure-data-lake-store-access)을 참조하세요.
 
@@ -71,7 +67,7 @@ Azure Portal을 사용하여 기본 저장소 또는 추가 저장소로 Azure D
 다음 지침은 기본 저장소로 Azure Storage 계정을 사용하고 추가 저장소로 Data Lake Store 계정을 사용하여 HDInsight 클러스터를 만듭니다.
 **Data Lake Store를 기본 저장소 계정으로 사용하여 HDInsight 클러스터를 만들려면**
 
-1. [Azure 포털](https://portal.azure.com)에 로그인합니다.
+1. [Azure Portal](https://portal.azure.com)에 로그인합니다.
 2. HDInsight 클러스터를 만드는 방법에 대한 일반 정보는 [클러스터 만들기](../hdinsight/hdinsight-hadoop-create-linux-clusters-portal.md#create-clusters)를 따릅니다.
 3. **저장소** 블레이드의 **기본 저장소 형식** 아래에서 **Azure Storage**를 선택한 후 다음 정보를 입력합니다.
 
@@ -163,7 +159,7 @@ Data Lake Store를 추가 저장소로 사용하는 경우 HDInsight 클러스�
 
 클러스터 설정을 완료한 후에 클러스터 블레이드에서 다음 단계 중 하나 또는 모두를 수행하여 결과를 확인합니다.
 
-* 클러스터에 대한 연결된 저장소가 지정한 Data Lake Store 계정인지 확인하려면 왼쪽 창에서 **저장소 계정**을 클릭합니다.
+* 클러스터에 대한 연결된 저장소가 지정한 Data Lake Store 계정인지 확인하려면 왼쪽 창에서 **Storage 계정**을 클릭합니다.
 
     ![HDInsight 클러스터에 서비스 주체 추가](./media/data-lake-store-hdinsight-hadoop-use-portal/hdi.adl.6-1.png "HDInsight 클러스터에 서비스 주체 추가")
 
@@ -178,7 +174,7 @@ Data Lake Store를 저장소로 사용하여 클러스터를 설정한 후에 HD
 
 ### <a name="run-a-hive-query-against-data-in-a-data-lake-store-as-primary-storage"></a>기본 저장소인 Data Lake Store에서 데이터에 대한 Hive 쿼리 실행
 
-Hive 쿼리를 실행하려면 Ambari 포털에서 [Hive 보기] 인터페이스를 사용합니다. [Ambari Hive 보기]를 사용하는 방법에 대한 지침은 [ HDInsight에서 Hadoop을 사용하여 Hive 보기 사용](../hdinsight/hdinsight-hadoop-use-hive-ambari-view.md)을 참조하세요.
+Hive 쿼리를 실행하려면 Ambari 포털에서 [Hive 보기] 인터페이스를 사용합니다. [Ambari Hive 보기]를 사용하는 방법에 대한 지침은 [ HDInsight에서 Hadoop을 사용하여 Hive 보기 사용](../hdinsight/hadoop/apache-hadoop-use-hive-ambari-view.md)을 참조하세요.
 
 Data Lake Store에서 데이터를 사용하는 경우 다음과 같은 몇 가지 문자열을 변경합니다.
 
@@ -201,15 +197,15 @@ Blob Storage에서 Azure Data Lake Store로 데이터를 복사하는 방법에 
 * [AdlCopy를 사용하여 Azure Storage Blob에서 Data Lake Store로 데이터 복사](data-lake-store-copy-data-azure-storage-blob.md)
 
 ### <a name="use-data-lake-store-with-a-spark-cluster"></a>Spark 클러스터에서 Data Lake Store 사용
-Spark 클러스터를 사용하여 Data Lake Store에 저장된 데이터에서 Spark 작업을 실행할 수 있습니다. 자세한 내용은 [HDInsight Spark 클러스터를 사용하여 Data Lake Store의 데이터 분석](../hdinsight/hdinsight-apache-spark-use-with-data-lake-store.md)을 참조하세요.
+Spark 클러스터를 사용하여 Data Lake Store에 저장된 데이터에서 Spark 작업을 실행할 수 있습니다. 자세한 내용은 [HDInsight Spark 클러스터를 사용하여 Data Lake Store의 데이터 분석](../hdinsight/spark/apache-spark-use-with-data-lake-store.md)을 참조하세요.
 
 
 ### <a name="use-data-lake-store-in-a-storm-topology"></a>Storm 토폴로지에서 Data Lake 저장소 사용
-데이터 레이크 저장소를 사용하여 Storm 토폴로지에서 데이터를 쓸 수 있습니다. 이 시나리오를 수행하는 방법에 대한 자세한 내용은 [HDInsight에서 Apache Storm에 Azure Data Lake Store 사용](../hdinsight/hdinsight-storm-write-data-lake-store.md)을 참조하세요.
+데이터 레이크 저장소를 사용하여 Storm 토폴로지에서 데이터를 쓸 수 있습니다. 이 시나리오를 수행하는 방법에 대한 자세한 내용은 [HDInsight에서 Apache Storm에 Azure Data Lake Store 사용](../hdinsight/storm/apache-storm-write-data-lake-store.md)을 참조하세요.
 
 ## <a name="see-also"></a>참고 항목
+* [Azure HDInsight 클러스터에 Data Lake Store 사용](../hdinsight/hdinsight-hadoop-use-data-lake-store.md)
 * [PowerShell: HDInsight 클러스터를 만들어 데이터 레이크 저장소 사용](data-lake-store-hdinsight-hadoop-use-powershell.md)
 
 [makecert]: https://msdn.microsoft.com/library/windows/desktop/ff548309(v=vs.85).aspx
 [pvk2pfx]: https://msdn.microsoft.com/library/windows/desktop/ff550672(v=vs.85).aspx
-

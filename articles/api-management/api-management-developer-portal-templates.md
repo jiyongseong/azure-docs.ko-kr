@@ -1,9 +1,9 @@
 ---
 title: "템플릿을 사용하여 Azure API Management 개발자 포털 사용자 지정 | Microsoft Docs"
-description: "템플릿을 사용하여 Azure API 관리 개발자 포털을 사용자 지정하는 방법을 알아봅니다."
+description: "템플릿을 사용하여 Azure API Management 개발자 포털을 사용자 지정하는 방법을 알아봅니다."
 services: api-management
 documentationcenter: 
-author: steved0x
+author: vladvino
 manager: erikre
 editor: 
 ms.assetid: a195675b-f7d0-4fc9-90bf-860e6f17ccf7
@@ -14,14 +14,13 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/09/2017
 ms.author: apimpm
-translationtype: Human Translation
-ms.sourcegitcommit: 2434762c2a1174a40d9c6daad6c317bc3ca8f374
-ms.openlocfilehash: 40d25726d31d2018785b77d169a8811c565316bf
-ms.lasthandoff: 02/23/2017
-
-
+ms.openlocfilehash: 2bdb8c30ffa630f85d666f3a16ce2b9dcdab6492
+ms.sourcegitcommit: 059dae3d8a0e716adc95ad2296843a45745a415d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/09/2018
 ---
-# <a name="how-to-customize-the-azure-api-management-developer-portal-using-templates"></a>템플릿을 사용하여 Azure API 관리 개발자 포털을 사용자 지정하는 방법
+# <a name="how-to-customize-the-azure-api-management-developer-portal-using-templates"></a>템플릿을 사용하여 Azure API Management 개발자 포털을 사용자 지정하는 방법
 
 Azure API Management에는 개발자 포털을 사용자 지정하는 기본적인 방법이 세 가지 있습니다.
 
@@ -32,13 +31,7 @@ Azure API Management에는 개발자 포털을 사용자 지정하는 기본적�
 템플릿은 시스템에서 생성된 개발자 포털 페이지(예: API 문서, 제품, 사용자 인증 등)의 콘텐츠를 사용자 지정하는 데 사용됩니다. [DotLiquid](http://dotliquidmarkup.org/) 구문 및 제공된 지역화 문자열 리소스, 아이콘 및 페이지 컨트롤을 사용하여 필요에 따라 페이지 콘텐츠를 유연하게 구성할 수 있습니다.
 
 ## <a name="developer-portal-templates-overview"></a>개발자 포털 템플릿 개요
-관리자로 로그인되어 있는 동안 **개발자 포털**에서 템플릿을 편집합니다. 여기로 이동하려면 우선 Azure Portal을 열고 API Management 인스턴스의 서비스 도구 모음에서 **게시자 포털**을 클릭하세요.
-
-![게시자 포털][api-management-management-console]
-
-그런 다음 오른쪽 상단의 **개발자 포털**을 클릭합니다. 
-
-![개발자 포털 메뉴][api-management-developer-portal-menu]
+관리자로 로그인되어 있는 동안 **개발자 포털**에서 템플릿을 편집합니다. 여기로 이동하려면 우선 Azure Portal을 열고 API Management 인스턴스의 서비스 도구 모음에서 **개발자 포털**을 클릭하세요.
 
 개발자 포털 템플릿에 액세스하려면 왼쪽의 사용자 지정 아이콘을 클릭하여 사용자 지정 메뉴를 표시한 다음 **템플릿**을 클릭합니다.
 
@@ -66,7 +59,7 @@ Azure API Management에는 개발자 포털을 사용자 지정하는 기본적�
 
 ![템플릿 데이터 모델][api-management-template-data]
 
-앞의 예제에는 다음 예제와 같이 **템플릿 데이터** 창에 표시된 데이터에서 가져온 두 개의 제품이 개발자 포털에 표시되어 있습니다.
+이전 예제에는 다음 예제와 같이 **템플릿 데이터** 창에 표시된 데이터에서 가져온 두 개의 제품이 개발자 포털에 표시되어 있습니다.
 
 ```json
 {
@@ -104,7 +97,7 @@ Azure API Management에는 개발자 포털을 사용자 지정하는 기본적�
 }
 ```
 
-**제품 목록** 템플릿의 태그는 데이터를 처리하고 제품 컬렉션에 대해 반복하여 정보 및 각 개별 제품에 대한 링크를 표시함으로써 원하는 결과를 제공합니다. 태그의 `<search-control>` 및 `<page-control>` 요소를 참조하세요. 이러한 요소는 페이지에서 검색 및 페이징 컨트롤 표시를 제어합니다. `ProductsStrings|PageTitleProducts`은(는) 페이지에 대한 `h2` 머리글 텍스트를 포함하는 지역화된 문자열 참조입니다. 개발자 포털 템플릿에서 사용할 수 있는 문자열 리소스, 페이지 컨트롤 및 아이콘 목록은 [API 관리 개발자 포털 템플릿 참조](api-management-developer-portal-templates-reference.md)를 참조하세요.
+**제품 목록** 템플릿의 태그는 데이터를 처리하고 제품 컬렉션에 대해 반복하여 정보 및 각 개별 제품에 대한 링크를 표시함으로써 원하는 결과를 제공합니다. 태그의 `<search-control>` 및 `<page-control>` 요소를 참조하세요. 이러한 요소는 페이지에서 검색 및 페이징 컨트롤 표시를 제어합니다. `ProductsStrings|PageTitleProducts`은(는) 페이지에 대한 `h2` 머리글 텍스트를 포함하는 지역화된 문자열 참조입니다. 개발자 포털 템플릿에서 사용할 수 있는 문자열 리소스, 페이지 컨트롤 및 아이콘 목록은 [API Management 개발자 포털 템플릿 참조](api-management-developer-portal-templates-reference.md)를 참조하세요.
 
 ```html
 <search-control></search-control>
@@ -187,7 +180,7 @@ Azure API Management에는 개발자 포털을 사용자 지정하는 기본적�
 그런 다음 [템플릿을 게시하려면](#to-publish-a-template)단계에 따라 복원된 템플릿을 개별적으로 또는 한 번에 게시해야 합니다.
 
 ## <a name="next-steps"></a>다음 단계
-개발자 포털 템플릿, 문자열 리소스, 아이콘 및 페이지 컨트롤에 대한 참조 정보는 [API 관리 개발자 포털 템플릿 참조](api-management-developer-portal-templates-reference.md)를 참조하세요.
+개발자 포털 템플릿, 문자열 리소스, 아이콘 및 페이지 컨트롤에 대한 참조 정보는 [API Management 개발자 포털 템플릿 참조](api-management-developer-portal-templates-reference.md)를 참조하세요.
 
 [modify-content-layout]: api-management-modify-content-layout.md
 [customize-styles]: api-management-customize-styles.md
@@ -212,7 +205,6 @@ Azure API Management에는 개발자 포털을 사용자 지정하는 기본적�
 [api-management-reset-template]: ./media/api-management-developer-portal-templates/api-management-reset-template.png
 [api-management-reset-template-confirm]: ./media/api-management-developer-portal-templates/api-management-reset-template-confirm.png
 [api-management-restore-templates]: ./media/api-management-developer-portal-templates/api-management-restore-templates.png
-
 
 
 

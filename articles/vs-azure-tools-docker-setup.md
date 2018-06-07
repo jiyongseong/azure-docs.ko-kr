@@ -1,11 +1,11 @@
 ---
-title: "VirtualBox 및 Docker 호스트 구성 | Microsoft Docs"
-description: "Docker 컴퓨터 및 VirtualBox를 사용하여 기본 Docker 인스턴스를 구성하는 단계별 지침입니다."
+title: VirtualBox 및 Docker 호스트 구성 | Microsoft Docs
+description: Docker 컴퓨터 및 VirtualBox를 사용하여 기본 Docker 인스턴스를 구성하는 단계별 지침입니다.
 services: azure-container-service
 documentationcenter: na
 author: mlearned
 manager: douge
-editor: 
+editor: ''
 ms.assetid: 0b1335a2-7720-42a8-8260-4e06fc00c9f6
 ms.service: multiple
 ms.devlang: dotnet
@@ -14,11 +14,11 @@ ms.tgt_pltfrm: na
 ms.workload: multiple
 ms.date: 06/08/2016
 ms.author: mlearned
-translationtype: Human Translation
-ms.sourcegitcommit: dcda8b30adde930ab373a087d6955b900365c4cc
-ms.openlocfilehash: e9465afb560a73d74f853c19094b3ee75b8c470c
-
-
+ms.openlocfilehash: 11e238fa901a164df1dfd896e38df828601e650b
+ms.sourcegitcommit: 48ab1b6526ce290316b9da4d18de00c77526a541
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/23/2018
 ---
 # <a name="configure-a-docker-host-with-virtualbox"></a>VirtualBox 및 Docker 호스트 구성
 ## <a name="overview"></a>개요
@@ -27,7 +27,7 @@ ms.openlocfilehash: e9465afb560a73d74f853c19094b3ee75b8c470c
 ## <a name="prerequisites"></a>필수 조건
 다음과 같은 도구를 설치해야 합니다.
 
-* [Docker 도구 상자](https://www.docker.com/products/overview#/docker_toolbox)
+* [Docker 도구 상자](https://github.com/docker/toolbox/releases)
 
 ## <a name="configuring-the-docker-client-with-windows-powershell"></a>Windows PowerShell과 함께 Docker 클라이언트 구성
 Docker 클라이언트를 구성하려면 단순히 Windows PowerShell을 열고 다음 단계를 수행합니다.
@@ -65,9 +65,3 @@ Docker 클라이언트를 구성하려면 단순히 Windows PowerShell을 열고
 
 [0]: ./media/vs-azure-tools-docker-setup/docker-machine-ls.png
 [1]: ./media/vs-azure-tools-docker-setup/docker-ps.png
-
-
-
-<!--HONumber=Feb17_HO3-->
-
-

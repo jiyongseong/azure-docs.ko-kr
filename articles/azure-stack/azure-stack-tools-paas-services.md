@@ -1,10 +1,10 @@
 ---
-title: Tools and PaaS services for Azure Stack | Microsoft Docs
-description: Learn how to get started with PaaS services in Azure Stack.
+title: "Azure 스택에 대 한 도구 및 PaaS 서비스 | Microsoft Docs"
+description: "Azure Stack의 PaaS 서비스를 시작하는 방법에 대해 알아보세요."
 services: azure-stack
 documentationcenter: 
-author: ErikjeMS
-manager: byronr
+author: brenduns
+manager: femila
 editor: 
 ms.assetid: 2ce8d7e3-bc5d-4d61-8ab8-e8f61df40675
 ms.service: multiple
@@ -13,24 +13,23 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 7/10/2017
-ms.author: erikje
-ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: a3866a91bf2656990c40ead20cedb67fc47a87fd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.author: brenduns
+ms.reviewer: 
+ms.openlocfilehash: 878bbbfe8fafce8c5d7c18bd0ac6f848e4513e03
+ms.sourcegitcommit: d87b039e13a5f8df1ee9d82a727e6bc04715c341
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/21/2018
 ---
-# <a name="paas-services-for-azure-stack"></a>PaaS services for Azure Stack
+# <a name="paas-services-for-azure-stack"></a>PaaS 서비스를 Azure 스택
 
-You can deploy [Platform as a Service](https://azure.microsoft.com/overview/what-is-paas/) (PaaS) services for Azure Stack from Microsoft and other 3rd party providers. If you want to be notified of new services, follow #AzureStack on Twitter.
+배포할 수 있습니다 [플랫폼 서비스로](https://azure.microsoft.com/overview/what-is-paas/) Azure 스택 Microsoft 및 기타 타사 공급자에 대 한 서비스 (PaaS). 새 서비스의 알림을 받을 하려면 #AzureStack Twitter에 따릅니다.
 
-[Add an App Service resource provider to Azure Stack](https://docs.microsoft.com/azure/azure-stack/azure-stack-app-service-overview)
+[Azure Stack에 App Service 리소스 공급자 추가](https://docs.microsoft.com/azure/azure-stack/azure-stack-app-service-overview)
 
-[Add a SQL Server resource provider to Azure Stack](https://docs.microsoft.com/azure/azure-stack/azure-stack-sql-resource-provider-deploy)
+[Azure 스택에 SQL Server 리소스 공급자 추가](https://docs.microsoft.com/azure/azure-stack/azure-stack-sql-resource-provider-deploy)
 
-[Add a MySQL Server resource provider to Azure Stack](https://docs.microsoft.com/azure/azure-stack/azure-stack-mysql-resource-provider-deploy)
-
+[Azure 스택에 MySQL Server 리소스 공급자 추가](https://docs.microsoft.com/azure/azure-stack/azure-stack-mysql-resource-provider-deploy)
 
 
 

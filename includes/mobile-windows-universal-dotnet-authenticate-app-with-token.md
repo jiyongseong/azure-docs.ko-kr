@@ -49,7 +49,7 @@
                 {
                     // Login with the identity provider.
                     user = await App.MobileService
-                        .LoginAsync(provider);
+                        .LoginAsync(provider, "{url_scheme_of_your_app}");
    
                     // Create and store the user credentials.
                     credential = new PasswordCredential(provider.ToString(),
@@ -75,7 +75,7 @@
     이 버전의 **AuthenticateAsync**에서는 앱이 **PasswordVault**에 저장된 자격 증명을 사용하여 서비스에 액세스합니다. 일반 로그인은 저장된 자격 증명이 없는 경우에도 수행됩니다.
    
    > [!NOTE]
-   > 캐시된 토큰은 만료될 수 있으며, 토큰 만료는 인증 후 앱을 사용할 때 발생할 수도 있습니다. 토큰이 만료되었는지 확인하는 방법을 알아보려면 [만료된 인증 토큰 확인](http://aka.ms/jww5vp)을 참조하세요. 토큰 만료와 관련된 권한 부여 오류를 처리하는 방법은 [Azure 모바일 서비스 관리 SDK에서 만료된 토큰 캐시 및 처리](http://blogs.msdn.com/b/carlosfigueira/archive/2014/03/13/caching-and-handling-expired-tokens-in-azure-mobile-services-managed-sdk.aspx)게시물을 참조하세요. 
+   > 캐시된 토큰은 만료될 수 있으며, 토큰 만료는 인증 후 앱을 사용할 때 발생할 수도 있습니다. 토큰이 만료되었는지 확인하는 방법을 알아보려면 [만료된 인증 토큰 확인](http://aka.ms/jww5vp)을 참조하세요. 토큰 만료와 관련된 권한 부여 오류를 처리하는 방법은 [Azure Mobile Services 관리 SDK에서 만료된 토큰 캐시 및 처리](http://blogs.msdn.com/b/carlosfigueira/archive/2014/03/13/caching-and-handling-expired-tokens-in-azure-mobile-services-managed-sdk.aspx)게시물을 참조하세요. 
    > 
    > 
 3. 앱을 두 번 다시 시작합니다.

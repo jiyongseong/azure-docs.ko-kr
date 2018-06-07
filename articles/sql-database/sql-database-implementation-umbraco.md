@@ -1,29 +1,21 @@
 ---
-title: "Azure SQL Database Azure 사례 연구 - Umbraco | Microsoft Docs"
-description: "어떻게 Umbraco가 SQL 데이터베이스를 사용하여 클라우드의 수천 개의 테넌트를 위해 서비스를 신속하게 프로비전하고 확장하는지 알아봅니다."
+title: Azure SQL Database Azure 사례 연구 - Umbraco | Microsoft Docs
+description: 어떻게 Umbraco가 SQL Database를 사용하여 클라우드의 수천 개의 테넌트를 위해 서비스를 신속하게 프로비전하고 확장하는지 알아봅니다.
 services: sql-database
-documentationcenter: 
 author: CarlRabeler
-manager: jhubbard
-editor: 
-ms.assetid: 5243d31e-3241-4cb0-9470-ad488ff28572
+manager: craigg
 ms.service: sql-database
 ms.custom: reference
-ms.devlang: NA
 ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: NA
-ms.date: 01/10/2017
+ms.date: 04/01/2018
 ms.author: carlrab
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 95b8c100246815f72570d898b4a5555e6196a1a0
-ms.openlocfilehash: c22cb3a5436daf0296451f1f05a52d315ebc0416
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/18/2017
-
-
+ms.openlocfilehash: 1079adb6ef8a206506823fdee6721aabbf857b4d
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
-# <a name="umbraco-uses-azure-sql-database-to-quickly-provision-and-scale-services-for-thousands-of-tenants-in-the-cloud"></a>Umbraco는 Azure SQL 데이터베이스를 사용하여 클라우드의 수천 개의 테넌트를 위해 서비스를 신속하게 프로비전하고 확장합니다.
+# <a name="umbraco-uses-azure-sql-database-to-quickly-provision-and-scale-services-for-thousands-of-tenants-in-the-cloud"></a>Umbraco는 Azure SQL Database를 사용하여 클라우드의 수천 개의 테넌트를 위해 서비스를 신속하게 프로비전하고 확장합니다.
 ![Umbraco 로고](./media/sql-database-implementation-umbraco/umbracologo.png)
 
 Umbraco는 소규모 캠페인 또는 브로슈어 사이트에서 포춘지 선정 500대 기업과 글로벌 미디어 웹 사이트를 위한 복잡한 응용 프로그램까지 실행이 가능한 인기 높은 오픈 소스 CMS(콘텐츠 관리 시스템)입니다. 
@@ -45,7 +37,7 @@ UaaS는 SaaS 고객이 이전에는 가능하지 않았던 Umbraco CMS 기능을
 그림 1. UaaS(Umbraco as a Service)에 대한 프로비전 수명 주기
 
 ## <a name="azure-elastic-pools-and-automation-simplify-deployments"></a>Azure 탄력적 풀 및 자동화로 배포 간소화
-Azure SQL 데이터베이스 및 기타 Azure 서비스를 사용하여 Umbraco 고객은 자신의 환경을 자체 프로비전할 수 있으며, Umbraco는 직관적인 워크플로의 일부로 데이터베이스를 쉽게 모니터링하고 관리할 수 있습니다.
+Azure SQL Database 및 기타 Azure 서비스를 사용하여 Umbraco 고객은 자신의 환경을 자체 프로비전할 수 있으며, Umbraco는 직관적인 워크플로의 일부로 데이터베이스를 쉽게 모니터링하고 관리할 수 있습니다.
 
 1. 프로비전
    
@@ -53,7 +45,7 @@ Azure SQL 데이터베이스 및 기타 Azure 서비스를 사용하여 Umbraco 
    
    가용성 풀이 임계값에 도달하면 새 탄력적 풀이 생성되고 새 데이터베이스가 필요할 때 고객에게 할당될 수 있게 미리 프로비전됩니다.
    
-   구현은 C# 관리 라이브러리 및 Azure 서비스 버스 큐를 사용하여 완전하게 자동화되었습니다.
+   구현은 C# 관리 라이브러리 및 Azure Service Bus 큐를 사용하여 완전하게 자동화되었습니다.
 2. 활용
    
    고객은 각각이 자체 데이터베이스를 포함하는 1~3가지 환경(프로덕션, 스테이징 및/또는 개발용)을 사용합니다. 고객 데이터베이스는 탄력적 풀에 있으므로 Umbraco에서 과도한 프로비전 없이도 효율적으로 규모를 조정할 수 있습니다.
@@ -64,7 +56,7 @@ Azure SQL 데이터베이스 및 기타 Azure 서비스를 사용하여 Umbraco 
    
    그림 2. 프로젝트 개요 및 세부 정보를 표시하는 UaaS(Umbraco-as a Service) 고객 웹 사이트
    
-   Azure SQL 데이터베이스는 DTU(데이터베이스 트랜잭션 단위)를 사용하여 실제 데이터베이스 트랜잭션에 필요한 상대적 성능을 나타냅니다. UaaS 고객의 경우 데이터베이스는 일반적으로 약 10개의 DTU에서 작동하지만 각각은 필요에 따라 탄력 있게 확장될 수 있습니다. 즉, UaaS는 사용량이 최대인 시간에도 고객에게 필요한 리소스가 항상 유지되도록 합니다. 예를 들어 최근에 있던 일요일 야간 스포츠 경기 중에, 한 UaaS 고객은 데이터베이스 최대 사용량이 100DTU까지 높아지는 것을 경험했습니다. Azure의 탄력적 풀은 Umbraco가 성능 저하 없이 이러한 높은 수요를 지원하도록 할 수 있습니다.
+   Azure SQL Database는 DTU(데이터베이스 트랜잭션 단위)를 사용하여 실제 데이터베이스 트랜잭션에 필요한 상대적 성능을 나타냅니다. UaaS 고객의 경우 데이터베이스는 일반적으로 약 10개의 DTU에서 작동하지만 각각은 필요에 따라 탄력 있게 확장될 수 있습니다. 즉, UaaS는 사용량이 최대인 시간에도 고객에게 필요한 리소스가 항상 유지되도록 합니다. 예를 들어 최근에 있던 일요일 야간 스포츠 경기 중에, 한 UaaS 고객은 데이터베이스 최대 사용량이 100DTU까지 높아지는 것을 경험했습니다. Azure의 탄력적 풀은 Umbraco가 성능 저하 없이 이러한 높은 수요를 지원하도록 할 수 있습니다.
 3. 모니터
    
    Umbraco는 고객의 사용자 지정 전자 메일 경고와 Azure 포털 내의 대시보드를 사용하여 데이터베이스 활동을 모니터링합니다.
@@ -77,7 +69,7 @@ Azure SQL 데이터베이스 및 기타 Azure 서비스를 사용하여 Umbraco 
    Umbraco는 지역에서 복제 기능이 필요 없지만 Azure 지리적 복원을 활용하여 가동 중단 시 최소 가동 중지 시간을 보장하도록 합니다. 지리적 복원은 지역 중복 Azure Storage의 데이터베이스 백업을 사용합니다. 따라서 사용자는 주 지역에서 작동이 중단될 경우 백업 복사본에서 복원할 수 있습니다.
 5. 프로비전 해제
    
-   프로젝트 환경이 삭제되면 연결된 모든 데이터베이스(개발, 스테이징 또는 라이브)가 Azure 서비스 버스 큐 정리 동안 제거됩니다. 이 자동화된 프로세스에서는 미사용 데이터베이스를 Umbraco의 탄력적 데이터베이스 가용성 풀로 복원하여, 최대 사용률을 유지하면서 향후 프로비전에 사용할 수 있도록 합니다.
+   프로젝트 환경이 삭제되면 연결된 모든 데이터베이스(개발, 스테이징 또는 라이브)가 Azure Service Bus 큐 정리 동안 제거됩니다. 이 자동화된 프로세스에서는 미사용 데이터베이스를 Umbraco의 탄력적 데이터베이스 가용성 풀로 복원하여, 최대 사용률을 유지하면서 향후 프로비전에 사용할 수 있도록 합니다.
 
 ## <a name="elastic-pools-allow-uaas-to-scale-with-ease"></a>탄력적 풀로 손쉽게 UaaS 크기 조정
 Azure의 탄력적 풀을 활용하여 Umbraco는 과도하거나 부족한 프로비전 없이 고객을 위해 성능을 최적화할 수 있습니다. Umbraco는 현재 19의 탄력적 풀에 약 3,000개의 데이터베이스를 보유하고 있으며, 기존의 325,000명 고객 또는 클라우드에 CMS를 배포할 준비가 끝난 새로운 고객을 수용하기 위해 쉽게 확장될 수 있습니다.
@@ -125,11 +117,9 @@ Azure를 클라우드 파트너로 선택한 이후부터 Umbraco는 셀프 호�
 
 ## <a name="more-information"></a>자세한 정보
 * Azure의 탄력적 풀에 대한 자세한 내용은 [탄력적 풀](sql-database-elastic-pool.md)을 참조하세요.
-* Azure 서비스 버스에 대한 자세한 내용은 [Azure 서비스 버스](https://azure.microsoft.com/services/service-bus/)를 참조하세요.
-* 웹 역할 및 작업자 역할에 대한 자세한 내용은 [작업자 역할](../fundamentals-introduction-to-azure.md#compute)을 참조하세요.    
+* Azure Service Bus에 대한 자세한 내용은 [Azure Service Bus](https://azure.microsoft.com/services/service-bus/)를 참조하세요.
 * 가상 네트워킹에 대해 자세히 알아보려면 [가상 네트워킹](https://azure.microsoft.com/documentation/services/virtual-network/)을 참조하세요.    
 * 백업 및 복구에 대한 자세한 내용은 [비즈니스 연속성](sql-database-business-continuity.md)을 참조하세요.    
 * 모니터링 풀에 대한 자세한 내용은 [모니터링 풀](sql-database-elastic-pool-manage-portal.md)을 참조하세요.    
 * 서비스로서의 Umbraco에 대한 자세한 내용은 [Umbraco](https://umbraco.com/cloud)를 참조하세요.
-
 

@@ -1,9 +1,9 @@
 ---
 title: "Azure Network Watcher 보안 그룹 보기를 사용하여 네트워크 보안 분석 - Azure CLI 2.0 | Microsoft Docs"
-description: "이 문서에서는 보안 그룹 보기를 사용하여 가상 컴퓨터 보안을 분석하기 위해 Azure CLI 2.0을 사용하는 방법을 설명합니다."
+description: "이 문서에서는 보안 그룹 보기를 사용하여 가상 머신 보안을 분석하기 위해 Azure CLI 2.0을 사용하는 방법을 설명합니다."
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
 editor: 
 ms.assetid: a986ff4f-7e0c-4994-95e1-4ac824986500
@@ -13,16 +13,14 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c785ad8dbfa427d69501f5f142ef40a2d3530f9e
-ms.openlocfilehash: 1756e14819e3b7c79361c193413a1fcd7f24a4e6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
+ms.author: jdial
+ms.openlocfilehash: 9ae5ec422b197b077c52dbb2e64ddab4e08e3a50
+ms.sourcegitcommit: b5c6197f997aa6858f420302d375896360dd7ceb
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/21/2017
 ---
-
-# <a name="analyze-your-virtual-machine-security-with-security-group-view-using-azure-cli-20"></a>Azure CLI 2.0을 사용하는 보안 그룹 보기에서 가상 컴퓨터 보안 분석
+# <a name="analyze-your-virtual-machine-security-with-security-group-view-using-azure-cli-20"></a>Azure CLI 2.0을 사용하는 보안 그룹 보기에서 Virtual Machine 보안 분석
 
 > [!div class="op_single_selector"]
 > - [PowerShell](network-watcher-security-group-view-powershell.md)
@@ -30,12 +28,12 @@ ms.lasthandoff: 05/26/2017
 > - [CLI 2.0](network-watcher-security-group-view-cli.md)
 > - [REST API](network-watcher-security-group-view-rest.md)
 
-보안 그룹 보기는 가상 컴퓨터에 적용되는 효과적으로 구성된 네트워크 보안 규칙을 반환합니다. 이 기능은 VM에 구성된 네트워크 보안 그룹 및 규칙을 감사하고 진단하여 트래픽을 올바르게 허용하거나 거부하는 데 유용합니다. 이 문서에서는 Azure CLI를 사용하여 가상 컴퓨터에 구성된 효과적인 보안 규칙을 검색하는 방법을 설명합니다.
+보안 그룹 보기는 가상 컴퓨터에 적용되는 효과적으로 구성된 네트워크 보안 규칙을 반환합니다. 이 기능은 VM에 구성된 네트워크 보안 그룹 및 규칙을 감사하고 진단하여 트래픽을 올바르게 허용하거나 거부하는 데 유용합니다. 이 문서에서는 Azure CLI를 사용하여 가상 머신에 구성된 효과적인 보안 규칙을 검색하는 방법을 설명합니다.
 
 
 이 문서에서는 Windows, Mac 및 Linux에서 사용할 수 있는 리소스 관리 배포 모델용 차세대 CLI인 Azure CLI 2.0을 사용합니다.
 
-이 문서의 단계를 수행하려면 [Mac, Linux 및 Windows용 Azure 명령줄 인터페이스(Azure CLI)를 설치](https://docs.microsoft.com/en-us/cli/azure/install-az-cli2)해야 합니다.
+이 문서의 단계를 수행하려면 [Mac, Linux 및 Windows용 Azure 명령줄 인터페이스(Azure CLI)를 설치](https://docs.microsoft.com/cli/azure/install-az-cli2)해야 합니다.
 
 ## <a name="before-you-begin"></a>시작하기 전에
 
@@ -43,17 +41,17 @@ ms.lasthandoff: 05/26/2017
 
 ## <a name="scenario"></a>시나리오
 
-이 문서에서 다루는 시나리오는 지정된 가상 컴퓨터에 대한 효과적으로 구성된 보안 규칙을 검색합니다.
+이 문서에서 다루는 시나리오는 지정된 가상 머신에 대한 효과적으로 구성된 보안 규칙을 검색합니다.
 
 ## <a name="get-a-vm"></a>VM 확인
 
-가상 컴퓨터는 `vm list` cmdlet을 실행해야 합니다. 다음 명령은 리소스 그룹에서 가상 컴퓨터를 나열합니다.
+가상 머신은 `vm list` cmdlet을 실행해야 합니다. 다음 명령은 리소스 그룹에서 가상 머신을 나열합니다.
 
 ```azurecli
 az vm list -resource-group resourceGroupName
 ```
 
-가상 컴퓨터를 알고 있다면 `vm show` cmdlet을 사용하여 리소스 ID를 가져올 수 있습니다.
+가상 머신을 알고 있다면 `vm show` cmdlet을 사용하여 리소스 ID를 가져올 수 있습니다.
 
 ```azurecli
 az vm show -resource-group resourceGroupName -name virtualMachineName
@@ -69,7 +67,7 @@ az network watcher show-security-group-view --resource-group resourceGroupName -
 
 ## <a name="viewing-the-results"></a>결과 보기
 
-다음 예제는 반환된 결과의 축약된 응답입니다. 결과는 **NetworkInterfaceSecurityRules**, **DefaultSecurityRules** 및 **EffectiveSecurityRules**라는 그룹으로 구분되는 가상 컴퓨터에서 효과적으로 적용된 보안 규칙을 모두 표시합니다.
+다음 예제는 반환된 결과의 축약된 응답입니다. 결과는 **NetworkInterfaceSecurityRules**, **DefaultSecurityRules** 및 **EffectiveSecurityRules**라는 그룹으로 구분되는 가상 머신에서 효과적으로 적용된 보안 규칙을 모두 표시합니다.
 
 ```json
 {
@@ -164,4 +162,3 @@ az network watcher show-security-group-view --resource-group resourceGroupName -
 [Network Watcher를 사용하여 NSG(네트워크 보안 그룹) 감사](network-watcher-nsg-auditing-powershell.md)를 방문하여 네트워크 보안 그룹의 유효성 검사를 자동화하는 방법을 알아봅니다.
 
 [보안 그룹 개요 보기](network-watcher-security-group-view-overview.md)를 방문하여 네트워크 리소스에 적용되는 보안 규칙에 대해 자세히 알아봅니다.
-

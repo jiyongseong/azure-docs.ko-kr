@@ -1,26 +1,24 @@
 ---
-title: "Azure 마이크로 서비스에서 시뮬레이션 실패 | Microsoft 문서"
-description: "이 문서에서는 Microsoft Azure 서비스 패브릭에서 발견되는 테스트 용이성 작업에 대해 다룹니다."
+title: Azure 마이크로 서비스에서 시뮬레이션 실패 | Microsoft 문서
+description: 이 문서에서는 Microsoft Azure 서비스 패브릭에서 발견되는 테스트 용이성 작업에 대해 다룹니다.
 services: service-fabric
 documentationcenter: .net
 author: motanv
 manager: timlt
-editor: toddabel
+editor: heeldin
 ms.assetid: ed53ca5c-4d5e-4b48-93c9-e386f32d8b7a
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
 ms.date: 06/07/2017
-ms.author: motanv;heeldin
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 7033955fa9c18b2fa1a28d488ad5268d598de287
-ms.openlocfilehash: 4de9967b41c37bbfacf63caf0f993f625bf3c779
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/24/2017
-
-
+ms.author: motanv
+ms.openlocfilehash: 087a0f12f765b55c2e2976abd93d791409ff6d44
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="testability-actions"></a>테스트 용이성 작업
 불안정한 인프라를 시뮬레이트할 수 있도록 Azure 서비스 패브릭에서는 개발자에게 다양한 실제 오류 및 상태 전환을 시뮬레이트할 수 있는 방법을 제공합니다. 이러한 작업을 테스트 용이성 작업이라고 합니다. 이러한 작업은 특정 오류 주입, 상태 전환 또는 유효성 검사를 발생시키는 저수준 API입니다. 이러한 작업을 결합하여 서비스에 대한 포괄적인 테스트 시나리오를 작성할 수 있습니다.
@@ -38,7 +36,7 @@ C#으로 구현한 작업은 System.Fabric.dll 어셈블리에 있습니다. 시
 다양한 정상 및 비정상 오류를 유도하면서 서비스 및 비즈니스 작업을 실행하면 보다 완벽하게 품질을 확인할 수 있습니다. 비정상적 오류의 경우 워크플로 도중에 서비스 프로세스가 갑자기 종료되는 시나리오를 실행합니다. 이 시나리오는 Service Fabric에서 서비스 복제본을 복원할 때 복구 경로를 테스트합니다. 데이터 일관성을 테스트하고 실패 후 서비스 상태가 올바르게 유지되는지 테스트하는 데 도움이 됩니다. 다른 실패 집합(정상적인 실패)은 서비스 패브릭에 의해 이동되는 복제본에 대해 서비스가 올바르게 반응하는지를 테스트 합니다. 이 테스트는 RunAsync 메서드의 취소 처리를 테스트합니다. 서비스에서 설정되는 취소 토큰을 확인하고 상태를 올바르게 저장한 후 RunAsync 메서드를 종료해야 합니다.
 
 ## <a name="testability-actions-list"></a>테스트 용이성 작업 목록
-| 작업 | 설명 | 관리 API | PowerShell cmdlet | 정상/비정상 오류 |
+| 조치 | 설명 | 관리 API | PowerShell cmdlet | 정상/비정상 오류 |
 | --- | --- | --- | --- | --- |
 | CleanTestState |테스트 드라이버가 비정상적으로 종료될 경우 클러스터에서 모든 테스트 상태를 제거합니다. |CleanTestStateAsync |Remove-ServiceFabricTestState |해당 없음 |
 | InvokeDataLoss |서비스 파티션으로 데이터 손실을 유도합니다. |InvokeDataLossAsync |Invoke-ServiceFabricPartitionDataLoss |정상 |
@@ -233,5 +231,4 @@ ReplicaSelector secondaryReplicaSelector = ReplicaSelector.RandomSecondaryOf(par
 * 서비스를 테스트하는 방법
   * [서비스 작업 중 오류 시뮬레이션](service-fabric-testability-workload-tests.md)
   * [서비스 대 서비스 통신 오류](service-fabric-testability-scenarios-service-communication.md)
-
 

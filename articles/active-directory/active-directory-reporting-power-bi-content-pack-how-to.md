@@ -3,22 +3,21 @@ title: "Azure Active Directory Power BI 콘텐츠 팩 사용 방법 | Microsoft 
 description: "Azure Active Directory Power BI 콘텐츠 팩 사용 방법 알아보기"
 services: active-directory
 author: MarkusVi
-manager: femila
+manager: mtillman
 ms.assetid: addd60fe-d5ac-4b8b-983c-0736c80ace02
 ms.service: active-directory
-ms.devlang: na
+ms.devlang: 
 ms.topic: get-started-article
-ms.tgt_pltfrm: na
+ms.tgt_pltfrm: 
 ms.workload: identity
-ms.date: 07/15/2017
+ms.date: 12/06/2017
 ms.author: markvi
 ms.reviewer: dhanyahk
+ms.openlocfilehash: 503b3f4c576382d8ce965d1f90aadda32c819a0b
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 5c642bb814a279756e8391f12fdc86b6ec0b4a8f
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="how-to-use-the-azure-active-directory-power-bi-content-pack"></a>Azure Active Directory Power BI 콘텐츠 팩 사용 방법
 
@@ -47,7 +46,7 @@ ms.lasthandoff: 07/21/2017
 5.  프롬프트가 나타나면 Azure AD 테넌트 ID를 입력한 후 **다음**을 클릭합니다.
 
     > [!TIP] 
-    > Office 365/Azure AD 테넌트용 테넌트 Id를 가져오는 간단한 방법은 Azure AD 포털에 로그인하고 디렉터리를 드릴다운한 다음 URL에서 ID를 복사하는 것입니다. https://manage.windowsazure.com/woodgroveonline.com#Workspaces/ActiveDirectoryExtension/Directory/<tenantid>/directoryQuickStart
+    > Office 365/Azure AD 테넌트의 테넌트 ID를 가져올 수 있는 빠른 방법은 Azure AD 포털에 로그인하고, 디렉터리로 드릴다운하고, [**속성** 페이지](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Properties)에서 **디렉터리 ID**를 복사하는 것입니다.
 
     ![Azure Active Directory Power BI 콘텐츠 팩](./media/active-directory-reporting-power-bi-content-pack-how-to/04.png) 
 
@@ -150,4 +149,3 @@ Power BI 보고서의 매일 새로 고침을 예약하려면 **데이터 집합
 ## <a name="next-steps"></a>다음 단계
 
 보고 개요는 [Azure Active Directory 보고](active-directory-reporting-azure-portal.md)를 참조하세요.
-

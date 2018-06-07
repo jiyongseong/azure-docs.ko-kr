@@ -1,6 +1,6 @@
 ---
-title: "Azure Service Fabric 신뢰할 수 있는 컬렉션의 트랜잭션 및 잠금 모드 | Microsoft Docs"
-description: "Azure Service Fabric 신뢰할 수 있는 상태 관리자 및 신뢰할 수 있는 컬렉션 트랜잭션 및 잠금."
+title: Azure Service Fabric 신뢰할 수 있는 컬렉션의 트랜잭션 및 잠금 모드 | Microsoft Docs
+description: Azure Service Fabric 신뢰할 수 있는 상태 관리자 및 신뢰할 수 있는 컬렉션 트랜잭션 및 잠금.
 services: service-fabric
 documentationcenter: .net
 author: mcoskun
@@ -9,24 +9,22 @@ editor: masnider,rajak
 ms.assetid: 62857523-604b-434e-bd1c-2141ea4b00d1
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: required
 ms.date: 5/1/2017
 ms.author: mcoskun
-ms.translationtype: Human Translation
-ms.sourcegitcommit: de674af369080ad7eb608608685e293f2326c8e6
-ms.openlocfilehash: 3452473f5b2f86d29e46339c997193bc6403736a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/04/2017
-
-
+ms.openlocfilehash: 79be861a70abb0331d971b00e753691e77642637
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="transactions-and-lock-modes-in-azure-service-fabric-reliable-collections"></a>Azure Service Fabric 신뢰할 수 있는 컬렉션의 트랜잭션 및 잠금 모드
 
 ## <a name="transaction"></a>트랜잭션
 트랜잭션은 작업의 단일 논리적 단위로 수행되는 작업 시퀀스입니다.
-트랜잭션은 다음 ACID 속성을 나타내야 합니다. (참조: https://technet.microsoft.com/en-us/library/ms190612)
+트랜잭션은 다음 ACID 속성을 나타내야 합니다. (참조: https://technet.microsoft.com/library/ms190612)
 * **원자성**: 트랜잭션은 작업의 원자 단위여야 합니다. 즉, 모든 데이터 수정 작업이 수행되거나, 또는 하나도 수행되지 않아야 합니다.
 * **일관성**: 완료되면 트랜잭션은 모든 데이터를 일관된 상태로 유지해야 합니다. 모든 내부 데이터 구조는 트랜잭션이 끝날 때 정확해야 합니다.
 * **격리**: 동시 트랜잭션에 의한 수정은 다른 동시 트랜잭션과 격리되어야 합니다. ITransaction 내에서 작업에 사용되는 격리 수준은 작업을 수행하는 IReliableState에 의해 결정됩니다.
@@ -76,10 +74,10 @@ FIFO를 유지하기 위해 `TryPeekAsync` 또는 `TryDequeueAsync`는 신뢰할
 
 잠금 호환성 매트릭스는 다음 테이블에서 확인할 수 있습니다.
 
-| 요청 \ 부여 | 없음 | 공유됨 | 업데이트 | 단독 |
+| 요청 \ 부여 | 없음 | 공유됨 | 주 지역에서 | 단독 |
 | --- |:--- |:--- |:--- |:--- |
 | 공유됨 |충돌 없음 |충돌 없음 |충돌 |충돌 |
-| 업데이트 |충돌 없음 |충돌 없음 |충돌 |충돌 |
+| 주 지역에서 |충돌 없음 |충돌 없음 |충돌 |충돌 |
 | 단독 |충돌 없음 |충돌 |충돌 |충돌 |
 
 신뢰할 수 있는 컬렉션 API의 시간 제한 인수는 교착 상태 감지를 위해 사용됩니다.
@@ -95,5 +93,4 @@ FIFO를 유지하기 위해 `TryPeekAsync` 또는 `TryDequeueAsync`는 신뢰할
 * [Reliable Services 백업 및 복원(재해 복구)](service-fabric-reliable-services-backup-restore.md)
 * [신뢰할 수 있는 상태 관리자 구성](service-fabric-reliable-services-configuration.md)
 * [신뢰할 수 있는 컬렉션에 대한 개발자 참조](https://msdn.microsoft.com/library/azure/microsoft.servicefabric.data.collections.aspx)
-
 

@@ -1,27 +1,25 @@
 ---
-title: "Azure 운영 보안 | Microsoft Docs"
-description: "Microsoft OMS(Operations Management Suite), 해당 서비스 및 작동 방법에 대해 알아봅니다."
+title: Azure 운영 보안 | Microsoft Docs
+description: Microsoft OMS(Operations Management Suite), 해당 서비스 및 작동 방법에 대해 알아봅니다.
 services: security
 documentationcenter: na
 author: UnifyCloud
-manager: swadhwa
+manager: mbaldwin
 editor: TomSh
-ms.assetid: 
+ms.assetid: ''
 ms.service: security
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 04/27/2017
+ms.date: 11/21/2017
 ms.author: TomSh
+ms.openlocfilehash: d5bea758a0b2a950f51ec443707d9d32dee9cbc4
+ms.sourcegitcommit: 870d372785ffa8ca46346f4dfe215f245931dae1
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: ec9e0fc7d67537a47d5c0d3bb376b60dc6ccffcd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/08/2018
 ---
-
 # <a name="azure-operational-security"></a>Azure 운영 보안
 ## <a name="introduction"></a>소개
 
@@ -49,7 +47,7 @@ Azure 운영 보안은 사용자가 Microsoft Azure에서 자신의 데이터, �
 
 4.  [Azure Network Watcher](https://docs.microsoft.com/azure/network-watcher/network-watcher-monitoring-overview)
 
-5.  [Azure 저장소 분석](https://docs.microsoft.com/rest/api/storageservices/fileservices/storage-analytics)
+5.  [Azure Storage 분석](https://docs.microsoft.com/rest/api/storageservices/fileservices/storage-analytics)
 
 6.  [Azure Active Directory](https://docs.microsoft.com/azure/active-directory/active-directory-whatis)
 
@@ -66,12 +64,12 @@ OMS를 사용하면 경쟁력 있는 솔루션보다 저렴한 비용으로 온-
 
 OMS의 핵심 기능은 Azure에서 실행되는 서비스 집합을 통해 제공됩니다. 각 서비스는 고유의 관리 기능을 제공하며, 사용자는 서비스를 결합하여 다양한 관리 시나리오를 해결할 수 있습니다.
 
-| 부여  | 설명|
+| 서비스  | 설명|
 | :------------- | :-------------|
-| Log Analytics | 실제 컴퓨터와 가상 컴퓨터를 포함하여 다양한 리소스의 가용성 및 성능을 모니터링하고 분석합니다. |
-|자동화 | 수동 프로세스를 자동화하고 실제 컴퓨터와 가상 컴퓨터에 대한 구성을 적용합니다. |
-| 백업 | 중요한 데이터를 백업하고 복원합니다. |
-| 사이트 복구 | 중요한 응용 프로그램에 고가용성을 제공합니다. |
+| Log Analytics | 실제 컴퓨터와 가상 머신을 포함하여 다양한 리소스의 가용성 및 성능을 모니터링하고 분석합니다. |
+|Automation | 수동 프로세스를 자동화하고 실제 컴퓨터와 가상 머신에 대한 구성을 적용합니다. |
+| Backup | 중요한 데이터를 백업하고 복원합니다. |
+| Site Recovery | 중요한 응용 프로그램에 고가용성을 제공합니다. |
 
 ### <a name="log-analytics"></a>Log Analytics
 
@@ -91,7 +89,7 @@ Log Analytics 서비스는 다음 방법을 사용하여 클라우드 기반 데
 -   규정 준수
 -   보안 표준 인증
 
-### <a name="azure-backup"></a>Azure 백업
+### <a name="azure-backup"></a>Azure Backup
 
 [Azure Backup](http://azure.microsoft.com/documentation/services/backup)은 데이터 백업 및 복원 서비스를 제공하며 OMS 제품 및 서비스 계열의 일부입니다.
 자본 투자 없이 최소한의 운영 비용으로 응용 프로그램 데이터를 보호하고 수년 간 보관합니다. SQL Server, SharePoint와 같은 응용 프로그램 워크로드 외에도 물리적 및 가상 Windows 서버의 데이터를 백업할 수 있습니다. 또한 중복 및 장기 저장을 위해 [System Center DPM(Data Protection Manager)](https://en.wikipedia.org/wiki/System_Center_Data_Protection_Manager)에서 보호된 데이터를 Azure로 복제하는 데 사용할 수 있습니다.
@@ -112,7 +110,7 @@ Azure Backup의 보호 데이터는 특정 지리적 지역에 있는 백업 저
 
 배포를 만들 때 [Azure Automation](https://docs.microsoft.com/azure/automation/automation-intro)의 runbook을 사용하여 필요한 업데이트를 설치합니다. 이 전체 프로세스를 포털에서 관리할 수 있으며 기본적인 세부 사항에 대해 걱정할 필요가 없습니다.
 
-## <a name="azure-security-center"></a>Azure 보안 센터
+## <a name="azure-security-center"></a>Azure Security Center
 
 Azure Security Center는 Azure 리소스를 보호하는 데 도움이 됩니다. Azure 구독에서 통합된 보안 모니터링 및 정책 관리를 제공합니다. 서비스 내에서 Azure 구독에 대한 정책뿐만 아니라 [리소스 그룹](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-overview#resource-groups)에 대한 정책도 정의할 수 있으므로 더욱 세분화할 수 있습니다.
 
@@ -130,7 +128,7 @@ Azure Security Center는 Azure 리소스를 보호하는 데 도움이 됩니다
 
 ### <a name="data-collection"></a>데이터 수집
 
-Security Center는 해당 보안 상태를 평가하고 보안 권장 사항을 제공하며 위협에 경고하기 위해 VM(가상 컴퓨터)에서 데이터를 수집합니다. Security Center에 처음 액세스하는 경우 구독의 모든 VM에서 데이터 수집이 활성화됩니다. 데이터 수집을 사용하는 것이 좋지만 Security Center 정책에서 데이터 수집 해제를 설정할 수 있습니다.
+Security Center는 해당 보안 상태를 평가하고 보안 권장 사항을 제공하며 위협에 경고하기 위해 VM(가상 머신)에서 데이터를 수집합니다. Security Center에 처음 액세스하는 경우 구독의 모든 VM에서 데이터 수집이 활성화됩니다. 데이터 수집을 사용하는 것이 좋지만 Security Center 정책에서 데이터 수집 해제를 설정할 수 있습니다.
 
 ### <a name="data-sources"></a>데이터 원본
 
@@ -142,25 +140,25 @@ Security Center는 해당 보안 상태를 평가하고 보안 권장 사항을 
 
 -   파트너 솔루션: 방화벽 및 맬웨어 방지 솔루션과 같은 통합된 파트너 솔루션의 보안 경고를 사용합니다.
 
--   가상 컴퓨터: Windows 이벤트 및 감사 로그, IIS 로그, syslog 메시지 및 가상 컴퓨터의 크래시 덤프 파일과 같은 보안 이벤트에 대한 구성 정보 및 정보를 사용합니다.
+-   Virtual Machines: Windows 이벤트 및 감사 로그, IIS 로그, syslog 메시지 및 Virtual Machines의 크래시 덤프 파일과 같은 보안 이벤트에 대한 구성 정보 및 정보를 사용합니다.
 
 ### <a name="data-protection"></a>데이터 보호
 
 고객이 위협을 방지, 감지 및 대응하는 데 도움을 주기 위해 Azure Security Center에서는 구성 정보, 메타데이터, 이벤트 로그, 크래시 덤프 파일 등을 포함한 보안 관련 데이터를 수집하고 처리합니다. Microsoft는 코딩부터 서비스에 이르기까지 엄격한 규정 준수 및 보안 지침을 따릅니다.
 
--   **데이터 분리:**데이터는 서비스 전체에서 각 구성 요소에 논리적으로 별도로 유지됩니다. 모든 데이터에는 조직별로 태그가 지정됩니다. 이 태그는 데이터 수명 주기 동안 유지되며 서비스의 각 계층에서 적용됩니다.
+-   **데이터 분리:** 데이터는 서비스 전체에서 각 구성 요소에 논리적으로 별도로 유지됩니다. 모든 데이터에는 조직별로 태그가 지정됩니다. 이 태그는 데이터 수명 주기 동안 유지되며 서비스의 각 계층에서 적용됩니다.
 
--   **데이터 액세스**: Microsoft 직원은 보안 권장 사항을 제공하고 잠재적 보안 위협을 조사하기 위해 Azure 서비스에서 수집하거나 분석한 정보에 액세스할 수 있습니다. 이러한 정보에는 크래시 덤프 파일, 프로세스 생성 이벤트, VM 디스크 스냅숏 및 아티팩트 등이 포함되며, 가상 컴퓨터의 고객 데이터 또는 개인 데이터가 의도치 않게 포함될 수도 있습니다. Microsoft는 [Microsoft Online Services 약관 및 개인정보처리방침](http://www.microsoftvolumelicensing.com/DocumentSearch.aspx?Mode=3&DocumentTypeId=31)을 준수하며, 고객 데이터를 사용하지 않거나 광고 또는 이와 유사한 상업적 목적으로 정보를 유출하지 않습니다.
+-   **데이터 액세스**: Microsoft 직원은 보안 권장 사항을 제공하고 잠재적 보안 위협을 조사하기 위해 Azure 서비스에서 수집하거나 분석한 정보에 액세스할 수 있습니다. 이러한 정보에는 크래시 덤프 파일, 프로세스 생성 이벤트, VM 디스크 스냅숏 및 아티팩트 등이 포함되며, 가상 머신의 고객 데이터 또는 개인 데이터가 의도치 않게 포함될 수도 있습니다. Microsoft는 [Microsoft Online Services 약관 및 개인정보처리방침](http://www.microsoftvolumelicensing.com/DocumentSearch.aspx?Mode=3&DocumentTypeId=31)을 준수하며, 고객 데이터를 사용하지 않거나 광고 또는 이와 유사한 상업적 목적으로 정보를 유출하지 않습니다.
 
 -   **데이터 사용**: Microsoft는 여러 테넌트에 발생하는 패턴 및 위협 인텔리전스를 사용하여 방지 및 검색 기능을 향상시킵니다. [개인 정보 취급 방침](https://www.microsoft.com/privacystatement/OnlineServices/Default.aspx)에 설명된 개인 정보 취급 방침 약정에 따라 수행합니다.
 
 ### <a name="data-location"></a>데이터 위치
 
-Azure 보안 센터는 크래시 덤프 파일의 임시 복사본을 수집하고 이용 시도 및 손상 성공의 증거를 찾기 위해 분석합니다. Azure Security Center는 작업 영역과 동일한 지역 내에서 이 분석을 수행하고 분석이 완료되면 임시 복사본을 삭제합니다. 컴퓨터 아티팩트는 VM과 동일한 지역에 중앙 집중식으로 저장됩니다.
+Azure Security Center는 크래시 덤프 파일의 임시 복사본을 수집하고 이용 시도 및 손상 성공의 증거를 찾기 위해 분석합니다. Azure Security Center는 작업 영역과 동일한 지역 내에서 이 분석을 수행하고 분석이 완료되면 임시 복사본을 삭제합니다. 컴퓨터 아티팩트는 VM과 동일한 지역에 중앙 집중식으로 저장됩니다.
 
--   **저장소 계정**: 가상 컴퓨터가 실행되는 각 지역에 대해 지정됩니다. 그러면 데이터를 수집하는 가상 컴퓨터와 동일한 지역에 데이터를 저장할 수 있습니다.
+-   **Storage 계정**: 가상 머신이 실행되는 각 지역에 대해 지정됩니다. 그러면 데이터를 수집하는 가상 컴퓨터와 동일한 지역에 데이터를 저장할 수 있습니다.
 
--   **Azure Security Center 저장소**: 보안 경고(파트너 경고 포함), 권장 사항 및 보안 상태에 대한 정보는 현재 미국에 있는 Azure Security Center 저장소에 중앙 집중식으로 저장됩니다. 이 정보는 필요한 가상 컴퓨터에서 수집된 관련된 구성 정보 및 보안 이벤트를 포함하여 보안 경고, 권장 사항 또는 보안 상태를 제공할 수 있습니다.
+-   **Azure Security Center Storage**: 보안 경고(파트너 경고 포함), 권장 사항 및 보안 상태에 대한 정보는 현재 미국에 있는 Azure Security Center Storage에 중앙 집중식으로 저장됩니다. 이 정보는 필요한 가상 머신에서 수집된 관련된 구성 정보 및 보안 이벤트를 포함하여 보안 경고, 권장 사항 또는 보안 상태를 제공할 수 있습니다.
 
 
 ## <a name="azure-monitor"></a>Azure Monitor
@@ -238,17 +236,17 @@ Network Watcher는 현재 다음과 같은 기능을 제공합니다.
 
 ## <a name="azure-storage-analytics"></a>Azure Storage 분석
 
-[저장소 분석](https://docs.microsoft.com/rest/api/storageservices/fileservices/storage-analytics)은 저장소 서비스 요청과 관련하여 집계된 트랜잭션 통계 및 용량 데이터를 포함하는 메트릭을 저장할 수 있습니다. 트랜잭션은 API 작업 수준과 저장소 서비스 수준에서 모두 보고되며 용량은 저장소 서비스 수준에서 보고됩니다. 메트릭 데이터를 사용하면 저장소 서비스 사용량을 분석하고 저장소 서비스에 대한 요청의 문제를 진단하며 서비스를 사용하는 응용 프로그램의 성능을 개선할 수 있습니다.
+[저장소 분석](https://docs.microsoft.com/rest/api/storageservices/fileservices/storage-analytics)은 Storage 서비스 요청과 관련하여 집계된 트랜잭션 통계 및 용량 데이터를 포함하는 메트릭을 저장할 수 있습니다. 트랜잭션은 API 작업 수준과 저장소 서비스 수준에서 모두 보고되며 용량은 저장소 서비스 수준에서 보고됩니다. 메트릭 데이터를 사용하면 저장소 서비스 사용량을 분석하고 저장소 서비스에 대한 요청의 문제를 진단하며 서비스를 사용하는 응용 프로그램의 성능을 개선할 수 있습니다.
 
-[Azure 저장소 분석](https://docs.microsoft.com/rest/api/storageservices/fileservices/storage-analytics)은 로깅을 수행하며 저장소 계정에 대한 메트릭 데이터를 제공합니다. 이 데이터를 사용하여 요청을 추적하고 사용량 추세를 분석하며 저장소 계정에 대한 문제를 진단할 수 있습니다. 저장소 분석 로깅은 [Blob, 큐 및 테이블 서비스](https://docs.microsoft.com/azure/storage/storage-introduction)에서 사용할 수 있습니다. 저장소 분석은 저장소 서비스에 대해 성공한 요청과 실패한 요청 관련 상세 정보를 기록합니다.
+[Azure Storage 분석](https://docs.microsoft.com/rest/api/storageservices/fileservices/storage-analytics)은 로깅을 수행하며 Storage 계정에 대한 메트릭 데이터를 제공합니다. 이 데이터를 사용하여 요청을 추적하고 사용량 추세를 분석하며 저장소 계정에 대한 문제를 진단할 수 있습니다. Storage 분석 로깅은 [Blob, 큐 및 Table service](https://docs.microsoft.com/azure/storage/storage-introduction)에서 사용할 수 있습니다. 저장소 분석은 Storage 서비스에 대해 성공한 요청과 실패한 요청 관련 상세 정보를 기록합니다.
 
 이 정로를 사용하면 개별 요청을 모니터링하고 저장소 서비스의 문제를 진단할 수 있습니다. 요청은 최상의 노력을 기준으로 기록됩니다. 서비스 끝점에 대한 요청이 있는 경우에만 로그 항목이 만들어집니다. 예를 들어 저장소 계정의 활동이 Blob 끝점에는 있지만 테이블 또는 큐 끝점에는 없는 경우 Blob service와 관련된 로그만 만들어집니다.
 
 저장소 분석을 사용하려면 모니터링할 각 서비스에 대해 저장소 분석을 개별적으로 사용하도록 설정해야 합니다. 이 작업은 [Azure Portal](https://portal.azure.com/)에서 수행할 수 있습니다. 자세한 내용은 [Azure Portal에서 저장소 계정 모니터링](https://docs.microsoft.com/azure/storage/storage-monitor-storage-account)을 참조하세요. REST API 또는 클라이언트 라이브러리를 통해 프로그래밍 방식으로 저장소 분석을 사용하도록 설정할 수도 있습니다. [서비스 속성 설정] 작업을 사용하여 각 서비스에 대해 개별적으로 저장소 분석을 사용하도록 설정합니다.
 
-집계된 데이터는 알려진 로깅용 Blob 및 알려진 메트릭용 테이블에 저장됩니다. Blob 서비스 및 테이블 서비스 API를 사용하면 이러한 Blob와 테이블에 액세스할 수 있습니다.
+집계된 데이터는 알려진 로깅용 Blob 및 알려진 메트릭용 테이블에 저장됩니다. Blob service 및 Table service API를 사용하면 이러한 Blob와 테이블에 액세스할 수 있습니다.
 
-저장소 분석에 저장되는 데이터의 양은 총 저장소 계정의 총 한도와 관계없이 20TB로 제한됩니다. 모든 로그는 $logs라는 컨테이너의 [블록 Blob](https://docs.microsoft.com/azure/storage/storage-analytics)에 저장되며, 저장소 계정에 대해 저장소 분석을 사용하도록 설정하면 자동으로 만들어집니다.
+저장소 분석에 저장되는 데이터의 양은 총 Storage 계정의 총 한도와 관계없이 20TB로 제한됩니다. 모든 로그는 $logs라는 컨테이너의 [블록 Blob](https://docs.microsoft.com/azure/storage/storage-analytics)에 저장되며, Storage 계정에 대해 저장소 분석을 사용하도록 설정하면 자동으로 만들어집니다.
 
 저장소 분석에서 수행하는 다음 작업에 대해 요금이 청구될 수 있습니다.
 
@@ -257,7 +255,7 @@ Network Watcher는 현재 다음과 같은 기능을 제공합니다.
 
 > [!Note]
 > 청구 및 데이터 보존 정책에 대한 자세한 내용은 [저장소 분석 및 청구](https://docs.microsoft.com/rest/api/storageservices/fileservices/storage-analytics-and-billing)를 참조하세요.
-> 최적의 성능을 얻기 위해 가상 컴퓨터에 연결되어 자주 활용되는 디스크의 수를 제한하여 가능한 제한을 방지하려고 합니다. 모든 디스크가 동시에 자주 활용되지 않으면 저장소 계정에서 많은 디스크를 지원할 수 있습니다.
+> 최적의 성능을 얻기 위해 가상 머신에 연결되어 자주 활용되는 디스크의 수를 제한하여 가능한 제한을 방지하려고 합니다. 모든 디스크가 동시에 자주 활용되지 않으면 저장소 계정에서 많은 디스크를 지원할 수 있습니다.
 
 > [!Note]
 > 저장소 계정 제한에 대한 자세한 내용은 [Azure Storage 확장성 및 성능 목표](https://docs.microsoft.com/azure/storage/storage-scalability-targets)를 참조하세요.
@@ -341,5 +339,4 @@ Microsoft는 클라우드 인프라의 탄력성을 보장하고 공격으로부
 Microsoft 보안 데이터 및 분석을 사용하여 더 지능적이고 효과적인 위협 검색을 수행합니다.
 
 - [Azure Security Center 계획 및 작업 가이드](https://docs.microsoft.com/azure/security-center/security-center-planning-and-operations-guide) - 조직의 보안 요구 사항과 클라우드 관리 모델에 따라 보안 센터를 최적으로 사용하기 위해 수행할 수 있는 일단의 단계 및 작업입니다.
-
 

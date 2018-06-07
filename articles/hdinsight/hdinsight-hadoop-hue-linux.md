@@ -1,27 +1,24 @@
 ---
-title: "HDInsight Linux 기반 클러스터에서 Hadoop으로 Hue - Azure | Microsoft Docs"
-description: "HDInsight 클러스터에서 Hue를 설치하고 터널링을 사용하여 Hue로 요청을 라우팅하는 방법을 알아봅니다. Hue를 사용하여 저장소를 찾은 후 Hive 또는 Pig를 실행합니다."
+title: HDInsight Linux 기반 클러스터에서 Hadoop으로 Hue - Azure | Microsoft Docs
+description: HDInsight 클러스터에서 Hue를 설치하고 터널링을 사용하여 Hue로 요청을 라우팅하는 방법을 알아봅니다. Hue를 사용하여 저장소를 찾은 후 Hive 또는 Pig를 실행합니다.
 keywords: hue hadoop
 services: hdinsight
-documentationcenter: 
+documentationcenter: ''
 author: nitinme
 manager: jhubbard
 editor: cgronlun
 ms.assetid: 9e57fcca-e26c-479d-a745-7b80a9290447
 ms.service: hdinsight
 ms.custom: hdinsightactive,hdiseo17may2017
-ms.workload: big-data
-ms.tgt_pltfrm: na
 ms.devlang: na
-ms.topic: article
-ms.date: 05/10/2017
+ms.topic: conceptual
+ms.date: 12/11/2017
 ms.author: nitinme
+ms.openlocfilehash: 829f309fa66bc548b9f74cca8112c244cc88775e
+ms.sourcegitcommit: 9cdd83256b82e664bd36991d78f87ea1e56827cd
 ms.translationtype: HT
-ms.sourcegitcommit: 54774252780bd4c7627681d805f498909f171857
-ms.openlocfilehash: 41a5c652a89c85f248039fc617c84a2b6b230f56
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/16/2018
 ---
 # <a name="install-and-use-hue-on-hdinsight-hadoop-clusters"></a>HDInsight Hadoop 클러스터에 Hue 설치 및 사용
 
@@ -49,7 +46,7 @@ Hue는 Hadoop 클러스터와 상호 작용하는 데 사용되는 웹 응용 �
 
 ## <a name="install-hue-using-script-actions"></a>스크립트 동작을 사용하여 Hue 설치
 
-Linux 기반 HDInsight 클러스터에 Hue를 설치하는 스크립트는 https://hdiconfigactions.blob.core.windows.net/linuxhueconfigactionv02/install-hue-uber-v02.sh에 있습니다. 이 스크립트를 사용하여 Azure Storage Blobs(WASB) 또는 Azure Data Lake Store를 기본 스토리지로 클러스터에 Hue를 설치할 수 있습니다.
+Linux 기반 HDInsight 클러스터에서 Hue를 설치하는 스크립트는 https://hdiconfigactions.blob.core.windows.net/linuxhueconfigactionv02/install-hue-uber-v02.sh에서 사용할 수 있습니다. 이 스크립트를 사용하여 Azure Storage Blobs(WASB) 또는 Azure Data Lake Store를 기본 스토리지로 클러스터에 Hue를 설치할 수 있습니다.
 
 이 섹션에서는 Azure Portal을 사용하여 클러스터를 프로비전할 때 스크립트를 사용하는 방법에 대한 지침을 제공합니다.
 
@@ -101,7 +98,7 @@ SSH 터널링이 실행되면 클러스터에서 Hue를 액세스하는 유일�
         hn0-myhdi-nfebtpfdv1nubcidphpap2eq2b.ex.internal.cloudapp.net
 
     Hue 웹 사이트가 위치한 기본 헤드의 호스트 이름입니다.
-4. 브라우저를 사용하여 http://HOSTNAME:8888 에서 Hue 포털을 엽니다. HOSTNAME을 이전 단계에서 얻은 이름으로 바꿉니다.
+4. 브라우저를 사용하여 http://HOSTNAME:8888에서 Hue 포털을 엽니다. HOSTNAME을 이전 단계에서 얻은 이름으로 바꿉니다.
 
    > [!NOTE]
    > 처음으로 로그인할 때 Hue 포털에 로그인할 계정을 만들라는 메시지가 표시됩니다. 여기에서 지정한 자격 증명은 포털로 제한되며 클러스터를 프로비전하는 동안 지정한 관리자 또는 SSH 사용자 자격 증명과 관련이 없습니다.
@@ -145,7 +142,7 @@ SSH 터널링이 실행되면 클러스터에서 Hue를 액세스하는 유일�
    ![Hue 포털 오류](./media/hdinsight-hadoop-hue-linux/hdinsight-hue-portal-error.png "Hue 포털 오류")
 
    이는 알려진 문제 때문입니다. 해결 방법으로 Ambari를 수정하여 활성 Resource Manager가 기본 헤드 노드에서 실행되도록 합니다.
-5. `wasb://`을 사용하여 HDInsight 클러스터가 Azure 저장소를 사용하는 동안 Hue는 WebHDFS를 이해합니다. 따라서 스크립트 동작에 사용할 사용자 지정 스크립트는 WASB와 통신을 위한 WebHDFS와 호환 가능한 서비스인 WebWasb를 설치합니다. 따라서 Hue 포털이 HDFS가 제대로 있다고 하더라도( **파일 브라우저**로 마우스를 이동할 때처럼) WASB로 해석되어야 합니다.
+5. `wasb://`을 사용하여 HDInsight 클러스터가 Azure Storage를 사용하는 동안 Hue는 WebHDFS를 이해합니다. 따라서 스크립트 동작에 사용할 사용자 지정 스크립트는 WASB와 통신을 위한 WebHDFS와 호환 가능한 서비스인 WebWasb를 설치합니다. 따라서 Hue 포털이 HDFS가 제대로 있다고 하더라도( **파일 브라우저**로 마우스를 이동할 때처럼) WASB로 해석되어야 합니다.
 
 ## <a name="next-steps"></a>다음 단계
 * [HDInsight 클러스터에 Giraph 설치](hdinsight-hadoop-giraph-install-linux.md). 클러스터 사용자 지정을 사용하여 HDInsight Hadoop 클러스터에 Giraph를 설치합니다. Giraph를 통해 Hadoop을 사용하여 그래프 처리를 수행할 수 있으며, Azure HDInsight에서 이를 사용할 수도 있습니다.
@@ -155,4 +152,3 @@ SSH 터널링이 실행되면 클러스터에서 Hue를 액세스하는 유일�
 [powershell-install-configure]: install-configure-powershell-linux.md
 [hdinsight-provision]: hdinsight-provision-clusters-linux.md
 [hdinsight-cluster-customize]: hdinsight-hadoop-customize-cluster-linux.md
-

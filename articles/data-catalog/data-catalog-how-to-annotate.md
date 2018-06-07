@@ -13,15 +13,13 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: data-catalog
-ms.date: 05/15/2017
+ms.date: 01/18/2018
 ms.author: maroche
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 219dcbfdca145bedb570eb9ef747ee00cc0342eb
-ms.openlocfilehash: ba15ebc176ada48943fb6afa5f9c723e3d906099
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
-
+ms.openlocfilehash: f9dd68380773e3cdb93cf1033ccd1b55d9f69305
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="how-to-annotate-data-sources"></a>데이터 원본에 주석을 추가하는 방법
 ## <a name="introduction"></a>소개
@@ -42,7 +40,7 @@ ms.lasthandoff: 11/17/2016
 ## <a name="different-types-of-annotations"></a>다양한 유형의 주석
 데이터 카탈로그는 다음과 같은 형식의 주석을 지원합니다.
 
-| 주석 | 참고 사항 |
+| 주석 | 메모 |
 | --- | --- |
 | 친숙한 이름 |데이터 자산 수준에서 친숙한 이름을 제공하여 데이터 자산을 보다 쉽게 이해할 수 있도록 할 수 있습니다. 친숙한 이름은 기본 개체 이름이 수수께끼, 약식일 경우 가장 유용하며 그렇지 않은 경우 사용자에게 의미가 없습니다. |
 | 설명 |데이터 자산 및 특성 / 열 수준에서 설명을 제공할 수 있습니다. 설명은 데이터 자산에 대한 사용자의 관점 또는 사용을 설명하는 자유 형식의 짧은 텍스트 주석입니다. |
@@ -50,7 +48,7 @@ ms.lasthandoff: 11/17/2016
 | 태그(용어집 태그) |데이터 자산 및 특성 / 열 수준에서 태그를 제공할 수 있습니다. 용어집 태그는 일반적인 비즈니스 분류법을 사용하여 데이터 자산 또는 속성을 분류하는 데 사용할 수 있는 중앙에서 정의되는 용어입니다. 자세한 내용은 [관리 태그 지정을 위해 비즈니스 용어집을 설정하는 방법](data-catalog-how-to-business-glossary.md)을 참조하세요. |
 | 전문가 |데이터 자산 수준에서 전문가를 제공할 수 있습니다. 전문가는 데이터에 대한 전문적 관점으로 사용자 또는 그룹을 식별하고 등록된 데이터 원본을 검색하고 기존 주석에서 대답하지 않은 질문이 있는 사용자에 대한 연락처의 지점으로 쓰일 수 있습니다. |
 | 액세스 요청 |데이터 자산 수준에서 액세스 요청 정보를 제공할 수 있습니다. 이 정보는 아직 액세스 권한이 없는 데이터 원본을 검색하는 사용자를 위한 것입니다. 사용자는 액세스, 액세스를 얻기 위해 필요한 프로세스 또는 도구의 URL을 부여하는 사용자 또는 그룹의 메일 주소를 입력할 수 있으며 또는 텍스트로 프로세스 자체를 입력할 수 있습니다. |
-| 설명서 |데이터 자산 수준에서 설명서를 제공할 수 있습니다. 자산 설명서는 링크와 이미지를 포함할 수 있으며 설명과 태그를 통해 전달되지 않은 어떠한 정보든 제공할 수 있는 서식 있는 텍스트 정보입니다. |
+| 문서화 |데이터 자산 수준에서 설명서를 제공할 수 있습니다. 자산 설명서는 링크와 이미지를 포함할 수 있으며 설명과 태그를 통해 전달되지 않은 어떠한 정보든 제공할 수 있는 서식 있는 텍스트 정보입니다. |
 
 ## <a name="annotating-multiple-assets"></a>여러 자산 주석 지정
 데이터 카탈로그 포털에서 여러 데이터 자산을 선택하는 경우 사용자는 단일 작업에서 선택한 모든 자산에 주석을 지정할 수 있습니다. 관련 데이터 자산에 대한 일관된 설명 및 태그와 전문가 집합을 쉽게 선택하고 제공할 수 있도록 주석이 선택된 모든 자산에 적용됩니다.
@@ -70,4 +68,3 @@ ms.lasthandoff: 11/17/2016
 
 ## <a name="see-also"></a>참고 항목
 * [Azure Data Catalog 시작](data-catalog-get-started.md) 자습서.
-

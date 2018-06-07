@@ -12,15 +12,13 @@ ms.devlang: node
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 09/13/2016
+ms.date: 08/25/2017
 ms.author: elioda
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a243e4f64b6cd0bf7b0776e938150a352d424ad1
-ms.openlocfilehash: 527aed57517f04d1b0fdcad5feac5488123b89c7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 12/07/2016
-
-
+ms.openlocfilehash: df49f054b5eb26c3d68f088bc05f5209cf2ebccf
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="get-started-with-device-twins-node"></a>장치 쌍 시작(노드)
 [!INCLUDE [iot-hub-selector-twin-get-started](../../includes/iot-hub-selector-twin-get-started.md)]
@@ -28,7 +26,7 @@ ms.lasthandoff: 12/07/2016
 이 자습서의 끝 부분에 다음 두 개의 Node.js 콘솔 앱이 제공됩니다.
 
 * **AddTagsAndQuery.js**, 태그를 추가하고 장치 쌍을 쿼리하는 Node.js 백 엔드 앱입니다.
-* **TwinSimulatedDevice.js** - 앞에서 만든 장치 ID와 IoT Hub를 연결하고 연결 상태를 보고하는 장치를 시뮬레이션하는 Node.js 앱.
+* **TwinSimulatedDevice.js** - 앞에서 만든 장치 ID와 IoT Hub를 연결하고 연결 상태를 보고하는 장치를 시뮬레이션하는 Node.js 앱입니다.
 
 > [!NOTE]
 > [Azure IoT SDK][lnk-hub-sdks] 문서는 장치 및 백 엔드 앱을 빌드하는 데 사용할 수 있는 Azure IoT SDK에 대한 정보를 제공합니다.
@@ -37,7 +35,7 @@ ms.lasthandoff: 12/07/2016
 
 이 자습서를 완료하려면 다음이 필요합니다.
 
-* Node.js 버전 0.10.x 이상
+* Node.js 버전 4.0.x 이상
 * 활성 Azure 계정. 계정이 없는 경우 몇 분 안에 [무료 계정][lnk-free-trial]을 만들 수 있습니다.
 
 [!INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
@@ -45,7 +43,7 @@ ms.lasthandoff: 12/07/2016
 [!INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
 
 ## <a name="create-the-service-app"></a>서비스 응용 프로그램 만들기
-이 섹션에서는 **myDeviceId**와 연결된 장치 쌍에 위치 메타데이터를 추가하는 Node.js 콘솔 앱을 만듭니다. 그런 다음 미국에 위치한 장치를 선택한 후 셀룰러 연결을 보고하는 장치를 선택하는 IoT Hub에 저장된 장치 쌍을 쿼리합니다.
+이 섹션에서는 **myDeviceId**와 연결된 장치 쌍에 위치 메타데이터를 추가하는 Node.js 콘솔 앱을 만듭니다. 그런 다음 IoT Hub에 저장된 장치 쌍을 쿼리하여 미국에 있는 장치를 선택한 다음 셀룰러 연결을 보고하는 장치를 선택합니다.
 
 1. **addtagsandqueryapp**라는 빈 폴더를 새로 만듭니다. **addtagsandqueryapp** 폴더의 명령 프롬프트에 다음 명령을 사용하여 package.json 파일을 만듭니다. 모든 기본값을 수락합니다.
    
@@ -91,7 +89,7 @@ ms.lasthandoff: 12/07/2016
    
     **레지스트리** 개체는 서비스의 장치 쌍을 조작하는 데 필요한 모든 메서드를 표시합니다. 이전 코드는 **Registry** 개체를 초기화한 다음 **myDeviceId**에 대한 장치 쌍을 검색하고, 마지막으로 원하는 위치 정보를 사용해 태그를 업데이트합니다.
    
-    태그를 업데이트한 후 **queryTwins** 함수를 호출합니다.
+    태그를 업데이트한 후에는 **queryTwins** 함수를 호출합니다.
 5. 다음 코드를 **queryTwins** 함수를 구현할 **AddTagsAndQuery.js** 끝 부분에 추가합니다.
    
         var queryTwins = function() {
@@ -116,7 +114,7 @@ ms.lasthandoff: 12/07/2016
    
     이전 코드는 두 개의 쿼리를 실행합니다. 첫 번째는 **Redmond43** 공장에 위치한 장치의 장치 쌍만을 선택하고, 두 번째는 또한 셀룰러 네트워크를 통해서 연결된 장치만을 선택하기 위해 쿼리를 구체화합니다.
    
-    이전 코드는 **쿼리** 개체를 만들 때 반환되는 최대 문서 수를 지정한다는 점에 유의합니다. **query** 개체에는 모든 결과를 검색하기 위해 여러번 **nextAsTwin** 메서드를 호출하는 데 사용할 수 있는 **hasMoreResults** 부울 속성이 들어 있습니다. **next**라는 메서드는 장치 쌍이 아닌 결과(예: 집계 쿼리의 결과)에 대해 사용할 수 있습니다.
+    이전 코드는 **쿼리** 개체를 만들 때 반환되는 최대 문서 수를 지정합니다. **query** 개체에는 모든 결과를 검색하기 위해 여러번 **nextAsTwin** 메서드를 호출하는 데 사용할 수 있는 **hasMoreResults** 부울 속성이 들어 있습니다. **next**라는 메서드는 장치 쌍이 아닌 결과(예: 집계 쿼리의 결과)에 대해 사용할 수 있습니다.
 6. 키를 눌러 응용 프로그램을 실행합니다.
    
         node AddTagsAndQuery.js
@@ -130,10 +128,6 @@ ms.lasthandoff: 12/07/2016
 ## <a name="create-the-device-app"></a>장치 앱 만들기
 이 섹션에서는 **myDeviceId**로 허브에 연결하는 Node.js 콘솔 앱을 만들고 셀룰러 네트워크를 사용하여 연결된 정보를 포함하도록 장치 쌍의 reported 속성을 업데이트합니다.
 
-> [!NOTE]
-> 현재 장치 쌍은 MQTT 프로토콜을 사용하여 IoT Hub에 연결하는 장치에서만 액세스할 수 있습니다. 기존 장치 앱이 MQTT를 사용하도록 변환하는 방법에 관한 설명은 [MQTT 지원][lnk-devguide-mqtt] 문서를 참조하세요.
-> 
-> 
 
 1. **reportconnectivity**라는 빈 폴더를 새로 만듭니다. **reportconnectivity** 폴더의 명령 프롬프트에서 다음 명령을 사용하여 package.json 파일을 만듭니다. 모든 기본값을 수락합니다.
    
@@ -231,4 +225,3 @@ ms.lasthandoff: 12/07/2016
 
 [lnk-methods-tutorial]: iot-hub-node-node-direct-methods.md
 [lnk-devguide-mqtt]: iot-hub-mqtt-support.md
-

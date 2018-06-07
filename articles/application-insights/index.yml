@@ -1,0 +1,87 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: Application Insights 설명서
+metadata:
+  title: 'Application Insights 설명서 - 자습서, API 참조 | Microsoft Docs'
+  description: 'Application Insights는 여러 플랫폼에서 앱을 빌드하고 관리하는 웹 개발자를 위한 확장 가능한 APM(Application Performance Management) 서비스입니다. 빠른 시작, 자습서 및 참조 설명서를 사용하여 문제를 검색 및 진단하고, 웹앱 및 서비스의 사용을 이해하는 방법을 알아봅니다.'
+  services: application-insights
+  author: czeumault
+  manager: carolz
+  ms.service: application-insights
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 09/15/2017
+  ms.author: carolz
+abstract:
+  description: 'Application Insights는 여러 플랫폼에서 앱을 빌드하고 관리하는 웹 개발자를 위한 확장 가능한 APM(Application Performance Management) 서비스입니다. 빠른 시작, 자습서 및 참조 설명서를 사용하여 문제를 검색 및 진단하고, 웹앱 및 서비스의 사용을 이해하는 방법을 알아봅니다.'
+sections:
+  - title: 5분 빠른 시작
+    items:
+      - type: paragraph
+        text: Azure Application Insights를 사용하여 응용 프로그램 모니터링을 시작하는 방법을 알아봅니다.
+      - type: list
+        style: icon48
+        items:
+          - image:
+              src: 'https://docs.microsoft.com/media/common/dotnet.svg'
+            text: .NET
+            href: quick-monitor-portal
+          - image:
+              src: 'https://docs.microsoft.com/media/logos/logo_NETcore.svg'
+            text: .NET Core
+            href: app-insights-dotnetcore-quick-start
+          - image:
+              src: 'https://docs.microsoft.com/media/common/nodejs.svg'
+            text: Node.js
+            href: app-insights-nodejs-quick-start
+          - image:
+              src: 'https://docs.microsoft.com/media/common/java.svg'
+            text: Java
+            href: app-insights-java-quick-start
+          - image:
+              src: /azure/application-insights/media/index/mobile-center.png
+            text: 모바일
+            href: app-insights-mobile-center-quickstart
+  - title: 단계별 자습서
+    items:
+      - type: paragraph
+        text: 웹 응용 프로그램의 성능과 사용을 지속적으로 향상시키는 방법을 알아봅니다.
+      - type: list
+        style: ordered
+        items:
+          - html: <a href="app-insights-tutorial-runtime-exceptions">런타임 예외 찾기 및 진단</a>
+          - html: <a href="app-insights-tutorial-performance">성능 문제 찾기 및 진단</a>
+          - html: <a href="app-insights-tutorial-alert">응용 프로그램 상태에 대한 모니터링 및 경고</a>
+          - html: <a href="app-insights-tutorial-users">고객 사용 및 정보 분석</a>
+          - html: <a href="app-insights-tutorial-dashboards">사용자 지정 KPI 대시보드 만들기</a>
+  - title: Pluralsight 비디오 교육 체험
+    items:
+      - type: list
+        style: cards
+        className: cardsFTitle
+        items:
+          - title: Azure에서 .NET으로 개발
+            href: 'https://app.pluralsight.com/library/courses/developing-dotnet-microsoft-azure-getting-started/table-of-contents'
+            image:
+              src: 'https://docs.microsoft.com/media/logos/logo_pluralsight.svg'
+              href: 'https://app.pluralsight.com/library/courses/developing-dotnet-microsoft-azure-getting-started/table-of-contents'
+          - title: Azure에서 Node.js로 개발
+            href: 'https://app.pluralsight.com/library/courses/developing-nodejs-microsoft-azure-getting-started/table-of-contents'
+            image:
+              src: 'https://docs.microsoft.com/media/logos/logo_pluralsight.svg'
+              href: 'https://app.pluralsight.com/library/courses/developing-nodejs-microsoft-azure-getting-started/table-of-contents'
+  - title: 참조
+    items:
+      - type: list
+        style: cards
+        className: cardsD
+        items:
+          - title: 언어
+            html: '<p><a href="https://docs.loganalytics.io/">분석</a></p><p><a href="/dotnet/api/microsoft.applicationinsights">.NET</a></p><p><a href="/java/api/com.microsoft.applicationinsights">Java</a></p><p><a href="https://github.com/Microsoft/ApplicationInsights-JS/blob/master/API-reference.md">JavaScript</a></p><p><a href="https://dev.applicationinsights.io/">데이터 액세스 API</a></p>'
+          - title: 데이터 모델
+            html: <p><a href="application-insights-data-model-request-telemetry">요청</a></p><p><a href="application-insights-data-model-dependency-telemetry">종속성</a></p><p><a href="application-insights-data-model-exception-telemetry">예외</a></p><p><a href="application-insights-data-model-trace-telemetry">추적</a></p><p><a href="application-insights-data-model-event-telemetry">Event</a></p><p><a href="application-insights-data-model-metric-telemetry">메트릭</a></p><p><a href="application-insights-data-model-context">컨텍스트</a></p>
+          - title: 원격 분석 상관 관계
+            html: <p><a href="application-insights-correlation">원격 분석 상관 관계</a></p>
+          - title: 코드 샘플
+            html: '<p><a href="https://azure.microsoft.com/en-us/resources/samples/?service=application-insights">코드 샘플</a></p>'

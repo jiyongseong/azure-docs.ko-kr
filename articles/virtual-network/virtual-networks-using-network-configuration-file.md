@@ -1,11 +1,11 @@
 ---
-title: "Azure Virtual Network(클래식) 구성 - 네트워크 구성 파일 | Microsoft Docs"
-description: "네트워크 구성 파일을 내보내고, 변경하며, 가져와서 가상 네트워크(클래식)를 만들고 수정하는 방법을 알아봅니다."
+title: Azure Virtual Network(클래식) 구성 - 네트워크 구성 파일 | Microsoft Docs
+description: 네트워크 구성 파일을 내보내고, 변경하며, 가져와서 가상 네트워크(클래식)를 만들고 수정하는 방법을 알아봅니다.
 services: virtual-network
-documentationcenter: 
-author: jimdial
-manager: timlt
-editor: 
+documentationcenter: ''
+author: genlin
+manager: cshepard
+editor: ''
 tags: azure-service-management
 ms.assetid: c29b9059-22b0-444e-bbfe-3e35f83cde2f
 ms.service: virtual-network
@@ -14,14 +14,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 06/23/2017
-ms.author: jdial
-ms.custom: 
+ms.author: genli
+ms.custom: ''
+ms.openlocfilehash: ed47a5d1449ba634f90e93a82f15daf6e44a553e
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: f1e3ae26b6525f2235a6b0d53546b334dc027b94
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="configure-a-virtual-network-classic-using-a-network-configuration-file"></a>네트워크 구성 파일을 사용하여 가상 네트워크(클래식) 구성
 > [!IMPORTANT]
@@ -57,7 +56,7 @@ PowerShell 또는 Azure CLI를 사용하여 네트워크 구성 파일을 내보
 
 ## <a name="create-or-modify-a-network-configuration-file"></a>네트워크 구성 파일 만들기 또는 수정
 
-네트워크 구성 파일은 XML 파일(PowerShell 사용) 또는 json 파일(Azure CLI 사용)입니다. 모든 텍스트 또는 XML/json 편집기에서 파일을 편집할 수 있습니다. [네트워크 구성 파일 스키마 설정](https://msdn.microsoft.com/library/azure/jj157100.aspx) 문서에는 모든 설정에 대한 세부 정보가 포함됩니다. 설정에 대한 추가 설명은 [가상 네트워크 및 설정 보기](virtual-network-manage-network.md#view-vnet)를 참조하세요. 파일에 대한 변경 내용:
+네트워크 구성 파일은 XML 파일(PowerShell 사용) 또는 json 파일(Azure CLI 사용)입니다. 모든 텍스트 또는 XML/json 편집기에서 파일을 편집할 수 있습니다. [네트워크 구성 파일 스키마 설정](https://msdn.microsoft.com/library/azure/jj157100.aspx) 문서에는 모든 설정에 대한 세부 정보가 포함됩니다. 설정에 대한 추가 설명은 [가상 네트워크 및 설정 보기](manage-virtual-network.md#view-virtual-networks-and-settings)를 참조하세요. 파일에 대한 변경 내용:
 
 - 스키마를 준수해야 하며 그렇지 않은 경우 네트워크 구성 파일 가져오기가 실패합니다.
 - 구독에 대한 모든 기존 네트워크 설정을 덮어쓰므로 수정할 때는 특히 주의하세요. 예를 들어, 다음에 나오는 네트워크 구성 파일 예를 참조하세요. 원본 파일에 두 **VirtualNetworkSite** 인스턴스가 포함되어 있고 예제와 같이 변경했다고 가정하겠습니다. 파일을 가져올 때 Azure는 파일에서 제거한 **VirtualNetworkSite** 인스턴스에 대한 가상 네트워크를 삭제합니다. 이 단순한 시나리오에서는 가상 네트워크에 리소스가 없다고 가정하고 가상 네트워크를 삭제할 수 없는 것처럼 가져오기가 실패합니다.
@@ -142,4 +141,3 @@ PowerShell 또는 Azure CLI를 사용하여 네트워크 구성 파일을 가져
     ```azurecli
     azure network import c:\azure\networkconfig.json
     ```
-

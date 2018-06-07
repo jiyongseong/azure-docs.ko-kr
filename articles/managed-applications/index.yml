@@ -1,0 +1,55 @@
+### YamlMime:YamlDocument
+documentType: LandingData
+title: "Azure 관리되는 응용 프로그램 설명서"
+metadata:
+  title: "Azure 관리되는 응용 프로그램 설명서 - 자습서, API 참조"
+  description: "Azure 관리되는 응용 프로그램을 사용하여 소비자가 보다 쉽게 유지 관리하는 클라우드 솔루션을 게시할 수 있습니다."
+  services: managed-applications
+  author: tfitzmac
+  manager: timlt
+  ms.service: managed-applications
+  ms.tgt_pltfrm: na
+  ms.devlang: na
+  ms.topic: landing-page
+  ms.date: 10/25/2017
+  ms.author: tomfitz
+  ms.openlocfilehash: 85f4d5d37dabfa5a8781a4f9ed0fb52d7c6e0297
+  ms.sourcegitcommit: 562a537ed9b96c9116c504738414e5d8c0fd53b1
+  ms.translationtype: HT
+  ms.contentlocale: ko-KR
+  ms.lasthandoff: 01/12/2018
+abstract:
+  description: "Azure 관리되는 응용 프로그램을 사용하면 내부 및 외부 고객에게 클라우드 솔루션을 제공할 수 있습니다. 솔루션에 대한 인프라 및 솔루션의 지속적인 관리를 위한 용어를 정의합니다. 솔루션의 요금 청구는 Azure 청구를 통해 처리됩니다."
+sections:
+- title: "5분 빠른 시작"
+  items:
+  - type: paragraph
+    text: "관리되는 응용 프로그램을 게시하고 배포하는 방법을 알아봅니다."
+  - type: list
+    style: icon48
+    items:
+    - image:
+        src: /azure/managed-applications/media/index/cli.svg
+      text: Azure CLI
+      href: /azure/managed-applications/managed-apps-quickstart-cli
+- title: "단계별 자습서"
+  items:
+  - type: paragraph
+    text: "관리되는 응용 프로그램을 개발하고 Azure Marketplace를 통해 제공하는 방법을 알아봅니다."
+  - type: list
+    style: ordered
+    items:
+    - html: "<a href=\"/azure/managed-applications/publish-service-catalog-app\">내부 사용자를 위해 관리되는 응용 프로그램 게시</a>"
+    - html: "<a href=\"/azure/managed-applications/publish-marketplace-app\">외부 사용자를 위해 관리되는 응용 프로그램 게시</a>"
+- title: "참조"
+  items:
+  - type: list
+    style: cards
+    className: cardsD
+    items:
+    - title: "명령줄"
+      html: <p><a href="/cli/azure/managedapp">Azure CLI</a></p><p><a href="/powershell/module/azurerm.resources">PowerShell</a></p>
+    - title: REST API
+      html: <p><a href="/rest/api/resources/">REST</a></p>
+    - title: "사용자 인터페이스"
+      html: "<p><a href=\"/azure/managed-applications/create-uidefinition-elements\">UI 요소</a></p><p><a href=\"/azure/managed-applications/create-uidefinition-functions\">UI 함수</a></p>"

@@ -1,39 +1,24 @@
 ---
-title: "Azure Blob에서 Azure 데이터 웨어하우스로 로드 | Microsoft Docs"
-description: "PolyBase를 사용하여 Azure blob 저장소에서 SQL 데이터 웨어하우스로 데이터를 로드하는 방법을 알아봅니다. 몇 개의 테이블을 공용 데이터에서 Contoso 소매 데이터 웨어하우스 스키마로 로드합니다."
+title: Azure SQL Data Warehouse에 Contoso 소매 데이터 로드 | Microsoft Docs
+description: Contoso 소매 데이터에서 Azure SQL Data Warehouse로 두 개의 테이블을 로드하기 위해 PolyBase와 T-SQL 명령을 사용합니다.
 services: sql-data-warehouse
-documentationcenter: NA
 author: ckarst
-manager: barbkess
-editor: 
-ms.assetid: faca0fe7-62e7-4e1f-a86f-032b4ffcb06e
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: loading
-ms.date: 10/31/2016
-ms.author: cakarst;barbkess
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2548f779767635865daf790d301d86feff573a29
-ms.openlocfilehash: 348605fed8101cf83cbcfb559c71f34407692f7a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/24/2017
-
-
-
+ms.topic: conceptual
+ms.component: implement
+ms.date: 04/17/2018
+ms.author: cakarst
+ms.reviewer: igorstan
+ms.openlocfilehash: 0b066699475b753bb1104a78a4a1c60564535700
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-# <a name="load-data-from-azure-blob-storage-into-sql-data-warehouse-polybase"></a>Azure blob 저장소에서 SQL 데이터 웨어하우스로 데이터를 로드합니다(PolyBase).
-> [!div class="op_single_selector"]
-> * [데이터 팩터리](sql-data-warehouse-load-from-azure-blob-storage-with-data-factory.md)
-> * [PolyBase](sql-data-warehouse-load-from-azure-blob-storage-with-polybase.md)
-> 
-> 
+# <a name="load-contoso-retail-data-to-azure-sql-data-warehouse"></a>Azure SQL Data Warehouse에 Contoso 소매 데이터 로드
 
-Azure Blob 저장소에서 Azure SQL 데이터 웨어하우스로 데이터 로드하기 위해 PolyBase와 T-SQL 명령을 사용합니다. 
-
-간단히 말하자면, 이 자습서는 공용 Azure 저장소 Blob에서 두 테이블을 Contoso 소매 데이터 웨어하우스 스키마로 로드 합니다. 전체 데이터 집합을 로드하려면 Microsoft SQL Server 샘플 리포지토리에서 예제 [전체 Contoso 소매 데이터 웨어하우스 로드하기][Load the full Contoso Retail Data Warehouse]를 실행합니다.
+Contoso 소매 데이터에서 Azure SQL Data Warehouse로 두 개의 테이블을 로드하기 위해 PolyBase와 T-SQL 명령을 사용합니다. 전체 데이터 집합을 로드하려면 Microsoft SQL Server 샘플 리포지토리에서 예제 [전체 Contoso 소매 데이터 웨어하우스 로드하기](https://github.com/Microsoft/sql-server-samples/tree/master/samples/databases/contoso-data-warehouse/readme.md)를 실행합니다.
 
 이 자습서에서는 다음 작업을 수행합니다.
 
@@ -42,10 +27,10 @@ Azure Blob 저장소에서 Azure SQL 데이터 웨어하우스로 데이터 로�
 3. 로드가 완료 된 후에 최적화를 수행합니다.
 
 ## <a name="before-you-begin"></a>시작하기 전에
-이 자습서를 실행하려면 SQL 데이터 웨어하우스 데이터베이스를 이미 가지고 있는 Azure 계정이 필요합니다. 계정이 아직 없다면 [SQL Data Warehouse 만들기][Create a SQL Data Warehouse]를 참조하세요.
+이 자습서를 실행하려면 SQL Data Warehouse 데이터베이스를 이미 가지고 있는 Azure 계정이 필요합니다. 계정이 아직 없다면 [SQL Data Warehouse 만들기][Create a SQL Data Warehouse]를 참조하세요.
 
 ## <a name="1-configure-the-data-source"></a>1. 데이터 원본 구성
-PolyBase는 T-SQL 외부 개체를 사용하여 외부 데이터의 위치와 특성을 정의합니다. 외부 개체의 정의는 SQL 데이터 웨어하우스에 저장됩니다. 데이터 자체는 외부에 저장됩니다.
+PolyBase는 T-SQL 외부 개체를 사용하여 외부 데이터의 위치와 특성을 정의합니다. 외부 개체의 정의는 SQL Data Warehouse에 저장됩니다. 데이터 자체는 외부에 저장됩니다.
 
 ### <a name="11-create-a-credential"></a>1.1. 자격 증명 만들기
 **이 단계를 건너뜁니다** . 공용 데이터는 누구나 액세스할 수 있으므로 보안 액세스가 필요하지 않습니다.
@@ -131,7 +116,7 @@ GO
 ```
 
 ### <a name="32-create-the-external-tables"></a>3.2. 외부 테이블을 만듭니다.
-DimProduct와 FactOnlineSales 외부 테이블을 만들려면 이 스크립트를 실행합니다. 여기에서는 열 이름과 데이터 형식을 정의하고 이들을 Azure blob 저장소 파일의 위치와 형식에 바인딩합니다. 정의는 SQL 데이터 웨어하우스에 저장되고 데이터는 여전히 Azure 저장소 Blob에 위치합니다.
+DimProduct와 FactOnlineSales 외부 테이블을 만들려면 이 스크립트를 실행합니다. 여기에서는 열 이름과 데이터 형식을 정의하고 이들을 Azure blob 저장소 파일의 위치와 형식에 바인딩합니다. 정의는 SQL Data Warehouse에 저장되고 데이터는 여전히 Azure Storage Blob에 위치합니다.
 
 **위치** 매개 변수는 Azure Storage Blob의 루트 폴더 아래에 있는 폴더입니다. 각 테이블은 서로 다른 폴더에 있습니다.
 
@@ -281,7 +266,7 @@ ORDER BY
 ```
 
 ## <a name="5-optimize-columnstore-compression"></a>5. Columnstore 압축을 최적화합니다.
-기본적으로 SQL 데이터 웨어하우스는 클러스터형 columnstore 인덱스로 테이블을 저장합니다. 로드를 완료한 후 데이터 행 일부는 columnstore로 압축되지 않을 수 있습니다.  여기에는 다양한 이유가 있습니다. 자세한 내용은 [Columnstore 인덱스 관리][manage columnstore indexes]를 참조하세요.
+기본적으로 SQL Data Warehouse는 클러스터형 columnstore 인덱스로 테이블을 저장합니다. 로드를 완료한 후 데이터 행 일부는 columnstore로 압축되지 않을 수 있습니다.  여기에는 다양한 이유가 있습니다. 자세한 내용은 [Columnstore 인덱스 관리][manage columnstore indexes]를 참조하세요.
 
 로드 후 쿼리 성능과 columnstore 압축을 최적화하려면 모든 행을 압축하기 위해 columnstore 인덱스를 강제 적용할 테이블을 다시 빌드합니다. 
 
@@ -345,7 +330,7 @@ CREATE STATISTICS [stat_cso_FactOnlineSales_StoreKey] ON [cso].[FactOnlineSales]
 ```
 
 ## <a name="achievement-unlocked"></a>목표를 달성했습니다!
-이제 Azure SQL 데이터 웨어하우스에 공용 데이터를 성공적으로 로드했습니다. 잘 하셨습니다!
+이제 Azure SQL Data Warehouse에 공용 데이터를 성공적으로 로드했습니다. 잘 하셨습니다!
 
 다음과 같은 쿼리를 사용하여 테이블 쿼리를 시작할 수 있습니다.
 
@@ -372,8 +357,8 @@ GROUP BY p.[BrandName]
 [label]: sql-data-warehouse-develop-label.md
 
 <!--MSDN references-->
-[CREATE EXTERNAL DATA SOURCE]: https://msdn.microsoft.com/en-us/library/dn935022.aspx
-[CREATE EXTERNAL FILE FORMAT]: https://msdn.microsoft.com/en-us/library/dn935026.aspx
+[CREATE EXTERNAL DATA SOURCE]: https://msdn.microsoft.com/library/dn935022.aspx
+[CREATE EXTERNAL FILE FORMAT]: https://msdn.microsoft.com/library/dn935026.aspx
 [CREATE TABLE AS SELECT (Transact-SQL)]: https://msdn.microsoft.com/library/mt204041.aspx
 [sys.dm_pdw_exec_requests]: https://msdn.microsoft.com/library/mt203887.aspx
 [REBUILD]: https://msdn.microsoft.com/library/ms188388.aspx
@@ -381,4 +366,3 @@ GROUP BY p.[BrandName]
 <!--Other Web references-->
 [Microsoft Download Center]: http://www.microsoft.com/download/details.aspx?id=36433
 [Load the full Contoso Retail Data Warehouse]: https://github.com/Microsoft/sql-server-samples/tree/master/samples/databases/contoso-data-warehouse/readme.md
-

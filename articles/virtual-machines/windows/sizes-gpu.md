@@ -1,29 +1,27 @@
 ---
-title: "Azure Windows VM 크기 - GPU | Microsoft Docs"
-description: "Azure의 Windows 가상 컴퓨터에 사용할 수 있는 다양한 GPU 최적화 크기를 나열합니다."
+title: Azure Windows VM 크기 - GPU | Microsoft Docs
+description: Azure의 Windows 가상 머신에 사용할 수 있는 다양한 GPU 최적화 크기를 나열합니다. 이 시리즈의 크기에 대한 저장소 처리량 및 네트워크 대역폭뿐만 아니라 vCPU, 데이터 디스크 및 NIC의 수에 대한 정보를 제공합니다.
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: jonbeck7
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager,azure-service-management
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-windows
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: infrastructure-services
-ms.date: 07/28/2017
+ms.date: 03/01/2018
 ms.author: jonbeck
+ms.openlocfilehash: d7f4bbe5e9950f864c6998b6a7c8844503083559
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 2e11e15d20ecebd881a9b031bb0bc2cb6c5a88d6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/24/2018
 ---
-
-# <a name="gpu"></a>GPU 
+# <a name="gpu-optimized-virtual-machine-sizes"></a>GPU 최적화 가상 머신 크기
 
 [!INCLUDE [virtual-machines-common-sizes-gpu](../../../includes/virtual-machines-common-sizes-gpu.md)]
 
@@ -44,5 +42,4 @@ ms.lasthandoff: 07/21/2017
 
 ## <a name="next-steps"></a>다음 단계
 [ACU(Azure Compute 단위)](acu.md)가 Azure SKU 간의 Compute 성능을 비교하는 데 어떻게 도움을 줄 수 있는지 알아봅니다.
-
 

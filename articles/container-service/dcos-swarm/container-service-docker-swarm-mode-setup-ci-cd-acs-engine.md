@@ -1,27 +1,20 @@
 ---
-title: "Azure Container Service Engine 및 Swarm Mode를 사용한 CI/CD | Microsoft Docs"
-description: "Docker Swarm Mode, Azure Container Registry Engine 및 Visual Studio Team Services와 Azure Container Service를 사용하여 다중 컨테이너 .NET Core 응용 프로그램 연속 배달"
+title: Azure Container Service Engine 및 Swarm Mode를 사용한 CI/CD
+description: Docker Swarm Mode, Azure Container Registry Engine 및 Visual Studio Team Services와 Azure Container Service를 사용하여 다중 컨테이너 .NET Core 응용 프로그램 연속 배달
 services: container-service
-documentationcenter: " "
 author: diegomrtnzg
-manager: esterdnb
-tags: acs, azure-container-service, acs-engine
-keywords: "Docker, 컨테이너, 마이크로서비스, Swarm, Azure, Visual Studio Team Services, DevOps, ACS Engine"
+manager: jeconnoc
 ms.service: container-service
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: na
 ms.date: 05/27/2017
 ms.author: diegomrtnzg
+ms.custom: mvc
+ms.openlocfilehash: 01126f3eef988eb1787bafea92e7384aad1a703c
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: bfd49ea68c597b109a2c6823b7a8115608fa26c3
-ms.openlocfilehash: e68f06925fd7c72d72610ca68fab58a6fa2f4561
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-
 # <a name="full-cicd-pipeline-to-deploy-a-multi-container-application-on-azure-container-service-with-acs-engine-and-docker-swarm-mode-using-visual-studio-team-services"></a>Visual Studio Team Services를 사용하여 ACS Engine 및 Docker Swarm Mode를 포함한 Azure Container Service에 있는 다중 컨테이너 응용 프로그램을 배포하는 전체 CI/CD 파이프라인
 
 *이 문서는 [Visual Studio Team Services를 사용하여 Docker Swarm을 포함한 Azure Container Service에 있는 다중 컨테이너 응용 프로그램을 배포하는 전체 CI/CD 파이프라인](container-service-docker-swarm-setup-ci-cd.md) 설명서를 토대로 작성되었습니다.*
@@ -150,7 +143,7 @@ CI/CD 파이프라인에 도달하기 전에 Azure의 Docker Swarm 클러스터�
 
     빌드 작업의 경우 **이미지 빌드** 작업인 Azure Container Registry를 선택하고 각 이미지를 정의하는 Dockerfile을 선택합니다. **작업 디렉터리**를 Dockerfile 루트 디렉터리로 설정하고, **이미지 이름**을 정의한 후 **최신 태그 포함**을 선택합니다.
     
-    이미지 이름은 ```$(RegistryURL)/[NAME]:$(Build.BuildId)``` 형식이어야 합니다. **[NAME]**을 이미지 이름으로 바꿉니다.
+    이미지 이름은 ```$(RegistryURL)/[NAME]:$(Build.BuildId)``` 형식이어야 합니다. **[NAME]** 을 이미지 이름으로 바꿉니다.
     - ```proxy```
     - ```products-api```
     - ```ratings-api```
@@ -256,4 +249,3 @@ Visual Studio Team Services를 사용하면 [환경에서 릴리스를 관리](h
 * Visual Studio Team Services를 사용하는 CI/CD에 대한 자세한 내용은 [VSTS 빌드 개요](https://www.visualstudio.com/docs/build/overview)를 참조하세요.
 * ACS Engine에 대한 자세한 내용은 [ACS Engine GitHub 리포지토리](https://github.com/Azure/acs-engine)를 참조하세요.
 * Docker Swarm Mode에 대한 자세한 내용은 [Docker Swarm Mode 개요](https://docs.docker.com/engine/swarm/)를 참조하세요.
-

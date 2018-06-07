@@ -1,9 +1,9 @@
 ---
-title: "Azure CLI 1.0을 사용하여 도메인 영역 파일을 Azure DNS에 가져오기 및 내보내기 | Microsoft Docs"
-description: "Azure CLI 1.0을 사용하여 Azure DNS에 DNS 영역 파일을 가져오고 내보내는 방법을 알아봅니다"
+title: Azure CLI 2.0을 사용하여 도메인 영역 파일을 Azure DNS에 가져오기 및 내보내기 | Microsoft Docs
+description: Azure CLI 2.0을 사용하여 Azure DNS에 DNS 영역 파일을 가져오고 내보내는 방법을 알아봅니다
 services: dns
 documentationcenter: na
-author: georgewallace
+author: KumudD
 manager: timlt
 ms.assetid: f5797782-3005-4663-a488-ac0089809010
 ms.service: dns
@@ -11,19 +11,18 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 08/16/2016
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 4f68f90c3aea337d7b61b43e637bcfda3c98f3ea
-ms.openlocfilehash: d6d3fa7aa0e8b2462b3a6b4b66d3d87ab5535314
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
+ms.date: 04/30/2018
+ms.author: kumud
+ms.openlocfilehash: 3aee4e20b43d946101e692f0dca76b07e04dbb7a
+ms.sourcegitcommit: c52123364e2ba086722bc860f2972642115316ef
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
+ms.locfileid: "34069380"
 ---
+# <a name="import-and-export-a-dns-zone-file-using-the-azure-cli-20"></a>Azure CLI 2.0을 사용하여 DNS 영역 파일 가져오기 및 내보내기 
 
-# <a name="import-and-export-a-dns-zone-file-using-the-azure-cli-10"></a>Azure CLI 1.0을 사용하여 DNS 영역 파일 가져오기 및 내보내기 
-
-이 문서는 Azure CLI 1.0을 사용하여 Azure DNS에 대한 DNS 영역 파일 가져오고 내보내는 과정을 안내합니다.
+이 아티클에서는 Azure CLI 2.0을 사용하여 Azure DNS에 대한 DNS 영역 파일 가져오고 내보내는 과정을 설명합니다.
 
 ## <a name="introduction-to-dns-zone-migration"></a>DNS 영역 마이그레이션 소개
 
@@ -31,11 +30,8 @@ DNS 영역 파일은 영역의 모든 DNS(도메인 이름 시스템) 레코드�
 
 Azure DNS는 Azure CLI(명령줄 인터페이스I)를 사용하여 영역 파일 가져오기 및 내보내기를 지원합니다. 영역 파일 가져오기는 현재 Azure PowerShell 또는 Azure Portal을 통해 지원되지 **않습니다**.
 
-Azure CLI 1.0은 Azure 서비스를 관리하는 데 사용하는 플랫폼 간 명령줄 도구입니다. [Azure 다운로드 페이지](https://azure.microsoft.com/downloads/)에서 다운로드하여 Windows, Mac 및 Linux 플랫폼에 사용할 수 있습니다. 가장 일반적인 이름 서버 소프트웨어인 [BIND](https://www.isc.org/downloads/bind/)는 일반적으로 Linux에서 실행하기 때문에 플랫폼 간 지원은 영역 파일 가져오기 및 내보내기에 중요합니다.
+Azure CLI 2.0은 Azure 서비스를 관리하는 데 사용하는 플랫폼 간 명령줄 도구입니다. [Azure 다운로드 페이지](https://azure.microsoft.com/downloads/)에서 다운로드하여 Windows, Mac 및 Linux 플랫폼에 사용할 수 있습니다. 가장 일반적인 이름 서버 소프트웨어인 [BIND](https://www.isc.org/downloads/bind/)는 일반적으로 Linux에서 실행하기 때문에 플랫폼 간 지원은 영역 파일 가져오기 및 내보내기에 중요합니다.
 
-> [!NOTE]
-> 현재 두 가지 버전의 Azure CLI가 있습니다. CLI1.0은 Node.js를 기반으로 하며 "azure"로 시작하는 명령이 있습니다.
-> CLI2.0은 Python을 기반으로 하며 "az"로 시작하는 명령이 있습니다. 두 버전에서 영역 파일 가져오기가 지원되지만 이 페이지에서 설명하는 대로 CLI1.0 명령을 사용하는 것이 좋습니다.
 
 ## <a name="obtain-your-existing-dns-zone-file"></a>기존 DNS 영역 파일 가져오기
 
@@ -43,7 +39,7 @@ Azure DNS에 DNS 영역 파일을 가져오기 전에 영역 파일의 복사본
 
 * DNS 영역이 파트너 서비스에서 호스팅되는 경우(예: 도메인 등록자, 전용 DNS 호스팅 공급자 또는 다른 클라우드 공급자) 해당 서비스는 DNS 영역 파일을 다운로드하는 기능을 제공해야 합니다.
 * 사용자의 DNS 영역이 Windows DNS에서 호스팅되는 경우 영역 파일의 기본 폴더는 **%systemroot%\system32\dns**입니다. 또한 각 영역 파일의 전체 경로는 DNS 콘솔의 **일반** 탭에 표시됩니다.
-* DNS 영역이 BIND를 사용하여 호스팅되는 경우 각 영역에 대한 영역 파일의 위치는 바인딩 구성 파일 **'named.conf'**에 지정됩니다.
+* DNS 영역이 BIND를 사용하여 호스팅되는 경우 각 영역에 대한 영역 파일의 위치는 바인딩 구성 파일 **'named.conf'** 에 지정됩니다.
 
 > [!NOTE]
 > GoDaddy에서 다운로드한 영역 파일은 약간 비표준 형식을 가지고 있습니다. 이러한 영역 파일을 Azure DNS로 가져오기 전에 이 오류를 수정해야 합니다.
@@ -60,11 +56,10 @@ Azure DNS에 DNS 영역 파일을 가져오기 전에 영역 파일의 복사본
 ### <a name="merge-behavior"></a>병합 동작
 
 * 기존 및 새 레코드 집합은 기본적으로 병합됩니다. 병합된 레코드 집합 내의 동일한 레코드는 중복을 제거합니다.
-* 또는 `--force` 옵션을 지정하여 가져오기 프로세스가 기존 레코드 집합을 새 레코드 집합으로 바꿉니다. 가져온 영역 파일에 해당 레코드 집합이 없는 기존 레코드 집합은 제거되지 않습니다.
-* 레코드 집합을 병합하는 경우 기존 레코드 집합의 TTL(time to live)이 사용됩니다. `--force`을(를) 사용하는 경우 새 레코드 집합의 TTL가 사용됩니다.
-* SOA(Start of Authority) 매개 변수(`host` 제외)는 `--force`의 사용에 관계 없이 항상 가져온 영역 파일에서 가져옵니다. 마찬가지로 영역 광선의 이름 서버 레코드 집합의 경우 TTL은 항상 가져온 영역 파일에서 가져옵니다.
-* `--force` 매개 변수를 지정하지 않는 한 가져온 CNAME 레코드는 기존 CNAME 레코드를 동일한 이름으로 바꾸지 않습니다.
-* CNAME 레코드와 이름은 같지만 형식이 다른 레코드 간에 충돌이 발생할 경우(기존 또는 새로 만든 것에 관계 없이) 기존 레코드가 보존됩니다. `--force`의 사용과 별개입니다.
+* 레코드 집합을 병합하는 경우 기존 레코드 집합의 TTL(time to live)이 사용됩니다.
+* SOA(Start of Authority) 매개 변수(`host` 제외)는 항상 가져온 영역 파일에서 가져옵니다. 마찬가지로 영역 광선의 이름 서버 레코드 집합의 경우 TTL은 항상 가져온 영역 파일에서 가져옵니다.
+* 가져온 CNAME 레코드는 기존 CNAME 레코드를 동일한 이름으로 바꾸지 않습니다.  
+* CNAME 레코드와 이름은 같지만 형식이 다른 레코드 간에 충돌이 발생할 경우(기존 또는 새로 만든 것에 관계 없이) 기존 레코드가 보존됩니다. 
 
 ### <a name="additional-information-about-importing"></a>가져오기에 대한 추가 정보
 
@@ -83,7 +78,7 @@ Azure DNS에 DNS 영역 파일을 가져오기 전에 영역 파일의 복사본
 DNS 영역을 가져오는 Azure CLI 명령 형식은 다음과 같습니다.
 
 ```azurecli
-azure network dns zone import [options] <resource group> <zone name> <zone file name>
+az network dns zone import -g <resource group> -n <zone name> -f <zone file name>
 ```
 
 값
@@ -92,48 +87,23 @@ azure network dns zone import [options] <resource group> <zone name> <zone file 
 * `<zone name>` 은(는) 영역의 이름입니다.
 * `<zone file name>` 은(는) 가져올 영역 파일의 경로/이름입니다.
 
-이 이름이 있는 영역이 리소스 그룹에 없는 경우 생성됩니다. 영역이 이미 있는 경우 가져온 레코드 집합은 기존 레코드 집합으로 병합됩니다. 기존 레코드 집합을 덮어쓰려면 `--force` 옵션을 사용합니다.
+이 이름이 있는 영역이 리소스 그룹에 없는 경우 생성됩니다. 영역이 이미 있는 경우 가져온 레코드 집합은 기존 레코드 집합으로 병합됩니다. 
 
-영역 파일을 실제로 가져오지 않고 영역 파일의 유효성을 검사하려면 `--parse-only` 옵션을 사용합니다.
 
 ### <a name="step-1-import-a-zone-file"></a>1단계. 영역 파일 가져오기
 
 **contoso.com**영역에 대한 영역 파일을 가져오려면
 
-1. Azure CLI 1.0을 사용하여 Azure 구독에 로그인합니다.
+1. Resource Manager 리소스 그룹이 없는 경우 해당 리소스 그룹을 만들어야 할 수도 있습니다.
 
     ```azurecli
-    azure login
+    az group create --group myresourcegroup -l westeurope
     ```
 
-2. 새 DNS 영역을 만들려는 구독을 선택합니다.
+2. **contoso.com.txt** 파일에서 **myresourcegroup** 리소스 그룹의 새 DNS 영역으로 **contoso.com** 영역을 가져오려면 `az network dns zone import` 명령을 실행합니다.<BR>이 명령은 영역 파일을 로드하여 구문을 분석합니다. 이 명령은 Azure DNS 서비스에서 일련의 명령을 실행하여 영역 및 영역의 모든 레코드 집합을 만듭니다. 이 명령은 모든 오류 또는 경고뿐만 아니라 콘솔 창에 진행률도 보고합니다. 레코드 집합이 계열에 만들어지기 때문에 큰 영역 파일을 가져오는 데 몇 분 정도 걸릴 수 있습니다.
 
     ```azurecli
-    azure account set <subscription name>
-    ```
-
-3. Azure DNS는 Azure 리소스 관리자 전용 서비스입니다. Azure CLI는 리소스 관리자 모드로 전환되어야 합니다.
-
-    ```azurecli
-    azure config mode arm
-    ```
-
-4. Azure DNS 서비스를 사용하기 전에 구독을 등록하여 Microsoft.Network 리소스 공급자를 사용해야 합니다. (이 작업은 각 구독에 대해 한 번만 수행하면 됩니다.)
-
-    ```azurecli
-    azure provider register Microsoft.Network
-    ```
-
-5. 또한 Resource Manager 리소스 그룹이 없는 경우 해당 리소스 그룹을 만들어야 할 수도 있습니다.
-
-    ```azurecli
-    azure group create myresourcegroup westeurope
-    ```
-
-6. **contoso.com.txt** 파일에서 **myresourcegroup** 리소스 그룹의 새 DNS 영역으로 **contoso.com** 영역을 가져오려면 `azure network dns zone import` 명령을 실행합니다.<BR>이 명령은 영역 파일을 로드하여 구문을 분석합니다. 이 명령은 Azure DNS 서비스에서 일련의 명령을 실행하여 영역 및 영역의 모든 레코드 집합을 만듭니다. 이 명령은 모든 오류 또는 경고뿐만 아니라 콘솔 창에 진행률도 보고합니다. 레코드 집합이 계열에 만들어지기 때문에 큰 영역 파일을 가져오는 데 몇 분 정도 걸릴 수 있습니다.
-
-    ```azurecli
-    azure network dns zone import myresourcegroup contoso.com contoso.com.txt
+    az network dns zone import -g myresourcegroup -n contoso.com -f contoso.com.txt
     ```
 
 ### <a name="step-2-verify-the-zone"></a>2단계. 영역 유효성 검사
@@ -143,29 +113,48 @@ azure network dns zone import [options] <resource group> <zone name> <zone file 
 * 다음 Azure CLI 명령을 사용하여 레코드를 나열할 수 있습니다.
 
     ```azurecli
-    azure network dns record-set list myresourcegroup contoso.com
+    az network dns record-set list -g myresourcegroup -z contoso.com
     ```
 
 * PowerShell cmdlet `Get-AzureRmDnsRecordSet`를 사용하여 레코드를 나열할 수 있습니다.
-* `nslookup` 을 사용하여 레코드에 대한 이름 확인의 유효성을 검사할 수 있습니다. 영역이 아직 위임되지 않았기 때문에 올바른 Azure DNS 이름 서버를 명시적으로 지정해야 합니다. 다음 샘플은 영역에 할당된 이름 서버 이름을 검색하는 방법을 보여 줍니다. 또한 IT는 `nslookup`을(를) 사용하여 "www" 레코드를 쿼리 하는 방법을 보여줍니다.
+* `nslookup` 을 사용하여 레코드에 대한 이름 확인의 유효성을 검사할 수 있습니다. 영역이 아직 위임되지 않았기 때문에 올바른 Azure DNS 이름 서버를 명시적으로 지정해야 합니다. 다음 샘플은 영역에 할당된 이름 서버 이름을 검색하는 방법을 보여 줍니다. 또한 `nslookup`을 사용하여 "www" 레코드를 쿼리하는 방법을 보여줍니다.
 
-        C:\>azure network dns record-set show myresourcegroup contoso.com @ NS
-        info:Executing command network dns record-set show
-        + Looking up the DNS Record Set "@" of type "NS"
-        data:Id: /subscriptions/.../resourceGroups/myresourcegroup/providers/Microsoft.Network/dnszones/contoso.com/NS/@
-        data:Name: @
-        data:Type: Microsoft.Network/dnszones/NS
-        data:Location: global
-        data:TTL : 3600
-        data:NS records
-        data:Name server domain name : ns1-01.azure-dns.com
-        data:Name server domain name : ns2-01.azure-dns.net
-        data:Name server domain name : ns3-01.azure-dns.org
-        data:Name server domain name : ns4-01.azure-dns.info
-        data:
-        info:network dns record-set show command OK
+    ```azurecli
+    az network dns record-set ns list -g myresourcegroup -z  --output json 
+    ```
 
-        C:\> nslookup www.contoso.com ns1-01.azure-dns.com
+    ```json
+    [
+      {
+       .......
+       "name": "@",
+        "nsRecords": [
+          {
+            "additionalProperties": {},
+            "nsdname": "ns1-03.azure-dns.com."
+          },
+          {
+            "additionalProperties": {},
+            "nsdname": "ns2-03.azure-dns.net."
+          },
+          {
+            "additionalProperties": {},
+            "nsdname": "ns3-03.azure-dns.org."
+          },
+          {
+            "additionalProperties": {},
+            "nsdname": "ns4-03.azure-dns.info."
+          }
+        ],
+        "resourceGroup": "myresourcegroup",
+        "ttl": 86400,
+        "type": "Microsoft.Network/dnszones/NS"
+      }
+    ]
+    ```
+
+    ```cmd
+    nslookup www.contoso.com ns1-03.azure-dns.com
 
         Server: ns1-01.azure-dns.com
         Address:  40.90.4.1
@@ -173,6 +162,7 @@ azure network dns zone import [options] <resource group> <zone name> <zone file 
         Name:www.contoso.com
         Addresses:  134.170.185.46
         134.170.188.221
+    ```
 
 ### <a name="step-3-update-dns-delegation"></a>3단계. DNS 위임 업데이트
 
@@ -183,7 +173,7 @@ azure network dns zone import [options] <resource group> <zone name> <zone file 
 DNS 영역을 가져오는 Azure CLI 명령 형식은 다음과 같습니다.
 
 ```azurecli
-azure network dns zone export [options] <resource group> <zone name> <zone file name>
+az network dns zone export -g <resource group> -n <zone name> -f <zone file name>
 ```
 
 값
@@ -196,27 +186,8 @@ azure network dns zone export [options] <resource group> <zone name> <zone file 
 
 ### <a name="to-export-a-zone-file"></a>영역 파일을 내보내려면
 
-1. Azure CLI를 사용하여 Azure 구독에 로그인합니다.
+**myresourcegroup** 리소스 그룹의 기존 **contoso.com** Azure DNS 영역을 현재 폴더의 **contoso.com.txt** 파일로 내보내려면 `azure network dns zone export` 명령을 실행합니다. 이 명령은 Azure DNS 서비스를 호출하여 영역에서 레코드 집합을 열거하고 BIND와 호환 가능한 영역 파일에 결과를 내보냅니다.
 
-    ```azurecli
-    azure login
     ```
-
-2. DNS 영역을 만들려는 구독을 선택합니다.
-
-    ```azurecli
-    azure account set <subscription name>
+    az network dns zone export -g myresourcegroup -n contoso.com -f contoso.com.txt
     ```
-
-3. Azure DNS는 Azure 리소스 관리자 전용 서비스입니다. Azure CLI는 리소스 관리자 모드로 전환되어야 합니다.
-
-    ```azurecli
-    azure config mode arm
-    ```
-
-4. **myresourcegroup** 리소스 그룹의 기존 **contoso.com** Azure DNS 영역을 현재 폴더의 **contoso.com.txt** 파일로 내보내려면 `azure network dns zone export` 명령을 실행합니다. 이 명령은 Azure DNS 서비스를 호출하여 영역에서 레코드 집합을 열거하고 BIND와 호환 가능한 영역 파일에 결과를 내보냅니다.
-
-    ```azurecli
-    azure network dns zone export myresourcegroup contoso.com contoso.com.txt
-    ```
-

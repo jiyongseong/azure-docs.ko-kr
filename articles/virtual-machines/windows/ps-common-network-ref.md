@@ -1,11 +1,11 @@
 ---
-title: "Azure Virtual Networks에 대한 공통 PowerShell 명령 | Microsoft Docs"
-description: "Vm에 대한 가상 네트워크 및 연결된 리소스 만들기를 시작하게 하는 공통 PowerShell 명령."
+title: Azure Virtual Networks에 대한 공통 PowerShell 명령 | Microsoft Docs
+description: Vm에 대한 가상 네트워크 및 연결된 리소스 만들기를 시작하게 하는 공통 PowerShell 명령.
 services: virtual-machines-windows
-documentationcenter: 
-author: davidmu1
-manager: timlt
-editor: 
+documentationcenter: ''
+author: cynthn
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
 ms.assetid: 56e1a73c-8299-4996-bd03-f74585caa1dc
 ms.service: virtual-machines-windows
@@ -14,17 +14,16 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 07/17/2017
-ms.author: davidmu
+ms.author: cynthn
+ms.openlocfilehash: a5b3f84c27a0a5f6458808940b16a9001097b30b
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 6ddb1915c8073a7b64ba03ff6b90e701ad337c3e
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
 # <a name="common-powershell-commands-for-azure-virtual-networks"></a>Azure Virtual Networks에 대한 공통 PowerShell 명령
 
-가상 컴퓨터를 만들려는 경우, [가상 네트워크](../../virtual-network/virtual-networks-overview.md) 를 만들거나 VM을 추가할 수 있는 기존 가상 네트워크에 대해 알아야 합니다. 일반적으로 VM을 만들 때 이 문서에 설명된 리소스를 만드는 것이 좋습니다.
+가상 머신을 만들려는 경우, [가상 네트워크](../../virtual-network/virtual-networks-overview.md) 를 만들거나 VM을 추가할 수 있는 기존 가상 네트워크에 대해 알아야 합니다. 일반적으로 VM을 만들 때 이 문서에 설명된 리소스를 만드는 것이 좋습니다.
 
 최신 버전의 Azure PowerShell 설치, 구독 선택, 자신의 계정에 로그인하는 방법에 대해서는 [Azure PowerShell 설치 및 구성 방법](/powershell/azure/overview)을 참조하세요.
 
@@ -35,7 +34,7 @@ ms.lasthandoff: 07/21/2017
 
 ## <a name="create-network-resources"></a>네트워크 리소스 만들기
 
-| 작업 | 명령 |
+| Task | 명령 |
 | ---- | ------- |
 | 서브넷 구성 만들기 |$subnet1 = [New-AzureRmVirtualNetworkSubnetConfig](https://docs.microsoft.com/powershell/module/azurerm.network/new-azurermvirtualnetworksubnetconfig) -Name "mySubnet1" -AddressPrefix XX.X.X.X/XX<BR>$subnet2 = New-AzureRmVirtualNetworkSubnetConfig -Name "mySubnet2" -AddressPrefix XX.X.X.X/XX<BR><BR>일반적인 네트워크는 [인터넷 연결 부하 분산 장치](../../load-balancer/load-balancer-internet-overview.md)에 대한 서브넷 및 [내부 부하 분산 장치](../../load-balancer/load-balancer-internal-overview.md)에 대한 별도 서브넷을 가질 수도 있습니다. |
 | 가상 네트워크 만들기 |$vnet = [New-AzureRmVirtualNetwork](https://docs.microsoft.com/powershell/module/azurerm.network/new-azurermvirtualnetwork) -Name "myVNet" -ResourceGroupName $myResourceGroup -Location $location -AddressPrefix XX.X.X.X/XX -Subnet $subnet1, $subnet2 |
@@ -43,15 +42,15 @@ ms.lasthandoff: 07/21/2017
 | 공용 IP 주소 만들기 |$pip = [New-AzureRmPublicIpAddress](https://docs.microsoft.com/powershell/module/azurerm.network/new-azurermpublicipaddress) -Name "myPublicIp" -ResourceGroupName $myResourceGroup -DomainNameLabel "myDNS" -Location $location -AllocationMethod Dynamic<BR><BR>공용 IP 주소는 이전에 테스트했고 부하 분산 장치의 프런트 엔드 구성에서 사용되는 도메인 이름을 사용합니다. |
 | 프런트 엔드 IP 구성 만들기 |$frontendIP = [New-AzureRmLoadBalancerFrontendIpConfig](https://docs.microsoft.com/powershell/module/azurerm.network/new-azurermloadbalancerfrontendipconfig) -Name "myFrontendIP" -PublicIpAddress $pip<BR><BR>프런트 엔드 구성은 들어오는 네트워크 트래픽에 대해 이전에 만든 공용 IP 주소를 포함합니다. |
 | 백 엔드 주소 풀 만들기 |$beAddressPool = [New-AzureRmLoadBalancerBackendAddressPoolConfig](https://docs.microsoft.com/powershell/module/azurerm.network/new-azurermloadbalancerbackendaddresspoolconfig) -Name "myBackendAddressPool"<BR><BR>네트워크 인터페이스를 통해 액세스 하는 부하 분산 장치의 백 엔드에 대한 내부 주소를 제공합니다. |
-| 프로브 만들기 |$healthProbe = [New-AzureRmLoadBalancerProbeConfig](https://docs.microsoft.com/powershell/module/azurerm.network/new-azurermloadbalancerprobeconfig) -Name "myProbe" -RequestPath 'HealthProbe.aspx' -Protocol http -Port 80 -IntervalInSeconds 15 -ProbeCount 2<BR><BR>백 엔드 주소 풀의 가상 컴퓨터 인스턴스 가용성을 확인하는 데 사용하는 상태 프로브를 포함합니다. |
+| 프로브 만들기 |$healthProbe = [New-AzureRmLoadBalancerProbeConfig](https://docs.microsoft.com/powershell/module/azurerm.network/new-azurermloadbalancerprobeconfig) -Name "myProbe" -RequestPath 'HealthProbe.aspx' -Protocol http -Port 80 -IntervalInSeconds 15 -ProbeCount 2<BR><BR>백 엔드 주소 풀의 가상 머신 인스턴스 가용성을 확인하는 데 사용하는 상태 프로브를 포함합니다. |
 | 부하 분산 규칙 만들기 |$lbRule = [New-AzureRmLoadBalancerRuleConfig](https://docs.microsoft.com/powershell/module/azurerm.network/new-azurermloadbalancerruleconfig) -Name HTTP -FrontendIpConfiguration $frontendIP -BackendAddressPool $beAddressPool -Probe $healthProbe -Protocol Tcp -FrontendPort 80 -BackendPort 80<BR><BR>백 엔드 주소 풀에 있는 포트에 부하 분산 장치의 공용 포트를 할당하는 규칙을 포함합니다. |
-| 인바운드 NAT 규칙 만들기 |$inboundNATRule = [New-AzureRmLoadBalancerInboundNatRuleConfig](https://docs.microsoft.com/powershell/module/azurerm.network/new-azurermloadbalancerinboundnatruleconfig) -Name "myInboundRule1" -FrontendIpConfiguration $frontendIP -Protocol TCP -FrontendPort 3441 -BackendPort 3389<BR><BR>백 엔드 주소 풀에서 특정 가상 컴퓨터에 대한 포트에 부하 분산 장치에는 공용 포트 매핑 규칙을 포함합니다. |
+| 인바운드 NAT 규칙 만들기 |$inboundNATRule = [New-AzureRmLoadBalancerInboundNatRuleConfig](https://docs.microsoft.com/powershell/module/azurerm.network/new-azurermloadbalancerinboundnatruleconfig) -Name "myInboundRule1" -FrontendIpConfiguration $frontendIP -Protocol TCP -FrontendPort 3441 -BackendPort 3389<BR><BR>백 엔드 주소 풀에서 특정 가상 머신에 대한 포트에 부하 분산 장치에는 공용 포트 매핑 규칙을 포함합니다. |
 | 부하 분산 장치 만들기 |$loadBalancer = [New-AzureRmLoadBalancer](https://docs.microsoft.com/powershell/module/azurerm.network/new-azurermloadbalancer) -ResourceGroupName $myResourceGroup -Name "myLoadBalancer" -Location $location -FrontendIpConfiguration $frontendIP -InboundNatRule $inboundNATRule -LoadBalancingRule $lbRule -BackendAddressPool $beAddressPool -Probe $healthProbe |
 | 네트워크 인터페이스 만들기 |$nic1= [New-AzureRmNetworkInterface](https://docs.microsoft.com/powershell/module/azurerm.network/new-azurermnetworkinterface) -ResourceGroupName $myResourceGroup -Name "myNIC" -Location $location -PrivateIpAddress XX.X.X.X -Subnet $subnet2 -LoadBalancerBackendAddressPool $loadBalancer.BackendAddressPools[0] -LoadBalancerInboundNatRule $loadBalancer.InboundNatRules[0]<BR><BR>이전에 만든 공용 IP 주소 및 가상 네트워크 서브넷을 사용하여 네트워크 인터페이스를 만듭니다. |
 
 ## <a name="get-information-about-network-resources"></a>네트워크 리소스에 대한 정보 가져오기
 
-| 작업 | 명령 |
+| Task | 명령 |
 | ---- | ------- |
 | 가상 네트워크 나열 |[Get-AzureRmVirtualNetwork](https://docs.microsoft.com/powershell/module/azurerm.network/get-azurermvirtualnetwork) -ResourceGroupName $myResourceGroup<BR><BR>리소스 그룹의 모든 가상 네트워크를 나열합니다. |
 | 가상 네트워크에 대한 정보 가져오기 |Get-AzureRmVirtualNetwork -Name "myVNet" -ResourceGroupName $myResourceGroup |
@@ -65,7 +64,7 @@ ms.lasthandoff: 07/21/2017
 
 ## <a name="manage-network-resources"></a>네트워크 리소스 관리
 
-| 작업 | 명령 |
+| Task | 명령 |
 | ---- | ------- |
 | 가상 네트워크에 서브넷 추가 |[Add-AzureRmVirtualNetworkSubnetConfig](https://docs.microsoft.com/powershell/module/azurerm.network/add-azurermvirtualnetworksubnetconfig) -AddressPrefix XX.X.X.X/XX -Name "mySubnet1" -VirtualNetwork $vnet<BR><BR>기존 가상 네트워크에 서브넷을 추가합니다. $vnet 값은 Get-AzureRmVirtualNetwork에서 반환되는 개체를 나타냅니다. |
 | 가상 네트워크 삭제 |[Remove-AzureRmVirtualNetwork](https://docs.microsoft.com/powershell/module/azurerm.network/remove-azurermvirtualnetwork) -Name "myVNet" -ResourceGroupName $myResourceGroup<BR><BR>리소스 그룹에서 지정된 가상 네트워크를 제거합니다. |
@@ -75,6 +74,5 @@ ms.lasthandoff: 07/21/2017
 
 ## <a name="next-steps"></a>다음 단계
 * [VM 만들기](../virtual-machines-windows-ps-create.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)를 할 때 방금 만든 네트워크 인터페이스를 사용합니다.
-* [여러 네트워크 인터페이스를 사용하여 VM 만들기](../../virtual-network/virtual-networks-multiple-nics.md)를 할 수 있는 방법을 알아봅니다.
-
+* [여러 네트워크 인터페이스를 사용하여 VM 만들기](../../virtual-network/virtual-network-deploy-multinic-classic-ps.md)를 할 수 있는 방법을 알아봅니다.
 

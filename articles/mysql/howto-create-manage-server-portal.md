@@ -1,95 +1,115 @@
 ---
-title: "Azure Portal을 사용한 MySQL용 Azure Database 서버 만들기 및 관리 | Microsoft Docs"
-description: "이 문서에서는 Azure Portal을 사용하여 신속하게 새로운 MySQL용 Azure Database 서버를 만들고 해당 서버를 관리하는 방법을 설명합니다."
+title: Azure Portal을 사용한 MySQL용 Azure Database 서버 만들기 및 관리
+description: 이 문서에서는 Azure Portal을 사용하여 신속하게 새로운 MySQL용 Azure Database 서버를 만들고 해당 서버를 관리하는 방법을 설명합니다.
 services: mysql
-author: v-chenyh
-ms.author: nolanwu
+author: ajlam
+ms.author: andrela
 editor: jasonwhowell
-manager: jhubbard
+manager: kfile
 ms.service: mysql-database
 ms.topic: article
-ms.date: 05/10/2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 71fea4a41b2e3a60f2f610609a14372e678b7ec4
-ms.openlocfilehash: cbf1bcd90c53a7221773c7dc7731b37cf762e953
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/10/2017
-
+ms.date: 02/28/2018
+ms.openlocfilehash: 4b52cb9e42e582d42424c2814e2e30f764a8679b
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
-
 # <a name="create-and-manage-azure-database-for-mysql-server-using-azure-portal"></a>Azure Portal을 사용한 MySQL용 Azure Database 서버 만들기 및 관리
-이 문서에서는 Azure Portal을 사용하여 신속하게 새로운 MySQL용 Azure Database 서버를 만들고 해당 서버를 관리하는 방법을 설명합니다. 서버 관리에는 서버 세부 정보 및 데이터베이스를 보고, 암호를 다시 설정하고 해당 서버를 삭제하는 것을 포함합니다.
+이 항목에서는 새로운 MySQL용 Azure Database 서버를 빠르게 만들 수 있는 방법을 설명합니다. 또한 Azure Portal을 사용하여 서버를 관리하는 방법에 대한 정보를 포함합니다. 서버 관리에는 서버 세부 정보 및 데이터베이스를 보고, 암호를 다시 설정하고, 리소스 크기를 조정하고, 서버를 삭제하는 것이 포함됩니다.
 
-## <a name="log-in-to-the-azure-portal"></a>Azure 포털에 로그인
-[Azure 포털](https://portal.azure.com)에 로그인합니다.
+## <a name="log-in-to-the-azure-portal"></a>Azure Portal에 로그인
+[Azure 포털](https://portal.azure.com) 에 로그인합니다.
 
-## <a name="create-an-azure-database-for-mysql-server"></a>MySQL용 Azure Database 서버 만들기
-“mysqlserver4demo”라는 MySQL용 Azure Database 서버를 만들려면 다음과 같은 단계를 수행합니다.
+## <a name="create-an-azure-database-for-mysql-server"></a>Azure Database for MySQL 서버 만들기
+다음과 단계를 수행하여 “mydemoserver”라는 Azure Database for MySQL 서버를 만듭니다.
 
-1 - Azure Portal의 왼쪽 위에 있는 **새로 만들기** 단추를 클릭합니다.
+1. Azure Portal의 왼쪽 위 모서리에 있는 **리소스 만들기** 단추를 클릭합니다.
 
-2 - 새로 만들기 페이지에서 **데이터베이스**를 선택하고 데이터베이스 페이지에서 **MySQL용 Azure Database**를 선택합니다.
+2. 새로 만들기 페이지에서 **데이터베이스**를 선택하고 데이터베이스 페이지에서 **MySQL용 Azure Database**를 선택합니다.
 
-> MySQL용 Azure Database 서버는 일련의 정의된 [계산 및 저장소](./concepts-compute-unit-and-storage.md) 리소스를 사용하여 만들어집니다. 데이터베이스는 Azure 리소스 그룹 및 MySQL용 Azure Database 서버에서 만들어집니다.
+    > MySQL용 Azure Database 서버는 일련의 정의된 [계산 및 저장소](./concepts-pricing-tiers.md) 리소스를 사용하여 만들어집니다. 데이터베이스는 Azure 리소스 그룹 및 MySQL용 Azure Database 서버에서 만들어집니다.
 
-![create-new-server](./media/howto-create-manage-server-portal/create-new-server.png)
+   ![create-new-server](./media/howto-create-manage-server-portal/create-new-server.png)
 
-3 - 다음 정보에 대한 MySQL용 Azure Database 양식을 작성합니다.
+3. 다음 정보를 사용하여 MySQL용 Azure Database 양식을 작성합니다.
 
-| **양식 필드** | **필드 설명** |
-|----------------|-----------------------|
-| *서버 이름* | azure-mysql(서버 이름은 전역적으로 고유함) |
-| *구독* | MySQLaaS(드롭다운 목록에서 선택) |
-| *리소스 그룹* | myresource(새 리소스 그룹을 만들거나 기존 그룹 선택) |
-| *서버 관리자 로그인* | myadmin(설치 관리자 계정 이름) |
-| *암호* | 암호 관리자 계정 암호 |
-| *암호 확인* | 관리자 계정 암호 확인 |
-| *위치*: | 북유럽(북유럽 및 미국 서부 중 선택) |
-| *버전* | 5.6(MySQL용 Azure Database 서버 버전 선택) |
+    | **양식 필드** | **필드 설명** |
+    |----------------|-----------------------|
+    | *서버 이름* | mydemoserver(서버 이름은 전역적으로 고유함) |
+    | *구독* | mysubscription(드롭다운 메뉴에서 선택) |
+    | *리소스 그룹* | myresourcegroup(새 리소스 그룹을 만들거나 기존 그룹 선택) |
+    | *원본 선택* | 비어 있음(빈 MySQL 서버 만들기) |
+    | *서버 관리자 로그인* | myadmin(관리자 계정 이름을 설정함) |
+    | *암호* | 관리자 계정 암호 설정 |
+    | *암호 확인* | 관리자 계정 암호를 확인합니다. |
+    | *위치* | 동남 아시아(북유럽과 미국 서부 사이에서 선택) |
+    | *버전* | 5.7(Azure Database for MySQL 서버 버전 선택) |
 
-4- **가격 책정 계층**을 클릭하고 새 서버의 서비스 계층 및 성능 수준을 지정합니다. 계산 단위는 기본 계층 50에서 100 및 표준 계층 100에서 200 사이로 구성할 수 있으며, 저장소는 포함된 금액에 따라 추가할 수 있습니다. 이 방법 가이드에서는 계산 단위 50 및 50GB를 선택합니다. **확인**을 클릭하여 선택 내용을 저장합니다.
-![create-server-pricing-tier](./media/howto-create-manage-server-portal/create-server-pricing-tier.png)
+4. **가격 책정 계층**을 클릭하고 새 서버의 서비스 계층 및 성능 수준을 지정합니다. **범용** 탭을 선택합니다. *4세대*, *2개 vCore*, *5GB* 및 *7일*은 **세대 계산**, **vCore**, **저장소** 및 **백업 보존 기간**에 대한 기본 값입니다. 해당 슬라이더를 그대로 둘 수 있습니다. 지역 중복 저장소에서 서버 백업을 사용하도록 설정하려면 **백업 중복 옵션**에서 **지역 중복**을 선택합니다.
 
-5- **만들기**를 클릭하여 서버를 프로비전합니다. 프로비전하는 데 몇 분이 걸립니다.
+   ![create-server-pricing-tier](./media/howto-create-manage-server-portal/create-server-pricing-tier.png)
 
-> 배포를 쉽게 추적할 수 있는 **대시보드에 고정** 옵션을 확인합니다.
-> [!NOTE]
-> 공개 미리 보기를 위해 기본 계층에서 최대 1000GB 및 표준 계층에서 10000GB 저장소가 지원되며 최대 저장소는 일시적으로 여전히 1000GB로 제한됩니다. 
-</Include>
+5. **만들기**를 클릭하여 서버를 프로비전합니다. 프로비전하는 데 몇 분이 걸립니다.
+
+    > 배포를 쉽게 추적할 수 있도록 **대시보드에 고정** 옵션을 선택합니다.
 
 ## <a name="update-an-azure-database-for-mysql-server"></a>MySQL용 Azure Database 서버 업데이트
-새 서버가 프로비전되면 사용자는 사용자 암호를 다시 설정하거나 계산 단위를 변경하여 서버를 강화/규모 축소하는 등의 기존 서버를 편집할 수 있는 2가지 옵션을 사용할 수 있습니다.
+새 서버가 프로비전된 후에는, 관리자 암호 재설정 및 vCore나 저장소를 변경하여 서버 확장 또는 축소를 비롯하여 기존 서버를 구성할 수 있는 옵션이 몇 가지 있습니다.
 
 ### <a name="change-the-administrator-user-password"></a>관리자 암호 변경
-1- 서버 **개요** 블레이드에서 **암호 재설정**을 클릭하여 암호 입력 및 확인 창을 채웁니다.
+1. 서버 **개요**에서 **암호 다시 설정**을 클릭하여 암호 재설정 창을 표시합니다.
 
-2- 새 암호를 입력하고 아래와 같이 창에서 암호를 확인합니다. ![reset-password](./media/howto-create-manage-server-portal/reset-password.png)
+   ![개요](./media/howto-create-manage-server-portal/overview.png)
 
-3- **확인**을 클릭하여 새 암호를 저장합니다.
+2. 아래와 같이 창에 새 암호를 입력하고 암호를 확인합니다.
 
-### <a name="scale-updown-by-changing-compute-units"></a>계산 단위를 변경하여 강화/규모 축소
+   ![reset-password](./media/howto-create-manage-server-portal/reset-password.png)
 
-1- 서버 블레이드의 **설정**에서 **가격 책정 계층**을 클릭하여 MySQL용 Azure Database 서버에 대한 가격 책정 계층 블레이드를 엽니다.
+3. **확인**을 클릭하여 새 암호를 저장합니다.
 
-2- **MySQL용 Azure Database 서버 만들기**의 4단계에 따라 동일한 가격 책정 계층의 계산 단위를 변경합니다.
+### <a name="scale-vcores-updown"></a>vCore 규모 확장/축소
+
+1. **설정** 아래에 있는 **가격 책정 계층**을 클릭합니다.
+
+2. 슬라이더를 원하는 값으로 이동하여 **vCore** 설정을 변경합니다.
+
+    ![scale-compute](./media/howto-create-manage-server-portal/scale-compute.png)
+
+3. **확인**을 클릭하여 변경 내용을 저장합니다.
+
+### <a name="scale-storage-up"></a>Storage 확장
+
+1. **설정** 아래에 있는 **가격 책정 계층**을 클릭합니다.
+
+2. 슬라이더를 원하는 값으로 이동하여 **Storage** 설정을 변경합니다.
+
+    ![scale-storage](./media/howto-create-manage-server-portal/scale-storage.png)
+
+3. **확인**을 클릭하여 변경 내용을 저장합니다.
 
 ## <a name="delete-an-azure-database-for-mysql-server"></a>MySQL용 Azure Database 서버 삭제
 
-1- 서버 **개요** 블레이드에서 **삭제** 명령 단추를 클릭하여 삭제 확인 블레이드를 엽니다.
+1. 서버 **개요**에서 **삭제** 단추를 클릭하여 삭제 확인 프롬프트를 엽니다.
 
-2- 이중 확인을 위해 블레이드의 입력 상자에 올바른 서버 이름을 입력합니다.
+    ![delete](./media/howto-create-manage-server-portal/delete.png)
 
-3- **삭제** 단추를 다시 클릭하여 삭제 작업을 확인하고 알림 표시줄에 “삭제 성공” 메시지가 표시되길 기다립니다.
+2. 이중 확인을 위해 입력 상자에 서버 이름을 입력합니다.
+
+    ![confirm-delete](./media/howto-create-manage-server-portal/confirm.png)
+
+3. **삭제** 단추를 클릭하여 서버 삭제를 확인합니다. 알림 표시줄에 “MySQL 서버를 삭제함" 팝업이 나타날 때까지 기다립니다.
 
 ## <a name="list-the-azure-database-for-mysql-databases"></a>MySQL용 Azure Database 데이터베이스 나열
-서버 **개요** 블레이드에서 맨 아래에 데이터베이스 타일이 표시될 때까지 아래로 스크롤합니다. 모든 데이터베이스가 테이블에 나열됩니다. **삭제** 명령 단추를 클릭하여 삭제 확인 블레이드를 엽니다.
+서버 **개요**에서 맨 아래 데이터베이스 타일이 보일 때까지 아래로 스크롤합니다. 서버의 모든 데이터베이스가 테이블에 나열되어 있습니다.
 
-![show-databases](./media/howto-create-manage-server-portal/show-databases.png)
+   ![show-databases](./media/howto-create-manage-server-portal/show-databases.png)
 
 ## <a name="show-details-of-an-azure-database-for-mysql-server"></a>MySQL용 Azure Database 서버의 세부 정보 보기
-서버 블레이드의 **설정**에서 **속성**을 클릭하면 **속성** 블레이드가 열립니다. 그러면 서버에 대한 자세한 모든 정보가 표시됩니다.
+서버에 대한 세부 정보를 보려면 **설정** 아래 있는 **속성**을 클릭합니다.
+
+![properties](./media/howto-create-manage-server-portal/properties.png)
 
 ## <a name="next-steps"></a>다음 단계
 
 [빠른 시작: Azure Portal을 사용한 MySQL용 Azure Database 서버 만들기 및 관리](./quickstart-create-mysql-server-database-using-azure-portal.md)
-

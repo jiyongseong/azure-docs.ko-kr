@@ -13,15 +13,13 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: data-catalog
-ms.date: 05/15/2017
+ms.date: 01/18/2018
 ms.author: maroche
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f7479260c7c2e10f242b6d8e77170d4abe8634ac
-ms.openlocfilehash: 6ae024e59d29d20c223243b71aceae1db7eefdf5
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/21/2017
-
-
+ms.openlocfilehash: a7effaaaeb23661b9be96dcddc2c140ab8c8b92b
+ms.sourcegitcommit: be9a42d7b321304d9a33786ed8e2b9b972a5977e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/19/2018
 ---
 # <a name="azure-data-catalog-prerequisites"></a>Azure 데이터 카탈로그의 필수 구성 요소
 
@@ -30,7 +28,7 @@ Azure Data Catalog를 설정하기 전에 몇 가지 사항을 주의해야 합�
 ## <a name="azure-subscription"></a>Azure 구독
 데이터 카탈로그를 설정하려면 Azure 구독의 소유자 또는 공동 소유자여야 합니다.
 
-Azure 구독에서는 데이터 카탈로그와 같은 클라우드 서비스 리소스에 대한 액세스를 구성할 수 있습니다. 구독은 리소스 사용을 보고하고, 요금을 청구하고, 지불하는 방식을 제어할 수도 있습니다. 각 구독은 별도 청구 및 지불 설정을 가질 수 있으므로 부서, 프로젝트, 지사 등에 따라 다른 구독 및 계획이 있을 수 있습니다. 모든 클라우드 서비스는 구독에 속하고 데이터 카탈로그를 설정하기 전에 구독을 보유해야 합니다. 자세한 내용은 [계정, 구독 및 관리 역할 관리](../active-directory/active-directory-assign-admin-roles.md)를 참조하세요.
+Azure 구독에서는 데이터 카탈로그와 같은 클라우드 서비스 리소스에 대한 액세스를 구성할 수 있습니다. 구독은 리소스 사용을 보고하고, 요금을 청구하고, 지불하는 방식을 제어할 수도 있습니다. 각 구독은 별도 청구 및 지불 설정을 가질 수 있으므로 부서, 프로젝트, 지사 등에 따라 다른 구독 및 계획이 있을 수 있습니다. 모든 클라우드 서비스는 구독에 속하고 데이터 카탈로그를 설정하기 전에 구독을 보유해야 합니다. 자세한 내용은 [계정, 구독 및 관리 역할 관리](../active-directory/active-directory-assign-admin-roles-azure-portal.md)를 참조하세요.
 
 ## <a name="azure-active-directory"></a>Azure Active Directory
 데이터 카탈로그를 설정하려면 Azure AD(Azure Active Directory) 사용자 계정으로 로그인해야 합니다.
@@ -53,4 +51,3 @@ Azure AD는 클라우드 및 온-프레미스 모두에서 비즈니스가 ID와
 
 ## <a name="next-steps"></a>다음 단계
 자세한 내용은 [인증 정책 구성](https://technet.microsoft.com/library/dn486781.aspx)을 참조하세요.
-

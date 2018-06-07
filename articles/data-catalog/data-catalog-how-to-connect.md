@@ -1,27 +1,25 @@
 ---
-title: "데이터 원본에 연결하는 방법 | Microsoft Docs"
-description: "Azure 데이터 카탈로그를 사용하여 검색된 데이터 원본에 연결하는 방법을 강조 표시한 방법 문서"
+title: 데이터 원본에 연결하는 방법 | Microsoft Docs
+description: Azure 데이터 카탈로그를 사용하여 검색된 데이터 원본에 연결하는 방법을 강조 표시한 방법 문서
 services: data-catalog
-documentationcenter: 
+documentationcenter: ''
 author: steelanddata
 manager: NA
-editor: 
-tags: 
+editor: ''
+tags: ''
 ms.assetid: 4e6b27a5-cf75-4012-b88c-333c1fe638e8
 ms.service: data-catalog
 ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: data-catalog
-ms.date: 05/15/2017
+ms.date: 01/18/2018
 ms.author: maroche
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 219dcbfdca145bedb570eb9ef747ee00cc0342eb
-ms.openlocfilehash: 5db1a6f8b3ff0369817e69abaa4d95af843cd7f2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
-
+ms.openlocfilehash: b4dfc7a900e42b348c416d2d8c05b73fb15847ae
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="how-to-connect-to-data-sources"></a>데이터 원본에 연결하는 방법
 ## <a name="introduction"></a>소개
@@ -50,7 +48,7 @@ Azure Data Catalog 포털에서 데이터 원본에 대한 "열기..." 메뉴를
 | 파워 쿼리 |.xlsx |Excel용 파워 쿼리 추가 기능이 설치된 Excel 2016 또는 Excel 2010 또는 Excel 2013 |
 | Power BI Desktop |.pbix |Power BI Desktop 2016년 7월 이상 |
 | SQL Server Data Tools |vsweb:// |SQL Server 도구가 설치된 Visual Studio 2013 업데이트 4 이상 |
-| 보고서 관리자 |http:// |[SQL Server Reporting Services에 대한 브라우저 요구 사항](https://technet.microsoft.com/en-us/library/ms156511.aspx)을 참조하세요. |
+| 보고서 관리자 |http:// |[SQL Server Reporting Services에 대한 브라우저 요구 사항](https://technet.microsoft.com/library/ms156511.aspx)을 참조하세요. |
 
 ## <a name="your-data-your-tools"></a>데이터, 도구
 메뉴에서 사용 가능한 옵션은 현재 선택한 데이터 자산 유형에 따라 달라집니다. 물론 모든 가능한 도구는 "다음에서 열기..." 메뉴에 포함되지 않지만 모든 클라이언트 도구를 사용하여 데이터 원본에 여전히 쉽게 연결할 수 있습니다. 데이터 자산이 **Azure Data Catalog** 포털에서 선택된 경우 전체 위치가 속성 창에 표시됩니다.
@@ -71,4 +69,3 @@ Azure Data Catalog 포털에서 데이터 원본에 대한 "열기..." 메뉴를
 
 ## <a name="see-also"></a>참고 항목
 * [Azure Data Catalog 시작](data-catalog-get-started.md) 자습서.
-

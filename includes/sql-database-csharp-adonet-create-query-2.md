@@ -1,8 +1,7 @@
 
 <a name="cs_0_csharpprogramexample_h2"/>
 
-## C# 프로그램 예
-<a id="c-program-example" class="xliff"></a>
+## <a name="c-program-example"></a>C# 프로그램 예
 
 이 문서의 다음 섹션에는 Transact-SQL 문을 SQL 데이터베이스로 보내기 위해 ADO.NET를 사용하는 C# 프로그램이 나와 있습니다. C# 프로그램은 다음 작업을 수행합니다.
 
@@ -20,13 +19,12 @@ C# 프로그램은 다음을 포함합니다.
 - T-SQL 소스 코드를 반환하는 메서드.
 - T-SQL을 데이터베이스에 제출하는 두 가지 메서드.
 
-#### 컴파일 및 실행
-<a id="to-compile-and-run" class="xliff"></a>
+#### <a name="to-compile-and-run"></a>컴파일 및 실행
 
 이 C# 프로그램은 하나의 논리적인 .cs 파일입니다. 하지만 여기서 프로그램은 물리적으로 여러 코드 블록으로 분할되어 각 블록을 보다 쉽게 보고 이해할 수 있습니다. 이 프로그램을 컴파일하고 실행하려면 다음을 수행합니다.
 
 1. Visual Studio에서 C# 프로젝트를 만듭니다.
-    - 프로젝트 형식은 다음과 같은 계층 구조와 같은 *콘솔* 응용 프로그램이어야 합니다. **템플릿** > **Visual C#** > **Windows 클래식 데스크톱**  > **콘솔 앱(.NET Framework)**.
+    - 프로젝트 형식은 다음과 같은 계층 구조와 같은 *콘솔* 응용 프로그램이어야 합니다. **템플릿** > **Visual C#** > **Windows 클래식 데스크톱** > **콘솔 앱(.NET Framework)**.
 3. **Program.cs** 파일에서 코드의 작은 시작 줄을 지웁니다.
 3. 여기에 제시된 것과 동일한 순서대로 Program.cs에 다음과 같은 블록을 복사하여 붙여 넣습니다.
 4. Program.cs에서 **Main** 메서드의 다음 값을 편집합니다.
@@ -45,8 +43,7 @@ C# 프로그램은 다음을 포함합니다.
 >
 
 <a name="cs_1_connect"/>
-### C# 블록 1: ADO.NET을 사용하여 연결
-<a id="c-block-1-connect-by-using-adonet" class="xliff"></a>
+### <a name="c-block-1-connect-by-using-adonet"></a>C# 블록 1: ADO.NET을 사용하여 연결
 
 - [다음](#cs_2_createtables)
 
@@ -102,8 +99,7 @@ namespace csharp_db_test
 
 
 <a name="cs_2_createtables"/>
-### C# 블록 2: 테이블을 만드는 T-SQL
-<a id="c-block-2-t-sql-to-create-tables" class="xliff"></a>
+### <a name="c-block-2-t-sql-to-create-tables"></a>C# 블록 2: 테이블을 만드는 T-SQL
 
 - [이전](#cs_1_connect) &nbsp; / &nbsp; [다음](#cs_3_insert)
 
@@ -135,8 +131,7 @@ CREATE TABLE tabEmployee
       }
 ```
 
-#### 엔터티 관계 다이어그램(ERD)
-<a id="entity-relationship-diagram-erd" class="xliff"></a>
+#### <a name="entity-relationship-diagram-erd"></a>엔터티 관계 다이어그램(ERD)
 
 이전 CREATE TABLE 문에는 두 테이블 간의 *외래 키*(FK) 관계를 만들기 위해 **REFERENCES** 키워드가 있습니다.  tempdb를 사용하는 경우 선행 대시의 쌍을 사용하여 `--REFERENCES` 키워드를 주석으로 처리합니다.
 
@@ -146,8 +141,7 @@ CREATE TABLE tabEmployee
 
 
 <a name="cs_3_insert"/>
-### C# 블록 3: 데이터를 삽입하는 T-SQL
-<a id="c-block-3-t-sql-to-insert-data" class="xliff"></a>
+### <a name="c-block-3-t-sql-to-insert-data"></a>C# 블록 3: 데이터를 삽입하는 T-SQL
 
 - [이전](#cs_2_createtables) &nbsp; / &nbsp; [다음](#cs_4_updatejoin)
 
@@ -179,8 +173,7 @@ INSERT INTO tabEmployee
 
 
 <a name="cs_4_updatejoin"/>
-### C# 블록 4: 업데이트 조인하는 T-SQL
-<a id="c-block-4-t-sql-to-update-join" class="xliff"></a>
+### <a name="c-block-4-t-sql-to-update-join"></a>C# 블록 4: 업데이트 조인하는 T-SQL
 
 - [이전](#cs_3_insert) &nbsp; / &nbsp; [다음](#cs_5_deletejoin)
 
@@ -208,8 +201,7 @@ UPDATE empl
 
 
 <a name="cs_5_deletejoin"/>
-### C# 블록 5: 삭제 조인하는 T-SQL
-<a id="c-block-5-t-sql-to-delete-join" class="xliff"></a>
+### <a name="c-block-5-t-sql-to-delete-join"></a>C# 블록 5: 삭제 조인하는 T-SQL
 
 - [이전](#cs_4_updatejoin) &nbsp; / &nbsp; [다음](#cs_6_selectrows)
 
@@ -241,8 +233,7 @@ DELETE tabDepartment
 
 
 <a name="cs_6_selectrows"/>
-### C# 블록 6: 행을 선택하는 T-SQL
-<a id="c-block-6-t-sql-to-select-rows" class="xliff"></a>
+### <a name="c-block-6-t-sql-to-select-rows"></a>C# 블록 6: 행을 선택하는 T-SQL
 
 - [이전](#cs_5_deletejoin) &nbsp; / &nbsp; [다음](#cs_6b_datareader)
 
@@ -270,8 +261,7 @@ SELECT
 
 
 <a name="cs_6b_datareader"/>
-### C# 블록 6b: ExecuteReader
-<a id="c-block-6b-executereader" class="xliff"></a>
+### <a name="c-block-6b-executereader"></a>C# 블록 6b: ExecuteReader
 
 - [이전](#cs_6_selectrows) &nbsp; / &nbsp; [다음](#cs_7_executenonquery)
 
@@ -307,8 +297,7 @@ SELECT
 
 
 <a name="cs_7_executenonquery"/>
-### C# 블록 7: ExecuteNonQuery
-<a id="c-block-7-executenonquery" class="xliff"></a>
+### <a name="c-block-7-executenonquery"></a>C# 블록 7: ExecuteNonQuery
 
 - [이전](#cs_6b_datareader) &nbsp; / &nbsp; [다음](#cs_8_output)
 
@@ -346,8 +335,7 @@ SELECT
 
 
 <a name="cs_8_output"/>
-### C# 블록 8: 콘솔에 대한 실제 테스트 출력
-<a id="c-block-8-actual-test-output-to-the-console" class="xliff"></a>
+### <a name="c-block-8-actual-test-output-to-the-console"></a>C# 블록 8: 콘솔에 대한 실제 테스트 출력
 
 - [이전](#cs_7_executenonquery)
 

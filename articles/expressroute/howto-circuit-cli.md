@@ -13,14 +13,13 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 07/25/2017
+ms.date: 10/19/2017
 ms.author: anzaman;cherylmc
+ms.openlocfilehash: cd4e31336fd0e90b13f1c3984de89f24e65b052b
+ms.sourcegitcommit: b5c6197f997aa6858f420302d375896360dd7ceb
 ms.translationtype: HT
-ms.sourcegitcommit: 349fe8129b0f98b3ed43da5114b9d8882989c3b2
-ms.openlocfilehash: 1a1c9a96b772868e2c832e9ff57874038c0db2d4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/21/2017
 ---
 # <a name="create-and-modify-an-expressroute-circuit-using-cli"></a>CLI를 사용하여 ExpressRoute 회로 만들기 및 수정
 
@@ -40,7 +39,7 @@ ms.lasthandoff: 07/26/2017
 * 시작하기 전에 최신 버전의 CLI 명령(2.0 이상)을 설치합니다. CLI 명령 설치에 대한 자세한 내용은 [Azure CLI 2.0 설치](/cli/azure/install-azure-cli) 및 [Azure CLI 2.0 시작](/cli/azure/get-started-with-azure-cli)을 참조하세요.
 * 구성을 시작하기 전에 [필수 조건](expressroute-prerequisites.md) 및 [워크플로](expressroute-workflows.md)를 검토합니다.
 
-## <a name="create-and-provision-an-expressroute-circuit"></a>Express 경로 회로 만들기 및 프로비전
+## <a name="create"></a>ExpressRoute 회로 만들기 및 프로비전
 
 ### <a name="1-sign-in-to-your-azure-account-and-select-your-subscription"></a>1. Azure 계정에 로그인하고 구독을 선택합니다.
 
@@ -64,7 +63,7 @@ az account set --subscription "<subscription ID>"
 
 ### <a name="2-get-the-list-of-supported-providers-locations-and-bandwidths"></a>2. 지원되는 공급자, 위치 및 대역폭 목록을 가져옵니다.
 
-Express 경로 회로를 만들기 전에 지원되는 연결 공급자, 위치 및 대역폭 옵션 목록이 필요합니다. CLI 명령 'az network express-route list-service-providers'는 이 정보를 반환하고 이를 이후 단계에서 사용합니다.
+ExpressRoute 회로를 만들기 전에 지원되는 연결 공급자, 위치 및 대역폭 옵션 목록이 필요합니다. CLI 명령 'az network express-route list-service-providers'는 이 정보를 반환하고 이를 이후 단계에서 사용합니다.
 
 ```azurecli
 az network express-route list-service-providers
@@ -129,26 +128,26 @@ az network express-route list-service-providers
 * PeeringLocations
 * BandwidthsOffered
 
-이제 Express 경로 회로를 만들 준비가 되었습니다.
+이제 ExpressRoute 회로를 만들 준비가 되었습니다.
 
-### <a name="3-create-an-expressroute-circuit"></a>3. Express 경로 회로 만들기
+### <a name="3-create-an-expressroute-circuit"></a>3. ExpressRoute 회로 만들기
 
 > [!IMPORTANT]
 > ExpressRoute 회로는 서비스 키가 발급된 순간부터 비용이 청구됩니다. 연결 공급자가 회로를 프로비전할 준비가 되면 이 작업을 수행합니다.
 > 
 > 
 
-아직 리소스 그룹이 없는 경우 Express 경로 회로를 만들기 전에 먼저 리소스 그룹을 만들어야 합니다. 다음 명령을 실행하여 리소스 그룹을 만들 수 있습니다.
+아직 리소스 그룹이 없는 경우 ExpressRoute 회로를 만들기 전에 먼저 리소스 그룹을 만들어야 합니다. 다음 명령을 실행하여 리소스 그룹을 만들 수 있습니다.
 
 ```azurecli
 az group create -n ExpressRouteResourceGroup -l "West US"
 ```
 
-아래 예제에서는 Equinix 실리콘밸리를 통해 200Mbps Express 경로 회로를 만드는 방법을 보여 줍니다. 다른 공급자와 다른 설정을 사용하는 경우, 요청을 수행할 때 해당 정보를 대체합니다. 
+아래 예제에서는 Equinix 실리콘밸리를 통해 200Mbps ExpressRoute 회로를 만드는 방법을 보여 줍니다. 다른 공급자와 다른 설정을 사용하는 경우, 요청을 수행할 때 해당 정보를 대체합니다. 
 
 올바른 SKU 계층과 SKU 제품군을 지정하는지 확인합니다.
 
-* SKU 계층은 Express 경로 표준 또는 Express 경로 Premium 추가 기능이 사용되는지 여부를 결정합니다. '표준'을 지정하여 표준 SKU를 가져오거나 프리미엄 추가 기능을 위해 '프리미엄'을 지정할 수 있습니다.
+* SKU 계층은 ExpressRoute 표준 또는 ExpressRoute Premium 추가 기능이 사용되는지 여부를 결정합니다. '표준'을 지정하여 표준 SKU를 가져오거나 프리미엄 추가 기능을 위해 '프리미엄'을 지정할 수 있습니다.
 * SKU 제품군은 청구서 유형을 결정합니다. 데이터 요금제의 경우 'Metereddata'를 선택하고 무제한 데이터 요금제의 경우 'Unlimiteddata'를 선택할 수 있습니다. 청구서 유형을 'Metereddata'에서 'Unlimiteddata'로 변경할 수 있지만, 'Unlimiteddata'에서 'Metereddata'로는 변경할 수 없습니다.
 
 
@@ -160,7 +159,7 @@ az network express-route create --bandwidth 200 -n MyCircuit --peering-location 
 
 응답에 서비스 키가 포함됩니다.
 
-### <a name="4-list-all-expressroute-circuits"></a>4. 모든 Express 경로 회로 나열
+### <a name="4-list-all-expressroute-circuits"></a>4. 모든 ExpressRoute 회로 나열
 
 만든 모든 ExpressRoute 회로 목록을 가져오려면 'az network express-route list' 명령을 실행합니다. 이 명령을 사용하여 이 정보를 언제든지 검색할 수 있습니다. 모든 회로를 나열하려면 매개 변수 없이 호출합니다.
 
@@ -223,7 +222,7 @@ az network express-route list -h
 "circuitProvisioningState": "Enabled"
 ```
 
-Express 경로 회로를 사용하려면 다음 상태여야 합니다.
+ExpressRoute 회로를 사용하려면 다음 상태여야 합니다.
 
 ```azurecli
 "serviceProviderProvisioningState": "Provisioned"
@@ -271,20 +270,20 @@ az network express-route show --resource-group ExpressRouteResourceGroup --name 
 
 ### <a name="7-create-your-routing-configuration"></a>7. 라우팅 구성 만들기
 
-회로 피어링을 만들고 수정하는 단계별 지침은 [Express 경로 회로 라우팅 구성](howto-routing-cli.md) 문서를 참조하세요.
+회로 피어링을 만들고 수정하는 단계별 지침은 [ExpressRoute 회로 라우팅 구성](howto-routing-cli.md) 문서를 참조하세요.
 
 > [!IMPORTANT]
 > 이 지침은 2계층 연결 서비스를 제공하는 서비스 공급자를 사용하여 만든 회로에만 적용됩니다. 관리된 3계층 서비스(일반적으로 MPLS와 같은 IP VPN)를 제공하는 서비스 공급자를 사용하는 경우 연결 공급자는 사용자를 위해 라우팅을 구성하고 관리합니다.
 > 
 > 
 
-### <a name="8-link-a-virtual-network-to-an-expressroute-circuit"></a>8. 가상 네트워크를 Express 경로 회로에 연결합니다.
+### <a name="8-link-a-virtual-network-to-an-expressroute-circuit"></a>8. 가상 네트워크를 ExpressRoute 회로에 연결합니다.
 
-그 다음 가상 네트워크를 Express 경로 회로에 연결합니다. [ExpressRoute 회로에 가상 네트워크 연결](howto-linkvnet-cli.md) 문서를 사용합니다.
+그 다음 가상 네트워크를 ExpressRoute 회로에 연결합니다. [ExpressRoute 회로에 가상 네트워크 연결](howto-linkvnet-cli.md) 문서를 사용합니다.
 
-## <a name="modify"></a>Express 경로 회로 수정
+## <a name="modify"></a>ExpressRoute 회로 수정
 
-연결에 미치는 영향 없이 Express 경로 회로의 특정 속성을 수정할 수 있습니다. 중단 시간 없이 다음과 같이 변경할 수 있습니다.
+연결에 미치는 영향 없이 ExpressRoute 회로의 특정 속성을 수정할 수 있습니다. 중단 시간 없이 다음과 같이 변경할 수 있습니다.
 
 * ExpressRoute 회로에 대해 ExpressRoute Premium 추가 기능을 사용하거나 사용하지 않을 수 있습니다.
 * 포트에 사용 가능한 수용작업량이 있는 경우 ExpressRoute 회로의 대역폭을 증가시킬 수 있습니다. 그러나, 회로의 대역폭 다운그레이드는 지원되지 않습니다. 
@@ -293,7 +292,7 @@ az network express-route show --resource-group ExpressRouteResourceGroup --name 
 
 제한 및 제한 사항에 대한 자세한 내용은 [ExpressRoute FAQ](expressroute-faqs.md)를 참조하세요.
 
-### <a name="to-enable-the-expressroute-premium-add-on"></a>Express 경로 Premium 추가 기능을 활성화하려면
+### <a name="to-enable-the-expressroute-premium-add-on"></a>ExpressRoute Premium 추가 기능을 활성화하려면
 
 다음 명령을 사용하여 기존 회로에 ExpressRoute Premium 추가 기능을 사용하도록 설정할 수 있습니다.
 
@@ -303,7 +302,7 @@ az network express-route update -n MyCircuit -g ExpressRouteResourceGroup --sku-
 
 이제 ExpressRoute Premium 추가 기능을 사용할 수 있게 됩니다. 명령이 성공적으로 실행되는 즉시 Premium 추가 기능에 대한 대금 청구가 시작됩니다.
 
-### <a name="to-disable-the-expressroute-premium-add-on"></a>Express 경로 Premium 추가 기능을 비활성화하려면
+### <a name="to-disable-the-expressroute-premium-add-on"></a>ExpressRoute Premium 추가 기능을 비활성화하려면
 
 > [!IMPORTANT]
 > 표준 회로에 허용된 것보다 많은 리소스를 사용할 경우 이 작업이 실패할 수 있습니다.
@@ -322,14 +321,14 @@ ExpressRoute Premium 추가 기능을 해제하기 전에 다음 조건을 이�
 az network express-route update -n MyCircuit -g ExpressRouteResourceGroup --sku-tier Standard
 ```
 
-### <a name="to-update-the-expressroute-circuit-bandwidth"></a>Express 경로 회로 대역폭을 업데이트하려면
+### <a name="to-update-the-expressroute-circuit-bandwidth"></a>ExpressRoute 회로 대역폭을 업데이트하려면
 
 공급자에 대해 지원되는 대역폭 옵션은 [ExpressRoute FAQ](expressroute-faqs.md)를 확인하세요. 기존 회로의 크기보다 큰 모든 크기를 선택할 수 있습니다.
 
 > [!IMPORTANT]
 > 기존 포트에 적절한 수용작업량이 없는 경우 ExpressRoute 회로를 다시 만들어야 할 수 있습니다. 해당 위치에서 사용 가능한 추가 용량이 없는 경우 해당 회로를 업그레이드할 수 없습니다.
 >
-> 그러나 중단 없이 Express 경로 회로의 대역폭을 줄일 수는 없습니다. 대역폭을 다운그레이드하려면 ExpressRoute 회로의 프로비전을 해제하고 새 ExpressRoute 회로를 다시 프로비전해야 합니다.
+> 그러나 중단 없이 ExpressRoute 회로의 대역폭을 줄일 수는 없습니다. 대역폭을 다운그레이드하려면 ExpressRoute 회로의 프로비전을 해제하고 새 ExpressRoute 회로를 다시 프로비전해야 합니다.
 >
 
 필요한 크기를 선택한 후에 다음 명령을 사용하여 회로 크기를 조정합니다.
@@ -350,17 +349,17 @@ az network express-route update -n MyCircuit -g ExpressRouteResourceGroup --sku-
 
 ### <a name="to-control-access-to-the-classic-and-resource-manager-environments"></a>클래식 및 리소스 관리자 환경에 대한 액세스를 제어하려면
 
-[클래식에서 Resource Manager 배포 모델로 Express 경로 회로 이동](expressroute-howto-move-arm.md)의 지침을 검토합니다.
+[클래식에서 Resource Manager 배포 모델로 ExpressRoute 회로 이동](expressroute-howto-move-arm.md)의 지침을 검토합니다.
 
-## <a name="deprovisioning-and-deleting-an-expressroute-circuit"></a>Express 경로 회로 프로비전 해제 및 삭제
+## <a name="delete"></a>ExpressRoute 회로 프로비전 해제 및 삭제
 
 ExpressRoute 회로의 프로비전을 해제하고 삭제하려면 다음 조건을 알고 있어야 합니다.
 
-* 모든 가상 네트워크를 Express 경로 회로에서 연결 해제해야 합니다. 이 작업에 실패한 경우 회로에 연결된 가상 네트워크가 있는지 확인하세요.
+* 모든 가상 네트워크를 ExpressRoute 회로에서 연결 해제해야 합니다. 이 작업에 실패한 경우 회로에 연결된 가상 네트워크가 있는지 확인하세요.
 * ExpressRoute 회로 서비스 공급자 프로비전 상태가 **프로비전 중** 또는 **프로비전됨**인 경우에는 서비스 공급자에게 회로 프로비전 해제를 요청해야 합니다. 서비스 공급자가 회로의 프로비전을 해제한 다음 통지를 보낼 때까지 리소스가 계속 예약되며 요금이 청구됩니다.
 * 서비스 공급자가 회로의 프로비전을 해제하는 경우 회로를 삭제할 수 있습니다. 회로의 프로비전이 해제되는 경우 서비스 공급자 프로비전 상태가 **프로비전되지 않음**으로 설정됩니다. 그러면 회로에 대한 요금 청구가 중지됩니다.
 
-다음 명령을 실행하여 Express 경로 회로를 삭제할 수 있습니다.
+다음 명령을 실행하여 ExpressRoute 회로를 삭제할 수 있습니다.
 
 ```azurecli
 az network express-route delete  -n MyCircuit -g ExpressRouteResourceGroup
@@ -370,5 +369,5 @@ az network express-route delete  -n MyCircuit -g ExpressRouteResourceGroup
 
 회로를 만든 후에 다음 작업을 수행해야 합니다.
 
-* [Express 경로 회로의 라우팅 만들기 및 수정](howto-routing-cli.md)
-* [가상 네트워크를 Express 경로 회로에 연결](howto-linkvnet-cli.md)
+* [ExpressRoute 회로의 라우팅 만들기 및 수정](howto-routing-cli.md)
+* [가상 네트워크를 ExpressRoute 회로에 연결](howto-linkvnet-cli.md)

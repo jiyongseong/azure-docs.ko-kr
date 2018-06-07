@@ -4,7 +4,7 @@ description: "SharePoint Server에 대한 프로필 동기화를 지원하도록
 services: active-directory-ds
 documentationcenter: 
 author: mahesh-unnikrishnan
-manager: stevenpo
+manager: mtillman
 editor: curtand
 ms.assetid: 938a5fbc-2dd1-4759-bcce-628a6e19ab9d
 ms.service: active-directory-ds
@@ -14,14 +14,12 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/06/2017
 ms.author: maheshu
-translationtype: Human Translation
-ms.sourcegitcommit: 2ef700f9a27d27997d53143260603bda822aa104
-ms.openlocfilehash: b84853da989d18414a31cf5b178c6506abc56bbe
-ms.lasthandoff: 01/30/2017
-
-
+ms.openlocfilehash: d98fbe85f35932161476a800a2fd438f0bf2b9ef
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
-
 # <a name="configure-a-managed-domain-to-support-profile-synchronization-for-sharepoint-server"></a>SharePoint Server에 대한 프로필 동기화를 지원하도록 관리 도메인 구성
 SharePoint Server에는 사용자 프로필 동기화에 사용되는 User Profile Service가 포함되어 있습니다. User Profile Service를 설정하려면 Active Directory 도메인에서 적절한 사용 권한을 부여해야 합니다. 자세한 내용은 [SharePoint Server 2013에서 프로필 동기화를 위해 Active Directory Domain Services 사용 권한 부여](https://technet.microsoft.com/library/hh296982.aspx)를 참조하세요.
 
@@ -50,4 +48,3 @@ SharePoint 사용자 프로필 동기화에 사용되는 서비스 계정을 **A
 
 ## <a name="related-content"></a>관련 콘텐츠
 * [기술 참조 - SharePoint Server 2013에서 프로필 동기화를 위해 Active Directory Domain Services 사용 권한 부여](https://technet.microsoft.com/library/hh296982.aspx)
-

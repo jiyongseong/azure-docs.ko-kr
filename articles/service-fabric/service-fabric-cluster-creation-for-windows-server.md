@@ -1,28 +1,28 @@
 ---
-title: "독립 실행형 Azure Service Fabric 클러스터 만들기 | Microsoft Docs"
-description: "온-프레미스 또는 클라우드에서 Windows Server 컴퓨터(실제 또는 가상)를 사용하여 Azure Service Fabric 클러스터를 만듭니다."
+title: 독립 실행형 Azure Service Fabric 클러스터 만들기 | Microsoft Docs
+description: 온-프레미스 또는 클라우드에서 Windows Server 컴퓨터(실제 또는 가상)를 사용하여 Azure Service Fabric 클러스터를 만듭니다.
 services: service-fabric
 documentationcenter: .net
 author: dkkapur
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 31349169-de19-4be6-8742-ca20ac41eb9e
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 06/24/2017
-ms.author: chackdan;maburlik;dekapur
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 09f24fa2b55d298cfbbf3de71334de579fbf2ecd
-ms.openlocfilehash: 7543d98030ea143d537e0028801fd3efe3e4ff32
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/08/2017
-
+ms.date: 8/10/2017
+ms.author: dekapur
+ms.openlocfilehash: efa48aa90806b45c99237404af24cb8aba762d15
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
+ms.locfileid: "34209157"
 ---
 # <a name="create-a-standalone-cluster-running-on-windows-server"></a>Windows Server에서 실행되는 독립 실행형 클러스터 만들기
-Azure Service Fabric을 사용하면 Windows Server를 실행 중인 가상 컴퓨터 또는 컴퓨터에서 Service Fabric 클러스터를 만들 수 있습니다. 즉, 온-프레미스 또는 클라우드 공급자에 서로 연결된 일련의 Windows Server 컴퓨터가 있는 환경에서 Service Fabric 응용 프로그램을 배포하고 실행할 수 있습니다. 서비스 패브릭은 독립 실행형 Windows Server 패키지라는 서비스 패브릭 클러스터를 만들 수 있는 설치 패키지를 제공합니다.
+Azure Service Fabric을 사용하면 Windows Server를 실행 중인 가상 머신 또는 컴퓨터에서 Service Fabric 클러스터를 만들 수 있습니다. 즉, 온-프레미스 또는 클라우드 공급자에 서로 연결된 일련의 Windows Server 컴퓨터가 있는 환경에서 Service Fabric 응용 프로그램을 배포하고 실행할 수 있습니다. 서비스 패브릭은 독립 실행형 Windows Server 패키지라는 서비스 패브릭 클러스터를 만들 수 있는 설치 패키지를 제공합니다.
 
 이 문서에서는 Service Fabric 독립 실행형 클러스터를 만들기 위한 단계를 안내합니다.
 
@@ -37,7 +37,7 @@ Azure Service Fabric을 사용하면 Windows Server를 실행 중인 가상 컴�
 * [Azure Service Fabric 포럼](https://social.msdn.microsoft.com/Forums/azure/en-US/home?forum=AzureServiceFabric?)에서 Windows Server용 Service Fabric 독립 실행형 패키지에 대해 커뮤니티에 문의합니다.
 * [Service Fabric에 대한 전문 지원](http://support.microsoft.com/oas/default.aspx?prid=16146)에 대한 티켓을 엽니다.  [여기](https://support.microsoft.com/en-us/gp/offerprophone?wa=wsignin1.0)에서 Microsoft의 전문 지원에 대해 자세히 알아봅니다.
 * 또한 [Microsoft 프리미어 지원](https://support.microsoft.com/en-us/premier)의 일부로 이 패키지에 대해 지원을 받을 수도 있습니다.
-* 자세한 내용은 [Azure Service Fabric 지원 옵션](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-support)을 참조하세요.
+* 자세한 내용은 [Azure Service Fabric 지원 옵션](https://docs.microsoft.com/azure/service-fabric/service-fabric-support)을 참조하세요.
 * 지원을 위해 로그를 수집하려면 [Service Fabric 독립 실행형 로그 수집기](service-fabric-cluster-standalone-package-contents.md)를 실행합니다.
 
 <a id="downloadpackage"></a>
@@ -113,9 +113,9 @@ Service Fabric 런타임 패키지는 클러스터 생성 시 자동으로 다�
 런타임 패키지는 [다운로드 링크 - Service Fabric 런타임 - Windows Server](https://go.microsoft.com/fwlink/?linkid=839354)에서 인터넷에 연결된 다른 컴퓨터에서 개별적으로 다운로드할 수 있습니다. 오프라인 클러스터를 배포하는 위치에 런타임 패키지를 복사하고 아래와 같이 포함된 `-FabricRuntimePackagePath` 매개 변수를 사용하여 `CreateServiceFabricCluster.ps1`을 실행하여 클러스터를 만듭니다. 
 
 ```powershell
-CreateServiceFabricCluster.ps1 -ClusterConfigurationFilePath <path to ClusterConfig.json> -FabricRuntimePackagePath <path to MicrosoftAzureServiceFabric.cab>
+.\CreateServiceFabricCluster.ps1 -ClusterConfigFilePath .\ClusterConfig.json -FabricRuntimePackagePath .\MicrosoftAzureServiceFabric.cab
 ```
-여기서 `<path to ClusterConfig.json>` 및 `<path to MicrosoftAzureServiceFabric.cab>`는 각각 클러스터 구성 및 런타임 .cab 파일에 대한 경로입니다.
+여기서 `.\ClusterConfig.json` 및 `.\MicrosoftAzureServiceFabric.cab`는 각각 클러스터 구성 및 런타임 .cab 파일에 대한 경로입니다.
 
 
 ### <a name="step-2-connect-to-the-cluster"></a>2단계: 클러스터에 연결
@@ -125,7 +125,9 @@ CreateServiceFabricCluster.ps1 -ClusterConfigurationFilePath <path to ClusterCon
 
 ```powershell
 Connect-ServiceFabricCluster -ConnectionEndpoint <*IPAddressofaMachine*>:<Client connection end point port>
-
+```
+예:
+```powershell
 Connect-ServiceFabricCluster -ConnectionEndpoint 192.13.123.2345:19000
 ```
 ### <a name="step-3-bring-up-service-fabric-explorer"></a>3단계: Service Fabric Explorer 표시
@@ -203,4 +205,3 @@ Connect-ServiceFabricCluster -ConnectionEndpoint 192.13.123.2345:19000
 
 <!--Image references-->
 [Trusted Zone]: ./media/service-fabric-cluster-creation-for-windows-server/TrustedZone.png
-

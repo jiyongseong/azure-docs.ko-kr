@@ -1,48 +1,47 @@
 ---
-title: "GPO를 사용하여 IE에 대한 Azure 액세스 패널 확장 배포 | Microsoft Docs"
-description: "그룹 정책을 사용하여 My Apps 포털용 Internet Explorer 추가 기능을 배포하는 방법"
+title: GPO를 사용하여 IE에 대한 Azure 액세스 패널 확장 배포 | Microsoft Docs
+description: 그룹 정책을 사용하여 My Apps 포털용 Internet Explorer 추가 기능을 배포하는 방법
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: MarkusVi
-manager: femila
+manager: mtillman
 ms.assetid: 7c2d49c8-5be0-4e7e-abac-332f9dfda736
 ms.service: active-directory
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: identity
-ms.date: 08/02/2017
+ms.date: 10/31/2017
 ms.author: markvi
 ms.reviewer: asteen
 ms.custom: H1Hack27Feb2017
+ms.openlocfilehash: a39e454bd0993f07efd1168404df453f3013e0fa
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 53ce95811bbeb306ae986fda91d3387db4e71998
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="how-to-deploy-the-access-panel-extension-for-internet-explorer-using-group-policy"></a>그룹 정책을 사용하여 Internet Explorer용 액세스 패널 확장을 배포하는 방법
-이 자습서에서는 그룹 정책을 사용하여 사용자의 컴퓨터에 Internet Explorer용 액세스 패널 확장을 원격 설치하는 방법을 보여줍니다. 이 확장은 [암호 기반 Single Sign-On](active-directory-appssoaccess-whatis.md#password-based-single-sign-on)을 사용하여 구성된 앱에 로그인하는 Internet Explorer 사용자에게 필요합니다.
+이 자습서에서는 그룹 정책을 사용하여 사용자의 컴퓨터에 Internet Explorer용 액세스 패널 확장을 원격 설치하는 방법을 보여줍니다. 이 확장은 [암호 기반 Single Sign-On](manage-apps/what-is-single-sign-on.md#password-based-single-sign-on)을 사용하여 구성된 앱에 로그인하는 Internet Explorer 사용자에게 필요합니다.
 
 관리자는 이 확장의 배포를 자동화하는 것이 좋습니다. 그렇지 않은 경우 사용자가 직접 확장을 다운로드하여 설치해야 하기 때문에 사용자 오류가 발생하기 쉽고 관리자 권한이 필요합니다. 이 자습서에서는 그룹 정책을 사용하여 소프트웨어 배포를 자동화하는 한 가지 방법을 설명합니다. [그룹 정책에 대해 알아봅니다.](https://technet.microsoft.com/windowsserver/bb310732.aspx)
 
 액세스 패널 확장은 [Chrome](https://go.microsoft.com/fwLink/?LinkID=311859) 및 [Firefox](https://go.microsoft.com/fwLink/?LinkID=626998)에도 사용할 수 있으며 설치에 관리자 권한이 필요하지 않습니다.
 
 ## <a name="prerequisites"></a>필수 조건
-* [Active Directory 도메인 서비스](https://msdn.microsoft.com/library/aa362244%28v=vs.85%29.aspx)를 설정하고, 사용자 컴퓨터를 도메인에 가입시킨 상태여야 합니다.
+* [Active Directory Domain Services](https://msdn.microsoft.com/library/aa362244%28v=vs.85%29.aspx)를 설정하고, 사용자 컴퓨터를 도메인에 가입시킨 상태여야 합니다.
 * 그룹 정책 개체(GPO)를 편집하는 "설정 편집" 사용 권한이 있어야 합니다. 기본적으로 도메인 관리자, 엔터프라이즈 관리자 및 그룹 정책 작성자/소유자 보안 그룹의 멤버에게 이 권한이 있습니다. [자세한 정보](https://technet.microsoft.com/library/cc781991%28v=ws.10%29.aspx)
 
 ## <a name="step-1-create-the-distribution-point"></a>1단계: 배포 지점 만들기
 먼저 원격으로 확장을 설치할 컴퓨터에서 액세스할 수 있는 네트워크 위치에 설치 관리자 패키지를 배치해야 합니다. 이렇게 하려면 다음 단계를 수행하세요.
 
 1. 관리자 권한으로 서버에 로그온합니다.
-2. **서버 관리자** 창에서 **파일 및 저장소 서비스**로 이동합니다.
+2. **서버 관리자** 창에서 **파일 및 Storage 서비스**로 이동합니다.
    
-    ![파일 및 저장소 서비스 열기](./media/active-directory-saas-ie-group-policy/files-services.png)
-3. **공유** 탭으로 이동합니다. 그런 다음 **태스크** > **새 공유...**를 클릭합니다.
+    ![파일 및 Storage 서비스 열기](./media/active-directory-saas-ie-group-policy/files-services.png)
+3. **공유** 탭으로 이동합니다. 그런 다음 **태스크** > **새 공유...** 를 클릭합니다.
    
-    ![파일 및 저장소 서비스 열기](./media/active-directory-saas-ie-group-policy/shares.png)
+    ![파일 및 Storage 서비스 열기](./media/active-directory-saas-ie-group-policy/shares.png)
 4. **새 공유 마법사** 를 완료하고 사용자의 컴퓨터에서 액세스할 수 있게 권한을 설정합니다. [공유에 대해 알아봅니다.](https://technet.microsoft.com/library/cc753175.aspx)
 5. Windows Installer 패키지(.msi 파일)[Access Panel Extension.msi](https://account.activedirectory.windowsazure.com/Applications/Installers/x64/Access Panel Extension.msi)를 다운로드합니다.
 6. 설치 관리자 패키지를 공유의 원하는 위치에 복사합니다.
@@ -51,7 +50,7 @@ ms.lasthandoff: 07/21/2017
 7. 클라이언트 컴퓨터가 공유에서 설치 관리자 패키지에 액세스할 수 있는지 확인합니다. 
 
 ## <a name="step-2-create-the-group-policy-object"></a>2단계: 그룹 정책 개체 만들기
-1. Active Directory 도메인 서비스(ADDS) 설치를 호스팅하는 서버에 로그온합니다.
+1. Active Directory Domain Services(ADDS) 설치를 호스팅하는 서버에 로그온합니다.
 2. 서버 관리자에서 **도구** > **그룹 정책 관리**로 이동합니다.
    
     ![도구 > 그룹 정책 관리로 이동](./media/active-directory-saas-ie-group-policy/tools-gpm.png)
@@ -61,7 +60,7 @@ ms.lasthandoff: 07/21/2017
    > 조직 단위(OU)를 만들거나 편집하려면 서버 관리자로 다시 전환하여 **도구** > **Active Directory 사용자 및 컴퓨터**로 이동합니다.
    > 
    > 
-4. OU를 선택한 후에 마우스 오른쪽 단추로 클릭하고 **이 도메인에서 GPO를 만들고 여기에 연결...**을 선택합니다.
+4. OU를 선택한 후에 마우스 오른쪽 단추로 클릭하고 **이 도메인에서 GPO를 만들고 여기에 연결...** 을 선택합니다.
    
     ![새 GPO 만들기](./media/active-directory-saas-ie-group-policy/create-gpo.png)
 5. **새 GPO** 프롬프트에 새 그룹 정책 개체의 이름을 입력합니다.
@@ -77,7 +76,7 @@ ms.lasthandoff: 07/21/2017
    
    * `Computer Configuration/Policies/Software Settings/`
    * `User Configuration/Policies/Software Settings/`
-3. **소프트웨어 설치**를 마우스 오른쪽 단추로 클릭한 다음 **새로 만들기** > **패키지...**를 선택합니다.
+3. **소프트웨어 설치**를 마우스 오른쪽 단추로 클릭한 다음 **새로 만들기** > **패키지...** 를 선택합니다.
    
     ![새 소프트웨어 설치 패키지 만들기](./media/active-directory-saas-ie-group-policy/new-package.png)
 4. [1단계: 배포 지점 만들기](#step-1-create-the-distribution-point)에서 만든 설치 관리자 패키지가 들어 있는 공유  폴더로 이동하고 .msi 파일을 선택한 다음 **열기**를 클릭합니다.
@@ -103,7 +102,7 @@ ms.lasthandoff: 07/21/2017
    * `User Configuration/Policies/Administrative Templates/Windows Components/Internet Explorer/Security Features/Add-on Management`
 2. **추가 기능 목록**을 마우스 오른쪽 단추로 클릭하고 **편집**을 선택합니다.
     ![추가 기능 목록을 편집합니다.](./media/active-directory-saas-ie-group-policy/edit-add-on-list.png)
-3. **추가 기능 목록** 창에서 **사용**을 선택합니다. 그런 다음 **옵션** 섹션에서 **표시...**를 클릭합니다.
+3. **추가 기능 목록** 창에서 **사용**을 선택합니다. 그런 다음 **옵션** 섹션에서 **표시...** 를 클릭합니다.
    
     ![사용을 클릭한 다음 표시...를 클릭합니다.](./media/active-directory-saas-ie-group-policy/edit-add-on-list-window.png)
 4. **내용 표시** 창에서 다음 단계를 수행합니다.
@@ -163,7 +162,6 @@ ms.lasthandoff: 07/21/2017
 
 ## <a name="related-articles"></a>관련 문서
 * [Azure Active Directory의 응용 프로그램 관리를 위한 문서 인덱스](active-directory-apps-index.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On](manage-apps/what-is-single-sign-on.md)
 * [Internet Explorer용 액세스 패널 확장 문제 해결](active-directory-saas-ie-troubleshooting.md)
-
 

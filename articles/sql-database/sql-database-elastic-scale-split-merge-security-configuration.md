@@ -1,30 +1,23 @@
 ---
-title: "분할-병합 보안 구성 | Microsoft Docs"
-description: "암호화에 대한 409 인증서를 설정"
+title: 분할-병합 보안 구성 | Microsoft Docs
+description: 탄력적 크기 조정을 위해 분할/병합 서비스를 통해 암호화에 대해 409 인증서를 설정합니다.
 metakeywords: Elastic Database certificates security
 services: sql-database
-documentationcenter: 
-manager: jhubbard
-author: torsteng
-ms.assetid: f9e89c57-61a0-484f-b787-82dae2349cb6
+manager: craigg
+author: stevestein
 ms.service: sql-database
 ms.custom: scale out apps
-ms.workload: sql-database
-ms.tgt_pltfrm: na
-ms.devlang: na
 ms.topic: article
-ms.date: 05/27/2016
-ms.author: torsteng
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6adaf7026d455210db4d7ce6e7111d13c2b75374
-ms.openlocfilehash: 7e6ccf51a4b75eef16a7df5c1a1018954af8e5dd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/22/2017
-
-
+ms.date: 04/01/2018
+ms.author: sstein
+ms.openlocfilehash: 694c1755b5263d48fdfa5cad3c0b13e42bfb8522
+ms.sourcegitcommit: 3a4ebcb58192f5bf7969482393090cb356294399
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/06/2018
 ---
 # <a name="split-merge-security-configuration"></a>분할-병합 보안 구성
-분할/병합 서비스를 사용하려면 보안을 올바르게 구성해야 합니다. 서비스는 Microsoft Azure SQL 데이터베이스의 탄력적인 확장 기능에 속합니다. 자세한 내용은 [탄력적인 확장 분할 및 병합 서비스 자습서](sql-database-elastic-scale-configure-deploy-split-and-merge.md)를 참조하세요.
+분할/병합 서비스를 사용하려면 보안을 올바르게 구성해야 합니다. 서비스는 Microsoft Azure SQL Database의 탄력적인 확장 기능에 속합니다. 자세한 내용은 [탄력적인 확장 분할 및 병합 서비스 자습서](sql-database-elastic-scale-configure-deploy-split-and-merge.md)를 참조하세요.
 
 ## <a name="configuring-certificates"></a>인증서 구성
 인증서는 두 가지 방법으로 구성합니다. 
@@ -127,7 +120,7 @@ ms.lasthandoff: 06/22/2017
 
 액세스 제어 그룹의 규칙은 서비스 구성 파일의 <AccessControl name=""> 섹션에서 구성합니다. 
 
-해당 형식에 대한 설명은 네트워크 액세스 제어 목록 설명서에 나와 있습니다.
+해당 형식에 대한 설명은 네트워크 Access Control 목록 설명서에 나와 있습니다.
 예를 들어 100.100.0.0~100.100.255.255 범위의 IP만 HTTPS 끝점에 액세스하도록 허용하려는 경우의 규칙은 다음과 같습니다.
 
     <AccessControl name="Retricted">
@@ -225,7 +218,7 @@ SSL 키 쌍이 포함된 기존 또는 생성된 .PFX 파일을 업로드합니�
 * 신뢰할 수 있는 루트 인증 기관 저장소로 인증서를 가져옵니다.
 
 ## <a name="turn-off-client-certificate-based-authentication"></a>클라이언트 인증서 기반 인증 해제
-클라이언트 인증서 기반 인증만 지원되며, 이를 사용하지 않으면 다른 메커니즘(예: Microsoft Azure 가상 네트워크)이 없는 한 서비스 끝점에 대한 공용 액세스가 허용됩니다.
+클라이언트 인증서 기반 인증만 지원되며, 이를 사용하지 않으면 다른 메커니즘(예: Microsoft Azure Virtual Network)이 없는 한 서비스 끝점에 대한 공용 액세스가 허용됩니다.
 
 서비스 구성 파일에서 이러한 설정을 false로 변경하여 기능을 해제합니다.
 
@@ -392,7 +385,7 @@ CA 공개 키가 포함된 기존 또는 생성된 .CER 파일과 함께 인증�
 3. **인증서**를 선택합니다.
 4. **추가**를 클릭합니다.
 5. 인증서 저장소 위치를 선택합니다.
-6. **마침**을 클릭합니다.
+6. **Finish**를 클릭합니다.
 7. **확인**을 클릭합니다.
 8. **인증서**를 확장합니다.
 9. 인증서 저장소 노드를 확장합니다.
@@ -402,17 +395,17 @@ CA 공개 키가 포함된 기존 또는 생성된 .CER 파일과 함께 인증�
 ## <a name="export-certificate"></a>인증서 내보내기
 **인증서 내보내기 마법사**에서 다음을 수행합니다.
 
-1. **다음**을 누릅니다.
+1. **다음**을 클릭합니다.
 2. **예**, **개인 키 내보내기**를 선택합니다.
-3. **다음**을 누릅니다.
+3. **다음**을 클릭합니다.
 4. 원하는 출력 파일 형식을 선택합니다.
 5. 원하는 옵션을 선택합니다.
 6. **암호**를 확인합니다.
 7. 강력한 암호를 입력하고 이를 확인합니다.
-8. **다음**을 누릅니다.
+8. **다음**을 클릭합니다.
 9. 인증서를 저장할 파일 이름을 입력하거나 찾습니다(.PFX 확장명을 사용하여).
 10. **다음**을 누릅니다.
-11. **마침**을 클릭합니다.
+11. **Finish**를 클릭합니다.
 12. **확인**을 클릭합니다.
 
 ## <a name="import-certificate"></a>인증서 가져오기
@@ -422,7 +415,7 @@ CA 공개 키가 포함된 기존 또는 생성된 .CER 파일과 함께 인증�
    
    * 현재 사용자 계정으로 실행되는 프로세스만 서비스에 액세스하는 경우 **현재 사용자** 를 선택합니다.
    * 컴퓨터의 다른 프로세스에서 서비스에 액세스하는 경우 **로컬 컴퓨터** 를 선택합니다.
-2. **다음**을 누릅니다.
+2. **다음**을 클릭합니다.
 3. 파일에서 가져오는 경우 파일 경로를 확인합니다.
 4. .PFX 파일을 가져오는 경우:
    1. 개인 키를 보호하는 암호를 입력합니다.
@@ -436,9 +429,9 @@ CA 공개 키가 포함된 기존 또는 생성된 .CER 파일과 함께 인증�
 9. 모든 대화 상자 창에서 **확인** 을 클릭합니다.
 
 ## <a name="upload-certificate"></a>인증서 업로드
-[Azure 포털](https://portal.azure.com/)
+[Azure Portal](https://portal.azure.com/)에서
 
-1. **클라우드 서비스**를 선택합니다.
+1. **Cloud Services**를 선택합니다.
 2. 클라우드 서비스를 선택합니다.
 3. 최상위 메뉴에서 **인증서**를 클릭합니다.
 4. 아래쪽 메뉴 모음에서 **업로드**를 클릭합니다.
@@ -454,5 +447,4 @@ CA 공개 키가 포함된 기존 또는 생성된 .CER 파일과 함께 인증�
 이 데이터베이스에 저장된 자격 증명은 암호화됩니다. 그러나 서비스 배포의 웹 역할과 작업자 역할 모두 최신 상태를 유지하고 저장된 자격 증명의 암호화 및 암호 해독에 사용되는 인증서와 메타데이터 데이터베이스에 액세스할 때 보안을 유지해야 합니다. 
 
 [!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
-
 

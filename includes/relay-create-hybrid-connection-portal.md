@@ -1,16 +1,18 @@
-[여기][namespace-how-to]와 같이 릴레이 네임스페이스를 이미 만들었는지 확인합니다.
+[Relay 네임스페이스][namespace-how-to]를 이미 만들었는지 확인합니다.
 
-1. [Azure 포털](https://portal.azure.com)에 로그온합니다.
-2. 포털의 왼쪽 탐색 창에서 **릴레이**를 클릭합니다.
-3. 하이브리드 연결을 만들려는 네임스페이스를 선택합니다. 이 경우 **mynewns**입니다.
+1. [Azure Portal](https://portal.azure.com)에 로그인합니다.
+2. 왼쪽 메뉴에서 **모든 리소스**를 선택합니다.
+3. 하이브리드 연결을 만들려는 네임스페이스를 선택합니다. 이 경우 **mynewns**입니다.  
+4. **Relay 네임스페이스** 아래에서 **하이브리드 연결**을 선택합니다.
+
+    ![하이브리드 연결 만들기](./media/relay-create-hybrid-connection-portal/create-hc-1.png)
+
+5. 네임스페이스 개요 창에서 **+ 하이브리드 연결**을 선택합니다.
    
-    ![hc 만들기](./media/relay-create-hybrid-connection-portal/create-hc-1.png)
-4. **릴레이 네임스페이스** 블레이드에서 **하이브리드 연결**을 선택한 후 **+ 하이브리드 연결**을 선택합니다.
-   
-    ![hc 선택](./media/relay-create-hybrid-connection-portal/create-hc-2.png)
-5. **하이브리드 연결 이름**을 입력하고 다른 값을 기본값으로 유지합니다.
+    ![하이브리드 연결 선택](./media/relay-create-hybrid-connection-portal/create-hc-2.png)
+6. **하이브리드 연결 만들기** 아래에서 하이브리드 연결 이름에 대한 값을 입력합니다. 다른 기본값은 그대로 둡니다.
    
     ![새로 만들기 선택](./media/relay-create-hybrid-connection-portal/create-hc-3.png)
-6. 블레이드 하단에서 **만들기**를 클릭합니다.
+7. **만들기**를 선택합니다.
 
 [namespace-how-to]: ../articles/service-bus-relay/relay-create-namespace-portal.md 

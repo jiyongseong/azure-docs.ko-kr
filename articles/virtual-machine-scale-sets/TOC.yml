@@ -1,0 +1,163 @@
+- name: Virtual Machines Scale Sets 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: 가상 머신 크기 집합이란?
+      href: overview.md
+- name: 빠른 시작
+  items:
+    - name: Azure Portal에서 만들기
+      href: quick-create-portal.md
+    - name: Azure CLI 2.0으로 만들기
+      href: quick-create-cli.md
+    - name: Azure PowerShell로 만들기
+      href: quick-create-powershell.md
+    - name: 템플릿으로 만들기
+      items:
+        - name: Linux 확장 집합
+          href: quick-create-template-linux.md
+        - name: Windows 확장 집합
+          href: quick-create-template-windows.md
+- name: 자습서
+  items:
+    - name: 1 - 확장 집합 만들기/관리
+      items:
+        - name: Azure CLI 2.0
+          href: tutorial-create-and-manage-cli.md
+        - name: Azure PowerShell
+          href: tutorial-create-and-manage-powershell.md
+    - name: 2 - 데이터 디스크 사용
+      items:
+        - name: Azure CLI 2.0
+          href: tutorial-use-disks-cli.md
+        - name: Azure PowerShell
+          href: tutorial-use-disks-powershell.md
+    - name: 3 - 사용자 지정 VM 이미지 사용
+      items:
+        - name: Azure CLI 2.0
+          href: tutorial-use-custom-image-cli.md
+        - name: Azure PowerShell
+          href: tutorial-use-custom-image-powershell.md
+    - name: 4 - 확장 집합에 앱 배포
+      items:
+        - name: Azure CLI 2.0
+          href: tutorial-install-apps-cli.md
+        - name: Azure PowerShell
+          href: tutorial-install-apps-powershell.md
+        - name: Template
+          href: tutorial-install-apps-template.md
+    - name: 5 - 확장 집합 자동 크기 조정
+      items:
+        - name: Azure CLI 2.0
+          href: tutorial-autoscale-cli.md
+        - name: Azure PowerShell
+          href: tutorial-autoscale-powershell.md
+        - name: Template
+          href: tutorial-autoscale-template.md
+    - name: 사용자 지정 Packer 이미지로 Azure 가상 머신 확장 집합에 앱 배포
+      items:
+        - name: Azure CLI 2.0
+          href: 'https://docs.microsoft.com/learn/deploy-custom-vmss-app/index'
+- name: 샘플
+  items:
+    - name: Azure CLI 2.0
+      href: cli-samples.md
+    - name: PowerShell
+      href: powershell-samples.md
+- name: 방법
+  items:
+    - name: 계획 및 디자인
+      items:
+        - name: 디자인 고려 사항
+          href: virtual-machine-scale-sets-design-overview.md
+        - name: 인스턴스 ID 이해
+          href: virtual-machine-scale-sets-instance-ids.md
+    - name: 템플릿 만들기
+      items:
+        - name: 확장 집합 템플릿에 대해 알아보기
+          href: virtual-machine-scale-sets-mvss-start.md
+        - name: 기존 가상 네트워크 사용
+          href: virtual-machine-scale-sets-mvss-existing-vnet.md
+        - name: 사용자 지정 이미지 사용
+          href: virtual-machine-scale-sets-mvss-custom-image.md
+        - name: Linux 확장 집합 템플릿을 사용하여 게스트 기반 자동 크기 조정 사용
+          href: virtual-machine-scale-sets-mvss-guest-based-autoscale-linux.md
+    - name: 배포
+      items:
+        - name: Visual Studio를 사용하여 만들기
+          href: virtual-machine-scale-sets-vs-create.md
+        - name: 가용성 영역 사용
+          href: virtual-machine-scale-sets-use-availability-zones.md
+        - name: 확장 집합 자동 크기 조정
+          href: virtual-machine-scale-sets-autoscale-overview.md
+          items:
+            - name: Azure 포털 사용
+              href: virtual-machine-scale-sets-autoscale-portal.md
+            - name: 고급 자동 크기 조정
+              href: ../monitoring-and-diagnostics/insights-advanced-autoscale-virtual-machine-scale-sets.md
+        - name: 크기 집합의 응용 프로그램
+          href: virtual-machine-scale-sets-deploy-app.md
+        - name: 확장 집합으로 데이터 디스크 사용
+          href: virtual-machine-scale-sets-attached-disks.md
+        - name: 확장 집합의 디스크 암호화
+          items:
+            - name: PowerShell 사용
+              href: virtual-machine-scale-sets-encrypt-disks-ps.md
+            - name: Azure CLI 2.0 사용
+              href: virtual-machine-scale-sets-encrypt-disks-cli.md
+        - name: 큰 확장 집합으로 작업
+          href: virtual-machine-scale-sets-placement-groups.md
+        - name: 확장 집합 템플릿을 변환하여 관리 디스크 사용
+          href: virtual-machine-scale-sets-convert-template-to-md.md
+        - name: 낮은 우선 순위 사용
+          href: virtual-machine-scale-sets-use-low-priority.md
+    - name: 관리
+      items:
+        - name: 일반적인 관리 작업
+          items:
+            - name: Azure CLI 2.0 사용
+              href: virtual-machine-scale-sets-manage-cli.md
+            - name: Azure PowerShell 사용
+              href: virtual-machine-scale-sets-manage-powershell.md
+        - name: 크기 집합에서 수직적 크기 조정
+          href: virtual-machine-scale-sets-vertical-scale-reprovision.md
+        - name: 자동 OS 업그레이드
+          href: virtual-machine-scale-sets-automatic-upgrade.md
+        - name: 확장 집합 수정
+          href: virtual-machine-scale-sets-upgrade-scale-set.md
+        - name: DSC 및 확장 집합 사용
+          href: virtual-machine-scale-sets-dsc.md
+        - name: 확장 집합에 대한 네트워킹
+          href: virtual-machine-scale-sets-networking.md
+        - name: 템플릿을 관리 디스크로 변환
+          href: virtual-machine-scale-sets-convert-template-to-md.md
+    - name: 문제 해결
+      items:
+        - name: Autoscale
+          href: virtual-machine-scale-sets-troubleshoot.md
+    - name: FAQ
+      items:
+        - name: 확장 집합 FAQ
+          href: virtual-machine-scale-sets-faq.md
+- name: 참고 자료
+  items:
+    - name: Azure PowerShell
+      href: /powershell/azure/overview
+    - name: Azure CLI
+      href: ../virtual-machines/azure-cli-arm-commands.md
+    - name: REST (영문)
+      href: /rest/api/virtualmachinescalesets/
+- name: 리소스
+  items:
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/?category=compute'
+    - name: 가격
+      items:
+        - name: Linux
+          href: 'https://azure.microsoft.com/pricing/details/virtual-machine-scale-sets/linux/'
+        - name: Windows
+          href: 'https://azure.microsoft.com/pricing/details/virtual-machine-scale-sets/windows/'
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'
+    - name: 스택 오버플로
+      href: 'http://stackoverflow.com/questions/tagged/azure-vm-scale-set'

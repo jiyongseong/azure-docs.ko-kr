@@ -14,13 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/02/2017
 ms.author: alkohli
-ms.translationtype: Human Translation
-ms.sourcegitcommit: f537befafb079256fba0529ee554c034d73f36b0
-ms.openlocfilehash: d7cd31dcb2278284ada6e7ac1d8beab9e1b5b1df
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/08/2017
-
-
+ms.openlocfilehash: 95dbd80e740210c3800a0af10071875a6d6f0939
+ms.sourcegitcommit: 48fce90a4ec357d2fb89183141610789003993d2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/12/2018
 ---
 # <a name="technical-specifications-and-compliance-for-the-storsimple-device"></a>StorSimple 장치에 대한 기술 사양 및 규정 준수
 
@@ -45,7 +43,7 @@ EBOD 엔클로저는 580 W PCM을 사용하며 기본 엔클로저는 764 W PCM�
 | 출력 |5V 대기 전압 @ 2.0A |5V 대기 전압 @ 2.7A |
 | +5V @ 42A |+5V @ 40A | |
 | +12V @ 38A |+12V @ 38A | |
-| 핫 플러그형 |예 |예 |
+| 핫 플러그형 |적용 |적용 |
 | 스위치 및 LED |AC ON/OFF 스위치와 4개의 상태 표시기 LED |AC ON/OFF 스위치와 6개의 상태 표시기 LED |
 | 냉각 엔클로저 |가변 팬 속도 제어를 사용한 냉각팬 축 |가변 팬 속도 제어를 사용한 냉각팬 축 |
 
@@ -74,15 +72,15 @@ StorSimple 장치에는 8100 및 8600에 대한 하드 디스크 드라이브 �
 | --- | --- | --- |
 | HDD(하드 디스크 드라이브)의 수 |8 |19 |
 | SSD(반도체 드라이브)의 수 |4 |5 |
-| 단일 HDD 용량 |4TB |4TB |
-| 단일 SSD 용량 |400GB |800GB |
-| 예비 용량 |4TB |4TB |
+| 단일 HDD 용량 |4 TB |4TB |
+| 단일 SSD 용량 |400 GB |800GB |
+| 예비 용량 |4 TB |4 TB |
 | 사용 가능한 HDD 용량 |14TB |36TB |
 | 사용 가능한 SSD 용량 |800GB |2TB |
 | 총 사용 가능한 용량 * |최대 15TB |최대 38TB |
 | 최대 솔루션 용량(클라우드 포함) |200TB |500TB |
 
-<sup>* </sup>- *총 사용 가능한 용량에는 데이터, 메타데이터 및 버퍼에 사용할 수 있는 용량이 포함됩니다.*
+<sup>* </sup>- *총 사용 가능한 용량에는 데이터, 메타데이터 및 버퍼에 사용할 수 있는 용량이 포함됩니다. 로컬로 고정된 볼륨을 8100 장치에서는 최대 8.5TB, 더 큰 8600 장치에서는 최대 22.5TB까지 프로비전할 수 있습니다. 자세한 내용은 [StorSimple 로컬로 고정된 볼륨](storsimple-8000-local-volume-faq.md)을 참조하세요.*
 
 ## <a name="enclosure-dimensions-and-weight-specifications"></a>엔클로저 차원과 가중치 사양
 
@@ -198,5 +196,4 @@ Microsoft Azure StorSimple 장치는 다음 EMC 등급을 만족합니다.
 ## <a name="next-steps"></a>다음 단계
 
 이제 데이터 센터에 StorSimple 장치를 배포할 준비가 되었습니다. 자세한 내용은 [온-프레미스 장치 배포](storsimple-8000-deployment-walkthrough-u2.md)를 참조하세요.
-
 

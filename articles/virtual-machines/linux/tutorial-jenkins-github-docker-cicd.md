@@ -1,30 +1,30 @@
 ---
-title: "Azure에서 Jenkins를 사용하여 개발 파이프라인 만들기 | Microsoft Docs"
-description: "각 코드 커밋의 GitHub에서 가져오고 앱을 실행하기 위해 새 Docker 컨테이너를 빌드하는 Azure에서 Jenkins 가상 컴퓨터를 만드는 방법을 알아봅니다."
+title: 자습서 - Azure에서 Jenkins를 사용하여 개발 파이프라인 만들기 | Microsoft Docs
+description: 자습서 - 이 자습서에서는 각 코드 커밋의 GitHub에서 가져오고 앱을 실행하기 위해 새 Docker 컨테이너를 빌드하는 Azure에서 Jenkins 가상 머신을 만드는 방법을 알아봅니다.
 services: virtual-machines-linux
 documentationcenter: virtual-machines
 author: iainfoulds
-manager: timlt
+manager: jeconnoc
 editor: tysonn
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-machines-linux
 ms.devlang: na
-ms.topic: article
+ms.topic: tutorial
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 05/08/2017
+ms.date: 03/27/2017
 ms.author: iainfou
 ms.custom: mvc
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 1e6f2b9de47d1ce84c4043f5f6e73d462e0c1271
-ms.openlocfilehash: b606d2c3070f8020cdd9aad3f12f8f1e43125138
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/21/2017
-
+ms.openlocfilehash: f50555775d369da7cf9321d5493bf4e1d84a7bf2
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
+ms.locfileid: "34211194"
 ---
+# <a name="tutorial-create-a-development-infrastructure-on-a-linux-vm-in-azure-with-jenkins-github-and-docker"></a>자습서 - Jenkins, GitHub 및 Docker를 사용하여 Azure에서 Linux VM의 개발 인프라 만들기
 
-# <a name="how-to-create-a-development-infrastructure-on-a-linux-vm-in-azure-with-jenkins-github-and-docker"></a>Jenkins, GitHub 및 Docker를 사용하여 Azure에서 Linux VM의 개발 인프라를 만드는 방법
 응용 프로그램 개발의 빌드 및 테스트 단계를 자동화하려면 CI/CD(연속 통합 및 배포) 파이프라인을 사용할 수 있습니다. 이 자습서에서는 Azure VM에서 CI/CD 파이프라인을 만들며 다음 방법이 포함됩니다.
 
 > [!div class="checklist"]
@@ -35,15 +35,14 @@ ms.lasthandoff: 06/21/2017
 > * 앱에 대한 Docker 이미지 만들기
 > * 새 Docker 이미지를 빌드한 GitHub 커밋 및 앱을 실행하는 업데이트 확인
 
-
 [!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
 
-CLI를 로컬로 설치하여 사용하도록 선택한 경우 이 자습서에서 Azure CLI 버전 2.0.4 이상을 실행해야 합니다. `az --version`을 실행하여 버전을 찾습니다. 설치 또는 업그레이드해야 하는 경우 [Azure CLI 2.0 설치]( /cli/azure/install-azure-cli)를 참조하세요. 
+CLI를 로컬로 설치하여 사용하도록 선택한 경우 이 자습서에서 Azure CLI 버전 2.0.30 이상을 실행해야 합니다. `az --version`을 실행하여 버전을 찾습니다. 설치 또는 업그레이드해야 하는 경우 [Azure CLI 2.0 설치]( /cli/azure/install-azure-cli)를 참조하세요.
 
 ## <a name="create-jenkins-instance"></a>Jenkins 인스턴스 만들기
-[처음 부팅 시 Linux 가상 컴퓨터를 사용자 지정하는 방법](tutorial-automate-vm-deployment.md)에 대한 이전 자습서에서 cloud-init를 사용하여 VM 사용자 지정을 자동화하는 방법을 배웠습니다. 이 자습서는 cloud-init 파일을 사용하여 VM에 Jenkins 및 Docker를 설치합니다. 
+[처음 부팅 시 Linux 가상 머신을 사용자 지정하는 방법](tutorial-automate-vm-deployment.md)에 대한 이전 자습서에서 cloud-init를 사용하여 VM 사용자 지정을 자동화하는 방법을 배웠습니다. 이 자습서는 cloud-init 파일을 사용하여 VM에 Jenkins 및 Docker를 설치합니다. 널리 사용되는 오픈 소스 자동화 서버인 Jenkins는 Azure와 원활하게 통합되어 CI(지속적인 통합) 및 CD(지속적인 업데이트)를 지원합니다. Jenkins 사용 방법에 대한 자세한 자습서는 [Jenkins Azure Hub](https://docs.microsoft.com/azure/jenkins/)를 참조하세요.
 
-*cloud-init-jenkins.txt*라는 cloud-init 파일을 만들고 다음 콘텐츠를 붙여넣습니다.
+현재 셸에서 *cloud-init-jenkins.txt*라는 파일을 만들고 다음 구성을 붙여넣습니다. 예를 들어 로컬 컴퓨터에 없는 Cloud Shell에서 파일을 만듭니다. `sensible-editor cloud-init-jenkins.txt`를 입력하여 파일을 만들고 사용할 수 있는 편집기의 목록을 봅니다. 전체 cloud-init 파일, 특히 첫 줄이 올바르게 복사되었는지 확인합니다.
 
 ```yaml
 #cloud-config
@@ -60,8 +59,9 @@ write_files:
         "hosts": ["fd://","tcp://127.0.0.1:2375"]
       }
 runcmd:
-  - wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
-  - sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+  - apt install default-jre -y
+  - wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
+  - sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
   - apt-get update && apt-get install jenkins -y
   - curl -sSL https://get.docker.com/ | sh
   - usermod -aG docker azureuser
@@ -69,13 +69,13 @@ runcmd:
   - service jenkins restart
 ```
 
-VM을 만들려면 먼저 [az group create](/cli/azure/group#create)를 사용하여 리소스 그룹을 만듭니다. 다음 예제에서는 *eastus* 위치에 *myResourceGroupJenkins*라는 리소스 그룹을 만듭니다.
+VM을 만들려면 먼저 [az group create](/cli/azure/group#az_group_create)를 사용하여 리소스 그룹을 만듭니다. 다음 예제에서는 *eastus* 위치에 *myResourceGroupJenkins*라는 리소스 그룹을 만듭니다.
 
 ```azurecli-interactive 
 az group create --name myResourceGroupJenkins --location eastus
 ```
 
-이제 [az vm create](/cli/azure/vm#create)로 VM을 만듭니다. `--custom-data` 매개 변수를 사용하여 cloud-init 구성 파일을 전달합니다. 현재 작업 디렉터리 외부에 파일을 저장한 경우 *cloud-init-jenkins.txt*에 전체 경로를 제공합니다.
+이제 [az vm create](/cli/azure/vm#az_vm_create)로 VM을 만듭니다. `--custom-data` 매개 변수를 사용하여 cloud-init 구성 파일을 전달합니다. 현재 작업 디렉터리 외부에 파일을 저장한 경우 *cloud-init-jenkins.txt*에 전체 경로를 제공합니다.
 
 ```azurecli-interactive 
 az vm create --resource-group myResourceGroupJenkins \
@@ -88,7 +88,7 @@ az vm create --resource-group myResourceGroupJenkins \
 
 VM을 만들고 구성하는 데 몇 분 정도 걸립니다.
 
-웹 트래픽이 VM에 연결되도록 허용하려면 [az vm open-port](/cli/azure/vm#open-port)를 사용하여 샘플 앱을 실행하는 데 사용되는 Jenkins 트래픽에 대한 포트 *8080* 및 Node.js 앱에 대한 포트 *1337*을 엽니다.
+웹 트래픽이 VM에 연결되도록 허용하려면 [az vm open-port](/cli/azure/vm#az_vm_open_port)를 사용하여 샘플 앱을 실행하는 데 사용되는 Jenkins 트래픽에 대한 포트 *8080* 및 Node.js 앱에 대한 포트 *1337*을 엽니다.
 
 ```azurecli-interactive 
 az vm open-port --resource-group myResourceGroupJenkins --name myVM --port 8080 --priority 1001
@@ -115,66 +115,70 @@ Jenkins 설치를 위해 `initialAdminPassword`를 보고 복사합니다.
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 
+파일을 아직 사용할 수 없는 경우 cloud-init이 Jenkins 및 Docker 설치를 완료할 때까지 몇 분 더 기다립니다.
+
 이제 웹 브라우저를 열고 `http://<publicIps>:8080`으로 이동합니다. 다음과 같이 초기 Jenkins 설치를 완료합니다.
 
-- 이전 단계에서 VM에서 가져온 *initialAdminPassword*를 입력합니다.
-- **설치할 플러그 인 선택**을 클릭합니다.
-- 맨 위에 있는 텍스트 상자에서 *GitHub*를 검색하고 *GitHub 플러그 인*을 선택한 다음, **설치**를 클릭합니다.
-- Jenkins 사용자 계정을 만들려면 원하는 대로 양식을 작성합니다. 보안 관점에서 기본 관리자 계정으로 계속 진행하지 않고 이 첫 번째 Jenkins 사용자를 만들어야 합니다.
-- 완료되면 **Jenkins를 사용하여 시작**을 클릭합니다.
+- **설치할 플러그 인 선택**을 선택합니다.
+- 상단의 텍스트 상자에서 *GitHub*를 검색합니다. *GitHub*에 대한 확인란을 선택한 다음, **설치**를 선택합니다.
+- 첫 번째 관리 사용자를 만듭니다. **admin**과 같은 사용자 이름을 입력한 다음, 고유하고 안전한 암호를 입력합니다. 마지막으로, 전체 이름 및 이메일 주소를 입력합니다.
+- **저장 및 끝내기**를 선택합니다.
+- Jenkins가 준비되면 **Jenkins를 사용하여 시작**을 선택합니다.
+  - Jenkins를 사용하여 시작할 때 웹 브라우저에 빈 페이지가 표시되는 경우 Jenkins 서비스를 다시 시작합니다. SSH 세션에서 `sudo service jenkins restart`를 입력한 다음, 웹 브라우저를 새로 고칩니다.
+- 사용자가 만든 사용자 이름 및 암호를 사용하여 Jenkins에 로그인합니다.
 
 
 ## <a name="create-github-webhook"></a>GitHub 웹후크 만들기
-GitHub를 통해 통합을 구성하려면 Azure 샘플 리포지토리에서 [Node.js 헬로 월드 샘플 앱](https://github.com/Azure-Samples/nodejs-docs-hello-world)을 엽니다. 사용자 고유의 GitHub 계정에 리포지토리를 분기하려면 오른쪽 위 모서리에 있는 **분기** 단추를 클릭합니다.
+GitHub를 통해 통합을 구성하려면 Azure 샘플 리포지토리에서 [Node.js 헬로 월드 샘플 앱](https://github.com/Azure-Samples/nodejs-docs-hello-world)을 엽니다. 사용자 고유의 GitHub 계정에 리포지토리를 분기하려면 오른쪽 위 모서리에 있는 **분기** 단추를 선택합니다.
 
 만든 분기 내부에 웹후크를 만듭니다.
 
-- **설정**을 클릭한 다음 왼쪽에 있는 **통합 및 서비스**를 선택합니다.
-- **서비스 추가**를 클릭한 다음, 필터 상자에 *Jenkins*를 입력합니다.
-- *Jenkins(GitHub 플러그 인)*를 선택합니다.
+- **설정**을 선택한 다음 왼쪽에 있는 **통합 및 서비스**를 선택합니다.
+- **서비스 추가**를 선택한 다음, 필터 상자에 *Jenkins*를 입력합니다.
+- *Jenkins(GitHub 플러그 인)* 를 선택합니다.
 - **Jenkins 후크 URL**의 경우 `http://<publicIps>:8080/github-webhook/`를 입력합니다. 후행 슬래시(/)를 포함해야 합니다.
-- **서비스 추가**를 클릭합니다.
+- **서비스 추가**를 선택합니다.
 
 ![분기된 리포지토리에 GitHub 웹후크 추가](media/tutorial-jenkins-github-docker-cicd/github_webhook.png)
 
 
 ## <a name="create-jenkins-job"></a>Jenkins 작업 만들기
-코드 커밋과 같은 GitHub의 이벤트에 대해 Jenkins가 응답하도록 하려면 Jenkins 작업을 만듭니다. 
+코드 커밋과 같은 GitHub의 이벤트에 대해 Jenkins가 응답하도록 하려면 Jenkins 작업을 만듭니다. 사용자 고유의 GitHub 포크에 대한 URL을 사용합니다.
 
-Jenkins 웹 사이트에서 홈 페이지에서 **새 작업 만들기**를 클릭합니다.
+Jenkins 웹 사이트에서 홈 페이지에서 **새 작업 만들기**를 선택합니다.
 
-- *HelloWorld*를 작업 이름으로 입력합니다. **프리스타일 프로젝트**를 선택한 다음 **확인**을 클릭합니다.
-- **일반** 섹션에서 **GitHub** 프로젝트를 선택하고 *https://github.com/iainfoulds/nodejs-docs-hello-world*와 같은 분기된 리포지토리 URL을 입력합니다.
-- **원본 코드 관리** 섹션에서 **Git**을 선택하고 *https://github.com/iainfoulds/nodejs-docs-hello-world.git*과 같은 분기된 리포지토리 *.git* URL을 입력합니다.
+- *HelloWorld*를 작업 이름으로 입력합니다. **프리스타일 프로젝트**를 선택한 다음 **확인**을 선택합니다.
+- **일반** 섹션에서 **GitHub 프로젝트**를 선택하고 *https://github.com/iainfoulds/nodejs-docs-hello-world*와 같은 포크된 리포지토리 URL을 입력합니다.
+- **소스 코드 관리** 섹션에서 **Git**을 선택하고 *https://github.com/iainfoulds/nodejs-docs-hello-world.git*과 같은 포크된 리포지토리 *.git* URL을 입력합니다.
 - **트리거 빌드**에서 **GITscm 폴링에 대한 GitHub 후크 트리거**를 선택합니다.
-- **빌드** 섹션에서 **빌드 단계 추가**를 클릭합니다. **셸 실행**을 선택한 다음, `echo "Testing"`을 명령 창에 입력합니다.
-- 작업 창 맨 아래에서 **저장**을 클릭합니다.
+- **빌드** 섹션 아래에서 **빌드 단계 추가**를 선택합니다. **셸 실행**을 선택한 다음 명령 창에 `echo "Testing"` 명령을 입력합니다.
+- 작업 창 맨 아래에서 **저장**을 선택합니다.
 
 
 ## <a name="test-github-integration"></a>GitHub 통합 테스트
 Jenkins와 GitHub의 통합을 테스트하려면 사용자 분기의 변경 내용을 커밋합니다. 
 
-GitHub 웹 UI로 돌아가서 분기된 리포지토리를 선택한 다음, **index.js** 파일을 클릭합니다. 연필 아이콘을 클릭하여 이 파일을 편집하면 6번 줄은 다음과 같습니다.
+GitHub 웹 UI로 돌아가서 분기된 리포지토리를 선택한 다음, **index.js** 파일을 선택합니다. 연필 아이콘을 선택하여 이 파일을 편집하면 6번 줄은 다음과 같습니다.
 
 ```nodejs
-response.end("Hello World!");`.
+response.end("Hello World!");
 ```
 
-변경 사항을 커밋하려면 맨 아래쪽에 **변경 내용 커밋** 단추를 클릭합니다.
+변경 사항을 커밋하려면 맨 아래쪽에 **변경 내용 커밋** 단추를 선택합니다.
 
-Jenkins에서 작업 페이지의 왼쪽 아래 모서리에 있는 **기록 빌드** 섹션에서 새 빌드가 시작됩니다. 빌드 번호 링크를 클릭하고 왼쪽 크기에 있는 **콘솔 출력**을 선택합니다. 코드가 GitHub에서 로드되면 Jenkins가 수행하는 단계와 콘솔에 메시지 `Testing`을 출력하는 빌드 작업을 확인할 수 있습니다. GitHub에서 커밋이 수행될 때마다 웹후크는 Jenkins에 도달하며, 이 방법으로 새 빌드를 트리거합니다.
+Jenkins에서 작업 페이지의 왼쪽 아래 모서리에 있는 **기록 빌드** 섹션에서 새 빌드가 시작됩니다. 빌드 번호 링크를 선택하고 왼쪽에 있는 **콘솔 출력**을 선택합니다. 코드가 GitHub에서 로드되면 Jenkins가 수행하는 단계와 콘솔에 메시지 `Testing`을 출력하는 빌드 작업을 확인할 수 있습니다. GitHub에서 커밋이 수행될 때마다 웹후크는 Jenkins에 도달하며, 이 방법으로 새 빌드를 트리거합니다.
 
 
 ## <a name="define-docker-build-image"></a>Docker 빌드 이미지 정의
 GitHub 커밋에 기반하여 실행되는 Node.js 앱을 확인하려면 Docker 이미지를 빌드하여 앱을 실행합니다. 이미지는 앱을 실행하는 컨테이너를 구성하는 방법을 정의하는 Dockerfile에서 빌드됩니다. 
 
-SSH 연결부터 VM까지 이전 단계에서 만든 작업 이후에 명명된 Jenkins 작업 영역 디렉터리를 변경합니다. 이 예제에서 *HelloWorld*라고 명명되었습니다.
+SSH 연결부터 VM까지 이전 단계에서 만든 작업 이후에 명명된 Jenkins 작업 영역 디렉터리를 변경합니다. 이 예제에서는 *HelloWorld*라고 명명되었습니다.
 
 ```bash
 cd /var/lib/jenkins/workspace/HelloWorld
 ```
 
-이 작업 영역 디렉터리에 `Dockerfile`이라는 파일을 만들고 다음 콘텐츠를 붙여넣습니다.
+`sudo sensible-editor Dockerfile`을 사용하여 이 작업 영역 디렉터리에 파일을 만들고 다음 콘텐츠를 붙여넣습니다. 전체 Dockerfile, 특히 첫 줄이 올바르게 복사되었는지 확인합니다.
 
 ```yaml
 FROM node:alpine
@@ -193,11 +197,11 @@ COPY index.js /var/www/
 ## <a name="create-jenkins-build-rules"></a>Jenkins 빌드 규칙 만들기
 이전 단계에서 콘솔에 메시지를 출력하는 기본 Jenkins 빌드 규칙을 만들었습니다. Dockerfile을 사용하고 앱을 실행하는 빌드 단계를 만들겠습니다.
 
-Jenkins 인스턴스로 돌아가서 이전 단계에서 만든 작업을 선택합니다. 왼쪽에 있는 **구성**을 클릭하고 **빌드** 섹션까지 아래로 스크롤합니다.
+Jenkins 인스턴스로 돌아가서 이전 단계에서 만든 작업을 선택합니다. 왼쪽에 있는 **구성**을 선택하고 **빌드** 섹션까지 아래로 스크롤합니다.
 
-- 기존 `echo "Test"` 빌드 단계를 제거합니다. 기존 빌드 단계 상자의 오른쪽 위 모서리에 있는 빨간색 십자가를 클릭합니다.
-- **빌드 단계 추가**를 클릭한 다음, **셸 실행**을 선택합니다.
-- **명령** 상자에서 다음 Docker 명령을 입력합니다.
+- 기존 `echo "Test"` 빌드 단계를 제거합니다. 기존 빌드 단계 상자의 오른쪽 위 모서리에 있는 빨간색 십자가를 선택합니다.
+- **빌드 단계 추가**를 선택한 다음, **셸 실행**을 선택합니다.
+- **명령** 상자에서 다음 Docker 명령을 입력한 다음 **저장**을 선택합니다.
 
   ```bash
   docker build --tag helloworld:$BUILD_NUMBER .
@@ -209,7 +213,7 @@ Docker 빌드 단계는 이미지를 만들고, 이미지에 대한 기록을 �
 
 
 ## <a name="test-your-pipeline"></a>파이프라인 테스트
-전체 파이프라인의 실제 동작을 확인하려면 분기된 GitHub 리포지토리에서 다시 *index.js* 파일을 편집하고 **변경 내용 커밋**을 클릭합니다. GitHub에 대한 웹후크에 기반하는 Jenkins에서 새 작업이 시작됩니다. Docker 이미지를 만들고 새 컨테이너에서 앱을 시작하는 데는 몇 초가 걸립니다.
+전체 파이프라인의 실제 동작을 확인하려면 분기된 GitHub 리포지토리에서 다시 *index.js* 파일을 편집하고 **변경 내용 커밋**을 선택합니다. GitHub에 대한 웹후크에 기반하는 Jenkins에서 새 작업이 시작됩니다. Docker 이미지를 만들고 새 컨테이너에서 앱을 시작하는 데는 몇 초가 걸립니다.
 
 필요한 경우 다시 VM의 공용 IP 주소를 가져옵니다.
 
@@ -237,7 +241,7 @@ az vm show --resource-group myResourceGroupJenkins --name myVM -d --query [publi
 > * 앱에 대한 Docker 이미지 만들기
 > * 새 Docker 이미지를 빌드한 GitHub 커밋 및 앱을 실행하는 업데이트 확인
 
-미리 빌드된 가상 컴퓨터 스크립트 샘플을 보려면 이 링크를 따릅니다.
+Visual Studio Team Services와 Jenkins를 통합하는 방법에 대한 자세한 내용을 보려면 다음 자습서로 이동합니다.
 
 > [!div class="nextstepaction"]
-> [Linux 가상 컴퓨터 스크립트 샘플](./cli-samples.md)
+> [Jenkins 및 Team Services를 사용하여 앱 배포](tutorial-build-deploy-jenkins.md)

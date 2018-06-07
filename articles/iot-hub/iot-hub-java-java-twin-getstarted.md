@@ -1,11 +1,11 @@
 ---
-title: "Azure IoT Hub 장치 쌍 시작(Java) | Microsoft Docs"
-description: "Azure IoT Hub 장치 쌍을 사용하여 태그를 추가한 다음 IoT Hub 쿼리를 사용하는 방법입니다. Java용 Azure IoT 장치 SDK를 사용하여 장치 앱을 구현하고 Java용 Azure IoT 서비스 SDK를 사용하여 태그를 추가하고 IoT Hub 쿼리를 실행하는 서비스 앱을 구현합니다."
+title: Azure IoT Hub 장치 쌍 시작(Java) | Microsoft Docs
+description: Azure IoT Hub 장치 쌍을 사용하여 태그를 추가한 다음 IoT Hub 쿼리를 사용하는 방법입니다. Java용 Azure IoT 장치 SDK를 사용하여 장치 앱을 구현하고 Java용 Azure IoT 서비스 SDK를 사용하여 태그를 추가하고 IoT Hub 쿼리를 실행하는 서비스 앱을 구현합니다.
 services: iot-hub
 documentationcenter: java
 author: dominicbetts
 manager: timlt
-editor: 
+editor: ''
 ms.service: iot-hub
 ms.devlang: java
 ms.topic: article
@@ -13,12 +13,11 @@ ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 07/04/2017
 ms.author: dobett
+ms.openlocfilehash: 8611b55f6e4f33f8946d8c7c481163166d24049c
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 3269cb65cfb59258d761f4c60278c598bc251325
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="get-started-with-device-twins-java"></a>장치 쌍 시작(Java)
 
@@ -36,13 +35,11 @@ ms.lasthandoff: 07/21/2017
 
 * 최신 [Java SE Development Kit 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [Maven 3](https://maven.apache.org/install.html)
-* 활성 Azure 계정. (계정이 없는 경우 몇 분 만에 [무료 계정](http://azure.microsoft.com/pricing/free-trial/)을 만들 수 있습니다.)
+* 활성 Azure 계정. 계정이 없는 경우 몇 분 만에 [무료 계정](http://azure.microsoft.com/pricing/free-trial/)을 만들 수 있습니다.
 
 [!INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
 
 [!INCLUDE [iot-hub-get-started-create-device-identity-portal](../../includes/iot-hub-get-started-create-device-identity-portal.md)]
-
-프로그래밍 방식으로 장치 ID를 만들려면 [Java를 사용하여 IoT 허브에 장치 연결](iot-hub-java-java-getstarted.md#create-a-device-identity) 문서의 해당 섹션을 참조하세요.
 
 ## <a name="create-the-service-app"></a>서비스 응용 프로그램 만들기
 
@@ -56,13 +53,13 @@ ms.lasthandoff: 07/21/2017
 
 1. 명령 프롬프트에서 `add-tags-query` 폴더로 이동합니다.
 
-1. 텍스트 편집기를 사용하여 `add-tags-query` 폴더에서 `pom.xml` 파일을 열고 **종속성** 노드에 다음 종속성을 추가합니다. 이러한 종속성을 통해 IoT 허브와 통신하도록 앱에서 **iot-service-client** 패키지를 사용할 수 있습니다.
+1. 텍스트 편집기를 사용하여 `add-tags-query` 폴더에서 `pom.xml` 파일을 열고 **종속성** 노드에 다음 종속성을 추가합니다. 이러한 종속성을 통해 IoT Hub와 통신하도록 앱에서 **iot-service-client** 패키지를 사용할 수 있습니다.
 
     ```xml
     <dependency>
       <groupId>com.microsoft.azure.sdk.iot</groupId>
       <artifactId>iot-service-client</artifactId>
-      <version>1.5.22</version>
+      <version>1.7.23</version>
       <type>jar</type>
     </dependency>
     ```
@@ -219,7 +216,7 @@ ms.lasthandoff: 07/21/2017
     <dependency>
       <groupId>com.microsoft.azure.sdk.iot</groupId>
       <artifactId>iot-device-client</artifactId>
-      <version>1.3.30</version>
+      <version>1.3.32</version>
     </dependency>
     ```
 
@@ -267,7 +264,7 @@ ms.lasthandoff: 07/21/2017
     private static String deviceId = "myDeviceId";
     ```
 
-    이 샘플 앱은 **DeviceClient** 개체를 인스턴스화할 때 **프로토콜** 변수를 사용합니다. 현재, 장치 쌍 기능을 사용하려면 MQTT 프로토콜을 사용해야 합니다.
+    이 샘플 앱은 **DeviceClient** 개체를 인스턴스화할 때 **프로토콜** 변수를 사용합니다. 
 
 1. **main** 메서드에 다음 코드를 추가합니다.
     * IoT Hub와 통신하는 장치 클라이언트를 만듭니다.
@@ -366,4 +363,3 @@ ms.lasthandoff: 07/21/2017
 
 <!-- Links -->
 [lnk-hub-sdks]: iot-hub-devguide-sdks.md
-

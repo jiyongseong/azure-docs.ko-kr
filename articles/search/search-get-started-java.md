@@ -1,36 +1,29 @@
 ---
-title: "Java에서 Azure 검색 시작 | Microsoft Docs"
-description: "Java를 프로그래밍 언어로 사용하여 Azure에서 호스트된 클라우드 검색 응용 프로그램을 빌드하는 방법입니다."
+title: Java에서 Azure Search 시작 | Microsoft Docs
+description: Java를 프로그래밍 언어로 사용하여 Azure에서 호스트된 클라우드 검색 응용 프로그램을 빌드하는 방법입니다.
 services: search
-documentationcenter: 
-author: EvanBoyle
-manager: pablocas
-editor: v-lincan
-ms.assetid: 8b4df3c9-3ae5-4e3a-b4bb-74b516a91c8e
+author: jj09
+manager: jlembicz
 ms.service: search
-ms.devlang: na
-ms.workload: search
-ms.topic: hero-article
-ms.tgt_pltfrm: na
+ms.topic: conceptual
 ms.date: 07/14/2016
-ms.author: evboyle
-translationtype: Human Translation
-ms.sourcegitcommit: 503f5151047870aaf87e9bb7ebf2c7e4afa27b83
-ms.openlocfilehash: f6ca06a0349def97b38a1bf6d0d8f36236077e92
-ms.lasthandoff: 03/29/2017
-
-
+ms.author: jjed
+ms.openlocfilehash: d95abab1d1a489deba2ebc260e1e32963aa5639e
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
-# <a name="get-started-with-azure-search-in-java"></a>Java에서 Azure 검색 시작
+# <a name="get-started-with-azure-search-in-java"></a>Java에서 Azure Search 시작
 > [!div class="op_single_selector"]
 > * [포털](search-get-started-portal.md)
 > * [.NET](search-howto-dotnet-sdk.md)
 > 
 > 
 
-검색 환경에 Azure 검색을 사용하는 사용자 지정 Java 검색 응용 프로그램을 빌드하는 방법에 대해 알아봅니다. 이 자습서에서는 [Azure 검색 서비스 REST API](https://msdn.microsoft.com/library/dn798935.aspx) 를 사용하여 이 연습에서 사용되는 개체 및 작업을 생성합니다.
+검색 환경에 Azure Search를 사용하는 사용자 지정 Java 검색 응용 프로그램을 빌드하는 방법에 대해 알아봅니다. 이 자습서에서는 [Azure Search 서비스 REST API](https://msdn.microsoft.com/library/dn798935.aspx)를 사용하여 이 연습에서 사용되는 개체 및 작업을 생성합니다.
 
-이 샘플을 실행하려면 [Azure 포털](https://portal.azure.com)에서 등록할 수 있는 Azure 검색 서비스가 있어야 합니다. 단계별 지침은 [포털에서 Azure 검색 서비스 만들기](search-create-service-portal.md) 를 참조하세요.
+이 샘플을 실행하려면 [Azure Portal](https://portal.azure.com)에서 등록할 수 있는 Azure Search 서비스가 있어야 합니다. 단계별 지침은 [포털에서 Azure Search 서비스 만들기](search-create-service-portal.md)를 참조하세요.
 
 이 샘플을 빌드 및 테스트하는 데 사용된 소프트웨어는 다음과 같습니다.
 
@@ -41,7 +34,7 @@ ms.lasthandoff: 03/29/2017
 ## <a name="about-the-data"></a>데이터 정보
 이 샘플 응용 프로그램에서는 데이터 집합 크기를 줄이기 위해 Rhode Island 주에 대해 필터링된 [USGS(United States Geological Services)](http://geonames.usgs.gov/domestic/download_data.htm)의 데이터를 사용합니다. 이 데이터를 사용하여 병원 및 학교와 같은 랜드마크 빌딩뿐만 아니라 강, 호수, 산 등의 지질학적 특징을 반환하는 검색 응용 프로그램을 빌드합니다.
 
-이 응용 프로그램에서 **SearchServlet.java** 프로그램은 [Indexer](https://msdn.microsoft.com/library/azure/dn798918.aspx) 구문을 사용하여 인덱스를 빌드 및 로드하며, 이를 통해 Azure SQL 데이터베이스에서 필터링된 USGS 데이터 집합을 검색합니다. 온라인 데이터 원본에 대한 미리 정의된 자격 증명 및 연결 정보는 프로그램 코드에서 제공됩니다. 데이터 액세스 측면에서 추가 구성은 필요하지 않습니다.
+이 응용 프로그램에서 **SearchServlet.java** 프로그램은 [Indexer](https://msdn.microsoft.com/library/azure/dn798918.aspx) 구문을 사용하여 인덱스를 빌드 및 로드하며, 이를 통해 Azure SQL Database에서 필터링된 USGS 데이터 집합을 검색합니다. 온라인 데이터 원본에 대한 미리 정의된 자격 증명 및 연결 정보는 프로그램 코드에서 제공됩니다. 데이터 액세스 측면에서 추가 구성은 필요하지 않습니다.
 
 > [!NOTE]
 > 무료 가격 책정 계층의 문서 제한(10,000개) 미만으로 유지하기 위해 이 데이터 집합에 필터를 적용했습니다. 표준 계층을 사용하는 경우에는 이 제한이 적용되지 않으며 이 코드를 수정하여 더 큰 데이터 집합을 사용할 수 있습니다. 각 가격 책정 계층의 용량에 대한 자세한 내용은 [제한 및 제약 조건](search-limits-quotas-capacity.md)을 참조하세요.
@@ -56,16 +49,16 @@ ms.lasthandoff: 03/29/2017
 * SearchServiceClient.java: HTTP 요청을 처리합니다.
 * SearchServiceHelper.java: 정적 메서드를 제공하는 도우미 클래스입니다.
 * Document.java: 데이터 모델을 제공합니다.
-* config.properties: 검색 서비스 URL 및 api-key를 설정합니다.
+* config.properties: Search 서비스 URL 및 api-key를 설정합니다.
 * Pom.xml: Maven 종속성입니다.
 
 <a id="sub-2"></a>
 
-## <a name="find-the-service-name-and-api-key-of-your-azure-search-service"></a>Azure 검색 서비스의 서비스 이름 및 api-key 찾기
-Azure 검색에 대한 모든 REST API 호출에는 서비스 URL 및 api-key를 제공해야 합니다. 
+## <a name="find-the-service-name-and-api-key-of-your-azure-search-service"></a>Azure Search 서비스의 서비스 이름 및 api-key 찾기
+Azure Search에 대한 모든 REST API 호출에는 서비스 URL 및 api-key를 제공해야 합니다. 
 
-1. [Azure 포털](https://portal.azure.com)에 로그인합니다.
-2. 점프 모음에서 **검색 서비스** 를 클릭하여 구독에 프로비전된 Azure 검색 서비스를 모두 나열합니다.
+1. [Azure Portal](https://portal.azure.com)에 로그인합니다.
+2. 점프 모음에서 **Search 서비스**를 클릭하여 구독에 프로비전된 Azure Search 서비스를 모두 나열합니다.
 3. 사용하려는 서비스를 선택합니다.
 4. 서비스 대시보드에 필수 정보에 대한 타일 및 관리 키에 액세스할 수 있는 키 아이콘이 표시됩니다.
    
@@ -73,7 +66,7 @@ Azure 검색에 대한 모든 REST API 호출에는 서비스 URL 및 api-key를
 5. 서비스 URL 및 관리 키를 복사합니다. 나중에 **config.properties** 파일에 추가할 때 필요합니다.
 
 ## <a name="download-the-sample-files"></a>샘플 파일 다운로드
-1. GitHub의 [AzureSearchJavaDemo](https://github.com/AzureSearch/AzureSearchJavaIndexerDemo)로 이동합니다.
+1. GitHub에서 [search-java-indexer-demo](https://github.com/Azure-Samples/search-java-indexer-demo)로 이동합니다.
 2. **Download ZIP**을 클릭하고 .zip 파일을 디스크에 저장한 다음 포함된 모든 파일을 추출합니다. 나중에 프로젝트를 쉽게 찾을 수 있도록 Java 작업 영역에 파일을 추출하는 것이 좋습니다.
 3. 샘플 파일은 읽기 전용입니다. 폴더 속성을 마우스 오른쪽 단추로 클릭하고 읽기 전용 특성을 지웁니다.
 
@@ -86,13 +79,13 @@ Azure 검색에 대한 모든 REST API 호출에는 서비스 URL 및 api-key를
 2. **Select root directory**에서 샘플 파일이 들어 있는 폴더를 찾습니다. .project 폴더가 포함된 폴더를 선택합니다. **Projects** 목록에 선택한 항목으로 프로젝트가 표시됩니다.
    
     ![][12]
-3. **마침**을 클릭합니다.
+3. **Finish**를 클릭합니다.
 4. **Project Explorer** 를 사용하여 파일을 보고 편집합니다. 아직 열지 않은 경우 **Window** > **Show View** > **Project Explorer**를 클릭하거나 바로 가기를 사용하여 엽니다.
 
 ## <a name="configure-the-service-url-and-api-key"></a>서비스 URL 및 api-key 구성
 1. **Project Explorer**에서 **config.properties**를 두 번 클릭하여 서버 이름 및 api-key가 포함된 구성 설정을 편집합니다.
-2. 이 문서의 이전 단계를 참조하여 [config.properties](https://portal.azure.com)에 입력할 값을 가져오도록 **Azure 포털**에서 서비스 URL 및 api-key를 찾습니다.
-3. **config.properties**에서 "Api Key"를 서비스의 api-key로 바꿉니다. 그러면 서비스 이름(URL http://servicename.search.windows.net의 첫 번째 구성 요소)이 동일한 파일의 "service name"을 대체합니다.
+2. 이 문서의 이전 단계를 참조하여 [config.properties](https://portal.azure.com)에 입력할 값을 가져오도록 **Azure Portal**에서 서비스 URL 및 api-key를 찾습니다.
+3. **config.properties**에서 "Api Key"를 서비스의 api-key로 바꿉니다. 다음으로 서비스 이름(URL http://servicename.search.windows.net)의 첫 번째 구성 요소)이 같은 파일의 “서비스 이름"을 대체합니다.
    
     ![][5]
 
@@ -102,16 +95,15 @@ Azure 검색에 대한 모든 REST API 호출에는 서비스 URL 및 api-key를
    
     ![][6]
 3. **Apply**를 클릭합니다.
-4. <seg>
-  **Window** > **Preferences** > **Server** > **Runtime Environments** > **Add..**를 선택합니다.</seg>
+4. **Window** > **Preferences** > **Server** > **Runtime Environments** > **Add..** 를 선택합니다.
 5. Apache를 확장하고 이전에 설치한 Apache Tomcat 서버의 버전을 선택합니다. 예제 시스템에는 버전 8이 설치되어 있습니다.
    
     ![][7]
 6. 다음 페이지에서 Tomcat 설치 디렉터리를 지정합니다. Windows 컴퓨터의 경우 일반적으로 C:\Program Files\Apache Software Foundation\Tomcat *버전*입니다.
-7. **마침**을 클릭합니다.
+7. **Finish**를 클릭합니다.
 8. **Window** > **Preferences** > **Java** > **Installed JREs** > **Add**를 선택합니다.
 9. **Add JRE**에서 **Standard VM**을 선택합니다.
-10. **Next**를 클릭합니다.
+10. **다음**을 클릭합니다.
 11. JRE 정의의 JRE 홈에서 **Directory**를 클릭합니다.
 12. **Program Files** > **Java**로 이동하여 이전에 설치한 JDK를 선택합니다. JDK를 JRE로 선택해야 합니다.
 13. Installed JREs에서 **JDK**를 선택합니다. 설정은 다음 스크린샷과 유사해야 합니다.
@@ -124,7 +116,7 @@ Azure 검색에 대한 모든 REST API 호출에는 서비스 URL 및 api-key를
 이제 구성 작업을 완료했습니다. 다음으로, 프로젝트를 빌드 및 실행합니다.
 
 ## <a name="build-the-project"></a>프로젝트 빌드
-1. Project Explorer에서 프로젝트 이름을 마우스 오른쪽 단추로 클릭하고 **Run As** > **Maven build...**를 선택하여 프로젝트를 구성합니다.
+1. Project Explorer에서 프로젝트 이름을 마우스 오른쪽 단추로 클릭하고 **Run As** > **Maven build...** 를 선택하여 프로젝트를 구성합니다.
    
     ![][10]
 2. Edit Configuration에서 Goals에 "clean install"을 입력하고 **Run**을 클릭합니다.
@@ -162,11 +154,11 @@ USGS 데이터 집합에는 Rhode Island 주와 관련된 레코드가 포함되
 * goose +cape
 
 ## <a name="next-steps"></a>다음 단계
-이것은 Java 및 USGS 데이터 집합을 기반으로 하는 첫 번째 Azure 검색 자습서입니다. 앞으로 이 자습서를 확장하여 사용자 지정 솔루션에서 사용할 수 있는 추가 검색 기능을 보여 드릴 예정입니다.
+이것은 Java 및 USGS 데이터 집합을 기반으로 하는 첫 번째 Azure Search 자습서입니다. 앞으로 이 자습서를 확장하여 사용자 지정 솔루션에서 사용할 수 있는 추가 검색 기능을 보여 드릴 예정입니다.
 
-Azure 검색에 대한 약간의 배경 지식이 있는 경우 [검색 페이지](search-pagination-page-layout.md)를 보강하거나 [패싯 탐색](search-faceted-navigation.md)을 구현하는 등 이 샘플을 기반으로 추가 실험을 수행할 수 있습니다. 또한 사용자가 결과 페이지를 차례로 탐색할 수 있도록 개수를 추가하고 문서를 일괄 처리하여 검색 결과 페이지를 개선할 수 있습니다.
+Azure Search에 대한 약간의 배경 지식이 있는 경우 [검색 페이지](search-pagination-page-layout.md)를 보강하거나 [패싯 탐색](search-faceted-navigation.md)을 구현하는 등 이 샘플을 기반으로 추가 실험을 수행할 수 있습니다. 또한 사용자가 결과 페이지를 차례로 탐색할 수 있도록 개수를 추가하고 문서를 일괄 처리하여 검색 결과 페이지를 개선할 수 있습니다.
 
-Azure 검색을 처음 사용하세요? 다른 자습서를 통해 만들 수 있는 항목에 대한 이해를 높여 보세요. 더 많은 리소스를 보려면 [설명서 페이지](https://azure.microsoft.com/documentation/services/search/) 를 방문하세요. [비디오 및 자습서](search-video-demo-tutorial-list.md) 의 링크를 통해 추가 정보를 확인할 수도 있습니다.
+Azure Search를 처음 사용하세요? 다른 자습서를 통해 만들 수 있는 항목에 대한 이해를 높여 보세요. 더 많은 리소스를 보려면 [설명서 페이지](https://azure.microsoft.com/documentation/services/search/) 를 방문하세요. [비디오 및 자습서](search-video-demo-tutorial-list.md) 의 링크를 통해 추가 정보를 확인할 수도 있습니다.
 
 <!--Image references-->
 [1]: ./media/search-get-started-java/create-search-portal-1.PNG
@@ -181,4 +173,3 @@ Azure 검색을 처음 사용하세요? 다른 자습서를 통해 만들 수 �
 [10]: ./media/search-get-started-java/AzSearch-Java-BuildProject1.PNG
 [11]: ./media/search-get-started-java/rogerwilliamsschool1.PNG
 [12]: ./media/search-get-started-java/AzSearch-Java-SelectProject.png
-

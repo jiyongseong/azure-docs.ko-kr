@@ -1,10 +1,10 @@
 ---
-title: "iOS 모바일 앱으로 오프라인 동기화 사용 | Microsoft Docs"
-description: "Azure App Service Mobile Apps를 사용하여 iOS 응용 프로그램에서 오프라인 데이터를 캐시 및 동기화하는 방법을 알아봅니다."
+title: iOS 모바일 앱으로 오프라인 동기화 사용 | Microsoft Docs
+description: Azure App Service Mobile Apps를 사용하여 iOS 응용 프로그램에서 오프라인 데이터를 캐시 및 동기화하는 방법을 알아봅니다.
 documentationcenter: ios
-author: ggailey777
-manager: syntaxc4
-editor: 
+author: conceptdev
+manager: crdun
+editor: ''
 services: app-service\mobile
 ms.assetid: eb5b9520-0f39-4a09-940a-dadb6d940db8
 ms.service: app-service-mobile
@@ -13,13 +13,12 @@ ms.tgt_pltfrm: mobile-ios
 ms.devlang: objective-c
 ms.topic: article
 ms.date: 10/01/2016
-ms.author: glenga
-ms.translationtype: Human Translation
-ms.sourcegitcommit: dc5f98fd548512801c705f942e30df5e6b95d542
-ms.openlocfilehash: 3271db005133bd7849b8a33dd7fa8f11bf5a29c2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/31/2017
-
+ms.author: crdun
+ms.openlocfilehash: 2f415f1886c654f3bdd880cdccaadc7aa3e69892
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
 # <a name="enable-offline-syncing-with-ios-mobile-apps"></a>iOS 모바일 앱으로 오프라인 동기화 사용
 [!INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
@@ -27,7 +26,7 @@ ms.lasthandoff: 01/31/2017
 ## <a name="overview"></a>개요
 이 자습서는 iOS용 Azure App Service의 Mobile Apps 기능을 사용한 오프라인 동기화를 설명합니다. 오프라인 동기화를 사용하면 네트워크에 연결되지 않은 경우에도 최종 사용자가 모바일 앱을 사용하여 데이터를 보거나, 추가하거나 수정할 수 있습니다. 변경 내용은 로컬 데이터베이스에 저장됩니다. 장치가 다시 온라인 상태가 되면 변경 내용이 원격 백 엔드와 동기화됩니다.
 
-Mobile Apps를 처음 사용하는 경우, 먼저 [iOS 앱 만들기]자습서를 완료해야 합니다. 다운로드한 빠른 시작 서버 프로젝트를 사용하지 않는 경우 프로젝트에 데이터 액세스 확장 패키지를 추가해야 합니다. 서버 확장 패키지에 대한 자세한 내용은 [Azure 모바일 앱용 .NET 백 엔드 서버 SDK 사용](app-service-mobile-dotnet-backend-how-to-use-server-sdk.md)을 참조하세요.
+Mobile Apps를 처음 사용하는 경우, 먼저 [iOS 앱 만들기]자습서를 완료해야 합니다. 다운로드한 빠른 시작 서버 프로젝트를 사용하지 않는 경우 프로젝트에 데이터 액세스 확장 패키지를 추가해야 합니다. 서버 확장 패키지에 대한 자세한 내용은 [Azure Mobile Apps용 .NET 백 엔드 서버 SDK 사용](app-service-mobile-dotnet-backend-how-to-use-server-sdk.md)을 참조하세요.
 
 오프라인 동기화 기능에 대해 자세히 알아보려면 [Mobile Apps에서 오프라인 데이터 동기화]를 참조하세요.
 
@@ -159,12 +158,12 @@ Swift 앱은 사용자가 새로 고침 제스처를 수행할 때 및 시작 �
 
 ![MS_TableOperations 테이블 특성][defining-core-data-tableoperations-entity]
 
-| 특성 | 형식 |
+| 특성 | type |
 | --- | --- |
 | id | 정수 64 |
-| itemId | String |
+| itemId | 문자열 |
 | properties | 이진 데이터 |
-| 테이블 | String |
+| 테이블 | 문자열 |
 | tableKind | 정수 16 |
 
 
@@ -172,7 +171,7 @@ Swift 앱은 사용자가 새로 고침 제스처를 수행할 때 및 시작 �
 
  ![MS_TableOperationErrors 테이블 특성][defining-core-data-tableoperationerrors-entity]
 
-| 특성 | 형식 |
+| 특성 | type |
 | --- | --- |
 | id |문자열 |
 | operationId |정수 64 |
@@ -183,26 +182,26 @@ Swift 앱은 사용자가 새로 고침 제스처를 수행할 때 및 시작 �
 
  ![][defining-core-data-tableconfig-entity]
 
-| 특성 | 형식 |
+| 특성 | type |
 | --- | --- |
 | id |문자열 |
-| key |String |
+| key |문자열 |
 | keyType |정수 64 |
-| 테이블 |String |
+| 테이블 |문자열 |
 | 값 |문자열 |
 
 ### <a name="data-table"></a>데이터 테이블
 
 **TodoItem**
 
-| 특성 | 유형 | 참고 |
+| 특성 | type | 참고 |
 | --- | --- | --- |
 | id | 문자열, 필수로 표시 |원격 저장소의 기본 키 |
-| complete | Boolean | 할 일 항목 필드 |
-| 텍스트 |String |할 일 항목 필드 |
+| complete | BOOLEAN | 할 일 항목 필드 |
+| text |문자열 |할 일 항목 필드 |
 | createdAt | Date | (옵션) **createdAt** 시스템 속성에 매핑됩니다. |
 | updatedAt | Date | (옵션) **updatedAt** 시스템 속성에 매핑됩니다. |
-| 버전 | String | (옵션) 충돌을 검색하는 데 사용되며 version에 매핑됩니다. |
+| 버전 | 문자열 | (옵션) 충돌을 검색하는 데 사용되며 version에 매핑됩니다. |
 
 ## <a name="setup-sync"></a>앱의 동기화 동작 변경
 이 섹션에서는 앱 시작 시 또는 항목을 삽입하거나 업데이트할 때 동기화하지 않도록 앱을 수정합니다. 새로 고침 제스처 단추를 누를 때만 동기화됩니다.
@@ -286,5 +285,4 @@ Mobile Apps에 대한 정상적인 만들기, 읽기, 업데이트 및 삭제(CR
 [defining-core-data-todoitem-entity]: ./media/app-service-mobile-ios-get-started-offline-data/defining-core-data-todoitem-entity.png
 
 [클라우드 커버: Azure Mobile Services에서 오프라인 동기화]: http://channel9.msdn.com/Shows/Cloud+Cover/Episode-155-Offline-Storage-with-Donna-Malayeri
-[Azure Friday: Offline-enabled apps in Azure Mobile Services]: http://azure.microsoft.com/en-us/documentation/videos/azure-mobile-services-offline-enabled-apps-with-donna-malayeri/
-
+[Azure Friday: Offline-enabled apps in Azure Mobile Services]: http://azure.microsoft.com/documentation/videos/azure-mobile-services-offline-enabled-apps-with-donna-malayeri/

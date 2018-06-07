@@ -4,7 +4,7 @@ description: "Azure Active Directory Domain Services 관리되는 도메인에�
 services: active-directory-ds
 documentationcenter: 
 author: mahesh-unnikrishnan
-manager: stevenpo
+manager: mtillman
 editor: curtand
 ms.assetid: 57cbf436-fc1d-4bab-b991-7d25b6e987ef
 ms.service: active-directory-ds
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 03/06/2017
 ms.author: maheshu
-translationtype: Human Translation
-ms.sourcegitcommit: 094729399070a64abc1aa05a9f585a0782142cbf
-ms.openlocfilehash: 0c9a9a56e1489ee91fcc332beeef36cdc9c93dc1
-ms.lasthandoff: 03/07/2017
-
-
+ms.openlocfilehash: 5c324ea5e268d97134202eff6e96764bedc6ca75
+ms.sourcegitcommit: e266df9f97d04acfc4a843770fadfd8edf4fa2b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/11/2017
 ---
 # <a name="synchronization-in-an-azure-ad-domain-services-managed-domain"></a>Azure AD 도메인 서비스 관리되는 도메인에서 동기화
 다음 다이어그램에서는 Azure AD 도메인 서비스 관리되는 도메인에서 동기화가 작동하는 방식을 보여 줍니다.
@@ -122,4 +121,3 @@ Azure AD Connect 동기화는 사용자 계정, 그룹 구성원 자격 및 자�
 * [배포 시나리오 - Azure AD Domain Services](active-directory-ds-scenarios.md)
 * [Azure AD 도메인 서비스에 대한 네트워킹 고려 사항](active-directory-ds-networking.md)
 * [Azure AD 도메인 서비스 시작](active-directory-ds-getting-started.md)
-

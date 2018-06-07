@@ -1,25 +1,24 @@
 ---
-title: "Azure IoT Hub(노드)를 사용하여 작업 예약 | Microsoft 문서"
-description: "여러 장치에서 직접 메서드를 호출하여 Azure IoT Hub 작업을 예약하는 방법입니다. Node.js용 Azure IoT SDK를 사용하여 시뮬레이션된 장치 앱 및 작업을 실행하는 서비스 앱을 구현합니다."
+title: Azure IoT Hub(노드)를 사용하여 작업 예약 | Microsoft 문서
+description: 여러 장치에서 직접 메서드를 호출하여 Azure IoT Hub 작업을 예약하는 방법입니다. Node.js용 Azure IoT SDK를 사용하여 시뮬레이션된 장치 앱 및 작업을 실행하는 서비스 앱을 구현합니다.
 services: iot-hub
 documentationcenter: .net
 author: juanjperez
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 2233356e-b005-4765-ae41-3a4872bda943
 ms.service: iot-hub
 ms.devlang: multiple
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 09/30/2016
+ms.date: 10/06/2017
 ms.author: juanpere
+ms.openlocfilehash: e7e724de68e7078782e90a3f2eda9f7261638ea5
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
 ms.translationtype: HT
-ms.sourcegitcommit: 6e76ac40e9da2754de1d1aa50af3cd4e04c067fe
-ms.openlocfilehash: 42e594dc6a8a8be619b5652bf8e44cf883650489
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/31/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
 ---
 # <a name="schedule-and-broadcast-jobs-node"></a>작업 예약 및 브로드캐스트(노드)
 
@@ -38,12 +37,14 @@ Azure IoT Hub는 백 엔드 앱에서 수백만 개의 장치를 예약 및 업�
 * 장치 쌍 및 속성: [장치 쌍 시작][lnk-get-started-twin] 및 [자습서: 장치 쌍 속성을 사용하는 방법][lnk-twin-props]
 * 직접 메서드: [IoT Hub 개발자 가이드 - 직접 메서드][lnk-dev-methods] 및 [자습서: 직접 메서드][lnk-c2d-methods]
 
+[!INCLUDE [iot-hub-basic](../../includes/iot-hub-basic-whole.md)]
+
 이 자습서에서는 다음을 수행하는 방법에 대해 설명합니다.
 
-* 솔루션 백 엔드에서 **lockDoor**를 호출할 수 있는 직접 메서드가 포함된 시뮬레이션된 장치 앱을 만듭니다.
+* 솔루션 백 엔드에서 **lockDoor**를 호출할 수 있는 직접 메서드가 포함된 Node.js로 시뮬레이션된 장치 앱을 만듭니다.
 * 작업을 사용하여 시뮬레이션된 장치 앱에서 **lockDoor** 직접 메서드를 호출하고, 장치 작업을 사용하여 desired 속성을 업데이트하는 Node.js 콘솔 앱을 만듭니다.
 
-이 자습서를 마치면 두 가지 Node.js 콘솔 앱이 만들어집니다.
+이 자습서를 마치면 두 가지 Node.js 앱이 만들어집니다.
 
 **simDevice.js** - 장치 ID로 IoT Hub에 연결하고 **lockDoor** 직접 메서드를 수신합니다.
 
@@ -51,7 +52,7 @@ Azure IoT Hub는 백 엔드 앱에서 수백만 개의 장치를 예약 및 업�
 
 이 자습서를 완료하려면 다음이 필요합니다.
 
-* Node.js 버전 0.12.x 이상, <br/>  Windows 또는 Linux에서 이 자습서를 위해 Node.js를 설치하는 방법에 대해서는 [개발 환경 준비][lnk-dev-setup]에서 설명합니다.
+* Node.js 버전 4.0.x 이상 <br/>  Windows 또는 Linux에서 이 자습서를 위해 Node.js를 설치하는 방법에 대해서는 [개발 환경 준비][lnk-dev-setup]에서 설명합니다.
 * 활성 Azure 계정. 계정이 없는 경우 몇 분 안에 [무료 계정][lnk-free-trial]을 만들 수 있습니다.
 
 [!INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
@@ -59,7 +60,7 @@ Azure IoT Hub는 백 엔드 앱에서 수백만 개의 장치를 예약 및 업�
 [!INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
 
 ## <a name="create-a-simulated-device-app"></a>시뮬레이션된 장치 앱 만들기
-이 섹션에서는 클라우드에서 호출한 직접 메서드에 응답하는 Node.js 콘솔 앱을 만듭니다. 이 메서드는 시뮬레이션된 장치 재부팅을 트리거하고, reported 속성을 사용하여 장치 및 해당 장치가 마지막으로 재부팅한 시간을 확인하는 장치 쌍 쿼리를 사용하도록 설정합니다.
+이 섹션에서는 클라우드에서 호출한 메서드에 응답하는 Node.js 콘솔 앱을 만듭니다. 이 메서드는 시뮬레이션된 **lockDoor** 메서드를 트리거합니다.
 
 1. **simDevice**라는 빈 폴더를 새로 만듭니다.  **simDevice** 폴더의 명령 프롬프트에서 다음 명령을 사용하여 package.json 파일을 만듭니다.  모든 기본값을 수락합니다.
    
@@ -118,7 +119,7 @@ Azure IoT Hub는 백 엔드 앱에서 수백만 개의 장치를 예약 및 업�
 8. **simDevice.js** 파일을 저장하고 닫습니다.
 
 > [!NOTE]
-> 간단히 하기 위해 이 자습서에서는 다시 시도 정책을 구현하지 않습니다. 프로덕션 코드에서는 MSDN 문서 [일시적인 오류 처리][lnk-transient-faults]에서 제시한 대로 다시 시도 정책(예: 지수 백오프)을 구현해야 합니다.
+> 간단히 하기 위해 이 자습서에서는 재시도 정책을 구현하지 않습니다. 프로덕션 코드에서는 MSDN 문서 [일시적인 오류 처리][lnk-transient-faults]에서 제시한 대로 다시 시도 정책(예: 지수 백오프)을 구현해야 합니다.
 > 
 > 
 
@@ -150,10 +151,10 @@ Azure IoT Hub는 백 엔드 앱에서 수백만 개의 장치를 예약 및 업�
     var connectionString = '{iothubconnectionstring}';
     var queryCondition = "deviceId IN ['myDeviceId']";
     var startTime = new Date();
-    var maxExecutionTimeInSeconds =  3600;
+    var maxExecutionTimeInSeconds =  300;
     var jobClient = JobClient.fromConnectionString(connectionString);
     ```
-6. 작업 실행을 모니터링하는 데 사용할 다음 함수를 추가합니다.
+6. 작업 실행을 모니터링하는 데 사용되는 다음 함수를 추가합니다.
    
     ```
     function monitorJob (jobId, callback) {
@@ -206,11 +207,13 @@ Azure IoT Hub는 백 엔드 앱에서 수백만 개의 장치를 예약 및 업�
    
     ```
     var twinPatch = {
-        etag: '*',
-        desired: {
-            building: '43',
-            floor: 3
-        }
+       etag: '*', 
+       properties: {
+           desired: {
+               building: '43', 
+               floor: 3
+           }
+       }
     };
    
     var twinJobId = uuid.v4();
@@ -266,8 +269,7 @@ IoT Hub 및 장치 관리 패턴(예: 원격 무선 펌웨어 업데이트)을 �
 [lnk-c2d-methods]: iot-hub-node-node-direct-methods.md
 [lnk-dev-methods]: iot-hub-devguide-direct-methods.md
 [lnk-fwupdate]: iot-hub-node-node-firmware-update.md
-[lnk-iot-edge]: iot-hub-linux-iot-edge-get-started.md
+[lnk-iot-edge]: ../iot-edge/tutorial-simulate-device-linux.md
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdk-node/tree/master/doc/node-devbox-setup.md
 [lnk-free-trial]: http://azure.microsoft.com/pricing/free-trial/
 [lnk-transient-faults]: https://msdn.microsoft.com/library/hh680901(v=pandp.50).aspx
-

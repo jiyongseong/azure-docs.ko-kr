@@ -1,9 +1,9 @@
 ---
 title: "Azure 모바일 앱(Android)용 오프라인 동기화 사용"
-description: "앱 서비스 모바일 앱을 사용하여 Android 응용 프로그램에서 오프라인 데이터를 캐시 및 동기화하는 방법을 알아봅니다."
+description: "App Service Mobile Apps를 사용하여 Android 응용 프로그램에서 오프라인 데이터를 캐시 및 동기화하는 방법을 알아봅니다."
 documentationcenter: android
-author: ggailey777
-manager: syntaxc4
+author: conceptdev
+manager: crdun
 services: app-service\mobile
 ms.assetid: 32a8a079-9b3c-4faf-8588-ccff02097224
 ms.service: app-service-mobile
@@ -12,23 +12,22 @@ ms.tgt_pltfrm: mobile-android
 ms.devlang: java
 ms.topic: article
 ms.date: 10/01/2016
-ms.author: glenga
-ms.translationtype: Human Translation
-ms.sourcegitcommit: cfe4957191ad5716f1086a1a332faf6a52406770
-ms.openlocfilehash: 6135c042010147270e06740038afe80efc738f2d
-ms.contentlocale: ko-kr
-ms.lasthandoff: 03/09/2017
-
+ms.author: crdun
+ms.openlocfilehash: 152702bed0ea061c3cb86e2ff6f88bf204f9d243
+ms.sourcegitcommit: df4ddc55b42b593f165d56531f591fdb1e689686
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/04/2018
 ---
 # <a name="enable-offline-sync-for-your-android-mobile-app"></a>Android 모바일 앱에 대해 오프라인 동기화 사용
 [!INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
 
 ## <a name="overview"></a>개요
-이 자습서에서는 Android용 Azure 모바일 앱의 오프라인 동기화 기능을 설명합니다. 오프라인 동기화를 사용하면 최종 사용자는 네트워크에 연결되어 있지 않을 때도 모바일 앱&mdash;데이터 보기, 추가 또는 수정&mdash;과 같은 상호 작용을 수행할 수 있습니다. 변경 내용은 로컬 데이터베이스에 저장됩니다. 장치가 다시 온라인 상태가 되면 이러한 변경 내용이 원격 백 엔드와 동기화됩니다.
+이 자습서에서는 Android용 Azure Mobile Apps의 오프라인 동기화 기능을 설명합니다. 오프라인 동기화를 사용하면 최종 사용자는 네트워크에 연결되어 있지 않을 때도 모바일 앱&mdash;데이터 보기, 추가 또는 수정&mdash;과 같은 상호 작용을 수행할 수 있습니다. 변경 내용은 로컬 데이터베이스에 저장됩니다. 장치가 다시 온라인 상태가 되면 이러한 변경 내용이 원격 백 엔드와 동기화됩니다.
 
-Azure 모바일 앱을 처음 사용하는 경우, 먼저 [Android 앱 만들기]자습서를 완료해야 합니다. 다운로드한 빠른 시작 서버 프로젝트를 사용하지 않는 경우 프로젝트에 데이터 액세스 확장 패키지를 추가해야 합니다. 서버 확장 패키지에 대한 자세한 내용은 [Azure 모바일 앱용 .NET 백 엔드 서버 SDK 사용](app-service-mobile-dotnet-backend-how-to-use-server-sdk.md)을 참조하세요.
+Azure Mobile Apps를 처음 사용하는 경우, 먼저 [Android 앱 만들기]자습서를 완료해야 합니다. 다운로드한 빠른 시작 서버 프로젝트를 사용하지 않는 경우 프로젝트에 데이터 액세스 확장 패키지를 추가해야 합니다. 서버 확장 패키지에 대한 자세한 내용은 [Azure Mobile Apps용 .NET 백 엔드 서버 SDK 사용](app-service-mobile-dotnet-backend-how-to-use-server-sdk.md)을 참조하세요.
 
-오프라인 동기화 기능에 대한 자세한 내용은 [Azure 모바일 앱에서 오프라인 데이터 동기화]항목을 참조하세요.
+오프라인 동기화 기능에 대한 자세한 내용은 [Azure Mobile Apps에서 오프라인 데이터 동기화]항목을 참조하세요.
 
 ## <a name="update-the-app-to-support-offline-sync"></a>오프라인 동기화를 지원하도록 앱 업데이트
 오프라인 동기화를 통해 *IMobileServiceSyncTable* 인터페이스를 사용하여 장치의 **SQLite** 데이터베이스 일부인 *동기화 테이블*에서 읽고 씁니다.
@@ -92,16 +91,15 @@ Azure 모바일 앱을 처음 사용하는 경우, 먼저 [Android 앱 만들기
 5. TodoItem 데이터를 Azure 포털에 다시 표시합니다. 이제 새 및 변경된 TodoItems가 나타납니다.
 
 ## <a name="additional-resources"></a>추가 리소스
-* [Azure 모바일 앱에서 오프라인 데이터 동기화]
+* [Azure Mobile Apps에서 오프라인 데이터 동기화]
 * [Cloud Cover: Azure Mobile Services에서 오프라인 동기화] \(참고: 비디오는 Mobile Services에 있지만 Azure Mobile Apps에서 비슷한 방식으로 오프라인 동기화가 작동합니다.\)
 
 <!-- URLs. -->
 
-[Azure 모바일 앱에서 오프라인 데이터 동기화]: app-service-mobile-offline-data-sync.md
+[Azure Mobile Apps에서 오프라인 데이터 동기화]: app-service-mobile-offline-data-sync.md
 
 [Android 앱 만들기]: app-service-mobile-android-get-started.md
 
 [Cloud Cover: Azure Mobile Services에서 오프라인 동기화]: http://channel9.msdn.com/Shows/Cloud+Cover/Episode-155-Offline-Storage-with-Donna-Malayeri
 [Azure Friday: Offline-enabled apps in Azure Mobile Services]: http://azure.microsoft.com/documentation/videos/azure-mobile-services-offline-enabled-apps-with-donna-malayeri/
-
 

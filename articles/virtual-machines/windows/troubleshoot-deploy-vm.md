@@ -1,11 +1,11 @@
 ---
-title: "Azure에서 Windows 가상 컴퓨터 배포 문제 해결 | Microsoft Docs"
-description: "Azure Resource Manager 배포 모델에서 Windows 가상 컴퓨터 배포 문제를 해결합니다."
+title: Azure에서 Windows 가상 머신 배포 문제 해결 | Microsoft Docs
+description: Azure Resource Manager 배포 모델에서 Windows 가상 머신 배포 문제를 해결합니다.
 services: virtual-machines-windows
-documentationcenter: 
+documentationcenter: ''
 author: genlin
-manager: timlt
-editor: 
+manager: jeconnoc
+editor: ''
 tags: azure-resource-manager
 ms.assetid: 4e383427-4aff-4bf3-a0f4-dbff5c6f0c81
 ms.service: virtual-machines-windows
@@ -13,18 +13,17 @@ ms.workload: infrastructure-services
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 06/22/2017
+ms.date: 05/11/2018
 ms.author: genli
+ms.openlocfilehash: fda249295cf3bbf6f9577eb90a147f46524b95ff
+ms.sourcegitcommit: c52123364e2ba086722bc860f2972642115316ef
 ms.translationtype: HT
-ms.sourcegitcommit: 74b75232b4b1c14dbb81151cdab5856a1e4da28c
-ms.openlocfilehash: e5f3fc57292102afb8f0ffb1f851953e97d7478a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/26/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/11/2018
 ---
-# <a name="troubleshoot-deploying-windows-virtual-machine-issues-in-azure"></a>Azure에서 Windows 가상 컴퓨터 배포 문제 해결
+# <a name="troubleshoot-deploying-windows-virtual-machine-issues-in-azure"></a>Azure에서 Windows 가상 머신 배포 문제 해결
 
-Azure의 VM(가상 컴퓨터) 배포 문제를 해결하려면 일반적인 오류 및 해결 방법에 대한 [주요 문제](#top-issues)를 검토합니다.
+Azure의 VM(가상 머신) 배포 문제를 해결하려면 일반적인 오류 및 해결 방법에 대한 [주요 문제](#top-issues)를 검토합니다.
 
 이 문서의 어디에서든 도움이 필요한 경우 [MSDN Azure 및 Stack Overflow 포럼](https://azure.microsoft.com/support/forums/)에서 Azure 전문가에게 문의할 수 있습니다. 또는 Azure 기술 지원 인시던트를 제출할 수 있습니다. [Azure 지원 사이트](https://azure.microsoft.com/support/options/) 로 가서 **지원 받기**를 선택합니다.
 
@@ -39,7 +38,7 @@ productPesIds="1234, 5678"
 />
 - 더 작은 VM 크기를 사용하여 요청을 다시 시도합니다.
 - 요청한 VM의 크기를 변경할 수 없으면:
-    - 가용성 집합의 VM을 모두 중지합니다. **리소스 그룹** > 사용자의 리소스 그룹 > **리소스** > 사용자의 가용성 집합 > **Virtual Machines** > 사용자의 가상 컴퓨터 > **중지**를 클릭합니다.
+    - 가용성 집합의 VM을 모두 중지합니다. **리소스 그룹** > 사용자의 리소스 그룹 > **리소스** > 사용자의 가용성 집합 > **Virtual Machines** > 사용자의 가상 머신 > **중지**를 클릭합니다.
     - VM을 모두 중지한 후에, 원하는 크기로 VM을 만듭니다.
     - 먼저 VM을 시작한 후에 중지된 각각의 VM을 선택하고 시작을 클릭합니다.
 
@@ -59,9 +58,9 @@ productPesIds="1234, 5678"
 
 적절한 Visual Studio(이전의 MSDN) 구독이 있으면 Azure에서 개발/테스트 시나리오에 Windows 7, Windows 8 또는 Windows 10을 사용할 수 있습니다. 이 [문서](client-images.md)에서는 Azure에서 Windows 클라이언트를 실행하고 Azure 갤러리 이미지를 사용하기 위한 적격성 요구 사항에 대해 대략적으로 설명합니다.
 
-## <a name="how-can-i-deploy-a-virtual-machine-using-the-hybrid-use-benefit-hub"></a>HUB(Hybrid Use Benefit)를 사용하여 가상 컴퓨터를 배포하려면 어떻게 하나요?
+## <a name="how-can-i-deploy-a-virtual-machine-using-the-hybrid-use-benefit-hub"></a>HUB(Hybrid Use Benefit)를 사용하여 가상 머신을 배포하려면 어떻게 하나요?
 
-Azure 하이브리드 사용 혜택을 사용하여 Windows 가상 컴퓨터를 배포하는 몇 가지 다른 방법이 있습니다.
+Azure 하이브리드 사용 혜택을 사용하여 Windows 가상 머신을 배포하는 몇 가지 다른 방법이 있습니다.
 
 기업 계약 구독의 경우:
 
@@ -97,10 +96,6 @@ Windows 기반 VM용 드라이버가 [여기](n-series-driver-setup.md)에 위�
 
 Windows Server 2016 또는 Windows Server 2012 R2를 실행하는 Azure N 시리즈 VM의 GPU 기능을 이용하려면 배포 후 각 VM에 NVIDIA 그래픽 드라이버를 설치해야 합니다. [Windows VM](n-series-driver-setup.md) 및 [Linux VM](../linux/n-series-driver-setup.md)에 대한 드라이버 설치 정보를 사용할 수 있습니다.
 
-## <a name="are-client-images-supported-for-n-series"></a>클라이언트 이미지가 N 시리즈에 지원되나요?
-
-현재 Azure는 Windows Server 및 Linux 운영 체제를 실행하는 VM에서만 N 시리즈를 지원합니다.
-
 ## <a name="is-n-series-vms-available-in-my-region"></a>N 시리즈 VM을 내 지역에서 사용할 수 있나요?
 
 가용성을 [지역에서 사용할 수 있는 제품 표](https://azure.microsoft.com/regions/services)에서 확인할 수 있고 가격 책정을 [여기](https://azure.microsoft.com/pricing/details/virtual-machines/series/#n-series)에서 확인할 수 있습니다.
@@ -110,7 +105,7 @@ Windows Server 2016 또는 Windows Server 2012 R2를 실행하는 Azure N 시리
 적절한 Visual Studio(이전의 MSDN) 구독이 있으면 Azure에서 개발/테스트 시나리오에 Windows 7, Windows 8 또는 Windows 10을 사용할 수 있습니다. 
 
 - [적격 개발/테스트 제품](client-images.md#eligible-offers) 내에서 Azure 갤러리의 특정 Windows 10 이미지를 사용할 수 있습니다. 
-- Visual Studio 구독자(사용 중인 제품 유형은 관계없음)는 64비트 Windows 7, Windows 8 또는 Windows 10 이미지를 [적절하게 준비하고 작성](prepare-for-upload-vhd-image.md)한 다음 [Azure에 업로드](upload-image.md)할 수도 있습니다. 이렇게 업로드하는 이미지 역시 활성 Visual Studio 구독자가 개발/테스트용으로만 사용할 수 있습니다.
+- Visual Studio 구독자(사용 중인 제품 유형은 관계없음)는 64비트 Windows 7, Windows 8 또는 Windows 10 이미지를 [적절하게 준비하고 작성](prepare-for-upload-vhd-image.md)한 다음 [Azure에 업로드](upload-generalized-managed.md)할 수도 있습니다. 이렇게 업로드하는 이미지 역시 활성 Visual Studio 구독자가 개발/테스트용으로만 사용할 수 있습니다.
 
 이 [문서](client-images.md)에서는 Azure에서 Windows 클라이언트를 실행하고 Azure 갤러리 이미지를 사용하기 위한 적격성 요구 사항에 대해 대략적으로 설명합니다.
 
@@ -128,11 +123,10 @@ VM을 실행하면 해당 VM이 실제 서버에 배포됩니다. Azure 지역�
 
 ## <a name="can-i-add-an-existing-classic-vm-to-an-availability-set"></a>가용성 집합에 기존 클래식 VM을 추가할 수 있나요?
 
-예. 새 가용성 집합 또는 기존 가용성 집합에 기존 클래식 VM을 추가할 수 있습니다. 자세한 내용은 [가용성 집합에 기존 가상 컴퓨터 추가](classic/configure-availability.md#addmachine)를 참조하세요.
+예. 새 가용성 집합 또는 기존 가용성 집합에 기존 클래식 VM을 추가할 수 있습니다. 자세한 내용은 [가용성 집합에 기존 가상 머신 추가](classic/configure-availability-classic.md#addmachine)를 참조하세요.
 
 
 ## <a name="next-steps"></a>다음 단계
 이 문서의 어디에서든 도움이 필요한 경우 [MSDN Azure 및 Stack Overflow 포럼](https://azure.microsoft.com/support/forums/)에서 Azure 전문가에게 문의할 수 있습니다.
 
 또는 Azure 기술 지원 인시던트를 제출할 수 있습니다. [Azure 지원 사이트](https://azure.microsoft.com/support/options/) 로 가서 **지원 받기**를 선택합니다.
-

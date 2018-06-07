@@ -1,6 +1,6 @@
 ---
-title: "신뢰할 수 있는 Azure 마이크로 서비스 구성 | Microsoft Docs"
-description: "Azure 서비스 패브릭에서 상태 저장 Reliable Services를 구성하는 방법을 알아봅니다."
+title: 신뢰할 수 있는 Azure 마이크로 서비스 구성 | Microsoft Docs
+description: Azure 서비스 패브릭에서 상태 저장 Reliable Services를 구성하는 방법을 알아봅니다.
 services: Service-Fabric
 documentationcenter: .net
 author: sumukhs
@@ -9,17 +9,16 @@ editor: vturecek
 ms.assetid: 9f72373d-31dd-41e3-8504-6e0320a11f0e
 ms.service: Service-Fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 6/29/2017
+ms.date: 10/02/2017
 ms.author: sumukhs
+ms.openlocfilehash: c5aaf9869326f2de86d3bff33f36e8f967f3e6fa
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: fa77eaf44f4d90d1a78f5de69e36432a53d80ecd
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="configure-stateful-reliable-services"></a>상태 저장 Reliable Services 구성
 Reliable Services에는 두 가지 구성 설정 집합이 있습니다. 한 집합은 클러스터의 모든 Reliable Services에 대해 전역인 반면 다른 집합은 특정 Reliable Services에 한정됩니다.
@@ -28,7 +27,7 @@ Reliable Services에는 두 가지 구성 설정 집합이 있습니다. 한 집
 전역 Reliable Service 구성은 KtlLogger 섹션 아래 클러스터에 대한 클러스터 매니페스트에 지정됩니다. 공유 로그 위치 및 크기와 로거에 사용되는 전역 메모리 한도를 구성할 수 있습니다. 클러스터 매니페스트는 클러스터의 모든 노드 및 서비스에 적용할 설정 및 구성을 포함하는 단일 XML 파일입니다. 이 파일을 일반적으로 ClusterManifest.xml이라고 합니다. Get-ServiceFabricClusterManifest powershell 명령을 사용하여 클러스터에 대한 클러스터 매니페스트를 확인할 수 있습니다.
 
 ### <a name="configuration-names"></a>구성 이름
-| 이름 | 단위 | 기본값 | 설명 |
+| Name | 단위 | 기본값 | 설명 |
 | --- | --- | --- | --- |
 | WriteBufferMemoryPoolMinimumInKB |킬로바이트 |8388608 |로거 쓰기 버퍼 메모리 풀에 대해 커널 모드에서 할당되는 최소 KB 수입니다. 이 메모리 풀은 디스크에 쓰기 전에 상태 정보를 캐시하는 데 사용됩니다. |
 | WriteBufferMemoryPoolMaximumInKB |킬로바이트 |제한 없음 |로거 쓰기 버퍼 메모리 풀이 증가할 수 있는 최대 크기입니다. |
@@ -104,7 +103,7 @@ ReplicatorConfig
 > 
 
 ### <a name="configuration-names"></a>구성 이름
-| 이름 | 단위 | 기본값 | 설명 |
+| Name | 단위 | 기본값 | 설명 |
 | --- | --- | --- | --- |
 | BatchAcknowledgementInterval |초 |0.015 |작업을 수신한 후 주 복제본에 대한 승인을 다시 보내기 전에 보조 복제본의 복제자가 대기하는 시간. 이 간격 내에서 처리하는 작업에 대해 보낼 나머지 승인은 모두 하나의 응답으로 전송됩니다. |
 | ReplicatorEndpoint |해당 없음 |기본값 없음--필수 매개 변수 |주/보조 복제자가 복제본 세트의 다른 복제자와 통신하는 데 사용할 IP 주소 및 포트. 서비스 매니페스트의 TCP 리소스 끝점을 참조해야 합니다. 서비스 매니페스트에서 끝점 리소스를 정의하는 방법에 대한 자세한 내용은 [서비스 매니페스트 리소스](service-fabric-service-manifest-resources.md) 를 참조하세요. |
@@ -187,5 +186,4 @@ SharedLogId 및 SharedLogPath 설정은 항상 함께 사용되며 서비스가 
 ## <a name="next-steps"></a>다음 단계
 * [Visual Studio에서 서비스 패브릭 응용 프로그램 디버깅](service-fabric-debugging-your-application.md)
 * [신뢰할 수 있는 서비스에 대한 개발자 참조](https://msdn.microsoft.com/library/azure/dn706529.aspx)
-
 

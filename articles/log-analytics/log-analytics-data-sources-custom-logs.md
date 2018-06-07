@@ -1,8 +1,8 @@
 ---
-title: "OMS Log Analytics에서 사용자 지정 로그 수집 | Microsoft Docs"
-description: "Log Analytics는 Windows와 Linux 컴퓨터의 텍스트 파일에서 이벤트를 수집할 수 있습니다.  이 문서는 새 사용자 지정 로그를 정의하는 방법을 설명하고 OMS 리포지토리에 만드는 레코드에 대한 자세한 정보를 제공합니다."
+title: Azure Log Analytics에서 사용자 지정 로그 수집 | Microsoft Docs
+description: Log Analytics는 Windows와 Linux 컴퓨터의 텍스트 파일에서 이벤트를 수집할 수 있습니다.  이 문서는 새 사용자 지정 로그를 정의하는 방법을 설명하고 Log Analytics 작업 영역에 만드는 레코드에 대한 자세한 정보를 제공합니다.
 services: log-analytics
-documentationcenter: 
+documentationcenter: ''
 author: bwren
 manager: jwhit
 editor: tysonn
@@ -12,14 +12,14 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 07/13/2017
+ms.date: 04/04/2018
 ms.author: bwren
+ms.openlocfilehash: e4e2edeb6703e8c55a16b488175fbcdb0dfe56a9
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: 137671152878e6e1ee5ba398dd5267feefc435b7
-ms.openlocfilehash: 8105cd6ef87a592a0a84ff44a2ce94efcd874a2c
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/28/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
+ms.locfileid: "34361892"
 ---
 # <a name="custom-logs-in-log-analytics"></a>Log Analytics의 사용자 지정 로그
 Log Analytics의 사용자 지정 로그 데이터 원본을 통해 Windows 및 Linux 컴퓨터의 텍스트 파일에서 이벤트를 수집할 수 있습니다. 많은 응용 프로그램이 Windows 이벤트 로그 또는 Syslog 같은 표준 로깅 서비스 대신 텍스트 파일에 정보를 기록합니다.  수집된 후에는, Log Analytics의 [사용자 지정 필드](log-analytics-custom-fields.md) 기능을 사용하여 로그의 각 레코드를 별도의 필드로 구문 분석할 수 있습니다.
@@ -30,19 +30,23 @@ Log Analytics의 사용자 지정 로그 데이터 원본을 통해 Windows 및 
 
 - 로그는 줄 당 항목이 하나이거나 각 항목의 시작 지점에 다음 형식 중 하나와 일치하는 타임스탬프를 사용해야 합니다.
 
-    YYYY-MM-DD HH:MM:SS <br>M/D/YYYY HH:MM:SS AM/PM <br>Mon DD,YYYY HH:MM:SS
+    YYYY-MM-DD HH:MM:SS <br>M/D/YYYY HH:MM:SS AM/PM<br>Mon DD, YYYY HH:MM:SS<br />yyMMdd HH:mm:ss<br />ddMMyy HH:mm:ss<br />MMM d hh:mm:ss<br />dd/MMM/yyyy:HH:mm:ss zzz<br />yyyy-MM-ddTHH:mm:ssK
 
-- 로그 파일은 새 항목으로 파일을 덮어쓰는 순환 업데이트를 허용하지 말아야 합니다.
+- 로그 파일은 새 항목으로 파일을 덮어쓰는 순환 로깅 또는 로그 회전을 허용하지 말아야 합니다.
 - 로그 파일은 ASCII 또는 UTF-8 인코딩을 사용해야 합니다.  UTF-16 등의 다른 형식은 지원되지 않습니다.
 
+>[!NOTE]
+>로그 파일에 중복된 항목이 있는 경우 Log Analytics에서 수집합니다.  그러나 검색 결과는 필터 결과가 결과 개수보다 더 많은 이벤트를 표시하는 위치에서 일치하지 않습니다.  이를 만드는 응용 프로그램에서 이 문제를 일으키는지 확인하도록 로그의 유효성을 검사하고 가능한 경우 사용자 지정 로그 컬렉션 정의를 만들기 전에 해결하는 것이 중요합니다.  
+>
+  
 ## <a name="defining-a-custom-log"></a>사용자 지정 로그 정의
 다음 절차에 따라 사용자 지정 로그 파일을 정의합니다.  사용자 지정 로그를 추가하는 샘플에 대한 연습을 보려면 이 문서의 끝으로 스크롤합니다.
 
 ### <a name="step-1-open-the-custom-log-wizard"></a>1단계. Custom Log Wizard(사용자 지정 로그 마법사) 열기
-Custom Log Wizard(사용자 지정 로그 마법사)는 OMS 포털에서 실행되며 수집할 새 사용자 지정 로그를 정의할 수 있습니다.
+사용자 지정 로그 마법사는 Azure Portal에서 실행되며 수집할 새 사용자 지정 로그를 정의할 수 있습니다.
 
-1. OMS 포털에서 **설정**으로 이동합니다.
-2. **데이터**를 클릭한 다음 **사용자 지정 로그**를 클릭합니다.
+1. Azure Portal에서 **Log Analytics** > 작업 영역 > **고급 설정**을 선택합니다.
+2. **데이터** > **사용자 지정 로그**를 클릭합니다.
 3. 기본적으로, 모든 구성 변경은 모든 에이전트로 자동 푸시됩니다.  Linux 에이전트에서, 구성 파일은 Fluentd 데이터 수집기로 전송됩니다.  각 Linux 에이전트에서 이 파일을 수동으로 수정하려면, *Apply below configuration to my Linux machines*(아래 구성을 내 Linux 컴퓨터에 적용) 확인란 선택을 해제합니다.
 4. **추가+** 를 클릭하여 Custom Log Wizard(사용자 지정 로그 마법사)를 엽니다.
 
@@ -51,18 +55,14 @@ Custom Log Wizard(사용자 지정 로그 마법사)는 OMS 포털에서 실행�
 
 **새 줄** 은 기본적인 구분 기호이며 줄당 하나의 항목을 포함하는 로그 파일에 사용됩니다.  줄이 사용 가능한 형식 중 한 가지의 날짜와 시간으로 시작되는 경우에는, 두 줄 이상에 걸쳐있는 항목을 지원하는 **타임스탬프** 구분 기호를 지정할 수 있습니다.
 
-타임스탬프 구분 기호가 사용되면, OMS에 저장된 각 레코드의 TimeGenerated 속성이 로그 파일의 해당 항목에 대해 지정된 날짜/시간으로 채워집니다.  새 줄 구분 기호가 사용되는 경우에는, TimeGenerated가 Log Analytics 항목을 수집한 날짜와 시간으로 채워집니다.
+타임스탬프 구분 기호가 사용되면, Log Analytics에 저장된 각 레코드의 TimeGenerated 속성이 로그 파일의 해당 항목에 대해 지정된 날짜/시간으로 채워집니다.  새 줄 구분 기호가 사용되는 경우에는, TimeGenerated가 Log Analytics 항목을 수집한 날짜와 시간으로 채워집니다.
 
-> [!NOTE]
-> Log Analytics는 현재 타임스탬프 구분 기호를 사용하여 로그로부터 수집된 날짜/시간을 UTC로 처리합니다.  이것은 곧 에이전트의 표준 시간대를 사용하도록 변경될 예정입니다.
->
->
 
 1. **찾아보기** 를 클릭하고 샘플 파일로 이동합니다.  일부 브라우저에서는 이 단추의 레이블이 **파일 선택** 인 경우도 있습니다.
-2. **다음**을 누릅니다.
+2. **다음**을 클릭합니다.
 3. Custom Log Wizard(사용자 지정 로그 마법사)가 파일을 업로드하고 식별된 레코드를 기록합니다.
 4. 새 레코드 식별에 사용된 구분 기호를 변경하고 로그 파일의 레코드를 가장 잘 식별하는 구분 기호를 선택합니다.
-5. **다음**을 누릅니다.
+5. **다음**을 클릭합니다.
 
 ### <a name="step-3-add-log-collection-paths"></a>3단계. 로그 수집 경로 추가
 사용자 지정 로그를 찾을 수 있는 에이전트의 경로를 하나 이상의 지정해야 합니다.  로그 파일의 특정 경로 및 이름을 제공하거나 이름의 와일드카드를 포함하는 경로를 지정할 수 있습니다.  이렇게 하면 매일 새 파일을 만드는 응용 프로그램을 지원하거나 하나의 파일이 일정한 크기에 도달하는 경우를 지원합니다.  하나의 로그 파일에 여러 경로를 제공할 수도 있습니다.
@@ -71,7 +71,7 @@ Custom Log Wizard(사용자 지정 로그 마법사)는 OMS 포털에서 실행�
 
 다음 테이블은 다른 로그 파일을 지정하는 데 유효한 패턴의 예를 제공합니다.
 
-| 설명 | Path |
+| 설명 | path |
 |:--- |:--- |
 | Windows 에이전트에서 확장명이 .txt인 *C:\Logs* 내 모든 파일 |C:\Logs\\\*.txt |
 | Windows 에이전트에서 이름이 log로 시작되고 확장명이 .txt인 *C:\Logs* 내 모든 파일 |C:\Logs\log\*.txt |
@@ -104,13 +104,12 @@ Log Analytics가 사용자 지정 로그에서 수집을 시작하면, 해당 �
 
 사용자 지정 로그 항목을 구문 분석하는 자세한 단계는 여기에 제공되지 않습니다.  이 정보는 [사용자 지정 필드](log-analytics-custom-fields.md) 설명서를 참조하세요.
 
-## <a name="disabling-a-custom-log"></a>사용자 지정 로그 비활성화
-생성된 사용자 지정 로그 정의는 제거할 수 없지만 모든 수집 경로를 제거하여 비활성화할 수 있습니다.
+## <a name="removing-a-custom-log"></a>사용자 지정 로그 제거
+Azure Portal에서 다음 프로세스를 사용하여 이전에 정의한 사용자 지정 로그를 제거합니다.
 
-1. OMS 포털에서 **설정**으로 이동합니다.
-2. **데이터**를 클릭한 다음 **사용자 지정 로그**를 클릭합니다.
-3. 비활성화할 사용자 지정 로그 정의 옆에 있는 **세부 정보**를 클릭합니다.
-4. 사용자 지정 로그 정의에 대한 각 수집 경로를 제거합니다.
+1. 작업 영역에 대한 **고급 설정**의 **데이터** 메뉴에서 **사용자 지정 로그**를 선택하여 모든 사용자 지정 로그를 나열합니다.
+2. 사용자 지정 로그 옆에 있는 **제거**를 클릭하여 제거합니다.
+
 
 ## <a name="data-collection"></a>데이터 수집
 Log Analytics는 각 사용자 지정 로그로부터 새로운 항목을 약 5분마다 수집합니다.  에이전트는 데이터를 수집하는 각 로그 파일에서 해당 위치를 기록합니다.  에이전트가 일정 기간 동안 오프라인 상태로 전환된 경우 Log Analytics는 마지막으로 오프라인 상태가 유지된 위치에서 항목을 수집하며, 이는 에이전트가 오프라인 상태에 있는 동안 해당 항목이 생성된 경우에도 마찬가지입니다.
@@ -120,7 +119,7 @@ Log Analytics는 각 사용자 지정 로그로부터 새로운 항목을 약 5�
 ## <a name="custom-log-record-properties"></a>사용자 지정 로그 레코드 속성
 사용자 지정 로그 레코드에는 사용자가 제공하는 로그 이름의 유형과 다음 테이블의 속성이 있습니다.
 
-| 속성 | 설명 |
+| 자산 | 설명 |
 |:--- |:--- |
 | TimeGenerated |Log Analytics에 의해 레코드가 수집된 날짜와 시간입니다.  로그에 시간 기반 구분 기호가 사용되는 경우, 항목에서 수집한 시간이 여기에 해당됩니다. |
 | SourceSystem |레코드가 수집된 에이전트의 유형입니다. <br> OpsManager – Windows 에이전트, 직접 연결 또는 System Center Operations Manager <br> Linux – 모든 Linux 에이전트 |
@@ -128,19 +127,11 @@ Log Analytics는 각 사용자 지정 로그로부터 새로운 항목을 약 5�
 | ManagementGroupName |System Center Operations Manage 에이전트의 관리 그룹 이름입니다.  다른 에이전트의 경우 AOI-\<작업 영역 ID\>입니다. |
 
 ## <a name="log-searches-with-custom-log-records"></a>사용자 지정 로그 레코드를 사용한 로그 검색
-사용자 지정 로그의 레코드는 다른 데이터 소스의 레코드처럼 OMS 리포지토리에 저장됩니다.  Type이 로그를 정의할 때 제공한 이름과 일치하기 때문에 검색에 Type 속성을 이용하여 특정 로그에서 수집한 레코드를 검색할 수 있습니다.
+사용자 지정 로그의 레코드는 다른 데이터 소스의 레코드처럼 Log Analytics 작업 영역에 저장됩니다.  Type이 로그를 정의할 때 제공한 이름과 일치하기 때문에 검색에 Type 속성을 이용하여 특정 로그에서 수집한 레코드를 검색할 수 있습니다.
 
 다음 테이블은 사용자 지정 로그로부터 레코드를 검색하는 로그 검색의 다양한 예를 제공합니다.
 
 | 쿼리 | 설명 |
-|:--- |:--- |
-| Type=MyApp_CL |이름 MyApp_CL인 사용자 지정 로그의 모든 이벤트. |
-| Type=MyApp_CL Severity_CF=error |이름이 *Severity_CF*인 사용자 지정 필드의 값이 *error*이고 이름이 MyApp_CL인 사용자 지정 로그의 모든 이벤트. |
-
->[!NOTE]
-> 작업 영역을 [새 Log Analytics 쿼리 언어](log-analytics-log-search-upgrade.md)로 업그레이드한 경우에는 위의 쿼리가 다음과 같이 변경됩니다.
-
-> | 쿼리 | 설명 |
 |:--- |:--- |
 | MyApp_CL |이름 MyApp_CL인 사용자 지정 로그의 모든 이벤트. |
 | MyApp_CL &#124; where Severity_CF=="error" |이름이 *Severity_CF*인 사용자 지정 필드의 값이 *error*이고 이름이 MyApp_CL인 사용자 지정 로그의 모든 이벤트. |
@@ -182,5 +173,4 @@ Log Analytics는 각 사용자 지정 로그로부터 새로운 항목을 약 5�
 
 ## <a name="next-steps"></a>다음 단계
 * [사용자 지정 필드](log-analytics-custom-fields.md)를 사용하여 사용자 지정 로그의 항목을 개별적인 필드로 구문 분석합니다.
-* 데이터 원본 및 솔루션에서 수집한 데이터를 분석하기 위해 [로그 검색](log-analytics-log-searches.md) 에 대해 알아봅니다.
-
+* 데이터 원본 및 솔루션에서 수집한 데이터를 분석하기 위해 [로그 검색](log-analytics-log-searches.md)에 대해 알아봅니다.

@@ -1,34 +1,49 @@
 ---
-title: "Azure 리소스의 여러 인스턴스 배포 | Microsoft Docs"
-description: "Azure 리소스 관리자 템플릿에서 복사 작업 및 배열을 사용하여 여러 번 반복하는 방법을 설명합니다."
+title: Azure 리소스의 여러 인스턴스 배포 | Microsoft Docs
+description: Azure 리소스 관리자 템플릿에서 복사 작업 및 배열을 사용하여 여러 번 반복하는 방법을 설명합니다.
 services: azure-resource-manager
 documentationcenter: na
 author: tfitzmac
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 94d95810-a87b-460f-8e82-c69d462ac3ca
 ms.service: azure-resource-manager
 ms.devlang: na
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 06/26/2017
+ms.date: 12/15/2017
 ms.author: tomfitz
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 857267f46f6a2d545fc402ebf3a12f21c62ecd21
-ms.openlocfilehash: ed8e3081d2b2e07938d7cf3aa5f95f6dde81bc66
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/28/2017
-
-
+ms.openlocfilehash: ce442793a9917320b6b2b0a7014a20f885c3720c
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="deploy-multiple-instances-of-a-resource-or-property-in-azure-resource-manager-templates"></a>Azure Resource Manager 템플릿에서 리소스 또는 속성의 여러 인스턴스 배포
-이 항목에서는 Azure Resource Manager 템플릿에서 반복하여 리소스의 여러 인스턴스 또는 리소스에 있는 속성의 여러 인스턴스를 만드는 방법을 보여 줍니다.
+이 문서에서는 리소스를 조건부로 배포하는 방법 및 Azure Resource Manager 템플릿에서 반복하여 리소스의 여러 인스턴스를 만드는 방법을 보여 줍니다.
 
-리소스 배포 여부를 지정할 수 있는 논리를 템플릿에 추가해야 하는 경우 [조건부로 리소스 배포](#conditionally-deploy-resource)를 참조하세요.
+## <a name="conditionally-deploy-resource"></a>조건부 리소스 배포
+
+배포 중 리소스의 인스턴스를 하나만 만들지, 아니면 인스턴스를 만들지 않을지 결정해야 할 경우에는 `condition` 요소를 사용합니다. 이 요소 값은 true 또는 false로 확인됩니다. 값이 true이면 리소스가 배포됩니다. 값이 false이면 리소스가 배포되지 않습니다. 예를 들어 새 저장소 계정 배포 여부 또는 기존 저장소 계정 사용 여부를 지정하려면 다음을 사용합니다.
+
+```json
+{
+    "condition": "[equals(parameters('newOrExisting'),'new')]",
+    "type": "Microsoft.Storage/storageAccounts",
+    "name": "[variables('storageAccountName')]",
+    "apiVersion": "2017-06-01",
+    "location": "[resourceGroup().location]",
+    "sku": {
+        "name": "[variables('storageAccountType')]"
+    },
+    "kind": "Storage",
+    "properties": {}
+}
+```
 
 ## <a name="resource-iteration"></a>리소스 반복
-리소스 종류의 여러 인스턴스를 만들려면 리소스 종류에 `copy` 요소를 추가합니다. copy 요소에서 이 루프의 반복 횟수와 이름을 지정합니다. count 값은 양의 정수여야 하며 800을 초과할 수 없습니다. Resource Manager는 병렬로 리소스를 만듭니다. 따라서 생성되는 순서는 정해져 있지 않습니다. 시퀀스에서 반복된 리소스를 만들려면 [직렬 복사](#serial-copy)를 참조하세요. 
+배포 중 리소스의 인스턴스를 하나 이상 만들지 결정해야 할 경우에는 `copy` 요소를 리소스 종류에 추가합니다. copy 요소에서 이 루프의 반복 횟수와 이름을 지정합니다. count 값은 양의 정수여야 하며 800을 초과할 수 없습니다. 
 
 다음 형식으로 리소스를 여러 번 만듭니다.
 
@@ -112,151 +127,40 @@ ms.lasthandoff: 06/28/2017
 * storagefabrikam
 * storagecoho
 
-## <a name="serial-copy"></a>직렬 복사
+기본적으로 Resource Manager는 병렬로 리소스를 만듭니다. 따라서 생성되는 순서는 정해져 있지 않습니다. 그러나 그 결과로 리소스가 배포되도록 지정하려고 합니다. 예를 들어 프로덕션 환경을 업데이트할 때 특정 수를 한 번에 업데이트하도록 업데이트를 늦추려고 할 수 있습니다.
 
-복사 요소를 사용하여 리소스 형식의 여러 인스턴스를 만드는 경우 Resource Manager는 기본적으로 동시에 해당 인스턴스를 배포합니다. 그러나 그 결과로 리소스가 배포되도록 지정하려고 합니다. 예를 들어 프로덕션 환경을 업데이트할 때 특정 수를 한 번에 업데이트하도록 업데이트를 늦추려고 할 수 있습니다.
+리소스의 여러 인스턴스를 직렬로 배포하려면 `mode`를 **직렬**로 설정하고 `batchSize`를 한 번에 배포할 인스턴스 수로 설정합니다. Resource Manager는 직렬 모드에서 루프에 이전 인스턴스의 종속성을 만듭니다. 따라서 이전 일괄 처리가 완료될 때까지 하나의 일괄 처리를 시작하지 않습니다.
 
-Resource Manager는 순차적으로 여러 인스턴스를 배포할 수 있는 복사 요소의 속성을 제공합니다. 복사 요소에서 `mode`를 **직렬**로 설정하고 `batchSize`를 한 번에 배포할 인스턴스 수로 설정합니다. Resource Manager는 직렬 모드에서 루프에 이전 인스턴스의 종속성을 만듭니다. 따라서 이전 일괄 처리가 완료될 때까지 하나의 일괄 처리를 시작하지 않습니다.
-
-```json
-"copy": {
-    "name": "iterator",
-    "count": "[parameters('numberToDeploy')]",
-    "mode": "serial",
-    "batchSize": 2
-},
-```
-
-모드 속성은 기본 값인 **병렬**을 수용합니다.
-
-실제 리소스를 만들지 않고 직렬 복사본을 테스트하려면 다음 템플릿을 사용하여 비어 있는 중첩된 템플릿을 배포합니다.
-
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-  "contentVersion": "1.0.0.0",
-  "parameters": {
-    "numberToDeploy": {
-      "type": "int",
-      "minValue": 2,
-      "defaultValue": 5
-    }
-  },
-  "resources": [
-    {
-      "apiVersion": "2015-01-01",
-      "type": "Microsoft.Resources/deployments",
-      "name": "[concat('loop-', copyIndex())]",
-      "copy": {
-        "name": "iterator",
-        "count": "[parameters('numberToDeploy')]",
-        "mode": "serial",
-        "batchSize": 1
-      },
-      "properties": {
-        "mode": "Incremental",
-        "template": {
-          "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-          "contentVersion": "1.0.0.0",
-          "parameters": {},
-          "variables": {},
-          "resources": [],
-          "outputs": {
-          }
-        }
-      }
-    }
-  ],
-  "outputs": {
-  }
-}
-```
-
-배포 기록에서 중첩된 배포가 순서대로 처리되는지를 확인합니다.
-
-![직렬 배포](./media/resource-group-create-multiple/serial-copy.png)
-
-보다 현실적인 시나리오의 경우 다음 예제에서는 중첩된 템플릿을 사용하는 Linux VM 하나당 두 개의 인스턴스를 배포합니다.
+예를 들어 저장소 계정을 한 번에 두 개씩 직렬로 배포하려면 다음을 사용합니다.
 
 ```json
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {
-        "adminUsername": {
-            "type": "string",
-            "metadata": {
-                "description": "User name for the Virtual Machine."
-            }
-        },
-        "adminPassword": {
-            "type": "securestring",
-            "metadata": {
-                "description": "Password for the Virtual Machine."
-            }
-        },
-        "dnsLabelPrefix": {
-            "type": "string",
-            "metadata": {
-                "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
-            }
-        },
-        "ubuntuOSVersion": {
-            "type": "string",
-            "defaultValue": "16.04.0-LTS",
-            "allowedValues": [
-                "12.04.5-LTS",
-                "14.04.5-LTS",
-                "15.10",
-                "16.04.0-LTS"
-            ],
-            "metadata": {
-                "description": "The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version."
-            }
-        }
-    },
-    "variables": {
-        "templatelink": "https://raw.githubusercontent.com/rjmax/Build2017/master/Act1.TemplateEnhancements/Chapter03.LinuxVM.json"
-    },
     "resources": [
         {
-            "apiVersion": "2015-01-01",
-            "name": "[concat('nestedDeployment',copyIndex())]",
-            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2016-01-01",
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[concat(copyIndex(),'storage', uniqueString(resourceGroup().id))]",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "Standard_LRS"
+            },
+            "kind": "Storage",
+            "properties": {},
             "copy": {
-                "name": "myCopySet",
+                "name": "storagecopy",
                 "count": 4,
                 "mode": "serial",
                 "batchSize": 2
-            },
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "[variables('templatelink')]",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "adminUsername": {
-                        "value": "[parameters('adminUsername')]"
-                    },
-                    "adminPassword": {
-                        "value": "[parameters('adminPassword')]"
-                    },
-                    "dnsLabelPrefix": {
-                        "value": "[parameters('dnsLabelPrefix')]"
-                    },
-                    "ubuntuOSVersion": {
-                        "value": "[parameters('ubuntuOSVersion')]"
-                    },
-                    "index":{
-                        "value": "[copyIndex()]"
-                    }
-                }
             }
         }
-    ]
+    ],
+    "outputs": {}
 }
-```
+``` 
+
+모드 속성은 기본 값인 **병렬**을 수용합니다.
 
 ## <a name="property-iteration"></a>속성 반복
 
@@ -266,7 +170,7 @@ Resource Manager는 순차적으로 여러 인스턴스를 배포할 수 있는 
 * count - 만들 값 수
 * input - 속성에 할당할 값이 포함된 개체  
 
-다음 예제는 가상 컴퓨터에서 `copy`를 dataDisks 속성에 적용하는 방법을 보여 줍니다.
+다음 예제는 가상 머신에서 `copy`를 dataDisks 속성에 적용하는 방법을 보여 줍니다.
 
 ```json
 {
@@ -352,55 +256,61 @@ Resource Manager는 배포 중 `copy` 배열을 확장합니다. 배열 이름�
 }
 ```
 
-리소스마다 하나의 copy 요소만 속성에 포함할 수 있습니다. 둘 이상의 속성에 대해 반복 루프를 지정하려면 복사 배열에서 여러 개체를 정의합니다. 각 개체는 개별적으로 반복됩니다. 예를 들어 부하 분산 장치에서 `frontendIPConfigurations` 속성 및 `loadBalancingRules` 속성 모두에 대해 여러 인스턴스를 만들려면 단일 copy 요소에서 두 개체를 모두 정의합니다. 
+## <a name="variable-iteration"></a>변수 반복
+
+변수의 여러 인스턴스를 만들려면 변수 섹션에서 `copy` 요소를 사용합니다. 관련 값이 있는 개체의 여러 인스턴스를 만든 다음, 해당 값을 리소스 인스턴스에 할당할 수 있습니다. 복사본을 사용하여 배열 속성 또는 배열이 있는 개체를 만들 수 있습니다. 다음 예제에서는 두 가지 방법을 모두 보여 줍니다.
 
 ```json
 {
-    "name": "[variables('loadBalancerName')]",
-    "type": "Microsoft.Network/loadBalancers",
-    "properties": {
-        "copy": [
-          {
-              "name": "frontendIPConfigurations",
-              "count": 2,
-              "input": {
-                  "name": "[concat('loadBalancerFrontEnd', copyIndex('frontendIPConfigurations', 1))]",
-                  "properties": {
-                      "publicIPAddress": {
-                          "id": "[variables(concat('publicIPAddressID', copyIndex('frontendIPConfigurations', 1)))]"
-                      }
-                  }
-              }
-          },
-          {
-              "name": "loadBalancingRules",
-              "count": 2,
-              "input": {
-                  "name": "[concat('LBRuleForVIP', copyIndex('loadBalancingRules', 1))]",
-                  "properties": {
-                      "frontendIPConfiguration": {
-                          "id": "[variables(concat('frontEndIPConfigID', copyIndex('loadBalancingRules', 1)))]"
-                      },
-                      "backendAddressPool": {
-                          "id": "[variables('lbBackendPoolID')]"
-                      },
-                      "protocol": "tcp",
-                      "frontendPort": "[variables(concat('frontEndPort' copyIndex('loadBalancingRules', 1))]",
-                      "backendPort": "[variables(concat('backEndPort' copyIndex('loadBalancingRules', 1))]",
-                      "probe": {
-                          "id": "[variables('lbProbeID')]"
-                      }
-                  }
-              }
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {},
+  "variables": {
+    "disk-array-on-object": {
+      "copy": [
+        {
+          "name": "disks",
+          "count": 5,
+          "input": {
+            "name": "[concat('myDataDisk', copyIndex('disks', 1))]",
+            "diskSizeGB": "1",
+            "diskIndex": "[copyIndex('disks')]"
           }
-        ],
-        ...
+        }
+      ]
+    },
+    "copy": [
+      {
+        "name": "disks-top-level-array",
+        "count": 5,
+        "input": {
+          "name": "[concat('myDataDisk', copyIndex('disks-top-level-array', 1))]",
+          "diskSizeGB": "1",
+          "diskIndex": "[copyIndex('disks-top-level-array')]"
+        }
+      }
+    ]
+  },
+  "resources": [],
+  "outputs": {
+    "exampleObject": {
+      "value": "[variables('disk-array-on-object')]",
+      "type": "object"
+    },
+    "exampleArrayOnObject": {
+      "value": "[variables('disk-array-on-object').disks]",
+      "type" : "array"
+    },
+    "exampleArray": {
+      "value": "[variables('disks-top-level-array')]",
+      "type" : "array"
     }
+  }
 }
 ```
 
 ## <a name="depend-on-resources-in-a-loop"></a>루프의 리소스에 따라 달라짐
-`dependsOn` 요소를 사용하여 어떤 리소스를 다른 리소스 다음에 배포하도록 지정합니다. 루프의 리소스 컬렉션에 따라 달라지는 리소스를 배포하려면 dependsOn 요소에 복사 루프의 이름을 제공합니다. 다음 예제에서는 가상 컴퓨터를 배포하기 전에 저장소 계정 3개를 배포하는 방법을 보여줍니다. 전체 가상 컴퓨터 정의는 표시되지 않습니다. 참고로 copy 요소의 name은 `storagecopy`로 설정되고 가상 컴퓨터에 대한 dependsOn 요소도 `storagecopy`로 설정되었습니다.
+`dependsOn` 요소를 사용하여 어떤 리소스를 다른 리소스 다음에 배포하도록 지정합니다. 루프의 리소스 컬렉션에 따라 달라지는 리소스를 배포하려면 dependsOn 요소에 복사 루프의 이름을 제공합니다. 다음 예제에서는 Virtual Machine을 배포하기 전에 저장소 계정 3개를 배포하는 방법을 보여줍니다. 전체 Virtual Machine 정의는 표시되지 않습니다. 참고로 copy 요소의 name은 `storagecopy`로 설정되고 Virtual Machines에 대한 dependsOn 요소도 `storagecopy`로 설정되었습니다.
 
 ```json
 {
@@ -435,7 +345,9 @@ Resource Manager는 배포 중 `copy` 배열을 확장합니다. 배열 이름�
 }
 ```
 
-## <a name="create-multiple-instances-of-a-child-resource"></a>자식 리소스의 여러 인스턴스 만들기
+<a id="looping-on-a-nested-resource" />
+
+## <a name="iteration-for-a-child-resource"></a>자식 리소스에 대한 반복
 자식 리소스에 대해 복사 반복을 사용할 수 없습니다. 일반적으로 다른 리소스 내에 중첩된 것으로 정의된 여러 인스턴스를 만들려면 대신 해당 리소스를 최상위 리소스로 만들어야 합니다. 형식 및 이름 속성을 통해 부모 리소스와의 관계를 정의합니다.
 
 예를 들어, 데이터 집합을 데이터 팩터리 내에 자식 리소스로 정의한다고 가정합니다.
@@ -485,31 +397,21 @@ Resource Manager는 배포 중 `copy` 배열을 확장합니다. 배열 이름�
 }]
 ```
 
-## <a name="conditionally-deploy-resource"></a>조건부 리소스 배포
+## <a name="example-templates"></a>예제 템플릿
 
-리소스 배포 여부를 지정하려면 `condition` 요소를 사용합니다. 이 요소 값은 true 또는 false로 확인됩니다. 값이 true이면 리소스가 배포됩니다. 값이 false이면 리소스가 배포되지 않습니다. 예를 들어 새 저장소 계정 배포 여부 또는 기존 저장소 계정 사용 여부를 지정하려면 다음을 사용합니다.
+다음 예제에서는 여러 리소스 또는 속성을 만들기 위한 일반적인 시나리오를 보여 줍니다.
 
-```json
-{
-    "condition": "[equals(parameters('newOrExisting'),'new')]",
-    "type": "Microsoft.Storage/storageAccounts",
-    "name": "[variables('storageAccountName')]",
-    "apiVersion": "2017-06-01",
-    "location": "[resourceGroup().location]",
-    "sku": {
-        "name": "[variables('storageAccountType')]"
-    },
-    "kind": "Storage",
-    "properties": {}
-}
-```
-
-기존 또는 새 리소스 사용 예제는 [신규 또는 기존 조건 템플릿](https://github.com/rjmax/Build2017/blob/master/Act1.TemplateEnhancements/Chapter05.ConditionalResources.NewOrExisting.json)을 참조하세요.
-
-암호 또는 SSH 키를 사용하여 가상 컴퓨터를 배포하는 예제는 [사용자 이름 또는 SSH 조건 템플릿](https://github.com/rjmax/Build2017/blob/master/Act1.TemplateEnhancements/Chapter05.ConditionalResourcesUsernameOrSsh.json)을 참조하세요.
+|Template  |설명  |
+|---------|---------|
+|[저장소 복사](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/multipleinstance/copystorage.json) |이름의 인덱스 번호를 사용하여 여러 저장소 계정을 배포합니다. |
+|[저장소 직렬 복사](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/multipleinstance/serialcopystorage.json) |여러 저장소 계정을 한 번에 하나씩 배포합니다. 이름에는 인덱스 번호가 포함됩니다. |
+|[배열을 사용하여 저장소 복사](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/multipleinstance/copystoragewitharray.json) |여러 저장소 계정을 배포합니다. 이름에는 배열의 값이 포함됩니다. |
+|[신규 또는 기존 가상 네트워크, 저장소 및 공용 IP가 있는 VM](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vm-new-or-existing-conditions) |가상 머신에 신규 또는 기존 리소스를 조건부로 배포합니다. |
+|[가변적인 수의 데이터 디스크를 사용한 VM 배포](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vm-windows-copy-datadisks) |가상 머신을 사용하여 여러 데이터 디스크를 배포합니다. |
+|[변수 복사](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/multipleinstance/copyvariables.json) |변수를 반복하는 다양한 방법을 보여 줍니다. |
+|[다중 보안 규칙](https://github.com/Azure/azure-docs-json-samples/blob/master/azure-resource-manager/multipleinstance/multiplesecurityrules.json) |네트워크 보안 그룹에 여러 보안 규칙을 배포합니다. 매개 변수에서 보안 규칙을 구성합니다. |
 
 ## <a name="next-steps"></a>다음 단계
 * 템플릿 섹션에 대한 자세한 내용은 [Azure Resource Manager 템플릿 작성](resource-group-authoring-templates.md)을 참조하세요.
 * 템플릿 배포 방법에 대한 자세한 내용은 [Azure 리소스 관리자 템플릿을 사용하여 응용 프로그램 배포](resource-group-template-deploy.md)를 참조하세요.
-
 

@@ -4,7 +4,7 @@ description: "StorSimple 가상 배열을 배포하는 첫 번째 자습서에�
 services: storsimple
 documentationcenter: NA
 author: alkohli
-manager: timlt
+manager: jeconnoc
 editor: 
 ms.assetid: 68a4cfd3-94c9-46cb-805c-46217290ce02
 ms.service: storsimple
@@ -12,15 +12,14 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 02/27/2017
+ms.date: 11/14/2017
 ms.author: alkohli
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 5edc47e03ca9319ba2e3285600703d759963e1f3
-ms.openlocfilehash: a5bc3a72eccc48ec26ef5f029d780175d66080c0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/01/2017
-
+ms.openlocfilehash: 6685c5ab7768176a0c8e7084c8512d5345732d9a
+ms.sourcegitcommit: 732e5df390dea94c363fc99b9d781e64cb75e220
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/14/2017
 ---
 # <a name="deploy-storsimple-virtual-array---prepare-the-azure-portal"></a>StorSimple 가상 배열 배포 – Azure Portal 준비
 
@@ -43,7 +42,7 @@ StorSimple 가상 배열을 배포하려면 다음 문서를 지정된 순서대
 | **#** | **단계** | **이 작업을 수행합니다…** | **그리고 이러한 문서를 사용합니다.** |
 | --- | --- | --- | --- |
 | 1. |**Azure Portal 설정** |StorSimple 가상 배열을 프로비전하기 전에 StorSimple 장치 관리자 서비스를 만들고 구성합니다. |[포털 준비](storsimple-virtual-array-deploy1-portal-prep.md) |
-| 2. |**가상 배열 프로비전** |Hyper-V의 경우 Windows Server 2012 R2, Windows Server 2012 또는 Windows Server 2008 R2에서 Hyper-V를 실행하는 호스트 시스템의 StorSimple 가상 배열을 프로비전하고 연결합니다. <br></br> <br></br> VMware의 경우, VMware ESXi 5.5 이상을 실행하는 호스트 시스템에서 StorSimple 가상 배열에 프로비전하고 연결합니다.<br></br> |[Hyper-V에서 가상 배열 프로비전](storsimple-virtual-array-deploy2-provision-hyperv.md) <br></br> <br></br> [VMware에서 가상 배열 프로비전](storsimple-virtual-array-deploy2-provision-vmware.md) |
+| 2. |**가상 배열 프로비전** |Hyper-V의 경우 Windows Server 2012 R2, Windows Server 2012 또는 Windows Server 2008 R2에서 Hyper-V를 실행하는 호스트 시스템의 StorSimple 가상 배열을 프로비전하고 연결합니다. <br></br> <br></br> VMware의 경우, VMware ESXi 5.0, 5.5 또는 6.0을 실행하는 호스트 시스템에서 StorSimple 가상 배열에 프로비전하고 연결합니다.<br></br> |[Hyper-V에서 가상 배열 프로비전](storsimple-virtual-array-deploy2-provision-hyperv.md) <br></br> <br></br> [VMware에서 가상 배열 프로비전](storsimple-virtual-array-deploy2-provision-vmware.md) |
 | 3. |**가상 배열 설정** |파일 서버에 대해 초기 설정을 수행하고 StorSimple 파일 서버를 등록하고 장치 설정을 완료합니다. 그런 다음 SMB 공유를 프로비전할 수 있습니다. <br></br> <br></br> iSCSI 서버에 대해 초기 설정을 수행하고 StorSimple iSCSI 서버를 등록하고 장치 설정을 완료합니다. 그런 다음 iSCSI 볼륨을 프로비전할 수 있습니다. |[파일 서버로 가상 배열 설정](storsimple-virtual-array-deploy3-fs-setup.md)<br></br> <br></br>[iSCSI 서버로 가상 배열 설정](storsimple-virtual-array-deploy3-iscsi-setup.md) |
 
 이제 Azure Portal 설치를 시작할 수 있습니다.
@@ -71,7 +70,7 @@ StorSimple 가상 배열을 배포하려면 다음 문서를 지정된 순서대
 
 가상 배열을 배포하기 전에 다음 사항을 확인해야 합니다.
 
-* 장치 프로비전에 사용될 수 있는 Windows Server 2008 R2 이상 또는 VMware(ESXi 5.5 이상)에서 Hyper-V를 실행하는 호스트 시스템에 액세스할 수 있습니다.
+* 장치 프로비전에 사용될 수 있는 Windows Server 2008 R2 이상 또는 VMware(ESXi 5.0, 5.5 또는 6.0)에서 Hyper-V를 실행하는 호스트 시스템에 액세스할 수 있습니다.
 * 가상 배열을 프로비전하려면 호스트 시스템에서 다음 리소스를 전용으로 사용할 수 있습니다.
   
   * 코어 4개 이상
@@ -137,21 +136,21 @@ StorSimple 장치 관리자 서비스를 실행한 후에는 서비스 등록 �
    
    * Windows Server 2012 이상의 Hyper-V용 VHDX
    * Windows Server 2008 R2 이상의 Hyper-V용 VHD
-   * VMWare ESXi 5.5 이상용 VMDK
+   * VMWare ESXi 5.0, 5.5 또는 6.0용 VMDK
 5. 파일을 다운로드하고 로컬 드라이브에 압축을 푼 다음 압축을 푼 위치를 적어둡니다.
 
 ## <a name="optional-step-configure-a-new-storage-account-for-the-service"></a>선택적 단계: 서비스에 대한 새 저장소 계정 구성
 
 이 단계는 선택 사항이며 서비스를 사용하여 저장소 계정을 자동으로 생성하도록 설정하지 않은 경우에만 수행해야 합니다.
 
-다른 지역에 Azure Storage 계정을 만들어야 하는 경우 단계별 지침은 [저장소 계정을 만드는 방법](../storage/storage-create-storage-account.md#create-a-storage-account)을 참조하세요.
+다른 지역에 Azure Storage 계정을 만들어야 하는 경우 단계별 지침은 [저장소 계정을 만드는 방법](../storage/common/storage-create-storage-account.md#create-a-storage-account)을 참조하세요.
 
 기존 Microsoft Azure Storage 계정을 추가하려면 StorSimple 장치 관리자 서비스 페이지의 [Azure Portal](https://ms.portal.azure.com/)에서 다음 단계를 수행합니다.
 
 #### <a name="to-add-a-storage-account-credential-that-has-the-same-azure-subscription-as-the-device-manager-service"></a>장치 관리자 서비스와 동일한 Azure 구독에 있는 저장소 계정 자격 증명을 추가하려면
 
 1. 장치 관리자 서비스를 찾아 선택하고 두 번 클릭합니다. 그러면 **개요** 블레이드가 열립니다.
-2. **구성** 섹션 내의 **저장소 계정 자격 증명**을 선택합니다.
+2. **구성** 섹션 내의 **Storage 계정 자격 증명**을 선택합니다.
 3. **추가**를 클릭합니다.
 4. **저장소 계정 추가** 블레이드에서 다음을 수행합니다.
    
@@ -171,5 +170,4 @@ StorSimple 장치 관리자 서비스를 실행한 후에는 서비스 등록 �
 
 * [Hyper-V에서 StorSimple 가상 배열 프로비전](storsimple-virtual-array-deploy2-provision-hyperv.md)
 * [VMware에서 StorSimple 가상 배열 프로비전](storsimple-virtual-array-deploy2-provision-vmware.md)
-
 

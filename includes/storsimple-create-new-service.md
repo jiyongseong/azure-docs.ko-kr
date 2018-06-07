@@ -10,7 +10,7 @@
    2. 서비스의 **위치** 를 지정합니다. 일반적으로 장치를 배포하려는 지리적 지역에 가장 가까운 위치를 선택합니다. 다음 사항을 고려할 수도 있습니다. 
       
       * StorSimple 장치로 배포하려는 Azure에 부하가 있는 경우, 해당 데이터 센터를 사용해야 합니다.
-      * StorSimple Manager 서비스와 Azure 저장소는 두 개의 별도 위치에 있을 수 있습니다. そのような場合、StorSimple Manager と Azure Storage のアカウントを別々に作成する必要があります。 Azure 저장소 계정을 만들려면 Azure 클래식 포털의 Azure Storage 서비스로 이동하고 [Azure Storage 계정 만들기](../articles/storage/storage-create-storage-account.md#create-a-storage-account)의 단계를 수행합니다. 이 계정을 만든 후에 [서비스에 대한 새 저장소 계정 구성](../articles/storsimple/storsimple-deployment-walkthrough.md#configure-a-new-storage-account-for-the-service)의 단계를 수행하여 StorSimple Manager 서비스에 추가합니다.
+      * StorSimple Manager 서비스와 Azure 저장소는 두 개의 별도 위치에 있을 수 있습니다. そのような場合、StorSimple Manager と Azure Storage のアカウントを別々に作成する必要があります。 Azure 저장소 계정을 만들려면 Azure 클래식 포털의 Azure Storage 서비스로 이동하고 [Azure Storage 계정 만들기](../articles/storage/common/storage-create-storage-account.md#create-a-storage-account)의 단계를 수행합니다. 이 계정을 만든 후에 [서비스에 대한 새 저장소 계정 구성](../articles/storsimple/storsimple-deployment-walkthrough.md#configure-a-new-storage-account-for-the-service)의 단계를 수행하여 StorSimple Manager 서비스에 추가합니다.
    3. 드롭다운 목록에서 **구독** 을 선택합니다. 구독은 대금 청구 계정에 연결됩니다. 이 필드는 구독이 하나만 있는 경우에는 나타나지 않습니다.
    4. **새 저장소 계정 만들기** 를 선택하여 서비스를 포함하는 저장소 계정을 자동으로 만듭니다. 이 저장소 계정에는 "storsimplebwv8c6dcnf"와 같은 특수한 이름이 주어집니다. 다른 위치에 있는 데이터가 필요하면 확인란의 선택을 취소합니다. 
    5. **StorSimple 관리자 만들기** 를 클릭하여 서비스를 만듭니다.

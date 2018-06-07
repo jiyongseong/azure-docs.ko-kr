@@ -11,15 +11,14 @@ ms.devlang: NA
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
 ms.workload: infrastructure
-ms.date: 12/01/2016
+ms.date: 10/31/2016
 ms.author: rclaus
 ms.custom: H1Hack27Feb2017
-translationtype: Human Translation
-ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
-ms.openlocfilehash: ee5be707b443cbe42bf4a492d79390e534d4b91f
-ms.lasthandoff: 04/03/2017
-
-
+ms.openlocfilehash: 5583f3d1949614dbba4d2f91d72e4ac6b4d03d1c
+ms.sourcegitcommit: 43c3d0d61c008195a0177ec56bf0795dc103b8fa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/01/2017
 ---
 # <a name="how-to-troubleshoot-and-monitor-sap-hana-large-instances-on-azure"></a>Azure(큰 인스턴스)에서 SAP HANA 문제를 해결하고 모니터링하는 방법
 
@@ -42,6 +41,16 @@ Azure Virtual Machines에서 위에 명시된 리소스 클래스가 충분한�
 **네트워크 대역폭:** Azure VNet 게이트웨이는 Azure VNet으로 이동하는 데이터의 대역폭으로 제한됩니다. 따라서 VNet 내의 모든 Azure VM에서 수신한 데이터를 모니터링하여 선택한 Azure 게이트웨이 SKU의 제한에 얼마나 근접했는지 파악하는 데 유용합니다. HANA 큰 인스턴스 단위에서 들어오고 나가는 네트워크 트래픽도 모니터링하고 시간이 지남에 따라 처리되는 볼륨도 추적하는 것이 합리적입니다.
 
 **디스크 공간:** 디스크 공간 사용량은 일반적으로 시간이 지남에 따라 증가합니다. 여러 가지 원인이 있지만 대부분 데이터 볼륨 증가, 트랜잭션 로그 백업 실행, 추적 파일 저장 및 저장소 스냅숏 수행으로 인해 발생합니다. 따라서 디스크 공간 사용량을 모니터링하고 HANA 큰 인스턴스 단위와 연결된 디스크 공간을 관리하는 것이 중요합니다.
+
+HANA 대규모 인스턴스의 **유형 II SKU**에서 서버에는 미리 로드된 시스템 진단 도구가 포함됩니다. 이러한 진단 도구를 사용하여 시스템 상태 검사를 수행할 수 있습니다. 다음 명령을 실행하여 /var/log/health_check에서 상태 검사 로그 파일을 생성합니다.
+```
+/opt/sgi/health_check/microsoft_tdi.sh
+```
+Microsoft 지원 팀과 함께 문제를 해결할 경우 이러한 진단 도구를 사용하여 로그 파일을 제공하도록 요청될 수 있습니다. 다음 명령을 사용하여 파일을 zip으로 압축할 수 있습니다.
+```
+tar  -czvf health_check_logs.tar.gz /var/log/health_check
+```
+
 
 ## <a name="monitoring-and-troubleshooting-from-hana-side"></a>HANA 쪽에서 모니터링 및 문제 해결
 
@@ -189,5 +198,4 @@ SAP HANA 인스턴스에 대한 일반적인 정보는 **HANA\_Configuration\_Ov
 SAP HANA 매개 변수를 확인하려면 **HANA\_Configuration\_Parameters\_Rev70+**.
 
 ![SAP HANA 매개 변수를 확인하려면 [HANA\_Configuration\_Parameters\_Rev70+].](./media/troubleshooting-monitoring/image15-configuration-parameters.png)
-
 

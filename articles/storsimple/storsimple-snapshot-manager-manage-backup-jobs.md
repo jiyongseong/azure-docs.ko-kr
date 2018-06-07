@@ -14,13 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 06/05/2017
 ms.author: v-sharos
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 219dcbfdca145bedb570eb9ef747ee00cc0342eb
-ms.openlocfilehash: b31f6d51399dc0533d8cbefcafc3b55762cb6cf1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 11/17/2016
-
-
+ms.openlocfilehash: 03e306b62250f2bb033cc14e856a59760b5406c3
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-storsimple-snapshot-manager-to-view-and-manage-backup-jobs"></a>StorSimple 스냅숏 관리자를 사용하여 백업 작업 보기 및 관리
 
@@ -88,5 +86,4 @@ ms.lasthandoff: 11/17/2016
 ## <a name="next-steps"></a>다음 단계
 * [StorSimple 스냅숏 관리자를 사용하여 StorSimple 솔루션을 관리](storsimple-snapshot-manager-admin.md)하는 방법을 알아봅니다.
 * [StorSimple 스냅숏 관리자를 사용하여 백업 카탈로그를 관리](storsimple-snapshot-manager-manage-backup-catalog.md)하는 방법을 알아봅니다.
-
 

@@ -1,11 +1,11 @@
 ---
-title: "Azure Traffic Manager - 트래픽 라우팅 메서드 | Microsoft Docs"
-description: "이 문서는 Traffic Manager에서 사용하는 다양한 트래픽 라우팅 방법을 이해하는 데 도움이 됩니다."
+title: Azure Traffic Manager - 트래픽 라우팅 메서드 | Microsoft Docs
+description: 이 문서는 Traffic Manager에서 사용하는 다양한 트래픽 라우팅 방법을 이해하는 데 도움이 됩니다.
 services: traffic-manager
-documentationcenter: 
+documentationcenter: ''
 author: KumudD
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: db1efbf6-6762-4c7a-ac99-675d4eeb54d0
 ms.service: traffic-manager
 ms.devlang: na
@@ -14,15 +14,13 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 07/13/2017
 ms.author: kumud
+ms.openlocfilehash: c9bd9b4913e38ed5c1f7f4ec8ee7e3210fa3be8f
+ms.sourcegitcommit: d74657d1926467210454f58970c45b2fd3ca088d
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: fe776e24a4f78b389c6096694055b38befa3c419
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/28/2018
 ---
-
-# <a name="traffic-manager-routing-methods"></a>트래픽 관리자 라우팅 방법
+# <a name="traffic-manager-routing-methods"></a>Traffic Manager 라우팅 방법
 
 Azure Traffic Manager는 다양한 서비스 끝점에 네트워크 트래픽을 라우팅하는 방법을 결정하는 네 가지 트래픽 라우팅 방법을 지원합니다. Traffic Manager는 트래픽 라우팅 메서드를 수신한 각 DNS 쿼리에 적용합니다. 트래픽 라우팅 메서드는 DNS 응답에서 반환된 끝점을 결정합니다.
 
@@ -33,7 +31,7 @@ Traffic Manager에서 사용할 수 있는 네 가지 트래픽 라우팅 메서
 * **[성능](#performance):** 끝점이 서로 다른 지역에 있고 최종 사용자가 가장 짧은 네트워크 대기 시간을 기준으로 "가장 가까운" 끝점을 사용하게 하려는 경우 **성능**을 선택합니다.
 * **[지리적](#geographic):** 사용자가 해당 DNS 쿼리가 시작된 지리적 위치를 기준으로 특정 끝점(Azure, 외부 또는 중첩)으로 리디렉션되게 하려면 **지리적**을 선택합니다. 이렇게 하면 Traffic Manager 고객이 사용자의 지리적 위치를 파악하고 그에 따라 라우팅되는 중요한 시나리오를 사용할 수 있습니다. 데이터 독립성 지시 사항, 콘텐츠 및 사용자 환경의 지역화를 준수하고 다른 지역의 트래픽을 측정하는 작업을 예로 들 수 있습니다.
 
-모든 Traffic Manager 프로필에는 끝점 상태 및 자동 끝점 장애 조치(Failover)의 모니터링이 포함됩니다. 자세한 내용은 [트래픽 관리자 끝점 모니터링](traffic-manager-monitoring.md)을 참조하세요. 단일 트래픽 관리자 프로필은 1가지 트래픽 라우팅 방법만 사용할 수 있습니다. 언제든지 프로필에 대해 다른 트래픽 라우팅 방법을 선택할 수 있습니다. 1분 안에 변경 내용이 적용되며 가동 중지는 발생하지 않습니다. 중첩 트래픽 관리자 프로필을 사용하여 트래픽 라우팅 방법을 결합할 수 있습니다. 중첩을 통해 크고 복잡한 응용 프로그램의 요구 사항을 충족할 수 있는 정교하고 유연한 트래픽 라우팅 구성이 가능합니다. 자세한 내용은 [중첩 Traffic Manager 프로필](traffic-manager-nested-profiles.md)을 참조하세요.
+모든 Traffic Manager 프로필에는 끝점 상태 및 자동 끝점 장애 조치(Failover)의 모니터링이 포함됩니다. 자세한 내용은 [Traffic Manager 끝점 모니터링](traffic-manager-monitoring.md)을 참조하세요. 단일 Traffic Manager 프로필은 1가지 트래픽 라우팅 방법만 사용할 수 있습니다. 언제든지 프로필에 대해 다른 트래픽 라우팅 방법을 선택할 수 있습니다. 1분 안에 변경 내용이 적용되며 가동 중지는 발생하지 않습니다. 중첩 Traffic Manager 프로필을 사용하여 트래픽 라우팅 방법을 결합할 수 있습니다. 중첩을 통해 크고 복잡한 응용 프로그램의 요구 사항을 충족할 수 있는 정교하고 유연한 트래픽 라우팅 구성이 가능합니다. 자세한 내용은 [중첩 Traffic Manager 프로필](traffic-manager-nested-profiles.md)을 참조하세요.
 
 ## <a name = "priority"></a>우선 순위 트래픽 라우팅 방법
 
@@ -52,7 +50,7 @@ Azure Resource Manager에서 각 끝점에 대해 '우선 순위' 속성을 사�
 
 ![Azure Traffic Manager '가중' 트래픽 라우팅 메서드][2]
 
-가중 트래픽 라우팅 메서드에서는 Traffic Manager 프로필 구성에서 각 끝점에 가중치를 할당합니다. 가중치는 1에서 1000 사이의 정수입니다. 이 매개 변수는 선택 사항입니다. 생략되면 Traffic Manager는 '1'이라는 기본 가중치를 사용합니다.
+가중 트래픽 라우팅 메서드에서는 Traffic Manager 프로필 구성에서 각 끝점에 가중치를 할당합니다. 가중치는 1에서 1000 사이의 정수입니다. 이 매개 변수는 선택 사항입니다. 생략되면 Traffic Manager는 '1'이라는 기본 가중치를 사용합니다. 가중치가 높을수록 우선 순위가 높아집니다.
 
 Traffic Manager는 수신한 각 DNS 쿼리에 대해 사용 가능한 끝점을 임의로 선택합니다. 끝점을 선택하는 확률은 사용 가능한 모든 끝점에 할당된 가중치를 기반으로 합니다. 모든 끝점 결과에서 동일한 가중치를 사용하면 균등하게 트래픽이 분포됩니다. 특정 끝점에 더 높은(또는 더 낮은) 가중치를 적용하면 해당 끝점이 DNS 응답에서 더(또는 덜) 자주 반환됩니다.
 
@@ -60,7 +58,7 @@ Traffic Manager는 수신한 각 DNS 쿼리에 대해 사용 가능한 끝점을
 
 * 점진적 응용 프로그램 업그레이드: 새 끝점으로 라우팅할 트래픽의 백분율을 할당하고 시간 경과에 따라 점진적으로 트래픽을 100%까지 늘립니다.
 * Azure에 응용 프로그램 마이그레이션: Azure 끝점 및 외부 끝점으로 프로필을 만듭니다. 새 끝점을 선호하도록 끝점의 가중치를 조정합니다.
-* 추가 용량을 위한 클라우드 버스트: 트래픽 관리자 프로필을 통해 온-프레미스 배포를 클라우드로 신속하게 확장합니다. 클라우드에 추가 용량이 필요한 경우 끝점을 더 추가하거나 사용하도록 설정하고 각 끝점으로 전송되는 트래픽 양을 지정할 수 있습니다.
+* 추가 용량을 위한 클라우드 버스트: Traffic Manager 프로필을 통해 온-프레미스 배포를 클라우드로 신속하게 확장합니다. 클라우드에 추가 용량이 필요한 경우 끝점을 더 추가하거나 사용하도록 설정하고 각 끝점으로 전송되는 트래픽 양을 지정할 수 있습니다.
 
 Resource Manager Azure Portal에서는 가중 트래픽 라우팅의 구성을 지원합니다.  Azure PowerShell, CLI 및 REST API에서 이전 버전의 Resource Manager를 사용하여 가중치를 구성할 수 있습니다.
 
@@ -72,7 +70,7 @@ Resource Manager Azure Portal에서는 가중 트래픽 라우팅의 구성을 �
 * 응용 프로그램 간 통신
 * 일반적인 재귀 DNS 인프라를 공유하는 좁은 사용자 기반을 목표로 하는 응용 프로그램(예: 프록시를 통해 연결하는 회사의 직원)
 
-이러한 DNS 캐싱 효과는 Azure 트래픽 관리자만이 아니라 모든 DNS 기반 트래픽 라우팅 시스템에 공통적으로 적용됩니다. 경우에 따라 DNS 캐시를 명시적으로 지우면 문제가 해결될 수도 있습니다. 대체 트래픽 라우팅 방법이 더 적절한 경우도 있습니다.
+이러한 DNS 캐싱 효과는 Azure Traffic Manager만이 아니라 모든 DNS 기반 트래픽 라우팅 시스템에 공통적으로 적용됩니다. 경우에 따라 DNS 캐시를 명시적으로 지우면 문제가 해결될 수도 있습니다. 대체 트래픽 라우팅 방법이 더 적절한 경우도 있습니다.
 
 ## <a name = "performance"></a>성능 트래픽 라우팅 방법
 
@@ -130,13 +128,12 @@ Traffic Manager는 DNS 쿼리의 원본 IP 주소를 읽고 해당 사항이 발
 
 [Traffic Manager endpoint monitoring](traffic-manager-monitoring.md)
 
-[트래픽 관리자 프로필을 만드는](traffic-manager-create-profile.md)
+[Traffic Manager 프로필을 만드는](traffic-manager-create-profile.md)
 
 <!--Image references-->
 [1]: ./media/traffic-manager-routing-methods/priority.png
 [2]: ./media/traffic-manager-routing-methods/weighted.png
 [3]: ./media/traffic-manager-routing-methods/performance.png
-
 
 
 

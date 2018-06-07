@@ -1,9 +1,9 @@
 ---
-title: "Azure Application Insights의 종속성 추적 | Microsoft Docs"
-description: "Application Insights를 사용하여 온-프레미스 또는 Microsoft Azure 웹 응용 프로그램의 사용량, 가용성 및 성능을 분석합니다."
+title: Azure Application Insights의 종속성 추적 | Microsoft Docs
+description: Application Insights를 사용하여 온-프레미스 또는 Microsoft Azure 웹 응용 프로그램의 사용량, 가용성 및 성능을 분석합니다.
 services: application-insights
 documentationcenter: .net
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: d15c4ca8-4c1a-47ab-a03d-c322b4bb2a9e
 ms.service: application-insights
@@ -12,13 +12,13 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 05/04/2017
-ms.author: sewhee
+ms.author: mbullwin
+ms.openlocfilehash: 99d9ad04ac39d6d0072b13c81e74605e48de175b
+ms.sourcegitcommit: 909469bf17211be40ea24a981c3e0331ea182996
 ms.translationtype: HT
-ms.sourcegitcommit: c30998a77071242d985737e55a7dc2c0bf70b947
-ms.openlocfilehash: 43733e452126c85ab9e19b6036aea96f56fc4d12
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/02/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
+ms.locfileid: "34010467"
 ---
 # <a name="set-up-application-insights-dependency-tracking"></a>Application Insights 설정: 종속성 추적
 *종속성*은 앱에서 호출하는 외부 구성 요소로, 일반적으로 HTTP, 데이터베이스 또는 파일 시스템을 사용하여 호출되는 서비스입니다. [Application Insights](app-insights-overview.md)는 응용 프로그램이 종속성을 기다리는 시간과 종속성 호출에 실패하는 빈도를 측정합니다. 특정 호출을 조사하여 요청 및 예외와 연관지을 수 있습니다.
@@ -179,7 +179,7 @@ ms.lasthandoff: 08/02/2017
 
 예를 들면, 사용자가 직접 작성하지 않은 어셈블리 코드를 작성하는 경우, 응답 시간 기여도를 알아보기 위해 모든 호출의 시간을 잴 수 있습니다. Application Insights에서 종속성 차트에 표시되는 이 데이터를 가지려면, `TrackDependency`을 사용하여 이것을 보냅니다.
 
-```C#
+```csharp
 
             var startTime = DateTime.UtcNow;
             var timer = System.Diagnostics.Stopwatch.StartNew();
@@ -201,9 +201,12 @@ ms.lasthandoff: 08/02/2017
 
 *SQL 쿼리가 일부만 표시됩니다.*
 
-* 최신 버전의 SDK로 업그레이드합니다. .NET 버전이 4.6 미만인 경우:
-  * IIS 호스트: 호스트 서버에 [Application Insights 에이전트](app-insights-monitor-performance-live-website-now.md)를 설치합니다.
-  * Azure 웹앱: 웹앱 제어판에서 Application Insights 탭을 열고 Application Insights를 설치합니다.
+* Application Insights SDK의 안정적인 최신 버전으로 업그레이드합니다.
+
+ .NET 버전이 4.6 미만인 경우:
+
+* IIS 호스트: 호스트 서버에 [Application Insights 에이전트](app-insights-monitor-performance-live-website-now.md)를 설치합니다.
+* Azure 웹앱: 웹앱 제어판에서 Application Insights 탭을 열고 Application Insights를 설치합니다.
 
 ## <a name="video"></a>비디오
 
@@ -213,4 +216,3 @@ ms.lasthandoff: 08/02/2017
 * [예외](app-insights-asp-net-exceptions.md)
 * [사용자 및 페이지 데이터](app-insights-javascript.md)
 * [Availability](app-insights-monitor-web-app-availability.md)
-

@@ -1,11 +1,11 @@
 ---
-title: "Azure Logic Apps의 MailChimp 커넥터 | Microsoft Docs"
-description: "Azure 앱 서비스로 논리 앱을 만듭니다. MailChimp는 비즈니스에서 마케팅 전자 메일, 자동화된 메시지 및 대상 캠페인 전송을 비롯한 전자 메일 마케팅 작업을 관리하고 자동화할 수 있는 SaaS 서비스입니다."
+title: Azure Logic Apps의 MailChimp 커넥터 | Microsoft Docs
+description: Azure 앱 서비스로 논리 앱을 만듭니다. MailChimp는 비즈니스에서 마케팅 전자 메일, 자동화된 메시지 및 대상 캠페인 전송을 비롯한 전자 메일 마케팅 작업을 관리하고 자동화할 수 있는 SaaS 서비스입니다.
 services: logic-apps
 documentationcenter: .net,nodejs,java
-author: MandiOhlinger
+author: ecfan
 manager: anneta
-editor: 
+editor: ''
 tags: connectors
 ms.assetid: 36559de2-94f0-4355-b492-2926dfc56486
 ms.service: logic-apps
@@ -14,24 +14,22 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: integration
 ms.date: 08/18/2016
-ms.author: mandia; ladocs
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c785ad8dbfa427d69501f5f142ef40a2d3530f9e
-ms.openlocfilehash: 46de91881f84183d0359755f49a115e712a7033b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
-
+ms.author: estfan; ladocs
+ms.openlocfilehash: 041212771db5b5971ccd220e68d71d59d8220531
+ms.sourcegitcommit: 8aab1aab0135fad24987a311b42a1c25a839e9f3
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/16/2018
 ---
 # <a name="get-started-with-the-mailchimp-connector"></a>MailChimp 커넥터 시작
-MailChimp는 비즈니스에서 마케팅 전자 메일, 자동화된 메시지 및 대상 캠페인 전송을 비롯한 전자 메일 마케팅 작업을 관리하고 자동화할 수 있는 SaaS 서비스입니다.
+MailChimp는 비즈니스에서 마케팅 이메일, 자동화된 메시지 및 대상 캠페인 전송을 비롯한 이메일 마케팅 작업을 관리하고 자동화할 수 있는 SaaS 서비스입니다.
 
-이제 논리 앱을 만들어 시작할 수 있습니다. [논리 앱 만들기](../logic-apps/logic-apps-create-a-logic-app.md)를 참조하세요.
+이제 논리 앱을 만들어 시작할 수 있습니다. [논리 앱 만들기](../logic-apps/quickstart-create-first-logic-app-workflow.md)를 참조하세요.
 
 ## <a name="create-a-connection-to-mailchimp"></a>MailChimp에 대한 연결 만들기
 MailChimp로 논리 앱을 만들려면 먼저 **연결**을 만든 후에 다음 속성에 대한 세부 정보를 제공해야 합니다.
 
-| 속성 | 필수 | 설명 |
+| 자산 | 필수 | 설명 |
 | --- | --- | --- |
 | 신뢰 |예 |MailChimp 자격 증명 제공 |
 

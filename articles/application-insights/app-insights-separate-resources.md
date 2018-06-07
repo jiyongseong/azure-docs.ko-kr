@@ -3,7 +3,7 @@ title: "Azure Application Insights에서 개발, 테스트 및 릴리스의 원�
 description: "개발, 테스트 및 프로덕션 스탬프에 대한 다양한 리소스에 직접 원격 분석"
 services: application-insights
 documentationcenter: 
-author: CFreemanwa
+author: mrbullwinkle
 manager: carmonm
 ms.assetid: 578e30f0-31ed-4f39-baa8-01b4c2f310c9
 ms.service: application-insights
@@ -12,13 +12,12 @@ ms.tgt_pltfrm: ibiza
 ms.devlang: na
 ms.topic: article
 ms.date: 05/15/2017
-ms.author: sewhee
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 125f05f5dce5a0e4127348de5b280f06c3491d84
-ms.openlocfilehash: 0ee19b46a0e882571f6193471be69fa097d98936
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/22/2017
-
+ms.author: mbullwin
+ms.openlocfilehash: 8d95958bce0597bfb16ef1c6b99b72ce9134e66f
+ms.sourcegitcommit: e462e5cca2424ce36423f9eff3a0cf250ac146ad
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 11/01/2017
 ---
 # <a name="separating-telemetry-from-development-test-and-production"></a>개발, 테스트 및 프로덕션의 원격 분석 구분
 
@@ -161,4 +160,3 @@ Visual Studio Team Services를 사용하는 경우 새 버전을 릴리스할 �
 
 * [여러 역할에 대한 공유 리소스](app-insights-monitor-multi-role-apps.md)
 * [A|B 변형을 구분하는 원격 분석 이니셜라이저 만들기](app-insights-api-filtering-sampling.md#add-properties)
-

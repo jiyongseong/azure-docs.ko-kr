@@ -1,8 +1,8 @@
 ---
-title: "Azure Data Lake Analytics 작업용 작업 브라우저 및 작업 보기 사용 | Microsoft 문서"
-description: "Azure Data Lake Analytics 작업용 작업 브라우저 및 작업 보기를 사용하는 방법에 대해 알아보세요. "
+title: Azure Data Lake Analytics 작업용 작업 브라우저 및 작업 보기 사용 | Microsoft 문서
+description: 'Azure Data Lake Analytics 작업용 작업 브라우저 및 작업 보기를 사용하는 방법에 대해 알아보세요. '
 services: data-lake-analytics
-documentationcenter: 
+documentationcenter: ''
 author: mumian
 manager: jhubbard
 editor: cgronlun
@@ -12,15 +12,13 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: big-data
-ms.date: 10/17/2016
+ms.date: 08/02/2017
 ms.author: jgao
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a1ba750d2be1969bfcd4085a24b0469f72a357ad
-ms.openlocfilehash: 2e5dbaf595e3d3cd7dee09431fbb1cb6f2403ef4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/20/2017
-
-
+ms.openlocfilehash: cc9048566dd58733cd86aac0f9836763fa095843
+ms.sourcegitcommit: d74657d1926467210454f58970c45b2fd3ca088d
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/28/2018
 ---
 # <a name="use-job-browser-and-job-view-for-azure-data-lake-analytics-jobs"></a>Azure Data Lake Analytics 작업용 작업 브라우저 및 작업 보기 사용
 Azure Data Lake Analytics 서비스는 제출된 작업을 [쿼리 저장소](#query-store)에 보관합니다. 이 문서에서는 Azure Data Lake Tools for Visual Studio에서 작업 브라우저 및 작업 보기를 사용하여 기존 작업 정보를 찾는 방법에 대해 배웁니다. 
@@ -31,7 +29,7 @@ Azure Data Lake Analytics 서비스는 제출된 작업을 [쿼리 저장소](#q
 [Data Lake Tools for Visual Studio 필수 구성 요소](data-lake-analytics-data-lake-tools-get-started.md#prerequisites)를 참조하세요.
 
 ## <a name="open-the-job-browser"></a>작업 브라우저 열기
-작업 브라우저는 Visual Studio에서 **서버 탐색기>Azure>Data Lake Analytics>작업**을 통해 액세스할 수 있습니다.  브라우저를 사용하여 Data Lake Analytics 계정의 쿼리 저장소에 액세스할 수 있습니다. 작업 브라우저에서 왼쪽 쿼리 저장소에는 작업에 대한 기본 정보가 표시되고 오른쪽 작업 보기에는 작업에 대한 세부 정보가 표시됩니다.
+작업 브라우저는 Visual Studio에서 **서버 탐색기>Azure>Data Lake Analytics>작업**을 통해 액세스합니다.  작업 브라우저를 사용하여 Data Lake Analytics 계정의 쿼리 저장소에 액세스할 수 있습니다. 작업 브라우저의 왼쪽 쿼리 저장소에는 기본 작업 정보가 표시되고 오른쪽 작업 보기에는 세부적인 작업 정보가 표시됩니다.
 
 ## <a name="job-view"></a>작업 보기
 작업 보기에는 작업에 대한 세부 정보가 표시됩니다. 작업을 열려면 작업 브라우저에서 작업을 두 번 클릭하거나 Data Lake에서 작업 보기를 클릭하여 엽니다. 작업 URL이 표시된 대화 상자가 나타납니다.
@@ -51,7 +49,7 @@ Azure Data Lake Analytics 서비스는 제출된 작업을 [쿼리 저장소](#q
       ![Azure Data Lake Analytics 작업 단계 상태](./media/data-lake-analytics-data-lake-tools-view-jobs/data-lake-tools-job-phases.png)
     
     * 준비 중: 스크립트를 클라우드로 업로드하고 컴파일 서비스를 사용하여 스크립트를 컴파일 및 최적화합니다.
-    * 대기 중: 작업이 큐에 추가된 다음 충분한 리소스를 기다리거나 작업이 계정당 최대 동시 작업 수 한도를 초과한 경우입니다. 우선 순위 설정에 따라 큐 작업의 순서가 결정되며 숫자가 낮을수록 우선 순위가 높습니다.
+    * 큐에 대기: 작업이 충분한 리소스를 기다리거나 계정당 최대 동시 작업 수 한도를 초과한 경우 큐에 대기합니다. 우선 순위 설정에 따라 큐 작업의 순서가 결정되며 숫자가 낮을수록 우선 순위가 높습니다.
     * 실행 중: 작업이 Data Lake Analytics 계정에서 실제로 실행 중입니다.
     * 종료하는 중: 작업이 완료되는 중입니다(예: 파일 마무리 중).
       
@@ -64,7 +62,7 @@ Azure Data Lake Analytics 서비스는 제출된 작업을 [쿼리 저장소](#q
     
     * 작업 결과: 성공 또는 실패입니다. 작업은 모든 단계에서 실패할 수 있습니다.
     * 총 기간: 제출 시간과 종료 시간 간 벽시계 시간(기간)입니다.
-    * 총 계산 시간: 전체 꼭짓점 실행 시간으로, 작업이 한 가지 꼭짓점에서만 실행되는 시간과 같습니다. 꼭짓점에 대한 자세한 내용은 전체 꼭짓점 수를 참조하세요.
+    * 총 Compute 시간: 전체 꼭짓점 실행 시간으로, 작업이 한 가지 꼭짓점에서만 실행되는 시간과 같습니다. 꼭짓점에 대한 자세한 내용은 전체 꼭짓점 수를 참조하세요.
     * 제출/시작/종료 시간: Data Lake Analytics 서비스가 작업 제출을 수신하는 시간/작업 실행을 시작하는 시간/작업을 성공적으로 또는 실패하고 종료하는 시간입니다.
     * 컴파일/대기 중/실행 중: 준비 중/대기 중/실행 중 단계에서 사용한 벽시계 시간입니다.
     * 계정: 작업을 실행하는 데 사용된 Data Lake Analytics 계정입니다.
@@ -134,7 +132,7 @@ Azure Data Lake Analytics 서비스는 제출된 작업을 [쿼리 저장소](#q
     
     * 진행률: 작업 실행 진행률. 자세한 내용은 [단계 정보](#stage-information)를 참조하세요.
     * 읽은/쓴 데이터: 각 단계에서 읽거나 쓴 총 데이터의 열 지도입니다.
-    * 계산 시간: SUM(전체 꼭짓점의 실행 시간)의 열 지도로. 단계의 모든 작업을 1개 꼭짓점에서만 실행할 경우 소요되는 시간과 같습니다.
+    * Compute 시간: SUM(전체 꼭짓점의 실행 시간)의 열 지도로. 단계의 모든 작업을 1개 꼭짓점에서만 실행할 경우 소요되는 시간과 같습니다.
     * 노드당 평균 실행 시간: SUM(전체 꼭짓점 실행 시간) / (꼭짓점 수)의 열 지도. 즉, 병렬 처리로 실행되는 모든 꼭짓점을 할당할 수 있을 경우 전체 단계는 이 시간 안에 완료됩니다.
     * 입력/출력 처리량: 각 단계의 입력/출력 처리량의 열 지도. 여기에서 작업이 I/O 바운드 작업인지 여부를 확인할 수 있습니다.
 * 메타데이터 작업
@@ -177,5 +175,4 @@ Azure Data Lake Analytics 서비스는 제출된 작업을 [쿼리 저장소](#q
 * 진단 정보를 기록하려면 [Azure Data Lake Analytics에 대한 진단 로그에 액세스](data-lake-analytics-diagnostic-logs.md)
 * 더 복잡한 쿼리를 보려면 [Azure 데이터 레이크 분석을 사용하여 웹 사이트 로그 분석](data-lake-analytics-analyze-weblogs.md)을 참조하세요.
 * 꼭짓점 실행 보기를 사용하려면 [Data Lake Tools for Visual Studio에서 Vertex Execution View 사용](data-lake-analytics-data-lake-tools-use-vertex-execution-view.md)을 참조하세요.
-
 

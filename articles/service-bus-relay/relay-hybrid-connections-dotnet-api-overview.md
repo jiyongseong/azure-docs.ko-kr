@@ -1,6 +1,6 @@
 ---
 title: "Azure Relay .NET Standard API 개요 | Microsoft Docs"
-description: "Relay .NET Standard API 개요"
+description: "Azure Relay .NET Standard API 개요"
 services: service-bus-relay
 documentationcenter: na
 author: sethmanheim
@@ -12,30 +12,27 @@ ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: na
-ms.date: 07/05/2017
+ms.date: 01/23/2018
 ms.author: sethm
-ms.translationtype: Human Translation
-ms.sourcegitcommit: b1d56fcfb472e5eae9d2f01a820f72f8eab9ef08
-ms.openlocfilehash: f3f4a2e721b1a75a5b92a5c17a9939c7013340d4
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/06/2017
-
-
+ms.openlocfilehash: aa1863a44f00ae17f63b02c7c247b2c9fd9925f6
+ms.sourcegitcommit: 9890483687a2b28860ec179f5fd0a292cdf11d22
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/24/2018
 ---
-
 # <a name="azure-relay-hybrid-connections-net-standard-api-overview"></a>Azure Relay 하이브리드 연결 .NET Standard API 개요
 
 이 문서는 일부 핵심적인 Azure Relay 하이브리드 연결 .NET Standard [클라이언트 API](/dotnet/api/microsoft.azure.relay)를 요약합니다.
   
-## <a name="relay-connection-string-builder"></a>Relay 연결 문자열 작성기
+## <a name="relay-connection-string-builder-class"></a>Relay 연결 문자열 작성기 클래스
 
 [RelayConnectionStringBuilder][RelayConnectionStringBuilder] 클래스는 Relay 하이브리드 연결에 관련된 연결 문자열의 서식을 지정합니다. 연결 문자열의 서식을 확인하거나 연결 문자열을 처음부터 작성하는 데 사용할 수 있습니다. 예제를 보려면 다음 코드를 참조하세요.
 
 ```csharp
-var endpoint = "{Relay namespace}";
-var entityPath = "{Name of the Hybrid Connection}";
-var sharedAccessKeyName = "{SAS key name}";
-var sharedAccessKey = "{SAS key value}";
+var endpoint = "[Relay namespace]";
+var entityPath = "[Name of the Hybrid Connection]";
+var sharedAccessKeyName = "[SAS key name]";
+var sharedAccessKey = "[SAS key value]";
 
 var connectionStringBuilder = new RelayConnectionStringBuilder()
 {
@@ -49,7 +46,7 @@ var connectionStringBuilder = new RelayConnectionStringBuilder()
 연결 문자열을 `RelayConnectionStringBuilder` 메서드에 직접 전달할 수도 있습니다. 이 작업을 사용하면 연결 문자열이 유효한 형식인지 확인할 수 있습니다. 매개 변수가 잘못된 경우 생성자가 `ArgumentException`을 생성합니다.
 
 ```csharp
-var myConnectionString = "{RelayConnectionString}";
+var myConnectionString = "[RelayConnectionString]";
 // Declare the connectionStringBuilder so that it can be used outside of the loop if needed
 RelayConnectionStringBuilder connectionStringBuilder;
 try
@@ -64,12 +61,14 @@ catch (ArgumentException ae)
 ```
 
 ## <a name="hybrid-connection-stream"></a>하이브리드 연결 스트림
+
 [HybridConnectionStream][HCStream] 클래스는 [HybridConnectionClient][HCClient] 또는 [HybridConnectionListener][HCListener]로 작업하는지에 상관 없이 Azure Relay 끝점에서 데이터를 송수신하는 데 사용되는 기본 개체입니다.
 
 ### <a name="getting-a-hybrid-connection-stream"></a>하이브리드 연결 스트림 가져오기
 
 #### <a name="listener"></a>수신기
-[HybridConnectionListener][HCListener]를 사용하면 다음과 같이 `HybridConnectionStream` 개체를 가져올 수 있습니다.
+
+[HybridConnectionListener][HCListener] 개체를 사용하면 다음과 같이 `HybridConnectionStream` 개체를 가져올 수 있습니다.
 
 ```csharp
 // Use the RelayConnectionStringBuilder to get a valid connection string
@@ -81,7 +80,8 @@ var hybridConnectionStream = await listener.AcceptConnectionAsync();
 ```
 
 #### <a name="client"></a>클라이언트
-[HybridConnectionClient][HCClient]를 사용하면 다음과 같이 `HybridConnectionStream` 개체를 가져올 수 있습니다.
+
+[HybridConnectionClient][HCClient] 개체를 사용하면 다음과 같이 `HybridConnectionStream` 개체를 가져올 수 있습니다.
 
 ```csharp
 // Use the RelayConnectionStringBuilder to get a valid connection string
@@ -91,6 +91,7 @@ var hybridConnectionStream = await client.CreateConnectionAsync();
 ```
 
 ### <a name="receiving-data"></a>데이터 수신
+
 [HybridConnectionStream][HCStream] 클래스를 사용하면 양방향 통신이 가능합니다. 대부분의 경우 스트림에서 지속적으로 수신합니다. 스트림에서 텍스트를 읽는 경우 데이터 구문 분석이 더 쉬운 [StreamReader](https://msdn.microsoft.com/library/system.io.streamreader(v=vs.110).aspx) 개체를 사용하는 것이 좋을 수도 있습니다. 예를 들어 아닌 데이터를 `byte[]`가 아닌 텍스트로 읽을 수 있습니다.
 
 다음 코드는 취소가 요청될 때까지 스트림에서 개별 텍스트 줄을 읽습니다.
@@ -117,6 +118,7 @@ while (!cancellationToken.IsCancellationRequested)
 ```
 
 ### <a name="sending-data"></a>데이터 전송
+
 연결을 설정하면 Relay 끝점으로 메시지를 보낼 수 있습니다. 연결 개체는 [스트림](https://msdn.microsoft.com/library/system.io.stream(v=vs.110).aspx)을 상속하기 때문에 데이터를 `byte[]`로 전송합니다. 다음 예제에 이 작업을 수행하는 방법이 나와 있습니다.
 
 ```csharp
@@ -133,6 +135,7 @@ await textWriter.WriteLineAsync("hello");
 ```
 
 ## <a name="next-steps"></a>다음 단계
+
 Azure Relay에 대한 자세한 내용은 다음 링크를 방문하세요.
 
 * [Microsoft.Azure.Relay 참조](/dotnet/api/microsoft.azure.relay)

@@ -1,30 +1,27 @@
 ---
-title: "Azure Functions의 함수 앱에 대한 리소스 배포 자동화 | Microsoft Docs"
-description: "함수 앱을 배포하는 Azure Resource Manager 템플릿을 빌드하는 방법을 알아봅니다."
+title: Azure Functions의 함수 앱에 대한 리소스 배포 자동화 | Microsoft Docs
+description: 함수 앱을 배포하는 Azure Resource Manager 템플릿을 빌드하는 방법을 알아봅니다.
 services: Functions
 documtationcenter: na
-author: lindydonna
-manager: erikre
-editor: 
-tags: 
-keywords: "Azure Functions, 함수, 서버 없는 아키텍처, 코드로서의 인프라, Azure Resource Manager"
+author: ggailey777
+manager: cfowler
+editor: ''
+tags: ''
+keywords: Azure Functions, 함수, 서버 없는 아키텍처, 코드로서의 인프라, Azure Resource Manager
 ms.assetid: d20743e3-aab6-442c-a836-9bcea09bfd32
 ms.server: functions
 ms.devlang: multiple
-ms.topic: 
+ms.topic: article
 ms.tgt_pltfrm: multiple
 ms.workload: na
 ms.date: 05/25/2017
-ms.author: donnam;glenga
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 532ff423ff53567b6ce40c0ea7ec09a689cee1e7
-ms.openlocfilehash: 9458b3b619649d094ddab1638e146571d9268fb0
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/06/2017
-
-
+ms.author: glenga
+ms.openlocfilehash: 28b2f5aba69e5c058feb7119eb31352220922998
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
-
 # <a name="automate-resource-deployment-for-your-function-app-in-azure-functions"></a>Azure Functions의 함수 앱에 대한 리소스 배포 자동화
 
 Azure Resource Manager 템플릿을 사용하여 함수 앱을 배포할 수 있습니다. 이 문서에서는 이 작업을 수행하는 데 필요한 리소스와 매개 변수를 간략히 설명합니다. 함수 앱의 [트리거 및 바인딩](functions-triggers-bindings.md)에 따라 추가 리소스를 배포해야 할 수 있습니다.
@@ -39,11 +36,11 @@ Azure Resource Manager 템플릿을 사용하여 함수 앱을 배포할 수 있
 
 함수 앱에는 다음 리소스가 필요합니다.
 
-* [Azure Storage](../storage/index.md) 계정
+* [Azure Storage](../storage/index.yml) 계정
 * 호스팅 계획(소비 계획 또는 App Service 계획)
 * 함수 앱 
 
-### <a name="storage-account"></a>저장소 계정
+### <a name="storage-account"></a>Storage 계정
 
 함수 앱에는 Azure Storage 계정이 필요합니다. Blob, 테이블, 큐 및 파일을 지원하는 일반 용도의 계정이 있어야 합니다. 자세한 내용은 [Azure Functions 저장소 계정 요구 사항](functions-create-function-app-portal.md#storage-account-requirements)을 참조하세요.
 
@@ -59,7 +56,9 @@ Azure Resource Manager 템플릿을 사용하여 함수 앱을 배포할 수 있
 }
 ```
 
-또한 속성 `AzureWebJobsStorage` 및 `AzureWebJobsDashboard`도 사이트 구성에서 앱 설정으로 지정되어야 합니다. Azure Functions 런타임에서는 `AzureWebJobsStorage` 연결 문자열을 사용하여 내부 큐를 만듭니다. 연결 문자열 `AzureWebJobsDashboard`는 Azure Table storage에 로그하고 포털에서 **모니터** 탭의 성능을 높이는 데 사용됩니다.
+또한 속성 `AzureWebJobsStorage`가 사이트 구성에서 앱 설정으로 지정되어야 합니다. 함수 앱이 Application Insights를 모니터링에 사용하지 않으면 `AzureWebJobsDashboard`도 앱 설정으로 지정되어야 합니다.
+
+Azure Functions 런타임에서는 `AzureWebJobsStorage` 연결 문자열을 사용하여 내부 큐를 만듭니다.  Application Insights가 활성화되지 않은 경우 런타임은 `AzureWebJobsDashboard` 연결 문자열을 사용하여 Azure Table Storage에 로그온하고 포털의 **모니터** 탭에 전원을 공급합니다.
 
 이러한 속성은 `siteConfig` 개체의 `appSettings` 컬렉션에서 지정됩니다.
 
@@ -200,7 +199,7 @@ App Service 계획에서 함수 앱은 웹앱과 유사하게 기본, 표준, �
 함수 앱에는 앱 설정 및 소스 제어 옵션을 포함하여 배포에 사용할 수 있는 자식 리소스가 많이 있습니다. 또한 **sourcecontrols** 자식 리소스를 제거하고 대신에 다른 [배포 옵션](functions-continuous-deployment.md)을 사용하도록 선택할 수 있습니다.
 
 > [!IMPORTANT]
-> Azure Resource Manager를 사용하여 응용 프로그램을 성공적으로 배포하려면 Azure에서 리소스가 배포되는 방식을 이해하는 것이 중요합니다. 다음 예제에서는 **siteConfig**를 사용하여 최상위 수준 구성을 적용합니다. Functions 런타임 및 배포 엔진에 정보를 전달하기 때문에 최상위 수준에서 이러한 구성을 설정하는 것이 중요합니다. **sourcecontrols/web** 자식 리소스를 적용하기 전에 최상위 수준 정보가 필요합니다. 자식 수준 **config/appSettings** 리소스에 이러한 설정을 구성할 수 있지만 **config/appSettings**가 적용되기 *전에* 함수 앱이 배포되어야 하는 경우도 있습니다. 예를 들어 [Logic Apps](../logic-apps/index.md)에서 함수를 사용하는 경우 함수는 다른 리소스의 종속성입니다.
+> Azure Resource Manager를 사용하여 응용 프로그램을 성공적으로 배포하려면 Azure에서 리소스가 배포되는 방식을 이해하는 것이 중요합니다. 다음 예제에서는 **siteConfig**를 사용하여 최상위 수준 구성을 적용합니다. Functions 런타임 및 배포 엔진에 정보를 전달하기 때문에 최상위 수준에서 이러한 구성을 설정하는 것이 중요합니다. **sourcecontrols/web** 자식 리소스를 적용하기 전에 최상위 수준 정보가 필요합니다. 자식 수준 **config/appSettings** 리소스에 이러한 설정을 구성할 수 있지만 **config/appSettings**가 적용되기 *전에* 함수 앱이 배포되어야 하는 경우도 있습니다. 예를 들어 [Logic Apps](../logic-apps/index.yml)에서 함수를 사용하는 경우 함수는 다른 리소스의 종속성입니다.
 
 ```json
 {
@@ -294,4 +293,3 @@ Azure Functions를 개발하고 구성하는 방법에 대해 자세히 알아�
 
 [소비 계획의 함수 앱]: https://github.com/Azure/azure-quickstart-templates/blob/master/101-function-app-create-dynamic/azuredeploy.json
 [Azure App Service 계획의 함수 앱]: https://github.com/Azure/azure-quickstart-templates/blob/master/101-function-app-create-dedicated/azuredeploy.json
-

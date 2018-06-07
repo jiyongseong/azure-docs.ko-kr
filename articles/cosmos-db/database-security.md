@@ -1,35 +1,32 @@
 ---
-title: "데이터베이스 보안 - Azure Cosmos DB | Microsoft Docs"
-description: "Azure Cosmos DB에서 데이터에 대해 데이터베이스 보호 및 데이터 보안을 제공하는 방법을 알아봅니다."
-keywords: "nosql 데이터베이스 보안, 정보 보안, 데이터 보안, 데이터베이스 암호화, 데이터베이스 보호, 보안 정책, 보안 테스트"
+title: 데이터베이스 보안 - Azure Cosmos DB | Microsoft Docs
+description: Azure Cosmos DB에서 데이터에 대해 데이터베이스 보호 및 데이터 보안을 제공하는 방법을 알아봅니다.
+keywords: nosql 데이터베이스 보안, 정보 보안, 데이터 보안, 데이터베이스 암호화, 데이터베이스 보호, 보안 정책, 보안 테스트
 services: cosmos-db
-author: mimig1
-manager: jhubbard
-editor: mimig
-documentationcenter: 
+author: SnehaGunda
+manager: kfile
+documentationcenter: ''
 ms.assetid: a02a6a82-3baf-405c-9355-7a00aaa1a816
 ms.service: cosmos-db
 ms.workload: data-services
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 07/24/2017
-ms.author: mimig
+ms.date: 11/15/2017
+ms.author: sngun
+ms.openlocfilehash: 2b0cb1ed92694a7859912dfe0339ef719c0d15ef
+ms.sourcegitcommit: ca05dd10784c0651da12c4d58fb9ad40fdcd9b10
 ms.translationtype: HT
-ms.sourcegitcommit: 141270c353d3fe7341dfad890162ed74495d48ac
-ms.openlocfilehash: 80b58ac0a5a34a9ff573d161ca26dbfd2dba25c7
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/25/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/03/2018
 ---
-
 # <a name="azure-cosmos-db-database-security"></a>Azure Cosmos DB 데이터베이스 보안
 
 이 문서에서는 데이터베이스 보안 모범 사례 및 데이터베이스 위반을 차단, 검색 및 대응하기 위해 Azure Cosmos DB에서 제공하는 주요 기능에 대해 설명합니다.
  
 ## <a name="whats-new-in-azure-cosmos-db-security"></a>Azure Cosmos DB 보안의 새로운 기능은 무엇인가요?
 
-이제 정부 지역, 중국 Azure, 독일 Azure를 제외한 모든 Azure 지역에서 Azure Cosmos DB에 저장된 문서에 미사용 암호화를 사용할 수 있습니다. 남은 영역은 백업에 대한 미사용 암호화와 함께 다음 주 활성화됩니다. 이러한 영역의 신규 및 기존 고객에 대해 미사용 데이터의 암호화가 자동으로 적용됩니다. 아무 것도 구성할 필요가 없으며 이전과 동일한 대기 시간, 처리량, 가용성, 기능과 함께 미사용 데이터를 암호화해 안전하게 보호하는 이점을 얻을 수 있습니다.
+이제 휴지 상태의 암호화를 모든 Azure 지역에서 Azure Cosmos DB에 저장된 문서 및 백업에 대해 사용할 수 있습니다. 이러한 영역의 신규 및 기존 고객에 대해 미사용 데이터의 암호화가 자동으로 적용됩니다. 아무 것도 구성할 필요가 없으며 이전과 동일한 대기 시간, 처리량, 가용성, 기능과 함께 미사용 데이터를 암호화해 안전하게 보호하는 이점을 얻을 수 있습니다.
 
 ## <a name="how-do-i-secure-my-database"></a>내 데이터베이스를 보호하려면 어떻게 하나요? 
 
@@ -73,15 +70,15 @@ ms.lasthandoff: 07/25/2017
 |Active Directory 통합(RBAC)| 이 표 다음의 스크린샷에 나와 있는 것처럼, Azure Portal에서 액세스 제어(IAM)를 사용하여 데이터베이스 계정에 대한 액세스도 제공할 수 있습니다. IAM은 역할 기반 액세스 제어를 제공하며 Active Directory와 통합됩니다. 다음 이미지처럼 개인 및 그룹에 대해 기본 제공 역할이나 사용자 지정 역할을 사용할 수 있습니다.|
 |글로벌 복제|Azure Cosmos DB는 단추 클릭만으로 Azure 전 세계 데이터 센터 중 어디로나 데이터를 복제할 수 있는 턴키 글로벌 배포 기능을 제공합니다. 글로벌 복제를 통해 전역적으로 크기를 조정하고 전 세계 데이터에 짧은 대기 시간으로 액세스할 수 있습니다.<br><br>보안 컨텍스트에서 글로벌 복제는 지역별 오류에 대해 데이터 보호를 보장해줍니다.<br><br>[데이터를 글로벌 배포](distribute-data-globally.md)에 대한 자세한 정보|
 |지역별 장애 조치|데이터를 둘 이상의 데이터 센터에 복제한 경우 지역 데이터 센터가 오프라인으로 전환되면 Azure Cosmos DB가 사용자 작업을 자동으로 롤오버합니다. 데이터가 복제된 지역을 사용하여 장애 조치 지역의 우선 순위가 지정된 목록을 만들 수 있습니다. <br><br>[Azure Cosmos DB의 지역별 장애 조치(Failover)](regional-failover.md)에서 자세히 알아보세요.|
-|로컬 복제|단일 데이터 센터 내에서도 Azure Cosmos DB는 고가용성을 위해 데이터를 자동으로 복제하여 [일관성 수준](consistency-levels.md)을 선택할 수 있도록 합니다. 이렇게 하면  [99.99% 작동 시간 가용성 SLA](https://azure.microsoft.com/support/legal/sla/cosmos-db)가 보장되고 다른 데이터베이스 서비스가 제공할 수 없는 재정적 보장이 함께 제공됩니다.|
+|로컬 복제|단일 데이터 센터 내에서도 Azure Cosmos DB는 고가용성을 위해 데이터를 자동으로 복제하여 [일관성 수준](consistency-levels.md)을 선택할 수 있도록 합니다. 이를 통해 모든 단일 지역 계정 및 평범한 일관성 수준의 모든 다중 지역 계정에 대한 99.99% [가용성 SLA](https://azure.microsoft.com/support/legal/sla/cosmos-db) 및 모든 다중 지역 데이터베이스 계정에 대한 99.999% 읽기 가용성을 보장합니다.|
 |자동 온라인 백업|Azure Cosmos DB 데이터베이스는 정기적으로 백업되며 georedundant 저장소에 저장됩니다. <br><br>[Azure Cosmos DB로 자동 온라인 백업 및 복원](online-backup-and-restore.md)에서 자세히 알아보세요.|
 |삭제된 데이터 복원|자동 온라인 백업을 사용하여 실수로 삭제한 데이터를 이벤트 후 최대 30일 이내에 복구할 수 있습니다. <br><br>[Azure Cosmos DB로 자동 온라인 백업 및 복원](online-backup-and-restore.md)에서 자세히 알아보세요.|
 |중요한 데이터 보호 및 격리|이제 [새로운 기능](#whats-new)에 나열된 지역의 모든 데이터가 미사용 상태에서 암호화됩니다.<br><br>PII 및 기타 기밀 데이터를 특정 컬렉션 및 읽기-쓰기로 격리할 수 있으며 읽기 전용 액세스를 특정 사용자로 제한할 수 있습니다.|
-|공격 모니터|감사 로깅 및 활동 로그를 사용하여 계정에서 정상 및 비정상적인 활동을 모니터링할 수 있습니다. 이 표 다음의 스크린샷에 나와 있는 것처럼, 리소스에 대해 어떤 작업이 누구에 의해 수행되었는지, 작업 상태 등을 확인할 수 있습니다.|
+|공격 모니터|[감사 로깅 및 활동 로그](logging.md)를 사용하여 계정에서 정상 및 비정상적인 활동을 모니터링할 수 있습니다. 이 표 다음의 스크린샷에 나와 있는 것처럼, 리소스에 대해 어떤 작업이 누구에 의해 수행되었는지, 작업 상태 등을 확인할 수 있습니다.|
 |공격에 대응|잠재적인 공격을 보고하기 위해 Azure 지원에 연락한 경우 5단계 인시던트 대응 프로세스가 시작됩니다. 5단계 프로세스의 목표는 문제가 검색되어 조사가 시작된 후 정상적인 서비스 보안 및 작업을 가능한 신속히 복원하는 것입니다.<br><br>[클라우드에서 Microsoft Azure의 보안 대응](https://aka.ms/securityresponsepaper)에 대한 자세한 정보|
 |지오-펜싱|Azure Cosmos DB는 독립적인 지역(예: 독일, 중국, US Gov)에 대해 데이터 거버넌스 및 준수를 보장합니다.|
 |보호된 기능|Azure Cosmos DB의 데이터는 SSD의 Azure 보호된 데이터 센터에 저장됩니다.<br><br>[Microsoft 글로벌 데이터 센터](https://www.microsoft.com/en-us/cloud-platform/global-datacenters)에 대한 자세한 정보|
-|HTTPS/SSL/TLS 암호화|모든 클라이언트-서비스 Azure Cosmos DB 상호 작용에는 SSL/TLS 1.2가 적용됩니다. 또한 모든 데이터 센터 내부 및 데이터 센터 간 복제에는 SSL/TLS 1.2가 적용됩니다.|
+|HTTPS/SSL/TLS 암호화|모든 클라이언트-서비스 Azure Cosmos DB 상호 작용에는 SSL/TLS 1.2가 지원됩니다. 또한 모든 데이터 센터 내부 및 데이터 센터 간 복제에는 SSL/TLS 1.2가 적용됩니다.|
 |휴지 상태의 암호화|Azure Cosmos DB에 저장된 모든 데이터는 미사용 암호화됩니다. 자세한 내용은 [Azure Cosmos DB 미사용 암호화](.\database-encryption-at-rest.md)를 참조하세요.|
 |패치된 서버|관리되는 데이터베이스인 Azure Cosmos DB를 사용하면 직접 서버를 관리하고 패치를 적용하지 않아도 자동으로 처리됩니다.|
 |강력한 암호를 사용하는 관리 계정|이 요구 사항은 당연하게 여겨질 수 있지만, 일부 경쟁업체와 달리 Azure Cosmos DB에서는 관리 계정에 반드시 암호가 있어야 합니다.<br><br> SSL 및 HMAC 비밀 기반 인증을 통한 보안이 기본적으로 반영됩니다.|
@@ -95,5 +92,6 @@ ms.lasthandoff: 07/25/2017
 
 마스터 키 및 리소스 토큰에 대한 자세한 내용은 [Azure Cosmos DB 데이터에 대한 액세스 보호](secure-access-to-data.md)를 참조하세요.
 
-Microsoft 인증서에 대한 자세한 내용은 [Azure 보안 센터](https://azure.microsoft.com/support/trust-center/)를 참조하세요.
+감사 로깅에 대한 자세한 내용은 [Azure Cosmos DB 진단 로깅](logging.md)을 참조하세요.
 
+Microsoft 인증서에 대한 자세한 내용은 [Azure 보안 센터](https://azure.microsoft.com/support/trust-center/)를 참조하세요.

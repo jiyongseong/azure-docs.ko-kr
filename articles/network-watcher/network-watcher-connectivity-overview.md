@@ -1,63 +1,36 @@
 ---
-title: "Azure Network Watcher의 연결 확인 소개 | Microsoft Docs"
-description: "이 페이지는 Network Watcher 연결 기능의 개요를 제공합니다."
+title: Azure Network Watcher 연결 문제 해결 소개 | Microsoft Docs
+description: 이 페이지는 Network Watcher 연결 문제 해결 기능에 대한 개요를 제공합니다.
 services: network-watcher
 documentationcenter: na
-author: georgewallace
-manager: timlt
-editor: 
+author: jimdial
+manager: jeconnoc
+editor: ''
 ms.service: network-watcher
 ms.devlang: na
 ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 07/11/2017
-ms.author: gwallace
+ms.author: jdial
+ms.openlocfilehash: 0268c7e54aa82df12243f98fd72de836fbc82070
+ms.sourcegitcommit: 6fcd9e220b9cd4cb2d4365de0299bf48fbb18c17
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 83a88df8c20c89a72047884b69c52e12adf1549b
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/05/2018
 ---
+# <a name="introduction-to-connection-troubleshoot-in-azure-network-watcher"></a>Azure Network Watcher의 연결 문제 해결 소개
 
-# <a name="introduction-to-connectivity-check-in-azure-network-watcher"></a>Azure Network Watcher의 연결 확인 소개
-
-Network Watcher의 연결 기능은 가상 컴퓨터에서 VM(가상 컴퓨터), FQDN(정규화된 도메인 이름), URI 또는 IPv4 주소까지 직접 TCP 연결을 확인하는 기능을 제공합니다. 네트워크 시나리오는 복잡하며, Azure에서 제공하는 네트워크 보안 그룹, 방화벽, 사용자 정의 경로 및 리소스를 사용하여 구현됩니다. 복잡한 구성은 연결 문제 해결을 어렵게 만듭니다. Network Watcher는 연결 문제를 찾고 감지하는 시간을 줄이는 데 도움이 됩니다. 반환된 결과를 통해 연결 문제가 플랫폼으로 인한 것인지 아니면 사용자 구성 문제인지에 대한 통찰력을 얻을 수 있습니다. 연결은 [PowerShell](network-watcher-connectivity-powershell.md), [Azure CLI](network-watcher-connectivity-cli.md) 및 [REST API](network-watcher-connectivity-rest.md)로 확인할 수 있습니다.
-
-[!INCLUDE [network-watcher-preview](../../includes/network-watcher-public-preview-notice.md)]
+Network Watcher의 연결 문제 해결 기능은 가상 머신에서 VM(가상 머신), FQDN(정규화된 도메인 이름), URI 또는 IPv4 주소로 직접 TCP 연결을 확인하는 기능을 제공합니다. 네트워크 시나리오는 복잡하며, Azure에서 제공하는 네트워크 보안 그룹, 방화벽, 사용자 정의 경로 및 리소스를 사용하여 구현됩니다. 복잡한 구성은 연결 문제 해결을 어렵게 만듭니다. Network Watcher는 연결 문제를 찾고 감지하는 시간을 줄이는 데 도움이 됩니다. 반환된 결과를 통해 연결 문제가 플랫폼으로 인한 것인지 아니면 사용자 구성 문제인지에 대한 통찰력을 얻을 수 있습니다. 연결은 [PowerShell](network-watcher-connectivity-powershell.md), [Azure CLI](network-watcher-connectivity-cli.md) 및 [REST API](network-watcher-connectivity-rest.md)로 확인할 수 있습니다.
 
 > [!IMPORTANT]
-> 연결 확인에는 가상 컴퓨터 확장 `AzureNetworkWatcherExtension`이 필요합니다. Windows VM에서 확장을 설치하려면 [Windows용 Azure Network Watcher 에이전트 가상 컴퓨터 확장](../virtual-machines/windows/extensions-nwa.md)을 방문하고 Linux VM인 경우 [Linux용 Azure Network Watcher 에이전트 가상 컴퓨터 확장](../virtual-machines/linux/extensions-nwa.md)을 방문하세요.
+> 연결 문제 해결은 문제를 해결하는 VM에 `AzureNetworkWatcherExtension` VM 확장이 설치되어 있어야 합니다. Windows VM에서 확장을 설치하려면 [Windows용 Azure Network Watcher 에이전트 가상 머신 확장](../virtual-machines/windows/extensions-nwa.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json)을 방문하고 Linux VM인 경우 [Linux용 Azure Network Watcher 에이전트 가상 머신 확장](../virtual-machines/linux/extensions-nwa.md?toc=%2fazure%2fnetwork-watcher%2ftoc.json)을 방문하세요. 확장은 대상 엔드포인트에서 필요하지 않습니다.
 
-## <a name="register-the-preview-capability"></a>미리 보기 기능 등록
+## <a name="response"></a>response
 
-연결 확인은 현재 공개 미리 보기로, 등록해야 이 기능을 사용할 수 있습니다. 이 작업을 수행하려면 다음 PowerShell 샘플을 실행합니다.
+다음 테이블에 연결 문제 해결이 실행 완료되었을 때 반환되는 속성이 나와 있습니다.
 
-```powershell
-Register-AzureRmProviderFeature -FeatureName AllowNetworkWatcherConnectivityCheck  -ProviderNamespace Microsoft.Network
-Register-AzureRmResourceProvider -ProviderNamespace Microsoft.Network
-```
-
-등록이 성공했는지 확인하려면 다음 Powershell 샘플을 실행합니다.
-
-```powershell
-Get-AzureRmProviderFeature -FeatureName AllowNetworkWatcherConnectivityCheck  -ProviderNamespace  Microsoft.Network
-```
-
-기능이 올바르게 등록된 경우 출력은 다음과 일치해야 합니다.
-
-```
-FeatureName         ProviderName      RegistrationState
------------         ------------      -----------------
-AllowNetworkWatcherConnectivityCheck  Microsoft.Network Registered
-```
-
-## <a name="response"></a>응답
-
-다음 테이블에 연결 확인이 실행 완료되었을 때 반환되는 속성이 나와 있습니다.
-
-|속성  |설명  |
+|자산  |설명  |
 |---------|---------|
 |ConnectionStatus     | 연결 확인의 상태입니다. 가능한 결과는 **연결 가능** 및 **연결 불가능**입니다.        |
 |AvgLatencyInMs     | 연결 확인 중 평균 대기 시간(밀리초)입니다. (검사 상태가 연결 가능인 경우에만 표시됩니다.)        |
@@ -98,9 +71,9 @@ AllowNetworkWatcherConnectivityCheck  Microsoft.Network Registered
 ```
 ## <a name="fault-types"></a>오류 형식
 
-연결 확인은 연결에 관한 오류 형식을 반환합니다. 다음 테이블에 반환된 현재 오류 형식의 목록이 나와 있습니다.
+연결 문제 해결은 연결에 대한 오류 형식을 반환합니다. 다음 테이블에 반환된 현재 오류 형식의 목록이 나와 있습니다.
 
-|형식  |설명  |
+|유형  |설명  |
 |---------|---------|
 |CPU     | 높은 CPU 사용률       |
 |메모리     | 높은 메모리 사용률       |
@@ -111,9 +84,4 @@ AllowNetworkWatcherConnectivityCheck  Microsoft.Network Registered
 
 ### <a name="next-steps"></a>다음 단계
 
-[Azure Network Watcher로 연결 확인](network-watcher-connectivity-powershell.md)을 방문하여 리소스로의 연결을 확인하는 방법을 알아봅니다.
-
-<!--Image references-->
-[1]: ./media/network-watcher-next-hop-overview/figure1.png
-
-
+[Azure Portal](network-watcher-connectivity-portal.md), [PowerShell](network-watcher-connectivity-powershell.md), [Azure CLI](network-watcher-connectivity-cli.md) 또는 [REST API](network-watcher-connectivity-rest.md)를 사용하여 연결 문제를 해결하는 방법을 알아봅니다.

@@ -3,7 +3,7 @@ title: "Azure API Management의 사용자 프로필 템플릿 | Microsoft Docs"
 description: "Azure API Management의 개발자 포털에서 사용자 프로필 페이지의 콘텐츠를 사용자 지정하는 방법을 알아봅니다."
 services: api-management
 documentationcenter: 
-author: miaojiang
+author: vladvino
 manager: erikre
 editor: 
 ms.assetid: 2e3b73ef-d223-44fe-9280-c3af3fd4a030
@@ -14,10 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/09/2017
 ms.author: apimpm
-translationtype: Human Translation
-ms.sourcegitcommit: 77fd7b5b339a8ede8a297bec96f91f0a243cc18d
-ms.openlocfilehash: cd6cfe3fde93624faec844f91ea9193527495df4
-
+ms.openlocfilehash: c56cefb3c62787f1bc2561aecec719cdbbc3b1c2
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="user-profile-templates-in-azure-api-management"></a>Azure API Management의 사용자 프로필 템플릿
 Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사용하여 개발자 포털 페이지의 콘텐츠를 사용자 지정하는 기능을 제공합니다. 이러한 템플릿에서 [DotLiquid](http://dotliquidmarkup.org/) 구문 및 [DotLiquid for Designers](https://github.com/dotliquid/dotliquid/wiki/DotLiquid-for-Designers) 및 제공된 지역화 [String 리소스](api-management-template-resources.md#strings), [Glyph 리소스](api-management-template-resources.md#glyphs) 및 [Page 컨트롤](api-management-page-controls.md)의 집합과 같은 선택한 편집기를 사용하여 필요에 따라 페이지 콘텐츠를 유연하게 구성할 수 있습니다.  
@@ -35,7 +36,7 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 > [!NOTE]
 >  다음 문서에는 샘플 기본 템플릿이 포함되어 있지만 지속적인 향상으로 인해 변경될 수 있습니다. 원하는 개별 템플릿으로 이동하여 개발자 포털에서 라이브 기본 템플릿을 볼 수 있습니다. 템플릿 작업에 대한 자세한 내용은 [템플릿을 사용하여 API Management 개발자 포털을 사용자 지정하는 방법](https://azure.microsoft.com/documentation/articles/api-management-developer-portal-templates/)을 참조하세요.  
   
-##  <a name="a-nameprofilea-profile"></a><a name="Profile"></a>프로필  
+##  <a name="Profile"></a>프로필  
  **프로필** 템플릿을 사용하여 개발자 포털에서 사용자 프로필 페이지의 사용자 프로필 섹션을 사용자 지정할 수 있습니다.  
   
  ![사용자 프로필 페이지](./media/api-management-user-profile-templates/APIM-User-Profile-Page.png "APIM 사용자 프로필 페이지")  
@@ -100,7 +101,7 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 > [!NOTE]
 >  [프로필](#Profile), [응용 프로그램](#Applications) 및 [구독](#Subscriptions) 템플릿은 동일한 데이터 모델을 공유하며 동일한 템플릿 데이터를 수신합니다.  
   
-|속성|유형|설명|  
+|속성|형식|설명|  
 |--------------|----------|-----------------|  
 |firstname|string|현재 사용자의 이름입니다.|  
 |Lastname|string|현재 사용의 성입니다.|  
@@ -180,7 +181,7 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 }  
 ```  
   
-##  <a name="a-namesubscriptionsa-subscriptions"></a><a name="Subscriptions"></a> 구독  
+##  <a name="Subscriptions"></a> 구독  
  **구독** 템플릿을 사용하여 개발자 포털에서 사용자 프로필 페이지의 구독 섹션을 사용자 지정할 수 있습니다.  
   
  ![사용자 구독 페이지](./media/api-management-user-profile-templates/APIM-User-Subscription-Page.png "APIM 사용자 구독 페이지")  
@@ -321,7 +322,7 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 > [!NOTE]
 >  [프로필](#Profile), [응용 프로그램](#Applications) 및 [구독](#Subscriptions) 템플릿은 동일한 데이터 모델을 공유하며 동일한 템플릿 데이터를 수신합니다.  
   
-|속성|유형|설명|  
+|속성|형식|설명|  
 |--------------|----------|-----------------|  
 |firstname|string|현재 사용자의 이름입니다.|  
 |Lastname|string|현재 사용의 성입니다.|  
@@ -401,7 +402,7 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 }  
 ```  
   
-##  <a name="a-nameapplicationsa-applications"></a><a name="Applications"></a> 응용 프로그램  
+##  <a name="Applications"></a> 응용 프로그램  
  **응용 프로그램** 템플릿을 사용하여 개발자 포털에서 사용자 프로필 페이지의 구독 섹션을 사용자 지정할 수 있습니다.  
   
  ![사용자 계정 응용 프로그램 페이지](./media/api-management-user-profile-templates/APIM-User-Account-Applications-Page.png "APIM 사용자 계정 응용 프로그램 페이지")  
@@ -484,7 +485,7 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 > [!NOTE]
 >  [프로필](#Profile), [응용 프로그램](#Applications) 및 [구독](#Subscriptions) 템플릿은 동일한 데이터 모델을 공유하며 동일한 템플릿 데이터를 수신합니다.  
   
-|속성|유형|설명|  
+|속성|형식|설명|  
 |--------------|----------|-----------------|  
 |firstname|string|현재 사용자의 이름입니다.|  
 |Lastname|string|현재 사용의 성입니다.|  
@@ -564,7 +565,7 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 }  
 ```  
   
-##  <a name="a-nameupdateaccountinfoa-update-account-info"></a><a name="UpdateAccountInfo"></a> 계정 정보 업데이트  
+##  <a name="UpdateAccountInfo"></a> 계정 정보 업데이트  
  **계정 정보 업데이트** 템플릿을 사용하여 개발자 포털의 **계정 정보 업데이트** 페이지를 사용자 지정할 수 있습니다.  
   
  ![사용자 계정 정보 페이지 개발자 포털 템플릿](./media/api-management-user-profile-templates/APIM-User-Account-Info-Page-Developer-Portal-Templates.png "APIM 사용자 계정 정보 페이지 개발자 포털 템플릿")  
@@ -623,8 +624,3 @@ Azure API Management는 해당 콘텐츠를 구성하는 템플릿 집합을 사
 
 ## <a name="next-steps"></a>다음 단계
 템플릿 작업에 대한 자세한 내용은 [템플릿을 사용하여 API Management 개발자 포털을 사용자 지정하는 방법](api-management-developer-portal-templates.md)을 참조하세요.
-
-
-<!--HONumber=Jan17_HO2-->
-
-

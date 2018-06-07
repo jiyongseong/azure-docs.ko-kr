@@ -1,0 +1,174 @@
+- name: Azure Stack 사용자 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: 주요 고려 사항
+      href: azure-stack-considerations.md
+- name: 빠른 시작
+  expanded: true
+  items:
+    - name: Windows VM 만들기 - 포털
+      href: azure-stack-quick-windows-portal.md
+    - name: Windows VM 만들기 - PowerShell
+      href: azure-stack-quick-create-vm-windows-powershell.md
+    - name: Windows VM 만들기 - CLI
+      href: azure-stack-quick-create-vm-windows-cli.md
+    - name: Linux VM 만들기 - 포털
+      href: azure-stack-quick-linux-portal.md
+    - name: Linux VM 만들기 - PowerShell
+      href: azure-stack-quick-create-vm-linux-powershell.md
+    - name: Linux VM 만들기 - CLI
+      href: azure-stack-quick-create-vm-linux-cli.md
+- name: 자습서
+  items:
+    - name: Azure 및 Azure Stack에 앱 배포
+      href: azure-stack-solution-pipeline.md
+    - name: 하이브리드 클라우드 id를 구성 합니다.
+      href: azure-stack-solution-hybrid-identity.md
+    - name: 하이브리드 클라우드 연결 구성
+      href: azure-stack-solution-hybrid-connectivity.md
+- name: 방법 가이드
+  items:
+    - name: Azure Stack 포털 사용
+      href: azure-stack-use-portal.md
+    - name: Azure 스택 API를 사용 하 여
+      href: azure-stack-rest-api-use.md
+    - name: 보안 및 규정 준수
+      items:
+        - name: 역할 기반 액세스 제어 사용
+          href: azure-stack-manage-permissions.md
+        - name: 서비스 보안 주체를 사용 하 여
+          href: Azure-stack-create-service-principals.md
+    - name: 서비스 사용
+      items:
+        - name: 주요 고려 사항
+          href: azure-stack-considerations.md
+        - name: 컴퓨팅
+          items:
+            - name: 개요
+              href: azure-stack-compute-overview.md
+            - name: VM 고려 사항
+              href: azure-stack-vm-considerations.md
+            - name: VM 크기
+              href: azure-stack-vm-sizes.md
+            - name: VM 디스크 관리
+              href: azure-stack-manage-vm-disks.md
+            - name: VM 보호
+              href: azure-stack-manage-vm-protect.md
+            - name: SQL Server VM 고려 사항
+              href: azure-stack-sql-server-vm-considerations.md
+        - name: Storage
+          items:
+            - name: 개요
+              href: azure-stack-storage-overview.md
+            - name: 저장소 고려 사항
+              href: azure-stack-acs-differences.md
+            - name: 저장소 개발 도구
+              href: azure-stack-storage-dev.md
+            - name: 데이터 전송 도구
+              href: azure-stack-storage-transfer.md
+            - name: Storage 탐색기 연결
+              href: azure-stack-storage-connect-se.md
+        - name: 네트워크
+          items:
+            - name: 개요
+              href: azure-stack-network-overview.md
+            - name: 네트워킹 고려 사항
+              href: azure-stack-network-differences.md
+            - name: Azure Stack용 iDNS
+              href: azure-stack-understanding-dns.md
+            - name: Azure Stack의 DNS
+              href: azure-stack-dns.md
+        - name: Key Vault
+          items:
+            - name: 개요
+              href: azure-stack-kv-intro.md
+            - name: 포털로 관리
+              href: azure-stack-kv-manage-portal.md
+            - name: Powershell로 관리
+              href: azure-stack-kv-manage-powershell.md
+            - name: 암호가 있는 VM 만들기
+              href: azure-stack-kv-deploy-vm-with-secret.md
+            - name: 인증서가 있는 VM 만들기
+              href: azure-stack-kv-push-secret-into-vm.md
+            - name: Key Vault 샘플 앱
+              href: azure-stack-kv-sample-app.md
+        - name: 솔루션 템플릿
+          items:
+            - name: 서비스 패브릭 클러스터를 배포 합니다.
+              href: azure-stack-solution-template-service-fabric-cluster.md
+            - name: Kubernetes 클러스터 배포
+              href: azure-stack-solution-template-kubernetes-deploy.md
+    - name: 앱 빌드
+      items:
+        - name: Azure Stack에 대한 개발
+          href: azure-stack-developer.md
+        - name: 개발 환경 설정
+          items:
+            - name: Azure Stack PowerShell 설치
+              href: 'https://docs.microsoft.com/azure/azure-stack/user/azure-stack-powershell-install'
+            - name: Azure 스택 도구 다운로드
+              href: azure-stack-powershell-download.md
+            - name: PowerShell 구성 - 사용자
+              href: azure-stack-powershell-configure-user.md
+            - name: Visual Studio 설치
+              href: azure-stack-install-visual-studio.md
+            - name: API 버전 프로필을 사용 하 여
+              href: azure-stack-version-profiles.md
+              items:
+                - name: PowerShell
+                  href: azure-stack-version-profiles-powershell.md
+                - name: Azure CLI 2.0
+                  href: azure-stack-version-profiles-azurecli2.md
+                - name: 이동
+                  href: azure-stack-version-profiles-go.md
+                - name: Ruby
+                  href: azure-stack-version-profiles-ruby.md
+                - name: 파이썬
+                  href: azure-stack-version-profiles-python.md
+                - name: 리소스 공급자 프로필에서 지 원하는 Api
+                  href: azure-stack-profiles-azure-resource-manager-versions.md
+        - name: Azure 스택 정책 모듈 사용
+          href: azure-stack-policy-module.md
+        - name: 템플릿 사용
+          items:
+            - name: 템플릿 개요
+              href: azure-stack-arm-templates.md
+            - name: 템플릿 고려 사항
+              href: azure-stack-develop-templates.md
+            - name: 템플릿 확인
+              href: azure-stack-validate-templates.md
+            - name: 포털을 사용하여 배포
+              href: azure-stack-deploy-template-portal.md
+            - name: 'PowerShell을 사용하여 배포 '
+              href: azure-stack-deploy-template-powershell.md
+            - name: Visual Studio를 사용하여 배포
+              href: azure-stack-deploy-template-visual-studio.md
+    - name: 클라우드 서비스 공급자를 사용 하도록 설정
+      href: azure-stack-csp-enable-billing-usage-tracking.md
+- name: 참조
+  items:
+    - name: Azure Stack PowerShell
+      href: /powershell/azure/azure-stack/overview?view=azurestackps-1.2.10
+    - name: Azure Stack CLI
+      href: /cli/azure/reference-index?view=azure-cli-2017-03-09-profile
+- name: 관련 항목
+  items:
+    - name: Azure Stack 연산자 설명서
+      href: /azure/azure-stack/
+    - name: ASDK 설명서
+      href: /azure/azure-stack/asdk/
+- name: 리소스
+  items:
+    - name: Azure 스택 로드맵
+      href: 'https://azure.microsoft.com/roadmap/?tag=azure-stack'
+    - name: Azure 스택 MSDN 포럼
+      href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureStack'
+    - name: Azure 스택 설명서 사용자 의견
+      href: 'https://feedback.azure.com/forums/344565-azure-stack?category_id=160275'
+    - name: 가격 정보
+      href: 'https://azure.microsoft.com/overview/azure-stack/how-to-buy/'
+    - name: 스택 오버플로
+      href: 'http://stackoverflow.com/questions/tagged/azure-stack'
+    - name: 교육 및 인증
+      href: 'https://docs.microsoft.com/azure/azure-stack/azure-stack-train-and-cert'

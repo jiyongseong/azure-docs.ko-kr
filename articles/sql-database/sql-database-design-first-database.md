@@ -1,63 +1,56 @@
 ---
-title: "첫 번째 Azure SQL Database 디자인 | Microsoft Docs"
-description: "첫 번째 Azure SQL Database를 디자인하는 방법을 알아봅니다."
+title: '자습서: SSMS를 사용하여 첫 번째 Azure SQL Database 디자인 | Microsoft Docs'
+description: SQL Server Management Studio를 사용하여 첫 번째 Azure SQL Database를 디자인하는 방법에 대해 알아봅니다.
 services: sql-database
-documentationcenter: 
 author: CarlRabeler
-manager: jhubbard
-editor: 
-tags: 
-ms.assetid: 
+manager: craigg
 ms.service: sql-database
 ms.custom: mvc,develop databases
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: 
-ms.date: 07/31/2017
+ms.topic: tutorial
+ms.date: 04/23/2018
 ms.author: carlrab
+ms.openlocfilehash: ba14208e971d712184052e7470757ce48ac26879
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
 ms.translationtype: HT
-ms.sourcegitcommit: c30998a77071242d985737e55a7dc2c0bf70b947
-ms.openlocfilehash: ec3b2debcd65f733041462940196a61c109bf051
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/02/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
+# <a name="tutorial-design-your-first-azure-sql-database-using-ssms"></a>자습서: SSMS를 사용하여 첫 번째 Azure SQL Database 디자인
 
-# <a name="design-your-first-azure-sql-database"></a>첫 번째 Azure SQL Database 디자인
-
-Azure SQL Database는 Microsoft 클라우드("Azure")의 관계형 DBaaS(Database-As-A-Service)입니다. 이 자습서에서는 Azure Portal 및 SSMS[(SQL Server Management Studio)](https://msdn.microsoft.com/library/ms174173.aspx)를 사용하는 방법을 알아봅니다. 
+Azure SQL Database는 Microsoft Cloud(Azure)의 관계형 DBaaS(Database-As-A-Service)입니다. 이 자습서에서는 Azure Portal 및 SSMS[(SQL Server Management Studio)](https://msdn.microsoft.com/library/ms174173.aspx)를 사용하는 방법을 알아봅니다. 
 
 > [!div class="checklist"]
-> * Azure Portal에서 데이터베이스 만들기
+> * Azure Portal에서 데이터베이스 만들기*
 > * Azure Portal에서 서버 수준 방화벽 규칙 설정
 > * SSMS로 데이터베이스에 연결
 > * SSMS를 사용하여 테이블 만들기
 > * BCP를 사용하여 데이터 대량 로드
 > * SSMS를 사용하여 해당 데이터 쿼리
-> * Azure Portal에서 데이터베이스를 이전 [특정 시점 복원](sql-database-recovery-using-backups.md#point-in-time-restore)으로 복원
 
 Azure 구독이 아직 없는 경우 시작하기 전에 [체험](https://azure.microsoft.com/free/) 계정을 만듭니다.
+
+   >[!NOTE]
+   > 이 자습서를 사용하기 위해 여기서는 [DTU 기반 구매 모델](sql-database-service-tiers-dtu.md)을 사용하지만, 사용자는 [vCore 기반 구매 모델(미리 보기)](sql-database-service-tiers-vcore.md) 선택 옵션을 사용할 수도 있습니다. 
 
 ## <a name="prerequisites"></a>필수 조건
 
 이 자습서를 완료하려면 다음을 설치했어야 합니다.
 - 최신 버전의 SSMS([SQL Server Management Studio](https://msdn.microsoft.com/library/ms174173.aspx))를 설치합니다.
-- 최신 버전의 [BCP 및 SQLCMD][https://www.microsoft.com/download/details.aspx?id=36433]
+- 최신 버전의 [BCP 및 SQLCMD](https://www.microsoft.com/download/details.aspx?id=36433).
 
-## <a name="log-in-to-the-azure-portal"></a>Azure 포털에 로그인
+## <a name="log-in-to-the-azure-portal"></a>Azure Portal에 로그인
 
-[Azure 포털](https://portal.azure.com/)에 로그인합니다.
+[Azure Portal](https://portal.azure.com/)에 로그인합니다.
 
 ## <a name="create-a-blank-sql-database"></a>빈 SQL 데이터베이스 만들기
 
-Azure SQL Database는 일련의 정의된 [계산 및 저장소 리소스](sql-database-service-tiers.md)를 사용하여 만들어집니다. 데이터베이스는 [Azure 리소스 그룹](../azure-resource-manager/resource-group-overview.md) 및 [Azure SQL Database 논리 서버](sql-database-features.md)에서 만들어집니다. 
+Azure SQL Database는 일련의 정의된 [계산 및 저장소 리소스](sql-database-service-tiers-dtu.md)를 사용하여 만들어집니다. 데이터베이스는 [Azure 리소스 그룹](../azure-resource-manager/resource-group-overview.md) 및 [Azure SQL Database 논리 서버](sql-database-features.md)에서 만들어집니다. 
 
 빈 SQL Database를 만들려면 다음 단계를 수행합니다. 
 
-1. Azure Portal의 왼쪽 위에 있는 **새로 만들기** 단추를 클릭합니다.
+1. Azure Portal의 왼쪽 위 모서리에서 **리소스 만들기**를 클릭합니다.
 
-2. **새로 만들기** 페이지에서 **데이터베이스**를 선택하고 **데이터베이스** 페이지에서 **SQL Database**를 선택합니다. 
+2. **새로 만들기** 페이지의 Azure Marketplace 섹션에서 **데이터베이스**를 선택한 다음, **추천** 섹션에서 **SQL Database**를 클릭합니다.
 
    ![빈 데이터베이스 만들기](./media/sql-database-design-first-database/create-empty-database.png)
 
@@ -77,25 +70,34 @@ Azure SQL Database는 일련의 정의된 [계산 및 저장소 리소스](sql-d
    | **서버 이름** | 전역적으로 고유한 이름 | 유효한 서버 이름은 [명명 규칙 및 제한 사항](https://docs.microsoft.com/azure/architecture/best-practices/naming-conventions)을 참조하세요. | 
    | **서버 관리자 로그인** | 모든 유효한 이름 | 유효한 로그인 이름은 [데이터베이스 식별자](https://docs.microsoft.com/sql/relational-databases/databases/database-identifiers)를 참조하세요.|
    | **암호** | 유효한 암호 | 암호는 8자 이상이어야 하며 대문자, 소문자, 숫자 및 영숫자가 아닌 문자 범주 중 세 가지 범주의 문자를 포함해야 합니다. |
-   | **위치** | 모든 유효한 위치 | 지역에 대한 자세한 내용은 [Azure 지역](https://azure.microsoft.com/regions/)을 참조하세요. |
+   | **위치**: | 모든 유효한 위치 | 지역에 대한 자세한 내용은 [Azure 지역](https://azure.microsoft.com/regions/)을 참조하세요. |
 
-   ![create database-server](./media//sql-database-design-first-database/create-database-server.png)
+   ![create database-server](./media/sql-database-design-first-database/create-database-server.png)
 
 5. **선택**을 클릭합니다.
 
-6. **가격 책정 계층**을 클릭하고 새 데이터베이스의 서비스 계층 및 성능 수준을 지정합니다. 이 자습서에서는 **20 DTU** 및 **250**GB의 저장소를 선택합니다.
+6. **가격 책정 계층**을 클릭하여 서비스 계층, DTU나 vCore 개수 및 저장소 크기를 지정합니다. 각 서비스 계층에 대해 사용할 수 있는 DTU/vCore 및 저장소 수에 대한 옵션을 살펴봅니다. 이 자습서를 사용하기 위해 여기서는 [DTU 기반 구매 모델](sql-database-service-tiers-dtu.md)을 사용하지만, 사용자는 [vCore 기반 구매 모델(미리 보기)](sql-database-service-tiers-vcore.md) 선택 옵션을 사용할 수도 있습니다. 
+
+7. 이 자습서에서는 **표준** 서비스 계층을 선택한 다음 슬라이더를 사용하여 **100DTU(S3)** 및 **400**GB 저장소를 선택합니다.
 
    ![create database-s1](./media/sql-database-design-first-database/create-empty-database-pricing-tier.png)
 
-7. **Apply**를 클릭합니다.  
+8. **추가 기능 저장소** 옵션을 사용하려면 미리 보기 약관에 동의합니다. 
 
-8. 빈 데이터베이스에 대한 **데이터 정렬**을 선택합니다(이 자습서의 경우 기본값 사용). 데이터 정렬에 대한 자세한 내용은 [데이터 정렬](https://docs.microsoft.com/sql/t-sql/statements/collations)을 참조하세요.
+   > [!IMPORTANT]
+   > -  포함된 저장소보다 큰 저장소 크기는 미리 보기로 있으며 추가 비용이 적용됩니다. 자세한 내용은 [SQL Database 가격](https://azure.microsoft.com/pricing/details/sql-database/)을 참조하세요. 
+   >-  Premium 계층의 경우 현재 오스트레일리아 동부, 오스트레일리아 남동부, 브라질 남부, 캐나다 중부, 캐나다 동부, 미국 중부, 프랑스 중부, 독일 중부, 일본 동부, 일본 서부, 한국 중부, 미국 중북부, 북유럽, 미국 중남부, 동남 아시아, 영국 남부, 영국 서부, 미국 동부 2, 미국 서부, 미국 버지니아 주 정부 및 유럽 서부에서 1TB 이상의 저장소를 사용할 수 있습니다. [P11-P15 현재 제한 사항](sql-database-dtu-resource-limits.md#single-database-limitations-of-p11-and-p15-when-the-maximum-size-greater-than-1-tb)을 참조하세요.  
 
-9. **만들기**를 클릭하여 데이터베이스를 프로비전합니다. 프로비전을 완료하는 데 약 1분 30초가 걸립니다. 
 
-10. 도구 모음에서 **알림**을 클릭하여 배포 프로세스를 모니터링합니다.
+9. 서버 계층, DTU 수 및 저장소 크기를 선택한 후에 **적용**을 클릭합니다.  
 
-   ![알림](./media/sql-database-get-started-portal/notification.png)
+10. 빈 데이터베이스에 대한 **데이터 정렬**을 선택합니다(이 자습서의 경우 기본값 사용). 데이터 정렬에 대한 자세한 내용은 [데이터 정렬](https://docs.microsoft.com/sql/t-sql/statements/collations)을 참조하세요.
+
+11. 이제 SQL Database 양식을 완료했으므로 **만들기**를 클릭하여 데이터베이스를 프로비전합니다. 프로비전하는 데 몇 분이 걸립니다. 
+
+12. 도구 모음에서 **알림**을 클릭하여 배포 프로세스를 모니터링합니다.
+    
+     ![알림](./media/sql-database-get-started-portal/notification.png)
 
 ## <a name="create-a-server-level-firewall-rule"></a>서버 수준 방화벽 규칙 만들기
 
@@ -105,26 +107,21 @@ Azure SQL Database는 일련의 정의된 [계산 및 저장소 리소스](sql-d
 > SQL Database는 포트 1433을 통해 통신합니다. 회사 네트워크 내에서 연결을 시도하는 경우 포트 1433을 통한 아웃바운드 트래픽이 네트워크 방화벽에서 허용되지 않을 수 있습니다. 이 경우 IT 부서에서 포트 1433을 열지 않으면 Azure SQL Database 서버에 연결할 수 없습니다.
 >
 
-1. 배포가 완료되면 왼쪽 메뉴에서 **SQL Database**를 클릭한 다음 **SQL Database** 페이지에서 **mySampleDatabase**를 클릭합니다. 데이터베이스에 대한 개요 페이지가 열리고 이 페이지에 정규화된 서버 이름(예: **mynewserver20170313.database.windows.net**)이 표시되며 추가 구성을 위한 옵션도 제공됩니다. 나중에 사용하기 위해 이 정규화된 서버 이름을 복사합니다.
+1. 배포가 완료되면 왼쪽 메뉴에서 **SQL Database**를 클릭한 다음 **SQL Database** 페이지에서 **mySampleDatabase**를 클릭합니다. 데이터베이스에 대한 개요 페이지가 열려 정규화된 서버 이름(예: **mynewserver-20170824.database.windows.net**)을 표시하고 추가 구성을 위한 옵션을 제공합니다. 
 
-   > [!IMPORTANT]
-   > 이후 빠른 시작에서 서버 및 해당 데이터베이스에 연결하려면 이 정규화된 서버 이름이 필요합니다.
-   > 
+2. 후속 자습서 및 빠른 시작에서 서버 및 해당 데이터베이스에 연결하는 데 사용하기 위해 이 정규화된 서버 이름을 복사합니다. 
 
-   ![서버 이름](./media/sql-database-connect-query-dotnet/server-name.png) 
+   ![서버 이름](./media/sql-database-get-started-portal/server-name.png) 
 
-2. 이전 이미지에 표시된 대로 도구 모음에서 **서버 방화벽 설정**을 클릭합니다. SQL Database 서버에 대한 **방화벽 설정** 페이지가 열립니다. 
+3. 도구 모음에서 **서버 방화벽 설정**을 클릭합니다. SQL Database 서버에 대한 **방화벽 설정** 페이지가 열립니다. 
 
    ![서버 방화벽 규칙](./media/sql-database-get-started-portal/server-firewall-rule.png) 
 
+4. 도구 모음에서 **클라이언트 IP 추가**를 클릭하여 현재 IP 주소를 새 방화벽 규칙에 추가합니다. 방화벽 규칙은 단일 IP 주소 또는 IP 주소의 범위에 1433 포트를 열 수 있습니다.
 
-3. 도구 모음에서 **클라이언트 IP 추가**를 클릭하여 현재 IP 주소를 새 방화벽 규칙에 추가합니다. 방화벽 규칙은 단일 IP 주소 또는 IP 주소의 범위에 1433 포트를 열 수 있습니다.
+5. **저장**을 클릭합니다. 논리 서버의 1433 포트를 여는 현재 IP 주소에 서버 수준 방화벽 규칙이 생성됩니다.
 
-4. **Save**를 클릭합니다. 논리 서버의 1433 포트를 여는 현재 IP 주소에 서버 수준 방화벽 규칙이 생성됩니다.
-
-   ![set server firewall rule](./media/sql-database-get-started-portal/server-firewall-rule-set.png) 
-
-4. **확인**을 클릭한 후 **방화벽 설정** 페이지를 닫습니다.
+6. **확인**을 클릭한 후 **방화벽 설정** 페이지를 닫습니다.
 
 이제 SQL Server Management Studio 또는 이전에 만든 서버 관리자 계정을 사용하여 이 IP 주소에서 원하는 다른 도구를 사용하여 SQL Database 서버 및 해당 데이터베이스에 연결할 수 있습니다.
 
@@ -135,11 +132,11 @@ Azure SQL Database는 일련의 정의된 [계산 및 저장소 리소스](sql-d
 
 Azure Portal에 있는 Azure SQL Database 서버의 정규화된 서버 이름을 가져옵니다. 정규화된 서버 이름을 사용하여 SQL Server Management Studio를 사용하는 서버에 연결합니다.
 
-1. [Azure 포털](https://portal.azure.com/)에 로그인합니다.
-2. 왼쪽 메뉴에서 **SQL Database**를 선택하고 **SQL Database** 페이지에서 데이터베이스를 클릭합니다. 
+1. [Azure Portal](https://portal.azure.com/)에 로그인합니다.
+2. 왼쪽 메뉴에서 **SQL Database**를 선택하고, **SQL Database** 페이지에서 데이터베이스를 클릭합니다. 
 3. 데이터베이스의 경우 Azure Portal의 **Essentials** 창에서 **서버 이름**을 찾고 복사합니다.
 
-   ![연결 정보](./media/sql-database-connect-query-dotnet/server-name.png)
+   ![연결 정보](./media/sql-database-get-started-portal/server-name.png)
 
 ## <a name="connect-to-the-database-with-ssms"></a>SSMS로 데이터베이스에 연결
 
@@ -152,7 +149,7 @@ Azure Portal에 있는 Azure SQL Database 서버의 정규화된 서버 이름�
    | 설정       | 제안 값 | 설명 | 
    | ------------ | ------------------ | ------------------------------------------------- | 
    | 서버 유형 | 데이터베이스 엔진 | 이 값은 필수입니다. |
-   | 서버 이름 | 정규화된 서버 이름 | 이름은 **mynewserver20170313.database.windows.net**과 같아야 합니다. |
+   | 서버 이름 | 정규화된 서버 이름 | 이름은 **mynewserver20170824.database.windows.net**과 비슷해야 합니다. |
    | 인증 | 공개 | SQL 인증은 이 자습서에서 구성한 유일한 인증 유형입니다. |
    | 로그인 | 서버 관리자 계정 | 서버를 만들 때 지정한 계정입니다. |
    | 암호 | 서버 관리자 계정의 암호 | 서버를 만들 때 지정한 암호입니다. |
@@ -301,26 +298,6 @@ Azure Portal에 있는 Azure SQL Database 서버의 정규화된 서버 이름�
    AND person.LastName = 'Coleman'
    ```
 
-## <a name="restore-a-database-to-a-previous-point-in-time"></a>이전 시점으로 데이터베이스 복원
-
-실수로 테이블을 삭제한 경우를 가정해 보겠습니다. 이런 경우는 쉽게 복구할 수 없는 경우입니다. Azure SQL Database를 사용하면 최근 35일 내 특정 시점으로 돌아가서 이 특정 시점을 새 데이터베이스에 복원할 수 있습니다. 이 데이터베이스를 사용하여 삭제된 데이터를 복구할 수 있습니다. 다음 단계를 수행하면 샘플 데이터베이스가 테이블이 추가되기 이전 시점으로 복원됩니다.
-
-1. 데이터베이스에 대한 SQL Database 페이지의 도구 모음에서 **복원**을 클릭합니다. **복원** 페이지가 열립니다.
-
-   ![복원](./media/sql-database-design-first-database/restore.png)
-
-2. 필요한 정보로 **복원** 양식을 채웁니다.
-    * 데이터베이스 이름: 데이터베이스 이름을 입력합니다. 
-    * 지정 시간: 복원 양식의 **지정 시간** 탭 
-    * 복원 지점: 데이터베이스를 변경하기 이전 시간 선택
-    * 대상 서버: 데이터베이스를 복원할 때는 이 값을 변경할 수 없습니다. 
-    * 탄력적 데이터베이스 풀: **없음** 선택  
-    * 가격 책정 계층: **20DTU** 및 **250**GB의 저장소를 선택합니다.
-
-   ![복원 시점](./media/sql-database-design-first-database/restore-point.png)
-
-3. **확인**을 클릭하여 데이터베이스를 테이블이 추가되기 이전 [시점으로 복원](sql-database-recovery-using-backups.md#point-in-time-restore)합니다. 다른 시점으로 데이터베이스를 복원하면 지정한 시점을 기준으로 원본 데이터베이스와 동일한 서버에 중복 데이터베이스가 생성됩니다([서비스 계층](sql-database-service-tiers.md)에 대한 보존 기간 내에 있는 경우).
-
 ## <a name="next-steps"></a>다음 단계 
 이 자습서에서는 데이터베이스 및 테이블 만들기, 데이터 로드 및 쿼리, 데이터베이스를 이전 시점으로 복원과 같은 기본적인 데이터베이스 작업에 대해 배웁니다. 다음 방법에 대해 알아보았습니다.
 > [!div class="checklist"]
@@ -330,10 +307,8 @@ Azure Portal에 있는 Azure SQL Database 서버의 정규화된 서버 이름�
 > * 테이블 만들기
 > * 데이터 대량 로드
 > * 해당 데이터 쿼리
-> * SQL Database [특정 시점 복원](sql-database-recovery-using-backups.md#point-in-time-restore) 기능을 사용하여 데이터베이스를 이전의 시점으로 복원
 
 Visual Studio 및 C#을 사용하여 데이터베이스를 설계하는 방법에 대한 자세한 내용을 알아보려면 다음 자습서로 이동합니다.
 
 > [!div class="nextstepaction"]
 >[Azure SQL Database 설계 및 C#과 ADO.NET에 연결T](sql-database-design-first-database-csharp.md)
-

@@ -1,34 +1,33 @@
 ---
-title: "PostgreSQL용 Azure 데이터베이스에 대한 연결 라이브러리 | Microsoft Docs"
+title: "PostgreSQL용 Azure 데이터베이스에 대한 연결 라이브러리"
 description: "이 문서에서는 개발자가 PostgreSQL용 Azure 데이터베이스에 연결하고 쿼리하도록 응용 프로그램을 코딩할 때 사용할 수 있는 여러 개의 라이브러리 및 드라이버에 대해 설명합니다."
 services: postgresql
-author: SaloniSonpal
-ms.author: salonis
-manager: jhubbard
+author: rachel-msft
+ms.author: raagyema
+manager: kfile
 editor: jasonwhowell
-ms.service: postgresql-database
+ms.service: postgresql
 ms.topic: article
-ms.date: 06/15/2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ff2fb126905d2a68c5888514262212010e108a3d
-ms.openlocfilehash: 7099e26fd749820ab6869c0262e1f97d993ab7b2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/17/2017
-
+ms.date: 02/28/2018
+ms.openlocfilehash: 7f0dd217a124f530ba009c9a5588691f604827e5
+ms.sourcegitcommit: c765cbd9c379ed00f1e2394374efa8e1915321b9
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/28/2018
 ---
 # <a name="connection-libraries-for-azure-database-for-postgresql"></a>PostgreSQL용 Azure 데이터베이스에 대한 연결 라이브러리
-이 항목에서는 개발자가 PostgreSQL용 Azure 데이터베이스에 연결하고 쿼리하도록 응용 프로그램을 프로그래밍하는 데 사용하기 위한 여러 개의 라이브러리 및 드라이버를 나열합니다.
+이 문서에서는 개발자가 Azure Database for PostgreSQL에 연결하고 쿼리하도록 응용 프로그램을 개발하는 데 사용할 수 있는 라이브러리 및 드라이버를 나열합니다.
 
 ## <a name="client-interfaces"></a>클라이언트 인터페이스
-PostgreSQL 서버에 연결하기 위한 대부분의 언어 클라이언트 라이브러리는 외부 프로젝트이며 독립적으로 배포됩니다. 이러한 라이브러리는 Windows, Linux 및 Mac 플랫폼에서 지원됩니다. 일부 인기 있는 클라이언트 드라이버는 다음과 같습니다.
+PostgreSQL 서버에 연결하기 위한 대부분의 언어 클라이언트 라이브러리는 외부 프로젝트이며 독립적으로 배포됩니다. 나열된 라이브러리는 Azure Database for PostgreSQL에 연결하기 위해 Windows, Linux 및 Mac 플랫폼에서 지원됩니다. 몇 가지 빠른 시작 예제는 다음 단계 섹션에 나열됩니다.
 
 | **언어** | **클라이언트 인터페이스** | **추가 정보** | **다운로드** |
 |--------------|----------------------------------------------------------------|-------------------------------------|--------------------------------------------------------------------|
-| Python | [psycopg](http://initd.org/psycopg/) | DB API 2.0 호환 | [다운로드](http://initd.org/psycopg/download/) |
+| 파이썬 | [psycopg](http://initd.org/psycopg/) | DB API 2.0 호환 | [다운로드](http://initd.org/psycopg/download/) |
 | PHP | [php-pgsql](https://php.net/manual/en/book.pgsql.php) | 데이터베이스 확장 | [설치](https://secure.php.net/manual/en/pgsql.installation.php) |
 | Node.js | [Pg npm package](https://www.npmjs.com/package/pg) | 순수 JavaScript 비차단 클라이언트 | [설치](https://www.npmjs.com/package/pg) |
 | 자바 | [JDBC](http://jdbc.postgresql.org/) | 형식 4 JDBC 드라이버 | [다운로드](https://jdbc.postgresql.org/download.html)  |
-| 루비 | [Pg gem](https://deveiate.org/code/pg/) | Ruby 인터페이스 | [다운로드](https://rubygems.org/downloads/pg-0.20.0.gem) |
+| Ruby | [Pg gem](https://deveiate.org/code/pg/) | Ruby 인터페이스 | [다운로드](https://rubygems.org/downloads/pg-0.20.0.gem) |
 | Go | [Package pq](https://godoc.org/github.com/lib/pq) | 순수 Go postgres 드라이버 | [설치](https://github.com/lib/pq/blob/master/README.md) |
 | C\#/ .NET | [Npgsql](http://www.npgsql.org/) | ADO.NET 데이터 공급자 | [다운로드](https://www.microsoft.com/net/) |
 | ODBC | [psqlODBC](https://odbc.postgresql.org/) | ODBC 드라이버 | [다운로드](http://www.postgresql.org/ftp/odbc/versions/) |
@@ -36,7 +35,6 @@ PostgreSQL 서버에 연결하기 위한 대부분의 언어 클라이언트 라
 | C++ | [libpqxx](http://pqxx.org/) | 새 스타일 C++ 인터페이스 | [다운로드](http://pqxx.org/download/software/) |
 
 ## <a name="next-steps"></a>다음 단계
-선택한 언어를 사용하여 PostgreSQL용 Azure 데이터베이스에 연결하고 쿼리하는 방법에 대한 빠른 시작을 읽어 보십시오.
+선택한 언어를 사용하여 PostgreSQL용 Azure Database에 연결하고 쿼리하는 방법에 대한 빠른 시작을 읽어보세요.
 
-[Python](./connect-python.md) | [Node.JS](./connect-nodejs.md) | [.NET(C#)](./connect-csharp.md)
-
+[Python](./connect-python.md) | [Node.JS](./connect-nodejs.md) | [Java](./connect-java.md) | [Ruby](./connect-ruby.md) | [PHP](./connect-php.md) | [.NET (C#)](./connect-csharp.md) | [Go](./connect-go.md)

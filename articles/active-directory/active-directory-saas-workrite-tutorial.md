@@ -1,10 +1,10 @@
 ---
-title: "자습서: Workrite와 Azure Active Directory 통합 | Microsoft Docs"
-description: "Azure Active Directory 및 Workrite 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다."
+title: '자습서: Workrite와 Azure Active Directory 통합 | Microsoft Docs'
+description: Azure Active Directory 및 Workrite 간에 Single Sign-On을 구성하는 방법에 대해 알아봅니다.
 services: active-directory
 documentationCenter: na
 author: jeevansd
-manager: femila
+manager: mtillman
 ms.reviewer: joflore
 ms.assetid: 2a5c2956-a011-4d5c-877b-80679b6587b5
 ms.service: active-directory
@@ -14,12 +14,11 @@ ms.devlang: na
 ms.topic: article
 ms.date: 07/19/2017
 ms.author: jeedes
+ms.openlocfilehash: 96d47acedd29a4be6b865f7aa85aecec800496f7
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
 ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: 4358c4c621634c17cbbd7fa1c72f12746b8e4a2a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
 # <a name="tutorial-azure-active-directory-integration-with-workrite"></a>자습서: Workrite와 Azure Active Directory 통합
 
@@ -31,7 +30,7 @@ Workrite를 Azure AD와 통합하면 다음과 같은 이점이 제공됩니다.
 - 사용자가 자신의 Azure AD 계정으로 Workrite에 자동으로 로그온(Single Sign-On)되도록 설정할 수 있습니다.
 - 단일 중앙 위치인 Azure Portal에서 계정을 관리할 수 있습니다.
 
-Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](active-directory-appssoaccess-whatis.md)를 참조하세요.
+Azure AD와 SaaS 앱 통합에 대한 자세한 내용은 [Azure Active Directory의 응용 프로그램 액세스 및 Single Sign-On이란 무엇인가요?](manage-apps/what-is-single-sign-on.md)를 참조하세요.
 
 ## <a name="prerequisites"></a>필수 조건
 
@@ -59,7 +58,7 @@ Workrite의 Azure AD 통합을 구성하려면 갤러리의 Workrite를 관리�
 
 **갤러리에서 Workrite를 추가하려면 다음 단계를 수행합니다.**
 
-1. **[Azure Portal](https://portal.azure.com)**의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
+1. **[Azure Portal](https://portal.azure.com)** 의 왼쪽 탐색 창에서 **Azure Active Directory** 아이콘을 클릭합니다. 
 
     ![Azure Active Directory 단추][1]
 
@@ -114,7 +113,7 @@ Workrite에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음
     > [!NOTE] 
     > 이 값은 실제 값이 아닙니다. 이 값을 실제 로그온 URL로 업데이트합니다. 이 값을 얻으려면 [Workrite 클라이언트 지원 팀](mailto:support@workrite.co.uk)에 문의하세요.
 
-4. **SAML 서명 인증서** 섹션에서 **인증서(Base64)**를 클릭한 후 컴퓨터에 인증서 파일을 저장합니다.
+4. **SAML 서명 인증서** 섹션에서 **인증서(Base64)** 를 클릭한 후 컴퓨터에 인증서 파일을 저장합니다.
 
     ![인증서 다운로드 링크](./media/active-directory-saas-workrite-tutorial/tutorial_workrite_certificate.png) 
 
@@ -158,9 +157,9 @@ Workrite에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음
 
     a. **이름** 상자에 **BrittaSimon**을 입력합니다.
 
-    b. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
+    나. **사용자 이름** 상자에 사용자인 Britta Simon의 전자 메일 주소를 입력합니다.
 
-    c. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
+    다. **암호 표시** 확인란을 선택한 다음 **암호** 상자에 표시된 값을 적어둡니다.
 
     d. **만들기**를 클릭합니다.
  
@@ -186,13 +185,13 @@ Workrite에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음
     
     a. **전자 메일** 텍스트 상자에서 Brittasimon@contoso.com과 같은 사용자의 이메일 주소를 입력합니다.
 
-    b. **이름** 텍스트 상자에 사용자의 이름(예: Britta)을 입력합니다.
+    나. **이름** 텍스트 상자에 사용자의 이름(예: Britta)을 입력합니다.
 
-    c. **성** 텍스트 상자에 사용자의 성(예: Simon)을 입력합니다.
+    다. **성** 텍스트 상자에 사용자의 성(예: Simon)을 입력합니다.
     
     d. **클라이언트 관리자**로 **역할 선택**을 수행합니다.
     
-    e. **Save**를 클릭합니다.   
+    e. **저장**을 클릭합니다.   
 
 ### <a name="assign-the-azure-ad-test-user"></a>Azure AD 테스트 사용자 할당
 
@@ -233,7 +232,7 @@ Workrite에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음
 ## <a name="additional-resources"></a>추가 리소스
 
 * [Azure Active Directory와 SaaS Apps를 통합하는 방법에 대한 자습서 목록](active-directory-saas-tutorial-list.md)
-* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On이란 무엇입니까?](active-directory-appssoaccess-whatis.md)
+* [Azure Active Directory로 응용 프로그램 액세스 및 Single Sign-On을 구현하는 방법](manage-apps/what-is-single-sign-on.md)
 
 <!--Image references-->
 
@@ -251,5 +250,4 @@ Workrite에서 Azure AD Single Sign-On을 구성하고 테스트하려면 다음
 [400]: ./media/active-directory-saas-workrite-tutorial/tutorial_workrite_400.png
 [401]: ./media/active-directory-saas-workrite-tutorial/tutorial_workrite_401.png
 [402]: ./media/active-directory-saas-workrite-tutorial/tutorial_workrite_402.png
-
 

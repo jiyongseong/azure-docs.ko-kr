@@ -1,6 +1,6 @@
 ---
 title: "Linux VM 배포 RM 문제 해결 | Microsoft Docs"
-description: "Azure에서 새 Linux 가상 컴퓨터 생성 시 Resource Manager 배포 문제 해결"
+description: "Azure에서 새 Linux 가상 머신 생성 시 Resource Manager 배포 문제 해결"
 services: virtual-machines-linux, azure-resource-manager
 documentationcenter: 
 author: JiangChen79
@@ -15,15 +15,13 @@ ms.devlang: na
 ms.topic: article
 ms.date: 09/09/2016
 ms.author: cjiang
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
 ms.openlocfilehash: aea5db05843b0175b8ef8b713944e12262e33010
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
-
+ms.sourcegitcommit: 3f33787645e890ff3b73c4b3a28d90d5f814e46c
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 01/03/2018
 ---
-# <a name="troubleshoot-resource-manager-deployment-issues-with-creating-a-new-linux-virtual-machine-in-azure"></a>Azure에서 새 Linux 가상 컴퓨터 생성 관련 Resource Manager 배포 문제 해결
+# <a name="troubleshoot-resource-manager-deployment-issues-with-creating-a-new-linux-virtual-machine-in-azure"></a>Azure에서 새 Linux 가상 머신 생성 관련 Resource Manager 배포 문제 해결
 [!INCLUDE [virtual-machines-troubleshoot-deployment-new-vm-opening](../../../includes/virtual-machines-troubleshoot-deployment-new-vm-opening-include.md)]
 
 [!INCLUDE [support-disclaimer](../../../includes/support-disclaimer.md)]
@@ -31,7 +29,7 @@ ms.lasthandoff: 07/04/2017
 ## <a name="top-issues"></a>주요 문제
 [!INCLUDE [support-disclaimer](../../../includes/virtual-machines-linux-troubleshoot-deploy-vm-top.md)]
 
-VM 배포 문제 및 질문은 [Azure에서 Linux 가상 컴퓨터 배포 문제 해결](troubleshoot-deploy-vm.md)을 참조하세요.
+VM 배포 문제 및 질문은 [Azure에서 Linux 가상 머신 배포 문제 해결](troubleshoot-deploy-vm.md)을 참조하세요.
 ## <a name="collect-activity-logs"></a>활동 로그 선택
 문제 해결을 시작하려면 문제와 관련된 오류를 파악하기 위해 활동 로그를 수집합니다. 다음 링크에는 수행할 프로세스에 대한 자세한 내용이 포함되어 있습니다.
 
@@ -75,7 +73,7 @@ VM 배포 문제 및 질문은 [Azure에서 Linux 가상 컴퓨터 배포 문제
 * 더 작은 VM 크기를 사용하여 요청을 다시 시도합니다.
 * 요청한 VM의 크기를 변경할 수 없으면:
   * 가용성 집합의 VM을 모두 중지합니다.
-    **리소스 그룹** > *사용자의 리소스 그룹* > **리소스** > *사용자의 가용성 집합* > **가상 컴퓨터** > *사용자의 가상 컴퓨터* > **중지**를 클릭합니다.
+    **리소스 그룹** > *사용자의 리소스 그룹* > **리소스** > *사용자의 가용성 집합* > **Virtual Machines** > *사용자의 가상 머신* > **중지**를 클릭합니다.
   * VM을 모두 중지한 후에, 원하는 크기로 VM을 새로 만듭니다.
   * 먼저 VM을 시작한 후에 중지된 각각의 VM을 선택하고 **시작**을 클릭합니다.
 
@@ -89,6 +87,5 @@ VM 배포 문제 및 질문은 [Azure에서 Linux 가상 컴퓨터 배포 문제
   * 새 VM을 동일한 가상 네트워크에 추가합니다.
 
 ## <a name="next-steps"></a>다음 단계
-중지된 Linux VM을 시작하거나 Azure에서 기존 Linux VM의 크기를 조정할 때 문제가 발생하면 [Azure의 기존 Linux 가상 컴퓨터 재시작 또는 크기 조정 관련 Resource Manager 배포 문제 해결](restart-resize-error-troubleshooting.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)을 참조하세요.
-
+중지된 Linux VM을 시작하거나 Azure에서 기존 Linux VM의 크기를 조정할 때 문제가 발생하면 [Azure의 기존 Linux Virtual Machine 재시작 또는 크기 조정 관련 Resource Manager 배포 문제 해결](restart-resize-error-troubleshooting.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)을 참조하세요.
 

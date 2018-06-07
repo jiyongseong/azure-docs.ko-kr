@@ -1,0 +1,132 @@
+- name: DNS 설명서
+  href: index.yml
+- name: 개요
+  items:
+    - name: Azure DNS란?
+      href: dns-overview.md
+- name: 빠른 시작
+  items:
+    - name: DNS 영역 및 레코드 만들기 - 포털
+      href: dns-getstarted-portal.md
+    - name: DNS 영역 및 레코드 만들기 - PowerShell
+      href: dns-getstarted-powershell.md
+    - name: DNS 영역 및 레코드 만들기 - CLI
+      href: dns-getstarted-cli.md
+- name: 자습서
+  items:
+    - name: 개인 DNS 영역 및 레코드 만들기
+      href: private-dns-getstarted-powershell.md
+    - name: Azure DNS에 도메인 위임
+      href: dns-delegate-domain-azure-dns.md
+    - name: 웹앱에 대한 사용자 지정 DNS 레코드 만들기
+      href: dns-web-sites-custom-domain.md
+- name: 샘플
+  items:
+    - name: Azure CLI
+      href: cli-samples.md
+- name: 개념
+  items:
+    - name: DNS 영역 및 레코드
+      href: dns-zones-records.md
+    - name: Azure DNS로 DNS 위임
+      href: dns-domain-delegation.md
+    - name: DNS FAQ
+      href: dns-faq.md
+    - name: 개인 DNS 영역 사용
+      href: private-dns-overview.md
+    - name: 개인 DNS 시나리오
+      href: private-dns-scenarios.md
+    - name: DNS 메트릭 및 경고
+      href: dns-alerts-metrics.md
+    - name: 역방향 DNS
+      href: dns-reverse-dns-overview.md
+- name: 방법
+  items:
+    - name: 사용자 지정 DNS 영역 및 레코드 만들기 - Azure CLI
+      href: private-dns-getstarted-cli.md
+    - name: DNS 영역 관리
+      items:
+        - name: Azure portal
+          href: dns-operations-dnszones-portal.md
+        - name: Azure PowerShell
+          href: dns-operations-dnszones.md
+        - name: Azure CLI
+          href: dns-operations-dnszones-cli.md
+    - name: DNS 레코드 관리
+      items:
+        - name: Azure portal
+          href: dns-operations-recordsets-portal.md
+        - name: Azure PowerShell
+          href: dns-operations-recordsets.md
+        - name: Azure CLI
+          href: dns-operations-recordsets-cli.md
+    - name: 역방향 DNS 관리
+      items:
+        - name: Azure DNS에서 역방향 조회 영역 호스트
+          href: dns-reverse-dns-hosting.md
+        - name: Azure 서비스에 대한 역방향 DNS 레코드 관리
+          href: dns-reverse-dns-for-azure-services.md
+    - name: DNS 영역 파일 가져오기 및 내보내기
+      href: dns-import-export.md
+    - name: 다른 Azure 서비스와 통합
+      href: dns-for-azure-services.md
+    - name: DNS 영역 및 레코드 보호
+      href: dns-protect-zones-recordsets.md
+    - name: .NET SDK를 사용하여 DNS 작업 자동화
+      href: dns-sdk.md
+    - name: Azure 리소스에 대한 사용자 지정 도메인
+      href: dns-custom-domain.md
+    - name: 문제 해결
+      items:
+        - name: 문제 해결 가이드
+          href: dns-troubleshoot.md
+- name: 참고 자료
+  items:
+    - name: 코드 샘플
+      href: 'https://azure.microsoft.com/resources/samples/?service=dns'
+    - name: Azure PowerShell
+      href: /powershell/module/azurerm.dns
+    - name: Azure CLI
+      href: /cli/azure/network/dns
+    - name: .NET
+      href: /dotnet/api/microsoft.azure.management.dns.models
+    - name: 자바
+      href: /java/api/com.microsoft.azure.management.dns
+    - name: Node.js
+      href: 'http://azure.github.io/azure-sdk-for-node/azure-arm-dns/latest/'
+    - name: Ruby
+      href: 'http://www.rubydoc.info/gems/azure_mgmt_dns/0.8.0'
+    - name: 파이썬
+      href: 'http://azure-sdk-for-python.readthedocs.io/en/latest/sample_azure-mgmt-dns.html'
+    - name: REST (영문)
+      href: /rest/api/dns/
+- name: 관련 항목
+  items:
+    - name: Application Gateway
+      href: /azure/application-gateway/
+    - name: Virtual Network
+      href: /azure/virtual-network/
+    - name: Virtual Machine
+      href: /azure/virtual-machines/
+    - name: 부하 분산 장치
+      href: /azure/load-balancer/
+    - name: Traffic Manager
+      href: /azure/traffic-manager/
+    - name: 웹 앱
+      href: /azure/app-service/
+- name: 리소스
+  items:
+    - name: Azure 로드맵
+      href: 'https://azure.microsoft.com/roadmap/?category=networking'
+    - name: 기능 요청
+      href: 'https://feedback.azure.com/forums/217313-networking/category/77466-domain-name-service-dns-traffic-manager'
+    - name: MSDN 포럼
+      href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=WAVirtualMachinesVirtualNetwork'
+    - name: 네트워킹 블로그
+      href: 'http://azure.microsoft.com/blog/topics/networking'
+    - name: 가격
+      href: 'https://azure.microsoft.com/pricing/details/dns/'
+    - name: 요금 계산기
+      href: 'https://azure.microsoft.com/pricing/calculator/'
+    - name: 서비스 업데이트
+      href: 'https://azure.microsoft.com/updates/?product=dns'

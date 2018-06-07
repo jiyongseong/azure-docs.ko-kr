@@ -1,25 +1,24 @@
 ---
-title: "내 응용 프로그램을 개발하는 문제”"
-description: "내 응용 프로그램을 개발하는 문제”"
+title: 내 응용 프로그램을 개발하는 문제”
+description: 내 응용 프로그램을 개발하는 문제”
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: ajamess
-manager: kbrint
+manager: mtillman
 ms.service: active-directory
+ms.component: app-mgmt
 ms.workload: identity
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 07/11/2017
 ms.author: asteen
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 0d6f6fb24f1f01d703104f925dcd03ee1ff46062
-ms.openlocfilehash: 69d366e9babcd1035b194de69933a3691c952c47
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/18/2017
-
+ms.openlocfilehash: ebb7717291b4a5c6436d72778888b76dd63e96c1
+ms.sourcegitcommit: d98d99567d0383bb8d7cbe2d767ec15ebf2daeb2
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/10/2018
 ---
-
 # <a name="problems-developing-my-application"></a>내 응용 프로그램을 개발하는 문제
 
 
@@ -32,4 +31,3 @@ ms.lasthandoff: 04/18/2017
   * [응용 프로그램 동의가 작동하는 방식이 혼동됨](https://docs.microsoft.com/azure/active-directory/application-dev-consent-framework/?/?WT.mc_id=DMC_AAD_Develop_Apps_Troubleshooting_Nav)
   * [내 응용 프로그램에 사용 권한을 부여하는 방법을 모름](https://docs.microsoft.com/azure/active-directory/application-dev-registration-config-grant-permissions-how-to/?/?WT.mc_id=DMC_AAD_Develop_Apps_Troubleshooting_Nav)
   * [위임된 권한과 응용 프로그램 권한의 차이를 모름](https://docs.microsoft.com/azure/active-directory/application-dev-delegated-and-app-perms/?/?WT.mc_id=DMC_AAD_Develop_Apps_Troubleshooting_Nav)
-

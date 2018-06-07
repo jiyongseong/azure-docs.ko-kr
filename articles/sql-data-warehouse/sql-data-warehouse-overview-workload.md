@@ -1,27 +1,20 @@
 ---
-title: "Azure SQL Data Warehouse 작업에 대해 알아보기 | Microsoft Docs"
-description: 'SQL Data Warehouse''s elasticity lets you grow, shrink, or pause compute power by using a sliding scale of data warehouse units (DWUs). This article explains the data warehouse metrics and how they relate to DWUs. '
+title: Azure SQL Data Warehouse 작업에 대해 알아보기 | Microsoft Docs
+description: 'SQL Data Warehouse의 탄력성 덕분에 데이터 웨어하우스 단위(DWU)의 슬라이딩 규모를 사용함으로써 계산 능력을 확장, 축소 또는 일시 중지할 수 있습니다. 이 문서는 데이터 웨어하우스의 메트릭 및 이들과 DWU와의 관계를 설명합니다. '
 services: sql-data-warehouse
-documentationcenter: NA
-author: jrowlandjones
-manager: jhubbard
-editor: 
-ms.assetid: cadffa9c-589d-4db7-888a-1f202a753bc5
+author: kevinvngo
+manager: craigg-msft
 ms.service: sql-data-warehouse
-ms.devlang: NA
-ms.topic: article
-ms.tgt_pltfrm: NA
-ms.workload: data-services
-ms.custom: performance
-ms.date: 10/31/2016
-ms.author: jrj;barbkess
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 43ab6a2f71ab51c50847b1ba5249f51c48e03fea
-ms.openlocfilehash: 79fedaabc438bc4cd884af6b494e43d32361950a
-ms.contentlocale: ko-kr
-ms.lasthandoff: 01/24/2017
-
-
+ms.topic: conceptual
+ms.component: design
+ms.date: 04/17/2018
+ms.author: kevin
+ms.reviewer: igorstan
+ms.openlocfilehash: 21e1f687e152cf91bd32389e0d5aa0dabd463b2f
+ms.sourcegitcommit: fa493b66552af11260db48d89e3ddfcdcb5e3152
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/23/2018
 ---
 # <a name="data-warehouse-workload"></a>데이터 웨어하우스 워크로드
 데이터 웨어하우스 워크로드란 데이터 웨어하우스에 대해 발생하는 모든 작업을 나타냅니다. 데이터 웨어하우스 워크로드는 데이터를 웨어하우스에 로드, 데이터 웨어하우스에서 분석 및 보고 수행, 데이터 웨어하우스에서 데이터 관리 및 데이터 웨어하우스로부터 데이터를 내보내는 전체 프로세스를 포괄합니다. 이러한 구성 요소의 깊이와 범위는 일반적으로 데이터 웨어하우스의 성숙도 수준과 관련이 있습니다.
@@ -43,7 +36,7 @@ ms.lasthandoff: 01/24/2017
 ## <a name="data-loading"></a>데이터 로드
 데이터 로드는 데이터 웨어하우스 워크로드의 주요 부분입니다. 일반적으로 기업은 고객들이 비즈니스 트랜잭션을 생성할 때 하루 동안 변경 내용을 추적하는 사용량이 많은 OLTP 시스템을 보유하고 있습니다. 정기적으로, 종종 유지 관리 기간 동안 밤에 트랜잭션이 데이터 웨어하우스로 이동 또는 복사됩니다. 일단 데이터가 데이터 웨어하우스로 들어가면 분석가가 분석을 수행하고 데이터에 대한 비즈니스 결정을 내릴 수 있습니다.
 
-* 일반적으로 로드 프로세스를 추출, 변환 및 로드에 대한 ETL이라고 합니다. 데이터는 일반적으로 변환할 수 있으므로 데이터 웨어하우스 내의 다른 데이터와 일관적입니다. 이전에는 기업이 전용 ETL 서버를 사용하여 변환을 수행했습니다. 이제는 이렇게 빠르고 방대한 병렬 처리를 통해 먼저 SQL 데이터 웨어하우스로 데이터를 로드하고 변환을 수행할 수 있습니다. 이 프로세스를 추출, 로드 및 변환(ELT)이라고 부르며, 데이터 웨어하우스 워크로드에 대한 새로운 표준으로 떠오르고 있습니다.
+* 일반적으로 로드 프로세스를 추출, 변환 및 로드에 대한 ETL이라고 합니다. 데이터는 일반적으로 변환할 수 있으므로 데이터 웨어하우스 내의 다른 데이터와 일관적입니다. 이전에는 기업이 전용 ETL 서버를 사용하여 변환을 수행했습니다. 이제는 이렇게 빠르고 방대한 병렬 처리를 통해 먼저 SQL Data Warehouse로 데이터를 로드하고 변환을 수행할 수 있습니다. 이 프로세스를 추출, 로드 및 변환(ELT)이라고 부르며, 데이터 웨어하우스 워크로드에 대한 새로운 표준으로 떠오르고 있습니다.
 
 > [!NOTE]
 > 이제 SQL Server 2016을 통해 OLTP 테이블에서 실시간으로 분석을 수행할 수 있습니다. 이것은 데이터 웨어하우스에서 데이터를 저장 및 분석해야 하는 필요성을 제거하지는 않지만 분석을 실시간으로 수행할 수 있는 방법을 제공합니다.
@@ -53,7 +46,7 @@ ms.lasthandoff: 01/24/2017
 ### <a name="reporting-and-analysis-queries"></a>보고 및 분석 쿼리
 보고 및 분석 쿼리는 종종 다양한 조건을 기반으로 소, 중, 대로 분류되지만 일반적으로 시간이 기준입니다. 대부분의 데이터 웨어하우스에는 장기 실행 쿼리와 빠른 실행 쿼리 워크로드가 혼합되어 있습니다. 각각의 경우 이러한 혼합과 빈도(매시간, 매일, 월말, 분기말 등)를 결정하는 것이 중요합니다. 혼합된 쿼리 워크로드가 동시성과 함께 데이터 웨어하우스를 위한 적절한 용량 계획으로 이어진다는 사실을 이해하는 것이 중요합니다.
 
-* 용량 계획은 혼합 쿼리 워크로드에 대해 복잡한 작업이 될 수도 있습니다. 특히 데이터 웨어하우스에 용량을 추가하는 데 긴 지연 시간이 필요한 경우가 그렇습니다. 언제든지 계산 용량을 증가 및 축소시킬 수 있으며 저장 및 계산 용량이 독립적으로 지정되므로 SQL 데이터 웨어하우스는 용량 계획의 긴급성을 제거해줍니다.
+* 용량 계획은 혼합 쿼리 워크로드에 대해 복잡한 작업이 될 수도 있습니다. 특히 데이터 웨어하우스에 용량을 추가하는 데 긴 지연 시간이 필요한 경우가 그렇습니다. 언제든지 계산 용량을 증가 및 축소시킬 수 있으며 저장 및 계산 용량이 독립적으로 지정되므로 SQL Data Warehouse는 용량 계획의 긴급성을 제거해줍니다.
 
 ### <a name="data-management"></a>데이터 관리
 데이터 관리는 중요합니다. 특히 조만간 디스크 공간이 부족해진다는 사실을 알고 있을 경우 그렇습니다. 데이터 웨어하우스는 일반적으로 데이터를 의미 있는 범위로 나누는데, 이들은 테이블에서 파티션으로 저장됩니다. 모든 SQL Server 기반 제품을 사용하여 테이블 내외부로 파티션을 이동할 수 있습니다. 이러한 파티션 전환을 통해 오래된 데이터를 저렴한 저장소로 이동하고 최신 데이터를 온라인 저장소에 보관할 수 있습니다.
@@ -79,4 +72,3 @@ SQL 데이터 웨어하우스에 대한 내용을 파악했으므로 [SQL Data W
 <!--MSDN references-->
 
 <!--Other web references-->
-

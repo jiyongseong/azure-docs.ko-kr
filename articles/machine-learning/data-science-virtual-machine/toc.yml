@@ -1,0 +1,73 @@
+- name: 데이터 과학 Virtual Machine 설명서
+  href: index.yml
+  items: null
+- name: 개요
+  expanded: true
+  items:
+    - name: 데이터 과학 VM은 무엇입니까?
+      href: overview.md
+    - name: 심층 학습 VM은 무엇입니까?
+      href: deep-learning-dsvm-overview.md
+    - name: Geo AI 데이터 과학 VM은 무엇입니까?
+      href: geo-ai-dsvm-overview.md
+- name: 시작하기
+  items:
+    - name: Windows 데이터 과학 VM 만들기
+      href: provision-vm.md
+    - name: Ubuntu 데이터 과학 VM 만들기
+      href: dsvm-ubuntu-intro.md
+    - name: CentOS 데이터 과학 VM 만들기
+      href: linux-dsvm-intro.md
+    - name: 심층 학습 VM 만들기
+      href: provision-deep-learning-dsvm.md
+    - name: Geo AI 데이터 과학 VM 만들기
+      href: provision-geo-ai-dsvm.md
+- name: 방법
+  items:
+    - name: Windows 데이터 과학 VM 사용
+      href: vm-do-ten-things.md
+    - name: Linux 데이터 과학 VM 사용
+      href: linux-dsvm-walkthrough.md
+    - name: 심층 학습 VM 사용
+      href: use-deep-learning-dsvm.md
+    - name: Geo AI 데이터 과학 VM 사용
+      href: use-geo-ai-dsvm.md
+- name: 엔터프라이즈 지침
+  items:
+    - name: 개요
+      href: dsvm-enterprise-overview.md
+    - name: 확장
+      href: dsvm-pools.md
+    - name: Active Directory 통합
+      href: dsvm-common-identity.md
+    - name: 안전한 리소스 액세스 자격 증명
+      href: dsvm-secure-access-keys.md
+- name: 참고 자료
+  expanded: true
+  items:
+    - name: DSVM 검색
+      href: dsvm-tools-overview.md
+    - name: 심층 학습 및 AI 프레임워크
+      href: dsvm-deep-learning-ai-frameworks.md
+    - name: ML 및 데이터 과학 도구
+      href: dsvm-ml-data-science-tools.md
+    - name: 언어
+      href: dsvm-languages.md
+    - name: 개발 도구
+      href: dsvm-tools-development.md
+    - name: 데이터 수집 도구
+      href: dsvm-tools-ingestion.md
+    - name: 데이터 탐색 및 시각화 도구
+      href: dsvm-tools-explore-and-visualize.md
+    - name: 데이터 플랫폼
+      href: dsvm-data-platforms.md
+    - name: 샘플 및 연습
+      href: dsvm-samples-and-walkthroughs.md
+- name: 리소스
+  items:
+    - name: 블로그
+      href: 'https://blogs.technet.microsoft.com/machinelearning/tag/dsvm/'
+    - name: MSDN 포럼
+      href: 'https://social.microsoft.com/Forums/en-US/home?forum=dsvm'
+    - name: 스택 오버플로
+      href: 'https://stackoverflow.com/search?q=dsvm'

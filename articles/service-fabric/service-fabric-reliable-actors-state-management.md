@@ -1,38 +1,36 @@
 ---
-title: "Reliable Actors 상태 관리 | Microsoft Docs"
-description: "고가용성을 위해 Reliable Actors 상태를 관리, 유지 및 복제하는 방법을 설명합니다."
+title: Reliable Actors 상태 관리 | Microsoft Docs
+description: 고가용성을 위해 Reliable Actors 상태를 관리, 유지 및 복제하는 방법을 설명합니다.
 services: service-fabric
 documentationcenter: .net
 author: vturecek
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: 37cf466a-5293-44c0-a4e0-037e5d292214
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 06/29/2017
+ms.date: 11/02/2017
 ms.author: vturecek
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6efa2cca46c2d8e4c00150ff964f8af02397ef99
-ms.openlocfilehash: aca8cf2b94e8b746a5cac6af021c7221a29b7345
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/01/2017
-
-
+ms.openlocfilehash: 3cab4d87eacc7bce17da64cda213086c262179a8
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="reliable-actors-state-management"></a>Reliable Actors 상태 관리
-Reliable Actors는 논리와 상태를 모두 캡슐화할 수 있는 단일 스레드 개체입니다. 행위자가 Reliable Services에서 실행되므로 Reliable Services에서 사용하는 동일한 지속성 및 복제 메커니즘을 사용하여 안전하게 상태를 유지할 수 있습니다. 이러한 방식으로 행위자는 실패한 후에 해당 상태를 손실하지 않고 가비지 수집 후 다시 활성화합니다. 또한 리소스 균형 조정 또는 업그레이드로 인해 클러스터의 노드 간에 이동하는 경우에도 그렇습니다.
+Reliable Actors는 논리와 상태를 모두 캡슐화할 수 있는 단일 스레드 개체입니다. 행위자가 Reliable Services에서 실행되므로 동일한 지속성 및 복제 메커니즘을 사용하여 안전하게 상태를 유지할 수 있습니다. 이러한 방식으로 행위자는 실패한 후에 해당 상태를 손실하지 않고 가비지 수집 후 다시 활성화합니다. 또한 리소스 균형 조정 또는 업그레이드로 인해 클러스터의 노드 간에 이동하는 경우에도 그렇습니다.
 
 ## <a name="state-persistence-and-replication"></a>상태 지속성 및 복제
 각 행위자 인스턴스가 고유 ID에 매핑되기 때문에 모든 Reliable Actors는 *상태 저장* 이라고 여겨집니다. 즉, 동일한 행위자 ID에 대한 반복된 호출이 동일한 행위자 인스턴스에 라우트됩니다. 상태 비저장 시스템에서 대조적으로 클라이언트 호출이 매번 동일한 서버에 라우트되도록 보장되지는 않습니다. 따라서 행위자 서비스는 항상 상태 저장 서비스입니다.
 
 행위자가 상태 저장을 고려하더라도 상태를 안정적으로 저장해야 하는 것은 아닙니다. 행위자는 해당 데이터 저장소 요구 사항에 따라 상태 지속성 및 복제의 수준을 선택할 수 있습니다.
 
-* **지속된 상태:** 상태가 디스크에 유지되고 3개 이상의 복제본에 복제됩니다. 상태가 전체 클러스터 가동 중단을 통해 유지할 수 있는 가장 지속적인 상태 저장 옵션입니다.
-* **일시적 상태:** 상태는 3개 이상의 복제본에 복제되고 메모리에만 보관됩니다. 업그레이드 및 리소스 균형을 조정하는 동안 노드 실패 및 행위자 실패에 대한 복원력을 제공합니다. 그러나 상태는 디스크에 유지되지 않으므로 한 번에 모든 복제본이 손실되면 상태도 손실됩니다.
-* **지속된 상태 없음:** 상태가 복제되거나 디스크에 기록되지 않습니다. 이 수준은 단순히 상태를 안정적으로 유지할 필요가 없는 행위자의 경우입니다.
+* **지속된 상태:** 상태가 디스크에 유지되고 3개 이상의 복제본에 복제됩니다. 지속된 상태는 완전한 클러스터 가동 중단 내내 상태가 유지될 수 있는 가장 지속적인 상태 저장 옵션입니다.
+* **일시적 상태:** 상태가 3개 이상의 복제본에 복제되고 메모리에만 보관됩니다. 일시적 상태는 업그레이드 및 리소스 균형을 조정하는 동안 노드 실패 및 행위자 실패에 대한 복원력을 제공합니다. 그러나 상태는 디스크에 유지되지 않으므로 한 번에 모든 복제본이 손실되면 상태도 손실됩니다.
+* **지속된 상태 없음**: 상태가 복제되거나 디스크에 쓰여지지 않으며 상태를 안정적으로 유지 관리할 필요가 없는 행위자에 대해서만 사용됩니다.
 
 지속성의 수준은 각각 단순히 *상태 제공자* 및 서비스의 *복제* 구성에 따라 다릅니다. 상태가 디스크에 기록되는지 여부는 상태를 저장하는 Reliable Service의 구성 요소인 상태 제공자에 따라 달라지며 복제는 서비스를 배포한 복제본 수에 따라 달라집니다. Reliable Services와 마찬가지로 상태 제공자와 복제본 수는 모두 쉽게 수동으로 설정될 수 있습니다. 행위자 프레임워크는 특성을 제공합니다. 이 특성은 행위자에 사용될 경우 자동으로 기본 상태 제공자를 선택하고 이러한 세 가지 지속성 설정 중 하나를 달성하기 위해 복제본 수에 대한 설정을 자동으로 생성합니다. StatePersistence 특성은 파생 클래스에서 상속되지 않으며 각 행위자 형식은 해당 StatePersistence 수준을 제공해야 합니다.
 
@@ -113,303 +111,21 @@ class MyActorImpl extends FabricActor implements MyActor
 
 상태 관리자는 신뢰할 수 있는 사전에 있는 것과 비슷한 상태를 관리하기 위한 일반적인 사전 메서드를 제공합니다.
 
-### <a name="accessing-state"></a>상태 액세스
-상태 관리자를 통해 키로 상태에 액세스할 수 있습니다. 상태 관리자 메서드는 행위자가 지속된 상태인 경우 디스크 I/O가 필요할 수 있기에 모두 비동기적입니다. 첫 번째 액세스에서 상태 개체는 메모리에 캐시됩니다. 반복 액세스 작업은 메모리에서 직접 개체에 액세스하고 오버헤드를 전환하는 디스크 I/O 또는 비동기 컨텍스트를 발생시키지 않고 동기적으로 반환합니다. 상태 개체는 다음과 같은 경우에 캐시에서 제거됩니다.
+행위자 상태 관리의 예제는 [Reliable Actors 상태 액세스, 저장 및 제거](service-fabric-reliable-actors-access-save-remove-state.md)를 참조하세요.
 
-* 행위자 메서드는 상태 관리자에서 개체를 검색한 후에 처리되지 않은 예외를 throw합니다.
-* 비활성화되거나 오류 발생 후에 행위자가 다시 활성화됩니다.
-* 상태 제공자가 디스크에 상태를 페이징합니다. 이 동작은 상태 제공자 구현에 따라 다릅니다. `Persisted` 설정에 대한 기본 상태 제공자는 이 동작을 포함합니다.
+## <a name="best-practices"></a>모범 사례
+다음은 행위자 상태를 관리하는 권장 사례 및 문제 해결 팁입니다.
 
-키에 대한 항목이 없는 경우 `KeyNotFoundException`(C#) 또는 `NoSuchElementException`(Java)를 throw하는 표준 *Get* 작업을 사용하여 상태를 검색할 수 있습니다.
-
-```csharp
-[StatePersistence(StatePersistence.Persisted)]
-class MyActor : Actor, IMyActor
-{
-    public MyActor(ActorService actorService, ActorId actorId)
-        : base(actorService, actorId)
-    {
-    }
-
-    public Task<int> GetCountAsync()
-    {
-        return this.StateManager.GetStateAsync<int>("MyState");
-    }
-}
-```
-```Java
-@StatePersistenceAttribute(statePersistence = StatePersistence.Persisted)
-class MyActorImpl extends FabricActor implements  MyActor
-{
-    public MyActorImpl(ActorService actorService, ActorId actorId)
-    {
-        super(actorService, actorId);
-    }
-
-    public CompletableFuture<Integer> getCountAsync()
-    {
-        return this.stateManager().getStateAsync("MyState");
-    }
-}
-```
-
-또한 키에 대한 항목이 없는 경우 throw하지 않는 *TryGet* 메서드를 사용하여 상태를 검색할 수 있습니다.
-
-```csharp
-class MyActor : Actor, IMyActor
-{
-    public MyActor(ActorService actorService, ActorId actorId)
-        : base(actorService, actorId)
-    {
-    }
-
-    public async Task<int> GetCountAsync()
-    {
-        ConditionalValue<int> result = await this.StateManager.TryGetStateAsync<int>("MyState");
-        if (result.HasValue)
-        {
-            return result.Value;
-        }
-
-        return 0;
-    }
-}
-```
-```Java
-class MyActorImpl extends FabricActor implements  MyActor
-{
-    public MyActorImpl(ActorService actorService, ActorId actorId)
-    {
-        super(actorService, actorId);
-    }
-
-    public CompletableFuture<Integer> getCountAsync()
-    {
-        return this.stateManager().<Integer>tryGetStateAsync("MyState").thenApply(result -> {
-            if (result.hasValue()) {
-                return result.getValue();
-            } else {
-                return 0;
-            });
-    }
-}
-```
-
-### <a name="saving-state"></a>상태 저장
-상태 관리자 검색 메서드는 로컬 메모리에 개체에 대한 참조를 반환합니다. 로컬 메모리에서 이 개체를 수정하는 것만으로는 지속적으로 저장하지 못합니다. 개체를 상태 관리자에서 검색하고 수정하는 경우 지속적으로 저장되도록 상태 관리자에 다시 삽입해야 합니다.
-
-`dictionary["key"] = value` 구문과 동등한 무조건 *설정*을 사용하여 상태를 삽입할 수 있습니다.
-
-```csharp
-[StatePersistence(StatePersistence.Persisted)]
-class MyActor : Actor, IMyActor
-{
-    public MyActor(ActorService actorService, ActorId actorId)
-        : base(actorService, actorId)
-    {
-    }
-
-    public Task SetCountAsync(int value)
-    {
-        return this.StateManager.SetStateAsync<int>("MyState", value);
-    }
-}
-```
-```Java
-@StatePersistenceAttribute(statePersistence = StatePersistence.Persisted)
-class MyActorImpl extends FabricActor implements  MyActor
-{
-    public MyActorImpl(ActorService actorService, ActorId actorId)
-    {
-        super(actorService, actorId);
-    }
-
-    public CompletableFuture setCountAsync(int value)
-    {
-        return this.stateManager().setStateAsync("MyState", value);
-    }
-}
-```
-
-*Add* 메서드를 사용하여 상태를 추가할 수 있습니다. 이미 존재하는 키를 추가하려고 하면 이 메서드가 `InvalidOperationException`(C#) 또는 `IllegalStateException`(Java)을 throw합니다.
-
-```csharp
-[StatePersistence(StatePersistence.Persisted)]
-class MyActor : Actor, IMyActor
-{
-    public MyActor(ActorService actorService, ActorId actorId)
-        : base(actorService, actorId)
-    {
-    }
-
-    public Task AddCountAsync(int value)
-    {
-        return this.StateManager.AddStateAsync<int>("MyState", value);
-    }
-}
-```
-```Java
-@StatePersistenceAttribute(statePersistence = StatePersistence.Persisted)
-class MyActorImpl extends FabricActor implements  MyActor
-{
-    public MyActorImpl(ActorService actorService, ActorId actorId)
-    {
-        super(actorService, actorId);
-    }
-
-    public CompletableFuture addCountAsync(int value)
-    {
-        return this.stateManager().addOrUpdateStateAsync("MyState", value, (key, old_value) -> old_value + value);
-    }
-}
-```
-
-*TryAdd* 메서드를 사용하여 상태를 추가할 수도 있습니다. 이미 존재하는 키를 추가하려고 하면 이 메서드가 throw하지 않습니다.
-
-```csharp
-[StatePersistence(StatePersistence.Persisted)]
-class MyActor : Actor, IMyActor
-{
-    public MyActor(ActorService actorService, ActorId actorId)
-        : base(actorService, actorId)
-    {
-    }
-
-    public async Task AddCountAsync(int value)
-    {
-        bool result = await this.StateManager.TryAddStateAsync<int>("MyState", value);
-
-        if (result)
-        {
-            // Added successfully!
-        }
-    }
-}
-```
-```Java
-@StatePersistenceAttribute(statePersistence = StatePersistence.Persisted)
-class MyActorImpl extends FabricActor implements  MyActor
-{
-    public MyActorImpl(ActorService actorService, ActorId actorId)
-    {
-        super(actorService, actorId);
-    }
-
-    public CompletableFuture addCountAsync(int value)
-    {
-        return this.stateManager().tryAddStateAsync("MyState", value).thenApply((result)->{
-            if(result)
-            {
-                // Added successfully!
-            }
-        });
-    }
-}
-```
-
-행위자 메서드가 끝날 때 상태 관리자는 삽입 또는 업데이트 작업에 의해 추가되거나 수정된 모든 값을 자동으로 저장합니다. "저장"은 사용된 설정에 따라 디스크와 복제를 지속하도록 포함할 수 있습니다. 수정되지 않은 값은 지속되거나 복제되지 않습니다. 수정된 값이 없는 경우 저장 작업은 아무 것도 수행하지 않습니다. 실패를 저장하는 경우 수정된 상태는 삭제되고 원래 상태를 다시 로드합니다.
-
-또한 행위자 기반의 `SaveStateAsync` 메서드를 호출하여 상태를 수동으로 저장할 수 있습니다.
-
-```csharp
-async Task IMyActor.SetCountAsync(int count)
-{
-    await this.StateManager.AddOrUpdateStateAsync("count", count, (key, value) => count > value ? count : value);
-
-    await this.SaveStateAsync();
-}
-```
-```Java
-interface MyActor {
-    CompletableFuture setCountAsync(int count)
-    {
-        this.stateManager().addOrUpdateStateAsync("count", count, (key, value) -> count > value ? count : value).thenApply();
-
-        this.stateManager().saveStateAsync().thenApply();
-    }
-}
-```
-
-### <a name="removing-state"></a>상태 제거
-*제거* 메서드 호출하여 행위자의 상태 관리자에서 상태를 영구적으로 상태를 제거할 수 있습니다. 존재하지 않는 키를 제거하려고 하면 이 메서드가 `KeyNotFoundException`(C#) 또는 `NoSuchElementException`(Java)을 throw합니다.
-
-```csharp
-[StatePersistence(StatePersistence.Persisted)]
-class MyActor : Actor, IMyActor
-{
-    public MyActor(ActorService actorService, ActorId actorId)
-        : base(actorService, actorId)
-    {
-    }
-
-    public Task RemoveCountAsync()
-    {
-        return this.StateManager.RemoveStateAsync("MyState");
-    }
-}
-```
-```Java
-@StatePersistenceAttribute(statePersistence = StatePersistence.Persisted)
-class MyActorImpl extends FabricActor implements  MyActor
-{
-    public MyActorImpl(ActorService actorService, ActorId actorId)
-    {
-        super(actorService, actorId);
-    }
-
-    public CompletableFuture removeCountAsync()
-    {
-        return this.stateManager().removeStateAsync("MyState");
-    }
-}
-```
-
-*TryRemove* 메서드를 사용하여 상태를 영구적으로 제거할 수도 있습니다. 존재하지 않는 키를 제거하려고 하면 이 메서드가 throw하지 않습니다.
-
-```csharp
-[StatePersistence(StatePersistence.Persisted)]
-class MyActor : Actor, IMyActor
-{
-    public MyActor(ActorService actorService, ActorId actorId)
-        : base(actorService, actorId)
-    {
-    }
-
-    public async Task RemoveCountAsync()
-    {
-        bool result = await this.StateManager.TryRemoveStateAsync("MyState");
-
-        if (result)
-        {
-            // State removed!
-        }
-    }
-}
-```
-```Java
-@StatePersistenceAttribute(statePersistence = StatePersistence.Persisted)
-class MyActorImpl extends FabricActor implements  MyActor
-{
-    public MyActorImpl(ActorService actorService, ActorId actorId)
-    {
-        super(actorService, actorId);
-    }
-
-    public CompletableFuture removeCountAsync()
-    {
-        return this.stateManager().tryRemoveStateAsync("MyState").thenApply((result)->{
-            if(result)
-            {
-                // State removed!
-            }
-        });
-    }
-}
-```
+### <a name="make-the-actor-state-as-granular-as-possible"></a>행위자 상태를 최대한 세분화합니다.
+이것은 응용 프로그램의 성능 및 리소스 사용량에 중요합니다. 행위자의 “명명된 상태”에 대한 쓰기/업데이트가 있을 때마다, “명명된 상태”에 해당하는 전체 값이 직렬화되어 네트워크를 통해 보조 복제본으로 전송됩니다.  보조 복제본은 이것을 로컬 디스크에 쓰고 주 복제본에 회신합니다. 주 복제본이 보조 복제본의 쿼럼으로부터 승인을 수신하면 로컬 디스크에 상태를 씁니다. 예를 들어 값이 멤버가 20개 있고 크기가 1MB인 클래스라고 가정하겠습니다. 크기가 1KB인 클래스 멤버 중 하나만 수정하더라도 1MB 전체에 대한 직렬화와 네트워크 및 디스크 쓰기에 대한 비용을 지불하게 됩니다. 마찬가지로, 컬렉션(예: 목록, 배열 또는 사전) 값을 사용하는 경우에 멤버 중 하나를 수정하더라도 컬렉션 전체에 대한 비용을 지불합니다. 행위자 클래스의 StateManager 인터페이스는 사전과 유사합니다. 이 사전 위에 행위자 상태를 나타내는 데이터 구조를 항상 모델링해야 합니다.
+ 
+### <a name="correctly-manage-the-actors-life-cycle"></a>행위자의 수명 주기를 올바르게 관리
+행위자 서비스의 파티션마다 상태의 크기를 관리하는 명확한 정책이 있어야 합니다. 행위자 서비스에는 고정된 수의 행위자를 두고 최대한 많이 다시 사용해야 합니다. 새 행위자를 지속적으로 만드는 경우 작업이 완료되고 나면 행위자를 삭제해야 합니다. 행위자 프레임워크는 존재하는 각 행위자에 대한 메타데이터를 저장합니다. 행위자의 상태를 모두 삭제해도 해당 행위자에 대한 메타데이터는 제거되지 않습니다. 시스템에 저장된 행위자에 대한 정보를 모두 제거하려면 행위자를 삭제해야 합니다([행위자와 해당 상태 삭제](service-fabric-reliable-actors-lifecycle.md#manually-deleting-actors-and-their-state) 참조). 추가 검사의 일환으로, 가끔 행위자 서비스를 쿼리하여 숫자 행위자가 예상 범위 내에 있는지 확인해야 합니다([행위자 열거](service-fabric-reliable-actors-platform.md) 참조).
+ 
+행위자 서비스의 데이터베이스 파일 크기가 예상 크기를 초과하여 증가하는 경우가 발생하면 이전 지침을 따르고 있는지 확인해야 합니다. 지침을 따르고 있는데 데이터베이스 파일 크기에 문제가 있으면 제품 팀과 함께 [지원 티켓을 열어서](service-fabric-support.md) 지원을 받는 것이 좋습니다.
 
 ## <a name="next-steps"></a>다음 단계
 
 Reliable Actors에 저장된 상태를 디스크에 기록하고 고가용성을 위해 복제하기 전에 직렬화해야 합니다. [행위자 형식 직렬화](service-fabric-reliable-actors-notes-on-actor-type-serialization.md)에 대해 자세히 알아봅니다.
 
 다음으로 [행위자 진단 및 성능 모니터링](service-fabric-reliable-actors-diagnostics.md)에 대해 자세히 알아봅니다.
-

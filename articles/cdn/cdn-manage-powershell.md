@@ -1,11 +1,11 @@
 ---
-title: "PowerShell을 사용하여 Azure CDN 관리 | Microsoft Docs"
-description: "Azure PowerShell cmdlet을 사용하여 Azure CDN을 관리하는 방법에 대해 알아봅니다."
+title: PowerShell을 사용하여 Azure CDN 관리 | Microsoft Docs
+description: Azure PowerShell cmdlet을 사용하여 Azure CDN을 관리하는 방법에 대해 알아봅니다.
 services: cdn
-documentationcenter: 
+documentationcenter: ''
 author: zhangmanling
 manager: erikre
-editor: 
+editor: ''
 ms.assetid: fb6f57a5-6e26-4847-8fd9-b51fb05a79eb
 ms.service: cdn
 ms.workload: tbd
@@ -14,21 +14,20 @@ ms.devlang: na
 ms.topic: article
 ms.date: 01/23/2017
 ms.author: mazha
-translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: 647e3de08dd8d3b520705f0d52ba2bb674eda0bf
-ms.lasthandoff: 04/27/2017
-
-
+ms.openlocfilehash: 5634ecdec04f023d9eb901c4ad0fb21b13bcfdc1
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/19/2018
 ---
 # <a name="manage-azure-cdn-with-powershell"></a>PowerShell을 사용하여 Azure CDN 관리
 PowerShell은 Azure CDN 프로필 및 끝점을 관리하는 매우 유연한 방법 중 하나를 제공합니다.  PowerShell을 대화형으로 또는 관리 작업을 자동화하는 스크립트를 작성하여 사용할 수 있습니다.  이 자습서에서는 PowerShell을 사용하여 Azure CDN 프로필 및 끝점의 관리를 달성할 수 있는 가장 일반적인 작업 몇 가지를 보여줍니다.
 
 ## <a name="prerequisites"></a>필수 조건
-PowerShell을 사용하여 Azure CDN 프로필 및 끝점을 관리하려면 Azure PowerShell 모듈이 설치되어 있어야 합니다.  Azure PowerShell을 설치하고 `Login-AzureRmAccount` cmdlet을 사용하여 Azure에 연결하는 방법을 알아보려면 [Azure PowerShell 설치 및 구성 방법](/powershell/azure/overview)을 참조하세요.
+PowerShell을 사용하여 Azure CDN 프로필 및 끝점을 관리하려면 Azure PowerShell 모듈이 설치되어 있어야 합니다.  Azure PowerShell을 설치하고 `Connect-AzureRmAccount` cmdlet을 사용하여 Azure에 연결하는 방법을 알아보려면 [Azure PowerShell 설치 및 구성 방법](/powershell/azure/overview)을 참조하세요.
 
 > [!IMPORTANT]
-> `Login-AzureRmAccount`에 로그인해야 Azure PowerShell cmdlet을 실행할 수 있습니다.
+> `Connect-AzureRmAccount`에 로그인해야 Azure PowerShell cmdlet을 실행할 수 있습니다.
 > 
 > 
 
@@ -169,7 +168,7 @@ Else { Write-Host "No, that endpoint name is not available." }
 `New-AzureRmCdnCustomDomain` 은 기존 끝점에 사용자 지정 도메인 이름을 추가합니다.
 
 > [!IMPORTANT]
-> [사용자 지정 도메인을 콘텐츠 배달 네트워크(CDN) 끝점에 매핑하는 방법](cdn-map-content-to-custom-domain.md)에서 설명한 대로 DNS 공급자를 통해 CNAME을 설정해야 합니다.  `Test-AzureRmCdnCustomDomain`를 사용하여 끝점을 수정하기 전에 매핑을 시험해야 합니다.
+> [사용자 지정 도메인을 Content Delivery Network(CDN) 끝점에 매핑하는 방법](cdn-map-content-to-custom-domain.md)에서 설명한 대로 DNS 공급자를 통해 CNAME을 설정해야 합니다.  `Test-AzureRmCdnCustomDomain`를 사용하여 끝점을 수정하기 전에 매핑을 시험해야 합니다.
 > 
 > 
 
@@ -245,5 +244,4 @@ Remove-AzureRmCdnProfile -ProfileName CdnPoshDemo -ResourceGroupName CdnDemoRG
 [.NET](cdn-app-dev-net.md) 또는 [Node.js](cdn-app-dev-node.md)를 사용하여 Azure CDN을 자동화하는 방법을 알아봅니다.
 
 CDN 기능에 대해 알아보려면 [CDN 개요](cdn-overview.md)를 참조하세요.
-
 

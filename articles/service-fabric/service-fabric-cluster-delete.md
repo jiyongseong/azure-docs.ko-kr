@@ -1,25 +1,24 @@
 ---
-title: "Azure 클러스터 및 해당 리소스 삭제 | Microsoft Docs"
-description: "클러스터가 포함된 리소스 그룹을 삭제하거나 리소스를 선별적으로 삭제하여 서비스 패브릭 클러스터를 완전히 삭제하는 방법을 알아봅니다."
+title: Azure 클러스터 및 해당 리소스 삭제 | Microsoft Docs
+description: 클러스터가 포함된 리소스 그룹을 삭제하거나 리소스를 선별적으로 삭제하여 서비스 패브릭 클러스터를 완전히 삭제하는 방법을 알아봅니다.
 services: service-fabric
 documentationcenter: .net
-author: ChackDan
+author: aljo-microsoft
 manager: timlt
-editor: 
+editor: ''
 ms.assetid: de422950-2d22-4ddb-ac47-dd663a946a7e
 ms.service: service-fabric
 ms.devlang: dotnet
-ms.topic: article
+ms.topic: conceptual
 ms.tgt_pltfrm: na
 ms.workload: na
 ms.date: 06/24/2017
-ms.author: chackdan
-ms.translationtype: Human Translation
-ms.sourcegitcommit: aaf97d26c982c1592230096588e0b0c3ee516a73
-ms.openlocfilehash: c2792287ef8b25a57beb4af069ffc5a3eed85e15
-ms.contentlocale: ko-kr
-ms.lasthandoff: 04/27/2017
-
+ms.author: aljo
+ms.openlocfilehash: 55840dc4b9f25c7e2676cff936390a0542eb239d
+ms.sourcegitcommit: eb75f177fc59d90b1b667afcfe64ac51936e2638
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/16/2018
 ---
 # <a name="delete-a-service-fabric-cluster-on-azure-and-the-resources-it-uses"></a>Azure의 서비스 패브릭 클러스터와 사용하는 리소스 삭제
 서비스 패브릭 클러스터는 클러스터 리소스 자체 외에도 다른 많은 Azure 리소스로 이루어져 있습니다. 따라서 서비스 패브릭 클러스터를 완벽하게 삭제하려면 구성되어 있는 모든 리소스를 삭제해야 합니다.
@@ -39,7 +38,7 @@ ms.lasthandoff: 04/27/2017
 PowerShell 창을 열고 다음 PS cmdlets를 실행합니다.
 
 ```powershell
-Login-AzureRmAccount
+Connect-AzureRmAccount
 
 Remove-AzureRmResourceGroup -Name <name of ResouceGroup> -Force
 ```
@@ -47,7 +46,7 @@ Remove-AzureRmResourceGroup -Name <name of ResouceGroup> -Force
 *-Force* 옵션을 사용하지 않은 경우 삭제를 확인하는 메시지가 나타납니다. 확인 시 RG 및 포함된 모든 리소스가 삭제됩니다.
 
 ### <a name="delete-a-resource-group-in-the-azure-portal"></a>Azure 포털에서 리소스 그룹 삭제
-1. [Azure 포털](https://portal.azure.com)에 로그인합니다.
+1. [Azure 포털](https://portal.azure.com) 에 로그인합니다.
 2. 삭제하려는 서비스 패브릭 클러스터로 이동합니다.
 3. 클러스터 필수 페이지에서 리소스 그룹 이름을 클릭합니다.
 4. 이렇게 하면 **리소스 그룹 필수** 페이지가 표시됩니다.
@@ -66,7 +65,7 @@ Remove-AzureRmResourceGroup -Name <name of ResouceGroup> -Force
 ***Tag#2:*** 키 = resourceName, 값 = ServiceFabric
 
 ### <a name="delete-specific-resources-in-the-azure-portal"></a>Azure 포털에서 특정 리소스 삭제
-1. [Azure 포털](https://portal.azure.com)에 로그인합니다.
+1. [Azure 포털](https://portal.azure.com) 에 로그인합니다.
 2. 삭제하려는 서비스 패브릭 클러스터로 이동합니다.
 3. 필수 블레이드에서 **모든 설정** 으로 이동합니다.
 4. 설정 블레이드의 **리소스 관리**에서 **태그**를 클릭합니다.
@@ -83,15 +82,15 @@ Remove-AzureRmResourceGroup -Name <name of ResouceGroup> -Force
 PowerShell 창을 열고 다음 PS cmdlets를 실행합니다.
 
 ```powershell
-Login-AzureRmAccount
+Connect-AzureRmAccount
 ```
-삭제하려는 각 리소스에 대해 다음을 실행합니다.
+삭제하려는 각 리소스에 대해 다음 스크립트를 실행합니다.
 
 ```powershell
 Remove-AzureRmResource -ResourceName "<name of the Resource>" -ResourceType "<Resource Type>" -ResourceGroupName "<name of the resource group>" -Force
 ```
 
-클러스터 리소스를 삭제하려면 다음을 실행합니다.
+클러스터 리소스를 삭제하려면 다음 스크립트를 실행합니다.
 
 ```powershell
 Remove-AzureRmResource -ResourceName "<name of the Resource>" -ResourceType "Microsoft.ServiceFabric/clusters" -ResourceGroupName "<name of the resource group>" -Force
@@ -109,4 +108,3 @@ Remove-AzureRmResource -ResourceName "<name of the Resource>" -ResourceType "Mic
 [ResourceTags]: ./media/service-fabric-cluster-delete/ResourceTags.png
 
 [TaggedResources]: ./media/service-fabric-cluster-delete/TaggedResources.PNG
-

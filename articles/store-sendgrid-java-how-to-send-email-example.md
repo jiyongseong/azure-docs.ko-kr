@@ -14,11 +14,11 @@ ms.devlang: Java
 ms.topic: article
 ms.date: 10/30/2014
 ms.author: vibhork;dominic.may@sendgrid.com;elmer.thomas@sendgrid.com
-translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
 ms.openlocfilehash: d80d7d9c54bad12a4d26d8623eeccdf9bc2a743a
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="how-to-send-email-using-sendgrid-from-java-in-an-azure-deployment"></a>Azure 배포에서 Java의 SendGrid를 사용하여 메일을 보내는 방법
 다음 예제는 Azure에 호스트된 웹 페이지에서 SendGrid를 사용하여 전자 메일을 보내는 방법을 보여 줍니다. 다음 스크린샷에 표시된 것처럼, 응용 프로그램에서 사용자에게 전자 메일 값을 묻습니다.
@@ -219,9 +219,3 @@ emailform.jsp는 전자 메일을 보낼 뿐만 아니라 사용자에게 결과
 [emailform]: ./media/store-sendgrid-java-how-to-send-email-example/SendGridJavaEmailform.jpg
 [emailsent]: ./media/store-sendgrid-java-how-to-send-email-example/SendGridJavaEmailSent.jpg
 [emailresult]: ./media/store-sendgrid-java-how-to-send-email-example/SendGridJavaResult.jpg
-
-
-
-<!--HONumber=Nov16_HO3-->
-
-

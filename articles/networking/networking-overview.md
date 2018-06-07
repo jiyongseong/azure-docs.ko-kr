@@ -1,13 +1,13 @@
 ---
-title: "Azure 네트워킹 | Microsoft Docs"
-description: "Azure 네트워킹 서비스와 기능에 대해 알아봅니다."
+title: Azure 네트워킹 | Microsoft Docs
+description: Azure 네트워킹 서비스와 기능에 대해 알아봅니다.
 services: networking
 documentationcenter: na
 author: jimdial
 manager: timlt
-editor: 
+editor: ''
 tags: azure-resource-manager
-ms.assetid: 
+ms.assetid: ''
 ms.service: virtual-network
 ms.devlang: na
 ms.topic: article
@@ -15,14 +15,12 @@ ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 04/19/2017
 ms.author: jdial
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 71fea4a41b2e3a60f2f610609a14372e678b7ec4
-ms.openlocfilehash: a7ab18ea9e7302f6cd2a89e7c2cce7f5a46c66a1
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/10/2017
-
+ms.openlocfilehash: 2e5862e99b3e883554b42341d2c1dbe9d8b8ec72
+ms.sourcegitcommit: b6319f1a87d9316122f96769aab0d92b46a6879a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/20/2018
 ---
-
 # <a name="azure-networking"></a>Azure 네트워킹
 
 Azure에서는 함께 또는 별도로 사용할 수 있는 다양한 네트워킹 기능을 제공합니다. 다음과 같은 주요 기능에 대해 알아보려면 그 중 하나를 클릭합니다.
@@ -30,16 +28,16 @@ Azure에서는 함께 또는 별도로 사용할 수 있는 다양한 네트워�
 - [인터넷 연결](#internet-connectivity): 인터넷을 통해 Azure 리소스 간에 통신합니다.
 - [온-프레미스 연결](#on-premises-connectivity): 인터넷의 VPN(가상 사설 네트워크) 또는 Azure에 대한 전용 연결을 통해 온-프레미스 네트워크를 Azure 리소스에 연결합니다.
 - [부하 분산 및 트래픽 방향](#load-balancing): 동일한 위치에 있는 서버에 대한 트래픽 및 다른 위치에 있는 서버에 대한 직접 트래픽의 부하를 분산합니다.
-- [보안](#security): 네트워크 서브넷 또는 개별 VM(가상 컴퓨터) 간에 네트워크 트래픽을 필터링합니다.
+- [보안](#security): 네트워크 서브넷 또는 개별 VM(가상 머신) 간에 네트워크 트래픽을 필터링합니다.
 - [라우팅](#routing): Azure 및 온-프레미스 리소스 간에 기본 라우팅 또는 전체 제어 라우팅을 사용합니다.
 - [관리 효율성](#manageability): Azure 네트워킹 리소스를 모니터링하고 관리합니다.
 - [배포 및 구성 도구](#tools): 웹 기반 포털 또는 크로스 플랫폼 명령줄 도구를 사용하여 네트워크 리소스를 배포하고 구성합니다.
 
 ## <a name="Connectivity"></a>Azure 리소스 간 연결
 
-Virtual Machines, Cloud Services, 가상 컴퓨터 확장 집합, Azure App Service 환경과 같은 Azure 리소스는 Azure VNet(가상 네트워크)를 통해 서로 개별적으로 통신할 수 있습니다. [구독](../azure-glossary-cloud-terminology.md?toc=%2fazure%2fnetworking%2ftoc.json) 전용 Azure 클라우드를 논리적으로 격리한 것이 VNet입니다. 각 Azure 구독 및 Azure [지역](https://azure.microsoft.com/regions) 내에서 여러 VNet을 구현할 수 있습니다. 각 VNet은 다른 VNet에서 격리됩니다. 각 VNet에 대해 다음을 수행할 수 있습니다.
+Virtual Machines, Cloud Services, Virtual Machines Scale Sets, Azure App Service Environment는와 같은 Azure 리소스는 Azure VNet(Virtual Network)를 통해 서로 개별적으로 통신할 수 있습니다. [구독](../azure-glossary-cloud-terminology.md?toc=%2fazure%2fnetworking%2ftoc.json) 전용 Azure 클라우드를 논리적으로 격리한 것이 VNet입니다. 각 Azure 구독 및 Azure [지역](https://azure.microsoft.com/regions) 내에서 여러 VNet을 구현할 수 있습니다. 각 VNet은 다른 VNet에서 격리됩니다. 각 VNet에 대해 다음을 수행할 수 있습니다.
 
-- 공용 및 개인(RFC 1918) 주소를 사용하여 사용자 지정 개인 IP 주소 공간을 지정합니다. Azure에서는 VNet에 연결된 리소스를 사용자가 할당한 주소 공간의 개인 IP 주소에 할당합니다.
+- 공용 및 사설(RFC 1918) 주소를 사용하여 사용자 지정 사설 IP 주소 공간을 지정합니다. Azure에서는 VNet에 연결된 리소스에 사용자가 할당한 주소 공간의 사설 IP 주소를 할당합니다.
 - VNet을 하나 이상의 서브넷으로 분할하고 VNet 주소 공간의 일부를 각 서브넷에 할당합니다.
 - Azure 제공 이름 확인을 사용하거나 VNet에 연결된 리소스에서 사용할 수 있도록 자체 DNS 서버를 지정합니다.
 
@@ -50,9 +48,9 @@ Azure Virtual Network 서비스에 대해 자세히 알아보려면 [가상 네�
 
 ## <a name="internet-connectivity"></a>인터넷 연결
 
-VNet에 연결된 모든 Azure 리소스는 기본적으로 인터넷에 아웃바운드로 연결됩니다. 리소스의 개인 IP 주소는 Azure 인프라에서 공용 IP 주소로 변환하는 원본 네트워크 주소입니다. 아웃바운드 인터넷 연결에 대한 자세한 내용은 [Azure에서 아웃바운드 연결 이해](../load-balancer/load-balancer-outbound-connections.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서를 참조하세요.
+VNet에 연결된 모든 Azure 리소스는 기본적으로 인터넷에 아웃바운드로 연결됩니다. 리소스의 사설 IP 주소는 Azure 인프라를 통해 공용 IP 주소로 SNAT(원본 네트워크 주소 변환)이 이루어집니다. 아웃바운드 인터넷 연결에 대한 자세한 내용은 [Azure에서 아웃바운드 연결 이해](../load-balancer/load-balancer-outbound-connections.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서를 참조하세요.
 
-인터넷에서 Azure 리소스에 인바운드로 통신하거나 SNAT 없이 인터넷에 아웃바운드로 통신하려면 공용 IP 주소에 리소스가 할당되어야 합니다. 공용 IP 주소에 대해 자세히 알아보려면 [공용 IP 주소](../virtual-network/virtual-network-public-ip-address.md?toc=%2fazure%2fnetworking%2ftoc.json)를 참조하세요.
+인터넷에서 Azure 리소스에 인바운드로 통신하거나 SNAT 없이 인터넷에 아웃바운드로 통신하려면 리소스에 공용 IP 주소가 할당되어야 합니다. 공용 IP 주소에 대해 자세히 알아보려면 [공용 IP 주소](../virtual-network/virtual-network-public-ip-address.md?toc=%2fazure%2fnetworking%2ftoc.json)를 참조하세요.
 
 ## <a name="on-premises-connectivity"></a>온-프레미스 연결
 
@@ -78,7 +76,7 @@ VPN 연결 또는 직접 개별 연결을 통해 VNet의 리소스 액세스할 
 
 ![ExpressRoute](./media/networking-overview/expressroute.png)
 
-이 종류의 연결은 ExpressRoute 파트너를 통해 네트워크와 Azure 간에 설정됩니다. 이 연결은 전용입니다. 트래픽이 인터넷을 통과하지 않습니다. 트래픽이 인터넷을 통과하지 않으므로 ExpressRoute 연결에 대한 대기 시간을 예측할 수 있습니다. ExpressRoute는 사이트 간 연결과 함께 사용할 수 있습니다.
+이 종류의 연결은 ExpressRoute 파트너를 통해 네트워크와 Azure 간에 설정됩니다. 이 연결은 전용입니다. 트래픽이 인터넷을 트래버스하지 않습니다. 트래픽이 인터넷을 통과하지 않으므로 ExpressRoute 연결에 대한 대기 시간을 예측할 수 있습니다. ExpressRoute는 사이트 간 연결과 함께 사용할 수 있습니다.
 
 모든 이전 연결 옵션에 대한 자세한 내용은 [연결 토폴로지 다이어그램](../vpn-gateway/vpn-gateway-about-vpngateways.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서를 읽어보세요.
 
@@ -96,7 +94,7 @@ Azure Traffic Manager 서비스는 전역 DNS 부하 분산을 제공합니다. 
 
 다음 그림에서는 Web App 끝점에 전달되는 웹 응용 프로그램의 요청을 보여줍니다. 끝점은 VM 및 Cloud Services와 같은 다른 Azure 서비스일 수도 있습니다.
 
-![트래픽 관리자](./media/networking-overview/traffic-manager.png)
+![Traffic Manager](./media/networking-overview/traffic-manager.png)
 
 클라이언트는 해당 끝점에 직접 연결합니다. Azure Traffic Manager는 끝점이 비정상임을 감지한 다음 클라이언트를 다른 정상적인 끝점으로 리디렉션합니다. Traffic Manager에 대해 자세히 알아보려면 [Azure Traffic Manager 개요](../traffic-manager/traffic-manager-overview.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서를 참고하세요.
 
@@ -108,7 +106,7 @@ Layer 7의 기타 라우팅 기능으로 들어오는 트래픽의 라운드 로
 
 다음 그림에서는 Application Gateway를 사용하는 URL 경로 기반 라우팅을 보여줍니다.
 
-![응용 프로그램 게이트웨이](./media/networking-overview/application-gateway.png)
+![Application Gateway](./media/networking-overview/application-gateway.png)
 
 **네트워크 부하 분산**
 
@@ -122,7 +120,7 @@ Azure Load Balancer는 모든 UDP 및 TCP 프로토콜에 대해 대기 시간�
 
 다음 옵션을 사용하여 Azure 리소스 간에 트래픽을 필터링할 수 있습니다.
 
-- **네트워크:** Azure NSG(네트워크 보안 그룹)를 구현하여 Azure 리소스에 대한 인바운드 및 아웃바운드 트래픽을 필터링할 수 있습니다. 각 NSG는 하나 이상의 인바운드 및 아웃바운드 규칙을 포함합니다. 각 규칙은 트래픽을 필터링하는 원본 IP 주소, 대상 IP 주소, 포트 및 프로토콜을 지정합니다. 개별 서브넷 및 개별 VM에 NSG를 적용할 수 있습니다. NSG에 대한 자세한 내용은 [네트워크 보안 그룹 개요](../virtual-network/virtual-networks-nsg.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서를 참고하세요.
+- **네트워크:** Azure NSG(네트워크 보안 그룹)를 구현하여 Azure 리소스에 대한 인바운드 및 아웃바운드 트래픽을 필터링할 수 있습니다. 각 NSG는 하나 이상의 인바운드 및 아웃바운드 규칙을 포함합니다. 각 규칙은 트래픽을 필터링하는 원본 IP 주소, 대상 IP 주소, 포트 및 프로토콜을 지정합니다. 개별 서브넷 및 개별 VM에 NSG를 적용할 수 있습니다. NSG에 대한 자세한 내용은 [네트워크 보안 그룹 개요](../virtual-network/security-overview.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서를 참고하세요.
 - **응용 프로그램:** 웹 응용 프로그램 방화벽이 설치된 Application Gateway를 사용하여 취약점 및 악용으로부터 웹 응용 프로그램을 보호할 수 있습니다. 일반적인 예로 SQL 주입 공격, 크로스 사이트 스크립팅 및 잘못된 형식의 헤더가 있습니다. Application Gateway는 이 트래픽을 필터링하고 웹 서버에 도달하지 않도록 중지합니다. 사용하려는 규칙을 구성할 수 있습니다. 특정 정책을 사용하지 않을 수 있도록 SSL 협상 정책을 구성하는 기능이 제공됩니다. 웹 응용 프로그램 방화벽에 대한 자세한 내용은 [웹 응용 프로그램 방화벽](../application-gateway/application-gateway-web-application-firewall-overview.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서를 참고하세요.
 
 Azure에서 제공하지 않는 네트워크 기능이 필요하거나 온-프레미스를 사용하는 네트워크 응용 프로그램을 사용하려면 VM에서 제품을 구현하고 VNet에 연결할 수 있습니다. [Azure Marketplace](https://azuremarketplace.microsoft.com/marketplace/apps/category/networking?page=1&subcategories=appliances)에는 현재 사용할 수 있는 네트워크 응용 프로그램을 사용하여 미리 구성된 여러 가지 다른 VM이 포함됩니다. 이러한 미리 구성된 VM은 일반적으로 NVA(네트워크 가상 어플라이언스)라고 합니다. NVA는 방화벽, WAN 최적화와 같은 응용 프로그램과 함께 사용할 수 있습니다.
@@ -140,7 +138,7 @@ Azure에서는 다음과 같은 도구를 제공하여 네트워킹을 모니터
 - **진단 로그:** 정기적이고 자동적인 이벤트가 네트워크 리소스에서 만들어지고 Azure Storage 계정에 기록되어 Azure Event Hub 또는 Azure Log Analytics로 전송됩니다. 진단 로그는 리소스 상태에 대한 정보를 제공하며, Load Balancer(인터넷 연결), 네트워크 보안 그룹, 경로 및 Application Gateway에서 사용할 수 있습니다. 진단 로그에 대한 자세한 내용은 [진단 로그 개요](../monitoring-and-diagnostics/monitoring-overview-of-diagnostic-logs.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서를 참고하세요.
 - **메트릭:** 메트릭은 리소스에 대해 일정 기간 동안 수집된 성능 측정 및 카운터입니다. 메트릭을 사용하여 임계값에 기반한 경고를 트리거할 수 있습니다. 현재 메트릭은 Application Gateway에서 사용할 수 있습니다. 메트릭에 대해 자세히 알아보려면 [메트릭 개요](../monitoring-and-diagnostics/monitoring-overview-metrics.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서를 읽어보세요.
 - **문제 해결:** Azure Portal에서 문제 해결 정보에 직접 액세스할 수 있습니다. 정보를 통해 ExpressRoute, VPN Gateway, Application Gateway, 네트워크 보안 로그, 경로, DNS, Load Balancer 및 Traffic Manager에서 발생하는 일반적인 문제를 진단할 수 있습니다.
-- **RBAC(역할 기반 액세스 제어):** RBAC(역할 기반 액세스 제어)를 사용하여 네트워킹 리소스를 만들고 관리할 수 있는 사용자를 제어합니다. [RBAC 시작](../active-directory/role-based-access-control-what-is.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서를 참고하여 RBAC에 대해 자세히 알아봅니다. 
+- **RBAC(역할 기반 액세스 제어):** RBAC(역할 기반 액세스 제어)를 사용하여 네트워킹 리소스를 만들고 관리할 수 있는 사용자를 제어합니다. [RBAC 시작](../role-based-access-control/overview.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서를 참고하여 RBAC에 대해 자세히 알아봅니다. 
 - **패킷 캡처:** Azure Network Watcher 서비스는 VM 내에서 확장을 통해 VM에 대한 패킷 캡처를 실행하는 기능을 제공합니다. 이 기능은 Linux 및 Windows VM에서 사용할 수 있습니다. 패킷 캡처에 대한 자세한 내용은 [패킷 캡처 개요](../network-watcher/network-watcher-packet-capture-overview.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서를 참고하세요.
 - **IP 흐름 확인:** Network Watcher를 사용하면 Azure VM과 원격 리소스 간에 IP 흐름을 확인하여 패킷을 허용할지 아니면 거부할지를 결정할 수 있습니다. 이 기능은 관리자에게 신속하게 연결 문제를 진단하는 기능을 제공합니다. IP 흐름을 확인하는 방법에 대한 자세한 내용은 [IP 흐름 확인 개요](../network-watcher/network-watcher-ip-flow-verify-overview.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서를 참고하세요.
 - **VPN 연결 문제 해결:** Network Watcher의 VPN 문제 해결사 기능은 연결 또는 게이트웨이를 쿼리하고 리소스의 상태를 확인하는 기능을 제공합니다. VPN 연결 문제를 해결하는 방법에 대한 자세한 내용은 [VPN 연결 문제 해결 개요](../network-watcher/network-watcher-troubleshoot-overview.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서를 참고하세요.
@@ -157,11 +155,10 @@ Azure에서는 다음과 같은 도구를 제공하여 네트워킹을 모니터
 
 ## <a name="pricing"></a>가격
 
-다른 서비스를 추가 비용 없이 사용할 수 있는 반면 일부 Azure 네트워킹 서비스에는 요금이 부과됩니다. 자세한 내용은 [Virtual Network](https://azure.microsoft.com/pricing/details/virtual-network), [VPN Gateway](https://azure.microsoft.com/pricing/details/vpn-gateway), [Application Gateway](https://azure.microsoft.com/en-us/pricing/details/application-gateway/), [Load Balancer](https://azure.microsoft.com/pricing/details/load-balancer), [Network Watcher](https://azure.microsoft.com/pricing/details/network-watcher), [DNS](https://azure.microsoft.com/pricing/details/dns), [Traffic Manager](https://azure.microsoft.com/pricing/details/traffic-manager) 및 [ExpressRoute](https://azure.microsoft.com/pricing/details/expressroute) 가격 책정 페이지를 봅니다.
+다른 서비스를 추가 비용 없이 사용할 수 있는 반면 일부 Azure 네트워킹 서비스에는 요금이 부과됩니다. 자세한 내용은 [Virtual Network](https://azure.microsoft.com/pricing/details/virtual-network), [VPN Gateway](https://azure.microsoft.com/pricing/details/vpn-gateway), [Application Gateway](https://azure.microsoft.com/pricing/details/application-gateway/), [Load Balancer](https://azure.microsoft.com/pricing/details/load-balancer), [Network Watcher](https://azure.microsoft.com/pricing/details/network-watcher), [DNS](https://azure.microsoft.com/pricing/details/dns), [Traffic Manager](https://azure.microsoft.com/pricing/details/traffic-manager) 및 [ExpressRoute](https://azure.microsoft.com/pricing/details/expressroute) 가격 책정 페이지를 봅니다.
 
 ## <a name="next-steps"></a>다음 단계
 
-- [첫 번째 가상 네트워크 만들기](../virtual-network/virtual-network-get-started-vnet-subnet.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서의 단계를 완료하여 첫 번째 VNet을 만들고 일부 VM을 연결합니다.
+- [첫 번째 가상 네트워크 만들기](../virtual-network/quick-create-portal.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서의 단계를 완료하여 첫 번째 VNet을 만들고 일부 VM을 연결합니다.
 - [지점 및 사이트 간 연결 구성](../vpn-gateway/vpn-gateway-howto-point-to-site-resource-manager-portal.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서의 단계를 완료하여 VNet에 컴퓨터를 연결합니다.
 - [인터넷 연결 부하 분산 장치 만들기](../load-balancer/load-balancer-get-started-internet-portal.md?toc=%2fazure%2fnetworking%2ftoc.json) 문서의 단계를 완료하여 공용 서버에 인터넷 트래픽의 부하를 분산합니다.
-

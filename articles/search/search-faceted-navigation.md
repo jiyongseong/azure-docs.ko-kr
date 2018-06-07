@@ -1,27 +1,20 @@
 ---
-title: "Azure Search에서 패싯 탐색을 구현하는 방법 | Microsoft Docs"
-description: "Microsoft Azure에서 클라우드 호스팅되는 검색 서비스인 Azure 검색과 통합되는 응용 프로그램에 패싯 탐색을 추가합니다."
-services: search
-documentationcenter: 
+title: Azure Search에서 패싯 탐색을 구현하는 방법 | Microsoft Docs
+description: Microsoft Azure에서 클라우드 호스팅되는 Search 서비스인 Azure Search와 통합되는 응용 프로그램에 패싯 탐색을 추가합니다.
 author: HeidiSteen
-manager: mblythe
-editor: 
-ms.assetid: cdf98fd4-63fd-4b50-b0b0-835cb08ad4d3
+manager: cgronlun
+services: search
 ms.service: search
-ms.devlang: rest-api
-ms.workload: search
-ms.topic: article
-ms.tgt_pltfrm: na
+ms.topic: conceptual
 ms.date: 3/10/2017
 ms.author: heidist
-translationtype: Human Translation
-ms.sourcegitcommit: fd35f1774ffda3d3751a6fa4b6e17f2132274916
-ms.openlocfilehash: 413f498eeb0bbc9a971c7a65200ed2fd8caa9aaf
-ms.lasthandoff: 03/16/2017
-
-
+ms.openlocfilehash: e00e875619e4ed6800f5739362ff0c52971f6f16
+ms.sourcegitcommit: e2adef58c03b0a780173df2d988907b5cb809c82
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/28/2018
 ---
-# <a name="how-to-implement-faceted-navigation-in-azure-search"></a>Azure 검색에서 패싯 탐색을 구현하는 방법
+# <a name="how-to-implement-faceted-navigation-in-azure-search"></a>Azure Search에서 패싯 탐색을 구현하는 방법
 패싯 탐색은 검색 응용 프로그램에서 자기 주도형 드릴다운 탐색을 제공하는 필터링 메커니즘입니다. '패싯 탐색'이라는 용어가 낯설 수도 있지만 아마도 이전에 사용해 보셨을 것입니다. 다음 예제와 같이 패싯 탐색은 결과를 필터링하는 데 사용되는 범주일 뿐입니다.
 
  ![Azure Search 작업 포털 데모][1]
@@ -43,7 +36,7 @@ ms.lasthandoff: 03/16/2017
 
 -   [GitHub의 Azure 샘플 리포지토리](https://github.com/Azure-Samples/search-dotnet-asp-net-mvc-jobs)에서 코드를 다운로드하세요.
 
-## <a name="get-started"></a>시작
+## <a name="get-started"></a>시작하기
 검색 개발을 처음 접하는 경우 패싯 탐색을 자기 주도형 검색에 대한 가능성을 보여 주는 것이라고 생각하는 것이 가장 좋습니다. 패싯 탐색은 포인트 클릭 동작을 통해 검색 결과의 범위를 신속하게 좁히는 데 사용되는 미리 정의된 필터를 기반으로 하는 드릴다운 검색 환경에 일종입니다. 
 
 ### <a name="interaction-model"></a>상호 작용 모델
@@ -52,7 +45,7 @@ ms.lasthandoff: 03/16/2017
 
 시작 지점은 일반적으로 주변에서 패싯 탐색을 제공하는 응용 프로그램 페이지입니다. 패싯 탐색은 각 값에 대한 확인란 또는 클릭할 수 있는 텍스트가 포함된 트리 구조인 경우가 많습니다. 
 
-1. Azure 검색으로 전송된 쿼리는 하나 이상의 패싯 쿼리 매개 변수를 통해 패싯 탐색 구조를 지정합니다. 예를 들어 쿼리는 프레젠테이션을 구체화하는 `:values` 또는 `:sort` 옵션과 함께 `facet=Rating`이 포함할 수 있습니다.
+1. Azure Search로 전송된 쿼리는 하나 이상의 패싯 쿼리 매개 변수를 통해 패싯 탐색 구조를 지정합니다. 예를 들어 쿼리는 프레젠테이션을 구체화하는 `:values` 또는 `:sort` 옵션과 함께 `facet=Rating`이 포함할 수 있습니다.
 2. 프레젠테이션 계층은 요청에 지정된 패싯을 사용하여 패싯 탐색을 제공하는 검색 페이지를 렌더링합니다.
 3. 등급이 포함된 패싯 탐색 구조에서 사용자가 등급이 4 이상인 제품만 표시하기 위해 “4”를 클릭합니다. 
 4. 이에 대한 응답으로 응용 프로그램은 `$filter=Rating ge 4` 
@@ -68,7 +61,7 @@ ms.lasthandoff: 03/16/2017
 
 ### <a name="query-basics"></a>쿼리 기본 사항
 
-Azure 검색에서는 하나 이상의 쿼리 매개 변수를 통해 요청이 지정됩니다(각 매개 변수에 대한 설명은 [문서 검색](http://msdn.microsoft.com/library/azure/dn798927.aspx) 참조). 필수 사항인 쿼리 매개 변수는 없지만 쿼리가 유효하려면 하나 이상의 쿼리 매개 변수가 있어야 합니다.
+Azure Search에서는 하나 이상의 쿼리 매개 변수를 통해 요청이 지정됩니다(각 매개 변수에 대한 설명은 [문서 검색](https://docs.microsoft.com/rest/api/searchservice/Search-Documents) 참조). 필수 사항인 쿼리 매개 변수는 없지만 쿼리가 유효하려면 하나 이상의 쿼리 매개 변수가 있어야 합니다.
 
 관련 없는 적중 항목을 필터링하는 기능으로 이해되는 정밀도는 다음 두 식 중 하나 또는 둘 다를 통해 실현됩니다.
 
@@ -98,13 +91,13 @@ Azure Search를 사용하여 응용 프로그램 코드에서 검색 요청을 �
 
 검색 인덱스에 `Facetable [true|false]` 인덱스 특성이 미리 정의되어 있으므로 선택한 필드를 패싯 탐색 구조에서 사용하거나 사용하지 않도록 설정하면 됩니다. `"Facetable" = true`가 아니면 패싯 탐색에서 필드를 사용할 수 없습니다.
 
-코드의 프레젠테이션 계층은 사용자 환경을 제공합니다. 레이블, 값, 확인란, 개수 등 패싯 탐색의 구성 부분을 나열합니다. Azure 검색 REST API는 플랫폼에 독립적이므로 사용자가 원하는 언어와 플랫폼을 사용합니다. 단, 각 추가 패싯이 선택될 때 업데이트된 UI 상태로 증분 새로 고침을 지원하는 UI 요소를 포함해야 합니다. 
+코드의 프레젠테이션 계층은 사용자 환경을 제공합니다. 레이블, 값, 확인란, 개수 등 패싯 탐색의 구성 부분을 나열합니다. Azure Search REST API는 플랫폼에 독립적이므로 사용자가 원하는 언어와 플랫폼을 사용합니다. 단, 각 추가 패싯이 선택될 때 업데이트된 UI 상태로 증분 새로 고침을 지원하는 UI 요소를 포함해야 합니다. 
 
 쿼리 시 응용 프로그램 코드는 패싯에 필드를 제공하는 요청 매개 변수인 `facet=[string]`을 포함하는 요청을 만듭니다. `&facet=color&facet=category&facet=rating`과 같이 각 패싯을 앰퍼샌드(&) 문자로 구분하여 여러 패싯을 쿼리에 지정할 수 있습니다.
 
 또한 응용 프로그램 코드는 패싯 탐색에서 클릭 이벤트를 처리할 `$filter` 식을 생성해야 합니다. `$filter` 는 패싯 값을 필터 조건으로 사용하여 검색 결과를 줄입니다.
 
-Azure Search는 사용자가 입력한 하나 이상의 용어에 따라 검색 결과를 반환하고 패싯 탐색 구조를 업데이트합니다. Azure 검색에서 패싯 탐색은 패싯 값과 각 값에 대해 발견된 결과 수로 이루어진 단일 수준 구성입니다.
+Azure Search는 사용자가 입력한 하나 이상의 용어에 따라 검색 결과를 반환하고 패싯 탐색 구조를 업데이트합니다. Azure Search에서 패싯 탐색은 패싯 값과 각 값에 대해 발견된 결과 수로 이루어진 단일 수준 구성입니다.
 
 다음 섹션에서는 각 부분을 작성하는 방법을 좀 더 자세히 살펴보겠습니다.
 
@@ -172,7 +165,7 @@ Brand 또는 Price별로 패싯하려는 경우에는 각 문서에 필터 옵�
 
 패싯 탐색의 경우 웹 또는 응용 프로그램은 패싯 탐색 구조를 표시하고, 페이지에서 사용자 입력을 검색하며, 변경된 요소를 삽입합니다. 
 
-웹 응용 프로그램의 경우 주로 AJAX가 프레젠테이션 계층에서 사용되는데, 이는 증분 변경 내용을 새로 고칠 수 있기 때문입니다. ASP.NET MVC 또는 기타 HTTP를 통해 Azure 검색에 연결할 수 있는 모든 시각화 플랫폼을 사용할 수도 있습니다. 이 문서 전체에 나오는 샘플 응용 프로그램 **Azure Search 구직 포털 데모**는 ASP.NET MVC 응용 프로그램입니다.
+웹 응용 프로그램의 경우 주로 AJAX가 프레젠테이션 계층에서 사용되는데, 이는 증분 변경 내용을 새로 고칠 수 있기 때문입니다. ASP.NET MVC 또는 기타 HTTP를 통해 Azure Search에 연결할 수 있는 모든 시각화 플랫폼을 사용할 수도 있습니다. 이 문서 전체에 나오는 샘플 응용 프로그램 **Azure Search 구직 포털 데모**는 ASP.NET MVC 응용 프로그램입니다.
 
 이 샘플에서 패싯 탐색은 검색 결과 페이지에 작성됩니다. 샘플 응용 프로그램의 `index.cshtml` 파일에서 가져온 다음 예제는 검색 결과 페이지에 패싯 탐색을 표시하는 동적 HTML 구조를 표시합니다. 검색 용어를 제출하거나 패킷을 선택 또는 선택 취소하면 자동으로 패싯 목록이 작성되거나 다시 작성됩니다.
 
@@ -235,9 +228,9 @@ SearchParameters sp = new SearchParameters()
 };
 ```
 
-패싯 쿼리 매개 변수는 필드로 설정되어 있으며, 데이터 형식에 따라 `count:<integer>`, `sort:<>`, `interval:<integer>` 및 `values:<list>`를 포함하는 쉼표로 구분된 목록으로 추가 매개 변수화할 수 있습니다. 값 목록은 범위를 설정할 때 숫자 데이터에 대해 지원됩니다. 자세한 내용은 [문서 검색(Azure 검색 API)](http://msdn.microsoft.com/library/azure/dn798927.aspx) 을 참조하세요.
+패싯 쿼리 매개 변수는 필드로 설정되어 있으며, 데이터 형식에 따라 `count:<integer>`, `sort:<>`, `interval:<integer>` 및 `values:<list>`를 포함하는 쉼표로 구분된 목록으로 추가 매개 변수화할 수 있습니다. 값 목록은 범위를 설정할 때 숫자 데이터에 대해 지원됩니다. 자세한 내용은 [문서 검색(Azure Search API)](https://docs.microsoft.com/rest/api/searchservice/Search-Documents) 을 참조하세요.
 
-패싯과 함께, 응용 프로그램에서 작성된 요청도 패싯 값 선택 항목에 따라 후보 문서 집합의 범위를 좁히는 필터를 작성해야 합니다. 자전거 매장의 경우 패싯 탐색은 *어떤 색상, 어떤 제조업체, 어떤 종류의 자전거를 판매합니까?*와 같은 질문에 대한 단서를 제공합니다. 필터링은 *이 가격대의 빨간색 산악용 자전거는 무엇입니까?*와 같은 질문에 답변합니다. 빨간색 제품만 표시되도록 사용자가 "빨간색"을 클릭하면 응용 프로그램에서 보내는 다음 쿼리에 `$filter=Color eq ‘Red’`가 포함됩니다.
+패싯과 함께, 응용 프로그램에서 작성된 요청도 패싯 값 선택 항목에 따라 후보 문서 집합의 범위를 좁히는 필터를 작성해야 합니다. 자전거 매장의 경우 패싯 탐색은 *어떤 색상, 어떤 제조업체, 어떤 종류의 자전거를 판매합니까?* 와 같은 질문에 대한 단서를 제공합니다. 필터링은 *이 가격대의 빨간색 산악용 자전거는 무엇입니까?* 와 같은 질문에 답변합니다. 빨간색 제품만 표시되도록 사용자가 "빨간색"을 클릭하면 응용 프로그램에서 보내는 다음 쿼리에 `$filter=Color eq ‘Red’`가 포함됩니다.
 
 사용자가 직함 패싯에서 값을 선택하는 경우 `JobsSearch.cs` 페이지의 다음 코드 조각은 선택된 직함을 필터에 추가합니다.
 
@@ -307,7 +300,7 @@ Numeric 및 DateTime 값에 한해, 패싯 필드에서 값을 명시적으로 �
 패싯 결과와 검색 결과의 차이에 주의하세요. 검색 결과는 쿼리와 일치하는 모든 문서입니다. 패싯 결과는 각 패싯 값에 대한 일치 항목입니다. 이 예제에서 검색 결과에는 패싯 분류 목록(이 예제의 경우 5)에 없는 City 이름이 포함됩니다. 패싯 탐색을 통해 필터링된 결과는 사용자가 패싯을 지우거나 City 이외의 다른 패싯을 선택한 경우에 표시됩니다. 
 
 > [!NOTE]
-> 두 가지 이상의 형식이 있을 때 `count`를 설명하면 혼동을 일으킬 수 있습니다. 다음 표에서는 Azure 검색 API, 샘플 코드 및 설명서에서 용어가 사용되는 방식에 대한 간략한 요약을 제공합니다. 
+> 두 가지 이상의 형식이 있을 때 `count`를 설명하면 혼동을 일으킬 수 있습니다. 다음 표에서는 Azure Search API, 샘플 코드 및 설명서에서 용어가 사용되는 방식에 대한 간략한 요약을 제공합니다. 
 
 * `@colorFacet.count`<br/>
   프레젠테이션 코드에는 패싯 결과 수를 표시하는 데 사용되는 count 매개 변수가 패싯에 표시됩니다. 패싯 결과에서 count는 패싯 용어 또는 범위와 일치하는 문서 수를 나타냅니다.
@@ -322,7 +315,7 @@ Numeric 및 DateTime 값에 한해, 패싯 필드에서 값을 명시적으로 �
 
 **정확한 수의 패싯을 가져오는지 확인**
 
-경우에 따라 패싯 수가 결과 집합과 일치하지 않을 수 있습니다( [Azure 검색의 패싯 탐색(포럼 게시물)](https://social.msdn.microsoft.com/Forums/azure/06461173-ea26-4e6a-9545-fbbd7ee61c8f/faceting-on-azure-search?forum=azuresearch)참조).
+경우에 따라 패싯 수가 결과 집합과 일치하지 않을 수 있습니다( [Azure Search의 패싯 탐색(포럼 게시물)](https://social.msdn.microsoft.com/Forums/azure/06461173-ea26-4e6a-9545-fbbd7ee61c8f/faceting-on-azure-search?forum=azuresearch)참조).
 
 패싯 수는 분할 아키텍처로 인해 부정확할 수 있습니다. 모든 검색 인덱스에는 여러 개의 분할된 데이터베이스가 있으며, 각 분할된 데이터베이스는 문서 수에 따라 상위 N개의 패싯을 보고합니다. 이 값이 단일 결과로 통합됩니다. 분할된 데이터베이스 중에 일치하는 값이 많은 것과 적은 것이 있는 경우 결과에서 일부 패싯 값이 누락되거나 적은 개수로 나타날 수 있습니다.
 
@@ -336,9 +329,9 @@ Numeric 및 DateTime 값에 한해, 패싯 필드에서 값을 명시적으로 �
 <a name="rangefacets"></a>
 
 ## <a name="filter-based-on-a-range"></a>범위를 기준으로 필터링
-값 범위에 대한 패싯은 일반적인 검색 응용 프로그램 요구 사항입니다. 범위는 숫자 데이터 및 DateTime 값에 대해 지원됩니다. 각 접근 방법에 대한 자세한 내용은 [문서 검색(Azure 검색 API)](http://msdn.microsoft.com/library/azure/dn798927.aspx)을 참조하세요.
+값 범위에 대한 패싯은 일반적인 검색 응용 프로그램 요구 사항입니다. 범위는 숫자 데이터 및 DateTime 값에 대해 지원됩니다. 각 접근 방법에 대한 자세한 내용은 [문서 검색(Azure Search API)](https://docs.microsoft.com/rest/api/searchservice/Search-Documents)을 참조하세요.
 
-Azure 검색에서는 범위를 계산하는 두 가지 방법을 제공하여 범위 생성을 간소화합니다. 두 방법 모두에 대해 Azure 검색에서는 사용자가 입력을 제공한 경우 적절한 범위를 만듭니다. 예를 들어 10|20|30 범위 값을 지정한 경우 0-10, 10-20, 20-30 범위가 자동으로 만들어집니다. 비어 있는 간격을 응용 프로그램에서 선택적으로 제거할 수도 있습니다. 
+Azure Search에서는 범위를 계산하는 두 가지 방법을 제공하여 범위 생성을 간소화합니다. 두 방법 모두에 대해 Azure Search에서는 사용자가 입력을 제공한 경우 적절한 범위를 만듭니다. 예를 들어 10|20|30 범위 값을 지정한 경우 0-10, 10-20, 20-30 범위가 자동으로 만들어집니다. 비어 있는 간격을 응용 프로그램에서 선택적으로 제거할 수도 있습니다. 
 
 **방법 1: interval 매개 변수 사용**  
 10달러 단위로 증분되는 가격 패싯을 설정하려면 다음과 같이 지정합니다. `&facet=price,interval:10`
@@ -369,7 +362,7 @@ Azure Search에는 **geo.distance** 및 **geo.intersects**라는 두 개의 지�
 * **geo.distance** 함수는 두 점 사이의 거리를 킬로미터 단위로 반환합니다. 한 점은 필드이고 다른 점은 필터의 일부로 전달되는 상수입니다. 
 * **geo.intersects** 함수는 주어진 점이 주어진 다각형 내부에 있으면 true를 반환합니다. 점은 필드이고, 다각형은 필터의 일부로 전달되는 좌표의 상수 목록으로 지정됩니다.
 
-필터 예제는 [OData 식 구문(Azure 검색)](http://msdn.microsoft.com/library/azure/dn798921.aspx)에서 확인할 수 있습니다.
+필터 예제는 [OData 식 구문(Azure Search)](https://docs.microsoft.com/rest/api/searchservice/odata-expression-syntax-for-azure-search)에서 확인할 수 있습니다.
 
 <a name="tryitout"></a>
 
@@ -438,10 +431,9 @@ Azure Search 구직 포털 데모에는 이 문서에 나와 있는 예제가 �
 [Designing for Faceted Search]: http://www.uie.com/articles/faceted_search/
 [Design Patterns: Faceted Navigation]: http://alistapart.com/article/design-patterns-faceted-navigation
 [Create your first application]: search-create-first-solution.md
-[OData expression syntax (Azure Search)]: http://msdn.microsoft.com/library/azure/dn798921.aspx
+[OData expression syntax (Azure Search)]: https://docs.microsoft.com/rest/api/searchservice/odata-expression-syntax-for-azure-search
 [Azure Search Adventure Works Demo]: https://azuresearchadventureworksdemo.codeplex.com/
 [http://www.odata.org/documentation/odata-version-2-0/overview/]: http://www.odata.org/documentation/odata-version-2-0/overview/ 
 [Faceting on Azure Search forum post]: ../faceting-on-azure-search.md?forum=azuresearch
-[Search Documents (Azure Search API)]: http://msdn.microsoft.com/library/azure/dn798927.aspx
-
+[Search Documents (Azure Search API)]: https://docs.microsoft.com/rest/api/searchservice/Search-Documents
 

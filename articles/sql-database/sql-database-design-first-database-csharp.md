@@ -1,31 +1,23 @@
 ---
-title: "첫 번째 Azure SQL Database 설계 - C# | Microsoft Docs"
-description: "첫 번째 Azure SQL Database를 설계하고 ADO.NET을 사용하여 C# 프로그램과 연결하는 방법을 알아봅니다."
+title: 첫 번째 Azure SQL Database 설계 - C# | Microsoft Docs
+description: 첫 번째 Azure SQL Database를 설계하고 ADO.NET을 사용하여 C# 프로그램과 연결하는 방법을 알아봅니다.
 services: sql-database
-documentationcenter: 
 author: MightyPen
 manager: craigg-msft
-editor: CarlRabeler
-tags: 
-ms.assetid: 
+ms.reviewer: CarlRabeler
 ms.service: sql-database
-ms.custom: develop databases
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: 
-ms.date: 07/31/2017
-ms.author: genemi;carlrab
+ms.custom: develop databases, mvc, devcenter
+ms.topic: tutorial
+ms.date: 03/15/2018
+ms.openlocfilehash: 3b6f260983e3c826bf558f0fe6d1a0fa6ae6b3af
+ms.sourcegitcommit: a36a1ae91968de3fd68ff2f0c1697effbb210ba8
 ms.translationtype: HT
-ms.sourcegitcommit: c30998a77071242d985737e55a7dc2c0bf70b947
-ms.openlocfilehash: d9731cf5399cce6f103129ccda521f2867bd8da6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 08/02/2017
-
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/17/2018
 ---
 # <a name="design-an-azure-sql-database-and-connect-with-cx23-and-adonet"></a>Azure SQL Database 설계 및 C#과 ADO.NET에 연결
 
-Azure SQL Database는 Microsoft 클라우드("Azure")의 관계형 DBaaS(Database-As-A-Service)입니다. 이 자습서에서는 Visual Studio에서 Azure Portal 및 ADO.NET을 사용하여 다음과 같은 작업을 수행하는 방법에 대해 알아봅니다. 
+Azure SQL Database는 Microsoft Cloud(Azure)의 관계형 DBaaS(Database-As-A-Service)입니다. 이 자습서에서는 Visual Studio에서 Azure Portal 및 ADO.NET을 사용하여 다음과 같은 작업을 수행하는 방법에 대해 알아봅니다. 
 
 > [!div class="checklist"]
 > * Azure Portal에서 데이터베이스 만들기
@@ -70,5 +62,4 @@ And it starts with a ## H2.
 
 > [!div class="nextstepaction"]
 >[SQL Server 데이터베이스를 Azure SQL Database로 마이그레이션](sql-database-migrate-your-sql-server-database.md)
-
 

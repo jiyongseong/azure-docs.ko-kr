@@ -1,11 +1,11 @@
 ---
-title: "Azure AD Connect: 설계 개념 | Microsoft Docs"
-description: "이 항목에서는 특정 구현 설계 영역을 자세히 설명합니다."
+title: 'Azure AD Connect: 설계 개념 | Microsoft Docs'
+description: 이 항목에서는 특정 구현 설계 영역을 자세히 설명합니다.
 services: active-directory
-documentationcenter: 
+documentationcenter: ''
 author: billmath
-manager: femila
-editor: 
+manager: mtillman
+editor: ''
 ms.assetid: 4114a6c0-f96a-493c-be74-1153666ce6c9
 ms.service: active-directory
 ms.custom: azure-ad-connect
@@ -15,12 +15,11 @@ ms.tgt_pltfrm: na
 ms.workload: Identity
 ms.date: 07/13/2017
 ms.author: billmath
-ms.translationtype: Human Translation
-ms.sourcegitcommit: ff2fb126905d2a68c5888514262212010e108a3d
-ms.openlocfilehash: bfb41f254d74bef843461a058ee5b2ced7fc45ec
-ms.contentlocale: ko-kr
-ms.lasthandoff: 06/17/2017
-
+ms.openlocfilehash: 179a669e4c9567950d22ed76a693ec6ab7a2db8d
+ms.sourcegitcommit: 59914a06e1f337399e4db3c6f3bc15c573079832
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/20/2018
 ---
 # <a name="azure-ad-connect-design-concepts"></a>Azure AD Connect: 설계 개념
 이 항목에서는 Azure AD Connect의 설계를 구현하는 중에 고려해야 할 영역을 설명합니다. 이 항목은 특정 영역을 심층 분석하고 이 개념을 다른 항목에서처럼 간단히 설명합니다.
@@ -151,9 +150,15 @@ Source Anchor 특성으로 objectGUID에서 ConsistencyGuid로 전환하려면:
 
    ![기존 배포에 대해 ConsistencyGuid 사용 - 6단계](./media/active-directory-aadconnect-design-concepts/consistencyguidexistingdeployment04.png)
 
-분석하는 동안(4단계) 특성이 디렉터리에 있는 하나 이상의 개체에 구성되어 있으면, 마법사에서 특성이 다른 응용 프로그램에서 사용되고 있다고 결정하고 아래 그림과 같은 오류를 반환합니다. 기존 응용 프로그램에서 특성을 사용하지 않는다고 확신하는 경우, 오류를 표시하지 않는 방법에 대한 정보를 얻기 위해 지원에 문의해야 합니다.
+분석하는 동안(4단계) 특성이 디렉터리에 있는 하나 이상의 개체에 구성되어 있으면, 마법사에서 특성이 다른 응용 프로그램에서 사용되고 있다고 결정하고 아래 그림과 같은 오류를 반환합니다. 주 Azure AD Connect 서버에서 ConsistencyGuid 기능을 이전에 설정하고 준비 서버에서 동일한 작업을 수행하려고 하는 경우 이 오류가 발생할 수 있습니다.
 
 ![기존 배포에 대해 ConsistencyGuid 사용 - 오류](./media/active-directory-aadconnect-design-concepts/consistencyguidexistingdeploymenterror.png)
+
+ 특성이 다른 기존 응용 프로그램에서 사용되지 않는다고 확신하는 경우 **/SkipLdapSearchcontact**를 지정한 Azure AD Connect 마법사를 다시 시작하여 오류를 무시할 수 있습니다. 이렇게 하려면 명령 프롬프트 창에서 다음 명령을 실행합니다.
+
+```
+"c:\Program Files\Microsoft Azure Active Directory Connect\AzureADConnect.exe" /SkipLdapSearch
+```
 
 ### <a name="impact-on-ad-fs-or-third-party-federation-configuration"></a>AD FS 또는 타사 페더레이션 구성에 미치는 영향
 Azure AD Connect를 사용하여 온-프레미스 AD FS 배포를 관리하는 경우, Azure AD Connect에서 클레임 규칙을 자동으로 업데이트하여 sourceAnchor와 동일한 AD 특성을 사용합니다. 이렇게 하면 AD FS에서 생성된 ImmutableID 클레임이 Azure AD로 내보낸 sourceAnchor 값과 일치하게 됩니다.
@@ -186,10 +191,9 @@ John은 contoso.com의 사용자입니다. 사용자를 Azure AD 디렉터리 co
 ### <a name="non-routable-on-premises-domains-and-upn-for-azure-ad"></a>라우팅할 수 있는 온-프레미스가 아닌 도메인 및 Azure AD에 대한 UPN
 일부 조직에는 라우팅할 수 없는 도메인(예: contoso.local) 또는 간단한 단일 레이블 도메인(예: contoso)이 있습니다. Azure AD에서 라우팅할 수 없는 도메인을 확인할 수 없습니다. Azure AD Connect는 Azure AD에서 확인된 도메인에 동기화할 수 있습니다. Azure AD 디렉터리를 만들면 라우팅 가능한 도메인을 만들고 다시 Azure AD에 대한 기본 도메인(예: contoso.onmicrosoft.com)이 됩니다. 따라서 기본 도메인(onmicrosoft.com)에 동기화하지 않으려는 경우 이 시나리오에서 라우팅할 수 있는 다른 도메인을 확인하는 데 필요하게 됩니다.
 
-도메인을 추가하고 확인하는 방법에 대한 자세한 내용은 [Azure Active Directory에 사용자 지정 도메인 이름 추가](../active-directory-add-domain.md) 를 참조하세요.
+도메인을 추가하고 확인하는 방법에 대한 자세한 내용은 [Azure Active Directory에 사용자 지정 도메인 이름 추가](../active-directory-domains-add-azure-portal.md) 를 참조하세요.
 
 Azure AD Connect는 라우팅할 수 없는 도메인 환경에서 실행하는지를 검색하고 Express 설정을 계속 진행하는 경우 적절하게 경고합니다. 라우팅할 수 없는 도메인에서 작업하는 경우 사용자의 UPN이 라우팅할 수 없는 접미사를 포함할 가능성이 있습니다. 예를 들어 contoso.local에서 실행하는 경우 Azure AD Connect는 Express 설정을 사용하지 않고 사용자 지정 설정을 사용하는 것이 좋습니다. 사용자 지정 설정을 사용하면 사용자가 Azure AD에 동기화된 후에 Azure에 로그인하기 위해 UPN으로 사용해야 하는 특성을 지정할 수 있습니다.
 
 ## <a name="next-steps"></a>다음 단계
 [Azure Active Directory와 온-프레미스 ID 통합](active-directory-aadconnect.md)에 대해 자세히 알아봅니다.
-

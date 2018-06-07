@@ -1,26 +1,23 @@
 ---
-title: "액세스 검토를 수행하는 방법 | Microsoft Docs"
-description: "Azure Privileged Identity Management 응용 프로그램을 사용하여 검토를 수행하는 방법을 알아봅니다."
+title: 액세스 검토를 수행하는 방법 | Microsoft Docs
+description: Azure Privileged Identity Management 응용 프로그램을 사용하여 검토를 수행하는 방법을 알아봅니다.
 services: active-directory
-documentationcenter: 
-author: billmath
-manager: femila
-editor: 
-ms.assetid: 49ee2feb-7d2e-4acf-82c1-40ff23062862
+documentationcenter: ''
+author: curtand
+manager: mtillman
+editor: ''
 ms.service: active-directory
-ms.devlang: na
 ms.topic: article
-ms.tgt_pltfrm: na
 ms.workload: identity
+ms.component: users-groups-roles
 ms.date: 06/06/2017
-ms.author: billmath
+ms.author: curtand
 ms.custom: pim
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: 5b5dabe301fae4000112aa467a22cc5c37b9b592
-ms.contentlocale: ko-kr
-ms.lasthandoff: 12/29/2016
-
+ms.openlocfilehash: b3cc71fc11a567c0c5c62b220e25be4169bd8348
+ms.sourcegitcommit: e221d1a2e0fb245610a6dd886e7e74c362f06467
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 05/07/2018
 ---
 # <a name="how-to-perform-an-access-review-in-azure-ad-privileged-identity-management"></a>Azure AD Privileged Identity Management의 액세스 검토를 수행하는 방법
 Azure AD(Active Directory) Privileged Identity Management를 사용하면 기업이 Azure AD 및 기타 Microsoft Online Services(Office 365 또는 Microsoft Intune 등)에서 권한 있는 리소스에 대한 액세스를 관리하는 방법을 간소화합니다.  
@@ -34,7 +31,7 @@ Azure AD(Active Directory) Privileged Identity Management를 사용하면 기업
 
 1. [Azure 포털](https://portal.azure.com/)에 로그인합니다.
 2. Azure 포털의 오른쪽 위에서 사용자 이름을 선택하고 작동할 디렉터리를 선택합니다.
-3. **더 많은 서비스**를 선택하고 [필터] 텍스트 상자를 사용하여 **Azure AD Privileged Identity Management**를 검색합니다.
+3. **모든 서비스**를 선택하고 필터 텍스트 상자를 사용하여 **Azure AD Privileged Identity Management**를 검색합니다.
 4. **대시보드에 고정** 옵션을 선택하고 **만들기**를 클릭합니다. Privileged Identity Management 응용 프로그램이 열립니다.
 
 ## <a name="approve-or-deny-access"></a>액세스 승인 또는 거부
@@ -54,4 +51,3 @@ Azure AD(Active Directory) Privileged Identity Management를 사용하면 기업
 <!--Image references-->
 
 [1]: ./media/active-directory-privileged-identity-management-configure/PIM_EnablePim.png
-

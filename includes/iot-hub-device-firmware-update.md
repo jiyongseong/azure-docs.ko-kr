@@ -5,21 +5,21 @@
 * 시뮬레이션된 펌웨어 업데이트 트리거
 * reported 속성을 사용하여 장치 및 해당 장치가 마지막으로 펌웨어 업데이트를 완료한 시간을 확인하는 장치 쌍 쿼리를 사용하도록 설정
 
-1단계: **manageddevice**라는 빈 폴더를 만듭니다.  **manageddevice** 폴더의 명령 프롬프트에서 다음 명령을 사용하여 package.json 파일을 만듭니다. 모든 기본값을 수락합니다.
+1. **manageddevice**라는 빈 폴더를 만듭니다.  **manageddevice** 폴더의 명령 프롬프트에서 다음 명령을 사용하여 package.json 파일을 만듭니다. 모든 기본값을 수락합니다.
    
     ```
     npm init
     ```
 
-2단계: **manageddevice** 폴더의 명령 프롬프트에서 다음 명령을 실행하여 **azure-iot-device** 및 **azure-iot-device-mqtt** 장치 SDK 패키지를 설치합니다.
+2. **manageddevice** 폴더의 명령 프롬프트에서 다음 명령을 실행하여 **azure-iot-device** 및 **azure-iot-device-mqtt** 장치 SDK 패키지를 설치합니다.
    
     ```
     npm install azure-iot-device azure-iot-device-mqtt --save
     ```
 
-3단계: 텍스트 편집기를 사용하여 **manageddevice** 폴더에 **dmpatterns_fwupdate_device.js** 파일을 만듭니다.
+3. 텍스트 편집기를 사용하여 **manageddevice** 폴더에 **dmpatterns_fwupdate_device.js** 파일을 만듭니다.
 
-4단계: 다음 'require' 문을 **dmpatterns_fwupdate_device.js** 파일의 시작 부분에 추가합니다.
+4. 다음 'require' 문을 **dmpatterns_fwupdate_device.js** 파일의 시작 부분에 추가합니다.
    
     ```
     'use strict';
@@ -27,14 +27,14 @@
     var Client = require('azure-iot-device').Client;
     var Protocol = require('azure-iot-device-mqtt').Mqtt;
     ```
-5단계: **connectionString** 변수를 추가하고 이 변수를 사용하여 **클라이언트** 인스턴스를 만듭니다. `{yourdeviceconnectionstring}` 자리 표시자를 이전의 "장치 ID 만들기" 섹션에서 기록한 연결 문자열로 대체합니다.
+5. **connectionString** 변수를 추가하고 이 변수를 사용하여 **클라이언트** 인스턴스를 만듭니다. `{yourdeviceconnectionstring}` 자리 표시자를 이전의 "장치 ID 만들기" 섹션에서 기록한 연결 문자열로 대체합니다.
    
     ```
     var connectionString = '{yourdeviceconnectionstring}';
     var client = Client.fromConnectionString(connectionString, Protocol);
     ```
 
-6단계: reported 속성을 업데이트하는 데 사용되는 다음 함수를 추가합니다.
+6. reported 속성을 업데이트하는 데 사용되는 다음 함수를 추가합니다.
    
     ```
     var reportFWUpdateThroughTwin = function(twin, firmwareUpdateValue) {
@@ -51,7 +51,7 @@
     };
     ```
 
-7단계: 펌웨어 이미지의 다운로드 및 적용을 시뮬레이션하는 다음 함수를 추가합니다.
+7. 펌웨어 이미지의 다운로드 및 적용을 시뮬레이션하는 다음 함수를 추가합니다.
    
     ```
     var simulateDownloadImage = function(imageUrl, callback) {
@@ -74,7 +74,7 @@
     }
     ```
 
-8단계: reported 속성을 통해 펌웨어 업데이트 상태를 **대기 중** 상태로 업데이트하는 다음 함수를 추가합니다. 일반적으로 장치는 사용 가능한 업데이트에 대한 알림을 받으며 관리자가 정의한 정책이 장치가 업데이트를 다운로드하고 적용하도록 유발합니다. 이 함수가 해당 정책을 활성화하는 논리가 실행되어야 하는 부분입니다. 간단히 하기 위해 샘플은 펌웨어 이미지를 다운로드하도록 계속 진행하기 전에 4초 동안 대기합니다.
+8. reported 속성을 통해 펌웨어 업데이트 상태를 **대기 중** 상태로 업데이트하는 다음 함수를 추가합니다. 일반적으로 장치는 사용 가능한 업데이트에 대한 알림을 받으며 관리자가 정의한 정책이 장치가 업데이트를 다운로드하고 적용하도록 유발합니다. 이 함수가 해당 정책을 활성화하는 논리가 실행되어야 하는 부분입니다. 간단히 하기 위해 샘플은 펌웨어 이미지를 다운로드하도록 계속 진행하기 전에 4초 동안 대기합니다.
    
     ```
     var waitToDownload = function(twin, fwPackageUriVal, callback) {
@@ -90,7 +90,7 @@
     };
     ```
 
-9단계: reported 속성을 통해 펌웨어 업데이트 상태를 **다운로드 중** 상태로 업데이트하는 다음 함수를 추가합니다. 그러면 함수는 펌웨어 다운로드를 시뮬레이션하고 펌웨어 업데이트 상태를 **downloadFailed** 또는 **downloadComplete**로 마지막으로 업데이트합니다.
+9. reported 속성을 통해 펌웨어 업데이트 상태를 **다운로드 중** 상태로 업데이트하는 다음 함수를 추가합니다. 그러면 함수는 펌웨어 다운로드를 시뮬레이션하고 펌웨어 업데이트 상태를 **downloadFailed** 또는 **downloadComplete**로 마지막으로 업데이트합니다.
    
     ```
     var downloadImage = function(twin, fwPackageUriVal, callback) {
@@ -128,7 +128,7 @@
     }
     ```
 
-10단계: reported 속성을 통해 펌웨어 업데이트 상태를 **적용 중** 상태로 업데이트하는 다음 함수를 추가합니다. 그러면 함수는 펌웨어 이미지 적용을 시뮬레이션하고 펌웨어 업데이트 상태를 **applyFailed** 또는 **applyComplete**로 마지막으로 업데이트합니다.
+10. reported 속성을 통해 펌웨어 업데이트 상태를 **적용 중** 상태로 업데이트하는 다음 함수를 추가합니다. 그러면 함수는 펌웨어 이미지 적용을 시뮬레이션하고 펌웨어 업데이트 상태를 **applyFailed** 또는 **applyComplete**로 마지막으로 업데이트합니다.
     
     ```
     var applyImage = function(twin, imageData, callback) {
@@ -166,7 +166,7 @@
     }
     ```
 
-11단계: **firmwareUpdate** 직접 메서드를 처리하고 다단계 펌웨어 업데이트 프로세스를 초기화하는 다음 함수를 추가합니다.
+11. **firmwareUpdate** 직접 메서드를 처리하고 다단계 펌웨어 업데이트 프로세스를 초기화하는 다음 함수를 추가합니다.
     
     ```
     var onFirmwareUpdate = function(request, response) {
@@ -202,7 +202,7 @@
     }
     ```
 
-12단계: 마지막으로 IoT Hub에 연결하는 다음 코드를 추가합니다.
+12. 마지막으로 IoT Hub에 연결하는 다음 코드를 추가합니다.
     
     ```
     client.open(function(err) {
@@ -217,6 +217,6 @@
     ```
 
 > [!NOTE]
-> 간단히 하기 위해 이 자습서에서는 다시 시도 정책을 구현하지 않습니다. 프로덕션 코드에서는 MSDN 문서 [일시적인 오류 처리](https://msdn.microsoft.com/library/hh675232.aspx)에서 제시한 대로 다시 시도 정책(예: 지수 백오프)을 구현해야 합니다.
+> 간단히 하기 위해 이 자습서에서는 재시도 정책을 구현하지 않습니다. 프로덕션 코드에서는 MSDN 문서 [일시적인 오류 처리](https://msdn.microsoft.com/library/hh675232.aspx)에서 제시한 대로 다시 시도 정책(예: 지수 백오프)을 구현해야 합니다.
 > 
 > 

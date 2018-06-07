@@ -14,11 +14,11 @@ ms.tgt_pltfrm: NA
 ms.workload: TBD
 ms.date: 12/1/2016
 ms.author: alkohli
-translationtype: Human Translation
-ms.sourcegitcommit: 6c5fa51bdaad808d90cac6c8b8adeafe7d1cafc9
 ms.openlocfilehash: 989e7b697f9b527df549fb32be18edd1d3c8d224
-
-
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-the-web-ui-to-administer-your-storsimple-virtual-array"></a>웹 UI를 사용하여 StorSimple 가상 배열 관리
 ![설정 프로세스 흐름](./media/storsimple-ova-web-ui-admin/manage4.png)
@@ -110,10 +110,4 @@ ms.openlocfilehash: 989e7b697f9b527df549fb32be18edd1d3c8d224
 
 ## <a name="next-steps"></a>다음 단계
 [StorSimple Manager 서비스를 사용하여 장치를 관리](storsimple-virtual-array-manager-service-administration.md)하는 방법을 알아봅니다.
-
-
-
-
-<!--HONumber=Dec16_HO1-->
-
 

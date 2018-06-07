@@ -3,7 +3,7 @@ title: "오픈 소스 도구를 사용하여 Azure Network Watcher NSG 흐름 �
 description: "이 페이지에서는 오픈 소스 도구를 사용하여 NSG 흐름 로그를 시각화하는 방법을 설명합니다."
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
 editor: 
 ms.assetid: e9b2dcad-4da4-4d6b-aee2-6d0afade0cb8
@@ -13,14 +13,13 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-translationtype: Human Translation
-ms.sourcegitcommit: 538f282b28e5f43f43bf6ef28af20a4d8daea369
-ms.openlocfilehash: 20f60ccd9108a7473705c2368f28d3152d0dd614
-ms.lasthandoff: 04/07/2017
-
+ms.author: jdial
+ms.openlocfilehash: f7d51352aa8411e36f4224804c90c2554d4ef9e6
+ms.sourcegitcommit: d87b039e13a5f8df1ee9d82a727e6bc04715c341
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 02/21/2018
 ---
-
 # <a name="visualize-azure-network-watcher-nsg-flow-logs-using-open-source-tools"></a>오픈 소스 도구를 사용하여 Azure Network Watcher NSG 흐름 로그 시각화
 
 네트워크 보안 그룹 흐름 로그는 네트워크 보안 그룹의 송/수신 IP 트래픽을 이해하는 데 사용할 수 있는 정보를 제공합니다. 이러한 흐름 로그는 트래픽이 허용되거나 거부된 경우 각 규칙을 기준으로 아웃바운드 및 인바운드 흐름, 흐름이 적용되는 NIC, 흐름에 대한 5개의 튜플 정보(원본/대상 IP, 원본/대상 포트, 프로토콜)를 보여 줍니다.
@@ -47,7 +46,7 @@ NSG 흐름 로그를 탄력적 스택과 연결하여 로그에서 정보를 검
 1. 이번 5.0 이상의 탄력적 스택에는 Java 8이 필요합니다. `java -version` 명령을 실행하여 버전을 확인합니다. java가 설치되지 않은 경우 [Oracle의 웹 사이트](http://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html)에서 설명서를 참조하세요.
 1. 시스템에 맞는 이진 패키지를 다운로드합니다.
 
-    ```
+    ```bash
     curl -L -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.2.0.deb
     sudo dpkg -i elasticsearch-5.2.0.deb
     sudo /etc/init.d/elasticsearch start
@@ -57,13 +56,13 @@ NSG 흐름 로그를 탄력적 스택과 연결하여 로그에서 정보를 검
 
 1. 명령으로 Elasticsearch가 실행 중인지 확인합니다.
 
-    ```
+    ```bash
     curl http://127.0.0.1:9200
     ```
 
     다음과 유사한 응답이 표시됩니다.
 
-    ```
+    ```json
     {
     "name" : "Angela Del Toro",
     "cluster_name" : "elasticsearch",
@@ -84,72 +83,77 @@ NSG 흐름 로그를 탄력적 스택과 연결하여 로그에서 정보를 검
 
 1. Logstash를 설치하려면 다음 명령을 실행합니다.
 
-    ```
+    ```bash
     curl -L -O https://artifacts.elastic.co/downloads/logstash/logstash-5.2.0.deb
     sudo dpkg -i logstash-5.2.0.deb
     ```
 1. 다음에는 흐름 로그를 액세스하고 구문 분석하도록 Logstash를 구성해야 합니다. 다음을 사용하여 logstash.conf 파일을 만듭니다.
 
-    ```
+    ```bash
     sudo touch /etc/logstash/conf.d/logstash.conf
     ```
 
 1. 파일에 다음 내용을 추가합니다.
 
   ```
-    input {
-      azureblob
-        {
-            storage_account_name => "mystorageaccount"
-            storage_access_key => "storageaccesskey"
-            container => "nsgflowlogContainerName"
-            codec => "json"
-        }
-      }
-
-      filter {
-        split { field => "[records]" }
-        split { field => "[records][properties][flows]"}
-        split { field => "[records][properties][flows][flows]"}
-        split { field => "[records][properties][flows][flows][flowTuples]"}
-
-     mutate{
-      split => { "[records][resourceId]" => "/"}
-      add_field => {"Subscription" => "%{[records][resourceId][2]}"
-                    "ResourceGroup" => "%{[records][resourceId][4]}"
-                    "NetworkSecurityGroup" => "%{[records][resourceId][8]}"}
-      convert => {"Subscription" => "string"}
-      convert => {"ResourceGroup" => "string"}
-      convert => {"NetworkSecurityGroup" => "string"}
-      split => { "[records][properties][flows][flows][flowTuples]" => ","}
-      add_field => {
-                  "unixtimestamp" => "%{[records][properties][flows][flows][flowTuples][0]}"
-                  "srcIp" => "%{[records][properties][flows][flows][flowTuples][1]}"
-                  "destIp" => "%{[records][properties][flows][flows][flowTuples][2]}"
-                  "srcPort" => "%{[records][properties][flows][flows][flowTuples][3]}"
-                  "destPort" => "%{[records][properties][flows][flows][flowTuples][4]}"
-                  "protocol" => "%{[records][properties][flows][flows][flowTuples][5]}"
-                  "trafficflow" => "%{[records][properties][flows][flows][flowTuples][6]}"
-                  "traffic" => "%{[records][properties][flows][flows][flowTuples][7]}"
-                   }
-      convert => {"unixtimestamp" => "integer"}
-      convert => {"srcPort" => "integer"}
-      convert => {"destPort" => "integer"}        
+input {
+   azureblob
+     {
+         storage_account_name => "mystorageaccount"
+         storage_access_key => "VGhpcyBpcyBhIGZha2Uga2V5Lg=="
+         container => "insights-logs-networksecuritygroupflowevent"
+         codec => "json"
+         # Refer https://docs.microsoft.com/azure/network-watcher/network-watcher-read-nsg-flow-logs
+         # Typical numbers could be 21/9 or 12/2 depends on the nsg log file types
+         file_head_bytes => 12
+         file_tail_bytes => 2
+         # Enable / tweak these settings when event is too big for codec to handle.
+         # break_json_down_policy => "with_head_tail"
+         # break_json_batch_count => 2
      }
+   }
 
-     date{
-       match => ["unixtimestamp" , "UNIX"]
-     }
-    }
+   filter {
+     split { field => "[records]" }
+     split { field => "[records][properties][flows]"}
+     split { field => "[records][properties][flows][flows]"}
+     split { field => "[records][properties][flows][flows][flowTuples]"}
 
-    output {
-      stdout { codec => rubydebug }
-      elasticsearch {
-        hosts => "localhost"
-        index => "nsg-flow-logs"
-      }
-    }  
+  mutate{
+   split => { "[records][resourceId]" => "/"}
+   add_field => {"Subscription" => "%{[records][resourceId][2]}"
+                 "ResourceGroup" => "%{[records][resourceId][4]}"
+                 "NetworkSecurityGroup" => "%{[records][resourceId][8]}"}
+   convert => {"Subscription" => "string"}
+   convert => {"ResourceGroup" => "string"}
+   convert => {"NetworkSecurityGroup" => "string"}
+   split => { "[records][properties][flows][flows][flowTuples]" => ","}
+   add_field => {
+               "unixtimestamp" => "%{[records][properties][flows][flows][flowTuples][0]}"
+               "srcIp" => "%{[records][properties][flows][flows][flowTuples][1]}"
+               "destIp" => "%{[records][properties][flows][flows][flowTuples][2]}"
+               "srcPort" => "%{[records][properties][flows][flows][flowTuples][3]}"
+               "destPort" => "%{[records][properties][flows][flows][flowTuples][4]}"
+               "protocol" => "%{[records][properties][flows][flows][flowTuples][5]}"
+               "trafficflow" => "%{[records][properties][flows][flows][flowTuples][6]}"
+               "traffic" => "%{[records][properties][flows][flows][flowTuples][7]}"
+                }
+   convert => {"unixtimestamp" => "integer"}
+   convert => {"srcPort" => "integer"}
+   convert => {"destPort" => "integer"}        
+  }
 
+  date{
+    match => ["unixtimestamp" , "UNIX"]
+  }
+ }
+output {
+  stdout { codec => rubydebug }
+  elasticsearch {
+    hosts => "localhost"
+    index => "nsg-flow-logs"
+  }
+}  
   ```
 
 Logstash 설치에 대한 추가 정보는 [공식 설명서](https://www.elastic.co/guide/en/beats/libbeat/5.2/logstash-installation.html)를 참조하세요.
@@ -158,13 +162,13 @@ Logstash 설치에 대한 추가 정보는 [공식 설명서](https://www.elasti
 
 이 Logstash 플러그 인을 사용하면 지정된 저장소 계정에서 흐름 로그에 직접 액세스할 수 있습니다. 이 플러그 인을 설치하려면 기본 Logstash 설치 디렉터리(이 경우 /usr/share/logstash/bin)에서 다음 명령을 실행합니다.
 
-```
+```bash
 logstash-plugin install logstash-input-azureblob
 ```
 
 Logstash를 시작하려면 다음 명령을 실행합니다.
 
-```
+```bash
 sudo /etc/init.d/logstash start
 ```
 
@@ -174,14 +178,14 @@ sudo /etc/init.d/logstash start
 
 1. 다음 명령을 실행하여 Kibana를 설치합니다.
 
-  ```
+  ```bash
   curl -L -O https://artifacts.elastic.co/downloads/kibana/kibana-5.2.0-linux-x86_64.tar.gz
   tar xzvf kibana-5.2.0-linux-x86_64.tar.gz
   ```
 
 1. Kibana를 실행하려면 다음 명령을 사용합니다.
 
-  ```
+  ```bash
   cd kibana-5.2.0-linux-x86_64/
   ./bin/kibana
   ```
@@ -252,4 +256,3 @@ sudo /etc/init.d/logstash start
 [5]: ./media/network-watcher-visualize-nsg-flow-logs-open-source-tools/figure5.png
 [6]: ./media/network-watcher-visualize-nsg-flow-logs-open-source-tools/figure6.png
 [7]: ./media/network-watcher-visualize-nsg-flow-logs-open-source-tools/figure7.png
-

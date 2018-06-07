@@ -1,9 +1,9 @@
 ---
 title: "Azure Network Watcher 보안 그룹 보기를 사용하여 네트워크 보안 분석 - PowerShell | Microsoft Docs"
-description: "이 문서에서는 보안 그룹 보기를 사용하여 가상 컴퓨터 보안을 분석하기 위해 PowerShell을 사용하는 방법을 설명합니다."
+description: "이 문서에서는 보안 그룹 보기를 사용하여 가상 머신 보안을 분석하기 위해 PowerShell을 사용하는 방법을 설명합니다."
 services: network-watcher
 documentationcenter: na
-author: georgewallace
+author: jimdial
 manager: timlt
 editor: 
 ms.assetid: 04e76b49-6a1b-4d0f-9a9b-51cf2f4df5a2
@@ -13,16 +13,14 @@ ms.topic: article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
 ms.date: 02/22/2017
-ms.author: gwallace
-ms.translationtype: Human Translation
-ms.sourcegitcommit: c785ad8dbfa427d69501f5f142ef40a2d3530f9e
-ms.openlocfilehash: 363fdd9f1de933bb4050f91e1e111aaf3e419058
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/26/2017
-
+ms.author: jdial
+ms.openlocfilehash: 3983055cd580c263d39b908c61a16ed14353c9a4
+ms.sourcegitcommit: b5c6197f997aa6858f420302d375896360dd7ceb
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 12/21/2017
 ---
-
-# <a name="analyze-your-virtual-machine-security-with-security-group-view-using-powershell"></a>PowerShell를 사용하는 보안 그룹 보기에서 가상 컴퓨터 보안 분석
+# <a name="analyze-your-virtual-machine-security-with-security-group-view-using-powershell"></a>PowerShell를 사용하는 보안 그룹 보기에서 Virtual Machine 보안 분석
 
 > [!div class="op_single_selector"]
 > - [PowerShell](network-watcher-security-group-view-powershell.md)
@@ -53,7 +51,7 @@ $networkWatcher = Get-AzureRmNetworkWatcher -Name $nw.Name -ResourceGroupName $n
 
 ## <a name="get-a-vm"></a>VM 확인
 
-`Get-AzureRmNetworkWatcherSecurityGroupView` cmdlet을 실행하려면 가상 컴퓨터가 필요합니다. 다음 예제는 VM 개체를 가져옵니다.
+`Get-AzureRmNetworkWatcherSecurityGroupView` cmdlet을 실행하려면 가상 머신이 필요합니다. 다음 예제는 VM 개체를 가져옵니다.
 
 ```powershell
 $VM = Get-AzurermVM -ResourceGroupName testrg -Name testvm1
@@ -69,7 +67,7 @@ $secgroup = Get-AzureRmNetworkWatcherSecurityGroupView -NetworkWatcher $networkW
 
 ## <a name="viewing-the-results"></a>결과 보기
 
-다음 예제는 반환된 결과의 축약된 응답입니다. 결과는 **NetworkInterfaceSecurityRules**, **DefaultSecurityRules** 및 **EffectiveSecurityRules**라는 그룹으로 구분되는 가상 컴퓨터에서 효과적으로 적용된 보안 규칙을 모두 표시합니다.
+다음 예제는 반환된 결과의 축약된 응답입니다. 결과는 **NetworkInterfaceSecurityRules**, **DefaultSecurityRules** 및 **EffectiveSecurityRules**라는 그룹으로 구분되는 가상 머신에서 효과적으로 적용된 보안 규칙을 모두 표시합니다.
 
 ```
 NetworkInterfaces : [
@@ -131,6 +129,5 @@ NetworkInterfaces : [
 ## <a name="next-steps"></a>다음 단계
 
 [Network Watcher를 사용하여 NSG(네트워크 보안 그룹) 감사](network-watcher-nsg-auditing-powershell.md)를 방문하여 네트워크 보안 그룹의 유효성 검사를 자동화하는 방법을 알아봅니다.
-
 
 

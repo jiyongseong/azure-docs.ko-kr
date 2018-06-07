@@ -15,13 +15,11 @@ ms.topic: article
 ms.date: 04/12/2017
 ms.author: magoedte
 ms.custom: H1Hack27Feb2017
-ms.translationtype: Human Translation
-ms.sourcegitcommit: a0c8af30fbed064001c3fd393bf0440aa1cb2835
-ms.openlocfilehash: b40d7c0acd8cc6a672f25489b745561c24501482
-ms.contentlocale: ko-kr
-ms.lasthandoff: 02/28/2017
-
-
+ms.openlocfilehash: 459ef90ca1d76bada6565bfefd7b4bd1086197d5
+ms.sourcegitcommit: 6699c77dcbd5f8a1a2f21fba3d0a0005ac9ed6b7
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 10/11/2017
 ---
 # <a name="use-azure-blob-storage-for-iis-and-azure-table-storage-for-events-with-log-analytics"></a>Log Analytics에서 이벤트에 대해 IIS와 Azure Table Storage에 Azure Blob Storage 사용
 
@@ -197,4 +195,3 @@ Azure PowerShell을 사용하여 Azure 저장소에 기록된 이벤트를 보�
 * 지원되는 Azure 서비스에 대해 [Azure 서비스에 대한 로그 및 메트릭 수집](log-analytics-azure-storage.md)
 * [솔루션을 사용하도록 설정](log-analytics-add-solutions.md) 하여 데이터에 대한 정보를 제공합니다.
 * [검색 쿼리를 사용](log-analytics-log-searches.md) 하여 데이터를 분석합니다.
-

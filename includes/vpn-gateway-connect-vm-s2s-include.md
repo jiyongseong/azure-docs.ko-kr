@@ -1,12 +1,28 @@
+---
+title: 포함 파일
+description: 포함 파일
+services: vpn-gateway
+author: cherylmc
+ms.service: vpn-gateway
+ms.topic: include
+ms.date: 03/21/2018
+ms.author: cherylmc
+ms.custom: include file
+ms.openlocfilehash: 5acdd54bcf7e253bc21dc3f99207fc1b2bd1ff59
+ms.sourcegitcommit: 20d103fb8658b29b48115782fe01f76239b240aa
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/03/2018
+---
 VM에 원격 데스크톱 연결을 만들어 VNet에 배포된 VM에 연결할 수 있습니다. 처음에 VM에 연결할 수 있는지 확인하는 가장 좋은 방법은 컴퓨터 이름이 아닌 개인 IP 주소를 사용하여 연결하는 것입니다. 이 방법을 사용하면 연결할 수 있는지, 이름 확인이 제대로 구성되었는지 테스트할 수 있습니다.
 
 1. 개인 IP 주소를 찾습니다. 여러 가지 방법으로 VM의 개인 IP 주소를 찾을 수 있습니다. 아래에서 Azure Portal 및 PowerShell에서의 단계를 보여줍니다.
 
-  - Azure Portal - Azure Portal에서 가상 컴퓨터를 찾습니다. VM 속성을 봅니다. 개인 IP 주소가 나열됩니다.
+  - Azure Portal - Azure Portal에서 가상 머신을 찾습니다. VM 속성을 봅니다. 개인 IP 주소가 나열됩니다.
 
   - PowerShell - 예제를 사용하여 리소스 그룹의 VM 및 개인 IP 주소 목록을 봅니다. 이 예제는 수정하지 않고 그냥 사용하면 됩니다.
 
-    ```powershell
+    ```azurepowershell-interactive
     $VMs = Get-AzureRmVM
     $Nics = Get-AzureRmNetworkInterface | Where VirtualMachine -ne $null
 
@@ -25,7 +41,7 @@ VM에 원격 데스크톱 연결을 만들어 VNet에 배포된 VM에 연결할 
 
 ### <a name="to-troubleshoot-an-rdp-connection-to-a-vm"></a>VM에 대한 RDP 연결 문제를 해결하려면
 
-VPN 연결을 통해 가상 컴퓨터에 연결하는 데 문제가 있는 경우 다음 항목을 확인합니다.
+VPN 연결을 통해 가상 머신에 연결하는 데 문제가 있는 경우 다음 항목을 확인합니다.
 
 - VPN 연결이 성공했는지 확인합니다.
 - VM의 개인 IP 주소에 연결하고 있는지 확인합니다.

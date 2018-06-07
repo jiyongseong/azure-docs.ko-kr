@@ -1,76 +1,60 @@
 ---
-title: "Azure CLI 스크립트 샘플 - 배치 계정 만들기 | Microsoft Docs"
-description: "Azure CLI 스크립트 샘플 - 배치 계정 만들기"
+title: "Azure CLI 스크립트 예제 - Batch 계정 만들기 - Batch 서비스 | Microsoft Docs"
+description: "Azure CLI 스크립트 예제 - Batch 서비스 모드에서 Batch 계정 만들기"
 services: batch
 documentationcenter: 
-author: annatisch
-manager: daryls
-editor: tysonn
+author: dlepow
+manager: jeconnoc
+editor: 
 ms.assetid: 
 ms.service: batch
 ms.devlang: azurecli
-ms.topic: article
+ms.topic: sample
 ms.tgt_pltfrm: multiple
 ms.workload: na
-ms.date: 05/02/2017
-ms.author: antisch
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 9568210d4df6cfcf5b89ba8154a11ad9322fa9cc
-ms.openlocfilehash: 698978fd717091c49a1375e222f46f4325431223
-ms.contentlocale: ko-kr
-ms.lasthandoff: 05/15/2017
-
+ms.date: 01/29/2018
+ms.author: danlep
+ms.openlocfilehash: ced93032203c33dc4cda362d30192ee8eb37d944
+ms.sourcegitcommit: 8c3267c34fc46c681ea476fee87f5fb0bf858f9e
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/09/2018
 ---
+# <a name="cli-example-create-a-batch-account-in-batch-service-mode"></a>CLI 예제: Batch 서비스 모드에서 Batch 계정 만들기
 
-# <a name="create-a-batch-account-with-the-azure-cli"></a>Azure CLI로 배치 계정 만들기
+이 스크립트는 Batch 서비스 모드에서 Azure Batch 계정을 만들고 계정의 다양한 속성을 쿼리 및 업데이트하는 방법을 보여줍니다. 기본 Batch 서비스 모드에서 Batch 계정을 만들면 Batch 서비스에서 계산 노드를 내부적으로 할당합니다. 할당된 계산 노드에는 별도의 vCPU(코어) 할당량이 적용되며 공유 키 자격 증명 또는 Azure Active Directory 토큰을 통해 계정을 인증할 수 있습니다.
 
-이 스크립트는 Azure 배치 계정을 만들고 계정의 다양한 속성을 쿼리 및 업데이트하는 방법을 보여 줍니다.
+[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
 
-## <a name="prerequisites"></a>필수 조건
+CLI를 로컬로 설치하여 사용하도록 선택하는 경우 이 문서에서 Azure CLI 버전 2.0.20 이상을 실행해야 합니다. `az --version`을 실행하여 버전을 찾습니다. 설치 또는 업그레이드해야 하는 경우 [Azure CLI 2.0 설치](/cli/azure/install-azure-cli)를 참조하세요. 
 
-아직 Azure CLI를 설치하지 않은 경우 [Azure CLI 설치 가이드](https://docs.microsoft.com/cli/azure/install-azure-cli)에 있는 지침을 사용하여 설치합니다.
+## <a name="example-script"></a>예제 스크립트
 
-## <a name="batch-account-sample-script"></a>배치 계정 샘플 스크립트
-
-배치 계정을 만들 때 기본적으로 계산 노드가 Batch 서비스에 내부적으로 할당됩니다. 할당된 계산 노드에는 별도의 코어 할당량이 적용되며 공유 키 자격 증명 또는 Azure Active Dirctory 토큰을 통해 계정을 인증할 수 있습니다.
-
-[!code-azurecli[메인](../../../cli_scripts/batch/create-account/create-account.sh "계정 만들기")]
-
-## <a name="batch-account-using-user-subscription-sample-script"></a>사용자 구독을 사용하는 배치 계정 샘플 스크립트
-
-Batch에서 사용자 고유의 Azure 구독에 계산 노드를 만들도록 선택할 수도 있습니다.
-계산 노드를 구독에 할당한 계정은 Azure Active Directory 토큰을 통해 인증되어야 하며 할당된 계산 노드는 구독 할당량에 포함됩니다. 이 모드에서 계정을 만들려면 계정을 만들 때 Key Vault를 지정해야 합니다.
-
-[!code-azurecli[메인](../../../cli_scripts/batch/create-account/create-account-user-subscription.sh  "사용자 구독을 사용하여 계정 만들기")]
+[!code-azurecli-interactive[main](../../../cli_scripts/batch/create-account/create-account.sh "Create Account")]
 
 ## <a name="clean-up-deployment"></a>배포 정리
 
-위의 샘플 스크립트 중 하나를 실행한 후 다음 명령을 실행하여 리소스 그룹 및 관련된 모든 리소스(배치 계정, Azure Storage 계정 및 Azure Key Vault)를 제거합니다.
+다음 명령을 실행하여 리소스 그룹 및 모든 관련 리소스를 제거합니다.
 
-```azurecli
+```azurecli-interactive
 az group delete --name myResourceGroup
 ```
 
 ## <a name="script-explanation"></a>스크립트 설명
 
-이 스크립트는 다음 명령을 사용하여 리소스 그룹, 배치 계정 및 모든 관련된 리소스를 만듭니다. 표에 있는 각 명령은 명령에 해당하는 문서에 연결됩니다.
+이 스크립트는 다음 명령을 사용합니다. 표에 있는 각 명령은 명령에 해당하는 문서에 연결됩니다.
 
-| 명령 | 참고 사항 |
+| 명령 | 메모 |
 |---|---|
-| [az group create](https://docs.microsoft.com/cli/azure/group#create) | 모든 리소스가 저장되는 리소스 그룹을 만듭니다. |
-| [az batch account create](https://docs.microsoft.com/cli/azure/batch/account#create) | 배치 계정을 만듭니다.  |
-| [az batch account set](https://docs.microsoft.com/cli/azure/batch/account#set) | 배치 계정의 속성을 업데이트합니다.  |
-| [az batch account show](https://docs.microsoft.com/cli/azure/batch/account#show) | 지정된 배치 계정의 세부 정보를 검색합니다.  |
-| [az batch account keys list](https://docs.microsoft.com/cli/azure/batch/account/keys#list) | 지정된 배치 계정의 액세스 키를 검색합니다.  |
-| [az batch account login](https://docs.microsoft.com/cli/azure/batch/account#login) | 추가 CLI 상호 작용을 위해 지정된 배치 계정에 대해 인증합니다.  |
-| [az storage account create](https://docs.microsoft.com/cli/azure/storage/account#create) | 저장소 계정을 만듭니다. |
-| [az keyvault create](https://docs.microsoft.com/cli/azure/keyvault#create) | 키 자격 증명 모음을 만듭니다. |
-| [az keyvault set-policy](https://docs.microsoft.com/cli/azure/keyvault#set-policy) | 지정된 주요 자격 증명 모음의 보안 정책을 업데이트합니다. |
-| [az group delete](https://docs.microsoft.com/cli/azure/group#delete) | 모든 중첩 리소스를 포함한 리소스 그룹을 삭제합니다. |
+| [az group create](/cli/azure/group#az_group_create) | 모든 리소스가 저장되는 리소스 그룹을 만듭니다. |
+| [az batch account create](/cli/azure/batch/account#az_batch_account_create) | Batch 계정을 만듭니다. |
+| [az storage account create](/cli/azure/storage/account#az_storage_account_create) | 저장소 계정을 만듭니다. |
+| [az batch account set](/cli/azure/batch/account#az_batch_account_set) | Batch 계정의 속성을 업데이트합니다.  |
+| [az batch account show](/cli/azure/batch/account#az_batch_account_show) | 지정된 Batch 계정의 세부 정보를 검색합니다.  |
+| [az batch account keys list](/cli/azure/batch/account/keys#az_batch_account_keys_list) | 지정된 Batch 계정의 액세스 키를 검색합니다.  |
+| [az batch account login](/cli/azure/batch/account#az_batch_account_login) | 추가 CLI 상호 작용을 위해 지정된 Batch 계정에 대해 인증합니다.  |
+| [az group delete](/cli/azure/group#az_group_delete) | 모든 중첩 리소스를 포함한 리소스 그룹을 삭제합니다. |
 
 ## <a name="next-steps"></a>다음 단계
 
-Azure CLI에 대한 자세한 내용은 [Azure CLI 설명서](https://docs.microsoft.com/cli/azure/overview)를 참조하세요.
-
-추가 Batch CLI 스크립트 샘플은 [Azure Batch CLI 설명서](../batch-cli-samples.md)에서 확인할 수 있습니다.
-
+Azure CLI에 대한 자세한 내용은 [Azure CLI 설명서](/cli/azure)를 참조하세요.

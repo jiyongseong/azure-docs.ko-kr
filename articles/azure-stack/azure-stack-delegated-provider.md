@@ -1,10 +1,10 @@
 ---
-title: Delegating offers in Azure Stack | Microsoft Docs
-description: Learn how to put other people in charge of creating offers and signing up users for you.
+title: "Azure 스택에서 offers 위임 | Microsoft Docs"
+description: "다른 사용자를 제안 만들기 및 사용자 수에 대 한 등록을 담당 하는 방법에 알아봅니다."
 services: azure-stack
 documentationcenter: 
-author: AlfredoPizzirani
-manager: byronr
+author: brenduns
+manager: femila
 editor: 
 ms.assetid: 157f0207-bddc-42e5-8351-197ec23f9d46
 ms.service: azure-stack
@@ -12,138 +12,144 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 10/07/2016
-ms.author: alfredop
-ms.translationtype: HT
-ms.sourcegitcommit: bde1bc7e140f9eb7bb864c1c0a1387b9da5d4d22
-ms.openlocfilehash: a082e17ef6bdbc6ffe475a59c613d684583530f2
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/21/2017
-
+ms.date: 02/28/2018
+ms.author: brenduns
+ms.reviewer: alfredop
+ms.openlocfilehash: 287bc04660664facbe99d2cb80ae6c92e41c4111
+ms.sourcegitcommit: 782d5955e1bec50a17d9366a8e2bf583559dca9e
+ms.translationtype: MT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 03/02/2018
 ---
-# <a name="delegating-offers-in-azure-stack"></a>Delegating offers in Azure Stack
+# <a name="delegate-offers-in-azure-stack"></a>Azure Stack에서 제품 위임
 
-As the Azure Stack cloud operator, you often want to put other people in charge of creating offers and signing up users for you. For example, this can happen if you are a service provider and you want resellers to sign up customers and manage them on your behalf. It can also happen in an enterprise if you are part of a central IT group and want divisions or subsidiaries to sign up users without your intervention.
+*적용 대상: Azure 스택 통합 시스템과 Azure 스택 개발 키트*
 
-Delegation helps you with these tasks, helping you to reach and manage more users than you would be able to do directly. The following illustration shows one level of delegation, but Azure Stack supports multiple levels. Delegated providers can in turn delegate to other providers, up to five levels.
+Azure 스택 연산자로 종종 다른 사용자를 담당 하 제안 만들기 및 사용자가 등록 하려고 합니다. 예를 들어 서비스 공급자를 사용 하는 경우 고객 등록 및 사용자를 대신 하 여 관리 하는 대리점 경우가 있습니다. 또는 사용 하는 엔터프라이즈에서는 중앙 IT 그룹의 일부 경우에 사용자가 사용자 개입 없이 등록 하는 자회사를 할 수 있습니다.
 
-![](media/azure-stack-delegated-provider/image1.png)
+위임을 사용 하면에 연결 하 고 직접는 것 보다 더 많은 사용자가 관리할 수 있도록 하 여 이러한 작업을 할 수 있습니다. 다음 그림과 한 수준의 위임 하지만 Azure 스택 여러 수준을 지원 합니다. 위임 된 공급자 (Dp) 최대 다섯 수준까지 다른 공급자에 위임할 수 있습니다.
 
-Azure Stack cloud operators can delegate the creation of offers and tenants to other users by using the delegation functionality.
+![위임 수준](media/azure-stack-delegated-provider/image1.png)
 
-## <a name="roles-and-steps-in-delegation"></a>Roles and steps in delegation
-To understand delegation, keep in mind that there are three roles involved:
+Azure 스택 운영자 위임 기능을 사용 하 여 만들기 제공 및 사용자가 다른 사용자에 게 위임할 수 있습니다.
 
-* The **cloud operator** manages the Azure Stack infrastructure, creates an offer template, and delegates others to offer it to their users.
-* The delegated cloud administrators are called **delegated providers**. They can belong to other organizations (such as other Azure Active Directory tenants).
-* **Users** sign up for the offers and use them for managing their workloads, creating VMs, storing data, etc.
+## <a name="roles-and-steps-in-delegation"></a>역할 및 위임의 단계
+위임을 이해 하려면 관련 된 세 가지 역할이 있습니다 염두에 둬야 합니다.
 
-As shown in the following graphic, there are two steps in setting up delegation.
+* *Azure 스택 연산자* Azure 스택 인프라를 관리 하는 제공 템플릿을 만들고 위임 하는 다른 사용자가 해당 사용자에 게 제공 합니다.
 
-1. Identify the delegated providers. Do this by subscribing them to an offer based on a plan that contains only the subscriptions service.
-   Users who subscribe to this offer acquire some of the cloud administrator’s capabilities, including the ability to extend offers and sign users up for them.
-2. Delegate an offer to the delegated provider. This offer functions as a template for what the delegated provider can offer. The delegated provider is now able to take the offer, choose a name for it (but not change its services and quotas), and offer it to customers.
+* 위임 된 Azure 스택 연산자 라고 *공급자 위임*합니다. 다른 Azure Active Directory (Azure AD) 사용자 등의 다른 조직에 속해 있습니다.
 
-![](media/azure-stack-delegated-provider/image2.png)
+* *사용자가* 제품에 등록 하 고 데이터를 저장 하는 Vm을 만들어 해당 작업을 관리 하기 위한 사용 하 고 등입니다.
 
-To act as delegated providers, users need to establish a relationship with the main provider; in other words, they need to create a subscription. In this scenario, this subscription identifies the delegated providers as having the right to present offers on behalf of the main provider.
+다음 그림에 나와 있는 것 처럼 위임을 설정 하려면 두 단계가 있습니다.
 
-Once this relationship is established, the cloud operator can delegate an offer to the delegated provider. The delegated provider is now able to take the offer, rename it (but not change its substance), and offer it to its customers.
+1. *위임 된 공급자 식별*합니다. 구독에 구독 서비스를 포함 하는 계획에 따라 제공 하 여이 작업을 수행 합니다. 사용자가이 제품 구독 제안을 확장 하 고 사용자가에 서명 하는 기능을 포함 하 여 Azure 스택 운영자의 기능 중 일부를 획득 합니다.
 
-To establish a delegated provider, delegate an offer, and verify that users can sign up for it, carry out the instructions in the following sections.
+2. *위임 된 공급자에 게 제공 하는 서비스를 위임할*합니다. 이 제품은 제공할 수는 위임 된 공급자에 대 한 템플릿으로 작동 합니다. 위임 된 공급자 제안을 걸릴 이제 수 있습니다. 에 대 한 이름을 선택 합니다 (그러나 해당 서비스와 할당량을 변경 하지 않는), 및 고객에 게 제공 합니다.
 
-## <a name="set-up-roles"></a>Set up roles
+![위임 된 공급자를 만들고 사용자가 등록할 수 있도록 합니다.](media/azure-stack-delegated-provider/image2.png)
 
-To see a delegated provider at work, you need additional Azure Active Directory accounts in addition to your cloud operator account. If you do not have them, create the two accounts. The accounts can belong to any AAD tenant. We will refer to them as the delegated provider (DP) and the user.
+위임 된 공급자 역할을 사용자 기본 공급자와 관계를 설정 해야 합니다. 즉, 구독을 만들려면 필요한 합니다. 이 시나리오에서는이 구독 기본 공급자를 대신 하 여 현재 제안 수 있는 권한이 있는 것으로 위임 된 공급자를 식별 합니다.
 
-| **Role** | **Organizational rights** |
+이 관계를 설정한 후 Azure 스택 연산자는 위임 된 공급자에 게 제공 하는 서비스를 위임할 수 있습니다. 위임 된 공급자 이제 제품 라인, 이름을 바꾸거나 (변경 하지 않고 내용을), 수 있고 해당 고객에 게 제공 합니다.
+
+다음 섹션에서는 대리자를 제공 하는 서비스, 위임 된 공급자를 설정 하는 방법을 설명 하 고 사용자가을 등록할 수 있는지 확인 합니다.
+
+## <a name="set-up-roles"></a>역할 설정
+
+회사에서 위임 된 공급자를 참조 하려면 추가 Azure AD 계정을 Azure 스택 운영자 계정 외에도 합니다. 이 두 계정이 없는 경우 만듭니다. 계정은 Azure AD 사용자에 게 속할 수 있으며 위임 된 공급자와 사용자 라고 합니다.
+
+| **역할** | **조직의 권한** |
 | --- | --- |
-| Delegated Provider |User |
-| User |User |
+| 위임 된 공급자 |사용자 |
+| 사용자 |사용자 |
 
-## <a name="identify-the-delegated-providers"></a>Identify the delegated providers
-1. Sign in as cloud operator.
-2. Create the offer that will enable users to become delegated providers. This requires that you create a plan and an offer based on it:
+## <a name="identify-the-delegated-providers"></a>위임 된 공급자를 식별 합니다.
+1. Azure 스택 연산자로 로그인 합니다.
+
+2. 사용자가 위임 된 공급자 될 수 있도록 제안을 만듭니다.
    
-   a.  [Create a plan](azure-stack-create-plan.md).
-       This plan should include only the subscriptions service. In this article, we use a plan called PlanForDelegation.
+   a.  [계획 만들기](azure-stack-create-plan.md)합니다.
+       이 계획에는 구독 서비스만을 포함 되어야 합니다. 이 문서에서는 이라는 계획 **PlanForDelegation**합니다.
    
-   b.  [Create an offer](azure-stack-create-offer.md) based on this plan. In this article, we use an offer called OfferToDP.
+   나.  [제안 만들기](azure-stack-create-offer.md) 이 계획에 기반 합니다. 이 문서에서는 호출 제안을 **OfferToDP**합니다.
    
-   c.  Once the creation of the offer is complete, add the delegated provider as a subscriber to this offer by clicking **Subscriptions** &gt; **Add** &gt; **New Tenant Subscription**.
+   다.  제공의 만들기가 완료 되, 위임 된 공급자 구독자로이 제품을 추가 합니다. 선택 하 여이 작업을 수행 **구독** > **추가** > **새 테 넌 트 구독**합니다.
    
-   ![](media/azure-stack-delegated-provider/image3.png)
+   ![구독자로 위임 된 공급자를 추가 합니다.](media/azure-stack-delegated-provider/image3.png)
 
 > [!NOTE]
-> As with all Azure Stack offers, you have the option of making the offer public and letting users sign up for it, or keeping it private and have the cloud operator manage the sign-up. Delegated providers are usually a small group and you want to control who is admitted to it, so keeping this offer private will make sense in most cases.
+> 있는 모든 Azure 스택 제안와 공용 및 하도록 사용자는이 요청을 만드는 옵션을 등록, 또는 개인 유지 및 Azure 스택 연산자 등록을 관리할 수 있도록 합니다. 위임 된 공급자는 일반적으로 작은 그룹. 대부분의 경우에서 의미가이 제안은 개인 유지 하므로,에 입원 사용자를 제어 하려고 합니다.
 > 
 > 
 
-## <a name="cloud-operator-creates-the-delegated-offer"></a>Cloud operator creates the delegated offer
+## <a name="azure-stack-operator-creates-the-delegated-offer"></a>Azure 스택 연산자는 위임 된 제안을 만듭니다.
 
-You have now established your delegated provider. The next step is to create the plan and offer that you are going to delegate, and which your customers will use. You should define this offer exactly as you want the customers to see it, because the delegated provider will not be able to change the plans and quotas it includes.
+위임 된 공급자에 구축할 이제 있습니다. 다음 단계는 계획 및 위임 하려고 하 고 고객에서 사용 하는 제품을 만드는 것입니다. 고객이 위임 된 공급자는 계획 및 포함 된 할당량 변경 될 수 없으므로 참조 수를 원하는 대로이 제품을 정의 하는 것이 좋습니다.
 
-1. As cloud operator, [create a plan](azure-stack-create-plan.md) and [an offer](azure-stack-create-offer.md) based on it. For this article, we use an offer called DelegatedOffer.
+1. Azure 스택 연산자로 [계획을 만들](azure-stack-create-plan.md) 및 [제안을](azure-stack-create-offer.md) 기반 합니다. 이 문서에서는 호출 제안을 **DelegatedOffer 합니다.**
    
    > [!NOTE]
-   > This offer does not need to be made public. It can be made public if you choose, but, in most cases, you only want delegated providers to have access to it. Once you delegate a private offer as described in the following steps, the delegated provider will have access to it.
+   > 이 제품은 있어서는 공개 됩니다. 를 선택한 경우 만들 수 있습니다 공개 합니다. 그러나 대부분의 경우에서만 해도 위임 된 공급자에 액세스할 수 있습니다. 다음 단계에 설명 된 대로 개인 제공 위임한, 후 위임 된 공급자에 액세스할 수 있습니다.
    > 
    > 
-2. Delegate the offer. Go to DelegatedOffer, and in the Settings pane, click **Delegated Providers** &gt; **Add**.
-3. Select the delegated provider’s subscription from the drop-down list box and click **Delegate**.
+1. 이 요청을 위임 합니다. 로 이동 **DelegatedOffer 합니다.** 그런 다음는 **설정** 창 선택 **위임 공급자** > **추가**합니다.
 
-> ![](media/azure-stack-delegated-provider/image4.png)
+2. 드롭다운 목록 상자에서 위임 된 공급자에 대 한 구독을 선택한 다음 선택 **대리자**합니다.
+
+> ![위임 된 공급자 추가](media/azure-stack-delegated-provider/image4.png)
 > 
 > 
 
-## <a name="delegated-provider-customizes-the-offer"></a>Delegated provider customizes the offer
+## <a name="delegated-provider-customizes-the-offer"></a>위임 된 공급자는이 요청에서 사용자 지정
 
-Sign in to the **tenant portal** as the delegated provider and create a new offer using the delegated offer as a template.
+공급자로 위임 된 사용자 포털에 로그인 한 다음 템플릿으로 위임 된 제품을 사용 하 여 새 제안을 만듭니다.
 
-1. Click **New** &gt; **Tenant Offers + Plans** &gt; **Offer**.
+1. 선택 **새** > **테 넌 트 제공 + 계획** > **제공**합니다.
 
-    ![](media/azure-stack-delegated-provider/image5.png)
+    ![새 제안 만들기](media/azure-stack-delegated-provider/image5.png)
 
 
-1. Assign a name to the offer. Here we choose ResellerOffer. Select the delegated offer to base it on and then click **Create**.
+1. 제품에 이름을 할당 합니다. 이 문서에서는 **ResellerOffer**합니다. 기본를 선택한 후에 위임 된 제안을 선택 **만들기**합니다.
    
-   ![](media/azure-stack-delegated-provider/image6.png)
+   ![이름을 할당합니다](media/azure-stack-delegated-provider/image6.png)
 
     >[!NOTE] 
-    > Note the difference compared to offer creation as experienced by the cloud operator. The delegated provider does not construct the offer from base plans and add-on plans; they can only choose from offers that have been delegated to them, and can't make changes to those offers.
+    > Azure 스택 연산자로 숙련 된으로 만들기 제공에 비해 차이 note 합니다. 위임 된 공급자는 기본 계획 및 추가 기능 계획에서 제안을 생성 하지 않습니다. 자신에 게 위임 된 변경할 수 없습니다 이러한 서비스 및 제품에서 선택할 수 있습니다.
 
-1. Make the offer public by clicking **Browse** &gt; **Offers**, selecting the offer, and clicking **Change State**.
-2. The delegated provider exposes these offers through his or her own portal URL. Note that these offers are visible only through this    delegated portal. To find and change this URL:
-   
-    a.  Click **Browse**&gt; **Provider Settings** &gt; **Portal URL**.
-   
-    b.  Change the Provider ID if desired.
-   
-    c.  Copy the portal URL to a separate location, such as Notepad.
-   
-    ![](media/azure-stack-delegated-provider/image7.png)
-   
-   <!-- -->
-   You have now completed the creation of a delegated offer as a delegated provider. Sign out as the delegated provider. Close the browser tab you have been using.
+1. 제품을 선택 하 여 공개로 설정 **찾아보기**, 차례로 **제공**합니다. 제품을 선택한 다음 선택 **상태 변경**합니다.
 
-## <a name="sign-up-for-the-offer"></a>Sign up for the offer
-1. In a new browser window, go to the delegated portal URL you saved in the previous step. Sign in to the portal as user. Note: you must use the delegated portal for this step. The delegated offer will not be visible otherwise.
-2. In the dashboard, click **Get a subscription**. You will see that only the delegated offers created by the delegated provider are presented to the user:
+2. 위임 된 공급자가 자신의 포털을 통해 이러한 서비스를 노출 URL입니다. 이러한 제안 위임된 포털을 통해만 표시 됩니다. 찾아서이 URL을 변경
+   
+    a.  선택 **찾아보기** > **더 많은 서비스** > **구독**합니다. 위임 된 공급자 구독을 선택 하십시오. 예를 들어 **DPSubscription** > **속성**합니다.
+   
+    나.  복사 포털 URL 메모장과 같은 별도 위치입니다.
+   
+    ![위임 된 공급자 구독 선택](media/azure-stack-delegated-provider/dpportaluri.png)  
+   
+   이제 위임 공급자로 위임 된 제안을 만들어졌습니다. 위임 된 공급자 로그 아웃 합니다. 사용 된 브라우저 창을 닫습니다.
 
-> ![](media/azure-stack-delegated-provider/image8.png)
+## <a name="sign-up-for-the-offer"></a>제품에 등록
+1. 위임 된 포털로 이동 하는 새 브라우저 창에서 이전 단계에서 저장 된 URL입니다. 사용자 포털에 로그인 합니다. 
+   
+   >[!NOTE]
+   >위임 된 포털을 사용 하지 않는 한 위임 된 제안을 표시 되지 않습니다. 
+
+2. 선택, 대시보드에서 **구독**합니다. 위임 된 제안을 위임 된 공급자에 의해 생성 된 사용자에 게 표시 되는 것이 표시 됩니다.
+
+> ![본 제품을 선택 합니다.](media/azure-stack-delegated-provider/image8.png)
 > 
 > 
 
-This concludes the process of offer delegation. The user can now sign up for this offer by getting a subscription for it.
+제안 위임 프로세스가 완료 되었습니다. 사용자 이제을 신청할 수 있습니다이 제품에 대 한 구독을 가져와서 합니다.
 
-## <a name="multiple-tier-delegation"></a>Multiple-tier delegation
+## <a name="multiple-tier-delegation"></a>다중 계층 위임
 
-Multiple-tier delegation allows the delegated provider to delegate the offer to other entities. This allows, for example, the creation of deeper reseller channels, in which the provider managing Azure Stack delegates an offer to a distributor, who in turn delegates to reseller.
-Azure Stack supports up to five levels of delegation.
+다른 엔터티에 제공 위임 하려면 위임 된 공급자를 사용 하는 다중 계층 위임 합니다. 이 사용 하면 예를 들어 Azure 스택을 관리 하는 공급자는 배포자에 제안을 위임 깊은 대리점 채널을 생성 합니다. 해당 배포자 차례로 재판매인에 위임합니다. Azure 스택 위임 최대 5 개의 수준을 지원합니다.
 
-To create multiple tiers of offer delegation, the delegated provider in turn delegates the offer to the next provider. The process is the same for the delegated provider as it was for the cloud operator (see [Cloud operator creates the delegated offer](#cloud-operator-creates-the-delegated-offer)).
+제안 위임의 여러 계층을 만들려면 위임 된 공급자에 차례로 제안을 다음 공급자에 위임 합니다. Azure 스택 연산자에 대 한 했습니다는 과정은 위임 된 공급자에 대 한 동일 (참조 [Azure 스택 연산자는 위임 된 제안을 만듭니다](#cloud-operator-creates-the-delegated-offer)).
 
-## <a name="next-steps"></a>Next steps
-[Provision a VM](azure-stack-provision-vm.md)
-
+## <a name="next-steps"></a>다음 단계
+[VM을 프로 비전](azure-stack-provision-vm.md)
 

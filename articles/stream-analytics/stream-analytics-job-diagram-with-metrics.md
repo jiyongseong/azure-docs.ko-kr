@@ -1,29 +1,20 @@
 ---
-title: "작업 다이어그램을 사용하여 Azure Stream Analytics 데이터 기반 디버그 | Microsoft Docs"
-description: "작업 다이어그램 및 메트릭을 사용하여 Stream Analytics 작업 문제를 해결합니다."
-keywords: 
-documentationcenter: 
+title: Azure Stream Analytics의 데이터 기반 디버깅
+description: 이 문서에서는 Azure Portal의 작업 다이어그램과 메트릭을 사용하여 Azure Stream Analytics 작업의 문제를 해결하는 방법에 대해 설명합니다.
 services: stream-analytics
-author: jeffstokes72
-manager: jhubbard
-editor: cgronlun
-ms.assetid: 
+author: jseb225
+ms.author: jeanb
+manager: kfile
+ms.reviewer: jasonh
 ms.service: stream-analytics
-ms.devlang: na
-ms.topic: article
-ms.tgt_pltfrm: na
-ms.workload: data-services
+ms.topic: conceptual
 ms.date: 05/01/2017
-ms.author: jeffstok
-ms.translationtype: Human Translation
-ms.sourcegitcommit: 6dbb88577733d5ec0dc17acf7243b2ba7b829b38
-ms.openlocfilehash: 8738b266bd007682459d08698fa13828ff67a1b6
-ms.contentlocale: ko-kr
-ms.lasthandoff: 07/04/2017
-
-
+ms.openlocfilehash: 3d50f96f3dea3646bb32a3a42d0248957dabf9f0
+ms.sourcegitcommit: 1362e3d6961bdeaebed7fb342c7b0b34f6f6417a
+ms.translationtype: HT
+ms.contentlocale: ko-KR
+ms.lasthandoff: 04/18/2018
 ---
-
 # <a name="data-driven-debugging-by-using-the-job-diagram"></a>작업 다이어그램을 사용하여 데이터 기반 디버그
 
 Azure Portal의 **모니터링** 블레이드에 있는 작업 다이어그램은 작업 파이프라인을 시각화하는 데 도움이 될 수 있습니다. 입력, 출력 및 쿼리 단계를 보여 줍니다. 작업 다이어그램을 사용하여 각 단계의 메트릭을 검사하면 문제를 해결할 때 문제의 원인을 더 빠르게 격리할 수 있습니다.
@@ -38,7 +29,7 @@ Azure Portal에서 Stream Analytics 작업 동안에 **지원 + 문제 해결**�
 
 ![메트릭이 있는 작업 다이어그램 - 기본 작업](./media/stream-analytics-job-diagram-with-metrics/stream-analytics-job-diagram-with-metrics-portal-2.png)
 
-Azure Event Hubs 입력의 파티션을 보려면 **. . .**을 선택합니다. 상황에 맞는 메뉴가 나타납니다. 또한 입력된 합병을 볼 수 있습니다.
+Azure Event Hubs 입력의 파티션을 보려면 **. . .** 을 선택합니다. 상황에 맞는 메뉴가 나타납니다. 또한 입력된 합병을 볼 수 있습니다.
 
 ![메트릭이 있는 작업 다이어그램 - 파티션 확장](./media/stream-analytics-job-diagram-with-metrics/stream-analytics-job-diagram-with-metrics-portal-3.png)
 
@@ -85,11 +76,11 @@ Azure Event Hubs 입력의 파티션을 보려면 **. . .**을 선택합니다. 
  
 ### <a name="are-we-falling-behind-in-reading-data"></a>데이터를 읽을 때 뒤쳐지고 있습니까?
 
-*   **InputEventsSourcesBackloggedTotal**은 이벤트 허브 및 Azure IoT Hub 입력에 읽어야 하는 메시지가 얼마나 더 있는지를 알려 줍니다.
+*   **총 백로그된 입력 이벤트 수**는 Event Hubs 및 Azure IoT Hub 입력에 대해 얼마나 많은 메시지를 읽어야 하는지 알려줍니다. 이 숫자가 0보다 크면 작업이 데이터가 들어오는 속도만큼 빠르게 데이터를 처리할 수 없다는 의미입니다. 이 경우 스트리밍 단위 수를 늘리거나 작업을 병렬 처리할 수 있도록 해야 합니다. 이에 대한 자세한 내용은 [쿼리 병렬화 페이지](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-parallelization)를 참조하세요. 
 
 
 ## <a name="get-help"></a>도움말 보기
-추가 지원이 필요한 경우 [Azure Stream Analytics 포럼](https://social.msdn.microsoft.com/Forums/home?forum=AzureStreamAnalytics)을 참조하세요.
+추가 지원이 필요한 경우 [Azure Stream Analytics 포럼](https://social.msdn.microsoft.com/Forums/azure/home?forum=AzureStreamAnalytics)을 참조하세요. 
 
 ## <a name="next-steps"></a>다음 단계
 * [Stream Analytics 소개](stream-analytics-introduction.md)
@@ -97,4 +88,3 @@ Azure Event Hubs 입력의 파티션을 보려면 **. . .**을 선택합니다. 
 * [Stream Analytics 작업 크기 조정](stream-analytics-scale-jobs.md)
 * [Stream Analytics 쿼리 언어 참조](https://msdn.microsoft.com/library/azure/dn834998.aspx)
 * [Stream Analytics 관리 REST API 참조](https://msdn.microsoft.com/library/azure/dn835031.aspx)
-
